@@ -1430,7 +1430,7 @@ public class WindowTest extends WebTestCase {
 
 
     /**
-     * Test that Window.execScript method gets correctly called and handled
+     * Test that Window.execScript method gets correctly called and doesn't throw
      * by the scripting engine even if it does nothing.
      * @throws Exception if the test fails
      */
@@ -1441,5 +1441,37 @@ public class WindowTest extends WebTestCase {
                  + "</script></head><body>"
                  + "</body></html>";
         loadPage(content);
+    }
+
+   /**
+     * @throws Exception If the test fails.
+     */
+    public void testOnLoadFunction() throws Exception {
+        final String content = "<html>\n"
+            + "<head><title>test</title>\n"
+            + "<script>\n"
+            + "  function test()\n"
+            + "  {\n"
+            + "    alert('test');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<script>\n"
+            + "  var oldOnLoad = window.onload;;\n"
+            + "  window.onload = test2;\n"
+            + "  function test2()\n"
+            + "  {\n"
+            + "    alert('test2');\n"
+            + "    oldOnLoad();\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>\n";
+        final List expectedAlerts = Arrays.asList( new String[]{"test2", "test"} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

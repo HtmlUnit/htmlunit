@@ -886,30 +886,6 @@ public class HtmlPageTest extends WebTestCase {
      * Regression test for window.onload property
      * @throws Exception if the test fails
      */
-    public void testOnLoadHandler_BodyNameRead() throws Exception {
-        final String content
-                 = "<html><head><title>foo</title>"
-                 + "<script type='text/javascript'>"
-                 + "load=function(){}</script>"
-                 + "</head><body onLoad='load'>"
-                 + "<script type='text/javascript'>\n"
-                 + "alert(onload);\n"
-                 + "</script></body></html>";
-        final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "load"
-        });
-        assertEquals( expectedAlerts, collectedAlerts );
-    }
-
-
-    /**
-     * Regression test for window.onload property
-     * @throws Exception if the test fails
-     */
     public void testOnLoadHandler_ScriptName() throws Exception {
         final String content
                  = "<html><head><title>foo</title>"

@@ -383,6 +383,10 @@
 
     <class name="Frame" extends="HTMLElement">
         <property name="src" readable="true" writable="true"/>
+        <property name="onload" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
 	</class>
 
     <class name="FocusableHostElement" extends="HTMLElement">

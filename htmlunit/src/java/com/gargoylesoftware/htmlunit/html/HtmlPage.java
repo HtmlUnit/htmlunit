@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  *  A representation of an html page returned from a server.  This class is the
@@ -97,8 +98,6 @@ public final class HtmlPage extends DomNode implements Page {
     
     private static final int TAB_INDEX_NOT_SPECIFIED = -10;
     private static final int TAB_INDEX_OUT_OF_BOUNDS = -20;
-
-    private Object onLoad_;
 
     /**
      *  This constructor should no longer be used
@@ -949,68 +948,27 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
-     * Return the value of the onload attribute of the enclosed body or
-     * frameset.
-     *
-     * @return the value of the onload attribute of the enclosed body or
-     * frameset.
-     */
-    private String getBodyOnLoadAttribute() {
-        final String onLoad;
-        final List bodyTags =
-            getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("body") );
-        final int bodyTagCount = bodyTags.size();
-        if( bodyTagCount == 0 ) {
-            // Must be a frameset
-            onLoad = "";
-        }
-        else if( bodyTagCount == 1 ) {
-            final HtmlBody body = (HtmlBody)bodyTags.get(0);
-            onLoad = body.getOnLoadAttribute();
-        }
-        else {
-            throw new IllegalStateException(
-                "Expected no more than one body tag but found ["+bodyTagCount+"] xml="+asXml());
-        }
-        return onLoad;
-    }
-
-    /**
-     * Internal use only - subject to change without notice.<p>
-     * Return the javascript string for onload.
-     * @return The javascript string for onload.
-     */
-    public Object getOnLoadAttribute() {
-        if( onLoad_ != null ) {
-            return onLoad_;
-        }
-        else {
-            return getBodyOnLoadAttribute();
-        }
-    }
-
-    /**
-     * Internal use only - subject to change without notice.<p>
-     * Set the javascript string for onload.
-     * @param newValue The new javascript string for onload.
-     */
-    public void setOnLoadAttribute(Object newValue) {
-        onLoad_ = newValue;
-    }
-
-    /**
      * Look for and execute any appropriate onload handlers.  Look for body
      * and frame tags.
      */
     private void executeOnLoadHandlersIfNeeded() {
-        executeOneOnLoadHandler( getOnLoadAttribute() );
+        if (!getWebClient().isJavaScriptEnabled()) {
+            return;
+        }
 
-        List list = getDocumentElement().getHtmlElementsByTagNames(
-            Collections.singletonList("frame") );
-        final int listSize = list.size();
-        for(int i=0; i<listSize;i++ ){
-            final HtmlFrame frame = (HtmlFrame) list.get(i);
-            executeOneOnLoadHandler(frame.getOnLoadAttribute());
+        // onload for the window
+        final Window jsWindow = (Window) getEnclosingWindow().getScriptObject();
+        if (jsWindow != null && jsWindow.jsGet_onload() != null) {
+            final ScriptEngine engine = getWebClient().getScriptEngine();
+            engine.callFunction(this, jsWindow.jsGet_onload(), jsWindow, new Object[]{}, null);
+        }
+
+        // the onload of the contained frames or iframe tags
+        final List list = getDocumentElement().getHtmlElementsByTagNames( Arrays.asList( new String[]{
+                "frame", "iframe" } ));
+        for (final Iterator iter = list.iterator(); iter.hasNext();) {
+            final BaseFrame frame = (BaseFrame) iter.next();
+            executeOneOnLoadHandler(frame);
         }
     }
 
@@ -1019,26 +977,12 @@ public final class HtmlPage extends DomNode implements Page {
      * will be executed as javascript, or a javascript Function.
      * @param onLoad The javascript to execute
      */
-    private void executeOneOnLoadHandler( final Object onLoad ) {
-        if ( onLoad instanceof String ) {
-            String onLoadScript = (String) onLoad;
-            if( onLoadScript.length() != 0 ) {
-                // needs to have wrapSourceInFunction="true" 
-                // because page's onload may contain a return statement 
-                ScriptResult scriptResult =
-                    executeJavaScriptIfPossible(onLoadScript, "body.onLoad", true, null);
-
-                // if script evaluates to a function then call it
-                Object javaScriptResult = scriptResult.getJavaScriptResult();
-                if (javaScriptResult != null && javaScriptResult instanceof Function) {
-                    ScriptEngine engine = getWebClient().getScriptEngine();
-                    engine.callFunction(this, javaScriptResult, null, new Object[] {}, null);
-                }
-            }
-        }
-        else {
+    private void executeOneOnLoadHandler(final HtmlElement element) {
+        getLog().debug("Executing onload handler, for " + element);
+        final Function onloadFunction = element.getEventHandler("onload");
+        if (onloadFunction != null) {
             final ScriptEngine engine = getWebClient().getScriptEngine();
-            engine.callFunction( this, onLoad, null, new Object [0], null );
+            engine.callFunction(this, onloadFunction, element.getScriptObject(), new Object[]{}, element);
         }
     }
 

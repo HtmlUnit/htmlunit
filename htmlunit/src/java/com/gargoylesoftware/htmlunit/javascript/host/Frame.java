@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.mozilla.javascript.Function;
+
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 
 /**
@@ -83,5 +85,23 @@ public class Frame extends HTMLElement {
 
     private BaseFrame getFrame() {
         return (BaseFrame) getHtmlElementOrDie();
+    }
+
+
+    /**
+     * Set the onload event handler for this element.
+     * @param eventHandler the new handler
+     */
+    public void jsSet_onload(final Function eventHandler) {
+        getHtmlElementOrDie().setEventHandler("onload", eventHandler);
+    }
+
+
+    /**
+     * Get the onload event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_onload() {
+        return getHtmlElementOrDie().getEventHandler("onload");
     }
 }
