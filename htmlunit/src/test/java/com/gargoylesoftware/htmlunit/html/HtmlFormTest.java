@@ -681,6 +681,45 @@ public class HtmlFormTest extends WebTestCase {
 
        assertEquals( expectedParameters, collectedParameters );
    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSubmit_NestedInput()
+        throws Exception {
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<form id='form1'>"
+                 + "    <table><tr><td>"
+                 + "        <input type='text' name='textfield' value='blah'/>"
+                 + "        </td><td>"
+                 + "        <input type='submit' name='button' value='foo'/>"
+                 + "        </td></tr>"
+                 + "     </table>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+
+        final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
+        button.click();
+
+        final List expectedParameters = Arrays.asList( new Object[]{
+            new KeyValuePair("textfield", "blah"),
+            new KeyValuePair("button", "foo")
+        } );
+        final List collectedParameters = webConnection.getLastParameters();
+
+        assertEquals( expectedParameters, collectedParameters );
+    }
+
    /**
     * @throws Exception if the test fails
     */

@@ -14,6 +14,11 @@
                 JavaScript is no longer derived from HTMLElement, but is derived from
                 NodeImpl instead.
             </action>
+            <action type="update" dev="mbowler" due-to="Christian Sell">
+            	Nested input elements, i.e. those that were not
+				immediate children of the enclosing form, were not handled.
+				Patch submitted by Christian Sell.
+            </action>
 		</release>
 		
         <release version="1.3-pre1" date="November 7, 2003">
