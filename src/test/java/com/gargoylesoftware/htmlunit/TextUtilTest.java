@@ -6,8 +6,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.htmlunit.TextUtil;
-
 /**
  *  Tests for TextUtil.
  *
