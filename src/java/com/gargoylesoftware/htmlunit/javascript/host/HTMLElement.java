@@ -40,7 +40,7 @@ public class HTMLElement extends SimpleScriptable {
      *
      * @return The style object
      */
-    public Style jsGet_style() {
+    public Object jsGet_style() {
         getLog().debug("HTMLElement.jsGet_Style() style=["+style_+"]");
         return style_;
     }

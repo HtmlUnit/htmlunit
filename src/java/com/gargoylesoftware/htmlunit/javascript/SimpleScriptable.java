@@ -407,7 +407,10 @@ public class SimpleScriptable extends ScriptableObject {
             }
         }
 
-        return NOT_FOUND;
+        // We don't have a specific subclass for this element so create something generic.
+        final SimpleScriptable scriptable = makeJavaScriptObject("HTMLElement");
+        scriptable.setHtmlElement(htmlElement);
+        return scriptable;
     }
 
 
@@ -447,5 +450,9 @@ public class SimpleScriptable extends ScriptableObject {
         }
     }
 
+
+    public Object getDefaultValue( final Class hint ) {
+        return toString();
+    }
 }
 

@@ -42,6 +42,9 @@
 			Refactored the interface between WebClient and WebConnection to make it easier to
 			add custom implementations of WebConnection.
 		</change>
+		<change type="new">
+			Added support for the Javascript Style object
+		</change>
 	</change-log>
 </section>
 
