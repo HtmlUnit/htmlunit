@@ -110,87 +110,147 @@
             <id>junit</id>
             <version>3.8.1</version>
             <url>http://www.junit.org/</url>
+            <properties>
+                <htmlunit.group>test</htmlunit.group>
+                <htmlunit.description>JUnit testing framework</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
             <id>junitperf</id>
             <version>1.8</version>
             <url>http://www.clarkware.com</url>
+            <properties>
+                <htmlunit.group>test</htmlunit.group>
+                <htmlunit.description>Additional support for testing</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
             <id>commons-jelly</id>
             <version>SNAPSHOT</version>
             <url>http://jakarta.apache.org/commons/jelly</url>
+            <properties>
+                <htmlunit.group>jelly</htmlunit.group>
+                <htmlunit.description>Jelly itself</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
             <id>commons-jelly+tags-log</id>
             <version>SNAPSHOT</version>
             <url>http://jakarta.apache.org/commons/jelly</url>
+            <properties>
+                <htmlunit.group>Jelly</htmlunit.group>
+                <htmlunit.description>Jelly tags for logging</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
             <id>commons-jexl</id>
             <version>SNAPSHOT</version>
             <url>http://jakarta.apache.org/commons/jexl</url>
+            <properties>
+                <htmlunit.group>jelly</htmlunit.group>
+                <htmlunit.description>Expression language</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
             <id>commons-cli</id>
             <version>SNAPSHOT</version>
             <url>http://jakarta.apache.org/commons/cli</url>
+            <properties>
+                <htmlunit.group>jelly</htmlunit.group>
+                <htmlunit.description>Command line interface</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
             <id>dom4j</id>
             <version>1.4-dev-8</version>
             <url>http://www.dom4j.org/</url>
+            <properties>
+                <htmlunit.group>jelly</htmlunit.group>
+                <htmlunit.description>XML DOM wrapper</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
             <id>commons-collections</id>
             <version>2.1</version>
             <url>http://jakarta.apache.org/commons/collections.html</url>
+            <properties>
+                <htmlunit.group>jelly</htmlunit.group>
+                <htmlunit.description>Collection classes</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
             <id>commons-beanutils</id>
             <version>1.6.1</version>
             <url>http://jakarta.apache.org/commons/beanutils</url>
+            <properties>
+                <htmlunit.group>jelly</htmlunit.group>
+                <htmlunit.description>Javabean support</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
             <id>commons-httpclient</id>
-            <version>2.0-alpha3</version>
+            <version>2.0-beta2</version>
             <url>http://jakarta.apache.org/commons/httpclient</url>
+            <properties>
+                <htmlunit.group>required</htmlunit.group>
+                <htmlunit.description>Provides the actual http support</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
             <id>gsbase</id>
             <version>2.0</version>
             <url>http://gsbase.sourceforge.net</url>
+            <properties>
+                <htmlunit.group>test</htmlunit.group>
+                <htmlunit.description>Misc testing support classes</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
             <id>rhino</id>
             <version>1.5R4-RC3</version>
             <url>http://www.mozilla.org/rhino</url>
             <jar>js-1.5R4-RC3.jar</jar>
+            <properties>
+                <htmlunit.group>optional</htmlunit.group>
+                <htmlunit.description>Needed for javascript support</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
             <id>xerces</id>
-            <version>2.0.2</version>
-            <url>http://xml.apache.org/xercesj</url>
-            <jar>xercesImpl-2.0.2.jar</jar>
+            <version>2.4.0</version>
+            <url>http://xml.apache.org/xerces2-j/index.html</url>
+            <jar>xercesImpl-2.4.0.jar</jar>
+            <properties>
+                <htmlunit.group>required</htmlunit.group>
+                <htmlunit.description>XML Parser</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
-            <id>xerces</id>
-            <version>2.0.2</version>
-            <url>http://xml.apache.org/xercesj</url>
-            <jar>xmlParserAPIs-2.0.2.jar</jar>
-        </dependency>
-        <dependency>
-            <id>xml-apis</id>
-            <version>2.0.2</version>
+            <id>xerces+parserAPIs</id>
+            <version>2.2.1</version>
+            <url>http://xml.apache.org/xerces2-j/index.html</url>
+            <jar>xmlParserAPIs-2.2.1.jar</jar>
+            <properties>
+                <htmlunit.group>required</htmlunit.group>
+                <htmlunit.description>XML Parser</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
             <id>nekohtml</id>
             <version>0.7.6</version>
+            <properties>
+                <htmlunit.group>required</htmlunit.group>
+                <htmlunit.description>Converts html into an XML DOM model</htmlunit.description>
+            </properties>
         </dependency>
         <dependency>
             <id>commons-logging</id>
             <version>1.0.2</version>
             <url>http://jakarta.apache.org/commons/logging.html</url>
+            <properties>
+                <htmlunit.group>required</htmlunit.group>
+                <htmlunit.description>Logging support</htmlunit.description>
+            </properties>
         </dependency>
     </dependencies>
 

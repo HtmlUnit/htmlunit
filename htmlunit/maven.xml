@@ -14,5 +14,95 @@
 
     <preGoal name="xdoc:transform">
         <attainGoal name="faq"/>
+    	<attainGoal name="createDependenciesPage"/>
     </preGoal>
+    
+    <goal name="createDependenciesPage"
+        description="Generates the dependencies document">
+
+        <j:set var="destfile" value="${maven.build.dir}/generated-xdocs/dependencies.xml"/>
+        <ant:mkdir dir="${maven.build.dir}/generated-xdocs"/>
+                
+        <u:file var="destfileFile" name="${destfile}"/>
+        <j:set var="destfile" value="${destfileFile.getCanonicalPath()}"/>
+                
+        <j:set var="outputencoding" value="${maven.docs.outputencoding}"/>
+
+        <j:file name="${destfile}" encoding="${outputencoding}" outputMode="xml">
+<document>
+
+    <properties>
+        <title>Dependencies</title>
+    </properties>
+    <body>
+        <section name="Dependencies">
+        	<p>
+        		These are the various dependencies required by HtmlUnit.  Some jars
+        		are mandatory for even the simplest use of HtmlUnit, others are optional.
+        		If the optional JARs are missing then the main functionality will
+        		continue to work but some functions will not.
+        	</p>
+        	<table>
+        	<tr><th>Required JARs</th><th>Description</th></tr>
+        	<tr><td>HtmlUnit.jar</td><td>The main HtmlUnit classes</td></tr>
+	        <j:forEach var="lib" items="${pom.artifacts}">
+	    	    <j:set var="dep" value="${lib.dependency}"/>
+			    <j:if test="${dep.getProperty('htmlunit.group')=='required'}">
+			    	<tr>
+			    	<tr>
+			    		<td><a href="${dep.url}">${dep.artifact}</a></td>
+			    		<td>${dep.getProperty('htmlunit.description')}</td>
+			   	    </tr>
+			   	    </tr>
+				</j:if>
+	    	</j:forEach>          
+
+        	<tr><th>Optional JARs for jelly scripting support</th><th>Description</th></tr>
+	        <j:forEach var="lib" items="${pom.artifacts}">
+	    	    <j:set var="dep" value="${lib.dependency}"/>
+			    <j:if test="${dep.getProperty('htmlunit.group')=='jelly'}">
+			    	<tr>
+			    	<tr>
+			    		<td><a href="${dep.url}">${dep.artifact}</a></td>
+			    		<td>${dep.getProperty('htmlunit.description')}</td>
+			   	    </tr>
+			   	    </tr>
+				</j:if>
+	    	</j:forEach>          
+
+        	<tr><th>Optional JARs for running the unit tests</th><th>Description</th></tr>
+	        <j:forEach var="lib" items="${pom.artifacts}">
+	    	    <j:set var="dep" value="${lib.dependency}"/>
+			    <j:if test="${dep.getProperty('htmlunit.group')=='test'}">
+			    	<tr>
+			    		<td><a href="${dep.url}">${dep.artifact}</a></td>
+			    		<td>${dep.getProperty('htmlunit.description')}</td>
+			   	    </tr>
+				</j:if>
+	    	</j:forEach>          
+
+        	<tr><th>Optional JARs for SSL support</th><th>Description</th></tr>
+        	<tr>
+        		<td><a href="http://java.sun.com/products/jsse/">JSSE</a></td>
+        		<td>Java Secure Socket Extension.  Not required if you are running Java 1.4+</td>
+        	</tr>
+
+        	<tr><th>Other optional JARs</th><th>Description</th></tr>
+	        <j:forEach var="lib" items="${pom.artifacts}">
+	    	    <j:set var="dep" value="${lib.dependency}"/>
+			    <j:if test="${dep.getProperty('htmlunit.group')=='optional'}">
+			    	<tr>
+			    	<tr>
+			    		<td><a href="${dep.url}">${dep.artifact}</a></td>
+			    		<td>${dep.getProperty('htmlunit.description')}</td>
+			   	    </tr>
+			   	    </tr>
+				</j:if>
+	    	</j:forEach>          
+	    	</table>
+        </section>
+    </body>
+</document>
+        </j:file>
+    </goal>    
 </project>
