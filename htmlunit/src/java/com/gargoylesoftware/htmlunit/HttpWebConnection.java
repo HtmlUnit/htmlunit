@@ -74,6 +74,7 @@ import org.apache.commons.logging.impl.SimpleLog;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
+ * @author David D. Kilzer
  */
 public class HttpWebConnection extends WebConnection {
     private final Map httpClients_ = new HashMap( 9 );
@@ -360,7 +361,7 @@ public class HttpWebConnection extends WebConnection {
      * @return The state or null if no state can be found for this domain.
      */
     public synchronized HttpState getStateForUrl( final URL url ) {
-        final String domain = url.getHost();
+        final String domain = url.getHost().toLowerCase();
         int index = domain.lastIndexOf('.');
         if( index != -1 ) {
             index = domain.lastIndexOf(".", index-1);
@@ -376,7 +377,8 @@ public class HttpWebConnection extends WebConnection {
         final Iterator iterator = httpClients_.entrySet().iterator();
         while( iterator.hasNext() ) {
             final Map.Entry entry = (Map.Entry)iterator.next();
-            final String host = (String)entry.getKey();
+            final String key = (String)entry.getKey();
+            final String host = key.substring(key.indexOf("://") + 3);
             if( host.equals(rootDomain) || host.endsWith("."+rootDomain) ) {
                 return ((HttpClient)entry.getValue()).getState();
             }

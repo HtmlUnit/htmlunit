@@ -107,6 +107,9 @@
             <action type="update" dev="mbowler" due-to="Mike Williams" id="1051885">
 				Fixes for buggy link management in DomNode.basicRemove()
             </action>
+            <action type="update" dev="mbowler" due-to="David D. Kilzer" id="1028314">
+				Fix for bug where HttpWebConnection.getStateForUrl() fails with localhost URL
+            </action>
 		</release>
 		    
         <release version="1.3-pre2" date="September 26, 2004">
