@@ -234,9 +234,10 @@ public abstract class HtmlElement extends DomNode {
      */
     public final void setEventHandler(final String eventName, final String jsSnippet) {
        
-        final BaseFunction function = new EventHandler(jsSnippet);
-       
+        final BaseFunction function = new EventHandler(this, jsSnippet);
         setEventHandler(eventName, function);
+        getLog().debug("Created event handler " + function.getFunctionName() 
+                + " for " + eventName + " on " + this);
     }
 
     /**

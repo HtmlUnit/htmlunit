@@ -192,6 +192,28 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    public void testScopeOfNestedNewFunction() throws Exception {
+        final List expectedAlerts = Collections.singletonList("foo");
+        final String content
+            = "<html><head>"
+            + "<script>\n"
+            + "var foo = 'foo';\n"
+            + "var f1 = new Function('f = new Function(\"alert(foo)\"); f()');\n"
+            + "f1();\n"
+            + "</script>"
+            + "</head>"
+            + "<body>\n"
+            + "</body></html>\n";
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * Checks that a dynamically compiled function works in the scope of its birth
      * and not the other window
      * @throws Exception if the test fails
@@ -555,25 +577,13 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     public void testThisDotInOnClick() throws Exception {
 
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
-
-        final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
         final String htmlContent
             = "<html><head><title>First</title><script>function foo(message){alert(message);}</script><body>"
              + "<form name='form1'><input type='submit' name='button1' onClick='foo(this.name)'></form>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            new URL("http://first/index.html"),
-            htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first/index.html" ),
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
         ((HtmlSubmitInput)page.getFormByName("form1").getInputByName("button1")).click();

@@ -53,9 +53,7 @@ import org.apache.commons.collections.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
 import org.mozilla.javascript.FunctionObject;
-import org.mozilla.javascript.NativeFunction;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
@@ -515,18 +513,6 @@ public class SimpleScriptable extends ScriptableObject {
              getLog().debug("No configured setter \"" + name + "\" found for " 
                      + start + ". Setting it as pure javascript property.");
              
-             // dynamically compiled functions must have as scope the one of their birth 
-             // there is perhaps a better way to identify a dyn compiled function
-             if (newValue instanceof NativeFunction 
-                     && ((NativeFunction) newValue).getFunctionName().equals("anonymous")) {
-                 final Function function = (Function) newValue;
-     
-                 // test if the parent scope has not been already fixed
-                if (!(function.getParentScope() instanceof SimpleScriptable)) {
-                     function.setParentScope(start);
-                }
-             }
-
              super.put(name, start, newValue);
          }
      }
@@ -590,21 +576,32 @@ public class SimpleScriptable extends ScriptableObject {
         if( scriptObject != null ) {
             return (SimpleScriptable)scriptObject;
         }
+        else {
+            return makeScriptableFor(domNode);
+        }
+    }
 
-        final String javaScriptClassName;
-        javaScriptClassName = (String)getHtmlJavaScriptMapping().get(domNode.getClass());
-        if( javaScriptClassName == null ) {
+    /**
+     * Builds a new the javascript object that corresponds to the specified object.<br>
+     * @param domNode the dom node for which a JS object should be created
+     * @return The javascript object
+     */
+     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
+
+        final String javaScriptClassName = (String)getHtmlJavaScriptMapping().get(domNode.getClass());
+        final SimpleScriptable scriptable;
+        if (javaScriptClassName == null) {
             // We don't have a specific subclass for this element so create something generic.
-            final SimpleScriptable scriptable = makeJavaScriptObject("HTMLElement");
-            scriptable.setDomNode(domNode);
-            //getLog().info("No javascript class found for element <"+domNode.getTagName()+">.  Using HTMLElement");
-            return scriptable;
+            scriptable = makeJavaScriptObject("HTMLElement");
+            getLog().debug("No javascript class found for element <"+domNode.getNodeName()+">. Using HTMLElement");
         }
         else {
-            final SimpleScriptable scriptable = makeJavaScriptObject(javaScriptClassName);
-            scriptable.setDomNode(domNode);
-            return scriptable;
+            scriptable = makeJavaScriptObject(javaScriptClassName);
         }
+        scriptable.setDomNode(domNode);
+        // parent scope needs to be set to "window" (no simple unit test found to illustrate the necessity)
+        scriptable.setParentScope((Scriptable) domNode.getPage().getEnclosingWindow().getScriptObject());
+        return scriptable;
     }
 
 

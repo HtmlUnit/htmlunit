@@ -160,4 +160,25 @@ public class EventTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * Test that this refers to the element on which the event applies
+     * @throws Exception if the test fails
+     */
+    public void testEventScope() throws Exception {
+        final List expectedAlerts = Collections.singletonList("frame1");
+        final String content
+            = "<html><head></head>"
+            + "<body>"
+            + "<button name='button1' id='button1' onclick='alert(this.name)'>1</button>"
+            + "<iframe src='about:blank' name='frame1' id='frame1'></iframe>"
+            + "<script>"
+            + "document.getElementById('frame1').onload = document.getElementById('button1').onclick;"
+            + "</script>"
+            + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

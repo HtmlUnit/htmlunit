@@ -37,13 +37,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * Allows to wrap event handler code as Function object.
@@ -53,22 +56,18 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 public class EventHandler extends BaseFunction {
     private static final long serialVersionUID = 3257850965406068787L;
     
-    private String eventHandlerWrapperName_;
-    private final String functionDeclaration_;
-    private boolean compiled_;
-
-    /**
-     * Counter to provide unique function names when defining event handlers 
-     */
-    private static int WrapperFunctionCounter_;
+    private final HtmlElement htmlElement_;
+    private final String jsSnippet_;
+    private Function realFunction_;
 
     /**
      * Builds a function that will execute the javascript code provided
+     * @param htmlElement the element for which the event is build
      * @param jsSnippet the javascript code
      */
-    public EventHandler(final String jsSnippet) {
-        functionDeclaration_ = wrapSnippet(jsSnippet);
-        
+    public EventHandler(final HtmlElement htmlElement, final String jsSnippet) {
+        htmlElement_ = htmlElement;
+        jsSnippet_ = "function(event) {" + jsSnippet + "}";
     }
 
     /**
@@ -79,46 +78,25 @@ public class EventHandler extends BaseFunction {
         final Scriptable thisObj, final Object[] args)
         throws JavaScriptException {
 
-        if (!compiled_) {
-            cx.evaluateString(scope, functionDeclaration_, HtmlElement.class.getName(), 1, null);
-            compiled_ = true;
+        // the js object to which this event is attached has to be the scope
+        final SimpleScriptable jsObj = (SimpleScriptable) htmlElement_.getScriptObject();
+        // compile "just in time"
+        if (realFunction_ == null) {
+            realFunction_ = cx.compileFunction(jsObj, jsSnippet_, "event for " + htmlElement_, 1, null);
         }
 
-        final StringBuffer expression = new StringBuffer(eventHandlerWrapperName_);
-
-        if (args.length==1) {
-            ScriptableObject.putProperty(scope, "event", args[0]);
-            expression.append("(event)");
-        }
-        else {
-            expression.append("()");
-        }
-
-        final Object result = cx.evaluateString(scope, expression.toString(), "sourceName", 1, null);
+        final Object result = realFunction_.call(cx, scope, thisObj, args);
 
         return result;
     }
 
-    private String wrapSnippet(final String jsSnippet) {
-        eventHandlerWrapperName_ = "gargoyleEventHandlerWrapper" + WrapperFunctionCounter_++;
-
-        final StringBuffer buffer = new StringBuffer();
-
-        buffer.append("function ");
-        buffer.append(eventHandlerWrapperName_);
-        buffer.append("(event) {");
-        buffer.append(jsSnippet);
-        buffer.append("}");
-        return buffer.toString();
-    }
-    
     /**
      * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
      * @param typeHint the type hint
      * @return the js code of the function declaration
      */
     public Object getDefaultValue(final Class typeHint) {
-        return functionDeclaration_;
+        return jsSnippet_;
     }
     
     /**
@@ -133,7 +111,7 @@ public class EventHandler extends BaseFunction {
 
                 public Object call(final Context cx, final Scriptable scope,
                         final Scriptable thisObj, final Object[] args) {
-                    return functionDeclaration_;
+                    return jsSnippet_;
                 }
             };
         }
@@ -141,4 +119,11 @@ public class EventHandler extends BaseFunction {
         return super.get(name, start);
     }
     
-  }
+    /**
+     * Return the log
+     * @return The log.
+     */
+    protected final Log getLog() {
+        return LogFactory.getLog(getClass());
+    }
+}

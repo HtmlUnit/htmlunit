@@ -230,9 +230,6 @@ public final class JavaScriptEngine extends ScriptEngine {
         }
         else {
             scope = (Scriptable)htmlElementScope.getScriptObject();
-            if( scope == null ) {
-                scope = ((SimpleScriptable)pageInfo.getScope()).getScriptableFor(htmlElementScope);
-            }
             scope.setParentScope(pageInfo.getScope());
         }
         return scope;
