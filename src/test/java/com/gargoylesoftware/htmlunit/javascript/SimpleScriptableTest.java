@@ -81,17 +81,17 @@ public class SimpleScriptableTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String content
-             = "<html><head><title>foo</title><script>"
-             + "function doTest() {\n"
-             + "    document.form1.textfield1.focus();\n"
-             + "    alert('past focus');\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "<p>hello world</p>"
-             + "<form name='form1'>"
-             + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-             + "</form>"
-             + "</body></html>";
+            = "<html><head><title>foo</title><script>"
+            + "function doTest() {\n"
+            + "    document.form1.textfield1.focus();\n"
+            + "    alert('past focus');\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+            + "</form>"
+            + "</body></html>";
 
         webConnection.setDefaultResponse( content );
         client.setWebConnection( webConnection );
@@ -164,8 +164,8 @@ public class SimpleScriptableTest extends WebTestCase {
      */
     public void testSetNonWritableProperty() throws Exception {
         final String content
-             = "<html><head><title>foo</title></head><body onload='document.body=123456'>"
-             + "</body></html>";
+            = "<html><head><title>foo</title></head><body onload='document.body=123456'>"
+            + "</body></html>";
 
         try {
             loadPage(content);

@@ -75,19 +75,19 @@ public class AnchorTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String content
-             = "<html><head><title>AnchorTest</title><script>\n"
-             + "function doTest(anchorElement) {\n"
-             + "    alert(anchorElement.href);\n"
-             + "    alert(anchorElement.getAttribute('href'));\n"
-             + "    anchorElement.href='testsite2.html';\n"
-             + "    alert(anchorElement.href);\n"
-             + "    alert(anchorElement.getAttribute('href'));\n"
-             + "    alert(anchorElement.getAttribute('id'));\n"
-             + "    alert(anchorElement.getAttribute('name'));\n"
-             + "}\n</script></head>"
-             + "<body>"
-             + "<a href='testsite1.html' id='13' name='testanchor' onClick='doTest(this);return false'>"
-             + "</body></html>";
+            = "<html><head><title>AnchorTest</title><script>\n"
+            + "function doTest(anchorElement) {\n"
+            + "    alert(anchorElement.href);\n"
+            + "    alert(anchorElement.getAttribute('href'));\n"
+            + "    anchorElement.href='testsite2.html';\n"
+            + "    alert(anchorElement.href);\n"
+            + "    alert(anchorElement.getAttribute('href'));\n"
+            + "    alert(anchorElement.getAttribute('id'));\n"
+            + "    alert(anchorElement.getAttribute('name'));\n"
+            + "}\n</script></head>"
+            + "<body>"
+            + "<a href='testsite1.html' id='13' name='testanchor' onClick='doTest(this);return false'>"
+            + "</body></html>";
         
         webConnection.setDefaultResponse( content );
         client.setWebConnection( webConnection );
@@ -112,18 +112,18 @@ public class AnchorTest extends WebTestCase {
      */
     public void testOnclickToString() throws Exception {
         final String content
-             = "<html><head><title>AnchorTest</title><script>\n"
-             + "function test() {\n"
-             + "    for (var i=0; i<document.links.length; ++i)"
-             + "    {\n"
-             + "        var onclick = document.links[i].onclick;\n"
-             + "        alert(onclick ? (onclick.toString().indexOf('alert(') != -1) : 'not defined');\n"
-             + "    }\n"
-             + "}\n</script></head>"
-             + "<body onload='test()'>"
-             + "<a href='foo.html' onClick='alert(\"on click\")'>"
-             + "<a href='foo2.html'>"
-             + "</body></html>";
+            = "<html><head><title>AnchorTest</title><script>\n"
+            + "function test() {\n"
+            + "    for (var i=0; i<document.links.length; ++i)"
+            + "    {\n"
+            + "        var onclick = document.links[i].onclick;\n"
+            + "        alert(onclick ? (onclick.toString().indexOf('alert(') != -1) : 'not defined');\n"
+            + "    }\n"
+            + "}\n</script></head>"
+            + "<body onload='test()'>"
+            + "<a href='foo.html' onClick='alert(\"on click\")'>"
+            + "<a href='foo2.html'>"
+            + "</body></html>";
         
         
         final List collectedAlerts = new ArrayList();
@@ -140,27 +140,27 @@ public class AnchorTest extends WebTestCase {
      */
     public void testDefaultConversionToString() throws Exception {
         final String content
-             = "<html><head><title>AnchorTest</title><script>\n"
-             + "function test() {\n"
-             + "  alert(document.getElementById('myAnchor'));\n"
-             + "  for (var i=0; i<document.links.length; ++i)"
-             + "  {\n"
-             + "    alert(document.links[i]);\n"
-             + "  }\n"
-             + "}</script></head>"
-             + "<body onload='test()'>"
-             + "<a name='start' id='myAnchor'/>"
-             + "<a href='foo.html'>foo</a>"
-             + "<a href='javascript:void(0)'>void</a>"
-             + "<a href='#'>#</a>"
-             + "</body></html>";
+            = "<html><head><title>AnchorTest</title><script>\n"
+            + "function test() {\n"
+            + "  alert(document.getElementById('myAnchor'));\n"
+            + "  for (var i=0; i<document.links.length; ++i)"
+            + "  {\n"
+            + "    alert(document.links[i]);\n"
+            + "  }\n"
+            + "}</script></head>"
+            + "<body onload='test()'>"
+            + "<a name='start' id='myAnchor'/>"
+            + "<a href='foo.html'>foo</a>"
+            + "<a href='javascript:void(0)'>void</a>"
+            + "<a href='#'>#</a>"
+            + "</body></html>";
         
         
         final List collectedAlerts = new ArrayList();
         final List expectedAlerts = Arrays.asList( new String[]{ "", 
-                "http://www.gargoylesoftware.com/foo.html",
-                "javascript:void(0)",
-                "http://www.gargoylesoftware.com/#"} );
+            "http://www.gargoylesoftware.com/foo.html",
+            "javascript:void(0)",
+            "http://www.gargoylesoftware.com/#"} );
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 

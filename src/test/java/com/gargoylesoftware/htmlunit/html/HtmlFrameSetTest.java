@@ -71,15 +71,15 @@ public class HtmlFrameSetTest extends WebTestCase {
         throws Exception {
 
         final String firstContent
-             = "<html><head><title>First</title></head>"
-             + "<frameset cols='130,*'>"
-             + "  <frame scrolling='no' name='left' src='http://second' frameborder='1' />"
-             + "  <frame scrolling='auto' name='right' src='http://third' frameborder='1' />"
-             + "  <noframes>"
-             + "    <body>Frames not supported</body>"
-             + "  </noframes>"
-             + "</frameset>"
-             + "</html>";
+            = "<html><head><title>First</title></head>"
+            + "<frameset cols='130,*'>"
+            + "  <frame scrolling='no' name='left' src='http://second' frameborder='1' />"
+            + "  <frame scrolling='auto' name='right' src='http://third' frameborder='1' />"
+            + "  <noframes>"
+            + "    <body>Frames not supported</body>"
+            + "  </noframes>"
+            + "</frameset>"
+            + "</html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent  = "<html><head><title>Third</title></head><body></body></html>";
 
@@ -113,11 +113,11 @@ public class HtmlFrameSetTest extends WebTestCase {
         throws Exception {
 
         final String firstContent
-             = "<html><head><title>First</title></head>"
-             + "<body>"
-             + "  <iframe name='left' src='http://second' />"
-             + "  some stuff"
-             + "</html>";
+            = "<html><head><title>First</title></head>"
+            + "<body>"
+            + "  <iframe name='left' src='http://second' />"
+            + "  some stuff"
+            + "</html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient webClient = new WebClient();
@@ -147,32 +147,32 @@ public class HtmlFrameSetTest extends WebTestCase {
         throws Exception {
 
         final String framesContent 
-                = "<html><head><title>Frames</title></head>"
-                + "<frameset rows='110,*'>"
-                + "  <frame src='subdir1/menu.html' name='menu' scrolling='no' border='0' noresize>"
-                + "  <frame src='subdir2/first.html' name='test' border='0' auto>"
-                + "</frameset>" 
-                + "<noframes>"
-                + "  <body>Frames not supported</body>" 
-                + "</noframes>"
-                + "</html>";
+            = "<html><head><title>Frames</title></head>"
+            + "<frameset rows='110,*'>"
+            + "  <frame src='subdir1/menu.html' name='menu' scrolling='no' border='0' noresize>"
+            + "  <frame src='subdir2/first.html' name='test' border='0' auto>"
+            + "</frameset>" 
+            + "<noframes>"
+            + "  <body>Frames not supported</body>" 
+            + "</noframes>"
+            + "</html>";
         final String menuContent 
-                = "<html><head><title>Menu</title></head>"
-                + "<body>"
-                + "  <script language='javascript'>"
-                + "    function changeEditPage() {parent.test.location='../second.html';}"
-                + "  </script>"
-                + "  <a name ='changePage' onClick='javascript:changeEditPage();' href='#'>Click</a>."
-                + "</body>"
-                + "</html>";
+            = "<html><head><title>Menu</title></head>"
+            + "<body>"
+            + "  <script language='javascript'>"
+            + "    function changeEditPage() {parent.test.location='../second.html';}"
+            + "  </script>"
+            + "  <a name ='changePage' onClick='javascript:changeEditPage();' href='#'>Click</a>."
+            + "</body>"
+            + "</html>";
         final String firstContent
-                = "<html><head><title>First</title></head>"
-                + "<body>First/body>" 
-                + "</html>";
+            = "<html><head><title>First</title></head>"
+            + "<body>First/body>" 
+            + "</html>";
         final String secondContent
-                = "<html><head><title>Second</title></head>"
-                + "<body>Second</body>" 
-                + "</html>";
+            = "<html><head><title>Second</title></head>"
+            + "<body>Second</body>" 
+            + "</html>";
         final String baseUrl = "http://framestest";
         
         final URL framesURL = new URL(baseUrl + "/frames.html");

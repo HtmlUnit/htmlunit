@@ -70,13 +70,13 @@ public final class HtmlInputTest extends WebTestCase {
      */
     public void testRadioButtonsAreMutuallyExclusive() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "<input type='radio' name='foo' value='1' selected='selected'/>"
-                 + "<input type='radio' name='foo' value='2'/>"
-                 + "<input type='radio' name='foo' value='3'/>"
-                 + "<input type='submit' name='button' value='foo'/>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<input type='radio' name='foo' value='1' selected='selected'/>"
+            + "<input type='radio' name='foo' value='2'/>"
+            + "<input type='radio' name='foo' value='3'/>"
+            + "<input type='submit' name='button' value='foo'/>"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
@@ -106,12 +106,12 @@ public final class HtmlInputTest extends WebTestCase {
      */
     public void testSetChecked_CheckBox() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "<input type='checkbox' name='foo'/>"
-                 + "<input type='checkbox' name='bar'/>"
-                 + "<input type='submit' name='button' value='foo'/>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<input type='checkbox' name='foo'/>"
+            + "<input type='checkbox' name='bar'/>"
+            + "<input type='submit' name='button' value='foo'/>"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
@@ -130,12 +130,12 @@ public final class HtmlInputTest extends WebTestCase {
      */
     public void testGetChecked_RadioButton() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "<input type='radio' name='radio1'>"
-                 + "<input type='RADIO' name='radio1' value='bar' checked>"
-                 + "<input type='submit' name='button' value='foo'>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<input type='radio' name='radio1'>"
+            + "<input type='RADIO' name='radio1' value='bar' checked>"
+            + "<input type='submit' name='button' value='foo'>"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
@@ -154,10 +154,10 @@ public final class HtmlInputTest extends WebTestCase {
     public void testOnChangeHandler() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "<input type='text' name='text1' onchange='alert(\"changed\")')>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<input type='text' name='text1' onchange='alert(\"changed\")')>"
+            + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
@@ -174,10 +174,10 @@ public final class HtmlInputTest extends WebTestCase {
      */
     public void testCheckboxDefaultValue() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "<input type='checkbox' name='checkbox1')>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<input type='checkbox' name='checkbox1')>"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
@@ -192,7 +192,7 @@ public final class HtmlInputTest extends WebTestCase {
      */
     public void testClickRadioButton() throws Exception {
         final String htmlContent
-        = "<html><head><title>foo</title></head><body>"
+            = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'>"
             + "<input type='radio' name='foo' value='1' selected='selected'/>"
             + "<input type='radio' name='foo' value='2'/>"
@@ -217,7 +217,7 @@ public final class HtmlInputTest extends WebTestCase {
      */
     public void testInputNoType() throws Exception {
         final String htmlContent
-        = "<html><head><title>foo</title></head><body>"
+            = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'>"
             + "<input name='foo'/>"
             + "</form></body></html>";

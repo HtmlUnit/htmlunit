@@ -71,11 +71,11 @@ public class HtmlAnchorTest extends WebTestCase {
     public void testClick() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>"
-                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>"
-                 + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>"
+            + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>"
+            + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>"
+            + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
@@ -97,9 +97,9 @@ public class HtmlAnchorTest extends WebTestCase {
      */
     public void testClickAnchorName() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<a href='#clickedAnchor' id='a1'>link to foo1</a>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<a href='#clickedAnchor' id='a1'>link to foo1</a>"
+            + "</body></html>";
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( client );
@@ -115,10 +115,8 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage secondPage = ( HtmlPage )anchor.click();
 
         // The url shouldn't contain the anchor since that isn't sent to the server
-        assertEquals("url", URL_GARGOYLE.toExternalForm(), secondPage
-                .getWebResponse()
-                .getUrl()
-                .toExternalForm());
+        assertEquals("url", URL_GARGOYLE.toExternalForm(), 
+            secondPage.getWebResponse().getUrl().toExternalForm());
     }
 
 
@@ -129,14 +127,14 @@ public class HtmlAnchorTest extends WebTestCase {
         throws Exception {
 
         final String firstContent
-                 = "<html><head><title>First</title></head><body>"
-                 + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>"
-                 + "<a href='http://second' id='a2' "
-                 + "onClick='alert(\"clicked\")'>link to foo2</a>"
-                 + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>"
-                 + "</body></html>";
+            = "<html><head><title>First</title></head><body>"
+            + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>"
+            + "<a href='http://second' id='a2' "
+            + "onClick='alert(\"clicked\")'>link to foo2</a>"
+            + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>"
+            + "</body></html>";
         final String secondContent
-             = "<html><head><title>Second</title></head><body></body></html>";
+            = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
@@ -170,14 +168,14 @@ public class HtmlAnchorTest extends WebTestCase {
         throws Exception {
 
         final String firstContent
-                 = "<html><head><title>First</title></head><body>"
-                 + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>"
-                 + "<a href='http://second' id='a2' "
-                 + "onClick='alert(\"clicked\");return false;'>link to foo2</a>"
-                 + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>"
-                 + "</body></html>";
+            = "<html><head><title>First</title></head><body>"
+            + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>"
+            + "<a href='http://second' id='a2' "
+            + "onClick='alert(\"clicked\");return false;'>link to foo2</a>"
+            + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>"
+            + "</body></html>";
         final String secondContent
-             = "<html><head><title>Second</title></head><body></body></html>";
+            = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
@@ -210,12 +208,12 @@ public class HtmlAnchorTest extends WebTestCase {
     public void testClick_onClickHandler_javascriptDisabled() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>"
-                 + "<a href='http://www.foo2.com' id='a2' "
-                 + "onClick='alert(\"clicked\")'>link to foo2</a>"
-                 + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>"
+            + "<a href='http://www.foo2.com' id='a2' "
+            + "onClick='alert(\"clicked\")'>link to foo2</a>"
+            + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>"
+            + "</body></html>";
         final WebClient client = new WebClient();
         client.setJavaScriptEnabled(false);
 
@@ -250,11 +248,11 @@ public class HtmlAnchorTest extends WebTestCase {
     public void testClick_javascriptUrl() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>"
-                 + "<a href='javascript:alert(\"clicked\")' id='a2'>link to foo2</a>"
-                 + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>"
+            + "<a href='javascript:alert(\"clicked\")' id='a2'>link to foo2</a>"
+            + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>"
+            + "</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         
@@ -275,11 +273,11 @@ public class HtmlAnchorTest extends WebTestCase {
     public void testClick_javascriptUrl_javascriptDisabled() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>"
-                 + "<a href='javascript:alert(\"clicked\")' id='a2'>link to foo2</a>"
-                 + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>"
+            + "<a href='javascript:alert(\"clicked\")' id='a2'>link to foo2</a>"
+            + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>"
+            + "</body></html>";
         final WebClient client = new WebClient();
         client.setJavaScriptEnabled(false);
 
@@ -308,15 +306,15 @@ public class HtmlAnchorTest extends WebTestCase {
     public void testClick_javascriptUrl_InvalidReturn_RegressionTest() throws Exception {
 
         final String htmlContent
-                 = "<html><head><SCRIPT lang=\"JavaScript\">"
-                 + "function doSubmit(formName){"
-                 + "    return false;"
-                 + "}"
-                 + "</SCRIPT></head><body><form name=\"formName\" method=\"POST\"action=\"../foo\">"
-                 + "<a href=\".\" id=\"testJavascript\" name=\"testJavascript\""
-                 + "onclick=\"return false;\">Test Link </a>"
-                 + "<input type=\"submit\" value=\"Login\" "
-                 + "name=\"loginButton\"></form></body></html>";
+            = "<html><head><SCRIPT lang=\"JavaScript\">"
+            + "function doSubmit(formName){"
+            + "    return false;"
+            + "}"
+            + "</SCRIPT></head><body><form name=\"formName\" method=\"POST\"action=\"../foo\">"
+            + "<a href=\".\" id=\"testJavascript\" name=\"testJavascript\""
+            + "onclick=\"return false;\">Test Link </a>"
+            + "<input type=\"submit\" value=\"Login\" "
+            + "name=\"loginButton\"></form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAnchor testAnchor = page.getAnchorByName("testJavascript");

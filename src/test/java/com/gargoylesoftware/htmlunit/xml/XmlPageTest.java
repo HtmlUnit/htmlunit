@@ -67,7 +67,7 @@ public class XmlPageTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String content
-             = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>"
              + "<foo>\n"
              + "    <foofoo name='first'>something</foofoo>\n"
              + "    <foofoo name='second'>something else</foofoo>\n"
@@ -99,12 +99,12 @@ public class XmlPageTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String content
-             = "<?xml version=\"1.0\"?>"
-             + "<foo>\n"
-             + "    <foofoo invalid\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
-             + "</foo>";
+            = "<?xml version=\"1.0\"?>"
+            + "<foo>\n"
+            + "    <foofoo invalid\n"
+            + "    <foofoo name='first'>something</foofoo>\n"
+            + "    <foofoo name='second'>something else</foofoo>\n"
+            + "</foo>";
 
         webConnection.setDefaultResponse(content, 200, "OK", "text/xml");
         client.setWebConnection( webConnection );

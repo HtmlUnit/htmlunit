@@ -77,55 +77,55 @@ public class FormTest extends WebTestCase {
      */
     public void testElementsAccessor() throws Exception {
         final String content
-                 = "<html><head><title>foo</title><script>\n"
-                 + "function doTest(){\n"
-                 + "    alert(document.form1.length)\n"
-                 + "    for( var i=0; i< document.form1.length; i++) {\n"
-                 + "        var element = document.form1.elements[i];"
-                 + "        if( element.type != 'radio' && element != document.form1[element.name] ) {\n"
-                 + "            alert('name index not working for '+element.name);\n"
-                 + "        }\n"
-                 + "        alert( element.name )\n"
-                 + "    }\n"
-                 + "}\n"
-                 + "</script></head><body onload='doTest()'>\n"
-                 + "<p>hello world</p>"
-                 + "<form name='form1'>"
-                 + "    <input type='button' name='button1' />"
-                 + "    <button type='button' name='button2' />"
-                 + "    <input type='checkbox' name='checkbox1' />"
-                 + "    <input type='file' name='fileupload1' />"
-                 + "    <input type='hidden' name='hidden1' />"
-                 + "    <input type='radio' name='radio1' value='1' />"
-                 + "    <input type='radio' name='radio1' value='2' />"
-                 + "    <select name='select1'>"
-                 + "        <option>foo</option>"
-                 + "    </select>"
-                 + "    <select multiple='multiple' name='select2'>"
-                 + "        <option>foo</option>"
-                 + "    </select>"
-                 + "    <input type='password' name='password1' />"
-                 + "    <input type='reset' name='reset1' />"
-                 + "    <button type='reset' name='reset2' />"
-                 + "    <input type='submit' name='submit1' />"
-                 + "    <button type='submit' name='submit2' />"
-                 + "    <input type='text' name='textInput1' />"
-                 + "    <textarea name='textarea1'>foo</textarea>"
-                 + "</form>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.form1.length)\n"
+            + "    for( var i=0; i< document.form1.length; i++) {\n"
+            + "        var element = document.form1.elements[i];"
+            + "        if( element.type != 'radio' && element != document.form1[element.name] ) {\n"
+            + "            alert('name index not working for '+element.name);\n"
+            + "        }\n"
+            + "        alert( element.name )\n"
+            + "    }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <input type='button' name='button1' />"
+            + "    <button type='button' name='button2' />"
+            + "    <input type='checkbox' name='checkbox1' />"
+            + "    <input type='file' name='fileupload1' />"
+            + "    <input type='hidden' name='hidden1' />"
+            + "    <input type='radio' name='radio1' value='1' />"
+            + "    <input type='radio' name='radio1' value='2' />"
+            + "    <select name='select1'>"
+            + "        <option>foo</option>"
+            + "    </select>"
+            + "    <select multiple='multiple' name='select2'>"
+            + "        <option>foo</option>"
+            + "    </select>"
+            + "    <input type='password' name='password1' />"
+            + "    <input type='reset' name='reset1' />"
+            + "    <button type='reset' name='reset2' />"
+            + "    <input type='submit' name='submit1' />"
+            + "    <button type='submit' name='submit2' />"
+            + "    <input type='text' name='textInput1' />"
+            + "    <textarea name='textarea1'>foo</textarea>"
+            + "</form>"
+            + "</body></html>";
 
-         final List collectedAlerts = new ArrayList();
-         final HtmlPage page = loadPage(content, collectedAlerts);
-         assertEquals("foo", page.getTitleText());
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
 
-         final List expectedAlerts = Arrays.asList( new String[]{
-             "16", "button1", "button2", "checkbox1", "fileupload1", "hidden1",
-             "radio1", "radio1",
-             "select1", "select2", "password1", "reset1",
-             "reset2", "submit1", "submit2", "textInput1", "textarea1"
-         } );
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "16", "button1", "button2", "checkbox1", "fileupload1", "hidden1",
+            "radio1", "radio1",
+            "select1", "select2", "password1", "reset1",
+            "reset2", "submit1", "submit2", "textInput1", "textarea1"
+        } );
 
-         assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
 
@@ -134,35 +134,35 @@ public class FormTest extends WebTestCase {
      */
     public void testRadioButtonArray() throws Exception {
         final String content
-                 = "<html><head><title>foo</title><script>\n"
-                 + "function doTest(){\n"
-                 + "    var radioArray = document.form1['radio1'];"
-                 + "    alert(radioArray.length)\n"
-                 + "    for( var i=0; i< radioArray.length; i++) {\n"
-                 + "        var element = radioArray[i];"
-                 + "        alert( element.value )\n"
-                 + "    }\n"
-                 + "}\n"
-                 + "</script></head><body onload='doTest()'>\n"
-                 + "<p>hello world</p>"
-                 + "<form name='form1'>"
-                 + "    <input type='radio' name='radio1' value='1'/>"
-                 + "    <input type='radio' name='radio1' value='2'/>"
-                 + "    <input type='radio' name='radio1' value='3'/>"
-                 + "</form>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    var radioArray = document.form1['radio1'];"
+            + "    alert(radioArray.length)\n"
+            + "    for( var i=0; i< radioArray.length; i++) {\n"
+            + "        var element = radioArray[i];"
+            + "        alert( element.value )\n"
+            + "    }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <input type='radio' name='radio1' value='1'/>"
+            + "    <input type='radio' name='radio1' value='2'/>"
+            + "    <input type='radio' name='radio1' value='3'/>"
+            + "</form>"
+            + "</body></html>";
 
-         final List collectedAlerts = new ArrayList();
+        final List collectedAlerts = new ArrayList();
 
-         final List expectedAlerts = Arrays.asList( new String[]{
-             "3", "1", "2", "3"
-         } );
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "3", "1", "2", "3"
+        } );
 
-         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-         final HtmlPage page = loadPage(content, collectedAlerts);
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final HtmlPage page = loadPage(content, collectedAlerts);
 
-         assertEquals("foo", page.getTitleText());
-         assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals("foo", page.getTitleText());
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
 
@@ -174,26 +174,26 @@ public class FormTest extends WebTestCase {
      */
     public void testRadioButton_OnlyOne() throws Exception {
         final String content
-                 = "<html><head><title>foo</title><script>\n"
-                 + "function doTest(){\n"
-                 + "    alert(document.form1['radio1'].value);"
-                 + "}\n"
-                 + "</script></head><body onload='doTest()'>\n"
-                 + "<p>hello world</p>"
-                 + "<form name='form1'>"
-                 + "    <input type='radio' name='radio1' value='1'/>"
-                 + "</form>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.form1['radio1'].value);"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <input type='radio' name='radio1' value='1'/>"
+            + "</form>"
+            + "</body></html>";
 
-         final List collectedAlerts = new ArrayList();
-         final HtmlPage page = loadPage(content, collectedAlerts);
-         assertEquals("foo", page.getTitleText());
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
 
-         final List expectedAlerts = Arrays.asList( new String[]{
-             "1"
-         } );
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "1"
+        } );
 
-         assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
 
@@ -262,28 +262,28 @@ public class FormTest extends WebTestCase {
             Exception {
 
         final String content
-                 = "<html><head><title>foo</title><script>\n"
-                 + "function doTest(){\n"
-                 + "    alert(document.form1."+jsProperty+");\n"
-                 + "    document.form1."+jsProperty+"='"+newValue+"'\n"
-                 + "    alert(document.form1."+jsProperty+");\n"
-                 + "}\n"
-                 + "</script></head><body onload='doTest()'>\n"
-                 + "<p>hello world</p>"
-                 + "<form name='form1' "+htmlProperty+"='"+oldValue+"'>"
-                 + "    <input type='button' name='button1' />"
-                 + "</form>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.form1."+jsProperty+");\n"
+            + "    document.form1."+jsProperty+"='"+newValue+"'\n"
+            + "    alert(document.form1."+jsProperty+");\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>"
+            + "<form name='form1' "+htmlProperty+"='"+oldValue+"'>"
+            + "    <input type='button' name='button1' />"
+            + "</form>"
+            + "</body></html>";
 
-         final List collectedAlerts = new ArrayList();
-         final HtmlPage page = loadPage(content, collectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
 
-         final List expectedAlerts = Arrays.asList( new String[]{
-             oldValue, newValue
-         } );
+        final List expectedAlerts = Arrays.asList( new String[]{
+            oldValue, newValue
+        } );
 
-         assertEquals( expectedAlerts, collectedAlerts );
-         return page.getFormByName("form1");
+        assertEquals( expectedAlerts, collectedAlerts );
+        return page.getFormByName("form1");
     }
 
 
@@ -295,17 +295,17 @@ public class FormTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
-                 = "<html><head><title>first</title></head><body>\n"
-                 + "<p>hello world</p>"
-                 + "<form name='form1' method='get' action='http://second'>"
-                 + "    <input type='button' name='button1' />"
-                 + "    <input type='button' name='button2' />"
-                 + "</form>"
-                 + "</body></html>";
+            = "<html><head><title>first</title></head><body>\n"
+            + "<p>hello world</p>"
+            + "<form name='form1' method='get' action='http://second'>"
+            + "    <input type='button' name='button1' />"
+            + "    <input type='button' name='button2' />"
+            + "</form>"
+            + "</body></html>";
         final String secondContent
-                 = "<html><head><title>second</title></head><body>\n"
-                 + "<p>hello world</p>"
-                 + "</body></html>";
+            = "<html><head><title>second</title></head><body>\n"
+            + "<p>hello world</p>"
+            + "</body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -331,16 +331,16 @@ public class FormTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
-                 = "<html><head><title>first</title></head><body>\n"
-                 + "<p>hello world</p>"
-                 + "<form name='form1' method='get' action='http://second' target='MyNewWindow'>"
-                 + "    <input type='button' name='button1' />"
-                 + "</form>"
-                 + "</body></html>";
+            = "<html><head><title>first</title></head><body>\n"
+            + "<p>hello world</p>"
+            + "<form name='form1' method='get' action='http://second' target='MyNewWindow'>"
+            + "    <input type='button' name='button1' />"
+            + "</form>"
+            + "</body></html>";
         final String secondContent
-                 = "<html><head><title>second</title></head><body>\n"
-                 + "<p>hello world</p>"
-                 + "</body></html>";
+            = "<html><head><title>second</title></head><body>\n"
+            + "<p>hello world</p>"
+            + "</body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -367,16 +367,16 @@ public class FormTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
-                 = "<html><head><title>first</title></head><body>\n"
-                 + "<form name='form1' method='get' action='http://second' onsubmit=\"alert('onsubmit called')\">"
-                 + "    <input type='submit' />"
-                 + "</form>"
-                 + "<a href='javascript:document.form1.submit()' id='link1'>Click me</a>"
-                 + "</body></html>";
+            = "<html><head><title>first</title></head><body>\n"
+            + "<form name='form1' method='get' action='http://second' onsubmit=\"alert('onsubmit called')\">"
+            + "    <input type='submit' />"
+            + "</form>"
+            + "<a href='javascript:document.form1.submit()' id='link1'>Click me</a>"
+            + "</body></html>";
         final String secondContent
-                 = "<html><head><title>second</title></head><body>\n"
-                 + "<p>hello world</p>"
-                 + "</body></html>";
+            = "<html><head><title>second</title></head><body>\n"
+            + "<p>hello world</p>"
+            + "</body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -414,18 +414,18 @@ public class FormTest extends WebTestCase {
 
     private void doTestInputWithName( final String name ) throws Exception {
         final String content
-                 = "<html><head><title>foo</title><script>"
-                 + "function go() {\n"
-                 + "   alert(document.simple_form."+name+".value);\n"
-                 + "   document.simple_form."+name+".value='foo';\n"
-                 + "   alert(document.simple_form."+name+".value);\n"
-                 + "}</script></head>"
-                 + "<body onload='go()'>"
-                 + "<p>hello world</p>"
-                 + "<form action='login.jsp' name='simple_form'>"
-                 + "    <input name='"+name+"' type='hidden' value='"+name+"2'>"
-                 + "</form>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title><script>"
+            + "function go() {\n"
+            + "   alert(document.simple_form."+name+".value);\n"
+            + "   document.simple_form."+name+".value='foo';\n"
+            + "   alert(document.simple_form."+name+".value);\n"
+            + "}</script></head>"
+            + "<body onload='go()'>"
+            + "<p>hello world</p>"
+            + "<form action='login.jsp' name='simple_form'>"
+            + "    <input name='"+name+"' type='hidden' value='"+name+"2'>"
+            + "</form>"
+            + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
@@ -450,22 +450,22 @@ public class FormTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final String firstContent
-             = "<html><head><title>Button Test</title></head><body><form name='whatsnew'>"
-             + "<input type='radio' name='second' value='1'>"
-             + "<input type='radio' name='second' value='2' checked>"
-             + "</form><script>clickAction();\n"
-             + "function clickAction(){\n"
-             + "    var value = -1;\n"
-             + "    radios = document.forms['whatsnew'].elements['second'];\n"
-             + "    for (var i=0; i < radios.length; i++){\n"
-             + "        if (radios[i].checked == true) {\n"
-             + "            value = radios[i].value;\n"
-             + "            break;\n"
-             + "        }\n"
-             + "    }\n"
-             + "    alert('value = ' + value);\n"
-             + "}\n"
-             + "</script></body></html>";
+            = "<html><head><title>Button Test</title></head><body><form name='whatsnew'>"
+            + "<input type='radio' name='second' value='1'>"
+            + "<input type='radio' name='second' value='2' checked>"
+            + "</form><script>clickAction();\n"
+            + "function clickAction(){\n"
+            + "    var value = -1;\n"
+            + "    radios = document.forms['whatsnew'].elements['second'];\n"
+            + "    for (var i=0; i < radios.length; i++){\n"
+            + "        if (radios[i].checked == true) {\n"
+            + "            value = radios[i].value;\n"
+            + "            break;\n"
+            + "        }\n"
+            + "    }\n"
+            + "    alert('value = ' + value);\n"
+            + "}\n"
+            + "</script></body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -487,15 +487,15 @@ public class FormTest extends WebTestCase {
      */
     public void testFindInputWithoutTypeDefined() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head>"
-                 + "<body onload='alert(document.simple_form.login.value);'>"
-                 + "<p>hello world</p><table><tr><td>"
-                 + "<form action='login.jsp' name='simple_form'>"
-                 + "    <input name='msg' type='hidden' value='0'>"
-                 + "    <script>document.simple_form.msg.value=1</script>"
-                 + "    <input name='login' size='17' value='foo'>"
-                 + "</form></td></tr></table>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head>"
+            + "<body onload='alert(document.simple_form.login.value);'>"
+            + "<p>hello world</p><table><tr><td>"
+            + "<form action='login.jsp' name='simple_form'>"
+            + "    <input name='msg' type='hidden' value='0'>"
+            + "    <script>document.simple_form.msg.value=1</script>"
+            + "    <input name='login' size='17' value='foo'>"
+            + "</form></td></tr></table>"
+            + "</body></html>";
         final List collectedAlerts = new ArrayList();
 
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -515,17 +515,17 @@ public class FormTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
-                 = "<html><head><title>first</title></head><body>\n"
-                 + "<p>hello world</p>"
-                 + "<form name='form1' method='get' action='http://second'>"
-                 + "    <button type='submit' name='button1' id='button1'/>"
-                 + "    <button type='submit' name='button2' />"
-                 + "</form>"
-                 + "</body></html>";
+            = "<html><head><title>first</title></head><body>\n"
+            + "<p>hello world</p>"
+            + "<form name='form1' method='get' action='http://second'>"
+            + "    <button type='submit' name='button1' id='button1'/>"
+            + "    <button type='submit' name='button2' />"
+            + "</form>"
+            + "</body></html>";
         final String secondContent
-                 = "<html><head><title>second</title></head><body>\n"
-                 + "<p>hello world</p>"
-                 + "</body></html>";
+            = "<html><head><title>second</title></head><body>\n"
+            + "<p>hello world</p>"
+            + "</body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -552,26 +552,26 @@ public class FormTest extends WebTestCase {
      */
     public void testLength() throws Exception {
         final String content
-                 = "<html><head><title>foo</title><script>\n"
-                 + "function doTest(){\n"
-                 + "    alert(document.form1.length);"
-                 + "}\n"
-                 + "</script></head><body onload='doTest()'>\n"
-                 + "<form name='form1'>"
-                 + "    <input type='radio' name='radio1' value='1'/>"
-                 + "    <input type='image' src='foo' value='1'/>"
-                 + "    <input type='submit' name='submit1' value='1'/>"
-                 + "</form>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.form1.length);"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'>"
+            + "    <input type='radio' name='radio1' value='1'/>"
+            + "    <input type='image' src='foo' value='1'/>"
+            + "    <input type='submit' name='submit1' value='1'/>"
+            + "</form>"
+            + "</body></html>";
 
-         final List collectedAlerts = new ArrayList();
-         loadPage(content, collectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
 
-         final List expectedAlerts = Arrays.asList( new String[]{
-             "2"
-         } );
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "2"
+        } );
 
-         assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
     /**
@@ -579,23 +579,23 @@ public class FormTest extends WebTestCase {
      */
     public void testGet() throws Exception {
         final String content
-                 = "<html><head><title>foo</title><script>\n"
-                 + "function doTest(){\n"
-                 + "    alert(document.form1[0].name)\n"
-                 + "}\n"
-                 + "</script></head><body onload='doTest()'>\n"
-                 + "<p>hello world</p>"
-                 + "<form name='form1'>"
-                 + "    <input type='button' name='button1' />"
-                 + "</form>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.form1[0].name)\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <input type='button' name='button1' />"
+            + "</form>"
+            + "</body></html>";
 
-         final List collectedAlerts = new ArrayList();
-         loadPage(content, collectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
 
-         final List expectedAlerts = Arrays.asList( new String[]{ "button1" } );
+        final List expectedAlerts = Arrays.asList( new String[]{ "button1" } );
 
-         assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
 
@@ -605,18 +605,18 @@ public class FormTest extends WebTestCase {
     public void testLostFunction() throws Exception {
 
         final String content
-                = "<html><head><title>foo</title><script>"
-                + " function onSubmit() { alert('hi!'); return false; }"
-                + "</script></head><body>"
-                + "<form onsubmit='return onSubmit();'>"
-                + " <input type='submit' id='clickMe' />"
-                + "</form>"
-                + "</body></html>";
+            = "<html><head><title>foo</title><script>"
+            + " function onSubmit() { alert('hi!'); return false; }"
+            + "</script></head><body>"
+            + "<form onsubmit='return onSubmit();'>"
+            + " <input type='submit' id='clickMe' />"
+            + "</form>"
+            + "</body></html>";
     
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlSubmitInput button = (HtmlSubmitInput)
-        page.getHtmlElementById("clickMe");
+            page.getHtmlElementById("clickMe");
         button.click();
         final List expectedAlerts = Collections.singletonList("hi!");
         assertEquals(expectedAlerts, collectedAlerts);
@@ -629,21 +629,21 @@ public class FormTest extends WebTestCase {
     public void testElementsLive() throws Exception {
 
         final String content = "<html>"
-                + "<body>"
-                + "<form name='myForm'>"
-                + "<script>"
-                + "var oElements = document.myForm.elements;"
-                + "alert(oElements.length);"
-                + "</script>"
-                + "<input type='text' name='foo'/>"
-                + "<script>"
-                + "alert(oElements.length);"
-                + "alert(document.myForm.elements.length);"
-                + "alert(oElements == document.myForm.elements);"
-                + "</script>"
-                + "</form>"
-                + "</body>"
-                + "</html>";
+            + "<body>"
+            + "<form name='myForm'>"
+            + "<script>"
+            + "var oElements = document.myForm.elements;"
+            + "alert(oElements.length);"
+            + "</script>"
+            + "<input type='text' name='foo'/>"
+            + "<script>"
+            + "alert(oElements.length);"
+            + "alert(document.myForm.elements.length);"
+            + "alert(oElements == document.myForm.elements);"
+            + "</script>"
+            + "</form>"
+            + "</body>"
+            + "</html>";
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
@@ -668,8 +668,8 @@ public class FormTest extends WebTestCase {
         
         final List collectedAlerts = new ArrayList();
         final List expectedAlerts = Arrays.asList( new String[]{
-                "foo.html"
-            } );
+            "foo.html"
+        } );
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 
@@ -752,31 +752,31 @@ public class FormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-     public void testFieldFoundWithID() throws Exception {
+    public void testFieldFoundWithID() throws Exception {
         final String content = "<html><head>"
-             + "<script>"
-             + "function test()"
-             + "{"
-             + "    alert(IRForm.IRText.value);"
-             + "    alert(IRForm.myField.length);"
-             + "}"
-             + "</script>"
-             + "</head>"
-             + "<body onload='test()'>"
-             + " <form name='IRForm' action='#'>"
-             + " <input type='text' id='IRText' value='before'/>"
-             + " <input type='image' name='myField' src='foo.gif'/>"
-             + " <input type='image' id='myField' src='foo.gif'/>"
-             + " <input type='text' name='myField'/>"
-             + " <input type='text' id='myField'/>"
-             + " </form>"
-             + "</body>"
-             + "</html>";
-         final List expectedAlerts = Arrays.asList( new String[]{ "before", "2" } );
-         final List collectedAlerts = new ArrayList();
-         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-         loadPage(content, collectedAlerts);
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "    alert(IRForm.IRText.value);"
+            + "    alert(IRForm.myField.length);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + " <form name='IRForm' action='#'>"
+            + " <input type='text' id='IRText' value='before'/>"
+            + " <input type='image' name='myField' src='foo.gif'/>"
+            + " <input type='image' id='myField' src='foo.gif'/>"
+            + " <input type='text' name='myField'/>"
+            + " <input type='text' id='myField'/>"
+            + " </form>"
+            + "</body>"
+            + "</html>";
+        final List expectedAlerts = Arrays.asList( new String[]{ "before", "2" } );
+        final List collectedAlerts = new ArrayList();
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
 
-         assertEquals(expectedAlerts, collectedAlerts);
-   }
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

@@ -73,14 +73,14 @@ public class StyleTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
-             = "<html><head><title>First</title><script>\n"
-             + "function doTest() {\n"
-             + "    var style = document.getElementById('div1').style;\n"
-             + "    alert(style.color);\n"
-             + "    style.color = 'pink';\n"
-             + "    alert(style.color);\n"
-             + "}\n</script></head>"
-             + "<body onload='doTest()'><div id='div1' style='color: black'>foo</div></body></html>";
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var style = document.getElementById('div1').style;\n"
+            + "    alert(style.color);\n"
+            + "    style.color = 'pink';\n"
+            + "    alert(style.color);\n"
+            + "}\n</script></head>"
+            + "<body onload='doTest()'><div id='div1' style='color: black'>foo</div></body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -106,15 +106,15 @@ public class StyleTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
-             = "<html><head><title>First</title><script>\n"
-             + "function doTest() {\n"
-             + "    var style = document.getElementById('div1').style;\n"
-             + "    alert(style.color);\n"
-             + "    style.color = 'pink';\n"
-             + "    alert(style.color);\n"
-             + "}\n</script></head>"
-             + "<body onload='doTest()'>"
-             + "<div id='div1' style='color: black;background:blue;foo:bar'>foo</div></body></html>";
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var style = document.getElementById('div1').style;\n"
+            + "    alert(style.color);\n"
+            + "    style.color = 'pink';\n"
+            + "    alert(style.color);\n"
+            + "}\n</script></head>"
+            + "<body onload='doTest()'>"
+            + "<div id='div1' style='color: black;background:blue;foo:bar'>foo</div></body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -141,15 +141,15 @@ public class StyleTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
-        = "<html><head><title>First</title><script>\n"
-        + "function doTest() {\n"
-        + "    var style = document.getElementById('div1').style;\n"
-        + "    alert(document.getElementById('nonexistingid'));\n"
-        + "    alert(style.color);\n"
-        + "    style.color = 'pink';\n"
-        + "    alert(style.color);\n"
-        + "}\n</script></head>"
-        + "<body onload='doTest()'><div id='div1'>foo</div></body></html>";
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var style = document.getElementById('div1').style;\n"
+            + "    alert(document.getElementById('nonexistingid'));\n"
+            + "    alert(style.color);\n"
+            + "    style.color = 'pink';\n"
+            + "    alert(style.color);\n"
+            + "}\n</script></head>"
+            + "<body onload='doTest()'><div id='div1'>foo</div></body></html>";
 
         webConnection.setResponse(
                 URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );

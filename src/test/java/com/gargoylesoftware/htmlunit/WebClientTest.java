@@ -89,8 +89,8 @@ public class WebClientTest extends WebTestCase {
     public void testCredentialProvider_NoCredentials() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "No access</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "No access</body></html>";
         final WebClient client = new WebClient();
         client.setPrintContentOnFailingStatusCode( false );
 
@@ -132,9 +132,9 @@ public class WebClientTest extends WebTestCase {
      */
     public void testHtmlWindowEvents_changed() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>"
+            + "</body></html>";
         final WebClient client = new WebClient();
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo(client);
@@ -170,13 +170,13 @@ public class WebClientTest extends WebTestCase {
      */
     public void testHtmlWindowEvents_opened() throws Exception {
         final String page1Content
-                 = "<html><head><title>foo</title>"
-                 + "<script>window.open('" + URL_SECOND.toExternalForm() + "', 'myNewWindow')</script>"
-                 + "</head><body>"
-                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title>"
+            + "<script>window.open('" + URL_SECOND.toExternalForm() + "', 'myNewWindow')</script>"
+            + "</head><body>"
+            + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>"
+            + "</body></html>";
         final String page2Content
-                 = "<html><head><title>foo</title></head><body></body></html>";
+            = "<html><head><title>foo</title></head><body></body></html>";
         final WebClient client = new WebClient();
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo(client);
@@ -211,14 +211,14 @@ public class WebClientTest extends WebTestCase {
      */
     public void testHtmlWindowEvents_closedFromFrame() throws Exception {
         final String firstContent
-                 = "<html><head><title>first</title></head><body>"
-                 + "<iframe src='http://third' id='frame1'>"
-                 + "<a href='http://second' id='a2'>link to foo2</a>"
-                 + "</body></html>";
+            = "<html><head><title>first</title></head><body>"
+            + "<iframe src='http://third' id='frame1'>"
+            + "<a href='http://second' id='a2'>link to foo2</a>"
+            + "</body></html>";
         final String secondContent
-                 = "<html><head><title>second</title></head><body></body></html>";
+            = "<html><head><title>second</title></head><body></body></html>";
         final String thirdContent
-                 = "<html><head><title>third</title></head><body></body></html>";
+            = "<html><head><title>third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( client );
@@ -459,10 +459,10 @@ public class WebClientTest extends WebTestCase {
      */
     public void testSetPageCreator() throws Exception {
         final String page1Content
-                 = "<html><head><title>foo</title>"
-                 + "</head><body>"
-                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title>"
+            + "</head><body>"
+            + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>"
+            + "</body></html>";
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( client );
@@ -502,7 +502,7 @@ public class WebClientTest extends WebTestCase {
          * @throws IOException If an IO problem occurs
          */
         public Page createPage( final WebResponse webResponse, final WebWindow webWindow )
-                throws IOException {
+            throws IOException {
             final Page page = new TextPage(webResponse, webWindow);
             webWindow.setEnclosedPage(page);
             collectedPages_.add(page);
@@ -517,8 +517,8 @@ public class WebClientTest extends WebTestCase {
     public void testLoadPage_PostWithParameters() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "</body></html>";
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( client );
@@ -539,9 +539,9 @@ public class WebClientTest extends WebTestCase {
      */
     public void testLoadPage_SlashesInQueryString() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head>"
-                 + "<body><a href='foo.html?id=UYIUYTY//YTYUY..F'>to page 2</a>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head>"
+            + "<body><a href='foo.html?id=UYIUYTY//YTYUY..F'>to page 2</a>"
+            + "</body></html>";
 
         final WebClient client = new WebClient();
 
@@ -561,8 +561,8 @@ public class WebClientTest extends WebTestCase {
      */
     public void testLoadPage_EncodeQueryString() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "</body></html>";
         
         final WebClient client = new WebClient();
 
@@ -969,15 +969,15 @@ public class WebClientTest extends WebTestCase {
         final String alertText = "content";
         final String newAlertText = "newcontent";
         final String content
-             = "<html><head><title>foo</title><script>"
-             + "<!--\n   alert('" + alertText + "');\n// -->"
-             + "</script></head><body>"
-             + "<p>hello world</p>"
-             + "<form name='form1'>"
-             + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-             + "    <input type='text' name='textfield2' id='textfield2'/>"
-             + "</form>"
-             + "</body></html>";
+            = "<html><head><title>foo</title><script>"
+            + "<!--\n   alert('" + alertText + "');\n// -->"
+            + "</script></head><body>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+            + "    <input type='text' name='textfield2' id='textfield2'/>"
+            + "</form>"
+            + "</body></html>";
 
         webConnection.setDefaultResponse( content );
         client.setWebConnection( webConnection );
@@ -1016,7 +1016,7 @@ public class WebClientTest extends WebTestCase {
 
         });
         client.getPage( new URL( "http://www.yahoo.com" ) );
-     }
+    }
     
     /** 
      * Test the ScriptPreProcessor's ability to filter out a javascript method
@@ -1052,7 +1052,7 @@ public class WebClientTest extends WebTestCase {
         
         assertEquals(1, alerts.size());
         assertEquals("implemented function", alerts.get(0).toString());
-     }
+    }
 
     /**
      * Apparently if the browsers receive a charset that they don't understand, they ignore
@@ -1061,8 +1061,8 @@ public class WebClientTest extends WebTestCase {
      */
     public void testBadCharset() throws Exception {
         final String page1Content
-                 = "<html><head><title>foo</title>"
-                 + "</head><body></body></html>";
+            = "<html><head><title>foo</title>"
+            + "</head><body></body></html>";
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( client );

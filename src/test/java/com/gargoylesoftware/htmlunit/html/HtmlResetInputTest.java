@@ -61,22 +61,22 @@ public class HtmlResetInputTest extends WebTestCase {
      */
     public void testReset() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "<input type='text' name='textfield1' id='textfield1' value='foo'/>"
-                 + "<input type='password' name='password1' id='password1' value='foo'/>"
-                 + "<input type='hidden' name='hidden1' id='hidden1' value='foo'/>"
-                 + "<input type='radio' name='radioButton' value='foo' checked/>"
-                 + "<input type='radio' name='radioButton' value='bar'/>"
-                 + "<input type='checkbox' name='checkBox' value='check'/>"
-                 + "<select id='select1'>"
-                 + "    <option id='option1' selected value='1'>Option1</option>"
-                 + "    <option id='option2' value='2'>Option2</option>"
-                 + "</select>"
-                 + "<textarea id='textarea1'>Foobar</textarea>"
-                 + "<isindex prompt='Enter some text' id='isindex1'>"
-                 + "<input type='reset' name='resetButton' value='pushme'/>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<input type='text' name='textfield1' id='textfield1' value='foo'/>"
+            + "<input type='password' name='password1' id='password1' value='foo'/>"
+            + "<input type='hidden' name='hidden1' id='hidden1' value='foo'/>"
+            + "<input type='radio' name='radioButton' value='foo' checked/>"
+            + "<input type='radio' name='radioButton' value='bar'/>"
+            + "<input type='checkbox' name='checkBox' value='check'/>"
+            + "<select id='select1'>"
+            + "    <option id='option1' selected value='1'>Option1</option>"
+            + "    <option id='option2' value='2'>Option2</option>"
+            + "</select>"
+            + "<textarea id='textarea1'>Foobar</textarea>"
+            + "<isindex prompt='Enter some text' id='isindex1'>"
+            + "<input type='reset' name='resetButton' value='pushme'/>"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );

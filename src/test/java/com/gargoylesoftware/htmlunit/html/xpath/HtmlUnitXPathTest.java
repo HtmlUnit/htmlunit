@@ -119,9 +119,9 @@ public class HtmlUnitXPathTest extends WebTestCase {
         }
 
         final String content
-        = "<html><head><title>First</title><script>"
-        + "</script></head><body>"
-        + "</body></html>";
+            = "<html><head><title>First</title><script>"
+            + "</script></head><body>"
+            + "</body></html>";
 
         final HtmlPage page = loadPage(content);
         final XPath xpath = new HtmlUnitXPath("//*");
@@ -143,24 +143,24 @@ public class HtmlUnitXPathTest extends WebTestCase {
      */
     public void testWhenJSChangesPage() throws Exception {
         final String content
-        = "<html><head><title>foo</title><script>"
-        + "function addOption() {\n"
-        + "    var options = document.form1.select1.options;\n"
-        + "    var index = options.length;\n"
-        + "    options[index] = new Option('Four','value4');\n"
-        + "}</script>\n"
-        + "</head>\n"
-        + "<body>"
-        + "<p>hello world</p>"
-        + "<form name='form1'>"
-        + "    <select name='select1'>"
-        + "        <option name='option1' value='value1'>One</option>"
-        + "        <option name='option2' value='value2' selected>Two</option>"
-        + "        <option name='option3' value='value3'>Three</option>"
-        + "    </select>"
-        + "</form>"
-        + "<a href='javascript:addOption()'>add option</a>"
-        + "</body></html>";
+            = "<html><head><title>foo</title><script>"
+            + "function addOption() {\n"
+            + "    var options = document.form1.select1.options;\n"
+            + "    var index = options.length;\n"
+            + "    options[index] = new Option('Four','value4');\n"
+            + "}</script>\n"
+            + "</head>\n"
+            + "<body>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <select name='select1'>"
+            + "        <option name='option1' value='value1'>One</option>"
+            + "        <option name='option2' value='value2' selected>Two</option>"
+            + "        <option name='option3' value='value3'>Three</option>"
+            + "    </select>"
+            + "</form>"
+            + "<a href='javascript:addOption()'>add option</a>"
+            + "</body></html>";
 
         final HtmlPage page = loadPage(content);
         assertEquals("foo", page.getTitleText());

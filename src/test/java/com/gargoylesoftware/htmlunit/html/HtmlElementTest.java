@@ -104,9 +104,9 @@ public class HtmlElementTest extends WebTestCase {
      */
     public void testAsText_WithComments() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<p id='p1'>foo<!--bar--></p>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<p id='p1'>foo<!--bar--></p>"
+            + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final HtmlElement element = page.getHtmlElementById("p1");
         assertEquals("foo", element.asText());

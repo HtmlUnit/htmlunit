@@ -74,12 +74,12 @@ public class LocationTest extends WebTestCase {
      */
     public void testDocumentLocationGet() throws Exception {
         final String firstContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    alert(top.document.location);\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "</body></html>";
+            = "<html><head><title>First</title><script>"
+            + "function doTest() {\n"
+            + "    alert(top.document.location);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
 
@@ -142,12 +142,12 @@ public class LocationTest extends WebTestCase {
      */
     public void testDocumentLocationHref() throws Exception {
         final String firstContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    alert(top.document.location.href);\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "</body></html>";
+            = "<html><head><title>First</title><script>"
+            + "function doTest() {\n"
+            + "    alert(top.document.location.href);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
@@ -165,19 +165,19 @@ public class LocationTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
-             = "<html><head><title>First</title><script>\n"
-             + "function doTest() {\n"
-             + "    var location = document.location;"
-             + "    alert(location.hash);\n"
-             + "    alert(location.host);\n"
-             + "    alert(location.hostname);\n"
-             + "    alert(location.href);\n"
-             + "    alert(location.pathname);\n"
-             + "    alert(location.port);\n"
-             + "    alert(location.protocol);\n"
-             + "    alert(location.search);\n"
-             + "}\n</script></head>"
-             + "<body onload='doTest()'></body></html>";
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var location = document.location;"
+            + "    alert(location.hash);\n"
+            + "    alert(location.host);\n"
+            + "    alert(location.hostname);\n"
+            + "    alert(location.href);\n"
+            + "    alert(location.pathname);\n"
+            + "    alert(location.port);\n"
+            + "    alert(location.protocol);\n"
+            + "    alert(location.search);\n"
+            + "}\n</script></head>"
+            + "<body onload='doTest()'></body></html>";
 
         webConnection.setDefaultResponse( firstContent );
         client.setWebConnection( webConnection );
@@ -227,15 +227,15 @@ public class LocationTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    location.replace('" + URL_SECOND.toExternalForm() + "');\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "</body></html>";
+            = "<html><head><title>First</title><script>"
+            + "function doTest() {\n"
+            + "    location.replace('" + URL_SECOND.toExternalForm() + "');\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "</body></html>";
 
         final String secondContent
-        = "<html><head><title>Second</title></head><body></body></html>";
+            = "<html><head><title>Second</title></head><body></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);

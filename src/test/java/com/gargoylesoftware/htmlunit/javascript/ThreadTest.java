@@ -125,17 +125,17 @@ public class ThreadTest extends WebTestCase {
          */
         public void testCallInheritedFunction() throws Exception {
             final String content
-                    = "<html><head><title>foo</title><script>"
-                      + "function doTest() {\n"
-                      + "    document.form1.textfield1.focus();\n"
-                      + "    alert('past focus');\n"
-                      + "}\n"
-                      + "</script></head><body onload='doTest()'>"
-                      + "<p>hello world</p>"
-                      + "<form name='form1'>"
-                      + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-                      + "</form>"
-                      + "</body></html>";
+                = "<html><head><title>foo</title><script>"
+                + "function doTest() {\n"
+                + "    document.form1.textfield1.focus();\n"
+                + "    alert('past focus');\n"
+                + "}\n"
+                + "</script></head><body onload='doTest()'>"
+                + "<p>hello world</p>"
+                + "<form name='form1'>"
+                + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+                + "</form>"
+                + "</body></html>";
 
             final List collectedAlerts = new ArrayList();
             final HtmlPage page = loadPage(content, collectedAlerts);

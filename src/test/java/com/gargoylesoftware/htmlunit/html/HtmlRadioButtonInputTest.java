@@ -62,10 +62,10 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      */
     public void test_asTextWhenNotChecked() throws Exception {
         final String htmlContent
-                  = "<html><head><title>foo</title></head><body>"
-                  + "<form id='form1'>"
-                  + "    <input type='radio' name='radio' id='radio'>Check me</input>"
-                  + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "    <input type='radio' name='radio' id='radio'>Check me</input>"
+            + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
