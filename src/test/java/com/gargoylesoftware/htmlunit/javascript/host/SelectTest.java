@@ -245,7 +245,7 @@ public class SelectTest extends WebTestCase {
                  + "</body></html>";
 
          final List collectedAlerts = new ArrayList();
-         final HtmlPage page = loadPage(content, collectedAlerts);
+         loadPage(content, collectedAlerts);
 
          final List expectedAlerts = Arrays.asList( new String[]{
              "false", "true", "true", "false"
