@@ -138,4 +138,29 @@ public class HtmlFrameTest extends WebTestCase {
         final HtmlFrame frame2 = (HtmlFrame)page.getHtmlElementById("frame2");
         assertEquals( "frame2", "", ((HtmlPage)frame2.getEnclosedPage()).getTitleText() );
     }
+
+    /**
+     * Test that frames are correctly deregistered even if not html
+     * @throws Exception if the test fails
+     */
+    public void testDeregisterNonHtmlFrame() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection =
+            new MockWebConnection(webClient);
+
+        final String firstContent
+            = "<html><head><title>first</title></head>"
+            + "<frameset cols='100%'>"
+            + "    <frame src='foo.txt'>"
+            + "</frameset></html>";
+        webConnection.setDefaultResponse("foo", 200, "OK", "text/plain");
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webClient.setWebConnection(webConnection);
+
+        HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals("first", page.getTitleText());
+        
+        // loads something else to trigger frame de-registration
+        webClient.getPage(URL_SECOND);
+    }
 }
