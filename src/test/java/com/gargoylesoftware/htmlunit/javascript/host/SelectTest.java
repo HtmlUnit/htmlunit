@@ -42,7 +42,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -139,16 +138,10 @@ public class SelectTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
         final HtmlPage newPage = (HtmlPage) button.click();
          
-         
-        final List expectedParameters = new ArrayList();
-        expectedParameters.add( new KeyValuePair( "submit", "button" ) );
-         
         final MockWebConnection webConnection = (MockWebConnection) newPage.getWebClient().getWebConnection();
          
-        assertEquals("http://test", newPage.getWebResponse().getUrl().toExternalForm());
+        assertEquals("http://test?submit=button", newPage.getWebResponse().getUrl().toExternalForm());
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
-         
-        assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
     }
 
     /**

@@ -43,7 +43,6 @@ import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -307,11 +306,8 @@ public class FormTest extends WebTestCase {
             + "<p>hello world</p>"
             + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setDefaultResponse(secondContent);
         client.setWebConnection( webConnection );
 
         final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
@@ -342,11 +338,8 @@ public class FormTest extends WebTestCase {
             + "<p>hello world</p>"
             + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setDefaultResponse(secondContent);
         client.setWebConnection( webConnection );
 
         final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
@@ -378,11 +371,8 @@ public class FormTest extends WebTestCase {
             + "<p>hello world</p>"
             + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setDefaultResponse(secondContent);
         client.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
@@ -467,8 +457,7 @@ public class FormTest extends WebTestCase {
             + "}\n"
             + "</script></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
         client.setWebConnection( webConnection );
 
         final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
@@ -527,11 +516,8 @@ public class FormTest extends WebTestCase {
             + "<p>hello world</p>"
             + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setDefaultResponse(secondContent);
         client.setWebConnection( webConnection );
 
         final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
@@ -540,9 +526,7 @@ public class FormTest extends WebTestCase {
         final HtmlButton button = (HtmlButton)page.getHtmlElementById("button1");
         final HtmlPage secondPage = (HtmlPage)button.click();
         assertEquals( "second", secondPage.getTitleText() );
-        
-        final List expectedParameters = Arrays.asList( new Object[]{ new KeyValuePair("button1","")} );
-        assertEquals( expectedParameters, webConnection.getLastParameters());
+        assertEquals("http://second?button1=", secondPage.getWebResponse().getUrl().toExternalForm());
     }
 
     /**

@@ -700,7 +700,7 @@ public class WindowTest extends WebTestCase {
             + "    document.form1.submit()\n"
             + "}\n"
             + "</script></head><body onload='runtest()'>"
-            + "<form name='form1' action='http://third'><input type='submit'></form>"
+            + "<form name='form1' action='http://third' method='post'><input type='submit'></form>"
             + "</body></html>";
         final String thirdContent
             = "<html><head><title>Third</title><script>"

@@ -50,7 +50,8 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *  Tests for HtmlIsIndex
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public class HtmlIsIndexTest extends WebTestCase {
     /**
@@ -70,7 +71,7 @@ public class HtmlIsIndexTest extends WebTestCase {
         throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
+            + "<form id='form1' method='post'>"
             + "<isindex prompt='enterSomeText'></isindex>"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
@@ -87,8 +88,8 @@ public class HtmlIsIndexTest extends WebTestCase {
         final List expectedParameters = new ArrayList();
         expectedParameters.add( new KeyValuePair( "enterSomeText", "Flintstone" ) );
 
-        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
-        assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
+        assertEquals("url", URL_GARGOYLE.toExternalForm(), secondPage.getWebResponse().getUrl().toExternalForm());
+        assertEquals( "method", SubmitMethod.POST, webConnection.getLastMethod() );
         assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
     }
 }

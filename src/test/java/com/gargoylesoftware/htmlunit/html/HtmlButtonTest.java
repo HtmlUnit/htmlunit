@@ -52,9 +52,10 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *  Tests for HtmlButton
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
- * @author  Brad Clarke
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
+ * @author Brad Clarke
+ * @author Marc Guillemot
  */
 public class HtmlButtonTest extends WebTestCase {
     /**
@@ -202,7 +203,7 @@ public class HtmlButtonTest extends WebTestCase {
     public void testButtonTypeSubmit() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
+            + "<form id='form1' method='post' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
             + "    <button type='submit' name='button' id='button' value='foo'"
             + "    >Push me</button>"
             + "</form></body></html>";
@@ -245,7 +246,7 @@ public class HtmlButtonTest extends WebTestCase {
             final String expectedType) throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>"
-            + "<form id='form1' action='http://second'>"
+            + "<form id='form1' action='http://second' method='post'>"
             + "    <button name='button' id='button' value='pushme'>PushMe</button>"
             + "</form></body></html>";
         final String secondContent
@@ -253,10 +254,8 @@ public class HtmlButtonTest extends WebTestCase {
         final WebClient client = new WebClient(browserVersion);
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);

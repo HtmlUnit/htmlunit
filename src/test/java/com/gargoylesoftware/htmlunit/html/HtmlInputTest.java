@@ -41,7 +41,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -50,7 +49,8 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *  Tests for HtmlInput
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public final class HtmlInputTest extends WebTestCase {
     /**
@@ -90,13 +90,9 @@ public final class HtmlInputTest extends WebTestCase {
         // Test that only one value for the radio button is being passed back to the server
         final HtmlPage secondPage = ( HtmlPage )pushButton.click();
 
-        final List expectedParameters = new ArrayList();
-        expectedParameters.add( new KeyValuePair( "foo", "2" ) );
-        expectedParameters.add( new KeyValuePair( "button", "foo" ) );
-
-        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
+        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?foo=2&button=foo", 
+                secondPage.getWebResponse().getUrl().toExternalForm());
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
-        assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
         assertNotNull( secondPage );
     }
 
