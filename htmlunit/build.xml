@@ -65,6 +65,10 @@
 
 
 <target name="build" depends="compile" description="build">
+	<tstamp>
+		<format property="timestamp-now" pattern="d-MMM-yyyy hh:mma" locale="en"/>
+	</tstamp>
+
 	<delete dir="build/${version}"/>
 
 	<mkdir dir="build/${version}/"/>
@@ -72,6 +76,7 @@
 	<mkdir dir="build/${version}/docs/api"/>
 	<mkdir dir="build/${version}/lib"/>
 	<mkdir dir="build/${version}/src"/>
+	<mkdir dir="build/${version}/META-INF"/>
 
 	<jar
 		jarfile="build/${version}/lib/HtmlUnit.jar"
@@ -132,6 +137,20 @@
 			<include name="*.jar"/>
 		</fileset>
 	</copy>
+
+	<manifest file="build/${version}/META-INF/MANIFEST.MF">
+		<attribute name="Built-By" value="${user.name}"/>
+		<section name="htmlunit">
+			<attribute name="Specification-Title" value="Example"/>
+			<attribute name="Specification-Version" value="${version}"/>
+			<attribute name="Specification-Vendor" value="Gargoyle Software Inc."/>
+			<attribute name="Implementation-Title" value="htmlunit"/>
+			<attribute name="Implementation-Version" value="${version} ${timestamp-now}"/>
+			<attribute name="Implementation-Vendor" value="Gargoyle Software Inc."/>
+			<attribute name="Sealed" value="true"/>
+			<attribute name="Main-Class" value="com.gargoylesoftware.htmlunit.Version"/>
+		</section>
+	</manifest>
 
 	<zip
 		zipfile="dist/${version}.zip"
