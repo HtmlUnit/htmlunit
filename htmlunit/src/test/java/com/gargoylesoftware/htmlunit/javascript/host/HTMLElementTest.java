@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Hans Donner
+ * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @version $Revision$
  */
 public class HTMLElementTest extends WebTestCase {
@@ -905,4 +906,33 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals(expectedAlerts, clientCollectedAlertsHandler.getCollectedAlerts());
     }
 
+    /**
+     * Test the removal of attributes from HTMLElements.
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testRemoveAttribute() throws Exception {
+        final String content = "<html>\n" +
+                "<head>\n" +
+                "    <title>Test</title>\n" +
+                "    <script>\n" +
+                "    function doTest() {\n" +
+                "       var myDiv = document.getElementById('aDiv');\n" +
+                "       alert(myDiv.getAttribute('name'));\n" +
+                "       myDiv.removeAttribute('name');\n" +
+               "       alert(myDiv.getAttribute('name'));\n" +              
+                "    }\n" +
+                "    </script>\n" +
+                "</head>\n" +
+                "<body onload='doTest()'><div id='aDiv' name='removeMe'>" +
+               "</div></body>\n" +
+                "</html>";
+        final List expectedAlerts = Arrays.asList(new String[]{"removeMe", "null"});
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
