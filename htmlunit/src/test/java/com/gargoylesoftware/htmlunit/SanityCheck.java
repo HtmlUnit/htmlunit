@@ -67,9 +67,10 @@ public class SanityCheck extends WebTestCase {
     /**
      * Main entry point for testing.
      * @param args the arguments.
+     * @throws Exception If a problem occurs.
      */
-    public static void main( final String args[] ) {
-        com.gargoylesoftware.htmlunit.MainTestSuite.enableAllLogging();
+    public static void main( final String args[] ) throws Exception {
+        new MainTestSuite("foo").enableAllLogging();
         TestRunner.run( SanityCheck.class );
         System.exit( 0 );
     }
