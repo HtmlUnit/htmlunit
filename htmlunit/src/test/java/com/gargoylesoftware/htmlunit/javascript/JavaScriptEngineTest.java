@@ -386,9 +386,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     public void testJavaScriptUrl() throws Exception {
 
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
-
         final String htmlContent
              = "<html><head><script language='javascript'>"
              + "var f1 = '<html><head><title>frame1</title></head><body><h1>frame1</h1></body></html>';\n"
@@ -399,14 +396,8 @@ public class JavaScriptEngineTest extends WebTestCase {
              + "    <frame id='frame2' src='javascript:parent.f2'/>"
              + "</frameset></html>";
 
-        webConnection.setResponse(
-            new URL("http://first/index.html"),
-            htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first/index.html" ),
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        createTestPageForRealBrowserIfNeeded(htmlContent, Collections.EMPTY_LIST);
+        final HtmlPage page = loadPage(htmlContent);
 
         final HtmlPage page1 = (HtmlPage)((HtmlFrame)page.getHtmlElementById("frame1")).getEnclosedPage();
         final HtmlPage page2 = (HtmlPage)((HtmlFrame)page.getHtmlElementById("frame2")).getEnclosedPage();

@@ -37,18 +37,11 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.htmlunit.html.HTMLParser;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.html.FocusableElement;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -71,6 +64,12 @@ import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.gargoylesoftware.htmlunit.html.BaseFrame;
+import com.gargoylesoftware.htmlunit.html.FocusableElement;
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 
 /**
  *  An object that represents a web browser
@@ -1350,39 +1349,18 @@ public class WebClient {
     }
 
     private WebResponse makeWebResponseForJavaScriptUrl( final WebWindow webWindow, final URL url ) {
-        if( webWindow instanceof HtmlElement == false ) {
+        if (!(webWindow instanceof BaseFrame.FrameWindow)) {
             throw new IllegalArgumentException(
                 "javascript urls can only be used to load content into frames and iframes");
         }
 
-        final HtmlPage enclosingPage = ((HtmlElement)webWindow).getPage();
+        final BaseFrame.FrameWindow frameWindow = (BaseFrame.FrameWindow) webWindow;
+        final HtmlPage enclosingPage = frameWindow.getEnclosingPage();
         final ScriptResult scriptResult = enclosingPage.executeJavaScriptIfPossible(
             url.toExternalForm(), "javascript url", false, null );
 
         final String contentString = scriptResult.getJavaScriptResult().toString();
-        return new WebResponse() {
-            public int getStatusCode() { return 200; }
-            public String getStatusMessage() { return "OK"; }
-            public String getContentType() { return "text/html"; }
-            public String getContentAsString() { return contentString; }
-            public InputStream getContentAsStream(){ return TextUtil.toInputStream(contentString); }
-            public URL getUrl() { return url; }
-            public String getResponseHeaderValue( final String key ) { return ""; }
-            public long getLoadTimeInMilliSeconds() { return 0; }
-            public byte[] getResponseBody() {
-                try {
-                    /*
-                     * this method must return raw bytes.
-                     * without encoding, getBytes use locale encoding.
-                     */
-                    return contentString.getBytes("ISO-8859-1");
-                }
-                catch( final UnsupportedEncodingException e ){
-                    return null;
-                }
-            }
-            public String getContentCharSet() { return "ISO-8859-1"; }
-        };
+        return new StringWebResponse(contentString);
     }
 
     /**

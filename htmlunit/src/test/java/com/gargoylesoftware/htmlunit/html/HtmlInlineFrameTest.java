@@ -102,35 +102,26 @@ public class HtmlInlineFrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSetSrcAttribute_ViaJavaScript() throws Exception {
-        if( false ) {
-            notImplemented();
-            return;
-        }
         final String firstContent
                  = "<html><head><title>First</title></head><body>"
                  + "<iframe id='iframe1' src='http://second'>"
-                 + "<script type='text/javascript'>document.getElementById ('iframe1').src = 'http://third';"
+                 + "<script type='text/javascript'>document.getElementById('iframe1').src = 'http://third';"
                  + "</script></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_THIRD,thirdContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
 
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
         assertEquals( "First", page.getTitleText() );
 
-        final HtmlInlineFrame iframe = (HtmlInlineFrame)page.getHtmlElementById("iframe1");
+        final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
         assertEquals( "http://third", iframe.getSrcAttribute() );
         assertEquals( "Third", ((HtmlPage)iframe.getEnclosedPage()).getTitleText() );
     }

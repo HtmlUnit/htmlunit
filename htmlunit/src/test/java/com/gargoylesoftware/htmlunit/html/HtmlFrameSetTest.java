@@ -37,10 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.Collections;
-
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -50,6 +47,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public class HtmlFrameSetTest extends WebTestCase {
 
@@ -85,27 +83,22 @@ public class HtmlFrameSetTest extends WebTestCase {
         final WebClient webClient = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( webClient );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_THIRD, thirdContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
 
         webClient.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals( "First", firstPage.getTitleText() );
 
         final WebWindow secondWebWindow = webClient.getWebWindowByName("left");
-        assertInstanceOf( secondWebWindow, HtmlFrame.class );
-        assertSame( firstPage, ((HtmlFrame)secondWebWindow).getPage() );
-        assertEquals( "Second", ((HtmlPage)secondWebWindow.getEnclosedPage()).getTitleText() );
+        assertSame( firstPage, ((BaseFrame.FrameWindow) secondWebWindow).getEnclosingPage() );
+        assertEquals( "Second", ((HtmlPage) secondWebWindow.getEnclosedPage()).getTitleText() );
 
         final WebWindow thirdWebWindow = webClient.getWebWindowByName("right");
-        assertInstanceOf( thirdWebWindow, HtmlFrame.class );
-        assertSame( firstPage, ((HtmlFrame)thirdWebWindow).getPage() );
+        assertInstanceOf( thirdWebWindow, BaseFrame.FrameWindow.class );
+        assertSame( firstPage, ((BaseFrame.FrameWindow) thirdWebWindow).getEnclosingPage() );
         assertEquals( "Third", ((HtmlPage)thirdWebWindow.getEnclosedPage()).getTitleText() );
     }
 
@@ -127,20 +120,17 @@ public class HtmlFrameSetTest extends WebTestCase {
         final WebClient webClient = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( webClient );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
 
         webClient.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals( "First", firstPage.getTitleText() );
 
         final WebWindow secondWebWindow = webClient.getWebWindowByName("left");
-        assertInstanceOf( secondWebWindow, HtmlInlineFrame.class );
-        assertSame( firstPage, ((HtmlInlineFrame)secondWebWindow).getPage() );
+        assertInstanceOf(secondWebWindow, BaseFrame.FrameWindow.class);
+        assertSame( firstPage, ((BaseFrame.FrameWindow) secondWebWindow).getEnclosingPage() );
         assertEquals( "Second", ((HtmlPage)secondWebWindow.getEnclosedPage()).getTitleText() );
     }
 }

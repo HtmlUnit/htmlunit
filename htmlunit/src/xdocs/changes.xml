@@ -7,6 +7,13 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                INCOMPATIBLE CHANGE: HtmlFrame and HtmlInlineFrame don't implement WebWindow anymore but now contain a WebWindow accessible
+				by getEnclosedWindow(). Javascript handling of frames works better due to the distinction between frame element and contained window.
+            </action>
+            <action type="add" dev="mguillem">
+			    Added HtmlPage.getFrameByName
+			</action>
             <action type="update" dev="mguillem" due-to="Mike Bresnahan" id="1083336">
                 asText() now returns "checked" or "unchecked" for HtmlRadioButtonInput and HtmlCheckBoxInput
             </action>        

@@ -37,75 +37,51 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.mozilla.javascript.Scriptable;
-
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-
+import com.gargoylesoftware.htmlunit.html.BaseFrame;
 
 /**
- * A JavaScript object for frames.
+ * A JavaScript object for a frame and iframe.
+ * 
  * @version $Revision$
  * @author Marc Guillemot
  */
-public final class FrameWindow extends Window {
+public class Frame extends HTMLElement {
     private static final long serialVersionUID = 3761121622400448304L;
-    private SimpleScriptable htmlElementView_; 
 
     /**
-     * Create an instance.  The rhino engine requires all host objects
-     * to have a default constructor.
+     * Create an instance.  A default constructor is required for all javascript objects.
      */
-    public FrameWindow() {
-    }
+    public Frame() { }
 
 
     /**
      * Javascript constructor.  This must be declared in every javascript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
-    public void jsConstructor() {
+    public final void jsConstructor() {
     }
 
+
+
+
     /**
-     * Initializes the "window view" as well as the "html element view"
-     * @see com.gargoylesoftware.htmlunit.javascript.host.Window#initialize(com.gargoylesoftware.htmlunit.html.HtmlPage)
+     * Return the value of url loaded in the frame
+     * @return The value of this attribute.
      */
-    public void initialize(final HtmlPage htmlPage) throws Exception {
-        super.initialize(htmlPage);
-
-        final DomNode frameDomNode = getDomNodeOrDie();
-
-        // create additional js object to access "normal" properties of the htmlelement
-        htmlElementView_ = makeJavaScriptObject("HTMLElement");
-        htmlElementView_.setDomNode(frameDomNode);
-        
-        // set script object again as it has been changed by previous line
-        frameDomNode.setScriptObject(this);
+    public String jsGet_src() {
+        return getFrame().getSrcAttribute();
     }
 
-    /**
-     * Return the specified property or {@link #NOT_FOUND} if it could not be found.
-     * @param name The name of the property
-     * @param start The scriptable object that was originally queried for this property
-     * @return The property.
-     */
-    public Object get( final String name, final Scriptable start ) {
-        // try to get it as property of the window
-        Object result = NOT_FOUND;
-        
-        
-        if (result == NOT_FOUND) {
-            result = super.get(name, start); 
-            }
 
-        // if not found
-        // try to get it as property of the html element 
-        if (result == NOT_FOUND) {
-            result = ((FrameWindow) start).htmlElementView_.get(name, start);
-        }
-            
-        return result;
+    /**
+     * Set the value of the source of the contained frame.
+     * @param src The new value.
+     */
+    public void jsSet_src(final String src) {
+        getFrame().setSrcAttribute(src);
+    }
+
+    private BaseFrame getFrame() {
+        return (BaseFrame) getHtmlElementOrDie();
     }
 }

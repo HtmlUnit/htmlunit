@@ -1144,10 +1144,8 @@ public final class HtmlPage extends DomNode implements Page {
      * Deregister frames that are no longer in use.
      */
     public void deregisterFramesIfNeeded() {
-        final List list = getFrames();
-        final int listSize = list.size();
-        for(int i=0; i<listSize; i++ ){
-            final WebWindow window = (WebWindow) list.get(i);
+        for (Iterator iter = getFrames().iterator(); iter.hasNext();) {
+            final WebWindow window = (WebWindow) iter.next();
             webClient_.deregisterWebWindow( window );
             HtmlPage page = (HtmlPage) window.getEnclosedPage();
             if (page != null) {
@@ -1160,14 +1158,42 @@ public final class HtmlPage extends DomNode implements Page {
 
 
     /**
-     * Return a list containing all the frames and iframes in this page.
-     * @return a list of all frames and iframes
+     * Return a list containing all the frames (from frame and iframe tags) in this page.
+     * @return a list of {@link BaseFrame.FrameWindow}
      */
     public List getFrames() {
-        return getDocumentElement().getHtmlElementsByTagNames( Arrays.asList( new String[]{
-            "frame", "iframe" } ) );
+        final List list = new ArrayList();
+        final WebWindow enclosingWindow = getEnclosingWindow();
+        for (Iterator iter = getWebClient().getWebWindows().iterator(); iter.hasNext();)
+        {
+            WebWindow window = (WebWindow) iter.next();
+            // quite strange but for a TopLevelWindow parent == self
+            if (enclosingWindow == window.getParentWindow()
+                    && enclosingWindow != window) {
+                list.add(window);
+            }
+        }
+        return list;
     }
 
+    /**
+     * Returns the first frame contained in this page with the specifed name.
+     * @param name The name to search for
+     * @return The first frame found.
+     * @exception ElementNotFoundException If no frame exist in this page with the specified name.
+     */
+    public BaseFrame.FrameWindow getFrameByName(final String name) throws ElementNotFoundException {
+        final List frames = getFrames();
+        for (Iterator iter = frames.iterator(); iter.hasNext();) {
+            final BaseFrame.FrameWindow frame = (BaseFrame.FrameWindow) iter.next();
+            if (frame.getName().equals(name)) {
+                return frame;
+            }
+        }
+
+        throw new ElementNotFoundException("frame or iframe", "name", name);
+    }
+    
     /**
      * Simulate pressing an access key.  This may change the focus, may click buttons and may invoke
      * javascript.

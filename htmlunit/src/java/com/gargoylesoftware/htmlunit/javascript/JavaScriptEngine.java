@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -170,7 +169,7 @@ public final class JavaScriptEngine extends ScriptEngine {
             newPageInfo.getContext().setOptimizationLevel(-1);
 
             final String hostClassNames[] = {
-                "HTMLElement", "Window", "FrameWindow", "Document", "Form", "Input", "Navigator",
+                "HTMLElement", "Window", "Frame", "Document", "Form", "Input", "Navigator",
                 "Screen", "History", "Location", "Button", "Select", "Textarea",
                 "Style", "Option", "Anchor", "Image", "TextImpl", "FocusableHostElement",
                 "ActiveXObject", "Table", "Attribute"
@@ -190,16 +189,8 @@ public final class JavaScriptEngine extends ScriptEngine {
             ScriptableObject.defineClass(parentScope, ElementArray.class);
             ScriptableObject.defineClass(parentScope, OptionsArray.class);
 
-            // determine the type of associated "window"
-            final String jsObjectName;
-            if (htmlPage.getEnclosingWindow() instanceof TopLevelWindow) {
-                jsObjectName = "Window";
-            }
-            else {
-                jsObjectName = "FrameWindow";
-            }
             final Window window = (Window)newPageInfo.getContext().newObject(
-                parentScope, jsObjectName, new Object[0]);
+                parentScope, "Window", new Object[0]);
             newPageInfo.scope_ = window;
             newPageInfo.getScope().setParentScope(parentScope);
             window.setPageInfo(newPageInfo);

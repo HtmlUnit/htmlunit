@@ -41,8 +41,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
-import java.util.Iterator;
 
+import org.apache.commons.collections.Transformer;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
@@ -52,13 +52,14 @@ import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
@@ -435,7 +436,12 @@ public class Window extends SimpleScriptable {
         }
         final HtmlPage page = (HtmlPage) this.getWebWindow().getEnclosedPage();
         final ElementArray frames = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
-        frames.init(page, xpath);
+        Transformer toEnclosedWindow = new Transformer() {
+            public Object transform(final Object obj) {
+                return ((BaseFrame) obj).getEnclosedWindow();
+            }
+        };
+        frames.init(page, xpath, toEnclosedWindow);
 
         return frames;
     }
@@ -487,17 +493,6 @@ public class Window extends SimpleScriptable {
         return "";
     }
 
-
-    /**
-     * Set the value of the src attribute.  In the case of an iframe, this will cause a reload of the page
-     * @param newValue The new value
-     */
-    public void jsSet_src( final String newValue ) {
-        final WebWindow webWindow = getWebWindow();
-        if( webWindow instanceof HtmlInlineFrame ) {
-            ((HtmlInlineFrame)webWindow).setSrcAttribute(newValue);
-        }
-    }
 
     /**
      * Does nothing.
@@ -638,7 +633,7 @@ public class Window extends SimpleScriptable {
 
         Object result = super.get(name, start);
 
-        // If we are in a frameset then this might be a frame name
+        // If we are in a frameset or have an iframe then this might be a frame name
         if( result == NOT_FOUND ) {
             final DomNode domNode = ((Window)start).getDomNodeOrNull();
             result = getFrameByName( domNode.getPage(), name );
@@ -669,28 +664,12 @@ public class Window extends SimpleScriptable {
     }
 
     private Object getFrameByName( final HtmlPage page, final String name ) {
-
-        final Iterator iterator = page.getDocumentElement().getAllHtmlChildElements();
-        while( iterator.hasNext() ) {
-            final HtmlElement element = ( HtmlElement )iterator.next();
-            final String tagName = element.getTagName();
-            if( tagName.equals("body") ) {
-                // Framesets don't contain body tags so if we find one of these
-                // then we can leave early.
-                return NOT_FOUND;
-            }
-            if( "frame".equals( tagName ) ) {
-                if( element.getAttributeValue("name").equals(name) ) {
-                    final Object scriptObject = element.getScriptObject();
-                    if( scriptObject == null ) {
-                        getLog().error("Window.getFrameByName() scriptObject not initialized yet");
-                        return NOT_FOUND;
-                    }
-                    return scriptObject;
-                }
-            }
+        try {
+            return page.getFrameByName(name).getScriptObject();
         }
-        return NOT_FOUND;
+        catch (final ElementNotFoundException e) {
+            return NOT_FOUND;
+        }
     }
 
 

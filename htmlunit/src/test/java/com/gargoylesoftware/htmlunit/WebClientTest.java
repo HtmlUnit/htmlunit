@@ -52,7 +52,6 @@ import org.apache.commons.io.FileUtils;
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -227,17 +226,13 @@ public class WebClientTest extends WebTestCase {
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_THIRD, thirdContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
 
         client.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
         assertEquals("first", firstPage.getTitleText());
 
         final EventCatcher eventCatcher = new EventCatcher();
@@ -254,10 +249,11 @@ public class WebClientTest extends WebTestCase {
         final WebWindow firstWindow = client.getCurrentWindow();
         final List expectedEvents = Arrays.asList( new Object[] {
             new WebWindowEvent(
-                frame, WebWindowEvent.CLOSE, thirdPage, null),
+                frame.getEnclosedWindow(), WebWindowEvent.CLOSE, thirdPage, null),
             new WebWindowEvent(
                 firstWindow, WebWindowEvent.CHANGE, firstPage, secondPage),
         } );
+        assertEquals( expectedEvents.get(0), eventCatcher.getEvents().get(0) );
         assertEquals( expectedEvents, eventCatcher.getEvents() );
     }
 
@@ -1067,7 +1063,7 @@ public class WebClientTest extends WebTestCase {
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
-        final HtmlPage pageInFrame = (HtmlPage) ((HtmlFrame) page.getFrames().get(0)).getEnclosedPage();
+        final HtmlPage pageInFrame = (HtmlPage) ((WebWindow) page.getFrames().get(0)).getEnclosedPage();
         ((HtmlAnchor) pageInFrame.getAnchors().get(0)).click();
 
         final List expectedAlerts = Arrays.asList( new String[]{

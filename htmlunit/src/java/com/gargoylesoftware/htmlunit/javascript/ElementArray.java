@@ -41,6 +41,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections.functors.NOPTransformer;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
@@ -74,6 +77,7 @@ public class ElementArray extends SimpleScriptable implements Function {
     
     private XPath xpath_;
     private DomNode node_;
+    private Transformer transformer_;
 
     /**
      * Create an instance. Javascript objects must have a default constructor.
@@ -83,14 +87,28 @@ public class ElementArray extends SimpleScriptable implements Function {
     }
 
     /**
-     * Init the content of this collection. The elements with be "calculated" at each
+     * Init the content of this collection. The elements will be "calculated" at each
      * access using the xpath applied on the node.
      * @param node the node to serve as root for the xpath expression
      * @param xpath the xpath giving the elements of the collection
      */
     public void init(final DomNode node, final XPath xpath) {
+        init(node, xpath, NOPTransformer.INSTANCE);
+        
+    }
+
+    /**
+     * Init the content of this collection. The elements will be "calculated" at each
+     * access using the xpath applied on the node and transformed using the transformer.
+     * @param node the node to serve as root for the xpath expression
+     * @param xpath the xpath giving the elements of the collection
+     * @param transformer the transformer allowing to get the expected objects from the xpath
+     * evaluation
+     */
+    public void init(final DomNode node, final XPath xpath, final Transformer transformer) {
         node_ = node;
         xpath_ = xpath;
+        transformer_ = transformer;
     }
 
     /**
@@ -148,8 +166,7 @@ public class ElementArray extends SimpleScriptable implements Function {
         final List elements = array.getElementsSorted();
         
         if( index >= 0 && index < elements.size()) {
-            final HtmlElement element = (HtmlElement) elements.get(index);
-            return getScriptableFor( element );
+            return getScriptableFor(elements.get(index));
         }
         else {
             return NOT_FOUND;
@@ -180,6 +197,7 @@ public class ElementArray extends SimpleScriptable implements Function {
             }
         }
         
+        CollectionUtils.transform(sortedNodes, transformer_);
         return sortedNodes;
     }
 
@@ -190,7 +208,9 @@ public class ElementArray extends SimpleScriptable implements Function {
      */
     private List getElements() {
         try {
-            return xpath_.selectNodes(node_);
+            final List list = xpath_.selectNodes(node_); 
+            CollectionUtils.transform(list, transformer_);
+            return list;
         }
         catch (JaxenException e) {
             throw Context.reportRuntimeError("Exeption getting elements: " + e.getMessage());
@@ -249,7 +269,7 @@ public class ElementArray extends SimpleScriptable implements Function {
             return array;
         }
         else if (subElements.size() == 1) {
-            final SimpleScriptable singleResult = getScriptableFor((DomNode) subElements.get(0)); 
+            final SimpleScriptable singleResult = getScriptableFor(subElements.get(0)); 
             getLog().debug("Property \"" + name + "\" evaluated (by name) to " + singleResult);
             return singleResult;
         }

@@ -350,7 +350,6 @@
         <property name="parent" readable="true" writable="false"/>
         <property name="opener" readable="true" writable="false"/>
         <property name="frames" readable="true" writable="false"/>
-        <property name="src" readable="true" writable="true"/>
         <property name="onload" readable="true" writable="true"/>
         <property name="name" readable="true" writable="false"/>
         <property name="status" readable="true" writable="true"/>
@@ -378,8 +377,9 @@
         <function name="scrollByPages"/>
         <function name="scrollTo"/>
     </class>
-    
-    <class name="FrameWindow" extends="Window">
+
+    <class name="Frame" extends="HTMLElement">
+        <property name="src" readable="true" writable="true"/>
 	</class>
 
     <class name="FocusableHostElement" extends="HTMLElement">
