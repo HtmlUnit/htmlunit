@@ -92,5 +92,4 @@ public class HTMLElementTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }  
-    
 }
