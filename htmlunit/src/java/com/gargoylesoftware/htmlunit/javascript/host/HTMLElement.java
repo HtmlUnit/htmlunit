@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -627,7 +628,7 @@ public class HTMLElement extends NodeImpl {
      * @return an identifier that can be user later to detach the behavior from the element
      */
     public int jsFunction_addBehavior(final String behavior) {
-        if (BEHAVIOR_CLIENT_CAPS.equals(behavior)) {
+        if (BEHAVIOR_CLIENT_CAPS.equalsIgnoreCase(behavior)) {
             final Class c = getClass();
             defineProperty("availHeight", c, 0);
             defineProperty("availWidth", c, 0);
@@ -650,7 +651,7 @@ public class HTMLElement extends NodeImpl {
             defineFunctionProperties(new String[] {"isComponentInstalled"}, c, 0);
             return BEHAVIOR_ID_CLIENT_CAPS;
         }
-        else if (BEHAVIOR_HOMEPAGE.equals(behavior)) {
+        else if (BEHAVIOR_HOMEPAGE.equalsIgnoreCase(behavior)) {
             final Class c = getClass();
             defineFunctionProperties(new String[] {"isHomePage"}, c, 0);
             defineFunctionProperties(new String[] {"setHomePage"}, c, 0);
@@ -898,14 +899,24 @@ public class HTMLElement extends NodeImpl {
 
     /**
      * Returns <tt>true</tt> if the specified URL is the web client's current
-     * homepage. Part of the <tt>#default#homePage</tt> default IE behavior
+     * homepage and the document calling the method is on the same domain as the
+     * user's homepage. Part of the <tt>#default#homePage</tt> default IE behavior
      * implementation.
      * @param url the URL to check
      * @return <tt>true</tt> if the specified URL is the current homepage
      */
     public boolean isHomePage(final String url) {
-        final String home = getDomNodeOrDie().getPage().getWebClient().getHomePage();
-        return (home != null && home.equals(url));
+        try {
+            final URL newUrl = new URL(url);
+            final URL currentUrl = getDomNodeOrDie().getPage().getWebResponse().getUrl();
+            final String home = getDomNodeOrDie().getPage().getWebClient().getHomePage();
+            final boolean sameDomains = newUrl.getHost().equalsIgnoreCase(currentUrl.getHost());
+            final boolean isHomePage = (home != null && home.equals(url));
+            return (sameDomains && isHomePage);
+        }
+        catch(final MalformedURLException e) {
+            return false;
+        }
     }
 
     /**
