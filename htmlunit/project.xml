@@ -9,7 +9,7 @@
     <organization>
         <name>Gargoyle Software Inc.</name>
         <url>http://www.GargoyleSoftware.com/</url>
-        <logo>http://www.gargoylesoftware.com/images/CompanyLogoSmall.gif</logo>
+        <logo>/images/GargoyleSoftwareLogo.jpg</logo>
     </organization>
     <inceptionYear>2002</inceptionYear>
     <package>com.gargoylesoftware.htmlunit</package>
@@ -51,13 +51,13 @@
 
     <mailingLists>
         <mailingList>
-    	    <name>HtmlUnit Users</name>
+            <name>HtmlUnit Users</name>
             <subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</subscribe>
             <unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</unsubscribe>
             <archive>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</archive>
         </mailingList>
         <mailingList>
-    	    <name>HtmlUnit Developers</name>
+            <name>HtmlUnit Developers</name>
             <subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</subscribe>
             <unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</unsubscribe>
             <archive>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</archive>
