@@ -37,10 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.base.testing.AcceptAllTestFilter;
-import com.gargoylesoftware.base.testing.RecursiveTestSuite;
 import java.io.File;
 import java.io.IOException;
+import java.util.Properties;
+
+import com.gargoylesoftware.base.testing.AcceptAllTestFilter;
+import com.gargoylesoftware.base.testing.RecursiveTestSuite;
 
 /**
  * This class is used by the junitui and junit targets in the build file.  It's
@@ -72,21 +74,27 @@ public class MainTestSuite extends RecursiveTestSuite {
      * Set the appropriate logging levels for running the tests.
      */
     public void enableAllLogging() {
-        System.getProperties().put("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.SimpleLog");
-        System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog", "trace");
+        final Properties properties = System.getProperties();
+        properties.put("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.SimpleLog");
+        properties.put("org.apache.commons.logging.simplelog.defaultlog", "trace");
 
         final String prefix = "org.apache.commons.logging.simplelog.log.";
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.Authenticator", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.Cookie", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.HeaderElement", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpClient", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpConnection", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpMethod", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpParser", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpState", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.ResponseInputStream", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.cookie.CookieSpec", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.methods.GetMethod", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpMethodBase", "info");
+        properties.put(prefix+"org.apache.commons.httpclient.Authenticator", "info");
+        properties.put(prefix+"org.apache.commons.httpclient.Cookie", "info");
+        properties.put(prefix+"org.apache.commons.httpclient.HeaderElement", "info");
+        properties.put(prefix+"org.apache.commons.httpclient.HttpClient", "info");
+        properties.put(prefix+"org.apache.commons.httpclient.HttpConnection", "info");
+        properties.put(prefix+"org.apache.commons.httpclient.HttpMethod", "info");
+        properties.put(prefix+"org.apache.commons.httpclient.HttpParser", "info");
+        properties.put(prefix+"org.apache.commons.httpclient.HttpState", "info");
+        properties.put(prefix+"org.apache.commons.httpclient.ResponseInputStream", "info");
+        properties.put(prefix+"org.apache.commons.httpclient.cookie.CookieSpec", "info");
+        properties.put(prefix+"org.apache.commons.httpclient.methods.GetMethod", "info");
+        properties.put(prefix+"org.apache.commons.httpclient.HttpMethodBase", "info");
+        properties.put(prefix+"org.apache.commons.logging.simplelog.showdatetime", "true");
+        properties.put(prefix+"httpclient.wire", "info");
+        properties.put(prefix+"org.apache.commons.httpclient", "info");
+
+
     }
 }
