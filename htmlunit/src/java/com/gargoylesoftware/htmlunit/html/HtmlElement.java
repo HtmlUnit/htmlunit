@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -74,7 +75,7 @@ public abstract class HtmlElement {
             htmlPage_ = ( HtmlPage )this;
         }
         else {
-            assertNotNull( "htmlPage", htmlPage );
+            Assert.assertNotNull( "htmlPage", htmlPage );
             htmlPage_ = htmlPage;
         }
     }
@@ -85,7 +86,7 @@ public abstract class HtmlElement {
      * @param element The xml element.
      */
     protected final void setElement( final Element element ) {
-        assertNotNull("element", element);
+        Assert.assertNotNull("element", element);
 
         if( element_ == null ) {
             final Object oldValue = element_;
@@ -122,9 +123,9 @@ public abstract class HtmlElement {
             final String attributeName,
             final String attributeValue ) {
 
-        assertNotNull( "elementName", elementName );
-        assertNotNull( "attributeName", attributeName );
-        assertNotNull( "attributeValue", attributeValue );
+        Assert.assertNotNull( "elementName", elementName );
+        Assert.assertNotNull( "attributeName", attributeName );
+        Assert.assertNotNull( "attributeValue", attributeValue );
 
         final List collectedElements = new ArrayList();
 
@@ -169,7 +170,7 @@ public abstract class HtmlElement {
      * or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
     public final String getAttributeValue( final Element element, final String attributeName ) {
-        assertNotNull("element", element);
+        Assert.assertNotNull("element", element);
 
         final Attr attribute = (Attr)element.getAttributeNode(attributeName.toUpperCase());
         if( attribute == null ) {
@@ -222,7 +223,7 @@ public abstract class HtmlElement {
      * @return the tag name of the specified element.
      */
     public final String getTagName( final Element element ) {
-        assertNotNull("element", element);
+        Assert.assertNotNull("element", element);
         return element.getTagName().toLowerCase();
     }
 
@@ -536,9 +537,9 @@ public abstract class HtmlElement {
         throws
             ElementNotFoundException {
 
-        assertNotNull( "elementName", elementName );
-        assertNotNull( "attributeName", attributeName );
-        assertNotNull( "attributeValue", attributeValue );
+        Assert.assertNotNull( "elementName", elementName );
+        Assert.assertNotNull( "attributeName", attributeName );
+        Assert.assertNotNull( "attributeValue", attributeValue );
 
         final List list = getHtmlElementsByAttribute( elementName, attributeName, attributeValue );
         final int listSize = list.size();
@@ -566,7 +567,7 @@ public abstract class HtmlElement {
     public HtmlElement getHtmlElementById( final String id )
         throws ElementNotFoundException {
 
-        assertNotNull( "id", id );
+        Assert.assertNotNull( "id", id );
         assertNotEmpty( "id", id );
 
         final Iterator iterator = getXmlChildElements();
@@ -624,9 +625,9 @@ public abstract class HtmlElement {
             final String attributeName,
             final String attributeValue ) {
 
-        assertNotNull( "elementName", elementName );
-        assertNotNull( "attributeName", attributeName );
-        assertNotNull( "attributeValue", attributeValue );
+        Assert.assertNotNull( "elementName", elementName );
+        Assert.assertNotNull( "attributeName", attributeName );
+        Assert.assertNotNull( "attributeValue", attributeValue );
 
         final List xmlElements = getXmlElementsByAttribute(
                 elementName, attributeName, attributeValue );
@@ -649,7 +650,7 @@ public abstract class HtmlElement {
      * @return The list of tag names
      */
     public final List getHtmlElementsByTagNames( final List acceptableTagNames ) {
-        assertNotNull( "acceptableTagNames", acceptableTagNames );
+        Assert.assertNotNull( "acceptableTagNames", acceptableTagNames );
 
         final HtmlPage page = getPage();
         final List collectedElements = new ArrayList();
@@ -822,7 +823,7 @@ public abstract class HtmlElement {
     public final synchronized void addPropertyChangeListener(
         final PropertyChangeListener listener ) {
 
-        assertNotNull("listener", listener);
+        Assert.assertNotNull("listener", listener);
         if( propertyChangeSupport_ == null ) {
             propertyChangeSupport_ = new PropertyChangeSupport(this);
         }
@@ -837,7 +838,7 @@ public abstract class HtmlElement {
     public final synchronized void removePropertyChangeListener(
         final PropertyChangeListener listener ) {
 
-        assertNotNull("listener", listener);
+        Assert.assertNotNull("listener", listener);
         if( propertyChangeSupport_ != null ) {
             propertyChangeSupport_.removePropertyChangeListener(listener);
         }

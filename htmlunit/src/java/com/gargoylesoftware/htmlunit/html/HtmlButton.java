@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
@@ -39,7 +40,7 @@ public class HtmlButton
      * @param  newValue The new content
      */
     public void setValueAttribute( final String newValue ) {
-        assertNotNull( "newValue", newValue );
+        Assert.assertNotNull( "newValue", newValue );
         getElement().setAttribute( "value", newValue );
     }
 

@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.Page;
@@ -107,10 +108,10 @@ public final class HtmlPage
 
         super( null, null );
 
-        assertNotNull( "webClient", webClient );
-        assertNotNull( "originatingUrl", originatingUrl );
-        assertNotNull( "webResponse", webResponse );
-        assertNotNull( "webWindow", webWindow );
+        Assert.assertNotNull( "webClient", webClient );
+        Assert.assertNotNull( "originatingUrl", originatingUrl );
+        Assert.assertNotNull( "webResponse", webResponse );
+        Assert.assertNotNull( "webWindow", webWindow );
 
         webClient_ = webClient;
         originatingUrl_ = originatingUrl;
@@ -314,7 +315,7 @@ public final class HtmlPage
      * @throws ElementNotFoundException If no anchors are found with the specified text
      */
     public HtmlAnchor getFirstAnchorByText( final String text ) throws ElementNotFoundException {
-        assertNotNull("text", text);
+        Assert.assertNotNull("text", text);
 
         final Iterator iterator = getAnchors().iterator();
         while( iterator.hasNext() ) {

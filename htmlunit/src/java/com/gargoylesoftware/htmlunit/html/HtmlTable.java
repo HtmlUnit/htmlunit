@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -139,7 +140,7 @@ public class HtmlTable extends HtmlElement {
     public final HtmlTableRow getRowById( final String id )
         throws ElementNotFoundException {
 
-        assertNotNull("id", id);
+        Assert.assertNotNull("id", id);
         assertNotEmpty("id", id);
 
         final Iterator iterator = getRows().iterator();

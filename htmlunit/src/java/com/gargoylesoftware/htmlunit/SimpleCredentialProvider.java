@@ -25,8 +25,8 @@ public final class SimpleCredentialProvider implements CredentialProvider {
      * @param  password The password
      */
     public SimpleCredentialProvider( final String userId, final String password ) {
-        assertNotNull( "userId", userId );
-        assertNotNull( "password", password );
+        Assert.assertNotNull( "userId", userId );
+        Assert.assertNotNull( "password", password );
 
         keyValuePair_ = new KeyValuePair( userId, password );
     }

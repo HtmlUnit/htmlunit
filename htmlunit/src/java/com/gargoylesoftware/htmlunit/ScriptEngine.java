@@ -26,7 +26,7 @@ public abstract class ScriptEngine {
      * @param webClient The web client.
      */
     protected ScriptEngine( final WebClient webClient ) {
-        assertNotNull("webClient", webClient);
+        Assert.assertNotNull("webClient", webClient);
         webClient_ = webClient;
     }
 

@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -42,7 +43,7 @@ public abstract class HtmlInput
      * @param  newValue The new content
      */
     public void setValueAttribute( final String newValue ) {
-        assertNotNull( "newValue", newValue );
+        Assert.assertNotNull( "newValue", newValue );
         getElement().setAttribute( "value", newValue );
 
         final String onChange = getOnChangeAttribute();
