@@ -10,7 +10,7 @@
     <body>
         <section>
             <p>
-                HtmlUnit uses the <a href="http://jakarta.apache.org/commons/logging.html">commons logging</a>
+                HtmlUnit uses the <a href="http://jakarta.apache.org/commons/logging/">commons logging</a>
                 package from the <a href="http://jakarta.apache.org">Apache Jakarta</a> project.  Commons
                 logging is a thin wrapper that sits on top of other logging frameworks such as
                 <a href="http://jakarta.apache.org/log4j/docs/index.html">LOG4J</a> or
@@ -18,7 +18,7 @@
             </p>
             <p>
                 For full details on configuring commons logging, refer to the
-                <a href="http://jakarta.apache.org/commons/logging.html">homepage</a>.
+                <a href="http://jakarta.apache.org/commons/logging/">homepage</a>.
             </p>
             <p>
                 If you don't explicitly configure commons logging to use LOG4J or another logging framework
