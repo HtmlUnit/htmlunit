@@ -199,7 +199,7 @@
         <dependency>
             <groupId>commons-jelly</groupId>
             <artifactId>commons-jelly</artifactId>
-            <version>1.0-rc1</version>
+            <version>1.0-RC1</version>
             <url>http://jakarta.apache.org/commons/jelly</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
