@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2003 Gargoyle Software Inc. All rights reserved.
+ * Copyright (c) 2002, 2004 Gargoyle Software Inc. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
