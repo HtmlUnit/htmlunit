@@ -76,6 +76,7 @@ public class HTMLParser {
 
     private static final Map ELEMENT_FACTORIES = new HashMap();
     private static boolean ValidateHtml_ = false;
+    private static boolean IgnoreOutsideContent_ = false;
     
     static {
         ELEMENT_FACTORIES.put("input", InputElementFactory.instance);
@@ -165,7 +166,33 @@ public class HTMLParser {
     public static void setValidateHtml(boolean validateFlag) {
         ValidateHtml_ = validateFlag;
     }
-        
+
+    /**
+     * Get the state of the logging flag for html errors
+     * @return - The current state
+     */
+    public static boolean getValidateHtml() {
+        return ValidateHtml_;
+    }
+
+    /**
+     * Set the flag to control validation of the HTML content that is outside of the
+     * BODY and HTML tags.  This flag is false by default to maintain compatability with 
+     * current NekoHTML defaults.
+     * @param ignoreOutsideContent - boolean flag to set
+     */
+    public static void setIgnoreOutsideContent(boolean ignoreOutsideContent) {
+        IgnoreOutsideContent_ = ignoreOutsideContent;
+    }
+
+    /**
+     * Get the state of the flag to ignore contant outside the BODY and HTML tags
+     * @return - The current state
+     */
+    public static boolean getIgnoreOutsideContent() {
+        return IgnoreOutsideContent_;
+    }
+
     /**
      * @param tagName an HTML element tag name
      * @return a factory for creating HtmlElements representing the given tag
@@ -292,8 +319,8 @@ public class HTMLParser {
                 setFeature( "http://cyberneko.org/html/features/augmentations", true );
                 setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
                 setFeature("http://cyberneko.org/html/features/report-errors", ValidateHtml_);
-// TODO - Tell nekoHtml to process the </body> and </html> tags - This should also be done by dynamic config.
-//                setFeature("http://cyberneko.org/html/features/balance-tags/ignore-outside-content", true);
+                setFeature("http://cyberneko.org/html/features/balance-tags/ignore-outside-content",
+                    IgnoreOutsideContent_);
             }
             catch (SAXException e) {
                 throw new ObjectInstantiationException("unable to create HTML parser", e);

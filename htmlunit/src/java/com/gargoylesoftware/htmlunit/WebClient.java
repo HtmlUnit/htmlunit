@@ -1670,5 +1670,31 @@ public class WebClient {
     public static void setValidateHtml(boolean validateFlag) {
         HTMLParser.setValidateHtml(validateFlag);
     }
+
+    /**
+     * Get the state of the logging flag for html errors
+     * @return - The current state
+     */
+    public static boolean getValidateHtml() {
+        return HTMLParser.getValidateHtml();
+    }
+
+    /**
+     * Set the flag on the HtmlParse to ignore the content that is outside of the BODY
+     * and HTML tags.
+     * @param ignoreOutsideContent The boolean flag to enable or disable the support of 
+     *          content outside of the HTML and BODY tags
+     */
+    public static void setIgnoreOutsideContent(boolean ignoreOutsideContent) {
+        HTMLParser.setIgnoreOutsideContent(ignoreOutsideContent);
+    }
+
+    /**
+     * Get the state of the flag to ignore contant outside the BODY and HTML tags
+     * @return - The current state
+     */
+    public static boolean getIgnoreOutsideContent() {
+        return HTMLParser.getIgnoreOutsideContent();
+    }
 }
 
