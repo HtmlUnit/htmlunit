@@ -88,10 +88,23 @@ public class HtmlTableRow extends HtmlElement {
         if( tableCells_ != null ) {
             return tableCells_;
         }
-
+        
+        tableCells_ = Collections.unmodifiableList(getCells( getElement() ));
+        return tableCells_;
+    }
+    /**
+     *  Return a List containing all the HtmlTableCell objects in this row
+     * @param parent The parent element
+     * @return  See above
+     */
+    private List getCells( final Element parent ) {
+        if( tableCells_ != null ) {
+            return tableCells_;
+        }
+        
         final List list = new ArrayList();
 
-        final NodeList nodeList = getElement().getChildNodes();
+        final NodeList nodeList = parent.getChildNodes();
         final int nodeCount = nodeList.getLength();
         final HtmlPage page = getPage();
 
@@ -110,11 +123,17 @@ public class HtmlTableRow extends HtmlElement {
                 else if( tagName.equals( "th" ) ) {
                     list.add( new HtmlTableHeaderCell( page, element, rowIndex, columnIndex++ ) );
                 }
+                else if( tagName.equals( "form" ) ) {
+                    // Completely illegal html but some of the big sites (ie amazon) do this
+                    list.addAll( getCells(element) );
+                }
+                else {
+                    getLog().debug("Illegal html: found <"+tagName+"> under a <tr> tag");
+                }
             }
         }
 
-        tableCells_ = Collections.unmodifiableList( list );
-        return tableCells_;
+        return list;
     }
 
 

@@ -67,10 +67,6 @@ public class TableElementCreatorTest extends WebTestCase {
      * @exception  Exception If the test fails
      */
     public void testGetTableCell() throws Exception {
-        if(true) {
-            notImplemented();
-            return;
-        }
         final String htmlContent
             = "<html><head><title>test</title></head>"
             + "<body><table>"
@@ -87,6 +83,6 @@ public class TableElementCreatorTest extends WebTestCase {
                 SubmitMethod.POST, Collections.EMPTY_LIST );
                 
         // Calling asText() will invoke the element creator which in turn will blow up
-        System.out.println(page.asXml());
+        page.asText();
     }
 }
