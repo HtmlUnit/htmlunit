@@ -80,44 +80,4 @@ public class ScriptEngineTest extends WebTestCase {
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         return page;
     }
-
-
-    public void testInputNamedId() throws Exception {
-        final String content
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<p>hello world</p>"
-                 + "<form action='login.jsp' name='simple_form'>"
-                 + "    <input name='id' type='hidden' value=''>"
-                 + "</form>"
-                 + "</body></html>";
-        final WebClient client = new WebClient();
-
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
-                SubmitMethod.POST, Collections.EMPTY_LIST );
-    }
-
-
-    public void testInputNamedAction() throws Exception {
-        final String content
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<p>hello world</p>"
-                 + "<form action='login.jsp' name='simple_form'>"
-                 + "    <input name='action' type='hidden' value=''>"
-                 + "</form>"
-                 + "</body></html>";
-        final WebClient client = new WebClient();
-
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
-                SubmitMethod.POST, Collections.EMPTY_LIST );
-    }
 }

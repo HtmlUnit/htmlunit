@@ -6,7 +6,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.test;
 
+import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.test.FakeWebConnection;
@@ -209,5 +211,48 @@ public class FormTest extends WebTestCase {
         final HtmlPage secondPage
             = (HtmlPage)page.executeJavascriptIfPossible("document.form1.submit()", "test");
         assertEquals( "second", secondPage.getTitleText() );
+    }
+
+
+    public void testInputNamedId() throws Exception {
+        doTestInputWithName("id");
+    }
+
+
+    public void testInputNamedAction() throws Exception {
+        doTestInputWithName("action");
+    }
+
+
+    private void doTestInputWithName( final String name ) throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "function go() {\n"
+                 + "   alert(document.simple_form."+name+".value);\n"
+                 + "   document.simple_form."+name+".value='foo';\n"
+                 + "   alert(document.simple_form."+name+".value);\n"
+                 + "}</script></head>"
+                 + "<body onload='go()'>"
+                 + "<p>hello world</p>"
+                 + "<form action='login.jsp' name='simple_form'>"
+                 + "    <input name='"+name+"' type='hidden' value='"+name+"2'>"
+                 + "</form>"
+                 + "</body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( content );
+        client.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final List expectedAlerts = Arrays.asList( new String[]{
+            name+"2", "foo"
+        } );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 }

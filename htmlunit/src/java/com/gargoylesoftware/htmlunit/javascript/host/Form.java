@@ -13,8 +13,11 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.NativeArray;
 
@@ -27,6 +30,7 @@ import org.mozilla.javascript.NativeArray;
 public class Form extends HTMLElement {
 
     private NativeArray jsElements_;
+    private Map overridingProperties_ = Collections.synchronizedMap(new HashMap(89));
 
     /**
      * Create an instance.  A default constructor is required for all javascript objects.
@@ -74,18 +78,8 @@ public class Form extends HTMLElement {
                     jsElement.setHtmlElement(htmlElement);
 
                     allJsElements.add(jsElement);
-                    try {
-                        defineProperty(name, jsElement, attributes);
-                    }
-                    catch( final RuntimeException e ) {
-                        // Rhino throws a RuntimeException so we can't catch anything more specific.
-                        if( e.getMessage().equals("Cannot create property") ) {
-                            getLog().warn("Can't create the property Form."+name+" for ["+htmlElement+"]");
-                        }
-                        else {
-                            throw e;
-                        }
-                    }
+                    overridingProperties_.put( name, jsElement );
+//                    put( name, this, jsElement );
                 }
             }
         }
@@ -308,5 +302,22 @@ public class Form extends HTMLElement {
     public void jsFunction_reset() {
         getHtmlForm().reset();
     }
+
+
+     /**
+      * Return the specified property or NOT_FOUND if it could not be found.
+      * @param name The name of the property
+      * @param start The scriptable object that was originally queried for this property
+      * @return The property.
+      */
+     public Object get( final String name, final Scriptable start ) {
+         final SimpleScriptable property = (SimpleScriptable)overridingProperties_.get(name);
+         if( property == null ) {
+             return super.get(name, start);
+         }
+         else {
+             return property;
+         }
+     }
 }
 
