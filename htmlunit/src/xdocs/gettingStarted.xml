@@ -29,7 +29,7 @@ public void testHomePage() throws Exception {
     final WebClient webClient = new WebClient();
     final URL url = new URL("http://htmlunit.sourceforge.net");
     final HtmlPage page = (HtmlPage)webClient.getPage(url);
-    assertEquals( "htmlunit - Welcome to HtmlUnit", page.getTitleText();
+    assertEquals( "htmlunit - Welcome to HtmlUnit", page.getTitleText() );
 }
             ]]></source>
         </section>
