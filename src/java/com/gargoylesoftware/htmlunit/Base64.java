@@ -44,7 +44,7 @@ import java.io.UnsupportedEncodingException;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
-
+ * @deprecated Use {@link org.apache.commons.codec.binary.Base64} instead. Will be removed in a future version.
  */
 public final class Base64 {
     /** The encoding table */

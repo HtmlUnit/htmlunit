@@ -48,6 +48,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HostConfiguration;
@@ -534,7 +535,8 @@ public class HttpWebConnection extends WebConnection {
         final String password = pair.getValue();
 
         String authString = userName + ":" + password;
-        final String value = "Basic " + Base64.encode( authString );
+        final String encoded = new String(Base64.encodeBase64(authString.getBytes()));
+        final String value = "Basic " + encoded;
         httpMethod.addRequestHeader( "Authorization", value );
     }
 }
