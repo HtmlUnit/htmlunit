@@ -27,6 +27,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.InputSource;
+import org.xml.sax.EntityResolver;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
@@ -217,16 +218,31 @@ public final class JavaScriptConfiguration {
 
     private InputStream getConfigurationFileAsStream() {
         final String fileName = "com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml";
-        InputStream inputStream = getClass().getResourceAsStream(fileName);
+        return getResourceAsStream(fileName);
+
+    }
+
+
+    private InputStream getResourceAsStream( final String name ) {
+        assertNotNull("name", name);
+
+        InputStream inputStream = getClass().getResourceAsStream(name);
         if( inputStream == null ) {
             try {
-                final String localizedFileName = fileName.replace( '/', File.separatorChar );
-                inputStream = new FileInputStream( localizedFileName );
+                final String localizedName = name.replace( '/', File.separatorChar );
+                inputStream = new FileInputStream( localizedName );
             }
             catch( final IOException e ) {
                 // Fall through
             }
         }
         return inputStream;
+    }
+
+
+    private void assertNotNull( final String description, final Object object ) {
+        if( object == null ) {
+            throw new NullPointerException(description);
+        }
     }
 }

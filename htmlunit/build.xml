@@ -50,6 +50,20 @@
 </target>
 
 
+<target name="validate" description="Validate">
+	<xmlvalidate
+		failonerror="yes" lenient="no" warn="yes"
+		file="src/java/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml"
+		classname="org.apache.xerces.parsers.SAXParser"
+		classpath="dist/lib/xercesImpl.jar">
+
+		<dtd
+			publicId="JavaScriptConfiguration.xsd"
+			location="src/java/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xsd"/>
+	</xmlvalidate>
+</target>
+
+
 <target name="build" depends="compile" description="build">
 	<delete dir="build/${version}"/>
 
