@@ -1,174 +1,171 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <project>
-  <pomVersion>3</pomVersion>
-  <name>HtmlUnit</name>
-  <id>htmlunit</id>
-  <gumpRepositoryId>htmlunit</gumpRepositoryId>
-  <inceptionYear>2001</inceptionYear>
-  <currentVersion>2.0-alpha2</currentVersion>
-  <package>com.gargoylesoftware.htmlunit</package>
+	<pomVersion>3</pomVersion>
+	<name>HtmlUnit</name>
+	<id>htmlunit</id>
+	<gumpRepositoryId>htmlunit</gumpRepositoryId>
+	<inceptionYear>2001</inceptionYear>
+	<currentVersion>2.0-alpha2</currentVersion>
+	<package>com.gargoylesoftware.htmlunit</package>
 
-  <organization>
+	<organization>
 	<name>Apache Software Foundation</name>
 	<url>http://jakarta.apache.org/</url>
 	<logo>http://jakarta.apache.org/commons/images/jakarta-logo-blue.gif</logo>
-  </organization>
+	</organization>
 
+	<shortDescription>HtmlUnit - A testing tool for web based applications</shortDescription>
+	<description>A testing tool for web based applications</description>
 
-  <shortDescription>HtmlUnit - A testing tool for web based applications</shortDescription>
-  <description>
-  A testing tool for web based applications
-  </description>
+	<logo></logo>
+	<url>http://htmlunit.sourceforge.net</url>
+	<issueTrackingUrl></issueTrackingUrl>
 
-  <logo></logo>
-  <url>http://htmlunit.sourceforge.net</url>
-  <issueTrackingUrl></issueTrackingUrl>
+	<siteAddress>htmlunit.sourceforge.net</siteAddress>
+	<siteDirectory>/</siteDirectory>
+	<distributionDirectory></distributionDirectory>
+	<repository>
+		<connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/htmlunit:htmlunit:anonymous</connection>
+		<url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/htmlunit/</url>
+	</repository>
 
-  <siteAddress>htmlunit.sourceforge.net</siteAddress>
-  <siteDirectory>/</siteDirectory>
-  <distributionDirectory></distributionDirectory>
-  <repository>
-	<connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/htmlunit</connection>
-	<url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/htmlunit/</url>
-  </repository>
+	<versions>
+		<version>
+			<id>1.0</id>
+			<name>1.0</name>
+			<tag>1.0</tag>
+		</version>
+	</versions>
 
-  <versions>
-	<version>
-	  <id>1.0</id>
-	  <name>1.0</name>
-	  <tag>1.0</tag>
-	</version>
-  </versions>
+	<mailingLists>
+		<mailingList>
+			<name>HtmlUnit Mailing list</name>
+			<subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</subscribe>
+			<unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</unsubscribe>
+			<archive>http://sourceforge.net/mailarchive/forum.php?forum=htmlunit-develop</archive>
+		</mailingList>
+	</mailingLists>
 
-  <mailingLists>
-	<mailingList>
-	  <name>HtmlUnit Mailing list</name>
-	  <subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</subscribe>
-	  <unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</unsubscribe>
-	  <archive>http://sourceforge.net/mailarchive/forum.php?forum=htmlunit-develop</archive>
-	</mailingList>
-  </mailingLists>
+	<developers>
+		<developer>
+			<name>Mike Bowler</name>
+			<id>mbowler</id>
+			<email>mbowler@GargoyleSoftware.com</email>
+			<organization>Gargoyle Software Inc.</organization>
+			<roles>
+			<role>Release Manager</role>
+			<role>Java Developer</role>
+			</roles>
+		</developer>
+	</developers>
 
-  <developers>
-	<developer>
-	  <name>Mike Bowler</name>
-	  <id>mbowler</id>
-	  <email>mbowler@GargoyleSoftware.com</email>
-	  <organization>Gargoyle Software Inc.</organization>
-	  <roles>
-		<role>Release Manager</role>
-		<role>Java Developer</role>
-	  </roles>
-	</developer>
-  </developers>
+	<contributors>
+	<!--
+		<contributor>
+			<name></name>
+			<email></email>
+		</contributor>
+	-->
+	</contributors>
 
-<contributors>
-<!--
-	<contributor>
-	  <name></name>
-	  <email></email>
-	</contributor>
--->
-</contributors>
+	<dependencies>
+		<dependency>
+			<id>junit</id>
+			<version>3.8.1</version>
+			<url>http://www.junit.org/</url>
+		</dependency>
+		<dependency>
+			<id>commons-logging</id>
+			<version>1.0.2</version>
+			<url>http://jakarta.apache.org/commons/logging.html</url>
+		</dependency>
+		<dependency>
+			<id>jsse</id>
+			<version>1.0.3_01</version>
+			<url>http://java.sun.com/products/jsse/</url>
+		</dependency>
+		<dependency>
+			<id>jsse+jnet</id>
+			<version>1.0.3_01</version>
+			<url>http://java.sun.com/products/jsse/</url>
+			<jar>jnet-1.0.3_01.jar</jar>
+		</dependency>
+		<dependency>
+			<id>jsse+jcert</id>
+			<version>1.0.3_01</version>
+			<url>http://java.sun.com/products/jsse/</url>
+			<jar>jcert-1.0.3_01.jar</jar>
+		</dependency>
+		<dependency>
+			<id>jce</id>
+			<version>1.2.2</version>
+			<url>http://java.sun.com/products/jce/</url>
+		</dependency>
+		<dependency>
+			<id>jce+sunjce_provider</id>
+			<version>1.2.2</version>
+			<url>http://java.sun.com/products/jce/</url>
+			<jar>sunjce_provider-1.2.2.jar</jar>
+		</dependency>
+		<dependency>
+			<id>jce+local_policy</id>
+			<version>1.2.2</version>
+			<url>http://java.sun.com/products/jce/</url>
+			<jar>local_policy-1.2.2.jar</jar>
+		</dependency>
+		<dependency>
+			<id>nekohtml</id>
+			<version>0.7.1</version>
+			<url>http://foo</url>
+			<jar>nekohtml-0.7.1.jar </jar>
+		</dependency>
+		<dependency>
+			<id>xml-apis</id>
+			<version>2.0.2</version>
+			<url>http://foo</url>
+			<jar>xml-apis-2.0.2.jar </jar>
+		</dependency>
+		<dependency>
+			<id>xerces</id>
+			<version>2.0.2</version>
+			<url>http://foo</url>
+			<jar>xercesImpl-2.0.2.jar</jar>
+		</dependency>
+		<dependency>
+			<id>rhino</id>
+			<version>1.5R4</version>
+			<url>http://foo</url>
+			<jar>js-1.5R4-RC3.jar</jar>
+		</dependency>
+		<dependency>
+			<id>commons-httpclient</id>
+			<version>2.0alpha2</version>
+			<url>http://foo</url>
+			<jar>commons-httpclient-2.0-alpha2.jar</jar>
+		</dependency>
 
-<dependencies>
-	<dependency>
-	  <id>junit</id>
-	  <version>3.8.1</version>
-	  <url>http://www.junit.org/</url>
-	</dependency>
-	<dependency>
-	  <id>commons-logging</id>
-	  <version>1.0.2</version>
-	  <url>http://jakarta.apache.org/commons/logging.html</url>
-	</dependency>
-	<dependency>
-	  <id>jsse</id>
-	  <version>1.0.3_01</version>
-	  <url>http://java.sun.com/products/jsse/</url>
-	</dependency>
-	<dependency>
-	  <id>jsse+jnet</id>
-	  <version>1.0.3_01</version>
-	  <url>http://java.sun.com/products/jsse/</url>
-	  <jar>jnet-1.0.3_01.jar</jar>
-	</dependency>
-	<dependency>
-		<id>jsse+jcert</id>
-		<version>1.0.3_01</version>
-		<url>http://java.sun.com/products/jsse/</url>
-		<jar>jcert-1.0.3_01.jar</jar>
-	</dependency>
-	<dependency>
-		<id>jce</id>
-		<version>1.2.2</version>
-		<url>http://java.sun.com/products/jce/</url>
-	</dependency>
-	<dependency>
-		<id>jce+sunjce_provider</id>
-		<version>1.2.2</version>
-		<url>http://java.sun.com/products/jce/</url>
-		<jar>sunjce_provider-1.2.2.jar</jar>
-	</dependency>
-	<dependency>
-		<id>jce+local_policy</id>
-		<version>1.2.2</version>
-		<url>http://java.sun.com/products/jce/</url>
-		<jar>local_policy-1.2.2.jar</jar>
-	</dependency>
-	<dependency>
-		<id>nekohtml</id>
-		<version>0.7.1</version>
-		<url>http://foo</url>
-		<jar>nekohtml-0.7.1.jar </jar>
-	</dependency>
-	<dependency>
-		<id>xml-apis</id>
-		<version>2.0.2</version>
-		<url>http://foo</url>
-		<jar>xml-apis-2.0.2.jar </jar>
-	</dependency>
-	<dependency>
-		<id>xerces</id>
-		<version>2.0.2</version>
-		<url>http://foo</url>
-		<jar>xercesImpl-2.0.2.jar</jar>
-	</dependency>
-	<dependency>
-		<id>rhino</id>
-		<version>1.5R4</version>
-		<url>http://foo</url>
-		<jar>js-1.5R4-RC3.jar</jar>
-	</dependency>
-	<dependency>
-		<id>commons-httpclient</id>
-		<version>2.0alpha2</version>
-		<url>http://foo</url>
-		<jar>commons-httpclient-2.0-alpha2.jar</jar>
-	</dependency>
-
-	<dependency>
-		<id>gsbase</id>
-		<version>Overridden by project.properties</version>
-		<url>gsbase.sourceforge.net</url>
-		<jar>gsbase.jar</jar>
-	</dependency>
-</dependencies>
+		<dependency>
+			<id>gsbase</id>
+			<version>Overridden by project.properties</version>
+			<url>gsbase.sourceforge.net</url>
+			<jar>gsbase.jar</jar>
+		</dependency>
+	</dependencies>
 
 	<build>
-	<nagEmailAddress>mbowler@GargoyleSoftware.com</nagEmailAddress>
-	<sourceDirectory>src/java</sourceDirectory>
-	<unitTestSourceDirectory>src/java</unitTestSourceDirectory>
-	<integrationUnitTestSourceDirectory/>
-	<aspectSourceDirectory/>
+		<nagEmailAddress>mbowler@GargoyleSoftware.com</nagEmailAddress>
+		<sourceDirectory>src/java</sourceDirectory>
+		<unitTestSourceDirectory>src/java</unitTestSourceDirectory>
+		<integrationUnitTestSourceDirectory/>
+		<aspectSourceDirectory/>
 
-		<unitTest>
-			<includes>
-				<include>**/*Test.java</include>
-			</includes>
-		</unitTest>
-	<jars></jars>
+			<unitTest>
+				<includes>
+					<include>**/*Test.java</include>
+				</includes>
+			</unitTest>
+		<jars></jars>
 	</build>
 
 </project>
