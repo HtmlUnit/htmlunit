@@ -217,6 +217,12 @@
             <action type="add" dev="mbowler" id="799757">
                 New method TopLevelWindow.close()
             </action>
+            <action type="add" dev="mbowler">
+                Added "type" attribute to WebWindowEvent to make testing easier
+            </action>
+            <action type="update" dev="mbowler">
+                Refactored test for window opening using the new type attribute.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">

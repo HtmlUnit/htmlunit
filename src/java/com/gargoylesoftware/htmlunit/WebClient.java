@@ -571,7 +571,7 @@ public class WebClient {
 
         newPage.initialize();
 
-        fireWindowContentChanged( new WebWindowEvent(webWindow, oldPage, newPage) );
+        fireWindowContentChanged( new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage) );
         return newPage;
     }
 
@@ -984,7 +984,7 @@ public class WebClient {
 
         if( window == null ) {
             window = new TopLevelWindow(windowName, this);
-            fireWindowOpened( new WebWindowEvent(window, null, null) );
+            fireWindowOpened( new WebWindowEvent(window, WebWindowEvent.OPEN, null, null) );
         }
 
         if( window instanceof TopLevelWindow && window != opener ) {
@@ -1088,7 +1088,7 @@ public class WebClient {
                 currentWindow_ = (WebWindow)webWindows_.get(0);
             }
         }
-        fireWindowClosed(new WebWindowEvent(webWindow, webWindow.getEnclosedPage(), null));
+        fireWindowClosed(new WebWindowEvent(webWindow, WebWindowEvent.CLOSE, webWindow.getEnclosedPage(), null));
     }
 
 

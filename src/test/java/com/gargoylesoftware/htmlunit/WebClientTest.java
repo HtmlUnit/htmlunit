@@ -37,15 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import com.gargoylesoftware.base.testing.EventCatcher;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  *  Tests for WebClient
@@ -148,7 +150,7 @@ public class WebClientTest extends WebTestCase {
             Collections.EMPTY_LIST,
             collectedOpenEvents );
         assertEquals( "Change event after first page",
-            Collections.singletonList(new WebWindowEvent(client.getCurrentWindow(), null, page)),
+            Collections.singletonList(new WebWindowEvent(client.getCurrentWindow(), WebWindowEvent.CHANGE,null, page)),
             collectedChangeEvents );
 
         collectedOpenEvents.clear();
@@ -161,7 +163,7 @@ public class WebClientTest extends WebTestCase {
             collectedOpenEvents );
         assertEquals( "Change event after second page",
             Collections.singletonList(
-                new WebWindowEvent(client.getCurrentWindow(), page, secondPage)),
+                new WebWindowEvent(client.getCurrentWindow(), WebWindowEvent.CHANGE,page, secondPage)),
             collectedChangeEvents );
     }
 
@@ -180,19 +182,9 @@ public class WebClientTest extends WebTestCase {
         final String page2Content
                  = "<html><head><title>foo</title></head><body></body></html>";
         final WebClient client = new WebClient();
-        final List collectedChangeEvents = new ArrayList();
-        final List collectedOpenEvents = new ArrayList();
-        client.addWebWindowListener( new WebWindowAdapter() {
-            public void webWindowOpened( final WebWindowEvent event ) {
-                collectedOpenEvents.add(event);
-            }
-            public void webWindowContentChanged( final WebWindowEvent event ) {
-                collectedChangeEvents.add(event);
-            }
-            public void webWindowClosed( final WebWindowEvent event ) {
-                collectedChangeEvents.add(event);
-            }
-        } );
+        final EventCatcher eventCatcher = new EventCatcher();
+        eventCatcher.listenTo(client);
+
 
         final FakeWebConnection webConnection = new FakeWebConnection( client );
         webConnection.setResponse(
@@ -202,14 +194,21 @@ public class WebClientTest extends WebTestCase {
 
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(
                 new URL( "http://page1" ), SubmitMethod.POST, Collections.EMPTY_LIST );
-        assertEquals("foo", page.getTitleText());
+        assertEquals("foo", firstPage.getTitleText());
 
-        assertEquals( 1, collectedOpenEvents.size() );
-        final WebWindowEvent openEvent = (WebWindowEvent)collectedOpenEvents.get(0);
-        final WebWindow newWindow = (WebWindow)openEvent.getSource();
-        assertEquals("myNewWindow", newWindow.getName());
+        final WebWindow firstWindow = client.getCurrentWindow();
+        final WebWindow secondWindow = client.getWebWindowByName("myNewWindow");
+        final List expectedEvents = Arrays.asList( new Object[] {
+            new WebWindowEvent(
+                secondWindow, WebWindowEvent.OPEN, null, null),
+            new WebWindowEvent(
+                secondWindow, WebWindowEvent.CHANGE, null, secondWindow.getEnclosedPage()),
+            new WebWindowEvent(
+                firstWindow, WebWindowEvent.CHANGE, null, firstPage),
+        } );
+        assertEquals( expectedEvents, eventCatcher.getEvents() );
     }
 
 
