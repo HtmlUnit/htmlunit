@@ -76,5 +76,12 @@ public interface WebResponse {
      * @return The value of the specified header
      */
     String getResponseHeaderValue( final String headerName );
+
+
+    /**
+     * Return the time it took to load this web response in milliseconds.
+     * @return The load time.
+     */
+    long getLoadTimeInMilliSeconds();
 }
 

@@ -892,7 +892,7 @@ public class WebClient {
                 "javascript urls can only be used to load content into frames and iframes");
         }
 
-        final HtmlPage enclosingPage=  ((HtmlElement)webWindow).getPage();
+        final HtmlPage enclosingPage = ((HtmlElement)webWindow).getPage();
         final ScriptResult scriptResult = enclosingPage.executeJavaScriptIfPossible(
             url.toExternalForm(), "javascript url", false );
 
@@ -905,6 +905,7 @@ public class WebClient {
             public InputStream getContentAsStream(){ return new StringBufferInputStream(contentString); }
             public URL getUrl() { return url; }
             public String getResponseHeaderValue( final String key ) { return ""; }
+            public long getLoadTimeInMilliSeconds() { return 0; }
         };
     }
 
