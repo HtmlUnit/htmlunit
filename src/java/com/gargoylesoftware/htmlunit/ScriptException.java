@@ -87,6 +87,8 @@ public class ScriptException extends RuntimeException {
         final StringWriter stringWriter = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(stringWriter);
 
+        printWriter.println("======= EXCEPTION START ========");
+
         if( throwable_ != null ) {
             if( throwable_ instanceof EcmaError ) {
                 final EcmaError ecmaError = (EcmaError)throwable_;
@@ -144,7 +146,12 @@ public class ScriptException extends RuntimeException {
             throwable_.printStackTrace( printWriter );
         }
 
-        printWriter.println();
+        if( scriptSourceCode_ != null && scriptSourceCode_.length() > 0 ) {
+            printWriter.println("== CALLING JAVASCRIPT ==");
+            printWriter.println(scriptSourceCode_);
+        }
+        printWriter.println("======= EXCEPTION END ========");
+
         return stringWriter.toString();
     }
 
