@@ -37,11 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 
 /**
@@ -49,6 +52,7 @@ import java.util.List;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public class TextareaTest extends WebTestCase {
     /**
@@ -87,4 +91,28 @@ public class TextareaTest extends WebTestCase {
          assertEquals( expectedAlerts, collectedAlerts );
     }
 
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testOnChange() throws Exception {
+        final String htmlContent = "<html><head><title>foo</title>"
+            + "</head><body>"
+            + "<p>hello world</p>"
+            + "<form name='form1' method='post'>"
+            + " <textarea name='textarea1' onchange='alert(this.value)'></textarea>"
+            + "</form>"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+
+        final HtmlForm form = page.getFormByName("form1");
+        final HtmlTextArea textarea
+        = (HtmlTextArea)form.getTextAreasByName("textarea1").get(0);
+        textarea.setText("foo");
+
+        final List expectedAlerts = Arrays.asList(new String[] {"foo"});
+        assertEquals(expectedAlerts, collectedAlerts);
+    }    
 }
