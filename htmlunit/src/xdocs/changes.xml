@@ -137,6 +137,11 @@
             <action type="update" dev="mbowler" id="1009817">
 	            Fixed bug where a colon in a relative URL causes MalformedURLException in WebClient.expandUrl()
             </action>
+            <action type="update" dev="mbowler" id="1050643">
+	            If the type attribute isn't specified on a button attribute then the default value according
+	            to the spec is "submit".  Internet Explorer doesn't obey the spec and returns "button".  HtmlUnit
+	            now does what the browsers do, depending which BrowserVersion is specified..
+            </action>
 		</release>
 		    
         <release version="1.3-pre2" date="September 26, 2004">

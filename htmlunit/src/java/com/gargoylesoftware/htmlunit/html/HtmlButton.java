@@ -37,11 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
+import java.util.Map;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
-import java.io.IOException;
-import java.util.Map;
 
 /**
  *  Wrapper for the html element "button"
@@ -183,13 +185,25 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
     /**
      * Return the value of the attribute "type".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
+     * documentation for details on the use of this attribute.  Note that Internet
+     * Explorer doesn't follow the spec when the type isn't specified.  It will return 
+     * "button" rather than the "submit" specified in the spec.
      *
      * @return The value of the attribute "type"
-     * or an empty string if that attribute isn't defined.
+     * or the default value if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
-        return getAttributeValue("type");
+        String type = getAttributeValue("type");
+        if( type == HtmlElement.ATTRIBUTE_NOT_DEFINED ) {
+            final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
+            if( browser.getApplicationName().equals(BrowserVersion.INTERNET_EXPLORER) ) {
+                type = "button";
+            }
+            else {
+                type = "submit";
+            }
+        }
+        return type;
     }
 
 
