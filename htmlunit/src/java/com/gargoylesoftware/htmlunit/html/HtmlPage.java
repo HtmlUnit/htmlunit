@@ -355,67 +355,6 @@ public final class HtmlPage
     }
 
 
-    private static PrintWriter createPrintWriterForTidy() {
-        return new PrintWriter(
-            new Writer() {
-                private StringBuffer buffer = new StringBuffer();
-
-
-                public void write( char[] cbuf, int off, int len ) {
-                    for( int i = off; i < off + len; i++ ) {
-                        write( cbuf[i] );
-                    }
-                    if( true ) {
-                        return;
-                    }
-                    final String string = new String( cbuf, off, len );
-                    if( string.trim().length() == 0 ) {
-                        return;
-                    }
-
-                    if( string.endsWith( "\n" ) || string.endsWith( "\r" ) ) {
-                        buffer.append( string.trim() );
-                        maybePrint( buffer.toString() );
-                        buffer = new StringBuffer();
-                    }
-                    buffer.append( string );
-                }
-
-
-                private void write( final char aChar ) {
-                    if( aChar == '\n' ) {
-                        maybePrint( buffer.toString() );
-                        buffer = new StringBuffer();
-                    }
-                    else if( aChar == '\r' ) {
-                        // Ignore this
-                    }
-                    else {
-                        buffer.append( aChar );
-                    }
-                }
-
-
-                public void flush() {
-                }
-
-
-                public void close() {
-                }
-            } );
-    }
-
-
-    private static void maybePrint( final String string ) {
-        if( string.length() == 0
-                 || string.equals( "Tidy (vers 4th August 2000) Parsing \"InputStream\"" )
-                 || string.equals( "no warnings or errors were found" )
-                 || string.startsWith( "InputStream: Document content looks like HTML" ) ) {
-            return;
-        }
-    }
-
-
     /**
      *  Return the value of the attribute "lang". Refer to the <a
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
