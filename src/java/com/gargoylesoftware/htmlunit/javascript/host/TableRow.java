@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
  * @version $Revision$
  */
 public class TableRow extends HTMLElement {
+    private static final long serialVersionUID = 3256441404401397812L;
     private ElementArray cells_; // has to be a member to have equality (==) working
 
     /**
