@@ -42,10 +42,10 @@ import java.util.Map;
 
 /**
  * Wrapper for the html element "script".<br>
- * When a script tag references an externat script (withc attribute src) it gets executed when the node
+ * When a script tag references an externat script (with attribute src) it gets executed when the node
  * is added to the DOM tree. When the script code is nested, it gets executed when the text node 
  * containing the script is added to the HtmlScript.<br>
- * The ScriptFilter feature of NekoHtml can't be used because they don't allow immediate access to the DOM 
+ * The ScriptFilter feature of NekoHtml can't be used because it doesn't allow immediate access to the DOM 
  * (ie <code>document.write("&lt;span id='mySpan'/>"); document.getElementById("mySpan").tagName;</code>
  * can't work with a filter).  
  * @version  $Revision$
