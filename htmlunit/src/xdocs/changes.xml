@@ -195,6 +195,9 @@
             	Added support for onload handlers on frames.  This isn't supported
             	by the HTML specification but is supported by the popular browsers.
             </action>
+            <action type="update" dev="mbowler">
+                Upgraded commons-httpclient.jar to 2.0-rc2
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
