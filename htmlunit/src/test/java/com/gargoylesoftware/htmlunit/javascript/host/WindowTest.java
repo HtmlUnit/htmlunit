@@ -50,7 +50,6 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.StatusHandler;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -100,16 +99,11 @@ public class WindowTest extends WebTestCase {
         final String secondContent
              = "<html><head><title>Second</title></head><body></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(URL_FIRST);
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("link");
@@ -145,15 +139,11 @@ public class WindowTest extends WebTestCase {
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo( webClient );
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(URL_FIRST);
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("link");
@@ -204,15 +194,11 @@ public class WindowTest extends WebTestCase {
              + "<script>alert(self.name)</script>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(URL_FIRST);
         assertEquals( "First", firstPage.getTitleText() );
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
         assertEquals( firstWebWindow, firstWebWindow.getTopWindow() );
@@ -259,19 +245,12 @@ public class WindowTest extends WebTestCase {
              = "<html><head><title>Third</title></head><body>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_THIRD, thirdContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
         webClient.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(URL_FIRST);
         assertEquals( "First", firstPage.getTitleText() );
         final WebWindow firstWindow = firstPage.getEnclosingWindow();
 
@@ -332,15 +311,11 @@ public class WindowTest extends WebTestCase {
 
         final EventCatcher eventCatcher = new EventCatcher();
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(URL_FIRST);
         assertEquals( "First", firstPage.getTitleText() );
 
         eventCatcher.listenTo( webClient );
@@ -386,23 +361,13 @@ public class WindowTest extends WebTestCase {
         final String fourthContent
              = "<html><head><title>Fourth</title></head><body></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_THIRD, thirdContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            new URL("http://fourth"), fourthContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
+        webConnection.setResponse(new URL("http://fourth"), fourthContent);
         webClient.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-            URL_FIRST, SubmitMethod.POST,
-            Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(URL_FIRST);
         assertEquals( "First", firstPage.getTitleText() );
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
@@ -467,23 +432,13 @@ public class WindowTest extends WebTestCase {
         final String fourthContent
              = "<html><head><title>Fourth</title></head><body></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_THIRD, thirdContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            new URL("http://fourth"), fourthContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
+        webConnection.setResponse(new URL("http://fourth"), fourthContent);
         webClient.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-            URL_FIRST, SubmitMethod.POST,
-            Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(URL_FIRST);
         assertEquals( "First", firstPage.getTitleText() );
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
@@ -529,19 +484,12 @@ public class WindowTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAlert_NoAlertHandler() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
             = "<html><head><title>First</title><script>function doTest(){alert('foo')}</script></head>"
             + "<body onload='doTest()'></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
         getLog().warn("Warning for no alert handler expected next");
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = loadPage(firstContent);
         assertEquals( "First", firstPage.getTitleText() );
     }
 
@@ -562,7 +510,7 @@ public class WindowTest extends WebTestCase {
         final String thirdContent
              = "<html><head><title>Third</title><script>"
              + "function doAlert() {\n"
-             + "    alert(parent != this);\n"
+			 + "    alert(parent != this);\n"
              + "    alert(top != this);\n"
              + "    alert(parent != top);\n"
              + "    alert(parent.parent == top);\n"
@@ -624,12 +572,10 @@ public class WindowTest extends WebTestCase {
             = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>"
             + "</head><body onload='doTest()'></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(URL_FIRST);
         assertEquals( "First", firstPage.getTitleText() );
 
         assertEquals( Collections.singletonList("foo"), collectedConfirms );
@@ -652,13 +598,11 @@ public class WindowTest extends WebTestCase {
             = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>"
             + "</head><body onload='doTest()'></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection( webConnection );
 
         getLog().warn("Warning for no confirm handler expected next");
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(URL_FIRST);
         assertEquals( "First", firstPage.getTitleText() );
 
         assertEquals( Collections.EMPTY_LIST, collectedConfirms );
@@ -687,12 +631,10 @@ public class WindowTest extends WebTestCase {
             = "<html><head><title>First</title><script>function doTest(){alert(prompt('foo'))}</script>"
             + "</head><body onload='doTest()'></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(URL_FIRST);
         assertEquals( "First", firstPage.getTitleText() );
 
         assertEquals( Collections.singletonList("foo"), collectedPrompts );
@@ -715,13 +657,11 @@ public class WindowTest extends WebTestCase {
             = "<html><head><title>First</title><script>function doTest(){alert(prompt('foo'))}</script>"
             + "</head><body onload='doTest()'></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection( webConnection );
         getLog().warn("Warning for no prompt handler expected next");
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(URL_FIRST);
         assertEquals( "First", firstPage.getTitleText() );
 
         assertEquals( Collections.EMPTY_LIST, collectedPrompts );
@@ -773,8 +713,7 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(URL_THIRD, thirdContent);
         webClient.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(URL_FIRST);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{ "null", "one", "two", "three" } );
@@ -871,24 +810,15 @@ public class WindowTest extends WebTestCase {
             new MockWebConnection(webClient);
         final String firstContent =
             "<html><body><script language='JavaScript'>"
-                + "w2=window.open(\"about:blank\", \"AboutBlank\");"
+                + "w2 = window.open('about:blank', 'AboutBlank');"
                 + "w2.document.open();"
-                + "w2.document.write(\"<html><head><title>hello</title></head><body></body></html>\");"
+                + "w2.document.write('<html><head><title>hello</title></head><body></body></html>');"
                 + "w2.document.close();"
                 + "</script></body></html>";
-        webConnection.setResponse(
-            URL_FIRST,
-            firstContent,
-            200,
-            "OK",
-            "text/html",
-            Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
 
-        webClient.getPage(
-            URL_FIRST,
-            SubmitMethod.POST,
-            Collections.EMPTY_LIST);
+        webClient.getPage(URL_FIRST);
         final WebWindow webWindow = webClient.getWebWindowByName("AboutBlank");
         assertNotNull(webWindow);
 
@@ -901,31 +831,14 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testWindowFrames() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection =
-            new MockWebConnection(webClient);
-        final List collectedAlerts = new ArrayList();
-
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
         final String firstContent =
             "<html><body><script language='JavaScript'>"
-                + "if (typeof top.frames[\"anyXXXname\"] == \"undefined\") {"
+                + "if (typeof top.frames['anyXXXname'] == 'undefined') {"
                 + "alert('one')};"
                 + "</script></body></html>";
-        webConnection.setResponse(
-            URL_FIRST,
-            firstContent,
-            200,
-            "OK",
-            "text/html",
-            Collections.EMPTY_LIST);
-        webClient.setWebConnection(webConnection);
 
-        webClient.getPage(
-            URL_FIRST,
-            SubmitMethod.POST,
-            Collections.EMPTY_LIST);
+        final List collectedAlerts = new ArrayList();
+        loadPage(firstContent, collectedAlerts);
         assertEquals(1, collectedAlerts.size());
     }
 
@@ -934,10 +847,6 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testWindowFramesLive() throws Exception {
-        if (true) {
-            notImplemented();
-            return;
-        }
 
         final String content =
             "<html>"
@@ -957,10 +866,12 @@ public class WindowTest extends WebTestCase {
                 + "</frameset>"
                 + "</html>";
 
-        final List collectedAlerts = new ArrayList();
-        loadPage(content);
-
         final List expectedAlerts = Arrays.asList( new String[]{ "0", "2", "2", "true" } );
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -970,24 +881,14 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testJavascriptVariableFromWindow() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection =
-            new MockWebConnection(webClient);
-        final List collectedAlerts = new ArrayList();
-
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
         final String firstContent =
             "<html><head><title>first</title></head><body><script>\n"
             + "myVariable = 'foo';\n"
             + "alert(window.myVariable);\n"
             + "</script></body></head>";
-        webConnection.setResponse( URL_FIRST, firstContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST);
-        webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage)webClient.getPage(
-            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(firstContent, collectedAlerts);
         assertEquals( Collections.singletonList("foo"), collectedAlerts );
         assertEquals( "first", page.getTitleText() );
     }
@@ -1009,16 +910,14 @@ public class WindowTest extends WebTestCase {
              + "myVariable = 'first'"
              + "  </script><iframe name='left' src='http://second' />"
              + "</body></html>";
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
 
         final String secondContent
              = "<html><head><title>Second</title></head><body><script>"
              + "myVariable = 'second'"
              + "  </script><iframe name='innermost' src='http://third' />"
              + "</body></html>";
-        webConnection.setResponse(
-            URL_SECOND, secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_SECOND, secondContent);
 
         final String thirdContent
              = "<html><head><title>Third</title><script>"
@@ -1030,13 +929,11 @@ public class WindowTest extends WebTestCase {
              + "</script></head>"
              + "<body onload='doTest()'></body></html>";
 
-        webConnection.setResponse(
-            URL_THIRD, thirdContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_THIRD, thirdContent);
 
         webClient.setWebConnection( webConnection );
 
-        final HtmlPage page = (HtmlPage)webClient.getPage(
-            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
+        final HtmlPage page = (HtmlPage)webClient.getPage(URL_FIRST);
         assertEquals( "First", page.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -1107,24 +1004,14 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testJavascriptVariableFromWindow_NotFound() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection =
-            new MockWebConnection(webClient);
-        final List collectedAlerts = new ArrayList();
-
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
         final String firstContent =
             "<html><head><title>first</title></head><body><script>\n"
             + "myVariable = 'foo';\n"
             + "alert(window.myOtherVariable == null);\n"
             + "</script></body></head>";
-        webConnection.setResponse( URL_FIRST, firstContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST);
-        webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage)webClient.getPage(
-            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(firstContent, collectedAlerts);
         assertEquals( Collections.singletonList("true"), collectedAlerts );
         assertEquals( "first", page.getTitleText() );
     }
@@ -1150,18 +1037,15 @@ public class WindowTest extends WebTestCase {
             + "    </frameset>"
             + "    <frame src='http://fourth' name='fourth'>"
             + "</frameset></html>";
-        webConnection.setResponse( URL_FIRST, firstContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse( URL_FIRST, firstContent);
 
         final String secondContent
             = "<html><head><title>second</title></head><body><p>second</p></body></html>";
-        webConnection.setResponse( URL_SECOND, secondContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse( URL_SECOND, secondContent);
 
         final String thirdContent
             = "<html><head><title>third</title></head><body><p>third</p></body></html>";
-        webConnection.setResponse( URL_THIRD, thirdContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse( URL_THIRD, thirdContent);
 
         final String fourthContent
             = "<html><head><title>fourth</title></head><body onload='doTest()'><script>\n"
@@ -1170,13 +1054,11 @@ public class WindowTest extends WebTestCase {
             + "alert('fourth-third='+parent.third.document.location);\n"
             + "}\n"
             + "</script></body></html>";
-        webConnection.setResponse( new URL("http://fourth"), fourthContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse( new URL("http://fourth"), fourthContent);
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage)webClient.getPage(
-            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
+        final HtmlPage page = (HtmlPage)webClient.getPage(URL_FIRST);
         assertEquals( "first", page.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -1210,18 +1092,10 @@ public class WindowTest extends WebTestCase {
         final String failContent
         = "<html><head><title>FAILURE!!!</title></head><body></body></html>";        
 
-        webConnection.setResponse(
-                new URL("http://opener/test/a.html"), aContent, 200, "OK", "text/html",
-                Collections.EMPTY_LIST );
-        webConnection.setResponse(
-                new URL("http://opener/test/b/b.html"), bContent, 200, "OK", "text/html",
-                Collections.EMPTY_LIST );
-        webConnection.setResponse(
-                new URL("http://opener/test/c.html"), cContent, 200, "OK", "text/html",
-                Collections.EMPTY_LIST );
-        webConnection.setResponse(
-                new URL("http://opener/c.html"), failContent, 200, "OK", "text/html",
-                Collections.EMPTY_LIST );        
+        webConnection.setResponse(new URL("http://opener/test/a.html"), aContent);
+        webConnection.setResponse(new URL("http://opener/test/b/b.html"), bContent);
+        webConnection.setResponse(new URL("http://opener/test/c.html"), cContent);
+        webConnection.setResponse(new URL("http://opener/c.html"), failContent);
         
         webClient.setWebConnection( webConnection );
 
@@ -1239,6 +1113,7 @@ public class WindowTest extends WebTestCase {
         assertNotNull("C", thirdPage);
         assertEquals( "C", thirdPage.getTitleText() );        
     }
+
     /**
      * Test closing using javascript
      * @throws Exception if the test fails.
@@ -1262,13 +1137,11 @@ public class WindowTest extends WebTestCase {
                   + "onclick='window.close(); return false;'>"
                   + "</form></body></html>";
 
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html",
-                                  Collections.EMPTY_LIST);
-        webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/html",
-                                  Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
         assertEquals(1, webClient.getWebWindows().size());
         final WebWindow firstWindow = firstPage.getEnclosingWindow();
@@ -1299,7 +1172,7 @@ public class WindowTest extends WebTestCase {
      * Test that length of frames collection is retrieved
      * @throws Exception if the test fails
      */
-    public void testFramesLength() throws Exception {
+    public void testFramesLengthZero() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>"
                  + "alert(window.frames.length)"
@@ -1319,7 +1192,7 @@ public class WindowTest extends WebTestCase {
      * are frames.
      * @throws Exception If the test fails
      */
-   public void testWindowMultipleFramesLength() throws Exception {
+   public void testFramesLengthAndFrameAccess() throws Exception {
 
        final String content =
            "<html>"
@@ -1327,18 +1200,20 @@ public class WindowTest extends WebTestCase {
                + "function test()"
                + "{"
                + "    alert(window.frames.length);"
+               + "    alert(window.frames[0].name);"
+               + "    alert(window.frames.frame2.name);"
                + "}"
                + "</script>"
                + "<frameset rows='50,*' onload='test()'>"
-               + "<frame src='about:blank'/>"
-               + "<frame src='about:blank'/>"
+               + "<frame name='frame1' src='about:blank'/>"
+               + "<frame name='frame2' src='about:blank'/>"
                + "</frameset>"
                + "</html>";
 
        final List collectedAlerts = new ArrayList();
        loadPage(content, collectedAlerts);
 
-       final List expectedAlerts = Arrays.asList( new String[]{ "2"} );
+       final List expectedAlerts = Arrays.asList( new String[]{ "2", "frame1", "frame2"} );
        assertEquals(expectedAlerts, collectedAlerts);
    }
 
