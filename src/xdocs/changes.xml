@@ -6,7 +6,7 @@
 	</properties>
 
 	<body>
-		<release version="1.2.2" date="April 1, 2003">
+		<release version="1.2.2" date="March 29, 2003">
 			<action type="add" dev="mbowler">
 				Started tracking more information about changes
 			</action>
@@ -54,7 +54,7 @@
 		</release>
 
 
-		<release version="1.2.1" date="">
+		<release version="1.2.1" date="March 20, 2003">
 			<action type="add" dev="mbowler">
 				Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlButtonInput#click()</javadoc>
 			</action>
@@ -76,7 +76,7 @@
 		</release>
 
 
-		<release version="1.2" date="">
+		<release version="1.2" date="March 10, 2003">
 			<action type="update" dev="mbowler">
 				Fixed bug where redirection didn't happen correctly if the location header contained
 				multiple entries seperated by commas
@@ -174,7 +174,7 @@
 		</release>
 
 
-		<release version="1.1" date="">
+		<release version="1.1" date="November 25, 2002">
 			<action type="update" dev="mbowler">
 				Fixed bug where loading of external javascript files would not follow redirects.
 			</action>
@@ -194,7 +194,7 @@
 		</release>
 
 
-		<release version="1.1-rc2" date="">
+		<release version="1.1-rc2" date="November 16, 2002">
 			<action type="update" dev="mbowler">
 				Fixed bug where calling WebClient.open() would open a new top level window every time.
 			</action>
@@ -226,7 +226,7 @@
 		</release>
 
 
-		<release version="1.1-rc1" date="">
+		<release version="1.1-rc1" date="October 29, 2002">
 			<action type="update" dev="mbowler">
 				Upgraded commons-logging.jar to 1.0.2
 			</action>
@@ -322,7 +322,7 @@
 		</release>
 
 
-		<release version="1.1-pre5" date="">
+		<release version="1.1-pre5" date="September 24, 2002">
 			<action type="update" dev="mbowler">
 				Changed html parser from
 				<a href="http://sourceforge.net/projects/jtidy">JTidy</a> to
@@ -411,7 +411,7 @@
 		</release>
 
 
-		<release version="1.1-pre4" date="">
+		<release version="1.1-pre4" date="August 23, 2002">
 			<action type="update" dev="mbowler">
 				Changed the <a href="license.html">license</a> used by HtmlUnit to an apache style one
 			</action>
@@ -551,7 +551,7 @@
 		</release>
 
 
-		<release version="1.1-pre3" date="">
+		<release version="1.1-pre3" date="July 23, 2002">
 			<action type="add" dev="mbowler">
 				Added HtmlElement.getParent()
 			</action>
@@ -607,7 +607,7 @@
 		</release>
 
 
-		<release version="1.1-pre2" date="">
+		<release version="1.1-pre2" date="July 10, 2002">
 			<action type="update" dev="mbowler">
 				Fixed NullPointerException due to a bug in JTidy - thanks to
 				Mike J Bresnahan for tracking this one right into the JTidy source.
@@ -675,7 +675,7 @@
 		</release>
 
 
-		<release version="1.1-pre1" date="">
+		<release version="1.1-pre1" date="July 2, 2002">
 			<action type="add" dev="mbowler">
 				Added initial javascript support
 			</action>
@@ -685,7 +685,7 @@
 		</release>
 
 
-		<release version="1.0" date="">
+		<release version="1.0" date="May 22, 2002">
 			<action type="add" dev="mbowler">
 				Initial release
 			</action>
