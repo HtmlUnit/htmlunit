@@ -106,6 +106,12 @@ public class SanityCheck extends WebTestCase {
     }
 
 
+    public void testCnnAfterHours() throws Exception {
+        final WebClient webClient = new WebClient(browserVersion_);
+        assertInstanceOf( webClient.getPage( new URL( "http://money.cnn.com/markets/afterhours/" ) ), HtmlPage.class );
+    }
+
+
     public void setUp() {
         System.out.println();
         System.out.println( "=====================================" );
