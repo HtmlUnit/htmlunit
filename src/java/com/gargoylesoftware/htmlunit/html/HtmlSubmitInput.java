@@ -60,8 +60,7 @@ public class HtmlSubmitInput extends HtmlInput {
      */
     public Page click()
         throws
-            IOException,
-            ElementNotFoundException {
+            IOException {
         return super.click();
     }
 

@@ -280,7 +280,7 @@ public final class HtmlPage
      * @param  name The name to search by
      * @return  See above
      */
-    public HtmlAnchor getAnchorByName( final String name ) {
+    public HtmlAnchor getAnchorByName( final String name ) throws ElementNotFoundException {
         return ( HtmlAnchor )getPage().getOneHtmlElementByAttribute( "a", "name", name );
     }
 
@@ -291,7 +291,7 @@ public final class HtmlPage
      * @param  href The string to search by
      * @return  The HtmlAnchor
      */
-    public HtmlAnchor getAnchorByHref( final String href ) {
+    public HtmlAnchor getAnchorByHref( final String href ) throws ElementNotFoundException {
         return ( HtmlAnchor )getPage().getOneHtmlElementByAttribute( "a", "href", href );
     }
 

@@ -41,14 +41,8 @@ public class HtmlImageInput extends HtmlInput {
      *
      * @return The page that is loaded after the click has taken place.
      * @exception  IOException If an io error occurs
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
      */
-    public Page click()
-        throws
-            IOException,
-            ElementNotFoundException {
-
+    public Page click() throws IOException {
         wasPositionSpecified_ = false;
         return super.click();
     }
