@@ -148,7 +148,8 @@ public final class JavaScriptEngine extends ScriptEngine {
         // Remove html comments around the source if needed
         sourceCode = sourceCode.trim();
         if( sourceCode.startsWith("<!--") ) {
-            final int startIndex = 4;
+            int startIndex = 4;
+
             final int endIndex;
             if( sourceCode.endsWith("-->") ) {
                 endIndex = sourceCode.length()-3;
@@ -156,6 +157,13 @@ public final class JavaScriptEngine extends ScriptEngine {
             else {
                 endIndex = sourceCode.length();
             }
+
+            // Anything on the same line as the opening comment should be ignored
+            char eachChar = sourceCode.charAt(startIndex);
+            while( startIndex <= endIndex && eachChar != '\n' && eachChar != '\r' ) {
+                eachChar = sourceCode.charAt( ++startIndex );
+            }
+
             sourceCode = sourceCode.substring(startIndex, endIndex);
         }
 
