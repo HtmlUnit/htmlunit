@@ -101,10 +101,6 @@ public class HTMLElement extends SimpleScriptable {
      * @return True if this element is disabled.
      */
     public boolean jsGet_disabled() {
-        getLog().warn(
-            "Getting the disabled attribute for non-submittable elements"
-            + " is not allowed according to the HTML specification.  Be aware"
-            + " that you are using a non-portable feature");
         return getHtmlElementOrDie().isAttributeDefined("disabled");
     }
 
@@ -114,10 +110,6 @@ public class HTMLElement extends SimpleScriptable {
      * @param disabled True if this is to be disabled.
      */
     public void jsSet_disabled( final boolean disabled ) {
-        getLog().warn(
-            "Setting the disabled attribute for non-submittable elements"
-            + " is not allowed according to the HTML specification.  Be aware"
-            + " that you are using a non-portable feature");
         final Element xmlElement = getHtmlElementOrDie().getElement();
         if( disabled ) {
             xmlElement.setAttribute("disabled", "disabled");
