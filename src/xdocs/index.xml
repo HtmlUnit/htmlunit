@@ -16,19 +16,22 @@
                 but is very different in implementation.  Which one is better for you depends on how
                 you like to write your tests.  HttpUnit models the http protocol so you deal with request and
                 response objects. HtmlUnit on the other hand, models the returned document so that you deal
-                with pages and form and tables.
+                with pages and forms and tables.
             </p>
             <p>
-                HtmlUnit was written by
+                HtmlUnit was originally written by
                 <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a> of
                 <a href="http://www.GargoyleSoftware.com">Gargoyle Software</a>
-                and has been released under an <a href="license.html">apache style license</a>
+                and released under an <a href="license.html">apache style license</a>.  
+                Since then, it has received many contributions from <a href="team-list.html">
+                other developers</a> and would not be where it is today without their
+                assistance.
             </p>
             <p>
                 HtmlUnit is not a generic unit testing framework.  It is specifically a way to simulate
                 a browser for testing purposes and is intended to be used within another testing
                 framework such as <a href="http://www.junit.org">JUnit</a>.  Refer to the document
-                "<a href="gettingStarted.html">Getting Started with HtmlUnit</a>" for an introduction.
+                <a href="gettingStarted.html">"Getting Started with HtmlUnit"</a> for an introduction.
             </p>
             <p>
                 NOTE: This documentation is for the current code in CVS and may not accurately
