@@ -14,7 +14,7 @@
 			Upgraded NekoHTML to version 0.7.2
 		</change>
 		<change type="change">
-			Upgraded commons-httpclient to the Nov 29, 2002 build
+			Upgraded commons-httpclient to 2.0beta3
 		</change>
 		<change type="change">
 			Upgraded xerces to 2.2.1
