@@ -37,15 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.WebConnection;
-import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.DocumentAllArray;
-
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,6 +52,18 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.StringWebResponse;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebConnection;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.DocumentAllArray;
+
 /**
  * A javascript object for a Document
  *
@@ -71,7 +75,9 @@ import org.mozilla.javascript.Scriptable;
 public final class Document extends HTMLElement {
     private DocumentAllArray allArray_;
 
-
+    /** The buffer that will be used for calls to document.write() */
+    private StringBuffer writeBuffer_;
+    
     /**
      * Create an instance.  Javascript objects must have a default constructor.
      */
@@ -158,9 +164,17 @@ public final class Document extends HTMLElement {
     public static Object jsFunction_write(
         final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
 
+        final Document document = (Document)scriptable;
         final String content = getStringArg(0, args, "");
-        final HtmlPage page = (HtmlPage)((Document)scriptable).getHtmlElementOrDie();
-        page.getScriptFilter().write(content);
+        
+        if( document.writeBuffer_ == null ) {
+            // open() hasn't been called
+            final HtmlPage page = (HtmlPage)document.getHtmlElementOrDie();
+            page.getScriptFilter().write(content);
+        }
+        else {
+            document.writeBuffer_.append(content);
+        }
         return null;
     }
 
@@ -188,6 +202,7 @@ public final class Document extends HTMLElement {
 
         return connection.getStateForUrl( url );
     }
+    
     /**
      * Return the cookie attribute.  Currently hardcoded to return an empty string
      * @return The cookie attribute
@@ -266,20 +281,60 @@ public final class Document extends HTMLElement {
 
 
     /**
-     * Open document
+     * javascript function "open".
+     * @param context The javascript context
+     * @param scriptable The scriptable
+     * @param args The arguments passed into the method.
+     * @param function The function.
+     * @return Nothing
      */
-    public void jsFunction_open() {
-        getLog().debug("Not implemented yet: document.open()");
+    public static Object jsFunction_open(
+        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
+            
+        final Document document = (Document)scriptable;
+        if( document.writeBuffer_ == null ) {
+            document.writeBuffer_ = new StringBuffer();
+        }   
+        else {
+            document.getLog().warn("open() called when document is already open.");
+        }         
+        return null;
     }
 
 
     /**
-     * Close an output stream
+     * javascript function "close".
+     * @param context The javascript context
+     * @param scriptable The scriptable
+     * @param args The arguments passed into the method.
+     * @param function The function.
+     * @return Nothing
      */
-    public void jsFunction_close() {
-        getLog().debug("Not implemented yet: document.close()");
-    }
+    public static Object jsFunction_close(
+            final Context context, 
+            final Scriptable scriptable, 
+            final Object[] args,  
+            final Function function ) 
+        throws 
+            IOException {
 
+        final Document document = (Document)scriptable;
+        if( document.writeBuffer_  == null ) {
+            document.getLog().warn("close() called when document is not open.");
+        }   
+        else {
+            final WebResponse webResponse 
+                = new StringWebResponse(document.writeBuffer_.toString());
+            final HtmlPage page = document.getHtmlElementOrDie().getPage();
+            final WebClient webClient = page.getWebClient();
+            final WebWindow window = page.getEnclosingWindow();
+            
+            webClient.loadWebResponseInto(webResponse, window);
+            
+            document.writeBuffer_ = null;
+        }         
+        return null;
+    }
 
     /**
      * Get the JavaScript property "parentNode" for the node that
