@@ -579,9 +579,14 @@ public final class Document extends NodeImpl {
      * @return body element
      */
     public Object jsGet_body() {
-        final DomNode bodyElement = (DomNode) getHtmlPage().getDocumentElement()
-                .getHtmlElementsByTagName("body").get(0);
-        return getScriptableFor(bodyElement);
+        final List list = getHtmlPage().getDocumentElement().getHtmlElementsByTagName("body");
+        if( list.size() == 0 ) {
+            return NOT_FOUND;
+        }
+        else {
+            final DomNode bodyElement = (DomNode)list.get(0);
+            return getScriptableFor(bodyElement);
+        }
     }
     
 

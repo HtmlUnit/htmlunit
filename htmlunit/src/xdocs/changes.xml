@@ -75,6 +75,10 @@
 	            INCOMPATIBLE CHANGE: The common browsers will automatically insert a tbody tag inside
 	            tables if there isn't one already there.  Now HtmlUnit does that as well.
             </action>  
+            <action type="update" dev="mbowler">
+                Fixed bug where calling document.body from javascript before the body tag had been 
+                parsed was causing an exception.
+            </action>  
 		</release>
 		    
         <release version="1.3-pre2" date="September 26, 2004">
