@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 
 /**
- *  Tests for HtmlForm
+ * Tests for {@link HtmlForm}.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -920,17 +920,41 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testUrlAfterGetSubmit()
+    public void testUrlAfterSubmit()
         throws Exception {
         testUrlAfterSubmit("get", "foo", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
         // for a get submit, query parameters in action are lost in browsers
         testUrlAfterSubmit("get", "foo?foo=12", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
         testUrlAfterSubmit("post", "foo", "foo");
         testUrlAfterSubmit("post", "foo?foo=12", "foo?foo=12");
+        
+        // test with anchor: the expected values are not correct as the anchors are discarded
+        // but in a first time, as long as htmlunit doesn't handle them correctly...
+        // then, these test should be removed and testUrlAfterSubmitWithAnchor should be activated
+        testUrlAfterSubmit("get", "foo#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
+        testUrlAfterSubmit("get", "foo?foo=12#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
+        testUrlAfterSubmit("post", "foo#anchor", "foo");
+        testUrlAfterSubmit("post", "foo?foo=12#anchor", "foo?foo=12");
     }
 
     /**
-     * Utility for {@link #testUrlAfterGetSubmit}
+     * Test doesn't work now because we don't handle anchors as we should for instance in
+     * {@link WebClient#expandUrl}.
+     * @throws Exception if the test fails
+     */
+    public void testUrlAfterSubmitWithAnchor()
+        throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testUrlAfterSubmit("get", "foo#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
+        testUrlAfterSubmit("get", "foo?foo=12#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
+        testUrlAfterSubmit("post", "foo#anchor", "foo#anchor");
+        testUrlAfterSubmit("post", "foo?foo=12#anchor", "foo?foo=12#anchor");
+    }
+
+    /**
+     * Utility for {@link #testUrlAfterSubmit()}
      * @throws Exception if the test fails
      */
     private void testUrlAfterSubmit(final String method, final String action, final String expectedUrlEnd)

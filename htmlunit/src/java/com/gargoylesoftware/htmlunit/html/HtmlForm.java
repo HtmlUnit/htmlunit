@@ -190,6 +190,9 @@ public class HtmlForm extends ClickableElement {
 
         String actionUrl = action;
         if (SubmitMethod.GET.equals(method)) {
+            // discard anchor (not fully correct, but quick fix)
+            actionUrl = StringUtils.substringBefore(actionUrl, "#");
+
             final NameValuePair[] pairs = new NameValuePair[parameters.size()];
             parameters.toArray( pairs );
             final String queryFromFields = EncodingUtil.formUrlEncode(pairs, getPage().getPageEncoding());
