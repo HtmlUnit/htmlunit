@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
@@ -57,29 +58,35 @@ import org.apache.commons.httpclient.HttpState;
  */
 public class MockWebConnection extends WebConnection {
     private class ResponseEntry {
-        public ResponseEntry(
-                final String content,
-                final int statusCode,
-                final String statusMessage,
-                final String contentType,
-                final List responseHeaders ) {
-
+        private void validateParameters(
+                Object content, 
+                String statusMessage, 
+                String contentType,
+                List responseHeaders) {
             Assert.notNull("content", content);
             Assert.notNull("statusMessage", statusMessage);
             Assert.notNull("contentType", contentType);
             Assert.notNull("responseHeaders", responseHeaders);
-
             // Validate that the response header list only contains KeyValuePairs
             final Iterator iterator = responseHeaders.iterator();
             while( iterator.hasNext() ) {
                 final Object object = iterator.next();
                 if( object instanceof KeyValuePair == false ) {
                     throw new IllegalArgumentException(
-                        "Only KeyValuePairs may be in the response header list but found: "
-                        + object.getClass().getName());
+                            "Only KeyValuePairs may be in the response header list but found: "
+                            + object.getClass().getName());
                 }
-            }
+            }               
+        }          
 
+        public ResponseEntry(
+                final byte[] content,
+                final int statusCode,
+                final String statusMessage,
+                final String contentType,
+                final List responseHeaders ) {
+
+            validateParameters(content, statusMessage, contentType, responseHeaders);
             content_ = content;
             statusCode_ = statusCode;
             statusMessage_ = statusMessage;
@@ -89,12 +96,23 @@ public class MockWebConnection extends WebConnection {
 
         private final int statusCode_;
         private final String statusMessage_;
-        private final String content_;
+        private final byte[] content_;
         private final String contentType_;
         private final List responseHeaders_;
     }
+    
+    private byte[] stringToByteArray(final String content) {
+        byte[] contentBytes;
+        try {
+            contentBytes = content.getBytes("ISO-8859-1");
+        }
+        catch (UnsupportedEncodingException e) {
+            contentBytes = new byte[0];
+        }
+        return contentBytes;
+    }    
 
-    private final Map responseMap_ = new HashMap(89);
+    private final Map responseMap_ = new HashMap(10);
     private ResponseEntry defaultResponseEntry_;
 
     private SubmitMethod lastMethod_;
@@ -162,7 +180,14 @@ public class MockWebConnection extends WebConnection {
             public int getStatusCode()         { return responseEntry.statusCode_;      }
             public String getStatusMessage()   { return responseEntry.statusMessage_;   }
             public String getContentType()     { return responseEntry.contentType_;     }
-            public String getContentAsString() { return responseEntry.content_;         }
+            public String getContentAsString() { 
+                try {
+                    return new String(responseEntry.content_, this.getContentCharSet());
+                }
+                catch (UnsupportedEncodingException e) {
+                    return null;
+                }
+            }
             public URL getUrl()                { return url;                           }
             public long getLoadTimeInMilliSeconds() { return 0; }
 
@@ -178,19 +203,14 @@ public class MockWebConnection extends WebConnection {
             }
 
             public InputStream getContentAsStream() {
-                return TextUtil.toInputStream(responseEntry.content_);
+                return new ByteArrayInputStream(responseEntry.content_);
             }
             public byte[] getResponseBody() {
-                try{
-                    /*
-                     * this method must return raw bytes.
-                     * without encoding, getBytes use locale encoding.
-                     */
-                    return responseEntry.content_.getBytes("ISO-8859-1");
-                }
-                catch( final UnsupportedEncodingException e ){
-                    return null;
-                }
+                /*
+                 * this method must return raw bytes.
+                 * without encoding, getBytes use locale encoding.
+                 */
+                return responseEntry.content_;
            }
             public String getContentCharSet() { return "ISO-8859-1"; }
         };
@@ -235,10 +255,33 @@ public class MockWebConnection extends WebConnection {
             final String contentType,
             final List responseHeaders ) {
 
-        final ResponseEntry responseEntry
-            = new ResponseEntry(content, statusCode, statusMessage, contentType, responseHeaders);
-        responseMap_.put( url.toExternalForm(), responseEntry );
+        setResponse(url, stringToByteArray(content), statusCode, statusMessage, 
+                    contentType, responseHeaders);
+        
     }
+    
+    /**
+     * Set the response that will be returned when the specified url is requested.
+     * @param url The url that will return the given response
+     * @param content The content to return
+     * @param statusCode The status code to return
+     * @param statusMessage The status message to return
+     * @param contentType The content type to return
+     * @param responseHeaders A list of {@KeyValuePair}s that will be returned as
+     * response headers.
+     */
+    public void setResponse(
+            final URL url,
+            final byte[] content,
+            final int statusCode,
+            final String statusMessage,
+            final String contentType,
+            final List responseHeaders ) {
+
+        final ResponseEntry responseEntry
+        = new ResponseEntry(content, statusCode, statusMessage, contentType, responseHeaders);
+        responseMap_.put( url.toExternalForm(), responseEntry );
+    }    
 
     /**
      * Convenience method that is the same as calling
@@ -266,7 +309,7 @@ public class MockWebConnection extends WebConnection {
 
         final String content = "<html><head><title>"+title+"</title></head><body></body></html>";
         final ResponseEntry responseEntry
-            = new ResponseEntry(content, 200, "OK", "text/html", Collections.EMPTY_LIST);
+            = new ResponseEntry(stringToByteArray(content), 200, "OK", "text/html", Collections.EMPTY_LIST);
         responseMap_.put( url.toExternalForm(), responseEntry );
     }
 
@@ -285,11 +328,27 @@ public class MockWebConnection extends WebConnection {
             final String statusMessage,
             final String contentType ) {
 
-        defaultResponseEntry_
-            = new ResponseEntry(content, statusCode, statusMessage,
-                contentType, Collections.EMPTY_LIST);
+        setDefaultResponse(stringToByteArray(content), statusCode, statusMessage, contentType);
     }
 
+    /**
+     * Set the response that will be returned when a url is requested that does
+     * not have a specific content set for it.
+     *
+     * @param content The content to return
+     * @param statusCode The status code to return
+     * @param statusMessage The status message to return
+     * @param contentType The content type to return
+     */
+    public void setDefaultResponse(
+            final byte[] content,
+            final int statusCode,
+            final String statusMessage,
+            final String contentType ) {
+
+        defaultResponseEntry_ = new ResponseEntry(content, statusCode, statusMessage,
+                contentType, Collections.EMPTY_LIST);
+    }
 
     /**
      * Set the response that will be returned when a url is requested that does
