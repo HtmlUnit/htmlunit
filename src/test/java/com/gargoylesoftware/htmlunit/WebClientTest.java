@@ -464,8 +464,7 @@ public class WebClientTest extends WebTestCase {
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, page1Content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, page1Content);
 
         client.setWebConnection( webConnection );
         final List collectedPageCreationItems = new ArrayList();
@@ -671,10 +670,8 @@ public class WebClientTest extends WebTestCase {
         final WebClient webClient = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( webClient );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
 
         webClient.setWebConnection( webConnection );
 
@@ -840,7 +837,7 @@ public class WebClientTest extends WebTestCase {
             "<html><head><title>First</title></head><body><form name='form1' method='post' onsubmit='return false;'>");
 
         for( int i=0; i<tabIndexValues.length; i++ ) {
-            buffer.append( "<input type='submit' name='submit");
+            buffer.append("<input type='submit' name='submit");
             buffer.append(i);
             buffer.append("' id='submit");
             buffer.append(i);
@@ -864,12 +861,10 @@ public class WebClientTest extends WebTestCase {
         buffer.append("</form></body></html>");
 
         final MockWebConnection webConnection = new MockWebConnection( webClient );
-        webConnection.setResponse(
-            new URL("http://first/"), buffer.toString(), 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, buffer.toString());
         webClient.setWebConnection( webConnection );
 
-        final URL url = new URL("http://first/");
-        return (HtmlPage)webClient.getPage(url);
+        return (HtmlPage) webClient.getPage(URL_FIRST);
     }
 
     /**
@@ -1098,8 +1093,8 @@ public class WebClientTest extends WebTestCase {
         final WebClient webClient = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection(webClient);
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
-        webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
 
         webClient.setWebConnection(webConnection);
 
@@ -1198,4 +1193,3 @@ public class WebClientTest extends WebTestCase {
         return file;
     }
 }
-
