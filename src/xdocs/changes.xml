@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1085878">
+                Improved ElementArray: fix for empty collection and addition of method namedItem().
+            </action>
             <action type="update" dev="mguillem">
                 Fixed bug with setTimeout: a timeout is now only executed if the page that placed it is always "alive". 
 			</action>
