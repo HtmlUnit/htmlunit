@@ -45,7 +45,7 @@
 				<a href="api/index.html">Javadoc API documentation</a> |
 				<a href="changes.html">Change history</a> |
 				<br />
-				<warning>
+				<warning title="Important Note">
 					The goal of 1.1 was to provide a level of javascript support that would handle
 					the most common cases.  I believe that goal has now been met.  Assuming there are
 					no show-stopper bugs found, this build will become 1.1 final.
