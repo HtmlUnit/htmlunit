@@ -49,6 +49,20 @@
     </versions>
 
     <mailingLists>
+	    <mailingList>
+    	    <name>HtmlUnit Users</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</unsubscribe>
+            <archive>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</archive>
+        </mailingList>
+	    <mailingList>
+    	    <name>HtmlUnit Developers</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</unsubscribe>
+            <archive>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</archive>
+        </mailingList>
+    </mailingList>
+    
     </mailingLists>
 
     <developers>
