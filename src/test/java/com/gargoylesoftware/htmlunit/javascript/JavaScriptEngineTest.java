@@ -81,6 +81,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author  Darrell DeBoer
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class JavaScriptEngineTest extends WebTestCase {
     /**
@@ -625,7 +626,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     public void testConfigurationFileAgainstSchema() throws Exception {
         final XMLReader parser = XMLReaderFactory.createXMLReader("org.apache.xerces.parsers.SAXParser");
-        final String directory = "src/java/com/gargoylesoftware/htmlunit/javascript/";
+        final String directory = "src/java/com/gargoylesoftware/htmlunit/javascript/configuration/";
         parser.setFeature("http://xml.org/sax/features/validation", true);
         parser.setFeature("http://apache.org/xml/features/validation/schema", true);
         parser.setEntityResolver( new EntityResolver() {

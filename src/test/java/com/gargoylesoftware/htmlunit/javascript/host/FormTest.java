@@ -625,27 +625,27 @@ public class FormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-     public void testAssignedOnsubmit() throws Exception {
+    public void testAssignedOnsubmit() throws Exception {
 
-         final String content
-             = "<html><head><title>foo</title><script>"
-             + " function onSubmit() { alert('hi!'); return false; }"
-             + " function init() { document.myForm.onsubmit = onSubmit; }"
-             + " window.onload = init;"
-             + "</script></head><body>"
-             + "<form name='myForm'>"
-             + " <input type='submit' id='clickMe' />"
-             + "</form>"
-             + "</body></html>";
+        final String content
+            = "<html><head><title>foo</title><script>"
+            + " function onSubmit() { alert('hi!'); return false; }"
+            + " function init() { document.myForm.onsubmit = onSubmit; }"
+            + " window.onload = init;"
+            + "</script></head><body>"
+            + "<form name='myForm'>"
+            + " <input type='submit' id='clickMe' />"
+            + "</form>"
+            + "</body></html>";
      
-         final List collectedAlerts = new ArrayList();
-         final HtmlPage page = loadPage(content, collectedAlerts);
-         final HtmlSubmitInput button = (HtmlSubmitInput)
-             page.getHtmlElementById("clickMe");
-         button.click();
-         final List expectedAlerts = Collections.singletonList("hi!");
-         assertEquals(expectedAlerts, collectedAlerts);
-     }
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlSubmitInput button = (HtmlSubmitInput)
+            page.getHtmlElementById("clickMe");
+        button.click();
+        final List expectedAlerts = Collections.singletonList("hi!");
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 
     /**
      * Test that the elements collection is live

@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class InputTest extends WebTestCase {
     /**
@@ -605,14 +606,14 @@ public class InputTest extends WebTestCase {
                 + "</script>\n"
                 + "</body></html>";
         final List expectedAlerts = Arrays.asList( new String[]{
-                "button: false, false, function, function, , ",
-                "submit: false, false, function, function, submit it!, submit it!",
-                "file: false, false, function, function, , ",
-                "checkbox: true, true, function, function, , on",
-                "radio: true, true, function, function, , on",
-                "text: false, false, function, function, , ",
-                "password: false, false, function, function, , "
-                } );
+            "button: false, false, function, function, , ",
+            "submit: false, false, function, function, submit it!, submit it!",
+            "file: false, false, function, function, , ",
+            "checkbox: true, true, function, function, , on",
+            "radio: true, true, function, function, , on",
+            "text: false, false, function, function, , ",
+            "password: false, false, function, function, , "
+        } );
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();

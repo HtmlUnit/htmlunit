@@ -10,8 +10,8 @@
 
     <postGoal name="java:compile">
         <ant:copy
-            file="src/java/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml"
-            toFile="${maven.build.dest}/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml"/>
+            file="src/java/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml"
+            toFile="${maven.build.dest}/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml"/>
     </postGoal>
 
     <preGoal name="xdoc:transform">
@@ -46,8 +46,8 @@
                 continue to work but some functions will not.
             </p>
             <p>
-            	  If you're using maven to build your project and just want to know what dependencies
-            	  to add to your POM, just scroll down to the <a href="#pomDependencies">next section</a>.
+                If you're using maven to build your project and just want to know what dependencies
+                to add to your POM, just scroll down to the <a href="#pomDependencies">next section</a>.
             </p>
             <table>
             <tr><th>Required JARs</th><th>Description</th></tr>
@@ -116,7 +116,7 @@
         </section>
 
         <section name="Dependencies">
-        	   <a name="pomDependencies"></a>
+             <a name="pomDependencies"></a>
             <p>
                 If you are using <a href="http://maven.apache.org">maven</a> to build your project 
                 then you can simply cut and paste the following dependencies into your project.xml.
@@ -140,14 +140,14 @@
     &lt;artifactId&gt;htmlunit&lt;/artifactId&gt;
     &lt;version&gt;${pom.currentVersion}&lt;/version&gt;
 &lt;/dependency&gt;
-	            <j:forEach var="lib" items="${pom.artifacts}">
-	                <j:set var="dep" value="${lib.dependency}"/>
+              <j:forEach var="lib" items="${pom.artifacts}">
+                  <j:set var="dep" value="${lib.dependency}"/>
 &lt;dependency&gt;
     &lt;groupId&gt;${dep.groupId}&lt;/groupId&gt;
     &lt;artifactId&gt;${dep.artifactId}&lt;/artifactId&gt;
     &lt;version&gt;${dep.version}&lt;/version&gt;
 &lt;/dependency&gt;
-	            </j:forEach>
+              </j:forEach>
            </source>
         </section>
     </body>
@@ -156,8 +156,11 @@
         </j:file>
     </goal>
 
-	<goal name="htmlunit:dist" prereqs="htmlunit:build-bin-dist,htmlunit:build-src-dist" />
-	
+  <goal name="htmlunit:dist" prereqs="htmlunit:build-bin-dist,htmlunit:build-src-dist" 
+    description="Build the distribution package" />
+  <goal name="htmlunit:junit" prereqs="maven-junit-report-plugin:report,xdoc"
+    description="Run the unit tests and create html results"/>
+
     <goal
         name="htmlunit:build-bin-dist"
         prereqs="java:jar, site"
@@ -199,7 +202,7 @@
         <!-- Copy documentation -->
         <j:set var="docsDest"
             value="${pom.getPluginContext('maven-xdoc-plugin').getVariable('maven.docs.dest')}"/>
-		<ant:echo>docsDest=${docsDest}</ant:echo>
+    <ant:echo>docsDest=${docsDest}</ant:echo>
         <ant:mkdir dir="${maven.dist.bin.assembly.dir}/${maven.final.name}/docs"/>
         <ant:copy todir="${maven.dist.bin.assembly.dir}/${maven.final.name}/docs">
             <ant:fileset dir="${docsDest}">
@@ -211,16 +214,16 @@
         <ant:delete file="${maven.dist.bin.assembly.dir}/dist/${maven.final.name}.zip"/>
         <ant:mkdir dir="${maven.dist.bin.assembly.dir}/dist/"/>
         <ant:zip destfile="${maven.dist.bin.assembly.dir}/dist/${maven.final.name}.zip">
-        		<ant:zipfileset 
-        			dir="${maven.dist.bin.assembly.dir}/${maven.final.name}" 
-        			prefix="${maven.final.name}"/>
-        	</ant:zip>
-	</goal>
-	
-	<goal
+            <ant:zipfileset 
+              dir="${maven.dist.bin.assembly.dir}/${maven.final.name}" 
+              prefix="${maven.final.name}"/>
+          </ant:zip>
+  </goal>
+  
+  <goal
         name="htmlunit:build-src-dist"
         description="Builds the distribution">
-	
+  
         <ant:echo>
             +------------------------------+
             | CREATING SOURCE DISTRIBUTION |
@@ -231,30 +234,30 @@
         <ant:delete dir="${srcStagingDir}"/>
         <ant:mkdir  dir="${srcStagingDir}"/>
         <ant:copy todir="${srcStagingDir}">
-	        	<ant:fileset dir="${basedir}">
-	        		<ant:include name="**/*.java"/>
-	        		<ant:include name="**/*.xml"/>
-	        		<ant:include name="**/*.jsl"/>
-	        		<ant:include name="**/*.fml"/>
-	        		<ant:include name="**/*.jelly"/>
-	        		<ant:include name="**/*.gif"/>
-	        		<ant:include name="**/*.jpg"/>
-	        		<ant:include name="**/*.properties"/>
-	        		<ant:include name="**/package.html."/>
-	        		<ant:include name="LICENSE.txt"/>
-	        		<ant:exclude name="target/**"/>
-	        		<ant:exclude name="build.properties"/>
-	        	</ant:fileset>
+            <ant:fileset dir="${basedir}">
+              <ant:include name="**/*.java"/>
+              <ant:include name="**/*.xml"/>
+              <ant:include name="**/*.jsl"/>
+              <ant:include name="**/*.fml"/>
+              <ant:include name="**/*.jelly"/>
+              <ant:include name="**/*.gif"/>
+              <ant:include name="**/*.jpg"/>
+              <ant:include name="**/*.properties"/>
+              <ant:include name="**/package.html."/>
+              <ant:include name="LICENSE.txt"/>
+              <ant:exclude name="target/**"/>
+              <ant:exclude name="build.properties"/>
+            </ant:fileset>
          </ant:copy>
          <ant:replace 
-         	file="${srcStagingDir}/project.properties"
-         	token="maven.clover.license.path="
-         	value="#maven.clover.license.path="/>
+          file="${srcStagingDir}/project.properties"
+          token="maven.clover.license.path="
+          value="#maven.clover.license.path="/>
          <j:set var="srcDistFileName" value="${srcStagingDir}.zip"/>
          <ant:delete file="${srcDistFileName}"/>
          <ant:zip destfile="${srcDistFileName}">
-        		<ant:zipfileset dir="${srcStagingDir}" prefix="${pom.name}-src-${pom.currentVersion}"/>
-        	</ant:zip>
+            <ant:zipfileset dir="${srcStagingDir}" prefix="${pom.name}-src-${pom.currentVersion}"/>
+          </ant:zip>
     </goal>
 
 	<!-- copy resource files for the tests -->
@@ -275,7 +278,7 @@
         prereqs="test:compile">
 
         <ant:java fork="true" classname="junit.textui.TestRunner" dir="target/test-classes">
-        	    <ant:jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog"/>
+              <ant:jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog"/>
             <ant:arg value="com.gargoylesoftware.htmlunit.MainTestSuite"/>
             <ant:classpath>
                 <ant:pathelement path="target/test-classes"/>
@@ -310,13 +313,13 @@
     </goal>
     
     <postGoal name="xdoc:register-reports">
-	    	<attainGoal name="maven-linkcheck-plugin:deregister"/>
-	    	<attainGoal name="maven-simian-plugin:register"/>
-	    	<attainGoal name="maven-pmd-plugin:register"/>
-	    	<attainGoal name="maven-clover-plugin:register"/>
+        <attainGoal name="maven-linkcheck-plugin:deregister"/>
+        <attainGoal name="maven-simian-plugin:register"/>
+        <attainGoal name="maven-pmd-plugin:register"/>
+        <attainGoal name="maven-clover-plugin:register"/>
     </postGoal>
     
-    <goal name="createJavaScriptConfigurationPage">
+    <goal name="createJavaScriptConfigurationPage" description="Create the javascript configuration page">
 
         <j:set var="destfile" value="${maven.build.dir}/generated-xdocs/javascriptConfiguration.xml"/>
         <ant:mkdir dir="${maven.build.dir}/generated-xdocs"/>
@@ -335,127 +338,127 @@
     <body>
         <section name="JavaScript Configuration">
             <p>
-            	Different versions of browsers will support different features in JavaScript.
-            	The file JavaScriptConfiguration.xml tells HtmlUnit what behaviours to 
-            	expect from specific BrowserVersion's.  The rest of this document is a 
-            	formatted version of this configuration file.
+              Different versions of browsers will support different features in JavaScript.
+              The file JavaScriptConfiguration.xml tells HtmlUnit what behaviours to 
+              expect from specific BrowserVersion's.  The rest of this document is a 
+              formatted version of this configuration file.
             </p>
         </section>
         <x:parse 
-        	var="doc" 
-        	xml="src/java/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml"/>
+          var="doc" 
+          xml="src/java/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml"/>
 
 
-		<x:set var="javascriptDocLinks" select="$doc/configuration/doclink"/>
-		<x:if select="$javascriptDocLinks">
-			<section name="Documentation links">
-				<ul>
-		    	    <x:forEach select="$javascriptDocLinks" var="javascriptDocLink">
-			    	    <x:set var="linkUrl" select="string(@url)"/>
-			    	    <x:set var="linkDescr" select="string(@descr)"/>
-		    	    	<li>
-							<j:choose>
-								<j:when test="${linkDescr!=''}">
-										<a href="${linkUrl}" target="_blank">${linkDescr}</a>
-								</j:when>
-								<j:otherwise>
-										<a href="${linkUrl}" target="_blank">${linkUrl}</a>
-								</j:otherwise>
-							</j:choose>
-		    	    	</li>
-		        	</x:forEach>
-		    	</ul>
-		    </section>
-		</x:if>
+    <x:set var="javascriptDocLinks" select="$doc/configuration/doclink"/>
+    <x:if select="$javascriptDocLinks">
+      <section name="Documentation links">
+        <ul>
+              <x:forEach select="$javascriptDocLinks" var="javascriptDocLink">
+                <x:set var="linkUrl" select="string(@url)"/>
+                <x:set var="linkDescr" select="string(@descr)"/>
+                <li>
+              <j:choose>
+                <j:when test="${linkDescr!=''}">
+                    <a href="${linkUrl}" target="_blank">${linkDescr}</a>
+                </j:when>
+                <j:otherwise>
+                    <a href="${linkUrl}" target="_blank">${linkUrl}</a>
+                </j:otherwise>
+              </j:choose>
+                </li>
+              </x:forEach>
+          </ul>
+        </section>
+    </x:if>
 
 
         <x:set var="javascriptClasses" select="$doc/configuration/class"/>
         <x:forEach select="$javascriptClasses" var="javascriptClass">
-        	<x:set var="className" select="string(@name)"/>
-			<section name="${className}">
-				<a name="${className}"/>
-    			<ul>
-		    	    <x:forEach select="doclink">
-			    	    <x:set var="linkUrl" select="string(@url)"/>
-			    	    <x:set var="linkDescr" select="string(@descr)"/>
-			    	    <li>
-							<j:choose>
-								<j:when test="${linkDescr!=''}">
-										<a href="${linkUrl}" target="_blank">${linkDescr}</a>
-								</j:when>
-								<j:otherwise>
-										<a href="${linkUrl}" target="_blank">${linkUrl}</a>
-								</j:otherwise>
-							</j:choose>
-						</li>
-		        	</x:forEach>
-	        	</ul>
-			
-	            <table>
-		            <tr>
-		            	<th>Type</th>
-		            	<th>Name</th>
-		            	<th>Readable</th>
-		            	<th>Writeable</th>
-		            	<th>Constraints</th>
-		            	<th>Documentation links</th>
-		            </tr>
-			        <x:forEach select="property|function" var="property">
-			        <tr>
-			        	<td>${property.name}</td>
-			        	<td><x:expr select="@name"/></td>
-			        	<td><x:expr select="@readable"/></td>
-			        	<td><x:expr select="@writable"/></td>
-			        	<td>
-			        		<x:forEach select="javascript">
-			        				Javascript &#160; <x:expr select="@min-version"/><br />
-			        		</x:forEach>
-			        		<x:forEach select="browser">
-			        			<x:expr select="@name"/>&#160;
-			        			<x:set var="minVersion" select="string(@min-version)"/>
-			        			<x:set var="lessThanVersion" select="string(@less-than-version)"/>
-			        			<x:set var="maxVersion" select="string(@max-version)"/>
+          <x:set var="className" select="string(@name)"/>
+      <section name="${className}">
+        <a name="${className}"/>
+          <ul>
+              <x:forEach select="doclink">
+                <x:set var="linkUrl" select="string(@url)"/>
+                <x:set var="linkDescr" select="string(@descr)"/>
+                <li>
+              <j:choose>
+                <j:when test="${linkDescr!=''}">
+                    <a href="${linkUrl}" target="_blank">${linkDescr}</a>
+                </j:when>
+                <j:otherwise>
+                    <a href="${linkUrl}" target="_blank">${linkUrl}</a>
+                </j:otherwise>
+              </j:choose>
+            </li>
+              </x:forEach>
+            </ul>
+      
+              <table>
+                <tr>
+                  <th>Type</th>
+                  <th>Name</th>
+                  <th>Readable</th>
+                  <th>Writeable</th>
+                  <th>Constraints</th>
+                  <th>Documentation links</th>
+                </tr>
+              <x:forEach select="property|function" var="property">
+              <tr>
+                <td>${property.name}</td>
+                <td><x:expr select="@name"/></td>
+                <td><x:expr select="@readable"/></td>
+                <td><x:expr select="@writable"/></td>
+                <td>
+                  <x:forEach select="javascript">
+                      Javascript &#160; <x:expr select="@min-version"/><br />
+                  </x:forEach>
+                  <x:forEach select="browser">
+                    <x:expr select="@name"/>&#160;
+                    <x:set var="minVersion" select="string(@min-version)"/>
+                    <x:set var="lessThanVersion" select="string(@less-than-version)"/>
+                    <x:set var="maxVersion" select="string(@max-version)"/>
 
-								<j:choose>
-									<j:when test="${minVersion!='' and maxVersion!=''}">
-										${minVersion}-${maxVersion}
-									</j:when>
-									<j:when test="${minVersion!='' and lessThanVersion!=''}">
-										${minVersion}-${lessThanVersion} (not including ${lessThanVersion})
-									</j:when>
-									<j:when test="${minVersion!=''}">
-										${minVersion}+
-									</j:when>
-									<j:when test="${maxVersion!=''}">
-										up to ${maxVersion}
-									</j:when>
-									<j:when test="${lessThanVersion!=''}">
-										earlier than ${lessThanVersion}
-									</j:when>
-								</j:choose>
-								<br />
-			        		</x:forEach>
-			        	</td>
-			        	<td>
-			        		<x:if select="doclink">
-					    	    <x:forEach select="doclink">
-						    	    <x:set var="linkUrl" select="string(@url)"/>
-						    	    <x:set var="linkDescr" select="string(@descr)"/>
-									<j:choose>
-										<j:when test="${linkDescr!=''}">
-												<a href="${linkUrl}" target="_blank">${linkDescr}</a>
-										</j:when>
-										<j:otherwise>
-												<a href="${linkUrl}" target="_blank">${linkUrl}</a>
-										</j:otherwise>
-									</j:choose>
-					        	</x:forEach>
-					        	<br />
-							</x:if>
-			        	</td>
-			        </tr>
-			        </x:forEach>
-	            </table>
+                <j:choose>
+                  <j:when test="${minVersion!='' and maxVersion!=''}">
+                    ${minVersion}-${maxVersion}
+                  </j:when>
+                  <j:when test="${minVersion!='' and lessThanVersion!=''}">
+                    ${minVersion}-${lessThanVersion} (not including ${lessThanVersion})
+                  </j:when>
+                  <j:when test="${minVersion!=''}">
+                    ${minVersion}+
+                  </j:when>
+                  <j:when test="${maxVersion!=''}">
+                    up to ${maxVersion}
+                  </j:when>
+                  <j:when test="${lessThanVersion!=''}">
+                    earlier than ${lessThanVersion}
+                  </j:when>
+                </j:choose>
+                <br />
+                  </x:forEach>
+                </td>
+                <td>
+                  <x:if select="doclink">
+                    <x:forEach select="doclink">
+                      <x:set var="linkUrl" select="string(@url)"/>
+                      <x:set var="linkDescr" select="string(@descr)"/>
+                  <j:choose>
+                    <j:when test="${linkDescr!=''}">
+                        <a href="${linkUrl}" target="_blank">${linkDescr}</a>
+                    </j:when>
+                    <j:otherwise>
+                        <a href="${linkUrl}" target="_blank">${linkUrl}</a>
+                    </j:otherwise>
+                  </j:choose>
+                    </x:forEach>
+                    <br />
+              </x:if>
+                </td>
+              </tr>
+              </x:forEach>
+              </table>
             </section>
         </x:forEach>
     </body>

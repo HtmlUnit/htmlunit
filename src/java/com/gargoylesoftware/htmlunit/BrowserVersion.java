@@ -52,6 +52,7 @@ package com.gargoylesoftware.htmlunit;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class BrowserVersion {
     private String applicationCodeName_ = APP_CODE_NAME;
@@ -66,6 +67,8 @@ public class BrowserVersion {
     private String userAgent_;
     private String userLanguage_ = LANGUAGE_ENGLISH_US;
     private String javaScriptVersion_;
+    private float javaScriptVersionNumeric_;
+    private float browserVersionNumeric_;
 
     /** Application code name for both Microsoft Internet Explorer and Netscape series */
     public static final String APP_CODE_NAME = "Mozilla";
@@ -91,28 +94,28 @@ public class BrowserVersion {
      */
     public static final BrowserVersion FULL_FEATURED_BROWSER = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
-        "Mozilla/4.0 (compatible; MSIE 6.0b; Windows 98)", "1.2");
+        "Mozilla/4.0 (compatible; MSIE 6.0b; Windows 98)", "1.2", 6);
 
     /** Mozilla 1.0 */
     public static final BrowserVersion MOZILLA_1_0 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
-        "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.0.0) Gecko/20020530", "1.2");
+        "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.0.0) Gecko/20020530", "1.2", 5);
 
     /** Netscape 4.79 */
     public static final BrowserVersion NETSCAPE_4_7_9 = new BrowserVersion(
         NETSCAPE, "4.79 [en] (Windows NT 5.0; U)",
-        "Mozilla/4.79 [en] (Windows NT 5.0; U)", "1.2");
+        "Mozilla/4.79 [en] (Windows NT 5.0; U)", "1.2", 4.79f);
 
     /** Netscape 6.2.3 */
     public static final BrowserVersion NETSCAPE_6_2_3 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US;rv:0.9.4.1) Gecko/20020508 Netscape6/6.2.3",
-        "1.2" );
+        "1.2", 5);
 
     /** Internet explorer 6.0  */
     public static final BrowserVersion INTERNET_EXPLORER_6_0 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
-        "4.0 (compatible; MSIE 6.0; Windows 98)", "1.2");
+        "4.0 (compatible; MSIE 6.0; Windows 98)", "1.2", 6);
 
     private static BrowserVersion DefaultBrowserVersion_ = FULL_FEATURED_BROWSER;
 
@@ -124,14 +127,16 @@ public class BrowserVersion {
      * @param applicationVersion The version string of the application
      * @param userAgent The user agent string that will be sent to the server
      * @param javaScriptVersion The version of JavaScript
+     * @param browserVersionNumeric The floating number version of the browser
      */
     public BrowserVersion( final String applicationName, final String applicationVersion,
-        final String userAgent, final String javaScriptVersion ) {
+        final String userAgent, final String javaScriptVersion, final float browserVersionNumeric) {
 
         applicationName_ = applicationName;
-        applicationVersion_ = applicationVersion;
+        setApplicationVersion(applicationVersion);
         userAgent_ = userAgent;
-        javaScriptVersion_ = javaScriptVersion;
+        setJavaScriptVersion(javaScriptVersion);
+        browserVersionNumeric_ = browserVersionNumeric;
     }
 
 
@@ -356,6 +361,7 @@ public class BrowserVersion {
      */
     public void setJavaScriptVersion(final String javaScriptVersion) {
         javaScriptVersion_ = javaScriptVersion;
+        javaScriptVersionNumeric_ = Float.parseFloat(javaScriptVersion);
     }
 
     /**
@@ -391,5 +397,23 @@ public class BrowserVersion {
      */
     public void setUserLanguage(final String userLanguage) {
         userLanguage_ = userLanguage;
+    }
+    /**
+     * @param browserVersion The browserVersion to set.
+     */
+    public void setBrowserVersion(float browserVersion) {
+        this.browserVersionNumeric_ = browserVersion;
+    }
+    /**
+     * @return Returns the browserVersionNumeric.
+     */
+    public float getBrowserVersionNumeric() {
+        return browserVersionNumeric_;
+    }
+    /**
+     * @return Returns the javaScriptVersionNumeric.
+     */
+    public float getJavaScriptVersionNumeric() {
+        return javaScriptVersionNumeric_;
     }
 }

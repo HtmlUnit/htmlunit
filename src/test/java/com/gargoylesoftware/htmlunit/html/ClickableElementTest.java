@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version  $Revision$
  * @author  David K. Taylor
+ * @author Chris Erskine
  */
 public class ClickableElementTest extends WebTestCase {
     /**
@@ -88,7 +89,7 @@ public class ClickableElementTest extends WebTestCase {
      */
     private void onClickPageTest(final String htmlContent, final int numClicks, final List expectedAlerts) 
         throws Exception {
-        final BrowserVersion bv = new BrowserVersion("Netscape", "7", "", "1.2");
+        final BrowserVersion bv = new BrowserVersion("Netscape", "7", "", "1.2", 7);
         final WebClient client = new WebClient(bv);
 
         final MockWebConnection webConnection = new MockWebConnection( client );

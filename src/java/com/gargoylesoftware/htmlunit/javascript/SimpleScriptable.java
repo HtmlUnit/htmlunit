@@ -37,14 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import com.gargoylesoftware.htmlunit.Assert;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
@@ -59,6 +51,15 @@ import org.mozilla.javascript.FunctionObject;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
+import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.ScriptException;
+import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
+
 /**
  * A javascript object for a Location
  *
@@ -66,33 +67,34 @@ import org.mozilla.javascript.ScriptableObject;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class SimpleScriptable extends ScriptableObject {
     private static final long serialVersionUID = 3120000176890886780L;
     
-    private static final Map PROPERTY_MAPS = Collections.synchronizedMap( new HashMap(89) );
     private static Map HtmlJavaScriptMap_ = null;
 
     private JavaScriptEngine.PageInfo pageInfo_;
     private DomNode domNode_;
 
-    private class PropertyInfo {
-        private Method getter_;
-        private Method setter_;
-        private FunctionObject function_;
-        /** @return The getter method */
-        public Method getGetter() { return getter_; }
-        /** @return The setter method */
-        public Method getSetter() { return setter_; }
-        /** @return The function object */
-        public FunctionObject getFunction() { return function_; }
-        /** @param getter The new getter method */
-        public void setGetter( final Method getter ) { getter_ = getter; }
-        /** @param setter The new setter method */
-        public void setSetter( final Method setter ) { setter_ = setter; }
-        /** @param function The new function object */
-        public void setFunction( final FunctionObject function ) { function_ = function; }
-    }
+
+//    private class PropertyInfo {
+//        private Method getter_;
+//        private Method setter_;
+//        private FunctionObject function_;
+//        /** @return The getter method */
+//        public Method getGetter() { return getter_; }
+//        /** @return The setter method */
+//        public Method getSetter() { return setter_; }
+//        /** @return The function object */
+//        public FunctionObject getFunction() { return function_; }
+//        /** @param getter The new getter method */
+//        public void setGetter( final Method getter ) { getter_ = getter; }
+//        /** @param setter The new setter method */
+//        public void setSetter( final Method setter ) { setter_ = setter; }
+//        /** @param function The new function object */
+//        public void setFunction( final FunctionObject function ) { function_ = function; }
+//    }
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.
@@ -163,23 +165,23 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
 
-    private Map getPropertyMap() {
-        synchronized( PROPERTY_MAPS ) {
-            final Class clazz = getClass();
-            final String className = clazz.getName();
-            Map localPropertyMap = (Map)PROPERTY_MAPS.get(className);
-            if( localPropertyMap == null && domNode_ != null ) {
-                try {
-                    localPropertyMap = createLocalPropertyMap();
-                }
-                catch( final Exception e ) {
-                    throw new ScriptException(e);
-                }
-                PROPERTY_MAPS.put( className, localPropertyMap );
-            }
-            return localPropertyMap;
-        }
-    }
+//    private Map getPropertyMap() {
+//        synchronized( PROPERTY_MAPS ) {
+//            final Class clazz = getClass();
+//            final String className = clazz.getName();
+//            Map localPropertyMap = (Map)PROPERTY_MAPS.get(className);
+//            if( localPropertyMap == null && domNode_ != null ) {
+//                try {
+//                    localPropertyMap = createLocalPropertyMap();
+//                }
+//                catch( final Exception e ) {
+//                    throw new ScriptException(e);
+//                }
+//                PROPERTY_MAPS.put( className, localPropertyMap );
+//            }
+//            return localPropertyMap;
+//        }
+//    }
 
 
     private JavaScriptConfiguration getJavaScriptConfiguration() {
@@ -189,69 +191,69 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
 
-    private Map createLocalPropertyMap() throws Exception {
-        final Class clazz = getClass();
-        final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
+//    private Map createLocalPropertyMap() throws Exception {
+//        final Class clazz = getClass();
+//        final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
+//
+//        final Map localPropertyMap = new HashMap(89);
+//
+//        final Method[] methods = getClass().getMethods();
+//        for( int i=0; i<methods.length; i++ ) {
+//            final String methodName = methods[i].getName();
+//            if( methodName.startsWith("jsGet_")  && methods[i].getParameterTypes().length == 0 ) {
+//                final String propertyName = methodName.substring(6);
+//                final int state = configuration.getReadablePropertyNameState(clazz, propertyName);
+//                if( state == JavaScriptConfiguration.ENABLED ) {
+//                    getPropertyInfo(localPropertyMap, propertyName).setGetter( methods[i] );
+//                }
+//                else if( state == JavaScriptConfiguration.NOT_FOUND ) {
+//                    throw new IllegalStateException("Getter for ["
+//                            + propertyName + "] not found in configuration for class ["
+//                            + clazz.getName() + "]");
+//                }
+//            }
+//            else if( methodName.startsWith("jsSet_")
+//                && methods[i].getParameterTypes().length == 1 ) {
+//
+//                final String propertyName = methodName.substring(6);
+//                final int state = configuration.getWritablePropertyNameState(clazz, propertyName);
+//                if( state == JavaScriptConfiguration.ENABLED ) {
+//                    getPropertyInfo(localPropertyMap, propertyName).setSetter( methods[i] );
+//                }
+//                else if( state == JavaScriptConfiguration.NOT_FOUND ) {
+//                    throw new IllegalStateException("Setter for [" 
+//                            + propertyName + "] not found in configuration for class ["
+//                            + clazz.getName() + "]");
+//                }
+//            }
+//            else if( methodName.startsWith("jsFunction_") ) {
+//                final String functionName = methodName.substring("jsFunction_".length());
+//                final int state = configuration.getFunctionNameState(clazz, functionName);
+//
+//                if( state == JavaScriptConfiguration.ENABLED ) {
+//                    final FunctionObject functionObject
+//                        = new FunctionObject(functionName, methods[i], this);
+//                    getPropertyInfo(localPropertyMap, functionName).setFunction( functionObject );
+//                }
+//                else if( state == JavaScriptConfiguration.NOT_FOUND ) {
+//                    throw new IllegalStateException("Function ["
+//                            + functionName + "] not found in configuration for class ["
+//                            + clazz.getName() + "]");
+//                }
+//            }
+//        }
+//        return localPropertyMap;
+//    }
 
-        final Map localPropertyMap = new HashMap(89);
 
-        final Method[] methods = getClass().getMethods();
-        for( int i=0; i<methods.length; i++ ) {
-            final String methodName = methods[i].getName();
-            if( methodName.startsWith("jsGet_")  && methods[i].getParameterTypes().length == 0 ) {
-                final String propertyName = methodName.substring(6);
-                final int state = configuration.getReadablePropertyNameState(clazz, propertyName);
-                if( state == JavaScriptConfiguration.ENABLED ) {
-                    getPropertyInfo(localPropertyMap, propertyName).setGetter( methods[i] );
-                }
-                else if( state == JavaScriptConfiguration.NOT_FOUND ) {
-                    throw new IllegalStateException("Getter for ["
-                            + propertyName + "] not found in configuration for class ["
-                            + clazz.getName() + "]");
-                }
-            }
-            else if( methodName.startsWith("jsSet_")
-                && methods[i].getParameterTypes().length == 1 ) {
-
-                final String propertyName = methodName.substring(6);
-                final int state = configuration.getWritablePropertyNameState(clazz, propertyName);
-                if( state == JavaScriptConfiguration.ENABLED ) {
-                    getPropertyInfo(localPropertyMap, propertyName).setSetter( methods[i] );
-                }
-                else if( state == JavaScriptConfiguration.NOT_FOUND ) {
-                    throw new IllegalStateException("Setter for [" 
-                            + propertyName + "] not found in configuration for class ["
-                            + clazz.getName() + "]");
-                }
-            }
-            else if( methodName.startsWith("jsFunction_") ) {
-                final String functionName = methodName.substring("jsFunction_".length());
-                final int state = configuration.getFunctionNameState(clazz, functionName);
-
-                if( state == JavaScriptConfiguration.ENABLED ) {
-                    final FunctionObject functionObject
-                        = new FunctionObject(functionName, methods[i], this);
-                    getPropertyInfo(localPropertyMap, functionName).setFunction( functionObject );
-                }
-                else if( state == JavaScriptConfiguration.NOT_FOUND ) {
-                    throw new IllegalStateException("Function ["
-                            + functionName + "] not found in configuration for class ["
-                            + clazz.getName() + "]");
-                }
-            }
-        }
-        return localPropertyMap;
-    }
-
-
-    private PropertyInfo getPropertyInfo( final Map localPropertyMap, final String name ) {
-        PropertyInfo info = (PropertyInfo)localPropertyMap.get(name);
-        if( info == null ) {
-            info = new PropertyInfo();
-            localPropertyMap.put(name, info);
-        }
-        return info;
-    }
+//    private PropertyInfo getPropertyInfo( final Map localPropertyMap, final String name ) {
+//        PropertyInfo info = (PropertyInfo)localPropertyMap.get(name);
+//        if( info == null ) {
+//            info = new PropertyInfo();
+//            localPropertyMap.put(name, info);
+//        }
+//        return info;
+//    }
 
 
     /**
@@ -277,7 +279,6 @@ public class SimpleScriptable extends ScriptableObject {
         Assert.notNull("pageInfo", pageInfo);
         pageInfo_ = pageInfo;
     }
-
 
     /**
      * Create a new javascript object
@@ -390,7 +391,8 @@ public class SimpleScriptable extends ScriptableObject {
 
 
     /**
-     * Return the specified property or NOT_FOUND if it could not be found.
+     * Return the specified property or NOT_FOUND if it could not be found.  This could also be 
+     * a call to a function so check it out as a function also.
      * @param name The name of the property
      * @param start The scriptable object that was originally queried for this property
      * @return The property.
@@ -410,49 +412,80 @@ public class SimpleScriptable extends ScriptableObject {
 
         final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
         final Class clazz = getClass();
-
-        final PropertyInfo info = (PropertyInfo)getPropertyMap().get(name);
-        final int propertyNameState = configuration.getReadablePropertyNameState(clazz, name);
-        final int functionNameState = configuration.getFunctionNameState(clazz, name);
-        if( propertyNameState == JavaScriptConfiguration.ENABLED
-                && functionNameState == JavaScriptConfiguration.ENABLED ) {
-            throw new IllegalStateException("Name is both a property and a function: name=["
-                +name+"] class=["+clazz.getName()+"]");
-        }
-
         final Object result;
-        if( propertyNameState == JavaScriptConfiguration.ENABLED ) {
-            if( info == null || info.getGetter() == null ) {
-                getLog().debug("Getter not implemented for property ["+name+"]");
-                result = NOT_FOUND;
-            }
-            else {
-                try {
-                    result = info.getGetter().invoke( this, new Object[0] );
-                }
-                catch( final Exception e ) {
-                    throw new ScriptException(e);
-                }
-            }
+
+        final Method propertyMethod = configuration.getPropertyReadMethod(clazz, name);
+        final Method functionMethod = configuration.getFunctionMethod(clazz, name);
+        if (propertyMethod != null && functionMethod != null) {
+            throw new IllegalStateException("Name is both a property and a function: name=["
+                + name + "] class=[" + clazz.getName() + "]");
         }
-        else if( functionNameState == JavaScriptConfiguration.ENABLED ) {
-            if( info == null || info.getFunction() == null ) {
-                getLog().debug("Function not implemented ["+name+"]");
-                result = NOT_FOUND;
+        if (propertyMethod == null) {
+            if (functionMethod == null) {
+                result = super.get(name, start);
             }
             else {
-                result = info.getFunction();
+                result = new FunctionObject(name, functionMethod, this);
             }
         }
         else {
-            result = super.get(name, start);
+            try {
+                result = propertyMethod.invoke(this, new Object[0]);
+            }
+            catch (final Exception e) {
+                throw new ScriptException(e);
+            }
         }
-
+        
         // this may help to find which properties htmlunit should impement
         if (result == NOT_FOUND) {
             getLog().debug("Property \"" + name + "\" of " + start + " not defined as fixed property");
         }
+
         return result;
+
+//        final PropertyInfo info = (PropertyInfo)getPropertyMap().get(name);
+//        final int propertyNameState = configuration.getReadablePropertyNameState(clazz, name);
+//        final int functionNameState = configuration.getFunctionNameState(clazz, name);
+//        if( propertyNameState == JavaScriptConfiguration.ENABLED
+//                && functionNameState == JavaScriptConfiguration.ENABLED ) {
+//            throw new IllegalStateException("Name is both a property and a function: name=["
+//                +name+"] class=["+clazz.getName()+"]");
+//        }
+//
+//        final Object result;
+//        if( propertyNameState == JavaScriptConfiguration.ENABLED ) {
+//            if( info == null || info.getGetter() == null ) {
+//                getLog().debug("Getter not implemented for property ["+name+"]");
+//                result = NOT_FOUND;
+//            }
+//            else {
+//                try {
+//                    result = info.getGetter().invoke( this, new Object[0] );
+//                }
+//                catch( final Exception e ) {
+//                    throw new ScriptException(e);
+//                }
+//            }
+//        }
+//        else if( functionNameState == JavaScriptConfiguration.ENABLED ) {
+//            if( info == null || info.getFunction() == null ) {
+//                getLog().debug("Function not implemented ["+name+"]");
+//                result = NOT_FOUND;
+//            }
+//            else {
+//                result = info.getFunction();
+//            }
+//        }
+//        else {
+//            result = super.get(name, start);
+//        }
+//
+//        // this may help to find which properties htmlunit should impement
+//        if (result == NOT_FOUND) {
+//            getLog().debug("Property \"" + name + "\" of " + start + " not defined as fixed property");
+//        }
+//        return result;
     }
 
 
@@ -473,50 +506,88 @@ public class SimpleScriptable extends ScriptableObject {
         }
 
         final JavaScriptConfiguration configuration = simpleScriptable.getJavaScriptConfiguration();
-        final int propertyNameState = configuration.getWritablePropertyNameState(getClass(), name);
+        final Method setterMethod = configuration.getPropertyWriteMethod(getClass(), name);
 
-        if (propertyNameState == JavaScriptConfiguration.DISABLED) {
-            throw Context.reportRuntimeError("Property \"" + name + "\" is not writable for " + start + ". "
-                    + "Cant set it to: " + newValue);
-        }
-        else if( propertyNameState == JavaScriptConfiguration.ENABLED ) {
-            final PropertyInfo info = (PropertyInfo) simpleScriptable.getPropertyMap().get(name);
-            if( info == null || info.getSetter() == null ) {
-                throw Context.reportRuntimeError("Setter configured but not implemented for property \"" 
-                    + name + "\" for " + start + ". "
+        if (setterMethod == null) {
+            if (configuration.propertyExists(getClass(), name)) {
+                throw Context.reportRuntimeError("Property \"" + name + "\" is not writable for " + start + ". "
                     + "Cant set it to: " + newValue);
             }
             else {
-                final Class parameterClass = info.getSetter().getParameterTypes()[0];
-                if( parameterClass == String.class) {
-                    newValue = Context.toString(newValue);
-                }
-                else if (Integer.TYPE.equals(parameterClass)) {
-                    newValue = new Integer((new Double(Context.toNumber(newValue))).intValue());
-                }
-                else if (Boolean.TYPE.equals(parameterClass)) {
-                    newValue = Boolean.valueOf(Context.toBoolean(newValue));
-                }
-                try {
-                    info.getSetter().invoke(
-                        simpleScriptable.findMatchingScriptable(start, info.getSetter()), 
-                        new Object[]{ newValue } );
-                }
-                catch( final InvocationTargetException e ) {
-                    throw new ScriptException(e.getTargetException());
-                }
-                catch( final Exception e ) {
-                    throw new ScriptException(e);
-                }
+                getLog().debug("No configured setter \"" + name + "\" found for " 
+                    + start + ". Setting it as pure javascript property.");
+               
+                super.put(name, start, newValue);
             }
         }
         else {
-            getLog().debug("No configured setter \"" + name + "\" found for " 
-                + start + ". Setting it as pure javascript property.");
-             
-            super.put(name, start, newValue);
+            final Class parameterClass = setterMethod.getParameterTypes()[0];
+            if( parameterClass == String.class) {
+                newValue = Context.toString(newValue);
+            }
+            else if (Integer.TYPE.equals(parameterClass)) {
+                newValue = new Integer((new Double(Context.toNumber(newValue))).intValue());
+            }
+            else if (Boolean.TYPE.equals(parameterClass)) {
+                newValue = Boolean.valueOf(Context.toBoolean(newValue));
+            }
+            try {
+                setterMethod.invoke(
+                    simpleScriptable.findMatchingScriptable(start, setterMethod), 
+                    new Object[]{ newValue } );
+            }
+            catch( final InvocationTargetException e ) {
+                throw new ScriptException(e.getTargetException());
+            }
+            catch( final Exception e ) {
+                throw new ScriptException(e);
+            }
+
         }
     }
+//        final int propertyNameState = configuration.getWritablePropertyNameState(getClass(), name);
+//
+//        if (propertyNameState == JavaScriptConfiguration.DISABLED) {
+//            throw Context.reportRuntimeError("Property \"" + name + "\" is not writable for " + start + ". "
+//                    + "Cant set it to: " + newValue);
+//        }
+//        else if( propertyNameState == JavaScriptConfiguration.ENABLED ) {
+//            final PropertyInfo info = (PropertyInfo) simpleScriptable.getPropertyMap().get(name);
+//            if( info == null || info.getSetter() == null ) {
+//                throw Context.reportRuntimeError("Setter configured but not implemented for property \"" 
+//                    + name + "\" for " + start + ". "
+//                    + "Cant set it to: " + newValue);
+//            }
+//            else {
+//                final Class parameterClass = info.getSetter().getParameterTypes()[0];
+//                if( parameterClass == String.class) {
+//                    newValue = Context.toString(newValue);
+//                }
+//                else if (Integer.TYPE.equals(parameterClass)) {
+//                    newValue = new Integer((new Double(Context.toNumber(newValue))).intValue());
+//                }
+//                else if (Boolean.TYPE.equals(parameterClass)) {
+//                    newValue = Boolean.valueOf(Context.toBoolean(newValue));
+//                }
+//                try {
+//                    info.getSetter().invoke(
+//                        simpleScriptable.findMatchingScriptable(start, info.getSetter()), 
+//                        new Object[]{ newValue } );
+//                }
+//                catch( final InvocationTargetException e ) {
+//                    throw new ScriptException(e.getTargetException());
+//                }
+//                catch( final Exception e ) {
+//                    throw new ScriptException(e);
+//                }
+//            }
+//        }
+//        else {
+//            getLog().debug("No configured setter \"" + name + "\" found for " 
+//                + start + ". Setting it as pure javascript property.");
+//             
+//            super.put(name, start, newValue);
+//        }
 
 
     /**
