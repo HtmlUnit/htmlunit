@@ -355,5 +355,13 @@ public final class Window extends SimpleScriptable {
     public void jsFunction_blur() {
         getLog().debug( "Window.blur() not implemented" );
     }
+
+
+    /**
+     * Close this window
+     */
+    public void jsFunction_close() {
+        getLog().debug( "Window.close() not implemented" );
+    }
 }
 

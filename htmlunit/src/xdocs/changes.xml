@@ -9,6 +9,9 @@
 		<change type="fix">
 			Fixed bug where accessing radio buttons by name wasn't working correctly
 		</change>
+		<change type="fix">
+			Stubbed out Window.close()
+		</change>
 	</change-log>
 </section>
 

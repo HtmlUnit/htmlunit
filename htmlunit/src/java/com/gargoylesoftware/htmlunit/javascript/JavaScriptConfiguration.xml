@@ -260,7 +260,7 @@
 			<javascript min-version="1" max-version="2"/>
 		</property>
 
-		<function name="foo">
+		<function name="close">
 		</function>
 	</class>
 </configuration>
