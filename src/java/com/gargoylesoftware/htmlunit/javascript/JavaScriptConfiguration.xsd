@@ -13,17 +13,19 @@
 
 	<xsd:complexType name="classType">
 		<xsd:sequence>
+			<xsd:element name="javascript" type="requiredJavascriptType" minOccurs="0" maxOccurs="1"/>
 			<xsd:element name="property" type="propertyType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="function" type="functionType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="name" type="xsd:string"/>
+		<xsd:attribute name="extends" type="xsd:string"/>
 	</xsd:complexType>
 
 
 	<xsd:complexType name="propertyType">
 		<xsd:sequence>
-			<xsd:element name="required-browser" type="requiredBrowserType" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="required-javascript" type="requiredJavascriptType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="browser" type="requiredBrowserType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="javascript" type="requiredJavascriptType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="name" type="xsd:string"/>
 		<xsd:attribute name="readable" type="xsd:string"/>
@@ -33,8 +35,8 @@
 
 	<xsd:complexType name="functionType">
 		<xsd:sequence>
-			<xsd:element name="required-browser" type="requiredBrowserType" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="required-javascript" type="requiredJavascriptType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="browser" type="requiredBrowserType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="javascript" type="requiredJavascriptType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="name" type="xsd:string"/>
 	</xsd:complexType>
@@ -44,6 +46,7 @@
 		<xsd:attribute name="name" type="xsd:string"/>
 		<xsd:attribute name="min-version" type="xsd:float"/>
 		<xsd:attribute name="max-version" type="xsd:float"/>
+		<xsd:attribute name="less-than-version" type="xsd:float"/>
 	</xsd:complexType>
 
 
