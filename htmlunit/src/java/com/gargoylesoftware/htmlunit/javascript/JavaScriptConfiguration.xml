@@ -365,6 +365,13 @@
 
     <class name="Radio" extends="Input"/><!-- NOT FINISHED -->
 
+    <class name="RowContainer" extends="HTMLElement">
+        <property name="rows" readable="true" writable="false"/>
+        <function name="deleteRow"/>
+        <function name="insertRow"/>
+        <function name="moveRow"/>
+    </class>
+
     <class name="Reset" extends="Input"/><!-- NOT FINISHED -->
 
     <class name="Screen">
@@ -397,9 +404,24 @@
         <property name="length" readable="true" writable="false"/>
     </class>
 
-    <class name="Table" extends="HTMLElement">
-        <property name="rows" readable="true" writable="false"/>
+    <class name="Table" extends="RowContainer">
+        <property name="caption" readable="true" writable="false"/>
+        <property name="tFoot" readable="true" writable="false"/>
+        <property name="tHead" readable="true" writable="false"/>
+        <property name="tBodies" readable="true" writable="false"/>
+        <function name="createCaption"/>
+        <function name="createTFoot"/>
+        <function name="createTHead"/>
+        <function name="deleteCaption"/>
+        <function name="deleteTFoot"/>
+        <function name="deleteTHead"/>
     </class>
+
+    <class name="TableBody" extends="RowContainer"/>
+
+    <class name="TableFooter" extends="RowContainer"/>
+
+    <class name="TableHeader" extends="RowContainer"/>
 
     <class name="Text" extends="Input"/><!-- NOT FINISHED -->
 

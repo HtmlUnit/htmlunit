@@ -37,25 +37,26 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.mozilla.javascript.NativeArray;
+import org.jaxen.JaxenException;
+import org.mozilla.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.html.HtmlTable;
-
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
+import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 
 /**
- * A javascript object representing a Table.
- *
+ * A JavaScript object representing a Table.
+ * 
  * @author David D. Kilzer
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Daniel Gredler
  * @version $Revision$
  */
-public class Table extends HTMLElement {
-    private static final long serialVersionUID = 2779888994049521608L;
+public class Table extends RowContainer {
 
+    private static final long serialVersionUID = 2779888994049521608L;
+    private ElementArray tBodies_; // has to be a member to have equality (==) working
 
     /**
      * Create an instance.
@@ -63,27 +64,142 @@ public class Table extends HTMLElement {
     public Table() {
     }
 
-
     /**
-     * Javascript constructor.  This must be declared in every javascript file because the rhino engine won't walk up
-     * the hierarchy looking for constructors.
+     * Javascript constructor. This must be declared in every JavaScript file because
+     * the Rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
     }
 
+    /**
+     * Returns the table's caption element, or <tt>null</tt> if none exists. If more than one
+     * caption is declared in the table, this method returns the first one.
+     * @return the table's caption element.
+     */
+    public Object jsGet_caption() {
+        final List captions = getHtmlElementOrDie().getHtmlElementsByTagName("caption");
+        if(captions.isEmpty()) {
+            return null;
+        }
+        else {
+            return getScriptableFor(captions.get(0));
+        }
+    }
 
     /**
-     * Return the rows in the table.
-     *
-     * @return The rows in the table.
+     * Returns the table's tfoot element, or <tt>null</tt> if none exists. If more than one
+     * tfoot is declared in the table, this method returns the first one.
+     * @return the table's tfoot element.
      */
-    public NativeArray jsGet_rows() {
-
-        final List htmlRows = ((HtmlTable) getHtmlElementOrDie()).getRows();
-        final List jsRows = new ArrayList();
-
-        CollectionUtils.collect(htmlRows, getTransformerScriptableFor(), jsRows);
-
-        return new NativeArray(jsRows.toArray());
+    public Object jsGet_tFoot() {
+        final List tfoots = getHtmlElementOrDie().getHtmlElementsByTagName("tfoot");
+        if(tfoots.isEmpty()) {
+            return null;
+        }
+        else {
+            return getScriptableFor(tfoots.get(0));
+        }
     }
+
+    /**
+     * Returns the table's thead element, or <tt>null</tt> if none exists. If more than one
+     * thead is declared in the table, this method returns the first one.
+     * @return the table's thead element.
+     */
+    public Object jsGet_tHead() {
+        final List theads = getHtmlElementOrDie().getHtmlElementsByTagName("thead");
+        if(theads.isEmpty()) {
+            return null;
+        }
+        else {
+            return getScriptableFor(theads.get(0));
+        }
+    }
+
+    /**
+     * Returns the tbody's in the table.
+     * @return The tbody's in the table.
+     */
+    public Object jsGet_tBodies() {
+        if (tBodies_ == null) {
+            tBodies_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            try {
+                tBodies_.init(getDomNodeOrDie(), new HtmlUnitXPath("//tbody"));
+            }
+            catch (final JaxenException e) {
+                throw Context.reportRuntimeError("Failed to initialize collection table.tBodies: " + e.getMessage());
+            }
+        }
+        return tBodies_;
+    }
+
+    /**
+     * If this table does not have a caption, this method creates an empty table caption,
+     * adds it to the table and then returns it. If one or more captions already exist,
+     * this method returns the first existing caption.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createcaption.asp">
+     * MSDN Documentation</a>
+     * @return a newly added caption if no caption exists, or the first existing caption.
+     */
+    public Object jsFunction_createCaption() {
+        return getScriptableFor( getHtmlElementOrDie().appendChildIfNoneExists("caption") );
+    }
+
+    /**
+     * If this table does not have a tfoot element, this method creates an empty tfoot
+     * element, adds it to the table and then returns it. If this table already has a
+     * tfoot element, this method returns the existing tfoot element.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createtfoot.asp">
+     * MSDN Documentation</a>
+     * @return a newly added caption if no caption exists, or the first existing caption.
+     */
+    public Object jsFunction_createTFoot() {
+        return getScriptableFor( getHtmlElementOrDie().appendChildIfNoneExists("tfoot") );
+    }
+
+    /**
+     * If this table does not have a thead element, this method creates an empty
+     * thead element, adds it to the table and then returns it. If this table
+     * already has a thead element, this method returns the existing thead element.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createthead.asp">
+     * MSDN Documentation</a>
+     * @return a newly added caption if no caption exists, or the first existing caption.
+     */
+    public Object jsFunction_createTHead() {
+        return getScriptableFor( getHtmlElementOrDie().appendChildIfNoneExists("thead") );
+    }
+
+    /**
+     * Deletes this table's caption. If the table has multiple captions, this method
+     * deletes only the first caption. If this table does not have any captions, this
+     * method does nothing.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp">
+     * MSDN Documentation</a>
+     */
+    public void jsFunction_deleteCaption() {
+        getHtmlElementOrDie().removeChild("caption", 0);
+    }
+
+    /**
+     * Deletes this table's tfoot element. If the table has multiple tfoot elements, this
+     * method deletes only the first tfoot element. If this table does not have any tfoot
+     * elements, this method does nothing.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp">
+     * MSDN Documentation</a>
+     */
+    public void jsFunction_deleteTFoot() {
+        getHtmlElementOrDie().removeChild("tfoot", 0);
+    }
+
+    /**
+     * Deletes this table's thead element. If the table has multiple thead elements, this
+     * method deletes only the first thead element. If this table does not have any thead
+     * elements, this method does nothing.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp">
+     * MSDN Documentation</a>
+     */
+    public void jsFunction_deleteTHead() {
+        getHtmlElementOrDie().removeChild("thead", 0);
+    }
+
 }

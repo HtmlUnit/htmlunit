@@ -555,6 +555,43 @@ public abstract class HtmlElement extends DomNode {
     }
 
     /**
+     * Appends a child element to this HTML element with the specified tag name
+     * if this HTML element does not already have a child with that tag name.
+     * Returns the appended child element, or the first existent child element
+     * with the specified tag name if none was appended.
+     * @param tagName the tag name of the child to append
+     * @return the added child, or the first existing child if none was added
+     */
+    public final HtmlElement appendChildIfNoneExists(final String tagName) {
+        final HtmlElement child;
+        final List children = getHtmlElementsByTagName(tagName);
+        if(children.isEmpty()) {
+            // Add a new child and return it.
+            child = getPage().createElement(tagName);
+            appendChild(child);
+        }
+        else {
+            // Return the first existing child.
+            child = (HtmlElement) children.get(0);
+        }
+        return child;
+    }
+
+    /**
+     * Removes the <tt>i</tt>th child element with the specified tag name
+     * from all relationships, if possible.
+     * @param tagName the tag name of the child to remove
+     * @param i the index of the child to remove
+     */
+    public final void removeChild(final String tagName, final int i) {
+        final List children = getHtmlElementsByTagName(tagName);
+        if(i >= 0 && i < children.size()) {
+            final HtmlElement child = (HtmlElement) children.get(i);
+            child.remove();
+        }
+    }
+
+    /**
      *  Create a URL object from the specified href
      *
      * @param  href The href
