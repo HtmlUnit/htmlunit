@@ -231,6 +231,43 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "second", secondPage.getTitleText() );
      }
 
+
+    /**
+     * Test that forms is a live collection
+     * @throws Exception if the test fails
+     */
+    public void testFormsLive() throws Exception {
+        final String content =
+            "<html>"
+            + "<head>"
+            + "<script>"
+            + "var oCol = document.forms;"
+            + "alert(oCol.length);"
+            + "function test()"
+            + "{"
+            + "    alert(oCol.length);"
+            + "    alert(document.forms.length);"
+            + "    alert(document.forms == oCol);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + "<form id='myForm' action='foo.html'>"
+            + "</form>"
+            + "</body>"
+            + "</html>";
+        
+        
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList( new String[]{
+                "0", "1", "1", "true"
+            } );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
     /**
      * Regression test for RFE 741930
      * @throws Exception if the test fails

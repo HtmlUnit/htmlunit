@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1088353">
+                document.forms is now a "live" collection and forms can be accessed with document.forms["myFormId"] where "myFormId" is the id of a form.
+            </action>
             <action type="update" dev="mguillem">
                 Collections like document.all or form.elements now use xpath expressions and are "live" (thanks to Daniel Gredler for the idea).
             </action>
