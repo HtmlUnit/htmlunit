@@ -7,6 +7,9 @@
 
     <body>
         <release version="Next" date="not released yet">
+            <action type="update" dev="mbowler">
+                Continued migration of the build process from ant to maven.
+            </action>
             <action type="update" dev="mbowler" id="713646">
                 Patch for bug in onload handler submitted by Andreas Hangler
             </action>

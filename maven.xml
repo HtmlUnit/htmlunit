@@ -178,4 +178,32 @@
             basedir="${maven.dist.bin.assembly.dir}/${maven.final.name}"/>
     </goal>
 
+	<!-- Run all the tests as quickly as possible.  This only outputs results
+	     to the console so if you are trying to generate reports, you will 
+	     need to call the slower "test" goal -->
+	<goal 
+		name="htmlunit:test" 
+		description="Run all the tests and output results to the console."
+		prereqs="test:compile">
+		
+	    <ant:java fork="true" classname="junit.textui.TestRunner" dir="target/test-classes">
+	        <arg value="com.gargoylesoftware.htmlunit.MainTestSuite"/>
+            <ant:classpath>
+            	<ant:path refid="maven.dependency.classpath"/>
+	            <ant:pathelement path="${maven.build.dest}"/>
+	            <ant:pathelement path="target/test-classes"/>
+    	    </ant:classpath>
+	    </ant:java>
+	</goal>
+	
+	<goal name="htmlunit:sanity-check" description="Run tests against a bunch of live servers">
+	    <ant:java fork="yes" classname="com.gargoylesoftware.htmlunit.SanityCheck" dir="src/java">
+            <ant:classpath>
+            	<ant:path refid="maven.dependency.classpath"/>
+	            <ant:pathelement path="${maven.build.dest}"/>
+	            <ant:pathelement path="target/test-classes"/>
+    	    </ant:classpath>
+	    </ant:java>
+	</goal>
+	
 </project>
