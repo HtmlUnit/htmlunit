@@ -265,7 +265,8 @@ public class ElementArray extends SimpleScriptable implements Function {
         }
         final List subElements = array.getElements();
         if (subElements.size() > 1) {
-            getLog().debug("Property \"" + name + "\" evaluated (by name) to " + array);
+            getLog().debug("Property \"" + name + "\" evaluated (by name) to " + array + " with " 
+                    + subElements.size() + " elements");
             return array;
         }
         else if (subElements.size() == 1) {
