@@ -55,7 +55,17 @@ public class HtmlInput
          extends HtmlElement
          implements SubmittableElement {
 
-    private final String originalValue_;
+	  //For Checkbox, radio
+	  private final boolean initialCheckedState_;
+
+	  //for Hidden, password
+	  private final String initialValue_;
+
+	  //For Image
+	  private boolean wasPositionSpecified_ = false;
+	  private boolean processingClick_ = false;
+	  private int xPosition_;
+	  private int yPosition_;
 
     /**
      *  Create an instance
@@ -65,7 +75,7 @@ public class HtmlInput
      */
     HtmlInput( final HtmlPage page, final Element element ) {
         super( page, element );
-        originalValue_ = element.getAttribute("value");
+
         //From the checkbox creator
         initialCheckedState_ = isAttributeDefined("checked");
         initialValue_ = getValueAttribute();
@@ -669,16 +679,7 @@ public class HtmlInput
         return getAttributeValue("align");
     }
     
-    //For Checkbox, radio
-    private final boolean initialCheckedState_;
-    //for Hidden, password
-    private final String initialValue_;
-    //For Image
-    private boolean wasPositionSpecified_ = false;
-    private boolean processingClick_ = false;
-    private int xPosition_;
-    private int yPosition_;
-    
+   
     /**
      * Reset this element to its original values.
      */
