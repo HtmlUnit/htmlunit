@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" due-to="sdanig" id="1082259">
+                Fixed problem with pages where body's onload contains a return statement.
+            </action>
             <action type="update" dev="mguillem">
                 Fixed bug in JS accessing form elements through syntax like myForm[i] and don't count inputs with type=image in form.length as browsers do.
             </action>
