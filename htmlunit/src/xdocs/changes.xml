@@ -136,6 +136,12 @@
             <action type="new" dev="mbowler" id="675597">
             	Added support for the javascript method Window.setTimeout()
             </action>
+            <action type="update" dev="mbowler">
+            	Upgraded the rhino engine to 1.5R4.1
+            </action>
+            <action type="update" dev="mbowler">
+            	Upgraded the xerces to 2.4
+            </action>
         </release>
 	</body>
 

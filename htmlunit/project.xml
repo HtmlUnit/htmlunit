@@ -206,10 +206,10 @@
             </properties>
         </dependency>
         <dependency>
-            <id>rhino</id>
-            <version>1.5R4-RC3</version>
+            <groupId>rhino</groupId>
+            <artifactId>js</artifactId>
+            <version>1.5R4.1</version>
             <url>http://www.mozilla.org/rhino</url>
-            <jar>js-1.5R4-RC3.jar</jar>
             <properties>
                 <htmlunit.group>optional</htmlunit.group>
                 <htmlunit.description>Needed for javascript support</htmlunit.description>
@@ -237,7 +237,7 @@
         </dependency>
         <dependency>
             <id>nekohtml</id>
-            <version>0.7.6</version>
+            <version>0.7.7</version>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>Converts html into an XML DOM model</htmlunit.description>
