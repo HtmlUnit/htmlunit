@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public class HtmlAreaTest extends WebTestCase {
 
@@ -149,6 +150,6 @@ public class HtmlAreaTest extends WebTestCase {
 
         final HtmlPage thirdPage = ( HtmlPage )area.click();
         assertEquals( Collections.singletonList("foo"), collectedAlerts);
-        assertEquals("first", thirdPage.getTitleText());
+        assertEquals("second", thirdPage.getTitleText());
     }
 }

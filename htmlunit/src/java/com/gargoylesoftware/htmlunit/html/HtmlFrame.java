@@ -52,9 +52,10 @@ import org.w3c.dom.Element;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  David K. Taylor
  */
 public class HtmlFrame
-    extends HtmlElement
+    extends StyledElement
     implements WebWindow {
 
     private Page enclosedPage_;
@@ -83,58 +84,6 @@ public class HtmlFrame
         catch( final IOException e ) {
             getLog().error("Error when loading from url ["+source+"]", e);
         }
-    }
-
-
-    /**
-     * Return the value of the attribute "id".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "id"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getIdAttribute() {
-        return getAttributeValue("id");
-    }
-
-
-    /**
-     * Return the value of the attribute "class".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "class"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getClassAttribute() {
-        return getAttributeValue("class");
-    }
-
-
-    /**
-     * Return the value of the attribute "style".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "style"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getStyleAttribute() {
-        return getAttributeValue("style");
-    }
-
-
-    /**
-     * Return the value of the attribute "title".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "title"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getTitleAttribute() {
-        return getAttributeValue("title");
     }
 
 

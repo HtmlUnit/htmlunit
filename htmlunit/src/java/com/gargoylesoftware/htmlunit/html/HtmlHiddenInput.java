@@ -44,8 +44,13 @@ import org.w3c.dom.Element;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public class HtmlHiddenInput extends HtmlInput {
+
+    //for Hidden, password
+    private final String initialValue_;
+
     /**
      *  Create an instance
      *
@@ -54,7 +59,16 @@ public class HtmlHiddenInput extends HtmlInput {
      */
     HtmlHiddenInput( final HtmlPage page, final Element element ) {
         super( page, element );
+
+        initialValue_ = getValueAttribute();
     }
 
+
+    /**
+     * Reset this element to its original values.
+     */
+    public void reset() {
+        setValueAttribute(initialValue_);
+    }
 }
 

@@ -37,7 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.Node;
+import org.w3c.dom.Element;
 
 /**
  *  An element that is returned for an html tag that is not supported by this
@@ -47,15 +47,15 @@ import org.w3c.dom.Node;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  */
-public class UnknownHtmlElement extends HtmlElement {
+public class UnknownHtmlElement extends ClickableElement {
     /**
      *  Create an instance
      *
      * @param  page The page that contains this element
      * @param  element The xml element that represents this html element
      */
-    UnknownHtmlElement( final HtmlPage page, final Node node ) {
-        super( page, node );
+    UnknownHtmlElement( final HtmlPage page, final Element element ) {
+        super( page, element );
     }
 
 

@@ -50,22 +50,11 @@ import java.io.IOException;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public class HtmlInput
-         extends HtmlElement
+         extends ClickableElement
          implements SubmittableElement {
-
-    //For Checkbox, radio
-    private final boolean initialCheckedState_;
-
-    //for Hidden, password
-    private final String initialValue_;
-
-    //For Image
-    private boolean wasPositionSpecified_ = false;
-    private boolean processingClick_ = false;
-    private int xPosition_;
-    private int yPosition_;
 
     /**
      *  Create an instance
@@ -75,10 +64,6 @@ public class HtmlInput
      */
     HtmlInput( final HtmlPage page, final Element element ) {
         super( page, element );
-
-        //From the checkbox creator
-        initialCheckedState_ = isAttributeDefined("checked");
-        initialValue_ = getValueAttribute();
     }
 
 
@@ -108,78 +93,7 @@ public class HtmlInput
      * @return  See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
-        if (getTypeAttribute().equals("image")) {
-            final String name = getNameAttribute();
-            if( wasPositionSpecified_ == true ) {
-                return new KeyValuePair[]{
-                    new KeyValuePair( name+".x", String.valueOf(xPosition_) ),
-                    new KeyValuePair( name+".y", String.valueOf(yPosition_) )
-                };
-            }
-        }
         return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getValueAttribute() )};
-    }
-
-
-    /**
-     * Submit the form that contains this input.  Only a couple of the inputs
-     * support this method so it is made protected here.  Those subclasses
-     * that wish to expose it will override and make it public.
-     *
-     * @return  The Page that is the result of submitting this page to the
-     *      server
-     * @exception  IOException If an io error occurs
-     */
-    public Page click() throws IOException {
-
-        String type = this.getTypeAttribute();
-        if (type.equals("file") || type.equals("hidden") || type.equals("password") || type.equals("text")) {
-            return getPage();
-        }
-        if (type.equals("image")){
-            if (! processingClick_ ) {
-                wasPositionSpecified_ = false;
-            }
-        }
-
-        if( isDisabled() == true ) {
-            return getPage();
-        }
-
-        final String onClick = getOnClickAttribute();
-        final HtmlPage page = getPage();
-        if( onClick.length() == 0 || page.getWebClient().isJavaScriptEnabled() == false ) {
-            return doClickAction();
-        }
-        else {
-            final ScriptResult scriptResult = page.executeJavaScriptIfPossible(
-                onClick, "onClick handler for "+getClass().getName(), true, this);
-            scriptResult.getJavaScriptResult();
-            return doClickAction();
-        }
-    }
-
-    /**
-     * This method will be called if there either wasn't an onclick handler or there was
-     * but the result of that handler was true.  This is the default behaviour of clicking
-     * the element.  The default implementation returns the current page - subclasses
-     * requiring different behaviour (like {@link HtmlSubmitInput}) will override this
-     * method.
-     *
-     * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occured
-     */
-    protected Page doClickAction() throws IOException {
-        final String type = getTypeAttribute().toLowerCase();
-        if (type.equals("image") || type.equals("submit")) {
-            return getEnclosingFormOrDie().submit(this);
-        }
-        else if (type.equals("reset")){
-            return getEnclosingFormOrDie().reset();
-        }
-        else {
-            return getPage();
-        }
     }
 
     /**
@@ -192,227 +106,6 @@ public class HtmlInput
      */
     public String asText() {
         return getValueAttribute();
-    }
-
-
-    /**
-     * Return the value of the attribute "id".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "id"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getIdAttribute() {
-        return getAttributeValue("id");
-    }
-
-
-    /**
-     * Return the value of the attribute "class".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "class"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getClassAttribute() {
-        return getAttributeValue("class");
-    }
-
-
-    /**
-     * Return the value of the attribute "style".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "style"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getStyleAttribute() {
-        return getAttributeValue("style");
-    }
-
-
-    /**
-     * Return the value of the attribute "title".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "title"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getTitleAttribute() {
-        return getAttributeValue("title");
-    }
-
-
-    /**
-     * Return the value of the attribute "lang".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "lang"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getLangAttribute() {
-        return getAttributeValue("lang");
-    }
-
-
-    /**
-     * Return the value of the attribute "xml:lang".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "xml:lang"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getXmlLangAttribute() {
-        return getAttributeValue("xml:lang");
-    }
-
-
-    /**
-     * Return the value of the attribute "dir".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "dir"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getTextDirectionAttribute() {
-        return getAttributeValue("dir");
-    }
-
-
-    /**
-     * Return the value of the attribute "onclick".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onclick"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnClickAttribute() {
-        return getAttributeValue("onclick");
-    }
-
-
-    /**
-     * Return the value of the attribute "ondblclick".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "ondblclick"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnDblClickAttribute() {
-        return getAttributeValue("ondblclick");
-    }
-
-
-    /**
-     * Return the value of the attribute "onmousedown".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onmousedown"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnMouseDownAttribute() {
-        return getAttributeValue("onmousedown");
-    }
-
-
-    /**
-     * Return the value of the attribute "onmouseup".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onmouseup"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnMouseUpAttribute() {
-        return getAttributeValue("onmouseup");
-    }
-
-
-    /**
-     * Return the value of the attribute "onmouseover".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onmouseover"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnMouseOverAttribute() {
-        return getAttributeValue("onmouseover");
-    }
-
-
-    /**
-     * Return the value of the attribute "onmousemove".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onmousemove"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnMouseMoveAttribute() {
-        return getAttributeValue("onmousemove");
-    }
-
-
-    /**
-     * Return the value of the attribute "onmouseout".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onmouseout"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnMouseOutAttribute() {
-        return getAttributeValue("onmouseout");
-    }
-
-
-    /**
-     * Return the value of the attribute "onkeypress".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onkeypress"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnKeyPressAttribute() {
-        return getAttributeValue("onkeypress");
-    }
-
-
-    /**
-     * Return the value of the attribute "onkeydown".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onkeydown"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnKeyDownAttribute() {
-        return getAttributeValue("onkeydown");
-    }
-
-
-    /**
-     * Return the value of the attribute "onkeyup".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onkeyup"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnKeyUpAttribute() {
-        return getAttributeValue("onkeyup");
     }
 
 
@@ -684,21 +377,7 @@ public class HtmlInput
      * Reset this element to its original values.
      */
     public void reset() {
-        String type = this.getTypeAttribute().toLowerCase();
-        if( type.equals("checkbox")) {
-            setChecked(initialCheckedState_);
-        }
-        else if (type.equals("hidden") || type.equals("password")|| type.equals("text")) {
-            setValueAttribute(initialValue_);
-        }
-        else if (type.equals("radio")) {
-            if( initialCheckedState_ ) {
-                getElement().setAttribute("checked", "checked");
-            }
-            else {
-                getElement().removeAttribute("checked");
-            }
-        }
+        // By default this does nothing.  Derived classes will override.
     }
 
     /**
@@ -707,49 +386,7 @@ public class HtmlInput
      * @param  isChecked true if this element is to be selected
      */
     public void setChecked( final boolean isChecked ) {
-        String type = this.getTypeAttribute().toLowerCase();
-        if (type.equals("checkbox") ) {
-            setCheckedCheckBox(isChecked);
-        }
-        else if (type.equals("radio")){
-            setCheckedRadio(isChecked);
-        }
-    }
-
-    /**
-     *  Set the "checked" attribute
-     *
-     * @param  isChecked true if this element is to be selected
-     */
-    private void setCheckedCheckBox( final boolean isChecked ) {
-        if( isChecked ) {
-            getElement().setAttribute( "checked", "checked" );
-        }
-        else {
-            getElement().removeAttribute( "checked" );
-        }
-    }
-
-    /**
-     *  Set the "checked" attribute
-     *
-     * @param  isChecked true if this element is to be selected
-     */
-    private final void setCheckedRadio( final boolean isChecked ) {
-        final HtmlForm form = getEnclosingForm();
-
-        if( isChecked ) {
-            try {
-                form.setCheckedRadioButton( getNameAttribute(), getValueAttribute() );
-            }
-            catch( final ElementNotFoundException e ) {
-                // Shouldn't be possible
-                throw new IllegalStateException("Can't find this element when going up to the form and back down.");
-            }
-        }
-        else {
-            getElement().removeAttribute( "checked" );
-        }
+        // By default this does nothing.  Derived classes will override.
     }
 
 
@@ -761,6 +398,8 @@ public class HtmlInput
     public boolean isChecked() {
          return isAttributeDefined("checked");
     }
+
+
     /**
      * Simulate clicking this input with a pointing device.  The x and y coordinates
      * of the pointing device will be sent to the server.
@@ -777,14 +416,8 @@ public class HtmlInput
             IOException,
             ElementNotFoundException {
 
-        wasPositionSpecified_ = true;
-        xPosition_ = x;
-        yPosition_ = y;
-        processingClick_ = true;
-        Page returnValue = this.click();
-        processingClick_ = false;
-
-        return returnValue;
+        // By default this is no different than a click without coordinates.
+        return click();
     }
 
     /**

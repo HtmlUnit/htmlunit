@@ -37,25 +37,87 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.TextUtil;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
 import org.w3c.dom.Element;
 
 /**
- *  Wrapper for the html element "td"
+ * Intermediate base class for "styled" HTML elements.  As defined
+ * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation,
+ * this class is a base class for all HTML elements except these:
+ * base, basefont, head, html, meta, param, script, style and title.
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
-public class HtmlTableData extends HtmlTableCell {
+public class StyledElement extends HtmlElement {
+
     /**
      *  Create an instance
      *
-     * @param  page The page that this element is contained within
+     * @param  page The page that contains this element
      * @param  element The xml element that represents this html element
-     * @param  row The row within the table that this cell is located at
-     * @param  column The column within the table that this cell is located at
      */
-    HtmlTableData( final HtmlPage page, final Element element, final int row, final int column ) {
-        super( page, element, row, column );
+    StyledElement( final HtmlPage page, final Element element ) {
+        super( page, element );
+    }
+
+
+    /**
+     * Return the value of the attribute "id".  Refer to the
+     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @return The value of the attribute "id"
+     * or an empty string if that attribute isn't defined.
+     */
+    public final String getIdAttribute() {
+        return getAttributeValue("id");
+    }
+
+
+    /**
+     * Return the value of the attribute "class".  Refer to the
+     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @return The value of the attribute "class"
+     * or an empty string if that attribute isn't defined.
+     */
+    public final String getClassAttribute() {
+        return getAttributeValue("class");
+    }
+
+
+    /**
+     * Return the value of the attribute "style".  Refer to the
+     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @return The value of the attribute "style"
+     * or an empty string if that attribute isn't defined.
+     */
+    public final String getStyleAttribute() {
+        return getAttributeValue("style");
+    }
+
+
+    /**
+     * Return the value of the attribute "title".  Refer to the
+     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @return The value of the attribute "title"
+     * or an empty string if that attribute isn't defined.
+     */
+    public final String getTitleAttribute() {
+        return getAttributeValue("title");
     }
 }
-

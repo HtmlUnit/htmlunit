@@ -40,15 +40,16 @@ package com.gargoylesoftware.htmlunit.html;
 import org.w3c.dom.Element;
 
 /**
- *  An abstract cell that provides the implementation for HtmlTableData and
- *  HtmlTableHeader.
+ *  An abstract cell that provides the implementation for HtmlTableDataCell and
+ *  HtmlTableHeaderCell.
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @see  HtmlTableData
- * @see  HtmlTableHeader
+ * @author David K. Taylor
+ * @see  HtmlTableDataCell
+ * @see  HtmlTableHeaderCell
  */
-public abstract class HtmlTableCell extends HtmlElement {
+public abstract class HtmlTableCell extends ClickableElement {
     private final int rowIndex_;
     private final int columnIndex_;
 
