@@ -51,8 +51,9 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *  Tests for HtmlSelect
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  Mike Williams
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Williams
+ * @author Marc Guillemot
  */
 public class HtmlSelectTest extends WebTestCase {
 
@@ -94,13 +95,9 @@ public class HtmlSelectTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
 
-        final List expectedParameters = new ArrayList();
-        expectedParameters.add(new KeyValuePair("select1", "option2"));
-        expectedParameters.add(new KeyValuePair("button", "foo"));
-
-        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
+        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option2&button=foo", 
+                secondPage.getWebResponse().getUrl().toExternalForm());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
-        assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);
     }
 
@@ -132,12 +129,9 @@ public class HtmlSelectTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
 
-        final List expectedParameters = new ArrayList();
-        expectedParameters.add(new KeyValuePair("button", "foo"));
-
-        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
+        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?button=foo", 
+                secondPage.getWebResponse().getUrl().toExternalForm());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
-        assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);
     }
 
@@ -170,13 +164,9 @@ public class HtmlSelectTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
 
-        final List expectedParameters = new ArrayList();
-        expectedParameters.add(new KeyValuePair("select1", "option3"));
-        expectedParameters.add(new KeyValuePair("button", "foo"));
-
-        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
+        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option3&button=foo", 
+                secondPage.getWebResponse().getUrl().toExternalForm());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
-        assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);
     }
 
@@ -210,15 +200,10 @@ public class HtmlSelectTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
 
-        final List expectedParameters = new ArrayList();
-        expectedParameters.add(new KeyValuePair("select1", "option1"));
-        expectedParameters.add(new KeyValuePair("select1", "option2"));
-        expectedParameters.add(new KeyValuePair("select1", "option3"));
-        expectedParameters.add(new KeyValuePair("button", "foo"));
-
-        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
+        assertEquals("url", 
+                URL_GARGOYLE.toExternalForm() + "?select1=option1&select1=option2&select1=option3&button=foo", 
+                secondPage.getWebResponse().getUrl().toExternalForm());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
-        assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);
     }
 
@@ -334,7 +319,7 @@ public class HtmlSelectTest extends WebTestCase {
     public void testSetSelected_IllegalValue() throws Exception {
 
         final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'><select name='select1'>"
+            + "<form id='form1' method='post'><select name='select1'>"
             + "<option value='option1' selected='selected'>Option1</option>"
             + "<option value='option2'>Option2</option>"
             + "<option value='option3'>Option3</option>"
@@ -367,8 +352,8 @@ public class HtmlSelectTest extends WebTestCase {
         expectedParameters.add(new KeyValuePair("select1", "newOption"));
         expectedParameters.add(new KeyValuePair("button", "foo"));
 
-        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
-        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        assertEquals("url", URL_GARGOYLE.toExternalForm(), secondPage.getWebResponse().getUrl().toExternalForm());
+        assertEquals("method", SubmitMethod.POST, webConnection.getLastMethod());
         assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);
     }

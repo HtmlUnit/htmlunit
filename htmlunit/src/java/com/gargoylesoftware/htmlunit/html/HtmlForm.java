@@ -47,6 +47,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.util.EncodingUtil;
+import org.apache.commons.lang.StringUtils;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
@@ -182,16 +185,28 @@ public class HtmlForm extends ClickableElement {
             }
         }
 
+        final List parameters = getParameterListForSubmit(submitElement);
+        final SubmitMethod method = SubmitMethod.getInstance( getAttributeValue("method"));
+
+        String actionUrl = action;
+        if (SubmitMethod.GET.equals(method)) {
+            final NameValuePair[] pairs = new NameValuePair[parameters.size()];
+            parameters.toArray( pairs );
+            final String queryFromFields = EncodingUtil.formUrlEncode(pairs, getPage().getPageEncoding());
+            // action may already contain some query parameters: they have to be removed
+            actionUrl = StringUtils.substringBefore(actionUrl, "?") + "?" + queryFromFields;
+            parameters.clear(); // parameters have been added to query
+        }
         final URL url;
         try {
-            url = htmlPage.getFullyQualifiedUrl( action );
+            url = htmlPage.getFullyQualifiedUrl( actionUrl );
         }
         catch( final MalformedURLException e ) {
-            throw new IllegalArgumentException( "Not a valid url: " + action );
+            throw new IllegalArgumentException( "Not a valid url: " + actionUrl );
         }
-        final WebRequestSettings settings = new WebRequestSettings(url, 
-                SubmitMethod.getInstance( getAttributeValue("method")));
-        settings.setRequestParameters(getParameterListForSubmit(submitElement));
+
+        final WebRequestSettings settings = new WebRequestSettings(url, method);
+        settings.setRequestParameters(parameters);
         settings.setEncodingType(FormEncodingType.getInstance( getEnctypeAttribute() ));
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();

@@ -52,7 +52,8 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *  Tests for HtmlSubmitInput
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public class HtmlSubmitInputTest extends WebTestCase {
     /**
@@ -71,7 +72,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
     public void testSubmit() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
+            + "<form id='form1' method='post'>"
             + "<input type='submit' name='aButton' value='foo'/>"
             + "<input type='suBMit' name='button' value='foo'/>"
             + "<input type='submit' name='anotherButton' value='foo'/>"
@@ -132,7 +133,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setDefaultResponse(secondContent);
 
         client.setWebConnection( webConnection );
 

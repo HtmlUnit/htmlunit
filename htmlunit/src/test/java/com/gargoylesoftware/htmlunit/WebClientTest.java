@@ -1094,7 +1094,7 @@ public class WebClientTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setDefaultResponse(secondContent);
 
         webClient.setWebConnection(webConnection);
 

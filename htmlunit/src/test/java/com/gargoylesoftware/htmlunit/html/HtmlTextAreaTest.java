@@ -37,10 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -50,7 +46,8 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *  Tests for HtmlTextArea
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public class HtmlTextAreaTest extends WebTestCase {
     /**
@@ -83,12 +80,9 @@ public class HtmlTextAreaTest extends WebTestCase {
 
         final Page secondPage = form.submit();
 
-        final List expectedParameters = new ArrayList();
-        expectedParameters.add( new KeyValuePair( "textArea1", "foo" ) );
-
-        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
+        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?textArea1=foo", 
+                secondPage.getWebResponse().getUrl().toExternalForm());
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
-        assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
     }
 
 
@@ -111,12 +105,9 @@ public class HtmlTextAreaTest extends WebTestCase {
         textArea.setText( "Flintstone" );
         final Page secondPage = form.submit();
 
-        final List expectedParameters = new ArrayList();
-        expectedParameters.add( new KeyValuePair( "textArea1", "Flintstone" ) );
-
-        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
+        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?textArea1=Flintstone", 
+                secondPage.getWebResponse().getUrl().toExternalForm());
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
-        assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
     }
     /**
      * @throws Exception if the test fails

@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -60,6 +61,7 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
  * @author George Murnock
+ * @author Marc Guillemot
  */
 public class HtmlFormTest extends WebTestCase {
     /**
@@ -102,14 +104,9 @@ public class HtmlFormTest extends WebTestCase {
         // Test that only one value for the radio button is being passed back to the server
         final HtmlPage secondPage = ( HtmlPage )pushButton.click();
 
-        final List expectedParameters = new ArrayList();
-        expectedParameters.add( new KeyValuePair( "foo", "2" ) );
-        expectedParameters.add( new KeyValuePair( "button", "foo" ) );
-
-        assertEquals( "url", URL_GARGOYLE, secondPage.getWebResponse().getUrl() );
-        assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
-        assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
-        assertNotNull( secondPage );
+        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?foo=2&button=foo",
+                secondPage.getWebResponse().getUrl().toExternalForm());
+        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
     }
 
 
@@ -163,7 +160,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
         
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput pushButton = ( HtmlSubmitInput )form.getInputByName( "button" );
 
@@ -172,15 +169,9 @@ public class HtmlFormTest extends WebTestCase {
         // Test that only one value for the radio button is being passed back to the server
         final HtmlPage secondPage = ( HtmlPage )pushButton.click();
 
-        final List expectedParameters = new ArrayList();
-        expectedParameters.add( new KeyValuePair( "button", "foo" ) );
-        expectedParameters.add( new KeyValuePair( "foo", "4" ) );
-
-        assertEquals( "url", URL_GARGOYLE,
-            secondPage.getWebResponse().getUrl() );
-        assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
-        assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
-        assertNotNull( secondPage );
+        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?button=foo&foo=4",
+            secondPage.getWebResponse().getUrl().toExternalForm() );
+        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod() );
     }
 
 
@@ -210,7 +201,7 @@ public class HtmlFormTest extends WebTestCase {
         throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
+            + "<form id='form1' method='post'>"
             + "    <input type='text' name='textfield' value='*'/>"
             + "    <input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
@@ -250,11 +241,11 @@ public class HtmlFormTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setDefaultResponse(secondContent);
 
         client.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -320,7 +311,7 @@ public class HtmlFormTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setDefaultResponse(secondContent);
 
         client.setWebConnection( webConnection );
 
@@ -486,7 +477,7 @@ public class HtmlFormTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setDefaultResponse(secondContent);
 
         client.setWebConnection( webConnection );
 
@@ -508,7 +499,7 @@ public class HtmlFormTest extends WebTestCase {
         throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
+            + "<form id='form1' method='post'>"
             + "    <input type='text' name='textfield'/>"
             + "    <input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
@@ -566,7 +557,7 @@ public class HtmlFormTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setDefaultResponse(secondContent);
         client.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
@@ -583,7 +574,7 @@ public class HtmlFormTest extends WebTestCase {
         throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
+            + "<form id='form1' method='post'>"
             + "    <input type='text' id='textfield' value='blah'/>"
             + "    <input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
@@ -609,7 +600,7 @@ public class HtmlFormTest extends WebTestCase {
     public void testSubmit_NoNameOnButton() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
+            + "<form id='form1' method='post'>"
             + "    <input type='text' id='textfield' value='blah' name='textfield' />"
             + "    <button type='submit' id='button' value='Go'>Go</button>"
             + "</form></body></html>";
@@ -633,7 +624,7 @@ public class HtmlFormTest extends WebTestCase {
         throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
+            + "<form id='form1' method='post'>"
             + "    <table><tr><td>"
             + "        <input type='text' name='textfield' value='blah'/>"
             + "        </td><td>"
@@ -665,7 +656,7 @@ public class HtmlFormTest extends WebTestCase {
         throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
+            + "<form id='form1' method='post'>"
             + "    <input type='text' name='textfield' value='blah' disabled />"
             + "    <input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
@@ -702,7 +693,7 @@ public class HtmlFormTest extends WebTestCase {
             + "}"
             + "</script>"
             + "</head><body>"
-            + "<form name='form1' id='form1'>"
+            + "<form name='form1' id='form1' method='post'>"
             + "<input type=checkbox name=Format value='' onclick='setFormat()'>"
             + "    <input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
@@ -783,7 +774,7 @@ public class HtmlFormTest extends WebTestCase {
     public void testSubmitToTargetWindow() throws Exception {
         final String firstContent
             = "<html><head><title>first</title></head><body>"
-            + "<form id='form1' target='window2' action='http://second'>"
+            + "<form id='form1' target='window2' action='http://second' method='post'>"
             + "    <input type='submit' name='button' value='push me'/>"
             + "</form></body></html>";
         final WebClient client = new WebClient();
@@ -827,27 +818,21 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testSubmit_SelectOptionWithoutValueAttribute()throws Exception {
+    public void testSubmit_SelectOptionWithoutValueAttribute() throws Exception {
 
         final String htmlContent
-            = "<html><body><form name='form' method='GET' action='action.html'>"
+            = "<html><body><form name='form' action='action.html'>"
             + "<select name='select'>"
             + "     <option>first value</option>"
             + "     <option selected>second value</option>"
             + "</select>"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        final MockWebConnection webConnection = getMockConnection(page);
-        
-        final HtmlPage secondPage = ( HtmlPage ) page.getFormByName("form").submit();
+        final HtmlPage secondPage = (HtmlPage) page.getFormByName("form").submit();
         
         assertNotNull( secondPage );
-        
-        final List expectedParameters = Arrays.asList( new Object[]{
-            new KeyValuePair("select", "second value")
-        } );
-        
-        assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
+        assertEquals(page.getWebResponse().getUrl().toExternalForm() + "action.html?select=second+value",
+                secondPage.getWebResponse().getUrl().toExternalForm());
     }        
     
     /**
@@ -856,7 +841,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     public void testSubmit_DeepInputs() throws Exception {
         final String htmlContent
-            = "<html><form method='GET' action=''>"
+            = "<html><form method='post' action=''>"
             + "<table><tr><td>"
             + "<input value='NOT_SUBMITTED' name='data' type='text'/>"
             + "</td></tr></table>"
@@ -928,6 +913,41 @@ public class HtmlFormTest extends WebTestCase {
         loadPage(htmlContent, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testUrlAfterGetSubmit()
+        throws Exception {
+        testUrlAfterSubmit("get", "foo", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
+        // for a get submit, query parameters in action are lost in browsers
+        testUrlAfterSubmit("get", "foo?foo=12", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
+        testUrlAfterSubmit("post", "foo", "foo");
+        testUrlAfterSubmit("post", "foo?foo=12", "foo?foo=12");
+    }
+
+    /**
+     * Utility for {@link #testUrlAfterGetSubmit}
+     * @throws Exception if the test fails
+     */
+    private void testUrlAfterSubmit(final String method, final String action, final String expectedUrlEnd)
+        throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1' method='" + method + "' action='" + action + "'>"
+            + "<input type='text' name='textField' value='foo'/>"
+            + "<input type='text' name='nonAscii' value='Floßfahrt'/>"
+            + "<input type='submit' name='button' value='foo'/>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final Page page2 = form.submit("button");
+        
+        assertEquals(URL_GARGOYLE.toExternalForm() + expectedUrlEnd, 
+                page2.getWebResponse().getUrl().toExternalForm());
     }
 }
 
