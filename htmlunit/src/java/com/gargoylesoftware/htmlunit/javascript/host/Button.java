@@ -60,13 +60,5 @@ public class Button extends Input {
     public void jsConstructor() {
     }
 
-
-    /**
-     * Return the type of this input.
-     * @return The type
-     */
-    public String jsGet_type() {
-        return "button";
-    }
 }
 

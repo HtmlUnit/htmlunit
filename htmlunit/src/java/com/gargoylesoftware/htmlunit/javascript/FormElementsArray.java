@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -124,13 +124,13 @@ public class FormElementsArray extends SimpleScriptable {
         while( iterator.hasNext() ) {
             htmlElement = (HtmlElement)iterator.next();
             if( htmlElement.getAttributeValue("name").equals(name) ) {
-                if( htmlElement instanceof HtmlRadioButtonInput ) {
+                if( htmlElement instanceof HtmlInput ) {
                     final List collectedRadioButtons = new ArrayList(elementList.size());
                     collectedRadioButtons.add(getScriptableFor(htmlElement));
                     while( iterator.hasNext() ) {
                         htmlElement = (HtmlElement)iterator.next();
-                        if( htmlElement instanceof HtmlRadioButtonInput
-                            && ((HtmlRadioButtonInput)htmlElement).getNameAttribute().equals(name) ) {
+                        if( htmlElement instanceof HtmlInput
+                            && ((HtmlInput)htmlElement).getNameAttribute().equals(name) ) {
                             collectedRadioButtons.add(getScriptableFor(htmlElement));
                         }
                     }

@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -50,7 +51,7 @@ import java.io.IOException;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public abstract class HtmlInput
+public class HtmlInput
          extends HtmlElement
          implements SubmittableElement {
 
@@ -65,6 +66,9 @@ public abstract class HtmlInput
     HtmlInput( final HtmlPage page, final Element element ) {
         super( page, element );
         originalValue_ = element.getAttribute("value");
+        //From the checkbox creator
+        initialCheckedState_ = isAttributeDefined("checked");
+        initialValue_ = getValueAttribute();
     }
 
 
@@ -94,6 +98,16 @@ public abstract class HtmlInput
      * @return  See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
+        if (getTypeAttribute().equals("image")) {
+            final String name = getNameAttribute();
+            if( wasPositionSpecified_ == true ) {
+                return new KeyValuePair[]{
+                    new KeyValuePair( name, getValueAttribute() ),
+                    new KeyValuePair( name+".x", String.valueOf(xPosition_) ),
+                    new KeyValuePair( name+".y", String.valueOf(yPosition_) )
+                };
+            }
+        }
         return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getValueAttribute() )};
     }
 
@@ -107,7 +121,17 @@ public abstract class HtmlInput
      *      server
      * @exception  IOException If an io error occurs
      */
-    protected Page click() throws IOException {
+    public Page click() throws IOException {
+        
+        String type = this.getTypeAttribute();
+        if (type.equals("file") || type.equals("hidden") || type.equals("password") || type.equals("text")) {
+            return getPage();
+        }
+        if (type.equals("image")){
+            if (! processingClick_ ) {
+                wasPositionSpecified_ = false;
+            }
+        }
 
         if( isDisabled() == true ) {
             return getPage();
@@ -137,7 +161,16 @@ public abstract class HtmlInput
      * @throws IOException If an IO error occured
      */
     protected Page doClickAction() throws IOException {
-        return getPage();
+        final String type = getTypeAttribute();
+        if (type.equals("image") || type.equals("submit")) {
+            return getEnclosingFormOrDie().submit(this);
+        } 
+        else if (type.equals("reset")){
+            return getEnclosingFormOrDie().reset();
+        } 
+        else {
+            return getPage();
+        }
     }
 
     /**
@@ -414,7 +447,7 @@ public abstract class HtmlInput
      */
     public final String getValueAttribute() {
         String value = getAttributeValue("value");
-        if( value == ATTRIBUTE_NOT_DEFINED && this instanceof HtmlCheckBoxInput ) {
+        if( value == ATTRIBUTE_NOT_DEFINED && getTypeAttribute().equals("checkbox")) {
             value = "on";
         }
         return value;
@@ -636,4 +669,141 @@ public abstract class HtmlInput
     public final String getAlignAttribute() {
         return getAttributeValue("align");
     }
+    
+    //For Checkbox, radio
+    private final boolean initialCheckedState_;
+    //for Hidden, password
+    private final String initialValue_;
+    //For Image
+    private boolean wasPositionSpecified_ = false;
+    private boolean processingClick_ = false;
+    private int xPosition_;
+    private int yPosition_;
+    
+    /**
+     * Reset this element to its original values.
+     */
+    public void reset() {
+        String type = this.getTypeAttribute();
+        if( type.equals("checkbox")) {
+            setChecked(initialCheckedState_);
+        } 
+        else if (type.equals("hidden") || type.equals("password")|| type.equals("text")) {
+            setValueAttribute(initialValue_);
+        } 
+        else if (type.equals("radio")) {
+            if( initialCheckedState_ ) {
+                getElement().setAttribute("checked", "checked");
+            } 
+            else {
+                getElement().removeAttribute("checked");
+            }
+        }
+    }
+
+    /**
+     *  Set the "checked" attribute
+     *
+     * @param  isChecked true if this element is to be selected
+     */
+    public void setChecked( final boolean isChecked ) {
+        String type = this.getTypeAttribute();
+        if (type.equals("checkbox") ) {
+            setCheckedCheckBox(isChecked);
+        } 
+        else if (type.equals("radio")){
+            setCheckedRadio(isChecked);
+        }
+    }
+
+    /**
+     *  Set the "checked" attribute
+     *
+     * @param  isChecked true if this element is to be selected
+     */
+    private void setCheckedCheckBox( final boolean isChecked ) {
+        if( isChecked ) {
+            getElement().setAttribute( "checked", "checked" );
+        }
+        else {
+            getElement().removeAttribute( "checked" );
+        }
+    }
+    
+    /**
+     *  Set the "checked" attribute
+     *
+     * @param  isChecked true if this element is to be selected
+     */
+    private final void setCheckedRadio( final boolean isChecked ) {
+        final HtmlForm form = getEnclosingForm();
+
+        if( isChecked ) {
+            try {
+                form.setCheckedRadioButton( getNameAttribute(), getValueAttribute() );
+            }
+            catch( final ElementNotFoundException e ) {
+                // Shouldn't be possible
+                throw new IllegalStateException("Can't find this element when going up to the form and back down.");
+            }
+        }
+        else {
+            getElement().removeAttribute( "checked" );
+        }
+    }
+
+
+    /**
+     *  Return true if this element is currently selected
+     *
+     * @return  See above
+     */
+    public boolean isChecked() {
+         return isAttributeDefined("checked");
+    }
+    /**
+     * Simulate clicking this input with a pointing device.  The x and y coordinates
+     * of the pointing device will be sent to the server.
+     *
+     * @param x The x coordinate of the pointing device at the time of clicking
+     * @param y The y coordinate of the pointing device at the time of clicking
+     * @return The page that is loaded after the click has taken place.
+     * @exception  IOException If an io error occurs
+     * @exception  ElementNotFoundException If a particular xml element could
+     *      not be found in the dom model
+     */
+    public Page click( final int x, final int y )
+        throws
+            IOException,
+            ElementNotFoundException {
+
+        wasPositionSpecified_ = true;
+        xPosition_ = x;
+        yPosition_ = y;
+        processingClick_ = true;
+        Page returnValue = this.click();
+        processingClick_ = false;
+
+        return returnValue;
+    }
+    
+    /**
+     *  Submit the form that contains this input
+     *
+     * @deprecated Use {@link #click()} instead
+     * @return  The Page that is the result of submitting this page to the
+     *      server
+     * @exception  IOException If an io error occurs
+     * @exception  ElementNotFoundException If a particular xml element could
+     *      not be found in the dom model
+     */
+    public Page submit()
+        throws
+            IOException,
+            ElementNotFoundException {
+
+        return click();
+    }
+    
+
 }

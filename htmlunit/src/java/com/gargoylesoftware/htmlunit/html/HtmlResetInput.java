@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.Page;
-import java.io.IOException;
 import org.w3c.dom.Element;
 
 /**
@@ -59,37 +57,5 @@ public class HtmlResetInput extends HtmlInput {
         super( page, element );
     }
 
-
-    /**
-     *  Reset the form that contains this input
-     *
-     * @return  The Page that is the result of reseting this page.  Typically this
-     * will be the current page but if javascript is invoked by this click then
-     * another page could have been loaded.
-     * @exception  IOException If an io error occurs
-     */
-    public Page click() throws IOException {
-        return super.click();
-    }
-
-
-    /**
-     * This method will be called if there either wasn't an onclick handler or there was
-     * but the result of that handler was true.  This is the default behaviour of clicking
-     * the element.  In this case, the method will reset the form.
-     *
-     * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occured
-     */
-    protected Page doClickAction() throws IOException {
-        return getEnclosingFormOrDie().reset();
-    }
-
-
-    /**
-     * Reset this element to its original values.  This is a no-op for a button.
-     */
-    public void reset() {
-    }
 }
 

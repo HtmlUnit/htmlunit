@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.Page;
-import java.io.IOException;
 import org.w3c.dom.Element;
 
 /**
@@ -49,8 +47,6 @@ import org.w3c.dom.Element;
  */
 public class HtmlCheckBoxInput extends HtmlInput {
 
-    private final boolean initialCheckedState_;
-
     /**
      *  Create an instance
      *
@@ -59,52 +55,6 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     HtmlCheckBoxInput( final HtmlPage page, final Element element ) {
         super( page, element );
-        initialCheckedState_ = isAttributeDefined("checked");
-    }
-
-
-    /**
-     *  Set the "checked" attribute
-     *
-     * @param  isChecked true if this element is to be selected
-     */
-    public void setChecked( final boolean isChecked ) {
-        if( isChecked ) {
-            getElement().setAttribute( "checked", "checked" );
-        }
-        else {
-            getElement().removeAttribute( "checked" );
-        }
-    }
-
-
-    /**
-     *  Return true if this element is currently selected
-     *
-     * @return  See above
-     */
-    public boolean isChecked() {
-         return isAttributeDefined("checked");
-    }
-
-
-    /**
-     * Return the value of this element to what it was at the time the page was loaded.
-     */
-    public void reset() {
-        setChecked(initialCheckedState_);
-    }
-
-
-    /**
-     *  Submit the form that contains this input
-     *
-     * @return  The Page that is the result of submitting this page to the
-     *      server
-     * @exception  IOException If an io error occurs
-     */
-    public Page click() throws IOException {
-        return super.click();
     }
 }
 

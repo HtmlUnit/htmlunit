@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.Page;
-import java.io.IOException;
 import org.w3c.dom.Element;
 
 /**
@@ -57,25 +55,6 @@ public class HtmlButtonInput extends HtmlInput {
      */
     HtmlButtonInput( final HtmlPage page, final Element element ) {
         super( page, element );
-    }
-
-
-    /**
-     * Reset this element to its original values.  This is a no-op for a button.
-     */
-    public void reset() {
-    }
-
-
-    /**
-     *  Submit the form that contains this input
-     *
-     * @return  The Page that is the result of submitting this page to the
-     *      server
-     * @exception  IOException If an io error occurs
-     */
-    public Page click() throws IOException {
-        return super.click();
     }
 }
 

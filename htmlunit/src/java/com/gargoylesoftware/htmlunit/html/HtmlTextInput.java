@@ -46,7 +46,6 @@ import org.w3c.dom.Element;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class HtmlTextInput extends HtmlInput {
-    private final String initialValue_;
 
     /**
      *  Create an instance
@@ -56,15 +55,6 @@ public class HtmlTextInput extends HtmlInput {
      */
     HtmlTextInput( final HtmlPage page, final Element element ) {
         super( page, element );
-        initialValue_ = getValueAttribute();
-    }
-
-
-    /**
-     * Return the value of this element to what it was at the time the page was loaded.
-     */
-    public void reset() {
-        setValueAttribute(initialValue_);
     }
 }
 
