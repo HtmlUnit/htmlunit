@@ -134,16 +134,6 @@ public class Form extends HTMLElement {
     }
 
 
-    private String getClassNameForType( final String type ) {
-        String className = "Input";
-        if( type.equals("radio") ) {
-            className = "Radio";
-        }
-
-        return className;
-    }
-
-
     private static String getClassNameForFormElement( final HtmlElement htmlElement ) {
         final String tagName = htmlElement.getTagName();
 
