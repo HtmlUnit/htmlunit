@@ -46,7 +46,6 @@ import junit.framework.TestCase;
 
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
@@ -117,17 +116,18 @@ public class HTMLParserTest extends TestCase {
         HtmlPage page = HTMLParser.parse(webResponse, webClient.getCurrentWindow());
 
         //find the copyright string
-        HtmlUnitXPath xpath = new HtmlUnitXPath("//div[@id='footer']/table/tr[2]/td");
+        HtmlUnitXPath xpath = new HtmlUnitXPath("//div[@id='footer']/div[@class='xright']");
         String stringVal = xpath.stringValueOf(page).trim();
         assertEquals("\u00A9 2002-2004, Gargoyle Software Inc.", stringVal);
 
         //see if the Google adds were added via Javascript
-        xpath = new HtmlUnitXPath("//iframe[@name = 'google_ads_frame']");
-        HtmlInlineFrame inline = (HtmlInlineFrame)xpath.selectSingleNode(page);
-
-        assertNotNull("find Google ads", inline);
-
-        HtmlPage innerPage = (HtmlPage)inline.getEnclosedPage();
-        assertNotNull(innerPage);
+        //Google ads are not currently being added to the page
+//        xpath = new HtmlUnitXPath("//iframe[@name = 'google_ads_frame']");
+//        HtmlInlineFrame inline = (HtmlInlineFrame)xpath.selectSingleNode(page);
+//
+//        assertNotNull("find Google ads", inline);
+//
+//        HtmlPage innerPage = (HtmlPage)inline.getEnclosedPage();
+//        assertNotNull(innerPage);
     }
 }
