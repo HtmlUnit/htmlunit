@@ -718,9 +718,11 @@ public class FormTest extends WebTestCase {
     }
 
     /**
+     * @param htmlSnippet The html to embed in the test
+     * @param expected The expected alert
      * @throws Exception if the test fails
      */
-    void testFieldNamedSubmit(final String htmlSnippet, final String expected) throws Exception {
+    private void testFieldNamedSubmit(final String htmlSnippet, final String expected) throws Exception {
         final String content =
             "<html>"
             + "<head>"

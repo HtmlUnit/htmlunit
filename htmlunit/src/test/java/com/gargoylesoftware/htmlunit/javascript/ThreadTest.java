@@ -91,17 +91,20 @@ public class ThreadTest extends WebTestCase {
     }
 
 
-
+    /** A test object for threads*/
     private static class TestThread extends Thread {
 
         private boolean successful_ = false;
 
-
+        /**
+         * Create an instance
+         * @param name the name of the thread.
+         */
         public TestThread(final String name) {
             super(name);
         }
 
-
+        /** @see Thread#run() */
         public void run() {
             try {
                 testCallInheritedFunction();
@@ -114,7 +117,7 @@ public class ThreadTest extends WebTestCase {
             }
         }
 
-
+        /** @return true if the test was successful */
         public boolean isSuccessful() {
             return successful_;
         }
@@ -122,6 +125,7 @@ public class ThreadTest extends WebTestCase {
 
         /**
          * @see SimpleScriptableTest#testCallInheritedFunction()
+         * @throws Exception if the test failed
          */
         public void testCallInheritedFunction() throws Exception {
             final String content
