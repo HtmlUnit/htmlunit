@@ -37,25 +37,27 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.Node;
-import org.w3c.dom.Text;
 
 /**
- * Wrapper for the DOM node Text.
+ * representation of a text node in the Html DOM
  *
  * @version  $Revision$
  * @author  David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class DomText extends DomCharacterData {
+
+    /** the symbolic node name */
+    public static final String NODE_NAME = "#text";
 
     /**
      * Create an instance of DomText
      *
      * @param page The HtmlPage that contains this element.
-     * @param xmlNode The actual XML text node that we are wrapping.
+     * @param data the string data held by this node
      */
-    DomText( final HtmlPage page, final Node xmlNode ) {
-        super(page, xmlNode);
+    public DomText( final HtmlPage page, String data) {
+        super(page, data);
     }
 
 
@@ -65,8 +67,48 @@ public class DomText extends DomCharacterData {
      * @return The Text node that was split from this node.
      */
     public DomText splitText(final int offset) {
-        final Text xmlNode = (Text) getNode();
-        final Text splitNode = xmlNode.splitText( offset );
-        return (DomText) getPage().getDomNode( splitNode );
+        if (offset < 0 || offset > getLength() ) {
+            throw new IllegalArgumentException("offset: "+offset+" data.length: "+getLength());
+        }
+
+        // split text into two separate nodes
+        DomText newText = new DomText(getPage(), getData().substring(offset));
+        setData(getData().substring(0, offset));
+
+        // insert new text node
+        if (getParentNode() != null) {
+            newText.setParentNode(getParentNode());
+            newText.setPreviousSibling(this);
+            newText.setNextSibling(this.getNextSibling());
+            this.setNextSibling(newText);
+        }
+
+        return newText;
+    }
+
+    /**
+     *  Return a text representation of this element that represents what would
+     *  be visible to the user if this page was shown in a web browser. For
+     *  example, a select element would return the currently selected value as
+     *  text
+     *
+     * @return  The element as text
+     */
+    public String asText() {
+        return getData();
+    }
+
+    /**
+     * @return the node type constant, in this case {@link DomNode#TEXT_NODE}
+     */
+    public short getNodeType() {
+        return DomNode.TEXT_NODE;
+    }
+
+    /**
+     * @return the node name, in this case {@link #NODE_NAME}
+     */
+    public String getNodeName() {
+        return NODE_NAME;
     }
 }

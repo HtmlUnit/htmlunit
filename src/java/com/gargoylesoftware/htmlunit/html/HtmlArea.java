@@ -41,8 +41,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
-
-import org.w3c.dom.Element;
+import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -55,17 +54,28 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlArea extends ClickableElement {
+
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "area";
 
     /**
      * Create an instance of HtmlArea
      *
      * @param page The HtmlPage that contains this element.
-     * @param xmlElement The actual html element that we are wrapping.
+     * @param attributes the initial attributes
      */
-    HtmlArea( final HtmlPage page, final Element xmlElement ) {
-        super(page, xmlElement);
+    public HtmlArea( final HtmlPage page, final Map attributes ) {
+        super( page, attributes );
+    }
+
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
     }
 
     /**

@@ -41,8 +41,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
-
-import org.w3c.dom.Element;
+import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -55,19 +54,29 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlAnchor extends ClickableElement {
+
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "a";
 
     /**
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element The xml element that represents this html element
+     * @param attributes the initial attributes
      */
-    HtmlAnchor( final HtmlPage page, final Element element ) {
-        super( page, element );
+    public HtmlAnchor(final HtmlPage page, final Map attributes) {
+        super( page, attributes );
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     /**
      * This method will be called if there either wasn't an onclick handler or

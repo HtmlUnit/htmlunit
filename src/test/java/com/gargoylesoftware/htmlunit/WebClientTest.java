@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class WebClientTest extends WebTestCase {
 
@@ -115,7 +116,7 @@ public class WebClientTest extends WebTestCase {
 
 
     /**
-     * Test that the {@link CHANGE} window event gets fired at the
+     * Test that the {@link WebWindowEvent#CHANGE} window event gets fired at the
      * appropriate time.
      * @throws Exception If something goes wrong.
      */
@@ -155,7 +156,7 @@ public class WebClientTest extends WebTestCase {
 
 
     /**
-     * Test that the {@link WindowEvent.OPEN} window event gets fired at
+     * Test that the {@link WebWindowEvent#OPEN} window event gets fired at
      * the appropriate time.
      * @throws Exception If something goes wrong.
      */
@@ -199,7 +200,7 @@ public class WebClientTest extends WebTestCase {
 
 
     /**
-     * Test that the {@link WindowEvent.CLOSE} window event gets fired at
+     * Test that the {@link WebWindowEvent#CLOSE} window event gets fired at
      * the appropriate time.
      * @throws Exception If something goes wrong.
      */
@@ -448,7 +449,7 @@ public class WebClientTest extends WebTestCase {
 
 
     /**
-     * Test {@link WebClient.setPageCreator(PageCreator)}.
+     * Test {@link WebClient#setPageCreator(PageCreator)}.
      * @throws Exception If something goes wrong.
      */
     public void testSetPageCreator() throws Exception {
@@ -504,6 +505,7 @@ public class WebClientTest extends WebTestCase {
             throws IOException {
 
             final Page page = new TextPage(webResponse, webWindow);
+            webWindow.setEnclosedPage(page);
             collectedPages_.add(page);
             return page;
         }
@@ -713,7 +715,7 @@ public class WebClientTest extends WebTestCase {
         final List expectedAlerts = Collections.singletonList("buttonPushed");
         collectedAlerts.clear();
 
-        button.getElement().removeAttribute("disabled");
+        button.removeAttribute("disabled");
         page.pressAccessKey('1');
 
         assertEquals( expectedAlerts, collectedAlerts );
@@ -768,7 +770,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test {@link WebClient#loadResponseInto(WebResponse,WebWindow)}
+     * Test {@link WebClient#loadWebResponseInto(WebResponse,WebWindow)}
      * @throws Exception If the test fails.
      */
     public void testLoadWebResponseInto() throws Exception {

@@ -37,12 +37,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 import java.io.IOException;
-import org.w3c.dom.Element;
+import java.util.Map;
 
 /**
  *  Wrapper for the html element "button"
@@ -50,21 +49,29 @@ import org.w3c.dom.Element;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class HtmlButton
-         extends ClickableElement
-         implements SubmittableElement {
+public class HtmlButton extends ClickableElement implements SubmittableElement {
+
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "button";
 
     /**
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element The xml element that corresponds to this html element
+     * @param attributes the initial attributes
      */
-    HtmlButton( final HtmlPage page, final Element element ) {
-        super( page, element );
+    public HtmlButton( final HtmlPage page, final Map attributes) {
+        super(page, attributes);
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     /**
      *  Set the content of the "value" attribute
@@ -72,10 +79,8 @@ public class HtmlButton
      * @param  newValue The new content
      */
     public void setValueAttribute( final String newValue ) {
-        Assert.notNull( "newValue", newValue );
-        getElement().setAttribute( "value", newValue );
+        setAttributeValue( "value", newValue );
     }
-
 
     /**
      *  Submit the form.
@@ -86,10 +91,7 @@ public class HtmlButton
      * @exception  ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
      */
-    public Page submit()
-        throws
-            IOException,
-            ElementNotFoundException {
+    public Page submit() throws IOException, ElementNotFoundException {
 
         return click();
     }

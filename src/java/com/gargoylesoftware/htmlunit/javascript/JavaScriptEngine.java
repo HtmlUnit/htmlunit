@@ -62,6 +62,7 @@ import org.mozilla.javascript.ScriptableObject;
  * @author  David K. Taylor
  */
 public final class JavaScriptEngine extends ScriptEngine {
+
     /** Information specific to the javascript engine */
     public static final class PageInfo {
         private final JavaScriptEngine engine_;
@@ -114,6 +115,15 @@ public final class JavaScriptEngine extends ScriptEngine {
      */
     public JavaScriptEngine( final WebClient webClient ) {
         super( webClient );
+    }
+
+    /**
+     * perform initialization for the given page
+     * @param page the page to initialize for
+     */
+    public void initialize(HtmlPage page) {
+        //force allocation of the page info.
+        getPageInfo(page);
     }
 
 

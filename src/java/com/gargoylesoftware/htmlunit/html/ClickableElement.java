@@ -38,8 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
-
-import org.w3c.dom.Element;
+import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -55,18 +54,18 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
  * @author David K. Taylor
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class ClickableElement
-         extends StyledElement {
+public abstract class ClickableElement extends StyledElement {
 
     /**
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element The xml element that represents this html element
+     * @param attributes the initial attributes
      */
-    ClickableElement( final HtmlPage page, final Element element ) {
-        super( page, element );
+    protected ClickableElement( final HtmlPage page, final Map attributes) {
+        super(page, attributes);
     }
 
 

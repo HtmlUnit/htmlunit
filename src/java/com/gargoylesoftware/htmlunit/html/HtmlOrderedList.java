@@ -37,7 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.Element;
+import java.util.Map;
+
 
 /**
  * Wrapper for the html element "ol".
@@ -45,19 +46,29 @@ import org.w3c.dom.Element;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlOrderedList extends ClickableElement {
+
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "ol";
 
     /**
      * Create an instance of HtmlOrderedList
      *
      * @param page The HtmlPage that contains this element.
-     * @param xmlElement The actual html element that we are wrapping.
+     * @param attributes the initial attributes
      */
-    HtmlOrderedList( final HtmlPage page, final Element xmlElement ) {
-        super(page, xmlElement);
+    public HtmlOrderedList( final HtmlPage page, final Map attributes ) {
+        super(page, attributes);
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     /**
      * Return the value of the attribute "type".  Refer to the

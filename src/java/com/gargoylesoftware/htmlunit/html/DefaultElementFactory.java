@@ -38,76 +38,75 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
+import java.util.HashMap;
+
+import org.xml.sax.Attributes;
 
 /**
- * An object that knows how to create HtmlElements
+ * Element factory which createss elements by calling the constructor on a
+ * given {@link com.gargoylesoftware.htmlunit.html.HtmlElement} subclass.
+ * The constructor is expected to take 2 arguments of type
+ * {@link com.gargoylesoftware.htmlunit.html.HtmlPage} and {@link java.util.Map}
+ * where the first one is the owning page of the element, the second one is a map
+ * holding the initial attributes for the element.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-class SimpleHtmlElementCreator extends HtmlElementCreator {
+class DefaultElementFactory implements IElementFactory {
+
+    private static final Class[] CONSTRUCTOR_ARGS = new Class[]{HtmlPage.class, Map.class};
+
     private final Constructor constructor_;
 
-    /**
-     * Create an instance
-     *
-     * @param clazz The class that will be used to create the HtmlElement.
-     */
-    public SimpleHtmlElementCreator( final Class clazz ) {
-        /*
-         * The Java compiler won't allow a direct assignment to the
-         * member variable constructor_ because it doesn't realize
-         * that if there is an exception thrown then the assignment
-         * must have failed.  So, we assign to a temporary variable
-         * and then assign to the final member variable at the end.
-         */
-        Constructor tempConstructor = null;
+    public DefaultElementFactory(Class elementClass) {
+
+        if(!HtmlElement.class.isAssignableFrom(elementClass)) {
+            throw new ClassCastException(elementClass+" is not a subclass of "+HtmlElement.class);
+        }
         try {
-            tempConstructor = clazz.getDeclaredConstructor(
-                new Class[]{HtmlPage.class, Element.class});
+            constructor_ = elementClass.getConstructor(CONSTRUCTOR_ARGS);
         }
-        catch( final NoSuchMethodException e ) {
-            try {
-                tempConstructor = clazz.getDeclaredConstructor(
-                    new Class[]{HtmlPage.class, Node.class});
-            }
-            catch( final NoSuchMethodException e2 ) {
-                throw new ObjectInstantiationException(
-                    "Unable to get constuctor for class ["+clazz.getName()+"]", e2);
-            }
+        catch (Exception e) {
+            throw new ObjectInstantiationException("required constructor not found in "+elementClass, e);
         }
-        constructor_ = tempConstructor;
     }
 
-
     /**
-     * Create a DomNode for the specified xmlElement, contained in the specified page.
-     *
-     * @param page The page that this element will belong to.
-     * @param xmlElement The xml element that this HtmlElement corresponds to.
-     * @return The new DomNode.
+     * @param page the owning page
+     * @param tagName the HTML tag name
+     * @param attributes initial attributes, possibly <code>null</code>
+     * @return the newly created element
      */
-    DomNode create( final HtmlPage page, final Node xmlElement ) {
+    public HtmlElement createElement(
+            HtmlPage page, String tagName, Attributes attributes) {
+
         try {
-            return (DomNode)constructor_.newInstance( new Object[]{page, xmlElement});
+            Map attributeMap = null;
+            if(attributes != null) {
+                attributeMap = new HashMap(attributes.getLength());
+                for(int i=0; i < attributes.getLength(); i++) {
+                    attributeMap.put(attributes.getLocalName(i), attributes.getValue(i));
+                }
+            }
+            HtmlElement element = (HtmlElement)constructor_.newInstance(new Object[]{page, attributeMap});
+            return element;
         }
         catch( final IllegalAccessException e) {
             throw new ObjectInstantiationException(
-                "Exception when calling constructor ["+constructor_+"]", e);
+                    "Exception when calling constructor ["+constructor_+"]", e);
         }
         catch( final InstantiationException e ) {
             throw new ObjectInstantiationException(
-                "Exception when calling constructor ["+constructor_+"]", e);
+                    "Exception when calling constructor ["+constructor_+"]", e);
         }
         catch( final InvocationTargetException e ) {
             throw new ObjectInstantiationException(
-                "Exception when calling constructor ["+constructor_+"]", e.getTargetException());
+                    "Exception when calling constructor ["+constructor_+"]", e.getTargetException());
         }
     }
 }
-

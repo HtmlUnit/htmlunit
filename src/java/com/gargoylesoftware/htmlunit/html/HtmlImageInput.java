@@ -40,8 +40,8 @@ package com.gargoylesoftware.htmlunit.html;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
-import org.w3c.dom.Element;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  *  Wrapper for the html element "input"
@@ -49,6 +49,7 @@ import java.io.IOException;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlImageInput extends HtmlInput {
 
@@ -61,10 +62,10 @@ public class HtmlImageInput extends HtmlInput {
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element the xml element that represents this tag
+     * @param attributes the initial attributes
      */
-    HtmlImageInput( final HtmlPage page, final Element element ) {
-        super( page, element );
+    public HtmlImageInput( final HtmlPage page, final Map attributes ) {
+        super( page, attributes );
     }
 
 

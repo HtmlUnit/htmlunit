@@ -38,7 +38,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import org.w3c.dom.Element;
+
+import java.util.Map;
 
 /**
  *  Wrapper for the html element "input"
@@ -46,6 +47,7 @@ import org.w3c.dom.Element;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlRadioButtonInput extends HtmlInput {
 
@@ -56,10 +58,10 @@ public class HtmlRadioButtonInput extends HtmlInput {
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element the xml element that represents this tag
+     * @param attributes the initial attributes
      */
-    HtmlRadioButtonInput( final HtmlPage page, final Element element ) {
-        super( page, element );
+    public HtmlRadioButtonInput( final HtmlPage page, final Map attributes ) {
+        super(page, attributes);
 
         //From the checkbox creator
         initialCheckedState_ = isAttributeDefined("checked");
@@ -71,10 +73,10 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     public void reset() {
         if( initialCheckedState_ ) {
-            getElement().setAttribute("checked", "checked");
+            setAttributeValue("checked", "checked");
         }
         else {
-            getElement().removeAttribute("checked");
+            removeAttribute("checked");
         }
     }
 
@@ -96,7 +98,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
             }
         }
         else {
-            getElement().removeAttribute( "checked" );
+            removeAttribute( "checked" );
         }
     }
 }

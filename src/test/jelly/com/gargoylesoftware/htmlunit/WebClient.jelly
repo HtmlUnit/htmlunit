@@ -46,8 +46,8 @@
 	    	</h:mockWebConnection>
 	    </h:webClient>
 	    
-        <h:getPage method="get" var="page1" uri="http://first" webclient="webClient1" xmlvar="xmldoc"/>
-        <x:set var="title" select="string($xmldoc/HTML/HEAD/TITLE)"/>
+        <h:getPage method="get" var="page1" uri="http://first" webclient="webClient1"/>
+        <h:select var="title" xpath="string($page1/head/title)"/>
         <test:assertEquals expected="first" actual="${title}"/>
     </test:case>
 

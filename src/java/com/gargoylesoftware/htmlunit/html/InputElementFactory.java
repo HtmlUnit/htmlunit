@@ -37,71 +37,93 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import org.xml.sax.Attributes;
+
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * A specialized creator that knows how to create input objects
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-class HtmlInputElementCreator extends HtmlElementCreator {
+final class InputElementFactory implements IElementFactory {
+
+    public static final InputElementFactory instance = new InputElementFactory();
+
+    /* private singleton constructor */
+    private InputElementFactory() {
+    }
 
     /**
      * Create an HtmlElement for the specified xmlElement, contained in the specified page.
      *
      * @param page The page that this element will belong to.
-     * @param xmlNode The xml element that this HtmlElement corresponds to.
-     * @return The new HtmlElement.
+     * @param tagName the HTML tag name
+     * @param attributes the SAX attributes
+     *
+     * @return a new HtmlInput element.
      */
-    DomNode create( final HtmlPage page, final Node xmlNode ) {
-        final Element xmlElement = (Element) xmlNode;
-        if( page.getTagName(xmlElement).equals("input") == false ) {
-            throw new IllegalArgumentException("tagName is not 'input': "+page.getTagName(xmlElement));
+    public HtmlElement createElement(HtmlPage page, String tagName, Attributes attributes) {
+
+        String type = attributes.getValue("type");
+
+        //type = type != null ? type.toLowerCase() : "";
+        if(type != null) {
+            type = type.toLowerCase();
+        }
+        else {
+            type = "";
         }
 
-        final String type = xmlElement.getAttribute("TYPE").toLowerCase();
+        HtmlInput result;
 
+        Map attributeMap = null;
+        if(attributes != null) {
+            attributeMap = new HashMap(attributes.getLength());
+            for(int i=0; i < attributes.getLength(); i++) {
+                attributeMap.put(attributes.getLocalName(i), attributes.getValue(i));
+            }
+        }
         if( type.length() == 0 ) {
             // This is really an illegal value but the common browsers seem to
             // treat it as a "text" input so we will as well.
-            return new HtmlTextInput( page, xmlElement );
+            result = new HtmlTextInput(page, attributeMap);
         }
         else if( type.equals("submit") ) {
-            return new HtmlSubmitInput( page, xmlElement );
+            result = new HtmlSubmitInput(page, attributeMap);
         }
         else if( type.equals("checkbox")) {
-            return new HtmlCheckBoxInput( page, xmlElement );
+            result = new HtmlCheckBoxInput(page, attributeMap);
         }
         else if( type.equals("radio")) {
-            return new HtmlRadioButtonInput( page, xmlElement );
+            result = new HtmlRadioButtonInput(page, attributeMap);
         }
         else if( type.equals("text")) {
-            return new HtmlTextInput( page, xmlElement );
+            result = new HtmlTextInput(page, attributeMap);
         }
         else if( type.equals("hidden")) {
-            return new HtmlHiddenInput( page, xmlElement );
+            result = new HtmlHiddenInput(page, attributeMap);
         }
         else if( type.equals("password")) {
-            return new HtmlPasswordInput( page, xmlElement );
+            result = new HtmlPasswordInput(page, attributeMap);
         }
         else if( type.equals("image")) {
-            return new HtmlImageInput( page, xmlElement );
+            result = new HtmlImageInput(page, attributeMap);
         }
         else if( type.equals("reset")) {
-            return new HtmlResetInput( page, xmlElement );
+            result = new HtmlResetInput(page, attributeMap);
         }
         else if( type.equals("button")) {
-            return new HtmlButtonInput( page, xmlElement );
+            result = new HtmlButtonInput(page, attributeMap);
         }
         else if( type.equals("file")) {
-            return new HtmlFileInput( page, xmlElement );
+            result = new HtmlFileInput(page, attributeMap);
         }
         else {
-            throw new IllegalStateException("Unexpected type ["+type+"]");
+            throw new IllegalArgumentException("Unexpected input type ["+type+"]");
         }
+        return result;
     }
 }
-

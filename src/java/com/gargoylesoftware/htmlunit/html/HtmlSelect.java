@@ -42,13 +42,13 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
+
+import java.util.Map;
 import java.util.List;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Collections;
+
 
 /**
  *  Wrapper for the html element "select"
@@ -57,10 +57,12 @@ import org.w3c.dom.NodeList;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class HtmlSelect
-         extends ClickableElement
-         implements SubmittableElement {
+public class HtmlSelect extends ClickableElement implements SubmittableElement {
+
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "select";
 
     private String[] fakeSelectedValues_;
 
@@ -69,12 +71,18 @@ public class HtmlSelect
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element The xml element that corresponds to this html element
+     * @param attributes the initial attributes
      */
-    HtmlSelect( final HtmlPage page, final Element element ) {
-        super( page, element );
+    public HtmlSelect( final HtmlPage page, final Map attributes ) {
+        super( page, attributes );
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     /**
      *  Return a List containing all of the currently selected options
@@ -104,18 +112,8 @@ public class HtmlSelect
      * @return  See above
      */
     public List getAllOptions() {
-
-        final NodeList nodeList = getElement().getElementsByTagName( "option" );
-        final int nodeCount = nodeList.getLength();
-        final List allOptions = new ArrayList( nodeCount );
-        final HtmlPage page = getPage();
-
-        int i;
-        for( i = 0; i < nodeCount; i++ ) {
-            allOptions.add( page.getHtmlElement( nodeList.item( i ) ) );
-        }
-
-        return Collections.unmodifiableList( allOptions );
+        final List elementList = getHtmlElementsByTagName( "option" );
+        return Collections.unmodifiableList( elementList );
     }
 
 
@@ -127,10 +125,8 @@ public class HtmlSelect
      */
     public HtmlOption getOption( final int index ) {
 
-        final NodeList nodeList =
-            getElement().getElementsByTagName( "option" );
-
-        return (HtmlOption) getPage().getHtmlElement( nodeList.item( index ) );
+        final List elementList = getHtmlElementsByTagName( "option" );
+        return (HtmlOption) elementList.get( index );
     }
 
 
@@ -140,8 +136,8 @@ public class HtmlSelect
      */
     public int getOptionSize() {
 
-        final NodeList nodeList = getElement().getElementsByTagName( "option" );
-        return nodeList.getLength();
+        final List elementList = getHtmlElementsByTagName( "option" );
+        return elementList.size();
     }
 
 
@@ -151,11 +147,10 @@ public class HtmlSelect
      * @param newLength The new length property value
      */
     public void setOptionSize( final int newLength ) {
-        final NodeList nodeList = getElement().getElementsByTagName( "option" );
+        final List elementList = getHtmlElementsByTagName( "option" );
 
-        while( nodeList.getLength() > newLength ) {
-            final Node optionNode = nodeList.item( nodeList.getLength() - 1 ) ;
-            getNode().removeChild( optionNode ) ;
+        for(int i=elementList.size()-1; i >= newLength; i--) {
+            ((HtmlElement)elementList.get(i)).remove();
         }
     }
 
@@ -165,11 +160,14 @@ public class HtmlSelect
      * @param index The index of the option to remove
      */
     public void removeOption( final int index ) {
-
-        final NodeList nodeList = getElement().getElementsByTagName( "option" );
-
-        final Node optionNode = nodeList.item( index ) ;
-        optionNode.getParentNode().removeChild( optionNode ) ;
+        ChildElementsIterator iterator = new ChildElementsIterator();
+        for(int i=0; iterator.hasNext(); i++) {
+            HtmlElement element = iterator.nextElement();
+            if(i == index) {
+                element.remove();
+                return;
+            }
+        }
     }
 
 
@@ -180,10 +178,14 @@ public class HtmlSelect
      */
     public void replaceOption( final int index, final HtmlOption newOption ) {
 
-        final NodeList nodeList = getElement().getElementsByTagName( "option" );
-
-        final Node optionNode = nodeList.item( index ) ;
-        optionNode.getParentNode().replaceChild( newOption.getNode(), optionNode ) ;
+        ChildElementsIterator iterator = new ChildElementsIterator();
+        for(int i=0; iterator.hasNext(); i++) {
+            HtmlElement element = iterator.nextElement();
+            if(i == index) {
+                element.replace(newOption);
+                return;
+            }
+        }
     }
 
 
@@ -192,9 +194,7 @@ public class HtmlSelect
      * @param newOption The new option to add
      */
     public void appendOption( final HtmlOption newOption ) {
-
-        final Node selectNode = getNode() ;
-        selectNode.appendChild( newOption.getNode() ) ;
+        appendChild( newOption ) ;
     }
 
 
@@ -236,17 +236,14 @@ public class HtmlSelect
      * may be the same window or it may be a freshly loaded one.
      */
     public Page setSelectedAttribute( final HtmlOption selectedOption, final boolean isSelected ) {
-
         if( isMultipleSelectEnabled() ) {
-            setSelected( selectedOption.getElement(), isSelected );
+            setSelected( selectedOption, isSelected );
         }
         else {
             final Iterator iterator = getAllOptions().iterator();
             while( iterator.hasNext() ) {
                 final HtmlOption option = ( HtmlOption )iterator.next();
-                setSelected(
-                    option.getElement(),
-                    option == selectedOption && isSelected );
+                setSelected(option, option == selectedOption && isSelected );
             }
         }
 
@@ -286,12 +283,12 @@ public class HtmlSelect
     }
 
 
-    private void setSelected( final Element element, final boolean isSelected ) {
+    private void setSelected(HtmlOption option, final boolean isSelected ) {
         if( isSelected ) {
-            element.setAttribute( "selected", "selected" );
+            option.setAttributeValue( "selected", "selected" );
         }
         else {
-            element.removeAttribute( "selected" );
+            option.removeAttribute( "selected" );
         }
     }
 

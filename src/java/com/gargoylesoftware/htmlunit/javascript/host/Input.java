@@ -37,15 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.w3c.dom.Element;
-
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
 /**
  *  The javascript object that represents something that can be put in a form.
  *
- *@version    $Revision$
- *@author     <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class Input extends HTMLElement {
 
@@ -81,7 +81,7 @@ public class Input extends HTMLElement {
      *@param  newValue  The new value.
      */
     public void jsSet_value( final String newValue ) {
-        getHtmlElementOrDie().getElement().setAttribute( "value", newValue );
+        getHtmlElementOrDie().setAttributeValue( "value", newValue );
     }
 
 
@@ -202,12 +202,12 @@ public class Input extends HTMLElement {
      * @param disabled True if this is to be disabled.
      */
     public void jsSet_disabled( final boolean disabled ) {
-        final Element xmlElement = getHtmlElementOrDie().getElement();
+        final HtmlElement element = getHtmlElementOrDie();
         if( disabled ) {
-            xmlElement.setAttribute("disabled", "disabled");
+            element.setAttributeValue("disabled", "disabled");
         }
         else {
-            xmlElement.removeAttribute("disabled");
+            element.removeAttribute("disabled");
         }
     }
 

@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -48,7 +46,6 @@ import java.util.Iterator;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
-import org.w3c.dom.Element;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
@@ -60,7 +57,6 @@ import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -73,6 +69,7 @@ import com.gargoylesoftware.htmlunit.javascript.WindowFramesArray;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @author  David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public final class Window extends SimpleScriptable {
 
@@ -359,15 +356,6 @@ public final class Window extends SimpleScriptable {
 
         document_ = (Document)makeJavaScriptObject("Document");
         document_.setHtmlElement(htmlPage);
-        final PropertyChangeListener listener = new PropertyChangeListener() {
-            public void propertyChange( final PropertyChangeEvent event ) {
-                if( event.getPropertyName().equals(htmlPage.PROPERTY_ELEMENT) ) {
-                    document_.initialize();
-                    htmlPage.removePropertyChangeListener(this);
-                }
-            }
-        };
-        htmlPage.addPropertyChangeListener(listener);
 
         navigator_ = (Navigator)makeJavaScriptObject("Navigator");
         screen_ = (Screen)makeJavaScriptObject("Screen");
@@ -567,7 +555,7 @@ public final class Window extends SimpleScriptable {
         if( result == NOT_FOUND ) {
             final HtmlElement htmlElement = ((Window)start).getHtmlElementOrNull();
             //System.out.println("Window.get() htmlElement=["+htmlElement+"]");
-            result = getFrameByName( htmlElement, name );
+            result = getFrameByName( htmlElement.getPage(), name );
         }
 
         if( result == NOT_FOUND ) {
@@ -611,21 +599,20 @@ public final class Window extends SimpleScriptable {
     }
 
 
-    private Object getFrameByName( final HtmlElement element, final String name ) {
-        final HtmlPage page = element.getPage();
-        final Iterator xmlIterator = page.getXmlChildElements();
-        while( xmlIterator.hasNext() ) {
-            final Element xmlElement = ( Element )xmlIterator.next();
-            final String tagName = page.getTagName(xmlElement);
+    private Object getFrameByName( final HtmlPage page, final String name ) {
+
+        final Iterator iterator = page.getAllHtmlChildElements();
+        while( iterator.hasNext() ) {
+            final HtmlElement element = ( HtmlElement )iterator.next();
+            final String tagName = element.getTagName();
             if( tagName.equals("body") ) {
                 // Framesets don't contain body tags so if we find one of these
                 // then we can leave early.
                 return NOT_FOUND;
             }
             if( "frame".equals( tagName ) ) {
-                if( page.getAttributeValue(xmlElement, "name").equals(name) ) {
-                    HtmlFrame frame = (HtmlFrame)page.getHtmlElement(xmlElement);
-                    final Object scriptObject = frame.getScriptObject();
+                if( element.getAttributeValue("name").equals(name) ) {
+                    final Object scriptObject = element.getScriptObject();
                     if( scriptObject == null ) {
                         getLog().error("Window.getFrameByName() scriptObject not initialized yet");
                         return NOT_FOUND;

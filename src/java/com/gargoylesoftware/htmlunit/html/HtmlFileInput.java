@@ -38,8 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
-
-import org.w3c.dom.Element;
+import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.KeyDataPair;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
@@ -49,6 +48,7 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlFileInput extends HtmlInput {
 
@@ -56,10 +56,10 @@ public class HtmlFileInput extends HtmlInput {
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element the xml element that represents this tag
+     * @param attributes the initial attributes
      */
-    HtmlFileInput( final HtmlPage page, final Element element ) {
-        super( page, element );
+    public HtmlFileInput( final HtmlPage page, final Map attributes ) {
+        super( page, attributes );
     }
 
     /**

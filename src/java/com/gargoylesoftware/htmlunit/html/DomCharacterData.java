@@ -37,35 +37,36 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.CharacterData;
-import org.w3c.dom.Node;
-
 /**
  * Wrapper for the DOM node CharacterData.
  *
  * @version  $Revision$
  * @author  David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class DomCharacterData extends DomNode {
+public abstract class DomCharacterData extends DomNode {
+
+    /** the data string */
+    private String data_;
 
     /**
      * Create an instance of DomCharacterData
      *
      * @param page The HtmlPage that contains this element.
-     * @param xmlNode The actual XML character data node that we are wrapping.
+     * @param data the data string wrapped by this node
      */
-    DomCharacterData( final HtmlPage page, final Node xmlNode ) {
-        super(page, xmlNode);
+    public DomCharacterData(final HtmlPage page, final String data) {
+        super(page);
+        this.data_ = data;
     }
 
 
     /**
      * Get the data character string for this character data.
-     * @return The String of data.
+     * @return The data String.
      */
     public String getData() {
-        final CharacterData xmlNode = (CharacterData) getNode();
-        return xmlNode.getData();
+        return data_;
     }
 
 
@@ -74,28 +75,32 @@ public class DomCharacterData extends DomNode {
      * @param newValue The new String of data.
      */
     public void setData( final String newValue ) {
-        final CharacterData xmlNode = (CharacterData) getNode();
-        xmlNode.setData( newValue );
+        data_ = newValue;
     }
 
+    /**
+     * Set the data character string to the new string.
+     * @param newValue The new String of data.
+     */
+    public void setNodeValue(String newValue) {
+        data_ = newValue;
+    }
 
     /**
      * Get the number of characters in the character data.
      * @return The number of characters.
      */
     public int getLength() {
-        final CharacterData xmlNode = (CharacterData) getNode();
-        return xmlNode.getLength();
+        return data_.length();
     }
 
 
     /**
      * Append a string to character data.
-     * @param arg The string to be appended to the character data.
+     * @param newData The string to be appended to the character data.
      */
-    public void appendData(final String arg) {
-        final CharacterData xmlNode = (CharacterData) getNode();
-        xmlNode.appendData( arg );
+    public void appendData(final String newData) {
+        this.data_ += newData;
     }
 
 
@@ -105,8 +110,17 @@ public class DomCharacterData extends DomNode {
      * @param count The number of characters to be deleted.
      */
     public void deleteData(final int offset, final int count) {
-        final CharacterData xmlNode = (CharacterData) getNode();
-        xmlNode.deleteData( offset, count);
+        if(offset < 0 || count < 0) {
+            throw new IllegalArgumentException("offset: "+offset+" count: "+count);
+        }
+
+        int tailLength = Math.max(data_.length() - count - offset, 0);
+        if(tailLength > 0) {
+            data_ = data_.substring(0, offset) + data_.substring(offset + count, offset + count + tailLength);
+        }
+        else {
+            data_ = "";
+        }
     }
 
 
@@ -117,8 +131,7 @@ public class DomCharacterData extends DomNode {
      * @param arg The string to insert.
      */
     public void insertData(final int offset, final String arg) {
-        final CharacterData xmlNode = (CharacterData) getNode();
-        xmlNode.insertData( offset, arg);
+        data_ = new StringBuffer(data_).insert(offset, arg).toString();
     }
 
 
@@ -130,10 +143,9 @@ public class DomCharacterData extends DomNode {
      * @param arg The string that replaces the count characters beginning at
      * the character at offset.
      */
-    public void replaceData(final int offset, final int count,
-        final String arg) {
-        final CharacterData xmlNode = (CharacterData) getNode();
-        xmlNode.replaceData( offset, count, arg );
+    public void replaceData(final int offset, final int count, final String arg) {
+        deleteData(offset, count);
+        insertData(offset, arg);
     }
 
 
@@ -145,7 +157,19 @@ public class DomCharacterData extends DomNode {
      * character data starting from the character at position offset.
      */
     public String substringData(final int offset, final int count) {
-        final CharacterData xmlNode = (CharacterData) getNode();
-        return xmlNode.substringData( offset, count );
+        int length = data_.length();
+        if (count < 0 || offset < 0 || offset > length - 1) {
+            throw new IllegalArgumentException("offset: "+offset+" count: "+count);
+        }
+
+        int tailIndex = Math.min(offset + count, length);
+        return data_.substring(offset, tailIndex);
+    }
+
+    /**
+     * @return the string data held by this node
+     */
+    public String getNodeValue() {
+        return data_;
     }
 }

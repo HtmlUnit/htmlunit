@@ -37,7 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.Element;
+import java.util.Map;
 
 /**
  *  Wrapper for the html element "option"
@@ -45,8 +45,12 @@ import org.w3c.dom.Element;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlOption extends ClickableElement {
+
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "option";
 
     private final boolean initialSelectedState_;
 
@@ -54,13 +58,19 @@ public class HtmlOption extends ClickableElement {
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element The xml element that represents this html element
+     * @param attributes the initial attributes
      */
-    HtmlOption( final HtmlPage page, final Element element ) {
-        super( page, element );
+    public HtmlOption( final HtmlPage page, final Map attributes ) {
+        super(page, attributes);
         initialSelectedState_ = isAttributeDefined("selected");
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     /**
      *  Return true if this option is currently selected
@@ -73,7 +83,9 @@ public class HtmlOption extends ClickableElement {
 
 
     /**
-     * Set the selected state of this option
+     * Set the selected state of this option. This will possibly also change the
+     * selected properties of sibling option elements
+     *
      * @param selected true if this option should be selected.
      */
     public void setSelected( final boolean selected ) {
@@ -82,12 +94,12 @@ public class HtmlOption extends ClickableElement {
 
 
     private HtmlSelect getEnclosingSelectOrDie() {
-        HtmlElement parent = getParent();
+        DomNode parent = getParentNode();
         while( parent != null ) {
             if( parent instanceof HtmlSelect ) {
                 return (HtmlSelect)parent;
             }
-            parent = parent.getParent();
+            parent = parent.getParentNode();
         }
         throw new IllegalStateException("Can't find enclosing select element");
     }
@@ -98,10 +110,10 @@ public class HtmlOption extends ClickableElement {
      */
     public void reset() {
         if( initialSelectedState_ ) {
-            getElement().setAttribute("selected", "selected");
+            setAttributeValue("selected", "selected");
         }
         else {
-            getElement().removeAttribute("selected");
+            removeAttribute("selected");
         }
     }
 

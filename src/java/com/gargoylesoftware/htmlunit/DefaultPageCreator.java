@@ -38,15 +38,18 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import org.xml.sax.SAXException;
 
 /**
  * The default implementation of PageCreator.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class DefaultPageCreator implements PageCreator {
+
     /**
      * Create an instance.
      */
@@ -73,16 +76,25 @@ public class DefaultPageCreator implements PageCreator {
         final Page newPage;
         final String contentType = webResponse.getContentType();
         if( contentType.equals( "text/html" ) || contentType.equals( "text/xhtml" ) ) {
-            newPage = new HtmlPage( webClient, webResponse.getUrl(), webResponse, webWindow );
+            try {
+                HTMLParser parser = new HTMLParser();
+                newPage = parser.parse(webClient, webResponse, webWindow);
+            }
+            catch (SAXException e) {
+                throw new ObjectInstantiationException("Unable to parse html input", e);
+            }
         }
         else if( contentType.equals("text/javascript") || contentType.equals("application/x-javascript") ) {
             newPage = new JavaScriptPage( webResponse, webWindow );
+            webWindow.setEnclosedPage(newPage);
         }
         else if( contentType.startsWith( "text/" ) ) {
             newPage = new TextPage( webResponse, webWindow );
+            webWindow.setEnclosedPage(newPage);
         }
         else {
             newPage = new UnexpectedPage( webResponse, webWindow );
+            webWindow.setEnclosedPage(newPage);
         }
         return newPage;
     }

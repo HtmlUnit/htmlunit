@@ -110,6 +110,37 @@
         	</table>
         </section>
 
+        <section name="select tag">
+        	<p>
+        		This tag will evaluate an XPath expression against a HtmlUnit node and store the
+                result in a script variable. Note that the evaluation context (i.e. the node from
+                which evaluation starts) must be provided through a script variable reference, using
+                the xpath variable syntax ($name).
+        	</p>
+        	<table>
+        		<tr>
+        			<th>Attribute</th>
+        			<th>Description</th>
+        			<th>Mandatory</th>
+        		</tr>
+        		<tr>
+        			<td>var</td>
+        			<td>
+        				The name of the jelly variable that will contain the evaluation result
+        			</td>
+        			<td>Yes</td>
+        		</tr>
+        		<tr>
+        			<td>xpath</td>
+        			<td>
+        				the xpath expression to evaluate. Note that the expression can reference
+                        script variables through the $name syntax
+        			</td>
+        			<td>No</td>
+        		</tr>
+        	</table>
+        </section>
+
         <section name="mockWebConnection tag">
         	<p>
         		Specify a fake WebConnection for the purpose of testing the jelly tags

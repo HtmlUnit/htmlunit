@@ -37,34 +37,40 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import org.xml.sax.Attributes;
+
 import java.util.Map;
+import java.util.HashMap;
 
 /**
- * Wrapper for the html element "tfoot".
+ * a factory for elements encountered in parsing the input which are not represented
+ * by dedicated element classes
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class HtmlTableFooter extends TableRowGroup {
+public final class UnknownElementFactory implements IElementFactory {
 
-    /** the HTML tag represented by this element */
-    public static final String TAG_NAME = "tfoot";
+    /** the singleton instance */
+    public static final UnknownElementFactory instance = new UnknownElementFactory();
 
-    /**
-     * Create an instance of HtmlTableFooter
-     *
-     * @param page The HtmlPage that contains this element.
-     * @param attributes the initial attributes
-     */
-    public HtmlTableFooter( final HtmlPage page, final Map attributes ) {
-        super(page, attributes);
+    /** private singleton constructor */
+    private UnknownElementFactory() {
     }
 
     /**
-     * @return the HTML tag name
+     * @see IElementFactory#createElement(HtmlPage, String, Attributes)
      */
-    public String getTagName() {
-        return TAG_NAME;
+    public HtmlElement createElement(HtmlPage page, String tagName, Attributes attributes)
+    {
+        Map attributeMap = null;
+        if(attributes != null) {
+            attributeMap = new HashMap(attributes.getLength());
+            for(int i=0; i < attributes.getLength(); i++) {
+                attributeMap.put(attributes.getLocalName(i), attributes.getValue(i));
+            }
+        }
+        HtmlElement newElement = new UnknownHtmlElement(page, tagName, attributeMap);
+        return newElement;
     }
 }

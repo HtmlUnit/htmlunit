@@ -59,10 +59,11 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.javascript.DocumentAllArray;
 
 /**
@@ -72,8 +73,10 @@ import com.gargoylesoftware.htmlunit.javascript.DocumentAllArray;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
  * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public final class Document extends HTMLElement {
+
     private DocumentAllArray allArray_;
     private String status_ = "";
 
@@ -364,7 +367,7 @@ public final class Document extends HTMLElement {
     public Object jsFunction_createElement( final String tagName ) {
         Object result = NOT_FOUND;
         try {
-            final HtmlElement htmlElement = getHtmlElementOrDie().getPage().createElement(tagName);
+            final HtmlElement htmlElement = getDomNodeOrDie().getPage().createElement(tagName);
             final Object jsElement = getScriptableFor(htmlElement);
 
             if( jsElement == NOT_FOUND ) {
@@ -392,7 +395,7 @@ public final class Document extends HTMLElement {
     public Object jsFunction_createTextNode( final String newData ) {
         Object result = NOT_FOUND;
         try {
-            final DomNode domNode = getDomNodeOrDie().getPage().createTextNode(newData);
+            final DomNode domNode = new DomText(getDomNodeOrDie().getPage(), newData);
             final Object jsElement = getScriptableFor(domNode);
 
             if( jsElement == NOT_FOUND ) {
