@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="yourgod">
+				Upgraded commons-httpclient to version 3.0rc1
+			</action>        
             <action type="update" dev="mguillem" id="1115259" due-to="Michael Ottati">
                 JavaScript: fixed document.domain setter for domains like d1.d2.d3.d4.com.
             </action>
