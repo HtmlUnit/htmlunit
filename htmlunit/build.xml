@@ -44,7 +44,20 @@
 </target>
 
 
-<target name="cleancompile" depends="clean, compile" description="clean compile">
+<target name="cleancompile" description="clean compile">
+	 <delete>
+		<fileset dir="src/java" includes="**/*.class"/>
+	</delete>
+	<antcall target="compile"/>
+</target>
+
+
+<target name="clean" description="clean">
+	 <delete>
+		<fileset dir="src/java" includes="**/*.class"/>
+	</delete>
+	<delete dir="build/${version}"/>
+	<delete file="dist/projectdocs.zip"/>
 </target>
 
 
@@ -220,13 +233,6 @@
 		<arg value="com.gargoylesoftware.htmlunit.test.MainTestSuite"/>
 		<classpath refid="base.class.path"/>
 	</java>
-</target>
-
-
-<target name="clean" description="clean">
-	 <delete>
-		<fileset dir="." includes="**/*.class"/>
-	</delete>
 </target>
 
 

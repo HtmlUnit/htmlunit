@@ -54,7 +54,14 @@
 
 
 	<xsd:complexType name="requiredBrowserType">
-		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="name" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="Netscape"/>
+					<xsd:enumeration value="Microsoft Internet Explorer"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
 		<xsd:attribute name="min-version" type="xsd:float"/>
 		<xsd:attribute name="max-version" type="xsd:float"/>
 		<xsd:attribute name="less-than-version" type="xsd:float"/>
