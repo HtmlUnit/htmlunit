@@ -843,6 +843,42 @@ public class WebClientTest extends WebTestCase {
         });
         client.getPage( new URL( "http://www.yahoo.com" ) );
      }
+    
+    /** 
+     * Test the ScriptPreProcessor's ability to filter out a javascript method
+     * that is not implemented without affecting the rest of the page.
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testScriptPreProcessor_UnimplementedJavascript() throws Exception {
+        
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        final String content = "<html><head><title>foo</title></head><body>"
+            + "<p>hello world</p>"
+            + "<script>document.unimplementedFunction();</script>"
+            + "<script>alert('implemented function');</script>"
+            + "</body></html>";
+
+        webConnection.setDefaultResponse( content );
+        client.setWebConnection( webConnection );
+
+        client.setScriptPreProcessor( new ScriptPreProcessor() {
+            public String preProcess( final HtmlPage htmlPage, final String sourceCode, final String sourceName,
+                                      final HtmlElement htmlElement ) {
+                if (sourceCode.indexOf("unimplementedFunction") > -1) {
+                    return "";
+                }
+                return sourceCode;
+            }
+        });
+        final List alerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(alerts));
+        client.getPage( new URL( "http://page" ) );
+        
+        assertEquals(1, alerts.size());
+        assertEquals("implemented function", alerts.get(0).toString());
+     }
 
     /**
      * Apparently if the browsers receive a charset that they don't understand, they ignore
