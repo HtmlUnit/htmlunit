@@ -301,39 +301,63 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for RFE 741930
-     * @throws Exception if the test fails
+     * Ensures that <tt>document.createElement()</tt> works correctly.
+     * @throws Exception if the test fails.
      */
     public void testDocumentCreateElement() throws Exception {
-        final String htmlContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    var div1=document.createElement('div');\n"
-             + "    var body1=document.getElementById('body');\n"
-             + "    body1.appendChild(div1);\n"
-             + "    alert(div1.tagName);\n"
-             + "    alert(div1.nodeType);\n"
-             + "    alert(div1.nodeValue);\n"
-             + "    alert(div1.nodeName);\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()' id='body'>"
-             + "</body></html>";
 
+        final String htmlContent
+             = "<html>\n"
+             + "  <head>\n"
+             + "    <title>First</title>\n"
+             + "    <script>\n"
+             + "      function doTest() {\n"
+             + "        // Create a DIV element.\n"
+             + "        var div1 = document.createElement('div');\n"
+             + "        div1.id = 'div1';\n"
+             + "        document.body.appendChild(div1);\n"
+             + "        alert(div1.tagName);\n"
+             + "        alert(div1.nodeType);\n"
+             + "        alert(div1.nodeValue);\n"
+             + "        alert(div1.nodeName);\n"
+             + "        // Create an INPUT element.\n"
+             + "        var input = document.createElement('input');\n"
+             + "        input.id = 'text1id';\n"
+             + "        input.name = 'text1name';\n"
+             + "        input.value = 'text1value';\n"
+             + "        var form = document.getElementById('form1');\n"
+             + "        form.appendChild(input);\n"
+             + "        alert(document.getElementById('button1id').value);\n"
+             + "        alert(document.getElementById('text1id').value);\n"
+             + "        // The default type of an INPUT element is 'text'.\n"
+             + "        alert(document.getElementById('text1id').type);\n"
+             + "      }\n"
+             + "    </script>\n"
+             + "  </head>\n"
+             + "  <body onload='doTest()'>\n"
+             + "    <form name='form1' id='form1'>\n"
+             + "      <input type='button' id='button1id' name='button1name' value='button1value'/>\n"
+             + "      This is form1.\n"
+             + "    </form>\n"
+             + "  </body>\n"
+             + "</html>\n";
+
+        final List expectedAlerts = Arrays.asList( 
+                new String[]{ "DIV", "1", "null", "DIV", "button1value", "text1value", "text" } );
+        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
+        
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals( "First", page.getTitleText() );
 
-        final HtmlElement div1 = (HtmlElement)
-            page.getHtmlElementById("body").getLastChild();
+        assertEquals( expectedAlerts, collectedAlerts );
+
+        final HtmlElement div1 = page.getHtmlElementById("div1");
         assertEquals("div", div1.getTagName());
         assertEquals(1, div1.getNodeType());
         assertEquals(null, div1.getNodeValue());
         assertEquals("div", div1.getNodeName());
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "DIV", "1", "null", "DIV"
-        } );
-        assertEquals( expectedAlerts, collectedAlerts );
     }
 
     /**

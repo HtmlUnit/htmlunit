@@ -68,25 +68,25 @@ final class InputElementFactory implements IElementFactory {
      */
     public HtmlElement createElement(HtmlPage page, String tagName, Attributes attributes) {
 
-        String type = attributes.getValue("type");
-
-        //type = type != null ? type.toLowerCase() : "";
-        if(type != null) {
-            type = type.toLowerCase();
+        String type = null;
+        if(attributes != null) {
+            type = attributes.getValue("type");
         }
-        else {
+        if(type == null) {
             type = "";
         }
+        else {
+            type = type.toLowerCase();
+        }
 
-        HtmlInput result;
-
-        Map attributeMap = null;
+        final Map attributeMap = new HashMap();
         if(attributes != null) {
-            attributeMap = new HashMap(attributes.getLength());
             for(int i=0; i < attributes.getLength(); i++) {
                 attributeMap.put(attributes.getLocalName(i), attributes.getValue(i));
             }
         }
+
+        final HtmlInput result;
         if( type.length() == 0 ) {
             // This not an illegal value, as it defaults to "text"
             // cf http://www.w3.org/TR/REC-html40/interact/forms.html#adef-type-INPUT
