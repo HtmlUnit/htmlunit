@@ -47,6 +47,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import junit.framework.AssertionFailedError;
 
@@ -59,6 +65,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David D. Kilzer
+ * @author Marc Guillemot
  */
 public abstract class WebTestCase extends BaseTestCase {
     /** Constant for the url http://first which is used in the tests. */
@@ -72,6 +79,14 @@ public abstract class WebTestCase extends BaseTestCase {
 
     /** Constant for the url http://www.gargoylesoftware.com which is used in the tests. */
     public static final URL URL_GARGOYLE;
+
+    /**
+     * The name of the system property used to determine if files should be generated
+     * or not in {@link #createTestPageForRealBrowser}
+     */
+    public static final String PROPERTY_GENERATE_TESTPAGES 
+        = "com.gargoylesoftware.htmlunit.WebTestCase.GenerateTestpages";
+
     static {
         try {
             URL_FIRST = new URL("http://first");
@@ -178,6 +193,60 @@ public abstract class WebTestCase extends BaseTestCase {
             throw new FileNotFoundException(localizedName);
         }
         return file;
+    }
+
+    /**
+     * Generates an instrumented html file in the temporary dir to easily make a manual test in a real browser.
+     * The file is generated only if the system property {@link #PROPERTY_GENERATE_TESTPAGES} is set. 
+     * @param content the content of the html page
+     * @param expectedAlerts the expected alerts
+     * @throws IOException if writing file fails
+     */
+    protected void createTestPageForRealBrowserIfNeeded(final String content, final List expectedAlerts) 
+    throws IOException {
+        final Log log = LogFactory.getLog(WebTestCase.class);
+        if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
+            // should be optimized....
+            
+            // generate the js code
+            final InputStream is = getClass().getClassLoader().getResourceAsStream(
+                    "com/gargoylesoftware/htmlunit/alertVerifier.js");
+            final String baseJS = IOUtils.toString(is);
+            IOUtils.closeQuietly(is);
+            
+            StringBuffer sb = new StringBuffer();
+            sb.append("<script type='text/javascript'>\n");
+            sb.append("var htmlunitReserved_tab = [");
+            for (final ListIterator iter = expectedAlerts.listIterator(); iter.hasNext();)
+            {
+                if (iter.hasPrevious()) {
+                    sb.append(", ");
+                }
+                final String message = (String) iter.next();
+                sb.append("{expected: \"")
+                    .append(message)
+                    .append("\"}");
+            }
+            sb.append("];\n\n");
+            sb.append(baseJS);
+            sb.append("</script>");
+            
+            // first version, we assume that there is a <head>
+            final int indexHead = content.indexOf("<head>");
+            if (indexHead == -1) {
+                throw new RuntimeException("Currently only content with a <head> is supported");
+            }
+            sb.insert(0, content.substring(0, indexHead + 6));
+            sb.append(content.substring(indexHead + 6));
+            
+            final File f = File.createTempFile("test", ".html");
+            FileUtils.writeStringToFile(f, sb.toString(), "ISO-8859-1");
+            log.info("Test file written: " + f.getAbsolutePath());
+        }
+        else {
+            log.debug("System property \"" + PROPERTY_GENERATE_TESTPAGES 
+                    + "\" not set, don't generate test html page for real browser");
+        }
     }
 }
 

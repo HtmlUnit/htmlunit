@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author  <a href="mailto:BarnabyCourt@users.sourceforge.net">Barnaby Court</a>
  * @author  David K. Taylor
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Marc Guillemot
  */
 public class SimpleScriptableTest extends WebTestCase {
     /**
@@ -96,6 +97,8 @@ public class SimpleScriptableTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final List expectedAlerts = Collections.singletonList("past focus");
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
@@ -107,8 +110,8 @@ public class SimpleScriptableTest extends WebTestCase {
                      page.getFormByName("form1").getInputByName("textfield1"),
                      page.getWebClient().getElementWithFocus());
         assertEquals( expectedAlerts, collectedAlerts );
+        
     }
-
 
     /**
      */
