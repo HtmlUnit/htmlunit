@@ -129,7 +129,11 @@
 				another in JavaScript. For example "parent.nav.document", where 
 				nav is the name of the frame. 
             </action>
+            <action type="update" dev="mbowler" id="793340">
+            	Fixed exception when specifying an empty string for src on an a frame.
+            </action>
         </release>
+
         <release version="1.2.3" date="July 31, 2003">
             <action type="add" dev="mbowler">
                 Initial support for Maven
