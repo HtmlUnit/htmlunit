@@ -47,6 +47,7 @@
 				Refer to <a href="submittingPatches.html">"How to submit a patch"</a>
 			</answer>
 		</faq>
+
 		<faq>
 			<question>
 				I'm having problems with cookie support
@@ -54,7 +55,8 @@
 			<answer>
 				Cookie support is actually implemented in
 				<a href="http://jakarta.apache.org/commons/httpclient">commons-httpclient</a>, a project
-				in active development.  The odds are pretty good that whatever cookie problems you're
+				in active development, and explained in the <a href="http://jakarta.apache.org/commons/httpclient/cookies.html">Cookie Guide</a>. 
+				The odds are pretty good that whatever cookie problems you're
 				encountering have already been fixed so you might want to try a newer version of
 				their jar file.  If that doesn't help then post something to the HtmlUnit mailing list.
 			</answer>
