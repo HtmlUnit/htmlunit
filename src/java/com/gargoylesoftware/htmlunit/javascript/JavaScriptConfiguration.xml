@@ -209,6 +209,8 @@
 			<javascript min-version="1.1"/>
 		</property>
 		<property name="value" readable="true" writable="true"/>
+		<!-- This property is only in DOM1 so it  -->
+		<property name="disabled" readable="true" writable="true"/>
 		<function name="blur"/>
 		<function name="click"/>
 		<function name="focus"/>

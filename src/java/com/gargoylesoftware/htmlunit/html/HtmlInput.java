@@ -385,6 +385,11 @@ public abstract class HtmlInput
     }
 
 
+    public final boolean isDisabled() {
+        return isAttributeDefined("disabled");
+    }
+
+
     /**
      * Return the value of the attribute "readonly".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>

@@ -275,6 +275,7 @@
 		<property key="checkstyle.rcurly" value="alone"/>
 		<property key="checkstyle.header.file" value="build/checkstyle.headerfile"/>
 		<property key="checkstyle.require.package.html" value="true"/>
+		<property key="checkstyle.require.version" value="true"/>
 		<fileset dir="src/java" includes="**/*.java" excludes="**/test/*"/>
 	</checkstyle>
 
