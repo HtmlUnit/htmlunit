@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                Improved JS innerHTML to allow complex html code to be set.
+            </action>
             <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1085224">
                 Refactored different arrays of html elements in a generic ElementArray. Expressions like "document.all.tags('s').item(y)" can now be evaluated.
             </action>

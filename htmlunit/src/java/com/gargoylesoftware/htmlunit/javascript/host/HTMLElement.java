@@ -43,14 +43,21 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * The javascript object "HTMLElement" which is the base class for all html
@@ -244,44 +251,80 @@ public class HTMLElement extends NodeImpl {
      * @return the contents of this node as html
      */
     public String jsGet_innerHTML() {
-        final Iterator it = getDomNodeOrDie().getChildIterator();
         StringBuffer buf = new StringBuffer();
-        while (it.hasNext()) {
-            buf.append(((DomNode) it.next()).asXml());
-        }
-        removeChar(buf, "\r");
-        removeChar(buf, "\n");
-        removeChar(buf, "  ");
+        // we can't rely on DomNode.asXml because it adds indentation and new lines
+        printChildren(buf, getDomNodeOrDie());
+
         return buf.toString();
     }
 
-
-    /**
-     * Remove all occurances of the given string.  Note that if the string
-     * is a multi-character string, only the first character is removed.
-     * @param buf - StringBuffer to remove the characters from
-     * @param str - The string with the first character to be removed.
-     */
-    private void removeChar(StringBuffer buf, String str) {
-        int i;
-        while (0 <= (i = buf.indexOf(str))) {
-            buf.deleteCharAt(i);
+    private void printChildren(final StringBuffer buffer, final DomNode node) {
+        for (final Iterator iter = node.getChildIterator(); iter.hasNext();) {
+            printNode(buffer, (DomNode) iter.next());
         }
     }
-    
+    private void printNode(final StringBuffer buffer, final DomNode node) {
+        if (node instanceof DomCharacterData) {
+            buffer.append(node.getNodeValue().replaceAll("  ", " ")); // remove white space sequences
+        }
+        else {
+            final HtmlElement htmlElt = (HtmlElement) node;
+            buffer.append("<");
+            buffer.append(htmlElt.getTagName());
+            
+            // the attributes
+            for (final Iterator iterator=htmlElt.getAttributeEntriesIterator(); iterator.hasNext(); ) {
+                buffer.append(' ' );
+                final Map.Entry entry = (Map.Entry) iterator.next();
+                buffer.append(entry.getKey());
+                buffer.append( "=\"" );
+                buffer.append(entry.getValue());
+                buffer.append( "\"" );
+            }
+            if (htmlElt.getFirstChild() == null) {
+                buffer.append("/");
+            }
+            buffer.append(">");
+            
+            printChildren(buffer, node);
+            if (htmlElt.getFirstChild() != null) {
+                buffer.append("</");
+                buffer.append(htmlElt.getTagName());
+                buffer.append(">");
+            }
+        }
+    }    
+
     /**
      * Replace all children elements of this element with the supplied value.
      * <b>Currently does not support html as the replacement value.</b>
      * @param value - the new value for the contents of this node
      */
     public void jsSet_innerHTML(final String value) {
-        if (value.indexOf('<') >= 0) {
-            getLog().debug("Setter not implemented for complex values for innerHTML - simple text string only");
-            return;
-        }
         final DomNode domNode = getDomNodeOrDie();
         domNode.removeAllChildren();
-        domNode.appendChild(new DomText(domNode.getPage(), value));
+
+        if (value.indexOf('<') >= 0) {
+            // build a pseudo WebResponse
+            final WebResponse webResp = new StringWebResponse("<html><body>" + value + "</body></html>");
+            try {
+                final HtmlPage pseudoPage = HTMLParser.parse(webResp, getDomNodeOrDie().getPage().getEnclosingWindow());
+                final HtmlBody body = (HtmlBody) pseudoPage.getDocumentElement().getFirstChild();
+                for (final Iterator iter = body.getChildIterator(); iter.hasNext();)
+                {
+                    final HtmlElement child = (HtmlElement) iter.next();
+                    domNode.appendChild(child);
+                }
+            }
+            catch (final IOException e) {
+                // should not occur
+                getLog().warn("Unexpected exception occured while setting innerHTML");
+            }
+        }
+        else {
+            // just text, keep it simple
+            domNode.appendChild(new DomText(domNode.getPage(), value));
+        }
     }
 
     /**

@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -226,7 +227,7 @@ public class HTMLElementTest extends WebTestCase {
                 "    function doTest(){\n" +
                 "       var myNode = document.getElementById('myNode');\n" +
                 "       alert('Old = ' + myNode.innerHTML);\n" +
-                "       myNode.innerHTML = 'New cell value';\n" +
+                "       myNode.innerHTML = 'New  cell value';\n" +
                 "       alert('New = ' + myNode.innerHTML);\n" +
                 "   }\n" +
                 "    </script>\n" +
@@ -240,7 +241,7 @@ public class HTMLElementTest extends WebTestCase {
         loadPage(content, collectedAlerts);
 
         final List expectedAlerts = Arrays.asList(new String[]{
-            "Old = <b> Old innerHTML</b>",
+            "Old = <b>Old innerHTML</b>",
             "New = New cell value"
         });
         assertEquals(expectedAlerts, collectedAlerts);
@@ -260,7 +261,7 @@ public class HTMLElementTest extends WebTestCase {
                 "    function doTest(){\n" +
                 "       var myNode = document.getElementById('myNode');\n" +
                 "       alert('Old = ' + myNode.innerHTML);\n" +
-                "       myNode.innerHTML = '<i>New cell value</i>';\n" +
+                "       myNode.innerHTML = '<i id=\"newElt\">New cell value</i>';\n" +
                 "       alert('New = ' + myNode.innerHTML);\n" +
                 "   }\n" +
                 "    </script>\n" +
@@ -271,13 +272,16 @@ public class HTMLElementTest extends WebTestCase {
                 "</html>\n" +
                 "";
         final List collectedAlerts = new ArrayList();
-        loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(content, collectedAlerts);
 
         final List expectedAlerts = Arrays.asList(new String[]{
-            "Old = <b> Old innerHTML</b>",
-            "New = <b> Old innerHTML</b>"
+            "Old = <b>Old innerHTML</b>",
+            "New = <i id=\"newElt\">New cell value</i>"
         });
         assertEquals(expectedAlerts, collectedAlerts);
+
+        final HtmlElement elt = page.getHtmlElementById("newElt");
+        assertEquals("New cell value", elt.asText());
     }
 
     /**
