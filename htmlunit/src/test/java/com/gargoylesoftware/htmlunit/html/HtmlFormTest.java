@@ -981,5 +981,38 @@ public class HtmlFormTest extends WebTestCase {
         
         assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
     }        
+    
+    /**
+     * At one point this test was failing because deeply nested inputs weren't getting picked up.
+     * @throws Exception if the test fails
+     */
+    public void testSubmit_DeepInputs() throws Exception {
+        final String htmlContent
+             = "<html><form method='GET' action=''>"
+             + "<table><tr><td>"
+             + "<input value='NOT_SUBMITTED' name='data' type='text'/>"
+             + "</td></tr></table>"
+             + "<input id='submitButton' name='submit' type='submit'/>"
+             + "</form></html>";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                URL_GARGOYLE,
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlInput submitButton = (HtmlInput)page.getHtmlElementById("submitButton");
+        submitButton.click();
+        
+        final List collectedParameters = webConnection.getLastParameters();
+        final List expectedParameters = Arrays.asList( new Object[] { 
+            new KeyValuePair("data", "NOT_SUBMITTED"),
+            new KeyValuePair("submit", "")
+        } );
+        assertEquals(expectedParameters, collectedParameters);
+    }
+    
 }
 
