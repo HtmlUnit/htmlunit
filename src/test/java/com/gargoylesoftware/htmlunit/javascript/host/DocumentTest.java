@@ -1972,4 +1972,21 @@ public class DocumentTest extends WebTestCase {
          assertEquals( expectedAlerts, collectedAlerts );
     }
 
+    /**
+     * Calling document.body before the page is fully loaded used to cause an exception.
+     * @throws Exception if the test fails
+     */
+    public void testDocumentWithNoBody() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>\n"
+                 + "alert(document.body)\n"
+                 + "</script></head><body></body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+
+         final List expectedAlerts = Collections.singletonList("undefined");
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
 }
