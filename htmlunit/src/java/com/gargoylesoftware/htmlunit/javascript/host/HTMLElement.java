@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.Text;
 import org.apache.html.dom.HTMLDocumentImpl;
 import org.mozilla.javascript.Scriptable;
 
@@ -158,6 +159,42 @@ public class HTMLElement extends SimpleScriptable {
 
 
     /**
+     * Get the JavaScript property "nodeType" for the current node.
+     * @return The node type
+     */
+    public short jsGet_nodeType() {
+        return getHtmlElementOrDie().getNode().getNodeType();
+    }
+
+
+    /**
+     * Get the JavaScript property "nodeName" for the current node.
+     * @return The node name
+     */
+    public String jsGet_nodeName() {
+        return getHtmlElementOrDie().getNode().getNodeName();
+    }
+
+
+    /**
+     * Get the JavaScript property "nodeValue" for the current node.
+     * @return The node value
+     */
+    public String jsGet_nodeValue() {
+        return getHtmlElementOrDie().getNode().getNodeValue();
+    }
+
+
+    /**
+     * Set the JavaScript property "nodeValue" for the current node.
+     * @param newValue The new node value
+     */
+    public void jsSet_nodeValue( String newValue ) {
+        getHtmlElementOrDie().getNode().setNodeValue( newValue );
+    }
+
+
+    /**
      * Add an HTML element to the element
      * @param childObject The element to add to this element
      * @return The newly added child element.
@@ -167,11 +204,11 @@ public class HTMLElement extends SimpleScriptable {
         if (childObject instanceof HTMLElement) {
             // Get XML element for the HTML element passed in
             final HtmlElement childHtmlElement = ((HTMLElement) childObject).getHtmlElementOrDie();
-            final Element childXmlNode = childHtmlElement.getElement();
+            final Node childXmlNode = childHtmlElement.getNode();
 
-            // Get the parent XML element that the child should be added to.
+            // Get the parent XML node that the child should be added to.
             final HtmlElement parentElement = this.getHtmlElementOrDie();
-            final Element parentXmlNode = parentElement.getElement();
+            final Node parentXmlNode = parentElement.getNode();
 
             // Append the child to the parent element
             if ( parentXmlNode.appendChild(childXmlNode) == null ) {
@@ -189,6 +226,20 @@ public class HTMLElement extends SimpleScriptable {
 
 
     /**
+     * Duplicate an XML node
+     * @param deep If true, recursively clone all descendents.  Otherwise,
+     * just clone this node.
+     * @return The newly cloned node.
+     */
+    public Object jsFunction_cloneNode(final boolean deep) {
+        final HtmlElement htmlElement = getHtmlElementOrDie();
+        final Node clonedXmlNode = htmlElement.getNode().cloneNode( deep );
+        return getJavaScriptElementFromXmlNode(clonedXmlNode,
+            htmlElement.getPage());
+    }
+
+
+    /**
      * Add an HTML element as a child to this element before the referenced
      * element.  If the referenced element is null, append to the end.
      * @param newChildObject The element to add to this element
@@ -202,16 +253,16 @@ public class HTMLElement extends SimpleScriptable {
             refChildObject instanceof HTMLElement) {
             // Get XML elements for the HTML elements passed in
             final HtmlElement newChildHtmlElement = ((HTMLElement) newChildObject).getHtmlElementOrDie();
-            final Element newChildXmlNode = newChildHtmlElement.getElement();
-            Element refChildXmlNode = null;
+            final Node newChildXmlNode = newChildHtmlElement.getNode();
+            Node refChildXmlNode = null;
             if (refChildObject != null) {
                 final HtmlElement refChildHtmlElement = ((HTMLElement) refChildObject).getHtmlElementOrDie();
-                refChildXmlNode = refChildHtmlElement.getElement();
+                refChildXmlNode = refChildHtmlElement.getNode();
             }
 
             // Get the parent XML element that the child should be added to.
             final HtmlElement parentElement = this.getHtmlElementOrDie();
-            final Element parentXmlNode = parentElement.getElement();
+            final Node parentXmlNode = parentElement.getNode();
 
             // Append the child to the parent element
             if ( parentXmlNode.insertBefore(newChildXmlNode,
@@ -239,11 +290,11 @@ public class HTMLElement extends SimpleScriptable {
         if (childObject instanceof HTMLElement) {
             // Get XML element for the HTML element passed in
             final HtmlElement childHtmlElement = ((HTMLElement) childObject).getHtmlElementOrDie();
-            final Element childXmlNode = childHtmlElement.getElement();
+            final Node childXmlNode = childHtmlElement.getNode();
 
             // Get the parent XML element that the child should be added to.
             final HtmlElement parentElement = this.getHtmlElementOrDie();
-            final Element parentXmlNode = parentElement.getElement();
+            final Node parentXmlNode = parentElement.getNode();
 
             // Remove the child from the parent element
             if ( parentXmlNode.removeChild(childXmlNode) == null ) {
@@ -262,13 +313,53 @@ public class HTMLElement extends SimpleScriptable {
 
 
     /**
+     * Replace a child HTML element with another HTML element.
+     * @param newChildObject The element to add as a child of this element
+     * @param oldChildObject The element to remove as a child of this element
+     * @return The removed child element.
+     */
+    public Object jsFunction_replaceChild(final Object newChildObject,
+        final Object oldChildObject) {
+        final Object removedChild;
+        if (newChildObject instanceof HTMLElement &&
+            oldChildObject instanceof HTMLElement) {
+            // Get XML elements for the HTML elements passed in
+            final HtmlElement newChildHtmlElement = ((HTMLElement) newChildObject).getHtmlElementOrDie();
+            final Node newChildXmlNode = newChildHtmlElement.getNode();
+            Node oldChildXmlNode = null;
+            if (oldChildObject != null) {
+                final HtmlElement oldChildHtmlElement = ((HTMLElement) oldChildObject).getHtmlElementOrDie();
+                oldChildXmlNode = oldChildHtmlElement.getNode();
+            }
+
+            // Get the parent XML element that the child should be added to.
+            final HtmlElement parentElement = this.getHtmlElementOrDie();
+            final Node parentXmlNode = parentElement.getNode();
+
+            // Replace the old child with the new child.
+            if ( parentXmlNode.replaceChild(newChildXmlNode,
+                oldChildXmlNode) == null ) {
+                removedChild = null;
+            }
+            else {
+                removedChild = oldChildObject;
+            }
+        }
+        else {
+            removedChild = null;
+        }
+        return removedChild;
+    }
+
+
+    /**
      * Get the JavaScript property "parentNode" for the node that
      * contains the current node.
      * @return The parent node
      */
     public Object jsGet_parentNode() {
         final HtmlElement htmlElement = getHtmlElementOrDie();
-        final Element xmlElement = htmlElement.getElement();
+        final Node xmlElement = htmlElement.getNode();
         final Node parentXmlNode = xmlElement.getParentNode();
         return getJavaScriptElementFromXmlNode(parentXmlNode,
             htmlElement.getPage());
@@ -283,7 +374,7 @@ public class HTMLElement extends SimpleScriptable {
      */
     public Object jsGet_nextSibling() {
         final HtmlElement htmlElement = getHtmlElementOrDie();
-        final Element xmlElement = htmlElement.getElement();
+        final Node xmlElement = htmlElement.getNode();
         final Node siblingXmlNode = xmlElement.getNextSibling();
         return getJavaScriptElementFromXmlNode(siblingXmlNode,
             htmlElement.getPage());
@@ -298,7 +389,7 @@ public class HTMLElement extends SimpleScriptable {
      */
     public Object jsGet_previousSibling() {
         final HtmlElement htmlElement = getHtmlElementOrDie();
-        final Element xmlElement = htmlElement.getElement();
+        final Node xmlElement = htmlElement.getNode();
         final Node siblingXmlNode = xmlElement.getPreviousSibling();
         return getJavaScriptElementFromXmlNode(siblingXmlNode,
             htmlElement.getPage());
@@ -313,7 +404,7 @@ public class HTMLElement extends SimpleScriptable {
      */
     public Object jsGet_firstChild() {
         final HtmlElement htmlElement = getHtmlElementOrDie();
-        final Element xmlElement = htmlElement.getElement();
+        final Node xmlElement = htmlElement.getNode();
         final Node childXmlNode = xmlElement.getFirstChild();
         return getJavaScriptElementFromXmlNode(childXmlNode,
             htmlElement.getPage());
@@ -328,7 +419,7 @@ public class HTMLElement extends SimpleScriptable {
      */
     public Object jsGet_lastChild() {
         final HtmlElement htmlElement = getHtmlElementOrDie();
-        final Element xmlElement = htmlElement.getElement();
+        final Node xmlElement = htmlElement.getNode();
         final Node childXmlNode = xmlElement.getLastChild();
         return getJavaScriptElementFromXmlNode(childXmlNode,
             htmlElement.getPage());
@@ -346,16 +437,16 @@ public class HTMLElement extends SimpleScriptable {
         if ( xmlNode == null ) {
             return null;
         }
-        if ( ( xmlNode instanceof Element ) == false ) {
+        if ( ( xmlNode instanceof Element ) == false &&
+            ( xmlNode instanceof Text ) == false ) {
             if( xmlNode instanceof HTMLDocumentImpl == false ) {
                 throw new IllegalStateException(
-                    "XML node is not an Element.  Only Elements are currently supported.  Node class: "
+                    "XML node is not an Element or Text node.  Only Elements and Text nodes are currently supported.  Node class: "
                     + xmlNode.getClass() );
             }
             return null;
         }
-        final Element xmlElement = (Element) xmlNode;
-        final HtmlElement htmlElement = page.getHtmlElement( xmlElement );
+        final HtmlElement htmlElement = page.getHtmlElement( xmlNode );
         final Object jsElement = getScriptableFor( htmlElement );
         return jsElement;
     }

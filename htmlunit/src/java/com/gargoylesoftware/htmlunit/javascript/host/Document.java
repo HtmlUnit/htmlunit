@@ -64,7 +64,7 @@ import org.mozilla.javascript.Scriptable;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author David K. Taylor
+ * @author  David K. Taylor
  * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  */
 public final class Document extends HTMLElement {
@@ -295,6 +295,34 @@ public final class Document extends HTMLElement {
             if( jsElement == NOT_FOUND ) {
                 getLog().debug("createElement("+tagName
                     +") cannot return a result as there isn't a javascript object for the html element "
+                    + htmlElement.getClass().getName());
+            }
+            else {
+                result = jsElement;
+            }
+        }
+        catch( final ElementNotFoundException e ) {
+            // Just fall through - result is already set to NOT_FOUND
+        }
+        return result;
+    }
+
+
+    /**
+     * Create a new DOM text node with the given data.
+     *
+     * @param newData The string value for the text node.
+     * @return the new text node or NOT_FOUND if there is an error.
+     */
+    public Object jsFunction_createTextNode( final String newData ) {
+        Object result = NOT_FOUND;
+        try {
+            final HtmlElement htmlElement = getHtmlElementOrDie().getPage().createTextNode(newData);
+            final Object jsElement = getScriptableFor(htmlElement);
+
+            if( jsElement == NOT_FOUND ) {
+                getLog().debug("createTextNode("+newData
+                    +") cannot return a result as there isn't a javascript object for the DOM node "
                     + htmlElement.getClass().getName());
             }
             else {

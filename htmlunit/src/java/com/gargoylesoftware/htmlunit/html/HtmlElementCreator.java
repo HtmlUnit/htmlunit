@@ -37,22 +37,23 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * An object that knows how to create HtmlElements
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  David K. Taylor
  */
 abstract class HtmlElementCreator {
     /**
-     * Create an HtmlElement for the specified xmlElement, contained in the specified page.
+     * Create an HtmlElement for the specified xmlNode, contained in the specified page.
      *
      * @param page The page that this element will belong to.
-     * @param xmlElement The xml element that this HtmlElement corresponds to.
+     * @param xmlNode The XML node that this HtmlElement corresponds to.
      * @return The new HtmlElement.
      */
-    abstract HtmlElement create( final HtmlPage page, final Element xmlElement );
+    abstract HtmlElement create( final HtmlPage page, final Node xmlNode );
 }
 

@@ -49,7 +49,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.HashMap;
 
 import org.apache.commons.httpclient.HttpConstants;
 import org.apache.xerces.xni.parser.XMLDocumentFilter;
@@ -58,6 +58,8 @@ import org.cyberneko.html.parsers.DOMParser;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.Text;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -115,14 +117,14 @@ public final class HtmlPage
     private final WebClient webClient_;
     private final URL originatingUrl_;
     private       String originalCharset_ = null;
-    private final Map elements_ = new HashMap( 89 );
+    private final Map nodes_ = new HashMap( 89 );
     private final WebResponse webResponse_;
 
     private WebWindow enclosingWindow_;
 
     private static int FunctionWrapperCount_ = 0;
 
-    private static final Map HTML_ELEMENT_CREATORS = new TreeMap();
+    private static final Map HTML_ELEMENT_CREATORS = new HashMap();
 
     private static final int TAB_INDEX_NOT_SPECIFIED = -10;
     private static final int TAB_INDEX_OUT_OF_BOUNDS = -20;
@@ -181,7 +183,10 @@ public final class HtmlPage
     private static void initializeHtmlElementCreatorsIfNeeded() {
         synchronized( HTML_ELEMENT_CREATORS ) {
             if( HTML_ELEMENT_CREATORS.isEmpty() ) {
-                HTML_ELEMENT_CREATORS.put( "input", new HtmlInputElementCreator() );
+                HTML_ELEMENT_CREATORS.put( new Integer( Node.TEXT_NODE ),
+                    new SimpleHtmlElementCreator( DomText.class ) );
+                HTML_ELEMENT_CREATORS.put( "input",
+                    new HtmlInputElementCreator() );
                 HTML_ELEMENT_CREATORS.put( "tr", new TableElementCreator() );
                 HTML_ELEMENT_CREATORS.put( "td", new TableElementCreator() );
                 HTML_ELEMENT_CREATORS.put( "th", new TableElementCreator() );
@@ -382,6 +387,22 @@ public final class HtmlPage
     }
 
 
+
+    /**
+     * Create a new text node with the given text data.  This may be
+     * called if the page hasn't fully been loaded yet.
+     *
+     * @param data String text data.
+     * @return the new text node.
+     */
+    public DomText createTextNode( String data ) {
+        Document document = getDocument();
+        final Text xmlText = document.createTextNode( data );
+        final DomText textNode = (DomText) getHtmlElement( xmlText );
+        return textNode;
+    }
+
+
     /**
      *  Return the HtmlAnchor with the specified name
      *
@@ -436,60 +457,67 @@ public final class HtmlPage
 
 
     /**
-     *  Given an xml element, return the HtmlElement object that corresponds to
-     *  that element or an instance of UnknownHtmlElement if one cannot be
+     *  Given an XML node, return the HtmlElement object that corresponds to
+     *  that node or an instance of UnknownHtmlElement if one cannot be
      *  found. <p />
      *
-     *  If a null xmlElement is passed in then null will be returned.  This
+     *  If a null xmlNode is passed in then null will be returned.  This
      *  deviates somewhat from the normal practice of throwing exceptions
      *  on null parameters but allowing this one case of null makes a
      *  significant amount of code elsewhere much simpler.
      *
-     * @param  xmlElement The xml element to match
+     * @param  xmlNode The XML node to match
      * @return  See above
      */
-    public HtmlElement getHtmlElement( final Element xmlElement ) {
-        if( xmlElement == null ) {
+    public HtmlElement getHtmlElement( final Node xmlNode ) {
+        if( xmlNode == null ) {
             return null;
         }
 
-        final HtmlElement htmlElement = ( HtmlElement )elements_.get( xmlElement );
+        final HtmlElement htmlElement = ( HtmlElement )nodes_.get( xmlNode );
         if( htmlElement != null ) {
             return htmlElement;
         }
 
-        final String tagName = getTagName(xmlElement);
+        final HtmlElementCreator creator;
         final HtmlElement newHtmlElement;
-        final HtmlElementCreator creator
-            = ( HtmlElementCreator )HTML_ELEMENT_CREATORS.get( tagName );
-        if( creator == null ) {
-            newHtmlElement = new UnknownHtmlElement( this, xmlElement );
+        if( xmlNode.getNodeType() == Node.ELEMENT_NODE ) {
+            final String tagName = getTagName((Element) xmlNode);
+            creator = ( HtmlElementCreator )
+               HTML_ELEMENT_CREATORS.get( tagName );
         }
         else {
-            newHtmlElement = creator.create( this, xmlElement );
+            creator = ( HtmlElementCreator )
+               HTML_ELEMENT_CREATORS.get( new Integer( xmlNode.getNodeType() ) );
         }
-        elements_.put( xmlElement, newHtmlElement );
+        if( creator == null ) {
+            newHtmlElement = new UnknownHtmlElement( this, xmlNode );
+        }
+        else {
+            newHtmlElement = creator.create( this, xmlNode );
+        }
+        nodes_.put( xmlNode, newHtmlElement );
         return newHtmlElement;
     }
 
 
 
     /**
-     *  Given an XML element, remove that element and return the HtmlElement
-     *  object that corresponds to that element or null if one cannot be
+     *  Given an XML node, remove that node and return the HtmlElement
+     *  object that corresponds to that node or null if one cannot be
      *  found. <p />
      *
      *  If a null xmlElement is passed in then null will be returned.
      *
-     * @param  xmlElement The XML element to remove
+     * @param  xmlNode The XML node to remove
      * @return  See above
      */
-    public HtmlElement removeHtmlElement( final Element xmlElement ) {
-        if( xmlElement == null ) {
+    public HtmlElement removeHtmlElement( final Node xmlNode ) {
+        if( xmlNode == null ) {
             return null;
         }
 
-        return ( HtmlElement )elements_.remove( xmlElement );
+        return ( HtmlElement )nodes_.remove( xmlNode );
     }
 
 

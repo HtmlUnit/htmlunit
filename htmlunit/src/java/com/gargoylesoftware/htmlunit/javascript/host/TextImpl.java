@@ -35,37 +35,47 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.w3c.dom.Node;
+import com.gargoylesoftware.htmlunit.html.DomText;
 
 /**
- *  An element that is returned for an html tag that is not supported by this
- *  framework.
+ * A javascript object for Text.
  *
  * @version  $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  */
-public class UnknownHtmlElement extends HtmlElement {
+public final class TextImpl extends CharacterDataImpl {
+
     /**
-     *  Create an instance
-     *
-     * @param  page The page that contains this element
-     * @param  element The xml element that represents this html element
+     * Create an instance.  Javascript objects must have a default constructor.
      */
-    UnknownHtmlElement( final HtmlPage page, final Node node ) {
-        super( page, node );
+    public TextImpl() {
     }
 
 
     /**
-     *  Return the tag name of the unknown element.
-     *
-     * @return  The tag name
+     * Javascript constructor.  This must be declared in every javascript file because
+     * the rhino engine won't walk up the hierarchy looking for constructors.
      */
-    public String getName() {
-        return getElement().getTagName().toLowerCase();
+    public void jsConstructor() {
+    }
+
+
+    /**
+     * Initialize this object
+     */
+    public void initialize() {
+    }
+
+
+    /**
+     * Split a Text node in two.
+     * @param offset The character position at which to split the Text node.
+     * @return The Text node that was split from this node.
+     */
+    public Object jsFunction_splitText(final int offset) {
+        final DomText domText = (DomText) getHtmlElementOrDie();
+        return getScriptableFor( domText.splitText(offset) );
     }
 }
-
