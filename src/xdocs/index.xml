@@ -180,12 +180,9 @@
                 <p>
                     To disable JavaScript processing for one WebClient, call WebClient.setJavaScriptEnabled(false).
                 </p>
-                <p>
-                    To disable JavaScript processing for all WebClients, remove js.jar from your classpath
-                </p>
             </note>
             <p>
-                Javascript code in script tags will get executed when the page loads.  If
+                Javascript code in script tags will get executed when the page loads. If
                 you want to execute code after that, you can call
                 HtmlPage.executeJavascriptIfPossible(String).
             </p>
