@@ -452,6 +452,19 @@ public final class Document extends NodeImpl {
 
 
     /**
+     * Creates a new HTML attribute with the specified name.
+     * 
+     * @param attributeName the name of the attribute to create
+     * @return an attribute with the specified name.
+     */
+    public Attribute jsFunction_createAttribute( final String attributeName ) {
+        final Attribute att = (Attribute) makeJavaScriptObject(Attribute.JS_OBJECT_NAME);
+        att.init(attributeName, null);
+        return att;
+    }
+
+
+    /**
      * Create a new DOM text node with the given data.
      *
      * @param newData The string value for the text node.

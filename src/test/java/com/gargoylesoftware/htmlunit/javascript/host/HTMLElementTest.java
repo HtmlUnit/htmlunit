@@ -70,7 +70,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception on test failure
      */
-    public void test_getAttribute() throws Exception {
+    public void testGetAttribute() throws Exception {
         final String content = "<html>\n" +
                 "<head>\n" +
                 "    <title>test</title>\n" +
@@ -103,7 +103,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception on test failure
      */
-    public void test_setAttribute() throws Exception {
+    public void testSetAttribute() throws Exception {
         final String content = "<html>\n" + 
                 "<head>\n" + 
                 "    <title>test</title>\n" + 
@@ -131,6 +131,106 @@ public class HTMLElementTest extends WebTestCase {
 
         final List expectedAlerts = Arrays.asList(new String[]{
             "a", "b", "undefined", "foo"
+        });
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    public void testGetAttributeNode() throws Exception {
+        final String content =
+              "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var div = document.getElementById('div2');\n"
+            + "      var customAtt = div.getAttributeNode('customAttribute');\n"
+            + "      alertAttributeProperties(customAtt);\n"
+            + "    }\n"
+            + "    function alertAttributeProperties(att) {\n"
+            + "      alert('expando=' + att.expando);\n"
+            + "      alert('firstChild=' + att.firstChild);\n"
+            + "      alert('lastChild=' + att.lastChild);\n"
+            + "      alert('name=' + att.name);\n"
+            + "      alert('nextSibling=' + att.nextSibling);\n"
+            + "      alert('nodeName=' + att.nodeName);\n"
+            + "      alert('nodeType=' + att.nodeType);\n"
+            + "      alert('nodeValue=' + att.nodeValue);\n"
+            + "      alert('(ownerDocument==document)=' + (att.ownerDocument==document));\n"
+            + "      alert('parentNode=' + att.parentNode);\n"
+            + "      alert('previousSibling=' + att.previousSibling);\n"
+            + "      alert('specified=' + att.specified);\n"
+            + "      alert('value=' + att.value);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1'></div>\n"
+            + "  <div id='div2' name='blah' customAttribute='bleh'></div>\n"
+            + "  <div id='div3'></div>\n"
+            + "</body>\n"
+            + "</html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("test", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "expando=true",
+            "firstChild=null",
+            "lastChild=null",
+            "name=customAttribute",
+            "nextSibling=null",
+            "nodeName=customAttribute",
+            "nodeType=2",
+            "nodeValue=bleh",
+            "(ownerDocument==document)=true",
+            "parentNode=null",
+            "previousSibling=null",
+            "specified=true",
+            "value=bleh",
+        });
+
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    public void testSetAttributeNode() throws Exception {
+        final String content =
+              "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      // Get the old alignment.\n"
+            + "      var div1 = document.getElementById('div1');\n"
+            + "      var a1 = div1.getAttributeNode('align');\n"
+            + "      alert(a1.value);\n"
+            + "      // Set the new alignment.\n"
+            + "      var a2 = document.createAttribute('align');\n"
+            + "      a2.value = 'right';\n"
+            + "      a1 = div1.setAttributeNode(a2);\n"
+            + "      alert(a1.value);\n"
+            + "      alert(div1.getAttributeNode('align').value);\n"
+            + "      alert(div1.getAttribute('align'));\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1' align='left'></div>\n"
+            + "</body>\n"
+            + "</html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("test", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "left", "left", "right", "right"
         });
 
         assertEquals(expectedAlerts, collectedAlerts);
