@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptException;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import java.lang.reflect.InvocationTargetException;
@@ -120,7 +121,8 @@ public class SimpleScriptable extends ScriptableObject {
             {"HtmlForm", "Form"},
             {"HtmlHiddenInput", "Input"},
             {"HtmlImage", "Image"},
-            {"HtmlInlineFrame", "FrameWindow"},
+            {"HtmlFrame", "Frame"},
+            {"HtmlInlineFrame", "Frame"},
             {"HtmlLabel", "FocusableHostElement"},
             {"HtmlOption", "Option"},
             {"HtmlPasswordInput", "Input"},
@@ -552,14 +554,20 @@ public class SimpleScriptable extends ScriptableObject {
 
 
      /**
-      * Return the javascript object that corresponds to the specified DOM node.
+      * Return the javascript object that corresponds to the specified object.
       * New javascript objects will be created as needed.  If a javascript object
-      * cannot be created for this domNode then NOT_FOUND will be returned.
+      * cannot be created for a domNode then NOT_FOUND will be returned.
       *
-      * @param domNode The DOM node
+      * @param object a {@link DomNode} or a {@link WebWindow}
       * @return The javascript object or NOT_FOUND
       */
-    public SimpleScriptable getScriptableFor( final DomNode domNode ) {
+    protected SimpleScriptable getScriptableFor(final Object object) {
+        if (object instanceof WebWindow) {
+            return (SimpleScriptable) ((WebWindow) object).getScriptObject();
+        }
+        
+        final DomNode domNode = (DomNode) object; 
+        
         final Object scriptObject = domNode.getScriptObject();
         if( scriptObject != null ) {
             return (SimpleScriptable)scriptObject;
@@ -589,7 +597,7 @@ public class SimpleScriptable extends ScriptableObject {
     protected Transformer getTransformerScriptableFor() {
         return new Transformer() {
             public Object transform(final Object obj) {
-                return getScriptableFor((HtmlElement) obj);
+                return getScriptableFor(obj);
             }    
         };
     }
