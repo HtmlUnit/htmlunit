@@ -186,4 +186,31 @@ public class LocationTest extends WebTestCase {
         } );
         assertEquals( "complete url", expectedAlerts, collectedAlerts );
     }
+
+    /**
+     * Test for replace
+     * @throws Exception if the test fails
+     */
+    public void testReplace() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    location.replace('" + URL_SECOND.toExternalForm() + "');\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "</body></html>";
+
+        final String secondContent
+        = "<html><head><title>Second</title></head><body></body></html>";
+
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage) webClient.getPage( URL_FIRST );
+        assertEquals("Second", page.getTitleText());
+    }
 }

@@ -38,7 +38,11 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+
+import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -105,9 +109,12 @@ public class Location extends SimpleScriptable {
     /**
      * Reload the window with the specified url
      * @param href The new url
+     * @throws IOException when exception occurs loading the new page
      */
-    public void jsFunction_replace( final String href ) {
-        getLog().debug("Not implemented yet: replace("+href+")");
+    public void jsFunction_replace( final String href ) throws IOException {
+        final WebWindow webWindow = window_.getWebWindow();
+        final URL url = ((HtmlPage) webWindow.getEnclosedPage()).getFullyQualifiedUrl( href );
+        webWindow.getWebClient().getPage(url);
     }
 
 

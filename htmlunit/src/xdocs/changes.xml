@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                Added support for window.location.replace(...).
+            </action>
             <action type="update" dev="mguillem" due-to="sdanig" id="1082259">
                 Fixed problem with pages where body's onload contains a return statement.
             </action>
