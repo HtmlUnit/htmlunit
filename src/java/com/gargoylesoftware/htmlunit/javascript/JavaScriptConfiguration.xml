@@ -74,6 +74,9 @@
 			<browser name="Microsoft Internet Explorer" min-version="4"/>
 			<browser name="Netscape" min-version="6"/>
 		</property>
+		<property name="disabled" readable="true" writable="true">
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
+		</property>
 		<property name="document" readable="true" writable="false">
 			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</property>
