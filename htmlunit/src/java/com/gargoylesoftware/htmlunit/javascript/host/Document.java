@@ -152,9 +152,9 @@ public final class Document extends HTMLElement {
      * Return the value of the "images" property.
      * @return The value of the "images" property
      */
-    public Image[] jsGet_images() {
+    public NativeArray jsGet_images() {
         getLog().debug("Not implemented yet: document.images");
-        return new Image[0];
+        return new NativeArray(new Image[0]);
     }
 
 
