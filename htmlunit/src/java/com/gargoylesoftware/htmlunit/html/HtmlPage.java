@@ -212,19 +212,7 @@ public final class HtmlPage
         }
         return parser.getDocument();
     }
-    public static void printXml(org.w3c.dom.Node node, String indent) {
-        if( node instanceof org.w3c.dom.Element ) {
-            System.out.println(indent+"<"+((org.w3c.dom.Element)node).getTagName()+" ...>");
-        }
-        else {
-            System.out.println(indent+node);
-        }
-        org.w3c.dom.Node child = node.getFirstChild();
-        while (child != null) {
-            printXml(child, indent+"  ");
-            child = child.getNextSibling();
-        }
-    }
+
 
     /**
      *  Return the HtmlAnchor with the specified name
@@ -994,9 +982,6 @@ public final class HtmlPage
     private void executeBodyOnLoadHandlerIfNeeded() {
         final List bodyTags = getHtmlElementsByTagNames( Collections.singletonList("body") );
         if( bodyTags.size() != 1 ) {
-            System.out.println("==== START XML DUMP ====");
-            printXml(getElement(),"");
-            System.out.println("==== END XML DUMP ====");
             throw new IllegalStateException(
                 "Expected exactly one body tag but found ["+bodyTags.size()+"]");
         }

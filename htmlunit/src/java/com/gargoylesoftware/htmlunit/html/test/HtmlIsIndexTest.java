@@ -42,7 +42,7 @@ public class HtmlIsIndexTest extends WebTestCase {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
                  + "<form id='form1'>"
-                 + "<isindex prompt='enterSomeText' />"
+                 + "<isindex prompt='enterSomeText'></isindex>"
                  + "</form></body></html>";
         final WebClient client = new WebClient();
 
@@ -53,6 +53,7 @@ public class HtmlIsIndexTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage )client.getPage(
             new URL( "http://www.gargoylesoftware.com" ),
             SubmitMethod.POST, Collections.EMPTY_LIST );
+        System.out.println( page.getXmlAsString());
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlIsIndex isInput =

@@ -7,6 +7,9 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,7 +22,9 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Element;
+import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -655,5 +660,39 @@ public abstract class HtmlElement {
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
     }
+
+
+    public String getXmlAsString() {
+        final StringWriter stringWriter = new StringWriter();
+        final PrintWriter printWriter = new PrintWriter(stringWriter);
+        printXml(getElement(), "", printWriter);
+        printWriter.close();
+        return stringWriter.toString();
+    }
+
+
+    private void printXml( final Node node, final String indent, final PrintWriter printWriter ) {
+        final boolean hasChildren = (node.getFirstChild() != null);
+        if( node instanceof Element ) {
+            printWriter.print(indent+"<"+((Element)node).getTagName().toLowerCase());
+            if( hasChildren == false ) {
+                printWriter.print("/");
+            }
+            printWriter.println(">");
+        }
+        else {
+            printWriter.println(indent+node);
+        }
+        Node child = node.getFirstChild();
+        while (child != null) {
+            printXml(child, indent+"  ", printWriter);
+            child = child.getNextSibling();
+        }
+        if( hasChildren && node instanceof Element ) {
+            printWriter.println(indent+"</"+((Element)node).getTagName().toLowerCase()+">");
+        }
+    }
+
+
 }
 
