@@ -229,10 +229,19 @@ public class HttpWebConnection extends WebConnection {
             if( queryString != null ) {
                 httpMethod.setQueryString(queryString);
             }
-            final Iterator iterator = parameters.iterator();
+            Iterator iterator;
+
+            // Note that this has to be done in two loops otherwise it won't 
+            // be able to support two elements with the same name.            
+            iterator = parameters.iterator();
             while( iterator.hasNext() ) {
                 final NameValuePair pair = ( NameValuePair )iterator.next();
                 ( ( PostMethod )httpMethod ).removeParameter( pair.getName(), pair.getValue() );
+            }
+            
+            iterator = parameters.iterator();
+            while( iterator.hasNext() ) {
+                final NameValuePair pair = ( NameValuePair )iterator.next();
                 ( ( PostMethod )httpMethod ).addParameter( pair.getName(), pair.getValue() );
             }
         }
