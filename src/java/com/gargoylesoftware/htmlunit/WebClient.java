@@ -677,16 +677,18 @@ public class WebClient {
     public WebWindow openWindow( final URL url, final String windowName ) throws IOException {
         assertNotNull("windowName", windowName);
 
-        // TODO: Check to see if there is already a window with the specified name.  If not, create
-        // a new one
-
-        final WebWindow window;
+        WebWindow window = null;
         if( windowName.equals("_self") ) {
             window = getCurrentWindow();
         }
         else {
-            window = new TopLevelWindow(windowName, this);
-            fireWindowOpened( new WebWindowEvent(window, null, null) );
+            try {
+                window = getWebWindowByName(windowName);
+            }
+            catch( final WebWindowNotFoundException e ) {
+                window = new TopLevelWindow(windowName, this);
+                fireWindowOpened( new WebWindowEvent(window, null, null) );
+            }
         }
 
         if( url != null ) {
