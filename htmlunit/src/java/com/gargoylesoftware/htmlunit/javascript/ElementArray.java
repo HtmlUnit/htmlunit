@@ -282,7 +282,7 @@ public class ElementArray extends SimpleScriptable implements Function {
         
         // Test to see if we are trying to get the length of this array?  If so, pass the processing up
         // to the higher level processing
-        if ("length".equalsIgnoreCase(name)) {
+        if ("length".equals(name)) {
             return NOT_FOUND;
         }
         
