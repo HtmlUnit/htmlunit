@@ -29,6 +29,9 @@
     <class name="Document" extends="NodeImpl"><!-- NOT FINISHED -->
         <property name="alinkColor" readable="true" writable="false"/>
         <property name="anchors" readable="true" writable="false"/>
+        <property name="all" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
         <property name="applets" readable="true" writable="false"/>
         <property name="body" readable="true" writable="false"/>
         <property name="bgColor" readable="true" writable="false"/>
@@ -51,13 +54,17 @@
             <javascript min-version="1.1"/>
         </property>
         <property name="referrer" readable="true" writable="false"/>
-        <property name="title" readable="true" writable="false"/>
+        <property name="status" readable="true" writable="true"/>
+        <property name="title" readable="true" writable="true"/>
         <property name="URL" readable="true" writable="false"/>
         <property name="vlinkColor" readable="true" writable="false"/>
         <function name="write"/>
         <function name="writeln"/>
         <function name="close"/>
+        <function name="open"/>
+        <function name="clear"/>
         <function name="getElementById"/>
+        <function name="getElementsByTagName"/>
         <function name="createElement"/>
         <function name="createTextNode"/>
         <function name="getElementsByName"/>        
@@ -280,7 +287,7 @@
         <function name="splitText"/>
     </class>
     <class name="Select" extends="Input"><!-- NOT FINISHED -->
-        <property name="length" readable="true" writable="false"/>
+        <property name="length" readable="true" writable="length"/>
         <function name="add"/>
         <function name="remove"/>
     </class>
