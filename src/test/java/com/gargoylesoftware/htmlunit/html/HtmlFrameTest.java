@@ -97,4 +97,82 @@ public class HtmlFrameTest extends WebTestCase {
         final HtmlFrame frame2 = (HtmlFrame)page.getHtmlElementById("frame2");
         assertEquals( "frame2", "", ((HtmlPage)frame2.getEnclosedPage()).getTitleText() );
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testOnLoadHandler() throws Exception {
+        if( true ) {
+            notImplemented();
+            return;
+        }
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection =
+            new FakeWebConnection(webClient);
+        final List collectedAlerts = new ArrayList();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent
+            = "<html><head><title>first</title></head>"
+            + "<frameset cols='20%,80%'>"
+            + "    <frame id='frame1'>"
+            + "    <frame onload=\"alert('onload');\"  id='frame2'>"
+            + "</frameset></html>";
+        webConnection.setResponse( new URL("http://first"), firstContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST);
+
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage)webClient.getPage(
+            new URL("http://first"), SubmitMethod.POST, Collections.EMPTY_LIST);
+        assertEquals( "first", page.getTitleText() );
+
+        final HtmlFrame frame1 = (HtmlFrame)page.getHtmlElementById("frame1");
+        assertEquals( "frame1", "", ((HtmlPage)frame1.getEnclosedPage()).getTitleText() );
+
+        final HtmlFrame frame2 = (HtmlFrame)page.getHtmlElementById("frame2");
+        assertEquals( "frame2", "", ((HtmlPage)frame2.getEnclosedPage()).getTitleText() );
+
+        assertEquals( Collections.singletonList("onload"), collectedAlerts );
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDocumentWrite() throws Exception {
+        if( true ) {
+            notImplemented();
+            return;
+        }
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection =
+            new FakeWebConnection(webClient);
+        final List collectedAlerts = new ArrayList();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent
+            = "<html><head><title>first</title></head>"
+            + "<frameset cols='20%,80%'>"
+            + "    <frame src='' name='frame1' id='frame1'>"
+            + "    <frame onload=\"frame1.document.open();frame1.document.write("
+            + "'<html><head><title>generated</title></head><body>generated</body></html>');"
+            + "frame1.document.close()\"  id='frame2'>"
+            + "</frameset></html>";
+        webConnection.setResponse( new URL("http://first"), firstContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST);
+
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage)webClient.getPage(
+            new URL("http://first"), SubmitMethod.POST, Collections.EMPTY_LIST);
+        assertEquals( "first", page.getTitleText() );
+
+        final HtmlFrame frame1 = (HtmlFrame)page.getHtmlElementById("frame1");
+        assertEquals( "frame1", "generated", ((HtmlPage)frame1.getEnclosedPage()).getTitleText() );
+
+        final HtmlFrame frame2 = (HtmlFrame)page.getHtmlElementById("frame2");
+        assertEquals( "frame2", "", ((HtmlPage)frame2.getEnclosedPage()).getTitleText() );
+    }
 }
