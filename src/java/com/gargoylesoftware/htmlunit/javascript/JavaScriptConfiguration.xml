@@ -18,6 +18,12 @@
 	<class name="Checkbox" extends="Input"/>
 
 	<class name="Document" extends="HTMLElement"><!-- NOT FINISHED -->
+		<property name="location" readable="true" writable="false"/>
+		<property name="forms" readable="true" writable="false"/>
+		<property name="cookie" readable="true" writable="false"/>
+		<property name="images" readable="true" writable="false"/>
+		<property name="referrer" readable="true" writable="false"/>
+		<property name="URL" readable="true" writable="false"/>
 		<function name="write"/>
 		<function name="writeln"/>
 		<function name="close"/>
@@ -25,6 +31,13 @@
 	</class>
 	<class name="FileUpload" extends="Input"/><!-- NOT FINISHED -->
 	<class name="Form" extends="HTMLElement"><!-- NOT FINISHED -->
+		<property name="name" readable="true" writable="false"/>
+		<property name="length" readable="true" writable="false"/>
+		<property name="elements" readable="true" writable="false"/>
+		<property name="action" readable="true" writable="true"/>
+		<property name="method" readable="true" writable="true"/>
+		<property name="target" readable="true" writable="true"/>
+		<property name="encoding" readable="true" writable="true"/>
 		<function name="submit"/>
 		<function name="reset"/>
 	</class>
@@ -187,14 +200,26 @@
 		<function name="onblur"/>
 	</class>
 
-	<class name="Option" extends="HTMLElement"/><!-- NOT FINISHED -->
+
+	<class name="Option" extends="HTMLElement">
+		<property name="text" readable="true" writable="false"/>
+		<property name="value" readable="true" writable="false"/>
+		<property name="defaultSelected" readable="true" writable="false"/>
+		<property name="selected" readable="true" writable="false"/>
+	</class>
+
+
 	<class name="Password" extends="Input"/><!-- NOT FINISHED -->
 	<class name="Radio" extends="Input"/><!-- NOT FINISHED -->
 	<class name="Reset" extends="Input"/><!-- NOT FINISHED -->
-	<class name="Submit" extends="Input"/><!-- NOT FINISHED -->
+	<class name="Submit" extends="Input"><!-- NOT FINISHED -->
+		<property name="length" readable="true" writable="false"/>
+	</class>
 	<class name="Text" extends="Input"/><!-- NOT FINISHED -->
 	<class name="Textarea" extends="Input"/><!-- NOT FINISHED -->
-	<class name="Select" extends="Input"/><!-- NOT FINISHED -->
+	<class name="Select" extends="Input"><!-- NOT FINISHED -->
+		<property name="length" readable="true" writable="false"/>
+	</class>
 
 	<class name="Window">
 		<!-- NOT FINISHED -->

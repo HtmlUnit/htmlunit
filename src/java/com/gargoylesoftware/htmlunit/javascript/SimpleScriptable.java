@@ -99,22 +99,24 @@ public class SimpleScriptable extends ScriptableObject {
             final String methodName = methods[i].getName();
             if( methodName.startsWith("jsGet_")  && methods[i].getParameterTypes().length == 0 ) {
                 final String propertyName = methodName.substring(6);
-                if( configuration.isValidReadablePropertyName(clazz, propertyName) ) {
+                final int state = configuration.getReadablePropertyNameState(clazz, propertyName);
+                if( state == configuration.ENABLED ) {
                     getPropertyInfo(localPropertyMap, propertyName).getter_ = methods[i];
                 }
-                else {
-                    getLog().trace("Getter for ["+propertyName+"] not used by this browser version");
+                else if( state == configuration.NOT_FOUND ) {
+                    getLog().trace("Getter for ["+propertyName+"] not found in configuration");
                 }
             }
             else if( methodName.startsWith("jsSet_")
                 && methods[i].getParameterTypes().length == 1 ) {
 
                 final String propertyName = methodName.substring(6);
-                if( configuration.isValidWritablePropertyName(clazz, propertyName) ) {
+                final int state = configuration.getWritablePropertyNameState(clazz, propertyName);
+                if( state == configuration.ENABLED ) {
                     getPropertyInfo(localPropertyMap, propertyName).setter_ = methods[i];
                 }
-                else {
-                    getLog().trace("Setter for ["+propertyName+"] not used by this browser version");
+                else if( state == configuration.NOT_FOUND ) {
+                    getLog().trace("Setter for ["+propertyName+"] not found in configuration");
                 }
             }
             else if( methodName.startsWith("jsFunction_") ) {
@@ -259,15 +261,15 @@ public class SimpleScriptable extends ScriptableObject {
          final Class clazz = getClass();
 
          final PropertyInfo info = (PropertyInfo)getPropertyMap().get(name);
-         final boolean isReadablePropertyName = configuration.isValidReadablePropertyName(clazz, name);
+         final int propertyNameState = configuration.getReadablePropertyNameState(clazz, name);
          final int functionNameState = configuration.getFunctionNameState(clazz, name);
-         if( isReadablePropertyName && functionNameState == configuration.ENABLED ) {
+         if( propertyNameState == configuration.ENABLED && functionNameState == configuration.ENABLED ) {
              throw new IllegalStateException("Name is both a property and a function: name=["
                 +name+"] class=["+clazz.getName()+"]");
          }
 
          final Object result;
-         if( isReadablePropertyName ) {
+         if( propertyNameState == configuration.ENABLED ) {
              if( info == null || info.getter_ == null ) {
                  getLog().debug("Getter not implemented for property ["+name+"]");
                  result = NOT_FOUND;
@@ -314,10 +316,10 @@ public class SimpleScriptable extends ScriptableObject {
          }
 
          final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
-         final boolean isPropertyName = configuration.isValidReadablePropertyName(getClass(), name);
+         final int propertyNameState = configuration.getWritablePropertyNameState(getClass(), name);
          final PropertyInfo info = (PropertyInfo)getPropertyMap().get(name);
 
-         if( isPropertyName ) {
+         if( propertyNameState == configuration.ENABLED ) {
              if( info == null || info.setter_ == null ) {
                  getLog().debug("Setter not implemented for property ["+name+"]");
              }
