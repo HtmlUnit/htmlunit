@@ -6,10 +6,9 @@
 
 <project name="HtmlUnit" default="cleancompile" basedir=".">
 
-<!--
+
 <property name="build.compiler" value="jikes" />
 <property name="build.compiler.pedantic" value="true"/>
--->
 <property name="version" value="HtmlUnit-1.1-pre5" />
 
 <taskdef name="checkstyle"
