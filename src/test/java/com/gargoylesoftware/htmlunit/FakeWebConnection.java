@@ -46,6 +46,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.httpclient.HttpState;
+
 /**
  *  A fake HttpProcessor for testing purposes only
  *
@@ -97,7 +99,7 @@ public class FakeWebConnection extends WebConnection {
 
     private SubmitMethod lastMethod_;
     private List lastParameters_;
-
+    private HttpState httpState_ = new HttpState();
 
     /**
      *  Create an instance
@@ -246,6 +248,16 @@ public class FakeWebConnection extends WebConnection {
      */
     public void setContent( final String content ) {
         setDefaultResponse(content, 200, "OK", "text/html");
+    }
+
+
+    /**
+     * Return the {@link HttpState} that is being used for a given domain
+     * @param url The url from which the domain will be determined
+     * @return The state or null if no state can be found for this domain.
+     */
+    public HttpState getStateForUrl( final URL url ) {
+        return httpState_;
     }
 }
 

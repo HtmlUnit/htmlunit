@@ -42,6 +42,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.httpclient.HttpState;
+
 /**
  *  An object that handles the actual communication portion of page
  *  retrieval/submission <p />
@@ -127,5 +129,13 @@ public abstract class WebConnection {
     public final int getProxyPort() {
         return proxyPort_;
     }
+
+
+    /**
+     * Return the {@link HttpState} that is being used for a given domain
+     * @param url The url from which the domain will be determined
+     * @return The state or null if no state can be found for this domain.
+     */
+    public abstract HttpState getStateForUrl( final URL url );
 }
 
