@@ -461,8 +461,8 @@ public class WindowTest extends WebTestCase {
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        webClient.getPage(
+            new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
 
         final int waitTime = 50;
         final int maxTime = 1000;
