@@ -274,7 +274,6 @@ public final class Document extends NodeImpl {
         final NativeArray allImages = new NativeArray(array);
         for( int i=0; i<array.length; i++ ) {
             final String name = array[i].getHtmlElementOrDie().getAttributeValue("name");
-            getLog().debug("found image with name '" + name + "'");
             if( name.length() != 0 ) {
                 allImages.defineProperty(name, array[i], attributes);
             }
