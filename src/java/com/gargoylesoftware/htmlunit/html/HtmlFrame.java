@@ -80,8 +80,8 @@ public class HtmlFrame
 
         try {
             final URL url = page.getFullyQualifiedUrl(source);
-            setEnclosedPage( webClient.getPage(
-                this, url, SubmitMethod.GET, Collections.EMPTY_LIST, false ) );
+            webClient.getPage(
+                this, url, SubmitMethod.GET, Collections.EMPTY_LIST, false );
         }
         catch( final MalformedURLException e ) {
             getLog().error("Unable to create url from ["+source+"]", e);
@@ -223,6 +223,26 @@ public class HtmlFrame
      */
     public void setEnclosedPage( final Page page ) {
         enclosedPage_ = page;
+    }
+
+
+    /**
+     * Return the window that contains this window.
+     *
+     * @return The parent window.
+     */
+    public WebWindow getParentWindow() {
+        return getPage().getEnclosingWindow();
+    }
+
+
+    /**
+     * Return the top level window that contains this window.
+     *
+     * @return The top level window that contains this window.
+     */
+    public WebWindow getTopWindow() {
+        return getParentWindow().getTopWindow();
     }
 
 

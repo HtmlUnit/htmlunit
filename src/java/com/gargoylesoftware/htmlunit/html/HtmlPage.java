@@ -177,6 +177,16 @@ public final class HtmlPage
     }
 
 
+    /**
+     * Clean up this page.
+     * @throws IOException If an IO problem occurs.
+     */
+    public void cleanUp() throws IOException {
+        cleanUpFramesIfNeeded();
+        // TODO: executeBodyOnUnloadHandlerIfNeeded();
+    }
+
+
     private static void initializeHtmlElementCreatorsIfNeeded() {
         synchronized( HTML_ELEMENT_CREATORS ) {
             if( HTML_ELEMENT_CREATORS.isEmpty() ) {
@@ -577,9 +587,42 @@ public final class HtmlPage
         }
         else {
             final HtmlBase htmlBase = (HtmlBase)baseElements.get(0);
-            baseUrl = new URL(htmlBase.getHrefAttribute());
+            final String href = htmlBase.getHrefAttribute();
+            if (href == null || href.length() == 0) {
+                baseUrl = originatingUrl_;
+            }
+            else {
+                baseUrl = new URL(href);
+            }
         }
         return webClient_.expandUrl( baseUrl, relativeUrl );
+    }
+
+
+
+    /**
+     *  Given a target attribute value, resolve the target using a base
+     *  target for the page.
+     *
+     * @param elementTarget The target specified as an attribute of the element.
+     * @return  The resolved target to use for the element.
+     */
+    public String getResolvedTarget( final String elementTarget ) {
+
+        final List baseElements =
+        getHtmlElementsByTagNames( Collections.singletonList("base"));
+        final String resolvedTarget;
+        if( baseElements.isEmpty() ) {
+            resolvedTarget = elementTarget;
+        }
+        else if( elementTarget != null && elementTarget.length() > 0 ) {
+            resolvedTarget = elementTarget;
+        }
+        else {
+            final HtmlBase htmlBase = (HtmlBase)baseElements.get(0);
+            resolvedTarget = htmlBase.getTargetAttribute();
+        }
+        return resolvedTarget;
     }
 
 
@@ -931,6 +974,7 @@ public final class HtmlPage
         }
 
         final WebWindow window = getEnclosingWindow();
+        getWebClient().pushClearFirstWindow();
         final Object result;
         if( wrapSourceInFunction == true ) {
             // Something that isn't likely to collide with the name of a function in the
@@ -944,7 +988,12 @@ public final class HtmlPage
             result = engine.execute( this, sourceCode, sourceName, htmlElement );
         }
 
-        return new ScriptResult( result, window.getEnclosedPage() );
+        WebWindow firstWindow = getWebClient().popFirstWindow();
+        if ( firstWindow == null) {
+            firstWindow = window;
+        }
+
+        return new ScriptResult( result, firstWindow.getEnclosedPage() );
     }
 
 
@@ -1222,6 +1271,18 @@ public final class HtmlPage
     private void initializeFramesIfNeeded() {
         // The act of creating the html element will cause initialization to start
         getHtmlElementsByTagNames( Arrays.asList( new String[]{"frame", "iframe"}) );
+    }
+
+
+    public void cleanUpFramesIfNeeded() {
+        // The act of creating the html element will cause initialization to start
+        List list = getHtmlElementsByTagNames( Arrays.asList( new String[]{"frame", "iframe"}) );
+        for(int i=0; i<list.size();i++ ){
+            WebWindow window = (WebWindow) list.get(i);
+            webClient_.deregisterWebWindow( window );
+            HtmlPage page = (HtmlPage) window.getEnclosedPage();
+            page.cleanUpFramesIfNeeded();
+        }
     }
 
 

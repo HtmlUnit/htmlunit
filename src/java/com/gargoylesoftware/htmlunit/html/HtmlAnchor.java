@@ -47,12 +47,14 @@ import org.w3c.dom.Element;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
  *  Wrapper for the html element "a"
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public class HtmlAnchor extends ClickableElement {
 
@@ -74,23 +76,34 @@ public class HtmlAnchor extends ClickableElement {
      * behavior is to open the HREF page, or execute the HREF if it is a
      * javascript: URL.
      *
+     * @param defaultPage The default page to return if the action does not
+     * load a new page.
      * @return The page that is currently loaded after execution of this method
      * @throws IOException If an IO error occured
      */
-    protected Page doClickAction() throws IOException {
+    protected Page doClickAction(Page defaultPage) throws IOException {
 
-        final HtmlPage page = getPage();
         final String href = getHrefAttribute();
 
-        if( TextUtil.startsWithIgnoreCase(href, "javascript:") ) {
-            return page.executeJavaScriptIfPossible( href, "javascript url", true, this ).getNewPage();
+        if( href != null && href.length() > 0 ) {
+            final HtmlPage page = getPage();
+            if( TextUtil.startsWithIgnoreCase(href, "javascript:") ) {
+                return page.executeJavaScriptIfPossible(
+                    href, "javascript url", true, this ).getNewPage();
+            }
+            else {
+                final URL url = page.getFullyQualifiedUrl( href );
+                final SubmitMethod submitMethod = SubmitMethod.GET;
+                final List parameters = Collections.EMPTY_LIST;
+
+                final WebWindow webWindow = page.getEnclosingWindow();
+                return page.getWebClient().getPage( webWindow, url,
+                    page.getResolvedTarget(getTargetAttribute()),
+                    submitMethod, parameters );
+            }
         }
         else {
-            final URL url = page.getFullyQualifiedUrl( getHrefAttribute() );
-            final SubmitMethod submitMethod = SubmitMethod.GET;
-            final List parameters = Collections.EMPTY_LIST;
-
-            return page.getWebClient().getPage( url, submitMethod, parameters );
+            return defaultPage;
         }
     }
 

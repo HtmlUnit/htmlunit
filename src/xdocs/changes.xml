@@ -132,6 +132,51 @@
             <action type="update" dev="mbowler" id="793340">
             	Fixed exception when specifying an empty string for src on an a frame.
             </action>
+            <action type="update" dev="dktaylor" id="753776">
+                Fixed the bug where newly opened windows targetted at named
+                frames were not opening in the correct windows.
+
+                Changed returned page from click() method to work with new
+                targets.  That is, instead of just returning changes to the
+                immediate window, it returns any window that is opened.  So,
+                if you call click() on an element that has a target set, you
+                will get the page in the window for that target.  This is
+                particularly needed for the _blank target where you couldn't
+                find the new window without this change since it is not named.
+            </action>
+            <action type="update" dev="dktaylor">
+                Fixed a bug where windows that were overwritten were not
+                cleaned up so they would be returned from getWebWindowByName.
+            </action>
+            <action type="add" dev="dktaylor">
+                Added WebWindow.getTopWindow() and getParentWindow().
+            </action>
+            <action type="add" dev="dktaylor">
+                Added support for the remaining special target names (_blank,
+                _parent, _top in addition to _self that was already supported).
+                These special target names are supported for a, area and form
+                elements as well as the JavaScript open() function.
+            </action>
+            <action type="add" dev="dktaylor">
+                Added support for DOM API node navigation methods in
+                HtmlElement so they are available within test cases.  This
+                includes getParentNode, getNextSibling, getPreviousSibling,
+                getFirstChild, getLastChild, getNodeType, getNodeName, and
+                getNodeValue.  
+            </action>
+            <action type="add" dev="dktaylor">
+                Added support for base elements to set a default target
+                using the target attribute.  This affects a, area and form
+                elements.
+            </action>
+            <action type="update" dev="dktaylor">
+                Fixed a bug where a base element without an href attribute
+                was causing a MalformedURLException to be thrown.  This can
+                be caused when the base element just sets a default target.
+                Similarly check for empty href attribute in a and area
+                elements.  (The HTML 4 standard does not allow the action
+                attribute to be optional in form elements.)
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">

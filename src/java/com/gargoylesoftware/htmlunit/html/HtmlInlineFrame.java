@@ -83,8 +83,8 @@ public class HtmlInlineFrame
             URL url = null;
             try {
                 url = getPage().getFullyQualifiedUrl(srcAttribute);
-                setEnclosedPage( webClient.getPage(
-                    this, url, SubmitMethod.GET, Collections.EMPTY_LIST, false ) );
+                webClient.getPage(
+                    this, url, SubmitMethod.GET, Collections.EMPTY_LIST, false );
             }
             catch( final MalformedURLException e ) {
                 getLog().error("Bad url in src attribute of iframe: url=["+srcAttribute+"]", e);
@@ -263,6 +263,26 @@ public class HtmlInlineFrame
      */
     public void setEnclosedPage( final Page page ) {
         enclosedPage_ = page;
+    }
+
+
+    /**
+     * Return the window that contains this window.
+     *
+     * @return The parent window.
+     */
+    public WebWindow getParentWindow() {
+        return getPage().getEnclosingWindow();
+    }
+
+
+    /**
+     * Return the top level window that contains this window.
+     *
+     * @return The top level window that contains this window.
+     */
+    public WebWindow getTopWindow() {
+        return getParentWindow().getTopWindow();
     }
 
 

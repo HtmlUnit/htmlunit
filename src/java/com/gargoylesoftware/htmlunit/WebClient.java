@@ -55,6 +55,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 import org.apache.commons.logging.Log;
@@ -69,6 +70,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Dominique Broeglin
  * @author Noboru Sinohara
  * @author <a href="mailto:chen_jun@users.sourceforge.net"> Chen Jun</a>
+ * @author David K. Taylor
  */
 public class WebClient {
 
@@ -95,6 +97,7 @@ public class WebClient {
     private final List webWindows_ = Collections.synchronizedList(new ArrayList());
 
     private WebWindow currentWindow_ = new TopLevelWindow("", this);
+    private Stack firstWindowStack_ = new Stack();
 
     private static URLStreamHandler JavaScriptUrlStreamHandler_
         = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
@@ -319,6 +322,39 @@ public class WebClient {
             FailingHttpStatusCodeException {
         return getPage(webWindow, url, method, parameters, getThrowExceptionOnFailingStatusCode());
     }
+
+
+    /**
+     * Return a page.
+     *
+     * @param  webWindow The window that the new page will be loaded into.
+     * @param  url The url of the server
+     * @param  target The name of the window where the page will be loaded.
+     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
+     * @param  parameters A list of {@link
+     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
+     *      contain the parameters to send to the server
+     * @return  The page that was loaded.
+     * @exception  IOException If an IO error occurs
+     * @exception  FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the property
+     *      "throwExceptionOnFailingStatusCode" is set to true (see {@link
+     *      #setThrowExceptionOnFailingStatusCode(boolean)})
+     */
+    public Page getPage(
+            final WebWindow webWindow,
+            final URL url,
+            final String target,
+            final SubmitMethod method,
+            final List parameters )
+        throws
+            IOException,
+            FailingHttpStatusCodeException {
+        return getPage(openTargetWindow( webWindow, target, "_self" ), url,
+            method, parameters, getThrowExceptionOnFailingStatusCode());
+    }
+
+
     /**
      * Return a page.
      *
@@ -347,6 +383,41 @@ public class WebClient {
             FailingHttpStatusCodeException {
         return getPage(webWindow, url, encType, method, parameters, getThrowExceptionOnFailingStatusCode());
     }
+
+
+    /**
+     * Return a page.
+     *
+     * @param  webWindow The window that the new page will be loaded into.
+     * @param  url The url of the server
+     * @param  target The name of the window where the page will be loaded.
+     * @param  encType Encoding type of the form when done as a POST
+     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
+     * @param  parameters A list of {@link
+     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
+     *      contain the parameters to send to the server
+     * @return  The page that was loaded.
+     * @exception  IOException If an IO error occurs
+     * @exception  FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the property
+     *      "throwExceptionOnFailingStatusCode" is set to true (see {@link
+     *      #setThrowExceptionOnFailingStatusCode(boolean)})
+     */
+    public Page getPage(
+            final WebWindow webWindow,
+            final URL url,
+            final String target,
+            final FormEncodingType encType,
+            final SubmitMethod method,
+            final List parameters )
+        throws
+            IOException,
+            FailingHttpStatusCodeException {
+        return getPage(openTargetWindow( webWindow, target, "_self" ),
+            url, encType, method, parameters,
+            getThrowExceptionOnFailingStatusCode());
+    }
+
 
     /**
      * Return a page.
@@ -435,6 +506,11 @@ public class WebClient {
             IOException,
             FailingHttpStatusCodeException {
 
+        final Page oldPage = webWindow.getEnclosedPage();
+        if (oldPage != null) {
+            // Remove the old windows before create new ones.
+            oldPage.cleanUp();
+        }
         final String protocol = url.getProtocol();
         final WebResponse webResponse;
         if( protocol.equals("javascript") ) {
@@ -457,9 +533,13 @@ public class WebClient {
             getLog().info( webResponse.getContentAsString() );
         }
 
-        final Page oldPage = webWindow.getEnclosedPage();
         final Page newPage = pageCreator_.createPage( this, webResponse, webWindow );
         webWindow.setEnclosedPage(newPage);
+
+        if (! firstWindowStack_.empty() && firstWindowStack_.peek() == null) {
+            firstWindowStack_.pop();
+            firstWindowStack_.push(webWindow);
+        }
 
         newPage.initialize();
 
@@ -733,6 +813,25 @@ public class WebClient {
 
 
     /**
+     * Return the "first" window for this client.  This is the first window
+     * opened since pushClearFirstWindow() was last called.
+     * @return The first window.
+     */
+    public WebWindow popFirstWindow() {
+        return (WebWindow)firstWindowStack_.pop();
+    }
+
+
+    /**
+     * Clear the first window for this client.
+     * @param window The first window.
+     */
+    public void pushClearFirstWindow() {
+        firstWindowStack_.push(null);
+    }
+
+
+    /**
      * Add a listener for WebWindowEvent's.  All events from all windows associated with this
      * client will be sent to the specified listener.
      * @param listener A listener.
@@ -781,7 +880,7 @@ public class WebClient {
      */
     public WebWindow openWindow( final URL url, final String windowName ) {
         Assert.notNull("windowName", windowName);
-        return openWindow( url, windowName, null );
+        return openWindow( url, windowName, getCurrentWindow() );
     }
 
 
@@ -795,13 +894,54 @@ public class WebClient {
      * @return The new window.
      */
     public WebWindow openWindow( final URL url, String windowName, final WebWindow opener ) {
-        if( windowName == null ) {
-            windowName = "";
+        WebWindow window = openTargetWindow( opener, windowName, "_blank" );
+        if( url != null ) {
+            try {
+                getPage(window, url, SubmitMethod.GET, Collections.EMPTY_LIST);
+            }
+            catch( final IOException e ) {
+                getLog().error("Error when loading content into window", e);
+            }
+        }
+        return window;
+    }
+
+
+    /**
+     * Open the window with the specified name.  The name may be a special
+     * target name of _self, _parent, _top, or _blank.  An empty or null
+     * name is set to the default.  The special target names are relative to
+     * the opener window.
+     *
+     * @param opener The web window that is calling openWindow
+     * @param windowName The name of the new window
+     * @param defaultName The default target if no name is given
+     * @return The new window.
+     */
+    private WebWindow openTargetWindow( final WebWindow opener,
+        String windowName, String defaultName ) {
+        Assert.notNull("opener", opener);
+        Assert.notNull("defaultName", defaultName);
+        if( windowName == null || windowName.length() == 0 ) {
+            windowName = defaultName;
         }
 
         WebWindow window = null;
         if( windowName.equals("_self") ) {
-            window = getCurrentWindow();
+            window = opener;
+            windowName = "";
+        }
+        else if( windowName.equals("_parent") ) {
+            window = opener.getParentWindow();
+            windowName = "";
+        }
+        else if( windowName.equals("_top") ) {
+            window = opener.getTopWindow();
+            windowName = "";
+        }
+        else if( windowName.equals("_blank") ) {
+            // Leave window null to create a new window.
+            windowName = "";
         }
         else if( windowName.length() != 0 ) {
             try {
@@ -817,18 +957,10 @@ public class WebClient {
             fireWindowOpened( new WebWindowEvent(window, null, null) );
         }
 
-        if( window instanceof TopLevelWindow ) {
+        if( window instanceof TopLevelWindow && window != opener ) {
             ((TopLevelWindow)window).setOpener(opener);
         }
 
-        if( url != null ) {
-            try {
-                getPage(window, url, SubmitMethod.GET, Collections.EMPTY_LIST);
-            }
-            catch( final IOException e ) {
-                getLog().error("Error when loading content into newly created window", e);
-            }
-        }
         return window;
     }
 

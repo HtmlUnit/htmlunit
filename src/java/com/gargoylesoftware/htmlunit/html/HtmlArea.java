@@ -75,25 +75,35 @@ public class HtmlArea extends ClickableElement {
      * requiring different behaviour (like {@link HtmlSubmitInput}) will override this
      * method.
      *
+     * @param defaultPage The default page to return if the action does not
+     * load a new page.
      * @return The page that is currently loaded after execution of this method
      * @throws IOException If an IO error occured
      */
-    protected Page doClickAction() throws IOException {
+    protected Page doClickAction(Page defaultPage) throws IOException {
         final HtmlPage enclosingPage = getPage();
         final WebClient webClient = enclosingPage.getWebClient();
 
-        final URL url;
-        try {
-            url = enclosingPage.getFullyQualifiedUrl( getHrefAttribute() );
-        }
-        catch( final MalformedURLException e ) {
-            throw new IllegalStateException(
-                "Not a valid url: " + getHrefAttribute() );
-        }
+        final String href = getHrefAttribute();
+        if( href != null && href.length() > 0 ) {
+            final URL url;
+            try {
+                url = enclosingPage.getFullyQualifiedUrl( getHrefAttribute() );
+            }
+            catch( final MalformedURLException e ) {
+                throw new IllegalStateException(
+                    "Not a valid url: " + getHrefAttribute() );
+            }
 
-        final SubmitMethod method = SubmitMethod.getInstance( getAttributeValue( "method" ) );
-        final WebWindow webWindow = enclosingPage.getEnclosingWindow();
-        return webClient.getPage( webWindow, url, method, Collections.EMPTY_LIST );
+            final SubmitMethod method = SubmitMethod.getInstance( getAttributeValue( "method" ) );
+            final WebWindow webWindow = enclosingPage.getEnclosingWindow();
+            return webClient.getPage( webWindow, url,
+                enclosingPage.getResolvedTarget(getTargetAttribute()), method,
+                Collections.EMPTY_LIST );
+        }
+        else {
+            return defaultPage;
+        }
     }
 
     /**

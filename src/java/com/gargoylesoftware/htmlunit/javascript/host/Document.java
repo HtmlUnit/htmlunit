@@ -281,6 +281,18 @@ public final class Document extends HTMLElement {
 
 
     /**
+     * Get the JavaScript property "parentNode" for the node that
+     * contains the current node.
+     * @return The parent node
+     */
+    public Object jsGet_parentNode() {
+        // Work around the fact that HtmlPage is both the HTML element
+        // and the Document node.
+        return null;
+    }
+
+
+    /**
      * Create a new HTML element with the given tag name.
      *
      * @param tagName The tag name

@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.javascript.WindowFramesArray;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
+ * @author  David K. Taylor
  */
 public final class Window extends SimpleScriptable {
 
@@ -385,15 +386,8 @@ public final class Window extends SimpleScriptable {
      * @return The value of "top"
      */
     public SimpleScriptable jsGet_top() {
-        WebWindow window = webWindow_;
-        while( window != null ) {
-            if( window instanceof TopLevelWindow ) {
-                return (SimpleScriptable)window.getScriptObject();
-            }
-
-            window = ((HtmlElement)window).getPage().getEnclosingWindow();
-        }
-        throw new IllegalStateException("Couldn't find a TopLevelWindow!");
+        final WebWindow topWebWindow = webWindow_.getTopWindow();
+        return (SimpleScriptable)topWebWindow.getScriptObject();
     }
 
 
@@ -402,17 +396,8 @@ public final class Window extends SimpleScriptable {
      * @return the value of window.parent
      */
     public SimpleScriptable jsGet_parent() {
-        final SimpleScriptable parentProperty;
-        if( webWindow_ instanceof TopLevelWindow ) {
-            parentProperty = this;
-        }
-        else {
-            final WebWindow parentWebWindow
-                = ((HtmlElement)webWindow_).getPage().getEnclosingWindow();
-            parentProperty = (SimpleScriptable)parentWebWindow.getScriptObject();
-        }
-
-        return parentProperty;
+        final WebWindow parentWebWindow = webWindow_.getParentWindow();
+        return (SimpleScriptable)parentWebWindow.getScriptObject();
     }
 
 

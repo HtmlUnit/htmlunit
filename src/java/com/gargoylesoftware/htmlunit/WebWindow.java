@@ -44,6 +44,7 @@ package com.gargoylesoftware.htmlunit;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  David K. Taylor
  */
 public interface WebWindow {
 
@@ -69,6 +70,25 @@ public interface WebWindow {
      * @param page The new page or null if there is no page (ie empty window)
      */
     void setEnclosedPage( final Page page );
+
+
+    /**
+     * Return the window that contains this window.  If this is a top
+     * level window, then return this window.
+     *
+     * @return The parent window or this window if there is no parent.
+     */
+    WebWindow getParentWindow();
+
+
+    /**
+     * Return the top level window that contains this window.  If this
+     * is a top level window, then return this window.
+     *
+     * @return The top level window that contains this window or this
+     * window if there is no parent.
+     */
+    WebWindow getTopWindow();
 
 
     /**

@@ -167,7 +167,9 @@ public class HtmlForm extends ClickableElement {
         final FormEncodingType encType = FormEncodingType.getInstance( this.getEnctypeAttribute() );
         final SubmitMethod method = SubmitMethod.getInstance( getAttributeValue( "method" ) );
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        return htmlPage.getWebClient().getPage( webWindow, url, encType, method, parameterList );
+        return htmlPage.getWebClient().getPage( webWindow, url,
+            htmlPage.getResolvedTarget(getTargetAttribute()), encType, method,
+            parameterList );
     }
 
 

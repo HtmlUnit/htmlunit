@@ -236,7 +236,6 @@ public class FakeWebConnection extends WebConnection {
 
         final ResponseEntry responseEntry
             = new ResponseEntry(content, statusCode, statusMessage, contentType, responseHeaders);
-
         responseMap_.put( url.toExternalForm(), responseEntry );
     }
 
