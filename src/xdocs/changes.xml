@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                Trying to set a JS property configured with writable="false" now generates a JS runtime error.
+            </action>
             <action type="add" dev="mguillem">
                 Added conversion to string and method toString on event handler functions.
             </action>

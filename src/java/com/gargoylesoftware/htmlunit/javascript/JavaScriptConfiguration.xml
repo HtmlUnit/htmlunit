@@ -286,7 +286,7 @@
         <property name="text" readable="true" writable="true"/>
         <property name="value" readable="true" writable="true"/>
         <property name="defaultSelected" readable="true" writable="false"/>
-        <property name="selected" readable="true" writable="false"/>
+        <property name="selected" readable="true" writable="true"/>
     </class>
 
     <class name="Password" extends="Input"/><!-- NOT FINISHED -->
