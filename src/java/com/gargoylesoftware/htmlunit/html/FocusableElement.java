@@ -49,8 +49,10 @@ import java.util.Map;
  */
 public abstract class FocusableElement extends ClickableElement {
 
-    /**
-     * @see ClickableElement
+    /** 
+     * Create an instance.
+     * @param page The page
+     * @param attributes The attributes
      */
     public FocusableElement(HtmlPage page, Map attributes) {
         super(page, attributes);

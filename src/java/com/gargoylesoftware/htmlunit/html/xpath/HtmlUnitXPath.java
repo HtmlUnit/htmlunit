@@ -45,8 +45,8 @@ import org.jaxen.JaxenException;
  *
  * <p>This is the main entry point for matching an XPath against a HU-DOM
  * tree.  You create a compiled XPath object, then match it against one or
- * more context nodes using the {@link #selectNodes} method, as in the
- * following example:</p>
+ * more context nodes using the {@link BaseXPath#selectNodes(Object)}
+ * method, as in the following example:</p>
  *
  * <pre>
  * XPath path = new HtmlUnitXPath("a/b/c");
@@ -57,6 +57,7 @@ import org.jaxen.JaxenException;
  *
  * @version  $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Mike Bowler
  */
 public class HtmlUnitXPath extends BaseXPath {
 

@@ -73,12 +73,17 @@ public class SimpleScriptable extends ScriptableObject {
         private Method getter_;
         private Method setter_;
         private FunctionObject function_;
-        
+        /** @return The getter method */
         public Method getGetter() { return getter_; }
+        /** @return The setter method */
         public Method getSetter() { return setter_; }
+        /** @return The function object */
         public FunctionObject getFunction() { return function_; }
+        /** @param getter The new getter method */
         public void setGetter( final Method getter ) { getter_ = getter; }
+        /** @param setter The new setter method */
         public void setSetter( final Method setter ) { setter_ = setter; }
+        /** @param function The new function object */
         public void setFunction( final FunctionObject function ) { function_ = function; }
     }
 
@@ -470,6 +475,10 @@ public class SimpleScriptable extends ScriptableObject {
      /**
       * Walk up the prototype chain and return the first scriptable that this method can
       * be invoked on.
+      * @param start The object on which we are starting the search
+      * @param method The method
+      * @return The first scriptable
+      * @throws IllegalStateException If a matching scriptable could not be found.
       */
      private Scriptable findMatchingScriptable( final Scriptable start, final Method method ) {
          final Class declaringClass = method.getDeclaringClass();

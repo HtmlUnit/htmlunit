@@ -54,7 +54,7 @@ public class Base64Test extends WebTestCase {
 
 
     /**
-     * Test {@link Base64.encode(String)}
+     * Test {@link Base64#encode(String)}
      */
     public void testEncode() {
         final String data[][] = {
@@ -77,7 +77,7 @@ public class Base64Test extends WebTestCase {
 
 
     /**
-     * Test {@link Base64.encode(String,String)} with a null string.
+     * Test {@link Base64#encode(String,String)} with a null string.
      * @throws Exception if the test fails
      */
     public void testEncodeStringEncoding_NullString()
@@ -93,7 +93,7 @@ public class Base64Test extends WebTestCase {
 
 
     /**
-     * Test {@link Base64.encode(String,String)} with a null encoding.
+     * Test {@link Base64#encode(String,String)} with a null encoding.
      * @throws Exception if the test fails
      */
     public void testEncodeStringEncoding_NullEncoding()
@@ -109,7 +109,7 @@ public class Base64Test extends WebTestCase {
 
 
     /**
-     * Test {@link Base64.encode(String)} with a null string.
+     * Test {@link Base64#encode(String)} with a null string.
      * @throws Exception if the test fails
      */
     public void testEncodeString_Null()
@@ -125,7 +125,7 @@ public class Base64Test extends WebTestCase {
 
 
     /**
-     * Test {@link Base64.encode(String,String)} with a null encoding.
+     * Test {@link Base64#encode(String,String)} with a null encoding.
      * @throws Exception if the test fails
      */
     public void testEncodeBytes_NullArray()

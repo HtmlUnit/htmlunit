@@ -678,24 +678,32 @@ public class JavaScriptEngineTest extends WebTestCase {
             delegate_ = delegate;
         }
 
+        /**
+         * Initialize with a given page.
+         * @param page The page.
+         */
         public void initialize(HtmlPage page) {
             delegate_.initialize(page);
         }
 
+        /** @inheritDoc ScriptEngine#execute(HtmlPage,String,String,HtmlElement) */
         public Object execute(HtmlPage htmlPage, String sourceCode, String sourceName, HtmlElement htmlElement) {
             scriptExecutionCount_++;
             return delegate_.execute(htmlPage, sourceCode, sourceName, htmlElement);
         }
 
+        /** @inheritDoc ScriptEngine#callFunction(HtmlPage,Object,Object,Object[],HtmlElement) */
         public Object callFunction(HtmlPage htmlPage, Object javaScriptFunction, Object thisObject,
                 Object[] args, HtmlElement htmlElementScope) {
             return delegate_.callFunction(htmlPage, javaScriptFunction, thisObject, args, htmlElementScope);
         }
 
+        /** @inheritDoc ScriptEngine#toString(HtmlPage,Object) */
         public String toString(HtmlPage htmlPage, Object javaScriptObject) {
             return delegate_.toString(htmlPage, javaScriptObject);
         }
 
+        /** @return The number of times that this engine has executed code */
         public int getExecutionCount() {
             return scriptExecutionCount_;
         }
