@@ -94,9 +94,12 @@
 
 
 <target name="clean" description="clean">
+	<!-- Note that we can't just delete 'target' because this would then blow
+	     away the repository which is needed for the compile.  Instead we delete
+	     all the individual directories under target *except* for 'repository' -->
     <delete dir="target/classes" quiet="true"/>
     <delete dir="target/test-classes" quiet="true"/>
-    <delete dir="target/repository" quiet="true"/>
+
     <delete dir="build/${version}"/>
     <delete file="dist/projectdocs.zip"/>
     <delete file="dist/${version}.zip"/>
