@@ -42,6 +42,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
@@ -58,20 +59,23 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.WindowFramesArray;
 
 /**
- * A javascript window class
- *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
- * @author  David K. Taylor
+ * A JavaScript object for a Window.
+ * 
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
+ * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
- * @author  Darrell DeBoer
+ * @author Darrell DeBoer
  * @author Marc Guillemot
  * @author Dierk Koenig
+ * @author Daniel Gredler
+ * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp">
+ * MSDN documentation</a>
  */
 public final class Window extends SimpleScriptable {
 
@@ -82,7 +86,6 @@ public final class Window extends SimpleScriptable {
     private Screen screen_;
     private History history_;
     private Location location_;
-    private WindowFramesArray windowFramesArray_;
 
     /**
      * Create an instance.  The rhino engine requires all host objects
@@ -359,9 +362,6 @@ public final class Window extends SimpleScriptable {
 
         location_ = (Location)makeJavaScriptObject("Location");
         location_.initialize(this);
-
-        windowFramesArray_ =(WindowFramesArray)makeJavaScriptObject("WindowFramesArray");
-        windowFramesArray_.initialize(htmlPage);
     }
 
 
@@ -405,8 +405,12 @@ public final class Window extends SimpleScriptable {
      * Return the value of the frames property.
      * @return The value of window.frames
      */
-    public WindowFramesArray jsGet_frames() {
-        return windowFramesArray_;
+    public ElementArray jsGet_frames() {
+        HtmlPage page = (HtmlPage) this.getWebWindow().getEnclosedPage();
+        List list = page.getFrames();
+        ElementArray frames = (ElementArray) makeJavaScriptObject("ElementArray");
+        frames.setElements( list );
+        return frames;
     }
 
     /**

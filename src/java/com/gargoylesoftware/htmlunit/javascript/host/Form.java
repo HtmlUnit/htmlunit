@@ -38,21 +38,26 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.javascript.FormElementsArray;
+import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
 import org.mozilla.javascript.Scriptable;
 
 /**
- * A javascript object representing a Form.
- *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * A JavaScript object for a Form.
+ * 
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Daniel Gredler
+ * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/form.asp">MSDN documentation</a>
  */
 public class Form extends HTMLElement {
 
     private static final long serialVersionUID = -1860993922147246513L;
-    private FormElementsArray formElementsArray_;
 
     /**
      * Create an instance.  A default constructor is required for all javascript objects.
@@ -69,17 +74,12 @@ public class Form extends HTMLElement {
 
 
     /**
-     * Initialize the object.
-     *
+     * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#setHtmlElement(HtmlElement)
      */
-    public void initialize() {
-
-        final HtmlForm htmlForm = getHtmlForm();
-        htmlForm.setScriptObject(this);
-        if( formElementsArray_ == null ) {
-            formElementsArray_ = (FormElementsArray)makeJavaScriptObject("FormElementsArray");
-            formElementsArray_.initialize( htmlForm );
-        }
+    public void setHtmlElement( final HtmlElement htmlElement ) {
+        super.setHtmlElement( htmlElement );
+        final HtmlForm htmlForm = this.getHtmlForm();
+        htmlForm.setScriptObject( this );
     }
 
 
@@ -96,8 +96,13 @@ public class Form extends HTMLElement {
      * Return the value of the javascript attribute "elements".
      * @return The value of this attribute.
      */
-    public FormElementsArray jsGet_elements() {
-        return formElementsArray_;
+    public ElementArray jsGet_elements() {
+        final HtmlForm htmlForm = getHtmlForm();
+        final List inputTagNames = Arrays.asList( new String[]{"input", "button", "select", "textarea"} );
+        final List elements = htmlForm.getHtmlElementsByTagNames( inputTagNames );
+        final ElementArray formElements = (ElementArray) makeJavaScriptObject("ElementArray");
+        formElements.setElements( elements );
+        return formElements;
     }
 
 
@@ -108,8 +113,9 @@ public class Form extends HTMLElement {
      * @return The value of this attribute.
      */
     public int jsGet_length() {
-        return jsGet_elements().jsGet_length() 
-            - getHtmlForm().getHtmlElementsByAttribute("input", "type", "image").size();
+        final int all = jsGet_elements().jsGet_length();
+        final int images = getHtmlForm().getHtmlElementsByAttribute("input", "type", "image").size();
+        return all - images;
     }
 
 
@@ -217,40 +223,37 @@ public class Form extends HTMLElement {
     }
 
 
-     /**
-      * Return the specified property or NOT_FOUND if it could not be found.
-      * @param name The name of the property
-      * @param start The scriptable object that was originally queried for this property
-      * @return The property.
-      */
-     public Object get( final String name, final Scriptable start ) {
-         final HtmlForm htmlForm = getHtmlFormOrNull();
-         if(htmlForm == null ) {
-             // The object hasn't fully been initialized yet so just pass through to the superclass
-             return super.get(name, start);
-         }
-
-         if( formElementsArray_ == null ) {
-             initialize();
-         }
-
-         final Object result = formElementsArray_.get( name, start );
-         if( result != NOT_FOUND ) {
-             return result;
-         }
-
-         return super.get(name, start);
-     }
+    /**
+     * Return the specified property or NOT_FOUND if it could not be found.
+     * @param name The name of the property
+     * @param start The scriptable object that was originally queried for this property
+     * @return The property.
+     */
+    public Object get( final String name, final Scriptable start ) {
+        // If the HtmlForm is null, the object hasn't been fully initialized yet so
+        // just pass through to the superclass.
+        final HtmlForm htmlForm = getHtmlFormOrNull();
+        if(htmlForm == null ) {
+            return super.get( name, start );
+        }
+        // Try to get the element or elements specified from the form element array.
+        final ElementArray formElements = this.jsGet_elements();
+        final Object result = formElements.get( name, start );
+        if( result != NOT_FOUND ) {
+            return result;
+        }
+        // Not found, just pass through to the superclass.
+        return super.get( name, start );
+    }
 
 
-     /**
-      * Return the specified indexed property
-      * @param index The index of the property
-      * @param start The scriptable object that was originally queried for this property
-      * @return The property.
-      */
-     public Object get( final int index, final Scriptable start ) {
-         return jsGet_elements().get(index, ((Form) start).jsGet_elements());
-     }
+    /**
+     * Return the specified indexed property
+     * @param index The index of the property
+     * @param start The scriptable object that was originally queried for this property
+     * @return The property.
+     */
+    public Object get( final int index, final Scriptable start ) {
+        return jsGet_elements().get(index, ((Form) start).jsGet_elements());
+    }
 }
-
