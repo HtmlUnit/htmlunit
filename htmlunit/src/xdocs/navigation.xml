@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="HtmlUnit">
+
+	<properties>
+		<title>HtmlUnit</title>
+		<author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+		<revision>$Revision$</revision>
+	</properties>
+
+	<body>
+		<menu name="Misc Project docs">
+			<item name="Building from CVS" href="/buildingFromCvs.html"/>
+			<item name="Changes" href="/changes.html"/>
+			<item name="Coding conventions" href="/codingConventions.html"/>
+			<item name="FAQ" href="/faq.html"/>
+			<item name="Getting started" href="/gettingStarted.html"/>
+			<item name="Tool support" href="/ide.html"/>
+			<item name="License" href="/license.html"/>
+			<item name="Logging" href="/logging.html"/>
+			<item name="Submitting patches" href="/submittingPatches.html"/>
+			<item name="TODO" href="/todo.html"/>
+		</menu>
+		<menu name="HOW-TO">
+			<item name="Keyboard" href="/keyboard-howto.html"/>
+			<item name="Tables" href="/table-howto.html"/>
+			<item name="Window" href="/window-howto.html"/>
+		</menu>
+	</body>
+</project>
+
+

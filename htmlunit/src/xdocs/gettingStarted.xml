@@ -1,83 +1,90 @@
 <?xml version="1.0"?>
-<document title="Getting Started with HtmlUnit">
+<document>
 
-<section title="Creating a WebClient">
-	<p>
-		The class <javadoc>com.gargoylesoftware.htmlunit.WebClient</javadoc> is the
-		main starting point.  This simulates a web browser and will be used to execute
-		all of the tests.
-	</p>
-	<p>
-		Most unit testing will be done within a framework like <a href="http://www.junit.org">JUnit</a>
-		so all the examples here will assume that we are using that.
-	</p>
-	<p>
-		In the first sample, we create the web client and have it load the homepage from the HtmlUnit website.
-		We then verify that this page has the correct title.  Note that getPage() can return different types
-		of pages based on the content type of the returned data.  In this case we are expecting a content
-		type of text/html so we cast the result to an <javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage</javadoc>.
-	</p>
-	<source><![CDATA[
+	<properties>
+		<title>Getting Started with HtmlUnit</title>
+		<author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+		<revision>$Revision$</revision>
+	</properties>
+
+	<body>
+		<section>
+			<p>
+				The class <javadoc>com.gargoylesoftware.htmlunit.WebClient</javadoc> is the
+				main starting point.  This simulates a web browser and will be used to execute
+				all of the tests.
+			</p>
+			<p>
+				Most unit testing will be done within a framework like <a href="http://www.junit.org">JUnit</a>
+				so all the examples here will assume that we are using that.
+			</p>
+			<p>
+				In the first sample, we create the web client and have it load the homepage from the HtmlUnit website.
+				We then verify that this page has the correct title.  Note that getPage() can return different types
+				of pages based on the content type of the returned data.  In this case we are expecting a content
+				type of text/html so we cast the result to an <javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage</javadoc>.
+			</p>
+			<source><![CDATA[
 public void testHomePage() throws Exception {
 	final WebClient webClient = new WebClient();
 	final URL url = new URL("http://htmlunit.sourceforge.net");
 	final HtmlPage page = (HtmlPage)webClient.getPage(url);
 	assertEquals( "Welcome to HtmlUnit", page.getTitleText();
 }
-	]]></source>
-</section>
+			]]></source>
+		</section>
 
 
-<section title="Imitating a specific browser">
-	<p>
-		Often you will want to simulate a specific browser.  This is done by passing a
-		<javadoc>com.gargoylesoftware.htmlunit.BrowserVersion</javadoc> into the WebClient constructor.
-		Constants have been provided for some common browsers but you can create your own specific
-		version by instantiating a BrowserVersion.
-	</p>
-	<source><![CDATA[
+		<section name="Imitating a specific browser">
+			<p>
+				Often you will want to simulate a specific browser.  This is done by passing a
+				<javadoc>com.gargoylesoftware.htmlunit.BrowserVersion</javadoc> into the WebClient constructor.
+				Constants have been provided for some common browsers but you can create your own specific
+				version by instantiating a BrowserVersion.
+			</p>
+			<source><![CDATA[
 public void testHomePage() throws Exception {
 	final WebClient webClient = new WebClient(BrowserVersion.MOZILLA_1_0);
 	final URL url = new URL("http://htmlunit.sourceforge.net");
 	final HtmlPage page = (HtmlPage)webClient.getPage(url);
 	assertEquals( "Welcome to HtmlUnit", page.getTitleText();
 }
-	]]></source>
-	<p>
-		Specifying this BrowserVersion will change the user agent header that is sent up to the
-		server and will change the behaviour of some of the javascript.  Note that the version
-		specific javascript behaviour still needs a lot of work.
-	</p>
-</section>
+			]]></source>
+			<p>
+				Specifying this BrowserVersion will change the user agent header that is sent up to the
+				server and will change the behaviour of some of the javascript.  Note that the version
+				specific javascript behaviour still needs a lot of work.
+			</p>
+		</section>
 
 
-<section title="Using a proxy server">
-	<p>
-		The last WebClient constructor allows you to specify proxy server information in those cases
-		where you need to connect through one.
-	</p>
-	<source><![CDATA[
+		<section name="Using a proxy server">
+			<p>
+				The last WebClient constructor allows you to specify proxy server information in those cases
+				where you need to connect through one.
+			</p>
+			<source><![CDATA[
 public void testHomePage() throws Exception {
 	final WebClient webClient = new WebClient(BrowserVersion.MOZILLA_1_0, "http://myproxyserver", 8000);
 	final URL url = new URL("http://htmlunit.sourceforge.net");
 	final HtmlPage page = (HtmlPage)webClient.getPage(url);
 	assertEquals( "Welcome to HtmlUnit", page.getTitleText();
 }
-	]]></source>
-	<p>
-		Specifying this BrowserVersion will change the user agent header that is sent up to the
-		server and will change the behaviour of some of the javascript.  Note that the version
-		specific javascript behaviour still needs a lot of work.
-	</p>
-</section>
+			]]></source>
+			<p>
+				Specifying this BrowserVersion will change the user agent header that is sent up to the
+				server and will change the behaviour of some of the javascript.  Note that the version
+				specific javascript behaviour still needs a lot of work.
+			</p>
+		</section>
 
 
-<section title="Submitting a form">
-	<p>
-		Frequently we want to change values in a form and submit the form back to the server.  The
-		following example shows how you might do this.
-	</p>
-	<source><![CDATA[
+		<section name="Submitting a form">
+			<p>
+				Frequently we want to change values in a form and submit the form back to the server.  The
+				following example shows how you might do this.
+			</p>
+			<source><![CDATA[
 public void testHomePage() throws Exception {
 	final WebClient webClient = new WebClient();
 	final URL url = new URL("http://htmlunit.sourceforge.net");
@@ -97,9 +104,9 @@ public void testHomePage() throws Exception {
 	// Now submit the form by clicking the button and get back the second page.
 	final HtmlPage page2 = (HtmlPage)button.click();
 }
-	]]></source>
+			]]></source>
 
-</section>
-
+		</section>
+	</body>
 </document>
 
