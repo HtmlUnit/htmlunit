@@ -50,7 +50,7 @@ import java.util.Map;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class HtmlTextArea extends ClickableElement implements SubmittableElement {
+public class HtmlTextArea extends FocusableElement implements SubmittableElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "textarea";

@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author  David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class HtmlArea extends ClickableElement {
+public class HtmlArea extends FocusableElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "area";

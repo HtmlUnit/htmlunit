@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.html.FocusableElement;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -83,7 +84,7 @@ public class WebClient {
     private final int proxyPort_;
     private ScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
-    private HtmlElement elementWithFocus_;
+    private FocusableElement elementWithFocus_;
     private final Map requestHeaders_ = Collections.synchronizedMap(new HashMap(89));
 
     private AlertHandler   alertHandler_;
@@ -1348,45 +1349,20 @@ public class WebClient {
 
 
     /**
-     * Move the focus to the specified component.  This will trigger any relevant javascript
+     * Remove the focus to the specified component.  This will trigger any relevant javascript
      * event handlers.
      *
-     * @param newElement The element that will recieve the focus or null if focus is to be removed
-     * from all elements.
-     * @return true if the specified element now has the focus.
-     * @see #getElementWithFocus()
-     * @see HtmlPage#tabToNextElement()
-     * @see HtmlPage#tabToPreviousElement()
-     * @see HtmlPage#pressAccessKey(char)
-     * @see HtmlPage#assertAllTabIndexAttributesSet()
+     * @param oldElement The element that will lose the focus.
+     * @see #moveFocusToElement(FocusableElement)
+     * @return true if the focus changed and a new page was not loaded
      */
-    public boolean moveFocusToElement( final HtmlElement newElement ) {
-        if( elementWithFocus_ == newElement ) {
-            // nothing to do
-            return true;
-        }
-
-        // TODO: This is an incredibly inefficient way to find out if the element is tabbable.
-        // Refactor this into something reasonable.
-        if( newElement != null && newElement.getPage().getTabbableElements().contains(newElement) == false ) {
-            // This element isn't tabbable.
-            return false;
-        }
-
-        if( elementWithFocus_ != null ) {
-            final String onBlurHandler = elementWithFocus_.getAttributeValue("onblur");
+    public boolean moveFocusFromElement( final FocusableElement oldElement ) {
+        if (oldElement != null && elementWithFocus_ == oldElement) {
+            final String onBlurHandler = oldElement.getAttributeValue("onblur");
             if( onBlurHandler.length() != 0 ) {
-                elementWithFocus_.getPage().executeJavaScriptIfPossible(
-                    onBlurHandler, "OnBlur handler", true, elementWithFocus_);
-            }
-        }
-
-        if( newElement != null ) {
-            final String onFocusHandler = newElement.getAttributeValue("onfocus");
-            if( onFocusHandler.length() != 0 ) {
-                final HtmlPage currentPage = newElement.getPage();
+                final HtmlPage currentPage = oldElement.getPage();
                 final Page newPage = currentPage.executeJavaScriptIfPossible(
-                    onFocusHandler, "OnFocus handler", true, newElement).getNewPage();
+                    onBlurHandler, "OnBlur handler", true, oldElement).getNewPage();
 
                 // If a page reload happened as a result of the focus change then obviously this
                 // element will not have the focus because its page has gone away.
@@ -1394,6 +1370,52 @@ public class WebClient {
                     elementWithFocus_ = null;
                     return false;
                 }
+            }
+            elementWithFocus_ = null;
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * Move the focus to the specified component.  This will trigger any relevant javascript
+     * event handlers.
+     *
+     * @param newElement The element that will recieve the focus.
+     * @return true if the specified element now has the focus.
+     * @see #getElementWithFocus()
+     * @see HtmlPage#tabToNextElement()
+     * @see HtmlPage#tabToPreviousElement()
+     * @see HtmlPage#pressAccessKey(char)
+     * @see HtmlPage#assertAllTabIndexAttributesSet()
+     */
+    public boolean moveFocusToElement( final FocusableElement newElement ) {
+
+        if( newElement == null ) {
+            throw new IllegalArgumentException("Cannot move focus to null");
+        }
+
+        if( elementWithFocus_ == newElement ) {
+            // nothing to do
+            return true;
+        }
+
+        if( elementWithFocus_ != null ) {
+            elementWithFocus_.blur();
+        }
+
+        final String onFocusHandler = newElement.getAttributeValue("onfocus");
+        if( onFocusHandler.length() != 0 ) {
+            final HtmlPage currentPage = newElement.getPage();
+            final Page newPage = currentPage.executeJavaScriptIfPossible(
+                onFocusHandler, "OnFocus handler", true, newElement).getNewPage();
+
+            // If a page reload happened as a result of the focus change then obviously this
+            // element will not have the focus because its page has gone away.
+            if( currentPage != newPage ) {
+                elementWithFocus_ = null;
+                return false;
             }
         }
 
@@ -1406,9 +1428,9 @@ public class WebClient {
      * Return the element with the focus or null if no elements have the focus.
      *
      * @return The element with focus or null.
-     * @see #moveFocusToElement(HtmlElement)
+     * @see #moveFocusToElement(FocusableElement)
      */
-    public HtmlElement getElementWithFocus() {
+    public FocusableElement getElementWithFocus() {
         return elementWithFocus_;
     }
 

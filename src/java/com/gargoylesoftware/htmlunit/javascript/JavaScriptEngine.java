@@ -146,7 +146,7 @@ public final class JavaScriptEngine extends ScriptEngine {
             final String hostClassNames[] = {
                 "HTMLElement" ,"Window", "Document", "Form", "Input", "Navigator",
                 "Screen", "History", "Location", "Button", "Select", "Textarea",
-                "Style", "Option", "Anchor", "Image", "TextImpl"
+                "Style", "Option", "Anchor", "Image", "TextImpl", "FocusableHostElement"
             };
 
             for( int i=0; i<hostClassNames.length; i++ ) {

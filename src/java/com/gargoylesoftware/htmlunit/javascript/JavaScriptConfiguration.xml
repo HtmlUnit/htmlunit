@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="JavaScriptConfiguration.xsd">
 
-    <class name="Anchor" extends="HTMLElement">
+    <class name="Anchor" extends="FocusableHostElement">
         <javascript min-version="1.2"/>
         <property name="name" readable="true" writable="true" always-available="true"/>
         <property name="tabindex" readable="true" writable="true"/>
@@ -210,7 +210,7 @@
     <class name="Image" extends="Input">
     </class>
 
-    <class name="Input" extends="HTMLElement">
+    <class name="Input" extends="FocusableHostElement">
         <property name="checked" readable="true" writable="true"/>
         <property name="defaultChecked" readable="true" writable="true"/>
         <property name="defaultValue" readable="true" writable="true"/>
@@ -225,15 +225,10 @@
         <property name="value" readable="true" writable="true"/>
         <!-- This property is only in DOM1 so it  -->
         <property name="disabled" readable="true" writable="true"/>
-        <function name="blur"/>
         <function name="click"/>
-        <function name="focus"/>
         <function name="select"/>
-        <function name="onblur"/>
         <function name="onchange"/>
         <function name="onclick"/>
-        <function name="onfocus"/>
-        <function name="onblur"/>
     </class>
 
     <class name="Location">
@@ -324,4 +319,11 @@
         <function name="prompt"/>
         <function name="setTimeout"/>
     </class>
+    
+    <class name="FocusableHostElement" extends="HTMLElement">
+        <function name="blur"/>
+        <function name="focus"/>
+        <function name="onblur"/>
+        <function name="onfocus"/>
+    </class>    
 </configuration>

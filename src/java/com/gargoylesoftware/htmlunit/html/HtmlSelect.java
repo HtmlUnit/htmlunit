@@ -59,7 +59,7 @@ import java.util.Collections;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class HtmlSelect extends ClickableElement implements SubmittableElement {
+public class HtmlSelect extends FocusableElement implements SubmittableElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "select";

@@ -1048,7 +1048,9 @@ public final class HtmlPage extends DomNode implements Page {
         final HtmlElement element = getHtmlElementByAccessKey(accessKey);
         final WebClient webClient = getWebClient();
         if( element != null ) {
-            webClient.moveFocusToElement(element);
+            if( element instanceof FocusableElement ) {
+                ((FocusableElement) element).focus();
+            }
 
             final Page newPage;
             if( element instanceof HtmlAnchor ) {
@@ -1078,7 +1080,7 @@ public final class HtmlPage extends DomNode implements Page {
 
             if( newPage != this && webClient.getElementWithFocus() == element ) {
                 // The page was reloaded therefore no element on this page will have the focus.
-                webClient.moveFocusToElement(null);
+                webClient.getElementWithFocus().blur();
             }
         }
 
@@ -1094,12 +1096,14 @@ public final class HtmlPage extends DomNode implements Page {
      */
     public HtmlElement tabToNextElement() {
         final List elements = getTabbableElements();
+        final FocusableElement elementWithFocus = getWebClient().getElementWithFocus();
         if( elements.isEmpty() ) {
-            getWebClient().moveFocusToElement(null);
+            if (elementWithFocus != null) {
+                elementWithFocus.blur();
+            }
             return null;
         }
 
-        final HtmlElement elementWithFocus = getWebClient().getElementWithFocus();
         final HtmlElement elementToGiveFocus;
         if( elementWithFocus == null ) {
             elementToGiveFocus = (HtmlElement)elements.get(0);
@@ -1120,7 +1124,9 @@ public final class HtmlPage extends DomNode implements Page {
             }
         }
 
-        getWebClient().moveFocusToElement( elementToGiveFocus );
+        if( elementToGiveFocus instanceof FocusableElement ) {
+            ((FocusableElement) elementToGiveFocus).focus();
+        }
         return elementToGiveFocus;
     }
 
@@ -1133,12 +1139,14 @@ public final class HtmlPage extends DomNode implements Page {
      */
     public HtmlElement tabToPreviousElement() {
         final List elements = getTabbableElements();
+        final FocusableElement elementWithFocus = getWebClient().getElementWithFocus();
         if( elements.isEmpty() ) {
-            getWebClient().moveFocusToElement(null);
+            if (elementWithFocus != null) {
+                elementWithFocus.blur();
+            }
             return null;
         }
 
-        final HtmlElement elementWithFocus = getWebClient().getElementWithFocus();
         final HtmlElement elementToGiveFocus;
         if( elementWithFocus == null ) {
             elementToGiveFocus = (HtmlElement)elements.get(elements.size()-1);
@@ -1159,7 +1167,9 @@ public final class HtmlPage extends DomNode implements Page {
             }
         }
 
-        getWebClient().moveFocusToElement( elementToGiveFocus );
+        if( elementToGiveFocus instanceof FocusableElement ) {
+            ((FocusableElement) elementToGiveFocus).focus();
+        }
         return elementToGiveFocus;
     }
 

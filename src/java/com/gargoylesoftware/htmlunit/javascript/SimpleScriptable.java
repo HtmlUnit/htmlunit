@@ -96,6 +96,7 @@ public class SimpleScriptable extends ScriptableObject {
         final String[][] mapping = {
             {"DomText", "TextImpl"},
             {"HtmlAnchor", "Anchor"},
+            {"HtmlArea", "FocusableHostElement"},
             {"HtmlButton", "Button"},
             {"HtmlInput", "Input"},
             {"HtmlCheckBoxInput", "Input"},
@@ -104,6 +105,7 @@ public class SimpleScriptable extends ScriptableObject {
             {"HtmlHiddenInput", "Input"},
             {"HtmlImage", "Image"},
             {"HtmlInlineFrame", "Window"},
+            {"HtmlLabel", "FocusableHostElement"},
             {"HtmlOption", "Option"},
             {"HtmlPasswordInput", "Input"},
             {"HtmlRadioButtonInput", "Input"},
