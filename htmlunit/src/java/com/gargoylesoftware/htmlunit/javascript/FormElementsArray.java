@@ -54,10 +54,6 @@ public class FormElementsArray extends SimpleScriptable {
     /**
      * <p>Return the object at the specified index.</p>
      *
-     * <p>TODO: This implementation is particularly inefficient but without a way
-     * to detect if an element has been inserted or removed, it isn't safe to
-     * cache the array.<p>
-     *
      * @param index The index
      * @param start The object that get is being called on.
      * @return The object or NOT_FOUND
@@ -126,10 +122,6 @@ public class FormElementsArray extends SimpleScriptable {
 
    /**
     * <p>Return the number of elements in this array</p>
-    *
-    * <p>TODO: This implementation is particularly inefficient but without a way
-    * to detect if an element has been inserted or removed, it isn't safe to
-    * cache the array/<p>
     *
     * @return The number of elements in the array
     */
