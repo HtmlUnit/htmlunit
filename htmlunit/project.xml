@@ -107,7 +107,8 @@
 
     <dependencies>
         <dependency>
-            <id>junit</id>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
             <version>3.8.1</version>
             <url>http://www.junit.org/</url>
             <properties>
@@ -116,7 +117,8 @@
             </properties>
         </dependency>
         <dependency>
-            <id>junitperf</id>
+            <groupId>junitperf</groupId>
+            <artifactId>junitperf</artifactId>
             <version>1.8</version>
             <url>http://www.clarkware.com</url>
             <properties>
@@ -125,8 +127,9 @@
             </properties>
         </dependency>
         <dependency>
-            <id>commons-jelly</id>
-            <version>SNAPSHOT</version>
+            <groupId>commons-jelly</groupId>
+            <artifactId>commons-jelly</artifactId>
+            <version>20030711.034327</version>
             <url>http://jakarta.apache.org/commons/jelly</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
@@ -134,8 +137,9 @@
             </properties>
         </dependency>
         <dependency>
-            <id>commons-jelly+tags-log</id>
-            <version>SNAPSHOT</version>
+            <groupId>commons-jelly</groupId>
+            <artifactId>commons-jelly-tags-log</artifactId>
+            <version>20030211.142821</version>
             <url>http://jakarta.apache.org/commons/jelly</url>
             <properties>
                 <htmlunit.group>Jelly</htmlunit.group>
@@ -143,8 +147,9 @@
             </properties>
         </dependency>
         <dependency>
-            <id>commons-jexl</id>
-            <version>SNAPSHOT</version>
+            <groupId>commons-jexl</groupId>
+            <artifactId>commons-jexl</artifactId>
+            <version>1.0-beta-1</version>
             <url>http://jakarta.apache.org/commons/jexl</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
@@ -152,8 +157,9 @@
             </properties>
         </dependency>
         <dependency>
-            <id>commons-cli</id>
-            <version>SNAPSHOT</version>
+            <groupId>commons-cli</groupId>
+            <artifactId>commons-cli</artifactId>
+            <version> 1.0-beta-2</version>
             <url>http://jakarta.apache.org/commons/cli</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
@@ -161,7 +167,8 @@
             </properties>
         </dependency>
         <dependency>
-            <id>dom4j</id>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
             <version>1.4-dev-8</version>
             <url>http://www.dom4j.org/</url>
             <properties>
@@ -170,7 +177,8 @@
             </properties>
         </dependency>
         <dependency>
-            <id>commons-collections</id>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
             <version>2.1</version>
             <url>http://jakarta.apache.org/commons/collections.html</url>
             <properties>
@@ -179,7 +187,8 @@
             </properties>
         </dependency>
         <dependency>
-            <id>commons-beanutils</id>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
             <version>1.6.1</version>
             <url>http://jakarta.apache.org/commons/beanutils</url>
             <properties>
@@ -188,7 +197,8 @@
             </properties>
         </dependency>
         <dependency>
-            <id>commons-httpclient</id>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
             <version>2.0-beta2</version>
             <url>http://jakarta.apache.org/commons/httpclient</url>
             <properties>
@@ -197,7 +207,8 @@
             </properties>
         </dependency>
         <dependency>
-            <id>gsbase</id>
+            <groupId>gsbase</groupId>
+            <artifactId>gsbase</artifactId>
             <version>2.0</version>
             <url>http://gsbase.sourceforge.net</url>
             <properties>
@@ -216,27 +227,28 @@
             </properties>
         </dependency>
         <dependency>
-            <id>xerces</id>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
             <version>2.4.0</version>
             <url>http://xml.apache.org/xerces2-j/index.html</url>
-            <jar>xercesImpl-2.4.0.jar</jar>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>XML Parser</htmlunit.description>
             </properties>
         </dependency>
         <dependency>
-            <id>xerces+parserAPIs</id>
+            <groupId>xerces</groupId>
+            <artifactId>xmlParserAPIs</artifactId>
             <version>2.2.1</version>
             <url>http://xml.apache.org/xerces2-j/index.html</url>
-            <jar>xmlParserAPIs-2.2.1.jar</jar>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>XML Parser</htmlunit.description>
             </properties>
         </dependency>
         <dependency>
-            <id>nekohtml</id>
+            <groupId>nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
             <version>0.7.7</version>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
@@ -244,7 +256,8 @@
             </properties>
         </dependency>
         <dependency>
-            <id>commons-logging</id>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
             <version>1.0.2</version>
             <url>http://jakarta.apache.org/commons/logging.html</url>
             <properties>
