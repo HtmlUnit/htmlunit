@@ -373,8 +373,8 @@ public class CharacterDataImplTest extends WebTestCase {
              + "    var text1=div1.firstChild;\n"
              + "    var text2=text1.splitText(5);\n"
              + "    alert(text1.data);\n"
-	     + "    alert(text2.data);\n"
-	     + "    alert(text1.nextSibling==text2);\n"
+             + "    alert(text2.data);\n"
+             + "    alert(text1.nextSibling==text2);\n"
              + "}\n"
              + "</script></head><body onload='doTest()'>"
              + "<div id='div1'>Some Text</div></body></html>";
@@ -390,7 +390,7 @@ public class CharacterDataImplTest extends WebTestCase {
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{
-	    "Some ", "Text", "true"
+            "Some ", "Text", "true"
         } );
         assertEquals( expectedAlerts, collectedAlerts );
     }

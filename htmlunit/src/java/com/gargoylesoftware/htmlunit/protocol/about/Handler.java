@@ -53,7 +53,6 @@ public class Handler extends URLStreamHandler {
      * Return a new URLConnection for this url.
      * @param url The "about:" url.
      * @return The connection.
-     * @throws IOException If an IO problem occurs
      */
     protected URLConnection openConnection( final URL url ) {
         return new AboutURLConnection(url);
