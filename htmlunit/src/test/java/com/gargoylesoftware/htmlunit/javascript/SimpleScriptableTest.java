@@ -121,7 +121,7 @@ public class SimpleScriptableTest extends WebTestCase {
         final String directoryName = "../../src/java/com/gargoylesoftware/htmlunit/javascript/host";
         final Set names = getFileNames(directoryName.replace('/', File.separatorChar));
 
-        // Now pull out those names that we know don't have html equivilents
+        // Now pull out those names that we know don't have html equivalents
         names.remove("CharacterDataImpl");
         names.remove("Document");
         names.remove("Event");
@@ -134,6 +134,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("Style");
         names.remove("ActiveXObject");
         names.remove("Window");
+        names.remove("Attribute");
         
         assertEquals( new TreeSet(names), new TreeSet(map.values()) );
     }

@@ -221,16 +221,14 @@ public class HTMLElement extends NodeImpl {
         return result;
     }
 
-
     /**
      * Gets the specified property.
-     * @param attibuteName attribute name.
+     * @param attributeName attribute name.
      * @return The value of the specified attribute
      */
-    public String jsFunction_getAttribute(String attibuteName) {
-        return getHtmlElementOrDie().getAttributeValue(attibuteName);
+    public String jsFunction_getAttribute(String attributeName) {
+        return getHtmlElementOrDie().getAttributeValue(attributeName);
     }
-
 
     /**
      * Set an attribute.
@@ -243,7 +241,32 @@ public class HTMLElement extends NodeImpl {
     public void jsFunction_setAttribute(final String name, final String value) {
         getHtmlElementOrDie().setAttributeValue(name, value);
     }
-    
+
+    /**
+     * Gets the attribute node for the specified attribute.
+     * @param attributeName the name of the attribute to retrieve
+     * @return the attribute node for the specified attribute.
+     */
+    public Object jsFunction_getAttributeNode(final String attributeName) {
+        final Attribute att = (Attribute) makeJavaScriptObject(Attribute.JS_OBJECT_NAME);
+        att.init(attributeName, getHtmlElementOrDie());
+        return att;
+    }
+
+    /**
+     * Sets the attribute node for the specified attribute.
+     * @param newAtt the attribute to set.
+     * @return the replaced attribute node, if any.
+     */
+    public Attribute jsFunction_setAttributeNode(final Attribute newAtt) {
+        final String name = newAtt.jsGet_name();
+        final String value = newAtt.jsGet_value();
+        final Attribute replacedAtt = (Attribute) jsFunction_getAttributeNode(name);
+        replacedAtt.detachFromParent();
+        getHtmlElementOrDie().setAttributeValue(name, value);
+        return replacedAtt;
+    }
+
     /**
      * Return all the elements with the specified tag name
      * @param tagName The name to search for

@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="mguillem" due-to="Daniel Gredler" id="1096133">
+                JavaScript: added attribute support.
+            </action>
             <action type="add" dev="mguillem">
                 Added WebClient.setThrowExceptionOnScriptError(boolean) and isThrowExceptionOnScriptError() to allow script errors 
 				to stop only execution of current script as browsers do.
