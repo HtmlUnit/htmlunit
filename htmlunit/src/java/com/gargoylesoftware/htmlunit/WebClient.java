@@ -361,7 +361,7 @@ public class WebClient {
     
     /**
      * For internal use only 
-     * @see getPage(WebWindow,WebRequestSettings)
+     * @see #getPage(WebWindow,WebRequestSettings)
      */
     public Page getPage(final WebWindow opener, final String target, final WebRequestSettings params)
             throws FailingHttpStatusCodeException, IOException {
@@ -369,8 +369,8 @@ public class WebClient {
     }
 
     /**
-     *  Convenience method to load a URL into the current WebWindow
-     * @see #getPage(WebWindow, WebRequestSettings)}
+     * Convenience method to load a URL into the current WebWindow
+     * @see #getPage(WebWindow, WebRequestSettings)
      */
     public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
         return getPage(getCurrentWindow(), new WebRequestSettings(url));
@@ -378,8 +378,7 @@ public class WebClient {
     
     /**
      * Convenience method to load a web request into the current WebWindow
-     *
-     * @see #getPage(WebWindow, WebRequestSettings)}
+     * @see #getPage(WebWindow, WebRequestSettings)
      */
     public Page getPage(final WebRequestSettings request) throws IOException,
             FailingHttpStatusCodeException {

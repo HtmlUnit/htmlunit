@@ -229,7 +229,7 @@ public class ElementArray extends SimpleScriptable implements Function {
      * of a property, the property value is returned. If it is the id of an element in
      * the array, that element is returned. Finally, if it is the name of an element or
      * elements in the array, then all those elements are returned. Otherwise,
-     * @{link #NOT_FOUND} is returned.
+     * {@link #NOT_FOUND} is returned.
      * @see org.mozilla.javascript.ScriptableObject#get(String, Scriptable)
      */
     public final Object get( final String name, final Scriptable start ) {

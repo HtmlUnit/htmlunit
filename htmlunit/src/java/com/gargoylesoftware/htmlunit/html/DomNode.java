@@ -387,7 +387,6 @@ public abstract class DomNode implements Cloneable {
     }
 
     /**
-     * @inheritDoc org.w3c.dom.Node#setNodeValue(String)
      * @param x The new value
      */
     public void setNodeValue(String x) {
