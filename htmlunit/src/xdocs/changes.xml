@@ -28,6 +28,9 @@
 		<change type="fix">
 			Fixed bug where javascript:option.getValue() was returning the text, not the value
 		</change>
+		<change type="change">
+			Improved some error handling when secondary pages are being loaded by frames
+		</change>
 	</change-log>
 </section>
 

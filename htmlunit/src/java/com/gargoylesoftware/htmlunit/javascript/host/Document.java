@@ -208,7 +208,7 @@ public final class Document extends HTMLElement {
 
             if( jsElement == null ) {
                 getLog().debug("getElementById("+id
-                    +") cannot return a result as there isn't a javascipt object for the html element "
+                    +") cannot return a result as there isn't a javascript object for the html element "
                     + htmlElement.getClass().getName());
             }
             else {
@@ -220,5 +220,6 @@ public final class Document extends HTMLElement {
         }
         return result;
     }
+
 }
 

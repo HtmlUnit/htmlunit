@@ -67,6 +67,12 @@ public class SanityCheck extends WebTestCase {
     }
 
 
+    public void testToyotaCanada() throws Exception {
+        final WebClient webClient = new WebClient();
+        final HtmlPage page = (HtmlPage)webClient.getPage( new URL( "http://www.toyota.ca" ) );
+    }
+
+
     public void testSourceForge_secure() throws Exception {
         final WebClient webClient = new WebClient();
         webClient.setPrintContentOnFailingStatusCode(true);
