@@ -120,7 +120,7 @@
 			<dt>HtmlUnit.jar</dt>
 			<dd>The main HtmlUnit classes</dd>
 
-			<dt>commons-httpclient.jar <version-string>Dec 9/2002 build</version-string></dt>
+			<dt>commons-httpclient.jar <version-string>2.0beta3</version-string></dt>
 			<dd><a href="http://jakarta.apache.org/commons/httpclient/">HttpClient from Apache</a>,
 			the code that actually handles the http connections.  Note that commons-httpclient
 			is going through active development and does not have a stable release yet.  We're
@@ -130,7 +130,7 @@
 			<dd><a href="http://jakarta.apache.org/commons/logging.html">Logging
 			from Apache</a></dd>
 
-			<dt>nekohtml.jar <version-string>0.7.2</version-string></dt>
+			<dt>nekohtml.jar <version-string>0.7.4</version-string></dt>
 			<dd><a href="http://www.apache.org/~andyc/neko/doc/html/index.html">
 			NekoHTML</a> is a tool to convert badly written html into an xml
 			dom model</dd>

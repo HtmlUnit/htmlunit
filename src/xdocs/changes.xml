@@ -11,7 +11,7 @@
 			Fixed bug where some success status codes (not 200) were being reported as errors
 		</change>
 		<change type="change">
-			Upgraded NekoHTML to version 0.7.2
+			Upgraded NekoHTML to version 0.7.4
 		</change>
 		<change type="change">
 			Upgraded commons-httpclient to 2.0beta3
