@@ -2,6 +2,7 @@
 <test:suite 
 	xmlns:j="jelly:core" 
 	xmlns:test="jelly:junit"
+	xmlns:x="jelly:xml"
 	xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:h="jelly:com.gargoylesoftware.htmlunit.jelly.HtmlUnitTagLibrary">
 
@@ -33,8 +34,21 @@
 
     <test:case name="testBrowserVersion">
 	    <h:webClient var="webClient1" browserVersion="MOZILLA_1_0"/>
-	    
 	    <test:assertEquals expected="Netscape" actual="${webClient1.browserVersion.applicationName}"/>
+    </test:case>
+
+    <test:case name="testXmlVarAttribute">
+	    <h:webClient var="webClient1">
+	    	<h:mockWebConnection>
+	    		<h:mockResponse url="http://first">
+	    			<html><head><title>first</title></head><body></body></html>
+	    		</h:mockResponse>
+	    	</h:mockWebConnection>
+	    </h:webClient>
+	    
+        <h:getPage method="get" var="page1" uri="http://first" webclient="webClient1" xmlvar="xmldoc"/>
+        <x:set var="title" select="string($xmldoc/HTML/HEAD/TITLE)"/>
+        <test:assertEquals expected="first" actual="${title}"/>
     </test:case>
 
 </test:suite>
