@@ -727,7 +727,26 @@ public class HtmlSelectTest extends WebTestCase {
         assertEquals("x", theSelect.getOption(1).getValue());
             
     }
-    
+
+    /**
+     * Test that asText() returns a blank string if nothing is selected.
+     * 
+     * @exception  Exception If the test fails
+     */
+    public void testAsTextWhenNothingSelected() throws Exception {
+        final String htmlContent = "<html><head><title>foo</title></head><body>"
+            + "<form>"
+            + "<select name='select1' size='1' id='mySelect'>"
+            + "</select>"
+            + "</form></body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlSelect select = (HtmlSelect) page.getHtmlElementById("mySelect");
+
+        assertEquals("", select.asText());
+    }
+
     void appendOption(HtmlSelect select, String value) {
         HtmlOption option = new HtmlOption(select.getPage(), null);
         option.setValueAttribute(value);

@@ -437,7 +437,9 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             }
 
             final HtmlOption currentOption = ( HtmlOption )iterator.next();
-            buffer.append( currentOption.asText() );
+            if( currentOption != null) {
+                buffer.append( currentOption.asText() );
+            }
         }
 
         return buffer.toString();

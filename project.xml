@@ -158,6 +158,9 @@
         <contributor>
             <name>Daniel Gredler</name>
         </contributor>
+        <contributor>
+            <name>Mike Bresnahan</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
