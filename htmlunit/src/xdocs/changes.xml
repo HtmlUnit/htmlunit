@@ -232,6 +232,10 @@
             <action type="add" dev="mbowler" id="742519">
                 New method HtmlForm.getInputsByValue() to get multiple inputs
             </action>
+            <action type="update" dev="dktaylor">
+                Raise more specific exception from HtmlForm.getRadioButtonInput
+                if there is no radio button to match the name.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
