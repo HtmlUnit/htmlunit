@@ -56,6 +56,9 @@
 			Fixed bug where form.submit() was always loading into the default WebWindow, not the
 			current one.
 		</change>
+		<change type="new">
+			Added support for indexed properties in javascript forms
+		</change>
 	</change-log>
 </section>
 
