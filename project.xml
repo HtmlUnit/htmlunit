@@ -26,7 +26,7 @@
 
     <siteAddress>htmlunit.sourceforge.net</siteAddress>
     <siteDirectory>/home/groups/h/ht/htmlunit/htdocs</siteDirectory>
-    <distributionDirectory></distributionDirectory>
+    <distributionDirectory>/home/groups/h/ht/htmlunit/htdocs/nightly</distributionDirectory>
 
 	<repository>
 	    <connection>scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/htmlunit:htmlunit</connection>
