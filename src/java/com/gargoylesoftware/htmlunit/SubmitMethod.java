@@ -44,7 +44,7 @@ package com.gargoylesoftware.htmlunit;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public class SubmitMethod {
+public final class SubmitMethod {
     /**
      *  POST
      */

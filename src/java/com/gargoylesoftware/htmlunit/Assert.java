@@ -44,6 +44,11 @@ package com.gargoylesoftware.htmlunit;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public final class Assert {
+
+    /** Private to prevent instantiation */
+    private Assert() {
+    }
+
     /**
      * Assert that the specified parameter is not null.  Throw a NullPointerException
      * if a null is found.

@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * An array returned by frames property of Window
  *
  * @author <a href="mailto:chen_jun@users.sourceforge.net>Chen Jun</a>
- * @version 1.0, 2003-8-23
+ * @version $Revision$
  */
 public class WindowFramesArray extends SimpleScriptable {
     private HtmlPage htmlPage_;

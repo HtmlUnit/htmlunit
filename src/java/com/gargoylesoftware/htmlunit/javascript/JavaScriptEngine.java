@@ -173,7 +173,7 @@ public final class JavaScriptEngine extends ScriptEngine {
 
     /**
      * Determine the scope for the page and element.
-     * @param htmlPage The page
+     * @param pageInfo The page info
      * @param htmlElementScope The element that will be used as context or null if
      * the page should be used as context.
      * @return The JavaScript execution scope.
