@@ -37,10 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit.jelly;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.SimpleCredentialProvider;
+import java.lang.reflect.Field;
+
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.SimpleCredentialProvider;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * Jelly tag "webClient".
@@ -52,7 +56,8 @@ public class WebClientTag extends HtmlUnitTagSupport {
     private WebClient webClient_;
     private String userId_;
     private String password_;
-
+    private String browserVersionName_;
+    
     /**
      * Create an instance
      */
@@ -67,12 +72,23 @@ public class WebClientTag extends HtmlUnitTagSupport {
      * @throws JellyTagException when any error occurs
      */
     public void doTag(XMLOutput xmlOutput) throws JellyTagException {
-        webClient_ = new WebClient();
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if( browserVersion == null ) {
+            webClient_ = new WebClient();
+        }
+        else {
+            webClient_ = new WebClient(browserVersion);
+        }
         if( userId_ != null || password_ != null ) {
             if( userId_ == null || password_ == null ) {
                 throw new JellyTagException("userid and password must either both be set or neither set");
             }
             webClient_.setCredentialProvider( new SimpleCredentialProvider(userId_, password_) );
+        }
+        
+        final String varName = getVarValueOrNull();
+        if( varName != null ) {
+            getContext().setVariable(varName, webClient_);
         }
         invokeBody(xmlOutput);
     }
@@ -83,10 +99,29 @@ public class WebClientTag extends HtmlUnitTagSupport {
      * @param browserVersion The new value.
      */
     public void setBrowserVersion( final String browserVersion ) {
-        System.out.println("BrowserVersion not supported yet ["+browserVersion+"]");
+        browserVersionName_ = browserVersion;
     }
 
 
+    private BrowserVersion getBrowserVersion() {
+        if( browserVersionName_ == null ) {
+            return null;
+        }
+        
+        try {
+            final Field field = BrowserVersion.class.getDeclaredField(browserVersionName_);
+            return (BrowserVersion)field.get(null);
+        }
+        catch( final NoSuchFieldException e ) {
+            return null;
+        }
+        catch( final IllegalAccessException e ) {
+            // All the legitimate constants are accessible so this exception 
+            // would mean that something else has been specified.
+            return null;
+        }
+    }
+    
     /**
      * Return the WebClient created by this tag.
      * @return The web client

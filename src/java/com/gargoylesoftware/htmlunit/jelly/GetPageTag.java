@@ -44,11 +44,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * Jelly tag to load a page from a server.
@@ -60,7 +62,8 @@ public class GetPageTag extends HtmlUnitTagSupport {
     private String url_ = null;
     private List parameters_ = null;
     private String method_ = "get";
-
+    private String webClientName_;
+    
     /**
      * Create an instance
      */
@@ -75,9 +78,23 @@ public class GetPageTag extends HtmlUnitTagSupport {
      */
     public void doTag(XMLOutput xmlOutput) throws JellyTagException {
         invokeBody(xmlOutput);
+        
+        final JellyContext jellyContext = getContext();
+        
+        final WebClient webClient;
+        if( webClientName_ != null ) {
+            webClient = (WebClient)jellyContext.getVariable(webClientName_);
+            if( webClient == null ) {
+                throw new JellyTagException("No webclient found for name ["+webClientName_+"]");
+            }
+        }
+        else {
+            webClient = getWebClient();
+        }
+        
         try {
-            final Page page = getWebClient().getPage( getUrl(), getSubmitMethod(), getParameters() );
-            getContext().setVariable( getVarOrDie(), page );
+            final Page page = webClient.getPage( getUrl(), getSubmitMethod(), getParameters() );
+            jellyContext.setVariable( getVarValueOrDie(), page );
         }
         catch( final IOException e ) {
             throw new JellyTagException(e);
@@ -145,6 +162,15 @@ public class GetPageTag extends HtmlUnitTagSupport {
      */
     public void setMethod( final String method ) {
         method_ = method;
+    }
+
+
+    /**
+     * Callback from Jelly to set the value of the method attribute.
+     * @param method The new value.
+     */
+    public void setWebclient( final String webClientName ) {
+        webClientName_ = webClientName;
     }
 
 

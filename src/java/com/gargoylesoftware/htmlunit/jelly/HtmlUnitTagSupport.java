@@ -124,7 +124,7 @@ public abstract class HtmlUnitTagSupport extends TagSupport {
      * @return The value of var
      * @throws MissingAttributeException If var hasn't been set.
      */
-    public String getVarOrDie() throws MissingAttributeException {
+    public String getVarValueOrDie() throws MissingAttributeException {
         if( var_ == null ) {
             throw new MissingAttributeException("var");
         }
@@ -132,6 +132,15 @@ public abstract class HtmlUnitTagSupport extends TagSupport {
     }
 
 
+    /**
+     * Return the value of the "var" attribute or throw an exception if it hasn't been set.
+     * @return The value of var
+     */
+    public String getVarValueOrNull() throws MissingAttributeException {
+        return var_;
+    }
+
+    
     /**
      * Return the web client that is currently in use.
      * @return the web client
