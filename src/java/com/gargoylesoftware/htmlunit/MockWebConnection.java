@@ -224,6 +224,7 @@ public class MockWebConnection extends WebConnection {
                 }
             }
             public URL getUrl()                { return url;                           }
+            public List getResponseHeaders()   { return responseEntry.responseHeaders_; }
             public long getLoadTimeInMilliSeconds() { return 0; }
 
             public String getResponseHeaderValue( final String headerName ) {

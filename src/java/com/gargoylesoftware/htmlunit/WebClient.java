@@ -155,6 +155,9 @@ public class WebClient {
                 return null;
             }
         }
+        public List getResponseHeaders() {
+            return Collections.EMPTY_LIST;
+        }
         public String getResponseHeaderValue(final String key) {
             return "";
         }
@@ -1443,6 +1446,9 @@ public class WebClient {
             }
             public URL getUrl() {
                 return url;
+            }
+            public List getResponseHeaders() {
+                return Collections.EMPTY_LIST;
             }
             public String getResponseHeaderValue(final String key) {
                 return "";

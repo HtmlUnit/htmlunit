@@ -442,6 +442,15 @@ public class HttpWebConnection extends WebConnection {
                 return originatingURL;
             }
 
+            public List getResponseHeaders() {
+                final List headers = new ArrayList();
+                final Header[] array = method.getResponseHeaders();
+                for( int i = 0; i < array.length; i++ ) {
+                    headers.add( new NameValuePair( array[i].getName(), array[i].getValue() ) );
+                }
+                return headers;
+            }
+
             public String getResponseHeaderValue( final String headerName ) {
                 final Header header = method.getResponseHeader(headerName);
                 if( header == null ) {

@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="add" dev="mguillem" id="1150208" due-to="Daniel Gredler">
+                Added WebResponse.getResponseHeaders().
+            </action>
             <action type="update" dev="mguillem" id="1166652" due-to="Alfred Nathaniel">
                 Fixed NPE in loadWebResponse for responses with status code 204 (No Content).
             </action>
