@@ -1240,13 +1240,28 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test that moveTo function doesn't throw
+     * Test that Window.moveTo method gets correctly called and handled
+     * by the scripting engine.
      * @throws Exception if the test fails
      */
     public void testMoveTo() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>"
                  + "window.moveTo(10, 20)"
+                 + "</script></head><body>"
+                 + "</body></html>";
+        loadPage(content);
+    }
+
+    /**
+     * Test that Window.moveBy method gets correctly called and handled
+     * by the scripting engine.
+     * @throws Exception if the test fails
+     */
+    public void testMoveBy() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "window.moveBy(10, 20)"
                  + "</script></head><body>"
                  + "</body></html>";
         loadPage(content);
@@ -1265,4 +1280,73 @@ public class WindowTest extends WebTestCase {
         loadPage(content);
     }
 
+    /**
+     * Test that Window.scroll method gets correctly called and handled
+     * by the scripting engine.
+     * @throws Exception if the test fails
+     */
+    public void testScroll() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "window.scroll(10, 20);"
+                 + "</script></head><body>"
+                 + "</body></html>";
+        loadPage(content);
+    }
+
+    /**
+     * Test that Window.scrollBy method gets correctly called and handled
+     * by the scripting engine.
+     * @throws Exception if the test fails
+     */
+    public void testScrollBy() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "window.scrollBy(10, 20);"
+                 + "</script></head><body>"
+                 + "</body></html>";
+        loadPage(content);
+    }
+
+    /**
+     * Test that Window.scrollByLines method gets correctly called and handled
+     * by the scripting engine.
+     * @throws Exception if the test fails
+     */
+    public void testScrollByLines() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "window.scrollByLines(2);"
+                 + "</script></head><body>"
+                 + "</body></html>";
+        loadPage(content);
+    }
+
+    /**
+     * Test that Window.scrollByPages method gets correctly called and handled
+     * by the scripting engine.
+     * @throws Exception if the test fails
+     */
+    public void testScrollByPages() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "window.scrollByPages(2);"
+                 + "</script></head><body>"
+                 + "</body></html>";
+        loadPage(content);
+    }
+
+    /**
+     * Test that Window.scrollTo method gets correctly called and handled
+     * by the scripting engine.
+     * @throws Exception if the test fails
+     */
+    public void testScrollTo() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "window.scrollTo(10, 20);"
+                 + "</script></head><body>"
+                 + "</body></html>";
+        loadPage(content);
+    }
 }

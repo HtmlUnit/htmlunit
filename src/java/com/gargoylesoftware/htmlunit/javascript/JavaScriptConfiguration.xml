@@ -335,6 +335,12 @@
         <function name="setTimeout"/>
         <function name="moveTo"/>
         <function name="resizeTo"/>
+        <function name="moveBy"/>
+        <function name="scroll"/>
+        <function name="scrollBy"/>
+        <function name="scrollByLines"/>
+        <function name="scrollByPages"/>
+        <function name="scrollTo"/>
     </class>
     
     <class name="FocusableHostElement" extends="HTMLElement">

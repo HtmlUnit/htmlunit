@@ -7,8 +7,11 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" due-to="sdanig" id="1075526">
+                Added support for methods moveBy, scroll, scrollBy, scrollByLines, scrollByPages and scrollTo for JS window object. 
+            </action>
             <action type="update" dev="yourgod">
-                Fixed bug where encoded "&", "=", "+", ",", and "$" in URLs would be decoded before 
+                Fixed bug where encoded "&amp;", "=", "+", ",", and "$" in URLs would be decoded before 
                 sending to the server.
             </action>        
             <action type="update" dev="mguillem">
