@@ -44,11 +44,14 @@
     <body>
         <section name="Dependencies">
             <p>
-
                 These are the various dependencies required by HtmlUnit.  Some jars
                 are mandatory for even the simplest use of HtmlUnit, others are optional.
                 If the optional JARs are missing then the main functionality will
                 continue to work but some functions will not.
+            </p>
+            <p>
+            	  If you're using maven to build your project and just want to know what dependencies
+            	  to add to your POM, just scroll down to the <a href="#pomDependencies">next section</a>.
             </p>
             <table>
             <tr><th>Required JARs</th><th>Description</th></tr>
@@ -114,6 +117,42 @@
                 </j:if>
             </j:forEach>
             </table>
+        </section>
+
+        <section name="Dependencies">
+        	   <a name="pomDependencies"></a>
+            <p>
+                If you are using <a href="http://maven.apache.org">maven</a> to build your project 
+                then you can simply cut and paste the following dependencies into your project.xml.
+                The only dependency that isn't listed here is JSSE because it isn't in the maven
+                repository but you don't need that anyway if you're using Java 1.4 or higher.
+            </p>
+            <p>
+                Note that if you are reading this on the HtmlUnit website then the version numbers
+                reflect what is currently in CVS, not neccessarily what versions are in use in
+                the distribution that you have downloaded.  In particular, the version number
+                for HtmlUnit itself may not reflect a version currently available in the maven
+                repository.
+            </p>
+            <p>
+                If you are reading this from the documentation that came bundled with a particular
+                distribution of HtmlUnit then you can use these values without modification.
+            </p>
+            <source>
+&lt;dependency&gt;
+    &lt;groupId&gt;htmlunit&lt;/groupId&gt;
+    &lt;artifactId&gt;htmlunit&lt;/artifactId&gt;
+    &lt;version&gt;${pom.currentVersion}&lt;/version&gt;
+&lt;/dependency&gt;
+	            <j:forEach var="lib" items="${pom.artifacts}">
+	                <j:set var="dep" value="${lib.dependency}"/>
+&lt;dependency&gt;
+    &lt;groupId&gt;${dep.groupId}&lt;/groupId&gt;
+    &lt;artifactId&gt;${dep.artifactId}&lt;/artifactId&gt;
+    &lt;version&gt;${dep.version}&lt;/version&gt;
+&lt;/dependency&gt;
+	            </j:forEach>
+           </source>
         </section>
     </body>
 
