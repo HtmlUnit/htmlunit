@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1002140" due-to="Daniel Gredler">
+                Fixed NullPointerException thrown in JavaScript by createElement('input')
+            </action>        
             <action type="update" dev="mguillem" id="1107432" due-to="Hans Donner">
                 Javascript: implemented innerText for html elements (read/write).
             </action>
