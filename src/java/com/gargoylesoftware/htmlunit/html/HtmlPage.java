@@ -922,7 +922,7 @@ public final class HtmlPage
         final List bodyTags = getHtmlElementsByTagNames( Collections.singletonList("body") );
         if( bodyTags.size() != 1 ) {
             throw new IllegalStateException(
-                "Expected exactly one body tag but found ["+bodyTags.size()+"]");
+                "Expected exactly one body tag but found ["+bodyTags.size()+"] xml="+asXml());
         }
 
         final HtmlBody body = (HtmlBody)bodyTags.get(0);
