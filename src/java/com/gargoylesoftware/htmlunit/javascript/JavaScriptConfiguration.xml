@@ -260,7 +260,22 @@
 			<javascript min-version="1" max-version="2"/>
 		</property>
 
-		<function name="close">
-		</function>
+		<property name="document"/>
+		<property name="navigator"/>
+		<property name="window"/>
+		<property name="self"/>
+		<property name="location"/>
+		<property name="history"/>
+		<property name="screen"/>
+		<property name="top"/>
+		<property name="parent"/>
+		<property name="opener"/>
+		<property name="frames"/>
+
+		<function name="close"/>
+		<function name="open"/>
+		<function name="alert"/>
+		<function name="confirm"/>
+		<function name="prompt"/>
 	</class>
 </configuration>
