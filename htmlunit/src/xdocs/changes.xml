@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1081554">
+                Added support for item function in JavaScript like "document.all(...).item(...). 
+            </action>
             <action type="update" dev="mguillem">
                 Onchange script handlers not executed anymore if the field value is changed by javascript. This should for instance avoid infinite loops when field A changes field B and field B changes field A. 
             </action>

@@ -75,14 +75,34 @@ public class DocumentAllArray extends SimpleScriptable implements Function {
             throw new JavaScriptException("Bad args"); // what should we throw here?
         }
 
-        Object index = args[0];
+        return get(args[0]);
+    }
+
+    /**
+     * Helper method getting element with index
+     * @param index The index
+     * @return The object or {@link Scriptable#NOT_FOUND}
+     * @throws JavaScriptException
+     */
+    protected Object get(final Object index) {
         // this distinction should not exist: why is there a difference get(int, ...) and get(String, ...)?
         if (index instanceof Double) {
             return get(((Double) index).intValue(), this);
         }
         else {
-            return get(String.valueOf(args[0]), this);
+            return get(String.valueOf(index), this);
         }
+    }
+
+    /**
+     * Allows to evaluate expressions like "document.all('toto').item(i)"
+     * @param index The index
+     * @return The object or NOT_FOUND
+     * @throws JavaScriptException if an uncaught exception occurred while executing the function
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/item.asp">MSDN doc</a>
+     */
+    public Object jsFunction_item(final Object index) throws JavaScriptException {
+        return get(index);
     }
 
     /**
