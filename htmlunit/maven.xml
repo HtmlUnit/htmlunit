@@ -121,10 +121,12 @@
         </j:file>
     </goal>
 
+	<goal name="htmlunit:dist" prereqs="htmlunit:build-bin-dist,htmlunit:build-src-dist" />
+	
     <goal
-        name="buildzip"
-        prereqs="xdoc:init, java:jar, javadoc:generate"
-        description="Builds the distribution">
+        name="htmlunit:build-bin-dist"
+        prereqs="java:jar, site"
+        description="Builds the binary distribution">
 
         <ant:mkdir dir="${maven.dist.bin.assembly.dir}/${maven.final.name}"/>
         <ant:mkdir dir="${maven.dist.bin.assembly.dir}/${maven.final.name}/lib"/>
@@ -132,16 +134,15 @@
         <ant:mkdir dir="${maven.dist.bin.assembly.dir}/${maven.final.name}/docs"/>
 
         <ant:echo>
-            +------------------------------------------+
-            | C R E A T I N G  D I S T R I B U T I O N |
-            +------------------------------------------+
+            +------------------------------+
+            | CREATING BINARY DISTRIBUTION |
+            +------------------------------+
         </ant:echo>
 
         <ant:copy todir="${maven.dist.bin.assembly.dir}/${maven.final.name}">
             <ant:fileset dir=".">
                 <ant:include name="README.txt"/>
                 <ant:include name="LICENSE*"/>
-
             </ant:fileset>
         </ant:copy>
 
@@ -163,6 +164,7 @@
         <!-- Copy documentation -->
         <j:set var="docsDest"
             value="${pom.getPluginContext('maven-xdoc-plugin').getVariable('maven.docs.dest')}"/>
+		<ant:echo>docsDest=${docsDest}</ant:echo>
         <ant:mkdir dir="${maven.dist.bin.assembly.dir}/${maven.final.name}/docs"/>
         <ant:copy todir="${maven.dist.bin.assembly.dir}/${maven.final.name}/docs">
             <ant:fileset dir="${docsDest}">
@@ -170,19 +172,53 @@
             </ant:fileset>
         </ant:copy>
 
-        <!-- Copy the source -->
-        <ant:mkdir dir="${maven.dist.bin.assembly.dir}/${maven.final.name}/src"/>
-        <ant:copy todir="${maven.dist.bin.assembly.dir}/${maven.final.name}/src">
-            <ant:fileset dir="src">
-                <ant:include name="**"/>
-                <ant:exclude name="xdocs"/>
-            </ant:fileset>
-        </ant:copy>
-
         <!-- Build the zip -->
-        <zip
-            destfile="${maven.dist.bin.assembly.dir}/${maven.final.name}.zip"
-            basedir="${maven.dist.bin.assembly.dir}/${maven.final.name}"/>
+        <ant:delete file="${maven.dist.bin.assembly.dir}/dist/${maven.final.name}.zip"/>
+        <ant:mkdir dir="${maven.dist.bin.assembly.dir}/dist/"/>
+        <ant:zip destfile="${maven.dist.bin.assembly.dir}/dist/${maven.final.name}.zip">
+        		<ant:zipfileset 
+        			dir="${maven.dist.bin.assembly.dir}/${maven.final.name}" 
+        			prefix="${maven.final.name}"/>
+        	</ant:zip>
+	</goal>
+	
+	<goal
+        name="htmlunit:build-src-dist"
+        description="Builds the distribution">
+	
+        <ant:echo>
+            +------------------------------+
+            | CREATING SOURCE DISTRIBUTION |
+            +------------------------------+
+        </ant:echo>
+        <j:set var="srcStagingDir"
+            value="${maven.dist.bin.assembly.dir}/dist/${pom.name}-src-${pom.currentVersion}"/>
+        <ant:delete dir="${srcStagingDir}"/>
+        <ant:mkdir  dir="${srcStagingDir}"/>
+        <ant:copy todir="${srcStagingDir}">
+	        	<ant:fileset dir="${basedir}">
+	        		<ant:include name="**/*.java"/>
+	        		<ant:include name="**/*.xml"/>
+	        		<ant:include name="**/*.jsl"/>
+	        		<ant:include name="**/*.fml"/>
+	        		<ant:include name="**/*.jelly"/>
+	        		<ant:include name="**/*.gif"/>
+	        		<ant:include name="**/*.jpg"/>
+	        		<ant:include name="**/*.properties"/>
+	        		<ant:include name="**/package.html."/>
+	        		<ant:include name="LICENSE.txt"/>
+	        		<ant:exclude name="target/**"/>
+	        	</ant:fileset>
+         </ant:copy>
+         <ant:replace 
+         	file="${srcStagingDir}/project.properties"
+         	token="maven.clover.license.path="
+         	value="#maven.clover.license.path="/>
+         <j:set var="srcDistFileName" value="${srcStagingDir}.zip"/>
+         <ant:delete file="${srcDistFileName}"/>
+         <ant:zip destfile="${srcDistFileName}">
+        		<ant:zipfileset dir="${srcStagingDir}" prefix="${pom.name}-src-${pom.currentVersion}"/>
+        	</ant:zip>
     </goal>
 
     <!-- Run all the tests as quickly as possible.  This only outputs results
