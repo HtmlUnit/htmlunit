@@ -257,7 +257,6 @@ public final class HtmlInputTest extends WebTestCase {
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlRadioButtonInput radioButton = form.getRadioButtonInput( "foo", "2" );
-        final HtmlSubmitInput pushButton = ( HtmlSubmitInput )form.getInputByName( "button" );
         
         assertFalse("Should not be checked before click", radioButton.isChecked());
         radioButton.click();
