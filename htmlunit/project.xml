@@ -140,6 +140,9 @@
             <name>Ben Curren</name>
             <email>bcurren@esomnie.com</email>
         </contributor>
+        <contributor>
+            <name>Mike Williams</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
