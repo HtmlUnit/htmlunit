@@ -124,6 +124,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("CharacterDataImpl");
         names.remove("Document");
         names.remove("Event");
+        names.remove("EventHandler");
         names.remove("History");
         names.remove("Location");
         names.remove("Navigator");

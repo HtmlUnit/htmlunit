@@ -106,4 +106,32 @@ public class AnchorTest extends WebTestCase {
         } );
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testOnclickToString() throws Exception {
+        final String content
+             = "<html><head><title>AnchorTest</title><script>\n"
+             + "function test() {\n"
+             + "    for (var i=0; i<document.links.length; ++i)"
+             + "    {\n"
+             + "        var onclick = document.links[i].onclick;\n"
+             + "        alert(onclick ? (onclick.toString().indexOf('alert(') != -1) : 'not defined');\n"
+             + "    }\n"
+             + "}\n</script></head>"
+             + "<body onload='test()'>"
+             + "<a href='foo.html' onClick='alert(\"on click\")'>"
+             + "<a href='foo2.html'>"
+             + "</body></html>";
+        
+        
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList( new String[]{ "true", "not defined" } );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+
+        
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }
