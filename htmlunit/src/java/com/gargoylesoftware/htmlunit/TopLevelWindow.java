@@ -18,6 +18,7 @@ public class TopLevelWindow implements WebWindow {
     private String name_;
     private Page enclosedPage_;
     private WebClient webClient_;
+    private WebWindow opener_;
 
     private Object scriptObject_;
 
@@ -104,5 +105,23 @@ public class TopLevelWindow implements WebWindow {
      */
     public Object getScriptObject() {
         return scriptObject_;
+    }
+
+
+    /**
+     * Set the opener property.  This is the WebWindow that caused this new window to be opened.
+     * @param opener The new opener
+     */
+    public void setOpener( final WebWindow opener ) {
+        opener_ = opener;
+    }
+
+
+    /**
+     * Return the opener property.  This is the WebWindow that caused this new window to be opened.
+     * @return The opener
+     */
+    public WebWindow getOpener() {
+        return opener_;
     }
 }

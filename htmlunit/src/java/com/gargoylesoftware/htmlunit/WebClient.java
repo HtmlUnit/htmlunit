@@ -280,7 +280,7 @@ public class WebClient {
      * @return  The page that was loaded.
      * @exception  IOException If an IO error occurs
      * @exception  FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the varaible
+     *      failing status code AND the variable
      *      "throwExceptionOnFailingStatusCode" is set to true
      */
     public Page getPage(
@@ -643,6 +643,23 @@ public class WebClient {
      */
     public WebWindow openWindow( final URL url, final String windowName ) {
         assertNotNull("windowName", windowName);
+        return openWindow( url, windowName, null );
+    }
+
+
+    /**
+     * Open a new window with the specified name.  If the url is non-null then attempt to load
+     * a page from that location and put it in the new window.
+     *
+     * @param url The url to load content from or null if no content is to be loaded.
+     * @param windowName The name of the new window
+     * @param opener The web window that is calling openWindow
+     * @return The new window.
+     */
+    public WebWindow openWindow( final URL url, String windowName, final WebWindow opener ) {
+        if( windowName == null ) {
+            windowName = "";
+        }
 
         WebWindow window = null;
         if( windowName.equals("_self") ) {
@@ -656,6 +673,10 @@ public class WebClient {
                 window = new TopLevelWindow(windowName, this);
                 fireWindowOpened( new WebWindowEvent(window, null, null) );
             }
+        }
+
+        if( window instanceof TopLevelWindow ) {
+            ((TopLevelWindow)window).setOpener(opener);
         }
 
         if( url != null ) {

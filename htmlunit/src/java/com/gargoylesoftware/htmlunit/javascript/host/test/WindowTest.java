@@ -347,4 +347,46 @@ public class WindowTest extends WebTestCase {
         assertEquals( Collections.EMPTY_LIST, collectedPrompts );
         assertEquals( Collections.singletonList("null"), collectedAlerts );
     }
+
+
+    public void testOpener() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final List collectedAlerts = new ArrayList();
+        final List collectedPrompts = new ArrayList();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function runtest() {\n"
+             + "    alert('one')\n"
+             + "    open('http://second', 'foo')"
+             + "}\n"
+             + "function callAlert() {\n"
+             + "    alert('two')"
+             + "}\n"
+             + "</script></head><body onload='runtest()'>"
+             + "</body></html>";
+        final String secondContent
+             = "<html><head><title>Second</title><script>"
+             + "function runtest() {\n"
+             + "    opener.callAlert()"
+             + "}\n"
+             + "</script></head><body onload='runtest()'>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://second"), secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
+                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList( new String[]{ "one", "two" } );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }

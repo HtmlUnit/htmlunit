@@ -409,5 +409,43 @@ public class SimpleScriptable extends ScriptableObject {
 
         return NOT_FOUND;
     }
+
+
+    /**
+     * Return the string value at the specified location in the argument list.  If the index is larger
+     * than the argument array then return null.
+     *
+     * @param index The index into the argument list.
+     * @param args The argument list.
+     * @return The specified string or null
+     */
+    public static String getStringArg( final int index, final Object[] args ) {
+        if( index >= args.length ) {
+            return null;
+        }
+        else {
+            return (String)args[index];
+        }
+    }
+
+
+    /**
+     * Return the boolean value at the specified location in the argument list.  If the index is larger
+     * than the argument array then return the default value.
+     *
+     * @param index The index into the argument list.
+     * @param args The argument list.
+     * @param defaultValue The default value to be used.
+     * @return The specified boolean or the default value.
+     */
+    public static boolean getBooleanArg( final int index, final Object[] args, final boolean defaultValue ) {
+        if( index >= args.length ) {
+            return defaultValue;
+        }
+        else {
+            return ((Boolean)args[index]).booleanValue();
+        }
+    }
+
 }
 
