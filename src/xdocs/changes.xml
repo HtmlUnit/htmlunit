@@ -16,13 +16,16 @@
             <action type="update" dev="mbowler" id="797144">
                 Added support for window frames - patch from Jun Chen
             </action>
-            <action type="update" dev="mbowler" id="803233 " due-to="Brad Clarke">
+            <action type="update" dev="mbowler" id="803233" due-to="Brad Clarke">
 				an update of the version number in build.xml and outputting of 
 				a src jar for the current build
 				Patch submitted by Brad Clarke
             </action>
-            <action type="update" dev="mbowler" id="803229 " due-to="Brad Clarke">
+            <action type="update" dev="mbowler" id="803229" due-to="Brad Clarke">
 				Added HtmlFileInput support. Patch submitted by Brad Clarke
+            </action>
+            <action type="update" dev="mbowler" id="803237" due-to="Brad Clarke">
+				Upgraded junit.jar to 3.8.1
             </action>
 		</release>
 
