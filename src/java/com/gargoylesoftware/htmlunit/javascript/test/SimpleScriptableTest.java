@@ -69,7 +69,7 @@ public class SimpleScriptableTest extends WebTestCase {
 
     public void testHtmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
         final Map map = SimpleScriptable.getHtmlJavaScriptMapping();
-        final String directoryName = "./com/gargoylesoftware/htmlunit/javascript/host";
+        final String directoryName = "com/gargoylesoftware/htmlunit/javascript/host";
         final Set names = getFileNames(directoryName.replace('/', File.separatorChar));
 
         // Now pull out those names that we know don't have html equivilents
@@ -86,11 +86,14 @@ public class SimpleScriptableTest extends WebTestCase {
 
 
     private Set getFileNames( final String directoryName ) {
-        final File directory = new File(directoryName);
+        File directory = new File("."+File.separatorChar+directoryName);
+        if( directory.exists() == false ) {
+            directory = new File("./src/java/".replace('/', File.separatorChar)+directoryName );
+        }
         assertTrue("directory exists", directory.exists() );
         assertTrue("is a directory", directory.isDirectory() );
 
-        final String fileNames[] = new File(directoryName).list();
+        final String fileNames[] = directory.list();
         final Set collection = new HashSet();
 
         for( int i=0; i<fileNames.length; i++ ) {
