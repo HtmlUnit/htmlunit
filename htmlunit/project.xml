@@ -124,8 +124,10 @@
             <name>Christian Sell</name>
             <email>cse@dynabean.de</email>
         </contributor>
+        <contributor>
+            <name>Darrell DeBoer</name>
+        </contributor>
     </contributors>
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
