@@ -6,6 +6,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
+
 /**
  *  An abstract page that represents some content returned from a server
  *
@@ -17,7 +19,7 @@ public interface Page {
     /**
      * Initialize this page.
      */
-    void initialize();
+    void initialize() throws IOException;
 
 
     /**

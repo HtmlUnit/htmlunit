@@ -82,7 +82,7 @@ public final class HtmlPage
         throws
             IOException {
 
-        super( null, createDocument( webResponse ).getDocumentElement() );
+        super( null, null );
 
         assertNotNull( "webClient", webClient );
         assertNotNull( "originatingUrl", originatingUrl );
@@ -100,8 +100,10 @@ public final class HtmlPage
     /**
      * Initialize this page.
      */
-    public void initialize() {
+    public void initialize() throws IOException {
         initializeHtmlElementCreatorsIfNeeded();
+        setElement(createDocument( webResponse_ ).getDocumentElement());
+
         executeScriptTagsIfNeeded();
         initializeFramesIfNeeded();
         executeBodyOnLoadHandlerIfNeeded();
@@ -203,7 +205,7 @@ public final class HtmlPage
     }
 
 
-    private static Document createDocument( final WebResponse webResponse )
+    private Document createDocument( final WebResponse webResponse )
         throws IOException {
 
         final InputStream inputStream = webResponse.getContentAsStream();
@@ -216,10 +218,10 @@ public final class HtmlPage
         final MyParser parser = new MyParser();
 
         try {
-//            XMLDocumentFilter[] filters = {
-//                new ScriptFilter( parser.getConfiguration() )//, new Identity(), new Writer()
-//            };
-//            parser.setProperty( "http://cyberneko.org/html/properties/filters", filters );
+            XMLDocumentFilter[] filters = {
+                new ScriptFilter( parser.getConfiguration(), this )//, new Identity(), new Writer()
+            };
+            parser.setProperty( "http://cyberneko.org/html/properties/filters", filters );
 
             parser.setFeature( "http://cyberneko.org/html/features/augmentations", true );
             parser.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
@@ -758,10 +760,7 @@ public final class HtmlPage
 
                 if( isJavaScript ) {
                     final String sourceUrl = htmlScript.getSrcAttribute();
-                    if( sourceUrl.length() == 0 ) {
-                        engine.execute( this, htmlScript.asText(), "Embedded script" );
-                    }
-                    else {
+                    if( sourceUrl.length() != 0 ) {
                         engine.execute( this, loadJavaScriptFromUrl( sourceUrl ), sourceUrl );
                     }
                 }
@@ -999,5 +998,13 @@ public final class HtmlPage
         return elementToGiveFocus;
     }
 
+
+    private ScriptFilter scriptFilter_;
+    public void setScriptFilter( final ScriptFilter scriptFilter ) {
+        scriptFilter_ = scriptFilter;
+    }
+    public ScriptFilter getScriptFilter() {
+        return scriptFilter_;
+    }
 }
 

@@ -34,9 +34,11 @@ public class SimpleScriptableTest extends WebTestCase {
 
         final String content
              = "<html><head><title>foo</title><script>"
-             + "document.form1.textfield1.focus();\n"
-             + "alert('past focus');\n"
-             + "</script></head><body>"
+             + "function doTest() {\n"
+             + "    document.form1.textfield1.focus();\n"
+             + "    alert('past focus');\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
              + "<p>hello world</p>"
              + "<form name='form1'>"
              + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"

@@ -7,6 +7,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
@@ -37,8 +39,12 @@ public abstract class HtmlElement {
     /** Constant meaning that the specified attribute was found but its value was empty */
     public static final String ATTRIBUTE_VALUE_EMPTY = new String("");
 
-    private final Element element_;
+    private Element element_;
     private final HtmlPage htmlPage_;
+
+    // We do lazy initialization on this since the vast majority of HtmlElement instances
+    // won't need it.
+    private PropertyChangeSupport propertyChangeSupport_ = null;
 
     /**
      * This is the javascript object corresponding to this html element.  It is
@@ -49,6 +55,8 @@ public abstract class HtmlElement {
      */
     private Object scriptObject_;
 
+    /** The name of the "element" property.  Used when watching property change events. */
+    public static final String PROPERTY_ELEMENT = "element";
 
     /**
      *  Create an instance
@@ -57,7 +65,9 @@ public abstract class HtmlElement {
      * @param  htmlPage The xml element that represents this html element
      */
     protected HtmlElement( final HtmlPage htmlPage, final Element element ) {
-        assertNotNull( "element", element );
+        if( element == null && this instanceof HtmlPage == false ) {
+            throw new NullPointerException("element is null");
+        }
         element_ = element;
 
         if( htmlPage == null && this instanceof HtmlPage ) {
@@ -66,6 +76,20 @@ public abstract class HtmlElement {
         else {
             assertNotNull( "htmlPage", htmlPage );
             htmlPage_ = htmlPage;
+        }
+    }
+
+
+    protected final void setElement( final Element element ) {
+        assertNotNull("element", element);
+
+        if( element_ == null ) {
+            final Object oldValue = element_;
+            element_ = element;
+            firePropertyChange(PROPERTY_ELEMENT, oldValue, element);
+        }
+        else {
+            throw new IllegalStateException("element_ has already been set");
         }
     }
 
@@ -803,6 +827,30 @@ public abstract class HtmlElement {
         }
         if( hasChildren && node instanceof Element ) {
             printWriter.println(indent+"</"+((Element)node).getTagName().toLowerCase()+">");
+        }
+    }
+
+
+    public synchronized final void addPropertyChangeListener( final PropertyChangeListener listener ) {
+        assertNotNull("listener", listener);
+        if( propertyChangeSupport_ == null ) {
+            propertyChangeSupport_ = new PropertyChangeSupport(this);
+        }
+        propertyChangeSupport_.addPropertyChangeListener(listener);
+    }
+
+
+    public synchronized final void removePropertyChangeListener( final PropertyChangeListener listener ) {
+        assertNotNull("listener", listener);
+        if( propertyChangeSupport_ != null ) {
+            propertyChangeSupport_.removePropertyChangeListener(listener);
+        }
+    }
+
+
+    protected synchronized final void firePropertyChange( final String propertyName, final Object oldValue, final Object newValue ) {
+        if( propertyChangeSupport_ != null ) {
+            propertyChangeSupport_.firePropertyChange(propertyName, oldValue, newValue);
         }
     }
 }

@@ -172,8 +172,8 @@ public class WindowTest extends WebTestCase {
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
 
         final String firstContent
-             = "<html><head><title>First</title><script>alert('foo')</script></head><body>"
-             + "</body></html>";
+            = "<html><head><title>First</title><script>function doTest(){alert('foo')}</script></head>"
+            + "<body onload='doTest()'></body></html>";
 
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -185,8 +185,7 @@ public class WindowTest extends WebTestCase {
     }
 
 
-    public void testParentAndTop()
-        throws Exception {
+    public void testParentAndTop() throws Exception {
 
         final String firstContent
              = "<html><head><title>First</title></head><body>"
@@ -252,8 +251,8 @@ public class WindowTest extends WebTestCase {
         } );
 
         final String firstContent
-             = "<html><head><title>First</title><script>alert(confirm('foo'))</script></head><body>"
-             + "</body></html>";
+            = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>"
+            + "</head><body onload='doTest()'></body></html>";
 
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -277,8 +276,8 @@ public class WindowTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-             = "<html><head><title>First</title><script>alert(confirm('foo'))</script></head><body>"
-             + "</body></html>";
+            = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>"
+            + "</head><body onload='doTest()'></body></html>";
 
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -308,8 +307,8 @@ public class WindowTest extends WebTestCase {
         } );
 
         final String firstContent
-             = "<html><head><title>First</title><script>alert(prompt('foo'))</script></head><body>"
-             + "</body></html>";
+            = "<html><head><title>First</title><script>function doTest(){alert(prompt('foo'))}</script>"
+            + "</head><body onload='doTest()'></body></html>";
 
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -333,8 +332,8 @@ public class WindowTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-             = "<html><head><title>First</title><script>alert(prompt('foo'))</script></head><body>"
-             + "</body></html>";
+            = "<html><head><title>First</title><script>function doTest(){alert(prompt('foo'))}</script>"
+            + "</head><body onload='doTest()'></body></html>";
 
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );

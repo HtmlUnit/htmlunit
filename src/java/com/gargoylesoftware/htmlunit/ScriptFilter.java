@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.StringReader;
 import org.apache.xerces.xni.Augmentations;
 import org.apache.xerces.xni.QName;
@@ -26,8 +27,11 @@ import org.cyberneko.html.filters.DefaultFilter;
  */
 public final class ScriptFilter extends DefaultFilter {
 
-    private HTMLConfiguration configuration_;
+    private final HTMLConfiguration configuration_;
+    private final HtmlPage htmlPage_;
+
     private StringBuffer scriptBuffer_;
+    private StringBuffer newContentBuffer_;
     private String systemId_;
     private int scriptCount_;
     private String scriptType_;
@@ -37,9 +41,12 @@ public final class ScriptFilter extends DefaultFilter {
      *
      * @param  config
      */
-    public ScriptFilter( final HTMLConfiguration config ) {
+    public ScriptFilter( final HTMLConfiguration config, final HtmlPage htmlPage ) {
         assertNotNull("config", config);
+        assertNotNull("htmlPage", htmlPage);
         configuration_ = config;
+        htmlPage_ = htmlPage;
+        htmlPage_.setScriptFilter(this);
     }
 
 
@@ -75,11 +82,12 @@ public final class ScriptFilter extends DefaultFilter {
             if( scriptType_ == null ) {
                 scriptType_ = "";
             }
-            scriptBuffer_ = new StringBuffer();
+            if( scriptType_ == null || scriptType_.length() == 0 || scriptType_.equals("text/javascript") ) {
+                scriptBuffer_ = new StringBuffer();
+            }
         }
-        else {
-            super.startElement( element, attrs, augmentations );
-        }
+
+        super.startElement( element, attrs, augmentations );
     }
 
 
@@ -93,9 +101,6 @@ public final class ScriptFilter extends DefaultFilter {
         throws
             XNIException {
 
-        if( element.rawname.equalsIgnoreCase( "script" ) ) {
-            return;
-        }
         super.emptyElement( element, attrs, augmentations );
     }
 
@@ -113,6 +118,7 @@ public final class ScriptFilter extends DefaultFilter {
             super.characters( text, augmentations );
         }
         else {
+            super.characters( text, augmentations );
             scriptBuffer_.append( text.ch, text.offset, text.length );
         }
     }
@@ -127,6 +133,7 @@ public final class ScriptFilter extends DefaultFilter {
         throws
             XNIException {
 
+        super.endElement( element, augmentations );
         if( scriptBuffer_ != null ) {
             if( element.rawname.equalsIgnoreCase( "script" ) == false ) {
                 throw new IllegalStateException("Other elements were contained within the script tag");
@@ -134,10 +141,10 @@ public final class ScriptFilter extends DefaultFilter {
 
             try {
                 final String script = scriptBuffer_.toString();
-                System.out.println();
-                System.out.println("=================== SCRIPT START ======================");
-                System.out.println(script);
-                System.out.println("=================== SCRIPT END   ======================");
+//                System.out.println();
+//                System.out.println("=================== SCRIPT START ======================");
+//                System.out.println(script);
+//                System.out.println("=================== SCRIPT END   ======================");
 
                 final String result = executeScript(script);
                 if( result.length() != 0 ) {
@@ -150,9 +157,9 @@ public final class ScriptFilter extends DefaultFilter {
                 scriptBuffer_ = null;
             }
         }
-        else {
-            super.endElement( element, augmentations );
-        }
+//        else {
+//            super.endElement( element, augmentations );
+//        }
     }
 
 
@@ -163,8 +170,25 @@ public final class ScriptFilter extends DefaultFilter {
     }
 
 
-    private String executeScript( final String script ) {
-        return "";
+    private synchronized String executeScript( final String script ) {
+        newContentBuffer_ = null;
+        htmlPage_.executeJavaScriptIfPossible(script, "Embedded script", false);
+        if( newContentBuffer_ == null ) {
+            return "";
+        }
+        else {
+            final String result = newContentBuffer_.toString();
+            newContentBuffer_ = null;
+            return result;
+        }
+    }
+
+
+    public synchronized void write( final String content ) {
+        if( newContentBuffer_ == null ) {
+            newContentBuffer_ = new StringBuffer();
+        }
+        newContentBuffer_.append(content);
     }
 }
 
