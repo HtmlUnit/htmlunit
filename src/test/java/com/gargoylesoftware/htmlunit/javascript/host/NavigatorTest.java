@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
 public class NavigatorTest extends WebTestCase {
 
@@ -69,7 +70,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testAppCodeName() throws Exception {
-        this.testAttribute("appCodeName", BrowserVersion.getDefault().getApplicationCodeName());
+        testAttribute("appCodeName", BrowserVersion.getDefault().getApplicationCodeName());
     }
 
     /**
@@ -77,7 +78,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testAppMinorVersion() throws Exception {
-        this.testAttribute("appMinorVersion", BrowserVersion.getDefault().getApplicationMinorVersion());
+        testAttribute("appMinorVersion", BrowserVersion.getDefault().getApplicationMinorVersion());
     }
 
     /**
@@ -85,7 +86,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testAppName() throws Exception {
-        this.testAttribute("appName", BrowserVersion.getDefault().getApplicationName());
+        testAttribute("appName", BrowserVersion.getDefault().getApplicationName());
     }
 
     /**
@@ -93,7 +94,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testAppVersion() throws Exception {
-        this.testAttribute("appVersion", BrowserVersion.getDefault().getApplicationVersion());
+        testAttribute("appVersion", BrowserVersion.getDefault().getApplicationVersion());
     }
 
     /**
@@ -101,7 +102,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testBrowserLanguage() throws Exception {
-        this.testAttribute("browserLanguage", BrowserVersion.getDefault().getBrowserLanguage());
+        testAttribute("browserLanguage", BrowserVersion.getDefault().getBrowserLanguage());
     }
 
     /**
@@ -109,7 +110,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testCookieEnabled() throws Exception {
-        this.testAttribute("cookieEnabled", "true");
+        testAttribute("cookieEnabled", "true");
     }
 
     /**
@@ -117,7 +118,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testCpuClass() throws Exception {
-        this.testAttribute("cpuClass", BrowserVersion.getDefault().getCpuClass());
+        testAttribute("cpuClass", BrowserVersion.getDefault().getCpuClass());
     }
 
     /**
@@ -125,7 +126,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testOnLine() throws Exception {
-        this.testAttribute("onLine", String.valueOf(BrowserVersion.getDefault().isOnLine()));
+        testAttribute("onLine", String.valueOf(BrowserVersion.getDefault().isOnLine()));
     }
 
     /**
@@ -133,7 +134,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testPlatform() throws Exception {
-        this.testAttribute("platform", BrowserVersion.getDefault().getPlatform());
+        testAttribute("platform", BrowserVersion.getDefault().getPlatform());
     }
 
     /**
@@ -141,7 +142,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testSystemLanguage() throws Exception {
-        this.testAttribute("systemLanguage", BrowserVersion.getDefault().getSystemLanguage());
+        testAttribute("systemLanguage", BrowserVersion.getDefault().getSystemLanguage());
     }
 
     /**
@@ -149,7 +150,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testUserAgent() throws Exception {
-        this.testAttribute("userAgent", BrowserVersion.getDefault().getUserAgent());
+        testAttribute("userAgent", BrowserVersion.getDefault().getUserAgent());
     }
 
     /**
@@ -157,7 +158,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testUserLanguage() throws Exception {
-        this.testAttribute("userLanguage", BrowserVersion.getDefault().getUserLanguage());
+        testAttribute("userLanguage", BrowserVersion.getDefault().getUserLanguage());
     }
 
     /**
@@ -165,7 +166,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testPlugins() throws Exception {
-        this.testAttribute("plugins.length", "0");
+        testAttribute("plugins.length", "0");
     }
 
     /**
@@ -173,7 +174,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testJavaEnabled() throws Exception {
-        this.testAttribute("javaEnabled()", "false");
+        testAttribute("javaEnabled()", "false");
     }
 
     /**
@@ -181,7 +182,7 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testTaintEnabled() throws Exception {
-        this.testAttribute("taintEnabled()", "false");
+        testAttribute("taintEnabled()", "false");
     }
 
     /**
@@ -202,8 +203,7 @@ public class NavigatorTest extends WebTestCase {
                 "</head>\n" + 
                 "<body onload=\'doTest()\'>\n" + 
                 "</body>\n" + 
-                "</html>\n" + 
-                "";
+                "</html>";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         final List expectedAlerts = Arrays.asList(new String[]{
@@ -238,4 +238,29 @@ public class NavigatorTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }    
     
+    /**
+     * Test language property (only for Mozilla)
+     * @throws Exception if the test fails.
+     */
+    public void testLanguage() throws Exception {
+
+        final WebClient webClient = new WebClient(BrowserVersion.MOZILLA_1_0);
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String content
+            = "<html><head><title>First</title></head>"
+            + "<body onload='alert(window.navigator.language)'></body>"
+            + "</html>";
+
+        webConnection.setDefaultResponse(content);
+        webClient.setWebConnection(webConnection);
+
+        webClient.getPage(URL_FIRST);
+
+        final List expectedAlerts = Arrays.asList(new String[]{ BrowserVersion.MOZILLA_1_0.getBrowserLanguage() });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }    
 }

@@ -402,9 +402,14 @@
         <property name="appMinorVersion" readable="true" writable="false"/>
         <property name="appName" readable="true" writable="false"/>
         <property name="appVersion" readable="true" writable="false"/>
-        <property name="browserLanguage" readable="true" writable="false"/>
+        <property name="browserLanguage" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="cookieEnabled" readable="true" writable="false"/>
         <property name="cpuClass" readable="true" writable="false"/>
+        <property name="language" readable="true" writable="false">
+            <browser name="Netscape"/>
+        </property>
         <property name="onLine" readable="true" writable="false"/>
         <property name="platform" readable="true" writable="false"/>
         <property name="systemLanguage" readable="true" writable="false"/>
@@ -605,27 +610,39 @@
         <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp"
                 descr="MSDN documenation"/>
 
+        <property name="document" readable="true" writable="false"/>
+        <property name="frames" readable="true" writable="false"/>
+        <property name="history" readable="true" writable="false"/>
+        <property name="innerHeight" readable="true" writable="false">
+            <browser name="Netscape"/>
+        </property>
+        <property name="innerWidth" readable="true" writable="false">
+            <browser name="Netscape"/>
+        </property>
         <property name="location" readable="true" writable="true">
             <browser name="Netscape" min-version="3"/>
             <browser name="Microsoft Internet Explorer" min-version="3"/>
             <javascript min-version="1"/>
         </property>
-        <property name="document" readable="true" writable="false"/>
-        <property name="navigator" readable="true" writable="false"/>
-        <property name="window" readable="true" writable="false"/>
-        <property name="self" readable="true" writable="false"/>
-        <property name="history" readable="true" writable="false"/>
-        <property name="screen" readable="true" writable="false"/>
-        <property name="top" readable="true" writable="false"/>
-        <property name="parent" readable="true" writable="false"/>
-        <property name="opener" readable="true" writable="false"/>
-        <property name="frames" readable="true" writable="false"/>
-        <property name="onload" readable="true" writable="true"/>
         <property name="name" readable="true" writable="true"/>
-        <property name="status" readable="true" writable="true"/>
+        <property name="navigator" readable="true" writable="false"/>
         <property name="onerror" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>
         </property>
+        <property name="onload" readable="true" writable="true"/>
+        <property name="opener" readable="true" writable="false"/>
+        <property name="outerHeight" readable="true" writable="false">
+            <browser name="Netscape"/>
+        </property>
+        <property name="outerWidth" readable="true" writable="false">
+            <browser name="Netscape"/>
+        </property>
+        <property name="parent" readable="true" writable="false"/>
+        <property name="screen" readable="true" writable="false"/>
+        <property name="self" readable="true" writable="false"/>
+        <property name="status" readable="true" writable="true"/>
+        <property name="top" readable="true" writable="false"/>
+        <property name="window" readable="true" writable="false"/>
         
         <function name="alert"/>
         <function name="blur"/>

@@ -111,7 +111,7 @@ public abstract class WebTestCase extends BaseTestCase {
 
 
     /**
-     * Load a page with the specified html.
+     * Load a page with the specified html using the default browser version.
      * @param html The html to use.
      * @return The new page.
      * @throws Exception if something goes wrong.
@@ -120,8 +120,24 @@ public abstract class WebTestCase extends BaseTestCase {
         return loadPage(html, null);
     }
 
+
    /**
      * Load a page with the specified html and collect alerts into the list.
+     * @param browserVersion the browser version to use
+     * @param html The HTML to use.
+     * @param collectedAlerts The list to hold the alerts.
+     * @return The new page.
+     * @throws Exception If something goes wrong.
+     */
+    protected static final HtmlPage loadPage(final BrowserVersion browserVersion,
+            final String html, final List collectedAlerts )
+        throws Exception {
+        return loadPage(browserVersion, html, collectedAlerts, URL_GARGOYLE);
+    }
+
+   /**
+     * User the default browser version to load a page with the specified html 
+     * and collect alerts into the list.
      * @param html The HTML to use.
      * @param collectedAlerts The list to hold the alerts.
      * @return The new page.
@@ -129,7 +145,7 @@ public abstract class WebTestCase extends BaseTestCase {
      */
     protected static final HtmlPage loadPage( final String html, final List collectedAlerts )
         throws Exception {
-     return loadPage(html,collectedAlerts, URL_GARGOYLE);
+        return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, URL_GARGOYLE);
     }
 
 
@@ -150,11 +166,26 @@ public abstract class WebTestCase extends BaseTestCase {
      * @return The new page.
      * @throws Exception If something goes wrong.
      */
-    protected static final HtmlPage loadPage( final String html, final List collectedAlerts, final URL url )
+    protected static final HtmlPage loadPage( final String html, final List collectedAlerts, 
+            final URL url ) throws Exception {
 
+        return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, url);
+    }
+
+    /**
+     * Load a page with the specified html and collect alerts into the list.
+     * @param browserVersion the browser version to use
+     * @param html The HTML to use.
+     * @param collectedAlerts The list to hold the alerts.
+     * @param url The URL that will use as the document host for this page
+     * @return The new page.
+     * @throws Exception If something goes wrong.
+     */
+    protected static final HtmlPage loadPage(final BrowserVersion browserVersion, 
+            final String html, final List collectedAlerts, final URL url)
         throws Exception {
 
-        final WebClient client = new WebClient();
+        final WebClient client = new WebClient(browserVersion);
         if( collectedAlerts != null ) {
             client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
         }
@@ -285,6 +316,7 @@ public abstract class WebTestCase extends BaseTestCase {
         sb.append("</script>\n");
         return sb.toString();
     }
+
     /**
      * Convenience method to pull the MockWebConnection out of an HtmlPage created with
      * the loadPage method. 

@@ -99,13 +99,20 @@ public final class Navigator extends SimpleScriptable {
 
 
     /**
-     * Return the property "browserLanguage".
-     * @return the property "browserLanguage".
+     * Return the language of the browser (for IE).
+     * @return the language.
      */
     public String jsGet_browserLanguage() {
         return getBrowserVersion().getBrowserLanguage();
     }
 
+    /**
+     * Return the language of the browser (for Mozilla).
+     * @return the language.
+     */
+    public String jsGet_language() {
+        return getBrowserVersion().getBrowserLanguage();
+    }
 
     /**
      * Return the property "cookieEnabled".
