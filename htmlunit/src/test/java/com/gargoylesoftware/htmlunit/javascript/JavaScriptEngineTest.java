@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,14 +44,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.xml.sax.EntityResolver;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -620,35 +610,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals( Collections.singletonList("Foo is: |flintstone|"), collectedAlerts );
     }
 
-    /**
-     * Test that the file JavaScriptConfiguration.xml is valid.
-     * @throws Exception If the test fails
-     */
-    public void testConfigurationFileAgainstSchema() throws Exception {
-        final XMLReader parser = XMLReaderFactory.createXMLReader("org.apache.xerces.parsers.SAXParser");
-        final String directory = "src/java/com/gargoylesoftware/htmlunit/javascript/configuration/";
-        parser.setFeature("http://xml.org/sax/features/validation", true);
-        parser.setFeature("http://apache.org/xml/features/validation/schema", true);
-        parser.setEntityResolver( new EntityResolver() {
-            public InputSource resolveEntity (final String publicId, final String systemId) throws IOException {
-                return createInputSourceForFile(directory+"JavaScriptConfiguration.xsd");
-            }
-        });
-        parser.setErrorHandler( new ErrorHandler() {
-            public void warning(final SAXParseException exception) throws SAXException {
-                throw exception;
-            }
-            public void error(final SAXParseException exception) throws SAXException {
-                throw exception;
-            }
-            public void fatalError(final SAXParseException exception) throws SAXException {
-                throw exception;
-            }
-        });
 
-        parser.parse( createInputSourceForFile(directory+"JavaScriptConfiguration.xml") );
-
-    }
 
     /**
      * Test that the javascript engine gets called correctly for variable access.
@@ -879,10 +841,6 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
     
     
-    private InputSource createInputSourceForFile( final String fileName ) throws FileNotFoundException {
-        return new InputSource( getFileAsStream(fileName) );
-    }
-
     private static final class CountingJavaScriptEngine extends ScriptEngine {
         private ScriptEngine delegate_;
         private int scriptExecutionCount_ = 0;

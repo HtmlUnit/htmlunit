@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.html.BaseFrame;
  * 
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class Frame extends HTMLElement {
     private static final long serialVersionUID = 3761121622400448304L;
@@ -64,13 +65,11 @@ public class Frame extends HTMLElement {
     }
 
 
-
-
     /**
      * Return the value of url loaded in the frame
      * @return The value of this attribute.
      */
-    public String jsGet_src() {
+    public String jsxGet_src() {
         return getFrame().getSrcAttribute();
     }
 
@@ -79,7 +78,7 @@ public class Frame extends HTMLElement {
      * Set the value of the source of the contained frame.
      * @param src The new value.
      */
-    public void jsSet_src(final String src) {
+    public void jsxSet_src(final String src) {
         getFrame().setSrcAttribute(src);
     }
 
@@ -92,7 +91,7 @@ public class Frame extends HTMLElement {
      * Set the onload event handler for this element.
      * @param eventHandler the new handler
      */
-    public void jsSet_onload(final Function eventHandler) {
+    public void jsxSet_onload(final Function eventHandler) {
         getHtmlElementOrDie().setEventHandler("onload", eventHandler);
     }
 
@@ -101,7 +100,7 @@ public class Frame extends HTMLElement {
      * Get the onload event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onload() {
+    public Function jsxGet_onload() {
         return getHtmlElementOrDie().getEventHandler("onload");
     }
 }

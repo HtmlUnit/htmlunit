@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Chris Erskine
  */
 public class History extends SimpleScriptable {
 
@@ -60,7 +61,7 @@ public class History extends SimpleScriptable {
      * Return the "length" property.  Currently hardcoded to return 0;
      * @return the "length" property
      */
-    public int jsGet_length() {
+    public int jsxGet_length() {
         getLog().debug("javascript: history.length not implemented yet - returning 0");
         return 0;
     }
@@ -69,7 +70,7 @@ public class History extends SimpleScriptable {
     /**
      * javascript function "back".  Currently not implemented
      */
-    public void jsFunction_back() {
+    public void jsxFunction_back() {
         getLog().debug("javascript: history.back() not implemented yet");
     }
 
@@ -77,7 +78,7 @@ public class History extends SimpleScriptable {
     /**
      * javascript function "forward".  Currently not implemented
      */
-    public void jsFunction_forward() {
+    public void jsxFunction_forward() {
         getLog().debug("javascript: history.forward() not implemented yet");
     }
 
@@ -86,7 +87,7 @@ public class History extends SimpleScriptable {
      * javascript function "go".  Currently not implemented
      * @param relativeUrl The relative url
      */
-    public void jsFunction_go( final String relativeUrl) {
+    public void jsxFunction_go( final String relativeUrl) {
         getLog().debug("javascript: history.go(String) not implemented yet");
     }
 }

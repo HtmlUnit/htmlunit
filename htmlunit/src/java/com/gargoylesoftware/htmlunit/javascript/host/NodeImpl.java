@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
  * @author Barnaby Court
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author Chris Erskine
  */
 public class NodeImpl extends SimpleScriptable {
 
@@ -82,7 +83,7 @@ public class NodeImpl extends SimpleScriptable {
      * Get the JavaScript property "nodeType" for the current node.
      * @return The node type
      */
-    public short jsGet_nodeType() {
+    public short jsxGet_nodeType() {
         return getDomNodeOrDie().getNodeType();
     }
 
@@ -91,7 +92,7 @@ public class NodeImpl extends SimpleScriptable {
      * Get the JavaScript property "nodeName" for the current node.
      * @return The node name
      */
-    public String jsGet_nodeName() {
+    public String jsxGet_nodeName() {
         final DomNode domNode = getDomNodeOrDie();
         String nodeName = domNode.getNodeName();
         
@@ -109,7 +110,7 @@ public class NodeImpl extends SimpleScriptable {
      * Get the JavaScript property "nodeValue" for the current node.
      * @return The node value
      */
-    public String jsGet_nodeValue() {
+    public String jsxGet_nodeValue() {
         return getDomNodeOrDie().getNodeValue();
     }
 
@@ -118,7 +119,7 @@ public class NodeImpl extends SimpleScriptable {
      * Set the JavaScript property "nodeValue" for the current node.
      * @param newValue The new node value
      */
-    public void jsSet_nodeValue( final String newValue ) {
+    public void jsxSet_nodeValue( final String newValue ) {
         getDomNodeOrDie().setNodeValue( newValue );
     }
 
@@ -128,7 +129,7 @@ public class NodeImpl extends SimpleScriptable {
      * @param childObject The node to add to this node
      * @return The newly added child node.
      */
-    public Object jsFunction_appendChild(final Object childObject) {
+    public Object jsxFunction_appendChild(final Object childObject) {
 
         Object appendedChild = null;
         if (childObject instanceof NodeImpl) {
@@ -153,7 +154,7 @@ public class NodeImpl extends SimpleScriptable {
      * just clone this node.
      * @return The newly cloned node.
      */
-    public Object jsFunction_cloneNode(final boolean deep) {
+    public Object jsxFunction_cloneNode(final boolean deep) {
         final DomNode domNode = getDomNodeOrDie();
         final DomNode clonedNode = domNode.cloneNode( deep );
         return getJavaScriptNode(clonedNode);
@@ -167,7 +168,7 @@ public class NodeImpl extends SimpleScriptable {
      * @param refChildObject The node before which to add the new child
      * @return The newly added child node.
      */
-    public Object jsFunction_insertBefore(
+    public Object jsxFunction_insertBefore(
             final Object newChildObject, final Object refChildObject) {
         Object appendedChild = null;
 
@@ -200,7 +201,7 @@ public class NodeImpl extends SimpleScriptable {
      * @param childObject The node to remove from this node
      * @return The removed child node.
      */
-    public Object jsFunction_removeChild(final Object childObject) {
+    public Object jsxFunction_removeChild(final Object childObject) {
         Object removedChild = null;
 
         if (childObject instanceof NodeImpl) {
@@ -219,7 +220,7 @@ public class NodeImpl extends SimpleScriptable {
      * Returns whether this node has any children.
      * @return boolean true if this node has any children, false otherwise.
      */
-    public boolean jsFunction_hasChildNodes() {
+    public boolean jsxFunction_hasChildNodes() {
         return getDomNodeOrDie().getChildIterator().hasNext();
     }
     
@@ -227,7 +228,7 @@ public class NodeImpl extends SimpleScriptable {
      * Returns the child nodes of the current element.
      * @return The child nodes of the current element.
      */
-    public Object jsGet_childNodes() {
+    public Object jsxGet_childNodes() {
         if (childNodes_ == null) {
             childNodes_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
@@ -248,7 +249,7 @@ public class NodeImpl extends SimpleScriptable {
      * @param oldChildObject The node to remove as a child of this node
      * @return The removed child node.
      */
-    public Object jsFunction_replaceChild(
+    public Object jsxFunction_replaceChild(
             final Object newChildObject, final Object oldChildObject) {
         Object removedChild = null;
 
@@ -275,7 +276,7 @@ public class NodeImpl extends SimpleScriptable {
      * contains the current node.
      * @return The parent node
      */
-    public Object jsGet_parentNode() {
+    public Object jsxGet_parentNode() {
         return getJavaScriptNode( getDomNodeOrDie().getParentNode() );
     }
 
@@ -286,7 +287,7 @@ public class NodeImpl extends SimpleScriptable {
      * @return The next sibling node or null if the current node has
      * no next sibling.
      */
-    public Object jsGet_nextSibling() {
+    public Object jsxGet_nextSibling() {
         return getJavaScriptNode( getDomNodeOrDie().getNextSibling() );
     }
 
@@ -297,7 +298,7 @@ public class NodeImpl extends SimpleScriptable {
      * @return The previous sibling node or null if the current node has
      * no previous sibling.
      */
-    public Object jsGet_previousSibling() {
+    public Object jsxGet_previousSibling() {
         return getJavaScriptNode( getDomNodeOrDie().getPreviousSibling() );
     }
 
@@ -308,7 +309,7 @@ public class NodeImpl extends SimpleScriptable {
      * @return The first child node or null if the current node has
      * no children.
      */
-    public Object jsGet_firstChild() {
+    public Object jsxGet_firstChild() {
         return getJavaScriptNode( getDomNodeOrDie().getFirstChild() );
     }
 
@@ -319,7 +320,7 @@ public class NodeImpl extends SimpleScriptable {
      * @return The last child node or null if the current node has
      * no children.
      */
-    public Object jsGet_lastChild() {
+    public Object jsxGet_lastChild() {
         return getJavaScriptNode( getDomNodeOrDie().getLastChild() );
     }
 

@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.html.DomCharacterData;
  *
  * @version  $Revision$
  * @author David K. Taylor
+ * @author Chris Erskine
  */
 public abstract class CharacterDataImpl extends NodeImpl {
 
@@ -58,7 +59,7 @@ public abstract class CharacterDataImpl extends NodeImpl {
      * Get the JavaScript property "data" for this character data.
      * @return The String of data.
      */
-    public Object jsGet_data() {
+    public Object jsxGet_data() {
         final DomCharacterData domCharacterData =
             (DomCharacterData) getDomNodeOrDie();
         return domCharacterData.getData();
@@ -69,7 +70,7 @@ public abstract class CharacterDataImpl extends NodeImpl {
      * Set the JavaScript property "data" for this character data.
      * @param newValue The new String of data.
      */
-    public void jsSet_data( final String newValue ) {
+    public void jsxSet_data( final String newValue ) {
         final DomCharacterData domCharacterData =
             (DomCharacterData) getDomNodeOrDie();
         domCharacterData.setData(newValue);
@@ -80,7 +81,7 @@ public abstract class CharacterDataImpl extends NodeImpl {
      * Get the number of character in the character data.
      * @return The number of characters.
      */
-    public int jsGet_length() {
+    public int jsxGet_length() {
         final DomCharacterData domCharacterData =
             (DomCharacterData) getDomNodeOrDie();
         return domCharacterData.getLength();
@@ -91,7 +92,7 @@ public abstract class CharacterDataImpl extends NodeImpl {
      * Append a string to character data.
      * @param arg The string to be appended to the character data.
      */
-    public void jsFunction_appendData(final String arg) {
+    public void jsxFunction_appendData(final String arg) {
         final DomCharacterData domCharacterData =
             (DomCharacterData) getDomNodeOrDie();
         domCharacterData.appendData(arg);
@@ -103,7 +104,7 @@ public abstract class CharacterDataImpl extends NodeImpl {
      * @param offset The position of the first character to be deleted.
      * @param count The number of characters to be deleted.
      */
-    public void jsFunction_deleteData(final int offset, final int count) {
+    public void jsxFunction_deleteData(final int offset, final int count) {
         final DomCharacterData domCharacterData =
             (DomCharacterData) getDomNodeOrDie();
         domCharacterData.deleteData(offset, count);
@@ -116,7 +117,7 @@ public abstract class CharacterDataImpl extends NodeImpl {
      * the string is to be inserted.
      * @param arg The string to insert.
      */
-    public void jsFunction_insertData(final int offset, final String arg) {
+    public void jsxFunction_insertData(final int offset, final String arg) {
         final DomCharacterData domCharacterData =
             (DomCharacterData) getDomNodeOrDie();
         domCharacterData.insertData(offset, arg);
@@ -131,7 +132,7 @@ public abstract class CharacterDataImpl extends NodeImpl {
      * @param arg The string that replaces the count characters beginning at
      * the character at offset.
      */
-    public void jsFunction_replaceData(final int offset, final int count,
+    public void jsxFunction_replaceData(final int offset, final int count,
         final String arg) {
         final DomCharacterData domCharacterData =
             (DomCharacterData) getDomNodeOrDie();
@@ -146,7 +147,7 @@ public abstract class CharacterDataImpl extends NodeImpl {
      * @return A string that consists of the count characters of the
      * character data starting from the character at position offset.
      */
-    public String jsFunction_substringData(final int offset,
+    public String jsxFunction_substringData(final int offset,
         final int count) {
         final DomCharacterData domCharacterData =
             (DomCharacterData) getDomNodeOrDie();

@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/attribute.asp">MSDN documentation</a>
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Chris Erskine
  */
 public class Attribute extends SimpleScriptable {
 
@@ -109,7 +110,7 @@ public class Attribute extends SimpleScriptable {
      * Returns <tt>true</tt> if arbitrary properties can be added to this attribute.
      * @return <tt>true</tt> if arbitrary properties can be added to this attribute.
      */
-    public boolean jsGet_expando() {
+    public boolean jsxGet_expando() {
         return true;
     }
 
@@ -117,7 +118,7 @@ public class Attribute extends SimpleScriptable {
      * Returns <code>null</code>
      * @return <code>null</code>
      */
-    public Object jsGet_firstChild() {
+    public Object jsxGet_firstChild() {
         return null;
     }
 
@@ -125,7 +126,7 @@ public class Attribute extends SimpleScriptable {
      * Returns <code>null</code>
      * @return <code>null</code>
      */
-    public Object jsGet_lastChild() {
+    public Object jsxGet_lastChild() {
         return null;
     }
 
@@ -133,7 +134,7 @@ public class Attribute extends SimpleScriptable {
      * Returns the name of the attribute.
      * @return the name of the attribute.
      */
-    public String jsGet_name() {
+    public String jsxGet_name() {
         return name_;
     }
 
@@ -141,7 +142,7 @@ public class Attribute extends SimpleScriptable {
      * Returns <code>null</code>
      * @return <code>null</code>
      */
-    public Object jsGet_nextSibling() {
+    public Object jsxGet_nextSibling() {
         return null;
     }
 
@@ -149,15 +150,15 @@ public class Attribute extends SimpleScriptable {
      * Returns the name of this attribute.
      * @return the name of this attribute.
      */
-    public String jsGet_nodeName() {
-        return jsGet_name();
+    public String jsxGet_nodeName() {
+        return jsxGet_name();
     }
 
     /**
      * Returns the type of DOM node this attribute represents.
      * @return the type of DOM node this attribute represents.
      */
-    public int jsGet_nodeType() {
+    public int jsxGet_nodeType() {
         return 2;
     }
 
@@ -165,15 +166,15 @@ public class Attribute extends SimpleScriptable {
      * Returns the value of this attribute.
      * @return the value of this attribute.
      */
-    public String jsGet_nodeValue() {
-        return jsGet_value();
+    public String jsxGet_nodeValue() {
+        return jsxGet_value();
     }
 
     /**
      * Returns the containing document.
      * @return the containing document.
      */
-    public Object jsGet_ownerDocument() {
+    public Object jsxGet_ownerDocument() {
         if(parent_ != null) {
             final SimpleScriptable documentScriptable = getScriptableFor(parent_.getPage());
             return documentScriptable;
@@ -187,7 +188,7 @@ public class Attribute extends SimpleScriptable {
      * Returns <code>null</code>
      * @return <code>null</code>
      */
-    public Object jsGet_parentNode() {
+    public Object jsxGet_parentNode() {
         return null;
     }
 
@@ -195,7 +196,7 @@ public class Attribute extends SimpleScriptable {
      * Returns <code>null</code>
      * @return <code>null</code>
      */
-    public Object jsGet_previousSibling() {
+    public Object jsxGet_previousSibling() {
         return null;
     }
 
@@ -203,7 +204,7 @@ public class Attribute extends SimpleScriptable {
      * Returns <tt>true</tt> if this attribute has been specified.
      * @return <tt>true</tt> if this attribute has been specified.
      */
-    public boolean jsGet_specified() {
+    public boolean jsxGet_specified() {
         return true;
     }
 
@@ -211,7 +212,7 @@ public class Attribute extends SimpleScriptable {
      * Returns the value of this attribute.
      * @return the value of this attribute.
      */
-    public String jsGet_value() {
+    public String jsxGet_value() {
         if(parent_ != null) {
             return parent_.getAttributeValue(name_);
         }
@@ -224,7 +225,7 @@ public class Attribute extends SimpleScriptable {
      * Sets the value of this attribute.
      * @param value the new value of this attribute.
      */
-    public void jsSet_value(final String value) {
+    public void jsxSet_value(final String value) {
         if(parent_ != null) {
             parent_.setAttributeValue(name_, value);
         }

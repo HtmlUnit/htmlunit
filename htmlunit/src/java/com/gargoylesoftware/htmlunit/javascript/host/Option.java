@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
+ * @author Chris Erskine
  */
 public class Option extends HTMLElement {
     private static final long serialVersionUID = 947015932373556314L;
@@ -81,10 +82,10 @@ public class Option extends HTMLElement {
     public void setDomNode( final DomNode domNode ) {
         super.setDomNode( domNode );
         if ( value_ != null ) {
-            jsSet_value( value_ );
+            jsxSet_value( value_ );
         }
         if ( text_ != null ) {
-            jsSet_text( text_ );
+            jsxSet_text( text_ );
         }
     }
 
@@ -92,7 +93,7 @@ public class Option extends HTMLElement {
      * Return the value of the "value" property
      * @return The value property
      */
-    public String jsGet_value() {
+    public String jsxGet_value() {
         return ((HtmlOption)getHtmlElementOrDie()).getValue();
     }
 
@@ -100,7 +101,7 @@ public class Option extends HTMLElement {
      * Set the value of the "value" property
      * @param newValue The value property
      */
-    public void jsSet_value( final String newValue ) {
+    public void jsxSet_value( final String newValue ) {
         ((HtmlOption)getHtmlElementOrDie()).setValueAttribute( newValue );
     }
 
@@ -109,7 +110,7 @@ public class Option extends HTMLElement {
      * Return the value of the "text" property
      * @return The text property
      */
-    public String jsGet_text() {
+    public String jsxGet_text() {
         final HtmlOption htmlOption = (HtmlOption) getHtmlElementOrDie();
         if ( htmlOption.isAttributeDefined( "label" ) ) {
             return htmlOption.getLabelAttribute();
@@ -122,7 +123,7 @@ public class Option extends HTMLElement {
      * Set the value of the "text" property
      * @param newText The text property
      */
-    public void jsSet_text( final String newText ) {
+    public void jsxSet_text( final String newText ) {
         ((HtmlOption)getHtmlElementOrDie()).setLabelAttribute( newText );
     }
 
@@ -130,7 +131,7 @@ public class Option extends HTMLElement {
      * Return the value of the "selected" property
      * @return The text property
      */
-    public boolean jsGet_selected() {
+    public boolean jsxGet_selected() {
         final HtmlOption htmlOption = (HtmlOption) getHtmlElementOrDie();
         return htmlOption.isSelected();
     }
@@ -140,7 +141,7 @@ public class Option extends HTMLElement {
      * Set the value of the "selected" property
      * @param selected The new selected property
      */
-    public void jsSet_selected( final boolean selected ) {
+    public void jsxSet_selected( final boolean selected ) {
         ((HtmlOption)getHtmlElementOrDie()).setSelected( selected );
     }
 }

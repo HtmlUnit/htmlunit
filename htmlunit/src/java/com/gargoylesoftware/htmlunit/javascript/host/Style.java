@@ -56,6 +56,7 @@ import org.mozilla.javascript.Scriptable;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Daniel Gredler
+ * @author Chris Erskine
  */
 public class Style extends SimpleScriptable {
     private static final long serialVersionUID = -1976370264911039311L;
@@ -88,7 +89,7 @@ public class Style extends SimpleScriptable {
                     try {
                         final Object[] url = URL_FORMAT.parse(value);
                         if (url.length > 0) {
-                            jsElement_.jsFunction_addBehavior((String) url[0]);
+                            jsElement_.jsxFunction_addBehavior((String) url[0]);
                             break;
                         }
                     }

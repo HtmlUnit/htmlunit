@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.javascript.OptionsArray;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class Select extends FormField {
 
@@ -93,7 +94,7 @@ public class Select extends FormField {
      * Remove option at the specified index
      * @param index The index of the item to remove
      */
-    public void jsFunction_remove(final int index) {
+    public void jsxFunction_remove(final int index) {
         put(index, null, null);
     }
 
@@ -102,7 +103,7 @@ public class Select extends FormField {
      * @param newOptionObject The DomNode to insert
      * @param beforeOptionObject The DomNode to insert the previous element before (null if at end)
      */
-    public void jsFunction_add(final Object newOptionObject, final Object beforeOptionObject) {
+    public void jsxFunction_add(final Object newOptionObject, final Object beforeOptionObject) {
 
         final HtmlSelect select = getHtmlSelect();
 
@@ -129,7 +130,7 @@ public class Select extends FormField {
      * Return the type of this input.
      * @return The type
      */
-    public String jsGet_type() {
+    public String jsxGet_type() {
         final String type;
         if (getHtmlSelect().isMultipleSelectEnabled()) {
             type = "select-multiple";
@@ -145,7 +146,7 @@ public class Select extends FormField {
      * Return the value of the "options" property
      * @return The options property
      */
-    public OptionsArray jsGet_options() {
+    public OptionsArray jsxGet_options() {
 
         if( optionsArray_ == null ) {
             initialize();
@@ -158,7 +159,7 @@ public class Select extends FormField {
      * Return the value of the "selectedIndex" property
      * @return The selectedIndex property
      */
-    public int jsGet_selectedIndex() {
+    public int jsxGet_selectedIndex() {
         final HtmlSelect htmlSelect = getHtmlSelect();
         final List selectedOptions = htmlSelect.getSelectedOptions();
         if( selectedOptions.isEmpty() ) {
@@ -175,7 +176,7 @@ public class Select extends FormField {
      * Set the value of the "selectedIndex" property
      * @param index The new value
      */
-    public void jsSet_selectedIndex( final int index ) {
+    public void jsxSet_selectedIndex( final int index ) {
         final HtmlSelect htmlSelect = getHtmlSelect();
         
         final Iterator iter = htmlSelect.getSelectedOptions().iterator();
@@ -198,17 +199,17 @@ public class Select extends FormField {
      * Return the actual value of the selected Option
      * @return The value
      */
-    public String jsGet_value() {
-        final int selectedIndex = jsGet_selectedIndex();
-        final Option selectedOption = (Option) jsGet_options().jsFunction_item(selectedIndex);
-        return selectedOption.jsGet_value();
+    public String jsxGet_value() {
+        final int selectedIndex = jsxGet_selectedIndex();
+        final Option selectedOption = (Option) jsxGet_options().jsFunction_item(selectedIndex);
+        return selectedOption.jsxGet_value();
     }
 
     /**
      * Return the value of the "length" property
      * @return The length property
      */
-    public int jsGet_length() {
+    public int jsxGet_length() {
         if( optionsArray_ == null ) {
             initialize();
         }
@@ -220,7 +221,7 @@ public class Select extends FormField {
      * Remove options by reducing the "length" property
      * @param newLength The new length property value
      */
-    public void jsSet_length( final int newLength ) {
+    public void jsxSet_length( final int newLength ) {
         if( optionsArray_ == null ) {
             initialize();
         }
@@ -268,7 +269,7 @@ public class Select extends FormField {
      * Selects the option with the specified value
      * @param newValue The value of the option to select
      */
-    public void jsSet_value(final String newValue) {
+    public void jsxSet_value(final String newValue) {
         getHtmlSelect().setSelectedAttribute(newValue, true);
     }
 }

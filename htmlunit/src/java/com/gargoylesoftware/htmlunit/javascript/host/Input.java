@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.html.InputElementFactory;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class Input extends FormField {
 
@@ -75,7 +76,7 @@ public class Input extends FormField {
      * Note: this replace the DOM node with a new one.
      * @param newType the new type to set
      */
-    public void jsSet_type(final String newType) {
+    public void jsxSet_type(final String newType) {
         final HtmlInput input = getHtmlInputOrDie();
         if (!input.getTypeAttribute().equalsIgnoreCase(newType)) {
             final AttributesImpl attributes = readAttributes(input);
@@ -99,14 +100,14 @@ public class Input extends FormField {
      *@param  checked  True if this input should have the "checked" attribute
      *      set
      */
-    public void jsSet_checked( final boolean checked ) {
+    public void jsxSet_checked( final boolean checked ) {
         final HtmlInput input = getHtmlInputOrDie();
         final String type = input.getTypeAttribute().toLowerCase();
         if (type.equals("checkbox") || type.equals("radio")){
             input.setChecked(checked);
         }
         else {
-            getLog().debug( "Input.jsSet_checked(" + checked
+            getLog().debug( "Input.jsxSet_checked(" + checked
                 + ") was called for class " + getClass().getName() );
         }
     }
@@ -128,14 +129,14 @@ public class Input extends FormField {
      *
      *@return    The checked property.
      */
-    public boolean jsGet_checked() {
+    public boolean jsxGet_checked() {
         final HtmlInput input = getHtmlInputOrDie();
         final String type = input.getTypeAttribute().toLowerCase();
         if (type.equals("checkbox") || type.equals("radio")){
             return input.isChecked();
         }
         else {
-            getLog().warn( "Input.jsGet_checked() was called for class " + getClass().getName() );
+            getLog().warn( "Input.jsxGet_checked() was called for class " + getClass().getName() );
             return false;
         }
     }

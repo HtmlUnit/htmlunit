@@ -48,10 +48,11 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 /**
  * A JavaScript object representing a Table.
  * 
+ * @version $Revision$
  * @author David D. Kilzer
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
- * @version $Revision$
+ * @author Chris Erskine
  */
 public class Table extends RowContainer {
 
@@ -76,7 +77,7 @@ public class Table extends RowContainer {
      * caption is declared in the table, this method returns the first one.
      * @return the table's caption element.
      */
-    public Object jsGet_caption() {
+    public Object jsxGet_caption() {
         final List captions = getHtmlElementOrDie().getHtmlElementsByTagName("caption");
         if(captions.isEmpty()) {
             return null;
@@ -91,7 +92,7 @@ public class Table extends RowContainer {
      * tfoot is declared in the table, this method returns the first one.
      * @return the table's tfoot element.
      */
-    public Object jsGet_tFoot() {
+    public Object jsxGet_tFoot() {
         final List tfoots = getHtmlElementOrDie().getHtmlElementsByTagName("tfoot");
         if(tfoots.isEmpty()) {
             return null;
@@ -106,7 +107,7 @@ public class Table extends RowContainer {
      * thead is declared in the table, this method returns the first one.
      * @return the table's thead element.
      */
-    public Object jsGet_tHead() {
+    public Object jsxGet_tHead() {
         final List theads = getHtmlElementOrDie().getHtmlElementsByTagName("thead");
         if(theads.isEmpty()) {
             return null;
@@ -120,7 +121,7 @@ public class Table extends RowContainer {
      * Returns the tbody's in the table.
      * @return The tbody's in the table.
      */
-    public Object jsGet_tBodies() {
+    public Object jsxGet_tBodies() {
         if (tBodies_ == null) {
             tBodies_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
@@ -141,7 +142,7 @@ public class Table extends RowContainer {
      * MSDN Documentation</a>
      * @return a newly added caption if no caption exists, or the first existing caption.
      */
-    public Object jsFunction_createCaption() {
+    public Object jsxFunction_createCaption() {
         return getScriptableFor( getHtmlElementOrDie().appendChildIfNoneExists("caption") );
     }
 
@@ -153,7 +154,7 @@ public class Table extends RowContainer {
      * MSDN Documentation</a>
      * @return a newly added caption if no caption exists, or the first existing caption.
      */
-    public Object jsFunction_createTFoot() {
+    public Object jsxFunction_createTFoot() {
         return getScriptableFor( getHtmlElementOrDie().appendChildIfNoneExists("tfoot") );
     }
 
@@ -165,7 +166,7 @@ public class Table extends RowContainer {
      * MSDN Documentation</a>
      * @return a newly added caption if no caption exists, or the first existing caption.
      */
-    public Object jsFunction_createTHead() {
+    public Object jsxFunction_createTHead() {
         return getScriptableFor( getHtmlElementOrDie().appendChildIfNoneExists("thead") );
     }
 
@@ -176,7 +177,7 @@ public class Table extends RowContainer {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp">
      * MSDN Documentation</a>
      */
-    public void jsFunction_deleteCaption() {
+    public void jsxFunction_deleteCaption() {
         getHtmlElementOrDie().removeChild("caption", 0);
     }
 
@@ -187,7 +188,7 @@ public class Table extends RowContainer {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp">
      * MSDN Documentation</a>
      */
-    public void jsFunction_deleteTFoot() {
+    public void jsxFunction_deleteTFoot() {
         getHtmlElementOrDie().removeChild("tfoot", 0);
     }
 
@@ -198,7 +199,7 @@ public class Table extends RowContainer {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletethead.asp">
      * MSDN Documentation</a>
      */
-    public void jsFunction_deleteTHead() {
+    public void jsxFunction_deleteTHead() {
         getHtmlElementOrDie().removeChild("thead", 0);
     }
 

@@ -130,7 +130,7 @@ public class HTMLElement extends NodeImpl {
      *
      * @return The style object
      */
-    public Object jsGet_style() {
+    public Object jsxGet_style() {
         return style_;
     }
 
@@ -151,7 +151,7 @@ public class HTMLElement extends NodeImpl {
      * Return the element ID.
      * @return The ID of this element.
      */
-    public String jsGet_id() {
+    public String jsxGet_id() {
         return getHtmlElementOrDie().getId();
     }
 
@@ -161,7 +161,7 @@ public class HTMLElement extends NodeImpl {
      *
      * @param newId The new identifier of this element.
      */
-    public void jsSet_id( final String newId ) {
+    public void jsxSet_id( final String newId ) {
         getHtmlElementOrDie().setId( newId );
     }
 
@@ -170,7 +170,7 @@ public class HTMLElement extends NodeImpl {
      * Return true if this element is disabled.
      * @return True if this element is disabled.
      */
-    public boolean jsGet_disabled() {
+    public boolean jsxGet_disabled() {
         return getHtmlElementOrDie().isAttributeDefined("disabled");
     }
 
@@ -179,7 +179,7 @@ public class HTMLElement extends NodeImpl {
      * Set whether or not to disable this element
      * @param disabled True if this is to be disabled.
      */
-    public void jsSet_disabled( final boolean disabled ) {
+    public void jsxSet_disabled( final boolean disabled ) {
         final HtmlElement element = getHtmlElementOrDie();
         if( disabled ) {
             element.setAttributeValue("disabled", "disabled");
@@ -194,7 +194,7 @@ public class HTMLElement extends NodeImpl {
      * Return the tag name of this element
      * @return The tag name in uppercase
      */
-    public String jsGet_tagName() {
+    public String jsxGet_tagName() {
         return getHtmlElementOrDie().getTagName().toUpperCase();
     }
 
@@ -230,7 +230,7 @@ public class HTMLElement extends NodeImpl {
      * @param attributeName attribute name.
      * @return The value of the specified attribute, <code>null</code> if the attribute is not defined
      */
-    public String jsFunction_getAttribute(final String attributeName) {
+    public String jsxFunction_getAttribute(final String attributeName) {
         final String value = getHtmlElementOrDie().getAttributeValue(attributeName);
         if (value == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
             return null;
@@ -248,7 +248,7 @@ public class HTMLElement extends NodeImpl {
      * @param name Name of the attribute to set
      * @param value Value to set the attribute to
      */
-    public void jsFunction_setAttribute(final String name, final String value) {
+    public void jsxFunction_setAttribute(final String name, final String value) {
         getHtmlElementOrDie().setAttributeValue(name, value);
     }
 
@@ -257,7 +257,7 @@ public class HTMLElement extends NodeImpl {
      * 
      * @param name Name of the attribute to remove
      */
-    public void jsFunction_removeAttribute(final String name) {
+    public void jsxFunction_removeAttribute(final String name) {
         getHtmlElementOrDie().removeAttribute(name);
     }
 
@@ -266,7 +266,7 @@ public class HTMLElement extends NodeImpl {
      * @param attributeName the name of the attribute to retrieve
      * @return the attribute node for the specified attribute.
      */
-    public Object jsFunction_getAttributeNode(final String attributeName) {
+    public Object jsxFunction_getAttributeNode(final String attributeName) {
         final Attribute att = (Attribute) makeJavaScriptObject(Attribute.JS_OBJECT_NAME);
         att.init(attributeName, getHtmlElementOrDie());
         return att;
@@ -277,10 +277,10 @@ public class HTMLElement extends NodeImpl {
      * @param newAtt the attribute to set.
      * @return the replaced attribute node, if any.
      */
-    public Attribute jsFunction_setAttributeNode(final Attribute newAtt) {
-        final String name = newAtt.jsGet_name();
-        final String value = newAtt.jsGet_value();
-        final Attribute replacedAtt = (Attribute) jsFunction_getAttributeNode(name);
+    public Attribute jsxFunction_setAttributeNode(final Attribute newAtt) {
+        final String name = newAtt.jsxGet_name();
+        final String value = newAtt.jsxGet_value();
+        final Attribute replacedAtt = (Attribute) jsxFunction_getAttributeNode(name);
         replacedAtt.detachFromParent();
         getHtmlElementOrDie().setAttributeValue(name, value);
         return replacedAtt;
@@ -291,7 +291,7 @@ public class HTMLElement extends NodeImpl {
      * @param tagName The name to search for
      * @return the list of elements
      */
-    public Object jsFunction_getElementsByTagName( final String tagName ) {
+    public Object jsxFunction_getElementsByTagName( final String tagName ) {
         final HtmlElement element = (HtmlElement)getDomNodeOrDie();
         final List list = element.getHtmlElementsByTagNames(
             Collections.singletonList(tagName.toLowerCase()));
@@ -305,7 +305,7 @@ public class HTMLElement extends NodeImpl {
      * Return the class defined for this element
      * @return the class name
      */
-    public Object jsGet_className() {
+    public Object jsxGet_className() {
         return getHtmlElementOrDie().getAttributeValue("class");
     }
 
@@ -313,7 +313,7 @@ public class HTMLElement extends NodeImpl {
      * Set the class attribute for this element.
      * @param className - the new class name
      */
-    public void jsSet_className(final String className) {
+    public void jsxSet_className(final String className) {
         getHtmlElementOrDie().setAttributeValue("class", className);
     }
     
@@ -321,7 +321,7 @@ public class HTMLElement extends NodeImpl {
      * Get the innerHTML attribute
      * @return the contents of this node as html
      */
-    public String jsGet_innerHTML() {
+    public String jsxGet_innerHTML() {
         final StringBuffer buf = new StringBuffer();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
         printChildren(buf, getDomNodeOrDie());
@@ -333,7 +333,7 @@ public class HTMLElement extends NodeImpl {
      * Get the innerText attribute
      * @return the contents of this node as text
      */
-    public String jsGet_innerText() {
+    public String jsxGet_innerText() {
         final StringBuffer buf = new StringBuffer();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
         printChildren(buf, getDomNodeOrDie(), false);
@@ -349,7 +349,7 @@ public class HTMLElement extends NodeImpl {
      * @return the contents of this node as html 
      * (note: the formatting isn't currently exactly the same as IE)
      */
-    public String jsGet_outerHTML() {
+    public String jsxGet_outerHTML() {
         final StringBuffer buf = new StringBuffer();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
         printNode(buf, getDomNodeOrDie());
@@ -420,7 +420,7 @@ public class HTMLElement extends NodeImpl {
      * Replace all children elements of this element with the supplied value.
      * @param value - the new value for the contents of this node
      */
-    public void jsSet_innerHTML(final String value) {
+    public void jsxSet_innerHTML(final String value) {
         final DomNode domNode = getDomNodeOrDie();
         domNode.removeAllChildren();
 
@@ -434,7 +434,7 @@ public class HTMLElement extends NodeImpl {
      * Replace all children elements of this element with the supplied value.
      * @param value - the new value for the contents of this node
      */
-    public void jsSet_innerText(final String value) {
+    public void jsxSet_innerText(final String value) {
         final DomNode domNode = getDomNodeOrDie();
         domNode.removeAllChildren();
 
@@ -450,7 +450,7 @@ public class HTMLElement extends NodeImpl {
      * MSDN documentation</a>
      * @param value - the new value for replacing this node
      */
-    public void jsSet_outerHTML(final String value) {
+    public void jsxSet_outerHTML(final String value) {
         final DomNode domNode = getDomNodeOrDie();
         
         if (OUTER_HTML_READONLY.contains(domNode.getNodeName())) {
@@ -586,7 +586,7 @@ public class HTMLElement extends NodeImpl {
      *         beforeBegin, afterBegin, beforeEnd, afterEnd
      * @param text the HTML text to insert
      */
-    public void jsFunction_insertAdjacentHTML(final String where, final String text) {
+    public void jsxFunction_insertAdjacentHTML(final String where, final String text) {
         final DomNode currentNode = getDomNodeOrDie();
         final DomNode node;
         final boolean append;
@@ -652,7 +652,7 @@ public class HTMLElement extends NodeImpl {
      * @param behavior the URL of the behavior to add, or a default behavior name
      * @return an identifier that can be user later to detach the behavior from the element
      */
-    public int jsFunction_addBehavior(final String behavior) {
+    public int jsxFunction_addBehavior(final String behavior) {
         if (BEHAVIOR_CLIENT_CAPS.equalsIgnoreCase(behavior)) {
             final Class c = getClass();
             defineProperty("availHeight", c, 0);
@@ -693,7 +693,7 @@ public class HTMLElement extends NodeImpl {
      * Removes the behavior corresponding to the specified identifier from this element.
      * @param id the identifier for the behavior to remove
      */
-    public void jsFunction_removeBehavior(final int id) {
+    public void jsxFunction_removeBehavior(final int id) {
         switch (id) {
             case BEHAVIOR_ID_CLIENT_CAPS:
                 delete("availHeight");
@@ -734,7 +734,7 @@ public class HTMLElement extends NodeImpl {
      * @return the screen's available height.
      */
     public int getAvailHeight() {
-        return getWindow().jsGet_screen().jsGet_availHeight();
+        return getWindow().jsxGet_screen().jsxGet_availHeight();
     }
 
     /**
@@ -743,7 +743,7 @@ public class HTMLElement extends NodeImpl {
      * @return the screen's available width.
      */
     public int getAvailWidth() {
-        return getWindow().jsGet_screen().jsGet_availWidth();
+        return getWindow().jsxGet_screen().jsxGet_availWidth();
     }
 
     /**
@@ -752,7 +752,7 @@ public class HTMLElement extends NodeImpl {
      * @return the screen's buffer depth.
      */
     public int getBufferDepth() {
-        return getWindow().jsGet_screen().jsGet_bufferDepth();
+        return getWindow().jsxGet_screen().jsxGet_bufferDepth();
     }
 
     /**
@@ -761,7 +761,7 @@ public class HTMLElement extends NodeImpl {
      * @return the screen's color depth.
      */
     public int getColorDepth() {
-        return getWindow().jsGet_screen().jsGet_colorDepth();
+        return getWindow().jsxGet_screen().jsxGet_colorDepth();
     }
 
     /**
@@ -780,7 +780,7 @@ public class HTMLElement extends NodeImpl {
      * @return whether or not cookies are enabled.
      */
     public boolean getCookieEnabled() {
-        return getWindow().jsGet_navigator().jsGet_cookieEnabled();
+        return getWindow().jsxGet_navigator().jsxGet_cookieEnabled();
     }
 
     /**
@@ -789,7 +789,7 @@ public class HTMLElement extends NodeImpl {
      * @return the type of CPU used.
      */
     public String getCpuClass() {
-        return getWindow().jsGet_navigator().jsGet_cpuClass();
+        return getWindow().jsxGet_navigator().jsxGet_cpuClass();
     }
 
     /**
@@ -798,7 +798,7 @@ public class HTMLElement extends NodeImpl {
      * @return the screen's height.
      */
     public int getHeight() {
-        return getWindow().jsGet_screen().jsGet_height();
+        return getWindow().jsxGet_screen().jsxGet_height();
     }
 
     /**
@@ -807,7 +807,7 @@ public class HTMLElement extends NodeImpl {
      * @return whether or not Java is enabled.
      */
     public boolean getJavaEnabled() {
-        return getWindow().jsGet_navigator().jsFunction_javaEnabled();
+        return getWindow().jsxGet_navigator().jsxFunction_javaEnabled();
     }
 
     /**
@@ -816,7 +816,7 @@ public class HTMLElement extends NodeImpl {
      * @return the platform used.
      */
     public String getPlatform() {
-        return getWindow().jsGet_navigator().jsGet_platform();
+        return getWindow().jsxGet_navigator().jsxGet_platform();
     }
 
     /**
@@ -825,7 +825,7 @@ public class HTMLElement extends NodeImpl {
      * @return the system language.
      */
     public String getSystemLanguage() {
-        return getWindow().jsGet_navigator().jsGet_systemLanguage();
+        return getWindow().jsxGet_navigator().jsxGet_systemLanguage();
     }
 
     /**
@@ -834,7 +834,7 @@ public class HTMLElement extends NodeImpl {
      * @return the user language.
      */
     public String getUserLanguage() {
-        return getWindow().jsGet_navigator().jsGet_userLanguage();
+        return getWindow().jsxGet_navigator().jsxGet_userLanguage();
     }
 
     /**
@@ -843,7 +843,7 @@ public class HTMLElement extends NodeImpl {
      * @return the screen's width.
      */
     public int getWidth() {
-        return getWindow().jsGet_screen().jsGet_width();
+        return getWindow().jsxGet_screen().jsxGet_width();
     }
 
     /**
@@ -969,7 +969,7 @@ public class HTMLElement extends NodeImpl {
      * Set the onclick event handler for this element.
      * @param onclick the new handler
      */
-    public void jsSet_onclick(final Function onclick) {
+    public void jsxSet_onclick(final Function onclick) {
         getHtmlElementOrDie().setEventHandler("onclick", onclick);
     }
 
@@ -977,7 +977,7 @@ public class HTMLElement extends NodeImpl {
      * Get the onclick event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onclick() {
+    public Function jsxGet_onclick() {
         return getHtmlElementOrDie().getEventHandler("onclick");
     }
 
@@ -987,7 +987,7 @@ public class HTMLElement extends NodeImpl {
      * MSDN documentation</a>
      * @return the child at the given position 
      */
-    public Object jsGet_children() {
+    public Object jsxGet_children() {
         final DomNode element = getDomNodeOrDie();
         final ElementArray children = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
         
@@ -1005,7 +1005,7 @@ public class HTMLElement extends NodeImpl {
      /**
      * Set the ondblclick event handler for this element.
      * @param ondblclick the new handler     */
-    public void jsSet_ondblclick(final Function ondblclick) {
+    public void jsxSet_ondblclick(final Function ondblclick) {
         getHtmlElementOrDie().setEventHandler("ondblclick", ondblclick);
     }
 
@@ -1013,7 +1013,7 @@ public class HTMLElement extends NodeImpl {
      * Get the ondblclick event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_ondblclick() {
+    public Function jsxGet_ondblclick() {
         return getHtmlElementOrDie().getEventHandler("ondblclick");
     }
 
@@ -1021,7 +1021,7 @@ public class HTMLElement extends NodeImpl {
      * Set the onblur event handler for this element.
      * @param onblur the new handler
      */
-    public void jsSet_onblur(final Function onblur) {
+    public void jsxSet_onblur(final Function onblur) {
         getHtmlElementOrDie().setEventHandler("onblur", onblur);
     }
 
@@ -1029,7 +1029,7 @@ public class HTMLElement extends NodeImpl {
      * Get the onblur event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onblur() {
+    public Function jsxGet_onblur() {
         return getHtmlElementOrDie().getEventHandler("onblur");
     }
 
@@ -1037,7 +1037,7 @@ public class HTMLElement extends NodeImpl {
      * Set the onfocus event handler for this element.
      * @param onfocus the new handler
      */
-    public void jsSet_onfocus(final Function onfocus) {
+    public void jsxSet_onfocus(final Function onfocus) {
         getHtmlElementOrDie().setEventHandler("onfocus", onfocus);
     }
 
@@ -1045,7 +1045,7 @@ public class HTMLElement extends NodeImpl {
      * Get the onfocus event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onfocus() {
+    public Function jsxGet_onfocus() {
         return getHtmlElementOrDie().getEventHandler("onfocus");
     }
 
@@ -1053,7 +1053,7 @@ public class HTMLElement extends NodeImpl {
      * Set the onkeydown event handler for this element.
      * @param onkeydown the new handler
      */
-    public void jsSet_onkeydown(final Function onkeydown) {
+    public void jsxSet_onkeydown(final Function onkeydown) {
         getHtmlElementOrDie().setEventHandler("onkeydown", onkeydown);
     }
 
@@ -1061,7 +1061,7 @@ public class HTMLElement extends NodeImpl {
      * Get the onkeydown event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onkeydown() {
+    public Function jsxGet_onkeydown() {
         return getHtmlElementOrDie().getEventHandler("onkeydown");
     }
 
@@ -1069,7 +1069,7 @@ public class HTMLElement extends NodeImpl {
      * Set the onkeypress event handler for this element.
      * @param onkeypress the new handler
      */
-    public void jsSet_onkeypress(final Function onkeypress) {
+    public void jsxSet_onkeypress(final Function onkeypress) {
         getHtmlElementOrDie().setEventHandler("onkeypress", onkeypress);
     }
 
@@ -1077,7 +1077,7 @@ public class HTMLElement extends NodeImpl {
      * Get the onkeypress event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onkeypress() {
+    public Function jsxGet_onkeypress() {
         return getHtmlElementOrDie().getEventHandler("onkeypress");
     }
 
@@ -1085,7 +1085,7 @@ public class HTMLElement extends NodeImpl {
      * Set the onkeyup event handler for this element.
      * @param onkeyup the new handler
      */
-    public void jsSet_onkeyup(final Function onkeyup) {
+    public void jsxSet_onkeyup(final Function onkeyup) {
         getHtmlElementOrDie().setEventHandler("onkeyup", onkeyup);
     }
 
@@ -1093,7 +1093,7 @@ public class HTMLElement extends NodeImpl {
      * Get the onkeyup event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onkeyup() {
+    public Function jsxGet_onkeyup() {
         return getHtmlElementOrDie().getEventHandler("onkeyup");
     }
 
@@ -1101,7 +1101,7 @@ public class HTMLElement extends NodeImpl {
      * Set the onmousedown event handler for this element.
      * @param onmousedown the new handler
      */
-    public void jsSet_onmousedown(final Function onmousedown) {
+    public void jsxSet_onmousedown(final Function onmousedown) {
         getHtmlElementOrDie().setEventHandler("onmousedown", onmousedown);
     }
 
@@ -1109,7 +1109,7 @@ public class HTMLElement extends NodeImpl {
      * Get the onmousedown event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onmousedown() {
+    public Function jsxGet_onmousedown() {
         return getHtmlElementOrDie().getEventHandler("onmousedown");
     }
 
@@ -1117,7 +1117,7 @@ public class HTMLElement extends NodeImpl {
      * Set the onmousemove event handler for this element.
      * @param onmousemove the new handler
      */
-    public void jsSet_onmousemove(final Function onmousemove) {
+    public void jsxSet_onmousemove(final Function onmousemove) {
         getHtmlElementOrDie().setEventHandler("onmousemove", onmousemove);
     }
 
@@ -1125,7 +1125,7 @@ public class HTMLElement extends NodeImpl {
      * Get the onmousemove event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onmousemove() {
+    public Function jsxGet_onmousemove() {
         return getHtmlElementOrDie().getEventHandler("onmousemove");
     }
 
@@ -1133,7 +1133,7 @@ public class HTMLElement extends NodeImpl {
      * Set the onmouseout event handler for this element.
      * @param onmouseout the new handler
      */
-    public void jsSet_onmouseout(final Function onmouseout) {
+    public void jsxSet_onmouseout(final Function onmouseout) {
         getHtmlElementOrDie().setEventHandler("onmouseout", onmouseout);
     }
 
@@ -1141,7 +1141,7 @@ public class HTMLElement extends NodeImpl {
      * Get the onmouseout event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onmouseout() {
+    public Function jsxGet_onmouseout() {
         return getHtmlElementOrDie().getEventHandler("onmouseout");
     }
 
@@ -1149,7 +1149,7 @@ public class HTMLElement extends NodeImpl {
      * Set the onmouseover event handler for this element.
      * @param onmouseover the new handler
      */
-    public void jsSet_onmouseover(final Function onmouseover) {
+    public void jsxSet_onmouseover(final Function onmouseover) {
         getHtmlElementOrDie().setEventHandler("onmouseover", onmouseover);
     }
 
@@ -1157,7 +1157,7 @@ public class HTMLElement extends NodeImpl {
      * Get the onmouseover event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onmouseover() {
+    public Function jsxGet_onmouseover() {
         return getHtmlElementOrDie().getEventHandler("onmouseover");
     }
 
@@ -1165,7 +1165,7 @@ public class HTMLElement extends NodeImpl {
      * Set the onmouseup event handler for this element.
      * @param onmouseup the new handler
      */
-    public void jsSet_onmouseup(final Function onmouseup) {
+    public void jsxSet_onmouseup(final Function onmouseup) {
         getHtmlElementOrDie().setEventHandler("onmouseup", onmouseup);
     }
 
@@ -1173,7 +1173,7 @@ public class HTMLElement extends NodeImpl {
      * Get the onmouseup event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onmouseup() {
+    public Function jsxGet_onmouseup() {
         return getHtmlElementOrDie().getEventHandler("onmouseup");
     }
 
@@ -1181,7 +1181,7 @@ public class HTMLElement extends NodeImpl {
      * Set the onresize event handler for this element.
      * @param onresize the new handler
      */
-    public void jsSet_onresize(final Function onresize) {
+    public void jsxSet_onresize(final Function onresize) {
         getHtmlElementOrDie().setEventHandler("onresize", onresize);
     }
 
@@ -1189,7 +1189,7 @@ public class HTMLElement extends NodeImpl {
      * Get the onresize event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onresize() {
+    public Function jsxGet_onresize() {
         return getHtmlElementOrDie().getEventHandler("onresize");
     }
 
@@ -1199,7 +1199,7 @@ public class HTMLElement extends NodeImpl {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetwidth.asp">
      * MSDN documentation</a>
      */
-    public int jsGet_offsetHeight() {
+    public int jsxGet_offsetHeight() {
         return 1;
     }
 
@@ -1209,7 +1209,7 @@ public class HTMLElement extends NodeImpl {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetWidth.asp">
      * MSDN documentation</a>
      */
-    public int jsGet_offsetWidth() {
+    public int jsxGet_offsetWidth() {
         return 1;
     }
 
@@ -1219,7 +1219,7 @@ public class HTMLElement extends NodeImpl {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetLeft.asp">
      * MSDN documentation</a>
      */
-    public int jsGet_offsetLeft() {
+    public int jsxGet_offsetLeft() {
         return 1;
     }
 
@@ -1229,7 +1229,7 @@ public class HTMLElement extends NodeImpl {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetTop.asp">
      * MSDN documentation</a>
      */
-    public int jsGet_offsetTop() {
+    public int jsxGet_offsetTop() {
         return 1;
     }
 

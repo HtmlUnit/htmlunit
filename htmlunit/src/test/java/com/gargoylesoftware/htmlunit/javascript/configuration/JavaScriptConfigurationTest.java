@@ -37,10 +37,20 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.lang.reflect.Method;
 import java.util.Iterator;
+
+import org.xml.sax.EntityResolver;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.XMLReaderFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -144,7 +154,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+            Document.class.getName(), null, null, true);
         expectedConfig.addProperty("readyState", true, false);
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -178,10 +189,33 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.NETSCAPE_6_2_3;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+            Document.class.getName(), null, null, true);
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
     
+    /**
+     * Test that the JSObject is being set correctly
+     * @throws Exception on error
+     */
+    public void testForSettingJSObject() throws Exception {
+        final String configurationString
+            = "<?xml version=\"1.0\"?>"
+            + "<configuration\n"
+            + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
+            + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
+            + "    <class name=\"Document\" extends=\"NodeImpl\" "
+            + "classname=\"com.gargoylesoftware.htmlunit.javascript.host.Document\" JSObject=\"true\">\n"
+            + "    </class>\n"
+            + "</configuration>\n";
+        final Reader reader = new StringReader(configurationString);
+        JavaScriptConfiguration.loadConfiguration(reader);
+        final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
+        final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
+        final ClassConfiguration config = configuration.getClassConfiguration("Document");
+        assertTrue("JSObject is not set", config.isJsObject());
+    }
+
     /**
      * Test getting the configuration for the Netscape browser.  The readyState property should not be
      * available in this case.
@@ -209,7 +243,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getTestInstance();
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+            Document.class.getName(), null, null, true);
         expectedConfig.addProperty("readyState", true, false);
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -277,7 +312,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+            Document.class.getName(), null, null, true);
         assertTrue("Document should not property did not match", 
             configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -310,7 +346,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+            Document.class.getName(), null, null, true);
         assertTrue("Document should not property did not match", 
             configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -344,7 +381,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+            Document.class.getName(), null, null, true);
         assertTrue("Document should not property did not match", 
             configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -369,7 +407,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+            Document.class.getName(), null, null, true);
         expectedConfig.addFunction("createAttribute");
         assertTrue("Document function did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -396,8 +435,43 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+            Document.class.getName(), null, null, true);
         assertTrue("Document function did not match", configuration.classConfigEquals("Document", expectedConfig));
+    }
+
+    /**
+     * Test that the file JavaScriptConfiguration.xml is valid.
+     * @throws Exception If the test fails
+     */
+    public void testConfigurationFileAgainstSchema() throws Exception {
+        final XMLReader parser = XMLReaderFactory.createXMLReader("org.apache.xerces.parsers.SAXParser");
+        final String directory = "src/java/com/gargoylesoftware/htmlunit/javascript/configuration/";
+        parser.setFeature("http://xml.org/sax/features/validation", true);
+        parser.setFeature("http://apache.org/xml/features/validation/schema", true);
+        parser.setEntityResolver( new EntityResolver() {
+            public InputSource resolveEntity (final String publicId, final String systemId) throws IOException {
+                return createInputSourceForFile(directory+"JavaScriptConfiguration.xsd");
+            }
+        });
+        parser.setErrorHandler( new ErrorHandler() {
+            public void warning(final SAXParseException exception) throws SAXException {
+                throw exception;
+            }
+            public void error(final SAXParseException exception) throws SAXException {
+                throw exception;
+            }
+            public void fatalError(final SAXParseException exception) throws SAXException {
+                throw exception;
+            }
+        });
+
+        parser.parse( createInputSourceForFile(directory+"JavaScriptConfiguration.xml") );
+
+    }
+    
+    private InputSource createInputSourceForFile( final String fileName ) throws FileNotFoundException {
+        return new InputSource( getFileAsStream(fileName) );
     }
 
     /**
@@ -427,20 +501,20 @@ public class JavaScriptConfigurationTest extends WebTestCase {
                 if (checkForIgnore(name, classname)) {
                     continue;
                 }
-                if (name.startsWith("jsGet_")) {
-                    elementName = name.substring(6);
+                if (name.startsWith("jsxGet_")) {
+                    elementName = name.substring(7);
                     theMethod = configuration.getPropertyReadMethod(classname, elementName);
                     assertNotNull("No definition found for " + name + " defined in " + clazz.getName(), 
                         theMethod);
                 }
-                else if (name.startsWith("jsSet_")) {
-                    elementName = name.substring(6);
+                else if (name.startsWith("jsxSet_")) {
+                    elementName = name.substring(7);
                     theMethod = configuration.getPropertyWriteMethod(classname, elementName);
                     assertNotNull("No definition found for " + name + " defined in " + clazz.getName(), 
                         theMethod);
                 } 
-                else if (name.startsWith("jsFunction_")) {
-                    elementName = name.substring(11);
+                else if (name.startsWith("jsxFunction_")) {
+                    elementName = name.substring(12);
                     theMethod = configuration.getFunctionMethod(classname, elementName);
                     assertNotNull("No definition found for " + name + " defined in " + clazz.getName(), 
                         theMethod);
@@ -452,19 +526,19 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
     
     private boolean checkForIgnore(final String methodName, final String classname) {
-        String[] ignoreList = { "Button|jsGet_form",
-                                "FormField|jsGet_form",
-                                "FileUpload|jsGet_form",
-                                "Radio|jsGet_form",
-                                "Reset|jsGet_form",
-                                "Submit|jsGet_form",
-                                "Checkbox|jsGet_form",
-                                "Hidden|jsGet_form",
-                                "Select|jsGet_form",
-                                "Textarea|jsGet_form",
-                                "Input|jsGet_form",
-                                "Password|jsGet_form",
-                                "CharacterDataImpl|jsGet_tabindex"};
+        String[] ignoreList = { "Button|jsxGet_form",
+                                "FormField|jsxGet_form",
+                                "FileUpload|jsxGet_form",
+                                "Radio|jsxGet_form",
+                                "Reset|jsxGet_form",
+                                "Submit|jsxGet_form",
+                                "Checkbox|jsxGet_form",
+                                "Hidden|jsxGet_form",
+                                "Select|jsxGet_form",
+                                "Textarea|jsxGet_form",
+                                "Input|jsxGet_form",
+                                "Password|jsxGet_form",
+                                "CharacterDataImpl|jsxGet_tabindex"};
         final String key = classname + "|" + methodName;
         for (int i = 0; i < ignoreList.length; i++) {
             if (ignoreList[i].equals(key)) {

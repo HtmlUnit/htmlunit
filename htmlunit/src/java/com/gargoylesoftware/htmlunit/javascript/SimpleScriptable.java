@@ -200,7 +200,7 @@ public class SimpleScriptable extends ScriptableObject {
 //        final Method[] methods = getClass().getMethods();
 //        for( int i=0; i<methods.length; i++ ) {
 //            final String methodName = methods[i].getName();
-//            if( methodName.startsWith("jsGet_")  && methods[i].getParameterTypes().length == 0 ) {
+//            if( methodName.startsWith("jsxGet_")  && methods[i].getParameterTypes().length == 0 ) {
 //                final String propertyName = methodName.substring(6);
 //                final int state = configuration.getReadablePropertyNameState(clazz, propertyName);
 //                if( state == JavaScriptConfiguration.ENABLED ) {
@@ -212,7 +212,7 @@ public class SimpleScriptable extends ScriptableObject {
 //                            + clazz.getName() + "]");
 //                }
 //            }
-//            else if( methodName.startsWith("jsSet_")
+//            else if( methodName.startsWith("jsxSet_")
 //                && methods[i].getParameterTypes().length == 1 ) {
 //
 //                final String propertyName = methodName.substring(6);
@@ -226,8 +226,8 @@ public class SimpleScriptable extends ScriptableObject {
 //                            + clazz.getName() + "]");
 //                }
 //            }
-//            else if( methodName.startsWith("jsFunction_") ) {
-//                final String functionName = methodName.substring("jsFunction_".length());
+//            else if( methodName.startsWith("jsxFunction_") ) {
+//                final String functionName = methodName.substring("jsxFunction_".length());
 //                final int state = configuration.getFunctionNameState(clazz, functionName);
 //
 //                if( state == JavaScriptConfiguration.ENABLED ) {
@@ -443,49 +443,6 @@ public class SimpleScriptable extends ScriptableObject {
         }
 
         return result;
-
-//        final PropertyInfo info = (PropertyInfo)getPropertyMap().get(name);
-//        final int propertyNameState = configuration.getReadablePropertyNameState(clazz, name);
-//        final int functionNameState = configuration.getFunctionNameState(clazz, name);
-//        if( propertyNameState == JavaScriptConfiguration.ENABLED
-//                && functionNameState == JavaScriptConfiguration.ENABLED ) {
-//            throw new IllegalStateException("Name is both a property and a function: name=["
-//                +name+"] class=["+clazz.getName()+"]");
-//        }
-//
-//        final Object result;
-//        if( propertyNameState == JavaScriptConfiguration.ENABLED ) {
-//            if( info == null || info.getGetter() == null ) {
-//                getLog().debug("Getter not implemented for property ["+name+"]");
-//                result = NOT_FOUND;
-//            }
-//            else {
-//                try {
-//                    result = info.getGetter().invoke( this, new Object[0] );
-//                }
-//                catch( final Exception e ) {
-//                    throw new ScriptException(e);
-//                }
-//            }
-//        }
-//        else if( functionNameState == JavaScriptConfiguration.ENABLED ) {
-//            if( info == null || info.getFunction() == null ) {
-//                getLog().debug("Function not implemented ["+name+"]");
-//                result = NOT_FOUND;
-//            }
-//            else {
-//                result = info.getFunction();
-//            }
-//        }
-//        else {
-//            result = super.get(name, start);
-//        }
-//
-//        // this may help to find which properties htmlunit should impement
-//        if (result == NOT_FOUND) {
-//            getLog().debug("Property \"" + name + "\" of " + start + " not defined as fixed property");
-//        }
-//        return result;
     }
 
 

@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class Textarea extends FormField {
 
@@ -70,7 +71,7 @@ public class Textarea extends FormField {
      * Return the type of this input.
      * @return The type
      */
-    public String jsGet_type() {
+    public String jsxGet_type() {
         return "textarea";
     }
 
@@ -79,7 +80,7 @@ public class Textarea extends FormField {
      * Return the value of the "value" attribute
      * @return The value of the "value" attribute
      */
-    public String jsGet_value() {
+    public String jsxGet_value() {
         return ((HtmlTextArea)getHtmlElementOrDie()).getText();
     }
 
@@ -88,7 +89,7 @@ public class Textarea extends FormField {
      * Set the value of the "value" attribute
      * @param value The new value
      */
-    public void jsSet_value( final String value ) {
+    public void jsxSet_value( final String value ) {
         ((HtmlTextArea)getHtmlElementOrDie()).setText(value);
     }
 }

@@ -51,8 +51,9 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 /**
  * A JavaScript object representing a TR.
  * 
- * @author Marc Guillemot
  * @version $Revision$
+ * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class TableRow extends HTMLElement {
     private static final long serialVersionUID = 3256441404401397812L;
@@ -77,7 +78,7 @@ public class TableRow extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/rowindex.asp">
      * MSDN Documentation</a>
      */
-    public int jsGet_rowIndex() {
+    public int jsxGet_rowIndex() {
         final HtmlTableRow row = (HtmlTableRow) getHtmlElementOrDie();
         final HtmlTable table = row.getEnclosingTable();
         return table.getRows().indexOf(row);
@@ -87,7 +88,7 @@ public class TableRow extends HTMLElement {
      * Returns the cells in the row.
      * @return The cells in the row.
      */
-    public Object jsGet_cells() {
+    public Object jsxGet_cells() {
         if (cells_ == null) {
             cells_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
@@ -112,7 +113,7 @@ public class TableRow extends HTMLElement {
      * @param f the function object that invoked this function.
      * @return the newly-created cell.
      */
-    public static Object jsFunction_insertCell(final Context cx, final Scriptable s, 
+    public static Object jsxFunction_insertCell(final Context cx, final Scriptable s, 
             final Object[] args, final Function f) {
         final TableRow row = (TableRow) s;
         final HtmlTableRow htmlRow = (HtmlTableRow) row.getDomNodeOrDie();

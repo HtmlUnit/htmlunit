@@ -52,6 +52,7 @@ import java.net.URL;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Michael Ottati
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class Location extends SimpleScriptable {
     private static final long serialVersionUID = -2907220432378132233L;
@@ -79,8 +80,8 @@ public class Location extends SimpleScriptable {
      * @param href The new location
      * @throws IOException when location loading fails
      */
-    public void jsSet_href( final String href ) throws IOException {
-        window_.jsSet_location(href);
+    public void jsxSet_href( final String href ) throws IOException {
+        window_.jsxSet_location(href);
     }
 
 
@@ -88,7 +89,7 @@ public class Location extends SimpleScriptable {
      * Return the value of the href property;
      * @return the value of the href property
      */
-    public String jsGet_href() {
+    public String jsxGet_href() {
         final Page page = window_.getWebWindow().getEnclosedPage();
         if( page == null ) {
             return UNKNOWN;
@@ -105,13 +106,13 @@ public class Location extends SimpleScriptable {
      * @param force If <tt>true</tt>, force reload from server; otherwise, may reload from cache.
      * @throws IOException When an exception occurs reloading the page.
      */
-    public void jsFunction_reload( final boolean force ) throws IOException {
-        String url = this.jsGet_href();
+    public void jsxFunction_reload( final boolean force ) throws IOException {
+        String url = this.jsxGet_href();
         if( UNKNOWN.equals( url ) ) {
             getLog().error( "Unable to reload location: current url is unknown." );
         }
         else {
-            this.jsSet_href( url );
+            this.jsxSet_href( url );
         }
     }
 
@@ -121,7 +122,7 @@ public class Location extends SimpleScriptable {
      * @param href The new url
      * @throws IOException when exception occurs loading the new page
      */
-    public void jsFunction_replace( final String href ) throws IOException {
+    public void jsxFunction_replace( final String href ) throws IOException {
         final WebWindow webWindow = window_.getWebWindow();
         final URL url = ((HtmlPage) webWindow.getEnclosedPage()).getFullyQualifiedUrl( href );
         webWindow.getWebClient().getPage(url);
@@ -136,7 +137,7 @@ public class Location extends SimpleScriptable {
      * Return the hostname that is part of the location url
      * @return The hostname
      */
-    public String jsGet_hostname() {
+    public String jsxGet_hostname() {
         return getUrl().getHost();
     }
 
@@ -146,14 +147,14 @@ public class Location extends SimpleScriptable {
      * @return The string URL
      */
     public String toString() {
-        return jsGet_href();
+        return jsxGet_href();
     }
 
     /**
      * Return the search string
      * @return The value.
      */
-    public String jsGet_search() {
+    public String jsxGet_search() {
         final String search = getUrl().getQuery();
         if( search == null ) {
             return "";
@@ -167,7 +168,7 @@ public class Location extends SimpleScriptable {
      * Return the value of "hash"
      * @return The value.
      */
-    public String jsGet_hash() {
+    public String jsxGet_hash() {
         final String hash = getUrl().getRef();
         if( hash == null ) {
             return "";
@@ -181,7 +182,7 @@ public class Location extends SimpleScriptable {
      * Return the value of "host"
      * @return The value.
      */
-    public String jsGet_host() {
+    public String jsxGet_host() {
         final URL url = getUrl();
         final int port = url.getPort();
         final String host = url.getHost();
@@ -198,7 +199,7 @@ public class Location extends SimpleScriptable {
      * Return the value of "pathname"
      * @return The value.
      */
-    public String jsGet_pathname() {
+    public String jsxGet_pathname() {
         return getUrl().getPath();
     }
 
@@ -206,7 +207,7 @@ public class Location extends SimpleScriptable {
      * Return the value of "port"
      * @return The value.
      */
-    public String jsGet_port() {
+    public String jsxGet_port() {
         final int port = getUrl().getPort();
         if( port == -1 ) {
             return "";
@@ -220,7 +221,7 @@ public class Location extends SimpleScriptable {
      * Return the value of "protocol" + ":" like what browser do
      * @return The value.
      */
-    public String jsGet_protocol() {
+    public String jsxGet_protocol() {
         return getUrl().getProtocol() + ":";
     }
 

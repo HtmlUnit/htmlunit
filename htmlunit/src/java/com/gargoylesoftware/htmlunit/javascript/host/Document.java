@@ -133,7 +133,7 @@ public final class Document extends NodeImpl {
      * Return the value of the javascript attribute "forms".
      * @return The value of this attribute.
      */
-    public Object jsGet_forms() {
+    public Object jsxGet_forms() {
         if (forms_ == null) {
             forms_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
@@ -153,7 +153,7 @@ public final class Document extends NodeImpl {
      * MSDN documentation</a>
      * @return The value of this attribute.
      */
-    public Object jsGet_links() {
+    public Object jsxGet_links() {
         if (links_ == null) {
             links_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
@@ -177,7 +177,7 @@ public final class Document extends NodeImpl {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/write.asp">
      * MSDN documentation</a>
      */
-    public static void jsFunction_write(
+    public static void jsxFunction_write(
         final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
 
         ((Document) scriptable).write(concatArgsAsString(args));
@@ -207,7 +207,7 @@ public final class Document extends NodeImpl {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/writeln.asp">
      * MSDN documentation</a>
      */
-    public static void jsFunction_writeln(
+    public static void jsxFunction_writeln(
         final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
 
         ((Document) scriptable).write(concatArgsAsString(args) + "\n");
@@ -242,7 +242,7 @@ public final class Document extends NodeImpl {
                     current = (HtmlElement) current.getParentNode();
                 }
                 ((HTMLElement) getJavaScriptNode(current))
-                .jsFunction_insertAdjacentHTML(HTMLElement.POSITION_BEFORE_END, bufferedContent);
+                .jsxFunction_insertAdjacentHTML(HTMLElement.POSITION_BEFORE_END, bufferedContent);
             }
             else {
                 getLog().debug("write: not enough content to parsed it now");
@@ -315,7 +315,7 @@ public final class Document extends NodeImpl {
      * Return the cookie attribute.
      * @return The cookie attribute
      */
-    public String jsGet_cookie() {
+    public String jsxGet_cookie() {
         final HttpState state = getHttpState();
         final Cookie[] cookies = state.getCookies();
         if( cookies == null ) {
@@ -341,7 +341,7 @@ public final class Document extends NodeImpl {
      * MSDN documentation</a> 
      * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
      */
-    public void jsSet_cookie(final String newCookie) {
+    public void jsxSet_cookie(final String newCookie) {
         final HttpState state = getHttpState();
 
         final Cookie cookie = buildCookie(newCookie, getHtmlPage().getWebResponse().getUrl());
@@ -395,9 +395,9 @@ public final class Document extends NodeImpl {
      * Return the value of the "location" property.
      * @return The value of the "location" property
      */
-    public Location jsGet_location() {
+    public Location jsxGet_location() {
         final WebWindow webWindow = ((HtmlPage)getDomNodeOrDie()).getEnclosingWindow();
-        return ((Window)webWindow.getScriptObject()).jsGet_location();
+        return ((Window)webWindow.getScriptObject()).jsxGet_location();
     }
 
 
@@ -410,9 +410,9 @@ public final class Document extends NodeImpl {
      * @param location the location to navigate to
      * @throws IOException when location loading fails
      */
-    public void jsSet_location(final String location) throws IOException {
+    public void jsxSet_location(final String location) throws IOException {
         final WebWindow webWindow = getHtmlPage().getEnclosingWindow();
-        ((Window)webWindow.getScriptObject()).jsSet_location(location);
+        ((Window)webWindow.getScriptObject()).jsxSet_location(location);
     }
 
 
@@ -420,7 +420,7 @@ public final class Document extends NodeImpl {
      * Return the value of the "images" property.
      * @return The value of the "images" property
      */
-    public Object jsGet_images() {
+    public Object jsxGet_images() {
         if (images_ == null) {
             images_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
@@ -438,7 +438,7 @@ public final class Document extends NodeImpl {
      * Return the value of the "referrer" property.
      * @return The value of the "referrer" property
      */
-    public String jsGet_referrer() {
+    public String jsxGet_referrer() {
         final String referrer = getHtmlPage().getWebResponse().getResponseHeaderValue("referrer");
         if( referrer == null ) {
             return "";
@@ -453,7 +453,7 @@ public final class Document extends NodeImpl {
      * Return the value of the "URL" property.
      * @return The value of the "URL" property
      */
-    public String jsGet_URL() {
+    public String jsxGet_URL() {
         return getHtmlPage().getWebResponse().getUrl().toExternalForm();
     }
 
@@ -462,7 +462,7 @@ public final class Document extends NodeImpl {
      * Return the value of the "all" property.
      * @return The value of the "all" property
      */
-    public ElementArray jsGet_all() {
+    public ElementArray jsxGet_all() {
         if (all_ == null) {
             all_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
@@ -486,7 +486,7 @@ public final class Document extends NodeImpl {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/open_1.asp">
      * MSDN documentation</a>
      */
-    public static Object jsFunction_open(
+    public static Object jsxFunction_open(
         final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
 
         final Document document = (Document) scriptable;
@@ -502,7 +502,7 @@ public final class Document extends NodeImpl {
      * javascript function "close".
      * @throws IOException If an IO problem occurs.
      */
-    public void jsFunction_close()
+    public void jsxFunction_close()
         throws
             IOException {
 
@@ -527,7 +527,7 @@ public final class Document extends NodeImpl {
      * Get the JavaScript property "documentElement" for the document.
      * @return The root node for the document.
      */
-    public Object jsGet_documentElement() {
+    public Object jsxGet_documentElement() {
         return getScriptableFor(((HtmlPage)getDomNodeOrDie()).getDocumentElement());
     }
 
@@ -538,7 +538,7 @@ public final class Document extends NodeImpl {
      * @param tagName The tag name
      * @return the new HTML element, or NOT_FOUND if the tag is not supported.
      */
-    public Object jsFunction_createElement( final String tagName ) {
+    public Object jsxFunction_createElement( final String tagName ) {
         Object result = NOT_FOUND;
         try {
             final HtmlElement htmlElement = getDomNodeOrDie().getPage().createElement(tagName);
@@ -566,7 +566,7 @@ public final class Document extends NodeImpl {
      * @param attributeName the name of the attribute to create
      * @return an attribute with the specified name.
      */
-    public Attribute jsFunction_createAttribute( final String attributeName ) {
+    public Attribute jsxFunction_createAttribute( final String attributeName ) {
         final Attribute att = (Attribute) makeJavaScriptObject(Attribute.JS_OBJECT_NAME);
         att.init(attributeName, null);
         return att;
@@ -579,7 +579,7 @@ public final class Document extends NodeImpl {
      * @param newData The string value for the text node.
      * @return the new text node or NOT_FOUND if there is an error.
      */
-    public Object jsFunction_createTextNode( final String newData ) {
+    public Object jsxFunction_createTextNode( final String newData ) {
         Object result = NOT_FOUND;
         try {
             final DomNode domNode = new DomText(getDomNodeOrDie().getPage(), newData);
@@ -607,7 +607,7 @@ public final class Document extends NodeImpl {
      * @param id The ID to search for
      * @return the element or null
      */
-    public Object jsFunction_getElementById( final String id ) {
+    public Object jsxFunction_getElementById( final String id ) {
         Object result = null;
         try {
             final HtmlElement htmlElement = ((HtmlPage)getDomNodeOrDie()).getDocumentElement().getHtmlElementById(id);
@@ -627,7 +627,7 @@ public final class Document extends NodeImpl {
             
             final BrowserVersion browser = this.getHtmlPage().getWebClient().getBrowserVersion();
             if (browser.isIE()) {
-                final NativeArray elements = (NativeArray) jsFunction_getElementsByName(id);
+                final NativeArray elements = (NativeArray) jsxFunction_getElementsByName(id);
                 result = elements.get(0, this);
                 if (result instanceof UniqueTag) {
                     return null;
@@ -647,7 +647,7 @@ public final class Document extends NodeImpl {
      * @param tagName The name to search for
      * @return the list of elements
      */
-    public Object jsFunction_getElementsByTagName( final String tagName ) {
+    public Object jsxFunction_getElementsByTagName( final String tagName ) {
         final HtmlPage page = (HtmlPage)getDomNodeOrDie();
         final List list = page.getDocumentElement().getHtmlElementsByTagNames(
             Collections.singletonList(tagName.toLowerCase()));
@@ -665,7 +665,7 @@ public final class Document extends NodeImpl {
      * @param elementName - value of the "name" attribute to look for
      * @return NodeList of elements
      */
-    public Object jsFunction_getElementsByName( final String elementName ) {
+    public Object jsxFunction_getElementsByName( final String elementName ) {
         final HtmlPage page = (HtmlPage)getDomNodeOrDie();
         final String exp = "//*[@name='" + elementName + "']";
         final List list;
@@ -723,7 +723,7 @@ public final class Document extends NodeImpl {
      * Gets the body element this document
      * @return body element
      */
-    public Object jsGet_body() {
+    public Object jsxGet_body() {
         final List list = getHtmlPage().getDocumentElement().getHtmlElementsByTagName("body");
         if( list.size() == 0 ) {
             return NOT_FOUND;
@@ -739,7 +739,7 @@ public final class Document extends NodeImpl {
      * Gets the title of this document
      * @return body element
      */
-    public String jsGet_title() {
+    public String jsxGet_title() {
         return getHtmlPage().getTitleText();
     }
     
@@ -747,7 +747,7 @@ public final class Document extends NodeImpl {
      * Set the title.
      * @param message The new title
      */
-    public void jsSet_title(final String message ) {
+    public void jsxSet_title(final String message ) {
         getHtmlPage().setTitleText(message);
     }
     
@@ -756,7 +756,7 @@ public final class Document extends NodeImpl {
      * @return the state - uninitilized, loading or complete - The interactive state is not returned
      * 
      */
-    public String jsGet_readyState() {
+    public String jsxGet_readyState() {
         final DomNode node = getDomNodeOrDie();
         if (node instanceof HtmlPage) {
             return ((HtmlPage) node).getDocumentElement().getReadyState();
@@ -771,7 +771,7 @@ public final class Document extends NodeImpl {
      * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147">
      * W3C documentation</a>
      */
-    public String jsGet_domain() {
+    public String jsxGet_domain() {
         if (domain_ == null) {
             domain_ = getHtmlPage().getWebResponse().getUrl().getHost();
             final BrowserVersion browser = this.getHtmlPage().getWebClient().getBrowserVersion();
@@ -812,8 +812,8 @@ public final class Document extends NodeImpl {
      * trimming to co.uk should not be possible.
      * @param newDomain the new domain to set
      */
-    public void jsSet_domain( final String newDomain ) {
-        final String currentDomain = jsGet_domain();
+    public void jsxSet_domain( final String newDomain ) {
+        final String currentDomain = jsxGet_domain();
         if (currentDomain.equalsIgnoreCase(newDomain)) {
             return;
         }
@@ -837,7 +837,7 @@ public final class Document extends NodeImpl {
      * Return the value of the javascript attribute "scripts".
      * @return The value of this attribute.
      */
-    public Object jsGet_scripts() {
+    public Object jsxGet_scripts() {
         if (scripts_ == null) {
             scripts_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {

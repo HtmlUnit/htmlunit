@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @author  <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
  * @author  David D. Kilzer
  * @author  Marc Guillemot
+ * @author Chris Erskine
  */
 public class Anchor extends FocusableHostElement {
 
@@ -76,7 +77,7 @@ public class Anchor extends FocusableHostElement {
      * Set the href property.
      * @param href href attribute value.
      */
-    public void jsSet_href( final String href ) {
+    public void jsxSet_href( final String href ) {
         getHtmlElementOrDie().setAttributeValue( "href", href );
     }
 
@@ -84,7 +85,7 @@ public class Anchor extends FocusableHostElement {
      * Return the value of the href property.
      * @return The href property.
      */
-    public String jsGet_href() {
+    public String jsxGet_href() {
         return getHtmlElementOrDie().getAttributeValue( "href" );
     }
 
