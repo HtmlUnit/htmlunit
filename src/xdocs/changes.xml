@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="mguillem">
+                JavaScript: added document.domain (read only).
+            </action>
             <action type="add" dev="mguillem" due-to="Daniel Gredler" id="1096789">
                 JavaScript: added implementation of IE behavior "#default#clientCaps".
             </action>
