@@ -927,5 +927,39 @@ public class HtmlPageTest extends WebTestCase {
 
         assertEquals("Shift_JIS", page.getPageEncoding());
     }
+
+
+    public void testGetAllForms() throws Exception {
+
+        final String content
+                 = "<html>"
+                 + "<head><title>foo</title></head>"
+                 + "<body>"
+                 + "<form name='one'>"
+                 + "<a id='c' accesskey='c'>foo</a>"
+                 + "</form>"
+                 + "<form name='two'>"
+                 + "<a id='c' accesskey='c'>foo</a>"
+                 + "</form>"
+                 + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
+                 + "<input name='bar' type='submit' id='bar'/>"
+                 + "</form></body></html>";
+
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( content );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://www.gargoylesoftware.com" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+
+        final List expectedForms = Arrays.asList( new HtmlForm[]{ 
+            page.getFormByName("one"),
+            page.getFormByName("two")
+        } );
+        assertEquals( expectedForms, page.getAllForms() );
+    }
 }
 
