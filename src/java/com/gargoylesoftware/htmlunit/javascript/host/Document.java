@@ -28,7 +28,6 @@ import org.mozilla.javascript.Scriptable;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public final class Document extends HTMLElement {
-//    private NativeArray allForms_;
     private DocumentAllArray allArray_;
 
 
@@ -51,33 +50,6 @@ public final class Document extends HTMLElement {
      * Initialize this object
      */
     public void initialize() {
-        /* 
-        final List jsForms = new ArrayList();
-
-        final List formElements
-            = getHtmlPage().getHtmlElementsByTagNames( Collections.singletonList("form") );
-        final Iterator iterator = formElements.iterator();
-        while( iterator.hasNext() ) {
-            final HtmlForm htmlForm = (HtmlForm)iterator.next();
-            final String formName = htmlForm.getAttributeValue("name");
-            if( formName.length() != 0 ) {
-                final Form jsForm = (Form)makeJavaScriptObject("Form");
-                jsForm.setHtmlElement( htmlForm );
-                jsForm.initialize();
-                jsForms.add(jsForm);
-                defineProperty(formName, jsForm, READONLY);
-            }
-        }
-
-        final int attributes = READONLY;
-        final Form[] array = new Form[jsForms.size()];
-        jsForms.toArray(array);
-        allForms_ = new NativeArray(array);
-        for( int i=0; i<array.length; i++ ) {
-            final String name = array[i].getHtmlElementOrDie().getAttributeValue("name");
-            allForms_.defineProperty(name, array[i], attributes);
-        }
-        */
         allArray_ = (DocumentAllArray)makeJavaScriptObject("DocumentAllArray");
         allArray_.initialize( (HtmlPage)getHtmlElementOrDie() );
     }
@@ -97,9 +69,9 @@ public final class Document extends HTMLElement {
      * @return The value of this attribute.
      */
     public NativeArray jsGet_forms() {
-        // TODO: Once the page has been fully loaded, there's no need to 
+        // TODO: Once the page has been fully loaded, there's no need to
         // rebuild this array every time.  It could be cached at that point.
-        
+
         final List jsForms = new ArrayList();
 
         final List formElements
@@ -110,7 +82,7 @@ public final class Document extends HTMLElement {
             final String formName = htmlForm.getAttributeValue("name");
             if( formName.length() != 0 ) {
                 Form jsForm = (Form)htmlForm.getScriptObject();
-                if( jsForm == null ) {                
+                if( jsForm == null ) {
                     jsForm = (Form)makeJavaScriptObject("Form");
                     jsForm.setHtmlElement( htmlForm );
                     jsForm.initialize();
@@ -127,7 +99,7 @@ public final class Document extends HTMLElement {
             final String name = array[i].getHtmlElementOrDie().getAttributeValue("name");
             allForms.defineProperty(name, array[i], attributes);
         }
-        
+
         return allForms;
     }
 
@@ -252,7 +224,7 @@ public final class Document extends HTMLElement {
     }
 
     /**
-     * Return the specified property or NOT_FOUND if it could not be found. This is 
+     * Return the specified property or NOT_FOUND if it could not be found. This is
      * overridden to check to see if the name belongs to a form within this document.
      * @param name The name of the property
      * @param start The scriptable object that was originally queried for this property
@@ -266,7 +238,7 @@ public final class Document extends HTMLElement {
         if( htmlPage == null ) {
             return super.get(name, start);
         }
-        
+
         try {
             final HtmlForm htmlForm = htmlPage.getFormByName(name);
             Form jsForm = (Form)htmlForm.getScriptObject();
