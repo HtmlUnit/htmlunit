@@ -129,7 +129,7 @@ public class HTMLElementTest extends WebTestCase {
 
     /**
      * Test for getElementsByTagName
-     * @throws Exception
+     * @throws Exception if the test fails
      */
     public void testGetElementsByTagName() throws Exception {
         final String content
@@ -159,7 +159,7 @@ public class HTMLElementTest extends WebTestCase {
     
     /**
      * Test getting the class for the element
-     * @throws Exception
+     * @throws Exception if the test fails
      */
     public void testGetClassName() throws Exception {
         final String content
@@ -185,7 +185,7 @@ public class HTMLElementTest extends WebTestCase {
     }
     /**
      * Test getting the class for the element
-     * @throws Exception
+     * @throws Exception if the test fails
      */
     public void testSetClassName() throws Exception {
         final String content

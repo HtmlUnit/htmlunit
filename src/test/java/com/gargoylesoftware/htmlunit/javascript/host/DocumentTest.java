@@ -1702,7 +1702,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * IE has a bug which returns the element by name if it can not find it by ID.
-     * @throws Exception
+     * @throws Exception if the test fails
      */
     public void testGetElementByIdForIE() throws Exception {
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
@@ -1731,7 +1731,7 @@ public class DocumentTest extends WebTestCase {
     
     /**
      * IE has a bug which returns the element by name if it can not find it by ID.
-     * @throws Exception
+     * @throws Exception if the test fails
      */
     public void testGetElementByIdForNetscape() throws Exception {
         final WebClient client = new WebClient(BrowserVersion.NETSCAPE_6_2_3);

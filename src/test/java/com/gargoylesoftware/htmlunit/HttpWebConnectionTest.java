@@ -141,7 +141,8 @@ public class HttpWebConnectionTest extends TestCase {
 
 
     /**
-     * Tests that <code>.domain.org</code> is not altered by {@link HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
+     * Tests that <code>.domain.org</code> is not altered 
+     * by {@link HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
      */
     public void testMakeCookiesRFC2109Compliant_2PartDomainWithDot() {
         assertMakeCookiesRFC2109Compliant(".domain.org", ".domain.org");
@@ -158,7 +159,8 @@ public class HttpWebConnectionTest extends TestCase {
 
 
     /**
-     * Tests that <code>www.domain.org</code> is not altered by {@link HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
+     * Tests that <code>www.domain.org</code> is not altered 
+     * by {@link HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
      */
     public void testMakeCookiesRFC2109Compliant_3PartDomain() {
         assertMakeCookiesRFC2109Compliant("www.domain.org", "www.domain.org");
@@ -166,7 +168,8 @@ public class HttpWebConnectionTest extends TestCase {
 
 
     /**
-     * Tests that <code>www.sub.domain.org</code> is not altered by {@link HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
+     * Tests that <code>www.sub.domain.org</code> is not altered 
+     * by {@link HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
      */
     public void testMakeCookiesRFC2109Compliant_4PartDomain() {
         assertMakeCookiesRFC2109Compliant("www.sub.domain.org", "www.sub.domain.org");
@@ -183,9 +186,9 @@ public class HttpWebConnectionTest extends TestCase {
         HttpWebConnection connection = new HttpWebConnection(new WebClient());
         try {
 
-            Field httpClients_ = connection.getClass().getDeclaredField("httpClients_");
-            httpClients_.setAccessible(true);
-            Map map = (Map) httpClients_.get(connection);
+            Field httpClients = connection.getClass().getDeclaredField("httpClients_");
+            httpClients.setAccessible(true);
+            Map map = (Map) httpClients.get(connection);
 
             HttpState expectedHttpState = new HttpState();
 
