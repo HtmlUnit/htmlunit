@@ -4,7 +4,7 @@
     <pomVersion>3</pomVersion>
     <id>htmlunit</id>
     <name>htmlunit</name>
-    <currentVersion>1.3</currentVersion>
+    <currentVersion>NextRelease</currentVersion>
 
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -103,6 +103,13 @@
                 <role>Java Developer</role>
             </roles>
         </developer>
+        <developer>
+            <name>Chris Erskine</name>
+            <id>cerskine</id>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <contributors>
@@ -135,9 +142,6 @@
         </contributor>
         <contributor>
             <name>Darrell DeBoer</name>
-        </contributor>
-        <contributor>
-            <name>Chris Erskine</name>
         </contributor>
         <contributor>
             <name>David D. Kilzer</name>
@@ -187,7 +191,7 @@
         <dependency>
             <groupId>commons-jelly</groupId>
             <artifactId>commons-jelly</artifactId>
-            <version>1.0-beta-4</version>
+            <version>1.0-rc1</version>
             <url>http://jakarta.apache.org/commons/jelly</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
