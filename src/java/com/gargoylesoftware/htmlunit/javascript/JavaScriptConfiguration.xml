@@ -434,6 +434,7 @@
         </property>
         <function name="alert"/>
         <function name="blur"/>
+        <function name="clearInterval"/>
         <function name="clearTimeout"/>
         <function name="close"/>
         <function name="confirm"/>
@@ -441,17 +442,18 @@
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="focus"/>
+        <function name="moveBy"/>
+        <function name="moveTo"/>
         <function name="open"/>
         <function name="prompt"/>
-        <function name="setTimeout"/>
-        <function name="moveTo"/>
         <function name="resizeTo"/>
-        <function name="moveBy"/>
         <function name="scroll"/>
         <function name="scrollBy"/>
         <function name="scrollByLines"/>
         <function name="scrollByPages"/>
         <function name="scrollTo"/>
+        <function name="setInterval"/>
+        <function name="setTimeout"/>
     </class>
 
 </configuration>

@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                JavaScript: added dummy implementation of window.setInterval and window.clearInterval doing nothing.
+            </action>
             <action type="update" dev="yourgod" id="976471" due-to="David D. Kilzer">
                 syncronized javascript execution for multi-threaded testing
             </action>        
