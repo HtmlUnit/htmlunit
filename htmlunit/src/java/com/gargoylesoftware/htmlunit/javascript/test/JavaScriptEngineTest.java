@@ -107,7 +107,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final FakeWebConnection webConnection = new FakeWebConnection( client );
 
         final String htmlContent
-             = "<html><head><title>foo</title><script src='/foo.js' id='script1'></script>"
+             = "<html><head><title>foo</title><script src='/foo.js' id='script1'/>"
              + "</head><body>"
              + "<p>hello world</p>"
              + "<form name='form1'>"
@@ -133,7 +133,6 @@ public class JavaScriptEngineTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage )client.getPage(
                 new URL( "http://www.gargoylesoftware.com" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
-
         final HtmlScript htmlScript = (HtmlScript)page.getHtmlElementById("script1");
         assertEquals( expectedAlerts, collectedAlerts );
     }
