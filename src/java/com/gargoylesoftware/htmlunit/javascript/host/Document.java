@@ -68,7 +68,9 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 
@@ -98,7 +100,8 @@ public final class Document extends NodeImpl {
     private ElementArray images_; // has to be a member to have equality (==) working
 
     /** The buffer that will be used for calls to document.write() */
-    private StringBuffer writeBuffer_;
+    private final StringBuffer writeBuffer_ = new StringBuffer();
+    private boolean writeInCurrentDocument_ = true;
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.
@@ -169,20 +172,74 @@ public final class Document extends NodeImpl {
      * @param content the content to write
      */
     public void jsFunction_write(final String content) {
-        if (writeBuffer_ == null) {
-            // open() hasn't been called
-            final HtmlPage page = (HtmlPage) getDomNodeOrDie();
-            // get the "current" node
-            final HtmlElement current = getLastHtmlElement(page.getDocumentElement());
-            
-            ((HTMLElement) getJavaScriptNode(current.getParentNode()))
-            .jsFunction_insertAdjacentHTML(HTMLElement.POSITION_BEFORE_END, content);
+        getLog().debug("write: " + content);
+
+        writeBuffer_.append(content);
+
+        if (!writeInCurrentDocument_) {
+            getLog().debug("written content added to buffer");
         }
         else {
-            writeBuffer_.append(content);
+            // open() hasn't been called
+            final String bufferedContent = writeBuffer_.toString();
+            if (canAlreadyBeParsed(bufferedContent)) {
+                writeBuffer_.setLength(0);
+                getLog().debug("parsing buffered content: " + bufferedContent);
+    
+                final HtmlPage page = (HtmlPage) getDomNodeOrDie();
+                // get the node at which end the parsed content should be added
+                HtmlElement current = getLastHtmlElement(page.getDocumentElement());
+                getLog().debug("current: " + current);
+                
+                // quick and dirty workaround as long as IFRAME JS object aren't an HTMLElement
+                if (current instanceof HtmlInlineFrame) {
+                    current = (HtmlElement) current.getParentNode();
+                }
+                ((HTMLElement) getJavaScriptNode(current))
+                .jsFunction_insertAdjacentHTML(HTMLElement.POSITION_BEFORE_END, bufferedContent);
+            }
+            else {
+                getLog().debug("write: not enough content to parsed it now");
+            }
         }
     }
     
+
+    /**
+     * Indicates if the content is a well formed html snippet that can already be parsed to be added
+     * to the dom
+     * @param content the html snippet
+     * @return <code>false</code> if it not well formed
+     */
+    private boolean canAlreadyBeParsed(final String content) {
+        // all <script> must have their </script> because the parser doesn't close automatically this tag
+        final String contentLowerCase = content.toLowerCase();
+        if (count(contentLowerCase, "<script") != count(contentLowerCase, "</script>")) {
+            return false;
+        }
+            
+        return true;
+    }
+
+
+    /**
+     * Computes the number of occurences of the searched string in the in string
+     * @param in the string to search in
+     * @param what the string to search for
+     * @return 0 or more
+     */
+    private int count(final String in, final String what) {
+        int index = in.indexOf(what);
+        int nbOccurences = 0;
+        while (index != -1) {
+            ++nbOccurences;
+            index = in.indexOf(what, index + 1);
+        }
+
+        return nbOccurences;
+    }
+
+
     /**
      * Gets the node that is the last one when exploring following nodes, depth-first.
      * @param node the node to search
@@ -190,10 +247,9 @@ public final class Document extends NodeImpl {
      */
     HtmlElement getLastHtmlElement(final HtmlElement node) {
         final DomNode lastChild = node.getLastChild(); 
-        if (lastChild == null) {
-            return node;
-        }
-        if (lastChild instanceof DomText) {
+        if (lastChild == null 
+                || !(lastChild instanceof HtmlElement)
+                || lastChild instanceof HtmlScript) {
             return node;
         }
         
@@ -375,17 +431,17 @@ public final class Document extends NodeImpl {
      * @param args The arguments passed into the method.
      * @param function The function.
      * @return Nothing
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/open_1.asp">
+     * MSDN documentation</a>
      */
     public static Object jsFunction_open(
         final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
 
-        final Document document = (Document)scriptable;
-        if( document.writeBuffer_ == null ) {
-            document.writeBuffer_ = new StringBuffer();
-        }
-        else {
+        final Document document = (Document) scriptable;
+        if (!document.writeInCurrentDocument_) {
             document.getLog().warn("open() called when document is already open.");
         }
+        document.writeInCurrentDocument_ = false; 
         return null;
     }
 
@@ -398,7 +454,7 @@ public final class Document extends NodeImpl {
         throws
             IOException {
 
-        if (writeBuffer_  == null) {
+        if (writeInCurrentDocument_) {
             getLog().warn("close() called when document is not open.");
         }
         else {
@@ -410,7 +466,8 @@ public final class Document extends NodeImpl {
 
             webClient.loadWebResponseInto(webResponse, window);
 
-            writeBuffer_ = null;
+            writeInCurrentDocument_ = true;
+            writeBuffer_.setLength(0);
         }
     }
 
