@@ -3,6 +3,19 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="JavaScriptConfiguration.xsd">
 
+	<doclink
+		url="http://www.w3.org/DOM/"
+		descr="W3C Document Object Model (DOM) - Start"/>
+	<doclink
+		url="http://www.w3.org/DOM/TR/"
+		descr="W3C Document Object Model (DOM) - Technical Reports"/>
+	<doclink
+		url="http://www.mozilla.org/docs/dom/"
+		descr="The Document Object Model in Mozilla"/>
+	<doclink
+		url="http://msdn.microsoft.com/workshop/author/dhtml/reference/dhtml_reference_entry.asp"
+		descr="HTML and DHTML Reference on MSDN"/>
+
     <class name="ActiveXObject">
         <function name="ActiveXObject">
             <browser name="Microsoft Internet Explorer"/>
@@ -11,6 +24,7 @@
 
     <class name="Anchor" extends="FocusableHostElement">
         <javascript min-version="1.2"/>
+		
         <property name="href" readable="true" writable="true" always-available="true"/>
         <property name="name" readable="true" writable="true" always-available="true"/>
         <property name="tabindex" readable="true" writable="true"/>
@@ -24,7 +38,8 @@
     <class name="CharacterDataImpl" extends="NodeImpl">
         <property name="data" readable="true" writable="true"/>
         <property name="length" readable="true" writable="false"/>
-        <function name="appendData"/>
+        
+		<function name="appendData"/>
         <function name="deleteData"/>
         <function name="insertData"/>
         <function name="replaceData"/>
@@ -33,18 +48,35 @@
 
     <class name="Checkbox" extends="Input"/>
 
-    <class name="Document" extends="NodeImpl"><!-- NOT FINISHED -->
-        <property name="alinkColor" readable="true" writable="false"/>
-        <property name="anchors" readable="true" writable="false"/>
+    <class name="Document" extends="NodeImpl">
+		<!-- NOT FINISHED -->
+
+		<doclink
+			url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919"
+			descr="WC3 Documentation (Level 1)"/>
+		<doclink
+			url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp"
+			descr="MSDN documenation"/>
+
         <property name="all" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
+        <property name="alinkColor" readable="true" writable="false"/>
+        <property name="anchors" readable="true" writable="false"/>
         <property name="applets" readable="true" writable="false"/>
         <property name="body" readable="true" writable="false"/>
         <property name="bgColor" readable="true" writable="false"/>
-        <property name="cookie" readable="true" writable="true"/>
+        <property name="cookie" readable="true" writable="true">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cookie.asp"
+				descr="MSDN documentation"/>
+		</property>
         <property name="documentElement" readable="true" writable="false"/>
-        <property name="domain" readable="true" writable="true"/>
+        <property name="domain" readable="true" writable="true">
+			<doclink
+				url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147"
+				descr="WC3 Documentation (Level 1)"/>
+		</property>
         <property name="embeds" readable="true" writable="false">
             <javascript min-version="1.1"/>
         </property>
@@ -56,65 +88,86 @@
         <property name="lastModified" readable="true" writable="false"/>
         <property name="linkColor" readable="true" writable="false"/>
         <property name="links" readable="true" writable="false"/>
-        <property name="location" readable="true" writable="true"/>
+        <property name="location" readable="true" writable="true">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_location.asp"
+				descr="MSDN documentation"/>
+		</property>
         <property name="plugins" readable="true" writable="false">
             <javascript min-version="1.1"/>
+        </property>
+        <property name="readyState" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="referrer" readable="true" writable="false"/>
         <property name="title" readable="true" writable="true"/>
         <property name="URL" readable="true" writable="false"/>
         <property name="vlinkColor" readable="true" writable="false"/>
-        <property name="readyState" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-        </property>
-        <function name="write"/>
-        <function name="writeln"/>
-        <function name="close"/>
-        <function name="open"/>
+
         <function name="clear"/>
-        <function name="getElementById"/>
-        <function name="getElementsByTagName"/>
+        <function name="close"/>
+        <function name="createAttribute"/>
         <function name="createElement"/>
         <function name="createTextNode"/>
-        <function name="createAttribute"/>
+        <function name="getElementById"/>
         <function name="getElementsByName"/>        
+        <function name="getElementsByTagName"/>
+        <function name="open">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/open_1.asp"
+				descr="MSDN documentation"/>
+		</function>
+        <function name="write"/>
+        <function name="writeln"/>
     </class>
 
     <class name="Event">
         <property name="currentTarget" readable="true" writable="false"/>
     </class>
 
-    <class name="FileUpload" extends="Input"/><!-- NOT FINISHED -->
+    <class name="FileUpload" extends="Input">
+		<!-- NOT FINISHED -->
+	</class>
 
     <class name="FocusableHostElement" extends="HTMLElement">
         <function name="blur"/>
         <function name="focus"/>
     </class>
 
-    <class name="Form" extends="HTMLElement"><!-- NOT FINISHED -->
-        <property name="name" readable="true" writable="false"/>
-        <property name="length" readable="true" writable="false"/>
-        <property name="elements" readable="true" writable="false"/>
+    <class name="Form" extends="HTMLElement">
+		<!-- NOT FINISHED -->
+		
+		<doclink
+			url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/form.asp"
+			descr="MSDN documentation"/>
+        
         <property name="action" readable="true" writable="true"/>
-        <property name="method" readable="true" writable="true"/>
-        <property name="target" readable="true" writable="true"/>
+        <property name="elements" readable="true" writable="false"/>
         <property name="encoding" readable="true" writable="true"/>
-        <function name="submit"/>
+        <property name="length" readable="true" writable="false"/>
+        <property name="method" readable="true" writable="true"/>
+		<property name="name" readable="true" writable="false"/>
+        <property name="target" readable="true" writable="true"/>
+
         <function name="reset"/>
+		<function name="submit"/>
     </class>
 
     <class name="Frame" extends="HTMLElement">
-        <property name="src" readable="true" writable="true"/>
         <property name="onload" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="3"/>
         </property>
+        <property name="src" readable="true" writable="true"/>
     </class>
 
-    <class name="Hidden" extends="Input"/><!-- NOT FINISHED -->
+    <class name="Hidden" extends="Input">
+		<!-- NOT FINISHED -->
+	</class>
 
     <class name="History">
         <property name="length" readable="true" writable="false"/>
+
         <function name="back"/>
         <function name="forward"/>
         <function name="go"/>
@@ -125,6 +178,9 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="children" readable="true" writable="false">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/children.asp"
+				descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="5.5"/>
         </property>
         <property name="className" readable="true" writable="true">
@@ -220,6 +276,9 @@
             <browser name="Netscape" min-version="3"/>
         </property>
         <property name="outerHTML" readable="true" writable="true">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/outerhtml.asp"
+				descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="outerText" readable="true" writable="true">
@@ -243,6 +302,10 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </property>
+		
+        <function name="addBehavior">
+            <browser name="Microsoft Internet Explorer" min-version="5"/>
+        </function>
         <function name="contains">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
@@ -250,9 +313,13 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </function>
-        <function name="handleEvent"/>
+        <function name="getAttributeNode"/>
         <function name="getElementsByTagName"/>
+        <function name="handleEvent"/>
         <function name="insertAdjacentHTML">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertadjacenthtml.asp"
+				descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
         <function name="insertAdjacentText">
@@ -261,8 +328,6 @@
         <function name="onhelp">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
-        <function name="getAttributeNode"/>
-        <function name="setAttributeNode"/>
         <function name="removeAttribute">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
@@ -274,9 +339,7 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </function>
-        <function name="addBehavior">
-            <browser name="Microsoft Internet Explorer" min-version="5"/>
-        </function>
+        <function name="setAttributeNode"/>
         <function name="removeBehavior">
             <browser name="Microsoft Internet Explorer" min-version="5"/>
         </function>
@@ -303,6 +366,7 @@
         <property name="value" readable="true" writable="true"/>
         <!-- This property is only in DOM1 so it  -->
         <property name="disabled" readable="true" writable="true"/>
+
         <function name="click"/>
         <function name="select"/>
     </class>
@@ -315,11 +379,16 @@
         <property name="port" readable="true" writable="false"/>
         <property name="protocol" readable="true" writable="false"/>
         <property name="search" readable="true" writable="false"/>
+
         <function name="reload"/>
         <function name="refresh"/>
     </class>
 
     <class name="Navigator">
+		<doclink
+			url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_navigator.asp"
+			descr="MSDN documentation"/>
+		
         <property name="appCodeName" readable="true" writable="false"/>
         <property name="appMinorVersion" readable="true" writable="false"/>
         <property name="appName" readable="true" writable="false"/>
@@ -332,7 +401,8 @@
         <property name="systemLanguage" readable="true" writable="false"/>
         <property name="userAgent" readable="true" writable="false"/>
         <property name="userLanguage" readable="true" writable="false"/>
-        <function name="javaEnabled"/>
+    
+	    <function name="javaEnabled"/>
         <function name="plugins"/>
         <function name="taintEnabled"/>
     </class>
@@ -346,35 +416,58 @@
         <property name="nodeValue" readable="true" writable="true"/>
         <property name="parentNode" readable="true" writable="false"/>
         <property name="previousSibling" readable="true" writable="false"/>
+
         <function name="appendChild"/>
         <function name="cloneNode"/>
+        <function name="hasChildNodes"/>        
         <function name="insertBefore"/>
         <function name="removeChild"/>
         <function name="replaceChild"/>
-        <function name="hasChildNodes"/>        
     </class>
 
     <class name="Option" extends="HTMLElement">
-        <property name="text" readable="true" writable="true"/>
-        <property name="value" readable="true" writable="true"/>
         <property name="defaultSelected" readable="true" writable="false"/>
         <property name="selected" readable="true" writable="true"/>
+        <property name="text" readable="true" writable="true"/>
+        <property name="value" readable="true" writable="true"/>
     </class>
 
-    <class name="Password" extends="Input"/><!-- NOT FINISHED -->
+    <class name="Password" extends="Input">
+		<!-- NOT FINISHED -->
+	</class>
 
-    <class name="Radio" extends="Input"/><!-- NOT FINISHED -->
+    <class name="Radio" extends="Input">
+		<!-- NOT FINISHED -->
+	</class>
 
     <class name="RowContainer" extends="HTMLElement">
         <property name="rows" readable="true" writable="false"/>
-        <function name="deleteRow"/>
-        <function name="insertRow"/>
+		
+        <function name="deleteRow">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deleterow.asp"
+				descr="MSDN documentation"/>
+        </function>
+        <function name="insertRow">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertrow.asp"
+				descr="MSDN documentation"/>
+        </function>
         <function name="moveRow"/>
     </class>
 
-    <class name="Reset" extends="Input"/><!-- NOT FINISHED -->
+    <class name="Reset" extends="Input">
+		<!-- NOT FINISHED -->
+	</class>
 
     <class name="Screen">
+		<doclink
+			url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_screen.asp"
+			descr="MSDN documentation"/>
+		<doclink
+			url="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html"
+			descr="Mozilla documentation"/>
+		
         <property name="availHeight" readable="true" writable="false"/>
         <property name="availLeft" readable="true" writable="false"/>
         <property name="availTop" readable="true" writable="false"/>
@@ -394,27 +487,57 @@
         <property name="width" readable="true" writable="false"/>
     </class>
 
-    <class name="Select" extends="Input"><!-- NOT FINISHED -->
-        <property name="length" readable="true" writable="true"/>
-        <function name="add"/>
+    <class name="Select" extends="Input">
+		<!-- NOT FINISHED -->
+        
+		<property name="length" readable="true" writable="true"/>
+        
+		<function name="add"/>
         <function name="remove"/>
     </class>
 
-    <class name="Submit" extends="Input"><!-- NOT FINISHED -->
-        <property name="length" readable="true" writable="false"/>
+    <class name="Submit" extends="Input">
+		<!-- NOT FINISHED -->
+        
+		<property name="length" readable="true" writable="false"/>
     </class>
 
     <class name="Table" extends="RowContainer">
-        <property name="caption" readable="true" writable="false"/>
-        <property name="tFoot" readable="true" writable="false"/>
-        <property name="tHead" readable="true" writable="false"/>
+		<property name="caption" readable="true" writable="false"/>
         <property name="tBodies" readable="true" writable="false"/>
-        <function name="createCaption"/>
-        <function name="createTFoot"/>
-        <function name="createTHead"/>
-        <function name="deleteCaption"/>
-        <function name="deleteTFoot"/>
-        <function name="deleteTHead"/>
+		<property name="tFoot" readable="true" writable="false"/>
+        <property name="tHead" readable="true" writable="false"/>
+        
+        <function name="createCaption">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createcaption.asp"
+				descr="MSDN documentation"/>
+        </function>
+        <function name="createTFoot">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createtfoot.asp"
+				descr="MSDN documentation"/>
+        </function>
+        <function name="createTHead">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createthead.asp"
+				descr="MSDN documentation"/>
+        </function>
+        <function name="deleteCaption">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp"
+				descr="MSDN documentation"/>
+        </function>
+        <function name="deleteTFoot">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp"
+				descr="MSDN documentation"/>
+        </function>
+        <function name="deleteTHead">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletethead.asp"
+				descr="MSDN documentation"/>
+        </function>
     </class>
 
     <class name="TableBody" extends="RowContainer"/>
@@ -423,9 +546,13 @@
 
     <class name="TableHeader" extends="RowContainer"/>
 
-    <class name="Text" extends="Input"/><!-- NOT FINISHED -->
+    <class name="Text" extends="Input">
+		<!-- NOT FINISHED -->
+	</class>
 
-    <class name="Textarea" extends="Input"/><!-- NOT FINISHED -->
+    <class name="Textarea" extends="Input">
+		<!-- NOT FINISHED -->
+	</class>
 
     <class name="TextImpl" extends="CharacterDataImpl">
         <function name="splitText"/>
@@ -433,6 +560,10 @@
 
     <class name="Window">
         <!-- NOT FINISHED -->
+		
+		<doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp"
+				descr="MSDN documenation"/>
+
         <property name="location" readable="true" writable="true">
             <browser name="Netscape" min-version="3" max-version="5"/>
             <browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>
@@ -454,13 +585,19 @@
         <property name="onerror" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>
         </property>
+		
         <function name="alert"/>
         <function name="blur"/>
-        <function name="clearInterval"/>
+        <function name="clearInterval">
+			<doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp"
+					descr="MSDN documenation"/>
+		</function>
         <function name="clearTimeout"/>
         <function name="close"/>
         <function name="confirm"/>
         <function name="execScript">
+			<doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/execscript.asp"
+					descr="MSDN documenation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="focus"/>
@@ -474,7 +611,11 @@
         <function name="scrollByLines"/>
         <function name="scrollByPages"/>
         <function name="scrollTo"/>
-        <function name="setInterval"/>
+        <function name="setInterval">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp"
+				descr="MSDN documenation"/>
+		</function>
         <function name="setTimeout"/>
     </class>
 
