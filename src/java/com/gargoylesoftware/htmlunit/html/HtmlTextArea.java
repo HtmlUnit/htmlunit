@@ -37,16 +37,19 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import org.apache.html.dom.HTMLTextAreaElementImpl;
+import org.w3c.dom.Element;
+
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
-import org.w3c.dom.Element;
 
 /**
  *  Wrapper for the html element "textarea"
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- */
+ * @author  <a href="mailto:BarnabyCourt@users.sourceforge.net">Barnaby Court</a>
+  */
 public class HtmlTextArea
          extends HtmlElement
          implements SubmittableElement {
@@ -61,6 +64,7 @@ public class HtmlTextArea
      */
     HtmlTextArea( final HtmlPage page, final Element element ) {
         super( page, element );
+        value_ = getText();
     }
 
 
@@ -81,12 +85,8 @@ public class HtmlTextArea
      * @return The text
      */
     public final String getText() {
-        if( value_ == null ) {
-            return asText();
-        }
-        else {
-            return value_;
-        }
+        HTMLTextAreaElementImpl textElement = (HTMLTextAreaElementImpl) getElement();
+        return textElement.getTextContent();
     }
 
 
@@ -114,7 +114,9 @@ public class HtmlTextArea
      */
     public final void setText( final String newValue ) {
         Assert.notNull("newValue", newValue);
-        value_ = newValue;
+
+        HTMLTextAreaElementImpl textElement = (HTMLTextAreaElementImpl) getElement();
+        textElement.setTextContent(newValue);
     }
 
 
@@ -136,7 +138,7 @@ public class HtmlTextArea
      * Return the value of this element to what it was at the time the page was loaded.
      */
     public void reset() {
-        value_ = null;
+        setText(value_);
     }
 
 

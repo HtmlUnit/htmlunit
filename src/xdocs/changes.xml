@@ -115,8 +115,12 @@
             	Added instructions for the "how to compile from cvs" document.
             	Patch provided by Barnaby Court.
             </action>
+            <action type="update" dev="mbowler" due-to="Barnaby Court" id="759217">
+            	Changed HtmlTextArea.setText() to actually modify the DOM
+            	Patch provided by Barnaby Court.
+            </action>
         </release>
-    </body>
+	</body>
 
 
     <body>
