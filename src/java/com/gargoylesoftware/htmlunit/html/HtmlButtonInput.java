@@ -6,10 +6,13 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.Page;
+import java.io.IOException;
 import org.w3c.dom.Element;
 
 /**
- *  Wrapper for the html element "input"
+ *  Wrapper for the html element "input" where type is "button"
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -31,6 +34,23 @@ public class HtmlButtonInput extends HtmlInput {
      * Reset this element to its original values.  This is a no-op for a button.
      */
     public void reset() {
+    }
+
+
+    /**
+     *  Submit the form that contains this input
+     *
+     * @return  The Page that is the result of submitting this page to the
+     *      server
+     * @exception  IOException If an io error occurs
+     * @exception  ElementNotFoundException If a particular xml element could
+     *      not be found in the dom model
+     */
+    public Page click()
+        throws
+            IOException,
+            ElementNotFoundException {
+        return super.click();
     }
 }
 

@@ -1,6 +1,15 @@
 <?xml version="1.0"?>
 <document title="Change History">
 
+<section title="1.3">
+	<change-log>
+		<change type="new">
+			Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlButtonInput#click()</javadoc>
+		</change>
+	</change-log>
+</section>
+
+
 <section title="1.2">
 	<change-log>
 		<change type="fix">
