@@ -10,6 +10,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import java.net.MalformedURLException;
 import java.net.URL;
 import junit.textui.TestRunner;
@@ -23,7 +24,7 @@ import junit.textui.TestRunner;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class SanityCheck extends WebTestCase {
-    private static final BrowserVersion browserVersion_ = BrowserVersion.MOZILLA_1_0;
+    private static final BrowserVersion BrowserVersion_ = BrowserVersion.MOZILLA_1_0;
 
     /**
      * Create an instance.
@@ -50,7 +51,7 @@ public class SanityCheck extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testYahooMail() throws Exception {
-        final WebClient webClient = new WebClient(browserVersion_);
+        final WebClient webClient = new WebClient(BrowserVersion_);
         assertInstanceOf(webClient.getPage( new URL( "http://mail.yahoo.com/" ) ), HtmlPage.class);
     }
 
@@ -60,7 +61,7 @@ public class SanityCheck extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testYahoo() throws Exception {
-        final WebClient webClient = new WebClient(browserVersion_);
+        final WebClient webClient = new WebClient(BrowserVersion_);
         assertInstanceOf( webClient.getPage( new URL( "http://yahoo.com/" ) ), HtmlPage.class );
     }
 
@@ -70,7 +71,7 @@ public class SanityCheck extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testIBM() throws Exception {
-        final WebClient webClient = new WebClient(browserVersion_);
+        final WebClient webClient = new WebClient(BrowserVersion_);
         webClient.setRedirectEnabled( true );
         final HtmlPage page = (HtmlPage)webClient.getPage( new URL( "http://www.ibm.com/" ) );
         assertEquals( "http://www.ibm.com/us/", page.getWebResponse().getUrl().toExternalForm() );
@@ -82,7 +83,7 @@ public class SanityCheck extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testAlphaWorks() throws Exception {
-        final WebClient webClient = new WebClient(browserVersion_);
+        final WebClient webClient = new WebClient(BrowserVersion_);
         assertInstanceOf(webClient.getPage(new URL( "http://www.alphaworks.ibm.com" ) ), HtmlPage.class);
     }
 
@@ -92,7 +93,7 @@ public class SanityCheck extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testCNN() throws Exception {
-        final WebClient webClient = new WebClient(browserVersion_);
+        final WebClient webClient = new WebClient(BrowserVersion_);
         assertInstanceOf( webClient.getPage( new URL( "http://www.cnn.com" ) ), HtmlPage.class);
     }
 
@@ -102,7 +103,7 @@ public class SanityCheck extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testToyotaCanada() throws Exception {
-        final WebClient webClient = new WebClient(browserVersion_);
+        final WebClient webClient = new WebClient(BrowserVersion_);
         assertInstanceOf(webClient.getPage( new URL( "http://www.toyota.ca" ) ), HtmlPage.class);
     }
 
@@ -113,7 +114,7 @@ public class SanityCheck extends WebTestCase {
      */
     public void testSourceForge_secure() throws Exception {
         try {
-            final WebClient webClient = new WebClient(browserVersion_);
+            final WebClient webClient = new WebClient(BrowserVersion_);
             webClient.setPrintContentOnFailingStatusCode(true);
             assertInstanceOf( webClient.getPage( new URL( "https://sourceforge.net/projects/htmlunit/" ) ), HtmlPage.class );
         }
@@ -129,7 +130,7 @@ public class SanityCheck extends WebTestCase {
      */
     public void testYahooLogin_secure() throws Exception {
         try {
-            final WebClient webClient = new WebClient(browserVersion_);
+            final WebClient webClient = new WebClient(BrowserVersion_);
             final HtmlPage page = (HtmlPage)webClient.getPage( new URL( "https://login.yahoo.com/" ) );
             final HtmlForm form = page.getFormByName("login_form");
             assertNotNull(form);
@@ -145,7 +146,7 @@ public class SanityCheck extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testAmazonCanada() throws Exception {
-        final WebClient webClient = new WebClient(browserVersion_);
+        final WebClient webClient = new WebClient(BrowserVersion_);
         assertInstanceOf( webClient.getPage( new URL( "http://www.amazon.ca/" ) ), HtmlPage.class );
     }
 
@@ -155,7 +156,7 @@ public class SanityCheck extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testCnnAfterHours() throws Exception {
-        final WebClient webClient = new WebClient(browserVersion_);
+        final WebClient webClient = new WebClient(BrowserVersion_);
         assertInstanceOf( webClient.getPage( new URL( "http://money.cnn.com/markets/afterhours/" ) ), HtmlPage.class );
     }
 
@@ -168,6 +169,57 @@ public class SanityCheck extends WebTestCase {
         System.out.println( "=====================================" );
         System.out.println( "==  Starting test: " + getName() );
         System.out.println( "=====================================" );
+    }
+
+
+    private URL getPrintEnvUrl() throws MalformedURLException {
+        return new URL("http://htmlunit.sourceforge.net/cgi-bin/printenv");
+    }
+
+
+    /**
+     * Test against htmlunit.sourceforge.net to make sure parameters are being passed
+     * correctly for GET methods
+     * @throws Exception If something goes wrong.
+     */
+    public void testGetMethodWithParameters() throws Exception {
+        final WebClient webClient = new WebClient();
+        final HtmlPage firstPage = (HtmlPage)webClient.getPage(getPrintEnvUrl());
+
+        assertEquals("GET", firstPage.getHtmlElementById("REQUEST_METHOD").asText());
+
+        final HtmlForm form = firstPage.getFormByName("form1");
+        assertEquals("get", form.getMethodAttribute());
+
+        final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button1");
+        final HtmlPage secondPage = (HtmlPage)button.click();
+        assertEquals("GET", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
+        assertEquals("textfield1=*&button1=PushMe",
+            secondPage.getHtmlElementById("QUERY_STRING").asText());
+        assertEquals("", secondPage.getHtmlElementById("CONTENT").asText());
+    }
+
+
+    /**
+     * Test against htmlunit.sourceforge.net to make sure parameters are being passed
+     * correctly for POST methods.
+     * @throws Exception If something goes wrong.
+     */
+    public void testPostMethodWithParameters() throws Exception {
+        final WebClient webClient = new WebClient();
+        final HtmlPage firstPage = (HtmlPage)webClient.getPage(getPrintEnvUrl());
+
+        assertEquals("GET", firstPage.getHtmlElementById("REQUEST_METHOD").asText());
+
+        final HtmlForm form = firstPage.getFormByName("form1");
+        form.setMethodAttribute("post");
+
+        final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button1");
+        final HtmlPage secondPage = (HtmlPage)button.click();
+        assertEquals("POST", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
+        assertEquals("", secondPage.getHtmlElementById("QUERY_STRING").asText());
+        assertEquals("textfield1=*&button1=PushMe",
+            secondPage.getHtmlElementById("CONTENT").asText());
     }
 }
 
