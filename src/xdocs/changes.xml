@@ -7,6 +7,9 @@
 			Fixed bug where redirection didn't happen correctly if the location header contained
 			multiple entries seperated by commas
 		</change>
+		<change type="fix">
+			Fixed bug where some success status codes (not 200) were being reported as errors
+		</change>
 	</change-log>
 </section>
 
