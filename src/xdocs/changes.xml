@@ -68,6 +68,17 @@
 			Added protocol package for url protocols and added protocol/javascript package for
 			code that supports javascript urls
 		</change>
+		<change type="change">
+			Removed deprecated method WebClient.setBrowserVersion(BrowserVersion).  No replacement
+			for this method - browser versions must be set in the constructor of the WebClient.
+		</change>
+		<change type="change">
+			Removed deprecated method HtmlPage.executeJavascriptIfPossible(String,String). Use
+			HtmlPage.executeJavaScriptIfPossible(String,String,boolean) instead.
+		</change>
+		<change type="change">
+			Removed deprecated method HtmlPage.getTitle().  Use HtmlPage.getTitleText() instead.
+		</change>
 	</change-log>
 </section>
 

@@ -598,28 +598,8 @@ public class WebClient {
 
 
     /**
-     * This method is deprecated - do not use.  It doesn't make any sense to change the
-     * browser that we are simulating part was through the use of the client.  There
-     * are many spots, particularly in the javascript support, that initialize things
-     * differently based on the browser version in use.  If that version was able to
-     * change after initialization then unpredictable behaviour could result.
-     *
-     * @param browserVersion The new browser version.
-     * @deprecated Pass the browser version into the constructor.  This method will be
-     * removed before the final 1.1 release.
-     */
-    public void setBrowserVersion( final BrowserVersion browserVersion ) {
-        assertNotNull("browserVersion", browserVersion);
-        if( browserVersion != browserVersion_ ) {
-            throw new IllegalStateException(
-                "Not allowed to change the browser version after the client has been created");
-        }
-    }
-
-
-    /**
      * Return the current browser version
-     * @return the current browser version or null if the default version is being used.
+     * @return the current browser version.
      */
     public BrowserVersion getBrowserVersion() {
         return browserVersion_;
