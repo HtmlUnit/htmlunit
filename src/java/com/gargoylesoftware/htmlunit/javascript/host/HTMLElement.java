@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.apache.html.dom.HTMLDocumentImpl;
 import org.mozilla.javascript.Scriptable;
 
 /**
@@ -197,8 +198,10 @@ public class HTMLElement extends SimpleScriptable {
             return null;
         }
         if ( ( parentXmlNode instanceof Element ) == false ) {
-            getLog().warn( "Parent XML node is not an Element.  Only Elements are currently supported.  Parent class: " 
-                + parentXmlNode.getClass() );
+            if( parentXmlNode instanceof HTMLDocumentImpl == false ) {
+                throw new IllegalStateException( "Parent XML node is not an Element.  Only Elements are currently supported.  Parent class: " 
+                    + parentXmlNode.getClass() );
+            }
             return null;
         }
         final Element parentXmlElement = (Element) parentXmlNode;
