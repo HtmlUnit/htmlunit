@@ -215,6 +215,17 @@ public class SanityCheck extends WebTestCase {
 
 
     /**
+     * Test against a live server: Adobe Acrobat Reader download step 2
+     * @throws Exception If something goes wrong.
+     */
+    public void testAdobeAcrobatReaderDownloadStep2() throws Exception {
+        final WebClient webClient = new WebClient();
+        assertInstanceOf( webClient.getPage( new URL( "http://www.adobe.com/products/acrobat/readstep2.html" ) ),
+                          HtmlPage.class );
+    }
+
+
+    /**
      * Print out the name of the test that is running.
      */
     public void setUp() {
