@@ -787,8 +787,17 @@ public class WebClient {
      * @exception  MalformedURLException If an error occurred when creating a
      *      URL object
      */
-    public static URL expandUrl( final URL baseUrl, final String relativeUrl )
+    public static URL expandUrl( final URL baseUrl, String relativeUrl )
         throws MalformedURLException {
+
+        if( relativeUrl.indexOf("%") != -1 ) {
+            try {
+                relativeUrl = org.apache.commons.httpclient.util.URIUtil.decode(relativeUrl);
+            }
+            catch( Exception e ) {
+                e.printStackTrace();
+            }
+        }
 
         // Was a protocol specified?
         if( relativeUrl.indexOf( ":" ) != -1 ) {
