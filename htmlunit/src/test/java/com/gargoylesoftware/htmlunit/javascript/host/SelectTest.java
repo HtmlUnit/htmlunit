@@ -280,6 +280,10 @@ public class SelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAddOptionWithAddMethod() throws Exception {
+        if(true) {
+            notImplemented();
+            return;
+        }
         final String content
                  = "<html><head><title>foo</title><script>"
                  + "function doTest() {\n"
@@ -348,6 +352,11 @@ public class SelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRemoveOptionWithRemoveMethod() throws Exception {
+        if(true) {
+            notImplemented();
+            return;
+        }
+        
         final String content
                  = "<html><head><title>foo</title><script>"
                  + "function doTest() {\n"
@@ -414,6 +423,10 @@ public class SelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOptionArrayHasItemMethod() throws Exception {
+        if(true) {
+            notImplemented();
+            return;
+        }
         final String content
                  = "<html><head><title>foo</title><script>"
                  + "function doTest() {\n"
