@@ -88,14 +88,14 @@ public class HttpWebConnection extends WebConnection {
         try {
             long startTime, endTime;
 
-            HttpMethod httpMethod = makeHttpMethod( url, submitMethod, parameters, httpClient, requestHeaders );
+            HttpMethod httpMethod = makeHttpMethod( url, submitMethod, parameters, requestHeaders );
             startTime = System.currentTimeMillis();
             int responseCode = httpClient.executeMethod( httpMethod );
             endTime = System.currentTimeMillis();
             if( responseCode == 401 ) {    // Authentication required
-                final KeyValuePair pair = getCredentials( httpMethod, httpClient, url );
+                final KeyValuePair pair = getCredentials( httpMethod, url );
                 if( pair != null ) {
-                    httpMethod = makeHttpMethod( url, submitMethod, parameters, httpClient, requestHeaders );
+                    httpMethod = makeHttpMethod( url, submitMethod, parameters, requestHeaders );
                     addCredentialsToHttpMethod( httpMethod, pair );
                     startTime = System.currentTimeMillis();
                     responseCode = httpClient.executeMethod( httpMethod );
@@ -131,7 +131,7 @@ public class HttpWebConnection extends WebConnection {
 
 
     private KeyValuePair getCredentials(
-            final HttpMethod httpMethod, final HttpClient httpClient, final URL url ) {
+            final HttpMethod httpMethod, final URL url ) {
 
         final Header challengeHeader = httpMethod.getResponseHeader( "WWW-Authenticate" );
         final String realmString = challengeHeader.getValue().trim();
@@ -168,7 +168,6 @@ public class HttpWebConnection extends WebConnection {
             final URL url,
             final SubmitMethod method,
             final List parameters,
-            final HttpClient httpClient,
             final Map requestHeaders )
         throws
             IOException {
