@@ -53,7 +53,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * @return  See above
      */
     public boolean isChecked() {
-        return getAttributeValue("checked").length() != 0;
+         return isAttributeDefined("checked");
     }
 
 
