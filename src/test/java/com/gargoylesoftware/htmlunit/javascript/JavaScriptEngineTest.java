@@ -809,6 +809,10 @@ public class JavaScriptEngineTest extends WebTestCase {
         private ScriptEngine delegate_;
         private int scriptExecutionCount_ = 0;
 
+        /**
+         * Create an instance
+         * @param delegate The ScriptEngine that we're wrapping.
+         */
         protected CountingJavaScriptEngine(ScriptEngine delegate) {
             super(delegate.getWebClient());
             delegate_ = delegate;
