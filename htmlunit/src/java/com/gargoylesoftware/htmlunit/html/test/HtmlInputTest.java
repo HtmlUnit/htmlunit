@@ -70,7 +70,7 @@ public final class HtmlInputTest extends WebTestCase {
         radioButton.setChecked( true );
 
         // Test that only one value for the radio button is being passed back to the server
-        final HtmlPage secondPage = ( HtmlPage )pushButton.submit();
+        final HtmlPage secondPage = ( HtmlPage )pushButton.click();
 
         final List expectedParameters = new ArrayList();
         expectedParameters.add( new KeyValuePair( "foo", "2" ) );

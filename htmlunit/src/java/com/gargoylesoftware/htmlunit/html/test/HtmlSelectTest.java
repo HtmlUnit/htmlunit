@@ -77,7 +77,7 @@ public class HtmlSelectTest extends WebTestCase {
                 form.getAllSubmittableElements() );
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = ( HtmlPage )button.submit();
+        final HtmlPage secondPage = ( HtmlPage )button.click();
 
         final List expectedParameters = new ArrayList();
         expectedParameters.add( new KeyValuePair( "select1", "option2" ) );
@@ -123,7 +123,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlSubmitInput button = ( HtmlSubmitInput )form.getInputByName( "button" );
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = ( HtmlPage )button.submit();
+        final HtmlPage secondPage = ( HtmlPage )button.click();
 
         final List expectedParameters = new ArrayList();
         expectedParameters.add( new KeyValuePair( "button", "foo" ) );
@@ -171,7 +171,7 @@ public class HtmlSelectTest extends WebTestCase {
         select.setSelectedAttribute( "option3", true );
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = ( HtmlPage )button.submit();
+        final HtmlPage secondPage = ( HtmlPage )button.click();
 
         final List expectedParameters = new ArrayList();
         expectedParameters.add( new KeyValuePair( "select1", "option3" ) );
@@ -221,7 +221,7 @@ public class HtmlSelectTest extends WebTestCase {
         select.setSelectedAttribute( "option2", true );
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = ( HtmlPage )button.submit();
+        final HtmlPage secondPage = ( HtmlPage )button.click();
 
         final List expectedParameters = new ArrayList();
         expectedParameters.add( new KeyValuePair( "select1", "option1" ) );
@@ -317,7 +317,7 @@ public class HtmlSelectTest extends WebTestCase {
         select.fakeSelectedAttribute( "newOption" );
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = ( HtmlPage )button.submit();
+        final HtmlPage secondPage = ( HtmlPage )button.click();
 
         final List expectedParameters = new ArrayList();
         expectedParameters.add( new KeyValuePair( "select1", "newOption" ) );

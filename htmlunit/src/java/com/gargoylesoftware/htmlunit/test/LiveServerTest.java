@@ -53,7 +53,7 @@ public class LiveServerTest extends WebTestCase {
         assertEquals("get", form.getMethodAttribute());
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button1");
-        final HtmlPage secondPage = (HtmlPage)button.submit();
+        final HtmlPage secondPage = (HtmlPage)button.click();
         assertEquals("GET", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
         assertEquals("textfield1=*&button1=PushMe",
             secondPage.getHtmlElementById("QUERY_STRING").asText());
@@ -71,7 +71,7 @@ public class LiveServerTest extends WebTestCase {
         form.setMethodAttribute("post");
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button1");
-        final HtmlPage secondPage = (HtmlPage)button.submit();
+        final HtmlPage secondPage = (HtmlPage)button.click();
         assertEquals("POST", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
         assertEquals("", secondPage.getHtmlElementById("QUERY_STRING").asText());
         assertEquals("textfield1=*&button1=PushMe",

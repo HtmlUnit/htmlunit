@@ -58,7 +58,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput submitInput = (HtmlSubmitInput)form.getInputByName("button");
-        final HtmlPage secondPage = (HtmlPage)submitInput.submit();
+        final HtmlPage secondPage = (HtmlPage)submitInput.click();
 
         assertEquals(
             Collections.singletonList(new KeyValuePair("button", "foo")),
@@ -88,7 +88,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
         final HtmlSubmitInput submitInput = (HtmlSubmitInput)form.getInputByName("button");
 
-        final HtmlPage secondPage = (HtmlPage)submitInput.submit();
+        final HtmlPage secondPage = (HtmlPage)submitInput.click();
 
         final List expectedAlerts = Arrays.asList( new String[]{"foo"} );
         assertEquals( expectedAlerts, collectedAlerts );
