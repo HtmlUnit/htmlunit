@@ -106,6 +106,33 @@ public class FormTest extends WebTestCase {
     }
 
 
+    /**
+     * If there is only one radio button with a specified name then that radio
+     * button will be returned for the name, not an array of radio buttons.  Test
+     * this.
+     */
+    public void testRadioButton_OnlyOne() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>\n"
+                 + "alert(document.form1['radio1'].value);"
+                 + "</script></head><body>\n"
+                 + "<p>hello world</p>"
+                 + "<form name='form1'>"
+                 + "    <input type='radio' name='radio1' value='1'/>"
+                 + "</form>"
+                 + "</body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "1"
+         } );
+
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
     public void testActionProperty() throws Exception {
         final String jsProperty = "action";
         final String htmlProperty = "action";
