@@ -40,6 +40,10 @@
                         <a href="http://www.junit.org">JUnit</a>.  No code will get merged without tests.
                     </li>
                     <li>
+                    	If you are fixing a bug but not adding new functionality then we still require
+                    	tests that would fail with the old behaviour.
+                    </li>
+                    <li>
                         All existing unit tests must pass.
                     </li>
                     <li>
@@ -57,7 +61,19 @@
                         author at the top.  Refer to <a href="http://java.sun.com/j2se/javadoc/writingdoccomments/">
                         How to Write JavaDoc</a> for more specific information on javadoc.
                     </li>
+                    <li>
+                    	Please provide one patch only that contains all the files.  Some people
+                    	will submit seperate patches for each file in the diff and this just
+                    	makes more work for the committer.  Please also submit it in .diff format, 
+                    	not zipped up.
+                    </li>
                 </ul>
+            </p>
+            <p>
+            	<b>IMPORTANT: Patches without tests will be rejected</b>.  Occassionally
+            	one of the committers will have the time to write the tests for you but this
+            	is rare.  If you are not sure how to write a test for a given situation then
+            	ask on the developer mailing list.
             </p>
             <p>
                 Additional documentation or code samples are always appreciated.  We're focussed on writing
