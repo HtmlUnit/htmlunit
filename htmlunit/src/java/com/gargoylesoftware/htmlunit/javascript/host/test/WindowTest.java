@@ -112,6 +112,10 @@ public class WindowTest extends WebTestCase {
 
         assertEquals( "First", ((HtmlPage)firstWebWindow.getEnclosedPage()).getTitleText());
         assertEquals( "Second", ((HtmlPage)secondWebWindow.getEnclosedPage()).getTitleText());
+
+        final WebWindowEvent changedEvent = (WebWindowEvent)eventCatcher.getEventAt(2);
+        assertNull( changedEvent.getOldPage() );
+        assertEquals( "Second", ((HtmlPage)changedEvent.getNewPage()).getTitleText() );
     }
 
 
