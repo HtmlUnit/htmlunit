@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1088655">
+                Fixed bug for JS wrapped in HTML comments on one line.
+            </action>
             <action type="update" dev="mguillem">
                 Allow to set commons-httpclient cookie policy using system property. 
             </action>
