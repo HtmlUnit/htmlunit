@@ -194,6 +194,14 @@ public class NodeImpl extends SimpleScriptable {
         }
         return removedChild;
     }
+    
+    /**
+     * Returns whether this node has any children.
+     * @return boolean true if this node has any children, false otherwise.
+     */
+    public boolean jsFunction_hasChildNodes() {
+        return getDomNodeOrDie().getChildIterator().hasNext();
+    }    
 
 
     /**
