@@ -36,15 +36,12 @@ public class HtmlSubmitInput extends HtmlInput {
      * @deprecated Use {@link #click()} instead
      * @return  The Page that is the result of submitting this page to the
      *      server
-     * @exception  IllegalStateException If the type of this input isn't
-     *      "submit"
      * @exception  IOException If an io error occurs
      * @exception  ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
      */
     public Page submit()
         throws
-            IllegalStateException,
             IOException,
             ElementNotFoundException {
 
@@ -57,26 +54,15 @@ public class HtmlSubmitInput extends HtmlInput {
      *
      * @return  The Page that is the result of submitting this page to the
      *      server
-     * @exception  IllegalStateException If the type of this input isn't
-     *      "submit"
      * @exception  IOException If an io error occurs
      * @exception  ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
      */
     public Page click()
         throws
-            IllegalStateException,
             IOException,
             ElementNotFoundException {
-
-        final String onClick = getOnClickAttribute();
-        final HtmlPage page = getPage();
-        if( onClick.length() == 0 || page.getWebClient().isJavaScriptEnabled() == false ) {
-            return getEnclosingFormOrDie().submit(this);
-        }
-        else {
-            return page.executeJavascriptIfPossible(onClick, "HtmlSubmitInput onClick handler");
-        }
+        return super.click();
     }
 }
 
