@@ -39,12 +39,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -53,6 +49,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public class StyleTest extends WebTestCase {
 
@@ -69,9 +66,6 @@ public class StyleTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testStyle_OneCssAttribute() throws Exception {
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
-
         final String firstContent
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -82,14 +76,8 @@ public class StyleTest extends WebTestCase {
             + "}\n</script></head>"
             + "<body onload='doTest()'><div id='div1' style='color: black'>foo</div></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        final HtmlPage page = loadPage(firstContent, collectedAlerts);
 
         final List expectedAlerts = Arrays.asList( new String[]{"black", "pink"} );
         assertEquals( expectedAlerts, collectedAlerts );
@@ -102,9 +90,6 @@ public class StyleTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testStyle_MultipleCssAttributes() throws Exception {
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
-
         final String firstContent
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -116,14 +101,8 @@ public class StyleTest extends WebTestCase {
             + "<body onload='doTest()'>"
             + "<div id='div1' style='color: black;background:blue;foo:bar'>foo</div></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        final HtmlPage page = loadPage(firstContent, collectedAlerts);
 
         final List expectedAlerts = Arrays.asList( new String[]{"black", "pink"} );
         assertEquals( expectedAlerts, collectedAlerts );
@@ -137,9 +116,6 @@ public class StyleTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testStyle_OneUndefinedCssAttribute() throws Exception {
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
-
         final String firstContent
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -151,14 +127,8 @@ public class StyleTest extends WebTestCase {
             + "}\n</script></head>"
             + "<body onload='doTest()'><div id='div1'>foo</div></body></html>";
 
-        webConnection.setResponse(
-                URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        final HtmlPage page = loadPage(firstContent, collectedAlerts);
 
         final List expectedAlerts = Arrays.asList( new String[]{"null", "", "pink"} );
         assertEquals( expectedAlerts, collectedAlerts );
