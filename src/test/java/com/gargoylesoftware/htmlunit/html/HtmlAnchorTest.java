@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public class HtmlAnchorTest extends WebTestCase {
 
@@ -86,8 +87,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final List expectedParameters = Collections.EMPTY_LIST;
         final MockWebConnection webConnection = getMockConnection(secondPage);
 
-        assertEquals( "url", "http://www.foo2.com",
-            secondPage.getWebResponse().getUrl().toExternalForm() );
+        assertEquals("url", "http://www.foo2.com", secondPage.getWebResponse().getUrl());
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
         assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
         assertNotNull( secondPage );
@@ -115,8 +115,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage secondPage = ( HtmlPage )anchor.click();
 
         // The url shouldn't contain the anchor since that isn't sent to the server
-        assertEquals("url", URL_GARGOYLE.toExternalForm(), 
-            secondPage.getWebResponse().getUrl().toExternalForm());
+        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
     }
 
 
@@ -234,8 +233,7 @@ public class HtmlAnchorTest extends WebTestCase {
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
         final List expectedParameters = Collections.EMPTY_LIST;
 
-        assertEquals( "url", "http://www.foo2.com",
-            secondPage.getWebResponse().getUrl().toExternalForm() );
+        assertEquals("url", "http://www.foo2.com", secondPage.getWebResponse().getUrl());
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
         assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
         assertNotNull( secondPage );

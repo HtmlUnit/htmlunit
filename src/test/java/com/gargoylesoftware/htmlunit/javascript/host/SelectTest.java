@@ -140,7 +140,7 @@ public class SelectTest extends WebTestCase {
          
         final MockWebConnection webConnection = (MockWebConnection) newPage.getWebClient().getWebConnection();
          
-        assertEquals("http://test?submit=button", newPage.getWebResponse().getUrl().toExternalForm());
+        assertEquals("http://test?submit=button", newPage.getWebResponse().getUrl());
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
     }
 

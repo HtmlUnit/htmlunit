@@ -212,6 +212,46 @@ public abstract class WebTestCase extends BaseTestCase {
     }
 
     /**
+     * Facility to test external form of urls. Comparing external form of urls is
+     * really faster than URL.equals() as the host doesn't need to be resolved.
+     * @param expectedUrl the expected url
+     * @param actualUrl the url to test
+     */
+    protected void assertEquals(final URL expectedUrl, final URL actualUrl) {
+        assertEquals(expectedUrl.toExternalForm(), actualUrl.toExternalForm());
+    }
+
+    /**
+     * Facility to test external form of urls. Comparing external form of urls is
+     * really faster than URL.equals() as the host doesn't need to be resolved.
+     * @param message the message to display if assertion fails
+     * @param expectedUrl the string representation of the expected url
+     * @param actualUrl the url to test
+     */
+    protected void assertEquals(final String message, final URL expectedUrl, final URL actualUrl) {
+        assertEquals(message, expectedUrl.toExternalForm(), actualUrl.toExternalForm());
+    }
+
+    /**
+     * Facility to test external form of an url.
+     * @param expectedUrl the string representation of the expected url
+     * @param actualUrl the url to test
+     */
+    protected void assertEquals(final String expectedUrl, final URL actualUrl) {
+        assertEquals(expectedUrl, actualUrl.toExternalForm());
+    }
+
+    /**
+     * Facility to test external form of an url.
+     * @param message the message to display if assertion fails
+     * @param expectedUrl the string representation of the expected url
+     * @param actualUrl the url to test
+     */
+    protected void assertEquals(final String message, final String expectedUrl, final URL actualUrl) {
+        assertEquals(message, expectedUrl, actualUrl.toExternalForm());
+    }
+
+    /**
      * Return an input stream for the specified file name.  Refer to {@link #getFileObject(String)}
      * for details on how the file is located.
      * @param fileName The base file name.

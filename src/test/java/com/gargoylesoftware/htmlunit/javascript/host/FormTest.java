@@ -526,7 +526,7 @@ public class FormTest extends WebTestCase {
         final HtmlButton button = (HtmlButton)page.getHtmlElementById("button1");
         final HtmlPage secondPage = (HtmlPage)button.click();
         assertEquals( "second", secondPage.getTitleText() );
-        assertEquals("http://second?button1=", secondPage.getWebResponse().getUrl().toExternalForm());
+        assertEquals("http://second?button1=", secondPage.getWebResponse().getUrl());
     }
 
     /**
