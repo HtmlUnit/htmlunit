@@ -1359,11 +1359,43 @@ public class WindowTest extends WebTestCase {
             "</body>\n" +
             "</html>\n";
         final List collectedAlerts = new ArrayList();
-        loadPage(content, collectedAlerts);
         final List expectedAlerts = Arrays.asList( new String[]{"form1", "form2", "2", "4"} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * All elements should be accessible via the window object by their id, if we
+     * are emulating Microsoft Internet Explorer. 
+     * @throws Exception If the test fails.
+     */
+    public void testElementByIdFromWindow() throws Exception {
+        final String content = "<html>\n" +
+            "<head><title>test</title>\n" +
+            "<script>\n" +
+            "  function test() {\n" +
+            "    alert(window.form1Id.name);\n" +
+            "    alert(form2Id.name);\n" +
+            "    alert(window.input1Id.value);\n" +
+            "    alert(myDiv.tagName);\n" +
+            "  }\n" +
+            "</script>\n" +
+            "</head>\n" +
+            "<body onload='test()'>\n" +
+            "<div id='myDiv'>\n" +
+            "<form name='form1' id='form1Id'></form>\n" +
+            "</div>\n" +
+            "<form name='form2' id='form2Id'></form>\n" +
+            "<input type='text' name='input1' id='input1Id' value='1'/>\n" +
+            "</form>\n" +
+            "</body>\n" +
+            "</html>\n";
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList( new String[]{"form1", "form2", "1", "DIV"} );
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 
     /**
      * Test that Window.execScript method gets correctly called and doesn't throw

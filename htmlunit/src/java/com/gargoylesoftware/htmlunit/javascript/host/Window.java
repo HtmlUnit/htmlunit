@@ -661,9 +661,10 @@ public class Window extends SimpleScriptable {
 
         Object result = super.get(name, start);
 
+        final Window thisWindow = (Window) start;
         // If we are in a frameset or have an iframe then this might be a frame name
         if( result == NOT_FOUND ) {
-            final DomNode domNode = ((Window)start).getDomNodeOrNull();
+            final DomNode domNode = thisWindow.getDomNodeOrNull();
             result = getFrameByName( domNode.getPage(), name );
         }
 
@@ -677,19 +678,22 @@ public class Window extends SimpleScriptable {
             }
         }
 
-        // See if it is an attempt to access an element directly by name if we are emulating IE.
+        // See if it is an attempt to access an element directly by name or id if we are emulating IE.
         if (result == NOT_FOUND) {
             // this tests are quite silly and should be removed when custom JS objects have a clean
             // way to get the WebClient they are running in.
-            final DomNode domNode = ((Window) start).getDomNodeOrNull();
+            final DomNode domNode = thisWindow.getDomNodeOrNull();
             if (domNode != null 
                     && domNode.getPage().getWebClient().getBrowserVersion().isIE()) {
-                final NativeArray array = (NativeArray) ((Window) start).document_.jsFunction_getElementsByName( name );
+                final NativeArray array = (NativeArray) thisWindow.document_.jsFunction_getElementsByName( name );
                 if (array.getLength() == 1) {
                     result = array.get(0, this);
                 }
                 else if (array.getLength() > 1) {
                     result = array;
+                }
+                else {
+                    result = thisWindow.document_.jsFunction_getElementById(name);
                 }
             }
         }
