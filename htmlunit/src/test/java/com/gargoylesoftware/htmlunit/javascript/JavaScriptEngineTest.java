@@ -59,7 +59,6 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -274,21 +273,16 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final String jsContent = "alert('got here');";
 
-        webConnection.setResponse(
-            URL_GARGOYLE,
-            htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            new URL("http://www.gargoylesoftware.com/foo.js"),
-            jsContent, 200, "OK", "text/javascript", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_GARGOYLE, htmlContent);
+        webConnection.setResponse(new URL("http://www.gargoylesoftware.com/foo.js"), jsContent, 
+                "text/javascript");
         client.setWebConnection( webConnection );
 
         final List expectedAlerts = Collections.singletonList("got here");
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
         final HtmlScript htmlScript = (HtmlScript)page.getHtmlElementById("script1");
         assertNotNull(htmlScript);
         assertEquals( expectedAlerts, collectedAlerts );
@@ -339,19 +333,16 @@ public class JavaScriptEngineTest extends WebTestCase {
          */
         final String jsContent = "alert('\u8868');";
 
-        webConnection.setResponse(
-            URL_GARGOYLE,
-            htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_GARGOYLE, htmlContent);
 
         webConnection.setResponse(
             new URL("http://www.gargoylesoftware.com/hidden"),
-            htmlContent2, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            htmlContent2);
 
         webConnection.setResponse(
             new URL("http://www.gargoylesoftware.com/foo.js"),
         // make SJIS bytes as responsebody
-            new String(jsContent.getBytes("SJIS"),"8859_1"),
-        200, "OK", "text/javascript", Collections.EMPTY_LIST );
+            new String(jsContent.getBytes("SJIS"),"8859_1"), "text/javascript");
 
     /*
      * foo2.js is same with foo.js
@@ -360,7 +351,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             new URL("http://www.gargoylesoftware.com/foo2.js"),
         // make SJIS bytes as responsebody
             new String(jsContent.getBytes("SJIS"),"8859_1"),
-        200, "OK", "text/javascript", Collections.EMPTY_LIST );
+            "text/javascript");
 
         client.setWebConnection( webConnection );
 
@@ -371,9 +362,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /*
      * detect encoding from meta tag
      */
-        final HtmlPage page = ( HtmlPage )client.getPage(
-             URL_GARGOYLE,
-             SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
         final HtmlScript htmlScript =
                      (HtmlScript)page.getHtmlElementById("script1");
 
@@ -385,8 +374,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     collectedAlerts.clear();
         final HtmlPage page2 = ( HtmlPage )client.getPage(
-             new URL( "http://www.gargoylesoftware.com/hidden" ),
-             SubmitMethod.POST, Collections.EMPTY_LIST );
+             new URL( "http://www.gargoylesoftware.com/hidden"));
         final HtmlScript htmlScript2 =
                      (HtmlScript)page2.getHtmlElementById("script2");
 
@@ -445,18 +433,12 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "    if (testLocalVariable == null)\n"
             + "        testLocalVariable = 'foo';\n"
             + "} ";
-
-        webConnection.setResponse(
-            new URL("http://first/index.html"),
-            htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            new URL("http://first/test.js"),
-            jsContent, 200, "OK", "text/javascript", Collections.EMPTY_LIST );
+        
+        webConnection.setResponse(URL_FIRST, htmlContent);
+        webConnection.setResponse(new URL("http://first/test.js"), jsContent, "text/javascript");
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first/index.html" ),
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("foo", page.getTitleText());
 
     }
@@ -495,10 +477,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testJavaScriptWrappedInHtmlComments() throws Exception {
-
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
-
         final String htmlContent
              = "<html><head><title>foo</title><script language='javascript'><!--\n"
              + "function doTest() {\n"
@@ -506,16 +484,8 @@ public class JavaScriptEngineTest extends WebTestCase {
              + "-->\n</script></head>\n"
              + "<body onload='doTest()'></body></html>";
 
-        webConnection.setResponse(
-            new URL("http://first/index.html"),
-            htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first/index.html" ),
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
         assertEquals("foo", page.getTitleText());
-
     }
 
 
@@ -523,10 +493,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testJavaScriptWrappedInHtmlComments_commentOnOpeningLine() throws Exception {
-
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
-
         final String htmlContent
              = "<html><head><title>foo</title><script language='javascript'><!-- Some comment here\n"
              + "function doTest() {\n"
@@ -534,14 +500,7 @@ public class JavaScriptEngineTest extends WebTestCase {
              + "-->\n</script></head>\n"
              + "<body onload='doTest()'></body></html>";
 
-        webConnection.setResponse(
-            new URL("http://first/index.html"),
-            htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first/index.html" ),
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
         assertEquals("foo", page.getTitleText());
     }
 
@@ -614,18 +573,16 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         webConnection.setResponse(
             new URL("http://first/index.html"),
-            htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            htmlContent);
         webConnection.setResponse(
             new URL("http://first/test.js"),
-            jsContent, 200, "OK", "text/javascript", Collections.EMPTY_LIST );
+            jsContent, "text/javascript");
         client.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first/index.html" ),
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = (HtmlPage) client.getPage(new URL("http://first/index.html"));
         assertEquals("foo", page.getTitleText());
         assertEquals( Collections.singletonList("Got to external method"), collectedAlerts );
     }
@@ -636,10 +593,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFunctionDefinedInSameFile() throws Exception {
-
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
-
         final String htmlContent
              = "<html><head><title>First</title><script>"
              + "function showFoo( foo ) {\n"
@@ -651,17 +604,9 @@ public class JavaScriptEngineTest extends WebTestCase {
              + "<input name='button1' type='button' onclick='showFoo( document.form1.text1.value);'>\n"
              + "</form></body></html>";
 
-        webConnection.setResponse(
-            new URL("http://first/index.html"),
-            htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first/index.html" ),
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
         final HtmlForm form = page.getFormByName("form1");
@@ -738,9 +683,7 @@ public class JavaScriptEngineTest extends WebTestCase {
                 client.getScriptEngine());
         client.setScriptEngine(countingJavaScriptEngine);
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
 
         assertEquals(1, countingJavaScriptEngine.getExecutionCount());
         assertEquals(0, countingJavaScriptEngine.getCallCount());
