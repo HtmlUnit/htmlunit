@@ -971,7 +971,7 @@ public class WebClient {
      * Move the focus to the specified component.  This will trigger any relevant javascript
      * event handlers.
      *
-     * @param element The element that will recieve the focus or null if focus is to be removed
+     * @param newElement The element that will recieve the focus or null if focus is to be removed
      * from all elements.
      * @throws ElementNotFocussableException If the specified element cannot have the focus.
      * @see #getElementWithFocus()
