@@ -243,6 +243,11 @@ public class Form extends HTMLElement {
     }
 
 
+    private HtmlForm getHtmlFormOrNull() {
+        return (HtmlForm)getHtmlElementOrNull();
+    }
+
+
     /**
      * Submit the form.
      *
@@ -268,13 +273,45 @@ public class Form extends HTMLElement {
       * @return The property.
       */
      public Object get( final String name, final Scriptable start ) {
-         final SimpleScriptable property = (SimpleScriptable)overridingProperties_.get(name);
-         if( property == null ) {
+         final HtmlForm htmlForm = getHtmlFormOrNull();
+         if(htmlForm == null ) {
+             // The object hasn't fully been initialized yet so just pass through to the superclass
              return super.get(name, start);
          }
-         else {
-             return property;
-         }
+
+        final List elementList = htmlForm.getHtmlElementsByTagNames(
+            Arrays.asList( new String[]{
+                "input", "button", "option", "select", "textarea"
+            } ) );
+        HtmlElement htmlElement;
+        final Iterator iterator = elementList.iterator();
+        while( iterator.hasNext() ) {
+            htmlElement = (HtmlElement)iterator.next();
+            if( htmlElement.getAttributeValue("name").equals(name) ) {
+                if( htmlElement instanceof HtmlRadioButtonInput ) {
+                    final List collectedRadioButtons = new ArrayList(elementList.size());
+                    collectedRadioButtons.add(getScriptableFor(htmlElement));
+                    while( iterator.hasNext() ) {
+                        htmlElement = (HtmlElement)iterator.next();
+                        if( htmlElement instanceof HtmlRadioButtonInput
+                            && ((HtmlRadioButtonInput)htmlElement).getNameAttribute().equals(name) ) {
+                            collectedRadioButtons.add(getScriptableFor(htmlElement));
+                        }
+                    }
+                    if( collectedRadioButtons.size() == 1 ) {
+                        return collectedRadioButtons.get(0);
+                    }
+                    else {
+                        return new NativeArray( collectedRadioButtons.toArray() );
+                    }
+                }
+                else {
+                    return getScriptableFor(htmlElement);
+                }
+            }
+        }
+
+        return super.get(name, start);
      }
 
 

@@ -18,6 +18,11 @@
                 Checkbox object which resulted in incorrect behaviour.  Add some additional
                 tests to prevent this kind of problem happening again.
             </action>
+            <action type="update" dev="mbowler">
+                Fixed bug in the setup of javascript form variables which resulted in situations where
+                input elements may not show up in the form depending on what had happened during page
+                load.
+            </action>
         </release>
     </body>
 
