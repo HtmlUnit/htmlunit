@@ -892,9 +892,7 @@ public class HtmlFormTest extends WebTestCase {
         webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
-        final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE);
-        settings.setSubmitMethod(SubmitMethod.POST);
-        settings.setRequestParameters(Collections.EMPTY_LIST);
+        final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE, SubmitMethod.POST);
 
         final HtmlPage page = ( HtmlPage )client.getPage(settings);
         final HtmlInput submitButton = (HtmlInput)page.getHtmlElementById("submitButton");

@@ -104,13 +104,13 @@ public class HtmlArea extends FocusableElement {
                 throw new IllegalStateException(
                     "Not a valid url: " + getHrefAttribute() );
             }
-            final WebRequestSettings params = new WebRequestSettings(url)
-                    .setSubmitMethod(SubmitMethod.getInstance(getAttributeValue("method")));
+            final WebRequestSettings settings = new WebRequestSettings(url, 
+                    SubmitMethod.getInstance(getAttributeValue("method")));
             final WebWindow webWindow = enclosingPage.getEnclosingWindow();
             return webClient.getPage(
                     webWindow,
                     enclosingPage.getResolvedTarget(getTargetAttribute()),
-                    params);
+                    settings);
         }
         else {
             return defaultPage;
