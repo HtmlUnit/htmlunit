@@ -88,8 +88,10 @@ final class InputElementFactory implements IElementFactory {
             }
         }
         if( type.length() == 0 ) {
-            // This is really an illegal value but the common browsers seem to
-            // treat it as a "text" input so we will as well.
+            // This not an illegal value, as it defaults to "text"
+            // cf http://www.w3.org/TR/REC-html40/interact/forms.html#adef-type-INPUT
+            // and the common browsers seem to treat it as a "text" input so we will as well.
+            attributeMap.put("type", "text");
             result = new HtmlTextInput(page, attributeMap);
         }
         else if( type.equals("submit") ) {

@@ -262,5 +262,23 @@ public final class HtmlInputTest extends WebTestCase {
         radioButton.click();
         assertTrue("Should be checked after click", radioButton.isChecked());
     }    
+
+    /**
+     *  Test that default type of input is text
+     *
+     * @exception  Exception If the test fails
+     */
+    public void testInputNoType() throws Exception {
+        final String htmlContent
+        = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<input name='foo'/>"
+            + "</form></body></html>";
+        
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        
+        assertEquals("text", form.getInputByName("foo").getTypeAttribute());
+    }    
 }
 

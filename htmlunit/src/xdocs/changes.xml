@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                getTypeAttribute now returns "text" for input without specified type attribute as it is the default value.
+            </action>
             <action type="update" dev="mguillem" id="1081554">
                 Added support for item function in JavaScript like "document.all(...).item(...). 
             </action>
