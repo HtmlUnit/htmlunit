@@ -88,10 +88,8 @@ public class HtmlSubmitInputTest extends WebTestCase {
 
         final HtmlPage secondPage = (HtmlPage)submitInput.click();
 
-        final List expectedAlerts = Arrays.asList( new String[]{"foo"} );
+        final List expectedAlerts = Arrays.asList( new String[]{"foo","bar"} );
         assertEquals( expectedAlerts, collectedAlerts );
-
-        assertSame( page, secondPage );
     }
 
 
