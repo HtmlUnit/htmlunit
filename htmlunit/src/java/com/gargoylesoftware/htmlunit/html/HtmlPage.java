@@ -774,7 +774,7 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
-     * Internal use only.  This is a callback from {@link ScriptFilter} and
+     * Internal use only.  This is a callback from {@link HtmlScript#executeScriptIfNeeded()} and
      * should not be called by consumers of HtmlUnit.
      * @param srcAttribute The source attribute from the script tag.
      * @param charset The charset attribute from the script tag.
@@ -977,7 +977,7 @@ public final class HtmlPage extends DomNode implements Page {
     /**
      * Execute a single onload handler.  This will either be a string which
      * will be executed as javascript, or a javascript Function.
-     * @param onLoad The javascript to execute
+     * @param element The element that contains the onload attribute.
      */
     private void executeOneOnLoadHandler(final HtmlElement element) {
         getLog().debug("Executing onload handler, for " + element);
@@ -1376,7 +1376,7 @@ public final class HtmlPage extends DomNode implements Page {
 
     /**
      * For internal used only
-     * @param _node the node that has just been added to the document.
+     * @param node the node that has just been added to the document.
      */
     void notifyNodeAdded(final DomNode node) {
         if (node instanceof HtmlElement) {
@@ -1391,7 +1391,7 @@ public final class HtmlPage extends DomNode implements Page {
 
     /**
      * For internal used only
-     * @param _node the node that has just been removed from the tree
+     * @param node the node that has just been removed from the tree
      */
     void notifyNodeRemoved(final DomNode node) {
         if (node instanceof HtmlElement) {

@@ -804,7 +804,7 @@ public class HTMLElement extends NodeImpl {
     }
 
     /**
-     * Downloads all the components queued via {@link addComponentRequest}.
+     * Downloads all the components queued via {@link #addComponentRequest(String, String, String)}.
      * @return <tt>true</tt> if the components are downloaded successfully.
      * Current implementation always return <code>false</code>
      */

@@ -56,21 +56,29 @@ import org.mozilla.javascript.Scriptable;
  * </p>
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Mike Bowler
  */
 class ScoperFunctionObject implements Function {
     private final Function wrapped_;
     private final Scriptable scope_;
 
+    /**
+     * Create an instance.
+     * @param wrapped The wrapped function.
+     * @param scope The scope.
+     */
     public ScoperFunctionObject(Function wrapped, final Scriptable scope) {
         wrapped_ = wrapped;
         scope_ = scope;
     }
     
+    /** @see Function#call(Context,Scriptable,Scriptable,Object[]) */
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
             Object[] args) {
         return wrapped_.call(cx, scope, thisObj, args);
     }
 
+    /** @see Function#construct(Context,Scriptable,Object[]) */
     public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
         Scriptable o = wrapped_.construct(cx, scope, args);
         o.setParentScope(scope_);
@@ -78,60 +86,97 @@ class ScoperFunctionObject implements Function {
         return o;
     }
 
+    /** @see Function#delete(int) */
     public void delete(int index) {
         wrapped_.delete(index);
     }
+    
+    /** @see Function#delete(String) */
     public void delete(String name) {
         wrapped_.delete(name);
     }
+    
+    /** @see Object#equals(Object) */
     public boolean equals(Object obj) {
         return wrapped_.equals(obj);
     }
+    
+    /** @see Function#get(int,Scriptable) */
     public Object get(int index, Scriptable start) {
         return wrapped_.get(index, start);
     }
+    
+    /** @see Function#get(String,Scriptable) */
     public Object get(String name, Scriptable start) {
         return wrapped_.get(name, start);
     }
+    
+    /** @see Function#getClassName() */
     public String getClassName() {
         return wrapped_.getClassName();
     }
+    
+    /** @see Function#getDefaultValue(Class) */
     public Object getDefaultValue(Class hint) {
         return wrapped_.getDefaultValue(hint);
     }
+
+    /** @see Function#getIds() */
     public Object[] getIds() {
         return wrapped_.getIds();
     }
+
+    /** @see Function#getParentScope() */
     public Scriptable getParentScope() {
         return wrapped_.getParentScope();
     }
+
+    /** @see Function#getPrototype() */
     public Scriptable getPrototype() {
         return wrapped_.getPrototype();
     }
+
+    /** @see Function#has(int,Scriptable) */
     public boolean has(int index, Scriptable start) {
         return wrapped_.has(index, start);
     }
+
+    /** @see Function#has(String,Scriptable) */
     public boolean has(String name, Scriptable start) {
         return wrapped_.has(name, start);
     }
+
+    /** @see Object#hashCode() */
     public int hashCode() {
         return wrapped_.hashCode();
     }
+
+    /** @see Function#hasInstance(Scriptable) */
     public boolean hasInstance(Scriptable instance) {
         return wrapped_.hasInstance(instance);
     }
+
+    /** @see Function#put(int,Scriptable,Object) */
     public void put(int index, Scriptable start, Object value) {
         wrapped_.put(index, start, value);
     }
+
+    /** @see Function#put(String,Scriptable,Object) */
     public void put(String name, Scriptable start, Object value) {
         wrapped_.put(name, start, value);
     }
+
+    /** @see Function#setParentScope(Scriptable) */
     public void setParentScope(Scriptable parent) {
         wrapped_.setParentScope(parent);
     }
+
+    /** @see Function#setPrototype(Scriptable) */
     public void setPrototype(Scriptable prototype) {
         wrapped_.setPrototype(prototype);
     }
+
+    /** @see Object#toString() */
     public String toString() {
         return wrapped_.toString();
     }

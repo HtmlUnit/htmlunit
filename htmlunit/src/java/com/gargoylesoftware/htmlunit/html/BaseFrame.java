@@ -326,7 +326,7 @@ public abstract class BaseFrame extends StyledElement {
     /**
      * Return the currently loaded page in the enclosed window.
      * This is a facility method for <code>getEnclosedWindow().getEnclosedPage()</code>.
-     * @see {@link WebWindow#getEnclosedPage()}
+     * @see WebWindow#getEnclosedPage()
      * @return The currently loaded page in the enclosed window or null if no page has been loaded.
      */
     public Page getEnclosedPage() {
