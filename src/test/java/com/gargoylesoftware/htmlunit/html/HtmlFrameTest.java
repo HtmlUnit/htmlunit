@@ -102,10 +102,6 @@ public class HtmlFrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnLoadHandler() throws Exception {
-        if( true ) {
-            notImplemented();
-            return;
-        }
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection =
             new FakeWebConnection(webClient);
