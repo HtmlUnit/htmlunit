@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.jelly;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
@@ -57,7 +57,7 @@ public class MockWebConnectionTag extends HtmlUnitTagSupport {
      */
     public void doTag(XMLOutput xmlOutput) throws JellyTagException {
         final WebClient webClient = getWebClient();
-        webClient.setWebConnection( new FakeWebConnection(webClient) );
+        webClient.setWebConnection( new MockWebConnection(webClient) );
         invokeBody(xmlOutput);
     }
 }

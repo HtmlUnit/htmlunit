@@ -45,7 +45,7 @@ import java.util.List;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebConnection;
 
 /**
@@ -78,10 +78,10 @@ public class MockResponseTag extends HtmlUnitTagSupport {
             newUrl, content, statusCode_, statusMessage_, contentType_, responseHeaders_);
     }
     
-    private FakeWebConnection getMockWebConnection() throws JellyTagException {
+    private MockWebConnection getMockWebConnection() throws JellyTagException {
         final WebConnection webConnection = getWebClient().getWebConnection();
-        if( webConnection instanceof FakeWebConnection ) {
-            return (FakeWebConnection)webConnection;
+        if( webConnection instanceof MockWebConnection ) {
+            return (MockWebConnection)webConnection;
         }
         throw new JellyTagException(
             "WebClient is not using a FakeWebConnection - have you used the mockWebConnection tag?");
