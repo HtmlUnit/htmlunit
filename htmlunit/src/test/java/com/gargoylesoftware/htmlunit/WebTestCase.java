@@ -58,8 +58,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David D. Kilzer
  */
-public class WebTestCase extends BaseTestCase {
+public abstract class WebTestCase extends BaseTestCase {
     /** Constant for the url http://first which is used in the tests. */
     public static final URL URL_FIRST;
 
