@@ -281,6 +281,9 @@
     <class name="Submit" extends="Input"><!-- NOT FINISHED -->
         <property name="length" readable="true" writable="false"/>
     </class>
+    <class name="Table" extends="HTMLElement">
+        <property name="rows" readable="true" writable="false"/>
+    </class>
     <class name="Text" extends="Input"/><!-- NOT FINISHED -->
     <class name="Textarea" extends="Input"/><!-- NOT FINISHED -->
     <class name="TextImpl" extends="CharacterDataImpl">

@@ -79,6 +79,9 @@
                 Fixed bug where calling document.body from javascript before the body tag had been 
                 parsed was causing an exception.
             </action>  
+            <action type="update" dev="mbowler" due-to="David D. Kilzer" id="930069">
+                Added support for javascript table.rows.  Patch provided by David D. Kilzer
+            </action>  
 		</release>
 		    
         <release version="1.3-pre2" date="September 26, 2004">
