@@ -41,6 +41,10 @@
 		<change type="new">
 			New method WebClient.setPromptHandler() and getPromptHandler()
 		</change>
+		<change type="new">
+			New method WebForm.getParameterListForSubmit().  This method is intended as
+			a debugging aid.
+		</change>
 	</change-log>
 </section>
 
