@@ -63,6 +63,10 @@ class DefaultElementFactory implements IElementFactory {
 
     private final Constructor constructor_;
 
+    /**
+     * Create an instance
+     * @param elementClass The element class.
+     */
     public DefaultElementFactory(Class elementClass) {
 
         if(!HtmlElement.class.isAssignableFrom(elementClass)) {

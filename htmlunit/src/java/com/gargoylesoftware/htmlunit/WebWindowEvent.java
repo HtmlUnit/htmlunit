@@ -65,7 +65,7 @@ public final class WebWindowEvent extends EventObject {
      * Create an instance
      *
      * @param webWindow The WebWindow that caused the event
-     * @param type The type - one of {@link OPEN}, {@link CLOSE} or {@link CHANGE}
+     * @param type The type - one of {@link #OPEN}, {@link #CLOSE} or {@link #CHANGE}
      * @param oldPage The old contents of the web window
      * @param newPage The new contents of the web window
      */

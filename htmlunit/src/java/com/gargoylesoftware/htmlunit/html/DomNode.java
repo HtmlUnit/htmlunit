@@ -359,9 +359,8 @@ public abstract class DomNode implements Cloneable {
     }
 
     /**
-     * Sets the node value.
-     *
-     * @see org.w3c.dom.Node#setNodeValue
+     * @inheritDoc org.w3c.dom.Node#setNodeValue(String)
+     * @param x The new value
      */
     public void setNodeValue(String x) {
         // Default behavior is to do nothing, overridden in some subclasses
@@ -658,7 +657,6 @@ public abstract class DomNode implements Cloneable {
             return result;
         }
 
-        /** @return the next element */
         private void setNextElement() {
             HtmlElement next = getFirstChildElement(nextElement_);
             if( next == null ) {
