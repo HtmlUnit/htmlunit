@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
+import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -1501,5 +1502,45 @@ public class WindowTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testStatus() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+
+        final String firstContent
+            = "<html><head><title>First</title><script>"
+            + "function doTest() {\n"
+            + "    alert(window.status);\n"
+            + "    window.status = 'newStatus';\n"
+            + "    alert(window.status);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "</body></html>";
+
+        final URL url = URL_FIRST;
+        webConnection.setResponse(url, firstContent);
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final List collectedStatus = new ArrayList();
+        webClient.setStatusHandler( new StatusHandler() {
+            public void statusMessageChanged( final Page page, final String message ) {
+                collectedStatus.add(message);
+            }
+        });
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList( new String[] { "", "newStatus"} );
+        assertEquals( "alerts", expectedAlerts, collectedAlerts );
+
+        final List expectedStatus = Arrays.asList( new String[] { "newStatus"} );
+        assertEquals( "status", expectedStatus, collectedStatus );
     }
 }

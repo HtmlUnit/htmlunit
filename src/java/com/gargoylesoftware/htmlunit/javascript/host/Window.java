@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
+import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -97,6 +98,7 @@ public class Window extends SimpleScriptable {
     private Function onload_;
     private Map timeoutThreads_;
     private int nextTimeoutId_;
+    private String status_ = "";
 
     /**
      * Create an instance.  The rhino engine requires all host objects
@@ -704,5 +706,27 @@ public class Window extends SimpleScriptable {
         getLog().warn("Current implementation of Window.execScript() does nothing");
         
         return null;
+    }
+
+
+    /**
+     * Return the text from the status line.
+     * @return the status line text
+     */
+    public String jsGet_status() {
+        return status_;
+    }
+
+    /**
+     * Set the text from the status line.
+     * @param message the status line text
+     */
+    public void jsSet_status( final String message ) {
+        status_ = message;
+
+        final StatusHandler statusHandler = webWindow_.getWebClient().getStatusHandler();
+        if( statusHandler != null ) {
+            statusHandler.statusMessageChanged(webWindow_.getEnclosedPage(), message);
+        }
     }
 }
