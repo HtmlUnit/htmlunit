@@ -320,9 +320,8 @@ public class WebClient {
      * @exception  IOException If an IO error occurs
      * @exception  FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
-     *      "throwExceptionOnFailingStatusCode" is set to true 
+     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true 
      *      
-     * @see #setThrowExceptionOnFailingStatusCode(boolean)
      * @see WebRequestSettings
      */
     public Page getPage( final WebWindow webWindow, final WebRequestSettings parameters )
@@ -369,8 +368,19 @@ public class WebClient {
     }
     
     /**
-     * For internal use only 
-     * @see #getPage(WebWindow,WebRequestSettings)
+     * <p>For internal use only</p>
+     * <p>Open a new web window and populate it with a page loaded by 
+     * {@link #getPage(WebWindow,WebRequestSettings)}</p>
+     * 
+     *  @param opener The web window that initiated the request.
+     *  @param target The name of the window to be opened.  This is the name that would
+     *  be passed into the javascript open() method.
+     *  @param params Any parameters
+     *  @return The new page.
+     *  @exception  FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the property
+     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     *  @exception IOException If an IO problem occurs. 
      */
     public Page getPage(final WebWindow opener, final String target, final WebRequestSettings params)
         throws FailingHttpStatusCodeException, IOException {
@@ -379,7 +389,12 @@ public class WebClient {
 
     /**
      * Convenience method to load a URL into the current WebWindow
-     * @see #getPage(WebWindow, WebRequestSettings)
+     * @param url The url of the new content.
+     * @return The new page.
+     * @throws  FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the property
+     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     * @throws IOException If an IO problem occurs. 
      */
     public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
         return getPage(getCurrentWindow(), new WebRequestSettings(url));
@@ -387,7 +402,13 @@ public class WebClient {
     
     /**
      * Convenience method to load a web request into the current WebWindow
-     * @see #getPage(WebWindow, WebRequestSettings)
+     *  @param request The request parameters 
+     *  @return The new page.
+     *  @exception  FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the property
+     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     *  @exception IOException If an IO problem occurs.
+     *  @see #getPage(WebWindow,WebRequestSettings) 
      */
     public Page getPage(final WebRequestSettings request) throws IOException,
             FailingHttpStatusCodeException {

@@ -314,9 +314,10 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * 
+     * @param element The element that we are checking for isSubmittable
      * @param submitElement The element that would have been pressed to submit the
      * form or null if the form was submitted by javascript.
+     * @return true if element is submittable
      */
     private boolean isSubmittable(final HtmlElement element, final SubmittableElement submitElement) {
         final String tagName = element.getTagName();

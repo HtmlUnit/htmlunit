@@ -980,6 +980,7 @@ public final class HtmlPage extends DomNode implements Page {
     /**
      * If a refresh has been specified either through a meta tag or an http
      * response header, then perform that refresh.
+     * @throws IOException if an IO problem occurs
      */
     private void executeRefreshIfNeeded() throws IOException {
         // If this page is not in a frame then a refresh has already happened,
