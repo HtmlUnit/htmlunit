@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Jelly Reference</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <revision>$Revision$</revision>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+            	<a href="http://jakarta.apache.org/commons/jelly">Jelly</a> is an
+            	xml based scripting language that can be embedded in applications.
+            	A jelly wrapper for HtmlUnit is provided in the HtmlUnit distribution.
+            </p>
+        </section>
+        
+        <section name="Quick start">
+        	<p>
+        		This sample creates a WebClient and uses it to load a page from http://first.  
+        		It then dumps out the title of that page to the console.
+        	</p>
+            <source><![CDATA[
+<h:webClient browserVersion="INTERNET_EXPLORER_6_0">
+    <h:getPage method="get" var="page1" uri="http://first"/>
+    Page title is ${page1.titleText}
+</h:webClient>
+            ]]></source>
+        </section>
+    </body>
+
+</document>
+
