@@ -116,8 +116,7 @@ public class Anchor extends FocusableHostElement {
             }
 
             try {
-                response = link.getPage().getFullyQualifiedUrl(beforeAnchor).toExternalForm()
-                + anchorPart;
+                response = link.getPage().getFullyQualifiedUrl(beforeAnchor).toExternalForm() + anchorPart;
             }
             catch (final MalformedURLException e) {
                 throw Context.reportRuntimeError("Problem reading url: " + e);

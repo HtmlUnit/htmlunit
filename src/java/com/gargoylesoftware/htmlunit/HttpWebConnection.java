@@ -430,90 +430,90 @@ public class HttpWebConnection extends WebConnection {
 
     private WebResponse makeWebResponse(
         final int statusCode, final HttpMethod method, final URL originatingURL, final long loadTime ) 
-    throws IOException {
+        throws IOException {
 
         return new WebResponse() {
             private String content_ = IOUtils.toString(method.getResponseBodyAsStream(), getContentCharSet());
 
             public int getStatusCode() {
-                    return statusCode;
+                return statusCode;
+            }
+
+            public String getStatusMessage() {
+                String message = method.getStatusText();
+                if( message == null || message.length() == 0 ) {
+                    message = HttpStatus.getStatusText( statusCode );
                 }
 
-                public String getStatusMessage() {
-                    String message = method.getStatusText();
-                    if( message == null || message.length() == 0 ) {
-                        message = HttpStatus.getStatusText( statusCode );
-                    }
-
-                    if( message == null ) {
-                        message = "Unknown status code";
-                    }
-
-                    return message;
+                if( message == null ) {
+                    message = "Unknown status code";
                 }
 
-                public String getContentType() {
-                    final Header contentTypeHeader  = method.getResponseHeader( "content-type" );
-                    if( contentTypeHeader == null ) {
-                        // Not technically legal but some servers don't return a content-type
-                        return "";
-                    }
-                    final String contentTypeHeaderLine = contentTypeHeader.getValue();
-                    final int index = contentTypeHeaderLine.indexOf( ';' );
-                    if( index == -1 ) {
-                        return contentTypeHeaderLine;
-                    }
-                    else {
-                        return contentTypeHeaderLine.substring( 0, index );
-                    }
-                }
+                return message;
+            }
 
-                public String getContentAsString() {
-                    return content_;
+            public String getContentType() {
+                final Header contentTypeHeader  = method.getResponseHeader( "content-type" );
+                if( contentTypeHeader == null ) {
+                    // Not technically legal but some servers don't return a content-type
+                    return "";
                 }
-
-                public InputStream getContentAsStream() {
-                    return new ByteArrayInputStream(getResponseBody());
+                final String contentTypeHeaderLine = contentTypeHeader.getValue();
+                final int index = contentTypeHeaderLine.indexOf( ';' );
+                if( index == -1 ) {
+                    return contentTypeHeaderLine;
                 }
-
-                public URL getUrl() {
-                    return originatingURL;
+                else {
+                    return contentTypeHeaderLine.substring( 0, index );
                 }
+            }
 
-                public String getResponseHeaderValue( final String headerName ) {
-                    final Header header = method.getResponseHeader(headerName);
-                    if( header == null ) {
-                        return null;
-                    }
-                    else {
-                        return header.getValue();
-                    }
+            public String getContentAsString() {
+                return content_;
+            }
+
+            public InputStream getContentAsStream() {
+                return new ByteArrayInputStream(getResponseBody());
+            }
+
+            public URL getUrl() {
+                return originatingURL;
+            }
+
+            public String getResponseHeaderValue( final String headerName ) {
+                final Header header = method.getResponseHeader(headerName);
+                if( header == null ) {
+                    return null;
                 }
-
-                public long getLoadTimeInMilliSeconds() {
-                    return loadTime;
+                else {
+                    return header.getValue();
                 }
+            }
 
-                public String getContentCharSet(){
-                    if( method instanceof HttpMethodBase ){
-                        return ((HttpMethodBase)method).getResponseCharSet();
-                    }
-                    else {
-                        return "ISO-8859-1";
-                    }
+            public long getLoadTimeInMilliSeconds() {
+                return loadTime;
+            }
+
+            public String getContentCharSet(){
+                if( method instanceof HttpMethodBase ){
+                    return ((HttpMethodBase)method).getResponseCharSet();
                 }
-
-                public byte [] getResponseBody() {
-                    try {
-                        return content_.getBytes(getContentCharSet());
-                    }
-                    catch (final UnsupportedEncodingException e) {
-                        // should never occur
-                        throw new RuntimeException(e);
-                    }
+                else {
+                    return "ISO-8859-1";
                 }
+            }
 
-            };
+            public byte [] getResponseBody() {
+                try {
+                    return content_.getBytes(getContentCharSet());
+                }
+                catch (final UnsupportedEncodingException e) {
+                    // should never occur
+                    throw new RuntimeException(e);
+                }
+            }
+
+        };
     }
 
 

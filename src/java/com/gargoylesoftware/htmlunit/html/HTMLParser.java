@@ -228,8 +228,7 @@ public class HTMLParser {
     public HtmlPage parse(
             final WebClient webClient, 
             final WebResponse webResponse, 
-            final WebWindow webWindow)
-            throws IOException {
+            final WebWindow webWindow) throws IOException {
         return parse(webResponse, webWindow);
     }
     /**
@@ -242,7 +241,7 @@ public class HTMLParser {
      * @throws java.io.IOException io error
      */
     public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow)
-            throws IOException {
+        throws IOException {
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(webResponse, webWindow);
         String charSet = webResponse.getContentCharSet();
         if( isSupportedCharacterSet(charSet) == false ) {
@@ -281,8 +280,7 @@ public class HTMLParser {
      * the ContentHandler interface. Thus all parser APIs are kept private. The ContentHandler methods
      * consume SAX events to build the page DOM
      */
-    private static class HtmlUnitDOMBuilder extends AbstractSAXParser
-            implements ContentHandler /*, LexicalHandler */ {
+    private static class HtmlUnitDOMBuilder extends AbstractSAXParser implements ContentHandler /*, LexicalHandler */ {
 
         private final WebResponse webResponse_;
         private final WebWindow webWindow_;
@@ -376,7 +374,7 @@ public class HTMLParser {
 
         /** @inheritDoc ContentHandler@endElement(String,String,String) */
         public void endElement(final String namespaceURI, final String localName, final String qName)
-                throws SAXException {
+            throws SAXException {
 
             handleCharacters();
             stack_.pop(); //remove currentElement from stack
@@ -387,8 +385,7 @@ public class HTMLParser {
         }
 
         /** @inheritDoc ContentHandler#characters(char,int,int) */
-        public void characters(final char ch[], final int start, final int length)
-                throws SAXException {
+        public void characters(final char ch[], final int start, final int length) throws SAXException {
 
             if(characters_ == null) {
                 characters_ = new StringBuffer();
@@ -397,8 +394,7 @@ public class HTMLParser {
         }
 
         /** @inheritDoc ContentHandler#ignorableWhitespace(char,int,int) */
-        public void ignorableWhitespace(final char ch[], final int start, final int length)
-                throws SAXException {
+        public void ignorableWhitespace(final char ch[], final int start, final int length) throws SAXException {
 
             if(characters_ == null) {
                 characters_ = new StringBuffer();
@@ -441,23 +437,19 @@ public class HTMLParser {
         }
 
         /** @inheritDoc ContentHandler#startPrefixMapping(String,String) */
-        public void startPrefixMapping(final String prefix, final String uri)
-                throws SAXException {
+        public void startPrefixMapping(final String prefix, final String uri) throws SAXException {
         }
 
         /** @inheritDoc ContentHandler#endPrefixMapping(String) */
-        public void endPrefixMapping(final String prefix)
-                throws SAXException {
+        public void endPrefixMapping(final String prefix) throws SAXException {
         }
 
         /** @inheritDoc ContentHandler#processingInstrucction(String,String) */
-        public void processingInstruction(final String target, final String data)
-                throws SAXException {
+        public void processingInstruction(final String target, final String data) throws SAXException {
         }
 
         /** @inheritDoc ContentHandler#skippedEntity(String) */
-        public void skippedEntity(final String name)
-                throws SAXException {
+        public void skippedEntity(final String name) throws SAXException {
         }
     }
 }

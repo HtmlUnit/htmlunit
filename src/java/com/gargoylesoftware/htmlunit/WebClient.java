@@ -371,7 +371,7 @@ public class WebClient {
      * @see #getPage(WebWindow,WebRequestSettings)
      */
     public Page getPage(final WebWindow opener, final String target, final WebRequestSettings params)
-            throws FailingHttpStatusCodeException, IOException {
+        throws FailingHttpStatusCodeException, IOException {
         return getPage(openTargetWindow(opener, target, "_self"), params);
     }
 
@@ -1331,8 +1331,7 @@ public class WebClient {
         if( parseUrl.trim().length() == 0 ) {
             stringToTokenize = baseUrl.getPath();
         }
-        else 
-            if( parseUrl.startsWith("/") ) {
+        else if( parseUrl.startsWith("/") ) {
             stringToTokenize = parseUrl;
         }
         else {
@@ -1545,10 +1544,10 @@ public class WebClient {
                     // We'll take a guess and go with the first value.
                     final int indexOfComma = locationString.indexOf(',');
                     if( indexOfComma >= 0) {
-                       newUrl = expandUrl( fixedUrl, locationString.substring(0, indexOfComma));
+                        newUrl = expandUrl( fixedUrl, locationString.substring(0, indexOfComma));
                     }
                     else {
-                       newUrl = expandUrl( fixedUrl, locationString);
+                        newUrl = expandUrl( fixedUrl, locationString);
                     }
                 }
             }

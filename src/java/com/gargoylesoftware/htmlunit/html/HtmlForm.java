@@ -73,8 +73,8 @@ public class HtmlForm extends ClickableElement {
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "form";
 
-    private static final Collection SUBMITTABLE_ELEMENT_NAMES
-             = Arrays.asList( new String[]{"input", "button", "select", "textarea", "isindex"} );
+    private static final Collection SUBMITTABLE_ELEMENT_NAMES =
+        Arrays.asList( new String[]{"input", "button", "select", "textarea", "isindex"} );
 
     private KeyValuePair fakeSelectedRadioButton_ = null;
 
@@ -181,8 +181,8 @@ public class HtmlForm extends ClickableElement {
         }
         final WebRequestSettings params = new WebRequestSettings(url)
             .setRequestParameters(getParameterListForSubmit(submitElement))
-            .setEncodingType(FormEncodingType.getInstance( getEnctypeAttribute() ))
-            .setSubmitMethod(SubmitMethod.getInstance( getAttributeValue( "method" ) ));
+                .setEncodingType(FormEncodingType.getInstance( getEnctypeAttribute() ))
+                    .setSubmitMethod(SubmitMethod.getInstance( getAttributeValue( "method" ) ));
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
         return htmlPage.getWebClient().getPage(

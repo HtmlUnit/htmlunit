@@ -325,8 +325,8 @@ public class MockWebConnection extends WebConnection {
             final String contentType,
             final List responseHeaders ) {
 
-        final ResponseEntry responseEntry
-        = new ResponseEntry(content, statusCode, statusMessage, contentType, responseHeaders);
+        final ResponseEntry responseEntry =
+            new ResponseEntry(content, statusCode, statusMessage, contentType, responseHeaders);
         responseMap_.put( url.toExternalForm(), responseEntry );
     }    
 

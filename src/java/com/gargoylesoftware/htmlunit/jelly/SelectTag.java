@@ -124,7 +124,7 @@ public class SelectTag extends TagSupport implements VariableContext {
      * @throws UnresolvableException variable not defined
      */
     public Object getVariableValue(final String namespaceURI, final String prefix, final String localName)
-            throws UnresolvableException {
+        throws UnresolvableException {
 
         final Object var = context.getVariable(localName);
         if(var == null) {

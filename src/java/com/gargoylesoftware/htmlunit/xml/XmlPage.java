@@ -93,7 +93,7 @@ public class XmlPage implements Page {
                 throws SAXException {
             // Does nothing as we're not interested in.
         }
-       };
+    };
 
 
     /**
@@ -115,8 +115,8 @@ public class XmlPage implements Page {
         final InputSource source = new InputSource(new StringReader(content_));
         try {
             final DocumentBuilder builder = factory.newDocumentBuilder();
-           builder.setErrorHandler(DISCARD_MESSAGES_HANDLER);
-           document_ = builder.parse(source);
+            builder.setErrorHandler(DISCARD_MESSAGES_HANDLER);
+            document_ = builder.parse(source);
         }
         catch (final SAXException e) {
             getLog().warn("Failed parsing xml document " + webResponse.getUrl() + ": " + e.getMessage());

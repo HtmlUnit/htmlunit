@@ -434,10 +434,9 @@ public abstract class DomNode implements Cloneable {
      * @return The javascript object that corresponds to this node building it if necessary.
      */
     public Object getScriptObject() {
-         if (scriptObject_ == null) {
-              scriptObject_ = ((SimpleScriptable) getPage().getScriptObject())
-                 .makeScriptableFor(this);
-         }
+        if (scriptObject_ == null) {
+            scriptObject_ = ((SimpleScriptable) getPage().getScriptObject()).makeScriptableFor(this);
+        }
         return scriptObject_;
     }
     

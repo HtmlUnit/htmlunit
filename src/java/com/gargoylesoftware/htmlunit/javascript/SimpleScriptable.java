@@ -324,15 +324,15 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The DOM node
      * @exception IllegalStateException If the DOM node could not be found.
      */
-     public final DomNode getDomNodeOrDie() throws IllegalStateException {
-         if( domNode_ == null ) {
-             throw new IllegalStateException(
-                "DomNode has not been set for this SimpleScriptable: "+getClass().getName());
-         }
-         else {
-             return domNode_;
-         }
-     }
+    public final DomNode getDomNodeOrDie() throws IllegalStateException {
+        if( domNode_ == null ) {
+            final String clazz = getClass().getName();
+            throw new IllegalStateException("DomNode has not been set for this SimpleScriptable: " + clazz);
+        }
+        else {
+            return domNode_;
+        }
+    }
 
 
     /**
@@ -341,9 +341,9 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The html element
      * @exception IllegalStateException If the html element could not be found.
      */
-     public final HtmlElement getHtmlElementOrDie() throws IllegalStateException {
-         return (HtmlElement) getDomNodeOrDie();
-     }
+    public final HtmlElement getHtmlElementOrDie() throws IllegalStateException {
+        return (HtmlElement) getDomNodeOrDie();
+    }
 
 
     /**
@@ -351,9 +351,9 @@ public class SimpleScriptable extends ScriptableObject {
      * or null if a node hasn't been set.
      * @return The DOM node or null
      */
-     public final DomNode getDomNodeOrNull() {
-         return domNode_;
-     }
+    public final DomNode getDomNodeOrNull() {
+        return domNode_;
+    }
 
 
     /**
@@ -361,218 +361,218 @@ public class SimpleScriptable extends ScriptableObject {
      * or null if an element hasn't been set.
      * @return The html element or null
      */
-     public final HtmlElement getHtmlElementOrNull() {
-         return (HtmlElement) getDomNodeOrNull();
-     }
+    public final HtmlElement getHtmlElementOrNull() {
+        return (HtmlElement) getDomNodeOrNull();
+    }
 
 
-     /**
-      * Set the DOM node that corresponds to this javascript object
-      * @param domNode The DOM node
-      */
-     public void setDomNode( final DomNode domNode ) {
-         setDomNode( domNode, true );
-     }
+    /**
+     * Set the DOM node that corresponds to this javascript object
+     * @param domNode The DOM node
+     */
+    public void setDomNode( final DomNode domNode ) {
+        setDomNode( domNode, true );
+    }
 
-     /**
-      * Set the DOM node that corresponds to this javascript object
-      * @param domNode The DOM node
-      * @param assignScriptObject If true, call <code>setScriptObject</code> on domNode
-      */
-     protected void setDomNode( final DomNode domNode, final boolean assignScriptObject ) {
-         Assert.notNull("domNode", domNode);
-         domNode_ = domNode;
-         if (assignScriptObject) {
-             domNode_.setScriptObject(this);
-         }
-     }
+    /**
+     * Set the DOM node that corresponds to this javascript object
+     * @param domNode The DOM node
+     * @param assignScriptObject If true, call <code>setScriptObject</code> on domNode
+     */
+    protected void setDomNode( final DomNode domNode, final boolean assignScriptObject ) {
+        Assert.notNull("domNode", domNode);
+        domNode_ = domNode;
+        if (assignScriptObject) {
+            domNode_.setScriptObject(this);
+        }
+    }
 
-     /**
-      * Set the html element that corresponds to this javascript object
-      * @param htmlElement The html element
-      */
-     public void setHtmlElement( final HtmlElement htmlElement ) {
-         setDomNode(htmlElement);
-     }
+    /**
+     * Set the html element that corresponds to this javascript object
+     * @param htmlElement The html element
+     */
+    public void setHtmlElement( final HtmlElement htmlElement ) {
+        setDomNode(htmlElement);
+    }
 
 
-     /**
-      * Return the specified property or NOT_FOUND if it could not be found.
-      * @param name The name of the property
-      * @param start The scriptable object that was originally queried for this property
-      * @return The property.
-      */
-     public Object get( final String name, final Scriptable start ) {
-         // Some calls to get will happen during the initialization of the superclass.
-         // At this point, we don't have enough information to do our own initialization
-         // so we have to just pass this call through to the superclass.
-         if( domNode_ == null ) {
+    /**
+     * Return the specified property or NOT_FOUND if it could not be found.
+     * @param name The name of the property
+     * @param start The scriptable object that was originally queried for this property
+     * @return The property.
+     */
+    public Object get( final String name, final Scriptable start ) {
+        // Some calls to get will happen during the initialization of the superclass.
+        // At this point, we don't have enough information to do our own initialization
+        // so we have to just pass this call through to the superclass.
+        if( domNode_ == null ) {
             final Object result = super.get(name, start);
             // this may help to find which properties htmlunit should impement
             if (result == NOT_FOUND) {
                 getLog().debug("Property \"" + name + "\" of " + start + " not defined as pure js property");
             }
             return result;
-         }
+        }
 
-         final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
-         final Class clazz = getClass();
+        final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
+        final Class clazz = getClass();
 
-         final PropertyInfo info = (PropertyInfo)getPropertyMap().get(name);
-         final int propertyNameState = configuration.getReadablePropertyNameState(clazz, name);
-         final int functionNameState = configuration.getFunctionNameState(clazz, name);
-         if( propertyNameState == JavaScriptConfiguration.ENABLED
-                 && functionNameState == JavaScriptConfiguration.ENABLED ) {
-             throw new IllegalStateException("Name is both a property and a function: name=["
+        final PropertyInfo info = (PropertyInfo)getPropertyMap().get(name);
+        final int propertyNameState = configuration.getReadablePropertyNameState(clazz, name);
+        final int functionNameState = configuration.getFunctionNameState(clazz, name);
+        if( propertyNameState == JavaScriptConfiguration.ENABLED
+                && functionNameState == JavaScriptConfiguration.ENABLED ) {
+            throw new IllegalStateException("Name is both a property and a function: name=["
                 +name+"] class=["+clazz.getName()+"]");
-         }
+        }
 
-         final Object result;
-         if( propertyNameState == JavaScriptConfiguration.ENABLED ) {
-             if( info == null || info.getGetter() == null ) {
-                 getLog().debug("Getter not implemented for property ["+name+"]");
-                 result = NOT_FOUND;
-             }
-             else {
-                 try {
-                     result = info.getGetter().invoke( this, new Object[0] );
-                 }
-                 catch( final Exception e ) {
-                     throw new ScriptException(e);
-                 }
-             }
-         }
-         else if( functionNameState == JavaScriptConfiguration.ENABLED ) {
-             if( info == null || info.getFunction() == null ) {
-                 getLog().debug("Function not implemented ["+name+"]");
-                 result = NOT_FOUND;
-             }
-             else {
-                 result = info.getFunction();
-             }
-         }
-         else {
-             result = super.get(name, start);
-         }
+        final Object result;
+        if( propertyNameState == JavaScriptConfiguration.ENABLED ) {
+            if( info == null || info.getGetter() == null ) {
+                getLog().debug("Getter not implemented for property ["+name+"]");
+                result = NOT_FOUND;
+            }
+            else {
+                try {
+                    result = info.getGetter().invoke( this, new Object[0] );
+                }
+                catch( final Exception e ) {
+                    throw new ScriptException(e);
+                }
+            }
+        }
+        else if( functionNameState == JavaScriptConfiguration.ENABLED ) {
+            if( info == null || info.getFunction() == null ) {
+                getLog().debug("Function not implemented ["+name+"]");
+                result = NOT_FOUND;
+            }
+            else {
+                result = info.getFunction();
+            }
+        }
+        else {
+            result = super.get(name, start);
+        }
 
-         // this may help to find which properties htmlunit should impement
-         if (result == NOT_FOUND) {
-             getLog().debug("Property \"" + name + "\" of " + start + " not defined as fixed property");
-         }
-         return result;
-     }
+        // this may help to find which properties htmlunit should impement
+        if (result == NOT_FOUND) {
+            getLog().debug("Property \"" + name + "\" of " + start + " not defined as fixed property");
+        }
+        return result;
+    }
 
 
-     /**
-      * Set the specified property
-      * @param name The name of the property
-      * @param start The scriptable object that was originally invoked for this property
-      * @param newValue The new value
-      */
-     public void put( final String name, final Scriptable start, Object newValue ) {
-         // Some calls to put will happen during the initialization of the superclass.
-         // At this point, we don't have enough information to do our own initialization
-         // so we have to just pass this call through to the superclass.
-         final SimpleScriptable simpleScriptable = (SimpleScriptable) start;
-         if (simpleScriptable.domNode_ == null ) {
-             super.put(name, start, newValue);
-             return;
-         }
+    /**
+     * Set the specified property
+     * @param name The name of the property
+     * @param start The scriptable object that was originally invoked for this property
+     * @param newValue The new value
+     */
+    public void put( final String name, final Scriptable start, Object newValue ) {
+        // Some calls to put will happen during the initialization of the superclass.
+        // At this point, we don't have enough information to do our own initialization
+        // so we have to just pass this call through to the superclass.
+        final SimpleScriptable simpleScriptable = (SimpleScriptable) start;
+        if (simpleScriptable.domNode_ == null ) {
+            super.put(name, start, newValue);
+            return;
+        }
 
-         final JavaScriptConfiguration configuration = simpleScriptable.getJavaScriptConfiguration();
-         final int propertyNameState = configuration.getWritablePropertyNameState(getClass(), name);
+        final JavaScriptConfiguration configuration = simpleScriptable.getJavaScriptConfiguration();
+        final int propertyNameState = configuration.getWritablePropertyNameState(getClass(), name);
 
-         if (propertyNameState == JavaScriptConfiguration.DISABLED) {
-             throw Context.reportRuntimeError("Property \"" + name + "\" is not writable for " + start + ". "
-                     + "Cant set it to: " + newValue);
-         }
-         else if( propertyNameState == JavaScriptConfiguration.ENABLED ) {
-             final PropertyInfo info = (PropertyInfo) simpleScriptable.getPropertyMap().get(name);
-             if( info == null || info.getSetter() == null ) {
-                 throw Context.reportRuntimeError("Setter configured but not implemented for property \"" 
-                         + name + "\" for " + start + ". "
-                        + "Cant set it to: " + newValue);
-             }
-             else {
-                 final Class parameterClass = info.getSetter().getParameterTypes()[0];
-                 if( parameterClass == String.class) {
-                     newValue = Context.toString(newValue);
-                 }
-                 else if (Integer.TYPE.equals(parameterClass)) {
-                     newValue = new Integer((new Double(Context.toNumber(newValue))).intValue());
-                 }
-                 else if (Boolean.TYPE.equals(parameterClass)) {
-                     newValue = Boolean.valueOf(Context.toBoolean(newValue));
-                 }
-                 try {
-                     info.getSetter().invoke(
-                             simpleScriptable.findMatchingScriptable(start, info.getSetter()), 
-                             new Object[]{ newValue } );
-                 }
-                 catch( final InvocationTargetException e ) {
-                     throw new ScriptException(e.getTargetException());
-                 }
-                 catch( final Exception e ) {
-                     throw new ScriptException(e);
-                 }
-             }
-         }
-         else {
-             getLog().debug("No configured setter \"" + name + "\" found for " 
-                     + start + ". Setting it as pure javascript property.");
+        if (propertyNameState == JavaScriptConfiguration.DISABLED) {
+            throw Context.reportRuntimeError("Property \"" + name + "\" is not writable for " + start + ". "
+                    + "Cant set it to: " + newValue);
+        }
+        else if( propertyNameState == JavaScriptConfiguration.ENABLED ) {
+            final PropertyInfo info = (PropertyInfo) simpleScriptable.getPropertyMap().get(name);
+            if( info == null || info.getSetter() == null ) {
+                throw Context.reportRuntimeError("Setter configured but not implemented for property \"" 
+                    + name + "\" for " + start + ". "
+                    + "Cant set it to: " + newValue);
+            }
+            else {
+                final Class parameterClass = info.getSetter().getParameterTypes()[0];
+                if( parameterClass == String.class) {
+                    newValue = Context.toString(newValue);
+                }
+                else if (Integer.TYPE.equals(parameterClass)) {
+                    newValue = new Integer((new Double(Context.toNumber(newValue))).intValue());
+                }
+                else if (Boolean.TYPE.equals(parameterClass)) {
+                    newValue = Boolean.valueOf(Context.toBoolean(newValue));
+                }
+                try {
+                    info.getSetter().invoke(
+                        simpleScriptable.findMatchingScriptable(start, info.getSetter()), 
+                        new Object[]{ newValue } );
+                }
+                catch( final InvocationTargetException e ) {
+                    throw new ScriptException(e.getTargetException());
+                }
+                catch( final Exception e ) {
+                    throw new ScriptException(e);
+                }
+            }
+        }
+        else {
+            getLog().debug("No configured setter \"" + name + "\" found for " 
+                + start + ". Setting it as pure javascript property.");
              
-             super.put(name, start, newValue);
-         }
-     }
+            super.put(name, start, newValue);
+        }
+    }
 
 
-     /**
-      * Walk up the prototype chain and return the first scriptable that this method can
-      * be invoked on.
-      * @param start The object on which we are starting the search
-      * @param method The method
-      * @return The first scriptable
-      * @throws IllegalStateException If a matching scriptable could not be found.
-      */
-     private Scriptable findMatchingScriptable( final Scriptable start, final Method method ) {
-         final Class declaringClass = method.getDeclaringClass();
-         Scriptable scriptable = start;
-         while( declaringClass.isInstance(start) == false ) {
-             scriptable = scriptable.getPrototype();
-             if( scriptable == null ) {
-                 throw new IllegalStateException("Couldn't find a matching scriptable");
-             }
-         }
+    /**
+     * Walk up the prototype chain and return the first scriptable that this method can
+     * be invoked on.
+     * @param start The object on which we are starting the search
+     * @param method The method
+     * @return The first scriptable
+     * @throws IllegalStateException If a matching scriptable could not be found.
+     */
+    private Scriptable findMatchingScriptable( final Scriptable start, final Method method ) {
+        final Class declaringClass = method.getDeclaringClass();
+        Scriptable scriptable = start;
+        while( declaringClass.isInstance(start) == false ) {
+            scriptable = scriptable.getPrototype();
+            if( scriptable == null ) {
+                throw new IllegalStateException("Couldn't find a matching scriptable");
+            }
+        }
 
-         return scriptable;
-     }
-
-
-     /**
-      * Return the log that is being used for all scripting objects
-      * @return The log.
-      */
-     protected final Log getLog() {
-         return LogFactory.getLog(getClass());
-     }
+        return scriptable;
+    }
 
 
-     private JavaScriptEngine.PageInfo getPageInfo() {
-         if( pageInfo_ == null ) {
-             throw new IllegalStateException("pageInfo_ has not been initialized!");
-         }
-         return pageInfo_;
-     }
+    /**
+     * Return the log that is being used for all scripting objects
+     * @return The log.
+     */
+    protected final Log getLog() {
+        return LogFactory.getLog(getClass());
+    }
 
 
-     /**
-      * Return the javascript object that corresponds to the specified object.
-      * New javascript objects will be created as needed.  If a javascript object
-      * cannot be created for a domNode then NOT_FOUND will be returned.
-      *
-      * @param object a {@link DomNode} or a {@link WebWindow}
-      * @return The javascript object or NOT_FOUND
-      */
+    private JavaScriptEngine.PageInfo getPageInfo() {
+        if( pageInfo_ == null ) {
+            throw new IllegalStateException("pageInfo_ has not been initialized!");
+        }
+        return pageInfo_;
+    }
+
+
+    /**
+     * Return the javascript object that corresponds to the specified object.
+     * New javascript objects will be created as needed.  If a javascript object
+     * cannot be created for a domNode then NOT_FOUND will be returned.
+     *
+     * @param object a {@link DomNode} or a {@link WebWindow}
+     * @return The javascript object or NOT_FOUND
+     */
     protected SimpleScriptable getScriptableFor(final Object object) {
         if (object instanceof WebWindow) {
             return (SimpleScriptable) ((WebWindow) object).getScriptObject();
@@ -594,7 +594,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @param domNode the dom node for which a JS object should be created
      * @return The javascript object
      */
-     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
+    public SimpleScriptable makeScriptableFor(final DomNode domNode) {
 
         final String javaScriptClassName = (String)getHtmlJavaScriptMapping().get(domNode.getClass());
         final SimpleScriptable scriptable;

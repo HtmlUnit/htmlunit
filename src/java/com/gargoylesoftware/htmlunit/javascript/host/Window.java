@@ -771,17 +771,17 @@ public class Window extends SimpleScriptable {
     /**
      * Set a chunk of javascript to be invoked each time a specified number of milliseconds has elapsed
      * Current implementation does nothing.
-    * @param context The javascript Context
-    * @param scriptable The object that the function was called on.
-    * @param args The arguments passed to the function. First arg must be a function or a string containing
-    * the code to execute. 2nd arg is the interval in milliseconds
-    * @param function The function object that was invoked.
-    * @return the id of the created interval
+     * @param context The javascript Context
+     * @param scriptable The object that the function was called on.
+     * @param args The arguments passed to the function. First arg must be a function or a string containing
+     * the code to execute. 2nd arg is the interval in milliseconds
+     * @param function The function object that was invoked.
+     * @return the id of the created interval
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp">
      * MSDN documentation</a>
-    */
-   public static int jsFunction_setInterval(final Context context, final Scriptable scriptable, 
-       final Object[] args,  final Function function ) {
+     */
+    public static int jsFunction_setInterval(final Context context, final Scriptable scriptable, 
+        final Object[] args,  final Function function ) {
 
         final Window thisWindow = (Window)scriptable;
 

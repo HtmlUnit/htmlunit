@@ -95,19 +95,19 @@ public abstract class ClickableElement extends StyledElement {
         final Function function = getEventHandler("onclick");
                 
         if (function != null && page.getWebClient().isJavaScriptEnabled()) {
-           boolean stateUpdated = false;
-           if (isStateUpdateFirst()) {
+            boolean stateUpdated = false;
+            if (isStateUpdateFirst()) {
                 doClickAction(page);
                 stateUpdated = true;
-           }
-           final Event event = new Event(this, this.getScriptObject());
-           
-           final Object[] args = new Object[] {event};
-           
-           final ScriptResult scriptResult = 
-               page.executeJavaScriptFunctionIfPossible(
-                       function, (Scriptable)this.getScriptObject(), args, this);
-           
+            }
+            final Event event = new Event(this, this.getScriptObject());
+            
+            final Object[] args = new Object[] {event};
+            
+            final ScriptResult scriptResult = 
+                page.executeJavaScriptFunctionIfPossible(
+                    function, (Scriptable)this.getScriptObject(), args, this);
+            
             final Page scriptPage = scriptResult.getNewPage();
             if( stateUpdated || scriptResult.getJavaScriptResult().equals( Boolean.FALSE ) ) {
                 return scriptPage;

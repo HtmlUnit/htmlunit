@@ -370,7 +370,7 @@ public final class HtmlPage extends DomNode implements Page {
     public String getResolvedTarget( final String elementTarget ) {
 
         final List baseElements =
-        getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("base"));
+            getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("base"));
         final String resolvedTarget;
         if( baseElements.isEmpty() ) {
             resolvedTarget = elementTarget;
@@ -466,35 +466,34 @@ public final class HtmlPage extends DomNode implements Page {
 
     private Comparator createTabOrderComparator() {
 
-        return
-            new Comparator() {
-                public int compare( final Object object1, final Object object2 ) {
-                    final HtmlElement element1 = ( HtmlElement )object1;
-                    final HtmlElement element2 = ( HtmlElement )object2;
+        return new Comparator() {
+            public int compare( final Object object1, final Object object2 ) {
+                final HtmlElement element1 = ( HtmlElement )object1;
+                final HtmlElement element2 = ( HtmlElement )object2;
 
-                    final int tabIndex1 = getTabIndex( element1 );
-                    final int tabIndex2 = getTabIndex( element2 );
+                final int tabIndex1 = getTabIndex( element1 );
+                final int tabIndex2 = getTabIndex( element2 );
 
-                    final int result;
-                    if( tabIndex1 > 0 && tabIndex2 > 0 ) {
-                        result = tabIndex1 - tabIndex2;
-                    }
-                    else if( tabIndex1 > 0 ) {
-                        result = -1;
-                    }
-                    else if( tabIndex2 > 0 ) {
-                        result = +1;
-                    }
-                    else if( tabIndex1 == tabIndex2 ) {
-                        result = 0;
-                    }
-                    else {
-                        result = tabIndex2 - tabIndex1;
-                    }
-
-                    return result;
+                final int result;
+                if( tabIndex1 > 0 && tabIndex2 > 0 ) {
+                    result = tabIndex1 - tabIndex2;
                 }
-            };
+                else if( tabIndex1 > 0 ) {
+                    result = -1;
+                }
+                else if( tabIndex2 > 0 ) {
+                    result = +1;
+                }
+                else if( tabIndex1 == tabIndex2 ) {
+                    result = 0;
+                }
+                else {
+                    result = tabIndex2 - tabIndex1;
+                }
+
+                return result;
+            }
+        };
     }
 
 
@@ -957,7 +956,7 @@ public final class HtmlPage extends DomNode implements Page {
 
         // the onload of the contained frames or iframe tags
         final List list = getDocumentElement().getHtmlElementsByTagNames( Arrays.asList( new String[]{
-                "frame", "iframe" } ));
+            "frame", "iframe" } ));
         for (final Iterator iter = list.iterator(); iter.hasNext();) {
             final BaseFrame frame = (BaseFrame) iter.next();
             getLog().debug("Executing onload handler for " + frame);
