@@ -164,4 +164,16 @@ public class HTMLElement extends NodeImpl {
         }
         return result;
     }
+    
+
+    /**
+     * Set an attruibute
+     * 
+     * @param name Name of the attribute to set
+     * @param value Value to set the attribute to
+     * @link http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-F68F082
+     */
+    public void jsFunction_setAttribute(final String name, final String value) {
+        getHtmlElementOrDie().setAttributeValue(name, value);
+    }    
 }
