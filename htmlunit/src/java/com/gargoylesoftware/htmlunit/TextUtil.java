@@ -6,6 +6,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.InputStream;
+
 /**
  * Utility methods relating to text.
  *
@@ -45,5 +47,10 @@ public final class TextUtil {
         if( object == null ) {
             throw new NullPointerException(description);
         }
+    }
+    
+    
+    public static InputStream toInputStream( final String content ) {
+        return new java.io.StringBufferInputStream(content);
     }
 }

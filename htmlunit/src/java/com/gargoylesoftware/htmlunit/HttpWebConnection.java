@@ -16,12 +16,15 @@ import java.util.List;
 import java.util.Map;
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.Header;
+import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.URI;
+import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.logging.Log;
@@ -196,7 +199,8 @@ public class HttpWebConnection extends WebConnection {
             final Iterator iterator = parameters.iterator();
             while( iterator.hasNext() ) {
                 final NameValuePair pair = ( NameValuePair )iterator.next();
-                ( ( PostMethod )httpMethod ).setParameter( pair.getName(), pair.getValue() );
+                ( ( PostMethod )httpMethod ).removeParameter( pair.getName(), pair.getValue() );
+                ( ( PostMethod )httpMethod ).addParameter( pair.getName(), pair.getValue() );
             }
         }
         else {
@@ -238,17 +242,21 @@ public class HttpWebConnection extends WebConnection {
                     }
                 } );
 
-            if( getProxyHost() == null ) {
-                client.startSession( url );
+            final HostConfiguration hostConfiguration = new HostConfiguration();
+            final URI uri;
+            try {
+                uri = new URI(url);
             }
-            else {
-                final boolean isSecure = url.getProtocol().equals( "https" );
-
-                final String host = url.getHost();
-                final int port = url.getPort();
-                client.startSession( host, port, getProxyHost(), getProxyPort(), isSecure );
+            catch( URIException e ) {
+                // Theoretically impossible but ....
+                throw new IllegalStateException("Unable to create URI from URL: "+url.toExternalForm());
             }
-
+            hostConfiguration.setHost(uri);
+            if( getProxyHost() != null ) {
+                hostConfiguration.setProxy( getProxyHost(), getProxyPort() );
+            }
+            client.setHostConfiguration(hostConfiguration);
+            
             // If two clients are part of the same domain then they should share the same
             // state (ie cookies)
             final HttpState sharedState = getStateForDomain( url.getHost() );

@@ -8,12 +8,12 @@ package com.gargoylesoftware.htmlunit.test;
 
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringBufferInputStream;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
@@ -119,7 +119,7 @@ public class FakeWebConnection extends WebConnection {
             }
 
             public InputStream getContentAsStream() throws IOException {
-                return new StringBufferInputStream( responseEntry.content_ );
+                return TextUtil.toInputStream(responseEntry.content_);
             }
         };
     }
