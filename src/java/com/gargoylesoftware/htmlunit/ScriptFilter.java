@@ -25,6 +25,7 @@ import org.cyberneko.html.filters.DefaultFilter;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
+ * @author David K. Taylor
  */
 public final class ScriptFilter extends DefaultFilter {
 
@@ -167,7 +168,7 @@ public final class ScriptFilter extends DefaultFilter {
                 final String result = executeScript(script);
                 if( result.length() != 0 ) {
                     final XMLInputSource xmlInputSource = new XMLInputSource(
-                        null, systemId_, null, new StringReader( scriptBuffer_.toString() ), "UTF-8" );
+                        null, systemId_, null, new StringReader( result ), "UTF-8" );
                     configuration_.pushInputSource( xmlInputSource );
                 }
             }
