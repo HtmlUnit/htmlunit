@@ -129,6 +129,8 @@ public class EventHandler extends BaseFunction {
         // quick and dirty
         if ("toString".equals(name)) {
             return new BaseFunction() {
+                private static final long serialVersionUID = 3761409724511435061L;
+
                 public Object call(final Context cx, final Scriptable scope,
                         final Scriptable thisObj, final Object[] args) {
                     return functionDeclaration_;
@@ -139,4 +141,4 @@ public class EventHandler extends BaseFunction {
         return super.get(name, start);
     }
     
-  };
+  }

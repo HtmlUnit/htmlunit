@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Marc Guillemot
  */
 public final class FrameWindow extends Window {
+    private static final long serialVersionUID = 3761121622400448304L;
     private SimpleScriptable htmlElementView_; 
 
     /**
