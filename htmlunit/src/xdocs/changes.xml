@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="yourgod">
+                Upgraded nekohtml to version 0.9.4
+            </action>          
             <action type="add" dev="mguillem">
                 Automatically encode query string part of requested urls if needed as browsers do (for instance change "http://first?a=b c" to "http://first?a=b%20c").
             </action>
