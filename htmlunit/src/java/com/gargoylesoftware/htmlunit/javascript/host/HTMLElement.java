@@ -1192,7 +1192,47 @@ public class HTMLElement extends NodeImpl {
     public Function jsGet_onresize() {
         return getHtmlElementOrDie().getEventHandler("onresize");
     }
-    
+
+    /**
+     * Get the offsetHeight for this element.
+     * @return a dummy value
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetwidth.asp">
+     * MSDN documentation</a>
+     */
+    public int jsGet_offsetHeight() {
+        return 1;
+    }
+
+    /**
+     * Get the offsetWidth for this element.
+     * @return a dummy value
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetWidth.asp">
+     * MSDN documentation</a>
+     */
+    public int jsGet_offsetWidth() {
+        return 1;
+    }
+
+    /**
+     * Get the offsetLeft for this element.
+     * @return a dummy value
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetLeft.asp">
+     * MSDN documentation</a>
+     */
+    public int jsGet_offsetLeft() {
+        return 1;
+    }
+
+    /**
+     * Get the offsetTop for this element.
+     * @return a dummy value
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetTop.asp">
+     * MSDN documentation</a>
+     */
+    public int jsGet_offsetTop() {
+        return 1;
+    }
+
     /**
      * Just for debug purposes
      * @see java.lang.Object#toString()
