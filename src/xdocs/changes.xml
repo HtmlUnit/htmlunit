@@ -30,7 +30,16 @@
 			New class ConfirmHandler
 		</change>
 		<change type="new">
-			New method WebClient.setConfirmHandler()
+			New method WebClient.setConfirmHandler() and getConfirmHandler()
+		</change>
+		<change type="new">
+			Added support for the javascript method Window.prompt()
+		</change>
+		<change type="new">
+			New class PromptHandler
+		</change>
+		<change type="new">
+			New method WebClient.setPromptHandler() and getPromptHandler()
 		</change>
 	</change-log>
 </section>

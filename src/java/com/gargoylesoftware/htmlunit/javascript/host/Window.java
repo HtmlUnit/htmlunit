@@ -8,6 +8,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
+import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -80,6 +81,23 @@ public final class Window extends SimpleScriptable {
         }
         else {
             return handler.handleConfirm(document_.getHtmlPage(), message);
+        }
+    }
+
+
+    /**
+     * The javascript function "prompt()"
+     * @param message The message
+     * @return true if ok was pressed, false if cancel was pressed
+     */
+    public String jsFunction_prompt( final String message ) {
+        final PromptHandler handler = getJavaScriptEngine().getWebClient().getPromptHandler();
+        if( handler == null ) {
+            getLog().warn("window.prompt(\""+message+"\") no prompt handler installed");
+            return null;
+        }
+        else {
+            return handler.handlePrompt(document_.getHtmlPage(), message);
         }
     }
 
