@@ -52,6 +52,7 @@ import org.apache.commons.io.FileUtils;
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -972,6 +973,37 @@ public class WebClientTest extends WebTestCase {
         for (int i = 0; i < 1000; i++) {
             page.getFormByName("myform").submit();
         }
+    }
+
+    /**
+     * Test the value of window.opener when a link has target="_top"
+     * @throws Exception if test fails
+     */
+    public void testOpenerInFrameset() throws Exception {
+
+        final String firstContent = "<html><head><script>alert(window.opener)</script><frameset cols='*'>"
+                                    + "<frame src='" + URL_SECOND + "'>"
+                                    + "</frameset>"
+                                    + "</html>";
+        final String secondContent = "<html><body><a href='" + URL_FIRST + "' target='_top'>to top</a></body></html>";
+
+        final WebClient webClient = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webClient.setWebConnection(webConnection);
+        
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage pageInFrame = (HtmlPage) ((HtmlFrame) page.getFrames().get(0)).getEnclosedPage();
+        ((HtmlAnchor) pageInFrame.getAnchors().get(0)).click();
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "null", "null"} );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 }
 

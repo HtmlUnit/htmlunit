@@ -740,6 +740,7 @@ public class WindowTest extends WebTestCase {
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function runtest() {\n"
+             + "    alert(window.opener)\n"
              + "    alert('one')\n"
              + "    open('http://second', 'foo')"
              + "}\n"
@@ -765,19 +766,16 @@ public class WindowTest extends WebTestCase {
              + "</script></head><body onload='runtest()'>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_THIRD, thirdContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
         webClient.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
                 URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final List expectedAlerts = Arrays.asList( new String[]{ "one", "two", "three" } );
+        final List expectedAlerts = Arrays.asList( new String[]{ "null", "one", "two", "three" } );
         assertEquals( expectedAlerts, collectedAlerts );
     }
 

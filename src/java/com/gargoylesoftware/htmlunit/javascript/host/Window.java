@@ -386,7 +386,7 @@ public final class Window extends SimpleScriptable {
 
     /**
      * Return the value of the opener property.
-     * @return the value of window.opener
+     * @return the value of window.opener, <code>null</code> for a top level window
      */
     public Object jsGet_opener() {
         if( webWindow_ instanceof TopLevelWindow ) {
@@ -396,7 +396,7 @@ public final class Window extends SimpleScriptable {
             }
         }
 
-        return NOT_FOUND;
+        return null;
     }
 
 
