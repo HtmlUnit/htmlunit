@@ -37,7 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.Element;
+import java.util.Map;
+
 
 /**
  *  Wrapper for the html "th" tag
@@ -45,21 +46,29 @@ import org.w3c.dom.Element;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlTableHeaderCell extends HtmlTableCell {
+
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "th";
+
     /**
      *  Create an instance
      *
      * @param  page The page that this element is contained within
-     * @param  element The xml element that represents this html element
-     * @param  row The row within the table that this cell is located at
-     * @param  column The column within the table that this cell is located at
+     * @param attributes the initial attributes
      */
-    HtmlTableHeaderCell(
-        final HtmlPage page, final Element element, final int row, final int column ) {
-        super( page, element, row, column );
+    public HtmlTableHeaderCell(final HtmlPage page, final Map attributes ) {
+        super( page, attributes );
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     /**
      * Return the value of the attribute "abbr".  Refer to the

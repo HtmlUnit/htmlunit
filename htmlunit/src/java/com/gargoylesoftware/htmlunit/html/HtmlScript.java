@@ -37,26 +37,37 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.Element;
+import java.util.Map;
+
 
 /**
  * Wrapper for the html element "script".
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlScript extends HtmlElement {
+
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "script";
 
     /**
      * Create an instance of HtmlScript
      *
      * @param page The HtmlPage that contains this element.
-     * @param xmlElement The actual html element that we are wrapping.
+     * @param attributes the initial attributes
      */
-    HtmlScript( final HtmlPage page, final Element xmlElement ) {
-        super(page, xmlElement);
+    public HtmlScript( final HtmlPage page, final Map attributes ) {
+        super(page, attributes);
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     /**
      * Return the value of the attribute "charset".  Refer to the

@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.mozilla.javascript.Scriptable;
-import org.w3c.dom.Element;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -51,6 +50,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Barnaby Court
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HTMLElement extends NodeImpl {
     private Style style_;
@@ -126,19 +126,19 @@ public class HTMLElement extends NodeImpl {
      * @param disabled True if this is to be disabled.
      */
     public void jsSet_disabled( final boolean disabled ) {
-        final Element xmlElement = getHtmlElementOrDie().getElement();
+        final HtmlElement element = getHtmlElementOrDie();
         if( disabled ) {
-            xmlElement.setAttribute("disabled", "disabled");
+            element.setAttributeValue("disabled", "disabled");
         }
         else {
-            xmlElement.removeAttribute("disabled");
+            element.removeAttribute("disabled");
         }
     }
 
 
     /**
-     * Return the tag name of this element.
-     * @return The tag name
+     * Return the tag name of this element
+     * @return The tag name in uppercase
      */
     public String jsGet_tagName() {
         return getHtmlElementOrDie().getTagName().toUpperCase();

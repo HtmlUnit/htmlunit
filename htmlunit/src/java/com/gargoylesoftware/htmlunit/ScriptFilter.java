@@ -58,12 +58,13 @@ import org.cyberneko.html.filters.DefaultFilter;
  * @author Noboru Sinohara
  * @author David K. Taylor
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public final class ScriptFilter extends DefaultFilter {
 
     private final HTMLConfiguration configuration_;
-    private final HtmlPage htmlPage_;
 
+    private HtmlPage htmlPage_;
     private String scriptSource_;
     private String scriptCharset_;
     private StringBuffer scriptBuffer_;
@@ -77,16 +78,20 @@ public final class ScriptFilter extends DefaultFilter {
      *  Create an instance
      *
      * @param  config The html configuration
-     * @param htmlPage The page that is being loaded.
      */
-    public ScriptFilter( final HTMLConfiguration config, final HtmlPage htmlPage ) {
+    public ScriptFilter( final HTMLConfiguration config ) {
         Assert.notNull("config", config);
-        Assert.notNull("htmlPage", htmlPage);
         configuration_ = config;
-        htmlPage_ = htmlPage;
-        htmlPage_.setScriptFilter(this);
     }
 
+    /**
+     * set the page. This method is called by the HTML parser as soon as the &lt;html&gt; element
+     * has been encountered, and the page has been created
+     * @param page the target page
+     */
+    public void setHtmlPage(HtmlPage page) {
+        htmlPage_ = page;
+    }
 
     /**
      * Start document.

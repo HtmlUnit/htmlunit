@@ -35,26 +35,39 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.html.xpath;
 
-import org.w3c.dom.Node;
+import org.jaxen.BaseXPath;
+import org.jaxen.JaxenException;
 
 /**
- *  A node that is returned for an XML node type that is not supported by this
- *  framework.
+ * Jaxen XPath adapter implementation for the HtmlUnit DOM model
+ *
+ * <p>This is the main entry point for matching an XPath against a HU-DOM
+ * tree.  You create a compiled XPath object, then match it against one or
+ * more context nodes using the {@link #selectNodes} method, as in the
+ * following example:</p>
+ *
+ * <pre>
+ * XPath path = new HtmlUnitXPath("a/b/c");
+ * List results = path.selectNodes(domNode);
+ * </pre>
+ *
+ * @see org.jaxen.BaseXPath
  *
  * @version  $Revision$
- * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class UnknownDomNode extends DomNode {
-    /**
-     *  Create an instance
+public class HtmlUnitXPath extends BaseXPath {
+
+    /** Construct given an XPath expression string.
      *
-     * @param  page The page that contains this node
-     * @param  node The XML node that represents this HTML node
+     *  @param xpathExpr The XPath expression.
+     *
+     *  @throws org.jaxen.JaxenException if there is a syntax error while
+     *          parsing the expression.
      */
-    UnknownDomNode( final HtmlPage page, final Node node ) {
-        super( page, node );
+    public HtmlUnitXPath(String xpathExpr) throws JaxenException {
+        super( xpathExpr, DocumentNavigator.instance );
     }
 }
-

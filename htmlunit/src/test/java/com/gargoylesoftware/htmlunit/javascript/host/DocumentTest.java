@@ -304,10 +304,10 @@ public class DocumentTest extends WebTestCase {
         assertEquals("div", div1.getTagName());
         assertEquals(1, div1.getNodeType());
         assertEquals(null, div1.getNodeValue());
-        assertEquals("DIV", div1.getNodeName());
+        assertEquals("div", div1.getNodeName());
 
         final List expectedAlerts = Arrays.asList( new String[]{
-            "DIV", "1", "null", "DIV"
+            "DIV", "1", "null", "div"
         } );
         assertEquals( expectedAlerts, collectedAlerts );
     }

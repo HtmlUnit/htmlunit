@@ -51,6 +51,7 @@ import junit.textui.TestRunner;
  *
  * @version    $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class SanityCheck extends WebTestCase {
     private static final BrowserVersion BROWSER_VERSION = BrowserVersion.MOZILLA_1_0;
@@ -267,7 +268,7 @@ public class SanityCheck extends WebTestCase {
         form.setMethodAttribute("post");
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button1");
-        button.getElement().setAttribute("name", "textfield1");
+        button.setAttributeValue("name", "textfield1");
 
         final HtmlPage secondPage = (HtmlPage)button.click();
         assertEquals("POST", secondPage.getHtmlElementById("REQUEST_METHOD").asText());

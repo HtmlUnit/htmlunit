@@ -37,11 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.apache.html.dom.HTMLTextAreaElementImpl;
-import org.w3c.dom.Element;
-
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
+
+import java.util.Map;
 
 /**
  *  Wrapper for the html element "textarea"
@@ -50,24 +48,31 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:BarnabyCourt@users.sourceforge.net">Barnaby Court</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class HtmlTextArea
-         extends ClickableElement
-         implements SubmittableElement {
+public class HtmlTextArea extends ClickableElement implements SubmittableElement {
 
-    private String value_ = null;
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "textarea";
+
+    private DomText oldText_;
 
     /**
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element The xml element that corresponds to this html element
+     * @param attributes the initial attributes
      */
-    HtmlTextArea( final HtmlPage page, final Element element ) {
-        super( page, element );
-        value_ = getText();
+    public HtmlTextArea( final HtmlPage page, final Map attributes ) {
+        super( page, attributes );
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     /**
      * Return the value that would be displayed in the text area
@@ -113,10 +118,8 @@ public class HtmlTextArea
      * @param  newValue The new value.
      */
     public final void setText( final String newValue ) {
-        Assert.notNull("newValue", newValue);
-
-        HTMLTextAreaElementImpl textElement = (HTMLTextAreaElementImpl) getElement();
-        textElement.setTextContent(newValue);
+        oldText_ = (DomText)getFirstChild();
+        setFirstChild(new DomText(getPage(), newValue));
     }
 
 
@@ -130,7 +133,7 @@ public class HtmlTextArea
      * @return  See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
-        return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getValue() )};
+        return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getText() )};
     }
 
 
@@ -138,7 +141,9 @@ public class HtmlTextArea
      * Return the value of this element to what it was at the time the page was loaded.
      */
     public void reset() {
-        setText(value_);
+        if(oldText_ != null) {
+            setFirstChild(oldText_);
+        }
     }
 
 

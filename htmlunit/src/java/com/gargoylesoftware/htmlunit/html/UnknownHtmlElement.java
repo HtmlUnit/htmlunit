@@ -37,7 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.Element;
+import java.util.Map;
+
 
 /**
  *  An element that is returned for an html tag that is not supported by this
@@ -46,26 +47,29 @@ import org.w3c.dom.Element;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class UnknownHtmlElement extends ClickableElement {
+
+    private String tagName_;
+
     /**
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element The xml element that represents this html element
+     * @param tagName the HTML tag represented by this object
+     * @param attributes the initial attributes
      */
-    UnknownHtmlElement( final HtmlPage page, final Element element ) {
-        super( page, element );
+    UnknownHtmlElement(final HtmlPage page, final String tagName, final Map attributes) {
+        super(page, attributes);
+        this.tagName_ = tagName.toLowerCase();
     }
 
-
     /**
-     *  Return the tag name of the unknown element.
-     *
-     * @return  The tag name
+     * @return the HTML tag name
      */
-    public String getName() {
-        return getElement().getTagName().toLowerCase();
+    public String getTagName() {
+        return tagName_;
     }
 }
 

@@ -45,7 +45,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
-import org.w3c.dom.Element;
+import java.util.Map;
 
 /**
  * Wrapper for the html element "frame".
@@ -53,10 +53,12 @@ import org.w3c.dom.Element;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class HtmlFrame
-    extends StyledElement
-    implements WebWindow {
+public class HtmlFrame extends StyledElement implements WebWindow {
+
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "frame";
 
     private Page enclosedPage_;
 
@@ -65,10 +67,12 @@ public class HtmlFrame
      * Create an instance of HtmlFrame
      *
      * @param page The HtmlPage that contains this element.
-     * @param xmlElement The actual html element that we are wrapping.
+     * @param attributes the initial attributes
      */
-    HtmlFrame( final HtmlPage page, final Element xmlElement ) {
-        super(page, xmlElement);
+    public HtmlFrame( final HtmlPage page, final Map attributes) {
+
+        super(page, attributes);
+
         final WebClient webClient = page.getWebClient();
         webClient.registerWebWindow(this);
 
@@ -91,6 +95,12 @@ public class HtmlFrame
         }
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     /**
      * Return the value of the attribute "longdesc".  Refer to the

@@ -47,26 +47,23 @@ import java.util.List;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
-import org.dom4j.io.DOMReader;
-import org.w3c.dom.Document;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Jelly tag to load a page from a server.
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:cse@dynabean.com">Christian Sell</a>
  */
 public class GetPageTag extends HtmlUnitTagSupport {
     private String url_ = null;
     private List parameters_ = null;
     private String method_ = "get";
     private String webClientName_;
-    private String xmlVarName_;
 
     /**
      * Create an instance
@@ -103,13 +100,6 @@ public class GetPageTag extends HtmlUnitTagSupport {
         }
         catch( final IOException e ) {
             throw new JellyTagException(e);
-        }
-
-        if( xmlVarName_ != null && page instanceof HtmlPage ) {
-            final Document domDocument = ((HtmlPage)page).getElement().getOwnerDocument();
-            final DOMReader domReader = new DOMReader();
-            jellyContext.setVariable( xmlVarName_, domReader.read(domDocument));
-            //jellyContext.setVariable( xmlVarName_, domDocument);
         }
     }
 
@@ -199,13 +189,5 @@ public class GetPageTag extends HtmlUnitTagSupport {
             // Provide a nicer error message
             throw new JellyTagException("Value of method attribute is not a valid submit method: "+method_);
         }
-    }
-
-    /**
-     * Callback from jelly to set the xmlvar attribute
-     * @param xmlVarName the xmlvar attribute
-     */
-    public void setXmlvar( final String xmlVarName ) {
-        xmlVarName_ = xmlVarName;
     }
 }

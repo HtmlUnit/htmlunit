@@ -39,22 +39,54 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-
-import org.w3c.dom.Node;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import com.gargoylesoftware.htmlunit.Assert;
 
 /**
- *  An abstract wrapper for DOM nodes
+ *  Base class for nodes in the Html DOM tree. This class is modelled after the
+ * W3c DOM specification, but does not implement it.
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public abstract class DomNode {
-    private Node node_;
+public abstract class DomNode implements Cloneable {
+    /**
+     * node type constant for the <code>Document</code> node.
+     */
+    public static final short DOCUMENT_NODE             = 0;
+    /**
+     * node type constant for <code>Element</code> nodes.
+     */
+    public static final short ELEMENT_NODE              = 1;
+    /**
+     * node type constant for <code>Text</code> nodes.
+     */
+    public static final short TEXT_NODE                 = 3;
+
+    /** the owning page of this node */
     private final HtmlPage htmlPage_;
+
+    /** the parent node */
+    private DomNode parent_;
+
+    /**
+     * the previous sibling. The first child's <code>previousSibling</code> points
+     * to the end of the list
+     */
+    private DomNode previousSibling_;
+
+    /**
+     * The next sibling. The last child's <code>nextSibling</code> is <code>null</code>
+     */
+    private DomNode nextSibling_;
+
+    /** Start of the child list */
+    private DomNode firstChild_;
 
     /**
      * This is the javascript object corresponding to this DOM node.  It is
@@ -76,49 +108,9 @@ public abstract class DomNode {
      *  Create an instance
      *
      * @param htmlPage The page that contains this node
-     * @param node The XML node that represents this DomNode
      */
-    protected DomNode( final HtmlPage htmlPage, final Node node ) {
-        if( this instanceof HtmlPage == false ) {
-            Assert.notNull("node", node);
-        }
-        node_ = node;
-
-        if( htmlPage == null && this instanceof HtmlPage ) {
-            htmlPage_ = ( HtmlPage )this;
-        }
-        else {
-            Assert.notNull( "htmlPage", htmlPage );
-            htmlPage_ = htmlPage;
-        }
-    }
-
-
-    /**
-     * Set the DOM node that maps to this DomNode.
-     * @param node The DOM node.
-     */
-    protected final void setNode( final Node node ) {
-        Assert.notNull("node", node);
-
-        if( node_ == null ) {
-            final Object oldValue = node_;
-            node_ = node;
-            firePropertyChange(PROPERTY_ELEMENT, oldValue, node);
-        }
-        else {
-            throw new IllegalStateException("node_ has already been set");
-        }
-    }
-
-
-    /**
-     *  Return the XML node that corresponds to this component.
-     *
-     * @return  The node
-     */
-    public Node getNode() {
-        return node_;
+    protected DomNode(final HtmlPage htmlPage) {
+        htmlPage_ = htmlPage;
     }
 
 
@@ -131,81 +123,6 @@ public abstract class DomNode {
         return htmlPage_;
     }
 
-
-    /**
-     * Get the parent node of this node
-     * @return the parent node of this node
-     */
-    public DomNode getParentNode() {
-        return getPage().getDomNode(getNode().getParentNode());
-    }
-
-
-    /**
-     * Return the next sibling node in the document
-     * @return The next sibling node in the document.
-     */
-    public DomNode getNextSibling() {
-        return getPage().getDomNode(getNode().getNextSibling());
-    }
-
-
-    /**
-     * Return the previous sibling node in the document
-     * @return The previous sibling node in the document.
-     */
-    public DomNode getPreviousSibling() {
-        return getPage().getDomNode(getNode().getPreviousSibling());
-    }
-
-
-    /**
-     * Get the first child node.
-     * @return The first child node or null if the current node has
-     * no children.
-     */
-    public DomNode getFirstChild() {
-        return getPage().getDomNode(getNode().getFirstChild());
-    }
-
-
-    /**
-     * Get the last child node.
-     * @return The last child node or null if the current node has
-     * no children.
-     */
-    public DomNode getLastChild() {
-        return getPage().getDomNode(getNode().getLastChild());
-    }
-
-
-    /**
-     * Get the type of the current node.
-     * @return The node type
-     */
-    public short getNodeType() {
-        return getNode().getNodeType();
-    }
-
-
-    /**
-     * Get the name for the current node.
-     * @return The node name
-     */
-    public String getNodeName() {
-        return getNode().getNodeName();
-    }
-
-
-    /**
-     * Get the value for the current node.
-     * @return The node value
-     */
-    public String getNodeValue() {
-        return getNode().getNodeValue();
-    }
-
-
     /**
      * Internal use only - subject to change without notice.<p>
      * Set the javascript object that corresponds to this node.  This is not
@@ -217,6 +134,150 @@ public abstract class DomNode {
         scriptObject_ = scriptObject;
     }
 
+    /**
+     * Get the last child node.
+     * @return The last child node or null if the current node has
+     * no children.
+     */
+    public DomNode getLastChild() {
+        if(firstChild_ != null) {
+            // last child is stored as the previous sibling of first child
+            return firstChild_.previousSibling_;
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * @return the parent of this node, which may be <code>null</code> if this
+     * is the root node
+     */
+    public DomNode getParentNode() {
+        return parent_;
+    }
+
+    /**
+     * set the aprent node
+     * @param parent the parent node
+     */
+    protected void setParentNode(DomNode parent) {
+        parent_ = parent;
+    }
+
+
+    /**
+     * @return the previous sibling of this node, or <code>null</code> if this is
+     * the first node
+     */
+    public DomNode getPreviousSibling() {
+        if(parent_ == null || this == parent_.firstChild_) {
+            // previous sibling of first child points to last child
+            return null;
+        }
+        else {
+            return previousSibling_;
+        }
+    }
+
+    /**
+     * @return the next sibling
+     */
+    public DomNode getNextSibling() {
+        return nextSibling_;
+    }
+
+    /**
+     * @return the previous sibling
+     */
+    public DomNode getFirstChild() {
+        return firstChild_;
+    }
+
+    /** @param previous set the previousSibling field value */
+    protected void setPreviousSibling(DomNode previous) {
+        previousSibling_ = previous;
+    }
+
+    /** @param next set the nextSibling field value */
+    protected void setNextSibling(DomNode next) {
+        nextSibling_ = next;
+    }
+
+    /** @param child set the first child field value */
+    protected void setFirstChild(DomNode child) {
+        firstChild_ = child;
+    }
+
+    /**
+     * Get the type of the current node.
+     * @return The node type
+     */
+    public abstract short getNodeType();
+
+    /**
+     * Get the name for the current node.
+     * @return The node name
+     */
+    public abstract String getNodeName();
+
+    /**
+     * @return  a text representation of this element that represents what would
+     *  be visible to the user if this page was shown in a web browser. For
+     *  example, a select element would return the currently selected value as
+     *  text
+     */
+    public abstract String asText();
+
+    /**
+     * Get the value for the current node.
+     * @return The node value
+     */
+    public String getNodeValue() {
+        return null;
+    }
+
+    /**
+     * Sets the node value.
+     *
+     * @see org.w3c.dom.Node#setNodeValue
+     */
+    public void setNodeValue(String x) {
+        // Default behavior is to do nothing, overridden in some subclasses
+    }
+
+    /**
+     * make a clone of this node
+     *
+     * @param deep if <code>true</code>, the clone will be propagated to the whole subtree
+     * below this one. Otherwise, the new node will not have any children. The page reference
+     * will always be the same as this node's.
+     * @return a new node
+     */
+    public DomNode cloneNode(boolean deep) {
+
+        final DomNode newnode;
+        try {
+            newnode = (DomNode) clone();
+        }
+        catch( final CloneNotSupportedException e ) {
+            throw new IllegalStateException("Clone not supported for node ["+this+"]");
+        }
+
+        newnode.parent_ = null;
+        newnode.nextSibling_ = null;
+        newnode.previousSibling_ = null;
+        newnode.firstChild_ = null;
+        newnode.scriptObject_ = null;
+
+        // if deep, clone the kids too.
+        if (deep) {
+            for (DomNode child = firstChild_; child != null; child = child.nextSibling_) {
+                newnode.appendChild(child.cloneNode(true));
+            }
+        }
+        return newnode;
+    }
 
     /**
      * Internal use only - subject to change without notice.<p>
@@ -227,6 +288,136 @@ public abstract class DomNode {
         return scriptObject_;
     }
 
+    /**
+     * append a child node to the end of the current list
+     * @param node the node to append
+     * @return the node added
+     */
+    public DomNode appendChild(DomNode node) {
+
+        //clean up the new node, in case it is being moved
+        if(node != this) {
+            node.basicRemove();
+        }
+
+        if(firstChild_ == null) {
+            firstChild_ = node;
+            firstChild_.previousSibling_ = node;
+        }
+        else {
+            DomNode last = getLastChild();
+
+            last.nextSibling_ = node;
+            node.previousSibling_ = last;
+            node.nextSibling_ = null; //safety first
+            firstChild_.previousSibling_ = node; //new last node
+        }
+        node.parent_ = this;
+        return node;
+    }
+
+    /**
+     * insert a new child node before this node into the child relationship this node is a
+     * part of.
+     *
+     * @param newNode the new node to insert
+     * @throws IllegalStateException if this node is not a child of any other node
+     */
+    public void insertBefore(DomNode newNode) throws IllegalStateException {
+
+        if(previousSibling_ == null) {
+            throw new IllegalStateException();
+        }
+
+        //clean up the new node, in case it is being moved
+        if(newNode != this) {
+            newNode.basicRemove();
+        }
+
+        if(parent_.firstChild_ == this) {
+            parent_.firstChild_ = newNode;
+        }
+        else {
+            previousSibling_.nextSibling_ = newNode;
+        }
+        newNode.previousSibling_ = previousSibling_;
+        newNode.nextSibling_ = this;
+        previousSibling_ = newNode;
+        newNode.parent_ = parent_;
+    }
+
+    /**
+     * remove this node from all relationships this node has with siblings an parents
+     * @throws IllegalStateException if this node is not a child of any other node
+     */
+    public void remove() throws IllegalStateException {
+        if(previousSibling_ == null) {
+            throw new IllegalStateException();
+        }
+        basicRemove();
+    }
+
+    /**
+     * cut off all relationships this node has with siblings an parents
+     */
+    private void basicRemove() {
+
+        if(parent_ != null && parent_.firstChild_ == this) {
+            parent_.firstChild_ = null;
+        }
+        else if(previousSibling_ != null) {
+            previousSibling_.nextSibling_ = nextSibling_;
+        }
+        if(nextSibling_ != null) {
+            nextSibling_.previousSibling_ = previousSibling_;
+        }
+
+        nextSibling_ = null;
+        previousSibling_ = null;
+        parent_ = null;
+    }
+
+    /**
+     * replace this node with another node in the child relationship is part of
+     *
+     * @param newNode the node to replace this one
+     * @throws IllegalStateException if this node is not a child of any other node
+     */
+    public void replace(DomNode newNode) throws IllegalStateException {
+
+        if(previousSibling_ == null) {
+            throw new IllegalStateException();
+        }
+
+        //clean up the new node, in case it is being moved
+        if(newNode != this) {
+            newNode.basicRemove();
+        }
+
+        if(parent_.firstChild_ == this) {
+            parent_.firstChild_ = newNode;
+        }
+        else {
+            previousSibling_.nextSibling_ = newNode;
+        }
+        if(nextSibling_ != null) {
+            nextSibling_.previousSibling_ = newNode;
+        }
+
+        newNode.nextSibling_ = nextSibling_;
+        newNode.parent_ = parent_;
+
+        nextSibling_ = null;
+        previousSibling_ = null;
+        parent_ = null;
+    }
+
+    /**
+     * @return an iterator over the children of this node
+     */
+    public Iterator getChildIterator() {
+        return new ChildIterator();
+    }
 
     /**
      * Add a property change listener to this node.
@@ -242,7 +433,6 @@ public abstract class DomNode {
         propertyChangeSupport_.addPropertyChangeListener(listener);
     }
 
-
     /**
      * Remove a property change listener from this node.
      * @param listener The istener.
@@ -255,7 +445,6 @@ public abstract class DomNode {
             propertyChangeSupport_.removePropertyChangeListener(listener);
         }
     }
-
 
     /**
      * Fire a property change event
@@ -270,5 +459,37 @@ public abstract class DomNode {
             propertyChangeSupport_.firePropertyChange(propertyName, oldValue, newValue);
         }
     }
-}
 
+    /**
+     * an iterator over all children of this node
+     */
+    protected class ChildIterator implements Iterator {
+
+        private DomNode nextNode_ = firstChild_;
+
+        /** @return whether there is a next object */
+        public boolean hasNext() {
+            return nextNode_ != null;
+        }
+
+        /** @return the next object */
+        public Object next() {
+            if(nextNode_ != null) {
+                DomNode result = nextNode_;
+                nextNode_ = nextNode_.nextSibling_;
+                return result;
+            }
+            else {
+                throw new NoSuchElementException();
+            }
+        }
+
+        /** remove the current object */
+        public void remove() {
+            if(nextNode_ == null) {
+                throw new IllegalStateException();
+            }
+            nextNode_.previousSibling_.remove();
+        }
+    }
+}

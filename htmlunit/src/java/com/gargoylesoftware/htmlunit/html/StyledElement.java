@@ -37,7 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.Element;
+import java.util.Map;
 
 /**
  * Intermediate base class for "styled" HTML elements.  As defined
@@ -48,17 +48,18 @@ import org.w3c.dom.Element;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class StyledElement extends HtmlElement {
+public abstract class StyledElement extends HtmlElement {
 
     /**
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element The xml element that represents this html element
+     * @param attributes the initial attributes
      */
-    StyledElement( final HtmlPage page, final Element element ) {
-        super( page, element );
+    protected StyledElement( final HtmlPage page, final Map attributes) {
+        super(page, attributes);
     }
 
 

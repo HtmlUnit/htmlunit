@@ -42,6 +42,7 @@ import org.apache.commons.jelly.TagLibrary;
 /**
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlUnitTagLibrary extends TagLibrary {
 
@@ -51,6 +52,7 @@ public class HtmlUnitTagLibrary extends TagLibrary {
     public HtmlUnitTagLibrary() {
         registerTag("webClient", WebClientTag.class);
         registerTag("getPage", GetPageTag.class);
+        registerTag("select", SelectTag.class);
         registerTag("assertStatusCode", AssertStatusCodeTag.class);
         registerTag("assertContentType", AssertContentTypeTag.class);
         registerTag("assertTitle", AssertTitleTag.class);

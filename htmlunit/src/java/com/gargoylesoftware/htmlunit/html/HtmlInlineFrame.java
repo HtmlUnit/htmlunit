@@ -45,7 +45,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
-import org.w3c.dom.Element;
+import java.util.Map;
 
 /**
  * Wrapper for the html element "iframe".
@@ -53,29 +53,35 @@ import org.w3c.dom.Element;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class HtmlInlineFrame
-    extends StyledElement
-    implements WebWindow {
+public class HtmlInlineFrame extends StyledElement implements WebWindow {
+
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "iframe";
 
     private Page enclosedPage_;
-
 
     /**
      * Create an instance of HtmlInlineFrame
      *
      * @param page The HtmlPage that contains this element.
-     * @param xmlElement The actual html element that we are wrapping.
+     * @param attributes the initial attributes
      */
-    public HtmlInlineFrame( final HtmlPage page, final Element xmlElement ) {
-        super(page, xmlElement);
+    public HtmlInlineFrame( final HtmlPage page, final Map attributes) {
+        super(page, attributes);
 
         final WebClient webClient = page.getWebClient();
         webClient.registerWebWindow(this);
-
         loadInnerPageIfPossible( getSrcAttribute(), webClient );
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     private void loadInnerPageIfPossible( final String srcAttribute, final WebClient webClient ) {
 
@@ -140,7 +146,7 @@ public class HtmlInlineFrame
      * @param attribute The new value
      */
     public final void setSrcAttribute( final String attribute ) {
-        getElement().setAttribute("src", attribute);
+        setAttributeValue("src", attribute);
         loadInnerPageIfPossible(attribute, getPage().getWebClient());
     }
 

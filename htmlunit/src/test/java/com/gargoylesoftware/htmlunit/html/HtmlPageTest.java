@@ -57,6 +57,7 @@ import junit.framework.AssertionFailedError;
  * @author Noboru Sinohara
  * @author David K. Taylor
  * @author Andreas Hangler
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlPageTest extends WebTestCase {
 
@@ -228,56 +229,42 @@ public class HtmlPageTest extends WebTestCase {
                 SubmitMethod.POST, Collections.EMPTY_LIST );
 
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
-        assertSame( "form1", form, page.getHtmlElementById( "form1" ) );
-        assertSame( "form2", form, page.getHtmlElement( form.getElement() ) );
+        assertSame( "form1", form, page.getHtmlElementById( "form1" ) ); //huh??
 
         final HtmlInput input = form.getInputByName( "textInput1" );
-        assertSame( "input1", input, form.getInputByName( "textInput1" ) );
-        assertSame( "input2", input, page.getHtmlElement( input.getElement() ) );
+        assertSame( "input1", input, form.getInputByName( "textInput1" ) ); //??
 
         final HtmlButton button = ( HtmlButton )form.getButtonsByName( "button1" ).get( 0 );
         assertSame( "button1", button, form.getButtonsByName( "button1" ).get( 0 ) );
-        assertSame( "button2", button, page.getHtmlElement( button.getElement() ) );
 
         final HtmlSelect select = ( HtmlSelect )form.getSelectsByName( "select1" ).get( 0 );
         assertSame( "select1", select, form.getSelectsByName( "select1" ).get( 0 ) );
-        assertSame( "select2", select, page.getHtmlElement( select.getElement() ) );
 
         final HtmlOption option = select.getOptionByValue( "option1" );
         assertSame( "option1", option, select.getOptionByValue( "option1" ) );
-        assertSame( "option2", option, page.getHtmlElement( option.getElement() ) );
 
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
         assertSame( "table1", table, page.getHtmlElementById( "table1" ) );
-        assertSame( "table2", table, page.getHtmlElement( table.getElement() ) );
 
         final HtmlAnchor anchor = page.getAnchorByName( "anchor1" );
         assertSame( "anchor1", anchor, page.getAnchorByName( "anchor1" ) );
-        assertSame( "anchor2", anchor, page.getHtmlElement( anchor.getElement() ) );
         assertSame( "anchor3", anchor, page.getAnchorByHref("http://www.foo.com") );
         assertSame( "anchor4", anchor, page.getFirstAnchorByText("foo.com") );
 
-        final HtmlTableRow tableRow = ( HtmlTableRow )table.getRows().get( 0 );
-        assertSame( "tableRow1", tableRow, table.getRows().get( 0 ) );
-        assertSame( "tableRow2", tableRow, page.getHtmlElement( tableRow.getElement() ) );
+        final HtmlTableRow tableRow = table.getRow( 0 );
+        assertSame( "tableRow1", tableRow, table.getRow( 0 ) );
 
-        final HtmlTableHeaderCell tableHeaderCell
-            = ( HtmlTableHeaderCell )tableRow.getCells().get( 0 );
-        assertSame( "tableHeaderCell1", tableHeaderCell, tableRow.getCells().get( 0 ) );
+        final HtmlTableHeaderCell tableHeaderCell = (HtmlTableHeaderCell)tableRow.getCell( 0 );
+        assertSame( "tableHeaderCell1", tableHeaderCell, tableRow.getCell( 0 ) );
         assertSame( "tableHeaderCell2", tableHeaderCell, page.getHtmlElementById( "header1" ) );
-        assertSame( "tableHeaderCell3", tableHeaderCell,
-            page.getHtmlElement( tableHeaderCell.getElement() ) );
 
-        final HtmlTableDataCell tableDataCell = ( HtmlTableDataCell )tableRow.getCells().get( 1 );
-        assertSame( "tableDataCell1", tableDataCell, tableRow.getCells().get( 1 ) );
+        final HtmlTableDataCell tableDataCell = (HtmlTableDataCell)tableRow.getCell( 1 );
+        assertSame( "tableDataCell1", tableDataCell, tableRow.getCell( 1 ) );
         assertSame( "tableDataCell2", tableDataCell, page.getHtmlElementById( "data1" ) );
-        assertSame( "tableDataCell3", tableDataCell,
-            page.getHtmlElement( tableDataCell.getElement() ) );
 
         final HtmlTextArea textArea
             = ( HtmlTextArea )form.getTextAreasByName( "textArea1" ).get( 0 );
         assertSame( "textArea1", textArea, form.getTextAreasByName( "textArea1" ).get( 0 ) );
-        assertSame( "textArea2", textArea, page.getHtmlElement( textArea.getElement() ) );
     }
 
 

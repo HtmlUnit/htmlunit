@@ -81,6 +81,11 @@ public abstract class ScriptEngine {
         Assert.notNull(description, object);
     }
 
+    /**
+     * perform initialization for the given page
+     * @param page the page to initialize for
+     */
+    public abstract void initialize(HtmlPage page);
 
     /**
      * Execute the specified source code in the context of the given page.

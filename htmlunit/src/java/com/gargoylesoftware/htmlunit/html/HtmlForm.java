@@ -45,9 +45,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
-import org.w3c.dom.Attr;
-import org.w3c.dom.Element;
+import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -66,25 +64,34 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
  * @author  Brad Clarke
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlForm extends ClickableElement {
+
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "form";
 
     private static final Collection SUBMITTABLE_ELEMENT_NAMES
              = Arrays.asList( new String[]{"input", "button", "select", "textarea", "isindex"} );
 
     private KeyValuePair fakeSelectedRadioButton_ = null;
 
-
     /**
      *  Create an instance
      *
      * @param  htmlPage The page that contains this element
-     * @param  element The xml element that represents this form in the DOM
+     * @param attributes the initial attributes
      */
-    HtmlForm( final HtmlPage htmlPage, final Element element ) {
-        super( htmlPage, element );
+    public HtmlForm( final HtmlPage htmlPage, final Map attributes) {
+        super(htmlPage, attributes);
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     /**
      *  Submit this form to the appropriate server as if a submit button had
@@ -251,13 +258,12 @@ public class HtmlForm extends ClickableElement {
     public Collection getAllSubmittableElements() {
 
         final List submittableElements = new ArrayList();
-        final HtmlPage page = getPage();
 
-        final Iterator iterator = getXmlChildElements();
+        final Iterator iterator = getChildElementsIterator();
         while( iterator.hasNext() ) {
-            final Element element = ( Element )iterator.next();
-            if( isSubmittable( element ) ) {
-                submittableElements.add( page.getHtmlElement( element ) );
+            final HtmlElement element = ( HtmlElement )iterator.next();
+            if( isSubmittable(element) ) {
+                submittableElements.add(element);
             }
         }
 
@@ -265,24 +271,23 @@ public class HtmlForm extends ClickableElement {
     }
 
 
-    private boolean isSubmittable( final Element element ) {
-        final String tagName = getTagName(element);
+    private boolean isSubmittable( final HtmlElement element ) {
+        final String tagName = element.getTagName();
         if( SUBMITTABLE_ELEMENT_NAMES.contains( tagName.toLowerCase() ) == false ) {
             return false;
         }
 
-        final Attr disabled = element.getAttributeNode("disabled");
-        if( disabled != null ) {
+        if(element.isAttributeDefined("disabled")) {
             return false;
         }
-        if( ! tagName.equals( "isindex" ) && getAttributeValue(element, "name" ).equals("") ) {
+
+        if( ! tagName.equals( "isindex" ) && element.getAttributeValue("name" ).equals("") ) {
             return false;
         }
         if( tagName.equals( "input" ) ) {
-            final String type = getAttributeValue(element, "type" ).toLowerCase();
+            final String type = element.getAttributeValue("type" ).toLowerCase();
             if( type.equals( "radio" ) || type.equals( "checkbox" ) ) {
-                final Attr checked = element.getAttributeNode("checked");
-                return checked != null;
+                return element.isAttributeDefined("checked");
             }
             if( type.equals("submit") || type.equals("image") ){
                 // The one submit button that was clicked can be submitted but no other ones
@@ -290,7 +295,7 @@ public class HtmlForm extends ClickableElement {
             }
         }
         if ( tagName.equals("button") ) {
-            final String type = getAttributeValue(element, "type" ).toLowerCase();
+            final String type = element.getAttributeValue("type" ).toLowerCase();
             if( type.equals("submit") ){
                 // The one submit button that was clicked can be submitted but no other ones
                 return false;
@@ -331,30 +336,31 @@ public class HtmlForm extends ClickableElement {
 
 
     /**
-     *  Return the "radio" type input fields that match the specified name and
-     *  value
+     *  Return the "radio" type input field that matches the specified name and value
      *
      * @param  name The name of the HtmlInput
      * @param  value The value of the HtmlInput
      * @return  See above
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
+     * @exception  ElementNotFoundException If the field could not be found
      */
     public HtmlRadioButtonInput getRadioButtonInput( final String name, final String value )
         throws
             ElementNotFoundException {
 
-        final Iterator iterator = getRadioButtonsByName( name ).iterator();
-        if( ! iterator.hasNext() ) {
-            throw new ElementNotFoundException("input", "name", name);
-        }
+        //final Iterator iterator = getRadioButtonsByName( name ).iterator();
+        final ChildElementsIterator iterator = getChildElementsIterator();
         while( iterator.hasNext() ) {
-            final HtmlRadioButtonInput input = ( HtmlRadioButtonInput )iterator.next();
-            if( input.getValueAttribute().equals( value ) ) {
-                return input;
+            final HtmlElement element = iterator.nextElement();
+
+            if( element instanceof HtmlRadioButtonInput
+                    && element.getAttributeValue("name").equals( name ) ) {
+
+                HtmlRadioButtonInput input = (HtmlRadioButtonInput)element;
+                if( input.getValueAttribute().equals( value ) ) {
+                    return input;
+                }
             }
         }
-
         throw new ElementNotFoundException( "input", "value", value );
     }
 
@@ -423,15 +429,14 @@ public class HtmlForm extends ClickableElement {
         Assert.notNull( "name", name );
 
         final List results = new ArrayList();
-        final HtmlPage page = getPage();
 
-        final Iterator iterator = getXmlChildElements();
+        final Iterator iterator = getChildElementsIterator();
         while( iterator.hasNext() ) {
-            final Element element = ( Element )iterator.next();
-            if( getTagName(element).equals( "input" )
-                     && getAttributeValue(element, "type").equalsIgnoreCase( "radio" )
-                     && getAttributeValue(element, "name").equals( name ) ) {
-                results.add( page.getHtmlElement( element ) );
+            final HtmlElement element = ( HtmlElement )iterator.next();
+            if( element.getTagName().equals( "input" )
+                     && element.getAttributeValue("type").equalsIgnoreCase( "radio" )
+                     && element.getAttributeValue("name").equals( name ) ) {
+                results.add(element);
             }
         }
 
@@ -449,8 +454,7 @@ public class HtmlForm extends ClickableElement {
      *
      * @param  name The name of the radio buttons
      * @param  value The value to match
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
+     * @exception  ElementNotFoundException If the specified element could not be found
      */
     public void setCheckedRadioButton(
             final String name,
@@ -458,25 +462,26 @@ public class HtmlForm extends ClickableElement {
         throws
             ElementNotFoundException {
 
+        //we could do this with one iterator, but that would set the state of the other
+        //radios also in the case where the specified one is not found
         final HtmlInput inputToSelect = getRadioButtonInput( name, value );
 
-        final Iterator iterator = getRadioButtonsByName( name ).iterator();
-        if( iterator.hasNext() == false ) {
-            throw new ElementNotFoundException("input", name, value);
-        }
-
+        final ChildElementsIterator iterator = getChildElementsIterator();
         while( iterator.hasNext() ) {
-            final HtmlInput input = ( HtmlInput )iterator.next();
+            final HtmlElement element = iterator.nextElement();
+            if( element instanceof HtmlRadioButtonInput
+                     && element.getAttributeValue("name").equals( name ) ) {
 
-            if( input == inputToSelect ) {
-                input.getElement().setAttribute("checked", "checked");
-            }
-            else {
-                input.getElement().removeAttribute("checked");
+                final HtmlRadioButtonInput input = (HtmlRadioButtonInput)element;
+                if( input == inputToSelect ) {
+                    input.setAttributeValue("checked", "checked");
+                }
+                else {
+                    input.removeAttribute("checked");
+                }
             }
         }
     }
-
 
     /**
      *  Set the "selected radio buttion" to a value that doesn't actually exist
@@ -517,16 +522,24 @@ public class HtmlForm extends ClickableElement {
     /**
      * Return the first checked radio button with the specified name.  If none of
      * the radio buttons by that name are checked then return null.
+     *
      * @param name The name of the radio button
      * @return The first checked radio button.
      */
     public HtmlRadioButtonInput getCheckedRadioButton( final String name ) {
+
         Assert.notNull("name", name);
-        final Iterator iterator = getRadioButtonsByName(name).iterator();
+
+        final ChildElementsIterator iterator = getChildElementsIterator();
         while( iterator.hasNext() ) {
-            final HtmlRadioButtonInput input = (HtmlRadioButtonInput)iterator.next();
-            if( input.isChecked() ) {
-                return input;
+            final HtmlElement element = iterator.nextElement();
+            if( element instanceof HtmlRadioButtonInput
+                     && element.getAttributeValue("name").equals( name ) ) {
+
+                final HtmlRadioButtonInput input = (HtmlRadioButtonInput)element;
+                if( input.isChecked() ) {
+                    return input;
+                }
             }
         }
         return null;
@@ -554,7 +567,7 @@ public class HtmlForm extends ClickableElement {
      * @param action  The value of the attribute "action"
      */
     public final void setActionAttribute( final String action ) {
-        getElement().setAttribute( "action", action );
+        setAttributeValue( "action", action );
     }
 
 
@@ -580,8 +593,7 @@ public class HtmlForm extends ClickableElement {
      *      attribute isn't defined.
      */
     public final void setMethodAttribute( final String method ) {
-        Assert.notNull("method", method);
-        getElement().setAttribute( "method", method );
+        setAttributeValue( "method", method );
     }
 
 
@@ -624,8 +636,7 @@ public class HtmlForm extends ClickableElement {
      *      attribute isn't defined.
      */
     public final void setEnctypeAttribute( final String encoding ) {
-        Assert.notNull("encoding", encoding);
-        getElement().setAttribute( "enctype", encoding );
+        setAttributeValue( "enctype", encoding );
     }
 
 
@@ -703,8 +714,7 @@ public class HtmlForm extends ClickableElement {
      *      attribute isn't defined.
      */
     public final void setTargetAttribute( final String target ) {
-        Assert.notNull("target", target);
-        getElement().setAttribute( "target", target );
+        setAttributeValue( "target", target );
     }
 
     /**

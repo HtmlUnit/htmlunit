@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.w3c.dom.Element;
+import java.util.Map;
 
 /**
  * Wrapper for the html element "tfoot".
@@ -48,6 +48,7 @@ import org.w3c.dom.Element;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public abstract class TableRowGroup extends ClickableElement {
 
@@ -55,10 +56,10 @@ public abstract class TableRowGroup extends ClickableElement {
      * Create an instance of TableRowGroup
      *
      * @param page The HtmlPage that contains this element.
-     * @param xmlElement The actual html element that we are wrapping.
+     * @param attributes the initial attributes
      */
-    TableRowGroup( final HtmlPage page, final Element xmlElement ) {
-        super(page, xmlElement);
+    protected TableRowGroup( final HtmlPage page, final Map attributes) {
+        super(page, attributes);
     }
 
 
@@ -68,10 +69,9 @@ public abstract class TableRowGroup extends ClickableElement {
      * @return a list of table rows
      */
     public final List getRows() {
-        final List childElements = getChildElements();
-        final List resultList = new ArrayList(childElements.size());
+        final List resultList = new ArrayList();
 
-        final Iterator iterator = childElements.iterator();
+        final Iterator iterator = getChildElementsIterator();
         while( iterator.hasNext() ) {
             final HtmlElement element = (HtmlElement)iterator.next();
             if( element instanceof HtmlTableRow ) {

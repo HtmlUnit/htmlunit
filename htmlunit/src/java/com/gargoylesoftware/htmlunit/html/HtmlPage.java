@@ -38,42 +38,28 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.httpclient.HttpConstants;
-import org.apache.xerces.xni.parser.XMLDocumentFilter;
-import org.cyberneko.html.HTMLConfiguration;
-import org.cyberneko.html.parsers.DOMParser;
-import org.mozilla.javascript.Function;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.Text;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import com.gargoylesoftware.htmlunit.Assert;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptEngine;
-import com.gargoylesoftware.htmlunit.ScriptFilter;
-import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.ScriptFilter;
+import com.gargoylesoftware.htmlunit.ScriptEngine;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import org.apache.commons.httpclient.HttpConstants;
+import org.mozilla.javascript.Function;
 
 /**
  *  A representation of an html page returned from a server. This is also the
@@ -85,45 +71,21 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Noboru Sinohara
  * @author David K. Taylor
  * @author Andreas Hangler
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public final class HtmlPage
-         extends HtmlElement
-         implements Page {
+public final class HtmlPage extends HtmlElement implements Page {
 
-    /**
-     * Custom subclass used to provide access to some protected variables.
-     */
-    class MyParser extends DOMParser {
-        /**
-         * Return the configuration used by this parser.
-         * @return The configuration.
-         */
-        public HTMLConfiguration getConfiguration() {
-            return (HTMLConfiguration)fConfiguration;
-        }
-        /**
-         * Return the document used by this parser.
-         * @return The document.
-         */
-        public Document getDocument() {
-            return fDocument;
-        }
-    }
-    /** The parser that is used to create the initial dom tree */
-    private MyParser xmlParser_;
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "html";
 
-    private       Document document_;
     private final WebClient webClient_;
     private final URL originatingUrl_;
     private       String originalCharset_ = null;
-    private final Map nodes_ = new HashMap( 89 );
     private final WebResponse webResponse_;
 
     private WebWindow enclosingWindow_;
 
     private static int FunctionWrapperCount_ = 0;
-
-    private static final Map HTML_ELEMENT_CREATORS = new HashMap();
 
     private static final int TAB_INDEX_NOT_SPECIFIED = -10;
     private static final int TAB_INDEX_OUT_OF_BOUNDS = -20;
@@ -145,33 +107,41 @@ public final class HtmlPage
             final WebResponse webResponse,
             final WebWindow webWindow ) {
 
-        super( null, null );
-
-        Assert.notNull( "webClient", webClient );
-        Assert.notNull( "originatingUrl", originatingUrl );
-        Assert.notNull( "webResponse", webResponse );
-        Assert.notNull( "webWindow", webWindow );
+        super(null, null);
 
         webClient_ = webClient;
         originatingUrl_ = originatingUrl;
         webResponse_ = webResponse;
         setEnclosingWindow(webWindow);
-        webWindow.setEnclosedPage(this);
+
+        final ScriptEngine engine = getWebClient().getScriptEngine();
+        if( engine != null ) {
+            engine.initialize(this);
+        }
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
+
+    /**
+     * @return this page
+     */
+    public HtmlPage getPage() {
+        return this;
+    }
 
     /**
      * Initialize this page.
      * @throws IOException If an IO problem occurs.
      */
     public void initialize() throws IOException {
-        initializeHtmlElementCreatorsIfNeeded();
-        document_ = createDocument( webResponse_ );
-        setElement(document_.getDocumentElement());
+        //executeJavaScriptIfPossible("", "Dummy stub just to get javascript initialized", false, null);
 
-        executeJavaScriptIfPossible("", "Dummy stub just to get javascript initialized", false, null);
-
-        initializeFramesIfNeeded();
+        //initializeFramesIfNeeded();
         executeOnLoadHandlersIfNeeded();
         executeRefreshIfNeeded();
     }
@@ -186,132 +156,6 @@ public final class HtmlPage
         // TODO: executeBodyOnUnloadHandlerIfNeeded();
     }
 
-
-    private static void initializeHtmlElementCreatorsIfNeeded() {
-        synchronized( HTML_ELEMENT_CREATORS ) {
-            if( HTML_ELEMENT_CREATORS.isEmpty() ) {
-                HTML_ELEMENT_CREATORS.put( new Integer( Node.TEXT_NODE ),
-                    new SimpleHtmlElementCreator( DomText.class ) );
-                HTML_ELEMENT_CREATORS.put( "input",
-                    new HtmlInputElementCreator() );
-                HTML_ELEMENT_CREATORS.put( "tr", new TableElementCreator() );
-                HTML_ELEMENT_CREATORS.put( "td", new TableElementCreator() );
-                HTML_ELEMENT_CREATORS.put( "th", new TableElementCreator() );
-
-                final String[][] simpleHtmlElementCreatorData = {
-                    {"a", "HtmlAnchor"},
-                    {"applet", "HtmlApplet"},
-                    {"address", "HtmlAddress"},
-                    {"area", "HtmlArea"},
-                    {"base", "HtmlBase"},
-                    {"basefont", "HtmlBaseFont"},
-                    {"bdo", "HtmlBidirectionalOverride"},
-                    {"blockquote", "HtmlBlockQuote"},
-                    {"body", "HtmlBody"},
-                    {"br", "HtmlBreak"},
-                    {"button", "HtmlButton"},
-                    {"caption", "HtmlCaption"},
-                    {"center", "HtmlCenter"},
-                    {"col", "HtmlTableColumn"},
-                    {"colgroup", "HtmlTableColumnGroup"},
-                    {"dd", "HtmlDefinitionDescription"},
-                    {"del", "HtmlDeletedText"},
-                    {"dir", "HtmlTextDirection"},
-                    {"div", "HtmlDivision"},
-                    {"dl", "HtmlDefinitionList"},
-                    {"dt", "HtmlDefinitionTerm"},
-                    {"fieldset", "HtmlFieldSet"},
-                    {"font", "HtmlFont"},
-                    {"form", "HtmlForm"},
-                    {"frame", "HtmlFrame"},
-                    {"frameset", "HtmlFrameSet"},
-                    {"h1", "HtmlHeader1"},
-                    {"h2", "HtmlHeader2"},
-                    {"h3", "HtmlHeader3"},
-                    {"h4", "HtmlHeader4"},
-                    {"h5", "HtmlHeader5"},
-                    {"h6", "HtmlHeader6"},
-                    {"head", "HtmlHead"},
-                    {"hr", "HtmlHorizontalRule"},
-                    {"iframe", "HtmlInlineFrame"},
-                    {"img", "HtmlImage"},
-                    {"ins", "HtmlInsertedText"},
-                    {"isindex", "HtmlIsIndex"},
-                    {"label", "HtmlLabel"},
-                    {"legend", "HtmlLegend"},
-                    {"li", "HtmlListItem"},
-                    {"link", "HtmlLink"},
-                    {"map", "HtmlMap"},
-                    {"menu", "HtmlMenu"},
-                    {"meta", "HtmlMeta"},
-                    {"noframes", "HtmlNoFrames"},
-                    {"noscript", "HtmlNoScript"},
-                    {"object", "HtmlObject"},
-                    {"ol", "HtmlOrderedList"},
-                    {"optgroup", "HtmlOptionGroup"},
-                    {"option", "HtmlOption"},
-                    {"p", "HtmlParagraph"},
-                    {"param", "HtmlParameter"},
-                    {"pre", "HtmlPreformattedText"},
-                    {"q", "HtmlInlineQuotation"},
-                    {"script", "HtmlScript"},
-                    {"select", "HtmlSelect"},
-                    {"span", "HtmlSpan"},
-                    {"style", "HtmlStyle"},
-                    {"title", "HtmlTitle"},
-                    {"table", "HtmlTable"},
-                    {"tbody", "HtmlTableBody"},
-                    {"textarea", "HtmlTextArea"},
-                    {"tfoot", "HtmlTableFooter"},
-                    {"thead", "HtmlTableHeader"},
-                    {"ul", "HtmlUnorderedList"},
-                };
-
-                for( int i=0; i<simpleHtmlElementCreatorData.length; i++ ) {
-                    final String tagName = simpleHtmlElementCreatorData[i][0];
-                    final Class clazz;
-                    try {
-                        clazz = Class.forName("com.gargoylesoftware.htmlunit.html."
-                            + simpleHtmlElementCreatorData[i][1] );
-                    }
-                    catch( final ClassNotFoundException e ) {
-                        throw new NoClassDefFoundError(simpleHtmlElementCreatorData[i][1]);
-                    }
-                    HTML_ELEMENT_CREATORS.put( tagName,
-                        new SimpleHtmlElementCreator(clazz) );
-                }
-            }
-        }
-    }
-
-
-    private Document createDocument( final WebResponse webResponse )
-        throws IOException {
-
-        final InputStream inputStream = webResponse.getContentAsStream();
-
-        xmlParser_ = new MyParser();
-
-        try {
-            XMLDocumentFilter[] filters = {
-                new ScriptFilter( xmlParser_.getConfiguration(), this )
-            };
-            xmlParser_.setProperty( "http://cyberneko.org/html/properties/filters", filters );
-
-            xmlParser_.setFeature( "http://cyberneko.org/html/features/augmentations", true );
-            xmlParser_.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
-            xmlParser_.setFeature("http://cyberneko.org/html/features/report-errors", true);
-
-            xmlParser_.parse( new InputSource(inputStream) );
-            final Document document = xmlParser_.getDocument();
-            xmlParser_ = null;
-            return document;
-        }
-        catch( final SAXException e ) {
-            throw new ObjectInstantiationException("Unable to parse html input", e);
-        }
-    }
-
     /**
      * Return the charset used in the page.
      * The sources of this information are from 1).meta element which
@@ -319,7 +163,7 @@ public final class HtmlPage
      * the response header.
      * @return the value of charset.
      */
-    public String getPageEncoding(){
+    public String getPageEncoding() {
         if( originalCharset_ != null ) {
             return originalCharset_ ;
         }
@@ -345,82 +189,27 @@ public final class HtmlPage
         return originalCharset_;
     }
 
-
-
     /**
-     * Return the xml element corresponding with this page.  This has been
-     * overridden to ensure it returns a correct value even if the page
-     * hasn't fully been loaded yet.
+     * Create a new HTML element with the given tag name.
      *
-     * @return the xml element.
-     */
-    public Element getElement() {
-        final Element element = super.getElement();
-        if( element == null && xmlParser_ != null ) {
-            return xmlParser_.getDocument().getDocumentElement();
-        }
-        return element;
-    }
-
-
-
-    /**
-     * Return the xml document element corresponding with this page.  This
-     * returns a correct value even if the page hasn't fully been loaded yet.
-     *
-     * @return the xml document element.
-     */
-    public Document getDocument() {
-        if( document_ == null && xmlParser_ != null ) {
-            document_ = xmlParser_.getDocument();
-        }
-        return document_;
-    }
-
-
-
-    /**
-     * Create a new HTML element with the given tag name.  This may be
-     * called if the page hasn't fully been loaded yet.
-     *
-     * @param tagName The tag name
+     * @param tagName The tag name, preferrably in lowercase
      * @return the new HTML element.
      */
-    public HtmlElement createElement( String tagName ) {
-        Document document = getDocument();
-        final Element xmlElement = document.createElement( tagName );
-        final HtmlElement element = getHtmlElement( xmlElement );
-        return element;
+    public HtmlElement createElement(String tagName) {
+        String tagLower = tagName.toLowerCase();
+        return HTMLParser.getFactory(tagLower).createElement(this, tagLower, null);
     }
-
-
-
-    /**
-     * Create a new text node with the given text data.  This may be
-     * called if the page hasn't fully been loaded yet.
-     *
-     * @param data String text data.
-     * @return the new text node.
-     */
-    public DomText createTextNode( String data ) {
-        Document document = getDocument();
-        final Text xmlText = document.createTextNode( data );
-        final DomText textNode = (DomText) getDomNode( xmlText );
-        return textNode;
-    }
-
 
     /**
      *  Return the HtmlAnchor with the specified name
      *
      * @param  name The name to search by
      * @return  See above
-     * @throws ElementNotFoundException If the anchor could not be found.
+     * @throws com.gargoylesoftware.htmlunit.ElementNotFoundException If the anchor could not be found.
      */
     public HtmlAnchor getAnchorByName( final String name ) throws ElementNotFoundException {
         return ( HtmlAnchor )getPage().getOneHtmlElementByAttribute( "a", "name", name );
     }
-
 
     /**
     *  Return the {@link HtmlAnchor} with the specified href
@@ -464,94 +253,6 @@ public final class HtmlPage
 
 
     /**
-     *  Given an XML node, return the HtmlElement object that corresponds to
-     *  that node or an instance of UnknownHtmlElement if one cannot be
-     *  found. <p />
-     *
-     *  If a null xmlNode is passed in then null will be returned.  This
-     *  deviates somewhat from the normal practice of throwing exceptions
-     *  on null parameters but allowing this one case of null makes a
-     *  significant amount of code elsewhere much simpler.
-     *
-     * @param  xmlNode The XML node to match
-     * @return  See above
-     */
-    public HtmlElement getHtmlElement( final Node xmlNode ) {
-        return (HtmlElement) getDomNode( xmlNode );
-    }
-
-
-    /**
-     *  Given an XML node, return the DomNode object that corresponds to
-     *  that node or an instance of UnknownHtmlElement or UnknownDomNode if
-     *  one cannot be found. <p />
-     *
-     *  If a null xmlNode is passed in then null will be returned.  This
-     *  deviates somewhat from the normal practice of throwing exceptions
-     *  on null parameters but allowing this one case of null makes a
-     *  significant amount of code elsewhere much simpler.
-     *
-     * @param  xmlNode The XML node to match
-     * @return  See above
-     */
-    public DomNode getDomNode( final Node xmlNode ) {
-        if( xmlNode == null ) {
-            return null;
-        }
-
-        final DomNode domNode = ( DomNode )nodes_.get( xmlNode );
-        if( domNode != null ) {
-            return domNode;
-        }
-
-        final HtmlElementCreator creator;
-        final DomNode newDomNode;
-        if( xmlNode.getNodeType() == Node.ELEMENT_NODE ) {
-            final String tagName = getTagName((Element) xmlNode);
-            creator = ( HtmlElementCreator )
-               HTML_ELEMENT_CREATORS.get( tagName );
-        }
-        else {
-            creator = ( HtmlElementCreator )
-               HTML_ELEMENT_CREATORS.get( new Integer( xmlNode.getNodeType() ) );
-        }
-        if( creator == null ) {
-            if( xmlNode.getNodeType() == Node.ELEMENT_NODE ) {
-                newDomNode = new UnknownHtmlElement( this, (Element) xmlNode );
-            }
-            else {
-                newDomNode = new UnknownDomNode( this, xmlNode );
-            }
-        }
-        else {
-            newDomNode = creator.create( this, xmlNode );
-        }
-        nodes_.put( xmlNode, newDomNode );
-        return newDomNode;
-    }
-
-
-
-    /**
-     *  Given an XML node, remove that node and return the DomNode
-     *  object that corresponds to that node or null if one cannot be
-     *  found. <p />
-     *
-     *  If a null xmlNode is passed in then null will be returned.
-     *
-     * @param  xmlNode The XML node to remove
-     * @return  See above
-     */
-    public DomNode removeDomNode( final Node xmlNode ) {
-        if( xmlNode == null ) {
-            return null;
-        }
-
-        return ( DomNode )nodes_.remove( xmlNode );
-    }
-
-
-    /**
      * Return the first form that matches the specifed name
      * @param name The name to search for
      * @return The first form.
@@ -584,8 +285,6 @@ public final class HtmlPage
         return webClient_;
     }
 
-
-
     /**
      *  Given a relative url (ie /foo), return a fully qualified url based on
      *  the url that was used to load this page
@@ -615,8 +314,6 @@ public final class HtmlPage
         }
         return webClient_.expandUrl( baseUrl, relativeUrl );
     }
-
-
 
     /**
      *  Given a target attribute value, resolve the target using a base
@@ -740,32 +437,29 @@ public final class HtmlPage
      * @return  A list containing all the tabbable elements in proper tab order.
      */
     public List getTabbableElements() {
+
         final List acceptableTagNames = Arrays.asList(
                 new Object[]{"a", "area", "button", "input", "object", "select", "textarea"} );
         final List tabbableElements = new ArrayList();
-        final HtmlPage page = getPage();
 
-        final Iterator xmlIterator = getXmlChildElements();
-        while( xmlIterator.hasNext() ) {
-            final Element xmlElement = ( Element )xmlIterator.next();
-            final String tagName = getTagName(xmlElement);
+        final DescendantElementsIterator iterator = getAllHtmlChildElements();
+        while( iterator.hasNext() ) {
+            final HtmlElement element = iterator.nextElement();
+            final String tagName = element.getTagName();
             if( acceptableTagNames.contains( tagName ) ) {
-                final String disabledAttribute = getAttributeValue(xmlElement, "disabled");
-                final boolean isDisabled = (disabledAttribute != ATTRIBUTE_NOT_DEFINED);
+                final boolean isDisabled = element.isAttributeDefined("disabled");
 
-                final HtmlElement htmlElement = page.getHtmlElement( xmlElement );
-                if( isDisabled == false && getTabIndex( htmlElement ) != TAB_INDEX_OUT_OF_BOUNDS ) {
-                    tabbableElements.add( htmlElement );
+                if( isDisabled == false && getTabIndex(element) != TAB_INDEX_OUT_OF_BOUNDS ) {
+                    tabbableElements.add(element);
                 }
             }
         }
-
         Collections.sort( tabbableElements, createTabOrderComparator() );
         return Collections.unmodifiableList( tabbableElements );
     }
 
-
     private Comparator createTabOrderComparator() {
+
         return
             new Comparator() {
                 public int compare( final Object object1, final Object object2 ) {
@@ -855,19 +549,20 @@ public final class HtmlPage
      * @return  A list of html elements that are assigned to the specified accesskey.
      */
     public List getHtmlElementsByAccessKey( final char accessKey ) {
+
         final List elements = new ArrayList();
 
         final String searchString = ( "" + accessKey ).toLowerCase();
         final List acceptableTagNames = Arrays.asList(
                 new Object[]{"a", "area", "button", "input", "label", "legend", "textarea"} );
 
-        final Iterator xmlIterator = getXmlChildElements();
-        while( xmlIterator.hasNext() ) {
-            final Element xmlElement = ( Element )xmlIterator.next();
-            if( acceptableTagNames.contains( getTagName(xmlElement) ) ) {
-                final String accessKeyAttribute = getAttributeValue(xmlElement, "accesskey");
+        final DescendantElementsIterator iterator = getAllHtmlChildElements();
+        while( iterator.hasNext() ) {
+            final HtmlElement element = iterator.nextElement();
+            if( acceptableTagNames.contains( element.getTagName() ) ) {
+                final String accessKeyAttribute = element.getAttributeValue("accesskey");
                 if( searchString.equalsIgnoreCase( accessKeyAttribute ) ) {
-                    elements.add( getPage().getHtmlElement( xmlElement ) );
+                    elements.add( element );
                 }
             }
         }
@@ -875,6 +570,36 @@ public final class HtmlPage
         return elements;
     }
 
+    /**
+     *  Many html elements are "tabbable" and can have a "tabindex" attribute
+     *  that determines the order in which the components are navigated when
+     *  pressing the tab key. To ensure good usability for keyboard navigation,
+     *  all tabbable elements should have the tabindex attribute set.<p>
+     *
+     *  Assert that all tabbable elements have a valid value set for "tabindex".
+     *  If they don't then throw an exception as per {@link
+     *  WebClient#assertionFailed(String)}
+     */
+    public void assertAllTabIndexAttributesSet() {
+
+        final List acceptableTagNames = Arrays.asList(
+                new Object[]{"a", "area", "button", "input", "object", "select", "textarea"} );
+        final List tabbableElements = getHtmlElementsByTagNames( acceptableTagNames );
+
+        final Iterator iterator = tabbableElements.iterator();
+        while( iterator.hasNext() ) {
+            final HtmlElement htmlElement = ( HtmlElement )iterator.next();
+            final int tabIndex = getTabIndex( htmlElement );
+            if( tabIndex == TAB_INDEX_OUT_OF_BOUNDS ) {
+                webClient_.assertionFailed(
+                    "Illegal value for tab index: "
+                    + htmlElement.getAttributeValue( "tabindex" ) );
+            }
+            else if( tabIndex == TAB_INDEX_NOT_SPECIFIED ) {
+                webClient_.assertionFailed( "tabindex not set for " + htmlElement );
+            }
+        }
+    }
 
     /**
      *  Many html components can have an "accesskey" attribute which defines a
@@ -883,11 +608,12 @@ public final class HtmlPage
      *  {@link WebClient#assertionFailed(String)}
      */
     public void assertAllAccessKeyAttributesUnique() {
+
         final List accessKeyList = new ArrayList();
 
-        final Iterator xmlIterator = getXmlChildElements();
-        while( xmlIterator.hasNext() ) {
-            final String id = getAttributeValue( ( Element )xmlIterator.next(), "accesskey" );
+        final DescendantElementsIterator iterator = getAllHtmlChildElements();
+        while( iterator.hasNext() ) {
+            final String id = iterator.nextElement().getAttributeValue("accesskey" );
             if( id != null && id.length() != 0 ) {
                 if( accessKeyList.contains( id ) ) {
                     webClient_.assertionFailed( "Duplicate access key: " + id );
@@ -910,9 +636,9 @@ public final class HtmlPage
     public void assertAllIdAttributesUnique() {
         final List idList = new ArrayList();
 
-        final Iterator xmlIterator = getXmlChildElements();
-        while( xmlIterator.hasNext() ) {
-            final String id = getAttributeValue( ( Element )xmlIterator.next(), "id" );
+        final DescendantElementsIterator iterator = getAllHtmlChildElements();
+        while( iterator.hasNext() ) {
+            final String id = iterator.nextElement().getAttributeValue("id");
             if( id != null && id.length() != 0 ) {
                 if( idList.contains( id ) ) {
                     webClient_.assertionFailed( "Duplicate ID: " + id );
@@ -923,38 +649,6 @@ public final class HtmlPage
             }
         }
     }
-
-
-    /**
-     *  Many html elements are "tabbable" and can have a "tabindex" attribute
-     *  that determines the order in which the components are navigated when
-     *  pressing the tab key. To ensure good usability for keyboard navigation,
-     *  all tabbable elements should have the tabindex attribute set.<p>
-     *
-     *  Assert that all tabbable elements have a valid value set for "tabindex".
-     *  If they don't then throw an exception as per {@link
-     *  WebClient#assertionFailed(String)}
-     */
-    public void assertAllTabIndexAttributesSet() {
-        final List acceptableTagNames = Arrays.asList(
-                new Object[]{"a", "area", "button", "input", "object", "select", "textarea"} );
-        final List tabbableElements = getHtmlElementsByTagNames( acceptableTagNames );
-
-        final Iterator iterator = tabbableElements.iterator();
-        while( iterator.hasNext() ) {
-            final HtmlElement htmlElement = ( HtmlElement )iterator.next();
-            final int tabIndex = getTabIndex( htmlElement );
-            if( tabIndex == TAB_INDEX_OUT_OF_BOUNDS ) {
-                webClient_.assertionFailed(
-                    "Illegal value for tab index: "
-                    + htmlElement.getAttributeValue( "tabindex" ) );
-            }
-            else if( tabIndex == TAB_INDEX_NOT_SPECIFIED ) {
-                webClient_.assertionFailed( "tabindex not set for " + htmlElement );
-            }
-        }
-    }
-
 
     /**
      * Execute the specified javascript if a javascript engine was successfully
@@ -1014,7 +708,6 @@ public final class HtmlPage
         return new ScriptResult( result, firstWindow.getEnclosedPage() );
     }
 
-
     /**
      * Internal use only.  This is a callback from {@link ScriptFilter} and
      * should not be called by consumers of HtmlUnit. this method assume the
@@ -1046,7 +739,7 @@ public final class HtmlPage
      * @param languageAttribute The language attribute specified in the script tag.
      * @return true if the script is javascript
      */
-    public boolean isJavaScript( final String typeAttribute, final String languageAttribute ) {
+    public static boolean isJavaScript( final String typeAttribute, final String languageAttribute ) {
         // Unless otherwise specified, we have to assume that any script is javascript
         final boolean isJavaScript;
         if( languageAttribute != null && languageAttribute.length() != 0  ) {
@@ -1061,7 +754,6 @@ public final class HtmlPage
 
         return isJavaScript;
     }
-
 
     private String loadJavaScriptFromUrl( final String urlString,
                                           final String charset ) {
@@ -1111,7 +803,6 @@ public final class HtmlPage
         return "";
     }
 
-
     /**
      * Return the window that this page is sitting inside.
      *
@@ -1120,7 +811,6 @@ public final class HtmlPage
     public WebWindow getEnclosingWindow() {
         return enclosingWindow_;
     }
-
 
     /**
      * Set the window that contains this page.
@@ -1131,18 +821,17 @@ public final class HtmlPage
         enclosingWindow_ = window;
     }
 
-
     /**
      * Return the title of this page or an empty string if the title wasn't specified.
      *
      * @return the title of this page or an empty string if the title wasn't specified.
      */
     public String getTitleText() {
-        final Iterator topIterator = getChildElements().iterator();
+        final Iterator topIterator = getChildElementsIterator();
         while( topIterator.hasNext() ) {
             final HtmlElement topElement = (HtmlElement)topIterator.next();
             if( topElement instanceof HtmlHead ) {
-                final Iterator headIterator = topElement.getChildElements().iterator();
+                final Iterator headIterator = topElement.getChildElementsIterator();
                 while( headIterator.hasNext() ) {
                     final HtmlElement headElement = (HtmlElement)headIterator.next();
                     if( headElement instanceof HtmlTitle ) {
@@ -1153,7 +842,6 @@ public final class HtmlPage
         }
         return "";
     }
-
 
     /**
      * Return the value of the onload attribute of the enclosed body or
@@ -1181,7 +869,6 @@ public final class HtmlPage
         return onLoad;
     }
 
-
     /**
      * Internal use only - subject to change without notice.<p>
      * Return the javascript string for onload.
@@ -1196,7 +883,6 @@ public final class HtmlPage
         }
     }
 
-
     /**
      * Internal use only - subject to change without notice.<p>
      * Set the javascript string for onload.
@@ -1206,7 +892,6 @@ public final class HtmlPage
         onLoad_ = newValue;
     }
 
-
     /**
      * Look for and execute any appropriate onload handlers.  Look for body
      * and frame tags.
@@ -1214,11 +899,13 @@ public final class HtmlPage
     private void executeOnLoadHandlersIfNeeded() {
         executeOneOnLoadHandler( getOnLoadAttribute() );
 
-        final List tagNames = Collections.singletonList("frame");
-        final Iterator iterator = getHtmlElementsByTagNames( tagNames ).iterator();
-        while( iterator.hasNext() ) {
-            final HtmlFrame frame = (HtmlFrame)iterator.next();
-            executeOneOnLoadHandler(frame.getOnLoadAttribute());
+        DescendantElementsIterator iterator = new DescendantElementsIterator();
+
+        while(iterator.hasNext()) {
+            HtmlElement next = iterator.nextElement();
+            if(next instanceof HtmlFrame) {
+                executeOneOnLoadHandler(((HtmlFrame)next).getOnLoadAttribute());
+            }
         }
     }
 
@@ -1247,6 +934,7 @@ public final class HtmlPage
             engine.callFunction( this, onLoad, null, new Object [0], null );
         }
     }
+
     /**
      * If a refresh has been specified either through a meta tag or an http
      * response header, then perform that refresh.
@@ -1304,10 +992,9 @@ public final class HtmlPage
         return getWebResponse().getResponseHeaderValue("Refresh");
     }
 
-    private void initializeFramesIfNeeded() {
-        // The act of creating the html element will cause initialization to start
+    /*private void initializeFramesIfNeeded() {
         getHtmlElementsByTagNames( Arrays.asList( new String[]{"frame", "iframe"}) );
-    }
+    }*/
 
     /**
      * Deregister frames that are no longer in use.
@@ -1332,7 +1019,6 @@ public final class HtmlPage
         return getHtmlElementsByTagNames( Arrays.asList( new String[]{
             "frame", "iframe" } ) );
     }
-
 
     /**
      * Simulate pressing an access key.  This may change the focus, may click buttons and may invoke
@@ -1462,7 +1148,6 @@ public final class HtmlPage
         getWebClient().moveFocusToElement( elementToGiveFocus );
         return elementToGiveFocus;
     }
-
 
     /**
      * Set the script filter that will be used during processing of the

@@ -48,6 +48,7 @@ import org.mozilla.javascript.Scriptable;
  *
  * @version  $Revision$
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class OptionsArray extends SimpleScriptable {
     private HtmlSelect htmlSelect_;
@@ -111,8 +112,7 @@ public class OptionsArray extends SimpleScriptable {
             HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
             if ( htmlOption == null ) {
                 initJavaScriptObject( option );
-                htmlOption = (HtmlOption)
-                    htmlSelect_.getPage().createElement( "option" );
+                htmlOption = new HtmlOption(htmlSelect_.getPage(), null);
                 option.setDomNode( htmlOption );
                 // BUG: Set the text and value.
             }

@@ -37,15 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.Assert;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import java.util.Map;
+import java.util.NoSuchElementException;
+
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 
 /**
  *  Wrapper for the html element "table"
@@ -53,112 +52,106 @@ import org.w3c.dom.NodeList;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlTable extends ClickableElement {
-    private List tableRows_;
 
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "table";
 
     /**
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element The xml element that represents this html element
+     * @param attributes the initial attributes
      */
-    HtmlTable( final HtmlPage page, final Element element ) {
-        super( page, element );
+    public HtmlTable( final HtmlPage page, final Map attributes ) {
+        super( page, attributes );
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     /**
      *  Return the first cell that matches the specified row and column,
      *  searching left to right, top to bottom.
      *
-     * @param  row The row index
-     * @param  column The column index
+     * @param  rowIndex The row index
+     * @param  columnIndex The column index
      * @return  The HtmlTableCell at that location or null if there are no cells
      *      at that location
      */
-    public final HtmlTableCell getCellAt( final int row, final int column ) {
-        final List tableRows = getRows();
-        final Iterator rowIterator = tableRows.iterator();
-        while( rowIterator.hasNext() ) {
-            final List tableCells = ( ( HtmlTableRow )rowIterator.next() ).getCells();
-            final Iterator cellIterator = tableCells.iterator();
-            while( cellIterator.hasNext() ) {
-                final HtmlTableCell cell = ( HtmlTableCell )cellIterator.next();
+    public final HtmlTableCell getCellAt( final int rowIndex, final int columnIndex )
+    {
+        final RowIterator rowIterator = getRowIterator();
+        for(int rowNo = 0; rowIterator.hasNext(); rowNo++) {
+            HtmlTableRow row = rowIterator.nextRow();
 
-                if( cell.matchesPosition( row, column ) ) {
-                    return cell;
-                }
-            }
-        }
-
-        return null;
-    }
-
-
-    /**
-     *  Return an immutable list containing all the HtmlTableRow objects
-     *
-     * @return  See above
-     */
-    public final synchronized List getRows() {
-        // Implementation note:  This method can't be rewritten to use
-        // getChildElements() as that would dump you into an infinite
-        // loop.
-
-        if( tableRows_ != null ) {
-            return tableRows_;
-        }
-
-        final List list = new ArrayList();
-
-        final NodeList nodeList = getElement().getChildNodes();
-        final int nodeCount = nodeList.getLength();
-        final HtmlPage page = getPage();
-
-        int rowIndex = 0;
-
-        for( int i = 0; i < nodeCount; i++ ) {
-            final Node node = nodeList.item( i );
-            if( node instanceof Element ) {
-                final Element element = ( Element )node;
-                final String tagName = getTagName(element);
-                if( tagName.equals( "tr" ) ) {
-                    list.add( new HtmlTableRow( page, element, rowIndex ) );
-                    rowIndex++;
-                }
-                else if( tagName.equals("thead")
-                    || tagName.equals("tbody")
-                    || tagName.equals("tfoot") ) {
-                    final NodeList subList = node.getChildNodes();
-                    final int subListCount = subList.getLength();
-                    for( int subListIndex = 0; subListIndex<subListCount; subListIndex++) {
-                        final Node subNode = subList.item(subListIndex);
-                        if( subNode instanceof Element ) {
-                            final Element subElement = (Element)subNode;
-                            if( getTagName(subElement).equals("tr") ) {
-                                list.add( new HtmlTableRow( page, subElement, rowIndex ) );
-                                rowIndex++;
-                            }
-                        }
+            final HtmlTableRow.CellIterator cellIterator = row.getCellIterator();
+            for(int colNo = 0; cellIterator.hasNext(); colNo++) {
+                HtmlTableCell cell = cellIterator.nextCell();
+                if(rowNo + cell.getRowSpan() > rowIndex) {
+                    if(colNo <= columnIndex && colNo + cell.getColumnSpan() > columnIndex) {
+                        return cell;
                     }
                 }
             }
         }
-
-        tableRows_ = Collections.unmodifiableList( list );
-        return tableRows_;
+        return null;
     }
 
+    /**
+     * @return  an iterator over all the HtmlTableRow objects
+     */
+    public RowIterator getRowIterator() {
+        return new RowIterator();
+    }
 
     /**
-     *  Return the number of rows in this table
+     * @return an immutable list containing all the HtmlTableRow objects
+     * @see #getRowIterator
+     */
+    public List getRows() {
+        List result = new ArrayList();
+        for(RowIterator iterator = getRowIterator(); iterator.hasNext(); ) {
+            result.add(iterator.next());
+        }
+        return Collections.unmodifiableList(result);
+    }
+
+    /**
+     * @param index the 0-based index of the row
+     * @return the HtmlTableRow at the given index
+     * @throws IndexOutOfBoundsException if there is no row at the given index
+     * @see #getRowIterator
+     */
+    public HtmlTableRow getRow(int index) throws IndexOutOfBoundsException {
+        int count = 0;
+        for(RowIterator iterator = getRowIterator(); iterator.hasNext(); count++) {
+            HtmlTableRow next = iterator.nextRow();
+            if(count == index) {
+                return next;
+            }
+        }
+        throw new IndexOutOfBoundsException();
+    }
+
+    /**
+     * compute the number of rows in this table. Note that the count is computed dynamically
+     * by iterating over all rows
      *
      * @return  The number of rows in this table
      */
     public final int getRowCount() {
-        return getRows().size();
+        int count = 0;
+        for(RowIterator iterator = getRowIterator(); iterator.hasNext(); iterator.next()) {
+            count++;
+        }
+        return count;
     }
 
 
@@ -169,20 +162,14 @@ public class HtmlTable extends ClickableElement {
      * @return The row with the specified id.
      * @exception ElementNotFoundException If the row cannot be found.
      */
-    public final HtmlTableRow getRowById( final String id )
-        throws ElementNotFoundException {
-
-        Assert.notNull("id", id);
-        assertNotEmpty("id", id);
-
-        final Iterator iterator = getRows().iterator();
+    public final HtmlTableRow getRowById( final String id ) throws ElementNotFoundException {
+        RowIterator iterator = new RowIterator();
         while( iterator.hasNext() ) {
             final HtmlTableRow row = (HtmlTableRow)iterator.next();
             if( row.getIdAttribute().equals(id) ) {
                 return row;
             }
         }
-
         throw new ElementNotFoundException( "tr", "id", id );
     }
 
@@ -193,7 +180,7 @@ public class HtmlTable extends ClickableElement {
      * @return The caption text
      */
     public String getCaptionText() {
-        final Iterator iterator = getChildElements().iterator();
+        final Iterator iterator = getChildElementsIterator();
         while( iterator.hasNext() ) {
             final HtmlElement element = (HtmlElement)iterator.next();
             if( element instanceof HtmlCaption ) {
@@ -210,7 +197,7 @@ public class HtmlTable extends ClickableElement {
      * @return The table header
      */
     public HtmlTableHeader getHeader() {
-        final Iterator iterator = getChildElements().iterator();
+        final Iterator iterator = getChildElementsIterator();
         while( iterator.hasNext() ) {
             final HtmlElement element = (HtmlElement)iterator.next();
             if( element instanceof HtmlTableHeader ) {
@@ -227,7 +214,7 @@ public class HtmlTable extends ClickableElement {
      * @return The table footer
      */
     public HtmlTableFooter getFooter() {
-        final Iterator iterator = getChildElements().iterator();
+        final Iterator iterator = getChildElementsIterator();
         while( iterator.hasNext() ) {
             final HtmlElement element = (HtmlElement)iterator.next();
             if( element instanceof HtmlTableFooter ) {
@@ -246,7 +233,7 @@ public class HtmlTable extends ClickableElement {
      */
     public List getBodies() {
         final List bodies = new ArrayList();
-        final Iterator iterator = getChildElements().iterator();
+        final Iterator iterator = getChildElementsIterator();
         while( iterator.hasNext() ) {
             final HtmlElement element = (HtmlElement)iterator.next();
             if( element instanceof HtmlTableBody ) {
@@ -371,5 +358,90 @@ public class HtmlTable extends ClickableElement {
      */
     public final String getBgcolorAttribute() {
         return getAttributeValue("bgcolor");
+    }
+
+
+    /**
+     * an iterator that moves over all rows in tis table. The iterator will also
+     * enter into nested row group elements (header, footer and body)
+     */
+    protected class RowIterator implements Iterator {
+
+        private HtmlTableRow nextRow_;
+        private TableRowGroup currentGroup_;
+
+        /** create a new instance */
+        public RowIterator() {
+            setNextRow(getFirstChild());
+        }
+
+        /**
+         * @return <code>true</code> if there are more rows available
+         */
+        public boolean hasNext() {
+            return nextRow_ != null;
+        }
+
+        /**
+         * @return the next row from this iterator
+         * @throws NoSuchElementException if no more rows are available
+         */
+        public Object next() throws NoSuchElementException {
+            return nextRow();
+        }
+
+        /**
+         * remove the current row from the underlying table
+         * @throws IllegalStateException if there is no current element
+         */
+        public void remove() throws IllegalStateException {
+            if(nextRow_ == null) {
+                throw new IllegalStateException();
+            }
+            if(nextRow_.getPreviousSibling() != null) {
+                nextRow_.getPreviousSibling().remove();
+            }
+        }
+
+        /**
+         * @return the next row from this iterator
+         * @throws NoSuchElementException if no more rows are available
+         */
+        public HtmlTableRow nextRow() throws NoSuchElementException {
+            if(nextRow_ != null) {
+                HtmlTableRow result = nextRow_;
+                setNextRow(nextRow_.getNextSibling());
+                return result;
+            }
+            else {
+                throw new NoSuchElementException();
+            }
+        }
+
+        /**
+         * set the internal position to the next row, starting at the given node
+         * @param node the node to marik as the next row. If this is not a row, the
+         * next reachable row will be marked
+         */
+        private void setNextRow(DomNode node) {
+
+            nextRow_ = null;
+            for(DomNode next = node; next != null; next = next.getNextSibling()) {
+                if(next instanceof HtmlTableRow) {
+                    nextRow_ = (HtmlTableRow)next;
+                    return;
+                }
+                else if(currentGroup_ == null && next instanceof TableRowGroup) {
+                    currentGroup_ = (TableRowGroup)next;
+                    setNextRow(next.getFirstChild());
+                    return;
+                }
+            }
+            if(currentGroup_ != null) {
+                DomNode group = currentGroup_;
+                currentGroup_ = null;
+                setNextRow(group.getNextSibling());
+            }
+        }
     }
 }

@@ -83,9 +83,9 @@ public class ScriptEngineTest extends WebTestCase {
         final List collectedScripts = new ArrayList();
         loadPageAndCollectScripts(content, collectedScripts);
 
-        // The last expected is the dummy stub that is needed to initialize the javascript engine
+        // NO MORE: The last expected is the dummy stub that is needed to initialize the javascript engine
         final List expectedScripts = Arrays.asList( new String[]{
-            "One", "Two", "Three", "" } );
+            "One", "Two", "Three"} );
 
         assertEquals( expectedScripts, collectedScripts );
     }
@@ -97,6 +97,8 @@ public class ScriptEngineTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         client.setScriptEngine( new ScriptEngine(client) {
+            public void initialize(HtmlPage page) {
+            }
             public Object execute(
                     final HtmlPage htmlPage, final String sourceCode,
                     final String sourceName, final HtmlElement htmlElement ) {

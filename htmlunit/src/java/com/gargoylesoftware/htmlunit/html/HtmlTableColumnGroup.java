@@ -37,7 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.Element;
+import java.util.Map;
+
 
 /**
  * Wrapper for the html element "colgroup".
@@ -45,19 +46,29 @@ import org.w3c.dom.Element;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlTableColumnGroup extends ClickableElement {
+
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "colgroup";
 
     /**
      * Create an instance of HtmlTableColumnGroup
      *
      * @param page The HtmlPage that contains this element.
-     * @param xmlElement The actual html element that we are wrapping.
+     * @param attributes the initial attributes
      */
-    HtmlTableColumnGroup( final HtmlPage page, final Element xmlElement ) {
-        super(page, xmlElement);
+    public HtmlTableColumnGroup( final HtmlPage page, final Map attributes ) {
+        super(page, attributes);
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     /**
      * Return the value of the attribute "span".  Refer to the

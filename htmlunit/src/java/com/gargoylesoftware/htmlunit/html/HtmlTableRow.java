@@ -37,12 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.Map;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 
 /**
  *  Wrapper for the html element "tr"
@@ -50,92 +51,65 @@ import org.w3c.dom.NodeList;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlTableRow extends ClickableElement {
 
-    private final int row_;
-    private List tableCells_;
-
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "tr";
 
     /**
      *  Create an instance
      *
      * @param  page The page that this element is contained within
-     * @param  element The xml element that represents this html element
-     * @param  row The row within the table that this cell is located at
+     * @param attributes the initial attributes
      */
-    HtmlTableRow( final HtmlPage page, final Element element, final int row ) {
-        super( page, element );
-        row_ = row;
+    public HtmlTableRow( final HtmlPage page, final Map attributes ) {
+        super( page, attributes );
     }
 
-
     /**
-     *  Return the index of this row
-     *
-     * @return  See above
+     * @return the HTML tag name
      */
-    public int getRow() {
-        return row_;
+    public String getTagName() {
+        return TAG_NAME;
     }
 
+    /**
+     * @return an Iterator over the all HtmlTableCell objects in this row
+     */
+    public CellIterator getCellIterator() {
+        return new CellIterator();
+    }
 
     /**
-     *  Return a List containing all the HtmlTableCell objects in this row
-     *
-     * @return  See above
+     * @return an immutable list containing all the HtmlTableCells held by this object
+     * @see #getCellIterator
      */
     public List getCells() {
-        if( tableCells_ != null ) {
-            return tableCells_;
+        List result = new ArrayList();
+        for(CellIterator iterator = getCellIterator(); iterator.hasNext(); ) {
+            result.add(iterator.next());
         }
-
-        tableCells_ = Collections.unmodifiableList(getCells( getElement() ));
-        return tableCells_;
+        return Collections.unmodifiableList(result);
     }
+
     /**
-     *  Return a List containing all the HtmlTableCell objects in this row
-     * @param parent The parent element
-     * @return  See above
+     * @param index the 0-based index
+     * @return the cell at the given index
+     * @throws IndexOutOfBoundsException if there is no cell at the given index
      */
-    private List getCells( final Element parent ) {
-        if( tableCells_ != null ) {
-            return tableCells_;
-        }
-
-        final List list = new ArrayList();
-
-        final NodeList nodeList = parent.getChildNodes();
-        final int nodeCount = nodeList.getLength();
-        final HtmlPage page = getPage();
-
-        final int rowIndex = getRow();
-        int columnIndex = 0;
-
-        for( int i = 0; i < nodeCount; i++ ) {
-            final Node node = nodeList.item( i );
-            if( node instanceof Element ) {
-                final Element element = (Element)node;
-                final String tagName = getTagName(element);
-
-                if( tagName.equals( "td" ) ) {
-                    list.add( new HtmlTableDataCell( page, element, rowIndex, columnIndex++ ) );
-                }
-                else if( tagName.equals( "th" ) ) {
-                    list.add( new HtmlTableHeaderCell( page, element, rowIndex, columnIndex++ ) );
-                }
-                else if( tagName.equals( "form" ) ) {
-                    // Completely illegal html but some of the big sites (ie amazon) do this
-                    list.addAll( getCells(element) );
-                }
-                else {
-                    getLog().debug("Illegal html: found <"+tagName+"> under a <tr> tag");
-                }
+    public HtmlTableCell getCell(int index) throws IndexOutOfBoundsException {
+        int count = 0;
+        for(CellIterator iterator = getCellIterator(); iterator.hasNext(); count++) {
+            HtmlTableCell next = iterator.nextCell();
+            if(count == index) {
+                return next;
             }
         }
-
-        return list;
+        throw new IndexOutOfBoundsException();
     }
+
 
 
     /**
@@ -200,5 +174,89 @@ public class HtmlTableRow extends ClickableElement {
      */
     public final String getBgcolorAttribute() {
         return getAttributeValue("bgcolor");
+    }
+
+    /**
+     * an Iterator over the HtmlTableCells contained in this row. It will also dive
+     * into nested forms, even though that is illegal HTML
+     */
+    public class CellIterator implements Iterator {
+
+        private HtmlTableCell nextCell_;
+        private HtmlForm currentForm_;
+
+        /** create an instance */
+        public CellIterator() {
+            setNextCell(getFirstChild());
+        }
+
+        /** @return whether there is another cell available */
+        public boolean hasNext() {
+            return nextCell_ != null;
+        }
+
+        /**
+         * @return the next cell
+         * @throws NoSuchElementException if no cell is available
+         */
+        public Object next() throws NoSuchElementException {
+            return nextCell();
+        }
+
+        /**
+         * remove the cell under the cursor from the current row
+         * @throws IllegalStateException if there is no currenr row
+         */
+        public void remove() throws IllegalStateException {
+            if(nextCell_ == null) {
+                throw new IllegalStateException();
+            }
+            if(nextCell_.getPreviousSibling() != null) {
+                nextCell_.getPreviousSibling().remove();
+            }
+        }
+
+        /**
+         * @return the next cell
+         * @throws NoSuchElementException if no cell is available
+         */
+        public HtmlTableCell nextCell() throws NoSuchElementException {
+
+            if(nextCell_ != null) {
+                HtmlTableCell result = nextCell_;
+                setNextCell(nextCell_.getNextSibling());
+                return result;
+            }
+            else {
+                throw new NoSuchElementException();
+            }
+        }
+
+        /**
+         * set the internal position to the next cell, starting at the given node
+         * @param node the node to mark as the next cell. If this is not a cell, the
+         * next reachable cell will be marked
+         */
+        private void setNextCell(DomNode node) {
+
+            nextCell_ = null;
+            for(DomNode next = node; next != null; next = next.getNextSibling()) {
+                if(next instanceof HtmlTableCell) {
+                    nextCell_ = (HtmlTableCell)next;
+                    return;
+                }
+                else if(currentForm_ == null && next instanceof HtmlForm) {
+                    // Completely illegal html but some of the big sites (ie amazon) do this
+                    currentForm_ = (HtmlForm)next;
+                    setNextCell(next.getFirstChild());
+                    return;
+                }
+            }
+            if(currentForm_ != null) {
+                DomNode form = currentForm_;
+                currentForm_ = null;
+                setNextCell(form.getNextSibling());
+            }
+        }
     }
 }

@@ -39,7 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
-import org.w3c.dom.Element;
+
+import java.util.Map;
 
 /**
  * Wrapper for the html element "isindex".  Note that this element has been
@@ -48,10 +49,12 @@ import org.w3c.dom.Element;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class HtmlIsIndex
-    extends StyledElement
-    implements SubmittableElement {
+public class HtmlIsIndex extends StyledElement implements SubmittableElement {
+
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "isindex";
 
     private String value_ = "";
 
@@ -59,12 +62,18 @@ public class HtmlIsIndex
      * Create an instance of HtmlIsIndex
      *
      * @param page The HtmlPage that contains this element.
-     * @param xmlElement The actual html element that we are wrapping.
+     * @param attributes the initial attributes
      */
-    HtmlIsIndex( final HtmlPage page, final Element xmlElement ) {
-        super(page, xmlElement);
+    public HtmlIsIndex( final HtmlPage page, final Map attributes) {
+        super(page, attributes);
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     /**
      * Set the value that will be returned during submission of a form.

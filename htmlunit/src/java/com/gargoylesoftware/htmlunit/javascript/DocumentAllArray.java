@@ -50,13 +50,13 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
-import org.w3c.dom.Element;
 
 /**
  * This is the array returned by the all property of Document.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class DocumentAllArray extends SimpleScriptable {
     private HtmlPage htmlPage_;
@@ -105,11 +105,11 @@ public class DocumentAllArray extends SimpleScriptable {
 
         int elementCount = 1;
 
-        final Iterator iterator = htmlPage.getXmlChildElements();
+        final Iterator iterator = htmlPage.getAllHtmlChildElements();
         while( iterator.hasNext() ) {
-            final Element element = (Element)iterator.next();
+            final HtmlElement element = (HtmlElement)iterator.next();
             if( elementCount == index ) {
-                return getScriptableFor( htmlPage.getHtmlElement(element) );
+                return getScriptableFor( element );
             }
             elementCount++;
         }
@@ -181,7 +181,7 @@ public class DocumentAllArray extends SimpleScriptable {
         int elementCount = 1; // First one is <html>
 
         final HtmlPage htmlPage = array.htmlPage_;
-        final Iterator iterator = htmlPage.getXmlChildElements();
+        final Iterator iterator = htmlPage.getAllHtmlChildElements();
         while( iterator.hasNext() ) {
             elementCount++;
             iterator.next();

@@ -71,6 +71,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Noboru Sinohara
  * @author <a href="mailto:chen_jun@users.sourceforge.net"> Chen Jun</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class WebClient {
 
@@ -563,7 +564,6 @@ public class WebClient {
         }
 
         final Page newPage = pageCreator_.createPage( this, webResponse, webWindow );
-        webWindow.setEnclosedPage(newPage);
 
         if (! firstWindowStack_.empty() && firstWindowStack_.peek() == null) {
             firstWindowStack_.pop();

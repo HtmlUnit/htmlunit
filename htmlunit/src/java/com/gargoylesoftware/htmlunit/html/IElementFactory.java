@@ -37,23 +37,23 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.Node;
+import org.xml.sax.Attributes;
 
 /**
- * An object that knows how to create HtmlElements
- *
+ * specification of a factory capable of creating HtmlElement objects
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-abstract class HtmlElementCreator {
+public interface IElementFactory {
     /**
-     * Create a DomNode for the specified xmlNode, contained in the specified page.
-     *
-     * @param page The page that this element will belong to.
-     * @param xmlNode The XML node that this HtmlElement corresponds to.
-     * @return The new DomNode.
+     * create an element according to this factory's specification.
+     * @param page the enclosing page for the new element. Note that the element is <em>not</em> yet added
+     * into the DOM tree.
+     * @param tagName the tag name. Most factories will be responsible for a specific tag, but this
+     * parameter is passed in for factories that dont follow this rule
+     * @param attributes the attributes encountered during XML/HTML parsing. Possibly <code>null</code>
+     * if no attributes specified
+     * @return the newly created and initialized element
      */
-    abstract DomNode create( final HtmlPage page, final Node xmlNode );
+    HtmlElement createElement(HtmlPage page, String tagName, Attributes attributes);
 }
-

@@ -42,30 +42,30 @@ import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.w3c.dom.Attr;
-import org.w3c.dom.Element;
-
 /**
  * <p>Tests for all the generated attribute accessors.  This test case will
  * dynamically generate tests for all the various attributes.  The code
  * is fairly complicated but doing it this way is much easier than writing
- * individual tests for all the attributes.</p>
+ * individual tests for all the attributes.
+ * </p>
+ * With the new custom DOM, this test has somewhat lost its significance.
+ * We simply set and get the attributes and compare the results.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Christian Sell
  */
 public class AttributesTest extends TestCase {
 
@@ -221,43 +221,36 @@ public class AttributesTest extends TestCase {
     protected void runTest() throws Exception {
         final String value = new String("value");
 
-        final List collectedAttributeRequests = new ArrayList();
-        final Element proxyElement = createProxyElement(value, collectedAttributeRequests);
-        final Object objectToTest = getNewInstanceForClassUnderTest(proxyElement);
+        final HtmlElement objectToTest = (HtmlElement)getNewInstanceForClassUnderTest();
+        objectToTest.setAttributeValue(attributeName_, value);
 
-        collectedAttributeRequests.clear();
         final Object noObjects[] = new Object[0];
         final Object result = method_.invoke( objectToTest, noObjects );
         assertSame( value, result );
-
-        final List expectedAttributeRequests = new ArrayList();
-        expectedAttributeRequests.add(attributeName_.toUpperCase());
-        assertEquals( expectedAttributeRequests, collectedAttributeRequests);
     }
 
     /**
      * Create a new instance of the class being tested.
-     * @param proxyElement The element that is being wrapped by the class.
      * @return The new instance.
      * @throws Exception If the new object cannot be created.
      */
-    private Object getNewInstanceForClassUnderTest(final Element proxyElement ) throws Exception {
+    private Object getNewInstanceForClassUnderTest() throws Exception {
         final Object newInstance;
         if( classUnderTest_ == HtmlTableRow.class ) {
-            newInstance = new HtmlTableRow( page_, proxyElement, 1 );
+            newInstance = new HtmlTableRow( page_, null);
         }
         else if( classUnderTest_ == HtmlTableHeaderCell.class ) {
-            newInstance = new HtmlTableHeaderCell(page_, proxyElement, 1, 1 );
+            newInstance = new HtmlTableHeaderCell(page_, null );
         }
         else if( classUnderTest_ == HtmlTableDataCell.class ) {
-            newInstance = new HtmlTableDataCell(page_, proxyElement, 1, 1 );
+            newInstance = new HtmlTableDataCell(page_, null );
         }
         else {
             final Constructor constructor = classUnderTest_.getDeclaredConstructor(
-                new Class[]{ HtmlPage.class, Element.class } );
+                new Class[]{ HtmlPage.class, Map.class } );
             try {
                 newInstance = constructor.newInstance(
-                    new Object[]{page_, proxyElement});
+                    new Object[]{page_, null});
             }
             catch( final InvocationTargetException e ) {
                 final Throwable targetException = e.getTargetException();
@@ -274,61 +267,6 @@ public class AttributesTest extends TestCase {
         }
 
         return newInstance;
-    }
-
-    /**
-     * Create a {@link Proxy} {@link Element}
-     * @param value The value that will be returned when the attribute value is
-     * requested.
-     * @param collectedAttributeRequests A list into which all the attribute
-     * requests will be placed.
-     * @return The new proxy.
-     */
-    private Element createProxyElement( final String value, final List collectedAttributeRequests ) {
-        final Class clazz = Element.class;
-        final InvocationHandler handler =
-            new InvocationHandler() {
-                public Object invoke( Object proxy, Method method, Object[] args ) {
-                    final String methodName = method.getName();
-
-                    if( methodName.equals( "equals" ) && args.length == 1 ) {
-                        return new Boolean( proxy == args[0] );
-                    }
-                    else if( methodName.equals( "toString" ) ) {
-                        return "Proxy(" + clazz.getName() + ")";
-                    }
-                    else if( methodName.endsWith("getAttributeNode") ) {
-                        collectedAttributeRequests.add( args[0] );
-                        return createProxyAttributeNode(value);
-                    }
-                    return null;
-                }
-            };
-
-        return (Element) Proxy.newProxyInstance(
-                getClass().getClassLoader(),
-                new Class[]{clazz},
-                handler );
-    }
-
-    /**
-     * Create a {@link Proxy} {@link Attr} object.
-     * @param value The object that will be returned by any method call to the proxy.
-     * @return The new proxy.
-     */
-    private Attr createProxyAttributeNode( final String value ) {
-        final Class clazz = Attr.class;
-        final InvocationHandler handler =
-            new InvocationHandler() {
-                public Object invoke( Object proxy, Method method, Object[] args ) {
-                    return value;
-                }
-            };
-
-        return (Attr) Proxy.newProxyInstance(
-                getClass().getClassLoader(),
-                new Class[]{clazz},
-                handler );
     }
 
     /**

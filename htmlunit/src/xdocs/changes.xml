@@ -6,10 +6,16 @@
     </properties>
 
     <body>
-        <release version="Next" date="not released yet">
+        <release version="1.3-pre1" date="November 7, 2003">
             <action type="update" dev="mbowler">
                 INCOMPATIBLE CHANGE: Added method to interface WebWindowListener for 
                 window closing events.
+            </action>
+            <action type="update" dev="mbowler" due-to="Christian Sell">
+                INCOMPATIBLE CHANGE: There previously were three seperate tree models
+                for any given page: 1) the HtmlElement hierarchy 2) The xml DOM model and
+                3) the javascript element model.  Now the first two tree models have 
+                been merged into one.  Patch submitted by Christian Sell.
             </action>
             <action type="update" dev="mbowler">
                 Continued migration of the build process from ant to maven.

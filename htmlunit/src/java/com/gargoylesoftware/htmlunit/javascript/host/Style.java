@@ -51,6 +51,7 @@ import org.mozilla.javascript.Scriptable;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class Style extends SimpleScriptable {
     private HTMLElement jsElement_;
@@ -125,7 +126,7 @@ public class Style extends SimpleScriptable {
              buffer.append( entry.getValue() );
              buffer.append( "; " );
          }
-         jsElement_.getHtmlElementOrDie().getElement().setAttribute("style", buffer.toString());
+         jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
      }
 
 

@@ -37,13 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.Element;
+import java.util.Map;
+
 
 /**
  *  Wrapper for the html element "input" where type is "button"
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlButtonInput extends HtmlInput {
 
@@ -51,10 +53,10 @@ public class HtmlButtonInput extends HtmlInput {
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element the xml element that represents this tag
+     * @param attributes the initial attributes
      */
-    HtmlButtonInput( final HtmlPage page, final Element element ) {
-        super( page, element );
+    public HtmlButtonInput( final HtmlPage page, final Map attributes) {
+        super( page, attributes);
     }
 }
 

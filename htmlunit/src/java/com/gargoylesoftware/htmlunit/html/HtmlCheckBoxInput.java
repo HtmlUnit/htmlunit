@@ -38,8 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
-
-import org.w3c.dom.Element;
+import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
 
@@ -50,6 +49,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlCheckBoxInput extends HtmlInput {
 
@@ -60,10 +60,10 @@ public class HtmlCheckBoxInput extends HtmlInput {
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element the xml element that represents this tag
+     * @param attributes the initial attributes
      */
-    HtmlCheckBoxInput( final HtmlPage page, final Element element ) {
-        super( page, element );
+    public HtmlCheckBoxInput( final HtmlPage page, final Map attributes) {
+        super( page, attributes );
 
         //From the checkbox creator
         initialCheckedState_ = isAttributeDefined("checked");
@@ -84,10 +84,10 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     public void setChecked( final boolean isChecked ) {
         if( isChecked ) {
-            getElement().setAttribute( "checked", "checked" );
+            setAttributeValue( "checked", "checked" );
         }
         else {
-            getElement().removeAttribute( "checked" );
+            removeAttribute( "checked" );
         }
     }
     /**

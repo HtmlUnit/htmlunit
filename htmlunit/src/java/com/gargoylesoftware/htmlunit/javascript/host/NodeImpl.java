@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.w3c.dom.Node;
-
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -50,6 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Barnaby Court
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class NodeImpl extends SimpleScriptable {
 
@@ -100,7 +99,7 @@ public class NodeImpl extends SimpleScriptable {
      * @param newValue The new node value
      */
     public void jsSet_nodeValue( String newValue ) {
-        getDomNodeOrDie().getNode().setNodeValue( newValue );
+        getDomNodeOrDie().setNodeValue( newValue );
     }
 
 
@@ -110,27 +109,19 @@ public class NodeImpl extends SimpleScriptable {
      * @return The newly added child node.
      */
     public Object jsFunction_appendChild(final Object childObject) {
-        final Object appendedChild;
+
+        Object appendedChild = null;
         if (childObject instanceof NodeImpl) {
             // Get XML node for the DOM node passed in
             final DomNode childDomNode =
                 ((NodeImpl) childObject).getDomNodeOrDie();
-            final Node childXmlNode = childDomNode.getNode();
 
             // Get the parent XML node that the child should be added to.
             final DomNode parentNode = this.getDomNodeOrDie();
-            final Node parentXmlNode = parentNode.getNode();
 
             // Append the child to the parent node
-            if ( parentXmlNode.appendChild(childXmlNode) == null ) {
-                appendedChild = null;
-            }
-            else {
-                appendedChild = childObject;
-            }
-        }
-        else {
-            appendedChild = null;
+            parentNode.appendChild(childDomNode);
+            appendedChild = childObject;
         }
         return appendedChild;
     }
@@ -144,8 +135,8 @@ public class NodeImpl extends SimpleScriptable {
      */
     public Object jsFunction_cloneNode(final boolean deep) {
         final DomNode domNode = getDomNodeOrDie();
-        final Node clonedXmlNode = domNode.getNode().cloneNode( deep );
-        return getJavaScriptNode(domNode.getPage().getDomNode(clonedXmlNode));
+        final DomNode clonedNode = domNode.cloneNode( deep );
+        return getJavaScriptNode(clonedNode);
     }
 
 
@@ -156,37 +147,29 @@ public class NodeImpl extends SimpleScriptable {
      * @param refChildObject The node before which to add the new child
      * @return The newly added child node.
      */
-    public Object jsFunction_insertBefore(final Object newChildObject,
-        final Object refChildObject) {
-        final Object appendedChild;
+    public Object jsFunction_insertBefore(
+            final Object newChildObject, final Object refChildObject) {
+        Object appendedChild = null;
+
         if (newChildObject instanceof NodeImpl &&
             refChildObject instanceof NodeImpl) {
-            // Get XML nodes for the DOM nodes passed in
-            final DomNode newChildDomNode =
+
+            final DomNode newChildNode =
                 ((NodeImpl) newChildObject).getDomNodeOrDie();
-            final Node newChildXmlNode = newChildDomNode.getNode();
-            Node refChildXmlNode = null;
-            if (refChildObject != null) {
-                final DomNode refChildDomNode =
-                    ((NodeImpl) refChildObject).getDomNodeOrDie();
-                refChildXmlNode = refChildDomNode.getNode();
-            }
 
-            // Get the parent XML node that the child should be added to.
-            final DomNode parentNode = this.getDomNodeOrDie();
-            final Node parentXmlNode = parentNode.getNode();
-
-            // Append the child to the parent node
-            if ( parentXmlNode.insertBefore(newChildXmlNode,
-                refChildXmlNode) == null ) {
-                appendedChild = null;
+            final DomNode refChildNode;
+            if(refChildObject != null) {
+                refChildNode = ((NodeImpl) refChildObject).getDomNodeOrDie();
             }
             else {
+                refChildNode = null;
+            }
+
+            // Append the child to the parent node
+            if (refChildNode != null ) {
+                refChildNode.insertBefore(newChildNode);
                 appendedChild = newChildObject;
             }
-        }
-        else {
-            appendedChild = null;
         }
         return appendedChild;
     }
@@ -198,28 +181,16 @@ public class NodeImpl extends SimpleScriptable {
      * @return The removed child node.
      */
     public Object jsFunction_removeChild(final Object childObject) {
-        final Object removedChild;
+        Object removedChild = null;
+
         if (childObject instanceof NodeImpl) {
             // Get XML node for the DOM node passed in
-            final DomNode childDomNode =
+            final DomNode childNode =
                 ((NodeImpl) childObject).getDomNodeOrDie();
-            final Node childXmlNode = childDomNode.getNode();
-
-            // Get the parent XML node that the child should be added to.
-            final DomNode parentNode = this.getDomNodeOrDie();
-            final Node parentXmlNode = parentNode.getNode();
 
             // Remove the child from the parent node
-            if ( parentXmlNode.removeChild(childXmlNode) == null ) {
-                removedChild = null;
-            }
-            else {
-                removedChild = childObject;
-                parentNode.getPage().removeDomNode(childXmlNode);
-            }
-        }
-        else {
-            removedChild = null;
+            childNode.remove();
+            removedChild = childObject;
         }
         return removedChild;
     }
@@ -231,37 +202,23 @@ public class NodeImpl extends SimpleScriptable {
      * @param oldChildObject The node to remove as a child of this node
      * @return The removed child node.
      */
-    public Object jsFunction_replaceChild(final Object newChildObject,
-        final Object oldChildObject) {
-        final Object removedChild;
+    public Object jsFunction_replaceChild(
+            final Object newChildObject, final Object oldChildObject) {
+        Object removedChild = null;
+
         if (newChildObject instanceof NodeImpl &&
             oldChildObject instanceof NodeImpl) {
             // Get XML nodes for the DOM nodes passed in
-            final DomNode newChildDomNode =
+            final DomNode newChildNode =
                 ((NodeImpl) newChildObject).getDomNodeOrDie();
-            final Node newChildXmlNode = newChildDomNode.getNode();
-            Node oldChildXmlNode = null;
-            if (oldChildObject != null) {
-                final DomNode oldChildDomNode =
-                    ((NodeImpl) oldChildObject).getDomNodeOrDie();
-                oldChildXmlNode = oldChildDomNode.getNode();
-            }
 
-            // Get the parent XML node that the child should be added to.
-            final DomNode parentNode = this.getDomNodeOrDie();
-            final Node parentXmlNode = parentNode.getNode();
-
-            // Replace the old child with the new child.
-            if ( parentXmlNode.replaceChild(newChildXmlNode,
-                oldChildXmlNode) == null ) {
-                removedChild = null;
-            }
-            else {
+            final DomNode oldChildNode;
+            if(oldChildObject != null) {
+                // Replace the old child with the new child.
+                oldChildNode = ((NodeImpl) oldChildObject).getDomNodeOrDie();
+                oldChildNode.replace(newChildNode);
                 removedChild = oldChildObject;
             }
-        }
-        else {
-            removedChild = null;
         }
         return removedChild;
     }

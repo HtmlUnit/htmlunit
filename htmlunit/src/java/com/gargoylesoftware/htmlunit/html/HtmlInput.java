@@ -38,8 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
-
-import org.w3c.dom.Element;
+import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -52,21 +51,29 @@ import com.gargoylesoftware.htmlunit.Page;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class HtmlInput
-         extends ClickableElement
-         implements SubmittableElement {
+public class HtmlInput extends ClickableElement implements SubmittableElement {
+
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "input";
 
     /**
      *  Create an instance
      *
      * @param  page The page that contains this element
-     * @param  element the xml element that represents this tag
+     * @param attributes the initial attributes
      */
-    HtmlInput( final HtmlPage page, final Element element ) {
-        super( page, element );
+    public HtmlInput( final HtmlPage page, final Map attributes ) {
+        super( page, attributes );
     }
 
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
+    }
 
     /**
      *  Set the content of the "value" attribute
@@ -75,7 +82,7 @@ public class HtmlInput
      */
     public void setValueAttribute( final String newValue ) {
         Assert.notNull( "newValue", newValue );
-        getElement().setAttribute( "value", newValue );
+        setAttributeValue( "value", newValue );
 
         final String onChange = getOnChangeAttribute();
         if( onChange.length() != 0 ) {
