@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * Tests for NodeImpl
  * 
  * @author yourgod
+ * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @version $Revision$
  *
  */
@@ -209,6 +210,38 @@ public class NodeImplTest extends WebTestCase {
         final List expectedAlerts = Arrays.asList(new String[]{
             "DIV"
         });
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+    
+    /**
+     * @throws Exception on test failure
+     */
+    public void test_getChildNodes() throws Exception {
+        final String content = "<html><head><title>test_getChildNodes</title>"            
+            + "<script>"
+            + "function doTest() {"
+            + "var aNode = document.getElementById('myNode');"
+            + "alert(aNode.childNodes.length);"            
+            + "alert(aNode.childNodes[0].nodeName);"
+            + "alert(aNode.childNodes[0].childNodes.length);"
+            + "alert(aNode.childNodes[0].childNodes[0].nodeName);"
+            + "alert(aNode.childNodes[0].childNodes[1].nodeName);"
+            + "alert(aNode.childNodes[1].nodeName);"
+            + "}"
+            + "</script>"            
+            + "</head><body onload='doTest()'>"
+            + "<div id='myNode'><span>Child Node 1-A"
+            + "<h1>Child Node 1-B</h1></span>"
+            + "<h2>Child Node 2-A</h2></div>"
+            + "</body></html>";
+
+        final List expectedAlerts = Arrays.asList(new String[] { "2", "SPAN", "2", "#text", "H1", "H2" });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("test_getChildNodes", page.getTitleText());
 
         assertEquals(expectedAlerts, collectedAlerts);
     }

@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="mguillem" id="1153693" due-to="George Murnock">
+                Javascript: implemented property childNodes.
+            </action>
             <action type="update" dev="yourgod">
                 Fixed bug where document.write-ing a frame was causing an attempt 
                 to load an invalid URL starting with http://first
@@ -16,7 +19,7 @@
             </action>
             <action type="update" dev="mguillem" id="1153710" due-to="George Murnock">
                 Javascript: document.links doesn't return tags with empty href anymore.
-            </action>      
+            </action>
             <action type="update" dev="yourgod">
                 A RefeshHandler can now throw IOExceptions instead of handling them.
                 Updated ImmediateRefeshHandler and ThreadedRefeshHandler to make refresh failures

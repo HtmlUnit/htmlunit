@@ -412,6 +412,7 @@
     </class>
 
     <class name="NodeImpl">
+        <property name="childNodes" readable="true" writable="false"/>
         <property name="firstChild" readable="true" writable="false"/>
         <property name="lastChild" readable="true" writable="false"/>
         <property name="nextSibling" readable="true" writable="false"/>
