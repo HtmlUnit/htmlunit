@@ -79,6 +79,14 @@ public class MockWebConnection extends WebConnection {
             }               
         }          
 
+        /**
+         * Create a new instance
+         * @param content The content as a byte array
+         * @param statusCode The status code
+         * @param statusMessage The status message
+         * @param contentType The content type
+         * @param responseHeaders a list of response headers
+         */
         public ResponseEntry(
                 final byte[] content,
                 final int statusCode,
