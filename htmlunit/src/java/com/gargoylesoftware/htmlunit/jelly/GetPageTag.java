@@ -47,10 +47,13 @@ import java.util.List;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
+import org.dom4j.io.DOMReader;
+import org.w3c.dom.Document;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Jelly tag to load a page from a server.
@@ -63,6 +66,7 @@ public class GetPageTag extends HtmlUnitTagSupport {
     private List parameters_ = null;
     private String method_ = "get";
     private String webClientName_;
+    private String xmlVarName_;
     
     /**
      * Create an instance
@@ -92,12 +96,20 @@ public class GetPageTag extends HtmlUnitTagSupport {
             webClient = getWebClient();
         }
         
+        final Page page;
         try {
-            final Page page = webClient.getPage( getUrl(), getSubmitMethod(), getParameters() );
+            page = webClient.getPage( getUrl(), getSubmitMethod(), getParameters() );
             jellyContext.setVariable( getVarValueOrDie(), page );
         }
         catch( final IOException e ) {
             throw new JellyTagException(e);
+        }
+        
+        if( xmlVarName_ != null && page instanceof HtmlPage ) {
+            final Document domDocument = ((HtmlPage)page).getElement().getOwnerDocument();
+            final DOMReader domReader = new DOMReader();
+            jellyContext.setVariable( xmlVarName_, domReader.read(domDocument));
+            //jellyContext.setVariable( xmlVarName_, domDocument);
         }
     }
 
@@ -187,5 +199,13 @@ public class GetPageTag extends HtmlUnitTagSupport {
             // Provide a nicer error message
             throw new JellyTagException("Value of method attribute is not a valid submit method: "+method_);
         }
+    }
+    
+    /**
+     * Callback from jelly to set the xmlvar attribute
+     * @param xmlVarName
+     */
+    public void setXmlvar( final String xmlVarName ) {
+        xmlVarName_ = xmlVarName;
     }
 }
