@@ -37,7 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Collections;
+
 import org.w3c.dom.Element;
+
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
  * Wrapper for the html element "area".
@@ -57,6 +67,34 @@ public class HtmlArea extends HtmlElement {
         super(page, xmlElement);
     }
 
+    /**
+     * Click this area.
+     * @return The page that results from clicking the area.
+     * @throws IOException If an IO problem occurs
+     */
+    public Page click() throws IOException {
+        final HtmlPage enclosingPage = getPage();
+        final WebClient webClient = enclosingPage.getWebClient();
+        final String onClick = getOnClickAttribute();
+
+        if( onClick.length() == 0 || webClient.isJavaScriptEnabled() == false ) {
+            final URL url;
+            try {
+                url = enclosingPage.getFullyQualifiedUrl( getHrefAttribute() );
+            }
+            catch( final MalformedURLException e ) {
+                throw new IllegalStateException(
+                    "Not a valid url: " + getHrefAttribute() );
+            }
+
+            final SubmitMethod method = SubmitMethod.getInstance( getAttributeValue( "method" ) );
+            final WebWindow webWindow = enclosingPage.getEnclosingWindow();
+            return webClient.getPage( webWindow, url, method, Collections.EMPTY_LIST );
+        }
+
+        return getPage().executeJavaScriptIfPossible(
+            getOnClickAttribute(), "onclick handler", true, this).getNewPage();
+    }
 
     /**
      * Return the value of the attribute "id".  Refer to the
