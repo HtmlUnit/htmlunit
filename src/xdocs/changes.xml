@@ -93,6 +93,11 @@
                 Added support for access keys to anchor, area, label, legend,
                 and textarea elements.
             </action>
+            <action type="update" dev="mbowler">
+            	Fixed bug where variables defined in a script could not be referenced
+            	as "window.myVariable".  This prevented the google ads from working
+            	on the HtmlUnit website.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">

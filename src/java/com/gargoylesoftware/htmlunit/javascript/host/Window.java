@@ -37,19 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.AlertHandler;
-import com.gargoylesoftware.htmlunit.ConfirmHandler;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.PromptHandler;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.TopLevelWindow;
-import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.WindowFramesArray;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -60,6 +47,20 @@ import java.util.Collections;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
+
+import com.gargoylesoftware.htmlunit.AlertHandler;
+import com.gargoylesoftware.htmlunit.ConfirmHandler;
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.PromptHandler;
+import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.TopLevelWindow;
+import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.WindowFramesArray;
 
 /**
  * A javascript window class
@@ -77,6 +78,14 @@ public final class Window extends SimpleScriptable {
     private History history_;
     private Location location_;
     private WindowFramesArray windowFramesArray_;
+
+    /**
+     * Kludge to avoid stack overflow problems.  This will be set to true if we
+     * are executing a javascript method to retrieve a value (see getJavaScriptVariable)
+     * and false otherwise.
+     */
+    private boolean getViaJavaScriptInProgress_ = false;
+
     /**
      * Create an instance.  The rhino engine requires all host objects
      * to have a default constructor.
@@ -336,6 +345,12 @@ public final class Window extends SimpleScriptable {
         if( webWindow_ instanceof HtmlElement ) {
             setHtmlElement((HtmlElement)webWindow_);
         }
+        else {
+            // Windows don't have corresponding HtmlElements so set the htmlElement
+            // variable to be the page.  If this isn't set then SimpleScriptable.get()
+            // won't work properly
+            setHtmlElement(htmlPage);
+        }
 
         document_ = (Document)makeJavaScriptObject("Document");
         document_.setHtmlElement(htmlPage);
@@ -516,5 +531,64 @@ public final class Window extends SimpleScriptable {
      */
     public String jsGet_name() {
         return webWindow_.getName();
+    }
+
+    /**
+     * Return the specified property or {@link #NOT_FOUND} if it could not be found.
+     * @param name The name of the property
+     * @param start The scriptable object that was originally queried for this property
+     * @return The property.
+     */
+    public Object get( final String name, final Scriptable start ) {
+        // If the htmlElement hasn't been set yet then do it now.
+        if( getHtmlElementOrNull() == null && document_ != null ) {
+            setHtmlElement( document_.getHtmlPage() );
+        }
+
+        final Window window;
+        Object result;
+        if( start == this ) {
+            result = super.get(name, start);
+            window = this;
+        }
+        else {
+            result = start.get(name, start);
+            window = (Window)start;
+        }
+        if( result == NOT_FOUND ) {
+            result = getJavaScriptVariable(window, name);
+        }
+        return result;
+    }
+
+    /**
+     * Use a dynamically created javascript method to retrieve a variable that
+     * we can't get any other way.
+     * @param window The window that contains the variable.
+     * @param name The name of the variable.
+     * @return The value of the variable or {@link #NOT_FOUND} if it cannot be found.
+     */
+    private Object getJavaScriptVariable( final Window window, final String name ) {
+        if( window.document_ == null ) {
+            return NOT_FOUND;
+        }
+
+        // Set this flag to indicate that we are already calling this method.  This
+        // is to avoid stack overflows.  Admittedly ugly but the best I could think
+        // of.
+        if( getViaJavaScriptInProgress_ == true ) {
+            return NOT_FOUND;
+        }
+        getViaJavaScriptInProgress_ = true;
+        try {
+            final HtmlPage page = window.document_.getHtmlPage();
+            final ScriptResult scriptResult = page.executeJavaScriptIfPossible(
+                "return "+name+";", "variable access for "+name, true, page);
+
+            return scriptResult.getJavaScriptResult();
+        }
+        finally {
+            getViaJavaScriptInProgress_ = false;
+        }
     }
 }
