@@ -863,6 +863,40 @@ public class WebClientTest extends WebTestCase {
         final HtmlPage htmlPage = (HtmlPage)page;
         assertEquals("first", htmlPage.getTitleText() );
     }
+    
+    /**
+     * Verifies that exceptions are thrown on failing status code and the returned page
+     * is still set as the current page in the WebWindow.
+     * 
+     * @throws Exception if test fails
+     */  
+    public void testGetPageFailingStatusCode() throws Exception {
+        final String firstContent = "<html><head><title>Hello World</title></head><body></body></html>";
+
+        final WebClient webClient = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webConnection.setResponse(
+                URL_FIRST,
+                firstContent,
+                500,
+                "BOOM",
+                "text/html",
+                Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
+        webClient.setThrowExceptionOnFailingStatusCode(true);
+        webClient.setPrintContentOnFailingStatusCode(false);
+        try {
+            webClient.getPage(URL_FIRST);
+            fail("Should have thrown");
+        } 
+        catch (final FailingHttpStatusCodeException e) {
+            assertEquals(e.getStatusCode(), 500);
+            assertEquals(e.getStatusMessage(), "BOOM");
+        }
+        final HtmlPage page = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
+        assertEquals("Hello World", page.getTitleText());
+    }    
 
     /**
      * Test {@link WebClient#expandUrl(URL,String)} for the case where an anchor name
