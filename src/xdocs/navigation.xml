@@ -26,7 +26,6 @@
             <item name="Configure JSSE" href="/jsse.html"/>
         </menu>
         <menu name="User docs">
-            <item name="Tool support" href="/ide.html"/>
             <item name="Logging" href="/logging.html"/>
             <item name="Jelly reference" href="/jelly-reference.html"/>
             <item name="FAQ" href="/faq.html"/>
