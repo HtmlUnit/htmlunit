@@ -52,7 +52,7 @@ public final class JavaScriptConfiguration {
 
             final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware( true );
-            factory.setValidating( true );
+            factory.setValidating( false );
 
             final DocumentBuilder documentBuilder = factory.newDocumentBuilder();
             documentBuilder.setErrorHandler( new StrictErrorHandler() );
