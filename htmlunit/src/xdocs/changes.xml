@@ -6,7 +6,10 @@
     </properties>
 
     <body>
-        <release version="1.3-pre2" date="Not released yet">
+        <release version="1.3-pre3" date="Not released yet">
+		</release>
+		    
+        <release version="1.3-pre2" date="September 26, 2004">
             <action type="update" dev="yourgod">
                 Added support for setting input.name in JavaScript
             </action>                 
