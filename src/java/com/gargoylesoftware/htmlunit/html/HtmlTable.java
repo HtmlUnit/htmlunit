@@ -9,10 +9,8 @@ package com.gargoylesoftware.htmlunit.html;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -24,7 +22,6 @@ import org.w3c.dom.NodeList;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class HtmlTable extends HtmlElement {
-    private final Map elements_ = new HashMap( 89 );
     private List tableRows_;
 
 

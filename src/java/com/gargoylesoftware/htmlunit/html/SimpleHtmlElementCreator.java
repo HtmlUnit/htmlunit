@@ -10,8 +10,6 @@ import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import org.w3c.dom.Element;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * An object that knows how to create HtmlElements
@@ -62,11 +60,6 @@ class SimpleHtmlElementCreator extends HtmlElementCreator {
             throw new ObjectInstantiationException(
                 "Exception when calling constructor ["+constructor_+"]", e.getTargetException());
         }
-    }
-
-
-    private Log getLog() {
-        return LogFactory.getLog(getClass());
     }
 }
 
