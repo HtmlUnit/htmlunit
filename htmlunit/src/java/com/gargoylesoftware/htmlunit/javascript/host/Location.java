@@ -46,6 +46,8 @@ import java.net.URL;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Michael Ottati
+ * @author Marc Guillemot
  */
 public class Location extends SimpleScriptable {
     private static final long serialVersionUID = -2907220432378132233L;
@@ -198,11 +200,11 @@ public class Location extends SimpleScriptable {
     }
 
     /**
-     * Return the value of "protocol"
+     * Return the value of "protocol" + ":" like what browser do
      * @return The value.
      */
     public String jsGet_protocol() {
-        return getUrl().getProtocol();
+        return getUrl().getProtocol() + ":";
     }
 
 }
