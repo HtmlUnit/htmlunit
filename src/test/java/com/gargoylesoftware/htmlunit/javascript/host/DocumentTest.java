@@ -1359,6 +1359,26 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    public void testDocumentAll_Item() throws Exception {
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    alert(document.all.item(0).tagName);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList( new String[] {"HTML"} );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
     public void testDocumentAll_tags() throws Exception {
         final String firstContent
              = "<html><head><title>First</title><script>"
