@@ -63,9 +63,13 @@
                 Added support for the following attributes on Document.Location:
                 hash, host, hostname, href, pathname, port, protocol and search.
             </action>
-            <action type="add" dev="mbowler" due-to="Alexei Goussev">
+            <action type="add" dev="mbowler" due-to="Alexei Goussev" id="856885">
             	Added support for Anchor.href and Anchor.getAttribute().  
             	Patch submitted by Alexei Goussev.
+            </action>
+            <action type="update" dev="mbowler" due-to="Alexei Goussev" id="871620">
+            	Fixed bug where getting the style attribute should return an empty 
+            	string instead of NOT_FOUND. Patch submitted by Alexei Goussev.
             </action>
         </release>
         

@@ -132,4 +132,37 @@ public class StyleTest extends WebTestCase {
             "background: blue; color: pink; foo: bar; ",
             page.getHtmlElementById("div1").getAttributeValue("style") );
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testStyle_OneUndefinedCssAttribute() throws Exception {
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+
+        final String firstContent
+        = "<html><head><title>First</title><script>\n"
+        + "function doTest() {\n"
+        + "    var style = document.getElementById('div1').style;\n"
+        + "    alert(document.getElementById('nonexistingid'));\n"
+        + "    alert(style.color);\n"
+        + "    style.color = 'pink';\n"
+        + "    alert(style.color);\n"
+        + "}\n</script></head>"
+        + "<body onload='doTest()'><div id='div1'>foo</div></body></html>";
+
+        webConnection.setResponse(
+                URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+
+        final List expectedAlerts = Arrays.asList( new String[]{"null", "", "pink"} );
+        assertEquals( expectedAlerts, collectedAlerts );
+
+        assertEquals("color: pink; ", page.getHtmlElementById("div1").getAttributeValue("style") );
+    }
 }
