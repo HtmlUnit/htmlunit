@@ -55,6 +55,7 @@ import org.apache.commons.httpclient.HttpState;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
+ * @author Marc Guillemot
  */
 public class MockWebConnection extends WebConnection {
     private class ResponseEntry {
@@ -324,6 +325,19 @@ public class MockWebConnection extends WebConnection {
      */
     public void setResponse( final URL url, final String content ) {
         setResponse( url, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+    }
+
+    /**
+     * Convenience method that is the same as calling
+     * {@link #setResponse(URL,String,int,String,String,List)} with a status
+     * of "200 OK" and no additonal headers.
+     *
+     * @param url The url that will return the given response
+     * @param content The content to return
+     * @param contentType The content type to return
+     */
+    public void setResponse(final URL url, final String content, final String contentType) {
+        setResponse( url, content, 200, "OK", contentType, Collections.EMPTY_LIST );
     }
 
     /**
