@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
@@ -603,6 +604,9 @@ public final class Window extends SimpleScriptable {
                 "return "+name+";", "variable access for "+name, true, page);
 
             return scriptResult.getJavaScriptResult();
+        }
+        catch( final ScriptException t ) {
+            return NOT_FOUND;
         }
         finally {
             getViaJavaScriptInProgress_ = false;

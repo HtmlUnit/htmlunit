@@ -605,4 +605,31 @@ public class WindowTest extends WebTestCase {
         assertEquals( Collections.singletonList("foo"), collectedAlerts );
         assertEquals( "first", page.getTitleText() );
     }
+
+    /**
+     * Variables that have not been defined should return null when accessed.
+     * @throws Exception If the test fails.
+     */
+    public void testJavascriptVariableFromWindow_NotFound() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection =
+            new FakeWebConnection(webClient);
+        final List collectedAlerts = new ArrayList();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent =
+            "<html><head><title>first</title></head><body><script>\n"
+            + "myVariable = 'foo';\n"
+            + "alert(window.myOtherVariable == null);\n"
+            + "</script></body></head>";
+        webConnection.setResponse( new URL("http://first"), firstContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage)webClient.getPage(
+            new URL("http://first"), SubmitMethod.POST, Collections.EMPTY_LIST);
+        assertEquals( Collections.singletonList("true"), collectedAlerts );
+        assertEquals( "first", page.getTitleText() );
+    }
 }
