@@ -57,6 +57,7 @@ import org.cyberneko.html.filters.DefaultFilter;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author David K. Taylor
+ * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
  */
 public final class ScriptFilter extends DefaultFilter {
 
@@ -68,6 +69,9 @@ public final class ScriptFilter extends DefaultFilter {
     private StringBuffer scriptBuffer_;
     private StringBuffer newContentBuffer_;
     private String systemId_;
+
+    private String scriptEventHandler_;
+    private int eventHandlerId_;
 
     /**
      *  Create an instance
@@ -107,6 +111,8 @@ public final class ScriptFilter extends DefaultFilter {
         else {
             systemId_ = locator.getLiteralSystemId();
         }
+        scriptEventHandler_ = null;
+        eventHandlerId_ = 0;
         super.startDocument( locator, encoding, augmentations );
     }
 
@@ -133,6 +139,11 @@ public final class ScriptFilter extends DefaultFilter {
                 if( src != null && src.length() != 0 ) {
                     scriptSource_ = src;
                     scriptCharset_ = charset;
+                }
+                final String ev = attrs.getValue("event");
+                final String obj = attrs.getValue("for");
+                if (ev != null && ev.length()>0 && obj != null && obj.length()>0) {
+                    scriptEventHandler_ = obj+"."+ev;
                 }
 
                 scriptBuffer_ = new StringBuffer();
@@ -206,8 +217,14 @@ public final class ScriptFilter extends DefaultFilter {
                     final String result = loadScript(scriptSource_, scriptCharset_);
                     pushResult( result );
                 }
-                final String script = scriptBuffer_.toString();
+                String script = scriptBuffer_.toString();
 
+                if (scriptEventHandler_!= null && scriptEventHandler_.length()>0) {
+                    final String evhName="htmlunit_evh_JJLL"+String.valueOf(eventHandlerId_);
+                    script = "function "+evhName+"()\n{"+script+"}\n"
+                            +scriptEventHandler_+"="+evhName+";";
+                    eventHandlerId_ ++;
+                }
                 final String result = executeScript(script);
                 pushResult( result );
             }
@@ -215,6 +232,7 @@ public final class ScriptFilter extends DefaultFilter {
                 scriptSource_ = null;
                 scriptCharset_ = null;
                 scriptBuffer_ = null;
+                scriptEventHandler_ = null;
             }
         }
     }
