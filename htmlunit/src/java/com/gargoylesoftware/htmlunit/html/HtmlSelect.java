@@ -58,8 +58,9 @@ import java.util.Collections;
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author David D. Kilzer
  */
-public class HtmlSelect extends FocusableElement implements SubmittableElement {
+public class HtmlSelect extends FocusableElement implements DisabledElement, SubmittableElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "select";
@@ -502,6 +503,14 @@ public class HtmlSelect extends FocusableElement implements SubmittableElement {
         return getAttributeValue( "disabled" );
     }
 
+    /**
+     * Return true if the disabled attribute is set for this element.
+     *
+     * @return Return true if this element is disabled.
+     */
+    public final boolean isDisabled() {
+        return isAttributeDefined( "disabled" );
+    }
 
     /**
      *  Return the value of the attribute "tabindex". Refer to the <a
