@@ -234,6 +234,37 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    public void testAllProperty_CalledDuringPageLoad() throws Exception {
+        if( true ) {
+            notImplemented();
+            return;
+        }
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><body>"
+             + "<div id='ARSMenuDiv1' style='VISIBILITY: hidden; POSITION: absolute; z-index: 1000000'></div>"
+             + "<script language='Javascript'>"
+             + "    var divObj = document.all['ARSMenuDiv1'];"
+             + "</script></body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "tangerine", "ginger"} );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
     public void testDocumentWrite() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
