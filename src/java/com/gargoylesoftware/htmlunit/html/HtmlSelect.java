@@ -167,7 +167,6 @@ public class HtmlSelect
     public void removeOption( final int index ) {
 
         final NodeList nodeList = getElement().getElementsByTagName( "option" );
-        final int nodeCount = nodeList.getLength();
 
         final Node optionNode = nodeList.item( index ) ;
         optionNode.getParentNode().removeChild( optionNode ) ;
@@ -182,7 +181,6 @@ public class HtmlSelect
     public void replaceOption( final int index, final HtmlOption newOption ) {
 
         final NodeList nodeList = getElement().getElementsByTagName( "option" );
-        final int nodeCount = nodeList.getLength();
 
         final Node optionNode = nodeList.item( index ) ;
         optionNode.getParentNode().replaceChild( newOption.getNode(), optionNode ) ;
