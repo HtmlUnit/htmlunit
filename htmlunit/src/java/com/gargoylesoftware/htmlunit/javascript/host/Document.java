@@ -217,6 +217,33 @@ public final class Document extends HTMLElement {
 
 
     /**
+     * Create a new HTML element with the given tag name.
+     *
+     * @return the new HTML element, or NOT_FOUND if the tag is not supported.
+     */
+    public Object jsFunction_createElement( final String tagName ) {
+        Object result = NOT_FOUND;
+        try {
+            final HtmlElement htmlElement = getHtmlElementOrDie().getPage().createElement(tagName);
+            final Object jsElement = getScriptableFor(htmlElement);
+
+            if( jsElement == NOT_FOUND ) {
+                getLog().debug("createElement("+tagName
+                    +") cannot return a result as there isn't a javascript object for the html element "
+                    + htmlElement.getClass().getName());
+            }
+            else {
+                result = jsElement;
+            }
+        }
+        catch( final ElementNotFoundException e ) {
+            // Just fall through - result is already set to NOT_FOUND
+        }
+        return result;
+    }
+
+
+    /**
      * Return the element with the specified id or NOT_FOUND of that element could not be found
      * @param id The id to search for
      * @return the element or NOT_FOUND

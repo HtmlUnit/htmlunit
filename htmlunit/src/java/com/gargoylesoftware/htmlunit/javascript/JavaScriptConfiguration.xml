@@ -49,6 +49,7 @@
         <function name="writeln"/>
         <function name="close"/>
         <function name="getElementById"/>
+        <function name="createElement"/>
     </class>
     <class name="FileUpload" extends="Input"/><!-- NOT FINISHED -->
     <class name="Form" extends="HTMLElement"><!-- NOT FINISHED -->

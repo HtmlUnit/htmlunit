@@ -76,6 +76,7 @@ public final class HtmlPage
     /** The parser that is used to create the initial dom tree */
     private MyParser xmlParser_;
 
+    private       Document document_;
     private final WebClient webClient_;
     private final URL originatingUrl_;
     private       String originalCharset_ = null;
@@ -131,7 +132,8 @@ public final class HtmlPage
      */
     public void initialize() throws IOException {
         initializeHtmlElementCreatorsIfNeeded();
-        setElement(createDocument( webResponse_ ).getDocumentElement());
+        document_ = createDocument( webResponse_ );
+        setElement(document_.getDocumentElement());
 
         executeJavaScriptIfPossible("", "Dummy stub just to get javascript initialized", false, null);
 
@@ -309,6 +311,36 @@ public final class HtmlPage
         if( element == null && xmlParser_ != null ) {
             return xmlParser_.getDocument().getDocumentElement();
         }
+        return element;
+    }
+
+
+    
+    /**
+     * Return the xml document element corresponding with this page.  This
+     * returns a correct value even if the page hasn't fully been loaded yet.
+     *
+     * @return the xml document element.
+     */
+    public Document getDocument() {
+        if( document_ == null && xmlParser_ != null ) {
+            document_ = xmlParser_.getDocument();
+        }
+        return document_;
+    }
+
+
+    
+    /**
+     * Create a new HTML element with the given tag name.  This may be
+     * called if the page hasn't fully been loaded yet.
+     *
+     * @return the new HTML element.
+     */
+    public HtmlElement createElement( String tagName ) {
+        Document document = getDocument();
+        final Element xmlElement = document.createElement( tagName );
+        final HtmlElement element = getHtmlElement( xmlElement );
         return element;
     }
 
