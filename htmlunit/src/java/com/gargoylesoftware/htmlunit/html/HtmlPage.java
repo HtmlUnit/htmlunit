@@ -212,15 +212,15 @@ public final class HtmlPage extends DomNode implements Page {
         if( originalCharset_ != null ) {
             return originalCharset_ ;
         }
-        ArrayList ar = new ArrayList();
+        final ArrayList ar = new ArrayList();
         ar.add("meta");
-        List list = getDocumentElement().getHtmlElementsByTagNames(ar);
+        final List list = getDocumentElement().getHtmlElementsByTagNames(ar);
         for(int i=0; i<list.size();i++ ){
-            HtmlMeta meta = (HtmlMeta) list.get(i);
-            String httpequiv = meta.getHttpEquivAttribute();
+            final HtmlMeta meta = (HtmlMeta) list.get(i);
+            final String httpequiv = meta.getHttpEquivAttribute();
             if( "content-type".equals(httpequiv.toLowerCase()) ){
-                String contents = meta.getContentAttribute();
-                int pos = contents.toLowerCase().indexOf("charset=");
+                final String contents = meta.getContentAttribute();
+                final int pos = contents.toLowerCase().indexOf("charset=");
                 if( pos>=0 ){
                     originalCharset_ = contents.substring(pos+8);
                     getLog().debug("Page Encoding detected: " + originalCharset_);
@@ -1102,9 +1102,9 @@ public final class HtmlPage extends DomNode implements Page {
     public List getFrames() {
         final List list = new ArrayList();
         final WebWindow enclosingWindow = getEnclosingWindow();
-        for (Iterator iter = getWebClient().getWebWindows().iterator(); iter.hasNext();)
+        for (final Iterator iter = getWebClient().getWebWindows().iterator(); iter.hasNext();)
         {
-            WebWindow window = (WebWindow) iter.next();
+            final WebWindow window = (WebWindow) iter.next();
             // quite strange but for a TopLevelWindow parent == self
             if (enclosingWindow == window.getParentWindow()
                     && enclosingWindow != window) {
@@ -1122,7 +1122,7 @@ public final class HtmlPage extends DomNode implements Page {
      */
     public BaseFrame.FrameWindow getFrameByName(final String name) throws ElementNotFoundException {
         final List frames = getFrames();
-        for (Iterator iter = frames.iterator(); iter.hasNext();) {
+        for (final Iterator iter = frames.iterator(); iter.hasNext();) {
             final BaseFrame.FrameWindow frame = (BaseFrame.FrameWindow) iter.next();
             if (frame.getName().equals(name)) {
                 return frame;
@@ -1283,7 +1283,7 @@ public final class HtmlPage extends DomNode implements Page {
     public HtmlElement getHtmlElementById( final String id )
         throws ElementNotFoundException {
 
-        HtmlElement idElement = (HtmlElement) idMap_.get(id);
+        final HtmlElement idElement = (HtmlElement) idMap_.get(id);
         if(idElement != null) {
             return idElement;
         }

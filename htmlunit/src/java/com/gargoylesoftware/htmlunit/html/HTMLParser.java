@@ -315,7 +315,7 @@ public class HTMLParser {
                 setFeature("http://cyberneko.org/html/features/balance-tags/ignore-outside-content",
                     IgnoreOutsideContent_);
             }
-            catch (SAXException e) {
+            catch (final SAXException e) {
                 throw new ObjectInstantiationException("unable to create HTML parser", e);
             }
         }
@@ -326,7 +326,7 @@ public class HTMLParser {
          * @param inputSource an XMLInputSource
          * @throws java.io.IOException
          */
-        public void parse(XMLInputSource inputSource) throws IOException {
+        public void parse(final XMLInputSource inputSource) throws IOException {
 
             setContentHandler(this);
             //setLexicalHandler(this); comments and CDATA
@@ -359,13 +359,15 @@ public class HTMLParser {
         }
 
         /** @inheritDoc ContentHandler#startElement(String,String,String,Attributes) */
-        public void startElement(String namespaceURI, String localName, String qName, Attributes atts)
-                throws SAXException {
+        public void startElement(
+                final String namespaceURI, final String localName,
+                final String qName, final Attributes atts)
+            throws SAXException {
 
             handleCharacters();
 
             final String tagLower = localName.toLowerCase();
-            IElementFactory factory = getElementFactory(tagLower);
+            final IElementFactory factory = getElementFactory(tagLower);
             HtmlElement newElement = factory.createElement(page_, tagLower, atts);
             currentNode_.appendChild(newElement);
             currentNode_ = newElement;
@@ -373,7 +375,7 @@ public class HTMLParser {
         }
 
         /** @inheritDoc ContentHandler@endElement(String,String,String) */
-        public void endElement(String namespaceURI, String localName, String qName)
+        public void endElement(final String namespaceURI, final String localName, final String qName)
                 throws SAXException {
 
             handleCharacters();
@@ -385,7 +387,7 @@ public class HTMLParser {
         }
 
         /** @inheritDoc ContentHandler#characters(char,int,int) */
-        public void characters(char ch[], int start, int length)
+        public void characters(final char ch[], final int start, final int length)
                 throws SAXException {
 
             if(characters_ == null) {
@@ -395,7 +397,7 @@ public class HTMLParser {
         }
 
         /** @inheritDoc ContentHandler#ignorableWhitespace(char,int,int) */
-        public void ignorableWhitespace(char ch[], int start, int length)
+        public void ignorableWhitespace(final char ch[], final int start, final int length)
                 throws SAXException {
 
             if(characters_ == null) {
@@ -411,7 +413,7 @@ public class HTMLParser {
         private void handleCharacters() {
 
             if(characters_ != null && characters_.length() > 0) {
-                DomText text = new DomText(page_, characters_.toString());
+                final DomText text = new DomText(page_, characters_.toString());
                 currentNode_.appendChild(text);
                 characters_.setLength(0);
             }
@@ -421,9 +423,9 @@ public class HTMLParser {
          * @param tagName an HTML tag name, in lowercase
          * @return the pre-registered element factory for the tag, or an UnknownElementFactory
          */
-        private IElementFactory getElementFactory(String tagName) {
+        private IElementFactory getElementFactory(final String tagName) {
 
-            IElementFactory factory = (IElementFactory)ELEMENT_FACTORIES.get(tagName);
+            final IElementFactory factory = (IElementFactory)ELEMENT_FACTORIES.get(tagName);
 
             //return factory != null ? factory : UnknownElementFactory.instance;
             if(factory != null) {
@@ -439,22 +441,22 @@ public class HTMLParser {
         }
 
         /** @inheritDoc ContentHandler#startPrefixMapping(String,String) */
-        public void startPrefixMapping(String prefix, String uri)
+        public void startPrefixMapping(final String prefix, final String uri)
                 throws SAXException {
         }
 
         /** @inheritDoc ContentHandler#endPrefixMapping(String) */
-        public void endPrefixMapping(String prefix)
+        public void endPrefixMapping(final String prefix)
                 throws SAXException {
         }
 
         /** @inheritDoc ContentHandler#processingInstrucction(String,String) */
-        public void processingInstruction(String target, String data)
+        public void processingInstruction(final String target, final String data)
                 throws SAXException {
         }
 
         /** @inheritDoc ContentHandler#skippedEntity(String) */
-        public void skippedEntity(String name)
+        public void skippedEntity(final String name)
                 throws SAXException {
         }
     }

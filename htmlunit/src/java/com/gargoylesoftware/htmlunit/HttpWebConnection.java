@@ -315,7 +315,7 @@ public class HttpWebConnection extends WebConnection {
         httpMethod.setFollowRedirects(false);
         // http://jakarta.apache.org/commons/httpclient/3.0/exception-handling.html#Automatic%20exception%20recovery
         final HttpMethodRetryHandler noAutoRetry = new HttpMethodRetryHandler() {
-            public boolean retryMethod(HttpMethod arg0, IOException arg1, int arg2) {
+            public boolean retryMethod(final HttpMethod arg0, final IOException arg1, final int arg2) {
                 return false;
             }
         };
@@ -507,7 +507,7 @@ public class HttpWebConnection extends WebConnection {
                     try {
                         return content_.getBytes(getContentCharSet());
                     }
-                    catch (UnsupportedEncodingException e) {
+                    catch (final UnsupportedEncodingException e) {
                         // should never occur
                         throw new RuntimeException(e);
                     }
@@ -534,7 +534,7 @@ public class HttpWebConnection extends WebConnection {
         final String userName = pair.getKey();
         final String password = pair.getValue();
 
-        String authString = userName + ":" + password;
+        final String authString = userName + ":" + password;
         final String encoded = new String(Base64.encodeBase64(authString.getBytes()));
         final String value = "Basic " + encoded;
         httpMethod.addRequestHeader( "Authorization", value );

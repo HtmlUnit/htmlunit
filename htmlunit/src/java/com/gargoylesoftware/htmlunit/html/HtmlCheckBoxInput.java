@@ -120,7 +120,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      *
      * {@inheritDoc}
      */
-    protected Page doClickAction(Page defaultPage) throws IOException {
+    protected Page doClickAction(final Page defaultPage) throws IOException {
         if (isChecked()) {
             setChecked(false);
         }

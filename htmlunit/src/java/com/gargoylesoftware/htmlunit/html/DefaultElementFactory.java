@@ -67,7 +67,7 @@ class DefaultElementFactory implements IElementFactory {
      * Create an instance
      * @param elementClass The element class.
      */
-    public DefaultElementFactory(Class elementClass) {
+    public DefaultElementFactory(final Class elementClass) {
 
         if(!HtmlElement.class.isAssignableFrom(elementClass)) {
             throw new ClassCastException(elementClass+" is not a subclass of "+HtmlElement.class);
@@ -75,7 +75,7 @@ class DefaultElementFactory implements IElementFactory {
         try {
             constructor_ = elementClass.getConstructor(CONSTRUCTOR_ARGS);
         }
-        catch (Exception e) {
+        catch (final Exception e) {
             throw new ObjectInstantiationException("required constructor not found in "+elementClass, e);
         }
     }
@@ -87,7 +87,7 @@ class DefaultElementFactory implements IElementFactory {
      * @return the newly created element
      */
     public HtmlElement createElement(
-            HtmlPage page, String tagName, Attributes attributes) {
+            final HtmlPage page, final String tagName, final Attributes attributes) {
 
         try {
             Map attributeMap = null;
@@ -97,7 +97,7 @@ class DefaultElementFactory implements IElementFactory {
                     attributeMap.put(attributes.getLocalName(i), attributes.getValue(i));
                 }
             }
-            HtmlElement element = (HtmlElement)constructor_.newInstance(new Object[]{page, attributeMap});
+            final HtmlElement element = (HtmlElement)constructor_.newInstance(new Object[]{page, attributeMap});
             return element;
         }
         catch( final IllegalAccessException e) {

@@ -57,7 +57,7 @@ public class DomText extends DomCharacterData {
      * @param page The HtmlPage that contains this element.
      * @param data the string data held by this node
      */
-    public DomText( final HtmlPage page, String data) {
+    public DomText( final HtmlPage page, final String data) {
         super(page, data);
     }
 
@@ -73,7 +73,7 @@ public class DomText extends DomCharacterData {
         }
 
         // split text into two separate nodes
-        DomText newText = new DomText(getPage(), getData().substring(offset));
+        final DomText newText = new DomText(getPage(), getData().substring(offset));
         setData(getData().substring(0, offset));
 
         // insert new text node
@@ -119,7 +119,7 @@ public class DomText extends DomCharacterData {
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
      */
-    protected void printXml( String indent, PrintWriter printWriter ) {
+    protected void printXml( final String indent, final PrintWriter printWriter ) {
 
         printWriter.print(indent);
         printWriter.println(getData());

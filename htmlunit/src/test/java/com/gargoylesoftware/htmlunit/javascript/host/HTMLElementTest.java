@@ -65,7 +65,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @param name The name of the test case
      */
-    public HTMLElementTest(String name) {
+    public HTMLElementTest(final String name) {
         super(name);
     }
 
@@ -773,7 +773,7 @@ public class HTMLElementTest extends WebTestCase {
      * @param eventName The name of the event
      * @throws Exception if the test fails
      */
-    private void eventHandlerSetterGetterTest(String eventName) throws Exception {
+    private void eventHandlerSetterGetterTest(final String eventName) throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -797,8 +797,8 @@ public class HTMLElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final List expectedAlerts = Arrays.asList(new String[]{ "success" });
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        HtmlPage page = loadPage(content, collectedAlerts);
-        HtmlElement div = page.getHtmlElementById("myDiv");
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlElement div = page.getHtmlElementById("myDiv");
         
         assertNotNull("Event handler was not set", div.getEventHandler(eventName));
         

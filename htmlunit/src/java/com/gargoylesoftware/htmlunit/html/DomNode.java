@@ -283,14 +283,14 @@ public abstract class DomNode implements Cloneable {
      * @see  #asText()
      */
     protected final String getChildrenAsText() {
-        StringBuffer buffer = new StringBuffer();
-        Iterator childIterator = getChildIterator();
+        final StringBuffer buffer = new StringBuffer();
+        final Iterator childIterator = getChildIterator();
 
         if(!childIterator.hasNext()) {
             return "";
         }
         while(childIterator.hasNext()) {
-            DomNode node = (DomNode)childIterator.next();
+            final DomNode node = (DomNode)childIterator.next();
             buffer.append(node.asText());
         }
 
@@ -309,7 +309,7 @@ public abstract class DomNode implements Cloneable {
         final int length = text.length();
         boolean whitespace = false;
         for( int i = 0; i < length; ++i) {
-            char ch = text.charAt(i);
+            final char ch = text.charAt(i);
             if( whitespace ) {
                 if( Character.isWhitespace(ch) == false ) {
                     buffer.append(ch);
@@ -358,7 +358,7 @@ public abstract class DomNode implements Cloneable {
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
      */
-    protected void printXml( String indent, PrintWriter printWriter ) {
+    protected void printXml( final String indent, final PrintWriter printWriter ) {
 
         printWriter.println(indent+this);
         printChildrenAsXml( indent, printWriter );
@@ -370,7 +370,7 @@ public abstract class DomNode implements Cloneable {
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
      */
-    protected void printChildrenAsXml( String indent, PrintWriter printWriter ) {
+    protected void printChildrenAsXml( final String indent, final PrintWriter printWriter ) {
         DomNode child = getFirstChild();
         while (child != null) {
             child.printXml(indent+"  ", printWriter);
@@ -389,7 +389,7 @@ public abstract class DomNode implements Cloneable {
     /**
      * @param x The new value
      */
-    public void setNodeValue(String x) {
+    public void setNodeValue(final String x) {
         // Default behavior is to do nothing, overridden in some subclasses
     }
 
@@ -401,7 +401,7 @@ public abstract class DomNode implements Cloneable {
      * will always be the same as this node's.
      * @return a new node
      */
-    public DomNode cloneNode(boolean deep) {
+    public DomNode cloneNode(final boolean deep) {
 
         final DomNode newnode;
         try {
@@ -557,7 +557,7 @@ public abstract class DomNode implements Cloneable {
      * @param newNode the node to replace this one
      * @throws IllegalStateException if this node is not a child of any other node
      */
-    public void replace(DomNode newNode) throws IllegalStateException {
+    public void replace(final DomNode newNode) throws IllegalStateException {
         insertBefore(newNode);
         remove();
     }
@@ -683,7 +683,7 @@ public abstract class DomNode implements Cloneable {
 
         /** @return is there a next one? */
         public HtmlElement nextElement() {
-            HtmlElement result = nextElement_;
+            final HtmlElement result = nextElement_;
             setNextElement();
             return result;
         }
@@ -699,7 +699,7 @@ public abstract class DomNode implements Cloneable {
             nextElement_ = next;
         }
 
-        private HtmlElement getNextElementUpwards( DomNode startingNode ) {
+        private HtmlElement getNextElementUpwards( final DomNode startingNode ) {
             if( startingNode == DomNode.this) {
                 return null;
             }
@@ -722,7 +722,7 @@ public abstract class DomNode implements Cloneable {
             }
         }
 
-        private HtmlElement getFirstChildElement(DomNode parent) {
+        private HtmlElement getFirstChildElement(final DomNode parent) {
             DomNode node = parent.getFirstChild();
             while( node != null && node instanceof HtmlElement == false ) {
                 node = node.getNextSibling();
@@ -730,7 +730,7 @@ public abstract class DomNode implements Cloneable {
             return (HtmlElement)node;
         }
 
-        private HtmlElement getNextSibling( HtmlElement element) {
+        private HtmlElement getNextSibling( final HtmlElement element) {
             DomNode node = element.getNextSibling();
             while( node != null && node instanceof HtmlElement == false ) {
                 node = node.getNextSibling();

@@ -184,7 +184,7 @@ public class AttributeCaseTest extends WebTestCase {
     }
 
 
-    private void setupAttributeTest(String content, String elementId) throws IOException {
+    private void setupAttributeTest(final String content, final String elementId) throws IOException {
 
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -198,7 +198,7 @@ public class AttributeCaseTest extends WebTestCase {
     }
 
 
-    private void setupGetAttributeTest(String attributeName, String attributeValue) throws IOException {
+    private void setupGetAttributeTest(final String attributeName, final String attributeValue) throws IOException {
 
         final String elementId = "p-id";
         final String content = "<html><head><title>AttributeCaseTest</title></head><body>\n"
@@ -209,8 +209,10 @@ public class AttributeCaseTest extends WebTestCase {
     }
 
 
-    private void setupSetAttributeTest(String attributeName, String attributeValue, String newAttributeValue)
-            throws IOException {
+    private void setupSetAttributeTest(
+            final String attributeName, final String attributeValue,
+            final String newAttributeValue)
+        throws IOException {
 
         final String elementId = "p-id";
         final String content

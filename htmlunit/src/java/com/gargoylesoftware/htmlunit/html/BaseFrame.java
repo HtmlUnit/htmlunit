@@ -88,7 +88,7 @@ public abstract class BaseFrame extends StyledElement {
          *
          * @param name The new name of this window.
          */
-        public void setName(String name) {
+        public void setName(final String name) {
             setNameAttribute(name);
         }
 
@@ -257,7 +257,7 @@ public abstract class BaseFrame extends StyledElement {
      *
      * @param name The new window name.
      */
-    public final void setNameAttribute(String name) {
+    public final void setNameAttribute(final String name) {
         setAttributeValue("name", name);
     }
 

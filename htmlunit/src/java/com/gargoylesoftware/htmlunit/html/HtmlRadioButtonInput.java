@@ -136,7 +136,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * @return The page that is currently loaded after execution of this method
      * @throws IOException If an IO error occured
      */
-    protected Page doClickAction(Page defaultPage) throws IOException {
+    protected Page doClickAction(final Page defaultPage) throws IOException {
         setChecked(true);
         return defaultPage;
     }

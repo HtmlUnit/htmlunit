@@ -75,19 +75,19 @@ public class HTMLParserTest extends WebTestCase {
      * @throws Exception failure
      */
     public void testSimpleHTMLString() throws Exception {
-        WebClient webClient = new WebClient();
-        WebResponse webResponse = new StringWebResponse(
+        final WebClient webClient = new WebClient();
+        final WebResponse webResponse = new StringWebResponse(
             "<html><head><title>TITLE</title><noscript>TEST</noscript></head><body></body></html>");
 
-        HtmlPage page = HTMLParser.parse(webResponse, webClient.getCurrentWindow());
+        final HtmlPage page = HTMLParser.parse(webResponse, webClient.getCurrentWindow());
 
         HtmlUnitXPath xpath = new HtmlUnitXPath("//noscript");
-        String stringVal = xpath.stringValueOf(page);
+        final String stringVal = xpath.stringValueOf(page);
 
         assertEquals("TEST", stringVal);
 
         xpath = new HtmlUnitXPath("//*[./text() = 'TEST']");
-        HtmlElement node = (HtmlElement)xpath.selectSingleNode(page);
+        final HtmlElement node = (HtmlElement)xpath.selectSingleNode(page);
 
         assertEquals(node.getTagName(), HtmlNoScript.TAG_NAME);
     }
@@ -170,12 +170,12 @@ public class HTMLParserTest extends WebTestCase {
      */
     public static void testHtmlUnitHomePage() throws Exception {
 
-        URL htmlUnitSite = new URL("http://htmlunit.sourceforge.net");
+        final URL htmlUnitSite = new URL("http://htmlunit.sourceforge.net");
         try {
-            URLConnection connection = htmlUnitSite.openConnection();
+            final URLConnection connection = htmlUnitSite.openConnection();
             connection.connect();
         }
-        catch (ConnectException e) {
+        catch (final ConnectException e) {
             /* sf.net's flaky web servers and not being able to connect
              * here from the shell server can cause this, doesn't mean something
              * is broken 
@@ -183,7 +183,7 @@ public class HTMLParserTest extends WebTestCase {
             System.out.println("Connection could not be made to " + htmlUnitSite.toExternalForm());
             return; 
         }
-        catch (SocketException e) {
+        catch (final SocketException e) {
             /* Some systems do not have access to the sf.net's web page.  If the connection
              * timesout, do not fail the test
              */
@@ -191,28 +191,28 @@ public class HTMLParserTest extends WebTestCase {
             return;
         }
         
-        WebClient webClient = new WebClient();
-        WebResponse webResponse = new HttpWebConnection(webClient).getResponse(
+        final WebClient webClient = new WebClient();
+        final WebResponse webResponse = new HttpWebConnection(webClient).getResponse(
                 htmlUnitSite,
                 SubmitMethod.GET,
                 Collections.EMPTY_LIST,
                 Collections.EMPTY_MAP
         );
 
-        HtmlPage page = HTMLParser.parse(webResponse, webClient.getCurrentWindow());
+        final HtmlPage page = HTMLParser.parse(webResponse, webClient.getCurrentWindow());
 
         //find the copyright string
         HtmlUnitXPath xpath = new HtmlUnitXPath("//div[@id='footer']/div[@class='xright']");
-        String stringVal = xpath.stringValueOf(page).trim();
+        final String stringVal = xpath.stringValueOf(page).trim();
         assertEquals("\u00A9 2002-2005, Gargoyle Software Inc.", stringVal);
 
         //see if the Google adds were added via Javascript
         xpath = new HtmlUnitXPath("//iframe[@name = 'google_ads_frame']");
-        HtmlInlineFrame inline = (HtmlInlineFrame)xpath.selectSingleNode(page);
+        final HtmlInlineFrame inline = (HtmlInlineFrame)xpath.selectSingleNode(page);
 
         assertNotNull("find Google ads", inline);
 
-        HtmlPage innerPage = (HtmlPage)inline.getEnclosedPage();
+        final HtmlPage innerPage = (HtmlPage)inline.getEnclosedPage();
         assertNotNull(innerPage);
     }
 }

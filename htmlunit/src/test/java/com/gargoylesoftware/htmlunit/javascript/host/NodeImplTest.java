@@ -60,7 +60,7 @@ public class NodeImplTest extends WebTestCase {
     /**
      * @param name The name of the test case
      */
-    public NodeImplTest(String name) {
+    public NodeImplTest(final String name) {
         super(name);
     }
 

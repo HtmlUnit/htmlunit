@@ -589,7 +589,7 @@ public final class Document extends NodeImpl {
             
             final BrowserVersion browser = this.getHtmlPage().getWebClient().getBrowserVersion();
             if (browser.isIE()) {
-                NativeArray elements = (NativeArray) jsFunction_getElementsByName(id);
+                final NativeArray elements = (NativeArray) jsFunction_getElementsByName(id);
                 result = elements.get(0, this);
                 if (result instanceof UniqueTag) {
                     return null;
@@ -635,7 +635,7 @@ public final class Document extends NodeImpl {
             final HtmlUnitXPath xpath = new HtmlUnitXPath(exp);
             list = xpath.selectNodes(page);
         } 
-        catch (JaxenException e) {
+        catch (final JaxenException e) {
             return new NativeArray(0);
         }
         CollectionUtils.transform(list, getTransformerScriptableFor());
@@ -661,7 +661,7 @@ public final class Document extends NodeImpl {
 
         // document.xxx allows to retrieve some elements by name like img or form but not input, a, ...
         // TODO: behaviour for iframe seems to differ between IE and Moz
-        ElementArray collection = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+        final ElementArray collection = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
         try {
             collection.init(htmlPage, new HtmlUnitXPath("//*[(@name = '" + name 
                     + "' and (name() = 'img' or name() = 'form'))"));

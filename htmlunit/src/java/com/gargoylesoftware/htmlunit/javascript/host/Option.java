@@ -78,7 +78,7 @@ public class Option extends HTMLElement {
       * Set the DOM node that corresponds to this javascript object
       * @param domNode The DOM node
       */
-    public void setDomNode( DomNode domNode ) {
+    public void setDomNode( final DomNode domNode ) {
         super.setDomNode( domNode );
         if ( value_ != null ) {
             jsSet_value( value_ );
@@ -100,7 +100,7 @@ public class Option extends HTMLElement {
      * Set the value of the "value" property
      * @param newValue The value property
      */
-    public void jsSet_value( String newValue ) {
+    public void jsSet_value( final String newValue ) {
         ((HtmlOption)getHtmlElementOrDie()).setValueAttribute( newValue );
     }
 
@@ -122,7 +122,7 @@ public class Option extends HTMLElement {
      * Set the value of the "text" property
      * @param newText The text property
      */
-    public void jsSet_text( String newText ) {
+    public void jsSet_text( final String newText ) {
         ((HtmlOption)getHtmlElementOrDie()).setLabelAttribute( newText );
     }
 

@@ -139,7 +139,7 @@ public class Input extends FocusableHostElement {
      *      set
      */
     public void jsSet_checked( final boolean checked ) {
-        String type = getHtmlElementOrDie().getAttributeValue("type").toLowerCase();
+        final String type = getHtmlElementOrDie().getAttributeValue("type").toLowerCase();
         if (type.equals("checkbox") || type.equals("radio")){
             ((HtmlInput)getHtmlElementOrDie()).setChecked(checked);
         }
@@ -159,7 +159,7 @@ public class Input extends FocusableHostElement {
      *@return    The checked property.
      */
     public boolean jsGet_checked() {
-        String type = getHtmlElementOrDie().getAttributeValue("type").toLowerCase();
+        final String type = getHtmlElementOrDie().getAttributeValue("type").toLowerCase();
         if (type.equals("checkbox") || type.equals("radio")){
             return ((HtmlInput)getHtmlElementOrDie()).isChecked();
         }

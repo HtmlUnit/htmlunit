@@ -264,7 +264,7 @@ public class WindowTest extends WebTestCase {
                 webClient.getWebWindowByName( "secondFrame" ));
             // Expected path
         }
-        catch (WebWindowNotFoundException exception) {
+        catch (final WebWindowNotFoundException exception) {
             fail( "Expected secondFrame would be found before click." );
         }
         final HtmlAnchor anchor = (HtmlAnchor)secondPage.getHtmlElementById("link");
@@ -281,7 +281,7 @@ public class WindowTest extends WebTestCase {
                 webClient.getWebWindowByName( "secondFrame" ));
             // Expected path
         }
-        catch (WebWindowNotFoundException exception) {
+        catch (final WebWindowNotFoundException exception) {
             fail( "Expected secondFrame would be found after click." );
         }
 
@@ -395,14 +395,14 @@ public class WindowTest extends WebTestCase {
             webClient.getWebWindowByName( "secondFrame" );
             fail( "Did not expect secondFrame to still exist after click." );
         }
-        catch (WebWindowNotFoundException exception) {
+        catch (final WebWindowNotFoundException exception) {
             // Expected path
         }
         try {
             webClient.getWebWindowByName( "thirdFrame" );
             fail( "Did not expect thirdFrame to still exist after click." );
         }
-        catch (WebWindowNotFoundException exception) {
+        catch (final WebWindowNotFoundException exception) {
             // Expected path
         }
     }
@@ -467,14 +467,14 @@ public class WindowTest extends WebTestCase {
             assertSame( namedWindow.getEnclosedPage(), fourthPage);
             // Expected path
         }
-        catch (WebWindowNotFoundException exception) {
+        catch (final WebWindowNotFoundException exception) {
             fail( "Expected secondFrame would be found after click." );
         }
         try {
             webClient.getWebWindowByName( "thirdFrame" );
             fail( "Did not expect thirdFrame to still exist after click." );
         }
-        catch (WebWindowNotFoundException exception) {
+        catch (final WebWindowNotFoundException exception) {
             // Expected path
         }
     }
@@ -1273,7 +1273,7 @@ public class WindowTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testResizeTo() throws Exception {
-        String content = "<html><head><title>foo</title><script>\n"
+        final String content = "<html><head><title>foo</title><script>\n"
                  + "window.resizeTo(10, 20);\n"
                  + "window.resizeTo(-10, 20);\n"
                  + "</script></head><body></body></html>";

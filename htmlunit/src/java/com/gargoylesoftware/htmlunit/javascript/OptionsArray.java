@@ -114,8 +114,8 @@ public class OptionsArray extends SimpleScriptable {
      * @param start The scriptable object that was originally invoked for this property
      * @param newValue The new value
      */
-    public void put( final int index, final Scriptable start,
-        Object newValue ) {
+    public void put(
+            final int index, final Scriptable start, final Object newValue) {
         if ( newValue == null ) {
             // Remove the indexed option.
             htmlSelect_.removeOption( index );

@@ -128,8 +128,10 @@ public class ElementArray extends SimpleScriptable implements Function {
     /**
      * @see Function#call(Context, Scriptable, Scriptable, Object[])
      */
-    public final Object call( final Context context, final Scriptable scope, Scriptable thisObj, Object[] args)
-    throws JavaScriptException {
+    public final Object call(
+            final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args)
+        throws JavaScriptException {
         if( args.length == 0 ) {
             throw Context.reportRuntimeError( "Zero arguments; need an index or a key." );
         }
@@ -139,8 +141,9 @@ public class ElementArray extends SimpleScriptable implements Function {
     /**
      * @see Function#construct(Context, Scriptable, Object[])
      */
-    public final Scriptable construct(Context arg0, Scriptable arg1, Object[] arg2)
-    throws JavaScriptException {
+    public final Scriptable construct(
+            final Context arg0, final Scriptable arg1, final Object[] arg2)
+        throws JavaScriptException {
         return null;
     }
 
@@ -150,7 +153,7 @@ public class ElementArray extends SimpleScriptable implements Function {
      * @param o The index or key corresponding to the element or elements to return.
      * @return The element or elements corresponding to the specified index or key.
      */
-    private Object get( Object o ) {
+    private Object get( final Object o ) {
         if( o instanceof Number ) {
             final Number n = (Number) o;
             final int i = n.intValue();
@@ -219,7 +222,7 @@ public class ElementArray extends SimpleScriptable implements Function {
             final List list = xpath_.selectNodes(node_); 
             return list;
         }
-        catch (JaxenException e) {
+        catch (final JaxenException e) {
             throw Context.reportRuntimeError("Exeption getting elements: " + e.getMessage());
         }
     }
@@ -352,7 +355,7 @@ public class ElementArray extends SimpleScriptable implements Function {
             final String newXPathExpr = xpath_.toString() + "[name() = '" + tagName.toLowerCase() + "']";
             array.init(node_, xpath_.getNavigator().parseXPath(newXPathExpr));
         }
-        catch (SAXPathException e) {
+        catch (final SAXPathException e) {
             // should never occur
             throw Context.reportRuntimeError("Failed call tags: " + e.getMessage());
         }

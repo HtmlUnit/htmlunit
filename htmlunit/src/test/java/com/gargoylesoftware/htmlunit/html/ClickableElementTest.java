@@ -116,7 +116,7 @@ public class ClickableElementTest extends WebTestCase {
      * @param htmlBody HTML text body
      * @throws Exception if the test fails
      */
-    private void onClickBodyTest(String htmlBody) throws Exception {
+    private void onClickBodyTest(final String htmlBody) throws Exception {
         onClickPageTest("<html><head><title>foo</title></head>" + htmlBody
                  + "</html>");
     }
@@ -128,7 +128,7 @@ public class ClickableElementTest extends WebTestCase {
      * @param tagName HTML tag name for simple tag with text body
      * @throws Exception if the test fails
      */
-    private void onClickSimpleTest(String tagName) throws Exception {
+    private void onClickSimpleTest(final String tagName) throws Exception {
         onClickBodyTest("<body><" + tagName + " id='clickId' onClick='alert(\"foo\")'>Text</" + tagName + "></body>");
     }
 

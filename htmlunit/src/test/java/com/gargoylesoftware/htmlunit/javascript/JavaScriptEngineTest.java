@@ -631,18 +631,18 @@ public class JavaScriptEngineTest extends WebTestCase {
         parser.setFeature("http://xml.org/sax/features/validation", true);
         parser.setFeature("http://apache.org/xml/features/validation/schema", true);
         parser.setEntityResolver( new EntityResolver() {
-            public InputSource resolveEntity (String publicId, String systemId) throws IOException {
+            public InputSource resolveEntity (final String publicId, final String systemId) throws IOException {
                 return createInputSourceForFile(directory+"JavaScriptConfiguration.xsd");
             }
         });
         parser.setErrorHandler( new ErrorHandler() {
-            public void warning(SAXParseException exception) throws SAXException {
+            public void warning(final SAXParseException exception) throws SAXException {
                 throw exception;
             }
-            public void error(SAXParseException exception) throws SAXException {
+            public void error(final SAXParseException exception) throws SAXException {
                 throw exception;
             }
-            public void fatalError(SAXParseException exception) throws SAXException {
+            public void fatalError(final SAXParseException exception) throws SAXException {
                 throw exception;
             }
         });
@@ -710,7 +710,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             loadPage(getJavaScriptContent( "new ActiveXObject()" ));
             fail( "An exception should be thrown for zero argument constructor." );
         } 
-        catch( ScriptException e ) {
+        catch( final ScriptException e ) {
             // Success
         }
 
@@ -718,7 +718,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             loadPage(getJavaScriptContent( "new ActiveXObject(1, '2', '3')" ));
             fail( "An exception should be thrown for a three argument constructor." );
         } 
-        catch( ScriptException e ) {
+        catch( final ScriptException e ) {
             // Success
         }
 
@@ -726,7 +726,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             loadPage(getJavaScriptContent( "new ActiveXObject(a)" ));
             fail( "An exception should be thrown for an undefined parameter in the constructor." );
         } 
-        catch( ScriptException e ) {
+        catch( final ScriptException e ) {
             // Success
         }
 
@@ -734,7 +734,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             loadPage(getJavaScriptContent( "new ActiveXObject(10)" ));
             fail( "An exception should be thrown for an integer parameter in the constructor." );
         } 
-        catch( ScriptException e ) {
+        catch( final ScriptException e ) {
             // Success
         }
 
@@ -742,7 +742,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             loadPage(getJavaScriptContent( "new ActiveXObject('UnknownObject')" ));
             fail( "An exception should be thrown for a null map." );
         } 
-        catch( ScriptException e ) {
+        catch( final ScriptException e ) {
             // Success
         }
     }
@@ -774,7 +774,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for non existent object in the map." );
         } 
-        catch( ScriptException e ) {
+        catch( final ScriptException e ) {
             // Success
         }
 
@@ -783,7 +783,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for an invalid object in the map." );
         } 
-        catch( ScriptException e ) {
+        catch( final ScriptException e ) {
             // Success
         }
 
@@ -793,7 +793,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for a non existent object in the map." );
         } 
-        catch( ScriptException e ) {
+        catch( final ScriptException e ) {
             // Success
         }
 
@@ -820,7 +820,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         
     }
 
-    private String getJavaScriptContent( String javascript ) {
+    private String getJavaScriptContent( final String javascript ) {
         return "<html><head><title>foo</title><script>"
              + javascript
              + "</script></head><body>"
@@ -902,25 +902,29 @@ public class JavaScriptEngineTest extends WebTestCase {
          * Initialize with a given page.
          * @param page The page.
          */
-        public void initialize(HtmlPage page) {
+        public void initialize(final HtmlPage page) {
             delegate_.initialize(page);
         }
 
         /** @inheritDoc ScriptEngine#execute(HtmlPage,String,String,HtmlElement) */
-        public Object execute(HtmlPage htmlPage, String sourceCode, String sourceName, HtmlElement htmlElement) {
+        public Object execute(
+                final HtmlPage htmlPage, final String sourceCode,
+                final String sourceName, final HtmlElement htmlElement) {
             scriptExecutionCount_++;
             return delegate_.execute(htmlPage, sourceCode, sourceName, htmlElement);
         }
 
         /** @inheritDoc ScriptEngine#callFunction(HtmlPage,Object,Object,Object[],HtmlElement) */
-        public Object callFunction(HtmlPage htmlPage, Object javaScriptFunction, Object thisObject,
-                Object[] args, HtmlElement htmlElementScope) {
+        public Object callFunction(
+                final HtmlPage htmlPage, final Object javaScriptFunction,
+                final Object thisObject, final Object[] args,
+                final HtmlElement htmlElementScope) {
             scriptCallCount_++;
             return delegate_.callFunction(htmlPage, javaScriptFunction, thisObject, args, htmlElementScope);
         }
 
         /** @inheritDoc ScriptEngine#toString(HtmlPage,Object) */
-        public String toString(HtmlPage htmlPage, Object javaScriptObject) {
+        public String toString(final HtmlPage htmlPage, final Object javaScriptObject) {
             return delegate_.toString(htmlPage, javaScriptObject);
         }
 

@@ -73,7 +73,9 @@ public class ActiveXObject extends SimpleScriptable {
      * @param inNewExpr Is new or not
      * @return the java object to allow javascript to access
      */
-    public static Scriptable jsConstructor( Context cx, Object[] args, Function ctorObj, boolean inNewExpr ) {
+    public static Scriptable jsConstructor(
+            final Context cx, final Object[] args, final Function ctorObj,
+            final boolean inNewExpr) {
         if( args.length < 1 || args.length > 2 ) {
             throw Context.reportRuntimeError( 
                     "ActiveXObject Error: constructor must have one or two String parameters." );
@@ -102,7 +104,7 @@ public class ActiveXObject extends SimpleScriptable {
             final Class xClass = Class.forName(xClassString);
             object = xClass.newInstance();
         } 
-        catch( Exception e ) {
+        catch( final Exception e ) {
             throw Context.reportRuntimeError( "ActiveXObject Error: failed instantiating class " + xClassString +
                     " because " + e.getMessage() + "." );
         }

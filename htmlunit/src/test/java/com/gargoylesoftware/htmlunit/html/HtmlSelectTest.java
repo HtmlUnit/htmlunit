@@ -490,8 +490,8 @@ public class HtmlSelectTest extends WebTestCase {
         option.setSelected(true);
     }
 
-    private void checkOptions(HtmlSelect select) {
-        List options = select.getAllOptions();
+    private void checkOptions(final HtmlSelect select) {
+        final List options = select.getAllOptions();
         if (options.isEmpty()) {
             assertNull(select.getFirstChild());
             assertNull(select.getLastChild());
@@ -601,8 +601,8 @@ public class HtmlSelectTest extends WebTestCase {
         assertEquals("", select.asText());
     }
 
-    void appendOption(HtmlSelect select, String value) {
-        HtmlOption option = new HtmlOption(select.getPage(), null);
+    void appendOption(final HtmlSelect select, final String value) {
+        final HtmlOption option = new HtmlOption(select.getPage(), null);
         option.setValueAttribute(value);
         option.setLabelAttribute(value);
         select.appendOption(option);

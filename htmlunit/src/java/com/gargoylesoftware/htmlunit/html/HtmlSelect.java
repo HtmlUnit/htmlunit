@@ -101,9 +101,9 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         if(isMultipleSelectEnabled()) {
             result = new ArrayList();
 
-            DescendantElementsIterator iterator = new DescendantElementsIterator();
+            final DescendantElementsIterator iterator = new DescendantElementsIterator();
             while(iterator.hasNext()) {
-                HtmlElement element = iterator.nextElement();
+                final HtmlElement element = iterator.nextElement();
                 if(element instanceof HtmlOption && ((HtmlOption)element).isSelected()) {
                     result.add(element);
                 }
@@ -115,9 +115,9 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             HtmlOption firstOption = null;
             HtmlOption lastOption = null;
 
-            DescendantElementsIterator iterator = new DescendantElementsIterator();
+            final DescendantElementsIterator iterator = new DescendantElementsIterator();
             while(iterator.hasNext()) {
-                HtmlElement element = iterator.nextElement();
+                final HtmlElement element = iterator.nextElement();
                 if(element instanceof HtmlOption) {
                     HtmlOption option = (HtmlOption)element;
                     if(firstOption == null) {
@@ -206,9 +206,9 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @param index The index of the option to remove
      */
     public void removeOption( final int index ) {
-        ChildElementsIterator iterator = new ChildElementsIterator();
+        final ChildElementsIterator iterator = new ChildElementsIterator();
         for(int i=0; iterator.hasNext(); i++) {
-            HtmlElement element = iterator.nextElement();
+            final HtmlElement element = iterator.nextElement();
             if(i == index) {
                 element.remove();
                 return;
@@ -224,9 +224,9 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      */
     public void replaceOption( final int index, final HtmlOption newOption ) {
 
-        ChildElementsIterator iterator = new ChildElementsIterator();
+        final ChildElementsIterator iterator = new ChildElementsIterator();
         for(int i=0; iterator.hasNext(); i++) {
-            HtmlElement element = iterator.nextElement();
+            final HtmlElement element = iterator.nextElement();
             if(i == index) {
                 element.replace(newOption);
                 return;
@@ -321,7 +321,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
 
-    private void setSelected(HtmlOption option, final boolean isSelected ) {
+    private void setSelected(final HtmlOption option, final boolean isSelected ) {
         if( isSelected ) {
             option.setAttributeValue( "selected", "selected" );
         }

@@ -96,7 +96,7 @@ public class FocusableElementTest extends WebTestCase {
      * @param htmlBodyContent HTML tag name for simple tag with text body.
      * @throws Exception if the test fails
      */
-    private void onClickBodyTest(String htmlBodyContent) throws Exception {
+    private void onClickBodyTest(final String htmlBodyContent) throws Exception {
         onClickPageTest(
                 "<html><head><title>foo</title></head><body>" +
                 htmlBodyContent +
@@ -116,7 +116,7 @@ public class FocusableElementTest extends WebTestCase {
      * @param tagAttributes Additional attribute(s) to add to the generated tag.
      * @throws Exception if the test fails
      */
-    private void onClickSimpleTest(String tagName, String tagAttributes) throws Exception {
+    private void onClickSimpleTest(final String tagName, final String tagAttributes) throws Exception {
         onClickBodyTest(
                 "<" + tagName + COMMON_ATTRIBUTES +
                 " " + tagAttributes + ">Text</" + tagName + ">");

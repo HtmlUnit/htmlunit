@@ -70,7 +70,7 @@ public class DisabledElementTest extends WebTestCase {
      */
     public static Test suite() {
 
-        TestSuite suite = new TestSuite();
+        final TestSuite suite = new TestSuite();
         addTestCases(suite, "button", "<button id='element1' {0}>foo</button>");
         addTestCases(suite, "input_button", "<input type='button' id='element1' {0}>");
         addTestCases(suite, "input_checkbox", "<input type='checkbox' id='element1' {0}>");
@@ -99,13 +99,15 @@ public class DisabledElementTest extends WebTestCase {
      * @param elementName The name of the HTML element being tested
      * @param elementHtml The html representing the element to test with attribute <code>id='element1'</code>
      */
-    private static void addTestCases(TestSuite suite, String elementName, String elementHtml) {
+    private static void addTestCases(
+            final TestSuite suite, final String elementName,
+            final String elementHtml) {
 
-        TestSuite subsuite = new TestSuite(DisabledElementTest.class.getName() + "_" + elementName);
+        final TestSuite subsuite = new TestSuite(DisabledElementTest.class.getName() + "_" + elementName);
 
-        Method[] methods = DisabledElementTest.class.getMethods();
+        final Method[] methods = DisabledElementTest.class.getMethods();
         for (int i = 0; i < methods.length; i++) {
-            Method method = methods[i];
+            final Method method = methods[i];
             if (Modifier.isPublic(method.getModifiers()) && method.getName().startsWith("test")) {
                 subsuite.addTest(new DisabledElementTest(method.getName(), elementHtml));
             }
@@ -121,7 +123,7 @@ public class DisabledElementTest extends WebTestCase {
      * @param testName The name of the test method to run
      * @param elementHtml The html representing the element to test with attribute <code>id='element1'</code>
      */
-    public DisabledElementTest(String testName, String elementHtml) {
+    public DisabledElementTest(final String testName, final String elementHtml) {
         super(testName);
         final String htmlContent = "<html><body><form id='form1'>{0}</form></body></html>";
         htmlContent_ = MessageFormat.format(htmlContent, new String[]{elementHtml});

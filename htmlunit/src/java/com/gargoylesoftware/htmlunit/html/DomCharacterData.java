@@ -114,7 +114,7 @@ public abstract class DomCharacterData extends DomNode {
             throw new IllegalArgumentException("offset: "+offset+" count: "+count);
         }
 
-        int tailLength = Math.max(data_.length() - count - offset, 0);
+        final int tailLength = Math.max(data_.length() - count - offset, 0);
         if(tailLength > 0) {
             data_ = data_.substring(0, offset) + data_.substring(offset + count, offset + count + tailLength);
         }
@@ -157,12 +157,12 @@ public abstract class DomCharacterData extends DomNode {
      * character data starting from the character at position offset.
      */
     public String substringData(final int offset, final int count) {
-        int length = data_.length();
+        final int length = data_.length();
         if (count < 0 || offset < 0 || offset > length - 1) {
             throw new IllegalArgumentException("offset: "+offset+" count: "+count);
         }
 
-        int tailIndex = Math.min(offset + count, length);
+        final int tailIndex = Math.min(offset + count, length);
         return data_.substring(offset, tailIndex);
     }
 

@@ -76,7 +76,7 @@ public class HtmlTitle extends HtmlElement {
      *  
      * @see com.gargoylesoftware.htmlunit.html.DomNode#setNodeValue(java.lang.String)
      */
-    public void setNodeValue(String message) {
+    public void setNodeValue(final String message) {
         final DomNode child = getFirstChild();
         if (child == null) {
             final DomNode textNode = new DomText(getPage() , message);

@@ -70,7 +70,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @param expected The expected value
      * @param actual The actual value
      */
-    public static void assertEquals(byte[] expected, byte[] actual) {
+    public static void assertEquals(final byte[] expected, final byte[] actual) {
         assertEquals(null, expected, actual);
     }
 
@@ -81,7 +81,8 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @param expected The expected value
      * @param actual The actual value
      */
-    public static void assertEquals(String message, byte[] expected, byte[] actual) {
+    public static void assertEquals(
+            final String message, final byte[] expected, final byte[] actual) {
         assertEquals(message, expected, actual, expected.length);
     }
 
@@ -93,7 +94,9 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @param actual The actual value
      * @param length How many characters at the beginning of each byte array will be compared.
      */
-    public static void assertEquals(String message, byte[] expected, byte[] actual, int length) {
+    public static void assertEquals(
+            final String message, final byte[] expected, final byte[] actual,
+            final int length) {
         if (expected == null && actual == null) {
             return;
         }
@@ -114,7 +117,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @param actual The actual value
      * @throws IOException If an IO problem occurs during comparison
      */
-    public static void assertEquals(InputStream expected, InputStream actual) throws IOException {
+    public static void assertEquals(final InputStream expected, final InputStream actual) throws IOException {
         assertEquals(null, expected, actual);
     }
 
@@ -125,7 +128,10 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @param actual The actual value
      * @throws IOException If an IO problem occurs during comparison
      */
-    public static void assertEquals(String message, InputStream expected, InputStream actual) throws IOException {
+    public static void assertEquals(
+            final String message, final InputStream expected,
+            final InputStream actual)
+        throws IOException {
 
         if (expected == null && actual == null) {
             return;
@@ -155,13 +161,13 @@ public class HttpWebConnectionTest extends BaseTestCase {
             expectedBuf = new BufferedInputStream(expected);
             actualBuf = new BufferedInputStream(actual);
 
-            byte[] expectedArray = new byte[2048];
-            byte[] actualArray = new byte[2048];
+            final byte[] expectedArray = new byte[2048];
+            final byte[] actualArray = new byte[2048];
 
             int expectedLength = expectedBuf.read(expectedArray);
             while(true) {
 
-                int actualLength = actualBuf.read(actualArray);
+                final int actualLength = actualBuf.read(actualArray);
                 assertEquals(message, expectedLength, actualLength);
 
                 if (expectedLength == -1) {
@@ -192,7 +198,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      *
      * @param name The name of the test.
      */
-    public HttpWebConnectionTest(String name) {
+    public HttpWebConnectionTest(final String name) {
         super(name);
     }
 
@@ -308,7 +314,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      *
      * @param hostname The hostname of the url to test
      */
-    private void assertGetStateForUrl(String hostname) {
+    private void assertGetStateForUrl(final String hostname) {
 
         final HttpWebConnection connection = new HttpWebConnection(new WebClient());
         try {
@@ -330,13 +336,13 @@ public class HttpWebConnectionTest extends BaseTestCase {
             final HttpState actualHttpState = connection.getStateForUrl(url);
             assertSame(expectedHttpState, actualHttpState);
         }
-        catch (NoSuchFieldException e) {
+        catch (final NoSuchFieldException e) {
             throw new RuntimeException(e);
         }
-        catch (IllegalAccessException e) {
+        catch (final IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-        catch (MalformedURLException e) {
+        catch (final MalformedURLException e) {
             throw new RuntimeException(e);
         }
     }

@@ -87,8 +87,8 @@ public class HtmlTableRow extends ClickableElement {
      * @see #getCellIterator
      */
     public List getCells() {
-        List result = new ArrayList();
-        for(CellIterator iterator = getCellIterator(); iterator.hasNext(); ) {
+        final List result = new ArrayList();
+        for(final CellIterator iterator = getCellIterator(); iterator.hasNext(); ) {
             result.add(iterator.next());
         }
         return Collections.unmodifiableList(result);
@@ -99,10 +99,10 @@ public class HtmlTableRow extends ClickableElement {
      * @return the cell at the given index
      * @throws IndexOutOfBoundsException if there is no cell at the given index
      */
-    public HtmlTableCell getCell(int index) throws IndexOutOfBoundsException {
+    public HtmlTableCell getCell(final int index) throws IndexOutOfBoundsException {
         int count = 0;
-        for(CellIterator iterator = getCellIterator(); iterator.hasNext(); count++) {
-            HtmlTableCell next = iterator.nextCell();
+        for(final CellIterator iterator = getCellIterator(); iterator.hasNext(); count++) {
+            final HtmlTableCell next = iterator.nextCell();
             if(count == index) {
                 return next;
             }
@@ -231,7 +231,7 @@ public class HtmlTableRow extends ClickableElement {
         public HtmlTableCell nextCell() throws NoSuchElementException {
 
             if(nextCell_ != null) {
-                HtmlTableCell result = nextCell_;
+                final HtmlTableCell result = nextCell_;
                 setNextCell(nextCell_.getNextSibling());
                 return result;
             }
@@ -245,7 +245,7 @@ public class HtmlTableRow extends ClickableElement {
          * @param node the node to mark as the next cell. If this is not a cell, the
          * next reachable cell will be marked
          */
-        private void setNextCell(DomNode node) {
+        private void setNextCell(final DomNode node) {
 
             nextCell_ = null;
             for(DomNode next = node; next != null; next = next.getNextSibling()) {
@@ -261,7 +261,7 @@ public class HtmlTableRow extends ClickableElement {
                 }
             }
             if(currentForm_ != null) {
-                DomNode form = currentForm_;
+                final DomNode form = currentForm_;
                 currentForm_ = null;
                 setNextCell(form.getNextSibling());
             }

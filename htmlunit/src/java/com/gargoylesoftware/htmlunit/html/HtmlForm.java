@@ -384,7 +384,7 @@ public class HtmlForm extends ClickableElement {
             if( element instanceof HtmlRadioButtonInput
                     && element.getAttributeValue("name").equals( name ) ) {
 
-                HtmlRadioButtonInput input = (HtmlRadioButtonInput)element;
+                final HtmlRadioButtonInput input = (HtmlRadioButtonInput)element;
                 if( input.getValueAttribute().equals( value ) ) {
                     return input;
                 }

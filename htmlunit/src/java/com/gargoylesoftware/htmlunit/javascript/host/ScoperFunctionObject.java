@@ -73,41 +73,42 @@ class ScoperFunctionObject implements Function {
     }
     
     /** @see Function#call(Context,Scriptable,Scriptable,Object[]) */
-    public Object call(Context cx, Scriptable scope, Scriptable thisObj,
-            Object[] args) {
+    public Object call(
+            final Context cx, final Scriptable scope, final Scriptable thisObj,
+            final Object[] args) {
         return wrapped_.call(cx, scope, thisObj, args);
     }
 
     /** @see Function#construct(Context,Scriptable,Object[]) */
-    public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
-        Scriptable o = wrapped_.construct(cx, scope, args);
+    public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
+        final Scriptable o = wrapped_.construct(cx, scope, args);
         o.setParentScope(scope_);
 
         return o;
     }
 
     /** @see Function#delete(int) */
-    public void delete(int index) {
+    public void delete(final int index) {
         wrapped_.delete(index);
     }
     
     /** @see Function#delete(String) */
-    public void delete(String name) {
+    public void delete(final String name) {
         wrapped_.delete(name);
     }
     
     /** @see Object#equals(Object) */
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         return wrapped_.equals(obj);
     }
     
     /** @see Function#get(int,Scriptable) */
-    public Object get(int index, Scriptable start) {
+    public Object get(final int index, final Scriptable start) {
         return wrapped_.get(index, start);
     }
     
     /** @see Function#get(String,Scriptable) */
-    public Object get(String name, Scriptable start) {
+    public Object get(final String name, final Scriptable start) {
         return wrapped_.get(name, start);
     }
     
@@ -117,7 +118,7 @@ class ScoperFunctionObject implements Function {
     }
     
     /** @see Function#getDefaultValue(Class) */
-    public Object getDefaultValue(Class hint) {
+    public Object getDefaultValue(final Class hint) {
         return wrapped_.getDefaultValue(hint);
     }
 
@@ -137,12 +138,12 @@ class ScoperFunctionObject implements Function {
     }
 
     /** @see Function#has(int,Scriptable) */
-    public boolean has(int index, Scriptable start) {
+    public boolean has(final int index, final Scriptable start) {
         return wrapped_.has(index, start);
     }
 
     /** @see Function#has(String,Scriptable) */
-    public boolean has(String name, Scriptable start) {
+    public boolean has(final String name, final Scriptable start) {
         return wrapped_.has(name, start);
     }
 
@@ -152,27 +153,27 @@ class ScoperFunctionObject implements Function {
     }
 
     /** @see Function#hasInstance(Scriptable) */
-    public boolean hasInstance(Scriptable instance) {
+    public boolean hasInstance(final Scriptable instance) {
         return wrapped_.hasInstance(instance);
     }
 
     /** @see Function#put(int,Scriptable,Object) */
-    public void put(int index, Scriptable start, Object value) {
+    public void put(final int index, final Scriptable start, final Object value) {
         wrapped_.put(index, start, value);
     }
 
     /** @see Function#put(String,Scriptable,Object) */
-    public void put(String name, Scriptable start, Object value) {
+    public void put(final String name, final Scriptable start, final Object value) {
         wrapped_.put(name, start, value);
     }
 
     /** @see Function#setParentScope(Scriptable) */
-    public void setParentScope(Scriptable parent) {
+    public void setParentScope(final Scriptable parent) {
         wrapped_.setParentScope(parent);
     }
 
     /** @see Function#setPrototype(Scriptable) */
-    public void setPrototype(Scriptable prototype) {
+    public void setPrototype(final Scriptable prototype) {
         wrapped_.setPrototype(prototype);
     }
 

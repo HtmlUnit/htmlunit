@@ -54,7 +54,7 @@ public abstract class FocusableElement extends ClickableElement {
      * @param page The page
      * @param attributes The attributes
      */
-    public FocusableElement(HtmlPage page, Map attributes) {
+    public FocusableElement(final HtmlPage page, final Map attributes) {
         super(page, attributes);
     }
 

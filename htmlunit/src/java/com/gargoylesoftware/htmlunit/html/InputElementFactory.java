@@ -66,7 +66,9 @@ final class InputElementFactory implements IElementFactory {
      *
      * @return a new HtmlInput element.
      */
-    public HtmlElement createElement(HtmlPage page, String tagName, Attributes attributes) {
+    public HtmlElement createElement(
+            final HtmlPage page, final String tagName,
+            final Attributes attributes) {
 
         String type = null;
         if(attributes != null) {

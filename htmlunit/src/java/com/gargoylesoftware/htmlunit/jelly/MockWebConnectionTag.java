@@ -55,7 +55,7 @@ public class MockWebConnectionTag extends HtmlUnitTagSupport {
      * @param xmlOutput The xml output
      * @throws JellyTagException If a problem occurs
      */
-    public void doTag(XMLOutput xmlOutput) throws JellyTagException {
+    public void doTag(final XMLOutput xmlOutput) throws JellyTagException {
         final WebClient webClient = getWebClient();
         webClient.setWebConnection( new MockWebConnection(webClient) );
         invokeBody(xmlOutput);

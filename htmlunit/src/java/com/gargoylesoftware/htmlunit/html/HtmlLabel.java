@@ -126,7 +126,7 @@ public class HtmlLabel extends FocusableElement {
      * Remove focus from this element.
      */
     public void blur() {
-        FocusableElement element = getReferencedElement();
+        final FocusableElement element = getReferencedElement();
         if (element != null) {
             element.blur();
         }
@@ -137,7 +137,7 @@ public class HtmlLabel extends FocusableElement {
      * Set the focus to this element.
      */
     public void focus() {
-        FocusableElement element = getReferencedElement();
+        final FocusableElement element = getReferencedElement();
         if (element != null) {
             element.focus();
         }
@@ -153,9 +153,9 @@ public class HtmlLabel extends FocusableElement {
             }
         }
         else {
-            Iterator childIterator = getChildIterator();
+            final Iterator childIterator = getChildIterator();
             while (childIterator.hasNext()) {
-                DomNode element = (DomNode) childIterator.next();
+                final DomNode element = (DomNode) childIterator.next();
                 if (element instanceof HtmlInput) {
                     return (FocusableElement) element;
                 }
