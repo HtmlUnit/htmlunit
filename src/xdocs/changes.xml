@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                JavaScript: fixed problem occuring for &lt;script for="window" event="onload()"&gt; with event value ending with "()".
+            </action>
             <action type="add" dev="mguillem">
                 JavaScript: added document.domain (read only).
             </action>
