@@ -755,15 +755,10 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
-    public void testOnLoadStatementHandler() throws Exception {
+    public void testOnLoadHandler_BodyStatement() throws Exception {
         final String content
                  = "<html><head><title>foo</title>"
                  + "</head><body onLoad='alert(\"foo\")'>"
-                 + "<p>hello world</p>"
-                 + "<form name='form1'>"
-                 + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-                 + "    <input type='text' name='textfield2' id='textfield2'/>"
-                 + "</form>"
                  + "</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
@@ -776,23 +771,87 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
-    public void testOnLoadNameHandler() throws Exception {
+    /**
+     * Regression test for bug 713646
+     */
+    public void testOnLoadHandler_BodyName() throws Exception {
         final String content
                  = "<html><head><title>foo</title>"
-                 + "<script type='text/javascript'>load=function(){alert(\"foo\")}</script>"
-                 + "</head><body onLoad='load'>"
-                 + "<p>hello world</p>"
-                 + "<form name='form1'>"
-                 + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-                 + "    <input type='text' name='textfield2' id='textfield2'/>"
-                 + "</form>"
-                 + "</body></html>";
+                 + "<script type='text/javascript'>"
+                 + "load=function(){alert('foo')}</script>"
+                 + "</head><body onLoad='load'></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
             "foo"
+        });
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for window.onload property
+     */
+    public void testOnLoadHandler_BodyNameRead() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title>"
+                 + "<script type='text/javascript'>"
+                 + "load=function(){}</script>"
+                 + "</head><body onLoad='load'>"
+                 + "<script type='text/javascript'>\n"
+                 + "alert(onload);\n"
+                 + "</script></body></html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "load"
+        });
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for window.onload property
+     */
+    public void testOnLoadHandler_ScriptName() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title>"
+                 + "<script type='text/javascript'>\n"
+                 + "load=function(){alert('foo')};\n"
+                 + "onload=load\n"
+                 + "</script></head><body></body></html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "foo"
+        });
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for window.onload property
+     */
+    public void testOnLoadHandler_ScriptNameRead() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title>"
+                 + "<script type='text/javascript'>\n"
+                 + "load=function(){};\n"
+                 + "onload=load;\n"
+                 + "alert(onload);\n"
+                 + "</script></head><body></body></html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "\nfunction () {\n}\n"
         });
         assertEquals( expectedAlerts, collectedAlerts );
     }

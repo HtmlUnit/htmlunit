@@ -16,6 +16,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import java.util.WeakHashMap;
 import java.util.Map;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
@@ -139,6 +140,31 @@ public final class JavaScriptEngine extends ScriptEngine {
 
 
     /**
+     * Determine the scope for the page and element.
+     * @param htmlPage The page
+     * @param htmlElementScope The element that will be used as context or null if
+     * the page should be used as context.
+     * @return The JavaScript execution scope.
+     */
+    private Scriptable getScope(
+	final PageInfo pageInfo, final HtmlElement htmlElementScope ) {
+
+        Scriptable scope;
+        if( htmlElementScope == null ) {
+            scope = pageInfo.getScope();
+        }
+        else {
+            scope = (Scriptable)htmlElementScope.getScriptObject();
+            if( scope == null ) {
+                scope = ((SimpleScriptable)pageInfo.getScope()).getScriptableFor(htmlElementScope);
+            }
+            scope.setParentScope(pageInfo.getScope());
+        }
+        return scope;
+    }
+
+
+    /**
      * Execute the specified javascript code in the context of a given html page.
      *
      * @param htmlPage The page that the code will execute within
@@ -180,17 +206,7 @@ public final class JavaScriptEngine extends ScriptEngine {
         final int lineNumber = 1;
         final Object securityDomain = null;
 
-        Scriptable scope;
-        if( htmlElementScope == null ) {
-            scope = pageInfo.getScope();
-        }
-        else {
-            scope = (Scriptable)htmlElementScope.getScriptObject();
-            if( scope == null ) {
-                scope = ((SimpleScriptable)pageInfo.getScope()).getScriptableFor(htmlElementScope);
-            }
-            scope.setParentScope(pageInfo.getScope());
-        }
+        final Scriptable scope = getScope( pageInfo, htmlElementScope );
 
         try {
             final Object result = pageInfo.getContext().evaluateString(
@@ -203,6 +219,50 @@ public final class JavaScriptEngine extends ScriptEngine {
         catch( final Throwable t ) {
             throw new ScriptException(t, sourceCode);
         }
+    }
+
+
+    /**
+     * Call a JavaScript function and return the result.
+     * @param htmlPage The page
+     * @param javaScriptFunction The function to call.
+     * @param thisObject The this object for class method calls.
+     * @param args The list of arguments to pass to the function.
+     * @param htmlElement The html element that will act as the context.
+     * @return The result of the function call.
+     */
+    public Object callFunction(
+	final HtmlPage htmlPage, final Object javaScriptFunction, final Object thisObject, Object [] args, final HtmlElement htmlElementScope ) {
+        final PageInfo pageInfo = getPageInfo(htmlPage);
+
+        final Scriptable scope = getScope( pageInfo, htmlElementScope );
+        try {
+            final Object result = ((Function) javaScriptFunction).call( pageInfo.getContext(),
+                scope, (Scriptable) thisObject, args );
+            return result;
+        }
+        catch( final JavaScriptException e ) {
+            throw new ScriptException( e, toString( htmlPage, javaScriptFunction ) );
+        }
+        catch( final Throwable t ) {
+            throw new ScriptException(t, toString( htmlPage, javaScriptFunction ) );
+        }
+    }
+
+
+    /**
+     * Return the string representation of the JavaScript object in the context of the given page.
+     * @param htmlPage The page
+     * @param javaScriptObject The object to represent at a string.
+     * @return The result string.
+     */
+    public String toString( final HtmlPage htmlPage, final Object javaScriptObject ) {
+
+        final PageInfo pageInfo = getPageInfo(htmlPage);
+
+        final String result = pageInfo.getContext().toString(
+                javaScriptObject );
+        return result;
     }
 }
 

@@ -80,6 +80,29 @@ public abstract class ScriptEngine {
 
 
     /**
+     * Call a JavaScript function and return the result.
+     * @param htmlPage The page
+     * @param javaScriptFunction The function to call.
+     * @param thisObject The this object for class method calls.
+     * @param args The list of arguments to pass to the function.
+     * @param htmlElement The html element that will act as the context.
+     * @return The result of the function call.
+     */
+    public abstract Object callFunction(
+        final HtmlPage htmlPage, final Object javaScriptFunction, final Object thisObject, Object [] args, final HtmlElement htmlElementScope );
+
+
+    /**
+     * Return the string representation of the JavaScript object in the context of the given page.
+     * @param htmlPage The page
+     * @param javaScriptObject The object to represent at a string.
+     * @return The result string.
+     */
+    public abstract String toString(
+        final HtmlPage htmlPage, final Object javaScriptObject );
+
+
+    /**
      * Return the log object that is being used to log information about the script engine.
      * @return The log
      */
