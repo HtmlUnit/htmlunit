@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class FormTest extends WebTestCase {
     /**
@@ -554,7 +555,8 @@ public class FormTest extends WebTestCase {
     }
 
     /**
-     * Test form.length
+     * Test form.length - This method does not count the type=image
+     * input tags.
      * @throws Exception if the test fails
      */
     public void testLength() throws Exception {

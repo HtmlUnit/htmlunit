@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David D. Kilzer
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public abstract class WebTestCase extends BaseTestCase {
     /** Constant for the url http://first which is used in the tests. */
@@ -116,6 +117,15 @@ public abstract class WebTestCase extends BaseTestCase {
      */
     protected final HtmlPage loadPage( final String html ) throws Exception {
         return loadPage(html, null);
+    }
+
+
+    /**
+     * Return the log that is being used for all testing objects
+     * @return The log.
+     */
+    protected final Log getLog() {
+        return LogFactory.getLog(getClass());
     }
 
 
