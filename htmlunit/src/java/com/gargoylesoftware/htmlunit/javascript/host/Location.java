@@ -77,6 +77,10 @@ public class Location extends SimpleScriptable {
     }
 
 
+    /**
+     * Return the hostname that is part of the location url
+     * @return The hostname
+     */
     public String jsGet_hostname() {
         final URL url = window_.getWebWindow().getEnclosedPage().getWebResponse().getUrl();
         return url.getHost();

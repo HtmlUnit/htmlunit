@@ -429,6 +429,10 @@ public final class Window extends SimpleScriptable {
     }
 
 
+    /**
+     * Return the value of the src attribute
+     * @return the value of the src attribute.
+     */
     public String jsGet_src() {
         final WebWindow webWindow = getWebWindow();
         if( webWindow instanceof HtmlInlineFrame ) {
@@ -439,6 +443,10 @@ public final class Window extends SimpleScriptable {
     }
 
 
+    /**
+     * Set the value of the src attribute.  In the case of an iframe, this will cause a reload of the page
+     * @param newValue The new value
+     */
     public void jsSet_src( final String newValue ) {
         final WebWindow webWindow = getWebWindow();
         if( webWindow instanceof HtmlInlineFrame ) {
