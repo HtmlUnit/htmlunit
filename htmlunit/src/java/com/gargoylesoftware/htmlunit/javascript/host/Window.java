@@ -96,7 +96,7 @@ public class Window extends SimpleScriptable {
     private History history_;
     private Location location_;
     private Function onload_;
-    private Map timeoutThreads_;
+    private final Map timeoutThreads_ = new HashMap();
     private int nextTimeoutId_;
     private String status_ = "";
     private ElementArray frames_; // has to be a member to have equality (==) working
@@ -122,7 +122,7 @@ public class Window extends SimpleScriptable {
      * @param message The message
      */
     public void jsFunction_alert( final String message ) {
-        final AlertHandler handler = getJavaScriptEngine().getWebClient().getAlertHandler();
+        final AlertHandler handler = getWebWindow().getWebClient().getAlertHandler();
         if( handler == null ) {
             getLog().warn("window.alert(\""+message+"\") no alert handler installed");
         }
@@ -138,7 +138,7 @@ public class Window extends SimpleScriptable {
      * @return true if ok was pressed, false if cancel was pressed
      */
     public boolean jsFunction_confirm( final String message ) {
-        final ConfirmHandler handler = getJavaScriptEngine().getWebClient().getConfirmHandler();
+        final ConfirmHandler handler = getWebWindow().getWebClient().getConfirmHandler();
         if( handler == null ) {
             getLog().warn("window.confirm(\""+message+"\") no confirm handler installed");
             return false;
@@ -155,7 +155,7 @@ public class Window extends SimpleScriptable {
      * @return true if ok was pressed, false if cancel was pressed
      */
     public String jsFunction_prompt( final String message ) {
-        final PromptHandler handler = getJavaScriptEngine().getWebClient().getPromptHandler();
+        final PromptHandler handler = getWebWindow().getWebClient().getPromptHandler();
         if( handler == null ) {
             getLog().warn("window.prompt(\""+message+"\") no prompt handler installed");
             return null;
@@ -396,27 +396,21 @@ public class Window extends SimpleScriptable {
 
         webWindow_ = htmlPage.getEnclosingWindow();
         webWindow_.setScriptObject(this);
-        if( webWindow_ instanceof DomNode ) {
-            setDomNode((DomNode)webWindow_);
-        }
-        else {
-            // Windows don't have corresponding DomNodes so set the domNode
-            // variable to be the page.  If this isn't set then SimpleScriptable.get()
-            // won't work properly
-            setDomNode(htmlPage);
-        }
+        // Windows don't have corresponding DomNodes so set the domNode
+        // variable to be the page.  If this isn't set then SimpleScriptable.get()
+        // won't work properly
+        setDomNode(htmlPage);
 
-        document_ = (Document)makeJavaScriptObject("Document");
+        document_ = (Document) makeJavaScriptObject("Document");
         document_.setDomNode(htmlPage);
 
         navigator_ = (Navigator)makeJavaScriptObject("Navigator");
+        navigator_.setParentScope(this);
         screen_ = (Screen)makeJavaScriptObject("Screen");
         history_ = (History)makeJavaScriptObject("History");
 
         location_ = (Location)makeJavaScriptObject("Location");
         location_.initialize(this);
-
-        timeoutThreads_ = new HashMap();
     }
 
 
@@ -723,19 +717,9 @@ public class Window extends SimpleScriptable {
      */
     public Object jsFunction_execScript(final String script, final String language) {
         if ("javascript".equalsIgnoreCase(language) || "jscript".equalsIgnoreCase(language)) {
-            boolean contextEntered = false;
-            try {
-                Context.enter();
-                contextEntered = true;
-                final HtmlPage htmlPage = document_.getHtmlPage();
-                final HtmlElement doc = htmlPage.getDocumentElement();
-                htmlPage.executeJavaScriptIfPossible(script, "Window.execScript()", true, doc);
-            }
-            finally {
-                if (contextEntered) {
-                    Context.exit();
-                }
-            }
+            final HtmlPage htmlPage = document_.getHtmlPage();
+            final HtmlElement doc = htmlPage.getDocumentElement();
+            htmlPage.executeJavaScriptIfPossible(script, "Window.execScript()", true, doc);
         }
         else if ("vbscript".equalsIgnoreCase(language)) {
             getLog().warn("VBScript not supported in Window.execScript().");

@@ -43,6 +43,8 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
@@ -278,15 +280,6 @@ public class SimpleScriptable extends ScriptableObject {
 
 
     /**
-     * Return the javascript engine that is executing this code.
-     * @return The engine
-     */
-    public JavaScriptEngine getJavaScriptEngine() {
-        return getPageInfo().getJavaScriptEngine();
-    }
-
-
-    /**
      * Create a new javascript object
      * @param className The class name of the new object
      * @return The new object
@@ -296,8 +289,8 @@ public class SimpleScriptable extends ScriptableObject {
 
         final SimpleScriptable newObject;
         try {
-            newObject = (SimpleScriptable)pageInfo.getContext().newObject(
-                pageInfo.getScope(), className, new Object[0]);
+            newObject = (SimpleScriptable) Context.getCurrentContext().newObject(
+                pageInfo.getScope(), className);
             initJavaScriptObject( newObject );
             return newObject;
         }
@@ -557,7 +550,11 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
 
-    private JavaScriptEngine.PageInfo getPageInfo() {
+    /**
+     * Gets the associated page info
+     * @return the info
+     */
+    protected JavaScriptEngine.PageInfo getPageInfo() {
         if( pageInfo_ == null ) {
             throw new IllegalStateException("pageInfo_ has not been initialized!");
         }
@@ -697,6 +694,22 @@ public class SimpleScriptable extends ScriptableObject {
      */
     public Object getDefaultValue( final Class hint ) {
         return toString();
+    }
+    
+    /**
+     * Gets the window that is (or should be) the scope for this object
+     * @return the window
+     * @throws RuntimeException if the window can't be found, what should never occurs
+     */
+    protected Window getWindow() throws RuntimeException {
+        Scriptable current = this;
+        while (current != null) {
+            if (current instanceof Window) {
+                return (Window) current;
+            }
+            current = current.getParentScope();
+        }
+        throw new RuntimeException("Unable to find associated window to " + this);
     }
 }
 
