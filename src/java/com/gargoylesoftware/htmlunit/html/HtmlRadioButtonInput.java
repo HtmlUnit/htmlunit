@@ -38,7 +38,9 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.Page;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -101,5 +103,19 @@ public class HtmlRadioButtonInput extends HtmlInput {
             removeAttribute( "checked" );
         }
     }
+    /**
+     * Override of default clickAction that makes this radio button the selected
+     * one when it is clicked
+     *
+     * @param defaultPage The default page to return if the action does not
+     * load a new page.
+     * @return The page that is currently loaded after execution of this method
+     * @throws IOException If an IO error occured
+     */    
+    protected Page doClickAction(Page defaultPage) throws IOException {
+        setChecked(true);
+        return defaultPage;
+    }
+
 }
 
