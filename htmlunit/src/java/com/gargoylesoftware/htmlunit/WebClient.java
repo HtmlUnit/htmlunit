@@ -516,7 +516,7 @@ public class WebClient {
             webResponse = makeWebResponseForJavaScriptUrl(webWindow, url);
         }
         else if (protocol.equals("about")) {
-            webResponse = makeWebResponseForAboutUrl(webWindow,url);
+            webResponse = makeWebResponseForAboutUrl(url);
         }
         else {
             webResponse = loadWebResponse( url, encType, method, parameters );
@@ -1220,9 +1220,7 @@ public class WebClient {
         return makeUrl( newUrlString );
     }
 
-    private WebResponse makeWebResponseForAboutUrl(
-        final WebWindow webWindow,
-        final URL url) {
+    private WebResponse makeWebResponseForAboutUrl(final URL url) {
         if (!url.toExternalForm().substring("about:".length()).equalsIgnoreCase("blank")){
             throw new IllegalArgumentException(
                 url.toExternalForm()+"is not supported, only about:blank is supported now.");

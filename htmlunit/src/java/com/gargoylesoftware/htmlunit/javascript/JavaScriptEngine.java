@@ -307,7 +307,7 @@ public final class JavaScriptEngine extends ScriptEngine {
      */
     public String toString( final HtmlPage htmlPage, final Object javaScriptObject ) {
 
-        final PageInfo pageInfo = getPageInfo(htmlPage);
+        getPageInfo(htmlPage);
 
         final String result = Context.toString( javaScriptObject );
         return result;

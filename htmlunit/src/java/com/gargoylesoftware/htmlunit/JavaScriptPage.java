@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.IOException;
-
 /**
  *  A generic page that will be returned for any text related content.
  *  Specifically any content types that start with "text/"
@@ -58,10 +56,8 @@ public class JavaScriptPage implements Page {
      *
      * @param  webResponse The response from the server
      * @param  enclosingWindow The window that holds the page.
-     * @exception  IOException If an IO error occurs
      */
-    public JavaScriptPage( final WebResponse webResponse, final WebWindow enclosingWindow )
-        throws IOException {
+    public JavaScriptPage( final WebResponse webResponse, final WebWindow enclosingWindow ) {
         webResponse_ = webResponse;
         content_ = webResponse.getContentAsString();
         enclosingWindow_ = enclosingWindow;

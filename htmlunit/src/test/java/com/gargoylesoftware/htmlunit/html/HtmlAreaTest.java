@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +66,7 @@ public class HtmlAreaTest extends WebTestCase {
     }
 
 
-    private WebClient createWebClient( final String onClick ) throws MalformedURLException {
+    private WebClient createWebClient( final String onClick ) {
         final String firstContent
             = "<html><head><title>first</title></head><body>"
             + "<img src='/images/planets.gif' width='145' height='126' usemap='#planetmap'>"

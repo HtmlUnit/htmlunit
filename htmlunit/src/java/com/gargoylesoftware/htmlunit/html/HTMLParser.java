@@ -185,10 +185,9 @@ public class HTMLParser {
      * @return the page object which forms the root of the DOM tree, or <code>null</code> if the &lt;HTML&gt;
      * tag is missing
      * @throws java.io.IOException io error
-     * @throws org.xml.sax.SAXException sax error
      */
     public HtmlPage parse(final WebClient webClient, final WebResponse webResponse, final WebWindow webWindow)
-            throws IOException, SAXException {
+            throws IOException {
 
         HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(webClient, webResponse, webWindow);
 
