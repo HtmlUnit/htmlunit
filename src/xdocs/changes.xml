@@ -25,6 +25,9 @@
 			This should fix an intermittant bug where an UnsupportedOperationException was being called from
 			the HiddenWebWindow if a javascript file was returned with a content type of "text/html"
 		</change>
+		<change type="fix">
+			Fixed bug where javascript:option.getValue() was returning the text, not the value
+		</change>
 	</change-log>
 </section>
 

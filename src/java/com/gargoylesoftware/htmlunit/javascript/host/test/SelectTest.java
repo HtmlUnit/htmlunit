@@ -63,9 +63,9 @@ public class SelectTest extends WebTestCase {
                  + "<p>hello world</p>"
                  + "<form name='form1'>"
                  + "    <select name='select1'>"
-                 + "        <option name='option1'>One</option>"
-                 + "        <option name='option2' selected>Two</option>"
-                 + "        <option name='option3'>Three</option>"
+                 + "        <option name='option1' value='value1'>One</option>"
+                 + "        <option name='option2' value='value2' selected>Two</option>"
+                 + "        <option name='option3' value='value3'>Three</option>"
                  + "    </select>"
                  + "</form>"
                  + "</body></html>";
@@ -74,7 +74,7 @@ public class SelectTest extends WebTestCase {
          final HtmlPage page = loadPage(content, collectedAlerts);
 
          final List expectedAlerts = Arrays.asList( new String[]{
-             "One", "Two", "Three"
+             "value1", "value2", "value3"
          } );
 
          assertEquals( expectedAlerts, collectedAlerts );
