@@ -427,7 +427,7 @@
         <property name="opener" readable="true" writable="false"/>
         <property name="frames" readable="true" writable="false"/>
         <property name="onload" readable="true" writable="true"/>
-        <property name="name" readable="true" writable="false"/>
+        <property name="name" readable="true" writable="true"/>
         <property name="status" readable="true" writable="true"/>
         <property name="onerror" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>

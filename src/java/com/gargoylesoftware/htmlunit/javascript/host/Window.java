@@ -83,6 +83,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Marc Guillemot
  * @author Dierk Koenig
  * @author Daniel Gredler
+ * @author David D. Kilzer
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp">
  * MSDN documentation</a>
  */
@@ -615,10 +616,18 @@ public class Window extends SimpleScriptable {
 
     /**
      * Return the value of the name property
-     * @return The name
+     * @return The window name
      */
     public String jsGet_name() {
         return webWindow_.getName();
+    }
+
+     /**
+     * Set the value of the newName property
+     * @param newName The new window name
+     */
+    public void jsSet_name( final String newName ) {
+        webWindow_.setName(newName);
     }
 
     /**

@@ -422,6 +422,9 @@ public class HTMLElement extends NodeImpl {
                     public String getName() {
                         return null;
                     }
+                    public void setName(final String name) {
+                        // nothing
+                    }
                     public WebWindow getParentWindow() {
                         return null;
                     }
