@@ -25,5 +25,12 @@ public class HtmlButtonInput extends HtmlInput {
     HtmlButtonInput( final HtmlPage page, final Element element ) {
         super( page, element );
     }
+
+
+    /**
+     * Reset this element to its original values.  This is a no-op for a button.
+     */
+    public void reset() {
+    }
 }
 

@@ -17,6 +17,8 @@ import org.w3c.dom.Element;
 public class HtmlOption
          extends HtmlElement {
 
+    private final boolean initialSelectedState_;
+
     /**
      *  Create an instance
      *
@@ -25,6 +27,7 @@ public class HtmlOption
      */
     HtmlOption( final HtmlPage page, final Element element ) {
         super( page, element );
+        initialSelectedState_ = isAttributeDefined("selected");
     }
 
 
@@ -35,6 +38,27 @@ public class HtmlOption
      */
     public boolean isSelected() {
         return isAttributeDefined("selected");
+    }
+
+
+    //TODO: If the select is single-selection then deselect others
+    public void setSelected( final boolean selected ) {
+        if( selected ) {
+            getElement().setAttribute("selected", "selected");
+        }
+        else {
+            getElement().removeAttribute("selected");
+        }
+    }
+
+
+    public void reset() {
+        if( initialSelectedState_ ) {
+            getElement().setAttribute("selected", "selected");
+        }
+        else {
+            getElement().removeAttribute("selected");
+        }
     }
 
 

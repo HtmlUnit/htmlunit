@@ -62,21 +62,6 @@ public abstract class HtmlInput
 
 
     /**
-     * Return the value of this element to what it was at the time the page was loaded.
-     */
-    public void reset() {
-        // TODO: Subclasses should override this to provide custom behaviour.
-//        getLog().info("Resetting value to ["+originalValue_+"]");
-        if( originalValue_ == null ) {
-            getElement().removeAttribute("value");
-        }
-        else {
-            getElement().setAttribute("value", originalValue_);
-        }
-    }
-
-
-    /**
      * Submit the form that contains this input.  Only a couple of the inputs
      * support this method so it is made protected here.  Those subclasses
      * that wish to expose it will override and make it public.

@@ -21,7 +21,6 @@ public class HtmlTextArea
 
     private String value_ = null;
 
-
     /**
      *  Create an instance
      *
@@ -37,8 +36,14 @@ public class HtmlTextArea
      * Return the value that would be displayed in the text area
      *
      * @return The text
+     * @deprecated Use {@link #getText()} instead
      */
     public final String getValue() {
+        return getText();
+    }
+
+
+    public final String getText() {
         if( value_ == null ) {
             return asText();
         }
@@ -53,8 +58,20 @@ public class HtmlTextArea
      *
      * @param  newValue The new value or null if the original value returned
      *      from the server should be used
+     * @deprecated Use {@link #setText()} instead
      */
     public final void setValue( final String newValue ) {
+        if( newValue == null ) {
+            reset();
+        }
+        else {
+            setText(newValue);
+        }
+    }
+
+
+    public final void setText( final String newValue ) {
+        assertNotNull("newValue", newValue);
         value_ = newValue;
     }
 
@@ -77,7 +94,7 @@ public class HtmlTextArea
      * Return the value of this element to what it was at the time the page was loaded.
      */
     public void reset() {
-        getLog().debug("reset() not implemented for this element");
+        value_ = null;
     }
 
 

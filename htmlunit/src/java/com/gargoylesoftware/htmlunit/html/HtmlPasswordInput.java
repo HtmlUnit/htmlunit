@@ -16,6 +16,8 @@ import org.w3c.dom.Element;
  */
 public class HtmlPasswordInput extends HtmlInput {
 
+    private final String initialValue_;
+
     /**
      *  Create an instance
      *
@@ -24,6 +26,15 @@ public class HtmlPasswordInput extends HtmlInput {
      */
     HtmlPasswordInput( final HtmlPage page, final Element element ) {
         super( page, element );
+        initialValue_ = getValueAttribute();
+    }
+
+
+    /**
+     * Reset the value of this element to its initial state.
+     */
+    public void reset() {
+        setValueAttribute(initialValue_);
     }
 }
 

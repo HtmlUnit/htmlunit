@@ -72,7 +72,7 @@ public class HtmlIsIndex
      * Return the value of this element to what it was at the time the page was loaded.
      */
     public void reset() {
-        getLog().debug("reset() not implemented for this element");
+        value_ = "";
     }
 
 

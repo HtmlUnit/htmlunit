@@ -15,6 +15,7 @@ import org.w3c.dom.Element;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class HtmlRadioButtonInput extends HtmlInput {
+    private final boolean initialCheckedState_;
 
     /**
      *  Create an instance
@@ -24,6 +25,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     HtmlRadioButtonInput( final HtmlPage page, final Element element ) {
         super( page, element );
+        initialCheckedState_ = isAttributeDefined("checked");
     }
 
 
@@ -53,6 +55,19 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     public final boolean isChecked() {
         return isAttributeDefined("checked");
+    }
+
+
+    /**
+     * Return the value of this element to what it was at the time the page was loaded.
+     */
+    public void reset() {
+        if( initialCheckedState_ ) {
+            getElement().setAttribute("checked", "checked");
+        }
+        else {
+            getElement().removeAttribute("checked");
+        }
     }
 }
 

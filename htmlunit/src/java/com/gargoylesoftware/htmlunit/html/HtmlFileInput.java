@@ -25,5 +25,13 @@ public class HtmlFileInput extends HtmlInput {
     HtmlFileInput( final HtmlPage page, final Element element ) {
         super( page, element );
     }
+
+
+    /**
+     * Reset the value of this element to its initial state.  This is a no-op for
+     * this component.
+     */
+    public void reset() {
+    }
 }
 

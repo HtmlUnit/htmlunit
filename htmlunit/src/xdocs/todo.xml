@@ -11,6 +11,8 @@
 		<li>Have TopLevelWindow's deregister themselves with WebClient when they are closed</li>
 		<li>During form.reset, all submittable fields must revert back to their original values</li>
 		<li>Upgrade HttpClient to the latest gump version</li>
+		<li>window-howto.xml</li>
+		<li>HtmlTextArea.getText() and setText() currently don't modify the dom.  This should be fixed</li>
 	</ol>
 </section>
 
