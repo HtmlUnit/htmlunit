@@ -541,6 +541,47 @@ public class WebClientTest extends WebTestCase {
 
 
     /**
+     * Test that the query string is encoded to be valid.
+     * @throws Exception If something goes wrong.
+     */
+    public void testLoadPage_EncodeQueryString() throws Exception {
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "</body></html>";
+        
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(htmlContent);
+        client.setWebConnection(webConnection);
+
+        // with query string not encoded
+        HtmlPage page = (HtmlPage) client.getPage(new URL("http://first?a=b c&d=ιθ"));
+        assertEquals(
+            "http://first?a=b%20c&d=%C3%A9%C3%A8",
+            page.getWebResponse().getUrl().toExternalForm());
+
+
+        // with query string already encoded
+        page = (HtmlPage) client.getPage(new URL("http://first?a=b%20c&d=%C3%A9%C3%A8"));
+        assertEquals(
+            "http://first?a=b%20c&d=%C3%A9%C3%A8",
+            page.getWebResponse().getUrl().toExternalForm());
+        
+        // with query string partially encoded
+        page = (HtmlPage) client.getPage(new URL("http://first?a=b%20c&d=e f"));
+        assertEquals(
+            "http://first?a=b%20c&d=e%20f",
+            page.getWebResponse().getUrl().toExternalForm());
+        
+        // with anchor
+        page = (HtmlPage) client.getPage(new URL("http://first?a=b c#myAnchor"));
+        assertEquals(
+            "http://first?a=b%20c#myAnchor",
+            page.getWebResponse().getUrl().toExternalForm());
+    }
+
+    /**
      * Test loading a page with POST parameters.
      * @throws Exception If something goes wrong.
      */
