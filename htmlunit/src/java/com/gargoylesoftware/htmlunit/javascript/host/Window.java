@@ -60,7 +60,6 @@ import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.ElementArray;
@@ -477,20 +476,6 @@ public class Window extends SimpleScriptable {
     public void jsFunction_close() {
         WebWindow window = ((HtmlPage) getDomNodeOrDie()).getEnclosingWindow();
         getWebWindow().getWebClient().deregisterWebWindow(window);
-    }
-
-
-    /**
-     * Return the value of the src attribute
-     * @return the value of the src attribute.
-     */
-    public String jsGet_src() {
-        final WebWindow webWindow = getWebWindow();
-        if( webWindow instanceof HtmlInlineFrame ) {
-            return ((HtmlInlineFrame)webWindow).getSrcAttribute();
-        }
-
-        return "";
     }
 
 

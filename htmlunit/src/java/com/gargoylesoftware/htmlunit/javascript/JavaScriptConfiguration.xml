@@ -71,6 +71,7 @@
         <function name="getElementsByTagName"/>
         <function name="createElement"/>
         <function name="createTextNode"/>
+        <function name="createAttribute"/>
         <function name="getElementsByName"/>        
     </class>
     <class name="Event">
@@ -231,6 +232,8 @@
         <function name="onhelp">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
+        <function name="getAttributeNode"/>
+        <function name="setAttributeNode"/>
         <function name="removeAttribute">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
