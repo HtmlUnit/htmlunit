@@ -21,6 +21,9 @@
 			loaded.  This meant that javascript that executed during page load would blow up when trying
 			to access document.all.
 		</change>
+		<change type="new" reporter="Teo Kian Lee">
+			Added support for location.hostname which fixed all but one of the tests in the sanity check.
+		</change>
 	</change-log>
 </section>
 
