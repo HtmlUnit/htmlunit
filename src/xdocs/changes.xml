@@ -90,6 +90,9 @@
 		<change type="new">
 			Added support for javascript document.referrer
 		</change>
+		<change type="new">
+			Added support for javascript document.URL
+		</change>
 	</change-log>
 </section>
 

@@ -180,8 +180,7 @@ public final class Document extends HTMLElement {
      * @return The value of the "URL" property
      */
     public String jsGet_URL() {
-        getLog().debug("Not implemented yet: document.URL");
-        return "";
+        return getHtmlPage().getWebResponse().getUrl().toExternalForm();
     }
 
 
