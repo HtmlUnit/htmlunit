@@ -17,6 +17,7 @@ import org.apache.commons.jelly.XMLOutput;
  */
 public class AssertTitleTag extends HtmlUnitTagSupport {
     private String expectedText_;
+    private String startsWithText_;
 
     /**
      * Process the tag.
@@ -25,13 +26,17 @@ public class AssertTitleTag extends HtmlUnitTagSupport {
      */
     public void doTag(XMLOutput xmlOutput) throws JellyTagException {
         invokeBody(xmlOutput);
-        if( expectedText_ == null ) {
-            throw new JellyTagException("text is a mandatory attribute");
+        if( expectedText_ == null && startsWithText_ == null ) {
+            throw new JellyTagException("One of 'text' or 'startsWith' must be specified");
         }
 
         final String actualText = getHtmlPage().getTitleText();
-        if( actualText.equals(expectedText_) == false ) {
+        if( expectedText_ != null && actualText.equals(expectedText_) == false ) {
             throw new JellyTagException("Expected text ["+expectedText_+"] but got ["+actualText+"] instead");
+        }
+
+        if( startsWithText_ != null && actualText.startsWith(startsWithText_) == false ) {
+            throw new JellyTagException("Expected text to start with ["+startsWithText_+"] but got ["+actualText+"] instead");
         }
     }
 
@@ -41,7 +46,12 @@ public class AssertTitleTag extends HtmlUnitTagSupport {
      * @param text The new value.
      */
     public void setText( final String text ) {
-        expectedText_ = text;;
+        expectedText_ = text;
+    }
+
+
+    public void setStartsWith( final String text ) {
+        startsWithText_ = text;
     }
 }
 

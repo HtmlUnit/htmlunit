@@ -7,6 +7,7 @@
 package com.gargoylesoftware.htmlunit.jelly;
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.SimpleCredentialProvider;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
@@ -18,6 +19,8 @@ import org.apache.commons.jelly.XMLOutput;
  */
 public class WebClientTag extends HtmlUnitTagSupport {
     private WebClient webClient_;
+    private String userId_;
+    private String password_;
 
     /**
      * Create an instance
@@ -34,6 +37,12 @@ public class WebClientTag extends HtmlUnitTagSupport {
      */
     public void doTag(XMLOutput xmlOutput) throws JellyTagException {
         webClient_ = new WebClient();
+        if( userId_ != null || password_ != null ) {
+            if( userId_ == null || password_ == null ) {
+                throw new JellyTagException("userid and password must either both be set or neither set");
+            }
+            webClient_.setCredentialProvider( new SimpleCredentialProvider(userId_, password_) );
+        }
         invokeBody(xmlOutput);
     }
 
@@ -53,5 +62,15 @@ public class WebClientTag extends HtmlUnitTagSupport {
      */
     public WebClient getWebClient() {
         return webClient_;
+    }
+
+
+    public void setUserid( final String userid ) {
+        userId_ = userid;
+    }
+
+
+    public void setPassword( final String password ) {
+        password_ = password;
     }
 }

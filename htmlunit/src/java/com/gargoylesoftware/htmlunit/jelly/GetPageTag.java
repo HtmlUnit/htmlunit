@@ -30,7 +30,6 @@ public class GetPageTag extends HtmlUnitTagSupport {
     private List parameters_ = null;
     private String method_ = "get";
 
-
     /**
      * Create an instance
      */
