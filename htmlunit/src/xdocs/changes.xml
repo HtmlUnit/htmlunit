@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1118222">
+                JavaScript: expressions like myForm.myField now look for form fields with "myField" as id or name.
+            </action>
             <action type="update" dev="mguillem" id="1118877">
                 Clicked image button without name sends parameter x and y.
             </action>

@@ -244,13 +244,13 @@ public class Form extends HTMLElement {
      * @param name The name of the property
      * @return The property.
      */
-    public Object get(final String name) {
+    Object get(final String name) {
         // Try to get the element or elements specified from the form element array 
         // (except input type="image" that can't be accessed this way)
         final ElementArray elements = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
         final HtmlForm htmlForm = getHtmlForm();
         try {
-            final XPath xpath = new HtmlUnitXPath("//*[@name = '" + name + "'"
+            final XPath xpath = new HtmlUnitXPath("//*[(@name = '" + name + "' or @id = '" + name + "')"
                     + " and ((name() = 'input' and translate(@type, 'IMAGE', 'image') != 'image') or name() = 'button'"
                     + " or name() = 'select' or name() = 'textarea')]", 
                     HtmlUnitXPath.buildSubtreeNavigator(htmlForm)); 
