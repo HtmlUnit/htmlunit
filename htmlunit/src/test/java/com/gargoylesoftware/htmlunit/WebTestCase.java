@@ -45,16 +45,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
+import junit.framework.AssertionFailedError;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import junit.framework.AssertionFailedError;
 
 import com.gargoylesoftware.base.testing.BaseTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -138,9 +138,7 @@ public abstract class WebTestCase extends BaseTestCase {
         webConnection.setDefaultResponse( html );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
         return page;
     }
 
@@ -208,45 +206,61 @@ public abstract class WebTestCase extends BaseTestCase {
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
             // should be optimized....
             
-            // generate the js code
-            final InputStream is = getClass().getClassLoader().getResourceAsStream(
-                    "com/gargoylesoftware/htmlunit/alertVerifier.js");
-            final String baseJS = IOUtils.toString(is);
-            IOUtils.closeQuietly(is);
+            // calls to alert() should be replaced by call to custom function
+            String newContent = StringUtils.replace(content, 
+                    "alert(", "htmlunitReserved_catchedAlert(");
             
-            StringBuffer sb = new StringBuffer();
-            sb.append("<script type='text/javascript'>\n");
-            sb.append("var htmlunitReserved_tab = [");
-            for (final ListIterator iter = expectedAlerts.listIterator(); iter.hasNext();)
-            {
-                if (iter.hasPrevious()) {
-                    sb.append(", ");
-                }
-                final String message = (String) iter.next();
-                sb.append("{expected: \"")
-                    .append(message)
-                    .append("\"}");
+            final String instrumentationJS = createInstrumentationScript(expectedAlerts);
+            
+            // first version, we assume that there is a <head> and a </body> or a </frameset>
+            newContent = StringUtils.replaceOnce(newContent, "<head>", "<head>" + instrumentationJS);
+            final String endScript = "\n<script>htmlunitReserved_addSummaryAfterOnload();</script>\n";
+            if (newContent.indexOf("</body>") != -1) {
+                newContent = StringUtils.replaceOnce(newContent, "</body>",  endScript + "</body>");
             }
-            sb.append("];\n\n");
-            sb.append(baseJS);
-            sb.append("</script>");
-            
-            // first version, we assume that there is a <head>
-            final int indexHead = content.indexOf("<head>");
-            if (indexHead == -1) {
-                throw new RuntimeException("Currently only content with a <head> is supported");
+            else {
+                throw new RuntimeException("Currently only content with a <head> and a </body> is supported");
             }
-            sb.insert(0, content.substring(0, indexHead + 6));
-            sb.append(content.substring(indexHead + 6));
-            
+
             final File f = File.createTempFile("test", ".html");
-            FileUtils.writeStringToFile(f, sb.toString(), "ISO-8859-1");
+            FileUtils.writeStringToFile(f, newContent, "ISO-8859-1");
             log.info("Test file written: " + f.getAbsolutePath());
         }
         else {
             log.debug("System property \"" + PROPERTY_GENERATE_TESTPAGES 
                     + "\" not set, don't generate test html page for real browser");
         }
+    }
+
+    /**
+     * @param expectedAlerts the list of the expected alerts
+     * @return the script to be included at the beginning of the generated html file
+     * @throws IOException in case of problem
+     */
+    private String createInstrumentationScript(final List expectedAlerts) throws IOException {
+        // generate the js code
+        final InputStream is = getClass().getClassLoader().getResourceAsStream(
+                "com/gargoylesoftware/htmlunit/alertVerifier.js");
+        final String baseJS = IOUtils.toString(is);
+        IOUtils.closeQuietly(is);
+        
+        StringBuffer sb = new StringBuffer();
+        sb.append("\n<script type='text/javascript'>\n");
+        sb.append("var htmlunitReserved_tab = [");
+        for (final ListIterator iter = expectedAlerts.listIterator(); iter.hasNext();)
+        {
+            if (iter.hasPrevious()) {
+                sb.append(", ");
+            }
+            final String message = (String) iter.next();
+            sb.append("{expected: \"")
+                .append(message)
+                .append("\"}");
+        }
+        sb.append("];\n\n");
+        sb.append(baseJS);
+        sb.append("</script>\n");
+        return sb.toString();
     }
 }
 

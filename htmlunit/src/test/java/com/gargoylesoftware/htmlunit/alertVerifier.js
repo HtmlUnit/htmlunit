@@ -1,6 +1,4 @@
 // permits to generate html file testing that the generated alerst are as expected
-// currently only works with Mozilla
-var htmlunitReserved_alert = alert;
 
 var htmlunitReserved_i = 0;
 function htmlunitReserved_catchedAlert(_str)
@@ -16,11 +14,6 @@ function htmlunitReserved_catchedAlert(_str)
 		tab[index] = {received: _str};
 	}
 }
-alert = htmlunitReserved_catchedAlert;
-if (addEventListener)
-	addEventListener('load', htmlunitReserved_addSummaryAfterOnload, true);
-else
-	attachEvent("submit", htmlunitReserved_addSummaryAfterOnload);
 
 function htmlunitReserved_addSummaryAfterOnload()
 {
@@ -44,7 +37,7 @@ function htmlunitReserved_displaySummary()
 			str += oResult.expected;
 
 		str += ", found: " + oResult.received + " => ";
-		if (oResult.expected == oResult.received)
+		if (oResult.expected == String(oResult.received))
 		{
 			iNbOk++;
 			str += "ok";
@@ -57,5 +50,5 @@ function htmlunitReserved_displaySummary()
 		str += "\n";
 	}
 	str += "\n\n===> Result: " + ((iNbFailure == 0) ? "success" : "FAILED");
-	htmlunitReserved_alert(str);
+	alert(str);
 }
