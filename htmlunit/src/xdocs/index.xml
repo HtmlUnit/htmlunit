@@ -28,16 +28,34 @@
 <section title="Where to find...">
 	<p>
 		<dl>
-			<dt>Latest stable release <date>November 25, 2002</date></dt>
-			<dd>Version <b>1.1 final</b>: |
-				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.1.zip?download">Download</a> |
-				<a href="api/index.html">Javadoc API documentation</a> |
-				<a href="changes.html">Change history</a> |
+			<dt>Latest release <date>March 7, 2003</date></dt>
+			<dd>
+				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.2rc1.zip?download">
+					Download version 1.2rc1
+				</a>
+				(release candidate)
 			</dd>
 		</dl>
 	</p>
 	<p>
+		<dl>
+			<dt>Latest stable release <date>November 25, 2002</date></dt>
+			<dd>
+				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.1.zip?download">
+					Download version 1.1 final
+				</a>
+			</dd>
+		</dl>
+	</p>
+	<p>
+		Documentation
 		<ul>
+			<li>
+				<a href="api/index.html">Javadoc API documentation</a>
+			</li>
+			<li>
+				<a href="changes.html">Change history</a>
+			</li>
 			<li>
 				<a href="faq.html">Frequently Asked Questions</a>
 			</li>
