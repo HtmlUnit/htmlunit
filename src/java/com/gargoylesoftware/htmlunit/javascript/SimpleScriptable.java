@@ -198,7 +198,8 @@ public class SimpleScriptable extends ScriptableObject {
                     getPropertyInfo(localPropertyMap, propertyName).setGetter( methods[i] );
                 }
                 else if( state == JavaScriptConfiguration.NOT_FOUND ) {
-                    getLog().trace("Getter for ["+propertyName+"] not found in configuration");
+                    throw new IllegalStateException("Getter for ["
+                            + propertyName + "] not found in configuration");
                 }
             }
             else if( methodName.startsWith("jsSet_")
@@ -210,7 +211,8 @@ public class SimpleScriptable extends ScriptableObject {
                     getPropertyInfo(localPropertyMap, propertyName).setSetter( methods[i] );
                 }
                 else if( state == JavaScriptConfiguration.NOT_FOUND ) {
-                    getLog().trace("Setter for ["+propertyName+"] not found in configuration");
+                    throw new IllegalStateException("Setter for [" 
+                            + propertyName + "] not found in configuration");
                 }
             }
             else if( methodName.startsWith("jsFunction_") ) {
@@ -223,7 +225,8 @@ public class SimpleScriptable extends ScriptableObject {
                     getPropertyInfo(localPropertyMap, functionName).setFunction( functionObject );
                 }
                 else if( state == JavaScriptConfiguration.NOT_FOUND ) {
-                    getLog().trace("Function ["+functionName+"] not found in configuration");
+                    throw new IllegalStateException("Function ["
+                            + functionName + "] not found in configuration");
                 }
             }
         }
