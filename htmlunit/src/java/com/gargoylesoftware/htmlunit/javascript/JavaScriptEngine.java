@@ -13,7 +13,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import java.util.HashMap;
+import java.util.WeakHashMap;
 import java.util.Map;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.JavaScriptException;
@@ -68,7 +68,10 @@ public final class JavaScriptEngine extends ScriptEngine {
     }
 
 
-    private final Map pageInfos_ = new HashMap(89);
+    /**
+     * Map where keys are {@link HtmlPage}s and values are {@link PageInfo}s
+     */
+    private final Map pageInfos_ = new WeakHashMap(89);
 
     /**
      * Create an instance for the specified webclient

@@ -36,6 +36,11 @@
             <action type="update" dev="mbowler">
                 Updated NekoHTML to 0.7.5 plus a private fix for an infinite loop problem.
             </action>
+            <action type="update" dev="mbowler">
+                Changed the JavaScriptEngine to use weak references for HtmlPage objects.  Previously
+                HtmlPage objects were never being garbage collected resulting in excessive memory
+                usage.
+            </action>
         </release>
     </body>
 
