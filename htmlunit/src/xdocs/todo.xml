@@ -4,6 +4,7 @@
     <properties>
         <title>TODO list</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author email="BarnabyCourt@users.sourceforge.net">BarnabyCourt</author>
         <revision>$Revision$</revision>
     </properties>
 
@@ -21,7 +22,6 @@
             <ol>
                 <li>implement Document.write()</li>
                 <li>Have TopLevelWindow's deregister themselves with WebClient when they are closed</li>
-                <li>HtmlTextArea.getText() and setText() currently don't modify the dom.  This should be fixed</li>
                 <li>Support for file urls</li>
                 <li>Use HtmlUnit to verify all links in generated documentation</li>
             </ol>
