@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  */
 public class WebClientTest extends WebTestCase {
 
@@ -783,5 +784,64 @@ public class WebClientTest extends WebTestCase {
         webClient.setRefreshHandler( handler );
         assertSame( handler, webClient.getRefreshHandler() );
     }
+    
+    /** 
+     * Test the script preprocessor
+     * @throws IOException if the test fails
+     */
+    public void testScriptPreProcessor() throws IOException {
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        final String alertText = "content";
+        final String newAlertText = "newcontent";
+        final String content
+             = "<html><head><title>foo</title><script>"
+             + "<!--\n   alert('" + alertText + "');\n// -->"
+             + "</script></head><body>"
+             + "<p>hello world</p>"
+             + "<form name='form1'>"
+             + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+             + "    <input type='text' name='textfield2' id='textfield2'/>"
+             + "</form>"
+             + "</body></html>";
+
+        webConnection.setDefaultResponse( content );
+        client.setWebConnection( webConnection );
+
+        // Test null return from pre processor
+        client.setScriptPreProcessor( new ScriptPreProcessor() {
+            public String preProcess( final HtmlPage htmlPage, final String sourceCode, final String sourceName,
+                                      final HtmlElement htmlElement ) {
+                return null;
+            }
+        });
+        client.setAlertHandler( new AlertHandler() {
+            public void handleAlert( final Page page, final String message ) {
+                fail("The pre processor did not remove the javascript");
+            }
+
+        });
+        client.getPage( new URL( "http://www.yahoo.com" ) );
+
+        // Test modify script in pre processor
+        client.setScriptPreProcessor( new ScriptPreProcessor() {
+            public String preProcess( final HtmlPage htmlPage, final String sourceCode, final String sourceName,
+                                      final HtmlElement htmlElement ) {
+                final int start = sourceCode.indexOf( alertText );
+                final int end = start + alertText.length();
+
+                return sourceCode.substring( 0, start ) + newAlertText + sourceCode.substring( end );
+            }
+        });
+        client.setAlertHandler( new AlertHandler() {
+            public void handleAlert( final Page page, final String message ) {
+                if( !message.equals( newAlertText ) ) {
+                    fail( "The pre processor did not modify the javascript" );
+                }
+            }
+
+        });
+        client.getPage( new URL( "http://www.yahoo.com" ) );
+     }
 }
 

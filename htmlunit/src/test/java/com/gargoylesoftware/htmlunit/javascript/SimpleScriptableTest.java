@@ -60,6 +60,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  <a href="mailto:BarnabyCourt@users.sourceforge.net">Barnaby Court</a>
  * @author  David K. Taylor
+ * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  */
 public class SimpleScriptableTest extends WebTestCase {
     /**
@@ -125,7 +126,8 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("NodeImpl");
         names.remove("Screen");
         names.remove("Style");
-
+        names.remove("ActiveXObject");
+        
         assertEquals( new TreeSet(names), new TreeSet(map.values()) );
     }
 

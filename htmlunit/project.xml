@@ -136,6 +136,10 @@
         <contributor>
             <name>David D. Kilzer</name>
         </contributor>
+        <contributor>
+            <name>Ben Curren</name>
+            <email>bcurren@esomnie.com</email>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

@@ -73,6 +73,7 @@ import org.apache.commons.logging.LogFactory;
  * @author <a href="mailto:chen_jun@users.sourceforge.net"> Chen Jun</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  */
 public class WebClient {
 
@@ -146,6 +147,10 @@ public class WebClient {
             return "ISO-8859-1";
         }
     };
+
+    private ScriptPreProcessor scriptPreProcessor_;
+    private Map activeXObjectMap_ = Collections.EMPTY_MAP;
+    private RefreshHandler refreshHandler_ = new DefaultRefreshHandler();
 
 
     /**
@@ -1443,7 +1448,6 @@ public class WebClient {
         return Collections.unmodifiableList(webWindows_);
     }
     
-    private RefreshHandler refreshHandler_ = new DefaultRefreshHandler();
     /**
      * @param handler The handler to set
      */
@@ -1462,5 +1466,43 @@ public class WebClient {
     public RefreshHandler getRefreshHandler() {
         return refreshHandler_;
     }
+    
+    /**
+     * Set the script pre processor for this webclient.
+     * @param scriptPreProcessor The new preprocessor or null if none is specified
+     */
+    public void setScriptPreProcessor( final ScriptPreProcessor scriptPreProcessor ) {
+        scriptPreProcessor_ = scriptPreProcessor;
+    }
+
+
+    /**
+     * Return the script pre processor for this webclient.
+     * @return the pre processor or null of one hasn't been set.
+     */
+    public ScriptPreProcessor getScriptPreProcessor() {
+        return scriptPreProcessor_;
+    }
+
+    /**
+     * Set the active X object map for this webclient. The <code>Map</code> is used to map the
+     * string passed into the <code>ActiveXObject</code> constructor to a java class name. Therefore
+     * you can emulate <code>ActiveXObject</code>s in a web page's javascript by mapping the object
+     * name to a java class to emulate the active X object.
+     * @param activeXObjectMap The new preprocessor or null if none is specified
+     */
+    public void setActiveXObjectMap( final Map activeXObjectMap ) {
+        activeXObjectMap_ = activeXObjectMap;
+    }
+
+
+    /**
+     * Return the active X object map for this webclient.
+     * @return the active X object map.
+     */
+    public Map getActiveXObjectMap() {
+        return activeXObjectMap_;
+    }
+
 }
 

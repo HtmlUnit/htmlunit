@@ -43,7 +43,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
@@ -53,9 +55,12 @@ import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
+import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -77,6 +82,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author  Darrell DeBoer
+ * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  */
 public class JavaScriptEngineTest extends WebTestCase {
     /**
@@ -665,6 +671,145 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * Test that Java objects placed in the active x map can be instantiated and used within
+     * javascript using the IE specific ActiveXObject constructor.
+     * @throws Exception If the test fails
+     */
+    public void testActiveXObject() throws Exception {
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        final Map map = new HashMap();
+        map.put("MockActiveXObject", "com.gargoylesoftware.htmlunit.javascript.MockActiveXObject");
+        map.put("FakeObject", "com.gargoylesoftware.htmlunit.javascript.NoSuchObject");
+        map.put("BadObject", new Object());
+
+        // Test for 0 arguments in the constructor
+        webConnection.setDefaultResponse( getJavaScriptContent( "new ActiveXObject()" ) );
+        client.setWebConnection( webConnection );
+        try {
+            client.getPage( new URL( "http://www.yahoo.com" ) );
+            fail( "An exception should be thrown for zero argument constructor." );
+        } catch( ScriptException e ) {
+            // Success
+        }
+
+        // Test for 3 arguments in the constructor
+        webConnection.setDefaultResponse( getJavaScriptContent( "new ActiveXObject(1, '2', '3')" ) );
+        client.setWebConnection( webConnection );
+        try {
+            client.getPage( new URL( "http://www.yahoo.com" ) );
+            fail( "An exception should be thrown for a three argument constructor." );
+        } catch( ScriptException e ) {
+             // Success
+        }
+
+        // Test for an undefined argument in the constructor
+        webConnection.setDefaultResponse( getJavaScriptContent( "new ActiveXObject(a)" ) );
+        client.setWebConnection( webConnection );
+        try {
+            client.getPage( new URL( "http://www.yahoo.com" ) );
+            fail( "An exception should be thrown for an undefined parameter in the constructor." );
+        } catch( ScriptException e ) {
+            // Success
+        }
+
+        // Test for an integer in the constructor
+        webConnection.setDefaultResponse( getJavaScriptContent( "new ActiveXObject(10)" ) );
+        client.setWebConnection( webConnection );
+        try {
+            client.getPage( new URL( "http://www.yahoo.com" ) );
+            fail( "An exception should be thrown for an integer parameter in the constructor." );
+        } catch( ScriptException e ) {
+            // Success
+        }
+
+        // Test for a null map
+        webConnection.setDefaultResponse( getJavaScriptContent( "new ActiveXObject('UnknownObject')" ) );
+        client.setWebConnection( webConnection );
+        try {
+            client.getPage( new URL( "http://www.yahoo.com" ) );
+            fail( "An exception should be thrown for a null map." );
+        } catch( ScriptException e ) {
+            // Success
+        }
+
+        // Test for an non existent object in the map
+        webConnection.setDefaultResponse( getJavaScriptContent( "new ActiveXObject('UnknownObject')" ) );
+        client.setWebConnection( webConnection );
+        client.setActiveXObjectMap(map);
+        try {
+            client.getPage( new URL( "http://www.yahoo.com" ) );
+            fail( "An exception should be thrown for non existent object in the map." );
+        } catch( ScriptException e ) {
+            // Success
+        }
+
+        // Test for an invalid object in the map
+        webConnection.setDefaultResponse( getJavaScriptContent( "new ActiveXObject('BadObject', 'server')" ) );
+        client.setWebConnection( webConnection );
+        client.setActiveXObjectMap(map);
+        try {
+            client.getPage( new URL( "http://www.yahoo.com" ) );
+            fail( "An exception should be thrown for an invalid object in the map." );
+        } catch( ScriptException e ) {
+            // Success
+        }
+
+        // Test for a non existent class in the map
+        webConnection.setDefaultResponse( getJavaScriptContent( "new ActiveXObject('FakeObject')" ) );
+        client.setWebConnection( webConnection );
+        client.setActiveXObjectMap(map);
+        try {
+            client.getPage( new URL( "http://www.yahoo.com" ) );
+            fail( "An exception should be thrown for a non existent object in the map." );
+        } catch( ScriptException e ) {
+            // Success
+        }
+
+        // Try a valid object in the map
+        webConnection.setDefaultResponse( getJavaScriptContent(
+                "var t = new ActiveXObject('MockActiveXObject'); alert(t.Message);" ) );
+        client.setWebConnection( webConnection );
+        client.setActiveXObjectMap(map);
+        client.setAlertHandler( new AlertHandler() {
+            public void handleAlert( final Page page, final String message ) {
+                if( !message.equals( new MockActiveXObject().Message ) ) {
+                    fail( "The active x object did not bind to the object." );
+                }
+            }
+
+        });
+        client.getPage( new URL( "http://www.yahoo.com" ) );
+
+        // Try a valid object in the map
+        webConnection.setDefaultResponse( getJavaScriptContent(
+                "var t = new ActiveXObject('MockActiveXObject', 'server'); alert(t.GetMessage());" ) );
+        client.setWebConnection( webConnection );
+        client.setActiveXObjectMap(map);
+        client.setAlertHandler( new AlertHandler() {
+            public void handleAlert( final Page page, final String message ) {
+                if( !message.equals( new MockActiveXObject().GetMessage() ) ) {
+                    fail( "The active x object did not bind to the object." );
+                }
+            }
+
+        });
+        client.getPage( new URL( "http://www.yahoo.com" ) );
+    }
+
+    private String getJavaScriptContent( String javascript ) {
+        return "<html><head><title>foo</title><script>"
+             + javascript
+             + "</script></head><body>"
+             + "<p>hello world</p>"
+             + "<form name='form1'>"
+             + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+             + "    <input type='text' name='textfield2' id='textfield2'/>"
+             + "</form>"
+             + "</body></html>";
+    }
+    
     private InputSource createInputSourceForFile( final String fileName ) throws FileNotFoundException {
         return new InputSource( getFileAsStream(fileName) );
     }
