@@ -48,6 +48,7 @@ import java.io.IOException;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
 /**
@@ -56,6 +57,7 @@ import org.mozilla.javascript.Scriptable;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
+ * @author Kent Tong
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/form.asp">MSDN documentation</a>
  */
 public class Form extends HTMLElement {
@@ -177,6 +179,21 @@ public class Form extends HTMLElement {
         return getHtmlForm().getTargetAttribute();
     }
 
+    /**
+     * Get the onsubmit event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_onsubmit() {
+        return getHtmlForm().getEventHandler("onsubmit");
+    }
+
+    /**
+     * Set the onsubmit event handler for this element.
+     * @param onsubmit the new handler
+     */
+    public void jsSet_onsubmit(final Function onsubmit) {
+        getHtmlForm().setEventHandler("onsubmit", onsubmit);
+    }
 
     /**
      * Set the value of the javascript attribute "target".

@@ -47,6 +47,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.mozilla.javascript.Function;
+import org.mozilla.javascript.Scriptable;
+
+
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
@@ -68,6 +72,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author George Murnock
+ * @author Kent Tong
  */
 public class HtmlForm extends ClickableElement {
 
@@ -151,11 +156,15 @@ public class HtmlForm extends ClickableElement {
         final HtmlPage htmlPage = getPage();
         if( htmlPage.getWebClient().isJavaScriptEnabled() ) {
             if( submitElement != null ) {
-                final String onSubmit = getOnSubmitAttribute();
-                if( onSubmit.length() != 0 ) {
-                    final ScriptResult scriptResult
-                        = htmlPage.executeJavaScriptIfPossible( onSubmit, "onSubmit", true, this );
-                    if( scriptResult.getJavaScriptResult().equals(Boolean.FALSE) ) {
+                final Function onsubmit = getEventHandler("onsubmit");
+                if (onsubmit != null
+                        && htmlPage.getWebClient().isJavaScriptEnabled()) {
+                    final ScriptResult scriptResult = htmlPage
+                            .executeJavaScriptFunctionIfPossible(onsubmit,
+                                    (Scriptable) this.getScriptObject(),
+                                    new Object[0], this);
+                    if (scriptResult.getJavaScriptResult()
+                            .equals(Boolean.FALSE)) {
                         return scriptResult.getNewPage();
                     }
                 }

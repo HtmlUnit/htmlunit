@@ -182,6 +182,9 @@
         <contributor>
             <name>George Murnock</name>
         </contributor>
+        <contributor>
+            <name>Kent Tong</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
