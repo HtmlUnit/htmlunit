@@ -690,7 +690,8 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for zero argument constructor." );
-        } catch( ScriptException e ) {
+        } 
+        catch( ScriptException e ) {
             // Success
         }
 
@@ -700,7 +701,8 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for a three argument constructor." );
-        } catch( ScriptException e ) {
+        } 
+        catch( ScriptException e ) {
              // Success
         }
 
@@ -710,7 +712,8 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for an undefined parameter in the constructor." );
-        } catch( ScriptException e ) {
+        } 
+        catch( ScriptException e ) {
             // Success
         }
 
@@ -720,7 +723,8 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for an integer parameter in the constructor." );
-        } catch( ScriptException e ) {
+        } 
+        catch( ScriptException e ) {
             // Success
         }
 
@@ -730,7 +734,8 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for a null map." );
-        } catch( ScriptException e ) {
+        } 
+        catch( ScriptException e ) {
             // Success
         }
 
@@ -741,7 +746,8 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for non existent object in the map." );
-        } catch( ScriptException e ) {
+        } 
+        catch( ScriptException e ) {
             // Success
         }
 
@@ -752,7 +758,8 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for an invalid object in the map." );
-        } catch( ScriptException e ) {
+        } 
+        catch( ScriptException e ) {
             // Success
         }
 
@@ -763,7 +770,8 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for a non existent object in the map." );
-        } catch( ScriptException e ) {
+        } 
+        catch( ScriptException e ) {
             // Success
         }
 
@@ -774,7 +782,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         client.setActiveXObjectMap(map);
         client.setAlertHandler( new AlertHandler() {
             public void handleAlert( final Page page, final String message ) {
-                if( !message.equals( new MockActiveXObject().Message ) ) {
+                if( !message.equals( MockActiveXObject.MESSAGE ) ) {
                     fail( "The active x object did not bind to the object." );
                 }
             }
