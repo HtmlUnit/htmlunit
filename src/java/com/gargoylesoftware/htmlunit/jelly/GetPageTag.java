@@ -37,17 +37,18 @@
  */
 package com.gargoylesoftware.htmlunit.jelly;
 
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
+
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
 
 /**
  * Jelly tag to load a page from a server.
@@ -134,27 +135,6 @@ public class GetPageTag extends HtmlUnitTagSupport {
         }
         else {
             return parameters_;
-        }
-    }
-
-
-    /**
-     * Return the web client that is currently in use.
-     * @return the web client
-     * @throws JellyTagException If a web client cannot be found.
-     */
-    protected final WebClient getWebClient() throws JellyTagException {
-        WebClient webClient = (WebClient)getContext().getVariable("webClient");
-        if( webClient != null ) {
-            return webClient;
-        }
-
-        final WebClientTag webClientTag = (WebClientTag) findAncestorWithClass(WebClientTag.class);
-        if( webClientTag == null ) {
-            throw new JellyTagException("Unable to determine webClient");
-        }
-        else {
-            return webClientTag.getWebClient();
         }
     }
 

@@ -37,10 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit.jelly;
 
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.TagSupport;
+
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Abstract superclass for all the HtmlUnit jelly tags.
@@ -119,12 +122,28 @@ public abstract class HtmlUnitTagSupport extends TagSupport {
     /**
      * Return the value of the "var" attribute or throw an exception if it hasn't been set.
      * @return The value of var
-     * @throws JellyTagException If var hasn't been set.
+     * @throws MissingAttributeException If var hasn't been set.
      */
-    public String getVarOrDie() throws JellyTagException {
+    public String getVarOrDie() throws MissingAttributeException {
         if( var_ == null ) {
-            throw new JellyTagException("var is a mandatory attribute");
+            throw new MissingAttributeException("var");
         }
         return var_;
+    }
+
+
+    /**
+     * Return the web client that is currently in use.
+     * @return the web client
+     * @throws JellyTagException If a web client cannot be found.
+     */
+    public WebClient getWebClient() throws JellyTagException {
+        final WebClientTag webClientTag = (WebClientTag) findAncestorWithClass(WebClientTag.class);
+        if( webClientTag == null ) {
+            throw new JellyTagException("Unable to determine webClient");
+        }
+        else {
+            return webClientTag.getWebClient();
+        }
     }
 }
