@@ -6,6 +6,11 @@
     </properties>
 
     <body>
+        <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                JavaScript: document.getElementById("") now returns null.
+            </action>
+		</release>
         <release version="1.4" date="January 9, 2005">
             <action type="add" dev="mbowler" due-to="David D. Kilzer" id="1098981">
 		        Fixed platform specific encoding problem in test WebClientTest.testLoadPage_EncodeQueryString()
