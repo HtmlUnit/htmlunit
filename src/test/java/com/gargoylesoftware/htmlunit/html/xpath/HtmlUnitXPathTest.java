@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html.xpath;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -75,5 +76,42 @@ public class HtmlUnitXPathTest extends WebTestCase {
         assertEquals(page.getHtmlElementById("myLink"), xpath.selectSingleNode(page));
         xpath = new HtmlUnitXPath("/html/head/title/text()");
         assertEquals("Test page", xpath.stringValueOf(page));
+    }
+
+    /**
+     * Test evaluation of paths after changed through javascript
+     * @throws Exception if test fails
+     */
+    public void testWhenJSChangesPage() throws Exception {
+        final String content
+        = "<html><head><title>foo</title><script>"
+        + "function addOption() {\n"
+        + "    var options = document.form1.select1.options;\n"
+        + "    var index = options.length;\n"
+        + "    options[index] = new Option('Four','value4');\n"
+        + "}</script>\n"
+        + "</head>\n"
+        + "<body>"
+        + "<p>hello world</p>"
+        + "<form name='form1'>"
+        + "    <select name='select1'>"
+        + "        <option name='option1' value='value1'>One</option>"
+        + "        <option name='option2' value='value2' selected>Two</option>"
+        + "        <option name='option3' value='value3'>Three</option>"
+        + "    </select>"
+        + "</form>"
+        + "<a href='javascript:addOption()'>add option</a>"
+        + "</body></html>";
+
+        final HtmlPage page = loadPage(content);
+        assertEquals("foo", page.getTitleText());
+        
+        HtmlUnitXPath xpath = new HtmlUnitXPath("count(//select[@name='select1']/option)");
+        assertEquals(3, ((Double) xpath.evaluate(page)).intValue());
+        
+        final HtmlAnchor link = (HtmlAnchor) page.getAnchors().get(0);
+        link.click();
+        assertEquals(4, ((Double) xpath.evaluate(page)).intValue());
+
     }
 }
