@@ -53,6 +53,7 @@ import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
@@ -74,10 +75,11 @@ import com.gargoylesoftware.htmlunit.javascript.DocumentAllArray;
  */
 public final class Document extends HTMLElement {
     private DocumentAllArray allArray_;
+    private String status_ = "";
 
     /** The buffer that will be used for calls to document.write() */
     private StringBuffer writeBuffer_;
-    
+
     /**
      * Create an instance.  Javascript objects must have a default constructor.
      */
@@ -166,7 +168,7 @@ public final class Document extends HTMLElement {
 
         final Document document = (Document)scriptable;
         final String content = getStringArg(0, args, "");
-        
+
         if( document.writeBuffer_ == null ) {
             // open() hasn't been called
             final HtmlPage page = (HtmlPage)document.getHtmlElementOrDie();
@@ -202,7 +204,7 @@ public final class Document extends HTMLElement {
 
         return connection.getStateForUrl( url );
     }
-    
+
     /**
      * Return the cookie attribute.  Currently hardcoded to return an empty string
      * @return The cookie attribute
@@ -290,14 +292,14 @@ public final class Document extends HTMLElement {
      */
     public static Object jsFunction_open(
         final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
-            
+
         final Document document = (Document)scriptable;
         if( document.writeBuffer_ == null ) {
             document.writeBuffer_ = new StringBuffer();
-        }   
+        }
         else {
             document.getLog().warn("open() called when document is already open.");
-        }         
+        }
         return null;
     }
 
@@ -311,28 +313,28 @@ public final class Document extends HTMLElement {
      * @return Nothing
      */
     public static Object jsFunction_close(
-            final Context context, 
-            final Scriptable scriptable, 
-            final Object[] args,  
-            final Function function ) 
-        throws 
+            final Context context,
+            final Scriptable scriptable,
+            final Object[] args,
+            final Function function )
+        throws
             IOException {
 
         final Document document = (Document)scriptable;
         if( document.writeBuffer_  == null ) {
             document.getLog().warn("close() called when document is not open.");
-        }   
+        }
         else {
-            final WebResponse webResponse 
+            final WebResponse webResponse
                 = new StringWebResponse(document.writeBuffer_.toString());
             final HtmlPage page = document.getHtmlElementOrDie().getPage();
             final WebClient webClient = page.getWebClient();
             final WebWindow window = page.getEnclosingWindow();
-            
+
             webClient.loadWebResponseInto(webResponse, window);
-            
+
             document.writeBuffer_ = null;
-        }         
+        }
         return null;
     }
 
@@ -483,6 +485,28 @@ public final class Document extends HTMLElement {
             // There are no forms with the specified name so pass the request
             // up to the superclass.
             return super.get(name, start);
+        }
+    }
+
+    /**
+     * Return the text from the status line.
+     * @return the status line text
+     */
+    public Object jsGet_status() {
+        return status_;
+    }
+
+    /**
+     * Set the text from the status line.
+     * @param message the status line text
+     */
+    public void jsSet_status( final String message ) {
+        status_ = message;
+
+        final HtmlPage page = getHtmlPage();
+        final StatusHandler statusHandler = page.getWebClient().getStatusHandler();
+        if( statusHandler != null ) {
+            statusHandler.statusMessageChanged(page, message);
         }
     }
 }
