@@ -88,7 +88,8 @@ public class ClickableElementTest extends WebTestCase {
      * @param expectedAlerts List of expected popup values
      * @throws Exception if the test fails
      */
-    private void onClickPageTest(final String htmlContent, final int numClicks, final List expectedAlerts) throws Exception {
+    private void onClickPageTest(final String htmlContent, final int numClicks, final List expectedAlerts) 
+    throws Exception {
         final BrowserVersion bv = new BrowserVersion("Netscape", "7", "", "1.2");
         final WebClient client = new WebClient(bv);
 
@@ -900,6 +901,10 @@ public class ClickableElementTest extends WebTestCase {
                         + "</body></html>");
     }
 
+    /**
+     *
+     * @throws Exception if the test fails
+     */
     public void testCheckbox_onClickUpdatesStateFirst() throws Exception {
         onClickPageTest("<html><head>"
                         + "<script language='JavaScript'>"
