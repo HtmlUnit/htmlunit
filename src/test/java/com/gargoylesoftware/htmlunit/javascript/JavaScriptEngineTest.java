@@ -619,8 +619,9 @@ public class JavaScriptEngineTest extends WebTestCase {
 
     /**
      * Test that the javascript engine gets called correctly for variable access.
+     * @throws Exception If the test fails
      */
-    public void testJavaScriptEngineCallsForVariableAccess() throws IOException {
+    public void testJavaScriptEngineCallsForVariableAccess() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection( client );
 
@@ -644,7 +645,8 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         webConnection.setDefaultResponse( content );
         client.setWebConnection( webConnection );
-        final CountingJavaScriptEngine countingJavaScriptEngine = new CountingJavaScriptEngine(client.getScriptEngine());
+        final CountingJavaScriptEngine countingJavaScriptEngine = new CountingJavaScriptEngine(
+                client.getScriptEngine());
         client.setScriptEngine(countingJavaScriptEngine);
 
         final HtmlPage page = ( HtmlPage )client.getPage(
@@ -667,10 +669,9 @@ public class JavaScriptEngineTest extends WebTestCase {
         return new InputSource( getFileAsStream(fileName) );
     }
 
-    private static final class CountingJavaScriptEngine extends ScriptEngine
-    {
+    private static final class CountingJavaScriptEngine extends ScriptEngine {
         private ScriptEngine delegate_;
-        private int scriptExecutionCount = 0;
+        private int scriptExecutionCount_ = 0;
 
         protected CountingJavaScriptEngine(ScriptEngine delegate) {
             super(delegate.getWebClient());
@@ -682,11 +683,12 @@ public class JavaScriptEngineTest extends WebTestCase {
         }
 
         public Object execute(HtmlPage htmlPage, String sourceCode, String sourceName, HtmlElement htmlElement) {
-            scriptExecutionCount++;
+            scriptExecutionCount_++;
             return delegate_.execute(htmlPage, sourceCode, sourceName, htmlElement);
         }
 
-        public Object callFunction(HtmlPage htmlPage, Object javaScriptFunction, Object thisObject, Object[] args, HtmlElement htmlElementScope) {
+        public Object callFunction(HtmlPage htmlPage, Object javaScriptFunction, Object thisObject,
+                Object[] args, HtmlElement htmlElementScope) {
             return delegate_.callFunction(htmlPage, javaScriptFunction, thisObject, args, htmlElementScope);
         }
 
@@ -695,7 +697,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         }
 
         public int getExecutionCount() {
-            return scriptExecutionCount;
+            return scriptExecutionCount_;
         }
     }
 }
