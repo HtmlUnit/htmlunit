@@ -23,12 +23,9 @@ import java.util.List;
 import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.InputSource;
-import org.xml.sax.EntityResolver;
-import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -40,20 +37,20 @@ import org.w3c.dom.Node;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public final class JavaScriptConfiguration {
-    private static org.w3c.dom.Document xmlDocument_;
-    private static final Object initializationLock_ = new Object();
+    private static org.w3c.dom.Document XmlDocument_;
+    private static final Object INITIALIZATION_LOCK = new Object();
 
-    private static Map configurationMap_ = new HashMap(11);
+    private static Map ConfigurationMap_ = new HashMap(11);
 
 
     private JavaScriptConfiguration( final BrowserVersion browserVersion ) {
-        synchronized(initializationLock_) {
-            if( xmlDocument_ == null ) {
-                xmlDocument_ = loadConfiguration();
+        synchronized(INITIALIZATION_LOCK) {
+            if( XmlDocument_ == null ) {
+                XmlDocument_ = loadConfiguration();
             }
         }
 
-        if( xmlDocument_ == null ) {
+        if( XmlDocument_ == null ) {
             throw new IllegalStateException("Configuration was not initialized - see log for details");
         }
     }
@@ -98,11 +95,11 @@ public final class JavaScriptConfiguration {
      */
     public static JavaScriptConfiguration getInstance( final BrowserVersion browserVersion ) {
         JavaScriptConfiguration configuration
-            = (JavaScriptConfiguration)configurationMap_.get(browserVersion);
+            = (JavaScriptConfiguration)ConfigurationMap_.get(browserVersion);
 
         if( configuration == null ) {
             configuration = new JavaScriptConfiguration(browserVersion);
-            configurationMap_.put( browserVersion, configuration );
+            ConfigurationMap_.put( browserVersion, configuration );
         }
         return configuration;
     }
@@ -113,6 +110,13 @@ public final class JavaScriptConfiguration {
     }
 
 
+    /**
+     * Return true if the specified name is a valid writable property for this configuration.
+     *
+     * @param hostClass The class that the property will be defined in.
+     * @param name The name of the property.
+     * @return true if this name is valid.
+     */
     public boolean isValidWritablePropertyName( final Class hostClass, final String name ) {
         assertNotNull("hostClass", hostClass);
         assertNotNull("name", name);
@@ -154,6 +158,13 @@ public final class JavaScriptConfiguration {
     }
 
 
+    /**
+     * Return true if the specified name is a valid readable property for this configuration.
+     *
+     * @param hostClass The class that the property will be defined in.
+     * @param name The name of the property.
+     * @return true if this name is valid.
+     */
     public boolean isValidReadablePropertyName( final Class hostClass, final String name ) {
         assertNotNull("hostClass", hostClass);
         assertNotNull("name", name);
@@ -217,23 +228,33 @@ public final class JavaScriptConfiguration {
     }
 
 
+    /**
+     * Return true if the specified name is a valid function for this configuration.
+     *
+     * @param hostClass The class that the property will be defined in.
+     * @param name The name of the function.
+     * @return true if this name is valid.
+     */
     public boolean isValidFunctionName( final Class hostClass, final String name ) {
         assertNotNull("hostClass", hostClass);
         assertNotNull("name", name);
-        //TODO: Remove this
-        if(true) return true;
 
-        final Element classElement = getClassElement(hostClass);
-        if( classElement == null ) {
-            return false;
+        Element classElement = getClassElement(getClassName(hostClass));
+        while( classElement != null ) {
+
+            final Element functionElement = getElementByTypeAndName(classElement, "function", name);
+            if( functionElement != null ) {
+                return isEnabled(functionElement);
+            }
+
+            final String superClassName = classElement.getAttribute("extends");
+            classElement = null;
+            if( superClassName != null && superClassName.length() != 0 ) {
+                classElement = getClassElement(superClassName);
+            }
         }
 
-        final Element functionElement = getElementByTypeAndName(classElement, "function", name);
-        if( functionElement == null ) {
-            return false;
-        }
-
-        return isEnabled(functionElement);
+        return false;
         //return getFunctionNames(hostClass).contains(name);
     }
 
@@ -303,10 +324,21 @@ public final class JavaScriptConfiguration {
     }
 
 
-    private Element getClassElement( final Class hostClass ) {
-        String className = hostClass.getName();
-        className = className.substring( className.lastIndexOf(".") + 1 );
-        Node node = xmlDocument_.getDocumentElement().getFirstChild();
+    private String getClassName( final Class hostClass ) {
+        assertNotNull("hostClass", hostClass);
+
+        final String className = hostClass.getName();
+        final int index = className.lastIndexOf(".");
+        if( index == -1 ) {
+            throw new IllegalArgumentException("hostClass does not contain a dot ["+className+"]");
+        }
+
+        return className.substring( index + 1 );
+    }
+
+
+    private Element getClassElement( final String className ) {
+        Node node = XmlDocument_.getDocumentElement().getFirstChild();
         while( node != null ) {
             if( node instanceof Element ) {
                 final Element element = (Element)node;

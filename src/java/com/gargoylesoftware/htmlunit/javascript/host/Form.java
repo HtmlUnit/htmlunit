@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.mozilla.javascript.Scriptable;
-import org.w3c.dom.Element;
 import org.mozilla.javascript.NativeArray;
 
 /**

@@ -13,11 +13,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.mozilla.javascript.Context;
 import org.mozilla.javascript.FunctionObject;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
@@ -255,14 +253,54 @@ public class SimpleScriptable extends ScriptableObject {
              return super.get(name, start);
          }
 
+         final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
+         final Class clazz = getClass();
+
          final PropertyInfo info = (PropertyInfo)getPropertyMap().get(name);
+         final boolean isReadablePropertyName = configuration.isValidReadablePropertyName(clazz, name);
+         final boolean isFunctionName = configuration.isValidFunctionName(clazz, name);
+         if( isReadablePropertyName && isFunctionName ) {
+             throw new IllegalStateException("Name is both a property and a function: name=["
+                +name+"] class=["+clazz.getName()+"]");
+         }
+
+         final Object result;
+         if( isReadablePropertyName ) {
+             if( info == null || info.getter_ == null ) {
+                 getLog().debug("Getter not implemented for property ["+name+"]");
+                 result = NOT_FOUND;
+             }
+             else {
+                 try {
+                     result = info.getter_.invoke( this, new Object[0] );
+                 }
+                 catch( final Exception e ) {
+                     throw new ScriptException(e);
+                 }
+             }
+         }
+         else if( isFunctionName ) {
+             if( info == null || info.function_ == null ) {
+                 getLog().debug("Function not implemented ["+name+"]");
+                 result = NOT_FOUND;
+             }
+             else {
+                 result = info.function_;
+             }
+         }
+         else {
+             result = super.get(name, start);
+         }
+
+         return result;
+/*
          if( info == null || ( info.getter_ == null && info.function_ == null ) ) {
              final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
              if( configuration.isValidReadablePropertyName(getClass(), name) ) {
-                 getLog().warn("Getter not implemented for property ["+name+"]");
+                 getLog().debug("Getter not implemented for property ["+name+"]");
              }
              else if( configuration.isValidFunctionName(getClass(), name) ) {
-                 getLog().warn("Function not implemented ["+name+"]");
+                 getLog().debug("Function not implemented ["+name+"]");
              }
 
              final Object result = super.get(name, start);
@@ -284,6 +322,7 @@ public class SimpleScriptable extends ScriptableObject {
          catch( final Exception e ) {
              throw new ScriptException(e);
          }
+*/
      }
 
 
@@ -302,31 +341,34 @@ public class SimpleScriptable extends ScriptableObject {
              return;
          }
 
+         final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
+         final boolean isPropertyName = configuration.isValidReadablePropertyName(getClass(), name);
          final PropertyInfo info = (PropertyInfo)getPropertyMap().get(name);
-         if( info == null || info.setter_ == null ) {
-             final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
-             if( configuration.isValidReadablePropertyName(getClass(), name) ) {
-                 getLog().warn("Setter not implemented for property ["+name+"]");
-             }
 
-             super.put(name, start, newValue);
+         if( isPropertyName ) {
+             if( info == null || info.setter_ == null ) {
+                 getLog().debug("Setter not implemented for property ["+name+"]");
+             }
+             else {
+                 final String className = getClass().getName();
+                 final Class parameterClass = info.setter_.getParameterTypes()[0];
+                 if( parameterClass == "".getClass() ) {
+                     newValue = newValue.toString();
+                 }
+                 try {
+                     info.setter_.invoke(
+                        findMatchingScriptable(start, info.setter_), new Object[]{ newValue } );
+                 }
+                 catch( final InvocationTargetException e ) {
+                     throw new ScriptException(e.getTargetException());
+                 }
+                 catch( final Exception e ) {
+                     throw new ScriptException(e);
+                 }
+             }
          }
          else {
-             final String className = getClass().getName();
-             final Class parameterClass = info.setter_.getParameterTypes()[0];
-             if( parameterClass == "".getClass() ) {
-                 newValue = newValue.toString();
-             }
-             try {
-                 info.setter_.invoke(
-                    findMatchingScriptable(start, info.setter_), new Object[]{ newValue } );
-             }
-             catch( final InvocationTargetException e ) {
-                 throw new ScriptException(e.getTargetException());
-             }
-             catch( final Exception e ) {
-                 throw new ScriptException(e);
-             }
+             super.put(name, start, newValue);
          }
      }
 

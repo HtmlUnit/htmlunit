@@ -17,9 +17,17 @@
 
 	<class name="Checkbox" extends="Input"/>
 
-	<class name="Document" extends="HTMLElement"/><!-- NOT FINISHED -->
+	<class name="Document" extends="HTMLElement"><!-- NOT FINISHED -->
+		<function name="write"/>
+		<function name="writeln"/>
+		<function name="close"/>
+		<function name="getElementById"/>
+	</class>
 	<class name="FileUpload" extends="Input"/><!-- NOT FINISHED -->
-	<class name="Form" extends="HTMLElement"/><!-- NOT FINISHED -->
+	<class name="Form" extends="HTMLElement"><!-- NOT FINISHED -->
+		<function name="submit"/>
+		<function name="reset"/>
+	</class>
 	<class name="Hidden" extends="Input"/><!-- NOT FINISHED -->
 
 	<class name="HTMLElement">
@@ -185,6 +193,7 @@
 	<class name="Submit" extends="Input"/><!-- NOT FINISHED -->
 	<class name="Text" extends="Input"/><!-- NOT FINISHED -->
 	<class name="Textarea" extends="Input"/><!-- NOT FINISHED -->
+	<class name="Select" extends="Input"/><!-- NOT FINISHED -->
 
 	<class name="Window">
 		<!-- NOT FINISHED -->

@@ -7,7 +7,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
@@ -22,9 +21,7 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Element;
-import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -35,7 +32,7 @@ import org.w3c.dom.NodeList;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public abstract class HtmlElement {
-    /** Constant meaning that the specified attribute was not define */
+    /** Constant meaning that the specified attribute was not defined */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
 
     /** Constant meaning that the specified attribute was found but its value was empty */
@@ -139,7 +136,8 @@ public abstract class HtmlElement {
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
      * attribute was specified but it was empty.
      *
-     * @param  attributeName the name of the attribute
+     * @param element The element from which we are getting the attribute.
+     * @param attributeName the name of the attribute
      * @return  The value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
      * or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
@@ -174,11 +172,28 @@ public abstract class HtmlElement {
     }
 
 
+    /**
+     * Return the tag name of this element.  The tag name is the actual html name.  For example
+     * the tag name for HtmlAnchor is "a" and the tag name for HtmlTable is "table".
+     * This tag name will always be in lowercase, no matter what case was used in the original
+     * document.
+     *
+     * @return the tag name of this element.
+     */
     public final String getTagName() {
         return getTagName(getElement());
     }
 
 
+    /**
+     * Return the tag name of the specified element.  The tag name is the actual html name.
+     * For example the tag name for HtmlAnchor is "a" and the tag name for HtmlTable is "table".
+     * This tag name will always be in lowercase, no matter what case was used in the original
+     * document.
+     *
+     * @param element The element for which we are getting the tag name
+     * @return the tag name of the specified element.
+     */
     public final String getTagName( final Element element ) {
         assertNotNull("element", element);
         return element.getTagName().toLowerCase();
@@ -662,6 +677,12 @@ public abstract class HtmlElement {
     }
 
 
+    /**
+     * Return a string representation of the xml document from this element and all
+     * it's children (recursively).
+     *
+     * @return The xml string.
+     */
     public String asXml() {
         final StringWriter stringWriter = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(stringWriter);

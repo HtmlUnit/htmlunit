@@ -9,7 +9,6 @@ package com.gargoylesoftware.htmlunit.test;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.test.WebTestCase;
 import java.net.URL;
 import junit.textui.TestRunner;
 
