@@ -155,6 +155,9 @@
         <contributor>
             <name>Dierk Koenig</name>
         </contributor>
+        <contributor>
+            <name>Daniel Gredler</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
