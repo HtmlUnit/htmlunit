@@ -1204,5 +1204,24 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals( DomNode.ELEMENT_NODE, root.getNodeType() );
         assertEquals( "#document", page.getNodeName() );
     }
+
+    /**
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testDeregisterFrameWithoutSrc() throws Exception {
+
+        final String content
+                 = "<html>"
+                 + "<head><title>foo</title></head>"
+                 + "<body>"
+                 + "<iframe />"
+                 + "<a href='about:blank'>link</a>"
+                 + "</body></html>";
+
+        final HtmlPage page = (HtmlPage) loadPage(content);
+        final HtmlAnchor link = (HtmlAnchor) page.getAnchors().get(0);
+        link.click();
+    }
 }
 
