@@ -6,7 +6,7 @@
     </properties>
 
     <body>
-        <release version="1.3" date="not released yet">
+        <release version="Next" date="not released yet">
             <action type="update" dev="mbowler" id="713646">
                 Patch for bug in onload handler submitted by Andreas Hangler
             </action>
@@ -26,6 +26,11 @@
             </action>
             <action type="update" dev="mbowler" id="803237" due-to="Brad Clarke">
 				Upgraded junit.jar to 3.8.1
+            </action>
+            <action type="update" dev="mbowler" id="802285">
+				Fixed bug where HtmlPage.asText() would blow up if form tags were 
+				found between tr and td tags.  Clearly this is illegal html but
+				the browsers support it so HtmlUnit needs to as well.
             </action>
 		</release>
 
