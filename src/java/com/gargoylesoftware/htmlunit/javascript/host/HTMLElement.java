@@ -1104,4 +1104,12 @@ public class HTMLElement extends NodeImpl {
     public Function jsGet_onresize() {
         return getHtmlElementOrDie().getEventHandler("onresize");
     }
+    
+    /**
+     * Just for debug purposes
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        return "HTMLElement for " + getHtmlElementOrNull();
+    }
 }
