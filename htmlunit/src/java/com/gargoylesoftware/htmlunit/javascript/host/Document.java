@@ -84,6 +84,7 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Michael Ottati
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp">
  * MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
@@ -736,6 +737,10 @@ public final class Document extends NodeImpl {
     public String jsGet_domain() {
         if (domain_ == null) {
             domain_ = getHtmlPage().getWebResponse().getUrl().getHost();
+            final BrowserVersion browser = this.getHtmlPage().getWebClient().getBrowserVersion();
+            if (browser.isNetscape()) {
+              domain_ = domain_.toLowerCase();
+            }
         }
  
         return domain_;
@@ -743,16 +748,51 @@ public final class Document extends NodeImpl {
 
     /**
      * Set the the domain of this document.
+     *
+     * Domains can only be set to suffixes of the existing domain
+     * with the exception of setting the domain to itself.
+     * <p>
+     * The domain will be set according to the following rules:
+     * <ol>
+     * <li>If the newDomain.equalsIgnoreCase(currentDomain)
+     *       the method returns with no error.</li>
+     * <li>If the browser version is netscape, the newDomain is downshifted.</li>
+     * <li>The change will take place if and only if the suffixes of the
+     *       current domain and the new domain match AND there are at least
+     *       two domain qualifiers e.g. the following transformations are legal
+     *       d1.d2.d3.gargoylesoftware.com may be transformed to itself or:
+     *          d2.d3.gargoylesoftware.com
+     *             d3.gargoylesoftware.com
+     *                gargoylesoftware.com
+     *
+     *        tranformation to:        com
+     *        will fail
+     * </li>
+     * </ol>
+     * </p>
+     * TODO This code could be modified to understand country domain suffixes.
+     * The domain www.bbc.co.uk should be trimmable only down to bbc.co.uk
+     * trimming to co.uk should not be possible.
      * @param newDomain the new domain to set
      */
     public void jsSet_domain( final String newDomain ) {
-        final String possibleDomain = StringUtils.substringAfter(
-                getHtmlPage().getWebResponse().getUrl().getHost(), ".");
-        if (newDomain.equals(possibleDomain)) {
-            domain_ = newDomain;
+        final String currentDomain = jsGet_domain();
+        if (currentDomain.equalsIgnoreCase(newDomain)) {
+            return;
+        }
+
+        if (newDomain.indexOf(".") == -1 
+                || !currentDomain.toLowerCase().endsWith("." + newDomain.toLowerCase())) {
+            throw Context.reportRuntimeError("Illegal domain value, can not set domain from: \"" 
+                    + currentDomain + "\" to: \"" + newDomain +"\"");
+        }
+
+        // Netscape down shifts the cse of the domain
+        if (getHtmlPage().getWebClient().getBrowserVersion().isNetscape()) {
+            domain_ = newDomain.toLowerCase();
         }
         else {
-            throw Context.reportRuntimeError("Illegal domain value: " + newDomain);
+            domain_ = newDomain;
         }
     }
 }

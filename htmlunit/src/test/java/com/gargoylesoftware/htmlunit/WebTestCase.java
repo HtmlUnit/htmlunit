@@ -67,6 +67,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Michael Ottati
  */
 public abstract class WebTestCase extends BaseTestCase {
     /** Constant for the url http://first which is used in the tests. */
@@ -119,6 +120,18 @@ public abstract class WebTestCase extends BaseTestCase {
         return loadPage(html, null);
     }
 
+   /**
+     * Load a page with the specified html and collect alerts into the list.
+     * @param html The HTML to use.
+     * @param collectedAlerts The list to hold the alerts.
+     * @return The new page.
+     * @throws Exception If something goes wrong.
+     */
+    protected static final HtmlPage loadPage( final String html, final List collectedAlerts )
+        throws Exception {
+     return loadPage(html,collectedAlerts, URL_GARGOYLE);
+   }
+
 
     /**
      * Return the log that is being used for all testing objects
@@ -133,10 +146,12 @@ public abstract class WebTestCase extends BaseTestCase {
      * Load a page with the specified html and collect alerts into the list.
      * @param html The HTML to use.
      * @param collectedAlerts The list to hold the alerts.
+     * @param url The URL that will use as the document host for this page
      * @return The new page.
      * @throws Exception If something goes wrong.
      */
-    protected static final HtmlPage loadPage( final String html, final List collectedAlerts )
+    protected static final HtmlPage loadPage( final String html, final List collectedAlerts, final URL url )
+
         throws Exception {
 
         final WebClient client = new WebClient();
@@ -148,7 +163,7 @@ public abstract class WebTestCase extends BaseTestCase {
         webConnection.setDefaultResponse( html );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlPage page = (HtmlPage) client.getPage(url);
         return page;
     }
 

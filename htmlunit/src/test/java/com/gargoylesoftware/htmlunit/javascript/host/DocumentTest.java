@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -68,6 +69,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author  Barnaby Court
  * @author  Chris Erskine
  * @author  Marc Guillemot
+ * @author  Michael Ottati
  */
 public class DocumentTest extends WebTestCase {
     /**
@@ -2000,4 +2002,136 @@ public class DocumentTest extends WebTestCase {
          loadPage(content, collectedAlerts);
          assertEquals( expectedAlerts, collectedAlerts );
     }
+
+  /**
+    * @throws Exception if the test fails
+    */
+   public void testDomainMixedCaseNetscape() throws Exception {
+
+    final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM");
+
+    final WebClient client = new WebClient(BrowserVersion.NETSCAPE_6_2_3);
+    final MockWebConnection webConnection = new MockWebConnection( client );
+
+    final String content = "<html><head><title>foo</title><script>\n"
+              + "function doTest(){\n"
+              + "    alert(document.domain);\n"
+              + "    document.domain = 'GaRgOyLeSoFtWaRe.CoM';\n"
+              + "    alert(document.domain);\n"
+              + "}\n"
+              + "</script></head>\n"
+              + "<body onload='doTest()'>\n"
+              + "</body></html>";
+
+
+        webConnection.setResponse(urlGargoyleUpperCase, content);
+        client.setWebConnection( webConnection );
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        client.getPage(urlGargoyleUpperCase);
+
+
+
+        final List expectedAlerts = Arrays.asList(new String[] {
+            "www.gargoylesoftware.com", "gargoylesoftware.com"
+        });
+        assertEquals( expectedAlerts, collectedAlerts );
+       }
+
+  /**
+    * @throws Exception if the test fails
+    */
+   public void testDomainMixedCase() throws Exception {
+       final String content = "<html><head><title>foo</title><script>\n"
+           + "function doTest(){\n"
+           + "    alert(document.domain);\n"
+           + "    document.domain = 'GaRgOyLeSoFtWaRe.CoM';\n"
+           + "    alert(document.domain);\n"
+           + "}\n"
+           + "</script></head>\n"
+           + "<body onload='doTest()'>\n"
+           + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        final List expectedAlerts = Arrays.asList(new String[] {
+            "www.gargoylesoftware.com", "GaRgOyLeSoFtWaRe.CoM"
+        });
+        assertEquals( expectedAlerts, collectedAlerts );
+   }
+
+
+      /**
+     * @throws Exception if the test fails
+     */
+    public void testDomainLong() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.domain);\n"
+            + "    document.domain = 'd4.d3.d2.d1.gargoylesoftware.com';\n"
+            + "    alert(document.domain);\n"
+            + "    document.domain = 'd1.gargoylesoftware.com';\n"
+            + "    alert(document.domain);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "d4.d3.d2.d1.gargoylesoftware.com", "d4.d3.d2.d1.gargoylesoftware.com","d1.gargoylesoftware.com"
+         } );
+
+         final List collectedAlerts = new ArrayList();
+         loadPage(content, collectedAlerts,new URL("http://d4.d3.d2.d1.gargoylesoftware.com"));
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+  /**
+ * @throws Exception if the test fails
+ */
+public void testDomainSetSelf() throws Exception {
+    final String content = "<html><head><title>foo</title><script>\n"
+        + "function doTest(){\n"
+        + "    alert(document.domain);\n"
+        + "    document.domain = 'localhost';\n"
+        + "    alert(document.domain);\n"
+        + "}\n"
+        + "</script></head>\n"
+        + "<body onload='doTest()'>\n"
+        + "</body></html>";
+
+     final List expectedAlerts = Arrays.asList( new String[]{
+         "localhost", "localhost"
+     } );
+
+     final List collectedAlerts = new ArrayList();
+     loadPage(content, collectedAlerts,new URL("http://localhost"));
+     assertEquals( expectedAlerts, collectedAlerts );
+}
+
+  /**
+    * @throws Exception if the test fails
+    */
+   public void testDomainTooShort() throws Exception {
+       final String content = "<html><head><title>foo</title><script>\n"
+           + "function doTest(){\n"
+           + "    alert(document.domain);\n"
+           + "    document.domain = 'com';\n"
+           + "    alert(document.domain);\n"
+           + "}\n"
+           + "</script></head>\n"
+           + "<body onload='doTest()'>\n"
+           + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        try {
+          loadPage(content, collectedAlerts);
+        }
+        catch (final ScriptException ex) {
+          return;
+        }
+        fail();
+   }
+
 }
