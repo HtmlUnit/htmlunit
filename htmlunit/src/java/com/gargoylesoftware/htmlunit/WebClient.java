@@ -548,7 +548,8 @@ public class WebClient {
      * change after initialization then unpredictable behaviour could result.
      *
      * @param browserVersion The new browser version.
-     * @deprecated Pass the browser version into the constructor
+     * @deprecated Pass the browser version into the constructor.  This method will be
+     * removed before the final 1.1 release.
      */
     public void setBrowserVersion( final BrowserVersion browserVersion ) {
         assertNotNull("browserVersion", browserVersion);
