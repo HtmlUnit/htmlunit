@@ -484,7 +484,14 @@ public final class HtmlPage
         }
     }
 
-
+    /**
+     * Return a list of all the forms in the page.
+     * @return All the forms.
+     */
+    public List getAllForms() {
+        return getHtmlElementsByTagNames( Arrays.asList(new String[]{"form"}) );
+    }
+    
     /**
      *  Return the WebClient that originally loaded this page
      *

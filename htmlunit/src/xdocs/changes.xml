@@ -142,6 +142,9 @@
             <action type="update" dev="mbowler">
             	Upgraded the xerces to 2.4
             </action>
+            <action type="new" dev="mbowler" id="742515">
+            	New method HtmlPage.getAllForms()
+            </action>
         </release>
 	</body>
 
