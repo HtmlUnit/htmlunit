@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <document title="Change History">
 
-<section title="1.1-pre6">
+<section title="1.1-rc1">
 	<change-log>
 		<change type="change">
 			Upgraded commons-logging.jar to 1.0.2
@@ -19,7 +19,7 @@
 			Changed window.open() to understand the magic name _self
 		</change>
 		<change type="new">
-			Added HtmlOption.setSelected(boolean)
+			Added <javadoc>com.gargoylesoftware.htmlunit.html.HtmlOption#setSelected(boolean)</javadoc>
 		</change>
 		<change type="new">
 			Completed support for reset buttons
@@ -33,23 +33,26 @@
 			Added support for the javascript method Window.confirm()
 		</change>
 		<change type="new">
-			New class ConfirmHandler
+			New interface <javadoc>com.gargoylesoftware.htmlunit.ConfirmHandler</javadoc>
 		</change>
 		<change type="new">
-			New method WebClient.setConfirmHandler() and getConfirmHandler()
+			New method <javadoc>com.gargoylesoftware.htmlunit.WebClient#setConfirmHandler(com.gargoylesoftware.htmlunit.ConfirmHandler)</javadoc>
+			and <javadoc>com.gargoylesoftware.htmlunit.WebClient#getConfirmHandler()</javadoc>
 		</change>
 		<change type="new">
 			Added support for the javascript method Window.prompt()
 		</change>
 		<change type="new">
-			New class PromptHandler
+			New interface <javadoc>com.gargoylesoftware.htmlunit.PromptHandler</javadoc>
 		</change>
 		<change type="new">
-			New method WebClient.setPromptHandler() and getPromptHandler()
+			New method
+			<javadoc>com.gargoylesoftware.htmlunit.WebClient#setPromptHandler(com.gargoylesoftware.htmlunit.PromptHandler)</javadoc> and
+			<javadoc>com.gargoylesoftware.htmlunit.WebClient#getPromptHandler()</javadoc>
 		</change>
 		<change type="new">
-			New method WebForm.getParameterListForSubmit().  This method is intended as
-			a debugging aid.
+			New method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlForm#getParameterListForSubmit()</javadoc>.
+			This method is intended as a debugging aid.
 		</change>
 		<change type="fix">
 			Page load would blow up if no body tag found.  Framesets aren't required to
@@ -62,7 +65,7 @@
 			Improved some error messages during initialization
 		</change>
 		<change type="new">
-			New class ObjectInitializationException
+			New class <javadoc>com.gargoylesoftware.htmlunit.ObjectInstantiationException</javadoc>
 		</change>
 		<change type="new">
 			Added protocol package for url protocols and added protocol/javascript package for
@@ -127,13 +130,13 @@
 			change then behaviour would be very unpredictable.
 		</change>
 		<change type="new">
-			Added method HtmlPage.getFirstAnchorByText()
+			Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage#getFirstAnchorByText(java.lang.String)</javadoc>
 		</change>
 		<change type="change">
 			First steps towards having property/function information in a configuration file
 		</change>
 		<change type="new">
-			Added method getHtmlElementsByAccessKey()
+			Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage#getHtmlElementsByAccessKey(char)</javadoc>
 		</change>
 		<change type="new">
 			Added support for javascript:document.getElementById()
@@ -151,17 +154,18 @@
 			Upgraded commons-httpclient.jar and commons-logging.jar to the Aug 30 gump build
 		</change>
 		<change type="new">
-			Added HtmlElement.asXml()
+			Added <javadoc>com.gargoylesoftware.htmlunit.html.HtmlElement#asXml()</javadoc>
 		</change>
 		<change type="new">
-			Added WebClient.expandUrl()
+			Added <javadoc>com.gargoylesoftware.htmlunit.WebClient#expandUrl(java.net.URL, java.lang.String)</javadoc>
 		</change>
 		<change type="fix">
 			Fixed bug where relative urls in redirects were not being expanded.
 		</change>
 		<change type="fix">
-			Fixed bug in HtmlSelect.getOptionByValue() where searching for the option would
-			start at the top of the page instead of at the select.
+			Fixed bug in
+			<javadoc>com.gargoylesoftware.htmlunit.html.HtmlSelect#getOptionByValue(java.lang.String)</javadoc>
+			where searching for the option would start at the top of the page instead of at the select.
 		</change>
 		<change type="change">
 			Applied patches to NekoHTML to fix problems with script tags and isindex
@@ -169,7 +173,9 @@
 			responses to bug reports.
 		</change>
 		<change type="new">
-			Added support for HtmlImageInput.click(...)
+			Added support for
+			<javadoc>com.gargoylesoftware.htmlunit.html.HtmlImageInput#click()</javadoc> and
+			<javadoc>com.gargoylesoftware.htmlunit.html.HtmlImageInput#click(int, int)</javadoc>
 		</change>
 		<change type="change">
 			Changed redirect logic so that on a 302 or 303 status, if the method changes
