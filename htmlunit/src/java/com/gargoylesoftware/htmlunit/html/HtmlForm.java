@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
@@ -163,10 +164,10 @@ public class HtmlForm extends HtmlElement {
         catch( final MalformedURLException e ) {
             throw new IllegalArgumentException( "Not a valid url: " + action );
         }
-
+        final FormEncodingType encType = FormEncodingType.getInstance( this.getEnctypeAttribute() );
         final SubmitMethod method = SubmitMethod.getInstance( getAttributeValue( "method" ) );
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        return htmlPage.getWebClient().getPage( webWindow, url, method, parameterList );
+        return htmlPage.getWebClient().getPage( webWindow, url, encType, method, parameterList );
     }
 
 

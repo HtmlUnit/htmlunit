@@ -21,6 +21,9 @@
 				a src jar for the current build
 				Patch submitted by Brad Clarke
             </action>
+            <action type="update" dev="mbowler" id="803229 " due-to="Brad Clarke">
+				Added HtmlFileInput support. Patch submitted by Brad Clarke
+            </action>
 		</release>
 
 		    

@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.File;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,6 +59,7 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
+import org.apache.commons.httpclient.methods.MultipartPostMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.logging.Log;
@@ -98,7 +100,6 @@ public class HttpWebConnection extends WebConnection {
         super(webClient, proxyHost, proxyPort);
     }
 
-
     /**
      *  Submit a request and retrieve a response
      *
@@ -116,20 +117,42 @@ public class HttpWebConnection extends WebConnection {
             final Map requestHeaders )
         throws
             IOException {
+        return this.getResponse(url, FormEncodingType.URL_ENCODED, submitMethod, parameters, requestHeaders);
+    }
+
+    /**
+     *  Submit a request and retrieve a response
+     *
+     * @param  parameters Any parameters
+     * @param  url The url of the server
+     * @param  encType Encoding type of the form when done as a POST
+     * @param  submitMethod The submit method. Ie SubmitMethod.GET
+     * @param  requestHeaders Any headers that need to be put in the request.
+     * @return  See above
+     * @exception  IOException If an IO error occurs
+     */
+    public WebResponse getResponse(
+            final URL url,
+            final FormEncodingType encType,
+            final SubmitMethod submitMethod,
+            final List parameters,
+            final Map requestHeaders )
+        throws
+            IOException {
 
         final HttpClient httpClient = getHttpClientFor( url );
 
         try {
             long startTime, endTime;
 
-            HttpMethod httpMethod = makeHttpMethod( url, submitMethod, parameters, requestHeaders );
+            HttpMethod httpMethod = makeHttpMethod( url, encType, submitMethod, parameters, requestHeaders );
             startTime = System.currentTimeMillis();
             int responseCode = httpClient.executeMethod( httpMethod );
             endTime = System.currentTimeMillis();
             if( responseCode == 401 ) {    // Authentication required
                 final KeyValuePair pair = getCredentials( httpMethod, url );
                 if( pair != null ) {
-                    httpMethod = makeHttpMethod( url, submitMethod, parameters, requestHeaders );
+                    httpMethod = makeHttpMethod( url, encType, submitMethod, parameters, requestHeaders );
                     addCredentialsToHttpMethod( httpMethod, pair );
                     startTime = System.currentTimeMillis();
                     responseCode = httpClient.executeMethod( httpMethod );
@@ -200,6 +223,7 @@ public class HttpWebConnection extends WebConnection {
 
     private HttpMethod makeHttpMethod(
             final URL url,
+            final FormEncodingType encType,
             final SubmitMethod method,
             final List parameters,
             final Map requestHeaders )
@@ -224,7 +248,12 @@ public class HttpWebConnection extends WebConnection {
             }
         }
         else if( method == SubmitMethod.POST ) {
-            httpMethod = new PostMethod( path );
+            if (encType == FormEncodingType.URL_ENCODED) {
+                httpMethod = new PostMethod( path );
+            } 
+            else {
+                httpMethod = new MultipartPostMethod(path);
+            }
             final String queryString = url.getQuery();
             if( queryString != null ) {
                 httpMethod.setQueryString(queryString);
@@ -234,15 +263,35 @@ public class HttpWebConnection extends WebConnection {
             // Note that this has to be done in two loops otherwise it won't 
             // be able to support two elements with the same name.            
             iterator = parameters.iterator();
-            while( iterator.hasNext() ) {
-                final NameValuePair pair = ( NameValuePair )iterator.next();
-                ( ( PostMethod )httpMethod ).removeParameter( pair.getName(), pair.getValue() );
-            }
-            
-            iterator = parameters.iterator();
-            while( iterator.hasNext() ) {
-                final NameValuePair pair = ( NameValuePair )iterator.next();
-                ( ( PostMethod )httpMethod ).addParameter( pair.getName(), pair.getValue() );
+            if (encType == FormEncodingType.URL_ENCODED) {
+                while( iterator.hasNext() ) {
+                    final NameValuePair pair = ( NameValuePair )iterator.next();
+                    ( ( PostMethod )httpMethod ).removeParameter( pair.getName(), pair.getValue() );
+                }
+
+                iterator = parameters.iterator();
+                while( iterator.hasNext() ) {
+                    final NameValuePair pair = ( NameValuePair )iterator.next();
+                    ( ( PostMethod )httpMethod ).addParameter( pair.getName(), pair.getValue() );
+                }
+            } 
+            else {
+                iterator = parameters.iterator();
+                while (iterator.hasNext()) {
+                    final KeyValuePair pair = (KeyValuePair) iterator.next();
+                    if (pair instanceof KeyDataPair) {
+                        File f = (File) ((KeyDataPair)pair).getData();
+                        if (f.exists()){
+                            ((MultipartPostMethod) httpMethod).addParameter(pair.getName(), f);
+                        } 
+                        else {
+                            ((MultipartPostMethod) httpMethod).addParameter(pair.getName(), pair.getValue());
+                        }
+                    } 
+                    else {
+                        ((MultipartPostMethod) httpMethod).addParameter(pair.getName(), pair.getValue());
+                    }
+                }
             }
         }
         else {

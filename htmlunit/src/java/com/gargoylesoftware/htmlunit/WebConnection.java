@@ -103,6 +103,25 @@ public abstract class WebConnection {
         throws
             IOException;
 
+    /**
+     *  Submit a request and retrieve a response
+     *
+     * @param  parameters Any parameters
+     * @param  url The url of the server
+     * @param  encType Encoding type of the form when done as a POST
+     * @param  submitMethod The submit method. Ie SubmitMethod.GET
+     * @param  requestHeaders Any headers that need to be put into the request.
+     * @return  See above
+     * @exception  IOException If an IO error occurs
+     */
+    public abstract WebResponse getResponse(
+            final URL url,
+            final FormEncodingType encType,
+            final SubmitMethod submitMethod,
+            final List parameters,
+            final Map requestHeaders )
+        throws
+            IOException;
 
     /**
      * Return the web client

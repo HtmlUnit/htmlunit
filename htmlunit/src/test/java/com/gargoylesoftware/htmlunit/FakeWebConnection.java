@@ -110,11 +110,29 @@ public class FakeWebConnection extends WebConnection {
         super( webClient );
     }
 
+    /**
+     *  Submit a request to the processor
+     *
+     * @param  url The url of the server
+     * @param  method The submit method. Ie SubmitMethod.GET
+     * @param  parameters Any parameters
+     * @param  requestParameters Any headers that need to be put into the request.
+     * @return  See above
+     */
+    public WebResponse getResponse(
+        final URL url,
+        final SubmitMethod method,
+        final List parameters,
+        final Map requestParameters ) {
+        
+        return this.getResponse(url, FormEncodingType.URL_ENCODED, method, parameters, requestParameters);
+    }
 
     /**
      *  Submit a request and retrieve a response
      *
      * @param  url The url of the server
+     * @param  encType form encoding type to use for POST method
      * @param  method The submit method. Ie SubmitMethod.GET
      * @param  parameters Any parameters
      * @param  requestHeaders Any headers that need to be put into the request.
@@ -122,6 +140,7 @@ public class FakeWebConnection extends WebConnection {
      */
     public WebResponse getResponse(
             final URL url,
+            final FormEncodingType encType,
             final SubmitMethod method,
             final List parameters,
             final Map requestHeaders ) {
