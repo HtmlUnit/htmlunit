@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <classpathentry kind="src" path="src/java"/>
+    <classpathentry kind="var" path="JRE_LIB" rootpath="JRE_SRCROOT" sourcepath="JRE_SRC"/>
+    <classpathentry kind="lib" path="dist/lib/commons-httpclient.jar"/>
+    <classpathentry kind="lib" path="dist/lib/commons-logging.jar"/>
+    <classpathentry kind="lib" path="dist/lib/js.jar"/>
+    <classpathentry kind="lib" path="dist/lib/nekohtml.jar"/>
+    <classpathentry kind="lib" path="dist/lib/xercesImpl.jar"/>
+    <classpathentry kind="lib" path="dist/lib/xmlParserAPIs.jar"/>
+    <classpathentry kind="lib" path="build/lib/checkstyle-all.jar"/>
+    <classpathentry kind="lib" path="build/lib/gsbase.jar"/>
+    <classpathentry kind="lib" path="build/lib/junit.jar"/>
+    <classpathentry kind="output" path="build\HtmlUnit-eclipse\src"/>
+</classpath>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<document title="Tool support">
+
+<section>
+	<p>
+		The following information and/or files have been contributed
+	</p>
+</section>
+
+<section title="Eclipse">
+	<p>
+		The following eclipse project files have been contributed by
+		<a href="mailto:bclarke@booksys.com">Brad Clarke</a>
+		<ul>
+			<li><a href="tools/eclipse/.project">.project</a></li>
+			<li><a href="tools/eclipse/.classpath">.classpath</a></li>
+		</ul>
+	</p>
+
+</section>
+
+</document>

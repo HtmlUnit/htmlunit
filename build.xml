@@ -179,6 +179,10 @@
 		</fileset>
 	</copy>
 
+	<copy todir="build/${version}/docs/tools" >
+		<fileset dir="ide" />
+	</copy>
+
 	<copy todir="build/${version}/lib">
 		<fileset dir="dist/lib">
 			<include name="*.jar"/>
