@@ -119,8 +119,7 @@ public class HTMLParserTest extends WebTestCase {
         final List expectedAlerts = Arrays.asList(new String[]{"myForm"});
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        System.out.println(page.asXml());
+        loadPage(content, collectedAlerts);
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
