@@ -68,7 +68,6 @@ public final class ScriptFilter extends DefaultFilter {
     private StringBuffer scriptBuffer_;
     private StringBuffer newContentBuffer_;
     private String systemId_;
-    private int scriptCount_;
 
     /**
      *  Create an instance
@@ -103,7 +102,6 @@ public final class ScriptFilter extends DefaultFilter {
         scriptCharset_ = null;
         scriptBuffer_ = null;
         systemId_ = locator != null ? locator.getLiteralSystemId() : null;
-        scriptCount_ = 0;
         super.startDocument( locator, encoding, augmentations );
     }
 

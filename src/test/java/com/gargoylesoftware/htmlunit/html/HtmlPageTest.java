@@ -128,7 +128,7 @@ public class HtmlPageTest extends WebTestCase {
                 new URL( "http://www.gargoylesoftware.com" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
-        final HtmlInput input = ( HtmlInput )form.getInputByName( "textInput1" );
+        final HtmlInput input = form.getInputByName( "textInput1" );
         assertEquals( "name", "textInput1", input.getNameAttribute() );
 
         assertEquals( "value", "textInput1", input.getValueAttribute() );
@@ -165,7 +165,7 @@ public class HtmlPageTest extends WebTestCase {
                 new URL( "http://www.gargoylesoftware.com" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
-        final HtmlInput textInput = ( HtmlInput )form.getInputByName( "textInput1" );
+        final HtmlInput textInput = form.getInputByName( "textInput1" );
         textInput.setValueAttribute( "foo" );
 
         final HtmlSubmitInput button = ( HtmlSubmitInput )form.getInputByName( "submitInput1" );
@@ -230,7 +230,7 @@ public class HtmlPageTest extends WebTestCase {
         assertSame( "form1", form, page.getHtmlElementById( "form1" ) );
         assertSame( "form2", form, page.getHtmlElement( form.getElement() ) );
 
-        final HtmlInput input = ( HtmlInput )form.getInputByName( "textInput1" );
+        final HtmlInput input = form.getInputByName( "textInput1" );
         assertSame( "input1", input, form.getInputByName( "textInput1" ) );
         assertSame( "input2", input, page.getHtmlElement( input.getElement() ) );
 

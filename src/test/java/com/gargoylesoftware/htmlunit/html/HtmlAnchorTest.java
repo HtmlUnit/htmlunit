@@ -301,7 +301,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage )client.getPage(
                 new URL( "http://www.gargoylesoftware.com" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
-        final HtmlAnchor testAnchor = (HtmlAnchor)page.getAnchorByName("testJavascript");
+        final HtmlAnchor testAnchor = page.getAnchorByName("testJavascript");
         testAnchor.click();  // blows up here
     }
 }

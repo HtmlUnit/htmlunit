@@ -435,7 +435,7 @@ public class WebClientTest extends WebTestCase {
                 list.add(page);
                 return page;
             }
-        };
+        }
         final List collectedPageCreationItems = new ArrayList();
         client.setPageCreator( new CollectingPageCreator(collectedPageCreationItems) );
 
@@ -650,7 +650,7 @@ public class WebClientTest extends WebTestCase {
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
-        final HtmlElement button = (HtmlElement)page.getHtmlElementById("button1");
+        final HtmlElement button = page.getHtmlElementById("button1");
 
         final List expectedAlerts = Collections.singletonList("buttonPushed");
         collectedAlerts.clear();

@@ -141,7 +141,7 @@ public class HtmlFormTest extends WebTestCase {
             SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
-        final HtmlInput pushButton = ( HtmlInput )form.getInputByName( "button" );
+        final HtmlInput pushButton = form.getInputByName( "button" );
         assertNotNull(pushButton);
 
         try {
