@@ -7,18 +7,24 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1113487">
+                Guess content type for file content and file name when loading a file url.
+            </action>
+            <action type="update" dev="mguillem">
+                Parse responses of type "application/xml" as XmlPage.
+            </action>
             <action type="update" dev="mguillem" id="1101525" due-to="Hans Donner">
                 Fixed wrond urls expansion with "#".
-            </action>        
+            </action>
             <action type="update" dev="mguillem" id="1106319" due-to="Daniel Gredler">
                 JavaScript: improved window.execScript to execute JavaScript code.
-            </action>        
+            </action>       
             <action type="update" dev="mguillem" id="1109224" due-to="Hans Donner">
                 Use commons-codec's Base64. Marked custom Base64 as deprecated.
-            </action>        
+            </action>
             <action type="update" dev="mguillem" id="1002140" due-to="Daniel Gredler">
                 Fixed NullPointerException thrown in JavaScript by createElement('input')
-            </action>        
+            </action>
             <action type="update" dev="mguillem" id="1107432" due-to="Hans Donner">
                 Javascript: implemented innerText for html elements (read/write).
             </action>
@@ -35,16 +41,16 @@
             </action>          
             <action type="update" dev="yourgod">
                 A failure when setting a location from javascript now throws an exception
-            </action>           
+            </action>
             <action type="update" dev="yourgod" id="1104522" due-to="Daniel Gredler">
                 Added support for misc table methods in javascript
-            </action>        
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: added dummy implementation of window.setInterval and window.clearInterval doing nothing.
             </action>
             <action type="update" dev="yourgod" id="976471" due-to="David D. Kilzer">
                 syncronized javascript execution for multi-threaded testing
-            </action>        
+            </action>
             <action type="update" dev="yourgod" id="1088709">
                 parse application/xhtml+xml content type into HtmlPage
             </action>

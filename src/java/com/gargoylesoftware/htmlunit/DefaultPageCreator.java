@@ -90,7 +90,7 @@ public class DefaultPageCreator implements PageCreator {
         else if( contentType.equals("text/javascript") || contentType.equals("application/x-javascript") ) {
             newPage = createJavaScriptPage(webResponse, webWindow);
         }
-        else if( contentType.equals( "text/xml" ) ) {
+        else if (contentType.equals("text/xml") || contentType.equals("application/xml")) {
             newPage = createXmlPage(webResponse, webWindow);
         }
         else if( contentType.startsWith( "text/" ) ) {

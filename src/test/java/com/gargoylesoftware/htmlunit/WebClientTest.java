@@ -48,12 +48,14 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  *  Tests for WebClient
@@ -601,7 +603,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test loading a page with POST parameters.
+     * Test loading a file page
      * @throws Exception If something goes wrong.
      */
     public void testLoadFilePage() throws Exception {
@@ -625,6 +627,38 @@ public class WebClientTest extends WebTestCase {
         assertEquals("text/html", page.getWebResponse().getContentType());
         assertEquals(200, page.getWebResponse().getStatusCode());
         assertEquals("foo", page.getTitleText());
+    }
+
+    /**
+     * Test loading a file page with xml content.
+     * Regression test for bug 1113487.
+     * @throws Exception If something goes wrong.
+     */
+    public void testLoadFilePageXml() throws Exception {
+        final String xmlContent = "<?xml version='1.0' encoding='UTF-8'?>\n"
+            + "<dataset>\n"
+            + "<table name=\"USER\">\n"
+            + "<column>ID</column>\n"
+            + "<row>\n"
+            + "<value>116517</value>\n"
+            + "</row>\n"
+            + "</table>\n"
+            + "</dataset>";
+        final File currentDirectory = new File((new File("")).getAbsolutePath());
+        final File tmpFile = File.createTempFile("test", ".xml", currentDirectory);
+        tmpFile.deleteOnExit();
+        final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
+        FileUtils.writeStringToFile(tmpFile, xmlContent, encoding);
+
+        URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
+        
+        final WebClient client = new WebClient();
+        final XmlPage page = (XmlPage) client.getPage(fileURL);
+
+        assertEquals(xmlContent, page.getWebResponse().getContentAsString());
+        // "text/xml" or "application/xml", it doesn't matter
+        assertEquals("/xml", StringUtils.substring(page.getWebResponse().getContentType(), -4)); 
+        assertEquals(200, page.getWebResponse().getStatusCode());
     }
 
     /**
