@@ -2027,8 +2027,8 @@ public class DocumentTest extends WebTestCase {
 
          final List collectedAlerts = new ArrayList();
          client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-         System.out.println(page.asXml());
+         client.getPage(URL_FIRST);
+
          assertEquals( expectedAlerts, collectedAlerts );
     }
 }
