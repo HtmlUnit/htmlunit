@@ -329,7 +329,9 @@ public class WebClient {
     /**
      * Return a page.
      *
-     * @param  webWindow The window that the new page will be loaded into.
+     * @param  webWindow The window from which the load is initiated.  If target
+     * is not specified then this will also be the window into which the new page
+     * is loaded.
      * @param  url The url of the server
      * @param  target The name of the window where the page will be loaded.
      * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
