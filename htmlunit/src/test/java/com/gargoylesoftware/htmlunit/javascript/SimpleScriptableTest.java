@@ -48,6 +48,7 @@ import java.util.TreeSet;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -156,5 +157,22 @@ public class SimpleScriptableTest extends WebTestCase {
             }
         }
         return collection;
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetNonWritableProperty() throws Exception {
+        final String content
+             = "<html><head><title>foo</title></head><body onload='document.body=123456'>"
+             + "</body></html>";
+
+        try {
+            loadPage(content);
+            fail("Exception should have been thrown");
+        }
+        catch (final ScriptException e) {
+            // it's ok
+        }
     }
 }

@@ -158,13 +158,13 @@ public final class JavaScriptConfiguration {
             final Element functionElement = getElementByTypeAndName(classElement, type, typeName);
             if( functionElement != null ) {
                 if( booleanAttributeName == null ) {
-                    return getEnabledState(functionElement);
+                    return ENABLED;
                 }
                 else if( getBooleanAttribute(functionElement,booleanAttributeName ) )  {
-                    return getEnabledState(functionElement);
+                    return ENABLED;
                 }
                 else {
-                    return NOT_FOUND;
+                    return DISABLED;
                 }
             }
 
@@ -293,12 +293,6 @@ public final class JavaScriptConfiguration {
         }
         getLog().warn("Unexpected class ["+className+"]");
         return null;
-    }
-
-
-    private int getEnabledState( final Element element ) {
-        Assert.notNull("element", element);
-        return ENABLED;
     }
 
 

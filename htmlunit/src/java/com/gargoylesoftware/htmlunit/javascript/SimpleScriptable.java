@@ -51,6 +51,7 @@ import java.util.Map;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mozilla.javascript.Context;
 import org.mozilla.javascript.FunctionObject;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
@@ -459,27 +460,41 @@ public class SimpleScriptable extends ScriptableObject {
          // Some calls to put will happen during the initialization of the superclass.
          // At this point, we don't have enough information to do our own initialization
          // so we have to just pass this call through to the superclass.
-         if( domNode_ == null ) {
+         final SimpleScriptable simpleScriptable = (SimpleScriptable) start;
+         if (simpleScriptable.domNode_ == null ) {
              super.put(name, start, newValue);
              return;
          }
 
-         final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
+         final JavaScriptConfiguration configuration = simpleScriptable.getJavaScriptConfiguration();
          final int propertyNameState = configuration.getWritablePropertyNameState(getClass(), name);
-         final PropertyInfo info = (PropertyInfo)getPropertyMap().get(name);
 
-         if( propertyNameState == JavaScriptConfiguration.ENABLED ) {
+         if (propertyNameState == JavaScriptConfiguration.DISABLED) {
+             throw Context.reportRuntimeError("Property \"" + name + "\" is not writable for " + start + ". "
+                     + "Cant set it to: " + newValue);
+         }
+         else if( propertyNameState == JavaScriptConfiguration.ENABLED ) {
+             final PropertyInfo info = (PropertyInfo) simpleScriptable.getPropertyMap().get(name);
              if( info == null || info.getSetter() == null ) {
-                 getLog().debug("Setter not implemented for property ["+name+"]");
+                 throw Context.reportRuntimeError("Setter configured but not implemented for property \"" 
+                         + name + "\" for " + start + ". "
+                        + "Cant set it to: " + newValue);
              }
              else {
                  final Class parameterClass = info.getSetter().getParameterTypes()[0];
-                 if( parameterClass == "".getClass() ) {
-                     newValue = newValue.toString();
+                 if( parameterClass == String.class) {
+                     newValue = Context.toString(newValue);
+                 }
+                 else if (Integer.TYPE.equals(parameterClass)) {
+                     newValue = new Integer((new Double(Context.toNumber(newValue))).intValue());
+                 }
+                 else if (Boolean.TYPE.equals(parameterClass)) {
+                     newValue = Boolean.valueOf(Context.toBoolean(newValue));
                  }
                  try {
                      info.getSetter().invoke(
-                        findMatchingScriptable(start, info.getSetter()), new Object[]{ newValue } );
+                             simpleScriptable.findMatchingScriptable(start, info.getSetter()), 
+                             new Object[]{ newValue } );
                  }
                  catch( final InvocationTargetException e ) {
                      throw new ScriptException(e.getTargetException());
@@ -490,6 +505,8 @@ public class SimpleScriptable extends ScriptableObject {
              }
          }
          else {
+             getLog().debug("No configured setter \"" + name + "\" found for " 
+                     + start + ". Setting it as pure javascript property.");
              super.put(name, start, newValue);
          }
      }
