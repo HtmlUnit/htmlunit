@@ -43,7 +43,6 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -102,9 +101,7 @@ public class HtmlAreaTest extends WebTestCase {
 
         final WebClient client = createWebClient("");
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlArea area = ( HtmlArea )page.getHtmlElementById( "third" );
 
         // Test that the correct value is being passed back up to the server
@@ -122,9 +119,7 @@ public class HtmlAreaTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlArea area = ( HtmlArea )page.getHtmlElementById( "second" );
 
         final HtmlPage thirdPage = ( HtmlPage )area.click();
@@ -141,9 +136,7 @@ public class HtmlAreaTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlArea area = ( HtmlArea )page.getHtmlElementById( "second" );
 
         final HtmlPage thirdPage = ( HtmlPage )area.click();

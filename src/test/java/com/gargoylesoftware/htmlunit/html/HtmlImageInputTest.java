@@ -38,13 +38,10 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -75,15 +72,9 @@ public class HtmlImageInputTest extends WebTestCase {
                  + "<input type='image' name='button' value='foo'/>"
                  + "<input type='image' name='anotherButton' value='foo'/>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
+        
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlImageInput imageInput = (HtmlImageInput)form.getInputByName("button");
@@ -112,15 +103,9 @@ public class HtmlImageInputTest extends WebTestCase {
                  + "<input type='image' name='button' value='foo'/>"
                  + "<input type='image' name='anotherButton' value='foo'/>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlImageInput imageInput = (HtmlImageInput)form.getInputByName("button");

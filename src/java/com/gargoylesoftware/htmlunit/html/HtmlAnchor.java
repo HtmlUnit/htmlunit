@@ -39,14 +39,11 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
-import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 
 /**
  *  Wrapper for the html element "a"
@@ -101,14 +98,11 @@ public class HtmlAnchor extends FocusableElement {
                     href, "javascript url", true, this ).getNewPage();
             }
             else {
-                final URL url = page.getFullyQualifiedUrl( href );
-                final SubmitMethod submitMethod = SubmitMethod.GET;
-                final List parameters = Collections.EMPTY_LIST;
-
-                final WebWindow webWindow = page.getEnclosingWindow();
-                return page.getWebClient().getPage( webWindow, url,
-                    page.getResolvedTarget(getTargetAttribute()),
-                    submitMethod, parameters );
+                final URL url = page.getFullyQualifiedUrl(href);
+                return page.getWebClient().getPage(
+                        page.getEnclosingWindow(),
+                        page.getResolvedTarget(getTargetAttribute()),
+                        new WebRequestSettings(url));
             }
         }
         else {

@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -126,9 +125,8 @@ public class ScriptEngineTest extends WebTestCase {
         webConnection.setDefaultResponse( html );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = (HtmlPage) client.getPage(new WebRequestSettings(URL_GARGOYLE)
+                .setSubmitMethod(SubmitMethod.POST));
         return page;
     }
 }

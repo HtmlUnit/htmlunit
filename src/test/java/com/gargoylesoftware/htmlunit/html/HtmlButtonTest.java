@@ -43,10 +43,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -79,19 +77,8 @@ public class HtmlButtonTest extends WebTestCase {
                  + "    <button type='button' name='button' id='button' "
                  + "onClick='alert(\"foo\")'>Push me</button>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
-        client.setAlertHandler(alertHandler);
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
 
         final HtmlPage secondPage = (HtmlPage)button.click();
@@ -113,19 +100,8 @@ public class HtmlButtonTest extends WebTestCase {
                  + "    <button type='submit' name='button' id='button' "
                  + "onClick='alert(\"foo\")'>Push me</button>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
-        client.setAlertHandler(alertHandler);
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
 
         final HtmlPage secondPage = (HtmlPage)button.click();
@@ -147,19 +123,8 @@ public class HtmlButtonTest extends WebTestCase {
                  + "    <button type='reset' name='button' id='button' "
                  + "onClick='alert(\"foo\")'>Push me</button>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
-        client.setAlertHandler(alertHandler);
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
 
         final HtmlPage secondPage = (HtmlPage)button.click();
@@ -192,14 +157,7 @@ public class HtmlButtonTest extends WebTestCase {
                  + "<isindex prompt='Enter some text' id='isindex1'>"
                  + "<button type='reset' id='resetButton' value='pushme'/>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
         final HtmlButton resetInput = (HtmlButton)page.getHtmlElementById( "resetButton" );
 
@@ -248,19 +206,8 @@ public class HtmlButtonTest extends WebTestCase {
                  + "    <button type='submit' name='button' id='button' value='foo'"
                  + "    >Push me</button>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
-        client.setAlertHandler(alertHandler);
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
 
         final HtmlPage secondPage = (HtmlPage)button.click();
@@ -272,7 +219,7 @@ public class HtmlButtonTest extends WebTestCase {
         final List expectedParameters = Arrays.asList( new Object[]{
             new KeyValuePair("button", "foo")
         } );
-        final List collectedParameters = webConnection.getLastParameters();
+        final List collectedParameters = getMockConnection(secondPage).getLastParameters();
 
         assertEquals( expectedParameters, collectedParameters );
     }
@@ -312,9 +259,7 @@ public class HtmlButtonTest extends WebTestCase {
             URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
         assertEquals( expectedType, button.getTypeAttribute() );
         

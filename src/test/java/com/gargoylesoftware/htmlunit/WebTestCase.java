@@ -93,7 +93,7 @@ public abstract class WebTestCase extends BaseTestCase {
             URL_FIRST = new URL("http://first");
             URL_SECOND = new URL("http://second");
             URL_THIRD = new URL("http://third");
-            URL_GARGOYLE = new URL("http://www.gargoylesoftware.com");
+            URL_GARGOYLE = new URL("http://www.gargoylesoftware.com/");
         }
         catch( final MalformedURLException e ) {
             // This is theoretically impossible.
@@ -115,7 +115,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @return The new page.
      * @throws Exception if something goes wrong.
      */
-    protected final HtmlPage loadPage( final String html ) throws Exception {
+    protected static final HtmlPage loadPage( final String html ) throws Exception {
         return loadPage(html, null);
     }
 
@@ -136,7 +136,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @return The new page.
      * @throws Exception If something goes wrong.
      */
-    protected final HtmlPage loadPage( final String html, final List collectedAlerts )
+    protected static final HtmlPage loadPage( final String html, final List collectedAlerts )
         throws Exception {
 
         final WebClient client = new WebClient();
@@ -271,6 +271,15 @@ public abstract class WebTestCase extends BaseTestCase {
         sb.append(baseJS);
         sb.append("</script>\n");
         return sb.toString();
+    }
+    /**
+     * Convenience method to pull the MockWebConnection out of an HtmlPage created with
+     * the loadPage method. 
+     * @param page HtmlPage to get the connection from 
+     * @return the MockWebConnection that served this page
+     */
+    protected static final MockWebConnection getMockConnection(final HtmlPage page) {
+        return (MockWebConnection) page.getWebClient().getWebConnection();
     }
 }
 

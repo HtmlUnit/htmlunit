@@ -41,7 +41,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,8 +59,8 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.StatusHandler;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -355,8 +354,7 @@ public class Window extends SimpleScriptable {
             
             getLog().debug("window.location=" + newLocation);
 
-            webWindow_.getWebClient().getPage(
-                webWindow_, url, SubmitMethod.GET, Collections.EMPTY_LIST );
+            webWindow_.getWebClient().getPage(webWindow_, new WebRequestSettings(url));
         }
         catch( final MalformedURLException e ) {
             getLog().error("jsSet_location(\""+newLocation+"\") Got MalformedURLException", e);

@@ -45,7 +45,6 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -77,15 +76,9 @@ public class HtmlSubmitInputTest extends WebTestCase {
                  + "<input type='suBMit' name='button' value='foo'/>"
                  + "<input type='submit' name='anotherButton' value='foo'/>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
+        
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput submitInput = (HtmlSubmitInput)form.getInputByName("button");
@@ -107,19 +100,9 @@ public class HtmlSubmitInputTest extends WebTestCase {
                  + "<form id='form1' onSubmit='alert(\"bar\")'>"
                  + "    <input type='submit' name='button' value='foo' onClick='alert(\"foo\")'/>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
-        client.setAlertHandler(alertHandler);
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
         final HtmlSubmitInput submitInput = (HtmlSubmitInput)form.getInputByName("button");
 
@@ -148,15 +131,12 @@ public class HtmlSubmitInputTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
 
         client.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlSubmitInput input = (HtmlSubmitInput)firstPage.getHtmlElementById("button1");
         final HtmlPage secondPage = (HtmlPage)input.click();
         assertEquals("Second", secondPage.getTitleText());

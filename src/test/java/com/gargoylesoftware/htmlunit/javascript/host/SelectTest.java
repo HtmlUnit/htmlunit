@@ -42,11 +42,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -275,18 +273,9 @@ public class SelectTest extends WebTestCase {
             + "<OPTION value='A'>111</OPTION>"
             + "<OPTION value='B'>222</OPTION>"
             + "</SELECT></form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        
         assertEquals("first", page.getTitleText());
         assertEquals( Collections.singletonList("true"), collectedAlerts );
     }
@@ -313,18 +302,8 @@ public class SelectTest extends WebTestCase {
             + "    </select>"
             + "</form>"
             + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("first", page.getTitleText());
         assertEquals( Collections.singletonList("One"), collectedAlerts );
     }

@@ -39,13 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -76,15 +71,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
                   + "<form id='form1'>"
                   + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>"
                   + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
         final HtmlCheckBoxInput checkBox = ( HtmlCheckBoxInput )page.getHtmlElementById( "checkbox" );
 
         assertFalse( checkBox.isChecked());
@@ -106,19 +93,8 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
                   + "    <input type='checkbox' name='checkbox' id='checkbox' "
                   + "onClick='alert(\"foo\")'>Check me</input>"
                   + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
-        client.setAlertHandler(alertHandler);
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlCheckBoxInput checkBox = ( HtmlCheckBoxInput )page.getHtmlElementById( "checkbox" );
 
         final HtmlPage secondPage = (HtmlPage)checkBox.click();
@@ -145,15 +121,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
                   + "    <input type='checkbox' name='checkbox' id='checkbox' "
                   + "onClick='document.form1.submit()'>Check me</input>"
                   + "</form></body></html>";
-         final WebClient client = new WebClient();
-
-         final MockWebConnection webConnection = new MockWebConnection( client );
-         webConnection.setDefaultResponse( htmlContent );
-         client.setWebConnection( webConnection );
-
-         final HtmlPage page = ( HtmlPage )client.getPage(
-                 URL_GARGOYLE,
-                 SubmitMethod.POST, Collections.EMPTY_LIST );
+         final HtmlPage page = loadPage(htmlContent);
          final HtmlCheckBoxInput checkBox = ( HtmlCheckBoxInput )page.getHtmlElementById( "checkbox" );
 
          final HtmlPage secondPage = (HtmlPage)checkBox.click();

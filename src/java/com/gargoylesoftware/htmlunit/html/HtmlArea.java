@@ -40,12 +40,12 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collections;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
@@ -104,12 +104,13 @@ public class HtmlArea extends FocusableElement {
                 throw new IllegalStateException(
                     "Not a valid url: " + getHrefAttribute() );
             }
-
-            final SubmitMethod method = SubmitMethod.getInstance( getAttributeValue( "method" ) );
+            final WebRequestSettings params = new WebRequestSettings(url)
+                    .setSubmitMethod(SubmitMethod.getInstance(getAttributeValue("method")));
             final WebWindow webWindow = enclosingPage.getEnclosingWindow();
-            return webClient.getPage( webWindow, url,
-                enclosingPage.getResolvedTarget(getTargetAttribute()), method,
-                Collections.EMPTY_LIST );
+            return webClient.getPage(
+                    webWindow,
+                    enclosingPage.getResolvedTarget(getTargetAttribute()),
+                    params);
         }
         else {
             return defaultPage;

@@ -37,20 +37,16 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import junit.framework.Test;
-import junit.framework.TestSuite;
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 
 
@@ -136,9 +132,9 @@ public class DisabledElementTest extends WebTestCase {
      * Tests that the <code>isDisabled()</code> method returns <code>false</code> when the <code>disabled</code>
      * attribute does not exist.
      *
-     * @throws IOException If the test fails
+     * @throws Exception If the test fails
      */
-    public void testNoDisabledAttribute() throws IOException {
+    public void testNoDisabledAttribute() throws Exception {
         executeDisabledTest("", false);
     }
 
@@ -147,9 +143,9 @@ public class DisabledElementTest extends WebTestCase {
      * Tests that the <code>isDisabled()</code> method returns <code>true</code> when the <code>disabled</code>
      * attribute exists and is blank.
      *
-     * @throws IOException If the test fails
+     * @throws Exception If the test fails
      */
-    public void testBlankDisabledAttribute() throws IOException {
+    public void testBlankDisabledAttribute() throws Exception {
         executeDisabledTest("disabled=''", true);
     }
 
@@ -158,9 +154,9 @@ public class DisabledElementTest extends WebTestCase {
      * Tests that the <code>isDisabled()</code> method returns <code>false</code> when the <code>disabled</code>
      * attribute exists and is <em>not</em> blank.
      *
-     * @throws IOException If the test fails
+     * @throws Exception If the test fails
      */
-    public void testPopulatedDisabledAttribute() throws IOException {
+    public void testPopulatedDisabledAttribute() throws Exception {
         executeDisabledTest("disabled='disabled'", true);
     }
 
@@ -170,21 +166,15 @@ public class DisabledElementTest extends WebTestCase {
      *
      * @param disabledAttribute The definition of the <code>disabled</code> attribute
      * @param expectedIsDisabled The expected return value of the <code>isDisabled()</code> method
-     * @throws IOException If test fails
+     * @throws Exception If test fails
      */
     private void executeDisabledTest(final String disabledAttribute, final boolean expectedIsDisabled)
-            throws IOException {
+            throws Exception {
 
         final String htmlContent = MessageFormat.format(htmlContent_, new String[]{disabledAttribute});
-        final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final MockWebConnection webConnection = new MockWebConnection(client);
-        webConnection.setDefaultResponse(htmlContent);
-        client.setWebConnection(webConnection);
-
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final DisabledElement element = (DisabledElement) form.getHtmlElementById("element1");

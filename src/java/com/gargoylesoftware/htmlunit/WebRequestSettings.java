@@ -35,65 +35,85 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
 
 /**
- *  Tests for HtmlElement
- *
- * @version  $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * Parameter object for making web requests
+ * 
+ * @author Brad Clarke
+ * @version $Revision$
  */
-public class HtmlElementTest extends WebTestCase {
-    /**
-     *  Create an instance
-     *
-     * @param  name The name of the test
-     */
-    public HtmlElementTest( final String name ) {
-        super( name );
-    }
-
+public class WebRequestSettings {
+    private URL url_;
+    private SubmitMethod submitMethod_ = SubmitMethod.GET;
+    private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
+    private List requestParameters_ = Collections.EMPTY_LIST;
 
     /**
-     * @throws Exception if the test fails
+     * @param target The URL for this request
      */
-    public void testGetEnclosingForm() throws Exception {
-        final String htmlContent = ""
-            + "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<table><tr><td><input type='text' id='foo'/></td></tr></table>"
-            + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
-
-        final HtmlInput input = (HtmlInput) form.getHtmlElementById("foo");
-        assertSame(form, input.getEnclosingForm());
+    public WebRequestSettings(final URL target) {
+        this.url_ = target;
     }
-
+    /**
+     * @return the URL
+     */
+    public URL getURL() {
+        return url_;
+    }
+    /**
+     * @param url The new URL
+     * @return This object
+     */
+    public WebRequestSettings setURL(final URL url) {
+        this.url_ = url;
+        return this;
+    }
 
     /**
-     * @throws Exception if the test fails
+     * @return Returns the encodingType.
      */
-    public void testAsText_WithComments() throws Exception {
-        final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<p id='p1'>foo<!--bar--></p>"
-                 + "</body></html>";
-        final HtmlPage page = loadPage(htmlContent);
-        final HtmlElement element = page.getHtmlElementById("p1");
-        assertEquals("foo", element.asText());
+    public FormEncodingType getEncodingType() {
+        return encodingType_;
     }
-
-
     /**
+     * @param encodingType The encodingType to set.
+     * @return This object
      */
-    public void testConstants() {
-        assertEquals( "", HtmlElement.ATTRIBUTE_NOT_DEFINED );
-        assertEquals( "", HtmlElement.ATTRIBUTE_VALUE_EMPTY );
-        assertTrue( "Not the same object",
-            HtmlElement.ATTRIBUTE_NOT_DEFINED != HtmlElement.ATTRIBUTE_VALUE_EMPTY );
+    public WebRequestSettings setEncodingType(final FormEncodingType encodingType) {
+        this.encodingType_ = encodingType;
+        return this;
     }
-
+    /**
+     * @return Returns the requestParameters.
+     */
+    public List getRequestParameters() {
+        return requestParameters_;
+    }
+    /**
+     * @param requestParameters The requestParameters to set.
+     * @return This object
+     */
+    public WebRequestSettings setRequestParameters(final List requestParameters) {
+        this.requestParameters_ = requestParameters;
+        return this;
+    }
+    /**
+     * @return Returns the submitMethod.
+     */
+    public SubmitMethod getSubmitMethod() {
+        return submitMethod_;
+    }
+    /**
+     * @param submitMethod The submitMethod to set.
+     * @return This object
+     */
+    public WebRequestSettings setSubmitMethod(final SubmitMethod submitMethod) {
+        this.submitMethod_ = submitMethod;
+        return this;
+    }
 }

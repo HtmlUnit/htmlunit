@@ -86,7 +86,7 @@ public class LocationTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
-        final List expectedAlerts = Collections.singletonList("http://www.gargoylesoftware.com");
+        final List expectedAlerts = Collections.singletonList(URL_GARGOYLE.toExternalForm());
         assertEquals( expectedAlerts, collectedAlerts );
     }
     
@@ -153,7 +153,7 @@ public class LocationTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
-        final List expectedAlerts = Collections.singletonList("http://www.gargoylesoftware.com");
+        final List expectedAlerts = Collections.singletonList(URL_GARGOYLE.toExternalForm());
         assertEquals( expectedAlerts, collectedAlerts );
     }
     

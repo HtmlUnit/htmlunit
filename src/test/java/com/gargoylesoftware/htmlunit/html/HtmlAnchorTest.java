@@ -76,21 +76,15 @@ public class HtmlAnchorTest extends WebTestCase {
                  + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>"
                  + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>"
                  + "</body></html>";
-        final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
 
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = ( HtmlPage )anchor.click();
 
         final List expectedParameters = Collections.EMPTY_LIST;
+        final MockWebConnection webConnection = getMockConnection(secondPage);
 
         assertEquals( "url", "http://www.foo2.com",
             secondPage.getWebResponse().getUrl().toExternalForm() );
@@ -121,8 +115,10 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage secondPage = ( HtmlPage )anchor.click();
 
         // The url shouldn't contain the anchor since that isn't sent to the server
-        assertEquals( "url", "http://www.gargoylesoftware.com/",
-            secondPage.getWebResponse().getUrl().toExternalForm() );
+        assertEquals("url", URL_GARGOYLE.toExternalForm(), secondPage
+                .getWebResponse()
+                .getUrl()
+                .toExternalForm());
     }
 
 
@@ -155,9 +151,7 @@ public class HtmlAnchorTest extends WebTestCase {
             Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -198,9 +192,7 @@ public class HtmlAnchorTest extends WebTestCase {
             Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -234,9 +226,7 @@ public class HtmlAnchorTest extends WebTestCase {
         webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = ( HtmlPage )client.getPage(URL_GARGOYLE);
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -265,17 +255,9 @@ public class HtmlAnchorTest extends WebTestCase {
                  + "<a href='javascript:alert(\"clicked\")' id='a2'>link to foo2</a>"
                  + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>"
                  + "</body></html>";
-        final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -308,9 +290,7 @@ public class HtmlAnchorTest extends WebTestCase {
         webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = ( HtmlPage )client.getPage(URL_GARGOYLE);
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -337,17 +317,8 @@ public class HtmlAnchorTest extends WebTestCase {
                  + "onclick=\"return false;\">Test Link </a>"
                  + "<input type=\"submit\" value=\"Login\" "
                  + "name=\"loginButton\"></form></body></html>";
-        final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
         final HtmlAnchor testAnchor = page.getAnchorByName("testJavascript");
         testAnchor.click();  // blows up here
     }

@@ -37,12 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.Collections;
-
 import org.mozilla.javascript.ScriptableObject;
 
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
@@ -68,10 +64,7 @@ public class HtmlTableRowTest extends WebTestCase {
             + "<td id='cell' width='20'><input type='text' id='foo'/></td>"
             + "</tr></table>" + "</body></html>";
 
-    private final WebClient client_ = new WebClient();
-
-    private final MockWebConnection webConnection_ = new MockWebConnection(
-            client_);
+    private WebClient client_;
 
     private HtmlPage page_;
     private HtmlTable table_;
@@ -83,11 +76,9 @@ public class HtmlTableRowTest extends WebTestCase {
 
     /** @see junit.framework.TestCase#setUp() */
     public void setUp() throws Exception {
-        webConnection_.setDefaultResponse(htmlContent);
-        client_.setWebConnection(webConnection_);
-
-        page_ = (HtmlPage) client_.getPage(URL_GARGOYLE, SubmitMethod.POST,
-                Collections.EMPTY_LIST);
+        page_ = loadPage(htmlContent);
+        client_ = page_.getWebClient();
+        
         table_ = (HtmlTable) page_.getHtmlElementById("table");
         tbody_ = (HtmlTableBody) table_.getFirstChild();
         row_ = table_.getRow(0);
