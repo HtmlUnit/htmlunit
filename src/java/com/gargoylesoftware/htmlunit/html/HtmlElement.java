@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author David D. Kilzer
  */
 public abstract class HtmlElement extends DomNode {
 
@@ -105,7 +106,7 @@ public abstract class HtmlElement extends DomNode {
      */
     public final String getAttributeValue( final String attributeName ) {
 
-        String value = (String)attributes_.get(attributeName);
+        String value = (String)attributes_.get(attributeName.toLowerCase());
 
         //return value != null ? value : ATTRIBUTE_NOT_DEFINED;
         if(value != null) {
@@ -130,11 +131,11 @@ public abstract class HtmlElement extends DomNode {
         if(attributeValue.length() == 0) {
             attributeValue = ATTRIBUTE_VALUE_EMPTY;
         }
-        boolean isId = attributeName.equals("id");
+        boolean isId = attributeName.equalsIgnoreCase("id");
         if (isId) {
             getPage().removeIdElement(this);
         }
-        attributes_.put(attributeName, attributeValue);
+        attributes_.put(attributeName.toLowerCase(), attributeValue);
         if (isId) {
             getPage().addIdElement(this);
         }
@@ -142,13 +143,13 @@ public abstract class HtmlElement extends DomNode {
 
     /**
      * remove an attribute from this element
-     * @param name the attribute name
+     * @param attributeName the attribute attributeName
      */
-    public final void removeAttribute(String name) {
-        if (name.equals("id")) {
+    public final void removeAttribute(String attributeName) {
+        if (attributeName.equalsIgnoreCase("id")) {
             getPage().removeIdElement(this);
         }
-        attributes_.remove(name);
+        attributes_.remove(attributeName.toLowerCase());
     }
 
     /**
@@ -160,7 +161,7 @@ public abstract class HtmlElement extends DomNode {
      * @return true if the attribute is defined
      */
     public boolean isAttributeDefined( final String attributeName ) {
-        return attributes_.get(attributeName) != null;
+        return attributes_.get(attributeName.toLowerCase()) != null;
     }
 
     /**
