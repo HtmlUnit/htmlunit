@@ -46,7 +46,9 @@ import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowEvent;
+import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.FakeWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -62,6 +64,7 @@ import java.util.List;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
+ * @author  David K. Taylor
  */
 public class WindowTest extends WebTestCase {
     /**
@@ -147,7 +150,7 @@ public class WindowTest extends WebTestCase {
 
         final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("link");
         final HtmlPage secondPage = (HtmlPage)anchor.click();
-        assertSame( firstPage, secondPage );
+        assertNotSame( firstPage, secondPage );
 
         // Expecting contentChanged, opened, contentChanged
         assertEquals( 3, eventCatcher.getEventCount() );
@@ -168,6 +171,134 @@ public class WindowTest extends WebTestCase {
 
         assertEquals(
             Collections.singletonList("MyNewWindow"),
+            collectedAlerts);
+    }
+
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testOpenWindow_base() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final String firstContent
+             = "<html><head><title>First</title><base target='MyNewWindow'></head><body>"
+             + "<form name='form1'>"
+             + "    <a id='link' href='http://second'>Click me</a>"
+             + "</form>"
+             + "</body></html>";
+        final String secondContent
+             = "<html><head><title>Second</title></head><body>"
+             + "<script>alert(self.name)</script>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://second"), secondContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
+                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals( "First", firstPage.getTitleText() );
+        final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
+        assertEquals( firstWebWindow, firstWebWindow.getTopWindow() );
+
+        final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("link");
+        final HtmlPage secondPage = (HtmlPage)anchor.click();
+        assertEquals( "Second", secondPage.getTitleText() );
+        assertNotSame( firstPage, secondPage );
+
+        final WebWindow secondWebWindow = secondPage.getEnclosingWindow();
+        assertNotSame( firstWebWindow, secondWebWindow );
+        assertEquals( "MyNewWindow", secondWebWindow.getName() );
+        assertEquals( secondWebWindow, secondWebWindow.getTopWindow() );
+
+        assertEquals(
+            Collections.singletonList("MyNewWindow"),
+            collectedAlerts);
+    }
+
+
+    /**
+     * _blank is a magic name.  If we call open(url, '_blank') then a new
+     * window must be loaded.
+     * @throws Exception If the test fails
+     */
+    public void testOpenWindow_blank() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final String firstContent
+             = "<html><head><title>First</title></head><body>"
+             + "  <iframe name='secondFrame' id='secondFrame' src='http://second' />"
+             + "</body></html>";
+        final String secondContent
+             = "<html><head><title>Second</title></head><body>"
+             + "  <a id='link' "
+             + "onClick='open(\"http://third\", \"_blank\").focus(); '>"
+             + "Click me</a>"
+             + "</body></html>";
+        final String thirdContent
+             = "<html><head><title>Third</title></head><body>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://second"), secondContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://third"), thirdContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
+            new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals( "First", firstPage.getTitleText() );
+        final WebWindow firstWindow = firstPage.getEnclosingWindow();
+
+        final HtmlInlineFrame secondFrame =
+            (HtmlInlineFrame)firstPage.getHtmlElementById("secondFrame");
+        final HtmlPage secondPage = (HtmlPage)secondFrame.getEnclosedPage();
+        assertEquals( "Second", secondPage.getTitleText() );
+        try {
+            assertEquals(secondFrame,
+                webClient.getWebWindowByName( "secondFrame" ));
+            // Expected path
+        }
+        catch (WebWindowNotFoundException exception) {
+            fail( "Expected secondFrame would be found before click." );
+        }
+        final HtmlAnchor anchor = (HtmlAnchor)secondPage.getHtmlElementById("link");
+        final HtmlPage thirdPage = (HtmlPage)anchor.click();
+        assertEquals( "Third", thirdPage.getTitleText() );
+        final WebWindow thirdWindow = thirdPage.getEnclosingWindow();
+        assertNotSame( firstWindow, thirdWindow );
+
+        assertEquals( "", thirdWindow.getName() );
+
+        assertEquals( thirdWindow, thirdWindow.getTopWindow() );
+        try {
+            assertEquals(secondFrame,
+                webClient.getWebWindowByName( "secondFrame" ));
+            // Expected path
+        }
+        catch (WebWindowNotFoundException exception) {
+            fail( "Expected secondFrame would be found after click." );
+        }
+
+        assertEquals(
+            Collections.EMPTY_LIST,
             collectedAlerts);
     }
 
@@ -223,6 +354,169 @@ public class WindowTest extends WebTestCase {
 
 
     /**
+     * _top is a magic name.  If we call open(url, '_top') then the top level
+     * window must be reloaded.
+     * @throws Exception If the test fails.
+     */
+    public void testOpenWindow_top() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title></head><body>"
+             + "  <iframe name='secondFrame' id='secondFrame' src='http://second' />"
+             + "</body></html>";
+        final String secondContent
+             = "<html><head><title>Second</title></head><body>"
+             + "  <iframe name='thirdFrame' id='thirdFrame' src='http://third' />"
+             + "</body></html>";
+        final String thirdContent
+             = "<html><head><title>Third</title></head><body>"
+             + "    <a id='link' onClick='open(\"http://fourth\", \"_top\"); "
+             + "return false;'>Click me</a>"
+             + "</body></html>";
+        final String fourthContent
+             = "<html><head><title>Fourth</title></head><body></body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://second"), secondContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://third"), thirdContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://fourth"), fourthContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
+            new URL( "http://first" ), SubmitMethod.POST,
+            Collections.EMPTY_LIST );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
+        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlInlineFrame secondFrame =
+            (HtmlInlineFrame)firstPage.getHtmlElementById("secondFrame");
+        final HtmlPage secondPage = (HtmlPage)secondFrame.getEnclosedPage();
+        assertEquals( "Second", secondPage.getTitleText() );
+        final HtmlInlineFrame thirdFrame =
+            (HtmlInlineFrame)secondPage.getHtmlElementById("thirdFrame");
+        final HtmlPage thirdPage = (HtmlPage)thirdFrame.getEnclosedPage();
+        assertEquals( "Third", thirdPage.getTitleText() );
+
+        assertSame( webClient.getCurrentWindow(), firstWebWindow);
+        assertNotSame( firstWebWindow, secondPage );
+
+        final HtmlAnchor anchor =
+            (HtmlAnchor)thirdPage.getHtmlElementById("link");
+        final HtmlPage fourthPage = (HtmlPage)anchor.click();
+        final WebWindow fourthWebWindow = fourthPage.getEnclosingWindow();
+        assertSame( firstWebWindow, fourthWebWindow );
+        assertSame( fourthWebWindow, fourthWebWindow.getTopWindow() );
+        try {
+            webClient.getWebWindowByName( "secondFrame" );
+            fail( "Did not expect secondFrame to still exist after click." );
+        }
+        catch (WebWindowNotFoundException exception) {
+            // Expected path
+        }
+        try {
+            webClient.getWebWindowByName( "thirdFrame" );
+            fail( "Did not expect thirdFrame to still exist after click." );
+        }
+        catch (WebWindowNotFoundException exception) {
+            // Expected path
+        }
+    }
+
+
+    /**
+     * _parent is a magic name.  If we call open(url, '_parent') then the
+     * parent window must be reloaded.
+     * @throws Exception If the test fails.
+     */
+    public void testOpenWindow_parent() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title></head><body>"
+             + "  <iframe name='secondFrame' id='secondFrame' src='http://second' />"
+             + "</body></html>";
+        final String secondContent
+             = "<html><head><title>Second</title></head><body>"
+             + "  <iframe name='thirdFrame' id='thirdFrame' src='http://third' />"
+             + "</body></html>";
+        final String thirdContent
+             = "<html><head><title>Third</title></head><body>"
+             + "    <a id='link' onClick='open(\"http://fourth\", \"_parent\"); "
+             + "return false;'>Click me</a>"
+             + "</body></html>";
+        final String fourthContent
+             = "<html><head><title>Fourth</title></head><body></body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://second"), secondContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://third"), thirdContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://fourth"), fourthContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
+            new URL( "http://first" ), SubmitMethod.POST,
+            Collections.EMPTY_LIST );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
+        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlInlineFrame secondFrame =
+            (HtmlInlineFrame)firstPage.getHtmlElementById("secondFrame");
+        final HtmlPage secondPage = (HtmlPage)secondFrame.getEnclosedPage();
+        assertEquals( "Second", secondPage.getTitleText() );
+        final HtmlInlineFrame thirdFrame =
+            (HtmlInlineFrame)secondPage.getHtmlElementById("thirdFrame");
+        final HtmlPage thirdPage = (HtmlPage)thirdFrame.getEnclosedPage();
+        assertEquals( "Third", thirdPage.getTitleText() );
+
+
+        assertSame( webClient.getCurrentWindow(), firstWebWindow);
+        assertNotSame( firstWebWindow, secondFrame );
+
+        final HtmlAnchor anchor =
+            (HtmlAnchor)thirdPage.getHtmlElementById("link");
+        final HtmlPage fourthPage = (HtmlPage)anchor.click();
+        final WebWindow fourthWebWindow = fourthPage.getEnclosingWindow();
+        assertSame( secondFrame, fourthWebWindow );
+        try {
+            final WebWindow namedWindow = webClient.getWebWindowByName( "secondFrame" );
+            assertSame( namedWindow.getEnclosedPage(), fourthPage);
+            // Expected path
+        }
+        catch (WebWindowNotFoundException exception) {
+            fail( "Expected secondFrame would be found after click." );
+        }
+        try {
+            webClient.getWebWindowByName( "thirdFrame" );
+            fail( "Did not expect thirdFrame to still exist after click." );
+        }
+        catch (WebWindowNotFoundException exception) {
+            // Expected path
+        }
+    }
+
+
+    /**
      * Regression test to reproduce a known bug
      * @throws Exception if the test fails
      */
@@ -255,7 +549,7 @@ public class WindowTest extends WebTestCase {
              + "</body></html>";
         final String secondContent
              = "<html><head><title>Second</title></head><body>"
-             + "  <iframe name='innermost' src='http://third/' />"
+             + "  <iframe name='innermost' src='http://third' />"
              + "</body></html>";
         final String thirdContent
              = "<html><head><title>Third</title><script>"
@@ -280,7 +574,7 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(
             new URL("http://second"), secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://third/"), thirdContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            new URL("http://third"), thirdContent,200,"OK","text/html",Collections.EMPTY_LIST );
 
         webClient.setWebConnection( webConnection );
 
@@ -291,6 +585,13 @@ public class WindowTest extends WebTestCase {
         final WebWindow innermostWebWindow = webClient.getWebWindowByName("innermost");
         final HtmlPage innermostPage = (HtmlPage)innermostWebWindow.getEnclosedPage();
         ((HtmlAnchor)innermostPage.getHtmlElementById("clickme")).click();
+
+        assertNotSame(innermostWebWindow.getParentWindow(), innermostWebWindow);
+        assertNotSame(innermostWebWindow.getTopWindow(), innermostWebWindow);
+        assertNotSame(innermostWebWindow.getParentWindow(),
+            innermostWebWindow.getTopWindow());
+        assertSame(innermostWebWindow.getParentWindow().getParentWindow(),
+            innermostWebWindow.getTopWindow());
 
         assertEquals(
             Arrays.asList( new String[] {"true", "true", "true", "true", "true", "true"} ),

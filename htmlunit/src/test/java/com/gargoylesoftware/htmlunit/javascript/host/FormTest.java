@@ -55,6 +55,7 @@ import java.util.List;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  David K. Taylor
  */
 public class FormTest extends WebTestCase {
     /**
@@ -311,6 +312,42 @@ public class FormTest extends WebTestCase {
         final HtmlPage secondPage
             = (HtmlPage)page.executeJavaScriptIfPossible("document.form1.submit()", "test", true, null).getNewPage();
         assertEquals( "second", secondPage.getTitleText() );
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testFormSubmit_target() throws Exception {
+        final WebClient client = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+
+        final String firstContent
+                 = "<html><head><title>first</title></head><body>\n"
+                 + "<p>hello world</p>"
+                 + "<form name='form1' method='get' action='http://second' target='MyNewWindow'>"
+                 + "    <input type='button' name='button1' />"
+                 + "</form>"
+                 + "</body></html>";
+        final String secondContent
+                 = "<html><head><title>second</title></head><body>\n"
+                 + "<p>hello world</p>"
+                 + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://second"), secondContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage)client.getPage(new URL("http://first"));
+        assertEquals( "first", page.getTitleText() );
+
+        final HtmlPage secondPage
+            = (HtmlPage)page.executeJavaScriptIfPossible("document.form1.submit()", "test", true, null).getNewPage();
+        assertEquals( "second", secondPage.getTitleText() );
+        assertEquals( "MyNewWindow", secondPage.getEnclosingWindow().getName() );
     }
 
 

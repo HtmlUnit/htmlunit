@@ -46,6 +46,7 @@ import java.io.InputStream;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public class UnexpectedPage implements Page {
     private final WebResponse webResponse_;
@@ -69,6 +70,13 @@ public class UnexpectedPage implements Page {
      * Initialize this page.
      */
     public void initialize() {
+    }
+
+
+    /**
+     * Clean up this page.
+     */
+    public void cleanUp() {
     }
 
 

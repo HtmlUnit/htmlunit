@@ -44,6 +44,7 @@ import java.io.IOException;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public interface Page {
 
@@ -52,6 +53,12 @@ public interface Page {
      * @throws IOException If an IO problem occurs.
      */
     void initialize() throws IOException;
+
+    /**
+     * Clean up this page.
+     * @throws IOException If an IO problem occurs.
+     */
+    void cleanUp() throws IOException;
 
 
     /**

@@ -43,6 +43,7 @@ package com.gargoylesoftware.htmlunit;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  David K. Taylor
  */
 public class TopLevelWindow implements WebWindow {
 
@@ -97,6 +98,28 @@ public class TopLevelWindow implements WebWindow {
      */
     public void setEnclosedPage( final Page page ) {
         enclosedPage_ = page;
+    }
+
+
+    /**
+     * Return the window that contains this window.  Since this is a top
+     * level window, return this window.
+     *
+     * @return This window since there is no parent.
+     */
+    public WebWindow getParentWindow() {
+        return this;
+    }
+
+
+    /**
+     * Return the top level window that contains this window.  Since this
+     * is a top level window, return this window.
+     *
+     * @return This window since it is top level.
+     */
+    public WebWindow getTopWindow() {
+        return this;
     }
 
 

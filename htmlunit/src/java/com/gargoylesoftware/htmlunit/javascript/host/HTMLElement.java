@@ -155,7 +155,7 @@ public class HTMLElement extends SimpleScriptable {
      * @return The node type
      */
     public short jsGet_nodeType() {
-        return getHtmlElementOrDie().getNode().getNodeType();
+        return getHtmlElementOrDie().getNodeType();
     }
 
 
@@ -164,7 +164,7 @@ public class HTMLElement extends SimpleScriptable {
      * @return The node name
      */
     public String jsGet_nodeName() {
-        return getHtmlElementOrDie().getNode().getNodeName();
+        return getHtmlElementOrDie().getNodeName();
     }
 
 
@@ -173,7 +173,7 @@ public class HTMLElement extends SimpleScriptable {
      * @return The node value
      */
     public String jsGet_nodeValue() {
-        return getHtmlElementOrDie().getNode().getNodeValue();
+        return getHtmlElementOrDie().getNodeValue();
     }
 
 
@@ -226,8 +226,7 @@ public class HTMLElement extends SimpleScriptable {
     public Object jsFunction_cloneNode(final boolean deep) {
         final HtmlElement htmlElement = getHtmlElementOrDie();
         final Node clonedXmlNode = htmlElement.getNode().cloneNode( deep );
-        return getJavaScriptElementFromXmlNode(clonedXmlNode,
-            htmlElement.getPage());
+        return getJavaScriptElement(htmlElement.getPage().getHtmlElement(clonedXmlNode));
     }
 
 
@@ -350,11 +349,7 @@ public class HTMLElement extends SimpleScriptable {
      * @return The parent node
      */
     public Object jsGet_parentNode() {
-        final HtmlElement htmlElement = getHtmlElementOrDie();
-        final Node xmlElement = htmlElement.getNode();
-        final Node parentXmlNode = xmlElement.getParentNode();
-        return getJavaScriptElementFromXmlNode(parentXmlNode,
-            htmlElement.getPage());
+        return getJavaScriptElement( getHtmlElementOrDie().getParentNode() );
     }
 
 
@@ -365,11 +360,7 @@ public class HTMLElement extends SimpleScriptable {
      * no next sibling.
      */
     public Object jsGet_nextSibling() {
-        final HtmlElement htmlElement = getHtmlElementOrDie();
-        final Node xmlElement = htmlElement.getNode();
-        final Node siblingXmlNode = xmlElement.getNextSibling();
-        return getJavaScriptElementFromXmlNode(siblingXmlNode,
-            htmlElement.getPage());
+        return getJavaScriptElement( getHtmlElementOrDie().getNextSibling() );
     }
 
 
@@ -380,11 +371,7 @@ public class HTMLElement extends SimpleScriptable {
      * no previous sibling.
      */
     public Object jsGet_previousSibling() {
-        final HtmlElement htmlElement = getHtmlElementOrDie();
-        final Node xmlElement = htmlElement.getNode();
-        final Node siblingXmlNode = xmlElement.getPreviousSibling();
-        return getJavaScriptElementFromXmlNode(siblingXmlNode,
-            htmlElement.getPage());
+        return getJavaScriptElement( getHtmlElementOrDie().getPreviousSibling() );
     }
 
 
@@ -395,11 +382,7 @@ public class HTMLElement extends SimpleScriptable {
      * no children.
      */
     public Object jsGet_firstChild() {
-        final HtmlElement htmlElement = getHtmlElementOrDie();
-        final Node xmlElement = htmlElement.getNode();
-        final Node childXmlNode = xmlElement.getFirstChild();
-        return getJavaScriptElementFromXmlNode(childXmlNode,
-            htmlElement.getPage());
+        return getJavaScriptElement( getHtmlElementOrDie().getFirstChild() );
     }
 
 
@@ -410,11 +393,7 @@ public class HTMLElement extends SimpleScriptable {
      * no children.
      */
     public Object jsGet_lastChild() {
-        final HtmlElement htmlElement = getHtmlElementOrDie();
-        final Node xmlElement = htmlElement.getNode();
-        final Node childXmlNode = xmlElement.getLastChild();
-        return getJavaScriptElementFromXmlNode(childXmlNode,
-            htmlElement.getPage());
+        return getJavaScriptElement( getHtmlElementOrDie().getLastChild() );
     }
 
 
@@ -424,23 +403,10 @@ public class HTMLElement extends SimpleScriptable {
      * @param page The HTML document to search in.
      * @return The JavaScript element.
      */
-    protected Object getJavaScriptElementFromXmlNode(Node xmlNode,
-        HtmlPage page) {
-        if ( xmlNode == null ) {
+    protected Object getJavaScriptElement( HtmlElement htmlElement ) {
+        if ( htmlElement == null ) {
             return null;
         }
-        if ( ( xmlNode instanceof Element ) == false &&
-            ( xmlNode instanceof Text ) == false ) {
-            if( xmlNode instanceof HTMLDocumentImpl == false ) {
-                throw new IllegalStateException(
-                    "XML node is not an Element or Text node.  Only Elements and "
-                    + "Text nodes are currently supported.  Node class: "
-                    + xmlNode.getClass() );
-            }
-            return null;
-        }
-        final HtmlElement htmlElement = page.getHtmlElement( xmlNode );
-        final Object jsElement = getScriptableFor( htmlElement );
-        return jsElement;
+        return getScriptableFor( htmlElement );
     }
 }

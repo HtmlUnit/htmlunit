@@ -784,11 +784,20 @@ public abstract class HtmlElement {
 
 
     /**
+     * Get the parent node of this node
+     * @return the parent node of this node
+     */
+    public HtmlElement getParentNode() {
+        return getPage().getHtmlElement(getNode().getParentNode());
+    }
+
+
+    /**
      * Return the next sibling element in the document
      * @return The next sibling element in the document.
      */
     public HtmlElement getNextSibling() {
-        return getPage().getHtmlElement(getElement().getNextSibling());
+        return getPage().getHtmlElement(getNode().getNextSibling());
     }
 
 
@@ -797,7 +806,54 @@ public abstract class HtmlElement {
      * @return The previous sibling element in the document.
      */
     public HtmlElement getPreviousSibling() {
-        return getPage().getHtmlElement(getElement().getPreviousSibling());
+        return getPage().getHtmlElement(getNode().getPreviousSibling());
+    }
+
+
+    /**
+     * Get the first child node.
+     * @return The first child node or null if the current node has
+     * no children.
+     */
+    public HtmlElement getFirstChild() {
+        return getPage().getHtmlElement(getNode().getFirstChild());
+    }
+
+
+    /**
+     * Get the last child node.
+     * @return The last child node or null if the current node has
+     * no children.
+     */
+    public HtmlElement getLastChild() {
+        return getPage().getHtmlElement(getNode().getLastChild());
+    }
+
+
+    /**
+     * Get the type of the current node.
+     * @return The node type
+     */
+    public short getNodeType() {
+        return getNode().getNodeType();
+    }
+
+
+    /**
+     * Get the name for the current node.
+     * @return The node name
+     */
+    public String getNodeName() {
+        return getNode().getNodeName();
+    }
+
+
+    /**
+     * Get the value for the current node.
+     * @return The node value
+     */
+    public String getNodeValue() {
+        return getNode().getNodeValue();
     }
 
 

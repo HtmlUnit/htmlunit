@@ -88,16 +88,18 @@ public class ClickableElement
 
         if( onClick.length() != 0 && page.getWebClient().isJavaScriptEnabled() ) {
             final ScriptResult scriptResult
-                = page.executeJavaScriptIfPossible( onClick, "onClick handler for "+getClass().getName(), true, this );
+                = page.executeJavaScriptIfPossible( onClick,
+                "onClick handler for "+getClass().getName(), true, this );
+            final Page scriptPage = scriptResult.getNewPage();
             if( scriptResult.getJavaScriptResult().equals( Boolean.FALSE ) ) {
-                return scriptResult.getNewPage();
+                return scriptPage;
             }
             else {
-                return doClickAction();
+                return doClickAction(scriptPage);
             }
         }
         else {
-            return doClickAction();
+            return doClickAction(page);
         }
     }
 
@@ -109,12 +111,14 @@ public class ClickableElement
      * the current page - subclasses requiring different behaviour (like
      * {@link HtmlSubmitInput}) will override this method.
      *
+     * @param defaultPage The default page to return if the action does not
+     * load a new page.
      * @return The page that is currently loaded after execution of this method
      * @throws IOException If an IO error occured
      */
-    protected Page doClickAction() throws IOException {
+    protected Page doClickAction(Page defaultPage) throws IOException {
 
-        return getPage();
+        return defaultPage;
     }
 
 

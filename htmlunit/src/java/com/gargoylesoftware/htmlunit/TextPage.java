@@ -45,6 +45,7 @@ import java.io.IOException;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public class TextPage implements Page {
     private final WebResponse webResponse_;
@@ -71,6 +72,13 @@ public class TextPage implements Page {
      * Initialize this page.
      */
     public void initialize() {
+    }
+
+
+    /**
+     * Clean up this page.
+     */
+    public void cleanUp() {
     }
 
 
