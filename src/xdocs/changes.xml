@@ -87,6 +87,9 @@
 		<change type="new">
 			Added support for onchange handlers in input tags
 		</change>
+		<change type="new">
+			Added support for javascript document.referrer
+		</change>
 	</change-log>
 </section>
 
