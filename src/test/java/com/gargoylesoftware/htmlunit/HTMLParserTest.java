@@ -48,7 +48,6 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
@@ -207,6 +206,7 @@ public class HTMLParserTest extends WebTestCase {
         assertEquals("\u00A9 2002-2005, Gargoyle Software Inc.", stringVal);
 
         //see if the Google adds were added via Javascript
+        /* google ads not on page anymore
         xpath = new HtmlUnitXPath("//iframe[@name = 'google_ads_frame']");
         final HtmlInlineFrame inline = (HtmlInlineFrame)xpath.selectSingleNode(page);
 
@@ -214,5 +214,6 @@ public class HTMLParserTest extends WebTestCase {
 
         final HtmlPage innerPage = (HtmlPage)inline.getEnclosedPage();
         assertNotNull(innerPage);
+        */
     }
 }
