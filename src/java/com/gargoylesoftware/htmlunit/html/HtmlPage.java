@@ -49,19 +49,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.httpclient.HttpConstants;
+import org.mozilla.javascript.Function;
+
+import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptEngine;
+import com.gargoylesoftware.htmlunit.ScriptFilter;
+import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.ScriptFilter;
-import com.gargoylesoftware.htmlunit.ScriptEngine;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.Assert;
-import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.TextUtil;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import org.apache.commons.httpclient.HttpConstants;
-import org.mozilla.javascript.Function;
 
 /**
  *  A representation of an html page returned from a server.  This class is the
@@ -936,23 +937,35 @@ public final class HtmlPage extends DomNode implements Page {
         }
 
         final String refreshString = getRefreshStringOrNull();
-        if( refreshString == null ) {
+        if( refreshString == null || refreshString.length() == 0 ) {
             return;
         }
 
-        final int index = refreshString.indexOf("URL=");
+        
+        int index = refreshString.indexOf(";");
         if( index == -1 ) {
-            if( refreshString.length() != 0 ) {
-                getLog().error("Malformed refresh string ["+refreshString+"]");
-            }
+            getLog().error("Malformed refresh string: Expecting 'URL=' but found ["+refreshString+"]");
             return;
         }
+        final int time = Integer.parseInt(refreshString.substring(0,index));
+        index = refreshString.indexOf("URL=", index);
+        if( index == -1 ) {
+            index = refreshString.indexOf("url=",index);
+        }
+        
+        if( index == -1 ) {
+            getLog().error("Malformed refresh string: Expecting 'URL=' but found ["+refreshString+"]");
+            return;
+        }
+        
         final String newUrl = refreshString.substring(index+4);
         try {
             final URL url = getFullyQualifiedUrl(newUrl);
 
-            getWebClient().getPage(
-                window, url, SubmitMethod.GET, Collections.EMPTY_LIST );
+            if( getWebClient().getRefreshHandler().shouldRefresh( this, url, time ) ) {
+                getWebClient().getPage(
+                        window, url, SubmitMethod.GET, Collections.EMPTY_LIST );
+            }
         }
         catch( final MalformedURLException e ) {
             getLog().error("HtmlPage refresh to ["+newUrl+"] Got MalformedURLException", e);
