@@ -87,6 +87,12 @@ public class SanityCheck extends WebTestCase {
     }
 
 
+    public void testAmazonCanada() throws Exception {
+        final WebClient webClient = new WebClient();
+        final HtmlPage page = (HtmlPage)webClient.getPage( new URL( "http://www.amazon.ca" ) );
+    }
+
+
     public void setUp() {
         System.out.println();
         System.out.println( "=====================================" );
