@@ -68,6 +68,7 @@ import java.util.List;
  * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @author  David K. Taylor
  * @author  Darrell DeBoer
+ * @author  Marc Guillemot
  */
 public class WindowTest extends WebTestCase {
     /**
@@ -1218,4 +1219,24 @@ public class WindowTest extends WebTestCase {
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }    
+    
+    /**
+     * Test that length of frames collection is retrieved
+     * @throws Exception if the test fails
+     */
+    public void testFramesLength() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "alert(window.frames.length)"
+                 + "</script></head><body>"
+                 + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "0"
+        });
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
 }
