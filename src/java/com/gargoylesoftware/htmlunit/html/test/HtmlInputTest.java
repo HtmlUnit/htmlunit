@@ -123,7 +123,7 @@ public final class HtmlInputTest extends WebTestCase {
                  = "<html><head><title>foo</title></head><body>"
                  + "<form id='form1'>"
                  + "<input type='radio' name='radio1'>"
-                 + "<input type='radio' name='radio1' value='bar' checked>"
+                 + "<input type='RADIO' name='radio1' value='bar' checked>"
                  + "<input type='submit' name='button' value='foo'>"
                  + "</form></body></html>";
         final WebClient client = new WebClient();
