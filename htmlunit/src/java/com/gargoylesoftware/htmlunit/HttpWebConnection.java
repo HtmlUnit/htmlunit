@@ -274,10 +274,10 @@ public class HttpWebConnection extends WebConnection {
             // Disable certificate caching within HttpClient
             final HttpState httpState = new HttpState() {
                 public void setCredentials(
-                    final String realm, final Credentials credentials ) {
+                    final String realm, final String host, final Credentials credentials ) {
                 }
 
-                public Credentials getCredentials( final String realm ) {
+                public Credentials getCredentials( final String realm, final String host ) {
                     return null;
                 }
             };
@@ -287,9 +287,9 @@ public class HttpWebConnection extends WebConnection {
             final HostConfiguration hostConfiguration = new HostConfiguration();
             final URI uri;
             try {
-                uri = new URI(url);
+                uri = new URI(url.toExternalForm());
             }
-            catch( URIException e ) {
+            catch( final URIException e ) {
                 // Theoretically impossible but ....
                 throw new IllegalStateException("Unable to create URI from URL: "+url.toExternalForm());
             }
