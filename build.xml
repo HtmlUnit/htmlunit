@@ -96,6 +96,7 @@
 <target name="clean" description="clean">
     <delete dir="target/classes" quiet="true"/>
     <delete dir="target/test-classes" quiet="true"/>
+    <delete dir="target/repository" quiet="true"/>
     <delete dir="build/${version}"/>
     <delete file="dist/projectdocs.zip"/>
     <delete file="dist/${version}.zip"/>
