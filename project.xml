@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project>
+  <pomVersion>3</pomVersion>
+  <name>HtmlUnit</name>
+  <id>htmlunit</id>
+  <gumpRepositoryId>htmlunit</gumpRepositoryId>
+  <inceptionYear>2001</inceptionYear>
+  <currentVersion>2.0-alpha2</currentVersion>
+  <package>com.gargoylesoftware.htmlunit</package>
+
+  <organization>
+	<name>Apache Software Foundation</name>
+	<url>http://jakarta.apache.org/</url>
+	<logo>http://jakarta.apache.org/commons/images/jakarta-logo-blue.gif</logo>
+  </organization>
+
+
+  <shortDescription>Jakarta Commons HttpClient</shortDescription>
+  <description>
+	The HttpClient  component supports the client-side of RFC 1945 (HTTP/1.0)  and RFC 2616 (HTTP/1.1) , several related specifications (RFC 2109 (Cookies) , RFC 2617 (HTTP Authentication) , etc.), and provides a framework by which new request types (methods) or HTTP extensions can be created easily.
+  </description>
+
+  <logo>/images/httpclient_logo.png</logo>
+  <url>http://jakarta.apache.org/commons/httpclient/</url>
+  <issueTrackingUrl><![CDATA[http://nagoya.apache.org/bugzilla/buglist.cgi?bug_status=UNCONFIRMED&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;component=HttpClient]]></issueTrackingUrl>
+
+  <siteAddress>jakarta.apache.org</siteAddress>
+  <siteDirectory>/www/jakarta.apache.org/commons/httpclient/</siteDirectory>
+  <distributionDirectory>/www/jakarta.apache.org/builds/jakarta-commons/httpclient</distributionDirectory>
+  <repository>
+	<connection>scm:cvs:pserver:anoncvs@cvs.apache.org:/home/cvspublic:jakarta-commons/httpclient/</connection>
+	<url>http://cvs.apache.org/viewcvs/jakarta-commons/httpclient/</url>
+  </repository>
+
+  <versions>
+	<version>
+	  <id>1.0</id>
+	  <name>1.0</name>
+	  <tag>1.0</tag>
+	</version>
+  </versions>
+
+  <mailingLists>
+	<mailingList>
+	  <name>HttpClient Mailing List</name>
+	  <subscribe> commons-httpclient-dev-subscribe@jakarta.apache.org </subscribe>
+	  <unsubscribe> commons-httpclient-dev-unsubscribe@jakarta.apache.org </unsubscribe>
+	  <archive>http://archives.apache.org/eyebrowse/SummarizeList?listId=128</archive>
+	</mailingList>
+	<mailingList>
+	  <name>Commons Developer List</name>
+	  <subscribe>commons-dev-subscribe@jakarta.apache.org</subscribe>
+	  <unsubscribe>commons-dev-unsubscribe@jakarta.apache.org</unsubscribe>
+	  <archive>http://archives.apache.org/eyebrowse/SummarizeList?listId=15</archive>
+	</mailingList>
+	<mailingList>
+	  <name>Commons User List</name>
+	  <subscribe>commons-user-subscribe@jakarta.apache.org</subscribe>
+	  <unsubscribe>commons-user-unsubscribe@jakarta.apache.org</unsubscribe>
+	  <archive>http://archives.apache.org/eyebrowse/SummarizeList?listId=105</archive>
+	</mailingList>
+  </mailingLists>
+
+  <developers>
+	<developer>
+	  <name>Mike Bowler</name>
+	  <id>mbowler</id>
+	  <email>mbowler@GargoyleSoftware.com</email>
+	  <organization>Gargoyle Software Inc.</organization>
+	  <roles>
+		<role>Release Manager</role>
+		<role>Java Developer</role>
+	  </roles>
+	</developer>
+  </developers>
+
+  <contributors>
+	<contributor>
+	  <name>Armando Antón</name>
+	  <email>armando.anton@newknow.com</email>
+	</contributor>
+  </contributors>
+
+<dependencies>
+	<dependency>
+	  <id>junit</id>
+	  <version>3.8.1</version>
+	  <url>http://www.junit.org/</url>
+	</dependency>
+	<dependency>
+	  <id>commons-logging</id>
+	  <version>1.0.2</version>
+	  <url>http://jakarta.apache.org/commons/logging.html</url>
+	</dependency>
+	<dependency>
+	  <id>jsse</id>
+	  <version>1.0.3_01</version>
+	  <url>http://java.sun.com/products/jsse/</url>
+	</dependency>
+	<dependency>
+	  <id>jsse+jnet</id>
+	  <version>1.0.3_01</version>
+	  <url>http://java.sun.com/products/jsse/</url>
+	  <jar>jnet-1.0.3_01.jar</jar>
+	</dependency>
+	<dependency>
+		<id>jsse+jcert</id>
+		<version>1.0.3_01</version>
+		<url>http://java.sun.com/products/jsse/</url>
+		<jar>jcert-1.0.3_01.jar</jar>
+	</dependency>
+	<dependency>
+		<id>jce</id>
+		<version>1.2.2</version>
+		<url>http://java.sun.com/products/jce/</url>
+	</dependency>
+	<dependency>
+		<id>jce+sunjce_provider</id>
+		<version>1.2.2</version>
+		<url>http://java.sun.com/products/jce/</url>
+		<jar>sunjce_provider-1.2.2.jar</jar>
+	</dependency>
+	<dependency>
+		<id>jce+local_policy</id>
+		<version>1.2.2</version>
+		<url>http://java.sun.com/products/jce/</url>
+		<jar>local_policy-1.2.2.jar</jar>
+	</dependency>
+	<dependency>
+		<id>nekohtml</id>
+		<version>0.7.1</version>
+		<url>http://foo</url>
+		<jar>nekohtml-0.7.1.jar </jar>
+	</dependency>
+	<dependency>
+		<id>xml-apis</id>
+		<version>2.0.2</version>
+		<url>http://foo</url>
+		<jar>xml-apis-2.0.2.jar </jar>
+	</dependency>
+	<dependency>
+		<id>xerces</id>
+		<version>2.0.2</version>
+		<url>http://foo</url>
+		<jar>xercesImpl-2.0.2.jar</jar>
+	</dependency>
+	<dependency>
+		<id>rhino</id>
+		<version>1.5R4</version>
+		<url>http://foo</url>
+		<jar>js-1.5R4-RC3.jar</jar>
+	</dependency>
+	<dependency>
+		<id>commons-httpclient</id>
+		<version>2.0alpha2</version>
+		<url>http://foo</url>
+		<jar>commons-httpclient-2.0-alpha2.jar</jar>
+	</dependency>
+
+	<dependency>
+		<id>gsbase</id>
+		<version>Overridden by project.properties</version>
+		<url>gsbase.sourceforge.net</url>
+		<jar>gsbase.jar</jar>
+	</dependency>
+</dependencies>
+
+	<build>
+	<nagEmailAddress>commons-httpclient-dev@jakarta.apache.org</nagEmailAddress>
+	<sourceDirectory>src/java</sourceDirectory>
+	<unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+	<integrationUnitTestSourceDirectory/>
+	<aspectSourceDirectory/>
+
+		<unitTest>
+			<includes>
+				<include>**/TestNoHost.java</include>
+			</includes>
+		</unitTest>
+	<jars></jars>
+	</build>
+
+</project>
