@@ -612,6 +612,5 @@ public class JavaScriptEngineTest extends WebTestCase {
     private InputSource createInputSourceForFile( final String fileName ) throws FileNotFoundException {
         return new InputSource( getFileAsStream(fileName) );
     }
-    
 }
 
