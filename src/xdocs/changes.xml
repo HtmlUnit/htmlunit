@@ -84,6 +84,9 @@
 			Fixed bug where the variable "this" in an onclick handler was a Window rather than the
 			appropriate component.
 		</change>
+		<change type="new">
+			Added support for onchange handlers in input tags
+		</change>
 	</change-log>
 </section>
 

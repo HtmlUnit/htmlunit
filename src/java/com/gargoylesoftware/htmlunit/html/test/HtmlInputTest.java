@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.html.test;
 
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -14,6 +15,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
+import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.test.FakeWebConnection;
 import com.gargoylesoftware.htmlunit.test.WebTestCase;
 import java.net.URL;
@@ -140,6 +142,34 @@ public final class HtmlInputTest extends WebTestCase {
 
         assertFalse( ((HtmlRadioButtonInput)radioButtons.get(0)).isChecked() );
         assertTrue( ((HtmlRadioButtonInput)radioButtons.get(1)).isChecked() );
+    }
+
+
+    public void testOnChangeHandler() throws Exception {
+
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<form id='form1'>"
+                 + "<input type='text' name='text1' onchange='alert(\"changed\")')>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://www.gargoylesoftware.com" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlTextInput input = (HtmlTextInput)form.getInputByName("text1");
+
+        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        input.setValueAttribute("foo");
+        assertEquals( Collections.singletonList("changed"), collectedAlerts );
     }
 }
 
