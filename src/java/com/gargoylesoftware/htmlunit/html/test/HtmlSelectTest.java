@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.html.test;
 
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -419,6 +420,41 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlSelect select = ( HtmlSelect )form.getSelectsByName( "select2" ).get( 0 );
         assertEquals( "s2o2", select.getOptionByValue("option2").asText() );
+    }
+
+
+    public void testSelect_SetSelected_OnChangeHandler()
+        throws Exception {
+
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<form id='form1'><select name='select1' onChange='alert(\"changing\")'>"
+                 + "<option value='option1' selected='selected'>Option1</option>"
+                 + "<option value='option2'>Option2</option>"
+                 + "<option value='option3'>Option3</option>"
+                 + "</select>"
+                 + "<input type='submit' name='button' value='foo'/>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://www.gargoylesoftware.com" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+
+        final HtmlSelect select = ( HtmlSelect )form.getSelectsByName( "select1" ).get( 0 );
+
+        // Change the value
+        select.setSelectedAttribute( "option3", true );
+
+        final List expectedAlerts = Collections.singletonList("changing");
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 }
 
