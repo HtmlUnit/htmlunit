@@ -224,4 +224,28 @@ public class DocumentTest extends WebTestCase {
             "tangerine", "ginger"} );
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+
+    public void testDocumentWrite() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title></head><body>"
+             + "<script>document.write(\"<div id='div1'></div>\")</script>"
+             + "</form></body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        // This will blow up if the div tag hasn't been written to the document
+        firstPage.getHtmlElementById("div1");
+    }
 }

@@ -10,6 +10,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
+import com.gargoylesoftware.htmlunit.ScriptFilter;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
@@ -29,6 +30,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import org.apache.xerces.xni.parser.XMLDocumentFilter;
+import org.apache.xerces.xni.parser.XMLInputSource;
+import org.cyberneko.html.HTMLConfiguration;
+import org.cyberneko.html.filters.DefaultFilter;
+import org.cyberneko.html.filters.Identity;
+import org.cyberneko.html.filters.Writer;
 import org.cyberneko.html.parsers.DOMParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -205,16 +212,29 @@ public final class HtmlPage
 
         final InputStream inputStream = webResponse.getContentAsStream();
 
-        DOMParser parser = new DOMParser();
+        class MyParser extends DOMParser {
+            public HTMLConfiguration getConfiguration() {
+                return (HTMLConfiguration)fConfiguration;
+            }
+        };
+        final MyParser parser = new MyParser();
+
         try {
+            XMLDocumentFilter[] filters = {
+                new ScriptFilter( parser.getConfiguration() )//, new Identity(), new Writer()
+            };
+//            parser.setProperty( "http://cyberneko.org/html/properties/filters", filters );
+
+            parser.setFeature( "http://cyberneko.org/html/features/augmentations", true );
             parser.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
             parser.setFeature("http://cyberneko.org/html/features/report-errors", true);
+
             parser.parse( new InputSource(inputStream) );
+            return parser.getDocument();
         }
         catch( final SAXException e ) {
             throw new ObjectInstantiationException("Unable to parse html input", e);
         }
-        return parser.getDocument();
     }
 
 
