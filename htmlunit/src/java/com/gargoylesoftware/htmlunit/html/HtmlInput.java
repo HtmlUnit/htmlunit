@@ -77,6 +77,10 @@ public abstract class HtmlInput
             IOException,
             ElementNotFoundException {
 
+        if( isDisabled() == true ) {
+            return getPage();
+        }
+
         final String onClick = getOnClickAttribute();
         final HtmlPage page = getPage();
         if( onClick.length() == 0 || page.getWebClient().isJavaScriptEnabled() == false ) {

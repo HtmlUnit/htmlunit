@@ -28,6 +28,13 @@
 		<change type="documentation">
 			Initial draft of a howto for keyboard navigation
 		</change>
+		<change type="new">
+			New method:
+			<javadoc>com.gargoylesoftware.htmlunit.html.HtmlButton#isDisabled()</javadoc>
+		</change>
+		<change type="change">
+			The click() method on buttons now do nothing if that element is disabled
+		</change>
 	</change-log>
 </section>
 

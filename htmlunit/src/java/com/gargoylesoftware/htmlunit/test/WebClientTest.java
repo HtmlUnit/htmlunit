@@ -18,7 +18,6 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowAdapter;
 import com.gargoylesoftware.htmlunit.WebWindowEvent;
-import com.gargoylesoftware.htmlunit.html.ElementNotFocussableException;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -551,7 +550,7 @@ public class WebClientTest extends WebTestCase {
 
         final StringBuffer buffer = new StringBuffer();
         buffer.append(
-            "<html><head><title>First</title></head><body><form name='form1' action='/foo' method='post'>");
+            "<html><head><title>First</title></head><body><form name='form1' method='post' onsubmit='return false;'>");
 
         for( int i=0; i<tabIndexValues.length; i++ ) {
             buffer.append( "<input type='submit' name='submit");
@@ -578,10 +577,10 @@ public class WebClientTest extends WebTestCase {
 
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
         webConnection.setResponse(
-            new URL("http://first"), buffer.toString(), 200, "OK", "text/html", Collections.EMPTY_LIST );
+            new URL("http://first/"), buffer.toString(), 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
-        final URL url = new URL("http://first");
+        final URL url = new URL("http://first/");
         return (HtmlPage)webClient.getPage(url, SubmitMethod.GET, Collections.EMPTY_LIST);
     }
 

@@ -574,7 +574,7 @@ public final class HtmlPage
             final Element xmlElement = ( Element )xmlIterator.next();
             if( acceptableTagNames.contains( getTagName(xmlElement) ) ) {
                 final String accessKeyAttribute = getAttributeValue(xmlElement, "accesskey");
-                if( searchString.equals( accessKeyAttribute ) ) {
+                if( searchString.equalsIgnoreCase( accessKeyAttribute ) ) {
                     elements.add( getPage().getHtmlElement( xmlElement ) );
                 }
             }
@@ -868,11 +868,14 @@ public final class HtmlPage
 
 
     /**
-     * Simulate pressing an access key.  This may change the focus.
+     * Simulate pressing an access key.  This may change the focus, may click buttons and may invoke
+     * javascript.
      *
      * @param accessKey The key that will be pressed.
      * @return The element that has the focus after pressing this access key or null if no element
      * has the focus.
+     * @throws IOException If an io error occurs during the processing of this access key.  This
+     * would only happen if the access key triggered a button which in turn caused a page load.
      */
     public HtmlElement pressAccessKey( final char accessKey ) throws IOException {
         final HtmlElement element = getHtmlElementByAccessKey(accessKey);
@@ -883,6 +886,12 @@ public final class HtmlPage
             final Page newPage;
             if( element instanceof HtmlButton ) {
                 newPage = ((HtmlButton)element).click();
+            }
+            else if( element instanceof HtmlSubmitInput ) {
+                newPage = ((HtmlSubmitInput)element).click();
+            }
+            else if( element instanceof HtmlResetInput ) {
+                newPage = ((HtmlResetInput)element).click();
             }
             else {
                 newPage = this;

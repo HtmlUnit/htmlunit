@@ -81,6 +81,10 @@ public class HtmlButton
             IOException,
             ElementNotFoundException {
 
+        if( isDisabled() ) {
+            return getPage();
+        }
+
         final String onClick = getOnClickAttribute();
         final HtmlPage page = getPage();
         if( onClick.length() == 0 || page.getWebClient().isJavaScriptEnabled() == false ) {
@@ -89,6 +93,15 @@ public class HtmlButton
         else {
             return page.executeJavaScriptIfPossible(onClick, "HtmlButton onClick handler", true).getNewPage();
         }
+    }
+
+
+    /**
+     * Return true if the disabled attribute is set for this element.
+     * @return Return true if this is disabled.
+     */
+    public final boolean isDisabled() {
+        return isAttributeDefined("disabled");
     }
 
 
