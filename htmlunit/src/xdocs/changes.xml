@@ -257,6 +257,12 @@
                 Fix Document.getElementById in JavaScript so it returns null
                 when there is no element with the given ID.
             </action>
+            <action type="update" dev="mbowler">
+                Added support for jelly wrappers
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug with expansion of urls that contain pound signs.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
