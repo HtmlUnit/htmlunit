@@ -99,7 +99,7 @@ public class BrowserVersion {
     /** Mozilla 1.0 */
     public static final BrowserVersion MOZILLA_1_0 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
-        "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.0.0) Gecko/20020530", "1.2", 5);
+        "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.0.0) Gecko/20020530", "1.2", 6);
 
     /** Netscape 4.79 */
     public static final BrowserVersion NETSCAPE_4_7_9 = new BrowserVersion(
@@ -110,7 +110,7 @@ public class BrowserVersion {
     public static final BrowserVersion NETSCAPE_6_2_3 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US;rv:0.9.4.1) Gecko/20020508 Netscape6/6.2.3",
-        "1.2", 5);
+        "1.2", 6);
 
     /** Internet explorer 6.0  */
     public static final BrowserVersion INTERNET_EXPLORER_6_0 = new BrowserVersion(
