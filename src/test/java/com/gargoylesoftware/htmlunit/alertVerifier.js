@@ -18,7 +18,11 @@ function htmlunitReserved_catchedAlert(_str)
 function htmlunitReserved_addSummaryAfterOnload()
 {
 	var originalOnload = window.onload; 
-	window.onload = function() {originalOnload(); htmlunitReserved_displaySummary();}
+	window.onload = function() {
+			if (originalOnload)
+				originalOnload(); 
+			htmlunitReserved_displaySummary();
+		};
 }
 
 function htmlunitReserved_displaySummary()
