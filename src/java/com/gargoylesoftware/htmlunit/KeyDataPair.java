@@ -46,10 +46,10 @@ package com.gargoylesoftware.htmlunit;
 public class KeyDataPair extends KeyValuePair {
 
     private final Object dataObject_;
-    
+
     /**
      * Create an instance.
-     * 
+     *
      * @param key The key.
      * @param value The value.
      */
@@ -59,8 +59,8 @@ public class KeyDataPair extends KeyValuePair {
     }
 
     /**
-     * Create an instance 
-     * 
+     * Create an instance
+     *
      * @param key The key.
      * @param data The value
      */

@@ -117,7 +117,7 @@ public interface WebResponse {
     long getLoadTimeInMilliSeconds();
 
     /**
-     * Return the content charset value. 
+     * Return the content charset value.
      * @return The charset value.
      */
     String getContentCharSet();

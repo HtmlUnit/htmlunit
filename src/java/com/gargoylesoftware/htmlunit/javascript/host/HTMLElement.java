@@ -167,19 +167,19 @@ public class HTMLElement extends SimpleScriptable {
             // Get XML element for the HTML element passed in
             final HtmlElement childHtmlElement = ((HTMLElement) childObject).getHtmlElementOrDie();
             final Element childXmlNode = childHtmlElement.getElement();
-            
+
             // Get the parent XML element that the child should be added to.
             final HtmlElement parentElement = this.getHtmlElementOrDie();
             final Element parentXmlNode = parentElement.getElement();
-            
+
             // Append the child to the parent element
             if ( parentXmlNode.appendChild(childXmlNode) == null ) {
                 appendedChild = null;
-            } 
+            }
             else {
                 appendedChild = childObject;
             }
-        } 
+        }
         else {
             appendedChild = null;
         }
@@ -201,8 +201,8 @@ public class HTMLElement extends SimpleScriptable {
         }
         if ( ( parentXmlNode instanceof Element ) == false ) {
             if( parentXmlNode instanceof HTMLDocumentImpl == false ) {
-                throw new IllegalStateException( 
-                    "Parent XML node is not an Element.  Only Elements are currently supported.  Parent class: " 
+                throw new IllegalStateException(
+                    "Parent XML node is not an Element.  Only Elements are currently supported.  Parent class: "
                     + parentXmlNode.getClass() );
             }
             return null;

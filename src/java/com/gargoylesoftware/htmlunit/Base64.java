@@ -46,8 +46,10 @@ import java.io.UnsupportedEncodingException;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
 
  */
-public class Base64 {
+public final class Base64 {
+    /** The encoding table */
     private static final byte[] ENCODING_TABLE;
+    /** The padding byte */
     private static final byte PADDING_BYTE;
 
     static {
@@ -66,7 +68,7 @@ public class Base64 {
         }
     }
 
-
+    /** Private constructor to prevent instantiation */
     private Base64() {
     }
 

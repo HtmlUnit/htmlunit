@@ -229,12 +229,12 @@ public class Form extends HTMLElement {
          if( formElementsArray_ == null ) {
              initialize();
          }
-         
+
          final Object result = formElementsArray_.get( name, start );
          if( result != NOT_FOUND ) {
              return result;
          }
-         
+
          return super.get(name, start);
      }
 

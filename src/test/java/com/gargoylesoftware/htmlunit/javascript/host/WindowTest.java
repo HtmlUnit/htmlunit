@@ -118,7 +118,7 @@ public class WindowTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-        
+
         final String firstContent
              = "<html><head><title>First</title></head><body>"
              + "<form name='form1'>"
@@ -165,7 +165,7 @@ public class WindowTest extends WebTestCase {
         final WebWindowEvent changedEvent = (WebWindowEvent)eventCatcher.getEventAt(2);
         assertNull( changedEvent.getOldPage() );
         assertEquals( "Second", ((HtmlPage)changedEvent.getNewPage()).getTitleText() );
-        
+
         assertEquals(
             Collections.singletonList("MyNewWindow"),
             collectedAlerts);
@@ -509,8 +509,8 @@ public class WindowTest extends WebTestCase {
         }
         fail("No alerts written within "+maxTime+"ms");
     }
-    
-    
+
+
     /**
      * @throws Exception If the test fails
      */
@@ -546,7 +546,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * 
+     *
      * @throws Exception If the test fails
      */
     public void testWindowFrames() throws Exception {

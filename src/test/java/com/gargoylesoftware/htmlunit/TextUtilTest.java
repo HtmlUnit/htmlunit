@@ -134,7 +134,7 @@ public final class TextUtilTest extends WebTestCase {
                 TextUtil.startsWithIgnoreCase(stringToCheck, prefix));
         }
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -159,13 +159,13 @@ public final class TextUtilTest extends WebTestCase {
             {"abcdefABCDEF", "abcdefABCDEF"},
         };
         final String encoding = "ISO-8859-1";
-        
+
         for( int i=0; i<data.length; i++ ) {
             final String input = data[i][0];
             final String expectedResult = data[i][1];
-            
+
             final InputStream inputStream = TextUtil.toInputStream(input, encoding);
-            final String actualResult 
+            final String actualResult
                 = new BufferedReader( new InputStreamReader(inputStream, encoding) ).readLine();
             assertEquals( expectedResult, actualResult);
         }

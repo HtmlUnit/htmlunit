@@ -93,7 +93,7 @@ public final class TextUtil {
                 "ISO-8859-1 is an unsupported encoding!  You may have a corrupted installation of java.");
         }
     }
-    
+
     /**
      * Convert a string into an input stream.
      * @param content The string
@@ -101,18 +101,18 @@ public final class TextUtil {
      * @return The resulting input stream.
      * @throws UnsupportedEncodingException If the encoding is not supported.
      */
-    public static InputStream toInputStream( 
-            final String content, 
-            final String encoding ) 
+    public static InputStream toInputStream(
+            final String content,
+            final String encoding )
         throws
             UnsupportedEncodingException {
 
-        try {                
+        try {
             final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(content.length()*2);
             final OutputStreamWriter writer = new OutputStreamWriter(byteArrayOutputStream, encoding);
             writer.write(content);
             writer.flush();
-            
+
             final byte[] byteArray = byteArrayOutputStream.toByteArray();
             return new ByteArrayInputStream(byteArray);
         }
@@ -120,7 +120,7 @@ public final class TextUtil {
             throw e;
         }
         catch( final IOException e ) {
-            // Theoretically impossible since all the "IO" is in memory but it's a 
+            // Theoretically impossible since all the "IO" is in memory but it's a
             // checked exception so we have to catch it.
             e.printStackTrace();
             throw new IllegalStateException("Exception when converting a string to an input stream: "+e);

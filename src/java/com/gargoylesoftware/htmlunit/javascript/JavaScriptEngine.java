@@ -264,12 +264,12 @@ public final class JavaScriptEngine extends ScriptEngine {
      * @return The result of the function call.
      */
     public Object callFunction(
-            final HtmlPage htmlPage, 
-            final Object javaScriptFunction, 
-            final Object thisObject, 
-            final Object [] args, 
+            final HtmlPage htmlPage,
+            final Object javaScriptFunction,
+            final Object thisObject,
+            final Object [] args,
             final HtmlElement htmlElementScope ) {
-                
+
         final PageInfo pageInfo = getPageInfo(htmlPage);
 
         final Scriptable scope = getScope( pageInfo, htmlElementScope );

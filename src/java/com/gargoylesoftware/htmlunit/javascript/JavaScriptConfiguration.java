@@ -76,7 +76,7 @@ public final class JavaScriptConfiguration {
     private static Map ConfigurationMap_ = new HashMap(11);
 
 
-    private JavaScriptConfiguration( final BrowserVersion browserVersion ) {
+    private JavaScriptConfiguration() {
         synchronized(INITIALIZATION_LOCK) {
             if( XmlDocument_ == null ) {
                 XmlDocument_ = loadConfiguration();
@@ -131,7 +131,7 @@ public final class JavaScriptConfiguration {
             = (JavaScriptConfiguration)ConfigurationMap_.get(browserVersion);
 
         if( configuration == null ) {
-            configuration = new JavaScriptConfiguration(browserVersion);
+            configuration = new JavaScriptConfiguration();
             ConfigurationMap_.put( browserVersion, configuration );
         }
         return configuration;

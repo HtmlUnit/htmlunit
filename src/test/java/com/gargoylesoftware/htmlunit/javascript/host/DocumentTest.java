@@ -959,7 +959,7 @@ public class DocumentTest extends WebTestCase {
         webClient.setWebConnection( webConnection );
 
         final String firstContent
-            = "<html><body><script type=\"text/javascript\">" 
+            = "<html><body><script type=\"text/javascript\">"
             + "alert(document.getElementsByTagName('script').length);"
             + "</script></body></html>";
         webConnection.setResponse(
@@ -1106,7 +1106,7 @@ public class DocumentTest extends WebTestCase {
         final HttpState state = webConnection.getStateForUrl(url);
         state.addCookie( new Cookie("first", "one", "two") );
         state.addCookie( new Cookie("first", "three", "four") );
-        
+
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 

@@ -868,7 +868,7 @@ public class HtmlPageTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
-        
+
         page.getAnchorByName("alert").click();
 
         final List expectedAlerts = Arrays.asList(new String[] { "4711" });
@@ -1034,7 +1034,7 @@ public class HtmlPageTest extends WebTestCase {
                 new URL( "http://www.gargoylesoftware.com" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
 
-        final List expectedForms = Arrays.asList( new HtmlForm[]{ 
+        final List expectedForms = Arrays.asList( new HtmlForm[]{
             page.getFormByName("one"),
             page.getFormByName("two")
         } );

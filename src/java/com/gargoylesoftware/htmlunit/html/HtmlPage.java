@@ -302,7 +302,7 @@ public final class HtmlPage
 
     /**
      * Return the charset used in the page.
-     * The sources of this information are from 1).meta element which 
+     * The sources of this information are from 1).meta element which
      * http-equiv attribute value is 'content-type', or if not from
      * the response header.
      * @return the value of charset.
@@ -334,7 +334,7 @@ public final class HtmlPage
     }
 
 
-    
+
     /**
      * Return the xml element corresponding with this page.  This has been
      * overridden to ensure it returns a correct value even if the page
@@ -351,7 +351,7 @@ public final class HtmlPage
     }
 
 
-    
+
     /**
      * Return the xml document element corresponding with this page.  This
      * returns a correct value even if the page hasn't fully been loaded yet.
@@ -366,7 +366,7 @@ public final class HtmlPage
     }
 
 
-    
+
     /**
      * Create a new HTML element with the given tag name.  This may be
      * called if the page hasn't fully been loaded yet.
@@ -496,7 +496,7 @@ public final class HtmlPage
     public List getAllForms() {
         return getHtmlElementsByTagNames( Arrays.asList(new String[]{"form"}) );
     }
-    
+
     /**
      *  Return the WebClient that originally loaded this page
      *
@@ -908,12 +908,12 @@ public final class HtmlPage
         loadExternalJavaScriptFile( srcAttribute, null );
     }
 
-    /** 
+    /**
      * Internal use only.  This is a callback from {@link ScriptFilter} and
      * should not be called by consumers of HtmlUnit.
      * @param srcAttribute The source attribute from the script tag.
      * @param charset The charset attribute from the script tag.
-     */ 
+     */
     public void loadExternalJavaScriptFile( final String srcAttribute,
                                             final String charset  ) {
         final ScriptEngine engine = getWebClient().getScriptEngine();
@@ -1105,7 +1105,7 @@ public final class HtmlPage
                     engine.callFunction(this, javaScriptResult, null, new Object[] {}, null);
                 }
             }
-        } 
+        }
         else {
             final ScriptEngine engine = getWebClient().getScriptEngine();
             engine.callFunction( this, onLoad, null, new Object [0], null );

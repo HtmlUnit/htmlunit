@@ -131,7 +131,7 @@ public class HtmlInput
      * @exception  IOException If an io error occurs
      */
     public Page click() throws IOException {
-        
+
         String type = this.getTypeAttribute();
         if (type.equals("file") || type.equals("hidden") || type.equals("password") || type.equals("text")) {
             return getPage();
@@ -173,10 +173,10 @@ public class HtmlInput
         final String type = getTypeAttribute().toLowerCase();
         if (type.equals("image") || type.equals("submit")) {
             return getEnclosingFormOrDie().submit(this);
-        } 
+        }
         else if (type.equals("reset")){
             return getEnclosingFormOrDie().reset();
-        } 
+        }
         else {
             return getPage();
         }
@@ -678,8 +678,8 @@ public class HtmlInput
     public final String getAlignAttribute() {
         return getAttributeValue("align");
     }
-    
-   
+
+
     /**
      * Reset this element to its original values.
      */
@@ -687,14 +687,14 @@ public class HtmlInput
         String type = this.getTypeAttribute();
         if( type.equals("checkbox")) {
             setChecked(initialCheckedState_);
-        } 
+        }
         else if (type.equals("hidden") || type.equals("password")|| type.equals("text")) {
             setValueAttribute(initialValue_);
-        } 
+        }
         else if (type.equals("radio")) {
             if( initialCheckedState_ ) {
                 getElement().setAttribute("checked", "checked");
-            } 
+            }
             else {
                 getElement().removeAttribute("checked");
             }
@@ -710,7 +710,7 @@ public class HtmlInput
         String type = this.getTypeAttribute();
         if (type.equals("checkbox") ) {
             setCheckedCheckBox(isChecked);
-        } 
+        }
         else if (type.equals("radio")){
             setCheckedRadio(isChecked);
         }
@@ -729,7 +729,7 @@ public class HtmlInput
             getElement().removeAttribute( "checked" );
         }
     }
-    
+
     /**
      *  Set the "checked" attribute
      *
@@ -786,7 +786,7 @@ public class HtmlInput
 
         return returnValue;
     }
-    
+
     /**
      *  Submit the form that contains this input
      *
@@ -804,6 +804,6 @@ public class HtmlInput
 
         return click();
     }
-    
+
 
 }

@@ -88,7 +88,7 @@ public class HtmlTableRow extends HtmlElement {
         if( tableCells_ != null ) {
             return tableCells_;
         }
-        
+
         tableCells_ = Collections.unmodifiableList(getCells( getElement() ));
         return tableCells_;
     }
@@ -101,7 +101,7 @@ public class HtmlTableRow extends HtmlElement {
         if( tableCells_ != null ) {
             return tableCells_;
         }
-        
+
         final List list = new ArrayList();
 
         final NodeList nodeList = parent.getChildNodes();
