@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
+ * @author Mike Bresnahan
  */
 public class HtmlCheckBoxInput extends HtmlInput {
 
@@ -98,6 +99,21 @@ public class HtmlCheckBoxInput extends HtmlInput {
             removeAttribute( "checked" );
         }
     }
+
+    /**
+     * A checkbox does not have a textual representation,
+     * but we invent one for it because it is useful for testing.
+     * @return "checked" or "unchecked" according to the radio state
+     */
+    public String asText() {
+        if (isChecked()) {
+            return "checked";
+        }
+        else {
+            return "unchecked";
+        }
+    }
+
     /**
      * Override so that checkbox can change its state correctly when its
      * click() method is called.

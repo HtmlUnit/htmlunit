@@ -51,6 +51,7 @@ import java.util.Map;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
+ * @author Mike Bresnahan
  */
 public class HtmlRadioButtonInput extends HtmlInput {
 
@@ -111,6 +112,21 @@ public class HtmlRadioButtonInput extends HtmlInput {
             removeAttribute( "checked" );
         }
     }
+
+    /**
+     * A radio button does not have a textual representation,
+     * but we invent one for it because it is useful for testing.
+     * @return "checked" or "unchecked" according to the radio state
+     */
+    public String asText() {
+        if (isChecked()) {
+            return "checked";
+        }
+        else {
+            return "unchecked";
+        }
+    }
+
     /**
      * Override of default clickAction that makes this radio button the selected
      * one when it is clicked
@@ -119,7 +135,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * load a new page.
      * @return The page that is currently loaded after execution of this method
      * @throws IOException If an IO error occured
-     */    
+     */
     protected Page doClickAction(Page defaultPage) throws IOException {
         setChecked(true);
         return defaultPage;

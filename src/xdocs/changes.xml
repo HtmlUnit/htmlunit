@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" due-to="Mike Bresnahan" id="1083336">
+                asText() now returns "checked" or "unchecked" for HtmlRadioButtonInput and HtmlCheckBoxInput
+            </action>        
             <action type="add" dev="mguillem">
                 JavaScript: added dummy implementation of window.execScript doing nothing.
             </action>        
