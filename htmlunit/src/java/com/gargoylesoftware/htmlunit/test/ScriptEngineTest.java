@@ -34,6 +34,7 @@ public class ScriptEngineTest extends WebTestCase {
      * Test that code in script tags is executed on page load.  Try different combinations
      * of the script tag except for the case where a remote javascript page is loaded.  That
      * one will be tested seperately.
+     * @throws Exception If something goes wrong.
      */
     public void testScriptTags_AllLocalContent() throws Exception {
         final String content
