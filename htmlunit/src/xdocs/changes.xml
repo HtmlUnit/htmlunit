@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1100089">
+                JavaScript: added window.status and removed erroneous document.status.
+            </action>
             <action type="update" dev="mguillem" due-to="Chris Eldredge" id="1099644">
                 Fixed window.frames['frameName'] causes ClassCastException.
             </action>

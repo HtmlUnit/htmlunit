@@ -59,7 +59,6 @@ import org.mozilla.javascript.UniqueTag;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
@@ -93,7 +92,6 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 public final class Document extends NodeImpl {
 
     private static final long serialVersionUID = -7646789903352066465L;
-    private String status_ = "";
     private ElementArray all_; // has to be a member to have equality (==) working
     private ElementArray forms_; // has to be a member to have equality (==) working
     private ElementArray links_; // has to be a member to have equality (==) working
@@ -656,28 +654,6 @@ public final class Document extends NodeImpl {
         }
 
         return super.get(name, start);
-    }
-
-    /**
-     * Return the text from the status line.
-     * @return the status line text
-     */
-    public Object jsGet_status() {
-        return status_;
-    }
-
-    /**
-     * Set the text from the status line.
-     * @param message the status line text
-     */
-    public void jsSet_status( final String message ) {
-        status_ = message;
-
-        final HtmlPage page = getHtmlPage();
-        final StatusHandler statusHandler = page.getWebClient().getStatusHandler();
-        if( statusHandler != null ) {
-            statusHandler.statusMessageChanged(page, message);
-        }
     }
 
     /**

@@ -51,8 +51,6 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -1528,48 +1526,6 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    public void testStatus() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
-        final String firstContent
-            = "<html><head><title>First</title><script>"
-            + "function doTest() {\n"
-            + "    alert(document.status);\n"
-            + "    document.status = 'newStatus';\n"
-            + "    alert(document.status);\n"
-            + "}\n"
-            + "</script></head><body onload='doTest()'>"
-            + "</body></html>";
-
-        final URL url = URL_FIRST;
-        webConnection.setResponse(url, firstContent);
-        webClient.setWebConnection( webConnection );
-
-        final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final List collectedStatus = new ArrayList();
-        webClient.setStatusHandler( new StatusHandler() {
-            public void statusMessageChanged( final Page page, final String message ) {
-                collectedStatus.add(message);
-            }
-        });
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
-
-        final List expectedAlerts = Arrays.asList( new String[] {
-            "", "newStatus"} );
-        assertEquals( "alerts", expectedAlerts, collectedAlerts );
-
-        final List expectedStatus = Arrays.asList( new String[] {
-            "newStatus"} );
-        assertEquals( "status", expectedStatus, collectedStatus );
-    }
-    
     /**
      * @throws Exception if the test fails
      */
