@@ -36,24 +36,53 @@
 			</dd>
 		</dl>
 	</p>
+	<faq>
+		<faq-entry>
+			<question>
+				I've found a bug, how do I report it?
+			</question>
+			<answer>
+				The best way is to open a bug report in the
+				<a href="https://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">sourceforge bug
+				tracking database</a>.  Sending a bug report to the mailing list runs the risk that the
+				bug may get lost.  Putting it in the bug database guarentees that it won't.  Please
+				search the bug database to see if your bug hasn't already been reported before opening
+				a new one.
+			</answer>
+			<answer>
+				If you know how to fix the problem then patches are gratefully accepted.
+			</answer>
+		</faq-entry>
+		<faq-entry>
+			<question>
+				HtmlUnit doesn't support feature X.  How do I request this feature?
+			</question>
+			<answer>
+				The best way is to open a bug report in the
+				<a href="https://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">sourceforge bug
+				tracking database</a>.  See the answer on bug reporting for why the database is preferred.
+			</answer>
+			<answer>
+				If you're willing to write the feature yourself, you can always send us a patch.
+			</answer>
+		</faq-entry>
+		<faq-entry>
+			<question>
+				How do I submit a patch?
+			</question>
+			<answer>
+				Refer to <a href="submittingPatches.html">"How to submit a patch"</a>
+			</answer>
+		</faq-entry>
 <!--
-	<p>
-		<dl>
-			<dt>Current development release</dt>
-			<dd>Version <b>1.1rc1</b>: |
-				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.1-rc1.zip?download">Download</a> |
-				<a href="api/index.html">Javadoc API documentation</a> |
-				<a href="changes.html">Change history</a> |
-				<br />
-				<warning title="Important Note">
-					The goal of 1.1 was to provide a level of javascript support that would handle
-					the most common cases.  I believe that goal has now been met.  Assuming there are
-					no show-stopper bugs found, this build will become 1.1 final.
-				</warning>
-			</dd>
-		</dl>
-	</p>
+		<faq-entry>
+			<question>
+			</question>
+			<answer>
+			</answer>
+		</faq-entry>
 -->
+	</faq>
 	<p>
 		<dl>
 			<dt>Most recent code</dt>
