@@ -37,16 +37,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 
 /**
@@ -88,13 +88,13 @@ public class CharacterDataImplTest extends WebTestCase {
              + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -125,13 +125,13 @@ public class CharacterDataImplTest extends WebTestCase {
              + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -162,13 +162,13 @@ public class CharacterDataImplTest extends WebTestCase {
              + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -198,13 +198,13 @@ public class CharacterDataImplTest extends WebTestCase {
              + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -234,13 +234,13 @@ public class CharacterDataImplTest extends WebTestCase {
              + "<div id='div1'>Some Not So New Text</div></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -270,13 +270,13 @@ public class CharacterDataImplTest extends WebTestCase {
              + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -306,13 +306,13 @@ public class CharacterDataImplTest extends WebTestCase {
              + "<div id='div1'>Some Old Text</div></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -342,13 +342,13 @@ public class CharacterDataImplTest extends WebTestCase {
              + "<div id='div1'>Some New Text</div></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -380,13 +380,13 @@ public class CharacterDataImplTest extends WebTestCase {
              + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{

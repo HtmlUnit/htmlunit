@@ -37,12 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.Collections;
+
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import java.net.URL;
-import java.util.Collections;
 
 /**
  *  Tests for HtmlElement
@@ -79,7 +79,7 @@ public class HtmlElementTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-            new URL( "http://www.gargoylesoftware.com" ),
+            URL_GARGOYLE,
             SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
@@ -103,7 +103,7 @@ public class HtmlElementTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-            new URL( "http://www.gargoylesoftware.com" ),
+            URL_GARGOYLE,
             SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlElement element = page.getHtmlElementById("p1");
         assertEquals("foo", element.asText());

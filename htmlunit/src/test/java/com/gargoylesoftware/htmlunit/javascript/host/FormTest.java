@@ -37,18 +37,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for Form
@@ -300,13 +300,13 @@ public class FormTest extends WebTestCase {
                  + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"), secondContent, 200, "OK", "text/html",
+            URL_SECOND, secondContent, 200, "OK", "text/html",
             Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = (HtmlPage)client.getPage(new URL("http://first"));
+        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
         assertEquals( "first", page.getTitleText() );
 
         final HtmlPage secondPage
@@ -335,13 +335,13 @@ public class FormTest extends WebTestCase {
                  + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"), secondContent, 200, "OK", "text/html",
+            URL_SECOND, secondContent, 200, "OK", "text/html",
             Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = (HtmlPage)client.getPage(new URL("http://first"));
+        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
         assertEquals( "first", page.getTitleText() );
 
         final HtmlPage secondPage
@@ -391,7 +391,7 @@ public class FormTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals("foo", page.getTitleText());
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -431,10 +431,10 @@ public class FormTest extends WebTestCase {
              + "</script></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = (HtmlPage)client.getPage(new URL("http://first"));
+        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
         assertEquals("Button Test", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{"value = 2"} );
@@ -468,7 +468,7 @@ public class FormTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals("foo", page.getTitleText());
         final List expectedAlerts = Arrays.asList( new String[]{

@@ -37,15 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  *  Tests for HtmlAnchor
@@ -83,7 +83,7 @@ public class HtmlAnchorTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
 
@@ -113,7 +113,7 @@ public class HtmlAnchorTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ) );
+                URL_GARGOYLE );
 
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a1" );
 
@@ -148,15 +148,15 @@ public class HtmlAnchorTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html",
+            URL_FIRST, firstContent, 200, "OK", "text/html",
             Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"), secondContent, 200, "OK", "text/html",
+            URL_SECOND, secondContent, 200, "OK", "text/html",
             Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
 
@@ -191,15 +191,15 @@ public class HtmlAnchorTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html",
+            URL_FIRST, firstContent, 200, "OK", "text/html",
             Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"), secondContent, 200, "OK", "text/html",
+            URL_SECOND, secondContent, 200, "OK", "text/html",
             Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
 
@@ -235,7 +235,7 @@ public class HtmlAnchorTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
 
@@ -274,7 +274,7 @@ public class HtmlAnchorTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
 
@@ -309,7 +309,7 @@ public class HtmlAnchorTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
 
@@ -346,7 +346,7 @@ public class HtmlAnchorTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlAnchor testAnchor = page.getAnchorByName("testJavascript");
         testAnchor.click();  // blows up here

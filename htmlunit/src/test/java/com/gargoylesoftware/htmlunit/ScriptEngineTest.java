@@ -37,13 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests that have to do with when the scripting engine is called.  Javascript
@@ -123,7 +123,7 @@ public class ScriptEngineTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         return page;
     }

@@ -43,6 +43,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
@@ -59,6 +60,29 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class WebTestCase extends BaseTestCase {
+    /** Constant for the url http://first which is used in the tests. */
+    public static final URL URL_FIRST;
+
+    /** Constant for the url http://second which is used in the tests. */
+    public static final URL URL_SECOND;
+
+    /** Constant for the url http://third which is used in the tests. */
+    public static final URL URL_THIRD;
+
+    /** Constant for the url http://www.gargoylesoftware.com which is used in the tests. */
+    public static final URL URL_GARGOYLE;
+    static {
+        try {
+            URL_FIRST = new URL("http://first");
+            URL_SECOND = new URL("http://second");
+            URL_THIRD = new URL("http://third");
+            URL_GARGOYLE = new URL("http://www.gargoylesoftware.com");
+        }
+        catch( final MalformedURLException e ) {
+            // This is theoretically impossible.
+            throw new IllegalStateException("Unable to create url constants");
+        }
+    }
     /**
      * Create an instance.
      * @param name The name of the test.

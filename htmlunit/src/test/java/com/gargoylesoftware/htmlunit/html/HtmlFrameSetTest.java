@@ -37,13 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.Collections;
+
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import java.net.URL;
-import java.util.Collections;
+import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
  *  Tests for HtmlFrameSet
@@ -86,16 +86,16 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( webClient );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"), secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_SECOND, secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://third"), thirdContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_THIRD, thirdContent,200,"OK","text/html",Collections.EMPTY_LIST );
 
         webClient.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final WebWindow secondWebWindow = webClient.getWebWindowByName("left");
@@ -128,14 +128,14 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( webClient );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"), secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_SECOND, secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
 
         webClient.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
-                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final WebWindow secondWebWindow = webClient.getWebWindowByName("left");

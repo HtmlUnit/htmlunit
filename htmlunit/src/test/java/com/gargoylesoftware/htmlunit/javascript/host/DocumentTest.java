@@ -191,13 +191,13 @@ public class DocumentTest extends WebTestCase {
                  + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"), secondContent, 200, "OK", "text/html",
+            URL_SECOND, secondContent, 200, "OK", "text/html",
             Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = (HtmlPage)client.getPage(new URL("http://first"));
+        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
         assertEquals( "", page.getTitleText() );
 
         final HtmlAnchor testAnchor = page.getAnchorByName("testJavascript");
@@ -222,13 +222,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("http://first");
@@ -253,13 +253,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("http://first");
@@ -290,13 +290,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlElement div1 = (HtmlElement)
@@ -337,13 +337,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final DomNode div1 =
@@ -383,12 +383,12 @@ public class DocumentTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
         webConnection.setResponse(
-            new URL("http://first"), content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -422,12 +422,12 @@ public class DocumentTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
         webConnection.setResponse(
-            new URL("http://first"), content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -464,12 +464,12 @@ public class DocumentTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
         webConnection.setResponse(
-            new URL("http://first"), content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -502,12 +502,12 @@ public class DocumentTest extends WebTestCase {
             + "<form name='form1'><div id='oldChild'/></form>"
             + "</body></html>";
         webConnection.setResponse(
-            new URL("http://first"), content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -540,12 +540,12 @@ public class DocumentTest extends WebTestCase {
             + "<form name='form1'><div id='formChild'/></form>"
             + "</body></html>";
         webConnection.setResponse(
-            new URL("http://first"), content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -579,12 +579,12 @@ public class DocumentTest extends WebTestCase {
             + "<form name='form1'><div id='formChild'/></form>"
             + "</body><div id='newChild'/></html>";
         webConnection.setResponse(
-            new URL("http://first"), content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -614,13 +614,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("bar");
@@ -650,13 +650,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[] {
@@ -686,13 +686,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("bar");
@@ -718,13 +718,13 @@ public class DocumentTest extends WebTestCase {
              + "<div id='id1'></div></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("id1");
@@ -749,13 +749,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("script1");
@@ -781,13 +781,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("text/javascript");
@@ -810,7 +810,7 @@ public class DocumentTest extends WebTestCase {
              + "</script></head><body onload='doTest()'>"
              + "</body></html>";
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final String scriptContent
              = "doTest=function () {\n"
@@ -822,7 +822,7 @@ public class DocumentTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("http://script");
@@ -849,13 +849,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlElement div1 = firstPage.getHtmlElementById("childDiv");
@@ -884,13 +884,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("true");
@@ -916,13 +916,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("true");
@@ -951,13 +951,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlElement childDiv = firstPage.getHtmlElementById("childDiv");
@@ -988,13 +988,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[] {
@@ -1022,13 +1022,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlElement div1 = firstPage.getHtmlElementById("parentDiv");
@@ -1063,13 +1063,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlElement parentDiv = firstPage.getHtmlElementById("parentDiv");
@@ -1335,13 +1335,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -1367,13 +1367,13 @@ public class DocumentTest extends WebTestCase {
              + "</script></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals("", firstPage.getTitleText());
 
         final List expectedAlerts = Collections.singletonList("DIV");
@@ -1394,13 +1394,13 @@ public class DocumentTest extends WebTestCase {
              + "</form></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         // This will blow up if the div tag hasn't been written to the document
@@ -1422,7 +1422,7 @@ public class DocumentTest extends WebTestCase {
              + "<script src='http://script'></script>"
              + "</form></body></html>";
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final String scriptContent
              = "document.write(\"<div id='div1'></div>\");";
@@ -1432,7 +1432,7 @@ public class DocumentTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         // This will blow up if the div tag hasn't been written to the document
@@ -1461,12 +1461,12 @@ public class DocumentTest extends WebTestCase {
         final String firstContent
              = "<html><body><h1 id=\"first\">First</h1></body></html>";
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final String secondContent
              = "<html><body><h1 id=\"second\">Second</h1></body></html>";
         webConnection.setResponse(
-            new URL("http://second"), secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_SECOND, secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final String scriptContent
              = "document.getElementById (\"iframe\").src = \"http://second\";";
@@ -1504,13 +1504,13 @@ public class DocumentTest extends WebTestCase {
 
         final List responseHeaders = Collections.singletonList( new KeyValuePair("referrer", "http://ref") );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", responseHeaders );
+            URL_FIRST, firstContent, 200, "OK", "text/html", responseHeaders );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         assertEquals( Collections.singletonList("http://ref"), collectedAlerts );
@@ -1530,13 +1530,13 @@ public class DocumentTest extends WebTestCase {
 
         final List responseHeaders = Collections.EMPTY_LIST;
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", responseHeaders );
+            URL_FIRST, firstContent, 200, "OK", "text/html", responseHeaders );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         assertEquals( Collections.singletonList(""), collectedAlerts );
@@ -1556,13 +1556,13 @@ public class DocumentTest extends WebTestCase {
 
         final List responseHeaders = Collections.EMPTY_LIST;
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", responseHeaders );
+            URL_FIRST, firstContent, 200, "OK", "text/html", responseHeaders );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         assertEquals( Collections.singletonList("http://first"), collectedAlerts );
@@ -1589,13 +1589,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("button");
@@ -1624,13 +1624,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("button");
@@ -1652,12 +1652,12 @@ public class DocumentTest extends WebTestCase {
             + "alert(document.getElementsByTagName('script').length);"
             + "</script></body></html>";
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        webClient.getPage( new URL( "http://first" ) );
+        webClient.getPage( URL_FIRST );
 
         final List expectedAlerts = Collections.singletonList("1");
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1676,7 +1676,7 @@ public class DocumentTest extends WebTestCase {
         final String firstContent
             = "<html><body><script src=\"http://script\"></script></body></html>";
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final String scriptContent
             = "alert(document.getElementsByTagName('script').length);";
@@ -1686,7 +1686,7 @@ public class DocumentTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        webClient.getPage( new URL( "http://first" ) );
+        webClient.getPage( URL_FIRST );
 
         final List expectedAlerts = Collections.singletonList("1");
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1712,13 +1712,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[] {
@@ -1749,13 +1749,13 @@ public class DocumentTest extends WebTestCase {
              + "</body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[] {
@@ -1787,7 +1787,7 @@ public class DocumentTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>"
             + "</body></html>";
 
-        final URL url = new URL("http://first");
+        final URL url = URL_FIRST;
         webConnection.setResponse(
             url, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
@@ -1799,7 +1799,7 @@ public class DocumentTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[] {
@@ -1824,7 +1824,7 @@ public class DocumentTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>"
             + "</body></html>";
 
-        final URL url = new URL("http://first");
+        final URL url = URL_FIRST;
         webConnection.setResponse(
             url, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
@@ -1838,7 +1838,7 @@ public class DocumentTest extends WebTestCase {
                 collectedStatus.add(message);
             }
         });
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[] {

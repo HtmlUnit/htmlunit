@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -82,13 +81,13 @@ public class HtmlFrameTest extends WebTestCase {
             + "    <frame src='' id='frame1'>"
             + "    <frame src='about:blank'  id='frame2'>"
             + "</frameset></html>";
-        webConnection.setResponse( new URL("http://first"), firstContent,
+        webConnection.setResponse( URL_FIRST, firstContent,
             200, "OK", "text/html", Collections.EMPTY_LIST);
 
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage)webClient.getPage(
-            new URL("http://first"), SubmitMethod.POST, Collections.EMPTY_LIST);
+            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
         assertEquals( "first", page.getTitleText() );
 
         final HtmlFrame frame1 = (HtmlFrame)page.getHtmlElementById("frame1");
@@ -115,13 +114,13 @@ public class HtmlFrameTest extends WebTestCase {
             + "    <frame id='frame1'>"
             + "    <frame onload=\"alert('onload');\"  id='frame2'>"
             + "</frameset></html>";
-        webConnection.setResponse( new URL("http://first"), firstContent,
+        webConnection.setResponse( URL_FIRST, firstContent,
             200, "OK", "text/html", Collections.EMPTY_LIST);
 
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage)webClient.getPage(
-            new URL("http://first"), SubmitMethod.POST, Collections.EMPTY_LIST);
+            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
         assertEquals( "first", page.getTitleText() );
 
         final HtmlFrame frame1 = (HtmlFrame)page.getHtmlElementById("frame1");
@@ -152,13 +151,13 @@ public class HtmlFrameTest extends WebTestCase {
             + "'<html><head><title>generated</title></head><body>generated</body></html>');"
             + "frame1.document.close()\"  id='frame2'>"
             + "</frameset></html>";
-        webConnection.setResponse( new URL("http://first"), firstContent,
+        webConnection.setResponse( URL_FIRST, firstContent,
             200, "OK", "text/html", Collections.EMPTY_LIST);
 
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage)webClient.getPage(
-            new URL("http://first"), SubmitMethod.POST, Collections.EMPTY_LIST);
+            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
         assertEquals( "first", page.getTitleText() );
 
         final HtmlFrame frame1 = (HtmlFrame)page.getHtmlElementById("frame1");

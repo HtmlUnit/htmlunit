@@ -37,21 +37,21 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashSet;
 import java.util.TreeSet;
+
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for SimpleScriptable.
@@ -99,7 +99,7 @@ public class SimpleScriptableTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals("foo", page.getTitleText());
 

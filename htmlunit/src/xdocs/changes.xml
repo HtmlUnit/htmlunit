@@ -24,28 +24,35 @@
                 Change the node type and node name for HtmlPage and Document in JavaScript.
             </action>
             <action type="update" dev="mbowler" due-to="Christian Sell">
-            	Nested input elements, i.e. those that were not
-				immediate children of the enclosing form, were not handled.
-				Patch submitted by Christian Sell.
+                Nested input elements, i.e. those that were not
+                immediate children of the enclosing form, were not handled.
+                Patch submitted by Christian Sell.
             </action>
             <action type="update" dev="mbowler" due-to="Christian Sell">
-				Changed the behaviour of single select lists to match the common
-				browsers.  When multiple items have the selected attribute then 
-				the last one is returned to the server.  When no items have been
-				selected, the first one is sent to the server.
-				Patch submitted by Christian Sell.
+                Changed the behaviour of single select lists to match the common
+                browsers.  When multiple items have the selected attribute then 
+                the last one is returned to the server.  When no items have been
+                selected, the first one is sent to the server.
+                Patch submitted by Christian Sell.
             </action>
             <action type="update" dev="mbowler">
-            	Deprecated MockWebConnection.setContent() in favour of setDefaultResponse()
-            	which is more descriptive.  Changed all tests to use the new method.
+                Deprecated MockWebConnection.setContent() in favour of setDefaultResponse()
+                which is more descriptive.  Changed all tests to use the new method.
             </action>
             <action type="update" dev="mbowler">
-            	Changed all tests to use MockWebConnection instead of FakeWebConnection.
-            	The FakeWebConnection class has been deprecated and will be removed for
-            	the next major release of HtmlUnit after 1.3.
+                Changed all tests to use MockWebConnection instead of FakeWebConnection.
+                The FakeWebConnection class has been deprecated and will be removed for
+                the next major release of HtmlUnit after 1.3.
             </action>
-		</release>
-		
+            <action type="update" dev="mbowler">
+                The same hard coded urls were being used over and over again throughout 
+                the tests.  Defined constants for the most freqently used urls in 
+                WebTestCase and changed tests to use these constants.  This will reduce 
+                the number of temporary objects during tests runs and will decrease the 
+                chance of making a typo in the urls.
+            </action>
+        </release>
+        
         <release version="1.3-pre1" date="November 7, 2003">
             <action type="update" dev="mbowler">
                 INCOMPATIBLE CHANGE: Added method to interface WebWindowListener for 
@@ -175,12 +182,12 @@
                  extra white space should not happen. Patch supplied by Brad Clarke.
             </action>
             <action type="update" dev="mbowler" id="824069">
-				Fixed exception when trying to reference one frame by name from 
-				another in JavaScript. For example "parent.nav.document", where 
-				nav is the name of the frame. 
+                Fixed exception when trying to reference one frame by name from 
+                another in JavaScript. For example "parent.nav.document", where 
+                nav is the name of the frame. 
             </action>
             <action type="update" dev="mbowler" id="793340">
-            	Fixed exception when specifying an empty string for src on an a frame.
+                Fixed exception when specifying an empty string for src on an a frame.
             </action>
             <action type="update" dev="dktaylor" id="753776">
                 Fixed the bug where newly opened windows targetted at named
@@ -228,8 +235,8 @@
                 attribute to be optional in form elements.)
             </action>
             <action type="update" dev="mbowler" id="824730" due-to="Jun Chen">
-            	Changed the behaviour of HtmlCheckBoxInput.click() to be consistent
-            	with IE and Mozilla.  Patch submitted by Jun Chen.
+                Changed the behaviour of HtmlCheckBoxInput.click() to be consistent
+                with IE and Mozilla.  Patch submitted by Jun Chen.
             </action>
             <action type="update" dev="dktaylor">
                 Fix return type from DomCharacterData.getData to be String.
@@ -242,8 +249,8 @@
                 instead of HtmlElement.
             </action>
             <action type="add" dev="mbowler">
-            	Added support for onload handlers on frames.  This isn't supported
-            	by the HTML specification but is supported by the popular browsers.
+                Added support for onload handlers on frames.  This isn't supported
+                by the HTML specification but is supported by the popular browsers.
             </action>
             <action type="update" dev="mbowler">
                 Upgraded commons-httpclient.jar to 2.0-rc2

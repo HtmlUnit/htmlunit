@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -80,13 +79,13 @@ public class NavigatorTest extends WebTestCase {
              + "<body onload='doTest()'></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        client.getPage(new URL("http://first"));
+        client.getPage(URL_FIRST);
 
         final List expectedAlerts = Arrays.asList( new String[]{"false"} );
         assertEquals( expectedAlerts, collectedAlerts );

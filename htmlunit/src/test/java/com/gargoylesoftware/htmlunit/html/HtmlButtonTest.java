@@ -37,17 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.KeyValuePair;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  *  Tests for HtmlButton
@@ -89,7 +89,7 @@ public class HtmlButtonTest extends WebTestCase {
         client.setAlertHandler(alertHandler);
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
 
@@ -123,7 +123,7 @@ public class HtmlButtonTest extends WebTestCase {
         client.setAlertHandler(alertHandler);
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
 
@@ -157,7 +157,7 @@ public class HtmlButtonTest extends WebTestCase {
         client.setAlertHandler(alertHandler);
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
 
@@ -197,7 +197,7 @@ public class HtmlButtonTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
         final HtmlButton resetInput = (HtmlButton)page.getHtmlElementById( "resetButton" );
@@ -258,7 +258,7 @@ public class HtmlButtonTest extends WebTestCase {
         client.setAlertHandler(alertHandler);
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
 

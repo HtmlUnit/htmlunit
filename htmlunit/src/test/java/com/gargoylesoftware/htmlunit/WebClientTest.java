@@ -89,7 +89,7 @@ public class WebClientTest extends WebTestCase {
 
         try {
             client.getPage(
-                    new URL( "http://www.gargoylesoftware.com" ),
+                    URL_GARGOYLE,
                     SubmitMethod.POST, Collections.EMPTY_LIST );
             fail( "Expected FailingHttpStatusCodeException" );
         }
@@ -134,7 +134,7 @@ public class WebClientTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlAnchor anchor = ( HtmlAnchor )firstPage.getHtmlElementById( "a2" );
 
@@ -218,16 +218,16 @@ public class WebClientTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"), secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_SECOND, secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://third"), thirdContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_THIRD, thirdContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals("first", firstPage.getTitleText());
 
         final EventCatcher eventCatcher = new EventCatcher();
@@ -391,15 +391,15 @@ public class WebClientTest extends WebTestCase {
             new KeyValuePair("Location", "http://second") );
         final MockWebConnection webConnection = new MockWebConnection( webClient );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, statusCode,
+            URL_FIRST, firstContent, statusCode,
             "Some error", "text/html", headers );
         webConnection.setResponse(
-            new URL("http://second"), secondContent, 200,
+            URL_SECOND, secondContent, 200,
             "OK", "text/html", Collections.EMPTY_LIST );
 
         webClient.setWebConnection( webConnection );
 
-        final URL url = new URL("http://first");
+        final URL url = URL_FIRST;
 
         HtmlPage page;
         WebResponse webResponse;
@@ -549,13 +549,13 @@ public class WebClientTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( webClient );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"), secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_SECOND, secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         webClient.setWebConnection( webConnection );
 
-        final URL url = new URL("http://first");
+        final URL url = URL_FIRST;
 
         final HtmlPage page = (HtmlPage)webClient.getPage(
             url, SubmitMethod.GET, Collections.EMPTY_LIST);
@@ -794,7 +794,7 @@ public class WebClientTest extends WebTestCase {
     public void testExpandUrl() throws Exception {
         assertEquals(
             "http://first/",
-            WebClient.expandUrl(new URL("http://first"), "#second").toExternalForm());
+            WebClient.expandUrl(URL_FIRST, "#second").toExternalForm());
     }
 }
 
