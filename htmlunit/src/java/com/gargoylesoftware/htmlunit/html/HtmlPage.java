@@ -1182,7 +1182,10 @@ public final class HtmlPage
 
         final int index = refreshString.indexOf("URL=");
         if( index == -1 ) {
-            getLog().error("Malformed refresh string ["+refreshString+"]");
+            if( refreshString.length() != 0 ) {
+                getLog().error("Malformed refresh string ["+refreshString+"]");
+            }
+            return;
         }
         final String newUrl = refreshString.substring(index+4);
         try {
