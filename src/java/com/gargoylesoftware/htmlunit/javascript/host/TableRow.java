@@ -83,8 +83,8 @@ public class TableRow extends HTMLElement {
     }
 
     /**
-     * Returns the rows in the element.
-     * @return The rows in the element.
+     * Returns the cells in the row.
+     * @return The cells in the row.
      */
     public Object jsGet_cells() {
         if (cells_ == null) {
