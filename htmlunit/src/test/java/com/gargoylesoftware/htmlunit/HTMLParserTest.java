@@ -71,8 +71,7 @@ public class HTMLParserTest extends TestCase {
         WebResponse webResponse = new StringWebResponse(
             "<html><head><title>TITLE</title><noscript>TEST</noscript></head><body></body></html>");
 
-        HTMLParser parser = new HTMLParser();
-        HtmlPage page = parser.parse(webClient, webResponse, webClient.getCurrentWindow());
+        HtmlPage page = HTMLParser.parse(webResponse, webClient.getCurrentWindow());
 
         HtmlUnitXPath xpath = new HtmlUnitXPath("//noscript");
         String stringVal = xpath.stringValueOf(page);
@@ -115,8 +114,7 @@ public class HTMLParserTest extends TestCase {
                 Collections.EMPTY_MAP
         );
 
-        HTMLParser parser = new HTMLParser();
-        HtmlPage page = parser.parse(webClient, webResponse, webClient.getCurrentWindow());
+        HtmlPage page = HTMLParser.parse(webResponse, webClient.getCurrentWindow());
 
         //find the copyright string
         HtmlUnitXPath xpath = new HtmlUnitXPath("//div[@id='footer']/table/tr[2]/td");

@@ -97,22 +97,36 @@ public final class HtmlPage extends DomNode implements Page {
     private Object onLoad_;
 
     /**
-     *  Create an instance of HtmlPage
+     *  This constructor should no longer be used
      *
-     * @param  webClient The WebClient that was used to load this page
+     * @param  webClient NOT USED
      * @param  webResponse The web response that was used to create this page
      * @param  originatingUrl The url that was used to load this page.
      * @param  webWindow The window that this page is being loaded into.
+     * @deprecated
      */
     public HtmlPage(
             final WebClient webClient,
             final URL originatingUrl,
             final WebResponse webResponse,
             final WebWindow webWindow ) {
+        this(originatingUrl, webResponse, webWindow);
+    }    
+    /**
+     *  Create an instance of HtmlPage
+     *
+     * @param  originatingUrl The url that was used to load this page.
+     * @param  webResponse The web response that was used to create this page
+     * @param  webWindow The window that this page is being loaded into.
+     */
+    public HtmlPage(
+            final URL originatingUrl,
+            final WebResponse webResponse,
+            final WebWindow webWindow ) {
 
         super(null);
 
-        webClient_ = webClient;
+        webClient_ = webWindow.getWebClient();
         originatingUrl_ = originatingUrl;
         webResponse_ = webResponse;
         setEnclosingWindow(webWindow);
