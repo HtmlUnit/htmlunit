@@ -13,21 +13,23 @@ a:visited { color: #009999; }
 a:active { color: #000066; }
 a:hover { color: #000066; }
 
-.box-frame-blue { font-size: 11px;border: solid 1px #7099C5; text-align: left; background-color: #f0f0ff; }
+.date { font-size: 11px; }
+
+.box-frame-blue { font-size: 12px;border: solid 1px #7099C5; text-align: left; background-color: #f0f0ff; }
 .box-title-blue { padding: 0px 0px 0px 2px; background-color: #7099C5; color: #ffffff; }
 
-.box-frame-red { font-size: 11px;border: solid 1px #7099C5; text-align: left; background-color: #fff0f0; }
+.box-frame-red { font-size: 12px;border: solid 1px #7099C5; text-align: left; background-color: #fff0f0; }
 .box-title-red { padding: 0px 0px 0px 2px; background-color: #D00000; color: #ffffff; }
 
-.box-frame-yellow { font-size: 11px;border: solid 1px #7099C5; text-align: left; background-color: #FAF9C3; }
+.box-frame-yellow { font-size: 12px;border: solid 1px #7099C5; text-align: left; background-color: #FAF9C3; }
 .box-title-yellow { padding: 0px 0px 0px 2px; background-color: #C6C600; color: #ffffff; }
 
-.box-frame-gray { font-size: 11px; border: solid 1px #CFDCED; text-align: left; background-color: #f0f0f0; }
+.box-frame-gray { font-size: 12px; border: solid 1px #CFDCED; text-align: left; background-color: #f0f0f0; }
 .box-title-gray { padding: 0px 0px 0px 2px; background-color: #c0c0c0; color: #ffffff; }
 
 .box-content {padding: 5px 5px 5px 10px;}
 
-.colouredTable { font-size: 11px; border: solid 1px #CFDCED; text-align: left; background-color: #f0f0f0; }
+.colouredTable { font-size: 12px; border: solid 1px #CFDCED; text-align: left; background-color: #f0f0f0; }
 thead { padding: 0px 0px 0px 2px; background-color: #c0c0c0; color: #ffffff; text-align: center; }
 tbody {padding: 5px 5px 5px 10px;}
 
@@ -287,6 +289,16 @@ tbody {padding: 5px 5px 5px 10px;}
 			<xsl:value-of select="$string"/>
 		</xsl:otherwise>
 	</xsl:choose>
+</xsl:template>
+
+
+<xsl:template match="date">
+	<span class="date">(<xsl:apply-templates/>)</span>
+</xsl:template>
+
+
+<xsl:template match="version-string">
+	<span class="date">(Version: <xsl:apply-templates/>)</span>
 </xsl:template>
 
 

@@ -23,20 +23,15 @@
 <section title="Where to find...">
 	<p>
 		<dl>
-			<dt>Latest stable release</dt>
-			<dd>Version <b>1.0</b>
-				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.0.zip?download">Download</a>
-				<note>
-					Technically, 1.0 is the last stable release but there have been so many
-					bug fixes and enhancements on the 1.1 stream that I can't honestly recommend
-					that anyone use 1.0 anymore.  The only "unstable" part of the 1.1 stream
-					right now is the javascript support so the "most stable" release at this point
-					would be the latest version of 1.1 with javascript disabled (just don't put js.jar in the
-					classpath).
-				</note>
+			<dt>Latest stable release <date>October 30, 2002</date></dt>
+			<dd>Version <b>1.1</b>: |
+				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.1.zip?download">Download</a> |
+				<a href="api/index.html">Javadoc API documentation</a> |
+				<a href="changes.html">Change history</a> |
 			</dd>
 		</dl>
 	</p>
+<!--
 	<p>
 		<dl>
 			<dt>Current development release</dt>
@@ -53,6 +48,7 @@
 			</dd>
 		</dl>
 	</p>
+-->
 	<p>
 		<dl>
 			<dt>Most recent code</dt>
@@ -126,24 +122,24 @@
 			<dt>HtmlUnit.jar</dt>
 			<dd>The main HtmlUnit classes</dd>
 
-			<dt>commons-httpclient.jar [Oct 20/2002 gump build]</dt>
+			<dt>commons-httpclient.jar <version-string>Oct 20/2002 gump build</version-string></dt>
 			<dd><a href="http://jakarta.apache.org/commons/httpclient/">HttpClient from Apache</a>,
 			the code that actually handles the http connections.</dd>
 
-			<dt>commons-logging.jar [Version 1.0.2]</dt>
+			<dt>commons-logging.jar <version-string>1.0.2</version-string></dt>
 			<dd><a href="http://jakarta.apache.org/commons/logging.html">Logging
 			from Apache</a></dd>
 
-			<dt>nekohtml.jar [Version 0.6.8 + patches from the author]</dt>
+			<dt>nekohtml.jar <version-string>0.6.8 + patches from the author</version-string></dt>
 			<dd><a href="http://www.apache.org/~andyc/neko/doc/html/index.html">
 			NekoHTML</a> is a tool to convert badly written html into an xml
 			dom model</dd>
 
-			<dt>xercesImpl.jar and xmlParserAPIs.jar [Version 2.1.0]</dt>
+			<dt>xercesImpl.jar and xmlParserAPIs.jar <version-string>2.1.0</version-string></dt>
 			<dd>The<a href="http://xml.apache.org/xerces2-j/index.html">
 			Xerces</a> xml parser from Apache. </dd>
 
-			<dt>js.jar [Version 1.5R3]</dt>
+			<dt>js.jar <version-string>1.5R3</version-string></dt>
 			<dd><a href="http://www.mozilla.org/rhino">Rhino</a>,
 			a javascript engine from the Mozilla project.  This jar is optional - if it isn't
 			found then javascript support will be disabled but the rest of HtmlUnit will
