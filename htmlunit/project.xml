@@ -345,7 +345,17 @@
                 <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>Logging support</htmlunit.description>
             </properties>
-        </dependency>          
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.0</version>
+            <url>http://jakarta.apache.org/commons/io/</url>
+            <properties>
+                <htmlunit.group>required</htmlunit.group>
+                <htmlunit.description>IO utilities</htmlunit.description>
+            </properties>
+        </dependency>
     </dependencies>
 
     <build>
