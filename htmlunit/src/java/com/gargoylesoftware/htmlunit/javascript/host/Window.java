@@ -48,13 +48,15 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.WindowFramesArray;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
-import java.util.List;
+
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
@@ -64,6 +66,7 @@ import org.mozilla.javascript.Scriptable;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  */
 public final class Window extends SimpleScriptable {
 
@@ -73,7 +76,7 @@ public final class Window extends SimpleScriptable {
     private Screen screen_;
     private History history_;
     private Location location_;
-
+    private WindowFramesArray windowFramesArray_;
     /**
      * Create an instance.  The rhino engine requires all host objects
      * to have a default constructor.
@@ -352,6 +355,9 @@ public final class Window extends SimpleScriptable {
 
         location_ = (Location)makeJavaScriptObject("Location");
         location_.initialize(this);
+        
+        windowFramesArray_ =(WindowFramesArray)makeJavaScriptObject("WindowFramesArray");
+        windowFramesArray_.initialize(htmlPage);
     }
 
 
@@ -408,27 +414,12 @@ public final class Window extends SimpleScriptable {
 
 
     /**
-     * Return the value of the frames property.  Currently not implemented
+     * Return the value of the frames property.
      * @return The value of window.frames
      */
-    public SimpleScriptable[] jsGet_frames() {
-        final Page page = webWindow_.getEnclosedPage();
-        if( page == null || page instanceof HtmlPage == false ) {
-            return new SimpleScriptable[0];
-        }
-
-        final HtmlPage htmlPage = (HtmlPage)page;
-        final List frames = htmlPage.getFrames();
-        final int frameCount = frames.size();
-        final SimpleScriptable[] jsFrames = new SimpleScriptable[frameCount];
-
-        for( int i=0; i<frameCount; i++ ) {
-            jsFrames[i] = (SimpleScriptable)((WebWindow)frames.get(i)).getScriptObject();
-        }
-
-        return jsFrames;
+    public WindowFramesArray jsGet_frames() {
+        return windowFramesArray_;
     }
-
 
     /**
      * Return the WebWindow associated with this Window
