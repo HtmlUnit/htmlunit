@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * Tests for elements with onblur and onfocus attributes.
  *
  * @author David D. Kilzer
+ * @author Marc Guillemot
  * @version $Revision$
  */
 public class FocusableElementTest extends WebTestCase {
@@ -101,10 +102,8 @@ public class FocusableElementTest extends WebTestCase {
                 "<html><head><title>foo</title></head><body>" +
                 htmlBodyContent +
                 "<script type=\"text/javascript\" language=\"JavaScript\">\n" +
-                "<!--\n" +
                 "document.getElementById('focusId').focus();\n" +
                 "document.getElementById('focusId').blur();\n" +
-                "// -->\n" +
                 "</script></body></html>");
     }
 
@@ -197,5 +196,35 @@ public class FocusableElementTest extends WebTestCase {
      */
     public void testTextarea_onblur_onfocus() throws Exception {
         onClickBodyTest("<form><textarea " + COMMON_ATTRIBUTES + ">Text</textarea></form>");
+    }
+    
+    /**
+     * Regresssion test for bug 
+     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1161705&group_id=47038
+     * @throws Exception if the test fails
+     */
+    public void testOnBlurWith2Pages() throws Exception {
+        final String html = 
+            "<html>"
+            + "<head>"
+            + "<script>\n"
+            + "var bCalled = false;\n"
+            + "function testOnBlur()\n"
+            + "{\n"
+            + "  if (bCalled)\n"
+            + "    throw 'problem!'; // to get the error immediately rather than an infinite loop\n"
+            + "  bCalled = true;\n"
+            + "  document.getElementById('text2').focus()\n;"
+            + "}\n"
+            + "</script>"
+            + "</head>"
+            + "<body onLoad='document.getElementById(\"text1\").focus()'>"
+            + "<input type='text' id='text1' onblur='testOnBlur()'>"
+            + "<input type='text' id='text2'>"
+            + "<a href='foo'>this page again</a>"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        ((HtmlAnchor) page.getAnchors().get(0)).click();
     }
 }
