@@ -42,7 +42,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.Transformer;
 import org.jaxen.JaxenException;
@@ -93,6 +95,8 @@ public class Window extends SimpleScriptable {
     private History history_;
     private Location location_;
     private Function onload_;
+    private Map timeoutThreads_;
+    private int nextTimeoutId_;
 
     /**
      * Create an instance.  The rhino engine requires all host objects
@@ -262,6 +266,9 @@ public class Window extends SimpleScriptable {
                     htmlPage.executeJavaScriptIfPossible(
                         script, "Window.setTimeout()", true, htmlPage.getDocumentElement());
                 }
+                catch( final InterruptedException e ) {
+                    window.getLog().debug("JavaScript timeout thread interrupted; clearTimeout() probably called.");
+                }
                 catch( final Exception e ) {
                     window.getLog().error("Caught exception in Window.setTimeout()", e);
                 }
@@ -273,10 +280,26 @@ public class Window extends SimpleScriptable {
                 }
             }
         };
-        final Thread setTimeoutThread = new Thread(runnable);
+        final int id = nextTimeoutId_++;
+        final String threadName = "HtmlUnit setTimeout() Thread " + id;
+        final Thread setTimeoutThread = new Thread(runnable, threadName);
+        timeoutThreads_.put(new Integer(id), setTimeoutThread);
         setTimeoutThread.setPriority(Thread.currentThread().getPriority() + 1);
         setTimeoutThread.start();
-        return 0; // to do when implementing clearTimeout
+        return id;
+    }
+
+
+    /**
+     * Cancels a time-out previously set with the <tt>setTimeout</tt> method.
+     * 
+     * @param timeoutId identifier for the timeout to clear (returned by <tt>setTimeout</tt>)
+     */
+    public void jsFunction_clearTimeout(final int timeoutId) {
+        final Thread setTimeoutThread = (Thread) timeoutThreads_.get(new Integer(timeoutId));
+        if(setTimeoutThread != null) {
+            setTimeoutThread.interrupt();
+        }
     }
 
 
@@ -385,6 +408,8 @@ public class Window extends SimpleScriptable {
 
         location_ = (Location)makeJavaScriptObject("Location");
         location_.initialize(this);
+
+        timeoutThreads_ = new HashMap();
     }
 
 
