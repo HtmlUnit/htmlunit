@@ -224,7 +224,7 @@ public class HtmlSelect
      */
     public HtmlOption getOptionByValue( final String value )
         throws ElementNotFoundException {
-        return ( HtmlOption )getPage().getOneHtmlElementByAttribute( "option", "value", value );
+        return ( HtmlOption )getOneHtmlElementByAttribute( "option", "value", value );
     }
 
 

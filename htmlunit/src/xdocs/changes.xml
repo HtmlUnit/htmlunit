@@ -47,7 +47,11 @@
 			Added WebClient.expandUrl()
 		</change>
 		<change type="fix">
-			Fixed bug were relative urls in redirects were not being expanded.
+			Fixed bug where relative urls in redirects were not being expanded.
+		</change>
+		<change type="fix">
+			Fixed bug in HtmlSelect.getOptionByValue() where searching for the option would
+			start at the top of the page instead of at the select.
 		</change>
 	</change-log>
 </section>
