@@ -33,7 +33,7 @@
         </property>
     </class>
 
-    <class name="Button" extends="Input"/>
+    <class name="Button" extends="FormField"/>
 
     <class name="CharacterDataImpl" extends="NodeImpl">
         <property name="data" readable="true" writable="true"/>
@@ -347,28 +347,32 @@
 
     <class name="Image" extends="Input"/>
 
-    <class name="Input" extends="FocusableHostElement">
-        <property name="checked" readable="true" writable="true"/>
-        <property name="defaultChecked" readable="true" writable="true"/>
-        <property name="defaultValue" readable="true" writable="true"/>
+    <class name="FormField" extends="FocusableHostElement">
+        <property name="disabled" readable="true" writable="true"/>
         <property name="form" readable="true" writable="true"/>
         <property name="name" readable="true" writable="true"/>
         <property name="onchange" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="3"/>
         </property>
-        <property name="options" readable="true" writable="true"/>
-        <property name="selectedIndex" readable="true" writable="true"/>
         <property name="tabindex" readable="true" writable="true"/>
-        <property name="type" readable="true" writable="true">
+        <property name="type" readable="true" writable="false">
             <javascript min-version="1.1"/>
         </property>
         <property name="value" readable="true" writable="true"/>
         <!-- This property is only in DOM1 so it  -->
-        <property name="disabled" readable="true" writable="true"/>
 
         <function name="click"/>
         <function name="select"/>
+    </class>
+
+    <class name="Input" extends="FormField">
+        <property name="checked" readable="true" writable="true"/>
+        <property name="defaultChecked" readable="true" writable="true"/>
+        <property name="defaultValue" readable="true" writable="true"/>
+        <property name="type" readable="true" writable="true">
+            <javascript min-version="1.1"/>
+        </property>
     </class>
 
     <class name="Location">
@@ -493,10 +497,12 @@
         <property name="width" readable="true" writable="false"/>
     </class>
 
-    <class name="Select" extends="Input">
+    <class name="Select" extends="FormField">
 		<!-- NOT FINISHED -->
         
 		<property name="length" readable="true" writable="true"/>
+        <property name="options" readable="true" writable="false"/>
+        <property name="selectedIndex" readable="true" writable="true"/>
         
 		<function name="add"/>
         <function name="remove"/>
@@ -578,11 +584,7 @@
 		</function>
 	</class>
 	
-    <class name="Text" extends="Input">
-		<!-- NOT FINISHED -->
-	</class>
-
-    <class name="Textarea" extends="Input">
+    <class name="Textarea" extends="FormField">
 		<!-- NOT FINISHED -->
 	</class>
 

@@ -697,4 +697,55 @@ public class FormTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * document.myForm.submit returns a field name submit or the submit function
+     * depending on the sort of the field named submit
+     * @throws Exception if the test fails
+     */
+    public void testFieldNamedSubmit() throws Exception {
+        testFieldNamedSubmit("<input type='text' name='submit'>", "INPUT");
+        testFieldNamedSubmit("<input type='password' name='submit'>", "INPUT");
+        testFieldNamedSubmit("<input type='submit' name='submit'>", "INPUT");
+        testFieldNamedSubmit("<input type='radio' name='submit'>", "INPUT");
+        testFieldNamedSubmit("<input type='checkbox' name='submit'>", "INPUT");
+        testFieldNamedSubmit("<input type='button' name='submit'>", "INPUT");
+        testFieldNamedSubmit("<button type='submit' name='submit'>", "BUTTON");
+        testFieldNamedSubmit("<textarea name='submit'></textarea>", "TEXTAREA");
+        testFieldNamedSubmit("<select name='submit'></select>", "SELECT");
+        testFieldNamedSubmit("<input type='image' name='submit'>", "function");
+        testFieldNamedSubmit("<input type='IMAGE' name='submit'>", "function");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    void testFieldNamedSubmit(final String htmlSnippet, final String expected) throws Exception {
+        final String content =
+            "<html>"
+            + "<head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  if (document.login.submit.tagName)"
+            + "    alert(document.login.submit.tagName);"
+            + "  else"
+            + "    alert('function');"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + "<form name='login' action='foo.html'>"
+            + htmlSnippet
+            + "</form>"
+            + "</body>"
+            + "</html>";
+
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList( new String[]{ expected } );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

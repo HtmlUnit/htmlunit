@@ -37,19 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.mozilla.javascript.Function;
-
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
 /**
- *  The javascript object that represents something that can be put in a form.
+ * The javascript object for form input elements (html tag &lt;input ...&gt;).
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
  */
-public class Input extends FocusableHostElement {
+public class Input extends FormField {
 
     private static final long serialVersionUID = 3712016051364495710L;
 
@@ -69,65 +67,16 @@ public class Input extends FocusableHostElement {
     public void jsConstructor() {
     }
 
-
     /**
-     *  Return the value of the javascript attribute "value".
-     *
-     *@return    The value of this attribute.
+     * Sets the value of the attribute "type".
+     * Currently only a placeholder doing nothing.
+     * @param newType the new type to set
      */
-    public String jsGet_value() {
-        return getHtmlElementOrDie().getAttributeValue( "value" );
+    public void jsSet_type(final String newType) {
+        getLog().warn("type setter for Input object currently only implemented as placeholder."
+                + " Type will not be changed to: \"" 
+                + newType + "\" and will stay by \"" + getHtmlInputOrDie().getTypeAttribute() + "\"");
     }
-
-
-    /**
-     *  Set the value of the javascript attribute "value".
-     *
-     *@param  newValue  The new value.
-     */
-    public void jsSet_value( final String newValue ) {
-        getHtmlElementOrDie().setAttributeValue( "value", newValue );
-    }
-
-
-    /**
-     *  Return the value of the javascript attribute "name".
-     *
-     *@return    The value of this attribute.
-     */
-    public String jsGet_name() {
-        return getHtmlElementOrDie().getAttributeValue( "name" );
-    }
-    
-    /**
-     *  Set the value of the javascript attribute "name".
-     *
-     *@param  newName  The new name.
-     */
-    public void jsSet_name( final String newName ) {
-        getHtmlElementOrDie().setAttributeValue( "name", newName );
-    }    
-
-
-    /**
-     *  Return the value of the javascript attribute "form".
-     *
-     *@return    The value of this attribute.
-     */
-    public Form jsGet_form() {
-        return (Form)getScriptableFor(getHtmlElementOrDie().getEnclosingForm());
-    }
-
-
-    /**
-     *  Return the value of the javascript attribute "type".
-     *
-     *@return    The value of this attribute.
-     */
-    public String jsGet_type() {
-        return getHtmlElementOrDie().getAttributeValue("type");
-    }
-
 
     /**
      *  Set the checked property. Although this property is defined in Input it
@@ -139,14 +88,23 @@ public class Input extends FocusableHostElement {
      *      set
      */
     public void jsSet_checked( final boolean checked ) {
-        final String type = getHtmlElementOrDie().getAttributeValue("type").toLowerCase();
+        final HtmlInput input = getHtmlInputOrDie();
+        final String type = input.getTypeAttribute().toLowerCase();
         if (type.equals("checkbox") || type.equals("radio")){
-            ((HtmlInput)getHtmlElementOrDie()).setChecked(checked);
+            input.setChecked(checked);
         }
         else {
             getLog().debug( "Input.jsSet_checked(" + checked
                 + ") was called for class " + getClass().getName() );
         }
+    }
+    
+    /**
+     * Commodity for <code>(HtmlInput) getHtmlElementOrDie()</code>
+     * @return the bound html input
+     */
+    protected HtmlInput getHtmlInputOrDie() {
+        return (HtmlInput) getHtmlElementOrDie();
     }
 
 
@@ -159,9 +117,10 @@ public class Input extends FocusableHostElement {
      *@return    The checked property.
      */
     public boolean jsGet_checked() {
-        final String type = getHtmlElementOrDie().getAttributeValue("type").toLowerCase();
+        final HtmlInput input = getHtmlInputOrDie();
+        final String type = input.getTypeAttribute().toLowerCase();
         if (type.equals("checkbox") || type.equals("radio")){
-            return ((HtmlInput)getHtmlElementOrDie()).isChecked();
+            return input.isChecked();
         }
         else {
             getLog().warn( "Input.jsGet_checked() was called for class " + getClass().getName() );
@@ -169,68 +128,5 @@ public class Input extends FocusableHostElement {
         }
     }
 
-    /**
-     * Set the onchange event handler for this element.
-     * @param onchange the new handler     */
-    public void jsSet_onchange(final Function onchange) {
-        getHtmlElementOrDie().setEventHandler("onchange", onchange);
-    }
-
-    /**
-     * Get the onchange event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
-     */
-    public Function jsGet_onchange() {
-        return getHtmlElementOrDie().getEventHandler("onchange");
-    }
-
-    /**
-     * Click this element.  This simulates the action of the user clicking with the mouse.
-     */
-    public void jsFunction_click() {
-        getLog().debug( "Input.jsFunction_click() not implemented" );
-    }
-
-
-    /**
-     * Select this element.
-     */
-    public void jsFunction_select() {
-        getLog().debug( "Input.jsFunction_select() not implemented" );
-    }
-
-
-    /**
-     * Return true if this element is disabled.
-     * @return True if this element is disabled.
-     */
-    public boolean jsGet_disabled() {
-        return getHtmlElementOrDie().isAttributeDefined("disabled");
-    }
-
-
-    /**
-     * Set whether or not to disable this element
-     * @param disabled True if this is to be disabled.
-     */
-    public void jsSet_disabled( final boolean disabled ) {
-        final HtmlElement element = getHtmlElementOrDie();
-        if( disabled ) {
-            element.setAttributeValue("disabled", "disabled");
-        }
-        else {
-            element.removeAttribute("disabled");
-        }
-    }
-
-
-    /**
-     * Return the value of the tabindex attribute.  Currently not implemented.
-     * @return the value of the tabindex attribute.
-     */
-    public String jsGet_tabindex() {
-        getLog().debug("Input.jsGet_tabindex not implemented");
-        return "";
-    }
 }
 

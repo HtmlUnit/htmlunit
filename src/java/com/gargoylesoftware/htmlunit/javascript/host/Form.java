@@ -111,7 +111,7 @@ public class Form extends HTMLElement {
                 elements_.init(htmlForm, xpath);
             }
             catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Failed to initialize collection document.all: " + e.getMessage());
+                throw Context.reportRuntimeError("Failed to initialize collection form.elements: " + e.getMessage());
             }
         }
         return elements_;
@@ -236,18 +236,41 @@ public class Form extends HTMLElement {
      * @return The property.
      */
     public Object get( final String name, final Scriptable start ) {
+        return ((Form) start).get(name);
+    }
 
-        // Try to get the element or elements specified from the form element array.
-        final ElementArray formElements = ((Form) start).jsGet_elements();
-        Object result = formElements.get( name, formElements);
-        if (result instanceof ElementArray) {
-            if (((ElementArray) result).jsGet_length() == 0) {
-                result = NOT_FOUND;
-            }
+    /**
+     * Return the specified property or NOT_FOUND if it could not be found.
+     * @param name The name of the property
+     * @return The property.
+     */
+    public Object get(final String name) {
+        // Try to get the element or elements specified from the form element array 
+        // (except input type="image" that can't be accessed this way)
+        final ElementArray elements = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+        final HtmlForm htmlForm = getHtmlForm();
+        try {
+            final XPath xpath = new HtmlUnitXPath("//*[@name = '" + name + "'"
+                    + " and ((name() = 'input' and translate(@type, 'IMAGE', 'image') != 'image') or name() = 'button'"
+                    + " or name() = 'select' or name() = 'textarea')]", 
+                    HtmlUnitXPath.buildSubtreeNavigator(htmlForm)); 
+            elements.init(htmlForm, xpath);
+        }
+        catch (final JaxenException e) {
+            throw Context.reportRuntimeError("Failed to initialize collection: " + e.getMessage());
+        }
+        
+        Object result = elements;
+        final int nbElements = elements.jsGet_length();
+        if (nbElements == 0) {
+            result = NOT_FOUND;
+        }
+        else if (nbElements == 1) {
+            result = elements.get(0, elements);
         }
         
         if (result == NOT_FOUND) {
-            result = super.get( name, start );
+            result = super.get( name, this );
         }
         
         return result;

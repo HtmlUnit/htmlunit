@@ -7,6 +7,12 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1115091">
+                JavaScript: fixed document.myForm.myField should not retrieve the field if it is an input of type image.
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: added empty implementation of type setter for input fields (already allowing some scripts to run).
+            </action>
             <action type="add" dev="mguillem">
                 Added HtmlElement.getEnclosingElement(String tagName).
             </action>
