@@ -675,7 +675,7 @@ public abstract class DomNode implements Cloneable {
                 return null;
             }
 
-            DomNode parent = (DomNode)startingNode.getParentNode();
+            final DomNode parent = startingNode.getParentNode();
             if( parent == DomNode.this ) {
                 return null;
             }
