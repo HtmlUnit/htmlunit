@@ -1150,25 +1150,22 @@ public class DocumentTest extends WebTestCase {
 
         final String mainContent
              = "<html><head><title>Main</title></head><body>"
-             + "<iframe name=\"iframe\" id=\"iframe\" src=\"http://first\"></iframe>"
-             + "<script type=\"text/javascript\">"
-             + "document.write('<script type=\"text\\/javascript\" src=\"http://script\"><\\/script>');"
+             + "<iframe name='iframe' id='iframe' src='http://first'></iframe>"
+             + "<script type='text/javascript'>"
+             + "document.write('<script type=\"text/javascript\" src=\"http://script\"></' + 'script>');"
              + "</script></body></html> ";
-        webConnection.setResponse(
-            new URL("http://main"), mainContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(new URL("http://main"), mainContent);
 
         final String firstContent
-             = "<html><body><h1 id=\"first\">First</h1></body></html>";
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+             = "<html><body><h1 id='first'>First</h1></body></html>";
+        webConnection.setResponse(URL_FIRST, firstContent);
 
         final String secondContent
-             = "<html><body><h1 id=\"second\">Second</h1></body></html>";
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+             = "<html><body><h1 id='second'>Second</h1></body></html>";
+        webConnection.setResponse(URL_SECOND, secondContent);
 
         final String scriptContent
-             = "document.getElementById (\"iframe\").src = \"http://second\";";
+             = "document.getElementById('iframe').src = 'http://second';";
         webConnection.setResponse(
             new URL("http://script"), scriptContent, 200, "OK", "text/javascript", Collections.EMPTY_LIST );
 
@@ -1193,24 +1190,19 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDocumentWrite_InDOM() throws Exception {
-        if (true) {
-            notImplemented();
-            return;
-        }        
         final String mainContent
         = "<html><head><title>First</title></head><body>"
-            + "<script type=\"text/javascript\">"
+            + "<script type='text/javascript'>"
             + "document.write('<a id=\"blah\">Hello World</a>');" 
-            + "alert(document.getElementById('blah'));"
+            + "alert(document.getElementById('blah').tagName);"
             + "</script>" 
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage firstPage = loadPage(mainContent, collectedAlerts);
-        assertEquals( "First", firstPage.getTitleText() );
+        assertEquals("First", firstPage.getTitleText());
 
-        assertEquals(1, collectedAlerts.size());
-        assertFalse("Should not be 'null'", "null".equals(collectedAlerts.get(0)));
+        assertEquals(collectedAlerts, Collections.singletonList("A"));
     }    
 
     /**

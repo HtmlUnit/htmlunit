@@ -59,7 +59,6 @@ import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
-import com.gargoylesoftware.htmlunit.ScriptFilter;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
@@ -98,8 +97,6 @@ public final class HtmlPage extends DomNode implements Page {
     
     private static final int TAB_INDEX_NOT_SPECIFIED = -10;
     private static final int TAB_INDEX_OUT_OF_BOUNDS = -20;
-
-    private ScriptFilter scriptFilter_;
 
     private Object onLoad_;
 
@@ -1311,25 +1308,6 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
-     * Set the script filter that will be used during processing of the
-     * javascript document.write().  This is intended for internal use only.
-     * @param scriptFilter The script filter.
-     */
-    public void setScriptFilter( final ScriptFilter scriptFilter ) {
-        scriptFilter_ = scriptFilter;
-    }
-
-    /**
-     * Return the script filter that will be used during processing of the
-     * javascript document.write().  This is intended for internal use only.
-     * @return The script filter.
-     */
-    public ScriptFilter getScriptFilter() {
-        return scriptFilter_;
-    }
-
-
-    /**
      *  Return the html element with the specified id. If more than one element
      *  has this id (not allowed by the html spec) then return the first one.
      *
@@ -1422,5 +1400,34 @@ public final class HtmlPage extends DomNode implements Page {
         }
 
         return this;
+    }
+
+    /**
+     * For internal used only
+     * @param _node the node that has just been added to the document.
+     */
+    void notifyNodeAdded(final DomNode node) {
+        if (node instanceof HtmlElement) {
+            addIdElement((HtmlElement) node);
+        }
+        if (node instanceof HtmlScript) {
+            final HtmlScript scriptNode = (HtmlScript) node;
+            if (!isJavaScript(scriptNode.getTypeAttribute(), scriptNode.getLanguageAttribute())) {
+                return; // not javascript
+            }
+            if (scriptNode.getSrcAttribute() != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+                loadExternalJavaScriptFile(scriptNode.getSrcAttribute(), scriptNode.getCharsetAttribute());
+            }
+        }
+    }
+
+    /**
+     * For internal used only
+     * @param _node the node that has just been removed from the tree
+     */
+    void notifyNodeRemoved(final DomNode node) {
+        if (node instanceof HtmlElement) {
+            removeIdElement((HtmlElement) node);
+        }
     }
 }

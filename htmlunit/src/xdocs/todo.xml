@@ -19,9 +19,7 @@
 
         <section name="Code todo's">
             <ol>
-                <li>implement Document.write()</li>
                 <li>Have TopLevelWindow's deregister themselves with WebClient when they are closed</li>
-                <li>Support for file urls</li>
                 <li>Use HtmlUnit to verify all links in generated documentation</li>
             </ol>
         </section>
@@ -30,6 +28,7 @@
             <ol>
                 <li>window-howto.xml</li>
                 <li>Generate one big pdf from all the smaller documents</li>
+                <li>XPath howto</li>
             </ol>
         </section>
     </body>

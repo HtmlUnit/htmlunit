@@ -459,16 +459,22 @@ public abstract class DomNode implements Cloneable {
         }
         node.parent_ = this;
 
-        if (node instanceof HtmlElement) {
-            // the htmlPage_ is null for the html page itself
-            if (this instanceof HtmlPage) {
-                ((HtmlPage) this).addIdElement((HtmlElement) node);
-            }
-            else {
-            htmlPage_.addIdElement((HtmlElement) node);
-            }
-        }
+        getHtmlPage().notifyNodeAdded(node);
+
         return node;
+    }
+
+    /**
+     * Gets the html page to which this objects belongs
+     * @return the html page
+     */
+    private HtmlPage getHtmlPage() {
+        if (this instanceof HtmlPage) {
+            return (HtmlPage) this;
+        }
+        else {
+            return htmlPage_;
+        }
     }
 
     /**
@@ -478,7 +484,7 @@ public abstract class DomNode implements Cloneable {
      * @param newNode the new node to insert
      * @throws IllegalStateException if this node is not a child of any other node
      */
-    public void insertBefore(DomNode newNode) throws IllegalStateException {
+    public void insertBefore(final DomNode newNode) throws IllegalStateException {
 
         if(previousSibling_ == null) {
             throw new IllegalStateException();
@@ -500,9 +506,7 @@ public abstract class DomNode implements Cloneable {
         previousSibling_ = newNode;
         newNode.parent_ = parent_;
         
-        if (newNode instanceof HtmlElement) {
-            htmlPage_.addIdElement((HtmlElement) newNode);
-        }
+        getHtmlPage().notifyNodeAdded(newNode);
     }
 
     /**
@@ -515,10 +519,8 @@ public abstract class DomNode implements Cloneable {
         }
         basicRemove();
 
-        if (this instanceof HtmlElement) {
-            htmlPage_.removeIdElement((HtmlElement) this);
-        }
-}
+        getHtmlPage().notifyNodeRemoved(this);
+    }
 
     /**
      * cut off all relationships this node has with siblings an parents

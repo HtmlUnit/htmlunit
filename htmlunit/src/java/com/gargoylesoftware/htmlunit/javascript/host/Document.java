@@ -171,12 +171,33 @@ public final class Document extends NodeImpl {
     public void jsFunction_write(final String content) {
         if (writeBuffer_ == null) {
             // open() hasn't been called
-            final HtmlPage page = getHtmlPage();
-            page.getScriptFilter().write(content);
+            final HtmlPage page = (HtmlPage) getDomNodeOrDie();
+            // get the "current" node
+            final HtmlElement current = getLastHtmlElement(page.getDocumentElement());
+            
+            ((HTMLElement) getJavaScriptNode(current.getParentNode()))
+            .jsFunction_insertAdjacentHTML(HTMLElement.POSITION_BEFORE_END, content);
         }
         else {
             writeBuffer_.append(content);
         }
+    }
+    
+    /**
+     * Gets the node that is the last one when exploring following nodes, depth-first.
+     * @param node the node to search
+     * @return the searched node
+     */
+    HtmlElement getLastHtmlElement(final HtmlElement node) {
+        final DomNode lastChild = node.getLastChild(); 
+        if (lastChild == null) {
+            return node;
+        }
+        if (lastChild instanceof DomText) {
+            return node;
+        }
+        
+        return getLastHtmlElement((HtmlElement) lastChild);
     }
 
 
@@ -371,37 +392,26 @@ public final class Document extends NodeImpl {
 
     /**
      * javascript function "close".
-     * @param context The javascript context
-     * @param scriptable The scriptable
-     * @param args The arguments passed into the method.
-     * @param function The function.
-     * @return Nothing
      * @throws IOException If an IO problem occurs.
      */
-    public static Object jsFunction_close(
-            final Context context,
-            final Scriptable scriptable,
-            final Object[] args,
-            final Function function )
+    public void jsFunction_close()
         throws
             IOException {
 
-        final Document document = (Document)scriptable;
-        if( document.writeBuffer_  == null ) {
-            document.getLog().warn("close() called when document is not open.");
+        if (writeBuffer_  == null) {
+            getLog().warn("close() called when document is not open.");
         }
         else {
             final WebResponse webResponse
-                = new StringWebResponse(document.writeBuffer_.toString());
-            final HtmlPage page = document.getDomNodeOrDie().getPage();
+                = new StringWebResponse(writeBuffer_.toString());
+            final HtmlPage page = getDomNodeOrDie().getPage();
             final WebClient webClient = page.getWebClient();
             final WebWindow window = page.getEnclosingWindow();
 
             webClient.loadWebResponseInto(webResponse, window);
 
-            document.writeBuffer_ = null;
+            writeBuffer_ = null;
         }
-        return null;
     }
 
     /**

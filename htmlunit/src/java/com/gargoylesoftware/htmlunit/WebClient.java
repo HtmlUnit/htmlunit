@@ -167,6 +167,7 @@ public class WebClient {
     private ScriptPreProcessor scriptPreProcessor_;
     private Map activeXObjectMap_ = Collections.EMPTY_MAP;
     private RefreshHandler refreshHandler_ = new DefaultRefreshHandler();
+    private boolean throwExceptionOnScriptError_ = true;
 
 
     /**
@@ -1718,6 +1719,25 @@ public class WebClient {
      */
     public void setTimeout(final int timeout){
         timeout_ = timeout;
+    }
+
+    /**
+     * Indicates if an exception should be thrown when a script execution fails
+     * (the default) or if it should be catched and just logged to allow page
+     * execution to continue.
+     * @return <code>true</code> if an exception is thrown on script error (the default) 
+     */
+    public boolean isThrowExceptionOnScriptError() {
+        return throwExceptionOnScriptError_;
+    }
+    
+    
+    /**
+     * Changes the behavior of this webclient when a script error occurs.
+     * @param newValue indicates if exception should be thrown or not
+     */
+    public void setThrowExceptionOnScriptError(final boolean newValue) {
+        throwExceptionOnScriptError_ = newValue;
     }
 }
 

@@ -41,16 +41,27 @@ import java.util.Map;
 
 
 /**
- * Wrapper for the html element "script".
- *
+ * Wrapper for the html element "script".<br>
+ * When a script tag references an externat script (withc attribute src) it gets executed when the node
+ * is added to the DOM tree. When the script code is nested, it gets executed when the text node 
+ * containing the script is added to the HtmlScript.<br>
+ * The ScriptFilter feature of NekoHtml can't be used because they don't allow immediate access to the DOM 
+ * (ie <code>document.write("&lt;span id='mySpan'/>"); document.getElementById("mySpan").tagName;</code>
+ * can't work with a filter).  
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
+ * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">
+ * DOM Level 1</a>
+ * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">
+ * DOM Level 2</a>
  */
 public class HtmlScript extends HtmlElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "script";
+    private static int EventHandlerId_;
 
     /**
      * Create an instance of HtmlScript
@@ -120,6 +131,21 @@ public class HtmlScript extends HtmlElement {
         return getAttributeValue("src");
     }
 
+    /**
+     * Return the value of the attribute "event".
+     * @return The value of the attribute "event"
+     */
+    public final String getEventAttribute() {
+        return getAttributeValue("event");
+    }
+
+    /**
+     * Return the value of the attribute "for".
+     * @return The value of the attribute "for"
+     */
+    public final String getHtmlForAttribute() {
+        return getAttributeValue("for");
+    }
 
     /**
      * Return the value of the attribute "defer".  Refer to the
@@ -131,5 +157,31 @@ public class HtmlScript extends HtmlElement {
      */
     public final String getDeferAttribute() {
         return getAttributeValue("defer");
+    }
+    
+    /**
+     * Executes the content as a script if it is a text node
+     * @see com.gargoylesoftware.htmlunit.html.DomNode#appendChild(com.gargoylesoftware.htmlunit.html.DomNode)
+     */
+    public DomNode appendChild(final DomNode node) {
+        final DomNode response = super.appendChild(node);
+        if (node instanceof DomCharacterData 
+                && HtmlPage.isJavaScript(getTypeAttribute(), getLanguageAttribute())) {
+            final DomCharacterData textNode = (DomCharacterData) node;
+            final String scriptCode;
+            if (getEventAttribute() != ATTRIBUTE_NOT_DEFINED 
+                    && getHtmlForAttribute() != ATTRIBUTE_NOT_DEFINED) {
+                final String scriptEventHandler = getHtmlForAttribute() + "." + getEventAttribute();
+                final String evhName = "htmlunit_evh_JJLL" + EventHandlerId_;
+                scriptCode = "function " + evhName + "()\n{" 
+                    + textNode.getData() + "}\n"
+                    + scriptEventHandler + "=" + evhName + ";";
+            }
+            else {
+                scriptCode = textNode.getData();
+            }
+            getPage().executeJavaScriptIfPossible(scriptCode, "Embedded script", false, null);
+        }
+        return response;
     }
 }

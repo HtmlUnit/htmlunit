@@ -7,6 +7,13 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="mguillem">
+                Added WebClient.setThrowExceptionOnScriptError(boolean) and isThrowExceptionOnScriptError() to allow script errors 
+				to stop only execution of current script as browsers do.
+            </action>        
+            <action type="update" dev="mguillem">
+                JavaScript: document.write(ln) writes directly in DOM what allows access to dom nodes in the same script code.
+            </action>        
             <action type="add" dev="yourgod">
                 Added WebClient.setTimeout(int) and WebClient.getTimeout()
             </action>        
