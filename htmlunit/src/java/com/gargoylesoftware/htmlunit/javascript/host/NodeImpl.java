@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.mozilla.javascript.Scriptable;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;

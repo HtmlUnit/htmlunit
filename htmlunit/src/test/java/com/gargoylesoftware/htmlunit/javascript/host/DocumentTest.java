@@ -781,8 +781,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final HtmlElement div1 =
-            (HtmlElement) firstPage.getHtmlElementById("childDiv");
+        final HtmlElement div1 = firstPage.getHtmlElementById("childDiv");
         assertEquals("parentDiv",
             ((HtmlElement) div1.getParentNode()).getAttributeValue("id"));
 
@@ -922,7 +921,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlElement div1 = firstPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv", 
+        assertEquals("childDiv",
             ((HtmlElement) div1.getFirstChild()).getAttributeValue("id"));
 
         final List expectedAlerts = Collections.singletonList("childDiv");
