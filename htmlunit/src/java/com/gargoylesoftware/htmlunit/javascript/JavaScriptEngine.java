@@ -139,6 +139,7 @@ public final class JavaScriptEngine extends ScriptEngine {
             final PageInfo newPageInfo = new PageInfo(this);
 
             newPageInfo.context_ = Context.enter();
+            newPageInfo.context_.setOptimizationLevel(-1);
             newPageInfo.getContext().setErrorReporter(
                 new StrictErrorReporter(getScriptEngineLog()) );
             final Scriptable parentScope = newPageInfo.getContext().initStandardObjects(null);
