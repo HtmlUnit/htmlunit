@@ -63,11 +63,17 @@ public class JellyTest extends WebTestCase {
         super( name );
     }
 
+    /**
+     * Return a suite of jelly tests.
+     *
+     * @return A suite of jelly tests
+     * @throws Exception When bad things happen
+     */
     public static Test suite() throws Exception {
         final XMLOutput output = XMLOutput.createXMLOutput(System.out);
         final File file = new File("src/test/jelly/com/gargoylesoftware/htmlunit/WebClient.jelly");
         final JellyContext context = new JellyContext().runScript(file, output);
-        TestSuite answer = (TestSuite) context.getVariable("org.apache.commons.jelly.junit.suite");
+        final TestSuite answer = (TestSuite) context.getVariable("org.apache.commons.jelly.junit.suite");
         if ( answer == null ) {
             System.out.println( "Could not find a TestSuite created by Jelly for the script:" + file );
             // return an empty test suite
