@@ -24,6 +24,10 @@
     <module name="TreeWalker">
 
         <property name="cacheFile" value="${checkstyle.cache.file}"/>
+        
+        <module name="SuppressionFilter">
+            <property name="file" value="checkstyle_suppressions.xml"/>
+        </module>        
 
         <!-- ************************************************************** -->
         <!-- Checks that are different from the sun coding conventions ones -->
