@@ -102,6 +102,10 @@
 		<change type="new">
 			Added support for javascript document.URL
 		</change>
+		<change type="new">
+			Added initial support for javascript document.write().  Calling document.write() to add content
+			while the page is loading is working.  Using it to write to a different frame is not.
+		</change>
 	</change-log>
 </section>
 

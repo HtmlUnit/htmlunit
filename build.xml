@@ -9,7 +9,7 @@
 
 <property name="build.compiler" value="jikes" />
 <property name="build.compiler.pedantic" value="true"/>
-<property name="version" value="HtmlUnit-1.2" />
+<property name="version" value="HtmlUnit-1.3beta1" />
 
 <taskdef name="checkstyle"
 	classname="com.puppycrawl.tools.checkstyle.CheckStyleTask"
@@ -26,6 +26,12 @@
 	<pathelement path="dist/lib/nekohtml.jar"/>
 	<pathelement path="dist/lib/xercesImpl.jar"/>
 	<pathelement path="dist/lib/xmlParserAPIs.jar"/>
+
+	<pathelement path="/usr/local/jelly/lib/commons-jelly-1.0-beta-4-SNAPSHOT.jar"/>
+	<pathelement path="/usr/local/maven-1.0-beta-7/repository/commons-cli/jars/commons-cli-SNAPSHOT.jar"/>
+	<pathelement path="/usr/local/maven-1.0-beta-7/repository/dom4j/jars/dom4j-1.4-dev-8.jar"/>
+	<pathelement path="/usr/local/maven-1.0-beta-7/repository/commons-collections/jars/commons-collections-2.1.jar"/>
+	<pathelement path="/usr/local/maven-1.0-beta-7/repository/commons-beanutils/jars/commons-beanutils-1.6.1.jar"/>
 
 	<!-- Jars for testing and development -->
 	<pathelement path="build/lib/junit.jar"/>
@@ -269,5 +275,12 @@
 	</checkstyle>
 </target>
 
+
+<target name="jellytest" description="DO NOT RUN THIS TASK">
+	<java fork="yes" classname="org.apache.commons.jelly.Jelly" dir=".">
+		<classpath refid="base.class.path"/>
+		<arg value="htmlunit.jelly"/>
+	</java>
+</target>
 
 </project>
