@@ -388,7 +388,7 @@ public class HtmlPageTest extends WebTestCase {
             fail("Expected AssertionFailedError");
         }
         catch (final AssertionFailedError e) {
-            assertTrue("dupeID", e.getMessage().contains("dupeID"));
+            assertTrue("dupeID", e.getMessage().indexOf("dupeID") != -1);
         }
     }
 
