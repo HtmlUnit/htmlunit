@@ -1925,4 +1925,25 @@ public class DocumentTest extends WebTestCase {
         } );
         assertEquals( expectedAlerts, collectedAlerts );
     }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testBuildCookie() throws Exception {
+        checkCookie(Document.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "", "first", false);
+        checkCookie(Document.buildCookie("toto=", URL_FIRST), "toto", "", "", "first", false);
+        checkCookie(Document.buildCookie("toto=foo;secure", URL_FIRST), "toto", "foo", "", "first", true);
+        checkCookie(Document.buildCookie("toto=foo;path=/myPath;secure", URL_FIRST), 
+                "toto", "foo", "/myPath", "first", true);
+    }
+    
+    private void checkCookie(final Cookie cookie, final String name, final String value, 
+            final String path, final String domain, final boolean secure) {
+        assertEquals(name, cookie.getName());
+        assertEquals(value, cookie.getValue());
+        assertNull(cookie.getComment());
+        assertEquals(path, cookie.getPath());
+        assertEquals(domain, cookie.getDomain());
+        assertEquals(secure, cookie.getSecure());
+    }
 }

@@ -41,12 +41,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
@@ -234,6 +239,61 @@ public final class Document extends NodeImpl {
             buffer.append( cookies[i].getValue() );
         }
         return buffer.toString();
+    }
+
+    /**
+     * Adds a cookie
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cookie.asp">
+     * MSDN documentation</a> 
+     * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
+     */
+    public void jsSet_cookie(final String newCookie) {
+        final HttpState state = getHttpState();
+
+        final Cookie cookie = buildCookie(newCookie, getHtmlPage().getWebResponse().getUrl());
+        state.addCookie(cookie);
+        getLog().info("Added cookie: " + cookie);
+    }
+
+
+    /**
+     * Builds a cookie object from the string representation allowed in JS
+     * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
+     * @param currentURL the url of the current page
+     * @return the cookie
+     */
+    static Cookie buildCookie(final String newCookie, final URL currentURL) {
+        final StringTokenizer st = new StringTokenizer(newCookie, ";");
+        final String nameValue = st.nextToken();
+
+        final String name = StringUtils.substringBefore(nameValue, "=");
+        final String value = StringUtils.substringAfter(nameValue, "=");
+
+        final Map attributes = new HashMap(); 
+        // default values
+        attributes.put("domain", currentURL.getHost());
+        // default value "" as it seems that org.apache.commons.httpclient.cookie.CookieSpec 
+        // doesn't like null as path 
+        attributes.put("path", "");
+
+        while (st.hasMoreTokens()) {
+            final String token = st.nextToken();
+            final int indexEqual = token.indexOf("=");
+            if (indexEqual > -1) {
+                attributes.put(token.substring(0, indexEqual), token.substring(indexEqual+1));
+            }
+            else {
+                attributes.put(token, Boolean.TRUE);
+            }
+        }
+        
+        final String domain = (String) attributes.get("domain");
+        final String path = (String) attributes.get("path");
+        final Date expires = null;
+        final boolean secure = (attributes.get("secure") != null);
+        final Cookie cookie = new Cookie(domain, name, value, path, expires, secure);
+
+        return cookie;
     }
 
 

@@ -36,7 +36,7 @@
         <property name="applets" readable="true" writable="false"/>
         <property name="body" readable="true" writable="false"/>
         <property name="bgColor" readable="true" writable="false"/>
-        <property name="cookie" readable="true" writable="false"/>
+        <property name="cookie" readable="true" writable="true"/>
         <property name="documentElement" readable="true" writable="false"/>
         <property name="domain" readable="true" writable="false"/>
         <property name="embeds" readable="true" writable="false">

@@ -7,6 +7,12 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="mguillem">
+                Added support for setting cookies from JS (like document.cookie = "foo=something").
+            </action>
+            <action type="add" dev="mguillem">
+                Added dependency to commons-lang
+            </action>
             <action type="update" dev="mguillem">
                 Trying to set a JS property configured with writable="false" now generates a JS runtime error.
             </action>

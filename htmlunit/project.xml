@@ -309,6 +309,17 @@
         </dependency>
 
         <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.0</version>
+            <url>http://jakarta.apache.org/commons/lang</url>
+            <properties>
+                <htmlunit.group>required</htmlunit.group>
+                <htmlunit.description>Core Language Utilities</htmlunit.description>
+            </properties>
+        </dependency>
+
+        <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
             <version>2.0.2</version>
