@@ -1025,7 +1025,7 @@ public class WebClient {
             fireWindowOpened( new WebWindowEvent(window, WebWindowEvent.OPEN, null, null) );
         }
 
-        if( window instanceof TopLevelWindow && window != opener ) {
+        if( window instanceof TopLevelWindow && window != opener.getTopWindow() ) {
             ((TopLevelWindow)window).setOpener(opener);
         }
 

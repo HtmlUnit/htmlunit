@@ -7,6 +7,10 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1068667">
+                Fixed wrong values of window.opener: now null (instead of undefined) when no opener 
+                and null when a link opens in "_top".
+            </action>
             <action type="update" dev="mbowler">
                 Upgraded commons-httpclient to version 2.0.2
             </action>                 
