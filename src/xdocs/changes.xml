@@ -63,6 +63,10 @@
                 Added support for the following attributes on Document.Location:
                 hash, host, hostname, href, pathname, port, protocol and search.
             </action>
+            <action type="add" dev="mbowler" due-to="Alexei Goussev">
+            	Added support for Anchor.href and Anchor.getAttribute().  
+            	Patch submitted by Alexei Goussev.
+            </action>
         </release>
         
         <release version="1.3-pre1" date="November 7, 2003">
