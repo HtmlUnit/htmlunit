@@ -66,8 +66,8 @@ public abstract class HtmlElement {
      * @param  htmlPage The xml element that represents this html element
      */
     protected HtmlElement( final HtmlPage htmlPage, final Element element ) {
-        if( element == null && this instanceof HtmlPage == false ) {
-            throw new NullPointerException("element is null");
+        if( this instanceof HtmlPage == false ) {
+            Assert.notNull("element", element);
         }
         element_ = element;
 
@@ -407,9 +407,8 @@ public abstract class HtmlElement {
 
             }
             private Element getNextElementUpwards( final Element startingElement ) {
-                if( startingElement == null ) {
-                    throw new NullPointerException("startingElement");
-                }
+                Assert.notNull("startingElement", startingElement);
+
                 if( startingElement == rootElement ) {
                     return startingElement;
                 }
