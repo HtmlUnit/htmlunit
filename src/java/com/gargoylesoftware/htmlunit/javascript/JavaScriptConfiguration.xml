@@ -5,6 +5,7 @@
 
     <class name="Anchor" extends="FocusableHostElement">
         <javascript min-version="1.2"/>
+        <property name="href" readable="true" writable="true" always-available="true"/>
         <property name="name" readable="true" writable="true" always-available="true"/>
         <property name="tabindex" readable="true" writable="true"/>
         <property name="text" readable="true" writable="true">
@@ -272,8 +273,8 @@
     </class>
 
     <class name="Option" extends="HTMLElement">
-        <property name="text" readable="true" writable="false"/>
-        <property name="value" readable="true" writable="false"/>
+        <property name="text" readable="true" writable="true"/>
+        <property name="value" readable="true" writable="true"/>
         <property name="defaultSelected" readable="true" writable="false"/>
         <property name="selected" readable="true" writable="false"/>
     </class>
