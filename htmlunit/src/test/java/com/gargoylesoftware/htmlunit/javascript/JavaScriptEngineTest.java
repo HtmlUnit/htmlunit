@@ -828,6 +828,38 @@ public class JavaScriptEngineTest extends WebTestCase {
              + "</form>"
              + "</body></html>";
     }
+
+    
+    /**
+     * Check that wrong javascript just causes its context to fail but not the whole page.
+     * @throws Exception If something goes wrong.
+     */
+    public void testScriptErrorIsolated() throws Exception {
+        if (true) {
+            notImplemented();
+            return;
+        }
+        final String content
+                 = "<html>"
+                 + "<head>"
+                 + "<script>alert(1);</script>"
+                 + "<script>alert(2</script>"
+                 + "<script>alert(3);</script>"
+                 + "</head>"
+                 + "<body onload='alert(4)'>"
+                 + "<button onclick='alert(5)'>click me</button>"
+                 + "</body>"
+                 + "</html>";
+
+        final List expectedAlerts = Arrays.asList( new String[]{ "1", "3", "4" } );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+    
     
     private InputSource createInputSourceForFile( final String fileName ) throws FileNotFoundException {
         return new InputSource( getFileAsStream(fileName) );
