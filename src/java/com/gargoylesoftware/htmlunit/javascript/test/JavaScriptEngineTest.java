@@ -9,6 +9,7 @@ package com.gargoylesoftware.htmlunit.javascript.test;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
@@ -195,5 +196,40 @@ public class JavaScriptEngineTest extends WebTestCase {
                 new URL( "http://first/index.html" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
 
+    }
+
+
+    public void testJavaScriptUrl() throws Exception {
+
+        final WebClient client = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+
+        final String htmlContent
+             = "<html><head><script language='javascript'>"
+             + "var f1 = '<html><head><title>frame1</title></head><body><h1>frame1</h1></body></html>';\n"
+             + "var f1 = '<html><head><title>frame2</title></head><body><h1>frame2</h1></body></html>';\n"
+             + "</script></head>\n"
+             + "<frameset border='0' frameborder='0' framespacing='0' rows='100,*'>"
+             + "    <frame id='frame1' src='javascript:parent.f1'/>"
+             + "    <frame id='frame2' src='javascript:parent.f2'/>"
+             + "</frameset></html>";
+
+        webConnection.setResponse(
+            new URL("http://first/index.html"),
+            htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first/index.html" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+
+        final HtmlPage page1 = (HtmlPage)((HtmlFrame)page.getHtmlElementById("frame1")).getEnclosedPage();
+        final HtmlPage page2 = (HtmlPage)((HtmlFrame)page.getHtmlElementById("frame2")).getEnclosedPage();
+
+        assertNotNull("page1", page1);
+        assertNotNull("page2", page2);
+
+        assertEquals( "frame1", page1.getTitleText() );
+        assertEquals( "frame2", page2.getTitleText() );
     }
 }

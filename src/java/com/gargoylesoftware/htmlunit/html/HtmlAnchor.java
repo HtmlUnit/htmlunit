@@ -9,6 +9,7 @@ package com.gargoylesoftware.htmlunit.html;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
@@ -63,7 +64,7 @@ public class HtmlAnchor
                 return page.getWebClient().getPage( url, submitMethod, parameters );
             }
         }
-        else if( href.toLowerCase().startsWith("javascript:") ) {
+        else if( TextUtil.startsWithIgnoreCase(href, "javascript:") ) {
             return page.executeJavaScriptIfPossible( href, "javascript url", true ).getNewPage();
         }
         else {
