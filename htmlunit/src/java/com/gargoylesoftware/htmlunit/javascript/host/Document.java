@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
@@ -234,6 +235,24 @@ public final class Document extends HTMLElement {
         }
         return result;
     }
+
+
+    /**
+     * Return all the elements with the specified tag name
+     * @param tagName The name to search for
+     * @return the list of elements
+     */
+    public Object jsFunction_getElementsByTagName( final String tagName ) {
+        final List list = getHtmlElementOrDie().getPage().getHtmlElementsByTagNames(Collections.singletonList(tagName));
+        final ListIterator iterator = list.listIterator();
+        while(iterator.hasNext()) {
+            final HtmlElement htmlElement = (HtmlElement)iterator.next();
+            iterator.set( getScriptableFor(htmlElement) );
+        }
+
+        return new NativeArray( list.toArray() );
+    }
+
 
     /**
      * Return the specified property or NOT_FOUND if it could not be found. This is

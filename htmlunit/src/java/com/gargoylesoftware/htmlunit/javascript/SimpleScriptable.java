@@ -39,7 +39,9 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     private static final String[][] HTML_JAVASCRIPT_MAPPING = {
+        {"HtmlAnchor", "Anchor"},
         {"HtmlButton", "Button"},
+        {"HtmlButtonInput", "Button"},
         {"HtmlCheckBox", "Checkbox"},
         {"HtmlFileInput", "FileUpload"},
         {"HtmlForm", "Form"},
@@ -52,7 +54,8 @@ public class SimpleScriptable extends ScriptableObject {
         {"HtmlSelect", "Select"},
         {"HtmlSubmitInput", "Submit"},
         {"HtmlTextInput", "Text"},
-        {"HtmlTextArea", "Textarea"} };
+        {"HtmlTextArea", "Textarea"}
+    };
 
 
     /**
@@ -419,6 +422,7 @@ public class SimpleScriptable extends ScriptableObject {
         // We don't have a specific subclass for this element so create something generic.
         final SimpleScriptable scriptable = makeJavaScriptObject("HTMLElement");
         scriptable.setHtmlElement(htmlElement);
+//        getLog().info("No javascript class found for element <"+htmlElement.getTagName()+">.  Using HTMLElement");
         return scriptable;
     }
 

@@ -356,4 +356,35 @@ public class DocumentTest extends WebTestCase {
 
         assertEquals( Collections.singletonList("http://first"), collectedAlerts );
     }
+
+
+    public void testGetElementsByTagName() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var elements = document.getElementsByTagName('input');\n"
+             + "    for( i=0; i<elements.length; i++ ) {\n"
+             + "        alert(elements[i].type);\n"
+             + "    }\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<form><input type='button' name='button1' value='pushme'></form>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("button");
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

@@ -139,7 +139,7 @@ public final class JavaScriptEngine extends ScriptEngine {
      * @param htmlPage The page that the code will execute within
      * @param sourceCode The javascript code to execute.
      * @param sourceName The name that will be displayed on error conditions
-     * @param htmlElementScope The element that will be used as context or null if 
+     * @param htmlElementScope The element that will be used as context or null if
      * the page should be used as context.
      * @return The result of executing the specified code.
      */

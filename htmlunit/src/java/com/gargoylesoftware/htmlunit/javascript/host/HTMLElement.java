@@ -88,5 +88,14 @@ public class HTMLElement extends SimpleScriptable {
             xmlElement.removeAttribute("disabled");
         }
     }
+
+
+    /**
+     * Return the tag name of this element.
+     * @return The tag name
+     */
+    public String jsGet_tagName() {
+        return getHtmlElementOrDie().getTagName();
+    }
 }
 
