@@ -643,7 +643,7 @@ public class Window extends SimpleScriptable {
     }
 
     /**
-     * Return the value of the onerror property
+     * Set the value of the onerror property
      * @param newValue The value
      */
     public void jsSet_onerror( final String newValue) {
