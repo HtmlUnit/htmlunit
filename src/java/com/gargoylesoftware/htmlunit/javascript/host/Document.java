@@ -311,6 +311,7 @@ public final class Document extends HTMLElement {
      * @param args The arguments passed into the method.
      * @param function The function.
      * @return Nothing
+     * @throws IOException If an IO problem occurs.
      */
     public static Object jsFunction_close(
             final Context context,

@@ -178,7 +178,7 @@ public class TopLevelWindow implements WebWindow {
     public WebWindow getOpener() {
         return opener_;
     }
-    
+
     /**
      * Close this window.
      */
