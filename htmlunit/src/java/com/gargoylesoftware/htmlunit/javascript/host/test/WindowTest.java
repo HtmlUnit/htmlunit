@@ -138,7 +138,7 @@ public class WindowTest extends WebTestCase {
         final String firstContent
              = "<html><head><title>First</title></head><body>"
              + "  <iframe name='left' src='http://second' />"
-             + "<body></html>";
+             + "</body></html>";
         final String secondContent
              = "<html><head><title>Second</title></head><body>"
              + "  <iframe name='innermost' src='http://third/' />"

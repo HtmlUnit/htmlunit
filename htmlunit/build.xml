@@ -6,10 +6,10 @@
 
 <project name="HtmlUnit" default="cleancompile" basedir=".">
 
-
+<!--
 <property name="build.compiler" value="jikes" />
 <property name="build.compiler.pedantic" value="true"/>
-
+-->
 <property name="version" value="HtmlUnit-1.1-pre5" />
 
 <taskdef name="checkstyle"
@@ -21,10 +21,13 @@
 	<pathelement path="src/java"/>
 
 	<!-- Jars for production -->
-	<pathelement path="dist/lib/Tidy.jar"/>
+	<!-- <pathelement path="dist/lib/Tidy.jar"/> -->
 	<pathelement path="dist/lib/commons-httpclient.jar"/>
 	<pathelement path="dist/lib/commons-logging.jar"/>
 	<pathelement path="dist/lib/js.jar"/>
+	<pathelement path="dist/lib/nekohtml.jar"/>
+	<pathelement path="dist/lib/xercesImpl.jar"/>
+	<pathelement path="dist/lib/xmlParserAPIs.jar"/>
 
 	<!-- Jars for testing and development -->
 	<pathelement path="build/lib/junit.jar"/>
@@ -162,7 +165,7 @@
 
 
 <target name="junit" description="junit">
-	<java fork="true" classname="junit.textui.TestRunner" taskname="junitui" dir="src/java">
+	<java fork="true" classname="junit.textui.TestRunner" dir="src/java">
 		<arg value="com.gargoylesoftware.htmlunit.test.MainTestSuite"/>
 		<classpath refid="base.class.path"/>
 	</java>
@@ -170,7 +173,7 @@
 
 
 <target name="junitui" description="junitui">
-	<java fork="yes" classname="junit.swingui.TestRunner" taskname="junitui" dir="src/java">
+	<java fork="yes" classname="junit.swingui.TestRunner" dir="src/java">
 		<arg value="com.gargoylesoftware.htmlunit.test.MainTestSuite"/>
 		<classpath refid="base.class.path"/>
 	</java>

@@ -211,7 +211,7 @@ public class HtmlForm extends HtmlElement {
 
 
     private boolean isSubmittable( final Element element ) {
-        final String tagName = element.getTagName();
+        final String tagName = getTagName(element);
         if( SUBMITTABLE_ELEMENT_NAMES.contains( tagName.toLowerCase() ) == false ) {
             return false;
         }
@@ -222,7 +222,7 @@ public class HtmlForm extends HtmlElement {
         }
 
         if( tagName.equals( "input" ) ) {
-            final String type = element.getAttribute( "type" );
+            final String type = getAttributeValue(element, "type" );
             if( type.equals( "radio" ) || type.equals( "checkbox" ) ) {
                 final Attr checked = (Attr)element.getAttributeNode("checked");
                 return checked != null;
@@ -359,9 +359,9 @@ public class HtmlForm extends HtmlElement {
         final Iterator iterator = getXmlChildElements();
         while( iterator.hasNext() ) {
             final Element element = ( Element )iterator.next();
-            if( element.getTagName().equals( "input" )
-                     && element.getAttribute( "type" ).equals( "radio" )
-                     && element.getAttribute( "name" ).equals( name ) ) {
+            if( getTagName(element).equals( "input" )
+                     && getAttributeValue(element, "type").equals( "radio" )
+                     && getAttributeValue(element, "name").equals( name ) ) {
                 results.add( page.getHtmlElement( element ) );
             }
         }

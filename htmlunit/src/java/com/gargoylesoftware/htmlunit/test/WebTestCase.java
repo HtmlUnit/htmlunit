@@ -14,6 +14,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
+import junit.framework.AssertionFailedError;
 
 public class WebTestCase extends BaseTestCase {
     public WebTestCase( final String name ) {
@@ -73,6 +74,13 @@ public class WebTestCase extends BaseTestCase {
                 new URL( "http://www.gargoylesoftware.com" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         return page;
+    }
+
+
+    public static void assertNull( final Object object ) {
+        if( object != null ) {
+            throw new AssertionFailedError("Expected null but found ["+object+"]");
+        }
     }
 }
 

@@ -107,7 +107,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final FakeWebConnection webConnection = new FakeWebConnection( client );
 
         final String htmlContent
-             = "<html><head><title>foo</title><script src='/foo.js' id='script1'/>"
+             = "<html><head><title>foo</title><script src='/foo.js' id='script1'></script>"
              + "</head><body>"
              + "<p>hello world</p>"
              + "<form name='form1'>"

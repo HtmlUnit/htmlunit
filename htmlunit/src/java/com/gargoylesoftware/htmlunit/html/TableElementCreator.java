@@ -25,7 +25,7 @@ class TableElementCreator extends HtmlElementCreator {
      * @return The new HtmlElement.
      */
     HtmlElement create( final HtmlPage page, final Element xmlElement ) {
-        final String tagName = xmlElement.getTagName();
+        final String tagName = page.getTagName(xmlElement);
 
         if( tagName.equals("tr") ) {
             return createTableRow( page, xmlElement );
@@ -71,7 +71,7 @@ class TableElementCreator extends HtmlElementCreator {
 
     private HtmlTable getTable( final HtmlPage page, final Element startingElement ) {
         Element element = startingElement;
-        while( element.getTagName().equals("table") == false ) {
+        while( page.getTagName(element).equals("table") == false ) {
             element = (Element)element.getParentNode();
         }
 

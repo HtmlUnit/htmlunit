@@ -8,12 +8,12 @@ package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -31,9 +31,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
+import org.cyberneko.html.parsers.DOMParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.tidy.Tidy;
+import org.xml.sax.InputSource;
 
 /**
  *  A representation of an html page returned from a server. This is also the
@@ -199,14 +200,31 @@ public final class HtmlPage
 
         final InputStream inputStream = webResponse.getContentAsStream();
 
-        final Tidy tidy = new Tidy();
-        tidy.setErrout( createPrintWriterForTidy() );
-        final OutputStream outputStream = null;
-
-        final Document document = tidy.parseDOM( inputStream, outputStream );
-        return document;
+        DOMParser parser = new DOMParser();
+        try {
+            parser.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
+            parser.setFeature("http://cyberneko.org/html/features/report-errors", true);
+            parser.parse( new InputSource(inputStream) );
+        }
+        catch( final Exception e ) {
+            e.printStackTrace();
+            return null;
+        }
+        return parser.getDocument();
     }
-
+    public static void printXml(org.w3c.dom.Node node, String indent) {
+        if( node instanceof org.w3c.dom.Element ) {
+            System.out.println(indent+"<"+((org.w3c.dom.Element)node).getTagName()+" ...>");
+        }
+        else {
+            System.out.println(indent+node);
+        }
+        org.w3c.dom.Node child = node.getFirstChild();
+        while (child != null) {
+            printXml(child, indent+"  ");
+            child = child.getNextSibling();
+        }
+    }
 
     /**
      *  Return the HtmlAnchor with the specified name
@@ -282,7 +300,7 @@ public final class HtmlPage
             return htmlElement;
         }
 
-        final String tagName = xmlElement.getTagName();
+        final String tagName = getTagName(xmlElement);
         final HtmlElement newHtmlElement;
         final HtmlElementCreator creator
             = ( HtmlElementCreator )HTML_ELEMENT_CREATORS.get( tagName );
@@ -567,9 +585,9 @@ public final class HtmlPage
         final Iterator xmlIterator = getXmlChildElements();
         while( xmlIterator.hasNext() ) {
             final Element xmlElement = ( Element )xmlIterator.next();
-            final String tagName = xmlElement.getTagName();
+            final String tagName = getTagName(xmlElement);
             if( acceptableTagNames.contains( tagName ) ) {
-                final String disabledAttribute = xmlElement.getAttribute( "disabled" );
+                final String disabledAttribute = getAttributeValue(xmlElement, "disabled");
                 final boolean isDisabled
                          = disabledAttribute != null && disabledAttribute.length() != 0;
 
@@ -685,8 +703,8 @@ public final class HtmlPage
         final Iterator xmlIterator = getXmlChildElements();
         while( xmlIterator.hasNext() ) {
             final Element xmlElement = ( Element )xmlIterator.next();
-            if( acceptableTagNames.contains( xmlElement.getTagName() ) ) {
-                final String accessKeyAttribute = xmlElement.getAttribute( "accesskey" );
+            if( acceptableTagNames.contains( getTagName(xmlElement) ) ) {
+                final String accessKeyAttribute = getAttributeValue(xmlElement, "accesskey");
                 if( searchString.equals( accessKeyAttribute ) ) {
                     elements.add( getPage().getHtmlElement( xmlElement ) );
                 }
@@ -708,7 +726,7 @@ public final class HtmlPage
 
         final Iterator xmlIterator = getXmlChildElements();
         while( xmlIterator.hasNext() ) {
-            final String id = ( ( Element )xmlIterator.next() ).getAttribute( "accesskey" );
+            final String id = getAttributeValue( ( Element )xmlIterator.next(), "accesskey" );
             if( id != null && id.length() != 0 ) {
                 if( accessKeyList.contains( id ) ) {
                     webClient_.assertionFailed( "Duplicate access key: " + id );
@@ -733,7 +751,7 @@ public final class HtmlPage
 
         final Iterator xmlIterator = getXmlChildElements();
         while( xmlIterator.hasNext() ) {
-            final String id = ( ( Element )xmlIterator.next() ).getAttribute( "id" );
+            final String id = getAttributeValue( ( Element )xmlIterator.next(), "id" );
             if( id != null && id.length() != 0 ) {
                 if( idList.contains( id ) ) {
                     webClient_.assertionFailed( "Duplicate ID: " + id );
@@ -860,7 +878,7 @@ public final class HtmlPage
         final Iterator iterator = getXmlChildElements();
         while( iterator.hasNext() ) {
             final Element element = ( Element )iterator.next();
-            if( element.getTagName().equals( "script" ) ) {
+            if( getTagName(element).equals( "script" ) ) {
                 final HtmlScript htmlScript = ( HtmlScript )getHtmlElement( element );
                 final String languageAttribute = htmlScript.getLanguageAttribute();
                 final String typeAttribute = htmlScript.getTypeAttribute();
@@ -976,6 +994,9 @@ public final class HtmlPage
     private void executeBodyOnLoadHandlerIfNeeded() {
         final List bodyTags = getHtmlElementsByTagNames( Collections.singletonList("body") );
         if( bodyTags.size() != 1 ) {
+            System.out.println("==== START XML DUMP ====");
+            printXml(getElement(),"");
+            System.out.println("==== END XML DUMP ====");
             throw new IllegalStateException(
                 "Expected exactly one body tag but found ["+bodyTags.size()+"]");
         }
