@@ -740,11 +740,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
-    public void testEmbeddedMetaTag() throws Exception {
-        if( true ) {
-            notImplemented();
-            return;
-        }
+    public void testEmbeddedMetaTag_Regression() throws Exception {
 
         final String content
                  = "<html><head><title>foo</title>"
@@ -758,11 +754,12 @@ public class HtmlPageTest extends WebTestCase {
                  + "</td></tr></table>"
                  + "</body></html>";
         final List collectedAlerts = new ArrayList();
+
+        // This used to blow up on page load
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final List expectedAlerts = Collections.EMPTY_LIST;
         assertEquals( expectedAlerts, collectedAlerts );
-        System.out.println(page.asXml());
     }
 }
 
