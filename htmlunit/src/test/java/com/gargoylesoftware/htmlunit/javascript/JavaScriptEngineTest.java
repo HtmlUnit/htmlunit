@@ -475,6 +475,30 @@ public class JavaScriptEngineTest extends WebTestCase {
 
 
     /**
+     * @throws Exception If the test fails.
+     */
+    public void testJavaScriptWrappedInHtmlComments_allOnOneLine() throws Exception {
+        final String content =
+                "<html>\n" +
+                "  <head>\n" +
+                "    <title>test</title>\n" +
+                "    <script>var test;</script>\n" +
+                "    <!-- var test should be undefined since it's on first line -->\n" +
+                "    <!-- but there should be no index out of bounds exception  -->\n" +
+                "    <script> <!-- test = 'abc'; // --> </script>\n" +
+                "  </head>\n" +
+                "  <body onload='alert(test)'>\n" +
+                "  </body>\n" +
+                "</html>\n" +
+                "";
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        final List expectedAlerts = Arrays.asList( new String[]{"undefined"} );
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+
+    /**
      * When using the syntax this.something in an onclick handler, "this" must represent
      * the object being clicked, not the window.  Regression test.
      * @throws Exception if the test fails

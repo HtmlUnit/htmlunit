@@ -255,7 +255,7 @@ public final class JavaScriptEngine extends ScriptEngine {
 
             // Anything on the same line as the opening comment should be ignored
             char eachChar = sourceCode.charAt(startIndex);
-            while( startIndex <= endIndex && eachChar != '\n' && eachChar != '\r' ) {
+            while( startIndex < endIndex && eachChar != '\n' && eachChar != '\r' ) {
                 eachChar = sourceCode.charAt( ++startIndex );
             }
 
