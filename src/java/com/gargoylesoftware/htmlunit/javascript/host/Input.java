@@ -101,7 +101,7 @@ public class Input extends HTMLElement {
      *@return    The value of this attribute.
      */
     public Form jsGet_form() {
-        return (Form)getHtmlElementOrDie().getEnclosingForm().getScriptObject();
+        return (Form)getScriptableFor(getHtmlElementOrDie().getEnclosingForm());
     }
 
 
