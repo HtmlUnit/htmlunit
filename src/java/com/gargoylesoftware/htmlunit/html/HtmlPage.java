@@ -48,6 +48,7 @@ import org.apache.commons.httpclient.HttpConstants;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Alex Nikiforoff
  * @author Noboru Sinohara
+ * @author David K. Taylor
  */
 public final class HtmlPage
          extends HtmlElement
@@ -969,8 +970,11 @@ public final class HtmlPage
         }
         else if( bodyTagCount == 1 ) {
             final HtmlBody body = (HtmlBody)bodyTags.get(0);
-            final String onLoad = body.getOnLoadAttribute();
+            String onLoad = body.getOnLoadAttribute();
             if( onLoad.length() != 0 ) {
+                if( onLoad.indexOf('(') == -1 ) {
+                    onLoad = onLoad + "()";
+                }
                 executeJavaScriptIfPossible(onLoad, "body.onLoad", false, null);
             }
         }

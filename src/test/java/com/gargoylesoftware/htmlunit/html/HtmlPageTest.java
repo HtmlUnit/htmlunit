@@ -37,6 +37,7 @@ import junit.framework.AssertionFailedError;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
+ * @author David K. Taylor
  */
 public class HtmlPageTest extends WebTestCase {
 
@@ -754,10 +755,32 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
-    public void testOnLoadHandler() throws Exception {
+    public void testOnLoadStatementHandler() throws Exception {
         final String content
                  = "<html><head><title>foo</title>"
                  + "</head><body onLoad='alert(\"foo\")'>"
+                 + "<p>hello world</p>"
+                 + "<form name='form1'>"
+                 + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+                 + "    <input type='text' name='textfield2' id='textfield2'/>"
+                 + "</form>"
+                 + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "foo"
+        });
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    public void testOnLoadNameHandler() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title>"
+                 + "<script type='text/javascript'>load=function(){alert(\"foo\")}</script>"
+                 + "</head><body onLoad='load'>"
                  + "<p>hello world</p>"
                  + "<form name='form1'>"
                  + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
