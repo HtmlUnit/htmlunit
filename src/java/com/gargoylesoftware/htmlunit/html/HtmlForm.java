@@ -12,6 +12,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -139,7 +140,8 @@ public class HtmlForm extends HtmlElement {
         }
 
         final SubmitMethod method = SubmitMethod.getInstance( getAttributeValue( "method" ) );
-        return getPage().getWebClient().getPage( url, method, parameterList );
+        final WebWindow webWindow = htmlPage.getEnclosingWindow();
+        return htmlPage.getWebClient().getPage( webWindow, url, method, parameterList );
     }
 
 

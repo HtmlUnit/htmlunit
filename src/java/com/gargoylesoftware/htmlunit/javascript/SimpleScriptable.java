@@ -416,15 +416,16 @@ public class SimpleScriptable extends ScriptableObject {
 
     /**
      * Return the string value at the specified location in the argument list.  If the index is larger
-     * than the argument array then return null.
+     * than the argument array then return the default value.
      *
      * @param index The index into the argument list.
      * @param args The argument list.
+     * @param defaultValue The default value to return if the arg wasn't specified.
      * @return The specified string or null
      */
-    public static String getStringArg( final int index, final Object[] args ) {
+    public static String getStringArg( final int index, final Object[] args, final String defaultValue ) {
         if( index >= args.length ) {
-            return null;
+            return defaultValue;
         }
         else {
             return (String)args[index];

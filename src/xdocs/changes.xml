@@ -52,6 +52,10 @@
 		<change type="fix">
 			Fixed bug where clicking on a checkbox would submit the form.
 		</change>
+		<change type="fix">
+			Fixed bug where form.submit() was always loading into the default WebWindow, not the
+			current one.
+		</change>
 	</change-log>
 </section>
 

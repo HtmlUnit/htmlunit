@@ -363,15 +363,24 @@ public class WindowTest extends WebTestCase {
              + "    alert('one')\n"
              + "    open('http://second', 'foo')"
              + "}\n"
-             + "function callAlert() {\n"
-             + "    alert('two')"
+             + "function callAlert( text ) {\n"
+             + "    alert(text)"
              + "}\n"
              + "</script></head><body onload='runtest()'>"
              + "</body></html>";
         final String secondContent
              = "<html><head><title>Second</title><script>"
              + "function runtest() {\n"
-             + "    opener.callAlert()"
+             + "    opener.callAlert('two')\n"
+             + "    document.form1.submit()\n"
+             + "}\n"
+             + "</script></head><body onload='runtest()'>"
+             + "<form name='form1' action='http://third'><input type='submit'></form>"
+             + "</body></html>";
+        final String thirdContent
+             = "<html><head><title>Third</title><script>"
+             + "function runtest() {\n"
+             + "    opener.callAlert('three')"
              + "}\n"
              + "</script></head><body onload='runtest()'>"
              + "</body></html>";
@@ -380,13 +389,15 @@ public class WindowTest extends WebTestCase {
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
             new URL("http://second"), secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://third"), thirdContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
                 new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final List expectedAlerts = Arrays.asList( new String[]{ "one", "two" } );
+        final List expectedAlerts = Arrays.asList( new String[]{ "one", "two", "three" } );
         assertEquals( expectedAlerts, collectedAlerts );
     }
 }
