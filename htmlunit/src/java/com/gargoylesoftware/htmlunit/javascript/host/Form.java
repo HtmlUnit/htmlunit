@@ -40,11 +40,14 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.ElementArray;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
+import java.io.IOException;
+
+import org.jaxen.JaxenException;
+import org.jaxen.XPath;
+import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
 /**
@@ -58,6 +61,7 @@ import org.mozilla.javascript.Scriptable;
 public class Form extends HTMLElement {
 
     private static final long serialVersionUID = -1860993922147246513L;
+    private ElementArray elements_; // has to be a member to have equality (==) working
 
     /**
      * Create an instance.  A default constructor is required for all javascript objects.
@@ -97,12 +101,20 @@ public class Form extends HTMLElement {
      * @return The value of this attribute.
      */
     public ElementArray jsGet_elements() {
-        final HtmlForm htmlForm = getHtmlForm();
-        final List inputTagNames = Arrays.asList( new String[]{"input", "button", "select", "textarea"} );
-        final List elements = htmlForm.getHtmlElementsByTagNames( inputTagNames );
-        final ElementArray formElements = (ElementArray) makeJavaScriptObject("ElementArray");
-        formElements.setElements( elements );
-        return formElements;
+        if (elements_ == null) {
+            final HtmlForm htmlForm = getHtmlForm();
+            elements_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            try {
+                final XPath xpath = new HtmlUnitXPath("//*[(name() = 'input' or name() = 'button'"
+                        + " or name() = 'select' or name() = 'textarea')]", 
+                        HtmlUnitXPath.buildSubtreeNavigator(htmlForm)); 
+                elements_.init(htmlForm, xpath);
+            }
+            catch (final JaxenException e) {
+                throw Context.reportRuntimeError("Failed to initialize collection document.all: " + e.getMessage());
+            }
+        }
+        return elements_;
     }
 
 
@@ -199,12 +211,6 @@ public class Form extends HTMLElement {
         return (HtmlForm)getHtmlElementOrDie();
     }
 
-
-    private HtmlForm getHtmlFormOrNull() {
-        return (HtmlForm)getHtmlElementOrNull();
-    }
-
-
     /**
      * Submit the form.
      *
@@ -230,20 +236,21 @@ public class Form extends HTMLElement {
      * @return The property.
      */
     public Object get( final String name, final Scriptable start ) {
-        // If the HtmlForm is null, the object hasn't been fully initialized yet so
-        // just pass through to the superclass.
-        final HtmlForm htmlForm = getHtmlFormOrNull();
-        if(htmlForm == null ) {
-            return super.get( name, start );
-        }
+
         // Try to get the element or elements specified from the form element array.
-        final ElementArray formElements = this.jsGet_elements();
-        final Object result = formElements.get( name, start );
-        if( result != NOT_FOUND ) {
-            return result;
+        final ElementArray formElements = ((Form) start).jsGet_elements();
+        Object result = formElements.get( name, formElements);
+        if (result instanceof ElementArray) {
+            if (((ElementArray) result).jsGet_length() == 0) {
+                result = NOT_FOUND;
+            }
         }
-        // Not found, just pass through to the superclass.
-        return super.get( name, start );
+        
+        if (result == NOT_FOUND) {
+            result = super.get( name, start );
+        }
+        
+        return result;
     }
 
 

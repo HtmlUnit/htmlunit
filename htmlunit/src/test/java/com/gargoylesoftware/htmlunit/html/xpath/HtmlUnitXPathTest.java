@@ -37,8 +37,19 @@
  */
 package com.gargoylesoftware.htmlunit.html.xpath;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Transformer;
+import org.jaxen.BaseXPath;
+import org.jaxen.Navigator;
+import org.jaxen.XPath;
+
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -76,6 +87,54 @@ public class HtmlUnitXPathTest extends WebTestCase {
         assertEquals(page.getHtmlElementById("myLink"), xpath.selectSingleNode(page));
         xpath = new HtmlUnitXPath("/html/head/title/text()");
         assertEquals("Test page", xpath.stringValueOf(page));
+    }
+
+    /**
+     * Test evaluation relative from elements other than the whole page
+     * @throws Exception if test fails
+     */
+    public void testXPathFromElement() throws Exception {
+        final String content = "<html><head><title>Test page</title></head>\n"
+            + "<body><a href='foo.html' id='myLink'>foo</a></body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPage(content);
+        XPath xpath = new HtmlUnitXPath("/html/body");
+        final HtmlBody body = (HtmlBody) xpath.selectSingleNode(page);
+
+        final Navigator relativeNavigator = HtmlUnitXPath.buildSubtreeNavigator(body);
+        xpath = new BaseXPath("/a", relativeNavigator);
+        assertEquals(page.getHtmlElementById("myLink"), xpath.selectSingleNode(body));
+    }
+
+    /**
+     * Test that the elements are in the right order
+     * @throws Exception if test fails
+     */
+    public void testElementOrder() throws Exception {
+        if (true) {
+            // due to bug http://jira.codehaus.org/browse/JAXEN-55
+            notImplemented();
+            return;
+        }
+
+        final String content
+        = "<html><head><title>First</title><script>"
+        + "</script></head><body>"
+        + "</body></html>";
+
+        final HtmlPage page = loadPage(content);
+        final XPath xpath = new HtmlUnitXPath("//*");
+        final List list = xpath.selectNodes(page);
+
+        final List expected = Arrays.asList(new String[] {"html", "head", "title", "script", "body"});
+        final Transformer tagReader = new Transformer() {
+            public Object transform(final Object obj) {
+                return ((DomNode) obj).getNodeName();
+            }
+        };
+        CollectionUtils.transform(list, tagReader);
+        assertEquals(expected, list);
     }
 
     /**

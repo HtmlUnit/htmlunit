@@ -902,6 +902,41 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
+     *
+     * @throws Exception If the test fails
+     */
+    public void testWindowFramesLive() throws Exception {
+        if (true) {
+            notImplemented();
+            return;
+        }
+
+        final String content =
+            "<html>"
+                + "<script>"
+                + "var oFrames = window.frames;"
+                + "alert(oFrames.length);"
+                + "function test()"
+                + "{"
+                + "    alert(oFrames.length);"
+                + "    alert(window.frames.length);"
+                + "    alert(oFrames == window.frames);"
+                + "}"
+                + "</script>"
+                + "<frameset rows='50,*' onload='test()'>"
+                + "<frame src='about:blank'/>"
+                + "<frame src='about:blank'/>"
+                + "</frameset>"
+                + "</html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content);
+
+        final List expectedAlerts = Arrays.asList( new String[]{ "0", "2", "2", "true" } );
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * Variables that are defined inside javascript should be accessible through the
      * window object (ie window.myVariable).  Test that this works.
      * @throws Exception If the test fails.

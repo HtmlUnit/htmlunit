@@ -47,6 +47,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import java.util.WeakHashMap;
 import java.util.Map;
 import java.lang.ref.WeakReference;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.JavaScriptException;
@@ -132,7 +135,13 @@ public final class JavaScriptEngine extends ScriptEngine {
      */
     public void initialize(HtmlPage page) {
         //force allocation of the page info.
+        try {
         getPageInfo(page);
+        }
+        catch (final RuntimeException e) {
+            // usefull for debugging (else catched Xerces and nested in a XNIException 
+            getLog().error("Exception while initializing JavaScript for the page", e);
+        }
     }
 
 
@@ -196,6 +205,15 @@ public final class JavaScriptEngine extends ScriptEngine {
 //        Context.exit();
     }
 
+
+
+    /**
+     * Return the log object for this class
+     * @return The log object
+     */
+    protected Log getLog() {
+        return LogFactory.getLog(getClass());
+    }
 
     /**
      * Determine the scope for the page and element.

@@ -40,15 +40,15 @@ package com.gargoylesoftware.htmlunit.html.xpath;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Collections;
-import java.util.NoSuchElementException;
 
 import org.jaxen.DefaultNavigator;
 import org.jaxen.XPath;
 import org.jaxen.JaxenException;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.Util;
 
 /**
  * Jaxen Navigator implementation for navigating around the HtmlUnit DOM object model
@@ -112,15 +112,8 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode the context node for the sibling iterator.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getFollowingSiblingAxisIterator (Object contextNode) {
-        return new NodeIterator ((DomNode)contextNode) {
-            protected DomNode getFirstNode (DomNode node) {
-                return getNextNode(node);
-            }
-            protected DomNode getNextNode (DomNode node) {
-                return node.getNextSibling();
-            }
-        };
+    public Iterator getFollowingSiblingAxisIterator (final Object contextNode) {
+        return Util.getFollowingSiblingAxisIterator((DomNode) contextNode);
     }
 
     /**
@@ -130,14 +123,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return A possibly-empty iterator (not null).
      */
     public Iterator getPrecedingSiblingAxisIterator (Object contextNode) {
-        return new NodeIterator ((DomNode)contextNode) {
-            protected DomNode getFirstNode (DomNode node) {
-                return getNextNode(node);
-            }
-            protected DomNode getNextNode (DomNode node) {
-                return node.getPreviousSibling();
-            }
-        };
+        return Util.getPrecedingSiblingAxisIterator((DomNode)contextNode);
     }
 
     /**
@@ -147,39 +133,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return A possibly-empty iterator (not null).
      */
     public Iterator getFollowingAxisIterator (Object contextNode) {
-        return new NodeIterator ((DomNode)contextNode) {
-            protected DomNode getFirstNode (DomNode node) {
-                if (node == null) {
-                    return null;
-                }
-                else {
-                    DomNode sibling = node.getNextSibling();
-                    if (sibling == null) {
-                        return getFirstNode(node.getParentNode());
-                    }
-                    else {
-                        return sibling;
-                    }
-                }
-            }
-            protected DomNode getNextNode (DomNode node) {
-                if (node == null) {
-                    return null;
-                }
-                else {
-                    DomNode n = node.getFirstChild();
-                    if (n == null) {
-                        n = node.getNextSibling();
-                    }
-                    if (n == null) {
-                        return getFirstNode(node.getParentNode());
-                    }
-                    else {
-                        return n;
-                    }
-                }
-            }
-        };
+        return Util.getFollowingAxisIterator((DomNode)contextNode);
     }
 
     /**
@@ -189,39 +143,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return A possibly-empty iterator (not null).
      */
     public Iterator getPrecedingAxisIterator (Object contextNode) {
-        return new NodeIterator ((DomNode)contextNode) {
-            protected DomNode getFirstNode (DomNode node) {
-                if (node == null) {
-                    return null;
-                }
-                else {
-                    DomNode sibling = node.getPreviousSibling();
-                    if (sibling == null) {
-                        return getFirstNode(node.getParentNode());
-                    }
-                    else {
-                        return sibling;
-                    }
-                }
-            }
-            protected DomNode getNextNode (DomNode node) {
-                if (node == null) {
-                    return null;
-                }
-                else {
-                    DomNode n = node.getLastChild();
-                    if (n == null) {
-                        n = node.getPreviousSibling();
-                    }
-                    if (n == null) {
-                        return getFirstNode(node.getParentNode());
-                    }
-                    else {
-                        return n;
-                    }
-                }
-            }
-        };
+        return Util.getPrecedingAxisIterator((DomNode)contextNode);
     }
 
     /**
@@ -487,62 +409,4 @@ public class DocumentNavigator extends DefaultNavigator {
         return page.getHtmlElementById(elementId);
     }
 
-    /**
-     * A generic iterator over DOM nodes.
-     *
-     * <p>Concrete subclasses must implement the {@link #getFirstNode}
-     * and {@link #getNextNode} methods for a specific iteration
-     * strategy.</p>
-     */
-    abstract class NodeIterator implements Iterator {
-
-        private DomNode node_;
-
-        /**
-         * @param contextNode The starting node.
-         */
-        public NodeIterator (DomNode contextNode) {
-            node_ = getFirstNode(contextNode);
-        }
-        /** @inheritDoc Iterator#hasNext() */
-        public boolean hasNext () {
-            return (node_ != null);
-        }
-        /** @inheritDoc Iterator#next() */
-        public Object next () {
-            if (node_ == null) {
-                throw new NoSuchElementException();
-            }
-            DomNode ret = node_;
-            node_ = getNextNode(node_);
-            return ret;
-        }
-        /** @inheritDoc Iterator#remove() */
-        public void remove () {
-            throw new UnsupportedOperationException();
-        }
-        /**
-         * Get the first node for iteration.
-         *
-         * <p>This method must derive an initial node for iteration
-         * from a context node.</p>
-         *
-         * @param contextNode The starting node.
-         * @return The first node in the iteration.
-         * @see #getNextNode
-         */
-        protected abstract DomNode getFirstNode (DomNode contextNode);
-        /**
-         * Get the next node for iteration.
-         *
-         * <p>This method must locate a following node from the
-         * current context node.</p>
-         *
-         * @param contextNode The current node in the iteration.
-         * @return The following node in the iteration, or null
-         * if there is none.
-         * @see #getFirstNode
-         */
-        protected abstract DomNode getNextNode (DomNode contextNode);
-    }
 }
