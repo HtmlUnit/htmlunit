@@ -28,6 +28,7 @@ import org.mozilla.javascript.ScriptableObject;
  */
 public class SimpleScriptable extends ScriptableObject {
     private static final Map PROPERTY_MAPS = Collections.synchronizedMap( new HashMap(89) );
+    private static Map HTML_JAVASCRIPT_MAP = null;
 
     private JavaScriptEngine.PageInfo pageInfo_;
     private HtmlElement htmlElement_;
@@ -38,31 +39,58 @@ public class SimpleScriptable extends ScriptableObject {
         private FunctionObject function_;
     }
 
-    private static final String[][] HTML_JAVASCRIPT_MAPPING = {
-        {"HtmlAnchor", "Anchor"},
-        {"HtmlButton", "Button"},
-        {"HtmlButtonInput", "Button"},
-        {"HtmlCheckBoxInput", "Checkbox"},
-        {"HtmlFileInput", "FileUpload"},
-        {"HtmlForm", "Form"},
-        {"HtmlHiddenInput", "Hidden"},
-        {"HtmlImage", "Image"},
-        {"HtmlInlineFrame", "Window"},
-        {"HtmlOption", "Option"},
-        {"HtmlPasswordInput", "Password"},
-        {"HtmlRadioButtonInput", "Radio"},
-        {"HtmlResetInput", "Reset"},
-        {"HtmlSelect", "Select"},
-        {"HtmlSubmitInput", "Submit"},
-        {"HtmlTextInput", "Text"},
-        {"HtmlTextArea", "Textarea"}
-    };
 
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.
      */
     public SimpleScriptable() {
+    }
+
+
+    public static synchronized Map getHtmlJavaScriptMapping() {
+        if( HTML_JAVASCRIPT_MAP != null ) {
+            return HTML_JAVASCRIPT_MAP;
+        }
+
+        final String[][] mapping = {
+            {"HtmlAnchor", "Anchor"},
+            {"HtmlButton", "Button"},
+            {"HtmlButtonInput", "Button"},
+            {"HtmlCheckBoxInput", "Checkbox"},
+            {"HtmlFileInput", "FileUpload"},
+            {"HtmlForm", "Form"},
+            {"HtmlHiddenInput", "Hidden"},
+            {"HtmlImage", "Image"},
+            {"HtmlInlineFrame", "Window"},
+            {"HtmlOption", "Option"},
+            {"HtmlPasswordInput", "Password"},
+            {"HtmlRadioButtonInput", "Radio"},
+            {"HtmlResetInput", "Reset"},
+            {"HtmlSelect", "Select"},
+            {"HtmlSubmitInput", "Submit"},
+            {"HtmlTextInput", "Text"},
+            {"HtmlTextArea", "Textarea"},
+            {"HtmlElement", "HTMLElement"},
+        };
+
+        final Map map = new HashMap();
+        for( int i=0; i<mapping.length; i++ ) {
+            final String htmlClassName = mapping[i][0];
+            final String javaScriptClassName = mapping[i][1];
+
+            try {
+                final Class htmlClass = Class.forName("com.gargoylesoftware.htmlunit.html."+htmlClassName);
+                Class.forName("com.gargoylesoftware.htmlunit.javascript.host."+javaScriptClassName);
+                map.put( htmlClass, javaScriptClassName );
+            }
+            catch( final ClassNotFoundException e ) {
+                throw new NoClassDefFoundError(e.getMessage());
+            }
+        }
+
+        HTML_JAVASCRIPT_MAP = Collections.unmodifiableMap(map);
+        return map;
     }
 
 
@@ -412,19 +440,20 @@ public class SimpleScriptable extends ScriptableObject {
         final String fullClassName = htmlElement.getClass().getName();
         final String className = fullClassName.substring( fullClassName.lastIndexOf(".") + 1 );
 
-        for( int i=0; i<HTML_JAVASCRIPT_MAPPING.length; i++ ) {
-            if( className.equals(HTML_JAVASCRIPT_MAPPING[i][0]) ) {
-                final SimpleScriptable scriptable = makeJavaScriptObject(HTML_JAVASCRIPT_MAPPING[i][1]);
-                scriptable.setHtmlElement(htmlElement);
-                return scriptable;
-            }
+        final String javaScriptClassName
+            = (String)getHtmlJavaScriptMapping().get(htmlElement.getClass());
+        if( javaScriptClassName == null ) {
+            // We don't have a specific subclass for this element so create something generic.
+            final SimpleScriptable scriptable = makeJavaScriptObject("HTMLElement");
+            scriptable.setHtmlElement(htmlElement);
+            //getLog().info("No javascript class found for element <"+htmlElement.getTagName()+">.  Using HTMLElement");
+            return scriptable;
         }
-
-        // We don't have a specific subclass for this element so create something generic.
-        final SimpleScriptable scriptable = makeJavaScriptObject("HTMLElement");
-        scriptable.setHtmlElement(htmlElement);
-//        getLog().info("No javascript class found for element <"+htmlElement.getTagName()+">.  Using HTMLElement");
-        return scriptable;
+        else {
+            final SimpleScriptable scriptable = makeJavaScriptObject(javaScriptClassName);
+            scriptable.setHtmlElement(htmlElement);
+            return scriptable;
+        }
     }
 
 

@@ -6,7 +6,18 @@
     </properties>
 
     <body>
-        <release version="1.2.2" date="unknown">
+        <release version="1.3" date="unknown">
+            <action type="add" dev="mbowler">
+                Initial support for jelly tags
+            </action>
+            <action type="add" dev="mbowler">
+                Initial support for Maven
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where checkboxes weren't getting properly mapped to the javascript
+                Checkbox object which resulted in incorrect behaviour.  Add some additional
+                tests to prevent this kind of problem happening again.
+            </action>
         </release>
     </body>
 
