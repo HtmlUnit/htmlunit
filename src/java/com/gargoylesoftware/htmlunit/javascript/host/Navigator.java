@@ -53,5 +53,10 @@ public final class Navigator extends SimpleScriptable {
     private BrowserVersion getBrowserVersion() {
         return BrowserVersion.getDefault();
     }
+
+
+    public boolean jsGet_javaEnabled() {
+        return false;
+    }
 }
 
