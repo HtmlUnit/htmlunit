@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<document title="Building HtmlUnit from CVS">
+
+<section>
+	<p>
+		Building HtmlUnit from the cvs repository will give you the latest version of the code.  At
+		any time, all the code in cvs should be compilable and should pass all the unit tests.  There
+		is no guarantee that it will be full featured - this is a work in progress.
+	</p>
+</section>
+
+
+<section title="Checking out">
+	<p>
+	Create a directory for HtmlUnit (ie c:\htmlunit or ~/htmlunit).  Change to that directory and execute the
+	following commands.  When prompted for a password, just press the enter key.
+	</p>
+	<source>
+cvs -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit login
+cvs -z3 -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit co src
+cvs -z3 -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit co lib
+cvs -z3 -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit co docs
+	</source>
+	<directory-structure>
+		<file name="LICENSE.txt">The licence used by HtmlUnit.  This is an apache style licence</file>
+		<file name="build.xml">The ant build file</file>
+		<file name=".cvsignore">A control file for cvs that tells it what files/directories
+			should be ignored when doing updates or checkouts</file>
+		<directory name="src">
+			All source will be in here
+			<directory name="java">
+				All java source will be under here
+				<directory name="com">
+					<directory name="gargoylesoftware">
+						<directory name="htmlunit">
+							<directory name="html">
+							</directory>
+						</directory>
+					</directory>
+				</directory>
+			</directory>
+			<directory name="xdocs">
+				<directory name="api">
+				</directory>
+			</directory>
+		</directory>
+		<directory name="docs">
+			<directory name="api">
+			</directory>
+		</directory>
+		<directory name="www">
+			<file name="index.html"/>
+		</directory>
+		<directory name="tools">
+			<directory name="lib">
+			</directory>
+		</directory>
+		<directory name="dist">
+		</directory>
+		<directory name="build">
+		</directory>
+	</directory-structure>
+</section>
+
+
+<section title="Compiling the code">
+	<p>
+		Make sure that you have <a href="http://jakarta.apache.org/ant">Ant</a> 1.5 installed.
+		The build.xml file is located in the root of the src directory so change to that
+		directory and execute the following command
+	</p>
+	<source>ant cleancompile</source>
+	<p>
+		This will delete all the existing class files and recompile all the source from scratch.
+	</p>
+</section>
+
+
+<section title="Running the tests">
+	<p>
+		All the tests are based on <a href="http://www.junit.org/">JUnit</a>.  JUnit is already provided
+		in the lib directory so you don't need to install anything extra.  The main tests can be
+		executed with either the text runner or the swing runner from JUnit.  The "junit" target
+		will dump status information to the command line while "junitui" will present a swing
+		user interface with a progress bar.
+	</p>
+	<source>ant junit</source>
+	<br />
+	<source>ant junitui</source>
+	<p>
+		Strangely, the Swing version takes about three times as long to execute as the text runner
+		so I rarely use it.  If you are using the Swing version then you will have to uncheck
+		"reload classes" or else all the javascript related tests will fail.  It seems that
+		the javascript engine and the logging framework don't like to be reloaded.
+	</p>
+</section>
+
+
+<section title="Packaging the code">
+	<source>ant build</source>
+	<p>
+		The build target will create a directory at the same level as src, lib and docs with the
+		name "HtmlUnit-" followed by the version number.  There will also be a zip file of the
+		same name that contains the contents of the directory.  Finally, there will be a zip
+		called projectdocs.zip that contains all the generated documentation.
+	</p>
+</section>
+
+
+<section title="Contributing back to HtmlUnit">
+	<p>
+		Contributions are always welcome but please note the following rules.
+		<ul>
+			<li>
+				Make sure the code follows the <a href="codingConventions.html">coding conventions</a>
+				already in use.  Failing to do this just means more work for the maintainers as the
+				code will have to be "cleaned up" prior to merging.  Refer to the link above to
+				see the coding conventions that we are using here.  We use checkstyle to enforce
+				many of the coding standards (some things like good naming can't be easily checked
+				with a tool but we check as much as we can automatically).  The ant target
+				"checkstyle" will check all the code.
+			</li>
+			<li>
+				Make sure the new code has automated unit tests written for
+				<a href="http://www.junit.org">JUnit</a>.  No code will get merged without tests so
+				if you don't do this then once again, it makes work for the maintainers.
+			</li>
+			<li>
+				All unit tests should pass.  Occassionally this rule will be broken if it is important
+				to get a test into the build before the code is ready.
+			</li>
+			<li>
+				All files must be copyright Gargoyle Software and must be licensed under the same
+				license as the rest of the probject - currently an <a href="license.html">apache
+				style</a> one.
+			</li>
+			<li>
+				All non-private methods must have full javadoc before we put out a release.  If you
+				make changes to a given file then you are expected to add an author tag at the top
+				of the file.  @author tags are written in chronological order with the original
+				author at the top.  Refer to <a href="http://java.sun.com/j2se/javadoc/writingdoccomments/">
+				How to Write JavaDoc</a> for more specific information on javadoc.
+			</li>
+		</ul>
+		Patches are more likely to be accepted if there isn't a lot of extra work for the
+		maintainers to do before committing.
+	</p>
+	<p>
+		Additional documentation or code samples are always appreciated.  We're focussed on writing
+		code and documentation often gets neglected.
+	</p>
+</section>
+
+
+</document>
+

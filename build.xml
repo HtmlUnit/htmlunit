@@ -49,23 +49,22 @@
 
 
 <target name="build" depends="compile" description="build">
-	<delete dir="../${version}"/>
+	<delete dir="build/${version}"/>
 
-	<mkdir dir="../${version}/"/>
-	<mkdir dir="../${version}/docs"/>
-	<mkdir dir="../${version}/docs/docs-1.1"/>
-	<mkdir dir="../${version}/docs/docs-1.1/api"/>
-	<mkdir dir="../${version}/lib"/>
-	<mkdir dir="../${version}/src"/>
+	<mkdir dir="build/${version}/"/>
+	<mkdir dir="build/${version}/docs"/>
+	<mkdir dir="build/${version}/docs/api"/>
+	<mkdir dir="build/${version}/lib"/>
+	<mkdir dir="build/${version}/src"/>
 
 	<jar
-		jarfile="../${version}/lib/HtmlUnit.jar"
-		basedir="."
+		jarfile="build/${version}/lib/HtmlUnit.jar"
+		basedir="src/java"
 		excludes="**/test/*,**/*.java,build.xml,lib,**/package.html"/>
 
 	<javadoc
-		sourcepath="."
-		destdir="../${version}/docs/docs-1.1/api"
+		sourcepath="src/java"
+		destdir="build/${version}/docs/api"
 		packagenames="${packageList}"
 		version="yes"
 		author="yes"
@@ -73,13 +72,13 @@
 		doctitle="${version}">
 
 		<classpath refid="base.class.path"/>
-		<packageset dir="." defaultexcludes="no">
+		<packageset dir="src/java" defaultexcludes="no">
 			<exclude name="**/test" />
 		</packageset>
 	</javadoc>
 
-	<copy todir="../${version}/src">
-		<fileset dir=".">
+	<copy todir="build/${version}/src">
+		<fileset dir="src/java">
 			<exclude name="**/*.class"/>
 			<exclude name="test/**"/>
 		</fileset>
@@ -87,49 +86,60 @@
 
 	<!-- Build the docs -->
 	<style
-		basedir="../docs"
-		destdir="../${version}/docs"
+		basedir="src/xdocs"
+		destdir="build/${version}/docs"
 		extension=".html"
-		style="../docs/site.xsl"
+		style="src/xdocs/stylesheets/site.xsl"
 		includes="*.xml">
 		<param name="pathToRoot" expression=""/>
 	</style>
+	<!--
 	<style
-		basedir="../docs"
-		destdir="../${version}/docs"
+		basedir="src/xdocs"
+		destdir="build/${version}/docs"
 		extension=".html"
-		style="../docs/site.xsl"
+		style="/docs/site.xsl"
 		includes="**/*.xml"
 		excludes="*.xml">
 		<param name="pathToRoot" expression="../"/>
 	</style>
-	<copy todir="../${version}/docs" >
-		<fileset dir="../docs" >
+	-->
+	<copy todir="build/${version}/docs" >
+		<fileset dir="src/xdocs/images" >
 			<include name="**/*.jpg"/>
 			<include name="**/*.gif"/>
 		</fileset>
 	</copy>
 
-	<copy todir="../${version}/lib" file="../lib/Tidy.jar"/>
-	<copy todir="../${version}/lib" file="../lib/commons-httpclient.jar"/>
-	<copy todir="../${version}/lib" file="../lib/commons-logging.jar"/>
-	<copy todir="../${version}/lib" file="../lib/js.jar"/>
+	<copy todir="build/${version}/lib">
+		<fileset dir="dist/lib">
+			<include name="*.jar"/>
+		</fileset>
+	</copy>
 
 	<zip
-		zipfile="../${version}.zip"
-		basedir=".."
+		zipfile="dist/${version}.zip"
+		basedir="build"
 		includes="${version}/**"
 	/>
 
 	<!-- Build the documentation zip file for uploading -->
 	<zip
-		zipfile="../projectdocs.zip"
-		basedir="../${version}/docs"
+		zipfile="dist/projectdocs.zip"
+		basedir="build/${version}/docs"
 		includes="**/*.html,**/*.jpg,**/*.gif"
 		excludes="src/**"
 	/>
+
+	<echo message=""/>
+	<echo message="************************************************************"/>
+	<echo message="Full packaged build is dist/${version}.zip"/>
+	<echo message="Zipped documentation is dist/projectdocs.zip"/>
+	<echo message="  "/>
+	<echo message="An unzipped build suitable for browsing is in build/${version}"/>
+	<echo message="************************************************************"/>
 	<!--
-	<delete dir="../${version}"/>
+	<delete dir="build/${version}"/>
 	-->
 </target>
 

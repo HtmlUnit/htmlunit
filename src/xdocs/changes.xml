@@ -1,0 +1,339 @@
+<?xml version="1.0"?>
+<document title="Change History">
+
+<section title="1.1-pre5">
+	<change-log>
+		<change type="new">
+			Added support for document.location (an alias for window.location)
+		</change>
+		<change type="change">
+			Changed initialization order in HtmlPage so that the enclosing window
+			is initialized before the javascript is run
+		</change>
+		<change type="change">
+			BEHAVIOUR CHANGE: WebClients may no longer change browser versions after creation.
+			This is required because some of the javascript bits initialize differently
+			depending on which browser is in use.  If we allowed the browser version to
+			change then behaviour would be very unpredictable.
+		</change>
+		<change type="new">
+			Added method HtmlPage.getFirstAnchorByText()
+		</change>
+		<change type="change">
+			First steps towards having property/function information in a configuration file
+		</change>
+		<change type="new">
+			Added method getHtmlElementsByAccessKey()
+		</change>
+		<change type="new">
+			Added support for javascript:document.getElementById()
+		</change>
+		<change type="new">
+			Added support for javascript:document.all[string]
+		</change>
+		<change type="fix">
+			Fixed bug where relative urls were not being expanded in certain situations
+		</change>
+		<change type="fix">
+			Fixed bug in relative url expansion that was blowing up on urls like //foo.com
+		</change>
+		<change type="change">
+			Upgraded commons-httpclient.jar and commons-logging.jar to the Aug 30 gump build
+		</change>
+	</change-log>
+</section>
+
+
+<section title="1.1-pre4">
+	<change-log>
+		<change type="change">
+			Changed the <a href="license.html">license</a> used by HtmlUnit to an apache style one
+		</change>
+		<change type="change">
+			Changed default value of WebClient.isRedirectEnabled() to false to be
+			consistent with pre2
+		</change>
+		<change type="documentation">
+			Updated look of documentation
+		</change>
+		<change type="new">
+			Started migrating System.out.println calls over to commons-logging.  Refer
+			to the <a href="logging.html">logging tutorial</a> for information on customizing this.
+		</change>
+		<change type="new">
+			Support for onClick handlers in HtmlSubmitInput
+		</change>
+		<change type="change">
+			Support for onClick handlers in HtmlButton
+		</change>
+		<change type="fix">
+			Fixed bug where NullPointerException would be thrown if window.alert() was
+			called and no AlertHandler had been registered
+		</change>
+		<change type="new">
+			Support for onload handler on the body tag
+		</change>
+		<change type="new">
+			Support for customizing the page types.  See WebClient.setPageCreator()
+		</change>
+		<change type="new">
+			Added HtmlElement.hasHtmlElementWithId()
+		</change>
+		<change type="change">
+			Renamed DefaultAlertHandler to CollectingAlertHandler
+		</change>
+		<change type="fix">
+			Fixed NullPointerException in HtmlForm during submission of a form containing
+			a radio button
+		</change>
+		<change type="new">
+			Stubbed out the following methods on Input: click(), focus(), blur(), select()
+		</change>
+		<change type="new">
+			Added support for inherited functions to SimpleScriptable.  Previously only getters
+			and setters were supported.
+		</change>
+		<change type="change">
+			Changed SimpleScriptable.getLog() to create a new log object each time.  This is
+			neccessary since in rhino, functions don't know who their object is.  A way for
+			functions to learn about their objects will have to be determined.
+		</change>
+		<change type="new">
+			Added a javascript style object
+		</change>
+		<change type="new">
+			Added new method HtmlElement.isAttributeDefined()
+		</change>
+		<change type="change">
+			Changed HtmlElement.getAttributeValue() to return constants indicating whether
+			the attribute was defined with an empty value or just not defined.  Both of
+			these constants are empty strings so the behaviour of this method hasn't
+			changed.
+		</change>
+		<change type="documentation">
+			Added a tutorial section on the main page and added a link to the table tutorial
+		</change>
+		<change type="documentation">
+			Started writing the table tutorial - still needs a lot of work
+		</change>
+		<change type="new">
+			Added support for the javascript function Form.submit()
+		</change>
+		<change type="fix">
+			Fixed bug where javascript:document.forms[formName] was blowing up
+		</change>
+		<change type="change">
+			Changed logic behind anchor onClick() handler to abort the click if javascript returns false
+		</change>
+		<change type="change">
+			Changed logic behind form onSubmit() handler to abort the submit if javascript returns false
+		</change>
+		<change type="fix">
+			Fixed WebConnection so that it now passes the query string through on post requests
+		</change>
+		<change type="new">
+			Added HtmlFrame class.  Loading a page containing frames will cause those frames to be
+			automatically loaded as well.
+		</change>
+		<change type="change">
+			Added support for loading iframes
+		</change>
+		<change type="new">
+			Added HtmlFrameSet class
+		</change>
+		<change type="documentation">
+			Added a <a href="codingConventions.html">coding conventions</a> document
+		</change>
+		<change type="documentation">
+			Added a <a href="buildingFromCvs.html">"how to get the latest code from cvs"</a> document
+		</change>
+		<change type="change">
+			Renamed WebWindow.getPage() and setPage() to getEnclosedPage() and setEnclosedPage() to
+			avoid conflict with getPage in HtmlElement
+		</change>
+		<change type="new">
+			Added WebClient.getWebWindowByName()
+		</change>
+		<change type="new">
+			New class WebWindowNotFoundException
+		</change>
+		<change type="change">
+			When checking to see if a script is javascript we previously assumed that the
+			script was not and then looked for proof that it was.  This gives us behaviour
+			that is different from browsers in some situations.  The logic has been
+			changed so that now it assumed that any script IS javascript unless there
+			is proof otherwise.
+		</change>
+		<change type="new">
+			New method HtmlPage.getFrames()
+		</change>
+		<change type="new">
+			Initial support for resetting forms.  None of the elements actually revert to
+			their previous values yet but onReset handlers will be run if specified.
+		</change>
+		<change type="new">
+			New method HtmlTable.getCaptionText()
+		</change>
+		<change type="change">
+			Deprecated HtmlPage.getTitle() to be replaced with HtmlPage.getTitleText().  This
+			will be removed before the final release of 1.1
+		</change>
+		<change type="new">
+			Added support for the javascript properties: Select.options, Select.selectedIndex,
+			Select.length and Option.value
+		</change>
+	</change-log>
+</section>
+
+
+<section title="1.1-pre3">
+	<change-log>
+		<change type="new">
+			Added HtmlElement.getParent()
+		</change>
+		<change type="new">
+			Added HtmlElement.getNextSibling()
+		</change>
+		<change type="new">
+			Added HtmlElement.getPreviousSibling()
+		</change>
+		<change type="fix">
+			Changed WebConnection so that cookies will be shared among servers in
+			the same domain
+		</change>
+		<change type="new">
+			Added support for redirection - WebClient.setRedirectEnabled(boolean)
+		</change>
+		<change type="new">
+			Added method on WebResponse to access the response headers
+		</change>
+		<change type="new">
+			Many new javascript objects - this will be transparent to users of HtmlUnit
+		</change>
+		<change type="change">
+			Lots of refactoring in the javascript portion
+		</change>
+		<change type="fix">
+			Fixed a NullPointerException if the server doesn't return a content-type header
+		</change>
+		<change type="fix">
+			Fixed HtmlElement.childrenAsText() so that it ignores comments
+		</change>
+		<change type="new">
+			Added support for Input.checked
+		</change>
+		<change type="new">
+			Added some constants to BrowserVersion for various browsers
+		</change>
+		<change type="change">
+			Upgraded gsbase.jar to version 1.8
+		</change>
+		<change type="change">
+			Replaced js.jar with a version that has been compiled with debug support
+		</change>
+		<change type="change">
+			Upgraded commons-httpclient.jar to the July 27 gump build.
+		</change>
+		<change type="new">
+			Added commons-logging.jar (July 27 gump build) which is needed by httpclient
+		</change>
+		<change type="new">
+			Support for proxy server and ssl together
+		</change>
+	</change-log>
+</section>
+
+
+<section title="1.1-pre2">
+<change-log>
+		<change type="fix">
+			Fixed NullPointerException due to a bug in JTidy - thanks to
+			Mike J Bresnahan for tracking this one right into the JTidy source.
+		</change>
+		<change type="new">
+			HtmlAnchor now supports javascript urls and onClick handlers
+		</change>
+		<change type="new">
+			Ability to set the emulated browser via WebClient.setBrowserVersion(BrowserVersion)
+		</change>
+		<change type="new">
+			Stubbed out a bunch of javascript methods that are used by the popular websites.
+			Each stubbed out method will print a diagnostic message when it is called
+			to alert the user to the fact that it was called.  This is just a temporary
+			measure to ensure that HtmlUnit doesn't blow up when hitting common sites.
+			These methods *will* be implemented properly at some point.
+		</change>
+		<change type="new">
+			Added WebWindow
+		</change>
+		<change type="new">
+			Added TopLevelWindow
+		</change>
+		<change type="new">
+			Added WebWindowListener
+		</change>
+		<change type="new">
+			Added WebWindowEvent
+		</change>
+		<change type="new">
+			Added WebWindowAdapter
+		</change>
+		<change type="new">
+			Added initial support for javascript:open().  Does not currently support
+			features or browser history
+		</change>
+		<change type="fix">
+			Fixed some cases in HtmlPage.getFullyQualifiedUrl() that weren't expanding properly
+		</change>
+		<change type="new">
+			Added HtmlTitle
+		</change>
+		<change type="new">
+			Added HtmlPage.getTitle()
+		</change>
+		<change type="new">
+			Added javascript window.location="some url"
+		</change>
+		<change type="new">
+			Stubbed out the javascript history object
+		</change>
+		<change type="new">
+			Added support javascript urls in HtmlForm submission
+		</change>
+		<change type="new">
+			Added support for HtmlForm.onSubmit()
+		</change>
+		<change type="change">
+			Rewrote logic for handling relative urls
+		</change>
+		<change type="fix">
+			Fixed bug in HtmlRadioButtonInput that was causing isChecked() to return false
+			in some cases even if the checked attribute was there.
+		</change>
+	</change-log>
+</section>
+
+
+<section title="1.1-pre1">
+<change-log>
+		<change type="new">
+			Added initial javascript support
+		</change>
+		<change type="fix">
+			Lots of bug fixes
+		</change>
+	</change-log>
+</section>
+
+
+<section title="1.0">
+	<change-log>
+		<change type="new">
+			Initial release
+		</change>
+	</change-log>
+</section>
+
+
+</document>
+

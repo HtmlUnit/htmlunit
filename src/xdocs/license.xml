@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<document title="HtmlUnit license agreement">
+
+<section title="">
+	<p>
+		Starting with 1.1-pre4, HtmlUnit is licensed under an Apache style license.  The full
+		contents of this license are below.
+	</p>
+	<p>
+		Prior to 1.1-pre4, HtmlUnit was licensed under the
+		<a href="http://www.gnu.org/licenses/gpl.html">LGPL</a>.
+		This change in license was done to ensure that HtmlUnit
+		could be used by the greatest number of projects possible.  There is a fair bit
+		of general confusion about the viral nature of the LGPL so the license for
+		HtmlUnit has been changed to one that is generally better understood.
+	</p>
+</section>
+
+
+<section title="The HtmlUnit License Agreement">
+	<p>
+		The HtmlUnit Software License, Version 1.0
+	</p>
+	<p>
+		Copyright (c) 2002 Gargoyle Software Inc.  All rights reserved.
+	</p>
+	<p>
+		Redistribution and use in source and binary forms, with or without
+		modification, are permitted provided that the following conditions
+		are met:
+	</p>
+	<ol>
+		<li>
+			Redistributions of source code must retain the above copyright
+			notice, this list of conditions and the following disclaimer.
+		</li>
+		<li>
+			Redistributions in binary form must reproduce the above copyright
+			notice, this list of conditions and the following disclaimer in
+			the documentation and/or other materials provided with the
+			distribution.
+		</li>
+		<li>
+			The end-user documentation included with the redistribution,
+			if any, must include the following acknowledgment:
+			<blockquote>
+				"This product includes software developed by
+				Gargoyle Software Inc. (http://www.GargoyleSoftware.com/)."
+			</blockquote>
+			Alternately, this acknowledgment may appear in the software itself,
+			if and wherever such third-party acknowledgments normally appear.
+		</li>
+		<li>
+			The name "Gargoyle Software" must
+			not be used to endorse or promote products derived from this
+			software without prior written permission. For written
+			permission, please contact info@GargoyleSoftware.com.
+		</li>
+		<li>
+			Products derived from this software may not be called "HtmlUnit",
+			nor may "HtmlUnit" appear in their name, without prior written
+			permission of Gargoyle Software Inc.
+		</li>
+	</ol>
+	<p>
+		THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+		WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+		OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+		DISCLAIMED.  IN NO EVENT SHALL THE APACHE SOFTWARE FOUNDATION OR
+		ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+		SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+		LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+		USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+		ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+		OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+		OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+		SUCH DAMAGE.
+	</p>
+</section>
+
+
+<section title="Contributions">
+	<p>
+		This software consists of voluntary contributions made by many
+		individuals on behalf of Gargoyle Software Inc.  For more
+		information on Gargoyle Software Inc., please see
+		<a href="http://www.GargoyleSoftware.com">http://www.GargoyleSoftware.com</a>.
+	</p>
+</section>
+
+
+</document>
+
