@@ -16,6 +16,9 @@
 			If there is only one radio button with a given name then javascript should be returning
 			the radio button, not an array of buttons.  The code was always returning an array.
 		</change>
+		<change type="fix">
+			Fixed bug where the javascript Option.text was returning the wrong value
+		</change>
 	</change-log>
 </section>
 
