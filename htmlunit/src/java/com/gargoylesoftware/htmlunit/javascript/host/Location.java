@@ -56,5 +56,14 @@ public class Location extends SimpleScriptable {
             return page.getWebResponse().getUrl().toExternalForm();
         }
     }
+
+
+    public void jsFunction_reload( final String href ) {
+        getLog().debug("Not implemented yet: reload("+href+")");
+    }
+    public void jsFunction_replace( final String href ) {
+        getLog().debug("Not implemented yet: replace("+href+")");
+    }
+
 }
 
