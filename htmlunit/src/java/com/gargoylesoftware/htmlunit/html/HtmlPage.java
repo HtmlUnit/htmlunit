@@ -921,6 +921,8 @@ public final class HtmlPage extends DomNode implements Page {
     
     /**
      * Get the first child of startElement that is an instance of the given class.
+     * @param startElement The parent element
+     * @param clazz The class to search for.
      * @return <code>null</code> if no child found
      */
     private HtmlElement getFirstChildElement(final HtmlElement startElement, final Class clazz) {
@@ -1394,7 +1396,9 @@ public final class HtmlPage extends DomNode implements Page {
     /**
      * Executes the onchange script code for this element if this is appropriate. 
      * This means that the element must have an onchange script, script must be enabled 
-     * and the change in the element must not have been triggered by a script.  
+     * and the change in the element must not have been triggered by a script.
+     * 
+     * @param htmlElement The element that contains the onchange attribute.
      * @return The page that occupies this window after this method completes. It
      * may be this or it may be a freshly loaded page. 
      */
