@@ -8,6 +8,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import java.net.URL;
 
 /**
  * A javascript object for a Location
@@ -73,6 +74,12 @@ public class Location extends SimpleScriptable {
      */
     public void jsFunction_replace( final String href ) {
         getLog().debug("Not implemented yet: replace("+href+")");
+    }
+
+
+    public String jsGet_hostname() {
+        final URL url = window_.getWebWindow().getEnclosedPage().getWebResponse().getUrl();
+        return url.getHost();
     }
 }
 
