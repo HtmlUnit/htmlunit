@@ -476,6 +476,51 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    public void testGetElementsByTagName_Inline() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        webClient.setWebConnection( webConnection );
+
+        final String firstContent
+            = "<html><body><script type=\"text/javascript\">alert(document.getElementsByTagName('script').length);</script></body></html>";
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+
+        final List expectedAlerts = Collections.singletonList("1");
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+
+    public void testGetElementsByTagName_LoadScript() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        webClient.setWebConnection( webConnection );
+
+        final String firstContent
+            = "<html><body><script src=\"http://script\"></script></body></html>";
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final String scriptContent
+            = "alert(document.getElementsByTagName('script').length);";
+        webConnection.setResponse(
+            new URL("http://script"), scriptContent, 200, "OK", "text/javascript", Collections.EMPTY_LIST );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+
+        final List expectedAlerts = Collections.singletonList("1");
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+
     public void testDocumentAll_IndexByInt() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );

@@ -69,8 +69,12 @@
             	by David K. Taylor.
             </action>
             <action type="update" dev="mbowler" id="740636" due-to="David K. Taylor">
-	            Fix for bug 740636 "getElementsByTagName should be case insensitive" 
-	            - patch submitted by David K. Taylor
+	            Fix for bug 740636 "getElementsByTagName should be case insensitive". 
+	            Patch submitted by David K. Taylor
+            </action>
+            <action type="update" dev="mbowler" id="740605 " due-to="David K. Taylor">
+	            Fix for bug 740605 "External script is executed before script element added".
+	            Patch submitted by David K. Taylor
             </action>
         </release>
     </body>
