@@ -15,6 +15,10 @@
     <preGoal name="xdoc:transform">
         <attainGoal name="faq"/>
         <attainGoal name="createDependenciesPage"/>
+        <ant:mkdir dir="${maven.build.dir}/docs/tools/eclipse"/>
+        <ant:copy todir="${maven.build.dir}/docs/tools/eclipse">
+		    <fileset dir="ide/eclipse"/>
+		</ant:copy>
     </preGoal>
 
     <goal name="createDependenciesPage"
