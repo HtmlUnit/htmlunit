@@ -59,7 +59,7 @@ public class MockResponseTag extends HtmlUnitTagSupport {
     private final String statusMessage_ = "OK";
     private final String contentType_ = "text/html";
     private final List responseHeaders_ = Collections.EMPTY_LIST;
-    
+
     /**
      * Process the tag
      * @param xmlOutput The xml output
@@ -77,7 +77,7 @@ public class MockResponseTag extends HtmlUnitTagSupport {
         getMockWebConnection().setResponse(
             newUrl, content, statusCode_, statusMessage_, contentType_, responseHeaders_);
     }
-    
+
     private MockWebConnection getMockWebConnection() throws JellyTagException {
         final WebConnection webConnection = getWebClient().getWebConnection();
         if( webConnection instanceof MockWebConnection ) {
@@ -86,14 +86,13 @@ public class MockResponseTag extends HtmlUnitTagSupport {
         throw new JellyTagException(
             "WebClient is not using a FakeWebConnection - have you used the mockWebConnection tag?");
     }
-    
+
     /**
      * Callback from Jelly to set the value of the contentType attribute.
-     * @param contentType The new value.
+     * @param url The new value.
      */
     public void setUrl( final String url ) {
         url_ = url;
     }
-    
 }
 
