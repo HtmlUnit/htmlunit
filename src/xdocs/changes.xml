@@ -20,8 +20,8 @@
 		</change>
 		<change type="fix">
 			Page load was blowing up if the name of an input was the same as the name of a
-			predefined property in Form (ie id or action).  Fixed so that a warning is printed
-			out but page load continues.
+			predefined property in Form (ie id or action). Fixed so that if the input has the
+			same name as a predefined property, the input wins.
 		</change>
 		<change type="new">
 			Added support for the javascript method Window.confirm()
