@@ -3,6 +3,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="JavaScriptConfiguration.xsd">
 
+    <class name="ActiveXObject">
+        <function name="ActiveXObject">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
+    </class>
+
     <class name="Anchor" extends="FocusableHostElement">
         <javascript min-version="1.2"/>
         <property name="href" readable="true" writable="true" always-available="true"/>
@@ -74,10 +80,20 @@
         <function name="createAttribute"/>
         <function name="getElementsByName"/>        
     </class>
+
     <class name="Event">
         <property name="currentTarget" readable="true" writable="false"/>
     </class>
+
     <class name="FileUpload" extends="Input"/><!-- NOT FINISHED -->
+
+    <class name="FocusableHostElement" extends="HTMLElement">
+        <function name="blur"/>
+        <function name="focus"/>
+        <function name="onblur"/>
+        <function name="onfocus"/>
+    </class>
+
     <class name="Form" extends="HTMLElement"><!-- NOT FINISHED -->
         <property name="name" readable="true" writable="false"/>
         <property name="length" readable="true" writable="false"/>
@@ -89,7 +105,23 @@
         <function name="submit"/>
         <function name="reset"/>
     </class>
+
+    <class name="Frame" extends="HTMLElement">
+        <property name="src" readable="true" writable="true"/>
+        <property name="onload" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
+    </class>
+
     <class name="Hidden" extends="Input"/><!-- NOT FINISHED -->
+
+    <class name="History">
+        <property name="length" readable="true" writable="false"/>
+        <function name="back"/>
+        <function name="forward"/>
+        <function name="go"/>
+    </class>
 
     <class name="HTMLElement" extends="NodeImpl">
         <property name="all" readable="true" writable="false">
@@ -139,8 +171,8 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="onclick" readable="true" writable="true">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-			<browser name="Netscape" min-version="3"/>
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
         </property>
         <property name="ondblclick" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
@@ -253,8 +285,7 @@
         </function>
     </class>
 
-    <class name="Image" extends="Input">
-    </class>
+    <class name="Image" extends="Input"/>
 
     <class name="Input" extends="FocusableHostElement">
         <property name="checked" readable="true" writable="true"/>
@@ -291,6 +322,24 @@
         <function name="refresh"/>
     </class>
 
+    <class name="Navigator">
+        <property name="appCodeName" readable="true" writable="false"/>
+        <property name="appMinorVersion" readable="true" writable="false"/>
+        <property name="appName" readable="true" writable="false"/>
+        <property name="appVersion" readable="true" writable="false"/>
+        <property name="browserLanguage" readable="true" writable="false"/>
+        <property name="cookieEnabled" readable="true" writable="false"/>
+        <property name="cpuClass" readable="true" writable="false"/>
+        <property name="onLine" readable="true" writable="false"/>
+        <property name="platform" readable="true" writable="false"/>
+        <property name="systemLanguage" readable="true" writable="false"/>
+        <property name="userAgent" readable="true" writable="false"/>
+        <property name="userLanguage" readable="true" writable="false"/>
+        <function name="javaEnabled"/>
+        <function name="plugins"/>
+        <function name="taintEnabled"/>
+    </class>
+
     <class name="NodeImpl">
         <property name="firstChild" readable="true" writable="false"/>
         <property name="lastChild" readable="true" writable="false"/>
@@ -316,23 +365,51 @@
     </class>
 
     <class name="Password" extends="Input"/><!-- NOT FINISHED -->
+
     <class name="Radio" extends="Input"/><!-- NOT FINISHED -->
+
     <class name="Reset" extends="Input"/><!-- NOT FINISHED -->
-    <class name="Submit" extends="Input"><!-- NOT FINISHED -->
-        <property name="length" readable="true" writable="false"/>
+
+    <class name="Screen">
+        <property name="availHeight" readable="true" writable="false"/>
+        <property name="availLeft" readable="true" writable="false"/>
+        <property name="availTop" readable="true" writable="false"/>
+        <property name="availWidth" readable="true" writable="false"/>
+        <property name="bufferDepth" readable="true" writable="true"/>
+        <property name="colorDepth" readable="true" writable="false"/>
+        <property name="deviceXDPI" readable="true" writable="false"/>
+        <property name="deviceYDPI" readable="true" writable="false"/>
+        <property name="fontSmoothingEnabled" readable="true" writable="false"/>
+        <property name="height" readable="true" writable="false"/>
+        <property name="left" readable="true" writable="true"/>
+        <property name="logicalXDPI" readable="true" writable="false"/>
+        <property name="logicalYDPI" readable="true" writable="false"/>
+        <property name="pixelDepth" readable="true" writable="false"/>
+        <property name="top" readable="true" writable="true"/>
+        <property name="updateInterval" readable="true" writable="true"/>
+        <property name="width" readable="true" writable="false"/>
     </class>
-    <class name="Table" extends="HTMLElement">
-        <property name="rows" readable="true" writable="false"/>
-    </class>
-    <class name="Text" extends="Input"/><!-- NOT FINISHED -->
-    <class name="Textarea" extends="Input"/><!-- NOT FINISHED -->
-    <class name="TextImpl" extends="CharacterDataImpl">
-        <function name="splitText"/>
-    </class>
+
     <class name="Select" extends="Input"><!-- NOT FINISHED -->
         <property name="length" readable="true" writable="true"/>
         <function name="add"/>
         <function name="remove"/>
+    </class>
+
+    <class name="Submit" extends="Input"><!-- NOT FINISHED -->
+        <property name="length" readable="true" writable="false"/>
+    </class>
+
+    <class name="Table" extends="HTMLElement">
+        <property name="rows" readable="true" writable="false"/>
+    </class>
+
+    <class name="Text" extends="Input"/><!-- NOT FINISHED -->
+
+    <class name="Textarea" extends="Input"/><!-- NOT FINISHED -->
+
+    <class name="TextImpl" extends="CharacterDataImpl">
+        <function name="splitText"/>
     </class>
 
     <class name="Window">
@@ -342,7 +419,6 @@
             <browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>
             <javascript min-version="1" max-version="2"/>
         </property>
-
         <property name="document" readable="true" writable="false"/>
         <property name="navigator" readable="true" writable="false"/>
         <property name="window" readable="true" writable="false"/>
@@ -359,14 +435,13 @@
         <property name="onerror" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>
         </property>
-
         <function name="alert"/>
         <function name="blur"/>
         <function name="close"/>
         <function name="confirm"/>
         <function name="execScript">
             <browser name="Microsoft Internet Explorer"/>
-		</function>
+        </function>
         <function name="focus"/>
         <function name="open"/>
         <function name="prompt"/>
@@ -381,25 +456,4 @@
         <function name="scrollTo"/>
     </class>
 
-    <class name="Frame" extends="HTMLElement">
-        <property name="src" readable="true" writable="true"/>
-        <property name="onload" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Netscape" min-version="3"/>
-        </property>
-	</class>
-
-    <class name="FocusableHostElement" extends="HTMLElement">
-        <function name="blur"/>
-        <function name="focus"/>
-        <function name="onblur"/>
-        <function name="onfocus"/>
-    </class>    
-    
-    <class name="ActiveXObject">
-	    <function name="ActiveXObject">
-	        <browser name="Microsoft Internet Explorer"/>
-	    </function>
-	</class>
-    
 </configuration>
