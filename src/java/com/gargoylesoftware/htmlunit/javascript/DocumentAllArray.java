@@ -18,8 +18,6 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Element;
 
 /**
@@ -142,6 +140,8 @@ public class DocumentAllArray extends SimpleScriptable {
     * <p>TODO: This implementation is particularly inefficient but without a way
     * to detect if an element has been inserted or removed, it isn't safe to
     * cache the array/<p>
+    *
+    * @return The number of elements in the array
     */
     public Object jsGet_length() {
 
@@ -159,6 +159,14 @@ public class DocumentAllArray extends SimpleScriptable {
     }
 
 
+    /**
+     * The javascript function document.all.tags()
+     * @param context The javascript context
+     * @param scriptable The javascript object that this function is being executed on.
+     * @param args The arguments passed to this function.
+     * @param function The actual function object
+     * @return The matching objects
+     */
     public static Object jsFunction_tags(
         final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
 
