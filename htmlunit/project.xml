@@ -106,6 +106,8 @@
         <developer>
             <name>Chris Erskine</name>
             <id>cerskine</id>
+            <email>cerskine@users.sourceforge.net</email>
+            <timezone>-7</timezone>
             <roles>
                 <role>Java Developer</role>
             </roles>
