@@ -329,10 +329,16 @@ public class HttpWebConnection extends WebConnection {
 
             // Disable certificate caching within HttpClient
             final HttpState httpState = new HttpState() {
+                /**
+                * @deprecated
+                */
                 public void setCredentials(
                     final String realm, final String host, final Credentials credentials ) {
                 }
 
+                /**
+                * @deprecated
+                */
                 public Credentials getCredentials( final String realm, final String host ) {
                     return null;
                 }
