@@ -82,6 +82,9 @@
                 support for HTMLElement.nodeType, nodeName and nodeValue
                 properties.
             </action>
+			<action type="add" dev="mbowler">
+				Added method HtmlArea.click()
+			</action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
