@@ -1088,5 +1088,14 @@ public class WebClientTest extends WebTestCase {
         WebClient.setIgnoreOutsideContent(true);
         assertEquals("Ignore content did not get set", true, WebClient.getIgnoreOutsideContent());
     }
+    /**
+     * Unset the static items set in tests here
+     * @throws Exception if superclass throws
+     */
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        WebClient.setValidateHtml(false);
+        WebClient.setIgnoreOutsideContent(false);
+    }
 }
 
