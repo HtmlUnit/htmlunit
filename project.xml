@@ -94,6 +94,15 @@
                 <role>Java Developer</role>
             </roles>
         </developer>
+        <developer>
+            <name>Marc Guillemot</name>
+            <id>mguillem</id>
+            <email>mguillem@users.sourceforge.net</email>
+            <timezone>+1</timezone>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <contributors>
@@ -131,9 +140,6 @@
             <name>Chris Erskine</name>
         </contributor>
         <contributor>
-            <name>Marc Guillemot</name>
-        </contributor>
-        <contributor>
             <name>David D. Kilzer</name>
         </contributor>
         <contributor>
@@ -145,6 +151,9 @@
         </contributor>
         <contributor>
             <name>Mike Gallaher</name>
+        </contributor>
+        <contributor>
+            <name>Dierk Koenig</name>
         </contributor>
     </contributors>
     <dependencies>
