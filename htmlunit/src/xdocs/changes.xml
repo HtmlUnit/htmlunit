@@ -37,23 +37,22 @@
                 getHtmlElementsByTagNames were all updated to ignore the case of the passed
                 in tag name as they're always compared with a lowercase version.
             </action>
-            <action type="update" dev="yourgod" id="1145916" due-to="sdanig">
-                JavaScript: Implemented location.reload(). Patch from sdanig.
+            <action type="update" dev="yourgod" id="1145916" due-to="Daniel Gredler">
+                JavaScript: Implemented location.reload().
             </action>
-            <action type="update" dev="yourgod" id="1143982" due-to="sdanig">
-                Fixed bug with meta refresh that only contained a number. Patch from sdanig.
+            <action type="update" dev="yourgod" id="1143982" due-to="Daniel Gredler">
+                Fixed bug with meta refresh that only contained a number.
             </action>
-            <action type="update" dev="yourgod" id="1145869" due-to="sdanig">
+            <action type="update" dev="yourgod" id="1145869" due-to="Daniel Gredler">
                 INCOMPATIBLE CHANGE: RefeshHandler interface changed and they must now do the 
                 refresh themselves. DefaultRefreshHandler was replaced with 
                 ImmediateRefreshHandler (the new default) and ThreadedRefreshHandler.
-                Patch from sdanig.
             </action>
-            <action type="update" dev="yourgod" id="1144103" due-to="sdanig">
+            <action type="update" dev="yourgod" id="1144103" due-to="Daniel Gredler">
                 INCOMPATIBLE CHANGE: com.gargoylesoftware.htmlunit.CredentialProvider has been removed.
                 You should now use org.apache.commons.httpclient.auth.CredentialsProvider instead.
                 This patch should allow support for NTLM and Digest authentication as well as 
-                proxy authentication. Patch from sdanig.
+                proxy authentication.
             </action>
             <action type="update" dev="mguillem" id="1110768" due-to="Daniel Gredler">
                 JavaScript: Pick up behaviors defined in style attribute when simulating IE.
