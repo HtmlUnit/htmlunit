@@ -59,6 +59,7 @@
         <function name="getElementById"/>
         <function name="createElement"/>
         <function name="createTextNode"/>
+        <function name="getElementsByName"/>        
     </class>
     <class name="FileUpload" extends="Input"/><!-- NOT FINISHED -->
     <class name="Form" extends="HTMLElement"><!-- NOT FINISHED -->

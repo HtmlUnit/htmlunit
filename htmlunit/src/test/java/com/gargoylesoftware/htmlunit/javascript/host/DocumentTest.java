@@ -1910,4 +1910,41 @@ public class DocumentTest extends WebTestCase {
             "newStatus"} );
         assertEquals( "status", expectedStatus, collectedStatus );
     }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetElementsByName() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var elements = document.getElementsByName('name1');\n"
+             + "    for( i=0; i<elements.length; i++ ) {\n"
+             + "        alert(elements[i].value);\n"
+             + "    }\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<form>" 
+             + "<input type='radio' name='name1' value='value1'>" 
+             + "<input type='radio' name='name1' value='value2'>"
+             + "<input type='button' name='name2' value='value3'>"
+             + "</form>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList(new String[] { "value1", "value2" });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }    
 }
