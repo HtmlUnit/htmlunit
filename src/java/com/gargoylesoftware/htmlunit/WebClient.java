@@ -316,7 +316,7 @@ public class WebClient {
                 return getPage( webWindow, newUrl, SubmitMethod.GET, parameters );
             }
             else if( statusCode == 302 || statusCode == 303 ) {
-                return getPage( webWindow, newUrl, SubmitMethod.GET, parameters );
+                return getPage( webWindow, newUrl, SubmitMethod.GET, Collections.EMPTY_LIST );
             }
         }
 
