@@ -48,6 +48,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  *  Base class for nodes in the Html DOM tree. This class is modelled after the
@@ -60,6 +61,7 @@ import com.gargoylesoftware.htmlunit.Assert;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Chris Erskine
  * @author Mike Williams
+ * @author Marc Guillemot
  */
 public abstract class DomNode implements Cloneable {
     /**
@@ -427,10 +429,16 @@ public abstract class DomNode implements Cloneable {
 
     /**
      * Internal use only - subject to change without notice.<p>
+     * The logic of when and where the js object is created needs a clean up: functions using
+     * a js object of a dom node should not have to look if they should create it first 
      * Return the javascript object that corresponds to this node.
-     * @return The javascript object that corresponds to this node.
+     * @return The javascript object that corresponds to this node building it if necessary.
      */
     public Object getScriptObject() {
+         if (scriptObject_ == null) {
+              scriptObject_ = ((SimpleScriptable) getPage().getScriptObject())
+                 .makeScriptableFor(this);
+         }
         return scriptObject_;
     }
     

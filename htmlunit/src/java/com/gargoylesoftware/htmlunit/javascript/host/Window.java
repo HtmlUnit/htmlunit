@@ -656,6 +656,11 @@ public class Window extends SimpleScriptable {
         // Ask the parent scope, as it may be a variable access like "window.myVar"
         if( result == NOT_FOUND ) {
             result = this.getParentScope().get(name, start);
+            // seems to be a bug in Rhino, workaround as long as the bug is not fixed
+            // https://bugzilla.mozilla.org/show_bug.cgi?id=277462
+            if ("Function".equals(name)) {
+                result = new ScoperFunctionObject((Function) result, start);
+            }
         }
 
         // See if it is an attempt to access an element directly by name if we are emulating IE.

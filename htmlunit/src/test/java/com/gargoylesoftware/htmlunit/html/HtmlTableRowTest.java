@@ -319,15 +319,12 @@ public class HtmlTableRowTest extends WebTestCase {
      * the clone.
      */
     public void testCloneHasDifferentScriptableObject() {
-        assertNull(cell_.getScriptObject());
-        assertNull(cellClone_.getScriptObject());
 
         String cmd = "document.getElementById('cell')"; // force it to have a
         // scriptable object
         client_.getScriptEngine().execute(page_, cmd, "test");
 
-        assertNotNull(cell_.getScriptObject());
-        assertNull(cellClone_.getScriptObject());
+        assertNotSame(cell_.getScriptObject(), cellClone_.getScriptObject());
     }
 
     /**
