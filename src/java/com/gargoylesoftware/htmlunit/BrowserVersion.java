@@ -20,8 +20,11 @@ public class BrowserVersion {
     private final String userAgent_;
     private final String javaScriptVersion_;
 
+    /** Constant representing the Microsoft Internet Explorer series of browsers */
     public static final String INTERNET_EXPLORER = "Microsoft Internet Explorer";
-    public static final String NETSCAPE = "Netscape"
+
+    /** Constant representing the Netscape navigator series of browsers */
+    public static final String NETSCAPE = "Netscape";
 
     /**
      * A fake browser that supports all the new features.  This constant is used whenever

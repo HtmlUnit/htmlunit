@@ -7,19 +7,11 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.javascript.host.Document;
-import com.gargoylesoftware.htmlunit.javascript.host.Form;
-import com.gargoylesoftware.htmlunit.javascript.host.Input;
-import com.gargoylesoftware.htmlunit.javascript.host.Option;
-import com.gargoylesoftware.htmlunit.javascript.host.Select;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -40,8 +32,13 @@ public final class JavaScriptConfiguration {
     private static org.w3c.dom.Document XmlDocument_;
     private static final Object INITIALIZATION_LOCK = new Object();
 
+    /** Constant indicating that this function/property is used by the specified browser version */
     public static final int ENABLED   = 1;
+
+    /** Constant indicating that this function/property is not used by the specified browser version */
     public static final int DISABLED  = 2;
+
+    /** Constant indicating that this function/property is not defined in the configuration file */
     public static final int NOT_FOUND = 3;
 
     private static Map ConfigurationMap_ = new HashMap(11);
@@ -114,7 +111,12 @@ public final class JavaScriptConfiguration {
     }
 
 
-    private int getState( final Class hostClass, final String type, final String typeName, final String booleanAttributeName ) {
+    private int getState(
+            final Class hostClass,
+            final String type,
+            final String typeName,
+            final String booleanAttributeName ) {
+
         assertNotNull("hostClass", hostClass);
         assertNotNull("typeName", typeName);
 
@@ -145,16 +147,37 @@ public final class JavaScriptConfiguration {
     }
 
 
+    /**
+     * Return the state of the specified readable property.
+     *
+     * @param hostClass The class for which this property is defined.
+     * @param name The name of the property.
+     * @return {@link #ENABLED}, {@link #DISABLED} or {@link #NOT_FOUND}
+     */
     public int getReadablePropertyNameState( final Class hostClass, final String name ) {
         return getState(hostClass, "property", name, "readable");
     }
 
 
+    /**
+     * Return the state of the specified writable property.
+     *
+     * @param hostClass The class for which this property is defined.
+     * @param name The name of the property.
+     * @return {@link #ENABLED}, {@link #DISABLED} or {@link #NOT_FOUND}
+     */
     public int getWritablePropertyNameState( final Class hostClass, final String name ) {
         return getState(hostClass, "property", name, "writable");
     }
 
 
+    /**
+     * Return the state of the specified function.
+     *
+     * @param hostClass The class for which this function is defined.
+     * @param name The name of the property.
+     * @return {@link #ENABLED}, {@link #DISABLED} or {@link #NOT_FOUND}
+     */
     public int getFunctionNameState( final Class hostClass, final String name ) {
         return getState(hostClass, "function", name, null);
     }
