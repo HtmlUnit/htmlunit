@@ -11,7 +11,7 @@
                 Added HtmlElement.getEnclosingElement(String tagName).
             </action>
             <action type="update" dev="mguillem">
-                JavaScript: added rowIndex property for table rows.
+                JavaScript: added properties rowIndex and cells and function insertCell for table rows.
             </action>
             <action type="add" dev="mguillem">
                 JavaScript: fixed insertRow when asked to insert at the end of the rows collection (was inserted one position before).

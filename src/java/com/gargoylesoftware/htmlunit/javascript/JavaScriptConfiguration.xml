@@ -559,6 +559,7 @@
 		<doclink
 			url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/tr.asp"
 			descr="MSDN documentation"/>
+        <property name="cells" readable="true" writable="false"/>
         <property name="rowIndex" readable="true" writable="false">
 			<doclink
 				url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-67347567"
@@ -567,6 +568,14 @@
 				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/rowindex.asp"
 				descr="MSDN documentation"/>
 		</property>
+        <function name="insertCell">
+			<doclink
+				url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-68927016"
+				descr="W3c DOM Level 2"/>
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertcell.asp"
+				descr="MSDN documentation"/>
+		</function>
 	</class>
 	
     <class name="Text" extends="Input">

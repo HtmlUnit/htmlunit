@@ -37,8 +37,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.jaxen.JaxenException;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
+import org.mozilla.javascript.Scriptable;
+
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
+import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 
 /**
  * A JavaScript object representing a TR.
@@ -47,6 +55,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
  * @version $Revision$
  */
 public class TableRow extends HTMLElement {
+    private ElementArray cells_; // has to be a member to have equality (==) working
 
     /**
      * Create an instance.
@@ -73,4 +82,55 @@ public class TableRow extends HTMLElement {
         return table.getRows().indexOf(row);
     }
 
+    /**
+     * Returns the rows in the element.
+     * @return The rows in the element.
+     */
+    public Object jsGet_cells() {
+        if (cells_ == null) {
+            cells_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            try {
+                cells_.init(getDomNodeOrDie(), new HtmlUnitXPath(".//td"));
+            }
+            catch (final JaxenException e) {
+                throw Context.reportRuntimeError("Failed to initialize row.cells: " + e.getMessage());
+            }
+        }
+        return cells_;
+    }
+
+    /**
+     * Inserts a new cell at the specified index in the element's cells collection. If the index
+     * is -1 or there is no index specified, then the cell is appended at the end of the
+     * element's cells collection.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertcell.asp">
+     * MSDN Documentation</a>
+     * @param cx the current JavaScript context.
+     * @param s this scriptable object.
+     * @param args the arguments for the function call.
+     * @param f the function object that invoked this function.
+     * @return the newly-created cell.
+     */
+    public static Object jsFunction_insertCell(final Context cx, final Scriptable s, 
+            final Object[] args, final Function f) {
+        final TableRow row = (TableRow) s;
+        final HtmlTableRow htmlRow = (HtmlTableRow) row.getDomNodeOrDie();
+        
+        final int position = getIntArg(0, args, -1);
+
+        final boolean indexValid = (position >= -1 && position <= htmlRow.getCells().size());
+        if (indexValid) {
+            final HtmlElement newCell = htmlRow.getPage().createElement("td");
+            if (position == -1 || position == htmlRow.getCells().size()) {
+                htmlRow.appendChild(newCell);
+            }
+            else {
+                htmlRow.getCell(position).insertBefore(newCell);
+            }
+            return row.getScriptableFor(newCell);
+        }
+        else {
+            throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount");
+        }
+    }
 }

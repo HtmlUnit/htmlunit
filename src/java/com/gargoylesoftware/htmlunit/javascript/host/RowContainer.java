@@ -152,7 +152,7 @@ public class RowContainer extends HTMLElement {
             return rowContainer.getScriptableFor(newRow);
         }
         else {
-            return null;
+            throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount");
         }
     }
 
