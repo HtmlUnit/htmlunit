@@ -247,7 +247,7 @@ public class HtmlForm extends HtmlElement {
         }
 
         if( tagName.equals( "input" ) ) {
-            final String type = getAttributeValue(element, "type" );
+            final String type = getAttributeValue(element, "type" ).toLowerCase();
             if( type.equals( "radio" ) || type.equals( "checkbox" ) ) {
                 final Attr checked = (Attr)element.getAttributeNode("checked");
                 return checked != null;
