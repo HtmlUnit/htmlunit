@@ -242,7 +242,6 @@ public class HTMLElement extends NodeImpl {
         while (it.hasNext()) {
             buf.append(((DomNode) it.next()).asXml());
         }
-        int i;
         removeChar(buf, "\r");
         removeChar(buf, "\n");
         removeChar(buf, "  ");

@@ -20,6 +20,13 @@
             		Added support for enabling the errors from
 				NekoHtml by setting a value on the WebClient.
             </action>
+            <action type="update" dev="mbowler" due-to="Mike Gallaher" id="1065797">
+				 Previously, if you clone an element, and set an attribute in either
+				the old or the new, the new setting appears in the other one as well.
+				This was because cloneNode just left the attributemap
+				alone, so the clones wound up using the same ones as
+				the old.
+            </action>
 		</release>
 
         <release version="1.3" date="November 12, 2004">

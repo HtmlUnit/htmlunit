@@ -234,7 +234,7 @@ public class HTMLElementTest extends WebTestCase {
                 "</html>\n" +
                 "";
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        loadPage(content, collectedAlerts);
 
         final List expectedAlerts = Arrays.asList(new String[]{
             "Old = <b> Old innerHTML</b>",
@@ -268,7 +268,7 @@ public class HTMLElementTest extends WebTestCase {
                 "</html>\n" +
                 "";
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        loadPage(content, collectedAlerts);
 
         final List expectedAlerts = Arrays.asList(new String[]{
             "Old = <b> Old innerHTML</b>",

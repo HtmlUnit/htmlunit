@@ -60,6 +60,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
+ * @author Mike Gallaher
  */
 public abstract class HtmlElement extends DomNode {
 
@@ -94,6 +95,31 @@ public abstract class HtmlElement extends DomNode {
         }
     }
 
+    /**
+     * Overrides DomNode.cloneNode so clone gets its own Map of attributes.
+     * 
+     * @see DomNode#cloneNode(boolean)
+     */
+    public DomNode cloneNode(boolean deep) {
+        final HtmlElement newnode = (HtmlElement) super.cloneNode(deep);
+
+        newnode.attributes_ = new HashMap();
+      
+        for (Iterator it = attributes_.keySet().iterator(); it.hasNext();) {
+            final Object key = it.next();
+
+            if ("id".equals(key)) {
+                continue;
+            }
+
+            newnode.setAttributeValue((String) key, (String) attributes_.get(key));
+        }
+
+        newnode.setId(ATTRIBUTE_VALUE_EMPTY);
+
+        return newnode;
+    }
+    
     /**
      *  Return the value of the specified attribute or an empty string.  If the
      * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
