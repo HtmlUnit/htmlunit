@@ -36,88 +36,48 @@
 			</dd>
 		</dl>
 	</p>
-	<faq>
-		<faq-entry>
-			<question>
-				I've found a bug, how do I report it?
-			</question>
-			<answer>
-				The best way is to open a bug report in the
-				<a href="https://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">sourceforge bug
-				tracking database</a>.  Sending a bug report to the mailing list runs the risk that the
-				bug may get lost.  Putting it in the bug database guarentees that it won't.  Please
-				search the bug database to see if your bug hasn't already been reported before opening
-				a new one.
-			</answer>
-			<answer>
-				If you know how to fix the problem then patches are gratefully accepted.
-			</answer>
-		</faq-entry>
-		<faq-entry>
-			<question>
-				HtmlUnit doesn't support feature X.  How do I request this feature?
-			</question>
-			<answer>
-				The best way is to open a bug report in the
-				<a href="https://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">sourceforge bug
-				tracking database</a>.  See the answer on bug reporting for why the database is preferred.
-			</answer>
-			<answer>
-				If you're willing to write the feature yourself, you can always send us a patch.
-			</answer>
-		</faq-entry>
-		<faq-entry>
-			<question>
-				How do I submit a patch?
-			</question>
-			<answer>
-				Refer to <a href="submittingPatches.html">"How to submit a patch"</a>
-			</answer>
-		</faq-entry>
-<!--
-		<faq-entry>
-			<question>
-			</question>
-			<answer>
-			</answer>
-		</faq-entry>
--->
-	</faq>
 	<p>
-		<dl>
-			<dt>Most recent code</dt>
-			<dd>
-				<a href="buildingFromCvs.html">Getting and building the most recent code from CVS</a>
-			</dd>
-		</dl>
-	</p>
-	<p>
-		<dl>
-			<dt>Other information</dt>
-			<dd>
+		<ul>
+			<li>
+				<a href="faq.html">Frequently Asked Questions</a>
+			</li>
+			<li>
 				<a href="http://sourceforge.net/projects/htmlunit">HtmlUnit project page on SourceForge.net</a>
-				<br />
+			</li>
+			<li>
 				<a href="http://sourceforge.net/mail/?group_id=47038">HtmlUnit mailing list</a>
-				<br />
+			</li>
+			<li>
 				<a href="codingConventions.html">HtmlUnit coding conventions</a>
-				<br />
+			</li>
+			<li>
 				<a href="submittingPatches.html">Submitting patches</a>
-			</dd>
-		</dl>
+			</li>
+			<li>
+				<a href="buildingFromCvs.html">Getting and building the most recent code from CVS</a>
+			</li>
+		</ul>
 	</p>
 
 	<p>
-		<dl>
-			<dt>Tutorials</dt>
-			<dd> |
-				<a href="gettingStarted.html">Getting Started</a> |
-				<a href="table-howto.html">Tables</a> |
-				<a href="logging.html">Logging</a> |
-				<a href="window-howto.html">Windows and frames</a> |
-				<a href="keyboard-howto.html">Keyboard navigation</a> |
-				<br />
-			</dd>
-		</dl>
+		Tutorials
+		<ul>
+			<li>
+				<a href="gettingStarted.html">Getting Started</a>
+			</li>
+			<li>
+				<a href="table-howto.html">Tables</a>
+			</li>
+			<li>
+				<a href="logging.html">Logging</a>
+			</li>
+			<li>
+				<a href="window-howto.html">Windows and frames</a>
+			</li>
+			<li>
+				<a href="keyboard-howto.html">Keyboard navigation</a>
+			</li>
+		</ul>
 	</p>
 </section>
 
