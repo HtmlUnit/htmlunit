@@ -37,9 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.jaxen.JaxenException;
+import org.mozilla.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
+import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 
 /**
  * The javascript object "NodeImpl" which is the base class for all DOM
@@ -50,9 +55,11 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author David K. Taylor
  * @author Barnaby Court
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author <a href="mailto:george@murnock.com">George Murnock</a>
  */
 public class NodeImpl extends SimpleScriptable {
 
+    private ElementArray childNodes_; //has to be a member to have equality (==) working
     private static final long serialVersionUID = -5695262053081637445L;
 
 
@@ -214,6 +221,24 @@ public class NodeImpl extends SimpleScriptable {
      */
     public boolean jsFunction_hasChildNodes() {
         return getDomNodeOrDie().getChildIterator().hasNext();
+    }
+    
+    /**
+     * Returns the child nodes of the current element.
+     * @return The child nodes of the current element.
+     */
+    public Object jsGet_childNodes() {
+        if (childNodes_ == null) {
+            childNodes_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            try {
+                childNodes_.init(getDomNodeOrDie(), new HtmlUnitXPath("./* | text()"));
+            }
+            catch (final JaxenException je) {
+                throw Context.reportRuntimeError("Failed to initialize collection element.childNodes: " 
+                        + je.getMessage());
+            }
+        }
+        return childNodes_;            
     }    
 
 
