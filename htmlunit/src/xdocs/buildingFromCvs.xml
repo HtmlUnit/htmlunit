@@ -17,10 +17,13 @@
 	</p>
 	<source>
 cvs -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit login
-cvs -z3 -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit co src
-cvs -z3 -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit co lib
-cvs -z3 -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit co docs
+cvs -z3 -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit co htmlunit
 	</source>
+	<warning>
+		The old directory structure used the modules "src", "docs" and "lib".  These modules are still
+		present in cvs but are no longer used.  All current source will be found in the "htmlunit"
+		module.
+	</warning>
 	<directory-structure>
 		<file name="LICENSE.txt">The licence used by HtmlUnit.  This is an apache style licence</file>
 		<file name="build.xml">The ant build file</file>
