@@ -121,7 +121,9 @@ public class HtmlForm extends ClickableElement {
 
     /**
      *  Submit this form to the appropriate server as if it had been submitted
-     *  by javascript - ie no submit buttons were pressed.
+     *  by javascript - ie no submit buttons were pressed.  Note that because we
+     *  are simulating a javascript submit, the onsubmit handler will not get
+     *  executed.
      *
      * @return  A new Page that reflects the results of this submission
      * @exception  IOException If an IO error occurs
@@ -132,7 +134,9 @@ public class HtmlForm extends ClickableElement {
 
 
     /**
-     *  Submit this form to the appropriate server
+     *  Submit this form to the appropriate server.  If submitElement is null then
+     *  treat this as if it was called by javascript.  In this case, the onsubmit
+     *  handler will not get executed.
      *
      * @param  submitElement The element that caused the submit to occur
      * @return  A new Page that reflects the results of this submission
@@ -142,25 +146,27 @@ public class HtmlForm extends ClickableElement {
 
         final String action = getActionAttribute();
         final HtmlPage htmlPage = getPage();
-        if( htmlPage.getWebClient().isJavaScriptEnabled() ) {
-            final String onSubmit = getOnSubmitAttribute();
-            if( onSubmit.length() != 0 ) {
-                final ScriptResult scriptResult
-                    = htmlPage.executeJavaScriptIfPossible( onSubmit, "onSubmit", true, this );
-                if( scriptResult.getJavaScriptResult().equals(Boolean.FALSE) ) {
-                    return scriptResult.getNewPage();
+        if( submitElement != null ) {
+            if( htmlPage.getWebClient().isJavaScriptEnabled() ) {
+                final String onSubmit = getOnSubmitAttribute();
+                if( onSubmit.length() != 0 ) {
+                    final ScriptResult scriptResult
+                        = htmlPage.executeJavaScriptIfPossible( onSubmit, "onSubmit", true, this );
+                    if( scriptResult.getJavaScriptResult().equals(Boolean.FALSE) ) {
+                        return scriptResult.getNewPage();
+                    }
+                }
+    
+                if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
+                    return htmlPage.executeJavaScriptIfPossible( action, "Form action", false, this ).getNewPage();
                 }
             }
-
-            if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
-                return htmlPage.executeJavaScriptIfPossible( action, "Form action", false, this ).getNewPage();
-            }
-        }
-        else {
-            if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
-                // The action is javascript but javascript isn't enabled.  Return
-                // the current page.
-                return htmlPage;
+            else {
+                if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
+                    // The action is javascript but javascript isn't enabled.  Return
+                    // the current page.
+                    return htmlPage;
+                }
             }
         }
 

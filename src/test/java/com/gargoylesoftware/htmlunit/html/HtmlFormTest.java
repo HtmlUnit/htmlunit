@@ -516,9 +516,12 @@ public class HtmlFormTest extends WebTestCase {
 
 
     /**
-     * Simulate a bug report where an anchor contained javascript that caused a form submit.
+     * <p>Simulate a bug report where an anchor contained javascript that caused a form submit.
      * According to the bug report, the form would be submitted even though the onsubmit
-     * handler would return false.  This wasn't reproducible but I added a test for it anyway.
+     * handler would return false.  This wasn't reproducible but I added a test for it anyway.</p>
+     * 
+     * <p>UPDATE: If the form submit is triggered by javascript then the onsubmit handler is not
+     * supposed to be called so it doesn't matter what value it returns.</p>
      * @throws Exception if the test fails
      */
     public void testSubmit_AnchorCausesSubmit_onSubmitHandler_returnFalse()
@@ -552,9 +555,9 @@ public class HtmlFormTest extends WebTestCase {
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
         final HtmlPage secondPage = (HtmlPage)anchor.click();
-        assertSame( firstPage, secondPage );
+        assertEquals( "Second", secondPage.getTitleText() );
 
-        assertEquals( Collections.singletonList("clicked"), collectedAlerts );
+        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
     }
 
 
