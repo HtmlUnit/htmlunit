@@ -745,4 +745,36 @@ public class Window extends SimpleScriptable {
             statusHandler.statusMessageChanged(webWindow_.getEnclosedPage(), message);
         }
     }
+
+    /**
+     * Set a chunk of javascript to be invoked each time a specified number of milliseconds has elapsed
+     * Current implementation does nothing.
+    * @param context The javascript Context
+    * @param scriptable The object that the function was called on.
+    * @param args The arguments passed to the function. First arg must be a function or a string containing
+    * the code to execute. 2nd arg is the interval in milliseconds
+    * @param function The function object that was invoked.
+    * @return the id of the created interval
+    */
+   public static int jsFunction_setInterval(final Context context, final Scriptable scriptable, 
+       final Object[] args,  final Function function ) {
+
+        final Window thisWindow = (Window)scriptable;
+
+        thisWindow.getLog().warn("Current implementation of setInterval does nothing.");
+        return 0;
+    }
+
+    /**
+     * Cancels the interval previously started using the setInterval method.
+     * Current implementation does nothing.
+     * @param iIntervalId specifies the interval to cancel as returned by the setInterval method.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp">
+     * MSDN documentation</a>
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp">
+     * MSDN documentation</a>
+     */
+    public void jsFunction_clearInterval(final int iIntervalId) {
+        getLog().warn("Current implementation of clearInterval does nothing.");
+    }
 }

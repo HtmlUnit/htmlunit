@@ -745,6 +745,27 @@ public class WindowTest extends WebTestCase {
         fail("No alerts written within "+maxTime+"ms");
     }
 
+
+    /**
+     * Just tests that setting and clearing an interval doesn't throw
+     * @throws Exception If the test fails
+     */
+    public void testSetAndClearInterval() throws Exception {
+        final String content
+            = "<html><body>\n"
+                + "<script>\n"
+                + "window.setInterval('alert(\"Yo!\")', 500);"
+                + "function foo() { alert('Yo2'); }\n"
+                + "var i = window.setInterval(foo, 500);"
+                + "window.clearInterval(i);"
+            + "</script></body></html>";
+
+        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        loadPage(content, collectedAlerts);
+        
+        // 
+    }
+
     /**
      * Test that a script started by a timer is not executed if it the page that started it
      * is not loaded anymore.
