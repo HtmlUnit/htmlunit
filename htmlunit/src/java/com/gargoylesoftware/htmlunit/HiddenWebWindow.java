@@ -56,6 +56,10 @@ public class HiddenWebWindow implements WebWindow {
      * @param page The new page or null if there is no page (ie empty window)
      */
     public void setEnclosedPage( final Page page ) {
+        if( page instanceof JavaScriptPage  == false ) {
+            throw new IllegalStateException(
+                "Wrong kind of page being put into this HiddenWebWindow: "+page.getClass().getName());
+        }
         enclosedPage_ = page;
     }
 

@@ -44,6 +44,9 @@ public class DefaultPageCreator implements PageCreator {
         if( contentType.equals( "text/html" ) || contentType.equals( "text/xhtml" ) ) {
             newPage = new HtmlPage( webClient, webResponse.getUrl(), webResponse, webWindow );
         }
+        else if( contentType.equals("text/javascript") ) {
+            newPage = new JavaScriptPage( webResponse, webWindow );
+        }
         else if( contentType.startsWith( "text/" ) ) {
             newPage = new TextPage( webResponse, webWindow );
         }
