@@ -20,6 +20,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Tests for Document
+ *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
@@ -258,7 +260,7 @@ public class DocumentTest extends WebTestCase {
 
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
         assertEquals("", firstPage.getTitleText());
-        
+
         final List expectedAlerts = Collections.singletonList("DIV");
         assertEquals( expectedAlerts, collectedAlerts );
     }

@@ -16,48 +16,40 @@ import java.util.Collections;
 import java.util.List;
 import junit.framework.AssertionFailedError;
 
+/**
+ * Common superclass for HtmlUnit tests
+ *
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ */
 public class WebTestCase extends BaseTestCase {
+    /**
+     * Create an instance.
+     * @param name The name of the test.
+     */
     public WebTestCase( final String name ) {
         super( name );
     }
 
 
     /**
-     * @param  label
-     * @param  clazz
-     * @param  object
+     * Load a page with the specified html.
+     * @param html The html to use.
+     * @return The new page.
+     * @throws Exception if something goes wrong.
      */
-    public void assertInstanceOf( final String label, final Object object, final Class clazz ) {
-        if( clazz.isAssignableFrom( object.getClass() ) == false ) {
-            fail( label + ": object [" + object + "] is not an instance of class ["
-                + clazz.getName() + "]" );
-        }
-    }
-
-
-    public void assertInstanceOf( final Object object, final Class clazz ) {
-        if( clazz.isAssignableFrom( object.getClass() ) == false ) {
-            fail("object ["+object+"] is not an instance of class ["+clazz.getName()+"]" );
-        }
-    }
-
-
-    /**
-     * @exception  Throwable
-     */
-//    public void runBare()
-//        throws Throwable {
-//        final long startTime = System.currentTimeMillis();
-//        super.runBare();
-//        final long endTime = System.currentTimeMillis();
-//    }
-
-
     protected final HtmlPage loadPage( final String html ) throws Exception {
         return loadPage(html, null);
     }
 
 
+    /**
+     * Load a page with the specified html and collect alerts into the list.
+     * @param html The HTML to use.
+     * @param collectedAlerts The list to hold the alerts.
+     * @return The new page.
+     * @throws Exception If something goes wrong.
+     */
     protected final HtmlPage loadPage( final String html, final List collectedAlerts )
         throws Exception {
 
@@ -77,6 +69,10 @@ public class WebTestCase extends BaseTestCase {
     }
 
 
+    /**
+     * Assert that the specified object is null.
+     * @param object The object to check.
+     */
     public static void assertNull( final Object object ) {
         if( object != null ) {
             throw new AssertionFailedError("Expected null but found ["+object+"]");

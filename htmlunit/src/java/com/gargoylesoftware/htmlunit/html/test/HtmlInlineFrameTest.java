@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.Collections;
 
 /**
- *  Tests for HtmlSubmitInput
+ *  Tests for HtmlInlineFrame
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

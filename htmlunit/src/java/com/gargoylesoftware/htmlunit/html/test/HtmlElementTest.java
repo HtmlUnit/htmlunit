@@ -18,7 +18,7 @@ import java.net.URL;
 import java.util.Collections;
 
 /**
- *  Tests for HtmlForm
+ *  Tests for HtmlElement
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

@@ -26,6 +26,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Tests for Window
+ *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
