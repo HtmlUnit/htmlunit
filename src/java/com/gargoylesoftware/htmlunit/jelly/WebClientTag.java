@@ -65,11 +65,19 @@ public class WebClientTag extends HtmlUnitTagSupport {
     }
 
 
+    /**
+     * Set the userid attribute
+     * @param userid the new value
+     */
     public void setUserid( final String userid ) {
         userId_ = userid;
     }
 
 
+    /**
+     * Set the password attribute
+     * @param password the new value
+     */
     public void setPassword( final String password ) {
         password_ = password;
     }
