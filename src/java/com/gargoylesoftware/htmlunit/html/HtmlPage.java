@@ -888,6 +888,8 @@ public final class HtmlPage
     /**
      * Move the focus to the next element in the tab order.  To determine the specified tab
      * order, refer to {@link HtmlPage#getTabbableElements()}
+     *
+     * @return The element that has focus after calling this method.
      */
     public HtmlElement tabToNextElement() {
         final List elements = getTabbableElements();
@@ -925,6 +927,8 @@ public final class HtmlPage
     /**
      * Move the focus to the previous element in the tab order.  To determine the specified tab
      * order, refer to {@link HtmlPage#getTabbableElements()}
+     *
+     * @return The element that has focus after calling this method.
      */
     public HtmlElement tabToPreviousElement() {
         final List elements = getTabbableElements();
