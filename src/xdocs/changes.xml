@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1166781" due-to="Kent Tong">
+                Javascript: form's onsubmit property is now a function and can be assigned.
+            </action>
             <action type="add" dev="mguillem" id="1153758" due-to="George Murnock">
                 Javascript: added support for new Image() and changing src attribute.
             </action>

@@ -149,6 +149,7 @@
         <property name="method" readable="true" writable="true"/>
 		<property name="name" readable="true" writable="false"/>
         <property name="target" readable="true" writable="true"/>
+        <property name="onsubmit" readable="true" writable="true"/>
 
         <function name="reset"/>
 		<function name="submit"/>
