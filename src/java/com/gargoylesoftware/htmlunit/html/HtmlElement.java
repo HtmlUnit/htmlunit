@@ -662,7 +662,7 @@ public abstract class HtmlElement {
     }
 
 
-    public String getXmlAsString() {
+    public String asXml() {
         final StringWriter stringWriter = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(stringWriter);
         printXml(getElement(), "", printWriter);
@@ -674,11 +674,27 @@ public abstract class HtmlElement {
     private void printXml( final Node node, final String indent, final PrintWriter printWriter ) {
         final boolean hasChildren = (node.getFirstChild() != null);
         if( node instanceof Element ) {
-            printWriter.print(indent+"<"+((Element)node).getTagName().toLowerCase());
+            final Element element = (Element)node;
+            printWriter.print(indent+"<"+element.getTagName().toLowerCase());
+            final NamedNodeMap attributeMap = element.getAttributes();
+            final int attributeCount = attributeMap.getLength();
+            for( int i=0; i<attributeCount; i++ ) {
+                printWriter.print(" ");
+                final Attr attribute = (Attr)attributeMap.item(i);
+                printWriter.print(attribute.getName().toLowerCase());
+                printWriter.print("=\"");
+                printWriter.print(attribute.getValue());
+                printWriter.print("\"");
+            }
+
             if( hasChildren == false ) {
                 printWriter.print("/");
             }
             printWriter.println(">");
+        }
+        else if( node instanceof CharacterData ) {
+            printWriter.print(indent);
+            printWriter.println( ((CharacterData)node).getData());
         }
         else {
             printWriter.println(indent+node);
@@ -692,7 +708,5 @@ public abstract class HtmlElement {
             printWriter.println(indent+"</"+((Element)node).getTagName().toLowerCase()+">");
         }
     }
-
-
 }
 
