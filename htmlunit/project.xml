@@ -5,14 +5,14 @@
 	<name>HtmlUnit</name>
 	<id>htmlunit</id>
 	<gumpRepositoryId>htmlunit</gumpRepositoryId>
-	<inceptionYear>2001</inceptionYear>
-	<currentVersion>2.0-alpha2</currentVersion>
+	<inceptionYear>2002</inceptionYear>
+	<currentVersion>1.3beta1</currentVersion>
 	<package>com.gargoylesoftware.htmlunit</package>
 
 	<organization>
-	<name>Apache Software Foundation</name>
-	<url>http://jakarta.apache.org/</url>
-	<logo>http://jakarta.apache.org/commons/images/jakarta-logo-blue.gif</logo>
+	<name>Gargoyle Software Inc.</name>
+	<url>http://www.GargoyleSoftware.com</url>
+	<logo>http://www.GargoyleSoftware.com/images/CompanyLogoSmall.jpg</logo>
 	</organization>
 
 	<shortDescription>HtmlUnit - A testing tool for web based applications</shortDescription>
@@ -23,10 +23,10 @@
 	<issueTrackingUrl></issueTrackingUrl>
 
 	<siteAddress>htmlunit.sourceforge.net</siteAddress>
-	<siteDirectory>/</siteDirectory>
+	<siteDirectory>/home/groups/h/ht/htmlunit/htdocs</siteDirectory>
 	<distributionDirectory></distributionDirectory>
 	<repository>
-		<connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/htmlunit:htmlunit:anonymous</connection>
+		<connection>scm:cvs:ext:mbowler@cvs.sourceforge.net:/cvsroot/htmlunit:htmlunit</connection>
 		<url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/htmlunit/</url>
 	</repository>
 
