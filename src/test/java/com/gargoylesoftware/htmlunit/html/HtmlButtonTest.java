@@ -42,6 +42,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -274,5 +275,41 @@ public class HtmlButtonTest extends WebTestCase {
         final List collectedParameters = webConnection.getLastParameters();
 
         assertEquals( expectedParameters, collectedParameters );
+    }
+
+
+    /**
+     * According to the html spec, the default type for a button is "submit"
+     * @throws Exception if the test fails
+     */
+    public void testDefaultButtonType_StandardsCompliantBrowser() throws Exception {
+        assertEquals("submit", getDefaultButtonType(BrowserVersion.MOZILLA_1_0));
+    }
+
+    /**
+     * IE is different than the html spec and has a default type of "button"
+     * @throws Exception if the test fails
+     */
+    public void testDefaultButtonType_InternetExplorer() throws Exception {
+        assertEquals("button", getDefaultButtonType(BrowserVersion.INTERNET_EXPLORER_6_0));
+    }
+    
+    private String getDefaultButtonType( final BrowserVersion browserVersion ) throws Exception {
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<form id='form1'>"
+                 + "    <button name='button' id='button'>PushMe</button>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient(browserVersion);
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                URL_GARGOYLE,
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
+        return button.getTypeAttribute();
     }
 }
