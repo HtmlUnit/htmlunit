@@ -384,7 +384,7 @@ public final class HtmlPage extends DomNode implements Page {
      *
      * @return  The list of id's
      */
-    public final List getTabbableElementIds() {
+    public List getTabbableElementIds() {
         final List list = new ArrayList( getTabbableElements() );
         final int listSize = list.size();
 

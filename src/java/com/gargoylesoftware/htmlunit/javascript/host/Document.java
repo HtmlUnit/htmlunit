@@ -94,7 +94,7 @@ public final class Document extends NodeImpl {
      * Javascript constructor.  This must be declared in every javascript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
-    public final void jsConstructor() {
+    public void jsConstructor() {
     }
 
 
