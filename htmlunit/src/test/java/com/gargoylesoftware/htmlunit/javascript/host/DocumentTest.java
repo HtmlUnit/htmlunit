@@ -1952,4 +1952,32 @@ public class DocumentTest extends WebTestCase {
         assertEquals(domain, cookie.getDomain());
         assertEquals(secure, cookie.getSecure());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testAccessImageByName() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.myImage.id)\n"
+            + "    alert(document.myImage2.length)\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<img src='foo' name='myImage' id='myImageId'>\n"
+            + "<img src='foo' name='myImage2'>\n"
+            + "<img src='foo' name='myImage2'>\n"
+            + "</body></html>";
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "myImageId", "2"
+         } );
+         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
 }
