@@ -64,14 +64,24 @@
         </developer>
     </developers>
 
-    <!--
     <contributors>
         <contributor>
-            <name></name>
-            <email></email>
+            <name>Noboru Sinohara</name>
+        </contributor>
+        <contributor>
+            <name>Mike J. Bresnahan</name>
+        </contributor>
+        <contributor>
+            <name>Dominique Broeglin</name>
+        </contributor>
+        <contributor>
+            <name>Alex Nikiforoff</name>
+        </contributor>
+        <contributor>
+            <name>David K. Taylor</name>
         </contributor>
     </contributors>
-    -->
+
     <dependencies>
         <dependency>
             <id>junit</id>
