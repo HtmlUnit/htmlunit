@@ -41,12 +41,12 @@ public class Textarea extends Input {
 
 
     public String jsGet_value() {
-        return ((HtmlTextArea)getHtmlElementOrDie()).getValue();
+        return ((HtmlTextArea)getHtmlElementOrDie()).getText();
     }
 
 
     public void jsSet_value( final String value ) {
-        ((HtmlTextArea)getHtmlElementOrDie()).setValue(value);
+        ((HtmlTextArea)getHtmlElementOrDie()).setText(value);
     }
 }
 
