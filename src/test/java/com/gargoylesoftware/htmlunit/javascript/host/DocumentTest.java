@@ -335,6 +335,82 @@ public class DocumentTest extends WebTestCase {
 
 
     /**
+     * Regression test for insertBefore
+     * @throws Exception if the test fails
+     */
+    public void testInsertBefore() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        webClient.setWebConnection( webConnection );
+
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    var form = document.forms['form1'];\n"
+            + "    var oldChild = document.getElementById('oldChild');\n"
+            + "    var div = document.createElement( 'DIV' );\n"
+            + "    form.insertBefore( div, oldChild );\n"
+            + "    alert( form.firstChild==div )\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'><div id='oldChild'/></form>"
+            + "</body></html>";
+        webConnection.setResponse(
+            new URL("http://first"), content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals("foo", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "true"
+        } );
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for removeChild
+     * @throws Exception if the test fails
+     */
+    public void testRemoveChild() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        webClient.setWebConnection( webConnection );
+
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    var form = document.forms['form1'];\n"
+            + "    var div = form.firstChild;\n"
+            + "    var removedDiv = form.removeChild(div);\n"
+            + "    alert(div==removedDiv);\n"
+            + "    alert(form.firstChild==null);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'><div id='formChild'/></form>"
+            + "</body></html>";
+        webConnection.setResponse(
+            new URL("http://first"), content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals("foo", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "true", "true"
+        } );
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
      * @throws Exception if the test fails
      */
     public void testGetElementById() throws Exception {
