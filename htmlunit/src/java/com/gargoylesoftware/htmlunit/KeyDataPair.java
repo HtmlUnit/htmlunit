@@ -37,15 +37,18 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.File;
+
 /**
- *  A holder for key/data pairs.
+ *  A holder for a key/value pair that represents a file to upload.
  *
  * @version  $Revision$
  * @author Brad Clarke
+ * @author David D. Kilzer
  */
 public class KeyDataPair extends KeyValuePair {
 
-    private final Object dataObject_;
+    private final File fileObject_;
 
     /**
      * Create an instance.
@@ -54,24 +57,24 @@ public class KeyDataPair extends KeyValuePair {
      * @param value The value.
      */
     public KeyDataPair( final String key, final String value) {
-        super(key, value);
-        dataObject_ = value;
+
+        super(key, new File(value).getName());
+
+        File f = new File(value);
+        if (f.exists()) {
+            fileObject_ = f;
+        }
+        else {
+            fileObject_ = null;
+        }
     }
 
-    /**
-     * Create an instance
-     *
-     * @param key The key.
-     * @param data The value
+
+    /** 
+     * @return The <code>java.io.File</code> object if the file exists, else <code>null</code>. 
      */
-    public KeyDataPair(String key, Object data) {
-        super(key, data.toString());
-        dataObject_ = data;
-    }
-
-    /** @return The data object */
-    public Object getData() {
-        return dataObject_;
+    public File getFile() {
+        return fileObject_;
     }
 
 }

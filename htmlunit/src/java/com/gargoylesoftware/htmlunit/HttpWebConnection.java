@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.File;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -280,13 +279,8 @@ public class HttpWebConnection extends WebConnection {
                 while (iterator.hasNext()) {
                     final KeyValuePair pair = (KeyValuePair) iterator.next();
                     if (pair instanceof KeyDataPair) {
-                        File f = (File) ((KeyDataPair)pair).getData();
-                        if (f.exists()){
-                            ((MultipartPostMethod) httpMethod).addParameter(pair.getName(), f);
-                        }
-                        else {
-                            ((MultipartPostMethod) httpMethod).addParameter(pair.getName(), pair.getValue());
-                        }
+                        ((MultipartPostMethod) httpMethod).addParameter(
+                                pair.getName(), pair.getValue(), ((KeyDataPair) pair).getFile());
                     }
                     else {
                         ((MultipartPostMethod) httpMethod).addParameter(pair.getName(), pair.getValue());

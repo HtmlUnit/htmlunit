@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.io.File;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.KeyDataPair;
@@ -73,13 +72,6 @@ public class HtmlFileInput extends HtmlInput {
      * @return  See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
-        final File f = new File(getValueAttribute());
-
-        if (f.exists()) {
-            return new KeyValuePair[] { new KeyDataPair(getNameAttribute(), f)};
-        }
-        else {
-            return new KeyValuePair[] { new KeyValuePair(getNameAttribute(), getValueAttribute())};
-        }
+        return new KeyValuePair[] { new KeyDataPair(getNameAttribute(), getValueAttribute()) };
     }
 }

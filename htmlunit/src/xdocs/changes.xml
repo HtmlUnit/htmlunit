@@ -7,44 +7,49 @@
 
     <body>
         <release version="1.3-pre2" date="Not released yet">
+            <action type="update" dev="yourgod" due-to="David D. Kilzer" id="974966">
+                Refactored HtmlFileInput submission to include the filename even when 
+                there is no file submitted.
+                Patch submitted by David D. Kilzer.
+            </action>        
             <action type="update" dev="yourgod" due-to="David D. Kilzer" id="956964">
-				Added support for JavaScript Window.close()
-				Patch submitted by David D. Kilzer.
+                Added support for JavaScript Window.close()
+                Patch submitted by David D. Kilzer.
             </action>
             <action type="update" dev="yourgod" due-to="David D. Kilzer" id="913740">
-				INCOMPATIBLE CHANGE: WebClient.moveFocusToElement() now takes a 
-				FocusableElement as it's parameter instead of an HtmlElement.
-				FocusableElement is derived from HtmlElement.
-            	Added framework for focus() and blur() as well as JavaScript support 
-            	for them on achors and inputs.
-            	Patch submitted by David D. Kilzer.
+                INCOMPATIBLE CHANGE: WebClient.moveFocusToElement() now takes a 
+                FocusableElement as it's parameter instead of an HtmlElement.
+                FocusableElement is derived from HtmlElement.
+                Added framework for focus() and blur() as well as JavaScript support 
+                for them on achors and inputs.
+                Patch submitted by David D. Kilzer.
             </action>           
             <action type="update" dev="yourgod">
-				Added support for JavaScript Element.setAttribute()
+                Added support for JavaScript Element.setAttribute()
             </action>        
             <action type="update" dev="yourgod">
-				Added support for JavaScript Node.hasChildNodes()
+                Added support for JavaScript Node.hasChildNodes()
             </action>          
             <action type="update" dev="yourgod">
-				Fix for Bug 916316 - this.form inside onclick should work now
+                Fix for Bug 916316 - this.form inside onclick should work now
             </action>           
             <action type="update" dev="yourgod">
-				Implemented JavaScript document.getElementsByName()
+                Implemented JavaScript document.getElementsByName()
             </action>          
             <action type="update" dev="yourgod">
-				Added support for setting select.selectedIndex from javascript
+                Added support for setting select.selectedIndex from javascript
             </action>             
             <action type="update" dev="yourgod">
-				Changed HtmlSelect.fakeSelectedAttribute() to use an empty string
-				as no value at all (nothing submitted)
+                Changed HtmlSelect.fakeSelectedAttribute() to use an empty string
+                as no value at all (nothing submitted)
             </action>             
             <action type="update" dev="yourgod">
-				Fixed bug where a select option with no value attribute was not
-				submitted with it's contents
+                Fixed bug where a select option with no value attribute was not
+                submitted with it's contents
             </action>           
             <action type="update" dev="yourgod">
-				DefaultPageCreator can now be easily extended to add custom
-				content type handling without affecting the default handlers.
+                DefaultPageCreator can now be easily extended to add custom
+                content type handling without affecting the default handlers.
             </action>        
             <action type="update" dev="yourgod">
                 INCOMPATIBLE CHANGE: PageCreator.createPage() no longer takes a 
@@ -53,15 +58,15 @@
                 This change also occured in DefaultPageCreator.
             </action>        
             <action type="update" dev="yourgod">
-				Deprecated HtmlPage(WebClient, URL, WebResponse, webWindow) in favor of
-				HtmlPage(URL, WebResponse, webWindow)
+                Deprecated HtmlPage(WebClient, URL, WebResponse, webWindow) in favor of
+                HtmlPage(URL, WebResponse, webWindow)
             </action>            
             <action type="update" dev="yourgod">
-				Deprecated HTMLParser() as you should never need an instance
+                Deprecated HTMLParser() as you should never need an instance
             </action>
             <action type="update" dev="yourgod">
-				Deprecated HTMLParser.parse(WebClient, WebRespose, WebWindow) in favor of
-				static HTMLParser.parse(WebRespose, WebWindow).
+                Deprecated HTMLParser.parse(WebClient, WebRespose, WebWindow) in favor of
+                static HTMLParser.parse(WebRespose, WebWindow).
             </action>
             <action type="update" dev="yourgod">
                 Updated HtmlRadioButtonInput.click() to select the clicked radio button
@@ -85,7 +90,7 @@
             </action>        
             <action type="update" dev="yourgod">
                 Fixed bug where submitting a form containing a select that had no options 
-				caused a NullPointerException.
+                caused a NullPointerException.
             </action>
             <action type="update" dev="dktaylor">
                 INCOMPATIBLE CHANGE: Changed HtmlPage so it is no longer derived from
@@ -140,22 +145,22 @@
                 hash, host, hostname, href, pathname, port, protocol and search.
             </action>
             <action type="add" dev="mbowler" due-to="Alexei Goussev" id="856885">
-            	Added support for Anchor.href and Anchor.getAttribute().  
-            	Patch submitted by Alexei Goussev.
+                Added support for Anchor.href and Anchor.getAttribute().  
+                Patch submitted by Alexei Goussev.
             </action>
             <action type="update" dev="mbowler" due-to="Alexei Goussev" id="871620">
-            	Fixed bug where getting the style attribute should return an empty 
-            	string instead of NOT_FOUND. Patch submitted by Alexei Goussev.
+                Fixed bug where getting the style attribute should return an empty 
+                string instead of NOT_FOUND. Patch submitted by Alexei Goussev.
             </action>
             <action type="update" dev="yourgod">
                 Fixed bug where calling select() on an HtmlInput from JavaScript caused an
                 exception about select being a function and a property (it's only a function)
             </action>            
-			<action type="update" dev="mbowler">
-				Added initial support for refresh handlers.  They will be invoked from meta 
-				tag refreshes and response header refreshes but not currently from javascript 
-				refreshes
-			</action>
+            <action type="update" dev="mbowler">
+                Added initial support for refresh handlers.  They will be invoked from meta 
+                tag refreshes and response header refreshes but not currently from javascript 
+                refreshes
+            </action>
         </release>
         
         <release version="1.3-pre1" date="November 7, 2003">
