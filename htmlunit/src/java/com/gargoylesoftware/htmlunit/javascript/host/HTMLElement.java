@@ -535,14 +535,7 @@ public class HTMLElement extends NodeImpl {
         else {
             final HtmlElement htmlElt = (HtmlElement) node;
             final IElementFactory factory = HTMLParser.getFactory(htmlElt.getNodeName());
-            final AttributesImpl attributes = new AttributesImpl();
-            for (final Iterator iter = htmlElt.getAttributeEntriesIterator(); iter.hasNext();) {
-                final Map.Entry entry = (Map.Entry) iter.next();
-                final String name = (String) entry.getKey();
-                final String value = (String) entry.getValue();
-                attributes.addAttribute(null, name, name, null, value);
-            }
-            copy = factory.createElement(page, node.getNodeName(), attributes);
+            copy = factory.createElement(page, node.getNodeName(), readAttributes(htmlElt));
             for (final Iterator iter = node.getChildIterator(); iter.hasNext();) {
                 final DomNode child = (DomNode) iter.next();
                 copy.appendChild(copy(child, page));
@@ -552,6 +545,22 @@ public class HTMLElement extends NodeImpl {
         return copy;
     }
 
+    /**
+     * Gets the attributs of the element in the form of a {@link Attributes} 
+     * @param element the element to read the attributes from
+     * @return the attributes
+     */
+    protected AttributesImpl readAttributes(final HtmlElement element) {
+        final AttributesImpl attributes = new AttributesImpl();
+        for (final Iterator iter = element.getAttributeEntriesIterator(); iter.hasNext();) {
+            final Map.Entry entry = (Map.Entry) iter.next();
+            final String name = (String) entry.getKey();
+            final String value = (String) entry.getValue();
+            attributes.addAttribute(null, name, name, null, value);
+        }
+        
+        return attributes;
+    }
 
     /**
      * Inserts the given HTML text into the element at the location.

@@ -542,14 +542,21 @@ public class InputTest extends WebTestCase {
         final String content
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    document.myForm.myRadio.type = 'hidden';\n"
+            + "    var input = document.myForm.myRadio;\n"
+            + "    alert(input.type);\n"
+            + "    input.type = 'hidden';\n"
+            + "    alert(input.type);\n"
             + "}\n</script></head>"
             + "<body onload='doTest()'>\n"
             + "<form name='myForm' action='foo'>\n"
             + "<input type='radio' name='myRadio'/>"
             + "</form></body></html>";
 
+        final List expectedAlerts = Arrays.asList( new String[]{"radio", "hidden"} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 }
