@@ -362,6 +362,9 @@
         <function name="blur"/>
         <function name="close"/>
         <function name="confirm"/>
+        <function name="execScript">
+            <browser name="Microsoft Internet Explorer"/>
+		</function>
         <function name="focus"/>
         <function name="open"/>
         <function name="prompt"/>
