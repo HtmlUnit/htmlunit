@@ -855,15 +855,20 @@ public final class HtmlPage
 
     private void executeBodyOnLoadHandlerIfNeeded() {
         final List bodyTags = getHtmlElementsByTagNames( Collections.singletonList("body") );
-        if( bodyTags.size() != 1 ) {
-            throw new IllegalStateException(
-                "Expected exactly one body tag but found ["+bodyTags.size()+"] xml="+asXml());
+        final int bodyTagCount = bodyTags.size();
+        if( bodyTagCount == 0 ) {
+            // Must be a frameset
         }
-
-        final HtmlBody body = (HtmlBody)bodyTags.get(0);
-        final String onLoad = body.getOnLoadAttribute();
-        if( onLoad.length() != 0 ) {
-            executeJavascriptIfPossible(onLoad, "body.onLoad");
+        else if( bodyTagCount == 1 ) {
+            final HtmlBody body = (HtmlBody)bodyTags.get(0);
+            final String onLoad = body.getOnLoadAttribute();
+            if( onLoad.length() != 0 ) {
+                executeJavascriptIfPossible(onLoad, "body.onLoad");
+            }
+        }
+        else {
+            throw new IllegalStateException(
+                "Expected no more than one body tag but found ["+bodyTagCount+"] xml="+asXml());
         }
     }
 

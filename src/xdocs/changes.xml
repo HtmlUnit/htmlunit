@@ -3,6 +3,12 @@
 
 <section title="1.1-pre6">
 	<change-log>
+		<change type="change">
+			Upgraded commons-logging.jar to 1.0.2
+		</change>
+		<change type="change">
+			Upgraded commons-httpclient.jar to Oct 20/2002 gump build
+		</change>
 		<change type="new">
 			Added support for javascript:Input.disabled
 		</change>
@@ -44,6 +50,9 @@
 		<change type="new">
 			New method WebForm.getParameterListForSubmit().  This method is intended as
 			a debugging aid.
+		</change>
+		<change type="fix">
+			Page load would blow up if no body tag found.  Framesets may not contain any body tags.
 		</change>
 	</change-log>
 </section>

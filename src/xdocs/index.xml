@@ -127,11 +127,11 @@
 			<dt>HtmlUnit.jar</dt>
 			<dd>The main HtmlUnit classes</dd>
 
-			<dt>commons-httpclient.jar</dt>
+			<dt>commons-httpclient.jar [Oct 20/2002 gump build]</dt>
 			<dd><a href="http://jakarta.apache.org/commons/httpclient/">HttpClient from Apache</a>,
 			the code that actually handles the http connections.</dd>
 
-			<dt>commons-logging.jar</dt>
+			<dt>commons-logging.jar [Version 1.0.2]</dt>
 			<dd><a href="http://jakarta.apache.org/commons/logging.html">Logging
 			from Apache</a></dd>
 
