@@ -766,18 +766,7 @@ public final class HtmlPage extends DomNode implements Page {
     }
  
     /**
-     * Internal use only.  This is a callback from {@link ScriptFilter} and
-     * should not be called by consumers of HtmlUnit. this method assume the
-     * charset is null.
-     * @param srcAttribute The source attribute from the script tag.
-     */
-    public void loadExternalJavaScriptFile( final String srcAttribute  ) {
-        loadExternalJavaScriptFile( srcAttribute, null );
-    }
-
-    /**
-     * Internal use only.  This is a callback from {@link HtmlScript#executeScriptIfNeeded()} and
-     * should not be called by consumers of HtmlUnit.
+     * Internal use only.
      * @param srcAttribute The source attribute from the script tag.
      * @param charset The charset attribute from the script tag.
      */

@@ -279,7 +279,7 @@ public class MockWebConnection extends WebConnection {
      * @param statusCode The status code to return
      * @param statusMessage The status message to return
      * @param contentType The content type to return
-     * @param responseHeaders A list of {@KeyValuePair}s that will be returned as
+     * @param responseHeaders A list of {@link KeyValuePair}s that will be returned as
      * response headers.
      */
     public void setResponse(
@@ -302,7 +302,7 @@ public class MockWebConnection extends WebConnection {
      * @param statusCode The status code to return
      * @param statusMessage The status message to return
      * @param contentType The content type to return
-     * @param responseHeaders A list of {@KeyValuePair}s that will be returned as
+     * @param responseHeaders A list of {@link KeyValuePair}s that will be returned as
      * response headers.
      */
     public void setResponse(
