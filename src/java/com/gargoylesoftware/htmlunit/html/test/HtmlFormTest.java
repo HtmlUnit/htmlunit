@@ -533,5 +533,31 @@ public class HtmlFormTest extends WebTestCase {
 
         assertEquals( expectedParameters, collectedParameters );
     }
+
+
+    public void testGetInputByName_WithinNoScriptTags()
+        throws Exception {
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<form id='form1'>"
+                 + "    <input type='text' name='textfield' value='*'/>"
+                 + "    <noscript>"
+                 + "    <input type='submit' name='button' value='foo'/>"
+                 + "    </noscript>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://www.gargoylesoftware.com" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+
+        // Was failing at this point
+        form.getInputByName("button");
+    }
 }
 
