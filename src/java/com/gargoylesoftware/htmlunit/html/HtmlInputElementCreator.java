@@ -38,12 +38,14 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * A specialized creator that knows how to create input objects
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  David K. Taylor
  */
 class HtmlInputElementCreator extends HtmlElementCreator {
 
@@ -51,10 +53,11 @@ class HtmlInputElementCreator extends HtmlElementCreator {
      * Create an HtmlElement for the specified xmlElement, contained in the specified page.
      *
      * @param page The page that this element will belong to.
-     * @param xmlElement The xml element that this HtmlElement corresponds to.
+     * @param xmlNode The xml element that this HtmlElement corresponds to.
      * @return The new HtmlElement.
      */
-    HtmlElement create( final HtmlPage page, final Element xmlElement ) {
+    HtmlElement create( final HtmlPage page, final Node xmlNode ) {
+        final Element xmlElement = (Element) xmlNode;
         if( page.getTagName(xmlElement).equals("input") == false ) {
             throw new IllegalArgumentException("tagName is not 'input': "+page.getTagName(xmlElement));
         }

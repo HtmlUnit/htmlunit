@@ -59,6 +59,7 @@ import java.util.TreeSet;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  <a href="mailto:BarnabyCourt@users.sourceforge.net">Barnaby Court</a>
+ * @author  David K. Taylor
  */
 public class SimpleScriptableTest extends WebTestCase {
     /**
@@ -114,6 +115,7 @@ public class SimpleScriptableTest extends WebTestCase {
         final Set names = getFileNames(directoryName.replace('/', File.separatorChar));
 
         // Now pull out those names that we know don't have html equivilents
+        names.remove("CharacterDataImpl");
         names.remove("Document");
         names.remove("History");
         names.remove("Location");

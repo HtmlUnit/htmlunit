@@ -71,6 +71,17 @@
                 document.  HTMLElement.insertBefore adds a new child element before
                 another child element.  It returns the newly added child element.
             </action>
+            <action type="update" dev="dktaylor" id="805051">
+                Add support for HTMLElement.cloneNode and replaceChild and
+                Document.createTextNode to close RFE 805051.  To support
+                createTextNode, added support for DOM text nodes and character
+                data nodes including the data and length properties and
+                appendData, deleteData, insertData, replaceData, substringData
+                and splitText functions.  Updated DOM API properties and
+                methods of HTMLElement to work with text nodes.  Also added
+                support for HTMLElement.nodeType, nodeName and nodeValue
+                properties.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">

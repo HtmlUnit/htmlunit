@@ -38,34 +38,35 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import org.w3c.dom.Node;
+import org.w3c.dom.Text;
 
 /**
- *  An element that is returned for an html tag that is not supported by this
- *  framework.
+ * Wrapper for the DOM node Text.
  *
  * @version  $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author David K. Taylor
+ * @author  David K. Taylor
  */
-public class UnknownHtmlElement extends HtmlElement {
+public class DomText extends DomCharacterData {
+
     /**
-     *  Create an instance
+     * Create an instance of DomText
      *
-     * @param  page The page that contains this element
-     * @param  element The xml element that represents this html element
+     * @param page The HtmlPage that contains this element.
+     * @param xmlNode The actual XML text node that we are wrapping.
      */
-    UnknownHtmlElement( final HtmlPage page, final Node node ) {
-        super( page, node );
+    DomText( final HtmlPage page, final Node xmlNode ) {
+        super(page, xmlNode);
     }
 
 
     /**
-     *  Return the tag name of the unknown element.
-     *
-     * @return  The tag name
+     * Split a Text node in two.
+     * @param offset The character position at which to split the Text node.
+     * @return The Text node that was split from this node.
      */
-    public String getName() {
-        return getElement().getTagName().toLowerCase();
+    public DomText splitText(final int offset) {
+        final Text xmlNode = (Text) getNode();
+        final Text splitNode = xmlNode.splitText( offset );
+        return (DomText) getPage().getHtmlElement( splitNode );
     }
 }
-

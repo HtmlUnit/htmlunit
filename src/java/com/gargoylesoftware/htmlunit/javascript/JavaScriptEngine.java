@@ -59,6 +59,7 @@ import org.mozilla.javascript.ScriptableObject;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
+ * @author  David K. Taylor
  */
 public final class JavaScriptEngine extends ScriptEngine {
     /** Information specific to the javascript engine */
@@ -135,7 +136,7 @@ public final class JavaScriptEngine extends ScriptEngine {
             final String hostClassNames[] = {
                 "HTMLElement" ,"Window", "Document", "Form", "Input", "Navigator",
                 "Screen", "History", "Location", "Button", "Select", "Textarea",
-                "Style", "Option", "Anchor", "Image"
+                "Style", "Option", "Anchor", "Image", "TextImpl"
             };
 
             for( int i=0; i<hostClassNames.length; i++ ) {

@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import java.util.Iterator;
 
 /**
@@ -45,6 +46,7 @@ import java.util.Iterator;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  David K. Taylor
  */
 class TableElementCreator extends HtmlElementCreator {
 
@@ -52,10 +54,11 @@ class TableElementCreator extends HtmlElementCreator {
      * Create an HtmlElement for the specified xmlElement, contained in the specified page.
      *
      * @param page The page that this element will belong to.
-     * @param xmlElement The xml element that this HtmlElement corresponds to.
+     * @param xmlNode The xml element that this HtmlElement corresponds to.
      * @return The new HtmlElement.
      */
-    HtmlElement create( final HtmlPage page, final Element xmlElement ) {
+    HtmlElement create( final HtmlPage page, final Node xmlNode ) {
+        final Element xmlElement = (Element) xmlNode;
         final String tagName = page.getTagName(xmlElement);
 
         if( tagName.equals("tr") ) {

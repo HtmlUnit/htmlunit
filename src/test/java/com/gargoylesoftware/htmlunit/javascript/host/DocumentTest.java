@@ -59,8 +59,8 @@ import org.apache.commons.httpclient.HttpState;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author David K. Taylor
- * @author Barnaby Court
+ * @author  David K. Taylor
+ * @author  Barnaby Court
  */
 public class DocumentTest extends WebTestCase {
     /**
@@ -275,6 +275,9 @@ public class DocumentTest extends WebTestCase {
              + "function doTest() {\n"
              + "    var div1=document.createElement('div');\n"
              + "    alert(div1.tagName);\n"
+             + "    alert(div1.nodeType);\n"
+             + "    alert(div1.nodeValue);\n"
+             + "    alert(div1.nodeName);\n"
              + "}\n"
              + "</script></head><body onload='doTest()'>"
              + "</body></html>";
@@ -289,7 +292,47 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final List expectedAlerts = Collections.singletonList("DIV");
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "DIV", "1", "null", "DIV"
+        } );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for createTextNode
+     * @throws Exception if the test fails
+     */
+    public void testDocumentCreateTextNode() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var text1=document.createTextNode('Some Text');\n"
+             + "    alert(text1.data);\n"
+             + "    alert(text1.length);\n"
+             + "    alert(text1.nodeType);\n"
+             + "    alert(text1.nodeValue);\n"
+             + "    alert(text1.nodeName);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "Some Text", "9", "3", "Some Text", "#text"
+        } );
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -328,6 +371,87 @@ public class DocumentTest extends WebTestCase {
 
         final List expectedAlerts = Arrays.asList( new String[]{
             "1"
+        } );
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for appendChild of a text node
+     * @throws Exception if the test fails
+     */
+    public void testAppendChild_textNode() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        webClient.setWebConnection( webConnection );
+
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    var form = document.forms['form1'];\n"
+            + "    var child = document.createTextNode( 'Some Text' );\n"
+            + "    form.appendChild( child );\n"
+            + "    alert( form.lastChild.data )\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "</form>"
+            + "</body></html>";
+        webConnection.setResponse(
+            new URL("http://first"), content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals("foo", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "Some Text"
+        } );
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for cloneNode
+     * @throws Exception if the test fails
+     */
+    public void testCloneNode() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        webClient.setWebConnection( webConnection );
+
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    var form = document.forms['form1'];\n"
+            + "    var cloneShallow = form.cloneNode(false);\n"
+            + "    alert( cloneShallow!=null )\n"
+            + "    alert( cloneShallow.firstChild==null )\n"
+            + "    var cloneDeep = form.cloneNode(true);\n"
+            + "    alert( cloneDeep!=null )\n"
+            + "    alert( cloneDeep.firstChild!=null )\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'>"
+            + "<p>hello world</p>"
+            + "</form>"
+            + "</body></html>";
+        webConnection.setResponse(
+            new URL("http://first"), content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals("foo", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "true", "true", "true", "true"
         } );
 
         assertEquals( expectedAlerts, collectedAlerts );
@@ -393,6 +517,45 @@ public class DocumentTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'><div id='formChild'/></form>"
             + "</body></html>";
+        webConnection.setResponse(
+            new URL("http://first"), content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals("foo", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "true", "true"
+        } );
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for replaceChild
+     * @throws Exception if the test fails
+     */
+    public void testReplaceChild() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        webClient.setWebConnection( webConnection );
+
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    var form = document.forms['form1'];\n"
+            + "    var div1 = form.firstChild;\n"
+            + "    var div2 = document.getElementById('newChild');\n"
+            + "    var removedDiv = form.replaceChild(div2,div1);\n"
+            + "    alert(div1==removedDiv);\n"
+            + "    alert(form.firstChild==div2);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'><div id='formChild'/></form>"
+            + "</body><div id='newChild'/></html>";
         webConnection.setResponse(
             new URL("http://first"), content, 200, "OK", "text/html", Collections.EMPTY_LIST );
 

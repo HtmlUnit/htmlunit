@@ -74,7 +74,7 @@ public abstract class HtmlElement {
     /** Constant meaning that the specified attribute was found but its value was empty */
     public static final String ATTRIBUTE_VALUE_EMPTY = new String("");
 
-    private Element element_;
+    private Node node_;
     private final HtmlPage htmlPage_;
 
     // We do lazy initialization on this since the vast majority of HtmlElement instances
@@ -96,14 +96,14 @@ public abstract class HtmlElement {
     /**
      *  Create an instance
      *
-     * @param  element The page that contains this element
-     * @param  htmlPage The xml element that represents this html element
+     * @param htmlPage The page that contains this element
+     * @param node The XML node that represents this html element
      */
-    protected HtmlElement( final HtmlPage htmlPage, final Element element ) {
+    protected HtmlElement( final HtmlPage htmlPage, final Node node ) {
         if( this instanceof HtmlPage == false ) {
-            Assert.notNull("element", element);
+            Assert.notNull("node", node);
         }
-        element_ = element;
+        node_ = node;
 
         if( htmlPage == null && this instanceof HtmlPage ) {
             htmlPage_ = ( HtmlPage )this;
@@ -122,13 +122,13 @@ public abstract class HtmlElement {
     protected final void setElement( final Element element ) {
         Assert.notNull("element", element);
 
-        if( element_ == null ) {
-            final Object oldValue = element_;
-            element_ = element;
+        if( node_ == null ) {
+            final Object oldValue = node_;
+            node_ = element;
             firePropertyChange(PROPERTY_ELEMENT, oldValue, element);
         }
         else {
-            throw new IllegalStateException("element_ has already been set");
+            throw new IllegalStateException("node_ has already been set");
         }
     }
 
@@ -138,8 +138,19 @@ public abstract class HtmlElement {
      *
      * @return  The node
      */
+    public Node getNode() {
+        return node_;
+    }
+
+
+    /**
+     *  Return the XML element that corresponds to this component.
+     *  Only call this method if you are sure the XML node is an element.
+     *
+     * @return  The element
+     */
     public Element getElement() {
-        return element_;
+        return (Element) node_;
     }
 
 

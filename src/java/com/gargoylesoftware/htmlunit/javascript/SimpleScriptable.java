@@ -57,6 +57,7 @@ import org.mozilla.javascript.ScriptableObject;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  David K. Taylor
  */
 public class SimpleScriptable extends ScriptableObject {
     private static final Map PROPERTY_MAPS = Collections.synchronizedMap( new HashMap(89) );
@@ -92,6 +93,7 @@ public class SimpleScriptable extends ScriptableObject {
         }
 
         final String[][] mapping = {
+            {"DomText", "TextImpl"},
             {"HtmlAnchor", "Anchor"},
             {"HtmlButton", "Button"},
             {"HtmlInput", "Input"},
