@@ -13,3 +13,5 @@ checkstyle.properties
 .settings
 build
 dist
+ant-jars
+ant-target

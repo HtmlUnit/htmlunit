@@ -7,22 +7,33 @@
  Authors:
     Mike Bowler
     David K. Taylor
+    Brad Clarke
 -->
 
-<project name="HtmlUnit" default="cleancompile" basedir=".">
+<project name="HtmlUnit" default="jar" basedir=".">
 
 <!--<property name="build.compiler" value="jikes" />-->
 <property name="build.compiler.pedantic" value="true"/>
-<property name="version" value="HtmlUnit-1.3.1-pre1" />
 
 <property environment="env"/>
-<property name="local-repository" value ="target/repository"/>
-<property name="remote-repository" value="http://www.ibiblio.org/maven"/>
+<property name="base.src.dir" value ="src/java"/>
+<property name="test.src.dir" value ="src/test/java"/>
+<property name="jars.dir" value ="ant-jars"/>
+<property name="target.dir" value ="ant-target"/>
+<property name="base.classes.dir" value ="${target.dir}/classes"/>
+<property name="test.classes.dir" value ="${target.dir}/test-classes"/>
+<property name="test.data.dir" location="${target.dir}/junit-data"/>
+<property name="test.reports.dir" location="${target.dir}/junit-reports"/>
 
+<property name="remote.repository" value="http://www.ibiblio.org/maven/"/>
+<!-- Some mirrors you can substitute are listed here: 
+    http://maven.apache.org/faq.html#ibiblio-mirrors
+-->
+    
 <path id="base.class.path">
-    <pathelement path="target/classes"/>
+    <pathelement path="${base.classes.dir}"/>
 
-    <fileset dir="${local-repository}/jars/">
+    <fileset dir="${jars.dir}">
         <include name="**/*.jar"/>
     </fileset>
 
@@ -32,96 +43,87 @@
 </path>
 
 <path id="test.class.path">
-    <pathelement path="target/test-classes"/>
+    <path refid="base.class.path"/>
+    <pathelement path="${test.classes.dir}"/>
 </path>
 
 <target name="maketarget" description="make target directories">
-    <mkdir dir="target/classes"/>
-    <mkdir dir="target/test-classes"/>
+    <mkdir dir="${base.classes.dir}"/>
+    <mkdir dir="${test.classes.dir}"/>
 </target>
 
 <target name="compile" description="compile" depends="maketarget">
-    <javac srcdir="src/java" destdir="target/classes" debug="on" deprecation="off" 
-            source="1.2" target="1.2">
+    <javac srcdir="${base.src.dir}" destdir="${base.classes.dir}" 
+            debug="on" deprecation="off" 
+            source="1.3" target="1.3">
         <classpath refid="base.class.path"/>
     </javac>
-    <copy todir="target/classes">
-        <fileset dir="src/java">
+    <copy todir="${base.classes.dir}">
+        <fileset dir="${base.src.dir}">
             <exclude name="**/*.java"/>
         </fileset>
     </copy>    
-    <javac srcdir="src/test/java" destdir="target/test-classes" debug="on" deprecation="off" 
-            source="1.2" target="1.2">
-        <classpath refid="base.class.path"/>
+    <javac srcdir="${test.src.dir}" destdir="${test.classes.dir}" 
+            debug="on" deprecation="off" 
+            source="1.3" target="1.3">
         <classpath refid="test.class.path"/>
     </javac>
-    <copy todir="target/test-classes">
-        <fileset dir="src/test/java">
+    <copy todir="${test.classes.dir}">
+        <fileset dir="${test.src.dir}">
             <exclude name="**/*.java"/>
         </fileset>
     </copy>        
 </target>
-<target name="jar" description="Make a jar of HtmlUnit" depends="cleancompile,junit">
+<target name="jar" description="Make a jar of HtmlUnit" depends="clean,compile,junit">
     <jar
-        jarfile="target/HtmlUnit.jar"
-        basedir="target/classes"
+        jarfile="${target.dir}/HtmlUnit.jar"
+        basedir="${base.classes.dir}"
         excludes="**/test/*,**/*.java,build.xml,lib,**/package.html"
     />
     <jar
-        jarfile="target/HtmlUnit-src.jar"
-        basedir="src/java"
+        jarfile="${target.dir}/HtmlUnit-src.jar"
+        basedir="${base.src.dir}"
         includes="**/*.java"/>
 </target>
 
-<target name="cleancompile" description="clean compile" depends="clean, compile" />
-
 <target name="clean" description="clean">
-    <!-- Note that we can't just delete 'target' because this would then blow
-         away the repository which is needed for the compile.  Instead we delete
-         all the individual directories under target *except* for 'repository' -->
-    <delete dir="target/classes" quiet="true"/>
-    <delete dir="target/test-classes" quiet="true"/>
+    <delete dir="${target.dir}" quiet="true"/>
 </target>
 
-<target name="validate" description="Validate">
+<target name="validate" description="Validate JavaScript config file (currently broken)">
     <xmlvalidate
         failonerror="yes" lenient="no" warn="yes"
-        file="src/java/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml"
+        file="${base.src.dir}/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml"
         classname="org.apache.xerces.parsers.SAXParser"
-        classpath="dist/lib/xercesImpl.jar">
+        classpathref="base.class.path">
 
         <xmlcatalog>
             <entity
                 publicId="JavaScriptConfiguration.xsd"
-                location="src/java/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xsd"/>
+                location="${base.src.dir}/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xsd"/>
         </xmlcatalog>
     </xmlvalidate>
 </target>
 
-
 <target name="junit" description="junit">
-    <property name="test.data.dir" location="target/junit-data"/>
-    <property name="test.reports.dir" location="target/junit-reports"/>
-    
     <delete dir="${test.data.dir}"/>
     <mkdir dir="${test.data.dir}"/>
         
     <junit fork="true" forkmode="perBatch" 
             errorProperty="test.failed" failureProperty="test.failed">
-        <classpath refid="base.class.path"/>
         <classpath refid="test.class.path"/>
         <formatter type="brief" usefile="false"/>
         <formatter type="xml"/>
 
         <batchtest todir="${test.data.dir}">
-            <fileset dir="target/test-classes">
+            <fileset dir="${test.classes.dir}">
                 <include name="**/*Test.class"/>
                 <exclude name="**/*$*.class"/>
                 <exclude name="**/JellyTest.class"/>
             </fileset>
         </batchtest>        
         <batchtest todir="${test.data.dir}">
-            <fileset dir="target/test-classes">
+            <fileset dir="${test.classes.dir}">
                 <include name="**/JellyTest.class"/>
                 <exclude name="**/*$*.class"/>
             </fileset>
@@ -130,13 +132,13 @@
     
     <delete dir="${test.reports.dir}"/> 
     <mkdir dir="${test.reports.dir}"/>
-    <junitreport todir="${test.reports.dir}" tofile="DeleteMe.xml">
+    <junitreport todir="${test.data.dir}" tofile="DeleteMe.xml">
         <fileset dir="${test.data.dir}">
             <include name="TEST-*.xml"/>
         </fileset>
-        <report format="frames" todir="${test.reports.dir}/junit"/>
+        <report format="frames" todir="${test.reports.dir}/junit/"/>
     </junitreport>
-    <delete file="${test.reports.dir}/DeleteMe.xml" />    
+    <delete file="${test.data.dir}/DeleteMe.xml" />    
     <echo>
 **********************
 JUnit results available here: ${test.reports.dir}/junit/index.html
@@ -145,25 +147,11 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
     <fail if="test.failed">Tests have failed!!</fail>
 </target>
 
-<target name="junitui" description="junitui">
-    <java fork="yes" classname="junit.swingui.TestRunner" dir="src/java">
-        <arg value="com.gargoylesoftware.htmlunit.test.MainTestSuite"/>
-        <classpath refid="base.class.path"/>
-    </java>
-</target>
-
-<target name="jellytest" description="DO NOT RUN THIS TASK">
-    <java fork="yes" classname="org.apache.commons.jelly.Jelly" dir=".">
-        <classpath refid="base.class.path"/>
-        <arg value="test.jelly"/>
-    </java>
-</target>
-
 <target name="get-dependency">
-    <mkdir dir="${local-repository}/jars/${type}/"/>
+    <mkdir dir="${jars.dir}/${type}/"/>
     <get usetimestamp="true"
-        src="${remote-repository}/${project}/jars/${jarName}"
-        dest="${local-repository}/jars/${type}/${jarName}"/>
+        src="${remote.repository}${project}/jars/${jarName}"
+        dest="${jars.dir}/${type}/${jarName}"/>
 </target>
 
 <target name="initialize"
@@ -171,7 +159,7 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
         depends="clean-jars,get-jars"/>
 <target name="clean-jars"
         description="Delete existing jars">
-     <delete dir="${local-repository}/jars"/>
+     <delete dir="${jars.dir}"/>
 </target>
 <target name="get-jars"
         description="Get all the required dependencies from a remote repository">
