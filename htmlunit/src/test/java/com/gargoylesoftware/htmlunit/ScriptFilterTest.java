@@ -68,11 +68,13 @@ public class ScriptFilterTest extends WebTestCase {
                  + "</script></head><body>"
                  + "<form name='form1'><input type=text name='txt'></form></body></html>";
         final List collectedAlerts = new ArrayList();
-        loadPage(content, collectedAlerts);
 
         final List expectedAlerts = Arrays.asList( new String[]{
             "hello"
         });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        loadPage(content, collectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
     }
 }
