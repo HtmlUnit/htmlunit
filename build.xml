@@ -40,25 +40,26 @@
     <mkdir dir="target/test-classes"/>
 </target>
 
-<target name="copyconfig" description="copy config files to target">
-    <copy todir="target/classes">
-        <fileset dir="src/java">
-            <include name="**/JavaScriptConfiguration.xml"/>
-            <include name="**/JavaScriptConfiguration.xsd"/>
-        </fileset>
-    </copy>
-</target>
-
-<target name="compile" description="compile" depends="maketarget,copyconfig">
+<target name="compile" description="compile" depends="maketarget">
     <javac srcdir="src/java" destdir="target/classes" debug="on" deprecation="off" 
             source="1.2" target="1.2">
         <classpath refid="base.class.path"/>
     </javac>
+    <copy todir="target/classes">
+        <fileset dir="src/java">
+            <exclude name="**/*.java"/>
+        </fileset>
+    </copy>    
     <javac srcdir="src/test/java" destdir="target/test-classes" debug="on" deprecation="off" 
             source="1.2" target="1.2">
         <classpath refid="base.class.path"/>
         <classpath refid="test.class.path"/>
     </javac>
+    <copy todir="target/test-classes">
+        <fileset dir="src/test/java">
+            <exclude name="**/*.java"/>
+        </fileset>
+    </copy>        
 </target>
 <target name="jar" description="Make a jar of HtmlUnit" depends="cleancompile,junit">
     <jar
@@ -72,13 +73,7 @@
         includes="**/*.java"/>
 </target>
 
-<target name="cleancompile" description="clean compile">
-     <delete quiet="true">
-        <fileset dir="target/classes" includes="**/*.class"/>
-        <fileset dir="target/test-classes" includes="**/*.class"/>
-    </delete>
-    <antcall target="compile"/>
-</target>
+<target name="cleancompile" description="clean compile" depends="clean, compile" />
 
 <target name="clean" description="clean">
     <!-- Note that we can't just delete 'target' because this would then blow
@@ -86,10 +81,6 @@
          all the individual directories under target *except* for 'repository' -->
     <delete dir="target/classes" quiet="true"/>
     <delete dir="target/test-classes" quiet="true"/>
-
-    <delete dir="build/${version}"/>
-    <delete file="dist/projectdocs.zip"/>
-    <delete file="dist/${version}.zip"/>
 </target>
 
 <target name="validate" description="Validate">
