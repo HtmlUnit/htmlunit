@@ -574,7 +574,7 @@ public class WebClientTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         // with query string not encoded
-        HtmlPage page = (HtmlPage) client.getPage(new URL("http://first?a=b c&d=ιθ"));
+        HtmlPage page = (HtmlPage) client.getPage(new URL("http://first?a=b c&d=" + ((char) 0xE9) + ((char) 0xE8)));
         assertEquals(
             "http://first?a=b%20c&d=%C3%A9%C3%A8",
             page.getWebResponse().getUrl().toExternalForm());
