@@ -762,10 +762,12 @@ public final class HtmlPage
             final WebResponse webResponse= getWebClient().loadWebResponse(
                 url, SubmitMethod.GET, Collections.EMPTY_LIST);
             if( webResponse.getStatusCode() == 200 ) {
-                if( webResponse.getContentType().equals("text/javascript") == false ) {
+                final String contentType = webResponse.getContentType();
+                if( contentType.equals("text/javascript") == false
+                        && contentType.equals("application/x-javascript") == false ) {
                     getLog().warn(
-                        "Expected content type of text/javascript for remotely loaded javascript element but got ["
-                        +webResponse.getContentType()+"]");
+                        "Expected content type of text/javascript or application/x-javascript for remotely "
+                        + "loaded javascript element but got [" + webResponse.getContentType()+"]");
                 }
                 return webResponse.getContentAsString();
             }
