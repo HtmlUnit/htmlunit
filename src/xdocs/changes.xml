@@ -26,6 +26,10 @@
             <action type="add" dev="mbowler">
                 Refactored some logic out of Form into FormElementsArray for easier maintenance
             </action>
+            <action type="update" dev="mbowler">
+                Many classes had their own assertNotNull() method.  Created an assert class and
+                changed all classes to use Assert.assertNotNull() rather than seperate methods.
+            </action>
         </release>
     </body>
 
