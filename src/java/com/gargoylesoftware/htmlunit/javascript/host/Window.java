@@ -119,7 +119,7 @@ public final class Window extends SimpleScriptable {
      * @param features The features - not currently implemented
      * @param replaceCurrentEntryInBrowsingHistory How will this affect the history object?
      */
-    public void jsFunction_open(
+    public Window jsFunction_open(
             final String url,
             final String windowName,
             final String features,
@@ -137,14 +137,9 @@ public final class Window extends SimpleScriptable {
                 + "]");
         }
 
-        try {
-            webWindow_.getWebClient().openWindow( makeUrlForOpenWindow(url), windowName );
-        }
-        catch( final IOException e ) {
-            // The window will have already been created.  Print out the stack
-            // trace and carry on - there isn't much else we can do at this point.
-            getLog().warn("error when calling openWindow()", e);
-        }
+        final WebWindow newWebWindow
+            =  webWindow_.getWebClient().openWindow( makeUrlForOpenWindow(url), windowName );
+        return (Window)newWebWindow.getScriptObject();
     }
 
 

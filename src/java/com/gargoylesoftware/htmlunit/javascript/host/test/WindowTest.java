@@ -75,7 +75,7 @@ public class WindowTest extends WebTestCase {
         final String firstContent
              = "<html><head><title>First</title></head><body>"
              + "<form name='form1'>"
-             + "    <a id='link' onClick='open(\"http://second\", \"MyNewWindow\"); "
+             + "    <a id='link' onClick='open(\"http://second\", \"MyNewWindow\").focus(); "
              + "return false;'>Click me</a>"
              + "</form>"
              + "</body></html>";
