@@ -42,6 +42,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -209,4 +212,37 @@ public class NavigatorTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * Test closing using javascript
+     * @throws Exception if the test fails.
+     */
+    public void testUseConfiguredBrowser() throws Exception {
+
+        // activate test when all custom JS objects have a way to get the webclient 
+        // they run in
+        if (true) {
+            notImplemented();
+            return;
+        }
+
+        final WebClient webClient = new WebClient(BrowserVersion.MOZILLA_1_0);
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String content
+                = "<html><head><title>First</title></head>"
+                + "<body onload='alert(window.navigator.appName)'></body>"
+                + "</html>";
+
+        webConnection.setDefaultResponse(content);
+        webClient.setWebConnection(webConnection);
+
+        webClient.getPage(URL_FIRST);
+
+        final List expectedAlerts = Arrays.asList(new String[]{ "Netscape" });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }    
+    
 }

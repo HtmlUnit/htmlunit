@@ -155,6 +155,26 @@ public class BrowserVersion {
 
 
     /**
+     * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
+     * version of Microsoft Internet Explorer.
+     * @return Whether or not this version is a version of IE.
+     */
+    public final boolean isIE() {
+        return INTERNET_EXPLORER.equals( getApplicationName() );
+    }
+
+
+    /**
+     * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
+     * version of a Netscape browser, including Mozilla and Firefox.
+     * @return Whether or not this version is a version of a Netscape browser.
+     */
+    public final boolean isNetscape() {
+        return NETSCAPE.equals( getApplicationName() );
+    }
+
+
+    /**
      * Return the application code name, for example "Mozilla".
      * Default value is {@link #APP_CODE_NAME} if not explicitely configured. 
      * @return The application code name.

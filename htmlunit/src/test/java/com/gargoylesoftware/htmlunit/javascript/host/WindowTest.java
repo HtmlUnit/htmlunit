@@ -1367,4 +1367,39 @@ public class WindowTest extends WebTestCase {
                  + "</body></html>";
         loadPage(content);
     }
+
+     /**
+     * All elements should be accessible via the window object by their name, both in qualified
+     * format (<tt>window.elementName</tt>) and unqualified format (<tt>elementName</tt>), if we
+     * are emulating Microsoft Internet Explorer. Both of these expressions are therefore equivalent
+     * to <tt>document.getElementsByName(elementName)</tt> in IE, and should return a collection of
+     * elements if there is more than one with the specified name.
+     * @throws Exception If the test fails.
+     */
+    public void testElementByNameFromWindow() throws Exception {
+        final String content = "<html>\n" +
+            "<head><title>test</title>\n" +
+            "<script>\n" +
+            "  function test() {\n" +
+            "    alert(window.form1.name);\n" +
+            "    alert(form2.name);\n" +
+            "    alert(window.input1.length);\n" +
+            "    alert(input2[1].value);\n" +
+            "  }\n" +
+            "</script>\n" +
+            "</head>\n" +
+            "<body onload='test()'>\n" +
+            "<form name='form1'></form>\n" +
+            "<form name='form2'></form>\n" +
+            "<input type='text' name='input1' value='1'/>\n" +
+            "<input type='text' name='input1' value='2'/>\n" +
+            "<input type='text' name='input2' value='3'/>\n" +
+            "<input type='text' name='input2' value='4'/>\n" +
+            "</body>\n" +
+            "</html>\n";
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        final List expectedAlerts = Arrays.asList( new String[]{"form1", "form2", "2", "4"} );
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
