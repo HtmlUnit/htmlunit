@@ -210,4 +210,71 @@ public class HTMLElementTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+    
+    /**
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testGetSetInnerHTMLSimple() throws Exception {
+        final String content = "<html>\n" +
+                "<head>\n" +
+                "    <title>test</title>\n" +
+                "    <script>\n" +
+                "    function doTest(){\n" +
+                "       var myNode = document.getElementById('myNode');\n" +
+                "       alert('Old = ' + myNode.innerHTML);\n" +
+                "       myNode.innerHTML = 'New cell value';\n" +
+                "       alert('New = ' + myNode.innerHTML);\n" +
+                "   }\n" +
+                "    </script>\n" +
+                "</head>\n" +
+                "<body onload='doTest()'>\n" +
+                "<p id='myNode'><b>Old innerHTML</b></p>\n" +
+                "</body>\n" +
+                "</html>\n" +
+                "";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "Old = <b> Old innerHTML</b>",
+            "New = New cell value"
+        });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * This test will have to change when jsSet_innerHTML changes to
+     * support setting complex values with embedded html.
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testGetSetInnerHTMLComplex() throws Exception {
+        final String content = "<html>\n" +
+                "<head>\n" +
+                "    <title>test</title>\n" +
+                "    <script>\n" +
+                "    function doTest(){\n" +
+                "       var myNode = document.getElementById('myNode');\n" +
+                "       alert('Old = ' + myNode.innerHTML);\n" +
+                "       myNode.innerHTML = '<i>New cell value</i>';\n" +
+                "       alert('New = ' + myNode.innerHTML);\n" +
+                "   }\n" +
+                "    </script>\n" +
+                "</head>\n" +
+                "<body onload='doTest()'>\n" +
+                "<p id='myNode'><b>Old innerHTML</b></p>\n" +
+                "</body>\n" +
+                "</html>\n" +
+                "";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "Old = <b> Old innerHTML</b>",
+            "New = <b> Old innerHTML</b>"
+        });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }

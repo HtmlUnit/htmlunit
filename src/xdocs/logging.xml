@@ -31,6 +31,14 @@
                 order from least serious to most serious).
             </p>
         </section>
+        <section name="Logging HTML parsing errors">
+        	<p>
+        		The package used to parse the HTML has the ability to log errors from parsing source.  These errors
+        		are logged to standard error rather than to the above logging utility.  This error logging can be
+        		enabled by using the command 'WebClient.setValidateHtml(true);'  Note that there is a current error
+        		with Neckohtml that logs errors for not closing the BODY and HTML tags.
+        	</p>
+        </section>
     </body>
 </document>
 

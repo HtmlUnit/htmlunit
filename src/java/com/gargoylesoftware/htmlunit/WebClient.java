@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
@@ -80,6 +81,7 @@ import org.apache.commons.logging.LogFactory;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class WebClient {
 
@@ -1575,5 +1577,12 @@ public class WebClient {
         return activeXObjectMap_;
     }
 
+    /**
+     * Set the flag on the HtmlParse to log html errors to standard error
+     * @param validateFlag The boolean flag to enable or disable parsing errors
+     */
+    public static void setValidateHtml(boolean validateFlag) {
+        HTMLParser.setValidateHtml(validateFlag);
+    }
 }
 

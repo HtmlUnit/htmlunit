@@ -613,6 +613,7 @@ public abstract class DomNode implements Cloneable {
     protected class ChildIterator implements Iterator {
 
         private DomNode nextNode_ = firstChild_;
+        private DomNode currentNode_ = null;
 
         /** @return whether there is a next object */
         public boolean hasNext() {
@@ -622,9 +623,9 @@ public abstract class DomNode implements Cloneable {
         /** @return the next object */
         public Object next() {
             if(nextNode_ != null) {
-                DomNode result = nextNode_;
+                currentNode_ = nextNode_;
                 nextNode_ = nextNode_.nextSibling_;
-                return result;
+                return currentNode_;
             }
             else {
                 throw new NoSuchElementException();
@@ -633,10 +634,10 @@ public abstract class DomNode implements Cloneable {
 
         /** remove the current object */
         public void remove() {
-            if(nextNode_ == null) {
+            if(currentNode_ == null) {
                 throw new IllegalStateException();
             }
-            nextNode_.previousSibling_.remove();
+            currentNode_.remove();
         }
     }
 
@@ -749,5 +750,22 @@ public abstract class DomNode implements Cloneable {
      */
     public void setReadyState(final String state) {
         readyState_ = state;
+    }
+    
+    /**
+     * Remove all the children of this node.
+     *
+     */
+    public void removeAllChildren() {
+        if (getFirstChild() == null) {
+            return;
+        }
+        final Iterator it = getChildIterator();
+        DomNode child;
+        while (it.hasNext()) {
+            child = (DomNode) it.next();
+            child.removeAllChildren();
+            it.remove();
+        }
     }
 }
