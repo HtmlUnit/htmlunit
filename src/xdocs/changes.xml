@@ -7,9 +7,13 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="yourgod">
+                Fixed bug where document.write-ing a frame was causing an attempt 
+                to load an invalid URL starting with http://first
+            </action>
             <action type="update" dev="mguillem" id="1155063">
                 Fixed node reference problem occuring when the text of a textarea is changed.
-            </action>      
+            </action>
             <action type="update" dev="mguillem" id="1153710" due-to="George Murnock">
                 Javascript: document.links doesn't return tags with empty href anymore.
             </action>      
@@ -30,23 +34,23 @@
                 getHtmlElementsByTagNames were all updated to ignore the case of the passed
                 in tag name as they're always compared with a lowercase version.
             </action>
-            <action type="update" dev="yourgod" id="1145916" due-to="Daniel Gredler">
-                JavaScript: Implemented location.reload(). Patch from Daniel Gredler.
+            <action type="update" dev="yourgod" id="1145916" due-to="sdanig">
+                JavaScript: Implemented location.reload(). Patch from sdanig.
             </action>
-            <action type="update" dev="yourgod" id="1143982" due-to="Daniel Gredler">
-                Fixed bug with meta refresh that only contained a number. Patch from Daniel Gredler.
+            <action type="update" dev="yourgod" id="1143982" due-to="sdanig">
+                Fixed bug with meta refresh that only contained a number. Patch from sdanig.
             </action>
-            <action type="update" dev="yourgod" id="1145869" due-to="Daniel Gredler">
+            <action type="update" dev="yourgod" id="1145869" due-to="sdanig">
                 INCOMPATIBLE CHANGE: RefeshHandler interface changed and they must now do the 
                 refresh themselves. DefaultRefreshHandler was replaced with 
                 ImmediateRefreshHandler (the new default) and ThreadedRefreshHandler.
-                Patch from Daniel Gredler.
+                Patch from sdanig.
             </action>
-            <action type="update" dev="yourgod" id="1144103" due-to="Daniel Gredler">
+            <action type="update" dev="yourgod" id="1144103" due-to="sdanig">
                 INCOMPATIBLE CHANGE: com.gargoylesoftware.htmlunit.CredentialProvider has been removed.
                 You should now use org.apache.commons.httpclient.auth.CredentialsProvider instead.
                 This patch should allow support for NTLM and Digest authentication as well as 
-                proxy authentication. Patch from Daniel Gredler.
+                proxy authentication. Patch from sdanig.
             </action>
             <action type="update" dev="mguillem" id="1110768" due-to="Daniel Gredler">
                 JavaScript: Pick up behaviors defined in style attribute when simulating IE.
