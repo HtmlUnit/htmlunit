@@ -16,6 +16,9 @@
 		<li>Have TopLevelWindow's deregister themselves with WebClient when they are closed</li>
 		<li>Upgrade HttpClient to the latest gump version</li>
 		<li>HtmlTextArea.getText() and setText() currently don't modify the dom.  This should be fixed</li>
+		<li>Support for file urls</li>
+		<li>Use HtmlUnit to verify all links in generated documentation</li>
+		<li>Mavenize</li>
 		<li></li>
 	</ol>
 </section>
