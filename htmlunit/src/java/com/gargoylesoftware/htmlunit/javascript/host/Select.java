@@ -41,6 +41,7 @@ import java.util.List;
 
 import org.mozilla.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.OptionsArray;
 
@@ -83,7 +84,33 @@ public class Select extends Input {
             optionsArray_.initialize( htmlSelect );
         }
     }
+    
+    /**
+     * Remove option at the specified index
+     * @param index The index of the item to remove
+     */
+    public void jsFunction_remove(final int index) {
+        put(index, null, null);
+    }
+    
+    /**
+     * Add a new item to the list (optionally) before the specified item
+     * @param paramA The DomNode to insert
+     * @param paramB The DomNode to insert the previous element before (null if at end)
+     */    
+    public void jsFunction_add(final Object paramA, final Object paramB) {
+        final HtmlSelect select = (HtmlSelect) getHtmlElementOrDie();
 
+        final DomNode newOptionDom = ((Option) paramA).getDomNodeOrDie();
+        
+        if (paramB == null) {
+            select.appendChild(newOptionDom);
+        } 
+        else {
+            final DomNode before = ((Option)paramB).getDomNodeOrDie();
+            before.insertBefore(newOptionDom);
+        }
+    }      
 
     /**
      * Return the type of this input.
@@ -198,5 +225,6 @@ public class Select extends Input {
     private HtmlSelect getHtmlSelect() {
         return (HtmlSelect)getHtmlElementOrDie();
     }
+     
 }
 

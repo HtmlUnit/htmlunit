@@ -277,6 +277,8 @@
     </class>
     <class name="Select" extends="Input"><!-- NOT FINISHED -->
         <property name="length" readable="true" writable="false"/>
+        <function name="add"/>
+        <function name="remove"/>
     </class>
 
     <class name="Window">
