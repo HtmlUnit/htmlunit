@@ -68,7 +68,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.ElementArray;
@@ -167,25 +166,17 @@ public final class Document extends NodeImpl {
 
     /**
      * javascript function "write".
-     * @param context The javascript context
-     * @param scriptable The scriptable
-     * @param args The arguments passed into the method.
-     * @param function The function.
-     * @return Nothing
+     * @param content the content to write
      */
-    public static Object jsFunction_write(
-        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
+    public Object jsFunction_write(final String content) {
 
-        final Document document = (Document)scriptable;
-        final String content = getStringArg(0, args, "");
-
-        if( document.writeBuffer_ == null ) {
+        if (writeBuffer_ == null) {
             // open() hasn't been called
-            final HtmlPage page = (HtmlPage)document.getDomNodeOrDie();
+            final HtmlPage page = getHtmlPage();
             page.getScriptFilter().write(content);
         }
         else {
-            document.writeBuffer_.append(content);
+            writeBuffer_.append(content);
         }
         return null;
     }
@@ -193,17 +184,10 @@ public final class Document extends NodeImpl {
 
     /**
      * javascript function "writeln".
-     * @param context The javascript context
-     * @param scriptable The scriptable
-     * @param args The arguments passed into the method.
-     * @param function The function.
-     * @return Nothing
+     * @param content the content to write
      */
-    public static Object jsFunction_writeln(
-        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
-
-        final String content = getStringArg(0, args, "");
-        return jsFunction_write(context, scriptable, new Object[]{ content+"\n" }, function);
+    public void jsFunction_writeln(final String content) {
+        jsFunction_write(content + "\n");
     }
 
 
@@ -569,7 +553,7 @@ public final class Document extends NodeImpl {
 
     /**
      * Return the specified property or NOT_FOUND if it could not be found. This is
-     * overridden to check to see if the name belongs to a form within this document.
+     * overridden to get elements by name within this document.
      * @param name The name of the property
      * @param start The scriptable object that was originally queried for this property
      * @return The property.
@@ -583,24 +567,16 @@ public final class Document extends NodeImpl {
             return super.get(name, start);
         }
 
-        try {
-            final HtmlForm htmlForm = htmlPage.getFormByName(name);
-            Form jsForm = (Form)htmlForm.getScriptObject();
-            if( jsForm == null ) {
-                // Create new one here.
-                jsForm = (Form)makeJavaScriptObject("Form");
-                jsForm.setHtmlElement( htmlForm );
-                return jsForm;
-            }
-            else {
-                return jsForm;
-            }
-        }
-        catch( final ElementNotFoundException e ) {
-            // There are no forms with the specified name so pass the request
-            // up to the superclass.
-            return super.get(name, start);
-        }
+    	final Document document = (Document) start;
+    	NativeArray array = (NativeArray) document.jsFunction_getElementsByName(name);
+    	if (array.getLength() == 1) {
+    		return array.get(0, array);
+    	}
+    	else if (array.getLength() > 1) {
+    		return array;
+    	}
+
+    	return super.get(name, start);
     }
 
     /**
