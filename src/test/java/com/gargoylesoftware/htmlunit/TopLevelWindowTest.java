@@ -81,5 +81,7 @@ public class TopLevelWindowTest extends WebTestCase {
         // been created when this one was closed.  Verify this.
         assertNotNull( webClient.getCurrentWindow() );
         assertTrue( webClient.getCurrentWindow() != windowToClose );
+
+        assertEquals(1, webClient.getWebWindows().size());
     }
 }

@@ -443,7 +443,8 @@ public final class Window extends SimpleScriptable {
      * Close this window
      */
     public void jsFunction_close() {
-        getLog().debug( "Window.close() not implemented" );
+        WebWindow window = ((HtmlPage) getDomNodeOrDie()).getEnclosingWindow();
+        getWebWindow().getWebClient().deregisterWebWindow(window);
     }
 
 
