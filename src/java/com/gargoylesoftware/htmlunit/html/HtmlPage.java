@@ -960,6 +960,7 @@ public final class HtmlPage extends DomNode implements Page {
         final Window jsWindow = (Window) getEnclosingWindow().getScriptObject();
         if (jsWindow != null && jsWindow.jsGet_onload() != null) {
             final ScriptEngine engine = getWebClient().getScriptEngine();
+            getLog().debug("Executing onload handler for the window");
             engine.callFunction(this, jsWindow.jsGet_onload(), jsWindow, new Object[]{}, null);
         }
 
@@ -968,6 +969,7 @@ public final class HtmlPage extends DomNode implements Page {
                 "frame", "iframe" } ));
         for (final Iterator iter = list.iterator(); iter.hasNext();) {
             final BaseFrame frame = (BaseFrame) iter.next();
+            getLog().debug("Executing onload handler for " + frame);
             executeOneOnLoadHandler(frame);
         }
     }
