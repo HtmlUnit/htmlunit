@@ -48,8 +48,18 @@ import java.util.EventObject;
 public final class WebWindowEvent extends EventObject {
     private final Page oldPage_;
     private final Page newPage_;
-
-
+    private final int type_;
+    
+    /** A window has opened */
+    public static final int OPEN = 1;
+    
+    /** A window has closed */
+    public static final int CLOSE = 2;
+    
+    /** The content of the window has changed */
+    public static final int CHANGE = 3;
+    
+    
     /**
      * Create an instance
      *
@@ -57,10 +67,26 @@ public final class WebWindowEvent extends EventObject {
      * @param oldPage The old contents of the web window
      * @param newPage The new contents of the web window
      */
-    public WebWindowEvent( final WebWindow webWindow, final Page oldPage, final Page newPage ) {
+    public WebWindowEvent( 
+            final WebWindow webWindow, 
+            final int type, 
+            final Page oldPage, 
+            final Page newPage ) {
         super(webWindow);
         oldPage_ = oldPage;
         newPage_ = newPage;
+        
+        switch( type ) {
+            case OPEN:
+            case CLOSE: 
+            case CHANGE:
+                type_ = type;
+                break;
+                
+            default:
+                throw new IllegalArgumentException(
+                    "type must be one of OPEN, CLOSE, CHANGE but got "+type);
+        }
     }
 
 
@@ -74,6 +100,7 @@ public final class WebWindowEvent extends EventObject {
         if( getClass() == object.getClass() ) {
             final WebWindowEvent event = (WebWindowEvent)object;
             return isEqual(getSource(), event.getSource())
+                && getEventType() == event.getEventType()
                 && isEqual(getOldPage(), event.getOldPage())
                 && isEqual(getNewPage(), event.getNewPage());
         }
@@ -138,8 +165,35 @@ public final class WebWindowEvent extends EventObject {
      * @return A string representation of this event.
      */
     public String toString() {
-        return "WebWindowEvent(source=["+getSource()+"] oldPage=["
-            +getOldPage()+"] newPage=["+getNewPage()+"])";
+        final StringBuffer buffer = new StringBuffer(80);
+        buffer.append("WebWindowEvent(source=[");
+        buffer.append(getSource());
+        buffer.append("] type=[");
+        switch( type_ ) {
+            case OPEN:
+                buffer.append("OPEN");
+                break;
+            case CLOSE: 
+                buffer.append("CLOSE");
+                break;
+            case CHANGE: 
+                buffer.append("CHANGE");
+                break;
+            default: 
+                buffer.append(type_);
+                break;
+        }
+        buffer.append("] oldPage=[");
+        buffer.append(getOldPage());
+        buffer.append("] newPage=[");
+        buffer.append(getNewPage());
+        buffer.append("])");
+        
+        return buffer.toString();
+    }
+    
+    /** @return the event type */
+    public int getEventType() {
+        return type_;
     }
 }
-
