@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1107432" due-to="Hans Donner">
+                Javascript: implemented innerText for html elements (read/write).
+            </action>
             <action type="update" dev="mguillem">
                 Fixed ClassCastException occuring when unloading a frameset that contained a frame which content wasn't html.
             </action>
@@ -21,7 +24,7 @@
             <action type="update" dev="yourgod">
                 A failure when setting a location from javascript now throws an exception
             </action>           
-            <action type="update" dev="yourgod" id="1104522" due-to="sdanig">
+            <action type="update" dev="yourgod" id="1104522" due-to="Daniel Gredler">
                 Added support for misc table methods in javascript
             </action>        
             <action type="update" dev="mguillem">

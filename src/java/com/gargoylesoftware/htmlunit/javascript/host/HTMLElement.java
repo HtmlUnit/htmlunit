@@ -85,6 +85,7 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
  * @author David D. Kilzer
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Hans Donner
  */
 public class HTMLElement extends NodeImpl {
     private static final long serialVersionUID = -6864034414262085851L;
@@ -313,6 +314,19 @@ public class HTMLElement extends NodeImpl {
     }
 
     /**
+     * Get the innerText attribute
+     * @return the contents of this node as text
+     */
+    public String jsGet_innerText() {
+        StringBuffer buf = new StringBuffer();
+        // we can't rely on DomNode.asXml because it adds indentation and new lines
+        printChildren(buf, getDomNodeOrDie(), false);
+
+        return buf.toString();
+    }
+    
+    
+    /**
      * Gets the outerHTML of the node.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/outerhtml.asp">
      * MSDN documentation</a>
@@ -328,15 +342,24 @@ public class HTMLElement extends NodeImpl {
     }
 
     private void printChildren(final StringBuffer buffer, final DomNode node) {
+        printChildren(buffer, node, true);
+    }
+    
+    private void printChildren(final StringBuffer buffer, final DomNode node, final boolean asInnerHTML) {
         for (final Iterator iter = node.getChildIterator(); iter.hasNext();) {
-            printNode(buffer, (DomNode) iter.next());
+            printNode(buffer, (DomNode) iter.next(), asInnerHTML);
         }
     }
+   
     private void printNode(final StringBuffer buffer, final DomNode node) {
+        printNode(buffer, node, true);
+    }
+    
+    private void printNode(final StringBuffer buffer, final DomNode node, boolean asInnerHTML) {
         if (node instanceof DomCharacterData) {
             buffer.append(node.getNodeValue().replaceAll("  ", " ")); // remove white space sequences
         }
-        else {
+        else if (asInnerHTML) { 
             final HtmlElement htmlElt = (HtmlElement) node;
             buffer.append("<");
             buffer.append(htmlElt.getTagName());
@@ -355,12 +378,23 @@ public class HTMLElement extends NodeImpl {
             }
             buffer.append(">");
             
-            printChildren(buffer, node);
+            printChildren(buffer, node, asInnerHTML);
             if (htmlElt.getFirstChild() != null) {
                 buffer.append("</");
                 buffer.append(htmlElt.getTagName());
                 buffer.append(">");
             }
+        }
+        else {
+            final HtmlElement htmlElement = (HtmlElement) node;
+            if (htmlElement.getTagName().equals("p")) {
+                buffer.append("\r\n"); // \r\n because it's to implement something IE specific
+            }
+
+            if (!htmlElement.getTagName().equals("script")) {
+                printChildren(buffer, node, asInnerHTML);
+            }
+
         }
     }    
 
@@ -378,6 +412,19 @@ public class HTMLElement extends NodeImpl {
         }
     }
 
+    /**
+     * Replace all children elements of this element with the supplied value.
+     * @param value - the new value for the contents of this node
+     */
+    public void jsSet_innerText(final String value) {
+        final DomNode domNode = getDomNodeOrDie();
+        domNode.removeAllChildren();
+
+        final DomNode node = new DomText(getDomNodeOrDie().getPage(), value);
+        domNode.appendChild(node);
+    }
+
+    
     /**
      * Replace all children elements of this element with the supplied value.
      * Sets the outerHTML of the node.

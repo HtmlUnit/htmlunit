@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author David D. Kilzer
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Hans Donner
  * @version $Revision$
  */
 public class HTMLElementTest extends WebTestCase {
@@ -802,4 +803,38 @@ public class HTMLElementTest extends WebTestCase {
         
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testGetSetInnerTextSimple() throws Exception {
+        final String content = "<html>\n" +
+                "<head>\n" +
+                "    <title>test</title>\n" +
+                "    <script>\n" +
+                "    function doTest(){\n" +
+                "       var myNode = document.getElementById('myNode');\n" +
+                "       alert('Old = ' + myNode.innerText);\n" +
+                "       myNode.innerText = 'New cell value';\n" +
+                "       alert('New = ' + myNode.innerText);\n" +
+                "   }\n" +
+                "    </script>\n" +
+                "</head>\n" +
+                "<body onload='doTest()'>\n" +
+                "<div id='myNode'><b>Old <p>innerText</p></b></div>\n" +
+                "</body>\n" +
+                "</html>\n" +
+                "";
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "Old = Old \r\ninnerText",
+            "New = New cell value"
+        });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }
