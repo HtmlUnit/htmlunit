@@ -3,18 +3,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="JavaScriptConfiguration.xsd">
 
-	<doclink
-		url="http://www.w3.org/DOM/"
-		descr="W3C Document Object Model (DOM) - Start"/>
-	<doclink
-		url="http://www.w3.org/DOM/TR/"
-		descr="W3C Document Object Model (DOM) - Technical Reports"/>
-	<doclink
-		url="http://www.mozilla.org/docs/dom/"
-		descr="The Document Object Model in Mozilla"/>
-	<doclink
-		url="http://msdn.microsoft.com/workshop/author/dhtml/reference/dhtml_reference_entry.asp"
-		descr="HTML and DHTML Reference on MSDN"/>
+    <doclink
+        url="http://www.w3.org/DOM/"
+        descr="W3C Document Object Model (DOM) - Start"/>
+    <doclink
+        url="http://www.w3.org/DOM/TR/"
+        descr="W3C Document Object Model (DOM) - Technical Reports"/>
+    <doclink
+        url="http://www.mozilla.org/docs/dom/"
+        descr="The Document Object Model in Mozilla"/>
+    <doclink
+        url="http://msdn.microsoft.com/workshop/author/dhtml/reference/dhtml_reference_entry.asp"
+        descr="HTML and DHTML Reference on MSDN"/>
 
     <class name="ActiveXObject" classname="com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject">
         <browser name="Microsoft Internet Explorer" min-version="4"/>
@@ -22,12 +22,12 @@
 
     <class name="Anchor" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Anchor">
         <javascript min-version="1.2"/>
-		
+        
         <property name="href" readable="true" writable="true"/>
         <property name="name" notImplemented="true" readable="true" writable="true">
-		</property>
+        </property>
         <property name="tabindex" notImplemented="true" readable="true" writable="true">
-		</property>
+        </property>
         <property name="text" notImplemented="true" readable="true" writable="true">
             <browser name="Netscape" min-version="4" max-version="4.8"/>
         </property>
@@ -40,7 +40,7 @@
         <property name="length" readable="true" writable="false"/>
         <property name="tabindex" notImplemented="true" readable="true" writable="true"/>
         
-		<function name="appendData"/>
+        <function name="appendData"/>
         <function name="deleteData"/>
         <function name="insertData"/>
         <function name="replaceData"/>
@@ -50,14 +50,14 @@
     <class name="Checkbox" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"/>
 
     <class name="Document" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Document">
-		<!-- NOT FINISHED -->
+        <!-- NOT FINISHED -->
 
-		<doclink
-			url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919"
-			descr="WC3 Documentation (Level 1)"/>
-		<doclink
-			url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp"
-			descr="MSDN documenation"/>
+        <doclink
+            url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919"
+            descr="WC3 Documentation (Level 1)"/>
+        <doclink
+            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp"
+            descr="MSDN documenation"/>
 
         <property name="all" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
@@ -68,16 +68,16 @@
         <property name="body" readable="true" writable="false"/>
         <property name="bgColor" notImplemented="true" readable="true" writable="false"/>
         <property name="cookie" readable="true" writable="true">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cookie.asp"
-				descr="MSDN documentation"/>
-		</property>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cookie.asp"
+                descr="MSDN documentation"/>
+        </property>
         <property name="documentElement" readable="true" writable="false"/>
         <property name="domain" readable="true" writable="true">
-			<doclink
-				url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147"
-				descr="WC3 Documentation (Level 1)"/>
-		</property>
+            <doclink
+                url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147"
+                descr="WC3 Documentation (Level 1)"/>
+        </property>
         <property name="embeds" notImplemented="true" readable="true" writable="false">
             <javascript min-version="1.1"/>
         </property>
@@ -90,10 +90,10 @@
         <property name="linkColor" notImplemented="true" readable="true" writable="false"/>
         <property name="links" readable="true" writable="false"/>
         <property name="location" readable="true" writable="true">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_location.asp"
-				descr="MSDN documentation"/>
-		</property>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_location.asp"
+                descr="MSDN documentation"/>
+        </property>
         <property name="plugins" notImplemented="true" readable="true" writable="false">
             <javascript min-version="1.1"/>
         </property>
@@ -115,10 +115,10 @@
         <function name="getElementsByName"/>        
         <function name="getElementsByTagName"/>
         <function name="open">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/open_1.asp"
-				descr="MSDN documentation"/>
-		</function>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/open_1.asp"
+                descr="MSDN documentation"/>
+        </function>
         <function name="write"/>
         <function name="writeln"/>
     </class>
@@ -128,8 +128,8 @@
     </class>
 
     <class name="FileUpload" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input">
-		<!-- NOT FINISHED -->
-	</class>
+        <!-- NOT FINISHED -->
+    </class>
 
     <class name="FocusableHostElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement">
         <function name="blur"/>
@@ -137,23 +137,23 @@
     </class>
 
     <class name="Form" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Form">
-		<!-- NOT FINISHED -->
-		
-		<doclink
-			url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/form.asp"
-			descr="MSDN documentation"/>
+        <!-- NOT FINISHED -->
+        
+        <doclink
+            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/form.asp"
+            descr="MSDN documentation"/>
         
         <property name="action" readable="true" writable="true"/>
         <property name="elements" readable="true" writable="false"/>
         <property name="encoding" readable="true" writable="true"/>
         <property name="length" readable="true" writable="false"/>
         <property name="method" readable="true" writable="true"/>
-		<property name="name" readable="true" writable="false"/>
-		<property name="onsubmit" readable="true" writable="true"/>
+        <property name="name" readable="true" writable="false"/>
+        <property name="onsubmit" readable="true" writable="true"/>
         <property name="target" readable="true" writable="true"/>
 
         <function name="reset"/>
-		<function name="submit"/>
+        <function name="submit"/>
     </class>
 
     <class name="Frame" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Frame">
@@ -165,8 +165,8 @@
     </class>
 
     <class name="Hidden" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input">
-		<!-- NOT FINISHED -->
-	</class>
+        <!-- NOT FINISHED -->
+    </class>
 
     <class name="History" classname="com.gargoylesoftware.htmlunit.javascript.host.History">
         <property name="length" readable="true" writable="false"/>
@@ -181,9 +181,9 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="children" readable="true" writable="false">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/children.asp"
-				descr="MSDN documentation"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/children.asp"
+                descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="5.5"/>
         </property>
         <property name="className" readable="true" writable="true">
@@ -271,9 +271,9 @@
             <browser name="Netscape" min-version="3"/>
         </property>
         <property name="outerHTML" readable="true" writable="true">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/outerhtml.asp"
-				descr="MSDN documentation"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/outerhtml.asp"
+                descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="outerText" notImplemented="true" readable="true" writable="true">
@@ -301,7 +301,7 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </property>
-		
+        
         <function name="addBehavior">
             <browser name="Microsoft Internet Explorer" min-version="5"/>
         </function>
@@ -316,9 +316,9 @@
         <function name="getElementsByTagName"/>
         <function name="handleEvent" notImplemented="true"/>
         <function name="insertAdjacentHTML">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertadjacenthtml.asp"
-				descr="MSDN documentation"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertadjacenthtml.asp"
+                descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
         <function name="insertAdjacentText" notImplemented="true">
@@ -346,7 +346,7 @@
 
     <class name="Image" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Image">
         <property name="src" readable="true" writable="true"/>
-	</class>
+    </class>
 
     <class name="FormField" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FormField">
         <property name="disabled" readable="true" writable="true"/>
@@ -382,7 +382,7 @@
         <property name="hash" readable="true" writable="false"/>
         <property name="host" readable="true" writable="false"/>
         <property name="hostname" readable="true" writable="false"/>
-		<property name="href" readable="true" writable="true"/>
+        <property name="href" readable="true" writable="true"/>
         <property name="pathname" readable="true" writable="false"/>
         <property name="port" readable="true" writable="false"/>
         <property name="protocol" readable="true" writable="false"/>
@@ -394,10 +394,10 @@
     </class>
 
     <class name="Navigator" classname="com.gargoylesoftware.htmlunit.javascript.host.Navigator">
-		<doclink
-			url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_navigator.asp"
-			descr="MSDN documentation"/>
-		
+        <doclink
+            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_navigator.asp"
+            descr="MSDN documentation"/>
+        
         <property name="appCodeName" readable="true" writable="false"/>
         <property name="appMinorVersion" readable="true" writable="false"/>
         <property name="appName" readable="true" writable="false"/>
@@ -411,7 +411,7 @@
         <property name="userAgent" readable="true" writable="false"/>
         <property name="userLanguage" readable="true" writable="false"/>
     
-	    <function name="javaEnabled"/>
+        <function name="javaEnabled"/>
         <function name="plugins"/>
         <function name="taintEnabled"/>
     </class>
@@ -443,47 +443,47 @@
     </class>
 
     <class name="Password" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input">
-		<!-- NOT FINISHED -->
-	</class>
+        <!-- NOT FINISHED -->
+    </class>
 
     <class name="Radio" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input">
-		<!-- NOT FINISHED -->
-	</class>
+        <!-- NOT FINISHED -->
+    </class>
 
     <class name="RowContainer" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.RowContainer">
         <property name="rows" readable="true" writable="false"/>
-		
+        
         <function name="deleteRow">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deleterow.asp"
-				descr="MSDN documentation"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deleterow.asp"
+                descr="MSDN documentation"/>
         </function>
         <function name="insertRow">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertrow.asp"
-				descr="MSDN documentation"/>
-			<doclink
-				url="http://www.mozilla.org/docs/dom/domref/dom_html_ref31.html"
-				descr="Gecko DOM Reference"/>
-			<doclink
-				url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-39872903"
-				descr="W3C Document Object Model (DOM) Level 2"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertrow.asp"
+                descr="MSDN documentation"/>
+            <doclink
+                url="http://www.mozilla.org/docs/dom/domref/dom_html_ref31.html"
+                descr="Gecko DOM Reference"/>
+            <doclink
+                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-39872903"
+                descr="W3C Document Object Model (DOM) Level 2"/>
         </function>
         <function name="moveRow"/>
     </class>
 
     <class name="Reset" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input">
-		<!-- NOT FINISHED -->
-	</class>
+        <!-- NOT FINISHED -->
+    </class>
 
     <class name="Screen" classname="com.gargoylesoftware.htmlunit.javascript.host.Screen">
-		<doclink
-			url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_screen.asp"
-			descr="MSDN documentation"/>
-		<doclink
-			url="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html"
-			descr="Mozilla documentation"/>
-		
+        <doclink
+            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_screen.asp"
+            descr="MSDN documentation"/>
+        <doclink
+            url="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html"
+            descr="Mozilla documentation"/>
+        
         <property name="availHeight" readable="true" writable="false"/>
         <property name="availLeft" readable="true" writable="false"/>
         <property name="availTop" readable="true" writable="false"/>
@@ -504,58 +504,58 @@
     </class>
 
     <class name="Select" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.Select">
-		<!-- NOT FINISHED -->
+        <!-- NOT FINISHED -->
         
-		<property name="length" readable="true" writable="true"/>
+        <property name="length" readable="true" writable="true"/>
         <property name="options" readable="true" writable="false"/>
         <property name="selectedIndex" readable="true" writable="true"/>
         
-		<function name="add"/>
+        <function name="add"/>
         <function name="remove"/>
     </class>
 
     <class name="Submit" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input">
-		<!-- NOT FINISHED -->
+        <!-- NOT FINISHED -->
 <!-- 
-		<property name="length" readable="true" writable="false"/>
+        <property name="length" readable="true" writable="false"/>
  -->
     </class>
 
     <class name="Table" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.Table">
-		<property name="caption" readable="true" writable="false"/>
+        <property name="caption" readable="true" writable="false"/>
         <property name="tBodies" readable="true" writable="false"/>
-		<property name="tFoot" readable="true" writable="false"/>
+        <property name="tFoot" readable="true" writable="false"/>
         <property name="tHead" readable="true" writable="false"/>
         
         <function name="createCaption">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createcaption.asp"
-				descr="MSDN documentation"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createcaption.asp"
+                descr="MSDN documentation"/>
         </function>
         <function name="createTFoot">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createtfoot.asp"
-				descr="MSDN documentation"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createtfoot.asp"
+                descr="MSDN documentation"/>
         </function>
         <function name="createTHead">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createthead.asp"
-				descr="MSDN documentation"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createthead.asp"
+                descr="MSDN documentation"/>
         </function>
         <function name="deleteCaption">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp"
-				descr="MSDN documentation"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp"
+                descr="MSDN documentation"/>
         </function>
         <function name="deleteTFoot">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp"
-				descr="MSDN documentation"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp"
+                descr="MSDN documentation"/>
         </function>
         <function name="deleteTHead">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletethead.asp"
-				descr="MSDN documentation"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletethead.asp"
+                descr="MSDN documentation"/>
         </function>
     </class>
 
@@ -566,34 +566,34 @@
     <class name="TableHeader" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.TableHeader"/>
 
     <class name="TableRow" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.TableRow">
-		<doclink
-			url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-6986576"
-			descr="W3c DOM Level 2"/>
-		<doclink
-			url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/tr.asp"
-			descr="MSDN documentation"/>
+        <doclink
+            url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-6986576"
+            descr="W3c DOM Level 2"/>
+        <doclink
+            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/tr.asp"
+            descr="MSDN documentation"/>
         <property name="cells" readable="true" writable="false"/>
         <property name="rowIndex" readable="true" writable="false">
-			<doclink
-				url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-67347567"
-				descr="W3c DOM Level 2"/>
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/rowindex.asp"
-				descr="MSDN documentation"/>
-		</property>
+            <doclink
+                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-67347567"
+                descr="W3c DOM Level 2"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/rowindex.asp"
+                descr="MSDN documentation"/>
+        </property>
         <function name="insertCell">
-			<doclink
-				url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-68927016"
-				descr="W3c DOM Level 2"/>
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertcell.asp"
-				descr="MSDN documentation"/>
-		</function>
-	</class>
-	
+            <doclink
+                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-68927016"
+                descr="W3c DOM Level 2"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertcell.asp"
+                descr="MSDN documentation"/>
+        </function>
+    </class>
+    
     <class name="Textarea" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.Textarea">
-		<!-- NOT FINISHED -->
-	</class>
+        <!-- NOT FINISHED -->
+    </class>
 
     <class name="TextImpl" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.TextImpl">
         <function name="splitText"/>
@@ -601,9 +601,9 @@
 
     <class name="Window" classname="com.gargoylesoftware.htmlunit.javascript.host.Window">
         <!-- NOT FINISHED -->
-		
-		<doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp"
-				descr="MSDN documenation"/>
+        
+        <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp"
+                descr="MSDN documenation"/>
 
         <property name="location" readable="true" writable="true">
             <browser name="Netscape" min-version="3"/>
@@ -626,19 +626,19 @@
         <property name="onerror" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>
         </property>
-		
+        
         <function name="alert"/>
         <function name="blur"/>
         <function name="clearInterval">
-			<doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp"
-					descr="MSDN documenation"/>
-		</function>
+            <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp"
+                    descr="MSDN documenation"/>
+        </function>
         <function name="clearTimeout"/>
         <function name="close"/>
         <function name="confirm"/>
         <function name="execScript">
-			<doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/execscript.asp"
-					descr="MSDN documenation"/>
+            <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/execscript.asp"
+                    descr="MSDN documenation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="focus"/>
@@ -653,10 +653,10 @@
         <function name="scrollByPages"/>
         <function name="scrollTo"/>
         <function name="setInterval">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp"
-				descr="MSDN documenation"/>
-		</function>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp"
+                descr="MSDN documenation"/>
+        </function>
         <function name="setTimeout"/>
     </class>
 

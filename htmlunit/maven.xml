@@ -330,140 +330,143 @@
         <j:set var="outputencoding" value="${maven.docs.outputencoding}"/>
 
         <j:file name="${destfile}" encoding="${outputencoding}" outputMode="xml">
-<document>
+  <document>
 
     <properties>
-        <title>JavaScript Configuration</title>
+      <title>JavaScript Configuration</title>
     </properties>
     <body>
-        <section name="JavaScript Configuration">
-            <p>
-              Different versions of browsers will support different features in JavaScript.
-              The file JavaScriptConfiguration.xml tells HtmlUnit what behaviours to 
-              expect from specific BrowserVersion's.  The rest of this document is a 
-              formatted version of this configuration file.
-            </p>
-        </section>
-        <x:parse 
-          var="doc" 
-          xml="src/java/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml"/>
+      <section name="JavaScript Configuration">
+        <p>
+          Different versions of browsers will support different features in JavaScript. The file
+          JavaScriptConfiguration.xml tells HtmlUnit what behaviours to expect from specific BrowserVersion's.
+          The rest of this document is a formatted version of this configuration file.
+        </p>
+      </section>
+      <x:parse var="doc"
+        xml="src/java/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml" />
 
 
-    <x:set var="javascriptDocLinks" select="$doc/configuration/doclink"/>
-    <x:if select="$javascriptDocLinks">
-      <section name="Documentation links">
-        <ul>
-              <x:forEach select="$javascriptDocLinks" var="javascriptDocLink">
-                <x:set var="linkUrl" select="string(@url)"/>
-                <x:set var="linkDescr" select="string(@descr)"/>
-                <li>
-              <j:choose>
-                <j:when test="${linkDescr!=''}">
+      <x:set var="javascriptDocLinks" select="$doc/configuration/doclink" />
+      <x:if select="$javascriptDocLinks">
+        <section name="Documentation links">
+          <ul>
+            <x:forEach select="$javascriptDocLinks" var="javascriptDocLink">
+              <x:set var="linkUrl" select="string(@url)" />
+              <x:set var="linkDescr" select="string(@descr)" />
+              <li>
+                <j:choose>
+                  <j:when test="${linkDescr!=''}">
                     <a href="${linkUrl}" target="_blank">${linkDescr}</a>
-                </j:when>
-                <j:otherwise>
+                  </j:when>
+                  <j:otherwise>
                     <a href="${linkUrl}" target="_blank">${linkUrl}</a>
-                </j:otherwise>
-              </j:choose>
-                </li>
-              </x:forEach>
+                  </j:otherwise>
+                </j:choose>
+              </li>
+            </x:forEach>
           </ul>
         </section>
-    </x:if>
+      </x:if>
 
 
-        <x:set var="javascriptClasses" select="$doc/configuration/class"/>
-        <x:forEach select="$javascriptClasses" var="javascriptClass">
-          <x:set var="className" select="string(@name)"/>
-      <section name="${className}">
-        <a name="${className}"/>
+      <x:set var="javascriptClasses" select="$doc/configuration/class" />
+      <x:forEach select="$javascriptClasses" var="javascriptClass">
+        <x:set var="className" select="string(@name)" />
+        <section name="${className}">
+          <a name="${className}" />
           <ul>
-              <x:forEach select="doclink">
-                <x:set var="linkUrl" select="string(@url)"/>
-                <x:set var="linkDescr" select="string(@descr)"/>
-                <li>
-              <j:choose>
-                <j:when test="${linkDescr!=''}">
+            <x:forEach select="doclink">
+              <x:set var="linkUrl" select="string(@url)" />
+              <x:set var="linkDescr" select="string(@descr)" />
+              <li>
+                <j:choose>
+                  <j:when test="${linkDescr!=''}">
                     <a href="${linkUrl}" target="_blank">${linkDescr}</a>
-                </j:when>
-                <j:otherwise>
+                  </j:when>
+                  <j:otherwise>
                     <a href="${linkUrl}" target="_blank">${linkUrl}</a>
-                </j:otherwise>
-              </j:choose>
-            </li>
-              </x:forEach>
-            </ul>
-      
-              <table>
-                <tr>
-                  <th>Type</th>
-                  <th>Name</th>
-                  <th>Readable</th>
-                  <th>Writeable</th>
-                  <th>Constraints</th>
-                  <th>Documentation links</th>
-                </tr>
-              <x:forEach select="property|function" var="property">
+                  </j:otherwise>
+                </j:choose>
+              </li>
+            </x:forEach>
+          </ul>
+
+          <table>
+            <tr>
+              <th width="10%">Type</th>
+              <th width="25%">Name</th>
+							<th width="17%">Not Implemented</th>
+              <th width="7%">Read</th>
+              <th width="7%">Write</th>
+              <th width="14%">Constraints</th>
+              <th width="20%">Documentation links</th>
+            </tr>
+            <x:forEach select="property|function" var="property">
               <tr>
                 <td>${property.name}</td>
-                <td><x:expr select="@name"/></td>
-                <td><x:expr select="@readable"/></td>
-                <td><x:expr select="@writable"/></td>
+                <td>
+                  <x:expr select="@name" />
+                </td>
+                <td>
+                  <x:expr select="@notImplemented" />
+                </td>
+                <td>
+                  <x:expr select="@readable" />
+                </td>
+                <td>
+                  <x:expr select="@writable" />
+                </td>
                 <td>
                   <x:forEach select="javascript">
-                      Javascript &#160; <x:expr select="@min-version"/><br />
+                    Javascript &#160;
+                    <x:expr select="@min-version" />
+                    <br />
                   </x:forEach>
                   <x:forEach select="browser">
-                    <x:expr select="@name"/>&#160;
-                    <x:set var="minVersion" select="string(@min-version)"/>
-                    <x:set var="lessThanVersion" select="string(@less-than-version)"/>
-                    <x:set var="maxVersion" select="string(@max-version)"/>
+                    <x:expr select="@name" />
+                    &#160;
+                    <x:set var="minVersion" select="string(@min-version)" />
+                    <x:set var="lessThanVersion" select="string(@less-than-version)" />
+                    <x:set var="maxVersion" select="string(@max-version)" />
 
-                <j:choose>
-                  <j:when test="${minVersion!='' and maxVersion!=''}">
-                    ${minVersion}-${maxVersion}
-                  </j:when>
-                  <j:when test="${minVersion!='' and lessThanVersion!=''}">
-                    ${minVersion}-${lessThanVersion} (not including ${lessThanVersion})
-                  </j:when>
-                  <j:when test="${minVersion!=''}">
-                    ${minVersion}+
-                  </j:when>
-                  <j:when test="${maxVersion!=''}">
-                    up to ${maxVersion}
-                  </j:when>
-                  <j:when test="${lessThanVersion!=''}">
-                    earlier than ${lessThanVersion}
-                  </j:when>
-                </j:choose>
-                <br />
+                    <j:choose>
+                      <j:when test="${minVersion!='' and maxVersion!=''}">${minVersion}-${maxVersion}</j:when>
+                      <j:when test="${minVersion!='' and lessThanVersion!=''}">
+                        ${minVersion}-${lessThanVersion} (not including ${lessThanVersion})
+                      </j:when>
+                      <j:when test="${minVersion!=''}">${minVersion}+</j:when>
+                      <j:when test="${maxVersion!=''}">up to ${maxVersion}</j:when>
+                      <j:when test="${lessThanVersion!=''}">earlier than ${lessThanVersion}</j:when>
+                    </j:choose>
+                    <br />
                   </x:forEach>
                 </td>
                 <td>
                   <x:if select="doclink">
                     <x:forEach select="doclink">
-                      <x:set var="linkUrl" select="string(@url)"/>
-                      <x:set var="linkDescr" select="string(@descr)"/>
-                  <j:choose>
-                    <j:when test="${linkDescr!=''}">
-                        <a href="${linkUrl}" target="_blank">${linkDescr}</a>
-                    </j:when>
-                    <j:otherwise>
-                        <a href="${linkUrl}" target="_blank">${linkUrl}</a>
-                    </j:otherwise>
-                  </j:choose>
+                      <x:set var="linkUrl" select="string(@url)" />
+                      <x:set var="linkDescr" select="string(@descr)" />
+                      <j:choose>
+                        <j:when test="${linkDescr!=''}">
+                          <a href="${linkUrl}" target="_blank">${linkDescr}</a>
+                        </j:when>
+                        <j:otherwise>
+                          <a href="${linkUrl}" target="_blank">${linkUrl}</a>
+                        </j:otherwise>
+                      </j:choose>
                     </x:forEach>
                     <br />
-              </x:if>
+                  </x:if>
                 </td>
               </tr>
-              </x:forEach>
-              </table>
-            </section>
-        </x:forEach>
+            </x:forEach>
+          </table>
+        </section>
+      </x:forEach>
     </body>
 
-</document>
+  </document>
         </j:file>
     </goal>
 </project>
