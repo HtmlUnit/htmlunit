@@ -18,8 +18,8 @@ import junit.textui.TestRunner;
  *  nothing obvious has broken. Don't run this very often lest we piss off the
  *  web masters.
  *
- *@version    $Revision$
- *@author     <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @version    $Revision$
+ * @author     <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class SanityCheck extends WebTestCase {
 

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<document title="TODO list">
+
+<section title="">
+	<p>
+		Items on this list are planned items that aren't bugs or feature requests.  Those are all
+		listed in the sourceforge tracker.  They are in no particular order.
+	</p>
+	<ol>
+		<li>Use CyberNeko instead of JTidy</li>
+		<li>Change package structure to match the Jakarta structure</li>
+		<li>implement Document.write()</li>
+		<li>Have TopLevelWindow's deregister themselves with WebClient when they are closed</li>
+		<li>During form.reset, all submittable fields must revert back to their original values</li>
+		<li>Upgrade HttpClient to the latest gump version</li>
+		<li>Document.all needs to return a smart array</li>
+	</ol>
+</section>
+
+
+</document>
+
