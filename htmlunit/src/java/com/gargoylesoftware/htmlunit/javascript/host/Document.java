@@ -6,8 +6,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -16,7 +16,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
+import org.mozilla.javascript.Scriptable;
 
 /**
  * A javascript object for a Document
@@ -98,34 +101,27 @@ public final class Document extends HTMLElement {
 
 
     /**
-     * javascript function "write".  Currently not implemented
+     * javascript function "write".
      * @param text The text to write
      */
-    public void jsFunction_write( final String text ) {
-        if( text.length() > 60 ) {
-            getLog().debug("Document.write() not implemented yet.  Text starts with ["
-                +text.substring(0,60)+"]");
-        }
-        else {
-            getLog().debug("Document.write() not implemented yet.  Text was ["+text+"]");
-        }
+    public static Object jsFunction_write(
+        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
+
+        final String content = getStringArg(0, args, "");
+        return null;
     }
 
 
     /**
-     * javascript function "writeln".  Currently not implemented
+     * javascript function "writeln".
      * @param text The text to write
      */
-    public void jsFunction_writeln( final String text ) {
-        if( text.length() > 60 ) {
-            getLog().debug("Document.writeln() not implemented yet.  Text starts with ["
-                +text.substring(0,60)+"]");
-        }
-        else {
-            getLog().debug("Document.writeln() not implemented yet.  Text was ["+text+"]");
-        }
-    }
+    public static Object jsFunction_writeln(
+        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
 
+        final String content = getStringArg(0, args, "");
+        return jsFunction_write(context, scriptable, new Object[]{ content+"\n" }, function);
+    }
 
 
     /**
