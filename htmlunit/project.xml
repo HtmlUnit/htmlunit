@@ -86,6 +86,9 @@
         <developer>
             <name>Brad Clarke</name>
             <id>yourgod</id>
+            <email>yourgod@users.sourceforge.net</email>
+            <url>http://www.bradclarke.com/</url>
+            <timezone>-6</timezone>
             <roles>
                 <role>Java Developer</role>
             </roles>
