@@ -677,7 +677,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
-    public void testGetFullQualifiedUrl() throws Exception {
+    public void testGetFullQualifiedUrl_NoBaseSpecified() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
                  + "<form id='form1'>"
@@ -721,6 +721,36 @@ public class HtmlPageTest extends WebTestCase {
             thirdPage.getFullyQualifiedUrl("").toExternalForm() );
         assertEquals( "http://foo.com/dog/cat/two.html",
             thirdPage.getFullyQualifiedUrl("two.html").toExternalForm() );
+    }
+
+
+    public void testGetFullQualifiedUrl_WithBase() throws Exception {
+        final String htmlContent
+                 = "<html><head><title>foo</title><base href='http://second'></head><body>"
+                 + "<form id='form1'>"
+                 + "<table><tr><td><input type='text' id='foo'/></td></tr></table>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final String urlString = "http://first/";
+        final HtmlPage page =
+            ( HtmlPage )client.getPage( new URL( urlString ),
+            SubmitMethod.POST, Collections.EMPTY_LIST );
+
+        assertEquals( "http://second/", page.getFullyQualifiedUrl("").toExternalForm() );
+        assertEquals( "http://second/foo", page.getFullyQualifiedUrl("foo").toExternalForm() );
+        assertEquals( "http://foo.com/bar",
+            page.getFullyQualifiedUrl("http://foo.com/bar").toExternalForm() );
+        assertEquals( "mailto:me@foo.com",
+            page.getFullyQualifiedUrl("mailto:me@foo.com").toExternalForm() );
+
+        assertEquals( "http://second/foo", page.getFullyQualifiedUrl("foo").toExternalForm() );
+        assertEquals( "http://second/bbb", page.getFullyQualifiedUrl("aaa/../bbb").toExternalForm() );
+        assertEquals( "http://second/c/d", page.getFullyQualifiedUrl("c/./d").toExternalForm() );
     }
 
 
