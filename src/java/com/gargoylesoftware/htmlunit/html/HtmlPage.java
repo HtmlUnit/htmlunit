@@ -182,7 +182,7 @@ public final class HtmlPage
      * @throws IOException If an IO problem occurs.
      */
     public void cleanUp() throws IOException {
-        cleanUpFramesIfNeeded();
+        deregisterFramesIfNeeded();
         // TODO: executeBodyOnUnloadHandlerIfNeeded();
     }
 
@@ -1310,17 +1310,16 @@ public final class HtmlPage
     }
 
     /**
-     * Clean up the frames.  TODO: Explain what this is really doing.  What is
-     * meant by "cleaning up"?
+     * Deregister frames that are no longer in use.
      */
-    public void cleanUpFramesIfNeeded() {
-        // The act of creating the html element will cause initialization to start
+    public void deregisterFramesIfNeeded() {
         List list = getHtmlElementsByTagNames( Arrays.asList( new String[]{"frame", "iframe"}) );
-        for(int i=0; i<list.size();i++ ){
-            WebWindow window = (WebWindow) list.get(i);
+        final int listSize = list.size();
+        for(int i=0; i<listSize;i++ ){
+            final WebWindow window = (WebWindow) list.get(i);
             webClient_.deregisterWebWindow( window );
             HtmlPage page = (HtmlPage) window.getEnclosedPage();
-            page.cleanUpFramesIfNeeded();
+            page.deregisterFramesIfNeeded();
         }
     }
 

@@ -826,7 +826,7 @@ public class WebClient {
 
     /**
      * Set the current window for this client.  This is the window that will be used when
-     * getPage() is called without specifying a window
+     * getPage() is called without specifying a window.
      * @param window The new window.
      */
     public void setCurrentWindow( final WebWindow window ) {
@@ -891,6 +891,14 @@ public class WebClient {
         }
     }
 
+
+    private void fireWindowClosed( final WebWindowEvent event ) {
+        final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
+        while( iterator.hasNext() ) {
+            final WebWindowListener listener = (WebWindowListener)iterator.next();
+            listener.webWindowClosed(event);
+        }
+    }
 
     /**
      * Open a new window with the specified name.  If the url is non-null then attempt to load
@@ -1070,6 +1078,17 @@ public class WebClient {
     public void deregisterWebWindow( final WebWindow webWindow ) {
         Assert.notNull("webWindow", webWindow);
         webWindows_.remove(webWindow);
+        
+        if( currentWindow_ == webWindow ) {
+            if( webWindows_.size() == 0 ) {
+                // Create a new one - we always have to have at least one window.
+                currentWindow_ = new TopLevelWindow("", this);
+            }
+            else {
+                currentWindow_ = (WebWindow)webWindows_.get(0);
+            }
+        }
+        fireWindowClosed(new WebWindowEvent(webWindow, webWindow.getEnclosedPage(), null));
     }
 
 

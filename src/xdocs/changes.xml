@@ -8,6 +8,10 @@
     <body>
         <release version="Next" date="not released yet">
             <action type="update" dev="mbowler">
+                INCOMPATIBLE CHANGE: Added method to interface WebWindowListener for 
+                window closing events.
+            </action>
+            <action type="update" dev="mbowler">
                 Continued migration of the build process from ant to maven.
             </action>
             <action type="update" dev="mbowler" id="713646">
@@ -209,6 +213,9 @@
             <action type="add" dev="mbowler" id="614045">
                 Finished the second variation of document.write(), writing to frames
                 other than the one that is loading.
+            </action>
+            <action type="add" dev="mbowler" id="799757">
+                New method TopLevelWindow.close()
             </action>
         </release>
 
