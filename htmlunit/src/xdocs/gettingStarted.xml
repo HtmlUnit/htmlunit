@@ -9,6 +9,10 @@
 
     <body>
         <section>
+        	    <p>
+        	        The <a href="dependencies.html">dependencies page</a> lists all the jars that you will need
+        	        to have in your classpath.
+        	    </p>
             <p>
                 The class <javadoc>com.gargoylesoftware.htmlunit.WebClient</javadoc> is the
                 main starting point.  This simulates a web browser and will be used to execute
