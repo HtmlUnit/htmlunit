@@ -485,7 +485,9 @@ public class HTMLElement extends NodeImpl {
             final AttributesImpl attributes = new AttributesImpl();
             for (Iterator iter = htmlElt.getAttributeEntriesIterator(); iter.hasNext();) {
                 final Map.Entry entry = (Map.Entry) iter.next();
-                attributes.addAttribute(null, (String) entry.getKey(), null, null, (String) entry.getValue());
+                final String name = (String) entry.getKey();
+                final String value = (String) entry.getValue();
+                attributes.addAttribute(null, name, name, null, value);
             }
             copy = factory.createElement(page, node.getNodeName(), attributes);
             for (Iterator iter = node.getChildIterator(); iter.hasNext();) {
