@@ -98,6 +98,9 @@
             	as "window.myVariable".  This prevented the google ads from working
             	on the HtmlUnit website.
             </action>
+            <action type="add" dev="mbowler">
+            	Stubbed out Window.onerror
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">

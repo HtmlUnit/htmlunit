@@ -296,6 +296,9 @@
         <property name="src" readable="true" writable="true"/>
         <property name="onload" readable="true" writable="true"/>
         <property name="name" readable="true" writable="false"/>
+        <property name="onerror" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>
+        </property>
 
         <function name="alert"/>
         <function name="blur"/>
