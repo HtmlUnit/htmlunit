@@ -59,8 +59,8 @@ public class AttributeCaseTest extends WebTestCase {
     private static final String ATTRIBUTE_VALUE = "someValue";
     private static final String ATTRIBUTE_VALUE_NEW = "newValue";
 
-    private HtmlElement element;
-    private HtmlPage page;
+    private HtmlElement element_;
+    private HtmlPage page_;
 
 
     /**
@@ -78,7 +78,7 @@ public class AttributeCaseTest extends WebTestCase {
      */
     public void testGetAttributeLowerCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        assertEquals(page.asXml(), ATTRIBUTE_VALUE, element.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
+        assertEquals(page_.asXml(), ATTRIBUTE_VALUE, element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /** 
@@ -87,7 +87,7 @@ public class AttributeCaseTest extends WebTestCase {
      */
     public void testGetAttributeMixedCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        assertEquals(page.asXml(), ATTRIBUTE_VALUE, element.getAttributeValue(ATTRIBUTE_NAME));
+        assertEquals(page_.asXml(), ATTRIBUTE_VALUE, element_.getAttributeValue(ATTRIBUTE_NAME));
     }
 
     /** 
@@ -96,7 +96,7 @@ public class AttributeCaseTest extends WebTestCase {
      */
     public void testGetAttributeUpperCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        assertEquals(page.asXml(), ATTRIBUTE_VALUE, element.getAttributeValue(ATTRIBUTE_NAME.toUpperCase()));
+        assertEquals(page_.asXml(), ATTRIBUTE_VALUE, element_.getAttributeValue(ATTRIBUTE_NAME.toUpperCase()));
     }
 
     /** 
@@ -105,7 +105,7 @@ public class AttributeCaseTest extends WebTestCase {
      */
     public void testSetAttributeLowerCase() throws IOException {
         setupSetAttributeTest(ATTRIBUTE_NAME.toLowerCase(), ATTRIBUTE_VALUE, ATTRIBUTE_VALUE_NEW);
-        assertEquals(page.asXml(), ATTRIBUTE_VALUE_NEW, element.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
+        assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW, element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /** 
@@ -114,7 +114,7 @@ public class AttributeCaseTest extends WebTestCase {
      */
     public void testSetAttributeMixedCase() throws IOException {
         setupSetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE, ATTRIBUTE_VALUE_NEW);
-        assertEquals(page.asXml(), ATTRIBUTE_VALUE_NEW, element.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
+        assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW, element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /** 
@@ -123,7 +123,7 @@ public class AttributeCaseTest extends WebTestCase {
      */
     public void testSetAttributeUpperCase() throws IOException {
         setupSetAttributeTest(ATTRIBUTE_NAME.toUpperCase(), ATTRIBUTE_VALUE, ATTRIBUTE_VALUE_NEW);
-        assertEquals(page.asXml(), ATTRIBUTE_VALUE_NEW, element.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
+        assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW, element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /** 
@@ -132,8 +132,8 @@ public class AttributeCaseTest extends WebTestCase {
      */
     public void testRemoveAttributeLowerCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        element.removeAttribute(ATTRIBUTE_NAME.toLowerCase());
-        assertEquals(page.asXml(), "", element.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
+        element_.removeAttribute(ATTRIBUTE_NAME.toLowerCase());
+        assertEquals(page_.asXml(), "", element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /** 
@@ -142,8 +142,8 @@ public class AttributeCaseTest extends WebTestCase {
      */
     public void testRemoveAttributeMixedCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        element.removeAttribute(ATTRIBUTE_NAME);
-        assertEquals(page.asXml(), "", element.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
+        element_.removeAttribute(ATTRIBUTE_NAME);
+        assertEquals(page_.asXml(), "", element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /** 
@@ -152,8 +152,8 @@ public class AttributeCaseTest extends WebTestCase {
      */
     public void testRemoveAttributeUpperCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        element.removeAttribute(ATTRIBUTE_NAME.toUpperCase());
-        assertEquals(page.asXml(), "", element.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
+        element_.removeAttribute(ATTRIBUTE_NAME.toUpperCase());
+        assertEquals(page_.asXml(), "", element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /** 
@@ -162,7 +162,7 @@ public class AttributeCaseTest extends WebTestCase {
      */
     public void testIsAttributeDefinedLowerCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        assertTrue(page.asXml(), element.isAttributeDefined(ATTRIBUTE_NAME.toLowerCase()));
+        assertTrue(page_.asXml(), element_.isAttributeDefined(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /** 
@@ -171,7 +171,7 @@ public class AttributeCaseTest extends WebTestCase {
      */
     public void testIsAttributeDefinedMixedCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        assertTrue(page.asXml(), element.isAttributeDefined(ATTRIBUTE_NAME));
+        assertTrue(page_.asXml(), element_.isAttributeDefined(ATTRIBUTE_NAME));
     }
 
     /** 
@@ -180,7 +180,7 @@ public class AttributeCaseTest extends WebTestCase {
      */
     public void testIsAttributeDefinedUpperCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        assertTrue(page.asXml(), element.isAttributeDefined(ATTRIBUTE_NAME.toUpperCase()));
+        assertTrue(page_.asXml(), element_.isAttributeDefined(ATTRIBUTE_NAME.toUpperCase()));
     }
 
 
@@ -192,9 +192,9 @@ public class AttributeCaseTest extends WebTestCase {
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
 
-        page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        page_ = (HtmlPage) client.getPage(URL_GARGOYLE);
 
-        element = page.getHtmlElementById(elementId);
+        element_ = page_.getHtmlElementById(elementId);
     }
 
 

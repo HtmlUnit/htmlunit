@@ -294,7 +294,8 @@ public class HtmlButtonTest extends WebTestCase {
         doTestDefaultButtonType(BrowserVersion.INTERNET_EXPLORER_6_0, "button");
     }
     
-    private void doTestDefaultButtonType( final BrowserVersion browserVersion, final String expectedType ) throws Exception {
+    private void doTestDefaultButtonType(final BrowserVersion browserVersion,
+            final String expectedType) throws Exception {
         final String firstContent
                  = "<html><head><title>First</title></head><body>"
                  + "<form id='form1' action='http://second'>"
