@@ -39,55 +39,174 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for Navigator.
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Daniel Gredler
  */
 public class NavigatorTest extends WebTestCase {
 
     /**
-     * Create an instance
-     * @param name The name of the test
+     * Create an instance.
+     * @param name The name of the test.
      */
     public NavigatorTest( final String name ) {
         super(name);
     }
 
     /**
-     * The javaEnabled() method should always return false.  Test this
-     * @throws Exception if the test fails.
+     * Tests the "appCodeName" property.
+     * @throws Exception on test failure.
+     */
+    public void testAppCodeName() throws Exception {
+        this.testAttribute("appCodeName", BrowserVersion.getDefault().getApplicationCodeName());
+    }
+
+    /**
+     * Tests the "appMinorVersion" property.
+     * @throws Exception on test failure.
+     */
+    public void testAppMinorVersion() throws Exception {
+        this.testAttribute("appMinorVersion", BrowserVersion.getDefault().getApplicationMinorVersion());
+    }
+
+    /**
+     * Tests the "appName" property.
+     * @throws Exception on test failure.
+     */
+    public void testAppName() throws Exception {
+        this.testAttribute("appName", BrowserVersion.getDefault().getApplicationName());
+    }
+
+    /**
+     * Tests the "appVersion" property.
+     * @throws Exception on test failure.
+     */
+    public void testAppVersion() throws Exception {
+        this.testAttribute("appVersion", BrowserVersion.getDefault().getApplicationVersion());
+    }
+
+    /**
+     * Tests the "browserLanguage" property.
+     * @throws Exception on test failure.
+     */
+    public void testBrowserLanguage() throws Exception {
+        this.testAttribute("browserLanguage", BrowserVersion.getDefault().getBrowserLanguage());
+    }
+
+    /**
+     * Tests the "cookieEnabled" property.
+     * @throws Exception on test failure.
+     */
+    public void testCookieEnabled() throws Exception {
+        this.testAttribute("cookieEnabled", "true");
+    }
+
+    /**
+     * Tests the "cpuClass" property.
+     * @throws Exception on test failure.
+     */
+    public void testCpuClass() throws Exception {
+        this.testAttribute("cpuClass", BrowserVersion.getDefault().getCpuClass());
+    }
+
+    /**
+     * Tests the "onLine" property.
+     * @throws Exception on test failure.
+     */
+    public void testOnLine() throws Exception {
+        this.testAttribute("onLine", String.valueOf(BrowserVersion.getDefault().isOnLine()));
+    }
+
+    /**
+     * Tests the "platform" property.
+     * @throws Exception on test failure.
+     */
+    public void testPlatform() throws Exception {
+        this.testAttribute("platform", BrowserVersion.getDefault().getPlatform());
+    }
+
+    /**
+     * Tests the "systemLanguage" property.
+     * @throws Exception on test failure.
+     */
+    public void testSystemLanguage() throws Exception {
+        this.testAttribute("systemLanguage", BrowserVersion.getDefault().getSystemLanguage());
+    }
+
+    /**
+     * Tests the "userAgent" property.
+     * @throws Exception on test failure.
+     */
+    public void testUserAgent() throws Exception {
+        this.testAttribute("userAgent", BrowserVersion.getDefault().getUserAgent());
+    }
+
+    /**
+     * Tests the "userLanguage" property.
+     * @throws Exception on test failure.
+     */
+    public void testUserLanguage() throws Exception {
+        this.testAttribute("userLanguage", BrowserVersion.getDefault().getUserLanguage());
+    }
+
+    /**
+     * Tests the "plugins" property.
+     * @throws Exception on test failure.
+     */
+    public void testPlugins() throws Exception {
+        this.testAttribute("plugins.length", "0");
+    }
+
+    /**
+     * Tests the "javaEnabled" method.
+     * @throws Exception on test failure.
      */
     public void testJavaEnabled() throws Exception {
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
-
-        final String firstContent
-             = "<html><head><title>First</title><script>\n"
-             + "function doTest() {\n"
-             + "    alert(navigator.javaEnabled());\n"
-             + "}\n</script></head>"
-             + "<body onload='doTest()'></body></html>";
-
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        client.setWebConnection( webConnection );
-
-        final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        client.getPage(URL_FIRST);
-
-        final List expectedAlerts = Arrays.asList( new String[]{"false"} );
-        assertEquals( expectedAlerts, collectedAlerts );
+        this.testAttribute("javaEnabled()", "false");
     }
+
+    /**
+     * Tests the "taintEnabled" property.
+     * @throws Exception on test failure.
+     */
+    public void testTaintEnabled() throws Exception {
+        this.testAttribute("taintEnabled()", "false");
+    }
+
+    /**
+     * Generic method for testing the value of a specific navigator attribute.
+     * @param name the name of the attribute to test.
+     * @param value the expected value for the named attribute.
+     * @throws Exception on test failure.
+     */
+    private void testAttribute(String name, String value) throws Exception {
+        final String content = "<html>\n" + 
+                "<head>\n" + 
+                "    <title>test</title>\n" + 
+                "    <script>\n" + 
+                "    function doTest(){\n" + 
+                "       alert('" + name + " = ' + window.navigator." + name + ");\n" +  
+                "    }\n" + 
+                "    </script>\n" + 
+                "</head>\n" + 
+                "<body onload=\'doTest()\'>\n" + 
+                "</body>\n" + 
+                "</html>\n" + 
+                "";
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        final List expectedAlerts = Arrays.asList(new String[]{
+            name + " = " + value
+        });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }

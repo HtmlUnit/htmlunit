@@ -37,14 +37,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.mozilla.javascript.NativeArray;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * A javascript object for a Navigator
- *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * A javascript object for a Navigator.
+ * 
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Daniel Gredler
+ * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_navigator.asp">
+ * MSDN documentation</a>
  */
 public final class Navigator extends SimpleScriptable {
 
@@ -52,14 +57,32 @@ public final class Navigator extends SimpleScriptable {
 
 
     /**
-     * Create an instance.  Javascript objects must have a default constructor.
+     * Create an instance. Javascript objects must have a default constructor.
      */
     public Navigator() {}
 
 
     /**
-     * Return the property "appName"
-     * @return The property
+     * Return the property "appCodeName".
+     * @return the property "appCodeName".
+     */
+    public String jsGet_appCodeName() {
+        return getBrowserVersion().getApplicationCodeName();
+    }
+
+
+    /**
+     * Return the property "appMinorVersion".
+     * @return the property "appMinorVersion".
+     */
+    public String jsGet_appMinorVersion() {
+        return getBrowserVersion().getApplicationMinorVersion();
+    }
+
+
+    /**
+     * Return the property "appName".
+     * @return the property "appName".
      */
     public String jsGet_appName() {
         return getBrowserVersion().getApplicationName();
@@ -67,8 +90,8 @@ public final class Navigator extends SimpleScriptable {
 
 
     /**
-     * Return the property "appVersion"
-     * @return The property
+     * Return the property "appVersion".
+     * @return the property "appVersion".
      */
     public String jsGet_appVersion() {
         return getBrowserVersion().getApplicationVersion();
@@ -76,25 +99,109 @@ public final class Navigator extends SimpleScriptable {
 
 
     /**
-     * Return the property "userAgent"
-     * @return The property
+     * Return the property "browserLanguage".
+     * @return the property "browserLanguage".
+     */
+    public String jsGet_browserLanguage() {
+        return getBrowserVersion().getBrowserLanguage();
+    }
+
+
+    /**
+     * Return the property "cookieEnabled".
+     * @return the property "cookieEnabled".
+     */
+    public boolean jsGet_cookieEnabled() {
+        return true;
+    }
+
+
+    /**
+     * Return the property "cpuClass".
+     * @return the property "cpuClass".
+     */
+    public String jsGet_cpuClass() {
+        return getBrowserVersion().getCpuClass();
+    }
+
+    /**
+     * Return the property "onLine".
+     * @return the property "onLine".
+     */
+    public boolean jsGet_onLine() {
+        return getBrowserVersion().isOnLine();
+    }
+
+
+    /**
+     * Return the property "platform".
+     * @return the property "platform".
+     */
+    public String jsGet_platform() {
+        return getBrowserVersion().getPlatform();
+    }
+
+
+    /**
+     * Return the property "systemLanguage".
+     * @return the property "systemLanguage".
+     */
+    public String jsGet_systemLanguage() {
+        return getBrowserVersion().getSystemLanguage();
+    }
+
+
+    /**
+     * Return the property "userAgent".
+     * @return The property "userAgent".
      */
     public String jsGet_userAgent() {
         return getBrowserVersion().getUserAgent();
     }
 
 
-    private BrowserVersion getBrowserVersion() {
-        return BrowserVersion.getDefault();
+    /**
+     * Return the property "userLanguage".
+     * @return the property "userLanguage".
+     */
+    public String jsGet_userLanguage() {
+        return getBrowserVersion().getUserLanguage();
     }
 
 
     /**
-     * Return false always as java support is not enabled in HtmlUnit
+     * Return an empty array because HtmlUnit does not support embedded objects.
+     * @return an empty array.
+     */
+    public Object jsFunction_plugins() {
+        return new NativeArray(0);
+    }
+
+
+    /**
+     * Return <tt>false</tt> always as Java support is not enabled in HtmlUnit.
      * @return false.
      */
     public boolean jsFunction_javaEnabled() {
         return false;
     }
-}
 
+
+    /**
+     * Return <tt>false</tt> always as data tainting support is not enabled in HtmlUnit.
+     * @return false.
+     */
+    public boolean jsFunction_taintEnabled() {
+        return false;
+    }
+
+
+    /**
+     * Returns the default browser version.
+     * @return the default browser version.
+     */
+    private BrowserVersion getBrowserVersion() {
+        return BrowserVersion.getDefault();
+    }
+
+}
