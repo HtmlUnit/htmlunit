@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.net.ConnectException;
+import java.net.SocketException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -181,6 +182,13 @@ public class HTMLParserTest extends WebTestCase {
              */
             System.out.println("Connection could not be made to " + htmlUnitSite.toExternalForm());
             return; 
+        }
+        catch (SocketException e) {
+            /* Some systems do not have access to the sf.net's web page.  If the connection
+             * timesout, do not fail the test
+             */
+            System.out.println("Connection could not be made to " + htmlUnitSite.toExternalForm());
+            return;
         }
         
         WebClient webClient = new WebClient();
