@@ -63,7 +63,7 @@ public final class ClassConfiguration {
      */
     private String className_;
     private Class linkedClass_;
-    private Class htmlClass_;
+    //private Class htmlClass_;
     private boolean jsObject_;
     
     /**
@@ -84,7 +84,7 @@ public final class ClassConfiguration {
         linkedClass_ = Class.forName(implementingClass);
         jsObject_ = jsObject;
         if (htmlClass != null && htmlClass.length() != 0) {
-            htmlClass_ = Class.forName(htmlClass);
+            //htmlClass_ = Class.forName(htmlClass);
         }
     }
     
