@@ -37,7 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.File;
+
 import org.w3c.dom.Element;
+
+import com.gargoylesoftware.htmlunit.KeyDataPair;
+import com.gargoylesoftware.htmlunit.KeyValuePair;
 
 /**
  *  Wrapper for the html element "input"
@@ -56,5 +61,25 @@ public class HtmlFileInput extends HtmlInput {
     HtmlFileInput( final HtmlPage page, final Element element ) {
         super( page, element );
     }
-}
 
+    /**
+     *  Return an array of KeyValuePairs that are the values that will be sent
+     *  back to the server whenever the current form is submitted. Some of the
+     *  values may be KeyDataPairs indicating that a File will be uploaded<p>
+     *
+     *  THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
+     *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
+     *
+     * @return  See above
+     */
+    public KeyValuePair[] getSubmitKeyValuePairs() {
+        final File f = new File(getValueAttribute());
+
+        if (f.exists()) {
+            return new KeyValuePair[] { new KeyDataPair(getNameAttribute(), f)};
+        }
+        else {
+            return new KeyValuePair[] { new KeyValuePair(getNameAttribute(), getValueAttribute())};
+        }
+    }
+}
