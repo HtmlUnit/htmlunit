@@ -165,8 +165,13 @@ public final class Document extends HTMLElement {
      * @return The value of the "referrer" property
      */
     public String jsGet_referrer() {
-        getLog().debug("Not implemented yet: document.referrer");
-        return "";
+        final String referrer = getHtmlPage().getWebResponse().getResponseHeaderValue("referrer");
+        if( referrer == null ) {
+            return "";
+        }
+        else {
+            return referrer;
+        }
     }
 
 
