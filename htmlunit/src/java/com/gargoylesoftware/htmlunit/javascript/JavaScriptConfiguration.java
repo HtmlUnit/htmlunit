@@ -118,8 +118,8 @@ public final class JavaScriptConfiguration {
             final String typeName,
             final String booleanAttributeName ) {
 
-        Assert.assertNotNull("hostClass", hostClass);
-        Assert.assertNotNull("typeName", typeName);
+        Assert.notNull("hostClass", hostClass);
+        Assert.notNull("typeName", typeName);
 
         Element classElement = getClassElement(getClassName(hostClass));
         while( classElement != null ) {
@@ -185,8 +185,8 @@ public final class JavaScriptConfiguration {
 
 
     private boolean getBooleanAttribute( final Element classElement, final String attributeName ) {
-        Assert.assertNotNull("classElement", classElement);
-        Assert.assertNotNull("attributeName", attributeName);
+        Assert.notNull("classElement", classElement);
+        Assert.notNull("attributeName", attributeName);
 
         final String value = classElement.getAttribute(attributeName);
         if( "true".equals(value) ) {
@@ -209,7 +209,7 @@ public final class JavaScriptConfiguration {
 
 
     private InputStream getResourceAsStream( final String name ) {
-        Assert.assertNotNull("name", name);
+        Assert.notNull("name", name);
 
         InputStream inputStream = getClass().getResourceAsStream(name);
         if( inputStream == null ) {
@@ -237,7 +237,7 @@ public final class JavaScriptConfiguration {
 
 
     private String getClassName( final Class hostClass ) {
-        Assert.assertNotNull("hostClass", hostClass);
+        Assert.notNull("hostClass", hostClass);
 
         final String className = hostClass.getName();
         final int index = className.lastIndexOf(".");
@@ -266,14 +266,14 @@ public final class JavaScriptConfiguration {
 
 
     private int getEnabledState( final Element element ) {
-        Assert.assertNotNull("element", element);
+        Assert.notNull("element", element);
         return ENABLED;
     }
 
 
     private Element getElementByTypeAndName( final Element root, final String type, final String name ) {
-        Assert.assertNotNull("type", type);
-        Assert.assertNotNull("name", name);
+        Assert.notNull("type", type);
+        Assert.notNull("name", name);
 
         Node node = root.getFirstChild();
         while( node != null ) {

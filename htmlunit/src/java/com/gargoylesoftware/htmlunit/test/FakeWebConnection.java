@@ -37,10 +37,10 @@ public class FakeWebConnection extends WebConnection {
                 final String contentType,
                 final List responseHeaders ) {
 
-            Assert.assertNotNull("content", content);
-            Assert.assertNotNull("statusMessage", statusMessage);
-            Assert.assertNotNull("contentType", contentType);
-            Assert.assertNotNull("responseHeaders", responseHeaders);
+            Assert.notNull("content", content);
+            Assert.notNull("statusMessage", statusMessage);
+            Assert.notNull("contentType", contentType);
+            Assert.notNull("responseHeaders", responseHeaders);
 
             content_ = content;
             statusCode_ = statusCode;

@@ -36,7 +36,7 @@ public class Style extends SimpleScriptable {
      * @param htmlElement The element that this style describes
      */
     public void initialize( final HTMLElement htmlElement ) {
-        Assert.assertNotNull("htmlElement", htmlElement);
+        Assert.notNull("htmlElement", htmlElement);
         jsElement_ = htmlElement;
     }
 

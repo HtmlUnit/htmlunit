@@ -201,7 +201,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @param pageInfo The new pageInfo.
      */
     public final void setPageInfo( final JavaScriptEngine.PageInfo pageInfo ) {
-        Assert.assertNotNull("pageInfo", pageInfo);
+        Assert.notNull("pageInfo", pageInfo);
         pageInfo_ = pageInfo;
     }
 
@@ -268,7 +268,7 @@ public class SimpleScriptable extends ScriptableObject {
       * @param htmlElement The html element
       */
      public void setHtmlElement( final HtmlElement htmlElement ) {
-         Assert.assertNotNull("htmlElement", htmlElement);
+         Assert.notNull("htmlElement", htmlElement);
          htmlElement_ = htmlElement;
          htmlElement_.setScriptObject(this);
      }

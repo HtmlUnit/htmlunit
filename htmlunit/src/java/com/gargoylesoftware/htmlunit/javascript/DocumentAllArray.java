@@ -50,7 +50,7 @@ public class DocumentAllArray extends SimpleScriptable {
      * @param page The HtmlPage that this object will retrive elements from.
      */
     public void initialize( final HtmlPage page ) {
-        Assert.assertNotNull("page", page);
+        Assert.notNull("page", page);
         htmlPage_ = page;
     }
 

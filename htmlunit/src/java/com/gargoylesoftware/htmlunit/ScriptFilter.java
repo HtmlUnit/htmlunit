@@ -42,8 +42,8 @@ public final class ScriptFilter extends DefaultFilter {
      * @param htmlPage The page that is being loaded.
      */
     public ScriptFilter( final HTMLConfiguration config, final HtmlPage htmlPage ) {
-        Assert.assertNotNull("config", config);
-        Assert.assertNotNull("htmlPage", htmlPage);
+        Assert.notNull("config", config);
+        Assert.notNull("htmlPage", htmlPage);
         configuration_ = config;
         htmlPage_ = htmlPage;
         htmlPage_.setScriptFilter(this);

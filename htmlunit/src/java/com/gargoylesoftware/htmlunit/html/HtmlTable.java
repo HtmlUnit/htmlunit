@@ -140,7 +140,7 @@ public class HtmlTable extends HtmlElement {
     public final HtmlTableRow getRowById( final String id )
         throws ElementNotFoundException {
 
-        Assert.assertNotNull("id", id);
+        Assert.notNull("id", id);
         assertNotEmpty("id", id);
 
         final Iterator iterator = getRows().iterator();

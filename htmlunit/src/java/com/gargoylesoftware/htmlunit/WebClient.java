@@ -78,7 +78,7 @@ public class WebClient {
      * @param  browserVersion The browser version to simulate
      */
     public WebClient( final BrowserVersion browserVersion ) {
-        Assert.assertNotNull("browserVersion", browserVersion);
+        Assert.notNull("browserVersion", browserVersion);
 
         browserVersion_ = browserVersion;
         proxyHost_ = null;
@@ -99,8 +99,8 @@ public class WebClient {
      * @param  proxyPort The port to use on the proxy server
      */
     public WebClient( final BrowserVersion browserVersion, final String proxyHost, final int proxyPort ) {
-        Assert.assertNotNull("browserVersion", browserVersion);
-        Assert.assertNotNull( "proxyHost", proxyHost );
+        Assert.notNull("browserVersion", browserVersion);
+        Assert.notNull( "proxyHost", proxyHost );
 
         proxyHost_ = proxyHost;
         proxyPort_ = proxyPort;
@@ -161,7 +161,7 @@ public class WebClient {
      * @param  webConnection The new web connection
      */
     public void setWebConnection( final WebConnection webConnection ) {
-        Assert.assertNotNull( "webConnection", webConnection );
+        Assert.notNull( "webConnection", webConnection );
         webConnection_ = webConnection;
     }
 
@@ -413,7 +413,7 @@ public class WebClient {
      * @param  credentialProvider The credential provider
      */
     public void setCredentialProvider( final CredentialProvider credentialProvider ) {
-        Assert.assertNotNull( "credentialProvider", credentialProvider );
+        Assert.notNull( "credentialProvider", credentialProvider );
         credentialProvider_ = credentialProvider;
     }
 
@@ -585,7 +585,7 @@ public class WebClient {
      * @param window The new window.
      */
     public void setCurrentWindow( final WebWindow window ) {
-        Assert.assertNotNull("window", window);
+        Assert.notNull("window", window);
         currentWindow_ = window;
     }
 
@@ -596,7 +596,7 @@ public class WebClient {
      * @param listener A listener.
      */
     public void addWebWindowListener( final WebWindowListener listener ) {
-        Assert.assertNotNull("listener", listener);
+        Assert.notNull("listener", listener);
         webWindowListeners_.add(listener);
     }
 
@@ -606,7 +606,7 @@ public class WebClient {
      * @param listener A listener.
      */
     public void removeWebWindowListener( final WebWindowListener listener ) {
-        Assert.assertNotNull("listener", listener);
+        Assert.notNull("listener", listener);
         webWindowListeners_.remove(listener);
     }
 
@@ -638,7 +638,7 @@ public class WebClient {
      * @return The new window.
      */
     public WebWindow openWindow( final URL url, final String windowName ) {
-        Assert.assertNotNull("windowName", windowName);
+        Assert.notNull("windowName", windowName);
         return openWindow( url, windowName, null );
     }
 
@@ -718,7 +718,7 @@ public class WebClient {
      * @param pageCreator The new page creator
      */
     public void setPageCreator( final PageCreator pageCreator ) {
-        Assert.assertNotNull("pageCreator", pageCreator);
+        Assert.notNull("pageCreator", pageCreator);
         pageCreator_ = pageCreator;
     }
 
@@ -741,7 +741,7 @@ public class WebClient {
      * @throws WebWindowNotFoundException If the {@link WebWindow} can't be found.
      */
     public WebWindow getWebWindowByName( final String name ) throws WebWindowNotFoundException {
-        Assert.assertNotNull("name", name);
+        Assert.notNull("name", name);
 
         final Iterator iterator = webWindows_.iterator();
         while( iterator.hasNext() ) {
@@ -761,7 +761,7 @@ public class WebClient {
      * @param webWindow The new WebWindow
      */
     public void registerWebWindow( final WebWindow webWindow ) {
-        Assert.assertNotNull("webWindow", webWindow);
+        Assert.notNull("webWindow", webWindow);
         webWindows_.add(webWindow);
     }
 
@@ -772,7 +772,7 @@ public class WebClient {
      * @param webWindow The WebWindow to remove
      */
     public void deregisterWebWindow( final WebWindow webWindow ) {
-        Assert.assertNotNull("webWindow", webWindow);
+        Assert.notNull("webWindow", webWindow);
         webWindows_.remove(webWindow);
     }
 
@@ -787,7 +787,7 @@ public class WebClient {
 
 
     private static URL makeUrl( final String urlString ) throws MalformedURLException {
-        Assert.assertNotNull("urlString", urlString);
+        Assert.notNull("urlString", urlString);
 
         if( TextUtil.startsWithIgnoreCase(urlString, "javascript:") ) {
             return new URL(null, urlString, JavaScriptUrlStreamHandler_);
@@ -914,9 +914,9 @@ public class WebClient {
         throws
             IOException {
 
-        Assert.assertNotNull("url", url);
-        Assert.assertNotNull("method", method);
-        Assert.assertNotNull("parameters", parameters);
+        Assert.notNull("url", url);
+        Assert.notNull("method", method);
+        Assert.notNull("parameters", parameters);
 
         final WebResponse webResponse = getWebConnection().getResponse( url, method, parameters, requestHeaders_ );
         final int statusCode = webResponse.getStatusCode();

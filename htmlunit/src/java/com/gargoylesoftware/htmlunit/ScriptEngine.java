@@ -26,7 +26,7 @@ public abstract class ScriptEngine {
      * @param webClient The web client.
      */
     protected ScriptEngine( final WebClient webClient ) {
-        Assert.assertNotNull("webClient", webClient);
+        Assert.notNull("webClient", webClient);
         webClient_ = webClient;
     }
 
@@ -47,7 +47,7 @@ public abstract class ScriptEngine {
      * @deprecated Use {@link Assert#assertNotNull(String,Object)}
      */
     protected final void assertNotNull( final String description, final Object object ) {
-        Assert.assertNotNull(description, object);
+        Assert.notNull(description, object);
     }
 
 

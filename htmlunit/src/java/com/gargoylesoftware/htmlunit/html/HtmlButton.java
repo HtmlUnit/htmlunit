@@ -40,7 +40,7 @@ public class HtmlButton
      * @param  newValue The new content
      */
     public void setValueAttribute( final String newValue ) {
-        Assert.assertNotNull( "newValue", newValue );
+        Assert.notNull( "newValue", newValue );
         getElement().setAttribute( "value", newValue );
     }
 

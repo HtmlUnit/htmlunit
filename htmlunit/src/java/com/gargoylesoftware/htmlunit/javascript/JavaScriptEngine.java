@@ -81,7 +81,7 @@ public final class JavaScriptEngine extends ScriptEngine {
 
 
     private synchronized PageInfo getPageInfo( final HtmlPage htmlPage ) {
-        Assert.assertNotNull( "htmlPage", htmlPage );
+        Assert.notNull( "htmlPage", htmlPage );
 
         final PageInfo existingPageInfo = (PageInfo)pageInfos_.get(htmlPage);
         if( existingPageInfo != null ) {
@@ -148,7 +148,7 @@ public final class JavaScriptEngine extends ScriptEngine {
     public Object execute(
         final HtmlPage htmlPage, String sourceCode, final String sourceName, final HtmlElement htmlElementScope ) {
 
-        Assert.assertNotNull( "sourceCode", sourceCode );
+        Assert.notNull( "sourceCode", sourceCode );
 
         // Remove html comments around the source if needed
         sourceCode = sourceCode.trim();

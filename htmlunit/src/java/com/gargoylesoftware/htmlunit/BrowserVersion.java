@@ -96,7 +96,7 @@ public class BrowserVersion {
      * @param newBrowserVersion The new default version.
      */
     public static void setDefault( final BrowserVersion newBrowserVersion ) {
-        Assert.assertNotNull("newBrowserVersion", newBrowserVersion);
+        Assert.notNull("newBrowserVersion", newBrowserVersion);
         DefaultBrowserVersion_ = newBrowserVersion;
     }
 

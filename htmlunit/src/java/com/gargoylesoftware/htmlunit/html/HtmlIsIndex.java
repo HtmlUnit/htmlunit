@@ -40,7 +40,7 @@ public class HtmlIsIndex
      * @param newValue The value.
      */
     public void setValue( final String newValue ) {
-        Assert.assertNotNull("newValue", newValue);
+        Assert.notNull("newValue", newValue);
         value_ = newValue;
     }
 

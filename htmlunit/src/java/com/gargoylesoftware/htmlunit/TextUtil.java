@@ -26,8 +26,8 @@ public final class TextUtil {
      * @return true if the string starts with the prefix.
      */
     public static boolean startsWithIgnoreCase( final String stringToCheck, final String prefix ) {
-        Assert.assertNotNull("stringToCheck", stringToCheck);
-        Assert.assertNotNull("prefix", prefix);
+        Assert.notNull("stringToCheck", stringToCheck);
+        Assert.notNull("prefix", prefix);
 
         if( prefix.length() == 0 ) {
             throw new IllegalArgumentException("Prefix may not be empty");
