@@ -37,22 +37,19 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
-import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
-import com.gargoylesoftware.htmlunit.html.HTMLParser;
-
-import java.io.IOException;
-import java.util.Collections;
 import java.net.ConnectException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Collections;
 
-import org.jaxen.JaxenException;
-import org.xml.sax.SAXException;
 import junit.framework.TestCase;
+
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
+import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 
 /**
  * test driver for the new HTMLParser implementation
@@ -66,12 +63,9 @@ public class HTMLParserTest extends TestCase {
      * test the new HTMLParser on a simple HTML string and use the Jaxen XPath navigator
      * to validate results
      *
-     * @throws org.xml.sax.SAXException
-     * @throws IOException yes
-     * @throws SAXException yes
-     * @throws JaxenException yes
+     * @throws Exception failure
      */
-    public void testSimpleHTMLString() throws SAXException, IOException, JaxenException {
+    public void testSimpleHTMLString() throws Exception {
 
         WebClient webClient = new WebClient();
         WebResponse webResponse = new StringWebResponse(
@@ -95,11 +89,9 @@ public class HTMLParserTest extends TestCase {
      * test the new HTMLParser by accessing the HtmlUnit home page and detecting the copyright
      * string.
      *
-     * @throws SAXException yes
-     * @throws IOException yes
-     * @throws JaxenException yes
+     * @throws Exception failure
      */
-    public static void testHtmlUnitHomePage() throws SAXException, IOException, JaxenException {
+    public static void testHtmlUnitHomePage() throws Exception {
 
         URL htmlUnitSite = new URL("http://htmlunit.sourceforge.net");
         try {

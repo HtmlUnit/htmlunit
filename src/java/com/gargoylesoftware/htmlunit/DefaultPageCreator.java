@@ -38,8 +38,9 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
+
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
-import org.xml.sax.SAXException;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * The default implementation of PageCreator.
@@ -56,7 +57,6 @@ public class DefaultPageCreator implements PageCreator {
     public DefaultPageCreator() {
     }
 
-
     /**
      * Create a Page object for the specified web response.
      *
@@ -67,39 +67,56 @@ public class DefaultPageCreator implements PageCreator {
      * @return The new page object
      */
     public Page createPage(
-            final WebClient webClient,
+            final WebClient webClient, //not used!
             final WebResponse webResponse,
             final WebWindow webWindow )
         throws
             IOException {
-
-        final Page newPage;
         final String contentType = webResponse.getContentType();
+        final Page newPage;
+        
         if( contentType.equals( "text/html" ) || contentType.equals( "text/xhtml" ) ) {
-            try {
-                HTMLParser parser = new HTMLParser();
-                newPage = parser.parse(webClient, webResponse, webWindow);
-            }
-            catch (SAXException e) {
-                throw new ObjectInstantiationException("Unable to parse html input", e);
-            }
+            newPage = createHtmlPage(webResponse, webWindow);
         }
         //else if( contentType.equals("application/xhtml+xml") ) {
         // Create validated xhtml document
         //}
         else if( contentType.equals("text/javascript") || contentType.equals("application/x-javascript") ) {
-            newPage = new JavaScriptPage( webResponse, webWindow );
-            webWindow.setEnclosedPage(newPage);
+            newPage = createJavaScriptPage(webResponse, webWindow);
         }
         else if( contentType.startsWith( "text/" ) ) {
-            newPage = new TextPage( webResponse, webWindow );
-            webWindow.setEnclosedPage(newPage);
+            newPage = createTextPage(webResponse, webWindow);
         }
         else {
-            newPage = new UnexpectedPage( webResponse, webWindow );
-            webWindow.setEnclosedPage(newPage);
+            newPage = createUnexpectedPage(webResponse, webWindow);
         }
+        return newPage;    
+
+    }
+    private HtmlPage createHtmlPage(final WebResponse webResponse, final WebWindow webWindow) 
+            throws IOException {
+        final HtmlPage newPage;
+        HTMLParser parser = new HTMLParser();
+        newPage = parser.parse(webWindow.getWebClient(), webResponse, webWindow);
         return newPage;
     }
+    private JavaScriptPage createJavaScriptPage(final WebResponse webResponse, final WebWindow webWindow) {
+        final JavaScriptPage newPage;
+        newPage = new JavaScriptPage( webResponse, webWindow );
+        webWindow.setEnclosedPage(newPage);
+        return newPage;
+    }
+    private TextPage createTextPage(final WebResponse webResponse, final WebWindow webWindow) {
+        final TextPage newPage;
+        newPage = new TextPage( webResponse, webWindow );
+        webWindow.setEnclosedPage(newPage);
+        return newPage;
+    }
+    private UnexpectedPage createUnexpectedPage(final WebResponse webResponse, final WebWindow webWindow) {
+        final UnexpectedPage newPage;
+        newPage = new UnexpectedPage( webResponse, webWindow );
+        webWindow.setEnclosedPage(newPage);
+        return newPage;
+    }    
 }
 
