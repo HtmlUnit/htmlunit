@@ -126,7 +126,7 @@
                 <htmlunit.description>Additional support for testing</htmlunit.description>
             </properties>
         </dependency>
-<!--
+
         <dependency>
             <groupId>commons-jelly</groupId>
             <artifactId>commons-jelly</artifactId>
@@ -197,7 +197,7 @@
                 <htmlunit.description>Javabean support</htmlunit.description>
             </properties>
         </dependency>
--->        
+       
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
