@@ -146,7 +146,7 @@
 			<dd>The<a href="http://xml.apache.org/xerces2-j/index.html">
 			Xerces</a> xml parser from Apache. </dd>
 
-			<dt>js.jar <version-string>1.5R3</version-string></dt>
+			<dt>js.jar <version-string>1.5R4</version-string></dt>
 			<dd><a href="http://www.mozilla.org/rhino">Rhino</a>,
 			a javascript engine from the Mozilla project.  This jar is optional - if it isn't
 			found then javascript support will be disabled but the rest of HtmlUnit will
