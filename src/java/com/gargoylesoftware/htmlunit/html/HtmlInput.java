@@ -147,19 +147,11 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.</p>
      *
-     * <p>Checkbox inputs have a default value as described in
-     * <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/value_1.asp"
-     * document</a></p>
-     *
      * @return The value of the attribute "value" or an empty string if that
-     * attribute isn't defined or the default as above.
+     * attribute isn't defined
      */
     public final String getValueAttribute() {
-        String value = getAttributeValue("value");
-        if( value == ATTRIBUTE_NOT_DEFINED && getTypeAttribute().equals("checkbox")) {
-            value = "on";
-        }
-        return value;
+        return getAttributeValue("value");
     }
 
 

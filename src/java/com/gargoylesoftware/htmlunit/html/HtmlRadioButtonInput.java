@@ -50,6 +50,7 @@ import java.util.Map;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
  */
 public class HtmlRadioButtonInput extends HtmlInput {
 
@@ -57,13 +58,20 @@ public class HtmlRadioButtonInput extends HtmlInput {
     private final boolean initialCheckedState_;
 
     /**
-     *  Create an instance
-     *
+     * Create an instance
+     * If no value is specified, it is set to "on" as browsers do (eg IE6 and Mozilla 1.7) 
+     * even if spec says that it is not allowed 
+     * (<a href="http://www.w3.org/TR/REC-html40/interact/forms.html#adef-value-INPUT">W3C</a>).
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
     public HtmlRadioButtonInput( final HtmlPage page, final Map attributes ) {
         super(page, attributes);
+
+        // default value for both IE6 and Mozilla 1.7 even if spec says it is unspecified
+        if (getAttributeValue("value") == ATTRIBUTE_NOT_DEFINED) {
+            setAttributeValue("value", "on");
+        }
 
         //From the checkbox creator
         initialCheckedState_ = isAttributeDefined("checked");

@@ -443,4 +443,28 @@ public class InputTest extends WebTestCase {
         final List expectedAlerts = Arrays.asList(new String[] {"foo"});
         assertEquals(expectedAlerts, collectedAlerts);
     }    
+
+    /**
+     * Test the default value of a radio and checkbox buttons.
+     * @throws Exception if the test fails
+     */
+    public void testDefautValue() throws Exception {
+        final String content
+             = "<html><head><title>First</title><script>\n"
+             + "function doTest() {\n"
+             + "    alert(document.myForm.myRadio.value);\n"
+             + "    alert(document.myForm.myCheckbox.value);\n"
+             + "}\n</script></head>"
+             + "<body onload='doTest()'>\n"
+             + "<form name='myForm' action='foo'>\n"
+             + "<input type='radio' name='myRadio'/>"
+             + "<input type='checkbox' name='myCheckbox'/>"
+             + "</form></body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        
+        final List expectedAlerts = Arrays.asList( new String[]{"on", "on"} );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }

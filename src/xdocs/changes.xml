@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1081557">
+                Automatically add value="on" for radio buttons and checkboxes without value attribute (available for JS access and used when submitting a form as browsers do).
+            </action>
             <action type="update" dev="mguillem" due-to="sdanig" id="1075526">
                 Added support for methods moveBy, scroll, scrollBy, scrollByLines, scrollByPages and scrollTo for JS window object. 
             </action>
