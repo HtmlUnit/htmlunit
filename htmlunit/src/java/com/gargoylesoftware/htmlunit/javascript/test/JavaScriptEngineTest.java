@@ -207,7 +207,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String htmlContent
              = "<html><head><script language='javascript'>"
              + "var f1 = '<html><head><title>frame1</title></head><body><h1>frame1</h1></body></html>';\n"
-             + "var f1 = '<html><head><title>frame2</title></head><body><h1>frame2</h1></body></html>';\n"
+             + "var f2 = '<html><head><title>frame2</title></head><body><h1>frame2</h1></body></html>';\n"
              + "</script></head>\n"
              + "<frameset border='0' frameborder='0' framespacing='0' rows='100,*'>"
              + "    <frame id='frame1' src='javascript:parent.f1'/>"

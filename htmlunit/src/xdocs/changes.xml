@@ -52,7 +52,21 @@
 			a debugging aid.
 		</change>
 		<change type="fix">
-			Page load would blow up if no body tag found.  Framesets may not contain any body tags.
+			Page load would blow up if no body tag found.  Framesets aren't required to
+			have body tags
+		</change>
+		<change type="new">
+			Added support for javascript urls in Frame and IFrame src tags
+		</change>
+		<change type="change">
+			Improved some error messages during initialization
+		</change>
+		<change type="new">
+			New class ObjectInitializationException
+		</change>
+		<change type="new">
+			Added protocol package for url protocols and added protocol/javascript package for
+			code that supports javascript urls
 		</change>
 	</change-log>
 </section>

@@ -671,7 +671,7 @@ public final class HtmlPage
      * @deprecated use {@link #executeJavaScriptIfPossible(String, String, boolean)} instead.
      * This method will be removed before 1.1 goes final!
      */
-    public Page executeJavascriptIfPossible( String sourceCode, final String sourceName ) {
+    public Page executeJavascriptIfPossible( final String sourceCode, final String sourceName ) {
         final ScriptResult scriptResult
             = executeJavaScriptIfPossible(sourceCode, sourceName, false);
         return scriptResult.getNewPage();

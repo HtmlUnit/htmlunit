@@ -7,11 +7,14 @@
 package com.gargoylesoftware.htmlunit;
 
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringBufferInputStream;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -293,10 +296,13 @@ public class WebClient {
             FailingHttpStatusCodeException {
 
         final String protocol = url.getProtocol();
+        final WebResponse webResponse;
         if( protocol.equals("javascript") ) {
-            throw new IllegalArgumentException("Javascript urls not supported yet ["+url.toExternalForm()+"]");
+            webResponse = makeWebResponseForJavaScriptUrl(webWindow, url);
         }
-        final WebResponse webResponse = getWebConnection().getResponse( url, method, parameters );
+        else {
+            webResponse = getWebConnection().getResponse( url, method, parameters );
+        }
         final String contentType = webResponse.getContentType();
         final int statusCode = webResponse.getStatusCode();
 
@@ -894,6 +900,29 @@ public class WebClient {
             buffer.append("/");
         }
         return makeUrl( buffer.toString() );
+    }
+
+
+    private WebResponse makeWebResponseForJavaScriptUrl( final WebWindow webWindow, final URL url ) {
+        if( webWindow instanceof HtmlElement == false ) {
+            throw new IllegalArgumentException(
+                "javascript urls can only be used to load content into frames and iframes");
+        }
+
+        final HtmlPage enclosingPage=  ((HtmlElement)webWindow).getPage();
+        final ScriptResult scriptResult = enclosingPage.executeJavaScriptIfPossible(
+            url.toExternalForm(), "javascript url", false );
+
+        final String contentString = scriptResult.getJavaScriptResult().toString();
+        return new WebResponse() {
+            public int getStatusCode() { return 200; }
+            public String getStatusMessage() { return "OK"; }
+            public String getContentType() { return "text/html"; }
+            public String getContentAsString() { return contentString; }
+            public InputStream getContentAsStream(){ return new StringBufferInputStream(contentString); }
+            public URL getUrl() { return url; }
+            public String getResponseHeaderValue( final String key ) { return ""; }
+        };
     }
 }
 
