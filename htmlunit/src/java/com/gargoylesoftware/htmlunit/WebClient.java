@@ -674,7 +674,7 @@ public class WebClient {
      * @return The new window.
      * @exception  IOException If an IO error occurs
      */
-    public WebWindow openWindow( final URL url, final String windowName ) throws IOException {
+    public WebWindow openWindow( final URL url, final String windowName ) {
         assertNotNull("windowName", windowName);
 
         WebWindow window = null;
@@ -692,7 +692,12 @@ public class WebClient {
         }
 
         if( url != null ) {
-            getPage(window, url, SubmitMethod.GET, Collections.EMPTY_LIST);
+            try {
+                getPage(window, url, SubmitMethod.GET, Collections.EMPTY_LIST);
+            }
+            catch( final IOException e ) {
+                getLog().error("Error when loading content into newly created window", e);
+            }
         }
         return window;
     }
