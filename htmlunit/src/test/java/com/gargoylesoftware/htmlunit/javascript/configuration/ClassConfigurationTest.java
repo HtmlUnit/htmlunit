@@ -71,8 +71,8 @@ public class ClassConfigurationTest extends WebTestCase {
      * @throws Exception - Exception on error
      */
     public void testConfigurationSimplePropertyEquality() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class.getName()); 
-        final ClassConfiguration config2 = new ClassConfiguration(ConfigTestClass.class.getName());
+        final ClassConfiguration config1 = new ClassConfiguration("c1", ConfigTestClass.class.getName()); 
+        final ClassConfiguration config2 = new ClassConfiguration("c2", ConfigTestClass.class.getName());
         
         config1.addProperty("test", true, true);
         assertFalse("Configs should not be equal", config1.equals(config2));
@@ -86,8 +86,8 @@ public class ClassConfigurationTest extends WebTestCase {
      * @throws Exception - Exception on error
      */
     public void testConfigurationSimpleFunctionEquality() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class.getName()); 
-        final ClassConfiguration config2 = new ClassConfiguration(ConfigTestClass.class.getName());
+        final ClassConfiguration config1 = new ClassConfiguration("c1", ConfigTestClass.class.getName()); 
+        final ClassConfiguration config2 = new ClassConfiguration("c2", ConfigTestClass.class.getName());
         
         config1.addFunction("testFunction");
         assertFalse("Configs should not be equal", config1.equals(config2));
@@ -102,8 +102,8 @@ public class ClassConfigurationTest extends WebTestCase {
      * @throws Exception - Exception on error
      */
     public void testConfigurationSimpleUnequalProperties() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class.getName()); 
-        final ClassConfiguration config2 = new ClassConfiguration(ConfigTestClass.class.getName());
+        final ClassConfiguration config1 = new ClassConfiguration("c1", ConfigTestClass.class.getName()); 
+        final ClassConfiguration config2 = new ClassConfiguration("c2", ConfigTestClass.class.getName());
         
         config1.addProperty("test", true, true);
         assertFalse("Configs should not be equal", config1.equals(config2));
@@ -118,8 +118,8 @@ public class ClassConfigurationTest extends WebTestCase {
      * @throws Exception - Exception on error
      */
     public void testConfigurationPropertyEqualityWithBrowser() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class.getName()); 
-        final ClassConfiguration config2 = new ClassConfiguration(ConfigTestClass.class.getName());
+        final ClassConfiguration config1 = new ClassConfiguration("c1", ConfigTestClass.class.getName()); 
+        final ClassConfiguration config2 = new ClassConfiguration("c2", ConfigTestClass.class.getName());
         
         config1.addProperty("test", true, true);
         config2.addProperty("test", true, true);
@@ -134,8 +134,8 @@ public class ClassConfigurationTest extends WebTestCase {
      * @throws Exception - Exception on error
      */
     public void testConfigurationPropertyEqualityWithDifferentBrowsers() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class.getName()); 
-        final ClassConfiguration config2 = new ClassConfiguration(ConfigTestClass.class.getName());
+        final ClassConfiguration config1 = new ClassConfiguration("c1", ConfigTestClass.class.getName()); 
+        final ClassConfiguration config2 = new ClassConfiguration("c2", ConfigTestClass.class.getName());
         
         config1.addProperty("test", true, true);
         config2.addProperty("test", true, true);
@@ -152,7 +152,7 @@ public class ClassConfigurationTest extends WebTestCase {
      * @throws Exception - Exception on error
      */
     public void testNoSetterMethod() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class.getName());
+        final ClassConfiguration config1 = new ClassConfiguration("c1", ConfigTestClass.class.getName());
         try {
             config1.addProperty("getterOnly", true, true);
             fail("Should produce an exception due to not finding the methods");
@@ -168,7 +168,7 @@ public class ClassConfigurationTest extends WebTestCase {
      * @throws Exception - Exception on error
      */
     public void testNoFunctionMethod() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class.getName());
+        final ClassConfiguration config1 = new ClassConfiguration("c1", ConfigTestClass.class.getName());
         try {
             config1.addFunction("noTestFunction");
             fail("Should produce an exception due to not finding the methods");

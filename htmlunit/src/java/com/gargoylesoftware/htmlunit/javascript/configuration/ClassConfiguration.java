@@ -43,6 +43,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * A container for all the javascript configuration information.
  *
@@ -63,29 +66,35 @@ public final class ClassConfiguration {
     /**
      * Constructor
      * 
+     * @param classname the name of the configuration class this entry is for
      * @param implementingClass - the fully qualified name of the class implimenting this functionality
      * @param extendedClass - The name of the class that this class extends
      * @throws ClassNotFoundException - If the implementing class is not found
      */
-    public ClassConfiguration(final String implementingClass, final String extendedClass) 
+    public ClassConfiguration(final String classname, final String implementingClass, final String extendedClass) 
         throws ClassNotFoundException {
-        init(implementingClass, extendedClass);
+        init(classname, implementingClass, extendedClass);
     }
     
     /**
      * Constructor for when there is not an extending class
      * 
+     * @param classname the name of the configuration class this entry is for
      * @param implementingClass - the fully qualified name of the class implimenting this functionality
      * @throws ClassNotFoundException - If the implementing class is not found
      */
-    public ClassConfiguration(final String implementingClass) throws ClassNotFoundException {
-        
-        init(implementingClass, null);
+    public ClassConfiguration(final String classname, final String implementingClass) throws ClassNotFoundException {
+        init(classname, implementingClass, "");
     }
 
     
-    private void init(final String implementingClass, final String extendedClass) 
+    private static Log getLog() {
+        return LogFactory.getLog(ClassConfiguration.class);
+    }
+
+    private void init(final String classname, final String implementingClass, final String extendedClass) 
         throws ClassNotFoundException {
+        className_ = classname;
         this.extendedClass_ = extendedClass;
         linkedClass_ = Class.forName(implementingClass);
     }

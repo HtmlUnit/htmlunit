@@ -72,6 +72,16 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.resetClassForTesting();
     }
 
+    /**
+     * Reset the JavaScriptConfiguration file for each test to it's inital clean state.
+     * 
+     * @throws Exception if the test fails
+     */
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        JavaScriptConfiguration.resetClassForTesting();
+    }
+
 
     /**
      * Test loading a configuration from the supplied stream
@@ -134,7 +144,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration(Document.class.getName(), "Document");
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
         expectedConfig.addProperty("readyState", true, false);
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -168,7 +178,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.NETSCAPE_6_2_3;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration(Document.class.getName(), "Document");
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
     
@@ -199,7 +209,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getTestInstance();
-        final ClassConfiguration expectedConfig = new ClassConfiguration(Document.class.getName(), "Document");
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
         expectedConfig.addProperty("readyState", true, false);
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -268,7 +278,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration(Document.class.getName(), "Document");
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
         assertTrue("Document should not property did not match", 
             configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -301,7 +311,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration(Document.class.getName(), "Document");
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
         assertTrue("Document should not property did not match", 
             configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -335,7 +345,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration(Document.class.getName(), "Document");
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
         assertTrue("Document should not property did not match", 
             configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -360,7 +370,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration(Document.class.getName(), "Document");
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
         expectedConfig.addFunction("createAttribute");
         assertTrue("Document function did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -387,7 +397,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration(Document.class.getName(), "Document");
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", Document.class.getName());
         assertTrue("Document function did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
 
