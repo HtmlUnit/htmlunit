@@ -56,7 +56,7 @@ public class FocusableHostElement extends HTMLElement {
      * Remove focus from this element.
      */
     public void jsFunction_blur() {
-        FocusableElement element = (FocusableElement) getDomNodeOrDie();
+        final FocusableElement element = (FocusableElement) getDomNodeOrDie();
         element.blur();
     }
 
@@ -65,7 +65,7 @@ public class FocusableHostElement extends HTMLElement {
      * Set the focus to this element.
      */
     public void jsFunction_focus() {
-        FocusableElement element = (FocusableElement) getDomNodeOrDie();
+        final FocusableElement element = (FocusableElement) getDomNodeOrDie();
         element.focus();
     }
 

@@ -71,7 +71,7 @@ public class WebClientTag extends HtmlUnitTagSupport {
      * @param xmlOutput to write output
      * @throws JellyTagException when any error occurs
      */
-    public void doTag(XMLOutput xmlOutput) throws JellyTagException {
+    public void doTag(final XMLOutput xmlOutput) throws JellyTagException {
         final BrowserVersion browserVersion = getBrowserVersion();
         if( browserVersion == null ) {
             webClient_ = new WebClient();

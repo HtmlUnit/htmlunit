@@ -150,7 +150,7 @@ public class EventTest extends WebTestCase {
         onClickPageTest(content, expectedAlerts);
     }
 
-    private void onClickPageTest(final String content, List expectedAlerts) throws Exception, IOException {
+    private void onClickPageTest(final String content, final List expectedAlerts) throws Exception, IOException {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
 

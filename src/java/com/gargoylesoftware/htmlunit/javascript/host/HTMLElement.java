@@ -204,7 +204,7 @@ public class HTMLElement extends NodeImpl {
      * @param start The scriptable to get the variable from.
      * @return The attribute value
      */
-    public Object get( String name, Scriptable start ) {
+    public Object get( final String name, final Scriptable start ) {
         Object result = super.get( name, start );
         if ( result == NOT_FOUND ) {
             final HtmlElement htmlElement = getHtmlElementOrNull();
@@ -229,7 +229,7 @@ public class HTMLElement extends NodeImpl {
      * @param attributeName attribute name.
      * @return The value of the specified attribute
      */
-    public String jsFunction_getAttribute(String attributeName) {
+    public String jsFunction_getAttribute(final String attributeName) {
         return getHtmlElementOrDie().getAttributeValue(attributeName);
     }
 
@@ -306,7 +306,7 @@ public class HTMLElement extends NodeImpl {
      * @return the contents of this node as html
      */
     public String jsGet_innerHTML() {
-        StringBuffer buf = new StringBuffer();
+        final StringBuffer buf = new StringBuffer();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
         printChildren(buf, getDomNodeOrDie());
 
@@ -318,7 +318,7 @@ public class HTMLElement extends NodeImpl {
      * @return the contents of this node as text
      */
     public String jsGet_innerText() {
-        StringBuffer buf = new StringBuffer();
+        final StringBuffer buf = new StringBuffer();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
         printChildren(buf, getDomNodeOrDie(), false);
 
@@ -334,7 +334,7 @@ public class HTMLElement extends NodeImpl {
      * (note: the formatting isn't currently exactly the same as IE)
      */
     public String jsGet_outerHTML() {
-        StringBuffer buf = new StringBuffer();
+        final StringBuffer buf = new StringBuffer();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
         printNode(buf, getDomNodeOrDie());
 
@@ -355,7 +355,9 @@ public class HTMLElement extends NodeImpl {
         printNode(buffer, node, true);
     }
     
-    private void printNode(final StringBuffer buffer, final DomNode node, boolean asInnerHTML) {
+    private void printNode(
+            final StringBuffer buffer, final DomNode node,
+            final boolean asInnerHTML) {
         if (node instanceof DomCharacterData) {
             buffer.append(node.getNodeValue().replaceAll("  ", " ")); // remove white space sequences
         }
@@ -493,8 +495,8 @@ public class HTMLElement extends NodeImpl {
                 final HtmlBody body = (HtmlBody) pseudoPage.getDocumentElement().getFirstChild();
                 
                 final Collection nodes = new ArrayList();
-                for (Iterator iter = body.getChildIterator(); iter.hasNext();) {
-                    DomNode child = (DomNode) iter.next();
+                for (final Iterator iter = body.getChildIterator(); iter.hasNext();) {
+                    final DomNode child = (DomNode) iter.next();
                     nodes.add(copy(child, getHtmlElementOrDie().getPage()));
                 }
                 return nodes;
@@ -531,16 +533,16 @@ public class HTMLElement extends NodeImpl {
         }
         else {
             final HtmlElement htmlElt = (HtmlElement) node;
-            IElementFactory factory = HTMLParser.getFactory(htmlElt.getNodeName());
+            final IElementFactory factory = HTMLParser.getFactory(htmlElt.getNodeName());
             final AttributesImpl attributes = new AttributesImpl();
-            for (Iterator iter = htmlElt.getAttributeEntriesIterator(); iter.hasNext();) {
+            for (final Iterator iter = htmlElt.getAttributeEntriesIterator(); iter.hasNext();) {
                 final Map.Entry entry = (Map.Entry) iter.next();
                 final String name = (String) entry.getKey();
                 final String value = (String) entry.getValue();
                 attributes.addAttribute(null, name, name, null, value);
             }
             copy = factory.createElement(page, node.getNodeName(), attributes);
-            for (Iterator iter = node.getChildIterator(); iter.hasNext();) {
+            for (final Iterator iter = node.getChildIterator(); iter.hasNext();) {
                 final DomNode child = (DomNode) iter.next();
                 copy.appendChild(copy(child, page));
             }
@@ -869,7 +871,7 @@ public class HTMLElement extends NodeImpl {
      * @return the version of the specified component.
      * Current implementation always return "1.0"
      */
-    public String getComponentVersion(String id, String idType) {
+    public String getComponentVersion(final String id, final String idType) {
         return "1.0";
     }
 
@@ -880,7 +882,7 @@ public class HTMLElement extends NodeImpl {
      * @param minVersion the minimum version to check for
      * @return <tt>true</tt> if the specified component is installed.
      */
-    public boolean isComponentInstalled(String id, String idType, String minVersion) {
+    public boolean isComponentInstalled(final String id, final String idType, final String minVersion) {
         return false;
     }
 

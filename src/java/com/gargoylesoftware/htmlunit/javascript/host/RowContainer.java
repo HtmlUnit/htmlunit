@@ -116,7 +116,9 @@ public class RowContainer extends HTMLElement {
      * @param f the function object that invoked this function.
      * @return the newly-created row.
      */
-    public static Object jsFunction_insertRow(Context cx, Scriptable s, Object[] args, Function f) {
+    public static Object jsFunction_insertRow(
+            final Context cx, final Scriptable s, final Object[] args,
+            final Function f) {
         final RowContainer rowContainer = (RowContainer) s;
         final ElementArray rows = (ElementArray) rowContainer.jsGet_rows();
         final Number rowIndex;

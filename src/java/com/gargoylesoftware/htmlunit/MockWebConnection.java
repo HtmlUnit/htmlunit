@@ -63,10 +63,10 @@ import org.apache.commons.logging.LogFactory;
 public class MockWebConnection extends WebConnection {
     private class ResponseEntry {
         private void validateParameters(
-                Object content, 
-                String statusMessage, 
-                String contentType,
-                List responseHeaders) {
+                final Object content, 
+                final String statusMessage, 
+                final String contentType,
+                final List responseHeaders) {
             Assert.notNull("content", content);
             Assert.notNull("statusMessage", statusMessage);
             Assert.notNull("contentType", contentType);
@@ -219,7 +219,7 @@ public class MockWebConnection extends WebConnection {
                 try {
                     return new String(responseEntry.content_, this.getContentCharSet());
                 }
-                catch (UnsupportedEncodingException e) {
+                catch (final UnsupportedEncodingException e) {
                     return null;
                 }
             }

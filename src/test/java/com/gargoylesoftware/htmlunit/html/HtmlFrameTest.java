@@ -157,7 +157,7 @@ public class HtmlFrameTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
 
-        HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
         
         // loads something else to trigger frame de-registration

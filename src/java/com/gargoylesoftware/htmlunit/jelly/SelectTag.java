@@ -80,7 +80,7 @@ public class SelectTag extends TagSupport implements VariableContext {
      * @throws MissingAttributeException if attribute is missing
      * @throws JellyTagException If a problem occurs
      */
-    public void doTag(XMLOutput output) throws MissingAttributeException, JellyTagException {
+    public void doTag(final XMLOutput output) throws MissingAttributeException, JellyTagException {
         if (var_ == null) {
             throw new MissingAttributeException( "var" );
         }
@@ -90,11 +90,11 @@ public class SelectTag extends TagSupport implements VariableContext {
 
         Object value = null;
         try {
-            HtmlUnitXPath xpath = new HtmlUnitXPath(xpath_);
+            final HtmlUnitXPath xpath = new HtmlUnitXPath(xpath_);
             xpath.setVariableContext(this);
             value = xpath.evaluate(null);
         }
-        catch (JaxenException e) {
+        catch (final JaxenException e) {
             throw new JellyTagException(e);
         }
 
@@ -123,10 +123,10 @@ public class SelectTag extends TagSupport implements VariableContext {
      * @return the variable value
      * @throws UnresolvableException variable not defined
      */
-    public Object getVariableValue(String namespaceURI, String prefix, String localName)
+    public Object getVariableValue(final String namespaceURI, final String prefix, final String localName)
             throws UnresolvableException {
 
-        Object var = context.getVariable(localName);
+        final Object var = context.getVariable(localName);
         if(var == null) {
             throw new UnresolvableException(localName);
         }

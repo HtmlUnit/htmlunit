@@ -87,7 +87,7 @@ public abstract class ScriptEngine {
      * perform initialization for the given page
      * @param page the page to initialize for
      */
-    public abstract void initialize(HtmlPage page);
+    public abstract void initialize(final HtmlPage page);
 
     /**
      * Execute the specified source code in the context of the given page.

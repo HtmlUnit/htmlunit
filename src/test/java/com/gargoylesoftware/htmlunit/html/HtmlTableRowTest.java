@@ -171,8 +171,8 @@ public class HtmlTableRowTest extends WebTestCase {
      * child.
      */
     public void testClonedCellChildHasDifferentId() {
-        HtmlElement cellChild = (HtmlElement) cell_.getFirstChild();
-        HtmlElement cellChildClone = (HtmlElement) cellClone_.getFirstChild();
+        final HtmlElement cellChild = (HtmlElement) cell_.getFirstChild();
+        final HtmlElement cellChildClone = (HtmlElement) cellClone_.getFirstChild();
         assertFalse(cellChild.getId().equals(cellChildClone.getId()));
         assertEquals("", cellChildClone.getId());
     }
@@ -227,10 +227,10 @@ public class HtmlTableRowTest extends WebTestCase {
      * refers to the same DOM node we think it should.
      */
     public void testScriptCanGetOriginalCell() {
-        String cmd = "document.getElementById('cell')";
-        Object object = client_.getScriptEngine().execute(page_, cmd, "test");
+        final String cmd = "document.getElementById('cell')";
+        final Object object = client_.getScriptEngine().execute(page_, cmd, "test");
 
-        HtmlElement cellElement = ((HTMLElement) object).getHtmlElementOrDie();
+        final HtmlElement cellElement = ((HTMLElement) object).getHtmlElementOrDie();
         assertSame(cell_, cellElement);
     }
 
@@ -239,8 +239,8 @@ public class HtmlTableRowTest extends WebTestCase {
      * same one the DOM node thinks it's wrapped by.
      */
     public void testCellScriptObjectIsReturnedByScript() {
-        String cmd = "document.getElementById('cell')";
-        HTMLElement jselement = (HTMLElement) client_.getScriptEngine()
+        final String cmd = "document.getElementById('cell')";
+        final HTMLElement jselement = (HTMLElement) client_.getScriptEngine()
                 .execute(page_, cmd, "test");
 
         assertSame(jselement, cell_.getScriptObject());
@@ -251,10 +251,10 @@ public class HtmlTableRowTest extends WebTestCase {
      * ScriptableObject that we think it should.
      */
     public void testScriptCanSetJsPropertyOnCell() {
-        String cmd = "document.getElementById('cell').a='original';document.getElementById('cell')";
-        Object object = client_.getScriptEngine().execute(page_, cmd, "test");
+        final String cmd = "document.getElementById('cell').a='original';document.getElementById('cell')";
+        final Object object = client_.getScriptEngine().execute(page_, cmd, "test");
 
-        HTMLElement jselement = ((HTMLElement) object);
+        final HTMLElement jselement = ((HTMLElement) object);
         assertEquals("original", ScriptableObject.getProperty(jselement, "a"));
 
         assertSame(jselement, cell_.getScriptObject());
@@ -264,7 +264,7 @@ public class HtmlTableRowTest extends WebTestCase {
      * Ensure that a script can set the disabled property on a DOM node.
      */
     public void testCloneScriptCanSetDisabledOnCell() {
-        String cmd = "document.getElementById('cell').disabled='true'";
+        final String cmd = "document.getElementById('cell').disabled='true'";
         client_.getScriptEngine().execute(page_, cmd, "test");
         assertEquals("disabled", cell_.getAttributeValue("disabled"));
     }
@@ -273,7 +273,7 @@ public class HtmlTableRowTest extends WebTestCase {
      * Ensure that a script can set an attribute on the DOM node.
      */
     public void testCloneScriptCanSetAttributeOnCell() {
-        String cmd = "document.getElementById('cell').setAttribute('a','original')";
+        final String cmd = "document.getElementById('cell').setAttribute('a','original')";
         client_.getScriptEngine().execute(page_, cmd, "test");
         assertEquals("original", cell_.getAttributeValue("a"));
     }
@@ -285,7 +285,7 @@ public class HtmlTableRowTest extends WebTestCase {
      * that same attribute on the clone.
      */
     public void testCloneScriptSetAttributeIndependentOfOriginal() {
-        String cmd = "document.getElementById('cell').setAttribute('a','original')";
+        final String cmd = "document.getElementById('cell').setAttribute('a','original')";
         client_.getScriptEngine().execute(page_, cmd, "test");
 
         assertEquals("original", cell_.getAttributeValue("a"));
@@ -297,7 +297,7 @@ public class HtmlTableRowTest extends WebTestCase {
      * that same attribute on the clone.
      */
     public void testCloneScriptSetDisabledIndependentOfOriginal() {
-        String cmd = "document.getElementById('cell').disabled = 'true'";
+        final String cmd = "document.getElementById('cell').disabled = 'true'";
         client_.getScriptEngine().execute(page_, cmd, "test");
 
         assertEquals("disabled", cell_.getAttributeValue("disabled"));
@@ -311,7 +311,7 @@ public class HtmlTableRowTest extends WebTestCase {
      */
     public void testCloneHasDifferentScriptableObject() {
 
-        String cmd = "document.getElementById('cell')"; // force it to have a
+        final String cmd = "document.getElementById('cell')"; // force it to have a
         // scriptable object
         client_.getScriptEngine().execute(page_, cmd, "test");
 
@@ -323,13 +323,13 @@ public class HtmlTableRowTest extends WebTestCase {
      * the cloned child.
      */
     public void testScriptDomOperations() {
-        String cmd = "document.getElementById('foo').value = 'Input!';document.getElementById('foo')";
+        final String cmd = "document.getElementById('foo').value = 'Input!';document.getElementById('foo')";
         client_.getScriptEngine().execute(page_, cmd, "test");
 
-        HtmlElement input = (HtmlElement) cell_.getFirstChild();
+        final HtmlElement input = (HtmlElement) cell_.getFirstChild();
         assertEquals("Input!", input.getAttributeValue("value"));
 
-        HtmlElement inputClone = (HtmlElement) cellClone_.getFirstChild();
+        final HtmlElement inputClone = (HtmlElement) cellClone_.getFirstChild();
         assertFalse("Input!".equals(inputClone.getAttributeValue("value")));
     }
 }

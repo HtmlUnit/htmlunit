@@ -110,11 +110,11 @@ public class XmlPage implements Page {
         content_ = webResponse.getContentAsString();
         enclosingWindow_ = enclosingWindow;
 
-        DocumentBuilderFactory factory =
+        final DocumentBuilderFactory factory =
             DocumentBuilderFactory.newInstance();
-        InputSource source = new InputSource(new StringReader(content_));
+        final InputSource source = new InputSource(new StringReader(content_));
         try {
-           DocumentBuilder builder = factory.newDocumentBuilder();
+            final DocumentBuilder builder = factory.newDocumentBuilder();
            builder.setErrorHandler(DISCARD_MESSAGES_HANDLER);
            document_ = builder.parse(source);
         }

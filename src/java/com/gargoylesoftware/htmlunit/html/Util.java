@@ -60,10 +60,10 @@ public final class Util {
      */
     public static Iterator getFollowingSiblingAxisIterator(final DomNode contextNode) {
         return new NodeIterator (contextNode) {
-            protected DomNode getFirstNode (DomNode node) {
+            protected DomNode getFirstNode (final DomNode node) {
                 return getNextNode(node);
             }
-            protected DomNode getNextNode (DomNode node) {
+            protected DomNode getNextNode (final DomNode node) {
                 return node.getNextSibling();
             }
         };
@@ -77,10 +77,10 @@ public final class Util {
      */
     public static Iterator getPrecedingSiblingAxisIterator (final DomNode contextNode) {
         return new NodeIterator (contextNode) {
-            protected DomNode getFirstNode (DomNode node) {
+            protected DomNode getFirstNode (final DomNode node) {
                 return getNextNode(node);
             }
-            protected DomNode getNextNode (DomNode node) {
+            protected DomNode getNextNode (final DomNode node) {
                 return node.getPreviousSibling();
             }
         };
@@ -94,10 +94,10 @@ public final class Util {
      */
     public static Iterator getFollowingAxisIterator (final DomNode contextNode) {
         return new NodeIterator (contextNode) {
-            protected DomNode getFirstNode (DomNode node) {
+            protected DomNode getFirstNode (final DomNode node) {
                 return getNextNode(node);
             }
-            protected DomNode getNextNode (DomNode node) {
+            protected DomNode getNextNode (final DomNode node) {
                 if (node == null) {
                     return null;
                 }
@@ -138,12 +138,12 @@ public final class Util {
      */
     public static Iterator getPrecedingAxisIterator (final DomNode contextNode) {
         return new NodeIterator(contextNode) {
-            protected DomNode getFirstNode (DomNode node) {
+            protected DomNode getFirstNode (final DomNode node) {
                 if (node == null) {
                     return null;
                 }
                 else {
-                    DomNode sibling = node.getPreviousSibling();
+                    final DomNode sibling = node.getPreviousSibling();
                     if (sibling == null) {
                         return getFirstNode(node.getParentNode());
                     }
@@ -152,7 +152,7 @@ public final class Util {
                     }
                 }
             }
-            protected DomNode getNextNode (DomNode node) {
+            protected DomNode getNextNode (final DomNode node) {
                 if (node == null) {
                     return null;
                 }
@@ -187,7 +187,7 @@ abstract class NodeIterator implements Iterator {
     /**
      * @param contextNode The starting node.
      */
-    public NodeIterator (DomNode contextNode) {
+    public NodeIterator (final DomNode contextNode) {
         node_ = getFirstNode(contextNode);
     }
     /** @inheritDoc Iterator#hasNext() */
@@ -217,7 +217,7 @@ abstract class NodeIterator implements Iterator {
      * @return The first node in the iteration.
      * @see #getNextNode
      */
-    protected abstract DomNode getFirstNode (DomNode contextNode);
+    protected abstract DomNode getFirstNode (final DomNode contextNode);
     /**
      * Get the next node for iteration.
      *
@@ -229,7 +229,7 @@ abstract class NodeIterator implements Iterator {
      * if there is none.
      * @see #getFirstNode
      */
-    protected abstract DomNode getNextNode (DomNode contextNode);
+    protected abstract DomNode getNextNode (final DomNode contextNode);
 }
 
 

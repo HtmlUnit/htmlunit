@@ -252,7 +252,7 @@ public class Window extends SimpleScriptable {
                     Thread.sleep(timeout);
                     window.getLog().debug("Executing timeout: " + script);
                     
-                    WebWindow webWindow = window.getWebWindow(); 
+                    final WebWindow webWindow = window.getWebWindow(); 
                     // test that the window is always opened and the page the same 
                     if (!webWindow.getWebClient().getWebWindows().contains(webWindow)
                             || webWindow.getEnclosedPage() != page) {

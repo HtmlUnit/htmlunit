@@ -97,7 +97,7 @@ public class ScriptEngineTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         client.setScriptEngine( new ScriptEngine(client) {
-            public void initialize(HtmlPage page) {
+            public void initialize(final HtmlPage page) {
             }
             public Object execute(
                     final HtmlPage htmlPage, final String sourceCode,
@@ -107,7 +107,7 @@ public class ScriptEngineTest extends WebTestCase {
             }
             public Object callFunction(
                     final HtmlPage htmlPage, final Object javaScriptFunction,
-                    final Object thisObject, Object [] args,
+                    final Object thisObject, final Object [] args,
                     final HtmlElement htmlElement ) {
                 return null;
             }

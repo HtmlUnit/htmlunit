@@ -29,10 +29,6 @@
 
         <property name="cacheFile" value="${checkstyle.cache.file}"/>
         
-
-        <!-- ************************************************************** -->
-        <!-- Checks that are different from the sun coding conventions ones -->
-        <!-- ************************************************************** -->
         <module name="Header">
             <property name="headerFile" value="${basedir}/LICENSE.txt"/>
             <property name="ignoreLines" value="1,2,3,4,5,6"/>
@@ -50,16 +46,9 @@
         <module name="MethodLength">
           <property name="max" value="175"/>
         </module>
-        <!-- No Paren pad check
-        <module name="ParenPad"/>
-        -->
         <module name="ConstantName">
           <property name="format" value="log|^[a-zA-Z][a-zA-Z0-9_]*$"/>
         </module>
-
-        <!-- ************************************************************** -->
-        <!-- Default Sun coding conventions checks                          -->
-        <!-- ************************************************************** -->
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
@@ -95,7 +84,7 @@
         <!-- Checks for imports                              -->
         <!-- See http://checkstyle.sf.net/config_import.html -->
         <module name="AvoidStarImport"/>
-        <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
+        <module name="IllegalImport"/>
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
 
@@ -106,14 +95,6 @@
 
         <!-- Checks for whitespace                               -->
         <!-- See http://checkstyle.sf.net/config_whitespace.html -->
-        <!--
-        <module name="EmptyForIteratorPad"/>
-        <module name="NoWhitespaceAfter"/>
-        <module name="NoWhitespaceBefore"/>
-        <module name="OperatorWrap"/>
-        <module name="WhitespaceAfter"/>
-        <module name="WhitespaceAround"/>
-        -->
         <module name="TabCharacter"/>
 
         <!-- Modifier Checks                                    -->
@@ -139,19 +120,16 @@
         <module name="HiddenField"/>
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
-        <!--<module name="MagicNumber"/>-->
         <module name="MissingSwitchDefault"/>
 		<module name="RedundantThrows">
 		    <property name="allowUnchecked" value="true"/>
 		    <property name="allowSubclasses" value="true"/>
 		</module>        
 		
-        <!-- <module name="SimplifyBooleanExpression"/> -->
         <module name="SimplifyBooleanReturn"/>
 
         <!-- Checks for class design                         -->
         <!-- See http://checkstyle.sf.net/config_design.html -->
-        <!-- <module name="DesignForExtension"/> -->
         <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
@@ -159,17 +137,20 @@
 
         <!-- Miscellaneous other checks.                   -->
         <!-- See http://checkstyle.sf.net/config_misc.html -->
-        <!-- <module name="ArrayTypeStyle"/> -->
-        <!-- <module name="FinalParameters"/> -->
-		<!--
-        <module name="GenericIllegalRegexp">
-            <property name="format" value="\s+$"/>
-            <property name="message" value="Line has trailing spaces."/>
-        </module>
-        -->
-        <!--<module name="TodoComment"/>-->
         <module name="UpperEll"/>
-
+        
+        <!--module name="usage.OneMethodPrivateField"/-->
+        <module name="usage.UnusedLocalVariable"/>
+        <module name="usage.UnusedPrivateField">
+            <property name="ignoreFormat" value="serialVersionUID$"/>
+        </module>
+        <module name="FinalLocalVariable">
+            <property name="tokens" value="VARIABLE_DEF"/>
+            <property name="tokens" value="PARAMETER_DEF"/>
+        </module>
+        
+        <!-- Uncomment to find the TODOs without a helpful IDE -->
+        <!--<module name="TodoComment"/>-->
     </module>
 
 </module>

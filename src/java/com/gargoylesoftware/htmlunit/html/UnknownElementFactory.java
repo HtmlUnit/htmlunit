@@ -61,8 +61,10 @@ public final class UnknownElementFactory implements IElementFactory {
     /**
      * @see IElementFactory#createElement(HtmlPage, String, Attributes)
      */
-    public HtmlElement createElement(HtmlPage page, String tagName, Attributes attributes)
-    {
+    public HtmlElement createElement(
+            final HtmlPage page, final String tagName,
+            final Attributes attributes) {
+
         Map attributeMap = null;
         if(attributes != null) {
             attributeMap = new HashMap(attributes.getLength());
@@ -70,7 +72,7 @@ public final class UnknownElementFactory implements IElementFactory {
                 attributeMap.put(attributes.getLocalName(i), attributes.getValue(i));
             }
         }
-        HtmlElement newElement = new UnknownHtmlElement(page, tagName, attributeMap);
+        final HtmlElement newElement = new UnknownHtmlElement(page, tagName, attributeMap);
         return newElement;
     }
 }

@@ -165,7 +165,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
         assertEquals("foo", page.getTitleText());
         
-        HtmlUnitXPath xpath = new HtmlUnitXPath("count(//select[@name='select1']/option)");
+        final HtmlUnitXPath xpath = new HtmlUnitXPath("count(//select[@name='select1']/option)");
         assertEquals(3, ((Double) xpath.evaluate(page)).intValue());
         
         final HtmlAnchor link = (HtmlAnchor) page.getAnchors().get(0);

@@ -65,7 +65,7 @@ public class MockResponseTag extends HtmlUnitTagSupport {
      * @param xmlOutput The xml output
      * @throws JellyTagException If a problem occurs
      */
-    public void doTag(XMLOutput xmlOutput) throws JellyTagException {
+    public void doTag(final XMLOutput xmlOutput) throws JellyTagException {
         final String content = getBodyText();
         final URL newUrl;
         try {

@@ -55,5 +55,7 @@ public interface IElementFactory {
      * if no attributes specified
      * @return the newly created and initialized element
      */
-    HtmlElement createElement(HtmlPage page, String tagName, Attributes attributes);
+    HtmlElement createElement(
+            final HtmlPage page, final String tagName,
+            final Attributes attributes);
 }

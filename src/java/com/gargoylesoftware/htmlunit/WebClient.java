@@ -147,7 +147,7 @@ public class WebClient {
             try {
                 return new URL(null,"about:blank",AboutUrlStreamHandler_);
             }
-            catch (MalformedURLException e) {
+            catch (final MalformedURLException e) {
                 // impossible
                 e.printStackTrace();
                 return null;
@@ -1065,7 +1065,7 @@ public class WebClient {
      * @param opener The web window that is calling openWindow
      * @return The new window.
      */
-    public WebWindow openWindow( final URL url, String windowName, final WebWindow opener ) {
+    public WebWindow openWindow( final URL url, final String windowName, final WebWindow opener ) {
         final WebWindow window = openTargetWindow( opener, windowName, "_blank" );
         if( url != null ) {
             try {
@@ -1090,50 +1090,53 @@ public class WebClient {
      * @param defaultName The default target if no name is given
      * @return The new window.
      */
-    private WebWindow openTargetWindow( final WebWindow opener,
-        String windowName, String defaultName ) {
+    private WebWindow openTargetWindow(
+            final WebWindow opener, final String windowName, final String defaultName) {
+
         Assert.notNull("opener", opener);
         Assert.notNull("defaultName", defaultName);
-        if( windowName == null || windowName.length() == 0 ) {
-            windowName = defaultName;
+        
+        String windowToOpen = windowName;
+        if( windowToOpen == null || windowToOpen.length() == 0 ) {
+            windowToOpen = defaultName;
         }
 
-        WebWindow window = null;
-        if( windowName.equals("_self") ) {
-            window = opener;
-            windowName = "";
+        WebWindow webWindow = null;
+        if( windowToOpen.equals("_self") ) {
+            webWindow = opener;
+            windowToOpen = "";
         }
-        else if( windowName.equals("_parent") ) {
-            window = opener.getParentWindow();
-            windowName = "";
+        else if( windowToOpen.equals("_parent") ) {
+            webWindow = opener.getParentWindow();
+            windowToOpen = "";
         }
-        else if( windowName.equals("_top") ) {
-            window = opener.getTopWindow();
-            windowName = "";
+        else if( windowToOpen.equals("_top") ) {
+            webWindow = opener.getTopWindow();
+            windowToOpen = "";
         }
-        else if( windowName.equals("_blank") ) {
+        else if( windowToOpen.equals("_blank") ) {
             // Leave window null to create a new window.
-            windowName = "";
+            windowToOpen = "";
         }
-        else if( windowName.length() != 0 ) {
+        else if( windowToOpen.length() != 0 ) {
             try {
-                window = getWebWindowByName(windowName);
+                webWindow = getWebWindowByName(windowToOpen);
             }
             catch( final WebWindowNotFoundException e ) {
                 // Fall through - a new window will be created below
             }
         }
 
-        if( window == null ) {
-            window = new TopLevelWindow(windowName, this);
-            fireWindowOpened( new WebWindowEvent(window, WebWindowEvent.OPEN, null, null) );
+        if( webWindow == null ) {
+            webWindow = new TopLevelWindow(windowToOpen, this);
+            fireWindowOpened( new WebWindowEvent(webWindow, WebWindowEvent.OPEN, null, null) );
         }
 
-        if( window instanceof TopLevelWindow && window != opener.getTopWindow() ) {
-            ((TopLevelWindow)window).setOpener(opener);
+        if( webWindow instanceof TopLevelWindow && webWindow != opener.getTopWindow() ) {
+            ((TopLevelWindow)webWindow).setOpener(opener);
         }
 
-        return window;
+        return webWindow;
     }
 
 

@@ -55,7 +55,7 @@ public class AssertTitleTag extends HtmlUnitTagSupport {
      * @param xmlOutput The xml output
      * @throws JellyTagException If a problem occurs
      */
-    public void doTag(XMLOutput xmlOutput) throws JellyTagException {
+    public void doTag(final XMLOutput xmlOutput) throws JellyTagException {
         invokeBody(xmlOutput);
         if( expectedText_ == null && startsWithText_ == null ) {
             throw new JellyTagException("One of 'text' or 'startsWith' must be specified");

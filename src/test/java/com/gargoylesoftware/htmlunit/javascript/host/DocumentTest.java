@@ -1747,7 +1747,7 @@ public class DocumentTest extends WebTestCase {
             + "<body onLoad='testIt()'></body></html>\n";
 
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        loadPage(content, collectedAlerts);
 
         final List expectedAlerts = Arrays.asList( new String[]{
             "undefined", "undefined"

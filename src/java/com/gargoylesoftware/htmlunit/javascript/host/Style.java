@@ -105,7 +105,7 @@ public class Style extends SimpleScriptable {
       * @param start The scriptable object that was originally invoked for this property
       * @param newValue The new value
       */
-     public void put( final String name, final Scriptable start, Object newValue ) {
+     public void put( final String name, final Scriptable start, final Object newValue ) {
          // Some calls to put will happen during the initialization of the superclass.
          // At this point, we don't have enough information to do our own initialization
          // so we have to just pass this call through to the superclass.

@@ -59,7 +59,7 @@ public class ThreadTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public ThreadTest(String name) {
+    public ThreadTest(final String name) {
         super(name);
     }
 
@@ -69,10 +69,10 @@ public class ThreadTest extends WebTestCase {
      */
     public void testJavaScriptEngineInMultipleThreads() throws InterruptedException {
 
-        TestThread thread1 = new TestThread("thread1");
-        TestThread thread2 = new TestThread("thread2");
-        TestThread thread3 = new TestThread("thread3");
-        TestThread thread4 = new TestThread("thread4");
+        final TestThread thread1 = new TestThread("thread1");
+        final TestThread thread2 = new TestThread("thread2");
+        final TestThread thread3 = new TestThread("thread3");
+        final TestThread thread4 = new TestThread("thread4");
 
         thread1.start();
         thread2.start();
@@ -97,7 +97,7 @@ public class ThreadTest extends WebTestCase {
         private boolean successful_ = false;
 
 
-        public TestThread(String name) {
+        public TestThread(final String name) {
             super(name);
         }
 
@@ -107,7 +107,7 @@ public class ThreadTest extends WebTestCase {
                 testCallInheritedFunction();
                 successful_ = true;
             }
-            catch (Exception e) {
+            catch (final Exception e) {
                 System.err.println(">>> Thread " + getName());
                 e.printStackTrace(System.err);
                 successful_ = false;

@@ -105,12 +105,12 @@ public abstract class HtmlElement extends DomNode {
      * 
      * @see DomNode#cloneNode(boolean)
      */
-    public DomNode cloneNode(boolean deep) {
+    public DomNode cloneNode(final boolean deep) {
         final HtmlElement newnode = (HtmlElement) super.cloneNode(deep);
 
         newnode.attributes_ = new HashMap();
       
-        for (Iterator it = attributes_.keySet().iterator(); it.hasNext();) {
+        for (final Iterator it = attributes_.keySet().iterator(); it.hasNext();) {
             final Object key = it.next();
 
             if ("id".equals(key)) {
@@ -137,7 +137,7 @@ public abstract class HtmlElement extends DomNode {
      */
     public final String getAttributeValue( final String attributeName ) {
 
-        String value = (String)attributes_.get(attributeName.toLowerCase());
+        final String value = (String)attributes_.get(attributeName.toLowerCase());
 
         //return value != null ? value : ATTRIBUTE_NOT_DEFINED;
         if(value != null) {
@@ -154,19 +154,21 @@ public abstract class HtmlElement extends DomNode {
      * @param attributeName the name of the attribute
      * @param attributeValue The value of the attribute
      */
-    public final void setAttributeValue(String attributeName, String attributeValue) {
+    public final void setAttributeValue(final String attributeName, final String attributeValue) {
 
+        String value = attributeValue;
+        
         if(attributes_ == Collections.EMPTY_MAP) {
             attributes_ = new HashMap();
         }
-        if(attributeValue.length() == 0) {
-            attributeValue = ATTRIBUTE_VALUE_EMPTY;
+        if(value.length() == 0) {
+            value = ATTRIBUTE_VALUE_EMPTY;
         }
-        boolean isId = attributeName.equalsIgnoreCase("id");
+        final boolean isId = attributeName.equalsIgnoreCase("id");
         if (isId) {
             getPage().removeIdElement(this);
         }
-        attributes_.put(attributeName.toLowerCase(), attributeValue);
+        attributes_.put(attributeName.toLowerCase(), value);
         if (isId) {
             getPage().addIdElement(this);
         }
@@ -176,7 +178,7 @@ public abstract class HtmlElement extends DomNode {
      * remove an attribute from this element
      * @param attributeName the attribute attributeName
      */
-    public final void removeAttribute(String attributeName) {
+    public final void removeAttribute(final String attributeName) {
         if (attributeName.equalsIgnoreCase("id")) {
             getPage().removeIdElement(this);
         }
@@ -334,14 +336,14 @@ public abstract class HtmlElement extends DomNode {
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
      */
-    protected void printXml( String indent, PrintWriter printWriter ) {
+    protected void printXml( final String indent, final PrintWriter printWriter ) {
 
         final boolean hasChildren = (getFirstChild() != null);
         printWriter.print(indent+"<"+getTagName().toLowerCase());
-        Map attributeMap = attributes_;
-        for( Iterator it=attributeMap.keySet().iterator(); it.hasNext(); ) {
+        final Map attributeMap = attributes_;
+        for( final Iterator it=attributeMap.keySet().iterator(); it.hasNext(); ) {
             printWriter.print(" ");
-            String name = (String)it.next();
+            final String name = (String)it.next();
             printWriter.print(name);
             printWriter.print("=\"");
             printWriter.print(attributeMap.get(name));
@@ -379,9 +381,9 @@ public abstract class HtmlElement extends DomNode {
         buffer.append( "[<" );
         buffer.append(getTagName());
 
-        for(Iterator iterator=attributes_.keySet().iterator(); iterator.hasNext(); ) {
+        for(final Iterator iterator=attributes_.keySet().iterator(); iterator.hasNext(); ) {
             buffer.append( ' ' );
-            String name = (String)iterator.next();
+            final String name = (String)iterator.next();
             buffer.append(name);
             buffer.append( "=\"" );
             buffer.append(attributes_.get(name));
@@ -510,13 +512,13 @@ public abstract class HtmlElement extends DomNode {
             final String attributeName,
             final String attributeValue ) {
 
-        List list = new ArrayList();
-        DescendantElementsIterator iterator = new DescendantElementsIterator();
+        final List list = new ArrayList();
+        final DescendantElementsIterator iterator = new DescendantElementsIterator();
 
         while(iterator.hasNext()) {
-            HtmlElement next = iterator.nextElement();
+            final HtmlElement next = iterator.nextElement();
             if(next.getTagName().equals(elementName)) {
-                String attValue = next.getAttributeValue(attributeName);
+                final String attValue = next.getAttributeValue(attributeName);
                 if(attValue != null && attValue.equals(attributeValue)) {
                     list.add(next);
                 }
@@ -534,11 +536,11 @@ public abstract class HtmlElement extends DomNode {
      */
     public final List getHtmlElementsByTagNames( final List acceptableTagNames ) {
 
-        List list = new ArrayList();
-        DescendantElementsIterator iterator = new DescendantElementsIterator();
+        final List list = new ArrayList();
+        final DescendantElementsIterator iterator = new DescendantElementsIterator();
 
         while(iterator.hasNext()) {
-            HtmlElement next = iterator.nextElement();
+            final HtmlElement next = iterator.nextElement();
             if(acceptableTagNames.contains(next.getTagName())) {
                 list.add(next);
             }
@@ -555,11 +557,11 @@ public abstract class HtmlElement extends DomNode {
      */
     public final List getHtmlElementsByTagName( final String tagName ) {
 
-        List list = new ArrayList();
-        DescendantElementsIterator iterator = new DescendantElementsIterator();
+        final List list = new ArrayList();
+        final DescendantElementsIterator iterator = new DescendantElementsIterator();
 
         while(iterator.hasNext()) {
-            HtmlElement next = iterator.nextElement();
+            final HtmlElement next = iterator.nextElement();
             if(tagName.equals(next.getTagName())) {
                 list.add(next);
             }
@@ -613,7 +615,7 @@ public abstract class HtmlElement extends DomNode {
      *      href
      * @deprecated Use {@link HtmlPage#getFullyQualifiedUrl(String)} instead.
      */
-    public final URL makeUrlFromHref( String href )
+    public final URL makeUrlFromHref( final String href )
         throws MalformedURLException {
 
             return getPage().getFullyQualifiedUrl(href);
@@ -685,7 +687,7 @@ public abstract class HtmlElement extends DomNode {
         /** @return the next element */
         public HtmlElement nextElement() {
             if(nextElement_ != null) {
-                HtmlElement result = nextElement_;
+                final HtmlElement result = nextElement_;
                 setNextElement(nextElement_);
                 return result;
             }
@@ -694,7 +696,7 @@ public abstract class HtmlElement extends DomNode {
             }
         }
 
-        private void setNextElement(DomNode node) {
+        private void setNextElement(final DomNode node) {
             DomNode next = node.getNextSibling();
             while(next != null && !(next instanceof HtmlElement)) {
                 next = next.getNextSibling();

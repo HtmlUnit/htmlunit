@@ -119,7 +119,7 @@ public class WebClientTest extends WebTestCase {
             client.assertionFailed( "foobar" );
             fail( "Expected AssertionFailedError" );
         }
-        catch( junit.framework.AssertionFailedError e ) {
+        catch( final junit.framework.AssertionFailedError e ) {
             assertEquals( "foobar", e.getMessage() );
         }
     }
@@ -618,7 +618,7 @@ public class WebClientTest extends WebTestCase {
         final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
         FileUtils.writeStringToFile(tmpFile, htmlContent, encoding);
 
-        URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
+        final URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
         
         final WebClient client = new WebClient();
         final HtmlPage page = (HtmlPage) client.getPage(fileURL);

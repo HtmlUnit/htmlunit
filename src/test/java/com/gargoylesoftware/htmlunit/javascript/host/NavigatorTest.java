@@ -190,7 +190,7 @@ public class NavigatorTest extends WebTestCase {
      * @param value the expected value for the named attribute.
      * @throws Exception on test failure.
      */
-    private void testAttribute(String name, String value) throws Exception {
+    private void testAttribute(final String name, final String value) throws Exception {
         final String content = "<html>\n" + 
                 "<head>\n" + 
                 "    <title>test</title>\n" + 

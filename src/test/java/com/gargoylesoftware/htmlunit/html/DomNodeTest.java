@@ -120,7 +120,7 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
         
-        Map attributes = new HashMap();
+        final Map attributes = new HashMap();
         attributes.put("id", "newElt");
         final DomNode newNode = new HtmlDivision(page, attributes);
         try {

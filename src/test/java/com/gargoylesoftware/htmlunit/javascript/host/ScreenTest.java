@@ -58,7 +58,7 @@ public class ScreenTest extends WebTestCase {
     /**
      * @param name The name of the test case
      */
-    public ScreenTest(String name) {
+    public ScreenTest(final String name) {
         super(name);
     }
 

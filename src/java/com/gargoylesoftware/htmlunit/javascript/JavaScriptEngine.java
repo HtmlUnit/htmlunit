@@ -132,10 +132,10 @@ public final class JavaScriptEngine extends ScriptEngine {
      * perform initialization for the given page
      * @param page the page to initialize for
      */
-    public void initialize(HtmlPage page) {
+    public void initialize(final HtmlPage page) {
         //force allocation of the page info.
         try {
-        getPageInfo(page);
+            getPageInfo(page);
         }
         catch (final RuntimeException e) {
             // usefull for debugging (else catched Xerces and nested in a XNIException 

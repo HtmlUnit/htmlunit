@@ -111,7 +111,7 @@ public class NodeImpl extends SimpleScriptable {
      * Set the JavaScript property "nodeValue" for the current node.
      * @param newValue The new node value
      */
-    public void jsSet_nodeValue( String newValue ) {
+    public void jsSet_nodeValue( final String newValue ) {
         getDomNodeOrDie().setNodeValue( newValue );
     }
 
@@ -304,7 +304,7 @@ public class NodeImpl extends SimpleScriptable {
      * @param domNode The DomNode
      * @return The JavaScript node or null if the DomNode was null.
      */
-    protected Object getJavaScriptNode( DomNode domNode ) {
+    protected Object getJavaScriptNode( final DomNode domNode ) {
         if ( domNode == null ) {
             return null;
         }

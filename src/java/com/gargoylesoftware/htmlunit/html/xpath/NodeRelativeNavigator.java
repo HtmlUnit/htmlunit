@@ -79,7 +79,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
      *  for queries on DOM documents.
      * @throws JaxenException if the expression could not be parsed
      */
-    public XPath parseXPath (String xpath) throws JaxenException {
+    public XPath parseXPath (final String xpath) throws JaxenException {
         return new BaseXPath(xpath, this);
     }
 
@@ -89,7 +89,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
      * @param contextNode Any node in the document.
      * @return The root node.
      */
-    public Object getDocumentNode (Object contextNode) {
+    public Object getDocumentNode (final Object contextNode) {
         return rootNode_;
     }
 
@@ -99,7 +99,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
      * @param object The target node.
      * @return true if the node is the document root, false otherwise.
      */
-    public boolean isDocument (Object object) {
+    public boolean isDocument (final Object object) {
         return (object == rootNode_);
     }
 
@@ -109,7 +109,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
      * @param object The target node.
      * @return true if the node is an element, false otherwise.
      */
-    public boolean isElement (Object object) {
+    public boolean isElement (final Object object) {
         return super.isElement(object) && (object != rootNode_);
     }
 
@@ -132,7 +132,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
      *  @see   javax.xml.parsers.DocumentBuilderFactory
      */
     public Object getElementById(final Object contextNode, final String elementId) {
-        DomNode node = (DomNode) super.getElementById(contextNode, elementId);
+        final DomNode node = (DomNode) super.getElementById(contextNode, elementId);
         if (isChild(node)) {
             return node;
         }
@@ -144,7 +144,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
      * @param node the node to test
      * @return <code>true</code> if it is a child of the root.
      */
-    private boolean isChild(DomNode node) {
+    private boolean isChild(final DomNode node) {
         DomNode parent = node;
         while (parent != null) {
             if (parent == rootNode_) {

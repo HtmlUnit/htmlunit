@@ -89,11 +89,11 @@ public class HtmlTable extends ClickableElement {
     {
         final RowIterator rowIterator = getRowIterator();
         for(int rowNo = 0; rowIterator.hasNext(); rowNo++) {
-            HtmlTableRow row = rowIterator.nextRow();
+            final HtmlTableRow row = rowIterator.nextRow();
 
             final HtmlTableRow.CellIterator cellIterator = row.getCellIterator();
             for(int colNo = 0; cellIterator.hasNext(); colNo++) {
-                HtmlTableCell cell = cellIterator.nextCell();
+                final HtmlTableCell cell = cellIterator.nextCell();
                 if(rowNo + cell.getRowSpan() > rowIndex) {
                     if(colNo <= columnIndex && colNo + cell.getColumnSpan() > columnIndex) {
                         return cell;
@@ -116,8 +116,8 @@ public class HtmlTable extends ClickableElement {
      * @see #getRowIterator
      */
     public List getRows() {
-        List result = new ArrayList();
-        for(RowIterator iterator = getRowIterator(); iterator.hasNext(); ) {
+        final List result = new ArrayList();
+        for(final RowIterator iterator = getRowIterator(); iterator.hasNext(); ) {
             result.add(iterator.next());
         }
         return Collections.unmodifiableList(result);
@@ -129,10 +129,10 @@ public class HtmlTable extends ClickableElement {
      * @throws IndexOutOfBoundsException if there is no row at the given index
      * @see #getRowIterator
      */
-    public HtmlTableRow getRow(int index) throws IndexOutOfBoundsException {
+    public HtmlTableRow getRow(final int index) throws IndexOutOfBoundsException {
         int count = 0;
-        for(RowIterator iterator = getRowIterator(); iterator.hasNext(); count++) {
-            HtmlTableRow next = iterator.nextRow();
+        for(final RowIterator iterator = getRowIterator(); iterator.hasNext(); count++) {
+            final HtmlTableRow next = iterator.nextRow();
             if(count == index) {
                 return next;
             }
@@ -148,7 +148,7 @@ public class HtmlTable extends ClickableElement {
      */
     public final int getRowCount() {
         int count = 0;
-        for(RowIterator iterator = getRowIterator(); iterator.hasNext(); iterator.next()) {
+        for(final RowIterator iterator = getRowIterator(); iterator.hasNext(); iterator.next()) {
             count++;
         }
         return count;
@@ -163,7 +163,7 @@ public class HtmlTable extends ClickableElement {
      * @exception ElementNotFoundException If the row cannot be found.
      */
     public final HtmlTableRow getRowById( final String id ) throws ElementNotFoundException {
-        RowIterator iterator = new RowIterator();
+        final RowIterator iterator = new RowIterator();
         while( iterator.hasNext() ) {
             final HtmlTableRow row = (HtmlTableRow)iterator.next();
             if( row.getIdAttribute().equals(id) ) {
@@ -409,7 +409,7 @@ public class HtmlTable extends ClickableElement {
          */
         public HtmlTableRow nextRow() throws NoSuchElementException {
             if(nextRow_ != null) {
-                HtmlTableRow result = nextRow_;
+                final HtmlTableRow result = nextRow_;
                 setNextRow(nextRow_.getNextSibling());
                 return result;
             }
@@ -423,7 +423,7 @@ public class HtmlTable extends ClickableElement {
          * @param node the node to marik as the next row. If this is not a row, the
          * next reachable row will be marked
          */
-        private void setNextRow(DomNode node) {
+        private void setNextRow(final DomNode node) {
 
             nextRow_ = null;
             for(DomNode next = node; next != null; next = next.getNextSibling()) {
@@ -438,7 +438,7 @@ public class HtmlTable extends ClickableElement {
                 }
             }
             if(currentGroup_ != null) {
-                DomNode group = currentGroup_;
+                final DomNode group = currentGroup_;
                 currentGroup_ = null;
                 setNextRow(group.getNextSibling());
             }
