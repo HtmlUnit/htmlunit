@@ -87,9 +87,15 @@ public class HtmlAnchor extends FocusableElement {
      * @return The page that is currently loaded after execution of this method
      * @throws IOException If an IO error occured
      */
-    protected Page doClickAction(Page defaultPage) throws IOException {
+    protected Page doClickAction(final Page defaultPage) throws IOException {
+
 
         final String href = getHrefAttribute();
+
+        getLog().debug(
+            "do click action in window '"
+                    + defaultPage.getEnclosingWindow().getName()
+                    + "', using href '" + href + "'");
 
         if( href != null && href.length() > 0 ) {
             final HtmlPage page = getPage();
@@ -99,6 +105,11 @@ public class HtmlAnchor extends FocusableElement {
             }
             else {
                 final URL url = page.getFullyQualifiedUrl(href);
+                getLog().debug(
+                    "Getting page for " + url.toExternalForm()
+                            + ", derived from href '" + href
+                            + "', using the originating url "
+                            + page.getWebResponse().getUrl());
                 return page.getWebClient().getPage(
                         page.getEnclosingWindow(),
                         page.getResolvedTarget(getTargetAttribute()),

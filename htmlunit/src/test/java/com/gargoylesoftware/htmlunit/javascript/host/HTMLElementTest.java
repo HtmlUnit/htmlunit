@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -835,6 +836,48 @@ public class HTMLElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testClickHashAnchor() throws Exception {
+        final String content 
+            = "<html><head><title>HashAnchor</title></head>"
+            + "<body>"
+            + "  <script language='javascript'>"
+            + "    function test() {alert('test hash');}"
+            + "  </script>"
+            + "  <a onClick='javascript:test();' href='#' name='hash'>Click</a>" 
+            + "</body>"
+            + "</html>";
+        final List expectedAlerts = Arrays.asList(new String[]{"test hash"});
+
+        // first use direct load
+        final List loadCollectedAlerts = new ArrayList();
+        final HtmlPage loadPage = loadPage(content, loadCollectedAlerts);
+
+        final HtmlAnchor loadHashAnchor = loadPage.getAnchorByName("hash");
+        loadHashAnchor.click();
+        
+        assertEquals(expectedAlerts, loadCollectedAlerts);
+        
+        // finally try via the client
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        webConnection.setResponse(URL_FIRST, content);
+        webClient.setWebConnection( webConnection );
+
+        final CollectingAlertHandler clientCollectedAlertsHandler = new CollectingAlertHandler();
+        webClient.setAlertHandler(clientCollectedAlertsHandler);
+
+        final HtmlPage clientPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlAnchor clientHashAnchor = clientPage.getAnchorByName("hash");
+        clientHashAnchor.click();
+        
+        assertEquals(expectedAlerts, clientCollectedAlertsHandler.getCollectedAlerts());
     }
 
 }

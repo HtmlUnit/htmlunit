@@ -352,7 +352,9 @@ public class Window extends SimpleScriptable {
             final HtmlPage page = (HtmlPage)webWindow_.getEnclosedPage();
             final URL url = page.getFullyQualifiedUrl(newLocation);
             
-            getLog().debug("window.location=" + newLocation);
+            getLog().debug(
+                "window.location=" + newLocation + " (" + url.toExternalForm()
+                        + "), for window named '" + webWindow_.getName() + "'");
 
             webWindow_.getWebClient().getPage(webWindow_, new WebRequestSettings(url));
         }
@@ -510,7 +512,7 @@ public class Window extends SimpleScriptable {
      * Close this window
      */
     public void jsFunction_close() {
-        WebWindow window = ((HtmlPage) getDomNodeOrDie()).getEnclosingWindow();
+        final WebWindow window = ((HtmlPage) getDomNodeOrDie()).getEnclosingWindow();
         getWebWindow().getWebClient().deregisterWebWindow(window);
     }
 

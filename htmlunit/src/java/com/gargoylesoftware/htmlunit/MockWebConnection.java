@@ -49,6 +49,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * A fake WebConnection designed to mock out the actual http connections.
@@ -116,7 +118,7 @@ public class MockWebConnection extends WebConnection {
         try {
             contentBytes = content.getBytes("ISO-8859-1");
         }
-        catch (UnsupportedEncodingException e) {
+        catch (final UnsupportedEncodingException e) {
             contentBytes = new byte[0];
         }
         return contentBytes;
@@ -136,6 +138,14 @@ public class MockWebConnection extends WebConnection {
      */
     public MockWebConnection( final WebClient webClient ) {
         super( webClient );
+    }
+
+    /**
+     * Return the log that is being used for all scripting objects
+     * @return The log.
+     */
+    protected final Log getLog() {
+        return LogFactory.getLog(getClass());
     }
 
     /**
@@ -175,6 +185,8 @@ public class MockWebConnection extends WebConnection {
             final List parameters,
             final Map requestHeaders ) throws IOException {
 
+        getLog().debug("Getting response for " + url.toExternalForm());
+        
         lastMethod_ = method;
         lastParameters_ = parameters;
 
