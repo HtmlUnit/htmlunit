@@ -241,6 +241,24 @@ public class MockWebConnection extends WebConnection {
 
 
     /**
+     * Specify a generic html page that will be returned when the given url is specified.
+     * The page will contain only minimal html to satisfy the html parser but will contain
+     * the specified title so that tests can check for titleText.
+     *
+     * @param url The url that will return the given response
+     * @param title The title of the page
+     */
+    public void setResponseAsGenericHtml(
+            final URL url,
+            final String title ) {
+
+        final String content = "<html><head><title>"+title+"</title></head><body></body></html>";
+        final ResponseEntry responseEntry
+            = new ResponseEntry(content, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        responseMap_.put( url.toExternalForm(), responseEntry );
+    }
+
+    /**
      * Set the response that will be returned when a url is requested that does
      * not have a specific content set for it.
      *
