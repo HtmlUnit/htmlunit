@@ -1209,7 +1209,7 @@ public class WebClient {
         if( tokens.isEmpty() || stringToTokenize.endsWith("/") ) {
             buffer.append("/");
         }
-        
+
         String newUrlString = buffer.toString();
         final int lastPoundSignIndex = newUrlString.lastIndexOf("#");
         if( lastPoundSignIndex != -1 ) {
@@ -1217,7 +1217,7 @@ public class WebClient {
         }
         return makeUrl( newUrlString );
     }
-    
+
     private WebResponse makeWebResponseForAboutUrl(
         final WebWindow webWindow,
         final URL url) {

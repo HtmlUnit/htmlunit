@@ -57,7 +57,7 @@ public class WebClientTag extends HtmlUnitTagSupport {
     private String userId_;
     private String password_;
     private String browserVersionName_;
-    
+
     /**
      * Create an instance
      */
@@ -85,7 +85,7 @@ public class WebClientTag extends HtmlUnitTagSupport {
             }
             webClient_.setCredentialProvider( new SimpleCredentialProvider(userId_, password_) );
         }
-        
+
         final String varName = getVarValueOrNull();
         if( varName != null ) {
             getContext().setVariable(varName, webClient_);
@@ -107,7 +107,7 @@ public class WebClientTag extends HtmlUnitTagSupport {
         if( browserVersionName_ == null ) {
             return null;
         }
-        
+
         try {
             final Field field = BrowserVersion.class.getDeclaredField(browserVersionName_);
             return (BrowserVersion)field.get(null);
@@ -116,12 +116,12 @@ public class WebClientTag extends HtmlUnitTagSupport {
             return null;
         }
         catch( final IllegalAccessException e ) {
-            // All the legitimate constants are accessible so this exception 
+            // All the legitimate constants are accessible so this exception
             // would mean that something else has been specified.
             return null;
         }
     }
-    
+
     /**
      * Return the WebClient created by this tag.
      * @return The web client
