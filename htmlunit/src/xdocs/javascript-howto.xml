@@ -10,22 +10,22 @@
     <body>
         <section name="Introduction">
             <p>
-            	A frequent question we get is "how do I test my javascript?".  It
-            	really isn't very different from testing the page itself so lets walk
-            	through some examples.
+                A frequent question we get is "how do I test my javascript?".  It
+                really isn't very different from testing the page itself so lets walk
+                through some examples.
             </p>
         </section>
 
         <section name="Example: using Document.write()">
             <p>
-            	Lets say that we have a page containing javascript that will dynamically
-            	write content to the page.  The following html will dynamically generate
-            	five textfields and place them inside a table.  Each textfield will have
-            	a unique name created by appending the index to the string "textfield".
+                Lets say that we have a page containing javascript that will dynamically
+                write content to the page.  The following html will dynamically generate
+                five textfields and place them inside a table.  Each textfield will have
+                a unique name created by appending the index to the string "textfield".
             </p>
             <source><![CDATA[
 <html><head><title>Table sample</title></head><body>
-	<form action='/foo' name='form1'>
+    <form action='/foo' name='form1'>
     <table id="table1">
         <script type="text/javascript">
             for( i=1; i <= 5; i++ ) {
@@ -39,8 +39,8 @@
             ]]></source>
             
             <p>
-            	We would likely want to test that the five text fields were created so
-            	we could start with this.
+                We would likely want to test that the five text fields were created so
+                we could start with this.
             </p>
             <source><![CDATA[
 public void testDocumentWrite() throws Exception {
@@ -58,10 +58,10 @@ public void testDocumentWrite() throws Exception {
 }
             ]]></source>
             <p>
-            	We might also want to check off-by-one errors by ensuring that 
-            	it didn't create "textfield0" or "textfield6".  Trying to get an 
-            	element that doesn't exist will cause an exception to be thrown
-            	so we could add this to the end of the previous test.
+                We might also want to check off-by-one errors by ensuring that 
+                it didn't create "textfield0" or "textfield6".  Trying to get an 
+                element that doesn't exist will cause an exception to be thrown
+                so we could add this to the end of the previous test.
             </p>
             <source><![CDATA[
     try {
@@ -84,9 +84,9 @@ public void testDocumentWrite() throws Exception {
         
         
         <section name="Example: Watching for 'alerts'">
-        	<p>
-        		Often you want to watch alerts triggered by javascript.
-        	</p>
+            <p>
+                Often you want to watch alerts triggered by javascript.
+            </p>
             <source><![CDATA[
 <html><head><title>Alert sample</title></head>
 <body onload='alert("foo");'>
@@ -119,22 +119,131 @@ public void testAlerts() throws Exception {
         </section>
         
         <section name="Prompts, Confirms and Status line messages">
-        	<p>
-        		Handling prompt dialogs, confirm dialogs and status line messages
-        		work in the same way as alerts.  You register a handler of the 
-        		appropriate type and it will get notified when that method is called.
-        		See WebClient.setPromptHandler(), WebClient.setConfirmHandler() and
-        		WebClient.setStatusHandler() for details on these.
-        	</p>
+            <p>
+                Handling prompt dialogs, confirm dialogs and status line messages
+                work in the same way as alerts.  You register a handler of the 
+                appropriate type and it will get notified when that method is called.
+                See WebClient.setPromptHandler(), WebClient.setConfirmHandler() and
+                WebClient.setStatusHandler() for details on these.
+            </p>
         </section>
 
 
-        <section name="onfocus and onblur handlers">
-        	<p>
-        		The method WebClient.moveFocusToElement(...) will change the focus
-        		to the appropriate element.  The onfocus and onblur handlers will
-        		be called appropriately as elements gain or lose focus.
-        	</p>
+        <section name="Event handlers">
+            <p>
+                Some event handlers are already implemented and will 
+                be triggered at the appropriate time (see table below).  
+            </p>
+            <p>
+            	If the event that you wish to test is not yet supported then you can 
+            	directly invoke it through the ScriptEngine.  Note that while the script 
+            	engine is publicly 
+                accessible, we do not recommend using it directly unless you have no
+                other choice.  It is much better to manipulate the page as a user would
+                by clicking on elements and shifting the focus around.
+            </p>
+            <table>            
+                <tr>
+                    <th>Event</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>onload</td>
+                    <td>
+                    	"onload" handlers on body or frameset elements will be triggered 
+                    	after the page has been loaded but before it is returned 
+                    	to the caller.
+                    </td>
+                </tr>
+                <tr>
+                    <td>onunload</td>
+                    <td>Not implemented yet</td>
+                </tr>
+                <tr>
+                    <td>onclick</td>
+                    <td>
+                    	This will be triggered when the click() method of a ClickableElement
+                    	is called.
+                    </td>
+                </tr>
+                <tr>
+                    <td>ondblclick</td>
+                    <td>Not implemented yet.</td>
+                </tr>
+                <tr>
+                    <td>onmousedown</td>
+                    <td>Not implemented yet.</td>
+                </tr>
+                <tr>
+                    <td>onmouseup</td>
+                    <td>Not implemented yet.</td>
+                </tr>
+                <tr>
+                    <td>onmouseover</td>
+                    <td>Not implemented yet.</td>
+                </tr>
+                <tr>
+                    <td>onmousemove</td>
+                    <td>Not implemented yet.</td>
+                </tr>
+                <tr>
+                    <td>onmouseout</td>
+                    <td>Not implemented yet.</td>
+                </tr>
+                <tr>
+                    <td>onfocus</td>
+                    <td>
+	                    The method WebClient.moveFocusToElement(...) will change the focus
+    		            to the appropriate element.  This event will be triggered when
+    		            an element gets focus.
+                    </td>
+                </tr>
+                <tr>
+                    <td>onblur</td>
+                    <td>
+	                    The method WebClient.moveFocusToElement(...) will change the focus
+    		            to the appropriate element.  This event will be triggered when
+    		            an element loses focus.
+                    </td>
+                </tr>
+                <tr>
+                    <td>onkeypress</td>
+                    <td>Not implemented yet.</td>
+                </tr>
+                <tr>
+                    <td>onkeydown</td>
+                    <td>Not implemented yet.</td>
+                </tr>
+                <tr>
+                    <td>onkeyup</td>
+                    <td>Not implemented yet.</td>
+                </tr>
+                <tr>
+                    <td>onsubmit</td>
+                    <td>
+                    	This will be triggered when a form is submitted either by
+                    	HtmlForm.submit() or via the javascript submit() method.
+                    </td>
+                </tr>
+                <tr>
+                    <td>onreset</td>
+                    <td>
+                    	This will be triggered when a form is reset either by
+                    	HtmlForm.reset() or via the javascript reset() method.
+                    </td>
+                </tr>
+                <tr>
+                    <td>onselect</td>
+                    <td>Not implemented yet.</td>
+                </tr>
+                <tr>
+                    <td>onchange</td>
+                    <td>
+                    	This will be triggered when the appropriate setValueAttribute()
+                    	method is called.
+                    </td>
+                </tr>
+            </table>
         </section>
     </body>
 
