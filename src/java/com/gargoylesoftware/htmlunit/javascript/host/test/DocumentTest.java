@@ -234,11 +234,10 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * Regression test for bug 707750
+     */
     public void testAllProperty_CalledDuringPageLoad() throws Exception {
-        if( true ) {
-            notImplemented();
-            return;
-        }
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
 
@@ -247,6 +246,7 @@ public class DocumentTest extends WebTestCase {
              + "<div id='ARSMenuDiv1' style='VISIBILITY: hidden; POSITION: absolute; z-index: 1000000'></div>"
              + "<script language='Javascript'>"
              + "    var divObj = document.all['ARSMenuDiv1'];"
+             + "    alert(divObj.tagName);"
              + "</script></body></html>";
 
         webConnection.setResponse(
@@ -257,10 +257,8 @@ public class DocumentTest extends WebTestCase {
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
-        assertEquals( "First", firstPage.getTitleText() );
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "tangerine", "ginger"} );
+        final List expectedAlerts = Collections.singletonList("div");
         assertEquals( expectedAlerts, collectedAlerts );
     }
 

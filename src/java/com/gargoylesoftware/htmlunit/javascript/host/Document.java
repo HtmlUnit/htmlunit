@@ -51,8 +51,10 @@ public final class Document extends HTMLElement {
      * Initialize this object
      */
     public void initialize() {
-        allArray_ = (DocumentAllArray)makeJavaScriptObject("DocumentAllArray");
-        allArray_.initialize( (HtmlPage)getHtmlElementOrDie() );
+        if( allArray_ == null ) {
+            allArray_ = (DocumentAllArray)makeJavaScriptObject("DocumentAllArray");
+            allArray_.initialize( (HtmlPage)getHtmlElementOrDie() );
+        }
     }
 
 
@@ -198,6 +200,9 @@ public final class Document extends HTMLElement {
      * @return The value of the "all" property
      */
     public DocumentAllArray jsGet_all() {
+        if( allArray_ == null ) {
+            initialize();
+        }
         return allArray_;
     }
 

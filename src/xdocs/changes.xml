@@ -16,6 +16,11 @@
 		<change type="new" id="705951">
 			Added support for javascript Document.getElementsByTagName()
 		</change>
+		<change type="fix" id="707750" reporter="Mabel Chow">
+			Fixed bug where document.all wasn't being initialized correctly until after the entire page had
+			loaded.  This meant that javascript that executed during page load would blow up when trying
+			to access document.all.
+		</change>
 	</change-log>
 </section>
 

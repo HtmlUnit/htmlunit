@@ -38,6 +38,7 @@ public class MainTestSuite extends RecursiveTestSuite {
 
 
     public static void enableAllLogging() {
+        System.getProperties().put("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.SimpleLog");
         System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog", "trace");
 
         final String prefix = "org.apache.commons.logging.simplelog.log.";
