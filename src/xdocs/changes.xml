@@ -10,19 +10,19 @@
             <action type="update" dev="mguillem">
                 Improved Refresh meta tag support: Take care of enclosing &lt;noscript&gt; tags and correctly interpret quoted urls.
             </action>
-            <action type="update" dev="mguillem" due-to="sdanig" id="1081544">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1081544">
                 Implemented IE specific behavior related methods as well as default behavior "#default#homePage".
             </action>
-            <action type="update" dev="mguillem" due-to="sdanig" id="1081544">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1081544">
                 Implemented screen methods.
             </action>
-            <action type="update" dev="mguillem" due-to="sdanig" id="1082509">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1082509">
                 Added missing (for IE) methods/properties of window.navigator.
             </action>
             <action type="update" dev="mguillem">
                 Added support for window.location.replace(...).
             </action>
-            <action type="update" dev="mguillem" due-to="sdanig" id="1082259">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1082259">
                 Fixed problem with pages where body's onload contains a return statement.
             </action>
             <action type="update" dev="mguillem">
@@ -31,7 +31,7 @@
             <action type="update" dev="mguillem" id="1081557">
                 Automatically add value="on" for radio buttons and checkboxes without value attribute (available for JS access and used when submitting a form as browsers do).
             </action>
-            <action type="update" dev="mguillem" due-to="sdanig" id="1075526">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1075526">
                 Added support for methods moveBy, scroll, scrollBy, scrollByLines, scrollByPages and scrollTo for JS window object. 
             </action>
             <action type="update" dev="yourgod">
