@@ -7,6 +7,11 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="yourgod" id="1151184">
+                HtmlElement's getHtmlElementsByAttribute, getHtmlElementsByTagName, and 
+                getHtmlElementsByTagNames were all updated to ignore the case of the passed
+                in tag name as they're always compared with a lowercase version.
+            </action>
             <action type="update" dev="yourgod" id="1145916" due-to="sdanig">
                 JavaScript: Implemented location.reload(). Patch from sdanig.
             </action>
