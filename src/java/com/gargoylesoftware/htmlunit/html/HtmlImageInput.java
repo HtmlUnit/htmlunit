@@ -55,6 +55,19 @@ public class HtmlImageInput extends HtmlInput {
 
 
     /**
+     * This method will be called if there either wasn't an onclick handler or there was
+     * but the result of that handler was true.  This is the default behaviour of clicking
+     * the element.  In this case, the method will submit the form.
+     *
+     * @return The page that is currently loaded after execution of this method
+     * @throws IOException If an IO error occured
+     */
+    protected Page doClickAction() throws IOException {
+        return getEnclosingFormOrDie().submit(this);
+    }
+
+
+    /**
      * Simulate clicking this input with a pointing device.  The x and y coordinates
      * of the pointing device will be sent to the server.
      *

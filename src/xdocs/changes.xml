@@ -49,6 +49,9 @@
 			Fixed bug where comments on the same line of an opening html comment inside a script tag
 			were being treated as javascript rather than as comment
 		</change>
+		<change type="fix">
+			Fixed bug where clicking on a checkbox would submit the form.
+		</change>
 	</change-log>
 </section>
 
