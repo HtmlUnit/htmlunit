@@ -121,7 +121,13 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      */
     public final void setText( final String newValue ) {
         oldText_ = (DomText)getFirstChild();
-        setFirstChild(new DomText(getPage(), newValue));
+        final DomText newText = new DomText(getPage(), newValue); 
+        if (oldText_ == null) {
+            appendChild(newText);
+        }
+        else {
+            oldText_.replace(newText);
+        }
 
         getPage().executeOnChangeHandlerIfAppropriate(this);
     }
@@ -146,7 +152,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      */
     public void reset() {
         if(oldText_ != null) {
-            setFirstChild(oldText_);
+            getFirstChild().replace(oldText_);
         }
     }
 

@@ -237,11 +237,6 @@ public abstract class DomNode implements Cloneable {
         nextSibling_ = next;
     }
 
-    /** @param child set the first child field value */
-    protected void setFirstChild(DomNode child) {
-        firstChild_ = child;
-    }
-
     /**
      * Get the type of the current node.
      * @return The node type

@@ -119,4 +119,30 @@ public class TextareaTest extends WebTestCase {
         final List expectedAlerts = Arrays.asList(new String[] {"foo"});
         assertEquals(expectedAlerts, collectedAlerts);
     }    
+
+    /**
+     * Tests that setValue doesn't has side effect. Test for bug 1155063.
+     * @throws Exception if the test fails
+     */
+    public void testSetValue() throws Exception {
+        final String content = "<html><head></head>"
+            + "<body>"
+            + "<form name='form1'>"
+            + "<textarea name='question'></textarea>"
+            + "<input type='button' name='btn_submit' value='Next'>"
+            + "</form>"
+            + "<script>"
+            + "document.form1.question.value = 'some text';"
+            + "alert(document.form1.elements[0].tagName);"
+            + "alert(document.form1.elements[1].tagName);"
+            + "</script>"
+            + "</body>"
+            + "</html>";
+        final List expectedAlerts = Arrays.asList( new String[]{ "TEXTAREA", "INPUT" } );
+        final List collectedAlerts = new ArrayList();
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
