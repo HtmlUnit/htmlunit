@@ -300,7 +300,7 @@
 
 
 <target name="SanityCheck" description="DO NOT RUN THIS TASK">
-    <java fork="yes" classname="com.gargoylesoftware.htmlunit.test.SanityCheck" dir="src/java">
+    <java fork="yes" classname="com.gargoylesoftware.htmlunit.SanityCheck" dir="src/java">
         <classpath refid="base.class.path"/>
         <classpath refid="test.class.path"/>
     </java>
