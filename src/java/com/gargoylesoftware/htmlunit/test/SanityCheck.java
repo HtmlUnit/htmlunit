@@ -25,11 +25,19 @@ import junit.textui.TestRunner;
 public class SanityCheck extends WebTestCase {
     private static final BrowserVersion browserVersion_ = BrowserVersion.MOZILLA_1_0;
 
+    /**
+     * Create an instance.
+     * @param name The name of the test.
+     */
     public SanityCheck( final String name ) {
         super( name );
     }
 
 
+    /**
+     * Main entry point for testing.
+     * @param args the arguments.
+     */
     public static void main( final String args[] ) {
         com.gargoylesoftware.htmlunit.test.MainTestSuite.enableAllLogging();
         TestRunner.run( SanityCheck.class );
@@ -37,18 +45,30 @@ public class SanityCheck extends WebTestCase {
     }
 
 
+    /**
+     * Test against a live server: Yahoo mail
+     * @throws Exception If something goes wrong.
+     */
     public void testYahooMail() throws Exception {
         final WebClient webClient = new WebClient(browserVersion_);
         assertInstanceOf(webClient.getPage( new URL( "http://mail.yahoo.com/" ) ), HtmlPage.class);
     }
 
 
+    /**
+     * Test against a live server: Yahoo
+     * @throws Exception If something goes wrong.
+     */
     public void testYahoo() throws Exception {
         final WebClient webClient = new WebClient(browserVersion_);
         assertInstanceOf( webClient.getPage( new URL( "http://yahoo.com/" ) ), HtmlPage.class );
     }
 
 
+    /**
+     * Test against a live server: IBM
+     * @throws Exception If something goes wrong.
+     */
     public void testIBM() throws Exception {
         final WebClient webClient = new WebClient(browserVersion_);
         webClient.setRedirectEnabled( true );
@@ -57,24 +77,40 @@ public class SanityCheck extends WebTestCase {
     }
 
 
+    /**
+     * Test against a live server: IBM Alphaworks
+     * @throws Exception If something goes wrong.
+     */
     public void testAlphaWorks() throws Exception {
         final WebClient webClient = new WebClient(browserVersion_);
         assertInstanceOf(webClient.getPage(new URL( "http://www.alphaworks.ibm.com" ) ), HtmlPage.class);
     }
 
 
+    /**
+     * Test against a live server: CNN
+     * @throws Exception If something goes wrong.
+     */
     public void testCNN() throws Exception {
         final WebClient webClient = new WebClient(browserVersion_);
         assertInstanceOf( webClient.getPage( new URL( "http://www.cnn.com" ) ), HtmlPage.class);
     }
 
 
+    /**
+     * Test against a live server: Toyota Canada
+     * @throws Exception If something goes wrong.
+     */
     public void testToyotaCanada() throws Exception {
         final WebClient webClient = new WebClient(browserVersion_);
         assertInstanceOf(webClient.getPage( new URL( "http://www.toyota.ca" ) ), HtmlPage.class);
     }
 
 
+    /**
+     * Test against a live server: HtmlUnit page on sourceforge using https
+     * @throws Exception If something goes wrong.
+     */
     public void testSourceForge_secure() throws Exception {
         try {
             final WebClient webClient = new WebClient(browserVersion_);
@@ -87,6 +123,10 @@ public class SanityCheck extends WebTestCase {
     }
 
 
+    /**
+     * Test against a live server: Yahoo secure login
+     * @throws Exception If something goes wrong.
+     */
     public void testYahooLogin_secure() throws Exception {
         try {
             final WebClient webClient = new WebClient(browserVersion_);
@@ -100,18 +140,29 @@ public class SanityCheck extends WebTestCase {
     }
 
 
+    /**
+     * Test against a live server: Amazon Canada
+     * @throws Exception If something goes wrong.
+     */
     public void testAmazonCanada() throws Exception {
         final WebClient webClient = new WebClient(browserVersion_);
         assertInstanceOf( webClient.getPage( new URL( "http://www.amazon.ca/" ) ), HtmlPage.class );
     }
 
 
+    /**
+     * Test against a live server: CNN After hours
+     * @throws Exception If something goes wrong.
+     */
     public void testCnnAfterHours() throws Exception {
         final WebClient webClient = new WebClient(browserVersion_);
         assertInstanceOf( webClient.getPage( new URL( "http://money.cnn.com/markets/afterhours/" ) ), HtmlPage.class );
     }
 
 
+    /**
+     * Print out the name of the test that is running.
+     */
     public void setUp() {
         System.out.println();
         System.out.println( "=====================================" );
