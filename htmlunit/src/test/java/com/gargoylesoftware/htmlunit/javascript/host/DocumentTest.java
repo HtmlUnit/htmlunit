@@ -112,6 +112,33 @@ public class DocumentTest extends WebTestCase {
 
 
     /**
+     * Previously, forms with no names were not being returned by document.forms.
+     * @throws Exception if the test fails
+     */
+    public void testFormsAccessor_FormWithNoName() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>\n"
+                 + "function doTest(){\n"
+                 + "    alert(document.forms.length)\n"
+                 + "}\n"
+                 + "</script></head><body onload='doTest()'>\n"
+                 + "<p>hello world</p>"
+                 + "<form>"
+                 + "    <input type='text' name='textfield1' value='foo' />"
+                 + "</form>"
+                 + "</body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
+
+         final List expectedAlerts = Collections.singletonList("1");
+
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
      * @throws Exception if the test fails
      */
     public void testFormsAccessor_NoForms() throws Exception {

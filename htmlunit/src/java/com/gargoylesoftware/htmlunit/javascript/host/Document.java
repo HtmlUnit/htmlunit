@@ -133,16 +133,13 @@ public final class Document extends NodeImpl {
         final Iterator iterator = formElements.iterator();
         while( iterator.hasNext() ) {
             final HtmlForm htmlForm = (HtmlForm)iterator.next();
-            final String formName = htmlForm.getAttributeValue("name");
-            if( formName.length() != 0 ) {
-                Form jsForm = (Form)htmlForm.getScriptObject();
-                if( jsForm == null ) {
-                    jsForm = (Form)makeJavaScriptObject("Form");
-                    jsForm.setHtmlElement( htmlForm );
-                    jsForm.initialize();
-                }
-                jsForms.add(jsForm);
+            Form jsForm = (Form)htmlForm.getScriptObject();
+            if( jsForm == null ) {
+                jsForm = (Form)makeJavaScriptObject("Form");
+                jsForm.setHtmlElement( htmlForm );
+                jsForm.initialize();
             }
+            jsForms.add(jsForm);
         }
 
         final int attributes = READONLY;
@@ -151,7 +148,9 @@ public final class Document extends NodeImpl {
         final NativeArray allForms = new NativeArray(array);
         for( int i=0; i<array.length; i++ ) {
             final String name = array[i].getHtmlElementOrDie().getAttributeValue("name");
-            allForms.defineProperty(name, array[i], attributes);
+            if( name.length() != 0 ) {
+                allForms.defineProperty(name, array[i], attributes);
+            }
         }
 
         return allForms;
