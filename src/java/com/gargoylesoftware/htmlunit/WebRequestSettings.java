@@ -41,11 +41,14 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang.ClassUtils;
+
 /**
  * Parameter object for making web requests
  * 
- * @author Brad Clarke
  * @version $Revision$
+ * @author Brad Clarke
+ * @author Hans Donner
  */
 public class WebRequestSettings {
     private URL url_;
@@ -116,4 +119,24 @@ public class WebRequestSettings {
         this.submitMethod_ = submitMethod;
         return this;
     }
+
+    /**
+     * Return a string representation of this object
+     * @return  See above
+     */
+    public String toString() {
+        final StringBuffer buffer = new StringBuffer();
+
+        buffer.append(ClassUtils.getShortClassName(getClass()));
+
+        buffer.append("[<");
+        buffer.append("url=\"" + url_.toExternalForm() + "\"");
+        buffer.append(", " + submitMethod_);
+        buffer.append(", " + encodingType_);
+        buffer.append(", " + requestParameters_);
+        buffer.append(">]");
+
+        return buffer.toString();
+    }
+
 }
