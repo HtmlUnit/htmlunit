@@ -65,6 +65,7 @@ import org.mozilla.javascript.Scriptable;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  */
 public final class Document extends HTMLElement {
     private DocumentAllArray allArray_;
@@ -260,6 +261,14 @@ public final class Document extends HTMLElement {
             initialize();
         }
         return allArray_;
+    }
+
+
+    /**
+     * Open document
+     */
+    public void jsFunction_open() {
+        getLog().debug("Not implemented yet: document.open()");
     }
 
 
