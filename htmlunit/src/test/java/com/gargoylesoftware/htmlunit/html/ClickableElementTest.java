@@ -42,6 +42,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -74,7 +75,22 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void onClickPageTest(final String htmlContent) throws Exception {
-        final WebClient client = new WebClient();
+        final List expectedAlerts = Arrays.asList( new String[]{"foo"} );
+        onClickPageTest(htmlContent, 1, expectedAlerts);
+    }
+
+    /**
+     * Full page driver for onClick tests.
+     *
+     * @param htmlContent HTML fragment for body of page with clickable element
+     * identified by clickId ID attribute.
+     * @param numClicks number of times to click element
+     * @param expectedAlerts List of expected popup values
+     * @throws Exception if the test fails
+     */
+    private void onClickPageTest(final String htmlContent, final int numClicks, final List expectedAlerts) throws Exception {
+        final BrowserVersion bv = new BrowserVersion("Netscape", "7", "", "1.2");
+        final WebClient client = new WebClient(bv);
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setDefaultResponse( htmlContent );
@@ -89,9 +105,10 @@ public class ClickableElementTest extends WebTestCase {
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final ClickableElement clickable = ( ClickableElement )page.getHtmlElementById( "clickId" );
 
-        clickable.click();
+        for (int i=0; i<numClicks; i++) {
+            clickable.click();
+        }
 
-        final List expectedAlerts = Arrays.asList( new String[]{"foo"} );
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -218,6 +235,18 @@ public class ClickableElementTest extends WebTestCase {
         onClickBodyTest("<body><form><button id='clickId' onClick='alert(\"foo\")'>Item</button></form></body>");
     }
 
+    /**
+     * Test onClick handler can be called multiple times
+     *
+     * @throws Exception if the test fails
+     */
+    public void testButton_onClickTwice() throws Exception {
+        final List expectedAlerts = Arrays.asList(new String[] {"foo0", "foo1"});
+        onClickPageTest("<body><form>" +
+                "<button id='clickId' onClick='alert(\"foo\" + count++)'>Item</button>" +
+                "<script> var count = 0 </script>" +
+                "</form></body>", 2, expectedAlerts);
+    }
 
     /**
      * Test onClick handler and click method of cite element.
@@ -855,6 +884,44 @@ public class ClickableElementTest extends WebTestCase {
             + "<tfoot><tr><th>Header</th></tr></tfoot></table></body>");
     }
 
+    /**
+     * Test when HtmlTableRow.onclick is set by a javascript
+     *
+     * @throws Exception if the test fails
+     */
+    public void testTableRow_onClickSetOnLoad() throws Exception {
+        onClickPageTest("<html><head>"
+                        + "<script language='JavaScript'>"
+                        + "function doFoo() { alert('foo');        }"
+                        + "function doOnload() { document.getElementById('clickId').onclick = doFoo;}"
+                        + "</script>"
+                        + "</head><body onload=\"doOnload();\">"
+                        + "<table><tbody><tr id='clickId'><td>cell value</td></tr></tbody></table>"
+                        + "</body></html>");
+    }
+
+    public void testCheckbox_onClickUpdatesStateFirst() throws Exception {
+        onClickPageTest("<html><head>"
+                        + "<script language='JavaScript'>"
+                        + "function doFoo(event) { if (this.checked) alert('foo'); else alert('bar'); }"
+                        + "function doOnload() { document.getElementById('clickId').onclick = doFoo;}"
+                        + "</script>"
+                        + "</head><body onload=\"doOnload();\">"
+                        + "<input type='checkbox' id='clickId'>"
+                        + "</body></html>");
+    }
+
+    /**
+     * Test when HtmlTableRow.onclick is set by a javascript
+     *
+     * @throws Exception if the test fails
+     */
+    public void testTableRow_onClickSetByNestedScript() throws Exception {
+        onClickBodyTest("<body><table><tbody><tr id='clickId'><td>cell value</td></tr></tbody></table>"
+                        + "<script language='JavaScript'>"
+                                + "function doFoo(event) { alert('foo');        }"
+                                + "document.getElementById('clickId').onclick = doFoo;</script></body>");
+    }
 
     /**
      * Test onClick handler and click method of teletype element.

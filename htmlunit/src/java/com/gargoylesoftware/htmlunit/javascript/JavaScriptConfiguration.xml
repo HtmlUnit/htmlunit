@@ -73,6 +73,9 @@
         <function name="createTextNode"/>
         <function name="getElementsByName"/>        
     </class>
+    <class name="Event">
+        <property name="currentTarget" readable="true" writable="false"/>
+    </class>
     <class name="FileUpload" extends="Input"/><!-- NOT FINISHED -->
     <class name="Form" extends="HTMLElement"><!-- NOT FINISHED -->
         <property name="name" readable="true" writable="false"/>
@@ -134,6 +137,10 @@
         <property name="offsetWidth" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
+        <property name="onclick" readable="true" writable="true">
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
+			<browser name="Netscape" min-version="3"/>
+        </property>
         <property name="outerHTML" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
@@ -172,9 +179,6 @@
         </function>
         <function name="insertAdjacentText">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
-        </function>
-        <function name="onclick">
-            <javascript min-version="1.2"/>
         </function>
         <function name="ondblclick">
             <javascript min-version="1.2"/>

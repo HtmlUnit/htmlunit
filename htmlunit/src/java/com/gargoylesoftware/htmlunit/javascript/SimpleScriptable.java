@@ -354,11 +354,21 @@ public class SimpleScriptable extends ScriptableObject {
       * @param domNode The DOM node
       */
      public void setDomNode( final DomNode domNode ) {
-         Assert.notNull("domNode", domNode);
-         domNode_ = domNode;
-         domNode_.setScriptObject(this);
+         setDomNode( domNode, true );
      }
 
+     /**
+      * Set the DOM node that corresponds to this javascript object
+      * @param domNode The DOM node
+      * @param assignScriptObject If true, call <code>setScriptObject</code> on domNode
+      */
+     protected void setDomNode( final DomNode domNode, final boolean assignScriptObject ) {
+         Assert.notNull("domNode", domNode);
+         domNode_ = domNode;
+         if (assignScriptObject) {
+             domNode_.setScriptObject(this);
+         }
+     }
 
      /**
       * Set the html element that corresponds to this javascript object

@@ -53,6 +53,7 @@ import org.apache.commons.httpclient.HttpConstants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -722,6 +723,41 @@ public final class HtmlPage extends DomNode implements Page {
         return new ScriptResult( result, firstWindow.getEnclosedPage() );
     }
 
+    /**
+     * Execute a Function in the given context.
+     *
+     * @param function The javascript Function to call.
+     * @param thisObject The "this" object to be used during invocation.
+     * @param args The arguments to pass into the call. 
+     * @param htmlElementScope The html element for which this script is being executed.
+     * This element will be the context during the javascript execution.  If null,
+     * the context will default to the page.
+     * @return A ScriptResult which will contain both the current page (which may be different than
+     * the previous page and a javascript result object.
+     */
+    public ScriptResult executeJavaScriptFunctionIfPossible(
+            Function function,
+            Scriptable thisObject,
+            Object[] args,
+            HtmlElement htmlElementScope) {
+        
+        final WebWindow window = getEnclosingWindow();
+        getWebClient().pushClearFirstWindow();
+
+        final ScriptEngine engine = getWebClient().getScriptEngine();
+        if( engine == null ) {
+            return new ScriptResult(null, this);
+        }
+
+        final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
+        
+        WebWindow firstWindow = getWebClient().popFirstWindow();
+        if ( firstWindow == null) {
+            firstWindow = window;
+        }
+        return new ScriptResult(result, firstWindow.getEnclosedPage());
+    }
+    
     /**
      * Return the log object for this element.
      * @return The log object for this element.

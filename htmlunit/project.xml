@@ -168,6 +168,9 @@
         <contributor>
             <name>Sergey Gorelkin</name>
         </contributor>
+        <contributor>
+            <name>Chris Eldredge</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

@@ -48,6 +48,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import org.mozilla.javascript.BaseFunction;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
+import org.mozilla.javascript.JavaScriptException;
+import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
+
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 
@@ -73,6 +80,14 @@ public abstract class HtmlElement extends DomNode {
     /** the map holding the attribute values by name */
     private Map attributes_;
 
+    /** the map holding event handlers */
+    private Map eventHandlers_;
+    
+    /**
+     * Counter to provide unique function names when defining event handlers 
+     */
+    private static int EventHandlerWrapperFunctionCounter_ = 0;
+
     /**
      *  Create an instance
      *
@@ -83,8 +98,10 @@ public abstract class HtmlElement extends DomNode {
     protected HtmlElement(final HtmlPage htmlPage, final Map attributes) {
 
         super(htmlPage);
+        eventHandlers_ = Collections.EMPTY_MAP;
         if(attributes != null) {
             attributes_ = attributes;
+            attributesToEventHandlers();
             String id = (String) attributes.get("id");
             if (id != null) {
                 getPage().addIdElement(this);
@@ -196,6 +213,81 @@ public abstract class HtmlElement extends DomNode {
      */
     public Iterator getAttributeEntriesIterator() {
         return attributes_.entrySet().iterator();
+    }
+
+    /**
+     *  Return a Function to be executed when a given event occurs.
+     * @param eventName Name of event such as "onclick" or "onblur", etc.
+     * @return A rhino javascript executable Function, or null if no event
+     * handler has been defined
+     */
+    public final Function getEventHandler(final String eventName) {
+       return (Function) eventHandlers_.get(eventName);
+    }
+    
+    /**
+     * Register a Function as an event handler.
+     * @param eventName Name of event such as "onclick" or "onblur", etc.
+     * @param eventHandler A rhino javascript executable Function
+     */
+    public final void setEventHandler(final String eventName, final Function eventHandler) {
+       if (eventHandlers_ == Collections.EMPTY_MAP) {
+          eventHandlers_ = new HashMap();
+       }
+       eventHandlers_.put(eventName, eventHandler);
+    }
+    
+    /**
+     * Register a snippet of javascript code as an event handler.  The javascript code will
+     * be wrapped inside a unique function declaration which provides one argument named
+     * "event"
+     * @param eventName Name of event such as "onclick" or "onblur", etc.
+     * @param jsSnippet executable javascript code
+     */
+    public final void setEventHandler(final String eventName, final String jsSnippet) {
+       
+      BaseFunction function = new BaseFunction() {
+          private String eventHandlerWrapperName_;
+          public Object call(final Context cx, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args)
+            throws JavaScriptException {
+    
+            if (eventHandlerWrapperName_ == null) {
+                final String functionDeclaration = wrapSnippet();
+                cx.evaluateString(scope, functionDeclaration, HtmlElement.class.getName(), 1, null);
+            }
+
+            final StringBuffer expression = new StringBuffer(eventHandlerWrapperName_);
+
+            if (args.length==1) {
+                ScriptableObject.putProperty(scope, "event", args[0]);
+                expression.append("(event)");
+            }
+            else {
+                expression.append("()");
+            }
+
+            final Object result = cx.evaluateString(scope, expression.toString(), "sourceName", 1, null);
+
+            return result;
+        }
+
+        private String wrapSnippet() {
+            eventHandlerWrapperName_ = "gargoyleEventHandlerWrapper" + EventHandlerWrapperFunctionCounter_++;
+
+            final StringBuffer buffer = new StringBuffer();
+
+            buffer.append("function ");
+            buffer.append(eventHandlerWrapperName_);
+            buffer.append("(event) {");
+            buffer.append(jsSnippet);
+            buffer.append("}");
+
+            return buffer.toString();
+        }
+      };
+       
+      setEventHandler(eventName, function);
     }
 
     /**
@@ -536,6 +628,22 @@ public abstract class HtmlElement extends DomNode {
     }
 
     /**
+    * Convert javascript snippets defined in the attribute map to executable event handlers.
+    * Should be called only on construction.
+    */
+    private void attributesToEventHandlers() {
+        for (final Iterator iter=attributes_.entrySet().iterator(); iter.hasNext();) {
+            final Map.Entry entry = (Map.Entry) iter.next();
+            final String eventName = (String) entry.getKey();
+
+            if (eventName.startsWith("on")) {
+                setEventHandler(eventName, (String) entry.getValue());
+            }
+        }
+
+    }
+
+   /**
      * an iterator over the HtmlElement children
      */
     protected class ChildElementsIterator implements Iterator {
