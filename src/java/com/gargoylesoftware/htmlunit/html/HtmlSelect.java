@@ -205,6 +205,14 @@ public class HtmlSelect
 
 
     /**
+     * Return the value of this element to what it was at the time the page was loaded.
+     */
+    public void reset() {
+        getLog().debug("reset() not implemented for this element");
+    }
+
+
+    /**
      *  Return true if this select is using "multiple select"
      *
      * @return  See above

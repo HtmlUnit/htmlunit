@@ -29,5 +29,11 @@ public interface SubmittableElement {
      */
     KeyValuePair[] getSubmitKeyValuePairs()
         throws ElementNotFoundException;
+
+
+    /**
+     * Return the value of this element to what it was at the time the page was loaded.
+     */
+    void reset();
 }
 

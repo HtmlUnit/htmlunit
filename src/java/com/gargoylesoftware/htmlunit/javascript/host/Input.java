@@ -143,11 +143,19 @@ public class Input extends HTMLElement {
     }
 
 
+    /**
+     * Return true if this element is disabled.
+     * @return True if this element is disabled.
+     */
     public boolean jsGet_disabled() {
         return getHtmlElementOrDie().isAttributeDefined("disabled");
     }
 
 
+    /**
+     * Set whether or not to disable this element
+     * @param disabled True if this is to be disabled.
+     */
     public void jsSet_disabled( final boolean disabled ) {
         final Element xmlElement = getHtmlElementOrDie().getElement();
         if( disabled ) {

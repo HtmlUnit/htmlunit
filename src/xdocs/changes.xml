@@ -3,6 +3,9 @@
 
 <section title="1.1-pre6">
 	<change-log>
+		<change type="new">
+			Added support for javascript:Input.disabled
+		</change>
 		<change type="change">
 			Upgraded NekoHTML to version 0.6.8
 		</change>
