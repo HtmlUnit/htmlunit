@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <document title="Change History">
 
-<section title="1.3">
+<section title="1.2.1">
 	<change-log>
 		<change type="new">
 			Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlButtonInput#click()</javadoc>
@@ -15,6 +15,11 @@
 		<change type="fix">
 			Fixed bug in HtmlForm.getRadioButtonsByName() where it would not match elements with an
 			uppercase value for "radio"
+		</change>
+		<change type="change">
+			Fixed a bunch of places that were declared to throw
+			<javadoc>com.gargoylesoftware.htmlunit.ElementNotFoundException</javadoc> but never actually
+			did.
 		</change>
 	</change-log>
 </section>

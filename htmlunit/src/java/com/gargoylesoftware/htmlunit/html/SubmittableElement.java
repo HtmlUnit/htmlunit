@@ -24,11 +24,8 @@ public interface SubmittableElement {
      *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
      * @return  See above
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
      */
-    KeyValuePair[] getSubmitKeyValuePairs()
-        throws ElementNotFoundException;
+    KeyValuePair[] getSubmitKeyValuePairs();
 
 
     /**

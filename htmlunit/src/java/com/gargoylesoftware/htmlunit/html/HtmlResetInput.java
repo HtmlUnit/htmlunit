@@ -37,14 +37,8 @@ public class HtmlResetInput extends HtmlInput {
      * will be the current page but if javascript is invoked by this click then
      * another page could have been loaded.
      * @exception  IOException If an io error occurs
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
      */
-    public Page click()
-        throws
-            IOException,
-            ElementNotFoundException {
-
+    public Page click() throws IOException {
         return super.click();
     }
 

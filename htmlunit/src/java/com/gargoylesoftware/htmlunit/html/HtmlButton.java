@@ -78,8 +78,7 @@ public class HtmlButton
     public Page click()
         throws
             IllegalStateException,
-            IOException,
-            ElementNotFoundException {
+            IOException {
 
         if( isDisabled() ) {
             return getPage();

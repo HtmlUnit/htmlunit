@@ -75,10 +75,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * @exception  ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
      */
-    public Page click()
-        throws
-            IOException,
-            ElementNotFoundException {
+    public Page click() throws IOException {
         return super.click();
     }
 }

@@ -49,8 +49,7 @@ public class HtmlSelect
      * @exception  ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
      */
-    public List getSelectedOptions()
-        throws ElementNotFoundException {
+    public List getSelectedOptions() {
         final List allOptions = getAllOptions();
         final List selectedOptions = new ArrayList( allOptions.size() );
 
@@ -71,11 +70,8 @@ public class HtmlSelect
      *  Return a List containing all the options
      *
      * @return  See above
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
      */
-    public List getAllOptions()
-        throws ElementNotFoundException {
+    public List getAllOptions() {
 
         final NodeList nodeList = getElement().getElementsByTagName( "option" );
         final int nodeCount = nodeList.getLength();
@@ -107,8 +103,7 @@ public class HtmlSelect
      * @return  The page that occupies this window after this change is made.  It
      * may be the same window or it may be a freshly loaded one.
      */
-    public Page setSelectedAttribute( final String optionValue, final boolean isSelected )
-        throws ElementNotFoundException {
+    public Page setSelectedAttribute( final String optionValue, final boolean isSelected ) {
 
         try {
             getOptionByValue( optionValue );
@@ -192,8 +187,7 @@ public class HtmlSelect
      * @exception  ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
      */
-    public KeyValuePair[] getSubmitKeyValuePairs()
-        throws ElementNotFoundException {
+    public KeyValuePair[] getSubmitKeyValuePairs() {
         final String name = getNameAttribute();
         final KeyValuePair[] pairs;
 
@@ -266,8 +260,7 @@ public class HtmlSelect
      * @exception  ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
      */
-    public String asText()
-        throws ElementNotFoundException {
+    public String asText() {
 
         final List options;
         if( isMultipleSelectEnabled() ) {

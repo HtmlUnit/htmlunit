@@ -81,7 +81,7 @@ public abstract class HtmlElement {
 
 
     /**
-     * Set the xml element that maps to this html element. 
+     * Set the xml element that maps to this html element.
      * @param element The xml element.
      */
     protected final void setElement( final Element element ) {
@@ -311,11 +311,8 @@ public abstract class HtmlElement {
      *  text
      *
      * @return  The element as text
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
      */
-    public String asText()
-        throws ElementNotFoundException {
+    public String asText() {
         return getChildrenAsText();
     }
 
@@ -325,12 +322,9 @@ public abstract class HtmlElement {
      *  would be visible in a web browser
      *
      * @return  See above
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
      * @see  #asText()
      */
-    protected final String getChildrenAsText()
-        throws ElementNotFoundException {
+    protected final String getChildrenAsText() {
 
         final StringBuffer buffer = new StringBuffer();
         final NodeList nodeList = getElement().getChildNodes();
@@ -825,9 +819,9 @@ public abstract class HtmlElement {
      * Add a property change listener to this element.
      * @param listener The new listener.
      */
-    public final synchronized void addPropertyChangeListener( 
+    public final synchronized void addPropertyChangeListener(
         final PropertyChangeListener listener ) {
-            
+
         assertNotNull("listener", listener);
         if( propertyChangeSupport_ == null ) {
             propertyChangeSupport_ = new PropertyChangeSupport(this);
@@ -840,9 +834,9 @@ public abstract class HtmlElement {
      * Remove a property change listener from this element.
      * @param listener The istener.
      */
-    public final synchronized void removePropertyChangeListener( 
+    public final synchronized void removePropertyChangeListener(
         final PropertyChangeListener listener ) {
-            
+
         assertNotNull("listener", listener);
         if( propertyChangeSupport_ != null ) {
             propertyChangeSupport_.removePropertyChangeListener(listener);
@@ -856,9 +850,9 @@ public abstract class HtmlElement {
      * @param oldValue The old value.
      * @param newValue The new value.
      */
-    protected final synchronized void firePropertyChange( 
+    protected final synchronized void firePropertyChange(
         final String propertyName, final Object oldValue, final Object newValue ) {
-            
+
         if( propertyChangeSupport_ != null ) {
             propertyChangeSupport_.firePropertyChange(propertyName, oldValue, newValue);
         }

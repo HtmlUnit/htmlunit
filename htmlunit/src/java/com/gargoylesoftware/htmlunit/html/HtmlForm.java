@@ -58,12 +58,10 @@ public class HtmlForm extends HtmlElement {
      * @param  buttonName The name of a submit input element or a button element
      *      which will be sent back up with the response
      * @return  A new Page that reflects the results of this submission
-     * @exception  IOException If an IO error occurs
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
+     * @throws IOException If an IO error occurs
+     * @throws ElementNotFoundException If a button with the specified name cannot be found.
      */
-    public Page submit( final String buttonName )
-        throws IOException, ElementNotFoundException {
+    public Page submit( final String buttonName ) throws IOException, ElementNotFoundException {
 
         HtmlElement htmlElement;
         try {
@@ -82,11 +80,8 @@ public class HtmlForm extends HtmlElement {
      *
      * @return  A new Page that reflects the results of this submission
      * @exception  IOException If an IO error occurs
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
      */
-    public Page submit()
-        throws IOException, ElementNotFoundException {
+    public Page submit() throws IOException {
         return submit( ( SubmittableElement )null );
     }
 
@@ -97,13 +92,8 @@ public class HtmlForm extends HtmlElement {
      * @param  submitElement The element that caused the submit to occur
      * @return  A new Page that reflects the results of this submission
      * @exception  IOException If an IO error occurs
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
      */
-    Page submit( final SubmittableElement submitElement )
-        throws
-            IOException,
-            ElementNotFoundException {
+    Page submit( final SubmittableElement submitElement ) throws IOException {
 
         final String action = getActionAttribute();
         final HtmlPage htmlPage = getPage();
@@ -279,7 +269,7 @@ public class HtmlForm extends HtmlElement {
      * @param  name The name of the input
      * @return  The input
      */
-    public final HtmlInput getInputByName( final String name ) {
+    public final HtmlInput getInputByName( final String name ) throws ElementNotFoundException {
         final List inputs = getHtmlElementsByAttribute( "input", "name", name );
         if( inputs.size() == 0 ) {
             throw new ElementNotFoundException( "input", "name", name );
@@ -332,7 +322,7 @@ public class HtmlForm extends HtmlElement {
      * @param name The name of the select element
      * @return The first select.
      */
-    public HtmlSelect getSelectByName( final String name ) {
+    public HtmlSelect getSelectByName( final String name ) throws ElementNotFoundException {
         final List list = getSelectsByName( name );
         if( list.isEmpty() ) {
             throw new ElementNotFoundException( "select", "name", name );
