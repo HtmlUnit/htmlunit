@@ -4,7 +4,7 @@
     <pomVersion>3</pomVersion>
     <id>htmlunit</id>
     <name>htmlunit</name>
-    <currentVersion>1.4</currentVersion>
+    <currentVersion>NextRelease</currentVersion>
 
     <organization>
         <name>Gargoyle Software Inc.</name>
