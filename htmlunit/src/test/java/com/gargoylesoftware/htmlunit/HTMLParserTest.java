@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
  *
  * @version  $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
  */
 public class HTMLParserTest extends WebTestCase {
 
@@ -129,8 +130,7 @@ public class HTMLParserTest extends WebTestCase {
      * @throws Exception failure
      */
     public void testUnknownTagInHead() throws Exception {
-        if (true) {
-            notImplemented();
+        if (notYetImplemented()) {
             return;
         }
 

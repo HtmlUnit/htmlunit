@@ -1095,10 +1095,10 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testSetOpenerLocationHrefRelative() throws Exception {
-        if (true) {
-            notImplemented();
+        if (notYetImplemented()) {
             return;
         }
+
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 

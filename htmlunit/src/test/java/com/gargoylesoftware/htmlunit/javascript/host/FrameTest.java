@@ -51,7 +51,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * Tests for Window
  *
  * @version  $Revision$
- * @author  Chris Erskine
+ * @author Chris Erskine
+ * @author Marc Guillemot
  */
 public class FrameTest extends WebTestCase {
     /**
@@ -61,37 +62,6 @@ public class FrameTest extends WebTestCase {
     public FrameTest( final String name ) {
         super(name);
     }
-
-//    /**
-//     * @throws Exception If the test fails
-//     */
-//    public void testFrameName() throws Exception {
-//        final String content
-//        = "<html><head><title>first</title>"
-//        + "</head>"
-//        + "<frameset cols='20%,80%'>"
-//        + "    <frame src='' name='frame1' id='frame1'>"
-//        + "    <frame onload=\"frame1.document.open();frame1.document.write("
-//        + "'<html><head><title>generated</title></head><body>generated</body></html>');"
-//        + "frame1.document.close()\"  id='frame2'>"
-//        + "</frameset></html>";
-//        
-//        final HtmlPage page = loadPage(content);
-//        final List frames = page.getFrames();
-//        Iterator it = frames.iterator();
-//        HtmlFrame frame;
-//        frame = null;
-//        while (it.hasNext())
-//        {
-//            frame = (HtmlFrame) it.next();
-//            if ("frame1".equals(frame.getNameAttribute()))
-//            {
-//                break;
-//            }
-//            fail("Did not find the expected frame by name");
-//        }
-//    }
-
 
     /**
      * @throws Exception if the test fails
@@ -127,11 +97,10 @@ public class FrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testLocation() throws Exception {
-        
-        if (true) {
-            notImplemented();
+        if (notYetImplemented()) {
             return;
         }
+
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection =
             new MockWebConnection(webClient);

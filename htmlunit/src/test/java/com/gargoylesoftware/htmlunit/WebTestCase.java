@@ -43,6 +43,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -326,5 +328,91 @@ public abstract class WebTestCase extends BaseTestCase {
     protected static final MockWebConnection getMockConnection(final HtmlPage page) {
         return (MockWebConnection) page.getWebClient().getWebConnection();
     }
+
+
+
+    /**
+     * Runs the calling JUnit test again and fails only if it already runs.<br/>
+     * This is helpfull for tests that don't currently work but should work one day,
+     * when the tested functionality has been implemented.<br/>
+     * The right way to use it is:
+     * <pre>
+     * public void testXXX() {
+     *   if (notYetImplemented()) {
+     *       return;
+     *   }
+     *   
+     *   ... the real (now failing) unit test
+     * }
+     * </pre>
+     * @return <false> when not itself already in the call stack
+     */
+    protected boolean notYetImplemented() {
+        if (notYetImplementedFlag.get() != null) {
+            return false;
+        }
+        notYetImplementedFlag.set(Boolean.TRUE);
+        
+        final Method testMethod = findRunningJUnitTestMethod();
+        try {
+            getLog().info("Running " + testMethod.getName() + " as not yet implemented");
+            testMethod.invoke(this, new Class[] {});
+            fail(testMethod.getName() + " is marked as not implemented but already works");
+        }
+        catch (final Exception e) {
+            getLog().info(testMethod.getName() + " fails what is normal as it is not yet implemented");
+            // method execution failed, it is really "not yet implemented"
+        }
+        
+        notYetImplementedFlag.set(null);
+        return true;
+    }
+
+    /**
+     * Finds from the call stack the active running JUnit test case
+     * @return the test case method
+     * @throws RuntimeException if no method could be found.
+     */
+    private Method findRunningJUnitTestMethod() {
+        final Class cl = getClass();
+        final Class[] args = new Class[] {};
+
+        // search the inial junit test
+        final Throwable t = new Exception();
+        for (int i=t.getStackTrace().length-1; i>=0; --i) {
+            final StackTraceElement element = t.getStackTrace()[i];
+            if (element.getClassName().equals(cl.getName())) {
+                try {
+                    final Method m = cl.getMethod(element.getMethodName(), args);
+                    if (isPublicTestMethod(m)) {
+                        return m;
+                    }
+                }
+                catch (final Exception e) {
+                    // can't acces, ignore it
+                }
+            }
+        }
+            
+        throw new RuntimeException("No JUnit test case method found in call stack");
+    }
+
+
+    /**
+     * From Junit. Test if the method is a junit test.
+     * @param method the method
+     * @return <code>true</code> if this is a junit test.
+     */
+    private boolean isPublicTestMethod(final Method method) {
+        final String name = method.getName();
+        final Class[] parameters = method.getParameterTypes();
+        final Class returnType = method.getReturnType();
+        
+        return parameters.length == 0 && name.startsWith("test") 
+            && returnType.equals(Void.TYPE)
+            && Modifier.isPublic(method.getModifiers());
+    }
+    
+    private static final ThreadLocal notYetImplementedFlag = new ThreadLocal();
 }
 
