@@ -266,6 +266,10 @@
             <action type="update" dev="mbowler">
                 Upgraded NekoHTML to 0.8.1
             </action>
+            <action type="update" dev="mbowler">
+                Added MockWebConnection in the deployable tree and changed FakeWebConnection
+                (in the test tree) to subclass that.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
