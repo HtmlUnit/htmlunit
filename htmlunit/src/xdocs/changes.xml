@@ -12,6 +12,9 @@
 		<change type="new" developer="Mike J. Bresnahan">
 			Added support for onchange handler in HtmlSelect
 		</change>
+		<change type="documentation">
+			Cleaned up some javadoc warnings
+		</change>
 	</change-log>
 </section>
 
