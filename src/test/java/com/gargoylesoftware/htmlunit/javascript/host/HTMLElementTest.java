@@ -293,6 +293,82 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testGetSetOuterHTMLSimple() throws Exception {
+        final String content = "<html>\n" +
+                "<head>\n" +
+                "    <title>test</title>\n" +
+                "    <script>\n" +
+                "    function doTest(){\n" +
+                "       var myNode = document.getElementById('myNode');\n" +
+                "       var innerNode = document.getElementById('innerNode');\n" +
+                "       alert('Old = ' + innerNode.outerHTML);\n" +
+                "       innerNode.outerHTML = 'New  cell value';\n" +
+                "       alert('New = ' + myNode.innerHTML);\n" +
+                "   }\n" +
+                "    </script>\n" +
+                "</head>\n" +
+                "<body onload='doTest()'>\n" +
+                "<p id='myNode'><b id='innerNode'>Old outerHTML</b></p>\n" +
+                "</body>\n" +
+                "</html>\n" +
+                "";
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "Old = <b id=\"innerNode\">Old outerHTML</b>",
+            "New = New cell value"
+        });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test the use of outerHTML to set new html code
+     * @throws Exception if the test fails
+     */
+    public void testGetSetOuterHTMLComplex() throws Exception {
+        final String content = "<html>\n" +
+                "<head>\n" +
+                "    <title>test</title>\n" +
+                "    <script>\n" +
+                "    function doTest(){\n" +
+                "       var myNode = document.getElementById('myNode');\n" +
+                "       var innerNode = document.getElementById('innerNode');\n" +
+                "       alert('Old = ' + innerNode.outerHTML);\n" +
+                "       innerNode.outerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n" +
+                "       alert('New = ' + myNode.innerHTML);\n" +
+                "       alert(document.getElementById('newElt').tagName);\n" +
+                "   }\n" +
+                "    </script>\n" +
+                "</head>\n" +
+                "<body onload='doTest()'>\n" +
+                "<p id='myNode'><b id='innerNode'>Old outerHTML</b></p>\n" +
+                "</body>\n" +
+                "</html>\n" +
+                "";
+
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "Old = <b id=\"innerNode\">Old outerHTML</b>",
+            "New =  <b><i id=\"newElt\">New cell value</i></b>",
+            "I"
+        });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+
+        final HtmlElement pElt = page.getHtmlElementById("myNode");
+        assertEquals("p", pElt.getNodeName());
+        final HtmlElement elt = page.getHtmlElementById("newElt");
+        assertEquals("New cell value", elt.asText());
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     public void testInsertAdjacentHTML() throws Exception {
