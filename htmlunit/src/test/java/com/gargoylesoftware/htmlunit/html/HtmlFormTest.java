@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
+ * @author George Murnock
  */
 public class HtmlFormTest extends WebTestCase {
     /**
@@ -248,10 +249,8 @@ public class HtmlFormTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
 
         client.setWebConnection( webConnection );
 
@@ -285,10 +284,8 @@ public class HtmlFormTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
 
         client.setWebConnection( webConnection );
 
@@ -322,10 +319,8 @@ public class HtmlFormTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
 
         client.setWebConnection( webConnection );
 
@@ -358,10 +353,8 @@ public class HtmlFormTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
 
         client.setWebConnection( webConnection );
 
@@ -394,8 +387,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
 
         client.setWebConnection( webConnection );
 
@@ -450,10 +442,8 @@ public class HtmlFormTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
 
         client.setWebConnection( webConnection );
 
@@ -495,10 +485,8 @@ public class HtmlFormTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
 
         client.setWebConnection( webConnection );
 
@@ -577,10 +565,8 @@ public class HtmlFormTest extends WebTestCase {
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
@@ -803,10 +789,8 @@ public class HtmlFormTest extends WebTestCase {
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST,firstContent,200,"OK","text/html",Collections.EMPTY_LIST );
-        webConnection.setResponseAsGenericHtml(
-            URL_SECOND, "second");
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponseAsGenericHtml(URL_SECOND, "second");
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
@@ -924,5 +908,28 @@ public class HtmlFormTest extends WebTestCase {
         assertCollectionsEqual(expectedParameters, collectedParameters);
     }
 
+     /**
+      * Simulate a bug report where using JavaScript to submit a form that contains a
+      * JavaScript action causes a an "IllegalArgumentException: javascript urls can only
+      * be used to load content into frames and iframes."
+      *
+      * @throws Exception if the test fails
+      */
+     public void testJSSubmit_JavaScriptAction() throws Exception {
+           final String htmlContent
+             = "<html><head><title>First</title></head>"
+             + "<body onload='document.getElementById(\"aForm\").submit()'>"
+             + "<form id='aForm' action='javascript:alert(\"clicked\")'"
+             + "</form>"
+             + "</body></html>";
+
+         final List expectedAlerts = Collections.singletonList("clicked");
+         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
+
+         final List collectedAlerts = new ArrayList();
+         loadPage(htmlContent, collectedAlerts);
+
+         assertEquals(expectedAlerts, collectedAlerts);
+     }
 }
 

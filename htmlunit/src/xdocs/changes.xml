@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1145773" due-to="George Murnock">
+                Fixed bug occuring when submitting from javascript a form with a javascript action.
+            </action>       
             <action type="update" dev="yourgod" id="1151184">
                 HtmlElement's getHtmlElementsByAttribute, getHtmlElementsByTagName, and 
                 getHtmlElementsByTagNames were all updated to ignore the case of the passed
