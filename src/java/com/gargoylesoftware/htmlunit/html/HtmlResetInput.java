@@ -51,7 +51,7 @@ public class HtmlResetInput extends HtmlInput {
             return getEnclosingFormOrDie().reset();
         }
         else {
-            return page.executeJavascriptIfPossible(onClick, "HtmlResetInput onClick handler");
+            return page.executeJavaScriptIfPossible(onClick, "HtmlResetInput onClick handler", true).getNewPage();
         }
     }
 

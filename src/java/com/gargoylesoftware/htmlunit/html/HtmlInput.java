@@ -83,7 +83,7 @@ public abstract class HtmlInput
             return getEnclosingFormOrDie().submit(this);
         }
         else {
-            return page.executeJavascriptIfPossible(onClick, "onClick handler for "+getClass().getName());
+            return page.executeJavaScriptIfPossible(onClick, "onClick handler for "+getClass().getName(), true).getNewPage();
         }
     }
 

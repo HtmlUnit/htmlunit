@@ -87,7 +87,7 @@ public class HtmlButton
             return getEnclosingFormOrDie().submit();
         }
         else {
-            return page.executeJavascriptIfPossible(onClick, "HtmlButton onClick handler");
+            return page.executeJavaScriptIfPossible(onClick, "HtmlButton onClick handler", true).getNewPage();
         }
     }
 

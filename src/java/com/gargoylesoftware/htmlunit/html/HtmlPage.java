@@ -832,7 +832,7 @@ public final class HtmlPage
             final HtmlBody body = (HtmlBody)bodyTags.get(0);
             final String onLoad = body.getOnLoadAttribute();
             if( onLoad.length() != 0 ) {
-                executeJavascriptIfPossible(onLoad, "body.onLoad");
+                executeJavaScriptIfPossible(onLoad, "body.onLoad", false);
             }
         }
         else {
