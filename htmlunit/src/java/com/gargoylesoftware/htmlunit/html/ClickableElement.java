@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
  * @version  $Revision$
  * @author David K. Taylor
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
  */
 public class ClickableElement
          extends StyledElement {
@@ -87,12 +88,17 @@ public class ClickableElement
         final String onClick = getOnClickAttribute();
 
         if( onClick.length() != 0 && page.getWebClient().isJavaScriptEnabled() ) {
+            if (isStateUpdateFirst()) {
+                final Page pageAfterAction = doClickAction(page);
+                page.executeJavaScriptIfPossible( onClick, "onClick handler for "+getClass().getName(), true, this );
+                return pageAfterAction;
+            }
             final ScriptResult scriptResult
                 = page.executeJavaScriptIfPossible( onClick,
                 "onClick handler for "+getClass().getName(), true, this );
             final Page scriptPage = scriptResult.getNewPage();
             if( scriptResult.getJavaScriptResult().equals( Boolean.FALSE ) ) {
-                return scriptPage;
+                return scriptResult.getNewPage();
             }
             else {
                 return doClickAction(scriptPage);
@@ -299,5 +305,16 @@ public class ClickableElement
      */
     public final String getOnKeyUpAttribute() {
         return getAttributeValue("onkeyup");
+    }
+
+    /**
+     * Return true if the state update should be done before onclick event
+     * handling.
+     * This is expected to be overriden to return "true" by derived classes
+     * like HtmlCheckBoxInput.
+     * @return Return true if state update should be done first.
+     */
+    protected boolean isStateUpdateFirst() {
+        return false;
     }
 }

@@ -37,7 +37,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
+
 import org.w3c.dom.Element;
+
+import com.gargoylesoftware.htmlunit.Page;
 
 /**
  *  Wrapper for the html element "input"
@@ -45,6 +49,7 @@ import org.w3c.dom.Element;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
  */
 public class HtmlCheckBoxInput extends HtmlInput {
 
@@ -84,6 +89,31 @@ public class HtmlCheckBoxInput extends HtmlInput {
         else {
             getElement().removeAttribute( "checked" );
         }
+    }
+    /**
+     * Override so that checkbox can change its state correctly when its
+     * click() method is called.
+     *
+     * {@inheritDoc}
+     */
+    protected Page doClickAction(Page defaultPage) throws IOException {
+        if (isChecked()) {
+            setChecked(false);
+        }
+        else {
+            setChecked(true);
+        }
+
+        return super.doClickAction(defaultPage);
+    }
+
+    /**
+     * Both IE and Mozilla will first update the internal state of checkbox
+     * and then handle "onclick" event.
+     * {@inheritDoc}
+     */
+    protected boolean isStateUpdateFirst() {
+        return true;
     }
 }
 

@@ -177,6 +177,10 @@
                 elements.  (The HTML 4 standard does not allow the action
                 attribute to be optional in form elements.)
             </action>
+            <action type="update" dev="mbowler" id="824730" due-to="Jun Chen">
+            	Changed the behaviour of HtmlCheckBoxInput.click() to be consistent
+            	with IE and Mozilla.  Patch submitted by Jun Chen.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">

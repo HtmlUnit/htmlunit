@@ -55,6 +55,7 @@ import java.util.List;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
  */
 public class HtmlFormTest extends WebTestCase {
     /**
@@ -711,5 +712,60 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals( expectedParameters, collectedParameters );
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+     public void testSubmit_CheckboxClicked() throws Exception {
+         final String htmlContent
+             = "<html><head><title>foo</title>"
+             + "<script language='javascript'>"
+             + "function setFormat()"
+             + "{"
+             + "    if(document.form1.Format.checked) {"
+             + "        document.form1.Format.value='html';"
+             + "    } else {"
+             + "        document.form1.Format.value='plain';"
+             + "    }"
+             + "}"
+             + "</script>"
+             + "</head><body>"
+             + "<form name='form1' id='form1'>"
+             + "<input type=checkbox name=Format value='' onclick='setFormat()'>"
+             + "    <input type='submit' name='button' value='foo'/>"
+             + "</form></body></html>";
+         final WebClient client = new WebClient();
+
+         final FakeWebConnection webConnection = new FakeWebConnection( client );
+         webConnection.setContent( htmlContent );
+         client.setWebConnection( webConnection );
+
+         final HtmlPage page = ( HtmlPage )client.getPage(
+             new URL( "http://first" ),
+             SubmitMethod.POST, Collections.EMPTY_LIST );
+         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+
+         final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) form.getInputByName("Format");
+
+         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
+
+         final List expectedParameters0 = Arrays.asList( new Object[]{
+             new KeyValuePair("button", "foo")
+         } );
+         final List expectedParameters1 = Arrays.asList( new Object[]{
+             new KeyValuePair("Format", "html"),
+             new KeyValuePair("button", "foo")
+         } );
+
+
+         button.click();
+         final List collectedParameters0 = webConnection.getLastParameters();
+
+         checkBox.click();
+         button.click();
+         final List collectedParameters1 = webConnection.getLastParameters();
+
+         assertEquals( expectedParameters0, collectedParameters0 );
+         assertEquals( expectedParameters1, collectedParameters1 );
+     }
 }
 
