@@ -57,11 +57,18 @@ import java.util.List;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class FormTest extends WebTestCase {
+    /**
+     * Create an instance
+     * @param name The name of the test
+     */
     public FormTest( final String name ) {
         super(name);
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testElementsAccessor() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>\n"
@@ -116,6 +123,9 @@ public class FormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testRadioButtonArray() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>\n"
@@ -152,6 +162,7 @@ public class FormTest extends WebTestCase {
      * If there is only one radio button with a specified name then that radio
      * button will be returned for the name, not an array of radio buttons.  Test
      * this.
+     * @throws Exception if the test fails
      */
     public void testRadioButton_OnlyOne() throws Exception {
         final String content
@@ -178,6 +189,9 @@ public class FormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testActionProperty() throws Exception {
         final String jsProperty = "action";
         final String htmlProperty = "action";
@@ -189,6 +203,9 @@ public class FormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testEncodingProperty() throws Exception {
         final String jsProperty = "encoding";
         final String htmlProperty = "enctype";
@@ -200,6 +217,9 @@ public class FormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testMethodProperty() throws Exception {
         final String jsProperty = "method";
         final String htmlProperty = "method";
@@ -211,6 +231,9 @@ public class FormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testTargetProperty() throws Exception {
         final String jsProperty = "target";
         final String htmlProperty = "target";
@@ -256,6 +279,9 @@ public class FormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testFormSubmit() throws Exception {
         final WebClient client = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( client );
@@ -288,11 +314,17 @@ public class FormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testInputNamedId() throws Exception {
         doTestInputWithName("id");
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testInputNamedAction() throws Exception {
         doTestInputWithName("action");
     }
@@ -334,6 +366,7 @@ public class FormTest extends WebTestCase {
 
     /**
      * Regression test that used to blow up on page load
+     * @throws Exception if the test fails
      */
     public void testAccessingRadioButtonArrayByName_Regression() throws Exception {
         final WebClient client = new WebClient();
@@ -375,6 +408,7 @@ public class FormTest extends WebTestCase {
     /**
      * Test for a bug that appeared when visiting mail.yahoo.com.  Setting the value of one input
      * seems to blow away the other input.
+     * @throws Exception if the test fails
      */
     public void testFindInputWithoutTypeDefined() throws Exception {
         final String content

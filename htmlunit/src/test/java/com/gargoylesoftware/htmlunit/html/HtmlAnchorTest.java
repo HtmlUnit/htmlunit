@@ -65,6 +65,9 @@ public class HtmlAnchorTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testClick() throws Exception {
 
         final String htmlContent
@@ -97,6 +100,9 @@ public class HtmlAnchorTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testClick_onClickHandler()
         throws Exception {
 
@@ -137,6 +143,9 @@ public class HtmlAnchorTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testClick_onClickHandler_returnFalse()
         throws Exception {
 
@@ -177,6 +186,9 @@ public class HtmlAnchorTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testClick_onClickHandler_javascriptDisabled() throws Exception {
 
         final String htmlContent
@@ -216,6 +228,9 @@ public class HtmlAnchorTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testClick_javascriptUrl() throws Exception {
 
         final String htmlContent
@@ -246,6 +261,9 @@ public class HtmlAnchorTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testClick_javascriptUrl_javascriptDisabled() throws Exception {
 
         final String htmlContent
@@ -278,6 +296,9 @@ public class HtmlAnchorTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testClick_javascriptUrl_InvalidReturn_RegressionTest() throws Exception {
 
         final String htmlContent

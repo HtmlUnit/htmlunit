@@ -104,7 +104,7 @@ public class FakeWebConnection extends WebConnection {
     /**
      *  Create an instance
      *
-     * @param  webClient
+     * @param  webClient The web client
      */
     public FakeWebConnection( final WebClient webClient ) {
         super( webClient );
@@ -112,18 +112,19 @@ public class FakeWebConnection extends WebConnection {
 
 
     /**
-     *  Submit a request to the processor
+     *  Submit a request and retrieve a response
      *
-     * @param  url The url
-     * @param  method The method to use
-     * @param  parameters any parameters
-     * @return  The response as an input stream
+     * @param  url The url of the server
+     * @param  method The submit method. Ie SubmitMethod.GET
+     * @param  parameters Any parameters
+     * @param  requestHeaders Any headers that need to be put into the request.
+     * @return  See above
      */
     public WebResponse getResponse(
             final URL url,
             final SubmitMethod method,
             final List parameters,
-            final Map requestParameters ) {
+            final Map requestHeaders ) {
 
         lastMethod_ = method;
         lastParameters_ = parameters;
@@ -245,6 +246,7 @@ public class FakeWebConnection extends WebConnection {
 
     /**
      * Set the default response entry to use the specified content with default values.
+     * @param content The new content
      */
     public void setContent( final String content ) {
         setDefaultResponse(content, 200, "OK", "text/html");

@@ -55,11 +55,19 @@ import java.util.List;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class StyleTest extends WebTestCase {
+
+    /**
+     * Create an instance
+     * @param name The name of the test
+     */
     public StyleTest( final String name ) {
         super(name);
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testStyle_OneCssAttribute() throws Exception {
         final WebClient client = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( client );
@@ -90,6 +98,9 @@ public class StyleTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testStyle_MultipleCssAttributes() throws Exception {
         final WebClient client = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( client );

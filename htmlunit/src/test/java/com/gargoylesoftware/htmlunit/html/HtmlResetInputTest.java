@@ -61,6 +61,9 @@ public class HtmlResetInputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testReset() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"

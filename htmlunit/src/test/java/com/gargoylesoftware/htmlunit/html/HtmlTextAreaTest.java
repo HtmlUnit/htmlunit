@@ -65,6 +65,9 @@ public class HtmlTextAreaTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testFormSubmission_OriginalData()
         throws Exception {
         final String htmlContent
@@ -99,6 +102,9 @@ public class HtmlTextAreaTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testFormSubmission_NewValue()
         throws Exception {
         final String htmlContent

@@ -64,11 +64,18 @@ import java.util.List;
  * @author Noboru Sinohara
  */
 public class JavaScriptEngineTest extends WebTestCase {
+    /**
+     * Create an instance
+     * @param name The name of the test
+     */
     public JavaScriptEngineTest( final String name ) {
         super(name);
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSetJavascriptEnabled_false() throws Exception {
         final WebClient client = new WebClient();
         client.setJavaScriptEnabled(false);
@@ -98,6 +105,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
     /**
      * Try to set the value of a text input field.
+     * @throws Exception if the test fails
      */
     public void testSetInputValue() throws Exception {
         final String content
@@ -120,6 +128,9 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testAlert() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>"
@@ -142,6 +153,9 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testExternalScript() throws Exception {
 
         final WebClient client = new WebClient();
@@ -180,6 +194,9 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testExternalScriptEncoding() throws Exception {
         final WebClient client = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( client );
@@ -279,6 +296,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * Set value on input expects a string.  If you pass in a value that isn't a string
      * this used to blow up.
+     * @throws Exception if the test fails
      */
     public void testSetValuesThatAreNotStrings() throws Exception {
         final String content
@@ -305,6 +323,9 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testReferencingVariablesFromOneScriptToAnother_Regression() throws Exception {
 
         final WebClient client = new WebClient();
@@ -340,6 +361,9 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testJavaScriptUrl() throws Exception {
 
         final WebClient client = new WebClient();
@@ -375,6 +399,9 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testJavaScriptWrappedInHtmlComments() throws Exception {
 
         final WebClient client = new WebClient();
@@ -400,6 +427,9 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testJavaScriptWrappedInHtmlComments_commentOnOpeningLine() throws Exception {
 
         final WebClient client = new WebClient();
@@ -427,6 +457,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * When using the syntax this.something in an onclick handler, "this" must represent
      * the object being clicked, not the window.  Regression test.
+     * @throws Exception if the test fails
      */
     public void testThisDotInOnClick() throws Exception {
 
@@ -458,6 +489,9 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testFunctionDefinedInExternalFile_CalledFromInlineScript() throws Exception {
 
         final WebClient client = new WebClient();
@@ -491,6 +525,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
     /**
      * Test case for bug 707134.  Currently I am unable to reproduce the problem.
+     * @throws Exception if the test fails
      */
     public void testFunctionDefinedInSameFile() throws Exception {
 

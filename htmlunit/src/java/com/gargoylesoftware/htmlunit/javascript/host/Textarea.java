@@ -71,11 +71,19 @@ public class Textarea extends Input {
     }
 
 
+    /**
+     * Return the value of the "value" attribute
+     * @return The value of the "value" attribute
+     */
     public String jsGet_value() {
         return ((HtmlTextArea)getHtmlElementOrDie()).getText();
     }
 
 
+    /**
+     * Set the value of the "value" attribute
+     * @param value The new value
+     */
     public void jsSet_value( final String value ) {
         ((HtmlTextArea)getHtmlElementOrDie()).setText(value);
     }

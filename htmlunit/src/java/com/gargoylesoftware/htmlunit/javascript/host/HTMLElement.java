@@ -137,6 +137,8 @@ public class HTMLElement extends SimpleScriptable {
 
     /**
      * Return the value of the named attribute.
+     * @param name The name of the variable
+     * @param start The scriptable to get the variable from.
      * @return The attribute value
      */
     public Object get( String name, Scriptable start ) {
@@ -199,7 +201,8 @@ public class HTMLElement extends SimpleScriptable {
         }
         if ( ( parentXmlNode instanceof Element ) == false ) {
             if( parentXmlNode instanceof HTMLDocumentImpl == false ) {
-                throw new IllegalStateException( "Parent XML node is not an Element.  Only Elements are currently supported.  Parent class: " 
+                throw new IllegalStateException( 
+                    "Parent XML node is not an Element.  Only Elements are currently supported.  Parent class: " 
                     + parentXmlNode.getClass() );
             }
             return null;

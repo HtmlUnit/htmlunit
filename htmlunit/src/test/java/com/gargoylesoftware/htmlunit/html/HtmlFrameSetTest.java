@@ -63,6 +63,9 @@ public class HtmlFrameSetTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testLoadingFrameSet()
         throws Exception {
 
@@ -107,6 +110,9 @@ public class HtmlFrameSetTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testLoadingIFrames()
         throws Exception {
 

@@ -85,24 +85,25 @@ public class SanityCheck extends WebTestCase {
     }
 
 
-	/**
-	 * Test against a live server: Yahoo
-	 * @throws Exception If something goes wrong.
-	 */
-	public void testYahoo() throws Exception {
-		final WebClient webClient = new WebClient(BROWSER_VERSION);
-		assertInstanceOf( webClient.getPage( new URL( "http://yahoo.com/" ) ), HtmlPage.class );
-	}
+    /**
+     * Test against a live server: Yahoo
+     * @throws Exception If something goes wrong.
+     */
+    public void testYahoo() throws Exception {
+        final WebClient webClient = new WebClient(BROWSER_VERSION);
+        assertInstanceOf( webClient.getPage( new URL( "http://yahoo.com/" ) ), HtmlPage.class );
+    }
 
-	/**
-	 * Test against a live server: Yahoo
-	 * @throws Exception If something goes wrong.
-	 */
-	public void testYahoo_Spanish() throws Exception {
-		final WebClient webClient = new WebClient(BROWSER_VERSION);
-		assertInstanceOf( webClient.getPage( new URL( "http://edit.europe.yahoo.com/config/mail?.intl=es" ) ), HtmlPage.class );
-	}
-	
+    /**
+     * Test against a live server: Yahoo
+     * @throws Exception If something goes wrong.
+     */
+    public void testYahoo_Spanish() throws Exception {
+        final WebClient webClient = new WebClient(BROWSER_VERSION);
+        assertInstanceOf( 
+            webClient.getPage( new URL( "http://edit.europe.yahoo.com/config/mail?.intl=es" ) ), HtmlPage.class );
+    }
+
 
     /**
      * Test against a live server: IBM

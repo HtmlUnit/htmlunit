@@ -63,11 +63,18 @@ import org.apache.commons.httpclient.HttpState;
  * @author Barnaby Court
  */
 public class DocumentTest extends WebTestCase {
+    /**
+     * Create an instance
+     * @param name The name of the test
+     */
     public DocumentTest( final String name ) {
         super(name);
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testFormsAccessor_TwoForms() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>\n"
@@ -99,6 +106,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testFormsAccessor_NoForms() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>\n"
@@ -124,6 +134,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testDocumentWrite_AssignedToVar() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>\n"
@@ -147,7 +160,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
-    // Regression test
+    /**
+     * @throws Exception if the test fails
+     */
     public void testFormArray() throws Exception {
         final WebClient client = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( client );
@@ -186,6 +201,9 @@ public class DocumentTest extends WebTestCase {
      }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testDocumentLocationHref() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -215,6 +233,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for bug 742902
+     * @throws Exception if the test fails
      */
     public void testDocumentLocation() throws Exception {
         final WebClient webClient = new WebClient();
@@ -245,6 +264,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for RFE 741930
+     * @throws Exception if the test fails
      */
     public void testDocumentCreateElement() throws Exception {
         final WebClient webClient = new WebClient();
@@ -276,6 +296,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for RFE 741930
+     * @throws Exception if the test fails
      */
     public void testAppendChild() throws Exception {
         final WebClient webClient = new WebClient();
@@ -313,6 +334,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetElementById() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -343,6 +367,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for bug 740665
+     * @throws Exception if the test fails
      */
     public void testGetElementById_divId() throws Exception {
         final WebClient webClient = new WebClient();
@@ -374,6 +399,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for bug 740665
+     * @throws Exception if the test fails
      */
     public void testGetElementById_scriptId() throws Exception {
         final WebClient webClient = new WebClient();
@@ -404,6 +430,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for bug 740665
+     * @throws Exception if the test fails
      */
     public void testGetElementById_scriptType() throws Exception {
         final WebClient webClient = new WebClient();
@@ -435,6 +462,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for bug 740665
+     * @throws Exception if the test fails
      */
     public void testGetElementById_scriptSrc() throws Exception {
         final WebClient webClient = new WebClient();
@@ -469,6 +497,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for parentNode with nested elements
+     * @throws Exception if the test fails
      */
     public void testParentNode_Nested() throws Exception {
         final WebClient webClient = new WebClient();
@@ -501,6 +530,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for parentNode of document
+     * @throws Exception if the test fails
      */
     public void testParentNode_Document() throws Exception {
         final WebClient webClient = new WebClient();
@@ -531,6 +561,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for parentNode and createElement
+     * @throws Exception if the test fails
      */
     public void testParentNode_CreateElement() throws Exception {
         final WebClient webClient = new WebClient();
@@ -562,6 +593,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for parentNode and appendChild
+     * @throws Exception if the test fails
      */
     public void testParentNode_AppendChild() throws Exception {
         final WebClient webClient = new WebClient();
@@ -594,6 +626,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testAllProperty_KeyByName() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -628,6 +663,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for bug 707750
+     * @throws Exception if the test fails
      */
     public void testAllProperty_CalledDuringPageLoad() throws Exception {
         final WebClient webClient = new WebClient();
@@ -656,6 +692,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testDocumentWrite() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -682,6 +721,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for bug 743241
+     * @throws Exception if the test fails
      */
     public void testDocumentWrite_LoadScript() throws Exception {
         final WebClient webClient = new WebClient();
@@ -713,6 +753,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for bug 715379
+     * @throws Exception if the test fails
      */
     public void testDocumentWrite_script() throws Exception {
         final WebClient webClient = new WebClient();
@@ -761,6 +802,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetReferrer() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -784,6 +828,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetReferrer_NoneSpecified() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -807,6 +854,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetURL() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -830,6 +880,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetElementsByTagName() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -863,6 +916,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for bug 740636
+     * @throws Exception if the test fails
      */
     public void testGetElementsByTagName_CaseInsensitive() throws Exception {
         final WebClient webClient = new WebClient();
@@ -897,6 +951,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for bug 740605
+     * @throws Exception if the test fails
      */
     public void testGetElementsByTagName_Inline() throws Exception {
         final WebClient webClient = new WebClient();
@@ -922,6 +977,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Regression test for bug 740605
+     * @throws Exception if the test fails
      */
     public void testGetElementsByTagName_LoadScript() throws Exception {
         final WebClient webClient = new WebClient();
@@ -948,6 +1004,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testDocumentAll_IndexByInt() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -979,6 +1038,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testDocumentAll_tags() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -1013,6 +1075,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testCookie_read() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );

@@ -51,11 +51,18 @@ import java.util.List;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class SelectTest extends WebTestCase {
+    /**
+     * Create an instance
+     * @param name The name of the test
+     */
     public SelectTest( final String name ) {
         super(name);
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetSelectedIndex() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>"
@@ -85,6 +92,9 @@ public class SelectTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetOptions() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>"

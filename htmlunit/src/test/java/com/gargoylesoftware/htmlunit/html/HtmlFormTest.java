@@ -199,6 +199,9 @@ public class HtmlFormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSubmit_String()
         throws Exception {
         final String htmlContent
@@ -222,6 +225,9 @@ public class HtmlFormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSubmit_ExtraParameters()
         throws Exception {
         final String htmlContent
@@ -253,6 +259,9 @@ public class HtmlFormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSubmit_onSubmitHandler()
         throws Exception {
 
@@ -287,6 +296,9 @@ public class HtmlFormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSubmit_onSubmitHandler_returnFalse()
         throws Exception {
 
@@ -322,6 +334,9 @@ public class HtmlFormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSubmit_onSubmitHandler_javascriptDisabled() throws Exception {
 
         final String firstContent
@@ -358,6 +373,9 @@ public class HtmlFormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSubmit_javascriptAction() throws Exception {
 
         final String firstContent
@@ -391,6 +409,9 @@ public class HtmlFormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSubmit_javascriptAction_javascriptDisabled() throws Exception {
 
         final String firstContent
@@ -423,6 +444,7 @@ public class HtmlFormTest extends WebTestCase {
 
     /**
      * Regression test for a bug that caused a NullPointer exception to be thrown during submit.
+     * @throws Exception if the test fails
      */
     public void testSubmitRadioButton() throws Exception {
         final String firstContent
@@ -451,6 +473,9 @@ public class HtmlFormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testReset_onResetHandler()
         throws Exception {
 
@@ -490,6 +515,7 @@ public class HtmlFormTest extends WebTestCase {
      * Simulate a bug report where an anchor contained javascript that caused a form submit.
      * According to the bug report, the form would be submitted even though the onsubmit
      * handler would return false.  This wasn't reproducible but I added a test for it anyway.
+     * @throws Exception if the test fails
      */
     public void testSubmit_AnchorCausesSubmit_onSubmitHandler_returnFalse()
         throws Exception {
@@ -528,6 +554,9 @@ public class HtmlFormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSubmit_NoDefaultValue()
         throws Exception {
         final String htmlContent
@@ -559,6 +588,9 @@ public class HtmlFormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetInputByName_WithinNoScriptTags() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
@@ -584,6 +616,9 @@ public class HtmlFormTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testForSubmit_TwoInputsWithSameName() throws Exception {
         final String firstContent
                  = "<html><head><title>First</title></head><body>"

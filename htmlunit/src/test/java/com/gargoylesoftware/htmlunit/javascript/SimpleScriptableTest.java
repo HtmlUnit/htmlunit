@@ -61,11 +61,18 @@ import java.util.TreeSet;
  * @author  <a href="mailto:BarnabyCourt@users.sourceforge.net">Barnaby Court</a>
  */
 public class SimpleScriptableTest extends WebTestCase {
+    /**
+     * Create an instance
+     * @param name The name of the test
+     */
     public SimpleScriptableTest( final String name ) {
         super(name);
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testCallInheritedFunction() throws Exception {
         final WebClient client = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( client );
@@ -99,6 +106,8 @@ public class SimpleScriptableTest extends WebTestCase {
     }
 
 
+    /**
+     */
     public void testHtmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
         final Map map = SimpleScriptable.getHtmlJavaScriptMapping();
         final String directoryName = "../../src/java/com/gargoylesoftware/htmlunit/javascript/host";

@@ -64,6 +64,9 @@ public class HtmlImageInputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testClick_NoPosition() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
@@ -92,6 +95,9 @@ public class HtmlImageInputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testClick_WithPosition() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"

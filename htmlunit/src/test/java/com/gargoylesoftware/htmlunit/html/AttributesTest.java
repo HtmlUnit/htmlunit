@@ -350,10 +350,4 @@ public class AttributesTest extends TestCase {
             new URL( "http://first" ),
             SubmitMethod.POST, Collections.EMPTY_LIST );
     }
-
-
-    public static void main( final String args[] ) {
-        junit.textui.TestRunner.main( new String[]{
-            "com.gargoylesoftware.htmlunit.html.AttributesTest"
-        } );
-    }}
+}

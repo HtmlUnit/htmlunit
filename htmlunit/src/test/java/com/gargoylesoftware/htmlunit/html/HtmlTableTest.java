@@ -136,6 +136,9 @@ public class HtmlTableTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetTableRows()
         throws Exception {
 
@@ -173,6 +176,9 @@ public class HtmlTableTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetTableRows_WithHeadBodyFoot()
         throws Exception {
 
@@ -216,6 +222,9 @@ public class HtmlTableTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testRowGroupings_AllDefined()
         throws Exception {
 
@@ -255,6 +264,9 @@ public class HtmlTableTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testRowGroupings_NoneDefined()
         throws Exception {
 
@@ -286,6 +298,9 @@ public class HtmlTableTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetCaptionText()
         throws Exception {
 
