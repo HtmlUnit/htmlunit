@@ -72,7 +72,12 @@ public class HtmlFrame
         final WebClient webClient = page.getWebClient();
         webClient.registerWebWindow(this);
 
-        final String source = getSrcAttribute();
+        String source = getSrcAttribute();
+        if( source.length() == 0 ) {
+            // Nothing to load
+            source = "about:blank";
+        }
+
         try {
             final URL url = page.getFullyQualifiedUrl(source);
             setEnclosedPage( webClient.getPage(
