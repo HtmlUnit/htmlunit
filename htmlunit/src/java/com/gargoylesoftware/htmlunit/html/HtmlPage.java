@@ -172,7 +172,7 @@ public final class HtmlPage
         executeJavaScriptIfPossible("", "Dummy stub just to get javascript initialized", false, null);
 
         initializeFramesIfNeeded();
-        executeBodyOnLoadHandlerIfNeeded();
+        executeOnLoadHandlersIfNeeded();
         executeRefreshIfNeeded();
     }
 
@@ -1207,8 +1207,27 @@ public final class HtmlPage
     }
 
 
-    private void executeBodyOnLoadHandlerIfNeeded() {
-        Object onLoad = getOnLoadAttribute();
+    /**
+     * Look for and execute any appropriate onload handlers.  Look for body
+     * and frame tags.
+     */
+    private void executeOnLoadHandlersIfNeeded() {
+        executeOneOnLoadHandler( getOnLoadAttribute() );
+
+        final List tagNames = Collections.singletonList("frame");
+        final Iterator iterator = getHtmlElementsByTagNames( tagNames ).iterator();
+        while( iterator.hasNext() ) {
+            final HtmlFrame frame = (HtmlFrame)iterator.next();
+            executeOneOnLoadHandler(frame.getOnLoadAttribute());
+        }
+    }
+
+    /**
+     * Execute a single onload handler.  This will either be a string which
+     * will be executed as javascript, or a javascript Function.
+     * @param onLoad The javascript to execute
+     */
+    private void executeOneOnLoadHandler( final Object onLoad ) {
         if ( onLoad instanceof String ) {
             String onLoadScript = (String) onLoad;
             if( onLoadScript.length() != 0 ) {
@@ -1228,7 +1247,6 @@ public final class HtmlPage
             engine.callFunction( this, onLoad, null, new Object [0], null );
         }
     }
-
     /**
      * If a refresh has been specified either through a meta tag or an http
      * response header, then perform that refresh.

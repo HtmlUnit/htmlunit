@@ -197,6 +197,19 @@ public class HtmlFrame
 
 
     /**
+     * Return the value of the attribute "onload".  This attribute is not
+     * actually supported by the HTML specification however it is supported
+     * by the popular browsers.
+     *
+     * @return The value of the attribute "onload"
+     * or an empty string if that attribute isn't defined.
+     */
+    public final String getOnLoadAttribute() {
+        return getAttributeValue("onload");
+    }
+
+
+    /**
      * Return the name of this window.
      *
      * @return The name of this window.
