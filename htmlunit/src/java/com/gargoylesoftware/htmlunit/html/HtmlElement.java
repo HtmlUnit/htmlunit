@@ -184,6 +184,35 @@ public abstract class HtmlElement extends DomNode {
 
 
     /**
+     * Set the value of the specified attribute.
+     *
+     * @param attributeName the name of the attribute
+     * @param attributeValue The value of the attribute
+     */
+    public final void setAttributeValue( final String attributeName,
+        final String attributeValue ) {
+
+        setAttributeValue( getElement(), attributeName, attributeValue);
+    }
+
+
+    /**
+     * Set the value of the specified attribute.
+     *
+     * @param element The element with the attribute to be set.
+     * @param attributeName the name of the attribute
+     * @param attributeValue The value of the attribute
+     */
+    public final void setAttributeValue( final Element element,
+        final String attributeName, final String attributeValue ) {
+        Assert.notNull("element", element);
+        Assert.notNull("attributeName", attributeName);
+
+        element.setAttribute( attributeName.toUpperCase(), attributeValue);
+    }
+
+
+    /**
      * Return true if the specified attribute has been defined.  This is neccessary
      * in order to distinguish between an attribute that is set to an empty string
      * and one that was not defined at all.

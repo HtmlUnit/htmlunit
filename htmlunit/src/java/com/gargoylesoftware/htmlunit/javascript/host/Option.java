@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 
 /**
@@ -44,8 +45,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  David K. Taylor
  */
 public class Option extends HTMLElement {
+    private String text;
+    private String value;
 
     /**
      * Create an instance.
@@ -58,9 +62,28 @@ public class Option extends HTMLElement {
      * Javascript constructor.  This must be declared in every javascript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
-    public void jsConstructor() {
+    public void jsConstructor( final String newText, final String newValue ) {
+        if ( newText != null && ! newText.equals( "undefined" ) ) {
+            text = newText;
+        }
+        if ( newValue != null && ! newValue.equals( "undefined" ) ) {
+            value = newValue;
+        }
     }
 
+     /**
+      * Set the DOM node that corresponds to this javascript object
+      * @param domNode The DOM node
+      */
+    public void setDomNode( DomNode domNode ) {
+        super.setDomNode( domNode );
+        if ( value != null ) {
+            jsSet_value( value );
+        }
+        if ( text != null ) {
+            jsSet_text( text );
+        }
+    }
 
     /**
      * Return the value of the "value" property
@@ -70,12 +93,33 @@ public class Option extends HTMLElement {
         return ((HtmlOption)getHtmlElementOrDie()).getValueAttribute();
     }
 
+    /**
+     * Set the value of the "value" property
+     * @param newValue The value property
+     */
+    public void jsSet_value( String newValue ) {
+        ((HtmlOption)getHtmlElementOrDie()).setValueAttribute( newValue );
+    }
+
 
     /**
      * Return the value of the "text" property
      * @return The text property
      */
     public String jsGet_text() {
-        return ((HtmlOption)getHtmlElementOrDie()).asText();
+        final HtmlOption htmlOption = (HtmlOption) getHtmlElementOrDie();
+        if ( htmlOption.isAttributeDefined( "label" ) ) {
+            return htmlOption.getLabelAttribute();
+        }
+        return htmlOption.asText();
+    }
+
+
+    /**
+     * Set the value of the "text" property
+     * @param newText The text property
+     */
+    public void jsSet_text( String newText ) {
+        ((HtmlOption)getHtmlElementOrDie()).setLabelAttribute( newText );
     }
 }

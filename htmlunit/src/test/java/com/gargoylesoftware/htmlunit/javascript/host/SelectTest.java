@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  David K. Taylor
  */
 public class SelectTest extends WebTestCase {
     /**
@@ -133,6 +134,41 @@ public class SelectTest extends WebTestCase {
          assertEquals( expectedAlerts, collectedAlerts );
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetOptionLabel() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "function doTest() {\n"
+                 + "    var options = document.form1.select1.options;\n"
+                 + "    for( i=0; i<options.length; i++ ) {\n"
+                 + "        alert(options[i].value);\n"
+                 + "        alert(options[i].text);\n"
+                 + "    }\n"
+                 + "}</script></head><body onload='doTest()'>"
+                 + "<p>hello world</p>"
+                 + "<form name='form1'>"
+                 + "    <select name='select1'>"
+                 + "        <option name='option1' value='value1' label='OneLabel'>One</option>"
+                 + "        <option name='option2' value='value2' label='TwoLabel' selected>Two</option>"
+                 + "        <option name='option3' value='value3' label='ThreeLabel'>Three</option>"
+                 + "    </select>"
+                 + "</form>"
+                 + "</body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "value1", "OneLabel", "value2", "TwoLabel", "value3", "ThreeLabel"
+         } );
+
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
     /**
      *
      * @throws Exception if the test fails
@@ -165,5 +201,147 @@ public class SelectTest extends WebTestCase {
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals("first", page.getTitleText());
         assertEquals( Collections.singletonList("true"), collectedAlerts );
+    }
+
+    /**
+     *
+     * @throws Exception if the test fails
+     */
+    public void testGetOptionByOptionIndex() throws Exception {
+        final String content
+            = "<html><head><title>first</title><script language='JavaScript'>"
+            //+ "//<!--"
+            + "function buggy(){\n"
+            + "var option1 = document.form1.select1.options[0];\n"
+            + "alert(option1.text);\n"
+            + "}\n"
+            //+ "//-->\n"
+            + "</script></head><body onload='buggy();'>"
+            + "<form name='form1'>"
+            + "    <select name='select1'>"
+            + "        <option name='option1' value='value1'>One</option>"
+            + "        <option name='option2' value='value2' selected>Two</option>"
+            + "        <option name='option3' value='value3'>Three</option>"
+            + "    </select>"
+            + "</form>"
+            + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( content );
+        client.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals("first", page.getTitleText());
+        assertEquals( Collections.singletonList("One"), collectedAlerts );
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testAddOption() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "function doTest() {\n"
+                 + "    var options = document.form1.select1.options;\n"
+                 + "    var index = options.length;\n"
+                 + "    options[index]=new Option('Four','value4');\n"
+                 + "    alert(options.length);\n"
+                 + "    alert(options[index].text);\n"
+                 + "    alert(options[index].value);\n"
+                 + "}</script></head><body onload='doTest()'>"
+                 + "<p>hello world</p>"
+                 + "<form name='form1'>"
+                 + "    <select name='select1'>"
+                 + "        <option name='option1' value='value1'>One</option>"
+                 + "        <option name='option2' value='value2' selected>Two</option>"
+                 + "        <option name='option3' value='value3'>Three</option>"
+                 + "    </select>"
+                 + "</form>"
+                 + "</body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "4", "Four", "value4"
+         } );
+
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testRemoveOption() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "function doTest() {\n"
+                 + "    var options = document.form1.select1.options;\n"
+                 + "    options[1]=null;\n"
+                 + "    alert(options.length);\n"
+                 + "    alert(options[1].text);\n"
+                 + "    alert(options[1].value);\n"
+                 + "}</script></head><body onload='doTest()'>"
+                 + "<p>hello world</p>"
+                 + "<form name='form1'>"
+                 + "    <select name='select1'>"
+                 + "        <option name='option1' value='value1'>One</option>"
+                 + "        <option name='option2' value='value2' selected>Two</option>"
+                 + "        <option name='option3' value='value3'>Three</option>"
+                 + "    </select>"
+                 + "</form>"
+                 + "</body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "2", "Three", "value3"
+         } );
+
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testClearOptions() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "function doTest() {\n"
+                 + "    var options = document.form1.select1.options;\n"
+                 + "    options.length=0;\n"
+                 + "    alert(options.length);\n"
+                 + "}</script></head><body onload='doTest()'>"
+                 + "<p>hello world</p>"
+                 + "<form name='form1'>"
+                 + "    <select name='select1'>"
+                 + "        <option name='option1' value='value1'>One</option>"
+                 + "        <option name='option2' value='value2' selected>Two</option>"
+                 + "        <option name='option3' value='value3'>Three</option>"
+                 + "    </select>"
+                 + "</form>"
+                 + "</body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "0"
+         } );
+
+         assertEquals( expectedAlerts, collectedAlerts );
     }
 }

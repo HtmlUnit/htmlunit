@@ -266,12 +266,23 @@ public class SimpleScriptable extends ScriptableObject {
         try {
             newObject = (SimpleScriptable)pageInfo.getContext().newObject(
                 pageInfo.getScope(), className, new Object[0]);
-            newObject.setPageInfo( pageInfo );
+            initJavaScriptObject( newObject );
             return newObject;
         }
         catch( final Exception e ) {
             throw new ScriptException(e);
         }
+    }
+
+
+    /**
+     * Initialize a new javascript object
+     * @param newObject The JavaScript object to initialize.
+     */
+    void initJavaScriptObject( final SimpleScriptable newObject ) {
+        final JavaScriptEngine.PageInfo pageInfo = getPageInfo();
+
+        newObject.setPageInfo( pageInfo );
     }
 
 

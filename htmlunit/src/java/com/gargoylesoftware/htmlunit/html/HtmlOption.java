@@ -146,6 +146,18 @@ public class HtmlOption extends ClickableElement {
 
 
     /**
+     * Set the value of the attribute "label".  Refer to the
+     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @param newLabel The value of the attribute "label".
+     */
+    public final void setLabelAttribute( final String newLabel ) {
+        setAttributeValue("label", newLabel);
+    }
+
+
+    /**
      * Return the value of the attribute "value".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
@@ -155,5 +167,17 @@ public class HtmlOption extends ClickableElement {
      */
     public final String getValueAttribute() {
         return getAttributeValue("value");
+    }
+
+
+    /**
+     * Set the value of the attribute "value".  Refer to the
+     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @param newValue The value of the attribute "value".
+     */
+    public final void setValueAttribute( final String newValue ) {
+        setAttributeValue("value", newValue);
     }
 }

@@ -47,6 +47,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -115,6 +116,87 @@ public class HtmlSelect
         }
 
         return Collections.unmodifiableList( allOptions );
+    }
+
+
+    /**
+     *  Return the indexed option.
+     *
+     * @param index The index
+     * @return The option specified by the index
+     */
+    public HtmlOption getOption( final int index ) {
+
+        final NodeList nodeList =
+            getElement().getElementsByTagName( "option" );
+
+        return (HtmlOption) getPage().getHtmlElement( nodeList.item( index ) );
+    }
+
+
+    /**
+     * Return the number of options
+     * @return The number of options
+     */
+    public int getOptionSize() {
+
+        final NodeList nodeList = getElement().getElementsByTagName( "option" );
+        return nodeList.getLength();
+    }
+
+
+    /**
+     * Remove options by reducing the "length" property.  This has no
+     * effect if the length is set to the same or greater.
+     * @param The new length property value
+     */
+    public void setOptionSize( final int newLength ) {
+        final NodeList nodeList = getElement().getElementsByTagName( "option" );
+
+        while( nodeList.getLength() > newLength ) {
+            final Node optionNode = nodeList.item( nodeList.getLength() - 1 ) ;
+            getNode().removeChild( optionNode ) ;
+        }
+    }
+
+
+    /**
+     * Remove an option at the given index.
+     * @param index The index of the option to remove
+     */
+    public void removeOption( final int index ) {
+
+        final NodeList nodeList = getElement().getElementsByTagName( "option" );
+        final int nodeCount = nodeList.getLength();
+
+        final Node optionNode = nodeList.item( index ) ;
+        optionNode.getParentNode().removeChild( optionNode ) ;
+    }
+
+
+    /**
+     * Replace an option at the given index with a new option.
+     * @param index The index of the option to remove
+     * @param newOption The new option to replace to indexed option
+     */
+    public void replaceOption( final int index, final HtmlOption newOption ) {
+
+        final NodeList nodeList = getElement().getElementsByTagName( "option" );
+        final int nodeCount = nodeList.getLength();
+
+        final Node optionNode = nodeList.item( index ) ;
+        optionNode.getParentNode().replaceChild( newOption.getNode(), optionNode ) ;
+    }
+
+
+    /**
+     * Add a new option at the end.
+     * @param newOption The new option to add
+     */
+    public void appendOption( final HtmlOption newOption ) {
+
+        final Node selectNode = getNode() ;
+        selectNode.appendChild( newOption.getNode() ) ;
     }
 
 

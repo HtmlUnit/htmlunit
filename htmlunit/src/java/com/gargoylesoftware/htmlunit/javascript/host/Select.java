@@ -43,14 +43,18 @@ import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.javascript.OptionsArray;
 
 /**
  * The javascript object that represents a select
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  David K. Taylor
  */
 public class Select extends Input {
+
+    private OptionsArray optionsArray_;
 
     /**
      * Create an instance.
@@ -64,6 +68,21 @@ public class Select extends Input {
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
+    }
+
+
+    /**
+     * Initialize the object.
+     *
+     */
+    public void initialize() {
+
+        final HtmlSelect htmlSelect = getHtmlSelect();
+        htmlSelect.setScriptObject(this);
+        if( optionsArray_ == null ) {
+            optionsArray_ = (OptionsArray)makeJavaScriptObject("OptionsArray");
+            optionsArray_.initialize( htmlSelect );
+        }
     }
 
 
@@ -87,22 +106,12 @@ public class Select extends Input {
      * Return the value of the "options" property
      * @return The options property
      */
-    public Option[] jsGet_options() {
-        final HtmlSelect htmlSelect = (HtmlSelect)getHtmlElementOrDie();
-        final List allOptions = htmlSelect.getAllOptions();
-        final Option optionArray[] = new Option[allOptions.size()];
+    public OptionsArray jsGet_options() {
 
-        for( int i=0; i<optionArray.length; i++ ) {
-            final HtmlOption htmlOption = (HtmlOption)allOptions.get(i);
-            Option jsOption = (Option)htmlOption.getScriptObject();
-            if( jsOption == null ) {
-                jsOption = (Option)makeJavaScriptObject("Option");
-                jsOption.setHtmlElement(htmlOption);
-                htmlOption.setScriptObject(jsOption);
-            }
-            optionArray[i] = jsOption;
+        if( optionsArray_ == null ) {
+            initialize();
         }
-        return optionArray;
+        return optionsArray_;
     }
 
 
@@ -137,8 +146,22 @@ public class Select extends Input {
      * @return The length property
      */
     public int jsGet_length() {
-        final HtmlSelect htmlSelect = (HtmlSelect)getHtmlElementOrDie();
-        return htmlSelect.getAllOptions().size();
+        if( optionsArray_ == null ) {
+            initialize();
+        }
+        return optionsArray_.jsGet_length();
+    }
+
+
+    /**
+     * Remove options by reducing the "length" property
+     * @param The new length property value
+     */
+    public void jsSet_length( final int newLength ) {
+        if( optionsArray_ == null ) {
+            initialize();
+        }
+        optionsArray_.jsSet_length( newLength );
     }
 
     /**
@@ -148,7 +171,33 @@ public class Select extends Input {
      * @return The property.
      */
     public Object get( final int index, final Scriptable start ) {
-        return jsGet_options()[index];
+        if( optionsArray_ == null ) {
+            initialize();
+        }
+        return optionsArray_.get( index, start );
+    }
+
+
+    /**
+     * Set the index property
+     * @param index The index
+     * @param start The scriptable object that was originally invoked for this property
+     * @param newValue The new value
+     */
+    public void put( final int index, final Scriptable start, Object newValue ) {
+        if( optionsArray_ == null ) {
+            initialize();
+        }
+        optionsArray_.put( index, start, newValue );
+    }
+
+
+    /**
+     * Return the HTML select object.
+     * @return The HTML select object.
+     */
+    private HtmlSelect getHtmlSelect() {
+        return (HtmlSelect)getHtmlElementOrDie();
     }
 }
 
