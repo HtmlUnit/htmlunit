@@ -443,4 +443,34 @@ public class SelectTest extends WebTestCase {
 
          assertEquals( expectedAlerts, collectedAlerts );
     }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetValue() throws Exception {
+        final String content
+        = "<html><head><title>foo</title><script>"
+            + "function doTest() {\n"
+            + "    alert(document.form1.select1.value);\n"
+            + "}</script></head><body onload='doTest()'>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <select name='select1'>"
+            + "        <option name='option1'>One</option>"
+            + "        <option name='option2' selected is='test'>Two</option>"
+            + "        <option name='option3'>Three</option>"
+            + "    </select>"
+            + "</form>"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+                "Two"
+        } );
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }    
 }

@@ -683,6 +683,36 @@ public class HtmlFormTest extends WebTestCase {
        assertEquals( expectedParameters, collectedParameters );
    }
 
+   /**
+    * @throws Exception if the test fails
+    */
+   public void testSubmit_NoNameOnButton() throws Exception {
+       final String htmlContent
+       = "<html><head><title>foo</title></head><body>"
+           + "<form id='form1'>"
+           + "    <input type='text' id='textfield' value='blah' name='textfield' />"
+           + "    <button type='submit' id='button' value='Go'>Go</button>"
+           + "</form></body></html>";
+       final WebClient client = new WebClient();
+
+       final MockWebConnection webConnection = new MockWebConnection( client );
+       webConnection.setDefaultResponse( htmlContent );
+       client.setWebConnection( webConnection );
+
+       final HtmlPage page = ( HtmlPage )client.getPage(
+               URL_FIRST,
+               SubmitMethod.POST, Collections.EMPTY_LIST );
+       
+       final HtmlButton button = (HtmlButton) page.getHtmlElementById( "button" );
+       button.click();
+
+       final List expectedParameters = Arrays.asList( new Object[]{
+               new KeyValuePair("textfield", "blah")
+       } );
+       final List collectedParameters = webConnection.getLastParameters();
+
+       assertEquals( expectedParameters, collectedParameters );
+   }   
     /**
      * @throws Exception if the test fails
      */
