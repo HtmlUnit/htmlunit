@@ -46,8 +46,6 @@ public class HtmlSelect
      *  Return a List containing all of the currently selected options
      *
      * @return  See above
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
      */
     public List getSelectedOptions() {
         final List allOptions = getAllOptions();
@@ -98,8 +96,6 @@ public class HtmlSelect
      *
      * @param  isSelected true if the option is to become selected
      * @param  optionValue The value of the option that is to change
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
      * @return  The page that occupies this window after this change is made.  It
      * may be the same window or it may be a freshly loaded one.
      */
@@ -184,8 +180,6 @@ public class HtmlSelect
      *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
      * @return  See above
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
         final String name = getNameAttribute();
@@ -257,8 +251,6 @@ public class HtmlSelect
      *  text
      *
      * @return  The element as text
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
      */
     public String asText() {
 

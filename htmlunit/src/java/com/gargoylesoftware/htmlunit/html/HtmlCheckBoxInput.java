@@ -71,8 +71,6 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * @return  The Page that is the result of submitting this page to the
      *      server
      * @exception  IOException If an io error occurs
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
      */
     public Page click() throws IOException {
         return super.click();

@@ -72,8 +72,6 @@ public class HtmlButton
      * @exception  IllegalStateException If the type of this input isn't
      *      "submit"
      * @exception  IOException If an IO problem occurs
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
      */
     public Page click()
         throws
