@@ -5,7 +5,7 @@
 
 	<class name="Anchor" extends="HTMLElement">
 		<javascript min-version="1.2"/>
-		<property name="name" readable="true" writable="true"/>
+		<property name="name" readable="true" writable="true" always-available="true"/>
 		<property name="text" readable="true" writable="true">
 			<browser name="netscape" min-version="4" less-than-version="5"/>
 		</property>
