@@ -156,7 +156,7 @@ public class WindowTest extends WebTestCase {
             = (WebWindow)((WebWindowEvent)eventCatcher.getEventAt(0)).getSource();
         final WebWindow secondWebWindow
             = (WebWindow)((WebWindowEvent)eventCatcher.getEventAt(2)).getSource();
-        assertSame( webClient.getCurrentWindow(), firstWebWindow);
+        assertSame( webClient.getCurrentWindow(), secondWebWindow);
         assertEquals( "MyNewWindow", secondWebWindow.getName() );
 
         assertEquals( "First", ((HtmlPage)firstWebWindow.getEnclosedPage()).getTitleText());
