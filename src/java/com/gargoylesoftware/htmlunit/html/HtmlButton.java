@@ -49,9 +49,10 @@ import org.w3c.dom.Element;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public class HtmlButton
-         extends HtmlElement
+         extends ClickableElement
          implements SubmittableElement {
 
     /**
@@ -81,46 +82,38 @@ public class HtmlButton
      *
      * @deprecated Use {@link #click()} instead
      * @return  The Page that wraps the response from the server
-     * @exception  IllegalStateException If the type of this input isn't
-     *      "submit"
      * @exception  IOException If an IO problem occurs
      * @exception  ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
      */
     public Page submit()
         throws
-            IllegalStateException,
             IOException,
             ElementNotFoundException {
 
         return click();
     }
 
-
     /**
-     *  Submit the form.
+     * This method will be called if there either wasn't an onclick handler or there was
+     * but the result of that handler was true.  This is the default behaviour of clicking
+     * the element.  The default implementation returns the current page - subclasses
+     * requiring different behaviour (like {@link HtmlSubmitInput}) will override this
+     * method.
      *
-     * @return  The Page that wraps the response from the server
-     * @exception  IllegalStateException If the type of this input isn't
-     *      "submit"
-     * @exception  IOException If an IO problem occurs
+     * @return The page that is currently loaded after execution of this method
+     * @throws IOException If an IO error occured
      */
-    public Page click()
-        throws
-            IllegalStateException,
-            IOException {
-
-        if( isDisabled() ) {
-            return getPage();
+    protected Page doClickAction() throws IOException {
+        final String type = getTypeAttribute().toLowerCase();
+        if (type.equals("submit")) {
+            return getEnclosingFormOrDie().submit(this);
         }
-
-        final String onClick = getOnClickAttribute();
-        final HtmlPage page = getPage();
-        if( onClick.length() == 0 || page.getWebClient().isJavaScriptEnabled() == false ) {
-            return getEnclosingFormOrDie().submit();
+        else if (type.equals("reset")){
+            return getEnclosingFormOrDie().reset();
         }
         else {
-            return page.executeJavaScriptIfPossible(onClick, "HtmlButton onClick handler", true, this).getNewPage();
+            return getPage();
         }
     }
 
@@ -149,231 +142,10 @@ public class HtmlButton
 
 
     /**
-     * Return the value of the attribute "id".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "id"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getIdAttribute() {
-        return getAttributeValue("id");
-    }
-
-
-    /**
      * Return the value of this element to what it was at the time the page was loaded.
      */
     public void reset() {
         getLog().debug("reset() not implemented for this element");
-    }
-
-
-    /**
-     * Return the value of the attribute "class".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "class"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getClassAttribute() {
-        return getAttributeValue("class");
-    }
-
-
-    /**
-     * Return the value of the attribute "style".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "style"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getStyleAttribute() {
-        return getAttributeValue("style");
-    }
-
-
-    /**
-     * Return the value of the attribute "title".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "title"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getTitleAttribute() {
-        return getAttributeValue("title");
-    }
-
-
-    /**
-     * Return the value of the attribute "lang".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "lang"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getLangAttribute() {
-        return getAttributeValue("lang");
-    }
-
-
-    /**
-     * Return the value of the attribute "xml:lang".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "xml:lang"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getXmlLangAttribute() {
-        return getAttributeValue("xml:lang");
-    }
-
-
-    /**
-     * Return the value of the attribute "dir".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "dir"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getTextDirectionAttribute() {
-        return getAttributeValue("dir");
-    }
-
-
-    /**
-     * Return the value of the attribute "onclick".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onclick"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnClickAttribute() {
-        return getAttributeValue("onclick");
-    }
-
-
-    /**
-     * Return the value of the attribute "ondblclick".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "ondblclick"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnDblClickAttribute() {
-        return getAttributeValue("ondblclick");
-    }
-
-
-    /**
-     * Return the value of the attribute "onmousedown".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onmousedown"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnMouseDownAttribute() {
-        return getAttributeValue("onmousedown");
-    }
-
-
-    /**
-     * Return the value of the attribute "onmouseup".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onmouseup"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnMouseUpAttribute() {
-        return getAttributeValue("onmouseup");
-    }
-
-
-    /**
-     * Return the value of the attribute "onmouseover".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onmouseover"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnMouseOverAttribute() {
-        return getAttributeValue("onmouseover");
-    }
-
-
-    /**
-     * Return the value of the attribute "onmousemove".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onmousemove"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnMouseMoveAttribute() {
-        return getAttributeValue("onmousemove");
-    }
-
-
-    /**
-     * Return the value of the attribute "onmouseout".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onmouseout"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnMouseOutAttribute() {
-        return getAttributeValue("onmouseout");
-    }
-
-
-    /**
-     * Return the value of the attribute "onkeypress".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onkeypress"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnKeyPressAttribute() {
-        return getAttributeValue("onkeypress");
-    }
-
-
-    /**
-     * Return the value of the attribute "onkeydown".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onkeydown"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnKeyDownAttribute() {
-        return getAttributeValue("onkeydown");
-    }
-
-
-    /**
-     * Return the value of the attribute "onkeyup".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "onkeyup"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getOnKeyUpAttribute() {
-        return getAttributeValue("onkeyup");
     }
 
 

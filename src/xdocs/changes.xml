@@ -85,6 +85,14 @@
 			<action type="add" dev="mbowler">
 				Added method HtmlArea.click()
 			</action>
+            <action type="add" dev="dktaylor" id="799865">
+                Add support for click() for all element types that have an
+                onClick attribute.  This includes image.  Removed extra
+                non-standard attributes (onClick, etc.) from BDO element.
+                Fixed support for button tags with type other than submit.
+                Added support for access keys to anchor, area, label, legend,
+                and textarea elements.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">

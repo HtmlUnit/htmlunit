@@ -454,8 +454,8 @@ public final class HtmlPage
 
     /**
      *  Given an XML node, return the HtmlElement object that corresponds to
-     *  that node or an instance of UnknownHtmlElement if one cannot be
-     *  found. <p />
+     *  that node or an instance of UnknownHtmlElement or UnknownDomNode if
+     *  one cannot be found. <p />
      *
      *  If a null xmlNode is passed in then null will be returned.  This
      *  deviates somewhat from the normal practice of throwing exceptions
@@ -487,7 +487,12 @@ public final class HtmlPage
                HTML_ELEMENT_CREATORS.get( new Integer( xmlNode.getNodeType() ) );
         }
         if( creator == null ) {
-            newHtmlElement = new UnknownHtmlElement( this, xmlNode );
+            if( xmlNode.getNodeType() == Node.ELEMENT_NODE ) {
+                newHtmlElement = new UnknownHtmlElement( this, (Element) xmlNode );
+            }
+            else {
+                newHtmlElement = new UnknownDomNode( this, xmlNode );
+            }
         }
         else {
             newHtmlElement = creator.create( this, xmlNode );
@@ -1190,11 +1195,26 @@ public final class HtmlPage
             webClient.moveFocusToElement(element);
 
             final Page newPage;
-            if( element instanceof HtmlButton ) {
+            if( element instanceof HtmlAnchor ) {
+                newPage = ((HtmlAnchor)element).click();
+            }
+            else if( element instanceof HtmlArea ) {
+                newPage = ((HtmlArea)element).click();
+            }
+            else if( element instanceof HtmlButton ) {
                 newPage = ((HtmlButton)element).click();
             }
             else if( element instanceof HtmlInput ) {
                 newPage = ((HtmlInput)element).click();
+            }
+            else if( element instanceof HtmlLabel ) {
+                newPage = ((HtmlLabel)element).click();
+            }
+            else if( element instanceof HtmlLegend ) {
+                newPage = ((HtmlLegend)element).click();
+            }
+            else if( element instanceof HtmlTextArea ) {
+                newPage = ((HtmlTextArea)element).click();
             }
             else {
                 newPage = this;

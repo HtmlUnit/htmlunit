@@ -37,13 +37,16 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.Page;
 import org.w3c.dom.Element;
+import java.io.IOException;
 
 /**
  *  Wrapper for the html element "input"
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public class HtmlResetInput extends HtmlInput {
 
@@ -55,6 +58,20 @@ public class HtmlResetInput extends HtmlInput {
      */
     HtmlResetInput( final HtmlPage page, final Element element ) {
         super( page, element );
+    }
+
+    /**
+     * This method will be called if there either wasn't an onclick handler or there was
+     * but the result of that handler was true.  This is the default behaviour of clicking
+     * the element.  The default implementation returns the current page - subclasses
+     * requiring different behaviour (like {@link HtmlSubmitInput}) will override this
+     * method.
+     *
+     * @return The page that is currently loaded after execution of this method
+     * @throws IOException If an IO error occured
+     */
+    protected Page doClickAction() throws IOException {
+        return getEnclosingFormOrDie().reset();
     }
 
 }

@@ -49,10 +49,11 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *  Tests for HtmlButtonInput
+ *  Tests for HtmlButton
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  David K. Taylor
  */
 public class HtmlButtonTest extends WebTestCase {
     /**
@@ -68,11 +69,11 @@ public class HtmlButtonTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testClick_onClick() throws Exception {
+    public void testButtonClick_onClick() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1' onSubmit='alert(\"bar\")'>"
-                 + "    <button type='submit' name='button' id='button' "
+                 + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
+                 + "    <button type='button' name='button' id='button' "
                  + "onClick='alert(\"foo\")'>Push me</button>"
                  + "</form></body></html>";
         final WebClient client = new WebClient();
@@ -96,5 +97,142 @@ public class HtmlButtonTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
 
         assertSame( page, secondPage );
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSubmitClick_onClick() throws Exception {
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
+                 + "    <button type='submit' name='button' id='button' "
+                 + "onClick='alert(\"foo\")'>Push me</button>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
+        client.setAlertHandler(alertHandler);
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://www.gargoylesoftware.com" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
+
+        final HtmlPage secondPage = (HtmlPage)button.click();
+
+        final List expectedAlerts = Arrays.asList( new String[]{"foo", "bar"} );
+        assertEquals( expectedAlerts, collectedAlerts );
+
+        assertNotSame( page, secondPage );
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testResetClick_onClick() throws Exception {
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
+                 + "    <button type='reset' name='button' id='button' "
+                 + "onClick='alert(\"foo\")'>Push me</button>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
+        client.setAlertHandler(alertHandler);
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://www.gargoylesoftware.com" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
+
+        final HtmlPage secondPage = (HtmlPage)button.click();
+
+        final List expectedAlerts = Arrays.asList( new String[]{"foo", "reset"} );
+        assertEquals( expectedAlerts, collectedAlerts );
+
+        assertSame( page, secondPage );
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testReset() throws Exception {
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<form id='form1'>"
+                 + "<input type='text' name='textfield1' id='textfield1' value='foo'/>"
+                 + "<input type='password' name='password1' id='password1' value='foo'/>"
+                 + "<input type='hidden' name='hidden1' id='hidden1' value='foo'/>"
+                 + "<input type='radio' name='radioButton' value='foo' checked/>"
+                 + "<input type='radio' name='radioButton' value='bar'/>"
+                 + "<input type='checkbox' name='checkBox' value='check'/>"
+                 + "<select id='select1'>"
+                 + "    <option id='option1' selected value='1'>Option1</option>"
+                 + "    <option id='option2' value='2'>Option2</option>"
+                 + "</select>"
+                 + "<textarea id='textarea1'>Foobar</textarea>"
+                 + "<isindex prompt='Enter some text' id='isindex1'>"
+                 + "<button type='reset' id='resetButton' value='pushme'/>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlButton resetInput = (HtmlButton)page.getHtmlElementById( "resetButton" );
+
+        // change all the values to something else
+        form.setCheckedRadioButton("radioButton", "bar");
+        ((HtmlCheckBoxInput)form.getInputByName("checkBox")).setChecked(true);
+        ((HtmlOption)page.getHtmlElementById("option1")).setSelected(false);
+        ((HtmlOption)page.getHtmlElementById("option2")).setSelected(true);
+        ((HtmlTextArea)page.getHtmlElementById("textarea1")).setText("Flintstone");
+        ((HtmlTextInput)page.getHtmlElementById("textfield1")).setValueAttribute("Flintstone");
+        ((HtmlHiddenInput)page.getHtmlElementById("hidden1")).setValueAttribute("Flintstone");
+        ((HtmlPasswordInput)page.getHtmlElementById("password1")).setValueAttribute("Flintstone");
+        ((HtmlIsIndex)page.getHtmlElementById("isindex1")).setValue("Flintstone");
+
+        // Check to make sure they did get changed
+        assertEquals( "bar", form.getCheckedRadioButton("radioButton").getValueAttribute());
+        assertTrue( ((HtmlCheckBoxInput)form.getInputByName("checkBox")).isChecked() );
+        assertFalse(((HtmlOption)page.getHtmlElementById("option1")).isSelected());
+        assertTrue(((HtmlOption)page.getHtmlElementById("option2")).isSelected());
+        assertEquals( "Flintstone", ((HtmlTextArea)page.getHtmlElementById("textarea1")).getText());
+        assertEquals( "Flintstone", ((HtmlTextInput)page.getHtmlElementById("textfield1")).getValueAttribute());
+        assertEquals( "Flintstone", ((HtmlHiddenInput)page.getHtmlElementById("hidden1")).getValueAttribute());
+        assertEquals( "Flintstone", ((HtmlIsIndex)page.getHtmlElementById("isindex1")).getValue());
+
+        final HtmlPage secondPage = (HtmlPage)resetInput.click();
+        assertSame( page, secondPage );
+
+        // Check to make sure all the values have been set back to their original values.
+        assertEquals( "foo", form.getCheckedRadioButton("radioButton").getValueAttribute());
+        assertFalse( ((HtmlCheckBoxInput)form.getInputByName("checkBox")).isChecked() );
+        assertTrue(((HtmlOption)page.getHtmlElementById("option1")).isSelected());
+        assertFalse(((HtmlOption)page.getHtmlElementById("option2")).isSelected());
+        assertEquals( "Foobar", ((HtmlTextArea)page.getHtmlElementById("textarea1")).getText());
+        assertEquals( "foo", ((HtmlTextInput)page.getHtmlElementById("textfield1")).getValueAttribute());
+        assertEquals( "foo", ((HtmlHiddenInput)page.getHtmlElementById("hidden1")).getValueAttribute());
+        assertEquals( "foo", ((HtmlPasswordInput)page.getHtmlElementById("password1")).getValueAttribute());
+        assertEquals( "", ((HtmlIsIndex)page.getHtmlElementById("isindex1")).getValue());
     }
 }

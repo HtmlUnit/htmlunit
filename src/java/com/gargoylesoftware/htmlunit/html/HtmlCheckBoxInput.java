@@ -44,8 +44,12 @@ import org.w3c.dom.Element;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public class HtmlCheckBoxInput extends HtmlInput {
+
+    //For Checkbox, radio
+    private final boolean initialCheckedState_;
 
     /**
      *  Create an instance
@@ -55,6 +59,31 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     HtmlCheckBoxInput( final HtmlPage page, final Element element ) {
         super( page, element );
+
+        //From the checkbox creator
+        initialCheckedState_ = isAttributeDefined("checked");
+    }
+
+
+    /**
+     * Reset this element to its original values.
+     */
+    public void reset() {
+        setChecked(initialCheckedState_);
+    }
+
+    /**
+     *  Set the "checked" attribute
+     *
+     * @param  isChecked true if this element is to be selected
+     */
+    public void setChecked( final boolean isChecked ) {
+        if( isChecked ) {
+            getElement().setAttribute( "checked", "checked" );
+        }
+        else {
+            getElement().removeAttribute( "checked" );
+        }
     }
 }
 

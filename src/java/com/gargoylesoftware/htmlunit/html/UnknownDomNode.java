@@ -37,50 +37,24 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
- * Wrapper for the html element "li".
+ *  A node that is returned for an XML node type that is not supported by this
+ *  framework.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @author David K. Taylor
  */
-public class HtmlListItem extends ClickableElement {
-
+public class UnknownDomNode extends HtmlElement {
     /**
-     * Create an instance of HtmlListItem
+     *  Create an instance
      *
-     * @param page The HtmlPage that contains this element.
-     * @param xmlElement The actual html element that we are wrapping.
+     * @param  page The page that contains this element
+     * @param  node The XML node that represents this HTML node
      */
-    HtmlListItem( final HtmlPage page, final Element xmlElement ) {
-        super(page, xmlElement);
-    }
-
-
-    /**
-     * Return the value of the attribute "type".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "type"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getTypeAttribute() {
-        return getAttributeValue("type");
-    }
-
-
-    /**
-     * Return the value of the attribute "value".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "value"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getValueAttribute() {
-        return getAttributeValue("value");
+    UnknownDomNode( final HtmlPage page, final Node node ) {
+        super( page, node );
     }
 }
+

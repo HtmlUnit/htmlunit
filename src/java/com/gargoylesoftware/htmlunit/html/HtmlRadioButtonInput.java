@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import org.w3c.dom.Element;
 
 /**
@@ -44,8 +45,12 @@ import org.w3c.dom.Element;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public class HtmlRadioButtonInput extends HtmlInput {
+
+    //For Checkbox, radio
+    private final boolean initialCheckedState_;
 
     /**
      *  Create an instance
@@ -55,6 +60,44 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     HtmlRadioButtonInput( final HtmlPage page, final Element element ) {
         super( page, element );
+
+        //From the checkbox creator
+        initialCheckedState_ = isAttributeDefined("checked");
+    }
+
+
+    /**
+     * Reset this element to its original values.
+     */
+    public void reset() {
+        if( initialCheckedState_ ) {
+            getElement().setAttribute("checked", "checked");
+        }
+        else {
+            getElement().removeAttribute("checked");
+        }
+    }
+
+    /**
+     *  Set the "checked" attribute
+     *
+     * @param  isChecked true if this element is to be selected
+     */
+    public void setChecked( final boolean isChecked ) {
+        final HtmlForm form = getEnclosingForm();
+
+        if( isChecked ) {
+            try {
+                form.setCheckedRadioButton( getNameAttribute(), getValueAttribute() );
+            }
+            catch( final ElementNotFoundException e ) {
+                // Shouldn't be possible
+                throw new IllegalStateException("Can't find this element when going up to the form and back down.");
+            }
+        }
+        else {
+            getElement().removeAttribute( "checked" );
+        }
     }
 }
 

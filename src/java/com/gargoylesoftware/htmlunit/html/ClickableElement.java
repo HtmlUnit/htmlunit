@@ -48,12 +48,18 @@ import java.util.List;
 import org.w3c.dom.Element;
 
 /**
- *  Wrapper for the html element "a"
+ * Intermediate base class for "clickable" HTML elements.  As defined
+ * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation,
+ * this class is a base class for all HTML elements except these:
+ * applet, base, basefront, bdo, br, font, frame, frameset, head, html,
+ * iframe, isindex, meta, param, script, style, and title.
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
-public class HtmlAnchor extends ClickableElement {
+public class ClickableElement
+         extends StyledElement {
 
     /**
      *  Create an instance
@@ -61,217 +67,236 @@ public class HtmlAnchor extends ClickableElement {
      * @param  page The page that contains this element
      * @param  element The xml element that represents this html element
      */
-    HtmlAnchor( final HtmlPage page, final Element element ) {
+    ClickableElement( final HtmlPage page, final Element element ) {
         super( page, element );
+    }
+
+
+    /**
+     *  Simulate clicking this link
+     *
+     * @return  The page that occupies this window after this element is
+     * clicked.  It may be the same window or it may be a freshly loaded one.
+     * @exception  IOException If an IO error occurs
+     */
+    public Page click()
+        throws IOException {
+
+        if( isDisabled() ) {
+            return getPage();
+        }
+
+        final HtmlPage page = getPage();
+        final String onClick = getOnClickAttribute();
+
+        if( onClick.length() != 0 && page.getWebClient().isJavaScriptEnabled() ) {
+            final ScriptResult scriptResult
+                = page.executeJavaScriptIfPossible( onClick, "onClick handler for "+getClass().getName(), true, this );
+            if( scriptResult.getJavaScriptResult().equals( Boolean.FALSE ) ) {
+                return scriptResult.getNewPage();
+            }
+            else {
+                return doClickAction();
+            }
+        }
+        else {
+            return doClickAction();
+        }
     }
 
 
     /**
      * This method will be called if there either wasn't an onclick handler or
      * there was but the result of that handler was true.  This is the default
-     * behaviour of clicking the element.  For this anchor element, the default
-     * behavior is to open the HREF page, or execute the HREF if it is a
-     * javascript: URL.
+     * behaviour of clicking the element.  The default implementation returns
+     * the current page - subclasses requiring different behaviour (like
+     * {@link HtmlSubmitInput}) will override this method.
      *
      * @return The page that is currently loaded after execution of this method
      * @throws IOException If an IO error occured
      */
     protected Page doClickAction() throws IOException {
 
-        final HtmlPage page = getPage();
-        final String href = getHrefAttribute();
-
-        if( TextUtil.startsWithIgnoreCase(href, "javascript:") ) {
-            return page.executeJavaScriptIfPossible( href, "javascript url", true, this ).getNewPage();
-        }
-        else {
-            final URL url = page.getFullyQualifiedUrl( getHrefAttribute() );
-            final SubmitMethod submitMethod = SubmitMethod.GET;
-            final List parameters = Collections.EMPTY_LIST;
-
-            return page.getWebClient().getPage( url, submitMethod, parameters );
-        }
+        return getPage();
     }
 
 
     /**
-     * Return the value of the attribute "charset".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "charset"
-     * or an empty string if that attribute isn't defined.
+     * Return true if the disabled attribute is set for this element.
+     * This is expected to be overriden by derived classes that can be
+     * disabled.
+     * @return Return true if this is disabled.
      */
-    public final String getCharsetAttribute() {
-        return getAttributeValue("charset");
+    protected boolean isDisabled() {
+        return false;
     }
 
 
     /**
-     * Return the value of the attribute "type".  Refer to the
+     * Return the value of the attribute "lang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "type"
+     * @return The value of the attribute "lang"
      * or an empty string if that attribute isn't defined.
      */
-    public final String getTypeAttribute() {
-        return getAttributeValue("type");
+    public final String getLangAttribute() {
+        return getAttributeValue("lang");
     }
 
 
     /**
-     * Return the value of the attribute "name".  Refer to the
+     * Return the value of the attribute "xml:lang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "name"
+     * @return The value of the attribute "xml:lang"
      * or an empty string if that attribute isn't defined.
      */
-    public final String getNameAttribute() {
-        return getAttributeValue("name");
+    public final String getXmlLangAttribute() {
+        return getAttributeValue("xml:lang");
     }
 
 
     /**
-     * Return the value of the attribute "href".  Refer to the
+     * Return the value of the attribute "dir".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "href"
+     * @return The value of the attribute "dir"
      * or an empty string if that attribute isn't defined.
      */
-    public final String getHrefAttribute() {
-        return getAttributeValue("href");
+    public final String getTextDirectionAttribute() {
+        return getAttributeValue("dir");
     }
 
 
     /**
-     * Return the value of the attribute "hreflang".  Refer to the
+     * Return the value of the attribute "onclick".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "hreflang"
+     * @return The value of the attribute "onclick"
      * or an empty string if that attribute isn't defined.
      */
-    public final String getHrefLangAttribute() {
-        return getAttributeValue("hreflang");
+    public final String getOnClickAttribute() {
+        return getAttributeValue("onclick");
     }
 
 
     /**
-     * Return the value of the attribute "rel".  Refer to the
+     * Return the value of the attribute "ondblclick".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "rel"
+     * @return The value of the attribute "ondblclick"
      * or an empty string if that attribute isn't defined.
      */
-    public final String getRelAttribute() {
-        return getAttributeValue("rel");
+    public final String getOnDblClickAttribute() {
+        return getAttributeValue("ondblclick");
     }
 
 
     /**
-     * Return the value of the attribute "rev".  Refer to the
+     * Return the value of the attribute "onmousedown".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "rev"
+     * @return The value of the attribute "onmousedown"
      * or an empty string if that attribute isn't defined.
      */
-    public final String getRevAttribute() {
-        return getAttributeValue("rev");
+    public final String getOnMouseDownAttribute() {
+        return getAttributeValue("onmousedown");
     }
 
 
     /**
-     * Return the value of the attribute "accesskey".  Refer to the
+     * Return the value of the attribute "onmouseup".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "accesskey"
+     * @return The value of the attribute "onmouseup"
      * or an empty string if that attribute isn't defined.
      */
-    public final String getAccessKeyAttribute() {
-        return getAttributeValue("accesskey");
+    public final String getOnMouseUpAttribute() {
+        return getAttributeValue("onmouseup");
     }
 
 
     /**
-     * Return the value of the attribute "shape".  Refer to the
+     * Return the value of the attribute "onmouseover".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "shape"
+     * @return The value of the attribute "onmouseover"
      * or an empty string if that attribute isn't defined.
      */
-    public final String getShapeAttribute() {
-        return getAttributeValue("shape");
+    public final String getOnMouseOverAttribute() {
+        return getAttributeValue("onmouseover");
     }
 
 
     /**
-     * Return the value of the attribute "coords".  Refer to the
+     * Return the value of the attribute "onmousemove".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "coords"
+     * @return The value of the attribute "onmousemove"
      * or an empty string if that attribute isn't defined.
      */
-    public final String getCoordsAttribute() {
-        return getAttributeValue("coords");
+    public final String getOnMouseMoveAttribute() {
+        return getAttributeValue("onmousemove");
     }
 
 
     /**
-     * Return the value of the attribute "tabindex".  Refer to the
+     * Return the value of the attribute "onmouseout".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "tabindex"
+     * @return The value of the attribute "onmouseout"
      * or an empty string if that attribute isn't defined.
      */
-    public final String getTabIndexAttribute() {
-        return getAttributeValue("tabindex");
+    public final String getOnMouseOutAttribute() {
+        return getAttributeValue("onmouseout");
     }
 
 
     /**
-     * Return the value of the attribute "onfocus".  Refer to the
+     * Return the value of the attribute "onkeypress".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onfocus"
+     * @return The value of the attribute "onkeypress"
      * or an empty string if that attribute isn't defined.
      */
-    public final String getOnFocusAttribute() {
-        return getAttributeValue("onfocus");
+    public final String getOnKeyPressAttribute() {
+        return getAttributeValue("onkeypress");
     }
 
 
     /**
-     * Return the value of the attribute "onblur".  Refer to the
+     * Return the value of the attribute "onkeydown".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onblur"
+     * @return The value of the attribute "onkeydown"
      * or an empty string if that attribute isn't defined.
      */
-    public final String getOnBlurAttribute() {
-        return getAttributeValue("onblur");
+    public final String getOnKeyDownAttribute() {
+        return getAttributeValue("onkeydown");
     }
 
 
     /**
-     * Return the value of the attribute "target".  Refer to the
+     * Return the value of the attribute "onkeyup".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "target"
+     * @return The value of the attribute "onkeyup"
      * or an empty string if that attribute isn't defined.
      */
-    public final String getTargetAttribute() {
-        return getAttributeValue("target");
+    public final String getOnKeyUpAttribute() {
+        return getAttributeValue("onkeyup");
     }
 }
