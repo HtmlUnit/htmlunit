@@ -64,6 +64,8 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
+import org.apache.commons.httpclient.URIException;
+import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -1374,9 +1376,11 @@ public class WebClient {
         Assert.notNull("url", url);
         Assert.notNull("method", method);
         Assert.notNull("parameters", parameters);
+        
+        final URL fixedUrl = encodeUrl(url);
 
         final WebResponse webResponse
-            = getWebConnection().getResponse( url, encType, method, parameters, requestHeaders_ );
+            = getWebConnection().getResponse( fixedUrl, encType, method, parameters, requestHeaders_ );
         final int statusCode = webResponse.getStatusCode();
 
         if( statusCode >= 301 && statusCode <=307 && isRedirectEnabled() ) {
@@ -1389,10 +1393,10 @@ public class WebClient {
                     // We'll take a guess and go with the first value.
                     int indexOfComma = locationString.indexOf(',');
                     if( indexOfComma >= 0) {
-                       newUrl = expandUrl( url, locationString.substring(0, indexOfComma));
+                       newUrl = expandUrl( fixedUrl, locationString.substring(0, indexOfComma));
                     }
                     else {
-                       newUrl = expandUrl( url, locationString);
+                       newUrl = expandUrl( fixedUrl, locationString);
                     }
                 }
             }
@@ -1423,7 +1427,46 @@ public class WebClient {
         return webResponse;
     }
 
+    /**
+     * Encodes illegal parameter in query string (if any) as done by browsers.
+     * Example: change "http://first?a=b c" to "http://first?a=b%20c"  
+     * @param url the url to encode
+     * @return the provided url if no change needed, the fixed url else
+     * @throws MalformedURLException if the new URL could note be instantiated
+     * @throws URIException if the default protocol charset is not supported
+     */
+    protected URL encodeUrl(final URL url) throws MalformedURLException, URIException {
+        // just look at urls with query string (better test?)
+        final String str = url.toExternalForm();
+        final int queryStart = url.toExternalForm().indexOf('?'); 
+        if (queryStart != -1) {
+            // extract query string: browsers seem not to encode everything, for instance not "#"
+            final String query;
+            final int anchorStart = str.indexOf('#'); 
+            if (anchorStart < queryStart) {
+                query = str.substring(queryStart);
+            }
+            else {
+                query = str.substring(queryStart, anchorStart);
+            }
 
+            // url may be partially encoded like "http://first?a=b%20c&d=e f"
+            final String fixedQuery = URIUtil.encodeQuery(URIUtil.decode(query));
+            if (query.equals(fixedQuery)) {
+                return url;
+            }
+            else {
+                final StringBuffer newUrl = new StringBuffer(str);
+                newUrl.replace(queryStart, queryStart + query.length(), fixedQuery);
+                return new URL(newUrl.toString());
+            }
+        }
+        else {
+            return url;
+        }
+
+    }
+    
     /**
      * Remove the focus to the specified component.  This will trigger any relevant javascript
      * event handlers.
