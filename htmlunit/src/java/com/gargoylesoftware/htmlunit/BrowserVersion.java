@@ -48,20 +48,42 @@ package com.gargoylesoftware.htmlunit;
  * http://htmlunit.sourceforge.net/cgi-bin/browserVersion</a>
  * and the code will be generated for you.
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Daniel Gredler
+ * @author Marc Guillemot
  */
 public class BrowserVersion {
-    private final String applicationName_;
-    private final String applicationVersion_;
-    private final String userAgent_;
-    private final String javaScriptVersion_;
+    private String applicationCodeName_ = APP_CODE_NAME;
+    private String applicationMinorVersion_ = "0";
+    private String applicationName_;
+    private String applicationVersion_;
+    private String browserLanguage_ = LANGUAGE_ENGLISH_US;
+    private String cpuClass_ = CPU_CLASS_X86;
+    private boolean onLine_ = true;
+    private String platform_ = PLATFORM_WIN32;
+    private String systemLanguage_ = LANGUAGE_ENGLISH_US;
+    private String userAgent_;
+    private String userLanguage_ = LANGUAGE_ENGLISH_US;
+    private String javaScriptVersion_;
 
-    /** Constant representing the Microsoft Internet Explorer series of browsers */
+    /** Application code name for both Microsoft Internet Explorer and Netscape series */
+    public static final String APP_CODE_NAME = "Mozilla";
+
+    /** Application name for the Microsoft Internet Explorer series of browsers */
     public static final String INTERNET_EXPLORER = "Microsoft Internet Explorer";
 
-    /** Constant representing the Netscape navigator series of browsers */
+    /** Application name the Netscape navigator series of browsers */
     public static final String NETSCAPE = "Netscape";
+
+    /** United States English language identifier. */
+    public static final String LANGUAGE_ENGLISH_US = "en-us";
+
+    /** The X86 CPU class. */
+    public static final String CPU_CLASS_X86 = "x86";
+
+    /** The WIN32 platform. */
+    public static final String PLATFORM_WIN32 = "Win32";
 
     /**
      * A fake browser that supports all the new features.  This constant is used whenever
@@ -133,8 +155,34 @@ public class BrowserVersion {
 
 
     /**
-     * Return the application name.  IE "Microsoft Internet Explorer"
-     * @return The application name
+     * Return the application code name, for example "Mozilla".
+     * Default value is {@link #APP_CODE_NAME} if not explicitely configured. 
+     * @return The application code name.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appcodename.asp">
+     * MSDN documentation</a>
+     */
+    public String getApplicationCodeName() {
+        return applicationCodeName_;
+    }
+
+
+    /**
+     * Return the application minor version, for example "0".
+     * Default value is "0" if not explicitely configured. 
+     * @return The application minor version.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appminorversion.asp">
+     * MSDN documentation</a>
+     */
+    public String getApplicationMinorVersion() {
+        return applicationMinorVersion_;
+    }
+
+
+    /**
+     * Return the application name, for example "Microsoft Internet Explorer".
+     * @return The application name.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appname.asp">
+     * MSDN documentation</a>
      */
     public String getApplicationName() {
         return applicationName_;
@@ -142,17 +190,10 @@ public class BrowserVersion {
 
 
     /**
-     * Return the user agent.  IE "Mozilla/4.0 (compatible; MSIE 6.0b; Windows 98)"
-     * @return The user agent
-     */
-    public String getUserAgent() {
-        return userAgent_;
-    }
-
-
-    /**
-     * Return the application version.  IE "4.0 (compatible; MSIE 6.0b; Windows 98)"
-     * @return The application version
+     * Return the application version, for example "4.0 (compatible; MSIE 6.0b; Windows 98)".
+     * @return The application version.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appversion.asp">
+     * MSDN documentation</a>
      */
     public String getApplicationVersion() {
         return applicationVersion_;
@@ -160,10 +201,175 @@ public class BrowserVersion {
 
 
     /**
-     * Return the version of javascript.  ie "1.2"
-     * @return The javascript version
+     * Return the browser application language, for example "en-us".
+     * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitely configured. 
+     * @return The browser application language.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/browserlanguage.asp">
+     * MSDN documentation</a>
+     */
+    public String getBrowserLanguage() {
+        return browserLanguage_;
+    }
+
+
+    /**
+     * Return the type of CPU in the machine, for example "x86".
+     * Default value is {@link #CPU_CLASS_X86} if not explicitely configured. 
+     * @return The type of CPU in the machine.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cpuclass.asp">
+     * MSDN documentation</a>
+     */
+    public String getCpuClass() {
+        return cpuClass_;
+    }
+
+
+    /**
+     * Return <tt>true</tt> if the browser is currently online.
+     * Default value is <code>true</code> if not explicitely configured. 
+     * @return <tt>true</tt> if the browser is currently online.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/online.asp">
+     * MSDN documentation</a>
+     */
+    public boolean isOnLine() {
+        return onLine_;
+    }
+
+
+    /**
+     * Return the platform on which the application is running, for example "Win32".
+     * Default value is {@link #PLATFORM_WIN32} if not explicitely configured. 
+     * @return the platform on which the application is running.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/platform.asp">
+     * MSDN documentation</a>
+     */
+    public String getPlatform() {
+        return platform_;
+    }
+
+
+    /**
+     * Return the system language, for example "en-us".
+     * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitely configured. 
+     * @return The system language.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/systemlanguage.asp">
+     * MSDN documentation</a>
+     */
+    public String getSystemLanguage() {
+        return systemLanguage_;
+    }
+
+
+    /**
+     * Return the user agent string, for example "Mozilla/4.0 (compatible; MSIE 6.0b; Windows 98)".
+     * @return The user agent string.
+     */
+    public String getUserAgent() {
+        return userAgent_;
+    }
+
+
+    /**
+     * Return the user language, for example "en-us".
+     * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitely configured. 
+     * @return The user language.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/userlanguage.asp">
+     * MSDN documentation</a>
+     */
+    public String getUserLanguage() {
+        return userLanguage_;
+    }
+
+
+    /**
+     * Return the version of javascript used by the browser, for example "1.2".
+     * @return the version of javascript used by the browser.
      */
     public String getJavaScriptVersion() {
         return javaScriptVersion_;
+    }
+
+    /**
+     * @param applicationCodeName The applicationCodeName to set.
+     */
+    public void setApplicationCodeName(final String applicationCodeName) {
+        applicationCodeName_ = applicationCodeName;
+    }
+
+    /**
+     * @param applicationMinorVersion The applicationMinorVersion to set.
+     */
+    public void setApplicationMinorVersion(final String applicationMinorVersion) {
+        applicationMinorVersion_ = applicationMinorVersion;
+    }
+
+    /**
+     * @param applicationName The applicationName to set.
+     */
+    public void setApplicationName(final String applicationName) {
+        applicationName_ = applicationName;
+    }
+
+    /**
+     * @param applicationVersion The applicationVersion to set.
+     */
+    public void setApplicationVersion(final String applicationVersion) {
+        applicationVersion_ = applicationVersion;
+    }
+
+    /**
+     * @param browserLanguage The browserLanguage to set.
+     */
+    public void setBrowserLanguage(final String browserLanguage) {
+        browserLanguage_ = browserLanguage;
+    }
+
+    /**
+     * @param cpuClass The cpuClass to set.
+     */
+    public void setCpuClass(final String cpuClass) {
+        cpuClass_ = cpuClass;
+    }
+
+    /**
+     * @param javaScriptVersion The javaScriptVersion to set.
+     */
+    public void setJavaScriptVersion(final String javaScriptVersion) {
+        javaScriptVersion_ = javaScriptVersion;
+    }
+
+    /**
+     * @param onLine The onLine to set.
+     */
+    public void setOnLine(final boolean onLine) {
+        onLine_ = onLine;
+    }
+
+    /**
+     * @param platform The platform to set.
+     */
+    public void setPlatform(final String platform) {
+        platform_ = platform;
+    }
+
+    /**
+     * @param systemLanguage The systemLanguage to set.
+     */
+    public void setSystemLanguage(final String systemLanguage) {
+        systemLanguage_ = systemLanguage;
+    }
+
+    /**
+     * @param userAgent The userAgent to set.
+     */
+    public void setUserAgent(final String userAgent) {
+        userAgent_ = userAgent;
+    }
+
+    /**
+     * @param userLanguage The userLanguage to set.
+     */
+    public void setUserLanguage(final String userLanguage) {
+        userLanguage_ = userLanguage;
     }
 }

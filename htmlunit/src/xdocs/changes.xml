@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" due-to="sdanig" id="1082509">
+                Added missing (for IE) methods/properties of window.navigator.
+            </action>
             <action type="update" dev="mguillem">
                 Added support for window.location.replace(...).
             </action>
