@@ -256,7 +256,7 @@
             <version>1.0-FCS-full</version>
             <url>http://jaxen.org/</url>
             <properties>
-                <htmlunit.group>jelly</htmlunit.group>
+                <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>XPath support</htmlunit.description>
             </properties>
         </dependency>
