@@ -242,7 +242,6 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String htmlContent
              = "<html><head><script language='javascript'><!--\n"
              + "function doTest() {\n"
-             + "    alert('one')\n"
              + "}\n"
              + "-->\n</script></head>\n"
              + "<body onload='doTest()'></body></html>";
@@ -267,7 +266,6 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String htmlContent
              = "<html><head><script language='javascript'><!-- Some comment here\n"
              + "function doTest() {\n"
-             + "    alert('one')\n"
              + "}\n"
              + "-->\n</script></head>\n"
              + "<body onload='doTest()'></body></html>";
