@@ -372,15 +372,23 @@ public abstract class HtmlInput
 
 
     /**
-     * Return the value of the attribute "value".  Refer to the
+     * <p>Return the value of the attribute "value".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
+     * documentation for details on the use of this attribute.</p>
      *
-     * @return The value of the attribute "value"
-     * or an empty string if that attribute isn't defined.
+     * <p>Checkbox inputs have a default value as described in
+     * <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/value_1.asp"
+     * document</a></p>
+     *
+     * @return The value of the attribute "value" or an empty string if that
+     * attribute isn't defined or the default as above.
      */
     public final String getValueAttribute() {
-        return getAttributeValue("value");
+        String value = getAttributeValue("value");
+        if( value == ATTRIBUTE_NOT_DEFINED && this instanceof HtmlCheckBoxInput ) {
+            value = "on";
+        }
+        return value;
     }
 
 
