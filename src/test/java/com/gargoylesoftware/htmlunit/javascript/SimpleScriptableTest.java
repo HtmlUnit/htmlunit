@@ -58,6 +58,7 @@ import java.util.TreeSet;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  <a href="mailto:BarnabyCourt@users.sourceforge.net">Barnaby Court</a>
  */
 public class SimpleScriptableTest extends WebTestCase {
     public SimpleScriptableTest( final String name ) {
@@ -106,7 +107,6 @@ public class SimpleScriptableTest extends WebTestCase {
         // Now pull out those names that we know don't have html equivilents
         names.remove("Document");
         names.remove("History");
-        names.remove("Input"); // <- this one is abstract
         names.remove("Location");
         names.remove("Navigator");
         names.remove("Screen");
