@@ -485,6 +485,11 @@ public class WebClientTest extends WebTestCase {
         assertEquals( "submit0", page.pressAccessKey('a').getAttributeValue("name") );
         assertEquals( "submit2", page.pressAccessKey('c').getAttributeValue("name") );
         assertEquals( "submit1", page.pressAccessKey('b').getAttributeValue("name") );
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "focus-0", "blur-0", "focus-2", "blur-2", "focus-1"
+        } );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
 
@@ -499,11 +504,18 @@ public class WebClientTest extends WebTestCase {
         assertEquals( "submit0", page.tabToNextElement().getAttributeValue("name") );
         assertEquals( "submit1", page.tabToNextElement().getAttributeValue("name") );
         assertEquals( "submit2", page.tabToNextElement().getAttributeValue("name") );
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "focus-0", "blur-0", "focus-1", "blur-1", "focus-2"
+        } );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
 
     public void testTabPrevious() throws Exception {
         final WebClient webClient = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
         final HtmlElement element = page.getHtmlElementById("submit0");
@@ -511,6 +523,11 @@ public class WebClientTest extends WebTestCase {
         assertEquals( "submit2", page.tabToPreviousElement().getAttributeValue("name") );
         assertEquals( "submit1", page.tabToPreviousElement().getAttributeValue("name") );
         assertEquals( "submit0", page.tabToPreviousElement().getAttributeValue("name") );
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "focus-2", "blur-2", "focus-1", "blur-1", "focus-0"
+        } );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
 
@@ -524,6 +541,9 @@ public class WebClientTest extends WebTestCase {
 
         assertFalse( webClient.moveFocusToElement(element) );
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+
+        final List expectedAlerts = Arrays.asList( new String[]{} );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
 
@@ -582,17 +602,6 @@ public class WebClientTest extends WebTestCase {
 
         final URL url = new URL("http://first/");
         return (HtmlPage)webClient.getPage(url, SubmitMethod.GET, Collections.EMPTY_LIST);
-    }
-
-
-    public void testPressAccessKey_SubmitInput() {
-        notImplemented();
-    }
-    public void testPressAccessKey_ResetInput() {
-        notImplemented();
-    }
-    public void testMoveFocusToElement_ElementNotOwnedByThisWebClient() {
-        notImplemented();
     }
 }
 

@@ -294,6 +294,9 @@ public class FormTest extends WebTestCase {
         final WebClient client = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( client );
 
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
         final String firstContent
              = "<html><head><title> Button Test </title></head><body><form name='whatsnew'>"
              + "<input type='radio' name='second' value='1'>"
@@ -302,7 +305,6 @@ public class FormTest extends WebTestCase {
              + "function clickAction(){\n"
              + "var value = -1;\n"
              + "radios = document.forms['whatsnew'].elements['second'];\n"
-             + "alert(document.forms['whatsnew'].elements['second']);\n"
              + "for (var i=0; i < radios.length; i++){\n"
              + "    if (radios[i].checked == true) {\n"
              + "        value = radios[i].value;\n"
@@ -318,5 +320,8 @@ public class FormTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = (HtmlPage)client.getPage(new URL("http://first"));
+
+        final List expectedAlerts = Arrays.asList( new String[]{"value = 2"} );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 }
