@@ -434,7 +434,7 @@ public final class Window extends SimpleScriptable {
      * Set the focus to this element.
      */
     public void jsFunction_focus() {
-        getLog().debug( "Window.focus() not implemented" );
+        webWindow_.getWebClient().setCurrentWindow(webWindow_);
     }
 
 

@@ -52,6 +52,9 @@
                 Fixed bug where radio button and checkbox logic was case sensitive.
                 Patch supplied by Brad Clarke
             </action>
+            <action type="update" dev="mbowler" id="814741" due-to="Brad Clarke">
+                Added support for Window.focus().  Patch supplied by Brad Clarke
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
