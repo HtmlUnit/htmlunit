@@ -1309,5 +1309,37 @@ public class HtmlPageTest extends WebTestCase {
 
          loadPage(content);
     }
+
+
+    /**
+     * Test that wrong formed html code is parsed like browsers do
+     * @throws Exception if the test fails
+     */
+    public void testWrongHtml_TagBeforeHtml() throws Exception {
+        if (true) {
+            notImplemented();
+            return;
+        }
+
+        final String content = "<div>"
+                 + "<html>"
+                 + "<head><title>foo</title>"
+                 + "<script>"
+                 + "var toto = 12345;"
+                 + "</script>"
+                 + "</head>"
+                 + "<body onload='alert(toto)'>"
+                 + "blabla"
+                 + "</body>"
+                 + "</html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        final List expectedAlerts = Arrays.asList( new String[]{ "12345" });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        assertEquals("foo", page.getTitleText());
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }
 
