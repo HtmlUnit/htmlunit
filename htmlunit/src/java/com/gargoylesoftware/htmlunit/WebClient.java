@@ -298,45 +298,12 @@ public class WebClient {
             webResponse = makeWebResponseForJavaScriptUrl(webWindow, url);
         }
         else {
-            webResponse = getWebConnection().getResponse( url, method, parameters );
+            webResponse = loadWebResponse( url, method, parameters );
         }
         final String contentType = webResponse.getContentType();
         final int statusCode = webResponse.getStatusCode();
 
         final boolean wasResponseSuccessful = ( statusCode <= 200 && statusCode < 300 );
-
-        if( statusCode >= 301 && statusCode <=307 && isRedirectEnabled() ) {
-            URL newUrl = null;
-            String locationString = null;
-            try {
-                locationString = webResponse.getResponseHeaderValue("Location");
-                if( locationString != null ) {
-                    newUrl = expandUrl( url, locationString );
-                }
-            }
-            catch( final MalformedURLException e ) {
-                getLog().warn("Got a redirect status code ["+statusCode+" "
-                    +webResponse.getStatusMessage()
-                    +"] but the location is not a valid url ["+locationString+"]");
-            }
-            getLog().debug("Got a redirect status code ["+statusCode
-                +"] new location=["+locationString+"]");
-            if( webResponse.getUrl().toExternalForm().equals(locationString) ) {
-                getLog().warn("Got a redirect but the location is the same as the page we just loaded ["
-                    +locationString+"]");
-            }
-            else if( newUrl == null ) {
-                // We don't have a new location to go to so just fall through
-            }
-            else if( ( statusCode == 301 || statusCode == 307 )
-                && method.equals(SubmitMethod.GET) ) {
-
-                return getPage( webWindow, newUrl, SubmitMethod.GET, parameters );
-            }
-            else if( statusCode == 302 || statusCode == 303 ) {
-                return getPage( webWindow, newUrl, SubmitMethod.GET, Collections.EMPTY_LIST );
-            }
-        }
 
         if( printContentOnFailingStatusCode_ == true && wasResponseSuccessful == false ) {
             getLog().info( "statusCode=[" + statusCode
@@ -928,7 +895,43 @@ public class WebClient {
         assertNotNull("method", method);
         assertNotNull("parameters", parameters);
 
-        return getWebConnection().getResponse( url, method, parameters );
+        final WebResponse webResponse = getWebConnection().getResponse( url, method, parameters );
+        final int statusCode = webResponse.getStatusCode();
+
+        if( statusCode >= 301 && statusCode <=307 && isRedirectEnabled() ) {
+            URL newUrl = null;
+            String locationString = null;
+            try {
+                locationString = webResponse.getResponseHeaderValue("Location");
+                if( locationString != null ) {
+                    newUrl = expandUrl( url, locationString );
+                }
+            }
+            catch( final MalformedURLException e ) {
+                getLog().warn("Got a redirect status code ["+statusCode+" "
+                    +webResponse.getStatusMessage()
+                    +"] but the location is not a valid url ["+locationString+"]");
+            }
+            getLog().debug("Got a redirect status code ["+statusCode
+                +"] new location=["+locationString+"]");
+            if( webResponse.getUrl().toExternalForm().equals(locationString) ) {
+                getLog().warn("Got a redirect but the location is the same as the page we just loaded ["
+                    +locationString+"]");
+            }
+            else if( newUrl == null ) {
+                // We don't have a new location to go to so just fall through
+            }
+            else if( ( statusCode == 301 || statusCode == 307 )
+                && method.equals(SubmitMethod.GET) ) {
+
+                return loadWebResponse( newUrl, SubmitMethod.GET, parameters );
+            }
+            else if( statusCode == 302 || statusCode == 303 ) {
+                return loadWebResponse( newUrl, SubmitMethod.GET, Collections.EMPTY_LIST );
+            }
+        }
+
+        return webResponse;
     }
 }
 
