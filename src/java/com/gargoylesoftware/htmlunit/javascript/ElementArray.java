@@ -52,6 +52,7 @@ import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
 import org.saxpath.SAXPathException;
 
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.Util;
@@ -237,11 +238,25 @@ public class ElementArray extends SimpleScriptable implements Function {
 
         // See if there is an element in the element array with the specified id.
         for (final Iterator iter = elements.iterator(); iter.hasNext();) {
-            final HtmlElement element = (HtmlElement) iter.next();
-            final String id = element.getId();
-            if( id != null && id.equals(name) ) {
-                getLog().debug("Property \"" + name + "\" evaluated (by id) to " + element);
-                return getScriptableFor( element );
+            final Object next = iter.next();
+            if (next instanceof HtmlElement) {
+                final HtmlElement element = (HtmlElement) next;
+                final String id = element.getId();
+                if( id != null && id.equals(name) ) {
+                    getLog().debug("Property \"" + name + "\" evaluated (by id) to " + element);
+                    return getScriptableFor( element );
+                }
+            }
+            else if (next instanceof WebWindow) {
+                final WebWindow window = (WebWindow) next;
+                final String windowName = window.getName();
+                if (windowName != null && windowName.equals(name)) {
+                    getLog().debug("Property \"" + name + "\" evaluated (by name) to " + window);
+                    return getScriptableFor( window );
+                }
+            }
+            else {
+                getLog().debug("Unrecognized type in array: \"" + next.getClass().getName() + "\"");
             }
         }
 

@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" due-to="Chris Eldredge" id="1099644">
+                Fixed window.frames['frameName'] causes ClassCastException.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: document.getElementById("") now returns null.
             </action>

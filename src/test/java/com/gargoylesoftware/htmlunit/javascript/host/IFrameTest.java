@@ -78,5 +78,23 @@ public class IFrameTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testReferenceFromJavaScript() throws Exception {
+      final String content
+           = "<html><head><title>First</title><script>\n"
+           + "function doTest() {\n"
+           + "    alert(window.frames['myIFrame'].name);\n"
+           + "}\n</script></head>"
+           + "<body onload='doTest()'>"
+           + "<iframe name='myIFrame' src='about:blank'></iframe></body></html>";
+
+      final List collectedAlerts = new ArrayList();
+      loadPage(content, collectedAlerts);
+      final List expectedAlerts = Arrays.asList( new String[]{"myIFrame"} );
+      createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+      assertEquals( expectedAlerts, collectedAlerts );
+  }
 
 }
