@@ -38,8 +38,9 @@ public class WebClient {
     private ScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
 
-    private AlertHandler alertHandler_;
+    private AlertHandler   alertHandler_;
     private ConfirmHandler confirmHandler_;
+    private PromptHandler  promptHandler_;
 
     private BrowserVersion browserVersion_ = BrowserVersion.getDefault();
     private boolean isRedirectEnabled_ = true;
@@ -557,6 +558,24 @@ public class WebClient {
      */
     public ConfirmHandler getConfirmHandler() {
         return confirmHandler_;
+    }
+
+
+    /**
+     * Set the handler that will be executed when the javascript method Window.prompt() is called.
+     * @param handler The new handler or null if no handler is to be used.
+     */
+    public void setPromptHandler( final PromptHandler handler ) {
+        promptHandler_ = handler;
+    }
+
+
+    /**
+     * Return the prompt handler.
+     * @return the prompt handler or null if one hasn't been set.
+     */
+    public PromptHandler getPromptHandler() {
+        return promptHandler_;
     }
 
 

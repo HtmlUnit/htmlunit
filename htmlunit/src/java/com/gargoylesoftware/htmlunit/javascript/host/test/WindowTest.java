@@ -10,6 +10,7 @@ import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -289,5 +290,61 @@ public class WindowTest extends WebTestCase {
 
         assertEquals( Collections.EMPTY_LIST, collectedConfirms );
         assertEquals( Collections.singletonList("false"), collectedAlerts );
+    }
+
+
+    public void testPrompt() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final List collectedAlerts = new ArrayList();
+        final List collectedPrompts = new ArrayList();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        webClient.setPromptHandler( new PromptHandler() {
+            public String handlePrompt( final Page page, final String message ) {
+                collectedPrompts.add(message);
+                return "Flintstone";
+            }
+        } );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>alert(prompt('foo'))</script></head><body>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
+                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        assertEquals( Collections.singletonList("foo"), collectedPrompts );
+        assertEquals( Collections.singletonList("Flintstone"), collectedAlerts );
+    }
+
+
+    public void testPrompt_noPromptHandler() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final List collectedAlerts = new ArrayList();
+        final List collectedPrompts = new ArrayList();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent
+             = "<html><head><title>First</title><script>alert(prompt('foo'))</script></head><body>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
+                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        assertEquals( Collections.EMPTY_LIST, collectedPrompts );
+        assertEquals( Collections.singletonList("null"), collectedAlerts );
     }
 }
