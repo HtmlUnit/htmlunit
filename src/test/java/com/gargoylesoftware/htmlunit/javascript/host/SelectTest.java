@@ -276,6 +276,39 @@ public class SelectTest extends WebTestCase {
          assertEquals( expectedAlerts, collectedAlerts );
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testAddOptionWithAddMethod() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "function doTest() {\n"
+                 + "    var options = document.form1.select1.options;\n"
+                 + "    options.add(new Option('Four','value4'), null);\n"
+                 + "    alert(options.length);\n"
+                 + "    alert(options[index].text);\n"
+                 + "    alert(options[index].value);\n"
+                 + "}</script></head><body onload='doTest()'>"
+                 + "<p>hello world</p>"
+                 + "<form name='form1'>"
+                 + "    <select name='select1'>"
+                 + "        <option name='option1' value='value1'>One</option>"
+                 + "        <option name='option2' value='value2' selected>Two</option>"
+                 + "        <option name='option3' value='value3'>Three</option>"
+                 + "    </select>"
+                 + "</form>"
+                 + "</body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "4", "Four", "value4"
+         } );
+
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
 
     /**
      * @throws Exception if the test fails
@@ -311,6 +344,39 @@ public class SelectTest extends WebTestCase {
          assertEquals( expectedAlerts, collectedAlerts );
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testRemoveOptionWithRemoveMethod() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "function doTest() {\n"
+                 + "    var options = document.form1.select1.options;\n"
+                 + "    options.remove(1);\n"
+                 + "    alert(options.length);\n"
+                 + "    alert(options[1].text);\n"
+                 + "    alert(options[1].value);\n"
+                 + "}</script></head><body onload='doTest()'>"
+                 + "<p>hello world</p>"
+                 + "<form name='form1'>"
+                 + "    <select name='select1'>"
+                 + "        <option name='option1' value='value1'>One</option>"
+                 + "        <option name='option2' value='value2' selected>Two</option>"
+                 + "        <option name='option3' value='value3'>Three</option>"
+                 + "    </select>"
+                 + "</form>"
+                 + "</body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "2", "Three", "value3"
+         } );
+
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
 
     /**
      * @throws Exception if the test fails
@@ -343,4 +409,38 @@ public class SelectTest extends WebTestCase {
 
          assertEquals( expectedAlerts, collectedAlerts );
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testOptionArrayHasItemMethod() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "function doTest() {\n"
+                 + "    var options = document.form1.select1.options;\n"
+                 + "    alert(options.item(0).text);\n"
+                 + "    alert(options.item(0).value);\n"
+                 + "}</script></head><body onload='doTest()'>"
+                 + "<p>hello world</p>"
+                 + "<form name='form1'>"
+                 + "    <select name='select1'>"
+                 + "        <option name='option1' value='value1'>One</option>"
+                 + "        <option name='option2' value='value2' selected>Two</option>"
+                 + "        <option name='option3' value='value3'>Three</option>"
+                 + "    </select>"
+                 + "</form>"
+                 + "</body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "One",
+             "value1"
+         } );
+
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
+    
 }
