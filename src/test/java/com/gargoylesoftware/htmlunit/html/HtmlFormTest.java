@@ -93,7 +93,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-            new URL( "http://www.gargoylesoftware.com" ),
+            URL_GARGOYLE,
             SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
@@ -141,7 +141,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-            new URL( "http://www.gargoylesoftware.com" ),
+            URL_GARGOYLE,
             SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
@@ -180,7 +180,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
@@ -220,7 +220,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
@@ -247,7 +247,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
@@ -282,14 +282,14 @@ public class HtmlFormTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"),secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -320,14 +320,14 @@ public class HtmlFormTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"),secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -358,14 +358,14 @@ public class HtmlFormTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"),secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -395,14 +395,14 @@ public class HtmlFormTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"),secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -432,12 +432,12 @@ public class HtmlFormTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -465,12 +465,12 @@ public class HtmlFormTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-            new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlSubmitInput loginButton
             = (HtmlSubmitInput)page.getDocumentElement().getOneHtmlElementByAttribute("input","value","Login");
         loginButton.click();
@@ -497,14 +497,14 @@ public class HtmlFormTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"),secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlResetInput button = (HtmlResetInput)firstPage.getHtmlElementById("button");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -540,14 +540,14 @@ public class HtmlFormTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"),secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("link1");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -576,7 +576,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
@@ -611,7 +611,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
@@ -636,13 +636,13 @@ public class HtmlFormTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"),secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )firstPage.getHtmlElementById( "form1" );
 
@@ -668,7 +668,7 @@ public class HtmlFormTest extends WebTestCase {
        client.setWebConnection( webConnection );
 
        final HtmlPage page = ( HtmlPage )client.getPage(
-               new URL( "http://first" ),
+               URL_FIRST,
                SubmitMethod.POST, Collections.EMPTY_LIST );
        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
@@ -705,7 +705,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
@@ -739,7 +739,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-            new URL( "http://first" ),
+            URL_FIRST,
             SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
@@ -782,7 +782,7 @@ public class HtmlFormTest extends WebTestCase {
          client.setWebConnection( webConnection );
 
          final HtmlPage page = ( HtmlPage )client.getPage(
-             new URL( "http://first" ),
+             URL_FIRST,
              SubmitMethod.POST, Collections.EMPTY_LIST );
          final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
@@ -830,7 +830,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
@@ -872,13 +872,13 @@ public class HtmlFormTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"),firstContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_FIRST,firstContent,200,"OK","text/html",Collections.EMPTY_LIST );
         webConnection.setResponseAsGenericHtml(
-            new URL("http://second"), "second");
+            URL_SECOND, "second");
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-            new URL( "http://first" ),
+            URL_FIRST,
             SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 

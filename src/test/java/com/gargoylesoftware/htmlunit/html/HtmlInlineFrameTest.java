@@ -37,12 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.Collections;
+
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import java.net.URL;
-import java.util.Collections;
 
 /**
  *  Tests for HtmlInlineFrame
@@ -75,16 +75,16 @@ public class HtmlInlineFrameTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"),secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://third"),thirdContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_THIRD,thirdContent,200,"OK","text/html",Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals( "First", page.getTitleText() );
 
@@ -117,16 +117,16 @@ public class HtmlInlineFrameTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"),secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://third"),thirdContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_THIRD,thirdContent,200,"OK","text/html",Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals( "First", page.getTitleText() );
 

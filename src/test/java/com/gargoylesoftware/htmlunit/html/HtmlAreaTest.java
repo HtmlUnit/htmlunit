@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -84,13 +83,13 @@ public class HtmlAreaTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://first"), firstContent,
+            URL_FIRST, firstContent,
             200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://second"), secondContent,
+            URL_SECOND, secondContent,
             200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
-            new URL("http://third"), thirdContent,
+            URL_THIRD, thirdContent,
             200, "OK", "text/html", Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
@@ -105,7 +104,7 @@ public class HtmlAreaTest extends WebTestCase {
         final WebClient client = createWebClient("");
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlArea area = ( HtmlArea )page.getHtmlElementById( "third" );
 
@@ -125,7 +124,7 @@ public class HtmlAreaTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlArea area = ( HtmlArea )page.getHtmlElementById( "second" );
 
@@ -144,7 +143,7 @@ public class HtmlAreaTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlArea area = ( HtmlArea )page.getHtmlElementById( "second" );
 

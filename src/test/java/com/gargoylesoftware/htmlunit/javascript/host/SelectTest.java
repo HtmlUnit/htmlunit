@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -197,7 +196,7 @@ public class SelectTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals("first", page.getTitleText());
         assertEquals( Collections.singletonList("true"), collectedAlerts );
@@ -235,7 +234,7 @@ public class SelectTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://first" ),
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals("first", page.getTitleText());
         assertEquals( Collections.singletonList("One"), collectedAlerts );

@@ -107,7 +107,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
 
         final HtmlTextInput textInput = (HtmlTextInput)page.getHtmlElementById("textfield1");
@@ -185,7 +185,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String jsContent = "alert('got here');";
 
         webConnection.setResponse(
-            new URL("http://www.gargoylesoftware.com"),
+            URL_GARGOYLE,
             htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
             new URL("http://www.gargoylesoftware.com/foo.js"),
@@ -197,7 +197,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://www.gargoylesoftware.com" ),
+                URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlScript htmlScript = (HtmlScript)page.getHtmlElementById("script1");
         assertNotNull(htmlScript);
@@ -250,7 +250,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String jsContent = "alert('\u8868');";
 
         webConnection.setResponse(
-            new URL("http://www.gargoylesoftware.com"),
+            URL_GARGOYLE,
             htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         webConnection.setResponse(
@@ -282,7 +282,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * detect encoding from meta tag
      */
         final HtmlPage page = ( HtmlPage )client.getPage(
-             new URL( "http://www.gargoylesoftware.com" ),
+             URL_GARGOYLE,
              SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlScript htmlScript =
                      (HtmlScript)page.getHtmlElementById("script1");

@@ -37,16 +37,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for Style.
@@ -83,13 +83,13 @@ public class StyleTest extends WebTestCase {
              + "<body onload='doTest()'><div id='div1' style='color: black'>foo</div></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = (HtmlPage)client.getPage(new URL("http://first"));
+        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
 
         final List expectedAlerts = Arrays.asList( new String[]{"black", "pink"} );
         assertEquals( expectedAlerts, collectedAlerts );
@@ -117,13 +117,13 @@ public class StyleTest extends WebTestCase {
              + "<div id='div1' style='color: black;background:blue;foo:bar'>foo</div></body></html>";
 
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = (HtmlPage)client.getPage(new URL("http://first"));
+        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
 
         final List expectedAlerts = Arrays.asList( new String[]{"black", "pink"} );
         assertEquals( expectedAlerts, collectedAlerts );

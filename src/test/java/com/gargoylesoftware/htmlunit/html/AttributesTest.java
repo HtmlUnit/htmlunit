@@ -37,22 +37,21 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * <p>Tests for all the generated attribute accessors.  This test case will
@@ -67,7 +66,7 @@ import junit.framework.TestSuite;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Christian Sell
  */
-public class AttributesTest extends TestCase {
+public class AttributesTest extends WebTestCase {
 
     private final Class classUnderTest_;
     private final Method method_;
@@ -285,7 +284,7 @@ public class AttributesTest extends TestCase {
         client.setWebConnection( webConnection );
 
         return (HtmlPage)client.getPage(
-            new URL( "http://first" ),
+            URL_FIRST,
             SubmitMethod.POST, Collections.EMPTY_LIST );
     }
 }

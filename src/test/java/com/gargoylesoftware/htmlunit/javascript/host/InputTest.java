@@ -322,7 +322,7 @@ public class InputTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final URL url = new URL("http://www.gargoylesoftware.com");
+        final URL url = URL_GARGOYLE;
         final HtmlPage page = (HtmlPage) client.getPage(url);
 
         final HtmlForm form = page.getFormByName("form1");
