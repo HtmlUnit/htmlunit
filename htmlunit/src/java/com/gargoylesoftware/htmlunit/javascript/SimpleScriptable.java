@@ -279,7 +279,7 @@ public class SimpleScriptable extends ScriptableObject {
      * Initialize a new javascript object
      * @param newObject The JavaScript object to initialize.
      */
-    void initJavaScriptObject( final SimpleScriptable newObject ) {
+    protected void initJavaScriptObject( final SimpleScriptable newObject ) {
         final JavaScriptEngine.PageInfo pageInfo = getPageInfo();
 
         newObject.setPageInfo( pageInfo );

@@ -42,6 +42,7 @@ import java.util.List;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.OptionsArray;
 
@@ -95,20 +96,29 @@ public class Select extends Input {
     
     /**
      * Add a new item to the list (optionally) before the specified item
-     * @param paramA The DomNode to insert
-     * @param paramB The DomNode to insert the previous element before (null if at end)
+     * @param newOptionObject The DomNode to insert
+     * @param beforeOptionObject The DomNode to insert the previous element before (null if at end)
      */    
-    public void jsFunction_add(final Object paramA, final Object paramB) {
+    public void jsFunction_add(final Object newOptionObject, final Object beforeOptionObject) {
+        
         final HtmlSelect select = (HtmlSelect) getHtmlElementOrDie();
 
-        final DomNode newOptionDom = ((Option) paramA).getDomNodeOrDie();
+        final Option option = (Option) newOptionObject;
+        final Option beforeOption = (Option) beforeOptionObject;
         
-        if (paramB == null) {
-            select.appendChild(newOptionDom);
+        HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
+        if ( htmlOption == null ) {
+            initJavaScriptObject( option );
+            htmlOption = new HtmlOption(select.getPage(), null);
+            option.setDomNode( htmlOption );
+        }
+        
+        if (beforeOption == null) {
+            select.appendChild(htmlOption);
         } 
         else {
-            final DomNode before = ((Option)paramB).getDomNodeOrDie();
-            before.insertBefore(newOptionDom);
+            final DomNode before = beforeOption.getDomNodeOrDie();
+            before.insertBefore(htmlOption);
         }
     }      
 
