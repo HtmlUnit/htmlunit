@@ -9,7 +9,7 @@
 
 <property name="build.compiler" value="jikes" />
 <property name="build.compiler.pedantic" value="true"/>
-<property name="version" value="HtmlUnit-1.2-pre1" />
+<property name="version" value="HtmlUnit-1.2" />
 
 <taskdef name="checkstyle"
 	classname="com.puppycrawl.tools.checkstyle.CheckStyleTask"

@@ -19,6 +19,13 @@
 		<javadoc>com.gargoylesoftware.htmlunit.WebClient#getPage(com.gargoylesoftware.htmlunit.WebWindow, java.net.URL, com.gargoylesoftware.htmlunit.SubmitMethod, java.util.List, boolean)</javadoc>
 		will load the new page into this window.
 	</p>
+	<p>
+		The javascript open() function can be used to load pages into other windows.  New WebWindow
+		objects will be created automatically by this function.  If you wish to be notified when
+		these windows are created, you need to register a
+		<javadoc>com.gargoylesoftware.htmlunit.WebWindowListener</javadoc> with the WebClient via the
+		method <javadoc>com.gargoylesoftware.htmlunit.WebClient#addWebWindowListener(com.gargoylesoftware.htmlunit.WebWindowListener)</javadoc>
+	</p>
 </section>
 
 
