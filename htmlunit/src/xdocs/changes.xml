@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1104028">
+                JavaScript: use js object Input for &lt;input type="image" .../&gt; and &lt;input type="button" .../&gt;
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: default conversion to string of an anchor returns the fully qualified url specified by the href.
             </action>

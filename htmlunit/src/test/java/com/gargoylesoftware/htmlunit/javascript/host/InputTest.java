@@ -360,6 +360,7 @@ public class InputTest extends WebTestCase {
         final HtmlForm form = page.getFormByName("form1");
         form.submit();
     }    
+
     /**
      * @throws Exception if the test fails
      */
@@ -367,8 +368,8 @@ public class InputTest extends WebTestCase {
         final String htmlContent = "<html>"
                 + "<head><title>First</title></head>"
                 + "<body>"
-                + "<form name=\"form1\">"
-                + "<input type=\"submit\" name=\"button1\" onClick=\"this.form.target='_blank'; return false;\">"
+                + "<form name='form1'>"
+                + "<input type='submit' name='button1' onClick=\"this.form.target='_blank'; return false;\">"
                 + "</form>"
                 + "</body></html>";
 
@@ -382,6 +383,38 @@ public class InputTest extends WebTestCase {
         assertEquals("_blank", page.getFormByName("form1").getTargetAttribute());
     }
     
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testFieldDotForm() throws Exception {
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title><script>"
+            + "function test(){\n"
+            + "  var f = document.form1;\n"
+            + "  alert(f == f.mySubmit.form);\n"
+            + "  alert(f == f.myText.form);\n"
+            + "  alert(f == f.myPassword.form);\n"
+            + "  alert(f == document.getElementById('myImage').form);\n"
+            + "  alert(f == f.myButton.form);\n"
+            + "}\n"
+            + "</script></head>"
+                + "<body onload='test()'>"
+                + "<form name='form1'>"
+                + "<input type='submit' name='mySubmit'>"
+                + "<input type='text' name='myText'>"
+                + "<input type='password' name='myPassword'>"
+                + "<input type='button' name='myButton'>"
+                + "<input type='image' src='foo' name='myImage' id='myImage'>"
+                + "</form>"
+                + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList(new String[] {"true", "true", "true", "true", "true"});
+        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
+        loadPage(htmlContent, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
     /**
      * @throws Exception if the test fails
      */
