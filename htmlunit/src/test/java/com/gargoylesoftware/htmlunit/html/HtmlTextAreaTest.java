@@ -136,5 +136,30 @@ public class HtmlTextAreaTest extends WebTestCase {
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
         assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetText() throws Exception {
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<form id='form1'>"
+                 + "<textarea name='textArea1'> foo \n bar </textarea>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+            new URL( "http://www.gargoylesoftware.com" ),
+            SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+
+        final HtmlTextArea textArea
+            = ( HtmlTextArea )form.getTextAreasByName( "textArea1" ).get( 0 );
+        assertNotNull(textArea);
+        assertEquals("White space must be preserved!", " foo \n bar ", textArea.getText());
+    }
 }
 

@@ -43,11 +43,11 @@
                 Patch supplied by Brad Clarke
             </action>
             <action type="update" dev="mbowler" id="800993">
-				Navigator.javaEnabled should be method not property
-			</action>
+                Navigator.javaEnabled should be method not property
+            </action>
             <action type="add" dev="mbowler" id="799760">
-				Added WebClient.getWebWindows()
-			</action>
+                Added WebClient.getWebWindows()
+            </action>
             <action type="update" dev="mbowler" id="812749" due-to="Brad Clarke">
                 Fixed bug where radio button and checkbox logic was case sensitive.
                 Patch supplied by Brad Clarke
@@ -82,9 +82,9 @@
                 support for HTMLElement.nodeType, nodeName and nodeValue
                 properties.
             </action>
-			<action type="add" dev="mbowler">
-				Added method HtmlArea.click()
-			</action>
+            <action type="add" dev="mbowler">
+                Added method HtmlArea.click()
+            </action>
             <action type="add" dev="dktaylor" id="799865">
                 Add support for click() for all element types that have an
                 onClick attribute.  This includes image.  Removed extra
@@ -94,30 +94,35 @@
                 and textarea elements.
             </action>
             <action type="update" dev="mbowler">
-            	Fixed bug where variables defined in a script could not be referenced
-            	as "window.myVariable".  This prevented the google ads from working
-            	on the HtmlUnit website.
+                Fixed bug where variables defined in a script could not be referenced
+                as "window.myVariable".  This prevented the google ads from working
+                on the HtmlUnit website.
             </action>
             <action type="add" dev="mbowler">
-            	Stubbed out Window.onerror
+                Stubbed out Window.onerror
             </action>
             <action type="update" dev="mbowler" id="799839">
-            	Fixed bug where an option without a value could not be selected.
+                Fixed bug where an option without a value could not be selected.
             </action>
             <action type="update" dev="mbowler" id="799752">
-            	Fixed bug where Select[index] wasn't returning options.
+                Fixed bug where Select[index] wasn't returning options.
             </action>
             <action type="update" dev="mbowler" id="824145" due-to="Brad Clarke">
-            	Fixed bug where button names would get submitted twice.  Patch
-            	submitted by Brad Clarke.
+                Fixed bug where button names would get submitted twice.  Patch
+                submitted by Brad Clarke.
             </action>
             <action type="add" dev="mbowler" id="772233">
-            	Added support for auto-refresh both from a Meta tag and from an
-            	http response header.
+                Added support for auto-refresh both from a Meta tag and from an
+                http response header.
             </action>
             <action type="update" dev="mbowler" id="824842" due-to="Jun Chen">
-            	Added support for the format of &lt;script&gt; defined by DOM Leve2.
-            	Patch submitted by Jun Chen
+                Added support for the format of &lt;script&gt; defined by DOM Level 2.
+                Patch submitted by Jun Chen
+            </action>
+            <action type="update" dev="mbowler" id="825003" due-to="Brad Clarke">
+                 An HtmlTextArea should not contain anything but preformatted text, 
+                 so doing things such as converting &lt;br&gt; to line breaks and removing 
+                 extra white space should not happen. Patch supplied by Brad Clarke.
             </action>
         </release>
 
