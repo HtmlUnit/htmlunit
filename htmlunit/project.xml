@@ -284,7 +284,7 @@
             <version>1.0-FCS</version>
             <url>http://saxpath.org/</url>
             <properties>
-                <htmlunit.group>jelly</htmlunit.group>
+                <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>XPath support</htmlunit.description>
             </properties>
         </dependency>
