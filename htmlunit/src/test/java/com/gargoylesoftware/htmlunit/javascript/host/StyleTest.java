@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -134,5 +135,31 @@ public class StyleTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
 
         assertEquals("color: pink; ", page.getHtmlElementById("div1").getAttributeValue("style") );
+    }
+
+    /**
+     * Even if javascript isn't really executed according to the browser version used,
+     * it may have some side effects if configuration is incorrect. 
+     * @throws Exception if the test fails
+     */
+    public void testMozillaStyle() throws Exception {
+        final String content
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var oDiv = document.getElementById('div1');\n"
+            + "    alert(oDiv.style.visibility);\n"
+            + "    oDiv.style.visibility = 'hidden';\n"
+            + "    alert(oDiv.style.visibility);\n"
+            + "}\n</script></head>"
+            + "<body onload='doTest()'>"
+            + "<div id='div1'>foo</div></body></html>";
+
+        final List expectedAlerts = Arrays.asList( new String[]{"", "hidden"} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 }
