@@ -46,7 +46,9 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.net.ConnectException;
 import java.net.URL;
+import java.net.URLConnection;
 
 import org.jaxen.JaxenException;
 import org.xml.sax.SAXException;
@@ -99,9 +101,23 @@ public class HTMLParserTest extends TestCase {
      */
     public static void testHtmlUnitHomePage() throws SAXException, IOException, JaxenException {
 
+        URL htmlUnitSite = new URL("http://htmlunit.sourceforge.net");
+        try {
+            URLConnection connection = htmlUnitSite.openConnection();
+            connection.connect();
+        }
+        catch (ConnectException e) {
+            /* sf.net's flaky web servers and not being able to connect
+             * here from the shell server can cause this, doesn't mean something
+             * is broken 
+             */
+            System.out.println("Connection could not be made to " + htmlUnitSite.toExternalForm());
+            return; 
+        }
+        
         WebClient webClient = new WebClient();
         WebResponse webResponse = new HttpWebConnection(webClient).getResponse(
-                new URL("http://htmlunit.sourceforge.net"),
+                htmlUnitSite,
                 SubmitMethod.GET,
                 Collections.EMPTY_LIST,
                 Collections.EMPTY_MAP
