@@ -77,11 +77,7 @@ public class HtmlOption extends ClickableElement {
      * @param selected true if this option should be selected.
      */
     public void setSelected( final boolean selected ) {
-        final String value = getValueAttribute();
-        if( value.length() ==  0 ) {
-            throw new IllegalStateException("Can't select this option because it has no value set");
-        }
-        getEnclosingSelectOrDie().setSelectedAttribute(value, selected);
+        getEnclosingSelectOrDie().setSelectedAttribute(this, selected);
     }
 
 

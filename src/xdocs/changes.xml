@@ -101,6 +101,9 @@
             <action type="add" dev="mbowler">
             	Stubbed out Window.onerror
             </action>
+            <action type="update" dev="mbowler" id="799839">
+            	Fixed bug where an option without a value could not be selected.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
