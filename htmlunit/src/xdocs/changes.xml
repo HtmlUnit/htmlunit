@@ -32,6 +32,10 @@
 				found between tr and td tags.  Clearly this is illegal html but
 				the browsers support it so HtmlUnit needs to as well.
             </action>
+            <action type="update" dev="mbowler" id="805332" due-to="Brad Clarke">
+				Fixed bug where form elements without names were being submitted anyway.  Patch
+				supplied by Brad Clarke
+            </action>
 		</release>
 
 		    

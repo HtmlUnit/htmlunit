@@ -271,7 +271,9 @@ public class HtmlForm extends HtmlElement {
         if( disabled != null ) {
             return false;
         }
-
+       if( ! tagName.equals( "isindex" ) && getAttributeValue(element, "name" ).equals("") ) {
+           return false;
+       }
         if( tagName.equals( "input" ) ) {
             final String type = getAttributeValue(element, "type" ).toLowerCase();
             if( type.equals( "radio" ) || type.equals( "checkbox" ) ) {
