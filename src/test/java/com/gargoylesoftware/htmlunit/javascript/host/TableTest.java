@@ -39,23 +39,20 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for Form
- *
- * @version  $Revision$
+ * Tests for Table.
+ * 
  * @author David D. Kilzer
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Daniel Gredler
+ * @version $Revision$
  */
 public class TableTest extends WebTestCase {
+
     /**
      * Create an instance
      * @param name The name of the test
@@ -65,38 +62,238 @@ public class TableTest extends WebTestCase {
     }
 
     /**
-     * Tests that a table's rows may be counted from JavaScript.
-     *
      * @throws Exception if the test fails
      */
-    public void testTableRowCountViaJavaScript()
-        throws Exception {
+    public void testTableCaptions() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<table id=\"table1\">"
-                 + "<tr><td>cell1</td><td>cell2</td><td rowspan=\"2\">cell4</td></tr>"
-                 + "<tr><td colspan=\"2\">cell3</td></tr>"
-                 + "</table>"
-                 + "<script type=\"text/javascript\" language=\"JavaScript\">\n"
-                 + "<!--\n"
-                 + "alert(document.getElementById('table1').rows.length);\n"
-                 + "// -->\n"
-                 + "</script>\n"
-                 + "</body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
+                 = "<html><head><title>foo</title></head><body>\n"
+                 + "  <table id='table_1'><caption>caption1</caption><caption>caption2</caption>\n"
+                 + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
+                 + "    <tr><td colspan='2'>cell3</td></tr>\n"
+                 + "  </table>\n"
+                 + "  <script type='text/javascript' language='JavaScript'>\n"
+                 + "  <!--\n"
+                 + "    var table = document.getElementById('table_1');\n"
+                 + "    alert(table.caption.innerHTML);\n"
+                 + "    table.deleteCaption();\n"
+                 + "    alert(table.caption.innerHTML);\n"
+                 + "    table.deleteCaption();\n"
+                 + "    alert(table.caption);\n"
+                 + "    var newCaption = table.createCaption();\n"
+                 + "    newCaption.innerHTML = 'caption3';\n"
+                 + "    alert(table.caption.innerHTML);\n"
+                 + "  // -->\n"
+                 + "  </script>\n"
+                 + "</body></html>\n";
 
         final List collectedAlerts = new ArrayList();
-        final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
-        client.setAlertHandler(alertHandler);
+        loadPage(htmlContent, collectedAlerts);
 
-        client.getPage(URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final List expectedAlerts = Arrays.asList(new String[] { "caption1", "caption2", "null", "caption3" });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 
-        final List expectedAlerts = Arrays.asList(new String[]{"2"});
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testTableHeaders() throws Exception {
+
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>\n"
+                 + "  <table id='table_1'>\n"
+                 + "    <thead id='thead1'><tr><td>cell1</td><td>cell2</td><td>cell3</td></tr></thead>\n"
+                 + "    <thead id='thead2'><tr><td>cell7</td><td>cell8</td><td>cell9</td></tr></thead>\n"
+                 + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
+                 + "    <tr><td colspan='2'>cell3</td></tr>\n"
+                 + "  </table>\n"
+                 + "  <script type='text/javascript' language='JavaScript'>\n"
+                 + "  <!--\n"
+                 + "    var table = document.getElementById('table_1');\n"
+                 + "    alert(table.tHead.id);\n"
+                 + "    table.deleteTHead();\n"
+                 + "    alert(table.tHead.id);\n"
+                 + "    table.deleteTHead();\n"
+                 + "    alert(table.tHead);\n"
+                 + "    var newTHead = table.createTHead();\n"
+                 + "    newTHead.id = 'thead3';\n"
+                 + "    alert(table.tHead.id);\n"
+                 + "  // -->\n"
+                 + "  </script>\n"
+                 + "</body></html>\n";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(htmlContent, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList(new String[] { "thead1", "thead2", "null", "thead3" });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testTableBodies() throws Exception {
+
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>\n"
+                 + "  <table id='table_1'>\n"
+                 + "    <tbody id='tbody1'>\n"
+                 + "      <tr><td>cell1</td><td>cell2</td></tr>\n"
+                 + "      <tr><td>cell3</td><td>cell4</td></tr>\n"
+                 + "    </tbody>\n"
+                 + "    <tbody id='tbody2'>\n"
+                 + "      <tr><td>cell1</td><td>cell2</td></tr>\n"
+                 + "      <tr><td>cell3</td><td>cell4</td></tr>\n"
+                 + "    </tbody>\n"
+                 + "  </table>\n"
+                 + "  <script type='text/javascript' language='JavaScript'>\n"
+                 + "  <!--\n"
+                 + "    var table = document.getElementById('table_1');\n"
+                 + "    var bodies = table.tBodies;\n"
+                 + "    alert(bodies.length);\n"
+                 + "    alert(bodies == table.tBodies);\n"
+                 + "    var body1 = table.tBodies[0];\n"
+                 + "    var body2 = table.tBodies[1];\n"
+                 + "    alert(table.rows.length + ' ' + body1.rows.length + ' ' + body2.rows.length);\n"
+                 + "    table.insertRow(); // Should add at end, to body2.\n"
+                 + "    body1.insertRow(); // Add one to body1, as well.\n"
+                 + "    alert(table.rows.length + ' ' + body1.rows.length + ' ' + body2.rows.length);\n"
+                 + "  // -->\n"
+                 + "  </script>\n"
+                 + "</body></html>\n";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(htmlContent, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList(new String[] { "2", "true", "4 2 2", "6 3 3" });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testTableRows() throws Exception {
+
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>\n"
+                 + "  <table id='table_1'>\n"
+                 + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
+                 + "    <tr><td colspan='2'>cell3</td></tr>\n"
+                 + "  </table>\n"
+                 + "  <script type='text/javascript' language='JavaScript'>\n"
+                 + "  <!--\n"
+                 + "    var table = document.getElementById('table_1');\n"
+                 + "    var rows = table.rows;\n"
+                 + "    alert(rows.length);\n"
+                 + "    alert(rows == table.rows);\n"
+                 + "    table.insertRow(1);\n"
+                 + "    alert(rows.length);\n"
+                 + "    table.deleteRow(1);\n"
+                 + "    alert(rows.length);\n"
+                 + "  // -->\n"
+                 + "  </script>\n"
+                 + "</body></html>\n";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(htmlContent, collectedAlerts);
+        
+        final List expectedAlerts = Arrays.asList(new String[] { "2", "true", "3", "2" });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testTableRowsWithManySections() throws Exception {
+
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "  <table id='table_1'>\n"
+            + "    <thead>\n"
+            + "      <tr><td>cell1</td><td>cell2</td></tr>\n"
+            + "      <tr><td>cell3</td><td>cell4</td></tr>\n"
+            + "    </thead>\n"
+            + "    <tbody id='tbody1'>\n"
+            + "      <tr><td>cell1</td><td>cell2</td></tr>\n"
+            + "      <tr><td>cell3</td><td>cell4</td></tr>\n"
+            + "    </tbody>\n"
+            + "    <tbody id='tbody2'>\n"
+            + "      <tr><td>cell1</td><td>cell2</td></tr>\n"
+            + "      <tr><td>cell3</td><td>cell4</td></tr>\n"
+            + "    </tbody>\n"
+            + "    <tfoot>\n"
+            + "      <tr><td>cell1</td><td>cell2</td></tr>\n"
+            + "      <tr><td>cell3</td><td>cell4</td></tr>\n"
+            + "    </tfoot>\n"
+            + "  </table>\n"
+            + "  <script type='text/javascript' language='JavaScript'>\n"
+            + "  <!--\n"
+            + "    var table = document.getElementById('table_1');\n"
+            + "    var bodies = table.tBodies;\n"
+            + "    alert(bodies.length);\n"
+            + "    alert(bodies == table.tBodies);\n"
+            + "    var head = table.tHead;\n"
+            + "    var body1 = table.tBodies.item(0);\n"
+            + "    var body2 = table.tBodies.item(1);\n"
+            + "    var foot = table.tFoot;\n"
+            + "    alert(table.rows.length + ' ' + head.rows.length + ' ' + body1.rows.length "
+            + "        + ' ' + body2.rows.length + ' ' + foot.rows.length);\n"
+            + "    table.insertRow(6); // Insert a row in the footer.\n"
+            + "    alert(table.rows.length + ' ' + head.rows.length + ' ' + body1.rows.length "
+            + "        + ' ' + body2.rows.length + ' ' + foot.rows.length);\n"
+            + "    table.deleteRow(5); // Delete a row from the second body.\n"
+            + "    alert(table.rows.length + ' ' + head.rows.length + ' ' + body1.rows.length "
+            + "        + ' ' + body2.rows.length + ' ' + foot.rows.length);\n"
+            + "    table.insertRow(2); // Insert a row in the first body.\n"
+            + "    alert(table.rows.length + ' ' + head.rows.length + ' ' + body1.rows.length "
+            + "        + ' ' + body2.rows.length + ' ' + foot.rows.length);\n"
+            + "    table.deleteRow(1); // Delete a row from the header.\n"
+            + "    alert(table.rows.length + ' ' + head.rows.length + ' ' + body1.rows.length "
+            + "        + ' ' + body2.rows.length + ' ' + foot.rows.length);\n"
+            + "  // -->\n"
+            + "  </script>\n"
+            + "</body></html>\n";
+
+        
+        final List collectedAlerts = new ArrayList();
+        loadPage(htmlContent, collectedAlerts);
+        
+        final List expectedAlerts = Arrays.asList(new String[] {"2", "true", "8 2 2 2 2",
+                "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3"});
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testTableFooters() throws Exception {
+
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>\n"
+                 + "  <table id='table_1'>\n"
+                 + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
+                 + "    <tr><td colspan='2'>cell3</td></tr>\n"
+                 + "    <tfoot id='tfoot1'><tr><td>cell1</td><td>cell2</td><td>cell3</td></tr></tfoot>\n"
+                 + "    <tfoot id='tfoot2'><tr><td>cell7</td><td>cell8</td><td>cell9</td></tr></tfoot>\n"
+                 + "  </table>\n"
+                 + "  <script type='text/javascript' language='JavaScript'>\n"
+                 + "  <!--\n"
+                 + "    var table = document.getElementById('table_1');\n"
+                 + "    alert(table.tFoot.id);\n"
+                 + "    table.deleteTFoot();\n"
+                 + "    alert(table.tFoot.id);\n"
+                 + "    table.deleteTFoot();\n"
+                 + "    alert(table.tFoot);\n"
+                 + "    var newTFoot = table.createTFoot();\n"
+                 + "    newTFoot.id = 'tfoot3';\n"
+                 + "    alert(table.tFoot.id);\n"
+                 + "  // -->\n"
+                 + "  </script>\n"
+                 + "</body></html>\n";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(htmlContent, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList(new String[] { "tfoot1", "tfoot2", "null", "tfoot3" });
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

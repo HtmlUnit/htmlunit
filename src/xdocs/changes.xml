@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="yourgod" id="1104522" due-to="sdanig">
+                Added support for misc table methods in javascript
+            </action>        
             <action type="update" dev="mguillem">
                 JavaScript: added dummy implementation of window.setInterval and window.clearInterval doing nothing.
             </action>

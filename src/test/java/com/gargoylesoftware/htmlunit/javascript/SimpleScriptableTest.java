@@ -136,10 +136,10 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("Window");
         names.remove("Attribute");
         names.remove("ScoperFunctionObject");
-        
+        names.remove("RowContainer");
+
         assertEquals( new TreeSet(names), new TreeSet(map.values()) );
     }
-
 
     private Set getFileNames( final String directoryName ) {
         File directory = new File("."+File.separatorChar+directoryName);
