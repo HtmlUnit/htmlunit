@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-
 <project>
+
 	<pomVersion>3</pomVersion>
-	<name>HtmlUnit</name>
 	<id>htmlunit</id>
-	<gumpRepositoryId>htmlunit</gumpRepositoryId>
-	<inceptionYear>2002</inceptionYear>
-	<currentVersion>1.3beta1</currentVersion>
-	<package>com.gargoylesoftware.htmlunit</package>
+	<name>htmlunit</name>
+	<currentVersion>1.3beta</currentVersion>
 
 	<organization>
-	<name>Gargoyle Software Inc.</name>
-	<url>http://www.GargoyleSoftware.com</url>
-	<logo>http://www.GargoyleSoftware.com/images/CompanyLogoSmall.jpg</logo>
+		<name>Gargoyle Software Inc.</name>
+		<url>http://www.GargoyleSoftware.com/</url>
+		<logo>http://www.gargoylesoftware.com/images/CompanyLogoSmall.gif</logo>
 	</organization>
+	<inceptionYear>2002</inceptionYear>
+	<package>com.gargoylesoftware.htmlunit</package>
+	<logo>/images/HtmlUnitLogo.jpg</logo>
+	<gumpRepositoryId>htmlunit</gumpRepositoryId>
 
-	<shortDescription>HtmlUnit - A testing tool for web based applications</shortDescription>
-	<description>A testing tool for web based applications</description>
+	<description>
+		A tool for testing web based applications
+	</description>
+	<shortDescription>HtmlUnit</shortDescription>
 
-	<logo></logo>
 	<url>http://htmlunit.sourceforge.net</url>
 	<issueTrackingUrl></issueTrackingUrl>
 
-	<siteAddress>htmlunit.sourceforge.net</siteAddress>
-	<siteDirectory>/home/groups/h/ht/htmlunit/htdocs</siteDirectory>
+	<siteAddress>http://htmlunit.sourceforge.net</siteAddress>
+	<siteDirectory></siteDirectory>
 	<distributionDirectory></distributionDirectory>
 	<repository>
 		<connection>scm:cvs:ext:mbowler@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit:htmlunit</connection>
@@ -32,19 +34,13 @@
 
 	<versions>
 		<version>
-			<id>1.0</id>
-			<name>1.0</name>
-			<tag>1.0</tag>
+			<id>2.0</id>
+			<name>2.0</name>
+			<tag>2.0</tag>
 		</version>
 	</versions>
 
 	<mailingLists>
-		<mailingList>
-			<name>HtmlUnit Mailing list</name>
-			<subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</subscribe>
-			<unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</unsubscribe>
-			<archive>http://sourceforge.net/mailarchive/forum.php?forum=htmlunit-develop</archive>
-		</mailingList>
 	</mailingLists>
 
 	<developers>
@@ -54,21 +50,20 @@
 			<email>mbowler@GargoyleSoftware.com</email>
 			<organization>Gargoyle Software Inc.</organization>
 			<roles>
-			<role>Release Manager</role>
-			<role>Java Developer</role>
+				<role>Release Manager</role>
+				<role>Java Developer</role>
 			</roles>
 		</developer>
 	</developers>
 
-	<contributors>
 	<!--
+	<contributors>
 		<contributor>
 			<name></name>
 			<email></email>
 		</contributor>
-	-->
 	</contributors>
-
+	-->
 	<dependencies>
 		<dependency>
 			<id>junit</id>
@@ -76,22 +71,70 @@
 			<url>http://www.junit.org/</url>
 		</dependency>
 		<dependency>
-			<id>commons-logging</id>
-			<version>1.0.2</version>
-			<url>http://jakarta.apache.org/commons/logging.html</url>
+			<id>junitperf</id>
+			<version>1.8</version>
+			<url>http://www.clarkware.com</url>
 		</dependency>
 		<dependency>
-			<id>jsse</id>
-			<version>1.0.3_01</version>
-			<url>http://java.sun.com/products/jsse/</url>
+			<id>commons-jelly</id>
+			<version>20030211.141339</version>
+			<url>http://jakarta.apache.org/commons/jelly</url>
 		</dependency>
 		<dependency>
-			<id>jsse+jnet</id>
-			<version>1.0.3_01</version>
-			<url>http://java.sun.com/products/jsse/</url>
-			<jar>jnet-1.0.3_01.jar</jar>
+			<id>commons-httpclient</id>
+			<version>2.0-alpha2</version>
+			<url>http://jakarta.apache.org/commons/httpclient</url>
 		</dependency>
 		<dependency>
+			<id>gsbase</id>
+			<version>2.0-beta</version>
+			<url>http://gsbase.sourceforge.net</url>
+		</dependency>
+		<dependency>
+			<id>rhino</id>
+			<version>1.5R4-RC3</version>
+			<url>http://www.mozilla.org/rhino</url>
+			<jar>js-1.5R4-RC3.jar</jar>
+		</dependency>
+		<dependency>
+			<id>xerces</id>
+			<version>2.0.2</version>
+			<url>http://xml.apache.org/xercesj</url>
+			<jar>xercesImpl-2.0.2.jar</jar>
+		</dependency>
+		<dependency>
+			<id>xerces</id>
+			<version>2.0.2</version>
+			<url>http://xml.apache.org/xercesj</url>
+			<jar>xmlParserAPIs-2.0.2.jar</jar>
+		</dependency>
+		<dependency>
+			<id>xml-apis</id>
+			<version>2.0.2</version>
+		</dependency>
+		<dependency>
+			<id>nekohtml</id>
+			<version>0.7.1</version>
+		</dependency>
+
+		<!-- HTTPCLIENT DEPENDENCIES -->
+			<dependency>
+	  <id>commons-logging</id>
+	  <version>1.0.2</version>
+	  <url>http://jakarta.apache.org/commons/logging.html</url>
+	</dependency>
+	<dependency>
+	  <id>jsse</id>
+	  <version>1.0.3_01</version>
+	  <url>http://java.sun.com/products/jsse/</url>
+	</dependency>
+	<dependency>
+	  <id>jsse+jnet</id>
+	  <version>1.0.3_01</version>
+	  <url>http://java.sun.com/products/jsse/</url>
+	  <jar>jnet-1.0.3_01.jar</jar>
+	</dependency>
+	<dependency>
 			<id>jsse+jcert</id>
 			<version>1.0.3_01</version>
 			<url>http://java.sun.com/products/jsse/</url>
@@ -114,47 +157,11 @@
 			<url>http://java.sun.com/products/jce/</url>
 			<jar>local_policy-1.2.2.jar</jar>
 		</dependency>
-		<dependency>
-			<id>nekohtml</id>
-			<version>0.7.1</version>
-			<url>http://foo</url>
-			<jar>nekohtml-0.7.1.jar </jar>
-		</dependency>
-		<dependency>
-			<id>xml-apis</id>
-			<version>2.0.2</version>
-			<url>http://foo</url>
-			<jar>xml-apis-2.0.2.jar </jar>
-		</dependency>
-		<dependency>
-			<id>xerces</id>
-			<version>2.0.2</version>
-			<url>http://foo</url>
-			<jar>xercesImpl-2.0.2.jar</jar>
-		</dependency>
-		<dependency>
-			<id>rhino</id>
-			<version>1.5R4</version>
-			<url>http://foo</url>
-			<jar>js-1.5R4-RC3.jar</jar>
-		</dependency>
-		<dependency>
-			<id>commons-httpclient</id>
-			<version>2.0alpha2</version>
-			<url>http://foo</url>
-			<jar>commons-httpclient-2.0-alpha2.jar</jar>
-		</dependency>
 
-		<dependency>
-			<id>gsbase</id>
-			<version>2.0-SNAPSHOT</version>
-			<url>gsbase.sourceforge.net</url>
-			<jar>gsbase.jar</jar>
-		</dependency>
 	</dependencies>
 
 	<build>
-		<nagEmailAddress>mbowler@GargoyleSoftware.com</nagEmailAddress>
+		<nagEmailAddress>htmlunit@GargoyleSoftware.com</nagEmailAddress>
 		<sourceDirectory>src/java</sourceDirectory>
 		<unitTestSourceDirectory>src/java</unitTestSourceDirectory>
 		<integrationUnitTestSourceDirectory/>
@@ -165,7 +172,7 @@
 				<include>**/*Test.java</include>
 			</includes>
 		</unitTest>
-		<jars></jars>
+
 	</build>
 
 </project>
