@@ -23,6 +23,9 @@
                 input elements may not show up in the form depending on what had happened during page
                 load.
             </action>
+            <action type="add" dev="mbowler">
+                Refactored some logic out of Form into FormElementsArray for easier maintenance
+            </action>
         </release>
     </body>
 
