@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
@@ -150,7 +151,7 @@ public class MockWebConnection extends WebConnection {
         final URL url,
         final SubmitMethod method,
         final List parameters,
-        final Map requestParameters ) {
+        final Map requestParameters ) throws IOException {
 
         return this.getResponse(url, FormEncodingType.URL_ENCODED, method, parameters, requestParameters);
     }
@@ -170,7 +171,7 @@ public class MockWebConnection extends WebConnection {
             final FormEncodingType encType,
             final SubmitMethod method,
             final List parameters,
-            final Map requestHeaders ) {
+            final Map requestHeaders ) throws IOException {
 
         lastMethod_ = method;
         lastParameters_ = parameters;
