@@ -684,4 +684,26 @@ public class FormTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetFieldNamedLikeForm() throws Exception {
+        final String content =
+            "<html>"
+            + "<head></head>"
+            + "<body onload='alert(document.login.login.type)'>"
+            + "<form name='login' action='foo.html'>"
+            + "<input name='login' type='text'>"
+            + "</form>"
+            + "</body>"
+            + "</html>";
+        
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList( new String[]{ "text" } );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

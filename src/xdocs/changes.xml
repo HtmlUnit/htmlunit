@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1100975">
+                JavaScript: document.xxx now retrieves dom node with name xxx only if it's an img or a form (input should not be retrieved).
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: Fixed bug in window.frames[i] (was introduced in 1.4).
             </action>
