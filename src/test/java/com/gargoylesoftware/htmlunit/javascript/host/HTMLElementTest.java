@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -928,6 +929,40 @@ public class HTMLElementTest extends WebTestCase {
                "</div></body>\n" +
                 "</html>";
         final List expectedAlerts = Arrays.asList(new String[]{"removeMe", "null"});
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+
+    /**
+     * Test offsets (real values don't matter currently).
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testOffsets() throws Exception {
+        final String content = "<html>\n"
+              + "<head>\n"
+              + "    <title>Test</title>\n"
+              + "</head>\n"
+              + "<body>"
+              + "</div></body>\n"
+              + "<div id='div1'>foo</div>"
+              + "<script>\n"
+              + "function alertOffsets(_oElt)\n"
+              + "{\n"
+              + "  alert(typeof _oElt.offsetHeight);\n"
+              + "  alert(typeof _oElt.offsetWidth);\n"
+              + "  alert(typeof _oElt.offsetLeft);\n"
+              + "  alert(typeof _oElt.offsetTop);\n"
+              + "}\n"
+              + "alertOffsets(document.body);\n"
+              + "alertOffsets(document.getElementById('div1'));\n"
+              + "</script></body></html>";
+        final List expectedAlerts = Collections.nCopies(8, "number");
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
