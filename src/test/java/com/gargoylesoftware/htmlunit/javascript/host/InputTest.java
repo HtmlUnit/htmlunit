@@ -328,4 +328,32 @@ public class InputTest extends WebTestCase {
         final HtmlForm form = page.getFormByName("form1");
         form.submit();
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testInputSelect_NotDefinedAsPropertyAndFunction() throws Exception {
+        final String htmlContent =
+            "<html><head><title>foo</title><script>"
+            + "function doTest(){\n"
+            + " document.form1.textfield1.select();"
+            + "}\n"
+            + "</script></head><body>"
+            + "<p>hello world</p>"
+            + "<form name='form1' method='post' onsubmit='doTest()'>"
+            + " <input type='text' name='textfield1' id='textfield1' value='foo' />"
+            + "</form>"
+            + "</body></html>";
+
+        final WebClient client = new WebClient(BrowserVersion.MOZILLA_1_0);
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(htmlContent);
+        client.setWebConnection(webConnection);
+
+        final URL url = URL_GARGOYLE;
+        final HtmlPage page = (HtmlPage) client.getPage(url);
+
+        final HtmlForm form = page.getFormByName("form1");
+        form.submit();
+    }    
 }

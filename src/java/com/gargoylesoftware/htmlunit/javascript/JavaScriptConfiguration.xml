@@ -214,7 +214,6 @@
         <property name="defaultChecked" readable="true" writable="true"/>
         <property name="defaultValue" readable="true" writable="true"/>
         <property name="form" readable="true" writable="true"/>
-        <property name="select" readable="true" writable="true"/>
         <property name="name" readable="true" writable="true"/>
         <property name="options" readable="true" writable="true"/>
         <property name="selectedIndex" readable="true" writable="true"/>
