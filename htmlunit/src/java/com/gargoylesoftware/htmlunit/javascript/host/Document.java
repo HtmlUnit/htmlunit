@@ -206,12 +206,16 @@ public final class Document extends HTMLElement {
     }
 
     /**
-     * Return the cookie attribute.  Currently hardcoded to return an empty string
+     * Return the cookie attribute.
      * @return The cookie attribute
      */
     public String jsGet_cookie() {
         final HttpState state = getHttpState();
         final Cookie[] cookies = state.getCookies();
+        if( cookies == null ) {
+            return "";
+        }
+
         final StringBuffer buffer = new StringBuffer();
 
         for( int i=0; i<cookies.length; i++ ) {
