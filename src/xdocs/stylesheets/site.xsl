@@ -248,7 +248,45 @@ tbody {padding: 5px 5px 5px 10px;}
 
 
 <xsl:template match="javadoc">
-	<a href="/foo"><xsl:apply-templates/></a>
+	<xsl:variable name="fullname" select="."/>
+	<xsl:choose>
+		<xsl:when test="contains($fullname, '#')">
+			<a href="api/{translate(substring-before($fullname,'#'),'.','/')}.html#{substring-after($fullname,'#')}">
+				<xsl:call-template name="lastElementOf">
+					<xsl:with-param name="string">
+						<xsl:value-of select="substring-before($fullname,'#')"/>
+					</xsl:with-param>
+				</xsl:call-template>
+				.<xsl:value-of select="substring-before(substring-after($fullname,'#'),'(')"/>()
+			</a>
+		</xsl:when>
+		<xsl:otherwise>
+			<a href="api/{translate($fullname,'.','/')}.html">
+				<xsl:call-template name="lastElementOf">
+					<xsl:with-param name="string">
+						<xsl:value-of select="$fullname"/>
+					</xsl:with-param>
+				</xsl:call-template>
+			</a>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+
+<xsl:template name="lastElementOf">
+	<xsl:param name="string"/>
+	<xsl:choose>
+		<xsl:when test="contains($string, '.')">
+			<xsl:call-template name="lastElementOf">
+				<xsl:with-param name="string">
+					<xsl:value-of select="substring-after($string,'.')"/>
+				</xsl:with-param>
+			</xsl:call-template>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="$string"/>
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 
 
