@@ -219,7 +219,7 @@ public final class HtmlPage
 
         try {
             XMLDocumentFilter[] filters = {
-                new ScriptFilter( parser.getConfiguration(), this )//, new Identity(), new Writer()
+                new ScriptFilter( parser.getConfiguration(), this )
             };
             parser.setProperty( "http://cyberneko.org/html/properties/filters", filters );
 
