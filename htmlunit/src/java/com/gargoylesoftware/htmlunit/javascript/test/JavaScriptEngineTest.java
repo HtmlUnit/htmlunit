@@ -9,6 +9,8 @@ package com.gargoylesoftware.htmlunit.javascript.test;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
@@ -354,5 +356,50 @@ public class JavaScriptEngineTest extends WebTestCase {
                 new URL( "http://first/index.html" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals("foo", page.getTitleText());
+    }
+
+
+    /**
+     * Test case for bug 707134.  Currently I am unable to reproduce the problem.
+     */
+    public void testFunctionDefinedInSameFile() throws Exception {
+
+        final WebClient client = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+
+        final String htmlContent
+             = "<html><head><title>First</title><script>"
+             + "function showFoo( foo ) {\n"
+             + "    alert( 'Foo is: |' + foo + '|' );\n"
+             + "}\n"
+             + "</script>"
+             + "</head><body><form name='form1'>"
+             + "<input name='text1' type='text'>\n"
+             + "<input name='button1' type='button' onclick='showFoo( document.form1.text1.value);'>\n"
+             + "</form></body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first/index.html"),
+            htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first/index.html" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals("First", page.getTitleText());
+
+        final HtmlForm form = page.getFormByName("form1");
+        final HtmlTextInput textInput = (HtmlTextInput)form.getInputByName("text1");
+        textInput.setValueAttribute("flintstone");
+
+        final HtmlButtonInput button = (HtmlButtonInput)form.getInputByName("button1");
+        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+
+        button.click();
+
+        assertEquals( Collections.singletonList("Foo is: |flintstone|"), collectedAlerts );
     }
 }
