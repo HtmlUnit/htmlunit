@@ -1,6 +1,22 @@
 <?xml version="1.0"?>
 <document title="Change History">
 
+<section title="1.3">
+	<change-log>
+		<change type="new">
+			Started tracking more information about changes
+		</change>
+		<change type="fix" reporter="Jean-Luc Vaillant" id="">
+			Fixed bug where the checked attribute wasn't always returning the correct value.
+		</change>
+		<change type="fix" reporter="Jean-Luc Vaillant" id="705693">
+			Fixed bug where checkboxes were returning the wrong value if they hadn't explicitly
+			been set by the server.
+		</change>
+	</change-log>
+</section>
+
+
 <section title="1.2.1">
 	<change-log>
 		<change type="new">

@@ -171,5 +171,27 @@ public final class HtmlInputTest extends WebTestCase {
         input.setValueAttribute("foo");
         assertEquals( Collections.singletonList("changed"), collectedAlerts );
     }
+
+
+    public void testCheckboxDefaultValue() throws Exception {
+
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<form id='form1'>"
+                 + "<input type='checkbox' name='checkbox1')>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://www.gargoylesoftware.com" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlCheckBoxInput input = (HtmlCheckBoxInput)form.getInputByName("checkbox1");
+        assertEquals( "on", input.getValueAttribute() );
+    }
 }
 
