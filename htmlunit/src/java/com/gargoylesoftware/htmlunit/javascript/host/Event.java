@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class Event extends SimpleScriptable {
 
+    private static final long serialVersionUID = 4050485607908455730L;
     private Object currentTarget_;
 
     /**
