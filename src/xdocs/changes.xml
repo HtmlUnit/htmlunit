@@ -14,7 +14,7 @@
                 JavaScript: fixed problem occuring for &lt;script for="window" event="onload()"&gt; with event value ending with "()".
             </action>
             <action type="add" dev="mguillem">
-                JavaScript: added document.domain (read only).
+                JavaScript: added document.domain.
             </action>
             <action type="add" dev="mguillem" due-to="Daniel Gredler" id="1096789">
                 JavaScript: added implementation of IE behavior "#default#clientCaps".
