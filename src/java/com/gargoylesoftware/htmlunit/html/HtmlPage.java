@@ -122,6 +122,7 @@ public final class HtmlPage
 
     /**
      * Initialize this page.
+     * @throws IOException If an IO problem occurs.
      */
     public void initialize() throws IOException {
         initializeHtmlElementCreatorsIfNeeded();
@@ -256,6 +257,13 @@ public final class HtmlPage
     }
 
 
+    /**
+     * Return the xml element corresponding with this page.  This has been 
+     * overridden to ensure it returns a correct value even if the page
+     * hasn't fully been loaded yet.
+     * 
+     * @return the xml element.
+     */
     public Element getElement() {
         final Element element = super.getElement();
         if( element == null && xmlParser_ != null ) {
@@ -263,6 +271,8 @@ public final class HtmlPage
         }
         return element;
     }
+
+
     /**
      *  Return the HtmlAnchor with the specified name
      *
@@ -1034,7 +1044,7 @@ public final class HtmlPage
     /**
      * Set the script filter that will be used during processing of the
      * javascript document.write().  This is intended for internal use only.
-     * @param The script filter.
+     * @param scriptFilter The script filter.
      */
     public void setScriptFilter( final ScriptFilter scriptFilter ) {
         scriptFilter_ = scriptFilter;

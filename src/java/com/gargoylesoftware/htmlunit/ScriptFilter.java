@@ -39,7 +39,8 @@ public final class ScriptFilter extends DefaultFilter {
     /**
      *  Create an instance
      *
-     * @param  config
+     * @param  config The html configuration
+     * @param htmlPage The page that is being loaded.
      */
     public ScriptFilter( final HTMLConfiguration config, final HtmlPage htmlPage ) {
         assertNotNull("config", config);
@@ -51,7 +52,11 @@ public final class ScriptFilter extends DefaultFilter {
 
 
     /**
-     *  Start document.
+     * Start document.
+     * @param locator The locator
+     * @param encoding The encoding.
+     * @param augmentations The Augumentations
+     * @throws XNIException if a problem occurs.
      */
     public void startDocument(
             final XMLLocator locator,
@@ -68,7 +73,10 @@ public final class ScriptFilter extends DefaultFilter {
 
 
     /**
-     *  Start element.
+     * Start element.
+     * @param element The element
+     * @param attrs The xml attributes
+     * @param augmentations The augmentations.
      */
     public void startElement(
             final QName element,
@@ -92,7 +100,11 @@ public final class ScriptFilter extends DefaultFilter {
 
 
     /**
-     *  Empty element.
+     * Empty element.
+     * @param element The element
+     * @param attrs The xml attributes.
+     * @param The augmentations
+     * @throws XNIException if a problem occurs.
      */
     public void emptyElement(
             final QName element,
@@ -106,7 +118,10 @@ public final class ScriptFilter extends DefaultFilter {
 
 
     /**
-     *  Characters.
+     * Characters.
+     * @param text The text
+     * @param augmentations The augmentations.
+     * @throws XNIException If a problem occurs
      */
     public void characters(
             final XMLString text,
@@ -126,6 +141,9 @@ public final class ScriptFilter extends DefaultFilter {
 
     /**
      *  End element.
+     * @param element The element
+     * @param The augmentations
+     * @throws XNIException if a problem occurs.
      */
     public void endElement(
             final QName element,
@@ -141,10 +159,6 @@ public final class ScriptFilter extends DefaultFilter {
 
             try {
                 final String script = scriptBuffer_.toString();
-//                System.out.println();
-//                System.out.println("=================== SCRIPT START ======================");
-//                System.out.println(script);
-//                System.out.println("=================== SCRIPT END   ======================");
 
                 final String result = executeScript(script);
                 if( result.length() != 0 ) {
@@ -157,9 +171,6 @@ public final class ScriptFilter extends DefaultFilter {
                 scriptBuffer_ = null;
             }
         }
-//        else {
-//            super.endElement( element, augmentations );
-//        }
     }
 
 
@@ -184,6 +195,10 @@ public final class ScriptFilter extends DefaultFilter {
     }
 
 
+    /**
+     * Write the content back into the stream.
+     * @param content The content.
+     */
     public synchronized void write( final String content ) {
         if( newContentBuffer_ == null ) {
             newContentBuffer_ = new StringBuffer();

@@ -73,6 +73,7 @@ public abstract class ScriptEngine {
      * @param sourceCode The code to execute.
      * @param sourceName A name for the chunk of code that is going to be executed.  This will be
      * used in error messages.
+     * @param htmlElement The html element that will act as the context.
      * @return The result of executing the specified code
      */
     public abstract Object execute(
