@@ -9,6 +9,7 @@
         <release version="NextRelease" date="Unknown">
 						<action type="update" dev="cerskine">
 								Added to the JavaScript configuration page a column showing if a function is not implemented.
+						</action>
             <action type="update" dev="cerskine">
                 Reworked the JavaScript configuration.  Configuration file is now used and supports the
                 browser constraints on the properties and functions.
