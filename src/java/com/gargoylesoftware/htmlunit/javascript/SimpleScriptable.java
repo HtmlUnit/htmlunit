@@ -424,6 +424,25 @@ public class SimpleScriptable extends ScriptableObject {
 
 
     /**
+     * Return the value at the specified location in the argument list.  If the index is larger
+     * than the argument array then return the default value.
+     *
+     * @param index The index into the argument list.
+     * @param args The argument list.
+     * @param defaultValue The default value to return if the arg wasn't specified.
+     * @return The specified object or null
+     */
+    public static Object getObjectArg( final int index, final Object[] args, final Object defaultValue ) {
+        if( index >= args.length ) {
+            return defaultValue;
+        }
+        else {
+            return args[index];
+        }
+    }
+
+
+    /**
      * Return the string value at the specified location in the argument list.  If the index is larger
      * than the argument array then return the default value.
      *
@@ -433,11 +452,12 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The specified string or null
      */
     public static String getStringArg( final int index, final Object[] args, final String defaultValue ) {
-        if( index >= args.length ) {
-            return defaultValue;
+        final Object object = getObjectArg(index, args, defaultValue);
+        if( object == null ) {
+            return null;
         }
         else {
-            return (String)args[index];
+            return object.toString();
         }
     }
 
@@ -452,12 +472,14 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The specified boolean or the default value.
      */
     public static boolean getBooleanArg( final int index, final Object[] args, final boolean defaultValue ) {
-        if( index >= args.length ) {
-            return defaultValue;
+        final Boolean defaultBoolean;
+        if( defaultValue ) {
+            defaultBoolean = Boolean.TRUE;
         }
         else {
-            return ((Boolean)args[index]).booleanValue();
+            defaultBoolean = Boolean.FALSE;
         }
+        return ((Boolean)getObjectArg(index, args, defaultBoolean)).booleanValue();
     }
 
 
