@@ -230,5 +230,38 @@ public final class HtmlInputTest extends WebTestCase {
         final HtmlCheckBoxInput input = (HtmlCheckBoxInput)form.getInputByName("checkbox1");
         assertEquals( "on", input.getValueAttribute() );
     }
+    
+    /**
+     *  Test that clicking a radio button will select it
+     *
+     * @exception  Exception If the test fails
+     */
+    public void testClickRadioButton() throws Exception {
+        final String htmlContent
+        = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<input type='radio' name='foo' value='1' selected='selected'/>"
+            + "<input type='radio' name='foo' value='2'/>"
+            + "<input type='radio' name='foo' value='3'/>"
+            + "<input type='submit' name='button' value='foo'/>"
+            + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                URL_GARGOYLE,
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+
+        final HtmlRadioButtonInput radioButton = form.getRadioButtonInput( "foo", "2" );
+        final HtmlSubmitInput pushButton = ( HtmlSubmitInput )form.getInputByName( "button" );
+        
+        assertFalse("Should not be checked before click", radioButton.isChecked());
+        radioButton.click();
+        assertTrue("Should be checked after click", radioButton.isChecked());
+    }    
 }
 
