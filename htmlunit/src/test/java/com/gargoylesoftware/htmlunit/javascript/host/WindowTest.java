@@ -61,6 +61,7 @@ import java.util.List;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  */
 public class WindowTest extends WebTestCase {
     public WindowTest( final String name ) {
@@ -164,6 +165,7 @@ public class WindowTest extends WebTestCase {
     /**
      * _self is a magic name.  If we call open(url, '_self') then the current window must be
      * reloaded.
+     * @throws Exception If the test fails.
      */
     public void testOpenWindow_self() throws Exception {
         final WebClient webClient = new WebClient();
@@ -212,6 +214,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Regression test to reproduce a known bug
+     * @throws Exception if the test fails
      */
     public void testAlert_NoAlertHandler() throws Exception {
         final WebClient webClient = new WebClient();
@@ -474,5 +477,70 @@ public class WindowTest extends WebTestCase {
             Thread.sleep(waitTime);
         }
         fail("No alerts written within "+maxTime+"ms");
+    }
+    
+    
+    public void testAboutURL() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection =
+            new FakeWebConnection(webClient);
+        final String firstContent =
+            "<html><body><script language='JavaScript'>"
+                + "w2=window.open(\"about:blank\", \"AboutBlank\");"
+                + "w2.document.open();"
+                + "w2.document.write(\"<html><head><title>hello</title></head><body></body></html>\");"
+                + "w2.document.close();"
+                + "</script></body></html>";
+        webConnection.setResponse(
+            new URL("http://first"),
+            firstContent,
+            200,
+            "OK",
+            "text/html",
+            Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
+
+        webClient.getPage(
+            new URL("http://first"),
+            SubmitMethod.POST,
+            Collections.EMPTY_LIST);
+        final WebWindow webWindow = webClient.getWebWindowByName("AboutBlank");
+        assertNotNull(webWindow);
+
+        //  final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
+        //  assertEquals("<html><head><title>hello</title></head><body></body></html>",page.getDocument().toString());
+    }
+
+    /**
+     * 
+     * @throws Exception If the test fails
+     */
+    public void testWindowFrames() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection =
+            new FakeWebConnection(webClient);
+        final List collectedAlerts = new ArrayList();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent =
+            "<html><body><script language='JavaScript'>"
+                + "if (typeof top.frames[\"anyXXXname\"] == \"undefined\") {"
+                + "alert('one')};"
+                + "</script></body></html>";
+        webConnection.setResponse(
+            new URL("http://first"),
+            firstContent,
+            200,
+            "OK",
+            "text/html",
+            Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
+
+        webClient.getPage(
+            new URL("http://first"),
+            SubmitMethod.POST,
+            Collections.EMPTY_LIST);
+        assertEquals(1, collectedAlerts.size());
     }
 }
