@@ -94,6 +94,9 @@
             <action type="update" dev="dktaylor">
 	            Add support for setting window.onload within a script.  Window.onload may be set to the name of a function, e.g., window.onload=initFunc;
             </action>
+            <action type="update" dev="dktaylor" id="741930" due-to="Barnaby Court">
+	            Partial fix for RFE 741930 "document.createElement(...) and form.appendChild(...)".  This fix adds HTMLElement.appendChild.
+            </action>
         </release>
     </body>
 
