@@ -10,11 +10,16 @@
             <action type="update" dev="mbowler" id="713646">
                 Patch for bug in onload handler submitted by Andreas Hangler
             </action>
-            <action type="update" dev="mbowler" id="797144 ">
+            <action type="update" dev="mbowler" id="797144">
                 Added support for the about: protocol - patch from Jun Chen
             </action>
-            <action type="update" dev="mbowler" id="797144 ">
+            <action type="update" dev="mbowler" id="797144">
                 Added support for window frames - patch from Jun Chen
+            </action>
+            <action type="update" dev="mbowler" id="803233 " due-to="Brad Clarke">
+				an update of the version number in build.xml and outputting of 
+				a src jar for the current build
+				Patch submitted by Brad Clarke
             </action>
 		</release>
 
