@@ -12,6 +12,10 @@
 			javascript that was executed during the parsing of the page would not be able to access functions
 			declared in the external javascript files.
 		</change>
+		<change type="fix">
+			Fixed bug in HtmlForm.getRadioButtonsByName() where it would not match elements with an
+			uppercase value for "radio"
+		</change>
 	</change-log>
 </section>
 

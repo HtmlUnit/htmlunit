@@ -385,7 +385,7 @@ public class HtmlForm extends HtmlElement {
         while( iterator.hasNext() ) {
             final Element element = ( Element )iterator.next();
             if( getTagName(element).equals( "input" )
-                     && getAttributeValue(element, "type").equals( "radio" )
+                     && getAttributeValue(element, "type").equalsIgnoreCase( "radio" )
                      && getAttributeValue(element, "name").equals( name ) ) {
                 results.add( page.getHtmlElement( element ) );
             }
