@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
-import java.util.Properties;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -180,10 +179,6 @@ public class HtmlFrameSetTest extends WebTestCase {
         final URL menuURL = new URL(baseUrl + "/subdir1/menu.html");
         final URL firstURL = new URL(baseUrl + "/subdir2/first.html");
         final URL secondURL = new URL(baseUrl + "/second.html");
-
-        final Properties properties = System.getProperties();
-        properties.put("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.SimpleLog");
-        properties.put("org.apache.commons.logging.simplelog.defaultlog", "trace");
 
         final WebClient webClient = new WebClient();
 
