@@ -93,6 +93,15 @@ public class Input extends FocusableHostElement {
     public String jsGet_name() {
         return getHtmlElementOrDie().getAttributeValue( "name" );
     }
+    
+    /**
+     *  Set the value of the javascript attribute "name".
+     *
+     *@param  newName  The new name.
+     */
+    public void jsSet_name( final String newName ) {
+        getHtmlElementOrDie().setAttributeValue( "name", newName );
+    }    
 
 
     /**

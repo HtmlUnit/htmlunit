@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
@@ -376,5 +377,37 @@ public class InputTest extends WebTestCase {
         ((HtmlSubmitInput) page.getFormByName("form1").getInputByName("button1")).click();
 
         assertEquals("_blank", page.getFormByName("form1").getTargetAttribute());
+    }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testInputNameChange() throws Exception {
+        final String htmlContent = "<html><head><title>foo</title><script>"
+            + "function doTest(){\n"
+            + " document.form1.textfield1.name = 'changed';"
+            + " alert(document.form1.changed.name);"
+            + "}\n"
+            + "</script></head><body>"
+            + "<p>hello world</p>"
+            + "<form name='form1' method='post' onsubmit='doTest()'>"
+            + " <input type='text' name='textfield1' id='textfield1' value='foo' />"
+            + "</form>"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final MockWebConnection connection = (MockWebConnection) page.getWebClient()
+                .getWebConnection();
+
+        final HtmlForm form = page.getFormByName("form1");
+        form.submit();
+
+        final List expectedAlerts = Arrays.asList(new String[] {"changed"});
+        assertEquals(expectedAlerts, collectedAlerts);
+
+        final List expectedParameters = Arrays
+                .asList(new Object[] {new KeyValuePair("changed", "foo")});
+        assertEquals(expectedParameters, connection.getLastParameters()); 
     }    
 }
