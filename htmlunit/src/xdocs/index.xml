@@ -147,7 +147,7 @@
                     <dd><a href="http://jakarta.apache.org/commons/logging.html">Logging
                     from Apache</a></dd>
 
-                    <dt>nekohtml.jar <version-string>0.7.4</version-string></dt>
+                    <dt>nekohtml.jar <version-string>0.7.5 + private fix</version-string></dt>
                     <dd><a href="http://www.apache.org/~andyc/neko/doc/html/index.html">
                     NekoHTML</a> is a tool to convert badly written html into an xml
                     dom model</dd>

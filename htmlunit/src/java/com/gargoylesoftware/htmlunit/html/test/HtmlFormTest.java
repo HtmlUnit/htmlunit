@@ -536,12 +536,6 @@ public class HtmlFormTest extends WebTestCase {
 
 
     public void testGetInputByName_WithinNoScriptTags() throws Exception {
-        if(true) {
-            // This is a bug in NekoHTML which Andy Clark says will be fixed in the
-            // next release.  This is commented out until we get the new version.
-            notImplemented();
-            return;
-        }
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
                  + "<form id='form1'>"
