@@ -128,7 +128,7 @@ public final class JavaScriptEngine extends ScriptEngine {
     }
 
 
-    private synchronized PageInfo getPageInfo( final HtmlPage htmlPage ) {
+    private PageInfo getPageInfo( final HtmlPage htmlPage ) {
         Assert.notNull( "htmlPage", htmlPage );
 
         final WeakReference weakReference = (WeakReference)pageInfos_.get(htmlPage);
@@ -271,11 +271,9 @@ public final class JavaScriptEngine extends ScriptEngine {
         final Boolean javaScriptAlreadyRunning = (Boolean) javaScriptRunning_.get();
         javaScriptRunning_.set(Boolean.TRUE);
         try {
-            synchronized (PageInfo.class) {
-                final Object result = pageInfo.context_.evaluateString(
-                        scope, sourceCode, sourceName, lineNumber, securityDomain );
-                return result;
-            }
+            final Object result = pageInfo.context_.evaluateString(
+                    scope, sourceCode, sourceName, lineNumber, securityDomain );
+            return result;
         }
         catch (final Exception e ) {
             final ScriptException scriptException = new ScriptException( e, sourceCode );  
