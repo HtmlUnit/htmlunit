@@ -37,14 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLStreamHandler;
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -348,7 +351,7 @@ public class WebClient {
 
         final boolean wasResponseSuccessful = ( statusCode >= 200 && statusCode < 300 );
 
-        if( printContentOnFailingStatusCode_ == true && wasResponseSuccessful == false ) {
+        if( printContentOnFailingStatusCode_ && !wasResponseSuccessful) {
             getLog().info( "statusCode=[" + statusCode
                 + "] contentType=[" + contentType + "]" );
             getLog().info( webResponse.getContentAsString() );
@@ -356,7 +359,7 @@ public class WebClient {
 
         loadWebResponseInto(webResponse, webWindow);
 
-        if( getThrowExceptionOnFailingStatusCode() == true && wasResponseSuccessful == false ) {
+        if( getThrowExceptionOnFailingStatusCode() && !wasResponseSuccessful) {
             throw new FailingHttpStatusCodeException( statusCode, webResponse.getStatusMessage() );
         }
 
@@ -1409,6 +1412,7 @@ public class WebClient {
         // take default encoding of the computer (in J2SE5 it's easier but...)
         final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
         final String str = FileUtils.readFileToString(file, encoding);
+        final String contentType = guessContentType(file);
         
         return new WebResponse() {
             public int getStatusCode() {
@@ -1418,7 +1422,7 @@ public class WebClient {
                 return "OK";
             }
             public String getContentType() {
-                return "text/html";
+                return contentType;
             }
             public String getContentAsString() {
                 return str;
@@ -1442,6 +1446,34 @@ public class WebClient {
                 return encoding;
             }
         };
+    }
+
+    /**
+     * Tries to guess the content type of the file.
+     * @param file the file
+     * @return "application/octet-stream" if nothing could be guessed.
+     * @throws IOException if a problem occurs
+     */
+    private String guessContentType(final File file) throws IOException {
+        String contentType;
+        InputStream inputStream = null;
+        try {
+            inputStream = new BufferedInputStream(new FileInputStream(file));
+            contentType = URLConnection.guessContentTypeFromStream(inputStream);
+        }
+        finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        }
+        if (contentType == null) {
+            contentType = URLConnection.guessContentTypeFromName(file.getName());
+        }
+        if (contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return contentType;
     }
 
     private WebResponse makeWebResponseForJavaScriptUrl( final WebWindow webWindow, final URL url ) {
