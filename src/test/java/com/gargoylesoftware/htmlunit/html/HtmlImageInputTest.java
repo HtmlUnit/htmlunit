@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public class HtmlImageInputTest extends WebTestCase {
     /**
@@ -115,6 +116,36 @@ public class HtmlImageInputTest extends WebTestCase {
         final List expectedPairs = Arrays.asList( new Object[]{
             new KeyValuePair("button.x", "100"),
             new KeyValuePair("button.y", "200")
+        });
+
+        assertEquals(
+            expectedPairs,
+            webConnection.getLastParameters() );
+    }
+
+    /**
+     * If an image button without name is clicked, it should send only "x" and "y" parameters
+     * Regression test for bug 1118877
+     * @throws Exception if the test fails
+     */
+    public void testNoNameClick_WithPosition() throws Exception {
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<form id='form1'>"
+                 + "<input type='image' value='foo'/>"
+                 + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
+
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+
+        final HtmlImageInput imageInput = (HtmlImageInput) form.getInputByValue("foo");
+        final HtmlPage secondPage = (HtmlPage) imageInput.click(100, 200);
+        assertNotNull(secondPage);
+
+        final List expectedPairs = Arrays.asList( new Object[]{
+            new KeyValuePair("x", "100"),
+            new KeyValuePair("y", "200")
         });
 
         assertEquals(

@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1118877">
+                Clicked image button without name sends parameter x and y.
+            </action>
             <action type="update" dev="mguillem" id="1093017" due-to="David D. Kilzer">
                 Submit form elements in the same order that they appear in the HTML form.
             </action>
