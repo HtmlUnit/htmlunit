@@ -89,6 +89,9 @@
                         <a href="codingConventions.html">HtmlUnit coding conventions</a>
                     </li>
                     <li>
+                        <a href="submittingBugs.html">Submitting bugs</a>
+                    </li>
+                    <li>
                         <a href="submittingPatches.html">Submitting patches</a>
                     </li>
                     <li>
