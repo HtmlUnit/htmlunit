@@ -439,7 +439,7 @@ public abstract class DomNode implements Cloneable {
      * @param node the node to append
      * @return the node added
      */
-    public DomNode appendChild(DomNode node) {
+    public DomNode appendChild(final DomNode node) {
 
         //clean up the new node, in case it is being moved
         if(node != this) {
@@ -458,6 +458,16 @@ public abstract class DomNode implements Cloneable {
             firstChild_.previousSibling_ = node; //new last node
         }
         node.parent_ = this;
+
+        if (node instanceof HtmlElement) {
+            // the htmlPage_ is null for the html page itself
+            if (this instanceof HtmlPage) {
+                ((HtmlPage) this).addIdElement((HtmlElement) node);
+            }
+            else {
+            htmlPage_.addIdElement((HtmlElement) node);
+            }
+        }
         return node;
     }
 
@@ -489,6 +499,10 @@ public abstract class DomNode implements Cloneable {
         newNode.nextSibling_ = this;
         previousSibling_ = newNode;
         newNode.parent_ = parent_;
+        
+        if (newNode instanceof HtmlElement) {
+            htmlPage_.addIdElement((HtmlElement) newNode);
+        }
     }
 
     /**
@@ -500,7 +514,11 @@ public abstract class DomNode implements Cloneable {
             throw new IllegalStateException();
         }
         basicRemove();
-    }
+
+        if (this instanceof HtmlElement) {
+            htmlPage_.removeIdElement((HtmlElement) this);
+        }
+}
 
     /**
      * cut off all relationships this node has with siblings an parents
@@ -509,10 +527,10 @@ public abstract class DomNode implements Cloneable {
         if(parent_ != null && parent_.firstChild_ == this) {
             parent_.firstChild_ = nextSibling_;
         }
-        else if(previousSibling_ != null) {
+        else if(previousSibling_ != null && previousSibling_.nextSibling_ == this) {
             previousSibling_.nextSibling_ = nextSibling_;
         }
-        if(nextSibling_ != null) {
+        if(nextSibling_ != null && nextSibling_.previousSibling_ == this) {
             nextSibling_.previousSibling_ = previousSibling_;
         }
         if(parent_ != null && this == parent_.getLastChild()) {
@@ -531,32 +549,8 @@ public abstract class DomNode implements Cloneable {
      * @throws IllegalStateException if this node is not a child of any other node
      */
     public void replace(DomNode newNode) throws IllegalStateException {
-
-        if(previousSibling_ == null) {
-            throw new IllegalStateException();
-        }
-
-        //clean up the new node, in case it is being moved
-        if(newNode != this) {
-            newNode.basicRemove();
-        }
-
-        if(parent_.firstChild_ == this) {
-            parent_.firstChild_ = newNode;
-        }
-        else {
-            previousSibling_.nextSibling_ = newNode;
-        }
-        if(nextSibling_ != null) {
-            nextSibling_.previousSibling_ = newNode;
-        }
-
-        newNode.nextSibling_ = nextSibling_;
-        newNode.parent_ = parent_;
-
-        nextSibling_ = null;
-        previousSibling_ = null;
-        parent_ = null;
+        insertBefore(newNode);
+        remove();
     }
 
     /**

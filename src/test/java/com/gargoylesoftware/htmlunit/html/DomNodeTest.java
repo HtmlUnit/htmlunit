@@ -38,8 +38,12 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -77,4 +81,145 @@ public class DomNodeTest extends WebTestCase {
         assertEquals("Did not remove all nodes", null, node.getFirstChild());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testReplace() throws Exception {
+        final String content
+            = "<html><head></head><body>\n"
+            + "<br><div id='tag'/><br></body></html>\n";
+        final HtmlPage page = loadPage(content);
+
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
+        
+        final DomNode previousSibling = node.getPreviousSibling();
+        final DomNode nextSibling = node.getNextSibling();
+        final DomNode parent = node.getParentNode();
+        
+        // position among parent's children
+        final int position = readPositionAmongParentChildren(node);
+
+        final DomNode newNode = new DomText(page, "test");
+        node.replace(newNode);
+        assertSame("previous sibling", previousSibling, newNode.getPreviousSibling());
+        assertSame("next sibling", nextSibling, newNode.getNextSibling());
+        assertSame("parent", parent, newNode.getParentNode());
+        assertSame(newNode, previousSibling.getNextSibling());
+        assertSame(newNode, nextSibling.getPreviousSibling());
+        assertEquals(position, readPositionAmongParentChildren(newNode));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetNewNodeById() throws Exception {
+        final String content
+            = "<html><head></head><body>\n"
+            + "<br><div id='tag'/></body></html>\n";
+        final HtmlPage page = loadPage(content);
+
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
+        
+        Map attributes = new HashMap();
+        attributes.put("id", "newElt");
+        final DomNode newNode = new HtmlDivision(page, attributes);
+        try {
+            page.getHtmlElementById("newElt");
+            fail("Element should not exist yet");
+        }
+        catch (final ElementNotFoundException e) {
+            // nothing to do, it's ok
+        }
+
+        node.replace(newNode);
+
+        page.getHtmlElementById("newElt");
+        try {
+            page.getHtmlElementById("tag");
+            fail("Element should not exist anymore");
+        }
+        catch (final ElementNotFoundException e) {
+            // nothing to do, it's ok
+        }
+        
+        newNode.insertBefore(node);
+        page.getHtmlElementById("tag");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testAppendChild() throws Exception {
+        final String content
+            = "<html><head></head><body>\n"
+            + "<br><div><div id='tag'/></div><br></body></html>\n";
+        final HtmlPage page = loadPage(content);
+
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
+        
+        final DomNode parent = node.getParentNode();
+        
+        // position among parent's children
+        final int position = readPositionAmongParentChildren(node);
+
+        final DomNode newNode = new DomText(page, "test");
+        parent.appendChild(newNode);
+        assertSame("new node previous sibling", node, newNode.getPreviousSibling());
+        assertSame("new node next sibling", null, newNode.getNextSibling());
+        assertSame("next sibling", newNode, node.getNextSibling());
+        assertSame("parent", parent, newNode.getParentNode());
+        assertEquals(position+1, readPositionAmongParentChildren(newNode));
+
+        final DomNode newNode2 = new DomText(page, "test2");
+        parent.appendChild(newNode2);
+        page.getHtmlElementById("tag");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testInsertBefore() throws Exception {
+        final String content
+            = "<html><head></head><body>\n"
+            + "<br><div id='tag'/><br></body></html>\n";
+        final HtmlPage page = loadPage(content);
+
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
+        
+        final DomNode previousSibling = node.getPreviousSibling();
+        final DomNode nextSibling = node.getNextSibling();
+        final DomNode parent = node.getParentNode();
+        
+        // position among parent's children
+        final int position = readPositionAmongParentChildren(node);
+
+        final DomNode newNode = new DomText(page, "test");
+        node.insertBefore(newNode);
+        assertSame("new node previous sibling", previousSibling, newNode.getPreviousSibling());
+        assertSame("previous sibling", newNode, node.getPreviousSibling());
+        assertSame("new node next sibling", node, newNode.getNextSibling());
+        assertSame("next sibling", nextSibling, node.getNextSibling());
+        assertSame("parent", parent, newNode.getParentNode());
+        assertSame(newNode, previousSibling.getNextSibling());
+        assertSame(node, nextSibling.getPreviousSibling());
+        assertEquals(position, readPositionAmongParentChildren(newNode));
+    }
+
+    /**
+     * Reads the position of the node amongs the children of its parent
+     * @param _node the node to look at
+     * @return the position
+     */
+    private int readPositionAmongParentChildren(final DomNode node) {
+        int i = 0;
+        for (final Iterator iter = node.getParentNode().getChildIterator(); iter.hasNext();) {
+            final DomNode child = (DomNode) iter.next();
+            if (child == node) {
+                return i;
+            }
+            ++i;
+        }
+
+        return -1;
+    }
 }

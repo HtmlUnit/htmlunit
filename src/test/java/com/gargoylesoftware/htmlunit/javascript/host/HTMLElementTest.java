@@ -192,6 +192,7 @@ public class HTMLElementTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
      * Test getting the class for the element
      * @throws Exception if the test fails
@@ -253,9 +254,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * This test will have to change when jsSet_innerHTML changes to
-     * support setting complex values with embedded html.
-     * 
+     * Test the use of innerHTML to set new html code
      * @throws Exception if the test fails
      */
     public void testGetSetInnerHTMLComplex() throws Exception {
@@ -266,7 +265,7 @@ public class HTMLElementTest extends WebTestCase {
                 "    function doTest(){\n" +
                 "       var myNode = document.getElementById('myNode');\n" +
                 "       alert('Old = ' + myNode.innerHTML);\n" +
-                "       myNode.innerHTML = '<i id=\"newElt\">New cell value</i>';\n" +
+                "       myNode.innerHTML = ' <i id=\"newElt\">New cell value</i>';\n" +
                 "       alert('New = ' + myNode.innerHTML);\n" +
                 "   }\n" +
                 "    </script>\n" +
@@ -281,12 +280,53 @@ public class HTMLElementTest extends WebTestCase {
 
         final List expectedAlerts = Arrays.asList(new String[]{
             "Old = <b>Old innerHTML</b>",
-            "New = <i id=\"newElt\">New cell value</i>"
+            "New =  <i id=\"newElt\">New cell value</i>"
         });
         assertEquals(expectedAlerts, collectedAlerts);
 
+        final HtmlElement pElt = page.getHtmlElementById("myNode");
+        assertEquals("p", pElt.getNodeName());
         final HtmlElement elt = page.getHtmlElementById("newElt");
         assertEquals("New cell value", elt.asText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testInsertAdjacentHTML() throws Exception {
+            final String content = "<html><head><title>First</title>\n"
+                + "<script>\n"
+                + "function test()\n"
+                + "{\n"
+                + "  var oDiv = document.getElementById('middle');\n"
+                + "  oDiv.insertAdjacentHTML('beforeEnd', ' <div id=3>before end</div> ');\n"
+                + "  oDiv.insertAdjacentHTML('afterEnd', ' <div id=4>after end</div> ');\n"
+                + "  oDiv.insertAdjacentHTML('beforeBegin', ' <div id=1>before begin</div> ');\n"
+                + "  oDiv.insertAdjacentHTML('afterBegin', ' <div id=2>after begin</div> ');\n"
+                + "  var coll = document.getElementsByTagName('DIV');\n"
+                + "  for (var i=0; i<coll.length; ++i) {\n"
+                + "    alert(coll[i].id);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>"
+                + "<body onload='test()'>\n"
+                + "<div id='outside' style='color: #00ff00'>\n"
+                + "<div id='middle' style='color: #ff0000'>\n"
+                + "inside\n"
+                + "</div>\n"
+                + "</div>\n"
+                + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "outside", "1", "middle", "2", "3", "4"
+        });
+        assertEquals(expectedAlerts, collectedAlerts);
+
+        final HtmlElement elt = page.getHtmlElementById("outside");
+        assertEquals("before begin after begin inside before end after end", elt.asText());
     }
 
     /**

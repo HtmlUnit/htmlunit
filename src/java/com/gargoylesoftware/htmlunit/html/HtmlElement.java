@@ -102,10 +102,6 @@ public abstract class HtmlElement extends DomNode {
         if(attributes != null) {
             attributes_ = attributes;
             attributesToEventHandlers();
-            String id = (String) attributes.get("id");
-            if (id != null) {
-                getPage().addIdElement(this);
-            }
         }
         else {
             attributes_ = Collections.EMPTY_MAP;

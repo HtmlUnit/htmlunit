@@ -7,6 +7,12 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                Added support for insertAdjacentHTML.
+            </action>
+            <action type="update" dev="mguillem" id="930846">
+                Fixed DomNode.replace() fails to set previousSibling on newNode and other problems when changing DomNode.
+            </action>
             <action type="update" dev="mguillem" due-to="Chris Eldredge" id="1080365">
                 Allow onclick event handler to be set by javascript.
             </action>
