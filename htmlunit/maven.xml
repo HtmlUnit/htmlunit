@@ -257,6 +257,15 @@
         	</ant:zip>
     </goal>
 
+	<!-- copy resource files for the tests -->
+    <postGoal name="test:compile">
+        <ant:copy todir="target/test-classes/com/gargoylesoftware/htmlunit/testfiles">
+            <ant:fileset dir="${basedir}/src/test/java/com/gargoylesoftware/htmlunit/testfiles">
+			    <ant:exclude name="CVS"/>
+            </ant:fileset>
+        </ant:copy>
+    </postGoal>
+
     <!-- Run all the tests as quickly as possible.  This only outputs results
          to the console so if you are trying to generate reports, you will
          need to call the slower "test" goal -->
