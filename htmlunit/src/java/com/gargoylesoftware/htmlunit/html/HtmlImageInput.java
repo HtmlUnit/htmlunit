@@ -25,5 +25,31 @@ public class HtmlImageInput extends HtmlInput {
     HtmlImageInput( final HtmlPage page, final Element element ) {
         super( page, element );
     }
+
+
+    /**
+     * Simulate clicking this input in some way other than with a pointing device.
+     * No x,y coordinates will be sent to the server.
+     *
+     * @return The page that is loaded after the click has taken place.
+     */
+    public Page click() {
+        notImplemented();
+        return null;
+    }
+
+
+    /**
+     * Simulate clicking this input with a pointing device.  The x and y coordinates
+     * of the pointing device will be sent to the server.
+     *
+     * @param x The x coordinate of the pointing device at the time of clicking
+     * @param y The y coordinate of the pointing device at the time of clicking
+     * @return The page that is loaded after the click has taken place.
+     */
+    public Page click( final int x, final int y ) {
+        notImplemented();
+        return null;
+    }
 }
 
