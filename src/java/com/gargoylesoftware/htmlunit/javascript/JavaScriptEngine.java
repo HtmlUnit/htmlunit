@@ -309,8 +309,7 @@ public final class JavaScriptEngine extends ScriptEngine {
 
         final PageInfo pageInfo = getPageInfo(htmlPage);
 
-        final String result = pageInfo.getContext().toString(
-                javaScriptObject );
+        final String result = Context.toString( javaScriptObject );
         return result;
     }
 }
