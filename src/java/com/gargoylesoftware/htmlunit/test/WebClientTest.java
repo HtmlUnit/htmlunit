@@ -402,5 +402,29 @@ public class WebClientTest extends WebTestCase {
             "http://first?a=b",
             page.getWebResponse().getUrl().toExternalForm() );
     }
+
+
+    public void testRedirectViaJavaScriptDuringInitialPageLoad() throws Exception {
+        final String firstContent = "<html><head><title>First</title><script>"
+            + "location.href='http://second'"
+            + "</script></head><body></body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient webClient = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://second"), secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        webClient.setWebConnection( webConnection );
+
+        final URL url = new URL("http://first");
+
+        final HtmlPage page = (HtmlPage)webClient.getPage(
+            url, SubmitMethod.GET, Collections.EMPTY_LIST);
+        assertEquals("Second", page.getTitleText());
+    }
 }
 
