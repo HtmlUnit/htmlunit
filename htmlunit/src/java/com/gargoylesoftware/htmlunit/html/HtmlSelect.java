@@ -131,7 +131,18 @@ public class HtmlSelect extends FocusableElement implements SubmittableElement {
                 result.add(lastOption);
             }
             else {
-                result.add(firstOption);
+                int theSize;
+                try {
+                    theSize = Integer.parseInt(getSizeAttribute());
+                } 
+                catch (final NumberFormatException e) {
+                    // Differet browsers have different (and odd) tolerances for invalid
+                    // size attributes so we'll just assume anything invalid is "1"
+                    theSize = 1;
+                }
+                if (theSize <= 1) {
+                    result.add(firstOption);
+                }
             }
             return result;
         }
