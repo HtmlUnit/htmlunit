@@ -7,6 +7,12 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="yourgod" id="1144103" due-to="sdanig">
+                INCOMPATIBLE CHANGE: com.gargoylesoftware.htmlunit.CredentialProvider has been removed.
+                You should now use org.apache.commons.httpclient.auth.CredentialsProvider instead.
+                This patch should allow support for NTLM and Digest authentication as well as 
+                proxy authentication. Patch from sdanig.
+            </action>       
             <action type="update" dev="mguillem" id="1110768" due-to="Daniel Gredler">
                 JavaScript: Pick up behaviors defined in style attribute when simulating IE.
             </action>       

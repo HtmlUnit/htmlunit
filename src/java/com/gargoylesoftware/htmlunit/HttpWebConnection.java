@@ -48,8 +48,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
@@ -62,6 +60,7 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
+import org.apache.commons.httpclient.auth.CredentialsProvider;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.multipart.FilePart;
@@ -159,16 +158,6 @@ public class HttpWebConnection extends WebConnection {
             startTime = System.currentTimeMillis();
             int responseCode = httpClient.executeMethod( httpMethod );
             endTime = System.currentTimeMillis();
-            if( responseCode == 401 ) {    // Authentication required
-                final KeyValuePair pair = getCredentials( httpMethod, url );
-                if( pair != null ) {
-                    httpMethod = makeHttpMethod( url, encType, submitMethod, parameters, requestHeaders );
-                    addCredentialsToHttpMethod( httpMethod, pair );
-                    startTime = System.currentTimeMillis();
-                    responseCode = httpClient.executeMethod( httpMethod );
-                    endTime = System.currentTimeMillis();
-                }
-            }
             return makeWebResponse( responseCode, httpMethod, url, endTime-startTime );
         }
         catch( final HttpException e ) {
@@ -195,40 +184,6 @@ public class HttpWebConnection extends WebConnection {
             }
         }
     }
-
-    private KeyValuePair getCredentials(
-            final HttpMethod httpMethod, final URL url ) {
-
-        final Header challengeHeader = httpMethod.getResponseHeader( "WWW-Authenticate" );
-        final String realmString = challengeHeader.getValue().trim();
-        final String tag = "realm=\"";
-        final int index = realmString.indexOf( tag );
-        if( index == -1 || realmString.charAt( realmString.length() - 1 ) != '\"' ) {
-            throw new IllegalStateException(
-                "Unable to parse the 'WWW-Authenticate' header - can't do authentication" );
-        }
-
-        int port = url.getPort();
-        if( port == -1 ) {
-            final String protocol = url.getProtocol();
-            if( protocol.equals( "http" ) ) {
-                port = 80;
-            }
-            else if( protocol.equals( "https" ) ) {
-                port = 443;
-            }
-            else {
-                throw new IllegalStateException( "Unsupported protocol: " + protocol );
-            }
-        }
-
-        final String realm
-            = realmString.substring( index + tag.length(), realmString.length() - 1 );
-        final KeyValuePair pair = getWebClient().getCredentialProvider().getCredentialsFor(
-                url.getHost(), port, realm );
-        return pair;
-    }
-
 
     private HttpMethod makeHttpMethod(
             final URL url,
@@ -337,23 +292,8 @@ public class HttpWebConnection extends WebConnection {
                 ((SimpleLog)log).setLevel( SimpleLog.LOG_LEVEL_WARN );
             }
 
-            // Disable certificate caching within HttpClient
-            final HttpState httpState = new HttpState() {
-                /**
-                * @deprecated
-                */
-                public void setCredentials(
-                    final String realm, final String host, final Credentials credentials ) {
-                }
-
-                /**
-                * @deprecated
-                */
-                public Credentials getCredentials( final String realm, final String host ) {
-                    return null;
-                }
-            };
-            client.setState(httpState);
+            // Tell the client where to get its credentials from.
+            client.getParams().setParameter( CredentialsProvider.PROVIDER, getWebClient().getCredentialsProvider() );
 
             final HostConfiguration hostConfiguration = new HostConfiguration();
             final URI uri;
@@ -527,17 +467,5 @@ public class HttpWebConnection extends WebConnection {
         }
     }
 
-
-    private void addCredentialsToHttpMethod(
-            final HttpMethod httpMethod, final KeyValuePair pair ) {
-
-        final String userName = pair.getKey();
-        final String password = pair.getValue();
-
-        final String authString = userName + ":" + password;
-        final String encoded = new String(Base64.encodeBase64(authString.getBytes()));
-        final String value = "Basic " + encoded;
-        httpMethod.addRequestHeader( "Authorization", value );
-    }
 }
 
