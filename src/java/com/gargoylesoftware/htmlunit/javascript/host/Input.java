@@ -87,7 +87,7 @@ public class Input extends FormField {
             input.replace(newInput);
             input.setScriptObject(null);
             setDomNode(newInput, true);
-            }
+        }
     }
 
     /**

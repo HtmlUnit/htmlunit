@@ -132,7 +132,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
      * @see CredentialsProvider#getCredentials(AuthScheme, String, int, boolean)
      */
     public Credentials getCredentials( final AuthScheme scheme, final String host, final int port, final boolean proxy )
-    throws CredentialsNotAvailableException {
+        throws CredentialsNotAvailableException {
         final Map credentials;
         if( proxy ) {
             credentials = proxyCredentials_;

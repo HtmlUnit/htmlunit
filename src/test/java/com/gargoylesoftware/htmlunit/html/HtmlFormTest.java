@@ -913,21 +913,21 @@ public class HtmlFormTest extends WebTestCase {
       *
       * @throws Exception if the test fails
       */
-     public void testJSSubmit_JavaScriptAction() throws Exception {
-           final String htmlContent
-             = "<html><head><title>First</title></head>"
-             + "<body onload='document.getElementById(\"aForm\").submit()'>"
-             + "<form id='aForm' action='javascript:alert(\"clicked\")'"
-             + "</form>"
-             + "</body></html>";
+    public void testJSSubmit_JavaScriptAction() throws Exception {
+        final String htmlContent
+            = "<html><head><title>First</title></head>"
+            + "<body onload='document.getElementById(\"aForm\").submit()'>"
+            + "<form id='aForm' action='javascript:alert(\"clicked\")'"
+            + "</form>"
+            + "</body></html>";
 
-         final List expectedAlerts = Collections.singletonList("clicked");
-         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
+        final List expectedAlerts = Collections.singletonList("clicked");
+        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
-         final List collectedAlerts = new ArrayList();
-         loadPage(htmlContent, collectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(htmlContent, collectedAlerts);
 
-         assertEquals(expectedAlerts, collectedAlerts);
-     }
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
 
