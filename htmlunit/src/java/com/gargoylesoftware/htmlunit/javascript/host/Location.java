@@ -48,7 +48,8 @@ import java.net.URL;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class Location extends SimpleScriptable {
-    private Window window_;
+    private static final long serialVersionUID = -2907220432378132233L;
+	private Window window_;
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.

@@ -60,7 +60,9 @@ import org.jaxen.JaxenException;
  */
 public class HtmlUnitXPath extends BaseXPath {
 
-    /** Construct given an XPath expression string.
+    private static final long serialVersionUID = -3902959929710269843L;
+
+	/** Construct given an XPath expression string.
      *
      *  @param xpathExpr The XPath expression.
      *

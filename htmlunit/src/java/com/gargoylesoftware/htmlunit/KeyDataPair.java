@@ -45,10 +45,13 @@ import java.io.File;
  * @version  $Revision$
  * @author Brad Clarke
  * @author David D. Kilzer
+ * @author Mike Bowler
  */
 public class KeyDataPair extends KeyValuePair {
 
-    private final File fileObject_;
+    private static final long serialVersionUID = -1129314696176851675L;
+    
+	private final File fileObject_;
 
     /**
      * Create an instance.

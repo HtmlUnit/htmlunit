@@ -48,7 +48,10 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public final class Navigator extends SimpleScriptable {
 
-    /**
+    private static final long serialVersionUID = 6741787912716453833L;
+
+
+	/**
      * Create an instance.  Javascript objects must have a default constructor.
      */
     public Navigator() {}

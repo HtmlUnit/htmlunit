@@ -44,7 +44,9 @@ package com.gargoylesoftware.htmlunit;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class FailingHttpStatusCodeException extends RuntimeException {
-    private final int statusCode_;
+    private static final long serialVersionUID = 4080165207084775250L;
+    
+	private final int statusCode_;
     private final String statusMessage_;
 
 

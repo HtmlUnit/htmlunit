@@ -74,7 +74,8 @@ import com.gargoylesoftware.htmlunit.javascript.WindowFramesArray;
  */
 public final class Window extends SimpleScriptable {
 
-    private Document document_;
+    private static final long serialVersionUID = -7730298149962810325L;
+	private Document document_;
     private Navigator navigator_;
     private WebWindow webWindow_;
     private Screen screen_;

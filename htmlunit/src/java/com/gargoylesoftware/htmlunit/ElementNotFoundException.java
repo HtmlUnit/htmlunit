@@ -45,7 +45,9 @@ package com.gargoylesoftware.htmlunit;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class ElementNotFoundException extends RuntimeException {
-    private final String elementName_;
+    private static final long serialVersionUID = 22133747152805455L;
+    
+	private final String elementName_;
     private final String attributeName_;
     private final String attributeValue_;
 

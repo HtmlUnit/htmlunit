@@ -61,10 +61,13 @@ import com.gargoylesoftware.htmlunit.html.DomText;
  *
  * @version  $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Mike Bowler
  * @see HtmlUnitXPath
  */
 public class DocumentNavigator extends DefaultNavigator {
-    /**
+    private static final long serialVersionUID = -5323715453687261210L;
+    
+	/**
      * Constant: singleton navigator.
      */
     public static final DocumentNavigator instance = new DocumentNavigator();

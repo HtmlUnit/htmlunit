@@ -47,7 +47,8 @@ import java.io.PrintStream;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class ObjectInstantiationException extends RuntimeException {
-    private final Throwable causeException_;
+    private static final long serialVersionUID = 8831953284047722098L;
+	private final Throwable causeException_;
 
 
     /**

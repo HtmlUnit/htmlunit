@@ -55,7 +55,8 @@ import org.mozilla.javascript.WrappedException;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class ScriptException extends RuntimeException {
-    private final Throwable throwable_;
+    private static final long serialVersionUID = 4788896649084231283L;
+	private final Throwable throwable_;
     private final String scriptSourceCode_;
 
 
