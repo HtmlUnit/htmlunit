@@ -53,6 +53,9 @@
             <action type="update" dev="mbowler" id="732952" due-to="Matt Ho">
                 Fixed typo in two of the samples in the getting started document.
             </action>
+            <action type="update" dev="mbowler">
+                Moved all tests under src/test/java
+            </action>
         </release>
     </body>
 

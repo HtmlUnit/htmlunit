@@ -50,7 +50,7 @@
             </p>
             <source>cob.getTrh()</source>
             <p>
-                I didn't either - this was code that I found while debugging something else.
+                I didn't either - this was code that I have had to maintain..
             </p>
             <p>
                 There are some abbreviations that are so common that it doesn't make sense to exclude them. The
@@ -142,7 +142,9 @@ import java.util.ArrayList;
             </p>
             <p>
                 A common complaint about this convention is "how will I know if an import isn't needed
-                anymore?".  The answer is, use checkstyle.  It will warn you about unused import statements.
+                anymore?".  The answer is, use a tool that warns you about this.  Eclipse and IDEA can
+                be configured to warn you about unused imports.  If your editor doesn't perform this 
+                check then use the ant "checkstyle" target.
             </p>
         </section>
 
