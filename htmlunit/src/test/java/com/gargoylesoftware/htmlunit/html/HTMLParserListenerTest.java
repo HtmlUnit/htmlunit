@@ -106,7 +106,7 @@ public class HTMLParserListenerTest extends WebTestCase {
         public int hashCode() {
             return super.hashCode();
         }
-    };
+    }
 
     /**
      * Create an instance
