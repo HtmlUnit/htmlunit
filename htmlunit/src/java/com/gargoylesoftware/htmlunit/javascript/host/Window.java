@@ -126,9 +126,9 @@ public final class Window extends SimpleScriptable {
     public static Object jsFunction_open(
         final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
 
-        final String url = getStringArg(0, args);
-        final String windowName = getStringArg(1, args);
-        final String features = getStringArg(2, args);
+        final String url = getStringArg(0, args, null);
+        final String windowName = getStringArg(1, args, "");
+        final String features = getStringArg(2, args, null);
         final boolean replaceCurrentEntryInBrowsingHistory = getBooleanArg(3, args, false);
         final Window thisWindow = (Window)scriptable;
 

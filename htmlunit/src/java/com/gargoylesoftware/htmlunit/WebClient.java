@@ -670,14 +670,18 @@ public class WebClient {
         if( windowName.equals("_self") ) {
             window = getCurrentWindow();
         }
-        else {
+        else if( windowName.length() != 0 ) {
             try {
                 window = getWebWindowByName(windowName);
             }
             catch( final WebWindowNotFoundException e ) {
-                window = new TopLevelWindow(windowName, this);
-                fireWindowOpened( new WebWindowEvent(window, null, null) );
+                // Fall through - a new window will be created below
             }
+        }
+
+        if( window == null ) {
+            window = new TopLevelWindow(windowName, this);
+            fireWindowOpened( new WebWindowEvent(window, null, null) );
         }
 
         if( window instanceof TopLevelWindow ) {
