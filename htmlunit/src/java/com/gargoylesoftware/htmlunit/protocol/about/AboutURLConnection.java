@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.protocol.about;
 
-import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -59,8 +58,7 @@ public class AboutURLConnection extends URLConnection {
     /**
      * @see java.net.URLConnection#connect()
      */
-    public void connect() throws IOException {
-
+    public void connect() {
     }
 
 }

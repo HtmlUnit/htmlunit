@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
@@ -177,7 +176,7 @@ public class FakeWebConnection extends WebConnection {
                 return null;
             }
 
-            public InputStream getContentAsStream() throws IOException {
+            public InputStream getContentAsStream() {
                 return TextUtil.toInputStream(responseEntry.content_);
             }
             public byte[] getResponseBody() {
