@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="mguillem" due-to="Daniel Gredler" id="1096789">
+                JavaScript: added implementation of IE behavior "#default#clientCaps".
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: added support to get/set the onload property as a function for window and for frames.
             </action>
@@ -19,10 +22,10 @@
 			</action>
             <action type="update" dev="mguillem" due-to="Mike Bresnahan" id="1083336">
                 asText() now returns "checked" or "unchecked" for HtmlRadioButtonInput and HtmlCheckBoxInput
-            </action>        
+            </action>
             <action type="add" dev="mguillem">
                 JavaScript: added dummy implementation of window.execScript doing nothing.
-            </action>        
+            </action>
             <action type="add" dev="mguillem" due-to="Daniel Gredler" id="1096133">
                 JavaScript: added attribute support.
             </action>

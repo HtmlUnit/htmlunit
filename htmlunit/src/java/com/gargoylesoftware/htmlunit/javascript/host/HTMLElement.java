@@ -88,9 +88,11 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
  */
 public class HTMLElement extends NodeImpl {
     private static final long serialVersionUID = -6864034414262085851L;
-    private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
     private static final int BEHAVIOR_ID_UNKNOWN = -1;
-    private static final int BEHAVIOR_ID_HOMEPAGE = 0;
+    private static final int BEHAVIOR_ID_CLIENT_CAPS = 0;
+    private static final int BEHAVIOR_ID_HOMEPAGE = 1;
+    private static final String BEHAVIOR_CLIENT_CAPS = "#default#clientCaps";
+    private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
     static final String POSITION_BEFORE_BEGIN = "beforeBegin";
     static final String POSITION_AFTER_BEGIN = "afterBegin";
     static final String POSITION_BEFORE_END = "beforeEnd";
@@ -564,40 +566,281 @@ public class HTMLElement extends NodeImpl {
      * Adds the specified behavior to this HTML element. Currently only supports
      * the following default IE behaviors:
      * <ul>
+     *   <li>#default#clientCaps</li>
      *   <li>#default#homePage</li>
      * </ul>
      * @param behavior the URL of the behavior to add, or a default behavior name
      * @return an identifier that can be user later to detach the behavior from the element
      */
     public int jsFunction_addBehavior(final String behavior) {
-        if (BEHAVIOR_HOMEPAGE.equals(behavior)) {
-            Class c = this.getClass();
+        if (BEHAVIOR_CLIENT_CAPS.equals(behavior)) {
+            final Class c = getClass();
+            defineProperty("availHeight", c, 0);
+            defineProperty("availWidth", c, 0);
+            defineProperty("bufferDepth", c, 0);
+            defineProperty("colorDepth", c, 0);
+            defineProperty("connectionType", c, 0);
+            defineProperty("cookieEnabled", c, 0);
+            defineProperty("cpuClass", c, 0);
+            defineProperty("height", c, 0);
+            defineProperty("javaEnabled", c, 0);
+            defineProperty("platform", c, 0);
+            defineProperty("systemLanguage", c, 0);
+            defineProperty("userLanguage", c, 0);
+            defineProperty("width", c, 0);
+            defineFunctionProperties(new String[] {"addComponentRequest"}, c, 0);
+            defineFunctionProperties(new String[] {"clearComponentRequest"}, c, 0);
+            defineFunctionProperties(new String[] {"compareVersions"}, c, 0);
+            defineFunctionProperties(new String[] {"doComponentRequest"}, c, 0);
+            defineFunctionProperties(new String[] {"getComponentVersion"}, c, 0);
+            defineFunctionProperties(new String[] {"isComponentInstalled"}, c, 0);
+            return BEHAVIOR_ID_CLIENT_CAPS;
+        }
+        else if (BEHAVIOR_HOMEPAGE.equals(behavior)) {
+            final Class c = getClass();
             defineFunctionProperties(new String[] {"isHomePage"}, c, 0);
             defineFunctionProperties(new String[] {"setHomePage"}, c, 0);
             defineFunctionProperties(new String[] {"navigateHomePage"}, c, 0);
             return BEHAVIOR_ID_HOMEPAGE;
         }
-        
-        getLog().warn("Unimplemented behavior: " + behavior);
-
-        return BEHAVIOR_ID_UNKNOWN;
+        else {
+            getLog().warn("Unimplemented behavior: " + behavior);
+            return BEHAVIOR_ID_UNKNOWN;
+        }
     }
 
     /**
      * Removes the behavior corresponding to the specified identifier from this element.
      * @param id the identifier for the behavior to remove
      */
-    public void jsFunction_removeBehavior(int id) {
+    public void jsFunction_removeBehavior(final int id) {
         switch (id) {
+            case BEHAVIOR_ID_CLIENT_CAPS:
+                delete("availHeight");
+                delete("availWidth");
+                delete("bufferDepth");
+                delete("colorDepth");
+                delete("connectionType");
+                delete("cookieEnabled");
+                delete("cpuClass");
+                delete("height");
+                delete("javaEnabled");
+                delete("platform");
+                delete("systemLanguage");
+                delete("userLanguage");
+                delete("width");
+                delete("addComponentRequest");
+                delete("clearComponentRequest");
+                delete("compareVersions");
+                delete("doComponentRequest");
+                delete("getComponentVersion");
+                delete("isComponentInstalled");
+                break;
             case BEHAVIOR_ID_HOMEPAGE:
-                this.delete("isHomePage");
-                this.delete("setHomePage");
-                this.delete("navigateHomePage");
+                delete("isHomePage");
+                delete("setHomePage");
+                delete("navigateHomePage");
                 break;
             default:
                 getLog().warn("Unexpected behavior id: " + id + ". Ignoring.");
         }
     }
+
+    //----------------------- START #default#clientCaps BEHAVIOR -----------------------
+
+    /**
+     * Returns the screen's available height. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     * @return the screen's available height.
+     */
+    public int getAvailHeight() {
+        return getWindow().jsGet_screen().jsGet_availHeight();
+    }
+
+    /**
+     * Returns the screen's available width. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     * @return the screen's available width.
+     */
+    public int getAvailWidth() {
+        return getWindow().jsGet_screen().jsGet_availWidth();
+    }
+
+    /**
+     * Returns the screen's buffer depth. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     * @return the screen's buffer depth.
+     */
+    public int getBufferDepth() {
+        return getWindow().jsGet_screen().jsGet_bufferDepth();
+    }
+
+    /**
+     * Returns the screen's color depth. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     * @return the screen's color depth.
+     */
+    public int getColorDepth() {
+        return getWindow().jsGet_screen().jsGet_colorDepth();
+    }
+
+    /**
+     * Returns the connection type being used. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     * @return the connection type being used.
+     * Current implementation always return "modem"
+     */
+    public String getConnectionType() {
+        return "modem";
+    }
+
+    /**
+     * Returns <tt>true</tt> if cookies are enabled. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     * @return whether or not cookies are enabled.
+     */
+    public boolean getCookieEnabled() {
+        return getWindow().jsGet_navigator().jsGet_cookieEnabled();
+    }
+
+    /**
+     * Returns the type of CPU used. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     * @return the type of CPU used.
+     */
+    public String getCpuClass() {
+        return getWindow().jsGet_navigator().jsGet_cpuClass();
+    }
+
+    /**
+     * Returns the screen's height. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     * @return the screen's height.
+     */
+    public int getHeight() {
+        return getWindow().jsGet_screen().jsGet_height();
+    }
+
+    /**
+     * Returns <tt>true</tt> if Java is enabled. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     * @return whether or not Java is enabled.
+     */
+    public boolean getJavaEnabled() {
+        return getWindow().jsGet_navigator().jsFunction_javaEnabled();
+    }
+
+    /**
+     * Returns the platform used. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     * @return the platform used.
+     */
+    public String getPlatform() {
+        return getWindow().jsGet_navigator().jsGet_platform();
+    }
+
+    /**
+     * Returns the system language. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     * @return the system language.
+     */
+    public String getSystemLanguage() {
+        return getWindow().jsGet_navigator().jsGet_systemLanguage();
+    }
+
+    /**
+     * Returns the user language. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     * @return the user language.
+     */
+    public String getUserLanguage() {
+        return getWindow().jsGet_navigator().jsGet_userLanguage();
+    }
+
+    /**
+     * Returns the screen's width. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     * @return the screen's width.
+     */
+    public int getWidth() {
+        return getWindow().jsGet_screen().jsGet_width();
+    }
+
+    /**
+     * Adds the specified component to the queue of components to be installed. Note
+     * that no components ever get installed, and this call is always ignored. Part of
+     * the <tt>#default#clientCaps</tt> default IE behavior implementation.
+     * @param id the identifier for the component to install
+     * @param idType the type of identifier specified
+     * @param minVersion the minimum version of the component to install
+     */
+    public void addComponentRequest(final String id, final String idType, final String minVersion) {
+        getLog().debug("Call to addComponentRequest(" + id + ", " + idType + ", " + minVersion + ") ignored.");
+    }
+
+    /**
+     * Clears the component install queue of all component requests. Note that no components
+     * ever get installed, and this call is always ignored. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     */
+    public void clearComponentRequest() {
+        getLog().debug("Call to clearComponentRequest() ignored.");
+    }
+
+    /**
+     * Compares the two specified version numbers. Part of the <tt>#default#clientCaps</tt>
+     * default IE behavior implementation.
+     * @param v1 the first of the two version numbers to compare
+     * @param v2 the second of the two version numbers to compare
+     * @return -1 if v1 < v2, 0 if v1 = v2, and 1 if v1 > v2
+     */
+    public int compareVersions(final String v1, final String v2) {
+        final int i = v1.compareTo(v2);
+        if(i == 0)     { return 0;  }
+        else if(i < 0) { return -1; }
+        else           { return 1;  }
+    }
+
+    /**
+     * Downloads all the components queued via {@link addComponentRequest}.
+     * @return <tt>true</tt> if the components are downloaded successfully.
+     * Current implementation always return <code>false</code>
+     */
+    public boolean doComponentRequest() {
+        return false;
+    }
+
+    /**
+     * Returns the version of the specified component.
+     * @param id the identifier for the component whose version is to be returned
+     * @param idType the type of identifier specified
+     * @return the version of the specified component.
+     * Current implementation always return "1.0"
+     */
+    public String getComponentVersion(String id, String idType) {
+        return "1.0";
+    }
+
+    /**
+     * Returns <tt>true</tt> if the specified component is installed.
+     * @param id the identifier for the component to check for
+     * @param idType the type of id specified
+     * @param minVersion the minimum version to check for
+     * @return <tt>true</tt> if the specified component is installed.
+     */
+    public boolean isComponentInstalled(String id, String idType, String minVersion) {
+        return false;
+    }
+
+    /**
+     * Returns the JavaScript object for the window containing this HTML element's page.
+     * @return the JavaScript object for the window containing this HTML element's page.
+     */
+    private Window getWindow() {
+        return (Window) getDomNodeOrDie().getPage().getEnclosingWindow().getScriptObject();
+    }
+
+    //----------------------- START #default#homePage BEHAVIOR -----------------------
 
     /**
      * Returns <tt>true</tt> if the specified URL is the web client's current
@@ -617,7 +860,7 @@ public class HTMLElement extends NodeImpl {
      * @param url the new homepage URL
      */
     public void setHomePage(final String url) {
-        this.getDomNodeOrDie().getPage().getWebClient().setHomePage(url);
+        getDomNodeOrDie().getPage().getWebClient().setHomePage(url);
     }
 
     /**
@@ -629,7 +872,9 @@ public class HTMLElement extends NodeImpl {
         final WebClient webClient = getDomNodeOrDie().getPage().getWebClient(); 
         webClient.getPage(new URL(webClient.getHomePage()));
     }
-    
+
+    //----------------------- END #default#homePage BEHAVIOR -----------------------
+
     /**
      * Set the onclick event handler for this element.
      * @param onclick the new handler
@@ -637,7 +882,7 @@ public class HTMLElement extends NodeImpl {
     public void jsSet_onclick(final Function onclick) {
         getHtmlElementOrDie().setEventHandler("onclick", onclick);
     }
-    
+
     /**
      * Get the onclick event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>

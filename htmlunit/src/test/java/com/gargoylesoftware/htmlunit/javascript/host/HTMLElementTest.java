@@ -508,6 +508,40 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * Test the <tt>#default#clientCaps</tt> default IE behavior.
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testAddBehaviorDefaultClientCaps() throws Exception {
+        final String content = "<html>\n" +
+                "<head>\n" +
+                "    <title>Test</title>\n" +
+                "    <script>\n" +
+                "    function doTest() {\n" +
+                "       var body = document.body;\n" +
+                "       alert('body.cpuClass = ' + body.cpuClass);\n" +
+                "       var id = body.addBehavior('#default#clientCaps');\n" +
+                "       alert('body.cpuClass = ' + body.cpuClass);\n" +
+                "       body.removeBehavior(id);\n" +
+                "       alert('body.cpuClass = ' + body.cpuClass);\n" +
+                "    }\n" +
+                "    </script>\n" +
+                "</head>\n" +
+                "<body onload='doTest()'>Test</body>\n" +
+                "</html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "body.cpuClass = undefined",
+            "body.cpuClass = " + page.getWebClient().getBrowserVersion().getCpuClass(),
+            "body.cpuClass = undefined"
+        });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * Test the <tt>#default#homePage</tt> default IE behavior.
      * 
      * @throws Exception if the test fails
