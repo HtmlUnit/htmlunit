@@ -17,13 +17,6 @@
 		<a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a> of
 		<a href="http://www.GargoyleSoftware.com">Gargoyle Software</a>
 		and has been released under an <a href="license.html">apache style license</a>
-
-		<note>
-			Prior to 1.1-pre4, HtmlUnit was licensed under the
-			<a href="http://www.gnu.org/licenses/lgpl.html">LGPL</a> license.  The license
-			has been changed due to the fact that many people are unclear on the exact
-			viral nature of the LGPL.  The apache license is much clearer in this respect.
-		</note>
 	</p>
 </section>
 
@@ -38,7 +31,7 @@
 					bug fixes and enhancements on the 1.1 stream that I can't honestly recommend
 					that anyone use 1.0 anymore.  The only "unstable" part of the 1.1 stream
 					right now is the javascript support so the "most stable" release at this point
-					would be 1.1pre5 with javascript disabled (just don't put js.jar in the
+					would be the latest version of 1.1 with javascript disabled (just don't put js.jar in the
 					classpath).
 				</note>
 			</dd>
@@ -47,11 +40,16 @@
 	<p>
 		<dl>
 			<dt>Current development release</dt>
-			<dd>Version <b>1.1pre5</b>: |
-				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.1-pre5.zip?download">Download</a> |
+			<dd>Version <b>1.1rc1</b>: |
+				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.1-rc1.zip?download">Download</a> |
 				<a href="api/index.html">Javadoc API documentation</a> |
 				<a href="changes.html">Change history</a> |
 				<br />
+				<warning>
+					The goal of 1.1 was to provide a level of javascript support that would handle
+					the most common cases.  I believe that goal has now been met.  Assuming there are
+					no show-stopper bugs found, this build will become 1.1 final.
+				</warning>
 			</dd>
 		</dl>
 	</p>
@@ -82,6 +80,7 @@
 			<dd> |
 				<a href="table-howto.html">Tables</a> |
 				<a href="logging.html">Logging</a> |
+				<a href="window-howto.html">Windows and frames</a> |
 				<br />
 			</dd>
 		</dl>
@@ -157,9 +156,6 @@
 			an earlier version of Java, then you can
 			<a href="http://java.sun.com/products/jsse">download</a> the JSSE from the Sun website.
 		</note>
-		<warning>
-			JTidy has been removed from the build and replaced with NekoHTML and Xerces
-		</warning>
 	</p>
 </section>
 
