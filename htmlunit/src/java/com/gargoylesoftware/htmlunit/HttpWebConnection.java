@@ -63,6 +63,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 
 import org.apache.commons.httpclient.methods.MultipartPostMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.SimpleLog;
@@ -403,7 +404,7 @@ public class HttpWebConnection extends WebConnection {
         final int statusCode, final HttpMethod method, final URL originatingURL, final long loadTime ) 
     throws IOException {
 
-        final String content = method.getResponseBodyAsString();
+        final String content = IOUtils.toString(method.getResponseBodyAsStream());
         return new WebResponse() {
                 public int getStatusCode() {
                     return statusCode;
