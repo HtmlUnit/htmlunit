@@ -41,18 +41,25 @@ public class HtmlInlineFrame
         final WebClient webClient = page.getWebClient();
         webClient.registerWebWindow(this);
 
-        final String source = getSrcAttribute();
-        URL url = null;
-        try {
-            url = getPage().getFullyQualifiedUrl(source);
-            setEnclosedPage( webClient.getPage(
-                this, url, SubmitMethod.GET, Collections.EMPTY_LIST, false ) );
-        }
-        catch( final MalformedURLException e ) {
-            getLog().error("Bad url in src attribute of iframe: url=["+source+"]", e);
-        }
-        catch( final IOException e ) {
-            getLog().error("IOException when getting content for iframe: url=["+url.toExternalForm()+"]", e);
+        loadInnerPageIfPossible( getSrcAttribute(), webClient );
+    }
+
+
+    private void loadInnerPageIfPossible( final String srcAttribute, final WebClient webClient ) {
+
+        if( srcAttribute.length() != 0 ) {
+            URL url = null;
+            try {
+                url = getPage().getFullyQualifiedUrl(srcAttribute);
+                setEnclosedPage( webClient.getPage(
+                    this, url, SubmitMethod.GET, Collections.EMPTY_LIST, false ) );
+            }
+            catch( final MalformedURLException e ) {
+                getLog().error("Bad url in src attribute of iframe: url=["+srcAttribute+"]", e);
+            }
+            catch( final IOException e ) {
+                getLog().error("IOException when getting content for iframe: url=["+url.toExternalForm()+"]", e);
+            }
         }
     }
 
@@ -145,6 +152,16 @@ public class HtmlInlineFrame
      */
     public final String getSrcAttribute() {
         return getAttributeValue("src");
+    }
+
+
+    /**
+     * Set the value of the "src" attribute.  Also load the frame with the specified url if possible.
+     * @param attribute The new value
+     */
+    public final void setSrcAttribute( final String attribute ) {
+        getElement().setAttribute("src", attribute);
+        loadInnerPageIfPossible(attribute, getPage().getWebClient());
     }
 
 
