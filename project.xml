@@ -4,7 +4,7 @@
     <pomVersion>3</pomVersion>
     <id>htmlunit</id>
     <name>htmlunit</name>
-    <currentVersion>1.3beta</currentVersion>
+    <currentVersion>1.2.3</currentVersion>
 
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -126,6 +126,7 @@
                 <htmlunit.description>Additional support for testing</htmlunit.description>
             </properties>
         </dependency>
+<!--
         <dependency>
             <groupId>commons-jelly</groupId>
             <artifactId>commons-jelly</artifactId>
@@ -196,6 +197,7 @@
                 <htmlunit.description>Javabean support</htmlunit.description>
             </properties>
         </dependency>
+-->        
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
