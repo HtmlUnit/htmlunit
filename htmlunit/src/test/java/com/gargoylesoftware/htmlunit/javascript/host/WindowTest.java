@@ -577,4 +577,32 @@ public class WindowTest extends WebTestCase {
             Collections.EMPTY_LIST);
         assertEquals(1, collectedAlerts.size());
     }
+
+    /**
+     * Variables that are defined inside javascript should be accessible through the
+     * window object (ie window.myVariable).  Test that this works.
+     * @throws Exception If the test fails.
+     */
+    public void testJavascriptVariableFromWindow() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection =
+            new FakeWebConnection(webClient);
+        final List collectedAlerts = new ArrayList();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent =
+            "<html><head><title>first</title></head><body><script>\n"
+            + "myVariable = 'foo';\n"
+            + "alert(window.myVariable);\n"
+            + "</script></body></head>";
+        webConnection.setResponse( new URL("http://first"), firstContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage)webClient.getPage(
+            new URL("http://first"), SubmitMethod.POST, Collections.EMPTY_LIST);
+        assertEquals( Collections.singletonList("foo"), collectedAlerts );
+        assertEquals( "first", page.getTitleText() );
+    }
 }
