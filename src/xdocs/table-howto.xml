@@ -1,11 +1,18 @@
 <?xml version="1.0"?>
-<document title="Table Tutorial">
+<document>
 
-<section title="Simple table">
-	<p>
-		The first set of examples will use this simple html.
-	</p>
-	<source><![CDATA[
+	<properties>
+		<title>Table Tutorial</title>
+		<author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+		<revision>$Revision$</revision>
+	</properties>
+
+	<body>
+		<section>
+			<p>
+				The first set of examples will use this simple html.
+			</p>
+			<source><![CDATA[
 <html><head><title>Table sample</title></head><body>
 	<table id="table1">
 		<tr>
@@ -18,10 +25,10 @@
 		</tr>
 	</table>
 </body></html>
-	]]></source>
-	<p>
-	This example shows how to iterate over all the rows and cells
-	<source>
+			]]></source>
+			<p>
+			This example shows how to iterate over all the rows and cells
+			<source>
 final WebClient webClient = new WebClient();
 final HtmlPage page = (HtmlPage)webClient.getPage( new URL("http://foo.com") );
 
@@ -38,28 +45,28 @@ while( rowIterator.hasNext() ) {
 		System.out.println("   Found cell: "+cell.asText());
 	}
 }
-	</source>
-	</p>
+			</source>
+			</p>
 
-	<p>
-	The following sample shows how to access specific cells by row and column
-	<source>
+			<p>
+			The following sample shows how to access specific cells by row and column
+			<source>
 final WebClient webClient = new WebClient();
 final HtmlPage page = (HtmlPage)webClient.getPage( new URL("http://foo.com") );
 
 final HtmlTable table = (HtmlTable)page.getHtmlElementById("table1");
 System.out.println( "Cell (1,2)="+ table.getCellAt(1,2);
-	</source>
-	</p>
-</section>
+			</source>
+			</p>
+		</section>
 
 
-<section title="More complex table">
-	<p>
-		The next examples will use a more complicated table that includes table header, footer and body
-		sections as well as a caption
-	</p>
-	<source><![CDATA[
+		<section name="More complex table">
+			<p>
+				The next examples will use a more complicated table that includes table header, footer and body
+				sections as well as a caption
+			</p>
+			<source><![CDATA[
 <html><head><title>Table sample</title></head><body>
 	<table id="table1">
 		<caption>My complex table</caption>
@@ -90,11 +97,11 @@ System.out.println( "Cell (1,2)="+ table.getCellAt(1,2);
 	</table>
 </body></html>]]></source>
 
-	<p>
-		HtmlTableHeader, HtmlTableFooter and HtmlTableBody sections are groupings of rows.  There can
-		be at most one header and one footer but there may be more than one body.  Each one of these
-		contains rows which can be accessed via getRows()
-		<source>
+			<p>
+				HtmlTableHeader, HtmlTableFooter and HtmlTableBody sections are groupings of rows.  There can
+				be at most one header and one footer but there may be more than one body.  Each one of these
+				contains rows which can be accessed via getRows()
+			<source><![CDATA[
 final HtmlTableHeader header = table.getHeader();
 final List headerRows = header.getRows();
 
@@ -106,37 +113,14 @@ final Iterator iterator = bodies.iterator();
 while( iterator.hasNext() ) {
 	final List rows = ((HtmlTableBody)iterator.next()).getRows();
 	...
-}
-		</source>
-	</p>
+}]]></source>
+			</p>
 
-	<p>
-		Every table may optionally have a caption element which describes it.
-		<source>final String caption = table.getCaptionText()</source>
-	</p>
-</section>
-
-<!--
-<section title="Accessible table">
-	<p>
-		These examples use a table that has support for accessibility.
-	</p>
-	<source><![CDATA[
-<html><head><title>Table sample</title></head><body>
-	<table id="table1">
-		<tr>
-			<th>Number</th>
-			<th>Description</th>
-		</tr>
-		<tr>
-			<td>5</td>
-			<td>Bicycle</td>
-		</tr>
-	</table>
-</body></html>
-	]]></source>
-</section>
--->
-
+			<p>
+				Every table may optionally have a caption element which describes it.
+				<source>final String caption = table.getCaptionText()</source>
+			</p>
+		</section>
+	</body>
 </document>
 

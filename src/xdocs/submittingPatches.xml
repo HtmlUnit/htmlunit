@@ -1,64 +1,70 @@
 <?xml version="1.0"?>
-<document title="Submitting patches">
+<document>
 
-<section>
-	<p>
-		Contributions are always welcome.  The preferred way to submit a patch is to attach it to
-		a bug or feature request in the SourceForge database.  Remember that patches for documentation
-		or additional test cases are just as valuable as code patches.
-	</p>
-	<p>
-		In order to be successfully merged, patches must be generated from the most recent code in cvs.
-		Refer to <a href="buildingFromCvs.html">"Building from CVS"</a> for information on retrieving
-		and building the latest code.
-	</p>
-</section>
-<section title="Rules for submitting patches">
-	<p>
-		These rules are intended to reduce the effort that the maintainers need to do when accepting
-		a patch.  If the patch requires too much effort to "clean up" before being merged then it will
-		likely be rejected.  Remember that everyone working on this project is volunteering their time
-		so lets be considerate.
-		<ul>
-			<li>
-				Make sure the code follows the <a href="codingConventions.html">coding conventions</a>
-				already in use.  Refer to the link above to
-				see the coding conventions that we are using here.  We use checkstyle to enforce
-				many of the coding standards (some things like good naming can't be easily checked
-				with a tool but we check as much as we can automatically).  The ant target
-				"checkstyle" will check all the code.
-			</li>
-			<li>
-				Make sure the new code has automated unit tests written for
-				<a href="http://www.junit.org">JUnit</a>.  No code will get merged without tests.
-			</li>
-			<li>
-				All unit tests should pass.  Occassionally this rule will be broken if it is important
-				to get a test into the build before the code is ready but this should be very rare.
-			</li>
-			<li>
-				All files must be copyright <a href="http://www.GargoyleSoftware.com">Gargoyle Software Inc.</a>
-				and must be licensed under the same
-				license as the rest of the probject - currently an <a href="license.html">apache
-				style</a> one.  This is required so that we can make sweeping changes such as the license
-				change that we already did (from LGPL to Apache style).
-			</li>
-			<li>
-				All non-private methods must have full javadoc before we put out a release.  Putting
-				javadoc on private methods is a good practice as well but isn't required.  If you
-				make changes to a given file then you are expected to add an author tag at the top
-				of the file.  @author tags are written in chronological order with the original
-				author at the top.  Refer to <a href="http://java.sun.com/j2se/javadoc/writingdoccomments/">
-				How to Write JavaDoc</a> for more specific information on javadoc.
-			</li>
-		</ul>
-	</p>
-	<p>
-		Additional documentation or code samples are always appreciated.  We're focussed on writing
-		code and documentation often gets neglected.
-	</p>
-</section>
+	<properties>
+		<title>Submitting Patches</title>
+		<author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+		<revision>$Revision$</revision>
+	</properties>
 
-
+	<body>
+		<section>
+			<p>
+				Contributions are always welcome.  The preferred way to submit a patch is to attach it to
+				a bug or feature request in the SourceForge database.  Remember that patches for documentation
+				or additional test cases are just as valuable as code patches.
+			</p>
+			<p>
+				In order to be successfully merged, patches must be generated from the most recent code in cvs.
+				Refer to <a href="buildingFromCvs.html">"Building from CVS"</a> for information on retrieving
+				and building the latest code.
+			</p>
+		</section>
+		<section name="Rules for submitting patches">
+			<p>
+				These rules are intended to reduce the effort that the maintainers need to do when accepting
+				a patch.  If the patch requires too much effort to "clean up" before being merged then it will
+				likely be rejected.  Remember that everyone working on this project is volunteering their time
+				so lets be considerate.
+				<ul>
+					<li>
+						Make sure the code follows the <a href="codingConventions.html">coding conventions</a>
+						already in use.  Refer to the link above to
+						see the coding conventions that we are using here.  We use checkstyle to enforce
+						many of the coding standards (some things like good naming can't be easily checked
+						with a tool but we check as much as we can automatically).  The ant target
+						"checkstyle" will check all the code.
+					</li>
+					<li>
+						Make sure the new code has automated unit tests written for
+						<a href="http://www.junit.org">JUnit</a>.  No code will get merged without tests.
+					</li>
+					<li>
+						All unit tests should pass.  Occassionally this rule will be broken if it is important
+						to get a test into the build before the code is ready but this should be very rare.
+					</li>
+					<li>
+						All files must be copyright <a href="http://www.GargoyleSoftware.com">Gargoyle Software Inc.</a>
+						and must be licensed under the same
+						license as the rest of the probject - currently an <a href="license.html">apache
+						style</a> one.  This is required so that we can make sweeping changes such as the license
+						change that we already did (from LGPL to Apache style).
+					</li>
+					<li>
+						All non-private methods must have full javadoc before we put out a release.  Putting
+						javadoc on private methods is a good practice as well but isn't required.  If you
+						make changes to a given file then you are expected to add an author tag at the top
+						of the file.  @author tags are written in chronological order with the original
+						author at the top.  Refer to <a href="http://java.sun.com/j2se/javadoc/writingdoccomments/">
+						How to Write JavaDoc</a> for more specific information on javadoc.
+					</li>
+				</ul>
+			</p>
+			<p>
+				Additional documentation or code samples are always appreciated.  We're focussed on writing
+				code and documentation often gets neglected.
+			</p>
+		</section>
+	</body>
 </document>
 

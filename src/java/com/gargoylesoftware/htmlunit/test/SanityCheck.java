@@ -7,6 +7,7 @@
 package com.gargoylesoftware.htmlunit.test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.SimpleCredentialProvider;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -37,78 +38,17 @@ public class SanityCheck extends WebTestCase {
     }
 
 
-    public void testYahooMail() throws Exception {
+    public void testAcceptance() throws Exception {
         final WebClient webClient = new WebClient(browserVersion_);
-        assertInstanceOf(webClient.getPage( new URL( "http://mail.yahoo.com/" ) ), HtmlPage.class);
+        webClient.setCredentialProvider( new SimpleCredentialProvider("ecpinten","password") );
+        assertInstanceOf(webClient.getPage( new URL( "http://tcisuacpt01.toyota.ca/ecp/index.html" ) ), HtmlPage.class);
     }
 
 
-    public void testYahoo() throws Exception {
+    public void testTest() throws Exception {
         final WebClient webClient = new WebClient(browserVersion_);
-        assertInstanceOf( webClient.getPage( new URL( "http://yahoo.com/" ) ), HtmlPage.class );
-    }
-
-
-    public void testIBM() throws Exception {
-        final WebClient webClient = new WebClient(browserVersion_);
-        webClient.setRedirectEnabled( true );
-        final HtmlPage page = (HtmlPage)webClient.getPage( new URL( "http://www.ibm.com/" ) );
-        assertEquals( "http://www.ibm.com/us/", page.getWebResponse().getUrl().toExternalForm() );
-    }
-
-
-    public void testAlphaWorks() throws Exception {
-        final WebClient webClient = new WebClient(browserVersion_);
-        assertInstanceOf(webClient.getPage(new URL( "http://www.alphaworks.ibm.com" ) ), HtmlPage.class);
-    }
-
-
-    public void testCNN() throws Exception {
-        final WebClient webClient = new WebClient(browserVersion_);
-        assertInstanceOf( webClient.getPage( new URL( "http://www.cnn.com" ) ), HtmlPage.class);
-    }
-
-
-    public void testToyotaCanada() throws Exception {
-        final WebClient webClient = new WebClient(browserVersion_);
-        assertInstanceOf(webClient.getPage( new URL( "http://www.toyota.ca" ) ), HtmlPage.class);
-    }
-
-
-    public void testSourceForge_secure() throws Exception {
-        try {
-            final WebClient webClient = new WebClient(browserVersion_);
-            webClient.setPrintContentOnFailingStatusCode(true);
-            assertInstanceOf( webClient.getPage( new URL( "https://sourceforge.net/projects/htmlunit/" ) ), HtmlPage.class );
-        }
-        catch( final MalformedURLException e ) {
-            System.out.println("Skipping https test: "+getName());
-        }
-    }
-
-
-    public void testYahooLogin_secure() throws Exception {
-        try {
-            final WebClient webClient = new WebClient(browserVersion_);
-            final HtmlPage page = (HtmlPage)webClient.getPage( new URL( "https://login.yahoo.com/" ) );
-            final HtmlForm form = page.getFormByName("login_form");
-            assertNotNull(form);
-        }
-        catch( final MalformedURLException e ) {
-            System.out.println("Skipping https test: "+getName());
-        }
-    }
-
-
-    public void testAmazonCanada() throws Exception {
-        final WebClient webClient = new WebClient(browserVersion_);
-        assertInstanceOf( webClient.getPage( new URL( "http://www.amazon.ca/" ) ), HtmlPage.class );
-    }
-
-
-    public void testCnnAfterHours() throws Exception {
-        final WebClient webClient = new WebClient(browserVersion_);
-        assertInstanceOf( webClient.getPage( new URL( "http://money.cnn.com/markets/afterhours/" ) ), HtmlPage.class );
+        webClient.setCredentialProvider( new SimpleCredentialProvider("ecpinten","password") );
+        assertInstanceOf(webClient.getPage( new URL( "http://mbecp.toyota.ca:9090/ecp/index.html" ) ), HtmlPage.class);
     }
 
 

@@ -1,35 +1,39 @@
 <?xml version="1.0"?>
-<document title="TODO list">
+<document>
 
-<section title="">
-	<p>
-		Items on this list are planned items that aren't bugs or feature requests. In other words,
-		these are all those things that need to be done but aren't listed in the sourceforge
-		bug tracker.  They are in no particular order.
-	</p>
-</section>
+	<properties>
+		<title>TODO list</title>
+		<author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+		<revision>$Revision$</revision>
+	</properties>
 
-
-<section title="Code todo's">
-	<ol>
-		<li>implement Document.write()</li>
-		<li>Have TopLevelWindow's deregister themselves with WebClient when they are closed</li>
-		<li>Upgrade HttpClient to the latest gump version</li>
-		<li>HtmlTextArea.getText() and setText() currently don't modify the dom.  This should be fixed</li>
-		<li>Support for file urls</li>
-		<li>Use HtmlUnit to verify all links in generated documentation</li>
-		<li>Mavenize</li>
-		<li></li>
-	</ol>
-</section>
+	<body>
+		<section>
+			<p>
+				Items on this list are planned items that aren't bugs or feature requests. In other words,
+				these are all those things that need to be done but aren't listed in the sourceforge
+				bug tracker.  They are in no particular order.
+			</p>
+		</section>
 
 
-<section title="Documentation todo's">
-	<ol>
-		<li>window-howto.xml</li>
-		<li>Generate one big pdf from all the smaller documents</li>
-	</ol>
-</section>
+		<section name="Code todo's">
+			<ol>
+				<li>implement Document.write()</li>
+				<li>Have TopLevelWindow's deregister themselves with WebClient when they are closed</li>
+				<li>HtmlTextArea.getText() and setText() currently don't modify the dom.  This should be fixed</li>
+				<li>Support for file urls</li>
+				<li>Use HtmlUnit to verify all links in generated documentation</li>
+			</ol>
+		</section>
 
+
+		<section name="Documentation todo's">
+			<ol>
+				<li>window-howto.xml</li>
+				<li>Generate one big pdf from all the smaller documents</li>
+			</ol>
+		</section>
+	</body>
 </document>
 
