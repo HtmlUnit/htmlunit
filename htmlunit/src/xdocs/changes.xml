@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1085224">
+                Refactored different arrays of html elements in a generic ElementArray. Expressions like "document.all.tags('s').item(y)" can now be evaluated.
+            </action>
             <action type="update" dev="mguillem" id="1082098">
                 Upgraded rhino js to 1.6R1.
             </action>

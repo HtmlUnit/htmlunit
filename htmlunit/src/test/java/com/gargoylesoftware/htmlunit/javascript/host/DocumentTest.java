@@ -1387,6 +1387,9 @@ public class DocumentTest extends WebTestCase {
              + "    for( i=0; i< inputCount; i++ ) {\n"
              + "        alert(inputs[i].name);\n"
              + "    }\n"
+             + "    // Make sure tags() returns an element array that you can call item() on.\n"
+             + "    alert(document.all.tags('input').item(0).name);\n"
+             + "    alert(document.all.tags('input').item(1).name);\n"
              + "}\n"
              + "</script></head><body onload='doTest()'>"
              + "<input type='text' name='a' value='1'>"
@@ -1398,7 +1401,29 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[] {
-            "a", "b"} );
+            "a", "b", "a", "b"} );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * Makes sure that the document.all collection contents are not cached if the
+     * collection is accessed before the page has finished loading.
+     * @throws Exception If the test fails.
+     */
+    public void testDocumentAll_Caching() throws Exception {
+        final String firstContent
+             = "<html><head><title>Test</title></head>"
+             + "<body onload='alert(document.all.b.value)'>"
+             + "<input type='text' name='a' value='1'>"
+             + "<script>alert(document.all.a.value)</script>"
+             + "<input type='text' name='b' value='2'>"
+             + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        assertEquals( "Test", firstPage.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList( new String[]{"1", "2"} );
         assertEquals( expectedAlerts, collectedAlerts );
     }
 

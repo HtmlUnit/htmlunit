@@ -45,6 +45,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 import org.jaxen.JaxenException;
@@ -69,23 +70,25 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
-import com.gargoylesoftware.htmlunit.javascript.DocumentAllArray;
+import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 
 /**
- * A javascript object for a Document
- *
- * @version  $Revision$
+ * A JavaScript object for a Document.
+ * 
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Chris Erskine
  * @author Marc Guillemot
+ * @author Daniel Gredler
+ * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp">
+ * MSDN documentation</a>
  */
 public final class Document extends NodeImpl {
 
     private static final long serialVersionUID = -7646789903352066465L;
-    private DocumentAllArray allArray_;
     private String status_ = "";
 
     /** The buffer that will be used for calls to document.write() */
@@ -103,17 +106,6 @@ public final class Document extends NodeImpl {
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
-    }
-
-
-    /**
-     * Initialize this object
-     */
-    public void initialize() {
-        if( allArray_ == null ) {
-            allArray_ = (DocumentAllArray)makeJavaScriptObject("DocumentAllArray");
-            allArray_.initialize( (HtmlPage)getDomNodeOrDie() );
-        }
     }
 
 
@@ -145,7 +137,6 @@ public final class Document extends NodeImpl {
             if( jsForm == null ) {
                 jsForm = (Form)makeJavaScriptObject("Form");
                 jsForm.setHtmlElement( htmlForm );
-                jsForm.initialize();
             }
             jsForms.add(jsForm);
         }
@@ -313,11 +304,12 @@ public final class Document extends NodeImpl {
      * Return the value of the "all" property.
      * @return The value of the "all" property
      */
-    public DocumentAllArray jsGet_all() {
-        if( allArray_ == null ) {
-            initialize();
-        }
-        return allArray_;
+    public ElementArray jsGet_all() {
+        final ElementArray all = (ElementArray) makeJavaScriptObject("ElementArray");
+        final List elements = new ArrayList();
+        CollectionUtils.addAll( elements, getHtmlPage().getAllHtmlChildElements() );
+        all.setElements( elements );
+        return all;
     }
 
 
@@ -553,7 +545,6 @@ public final class Document extends NodeImpl {
                 // Create new one here.
                 jsForm = (Form)makeJavaScriptObject("Form");
                 jsForm.setHtmlElement( htmlForm );
-                jsForm.initialize();
                 return jsForm;
             }
             else {

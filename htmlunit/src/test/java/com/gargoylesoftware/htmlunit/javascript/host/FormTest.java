@@ -484,8 +484,9 @@ public class FormTest extends WebTestCase {
 
 
     /**
-     * Test for a bug that appeared when visiting mail.yahoo.com.  Setting the value of one input
-     * seems to blow away the other input.
+     * Test for a bug that appeared when visiting mail.yahoo.com. Setting the value of one input
+     * seems to blow away the other input. Also tests that the form input collection does not get
+     * cached before the document is finished loading.
      * @throws Exception if the test fails
      */
     public void testFindInputWithoutTypeDefined() throws Exception {

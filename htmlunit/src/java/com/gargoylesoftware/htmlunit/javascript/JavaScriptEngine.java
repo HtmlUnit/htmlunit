@@ -176,9 +176,7 @@ public final class JavaScriptEngine extends ScriptEngine {
                 }
             }
 
-            ScriptableObject.defineClass(parentScope, DocumentAllArray.class);
-            ScriptableObject.defineClass(parentScope, FormElementsArray.class);
-            ScriptableObject.defineClass(parentScope, WindowFramesArray.class);
+            ScriptableObject.defineClass(parentScope, ElementArray.class);
             ScriptableObject.defineClass(parentScope, OptionsArray.class);
 
             final Window window = (Window)newPageInfo.getContext().newObject(
