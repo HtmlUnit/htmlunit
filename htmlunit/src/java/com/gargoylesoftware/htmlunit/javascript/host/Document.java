@@ -27,6 +27,7 @@ import org.mozilla.javascript.Scriptable;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public final class Document extends HTMLElement {
     private DocumentAllArray allArray_;
@@ -248,7 +249,7 @@ public final class Document extends HTMLElement {
      * @return the list of elements
      */
     public Object jsFunction_getElementsByTagName( final String tagName ) {
-        final List list = getHtmlElementOrDie().getPage().getHtmlElementsByTagNames(Collections.singletonList(tagName));
+        final List list = getHtmlElementOrDie().getPage().getHtmlElementsByTagNames(Collections.singletonList(tagName.toLowerCase()));
         final ListIterator iterator = list.listIterator();
         while(iterator.hasNext()) {
             final HtmlElement htmlElement = (HtmlElement)iterator.next();

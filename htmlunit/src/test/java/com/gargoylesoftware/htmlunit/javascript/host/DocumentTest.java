@@ -442,6 +442,40 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * Regression test for bug 740636
+     */
+    public void testGetElementsByTagName_CaseInsensitive() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var elements = document.getElementsByTagName('InPuT');\n"
+             + "    for( i=0; i<elements.length; i++ ) {\n"
+             + "        alert(elements[i].type);\n"
+             + "    }\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<form><input type='button' name='button1' value='pushme'></form>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("button");
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+
     public void testDocumentAll_IndexByInt() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
