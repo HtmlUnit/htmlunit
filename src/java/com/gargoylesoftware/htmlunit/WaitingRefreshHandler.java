@@ -41,9 +41,9 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * This refresh handler spawns a new thread that waits the specified
- * number of seconds before refreshing the specified page, using the
- * specified URL.
+ * This refresh handler waits the specified number of seconds (or a user defined maximum)
+ * before refreshing the specified page, using the specified URL. Waiting happens
+ * on the current thread
  * 
  * If you want a refresh handler that ignores the wait time, see
  * {@link ImmediateRefreshHandler}.
@@ -52,28 +52,53 @@ import java.net.URL;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  */
-public class ThreadedRefreshHandler implements RefreshHandler {
-
+public class WaitingRefreshHandler implements RefreshHandler {
+    private final int maxwait_;
+    /**
+     * Create a WaitingRefreshHandler that will wait whatver time the server or 
+     * content asks unless it it longer than maxwait.
+     * 
+     * @param maxwait The maximum wait time before the refresh (in seconds). A value
+     *                less than one (1) will cause WaitingRefreshHandler to wait for 
+     *                whatever time the server or content asks.
+     */
+    public WaitingRefreshHandler(final int maxwait) {
+        maxwait_ = maxwait;
+    }
+    /**
+     * Create a WaitingRefreshHandler that will always wait whatver time the server or 
+     * content asks.
+     */
+    public WaitingRefreshHandler() {
+        maxwait_ = 0;
+    }
+    
     /**
      * Refreshes the specified page using the specified URL after the specified number
      * of seconds.
      * @param page The page that is going to be refreshed.
      * @param url The URL where the new page will be loaded.
-     * @param seconds The number of seconds to wait before reloading the page.
+     * @param requestedWait The number of seconds to wait before reloading the page. If this is 
+     *                      greater than maxwait than maxwait will be used instead.
+     * @throws IOException if the refresh fails
      */
-    public void handleRefresh(final Page page, final URL url, final int seconds) {
-        final Thread thread = new Thread( "ThreadedRefreshHandler Thread" ) {
-            public void run() {
-                try {
-                    new WaitingRefreshHandler().handleRefresh(page, url, seconds);
-                }
-                catch( final IOException e ) {
-                    page.getEnclosingWindow().getWebClient().getLog().error( "Unable to refresh page!", e );
-                    throw new RuntimeException("Unable to refresh page!", e);
-                }
-            }
-        };
-        thread.start();
+    public void handleRefresh(final Page page, final URL url, final int requestedWait) throws IOException {
+        int seconds = requestedWait;
+        if (seconds > maxwait_ && maxwait_ > 0) {
+            seconds = maxwait_;
+        }
+        try {
+            Thread.sleep( seconds * 1000 );
+        } 
+        catch (final InterruptedException e) {
+            throw new RuntimeException("Unknown threading error during refresh", e);
+        }
+        final WebWindow window = page.getEnclosingWindow();
+        if( window == null ) {
+            return;
+        }
+        final WebClient client = window.getWebClient();                
+        client.getPage( window, new WebRequestSettings( url ) );
     }
 
 }

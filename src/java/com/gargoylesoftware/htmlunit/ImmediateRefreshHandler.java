@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -58,26 +59,22 @@ public class ImmediateRefreshHandler implements RefreshHandler {
      * @param page The page that is going to be refreshed.
      * @param url The URL where the new page will be loaded.
      * @param seconds The number of seconds to wait before reloading the page (ignored!).
+     * @throws IOException if the refresh fails
      */
-    public void handleRefresh(final Page page, final URL url, final int seconds) {
+    public void handleRefresh(final Page page, final URL url, final int seconds) throws IOException {
         final WebWindow window = page.getEnclosingWindow();
         if( window == null ) {
             return;
         }
         final WebClient client = window.getWebClient();
         if( page.getWebResponse().getUrl().equals( url ) ) {
-            String msg = "Attempted to refresh a page using an ImmediateRefreshHandler, " +
-                "which would have caused an OutOfMemoryException; refresh aborted. " +
-                "Please use a WaitRefreshHandler instead.";
-            client.getLog().warn( msg );
-            return;
+            final String msg = "Refresh Aborted by HtmlUnit: " +
+                "Attempted to refresh a page using an ImmediateRefreshHandler " +
+                "which could have caused an OutOfMemoryError " +
+                "Please use WaitingRefreshHandler or ThreadedRefreshHandler instead.";
+            throw new RuntimeException(msg);
         }
-        try {
-            client.getPage( window, new WebRequestSettings( url ) );
-        }
-        catch( final Exception e ) {
-            client.getLog().error( "Unable to refresh page!", e );
-        }
+        client.getPage( window, new WebRequestSettings( url ) );
     }
 
 }
