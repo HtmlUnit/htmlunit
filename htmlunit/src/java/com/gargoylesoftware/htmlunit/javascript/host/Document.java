@@ -658,13 +658,23 @@ public final class Document extends NodeImpl {
             return super.get(name, start);
         }
 
-        final Document document = (Document) start;
-        NativeArray array = (NativeArray) document.jsFunction_getElementsByName(name);
-        if (array.getLength() == 1) {
-            return array.get(0, array);
+        // document.xxx allows to retrieve some elements by name like img or form but not input, a, ...
+        // TODO: behaviour for iframe seems to differ between IE and Moz
+        ElementArray collection = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+        try {
+        	collection.init(htmlPage, new HtmlUnitXPath("//*[(@name = '" + name 
+        			+ "' and (name() = 'img' or name() = 'form'))"));
+        }
+        catch (final JaxenException e) {
+            throw Context.reportRuntimeError("Failed to initialize collection: " + e.getMessage());
+        }
+
+        final int size = collection.jsGet_length(); 
+        if (size == 1) {
+            return collection.get(0, collection);
         } 
-        else if (array.getLength() > 1) {
-            return array;
+        else if (size > 1) {
+            return collection;
         }
 
         return super.get(name, start);

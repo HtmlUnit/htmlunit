@@ -1856,23 +1856,36 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
+     * Test that img and form can be retrieved directly by name but not
+     * a, input or button
      * @throws Exception if the test fails
      */
-    public void testAccessImageByName() throws Exception {
+    public void testDirectAccessByName() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
-            + "    alert(document.myImage.id)\n"
-            + "    alert(document.myImage2.length)\n"
+            + "    alert(document.myImage.id);\n"
+            + "    alert(document.myImage2.length);\n"
+            + "    alert(document.myForm.tagName);\n"
+            + "    alert(document.myAnchor);\n"
+            + "    alert(document.myInput);\n"
+            + "    alert(document.myInputImage);\n"
+            + "    alert(document.myButton);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<img src='foo' name='myImage' id='myImageId'>\n"
             + "<img src='foo' name='myImage2'>\n"
             + "<img src='foo' name='myImage2'>\n"
+            + "<a name='myAnchor'/>\n"
+            + "<form name='myForm'>\n"
+            + "<input name='myInput' type='text'>\n"
+            + "<input name='myInputImage' type='image' src='foo'>\n"
+            + "<button name='myButton'>foo</button>\n"
+            + "</form>\n"
             + "</body></html>";
 
          final List expectedAlerts = Arrays.asList( new String[]{
-             "myImageId", "2"
+             "myImageId", "2", "FORM", "undefined", "undefined", "undefined", "undefined"
          } );
          createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
