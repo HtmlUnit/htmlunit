@@ -8,8 +8,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.test.WebTestCase;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -179,6 +181,56 @@ public class InputTest extends WebTestCase {
 
          final List expectedAlerts = Arrays.asList( new String[]{
              "true", "false", "false", "false", "true", "false"
+         } );
+
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    public void testDisabledAttribute() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "function test() {"
+                 + "    alert(document.form1.button1.disabled)\n"
+                 + "    alert(document.form1.button2.disabled)\n"
+                 + "    alert(document.form1.button3.disabled)\n"
+                 + "    document.form1.button1.disabled=true\n"
+                 + "    document.form1.button2.disabled=false\n"
+                 + "    document.form1.button3.disabled=true\n"
+                 + "    alert(document.form1.button1.disabled)\n"
+                 + "    alert(document.form1.button2.disabled)\n"
+                 + "    alert(document.form1.button3.disabled)\n"
+                 + "}"
+                 + "</script></head><body>"
+                 + "<p>hello world</p>"
+                 + "<form name='form1'>"
+                 + "    <input type='submit' name='button1' value='1'/>"
+                 + "    <input type='submit' name='button2' value='2' disabled/>"
+                 + "    <input type='submit' name='button3' value='3'/>"
+                 + "</form>"
+                 + "<a href='javascript:test()' id='clickme'>click me</a>\n"
+                 + "</body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+         final HtmlForm form = page.getFormByName("form1");
+
+         final HtmlSubmitInput button1
+            = (HtmlSubmitInput)form.getInputByName("button1");
+         final HtmlSubmitInput button2
+            = (HtmlSubmitInput)form.getInputByName("button2");
+         final HtmlSubmitInput button3
+            = (HtmlSubmitInput)form.getInputByName("button3");
+         assertFalse( button1.isDisabled() );
+         assertTrue ( button2.isDisabled() );
+         assertFalse( button3.isDisabled() );
+         ((HtmlAnchor)page.getHtmlElementById("clickme")).click();
+         assertTrue ( button1.isDisabled() );
+         assertFalse( button2.isDisabled() );
+         assertTrue ( button3.isDisabled() );
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "false", "true", "false", "true", "false", "true"
          } );
 
          assertEquals( expectedAlerts, collectedAlerts );

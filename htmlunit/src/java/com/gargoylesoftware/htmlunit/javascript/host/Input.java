@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.w3c.dom.Element;
 
 /**
  *  The javascript object that represents something that can be put in a form.
@@ -139,6 +140,22 @@ public class Input extends HTMLElement {
      */
     public void jsFunction_select() {
         getLog().debug( "Input.jsFunction_select() not implemented" );
+    }
+
+
+    public boolean jsGet_disabled() {
+        return getHtmlElementOrDie().isAttributeDefined("disabled");
+    }
+
+
+    public void jsSet_disabled( final boolean disabled ) {
+        final Element xmlElement = getHtmlElementOrDie().getElement();
+        if( disabled ) {
+            xmlElement.setAttribute("disabled", "disabled");
+        }
+        else {
+            xmlElement.removeAttribute("disabled");
+        }
     }
 }
 
