@@ -170,26 +170,42 @@ public class HTMLParser {
     }
 
     /**
-     * Create a new parser. The parser does not have any state, therefore it is safe
-     * (though unnecessary) to keep an instance around
-     */
+     * You should never need to create one of these!
+     * @deprecated
+     */    
     public HTMLParser() {
     }
 
     /**
+     * This method should no longer be used
+     *
+     * @param webClient NOT USED
+     * @param webResponse the response data
+     * @param webWindow the web window into which the page is to be loaded
+     * @return the page object which forms the root of the DOM tree, or <code>null</code> if the &lt;HTML&gt;
+     * tag is missing
+     * @throws java.io.IOException io error
+     * @deprecated
+     */
+    public HtmlPage parse(
+            final WebClient webClient, 
+            final WebResponse webResponse, 
+            final WebWindow webWindow)
+            throws IOException {
+        return parse(webResponse, webWindow);
+    }
+    /**
      * parse the HTML content from the given WebResponse into an object tree representation
      *
-     * @param webClient the web client that initiated the request
      * @param webResponse the response data
      * @param webWindow the web window into which the page is to be loaded
      * @return the page object which forms the root of the DOM tree, or <code>null</code> if the &lt;HTML&gt;
      * tag is missing
      * @throws java.io.IOException io error
      */
-    public HtmlPage parse(final WebClient webClient, final WebResponse webResponse, final WebWindow webWindow)
+    public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow)
             throws IOException {
-
-        HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(webClient, webResponse, webWindow);
+        HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(webResponse, webWindow);
 
         XMLInputSource in = new XMLInputSource(
                 null,
@@ -207,10 +223,9 @@ public class HTMLParser {
      * the ContentHandler interface. Thus all parser APIs are kept private. The ContentHandler methods
      * consume SAX events to build the page DOM
      */
-    private class HtmlUnitDOMBuilder extends AbstractSAXParser
+    private static class HtmlUnitDOMBuilder extends AbstractSAXParser
             implements ContentHandler /*, LexicalHandler */ {
 
-        private final WebClient webClient_;
         private final WebResponse webResponse_;
         private final WebWindow webWindow_;
 
@@ -226,18 +241,12 @@ public class HTMLParser {
 
         /**
          * create a new builder for parsing the given response contents
-         * @param webClient the web client that initiated the request
          * @param webResponse the response data
          * @param webWindow the web window into which the page is to be loaded
          */
-        public HtmlUnitDOMBuilder(
-                final WebClient webClient,
-                final WebResponse webResponse,
-                final WebWindow webWindow) {
-
+        public HtmlUnitDOMBuilder(final WebResponse webResponse, final WebWindow webWindow) {
             super(new HTMLConfiguration());
 
-            webClient_ = webClient;
             webResponse_ = webResponse;
             webWindow_ = webWindow;
 
@@ -287,7 +296,7 @@ public class HTMLParser {
 
         /** SAX start document event */
         public void startDocument() throws SAXException {
-            page_ = new HtmlPage(webClient_, webResponse_.getUrl(), webResponse_, webWindow_);
+            page_ = new HtmlPage(webResponse_.getUrl(), webResponse_, webWindow_);
             page_.setScriptFilter(scriptFilter_);
             scriptFilter_.setHtmlPage(page_);
             webWindow_.setEnclosedPage(page_);

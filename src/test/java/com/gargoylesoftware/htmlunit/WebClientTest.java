@@ -492,18 +492,13 @@ public class WebClientTest extends WebTestCase {
         }
         /**
          * Create a page
-         * @param webClient The web client
          * @param webResponse The web response
          * @param webWindow The web window
          * @return The new page
          * @throws IOException If an IO problem occurs
          */
-        public Page createPage(
-            final WebClient webClient,
-            final WebResponse webResponse,
-            final WebWindow webWindow )
-            throws IOException {
-
+        public Page createPage( final WebResponse webResponse, final WebWindow webWindow )
+                throws IOException {
             final Page page = new TextPage(webResponse, webWindow);
             webWindow.setEnclosedPage(page);
             collectedPages_.add(page);

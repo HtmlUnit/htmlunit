@@ -8,6 +8,27 @@
     <body>
         <release version="1.3-pre2" date="Not released yet">
             <action type="update" dev="yourgod">
+				DefaultPageCreator can now be easily extended to add custom
+				content type handling without affecting the default handlers.
+            </action>        
+            <action type="update" dev="yourgod">
+                INCOMPATIBLE CHANGE: PageCreator.createPage() no longer takes a 
+                WebClient as a parameter. If you have an existing PageCreator 
+                you can get the WebClient from the WebWindow parameter. 
+                This change also occured in DefaultPageCreator.
+            </action>        
+            <action type="update" dev="yourgod">
+				Deprecated HtmlPage(WebClient, URL, WebResponse, webWindow) in favor of
+				HtmlPage(URL, WebResponse, webWindow)
+            </action>            
+            <action type="update" dev="yourgod">
+				Deprecated HTMLParser() as you should never need an instance
+            </action>
+            <action type="update" dev="yourgod">
+				Deprecated HTMLParser.parse(WebClient, WebRespose, WebWindow) in favor of
+				static HTMLParser.parse(WebRespose, WebWindow).
+            </action>
+            <action type="update" dev="yourgod">
                 Updated HtmlRadioButtonInput.click() to select the clicked radio button
             </action>          
             <action type="update" dev="yourgod">

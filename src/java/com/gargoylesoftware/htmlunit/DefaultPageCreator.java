@@ -43,11 +43,16 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * The default implementation of PageCreator.
+ * The default implementation of PageCreator. Designed to be extented for easier 
+ * handling of new content types. Just check the content type in createPage()
+ * and call super(createPage()) if your custom type isn't found. There are 
+ * also protected createXXXXPage() methods for creating the Page types HtmlUnit
+ * already knows about for your custom content types. 
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author <a href="mailto:yourgod@users.sourceforge.net">Brad Clarke</a>
  */
 public class DefaultPageCreator implements PageCreator {
 
@@ -60,14 +65,12 @@ public class DefaultPageCreator implements PageCreator {
     /**
      * Create a Page object for the specified web response.
      *
-     * @param webClient The web client that loaded the page
      * @param webResponse The response from the server
      * @param webWindow The window that this page will be loaded into.
      * @exception IOException If an io problem occurs
      * @return The new page object
      */
     public Page createPage(
-            final WebClient webClient, //not used!
             final WebResponse webResponse,
             final WebWindow webWindow )
         throws
@@ -93,26 +96,54 @@ public class DefaultPageCreator implements PageCreator {
         return newPage;    
 
     }
-    private HtmlPage createHtmlPage(final WebResponse webResponse, final WebWindow webWindow) 
+    /**
+     * Create a HtmlPage for this WebResponse
+     * 
+     * @param webResponse The page's source
+     * @param webWindow The WebWindow to place the HtmlPage in
+     * @return The newly created HtmlPage
+     * @throws IOException If the page could not be created
+     */
+    protected HtmlPage createHtmlPage(final WebResponse webResponse, final WebWindow webWindow) 
             throws IOException {
         final HtmlPage newPage;
-        HTMLParser parser = new HTMLParser();
-        newPage = parser.parse(webWindow.getWebClient(), webResponse, webWindow);
+        newPage = HTMLParser.parse(webResponse, webWindow);
         return newPage;
     }
-    private JavaScriptPage createJavaScriptPage(final WebResponse webResponse, final WebWindow webWindow) {
+    /**
+     * Create a JavaScriptPage for this WebResponse
+     * 
+     * @param webResponse The page's source
+     * @param webWindow The WebWindow to place the JavaScriptPage in
+     * @return The newly created JavaScriptPage
+     */
+    protected JavaScriptPage createJavaScriptPage(final WebResponse webResponse, final WebWindow webWindow) {
         final JavaScriptPage newPage;
         newPage = new JavaScriptPage( webResponse, webWindow );
         webWindow.setEnclosedPage(newPage);
         return newPage;
     }
-    private TextPage createTextPage(final WebResponse webResponse, final WebWindow webWindow) {
+    /**
+     * Create a TextPage for this WebResponse
+     * 
+     * @param webResponse The page's source
+     * @param webWindow The WebWindow to place the TextPage in
+     * @return The newly created TextPage
+     */    
+    protected TextPage createTextPage(final WebResponse webResponse, final WebWindow webWindow) {
         final TextPage newPage;
         newPage = new TextPage( webResponse, webWindow );
         webWindow.setEnclosedPage(newPage);
         return newPage;
     }
-    private UnexpectedPage createUnexpectedPage(final WebResponse webResponse, final WebWindow webWindow) {
+    /**
+     * Create an UnexpectedPage for this WebResponse
+     * 
+     * @param webResponse The page's source
+     * @param webWindow The WebWindow to place the UnexpectedPage in
+     * @return The newly created UnexpectedPage
+     */    
+    protected UnexpectedPage createUnexpectedPage(final WebResponse webResponse, final WebWindow webWindow) {
         final UnexpectedPage newPage;
         newPage = new UnexpectedPage( webResponse, webWindow );
         webWindow.setEnclosedPage(newPage);
