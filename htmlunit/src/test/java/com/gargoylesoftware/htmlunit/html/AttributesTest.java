@@ -78,7 +78,7 @@ public class AttributesTest extends TestCase {
     static {
         EXCLUDED_METHODS.add("getHtmlElementsByAttribute");    
         EXCLUDED_METHODS.add("getOneHtmlElementByAttribute");    
-    };
+    }
 
     /**
      * Return a test suite containing a seperate test for each attribute

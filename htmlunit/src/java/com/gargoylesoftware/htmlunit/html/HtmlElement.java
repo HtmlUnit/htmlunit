@@ -204,7 +204,7 @@ public abstract class HtmlElement {
     public final String getAttributeValue( final Element element, final String attributeName ) {
         Assert.notNull("element", element);
 
-        final Attr attribute = (Attr)element.getAttributeNode(attributeName.toUpperCase());
+        final Attr attribute = element.getAttributeNode(attributeName.toUpperCase());
         if( attribute == null ) {
             return ATTRIBUTE_NOT_DEFINED;
         }

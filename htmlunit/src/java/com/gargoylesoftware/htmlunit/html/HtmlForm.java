@@ -100,7 +100,7 @@ public class HtmlForm extends HtmlElement {
         while( iterator.hasNext() ) {
             final HtmlInput input = (HtmlInput)iterator.next();
             if( input.getTypeAttribute().equals("submit")) {
-                return submit( ( SubmittableElement )input );
+                return submit( input );
             }
         }
 
@@ -266,7 +266,7 @@ public class HtmlForm extends HtmlElement {
             return false;
         }
 
-        final Attr disabled = (Attr)getElement().getAttributeNode("disabled");
+        final Attr disabled = getElement().getAttributeNode("disabled");
         if( disabled != null ) {
             return false;
         }
@@ -274,7 +274,7 @@ public class HtmlForm extends HtmlElement {
         if( tagName.equals( "input" ) ) {
             final String type = getAttributeValue(element, "type" ).toLowerCase();
             if( type.equals( "radio" ) || type.equals( "checkbox" ) ) {
-                final Attr checked = (Attr)element.getAttributeNode("checked");
+                final Attr checked = element.getAttributeNode("checked");
                 return checked != null;
             }
             if( type.equals("submit") || type.equals("image") ){

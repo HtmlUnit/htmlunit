@@ -180,7 +180,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage page = (HtmlPage)client.getPage(new URL("http://first"));
         assertEquals( "", page.getTitleText() );
 
-        final HtmlAnchor testAnchor = (HtmlAnchor)page.getAnchorByName("testJavascript");
+        final HtmlAnchor testAnchor = page.getAnchorByName("testJavascript");
         final HtmlPage secondPage = (HtmlPage)testAnchor.click();
         assertEquals( "second", secondPage.getTitleText() );
      }
