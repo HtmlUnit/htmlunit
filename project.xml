@@ -179,6 +179,9 @@
         <contributor>
             <name>Michael Ottati</name>
         </contributor>
+        <contributor>
+            <name>George Murnock</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

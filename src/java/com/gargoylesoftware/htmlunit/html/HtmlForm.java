@@ -67,6 +67,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author  Brad Clarke
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
+ * @author George Murnock
  */
 public class HtmlForm extends ClickableElement {
 
@@ -148,8 +149,8 @@ public class HtmlForm extends ClickableElement {
 
         final String action = getActionAttribute();
         final HtmlPage htmlPage = getPage();
-        if( submitElement != null ) {
-            if( htmlPage.getWebClient().isJavaScriptEnabled() ) {
+        if( htmlPage.getWebClient().isJavaScriptEnabled() ) {
+            if( submitElement != null ) {
                 final String onSubmit = getOnSubmitAttribute();
                 if( onSubmit.length() != 0 ) {
                     final ScriptResult scriptResult
@@ -158,17 +159,17 @@ public class HtmlForm extends ClickableElement {
                         return scriptResult.getNewPage();
                     }
                 }
-    
-                if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
-                    return htmlPage.executeJavaScriptIfPossible( action, "Form action", false, this ).getNewPage();
-                }
             }
-            else {
-                if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
-                    // The action is javascript but javascript isn't enabled.  Return
-                    // the current page.
-                    return htmlPage;
-                }
+    
+            if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
+                 return htmlPage.executeJavaScriptIfPossible( action, "Form action", false, this ).getNewPage();
+            }
+        }
+        else {
+            if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
+                // The action is javascript but javascript isn't enabled.  Return
+                // the current page.
+                return htmlPage;
             }
         }
 
