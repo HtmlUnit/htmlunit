@@ -1175,7 +1175,7 @@ public final class HtmlPage
             return;
         }
 
-        final String refreshString = getRefreshStringOrNull();        
+        final String refreshString = getRefreshStringOrNull();
         if( refreshString == null ) {
             return;
         }
@@ -1199,6 +1199,10 @@ public final class HtmlPage
         }
     }
 
+    /**
+     * Return an auto-refresh string if specified.  This will look in both the meta
+     * tags and inside the http response headers.
+     */
     private String getRefreshStringOrNull() {
         final Iterator iterator
             = getHtmlElementsByTagNames( Collections.singletonList("meta") ).iterator();
@@ -1211,7 +1215,7 @@ public final class HtmlPage
 
         return getWebResponse().getResponseHeaderValue("Refresh");
     }
-    
+
     private void initializeFramesIfNeeded() {
         // The act of creating the html element will cause initialization to start
         getHtmlElementsByTagNames( Arrays.asList( new String[]{"frame", "iframe"}) );
