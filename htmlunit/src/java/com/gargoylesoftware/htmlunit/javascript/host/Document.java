@@ -106,7 +106,10 @@ public final class Document extends HTMLElement {
 
     /**
      * javascript function "write".
-     * @param text The text to write
+     * @param The javascript context
+     * @param Scriptable The scriptable
+     * @param args The arguments passed into the method.
+     * @param function The function.
      */
     public static Object jsFunction_write(
         final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
@@ -120,7 +123,10 @@ public final class Document extends HTMLElement {
 
     /**
      * javascript function "writeln".
-     * @param text The text to write
+     * @param The javascript context
+     * @param Scriptable The scriptable
+     * @param args The arguments passed into the method.
+     * @param function The function.
      */
     public static Object jsFunction_writeln(
         final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
