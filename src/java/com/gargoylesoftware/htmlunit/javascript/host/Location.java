@@ -58,12 +58,21 @@ public class Location extends SimpleScriptable {
     }
 
 
+    /**
+     * Reload the window with the specified url
+     * @param href The new url
+     */
     public void jsFunction_reload( final String href ) {
         getLog().debug("Not implemented yet: reload("+href+")");
     }
+
+
+    /**
+     * Reload the window with the specified url
+     * @param href The new url
+     */
     public void jsFunction_replace( final String href ) {
         getLog().debug("Not implemented yet: replace("+href+")");
     }
-
 }
 

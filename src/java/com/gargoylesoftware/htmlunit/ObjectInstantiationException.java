@@ -9,16 +9,31 @@ package com.gargoylesoftware.htmlunit;
 import java.io.PrintWriter;
 import java.io.PrintStream;
 
+/**
+ * Thrown if an object could not be instantiated for some reason.
+ *
+ * @version  $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ */
 public class ObjectInstantiationException extends RuntimeException {
     private final Throwable causeException_;
 
 
+    /**
+     * Create an instance.
+     * @param message A message explaining the failure
+     * @param cause The exception that was thrown
+     */
     public ObjectInstantiationException( final String message, final Throwable cause ) {
         super(message);
         causeException_ = cause;
     }
 
 
+    /**
+     * Return the exception that had been thrown during instantiation of the object.
+     * @return The cause exception
+     */
     public Throwable getCauseException() {
         return causeException_;
     }

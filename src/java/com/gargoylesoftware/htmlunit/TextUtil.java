@@ -6,11 +6,23 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+/**
+ * Utility methods relating to text.
+ *
+ * @version  $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ */
 public final class TextUtil {
     /** Private constructor to prevent instantiation */
     private TextUtil() {}
 
 
+    /**
+     * Return true if the string starts with the specified prefix, irrespective of case.
+     * @param stringToCheck The string to check
+     * @param prefix The prefix
+     * @return true if the string starts with the prefix.
+     */
     public static boolean startsWithIgnoreCase( final String stringToCheck, final String prefix ) {
         assertNotNull("stringToCheck", stringToCheck);
         assertNotNull("prefix", prefix);

@@ -9,11 +9,8 @@ package com.gargoylesoftware.htmlunit;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringBufferInputStream;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
@@ -59,7 +56,7 @@ public class WebClient {
 
     private WebWindow currentWindow_ = new TopLevelWindow("", this);
 
-    private static URLStreamHandler javaScriptUrlStreamHandler_
+    private static URLStreamHandler JavaScriptUrlStreamHandler_
         = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
 
 
@@ -798,7 +795,7 @@ public class WebClient {
         assertNotNull("urlString", urlString);
 
         if( TextUtil.startsWithIgnoreCase(urlString, "javascript:") ) {
-            return new URL(null, urlString, javaScriptUrlStreamHandler_);
+            return new URL(null, urlString, JavaScriptUrlStreamHandler_);
         }
         else {
             return new URL(urlString);
