@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+			<action type="update" dev="cerskine">
+                Reworked the JavaScript configuration.  Configuration file is now used and supports the
+                browser constraints on the properties and functions.
+			</action>
             <action type="update" dev="mguillem">
                 Javascript: navigator properties now depend from used BrowserVersion.
             </action>

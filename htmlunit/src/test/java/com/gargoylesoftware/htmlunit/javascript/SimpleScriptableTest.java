@@ -62,6 +62,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author  David K. Taylor
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class SimpleScriptableTest extends WebTestCase {
     /**

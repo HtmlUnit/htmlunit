@@ -16,28 +16,29 @@
 		url="http://msdn.microsoft.com/workshop/author/dhtml/reference/dhtml_reference_entry.asp"
 		descr="HTML and DHTML Reference on MSDN"/>
 
-    <class name="ActiveXObject">
-        <function name="ActiveXObject">
-            <browser name="Microsoft Internet Explorer"/>
-        </function>
+    <class name="ActiveXObject" classname="com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject">
+        <browser name="Microsoft Internet Explorer" min-version="4"/>
     </class>
 
-    <class name="Anchor" extends="FocusableHostElement">
+    <class name="Anchor" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Anchor">
         <javascript min-version="1.2"/>
 		
-        <property name="href" readable="true" writable="true" always-available="true"/>
-        <property name="name" readable="true" writable="true" always-available="true"/>
-        <property name="tabindex" readable="true" writable="true"/>
-        <property name="text" readable="true" writable="true">
-            <browser name="Netscape" min-version="4" less-than-version="5"/>
+        <property name="href" readable="true" writable="true"/>
+        <property name="name" notImplemented="true" readable="true" writable="true">
+		</property>
+        <property name="tabindex" notImplemented="true" readable="true" writable="true">
+		</property>
+        <property name="text" notImplemented="true" readable="true" writable="true">
+            <browser name="Netscape" min-version="4" max-version="4.8"/>
         </property>
     </class>
 
-    <class name="Button" extends="FormField"/>
+    <class name="Button" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.Button"/>
 
-    <class name="CharacterDataImpl" extends="NodeImpl">
+    <class name="CharacterDataImpl" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl">
         <property name="data" readable="true" writable="true"/>
         <property name="length" readable="true" writable="false"/>
+        <property name="tabindex" notImplemented="true" readable="true" writable="true"/>
         
 		<function name="appendData"/>
         <function name="deleteData"/>
@@ -46,9 +47,9 @@
         <function name="substringData"/>
     </class>
 
-    <class name="Checkbox" extends="Input"/>
+    <class name="Checkbox" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"/>
 
-    <class name="Document" extends="NodeImpl">
+    <class name="Document" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Document">
 		<!-- NOT FINISHED -->
 
 		<doclink
@@ -61,11 +62,11 @@
         <property name="all" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
-        <property name="alinkColor" readable="true" writable="false"/>
-        <property name="anchors" readable="true" writable="false"/>
-        <property name="applets" readable="true" writable="false"/>
+        <property name="alinkColor" notImplemented="true" readable="true" writable="false"/>
+        <property name="anchors" notImplemented="true" readable="true" writable="false"/>
+        <property name="applets" notImplemented="true" readable="true" writable="false"/>
         <property name="body" readable="true" writable="false"/>
-        <property name="bgColor" readable="true" writable="false"/>
+        <property name="bgColor" notImplemented="true" readable="true" writable="false"/>
         <property name="cookie" readable="true" writable="true">
 			<doclink
 				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cookie.asp"
@@ -77,23 +78,23 @@
 				url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147"
 				descr="WC3 Documentation (Level 1)"/>
 		</property>
-        <property name="embeds" readable="true" writable="false">
+        <property name="embeds" notImplemented="true" readable="true" writable="false">
             <javascript min-version="1.1"/>
         </property>
-        <property name="fgColor" readable="true" writable="false"/>
+        <property name="fgColor" notImplemented="true" readable="true" writable="false"/>
         <property name="forms" readable="true" writable="false"/>
         <property name="images" readable="true" writable="false">
             <javascript min-version="1.1"/>
         </property>
-        <property name="lastModified" readable="true" writable="false"/>
-        <property name="linkColor" readable="true" writable="false"/>
+        <property name="lastModified" notImplemented="true" readable="true" writable="false"/>
+        <property name="linkColor" notImplemented="true" readable="true" writable="false"/>
         <property name="links" readable="true" writable="false"/>
         <property name="location" readable="true" writable="true">
 			<doclink
 				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_location.asp"
 				descr="MSDN documentation"/>
 		</property>
-        <property name="plugins" readable="true" writable="false">
+        <property name="plugins" notImplemented="true" readable="true" writable="false">
             <javascript min-version="1.1"/>
         </property>
         <property name="readyState" readable="true" writable="false">
@@ -103,9 +104,9 @@
         <property name="scripts" readable="true" writable="false"/>
         <property name="title" readable="true" writable="true"/>
         <property name="URL" readable="true" writable="false"/>
-        <property name="vlinkColor" readable="true" writable="false"/>
+        <property name="vlinkColor" notImplemented="true" readable="true" writable="false"/>
 
-        <function name="clear"/>
+        <function name="clear" notImplemented="true"/>
         <function name="close"/>
         <function name="createAttribute"/>
         <function name="createElement"/>
@@ -122,20 +123,20 @@
         <function name="writeln"/>
     </class>
 
-    <class name="Event">
+    <class name="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.Event">
         <property name="currentTarget" readable="true" writable="false"/>
     </class>
 
-    <class name="FileUpload" extends="Input">
+    <class name="FileUpload" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input">
 		<!-- NOT FINISHED -->
 	</class>
 
-    <class name="FocusableHostElement" extends="HTMLElement">
+    <class name="FocusableHostElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement">
         <function name="blur"/>
         <function name="focus"/>
     </class>
 
-    <class name="Form" extends="HTMLElement">
+    <class name="Form" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Form">
 		<!-- NOT FINISHED -->
 		
 		<doclink
@@ -148,14 +149,14 @@
         <property name="length" readable="true" writable="false"/>
         <property name="method" readable="true" writable="true"/>
 		<property name="name" readable="true" writable="false"/>
+		<property name="onsubmit" readable="true" writable="true"/>
         <property name="target" readable="true" writable="true"/>
-        <property name="onsubmit" readable="true" writable="true"/>
 
         <function name="reset"/>
 		<function name="submit"/>
     </class>
 
-    <class name="Frame" extends="HTMLElement">
+    <class name="Frame" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Frame">
         <property name="onload" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="3"/>
@@ -163,11 +164,11 @@
         <property name="src" readable="true" writable="true"/>
     </class>
 
-    <class name="Hidden" extends="Input">
+    <class name="Hidden" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input">
 		<!-- NOT FINISHED -->
 	</class>
 
-    <class name="History">
+    <class name="History" classname="com.gargoylesoftware.htmlunit.javascript.host.History">
         <property name="length" readable="true" writable="false"/>
 
         <function name="back"/>
@@ -175,8 +176,8 @@
         <function name="go"/>
     </class>
 
-    <class name="HTMLElement" extends="NodeImpl">
-        <property name="all" readable="true" writable="false">
+    <class name="HTMLElement" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLElement">
+        <property name="all" notImplemented="true" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="children" readable="true" writable="false">
@@ -192,7 +193,7 @@
         <property name="disabled" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
-        <property name="document" readable="true" writable="false">
+        <property name="document" notImplemented="true" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="id" readable="true" writable="true">
@@ -206,13 +207,13 @@
         <property name="innerText" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
-        <property name="lang" readable="true" writable="true">
+        <property name="lang" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </property>
         <property name="offsetHeight" readable="true" writable="false"/>
         <property name="offsetLeft" readable="true" writable="false"/>
-        <property name="offsetParent" readable="true" writable="false">
+        <property name="offsetParent" notImplemented="true" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="offsetTop" readable="true" writable="false"/>
@@ -275,16 +276,20 @@
 				descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
-        <property name="outerText" readable="true" writable="true">
+        <property name="outerText" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
-        <property name="parentElement" readable="true" writable="false">
+        <property name="parentElement" notImplemented="true" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
-        <property name="sourceIndex" readable="true" writable="false">
+        <property name="sourceIndex" notImplemented="true" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
-        <property name="style" readable="true" writable="true">
+        <property name="style" notImplemented="true" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="style" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </property>
@@ -292,7 +297,7 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </property>
-        <property name="title" readable="true" writable="true">
+        <property name="title" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </property>
@@ -300,7 +305,7 @@
         <function name="addBehavior">
             <browser name="Microsoft Internet Explorer" min-version="5"/>
         </function>
-        <function name="contains">
+        <function name="contains" notImplemented="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
         <function name="getAttribute">
@@ -309,24 +314,24 @@
         </function>
         <function name="getAttributeNode"/>
         <function name="getElementsByTagName"/>
-        <function name="handleEvent"/>
+        <function name="handleEvent" notImplemented="true"/>
         <function name="insertAdjacentHTML">
 			<doclink
 				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertadjacenthtml.asp"
 				descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
-        <function name="insertAdjacentText">
+        <function name="insertAdjacentText" notImplemented="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
-        <function name="onhelp">
+        <function name="onhelp" notImplemented="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
         <function name="removeAttribute">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </function>
-        <function name="scrollIntoView">
+        <function name="scrollIntoView" notImplemented="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
         <function name="setAttribute">
@@ -339,19 +344,21 @@
         </function>
     </class>
 
-    <class name="Image" extends="HTMLElement">
+    <class name="Image" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Image">
         <property name="src" readable="true" writable="true"/>
-    </class>
+	</class>
 
-    <class name="FormField" extends="FocusableHostElement">
+    <class name="FormField" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FormField">
         <property name="disabled" readable="true" writable="true"/>
-        <property name="form" readable="true" writable="true"/>
+        <property name="form" notImplemented="true" readable="true" writable="true"/>
+        <property name="form" readable="true" writable="false"/>
         <property name="name" readable="true" writable="true"/>
         <property name="onchange" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="3"/>
         </property>
-        <property name="tabindex" readable="true" writable="true"/>
+        <property name="tabindex" readable="true" writable="false"/>
+        <property name="tabindex" notImplemented="true" readable="true" writable="true"/>
         <property name="type" readable="true" writable="false">
             <javascript min-version="1.1"/>
         </property>
@@ -362,29 +369,31 @@
         <function name="select"/>
     </class>
 
-    <class name="Input" extends="FormField">
+    <class name="Input" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.Input">
         <property name="checked" readable="true" writable="true"/>
-        <property name="defaultChecked" readable="true" writable="true"/>
-        <property name="defaultValue" readable="true" writable="true"/>
+        <property name="defaultChecked" notImplemented="true" readable="true" writable="true"/>
+        <property name="defaultValue" notImplemented="true" readable="true" writable="true"/>
         <property name="type" readable="true" writable="true">
             <javascript min-version="1.1"/>
         </property>
     </class>
 
-    <class name="Location">
+    <class name="Location" classname="com.gargoylesoftware.htmlunit.javascript.host.Location">
         <property name="hash" readable="true" writable="false"/>
         <property name="host" readable="true" writable="false"/>
         <property name="hostname" readable="true" writable="false"/>
+		<property name="href" readable="true" writable="true"/>
         <property name="pathname" readable="true" writable="false"/>
         <property name="port" readable="true" writable="false"/>
         <property name="protocol" readable="true" writable="false"/>
         <property name="search" readable="true" writable="false"/>
 
         <function name="reload"/>
-        <function name="refresh"/>
+        <function name="replace"/>
+        <function name="refresh" notImplemented="true"/>
     </class>
 
-    <class name="Navigator">
+    <class name="Navigator" classname="com.gargoylesoftware.htmlunit.javascript.host.Navigator">
 		<doclink
 			url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_navigator.asp"
 			descr="MSDN documentation"/>
@@ -407,7 +416,7 @@
         <function name="taintEnabled"/>
     </class>
 
-    <class name="NodeImpl">
+    <class name="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.NodeImpl">
         <property name="childNodes" readable="true" writable="false"/>
         <property name="firstChild" readable="true" writable="false"/>
         <property name="lastChild" readable="true" writable="false"/>
@@ -426,22 +435,22 @@
         <function name="replaceChild"/>
     </class>
 
-    <class name="Option" extends="HTMLElement">
-        <property name="defaultSelected" readable="true" writable="false"/>
+    <class name="Option" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Option">
+        <property name="defaultSelected" notImplemented="true" readable="true" writable="false"/>
         <property name="selected" readable="true" writable="true"/>
         <property name="text" readable="true" writable="true"/>
         <property name="value" readable="true" writable="true"/>
     </class>
 
-    <class name="Password" extends="Input">
+    <class name="Password" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input">
 		<!-- NOT FINISHED -->
 	</class>
 
-    <class name="Radio" extends="Input">
+    <class name="Radio" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input">
 		<!-- NOT FINISHED -->
 	</class>
 
-    <class name="RowContainer" extends="HTMLElement">
+    <class name="RowContainer" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.RowContainer">
         <property name="rows" readable="true" writable="false"/>
 		
         <function name="deleteRow">
@@ -463,11 +472,11 @@
         <function name="moveRow"/>
     </class>
 
-    <class name="Reset" extends="Input">
+    <class name="Reset" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input">
 		<!-- NOT FINISHED -->
 	</class>
 
-    <class name="Screen">
+    <class name="Screen" classname="com.gargoylesoftware.htmlunit.javascript.host.Screen">
 		<doclink
 			url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_screen.asp"
 			descr="MSDN documentation"/>
@@ -494,7 +503,7 @@
         <property name="width" readable="true" writable="false"/>
     </class>
 
-    <class name="Select" extends="FormField">
+    <class name="Select" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.Select">
 		<!-- NOT FINISHED -->
         
 		<property name="length" readable="true" writable="true"/>
@@ -505,13 +514,14 @@
         <function name="remove"/>
     </class>
 
-    <class name="Submit" extends="Input">
+    <class name="Submit" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input">
 		<!-- NOT FINISHED -->
-        
+<!-- 
 		<property name="length" readable="true" writable="false"/>
+ -->
     </class>
 
-    <class name="Table" extends="RowContainer">
+    <class name="Table" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.Table">
 		<property name="caption" readable="true" writable="false"/>
         <property name="tBodies" readable="true" writable="false"/>
 		<property name="tFoot" readable="true" writable="false"/>
@@ -549,13 +559,13 @@
         </function>
     </class>
 
-    <class name="TableBody" extends="RowContainer"/>
+    <class name="TableBody" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.TableBody"/>
 
-    <class name="TableFooter" extends="RowContainer"/>
+    <class name="TableFooter" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.TableFooter"/>
 
-    <class name="TableHeader" extends="RowContainer"/>
+    <class name="TableHeader" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.TableHeader"/>
 
-    <class name="TableRow" extends="HTMLElement">
+    <class name="TableRow" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.TableRow">
 		<doclink
 			url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-6986576"
 			descr="W3c DOM Level 2"/>
@@ -581,24 +591,24 @@
 		</function>
 	</class>
 	
-    <class name="Textarea" extends="FormField">
+    <class name="Textarea" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.Textarea">
 		<!-- NOT FINISHED -->
 	</class>
 
-    <class name="TextImpl" extends="CharacterDataImpl">
+    <class name="TextImpl" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.TextImpl">
         <function name="splitText"/>
     </class>
 
-    <class name="Window">
+    <class name="Window" classname="com.gargoylesoftware.htmlunit.javascript.host.Window">
         <!-- NOT FINISHED -->
 		
 		<doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp"
 				descr="MSDN documenation"/>
 
         <property name="location" readable="true" writable="true">
-            <browser name="Netscape" min-version="3" max-version="5"/>
-            <browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>
-            <javascript min-version="1" max-version="2"/>
+            <browser name="Netscape" min-version="3"/>
+            <browser name="Microsoft Internet Explorer" min-version="3"/>
+            <javascript min-version="1"/>
         </property>
         <property name="document" readable="true" writable="false"/>
         <property name="navigator" readable="true" writable="false"/>

@@ -145,7 +145,7 @@ public class FrameTest extends WebTestCase {
             + "    <frame name='Frame1' src='subdir/frame.html'>"
             + "</frameset></html>";
         final String defaultContent
-        = "<html><head><script>alert(location)</script></head></html>";
+            = "<html><head><script>alert(location)</script></head></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(defaultContent);
