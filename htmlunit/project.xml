@@ -16,21 +16,21 @@
   </organization>
 
 
-  <shortDescription>Jakarta Commons HttpClient</shortDescription>
+  <shortDescription>HtmlUnit - A testing tool for web based applications</shortDescription>
   <description>
-	The HttpClient  component supports the client-side of RFC 1945 (HTTP/1.0)  and RFC 2616 (HTTP/1.1) , several related specifications (RFC 2109 (Cookies) , RFC 2617 (HTTP Authentication) , etc.), and provides a framework by which new request types (methods) or HTTP extensions can be created easily.
+  A testing tool for web based applications
   </description>
 
-  <logo>/images/httpclient_logo.png</logo>
-  <url>http://jakarta.apache.org/commons/httpclient/</url>
-  <issueTrackingUrl><![CDATA[http://nagoya.apache.org/bugzilla/buglist.cgi?bug_status=UNCONFIRMED&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;component=HttpClient]]></issueTrackingUrl>
+  <logo></logo>
+  <url>http://htmlunit.sourceforge.net</url>
+  <issueTrackingUrl></issueTrackingUrl>
 
-  <siteAddress>jakarta.apache.org</siteAddress>
-  <siteDirectory>/www/jakarta.apache.org/commons/httpclient/</siteDirectory>
-  <distributionDirectory>/www/jakarta.apache.org/builds/jakarta-commons/httpclient</distributionDirectory>
+  <siteAddress>htmlunit.sourceforge.net</siteAddress>
+  <siteDirectory>/</siteDirectory>
+  <distributionDirectory></distributionDirectory>
   <repository>
-	<connection>scm:cvs:pserver:anoncvs@cvs.apache.org:/home/cvspublic:jakarta-commons/httpclient/</connection>
-	<url>http://cvs.apache.org/viewcvs/jakarta-commons/httpclient/</url>
+	<connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/htmlunit</connection>
+	<url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/htmlunit/</url>
   </repository>
 
   <versions>
@@ -43,22 +43,10 @@
 
   <mailingLists>
 	<mailingList>
-	  <name>HttpClient Mailing List</name>
-	  <subscribe> commons-httpclient-dev-subscribe@jakarta.apache.org </subscribe>
-	  <unsubscribe> commons-httpclient-dev-unsubscribe@jakarta.apache.org </unsubscribe>
-	  <archive>http://archives.apache.org/eyebrowse/SummarizeList?listId=128</archive>
-	</mailingList>
-	<mailingList>
-	  <name>Commons Developer List</name>
-	  <subscribe>commons-dev-subscribe@jakarta.apache.org</subscribe>
-	  <unsubscribe>commons-dev-unsubscribe@jakarta.apache.org</unsubscribe>
-	  <archive>http://archives.apache.org/eyebrowse/SummarizeList?listId=15</archive>
-	</mailingList>
-	<mailingList>
-	  <name>Commons User List</name>
-	  <subscribe>commons-user-subscribe@jakarta.apache.org</subscribe>
-	  <unsubscribe>commons-user-unsubscribe@jakarta.apache.org</unsubscribe>
-	  <archive>http://archives.apache.org/eyebrowse/SummarizeList?listId=105</archive>
+	  <name>HtmlUnit Mailing list</name>
+	  <subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</subscribe>
+	  <unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</unsubscribe>
+	  <archive>http://sourceforge.net/mailarchive/forum.php?forum=htmlunit-develop</archive>
 	</mailingList>
   </mailingLists>
 
@@ -75,12 +63,14 @@
 	</developer>
   </developers>
 
-  <contributors>
+<contributors>
+<!--
 	<contributor>
-	  <name>Armando Antón</name>
-	  <email>armando.anton@newknow.com</email>
+	  <name></name>
+	  <email></email>
 	</contributor>
-  </contributors>
+-->
+</contributors>
 
 <dependencies>
 	<dependency>
@@ -167,15 +157,15 @@
 </dependencies>
 
 	<build>
-	<nagEmailAddress>commons-httpclient-dev@jakarta.apache.org</nagEmailAddress>
+	<nagEmailAddress>mbowler@GargoyleSoftware.com</nagEmailAddress>
 	<sourceDirectory>src/java</sourceDirectory>
-	<unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+	<unitTestSourceDirectory>src/java</unitTestSourceDirectory>
 	<integrationUnitTestSourceDirectory/>
 	<aspectSourceDirectory/>
 
 		<unitTest>
 			<includes>
-				<include>**/TestNoHost.java</include>
+				<include>**/*Test.java</include>
 			</includes>
 		</unitTest>
 	<jars></jars>
