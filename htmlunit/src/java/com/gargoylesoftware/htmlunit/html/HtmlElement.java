@@ -589,7 +589,7 @@ public abstract class HtmlElement {
      * @return  A URL
      * @exception  MalformedURLException If a URL cannot be created from this
      *      href
-     * @deprecated Use {@link HtmlPage#getFullyQualifiedUrl(String)} instead
+     * @deprecated Use {@link HtmlPage#getFullyQualifiedUrl(String)} instead.
      */
     public final URL makeUrlFromHref( String href )
         throws MalformedURLException {
@@ -661,7 +661,7 @@ public abstract class HtmlElement {
     /**
      * Internal use only - subject to change without notice.<p>
      * Return the javascript object that corresponds to this element.
-     * @return The javascript object that corresponsd to this element.
+     * @return The javascript object that corresponds to this element.
      */
     public Object getScriptObject() {
         return scriptObject_;
