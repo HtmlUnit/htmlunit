@@ -279,6 +279,7 @@ public final class HtmlPage
      *
      * @param  name The name to search by
      * @return  See above
+     * @throws ElementNotFoundException If the anchor could not be found.
      */
     public HtmlAnchor getAnchorByName( final String name ) throws ElementNotFoundException {
         return ( HtmlAnchor )getPage().getOneHtmlElementByAttribute( "a", "name", name );
@@ -290,6 +291,7 @@ public final class HtmlPage
      *
      * @param  href The string to search by
      * @return  The HtmlAnchor
+     * @throws ElementNotFoundException If the anchor could not be found.
      */
     public HtmlAnchor getAnchorByHref( final String href ) throws ElementNotFoundException {
         return ( HtmlAnchor )getPage().getOneHtmlElementByAttribute( "a", "href", href );
@@ -773,7 +775,9 @@ public final class HtmlPage
 
 
     /**
-     * Internal use only.  This is a callback from {@link ScriptFilter} and should not be called by consumers of HtmlUnit.
+     * Internal use only.  This is a callback from {@link ScriptFilter} and
+     * should not be called by consumers of HtmlUnit.
+     * @param srcAttribute The source attribute from the script tag.
      */
     public void loadExternalJavaScriptFile( final String srcAttribute  ) {
         final ScriptEngine engine = getWebClient().getScriptEngine();
@@ -786,6 +790,9 @@ public final class HtmlPage
     /**
      * Internal use only.  Return true if a script with the specified type and language attributes
      * is actually JavaScript.
+     * @param typeAttribute The type attribute specified in the script tag.
+     * @param languageAttribute The language attribute specified in the script tag.
+     * @return true if the script is javascript
      */
     public boolean isJavaScript( final String typeAttribute, final String languageAttribute ) {
         // Unless otherwise specified, we have to assume that any script is javascript

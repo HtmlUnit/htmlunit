@@ -268,6 +268,7 @@ public class HtmlForm extends HtmlElement {
      *
      * @param  name The name of the input
      * @return  The input
+     * @throws ElementNotFoundException If no inputs could be found with the specified name.
      */
     public final HtmlInput getInputByName( final String name ) throws ElementNotFoundException {
         final List inputs = getHtmlElementsByAttribute( "input", "name", name );
@@ -321,6 +322,7 @@ public class HtmlForm extends HtmlElement {
      * Find the first select element with the specified name
      * @param name The name of the select element
      * @return The first select.
+     * @throws ElementNotFoundException If the select cannot be found.
      */
     public HtmlSelect getSelectByName( final String name ) throws ElementNotFoundException {
         final List list = getSelectsByName( name );

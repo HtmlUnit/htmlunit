@@ -55,6 +55,10 @@ public final class Navigator extends SimpleScriptable {
     }
 
 
+    /**
+     * Return false always as java support is not enabled in HtmlUnit
+     * @return false.
+     */
     public boolean jsGet_javaEnabled() {
         return false;
     }
