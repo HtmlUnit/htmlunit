@@ -304,7 +304,7 @@ public class WebClient {
         final String contentType = webResponse.getContentType();
         final int statusCode = webResponse.getStatusCode();
 
-        final boolean wasResponseSuccessful = ( statusCode <= 200 && statusCode < 300 );
+        final boolean wasResponseSuccessful = ( statusCode >= 200 && statusCode < 300 );
 
         if( printContentOnFailingStatusCode_ == true && wasResponseSuccessful == false ) {
             getLog().info( "statusCode=[" + statusCode
