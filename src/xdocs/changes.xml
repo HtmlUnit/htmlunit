@@ -8,6 +8,9 @@
     <body>
         <release version="next" date="unknown">
             <action type="update" dev="mguillem">
+                JavaScript: added support to get/set the onload property as a function for window and for frames.
+            </action>
+            <action type="update" dev="mguillem">
                 INCOMPATIBLE CHANGE: HtmlFrame and HtmlInlineFrame don't implement WebWindow anymore but now contain a WebWindow accessible
 				by getEnclosedWindow(). Javascript handling of frames works better due to the distinction between frame element and contained window.
             </action>

@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -112,24 +113,23 @@ public class HtmlFrameTest extends WebTestCase {
             = "<html><head><title>first</title></head>"
             + "<frameset cols='20%,80%'>"
             + "    <frame id='frame1'>"
-            + "    <frame onload=\"alert('onload');\"  id='frame2'>"
+            + "    <frame onload='alert(this.tagName)' id='frame2'>"
             + "</frameset></html>";
-        webConnection.setResponse( URL_FIRST, firstContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST);
+        final List expectedAlerts = Arrays.asList( new String[]{"FRAME"} );
 
+        webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage)webClient.getPage(
-            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
-        assertEquals( "first", page.getTitleText() );
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals("first", page.getTitleText());
 
         final HtmlFrame frame1 = (HtmlFrame)page.getHtmlElementById("frame1");
-        assertEquals( "frame1", "", ((HtmlPage)frame1.getEnclosedPage()).getTitleText() );
+        assertEquals("frame1", "", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
 
         final HtmlFrame frame2 = (HtmlFrame)page.getHtmlElementById("frame2");
-        assertEquals( "frame2", "", ((HtmlPage)frame2.getEnclosedPage()).getTitleText() );
+        assertEquals("frame2", "", ((HtmlPage)frame2.getEnclosedPage()).getTitleText());
 
-        assertEquals( Collections.singletonList("onload"), collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

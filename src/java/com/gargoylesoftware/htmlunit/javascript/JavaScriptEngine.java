@@ -52,10 +52,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
-import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
-import org.mozilla.javascript.WrappedException;
 
 /**
  * A wrapper for the <a href="http://www.mozilla.org/rhino">Rhino javascript engine</a>
@@ -336,27 +334,24 @@ public final class JavaScriptEngine extends ScriptEngine {
         // => keep trace of JS running or not
         final Boolean javaScriptAlreadyRunning = (Boolean) javaScriptRunning_.get();
         javaScriptRunning_.set(Boolean.TRUE);
+        final Function function = (Function) javaScriptFunction;
         try {
-            final Object result = ((Function) javaScriptFunction).call( pageInfo.getContext(),
+            final Object result = function.call( pageInfo.getContext(),
                 scope, (Scriptable) thisObject, args );
             return result;
         }
-        catch (final ScriptException e) {
-            throw e;
-        }
-        catch (final WrappedException e) {
-            if (e.getWrappedException() instanceof ScriptException) {
-                throw (ScriptException) e.getWrappedException();
+        catch (final Exception e ) {
+            final ScriptException scriptException = new ScriptException( e, 
+                    pageInfo.getContext().decompileFunction(function, 2));  
+            if (getWebClient().isThrowExceptionOnScriptError()) {
+                throw scriptException;
             }
             else {
-                throw e;
+                // use a ScriptException to log it because it provides good information 
+                // on the source code
+                getLog().info("Catched script exception", scriptException);
+                return null;
             }
-        }
-        catch( final RhinoException e ) {
-            throw new ScriptException( e, toString( htmlPage, javaScriptFunction ) );
-        }
-        catch( final Throwable t ) {
-            throw new ScriptException(t, toString( htmlPage, javaScriptFunction ) );
         }
         finally {
             javaScriptRunning_.set(javaScriptAlreadyRunning);

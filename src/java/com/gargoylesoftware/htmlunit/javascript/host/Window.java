@@ -40,7 +40,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.apache.commons.collections.Transformer;
 import org.jaxen.JaxenException;
@@ -60,6 +62,7 @@ import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.ElementArray;
@@ -89,6 +92,7 @@ public class Window extends SimpleScriptable {
     private Screen screen_;
     private History history_;
     private Location location_;
+    private Function onload_;
 
     /**
      * Create an instance.  The rhino engine requires all host objects
@@ -550,33 +554,33 @@ public class Window extends SimpleScriptable {
     }
 
     /**
-     * Set the value of the onload property.
-     * @param newValue The new value
+     * Set the value of the onload event handler.
+     * @param newOnload The new handler
      */
-    public void jsSet_onload( final Object newValue ) {
-        if( webWindow_.getEnclosedPage() instanceof HtmlPage ) {
-            final HtmlPage page = (HtmlPage)webWindow_.getEnclosedPage();
-            if ( newValue instanceof Function ) {
-                page.setOnLoadAttribute( newValue );
-            }
-            else {
-                getLog().error( "Invalid value set to window.onload.  Value class: " + newValue.getClass () );
-            }
-        }
+    public void jsSet_onload(final Function newOnload) {
+        onload_ = newOnload;
     }
 
-
     /**
-     * Return the value of the onload property.
-     * @return the value of window.onload
+     * Return the onload event handler function.
+     * @return the onload event handler function.
      */
-    public Object jsGet_onload() {
-        if( webWindow_.getEnclosedPage() instanceof HtmlPage ) {
-            final HtmlPage page = (HtmlPage)webWindow_.getEnclosedPage();
-            return page.getOnLoadAttribute();
+    public Function jsGet_onload() {
+        if (onload_ == null) {
+            // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
+            final HtmlPage page = (HtmlPage) webWindow_.getEnclosedPage();
+            final List listTagNames = Arrays.asList(new String[] {"body", "frameset"});
+            final List listElements = page.getDocumentElement().getHtmlElementsByTagNames(listTagNames);
+            if (!listElements.isEmpty()) {
+                return ((HtmlElement) listElements.get(0)).getEventHandler("onload");
+            }
+            else {
+                return null;
+            }
         }
-
-        return "";
+        else {
+            return onload_;
+        }
     }
 
     /**
