@@ -8,6 +8,17 @@
     <body>
         <release version="1.3-pre2" date="Not released yet">
             <action type="update" dev="yourgod">
+				Added support for setting select.selectedIndex from javascript
+            </action>             
+            <action type="update" dev="yourgod">
+				Changed HtmlSelect.fakeSelectedAttribute() to use an empty string
+				as no value at all (nothing submitted)
+            </action>             
+            <action type="update" dev="yourgod">
+				Fixed bug where a select option with no value attribute was not
+				submitted with it's contents
+            </action>           
+            <action type="update" dev="yourgod">
 				DefaultPageCreator can now be easily extended to add custom
 				content type handling without affecting the default handlers.
             </action>        

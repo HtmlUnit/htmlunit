@@ -132,4 +132,33 @@ public class HtmlOptionTest extends WebTestCase {
         assertEquals("Number Two", option2.getValue());
 
     }    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetValue_ContentsIsValue() throws Exception {
+
+        final String htmlContent
+        = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>" 
+            + "<select name='select1' id='select1'>"
+            + "     <option id='option1'>Option1</option>"
+            + "     <option id='option2' selected>Number Two</option>"
+            + "</select>"
+            + "<input type='submit' name='button' value='foo'/>"
+            + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
+
+        final HtmlOption option1 = ( HtmlOption )page.getHtmlElementById( "option1" );
+        final HtmlOption option2 = ( HtmlOption )page.getHtmlElementById( "option2" );
+        
+        assertEquals("Option1", option1.getValue());
+        assertEquals("Number Two", option2.getValue());
+
+    }        
 }

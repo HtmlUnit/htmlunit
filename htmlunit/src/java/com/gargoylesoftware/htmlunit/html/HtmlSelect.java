@@ -348,14 +348,17 @@ public class HtmlSelect extends ClickableElement implements SubmittableElement {
 
             for( int i = 0; i < optionCount; i++ ) {
                 final HtmlOption option = ( HtmlOption )selectedOptions.get( i );
-                pairs[i] = new KeyValuePair( name, option.getValueAttribute() );
+                pairs[i] = new KeyValuePair( name, option.getValue() );
             }
         }
         else {
-            pairs = new KeyValuePair[fakeSelectedValues_.length];
-            for( int i = 0; i < pairs.length; i++ ) {
-                pairs[i] = new KeyValuePair( name, fakeSelectedValues_[i] );
+            final List pairsList = new ArrayList();
+            for( int i = 0; i < fakeSelectedValues_.length; i++ ) {
+                if (fakeSelectedValues_[i].length() > 0) {
+                    pairsList.add(new KeyValuePair( name, fakeSelectedValues_[i] ));
+                }
             }
+            pairs = (KeyValuePair[]) pairsList.toArray(new KeyValuePair[pairsList.size()]); 
         }
         return pairs;
     }
