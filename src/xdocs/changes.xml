@@ -7,6 +7,10 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                Added DebuggingWebConnection, a web connection that saves the received responses and builds an overview. 
+				Sometimes usefull at conception time to understand what is "browsed".
+            </action>
             <action type="update" dev="mguillem" due-to="Chris Eldredge" id="1090438">
                 Extended javascript event handler to most common events:  ondblclick, onmousedown, onmouseup,
 				onmousemove, onmouseover, onmouseout, onkeypress, onkeydown, onkeyup, onfocus, onblur.
