@@ -824,7 +824,6 @@ public class WebClient {
 
     /**
      * Clear the first window for this client.
-     * @param window The first window.
      */
     public void pushClearFirstWindow() {
         firstWindowStack_.push(null);

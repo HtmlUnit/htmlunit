@@ -1273,7 +1273,10 @@ public final class HtmlPage
         getHtmlElementsByTagNames( Arrays.asList( new String[]{"frame", "iframe"}) );
     }
 
-
+    /**
+     * Clean up the frames.  TODO: Explain what this is really doing.  What is
+     * meant by "cleaning up"?
+     */
     public void cleanUpFramesIfNeeded() {
         // The act of creating the html element will cause initialization to start
         List list = getHtmlElementsByTagNames( Arrays.asList( new String[]{"frame", "iframe"}) );
