@@ -68,6 +68,7 @@ public class FormTest extends WebTestCase {
 
          final List collectedAlerts = new ArrayList();
          final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
 
          final List expectedAlerts = Arrays.asList( new String[]{
              "16", "button1", "button2", "checkbox1", "fileupload1", "hidden1",
@@ -100,6 +101,7 @@ public class FormTest extends WebTestCase {
 
          final List collectedAlerts = new ArrayList();
          final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
 
          final List expectedAlerts = Arrays.asList( new String[]{
              "3", "1", "2", "3"
@@ -127,6 +129,7 @@ public class FormTest extends WebTestCase {
 
          final List collectedAlerts = new ArrayList();
          final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
 
          final List expectedAlerts = Arrays.asList( new String[]{
              "1"
@@ -280,6 +283,7 @@ public class FormTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage )client.getPage(
                 new URL( "http://first" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals("foo", page.getTitleText());
         final List expectedAlerts = Arrays.asList( new String[]{
             name+"2", "foo"
         } );
@@ -298,7 +302,7 @@ public class FormTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final String firstContent
-             = "<html><head><title> Button Test </title></head><body><form name='whatsnew'>"
+             = "<html><head><title>Button Test</title></head><body><form name='whatsnew'>"
              + "<input type='radio' name='second' value='1'>"
              + "<input type='radio' name='second' value='2' checked>"
              + "</form><script>clickAction();\n"
@@ -320,6 +324,7 @@ public class FormTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         final HtmlPage page = (HtmlPage)client.getPage(new URL("http://first"));
+        assertEquals("Button Test", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{"value = 2"} );
         assertEquals( expectedAlerts, collectedAlerts );

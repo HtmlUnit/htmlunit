@@ -45,12 +45,12 @@ public class WebTestCase extends BaseTestCase {
     /**
      * @exception  Throwable
      */
-    public void runBare()
-        throws Throwable {
-        final long startTime = System.currentTimeMillis();
-        super.runBare();
-        final long endTime = System.currentTimeMillis();
-    }
+//    public void runBare()
+//        throws Throwable {
+//        final long startTime = System.currentTimeMillis();
+//        super.runBare();
+//        final long endTime = System.currentTimeMillis();
+//    }
 
 
     protected final HtmlPage loadPage( final String html ) throws Exception {

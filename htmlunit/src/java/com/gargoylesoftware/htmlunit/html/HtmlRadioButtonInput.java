@@ -38,8 +38,6 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * @param  isChecked true if this element is to be selected
      */
     public final void setChecked( final boolean isChecked ) {
-        final String type = getTypeAttribute();
-
         final HtmlForm form = getEnclosingForm();
 
         if( isChecked ) {

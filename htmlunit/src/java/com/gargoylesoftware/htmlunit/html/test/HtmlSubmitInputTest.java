@@ -59,6 +59,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
 
         final HtmlSubmitInput submitInput = (HtmlSubmitInput)form.getInputByName("button");
         final HtmlPage secondPage = (HtmlPage)submitInput.click();
+        assertEquals("foo", secondPage.getTitleText());
 
         assertEquals(
             Collections.singletonList(new KeyValuePair("button", "foo")),

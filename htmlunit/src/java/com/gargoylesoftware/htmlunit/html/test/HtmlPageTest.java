@@ -74,6 +74,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage )client.getPage(
                 new URL( "http://www.gargoylesoftware.com" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals("foo", page.getTitleText());
     }
 
 
@@ -732,6 +733,7 @@ public class HtmlPageTest extends WebTestCase {
                  + "</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
             "foo"
@@ -757,6 +759,7 @@ public class HtmlPageTest extends WebTestCase {
 
         // This used to blow up on page load
         final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Collections.EMPTY_LIST;
         assertEquals( expectedAlerts, collectedAlerts );

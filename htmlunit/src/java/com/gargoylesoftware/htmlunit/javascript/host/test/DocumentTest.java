@@ -47,6 +47,7 @@ public class DocumentTest extends WebTestCase {
 
          final List collectedAlerts = new ArrayList();
          final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
 
          final List expectedAlerts = Arrays.asList( new String[]{
              "2", "form1", "form2"
@@ -69,6 +70,7 @@ public class DocumentTest extends WebTestCase {
 
          final List collectedAlerts = new ArrayList();
          final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
 
          final List expectedAlerts = Arrays.asList( new String[]{
              "0"
@@ -90,13 +92,14 @@ public class DocumentTest extends WebTestCase {
                  + "<p>hello world</p>"
                  + "</body></html>";
 
-         final List collectedAlerts = new ArrayList();
-         final HtmlPage page = loadPage(content, collectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
 
-         final List expectedAlerts = Arrays.asList( new String[]{
-         } );
+        final List expectedAlerts = Arrays.asList( new String[]{
+        } );
 
-         assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
 

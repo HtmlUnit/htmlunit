@@ -120,6 +120,8 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSelect select = ( HtmlSelect )form.getSelectsByName( "select1" ).get( 0 );
+        assertNotNull(select);
+        
         final HtmlSubmitInput button = ( HtmlSubmitInput )form.getInputByName( "button" );
 
         // Test that the correct value is being passed back up to the server

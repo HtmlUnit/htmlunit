@@ -53,6 +53,7 @@ public class SimpleScriptableTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage )client.getPage(
                 new URL( "http://www.gargoylesoftware.com" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals("foo", page.getTitleText());
 
         assertEquals( expectedAlerts, collectedAlerts );
     }

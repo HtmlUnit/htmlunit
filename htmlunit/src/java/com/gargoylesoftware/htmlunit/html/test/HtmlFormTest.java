@@ -118,7 +118,8 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlInput pushButton = ( HtmlInput )form.getInputByName( "button" );
-
+		assertNotNull(pushButton);
+		
         try {
             form.setCheckedRadioButton( "foo", "4" );
             fail( "Expected foo" );

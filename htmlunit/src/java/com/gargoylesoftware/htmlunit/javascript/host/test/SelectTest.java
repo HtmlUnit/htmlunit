@@ -42,6 +42,7 @@ public class SelectTest extends WebTestCase {
 
          final List collectedAlerts = new ArrayList();
          final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
 
          final List expectedAlerts = Arrays.asList( new String[]{
              "3", "1"
@@ -73,6 +74,7 @@ public class SelectTest extends WebTestCase {
 
          final List collectedAlerts = new ArrayList();
          final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
 
          final List expectedAlerts = Arrays.asList( new String[]{
              "value1", "One", "value2", "Two", "value3", "Three"

@@ -57,6 +57,8 @@ public class HtmlTextAreaTest extends WebTestCase {
 
         final HtmlTextArea textArea
             = ( HtmlTextArea )form.getTextAreasByName( "textArea1" ).get( 0 );
+        assertNotNull(textArea);
+        
         final Page secondPage = form.submit();
 
         final List expectedParameters = new ArrayList();
