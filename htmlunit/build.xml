@@ -60,7 +60,7 @@
         <classpath refid="test.class.path"/>
     </javac>
 </target>
-<target name="jar" description="Make a jar of HtmlUnit" depends="compile">
+<target name="jar" description="Make a jar of HtmlUnit" depends="cleancompile,junit">
     <jar
         jarfile="target/HtmlUnit.jar"
         basedir="target/classes"
@@ -166,7 +166,7 @@
     <antcall target="get-dependency">
         <param name="type" value="required"/>
         <param name="project" value="nekohtml"/>
-        <param name="jarName" value="nekohtml-0.9.1.jar"/>
+        <param name="jarName" value="nekohtml-0.9.4.jar"/>
     </antcall>
     <antcall target="get-dependency">
         <param name="type" value="required"/>
