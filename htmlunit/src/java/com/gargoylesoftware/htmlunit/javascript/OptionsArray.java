@@ -93,7 +93,6 @@ public class OptionsArray extends SimpleScriptable {
         catch( final IndexOutOfBoundsException e ) {
             object = NOT_FOUND;
         }
-        System.out.println("OptionsArray.get("+index+") "+object);
         return object;
     }
 
