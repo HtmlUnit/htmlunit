@@ -325,10 +325,10 @@ public final class JavaScriptConfiguration {
                     parseFunctionElement(classConfiguration, childElement);
                 }
                 else if (tagName.equals("javascript")) {
-                    getLog().info("javascript tag not yet handled for class " + linkedClassname);
+                    getLog().debug("javascript tag not yet handled for class " + linkedClassname);
                 }
                 else if (tagName.equals("browser")) {
-                    getLog().info("browser tag not yet handled for class " + linkedClassname);
+                    getLog().debug("browser tag not yet handled for class " + linkedClassname);
                 }
                 else if (tagName.equals("doclink")) {
                     // ignore this link
