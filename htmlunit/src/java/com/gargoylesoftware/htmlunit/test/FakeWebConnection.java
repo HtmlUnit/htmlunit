@@ -179,12 +179,5 @@ public class FakeWebConnection extends WebConnection {
     public void setContent( final String content ) {
         setDefaultResponse(content, 200, "OK", "text/html");
     }
-
-
-    private void assertNotNull( final String description, final Object object ) {
-        if( object == null ) {
-            throw new NullPointerException(description);
-        }
-    }
 }
 

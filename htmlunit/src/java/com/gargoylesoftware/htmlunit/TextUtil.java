@@ -43,13 +43,6 @@ public final class TextUtil {
     }
 
 
-    private static void assertNotNull( final String description, final Object object ) {
-        if( object == null ) {
-            throw new NullPointerException(description);
-        }
-    }
-
-
     /**
      * Convert a string into an input stream.
      * @param content The string

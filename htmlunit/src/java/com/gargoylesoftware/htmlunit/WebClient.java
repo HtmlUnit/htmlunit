@@ -331,13 +331,6 @@ public class WebClient {
     }
 
 
-    private static void assertNotNull( final String description, final Object object ) {
-        if( object == null ) {
-            throw new NullPointerException( description );
-        }
-    }
-
-
     /**
      *  Specify whether or not the content of the resulting document will be
      *  printed to the console in the event of a failing response code.

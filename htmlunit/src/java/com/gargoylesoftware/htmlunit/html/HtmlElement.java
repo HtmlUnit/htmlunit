@@ -488,20 +488,6 @@ public abstract class HtmlElement {
 
 
     /**
-     *  Throw a NullPointerException if the specified object is null.
-     *
-     * @param  description the description that will be passed into the
-     *      NullPointerException
-     * @param  object The object to check
-     */
-    protected final void assertNotNull( final String description, final Object object ) {
-        if( object == null ) {
-            throw new NullPointerException( description );
-        }
-    }
-
-
-    /**
      *  Assert that the specified string is not empty. Throw an exception if it
      *  is.
      *

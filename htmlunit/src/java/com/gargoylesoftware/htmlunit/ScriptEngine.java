@@ -44,11 +44,10 @@ public abstract class ScriptEngine {
      * Throw a NullPointerException with the specified description if the object is null.
      * @param description The description
      * @param object The object to check for null.
+     * @deprecated Use {@link Assert#assertNotNull(String,Object)}
      */
     protected final void assertNotNull( final String description, final Object object ) {
-        if( object == null ) {
-            throw new NullPointerException(description);
-        }
+        Assert.assertNotNull(description, object);
     }
 
 
