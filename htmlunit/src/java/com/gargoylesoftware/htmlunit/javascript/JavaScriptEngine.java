@@ -286,9 +286,11 @@ public final class JavaScriptEngine extends ScriptEngine {
         final Boolean javaScriptAlreadyRunning = (Boolean) javaScriptRunning_.get();
         javaScriptRunning_.set(Boolean.TRUE);
         try {
-            final Object result = pageInfo.getContext().evaluateString(
-                    scope, sourceCode, sourceName, lineNumber, securityDomain );
-            return result;
+            synchronized (PageInfo.class) {
+                final Object result = pageInfo.getContext().evaluateString(
+                        scope, sourceCode, sourceName, lineNumber, securityDomain );
+                return result;
+            }
         }
         catch (final Exception e ) {
             final ScriptException scriptException = new ScriptException( e, sourceCode );  
