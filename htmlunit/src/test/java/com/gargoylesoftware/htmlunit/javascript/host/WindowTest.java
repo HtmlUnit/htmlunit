@@ -1263,7 +1263,6 @@ public class WindowTest extends WebTestCase {
                  + "window.resizeTo(-10, 20);\n"
                  + "</script></head><body></body></html>";
         loadPage(content);
-        loadPage(content);
     }
 
 }
