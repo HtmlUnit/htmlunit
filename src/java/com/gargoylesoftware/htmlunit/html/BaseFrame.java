@@ -181,7 +181,14 @@ public abstract class BaseFrame extends StyledElement {
 
         final WebClient webClient = page.getWebClient();
         webClient.registerWebWindow(enclosedWindow_);
+    }
 
+
+    /**
+     * Called after the node for <frame...> or <iframe> has been added to the containing page.
+     * The node needs to be added first to allow js in the frame to see the frame in the parent
+     */
+    void loadInnerPage() {
         String source = getSrcAttribute();
         if( source.length() == 0 ) {
             // Nothing to load
@@ -190,7 +197,6 @@ public abstract class BaseFrame extends StyledElement {
 
         loadInnerPageIfPossible(source);
     }
-
 
     private void loadInnerPageIfPossible(final String srcAttribute) {
 

@@ -1386,6 +1386,9 @@ public final class HtmlPage extends DomNode implements Page {
         if (node instanceof HtmlElement) {
             addIdElement((HtmlElement) node);
         }
+        if (node instanceof BaseFrame) {
+            ((BaseFrame) node).loadInnerPage();
+        }
         if (node instanceof HtmlScript) {
             final HtmlScript scriptNode = (HtmlScript) node;
             getLog().debug("Script node added: " + scriptNode.asXml());
