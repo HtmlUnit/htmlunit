@@ -199,7 +199,8 @@ public class SimpleScriptable extends ScriptableObject {
                 }
                 else if( state == JavaScriptConfiguration.NOT_FOUND ) {
                     throw new IllegalStateException("Getter for ["
-                            + propertyName + "] not found in configuration");
+                            + propertyName + "] not found in configuration for class ["
+                            + clazz.getName() + "]");
                 }
             }
             else if( methodName.startsWith("jsSet_")
@@ -212,7 +213,8 @@ public class SimpleScriptable extends ScriptableObject {
                 }
                 else if( state == JavaScriptConfiguration.NOT_FOUND ) {
                     throw new IllegalStateException("Setter for [" 
-                            + propertyName + "] not found in configuration");
+                            + propertyName + "] not found in configuration for class ["
+                            + clazz.getName() + "]");
                 }
             }
             else if( methodName.startsWith("jsFunction_") ) {
@@ -226,7 +228,8 @@ public class SimpleScriptable extends ScriptableObject {
                 }
                 else if( state == JavaScriptConfiguration.NOT_FOUND ) {
                     throw new IllegalStateException("Function ["
-                            + functionName + "] not found in configuration");
+                            + functionName + "] not found in configuration for class ["
+                            + clazz.getName() + "]");
                 }
             }
         }
