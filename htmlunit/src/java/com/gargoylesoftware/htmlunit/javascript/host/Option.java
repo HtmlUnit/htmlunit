@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
  */
 public class Option extends HTMLElement {
     private static final long serialVersionUID = 947015932373556314L;
-	private String text_;
+    private String text_;
     private String value_;
 
     /**

@@ -56,7 +56,7 @@ import org.mozilla.javascript.WrappedException;
  */
 public class ScriptException extends RuntimeException {
     private static final long serialVersionUID = 4788896649084231283L;
-	private final Throwable throwable_;
+    private final Throwable throwable_;
     private final String scriptSourceCode_;
 
 

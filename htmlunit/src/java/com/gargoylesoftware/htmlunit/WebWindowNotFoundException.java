@@ -46,7 +46,7 @@ package com.gargoylesoftware.htmlunit;
  */
 public class WebWindowNotFoundException extends RuntimeException {
     private static final long serialVersionUID = 2971032116624875170L;
-	private final String name_;
+    private final String name_;
 
 
     /**

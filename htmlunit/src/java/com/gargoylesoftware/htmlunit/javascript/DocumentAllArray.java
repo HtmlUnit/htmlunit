@@ -60,7 +60,7 @@ import org.mozilla.javascript.Scriptable;
  */
 public class DocumentAllArray extends SimpleScriptable {
     private static final long serialVersionUID = 898458356155974768L;
-	private HtmlPage htmlPage_;
+    private HtmlPage htmlPage_;
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.

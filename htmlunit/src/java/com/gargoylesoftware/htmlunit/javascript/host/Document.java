@@ -80,7 +80,7 @@ import com.gargoylesoftware.htmlunit.javascript.DocumentAllArray;
 public final class Document extends NodeImpl {
 
     private static final long serialVersionUID = -7646789903352066465L;
-	private DocumentAllArray allArray_;
+    private DocumentAllArray allArray_;
     private String status_ = "";
 
     /** The buffer that will be used for calls to document.write() */

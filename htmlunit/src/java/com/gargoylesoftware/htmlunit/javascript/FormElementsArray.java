@@ -56,7 +56,7 @@ import org.mozilla.javascript.Scriptable;
  */
 public class FormElementsArray extends SimpleScriptable {
     private static final long serialVersionUID = 1515527212503251703L;
-	private HtmlForm htmlForm_;
+    private HtmlForm htmlForm_;
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.

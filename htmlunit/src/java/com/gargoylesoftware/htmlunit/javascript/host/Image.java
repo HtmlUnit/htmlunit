@@ -49,7 +49,7 @@ public class Image extends HTMLElement {
     private static final long serialVersionUID = 5630843390548382869L;
 
 
-	/**
+    /**
      * Create an instance.
      */
     public Image() {

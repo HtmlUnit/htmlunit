@@ -63,7 +63,7 @@ import org.mozilla.javascript.ScriptableObject;
 public class SimpleScriptable extends ScriptableObject {
     private static final long serialVersionUID = 3120000176890886780L;
     
-	private static final Map PROPERTY_MAPS = Collections.synchronizedMap( new HashMap(89) );
+    private static final Map PROPERTY_MAPS = Collections.synchronizedMap( new HashMap(89) );
     private static Map HtmlJavaScriptMap_ = null;
 
     private JavaScriptEngine.PageInfo pageInfo_;
