@@ -34,7 +34,9 @@
     <pathelement path="dist/lib/xmlParserAPIs.jar"/>
 
     <pathelement path="${maven-repository}/commons-jelly/jars/commons-jelly-SNAPSHOT.jar"/>
+    <pathelement path="${maven-repository}/commons-jelly/jars/commons-jelly-tags-log-SNAPSHOT.jar"/>
     <pathelement path="${maven-repository}/commons-cli/jars/commons-cli-SNAPSHOT.jar"/>
+    <pathelement path="${maven-repository}/commons-jexl/jars/commons-jexl-SNAPSHOT.jar"/>
     <pathelement path="${maven-repository}/dom4j/jars/dom4j-1.4-dev-8.jar"/>
     <pathelement path="${maven-repository}/commons-collections/jars/commons-collections-2.1.jar"/>
     <pathelement path="${maven-repository}/commons-beanutils/jars/commons-beanutils-1.6.1.jar"/>

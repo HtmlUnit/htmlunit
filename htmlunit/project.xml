@@ -89,6 +89,16 @@
             <url>http://jakarta.apache.org/commons/jelly</url>
         </dependency>
         <dependency>
+            <id>commons-jelly+tags-log</id>
+            <version>SNAPSHOT</version>
+            <url>http://jakarta.apache.org/commons/jelly</url>
+        </dependency>
+        <dependency>
+            <id>commons-jexl</id>
+            <version>SNAPSHOT</version>
+            <url>http://jakarta.apache.org/commons/jexl</url>
+        </dependency>
+        <dependency>
             <id>commons-cli</id>
             <version>SNAPSHOT</version>
             <url>http://jakarta.apache.org/commons/cli</url>
