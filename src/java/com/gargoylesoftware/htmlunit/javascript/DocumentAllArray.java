@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.ListIterator;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 
@@ -55,12 +56,50 @@ import org.mozilla.javascript.Scriptable;
  * This is the array returned by the all property of Document.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
  */
-public class DocumentAllArray extends SimpleScriptable {
+public class DocumentAllArray extends SimpleScriptable implements Function {
     private static final long serialVersionUID = 898458356155974768L;
     private HtmlPage htmlPage_;
+
+    /**
+     * Allows to evaluate expressions like "document.all('toto')"
+     * @see org.mozilla.javascript.Function#call(org.mozilla.javascript.Context, 
+     * org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
+    public Object call(final Context context, final Scriptable scope, final Scriptable thisObj,
+            final Object[] args) throws JavaScriptException {
+        if (args.length == 0) {
+            throw new JavaScriptException("Bad args"); // what should we throw here?
+        }
+
+        Object index = args[0];
+        // this distinction should not exist: why is there a difference get(int, ...) and get(String, ...)?
+        if (index instanceof Double) {
+            return get(((Double) index).intValue(), this);
+        }
+        else {
+            return get(String.valueOf(args[0]), this);
+        }
+    }
+
+    /**
+     * Needed as we implement Function.
+     * @param context - the current Context for this thread
+     * @param scope - the scope to execute the function relative to. 
+     * This is set to the value returned by getParentScope() except when the function is called from a closure.
+     * @param args - the array of arguments
+     * @see org.mozilla.javascript.Function#construct(org.mozilla.javascript.Context, 
+     * org.mozilla.javascript.Scriptable, java.lang.Object[])
+     * @throws JavaScriptException if an uncaught exception occurred while executing the function
+     * @return <code>null</code>
+     */
+    public Scriptable construct(final Context context, final Scriptable scope, final Object[] args)
+            throws JavaScriptException {
+        return null; // what should we return?
+    }
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.
