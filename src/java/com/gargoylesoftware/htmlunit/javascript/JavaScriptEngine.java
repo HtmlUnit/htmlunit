@@ -72,40 +72,24 @@ public final class JavaScriptEngine extends ScriptEngine {
 
     /** Information specific to the javascript engine */
     public static final class PageInfo {
-        private final JavaScriptEngine engine_;
-        /**
-         * Create an instance
-         * @param engine The javascript engine that created this object
-         */
-        public PageInfo( final JavaScriptEngine engine) {
-            engine_ = engine;
-        }
 
-        /** The javascript.getContext() */
+        /**
+         *  The javascript.getContext()
+         *  This is probably wrong to hold a reference to the context: it should be
+         *  entered when necessary and exited after, therefore there is some work 
+         *  to do in this area. 
+         **/
         private Context context_;
+
         /** The javascript.getScope() */
-        private Scriptable scope_;
+        private Window scope_;
 
         /**
-         * Return the context
-         * @return the context
+         * Return the window scope
+         * @return the window
          */
-        public Context getContext() {
-            return context_;
-        }
-        /**
-         * Return the scope
-         * @return the scope
-         */
-        public Scriptable getScope() {
+        public Window getScope() {
             return scope_;
-        }
-        /**
-         * Return the javascript engine
-         * @return the javascript engine
-         */
-        public JavaScriptEngine getJavaScriptEngine() {
-            return engine_;
         }
     }
 
@@ -156,15 +140,13 @@ public final class JavaScriptEngine extends ScriptEngine {
         }
 
         try {
-            final PageInfo newPageInfo = new PageInfo(this);
-
             WEB_CLIENTS.set(htmlPage.getWebClient());
-            newPageInfo.context_ = Context.enter();
-            newPageInfo.context_.setOptimizationLevel(-1);
-            newPageInfo.getContext().setErrorReporter(
+            
+            final Context context = Context.enter();
+            context.setOptimizationLevel(-1);
+            context.setErrorReporter(
                 new StrictErrorReporter(getScriptEngineLog()) );
-            final Scriptable parentScope = newPageInfo.getContext().initStandardObjects(null);
-            newPageInfo.getContext().setOptimizationLevel(-1);
+            final Scriptable parentScope = context.initStandardObjects(null);
 
             final String hostClassNames[] = {
                 "HTMLElement", "Window", "Frame", "Document", "Form", "Input", "Navigator",
@@ -188,10 +170,12 @@ public final class JavaScriptEngine extends ScriptEngine {
             ScriptableObject.defineClass(parentScope, ElementArray.class);
             ScriptableObject.defineClass(parentScope, OptionsArray.class);
 
-            final Window window = (Window)newPageInfo.getContext().newObject(
+            final Window window = (Window) context.newObject(
                 parentScope, "Window", new Object[0]);
+
+            final PageInfo newPageInfo = new PageInfo();
+            newPageInfo.context_ = context;
             newPageInfo.scope_ = window;
-            newPageInfo.getScope().setParentScope(parentScope);
             window.setPageInfo(newPageInfo);
             window.initialize(htmlPage);
 
@@ -288,7 +272,7 @@ public final class JavaScriptEngine extends ScriptEngine {
         javaScriptRunning_.set(Boolean.TRUE);
         try {
             synchronized (PageInfo.class) {
-                final Object result = pageInfo.getContext().evaluateString(
+                final Object result = pageInfo.context_.evaluateString(
                         scope, sourceCode, sourceName, lineNumber, securityDomain );
                 return result;
             }
@@ -336,13 +320,13 @@ public final class JavaScriptEngine extends ScriptEngine {
         javaScriptRunning_.set(Boolean.TRUE);
         final Function function = (Function) javaScriptFunction;
         try {
-            final Object result = function.call( pageInfo.getContext(),
+            final Object result = function.call( pageInfo.context_,
                 scope, (Scriptable) thisObject, args );
             return result;
         }
         catch (final Exception e ) {
             final ScriptException scriptException = new ScriptException( e, 
-                    pageInfo.getContext().decompileFunction(function, 2));  
+                    pageInfo.context_.decompileFunction(function, 2));  
             if (getWebClient().isThrowExceptionOnScriptError()) {
                 throw scriptException;
             }

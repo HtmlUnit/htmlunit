@@ -218,13 +218,6 @@ public class NavigatorTest extends WebTestCase {
      */
     public void testUseConfiguredBrowser() throws Exception {
 
-        // activate test when all custom JS objects have a way to get the webclient 
-        // they run in
-        if (true) {
-            notImplemented();
-            return;
-        }
-
         final WebClient webClient = new WebClient(BrowserVersion.MOZILLA_1_0);
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 

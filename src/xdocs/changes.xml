@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                Javascript: navigator properties now depend from used BrowserVersion.
+            </action>
             <action type="add" dev="mguillem">
                 Javascript: added dummy implementation for read only properties offsetHeight, offsetLeft, offsetTop and offsetWidth.
             </action>

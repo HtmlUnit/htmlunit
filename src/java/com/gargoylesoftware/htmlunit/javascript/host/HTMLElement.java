@@ -916,7 +916,7 @@ public class HTMLElement extends NodeImpl {
      * Returns the JavaScript object for the window containing this HTML element's page.
      * @return the JavaScript object for the window containing this HTML element's page.
      */
-    private Window getWindow() {
+    protected Window getWindow() {
         return (Window) getDomNodeOrDie().getPage().getEnclosingWindow().getScriptObject();
     }
 
