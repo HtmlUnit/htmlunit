@@ -255,4 +255,38 @@ public class FormTest extends WebTestCase {
         } );
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+
+    /**
+     * Regression test that used to blow up on page load
+     */
+    public void testAccessingRadioButtonArrayByName_Regression() throws Exception {
+        final WebClient client = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+
+        final String firstContent
+             = "<html><head><title> Button Test </title></head><body><form name='whatsnew'>"
+             + "<input type='radio' name='second' value='1'>"
+             + "<input type='radio' name='second' value='2' checked>"
+             + "</form><script>clickAction();\n"
+             + "function clickAction(){\n"
+             + "var value = -1;\n"
+             + "radios = document.forms['whatsnew'].elements['second'];\n"
+             + "alert(document.forms['whatsnew'].elements['second']);\n"
+             + "for (var i=0; i < radios.length; i++){\n"
+             + "    if (radios[i].checked == true) {\n"
+             + "        value = radios[i].value;\n"
+             + "        break;\n"
+             + "    }\n"
+             + "}\n"
+             + "alert('value = ' + value);\n"
+             + "}\n"
+             + "</script></body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage)client.getPage(new URL("http://first"));
+    }
 }

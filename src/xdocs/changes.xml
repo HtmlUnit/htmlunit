@@ -6,6 +6,9 @@
 		<change type="fix">
 			Fixed bug where loading of external javascript files would not follow redirects.
 		</change>
+		<change type="fix">
+			Fixed bug where accessing radio buttons by name wasn't working correctly
+		</change>
 	</change-log>
 </section>
 

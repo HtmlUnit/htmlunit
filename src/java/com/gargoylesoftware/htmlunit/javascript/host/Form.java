@@ -121,6 +121,7 @@ public class Form extends HTMLElement {
             }
             final Radio radioArray[] = new Radio[collectedRadioButtons.size()];
             defineProperty(radioButtonName, collectedRadioButtons.toArray(radioArray), attributes);
+            jsElements_.defineProperty(radioButtonName, collectedRadioButtons.toArray(radioArray), attributes);
         }
     }
 
