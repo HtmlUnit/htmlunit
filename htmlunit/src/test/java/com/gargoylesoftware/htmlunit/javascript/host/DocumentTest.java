@@ -1698,4 +1698,65 @@ public class DocumentTest extends WebTestCase {
          final List expectedAlerts = Collections.singletonList("undefined");
          assertEquals( expectedAlerts, collectedAlerts );
     }
+
+
+    /**
+     * IE has a bug which returns the element by name if it can not find it by ID.
+     * @throws Exception
+     */
+    public void testGetElementByIdForIE() throws Exception {
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        final String content
+            = "<html><head><title>foo</title></head>"
+            + "<body>\n"
+            + "<input type='text' name='findMe'>\n"
+            + "<input type='text' id='findMe2' name='byId'>\n"
+            + "<script>\n"
+            + "alert(document.getElementById('findMe').name)\n"
+            + "alert(document.getElementById('findMe2').name)\n"
+            + "</script></body></html>";
+
+        webConnection.setResponse(
+            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "findMe", "byId"
+        } );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+    
+    /**
+     * IE has a bug which returns the element by name if it can not find it by ID.
+     * @throws Exception
+     */
+    public void testGetElementByIdForNetscape() throws Exception {
+        final WebClient client = new WebClient(BrowserVersion.NETSCAPE_6_2_3);
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        final String content
+            = "<html><head><title>foo</title></head>"
+            + "<body>\n"
+            + "<input type='text' name='findMe'>\n"
+            + "<input type='text' id='findMe2' name='byId'>\n"
+            + "<script>\n"
+            + "alert(document.getElementById('findMe'))\n"
+            + "alert(document.getElementById('findMe2').name)\n"
+            + "</script></body></html>";
+
+        webConnection.setResponse(
+            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        client.getPage(URL_FIRST);
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "null", "byId"
+        } );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }
