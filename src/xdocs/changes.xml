@@ -236,6 +236,16 @@
                 Raise more specific exception from HtmlForm.getRadioButtonInput
                 if there is no radio button to match the name.
             </action>
+            <action type="add" dev="dktaylor">
+                Added support for JavaScript editing of select options: add
+                new options, replace options, remove options, shorten options
+                list, set value, and set text.  These features also available
+                through HtmlOption.
+            </action>
+            <action type="update" dev="dktaylor">
+                Fixed support for option label attribute so label value is
+                returned as text if label is set.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
