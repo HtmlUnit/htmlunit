@@ -105,6 +105,7 @@ public class FakeWebConnection extends WebConnection {
             public String getContentType()     { return responseEntry.contentType_;     }
             public String getContentAsString() { return responseEntry.content_;         }
             public URL getUrl()                { return url;                           }
+            public long getLoadTimeInMilliSeconds() { return 0; }
 
             public String getResponseHeaderValue( final String headerName ) {
                 final Iterator iterator = responseEntry.responseHeaders_.iterator();

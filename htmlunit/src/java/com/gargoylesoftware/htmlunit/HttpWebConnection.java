@@ -83,17 +83,23 @@ public class HttpWebConnection extends WebConnection {
         final HttpClient httpClient = getHttpClientFor( url );
 
         try {
+            long startTime, endTime;
+
             HttpMethod httpMethod = makeHttpMethod( url, submitMethod, parameters, httpClient, requestHeaders );
+            startTime = System.currentTimeMillis();
             int responseCode = httpClient.executeMethod( httpMethod );
+            endTime = System.currentTimeMillis();
             if( responseCode == 401 ) {    // Authentication required
                 final KeyValuePair pair = getCredentials( httpMethod, httpClient, url );
                 if( pair != null ) {
                     httpMethod = makeHttpMethod( url, submitMethod, parameters, httpClient, requestHeaders );
                     addCredentialsToHttpMethod( httpMethod, pair );
+                    startTime = System.currentTimeMillis();
                     responseCode = httpClient.executeMethod( httpMethod );
+                    endTime = System.currentTimeMillis();
                 }
             }
-            return makeWebResponse( responseCode, httpMethod, url );
+            return makeWebResponse( responseCode, httpMethod, url, endTime-startTime );
         }
         catch( final HttpException e ) {
             // KLUDGE: hitting www.yahoo.com will cause an exception to be thrown while
@@ -282,7 +288,7 @@ public class HttpWebConnection extends WebConnection {
 
 
     private WebResponse makeWebResponse(
-        final int statusCode, final HttpMethod method, final URL originatingURL ) {
+        final int statusCode, final HttpMethod method, final URL originatingURL, final long loadTime ) {
 
         final byte[] contentBuffer = method.getResponseBody();
         final String contentAsString = method.getResponseBodyAsString();
@@ -341,6 +347,10 @@ public class HttpWebConnection extends WebConnection {
                     else {
                         return header.getValue();
                     }
+                }
+
+                public long getLoadTimeInMilliSeconds() {
+                    return loadTime;
                 }
             };
     }
