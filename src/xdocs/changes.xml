@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1115259" due-to="Michael Ottati">
+                JavaScript: fixed document.domain setter for domains like d1.d2.d3.d4.com.
+            </action>
             <action type="update" dev="mguillem" id="1115091">
                 JavaScript: fixed document.myForm.myField should not retrieve the field if it is an input of type image.
             </action>

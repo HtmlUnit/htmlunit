@@ -176,6 +176,9 @@
         <contributor>
             <name>Hans Donner</name>
         </contributor>
+        <contributor>
+            <name>Michael Ottati</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
