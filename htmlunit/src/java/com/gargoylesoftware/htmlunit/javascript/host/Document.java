@@ -102,6 +102,7 @@ public final class Document extends NodeImpl {
     /** The buffer that will be used for calls to document.write() */
     private final StringBuffer writeBuffer_ = new StringBuffer();
     private boolean writeInCurrentDocument_ = true;
+    private String domain_;
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.
@@ -732,7 +733,26 @@ public final class Document extends NodeImpl {
      * W3C documentation</a>
      */
     public String jsGet_domain() {
-        return getHtmlPage().getWebResponse().getUrl().getHost();
+        if (domain_ == null) {
+            domain_ = getHtmlPage().getWebResponse().getUrl().getHost();
+        }
+ 
+        return domain_;
+    }
+
+    /**
+     * Set the the domain of this document.
+     * @param newDomain the new domain to set
+     */
+    public void jsSet_domain( final String newDomain ) {
+        final String possibleDomain = StringUtils.substringAfter(
+                getHtmlPage().getWebResponse().getUrl().getHost(), ".");
+        if (newDomain.equals(possibleDomain)) {
+            domain_ = newDomain;
+        }
+        else {
+            throw Context.reportRuntimeError("Illegal domain value: " + newDomain);
+        }
     }
 }
 

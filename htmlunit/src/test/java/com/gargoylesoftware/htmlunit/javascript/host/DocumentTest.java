@@ -1989,13 +1989,15 @@ public class DocumentTest extends WebTestCase {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.domain);\n"
+            + "    document.domain = 'gargoylesoftware.com';\n"
+            + "    alert(document.domain);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
          final List expectedAlerts = Arrays.asList( new String[]{
-             "www.gargoylesoftware.com"
+             "www.gargoylesoftware.com", "gargoylesoftware.com"
          } );
 
          final List collectedAlerts = new ArrayList();
