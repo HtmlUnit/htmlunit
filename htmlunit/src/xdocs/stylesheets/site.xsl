@@ -13,7 +13,7 @@ a:visited { color: #009999; }
 a:active { color: #000066; }
 a:hover { color: #000066; }
 
-.date { font-size: 11px; }
+.date, .reporter { font-size: 11px; }
 
 .box-frame-blue { font-size: 12px;border: solid 1px #7099C5; text-align: left; background-color: #f0f0ff; }
 .box-title-blue { padding: 0px 0px 0px 2px; background-color: #7099C5; color: #ffffff; }
@@ -214,6 +214,9 @@ tbody {padding: 5px 5px 5px 10px;}
 				</td>
 				<td valign="top">
 					<xsl:apply-templates/>
+					<xsl:if test="@reporter">
+						<span class="reporter">(Reported by <xsl:value-of select="@reporter"/>)</span>
+					</xsl:if>
 				</td>
 			</tr>
 		</xsl:for-each>
