@@ -9,6 +9,7 @@ package com.gargoylesoftware.htmlunit.html;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import org.w3c.dom.Element;
 import java.io.IOException;
 
@@ -87,8 +88,13 @@ public abstract class HtmlInput
             return doClickAction();
         }
         else {
-            return page.executeJavaScriptIfPossible(
-                onClick, "onClick handler for "+getClass().getName(), true).getNewPage();
+            final ScriptResult scriptResult = page.executeJavaScriptIfPossible(
+                onClick, "onClick handler for "+getClass().getName(), true);
+            final Object result = scriptResult.getJavaScriptResult();
+            if( result instanceof Boolean && ((Boolean)result).booleanValue() == true ) {
+                return doClickAction();
+            }
+            return scriptResult.getNewPage();
         }
     }
 
