@@ -79,6 +79,11 @@
 		<change type="change">
 			Removed deprecated method HtmlPage.getTitle().  Use HtmlPage.getTitleText() instead.
 		</change>
+		<change type="change">
+			Added support for manipulating the disabled attribute of any element via javascript.
+			This is incorrect according to the html specification but Internet Explorer supports
+			it so we have to as well.  This will print a warning if it is used.
+		</change>
 	</change-log>
 </section>
 

@@ -8,7 +8,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-
+import org.w3c.dom.Element;
 
 /**
  * The javascript object "HTMLElement" which is the base class for all html
@@ -56,5 +56,37 @@ public class HTMLElement extends SimpleScriptable {
          style_ = (Style)makeJavaScriptObject("Style");
          style_.initialize(this);
      }
+
+
+    /**
+     * Return true if this element is disabled.
+     * @return True if this element is disabled.
+     */
+    public boolean jsGet_disabled() {
+        getLog().warn(
+            "Getting the disabled attribute for non-submittable elements"
+            + " is not allowed according to the HTML specification.  Be aware"
+            + " that you are using a non-portable feature");
+        return getHtmlElementOrDie().isAttributeDefined("disabled");
+    }
+
+
+    /**
+     * Set whether or not to disable this element
+     * @param disabled True if this is to be disabled.
+     */
+    public void jsSet_disabled( final boolean disabled ) {
+        getLog().warn(
+            "Setting the disabled attribute for non-submittable elements"
+            + " is not allowed according to the HTML specification.  Be aware"
+            + " that you are using a non-portable feature");
+        final Element xmlElement = getHtmlElementOrDie().getElement();
+        if( disabled ) {
+            xmlElement.setAttribute("disabled", "disabled");
+        }
+        else {
+            xmlElement.removeAttribute("disabled");
+        }
+    }
 }
 

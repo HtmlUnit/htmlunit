@@ -117,7 +117,7 @@ public class HtmlForm extends HtmlElement {
             }
 
             if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
-                return htmlPage.executeJavascriptIfPossible( action, "Form action" );
+                return htmlPage.executeJavaScriptIfPossible( action, "Form action", false ).getNewPage();
             }
         }
         else {
