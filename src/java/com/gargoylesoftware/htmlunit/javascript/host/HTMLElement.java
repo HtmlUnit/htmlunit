@@ -441,7 +441,8 @@ public class HTMLElement extends SimpleScriptable {
             ( xmlNode instanceof Text ) == false ) {
             if( xmlNode instanceof HTMLDocumentImpl == false ) {
                 throw new IllegalStateException(
-                    "XML node is not an Element or Text node.  Only Elements and Text nodes are currently supported.  Node class: "
+                    "XML node is not an Element or Text node.  Only Elements and "
+                    + "Text nodes are currently supported.  Node class: "
                     + xmlNode.getClass() );
             }
             return null;

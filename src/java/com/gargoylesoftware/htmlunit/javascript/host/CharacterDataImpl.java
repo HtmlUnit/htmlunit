@@ -73,7 +73,7 @@ public abstract class CharacterDataImpl extends HTMLElement {
 
     /**
      * Set the JavaScript property "data" for this character data.
-     * @param The new String of data.
+     * @param newValue The new String of data.
      */
     public void jsSet_data( final String newValue ) {
         final DomCharacterData domCharacterData =
