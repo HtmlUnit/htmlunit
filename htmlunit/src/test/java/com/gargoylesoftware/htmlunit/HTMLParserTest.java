@@ -40,9 +40,10 @@ package com.gargoylesoftware.htmlunit;
 import java.net.ConnectException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-
-import junit.framework.TestCase;
+import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -57,16 +58,22 @@ import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
  * @version  $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class HTMLParserTest extends TestCase {
+public class HTMLParserTest extends WebTestCase {
+
+    /**
+     * Create an instance
+     * @param name The name of the test
+     */
+    public HTMLParserTest( final String name ) {
+        super(name);
+    }
 
     /**
      * test the new HTMLParser on a simple HTML string and use the Jaxen XPath navigator
      * to validate results
-     *
      * @throws Exception failure
      */
     public void testSimpleHTMLString() throws Exception {
-
         WebClient webClient = new WebClient();
         WebResponse webResponse = new StringWebResponse(
             "<html><head><title>TITLE</title><noscript>TEST</noscript></head><body></body></html>");
@@ -82,6 +89,77 @@ public class HTMLParserTest extends TestCase {
         HtmlElement node = (HtmlElement)xpath.selectSingleNode(page);
 
         assertEquals(node.getTagName(), HtmlNoScript.TAG_NAME);
+    }
+
+    /**
+     * Test when <form> inside <table> and before <tr>
+     * @throws Exception failure
+     */
+    public void testBadlyFormedHTML() throws Exception {
+        final String content
+            = "<html><head><title>first</title>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  alert(document.getElementById('myInput').form.id);\n"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + "<table>"
+            + "<form name='myForm' action='foo' id='myForm'>"
+            + "<tr><td>"
+            + "<input type='text' name='myInput' id='myInput'/>"
+            + "</td></tr>"
+            + "</form>"
+            + "</table>"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList(new String[]{"myForm"});
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        System.out.println(page.asXml());
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * Test when an illegal tag is found in head as some websites do
+     * @throws Exception failure
+     */
+    public void testUnknownTagInHead() throws Exception {
+        if (true) {
+            notImplemented();
+            return;
+        }
+
+        // Note: the <meta> tag in this test is quite important because
+        // I could adapt the TagBalancer to make it work except with this <meta http-equiv...
+        // (it worked with <meta name=...)
+        final String content
+            = "<html><head><mainA3>"
+            + "<meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>"
+            + "<title>first</title>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  alert(document.title);\n"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList(new String[]{"first"});
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        System.out.println(page.asXml());
+
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
     /**
