@@ -205,8 +205,20 @@ public class ElementArray extends SimpleScriptable implements Function {
     }
 
     /**
-     * Returns all the elements in this element array that have the specified tag name, or
-     * <tt>NOT_FOUND</tt> if there are no elements with the specified tag name.
+     * Retrieves the item or items corresponding to the specified name (checks ids, and if
+     * that does not work, then names).
+     * @param name The name or id the element or elements to return.
+     * @return The element or elements corresponding to the specified name or id.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/nameditem.asp">MSDN doc</a>
+     */
+    public final Object jsFunction_namedItem( final String name ) {
+        return get( name );
+    }
+
+    /**
+     * Returns all the elements in this element array that have the specified tag name.
+     * This method returns an empty element array if there are no elements with the
+     * specified tag name.
      * @param tagName The name of the tag of the elements to return.
      * @return All the elements in this element array that have the specified tag name.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/tags.asp">MSDN doc</a>
@@ -220,12 +232,9 @@ public class ElementArray extends SimpleScriptable implements Function {
                 matches.add( element );
             }
         }
-        if( ! matches.isEmpty() ) {
-            final ElementArray array = (ElementArray) makeJavaScriptObject("ElementArray");
-            array.setElements( matches );
-            return array;
-        }
-        return NOT_FOUND;
+        final ElementArray array = (ElementArray) makeJavaScriptObject("ElementArray");
+        array.setElements( matches );
+        return array;
     }
 
 }

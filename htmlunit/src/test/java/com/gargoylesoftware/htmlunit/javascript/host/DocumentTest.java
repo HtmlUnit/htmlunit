@@ -1378,6 +1378,32 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    public void testDocumentAll_NamedItem() throws Exception {
+        final String firstContent
+             = "<html><head><title>First</title><script>\n"
+             + "function doTest() {\n"
+             + "    alert(document.all.namedItem('form1').name);\n"
+             + "    alert(document.all.namedItem('form2').id);\n"
+             + "    alert(document.all.namedItem('form3').length);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>\n"
+             + "<form name='form1'></form>\n"
+             + "<form id='form2'></form>\n"
+             + "<form name='form3'></form>\n"
+             + "<form name='form3'></form>\n"
+             + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList( new String[] {"form1", "form2", "2"} );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
     public void testDocumentAll_tags() throws Exception {
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -1390,6 +1416,8 @@ public class DocumentTest extends WebTestCase {
              + "    // Make sure tags() returns an element array that you can call item() on.\n"
              + "    alert(document.all.tags('input').item(0).name);\n"
              + "    alert(document.all.tags('input').item(1).name);\n"
+             + "    // Make sure tags() returns an empty element array if there are no matches.\n"
+             + "    alert(document.all.tags('xxx').length);\n"
              + "}\n"
              + "</script></head><body onload='doTest()'>"
              + "<input type='text' name='a' value='1'>"
@@ -1401,7 +1429,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[] {
-            "a", "b", "a", "b"} );
+            "a", "b", "a", "b", "0"} );
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
