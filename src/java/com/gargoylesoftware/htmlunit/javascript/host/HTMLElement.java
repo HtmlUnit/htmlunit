@@ -91,10 +91,10 @@ public class HTMLElement extends NodeImpl {
     private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
     private static final int BEHAVIOR_ID_UNKNOWN = -1;
     private static final int BEHAVIOR_ID_HOMEPAGE = 0;
-    private static final String POSITION_BEFORE_BEGIN = "beforeBegin";
-    private static final String POSITION_AFTER_BEGIN = "afterBegin";
-    private static final String POSITION_BEFORE_END = "beforeEnd";
-    private static final String POSITION_AFTER_END = "afterEnd";
+    static final String POSITION_BEFORE_BEGIN = "beforeBegin";
+    static final String POSITION_AFTER_BEGIN = "afterBegin";
+    static final String POSITION_BEFORE_END = "beforeEnd";
+    static final String POSITION_AFTER_END = "afterEnd";
 
     /**
      * The tag names of the objects for which outerHTML is readonly 
@@ -383,6 +383,11 @@ public class HTMLElement extends NodeImpl {
         if (htmlSnippet.indexOf('<') >= 0) {
             // build a pseudo WebResponse
             final WebClient webClient = getDomNodeOrDie().getPage().getWebClient();
+            final boolean jsEnabled = webClient.isJavaScriptEnabled();
+            // disable js while interpreting the html snippet: it only needs to be interpreted
+            // when integrated in the real page
+            webClient.setJavaScriptEnabled(false);
+
             final WebResponse webResp = new StringWebResponse("<html><body>" + htmlSnippet + "</body></html>");
             try {
                 final WebWindow pseudoWindow = new WebWindow() {
@@ -412,20 +417,21 @@ public class HTMLElement extends NodeImpl {
                 final HtmlPage pseudoPage = HTMLParser.parse(webResp, pseudoWindow);
                 final HtmlBody body = (HtmlBody) pseudoPage.getDocumentElement().getFirstChild();
                 
-                Collection nodes = new ArrayList();
+                final Collection nodes = new ArrayList();
                 for (Iterator iter = body.getChildIterator(); iter.hasNext();) {
                     DomNode child = (DomNode) iter.next();
                     nodes.add(copy(child, getHtmlElementOrDie().getPage()));
                 }
                 return nodes;
             }
-            catch (final IOException e) {
-                // should not occur
-                getLog().warn("Unexpected exception occured while setting innerHTML");
-                return Collections.EMPTY_LIST;
-            }
             catch (final Exception e) {
-                return Collections.EMPTY_LIST;
+                getLog().error("Unexpected exception occured while parsing html snippet", e);
+                throw Context.reportRuntimeError("Unexpected exception occured while parsing html snippet: " 
+                        + e.getMessage());
+            }
+            finally {
+                // set javascript enabled back to original state
+                webClient.setJavaScriptEnabled(jsEnabled);
             }
         }
         else {

@@ -53,7 +53,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
-import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
@@ -305,11 +304,17 @@ public final class JavaScriptEngine extends ScriptEngine {
                     scope, sourceCode, sourceName, lineNumber, securityDomain );
             return result;
         }
-        catch( final JavaScriptException e ) {
-            throw new ScriptException( e, sourceCode );
-        }
-        catch( final Throwable t ) {
-            throw new ScriptException(t, sourceCode);
+        catch (final Exception e ) {
+            final ScriptException scriptException = new ScriptException( e, sourceCode );  
+            if (getWebClient().isThrowExceptionOnScriptError()) {
+                throw scriptException;
+            }
+            else {
+                // use a ScriptException to log it because it provides good information 
+                // on the source code
+                getLog().info("Catched script exception", scriptException);
+                return null;
+            }
         }
         finally {
             javaScriptRunning_.set(javaScriptAlreadyRunning);

@@ -65,6 +65,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Christian Sell
+ * @author Marc Guillemot
  */
 public class AttributesTest extends WebTestCase {
 
@@ -146,7 +147,7 @@ public class AttributesTest extends WebTestCase {
             final String methodName = methods[i].getName();
             if( methodName.startsWith("get")
                 && methodName.endsWith("Attribute")
-                && EXCLUDED_METHODS.contains(methodName) == false ) {
+                && !EXCLUDED_METHODS.contains(methodName)) {
 
                 String attributeName = methodName.substring(3, methodName.length()-9).toLowerCase();
                 if( attributeName.equals("xmllang") ) {
@@ -166,6 +167,9 @@ public class AttributesTest extends WebTestCase {
                 }
                 else if( attributeName.equals("acceptcharset") ) {
                     attributeName = "accept-charset";
+                }
+                else if( attributeName.equals("htmlfor") ) {
+                    attributeName = "for";
                 }
                 suite.addTest( new AttributesTest(attributeName, clazz, methods[i], page) );
             }
@@ -191,12 +195,7 @@ public class AttributesTest extends WebTestCase {
         classUnderTest_ = classUnderTest;
         method_ = method;
         page_ = page;
-        if( attributeName.equals("TextDirection") ) {
-            attributeName_ = "dir";
-        }
-        else {
-           attributeName_ = attributeName;
-        }
+        attributeName_ = attributeName;
     }
 
     /**

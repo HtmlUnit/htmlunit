@@ -835,10 +835,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testScriptErrorIsolated() throws Exception {
-        if (true) {
-            notImplemented();
-            return;
-        }
+
         final String content
                  = "<html>"
                  + "<head>"
@@ -846,7 +843,7 @@ public class JavaScriptEngineTest extends WebTestCase {
                  + "<script>alert(2</script>"
                  + "<script>alert(3);</script>"
                  + "</head>"
-                 + "<body onload='alert(4)'>"
+                 + "<body onload='alert(4);notExisting()'>"
                  + "<button onclick='alert(5)'>click me</button>"
                  + "</body>"
                  + "</html>";
@@ -854,9 +851,28 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List expectedAlerts = Arrays.asList( new String[]{ "1", "3", "4" } );
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(content);
+        client.setWebConnection(webConnection);
         final List collectedAlerts = new ArrayList();
-        loadPage(content, collectedAlerts);
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
+        // first test with script exceptions thrown
+        try {
+            client.getPage(URL_FIRST);
+            fail("Should have thrown a script error");
+        }
+        catch (final Exception e) {
+            // nothing
+        }
+        assertEquals(Collections.singletonList("1"), collectedAlerts);
+        collectedAlerts.clear();
+
+        // and with script exception not thrown
+        client.setThrowExceptionOnScriptError(false);
+        client.getPage(URL_FIRST);
+        
         assertEquals(expectedAlerts, collectedAlerts);
     }
     

@@ -46,7 +46,6 @@ import java.util.Map;
 import java.util.Stack;
 
 import org.apache.xerces.parsers.AbstractSAXParser;
-import org.apache.xerces.xni.parser.XMLDocumentFilter;
 import org.apache.xerces.xni.parser.XMLInputSource;
 import org.cyberneko.html.HTMLConfiguration;
 import org.xml.sax.Attributes;
@@ -55,7 +54,6 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
-import com.gargoylesoftware.htmlunit.ScriptFilter;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -289,7 +287,7 @@ public class HTMLParser {
         private final WebResponse webResponse_;
         private final WebWindow webWindow_;
 
-        private final ScriptFilter scriptFilter_;
+        // private final ScriptFilter scriptFilter_;
 
         private HtmlPage page_;
 
@@ -310,12 +308,7 @@ public class HTMLParser {
             webResponse_ = webResponse;
             webWindow_ = webWindow;
 
-            scriptFilter_ = new ScriptFilter((HTMLConfiguration)fConfiguration);
-
             try {
-                XMLDocumentFilter[] filters = {scriptFilter_};
-
-                setProperty( "http://cyberneko.org/html/properties/filters", filters);
                 setFeature( "http://cyberneko.org/html/features/augmentations", true );
                 setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
                 setFeature("http://cyberneko.org/html/features/report-errors", ValidateHtml_);
@@ -359,8 +352,6 @@ public class HTMLParser {
         /** @inheritDoc ContentHandler#startDocument() */
         public void startDocument() throws SAXException {
             page_ = new HtmlPage(webResponse_.getUrl(), webResponse_, webWindow_);
-            page_.setScriptFilter(scriptFilter_);
-            scriptFilter_.setHtmlPage(page_);
             webWindow_.setEnclosedPage(page_);
 
             currentNode_ = page_;
