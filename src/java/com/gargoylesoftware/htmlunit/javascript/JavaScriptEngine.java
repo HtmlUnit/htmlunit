@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import java.util.WeakHashMap;
 import java.util.Map;
+import java.lang.ref.WeakReference;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.JavaScriptException;
@@ -62,6 +63,7 @@ import org.mozilla.javascript.ScriptableObject;
  * @author  David K. Taylor
  * @author  Chris Erskine
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author David D. Kilzer
  */
 public final class JavaScriptEngine extends ScriptEngine {
 
@@ -134,9 +136,12 @@ public final class JavaScriptEngine extends ScriptEngine {
     private synchronized PageInfo getPageInfo( final HtmlPage htmlPage ) {
         Assert.notNull( "htmlPage", htmlPage );
 
-        final PageInfo existingPageInfo = (PageInfo)pageInfos_.get(htmlPage);
-        if( existingPageInfo != null ) {
-            return existingPageInfo;
+        final WeakReference weakReference = (WeakReference)pageInfos_.get(htmlPage);
+        if( weakReference != null ) {
+            final PageInfo existingPageInfo = (PageInfo)weakReference.get();
+            if( existingPageInfo != null ) {
+                return existingPageInfo;
+            }
         }
 
         try {
@@ -180,7 +185,7 @@ public final class JavaScriptEngine extends ScriptEngine {
             window.setPageInfo(newPageInfo);
             window.initialize(htmlPage);
 
-            pageInfos_.put( htmlPage, newPageInfo );
+            pageInfos_.put( htmlPage, new WeakReference(newPageInfo) );
 
             return newPageInfo;
         }

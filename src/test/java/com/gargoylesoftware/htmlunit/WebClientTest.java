@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Marc Guillemot
+ * @author David D. Kilzer
  */
 public class WebClientTest extends WebTestCase {
 
@@ -943,6 +944,34 @@ public class WebClientTest extends WebTestCase {
     public void testExpandUrlHandlesColonsInRelativeUrl() throws Exception {
         final URL newUrl = WebClient.expandUrl( new URL("http://host/foo"), "/bar/blah:de:blah");
         assertEquals( "http://host/bar/blah:de:blah", newUrl.toExternalForm() );
+    }
+
+    /**
+     * Test reuse of a single {@link HtmlPage} object to submit the same form multiple times.
+     *
+     * @throws Exception if test fails
+     */
+    public void testReusingHtmlPageToSubmitFormMultipleTimes() throws Exception {
+
+        final String firstContent = "<html><head><title>First</title></head>" +
+                                    "<body onload='document.myform.mysubmit.focus()'>" +
+                                    "<form action='" + URL_SECOND + "' name='myform'>" +
+                                    "<input type='submit' name='mysubmit'>" +
+                                    "</form></body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body>Second</body></html>";
+
+        final WebClient webClient = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        for (int i = 0; i < 1000; i++) {
+            page.getFormByName("myform").submit();
+        }
     }
 }
 
