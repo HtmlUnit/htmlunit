@@ -40,12 +40,14 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for Location.
@@ -62,8 +64,66 @@ public class LocationTest extends WebTestCase {
     public LocationTest( final String name ) {
         super(name);
     }
+    
+    /**
+     * Regression test for bug 742902
+     * @throws Exception if the test fails
+     */
+    public void testDocumentLocation() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    alert(top.document.location);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "</body></html>";
 
+        webConnection.setResponse(
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("http://first");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDocumentLocationHref() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    alert(top.document.location.href);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("http://first");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+    
     /**
      * @throws Exception if the test fails
      */

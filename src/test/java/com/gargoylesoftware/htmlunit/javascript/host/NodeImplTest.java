@@ -39,8 +39,12 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -108,4 +112,79 @@ public class NodeImplTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }    
+    /**
+     * Regression test for removeChild
+     * @throws Exception if the test fails
+     */
+    public void testRemoveChild() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        webClient.setWebConnection( webConnection );
+
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    var form = document.forms['form1'];\n"
+            + "    var div = form.firstChild;\n"
+            + "    var removedDiv = form.removeChild(div);\n"
+            + "    alert(div==removedDiv);\n"
+            + "    alert(form.firstChild==null);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'><div id='formChild'/></form>"
+            + "</body></html>";
+        webConnection.setResponse(
+            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
+        assertEquals("foo", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "true", "true"
+        } );
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * Regression test for replaceChild
+     * @throws Exception if the test fails
+     */
+    public void testReplaceChild() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        webClient.setWebConnection( webConnection );
+
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    var form = document.forms['form1'];\n"
+            + "    var div1 = form.firstChild;\n"
+            + "    var div2 = document.getElementById('newChild');\n"
+            + "    var removedDiv = form.replaceChild(div2,div1);\n"
+            + "    alert(div1==removedDiv);\n"
+            + "    alert(form.firstChild==div2);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'><div id='formChild'/></form>"
+            + "</body><div id='newChild'/></html>";
+        webConnection.setResponse(
+            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
+        assertEquals("foo", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "true", "true"
+        } );
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+    
 }

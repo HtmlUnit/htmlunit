@@ -235,68 +235,6 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "second", secondPage.getTitleText() );
      }
 
-
-    /**
-     * @throws Exception if the test fails
-     */
-    public void testDocumentLocationHref() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
-        final String firstContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    alert(top.document.location.href);\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "</body></html>";
-
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
-        final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
-
-        final List expectedAlerts = Collections.singletonList("http://first");
-        assertEquals( expectedAlerts, collectedAlerts );
-    }
-
-
-    /**
-     * Regression test for bug 742902
-     * @throws Exception if the test fails
-     */
-    public void testDocumentLocation() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
-        final String firstContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    alert(top.document.location);\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "</body></html>";
-
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
-        final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
-
-        final List expectedAlerts = Collections.singletonList("http://first");
-        assertEquals( expectedAlerts, collectedAlerts );
-    }
-
-
     /**
      * Regression test for RFE 741930
      * @throws Exception if the test fails
@@ -546,84 +484,6 @@ public class DocumentTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
-
-    /**
-     * Regression test for removeChild
-     * @throws Exception if the test fails
-     */
-    public void testRemoveChild() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-        webClient.setWebConnection( webConnection );
-
-        final String content
-            = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
-            + "    var form = document.forms['form1'];\n"
-            + "    var div = form.firstChild;\n"
-            + "    var removedDiv = form.removeChild(div);\n"
-            + "    alert(div==removedDiv);\n"
-            + "    alert(form.firstChild==null);\n"
-            + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
-            + "<form name='form1'><div id='formChild'/></form>"
-            + "</body></html>";
-        webConnection.setResponse(
-            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
-
-        final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals("foo", page.getTitleText());
-
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "true", "true"
-        } );
-
-        assertEquals( expectedAlerts, collectedAlerts );
-    }
-
-
-    /**
-     * Regression test for replaceChild
-     * @throws Exception if the test fails
-     */
-    public void testReplaceChild() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-        webClient.setWebConnection( webConnection );
-
-        final String content
-            = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
-            + "    var form = document.forms['form1'];\n"
-            + "    var div1 = form.firstChild;\n"
-            + "    var div2 = document.getElementById('newChild');\n"
-            + "    var removedDiv = form.replaceChild(div2,div1);\n"
-            + "    alert(div1==removedDiv);\n"
-            + "    alert(form.firstChild==div2);\n"
-            + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
-            + "<form name='form1'><div id='formChild'/></form>"
-            + "</body><div id='newChild'/></html>";
-        webConnection.setResponse(
-            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
-
-        final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals("foo", page.getTitleText());
-
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "true", "true"
-        } );
-
-        assertEquals( expectedAlerts, collectedAlerts );
-    }
-
 
     /**
      * @throws Exception if the test fails
@@ -2052,8 +1912,9 @@ public class DocumentTest extends WebTestCase {
             loadPage(content, collectedAlerts);
         }
         catch (ScriptException se) {
-            if (se.getEnclosedException() instanceof IllegalStateException)
+            if (se.getEnclosedException() instanceof IllegalStateException) {
                 return;
+            }
         }
         fail("Should have thrown IllegalState for missing title when setting the title from JavaScript");
       }
