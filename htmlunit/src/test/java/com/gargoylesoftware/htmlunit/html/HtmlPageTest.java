@@ -56,6 +56,7 @@ import junit.framework.AssertionFailedError;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author David K. Taylor
+ * @author Andreas Hangler
  */
 public class HtmlPageTest extends WebTestCase {
 
@@ -806,6 +807,25 @@ public class HtmlPageTest extends WebTestCase {
             "foo"
         });
         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * Regression test for bug 713646
+     */
+    public void testOnLoadHandler_BodyName_NotAFunction() throws Exception {
+        final String content =
+            "<html><head><title>foo</title></head>"
+                + "<body onLoad='foo=4711'>"
+                + "<a name='alert' href='javascript:alert(foo)'/>"
+                + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
+        
+        page.getAnchorByName("alert").click();
+
+        final List expectedAlerts = Arrays.asList(new String[] { "4711" });
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
 
