@@ -1516,6 +1516,40 @@ public class DocumentTest extends WebTestCase {
         // and executed so the second page has been loaded.
         enclosedPage.getHtmlElementById( "second" );
     }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDocumentWrite_InDOM() throws Exception {
+        if (true) {
+            notImplemented();
+            return;
+        }        
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        webClient.setWebConnection( webConnection );
+
+        final String mainContent
+        = "<html><head><title>First</title></head><body>"
+            + "<script type=\"text/javascript\">"
+            + "document.write('<a id=\"blah\">Hello World</a>');" 
+            + "alert(document.getElementById('blah'));"
+            + "</script>" 
+            + "</body></html>";
+        
+        webConnection.setResponse(
+                URL_FIRST, mainContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        assertEquals(1, collectedAlerts.size());
+        assertFalse("Should not be 'null'", "null".equals(collectedAlerts.get(0)));
+    }    
 
 
     /**
