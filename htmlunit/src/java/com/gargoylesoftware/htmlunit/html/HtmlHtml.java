@@ -37,92 +37,73 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.io.PrintWriter;
+import java.util.Map;
 
 /**
- * representation of a text node in the Html DOM
+ *  A representation of an html element "html".
  *
  * @version  $Revision$
- * @author  David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author David K. Taylor
  */
-public class DomText extends DomCharacterData {
+public final class HtmlHtml extends HtmlElement {
 
-    /** the symbolic node name */
-    public static final String NODE_NAME = "#text";
+    /** the HTML tag represented by this element */
+    public static final String TAG_NAME = "html";
 
     /**
-     * Create an instance of DomText
+     * Create an instance of HtmlHtml
      *
      * @param page The HtmlPage that contains this element.
-     * @param data the string data held by this node
+     * @param attributes the initial attributes
      */
-    public DomText( final HtmlPage page, String data) {
-        super(page, data);
+    public HtmlHtml( final HtmlPage page, final Map attributes) {
+        super(page, attributes);
+    }
+
+    /**
+     * @return the HTML tag name
+     */
+    public String getTagName() {
+        return TAG_NAME;
     }
 
 
     /**
-     * Split a Text node in two.
-     * @param offset The character position at which to split the Text node.
-     * @return The Text node that was split from this node.
-     */
-    public DomText splitText(final int offset) {
-        if (offset < 0 || offset > getLength() ) {
-            throw new IllegalArgumentException("offset: "+offset+" data.length: "+getLength());
-        }
-
-        // split text into two separate nodes
-        DomText newText = new DomText(getPage(), getData().substring(offset));
-        setData(getData().substring(0, offset));
-
-        // insert new text node
-        if (getParentNode() != null) {
-            newText.setParentNode(getParentNode());
-            newText.setPreviousSibling(this);
-            newText.setNextSibling(this.getNextSibling());
-            this.setNextSibling(newText);
-        }
-
-        return newText;
-    }
-
-    /**
-     *  Return a text representation of this element that represents what would
-     *  be visible to the user if this page was shown in a web browser. For
-     *  example, a select element would return the currently selected value as
-     *  text
+     *  Return the value of the attribute "lang". Refer to the <a
+     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     *  details on the use of this attribute.
      *
-     * @return  The element as text
+     * @return  The value of the attribute "lang" or an empty string if that
+     *      attribute isn't defined.
      */
-    public String asText() {
-        return getData();
+    public final String getLangAttribute() {
+        return getAttributeValue( "lang" );
     }
 
-    /**
-     * @return the node type constant, in this case {@link DomNode#TEXT_NODE}
-     */
-    public short getNodeType() {
-        return DomNode.TEXT_NODE;
-    }
 
     /**
-     * @return the node name, in this case {@link #NODE_NAME}
-     */
-    public String getNodeName() {
-        return NODE_NAME;
-    }
-
-    /**
-     * recursively write the XML data for the node tree starting at <code>node</code>
+     *  Return the value of the attribute "xml:lang". Refer to the <a
+     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     *  details on the use of this attribute.
      *
-     * @param indent white space to indent child nodes
-     * @param printWriter writer where child nodes are written
+     * @return  The value of the attribute "xml:lang" or an empty string if that
+     *      attribute isn't defined.
      */
-    protected void printXml( String indent, PrintWriter printWriter ) {
+    public final String getXmlLangAttribute() {
+        return getAttributeValue( "xml:lang" );
+    }
 
-        printWriter.print(indent);
-        printWriter.println(getData());
-        printChildrenAsXml( indent, printWriter );
+
+    /**
+     *  Return the value of the attribute "dir". Refer to the <a
+     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     *  details on the use of this attribute.
+     *
+     * @return  The value of the attribute "dir" or an empty string if that
+     *      attribute isn't defined.
+     */
+    public final String getTextDirectionAttribute() {
+        return getAttributeValue( "dir" );
     }
 }
+

@@ -44,6 +44,7 @@ import java.util.EventObject;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  David K. Taylor
  */
 public final class WebWindowEvent extends EventObject {
     private final Page oldPage_;

@@ -26,12 +26,13 @@
 
     <class name="Checkbox" extends="Input"/>
 
-    <class name="Document" extends="HTMLElement"><!-- NOT FINISHED -->
+    <class name="Document" extends="NodeImpl"><!-- NOT FINISHED -->
         <property name="alinkColor" readable="true" writable="false"/>
         <property name="anchors" readable="true" writable="false"/>
         <property name="applets" readable="true" writable="false"/>
         <property name="bgColor" readable="true" writable="false"/>
         <property name="cookie" readable="true" writable="false"/>
+        <property name="documentElement" readable="true" writable="false"/>
         <property name="domain" readable="true" writable="false"/>
         <property name="embeds" readable="true" writable="false">
             <javascript min-version="1.1"/>

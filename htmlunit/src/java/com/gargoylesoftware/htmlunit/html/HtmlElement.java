@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -48,9 +47,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -87,6 +83,10 @@ public abstract class HtmlElement extends DomNode {
         super(htmlPage);
         if(attributes != null) {
             attributes_ = attributes;
+            String id = (String) attributes.get("id");
+            if (id != null) {
+                getPage().addIdElement(this);
+            }
         }
         else {
             attributes_ = Collections.EMPTY_MAP;
@@ -130,7 +130,14 @@ public abstract class HtmlElement extends DomNode {
         if(attributeValue.length() == 0) {
             attributeValue = ATTRIBUTE_VALUE_EMPTY;
         }
+        boolean isId = attributeName.equals("id");
+        if (isId) {
+            getPage().removeIdElement(this);
+        }
         attributes_.put(attributeName, attributeValue);
+        if (isId) {
+            getPage().addIdElement(this);
+        }
     }
 
     /**
@@ -138,6 +145,9 @@ public abstract class HtmlElement extends DomNode {
      * @param name the attribute name
      */
     public final void removeAttribute(String name) {
+        if (name.equals("id")) {
+            getPage().removeIdElement(this);
+        }
         attributes_.remove(name);
     }
 
@@ -236,6 +246,36 @@ public abstract class HtmlElement extends DomNode {
         return form;
     }
 
+    /**
+     * recursively write the XML data for the node tree starting at <code>node</code>
+     *
+     * @param indent white space to indent child nodes
+     * @param printWriter writer where child nodes are written
+     */
+    protected void printXml( String indent, PrintWriter printWriter ) {
+
+        final boolean hasChildren = (getFirstChild() != null);
+        printWriter.print(indent+"<"+getTagName().toLowerCase());
+        Map attributeMap = attributes_;
+        for( Iterator it=attributeMap.keySet().iterator(); it.hasNext(); ) {
+            printWriter.print(" ");
+            String name = (String)it.next();
+            printWriter.print(name);
+            printWriter.print("=\"");
+            printWriter.print(attributeMap.get(name));
+            printWriter.print("\"");
+        }
+
+        if( ! hasChildren ) {
+            printWriter.print("/");
+        }
+        printWriter.println(">");
+        printChildrenAsXml( indent, printWriter );
+        if( hasChildren ) {
+            printWriter.println(indent+"</"+getTagName().toLowerCase()+">");
+        }
+    }
+
 
     /**
      *  Return a string representation of this object
@@ -268,91 +308,6 @@ public abstract class HtmlElement extends DomNode {
         buffer.append( ">]" );
 
         return buffer.toString();
-    }
-
-
-    /**
-     *  Return a text representation of this element that represents what would
-     *  be visible to the user if this page was shown in a web browser. For
-     *  example, a select element would return the currently selected value as
-     *  text
-     *
-     * @return  The element as text
-     */
-    public String asText() {
-        String text = getChildrenAsText();
-
-        // Translate non-breaking spaces to regular spaces.
-        text = text.replace((char)160,' ');
-
-        // Remove extra whitespace
-        text = reduceWhitespace(text);
-        return text;
-    }
-
-
-    /**
-     *  Return a text string that represents all the child elements as they
-     *  would be visible in a web browser
-     *
-     * @return  See above
-     * @see  #asText()
-     */
-    protected final String getChildrenAsText() {
-        StringBuffer buffer = new StringBuffer();
-        Iterator childIterator = getChildIterator();
-
-        if(!childIterator.hasNext()) {
-            return "";
-        }
-        while(childIterator.hasNext()) {
-            DomNode node = (DomNode)childIterator.next();
-            buffer.append(node.asText());
-        }
-
-        return buffer.toString();
-    }
-
-
-    /**
-     * Removes extra whitespace from a string similar to what a browser does
-     * when it displays text.
-     * @param text The text to clean up.
-     * @return The cleaned up text.
-     */
-    private static String reduceWhitespace( final String text ) {
-        final StringBuffer buffer = new StringBuffer( text.length() );
-        final int length = text.length();
-        boolean whitespace = false;
-        for( int i = 0; i < length; ++i) {
-            char ch = text.charAt(i);
-            if( whitespace ) {
-                if( Character.isWhitespace(ch) == false ) {
-                    buffer.append(ch);
-                    whitespace = false;
-                }
-            }
-            else {
-                if( Character.isWhitespace(ch) ) {
-                    whitespace = true;
-                    buffer.append(' ');
-                }
-                else {
-                    buffer.append(ch);
-                }
-            }
-        }
-        return buffer.toString().trim();
-    }
-
-
-    /**
-     * Return an iterator that will recursively iterate over every child element
-     * below this one.
-     * @return The iterator.
-     */
-    public DescendantElementsIterator getAllHtmlChildElements() {
-        return new DescendantElementsIterator();
     }
 
 
@@ -431,14 +386,7 @@ public abstract class HtmlElement extends DomNode {
     public HtmlElement getHtmlElementById( final String id )
         throws ElementNotFoundException {
 
-        DescendantElementsIterator iterator = new DescendantElementsIterator();
-        while(iterator.hasNext()) {
-            HtmlElement next = iterator.nextElement();
-            if(next.getId().equals(id)) {
-                return next;
-            }
-        }
-        throw new ElementNotFoundException( "*", "id", id );
+        return getPage().getHtmlElementById(id);
     }
 
 
@@ -565,70 +513,6 @@ public abstract class HtmlElement extends DomNode {
     }
 
     /**
-     * Return the log object for this element.
-     * @return The log object for this element.
-     */
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
-    }
-
-    /**
-     * Return a string representation of the xml document from this element and all
-     * it's children (recursively).
-     *
-     * @return The xml string.
-     */
-    public String asXml() {
-
-        final StringWriter stringWriter = new StringWriter();
-        final PrintWriter printWriter = new PrintWriter(stringWriter);
-        printXml(this, "", printWriter);
-        printWriter.close();
-        return stringWriter.toString();
-    }
-
-    /*
-     * recursively write the XML data for the node tree starting at <code>node</code>
-     */
-    private void printXml( DomNode node, String indent, PrintWriter printWriter ) {
-
-        final boolean hasChildren = (node.getFirstChild() != null);
-        if( node instanceof HtmlElement ) {
-            final HtmlElement element = (HtmlElement)node;
-            printWriter.print(indent+"<"+element.getTagName().toLowerCase());
-            Map attributeMap = element.attributes_;
-            for( Iterator it=attributeMap.keySet().iterator(); it.hasNext(); ) {
-                printWriter.print(" ");
-                String name = (String)it.next();
-                printWriter.print(name);
-                printWriter.print("=\"");
-                printWriter.print(attributeMap.get(name));
-                printWriter.print("\"");
-            }
-
-            if( hasChildren == false ) {
-                printWriter.print("/");
-            }
-            printWriter.println(">");
-        }
-        else if( node instanceof DomText ) {
-            printWriter.print(indent);
-            printWriter.println( ((DomText)node).getData());
-        }
-        else {
-            printWriter.println(indent+node);
-        }
-        DomNode child = node.getFirstChild();
-        while (child != null) {
-            printXml(child, indent+"  ", printWriter);
-            child = child.getNextSibling();
-        }
-        if( hasChildren && node instanceof HtmlElement ) {
-            printWriter.println(indent+"</"+((HtmlElement)node).getTagName().toLowerCase()+">");
-        }
-    }
-
-    /**
      * an iterator over the HtmlElement children
      */
     protected class ChildElementsIterator implements Iterator {
@@ -685,92 +569,6 @@ public abstract class HtmlElement extends DomNode {
                 next = next.getNextSibling();
             }
             nextElement_ = (HtmlElement)next;
-        }
-    }
-
-    /**
-     * an iterator over all HtmlElement descendants in document order
-     */
-    protected class DescendantElementsIterator implements Iterator {
-
-        private HtmlElement nextElement_ = getFirstChildElement(HtmlElement.this);
-
-        /** @return is there a next one? */
-        public boolean hasNext() {
-            return nextElement_ != null;
-        }
-
-        /** @return the next one */
-        public Object next() {
-            return nextElement();
-        }
-
-        /** remove the current object */
-        public void remove() {
-            if(nextElement_ == null) {
-                throw new IllegalStateException();
-            }
-            if(nextElement_.getPreviousSibling() != null) {
-                nextElement_.getPreviousSibling().remove();
-            }
-        }
-
-        /** @return is there a next one? */
-        public HtmlElement nextElement() {
-            HtmlElement result = nextElement_;
-            setNextElement();
-            return result;
-        }
-
-        /** @return the next element */
-        private void setNextElement() {
-            HtmlElement next = getFirstChildElement(nextElement_);
-            if( next == null ) {
-                next = getNextSibling(nextElement_);
-            }
-            if( next == null ) {
-                next = getNextElementUpwards(nextElement_);
-            }
-            nextElement_ = next;
-        }
-
-        private HtmlElement getNextElementUpwards( HtmlElement startingElement ) {
-            if( startingElement == HtmlElement.this) {
-                return null;
-            }
-
-            HtmlElement parent = (HtmlElement)startingElement.getParentNode();
-            if( parent == HtmlElement.this ) {
-                return null;
-            }
-
-            DomNode next = parent.getNextSibling();
-            while( next != null && next instanceof HtmlElement == false ) {
-                next = next.getNextSibling();
-            }
-
-            if( next == null ) {
-                return getNextElementUpwards(parent);
-            }
-            else {
-                return (HtmlElement)next;
-            }
-        }
-
-        private HtmlElement getFirstChildElement(HtmlElement parent) {
-            DomNode node = parent.getFirstChild();
-            while( node != null && node instanceof HtmlElement == false ) {
-                node = node.getNextSibling();
-            }
-            return (HtmlElement)node;
-        }
-
-        private HtmlElement getNextSibling( HtmlElement element) {
-            DomNode node = element.getNextSibling();
-            while( node != null && node instanceof HtmlElement == false ) {
-                node = node.getNextSibling();
-            }
-            return (HtmlElement)node;
         }
     }
 }

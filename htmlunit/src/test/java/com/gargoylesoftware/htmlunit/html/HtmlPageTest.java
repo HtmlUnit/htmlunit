@@ -1089,5 +1089,63 @@ public class HtmlPageTest extends WebTestCase {
 
         assertEquals( "second", page.getTitleText() );
     }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDocumentElement() throws Exception {
+
+        final String content
+                 = "<html>"
+                 + "<head><title>foo</title></head>"
+                 + "<body>"
+                 + "</body></html>";
+
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( content );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://www.gargoylesoftware.com" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+
+        final HtmlElement root = page.getDocumentElement();
+
+        assertNotNull(root);
+        assertEquals( "html", root.getTagName() );
+        assertSame( page, root.getParentNode() );
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDocumentNodeType() throws Exception {
+
+        final String content
+                 = "<html>"
+                 + "<head><title>foo</title></head>"
+                 + "<body>"
+                 + "</body></html>";
+
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( content );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://www.gargoylesoftware.com" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+
+        final HtmlElement root = page.getDocumentElement();
+
+        assertEquals( DomNode.DOCUMENT_NODE, page.getNodeType() );
+        assertEquals( DomNode.ELEMENT_NODE, root.getNodeType() );
+        assertEquals( "#document", page.getNodeName() );
+    }
 }
 
