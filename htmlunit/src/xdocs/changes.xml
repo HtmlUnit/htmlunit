@@ -7,9 +7,15 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
-						<action type="update" dev="cerskine">
-								Added to the JavaScript configuration page a column showing if a function is not implemented.
-						</action>
+            <action type="update" dev="mguillem">
+                Javascript: added navigator.language for Mozilla.
+            </action>
+            <action type="update" dev="mguillem">
+                Javascript: added dummy implementation of Mozilla's window properties innerHeight, innerWidth, outerHeight, outerWidth.
+            </action>
+            <action type="update" dev="cerskine">
+                Added to the JavaScript configuration page a column showing if a function is not implemented.
+            </action>
             <action type="update" dev="cerskine">
                 Reworked the JavaScript configuration.  Configuration file is now used and supports the
                 browser constraints on the properties and functions.

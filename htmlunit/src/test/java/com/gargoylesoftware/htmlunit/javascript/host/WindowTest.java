@@ -44,6 +44,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -1546,6 +1547,30 @@ public class WindowTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test Mozilla viewport properties
+     *
+     * @throws Exception If the test fails.
+     */
+    public void testMozillaViewport() throws Exception {
+        final String content = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "alert(typeof window.innerWidth);\n"
+            + "alert(typeof window.innerHeight);\n"
+            + "alert(typeof window.outerWidth);\n"
+            + "alert(typeof window.outerHeight);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>\n";
+        final List expectedAlerts = Collections.nCopies(4, "number");
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

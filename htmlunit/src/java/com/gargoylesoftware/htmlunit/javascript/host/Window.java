@@ -783,4 +783,41 @@ public class Window extends SimpleScriptable {
     public void jsFunction_clearInterval(final int iIntervalId) {
         getLog().warn("Current implementation of clearInterval does nothing.");
     }
+
+
+    /**
+     * Return the innerWidth.
+     * @return a dummy value
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref28.html">Mozilla doc</a>
+     */
+    public int jsGet_innerWidth() {
+        return 1276; // why this value? this is the current value of my Mozilla
+    }
+
+    /**
+     * Return the outerWidth.
+     * @return a dummy value
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref79.html">Mozilla doc</a>
+     */
+    public int jsGet_outerWidth() {
+        return 1276; // why this value? this is the current value of my Mozilla
+    }
+
+    /**
+     * Return the innerHeight.
+     * @return a dummy value
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref27.html">Mozilla doc</a>
+     */
+    public int jsGet_innerHeight() {
+        return 778; // why this value? this is the current value of my Mozilla
+    }
+
+    /**
+     * Return the outer height.
+     * @return a dummy value
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref78.html">Mozilla doc</a>
+     */
+    public int jsGet_outerHeight() {
+        return 936; // why this value? this is the current value of my Mozilla
+    }
 }
