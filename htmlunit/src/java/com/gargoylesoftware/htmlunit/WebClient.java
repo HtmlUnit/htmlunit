@@ -202,7 +202,6 @@ public class WebClient {
      *      failing status code AND the property
      *      "throwExceptionOnFailingStatusCode" is set to true (see {@link
      *      #setThrowExceptionOnFailingStatusCode(boolean)})
-     * @deprecated Use {@link #getPage(WebWindow,URL,SubmitMethod,List,boolean)} instead.
      */
     public Page getPage(
             final URL url,
@@ -217,7 +216,7 @@ public class WebClient {
 
 
     /**
-     * Return a page.  This variation has been deprecated.
+     * Return a page.
      *
      * @param  webWindow The window that the new page will be loaded into.
      * @param  url The url of the server
@@ -231,7 +230,6 @@ public class WebClient {
      *      failing status code AND the property
      *      "throwExceptionOnFailingStatusCode" is set to true (see {@link
      *      #setThrowExceptionOnFailingStatusCode(boolean)})
-     * @deprecated Use {@link #getPage(WebWindow,URL,SubmitMethod,List,boolean)} instead
      */
     public Page getPage(
             final WebWindow webWindow,
