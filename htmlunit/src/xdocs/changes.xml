@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="add" dev="mguillem" id="1153758" due-to="George Murnock">
+                Javascript: added support for new Image() and changing src attribute.
+            </action>
         </release>
      
         <release version="1.5" date="March 13, 2005">

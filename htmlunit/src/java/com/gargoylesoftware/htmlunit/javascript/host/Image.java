@@ -37,16 +37,28 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.MalformedURLException;
+
+import org.mozilla.javascript.Context;
+
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+
 
 /**
  * The javascript object that represents an "Image"
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  <a href="mailto:george@murnock.com">George Murnock</a>
  */
 public class Image extends HTMLElement {
 
     private static final long serialVersionUID = 5630843390548382869L;
+    private String src_;
 
 
     /**
@@ -62,14 +74,52 @@ public class Image extends HTMLElement {
      */
     public void jsConstructor() {
     }
-
-
+    
     /**
-     * Return the type of this input.
-     * @return The type
+     * Set the src property, either on the DOM node which corresponds to this 
+     * JavaScript object, or if none exists (as when using JavaScript to preload
+     * images), on the JavaScript object itself.
+     * @param src the src attribute value
      */
-    public String jsGet_type() {
-        return "image";
+    public void jsSet_src(final String src) {
+        src_ = src;
+        final HtmlImage htmlImageElement = (HtmlImage) getHtmlElementOrNull();
+        if (htmlImageElement != null) {
+            htmlImageElement.setAttributeValue( "src", src );
+        }
+    }
+    
+    /**
+     * Return the value of the src property, either from the DOM node which
+     * corresponds to this JavaScript object, or if that doesn't exist (as
+     * when using JavaScript to preload images), from the JavaScript object 
+     * itself.
+     * @return the src attribute
+     */
+    public String jsGet_src() {
+        WebClient webClient = JavaScriptEngine.getWebClientForCurrentThread();
+        HtmlPage currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
+        
+        HtmlElement htmlImageElement = getHtmlElementOrNull();
+        if ( htmlImageElement != null ) {
+            String srcValue = htmlImageElement.getAttributeValue( "src" );
+            try {
+                return currentPage.getFullyQualifiedUrl(srcValue).toExternalForm();
+            } 
+            catch (final MalformedURLException e) {
+                throw Context.reportRuntimeError("Unable to create fully qualified URL for src attribute of image: " 
+                                                  + e.getMessage());
+            }
+        }
+        else {
+            try {
+                return currentPage.getFullyQualifiedUrl(src_).toExternalForm();
+            }
+            catch (final MalformedURLException e) {
+                throw Context.reportRuntimeError("Unable to create fully qualified URL for src attribute of image: " 
+                                                 + e.getMessage());
+            }
+        }
     }
 }
 
