@@ -37,7 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.xml.sax.helpers.AttributesImpl;
+
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.InputElementFactory;
 
 /**
  * The javascript object for form input elements (html tag &lt;input ...&gt;).
@@ -69,13 +72,22 @@ public class Input extends FormField {
 
     /**
      * Sets the value of the attribute "type".
-     * Currently only a placeholder doing nothing.
+     * Note: this replace the DOM node with a new one.
      * @param newType the new type to set
      */
     public void jsSet_type(final String newType) {
-        getLog().warn("type setter for Input object currently only implemented as placeholder."
-                + " Type will not be changed to: \"" 
-                + newType + "\" and will stay by \"" + getHtmlInputOrDie().getTypeAttribute() + "\"");
+        final HtmlInput input = getHtmlInputOrDie();
+        if (!input.getTypeAttribute().equalsIgnoreCase(newType)) {
+            final AttributesImpl attributes = readAttributes(input);
+            final int index = attributes.getIndex("type");
+            attributes.setValue(index, newType);
+
+            final HtmlInput newInput = (HtmlInput) InputElementFactory.instance
+                .createElement(input.getPage(), "input", attributes);
+            input.replace(newInput);
+            input.setScriptObject(null);
+            setDomNode(newInput, true);
+            }
     }
 
     /**

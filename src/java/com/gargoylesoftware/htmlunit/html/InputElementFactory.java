@@ -48,7 +48,7 @@ import java.util.HashMap;
  * @version  $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-final class InputElementFactory implements IElementFactory {
+public final class InputElementFactory implements IElementFactory {
 
     /** The singleton instance */
     public static final InputElementFactory instance = new InputElementFactory();
