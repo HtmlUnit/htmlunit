@@ -37,14 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.TextUtil;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Collections;
-import java.util.List;
 import org.w3c.dom.Element;
 
 /**
