@@ -302,4 +302,27 @@ public class DocumentTest extends WebTestCase {
 
         assertEquals( Collections.singletonList(""), collectedAlerts );
     }
+
+
+    public void testGetURL() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title></head><body onload='alert(document.URL);'>"
+             + "</form></body></html>";
+
+        final List responseHeaders = Collections.EMPTY_LIST;
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", responseHeaders );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        assertEquals( Collections.singletonList("http://first"), collectedAlerts );
+    }
 }
