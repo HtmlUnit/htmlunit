@@ -93,6 +93,17 @@ public class OptionsArray extends SimpleScriptable {
             return NOT_FOUND;
         }
     }
+    
+    /**
+     * <p>Return the object at the specified index.</p>
+     *
+     * @param index The index
+     * @return The object or NOT_FOUND
+     */
+    public Object jsFunction_item(final int index) {
+        return get(index, null);
+
+    }    
 
 
     /**

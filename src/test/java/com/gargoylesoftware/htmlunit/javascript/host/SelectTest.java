@@ -287,7 +287,7 @@ public class SelectTest extends WebTestCase {
         final String content
                  = "<html><head><title>foo</title><script>"
                  + "function doTest() {\n"
-                 + "    var options = document.form1.select1.options;\n"
+                 + "    var options = document.form1.select1;\n"
                  + "    options.add(new Option('Four','value4'), null);\n"
                  + "    alert(options.length);\n"
                  + "    alert(options[index].text);\n"
@@ -352,15 +352,10 @@ public class SelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRemoveOptionWithRemoveMethod() throws Exception {
-        if(true) {
-            notImplemented();
-            return;
-        }
-
         final String content
                  = "<html><head><title>foo</title><script>"
                  + "function doTest() {\n"
-                 + "    var options = document.form1.select1.options;\n"
+                 + "    var options = document.form1.select1;\n"
                  + "    options.remove(1);\n"
                  + "    alert(options.length);\n"
                  + "    alert(options[1].text);\n"
@@ -423,10 +418,6 @@ public class SelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOptionArrayHasItemMethod() throws Exception {
-        if(true) {
-            notImplemented();
-            return;
-        }
         final String content
                  = "<html><head><title>foo</title><script>"
                  + "function doTest() {\n"
