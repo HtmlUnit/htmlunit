@@ -65,6 +65,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Marc Guillemot
  * @author David D. Kilzer
+ * @author Chris Erskine
  */
 public class WebClientTest extends WebTestCase {
 
@@ -1072,6 +1073,20 @@ public class WebClientTest extends WebTestCase {
         final List expectedAlerts = Arrays.asList( new String[]{
             "null", "null"} );
         assertEquals( expectedAlerts, collectedAlerts );
+    }
+    
+    /**
+     * Test setting the NekoHTML logging and parsing flags
+     * 
+     * @throws Exception if test fails
+     */
+    public void testNekoFlagSetters() throws Exception {
+        assertEquals("Default logging is wrong", false, WebClient.getValidateHtml());
+        WebClient.setValidateHtml(true);
+        assertEquals("Logging did not get set", true, WebClient.getValidateHtml());
+        assertEquals("Default ignore content is wrong", false, WebClient.getIgnoreOutsideContent());
+        WebClient.setIgnoreOutsideContent(true);
+        assertEquals("Ignore content did not get set", true, WebClient.getIgnoreOutsideContent());
     }
 }
 
