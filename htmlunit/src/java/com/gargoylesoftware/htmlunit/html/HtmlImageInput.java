@@ -7,6 +7,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import org.w3c.dom.Element;
+import com.gargoylesoftware.htmlunit.Page;
 
 /**
  *  Wrapper for the html element "input"
