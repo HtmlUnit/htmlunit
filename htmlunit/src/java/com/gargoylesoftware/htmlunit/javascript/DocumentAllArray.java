@@ -72,7 +72,7 @@ public class DocumentAllArray extends SimpleScriptable implements Function {
     public Object call(final Context context, final Scriptable scope, final Scriptable thisObj,
             final Object[] args) throws JavaScriptException {
         if (args.length == 0) {
-            throw new JavaScriptException("Bad args"); // what should we throw here?
+            throw Context.reportRuntimeError("Bad args"); // what should we throw here?
         }
 
         return get(args[0]);

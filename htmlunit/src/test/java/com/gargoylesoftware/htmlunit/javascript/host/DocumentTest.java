@@ -52,7 +52,6 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -1603,15 +1602,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
-        try {
-            loadPage(content, collectedAlerts);
-        } 
-        catch (ScriptException se) {
-            if (se.getEnclosedException() instanceof IllegalStateException) {
-                return;
-            }
-        }
-        fail("Should have thrown IllegalState for missing title when setting the title from JavaScript");
+        loadPage(content, collectedAlerts);
+        final List expectedAlerts = Arrays.asList( new String[]{ "correct title" } );
+
+        assertEquals("Test the alert", expectedAlerts, collectedAlerts );       
     }
     
     /**

@@ -142,19 +142,17 @@ public class ScriptException extends RuntimeException {
                 final EcmaError ecmaError = (EcmaError)throwable_;
                 printWriter.print("EcmaError: ");
                 printWriter.print("lineNumber=[");
-                printWriter.print(ecmaError.getLineNumber());
+                printWriter.print(ecmaError.lineNumber());
                 printWriter.print("] column=[");
-                printWriter.print(ecmaError.getColumnNumber());
+                printWriter.print(ecmaError.columnNumber());
                 printWriter.print("] lineSource=[");
                 printWriter.print(getFailingLine());
                 printWriter.print("] name=[");
                 printWriter.print(ecmaError.getName());
                 printWriter.print("] sourceName=[");
-                printWriter.print(ecmaError.getSourceName());
+                printWriter.print(ecmaError.sourceName());
                 printWriter.print("] message=[");
                 printWriter.print(ecmaError.getMessage());
-                printWriter.print("] errorObject=[");
-                printWriter.print(ecmaError.getErrorObject());
                 printWriter.print("]");
                 printWriter.println();
             }
@@ -257,7 +255,7 @@ public class ScriptException extends RuntimeException {
 
         if( throwable_ instanceof EcmaError ) {
             final EcmaError ecmaError = (EcmaError)throwable_;
-            return ecmaError.getLineNumber();
+            return ecmaError.lineNumber();
         }
 
         return -1;

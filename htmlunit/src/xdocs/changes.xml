@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1082098">
+                Upgraded rhino js to 1.6R1.
+            </action>
             <action type="update" dev="mguillem" due-to="Mike Bresnahan" id="1083330">
                 Fixed NullPointerException tossed by HtmlSelect.asText() if no option is selected.
             </action>

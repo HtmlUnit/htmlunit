@@ -862,37 +862,56 @@ public final class HtmlPage extends DomNode implements Page {
      * @param message The new text 
      */
     public void setTitleText(final String message) {
-        final HtmlTitle titleElement = getTitleElement();
+        HtmlTitle titleElement = getTitleElement();
         if (titleElement == null) {
-            throw new IllegalStateException("Title element was not defined for this page");
+            getLog().debug("No title element, creating one");
+            final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentElement(), HtmlHead.class);
+            if (head == null) {
+                // perhaps should we create head too?
+                throw new IllegalStateException("Headelement was not defined for this page");
+            }
+            titleElement = new HtmlTitle(this, Collections.EMPTY_MAP);
+            if (head.getFirstChild() != null) {
+                head.getFirstChild().insertBefore(titleElement);
+            }
+            else {
+                head.appendChild(titleElement);
+            }
         }
-        else {
-            titleElement.setNodeValue(message);
-        }
+
+        titleElement.setNodeValue(message);
     }
     
+    /**
+     * Get the first child of startElement that is an instance of the given class.
+     * @return <code>null</code> if no child found
+     */
+    private HtmlElement getFirstChildElement(final HtmlElement startElement, final Class clazz) {
+        final Iterator iterator = startElement.getChildElementsIterator();
+        while (iterator.hasNext()) {
+            final HtmlElement element = (HtmlElement) iterator.next();
+            if (clazz.isInstance(element)) {
+                return element;
+            }
+        }
         
+        return null;
+    }
+    
     /**
      * Get the title element for this page.  Returns null if one is not found.
      * 
      * @return the title element for this page or null if this is not one.
      */
     private HtmlTitle getTitleElement() {
-        final Iterator topIterator = getDocumentElement().getChildElementsIterator();
-        while( topIterator.hasNext() ) {
-            final HtmlElement topElement = (HtmlElement)topIterator.next();
-            if( topElement instanceof HtmlHead ) {
-                final Iterator headIterator = topElement.getChildElementsIterator();
-                while( headIterator.hasNext() ) {
-                    final HtmlElement headElement = (HtmlElement)headIterator.next();
-                    if( headElement instanceof HtmlTitle ) {
-                        return (HtmlTitle) headElement;
-                    }
-                }
-            }
+        final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentElement(), HtmlHead.class);
+        if (head != null) {
+            return (HtmlTitle) getFirstChildElement(head, HtmlTitle.class);
         }
+
         return null;
     }
+
     /**
      * Return the value of the onload attribute of the enclosed body or
      * frameset.
