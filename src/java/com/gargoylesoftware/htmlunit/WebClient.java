@@ -790,15 +790,6 @@ public class WebClient {
     public static URL expandUrl( final URL baseUrl, String relativeUrl )
         throws MalformedURLException {
 
-        if( relativeUrl.indexOf("%") != -1 ) {
-            try {
-                relativeUrl = org.apache.commons.httpclient.util.URIUtil.decode(relativeUrl);
-            }
-            catch( Exception e ) {
-                e.printStackTrace();
-            }
-        }
-
         // Was a protocol specified?
         if( relativeUrl.indexOf( ":" ) != -1 ) {
             return makeUrl( relativeUrl );
