@@ -1,0 +1,232 @@
+<!--
+ This is a configuration file for the ant build tool
+ http://jakarta.apache.org/ant/index.html
+ $Revision$
+-->
+
+<project name="HtmlUnit" default="cleancompile" basedir=".">
+
+
+<property name="build.compiler" value="jikes" />
+<property name="build.compiler.pedantic" value="true"/>
+
+<property name="version" value="HtmlUnit-1.1-pre5" />
+
+<taskdef name="checkstyle"
+	classname="com.puppycrawl.tools.checkstyle.CheckStyleTask"
+	classpath="build/lib/checkstyle-all-2.3.jar" />
+
+
+<path id="base.class.path">
+	<pathelement path="src/java"/>
+
+	<!-- Jars for production -->
+	<pathelement path="dist/lib/Tidy.jar"/>
+	<pathelement path="dist/lib/commons-httpclient.jar"/>
+	<pathelement path="dist/lib/commons-logging.jar"/>
+	<pathelement path="dist/lib/js.jar"/>
+
+	<!-- Jars for testing and development -->
+	<pathelement path="build/lib/junit.jar"/>
+	<pathelement path="build/lib/gsbase.jar"/>
+	<pathelement path="build/lib/doclint.jar"/>
+
+	<!-- Required so that jikes can find the JDK classes on Mac OS/X -->
+	<pathelement path="/System/Library/Frameworks/JavaVM.framework/Versions/1.3.1/Classes/classes.jar"/>
+
+</path>
+
+
+<target name="compile" description="compile">
+	<javac srcdir="src/java" destdir="src/java" debug="on" deprecation="off">
+		<classpath refid="base.class.path"/>
+	</javac>
+</target>
+
+
+<target name="cleancompile" depends="clean, compile" description="clean compile">
+</target>
+
+
+<target name="build" depends="compile" description="build">
+	<delete dir="../${version}"/>
+
+	<mkdir dir="../${version}/"/>
+	<mkdir dir="../${version}/docs"/>
+	<mkdir dir="../${version}/docs/docs-1.1"/>
+	<mkdir dir="../${version}/docs/docs-1.1/api"/>
+	<mkdir dir="../${version}/lib"/>
+	<mkdir dir="../${version}/src"/>
+
+	<jar
+		jarfile="../${version}/lib/HtmlUnit.jar"
+		basedir="."
+		excludes="**/test/*,**/*.java,build.xml,lib,**/package.html"/>
+
+	<javadoc
+		sourcepath="."
+		destdir="../${version}/docs/docs-1.1/api"
+		packagenames="${packageList}"
+		version="yes"
+		author="yes"
+		windowtitle="${version}"
+		doctitle="${version}">
+
+		<classpath refid="base.class.path"/>
+		<packageset dir="." defaultexcludes="no">
+			<exclude name="**/test" />
+		</packageset>
+	</javadoc>
+
+	<copy todir="../${version}/src">
+		<fileset dir=".">
+			<exclude name="**/*.class"/>
+			<exclude name="test/**"/>
+		</fileset>
+	</copy>
+
+	<!-- Build the docs -->
+	<style
+		basedir="../docs"
+		destdir="../${version}/docs"
+		extension=".html"
+		style="../docs/site.xsl"
+		includes="*.xml">
+		<param name="pathToRoot" expression=""/>
+	</style>
+	<style
+		basedir="../docs"
+		destdir="../${version}/docs"
+		extension=".html"
+		style="../docs/site.xsl"
+		includes="**/*.xml"
+		excludes="*.xml">
+		<param name="pathToRoot" expression="../"/>
+	</style>
+	<copy todir="../${version}/docs" >
+		<fileset dir="../docs" >
+			<include name="**/*.jpg"/>
+			<include name="**/*.gif"/>
+		</fileset>
+	</copy>
+
+	<copy todir="../${version}/lib" file="../lib/Tidy.jar"/>
+	<copy todir="../${version}/lib" file="../lib/commons-httpclient.jar"/>
+	<copy todir="../${version}/lib" file="../lib/commons-logging.jar"/>
+	<copy todir="../${version}/lib" file="../lib/js.jar"/>
+
+	<zip
+		zipfile="../${version}.zip"
+		basedir=".."
+		includes="${version}/**"
+	/>
+
+	<!-- Build the documentation zip file for uploading -->
+	<zip
+		zipfile="../projectdocs.zip"
+		basedir="../${version}/docs"
+		includes="**/*.html,**/*.jpg,**/*.gif"
+		excludes="src/**"
+	/>
+	<!--
+	<delete dir="../${version}"/>
+	-->
+</target>
+
+
+<target name="doclint" description="doclint">
+	<javadoc
+		sourcepath="src/java"
+		packagenames="${packageList}"
+		version="no"
+		author="no"
+		doclet="com.jollem.doclint.DocLint"
+		docletPath="build/lib/doclint.jar">
+
+		<classpath refid="base.class.path"/>
+		<packageset dir="src/java" defaultexcludes="no">
+			<exclude name="**/test" />
+		</packageset>
+	</javadoc>
+</target>
+
+
+<target name="junit" description="junit">
+	<java fork="true" classname="junit.textui.TestRunner" taskname="junitui" dir="src/java">
+		<arg value="com.gargoylesoftware.htmlunit.test.MainTestSuite"/>
+		<classpath refid="base.class.path"/>
+	</java>
+</target>
+
+
+<target name="junitui" description="junitui">
+	<java fork="yes" classname="junit.swingui.TestRunner" taskname="junitui" dir="src/java">
+		<arg value="com.gargoylesoftware.htmlunit.test.MainTestSuite"/>
+		<classpath refid="base.class.path"/>
+	</java>
+</target>
+
+
+<target name="clean" description="clean">
+	 <delete>
+		<fileset dir="." includes="**/*.class"/>
+	</delete>
+</target>
+
+
+<target name="SanityCheck" description="DO NOT RUN THIS TASK">
+	<java fork="yes" classname="com.gargoylesoftware.htmlunit.test.SanityCheck" dir="src/java">
+		<classpath refid="base.class.path"/>
+	</java>
+</target>
+
+
+<target name="checkstyle" description="Check all the coding conventions">
+	<!-- Check production code -->
+	<checkstyle
+		javadocScope="package"
+		tabWidth="4"
+		constPattern="^[A-Z](_?[A-Z0-9]+)*$"
+		localVarPattern="^i|[a-z][a-zA-Z0-9]+$"
+		memberPattern="^[a-z][a-zA-Z0-9_]+_$"
+		methodPattern="^jsGet_[a-zA-Z0-9]+|jsSet_[a-zA-Z0-9]+|jsFunction_[a-zA-Z0-9]+|[a-z][a-zA-Z0-9]+$"
+		paramPattern="^[a-z][a-zA-Z0-9]+$"
+		publicMemberPattern="^$"
+		staticPattern="^[A-Z][a-zA-Z0-9_]+_$"
+		typePattern="^[A-Z][a-zA-Z0-9]+$"
+		parenPad="ignore"
+		ignoreCastWhitespace="yes"
+		ignoreWhitespace="yes"
+		maxLineLen="120"
+		rcurly="alone"
+		headerFile="build/checkstyle.headerfile"
+		requirePackageHtml="true"
+		>
+		<fileset dir="src/java" includes="**/*.java" excludes="**/test/*"/>
+	</checkstyle>
+
+	<!-- Check tests - test code is a bit more lenient -->
+	<checkstyle
+		javadocScope="nothing"
+		tabWidth="4"
+		constPattern="^[A-Z](_?[A-Z0-9]+)*$"
+		localVarPattern="^i|[a-z][a-zA-Z0-9]+$"
+		memberPattern="^[a-z][a-zA-Z0-9_]+_$"
+		methodPattern="^[a-z][a-zA-Z0-9_]+$"
+		paramPattern="^[a-z][a-zA-Z0-9]+$"
+		publicMemberPattern="^$"
+		staticPattern="^[a-z][a-zA-Z0-9_]+_$"
+		typePattern="^[A-Z][a-zA-Z0-9]+$"
+		parenPad="ignore"
+		ignoreCastWhitespace="yes"
+		ignoreWhitespace="yes"
+		maxLineLen="120"
+		rcurly="alone"
+		headerFile="build/checkstyle.headerfile"
+		>
+		<fileset dir="src/java" includes="**/test/*.java"/>
+	</checkstyle>
+</target>
+
+
+</project>
