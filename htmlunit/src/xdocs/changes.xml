@@ -42,6 +42,9 @@
                 Fixed bug where disabled elements were being submitted anyway.
                 Patch supplied by Brad Clarke
             </action>
+            <action type="update" dev="mbowler" id="800993">
+				Navigator.javaEnabled should be method not property
+			</action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
