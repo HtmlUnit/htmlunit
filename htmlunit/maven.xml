@@ -14,18 +14,18 @@
 
     <preGoal name="xdoc:transform">
         <attainGoal name="faq"/>
-    	<attainGoal name="createDependenciesPage"/>
+        <attainGoal name="createDependenciesPage"/>
     </preGoal>
-    
+
     <goal name="createDependenciesPage"
         description="Generates the dependencies document">
 
         <j:set var="destfile" value="${maven.build.dir}/generated-xdocs/dependencies.xml"/>
         <ant:mkdir dir="${maven.build.dir}/generated-xdocs"/>
-                
+
         <u:file var="destfileFile" name="${destfile}"/>
         <j:set var="destfile" value="${destfileFile.getCanonicalPath()}"/>
-                
+
         <j:set var="outputencoding" value="${maven.docs.outputencoding}"/>
 
         <j:file name="${destfile}" encoding="${outputencoding}" outputMode="xml">
@@ -36,73 +36,147 @@
     </properties>
     <body>
         <section name="Dependencies">
-        	<p>
-        		These are the various dependencies required by HtmlUnit.  Some jars
-        		are mandatory for even the simplest use of HtmlUnit, others are optional.
-        		If the optional JARs are missing then the main functionality will
-        		continue to work but some functions will not.
-        	</p>
-        	<table>
-        	<tr><th>Required JARs</th><th>Description</th></tr>
-        	<tr><td>HtmlUnit.jar</td><td>The main HtmlUnit classes</td></tr>
-	        <j:forEach var="lib" items="${pom.artifacts}">
-	    	    <j:set var="dep" value="${lib.dependency}"/>
-			    <j:if test="${dep.getProperty('htmlunit.group')=='required'}">
-			    	<tr>
-			    	<tr>
-			    		<td><a href="${dep.url}">${dep.artifact}</a></td>
-			    		<td>${dep.getProperty('htmlunit.description')}</td>
-			   	    </tr>
-			   	    </tr>
-				</j:if>
-	    	</j:forEach>          
+            <p>
 
-        	<tr><th>Optional JARs for jelly scripting support</th><th>Description</th></tr>
-	        <j:forEach var="lib" items="${pom.artifacts}">
-	    	    <j:set var="dep" value="${lib.dependency}"/>
-			    <j:if test="${dep.getProperty('htmlunit.group')=='jelly'}">
-			    	<tr>
-			    	<tr>
-			    		<td><a href="${dep.url}">${dep.artifact}</a></td>
-			    		<td>${dep.getProperty('htmlunit.description')}</td>
-			   	    </tr>
-			   	    </tr>
-				</j:if>
-	    	</j:forEach>          
+                These are the various dependencies required by HtmlUnit.  Some jars
+                are mandatory for even the simplest use of HtmlUnit, others are optional.
+                If the optional JARs are missing then the main functionality will
+                continue to work but some functions will not.
+            </p>
+            <table>
+            <tr><th>Required JARs</th><th>Description</th></tr>
+            <tr><td>HtmlUnit.jar</td><td>The main HtmlUnit classes</td></tr>
+            <j:forEach var="lib" items="${pom.artifacts}">
+                <j:set var="dep" value="${lib.dependency}"/>
 
-        	<tr><th>Optional JARs for running the unit tests</th><th>Description</th></tr>
-	        <j:forEach var="lib" items="${pom.artifacts}">
-	    	    <j:set var="dep" value="${lib.dependency}"/>
-			    <j:if test="${dep.getProperty('htmlunit.group')=='test'}">
-			    	<tr>
-			    		<td><a href="${dep.url}">${dep.artifact}</a></td>
-			    		<td>${dep.getProperty('htmlunit.description')}</td>
-			   	    </tr>
-				</j:if>
-	    	</j:forEach>          
+                <j:if test="${dep.getProperty('htmlunit.group')=='required'}">
+                    <tr>
+                    <tr>
+                        <td><a href="${dep.url}">${dep.artifact}</a></td>
+                        <td>${dep.getProperty('htmlunit.description')}</td>
+                    </tr>
+                    </tr>
+                </j:if>
 
-        	<tr><th>Optional JARs for SSL support</th><th>Description</th></tr>
-        	<tr>
-        		<td><a href="http://java.sun.com/products/jsse/">JSSE</a></td>
-        		<td>Java Secure Socket Extension.  Not required if you are running Java 1.4+</td>
-        	</tr>
+            </j:forEach>
 
-        	<tr><th>Other optional JARs</th><th>Description</th></tr>
-	        <j:forEach var="lib" items="${pom.artifacts}">
-	    	    <j:set var="dep" value="${lib.dependency}"/>
-			    <j:if test="${dep.getProperty('htmlunit.group')=='optional'}">
-			    	<tr>
-			    	<tr>
-			    		<td><a href="${dep.url}">${dep.artifact}</a></td>
-			    		<td>${dep.getProperty('htmlunit.description')}</td>
-			   	    </tr>
-			   	    </tr>
-				</j:if>
-	    	</j:forEach>          
-	    	</table>
+            <tr><th>Optional JARs for jelly scripting support</th><th>Description</th></tr>
+            <j:forEach var="lib" items="${pom.artifacts}">
+                <j:set var="dep" value="${lib.dependency}"/>
+                <j:if test="${dep.getProperty('htmlunit.group')=='jelly'}">
+                    <tr>
+                    <tr>
+
+                        <td><a href="${dep.url}">${dep.artifact}</a></td>
+                        <td>${dep.getProperty('htmlunit.description')}</td>
+                    </tr>
+                    </tr>
+                </j:if>
+            </j:forEach>
+
+            <tr><th>Optional JARs for running the unit tests</th><th>Description</th></tr>
+
+            <j:forEach var="lib" items="${pom.artifacts}">
+                <j:set var="dep" value="${lib.dependency}"/>
+                <j:if test="${dep.getProperty('htmlunit.group')=='test'}">
+                    <tr>
+                        <td><a href="${dep.url}">${dep.artifact}</a></td>
+                        <td>${dep.getProperty('htmlunit.description')}</td>
+                    </tr>
+                </j:if>
+
+            </j:forEach>
+
+            <tr><th>Optional JARs for SSL support</th><th>Description</th></tr>
+            <tr>
+                <td><a href="http://java.sun.com/products/jsse/">JSSE</a></td>
+                <td>Java Secure Socket Extension.  Not required if you are running Java 1.4+</td>
+            </tr>
+
+            <tr><th>Other optional JARs</th><th>Description</th></tr>
+            <j:forEach var="lib" items="${pom.artifacts}">
+                <j:set var="dep" value="${lib.dependency}"/>
+                <j:if test="${dep.getProperty('htmlunit.group')=='optional'}">
+                    <tr>
+                    <tr>
+                        <td><a href="${dep.url}">${dep.artifact}</a></td>
+
+                        <td>${dep.getProperty('htmlunit.description')}</td>
+                    </tr>
+                    </tr>
+                </j:if>
+            </j:forEach>
+            </table>
         </section>
     </body>
+
 </document>
         </j:file>
-    </goal>    
+    </goal>
+
+
+    <goal
+        name="buildzip"
+        prereqs="xdoc:init, java:jar, javadoc:generate"
+        description="Builds the distribution">
+
+        <ant:mkdir dir="${maven.dist.bin.assembly.dir}/${maven.final.name}"/>
+        <ant:mkdir dir="${maven.dist.bin.assembly.dir}/${maven.final.name}/lib"/>
+
+        <ant:mkdir dir="${maven.dist.bin.assembly.dir}/${maven.final.name}/docs"/>
+
+        <ant:echo>
+            +------------------------------------------+
+            | C R E A T I N G  D I S T R I B U T I O N |
+            +------------------------------------------+
+        </ant:echo>
+
+        <ant:copy todir="${maven.dist.bin.assembly.dir}/${maven.final.name}">
+            <ant:fileset dir=".">
+                <ant:include name="README.txt"/>
+                <ant:include name="LICENSE*"/>
+
+            </ant:fileset>
+        </ant:copy>
+
+        <!-- Copy Jars -->
+        <ant:copy todir="${maven.dist.bin.assembly.dir}/${maven.final.name}/lib">
+            <ant:fileset dir="${maven.build.dir}">
+                <ant:include name="${maven.final.name}.jar"/>
+            </ant:fileset>
+        </ant:copy>
+
+        <!-- Copy dependencies -->
+        <j:forEach var="lib" items="${pom.artifacts}">
+            <j:set var="dep" value="${lib.dependency}"/>
+            <j:if test="${dep.getProperty('htmlunit.group')!='test'}">
+                <ant:copy todir="${maven.dist.bin.assembly.dir}/${maven.final.name}/lib" file="${lib.path}"/>
+            </j:if>
+        </j:forEach>
+
+        <!-- Copy documentation -->
+        <j:set var="docsDest"
+            value="${pom.getPluginContext('maven-xdoc-plugin').getVariable('maven.docs.dest')}"/>
+        <ant:mkdir dir="${maven.dist.bin.assembly.dir}/${maven.final.name}/docs"/>
+        <ant:copy todir="${maven.dist.bin.assembly.dir}/${maven.final.name}/docs">
+            <ant:fileset dir="${docsDest}">
+                <ant:include name="**"/>
+            </ant:fileset>
+        </ant:copy>
+
+        <!-- Copy the source -->
+        <ant:mkdir dir="${maven.dist.bin.assembly.dir}/${maven.final.name}/src"/>
+        <ant:copy todir="${maven.dist.bin.assembly.dir}/${maven.final.name}/src">
+            <ant:fileset dir="src">
+                <ant:include name="**"/>
+                <ant:exclude name="xdocs"/>
+            </ant:fileset>
+        </ant:copy>
+
+		<!-- Build the zip -->
+        <zip
+            destfile="${maven.dist.bin.assembly.dir}/${maven.final.name}.zip"
+            basedir="${maven.dist.bin.assembly.dir}/${maven.final.name}"/>
+    </goal>
+
 </project>
