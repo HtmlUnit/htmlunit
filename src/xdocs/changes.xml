@@ -149,6 +149,12 @@
             	Fixed bug where inputs would not submit properly if the type attribute
             	wasn't lowercase.
             </action>
+            <action type="update" dev="mbowler" id="744381">
+            	Changed behaviour of HtmlImageInput submission to be consistent with 
+            	what the browsers do.  If the input's name was foo we would previously
+            	send the following values to the server: foo, foo.x and foo.y.  The browsers
+            	only send foo.x and foo.y.
+            </action>
         </release>
 	</body>
 
