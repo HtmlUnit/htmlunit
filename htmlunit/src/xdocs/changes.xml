@@ -246,6 +246,17 @@
                 Fixed support for option label attribute so label value is
                 returned as text if label is set.
             </action>
+            <action type="add" dev="dktaylor">
+                Add support for the id attribute of HTMLElement in JavaScript.
+                This partly fixes bug 757225.
+            </action>
+            <action type="add" dev="dktaylor">
+                Add HtmlElement.getId and setId.
+            </action>
+            <action type="update" dev="dktaylor">
+                Fix Document.getElementById in JavaScript so it returns null
+                when there is no element with the given ID.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">

@@ -254,6 +254,26 @@ public abstract class HtmlElement extends DomNode {
 
 
     /**
+     * Return the identifier this element.
+     *
+     * @return the identifier of this element.
+     */
+    public final String getId() {
+        return getAttributeValue("id");
+    }
+
+
+    /**
+     * Set the identifier this element.
+     *
+     * @param newId The new identifier of this element.
+     */
+    public final void setId(final String newId) {
+        setAttributeValue("id", newId);
+    }
+
+
+    /**
      *  Return the form that enclosed this element or null if this element is
      *  not within a form.
      *

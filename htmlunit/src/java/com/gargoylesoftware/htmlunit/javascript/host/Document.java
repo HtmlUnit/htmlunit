@@ -408,12 +408,13 @@ public final class Document extends HTMLElement {
 
 
     /**
-     * Return the element with the specified id or NOT_FOUND of that element could not be found
-     * @param id The id to search for
-     * @return the element or NOT_FOUND
+     * Return the element with the specified id or null if that element could
+     * not be found
+     * @param id The ID to search for
+     * @return the element or null
      */
     public Object jsFunction_getElementById( final String id ) {
-        Object result = NOT_FOUND;
+        Object result = null;
         try {
             final HtmlElement htmlElement = getHtmlElementOrDie().getPage().getHtmlElementById(id);
             final Object jsElement = getScriptableFor(htmlElement);
@@ -428,7 +429,7 @@ public final class Document extends HTMLElement {
             }
         }
         catch( final ElementNotFoundException e ) {
-            // Just fall through - result is already set to NOT_FOUND
+            // Just fall through - result is already set to null
         }
         return result;
     }
