@@ -237,6 +237,13 @@
     </class>
 
     <class name="Location">
+        <property name="hash" readable="true" writable="false"/>
+        <property name="host" readable="true" writable="false"/>
+        <property name="hostname" readable="true" writable="false"/>
+        <property name="pathname" readable="true" writable="false"/>
+        <property name="port" readable="true" writable="false"/>
+        <property name="protocol" readable="true" writable="false"/>
+        <property name="search" readable="true" writable="false"/>
         <function name="reload"/>
         <function name="refresh"/>
     </class>
