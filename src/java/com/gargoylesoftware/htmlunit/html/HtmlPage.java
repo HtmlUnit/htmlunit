@@ -656,11 +656,18 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
+     * <p>
      * Execute the specified javascript if a javascript engine was successfully
      * instantiated.  If this javascript causes the current page to be reloaded
      * (through location="" or form.submit()) then return the new page.  Otherwise
      * return the current page.
-     *
+     * </p>
+     * <p><b>Please note:</b> Although this method is public, it is not intended for
+     * general execution of javascript.  Users of HtmlUnit should interact with the pages
+     * as a user would by clicking on buttons or links and having the javascript event
+     * handlers execute as needed..
+     * </p>
+     * 
      * @param sourceCode The javascript code to execute.
      * @param sourceName The name for this chunk of code.  This name will be displayed
      * in any error messages.
