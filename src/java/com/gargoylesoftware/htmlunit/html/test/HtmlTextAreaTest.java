@@ -89,7 +89,7 @@ public class HtmlTextAreaTest extends WebTestCase {
 
         final HtmlTextArea textArea
             = ( HtmlTextArea )form.getTextAreasByName( "textArea1" ).get( 0 );
-        textArea.setValue( "Flintstone" );
+        textArea.setText( "Flintstone" );
         final Page secondPage = form.submit();
 
         final List expectedParameters = new ArrayList();

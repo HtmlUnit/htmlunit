@@ -146,7 +146,7 @@ public class HtmlPageTest extends WebTestCase {
         textInput.setValueAttribute( "foo" );
 
         final HtmlSubmitInput button = ( HtmlSubmitInput )form.getInputByName( "submitInput1" );
-        final HtmlPage secondPage = ( HtmlPage )button.submit();
+        final HtmlPage secondPage = ( HtmlPage )button.click();
 
         final List expectedParameters = new ArrayList();
         expectedParameters.add( new KeyValuePair( "textInput1", "foo" ) );

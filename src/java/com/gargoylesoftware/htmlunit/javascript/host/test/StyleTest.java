@@ -6,10 +6,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.test;
 
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.test.FakeWebConnection;
 import com.gargoylesoftware.htmlunit.test.WebTestCase;
