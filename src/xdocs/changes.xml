@@ -97,6 +97,9 @@
             <action type="update" dev="dktaylor" id="741930" due-to="Barnaby Court">
 	            Partial fix for RFE 741930 "document.createElement(...) and form.appendChild(...)".  This fix adds HTMLElement.appendChild.
             </action>
+            <action type="update" dev="dktaylor">
+	            Add support for getting HTMLElement.parentNode.  HTMLElement.parentNode returns the node above the current node.  It returns null if there is no parent or the parent node type is not supported (not HTML).
+            </action>
         </release>
     </body>
 

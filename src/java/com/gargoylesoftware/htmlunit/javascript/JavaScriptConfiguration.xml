@@ -121,6 +121,7 @@
         <property name="parentElement" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
+        <property name="parentNode" readable="true" writable="false"/>
         <property name="sourceIndex" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>

@@ -433,6 +433,133 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * Regression test for parentNode with nested elements
+     */
+    public void testParentNode_Nested() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var div1=document.getElementById('childDiv');\n"
+             + "    alert(div1.parentNode.id);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<div id='parentDiv'><div id='childDiv'></div></div>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("parentDiv");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for parentNode of document
+     */
+    public void testParentNode_Document() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    alert(document.parentNode==null);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("true");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for parentNode and createElement
+     */
+    public void testParentNode_CreateElement() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var div1=document.createElement('div');\n"
+             + "    alert(div1.parentNode==null);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("true");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for parentNode and appendChild
+     */
+    public void testParentNode_AppendChild() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var childDiv=document.getElementById('childDiv');\n"
+             + "    var parentDiv=document.getElementById('parentDiv');\n"
+             + "    parentDiv.appendChild(childDiv);\n"
+             + "    alert(childDiv.parentNode.id);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<div id='parentDiv'></div><div id='childDiv'></div>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("parentDiv");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
     public void testAllProperty_KeyByName() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
