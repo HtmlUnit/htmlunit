@@ -65,6 +65,7 @@ import org.w3c.dom.NodeList;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
+ * @author David K. Taylor
  */
 public abstract class HtmlElement {
     /** Constant meaning that the specified attribute was not defined */
