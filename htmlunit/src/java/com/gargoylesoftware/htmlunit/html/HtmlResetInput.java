@@ -45,14 +45,20 @@ public class HtmlResetInput extends HtmlInput {
             IOException,
             ElementNotFoundException {
 
-        final String onClick = getOnClickAttribute();
-        final HtmlPage page = getPage();
-        if( onClick.length() == 0 || page.getWebClient().isJavaScriptEnabled() == false ) {
-            return getEnclosingFormOrDie().reset();
-        }
-        else {
-            return page.executeJavaScriptIfPossible(onClick, "HtmlResetInput onClick handler", true).getNewPage();
-        }
+        return super.click();
+    }
+
+
+    /**
+     * This method will be called if there either wasn't an onclick handler or there was
+     * but the result of that handler was true.  This is the default behaviour of clicking
+     * the element.  In this case, the method will reset the form.
+     *
+     * @return The page that is currently loaded after execution of this method
+     * @throws IOException If an IO error occured
+     */
+    protected Page doClickAction() throws IOException {
+        return getEnclosingFormOrDie().reset();
     }
 
 

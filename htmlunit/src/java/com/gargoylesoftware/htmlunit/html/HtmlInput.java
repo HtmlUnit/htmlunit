@@ -84,7 +84,7 @@ public abstract class HtmlInput
         final String onClick = getOnClickAttribute();
         final HtmlPage page = getPage();
         if( onClick.length() == 0 || page.getWebClient().isJavaScriptEnabled() == false ) {
-            return getEnclosingFormOrDie().submit(this);
+            return doClickAction();
         }
         else {
             return page.executeJavaScriptIfPossible(
@@ -92,6 +92,19 @@ public abstract class HtmlInput
         }
     }
 
+    /**
+     * This method will be called if there either wasn't an onclick handler or there was
+     * but the result of that handler was true.  This is the default behaviour of clicking
+     * the element.  The default implementation returns the current page - subclasses
+     * requiring different behaviour (like {@link HtmlSubmitInput}) will override this
+     * method.
+     *
+     * @return The page that is currently loaded after execution of this method
+     * @throws IOException If an IO error occured
+     */
+    protected Page doClickAction() throws IOException {
+        return getPage();
+    }
 
     /**
      *  Return a text representation of this element that represents what would
