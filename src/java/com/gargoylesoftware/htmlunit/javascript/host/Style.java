@@ -90,7 +90,7 @@ public class Style extends SimpleScriptable {
 
          final Object value = getStyleMap().get(name);
          if( value == null ) {
-             return NOT_FOUND;
+             return "";
          }
          else {
              return value;
