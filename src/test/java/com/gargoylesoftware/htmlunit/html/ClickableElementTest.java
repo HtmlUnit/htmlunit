@@ -242,20 +242,26 @@ public class ClickableElementTest extends WebTestCase {
     /**
      * Test onClick handler and click method of table column element.
      *
-     * @thcolumns Exception if the test fails
+     * @throws Exception if the test fails
      */
     public void testTableColumn_onClick() throws Exception {
-        onClickBodyTest("<body><table><caption>Caption</caption><colgroup><col id='clickId' onClick='alert(\"foo\")'/></colgroup><thead><tr><th>Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody><tfoot><tr><th>Header</th></tr></tfoot></table></body>");
+        onClickBodyTest("<body><table><caption>Caption</caption><colgroup>"
+            + "<col id='clickId' onClick='alert(\"foo\")'/></colgroup><thead><tr><th>"
+            + "Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody><tfoot><tr>"
+            + "th>Header</th></tr></tfoot></table></body>");
     }
 
 
     /**
      * Test onClick handler and click method of table column group element.
      *
-     * @thcolumns Exception if the test fails
+     * @throws Exception if the test fails
      */
     public void testTableColumnGroup_onClick() throws Exception {
-        onClickBodyTest("<body><table><caption>Caption</caption><colgroup id='clickId' onClick='alert(\"foo\")'><col/></colgroup><thead><tr><th>Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody><tfoot><tr><th>Header</th></tr></tfoot></table></body>");
+        onClickBodyTest("<body><table><caption>Caption</caption>"
+        + "<colgroup id='clickId' onClick='alert(\"foo\")'><col/></colgroup><thead>"
+        + "<tr><th>Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody><tfoot>"
+        + "<tr><th>Header</th></tr></tfoot></table></body>");
     }
 
 
@@ -272,10 +278,13 @@ public class ClickableElementTest extends WebTestCase {
     /**
      * Test onClick handler and click method of table caption element.
      *
-     * @thcaptions Exception if the test fails
+     * @throws Exception if the test fails
      */
     public void testTableCaption_onClick() throws Exception {
-        onClickBodyTest("<body><table><caption id='clickId' onClick='alert(\"foo\")'>Caption</caption><colgroup><col/></colgroup><thead><tr><th>Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody><tfoot><tr><th>Header</th></tr></tfoot></table></body>");
+        onClickBodyTest("<body><table><caption id='clickId' onClick='alert(\"foo\")'>"
+        + "Caption</caption><colgroup><col/></colgroup><thead><tr><th>Header</th></tr>"
+        + "</thead><tbody><tr><td>Data</td></tr></tbody><tfoot><tr><th>Header</th></tr>"
+        + "</tfoot></table></body>");
     }
 
 
@@ -375,7 +384,8 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFieldSet_onClick() throws Exception {
-        onClickBodyTest("<body><form><fieldset id='clickId' onClick='alert(\"foo\")'><legend>Legend</legend></fieldset></form></body>");
+        onClickBodyTest("<body><form><fieldset id='clickId' onClick='alert(\"foo\")'>"
+        + "<legend>Legend</legend></fieldset></form></body>");
     }
 
 
@@ -524,7 +534,8 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testLegend_onClick() throws Exception {
-        onClickBodyTest("<body><form><fieldset><legend id='clickId' onClick='alert(\"foo\")'>Legend</legend></fieldset></form></body>");
+        onClickBodyTest("<body><form><fieldset><legend id='clickId' onClick='alert(\"foo\")'>"
+        + "Legend</legend></fieldset></form></body>");
     }
 
 
@@ -534,7 +545,8 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void XXtestLink_onClick() throws Exception {
-        onClickPageTest("<html><head><title>foo</title><link id='clickId' onClick='alert(\"foo\")'/></head><body></body></html>");
+        onClickPageTest("<html><head><title>foo</title><link id='clickId' onClick='alert(\"foo\")'/>"
+        + "</head><body></body></html>");
     }
 
 
@@ -574,7 +586,8 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void XXtestNoFrames_onClick() throws Exception {
-        onClickPageTest("<html><head><title>foo</title></head><frameset><frame/><noframes id='clickId' onClick='alert(\"foo\")'/></frameset></html>");
+        onClickPageTest("<html><head><title>foo</title></head><frameset><frame/>"
+        + "<noframes id='clickId' onClick='alert(\"foo\")'/></frameset></html>");
     }
 
 
@@ -584,7 +597,8 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testNoScript_onClick() throws Exception {
-        onClickBodyTest("<body><script>var i=0;</script><noscript id='clickId' onClick='alert(\"foo\")'>Item</noscript></body>");
+        onClickBodyTest("<body><script>var i=0;</script><noscript id='clickId' "
+        + "onClick='alert(\"foo\")'>Item</noscript></body>");
     }
 
 
@@ -604,7 +618,8 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOption_onClick() throws Exception {
-        onClickBodyTest("<body><form><select><option id='clickId' onClick='alert(\"foo\")'>Option</option></select></form></body>");
+        onClickBodyTest("<body><form><select><option id='clickId' onClick='alert(\"foo\")'>"
+        + "Option</option></select></form></body>");
     }
 
 
@@ -614,7 +629,8 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOptionGroup_onClick() throws Exception {
-        onClickBodyTest("<body><form><select><optgroup id='clickId' onClick='alert(\"foo\")'><option>Option</option></optgroup></select></form></body>");
+        onClickBodyTest("<body><form><select><optgroup id='clickId' onClick='alert(\"foo\")'>"
+            + "<option>Option</option></optgroup></select></form></body>");
     }
 
 
@@ -684,7 +700,8 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSelect_onClick() throws Exception {
-        onClickBodyTest("<body><form><select id='clickId' onClick='alert(\"foo\")'><option>Option</option></select></form></body>");
+        onClickBodyTest("<body><form><select id='clickId' onClick='alert(\"foo\")'>"
+            + "<option>Option</option></select></form></body>");
     }
 
 
@@ -744,7 +761,10 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTable_onClick() throws Exception {
-        onClickBodyTest("<body><table id='clickId' onClick='alert(\"foo\")'><caption>Caption</caption><colgroup><col/></colgroup><thead><tr><th>Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody><tfoot><tr><th>Header</th></tr></tfoot></table></body>");
+        onClickBodyTest("<body><table id='clickId' onClick='alert(\"foo\")'><caption>"
+            + "Caption</caption><colgroup><col/></colgroup><thead><tr><th>Header</th></tr>"
+            + "</thead><tbody><tr><td>Data</td></tr></tbody><tfoot><tr><th>Header</th></tr>"
+            + "</tfoot></table></body>");
     }
 
 
@@ -754,7 +774,10 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTableBody_onClick() throws Exception {
-        onClickBodyTest("<body><table><caption>Caption</caption><colgroup><col/></colgroup><thead><tr><th>Header</th></tr></thead><tbody id='clickId' onClick='alert(\"foo\")'><tr><td>Data</td></tr></tbody><tfoot><tr><th>Header</th></tr></tfoot></table></body>");
+        onClickBodyTest("<body><table><caption>Caption</caption><colgroup><col/>"
+            + "</colgroup><thead><tr><th>Header</th></tr></thead>"
+            + "<tbody id='clickId' onClick='alert(\"foo\")'><tr><td>Data</td></tr>"
+            + "</tbody><tfoot><tr><th>Header</th></tr></tfoot></table></body>");
     }
 
 
@@ -764,7 +787,10 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTableDataCell_onClick() throws Exception {
-        onClickBodyTest("<body><table><caption>Caption</caption><colgroup><col/></colgroup><thead><tr><th>Header</th></tr></thead><tbody><tr><td id='clickId' onClick='alert(\"foo\")'>Data</td></tr></tbody><tfoot><tr><th>Header</th></tr></tfoot></table></body>");
+        onClickBodyTest("<body><table><caption>Caption</caption><colgroup><col/>"
+            + "</colgroup><thead><tr><th>Header</th></tr></thead><tbody><tr>"
+            + "<td id='clickId' onClick='alert(\"foo\")'>Data</td></tr></tbody>"
+            + "<tfoot><tr><th>Header</th></tr></tfoot></table></body>");
     }
 
 
@@ -784,7 +810,10 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTableFooter_onClick() throws Exception {
-        onClickBodyTest("<body><table><caption>Caption</caption><colgroup><col/></colgroup><thead><tr><th>Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody><tfoot id='clickId' onClick='alert(\"foo\")'><tr><th>Header</th></tr></tfoot></table></body>");
+        onClickBodyTest("<body><table><caption>Caption</caption><colgroup><col/>"
+        + "</colgroup><thead><tr><th>Header</th></tr></thead><tbody><tr><td>Data</td>"
+        + "</tr></tbody><tfoot id='clickId' onClick='alert(\"foo\")'><tr><th>Header</th>"
+        + "</tr></tfoot></table></body>");
     }
 
 
@@ -794,7 +823,10 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTableHeaderCell_onClick() throws Exception {
-        onClickBodyTest("<body><table><caption>Caption</caption><colgroup><col/></colgroup><thead><tr><th id='clickId' onClick='alert(\"foo\")'>Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody><tfoot><tr><th>Header</th></tr></tfoot></table></body>");
+        onClickBodyTest("<body><table><caption>Caption</caption><colgroup>"
+            + "<col/></colgroup><thead><tr><th id='clickId' onClick='alert(\"foo\")'>"
+            + "Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody><tfoot><tr>"
+            + "<th>Header</th></tr></tfoot></table></body>");
     }
 
 
@@ -804,7 +836,10 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTableHeader_onClick() throws Exception {
-        onClickBodyTest("<body><table><caption>Caption</caption><colgroup><col/></colgroup><thead id='clickId' onClick='alert(\"foo\")'><tr><th>Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody><tfoot><tr><th>Header</th></tr></tfoot></table></body>");
+        onClickBodyTest("<body><table><caption>Caption</caption><colgroup><col/>"
+        + "</colgroup><thead id='clickId' onClick='alert(\"foo\")'><tr><th>Header</th>"
+        + "</tr></thead><tbody><tr><td>Data</td></tr></tbody><tfoot><tr><th>Header</th>"
+        + "</tr></tfoot></table></body>");
     }
 
 
@@ -814,7 +849,10 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTableRow_onClick() throws Exception {
-        onClickBodyTest("<body><table><caption>Caption</caption><colgroup><col/></colgroup><thead><tr><th>Header</th></tr></thead><tbody><tr id='clickId' onClick='alert(\"foo\")'><td>Data</td></tr></tbody><tfoot><tr><th>Header</th></tr></tfoot></table></body>");
+        onClickBodyTest("<body><table><caption>Caption</caption><colgroup><col/>"
+            + "</colgroup><thead><tr><th>Header</th></tr></thead><tbody>"
+            + "<tr id='clickId' onClick='alert(\"foo\")'><td>Data</td></tr></tbody>"
+            + "<tfoot><tr><th>Header</th></tr></tfoot></table></body>");
     }
 
 
