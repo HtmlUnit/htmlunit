@@ -20,8 +20,6 @@ import org.mozilla.javascript.Scriptable;
  */
 public class Form extends HTMLElement {
 
-//    private NativeArray jsElements_;
-//    private Map overridingProperties_ = Collections.synchronizedMap(new HashMap(89));
     private FormElementsArray formElementsArray_;
 
     /**
@@ -197,12 +195,15 @@ public class Form extends HTMLElement {
              return super.get(name, start);
          }
 
-         if( formElementsArray_ != null ) {
-             final Object result = formElementsArray_.get( name, start );
-             if( result != NOT_FOUND ) {
-                 return result;
-             }
+         if( formElementsArray_ == null ) {
+             initialize();
          }
+         
+         final Object result = formElementsArray_.get( name, start );
+         if( result != NOT_FOUND ) {
+             return result;
+         }
+         
          return super.get(name, start);
      }
 

@@ -6,13 +6,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.test;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
+import com.gargoylesoftware.htmlunit.test.FakeWebConnection;
 import com.gargoylesoftware.htmlunit.test.WebTestCase;
+
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -242,5 +247,32 @@ public class InputTest extends WebTestCase {
          } );
 
          assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    public void testInputValue() throws Exception {
+        final String htmlContent =
+            "<html><head><title>foo</title><script>"
+                + "function doTest(){\n"
+                + " document.form1.textfield1.value = 'blue';"
+                + "}\n"
+                + "</script></head><body>"
+                + "<p>hello world</p>"
+                + "<form name='form1' method='post' onsubmit='doTest()'>"
+                + " <input type='text' name='textfield1' id='textfield1' value='foo' />"
+                + "</form>"
+                + "</body></html>";
+
+        final WebClient client = new WebClient(BrowserVersion.MOZILLA_1_0);
+
+        final FakeWebConnection webConnection = new FakeWebConnection(client);
+        webConnection.setContent(htmlContent);
+        client.setWebConnection(webConnection);
+
+        final URL url = new URL("http://www.gargoylesoftware.com");
+        final HtmlPage page = (HtmlPage) client.getPage(url);
+
+        final HtmlForm form = page.getFormByName("form1");
+        form.submit();
     }
 }
