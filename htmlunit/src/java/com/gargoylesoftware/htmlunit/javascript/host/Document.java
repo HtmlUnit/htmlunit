@@ -168,8 +168,7 @@ public final class Document extends NodeImpl {
      * javascript function "write".
      * @param content the content to write
      */
-    public Object jsFunction_write(final String content) {
-
+    public void jsFunction_write(final String content) {
         if (writeBuffer_ == null) {
             // open() hasn't been called
             final HtmlPage page = getHtmlPage();
@@ -178,7 +177,6 @@ public final class Document extends NodeImpl {
         else {
             writeBuffer_.append(content);
         }
-        return null;
     }
 
 
@@ -567,16 +565,16 @@ public final class Document extends NodeImpl {
             return super.get(name, start);
         }
 
-    	final Document document = (Document) start;
-    	NativeArray array = (NativeArray) document.jsFunction_getElementsByName(name);
-    	if (array.getLength() == 1) {
-    		return array.get(0, array);
-    	}
-    	else if (array.getLength() > 1) {
-    		return array;
-    	}
+        final Document document = (Document) start;
+        NativeArray array = (NativeArray) document.jsFunction_getElementsByName(name);
+        if (array.getLength() == 1) {
+            return array.get(0, array);
+        } 
+        else if (array.getLength() > 1) {
+            return array;
+        }
 
-    	return super.get(name, start);
+        return super.get(name, start);
     }
 
     /**
