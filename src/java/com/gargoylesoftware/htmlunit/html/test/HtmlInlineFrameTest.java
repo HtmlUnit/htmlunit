@@ -70,4 +70,39 @@ public class HtmlInlineFrameTest extends WebTestCase {
         assertEquals( "http://third", iframe.getSrcAttribute() );
         assertEquals( "Third", ((HtmlPage)iframe.getEnclosedPage()).getTitleText() );
     }
+
+
+    public void testSetSrcAttribute_ViaJavaScript() throws Exception {
+        if( false ) {
+            notImplemented();
+            return;
+        }
+        final String firstContent
+                 = "<html><head><title>First</title></head><body>"
+                 + "<iframe id='iframe1' src='http://second'>"
+                 + "<script type='text/javascript'>document.getElementById ('iframe1').src = 'http://third';"
+                 + "</script></body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://second"),secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://third"),thirdContent,200,"OK","text/html",Collections.EMPTY_LIST );
+
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals( "First", page.getTitleText() );
+
+        final HtmlInlineFrame iframe = (HtmlInlineFrame)page.getHtmlElementById("iframe1");
+        assertEquals( "http://third", iframe.getSrcAttribute() );
+        assertEquals( "Third", ((HtmlPage)iframe.getEnclosedPage()).getTitleText() );
+    }
 }
