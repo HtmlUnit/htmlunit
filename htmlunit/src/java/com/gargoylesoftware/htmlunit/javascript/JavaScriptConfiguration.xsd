@@ -6,7 +6,7 @@
 
 	<xsd:complexType name="configurationType">
 		<xsd:sequence>
-			<xsd:element name="class" type="classType" maxOccurs="unbounded"/>
+			<xsd:element name="class" type="classType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -17,7 +17,7 @@
 			<xsd:element name="property" type="propertyType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="function" type="functionType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
-		<xsd:attribute name="name" type="xsd:string"/>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
 		<xsd:attribute name="extends" type="xsd:string"/>
 	</xsd:complexType>
 
@@ -27,9 +27,10 @@
 			<xsd:element name="browser" type="requiredBrowserType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="javascript" type="requiredJavascriptType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
-		<xsd:attribute name="name" type="xsd:string"/>
-		<xsd:attribute name="readable" type="xsd:string"/>
-		<xsd:attribute name="writable" type="xsd:string"/>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="readable" type="xsd:boolean"/>
+		<xsd:attribute name="writable" type="xsd:boolean"/>
+		<xsd:attribute name="always-available" type="xsd:boolean" default="false"/>
 	</xsd:complexType>
 
 
@@ -38,12 +39,22 @@
 			<xsd:element name="browser" type="requiredBrowserType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="javascript" type="requiredJavascriptType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
-		<xsd:attribute name="name" type="xsd:string"/>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="return-type" default="void">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="void"/>
+					<xsd:enumeration value="array"/>
+					<xsd:enumeration value="string"/>
+					<xsd:enumeration value="int"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
 	</xsd:complexType>
 
 
 	<xsd:complexType name="requiredBrowserType">
-		<xsd:attribute name="name" type="xsd:string"/>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
 		<xsd:attribute name="min-version" type="xsd:float"/>
 		<xsd:attribute name="max-version" type="xsd:float"/>
 		<xsd:attribute name="less-than-version" type="xsd:float"/>
