@@ -783,5 +783,16 @@ public class WebClientTest extends WebTestCase {
         final HtmlPage htmlPage = (HtmlPage)page;
         assertEquals("first", htmlPage.getTitleText() );
     }
+    
+    /**
+     * Test {@link WebClient#expandUrl(URL,String)} for the case where an anchor name
+     * was specified.
+     * @throws Exception If the test fails.
+     */
+    public void testExpandUrl() throws Exception {
+        assertEquals(
+            "http://first/", 
+            WebClient.expandUrl(new URL("http://first"), "#second").toExternalForm());
+    }
 }
 
