@@ -141,7 +141,7 @@ public class ElementArray extends SimpleScriptable implements Function {
     /**
      * Returns the element at the specified index, or <tt>NOT_FOUND</tt> if the
      * index is invalid.
-     * @see ScriptableObject#get(int, Scriptable)
+     * @see org.mozilla.javascript.ScriptableObject#get(int, Scriptable)
      */
     public final Object get( final int index, final Scriptable start ) {
         final ElementArray array = (ElementArray) start;
@@ -160,6 +160,7 @@ public class ElementArray extends SimpleScriptable implements Function {
      * Due to bug in Jaxen: http://jira.codehaus.org/browse/JAXEN-55
      * the nodes returned by the xpath evaluation are not correctly sorted.
      * We have therefore to sort them.
+     * @return the sorted list.
      */
     private List getElementsSorted() {
         final List nodes = getElements();
@@ -201,8 +202,8 @@ public class ElementArray extends SimpleScriptable implements Function {
      * of a property, the property value is returned. If it is the id of an element in
      * the array, that element is returned. Finally, if it is the name of an element or
      * elements in the array, then all those elements are returned. Otherwise,
-     * <tt>NOT_FOUND</tt> is returned.
-     * @see ScriptableObject#get(String, Scriptable)
+     * @{link #NOT_FOUND} is returned.
+     * @see org.mozilla.javascript.ScriptableObject#get(String, Scriptable)
      */
     public final Object get( final String name, final Scriptable start ) {
         // If the name of a property was specified, return the property value.

@@ -43,10 +43,12 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 /**
  *  JavaScript object representing an Event that is passed into Event Handlers
  * when they are invoked.  For general information on which properties and functions
- * should be supported, see {@link www.mozilla.org/docs/dom/domref/dom_event_ref.html}
+ * should be supported, see <a href="www.mozilla.org/docs/dom/domref/dom_event_ref.html">
+ * the mozilla docs</a>.
  * 
  * @version $Revision$
  * @author <a hrer="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
+ * @author Mike Bowler
  */
 public class Event extends SimpleScriptable {
 

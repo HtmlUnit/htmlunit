@@ -82,7 +82,7 @@ public abstract class WebTestCase extends BaseTestCase {
 
     /**
      * The name of the system property used to determine if files should be generated
-     * or not in {@link #createTestPageForRealBrowser}
+     * or not in {@link #createTestPageForRealBrowserIfNeeded(String,List)}
      */
     public static final String PROPERTY_GENERATE_TESTPAGES 
         = "com.gargoylesoftware.htmlunit.WebTestCase.GenerateTestpages";
