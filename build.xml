@@ -55,8 +55,12 @@
     <pathelement path="target/test-classes"/>
 </path>
 
+<target name="maketarget" description="make target directories">
+    <mkdir dir="target/classes"/>
+    <mkdir dir="target/test-classes"/>
+</target>
 
-<target name="compile" description="compile">
+<target name="compile" description="compile" depends="maketarget">
     <javac srcdir="src/java" destdir="target/classes" debug="on" deprecation="off">
         <classpath refid="base.class.path"/>
     </javac>
@@ -68,7 +72,7 @@
 
 
 <target name="cleancompile" description="clean compile">
-     <delete>
+     <delete quiet="true">
         <fileset dir="target/classes" includes="**/*.class"/>
         <fileset dir="target/test-classes" includes="**/*.class"/>
     </delete>
@@ -77,7 +81,7 @@
 
 
 <target name="clean" description="clean">
-     <delete>
+     <delete quiet="true">
         <fileset dir="target/classes" includes="**/*.class"/>
         <fileset dir="target/test-classes" includes="**/*.class"/>
     </delete>
