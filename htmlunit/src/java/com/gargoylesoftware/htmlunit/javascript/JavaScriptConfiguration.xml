@@ -260,17 +260,17 @@
 			<javascript min-version="1" max-version="2"/>
 		</property>
 
-		<property name="document"/>
-		<property name="navigator"/>
-		<property name="window"/>
-		<property name="self"/>
-		<property name="location"/>
-		<property name="history"/>
-		<property name="screen"/>
-		<property name="top"/>
-		<property name="parent"/>
-		<property name="opener"/>
-		<property name="frames"/>
+		<property name="document" readable="true" writable="false"/>
+		<property name="navigator" readable="true" writable="false"/>
+		<property name="window" readable="true" writable="false"/>
+		<property name="self" readable="true" writable="false"/>
+		<property name="location" readable="true" writable="false"/>
+		<property name="history" readable="true" writable="false"/>
+		<property name="screen" readable="true" writable="false"/>
+		<property name="top" readable="true" writable="false"/>
+		<property name="parent" readable="true" writable="false"/>
+		<property name="opener" readable="true" writable="false"/>
+		<property name="frames" readable="true" writable="false"/>
 
 		<function name="close"/>
 		<function name="open"/>
