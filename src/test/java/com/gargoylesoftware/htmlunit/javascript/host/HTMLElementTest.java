@@ -393,6 +393,35 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * Test the use of innerHTML to set a new input
+     * @throws Exception if the test fails
+     */
+    public void testGetSetInnerHTMLNewInput() throws Exception {
+        final String content = "<html>\n" +
+                "<head>\n" +
+                "    <title>test</title>\n" +
+                "    <script>\n" +
+                "    function doTest(){\n" +
+                "       var myNode = document.getElementById('myNode');\n" +
+                "       myNode.innerHTML = '<input type=\"checkbox\" name=\"myCb\" checked>';\n" +
+                "       alert(myNode.myCb.checked);\n" +
+                "   }\n" +
+                "    </script>\n" +
+                "</head>\n" +
+                "<body onload='doTest()'>\n" +
+                "<form id='myNode'></form>\n" +
+                "</body>\n" +
+                "</html>\n" +
+                "";
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList(new String[]{ "true" });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * 
      * @throws Exception if the test fails
      */
