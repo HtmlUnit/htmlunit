@@ -92,7 +92,7 @@ public class WebClient {
     private PageCreator pageCreator_ = new DefaultPageCreator();
 
     private final Set webWindowListeners_ = new HashSet(5);
-    private final List webWindows_ = new ArrayList();
+    private final List webWindows_ = Collections.synchronizedList(new ArrayList());
 
     private WebWindow currentWindow_ = new TopLevelWindow("", this);
 
@@ -1212,6 +1212,14 @@ public class WebClient {
      */
     public HtmlElement getElementWithFocus() {
         return elementWithFocus_;
+    }
+
+    /**
+     * Return an immutable list of open web windows.
+     * @return The web windows
+     */
+    public List getWebWindows() {
+        return Collections.unmodifiableList(webWindows_);
     }
 }
 

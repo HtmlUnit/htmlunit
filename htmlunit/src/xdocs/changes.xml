@@ -45,6 +45,9 @@
             <action type="update" dev="mbowler" id="800993">
 				Navigator.javaEnabled should be method not property
 			</action>
+            <action type="add" dev="mbowler" id="799760">
+				Added WebClient.getWebWindows()
+			</action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
