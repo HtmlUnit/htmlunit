@@ -510,7 +510,7 @@ public class WindowTest extends WebTestCase {
         final String thirdContent
              = "<html><head><title>Third</title><script>"
              + "function doAlert() {\n"
-			 + "    alert(parent != this);\n"
+             + "    alert(parent != this);\n"
              + "    alert(top != this);\n"
              + "    alert(parent != top);\n"
              + "    alert(parent.parent == top);\n"

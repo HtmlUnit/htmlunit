@@ -22,7 +22,7 @@
     <module name="Translation"/>
 
     <module name="SuppressionFilter">
-        <property name="file" value="checkstyle_suppressions.xml"/>
+        <property name="file" value="${basedir}/checkstyle_suppressions.xml"/>
     </module>        
 
     <module name="TreeWalker">

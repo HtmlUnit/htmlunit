@@ -662,8 +662,8 @@ public final class Document extends NodeImpl {
         // TODO: behaviour for iframe seems to differ between IE and Moz
         ElementArray collection = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
         try {
-        	collection.init(htmlPage, new HtmlUnitXPath("//*[(@name = '" + name 
-        			+ "' and (name() = 'img' or name() = 'form'))"));
+            collection.init(htmlPage, new HtmlUnitXPath("//*[(@name = '" + name 
+                    + "' and (name() = 'img' or name() = 'form'))"));
         }
         catch (final JaxenException e) {
             throw Context.reportRuntimeError("Failed to initialize collection: " + e.getMessage());

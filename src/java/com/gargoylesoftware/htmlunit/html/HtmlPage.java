@@ -1305,10 +1305,10 @@ public final class HtmlPage extends DomNode implements Page {
      * @param idElement the element with an ID attribute to add.
      */
     void addIdElement(final HtmlElement idElement) {
-    	final String id = idElement.getId();
-    	if (!StringUtils.isEmpty(id)) {
+        final String id = idElement.getId();
+        if (!StringUtils.isEmpty(id)) {
             idMap_.put(id, idElement);
-    	}
+        }
     }
 
     /**

@@ -189,20 +189,20 @@ public class ElementArray extends SimpleScriptable implements Function {
         final List nodes = getElements();
         final List sortedNodes;
         if (nodes.size() > 1) {
-	        sortedNodes = new ArrayList();
-	        for (final Iterator iter = Util.getFollowingAxisIterator(node_); iter.hasNext();) {
-	            final Object node = iter.next();
-	            if (nodes.contains(node)) {
-	                sortedNodes.add(node);
-	                nodes.remove(node);
-	                if (nodes.isEmpty()) {
-	                    break; // nothing to sort anymore
-	                }
-	            }
-	        }
+            sortedNodes = new ArrayList();
+            for (final Iterator iter = Util.getFollowingAxisIterator(node_); iter.hasNext();) {
+                final Object node = iter.next();
+                if (nodes.contains(node)) {
+                    sortedNodes.add(node);
+                    nodes.remove(node);
+                    if (nodes.isEmpty()) {
+                        break; // nothing to sort anymore
+                    }
+                }
+            }
         }
         else {
-        	sortedNodes = nodes; // already "sorted"
+            sortedNodes = nodes; // already "sorted"
         }
         
         CollectionUtils.transform(sortedNodes, transformer_);
