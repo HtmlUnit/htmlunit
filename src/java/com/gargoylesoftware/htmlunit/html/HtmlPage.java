@@ -968,8 +968,10 @@ public final class HtmlPage extends DomNode implements Page {
         if ( onLoad instanceof String ) {
             String onLoadScript = (String) onLoad;
             if( onLoadScript.length() != 0 ) {
+                // needs to have wrapSourceInFunction="true" 
+                // because page's onload may contain a return statement 
                 ScriptResult scriptResult =
-                    executeJavaScriptIfPossible(onLoadScript, "body.onLoad", false, null);
+                    executeJavaScriptIfPossible(onLoadScript, "body.onLoad", true, null);
 
                 // if script evaluates to a function then call it
                 Object javaScriptResult = scriptResult.getJavaScriptResult();
