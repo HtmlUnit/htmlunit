@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="mguillem" due-to="Daniel Gredler" id="1100321">
+                JavaScript: Implement writeable document.location.
+            </action>
             <action type="update" dev="mguillem" id="1100089">
                 JavaScript: added window.status and removed erroneous document.status.
             </action>
