@@ -101,6 +101,14 @@ public class ScriptException extends RuntimeException {
     }
 
     /**
+     * Print the stack trace to System.out. If this exception contains another
+     * exception then the stack traces for both will be printed.
+     */
+    public void printStackTrace() {
+        printStackTrace(System.out);
+    }
+
+    /**
      *  Print the stack trace. If this exception contains another exception then
      *  the stack traces for both will be printed.
      *
