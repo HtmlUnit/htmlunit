@@ -8,6 +8,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.test;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.ConfirmHandler;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -152,7 +154,6 @@ public class WindowTest extends WebTestCase {
         assertEquals( "First", firstPage.getTitleText() );
         assertEquals( "Second", secondPage.getTitleText() );
 
-        // Expecting only a changed
         assertEquals( 1, eventCatcher.getEventCount() );
 
         final WebWindow secondWebWindow
@@ -232,5 +233,61 @@ public class WindowTest extends WebTestCase {
         assertEquals(
             Arrays.asList( new String[] {"true", "true", "true", "true", "true", "true"} ),
             collectedAlerts);
+    }
+
+
+    public void testConfirm() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final List collectedAlerts = new ArrayList();
+        final List collectedConfirms = new ArrayList();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        webClient.setConfirmHandler( new ConfirmHandler() {
+            public boolean handleConfirm( final Page page, final String message ) {
+                collectedConfirms.add(message);
+                return true;
+            }
+        } );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>alert(confirm('foo'))</script></head><body>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
+                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        assertEquals( Collections.singletonList("foo"), collectedConfirms );
+        assertEquals( Collections.singletonList("true"), collectedAlerts );
+    }
+
+
+    public void testConfirm_noConfirmHandler() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final List collectedAlerts = new ArrayList();
+        final List collectedConfirms = new ArrayList();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent
+             = "<html><head><title>First</title><script>alert(confirm('foo'))</script></head><body>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
+                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        assertEquals( Collections.EMPTY_LIST, collectedConfirms );
+        assertEquals( Collections.singletonList("false"), collectedAlerts );
     }
 }
