@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="yourgod">
+                Javascript: Added support for document.scripts
+            </action>
             <action type="update" dev="mguillem" id="1157936">
                 Javascript: fixed getAttribute() to return null if the requested attribute is not defined.
             </action>

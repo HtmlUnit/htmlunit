@@ -2166,5 +2166,22 @@ public class DocumentTest extends WebTestCase {
          assertNotNull(frame);
          assertEquals(frameURL, frame.getEnclosedPage().getWebResponse().getUrl());
          assertEquals("frame", ((HtmlPage)frame.getEnclosedPage()).getTitleText());
-     }    
+     }
+     
+     /**
+     * @throws Exception if the test fails
+     */
+    public void testScriptsArray() throws Exception {
+        final String htmlContent = "<html><head><script lang='JavaScript'>"
+            + "    function doTest(){"
+            + "        alert(document.scripts.length);" // This line used to blow up
+            + "}"
+            + "</script></head><body onload='doTest();'>"
+            + "<script>var scriptTwo = 1;</script>"
+            + "</body></html> ";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(htmlContent, collectedAlerts);
+        assertEquals(Collections.singletonList("2"), collectedAlerts);
+    }     
 }
