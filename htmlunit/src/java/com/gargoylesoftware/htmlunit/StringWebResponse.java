@@ -103,9 +103,8 @@ public class StringWebResponse implements WebResponse {
      *  Return the content from the server as a string
      *
      * @return  See above
-     * @exception  IOException If an IO problem occurs
      */
-    public String getContentAsString() throws IOException {
+    public String getContentAsString() {
         return content_;
     }
 
