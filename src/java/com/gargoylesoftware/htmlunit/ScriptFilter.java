@@ -169,16 +169,13 @@ public final class ScriptFilter extends DefaultFilter {
 
             try {
                 if( scriptSource_ != null ) {
-                    htmlPage_.loadExternalJavaScriptFile(scriptSource_, scriptCharset_);
+                    final String result = loadScript(scriptSource_, scriptCharset_);
+                    pushResult( result );
                 }
                 final String script = scriptBuffer_.toString();
 
                 final String result = executeScript(script);
-                if( result.length() != 0 ) {
-                    final XMLInputSource xmlInputSource = new XMLInputSource(
-                        null, systemId_, null, new StringReader( result ), "UTF-8" );
-                    configuration_.pushInputSource( xmlInputSource );
-                }
+                pushResult( result );
             }
             finally {
                 scriptSource_ = null;
@@ -189,6 +186,32 @@ public final class ScriptFilter extends DefaultFilter {
     }
 
 
+    /**
+     * Execute an external loaded script.  Any results from document.write
+     * calls are returned.
+     * @param scriptSource The URL for the external script to execute.
+     * @param scriptCharset The character set to decode the external script.
+     * @return The script output result.
+     */
+    private synchronized String loadScript(final String scriptSource, final String scriptCharset) {
+        newContentBuffer_ = null;
+        //System.err.println ("Load script " + scriptSource);
+        htmlPage_.loadExternalJavaScriptFile(scriptSource, scriptCharset);
+        if( newContentBuffer_ != null ) {
+            final String result = newContentBuffer_.toString();
+            newContentBuffer_ = null;
+            return result;
+        }
+        return "";
+    }
+
+
+    /**
+     * Execute an embedded script.  Any results from document.write calls
+     * are returned.
+     * @param script The embedded script to execute.
+     * @return The script output result.
+     */
     private synchronized String executeScript( final String script ) {
         newContentBuffer_ = null;
         htmlPage_.executeJavaScriptIfPossible(script, "Embedded script", false, null);
@@ -199,6 +222,20 @@ public final class ScriptFilter extends DefaultFilter {
             final String result = newContentBuffer_.toString();
             newContentBuffer_ = null;
             return result;
+        }
+    }
+
+
+    /**
+     * Push the output result from a script execution as an XML input source.
+     * The pushed result is from document.write calls in the script.
+     * @param result The script output result.
+     */
+    private synchronized void pushResult( final String result ) {
+        if( result.length() != 0 ) {
+            final XMLInputSource xmlInputSource = new XMLInputSource(
+                null, systemId_, null, new StringReader( result ), "UTF-8" );
+            configuration_.pushInputSource( xmlInputSource );
         }
     }
 
