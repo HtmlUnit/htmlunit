@@ -102,18 +102,18 @@ public class HTMLElement extends NodeImpl {
     /**
      * The tag names of the objects for which outerHTML is readonly 
      */
-    private static final List OUTER_HTML_READONLY 
-        = Arrays.asList(new String[]
-          { "caption", "col", "colgroup", "frameset", "html", 
-                "tbody", "td", "tfoot", "th", "thead", "tr"});
+    private static final List OUTER_HTML_READONLY = 
+        Arrays.asList(new String[] {
+            "caption", "col", "colgroup", "frameset", "html", 
+            "tbody", "td", "tfoot", "th", "thead", "tr"});
 
     private Style style_;
 
-     /**
-      * Create an instance.
-      */
-     public HTMLElement() {
-     }
+    /**
+     * Create an instance.
+     */
+    public HTMLElement() {
+    }
 
 
     /**
@@ -134,16 +134,16 @@ public class HTMLElement extends NodeImpl {
     }
 
 
-     /**
-      * Set the DOM node that corresponds to this javascript object
-      * @param domNode The DOM node
-      */
-     public void setDomNode( final DomNode domNode ) {
-         super.setDomNode(domNode);
+    /**
+     * Set the DOM node that corresponds to this javascript object
+     * @param domNode The DOM node
+     */
+    public void setDomNode( final DomNode domNode ) {
+        super.setDomNode(domNode);
 
-         style_ = (Style)makeJavaScriptObject("Style");
-         style_.initialize(this);
-     }
+        style_ = (Style)makeJavaScriptObject("Style");
+        style_.initialize(this);
+    }
 
 
     /**

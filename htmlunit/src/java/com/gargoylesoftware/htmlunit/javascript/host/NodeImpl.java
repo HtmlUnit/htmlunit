@@ -53,14 +53,14 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class NodeImpl extends SimpleScriptable {
 
-     private static final long serialVersionUID = -5695262053081637445L;
+    private static final long serialVersionUID = -5695262053081637445L;
 
 
     /**
-      * Create an instance.
-      */
-     public NodeImpl() {
-     }
+     * Create an instance.
+     */
+    public NodeImpl() {
+    }
 
 
     /**

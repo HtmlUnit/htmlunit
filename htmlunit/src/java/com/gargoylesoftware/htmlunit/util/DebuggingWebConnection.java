@@ -106,8 +106,8 @@ public class DebuggingWebConnection extends WebConnection {
      * FormEncodingType, SubmitMethod, List, Map)
      */
     public WebResponse getResponse(final URL url, final FormEncodingType encType,
-            final SubmitMethod submitMethod, final List parameters, final Map requestHeaders)
-            throws IOException {
+        final SubmitMethod submitMethod, final List parameters, final Map requestHeaders)
+        throws IOException {
         final WebResponse response = wrappedWebConnection_.getResponse(url, encType,
                 submitMethod, parameters, requestHeaders);
         saveResponse(response, submitMethod);
@@ -147,7 +147,7 @@ public class DebuggingWebConnection extends WebConnection {
      * @throws IOException if a problem occurs writing the file
      */
     private void saveResponse(final WebResponse response, final SubmitMethod submitMethod)
-    throws IOException {
+        throws IOException {
         counter_++;
         final String extension;
         if ("application/x-javascript".equals(response.getContentType())) {
@@ -184,22 +184,22 @@ public class DebuggingWebConnection extends WebConnection {
 
         final File summary = new File(javaScriptFile_.getParentFile(), reportBaseName_ + ".html");
         final String content = "<html><head><title>Summary for " + reportBaseName_ + "</title>\n"
-        + "<h1>Received responses</h1>\n"
-        + "<script src='" + javaScriptFile_.getName() + "' type='text/javascript'></script>\n"
-        + "</head>\n"
-        + "<body>"
-        + "<ol>\n"
-        + "<script>\n"
-        + "for (var i=0; i<tab.length; ++i) {\n"
-        + "  var curRes = tab[i];\n"
-        + "  document.writeln('<li>'"
-        + " + curRes.code + ' ' + curRes.method + ' ' "
-        + " + '<a href=\"' + curRes.fileName + '\" target=_blank>' + curRes.url + '</a> "
-        + " (' + curRes.contentType + ')</li>');\n"
-        + "}\n"
-        + "</script>\n"
-        + "</ol>"
-        + "</body></html>";
+            + "<h1>Received responses</h1>\n"
+            + "<script src='" + javaScriptFile_.getName() + "' type='text/javascript'></script>\n"
+            + "</head>\n"
+            + "<body>"
+            + "<ol>\n"
+            + "<script>\n"
+            + "for (var i=0; i<tab.length; ++i) {\n"
+            + "  var curRes = tab[i];\n"
+            + "  document.writeln('<li>'"
+            + " + curRes.code + ' ' + curRes.method + ' ' "
+            + " + '<a href=\"' + curRes.fileName + '\" target=_blank>' + curRes.url + '</a> "
+            + " (' + curRes.contentType + ')</li>');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</ol>"
+            + "</body></html>";
         
         FileUtils.writeStringToFile(summary, content, "ISO-8859-1");
         LOG.info("Summary will be in " + summary.getAbsolutePath());

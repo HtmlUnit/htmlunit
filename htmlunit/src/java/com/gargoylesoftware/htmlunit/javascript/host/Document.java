@@ -739,7 +739,7 @@ public final class Document extends NodeImpl {
             domain_ = getHtmlPage().getWebResponse().getUrl().getHost();
             final BrowserVersion browser = this.getHtmlPage().getWebClient().getBrowserVersion();
             if (browser.isNetscape()) {
-              domain_ = domain_.toLowerCase();
+                domain_ = domain_.toLowerCase();
             }
         }
  

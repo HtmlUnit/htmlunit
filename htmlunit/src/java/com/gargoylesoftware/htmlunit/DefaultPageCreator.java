@@ -110,8 +110,7 @@ public class DefaultPageCreator implements PageCreator {
      * @return The newly created HtmlPage
      * @throws IOException If the page could not be created
      */
-    protected HtmlPage createHtmlPage(final WebResponse webResponse, final WebWindow webWindow) 
-            throws IOException {
+    protected HtmlPage createHtmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
         final HtmlPage newPage;
         newPage = HTMLParser.parse(webResponse, webWindow);
         return newPage;

@@ -170,7 +170,7 @@ public class ScriptException extends RuntimeException {
                 ((Throwable)value).printStackTrace(printWriter);
             }
             else {
-               printWriter.println(value);
+                printWriter.println(value);
             }
         }
         else if( throwable_ != null && throwable_ instanceof WrappedException ) {

@@ -74,81 +74,80 @@ public class Style extends SimpleScriptable {
     }
 
 
-     /**
-      * Return the specified property or NOT_FOUND if it could not be found.
-      * @param name The name of the property
-      * @param start The scriptable object that was originally queried for this property
-      * @return The property.
-      */
-     public Object get( final String name, final Scriptable start ) {
-         final Object result = super.get(name, start);
+    /**
+     * Return the specified property or NOT_FOUND if it could not be found.
+     * @param name The name of the property
+     * @param start The scriptable object that was originally queried for this property
+     * @return The property.
+     */
+    public Object get( final String name, final Scriptable start ) {
+        final Object result = super.get(name, start);
 
-         // We only handle the logic here if 1) we have been fully initialized and 2) the
-         // superclass wasn't able to find anything with the matching name.
-         if( jsElement_ == null || result != NOT_FOUND ) {
-             return result;
-         }
+        // We only handle the logic here if 1) we have been fully initialized and 2) the
+        // superclass wasn't able to find anything with the matching name.
+        if( jsElement_ == null || result != NOT_FOUND ) {
+            return result;
+        }
 
-         final Object value = getStyleMap().get(name);
-         if( value == null ) {
-             return "";
-         }
-         else {
-             return value;
-         }
-     }
-
-
-     /**
-      * Set the specified property
-      * @param name The name of the property
-      * @param start The scriptable object that was originally invoked for this property
-      * @param newValue The new value
-      */
-     public void put( final String name, final Scriptable start, final Object newValue ) {
-         // Some calls to put will happen during the initialization of the superclass.
-         // At this point, we don't have enough information to do our own initialization
-         // so we have to just pass this call through to the superclass.
-         if( jsElement_ == null ) {
-             super.put(name, start, newValue);
-             return;
-         }
-
-         final Map styleMap = getStyleMap();
-         styleMap.put( name, newValue );
-
-         final StringBuffer buffer = new StringBuffer();
-
-         final Iterator iterator = styleMap.entrySet().iterator();
-         while( iterator.hasNext() ) {
-             final Map.Entry entry = (Map.Entry)iterator.next();
-             buffer.append( entry.getKey() );
-             buffer.append( ": " );
-             buffer.append( entry.getValue() );
-             buffer.append( "; " );
-         }
-         jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
-     }
+        final Object value = getStyleMap().get(name);
+        if( value == null ) {
+            return "";
+        }
+        else {
+            return value;
+        }
+    }
 
 
-     private Map getStyleMap() {
-         // This must be a SortedMap so that the tests get results back in a defined order.
-         final SortedMap styleMap = new TreeMap();
+    /**
+     * Set the specified property
+     * @param name The name of the property
+     * @param start The scriptable object that was originally invoked for this property
+     * @param newValue The new value
+     */
+    public void put( final String name, final Scriptable start, final Object newValue ) {
+        // Some calls to put will happen during the initialization of the superclass.
+        // At this point, we don't have enough information to do our own initialization
+        // so we have to just pass this call through to the superclass.
+        if( jsElement_ == null ) {
+            super.put(name, start, newValue);
+            return;
+        }
 
-         final String styleAttribute = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
-         final StringTokenizer tokenizer = new StringTokenizer(styleAttribute, ";");
-         while( tokenizer.hasMoreTokens() ) {
-             final String token = tokenizer.nextToken();
-             final int index = token.indexOf(":");
-             if( index != -1 ) {
-                 final String key = token.substring(0,index).trim();
-                 final String value = token.substring(index+1).trim();
+        final Map styleMap = getStyleMap();
+        styleMap.put( name, newValue );
 
-                 styleMap.put( key, value );
-             }
-         }
+        final StringBuffer buffer = new StringBuffer();
 
-         return styleMap;
-     }
+        final Iterator iterator = styleMap.entrySet().iterator();
+        while( iterator.hasNext() ) {
+            final Map.Entry entry = (Map.Entry)iterator.next();
+            buffer.append( entry.getKey() );
+            buffer.append( ": " );
+            buffer.append( entry.getValue() );
+            buffer.append( "; " );
+        }
+        jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
+    }
+
+
+    private Map getStyleMap() {
+        // This must be a SortedMap so that the tests get results back in a defined order.
+        final SortedMap styleMap = new TreeMap();
+
+        final String styleAttribute = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
+        final StringTokenizer tokenizer = new StringTokenizer(styleAttribute, ";");
+        while( tokenizer.hasMoreTokens() ) {
+            final String token = tokenizer.nextToken();
+            final int index = token.indexOf(":");
+            if( index != -1 ) {
+                final String key = token.substring(0,index).trim();
+                final String value = token.substring(index+1).trim();
+
+                styleMap.put( key, value );
+            }
+        }
+
+        return styleMap;
+    }
 }
-

@@ -221,10 +221,10 @@ public abstract class HtmlElement extends DomNode {
      * @param eventHandler A rhino javascript executable Function
      */
     public final void setEventHandler(final String eventName, final Function eventHandler) {
-       if (eventHandlers_ == Collections.EMPTY_MAP) {
-          eventHandlers_ = new HashMap();
-       }
-       eventHandlers_.put(eventName, eventHandler);
+        if (eventHandlers_ == Collections.EMPTY_MAP) {
+            eventHandlers_ = new HashMap();
+        }
+        eventHandlers_.put(eventName, eventHandler);
     }
     
     /**
