@@ -258,7 +258,7 @@ public class HTMLParser {
                 setProperty( "http://cyberneko.org/html/properties/filters", filters);
                 setFeature( "http://cyberneko.org/html/features/augmentations", true );
                 setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
-                setFeature("http://cyberneko.org/html/features/report-errors", true);
+                setFeature("http://cyberneko.org/html/features/report-errors", false);
             }
             catch (SAXException e) {
                 throw new ObjectInstantiationException("unable to create HTML parser", e);
