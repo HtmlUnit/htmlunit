@@ -32,6 +32,14 @@
 		<url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/htmlunit/</url>
 	</repository>
 
+	<licenses>
+		<license>
+			<name>The HtmlUnit Software License</name>
+			<url>http://htmlunit.sourceforge.net/license.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
 	<versions>
 		<version>
 			<id>2.0</id>
