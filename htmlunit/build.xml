@@ -13,7 +13,7 @@
 
 <!--<property name="build.compiler" value="jikes" />-->
 <property name="build.compiler.pedantic" value="true"/>
-<property name="version" value="HtmlUnit-1.2.3" />
+<property name="version" value="HtmlUnit-1.3-pre2" />
 
 <property environment="env"/>
 <property name="local-repository" value ="target/repository"/>
@@ -22,26 +22,9 @@
 <path id="base.class.path">
     <pathelement path="target/classes"/>
 
-    <!-- Jars for production -->
-    <pathelement path="dist/lib/commons-httpclient.jar"/>
-    <pathelement path="dist/lib/commons-logging.jar"/>
-    <pathelement path="dist/lib/js.jar"/>
-    <pathelement path="dist/lib/nekohtml.jar"/>
-    <pathelement path="dist/lib/xercesImpl.jar"/>
-    <pathelement path="dist/lib/xmlParserAPIs.jar"/>
-
-    <pathelement path="${local-repository}/commons-jelly/jars/commons-jelly-SNAPSHOT.jar"/>
-    <pathelement path="${local-repository}/commons-jelly/jars/commons-jelly-tags-log-SNAPSHOT.jar"/>
-    <pathelement path="${local-repository}/commons-cli/jars/commons-cli-SNAPSHOT.jar"/>
-    <pathelement path="${local-repository}/commons-jexl/jars/commons-jexl-SNAPSHOT.jar"/>
-    <pathelement path="${local-repository}/dom4j/jars/dom4j-1.4-dev-8.jar"/>
-    <pathelement path="${local-repository}/commons-collections/jars/commons-collections-2.1.jar"/>
-    <pathelement path="${local-repository}/commons-beanutils/jars/commons-beanutils-1.6.1.jar"/>
-
-    <!-- Jars for testing and development -->
-    <pathelement path="build/lib/junit.jar"/>
-    <pathelement path="build/lib/gsbase.jar"/>
-    <pathelement path="build/lib/doclint.jar"/>
+    <fileset dir="${local-repository}/jars/">
+        <include name="**/*.jar"/>
+    </fileset>
 
     <!-- Required so that jikes can find the JDK classes on Mac OS/X -->
     <pathelement path="/System/Library/Frameworks/JavaVM.framework/Versions/1.3.1/Classes/classes.jar"/>
@@ -84,7 +67,7 @@
     <jar
         jarfile="build/HtmlUnit-src.jar"
         basedir="src/java"
-        includes="**/*.java"/>    
+        includes="**/*.java"/>
 </target>
 
 <target name="cleancompile" description="clean compile">
@@ -146,43 +129,128 @@
 </target>
 
 <target name="get-dependency">
-    <mkdir dir="${local-repository}/${project}/jars/"/>
-    <get
+    <mkdir dir="${local-repository}/jars/${type}/"/>
+    <get usetimestamp="true"
         src="${remote-repository}/${project}/jars/${jarName}"
-        dest="${local-repository}/${project}/jars/${jarName}"/>
+        dest="${local-repository}/jars/${type}/${jarName}"/>
 </target>
 
-<target
-    name="initialize"
-    description="Get all the required dependencies from a remote repository">
-
+<target name="initialize"
+        description="Get a clean set of all needed jars"
+        depends="clean-jars,get-jars"/>
+<target name="clean-jars"
+        description="Delete existing jars">
+     <delete dir="${local-repository}/jars"/>
+</target>
+<target name="get-jars"
+        description="Get all the required dependencies from a remote repository">
+    
+    <!-- required -->
     <antcall target="get-dependency">
+        <param name="type" value="required"/>
+        <param name="project" value="commons-httpclient"/>
+        <param name="jarName" value="commons-httpclient-2.0.1.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="type" value="required"/>
+        <param name="project" value="xerces"/>
+        <param name="jarName" value="xercesImpl-2.6.2.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="type" value="required"/>
+        <param name="project" value="xerces"/>
+        <param name="jarName" value="xmlParserAPIs-2.2.1.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="type" value="required"/>
+        <param name="project" value="nekohtml"/>
+        <param name="jarName" value="nekohtml-0.9.1.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="type" value="required"/>
+        <param name="project" value="commons-logging"/>
+        <param name="jarName" value="commons-logging-1.0.4.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="type" value="required"/>
+        <param name="project" value="jaxen"/>
+        <param name="jarName" value="jaxen-1.0-FCS-full.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="type" value="required"/>
+        <param name="project" value="saxpath"/>
+        <param name="jarName" value="saxpath-1.0-FCS.jar"/>
+    </antcall>
+    
+    <!-- optional -->
+    <antcall target="get-dependency">
+        <param name="type" value="optional"/>
+        <param name="project" value="rhino"/>
+        <param name="jarName" value="rhino-1.5R4.1.jar"/>
+    </antcall>
+    
+    <!-- test -->
+    <antcall target="get-dependency">
+        <param name="type" value="test"/>
+        <param name="project" value="junit"/>
+        <param name="jarName" value="junit-3.8.1.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="type" value="test"/>
+        <param name="project" value="junitperf"/>
+        <param name="jarName" value="junitperf-1.8.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="type" value="test"/>
         <param name="project" value="commons-jelly"/>
-        <param name="jarName" value="commons-jelly-SNAPSHOT.jar"/>
+        <param name="jarName" value="commons-jelly-tags-junit-1.0.jar"/>
     </antcall>
     <antcall target="get-dependency">
+        <param name="type" value="test"/>
         <param name="project" value="commons-jelly"/>
-        <param name="jarName" value="commons-jelly-tags-log-SNAPSHOT.jar"/>
+        <param name="jarName" value="commons-jelly-tags-xml-1.0.jar"/>
     </antcall>
     <antcall target="get-dependency">
-        <param name="project" value="commons-cli"/>
-        <param name="jarName" value="commons-cli-SNAPSHOT.jar"/>
+        <param name="type" value="test"/>
+        <param name="project" value="gsbase"/>
+        <param name="jarName" value="gsbase-2.0.jar"/>
+    </antcall>
+        
+    <!-- jelly -->
+    <antcall target="get-dependency">
+        <param name="type" value="jelly"/>
+        <param name="project" value="commons-jelly"/>
+        <param name="jarName" value="commons-jelly-1.0-beta-4.jar"/>
     </antcall>
     <antcall target="get-dependency">
+        <param name="type" value="jelly"/>
+        <param name="project" value="commons-jelly"/>
+        <param name="jarName" value="commons-jelly-tags-log-1.0.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="type" value="jelly"/>
         <param name="project" value="commons-jexl"/>
-        <param name="jarName" value="commons-jexl-SNAPSHOT.jar"/>
+        <param name="jarName" value="commons-jexl-1.0.jar"/>
     </antcall>
     <antcall target="get-dependency">
+        <param name="type" value="jelly"/>
+        <param name="project" value="commons-cli"/>
+        <param name="jarName" value="commons-cli-1.0.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="type" value="jelly"/>
         <param name="project" value="dom4j"/>
-        <param name="jarName" value="dom4j-1.4-dev-8.jar"/>
+        <param name="jarName" value="dom4j-1.5.jar"/>
     </antcall>
     <antcall target="get-dependency">
+        <param name="type" value="jelly"/>
         <param name="project" value="commons-collections"/>
-        <param name="jarName" value="commons-collections-2.1.jar"/>
+        <param name="jarName" value="commons-collections-3.1.jar"/>
     </antcall>
     <antcall target="get-dependency">
+        <param name="type" value="jelly"/>
         <param name="project" value="commons-beanutils"/>
-        <param name="jarName" value="commons-beanutils-1.6.1.jar"/>
+        <param name="jarName" value="commons-beanutils-1.7.0.jar"/>
     </antcall>
 </target>
 
