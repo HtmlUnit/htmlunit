@@ -973,17 +973,24 @@ public class WebClient {
      *
      * @param newElement The element that will recieve the focus or null if focus is to be removed
      * from all elements.
-     * @throws ElementNotFocussableException If the specified element cannot have the focus.
+     * @return true if the specified element now has the focus.
      * @see #getElementWithFocus()
      * @see HtmlPage#tabToNextElement()
      * @see HtmlPage#tabToPreviousElement()
      * @see HtmlPage#pressAccessKey(char)
      * @see HtmlPage#assertAllTabIndexAttributesSet()
      */
-    public void moveFocusToElement( final HtmlElement newElement ) throws ElementNotFocussableException {
+    public boolean moveFocusToElement( final HtmlElement newElement ) {
         if( elementWithFocus_ == newElement ) {
             // nothing to do
-            return;
+            return true;
+        }
+
+        // TODO: This is an incredibly inefficient way to find out if the element is tabbable.
+        // Refactor this into something reasonable.
+        if( newElement != null && newElement.getPage().getTabbableElements().contains(newElement) == false ) {
+            // This element isn't tabbable.
+            return false;
         }
 
         if( elementWithFocus_ != null ) {
@@ -1005,12 +1012,13 @@ public class WebClient {
                 // element will not have the focus because its page has gone away.
                 if( currentPage != newPage ) {
                     elementWithFocus_ = null;
-                    return;
+                    return false;
                 }
             }
         }
 
         elementWithFocus_ = newElement;
+        return true;
     }
 
 

@@ -458,8 +458,7 @@ public final class HtmlPage
             final String tagName = getTagName(xmlElement);
             if( acceptableTagNames.contains( tagName ) ) {
                 final String disabledAttribute = getAttributeValue(xmlElement, "disabled");
-                final boolean isDisabled
-                         = disabledAttribute != null && disabledAttribute.length() != 0;
+                final boolean isDisabled = (disabledAttribute != ATTRIBUTE_NOT_DEFINED);
 
                 final HtmlElement htmlElement = page.getHtmlElement( xmlElement );
                 if( isDisabled == false && getTabIndex( htmlElement ) != TAB_INDEX_OUT_OF_BOUNDS ) {
@@ -875,12 +874,26 @@ public final class HtmlPage
      * @return The element that has the focus after pressing this access key or null if no element
      * has the focus.
      */
-    public HtmlElement pressAccessKey( final char accessKey ) {
+    public HtmlElement pressAccessKey( final char accessKey ) throws IOException {
         final HtmlElement element = getHtmlElementByAccessKey(accessKey);
         final WebClient webClient = getWebClient();
         if( element != null ) {
             webClient.moveFocusToElement(element);
+
+            final Page newPage;
+            if( element instanceof HtmlButton ) {
+                newPage = ((HtmlButton)element).click();
+            }
+            else {
+                newPage = this;
+            }
+
+            if( newPage != this && webClient.getElementWithFocus() == element ) {
+                // The page was reloaded therefore no element on this page will have the focus.
+                webClient.moveFocusToElement(null);
+            }
         }
+
         return webClient.getElementWithFocus();
     }
 

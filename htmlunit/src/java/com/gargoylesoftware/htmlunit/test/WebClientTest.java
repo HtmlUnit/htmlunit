@@ -18,7 +18,9 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowAdapter;
 import com.gargoylesoftware.htmlunit.WebWindowEvent;
+import com.gargoylesoftware.htmlunit.html.ElementNotFocussableException;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.IOException;
@@ -503,8 +505,6 @@ public class WebClientTest extends WebTestCase {
 
     public void testTabPrevious() throws Exception {
         final WebClient webClient = new WebClient();
-        final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
         final HtmlElement element = page.getHtmlElementById("submit0");
@@ -515,14 +515,34 @@ public class WebClientTest extends WebTestCase {
     }
 
 
-    public void testMoveFocusToElement_NotTabbableElement() {
-        notImplemented();
+    public void testMoveFocusToElement_NotTabbableElement() throws Exception {
+        final WebClient webClient = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
+        final HtmlElement element = page.getHtmlElementById("div1");
+
+        assertFalse( webClient.moveFocusToElement(element) );
+        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
     }
-    public void testMoveFocusToElement_ElementNotOwnedByThisWebClient() {
-        notImplemented();
-    }
-    public void testPressAccessKey_Button() {
-        notImplemented();
+
+
+    public void testPressAccessKey_Button() throws Exception {
+        final WebClient webClient = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
+        final HtmlElement button = (HtmlElement)page.getHtmlElementById("button1");
+
+        final List expectedAlerts = Collections.singletonList("buttonPushed");
+        collectedAlerts.clear();
+
+        button.getElement().removeAttribute("disabled");
+        page.pressAccessKey('1');
+
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
 
@@ -549,6 +569,11 @@ public class WebClientTest extends WebTestCase {
             buffer.append(" accesskey='"+(char)('a'+i)+"'");
             buffer.append(">");
         }
+        buffer.append("<div id='div1'>foo</div>"); // something that isn't tabbable
+
+        // Elements that are tabbable but are disabled
+        buffer.append("<button name='button1' id='button1' disabled onclick='alert(\"buttonPushed\")' accesskey='1'>foo</button>");
+
         buffer.append("</form></body></html>");
 
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -558,6 +583,17 @@ public class WebClientTest extends WebTestCase {
 
         final URL url = new URL("http://first");
         return (HtmlPage)webClient.getPage(url, SubmitMethod.GET, Collections.EMPTY_LIST);
+    }
+
+
+    public void testPressAccessKey_SubmitInput() {
+        notImplemented();
+    }
+    public void testPressAccessKey_ResetInput() {
+        notImplemented();
+    }
+    public void testMoveFocusToElement_ElementNotOwnedByThisWebClient() {
+        notImplemented();
     }
 }
 
