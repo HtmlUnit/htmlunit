@@ -90,8 +90,6 @@
     <class name="FocusableHostElement" extends="HTMLElement">
         <function name="blur"/>
         <function name="focus"/>
-        <function name="onblur"/>
-        <function name="onfocus"/>
     </class>
 
     <class name="Form" extends="HTMLElement"><!-- NOT FINISHED -->
