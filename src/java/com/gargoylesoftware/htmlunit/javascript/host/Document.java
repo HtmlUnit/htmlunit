@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -179,7 +180,8 @@ public final class Document extends HTMLElement {
      */
     public String jsGet_cookie() {
         getLog().debug("Document.cookie not supported: returning empty string");
-        return "";
+        final WebResponse webResponse = ((HtmlPage)getHtmlElementOrDie()).getWebResponse();
+        return webResponse.getResponseHeaderValue("Set-Cookie");
     }
 
 
