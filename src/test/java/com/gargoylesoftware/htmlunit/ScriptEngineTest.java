@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public class ScriptEngineTest extends WebTestCase {
     /**
@@ -114,6 +115,9 @@ public class ScriptEngineTest extends WebTestCase {
             public String toString(
                     final HtmlPage htmlPage, final Object javaScriptObject ) {
                 return null;
+            }
+            public boolean isScriptRunning() {
+                return false;
             }
         } );
 

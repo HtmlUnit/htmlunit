@@ -78,6 +78,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Andreas Hangler
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Chris Erskine
+ * @author Marc Guillemot
  */
 public final class HtmlPage extends DomNode implements Page {
 
@@ -222,7 +223,7 @@ public final class HtmlPage extends DomNode implements Page {
                 int pos = contents.toLowerCase().indexOf("charset=");
                 if( pos>=0 ){
                     originalCharset_ = contents.substring(pos+8);
-                    getLog().debug("Page Encoding detected:" + originalCharset_);
+                    getLog().debug("Page Encoding detected: " + originalCharset_);
                     return originalCharset_;
                 }
             }
@@ -700,7 +701,7 @@ public final class HtmlPage extends DomNode implements Page {
         final WebWindow window = getEnclosingWindow();
         getWebClient().pushClearFirstWindow();
         final Object result;
-        if( wrapSourceInFunction == true ) {
+        if( wrapSourceInFunction ) {
             // Something that isn't likely to collide with the name of a function in the
             // loaded javascript
             final String wrapperName = "GargoyleWrapper"+(FunctionWrapperCount_++);
@@ -1302,5 +1303,25 @@ public final class HtmlPage extends DomNode implements Page {
                 table.appendChild(body);
             }
         }
+    }
+    
+    /**
+     * Executes the onchange script code for this element if this is appropriate. 
+     * This means that the element must have an onchange script, script must be enabled 
+     * and the change in the element must not have been triggered by a script.  
+     * @return The page that occupies this window after this method completes. It
+     * may be this or it may be a freshly loaded page. 
+     */
+    Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
+        final String onChange = htmlElement.getAttributeValue("onchange");
+        final ScriptEngine engine = getWebClient().getScriptEngine();
+        if (onChange.length() != 0 && getWebClient().isJavaScriptEnabled() 
+                && engine != null && !engine.isScriptRunning()) {
+            final ScriptResult scriptResult
+                = executeJavaScriptIfPossible( onChange, "onChange handler", true, htmlElement );
+            return scriptResult.getNewPage();
+        }
+
+        return this;
     }
 }

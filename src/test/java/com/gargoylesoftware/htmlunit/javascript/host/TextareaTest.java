@@ -42,6 +42,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -99,8 +100,9 @@ public class TextareaTest extends WebTestCase {
         final String htmlContent = "<html><head><title>foo</title>"
             + "</head><body>"
             + "<p>hello world</p>"
-            + "<form name='form1' method='post'>"
+            + "<form name='form1'>"
             + " <textarea name='textarea1' onchange='alert(this.value)'></textarea>"
+            + "<input name='myButton' type='button' onclick='document.form1.textarea1.value=\"from button\"'>"
             + "</form>"
             + "</body></html>";
 
@@ -111,6 +113,8 @@ public class TextareaTest extends WebTestCase {
         final HtmlTextArea textarea
         = (HtmlTextArea)form.getTextAreasByName("textarea1").get(0);
         textarea.setText("foo");
+        final HtmlButtonInput button = (HtmlButtonInput) form.getInputByName("myButton");
+        button.click();
 
         final List expectedAlerts = Arrays.asList(new String[] {"foo"});
         assertEquals(expectedAlerts, collectedAlerts);

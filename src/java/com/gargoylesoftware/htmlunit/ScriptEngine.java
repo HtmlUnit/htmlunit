@@ -48,6 +48,7 @@ import org.apache.commons.logging.LogFactory;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Marc Guillemot
  */
 public abstract class ScriptEngine {
     private final WebClient webClient_;
@@ -177,4 +178,10 @@ public abstract class ScriptEngine {
         return newSourceCode;
     }
 
+    /**
+     * Indicates if Script is running in current thread. <br/>
+     * This allows code to know if there own evaluation is has been triggered by some script code.
+     * @return <code>true</code> if script is running.
+     */
+    public abstract boolean isScriptRunning();
 }

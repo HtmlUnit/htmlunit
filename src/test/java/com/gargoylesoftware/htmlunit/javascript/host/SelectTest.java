@@ -48,7 +48,9 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
 
@@ -58,6 +60,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
+ * @author Marc Guillemot
  */
 public class SelectTest extends WebTestCase {
     /**
@@ -559,4 +562,42 @@ public class SelectTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }    
+
+    /**
+     * changed made through JS should not trigger an onchange
+     * @throws Exception if the test fails
+     */
+    public void testNoOnchangeFromJS() throws Exception {
+        final String content = "<html><head><title>Test infinite loop on js onchange</title></head>"
+            + "<body><form name='myForm'>"
+            + "<select name='a' onchange='this.form.b.selectedIndex=0'>"
+            + "<option value='1'>one</option>"
+            + "<option value='2'>two</option>"
+            + "</select>"
+            + "<select name='b' onchange='alert(\"b changed\")'>"
+            + "<option value='G'>green</option>"
+            + "<option value='R' selected>red</option>"
+            + "</select>"
+            + "</form>"
+            + "</body>" 
+            + "</html>";
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+         final HtmlSelect selectA = page.getFormByName("myForm").getSelectByName("a");
+         final HtmlOption optionA2 = selectA.getOption(1);
+         
+         assertEquals("two", optionA2.asText());
+
+         final HtmlSelect selectB = page.getFormByName("myForm").getSelectByName("b");
+         assertEquals(1, selectB.getSelectedOptions().size());
+         assertEquals("red", ((HtmlOption) selectB.getSelectedOptions().get(0)).asText());
+
+         // changed selection in first select
+         optionA2.setSelected(true);
+         assertTrue(optionA2.isSelected());
+         assertEquals(1, selectB.getSelectedOptions().size());
+         assertEquals("green", ((HtmlOption) selectB.getSelectedOptions().get(0)).asText());
+
+         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+    }
 }

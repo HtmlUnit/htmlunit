@@ -64,6 +64,7 @@ import org.mozilla.javascript.ScriptableObject;
  * @author  Chris Erskine
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author David D. Kilzer
+ * @author Marc Guillemot
  */
 public final class JavaScriptEngine extends ScriptEngine {
 
@@ -114,6 +115,8 @@ public final class JavaScriptEngine extends ScriptEngine {
 
     private static final ThreadLocal WEB_CLIENTS = new ThreadLocal();
     
+    private static final ThreadLocal javaScriptRunning_ = new ThreadLocal();
+
     /**
      * Create an instance for the specified webclient
      *
@@ -268,6 +271,8 @@ public final class JavaScriptEngine extends ScriptEngine {
 
         final Scriptable scope = getScope( pageInfo, htmlElementScope );
 
+        final Boolean javaScriptAlreadyRunning = (Boolean) javaScriptRunning_.get();
+        javaScriptRunning_.set(Boolean.TRUE);
         try {
             final Object result = pageInfo.getContext().evaluateString(
                     scope, sourceCode, sourceName, lineNumber, securityDomain );
@@ -278,6 +283,9 @@ public final class JavaScriptEngine extends ScriptEngine {
         }
         catch( final Throwable t ) {
             throw new ScriptException(t, sourceCode);
+        }
+        finally {
+            javaScriptRunning_.set(javaScriptAlreadyRunning);
         }
     }
 
@@ -301,6 +309,10 @@ public final class JavaScriptEngine extends ScriptEngine {
         final PageInfo pageInfo = getPageInfo(htmlPage);
 
         final Scriptable scope = getScope( pageInfo, htmlElementScope );
+        // some js code (like onchange handlers) should not be triggered from JS code: 
+        // => keep trace of JS running or not
+        final Boolean javaScriptAlreadyRunning = (Boolean) javaScriptRunning_.get();
+        javaScriptRunning_.set(Boolean.TRUE);
         try {
             final Object result = ((Function) javaScriptFunction).call( pageInfo.getContext(),
                 scope, (Scriptable) thisObject, args );
@@ -311,6 +323,9 @@ public final class JavaScriptEngine extends ScriptEngine {
         }
         catch( final Throwable t ) {
             throw new ScriptException(t, toString( htmlPage, javaScriptFunction ) );
+        }
+        finally {
+            javaScriptRunning_.set(javaScriptAlreadyRunning);
         }
     }
 
@@ -336,6 +351,15 @@ public final class JavaScriptEngine extends ScriptEngine {
      */
     public static WebClient getWebClientForCurrentThread() {
         return (WebClient)WEB_CLIENTS.get();
+    }
+    
+    /**
+     * Indicates if JavaScript is running in current thread. <br/>
+     * This allows code to know if there own evaluation is has been  triggered by some JS code.
+     * @return <code>true</code> if JavaScript is running.
+     */
+    public boolean isScriptRunning() {
+        return Boolean.TRUE.equals(javaScriptRunning_.get());
     }
 }
 
