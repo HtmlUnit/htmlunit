@@ -315,13 +315,15 @@ public class HtmlForm extends ClickableElement {
 
         // The one submit button that was clicked can be submitted but no other ones
         if( tagName.equals( "input" ) ) {
-            final String type = element.getAttributeValue("type").toLowerCase();
+            final HtmlInput input = (HtmlInput)element;
+            final String type = input.getTypeAttribute().toLowerCase();
             if( type.equals("submit") || type.equals("image") ){
                 return false;
             }
         }
         if ( tagName.equals("button") ) {
-            final String type = element.getAttributeValue("type").toLowerCase();
+            final HtmlButton button = (HtmlButton)element;
+            final String type = button.getTypeAttribute().toLowerCase();
             if( type.equals("submit") ){
                 return false;
             }
