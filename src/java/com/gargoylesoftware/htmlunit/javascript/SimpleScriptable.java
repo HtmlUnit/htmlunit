@@ -73,9 +73,14 @@ public class SimpleScriptable extends ScriptableObject {
         private Method getter_;
         private Method setter_;
         private FunctionObject function_;
+        
+        public Method getGetter() { return getter_; }
+        public Method getSetter() { return setter_; }
+        public FunctionObject getFunction() { return function_; }
+        public void setGetter( final Method getter ) { getter_ = getter; }
+        public void setSetter( final Method setter ) { setter_ = setter; }
+        public void setFunction( final FunctionObject function ) { function_ = function; }
     }
-
-
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.
@@ -178,7 +183,7 @@ public class SimpleScriptable extends ScriptableObject {
                 final String propertyName = methodName.substring(6);
                 final int state = configuration.getReadablePropertyNameState(clazz, propertyName);
                 if( state == JavaScriptConfiguration.ENABLED ) {
-                    getPropertyInfo(localPropertyMap, propertyName).getter_ = methods[i];
+                    getPropertyInfo(localPropertyMap, propertyName).setGetter( methods[i] );
                 }
                 else if( state == JavaScriptConfiguration.NOT_FOUND ) {
                     getLog().trace("Getter for ["+propertyName+"] not found in configuration");
@@ -190,7 +195,7 @@ public class SimpleScriptable extends ScriptableObject {
                 final String propertyName = methodName.substring(6);
                 final int state = configuration.getWritablePropertyNameState(clazz, propertyName);
                 if( state == JavaScriptConfiguration.ENABLED ) {
-                    getPropertyInfo(localPropertyMap, propertyName).setter_ = methods[i];
+                    getPropertyInfo(localPropertyMap, propertyName).setSetter( methods[i] );
                 }
                 else if( state == JavaScriptConfiguration.NOT_FOUND ) {
                     getLog().trace("Setter for ["+propertyName+"] not found in configuration");
@@ -203,7 +208,7 @@ public class SimpleScriptable extends ScriptableObject {
                 if( state == JavaScriptConfiguration.ENABLED ) {
                     final FunctionObject functionObject
                         = new FunctionObject(functionName, methods[i], this);
-                    getPropertyInfo(localPropertyMap, functionName).function_ = functionObject;
+                    getPropertyInfo(localPropertyMap, functionName).setFunction( functionObject );
                 }
                 else if( state == JavaScriptConfiguration.NOT_FOUND ) {
                     getLog().trace("Function ["+functionName+"] not found in configuration");
@@ -386,13 +391,13 @@ public class SimpleScriptable extends ScriptableObject {
 
          final Object result;
          if( propertyNameState == JavaScriptConfiguration.ENABLED ) {
-             if( info == null || info.getter_ == null ) {
+             if( info == null || info.getGetter() == null ) {
                  getLog().debug("Getter not implemented for property ["+name+"]");
                  result = NOT_FOUND;
              }
              else {
                  try {
-                     result = info.getter_.invoke( this, new Object[0] );
+                     result = info.getGetter().invoke( this, new Object[0] );
                  }
                  catch( final Exception e ) {
                      throw new ScriptException(e);
@@ -400,12 +405,12 @@ public class SimpleScriptable extends ScriptableObject {
              }
          }
          else if( functionNameState == JavaScriptConfiguration.ENABLED ) {
-             if( info == null || info.function_ == null ) {
+             if( info == null || info.getFunction() == null ) {
                  getLog().debug("Function not implemented ["+name+"]");
                  result = NOT_FOUND;
              }
              else {
-                 result = info.function_;
+                 result = info.getFunction();
              }
          }
          else {
@@ -436,17 +441,17 @@ public class SimpleScriptable extends ScriptableObject {
          final PropertyInfo info = (PropertyInfo)getPropertyMap().get(name);
 
          if( propertyNameState == JavaScriptConfiguration.ENABLED ) {
-             if( info == null || info.setter_ == null ) {
+             if( info == null || info.getSetter() == null ) {
                  getLog().debug("Setter not implemented for property ["+name+"]");
              }
              else {
-                 final Class parameterClass = info.setter_.getParameterTypes()[0];
+                 final Class parameterClass = info.getSetter().getParameterTypes()[0];
                  if( parameterClass == "".getClass() ) {
                      newValue = newValue.toString();
                  }
                  try {
-                     info.setter_.invoke(
-                        findMatchingScriptable(start, info.setter_), new Object[]{ newValue } );
+                     info.getSetter().invoke(
+                        findMatchingScriptable(start, info.getSetter()), new Object[]{ newValue } );
                  }
                  catch( final InvocationTargetException e ) {
                      throw new ScriptException(e.getTargetException());
