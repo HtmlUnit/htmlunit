@@ -153,7 +153,7 @@
         <dependency>
             <groupId>commons-jelly</groupId>
             <artifactId>commons-jelly</artifactId>
-            <version>20030902.160215</version>
+            <version>1.0-beta-4</version>
             <url>http://jakarta.apache.org/commons/jelly</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
@@ -163,7 +163,7 @@
         <dependency>
             <groupId>commons-jelly</groupId>
             <artifactId>commons-jelly-tags-log</artifactId>
-            <version>20030211.142821</version>
+            <version>1.0</version>
             <url>http://jakarta.apache.org/commons/jelly</url>
             <properties>
                 <htmlunit.group>Jelly</htmlunit.group>
@@ -171,9 +171,31 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>commons-jelly</groupId>
+            <artifactId>commons-jelly-tags-xml</artifactId>
+            <version>1.0</version>
+            <url>http://jakarta.apache.org/commons/jelly/libs/xml/</url>
+            <properties>
+                <classloader>root.maven</classloader>
+                <htmlunit.group>test</htmlunit.group>
+                <htmlunit.description>Support for building HtmlUnit</htmlunit.description>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>commons-jelly</groupId>
+            <artifactId>commons-jelly-tags-junit</artifactId>
+            <version>1.0</version>
+            <url>http://jakarta.apache.org/commons/jelly/libs/junit/</url>
+            <properties>
+                <classloader>root.maven</classloader>
+                <htmlunit.group>test</htmlunit.group>
+                <htmlunit.description>Support for building HtmlUnit</htmlunit.description>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>commons-jexl</groupId>
             <artifactId>commons-jexl</artifactId>
-            <version>1.0-beta-1</version>
+            <version>1.0</version>
             <url>http://jakarta.apache.org/commons/jexl</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
@@ -183,7 +205,7 @@
         <dependency>
             <groupId>commons-cli</groupId>
             <artifactId>commons-cli</artifactId>
-            <version> 1.0-beta-2</version>
+            <version>1.0</version>
             <url>http://jakarta.apache.org/commons/cli</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
@@ -193,7 +215,7 @@
         <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
-            <version>1.4-dev-8</version>
+            <version>1.5</version>
             <url>http://www.dom4j.org/</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
@@ -201,9 +223,30 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>jaxen</groupId>
+            <artifactId>jaxen</artifactId>
+            <version>1.0-FCS-full</version>
+            <url>http://jaxen.org/</url>
+            <properties>
+                <htmlunit.group>jelly</htmlunit.group>
+                <htmlunit.description>XPath support</htmlunit.description>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>saxpath</groupId>
+            <artifactId>saxpath</artifactId>
+            <version>1.0-FCS</version>
+            <url>http://saxpath.org/</url>
+            <properties>
+                <htmlunit.group>jelly</htmlunit.group>
+                <htmlunit.description>XPath support</htmlunit.description>
+            </properties>
+        </dependency>
+        
+        <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
-            <version>2.1</version>
+            <version>3.1</version>
             <url>http://jakarta.apache.org/commons/collections.html</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
@@ -213,7 +256,7 @@
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
-            <version>1.6.1</version>
+            <version>1.7.0</version>
             <url>http://jakarta.apache.org/commons/beanutils</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
@@ -224,7 +267,7 @@
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
-            <version>2.0-rc2</version>
+            <version>2.0.1</version>
             <url>http://jakarta.apache.org/commons/httpclient</url>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
@@ -254,7 +297,7 @@
         <dependency>
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
-            <version>2.4.0</version>
+            <version>2.6.2</version>
             <url>http://xml.apache.org/xerces2-j/index.html</url>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
@@ -274,7 +317,7 @@
         <dependency>
             <groupId>nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
-            <version>0.8.1</version>
+            <version>0.9.1</version>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>Converts html into an XML DOM model</htmlunit.description>
@@ -283,37 +326,13 @@
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.4</version>
             <url>http://jakarta.apache.org/commons/logging.html</url>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>Logging support</htmlunit.description>
             </properties>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-jelly</groupId>
-            <artifactId>commons-jelly-tags-xml</artifactId>
-            <version>20030211.142705</version>
-            <url>http://jakarta.apache.org/commons/jelly/libs/xml/</url>
-            <properties>
-                <classloader>root.maven</classloader>
-                <htmlunit.group>test</htmlunit.group>
-                <htmlunit.description>Support for building HtmlUnit</htmlunit.description>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>commons-jelly</groupId>
-            <artifactId>commons-jelly-tags-junit</artifactId>
-            <version>20030211.141731</version>
-            <url>http://jakarta.apache.org/commons/jelly/libs/junit/</url>
-            <properties>
-                <classloader>root.maven</classloader>
-                <htmlunit.group>test</htmlunit.group>
-                <htmlunit.description>Support for building HtmlUnit</htmlunit.description>
-            </properties>
-        </dependency>
-
+        </dependency>          
     </dependencies>
 
     <build>
