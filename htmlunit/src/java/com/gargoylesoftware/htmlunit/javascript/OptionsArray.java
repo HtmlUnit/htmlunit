@@ -140,7 +140,7 @@ public class OptionsArray extends SimpleScriptable {
 
     /**
      * Remove options by reducing the "length" property
-     * @param The new length property value
+     * @param newLength The new length property value
      */
     public void jsSet_length( final int newLength ) {
         htmlSelect_.setOptionSize( newLength );

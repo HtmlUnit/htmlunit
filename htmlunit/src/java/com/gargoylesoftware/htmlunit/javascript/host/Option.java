@@ -48,8 +48,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
  * @author  David K. Taylor
  */
 public class Option extends HTMLElement {
-    private String text;
-    private String value;
+    private String text_;
+    private String value_;
 
     /**
      * Create an instance.
@@ -61,13 +61,15 @@ public class Option extends HTMLElement {
     /**
      * Javascript constructor.  This must be declared in every javascript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
+     * @param newText The text
+     * @param newValue The value
      */
     public void jsConstructor( final String newText, final String newValue ) {
         if ( newText != null && ! newText.equals( "undefined" ) ) {
-            text = newText;
+            text_ = newText;
         }
         if ( newValue != null && ! newValue.equals( "undefined" ) ) {
-            value = newValue;
+            value_ = newValue;
         }
     }
 
@@ -77,11 +79,11 @@ public class Option extends HTMLElement {
       */
     public void setDomNode( DomNode domNode ) {
         super.setDomNode( domNode );
-        if ( value != null ) {
-            jsSet_value( value );
+        if ( value_ != null ) {
+            jsSet_value( value_ );
         }
-        if ( text != null ) {
-            jsSet_text( text );
+        if ( text_ != null ) {
+            jsSet_text( text_ );
         }
     }
 

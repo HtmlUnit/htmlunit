@@ -148,7 +148,7 @@ public class HtmlSelect
     /**
      * Remove options by reducing the "length" property.  This has no
      * effect if the length is set to the same or greater.
-     * @param The new length property value
+     * @param newLength The new length property value
      */
     public void setOptionSize( final int newLength ) {
         final NodeList nodeList = getElement().getElementsByTagName( "option" );
