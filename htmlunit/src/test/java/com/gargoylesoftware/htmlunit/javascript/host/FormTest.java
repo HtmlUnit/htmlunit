@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -353,6 +354,43 @@ public class FormTest extends WebTestCase {
         assertEquals( "MyNewWindow", secondPage.getEnclosingWindow().getName() );
     }
 
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testFormSubmitDoesntCallOnSubmit() throws Exception {
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+
+        final String firstContent
+                 = "<html><head><title>first</title></head><body>\n"
+                 + "<form name='form1' method='get' action='http://second' onsubmit=\"alert('onsubmit called')\">"
+                 + "    <input type='submit' />"
+                 + "</form>"
+                 + "<a href='javascript:document.form1.submit()' id='link1'>Click me</a>"
+                 + "</body></html>";
+        final String secondContent
+                 = "<html><head><title>second</title></head><body>\n"
+                 + "<p>hello world</p>"
+                 + "</body></html>";
+
+        webConnection.setResponse(
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            URL_SECOND, secondContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
+
+        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        final HtmlAnchor link = (HtmlAnchor)page.getHtmlElementById("link1");
+        link.click();
+
+        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+    }
+    
 
     /**
      * @throws Exception if the test fails

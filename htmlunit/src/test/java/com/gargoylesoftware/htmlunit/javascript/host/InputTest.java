@@ -392,6 +392,7 @@ public class InputTest extends WebTestCase {
             + "<p>hello world</p>"
             + "<form name='form1' method='post' onsubmit='doTest()'>"
             + " <input type='text' name='textfield1' id='textfield1' value='foo' />"
+            + " <input type='submit' name='button1' value='pushme' />"
             + "</form>"
             + "</body></html>";
 
@@ -401,13 +402,15 @@ public class InputTest extends WebTestCase {
                 .getWebConnection();
 
         final HtmlForm form = page.getFormByName("form1");
-        form.submit();
+        form.getInputByName("button1").click();
 
         final List expectedAlerts = Arrays.asList(new String[] {"changed"});
         assertEquals(expectedAlerts, collectedAlerts);
 
-        final List expectedParameters = Arrays
-                .asList(new Object[] {new KeyValuePair("changed", "foo")});
+        final List expectedParameters = Arrays.asList(new Object[] {
+            new KeyValuePair("changed", "foo"),
+            new KeyValuePair("button1", "pushme")
+        });
         assertEquals(expectedParameters, connection.getLastParameters()); 
     }    
 }
