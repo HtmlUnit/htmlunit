@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="yourgod" id="976471" due-to="David D. Kilzer">
+                syncronized javascript execution for multi-threaded testing
+            </action>        
             <action type="update" dev="yourgod" id="1088709">
                 parse application/xhtml+xml content type into HtmlPage
             </action>
