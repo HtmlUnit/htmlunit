@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.File;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.KeyDataPair;
@@ -72,6 +73,15 @@ public class HtmlFileInput extends HtmlInput {
      * @return  See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
-        return new KeyValuePair[] { new KeyDataPair(getNameAttribute(), getValueAttribute()) };
+        final File file = new File(getValueAttribute());
+        
+        // contentType and charset are determined from browser and page
+        // perhaps could it be interessant to have setters for it in this class
+        // to give finer control to user
+        final String contentType = getPage().getWebClient().guessContentType(file);
+        final String charset = getPage().getPageEncoding();
+        return new KeyValuePair[] { new KeyDataPair(getNameAttribute(), file, contentType,
+                charset) };
     }
+    
 }
