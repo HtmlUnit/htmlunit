@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                Fixed bug with setTimeout: a timeout is now only executed if the page that placed it is always "alive". 
+			</action>
             <action type="update" dev="mguillem" id="1085378">
                 Fixed html element property access in JS: attributes are case sensitive.
 			</action>

@@ -221,26 +221,36 @@ public final class Window extends SimpleScriptable {
 
     /**
      * Set a chunk of javascript to be invoked at some specified time later.
+     * The invocation occurs only if the window is opened after the delay
+     * and does not contain an other page than the one that originated the setTimeout. 
      *
-     * @param context The javascript Context
-     * @param scriptable The object that the function was called on.
-     * @param args The arguments passed to the function.
-     * @param function The function object that was invoked.
-     * @return The newly opened window
+     * @param script the code to execute
+     * @param timeout the delay in milliseconds to wait before executing the code
+     * @return the id of the created timer
      */
-    public static Object jsFunction_setTimeout(
-        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
-        final String script = getStringArg(0, args, null);
-        final int timeout = getIntArg(1, args, 0);
-
+    public int jsFunction_setTimeout(final String script, final int timeout) {
         final Runnable runnable = new Runnable() {
             public void run() {
-                final Window window = (Window)scriptable;
+                final Window window = Window.this;
+                final Page page = window.getWebWindow().getEnclosedPage();
+                boolean contextEntered = false;
                 try {
                     Thread.sleep(timeout);
+                    window.getLog().info("Executing timeout: " + script);
+                    
+                    WebWindow webWindow = window.getWebWindow(); 
+                    // test that the window is always opened and the page the same 
+                    if (!webWindow.getWebClient().getWebWindows().contains(webWindow)
+                            || webWindow.getEnclosedPage() != page) {
+                        
+                        window.getLog().info("the page that originated the setTimeout doesnt exist anymore. "
+                                + "Execution cancelled.");
+                        return;
+                    }
 
                     // Register this thread with the rhino engine
                     Context.enter();
+                    contextEntered = true;
                     final HtmlPage htmlPage = window.document_.getHtmlPage();
                     htmlPage.executeJavaScriptIfPossible(
                         script, "Window.setTimeout()", true, htmlPage.getDocumentElement());
@@ -249,13 +259,15 @@ public final class Window extends SimpleScriptable {
                     window.getLog().error("Caught exception in Window.setTimeout()", e);
                 }
                 finally {
-                    // Deregister this thread with the rhino engine
-                    Context.exit();
+                    if (contextEntered) {
+                        // Deregister this thread with the rhino engine
+                        Context.exit();
+                    }
                 }
             }
         };
         new Thread(runnable).start();
-        return null;
+        return 0; // to do when implementing clearTimeout
     }
 
 
