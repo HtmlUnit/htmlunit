@@ -159,6 +159,9 @@
             <action type="update" dev="mbowler" due-to="David D. Kilzer" id="1061234">
 				Fixed OutOfMemoryError when submitting a form many times from the same HtmlPage
             </action>
+            <action type="update" dev="mbowler" due-to="David D. Kilzer" id="1062388">
+				Clean up memory use in HttpWebConnection.makeWebResponse().
+            </action>
 		</release>
 		    
         <release version="1.3-pre2" date="September 26, 2004">

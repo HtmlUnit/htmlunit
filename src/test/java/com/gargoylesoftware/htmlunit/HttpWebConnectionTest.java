@@ -37,16 +37,25 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import junit.framework.TestCase;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpState;
-import org.apache.commons.httpclient.Cookie;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
+
+import org.apache.commons.httpclient.Cookie;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.HttpMethodBase;
+import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.httpclient.methods.GetMethod;
+
+import com.gargoylesoftware.base.testing.BaseTestCase;
 
 
 
@@ -56,7 +65,129 @@ import java.util.Map;
  * @author David D. Kilzer
  * @version $Revision$
  */
-public class HttpWebConnectionTest extends TestCase {
+public class HttpWebConnectionTest extends BaseTestCase {
+
+    /**
+     * Assert that the two byte arrays are equal
+     * @param expected The expected value
+     * @param actual The actual value
+     */
+    public static void assertEquals(byte[] expected, byte[] actual) {
+        assertEquals(null, expected, actual);
+    }
+
+
+    /**
+     * Assert that the two byte arrays are equal
+     * @param message The message to display on failure
+     * @param expected The expected value
+     * @param actual The actual value
+     */
+    public static void assertEquals(String message, byte[] expected, byte[] actual) {
+        assertEquals(message, expected, actual, expected.length);
+    }
+
+
+    /**
+     * Assert that the two byte arrays are equal
+     * @param message The message to display on failure
+     * @param expected The expected value
+     * @param actual The actual value
+     * @param length How many characters at the beginning of each byte array will be compared.
+     */
+    public static void assertEquals(String message, byte[] expected, byte[] actual, int length) {
+        if (expected == null && actual == null) {
+            return;
+        }
+        if (expected == null || actual == null) {
+            fail(message);
+        }
+        if (expected.length < length || actual.length < length) {
+            fail(message);
+        }
+        for (int i = 0; i < length; i++) {
+            assertEquals(message, expected[i], actual[i]);
+        }
+    }
+
+    /**
+     * Assert that the two input streams are the same.
+     * @param expected The expected value
+     * @param actual The actual value
+     * @throws IOException If an IO problem occurs during comparison
+     */
+    public static void assertEquals(InputStream expected, InputStream actual) throws IOException {
+        assertEquals(null, expected, actual);
+    }
+
+    /**
+     * Assert that the two input streams are the same.
+     * @param message The message to display on failure
+     * @param expected The expected value
+     * @param actual The actual value
+     * @throws IOException If an IO problem occurs during comparison
+     */
+    public static void assertEquals(String message, InputStream expected, InputStream actual) throws IOException {
+
+        if (expected == null && actual == null) {
+            return;
+        }
+
+        if (expected == null || actual == null) {
+            try {
+                fail(message);
+            }
+            finally {
+                try {
+                    if (expected != null) {
+                        expected.close();
+                    }
+                }
+                finally {
+                    if (actual != null) {
+                        actual.close();
+                    }
+                }
+            }
+        }
+
+        InputStream expectedBuf = null;
+        InputStream actualBuf = null;
+        try {
+            expectedBuf = new BufferedInputStream(expected);
+            actualBuf = new BufferedInputStream(actual);
+
+            byte[] expectedArray = new byte[2048];
+            byte[] actualArray = new byte[2048];
+
+            int expectedLength = expectedBuf.read(expectedArray);
+            while(true) {
+
+                int actualLength = actualBuf.read(actualArray);
+                assertEquals(message, expectedLength, actualLength);
+
+                if (expectedLength == -1) {
+                    break;
+                }
+
+                assertEquals(message, expectedArray, actualArray, expectedLength);
+                expectedLength = expectedBuf.read(expectedArray);
+            }
+        }
+        finally {
+            try {
+                if (expectedBuf != null) {
+                    expectedBuf.close();
+                }
+            }
+            finally {
+                if (actualBuf != null) {
+                    actualBuf.close();
+                }
+            }
+        }
+    }
+
 
     /**
      * Create an instance.
@@ -88,7 +219,7 @@ public class HttpWebConnectionTest extends TestCase {
 
     /**
      * Tests {@link HttpWebConnection#getStateForUrl(java.net.URL)} using a url with hostname
-     * <code>www.gargoylesoftware.com</code>.
+     * <code>www.sub.gargoylesoftware.com</code>.
      */
     public void testGetStateForUrl_www_sub_gargoylesoftware_com() {
         assertGetStateForUrl("www.sub.gargoylesoftware.com");
@@ -175,6 +306,40 @@ public class HttpWebConnectionTest extends TestCase {
         assertMakeCookiesRFC2109Compliant("www.sub.domain.org", "www.sub.domain.org");
     }
 
+    /**
+     * Test creation of a web response
+     * @throws Exception If the test fails
+     */
+    public void testMakeWebResponse() throws Exception {
+
+        final URL url = new URL("http://htmlunit.sourceforge.net/");
+        final String content = "<html><head></head><body></body></html>";
+        final int httpStatus = 200;
+        final long loadTime = 500L;
+
+        final HttpMethod httpMethod = new GetMethod(url.toString());
+        final Field field = HttpMethodBase.class.getDeclaredField("responseBody");
+        field.setAccessible(true);
+        field.set(httpMethod, content.getBytes());
+
+        final HttpWebConnection connection = new HttpWebConnection(new WebClient());
+        final Method method =
+                connection.getClass().getDeclaredMethod("makeWebResponse", new Class[]{
+                    int.class, HttpMethod.class, URL.class, long.class});
+        method.setAccessible(true);
+
+        final WebResponse response =
+                (WebResponse) method.invoke(connection, new Object[]{
+                    new Integer(httpStatus), httpMethod, url, new Long(loadTime)});
+
+        assertEquals(httpStatus, response.getStatusCode());
+        assertEquals(url, response.getUrl());
+        assertEquals(loadTime, response.getLoadTimeInMilliSeconds());
+        assertEquals(content, response.getContentAsString());
+        assertEquals(content.getBytes(), response.getResponseBody());
+        assertEquals(new ByteArrayInputStream(content.getBytes()), response.getContentAsStream());
+    }
+
 
     /**
      * Tests the {@link HttpWebConnection#getStateForUrl(java.net.URL)} using reflection.
@@ -183,24 +348,24 @@ public class HttpWebConnectionTest extends TestCase {
      */
     private void assertGetStateForUrl(String hostname) {
 
-        HttpWebConnection connection = new HttpWebConnection(new WebClient());
+        final HttpWebConnection connection = new HttpWebConnection(new WebClient());
         try {
 
-            Field httpClients = connection.getClass().getDeclaredField("httpClients_");
+            final Field httpClients = connection.getClass().getDeclaredField("httpClients_");
             httpClients.setAccessible(true);
-            Map map = (Map) httpClients.get(connection);
+            final Map map = (Map) httpClients.get(connection);
 
-            HttpState expectedHttpState = new HttpState();
+            final HttpState expectedHttpState = new HttpState();
 
-            HttpClient httpClient = new HttpClient();
-            Field httpState = httpClient.getClass().getDeclaredField("state");
+            final HttpClient httpClient = new HttpClient();
+            final Field httpState = httpClient.getClass().getDeclaredField("state");
             httpState.setAccessible(true);
             httpState.set(httpClient, expectedHttpState);
 
             map.put("http://" + hostname.toLowerCase(), httpClient);
 
-            URL url = new URL("http://" + hostname + "/context");
-            HttpState actualHttpState = connection.getStateForUrl(url);
+            final URL url = new URL("http://" + hostname + "/context");
+            final HttpState actualHttpState = connection.getStateForUrl(url);
             assertSame(expectedHttpState, actualHttpState);
         }
         catch (NoSuchFieldException e) {
@@ -223,12 +388,12 @@ public class HttpWebConnectionTest extends TestCase {
      */
     private void assertMakeCookiesRFC2109Compliant(String testedDomain, String expectedDomain) {
         try {
-            Cookie cookie = new Cookie(testedDomain, "foo", "bar");
-            HttpWebConnection connection = new HttpWebConnection(new WebClient());
-            Method method = HttpWebConnection.class.getDeclaredMethod(
+            final Cookie cookie = new Cookie(testedDomain, "foo", "bar");
+            final HttpWebConnection connection = new HttpWebConnection(new WebClient());
+            final Method method = HttpWebConnection.class.getDeclaredMethod(
                     "makeCookiesRFC2109Compliant", new Class[]{HttpState.class});
             method.setAccessible(true);
-            HttpState httpState = new HttpState();
+            final HttpState httpState = new HttpState();
             httpState.addCookie(cookie);
             method.invoke(connection, new Object[]{httpState});
             assertEquals(expectedDomain, cookie.getDomain());

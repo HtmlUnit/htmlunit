@@ -414,9 +414,6 @@ public class HttpWebConnection extends WebConnection {
     private WebResponse makeWebResponse(
         final int statusCode, final HttpMethod method, final URL originatingURL, final long loadTime ) {
 
-        final byte[] contentBuffer = method.getResponseBody();
-        final String contentAsString = method.getResponseBodyAsString();
-
         return new WebResponse() {
                 public int getStatusCode() {
                     return statusCode;
@@ -452,11 +449,11 @@ public class HttpWebConnection extends WebConnection {
                 }
 
                 public String getContentAsString() {
-                    return contentAsString;
+                    return method.getResponseBodyAsString();
                 }
 
                 public InputStream getContentAsStream() {
-                    return new ByteArrayInputStream(contentBuffer);
+                    return new ByteArrayInputStream(method.getResponseBody());
                 }
 
                 public URL getUrl() {
@@ -487,7 +484,7 @@ public class HttpWebConnection extends WebConnection {
                 }
 
                 public byte [] getResponseBody(){
-                    return contentBuffer;
+                    return method.getResponseBody();
                 }
 
             };
