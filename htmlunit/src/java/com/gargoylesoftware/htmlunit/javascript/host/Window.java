@@ -80,7 +80,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp">
  * MSDN documentation</a>
  */
-public final class Window extends SimpleScriptable {
+public class Window extends SimpleScriptable {
 
     private static final long serialVersionUID = -7730298149962810325L;
     private Document document_;

@@ -131,6 +131,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("Screen");
         names.remove("Style");
         names.remove("ActiveXObject");
+        names.remove("Window");
         
         assertEquals( new TreeSet(names), new TreeSet(map.values()) );
     }

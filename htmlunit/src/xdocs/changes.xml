@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1067396">
+                IFrames can now be seen in JS as an html element too. Expressions like window.myIFrame.style.display now work.
+            </action>
             <action type="update" dev="mguillem" id="1088353">
                 document.forms is now a "live" collection and forms can be accessed with document.forms["myFormId"] where "myFormId" is the id of a form.
             </action>
