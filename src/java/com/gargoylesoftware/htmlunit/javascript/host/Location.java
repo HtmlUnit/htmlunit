@@ -49,7 +49,7 @@ import java.net.URL;
  */
 public class Location extends SimpleScriptable {
     private static final long serialVersionUID = -2907220432378132233L;
-	private Window window_;
+    private Window window_;
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.

@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class WindowFramesArray extends SimpleScriptable {
     private static final long serialVersionUID = 3108681888070448618L;
-	private HtmlPage htmlPage_;
+    private HtmlPage htmlPage_;
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.

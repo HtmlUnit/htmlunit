@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  */
 public class HTMLElement extends NodeImpl {
     private static final long serialVersionUID = -6864034414262085851L;
-	private Style style_;
+    private Style style_;
 
      /**
       * Create an instance.

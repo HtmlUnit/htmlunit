@@ -55,7 +55,7 @@ import org.mozilla.javascript.Scriptable;
  */
 public class Style extends SimpleScriptable {
     private static final long serialVersionUID = -1976370264911039311L;
-	private HTMLElement jsElement_;
+    private HTMLElement jsElement_;
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.

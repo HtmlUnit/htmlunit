@@ -46,7 +46,7 @@ package com.gargoylesoftware.htmlunit;
 public class FailingHttpStatusCodeException extends RuntimeException {
     private static final long serialVersionUID = 4080165207084775250L;
     
-	private final int statusCode_;
+    private final int statusCode_;
     private final String statusMessage_;
 
 

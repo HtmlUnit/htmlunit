@@ -62,7 +62,7 @@ public class HtmlUnitXPath extends BaseXPath {
 
     private static final long serialVersionUID = -3902959929710269843L;
 
-	/** Construct given an XPath expression string.
+    /** Construct given an XPath expression string.
      *
      *  @param xpathExpr The XPath expression.
      *

@@ -52,7 +52,7 @@ public class Input extends FocusableHostElement {
     private static final long serialVersionUID = 3712016051364495710L;
 
 
-	/**
+    /**
      *  Create an instance.
      */
     public Input() {

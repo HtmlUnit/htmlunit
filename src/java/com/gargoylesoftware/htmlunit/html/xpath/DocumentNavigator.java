@@ -67,7 +67,7 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 public class DocumentNavigator extends DefaultNavigator {
     private static final long serialVersionUID = -5323715453687261210L;
     
-	/**
+    /**
      * Constant: singleton navigator.
      */
     public static final DocumentNavigator instance = new DocumentNavigator();

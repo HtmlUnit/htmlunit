@@ -52,7 +52,7 @@ import org.mozilla.javascript.Scriptable;
  */
 public class OptionsArray extends SimpleScriptable {
     private static final long serialVersionUID = -4790255174217201235L;
-	private HtmlSelect htmlSelect_;
+    private HtmlSelect htmlSelect_;
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.

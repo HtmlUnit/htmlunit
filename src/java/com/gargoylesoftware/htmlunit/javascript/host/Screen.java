@@ -50,7 +50,7 @@ public class Screen extends SimpleScriptable {
     private static final long serialVersionUID = 7775024295042666245L;
 
 
-	/**
+    /**
      * Create an instance.  Javascript objects must have a default constructor.
      */
     public Screen() {}
