@@ -7,3 +7,6 @@ build.properties
 .project
 .checkstyle
 temp
+build_eclipse
+.checkclipse
+checkstyle.properties
