@@ -632,4 +632,61 @@ public class WindowTest extends WebTestCase {
         assertEquals( Collections.singletonList("true"), collectedAlerts );
         assertEquals( "first", page.getTitleText() );
     }
+
+    /**
+     *
+     * @throws Exception If the test fails.
+     */
+    public void testGetFrameByName() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection =
+            new FakeWebConnection(webClient);
+        final List collectedAlerts = new ArrayList();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent
+            = "<html><head><title>first</title></head>"
+            + "<frameset cols='20%,80%'>"
+            + "    <frameset rows='30%,70%'>"
+            + "        <frame src='http://second' name='second'>"
+            + "        <frame src='http://third' name='third'>"
+            + "    </frameset>"
+            + "    <frame src='http://fourth' name='fourth'>"
+            + "</frameset></html>";
+        webConnection.setResponse( new URL("http://first"), firstContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST);
+
+        final String secondContent
+            = "<html><head><title>second</title></head><body><p>second</p></body></html>";
+        webConnection.setResponse( new URL("http://second"), secondContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST);
+
+        final String thirdContent
+            = "<html><head><title>third</title></head><body><p>third</p></body></html>";
+        webConnection.setResponse( new URL("http://third"), thirdContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST);
+
+        final String fourthContent
+            = "<html><head><title>fourth</title></head><body onload='doTest()'><script>\n"
+            + "function doTest() {\n"
+            + "alert('fourth-second='+parent.second.document.location);\n"
+            + "alert('fourth-third='+parent.third.document.location);\n"
+            + "}\n"
+            + "</script></body></html>";
+        webConnection.setResponse( new URL("http://fourth"), fourthContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST);
+
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage)webClient.getPage(
+            new URL("http://first"), SubmitMethod.POST, Collections.EMPTY_LIST);
+        assertEquals( "first", page.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "fourth-second=http://second",
+            "fourth-third=http://third",
+        } );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }
