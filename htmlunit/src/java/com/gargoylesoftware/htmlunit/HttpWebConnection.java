@@ -373,9 +373,29 @@ public class HttpWebConnection extends WebConnection {
     private WebResponse makeWebResponse(
         final int statusCode, final HttpMethod method, final URL originatingURL, final long loadTime ) 
         throws IOException {
+        
+        // determine charset
+        final String contentCharSet;
+        if (method instanceof HttpMethodBase) {
+            contentCharSet = ((HttpMethodBase) method).getResponseCharSet();
+        }
+        else {
+            contentCharSet = "ISO-8859-1";
+        }
+
+        // HttpMethod.getResponseBodyAsStream may return null if no body is available
+        final InputStream bodyStream = method.getResponseBodyAsStream();
+        final String content;
+        if (bodyStream == null) {
+            content = "";
+        }
+        else {
+            content = IOUtils.toString(bodyStream, contentCharSet);
+        }
 
         return new WebResponse() {
-            private String content_ = IOUtils.toString(method.getResponseBodyAsStream(), getContentCharSet());
+            private String content_ = content;
+            private String contentCharSet_ = contentCharSet;
 
             public int getStatusCode() {
                 return statusCode;
@@ -437,12 +457,7 @@ public class HttpWebConnection extends WebConnection {
             }
 
             public String getContentCharSet(){
-                if( method instanceof HttpMethodBase ){
-                    return ((HttpMethodBase)method).getResponseCharSet();
-                }
-                else {
-                    return "ISO-8859-1";
-                }
+                return contentCharSet_;
             }
 
             public byte [] getResponseBody() {
