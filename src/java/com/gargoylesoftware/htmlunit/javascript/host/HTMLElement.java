@@ -438,6 +438,9 @@ public class HTMLElement extends NodeImpl {
     /**
      * Copies the node to make it available to the page.
      * All this stuff just to change the htmlPage_ property on all nodes!
+     * 
+     * @param node The node to copy.
+     * @param page The page containing the node.
      * @return a node with the same properties but bound to the page. 
      */
     private DomNode copy(final DomNode node, final HtmlPage page) {

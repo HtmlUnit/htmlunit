@@ -605,6 +605,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * @param eventName The name of the event
      * @throws Exception if the test fails
      */
     private void eventHandlerSetterGetterTest(String eventName) throws Exception {

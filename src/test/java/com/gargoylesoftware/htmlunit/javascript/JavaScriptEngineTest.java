@@ -913,6 +913,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         public int getExecutionCount() {
             return scriptExecutionCount_;
         }
+        /** @return true if the script is running */
         public boolean isScriptRunning() {
             return false;
         }
