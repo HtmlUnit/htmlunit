@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import java.net.URL;
 import java.util.Collections;
@@ -73,7 +73,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
@@ -115,7 +115,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(

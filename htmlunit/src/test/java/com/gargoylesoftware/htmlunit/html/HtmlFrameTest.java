@@ -43,7 +43,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -70,8 +70,8 @@ public class HtmlFrameTest extends WebTestCase {
      */
     public void testSrcOfBlankAndEmpty() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection =
-            new FakeWebConnection(webClient);
+        final MockWebConnection webConnection =
+            new MockWebConnection(webClient);
         final List collectedAlerts = new ArrayList();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -103,8 +103,8 @@ public class HtmlFrameTest extends WebTestCase {
      */
     public void testOnLoadHandler() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection =
-            new FakeWebConnection(webClient);
+        final MockWebConnection webConnection =
+            new MockWebConnection(webClient);
         final List collectedAlerts = new ArrayList();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -138,8 +138,8 @@ public class HtmlFrameTest extends WebTestCase {
      */
     public void testDocumentWrite() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection =
-            new FakeWebConnection(webClient);
+        final MockWebConnection webConnection =
+            new MockWebConnection(webClient);
         final List collectedAlerts = new ArrayList();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

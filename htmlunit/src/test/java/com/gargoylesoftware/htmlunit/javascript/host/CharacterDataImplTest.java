@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import java.net.URL;
@@ -71,7 +71,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_textNode() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -110,7 +110,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_setData() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -147,7 +147,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_setNodeValue() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -184,7 +184,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_appendData() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -220,7 +220,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_deleteData() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -256,7 +256,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_insertData() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -292,7 +292,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_replaceData() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -328,7 +328,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_substringData() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -364,7 +364,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testTextImpl_splitText() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"

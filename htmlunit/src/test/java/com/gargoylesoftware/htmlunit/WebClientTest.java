@@ -82,7 +82,7 @@ public class WebClientTest extends WebTestCase {
         final WebClient client = new WebClient();
         client.setPrintContentOnFailingStatusCode( false );
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setDefaultResponse(
             htmlContent, 401, "Credentials missing or just plain wrong", "text/plain" );
         client.setWebConnection( webConnection );
@@ -129,8 +129,8 @@ public class WebClientTest extends WebTestCase {
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo(client);
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( htmlContent );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )client.getPage(
@@ -173,7 +173,7 @@ public class WebClientTest extends WebTestCase {
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo(client);
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
             new URL("http://page1"), page1Content, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
@@ -216,7 +216,7 @@ public class WebClientTest extends WebTestCase {
                  = "<html><head><title>third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
@@ -389,7 +389,7 @@ public class WebClientTest extends WebTestCase {
 
         final List headers = Collections.singletonList(
             new KeyValuePair("Location", "http://second") );
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webConnection.setResponse(
             new URL("http://first"), firstContent, statusCode,
             "Some error", "text/html", headers );
@@ -460,7 +460,7 @@ public class WebClientTest extends WebTestCase {
                  + "</body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
             new URL("http://page1"), page1Content, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
@@ -522,8 +522,8 @@ public class WebClientTest extends WebTestCase {
                  + "</body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( htmlContent );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
@@ -547,7 +547,7 @@ public class WebClientTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
@@ -760,7 +760,7 @@ public class WebClientTest extends WebTestCase {
 
         buffer.append("</form></body></html>");
 
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webConnection.setResponse(
             new URL("http://first/"), buffer.toString(), 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );

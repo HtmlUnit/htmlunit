@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import java.net.URL;
 import java.util.Collections;
@@ -84,7 +84,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
@@ -126,7 +126,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(

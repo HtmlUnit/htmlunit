@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import java.net.URL;
 import java.util.ArrayList;
@@ -285,7 +285,7 @@ public class FormTest extends WebTestCase {
      */
     public void testFormSubmit() throws Exception {
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
                  = "<html><head><title>first</title></head><body>\n"
@@ -320,7 +320,7 @@ public class FormTest extends WebTestCase {
      */
     public void testFormSubmit_target() throws Exception {
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
                  = "<html><head><title>first</title></head><body>\n"
@@ -383,8 +383,8 @@ public class FormTest extends WebTestCase {
                  + "</body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( content );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( content );
         client.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
@@ -407,7 +407,7 @@ public class FormTest extends WebTestCase {
      */
     public void testAccessingRadioButtonArrayByName_Regression() throws Exception {
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
@@ -460,8 +460,8 @@ public class FormTest extends WebTestCase {
                  + "</body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( content );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( content );
         client.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();

@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import java.io.File;
 import java.net.URL;
@@ -76,7 +76,7 @@ public class SimpleScriptableTest extends WebTestCase {
      */
     public void testCallInheritedFunction() throws Exception {
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String content
              = "<html><head><title>foo</title><script>"
@@ -91,7 +91,7 @@ public class SimpleScriptableTest extends WebTestCase {
              + "</form>"
              + "</body></html>";
 
-        webConnection.setContent( content );
+        webConnection.setDefaultResponse( content );
         client.setWebConnection( webConnection );
 
         final List expectedAlerts = Collections.singletonList("past focus");

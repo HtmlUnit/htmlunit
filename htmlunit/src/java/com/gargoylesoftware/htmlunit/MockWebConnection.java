@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
@@ -48,7 +49,7 @@ import java.util.Map;
 import org.apache.commons.httpclient.HttpState;
 
 /**
- *  A fake HttpProcessor for testing purposes only
+ * A fake WebConnection designed to mock out the actual http connections.
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -187,7 +188,7 @@ public class MockWebConnection extends WebConnection {
                      */
                     return responseEntry.content_.getBytes("ISO-8859-1");
                 }
-                catch( final java.io.UnsupportedEncodingException e ){
+                catch( final UnsupportedEncodingException e ){
                     return null;
                 }
            }
@@ -207,7 +208,7 @@ public class MockWebConnection extends WebConnection {
 
 
     /**
-     *  Return the parametersthat were used in the last call to submitRequest()
+     *  Return the parameters that were used in the last call to submitRequest()
      *
      * @return  See above
      */
@@ -239,6 +240,17 @@ public class MockWebConnection extends WebConnection {
         responseMap_.put( url.toExternalForm(), responseEntry );
     }
 
+    /**
+     * Convenience method that is the same as calling
+     * {@link #setResponse(URL,String,int,String,String,List)} with a status
+     * of "200 OK", a content type of "text/html" and no additonal headers.
+     *
+     * @param url The url that will return the given response
+     * @param content The content to return
+     */
+    public void setResponse( final URL url, final String content ) {
+        setResponse( url, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+    }
 
     /**
      * Specify a generic html page that will be returned when the given url is specified.
@@ -280,10 +292,12 @@ public class MockWebConnection extends WebConnection {
 
 
     /**
-     * Set the default response entry to use the specified content with default values.
-     * @param content The new content
+     * Set the response that will be returned when a url is requested that does
+     * not have a specific content set for it.
+     *
+     * @param content The content to return
      */
-    public void setContent( final String content ) {
+    public void setDefaultResponse( final String content ) {
         setDefaultResponse(content, 200, "OK", "text/html");
     }
 

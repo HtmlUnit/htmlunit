@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import java.net.URL;
 import java.util.ArrayList;
@@ -70,7 +70,7 @@ public class StyleTest extends WebTestCase {
      */
     public void testStyle_OneCssAttribute() throws Exception {
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
              = "<html><head><title>First</title><script>\n"
@@ -103,7 +103,7 @@ public class StyleTest extends WebTestCase {
      */
     public void testStyle_MultipleCssAttributes() throws Exception {
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
              = "<html><head><title>First</title><script>\n"

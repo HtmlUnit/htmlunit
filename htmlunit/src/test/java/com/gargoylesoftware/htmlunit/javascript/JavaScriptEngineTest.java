@@ -54,7 +54,7 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -90,7 +90,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testSetJavascriptEnabled_false() throws Exception {
         final WebClient client = new WebClient();
         client.setJavaScriptEnabled(false);
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String content
              = "<html><head><title>foo</title><script>"
@@ -103,7 +103,7 @@ public class JavaScriptEngineTest extends WebTestCase {
              + "</form>"
              + "</body></html>";
 
-        webConnection.setContent( content );
+        webConnection.setDefaultResponse( content );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
@@ -170,7 +170,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testExternalScript() throws Exception {
 
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String htmlContent
              = "<html><head><title>foo</title><script src='/foo.js' id='script1'/>"
@@ -210,7 +210,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     public void testExternalScriptEncoding() throws Exception {
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         /*
      * this page has meta element , and script tag has no charset attribute
      */
@@ -340,7 +340,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testReferencingVariablesFromOneScriptToAnother_Regression() throws Exception {
 
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String htmlContent
              = "<html><head><title>foo</title><script src='./test.js'></script>"
@@ -378,7 +378,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testJavaScriptUrl() throws Exception {
 
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String htmlContent
              = "<html><head><script language='javascript'>"
@@ -416,7 +416,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testJavaScriptWrappedInHtmlComments() throws Exception {
 
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String htmlContent
              = "<html><head><title>foo</title><script language='javascript'><!--\n"
@@ -444,7 +444,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testJavaScriptWrappedInHtmlComments_commentOnOpeningLine() throws Exception {
 
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String htmlContent
              = "<html><head><title>foo</title><script language='javascript'><!-- Some comment here\n"
@@ -473,7 +473,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testThisDotInOnClick() throws Exception {
 
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
@@ -506,7 +506,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testFunctionDefinedInExternalFile_CalledFromInlineScript() throws Exception {
 
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String htmlContent
              = "<html><head><title>foo</title><script src='./test.js'></script>"
@@ -541,7 +541,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testFunctionDefinedInSameFile() throws Exception {
 
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String htmlContent
              = "<html><head><title>First</title><script>"

@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 import java.net.URL;
@@ -318,8 +318,8 @@ public class InputTest extends WebTestCase {
 
         final WebClient client = new WebClient(BrowserVersion.MOZILLA_1_0);
 
-        final FakeWebConnection webConnection = new FakeWebConnection(client);
-        webConnection.setContent(htmlContent);
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
         final URL url = new URL("http://www.gargoylesoftware.com");

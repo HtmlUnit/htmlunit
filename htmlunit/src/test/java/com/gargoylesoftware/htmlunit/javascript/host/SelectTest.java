@@ -44,7 +44,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -189,8 +189,8 @@ public class SelectTest extends WebTestCase {
             + "</SELECT></form></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( content );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( content );
         client.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
@@ -227,8 +227,8 @@ public class SelectTest extends WebTestCase {
             + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( content );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( content );
         client.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
