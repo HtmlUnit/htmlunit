@@ -95,8 +95,8 @@ public class HTMLElementTest extends WebTestCase {
                 "</html>\n" +
                 "";
         final List expectedAlerts = Arrays.asList(new String[]{
-                "a", "a", "undefined", "null"
-            });
+            "a", "a", "undefined", "null"
+        });
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();

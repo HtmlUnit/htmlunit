@@ -2140,33 +2140,33 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-     public void testDocumentWriteFrameRelativeURLMultipleFrameset() throws Exception {
-         final String framesetContent = "<html><head><title>frameset</title></head>\n"
+    public void testDocumentWriteFrameRelativeURLMultipleFrameset() throws Exception {
+        final String framesetContent = "<html><head><title>frameset</title></head>\n"
             + "<script>\n"
             + "    document.write('<frameset><frame src=\"frame.html\"/></frameset>');\n"
             + "</script>\n"
             + "<frameset><frame src='blank.html'/></frameset>"
             + "</html>";
          
-         final URL baseURL = new URL("http://base/subdir/");
-         final URL framesetURL = new URL(baseURL.toExternalForm() + "test.html");
-         final URL frameURL = new URL(baseURL.toExternalForm() + "frame.html");
-         final URL blankURL = new URL(baseURL.toExternalForm() + "blank.html");
+        final URL baseURL = new URL("http://base/subdir/");
+        final URL framesetURL = new URL(baseURL.toExternalForm() + "test.html");
+        final URL frameURL = new URL(baseURL.toExternalForm() + "frame.html");
+        final URL blankURL = new URL(baseURL.toExternalForm() + "blank.html");
 
-         final WebClient client = new WebClient();
-         final MockWebConnection webConnection = new MockWebConnection( client );
-         webConnection.setResponse(framesetURL, framesetContent);
-         webConnection.setResponseAsGenericHtml(frameURL, "frame");
-         webConnection.setResponseAsGenericHtml(blankURL, "blank");
-         client.setWebConnection( webConnection );
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(framesetURL, framesetContent);
+        webConnection.setResponseAsGenericHtml(frameURL, "frame");
+        webConnection.setResponseAsGenericHtml(blankURL, "blank");
+        client.setWebConnection( webConnection );
          
-         final HtmlPage framesetPage = (HtmlPage) client.getPage(framesetURL);
-         final FrameWindow frame = (FrameWindow) framesetPage.getFrames().get(0);
+        final HtmlPage framesetPage = (HtmlPage) client.getPage(framesetURL);
+        final FrameWindow frame = (FrameWindow) framesetPage.getFrames().get(0);
          
-         assertNotNull(frame);
-         assertEquals(frameURL.toExternalForm(), frame.getEnclosedPage().getWebResponse().getUrl().toExternalForm());
-         assertEquals("frame", ((HtmlPage)frame.getEnclosedPage()).getTitleText());
-     }
+        assertNotNull(frame);
+        assertEquals(frameURL.toExternalForm(), frame.getEnclosedPage().getWebResponse().getUrl().toExternalForm());
+        assertEquals("frame", ((HtmlPage)frame.getEnclosedPage()).getTitleText());
+    }
      
      /**
      * @throws Exception if the test fails
