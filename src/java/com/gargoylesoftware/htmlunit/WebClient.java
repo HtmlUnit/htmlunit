@@ -1167,8 +1167,18 @@ public class WebClient {
         throws MalformedURLException {
 
         // Was a protocol specified?
-        if( relativeUrl.indexOf( ":" ) != -1 ) {
-            return makeUrl( relativeUrl );
+        final int colonIndex = relativeUrl.indexOf(":");
+        if( colonIndex != -1 ) {
+            boolean isProtocolSpecified = true;
+            for( int i=0; i<colonIndex; i++ ) {
+                if( Character.isLetter(relativeUrl.charAt(i)) == false ) {
+                    isProtocolSpecified = false;
+                    break;
+                }
+            }
+            if( isProtocolSpecified == true ) {
+                return makeUrl( relativeUrl );
+            }
         }
 
         if( relativeUrl.startsWith("//") ) {

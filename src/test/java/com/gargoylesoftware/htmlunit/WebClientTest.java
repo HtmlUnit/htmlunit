@@ -934,5 +934,15 @@ public class WebClientTest extends WebTestCase {
                 new URL( "http://page1" ), SubmitMethod.POST, Collections.EMPTY_LIST );
         assertInstanceOf(page, HtmlPage.class);
     }
+    
+    /**
+     * Colons are legal in the path of a url but {@link WebClient#expandUrl(URL,String)} was
+     * blowing up on this case.  Ensure it's fixed.
+     * @throws Exception If the test fails.
+     */
+    public void testExpandUrlHandlesColonsInRelativeUrl() throws Exception {
+        final URL newUrl = WebClient.expandUrl( new URL("http://host/foo"), "/bar/blah:de:blah");
+        assertEquals( "http://host/bar/blah:de:blah", newUrl.toExternalForm() );
+    }
 }
 
