@@ -99,6 +99,7 @@ public class Window extends SimpleScriptable {
     private Map timeoutThreads_;
     private int nextTimeoutId_;
     private String status_ = "";
+    private ElementArray frames_; // has to be a member to have equality (==) working
 
     /**
      * Create an instance.  The rhino engine requires all host objects
@@ -453,27 +454,29 @@ public class Window extends SimpleScriptable {
 
     /**
      * Return the value of the frames property.
-     * @return The value of window.frames
+     * @return The live collection of frames
      */
     public ElementArray jsGet_frames() {
-        final XPath xpath;
-        try {
-            xpath = new HtmlUnitXPath("//*[(name() = 'frame' or name() = 'iframe']");
-        }
-        catch (final JaxenException e) {
-            // should never occur
-            throw Context.reportRuntimeError("Failed initializing frame collections: " + e.getMessage());
-        }
-        final HtmlPage page = (HtmlPage) this.getWebWindow().getEnclosedPage();
-        final ElementArray frames = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
-        Transformer toEnclosedWindow = new Transformer() {
-            public Object transform(final Object obj) {
-                return ((BaseFrame) obj).getEnclosedWindow();
+        if (frames_ == null) {
+            final XPath xpath;
+            try {
+                xpath = new HtmlUnitXPath("//*[(name() = 'frame' or name() = 'iframe')]");
             }
-        };
-        frames.init(page, xpath, toEnclosedWindow);
+            catch (final JaxenException e) {
+                // should never occur
+                throw Context.reportRuntimeError("Failed initializing frame collections: " + e.getMessage());
+            }
+            final HtmlPage page = (HtmlPage) this.getWebWindow().getEnclosedPage();
+            frames_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            Transformer toEnclosedWindow = new Transformer() {
+                public Object transform(final Object obj) {
+                    return ((BaseFrame) obj).getEnclosedWindow();
+                }
+            };
+            frames_.init(page, xpath, toEnclosedWindow);
+        }
 
-        return frames;
+        return frames_;
     }
 
     /**

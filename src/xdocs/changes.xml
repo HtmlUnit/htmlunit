@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                JavaScript: Fixed bug in window.frames[i] (was introduced in 1.4).
+            </action>
             <action type="update" dev="cerskine">
                 JavaScript: Fixed bug with frames.length not working.
             </action>

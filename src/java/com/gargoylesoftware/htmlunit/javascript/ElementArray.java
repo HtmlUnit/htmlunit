@@ -79,6 +79,10 @@ public class ElementArray extends SimpleScriptable implements Function {
     
     private XPath xpath_;
     private DomNode node_;
+    /**
+     * The transformer used to get the element to return from the html element.
+     * It returns the html element itself except for frames where it returns the nested window.
+     */
     private Transformer transformer_;
 
     /**
@@ -183,20 +187,22 @@ public class ElementArray extends SimpleScriptable implements Function {
      */
     private List getElementsSorted() {
         final List nodes = getElements();
-        if (nodes.size() < 2) {
-            return nodes; // already "sorted"
+        final List sortedNodes;
+        if (nodes.size() > 1) {
+	        sortedNodes = new ArrayList();
+	        for (final Iterator iter = Util.getFollowingAxisIterator(node_); iter.hasNext();) {
+	            final Object node = iter.next();
+	            if (nodes.contains(node)) {
+	                sortedNodes.add(node);
+	                nodes.remove(node);
+	                if (nodes.isEmpty()) {
+	                    break; // nothing to sort anymore
+	                }
+	            }
+	        }
         }
-
-        final List sortedNodes = new ArrayList();
-        for (final Iterator iter = Util.getFollowingAxisIterator(node_); iter.hasNext();) {
-            final Object node = iter.next();
-            if (nodes.contains(node)) {
-                sortedNodes.add(node);
-                nodes.remove(node);
-                if (nodes.isEmpty()) {
-                    break; // nothing to sort anymore
-                }
-            }
+        else {
+        	sortedNodes = nodes; // already "sorted"
         }
         
         CollectionUtils.transform(sortedNodes, transformer_);
@@ -204,14 +210,13 @@ public class ElementArray extends SimpleScriptable implements Function {
     }
 
     /**
-     * Gets the elements. Avoid calling it multiple times within a method because the evaluation
+     * Gets the html elements. Avoid calling it multiple times within a method because the evaluation
      * needs to be performed each time again
      * @return the list of {@link HtmlElement} contained in this collection
      */
     private List getElements() {
         try {
             final List list = xpath_.selectNodes(node_); 
-            CollectionUtils.transform(list, transformer_);
             return list;
         }
         catch (JaxenException e) {
@@ -236,6 +241,7 @@ public class ElementArray extends SimpleScriptable implements Function {
         
         final ElementArray currentArray = ((ElementArray) start); 
         final List elements = currentArray.getElements();
+        CollectionUtils.transform(elements, transformer_);
 
         // See if there is an element in the element array with the specified id.
         for (final Iterator iter = elements.iterator(); iter.hasNext();) {
