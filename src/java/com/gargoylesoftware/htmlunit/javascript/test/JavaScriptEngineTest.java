@@ -324,4 +324,35 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List expectedAlerts = Collections.singletonList("button1");
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+
+    public void testFunctionDefinedInExternalFile_CalledFromInlineScript() throws Exception {
+
+        final WebClient client = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+
+        final String htmlContent
+             = "<html><head><title>foo</title><script src='./test.js'></script>"
+             + "</head><body>"
+             + "    <script>externalMethod()</script>"
+             + "</body></html>";
+
+        final String jsContent
+            = "function externalMethod() {\n"
+            + "    alert('Got to external method');\n"
+            + "} ";
+
+        webConnection.setResponse(
+            new URL("http://first/index.html"),
+            htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://first/test.js"),
+            jsContent, 200, "OK", "text/javascript", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first/index.html" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals("foo", page.getTitleText());
+    }
 }

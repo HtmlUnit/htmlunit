@@ -128,7 +128,8 @@ public final class HtmlPage
         initializeHtmlElementCreatorsIfNeeded();
         setElement(createDocument( webResponse_ ).getDocumentElement());
 
-        executeScriptTagsIfNeeded();
+        executeJavaScriptIfPossible("", "Dummy stub just to get javascript initialized", false, null);
+
         initializeFramesIfNeeded();
         executeBodyOnLoadHandlerIfNeeded();
     }
@@ -258,10 +259,10 @@ public final class HtmlPage
 
 
     /**
-     * Return the xml element corresponding with this page.  This has been 
+     * Return the xml element corresponding with this page.  This has been
      * overridden to ensure it returns a correct value even if the page
      * hasn't fully been loaded yet.
-     * 
+     *
      * @return the xml element.
      */
     public Element getElement() {
@@ -772,42 +773,34 @@ public final class HtmlPage
 
 
     /**
-     *  Walk through all the elements looking for script tags. Execute any
-     *  script tags that contain javascript.
+     * Internal use only.  This is a callback from {@link ScriptFilter} and should not be called by consumers of HtmlUnit.
      */
-    private void executeScriptTagsIfNeeded() {
+    public void loadExternalJavaScriptFile( final String srcAttribute  ) {
         final ScriptEngine engine = getWebClient().getScriptEngine();
-        if( engine == null ) {
-            return;
+        if( engine != null ) {
+            engine.execute( this, loadJavaScriptFromUrl( srcAttribute ), srcAttribute, null );
+        }
+    }
+
+
+    /**
+     * Internal use only.  Return true if a script with the specified type and language attributes
+     * is actually JavaScript.
+     */
+    public boolean isJavaScript( final String typeAttribute, final String languageAttribute ) {
+        // Unless otherwise specified, we have to assume that any script is javascript
+        final boolean isJavaScript;
+        if( languageAttribute != null && languageAttribute.length() != 0  ) {
+            isJavaScript = TextUtil.startsWithIgnoreCase(languageAttribute, "javascript");
+        }
+        else if(  typeAttribute != null && typeAttribute.length() != 0 ) {
+            isJavaScript = typeAttribute.equals( "text/javascript" );
+        }
+        else {
+            isJavaScript = true;
         }
 
-        executeJavaScriptIfPossible("", "Dummy stub just to get javascript initialized", false, null);
-
-        final Iterator iterator = getXmlChildElements();
-        while( iterator.hasNext() ) {
-            final Element element = ( Element )iterator.next();
-            if( getTagName(element).equals( "script" ) ) {
-                final HtmlScript htmlScript = ( HtmlScript )getHtmlElement( element );
-                final String languageAttribute = htmlScript.getLanguageAttribute();
-                final String typeAttribute = htmlScript.getTypeAttribute();
-
-                // Unless otherwise specified, we have to assume that any script is javascript
-                boolean isJavaScript = true;
-                if( languageAttribute.length() != 0  ) {
-                    isJavaScript = TextUtil.startsWithIgnoreCase(languageAttribute, "javascript");
-                }
-                else if(  typeAttribute.length() != 0 ) {
-                    isJavaScript = typeAttribute.equals( "text/javascript" );
-                }
-
-                if( isJavaScript ) {
-                    final String sourceUrl = htmlScript.getSrcAttribute();
-                    if( sourceUrl.length() != 0 ) {
-                        engine.execute( this, loadJavaScriptFromUrl( sourceUrl ), sourceUrl, null );
-                    }
-                }
-            }
-        }
+        return isJavaScript;
     }
 
 

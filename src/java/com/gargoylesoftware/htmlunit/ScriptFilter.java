@@ -87,11 +87,13 @@ public final class ScriptFilter extends DefaultFilter {
             XNIException {
 
         if( element.rawname.equalsIgnoreCase( "script" ) ) {
-            scriptType_ = attrs.getValue( "type" );
-            if( scriptType_ == null ) {
-                scriptType_ = "";
-            }
-            if( scriptType_ == null || scriptType_.length() == 0 || scriptType_.equals("text/javascript") ) {
+            final boolean isJavaScript = htmlPage_.isJavaScript( attrs.getValue("type"), attrs.getValue("language") );
+            if( isJavaScript ) {
+                final String src = attrs.getValue("src");
+                if( src != null && src.length() != 0 ) {
+                    htmlPage_.loadExternalJavaScriptFile(src);
+                }
+
                 scriptBuffer_ = new StringBuffer();
             }
         }
