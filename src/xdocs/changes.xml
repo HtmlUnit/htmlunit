@@ -115,6 +115,10 @@
             	Added support for auto-refresh both from a Meta tag and from an
             	http response header.
             </action>
+            <action type="update" dev="mbowler" id="824842" due-to="Jun Chen">
+            	Added support for the format of &lt;script&gt; defined by DOM Leve2.
+            	Patch submitted by Jun Chen
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
