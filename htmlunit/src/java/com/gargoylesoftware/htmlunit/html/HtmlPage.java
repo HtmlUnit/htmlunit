@@ -827,7 +827,7 @@ public final class HtmlPage extends DomNode implements Page {
                         && contentType.equals("application/x-javascript") == false ) {
                     getLog().warn(
                         "Expected content type of text/javascript or application/x-javascript for remotely "
-                        + "loaded javascript element but got [" + webResponse.getContentType()+"]");
+                        + "loaded javascript element " + url + " but got [" + webResponse.getContentType()+"]");
                 }
                 if( scriptEncoding == null || scriptEncoding.length() == 0 ){
                     if( contentCharset.equals("ISO-8859-1")==false ) {
@@ -1412,12 +1412,8 @@ public final class HtmlPage extends DomNode implements Page {
         }
         if (node instanceof HtmlScript) {
             final HtmlScript scriptNode = (HtmlScript) node;
-            if (!isJavaScript(scriptNode.getTypeAttribute(), scriptNode.getLanguageAttribute())) {
-                return; // not javascript
-            }
-            if (scriptNode.getSrcAttribute() != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
-                loadExternalJavaScriptFile(scriptNode.getSrcAttribute(), scriptNode.getCharsetAttribute());
-            }
+            getLog().debug("Script node added: " + scriptNode.asXml());
+            scriptNode.executeScriptIfNeeded();
         }
     }
 

@@ -1972,4 +1972,63 @@ public class DocumentTest extends WebTestCase {
          assertEquals( expectedAlerts, collectedAlerts );
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testWriteInManyTimes() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.getElementById('inner').parentNode.id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<script>\n"
+            + "document.write('<div id=\"outer\">');"
+            + "document.write('<div id=\"inner\"/>');"
+            + "document.write('</div>');"
+            + "</script>\n"
+            + "</body></html>";
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "outer"
+         } );
+         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+         final List collectedAlerts = new ArrayList();
+         loadPage(content, collectedAlerts);
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testWriteScriptInManyTimes() throws Exception {
+        final String content = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "document.write('<script src=\"script.js\">');"
+            + "document.write('<' + '/script>');"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "foo"
+         } );
+         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+         final URL scriptUrl = new URL(URL_FIRST.toExternalForm() + "/script.js");
+         final WebClient client = new WebClient();
+         final MockWebConnection webConnection = new MockWebConnection(client);
+         client.setWebConnection(webConnection);
+         webConnection.setDefaultResponse(content);
+         webConnection.setResponse(scriptUrl, "alert('foo');", 200, "OK", "text/javascript", 
+                 Collections.EMPTY_LIST);
+
+         final List collectedAlerts = new ArrayList();
+         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+         System.out.println(page.asXml());
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
 }
