@@ -544,34 +544,24 @@ public class WebClientTest extends WebTestCase {
      */
     public void testLoadFilePage() throws Exception {
 
-    	// create a real file to read 
-    	// it could be usefull to have existing files to test in a special location in filesystem. 
-    	// It will be really needed when we have to test binary files using the file protocol.
-        final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "</body></html>";
+        // create a real file to read
+        // it could be usefull to have existing files to test in a special location in filesystem. 
+        // It will be really needed when we have to test binary files using the file protocol.
+        final String htmlContent = "<html><head><title>foo</title></head><body></body></html>";
         File tmpFile = File.createTempFile("test", ".html");
         tmpFile.deleteOnExit();
-    	final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
-    	FileUtils.writeStringToFile(tmpFile, htmlContent, encoding);
-    	
-    	URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
+        final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
+        FileUtils.writeStringToFile(tmpFile, htmlContent, encoding);
+
+        URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
         
         final WebClient client = new WebClient();
         final HtmlPage page = (HtmlPage) client.getPage(fileURL);
 
-        assertEquals(
-            htmlContent,
-            page.getWebResponse().getContentAsString() );
-        assertEquals(
-                "text/html",
-	            page.getWebResponse().getContentType() );
-        assertEquals(
-                200,
-	            page.getWebResponse().getStatusCode() );
-        assertEquals(
-                "foo",
-	            page.getTitleText() );
+        assertEquals(htmlContent, page.getWebResponse().getContentAsString());
+        assertEquals("text/html", page.getWebResponse().getContentType());
+        assertEquals(200, page.getWebResponse().getStatusCode());
+        assertEquals("foo", page.getTitleText());
     }
 
     /**
