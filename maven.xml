@@ -228,10 +228,10 @@
     </goal>
     
     <postGoal name="xdoc:register-reports">
-    	<attainGoal name="maven-linkcheck-plugin:deregister"/>
-    	<attainGoal name="maven-simian-plugin:register"/>
-    	<attainGoal name="maven-pmd-plugin:register"/>
-    	<attainGoal name="maven-clover-plugin:register"/>
+	    	<attainGoal name="maven-linkcheck-plugin:deregister"/>
+	    	<attainGoal name="maven-simian-plugin:register"/>
+	    	<attainGoal name="maven-pmd-plugin:register"/>
+	    	<attainGoal name="maven-clover-plugin:register"/>
     </postGoal>
     
     <goal name="createJavaScriptConfigurationPage">
