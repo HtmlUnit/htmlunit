@@ -127,6 +127,31 @@ public class HtmlForm extends HtmlElement {
             }
         }
 
+        final List parameterList = getParameterListForSubmit(submitElement);
+
+        final URL url;
+        try {
+            url = htmlPage.getFullyQualifiedUrl( action );
+        }
+        catch( final MalformedURLException e ) {
+            throw new IllegalArgumentException( "Not a valid url: " + action );
+        }
+
+        final SubmitMethod method = SubmitMethod.getInstance( getAttributeValue( "method" ) );
+        return getPage().getWebClient().getPage( url, method, parameterList );
+    }
+
+
+    /**
+     * Return a list of {@link KeyValuePair}s that represent the data that will be
+     * sent to the server on a form submit.  This is primarily intended to aid
+     * debugging.
+     *
+     * @param submitElement The element that would have been pressed to submit the
+     * form or null if the form was submitted by javascript.
+     * @return The list of {@link KeyValuePair}s.
+     */
+    public final List getParameterListForSubmit( final SubmittableElement submitElement ) {
         final Collection submittableElements = getAllSubmittableElements();
 
         final List parameterList = new ArrayList( submittableElements.size() );
@@ -149,17 +174,7 @@ public class HtmlForm extends HtmlElement {
         if( fakeSelectedRadioButton_ != null ) {
             adjustParameterListToAccountForFakeSelectedRadioButton( parameterList );
         }
-
-        final URL url;
-        try {
-            url = htmlPage.getFullyQualifiedUrl( action );
-        }
-        catch( final MalformedURLException e ) {
-            throw new IllegalArgumentException( "Not a valid url: " + action );
-        }
-
-        final SubmitMethod method = SubmitMethod.getInstance( getAttributeValue( "method" ) );
-        return getPage().getWebClient().getPage( url, method, parameterList );
+        return parameterList;
     }
 
 
