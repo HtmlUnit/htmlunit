@@ -6,3 +6,4 @@ build.properties
 .classpath
 .project
 .checkstyle
+temp
