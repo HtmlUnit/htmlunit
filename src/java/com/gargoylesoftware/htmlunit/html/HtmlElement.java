@@ -480,24 +480,6 @@ public abstract class HtmlElement {
 
 
     /**
-     * Used by {@link #getXmlChildElements} to gather all the child nodes in a list.
-     */
-    private void collectXmlChildElementsInto( final List list, final Element currentElement ) {
-        list.add( currentElement );
-
-        final NodeList nodeList = currentElement.getChildNodes();
-        final int nodeListLength = nodeList.getLength();
-
-        for( int i = 0; i < nodeListLength; i++ ) {
-            final Node node = nodeList.item( i );
-            if( node instanceof Element ) {
-                collectXmlChildElementsInto( list, ( Element )node );
-            }
-        }
-    }
-
-
-    /**
      *  Throw an exception. This is a convenience during development only - it
      *  will likely be removed in the future.
      */
