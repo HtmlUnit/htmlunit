@@ -86,7 +86,7 @@ public class HtmlTextArea
      * @return The text
      */
     public final String getText() {
-        return asText();
+        return getChildrenAsText();
     }
 
 
