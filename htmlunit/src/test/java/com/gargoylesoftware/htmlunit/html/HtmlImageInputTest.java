@@ -116,7 +116,6 @@ public class HtmlImageInputTest extends WebTestCase {
         assertNotNull(secondPage);
 
         final List expectedPairs = Arrays.asList( new Object[]{
-            new KeyValuePair("button", "foo"),
             new KeyValuePair("button.x", "100"),
             new KeyValuePair("button.y", "200")
         });
