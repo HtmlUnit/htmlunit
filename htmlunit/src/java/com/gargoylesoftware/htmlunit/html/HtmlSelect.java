@@ -8,6 +8,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -20,6 +22,7 @@ import org.w3c.dom.NodeList;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="Mike.J.Bresnahan@supervalu.com">Mike J. Bresnahan</a>
  */
 public class HtmlSelect
          extends HtmlElement
@@ -101,8 +104,10 @@ public class HtmlSelect
      * @param  optionValue The value of the option that is to change
      * @exception  ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
+     * @return  The page that occupies this window after this change is made.  It
+     * may be the same window or it may be a freshly loaded one.
      */
-    public void setSelectedAttribute( final String optionValue, final boolean isSelected )
+    public Page setSelectedAttribute( final String optionValue, final boolean isSelected )
         throws ElementNotFoundException {
 
         try {
@@ -129,6 +134,16 @@ public class HtmlSelect
                     option.getValueAttribute().equals( optionValue ) && isSelected );
             }
         }
+
+        final HtmlPage page = getPage();
+        final String onChange = getOnChangeAttribute();
+
+        if( onChange.length() != 0 && page.getWebClient().isJavaScriptEnabled() ) {
+            final ScriptResult scriptResult
+                = page.executeJavaScriptIfPossible( onChange, "onChange handler", true );
+            return scriptResult.getNewPage();
+        }
+        return page;
     }
 
 
