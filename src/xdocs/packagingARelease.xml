@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Packaging a release</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <revision>$Revision$</revision>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                This document is intended for committers who are packaging a release.  It likely won't be
+                of much use to anyone else.
+            </p>
+            <p>
+                <ol>
+                    <li>
+                        Update the version number in project.xml
+                    </li>
+                    <li>
+                        Update the version number and release date in changes.xml
+                    </li>
+                    <li>
+                        Build the zip
+                        <source>maven clean buildzip</source>
+                    </li>
+                    <li>
+                        Upload that zip to SourceForge following 
+                        <a href="http://sourceforge.net/docman/display_doc.php?docid=6445&amp;group_id=1">
+                        these instructions</a>
+                    </li>
+                    <li>
+                        Assuming that everything has gone smoothly so far, make sure everything is checked
+                        in and tag the repository with a name like this "HtmlUnit-1dot1" that reflects
+                        the current build version.
+                    </li>
+                    <li>
+                        Increment the version number in project.xml to indicate that the docs are now
+                        reflecting a future version and not what what had been released.
+                    </li>
+                    <li>
+                        Rebuild and redeploy the site documentation.
+                        <source>maven site:deploy</source>
+                    </li>
+                    <li>
+                        Deploy this new version to the maven repository as 
+                        <a href="http://maven.apache.org/repository-upload.html">described here</a>
+                    </li>
+                </ol>
+            </p>
+        </section>
+    </body>
+</document>
+
