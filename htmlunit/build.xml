@@ -151,7 +151,12 @@
     <antcall target="get-dependency">
         <param name="type" value="required"/>
         <param name="project" value="commons-httpclient"/>
-        <param name="jarName" value="commons-httpclient-2.0.2.jar"/>
+        <param name="jarName" value="commons-httpclient-3.0-beta1.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="type" value="required"/>
+        <param name="project" value="commons-codec"/>
+        <param name="jarName" value="commons-codec-1.3.jar"/>
     </antcall>
     <antcall target="get-dependency">
         <param name="type" value="required"/>
