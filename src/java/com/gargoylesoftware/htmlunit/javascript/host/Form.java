@@ -74,7 +74,18 @@ public class Form extends HTMLElement {
                     jsElement.setHtmlElement(htmlElement);
 
                     allJsElements.add(jsElement);
-                    defineProperty(name, jsElement, attributes);
+                    try {
+                        defineProperty(name, jsElement, attributes);
+                    }
+                    catch( final RuntimeException e ) {
+                        // Rhino throws a RuntimeException so we can't catch anything more specific.
+                        if( e.getMessage().equals("Cannot create property") ) {
+                            getLog().warn("Can't create the property Form."+name+" for ["+htmlElement+"]");
+                        }
+                        else {
+                            throw e;
+                        }
+                    }
                 }
             }
         }
