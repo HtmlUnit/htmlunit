@@ -37,52 +37,73 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
+
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * The javascript object that represents an anchor
+ * Tests for Anchor.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
  */
-public class Anchor extends HTMLElement {
+public class AnchorTest extends WebTestCase {
 
     /**
-     * Create an instance.
+     * Create an instance
+     * @param name The name of the test
      */
-    public Anchor() {
+    public AnchorTest( final String name ) {
+        super(name);
     }
 
 
     /**
-     * Javascript constructor.  This must be declared in every javascript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
+     * @throws Exception if the test fails
      */
-    public void jsConstructor() {
-    }
- 
-    /**
-     * Set the href property.
-     * @param href href attribute value.
-     */
-    public void jsSet_href( final String href ) {
-        getHtmlElementOrDie().setAttributeValue( "href", href );
-    }
+    public void testAnchor_getAttribute_and_href() throws Exception {
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
-    /**
-     * Return the value of the href property.
-     * @return The href property.
-     */
-    public String jsGet_href() {
-        return getHtmlElementOrDie().getAttributeValue( "href" );
-    }
+        final String content
+             = "<html><head><title>AnchorTest</title><script>\n"
+             + "function doTest(anchorElement) {\n"
+             + "    alert(anchorElement.href);\n"
+             + "    alert(anchorElement.getAttribute('href'));\n"
+             + "    anchorElement.href='testsite2.html';\n"
+             + "    alert(anchorElement.href);\n"
+             + "    alert(anchorElement.getAttribute('href'));\n"
+             + "    alert(anchorElement.getAttribute('id'));\n"
+             + "    alert(anchorElement.getAttribute('name'));\n"
+             + "}\n</script></head>"
+             + "<body>"
+             + "<a href='testsite1.html' id='13' name='testanchor' onClick='doTest(this);return false'>"
+             + "</body></html>";
+        
+        webConnection.setDefaultResponse( content );
+        client.setWebConnection( webConnection );
+        
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-    /**
-     * Gets the specified property.
-     * @param attibuteName attribute name.
-     * @return The value of the specified attribute
-     */
-    public String jsFunction_getAttribute(String attibuteName) {
-        return getHtmlElementOrDie().getAttributeValue(attibuteName);
+        final HtmlPage page = (HtmlPage)(client.getPage( new URL("http://x")));
+                
+        final HtmlAnchor anchor = page.getAnchorByName("testanchor");
+        
+        anchor.click();
+        
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "testsite1.html", "testsite1.html", "testsite2.html", "testsite2.html", "13", "testanchor"
+        } );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 }
