@@ -755,6 +755,8 @@ public class Window extends SimpleScriptable {
     * the code to execute. 2nd arg is the interval in milliseconds
     * @param function The function object that was invoked.
     * @return the id of the created interval
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp">
+     * MSDN documentation</a>
     */
    public static int jsFunction_setInterval(final Context context, final Scriptable scriptable, 
        final Object[] args,  final Function function ) {
@@ -769,8 +771,6 @@ public class Window extends SimpleScriptable {
      * Cancels the interval previously started using the setInterval method.
      * Current implementation does nothing.
      * @param iIntervalId specifies the interval to cancel as returned by the setInterval method.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp">
-     * MSDN documentation</a>
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp">
      * MSDN documentation</a>
      */
