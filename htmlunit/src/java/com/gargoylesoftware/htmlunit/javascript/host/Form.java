@@ -95,6 +95,7 @@ public class Form extends HTMLElement {
             }
         }
 
+
         // If the element is a radio button then set the value of the property to an array
         // of radio buttons with the specified name
         while( radioButtons.isEmpty() == false ) {
@@ -326,6 +327,17 @@ public class Form extends HTMLElement {
          else {
              return property;
          }
+     }
+
+
+     /**
+      * Return the specified indexed property
+      * @param name The name of the property
+      * @param start The scriptable object that was originally queried for this property
+      * @return The property.
+      */
+     public Object get( final int index, final Scriptable start ) {
+         return jsElements_.get(index, start);
      }
 }
 
