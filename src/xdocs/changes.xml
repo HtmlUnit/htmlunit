@@ -145,6 +145,10 @@
             <action type="new" dev="mbowler" id="742515">
             	New method HtmlPage.getAllForms()
             </action>
+            <action type="update" dev="mbowler">
+            	Fixed bug where inputs would not submit properly if the type attribute
+            	wasn't lowercase.
+            </action>
         </release>
 	</body>
 
