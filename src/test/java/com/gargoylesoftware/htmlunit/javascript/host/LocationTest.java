@@ -54,6 +54,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Michael Ottati
+ * @author Marc Guillemot
  */
 public class LocationTest extends WebTestCase {
 
@@ -163,7 +165,7 @@ public class LocationTest extends WebTestCase {
             "http://first",   // href
             "",               // pathname
             "",               // port
-            "http",           // protocol
+            "http:",           // protocol
             ""                // search
         } );
         assertEquals( "simple url", expectedAlerts, collectedAlerts );
@@ -179,7 +181,7 @@ public class LocationTest extends WebTestCase {
             "http://www.first:77/foo?bar#wahoo", // href
             "/foo",                              // pathname
             "77",                                // port
-            "http",                              // protocol 
+            "http:",                              // protocol 
             "?bar"                               // search
         } );
         assertEquals( "complete url", expectedAlerts, collectedAlerts );
