@@ -133,6 +133,9 @@
             <action type="new" dev="mbowler">
             	Added read-only support for Document.cookie.
             </action>
+            <action type="new" dev="mbowler" id="675597">
+            	Added support for the javascript method Window.setTimeout()
+            </action>
         </release>
 	</body>
 

@@ -447,10 +447,6 @@ public class WindowTest extends WebTestCase {
 
 
     public void testSetTimeout() throws Exception {
-        if(true) {
-            notImplemented();
-            return;
-        }
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
@@ -458,7 +454,7 @@ public class WindowTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-            = "<html><body><script language='JavaScript'>window.setTimeout('alert(\"Yo!\")',0);"
+            = "<html><body><script language='JavaScript'>window.setTimeout('alert(\"Yo!\")',1);"
             + "</script></body></html>";
 
         webConnection.setResponse(

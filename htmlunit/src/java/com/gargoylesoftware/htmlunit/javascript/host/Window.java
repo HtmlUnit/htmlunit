@@ -217,9 +217,6 @@ public final class Window extends SimpleScriptable {
      */
     public static Object jsFunction_setTimeout(
         final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
-        ((Window)scriptable).getLog().debug( "Window.setTimeout() not implemented" );
-        return NOT_FOUND;
-/* commented out for now as this doesn't work - come back to it later
         final String script = getStringArg(0, args, null);
         final int timeout = getIntArg(1, args, 0);
 
@@ -229,17 +226,23 @@ public final class Window extends SimpleScriptable {
                 try {
                     Thread.sleep(timeout);
 
+                    // Register this thread with the rhino engine
+                    Context.enter();
                     final HtmlPage htmlPage = window.document_.getHtmlPage();
-                    htmlPage.executeJavaScriptIfPossible(script, "Window.setTimeout()", true, null);
+                    htmlPage.executeJavaScriptIfPossible(
+                        script, "Window.setTimeout()", true, htmlPage);
                 }
                 catch( final Exception e ) {
                     window.getLog().error("Caught exception in Window.setTimeout()", e);
+                }
+                finally {
+                    // Deregister this thread with the rhino engine
+                    Context.exit();
                 }
             }
         };
         new Thread(runnable).start();
         return null;
-*/
     }
 
 
