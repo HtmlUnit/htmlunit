@@ -7,6 +7,10 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="mguillem">
+                Response of type "text/xml" are now represented as an XmlPage (rather that a TextPage) 
+				which gives access to the Document object if the xml is well formed.
+            </action>
             <action type="update" dev="mguillem" due-to="Michael Ottati" id="1075690">
                 Fixed bug for JS location.protocol (was missing a ":", e.g. "http:" and not "http").
             </action>

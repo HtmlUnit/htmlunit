@@ -41,6 +41,7 @@ import java.io.IOException;
 
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * The default implementation of PageCreator. Designed to be extented for easier 
@@ -53,6 +54,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author <a href="mailto:yourgod@users.sourceforge.net">Brad Clarke</a>
+ * @author Marc Guillemot
  */
 public class DefaultPageCreator implements PageCreator {
 
@@ -86,6 +88,9 @@ public class DefaultPageCreator implements PageCreator {
         //}
         else if( contentType.equals("text/javascript") || contentType.equals("application/x-javascript") ) {
             newPage = createJavaScriptPage(webResponse, webWindow);
+        }
+        else if( contentType.equals( "text/xml" ) ) {
+            newPage = createXmlPage(webResponse, webWindow);
         }
         else if( contentType.startsWith( "text/" ) ) {
             newPage = createTextPage(webResponse, webWindow);
@@ -123,6 +128,7 @@ public class DefaultPageCreator implements PageCreator {
         webWindow.setEnclosedPage(newPage);
         return newPage;
     }
+
     /**
      * Create a TextPage for this WebResponse
      * 
@@ -136,6 +142,7 @@ public class DefaultPageCreator implements PageCreator {
         webWindow.setEnclosedPage(newPage);
         return newPage;
     }
+
     /**
      * Create an UnexpectedPage for this WebResponse
      * 
@@ -149,5 +156,18 @@ public class DefaultPageCreator implements PageCreator {
         webWindow.setEnclosedPage(newPage);
         return newPage;
     }    
-}
 
+    /**
+     * Create an XmlPage for this WebResponse
+     * 
+     * @param webResponse The page's source
+     * @param webWindow The WebWindow to place the TextPage in
+     * @return The newly created TextPage
+     * @throws IOException If the page could not be created
+     */    
+    protected XmlPage createXmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
+        final XmlPage newPage = new XmlPage( webResponse, webWindow );
+        webWindow.setEnclosedPage(newPage);
+        return newPage;
+    }
+}
