@@ -82,7 +82,7 @@ public class HtmlTextArea
      * @param  newValue The new value.
      */
     public final void setText( final String newValue ) {
-        Assert.assertNotNull("newValue", newValue);
+        Assert.notNull("newValue", newValue);
         value_ = newValue;
     }
 

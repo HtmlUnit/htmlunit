@@ -108,10 +108,10 @@ public final class HtmlPage
 
         super( null, null );
 
-        Assert.assertNotNull( "webClient", webClient );
-        Assert.assertNotNull( "originatingUrl", originatingUrl );
-        Assert.assertNotNull( "webResponse", webResponse );
-        Assert.assertNotNull( "webWindow", webWindow );
+        Assert.notNull( "webClient", webClient );
+        Assert.notNull( "originatingUrl", originatingUrl );
+        Assert.notNull( "webResponse", webResponse );
+        Assert.notNull( "webWindow", webWindow );
 
         webClient_ = webClient;
         originatingUrl_ = originatingUrl;
@@ -315,7 +315,7 @@ public final class HtmlPage
      * @throws ElementNotFoundException If no anchors are found with the specified text
      */
     public HtmlAnchor getFirstAnchorByText( final String text ) throws ElementNotFoundException {
-        Assert.assertNotNull("text", text);
+        Assert.notNull("text", text);
 
         final Iterator iterator = getAnchors().iterator();
         while( iterator.hasNext() ) {

@@ -43,7 +43,7 @@ public abstract class HtmlInput
      * @param  newValue The new content
      */
     public void setValueAttribute( final String newValue ) {
-        Assert.assertNotNull( "newValue", newValue );
+        Assert.notNull( "newValue", newValue );
         getElement().setAttribute( "value", newValue );
 
         final String onChange = getOnChangeAttribute();

@@ -94,7 +94,7 @@ public class Form extends HTMLElement {
      * @param action The new value.
      */
     public void jsSet_action( final String action ) {
-        Assert.assertNotNull("action", action);
+        Assert.notNull("action", action);
         getHtmlForm().setActionAttribute(action);
     }
 
@@ -113,7 +113,7 @@ public class Form extends HTMLElement {
      * @param method The new value.
      */
     public void jsSet_method( final String method ) {
-        Assert.assertNotNull("method", method);
+        Assert.notNull("method", method);
         getHtmlForm().setMethodAttribute(method);
     }
 
@@ -132,7 +132,7 @@ public class Form extends HTMLElement {
      * @param target The new value.
      */
     public void jsSet_target( final String target ) {
-        Assert.assertNotNull("target", target);
+        Assert.notNull("target", target);
         getHtmlForm().setTargetAttribute(target);
     }
 
@@ -151,7 +151,7 @@ public class Form extends HTMLElement {
      * @param encoding The new value.
      */
     public void jsSet_encoding( final String encoding ) {
-        Assert.assertNotNull("encoding", encoding);
+        Assert.notNull("encoding", encoding);
         getHtmlForm().setEnctypeAttribute(encoding);
     }
 

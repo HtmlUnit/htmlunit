@@ -24,7 +24,7 @@ public final class Assert {
      * @param description The description to pass into the NullPointerException
      * @param object The object to check for null.
      */
-    public static final void assertNotNull( final String description, final Object object ) {
+    public static final void notNull( final String description, final Object object ) {
         if( object == null ) {
             throw new NullPointerException(description);
         }

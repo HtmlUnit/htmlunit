@@ -372,7 +372,7 @@ public class HtmlForm extends HtmlElement {
      */
     public List getRadioButtonsByName( final String name ) {
 
-        Assert.assertNotNull( "name", name );
+        Assert.notNull( "name", name );
 
         final List results = new ArrayList();
         final HtmlPage page = getPage();
@@ -473,7 +473,7 @@ public class HtmlForm extends HtmlElement {
      * @return The first checked radio button.
      */
     public HtmlRadioButtonInput getCheckedRadioButton( final String name ) {
-        Assert.assertNotNull("name", name);
+        Assert.notNull("name", name);
         final Iterator iterator = getRadioButtonsByName(name).iterator();
         while( iterator.hasNext() ) {
             final HtmlRadioButtonInput input = (HtmlRadioButtonInput)iterator.next();
@@ -753,7 +753,7 @@ public class HtmlForm extends HtmlElement {
      *      attribute isn't defined.
      */
     public final void setMethodAttribute( final String method ) {
-        Assert.assertNotNull("method", method);
+        Assert.notNull("method", method);
         getElement().setAttribute( "method", method );
     }
 
@@ -797,7 +797,7 @@ public class HtmlForm extends HtmlElement {
      *      attribute isn't defined.
      */
     public final void setEnctypeAttribute( final String encoding ) {
-        Assert.assertNotNull("encoding", encoding);
+        Assert.notNull("encoding", encoding);
         getElement().setAttribute( "enctype", encoding );
     }
 
@@ -876,7 +876,7 @@ public class HtmlForm extends HtmlElement {
      *      attribute isn't defined.
      */
     public final void setTargetAttribute( final String target ) {
-        Assert.assertNotNull("target", target);
+        Assert.notNull("target", target);
         getElement().setAttribute( "target", target );
     }
 }

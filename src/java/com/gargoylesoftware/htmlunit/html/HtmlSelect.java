@@ -146,7 +146,7 @@ public class HtmlSelect
      * @param  optionValue The value of the new "selected" option
      */
     public void fakeSelectedAttribute( final String optionValue ) {
-        Assert.assertNotNull( "optionValue", optionValue );
+        Assert.notNull( "optionValue", optionValue );
         fakeSelectedAttribute( new String[]{optionValue} );
     }
 
@@ -158,7 +158,7 @@ public class HtmlSelect
      * @param  optionValues The values of the new "selected" options
      */
     public void fakeSelectedAttribute( final String optionValues[] ) {
-        Assert.assertNotNull( "optionValues", optionValues );
+        Assert.notNull( "optionValues", optionValues );
         fakeSelectedValues_ = optionValues;
     }
 
@@ -239,7 +239,7 @@ public class HtmlSelect
      */
     public HtmlOption getOptionByValue( final String value )
         throws ElementNotFoundException {
-        Assert.assertNotNull("value", value);
+        Assert.notNull("value", value);
 
         return ( HtmlOption )getOneHtmlElementByAttribute( "option", "value", value );
     }

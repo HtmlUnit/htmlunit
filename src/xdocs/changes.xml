@@ -28,7 +28,7 @@
             </action>
             <action type="update" dev="mbowler">
                 Many classes had their own assertNotNull() method.  Created an assert class and
-                changed all classes to use Assert.assertNotNull() rather than seperate methods.
+                changed all classes to use Assert.notNull() rather than seperate methods.
             </action>
         </release>
     </body>

@@ -46,7 +46,7 @@ public class FormElementsArray extends SimpleScriptable {
      * @param page The HtmlPage that this object will retrive elements from.
      */
     public void initialize( final HtmlForm form ) {
-        Assert.assertNotNull("form", form);
+        Assert.notNull("form", form);
         htmlForm_ = form;
     }
 
@@ -139,7 +139,7 @@ public class FormElementsArray extends SimpleScriptable {
 
 
     private List getHtmlElementsInForm( final HtmlForm htmlForm ) {
-        Assert.assertNotNull("htmlForm", htmlForm);
+        Assert.notNull("htmlForm", htmlForm);
 
         return htmlForm.getHtmlElementsByTagNames(
             Arrays.asList( new String[]{
