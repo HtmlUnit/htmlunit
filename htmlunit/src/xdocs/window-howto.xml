@@ -21,13 +21,31 @@
 	</p>
 	<p>
 		The javascript open() function can be used to load pages into other windows.  New WebWindow
-		objects will be created automatically by this function.  If you wish to be notified when
-		these windows are created, you need to register a
-		<javadoc>com.gargoylesoftware.htmlunit.WebWindowListener</javadoc> with the WebClient via the
-		method <javadoc>com.gargoylesoftware.htmlunit.WebClient#addWebWindowListener(com.gargoylesoftware.htmlunit.WebWindowListener)</javadoc>
+		objects will be created automatically by this function.
 	</p>
 </section>
 
+
+<section title="WebWindowEvents">
+	<p>
+		If you wish to be notified when windows are created or pages are loaded, you need to register a
+		<javadoc>com.gargoylesoftware.htmlunit.WebWindowListener</javadoc> with the WebClient via the
+		method <javadoc>com.gargoylesoftware.htmlunit.WebClient#addWebWindowListener(com.gargoylesoftware.htmlunit.WebWindowListener)</javadoc>
+	</p>
+	<p>
+		When a window is opened either by javascript or through the WebClient, a WebWindowEvent will be
+		fired and passed into the
+		<javadoc>com.gargoylesoftware.htmlunit.WebWindowListener#webWindowOpened(com.gargoylesoftware.htmlunit.WebWindowEvent)</javadoc>
+		method.  Note that both the new and old pages in the event will be null as the window does not
+		have any content loaded at this point.  If a url was specified during creation of the window then the page
+		will be loaded and another event will be fired as described below.
+	</p>
+	<p>
+		When a new page is loaded into a specific window, a WebWindowEvent will be fired and passed into the
+		<javadoc>com.gargoylesoftware.htmlunit.WebWindowListener#webWindowContentChanged(com.gargoylesoftware.htmlunit.WebWindowEvent)</javadoc>
+		method.
+	</p>
+</section>
 
 </document>
 
