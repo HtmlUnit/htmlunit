@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="yourgod" id="1088709">
+                parse application/xhtml+xml content type into HtmlPage
+            </action>
             <action type="update" dev="mguillem" id="1104028">
                 JavaScript: use js object Input for &lt;input type="image" .../&gt; and &lt;input type="button" .../&gt;
             </action>
