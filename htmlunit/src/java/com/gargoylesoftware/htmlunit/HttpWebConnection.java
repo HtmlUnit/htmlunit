@@ -55,6 +55,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpMethodBase;
+import org.apache.commons.httpclient.HttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
@@ -66,6 +67,7 @@ import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
+import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -310,6 +312,13 @@ public class HttpWebConnection extends WebConnection {
 
         writeRequestHeadersToHttpMethod( httpMethod, requestHeaders );
         httpMethod.setFollowRedirects(false);
+        // http://jakarta.apache.org/commons/httpclient/3.0/exception-handling.html#Automatic%20exception%20recovery
+        final HttpMethodRetryHandler noAutoRetry = new HttpMethodRetryHandler() {
+            public boolean retryMethod(HttpMethod arg0, IOException arg1, int arg2) {
+                return false;
+            }
+        };
+        httpMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, noAutoRetry);
         return httpMethod;
     }
 

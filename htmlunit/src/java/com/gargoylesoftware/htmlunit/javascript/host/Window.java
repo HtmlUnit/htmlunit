@@ -346,8 +346,9 @@ public class Window extends SimpleScriptable {
     /**
      * Set the location property.  This will cause a reload of the window.
      * @param newLocation The url of the new content.
+     * @throws IOException when location loading fails
      */
-    public void jsSet_location( final String newLocation ) {
+    public void jsSet_location( final String newLocation ) throws IOException {
         try {
             final HtmlPage page = (HtmlPage)webWindow_.getEnclosedPage();
             final URL url = page.getFullyQualifiedUrl(newLocation);
@@ -359,9 +360,11 @@ public class Window extends SimpleScriptable {
         }
         catch( final MalformedURLException e ) {
             getLog().error("jsSet_location(\""+newLocation+"\") Got MalformedURLException", e);
+            throw e;
         }
         catch( final IOException e ) {
             getLog().error("jsSet_location(\""+newLocation+"\") Got IOException", e);
+            throw e;
         }
     }
 

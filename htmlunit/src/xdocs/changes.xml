@@ -7,6 +7,13 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="yourgod">
+                Stopped httpclient from automatically retrying failed connections 5 times
+                http://jakarta.apache.org/commons/httpclient/3.0/exception-handling.html#Automatic%20exception%20recovery
+            </action>          
+            <action type="update" dev="yourgod">
+                A failure when setting a location from javascript now throws an exception
+            </action>           
             <action type="update" dev="yourgod" id="1104522" due-to="sdanig">
                 Added support for misc table methods in javascript
             </action>        

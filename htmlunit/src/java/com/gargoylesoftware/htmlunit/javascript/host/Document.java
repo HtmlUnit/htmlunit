@@ -370,8 +370,9 @@ public final class Document extends NodeImpl {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_location.asp">
      * MSDN documentation</a>
      * @param location the location to navigate to
+     * @throws IOException when location loading fails
      */
-    public void jsSet_location(final String location) {
+    public void jsSet_location(final String location) throws IOException {
         final WebWindow webWindow = getHtmlPage().getEnclosingWindow();
         ((Window)webWindow.getScriptObject()).jsSet_location(location);
     }
