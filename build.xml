@@ -3,6 +3,10 @@
  This is a configuration file for the ant build tool
  http://jakarta.apache.org/ant/index.html
  $Revision$
+ 
+ Authors:
+ 	Mike Bowler
+ 	David K. Taylor
 -->
 
 <project name="HtmlUnit" default="cleancompile" basedir=".">
