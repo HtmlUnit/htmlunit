@@ -7,10 +7,12 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
-			<action type="update" dev="cerskine">
+						<action type="update" dev="cerskine">
+								Added to the JavaScript configuration page a column showing if a function is not implemented.
+            <action type="update" dev="cerskine">
                 Reworked the JavaScript configuration.  Configuration file is now used and supports the
                 browser constraints on the properties and functions.
-			</action>
+            </action>
             <action type="update" dev="mguillem">
                 Javascript: navigator properties now depend from used BrowserVersion.
             </action>
@@ -107,8 +109,8 @@
                 Submit form elements in the same order that they appear in the HTML form.
             </action>
             <action type="update" dev="yourgod">
-				Upgraded commons-httpclient to version 3.0rc1
-			</action>
+                Upgraded commons-httpclient to version 3.0rc1
+            </action>
             <action type="update" dev="mguillem" id="1115259" due-to="Michael Ottati">
                 JavaScript: fixed document.domain setter for domains like d1.d2.d3.d4.com.
             </action>
@@ -210,10 +212,10 @@
             <action type="update" dev="mguillem">
                 JavaScript: document.getElementById("") now returns null.
             </action>
-		</release>
+        </release>
         <release version="1.4" date="January 9, 2005">
             <action type="add" dev="mbowler" due-to="David D. Kilzer" id="1098981">
-		        Fixed platform specific encoding problem in test WebClientTest.testLoadPage_EncodeQueryString()
+                Fixed platform specific encoding problem in test WebClientTest.testLoadPage_EncodeQueryString()
             </action>
             <action type="add" dev="mguillem" due-to="Daniel Gredler" id="1090094">
                 JavaScript: added window.clearTimeout.
@@ -235,11 +237,11 @@
             </action>
             <action type="update" dev="mguillem">
                 INCOMPATIBLE CHANGE: HtmlFrame and HtmlInlineFrame don't implement WebWindow anymore but now contain a WebWindow accessible
-				by getEnclosedWindow(). Javascript handling of frames works better due to the distinction between frame element and contained window.
+                by getEnclosedWindow(). Javascript handling of frames works better due to the distinction between frame element and contained window.
             </action>
             <action type="add" dev="mguillem">
-			    Added HtmlPage.getFrameByName
-			</action>
+                Added HtmlPage.getFrameByName
+            </action>
             <action type="update" dev="mguillem" due-to="Mike Bresnahan" id="1083336">
                 asText() now returns "checked" or "unchecked" for HtmlRadioButtonInput and HtmlCheckBoxInput
             </action>
@@ -251,7 +253,7 @@
             </action>
             <action type="add" dev="mguillem">
                 Added WebClient.setThrowExceptionOnScriptError(boolean) and isThrowExceptionOnScriptError() to allow script errors 
-				to stop only execution of current script as browsers do.
+                to stop only execution of current script as browsers do.
             </action>        
             <action type="update" dev="mguillem">
                 JavaScript: document.write(ln) writes directly in DOM what allows access to dom nodes in the same script code.
@@ -270,27 +272,27 @@
             </action>
             <action type="update" dev="mguillem">
                 Added DebuggingWebConnection, a web connection that saves the received responses and builds an overview. 
-				Sometimes usefull at conception time to understand what is "browsed".
+                Sometimes usefull at conception time to understand what is "browsed".
             </action>
             <action type="update" dev="mguillem" due-to="Chris Eldredge" id="1090438">
                 Extended javascript event handler to most common events:  ondblclick, onmousedown, onmouseup,
-				onmousemove, onmouseover, onmouseout, onkeypress, onkeydown, onkeyup, onfocus, onblur.
+                onmousemove, onmouseover, onmouseout, onkeypress, onkeydown, onkeyup, onfocus, onblur.
             </action>
             <action type="update" dev="mguillem">
                 Added JS support for outerHTML.
             </action>
             <action type="update" dev="mguillem">
-				Upgraded commons-httpclient to version 3.0beta1
-			</action>
-            <action type="update" dev="mguillem">
-				Added dependency to commons-codec 1.3
-			</action>
-            <action type="update" dev="mguillem" id="1058846">
-				Possibly incompatible change: Removed fix trying to mimic browser kludge for non-RFC2019-compliant cookies as it causes new problems.
+                Upgraded commons-httpclient to version 3.0beta1
             </action>
             <action type="update" dev="mguillem">
-				Possibly incompatible change: Don't set httpclient's cookie policy to COMPATIBILITY anymore what lets user configure it directly 
-				or use the default (RFC2109).
+                Added dependency to commons-codec 1.3
+            </action>
+            <action type="update" dev="mguillem" id="1058846">
+                Possibly incompatible change: Removed fix trying to mimic browser kludge for non-RFC2019-compliant cookies as it causes new problems.
+            </action>
+            <action type="update" dev="mguillem">
+                Possibly incompatible change: Don't set httpclient's cookie policy to COMPATIBILITY anymore what lets user configure it directly 
+                or use the default (RFC2109).
             </action>
             <action type="add" dev="mguillem">
                 Added support for setting cookies from JS (like document.cookie = "foo=something").
@@ -338,8 +340,8 @@
                 Allow onclick event handler to be set by javascript.
             </action>
             <action type="update" dev="cerskine">
-            		Added logic to WebClient to allow messages from parsing the HTML to be displayed on the
-            		on the console.
+                    Added logic to WebClient to allow messages from parsing the HTML to be displayed on the
+                    on the console.
             </action>
             <action type="update" dev="mguillem" due-to="Sergey Gorelkin" id="1085612">
                 Fixed bug changing "//" to "/" in query parameters of urls called from a page.
@@ -352,10 +354,10 @@
             </action>
             <action type="update" dev="mguillem">
                 Fixed bug with setTimeout: a timeout is now only executed if the page that placed it is always "alive". 
-			</action>
+            </action>
             <action type="update" dev="mguillem" id="1085378">
                 Fixed html element property access in JS: attributes are case sensitive.
-			</action>
+            </action>
             <action type="update" dev="mguillem">
                 Improved JS innerHTML to allow complex html code to be set.
             </action>
@@ -416,7 +418,7 @@
             </action>
             <action type="add" dev="mguillem">
                 Response of type "text/xml" are now represented as an XmlPage (rather that a TextPage) 
-				which gives access to the Document object if the xml is well formed.
+                which gives access to the Document object if the xml is well formed.
             </action>
             <action type="update" dev="mguillem" due-to="Michael Ottati" id="1075690">
                 Fixed bug for JS location.protocol (was missing a ":", e.g. "http:" and not "http").
@@ -444,17 +446,17 @@
                 Added support for InnerHTML().
             </action>
             <action type="update" dev="mbowler" due-to="Chris Erskine" id="1065797">
-            		Added support for enabling the errors from
-				NekoHtml by setting a value on the WebClient.
+                    Added support for enabling the errors from
+                NekoHtml by setting a value on the WebClient.
             </action>
             <action type="update" dev="mbowler" due-to="Mike Gallaher" id="1065797">
-				 Previously, if you clone an element, and set an attribute in either
-				the old or the new, the new setting appears in the other one as well.
-				This was because cloneNode just left the attributemap
-				alone, so the clones wound up using the same ones as
-				the old.
+                 Previously, if you clone an element, and set an attribute in either
+                the old or the new, the new setting appears in the other one as well.
+                This was because cloneNode just left the attributemap
+                alone, so the clones wound up using the same ones as
+                the old.
             </action>
-		</release>
+        </release>
 
         <release version="1.3" date="November 12, 2004">
             <action type="update" dev="mbowler">
@@ -521,8 +523,8 @@
                 Initial support for Active X objects.
             </action>  
             <action type="update" dev="mbowler" id="930539">
-	            INCOMPATIBLE CHANGE: The common browsers will automatically insert a tbody tag inside
-	            tables if there isn't one already there.  Now HtmlUnit does that as well.
+                INCOMPATIBLE CHANGE: The common browsers will automatically insert a tbody tag inside
+                tables if there isn't one already there.  Now HtmlUnit does that as well.
             </action>  
             <action type="update" dev="mbowler">
                 Fixed bug where calling document.body from javascript before the body tag had been 
@@ -555,65 +557,65 @@
                 http://issues.apache.org/bugzilla/show_bug.cgi?id=31884
             </action>
             <action type="update" dev="mbowler" due-to="Mike Williams" id="1051885">
-				Fixes for buggy link management in DomNode.basicRemove()
+                Fixes for buggy link management in DomNode.basicRemove()
             </action>
             <action type="update" dev="mbowler" due-to="David D. Kilzer" id="1028314">
-				Fix for bug where HttpWebConnection.getStateForUrl() fails with localhost URL
+                Fix for bug where HttpWebConnection.getStateForUrl() fails with localhost URL
             </action>
             <action type="update" dev="mbowler" due-to="Chris Erskine" id="1056744">
-				Added IE specific behaviour for getElementById()
+                Added IE specific behaviour for getElementById()
             </action>
             <action type="update" dev="mbowler" due-to="David D. Kilzer" id="1056376">
-				Made WebTestCase abstract
+                Made WebTestCase abstract
             </action>
             <action type="update" dev="mbowler" id="1044768">
-				Changed HtmlElement.getOneHtmlElement() to match the documented behaviour
-				in the case where multiple matches were found.
+                Changed HtmlElement.getOneHtmlElement() to match the documented behaviour
+                in the case where multiple matches were found.
             </action>
             <action type="add" dev="mbowler" due-to="Chris Erskine" id="1058238">
-				Added getElementsByTagName(), getClassName() and setClassName() to HTMLElement
+                Added getElementsByTagName(), getClassName() and setClassName() to HTMLElement
             </action>
             <action type="update" dev="mbowler" due-to="David D. Kilzer" id="930546">
-				getAttribute() and setAttribute() missing on HTMLElement.
+                getAttribute() and setAttribute() missing on HTMLElement.
             </action>
             <action type="update" dev="mbowler" due-to="David D. Kilzer" id="1058846">
-				Mimic browser kludge for non-RFC2019-compliant cookies.
+                Mimic browser kludge for non-RFC2019-compliant cookies.
             </action>
             <action type="update" dev="mbowler" due-to="David D. Kilzer" id="939639">
-				Fixed bug where the getAttribute() and setAttribute() methods were not
-				ignoring the case of the attribute name when getting and
-				setting.
+                Fixed bug where the getAttribute() and setAttribute() methods were not
+                ignoring the case of the attribute name when getting and
+                setting.
             </action>
             <action type="update" dev="mbowler" id="1009817">
-	            Fixed bug where a colon in a relative URL causes MalformedURLException in WebClient.expandUrl()
+                Fixed bug where a colon in a relative URL causes MalformedURLException in WebClient.expandUrl()
             </action>
             <action type="update" dev="mbowler" id="1050643">
-	            If the type attribute isn't specified on a button attribute then the default value according
-	            to the spec is "submit".  Internet Explorer doesn't obey the spec and returns "button".  HtmlUnit
-	            now does what the browsers do, depending which BrowserVersion is specified..
+                If the type attribute isn't specified on a button attribute then the default value according
+                to the spec is "submit".  Internet Explorer doesn't obey the spec and returns "button".  HtmlUnit
+                now does what the browsers do, depending which BrowserVersion is specified..
             </action>
             <action type="update" dev="mbowler" due-to="Mike Bresnahan" id="974447">
-				Fixed bug in handling of onclick handlers for an HtmlCheckBoxInput.  When an onclick
-				handler is specified on a HTML checkbox that causes a new page to be displayed,
-				the function HtmlCheckBoxInput.click() was not returning the new page. Rather it was 
-				returning the original page.            
-			</action>
+                Fixed bug in handling of onclick handlers for an HtmlCheckBoxInput.  When an onclick
+                handler is specified on a HTML checkbox that causes a new page to be displayed,
+                the function HtmlCheckBoxInput.click() was not returning the new page. Rather it was 
+                returning the original page.            
+            </action>
             <action type="update" dev="mbowler" due-to="Mike Bresnahan" id="977759">
-				Fixed bug where  HtmlImageInput.click() was not including the name.x and
-				name.y attributes in the submitted request.
-			</action>
+                Fixed bug where  HtmlImageInput.click() was not including the name.x and
+                name.y attributes in the submitted request.
+            </action>
             <action type="update" dev="mbowler" id="1008707">
-				If form.submit() is called from javascript then the forms onsubmit handler should
-				not get executed.
-			</action>
+                If form.submit() is called from javascript then the forms onsubmit handler should
+                not get executed.
+            </action>
             <action type="update" dev="mbowler" due-to="David D. Kilzer" id="1061234">
-				Fixed OutOfMemoryError when submitting a form many times from the same HtmlPage
+                Fixed OutOfMemoryError when submitting a form many times from the same HtmlPage
             </action>
             <action type="update" dev="mbowler" due-to="David D. Kilzer" id="1062388">
-				Clean up memory use in HttpWebConnection.makeWebResponse().
+                Clean up memory use in HttpWebConnection.makeWebResponse().
             </action>
-		</release>
-		    
+        </release>
+            
         <release version="1.3-pre2" date="September 26, 2004">
             <action type="update" dev="yourgod">
                 Added support for setting input.name in JavaScript
@@ -774,15 +776,15 @@
                 refreshes
             </action>
             <action type="update" dev="mbowler">
-            		Added serialVersionUID to all classes that are Serializable but didn't already 
-            		have one of these.
+                    Added serialVersionUID to all classes that are Serializable but didn't already 
+                    have one of these.
             </action>
             <action type="update" dev="mbowler" due-to="Darrell DeBoer" id="1034897">
-            		Fix for performance problem in JavaScript handling.
+                    Fix for performance problem in JavaScript handling.
             </action>
             <action type="update" dev="mbowler" id="856797">
-            		If the server returns an unsupported encoding type then the browsers assume
-            		ISO-8859-1.  Now HtmlUnit does the same.
+                    If the server returns an unsupported encoding type then the browsers assume
+                    ISO-8859-1.  Now HtmlUnit does the same.
             </action>
         </release>
         
