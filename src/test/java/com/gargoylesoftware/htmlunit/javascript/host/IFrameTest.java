@@ -85,6 +85,7 @@ public class IFrameTest extends WebTestCase {
       final String content
            = "<html><head><title>First</title><script>\n"
            + "function doTest() {\n"
+           + "    alert(window.frames.length);\n"
            + "    alert(window.frames['myIFrame'].name);\n"
            + "}\n</script></head>"
            + "<body onload='doTest()'>"
@@ -92,7 +93,7 @@ public class IFrameTest extends WebTestCase {
 
       final List collectedAlerts = new ArrayList();
       loadPage(content, collectedAlerts);
-      final List expectedAlerts = Arrays.asList( new String[]{"myIFrame"} );
+      final List expectedAlerts = Arrays.asList( new String[]{"1", "myIFrame"} );
       createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
       assertEquals( expectedAlerts, collectedAlerts );
   }
