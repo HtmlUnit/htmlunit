@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 
 /**
  *  A response from a web server
@@ -97,6 +98,14 @@ public interface WebResponse {
      * @return The originating URL
      */
     URL getUrl();
+
+
+    /**
+     * Return the response headers as a List of {@link org.apache.commons.httpclient.NameValuePair}s.
+     * 
+     * @return a List of {@link org.apache.commons.httpclient.NameValuePair}s.
+     */
+    List getResponseHeaders();
 
 
     /**

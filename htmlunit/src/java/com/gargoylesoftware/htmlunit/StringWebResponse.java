@@ -42,6 +42,8 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A simple WebResponse created from a string.  Content is assumed to be
@@ -137,6 +139,16 @@ public class StringWebResponse implements WebResponse {
      */
     public URL getUrl() {
         return url_;
+    }
+
+
+    /**
+     * Return the response headers as a List of {@link org.apache.commons.httpclient.NameValuePair}s.
+     * 
+     * @return an empty list.
+     */
+    public List getResponseHeaders() {
+        return Collections.EMPTY_LIST;
     }
 
 
