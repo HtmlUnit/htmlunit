@@ -69,17 +69,16 @@ public class Form extends HTMLElement {
             final HtmlElement htmlElement = (HtmlElement)iterator.next();
             final String name = htmlElement.getAttributeValue("name");
             if( name.length() != 0 ) {
+                final String className = getClassNameForFormElement(htmlElement);
+                final SimpleScriptable jsElement = makeJavaScriptObject( className );
+                jsElement.setHtmlElement(htmlElement);
+                allJsElements.add(jsElement);
+
                 if( htmlElement instanceof HtmlRadioButtonInput ) {
                     radioButtons.add(htmlElement);
                 }
                 else {
-                    final String className = getClassNameForFormElement(htmlElement);
-                    final SimpleScriptable jsElement = makeJavaScriptObject( className );
-                    jsElement.setHtmlElement(htmlElement);
-
-                    allJsElements.add(jsElement);
                     overridingProperties_.put( name, jsElement );
-//                    put( name, this, jsElement );
                 }
             }
         }
@@ -90,8 +89,10 @@ public class Form extends HTMLElement {
         final Iterator scriptableIterator = allJsElements.iterator();
         while( scriptableIterator.hasNext() ) {
             final SimpleScriptable scriptable = (SimpleScriptable)scriptableIterator.next();
-            final String name = scriptable.getHtmlElementOrDie().getAttributeValue("name");
-            jsElements_.defineProperty(name, scriptable, attributes);
+            if( scriptable.getHtmlElementOrDie() instanceof HtmlRadioButtonInput == false ) {
+                final String name = scriptable.getHtmlElementOrDie().getAttributeValue("name");
+                jsElements_.defineProperty(name, scriptable, attributes);
+            }
         }
 
         // If the element is a radio button then set the value of the property to an array

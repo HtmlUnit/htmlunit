@@ -29,13 +29,13 @@ public class FormTest extends WebTestCase {
     }
 
 
-    public void testElementsAccessor_TwoElements() throws Exception {
+    public void testElementsAccessor() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>\n"
                  + "alert(document.form1.length)\n"
                  + "for( var i=0; i< document.form1.length; i++) {\n"
                  + "    var element = document.form1.elements[i];"
-                 + "    if( element != document.form1[element.name] ) {\n"
+                 + "    if( element.type != 'radio' && element != document.form1[element.name] ) {\n"
                  + "        alert('name index not working for '+element.name);\n"
                  + "    }\n"
                  + "    alert( element.name )\n"
@@ -48,6 +48,8 @@ public class FormTest extends WebTestCase {
                  + "    <input type='checkbox' name='checkbox1' />"
                  + "    <input type='file' name='fileupload1' />"
                  + "    <input type='hidden' name='hidden1' />"
+                 + "    <input type='radio' name='radio1' value='1' />"
+                 + "    <input type='radio' name='radio1' value='2' />"
                  + "    <select name='select1'>"
                  + "        <option>foo</option>"
                  + "    </select>"
@@ -68,7 +70,8 @@ public class FormTest extends WebTestCase {
          final HtmlPage page = loadPage(content, collectedAlerts);
 
          final List expectedAlerts = Arrays.asList( new String[]{
-             "14", "button1", "button2", "checkbox1", "fileupload1", "hidden1",
+             "16", "button1", "button2", "checkbox1", "fileupload1", "hidden1",
+             "radio1", "radio1",
              "select1", "select2", "password1", "reset1",
              "reset2", "submit1", "submit2", "textInput1", "textarea1"
          } );

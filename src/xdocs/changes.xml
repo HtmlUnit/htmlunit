@@ -35,6 +35,9 @@
 		<change type="change">
 			The click() method on buttons now do nothing if that element is disabled
 		</change>
+		<change type="fix">
+			Fixed bug where javascript Form.elements was not returning radio buttons
+		</change>
 	</change-log>
 </section>
 
