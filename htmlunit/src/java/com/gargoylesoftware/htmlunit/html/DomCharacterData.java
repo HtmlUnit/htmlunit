@@ -63,7 +63,7 @@ public class DomCharacterData extends HtmlElement {
      * Get the data character string for this character data.
      * @return The String of data.
      */
-    public Object getData() {
+    public String getData() {
         final CharacterData xmlNode = (CharacterData) getNode();
         return xmlNode.getData();
     }
