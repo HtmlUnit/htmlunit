@@ -134,11 +134,13 @@ public final class JavaScriptEngine extends ScriptEngine {
 
 
     /**
-     * Execute the specified javascript code in the.getContext() of a given html page.
+     * Execute the specified javascript code in the context of a given html page.
      *
      * @param htmlPage The page that the code will execute within
      * @param sourceCode The javascript code to execute.
      * @param sourceName The name that will be displayed on error conditions
+     * @param htmlElement The element that will be used as context or null if 
+     * the page should be used as context.
      * @return The result of executing the specified code.
      */
     public Object execute(
