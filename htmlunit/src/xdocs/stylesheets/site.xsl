@@ -174,17 +174,19 @@ tbody {padding: 5px 5px 5px 10px;}
 
 
 <xsl:template match="faq">
+	<fieldset><legend>Frequently Asked Questions</legend>
 	<xsl:for-each select="faq-entry">
 		<xsl:for-each select="question">
-			<p><b>Question: </b><xsl:apply-templates/></p>
+			<p><i><xsl:apply-templates/></i></p>
 		</xsl:for-each>
 		<xsl:for-each select="answer">
-			<p><b>Answer: </b><xsl:apply-templates/></p>
+			<p><xsl:apply-templates/></p>
 		</xsl:for-each>
 		<xsl:if test="position() != last()">
 			<hr noshade="noshade" />
 		</xsl:if>
 	</xsl:for-each>
+	</fieldset>
 </xsl:template>
 
 
