@@ -7,6 +7,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.html.ElementNotFocussableException;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.IOException;
@@ -43,6 +44,7 @@ public class WebClient {
     private final int proxyPort_;
     private ScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
+    private HtmlElement elementWithFocus_;
 
     private AlertHandler   alertHandler_;
     private ConfirmHandler confirmHandler_;
@@ -962,6 +964,64 @@ public class WebClient {
         }
 
         return webResponse;
+    }
+
+
+    /**
+     * Move the focus to the specified component.  This will trigger any relevant javascript
+     * event handlers.
+     *
+     * @param element The element that will recieve the focus or null if focus is to be removed
+     * from all elements.
+     * @throws ElementNotFocussableException If the specified element cannot have the focus.
+     * @see #getElementWithFocus()
+     * @see #tabToNextElement()
+     * @see #tabToPreviousElement()
+     * @see #pressAccessKey()
+     * @see HtmlPage#assertAllTabIndexAttributesSet()
+     */
+    public void moveFocusToElement( final HtmlElement newElement ) throws ElementNotFocussableException {
+        if( elementWithFocus_ == newElement ) {
+            // nothing to do
+            return;
+        }
+
+        if( elementWithFocus_ != null ) {
+            final String onBlurHandler = elementWithFocus_.getAttributeValue("onblur");
+            if( onBlurHandler.length() != 0 ) {
+                elementWithFocus_.getPage().executeJavaScriptIfPossible(
+                    onBlurHandler, "OnBlur handler", true);
+            }
+        }
+
+        if( newElement != null ) {
+            final String onFocusHandler = newElement.getAttributeValue("onfocus");
+            if( onFocusHandler.length() != 0 ) {
+                final HtmlPage currentPage = newElement.getPage();
+                final Page newPage = currentPage.executeJavaScriptIfPossible(
+                    onFocusHandler, "OnFocus handler", true).getNewPage();
+
+                // If a page reload happened as a result of the focus change then obviously this
+                // element will not have the focus because its page has gone away.
+                if( currentPage != newPage ) {
+                    elementWithFocus_ = null;
+                    return;
+                }
+            }
+        }
+
+        elementWithFocus_ = newElement;
+    }
+
+
+    /**
+     * Return the element with the focus or null if no elements have the focus.
+     *
+     * @return The element with focus or null.
+     * @see #moveFocusTo(HtmlElement)
+     */
+    public HtmlElement getElementWithFocus() {
+        return elementWithFocus_;
     }
 }
 
