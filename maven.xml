@@ -208,6 +208,7 @@
 	        		<ant:include name="**/package.html."/>
 	        		<ant:include name="LICENSE.txt"/>
 	        		<ant:exclude name="target/**"/>
+	        		<ant:exclude name="build.properties"/>
 	        	</ant:fileset>
          </ant:copy>
          <ant:replace 
