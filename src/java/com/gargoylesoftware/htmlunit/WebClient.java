@@ -41,8 +41,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.html.FocusableElement;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
@@ -59,6 +63,7 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -74,6 +79,7 @@ import org.apache.commons.logging.LogFactory;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Marc Guillemot
  */
 public class WebClient {
 
@@ -523,6 +529,9 @@ public class WebClient {
         }
         else if (protocol.equals("about")) {
             webResponse = makeWebResponseForAboutUrl(url);
+        }
+        else if (protocol.equals("file")) {
+            webResponse = makeWebResponseForFileUrl(url);
         }
         else {
             webResponse = loadWebResponse( url, encType, method, parameters );
@@ -1235,6 +1244,54 @@ public class WebClient {
         return WEB_RESPONSE_FOR_ABOUT_BLANK;
     }
 
+    /**
+     * Builds a WebResponse for a file url.
+     * This first implementation is basic. 
+     * It assumes that the file contains an html page encoded with computer's default 
+     * encoding.
+     * @param url The file url
+     * @return The web response
+     */
+    private WebResponse makeWebResponseForFileUrl(final URL url) throws IOException {
+        final File file = FileUtils.toFile(url);
+        
+        // take default encoding of the computer (in J2SE5 it's easier but...)
+        final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
+        final String str = FileUtils.readFileToString(file, encoding);
+        
+        return new WebResponse() {
+            public int getStatusCode() {
+                return 200;
+            }
+            public String getStatusMessage() {
+                return "OK";
+            }
+            public String getContentType() {
+                return "text/html";
+            }
+            public String getContentAsString() {
+                return str;
+            }
+            public InputStream getContentAsStream() {
+                return TextUtil.toInputStream(str);
+            }
+            public URL getUrl() {
+                return url;
+            }
+            public String getResponseHeaderValue(final String key) {
+                return "";
+            }
+            public long getLoadTimeInMilliSeconds() {
+                return 0;
+            }
+            public byte[] getResponseBody() {
+                return str.getBytes();
+            }
+            public String getContentCharSet() {
+                return encoding;
+            }
+        };
+    }
 
     private WebResponse makeWebResponseForJavaScriptUrl( final WebWindow webWindow, final URL url ) {
         if( webWindow instanceof HtmlElement == false ) {

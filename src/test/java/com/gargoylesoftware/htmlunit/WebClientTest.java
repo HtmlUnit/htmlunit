@@ -37,12 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import org.apache.commons.io.FileUtils;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -57,6 +62,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Marc Guillemot
  */
 public class WebClientTest extends WebTestCase {
 
@@ -531,6 +537,42 @@ public class WebClientTest extends WebTestCase {
             page.getWebResponse().getUrl().toExternalForm() );
     }
 
+
+    /**
+     * Test loading a page with POST parameters.
+     * @throws Exception If something goes wrong.
+     */
+    public void testLoadFilePage() throws Exception {
+
+    	// create a real file to read 
+    	// it could be usefull to have existing files to test in a special location in filesystem. 
+    	// It will be really needed when we have to test binary files using the file protocol.
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "</body></html>";
+        File tmpFile = File.createTempFile("test", ".html");
+        tmpFile.deleteOnExit();
+    	final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
+    	FileUtils.writeStringToFile(tmpFile, htmlContent, encoding);
+    	
+    	URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
+        
+        final WebClient client = new WebClient();
+        final HtmlPage page = (HtmlPage) client.getPage(fileURL);
+
+        assertEquals(
+            htmlContent,
+            page.getWebResponse().getContentAsString() );
+        assertEquals(
+                "text/html",
+	            page.getWebResponse().getContentType() );
+        assertEquals(
+                200,
+	            page.getWebResponse().getStatusCode() );
+        assertEquals(
+                "foo",
+	            page.getTitleText() );
+    }
 
     /**
      * Test redirecting with javascript during page load.
