@@ -1,5 +1,6 @@
 maven.log
 velocity.log
+log
 target
 build.properties
 .classpath
