@@ -154,48 +154,11 @@
             <id>nekohtml</id>
             <version>0.7.1</version>
         </dependency>
-
-        <!-- HTTPCLIENT DEPENDENCIES -->
-            <dependency>
-      <id>commons-logging</id>
-      <version>1.0.2</version>
-      <url>http://jakarta.apache.org/commons/logging.html</url>
-    </dependency>
-    <dependency>
-      <id>jsse</id>
-      <version>1.0.3_01</version>
-      <url>http://java.sun.com/products/jsse/</url>
-    </dependency>
-    <dependency>
-      <id>jsse+jnet</id>
-      <version>1.0.3_01</version>
-      <url>http://java.sun.com/products/jsse/</url>
-      <jar>jnet-1.0.3_01.jar</jar>
-    </dependency>
-    <dependency>
-            <id>jsse+jcert</id>
-            <version>1.0.3_01</version>
-            <url>http://java.sun.com/products/jsse/</url>
-            <jar>jcert-1.0.3_01.jar</jar>
-        </dependency>
         <dependency>
-            <id>jce</id>
-            <version>1.2.2</version>
-            <url>http://java.sun.com/products/jce/</url>
+            <id>commons-logging</id>
+            <version>1.0.2</version>
+            <url>http://jakarta.apache.org/commons/logging.html</url>
         </dependency>
-        <dependency>
-            <id>jce+sunjce_provider</id>
-            <version>1.2.2</version>
-            <url>http://java.sun.com/products/jce/</url>
-            <jar>sunjce_provider-1.2.2.jar</jar>
-        </dependency>
-        <dependency>
-            <id>jce+local_policy</id>
-            <version>1.2.2</version>
-            <url>http://java.sun.com/products/jce/</url>
-            <jar>local_policy-1.2.2.jar</jar>
-        </dependency>
-
     </dependencies>
 
     <build>
