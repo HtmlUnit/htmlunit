@@ -60,12 +60,12 @@
 </target>
 <target name="jar" description="Make a jar of HtmlUnit" depends="compile">
     <jar
-        jarfile="build/HtmlUnit.jar"
+        jarfile="target/HtmlUnit.jar"
         basedir="target/classes"
         excludes="**/test/*,**/*.java,build.xml,lib,**/package.html"
     />
     <jar
-        jarfile="build/HtmlUnit-src.jar"
+        jarfile="target/HtmlUnit-src.jar"
         basedir="src/java"
         includes="**/*.java"/>
 </target>
