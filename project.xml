@@ -22,11 +22,12 @@
     <shortDescription>HtmlUnit</shortDescription>
 
     <url>http://htmlunit.sourceforge.net</url>
-    <issueTrackingUrl>http://sourceforge.net/tracker/?group_id=47038&atid=448266</issueTrackingUrl>
+    <issueTrackingUrl>http://sourceforge.net/tracker/?group_id=47038&amp;atid=448266</issueTrackingUrl>
 
-    <siteAddress>http://htmlunit.sourceforge.net</siteAddress>
-    <siteDirectory></siteDirectory>
+    <siteAddress>htmlunit.sourceforge.net</siteAddress>
+    <siteDirectory>/home/groups/h/ht/htmlunit/htdocs</siteDirectory>
     <distributionDirectory></distributionDirectory>
+
     <repository>
         <connection>scm:cvs:ext:mbowler@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit:htmlunit</connection>
         <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/htmlunit/</url>
@@ -49,20 +50,18 @@
     </versions>
 
     <mailingLists>
-	    <mailingList>
+        <mailingList>
     	    <name>HtmlUnit Users</name>
             <subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</subscribe>
             <unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</unsubscribe>
             <archive>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</archive>
         </mailingList>
-	    <mailingList>
+        <mailingList>
     	    <name>HtmlUnit Developers</name>
             <subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</subscribe>
             <unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</unsubscribe>
             <archive>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</archive>
         </mailingList>
-    </mailingList>
-    
     </mailingLists>
 
     <developers>
