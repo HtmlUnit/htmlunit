@@ -223,6 +223,12 @@
 	</class>
 
 
+	<class name="Location">
+		<function name="reload"/>
+		<function name="refresh"/>
+	</class>
+
+
 	<class name="Option" extends="HTMLElement">
 		<property name="text" readable="true" writable="false"/>
 		<property name="value" readable="true" writable="false"/>
