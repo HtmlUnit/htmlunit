@@ -37,9 +37,29 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.xml.sax.EntityResolver;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.XMLReaderFactory;
+
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.FakeWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlFrame;
@@ -47,13 +67,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 
 /**
@@ -566,5 +579,39 @@ public class JavaScriptEngineTest extends WebTestCase {
         button.click();
 
         assertEquals( Collections.singletonList("Foo is: |flintstone|"), collectedAlerts );
+    }
+
+    /**
+     * Test that the file JavaScriptConfiguration.xml is valid.
+     * @throws Exception If the test fails
+     */
+    public void testConfigurationFileAgainstSchema() throws Exception {
+        final XMLReader parser = XMLReaderFactory.createXMLReader("org.apache.xerces.parsers.SAXParser");
+        final String directory = "src/java/com/gargoylesoftware/htmlunit/javascript/";
+        parser.setFeature("http://xml.org/sax/features/validation", true);
+        parser.setFeature("http://apache.org/xml/features/validation/schema", true);
+        parser.setEntityResolver( new EntityResolver() {
+            public InputSource resolveEntity (String publicId, String systemId) throws IOException {
+                return createInputSourceForFile(directory+"JavaScriptConfiguration.xsd");
+            }
+        });
+        parser.setErrorHandler( new ErrorHandler() {
+            public void warning(SAXParseException exception) throws SAXException {
+                throw exception;
+            }
+            public void error(SAXParseException exception) throws SAXException {
+                throw exception;
+            }
+            public void fatalError(SAXParseException exception) throws SAXException {
+                throw exception;
+            }
+        });
+
+        parser.parse( createInputSourceForFile(directory+"JavaScriptConfiguration.xml") );
+
+    }
+
+    private InputSource createInputSourceForFile( final String fileName ) throws FileNotFoundException {
+        return new InputSource( new BufferedInputStream( new FileInputStream(fileName)));
     }
 }
