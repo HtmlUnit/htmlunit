@@ -68,5 +68,13 @@ public class WebWindowAdapter implements WebWindowListener {
      */
     public void webWindowContentChanged( final WebWindowEvent event ) {
     }
+
+    /**
+     * A web window has been closed
+     *
+     * @param event The event
+     */
+    public void webWindowClosed( final WebWindowEvent event ) {
+    }
 }
 

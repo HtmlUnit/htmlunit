@@ -178,4 +178,11 @@ public class TopLevelWindow implements WebWindow {
     public WebWindow getOpener() {
         return opener_;
     }
+    
+    /**
+     * Close this window.
+     */
+    public void close() {
+        getWebClient().deregisterWebWindow(this);
+    }
 }

@@ -130,6 +130,9 @@ public class WebClientTest extends WebTestCase {
             public void webWindowContentChanged( final WebWindowEvent event ) {
                 collectedChangeEvents.add(event);
             }
+            public void webWindowClosed( final WebWindowEvent event ) {
+                collectedChangeEvents.add(event);
+            }
         } );
 
         final FakeWebConnection webConnection = new FakeWebConnection( client );
@@ -184,6 +187,9 @@ public class WebClientTest extends WebTestCase {
                 collectedOpenEvents.add(event);
             }
             public void webWindowContentChanged( final WebWindowEvent event ) {
+                collectedChangeEvents.add(event);
+            }
+            public void webWindowClosed( final WebWindowEvent event ) {
                 collectedChangeEvents.add(event);
             }
         } );

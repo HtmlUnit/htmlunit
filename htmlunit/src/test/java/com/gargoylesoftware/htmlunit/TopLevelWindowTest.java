@@ -37,32 +37,45 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.util.Arrays;
+import java.util.List;
+
+import com.gargoylesoftware.base.testing.EventCatcher;
+
+
 /**
- * A listener for WebWindowEvent's
+ *  Tests for WebClient
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public interface WebWindowListener {
-    /**
-     * A web window has been opened
-     *
-     * @param event The event
-     */
-    void webWindowOpened( final WebWindowEvent event );
+public class TopLevelWindowTest extends WebTestCase {
 
     /**
-     * The contents of a web window has been changed
+     *  Create an instance
      *
-     * @param event The event
+     * @param  name The name of the test
      */
-    void webWindowContentChanged( final WebWindowEvent event );
+    public TopLevelWindowTest( final String name ) {
+        super( name );
+    }
 
-    /**
-     * A web window has been closed.
-     *
-     * @param event The event
-     */
-    void webWindowClosed( final WebWindowEvent event );
+    public void testCloseOnlyWindow() throws Exception {
+        final WebClient webClient = new WebClient();
+        final EventCatcher eventCatcher = new EventCatcher();
+        eventCatcher.listenTo(webClient);
+        
+        final WebWindow windowToClose = webClient.getCurrentWindow();
+        ((TopLevelWindow)windowToClose).close();
+        
+        final List expectedEvents = Arrays.asList( new Object[] {
+            new WebWindowEvent(windowToClose, null, null)
+        } );
+        eventCatcher.assertEventsAppearEquals(expectedEvents);
+        
+        // Since this was the only open window, a new window should have
+        // been created when this one was closed.  Verify this.
+        assertNotNull( webClient.getCurrentWindow() );
+        assertTrue( webClient.getCurrentWindow() != windowToClose );
+    }
 }
-
