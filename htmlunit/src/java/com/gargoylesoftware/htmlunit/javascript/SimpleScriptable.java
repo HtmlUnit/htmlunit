@@ -124,6 +124,7 @@ public class SimpleScriptable extends ScriptableObject {
             {"HtmlResetInput", "Input"},
             {"HtmlSelect", "Select"},
             {"HtmlSubmitInput", "Input"},
+            {"HtmlTable", "Table"},
             {"HtmlTextInput", "Input"},
             {"HtmlTextArea", "Textarea"},
             {"HtmlElement", "HTMLElement"},
