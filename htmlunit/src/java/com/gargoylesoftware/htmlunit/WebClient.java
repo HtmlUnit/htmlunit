@@ -87,6 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Daniel Gredler
+ * @author Sergey Gorelkin
  */
 public class WebClient {
 
@@ -1228,7 +1229,18 @@ public class WebClient {
             }
             stringToTokenize = path+"/"+relativeUrl;
         }
-        final StringTokenizer tokenizer = new StringTokenizer(stringToTokenize,"/");
+
+        String stringParams = null;
+        final String pathToTokenize;
+        final int indexQuery = stringToTokenize.indexOf('?');
+        if (indexQuery > 0) {
+            stringParams = stringToTokenize.substring(indexQuery);
+            pathToTokenize = stringToTokenize.substring(0, indexQuery);
+        }
+        else {
+            pathToTokenize = stringToTokenize;
+        }
+        final StringTokenizer tokenizer = new StringTokenizer(pathToTokenize, "/");
         while( tokenizer.hasMoreTokens() ) {
             tokens.add( tokenizer.nextToken() );
         }
@@ -1262,10 +1274,13 @@ public class WebClient {
             buffer.append(iterator.next());
         }
 
-        if( tokens.isEmpty() || stringToTokenize.endsWith("/") ) {
+        if( tokens.isEmpty() || pathToTokenize.endsWith("/") ) {
             buffer.append("/");
         }
 
+        if (stringParams != null) {
+            buffer.append(stringParams);
+        }
         String newUrlString = buffer.toString();
         final int lastPoundSignIndex = newUrlString.lastIndexOf("#");
         if( lastPoundSignIndex != -1 ) {

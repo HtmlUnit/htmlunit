@@ -539,6 +539,27 @@ public class WebClientTest extends WebTestCase {
             page.getWebResponse().getUrl().toExternalForm() );
     }
 
+    /**
+     * Test that double / in query string are not changed.
+     * @throws Exception If something goes wrong.
+     */
+    public void testLoadPage_SlashesInQueryString() throws Exception {
+        final String htmlContent
+                 = "<html><head><title>foo</title></head>"
+                 + "<body><a href='foo.html?id=UYIUYTY//YTYUY..F'>to page 2</a>"
+                 + "</body></html>";
+
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(htmlContent);
+        client.setWebConnection(webConnection);
+        
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlAnchor link = (HtmlAnchor) page.getAnchors().get(0);
+        final Page page2 = link.click(); 
+        assertEquals("http://first/foo.html?id=UYIUYTY//YTYUY..F", page2.getWebResponse().getUrl().toExternalForm());
+    }
 
     /**
      * Test that the query string is encoded to be valid.
