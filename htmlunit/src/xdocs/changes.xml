@@ -6,6 +6,16 @@
     </properties>
 
     <body>
+        <release version="1.3-pre2" date="Not released yet">
+            <action type="update" dev="dktaylor">
+                INCOMPATIBLE CHANGE: Changed HtmlPage so it is no longer derived from
+                HtmlElement.  It is now derived from DomNode and a new HtmlHtml element
+                represents the root element of the document.  Similarly, Document in
+                JavaScript is no longer derived from HTMLElement, but is derived from
+                NodeImpl instead.
+            </action>
+		</release>
+		
         <release version="1.3-pre1" date="November 7, 2003">
             <action type="update" dev="mbowler">
                 INCOMPATIBLE CHANGE: Added method to interface WebWindowListener for 
@@ -16,13 +26,6 @@
                 for any given page: 1) the HtmlElement hierarchy 2) The xml DOM model and
                 3) the javascript element model.  Now the first two tree models have 
                 been merged into one.  Patch submitted by Christian Sell.
-            </action>
-            <action type="update" dev="dktaylor">
-                INCOMPATIBLE CHANGE: Changed HtmlPage so it is no longer derived from
-                HtmlElement.  It is now derived from DomNode and a new HtmlHtml element
-                represents the root element of the document.  Similarly, Document in
-                JavaScript is no longer derived from HTMLElement, but is derived from
-                NodeImpl instead.
             </action>
             <action type="update" dev="mbowler">
                 Continued migration of the build process from ant to maven.
