@@ -44,6 +44,9 @@
             <action type="update" dev="mbowler" id="729266">
                 Fixed bug where the javascript textarea object was not properly getting and setting the 'value'.
             </action>
+            <action type="update" dev="mbowler" id="717021" due-to="XuefengHe">
+                Fixed bug where url expansion wasn't obeying the base element as defined in the html.
+            </action>
         </release>
     </body>
 

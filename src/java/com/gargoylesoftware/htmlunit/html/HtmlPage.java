@@ -443,7 +443,16 @@ public final class HtmlPage
     public URL getFullyQualifiedUrl( final String relativeUrl )
         throws MalformedURLException {
 
-        return webClient_.expandUrl( originatingUrl_, relativeUrl );
+        final List baseElements = getHtmlElementsByTagNames( Collections.singletonList("base"));
+        final URL baseUrl;
+        if( baseElements.isEmpty() ) {
+            baseUrl = originatingUrl_;
+        }
+        else {
+            final HtmlBase htmlBase = (HtmlBase)baseElements.get(0);
+            baseUrl = new URL(htmlBase.getHrefAttribute());
+        }
+        return webClient_.expandUrl( baseUrl, relativeUrl );
     }
 
 
