@@ -350,9 +350,81 @@ public abstract class HtmlElement {
      * @return  See above
      */
     protected Iterator getXmlChildElements() {
+        final Element rootElement = getElement();
+        return new Iterator() {
+            private Element nextElement_ = getFirstChildElement(rootElement);
+            public boolean hasNext() {
+                return nextElement_ != null;
+            }
+            public Object next() {
+                final Element result = nextElement_;
+                moveToNext();
+                return result;
+            }
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+            private void moveToNext() {
+                //System.out.println("moveToNext() entering nextElement_="+nextElement_);
+                Element next = getFirstChildElement(nextElement_);
+                if( next == null ) {
+                    next = getNextSibling(nextElement_);
+                }
+                if( next == null ) {
+                    next = getNextElementUpwards(nextElement_);
+                }
+                if( next == rootElement ) {
+                    next = null;
+                }
+                nextElement_ = next;
+                //System.out.println("moveToNext() leaving nextElement_="+nextElement_);
+
+            }
+            private Element getNextElementUpwards( final Element startingElement ) {
+                if( startingElement == null ) {
+                    throw new NullPointerException("startingElement");
+                }
+                if( startingElement == rootElement ) {
+                    return startingElement;
+                }
+
+                final Element parent = (Element)startingElement.getParentNode();
+                if( parent == rootElement ) {
+                    return parent;
+                }
+
+                Node next = parent.getNextSibling();
+                while( next != null && next instanceof Element == false ) {
+                    next = next.getNextSibling();
+                }
+
+                if( next == null ) {
+                    return getNextElementUpwards(parent);
+                }
+                else {
+                    return (Element)next;
+                }
+            }
+            private Element getFirstChildElement( final Element parent ) {
+                Node node = parent.getFirstChild();
+                while( node != null && node instanceof Element == false ) {
+                    node = node.getNextSibling();
+                }
+                return (Element)node;
+            }
+            private Element getNextSibling( final Element parent ) {
+                Node node = parent.getNextSibling();
+                while( node != null && node instanceof Element == false ) {
+                    node = node.getNextSibling();
+                }
+                return (Element)node;
+            }
+        };
+        /*
         final List list = new ArrayList();
         collectXmlChildElementsInto( list, getElement() );
         return Collections.unmodifiableList( list ).iterator();
+        */
     }
 
 
@@ -362,17 +434,21 @@ public abstract class HtmlElement {
      * @return The iterator.
      */
     public Iterator getAllHtmlChildElements() {
-        final List list = new ArrayList();
-        collectXmlChildElementsInto( list, getElement() );
-
+        final Iterator xmlIterator = getXmlChildElements();
         final HtmlPage page = getPage();
 
-        final int listSize = list.size();
-        for( int i=0; i<listSize; i++ ) {
-            list.set(i, page.getHtmlElement( (Element)list.get(i) ) );
-        }
-
-        return Collections.unmodifiableList( list ).iterator();
+        return new Iterator() {
+            public boolean hasNext() {
+                return xmlIterator.hasNext();
+            }
+            public Object next() {
+                final Element xmlElement = (Element)xmlIterator.next();
+                return page.getHtmlElement(xmlElement);
+            }
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
     }
 
 
