@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1084226">
+                JavaScript: when simulating IE, a variable named after the id of a dom node represents this dom node.  
+            </action>
             <action type="add" dev="mguillem" due-to="David D. Kilzer" id="1099235">
                 Made window.name writable.
             </action>
