@@ -33,7 +33,12 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * @param  isChecked true if this element is to be selected
      */
     public void setChecked( final boolean isChecked ) {
-        getEnclosingForm().setCheckedAttribute(getElement(), isChecked);
+        if( isChecked ) {
+            getElement().setAttribute( "checked", "checked" );
+        }
+        else {
+            getElement().removeAttribute( "checked" );
+        }
     }
 
 

@@ -12,7 +12,6 @@ import com.gargoylesoftware.htmlunit.Page;
 import org.w3c.dom.Element;
 import java.io.IOException;
 
-
 /**
  *  Wrapper for the html element "input"
  *
@@ -23,6 +22,8 @@ public abstract class HtmlInput
          extends HtmlElement
          implements SubmittableElement {
 
+    private final String originalValue_;
+
     /**
      *  Create an instance
      *
@@ -31,6 +32,7 @@ public abstract class HtmlInput
      */
     HtmlInput( final HtmlPage page, final Element element ) {
         super( page, element );
+        originalValue_ = element.getAttribute("value");
     }
 
 
@@ -56,6 +58,21 @@ public abstract class HtmlInput
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
         return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getValueAttribute() )};
+    }
+
+
+    /**
+     * Return the value of this element to what it was at the time the page was loaded.
+     */
+    public void reset() {
+        // TODO: Subclasses should override this to provide custom behaviour.
+//        getLog().info("Resetting value to ["+originalValue_+"]");
+        if( originalValue_ == null ) {
+            getElement().removeAttribute("value");
+        }
+        else {
+            getElement().setAttribute("value", originalValue_);
+        }
     }
 
 
@@ -385,6 +402,10 @@ public abstract class HtmlInput
     }
 
 
+    /**
+     * Return true if the disabled attribute is set for this element.
+     * @return Return true if this is disabled.
+     */
     public final boolean isDisabled() {
         return isAttributeDefined("disabled");
     }

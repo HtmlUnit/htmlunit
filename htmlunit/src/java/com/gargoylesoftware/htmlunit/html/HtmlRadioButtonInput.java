@@ -41,7 +41,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
             form.setCheckedRadioButton( getNameAttribute(), getValueAttribute() );
         }
         else {
-            form.setCheckedAttribute( getElement(), false );
+            getElement().removeAttribute( "checked" );
         }
     }
 

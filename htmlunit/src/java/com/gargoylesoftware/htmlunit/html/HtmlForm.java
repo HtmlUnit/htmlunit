@@ -182,7 +182,14 @@ public class HtmlForm extends HtmlElement {
             }
         }
 
-        getLog().debug("HtmlForm.reset() doesn't actually reset the values of the fields yet");
+        final Iterator elementIterator = getAllHtmlChildElements();
+        while( elementIterator.hasNext() ) {
+            final Object next = elementIterator.next();
+            if( next instanceof SubmittableElement ) {
+                ((SubmittableElement)next).reset();
+            }
+        }
+
         return htmlPage;
     }
 
@@ -392,14 +399,18 @@ public class HtmlForm extends HtmlElement {
         final HtmlInput inputToSelect = getRadioButtonInput( name, value );
 
         final Iterator iterator = getRadioButtonsByName( name ).iterator();
+        if( iterator.hasNext() == false ) {
+            throw new ElementNotFoundException("input", name, value);
+        }
+
         while( iterator.hasNext() ) {
             final HtmlInput input = ( HtmlInput )iterator.next();
 
             if( input == inputToSelect ) {
-                setCheckedAttribute( input.getElement(), true );
+                input.getElement().setAttribute("checked", "checked");
             }
             else {
-                setCheckedAttribute( input.getElement(), false );
+                input.getElement().removeAttribute("checked");
             }
         }
     }
@@ -424,22 +435,6 @@ public class HtmlForm extends HtmlElement {
     }
 
 
-    /**
-     *  Add or remove the selected attribute as needed
-     *
-     * @param  element The xml element to adjust
-     * @param  checked True if the checked attribute is to be set
-     */
-    void setCheckedAttribute( final Element element, final boolean checked ) {
-        if( checked ) {
-            element.setAttribute( "checked", "checked" );
-        }
-        else {
-            element.removeAttribute( "checked" );
-        }
-    }
-
-
     private void adjustParameterListToAccountForFakeSelectedRadioButton( final List list ) {
         final String fakeRadioButtonName = fakeSelectedRadioButton_.getKey();
 
@@ -454,6 +449,23 @@ public class HtmlForm extends HtmlElement {
 
         // Now add this one back in
         list.add( fakeSelectedRadioButton_ );
+    }
+
+
+    /**
+     * Return the first checked radio button with the specified name.  If none of
+     * the radio buttons by that name are checked then return null.
+     */
+    public HtmlRadioButtonInput getCheckedRadioButton( final String name ) {
+        assertNotNull("name", name);
+        final Iterator iterator = getRadioButtonsByName(name).iterator();
+        while( iterator.hasNext() ) {
+            final HtmlRadioButtonInput input = (HtmlRadioButtonInput)iterator.next();
+            if( input.isChecked() ) {
+                return input;
+            }
+        }
+        return null;
     }
 
 
