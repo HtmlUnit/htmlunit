@@ -14,7 +14,6 @@
                 name="SourceForge project page"
                 href="http://www.sourceforge.net/projects/htmlunit"
                 img="http://sourceforge.net/sflogo.php?group_id=47038&amp;type=2"/>
-                <!-- Verify link above - that one is likely for gsbase -->
             <item name="Download" href="http://sourceforge.net/project/showfiles.php?group_id=47038"/>
         </menu>
         <menu name="How do I...">
