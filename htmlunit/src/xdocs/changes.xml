@@ -3,6 +3,10 @@
 
 <section title="1.2-pre1">
 	<change-log>
+		<change type="fix">
+			Fixed bug where redirection didn't happen correctly if the location header contained
+			multiple entries seperated by commas
+		</change>
 	</change-log>
 </section>
 

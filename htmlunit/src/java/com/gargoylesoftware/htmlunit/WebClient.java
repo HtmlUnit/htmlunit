@@ -30,7 +30,8 @@ import org.apache.commons.logging.LogFactory;
  *  An object that represents a web browser
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  */
 public class WebClient {
 
@@ -904,7 +905,15 @@ public class WebClient {
             try {
                 locationString = webResponse.getResponseHeaderValue("Location");
                 if( locationString != null ) {
-                    newUrl = expandUrl( url, locationString );
+                    // HttpClient sometimes returns a delimited list of values where the delimiter is a comma.
+                    // We'll take a guess and go with the first value.
+                    int indexOfComma = locationString.indexOf(',');
+                    if( indexOfComma >= 0) {
+                       newUrl = expandUrl( url, locationString.substring(0, indexOfComma));
+                    }
+                    else {
+                       newUrl = expandUrl( url, locationString);
+                    }
                 }
             }
             catch( final MalformedURLException e ) {
