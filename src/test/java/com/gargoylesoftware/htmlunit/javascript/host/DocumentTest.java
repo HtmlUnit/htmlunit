@@ -185,8 +185,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-        } );
+        final List expectedAlerts = Collections.EMPTY_LIST;
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -199,28 +198,25 @@ public class DocumentTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
-                 = "<html><head><SCRIPT lang=\"JavaScript\">"
+                 = "<html><head><SCRIPT lang='JavaScript'>"
                  + "    function doSubmit(formName){"
                  + "        var form = document.forms[formName];" // This line used to blow up
                  + "        form.submit()"
                  + "}"
-                 + "</SCRIPT></head><body><form name=\"formName\" method=\"POST\" "
-                 + "action=\"http://second\">"
-                 + "<a href=\".\" id=\"testJavascript\" name=\"testJavascript\" "
+                 + "</SCRIPT></head><body><form name='formName' method='POST' "
+                 + "action='http://second'>"
+                 + "<a href='.' id='testJavascript' name='testJavascript' "
                  + "onclick=\" doSubmit('formName');return false;\">"
-                 + "Test Link </a><input type=\"submit\" value=\"Login\" "
-                 + "name=\"loginButton\"></form>"
+                 + "Test Link </a><input type='submit' value='Login' "
+                 + "name='loginButton'></form>"
                  + "</body></html> ";
         final String secondContent
                  = "<html><head><title>second</title></head><body>\n"
                  + "<p>hello world</p>"
                  + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html",
-            Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection( webConnection );
 
         final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
@@ -383,10 +379,6 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAppendChild() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-        webClient.setWebConnection( webConnection );
-
         final String content
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -401,13 +393,9 @@ public class DocumentTest extends WebTestCase {
             + "<form name='form1'>"
             + "</form>"
             + "</body></html>";
-        webConnection.setResponse(
-            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -661,15 +649,13 @@ public class DocumentTest extends WebTestCase {
              + "<script id='script1' src='http://script'>\n"
              + "</script></head><body onload='doTest()'>"
              + "</body></html>";
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
 
         final String scriptContent
              = "doTest=function () {\n"
              + "    alert(top.document.getElementById('script1').src);\n"
              + "}\n";
-        webConnection.setResponse(
-            new URL("http://script"), scriptContent, 200, "OK", "text/javascript", Collections.EMPTY_LIST );
+        webConnection.setResponse(new URL("http://script"), scriptContent, "text/javascript");
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
@@ -1117,13 +1103,11 @@ public class DocumentTest extends WebTestCase {
              = "<html><head><title>First</title></head><body>"
              + "<script src='http://script'></script>"
              + "</form></body></html>";
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
 
         final String scriptContent
              = "document.write(\"<div id='div1'></div>\");";
-        webConnection.setResponse(
-            new URL("http://script"), scriptContent, 200, "OK", "text/javascript", Collections.EMPTY_LIST );
+        webConnection.setResponse(new URL("http://script"), scriptContent, "text/javascript");
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
@@ -1166,8 +1150,7 @@ public class DocumentTest extends WebTestCase {
 
         final String scriptContent
              = "document.getElementById('iframe').src = 'http://second';";
-        webConnection.setResponse(
-            new URL("http://script"), scriptContent, 200, "OK", "text/javascript", Collections.EMPTY_LIST );
+        webConnection.setResponse(new URL("http://script"), scriptContent, "text/javascript");
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
@@ -1235,22 +1218,12 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetReferrer_NoneSpecified() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title></head><body onload='alert(document.referrer);'>"
              + "</form></body></html>";
 
-        final List responseHeaders = Collections.EMPTY_LIST;
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", responseHeaders );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         assertEquals( Collections.singletonList(""), collectedAlerts );
@@ -1260,25 +1233,15 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetURL() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title></head><body onload='alert(document.URL);'>"
              + "</form></body></html>";
 
-        final List responseHeaders = Collections.EMPTY_LIST;
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", responseHeaders );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
-        assertEquals( Collections.singletonList("http://first"), collectedAlerts );
+        assertEquals( Collections.singletonList("http://www.gargoylesoftware.com"), collectedAlerts );
     }
 
     /**
@@ -1357,13 +1320,11 @@ public class DocumentTest extends WebTestCase {
 
         final String firstContent
             = "<html><body><script src=\"http://script\"></script></body></html>";
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
 
         final String scriptContent
             = "alert(document.getElementsByTagName('script').length);";
-        webConnection.setResponse(
-            new URL("http://script"), scriptContent, 200, "OK", "text/javascript", Collections.EMPTY_LIST );
+        webConnection.setResponse(new URL("http://script"), scriptContent, "text/javascript");
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
@@ -1546,8 +1507,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final URL url = URL_FIRST;
-        webConnection.setResponse(
-            url, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(url, firstContent);
         webClient.setWebConnection( webConnection );
 
         final HttpState state = webConnection.getStateForUrl(url);
@@ -1583,8 +1543,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final URL url = URL_FIRST;
-        webConnection.setResponse(
-            url, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(url, firstContent);
         webClient.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
@@ -1831,8 +1790,7 @@ public class DocumentTest extends WebTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onLoad='testIt()'></body></html>\n";
-        webConnection.setResponse(
-            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, content);
         client.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
@@ -1863,14 +1821,11 @@ public class DocumentTest extends WebTestCase {
          assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * IE has a bug which returns the element by name if it can not find it by ID.
      * @throws Exception if the test fails
      */
     public void testGetElementByIdForIE() throws Exception {
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
-        final MockWebConnection webConnection = new MockWebConnection( client );
         final String content
             = "<html><head><title>foo</title></head>"
             + "<body>\n"
@@ -1881,9 +1836,6 @@ public class DocumentTest extends WebTestCase {
             + "alert(document.getElementById('findMe2').name)\n"
             + "</script></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        client.setWebConnection( webConnection );
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
@@ -1910,8 +1862,7 @@ public class DocumentTest extends WebTestCase {
             + "alert(document.getElementById('findMe2').name)\n"
             + "</script></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, content);
         client.setWebConnection( webConnection );
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
@@ -2022,8 +1973,7 @@ public class DocumentTest extends WebTestCase {
          final MockWebConnection webConnection = new MockWebConnection(client);
          client.setWebConnection(webConnection);
          webConnection.setDefaultResponse(content);
-         webConnection.setResponse(scriptUrl, "alert('foo');", 200, "OK", "text/javascript", 
-                 Collections.EMPTY_LIST);
+         webConnection.setResponse(scriptUrl, "alert('foo');", "text/javascript");
 
          final List collectedAlerts = new ArrayList();
          client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
