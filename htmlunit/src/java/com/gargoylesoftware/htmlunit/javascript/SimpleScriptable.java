@@ -484,6 +484,32 @@ public class SimpleScriptable extends ScriptableObject {
 
 
     /**
+     * Return the int value at the specified location in the argument list.  If the index is larger
+     * than the argument array then return the default value.
+     *
+     * @param index The index into the argument list.
+     * @param args The argument list.
+     * @param defaultValue The default value to be used.
+     * @return The specified int or the default value.
+     */
+    public static int getIntArg( final int index, final Object[] args, final int defaultValue ) {
+        final Object result = getObjectArg(index, args, new Integer(defaultValue));
+        if( result instanceof String ) {
+            return Integer.parseInt( (String)result );
+        }
+        else if( result instanceof Integer ) {
+            return ((Integer)result).intValue();
+        }
+        else if( result instanceof Number ) {
+            return ((Number)result).intValue();
+        }
+        else {
+            throw new IllegalStateException("Unexpected type for result: "+result.getClass().getName());
+        }
+    }
+
+
+    /**
      * Return the javascript default value of this object.  This is the javascript equivilent
      * of a toString() in java.
      *
