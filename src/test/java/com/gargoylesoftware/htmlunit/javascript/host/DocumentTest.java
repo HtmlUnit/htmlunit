@@ -48,6 +48,7 @@ import org.apache.commons.httpclient.HttpState;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -79,7 +80,6 @@ public class DocumentTest extends WebTestCase {
     public DocumentTest( final String name ) {
         super(name);
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -114,7 +114,6 @@ public class DocumentTest extends WebTestCase {
          assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Previously, forms with no names were not being returned by document.forms.
      * @throws Exception if the test fails
@@ -140,7 +139,6 @@ public class DocumentTest extends WebTestCase {
 
          assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -169,7 +167,6 @@ public class DocumentTest extends WebTestCase {
          assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -194,7 +191,6 @@ public class DocumentTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -241,10 +237,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDocumentCreateElement() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
-        final String firstContent
+        final String htmlContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
              + "    var div1=document.createElement('div');\n"
@@ -258,18 +251,12 @@ public class DocumentTest extends WebTestCase {
              + "</script></head><body onload='doTest()' id='body'>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        assertEquals( "First", page.getTitleText() );
 
         final HtmlElement div1 = (HtmlElement)
-            firstPage.getHtmlElementById("body").getLastChild();
+            page.getHtmlElementById("body").getLastChild();
         assertEquals("div", div1.getTagName());
         assertEquals(1, div1.getNodeType());
         assertEquals(null, div1.getNodeValue());
@@ -281,16 +268,12 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for createTextNode
      * @throws Exception if the test fails
      */
     public void testDocumentCreateTextNode() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
-        final String firstContent
+        final String htmlContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
              + "    var text1=document.createTextNode('Some Text');\n"
@@ -305,18 +288,12 @@ public class DocumentTest extends WebTestCase {
              + "</script></head><body onload='doTest()' id='body'>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        assertEquals( "First", page.getTitleText() );
 
         final DomNode div1 =
-            firstPage.getHtmlElementById("body").getLastChild();
+            page.getHtmlElementById("body").getLastChild();
         assertEquals(3, div1.getNodeType());
         assertEquals("Some Text", div1.getNodeValue());
         assertEquals("#text", div1.getNodeName());
@@ -326,7 +303,6 @@ public class DocumentTest extends WebTestCase {
         } );
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * Regression test for RFE 741930
@@ -367,16 +343,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for appendChild of a text node
      * @throws Exception if the test fails
      */
     public void testAppendChild_textNode() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-        webClient.setWebConnection( webConnection );
-
         final String content
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -390,13 +361,9 @@ public class DocumentTest extends WebTestCase {
             + "<form name='form1'>"
             + "</form>"
             + "</body></html>";
-        webConnection.setResponse(
-            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -406,16 +373,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for cloneNode
      * @throws Exception if the test fails
      */
     public void testCloneNode() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-        webClient.setWebConnection( webConnection );
-
         final String content
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -432,13 +394,9 @@ public class DocumentTest extends WebTestCase {
             + "<p>hello world</p>"
             + "</form>"
             + "</body></html>";
-        webConnection.setResponse(
-            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -448,16 +406,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for insertBefore
      * @throws Exception if the test fails
      */
     public void testInsertBefore() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-        webClient.setWebConnection( webConnection );
-
         final String content
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -470,13 +423,8 @@ public class DocumentTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'><div id='oldChild'/></form>"
             + "</body></html>";
-        webConnection.setResponse(
-            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -490,10 +438,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetElementById() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
-        final String firstContent
+        final String content
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
              + "    alert(top.document.getElementById('input1').value);\n"
@@ -504,29 +449,19 @@ public class DocumentTest extends WebTestCase {
              + "</form>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals( "First", page.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("bar");
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
     public void testGetElementById_resetId() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
-        final String firstContent
+        final String content
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
              + "    var input1=top.document.getElementById('input1');\n"
@@ -540,29 +475,19 @@ public class DocumentTest extends WebTestCase {
              + "</form>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals( "First", page.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[] {
             "bar", "null"} );
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
     public void testGetElementById_setNewId() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -575,30 +500,19 @@ public class DocumentTest extends WebTestCase {
              + "<div id='div1'/><input name='foo' type='text' value='bar' />"
              + "</form>"
              + "</body></html>";
-
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("bar");
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for bug 740665
      * @throws Exception if the test fails
      */
     public void testGetElementById_divId() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -608,29 +522,19 @@ public class DocumentTest extends WebTestCase {
              + "</script></head><body onload='doTest()'>"
              + "<div id='id1'></div></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("id1");
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for bug 740665
      * @throws Exception if the test fails
      */
     public void testGetElementById_scriptId() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script id='script1'>"
              + "function doTest() {\n"
@@ -639,29 +543,19 @@ public class DocumentTest extends WebTestCase {
              + "</script></head><body onload='doTest()'>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("script1");
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for bug 740665
      * @throws Exception if the test fails
      */
     public void testGetElementById_scriptType() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title>"
              + "<script id='script1' type='text/javascript'>\n"
@@ -671,20 +565,13 @@ public class DocumentTest extends WebTestCase {
              + "</script></head><body onload='doTest()'>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("text/javascript");
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * Regression test for bug 740665
@@ -720,15 +607,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for parentNode with nested elements
      * @throws Exception if the test fails
      */
     public void testParentNode_Nested() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -739,14 +622,8 @@ public class DocumentTest extends WebTestCase {
              + "<div id='parentDiv'><div id='childDiv'></div></div>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlElement div1 = firstPage.getHtmlElementById("childDiv");
@@ -757,15 +634,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for parentNode of document
      * @throws Exception if the test fails
      */
     public void testParentNode_Document() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -774,29 +647,19 @@ public class DocumentTest extends WebTestCase {
              + "</script></head><body onload='doTest()'>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("true");
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for parentNode and createElement
      * @throws Exception if the test fails
      */
     public void testParentNode_CreateElement() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -806,29 +669,19 @@ public class DocumentTest extends WebTestCase {
              + "</script></head><body onload='doTest()'>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("true");
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for parentNode and appendChild
      * @throws Exception if the test fails
      */
     public void testParentNode_AppendChild() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -841,14 +694,8 @@ public class DocumentTest extends WebTestCase {
              + "<div id='parentDiv'></div><div id='childDiv'></div>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlElement childDiv = firstPage.getHtmlElementById("childDiv");
@@ -859,15 +706,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for documentElement of document
      * @throws Exception if the test fails
      */
     public void testDocumentElement() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -878,14 +721,8 @@ public class DocumentTest extends WebTestCase {
              + "</script></head><body onload='doTest()'>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[] {
@@ -893,15 +730,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for firstChild with nested elements
      * @throws Exception if the test fails
      */
     public void testFirstChild_Nested() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -912,14 +745,8 @@ public class DocumentTest extends WebTestCase {
              + "<div id='parentDiv'><div id='childDiv'/><div id='childDiv2'/></div>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlElement div1 = firstPage.getHtmlElementById("parentDiv");
@@ -936,9 +763,6 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFirstChild_AppendChild() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -953,14 +777,8 @@ public class DocumentTest extends WebTestCase {
              + "<div id='parentDiv'/><div id='childDiv'/><div id='childDiv2'/>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlElement parentDiv = firstPage.getHtmlElementById("parentDiv");
@@ -971,15 +789,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for lastChild with nested elements
      * @throws Exception if the test fails
      */
     public void testLastChild_Nested() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String lastContent
              = "<html><head><title>Last</title><script>"
              + "function doTest() {\n"
@@ -990,14 +804,8 @@ public class DocumentTest extends WebTestCase {
              + "<div id='parentDiv'><div id='childDiv1'/><div id='childDiv'/></div>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            new URL("http://last"), lastContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage lastPage = ( HtmlPage )webClient.getPage( new URL( "http://last" ) );
+        final HtmlPage lastPage = loadPage(lastContent, collectedAlerts);
         assertEquals( "Last", lastPage.getTitleText() );
 
         final HtmlElement parentDiv = lastPage.getHtmlElementById("parentDiv");
@@ -1008,15 +816,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for lastChild and appendChild
      * @throws Exception if the test fails
      */
     public void testLastChild_AppendChild() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String lastContent
              = "<html><head><title>Last</title><script>"
              + "function doTest() {\n"
@@ -1031,14 +835,8 @@ public class DocumentTest extends WebTestCase {
              + "<div id='parentDiv'/><div id='childDiv1'/><div id='childDiv'/>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            new URL("http://last"), lastContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage lastPage = ( HtmlPage )webClient.getPage( new URL( "http://last" ) );
+        final HtmlPage lastPage = loadPage(lastContent, collectedAlerts);
         assertEquals( "Last", lastPage.getTitleText() );
 
         final HtmlElement parentDiv = lastPage.getHtmlElementById("parentDiv");
@@ -1049,15 +847,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for nextSibling with nested elements
      * @throws Exception if the test fails
      */
     public void testNextSibling_Nested() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String lastContent
              = "<html><head><title>Last</title><script>"
              + "function doTest() {\n"
@@ -1068,14 +862,8 @@ public class DocumentTest extends WebTestCase {
              + "<div id='parentDiv'><div id='previousDiv'/><div id='nextDiv'/></div>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            new URL("http://last"), lastContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage lastPage = ( HtmlPage )webClient.getPage( new URL( "http://last" ) );
+        final HtmlPage lastPage = loadPage(lastContent, collectedAlerts);
         assertEquals( "Last", lastPage.getTitleText() );
 
         final HtmlElement div1 = lastPage.getHtmlElementById("previousDiv");
@@ -1086,15 +874,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for nextSibling and appendChild
      * @throws Exception if the test fails
      */
     public void testNextSibling_AppendChild() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String lastContent
              = "<html><head><title>Last</title><script>"
              + "function doTest() {\n"
@@ -1109,14 +893,8 @@ public class DocumentTest extends WebTestCase {
              + "<div id='parentDiv'/><div id='junk1'/><div id='previousDiv'/><div id='junk2'/><div id='nextDiv'/>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            new URL("http://last"), lastContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage lastPage = ( HtmlPage )webClient.getPage( new URL( "http://last" ) );
+        final HtmlPage lastPage = loadPage(lastContent, collectedAlerts);
         assertEquals( "Last", lastPage.getTitleText() );
 
         final HtmlElement previousDiv = lastPage.getHtmlElementById("previousDiv");
@@ -1127,15 +905,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for previousSibling with nested elements
      * @throws Exception if the test fails
      */
     public void testPreviousSibling_Nested() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String lastContent
              = "<html><head><title>Last</title><script>"
              + "function doTest() {\n"
@@ -1146,14 +920,8 @@ public class DocumentTest extends WebTestCase {
              + "<div id='parentDiv'><div id='previousDiv'/><div id='nextDiv'/></div>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            new URL("http://last"), lastContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage lastPage = ( HtmlPage )webClient.getPage( new URL( "http://last" ) );
+        final HtmlPage lastPage = loadPage(lastContent, collectedAlerts);
         assertEquals( "Last", lastPage.getTitleText() );
 
         final HtmlElement div1 = lastPage.getHtmlElementById("nextDiv");
@@ -1164,15 +932,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for previousSibling and appendChild
      * @throws Exception if the test fails
      */
     public void testPreviousSibling_AppendChild() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String lastContent
              = "<html><head><title>Last</title><script>"
              + "function doTest() {\n"
@@ -1187,14 +951,8 @@ public class DocumentTest extends WebTestCase {
              + "<div id='parentDiv'/><div id='junk1'/><div id='previousDiv'/><div id='junk2'/><div id='nextDiv'/>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            new URL("http://last"), lastContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage lastPage = ( HtmlPage )webClient.getPage( new URL( "http://last" ) );
+        final HtmlPage lastPage = loadPage(lastContent, collectedAlerts);
         assertEquals( "Last", lastPage.getTitleText() );
 
         final HtmlElement nextDiv = lastPage.getHtmlElementById("nextDiv");
@@ -1205,14 +963,10 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
     public void testAllProperty_KeyByName() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -1225,14 +979,8 @@ public class DocumentTest extends WebTestCase {
              + "</form>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -1240,15 +988,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for bug 707750
      * @throws Exception if the test fails
      */
     public void testAllProperty_CalledDuringPageLoad() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><body>"
              + "<div id='ARSMenuDiv1' style='VISIBILITY: hidden; POSITION: absolute; z-index: 1000000'></div>"
@@ -1257,47 +1001,34 @@ public class DocumentTest extends WebTestCase {
              + "    alert(divObj.tagName);"
              + "</script></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals("", firstPage.getTitleText());
 
         final List expectedAlerts = Collections.singletonList("DIV");
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
     public void testDocumentWrite() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title></head><body>"
              + "<script>document.write(\"<div id='div1'></div>\")</script>"
              + "</form></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
-        // This will blow up if the div tag hasn't been written to the document
-        firstPage.getHtmlElementById("div1");
+        try {
+            firstPage.getHtmlElementById("div1");
+        } 
+        catch (final ElementNotFoundException e) {
+            fail("Element not written to page as expected");
+        }
     }
-
 
     /**
      * Regression test for bug 743241
@@ -1326,10 +1057,13 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
-        // This will blow up if the div tag hasn't been written to the document
-        firstPage.getHtmlElementById("div1");
+        try {
+            firstPage.getHtmlElementById("div1");
+        } 
+        catch (final ElementNotFoundException e) {
+            fail("Element not written to page as expected");
+        }
     }
-
 
     /**
      * Regression test for bug 715379
@@ -1389,10 +1123,6 @@ public class DocumentTest extends WebTestCase {
             notImplemented();
             return;
         }        
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-        webClient.setWebConnection( webConnection );
-
         final String mainContent
         = "<html><head><title>First</title></head><body>"
             + "<script type=\"text/javascript\">"
@@ -1400,21 +1130,14 @@ public class DocumentTest extends WebTestCase {
             + "alert(document.getElementById('blah'));"
             + "</script>" 
             + "</body></html>";
-        
-        webConnection.setResponse(
-                URL_FIRST, mainContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(mainContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         assertEquals(1, collectedAlerts.size());
         assertFalse("Should not be 'null'", "null".equals(collectedAlerts.get(0)));
     }    
-
 
     /**
      * @throws Exception if the test fails
@@ -1467,7 +1190,6 @@ public class DocumentTest extends WebTestCase {
         assertEquals( Collections.singletonList(""), collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -1493,14 +1215,10 @@ public class DocumentTest extends WebTestCase {
         assertEquals( Collections.singletonList("http://first"), collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
     public void testGetElementsByTagName() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -1513,29 +1231,19 @@ public class DocumentTest extends WebTestCase {
              + "<form><input type='button' name='button1' value='pushme'></form>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("button");
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-
     /**
      * Regression test for bug 740636
      * @throws Exception if the test fails
      */
     public void testGetElementsByTagName_CaseInsensitive() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -1548,46 +1256,29 @@ public class DocumentTest extends WebTestCase {
              + "<form><input type='button' name='button1' value='pushme'></form>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("button");
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-
     /**
      * Regression test for bug 740605
      * @throws Exception if the test fails
      */
     public void testGetElementsByTagName_Inline() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-        webClient.setWebConnection( webConnection );
-
         final String firstContent
             = "<html><body><script type=\"text/javascript\">"
             + "alert(document.getElementsByTagName('script').length);"
             + "</script></body></html>";
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        webClient.getPage( URL_FIRST );
-
+        loadPage(firstContent, collectedAlerts);
         final List expectedAlerts = Collections.singletonList("1");
         assertEquals(expectedAlerts, collectedAlerts);
     }
-
 
     /**
      * Regression test for bug 740605
@@ -1617,14 +1308,10 @@ public class DocumentTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-
     /**
      * @throws Exception if the test fails
      */
     public void testDocumentAll_IndexByInt() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -1636,14 +1323,8 @@ public class DocumentTest extends WebTestCase {
              + "</script></head><body onload='doTest()'>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[] {
@@ -1651,14 +1332,10 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
     public void testDocumentAll_tags() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -1673,21 +1350,14 @@ public class DocumentTest extends WebTestCase {
              + "<input type='text' name='b' value='1'>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList( new String[] {
             "a", "b"} );
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -1779,9 +1449,6 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetElementsByName() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -1798,19 +1465,14 @@ public class DocumentTest extends WebTestCase {
              + "</form>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList(new String[] { "value1", "value2" });
         assertEquals(expectedAlerts, collectedAlerts);
     }
+    
     /**
      * @throws Exception if the test fails
      */
@@ -1829,15 +1491,11 @@ public class DocumentTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }    
     
-    
     /**
      * Test the access to the images value.  This should return the 2 images in the document
      * @throws Exception if the test fails
      */
     public void testGetImages() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -1851,14 +1509,8 @@ public class DocumentTest extends WebTestCase {
              + "</form>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Arrays.asList(new String[] { "2" });
@@ -1891,7 +1543,6 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Test the alert", expectedAlerts, collectedAlerts );       
     }
 
-
     /**
      * Test setting and reading the title for when the is not in
      * the page to begin
@@ -1899,27 +1550,25 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSettingMissingTitle() throws Exception {
-        final String content
-            = "<html><head></head>\n"
+        final String content = "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + "    document.title = 'correct title';\n"
             + "    alert(document.title)\n"
             + "</script>\n"
             + "</body></html>";
- 
+
         final List collectedAlerts = new ArrayList();
         try {
             loadPage(content, collectedAlerts);
-        }
+        } 
         catch (ScriptException se) {
             if (se.getEnclosedException() instanceof IllegalStateException) {
                 return;
             }
         }
         fail("Should have thrown IllegalState for missing title when setting the title from JavaScript");
-      }
-
+    }
     
     /**
      * Test setting and reading the title for when the is not in
@@ -1928,18 +1577,16 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSettingBlankTitle() throws Exception {
-        final String content
-            = "<html><head><title></title></head>\n"
+        final String content = "<html><head><title></title></head>\n"
             + "<body>\n"
-        + "<script>\n"
-        + "    document.title = 'correct title';\n"
-        + "    alert(document.title)\n"
-        + "</script>\n"
-        + "</body></html>";
+            + "<script>\n"
+            + "    document.title = 'correct title';\n"
+            + "    alert(document.title)\n"
+            + "</script>\n"
+            + "</body></html>";
  
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
-//        assertEquals("correct title", page.getTitleText());
         assertEquals("correct title", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
@@ -1953,14 +1600,13 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTitle() throws Exception {
-        final String content
-                 = "<html><head><title>foo</title><script>\n"
-                 + "function doTest(){\n"
-                 + "    alert(document.title)\n"
-                 + "}\n"
-                 + "</script></head>\n"
-             + "<body onload='doTest()'>\n"
-                 + "</body></html>";
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.title)\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
 
          final List collectedAlerts = new ArrayList();
          final HtmlPage page = loadPage(content, collectedAlerts);
@@ -1984,25 +1630,18 @@ public class DocumentTest extends WebTestCase {
             notImplemented();
             return;
         }
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        final String content
-            = "<html><head>\n"
-        + "<script>\n"
-        + "function testIt() {\n"
-        + "  alert(document.readyState);\n"
-        + "}\n"
-        + "alert(document.readyState);\n"
-        + "</script>\n"
-        + "</head>\n"
-        + "<body onLoad='testIt()'></body></html>\n";
-        webConnection.setResponse(
-            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        client.setWebConnection( webConnection );
+        final String content = "<html><head>\n"
+            + "<script>\n"
+            + "function testIt() {\n"
+            + "  alert(document.readyState);\n"
+            + "}\n"
+            + "alert(document.readyState);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onLoad='testIt()'></body></html>\n";
 
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        final HtmlPage page = loadPage(content, collectedAlerts);
 
         final List expectedAlerts = Arrays.asList( new String[]{
             "undefined", "undefined"
@@ -2019,16 +1658,15 @@ public class DocumentTest extends WebTestCase {
     public void testReadyStateIE() throws Exception {
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
         final MockWebConnection webConnection = new MockWebConnection( client );
-        final String content
-            = "<html><head>\n"
-        + "<script>\n"
-        + "function testIt() {\n"
-        + "  alert(document.readyState);\n"
-        + "}\n"
-        + "alert(document.readyState);\n"
-        + "</script>\n"
-        + "</head>\n"
-        + "<body onLoad='testIt()'></body></html>\n";
+        final String content = "<html><head>\n"
+            + "<script>\n"
+            + "function testIt() {\n"
+            + "  alert(document.readyState);\n"
+            + "}\n"
+            + "alert(document.readyState);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onLoad='testIt()'></body></html>\n";
         webConnection.setResponse(
             URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
@@ -2060,5 +1698,4 @@ public class DocumentTest extends WebTestCase {
          final List expectedAlerts = Collections.singletonList("undefined");
          assertEquals( expectedAlerts, collectedAlerts );
     }
-
 }
