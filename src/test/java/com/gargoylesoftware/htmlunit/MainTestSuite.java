@@ -71,7 +71,7 @@ public class MainTestSuite extends RecursiveTestSuite {
     /**
      * Set the appropriate logging levels for running the tests.
      */
-    public static void enableAllLogging() {
+    public void enableAllLogging() {
         System.getProperties().put("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.SimpleLog");
         System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog", "trace");
 

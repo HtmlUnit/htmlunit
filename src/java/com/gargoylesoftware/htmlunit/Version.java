@@ -55,7 +55,7 @@ public class Version {
      */
     public static void main( final String args[] ) throws Exception {
         if( args.length == 1 && args[0].equals("-SanityCheck") ) {
-            runSanityCheck();
+            new Version().runSanityCheck();
             return;
         }
 
@@ -70,7 +70,7 @@ public class Version {
     }
 
 
-    private static void runSanityCheck() throws Exception {
+    private void runSanityCheck() throws Exception {
         final WebClient webClient = new WebClient();
         final HtmlPage page = (HtmlPage)webClient.getPage(
             new URL("http://htmlunit.sourceforge.net/index.html") );
