@@ -46,6 +46,7 @@ import junit.framework.TestCase;
 
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
@@ -121,13 +122,12 @@ public class HTMLParserTest extends TestCase {
         assertEquals("\u00A9 2002-2004, Gargoyle Software Inc.", stringVal);
 
         //see if the Google adds were added via Javascript
-        //Google ads are not currently being added to the page
-//        xpath = new HtmlUnitXPath("//iframe[@name = 'google_ads_frame']");
-//        HtmlInlineFrame inline = (HtmlInlineFrame)xpath.selectSingleNode(page);
-//
-//        assertNotNull("find Google ads", inline);
-//
-//        HtmlPage innerPage = (HtmlPage)inline.getEnclosedPage();
-//        assertNotNull(innerPage);
+        xpath = new HtmlUnitXPath("//iframe[@name = 'google_ads_frame']");
+        HtmlInlineFrame inline = (HtmlInlineFrame)xpath.selectSingleNode(page);
+
+        assertNotNull("find Google ads", inline);
+
+        HtmlPage innerPage = (HtmlPage)inline.getEnclosedPage();
+        assertNotNull(innerPage);
     }
 }
