@@ -30,6 +30,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * A container for all the javascript configuration information.
@@ -38,16 +40,31 @@ import org.xml.sax.SAXParseException;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public final class JavaScriptConfiguration {
-    private org.w3c.dom.Document xmlDocument_;
+    private static org.w3c.dom.Document xmlDocument_;
+    private static final Object initializationLock_ = new Object();
+
     private static Map configurationMap_ = new HashMap(11);
 
-    private JavaScriptConfiguration( final BrowserVersion browserVersion ) {
 
+    private JavaScriptConfiguration( final BrowserVersion browserVersion ) {
+        synchronized(initializationLock_) {
+            if( xmlDocument_ == null ) {
+                xmlDocument_ = loadConfiguration();
+            }
+        }
+
+        if( xmlDocument_ == null ) {
+            throw new IllegalStateException("Configuration was not initialized - see log for details");
+        }
+    }
+
+
+    private org.w3c.dom.Document loadConfiguration() {
         try {
             final InputStream inputStream = getConfigurationFileAsStream();
             if( inputStream == null ) {
                 getLog().error("Unable to load JavaScriptConfiguration.xml");
-                return;
+                return null;
             }
             final InputSource inputSource = new InputSource(inputStream);
 
@@ -58,7 +75,7 @@ public final class JavaScriptConfiguration {
             final DocumentBuilder documentBuilder = factory.newDocumentBuilder();
             documentBuilder.setErrorHandler( new StrictErrorHandler() );
 
-            xmlDocument_ = documentBuilder.parse( inputSource );
+            return documentBuilder.parse( inputSource );
         }
         catch( final SAXParseException parseException ) {
             getLog().error( "line=[" + parseException.getLineNumber()
@@ -69,6 +86,8 @@ public final class JavaScriptConfiguration {
         catch( final Exception e ) {
             getLog().error("Error when loading JavascriptConfiguration.xml", e);
         }
+
+        return null;
     }
 
 
@@ -94,12 +113,20 @@ public final class JavaScriptConfiguration {
     }
 
 
+    public boolean isValidWritablePropertyName( final Class hostClass, final String name ) {
+        assertNotNull("hostClass", hostClass);
+        assertNotNull("name", name);
+
+        return getWritablePropertyNames(hostClass).contains(name);
+    }
+
+
     /**
      * Return a list containing all the names of the writable properties for the specified class.
      * @param hostClass The class for which we are getting names.
      * @return A list of names.
      */
-    public List getWritablePropertyNames( final Class hostClass ) {
+    private List getWritablePropertyNames( final Class hostClass ) {
         final List list = new ArrayList();
 
         if( Input.class.isAssignableFrom(hostClass) ) {
@@ -127,12 +154,20 @@ public final class JavaScriptConfiguration {
     }
 
 
+    public boolean isValidReadablePropertyName( final Class hostClass, final String name ) {
+        assertNotNull("hostClass", hostClass);
+        assertNotNull("name", name);
+
+        return getReadablePropertyNames(hostClass).contains(name);
+    }
+
+
     /**
      * Return a list containing all the names of the readable properties for the specified class.
      * @param hostClass The class for which we are getting names.
      * @return A list of names.
      */
-    public List getReadablePropertyNames( final Class hostClass ) {
+    private List getReadablePropertyNames( final Class hostClass ) {
         final List list = new ArrayList();
 
         if( Input.class.isAssignableFrom(hostClass) ) {
@@ -182,12 +217,33 @@ public final class JavaScriptConfiguration {
     }
 
 
+    public boolean isValidFunctionName( final Class hostClass, final String name ) {
+        assertNotNull("hostClass", hostClass);
+        assertNotNull("name", name);
+        //TODO: Remove this
+        if(true) return true;
+
+        final Element classElement = getClassElement(hostClass);
+        if( classElement == null ) {
+            return false;
+        }
+
+        final Element functionElement = getElementByTypeAndName(classElement, "function", name);
+        if( functionElement == null ) {
+            return false;
+        }
+
+        return isEnabled(functionElement);
+        //return getFunctionNames(hostClass).contains(name);
+    }
+
+
     /**
      * Return a list containing all the names of the functions for the specified class.
      * @param hostClass The class for which we are getting names.
      * @return A list of names.
      */
-    public List getFunctionNames( final Class hostClass ) {
+    private List getFunctionNames( final Class hostClass ) {
         final List list = new ArrayList();
 
         if( Input.class.isAssignableFrom(hostClass) ) {
@@ -244,5 +300,47 @@ public final class JavaScriptConfiguration {
         if( object == null ) {
             throw new NullPointerException(description);
         }
+    }
+
+
+    private Element getClassElement( final Class hostClass ) {
+        String className = hostClass.getName();
+        className = className.substring( className.lastIndexOf(".") + 1 );
+        Node node = xmlDocument_.getDocumentElement().getFirstChild();
+        while( node != null ) {
+            if( node instanceof Element ) {
+                final Element element = (Element)node;
+                if( element.getTagName().equals("class") && className.equals(element.getAttribute("name") )) {
+                    return element;
+                }
+            }
+            node = node.getNextSibling();
+        }
+        getLog().warn("Unexpected class ["+className+"]");
+        return null;
+    }
+
+
+    private boolean isEnabled( final Element element ) {
+        assertNotNull("element", element);
+        return true;
+    }
+
+
+    private Element getElementByTypeAndName( final Element root, final String type, final String name ) {
+        assertNotNull("type", type);
+        assertNotNull("name", name);
+
+        Node node = root.getFirstChild();
+        while( node != null ) {
+            if( node instanceof Element ) {
+                final Element element = (Element)node;
+                if( element.getTagName().equals(type) && name.equals(element.getAttribute("name") ) ) {
+                    return element;
+                }
+            }
+            node = node.getNextSibling();
+        }
+        return null;
     }
 }

@@ -20,7 +20,6 @@
 	<pathelement path="src/java"/>
 
 	<!-- Jars for production -->
-	<!-- <pathelement path="dist/lib/Tidy.jar"/> -->
 	<pathelement path="dist/lib/commons-httpclient.jar"/>
 	<pathelement path="dist/lib/commons-logging.jar"/>
 	<pathelement path="dist/lib/js.jar"/>
@@ -35,7 +34,6 @@
 
 	<!-- Required so that jikes can find the JDK classes on Mac OS/X -->
 	<pathelement path="/System/Library/Frameworks/JavaVM.framework/Versions/1.3.1/Classes/classes.jar"/>
-
 </path>
 
 
@@ -57,9 +55,11 @@
 		classname="org.apache.xerces.parsers.SAXParser"
 		classpath="dist/lib/xercesImpl.jar">
 
-		<dtd
-			publicId="JavaScriptConfiguration.xsd"
-			location="src/java/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xsd"/>
+		<xmlcatalog>
+			<entity
+				publicId="JavaScriptConfiguration.xsd"
+				location="src/java/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xsd"/>
+		</xmlcatalog>
 	</xmlvalidate>
 </target>
 
