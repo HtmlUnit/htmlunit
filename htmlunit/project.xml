@@ -295,7 +295,7 @@
             <version>3.1</version>
             <url>http://jakarta.apache.org/commons/collections.html</url>
             <properties>
-                <htmlunit.group>jelly</htmlunit.group>
+                <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>Collection classes</htmlunit.description>
             </properties>
         </dependency>

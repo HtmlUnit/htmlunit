@@ -197,7 +197,13 @@
         <param name="type" value="required"/>
         <param name="project" value="commons-lang"/>
         <param name="jarName" value="commons-lang-2.0.jar"/>
-    </antcall>    
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="type" value="required"/>
+        <param name="project" value="commons-collections"/>
+        <param name="jarName" value="commons-collections-3.1.jar"/>
+    </antcall>
+    
     
     <!-- optional -->
     <antcall target="get-dependency">
@@ -258,11 +264,6 @@
         <param name="type" value="jelly"/>
         <param name="project" value="dom4j"/>
         <param name="jarName" value="dom4j-1.5.jar"/>
-    </antcall>
-    <antcall target="get-dependency">
-        <param name="type" value="jelly"/>
-        <param name="project" value="commons-collections"/>
-        <param name="jarName" value="commons-collections-3.1.jar"/>
     </antcall>
     <antcall target="get-dependency">
         <param name="type" value="jelly"/>
