@@ -43,6 +43,12 @@
         <section name="Where to find...">
             <p>
                 <dl>
+                    <dt>Nightly Build (highly unstable) <date>Yesterday</date></dt>
+                    <dd>
+                        <a href="nightly/">
+                            Download Nightly Build
+                        </a>.
+                    </dd>                
                     <dt>Latest pre-release (unstable) <date>November 7, 2003</date></dt>
                     <dd>
                         <a href="http://prdownloads.sourceforge.net/htmlunit/htmlunit-1.3-pre1.zip?download">

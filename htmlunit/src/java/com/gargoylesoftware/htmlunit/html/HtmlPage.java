@@ -338,7 +338,7 @@ public final class HtmlPage extends DomNode implements Page {
                 baseUrl = new URL(href);
             }
         }
-        return webClient_.expandUrl( baseUrl, relativeUrl );
+        return WebClient.expandUrl( baseUrl, relativeUrl );
     }
 
     /**

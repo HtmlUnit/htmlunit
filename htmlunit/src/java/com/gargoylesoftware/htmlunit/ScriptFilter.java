@@ -137,7 +137,7 @@ public final class ScriptFilter extends DefaultFilter {
             XNIException {
 
         if( element.rawname.equalsIgnoreCase( "script" ) ) {
-            final boolean isJavaScript = htmlPage_.isJavaScript( attrs.getValue("type"), attrs.getValue("language") );
+            final boolean isJavaScript = HtmlPage.isJavaScript( attrs.getValue("type"), attrs.getValue("language") );
             if( isJavaScript ) {
                 final String src = attrs.getValue("src");
                 final String charset = attrs.getValue("charset");
