@@ -649,13 +649,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The specified string or null
      */
     public static String getStringArg( final int index, final Object[] args, final String defaultValue ) {
-        final Object object = getObjectArg(index, args, defaultValue);
-        if( object == null ) {
-            return null;
-        }
-        else {
-            return object.toString();
-        }
+        return Context.toString(getObjectArg(index, args, defaultValue));
     }
 
 
@@ -669,14 +663,9 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The specified boolean or the default value.
      */
     public static boolean getBooleanArg( final int index, final Object[] args, final boolean defaultValue ) {
-        final Boolean defaultBoolean;
-        if( defaultValue ) {
-            defaultBoolean = Boolean.TRUE;
-        }
-        else {
-            defaultBoolean = Boolean.FALSE;
-        }
-        return ((Boolean)getObjectArg(index, args, defaultBoolean)).booleanValue();
+        final Boolean defaultBoolean = Boolean.valueOf(defaultValue);
+
+        return Context.toBoolean(getObjectArg(index, args, defaultBoolean));
     }
 
 
@@ -690,19 +679,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The specified int or the default value.
      */
     public static int getIntArg( final int index, final Object[] args, final int defaultValue ) {
-        final Object result = getObjectArg(index, args, new Integer(defaultValue));
-        if( result instanceof String ) {
-            return Integer.parseInt( (String)result );
-        }
-        else if( result instanceof Integer ) {
-            return ((Integer)result).intValue();
-        }
-        else if( result instanceof Number ) {
-            return ((Number)result).intValue();
-        }
-        else {
-            throw new IllegalStateException("Unexpected type for result: "+result.getClass().getName());
-        }
+        return (int) Context.toNumber(getObjectArg(index, args, new Integer(defaultValue)));
     }
 
 
