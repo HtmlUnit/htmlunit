@@ -31,7 +31,8 @@ import org.w3c.dom.NodeList;
  *  An abstract wrapper for html elements
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  */
 public abstract class HtmlElement {
     /** Constant meaning that the specified attribute was not defined */
@@ -314,7 +315,14 @@ public abstract class HtmlElement {
      * @return  The element as text
      */
     public String asText() {
-        return getChildrenAsText();
+        String text = getChildrenAsText();
+        
+        // Translate non-breaking spaces to regular spaces.
+        text = text.replace((char)160,' ');
+        
+        // Remove extra whitespace
+        text = reduceWhitespace(text);
+        return text;
     }
 
 
@@ -343,7 +351,7 @@ public abstract class HtmlElement {
                 // Discard comments
             }
             else if( node instanceof CharacterData ) {
-                buffer.append( ( ( CharacterData )node ).getData() );
+                buffer.append(( ( CharacterData )node ).getData());
             }
             else {
                 throw new RuntimeException(
@@ -352,6 +360,38 @@ public abstract class HtmlElement {
         }
 
         return buffer.toString();
+    }
+
+
+    /**
+     * Removes extra whitespace from a string similar to what a browser does 
+     * when it displays text.
+     * @param text The text to clean up.
+     * @return The cleaned up text.
+     */
+    private static String reduceWhitespace( final String text ) {
+        final StringBuffer buffer = new StringBuffer( text.length() );
+        final int length = text.length();
+        boolean whitespace = false;
+        for( int i = 0; i < length; ++i) {
+            char ch = text.charAt(i);
+            if( whitespace ) {
+                if( Character.isWhitespace(ch) == false ) {
+                    buffer.append(ch);
+                    whitespace = false;
+                }
+            }
+            else {
+                if( Character.isWhitespace(ch) ) {
+                    whitespace = true;
+                    buffer.append(' ');
+                }
+                else {
+                    buffer.append(ch);
+                }
+            }
+        }
+        return buffer.toString().trim();
     }
 
 
