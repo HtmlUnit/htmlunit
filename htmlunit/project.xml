@@ -74,10 +74,18 @@
                 <role>Release Manager</role>
                 <role>Java Developer</role>
             </roles>
+            <timezone>-5</timezone>
         </developer>
         <developer>
             <name>David K. Taylor</name>
             <id>dktaylor</id>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Brad Clarke</name>
+            <id>yourgod</id>
             <roles>
                 <role>Java Developer</role>
             </roles>
@@ -99,9 +107,6 @@
         </contributor>
         <contributor>
             <name>Barnaby Court</name>
-        </contributor>
-        <contributor>
-            <name>Brad Clarke</name>
         </contributor>
         <contributor>
             <name>Andreas Hangler</name>
