@@ -849,8 +849,8 @@ public class HtmlPageTest extends WebTestCase {
         final String content
                  = "<html><head><title>foo</title>"
                  + "<script type='text/javascript'>"
-                 + "load=function(){alert('foo')}</script>"
-                 + "</head><body onLoad='load'></body></html>";
+                 + "window.onload=function(){alert('foo')}</script>"
+                 + "</head><body></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
