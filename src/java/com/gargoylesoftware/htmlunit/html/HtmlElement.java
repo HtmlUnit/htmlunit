@@ -383,12 +383,12 @@ public abstract class HtmlElement {
                 "The xml element hasn't been set for this object.");
         }
         return new Iterator() {
-            private Element nextElement_ = getFirstChildElement(rootElement);
+            private Element nextElement = getFirstChildElement(rootElement);
             public boolean hasNext() {
-                return nextElement_ != null;
+                return nextElement != null;
             }
             public Object next() {
-                final Element result = nextElement_;
+                final Element result = nextElement;
                 moveToNext();
                 return result;
             }
@@ -397,17 +397,17 @@ public abstract class HtmlElement {
             }
             private void moveToNext() {
                 //System.out.println("moveToNext() entering nextElement_="+nextElement_);
-                Element next = getFirstChildElement(nextElement_);
+                Element next = getFirstChildElement(nextElement);
                 if( next == null ) {
-                    next = getNextSibling(nextElement_);
+                    next = getNextSibling(nextElement);
                 }
                 if( next == null ) {
-                    next = getNextElementUpwards(nextElement_);
+                    next = getNextElementUpwards(nextElement);
                 }
                 if( next == rootElement ) {
                     next = null;
                 }
-                nextElement_ = next;
+                nextElement = next;
                 //System.out.println("moveToNext() leaving nextElement_="+nextElement_);
 
             }
@@ -825,7 +825,7 @@ public abstract class HtmlElement {
      * Add a property change listener to this element.
      * @param listener The new listener.
      */
-    public synchronized final void addPropertyChangeListener( 
+    public final synchronized void addPropertyChangeListener( 
         final PropertyChangeListener listener ) {
             
         assertNotNull("listener", listener);
@@ -840,7 +840,7 @@ public abstract class HtmlElement {
      * Remove a property change listener from this element.
      * @param listener The istener.
      */
-    public synchronized final void removePropertyChangeListener( 
+    public final synchronized void removePropertyChangeListener( 
         final PropertyChangeListener listener ) {
             
         assertNotNull("listener", listener);
@@ -856,7 +856,7 @@ public abstract class HtmlElement {
      * @param oldValue The old value.
      * @param newValue The new value.
      */
-    protected synchronized final void firePropertyChange( 
+    protected final synchronized void firePropertyChange( 
         final String propertyName, final Object oldValue, final Object newValue ) {
             
         if( propertyChangeSupport_ != null ) {

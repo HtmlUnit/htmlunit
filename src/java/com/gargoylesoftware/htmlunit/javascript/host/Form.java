@@ -280,7 +280,7 @@ public class Form extends HTMLElement {
 
      /**
       * Return the specified indexed property
-      * @param name The name of the property
+      * @param index The index of the property
       * @param start The scriptable object that was originally queried for this property
       * @return The property.
       */

@@ -54,9 +54,17 @@ public final class HtmlPage
      * Custom subclass used to provide access to some protected variables.
      */
     class MyParser extends DOMParser {
+        /**
+         * Return the configuration used by this parser.
+         * @return The configuration.
+         */
         public HTMLConfiguration getConfiguration() {
             return (HTMLConfiguration)fConfiguration;
         }
+        /**
+         * Return the document used by this parser.
+         * @return The document.
+         */
         public Document getDocument() {
             return fDocument;
         }
@@ -77,6 +85,7 @@ public final class HtmlPage
 
     private static final int TAB_INDEX_NOT_SPECIFIED = -10;
     private static final int TAB_INDEX_OUT_OF_BOUNDS = -20;
+    private ScriptFilter scriptFilter_;
 
 
     /**
@@ -711,6 +720,9 @@ public final class HtmlPage
      * @param wrapSourceInFunction True if this snippet of code should be placed inside
      * a javascript function.  This is neccessary for intrinsic event handlers that may
      * try to return a value.
+     * @param htmlElement The html element for which this script is being executed.
+     * This element will be the context during the javascript execution.  If null,
+     * the context will default to the page.
      * @return A ScriptResult which will contain both the current page (which may be different than
      * the previous page and a javascript result object.
      */
@@ -1019,10 +1031,20 @@ public final class HtmlPage
     }
 
 
-    private ScriptFilter scriptFilter_;
+    /**
+     * Set the script filter that will be used during processing of the
+     * javascript document.write().  This is intended for internal use only.
+     * @param The script filter.
+     */
     public void setScriptFilter( final ScriptFilter scriptFilter ) {
         scriptFilter_ = scriptFilter;
     }
+
+    /**
+     * Return the script filter that will be used during processing of the
+     * javascript document.write().  This is intended for internal use only.
+     * @return The script filter.
+     */
     public ScriptFilter getScriptFilter() {
         return scriptFilter_;
     }
