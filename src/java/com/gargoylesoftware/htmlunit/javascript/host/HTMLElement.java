@@ -45,7 +45,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.mozilla.javascript.NativeArray;
-import org.mozilla.javascript.PropertyException;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -293,9 +292,8 @@ public class HTMLElement extends NodeImpl {
      * </ul>
      * @param behavior the URL of the behavior to add, or a default behavior name
      * @return an identifier that can be user later to detach the behavior from the element
-     * @throws PropertyException if behaviour's methods could be registered
      */
-    public int jsFunction_addBehavior(final String behavior) throws PropertyException {
+    public int jsFunction_addBehavior(final String behavior) {
         if (BEHAVIOR_HOMEPAGE.equals(behavior)) {
             Class c = this.getClass();
             defineFunctionProperties(new String[] {"isHomePage"}, c, 0);
