@@ -23,14 +23,9 @@
             following commands.  When prompted for a password, just press the enter key.
             </p>
             <source>
-cvs -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit login
-cvs -z3 -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit co htmlunit
+cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/htmlunit login
+cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/htmlunit co htmlunit
             </source>
-            <warning>
-                The old directory structure used the modules "src", "docs" and "lib".  These modules are still
-                present in cvs but are no longer used.  All current source will be found in the "htmlunit"
-                module.
-            </warning>
         </section>
 
         <section name="Compiling the code">

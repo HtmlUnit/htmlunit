@@ -127,6 +127,9 @@
         <contributor>
             <name>Darrell DeBoer</name>
         </contributor>
+        <contributor>
+            <name>Chris Erskine</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
