@@ -47,6 +47,9 @@
             <action type="update" dev="mbowler" id="717021" due-to="XuefengHe">
                 Fixed bug where url expansion wasn't obeying the base element as defined in the html.
             </action>
+            <action type="update" dev="mbowler" id="727718" due-to="jin kim">
+                Fixed bug where javascript form elements were not always being initialized correctly..
+            </action>
         </release>
     </body>
 
