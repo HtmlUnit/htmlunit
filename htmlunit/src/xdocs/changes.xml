@@ -6,6 +6,12 @@
 		<change type="new">
 			Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlButtonInput#click()</javadoc>
 		</change>
+		<change type="fix">
+			Fixed a bug in javascript loading where external scripts were being loaded after the page was fully
+			parsed rather than as each &lt;script&gt; tag was being handled.  This resulted in situations where
+			javascript that was executed during the parsing of the page would not be able to access functions
+			declared in the external javascript files.
+		</change>
 	</change-log>
 </section>
 
