@@ -750,24 +750,29 @@ public class FormTest extends WebTestCase {
     }
 
     /**
-     * Specific to IE, form field can be found in the form myForm.myFieldId
      * @throws Exception if the test fails
      */
      public void testFieldFoundWithID() throws Exception {
-        if (true) {
-            // due to bug http://jira.codehaus.org/browse/JAXEN-55
-            notImplemented();
-            return;
-        }
-
-        final String content = "<html><head></head>"
-             + "<body onload='alert(IRForm.IRText.value)'>"
+        final String content = "<html><head>"
+             + "<script>"
+             + "function test()"
+             + "{"
+             + "    alert(IRForm.IRText.value);"
+             + "    alert(IRForm.myField.length);"
+             + "}"
+             + "</script>"
+             + "</head>"
+             + "<body onload='test()'>"
              + " <form name='IRForm' action='#'>"
              + " <input type='text' id='IRText' value='before'/>"
+             + " <input type='image' name='myField' src='foo.gif'/>"
+             + " <input type='image' id='myField' src='foo.gif'/>"
+             + " <input type='text' name='myField'/>"
+             + " <input type='text' id='myField'/>"
              + " </form>"
              + "</body>"
              + "</html>";
-         final List expectedAlerts = Arrays.asList( new String[]{ "before" } );
+         final List expectedAlerts = Arrays.asList( new String[]{ "before", "2" } );
          final List collectedAlerts = new ArrayList();
          createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
          loadPage(content, collectedAlerts);
