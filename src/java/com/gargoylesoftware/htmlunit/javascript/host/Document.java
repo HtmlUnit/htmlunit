@@ -167,12 +167,57 @@ public final class Document extends NodeImpl {
         return links_;
     }
 
+    /**
+     * javascript function "write" may accept a variable number of args.
+     * It's not documented by W3C, Mozilla or MSDN but works with Mozilla and IE.
+     * @param context The javascript context
+     * @param scriptable The scriptable
+     * @param args The arguments passed into the method.
+     * @param function The function.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/write.asp">
+     * MSDN documentation</a>
+     */
+    public static void jsFunction_write(
+        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
+
+        ((Document) scriptable).write(concatArgsAsString(args));
+    }
+
+
+    /**
+     * Converts the arguments to strings and concatenate them.
+     * @param args the javascript arguments
+     * @return the string concatenation
+     */
+    private static String concatArgsAsString(final Object[] args) {
+        final StringBuffer buffer = new StringBuffer();
+        for (int i=0; i<args.length; ++i) {
+            buffer.append(Context.toString(args[i]));
+        }
+        return buffer.toString();
+    }
+
+    /**
+     * javascript function "writeln" may accept a variable number of args.
+     * It's not documented by W3C, Mozilla or MSDN but works with Mozilla and IE.
+     * @param context The javascript context
+     * @param scriptable The scriptable
+     * @param args The arguments passed into the method.
+     * @param function The function.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/writeln.asp">
+     * MSDN documentation</a>
+     */
+    public static void jsFunction_writeln(
+        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
+
+        ((Document) scriptable).write(concatArgsAsString(args) + "\n");
+    }
 
     /**
      * javascript function "write".
      * @param content the content to write
      */
-    public void jsFunction_write(final String content) {
+    protected void write(final String content) {
         getLog().debug("write: " + content);
 
         writeBuffer_.append(content);
@@ -255,15 +300,6 @@ public final class Document extends NodeImpl {
         }
         
         return getLastHtmlElement((HtmlElement) lastChild);
-    }
-
-
-    /**
-     * javascript function "writeln".
-     * @param content the content to write
-     */
-    public void jsFunction_writeln(final String content) {
-        jsFunction_write(content + "\n");
     }
 
 

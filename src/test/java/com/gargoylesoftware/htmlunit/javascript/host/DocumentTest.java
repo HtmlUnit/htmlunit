@@ -1105,7 +1105,11 @@ public class DocumentTest extends WebTestCase {
     public void testDocumentWrite() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>"
-            + "<script>document.write(\"<div id='div1'></div>\")</script>"
+            + "<script>\n"
+            + "document.write(\"<div id='div1'></div>\");\n"
+            + "document.write('<div', \" id='div2'>\", '</div>');\n"
+            + "document.writeln('<div', \" id='div3'>\", '</div>');\n"
+            + "</script>"
             + "</form></body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -1114,9 +1118,11 @@ public class DocumentTest extends WebTestCase {
 
         try {
             firstPage.getHtmlElementById("div1");
+            firstPage.getHtmlElementById("div2");
+            firstPage.getHtmlElementById("div3");
         } 
         catch (final ElementNotFoundException e) {
-            fail("Element not written to page as expected");
+            fail("Element not written to page as expected: " + e.getMessage());
         }
     }
 
