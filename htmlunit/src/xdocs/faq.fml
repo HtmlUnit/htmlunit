@@ -79,7 +79,10 @@ INFO: Redirect requested but followRedirects is disabled
 					because I have explicitly disabled its redirection support.
 				</p>
 				<p>
-					I'd like to filter out that warning message but haven't figured out a clean way of doing it.
+					I'd like to filter out that warning message but haven't figured out a clean way of doing it.  A
+					number of people have pointed out that it's easy to disable a message if you know which logger
+					is being used.  The problem is that there isn't a way to disable the messages without knowing
+					the logger in use.
 				</p>
 			</answer>
 		</faq>
