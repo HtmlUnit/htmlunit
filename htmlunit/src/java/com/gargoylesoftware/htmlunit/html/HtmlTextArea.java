@@ -10,7 +10,7 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
 import org.w3c.dom.Element;
 
 /**
- *  Wrapper for the html element "button"
+ *  Wrapper for the html element "textarea"
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -63,7 +63,7 @@ public class HtmlTextArea
      *
      * @param  newValue The new value or null if the original value returned
      *      from the server should be used
-     * @deprecated Use {@link #setText()} instead
+     * @deprecated Use {@link #setText(String)} instead
      */
     public final void setValue( final String newValue ) {
         if( newValue == null ) {

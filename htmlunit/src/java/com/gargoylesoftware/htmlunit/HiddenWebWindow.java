@@ -23,7 +23,6 @@ public class HiddenWebWindow implements WebWindow {
 
     /**
      * Create an instance.
-     * @param name The name of the new window
      * @param webClient The web client that "owns" this window.
      */
     public HiddenWebWindow( final WebClient webClient ) {

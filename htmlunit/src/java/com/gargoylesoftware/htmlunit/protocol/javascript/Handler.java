@@ -6,12 +6,22 @@
  */
 package com.gargoylesoftware.htmlunit.protocol.javascript;
 
-import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandler;
 
+/**
+ *  Stream handler for javascript urls
+ *
+ * @version  $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ */
 public class Handler extends URLStreamHandler {
+    /**
+     * Return a new URLConnection for this url.
+     * @param url The javascript url.
+     * @return The connection.
+     */
     protected URLConnection openConnection( final URL url ) {
         return new JavaScriptURLConnection(url);
     }
