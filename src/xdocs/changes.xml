@@ -3,6 +3,18 @@
 
 <section title="1.1-pre5">
 	<change-log>
+		<change type="change">
+			Changed html parser from
+			<a href="http://sourceforge.net/projects/jtidy">JTidy</a> to
+			<a href="http://www.apache.org/~andyc/neko/doc/index.html">CyberNeko</a>.
+			CyberNeko is better at parsing really bad html but this now gives us a dependancy on the
+			<a href="http://xml.apache.org/xerces2-j/">xerces parser from apache</a>.
+		</change>
+		<change type="change">
+			The directory structure has undergone a significant change and is now checked in under
+			a single module ("htmlunit") in cvs.  This should only affect those people who are
+			checking out code directly from cvs.
+		</change>
 		<change type="new">
 			Added support for document.location (an alias for window.location)
 		</change>
