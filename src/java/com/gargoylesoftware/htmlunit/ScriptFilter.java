@@ -176,13 +176,6 @@ public final class ScriptFilter extends DefaultFilter {
     }
 
 
-    private void assertNotNull( final String description, final Object object ) {
-        if( object == null ) {
-            throw new NullPointerException(description);
-        }
-    }
-
-
     private synchronized String executeScript( final String script ) {
         newContentBuffer_ = null;
         htmlPage_.executeJavaScriptIfPossible(script, "Embedded script", false, null);

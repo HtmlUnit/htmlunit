@@ -101,13 +101,6 @@ public class BrowserVersion {
     }
 
 
-    private static void assertNotNull( final String description, final Object object ) {
-        if( object == null ) {
-            throw new NullPointerException( description );
-        }
-    }
-
-
     /**
      * Return the application name.  IE "Microsoft Internet Explorer"
      * @return The application name

@@ -197,17 +197,6 @@ public class SimpleScriptable extends ScriptableObject {
 
 
     /**
-     * Assert that the specified parameter is not null.  Throw a NullPointerException
-     * if a null is found.
-     * @param description The description to pass into the NullPointerException
-     * @param object The object to check for null.
-     */
-    protected final void assertNotNull( final String description, final Object object ) {
-        Assert.assertNotNull(description, object);
-    }
-
-
-    /**
      * Set the page info.  This contains information specific to the rhino engine.
      * @param pageInfo The new pageInfo.
      */

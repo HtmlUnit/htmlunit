@@ -49,13 +49,6 @@ public final class SimpleCredentialProvider implements CredentialProvider {
     }
 
 
-    private void assertNotNull( final String description, final Object object ) {
-        if( object == null ) {
-            throw new NullPointerException( description );
-        }
-    }
-
-
     /**
      * Return a string representation of this object.
      * @return a string representation of this object.
