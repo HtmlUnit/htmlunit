@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import java.net.URL;
@@ -1045,4 +1046,59 @@ public class WindowTest extends WebTestCase {
         assertNotNull("C", thirdPage);
         assertEquals( "C", thirdPage.getTitleText() );        
     }
+    /**
+     * Test closing using javascript
+     * @throws Exception if the test fails.
+     */
+    public void testClose() throws Exception {
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent
+                = "<html><head><title>First</title></head><body>"
+                  + "<a href='" + URL_SECOND + "' id='link' target='_blank'>Link</a>"
+                  + "</body></html>";
+        final String secondContent
+                = "<html><head><title>Second</title></head><body>"
+                  + "<h1>Second</h1><form>"
+                  + "<input type='submit' name='action' value='Close' id='button' " 
+                  + "onclick='window.close(); return false;'>"
+                  + "</form></body></html>";
+
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html",
+                                  Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/html",
+                                  Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
+        assertEquals("First", firstPage.getTitleText());
+        assertEquals(1, webClient.getWebWindows().size());
+        final WebWindow firstWindow = firstPage.getEnclosingWindow();
+
+        final HtmlPage secondPage = (HtmlPage) ((HtmlAnchor) firstPage.getHtmlElementById("link")).click();
+        assertEquals("Second", secondPage.getTitleText());
+        assertEquals(2, webClient.getWebWindows().size());
+        final WebWindow secondWindow = secondPage.getEnclosingWindow();
+
+        assertNotSame(firstWindow, secondWindow);
+
+        final EventCatcher eventCatcher = new EventCatcher();
+        eventCatcher.listenTo(webClient);
+        ((HtmlSubmitInput) secondPage.getHtmlElementById("button")).click();
+
+        final List expectedEvents = Arrays.asList(new Object[]{
+            new WebWindowEvent(secondWindow, WebWindowEvent.CLOSE, secondPage, null)
+        });
+        assertEquals(expectedEvents, eventCatcher.getEvents());
+
+        assertEquals(1, webClient.getWebWindows().size());
+        assertEquals(firstWindow, webClient.getCurrentWindow());
+
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+    }    
 }
