@@ -83,9 +83,10 @@ public class DefaultPageCreator implements PageCreator {
         if( contentType.equals( "text/html" ) || contentType.equals( "text/xhtml" ) ) {
             newPage = createHtmlPage(webResponse, webWindow);
         }
-        //else if( contentType.equals("application/xhtml+xml") ) {
-        // Create validated xhtml document
-        //}
+        else if( contentType.equals("application/xhtml+xml") ) {
+            //Should create a validated XML document but for now just make what we can 
+            newPage = createHtmlPage(webResponse, webWindow);
+        }
         else if( contentType.equals("text/javascript") || contentType.equals("application/x-javascript") ) {
             newPage = createJavaScriptPage(webResponse, webWindow);
         }

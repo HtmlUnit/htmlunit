@@ -499,6 +499,12 @@ public class WebClient {
      *      <td>{@link com.gargoylesoftware.htmlunit.html.HtmlPage}</td>
      *    </tr>
      *    <tr>
+     *      <td>"application/xhtml+xml"</td>
+     *      <td>{@link com.gargoylesoftware.htmlunit.html.HtmlPage} for now, in the 
+     *          future it will be XML validated as well 
+     *      </td>
+     *    </tr>    
+     *    <tr>
      *      <td>"text/*"</td>
      *      <td>{@link com.gargoylesoftware.htmlunit.TextPage}</td>
      *    </tr>
