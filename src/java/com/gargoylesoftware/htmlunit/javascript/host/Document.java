@@ -47,6 +47,7 @@ import java.util.ListIterator;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
+import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
@@ -64,6 +65,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.DocumentAllArray;
 
 /**
@@ -453,6 +455,32 @@ public final class Document extends NodeImpl {
             iterator.set( getScriptableFor(htmlElement) );
         }
 
+        return new NativeArray( list.toArray() );
+    }
+    /**
+     * Returns all HTML elements that have a "name" attribute with the given value
+     * 
+     * @link http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-71555259
+     * 
+     * @param elementName - value of the "name" attribute to look for
+     * @return NodeList of elements
+     */
+    public Object jsFunction_getElementsByName( final String elementName ) {
+        final HtmlPage page = (HtmlPage)getDomNodeOrDie();
+        final String exp = "//*[@name='" + elementName + "']";
+        final List list;
+        try {
+            final HtmlUnitXPath xpath = new HtmlUnitXPath(exp);
+            list = xpath.selectNodes(page);
+        } 
+        catch (JaxenException e) {
+            return new NativeArray(0);
+        }
+        final ListIterator iterator = list.listIterator();
+        while(iterator.hasNext()) {
+            final HtmlElement htmlElement = (HtmlElement)iterator.next();
+            iterator.set( getScriptableFor(htmlElement) );
+        }        
         return new NativeArray( list.toArray() );
     }
 
