@@ -68,6 +68,7 @@ import com.gargoylesoftware.htmlunit.html.Util;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class ElementArray extends SimpleScriptable implements Function {
     /**
@@ -278,6 +279,13 @@ public class ElementArray extends SimpleScriptable implements Function {
         catch (final SAXPathException e) {
             throw Context.reportRuntimeError("Failed getting sub elements by name" + e.getMessage());
         }
+        
+        // Test to see if we are trying to get the length of this array?  If so, pass the processing up
+        // to the higher level processing
+        if ("length".equalsIgnoreCase(name)) {
+            return NOT_FOUND;
+        }
+        
         final List subElements = array.getElements();
         if (subElements.size() > 1) {
             getLog().debug("Property \"" + name + "\" evaluated (by name) to " + array + " with " 

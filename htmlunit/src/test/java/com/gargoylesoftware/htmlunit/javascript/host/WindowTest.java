@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author  Darrell DeBoer
  * @author  Marc Guillemot
  * @author  Dierk Koenig
+ * @author  Chris Erskine
  */
 public class WindowTest extends WebTestCase {
     /**
@@ -538,7 +539,7 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
-
+        getLog().warn("Warning for no alert handler expected next");
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
                 URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals( "First", firstPage.getTitleText() );
@@ -655,6 +656,7 @@ public class WindowTest extends WebTestCase {
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
+        getLog().warn("Warning for no confirm handler expected next");
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
                 URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals( "First", firstPage.getTitleText() );
@@ -716,6 +718,7 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
+        getLog().warn("Warning for no prompt handler expected next");
 
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
                 URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
@@ -1310,6 +1313,34 @@ public class WindowTest extends WebTestCase {
         });
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+    /**
+     * Test that length of frames collection is retrieved when there
+     * are frames.
+     * @throws Exception If the test fails
+     */
+   public void testWindowMultipleFramesLength() throws Exception {
+
+       final String content =
+           "<html>"
+               + "<script>"
+               + "function test()"
+               + "{"
+               + "    alert(window.frames.length);"
+               + "}"
+               + "</script>"
+               + "<frameset rows='50,*' onload='test()'>"
+               + "<frame src='about:blank'/>"
+               + "<frame src='about:blank'/>"
+               + "</frameset>"
+               + "</html>";
+
+       final List collectedAlerts = new ArrayList();
+       loadPage(content, collectedAlerts);
+
+       final List expectedAlerts = Arrays.asList( new String[]{ "2"} );
+       assertEquals(expectedAlerts, collectedAlerts);
+   }
 
     /**
      * Test that Window.moveTo method gets correctly called and handled
