@@ -48,6 +48,10 @@
             <action type="add" dev="mbowler" id="799760">
 				Added WebClient.getWebWindows()
 			</action>
+            <action type="update" dev="mbowler" id="812749" due-to="Brad Clarke">
+                Fixed bug where radio button and checkbox logic was case sensitive.
+                Patch supplied by Brad Clarke
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">

@@ -178,7 +178,7 @@ public class InputTest extends WebTestCase {
                  + "</script></head><body>"
                  + "<p>hello world</p>"
                  + "<form name='form1'>"
-                 + "    <input type='checkbox' name='checkbox1' id='checkbox1' value='foo' />"
+                 + "    <input type='cheCKbox' name='checkbox1' id='checkbox1' value='foo' />"
                  + "</form>"
                  + "<a href='javascript:test()' id='clickme'>click me</a>\n"
                  + "</body></html>";
@@ -217,7 +217,7 @@ public class InputTest extends WebTestCase {
                  + "<p>hello world</p>"
                  + "<form name='form1'>"
                  + "    <input type='radio' name='radio1' id='radioA' value='a' checked='checked'/>"
-                 + "    <input type='radio' name='radio1' id='radioB' value='b' />"
+                 + "    <input type='RADIO' name='radio1' id='radioB' value='b' />"
                  + "    <input type='radio' name='radio1' id='radioC' value='c' />"
                  + "</form>"
                  + "<a href='javascript:test()' id='clickme'>click me</a>\n"

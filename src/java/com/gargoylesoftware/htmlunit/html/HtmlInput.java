@@ -684,7 +684,7 @@ public class HtmlInput
      * Reset this element to its original values.
      */
     public void reset() {
-        String type = this.getTypeAttribute();
+        String type = this.getTypeAttribute().toLowerCase();
         if( type.equals("checkbox")) {
             setChecked(initialCheckedState_);
         }
@@ -707,7 +707,7 @@ public class HtmlInput
      * @param  isChecked true if this element is to be selected
      */
     public void setChecked( final boolean isChecked ) {
-        String type = this.getTypeAttribute();
+        String type = this.getTypeAttribute().toLowerCase();
         if (type.equals("checkbox") ) {
             setCheckedCheckBox(isChecked);
         }
