@@ -13,6 +13,7 @@ import org.mozilla.javascript.Scriptable;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import org.w3c.dom.Element;
 
 /**
  * This is the array returned by the all property of Document.
@@ -49,14 +50,33 @@ public class DocumentAllArray extends SimpleScriptable {
 
 
     /**
-     * Return the object at the specified index.
+     * <p>Return the object at the specified index.</p>
+     *
+     * <p>TODO: This implementation is particularly inefficient but without a way
+     * to detect if an element has been inserted or removed, it isn't safe to
+     * cache the array/<p>
      *
      * @param index The index
      * @param start The object that get is being called on.
      * @return The object or NOT_FOUND
      */
     public Object get( final int index, final Scriptable start ) {
-        getLog().debug("Not implemented yet: document.all["+index+"]");
+        final HtmlPage htmlPage = ((DocumentAllArray)start).htmlPage_;
+        if( index == 0 ) {
+            return getScriptableFor( htmlPage );
+        }
+
+        int elementCount = 1;
+
+        final Iterator iterator = htmlPage.getXmlChildElements();
+        while( iterator.hasNext() ) {
+            final Element element = (Element)iterator.next();
+            if( elementCount == index ) {
+                return getScriptableFor( htmlPage.getHtmlElement(element) );
+            }
+            elementCount++;
+        }
+
         return NOT_FOUND;
     }
 
@@ -75,6 +95,10 @@ public class DocumentAllArray extends SimpleScriptable {
         final Object result = super.get(name, start);
         if( result != NOT_FOUND ) {
             return result;
+        }
+
+        if( name.equals("length") ) {
+            return getLength( (DocumentAllArray)start );
         }
 
         final HtmlPage htmlPage = ((DocumentAllArray)start).htmlPage_;
@@ -106,5 +130,26 @@ public class DocumentAllArray extends SimpleScriptable {
                 }
                 return array;
         }
+    }
+
+
+   /**
+    * <p>Return the number of elements in this array</p>
+    *
+    * <p>TODO: This implementation is particularly inefficient but without a way
+    * to detect if an element has been inserted or removed, it isn't safe to
+    * cache the array/<p>
+    */
+     private static Integer getLength( final DocumentAllArray array ) {
+        int elementCount = 1; // First one is <html>
+
+        final HtmlPage htmlPage = array.htmlPage_;
+        final Iterator iterator = htmlPage.getXmlChildElements();
+        while( iterator.hasNext() ) {
+            elementCount++;
+            iterator.next();
+        }
+
+        return new Integer(elementCount);
     }
 }

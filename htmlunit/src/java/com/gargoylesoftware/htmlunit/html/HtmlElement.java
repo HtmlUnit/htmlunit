@@ -370,7 +370,7 @@ public abstract class HtmlElement {
      *
      * @return  See above
      */
-    protected Iterator getXmlChildElements() {
+    public Iterator getXmlChildElements() {
         final Element rootElement = getElement();
         if( rootElement == null ) {
             throw new IllegalStateException(

@@ -95,7 +95,7 @@ public class HTMLElement extends SimpleScriptable {
      * @return The tag name
      */
     public String jsGet_tagName() {
-        return getHtmlElementOrDie().getTagName();
+        return getHtmlElementOrDie().getTagName().toUpperCase();
     }
 }
 
