@@ -568,7 +568,7 @@ public class HtmlFormTest extends WebTestCase {
 
     public void testForSubmit_TwoInputsWithSameName() throws Exception {
         final String firstContent
-                 = "<html><head><title>First</title></head><body onload='document.form1.submit(\"foo\")'>"
+                 = "<html><head><title>First</title></head><body>"
                  + "<form id='form1' name='form1' action='http://second'>"
                  + "    <input type='hidden' name='foo' value='bar'/>"
                  + "    <input type='submit' name='foo' value='bar'/>"
@@ -584,10 +584,13 @@ public class HtmlFormTest extends WebTestCase {
             new URL("http://second"),secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(
                 new URL( "http://first" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
-        assertEquals( "Second", page.getTitleText() );
+        final HtmlForm form = ( HtmlForm )firstPage.getHtmlElementById( "form1" );
+
+        final HtmlPage secondPage = (HtmlPage) form.submit("foo");
+        assertEquals( "Second", secondPage.getTitleText() );
     }
 }
 

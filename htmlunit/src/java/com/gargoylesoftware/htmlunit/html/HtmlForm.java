@@ -63,14 +63,17 @@ public class HtmlForm extends HtmlElement {
      */
     public Page submit( final String buttonName ) throws IOException, ElementNotFoundException {
 
-        HtmlElement htmlElement;
-        try {
-            htmlElement = getOneHtmlElementByAttribute( "input", "name", buttonName );
+        final List inputList = getHtmlElementsByAttribute("input", "name", buttonName);
+        final Iterator iterator = inputList.iterator();
+        while( iterator.hasNext() ) {
+            final HtmlInput input = (HtmlInput)iterator.next();
+            if( input instanceof HtmlSubmitInput ) {
+                return submit( ( SubmittableElement )input );
+            }
         }
-        catch( final ElementNotFoundException e ) {
-            htmlElement = getOneHtmlElementByAttribute( "button", "name", buttonName );
-        }
-        return submit( ( SubmittableElement )htmlElement );
+
+        final HtmlButton button = (HtmlButton)getOneHtmlElementByAttribute( "button", "name", buttonName );
+        return submit( button );
     }
 
 
