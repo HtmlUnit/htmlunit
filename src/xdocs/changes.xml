@@ -40,6 +40,15 @@
 		<change type="change">
 			Upgraded commons-httpclient.jar and commons-logging.jar to the Aug 30 gump build
 		</change>
+		<change type="new">
+			Added HtmlElement.asXml()
+		</change>
+		<change type="new">
+			Added WebClient.expandUrl()
+		</change>
+		<change type="fix">
+			Fixed bug were relative urls in redirects were not being expanded.
+		</change>
 	</change-log>
 </section>
 
