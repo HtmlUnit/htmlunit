@@ -95,7 +95,7 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="children" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Microsoft Internet Explorer" min-version="5.5"/>
         </property>
         <property name="className" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>

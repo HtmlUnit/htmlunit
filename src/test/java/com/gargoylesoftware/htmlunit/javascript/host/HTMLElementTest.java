@@ -265,8 +265,9 @@ public class HTMLElementTest extends WebTestCase {
                 "    function doTest(){\n" +
                 "       var myNode = document.getElementById('myNode');\n" +
                 "       alert('Old = ' + myNode.innerHTML);\n" +
-                "       myNode.innerHTML = ' <i id=\"newElt\">New cell value</i>';\n" +
+                "       myNode.innerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n" +
                 "       alert('New = ' + myNode.innerHTML);\n" +
+                "       alert(document.getElementById('newElt').tagName);\n" +
                 "   }\n" +
                 "    </script>\n" +
                 "</head>\n" +
@@ -280,7 +281,8 @@ public class HTMLElementTest extends WebTestCase {
 
         final List expectedAlerts = Arrays.asList(new String[]{
             "Old = <b>Old innerHTML</b>",
-            "New =  <i id=\"newElt\">New cell value</i>"
+            "New =  <b><i id=\"newElt\">New cell value</i></b>",
+            "I"
         });
         assertEquals(expectedAlerts, collectedAlerts);
 
@@ -403,6 +405,37 @@ public class HTMLElementTest extends WebTestCase {
             "body.isHomePage = false",
             "body.isHomePage = undefined"
         });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testChildren() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function test()\n"
+            + "{\n"
+            + "    var oDiv = document.getElementById('myDiv');\n"
+            + "    for (var i=0; i<oDiv.children.length; ++i) \n"
+            + "        alert(oDiv.children(i).tagName);\n"
+            + "    var oCol = oDiv.children;\n"
+            + "    alert(oCol.length);\n"
+            + "    oDiv.insertAdjacentHTML('beforeEnd', '<br>');\n"
+            + "    alert(oCol.length);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='myDiv'><br/><div><span>test</span></div></div>\n"
+            + "</body>\n"
+            + "</html>";
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList(new String[]{ "BR", "DIV", "2", "3" });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

@@ -38,46 +38,59 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import org.jaxen.JaxenException;
+import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
+import org.saxpath.SAXPathException;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.Util;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
  * <tt>document.all.tags('x')</tt>, <tt>document.forms</tt>, <tt>window.frames</tt>, etc.
  * Note that this class must not be used for collections that can be modified, for example
  * <tt>map.areas</tt> and <tt>select.options</tt>.
- * 
+ * <br>
+ * This class (like all classes in this package) is specific for the javascript engine. 
+ * Users of HtmlUnit shouldn't use it directly.
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
 public class ElementArray extends SimpleScriptable implements Function {
-
+    /**
+     * The name of the js object corresponding to this class as registered by the javascript context
+     */
+    public static final String JS_OBJECT_NAME = "ElementArray";
     private static final long serialVersionUID = 4049916048017011764L;
     
-    private HtmlElement[] elements_;
+    private XPath xpath_;
+    private DomNode node_;
 
     /**
      * Create an instance. Javascript objects must have a default constructor.
      */
     public ElementArray() {
-        elements_ = new HtmlElement[0];
+        
     }
 
     /**
-     * Sets the elements in this element array to the specified elements.
-     * The specified list must contain <tt>HtmlElement</tt> instances.
-     * @param list A list of the elements that the element array is to contain.
+     * Init the content of this collection. The elements with be "calculated" at each
+     * access using the xpath applied on the node.
+     * @param node the node to serve as root for the xpath expression
+     * @param xpath the xpath giving the elements of the collection
      */
-    public final void setElements( List list ) {
-        HtmlElement[] elements = new HtmlElement[ list.size() ];
-        elements = (HtmlElement[]) list.toArray( elements );
-        elements_ = elements;
+    public void init(final DomNode node, final XPath xpath) {
+        node_ = node;
+        xpath_ = xpath;
     }
 
     /**
@@ -132,12 +145,54 @@ public class ElementArray extends SimpleScriptable implements Function {
      */
     public final Object get( final int index, final Scriptable start ) {
         final ElementArray array = (ElementArray) start;
-        if( index >= 0 && index < array.elements_.length ) {
-            final HtmlElement element = array.elements_[ index ];
+        final List elements = array.getElementsSorted();
+        
+        if( index >= 0 && index < elements.size()) {
+            final HtmlElement element = (HtmlElement) elements.get(index);
             return getScriptableFor( element );
         }
         else {
             return NOT_FOUND;
+        }
+    }
+
+    /**
+     * Due to bug in Jaxen: http://jira.codehaus.org/browse/JAXEN-55
+     * the nodes returned by the xpath evaluation are not correctly sorted.
+     * We have therefore to sort them.
+     */
+    private List getElementsSorted() {
+        final List nodes = getElements();
+        if (nodes.size() < 2) {
+            return nodes; // already "sorted"
+        }
+
+        final List sortedNodes = new ArrayList();
+        for (final Iterator iter = Util.getFollowingAxisIterator(node_); iter.hasNext();) {
+            final Object node = iter.next();
+            if (nodes.contains(node)) {
+                sortedNodes.add(node);
+                nodes.remove(node);
+                if (nodes.isEmpty()) {
+                    break; // nothing to sort anymore
+                }
+            }
+        }
+        
+        return sortedNodes;
+    }
+
+    /**
+     * Gets the elements. Avoid calling it multiple times within a method because the evaluation
+     * needs to be performed each time again
+     * @return the list of {@link HtmlElement} contained in this collection
+     */
+    private List getElements() {
+        try {
+            return xpath_.selectNodes(node_);
+        }
+        catch (JaxenException e) {
+            throw Context.reportRuntimeError("Exeption getting elements: " + e.getMessage());
         }
     }
 
@@ -155,32 +210,49 @@ public class ElementArray extends SimpleScriptable implements Function {
         if( result != NOT_FOUND ) {
             return result;
         }
+        
+        final ElementArray currentArray = ((ElementArray) start); 
+        final List elements = currentArray.getElements();
+
         // See if there is an element in the element array with the specified id.
-        for( int i = 0; i < elements_.length; i++ ) {
-            final HtmlElement element = elements_[ i ];
+        for (final Iterator iter = elements.iterator(); iter.hasNext();) {
+            final HtmlElement element = (HtmlElement) iter.next();
             final String id = element.getId();
             if( id != null && id.equals(name) ) {
+                getLog().debug("Property \"" + name + "\" evaluated (by id) to " + element);
                 return getScriptableFor( element );
             }
         }
+
         // See if there are any elements in the element array with the specified name.
-        List matches = new ArrayList();
-        for( int i = 0; i < elements_.length; i++ ) {
-            final HtmlElement element = elements_[ i ];
-            final String nameAtt = element.getAttributeValue( "name" );
-            if( nameAtt != null && nameAtt.equals(name) ) {
-                matches.add( element );
+        final ElementArray array = (ElementArray) currentArray.makeJavaScriptObject(JS_OBJECT_NAME);
+        try {
+            final String newCondition = "@name = '" + name + "'";
+            final String currentXPathExpr = currentArray.xpath_.toString();
+            final String xpathExpr;
+            if (currentXPathExpr.endsWith("]")) {
+                xpathExpr = currentXPathExpr.substring(0, currentXPathExpr.length()-1) + " and " + newCondition + "]";
             }
+            else {
+                xpathExpr = currentXPathExpr + "[" + newCondition + "]";
+            }
+            final XPath xpathName = currentArray.xpath_.getNavigator().parseXPath(xpathExpr);
+            array.init(currentArray.node_, xpathName);
         }
-        if( matches.size() > 1 ) {
-            final ElementArray array = (ElementArray) makeJavaScriptObject("ElementArray");
-            array.setElements( matches );
+        catch (final SAXPathException e) {
+            throw Context.reportRuntimeError("Failed getting sub elements by name" + e.getMessage());
+        }
+        final List subElements = array.getElements();
+        if (subElements.size() > 1) {
+            getLog().debug("Property \"" + name + "\" evaluated (by name) to " + array);
             return array;
         }
-        else if( matches.size() == 1 ) {
-            final HtmlElement element = (HtmlElement) matches.get( 0 );
-            return getScriptableFor( element );
+        else if (subElements.size() == 1) {
+            final SimpleScriptable singleResult = getScriptableFor((DomNode) subElements.get(0)); 
+            getLog().debug("Property \"" + name + "\" evaluated (by name) to " + singleResult);
+            return singleResult;
         }
+
         // Nothing was found.
         return NOT_FOUND;
     }
@@ -191,7 +263,7 @@ public class ElementArray extends SimpleScriptable implements Function {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/length.asp">MSDN doc</a>
      */
     public final int jsGet_length() {
-        return elements_.length;
+        return getElements().size();
     }
 
     /**
@@ -224,17 +296,28 @@ public class ElementArray extends SimpleScriptable implements Function {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/tags.asp">MSDN doc</a>
      */
     public final Object jsFunction_tags( final String tagName ) {
-        final List matches = new ArrayList();
-        for( int i = 0; i < elements_.length; i++ ) {
-            final HtmlElement element = elements_[ i ];
-            final String tag = element.getTagName();
-            if( tag != null && tag.equals(tagName) ) {
-                matches.add( element );
-            }
+        final ElementArray array = (ElementArray) makeJavaScriptObject(JS_OBJECT_NAME);
+        try {
+            final String newXPathExpr = xpath_.toString() + "[name() = '" + tagName.toLowerCase() + "']";
+            array.init(node_, xpath_.getNavigator().parseXPath(newXPathExpr));
         }
-        final ElementArray array = (ElementArray) makeJavaScriptObject("ElementArray");
-        array.setElements( matches );
+        catch (SAXPathException e) {
+            // should never occur
+            throw Context.reportRuntimeError("Failed call tags: " + e.getMessage());
+        }
+
         return array;
     }
 
+    
+    /**
+     * Just for debug purpose.
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        if (xpath_ != null) {
+            return super.toString() + "<" + xpath_.toString() + ">";
+        }
+        return super.toString();
+    }
 }

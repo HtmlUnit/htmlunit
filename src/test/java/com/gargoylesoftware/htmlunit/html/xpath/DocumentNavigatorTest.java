@@ -35,55 +35,75 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.html.xpath;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.mozilla.javascript.NativeArray;
+import org.apache.commons.collections.Transformer;
+import org.jaxen.Navigator;
 
-import com.gargoylesoftware.htmlunit.html.HtmlTable;
-
+import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * A javascript object representing a Table.
+ * <p>Tests for the DocumentNavigator
  *
- * @author David D. Kilzer
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @version $Revision$
+ * @author Marc Guillemot
  */
-public class Table extends HTMLElement {
-    private static final long serialVersionUID = 2779888994049521608L;
+public class DocumentNavigatorTest extends WebTestCase {
+    private static final Transformer NODE_TO_NODENAME = new Transformer() {
+        public Object transform(final Object obj) {
+            return ((DomNode) obj).getNodeName();
+        }
+    };
 
-
-    /**
-     * Create an instance.
-     */
-    public Table() {
-    }
-
-
-    /**
-     * Javascript constructor.  This must be declared in every javascript file because the rhino engine won't walk up
-     * the hierarchy looking for constructors.
-     */
-    public void jsConstructor() {
-    }
-
+    private static final Navigator NAVIGATOR = DocumentNavigator.instance;
+    static final String CONTENT = "<html><head><title>Test page</title></head>"
+        + "<body><a href='foo.html' id='myLink'>foo</a></body>"
+        + "</html>";
+    private final HtmlPage page_;
+    
 
     /**
-     * Return the rows in the table.
+     *  Create an instance
      *
-     * @return The rows in the table.
+     * @param  name The name of the test
+     * @throws Exception if initialisation fails
      */
-    public NativeArray jsGet_rows() {
+    public DocumentNavigatorTest( final String name ) throws Exception {
+        super( name );
+        page_ = loadPage(CONTENT);
+    }
 
-        final List htmlRows = ((HtmlTable) getHtmlElementOrDie()).getRows();
-        final List jsRows = new ArrayList();
+    /**
+     * Test evaluation of some simple paths
+     * @throws Exception if test fails
+     */
+    public void testFollowingAxisIterator() throws Exception {
+        
+        final List expected = Arrays.asList(new String[] {"html", "head", "title", "#text", "body", "a", "#text"});
+        final Collection received= CollectionUtils
+            .collect(NAVIGATOR.getFollowingAxisIterator(page_), 
+                NODE_TO_NODENAME);
+        assertEquals(expected, received);
+        
+    }
 
-        CollectionUtils.collect(htmlRows, getTransformerScriptableFor(), jsRows);
-
-        return new NativeArray(jsRows.toArray());
+    /**
+     * Test evaluation of some simple paths
+     * @throws Exception if test fails
+     */
+    public void testFollowingSiblingAxisIterator() throws Exception {
+        
+        final List expected = Arrays.asList(new String[] {"body"});
+        final Collection received= CollectionUtils
+            .collect(NAVIGATOR.getFollowingSiblingAxisIterator(page_.getDocumentElement().getFirstChild()), 
+                NODE_TO_NODENAME);
+        assertEquals(expected, received);
     }
 }

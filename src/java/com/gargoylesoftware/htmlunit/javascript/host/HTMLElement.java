@@ -44,9 +44,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.jaxen.JaxenException;
+import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
@@ -66,6 +68,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.IElementFactory;
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
+import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 
 /**
  * The javascript object "HTMLElement" which is the base class for all html
@@ -198,10 +202,13 @@ public class HTMLElement extends NodeImpl {
             if ( htmlElement != null && name.toLowerCase().equals(name)) {
                 final String value = htmlElement.getAttributeValue(name);
                 if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
+                    getLog().debug("Found attribute for evalution of property \"" + name 
+                            + "\" for of " + start);
                     result = value;
                 }
             }
         }
+        
         return result;
     }
 
@@ -237,15 +244,12 @@ public class HTMLElement extends NodeImpl {
         final HtmlElement element = (HtmlElement)getDomNodeOrDie();
         final List list = element.getHtmlElementsByTagNames(
             Collections.singletonList(tagName.toLowerCase()));
-        final ListIterator iterator = list.listIterator();
-        while(iterator.hasNext()) {
-            final HtmlElement htmlElement = (HtmlElement)iterator.next();
-            iterator.set( getScriptableFor(htmlElement) );
-        }
+
+        CollectionUtils.transform(list, getTransformerScriptableFor());
 
         return new NativeArray( list.toArray() );
     }
-  
+    
     /**
      * Return the class defined for this element
      * @return the class name
@@ -565,5 +569,26 @@ public class HTMLElement extends NodeImpl {
      */
     public Object jsGet_onclick() {
         return getHtmlElementOrDie().getEventHandler("onclick");
+    }
+
+    /**
+     * Get the children of the current node.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/children.asp">
+     * MSDN documentation</a>
+     * @return the child at the given position 
+     */
+    public Object jsGet_children() {
+        final DomNode element = getDomNodeOrDie();
+        final ElementArray children = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+        
+        try {
+            final XPath xpath = new HtmlUnitXPath("./*", HtmlUnitXPath.buildSubtreeNavigator(element));
+            children.init(element, xpath);
+        }
+        catch (final JaxenException e) {
+            // should never occur
+            throw Context.reportRuntimeError("Failed initializing children: " + e.getMessage());
+        }
+        return children;
     }
 }

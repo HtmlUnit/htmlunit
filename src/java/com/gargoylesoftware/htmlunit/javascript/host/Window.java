@@ -42,8 +42,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 
+import org.jaxen.JaxenException;
+import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
@@ -60,6 +61,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -421,10 +423,18 @@ public final class Window extends SimpleScriptable {
      * @return The value of window.frames
      */
     public ElementArray jsGet_frames() {
-        HtmlPage page = (HtmlPage) this.getWebWindow().getEnclosedPage();
-        List list = page.getFrames();
-        ElementArray frames = (ElementArray) makeJavaScriptObject("ElementArray");
-        frames.setElements( list );
+        final XPath xpath;
+        try {
+            xpath = new HtmlUnitXPath("//*[(name() = 'frame' or name() = 'iframe']");
+        }
+        catch (final JaxenException e) {
+            // should never occur
+            throw Context.reportRuntimeError("Failed initializing frame collections: " + e.getMessage());
+        }
+        final HtmlPage page = (HtmlPage) this.getWebWindow().getEnclosedPage();
+        final ElementArray frames = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+        frames.init(page, xpath);
+
         return frames;
     }
 

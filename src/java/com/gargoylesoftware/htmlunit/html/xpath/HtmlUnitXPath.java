@@ -39,6 +39,9 @@ package com.gargoylesoftware.htmlunit.html.xpath;
 
 import org.jaxen.BaseXPath;
 import org.jaxen.JaxenException;
+import org.jaxen.Navigator;
+
+import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
  * Jaxen XPath adapter implementation for the HtmlUnit DOM model
@@ -58,19 +61,54 @@ import org.jaxen.JaxenException;
  * @version  $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Mike Bowler
+ * @author Marc Guillemot
  */
 public class HtmlUnitXPath extends BaseXPath {
 
     private static final long serialVersionUID = -3902959929710269843L;
+    private final String xpath_;
 
-    /** Construct given an XPath expression string.
-     *
+    /** 
+     * Construct given an XPath expression string.
      *  @param xpathExpr The XPath expression.
-     *
      *  @throws org.jaxen.JaxenException if there is a syntax error while
      *          parsing the expression.
      */
-    public HtmlUnitXPath(String xpathExpr) throws JaxenException {
-        super( xpathExpr, DocumentNavigator.instance );
+    public HtmlUnitXPath(final String xpathExpr) throws JaxenException {
+        this( xpathExpr, DocumentNavigator.instance );
+    }
+
+    /** 
+     * Construct given an XPath expression string and a Document Navigator.
+     * @param xpathExpr The XPath expression.
+     * @param navigator the document navigator to use for evaluation
+     * @throws org.jaxen.JaxenException if there is a syntax error while
+     *          parsing the expression.
+     */
+    public HtmlUnitXPath(final String xpathExpr, final Navigator navigator) throws JaxenException {
+        super(xpathExpr, navigator);
+        xpath_ = xpathExpr;
+    }
+    
+    
+    /**
+     * Builds a navigator that will see the provided node as the "document" 
+     * and only navigate in its children.<br/>
+     * The returned navigator can only be used to evaluate xpath expressions on nodes
+     * of the same document as the provided one. The behavior when used on an other document is undefined. 
+     * @param node the node that should be considered as the root by the navigator 
+     * @return a navigator
+     */
+    public static Navigator buildSubtreeNavigator(final DomNode node) {
+        return new NodeRelativeNavigator(node);
+    }
+    
+    /**
+     * Gives the xpath expression provided to c'tor.
+     * @see org.jaxen.BaseXPath#toString()
+     * @return the xpath expression provided to c'tor.
+     */
+    public String toString() {
+        return xpath_;
     }
 }

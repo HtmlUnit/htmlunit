@@ -47,6 +47,8 @@ import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.collections.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.FunctionObject;
@@ -390,7 +392,12 @@ public class SimpleScriptable extends ScriptableObject {
          // At this point, we don't have enough information to do our own initialization
          // so we have to just pass this call through to the superclass.
          if( domNode_ == null ) {
-             return super.get(name, start);
+            final Object result = super.get(name, start);
+            // this may help to find which properties htmlunit should impement
+            if (result == NOT_FOUND) {
+                getLog().debug("Property \"" + name + "\" of " + start + " not defined as pure js property");
+            }
+            return result;
          }
 
          final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
@@ -433,6 +440,10 @@ public class SimpleScriptable extends ScriptableObject {
              result = super.get(name, start);
          }
 
+         // this may help to find which properties htmlunit should impement
+         if (result == NOT_FOUND) {
+             getLog().debug("Property \"" + name + "\" of " + start + " not defined as fixed property");
+         }
          return result;
      }
 
@@ -552,6 +563,18 @@ public class SimpleScriptable extends ScriptableObject {
         }
     }
 
+
+    /**
+     * Gets a transformer getting the scriptable element for an HtmlElement
+     * @return the transformer.
+     */
+    protected Transformer getTransformerScriptableFor() {
+        return new Transformer() {
+            public Object transform(final Object obj) {
+                return getScriptableFor((HtmlElement) obj);
+            }    
+        };
+    }
 
     /**
      * Return the value at the specified location in the argument list.  If the index is larger

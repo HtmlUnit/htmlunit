@@ -43,7 +43,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.httpclient.Cookie;
@@ -90,6 +89,7 @@ public final class Document extends NodeImpl {
 
     private static final long serialVersionUID = -7646789903352066465L;
     private String status_ = "";
+    private ElementArray all_; // has to be a member to have equality (==) working
 
     /** The buffer that will be used for calls to document.write() */
     private StringBuffer writeBuffer_;
@@ -305,11 +305,16 @@ public final class Document extends NodeImpl {
      * @return The value of the "all" property
      */
     public ElementArray jsGet_all() {
-        final ElementArray all = (ElementArray) makeJavaScriptObject("ElementArray");
-        final List elements = new ArrayList();
-        CollectionUtils.addAll( elements, getHtmlPage().getAllHtmlChildElements() );
-        all.setElements( elements );
-        return all;
+        if (all_ == null) {
+            all_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            try {
+                all_.init(getHtmlPage(), new HtmlUnitXPath("//*"));
+            }
+            catch (final JaxenException e) {
+                throw Context.reportRuntimeError("Failed to initialize collection document.all: " + e.getMessage());
+            }
+        }
+        return all_;
     }
 
 
@@ -485,14 +490,11 @@ public final class Document extends NodeImpl {
         final HtmlPage page = (HtmlPage)getDomNodeOrDie();
         final List list = page.getDocumentElement().getHtmlElementsByTagNames(
             Collections.singletonList(tagName.toLowerCase()));
-        final ListIterator iterator = list.listIterator();
-        while(iterator.hasNext()) {
-            final HtmlElement htmlElement = (HtmlElement)iterator.next();
-            iterator.set( getScriptableFor(htmlElement) );
-        }
+        CollectionUtils.transform(list, getTransformerScriptableFor());
 
         return new NativeArray( list.toArray() );
     }
+
     /**
      * Returns all HTML elements that have a "name" attribute with the given value
      * 
@@ -513,11 +515,7 @@ public final class Document extends NodeImpl {
         catch (JaxenException e) {
             return new NativeArray(0);
         }
-        final ListIterator iterator = list.listIterator();
-        while(iterator.hasNext()) {
-            final HtmlElement htmlElement = (HtmlElement)iterator.next();
-            iterator.set( getScriptableFor(htmlElement) );
-        }        
+        CollectionUtils.transform(list, getTransformerScriptableFor());
         return new NativeArray( list.toArray() );
     }
 

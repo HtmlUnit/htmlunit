@@ -7,6 +7,15 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                Collections like document.all or form.elements now use xpath expressions and are "live" (thanks to Daniel Gredler for the idea).
+            </action>
+            <action type="update" dev="mguillem">
+                Added the possibility to evaluate xpath expressions relatively to a particular node of a the html document.
+            </action>
+            <action type="update" dev="mguillem">
+                Added node.children.
+            </action>
             <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1088655">
                 Fixed bug for JS wrapped in HTML comments on one line.
             </action>

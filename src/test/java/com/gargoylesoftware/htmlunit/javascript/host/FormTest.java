@@ -153,13 +153,15 @@ public class FormTest extends WebTestCase {
                  + "</body></html>";
 
          final List collectedAlerts = new ArrayList();
-         final HtmlPage page = loadPage(content, collectedAlerts);
-         assertEquals("foo", page.getTitleText());
 
          final List expectedAlerts = Arrays.asList( new String[]{
              "3", "1", "2", "3"
          } );
 
+         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+         final HtmlPage page = loadPage(content, collectedAlerts);
+
+         assertEquals("foo", page.getTitleText());
          assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -424,22 +426,14 @@ public class FormTest extends WebTestCase {
                  + "    <input name='"+name+"' type='hidden' value='"+name+"2'>"
                  + "</form>"
                  + "</body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
 
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
         final List expectedAlerts = Arrays.asList( new String[]{
             name+"2", "foo"
         } );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -632,6 +626,36 @@ public class FormTest extends WebTestCase {
         page.getHtmlElementById("clickMe");
         button.click();
         final List expectedAlerts = Collections.singletonList("hi!");
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+ 
+    /**
+     * Test that the elements collection is live
+    * @throws Exception if the test fails
+    */
+    public void testElementsLive() throws Exception {
+
+        final String content = "<html>"
+                + "<body>"
+                + "<form name='myForm'>"
+                + "<script>"
+                + "var oElements = document.myForm.elements;"
+                + "alert(oElements.length);"
+                + "</script>"
+                + "<input type='text' name='foo'/>"
+                + "<script>"
+                + "alert(oElements.length);"
+                + "alert(document.myForm.elements.length);"
+                + "alert(oElements == document.myForm.elements);"
+                + "</script>"
+                + "</form>"
+                + "</body>"
+                + "</html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList( new String[]{"0", "1", "1", "true"});
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
