@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" due-to="Mike Bresnahan" id="1083330">
+                Fixed NullPointerException tossed by HtmlSelect.asText() if no option is selected.
+            </action>
             <action type="update" dev="mguillem">
                 Improved Refresh meta tag support: Take care of enclosing &lt;noscript&gt; tags and correctly interpret quoted urls.
             </action>
