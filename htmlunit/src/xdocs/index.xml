@@ -52,10 +52,10 @@
                 Documentation
                 <ul>
                     <li>
-                        <a href="api/index.html">Javadoc API documentation</a>
+                        <a href="apidocs/index.html">Javadoc API documentation</a>
                     </li>
                     <li>
-                        <a href="changes.html">Change history</a>
+                        <a href="changes-report.html">Change history</a>
                     </li>
                     <li>
                         <a href="faq.html">Frequently Asked Questions</a>
