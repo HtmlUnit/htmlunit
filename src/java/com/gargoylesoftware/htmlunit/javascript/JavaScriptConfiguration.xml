@@ -332,6 +332,7 @@
         <function name="open"/>
         <function name="prompt"/>
         <function name="setTimeout"/>
+        <function name="moveTo"/>
     </class>
     
     <class name="FocusableHostElement" extends="HTMLElement">

@@ -1239,4 +1239,16 @@ public class WindowTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
+    /**
+     * Test that moveTo function doesn't throw
+     * @throws Exception if the test fails
+     */
+    public void testMoveTo() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "window.moveTo(10, 20)"
+                 + "</script></head><body>"
+                 + "</body></html>";
+        loadPage(content);
+    }
 }

@@ -70,6 +70,7 @@ import com.gargoylesoftware.htmlunit.javascript.WindowFramesArray;
  * @author  David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author  Darrell DeBoer
+ * @author Marc Guillemot
  */
 public final class Window extends SimpleScriptable {
 
@@ -466,6 +467,14 @@ public final class Window extends SimpleScriptable {
         }
     }
 
+    /**
+     * Does nothing
+     * @param x The horizontal position
+     * @param y The vertical position
+     */
+    public void jsFunction_moveTo(final int x, final int y) {
+        getLog().debug( "Window.moveTo() not implemented" );
+    }
 
     /**
      * Set the value of the onload property.
