@@ -4,6 +4,7 @@
     <properties>
         <title>Building HtmlUnit from CVS</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author email="BarnabyCourt@users.sourceforge.net">BarnabyCourt</author>
         <revision>$Revision$</revision>
     </properties>
 
@@ -38,7 +39,11 @@ cvs -z3 -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit co h
             <p>
                 Make sure that you have <a href="http://jakarta.apache.org/ant">Ant</a> 1.5 installed.
                 The build.xml file is located in the root of the src directory so change to that
-                directory and execute the following command
+                directory and execute the following commands
+            </p>
+            <source>ant initialize</source>
+            <p>
+                This will get the libraries needed to build that are not in the CVS repository.
             </p>
             <source>ant cleancompile</source>
             <p>

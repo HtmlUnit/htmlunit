@@ -107,6 +107,14 @@
 	            both allow the form to be submitted no matter what is returned from 
 	            Input.onclick.
             </action>
+            <action type="update" dev="mbowler" due-to="Barnaby Court">
+            	Moved all logic from the HtmlInput subclasses up into HtmlInput itself.
+            	Patch provided by Barnaby Court.
+            </action>
+            <action type="update" dev="mbowler" due-to="Barnaby Court">
+            	Added instructions for the "how to compile from cvs" document.
+            	Patch provided by Barnaby Court.
+            </action>
         </release>
     </body>
 
