@@ -95,6 +95,11 @@
                 Fixed bug where calling select() on an HtmlInput from JavaScript caused an
                 exception about select being a function and a property (it's only a function)
             </action>            
+			<action type="update" dev="mbowler">
+				Added initial support for refresh handlers.  They will be invoked from meta 
+				tag refreshes and response header refreshes but not currently from javascript 
+				refreshes
+			</action>
         </release>
         
         <release version="1.3-pre1" date="November 7, 2003">

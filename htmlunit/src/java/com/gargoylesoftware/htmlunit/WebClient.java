@@ -1421,5 +1421,19 @@ public class WebClient {
     public List getWebWindows() {
         return Collections.unmodifiableList(webWindows_);
     }
+    
+    private RefreshHandler refreshHandler_ = new DefaultRefreshHandler();
+    public void setRefreshHandler( final RefreshHandler handler ) {
+        if( handler == null ) {
+            refreshHandler_ = new DefaultRefreshHandler();
+        }
+        else {
+            refreshHandler_ = handler;
+        }
+    }
+    
+    public RefreshHandler getRefreshHandler() {
+        return refreshHandler_;
+    }
 }
 

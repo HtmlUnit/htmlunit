@@ -1032,7 +1032,7 @@ public class HtmlPageTest extends WebTestCase {
      * Test auto-refresh from a meta tag.
      * @throws Exception if the test fails
      */
-    public void testRefresh_MetaTag() throws Exception {
+    public void testRefresh_MetaTag_DefaultRefreshHandler() throws Exception {
 
         final String firstContent
             = "<html><head><title>first</title>"
@@ -1060,7 +1060,45 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Test auto-refresh from a meta tag.
+     * Test auto-refresh from a meta tag with a refresh handler that returns false.
+     * @throws Exception if the test fails
+     */
+    public void testRefresh_MetaTag_CustomRefreshHandler() throws Exception {
+
+        final String firstContent
+            = "<html><head><title>first</title>"
+            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=http://second\">"
+            + "</head><body></body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body></body></html>";
+
+        final WebClient client = new WebClient();
+        final List collectedItems = new ArrayList();
+        client.setRefreshHandler( new LoggingRefreshHandler(collectedItems) );
+        
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(
+            URL_FIRST, firstContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            URL_SECOND, secondContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                URL_FIRST,
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+
+        assertEquals( "first", page.getTitleText() );
+        
+        final List expectedItems = Arrays.asList( new Object[] {
+            "first", URL_SECOND, new Integer(3)                                             
+        } );                                             
+        assertEquals( expectedItems, collectedItems );
+    }
+    
+    /**
+     * Test auto-refresh from a response header.
      * @throws Exception if the test fails
      */
     public void testRefresh_HttpResponseHeader() throws Exception {

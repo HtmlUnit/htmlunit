@@ -796,5 +796,15 @@ public class WebClientTest extends WebTestCase {
             "http://first/",
             WebClient.expandUrl(URL_FIRST, "#second").toExternalForm());
     }
+
+    /** Test the accessors for refreshHandler */
+    public void testRefreshHandlerAccessors() {
+        final WebClient webClient = new WebClient();
+        assertInstanceOf( webClient.getRefreshHandler(), DefaultRefreshHandler.class );
+        
+        final RefreshHandler handler = new DefaultRefreshHandler() {};
+        webClient.setRefreshHandler( handler );
+        assertSame( handler, webClient.getRefreshHandler() );
+    }
 }
 
