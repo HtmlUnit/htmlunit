@@ -70,6 +70,7 @@ public final class Window extends SimpleScriptable {
     /**
      * The javascript function "confirm()"
      * @param message The message
+     * @return true if ok was pressed, false if cancel was pressed
      */
     public boolean jsFunction_confirm( final String message ) {
         final ConfirmHandler handler = getJavaScriptEngine().getWebClient().getConfirmHandler();
