@@ -90,11 +90,8 @@ public abstract class HtmlInput
         else {
             final ScriptResult scriptResult = page.executeJavaScriptIfPossible(
                 onClick, "onClick handler for "+getClass().getName(), true, this);
-            final Object result = scriptResult.getJavaScriptResult();
-//            if( result instanceof Boolean && ((Boolean)result).booleanValue() == true ) {
-                return doClickAction();
-//            }
-//            return scriptResult.getNewPage();
+            scriptResult.getJavaScriptResult();
+            return doClickAction();
         }
     }
 
