@@ -117,6 +117,7 @@ public class WebClient {
 
     private WebWindow currentWindow_ = new TopLevelWindow("", this);
     private Stack firstWindowStack_ = new Stack();
+    private int timeout_ = 0;
 
     private static URLStreamHandler JavaScriptUrlStreamHandler_
         = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
@@ -1695,6 +1696,28 @@ public class WebClient {
      */
     public static boolean getIgnoreOutsideContent() {
         return HTMLParser.getIgnoreOutsideContent();
+    }
+    
+    /**
+     * Gets the timeout value for the WebConnection
+     * 
+     * @return The timeout value in milliseconds
+     * @see WebClient#setTimeout(int)
+     */
+    public int getTimeout() {
+        return timeout_;
+    }
+    /**
+     * Sets the timeout of the WebConnection. Set to zero (the default) for an infinite wait.  
+     * 
+     * Note: The timeout is used twice. The first is for making the socket connection, the
+     * second is for data retrieval. If the time is critical you must allow for twice the 
+     * time specified here.  
+     * 
+     * @param timeout The value of the timeout in milliseconds
+     */
+    public void setTimeout(final int timeout){
+        timeout_ = timeout;
     }
 }
 

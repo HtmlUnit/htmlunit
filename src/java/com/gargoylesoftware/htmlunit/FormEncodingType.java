@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit;
 
 import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.MultipartPostMethod;
 
 /**
  *  A collection of constants that represent the various ways a form can be
@@ -56,9 +55,9 @@ public final class FormEncodingType {
         new FormEncodingType(PostMethod.FORM_URL_ENCODED_CONTENT_TYPE);
     /**
      *  MULTIPART
+     *  This used to be a constant in httpcommons but it was deprecated with no alternative.
      */
-    public static final FormEncodingType MULTIPART =
-        new FormEncodingType(MultipartPostMethod.MULTIPART_FORM_CONTENT_TYPE);
+    public static final FormEncodingType MULTIPART = new FormEncodingType("multipart/form-data");
 
     private final String name_;
 
