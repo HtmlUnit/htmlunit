@@ -1,36 +1,36 @@
 <?xml version="1.0"?>
 <document>
 
-	<properties>
-		<title>Logging</title>
-		<author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
-		<revision>$Revision$</revision>
-	</properties>
+    <properties>
+        <title>Logging</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <revision>$Revision$</revision>
+    </properties>
 
-	<body>
-		<section>
-			<p>
-				HtmlUnit uses the <a href="http://jakarta.apache.org/commons/logging.html">commons logging</a>
-				package from the <a href="http://jakarta.apache.org">Apache Jakarta</a> project.  Commons
-				logging is a thin wrapper that sits on top of other logging frameworks such as
-				<a href="http://jakarta.apache.org/log4j/docs/index.html">LOG4J</a> or
-				<a href="http://jakarta.apache.org/avalon/logkit/">LogKit</a>.
-			</p>
-			<p>
-				For full details on configuring commons logging, refer to the
-				<a href="http://jakarta.apache.org/commons/logging.html">homepage</a>.
-			</p>
-			<p>
-				If you don't explicitly configure commons logging to use LOG4J or another logging framework
-				then it will use the simple logger.  When using the simple logger, you can change the default
-				logging level by setting the following system property.
-			</p>
-			<source>System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog", "trace");</source>
-			<p>
-				Valid values for this property are "trace", "debug", "info", "warn", "error", or "fatal" (in
-				order from least serious to most serious).
-			</p>
-		</section>
-	</body>
+    <body>
+        <section>
+            <p>
+                HtmlUnit uses the <a href="http://jakarta.apache.org/commons/logging.html">commons logging</a>
+                package from the <a href="http://jakarta.apache.org">Apache Jakarta</a> project.  Commons
+                logging is a thin wrapper that sits on top of other logging frameworks such as
+                <a href="http://jakarta.apache.org/log4j/docs/index.html">LOG4J</a> or
+                <a href="http://jakarta.apache.org/avalon/logkit/">LogKit</a>.
+            </p>
+            <p>
+                For full details on configuring commons logging, refer to the
+                <a href="http://jakarta.apache.org/commons/logging.html">homepage</a>.
+            </p>
+            <p>
+                If you don't explicitly configure commons logging to use LOG4J or another logging framework
+                then it will use the simple logger.  When using the simple logger, you can change the default
+                logging level by setting the following system property.
+            </p>
+            <source>System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog", "trace");</source>
+            <p>
+                Valid values for this property are "trace", "debug", "info", "warn", "error", or "fatal" (in
+                order from least serious to most serious).
+            </p>
+        </section>
+    </body>
 </document>
 

@@ -1,58 +1,58 @@
 <?xml version="1.0"?>
 <document>
 
-	<properties>
-		<title>Window Tutorial</title>
-		<author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
-		<revision>$Revision$</revision>
-	</properties>
+    <properties>
+        <title>Window Tutorial</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <revision>$Revision$</revision>
+    </properties>
 
-	<body>
-		<section>
-			<p>
-				All pages are contained within
-				<javadoc>com.gargoylesoftware.htmlunit.WebWindow</javadoc> objects.  This could be a
-				<javadoc>com.gargoylesoftware.htmlunit.TopLevelWindow</javadoc> representing an actual
-				browser window, an
-				<javadoc>com.gargoylesoftware.htmlunit.html.HtmlFrame</javadoc> representing a &lt;frame&gt;
-				element or an
-				<javadoc>com.gargoylesoftware.htmlunit.html.HtmlInlineFrame</javadoc> representing an
-				&lt;iframe&gt; element.
-			</p>
-			<p>
-				When a <javadoc>com.gargoylesoftware.htmlunit.WebClient</javadoc> is first instantiated,
-				a <javadoc>com.gargoylesoftware.htmlunit.TopLevelWindow</javadoc> is automatically created.
-				You could think of this as being the first window displayed by a web browser.  Calling
-				<javadoc>com.gargoylesoftware.htmlunit.WebClient#getPage(com.gargoylesoftware.htmlunit.WebWindow, java.net.URL, com.gargoylesoftware.htmlunit.SubmitMethod, java.util.List, boolean)</javadoc>
-				will load the new page into this window.
-			</p>
-			<p>
-				The javascript open() function can be used to load pages into other windows.  New WebWindow
-				objects will be created automatically by this function.
-			</p>
-		</section>
+    <body>
+        <section>
+            <p>
+                All pages are contained within
+                <javadoc>com.gargoylesoftware.htmlunit.WebWindow</javadoc> objects.  This could be a
+                <javadoc>com.gargoylesoftware.htmlunit.TopLevelWindow</javadoc> representing an actual
+                browser window, an
+                <javadoc>com.gargoylesoftware.htmlunit.html.HtmlFrame</javadoc> representing a &lt;frame&gt;
+                element or an
+                <javadoc>com.gargoylesoftware.htmlunit.html.HtmlInlineFrame</javadoc> representing an
+                &lt;iframe&gt; element.
+            </p>
+            <p>
+                When a <javadoc>com.gargoylesoftware.htmlunit.WebClient</javadoc> is first instantiated,
+                a <javadoc>com.gargoylesoftware.htmlunit.TopLevelWindow</javadoc> is automatically created.
+                You could think of this as being the first window displayed by a web browser.  Calling
+                <javadoc>com.gargoylesoftware.htmlunit.WebClient#getPage(com.gargoylesoftware.htmlunit.WebWindow, java.net.URL, com.gargoylesoftware.htmlunit.SubmitMethod, java.util.List, boolean)</javadoc>
+                will load the new page into this window.
+            </p>
+            <p>
+                The javascript open() function can be used to load pages into other windows.  New WebWindow
+                objects will be created automatically by this function.
+            </p>
+        </section>
 
 
-		<section name="WebWindowEvents">
-			<p>
-				If you wish to be notified when windows are created or pages are loaded, you need to register a
-				<javadoc>com.gargoylesoftware.htmlunit.WebWindowListener</javadoc> with the WebClient via the
-				method <javadoc>com.gargoylesoftware.htmlunit.WebClient#addWebWindowListener(com.gargoylesoftware.htmlunit.WebWindowListener)</javadoc>
-			</p>
-			<p>
-				When a window is opened either by javascript or through the WebClient, a WebWindowEvent will be
-				fired and passed into the
-				<javadoc>com.gargoylesoftware.htmlunit.WebWindowListener#webWindowOpened(com.gargoylesoftware.htmlunit.WebWindowEvent)</javadoc>
-				method.  Note that both the new and old pages in the event will be null as the window does not
-				have any content loaded at this point.  If a url was specified during creation of the window then the page
-				will be loaded and another event will be fired as described below.
-			</p>
-			<p>
-				When a new page is loaded into a specific window, a WebWindowEvent will be fired and passed into the
-				<javadoc>com.gargoylesoftware.htmlunit.WebWindowListener#webWindowContentChanged(com.gargoylesoftware.htmlunit.WebWindowEvent)</javadoc>
-				method.
-			</p>
-		</section>
-	</body>
+        <section name="WebWindowEvents">
+            <p>
+                If you wish to be notified when windows are created or pages are loaded, you need to register a
+                <javadoc>com.gargoylesoftware.htmlunit.WebWindowListener</javadoc> with the WebClient via the
+                method <javadoc>com.gargoylesoftware.htmlunit.WebClient#addWebWindowListener(com.gargoylesoftware.htmlunit.WebWindowListener)</javadoc>
+            </p>
+            <p>
+                When a window is opened either by javascript or through the WebClient, a WebWindowEvent will be
+                fired and passed into the
+                <javadoc>com.gargoylesoftware.htmlunit.WebWindowListener#webWindowOpened(com.gargoylesoftware.htmlunit.WebWindowEvent)</javadoc>
+                method.  Note that both the new and old pages in the event will be null as the window does not
+                have any content loaded at this point.  If a url was specified during creation of the window then the page
+                will be loaded and another event will be fired as described below.
+            </p>
+            <p>
+                When a new page is loaded into a specific window, a WebWindowEvent will be fired and passed into the
+                <javadoc>com.gargoylesoftware.htmlunit.WebWindowListener#webWindowContentChanged(com.gargoylesoftware.htmlunit.WebWindowEvent)</javadoc>
+                method.
+            </p>
+        </section>
+    </body>
 </document>
 

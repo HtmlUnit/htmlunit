@@ -1,206 +1,206 @@
 <?xml version="1.0"?>
 <document>
 
-	<properties>
-		<title>Welcome to HtmlUnit</title>
-		<author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
-		<revision>$Revision$</revision>
-	</properties>
+    <properties>
+        <title>Welcome to HtmlUnit</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <revision>$Revision$</revision>
+    </properties>
 
-	<body>
-		<section>
-			<p>
-				HtmlUnit is a java unit testing framework for testing web based applications.  It is similar
-				in concept to
-				<a href="http://sourceforge.net/projects/httpunit">httpunit</a>
-				but is very different in implementation.  Which one is better for you depends on how
-				you like to write your tests.  HttpUnit models the http protocol so you deal with request and
-				response objects. HtmlUnit on the other hand, models the returned document so that you deal
-				with pages and form and tables.
-			</p>
-			<p>
-				HtmlUnit was written by
-				<a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a> of
-				<a href="http://www.GargoyleSoftware.com">Gargoyle Software</a>
-				and has been released under an <a href="license.html">apache style license</a>
-			</p>
-			<p>
-				HtmlUnit is not a generic unit testing framework.  It is specifically a way to simulate
-				a browser for testing purposes and is intended to be used within another testing
-				framework such as <a href="http://www.junit.org">JUnit</a>.  Refer to the document
-				"<a href="gettingStarted.html">Getting Started with HtmlUnit</a>" for an introduction.
-			</p>
-		</section>
+    <body>
+        <section>
+            <p>
+                HtmlUnit is a java unit testing framework for testing web based applications.  It is similar
+                in concept to
+                <a href="http://sourceforge.net/projects/httpunit">httpunit</a>
+                but is very different in implementation.  Which one is better for you depends on how
+                you like to write your tests.  HttpUnit models the http protocol so you deal with request and
+                response objects. HtmlUnit on the other hand, models the returned document so that you deal
+                with pages and form and tables.
+            </p>
+            <p>
+                HtmlUnit was written by
+                <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a> of
+                <a href="http://www.GargoyleSoftware.com">Gargoyle Software</a>
+                and has been released under an <a href="license.html">apache style license</a>
+            </p>
+            <p>
+                HtmlUnit is not a generic unit testing framework.  It is specifically a way to simulate
+                a browser for testing purposes and is intended to be used within another testing
+                framework such as <a href="http://www.junit.org">JUnit</a>.  Refer to the document
+                "<a href="gettingStarted.html">Getting Started with HtmlUnit</a>" for an introduction.
+            </p>
+        </section>
 
-		<section name="Where to find...">
-			<p>
-				<dl>
-					<dt>Latest stable release <date>March 29, 2003</date></dt>
-					<dd>
-						<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.2.2.zip?download">
-							Download version 1.2.2
-						</a>
-					</dd>
-				</dl>
-			</p>
-			<p>
-				Documentation
-				<ul>
-					<li>
-						<a href="api/index.html">Javadoc API documentation</a>
-					</li>
-					<li>
-						<a href="changes.html">Change history</a>
-					</li>
-					<li>
-						<a href="faq.html">Frequently Asked Questions</a>
-					</li>
-					<li>
-						<a href="http://sourceforge.net/projects/htmlunit">HtmlUnit project page on SourceForge.net</a>
-					</li>
-					<li>
-						<a href="http://sourceforge.net/mail/?group_id=47038">HtmlUnit mailing list</a>
-					</li>
-					<li>
-						<a href="codingConventions.html">HtmlUnit coding conventions</a>
-					</li>
-					<li>
-						<a href="submittingPatches.html">Submitting patches</a>
-					</li>
-					<li>
-						<a href="buildingFromCvs.html">Getting and building the most recent code from CVS</a>
-					</li>
-					<li>
-						<a href="ide.html">Support for specific tools and IDE's</a>
-					</li>
-				</ul>
-			</p>
+        <section name="Where to find...">
+            <p>
+                <dl>
+                    <dt>Latest stable release <date>March 29, 2003</date></dt>
+                    <dd>
+                        <a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.2.2.zip?download">
+                            Download version 1.2.2
+                        </a>
+                    </dd>
+                </dl>
+            </p>
+            <p>
+                Documentation
+                <ul>
+                    <li>
+                        <a href="api/index.html">Javadoc API documentation</a>
+                    </li>
+                    <li>
+                        <a href="changes.html">Change history</a>
+                    </li>
+                    <li>
+                        <a href="faq.html">Frequently Asked Questions</a>
+                    </li>
+                    <li>
+                        <a href="http://sourceforge.net/projects/htmlunit">HtmlUnit project page on SourceForge.net</a>
+                    </li>
+                    <li>
+                        <a href="http://sourceforge.net/mail/?group_id=47038">HtmlUnit mailing list</a>
+                    </li>
+                    <li>
+                        <a href="codingConventions.html">HtmlUnit coding conventions</a>
+                    </li>
+                    <li>
+                        <a href="submittingPatches.html">Submitting patches</a>
+                    </li>
+                    <li>
+                        <a href="buildingFromCvs.html">Getting and building the most recent code from CVS</a>
+                    </li>
+                    <li>
+                        <a href="ide.html">Support for specific tools and IDE's</a>
+                    </li>
+                </ul>
+            </p>
 
-			<p>
-				Tutorials
-				<ul>
-					<li>
-						<a href="gettingStarted.html">Getting Started</a>
-					</li>
-					<li>
-						<a href="table-howto.html">Tables</a>
-					</li>
-					<li>
-						<a href="logging.html">Logging</a>
-					</li>
-					<li>
-						<a href="window-howto.html">Windows and frames</a>
-					</li>
-					<li>
-						<a href="keyboard-howto.html">Keyboard navigation</a>
-					</li>
-				</ul>
-			</p>
-		</section>
+            <p>
+                Tutorials
+                <ul>
+                    <li>
+                        <a href="gettingStarted.html">Getting Started</a>
+                    </li>
+                    <li>
+                        <a href="table-howto.html">Tables</a>
+                    </li>
+                    <li>
+                        <a href="logging.html">Logging</a>
+                    </li>
+                    <li>
+                        <a href="window-howto.html">Windows and frames</a>
+                    </li>
+                    <li>
+                        <a href="keyboard-howto.html">Keyboard navigation</a>
+                    </li>
+                </ul>
+            </p>
+        </section>
 
 
-		<section name="Features">
-			<p>
-				<ul>
-					<li>Support for the HTTP and HTTPS protocols. (
-					<a href="http://java.sun.com/products/jsse">JSSE</a>
-					must be in your classpath in order to use HTTPS support)</li>
-					<li>Support for cookies</li>
-					<li>Ability to specify whether failing responses from the server should throw
-					exceptions or should be returned as pages of the appropriate type (based on content
-					type)</li>
-					<li>Support for submit methods POST and GET</li>
-					<li>Ability to customize the request headers being sent to the server</li>
-					<li>Support for html responses
-						<ul>
-							<li>Wrapper for html pages that provides easy access to all information
-							contained inside them</li>
-							<li>Support for submitting forms</li>
-							<li>Support for clicking links</li>
-							<li>Support for walking the DOM model of the html document</li>
-						</ul>
-					</li>
-					<li>Proxy server support</li>
-					<li>Support for basic authentication</li>
-					<li>Partial support for javascript (see javascript section below)</li>
-				</ul>
-			</p>
-		</section>
+        <section name="Features">
+            <p>
+                <ul>
+                    <li>Support for the HTTP and HTTPS protocols. (
+                    <a href="http://java.sun.com/products/jsse">JSSE</a>
+                    must be in your classpath in order to use HTTPS support)</li>
+                    <li>Support for cookies</li>
+                    <li>Ability to specify whether failing responses from the server should throw
+                    exceptions or should be returned as pages of the appropriate type (based on content
+                    type)</li>
+                    <li>Support for submit methods POST and GET</li>
+                    <li>Ability to customize the request headers being sent to the server</li>
+                    <li>Support for html responses
+                        <ul>
+                            <li>Wrapper for html pages that provides easy access to all information
+                            contained inside them</li>
+                            <li>Support for submitting forms</li>
+                            <li>Support for clicking links</li>
+                            <li>Support for walking the DOM model of the html document</li>
+                        </ul>
+                    </li>
+                    <li>Proxy server support</li>
+                    <li>Support for basic authentication</li>
+                    <li>Partial support for javascript (see javascript section below)</li>
+                </ul>
+            </p>
+        </section>
 
-		<section name="Installation">
-			<p>
-				Place the following jar files in your classpath.  All of these can be found in the lib directory
-				of the HtmlUnit installation.
-			</p>
-			<p>
-				<dl>
-					<dt>HtmlUnit.jar</dt>
-					<dd>The main HtmlUnit classes</dd>
+        <section name="Installation">
+            <p>
+                Place the following jar files in your classpath.  All of these can be found in the lib directory
+                of the HtmlUnit installation.
+            </p>
+            <p>
+                <dl>
+                    <dt>HtmlUnit.jar</dt>
+                    <dd>The main HtmlUnit classes</dd>
 
-					<dt>commons-httpclient.jar <version-string>2.0beta3</version-string></dt>
-					<dd><a href="http://jakarta.apache.org/commons/httpclient/">HttpClient from Apache</a>,
-					the code that actually handles the http connections.  Note that commons-httpclient
-					is going through active development and does not have a stable release yet.  We're
-					using periodic "daily snapshots" which are actually quite solid.</dd>
+                    <dt>commons-httpclient.jar <version-string>2.0beta3</version-string></dt>
+                    <dd><a href="http://jakarta.apache.org/commons/httpclient/">HttpClient from Apache</a>,
+                    the code that actually handles the http connections.  Note that commons-httpclient
+                    is going through active development and does not have a stable release yet.  We're
+                    using periodic "daily snapshots" which are actually quite solid.</dd>
 
-					<dt>commons-logging.jar <version-string>1.0.2</version-string></dt>
-					<dd><a href="http://jakarta.apache.org/commons/logging.html">Logging
-					from Apache</a></dd>
+                    <dt>commons-logging.jar <version-string>1.0.2</version-string></dt>
+                    <dd><a href="http://jakarta.apache.org/commons/logging.html">Logging
+                    from Apache</a></dd>
 
-					<dt>nekohtml.jar <version-string>0.7.4</version-string></dt>
-					<dd><a href="http://www.apache.org/~andyc/neko/doc/html/index.html">
-					NekoHTML</a> is a tool to convert badly written html into an xml
-					dom model</dd>
+                    <dt>nekohtml.jar <version-string>0.7.4</version-string></dt>
+                    <dd><a href="http://www.apache.org/~andyc/neko/doc/html/index.html">
+                    NekoHTML</a> is a tool to convert badly written html into an xml
+                    dom model</dd>
 
-					<dt>xercesImpl.jar and xmlParserAPIs.jar <version-string>2.2.1</version-string></dt>
-					<dd>The<a href="http://xml.apache.org/xerces2-j/index.html">
-					Xerces</a> xml parser from Apache. </dd>
+                    <dt>xercesImpl.jar and xmlParserAPIs.jar <version-string>2.2.1</version-string></dt>
+                    <dd>The<a href="http://xml.apache.org/xerces2-j/index.html">
+                    Xerces</a> xml parser from Apache. </dd>
 
-					<dt>js.jar <version-string>1.5R4</version-string></dt>
-					<dd><a href="http://www.mozilla.org/rhino">Rhino</a>,
-					a javascript engine from the Mozilla project.  This jar is optional - if it isn't
-					found then javascript support will be disabled but the rest of HtmlUnit will
-					continue to work.</dd>
+                    <dt>js.jar <version-string>1.5R4</version-string></dt>
+                    <dd><a href="http://www.mozilla.org/rhino">Rhino</a>,
+                    a javascript engine from the Mozilla project.  This jar is optional - if it isn't
+                    found then javascript support will be disabled but the rest of HtmlUnit will
+                    continue to work.</dd>
 
-				</dl>
-				<note>
-					If you want to use HTTPS (Secure HTTP) then you will have to have the JSSE in your
-					classpath.  JSSE is a standard part of Java starting with JDK1.4.  If you are using
-					an earlier version of Java, then you can
-					<a href="http://java.sun.com/products/jsse">download</a> the JSSE from the Sun website.
-				</note>
-			</p>
-		</section>
+                </dl>
+                <note>
+                    If you want to use HTTPS (Secure HTTP) then you will have to have the JSSE in your
+                    classpath.  JSSE is a standard part of Java starting with JDK1.4.  If you are using
+                    an earlier version of Java, then you can
+                    <a href="http://java.sun.com/products/jsse">download</a> the JSSE from the Sun website.
+                </note>
+            </p>
+        </section>
 
-		<section name="JavaScript support">
-			<p>
-				Starting with the 1.1 release, HtmlUnit is supporting javascript.  The core
-				javascript language is already fully supported by the Rhino javascript engine.  The
-				web browser specific host objects are being implemented now.  We are focussing on
-				those parts of javascript that are most commonly used first and will flesh out the
-				remaining javascript support over time.  If there is something specific that you
-				need that we haven't got to yet then please open a feature request.  We are
-				prioritizing tasks according to demand so if you want a specific feature then
-				make sure we know about it (opening a feature request is still the best way to
-				do that).
-			</p>
-			<note title="Disabling JavaScript support">
-				<p>
-					To disable JavaScript processing for one WebClient, call WebClient.setJavaScriptEnabled(false).
-				</p>
-				<p>
-					To disable JavaScript processing for all WebClients, remove js.jar from your classpath
-				</p>
-			</note>
-			<p>
-				Javascript code in script tags will get executed when the page loads.  If
-				you want to execute code after that, you can call
-				HtmlPage.executeJavascriptIfPossible(String).
-			</p>
-			<p>
-				Refer to the changes document for details on what is being added.
-			</p>
-		</section>
-	</body>
+        <section name="JavaScript support">
+            <p>
+                Starting with the 1.1 release, HtmlUnit is supporting javascript.  The core
+                javascript language is already fully supported by the Rhino javascript engine.  The
+                web browser specific host objects are being implemented now.  We are focussing on
+                those parts of javascript that are most commonly used first and will flesh out the
+                remaining javascript support over time.  If there is something specific that you
+                need that we haven't got to yet then please open a feature request.  We are
+                prioritizing tasks according to demand so if you want a specific feature then
+                make sure we know about it (opening a feature request is still the best way to
+                do that).
+            </p>
+            <note title="Disabling JavaScript support">
+                <p>
+                    To disable JavaScript processing for one WebClient, call WebClient.setJavaScriptEnabled(false).
+                </p>
+                <p>
+                    To disable JavaScript processing for all WebClients, remove js.jar from your classpath
+                </p>
+            </note>
+            <p>
+                Javascript code in script tags will get executed when the page loads.  If
+                you want to execute code after that, you can call
+                HtmlPage.executeJavascriptIfPossible(String).
+            </p>
+            <p>
+                Refer to the changes document for details on what is being added.
+            </p>
+        </section>
+    </body>
 </document>
 

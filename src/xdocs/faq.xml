@@ -2,84 +2,84 @@
 <document title="Frequently Asked Questions">
 
 <section>
-	<faq>
-		<faq-entry>
-			<question>
-				I've found a bug, how do I report it?
-			</question>
-			<answer>
-				The best way is to open a bug report in the
-				<a href="https://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">sourceforge bug
-				tracking database</a>.  Sending a bug report to the mailing list runs the risk that the
-				bug may get lost.  Putting it in the bug database guarentees that it won't.  Please
-				search the bug database to see if your bug hasn't already been reported before opening
-				a new one.
-			</answer>
-			<answer>
-				If you know how to fix the problem then patches are gratefully accepted.
-			</answer>
-		</faq-entry>
-		<faq-entry>
-			<question>
-				HtmlUnit doesn't support feature X.  How do I request this feature?
-			</question>
-			<answer>
-				The best way is to open a bug report in the
-				<a href="https://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">sourceforge bug
-				tracking database</a>.  See the answer on bug reporting for why the database is preferred.
-			</answer>
-			<answer>
-				If you're willing to write the feature yourself, you can always send us a patch.
-			</answer>
-		</faq-entry>
-		<faq-entry>
-			<question>
-				How do I submit a patch?
-			</question>
-			<answer>
-				Refer to <a href="submittingPatches.html">"How to submit a patch"</a>
-			</answer>
-		</faq-entry>
-		<faq-entry>
-			<question>
-				I'm having problems with cookie support
-			</question>
-			<answer>
-				Cookie support is actually implemented in
-				<a href="http://jakarta.apache.org/commons/httpclient">commons-httpclient</a>, a project
-				in active development.  The odds are pretty good that whatever cookie problems you're
-				encountering have already been fixed so you might want to try a newer version of
-				their jar file.  If that doesn't help then post something to the HtmlUnit mailing list.
-			</answer>
-		</faq-entry>
-		<faq-entry>
-			<question>
-				I get error messages about redirection being disabled but I've turned it on
-				<source>
+    <faq>
+        <faq-entry>
+            <question>
+                I've found a bug, how do I report it?
+            </question>
+            <answer>
+                The best way is to open a bug report in the
+                <a href="https://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">sourceforge bug
+                tracking database</a>.  Sending a bug report to the mailing list runs the risk that the
+                bug may get lost.  Putting it in the bug database guarentees that it won't.  Please
+                search the bug database to see if your bug hasn't already been reported before opening
+                a new one.
+            </answer>
+            <answer>
+                If you know how to fix the problem then patches are gratefully accepted.
+            </answer>
+        </faq-entry>
+        <faq-entry>
+            <question>
+                HtmlUnit doesn't support feature X.  How do I request this feature?
+            </question>
+            <answer>
+                The best way is to open a bug report in the
+                <a href="https://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">sourceforge bug
+                tracking database</a>.  See the answer on bug reporting for why the database is preferred.
+            </answer>
+            <answer>
+                If you're willing to write the feature yourself, you can always send us a patch.
+            </answer>
+        </faq-entry>
+        <faq-entry>
+            <question>
+                How do I submit a patch?
+            </question>
+            <answer>
+                Refer to <a href="submittingPatches.html">"How to submit a patch"</a>
+            </answer>
+        </faq-entry>
+        <faq-entry>
+            <question>
+                I'm having problems with cookie support
+            </question>
+            <answer>
+                Cookie support is actually implemented in
+                <a href="http://jakarta.apache.org/commons/httpclient">commons-httpclient</a>, a project
+                in active development.  The odds are pretty good that whatever cookie problems you're
+                encountering have already been fixed so you might want to try a newer version of
+                their jar file.  If that doesn't help then post something to the HtmlUnit mailing list.
+            </answer>
+        </faq-entry>
+        <faq-entry>
+            <question>
+                I get error messages about redirection being disabled but I've turned it on
+                <source>
 26.02.2003 16:07:05 org.apache.commons.httpclient.HttpMethodBase   processRedirectResponse
 INFO: Redirect requested but followRedirects is disabled
-				</source>
-			</question>
-			<answer>
-				It's an annoyance that I haven't figured out how to fix yet.
-			</answer>
-			<answer>
-				For a variety of reasons, I handle the redirection logic inside HtmlUnit rather than letting
-				commons-httpclient handle it for me.  It's commons-httpclient that is displaying that message
-				because I have explicitly disabled its redirection support.
-			</answer>
-			<answer>
-				I'd like to filter out that warning message but haven't figured out a clean way of doing it.
-			</answer>
-		</faq-entry>
+                </source>
+            </question>
+            <answer>
+                It's an annoyance that I haven't figured out how to fix yet.
+            </answer>
+            <answer>
+                For a variety of reasons, I handle the redirection logic inside HtmlUnit rather than letting
+                commons-httpclient handle it for me.  It's commons-httpclient that is displaying that message
+                because I have explicitly disabled its redirection support.
+            </answer>
+            <answer>
+                I'd like to filter out that warning message but haven't figured out a clean way of doing it.
+            </answer>
+        </faq-entry>
 <!--
-		<faq-entry>
-			<question>
-			</question>
-			<answer>
-			</answer>
-		</faq-entry>
+        <faq-entry>
+            <question>
+            </question>
+            <answer>
+            </answer>
+        </faq-entry>
 -->
-	</faq>
+    </faq>
 </section>
 </document>
