@@ -7,6 +7,10 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="yourgod">
+                Fixed bug where encoded "&", "=", "+", ",", and "$" in URLs would be decoded before 
+                sending to the server.
+            </action>        
             <action type="update" dev="mguillem">
                 getTypeAttribute now returns "text" for input without specified type attribute as it is the default value.
             </action>
