@@ -50,6 +50,11 @@ public final class TextUtil {
     }
 
 
+    /**
+     * Convert a string into an input stream.
+     * @param content The string
+     * @return The resulting input stream.
+     */
     public static InputStream toInputStream( final String content ) {
         return new java.io.StringBufferInputStream(content);
     }

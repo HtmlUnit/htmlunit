@@ -18,6 +18,7 @@ public interface Page {
 
     /**
      * Initialize this page.
+     * @throws IOException If an IO problem occurs.
      */
     void initialize() throws IOException;
 

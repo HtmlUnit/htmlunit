@@ -40,6 +40,7 @@ public class Submit extends Input {
     
     /**
      * Return the name of this input.
+     * @return The name of this input
      */
     public String jsGet_name() {
         return getHtmlElementOrDie().getAttributeValue( "name" );
