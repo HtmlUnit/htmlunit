@@ -274,6 +274,19 @@
                 <htmlunit.description>Logging support</htmlunit.description>
             </properties>
         </dependency>
+
+        <dependency>
+            <groupId>commons-jelly</groupId>
+            <artifactId>commons-jelly-tags-xml</artifactId>
+            <version>20030211.142705</version>
+            <url>http://jakarta.apache.org/commons/jelly/libs/xml/</url>
+            <properties>
+                <classloader>root.maven</classloader>
+                <htmlunit.group>test</htmlunit.group>
+                <htmlunit.description>Support for building HtmlUnit</htmlunit.description>
+            </properties>
+        </dependency>
+
     </dependencies>
 
     <build>

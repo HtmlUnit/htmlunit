@@ -4,7 +4,9 @@
     xmlns:ant="jelly:ant"
     xmlns:maven="jelly:maven"
     xmlns:m="maven"
-    xmlns:deploy="deploy">
+    xmlns:deploy="deploy"
+    xmlns:x="jelly:xml"
+    >
 
     <postGoal name="java:compile">
         <ant:copy
@@ -17,8 +19,8 @@
         <attainGoal name="createDependenciesPage"/>
         <ant:mkdir dir="${maven.build.dir}/docs/tools/eclipse"/>
         <ant:copy todir="${maven.build.dir}/docs/tools/eclipse">
-		    <fileset dir="ide/eclipse"/>
-		</ant:copy>
+            <fileset dir="ide/eclipse"/>
+        </ant:copy>
     </preGoal>
 
     <goal name="createDependenciesPage"
@@ -182,32 +184,45 @@
             basedir="${maven.dist.bin.assembly.dir}/${maven.final.name}"/>
     </goal>
 
-	<!-- Run all the tests as quickly as possible.  This only outputs results
-	     to the console so if you are trying to generate reports, you will 
-	     need to call the slower "test" goal -->
-	<goal 
-		name="htmlunit:test" 
-		description="Run all the tests and output results to the console."
-		prereqs="test:compile">
-		
-	    <ant:java fork="true" classname="junit.textui.TestRunner" dir="target/test-classes">
-	        <arg value="com.gargoylesoftware.htmlunit.MainTestSuite"/>
+    <!-- Run all the tests as quickly as possible.  This only outputs results
+         to the console so if you are trying to generate reports, you will
+         need to call the slower "test" goal -->
+    <goal
+        name="htmlunit:test"
+        description="Run all the tests and output results to the console."
+        prereqs="test:compile">
+
+        <ant:java fork="true" classname="junit.textui.TestRunner" dir="target/test-classes">
+            <arg value="com.gargoylesoftware.htmlunit.MainTestSuite"/>
             <ant:classpath>
-            	<ant:path refid="maven.dependency.classpath"/>
-	            <ant:pathelement path="${maven.build.dest}"/>
-	            <ant:pathelement path="target/test-classes"/>
-    	    </ant:classpath>
-	    </ant:java>
-	</goal>
-	
-	<goal name="htmlunit:sanity-check" description="Run tests against a bunch of live servers">
-	    <ant:java fork="yes" classname="com.gargoylesoftware.htmlunit.SanityCheck" dir="src/java">
+                <ant:path refid="maven.dependency.classpath"/>
+                <ant:pathelement path="${maven.build.dest}"/>
+                <ant:pathelement path="target/test-classes"/>
+            </ant:classpath>
+        </ant:java>
+    </goal>
+
+    <goal name="htmlunit:sanity-check" description="Run tests against a bunch of live servers">
+        <ant:java fork="yes" classname="com.gargoylesoftware.htmlunit.SanityCheck" dir="src/java">
             <ant:classpath>
-            	<ant:path refid="maven.dependency.classpath"/>
-	            <ant:pathelement path="${maven.build.dest}"/>
-	            <ant:pathelement path="target/test-classes"/>
-    	    </ant:classpath>
-	    </ant:java>
-	</goal>
-	
+                <ant:path refid="maven.dependency.classpath"/>
+                <ant:pathelement path="${maven.build.dest}"/>
+                <ant:pathelement path="target/test-classes"/>
+            </ant:classpath>
+        </ant:java>
+    </goal>
+
+    <goal name="htmlunit:checkstyle" description="Display a human readable version of the checkstyle report">
+        <attainGoal name="checkstyle:report"/>
+
+        <x:parse var="doc" xml="target/checkstyle-raw-report.xml"/>
+        <x:set var="filesWithErrors" select="$doc/checkstyle/file[count(error)!=0]"/>
+        <x:forEach select="$filesWithErrors" var="element">
+            <echo />
+            <echo><x:expr select="@name"/></echo>
+            <x:forEach select="$element/error" var="error">
+                <echo>    <x:expr select="@line"/>: <x:expr select="@message"/></echo>
+            </x:forEach>
+        </x:forEach>
+    </goal>
 </project>
