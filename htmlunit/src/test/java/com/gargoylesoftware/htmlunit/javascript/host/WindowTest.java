@@ -833,6 +833,34 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    public void testClearTimeout() throws Exception {
+        final String content =
+              "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var id = setTimeout('doAlert()', 2000);\n"
+            + "      clearTimeout(id);\n"
+            + "    }\n"
+            + "    function doAlert() {\n"
+            + "      alert('blah');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        loadPage(content, collectedAlerts);
+        Thread.sleep(2200);
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
     public void testAboutURL() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection =

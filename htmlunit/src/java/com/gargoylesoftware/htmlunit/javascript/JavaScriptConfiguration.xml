@@ -437,6 +437,7 @@
         </property>
         <function name="alert"/>
         <function name="blur"/>
+        <function name="clearTimeout"/>
         <function name="close"/>
         <function name="confirm"/>
         <function name="execScript">
