@@ -6,8 +6,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.htmlunit.Base64;
-
 /**
  * Tests for Base64
  *

@@ -51,6 +51,15 @@ public final class WebWindowEvent extends EventObject {
 
 
     /**
+     * Return the hash code for this object.
+     * @return the hash code for this object.
+     */
+    public int hashCode() {
+        return source.hashCode();
+    }
+    
+    
+    /**
      * Return the oldPage
      * @return the page or null if the window has no page
      */
