@@ -163,6 +163,14 @@ public class HtmlTableRow extends ClickableElement {
         return getAttributeValue("valign");
     }
 
+    /**
+     * Gets the table containing this row
+     * @return the table
+     */
+    public HtmlTable getEnclosingTable() {
+        return (HtmlTable) getEnclosingElement("table");
+    }
+
 
     /**
      * Return the value of the attribute "bgcolor".  Refer to the

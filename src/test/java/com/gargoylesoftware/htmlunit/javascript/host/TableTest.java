@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author David D. Kilzer
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
+ * @author Marc Guillemot
  * @version $Revision$
  */
 public class TableTest extends WebTestCase {
@@ -147,7 +148,6 @@ public class TableTest extends WebTestCase {
                  + "    </tbody>\n"
                  + "  </table>\n"
                  + "  <script type='text/javascript' language='JavaScript'>\n"
-                 + "  <!--\n"
                  + "    var table = document.getElementById('table_1');\n"
                  + "    var bodies = table.tBodies;\n"
                  + "    alert(bodies.length);\n"
@@ -155,17 +155,18 @@ public class TableTest extends WebTestCase {
                  + "    var body1 = table.tBodies[0];\n"
                  + "    var body2 = table.tBodies[1];\n"
                  + "    alert(table.rows.length + ' ' + body1.rows.length + ' ' + body2.rows.length);\n"
-                 + "    table.insertRow(); // Should add at end, to body2.\n"
-                 + "    body1.insertRow(); // Add one to body1, as well.\n"
+                 + "    table.insertRow(-1); // Should add at end, to body2.\n"
+                 + "    body1.insertRow(-1); // Add one to body1, as well.\n"
                  + "    alert(table.rows.length + ' ' + body1.rows.length + ' ' + body2.rows.length);\n"
-                 + "  // -->\n"
                  + "  </script>\n"
                  + "</body></html>\n";
+
+        final List expectedAlerts = Arrays.asList(new String[] { "2", "true", "4 2 2", "6 3 3" });
+        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList(new String[] { "2", "true", "4 2 2", "6 3 3" });
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -294,6 +295,34 @@ public class TableTest extends WebTestCase {
         loadPage(htmlContent, collectedAlerts);
 
         final List expectedAlerts = Arrays.asList(new String[] { "tfoot1", "tfoot2", "null", "tfoot3" });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testInsertRow() throws Exception {
+
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>\n"
+                 + "  <table id='table_1'>\n"
+                 + "  <tr><td>foo</td></tr>\n"
+                 + "  </table>\n"
+                 + "  <script type='text/javascript' language='JavaScript'>\n"
+                 + "    var table = document.getElementById('table_1');\n"
+                 + "    alert(table.rows.length);\n"
+                 + "    var newRow = table.insertRow(-1);\n"
+                 + "    alert(table.rows.length);\n"
+                 + "    alert(newRow.rowIndex);\n"
+                 + "  </script>\n"
+                 + "</body></html>\n";
+
+        final List expectedAlerts = Arrays.asList(new String[] { "1", "2", "1" });
+        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(htmlContent, collectedAlerts);
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

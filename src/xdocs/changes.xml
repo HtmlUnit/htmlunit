@@ -7,6 +7,15 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="mguillem">
+                Added HtmlElement.getEnclosingElement(String tagName).
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: added rowIndex property for table rows.
+            </action>
+            <action type="add" dev="mguillem">
+                JavaScript: fixed insertRow when asked to insert at the end of the rows collection (was inserted one position before).
+            </action>
             <action type="update" dev="mguillem" id="1113487">
                 Guess content type for file content and file name when loading a file url.
             </action>
