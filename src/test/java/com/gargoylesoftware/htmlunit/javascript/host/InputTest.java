@@ -559,4 +559,64 @@ public class InputTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
     }
+    
+    /**
+     * Inputs have properties not only from there own type.
+     * Works with Mozilla, Firefox and IE... but not with htmlunit now.
+     * @throws Exception if the test fails
+     */
+    public void testDefaultValues() throws Exception {
+        if (true) {
+            notImplemented();
+            return;
+        }
+        
+        final String content
+            = "<html><head></head><body>\n"
+                + "<form name='myForm'>\n"
+                + "<input type='button' name='myButton'/>\n"
+                + "<input type='submit' name='mySubmit' value='submit it!'/>\n"
+                + "<input type='file' name='myFile'/>\n"
+                + "<input type='checkbox' name='myCheckbox' checked='true'/>\n"
+                + "<input type='radio' name='myRadio' checked='true'/>\n"
+                + "<input type='text' name='myText'/>\n"
+                + "<input type='password' name='myPwd'/>\n"
+                + "</form>\n"
+                + "<script>\n"
+                + "function details(_oInput)\n"
+                + "{\n"
+                + "  alert(_oInput.type + ': '\n" 
+                + "  + _oInput.checked + ', ' \n"
+                + "  + _oInput.defaultChecked + ', '\n"
+                + "  + ((String(_oInput.click).indexOf('function') > 0) ? 'function' : 'unknown') + ', '\n"
+                + "  + ((String(_oInput.select).indexOf('function') > 0) ? 'function' : 'unknown') + ', '\n"
+                + "  + _oInput.defaultValue + ', '\n"
+                + "  + _oInput.value\n"
+                + "  );\n"
+                + "}\n"
+                + "var oForm = document.myForm;\n"
+                + "details(oForm.myButton);\n"
+                + "details(oForm.mySubmit);\n"
+                + "details(oForm.myFile);\n"
+                + "details(oForm.myCheckbox);\n"
+                + "details(oForm.myRadio);\n"
+                + "details(oForm.myText);\n"
+                + "details(oForm.myPwd);\n"
+                + "</script>\n"
+                + "</body></html>";
+        final List expectedAlerts = Arrays.asList( new String[]{
+                "button: false, false, function, function, , ",
+                "submit: false, false, function, function, submit it!, submit it!",
+                "file: false, false, function, function, , ",
+                "checkbox: true, true, function, function, , on",
+                "radio: true, true, function, function, , on",
+                "text: false, false, function, function, , ",
+                "password: false, false, function, function, , "
+                } );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }
