@@ -253,6 +253,15 @@ public class HTMLElement extends NodeImpl {
     }
 
     /**
+     * Remove an attribute.
+     * 
+     * @param name Name of the attribute to remove
+     */
+    public void jsFunction_removeAttribute(final String name) {
+        getHtmlElementOrDie().removeAttribute(name);
+    }
+
+    /**
      * Gets the attribute node for the specified attribute.
      * @param attributeName the name of the attribute to retrieve
      * @return the attribute node for the specified attribute.

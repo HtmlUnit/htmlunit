@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="mguillem" id="1153758" due-to="George Murnock">
+                Javascript: implemented method removeAttribute for DOM nodes.
+            </action>
             <action type="update" dev="yourgod">
                 Javascript: Added support for document.scripts
             </action>
