@@ -49,14 +49,11 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.mozilla.javascript.BaseFunction;
-import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
-import org.mozilla.javascript.JavaScriptException;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 
 /**
  *  An abstract wrapper for html elements
@@ -83,11 +80,6 @@ public abstract class HtmlElement extends DomNode {
     /** the map holding event handlers */
     private Map eventHandlers_;
     
-    /**
-     * Counter to provide unique function names when defining event handlers 
-     */
-    private static int EventHandlerWrapperFunctionCounter_ = 0;
-
     /**
      *  Create an instance
      *
@@ -242,50 +234,9 @@ public abstract class HtmlElement extends DomNode {
      */
     public final void setEventHandler(final String eventName, final String jsSnippet) {
        
-      BaseFunction function = new BaseFunction() {
-        private static final long serialVersionUID = 3257850965406068787L;
-        
-        private String eventHandlerWrapperName_;
-          public Object call(final Context cx, final Scriptable scope,
-            final Scriptable thisObj, final Object[] args)
-            throws JavaScriptException {
-    
-            if (eventHandlerWrapperName_ == null) {
-                final String functionDeclaration = wrapSnippet();
-                cx.evaluateString(scope, functionDeclaration, HtmlElement.class.getName(), 1, null);
-            }
-
-            final StringBuffer expression = new StringBuffer(eventHandlerWrapperName_);
-
-            if (args.length==1) {
-                ScriptableObject.putProperty(scope, "event", args[0]);
-                expression.append("(event)");
-            }
-            else {
-                expression.append("()");
-            }
-
-            final Object result = cx.evaluateString(scope, expression.toString(), "sourceName", 1, null);
-
-            return result;
-        }
-
-        private String wrapSnippet() {
-            eventHandlerWrapperName_ = "gargoyleEventHandlerWrapper" + EventHandlerWrapperFunctionCounter_++;
-
-            final StringBuffer buffer = new StringBuffer();
-
-            buffer.append("function ");
-            buffer.append(eventHandlerWrapperName_);
-            buffer.append("(event) {");
-            buffer.append(jsSnippet);
-            buffer.append("}");
-
-            return buffer.toString();
-        }
-      };
+        final BaseFunction function = new EventHandler(jsSnippet);
        
-      setEventHandler(eventName, function);
+        setEventHandler(eventName, function);
     }
 
     /**
