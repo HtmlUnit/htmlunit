@@ -345,6 +345,9 @@ public class HtmlForm extends ClickableElement {
             ElementNotFoundException {
 
         final Iterator iterator = getRadioButtonsByName( name ).iterator();
+        if( ! iterator.hasNext() ) {
+            throw new ElementNotFoundException("input", "name", name);
+        }
         while( iterator.hasNext() ) {
             final HtmlRadioButtonInput input = ( HtmlRadioButtonInput )iterator.next();
             if( input.getValueAttribute().equals( value ) ) {
