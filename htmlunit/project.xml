@@ -84,6 +84,9 @@
         <contributor>
             <name>Alex Nikiforoff</name>
         </contributor>
+        <contributor>
+            <name>Barnaby Court</name>
+        </contributor>
     </contributors>
 
     <dependencies>
@@ -166,7 +169,7 @@
         </dependency>
         <dependency>
             <id>nekohtml</id>
-            <version>0.7.1</version>
+            <version>0.7.6</version>
         </dependency>
         <dependency>
             <id>commons-logging</id>
