@@ -534,6 +534,23 @@ public final class Window extends SimpleScriptable {
     }
 
     /**
+     * Return the value of the onerror property
+     * @return The value
+     */
+    public String jsGet_onerror() {
+        getLog().debug("Window.onerror not implemented");
+        return "";
+    }
+
+    /**
+     * Return the value of the onerror property
+     * @param newValue The value
+     */
+    public void jsSet_onerror( final String newValue) {
+        getLog().debug("Window.onerror not implemented");
+    }
+
+    /**
      * Return the specified property or {@link #NOT_FOUND} if it could not be found.
      * @param name The name of the property
      * @param start The scriptable object that was originally queried for this property
