@@ -187,7 +187,7 @@ public abstract class HtmlElement extends DomNode {
     }
 
     /**
-     * @see #getTagName
+     * @return The same value as returned by {@link #getTagName()},
      */
     public String getNodeName() {
         return getTagName();

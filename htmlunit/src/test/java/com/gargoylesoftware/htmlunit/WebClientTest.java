@@ -372,13 +372,14 @@ public class WebClientTest extends WebTestCase {
      * @param initialRequestMethod The initial request.
      * @param expectedRedirectedRequestMethod The submit method of the second (redirected) request.
      * If a redirect is not expected to happen then this must be null
+     * @throws Exception if the test fails.
      */
     private void doTestRedirection(
             final int statusCode,
             final SubmitMethod initialRequestMethod,
             final SubmitMethod expectedRedirectedRequestMethod )
         throws
-            Exception{
+             Exception {
 
         final String firstContent = "<html><head><title>First</title></head><body></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
@@ -702,6 +703,7 @@ public class WebClientTest extends WebTestCase {
      * @param webClient the WebClient to load the page from.
      * @param tabIndexValues The tab index values.  One input will be created for each item
      * in this list.
+     * @return The loaded page.
      * @throws Exception If something goes wrong.
      */
     private HtmlPage getPageForKeyboardTest(

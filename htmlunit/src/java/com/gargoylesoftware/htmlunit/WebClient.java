@@ -702,6 +702,7 @@ public class WebClient {
 
 
     private class DenyAllCredentialProvider implements CredentialProvider {
+    		/** @inheritDoc CredentialProvider#getCredentialsFor(String,int,String) */
         public KeyValuePair getCredentialsFor(
             final String server, final int port, final String realm ) {
 

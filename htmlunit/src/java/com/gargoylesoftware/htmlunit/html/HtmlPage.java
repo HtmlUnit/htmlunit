@@ -992,6 +992,7 @@ public final class HtmlPage extends DomNode implements Page {
     /**
      * Return an auto-refresh string if specified.  This will look in both the meta
      * tags and inside the http response headers.
+     * @return the auto-refresh string.
      */
     private String getRefreshStringOrNull() {
         final Iterator iterator
@@ -1005,10 +1006,6 @@ public final class HtmlPage extends DomNode implements Page {
 
         return getWebResponse().getResponseHeaderValue("Refresh");
     }
-
-    /*private void initializeFramesIfNeeded() {
-        getHtmlElementsByTagNames( Arrays.asList( new String[]{"frame", "iframe"}) );
-    }*/
 
     /**
      * Deregister frames that are no longer in use.

@@ -461,7 +461,8 @@ public final class Document extends NodeImpl {
     /**
      * Returns all HTML elements that have a "name" attribute with the given value
      * 
-     * @link http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-71555259
+     * Refer to <a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-71555259">
+     * The DOM spec</a> for details.
      * 
      * @param elementName - value of the "name" attribute to look for
      * @return NodeList of elements

@@ -294,7 +294,7 @@ public class HTMLParser {
             this.locator_ = locator;
         }
 
-        /** SAX start document event */
+        /** @inheritDoc ContentHandler#startDocument() */
         public void startDocument() throws SAXException {
             page_ = new HtmlPage(webResponse_.getUrl(), webResponse_, webWindow_);
             page_.setScriptFilter(scriptFilter_);
@@ -305,7 +305,7 @@ public class HTMLParser {
             stack_.push(currentNode_);
         }
 
-        /** SAX start event */
+        /** @inheritDoc ContentHandler#startElement(String,String,String,Attributes) */
         public void startElement(String namespaceURI, String localName, String qName, Attributes atts)
                 throws SAXException {
 
@@ -319,7 +319,7 @@ public class HTMLParser {
             stack_.push(currentNode_);
         }
 
-        /** SAX end event */
+        /** @inheritDoc ContentHandler@endElement(String,String,String) */
         public void endElement(String namespaceURI, String localName, String qName)
                 throws SAXException {
 
@@ -331,7 +331,7 @@ public class HTMLParser {
             }
         }
 
-        /** SAX characters event */
+        /** @inheritDoc ContentHandler#characters(char,int,int) */
         public void characters(char ch[], int start, int length)
                 throws SAXException {
 
@@ -341,6 +341,7 @@ public class HTMLParser {
             characters_.append(ch, start, length);
         }
 
+        /** @inheritDoc ContentHandler#ignorableWhitespace(char,int,int) */
         public void ignorableWhitespace(char ch[], int start, int length)
                 throws SAXException {
 
@@ -380,26 +381,26 @@ public class HTMLParser {
             }
         }
 
-        /** unused SAX event */
+        /** @inheritDoc ContentHandler#endDocument() */
         public void endDocument() throws SAXException {
         }
 
-        /** unused SAX event */
+        /** @inheritDoc ContentHandler#startPrefixMapping(String,String) */
         public void startPrefixMapping(String prefix, String uri)
                 throws SAXException {
         }
 
-        /** unused SAX event */
+        /** @inheritDoc ContentHandler#endPrefixMapping(String) */
         public void endPrefixMapping(String prefix)
                 throws SAXException {
         }
 
-        /** unused SAX event */
+        /** @inheritDoc ContentHandler#processingInstrucction(String,String) */
         public void processingInstruction(String target, String data)
                 throws SAXException {
         }
 
-        /** unused SAX event */
+        /** @inheritDoc ContentHandler#skippedEntity(String) */
         public void skippedEntity(String name)
                 throws SAXException {
         }
