@@ -50,6 +50,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.httpclient.util.EncodingUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Function;
@@ -1303,8 +1304,11 @@ public final class HtmlPage extends DomNode implements Page {
      *
      * @param idElement the element with an ID attribute to add.
      */
-    void addIdElement(HtmlElement idElement) {
-        idMap_.put(idElement.getAttributeValue("id"), idElement);
+    void addIdElement(final HtmlElement idElement) {
+    	final String id = idElement.getId();
+    	if (!StringUtils.isEmpty(id)) {
+            idMap_.put(id, idElement);
+    	}
     }
 
     /**

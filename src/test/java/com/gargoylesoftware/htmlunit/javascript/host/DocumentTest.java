@@ -504,6 +504,8 @@ public class DocumentTest extends WebTestCase {
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
              + "    alert(top.document.getElementById('input1').value);\n"
+             + "    alert(document.getElementById(''));\n"
+             + "    alert(document.getElementById('non existing'));\n"
              + "}\n"
              + "</script></head><body onload='doTest()'>"
              + "<form id='form1'>"
@@ -515,7 +517,8 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals( "First", page.getTitleText() );
 
-        final List expectedAlerts = Collections.singletonList("bar");
+        final List expectedAlerts = Arrays.asList(new String[] {"bar", "null", "null"});
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
