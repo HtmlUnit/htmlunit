@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1155063">
+                Fixed node reference problem occuring when the text of a textarea is changed.
+            </action>      
             <action type="update" dev="mguillem" id="1153710" due-to="George Murnock">
                 Javascript: document.links doesn't return tags with empty href anymore.
             </action>      

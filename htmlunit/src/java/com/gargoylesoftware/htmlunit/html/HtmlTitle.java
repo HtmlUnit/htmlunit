@@ -47,6 +47,7 @@ import java.util.Map;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Chris Erskine
+ * @author Marc Guillemot
  */
 public class HtmlTitle extends HtmlElement {
 
@@ -80,7 +81,7 @@ public class HtmlTitle extends HtmlElement {
         final DomNode child = getFirstChild();
         if (child == null) {
             final DomNode textNode = new DomText(getPage() , message);
-            setFirstChild(textNode);
+            appendChild(textNode);
         }
         else if (child instanceof DomText) {
             ((DomText) child).setData(message);
