@@ -54,6 +54,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLStreamHandler;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -64,6 +65,7 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
+import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.io.FileUtils;
@@ -1451,7 +1453,11 @@ public class WebClient {
             }
 
             // url may be partially encoded like "http://first?a=b%20c&d=e f"
-            final String fixedQuery = URIUtil.encodeQuery(URIUtil.decode(query));
+//          // don't re-encode the %'s from already encoded items
+            final BitSet partiallyEncodedQuery = new BitSet(256);
+            partiallyEncodedQuery.set('%'); 
+            partiallyEncodedQuery.or(URI.allowed_query);
+            final String fixedQuery = URIUtil.encode(query, partiallyEncodedQuery);
             if (query.equals(fixedQuery)) {
                 return url;
             }

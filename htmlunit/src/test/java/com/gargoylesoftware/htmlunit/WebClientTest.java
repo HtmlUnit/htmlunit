@@ -579,6 +579,12 @@ public class WebClientTest extends WebTestCase {
         assertEquals(
             "http://first?a=b%20c#myAnchor",
             page.getWebResponse().getUrl().toExternalForm());
+        
+        // with query string containing encoded "&", "=", "+", ",", and "$"
+        page = (HtmlPage) client.getPage(new URL("http://first?a=%26%3D%20%2C%24"));
+        assertEquals(
+            "http://first?a=%26%3D%20%2C%24",
+            page.getWebResponse().getUrl().toExternalForm());        
     }
 
     /**
