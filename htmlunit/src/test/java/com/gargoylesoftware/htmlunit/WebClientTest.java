@@ -1137,12 +1137,9 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception if test fails
      */
     public void testNekoFlagSetters() throws Exception {
-        assertEquals("Default logging is wrong", false, WebClient.getValidateHtml());
-        WebClient.setValidateHtml(true);
-        assertEquals("Logging did not get set", true, WebClient.getValidateHtml());
         assertEquals("Default ignore content is wrong", false, WebClient.getIgnoreOutsideContent());
         WebClient.setIgnoreOutsideContent(true);
-        assertEquals("Ignore content did not get set", true, WebClient.getIgnoreOutsideContent());
+        assertTrue("Ignore content did not get set", WebClient.getIgnoreOutsideContent());
     }
     /**
      * Unset the static items set in tests here
@@ -1150,7 +1147,6 @@ public class WebClientTest extends WebTestCase {
      */
     protected void tearDown() throws Exception {
         super.tearDown();
-        WebClient.setValidateHtml(false);
         WebClient.setIgnoreOutsideContent(false);
     }
 
