@@ -1946,5 +1946,22 @@ public class DocumentTest extends WebTestCase {
 
         final List expectedAlerts = Arrays.asList(new String[] { "value1", "value2" });
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDocumentBody_read() throws Exception {
+
+        final String firstContent = "<html><head><title>First</title></head>"
+            + "<body id='IAmTheBody' onload='alert(document.body.id)'>"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        assertEquals("First", firstPage.getTitleText());
+
+        final List expectedAlerts = Collections.singletonList("IAmTheBody");
+        assertEquals(expectedAlerts, collectedAlerts);
     }    
 }

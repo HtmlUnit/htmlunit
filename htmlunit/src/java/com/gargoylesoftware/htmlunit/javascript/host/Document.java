@@ -60,11 +60,11 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.DocumentAllArray;
 
@@ -542,6 +542,16 @@ public final class Document extends NodeImpl {
         if( statusHandler != null ) {
             statusHandler.statusMessageChanged(page, message);
         }
+    }
+
+    /**
+     * Gets the body element this document
+     * @return body element
+     */
+    public Object jsGet_body() {
+        final DomNode bodyElement = (DomNode) getHtmlPage().getDocumentElement()
+                .getHtmlElementsByTagName("body").get(0);
+        return getScriptableFor(bodyElement);
     }
 }
 
