@@ -15,11 +15,18 @@ import com.gargoylesoftware.htmlunit.Base64;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class Base64Test extends WebTestCase {
+    /**
+     * Create an instance.
+     * @param name The name of the test.
+     */
     public Base64Test( final String name ) {
         super( name );
     }
 
 
+    /**
+     * Test {@link Base64.encode(String)}
+     */
     public void testEncode() {
         final String data[][] = {
                 {"", ""},
@@ -40,6 +47,9 @@ public class Base64Test extends WebTestCase {
     }
 
 
+    /**
+     * Test {@link Base64.encode(String,String)} with a null string.
+     */
     public void testEncodeStringEncoding_NullString()
         throws Exception {
         try {
@@ -52,6 +62,9 @@ public class Base64Test extends WebTestCase {
     }
 
 
+    /**
+     * Test {@link Base64.encode(String,String)} with a null encoding.
+     */
     public void testEncodeStringEncoding_NullEncoding()
         throws Exception {
         try {
@@ -64,6 +77,9 @@ public class Base64Test extends WebTestCase {
     }
 
 
+    /**
+     * Test {@link Base64.encode(String)} with a null string.
+     */
     public void testEncodeString_Null()
         throws Exception {
         try {
@@ -76,6 +92,9 @@ public class Base64Test extends WebTestCase {
     }
 
 
+    /**
+     * Test {@link Base64.encode(String,String)} with a null encoding.
+     */
     public void testEncodeBytes_NullArray()
         throws Exception {
         try {
