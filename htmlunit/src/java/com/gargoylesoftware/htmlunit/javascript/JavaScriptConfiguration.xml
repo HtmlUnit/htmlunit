@@ -146,6 +146,7 @@
 			<browser name="Netscape" min-version="6"/>
 		</function>
 		<function name="handleEvent"/>
+		<function name="getElementsByTagName"/>
 		<function name="insertAdjacentHTML">
 			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</function>
@@ -198,6 +199,9 @@
 		</function>
 	</class>
 
+
+	<class name="Image" extends="Input">
+	</class>
 
 	<class name="Input" extends="HTMLElement">
 		<property name="checked" readable="true" writable="true"/>
@@ -272,10 +276,13 @@
 		<property name="opener" readable="true" writable="false"/>
 		<property name="frames" readable="true" writable="false"/>
 
-		<function name="close"/>
-		<function name="open"/>
 		<function name="alert"/>
+		<function name="blur"/>
+		<function name="close"/>
 		<function name="confirm"/>
+		<function name="focus"/>
+		<function name="open"/>
 		<function name="prompt"/>
+		<function name="setTimeout"/>
 	</class>
 </configuration>

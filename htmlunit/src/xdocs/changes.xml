@@ -24,6 +24,15 @@
 		<change type="new" reporter="Teo Kian Lee">
 			Added support for location.hostname which fixed all but one of the tests in the sanity check.
 		</change>
+		<change type="new">
+			Added support for document.all[index]
+		</change>
+		<change type="change">
+			Changed the javascript tagName attribute to return uppercase values according to spec
+		</change>
+		<change type="change">
+			Updated configuration file with more functions/properties
+		</change>
 	</change-log>
 </section>
 
