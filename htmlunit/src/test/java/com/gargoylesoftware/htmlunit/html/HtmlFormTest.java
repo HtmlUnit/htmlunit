@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 
 /**
  *  Tests for HtmlForm
@@ -890,6 +891,38 @@ public class HtmlFormTest extends WebTestCase {
         } );
         assertEquals(expectedParameters, collectedParameters);
     }
-    
+
+    /**
+     * Test order of submitted parameters matches order of elements in form.
+     * @throws Exception if the test fails
+     */
+    public void testSubmit_FormElementOrder() throws Exception {
+        final String htmlContent
+             = "<html><head></head><body><form method='post' action=''>"
+             + "<input type='submit' name='dispatch' value='Save' id='submitButton'>"
+             + "<input type='hidden' name='dispatch' value='TAB'>"
+             + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE);
+        settings.setSubmitMethod(SubmitMethod.POST);
+        settings.setRequestParameters(Collections.EMPTY_LIST);
+
+        final HtmlPage page = ( HtmlPage )client.getPage(settings);
+        final HtmlInput submitButton = (HtmlInput)page.getHtmlElementById("submitButton");
+        submitButton.click();
+
+        final List collectedParameters = webConnection.getLastParameters();
+        final List expectedParameters = Arrays.asList( new Object[] {
+            new KeyValuePair("dispatch", "Save"),
+            new KeyValuePair("dispatch", "TAB"),
+        } );
+        assertCollectionsEqual(expectedParameters, collectedParameters);
+    }
+
 }
 

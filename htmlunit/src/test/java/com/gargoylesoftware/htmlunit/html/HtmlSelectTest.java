@@ -89,7 +89,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
 
         // Test that the select is being correctly identified as a submittable element
-        assertCollectionsEqual(Arrays.asList(new Object[] {select}), form.getAllSubmittableElements());
+        assertCollectionsEqual(Arrays.asList(new Object[] {select, button}), form.getAllSubmittableElements(button));
 
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
