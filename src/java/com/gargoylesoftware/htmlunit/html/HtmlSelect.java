@@ -263,7 +263,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             return setSelectedAttribute( getOptionByValue(optionValue), isSelected );
         }
         catch( final ElementNotFoundException e ) {
-            throw new IllegalArgumentException("optionValue");
+            throw new IllegalArgumentException("No option found with value: " + optionValue);
         }
     }
 
