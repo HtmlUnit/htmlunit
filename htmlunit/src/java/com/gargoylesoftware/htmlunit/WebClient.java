@@ -975,9 +975,9 @@ public class WebClient {
      * from all elements.
      * @throws ElementNotFocussableException If the specified element cannot have the focus.
      * @see #getElementWithFocus()
-     * @see #tabToNextElement()
-     * @see #tabToPreviousElement()
-     * @see #pressAccessKey()
+     * @see HtmlPage#tabToNextElement()
+     * @see HtmlPage#tabToPreviousElement()
+     * @see HtmlPage#pressAccessKey(char)
      * @see HtmlPage#assertAllTabIndexAttributesSet()
      */
     public void moveFocusToElement( final HtmlElement newElement ) throws ElementNotFocussableException {
@@ -1018,7 +1018,7 @@ public class WebClient {
      * Return the element with the focus or null if no elements have the focus.
      *
      * @return The element with focus or null.
-     * @see #moveFocusTo(HtmlElement)
+     * @see #moveFocusToElement(HtmlElement)
      */
     public HtmlElement getElementWithFocus() {
         return elementWithFocus_;
