@@ -667,26 +667,6 @@ public final class HtmlPage
      * @param sourceCode The javascript code to execute.
      * @param sourceName The name for this chunk of code.  This name will be displayed
      * in any error messages.
-     * @return A page
-     * @deprecated use {@link #executeJavaScriptIfPossible(String, String, boolean)} instead.
-     * This method will be removed before 1.1 goes final!
-     */
-    public Page executeJavascriptIfPossible( final String sourceCode, final String sourceName ) {
-        final ScriptResult scriptResult
-            = executeJavaScriptIfPossible(sourceCode, sourceName, false);
-        return scriptResult.getNewPage();
-    }
-
-
-    /**
-     * Execute the specified javascript if a javascript engine was successfully
-     * instantiated.  If this javascript causes the current page to be reloaded
-     * (through location="" or form.submit()) then return the new page.  Otherwise
-     * return the current page.
-     *
-     * @param sourceCode The javascript code to execute.
-     * @param sourceName The name for this chunk of code.  This name will be displayed
-     * in any error messages.
      * @param wrapSourceInFunction True if this snippet of code should be placed inside
      * a javascript function.  This is neccessary for intrinsic event handlers that may
      * try to return a value.
@@ -816,18 +796,6 @@ public final class HtmlPage
      */
     public void setEnclosingWindow( final WebWindow window ) {
         enclosingWindow_ = window;
-    }
-
-
-    /**
-     * Return the title of this page or an empty string if the title wasn't specified.
-     *
-     * @return the title of this page or an empty string if the title wasn't specified.
-     * @deprecated Use {@link #getTitleText()} instead.  This method will be removed
-     * prior to the final release of 1.1
-     */
-    public String getTitle() {
-        return getTitleText();
     }
 
 
