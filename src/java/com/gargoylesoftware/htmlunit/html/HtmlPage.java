@@ -37,18 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.Assert;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptEngine;
-import com.gargoylesoftware.htmlunit.ScriptFilter;
-import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.TextUtil;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -62,14 +50,29 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import org.apache.commons.httpclient.HttpConstants;
 import org.apache.xerces.xni.parser.XMLDocumentFilter;
 import org.cyberneko.html.HTMLConfiguration;
 import org.cyberneko.html.parsers.DOMParser;
+import org.mozilla.javascript.Function;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.apache.commons.httpclient.HttpConstants;
+
+import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptEngine;
+import com.gargoylesoftware.htmlunit.ScriptFilter;
+import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
  *  A representation of an html page returned from a server. This is also the
@@ -80,6 +83,7 @@ import org.apache.commons.httpclient.HttpConstants;
  * @author Alex Nikiforoff
  * @author Noboru Sinohara
  * @author David K. Taylor
+ * @author Andreas Hangler
  */
 public final class HtmlPage
          extends HtmlElement
@@ -1090,10 +1094,15 @@ public final class HtmlPage
         if ( onLoad instanceof String ) {
             String onLoadScript = (String) onLoad;
             if( onLoadScript.length() != 0 ) {
-                if( onLoadScript.indexOf('(') == -1 ) {
-                    onLoadScript = onLoadScript + "()";
+                ScriptResult scriptResult =
+                    executeJavaScriptIfPossible(onLoadScript, "body.onLoad", false, null);
+
+                // if script evaluates to a function then call it
+                Object javaScriptResult = scriptResult.getJavaScriptResult();
+                if (javaScriptResult != null && javaScriptResult instanceof Function) {
+                    ScriptEngine engine = getWebClient().getScriptEngine();
+                    engine.callFunction(this, javaScriptResult, null, new Object[] {}, null);
                 }
-                executeJavaScriptIfPossible(onLoadScript, "body.onLoad", false, null);
             }
         } 
         else {
