@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *  Tests that when DOM events such as "onclick" have access
  * to an Event object with context information.
  * 
+ * @version  $Revision$
  * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
  */
 public class EventTest extends WebTestCase {
@@ -64,6 +65,7 @@ public class EventTest extends WebTestCase {
     /**
      *  Verify the "this" object refers to the Element being clicked when an
      * event handler is invoked.
+     * @throws Exception if the test fails
      */
     public void testThisDefined() throws Exception {
         final List expectedAlerts = Collections.singletonList("clickId");
@@ -81,6 +83,7 @@ public class EventTest extends WebTestCase {
     /**
      *  Verify setting a previously undefined/non-existant property on an Element
      * is accessible from inside an event handler
+     * @throws Exception if the test fails
      */
     public void testSetPropOnThisDefined() throws Exception {
         final List expectedAlerts = Collections.singletonList("foo");
@@ -100,6 +103,7 @@ public class EventTest extends WebTestCase {
     /**
      *  Verify that javascript snippets have a variable named 'event' available
      * to them.
+     * @throws Exception if the test fails
      */
     public void testEventArgDefinedByWrapper() throws Exception {
         final List expectedAlerts = Collections.singletonList("defined");
@@ -113,6 +117,7 @@ public class EventTest extends WebTestCase {
 
     /**
      *  Verify that when event handler is invoked an argument is passed in. 
+     * @throws Exception if the test fails
      */
     public void testEventArgDefined() throws Exception {
         final List expectedAlerts = Collections.singletonList("defined");
@@ -128,6 +133,7 @@ public class EventTest extends WebTestCase {
 
     /**
      *  event.currentTarget == this inside javascript event handler 
+     * @throws Exception if the test fails
      */
     public void testEventCurrentTargetSameAsThis() throws Exception {
         final List expectedAlerts = Collections.singletonList("pass");
@@ -135,7 +141,8 @@ public class EventTest extends WebTestCase {
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
-            + "function handler(event) { alert(event.currentTarget == this ? 'pass' : event.currentTarget + '!=' + this); }\n"
+            + "function handler(event) {\n"
+            + "alert(event.currentTarget == this ? 'pass' : event.currentTarget + '!=' + this); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>\n";
         onClickPageTest(content, expectedAlerts);
