@@ -53,12 +53,9 @@
 				I'm having problems with cookie support
 			</question>
 			<answer>
-				Cookie support is actually implemented in
-				<a href="http://jakarta.apache.org/commons/httpclient">commons-httpclient</a>, a project
-				in active development, and explained in the <a href="http://jakarta.apache.org/commons/httpclient/cookies.html">Cookie Guide</a>. 
-				The odds are pretty good that whatever cookie problems you're
-				encountering have already been fixed so you might want to try a newer version of
-				their jar file.  If that doesn't help then post something to the HtmlUnit mailing list.
+				htmlunit relies totally on <a href="http://jakarta.apache.org/commons/httpclient/3.0/index.html">commons-httpclient 3.0</a> for Cookie handling. 
+				The odds are pretty good that whatever cookie problems you're encountering have already a solution as explained in the <a href="http://jakarta.apache.org/commons/httpclient/3.0/cookies.html">Cookie Guide</a>.
+				If that doesn't help then post something to the HtmlUnit mailing list.
 			</answer>
 		</faq>
 
