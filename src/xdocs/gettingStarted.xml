@@ -47,7 +47,7 @@ public void testHomePage() throws Exception {
     final WebClient webClient = new WebClient(BrowserVersion.MOZILLA_1_0);
     final URL url = new URL("http://htmlunit.sourceforge.net");
     final HtmlPage page = (HtmlPage)webClient.getPage(url);
-    assertEquals( "Welcome to HtmlUnit", page.getTitleText();
+    assertEquals( "Welcome to HtmlUnit", page.getTitleText() );
 }
             ]]></source>
             <p>
@@ -68,7 +68,7 @@ public void testHomePage() throws Exception {
     final WebClient webClient = new WebClient(BrowserVersion.MOZILLA_1_0, "http://myproxyserver", 8000);
     final URL url = new URL("http://htmlunit.sourceforge.net");
     final HtmlPage page = (HtmlPage)webClient.getPage(url);
-    assertEquals( "Welcome to HtmlUnit", page.getTitleText();
+    assertEquals( "Welcome to HtmlUnit", page.getTitleText() );
 }
             ]]></source>
             <p>
