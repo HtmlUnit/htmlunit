@@ -141,9 +141,23 @@ public final class JavaScriptEngine extends ScriptEngine {
      * @return The result of executing the specified code.
      */
     public Object execute(
-        final HtmlPage htmlPage, final String sourceCode, final String sourceName ) {
+        final HtmlPage htmlPage, String sourceCode, final String sourceName ) {
 
         assertNotNull( "sourceCode", sourceCode );
+
+        // Remove html comments around the source if needed
+        sourceCode = sourceCode.trim();
+        if( sourceCode.startsWith("<!--") ) {
+            final int startIndex = 4;
+            final int endIndex;
+            if( sourceCode.endsWith("-->") ) {
+                endIndex = sourceCode.length()-3;
+            }
+            else {
+                endIndex = sourceCode.length();
+            }
+            sourceCode = sourceCode.substring(startIndex, endIndex);
+        }
 
         final PageInfo pageInfo = getPageInfo(htmlPage);
 

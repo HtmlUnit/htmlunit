@@ -16,8 +16,11 @@
 		<change type="change">
 			Upgraded commons-httpclient to the Nov 29, 2002 build
 		</change>
-		<change>
+		<change type="new">
 			Added support for the Window.opener property
+		</change>
+		<change type="fix">
+			Fixed bug where javascript that was enclosed in html comment tags would blow up
 		</change>
 	</change-log>
 </section>
