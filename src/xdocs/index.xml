@@ -28,10 +28,10 @@
 <section title="Where to find...">
 	<p>
 		<dl>
-			<dt>Latest stable release <date>March 10, 2003</date></dt>
+			<dt>Latest stable release <date>March 20, 2003</date></dt>
 			<dd>
-				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.2.zip?download">
-					Download version 1.2 final
+				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.2.1.zip?download">
+					Download version 1.2.1 final
 				</a>
 			</dd>
 		</dl>
