@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.mozilla.javascript.Scriptable;
@@ -173,7 +174,22 @@ public class Select extends Input {
      * @param index The new value
      */
     public void jsSet_selectedIndex( final int index ) {
-        getLog().debug("select.selectedIndex not implemented yet");
+        final HtmlSelect htmlSelect = (HtmlSelect)getHtmlElementOrDie();
+        
+        final Iterator iter = htmlSelect.getSelectedOptions().iterator();
+        while (iter.hasNext()){
+            final HtmlOption itemToUnSelect = (HtmlOption) iter.next();
+            htmlSelect.setSelectedAttribute(itemToUnSelect, false);
+        }
+        if (index < 0){
+            htmlSelect.fakeSelectedAttribute("");
+            return;
+        }
+        
+        final List allOptions = htmlSelect.getAllOptions();
+         
+        final HtmlOption itemToSelect = (HtmlOption) allOptions.get(index);
+        htmlSelect.setSelectedAttribute(itemToSelect, true);
     }
     
     /**

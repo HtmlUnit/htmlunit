@@ -43,11 +43,13 @@ import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
 
 /**
@@ -98,6 +100,55 @@ public class SelectTest extends WebTestCase {
          assertEquals( expectedAlerts, collectedAlerts );
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetSelectedIndex() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "function doTest() {\n"
+                 + "    alert(document.form1.select1.length);\n"
+                 + "    alert(document.form1.select1.selectedIndex);\n"
+                 + "    document.form1.select1.selectedIndex = 2;\n"
+                 + "    alert(document.form1.select1.length);\n"
+                 + "    alert(document.form1.select1.selectedIndex);\n"
+                 + "    document.form1.select1.selectedIndex = -1;\n"
+                 + "}</script></head><body onload='doTest()'>"
+                 + "<p>hello world</p>"
+                 + "<form name='form1' action='http://test' method='get'>"
+                 + "    <select name='select1'>"
+                 + "        <option value='option1' name='option1'>One</option>"
+                 + "        <option value='option2' name='option2' selected>Two</option>"
+                 + "        <option value='option3' name='option3'>Three</option>"
+                 + "    </select>"
+                 + "    <input type='submit' id='clickMe' name='submit' value='button'>"
+                 + "</form>"
+                 + "</body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "3", "1", "3", "2"
+         } );
+
+         assertEquals( expectedAlerts, collectedAlerts );
+         
+         final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
+         final HtmlPage newPage = (HtmlPage) button.click();
+         
+         
+         final List expectedParameters = new ArrayList();
+         expectedParameters.add( new KeyValuePair( "submit", "button" ) );
+         
+         final MockWebConnection webConnection = (MockWebConnection) newPage.getWebClient().getWebConnection();
+         
+         assertEquals("http://test", newPage.getWebResponse().getUrl().toExternalForm());
+         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
+         
+         assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
+    }
 
     /**
      * @throws Exception if the test fails

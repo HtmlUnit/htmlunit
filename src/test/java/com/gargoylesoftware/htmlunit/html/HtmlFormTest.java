@@ -947,5 +947,39 @@ public class HtmlFormTest extends WebTestCase {
         assertNotNull( secondPage );
         assertEquals( "parameters", Collections.EMPTY_LIST, webConnection.getLastParameters() );
     }    
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSubmit_SelectOptionWithoutValueAttribute()throws Exception {
+
+        final String htmlContent
+        = "<html><body><form name='form' method='GET' action='action.html'>"
+        + "<select name='select'>"
+        + "     <option>first value</option>"
+        + "     <option selected>second value</option>"
+        + "</select>"
+        + "</form></body></html>";
+        final WebClient client = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        
+        final HtmlPage secondPage = ( HtmlPage ) page.getFormByName("form").submit();
+        
+        assertNotNull( secondPage );
+        
+        final List expectedParameters = Arrays.asList( new Object[]{
+                new KeyValuePair("select", "second value")
+            } );
+        
+        assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
+    }        
 }
 
