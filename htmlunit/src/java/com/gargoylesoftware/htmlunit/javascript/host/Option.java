@@ -92,7 +92,7 @@ public class Option extends HTMLElement {
      * @return The value property
      */
     public String jsGet_value() {
-        return ((HtmlOption)getHtmlElementOrDie()).getValueAttribute();
+        return ((HtmlOption)getHtmlElementOrDie()).getValue();
     }
 
     /**

@@ -204,7 +204,7 @@ public class HtmlForm extends ClickableElement {
                 parameterList.add( pairs[i] );
             }
         }
-        if( submitElement != null ) {
+        if( submitElement != null && isValidForSubmission((HtmlElement) submitElement) ) {
             final KeyValuePair[] pairs = submitElement.getSubmitKeyValuePairs();
             for( int i = 0; i < pairs.length; i++ ) {
                 parameterList.add( pairs[i] );
@@ -270,35 +270,26 @@ public class HtmlForm extends ClickableElement {
         return submittableElements;
     }
 
-
-    private boolean isSubmittable( final HtmlElement element ) {
+    private boolean isValidForSubmission(final HtmlElement element){
         final String tagName = element.getTagName();
         if( SUBMITTABLE_ELEMENT_NAMES.contains( tagName.toLowerCase() ) == false ) {
             return false;
-        }
-
+        }        
         if(element.isAttributeDefined("disabled")) {
             return false;
         }
-
-        if( ! tagName.equals( "isindex" ) && element.getAttributeValue("name" ).equals("") ) {
+        if (! tagName.equals( "isindex" ) && !element.isAttributeDefined("name")){
             return false;
         }
+        
+        if( ! tagName.equals( "isindex" ) && element.getAttributeValue("name").equals("") ) {
+            return false;
+        }        
+        
         if( tagName.equals( "input" ) ) {
-            final String type = element.getAttributeValue("type" ).toLowerCase();
+            final String type = element.getAttributeValue("type").toLowerCase();
             if( type.equals( "radio" ) || type.equals( "checkbox" ) ) {
                 return element.isAttributeDefined("checked");
-            }
-            if( type.equals("submit") || type.equals("image") ){
-                // The one submit button that was clicked can be submitted but no other ones
-                return false;
-            }
-        }
-        if ( tagName.equals("button") ) {
-            final String type = element.getAttributeValue("type" ).toLowerCase();
-            if( type.equals("submit") ){
-                // The one submit button that was clicked can be submitted but no other ones
-                return false;
             }
         }
         if ( tagName.equals("select") ) {
@@ -306,7 +297,29 @@ public class HtmlForm extends ClickableElement {
             if (((HtmlSelect) element).getOptionSize() < 1) {
                 return false;
             }
-        }        
+        }          
+        return true;
+    }
+
+    private boolean isSubmittable( final HtmlElement element ) {
+        final String tagName = element.getTagName();
+        if (!isValidForSubmission(element)){
+            return false;
+        }
+
+        // The one submit button that was clicked can be submitted but no other ones
+        if( tagName.equals( "input" ) ) {
+            final String type = element.getAttributeValue("type").toLowerCase();
+            if( type.equals("submit") || type.equals("image") ){
+                return false;
+            }
+        }
+        if ( tagName.equals("button") ) {
+            final String type = element.getAttributeValue("type").toLowerCase();
+            if( type.equals("submit") ){
+                return false;
+            }
+        }
 
         return true;
     }

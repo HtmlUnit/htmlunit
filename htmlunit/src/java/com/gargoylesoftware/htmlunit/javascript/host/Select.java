@@ -175,7 +175,16 @@ public class Select extends Input {
     public void jsSet_selectedIndex( final int index ) {
         getLog().debug("select.selectedIndex not implemented yet");
     }
-
+    
+    /**
+     * Return the actual value of the selected Option
+     * @return The value
+     */
+    public String jsGet_value() {
+        final int selectedIndex = jsGet_selectedIndex();
+        final Option selectedOption = (Option) jsGet_options().jsFunction_item(selectedIndex);
+        return selectedOption.jsGet_value();
+    }
 
     /**
      * Return the value of the "length" property

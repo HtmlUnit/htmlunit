@@ -192,4 +192,18 @@ public class HtmlOption extends ClickableElement {
     public final void setValueAttribute( final String newValue ) {
         setAttributeValue("value", newValue);
     }
+
+    /**
+     * Return the value of this option as it will be submitted
+     *
+     * @return The value of the control
+     */    
+    public String getValue() {
+        if (isAttributeDefined("value")){
+            return getValueAttribute();
+        } 
+        else {
+            return asText();
+        }
+    }
 }

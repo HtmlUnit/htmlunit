@@ -8,6 +8,23 @@
     <body>
         <release version="1.3-pre2" date="Not released yet">
             <action type="update" dev="yourgod">
+                Fixed bug where the javascript value of a select list was always empty. 
+                It should not correctly be the value of the selected option.
+            </action>                 
+            <action type="update" dev="yourgod">
+                Fixed bug where the javascript value of an option element was empty
+                if the value attribute was not defined. The value should now correctly be
+                the contents of the element.
+            </action>         
+            <action type="update" dev="yourgod">
+                Added HtmlOption.getValue() that returns the value of the option as
+                it should be submitted
+            </action>         
+            <action type="update" dev="yourgod">
+                Fixed bug where submitting a form with a submit control that had no name 
+                would submit an invalid name/value pair instead of ignoring the control
+            </action>        
+            <action type="update" dev="yourgod">
                 Fixed bug where submitting a form containing a select that had no options 
 				caused a NullPointerException.
             </action>
