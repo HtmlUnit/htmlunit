@@ -7,26 +7,9 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.httpclient.Credentials;
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.HttpState;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.NameValuePair;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.logging.impl.SimpleLog;
 
 /**
  *  An object that handles the actual communication portion of page
@@ -75,6 +58,7 @@ public abstract class WebConnection {
      * @param  parameters Any parameters
      * @param  url The url of the server
      * @param  submitMethod The submit method. Ie SubmitMethod.GET
+     * @param  requestHeaders Any headers that need to be put into the request.
      * @return  See above
      * @exception  IOException If an IO error occurs
      */

@@ -451,6 +451,13 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
 
+    /**
+     * Return the javascript default value of this object.  This is the javascript equivilent
+     * of a toString() in java.
+     *
+     * @param hint A hint as to the format of the default value.  Ignored in this case.
+     * @return The default value.
+     */
     public Object getDefaultValue( final Class hint ) {
         return toString();
     }
