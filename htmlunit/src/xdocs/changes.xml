@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1153710" due-to="George Murnock">
+                Javascript: document.links doesn't return tags with empty href anymore.
+            </action>      
             <action type="update" dev="yourgod">
                 A RefeshHandler can now throw IOExceptions instead of handling them.
                 Updated ImmediateRefeshHandler and ThreadedRefeshHandler to make refresh failures
@@ -15,10 +18,10 @@
             </action>
             <action type="update" dev="mguillem">
                 Javascript: the type property of input elements can now be changed.
-            </action>       
+            </action>
             <action type="update" dev="mguillem" id="1145773" due-to="George Murnock">
                 Fixed bug occuring when submitting from javascript a form with a javascript action.
-            </action>       
+            </action>
             <action type="update" dev="yourgod" id="1151184">
                 HtmlElement's getHtmlElementsByAttribute, getHtmlElementsByTagName, and 
                 getHtmlElementsByTagNames were all updated to ignore the case of the passed
@@ -41,10 +44,10 @@
                 You should now use org.apache.commons.httpclient.auth.CredentialsProvider instead.
                 This patch should allow support for NTLM and Digest authentication as well as 
                 proxy authentication. Patch from sdanig.
-            </action>       
+            </action>
             <action type="update" dev="mguillem" id="1110768" due-to="Daniel Gredler">
                 JavaScript: Pick up behaviors defined in style attribute when simulating IE.
-            </action>       
+            </action>
             <action type="update" dev="mguillem" id="1118222">
                 JavaScript: expressions like myForm.myField now look for form fields with "myField" as id or name.
             </action>
@@ -56,7 +59,7 @@
             </action>
             <action type="update" dev="yourgod">
 				Upgraded commons-httpclient to version 3.0rc1
-			</action>        
+			</action>
             <action type="update" dev="mguillem" id="1115259" due-to="Michael Ottati">
                 JavaScript: fixed document.domain setter for domains like d1.d2.d3.d4.com.
             </action>
