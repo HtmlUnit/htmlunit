@@ -43,6 +43,11 @@ public class HtmlTextArea
     }
 
 
+    /**
+     * Return the value that would be displayed in the text area
+     *
+     * @return The text
+     */
     public final String getText() {
         if( value_ == null ) {
             return asText();
@@ -70,6 +75,11 @@ public class HtmlTextArea
     }
 
 
+    /**
+     *  Set the new value of this text area.
+     *
+     * @param  newValue The new value.
+     */
     public final void setText( final String newValue ) {
         assertNotNull("newValue", newValue);
         value_ = newValue;
