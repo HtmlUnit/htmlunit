@@ -172,6 +172,10 @@
                 tag refreshes and response header refreshes but not currently from javascript 
                 refreshes
             </action>
+            <action type="update" dev="mbowler">
+            		Added serialVersionUID to all classes that are Serializable but didn't already 
+            		have one of these.
+            </action>
         </release>
         
         <release version="1.3-pre1" date="November 7, 2003">
