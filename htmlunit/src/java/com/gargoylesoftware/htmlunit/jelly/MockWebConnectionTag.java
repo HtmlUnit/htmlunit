@@ -37,79 +37,28 @@
  */
 package com.gargoylesoftware.htmlunit.jelly;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.SimpleCredentialProvider;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
+import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+
 /**
- * Jelly tag "webClient".
  *
- * @version  $Revision$
+ * @version  $Revision $
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public class WebClientTag extends HtmlUnitTagSupport {
-    private WebClient webClient_;
-    private String userId_;
-    private String password_;
-
-    /**
-     * Create an instance
-     */
-    public WebClientTag() {
-    }
-
+public class MockWebConnectionTag extends HtmlUnitTagSupport {
 
     /**
      * Process the tag
-     *
-     * @param xmlOutput to write output
-     * @throws JellyTagException when any error occurs
+     * @param xmlOutput The xml output
+     * @throws JellyTagException If a problem occurs
      */
     public void doTag(XMLOutput xmlOutput) throws JellyTagException {
-        webClient_ = new WebClient();
-        if( userId_ != null || password_ != null ) {
-            if( userId_ == null || password_ == null ) {
-                throw new JellyTagException("userid and password must either both be set or neither set");
-            }
-            webClient_.setCredentialProvider( new SimpleCredentialProvider(userId_, password_) );
-        }
+        final WebClient webClient = getWebClient();
+        webClient.setWebConnection( new FakeWebConnection(webClient) );
         invokeBody(xmlOutput);
     }
-
-
-    /**
-     * Callback from Jelly to set the value of the browserVersion attribute.
-     * @param browserVersion The new value.
-     */
-    public void setBrowserVersion( final String browserVersion ) {
-        System.out.println("BrowserVersion not supported yet ["+browserVersion+"]");
-    }
-
-
-    /**
-     * Return the WebClient created by this tag.
-     * @return The web client
-     */
-    public WebClient getWebClient() {
-        return webClient_;
-    }
-
-
-    /**
-     * Set the userid attribute
-     * @param userid the new value
-     */
-    public void setUserid( final String userid ) {
-        userId_ = userid;
-    }
-
-
-    /**
-     * Set the password attribute
-     * @param password the new value
-     */
-    public void setPassword( final String password ) {
-        password_ = password;
-    }
 }
+

@@ -54,6 +54,8 @@ public class HtmlUnitTagLibrary extends TagLibrary {
         registerTag("assertStatusCode", AssertStatusCodeTag.class);
         registerTag("assertContentType", AssertContentTypeTag.class);
         registerTag("assertTitle", AssertTitleTag.class);
+        registerTag("mockWebConnection", MockWebConnectionTag.class);
+        registerTag("mockResponse", MockResponseTag.class);
     }
 }
 

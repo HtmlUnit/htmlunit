@@ -35,81 +35,44 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.jelly;
+package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.SimpleCredentialProvider;
-import org.apache.commons.jelly.JellyTagException;
+import java.io.File;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
+import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.XMLOutput;
 
+
 /**
- * Jelly tag "webClient".
+ * run all the jelly tests
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public class WebClientTag extends HtmlUnitTagSupport {
-    private WebClient webClient_;
-    private String userId_;
-    private String password_;
+public class JellyTest extends WebTestCase {
 
     /**
-     * Create an instance
-     */
-    public WebClientTag() {
-    }
-
-
-    /**
-     * Process the tag
+     *  Create an instance
      *
-     * @param xmlOutput to write output
-     * @throws JellyTagException when any error occurs
+     * @param  name The name of the test
      */
-    public void doTag(XMLOutput xmlOutput) throws JellyTagException {
-        webClient_ = new WebClient();
-        if( userId_ != null || password_ != null ) {
-            if( userId_ == null || password_ == null ) {
-                throw new JellyTagException("userid and password must either both be set or neither set");
-            }
-            webClient_.setCredentialProvider( new SimpleCredentialProvider(userId_, password_) );
+    public JellyTest( final String name ) {
+        super( name );
+    }
+
+    public static Test suite() throws Exception {
+        final XMLOutput output = XMLOutput.createXMLOutput(System.out);
+        final File file = new File("src/test/jelly/com/gargoylesoftware/htmlunit/WebClient.jelly");
+        final JellyContext context = new JellyContext().runScript(file, output);
+        TestSuite answer = (TestSuite) context.getVariable("org.apache.commons.jelly.junit.suite");
+        if ( answer == null ) {
+            System.out.println( "Could not find a TestSuite created by Jelly for the script:" + file );
+            // return an empty test suite
+            return new TestSuite();
         }
-        invokeBody(xmlOutput);
-    }
-
-
-    /**
-     * Callback from Jelly to set the value of the browserVersion attribute.
-     * @param browserVersion The new value.
-     */
-    public void setBrowserVersion( final String browserVersion ) {
-        System.out.println("BrowserVersion not supported yet ["+browserVersion+"]");
-    }
-
-
-    /**
-     * Return the WebClient created by this tag.
-     * @return The web client
-     */
-    public WebClient getWebClient() {
-        return webClient_;
-    }
-
-
-    /**
-     * Set the userid attribute
-     * @param userid the new value
-     */
-    public void setUserid( final String userid ) {
-        userId_ = userid;
-    }
-
-
-    /**
-     * Set the password attribute
-     * @param password the new value
-     */
-    public void setPassword( final String password ) {
-        password_ = password;
+        return answer;
     }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<test:suite 
+	xmlns:j="jelly:core" 
+	xmlns:test="jelly:junit"
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="jelly:com.gargoylesoftware.htmlunit.jelly.HtmlUnitTagLibrary">
+
+    <test:case name="testResultSet">
+	    <h:webClient browserVersion="INTERNET_EXPLORER_6_0">
+	    	<h:mockWebConnection>
+	    		<h:mockResponse url="http://first">
+	    			<html><head><title>first</title></head><body></body></html>
+	    		</h:mockResponse>
+	    	</h:mockWebConnection>
+	    	
+	        <h:getPage method="get" var="page1" uri="http://first"/>
+	        page=${page1.titleText}
+	        <test:assertEquals expected="first" actual="${page1.titleText}"/>
+	    </h:webClient>
+    </test:case>
+
+</test:suite>
