@@ -39,6 +39,14 @@
 		<change type="fix" reporter="Dominique Broeglin" patch-author="Dominique Broeglin">
 			Fixed bug in expansion of relative urls
 		</change>
+		<change type="new" id="709740" reporter="David K. Taylor">
+			Added support for setting the src attribute on an iframe via javascript.  Setting this attribute
+			will cause the iframe to be reloaded with new content.
+		</change>
+		<change type="change" id="707343">
+			Improved the documentation for WebWindowEvent handling as the behaviour wasn't really
+			self explanatory.
+		</change>
 	</change-log>
 </section>
 
