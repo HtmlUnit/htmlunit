@@ -13,7 +13,7 @@
 
 <taskdef name="checkstyle"
 	classname="com.puppycrawl.tools.checkstyle.CheckStyleTask"
-	classpath="build/lib/checkstyle-all-2.3.jar" />
+	classpath="build/lib/checkstyle-all.jar" />
 
 
 <path id="base.class.path">
@@ -245,47 +245,46 @@
 
 <target name="checkstyle" description="Check all the coding conventions">
 	<!-- Check production code -->
-	<checkstyle
-		javadocScope="package"
-		tabWidth="4"
-		constPattern="^[A-Z](_?[A-Z0-9]+)*$"
-		localVarPattern="^i|[a-z][a-zA-Z0-9]+$"
-		memberPattern="^[a-z][a-zA-Z0-9_]+_$"
-		methodPattern="^jsGet_[a-zA-Z0-9]+|jsSet_[a-zA-Z0-9]+|jsFunction_[a-zA-Z0-9]+|[a-z][a-zA-Z0-9]+$"
-		paramPattern="^[a-z][a-zA-Z0-9]+$"
-		publicMemberPattern="^$"
-		staticPattern="^[A-Z][a-zA-Z0-9_]+_$"
-		typePattern="^[A-Z][a-zA-Z0-9]+$"
-		parenPad="ignore"
-		ignoreCastWhitespace="yes"
-		ignoreWhitespace="yes"
-		maxLineLen="120"
-		rcurly="alone"
-		headerFile="build/checkstyle.headerfile"
-		requirePackageHtml="true"
-		>
+	<checkstyle>
+		<property key="checkstyle.javadoc.scope" value="package"/>
+		<property key="checkstyle.tab.width" value="4"/>
+		<property key="checkstyle.const.pattern" value="^[A-Z](_?[A-Z0-9]+)*$"/>
+		<property key="checkstyle.local.var.pattern" value="^i|[a-z][a-zA-Z0-9]+$"/>
+		<property key="checkstyle.pattern.member" value="^[a-z][a-zA-Z0-9_]+_$"/>
+		<property key="checkstyle.pattern.method" value="^jsGet_[a-zA-Z0-9]+|jsSet_[a-zA-Z0-9]+|jsFunction_[a-zA-Z0-9]+|[a-z][a-zA-Z0-9]+$"/>
+		<property key="checkstyle.pattern.param" value="^[a-z][a-zA-Z0-9]+$"/>
+		<property key="checkstyle.pattern.public.member" value="^$"/>
+		<property key="checkstyle.pattern.static" value="^[A-Z][a-zA-Z0-9_]+_$"/>
+		<property key="checkstyle.pattern.type" value="^[A-Z][a-zA-Z0-9]+$"/>
+		<property key="checkstyle.paren.pad" value="space"/>
+		<property key="checkstyle.ignore.cast.whitespace" value="yes"/>
+		<property key="checkstyle.ignore.whitespace" value="yes"/>
+		<property key="checkstyle.maxlinelen" value="120"/>
+		<property key="checkstyle.rcurly" value="alone"/>
+		<property key="checkstyle.header.file" value="build/checkstyle.headerfile"/>
+		<property key="checkstyle.require.package.html" value="true"/>
 		<fileset dir="src/java" includes="**/*.java" excludes="**/test/*"/>
 	</checkstyle>
 
 	<!-- Check tests - test code is a bit more lenient -->
-	<checkstyle
-		javadocScope="nothing"
-		tabWidth="4"
-		constPattern="^[A-Z](_?[A-Z0-9]+)*$"
-		localVarPattern="^i|[a-z][a-zA-Z0-9]+$"
-		memberPattern="^[a-z][a-zA-Z0-9_]+_$"
-		methodPattern="^[a-z][a-zA-Z0-9_]+$"
-		paramPattern="^[a-z][a-zA-Z0-9]+$"
-		publicMemberPattern="^$"
-		staticPattern="^[a-z][a-zA-Z0-9_]+_$"
-		typePattern="^[A-Z][a-zA-Z0-9]+$"
-		parenPad="ignore"
-		ignoreCastWhitespace="yes"
-		ignoreWhitespace="yes"
-		maxLineLen="120"
-		rcurly="alone"
-		headerFile="build/checkstyle.headerfile"
-		>
+	<checkstyle>
+		<property key="checkstyle.javadoc.scope" value="nothing"/>
+		<property key="checkstyle.tab.width" value="4"/>
+		<property key="checkstyle.const.pattern" value="^[A-Z](_?[A-Z0-9]+)*$"/>
+		<property key="checkstyle.local.var.pattern" value="^i|[a-z][a-zA-Z0-9]+$"/>
+		<property key="checkstyle.pattern.member" value="^[a-z][a-zA-Z0-9_]+_$"/>
+		<property key="checkstyle.pattern.method" value="^+|[a-z][a-zA-Z0-9]+$"/>
+		<property key="checkstyle.pattern.param" value="^[a-z][a-zA-Z0-9]+$"/>
+		<property key="checkstyle.pattern.public.member" value="^$"/>
+		<property key="checkstyle.pattern.static" value="^[A-Z][a-zA-Z0-9_]+_$"/>
+		<property key="checkstyle.pattern.type" value="^[A-Z][a-zA-Z0-9]+$"/>
+		<property key="checkstyle.paren.pad" value="space"/>
+		<property key="checkstyle.ignore.cast.whitespace" value="yes"/>
+		<property key="checkstyle.ignore.whitespace" value="yes"/>
+		<property key="checkstyle.maxlinelen" value="120"/>
+		<property key="checkstyle.rcurly" value="alone"/>
+		<property key="checkstyle.header.file" value="build/checkstyle.headerfile"/>
+		<property key="checkstyle.require.package.html" value="true"/>
 		<fileset dir="src/java" includes="**/test/*.java"/>
 	</checkstyle>
 </target>

@@ -17,13 +17,33 @@
 
 	<class name="Checkbox" extends="Input"/>
 
+
 	<class name="Document" extends="HTMLElement"><!-- NOT FINISHED -->
-		<property name="location" readable="true" writable="false"/>
-		<property name="forms" readable="true" writable="false"/>
+		<property name="alinkColor" readable="true" writable="false"/>
+		<property name="anchors" readable="true" writable="false"/>
+		<property name="applets" readable="true" writable="false"/>
+		<property name="bgColor" readable="true" writable="false"/>
 		<property name="cookie" readable="true" writable="false"/>
-		<property name="images" readable="true" writable="false"/>
+		<property name="domain" readable="true" writable="false"/>
+		<property name="embeds" readable="true" writable="false">
+			<javascript min-version="1.1"/>
+		</property>
+		<property name="fgColor" readable="true" writable="false"/>
+		<property name="forms" readable="true" writable="false"/>
+		<property name="images" readable="true" writable="false">
+			<javascript min-version="1.1"/>
+		</property>
+		<property name="lastModified" readable="true" writable="false"/>
+		<property name="linkColor" readable="true" writable="false"/>
+		<property name="links" readable="true" writable="false"/>
+		<property name="location" readable="true" writable="false"/>
+		<property name="plugins" readable="true" writable="false">
+			<javascript min-version="1.1"/>
+		</property>
 		<property name="referrer" readable="true" writable="false"/>
+		<property name="title" readable="true" writable="false"/>
 		<property name="URL" readable="true" writable="false"/>
+		<property name="vlinkColor" readable="true" writable="false"/>
 		<function name="write"/>
 		<function name="writeln"/>
 		<function name="close"/>

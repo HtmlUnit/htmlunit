@@ -15,6 +15,9 @@
 			a single module ("htmlunit") in cvs.  This should only affect those people who are
 			checking out code directly from cvs.
 		</change>
+		<change type="change">
+			Upgraded checkstyle to version 2.4
+		</change>
 		<change type="new">
 			Added support for document.location (an alias for window.location)
 		</change>
