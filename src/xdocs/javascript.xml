@@ -45,6 +45,20 @@
                 'com.gargoylesoftware.htmlunit.javascript' to debug level, the
                 inline code will be logged with the wrapper function to help you determine what line of code is failing.
             </p>
+            <p>
+                One of the problems with JavaScript is finding the objects that you expect to be defined but have not
+                been defined within the code.  To help find some of these errors, HtmlUnit will produce WARN level messages
+                reporting these errors. A WARN level log message has also been added to report when getElementById does not find an element.
+            </p>
+        </section>
+        <section name="Internet Explorer features">
+            <p>
+                Internet Explorer has a number of features which are out of the normal Html/JavaScript spec.  Most of
+                these features have not been implimented but are being added and found and needed.  One feature is the
+                document.getElementById function.  This function is suppose to return the tag that has the given id.
+                Within IE, if the id is not found, it is searched for by name. HtmlUnit supports this function but will
+                log a message at the WARN level that the search was done by name.
+            </p>
         </section>
     </body>
 </document>

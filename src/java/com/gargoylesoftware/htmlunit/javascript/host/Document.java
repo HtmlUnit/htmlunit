@@ -52,7 +52,9 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.UniqueTag;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
@@ -462,8 +464,21 @@ public final class Document extends NodeImpl {
                 result = jsElement;
             }
         }
-        catch( final ElementNotFoundException e ) {
+        catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to null
+            
+            final BrowserVersion browser = this.getHtmlPage().getEnclosingWindow().getWebClient().getBrowserVersion();
+            if (BrowserVersion.INTERNET_EXPLORER.equals(browser.getApplicationName())) {
+                NativeArray elements = (NativeArray) jsFunction_getElementsByName(id);
+                result = elements.get(0, this);
+                if (result instanceof UniqueTag) {
+                    return null;
+                }
+                getLog().warn("getElementById(" + id + ") did a getElementByName for Internet Explorer");
+                return result;
+            }
+            getLog().warn("getElementById(" + id 
+                + ") cannot return a result as there isn't a javascript object for the html element ");
         }
         return result;
     }
