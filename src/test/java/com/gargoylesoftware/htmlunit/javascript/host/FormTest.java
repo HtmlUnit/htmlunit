@@ -43,10 +43,12 @@ import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -292,6 +294,7 @@ public class FormTest extends WebTestCase {
                  + "<p>hello world</p>"
                  + "<form name='form1' method='get' action='http://second'>"
                  + "    <input type='button' name='button1' />"
+                 + "    <input type='button' name='button2' />"
                  + "</form>"
                  + "</body></html>";
         final String secondContent
@@ -476,4 +479,43 @@ public class FormTest extends WebTestCase {
         } );
         assertEquals( expectedAlerts, collectedAlerts );
     }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testFormSubmit_MultipleButtons() throws Exception {
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+
+        final String firstContent
+                 = "<html><head><title>first</title></head><body>\n"
+                 + "<p>hello world</p>"
+                 + "<form name='form1' method='get' action='http://second'>"
+                 + "    <button type='submit' name='button1' id='button1'/>"
+                 + "    <button type='submit' name='button2' />"
+                 + "</form>"
+                 + "</body></html>";
+        final String secondContent
+                 = "<html><head><title>second</title></head><body>\n"
+                 + "<p>hello world</p>"
+                 + "</body></html>";
+
+        webConnection.setResponse(
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            URL_SECOND, secondContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        assertEquals( "first", page.getTitleText() );
+
+        final HtmlButton button = (HtmlButton)page.getHtmlElementById("button1");
+        final HtmlPage secondPage = (HtmlPage)button.click();
+        assertEquals( "second", secondPage.getTitleText() );
+        
+        final List expectedParameters = Arrays.asList( new Object[]{ new KeyValuePair("button1","")} );
+        assertEquals( expectedParameters, webConnection.getLastParameters());
+    }
+
 }
