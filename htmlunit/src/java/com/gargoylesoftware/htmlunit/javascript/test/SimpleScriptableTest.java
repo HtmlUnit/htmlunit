@@ -12,11 +12,17 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.test.FakeWebConnection;
 import com.gargoylesoftware.htmlunit.test.WebTestCase;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
-
+import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.TreeSet;
 
 /**
  * @version  $Revision$
@@ -58,5 +64,41 @@ public class SimpleScriptableTest extends WebTestCase {
         assertEquals("foo", page.getTitleText());
 
         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    public void testHtmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
+        final Map map = SimpleScriptable.getHtmlJavaScriptMapping();
+        final String directoryName = "./com/gargoylesoftware/htmlunit/javascript/host";
+        final Set names = getFileNames(directoryName.replace('/', File.separatorChar));
+
+        // Now pull out those names that we know don't have html equivilents
+        names.remove("Document");
+        names.remove("History");
+        names.remove("Input"); // <- this one is abstract
+        names.remove("Location");
+        names.remove("Navigator");
+        names.remove("Screen");
+        names.remove("Style");
+
+        assertEquals( new TreeSet(names), new TreeSet(map.values()) );
+    }
+
+
+    private Set getFileNames( final String directoryName ) {
+        final File directory = new File(directoryName);
+        assertTrue("directory exists", directory.exists() );
+        assertTrue("is a directory", directory.isDirectory() );
+
+        final String fileNames[] = new File(directoryName).list();
+        final Set collection = new HashSet();
+
+        for( int i=0; i<fileNames.length; i++ ) {
+            final String name = fileNames[i];
+            if( name.endsWith(".java") ) {
+                collection.add( name.substring(0, name.length()-5) );
+            }
+        }
+        return collection;
     }
 }
