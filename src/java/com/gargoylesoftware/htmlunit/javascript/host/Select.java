@@ -103,7 +103,7 @@ public class Select extends Input {
      */
     public void jsFunction_add(final Object newOptionObject, final Object beforeOptionObject) {
 
-        final HtmlSelect select = (HtmlSelect) getHtmlElementOrDie();
+        final HtmlSelect select = getHtmlSelect();
 
         final Option option = (Option) newOptionObject;
         final Option beforeOption = (Option) beforeOptionObject;
@@ -158,7 +158,7 @@ public class Select extends Input {
      * @return The selectedIndex property
      */
     public int jsGet_selectedIndex() {
-        final HtmlSelect htmlSelect = (HtmlSelect)getHtmlElementOrDie();
+        final HtmlSelect htmlSelect = getHtmlSelect();
         final List selectedOptions = htmlSelect.getSelectedOptions();
         if( selectedOptions.isEmpty() ) {
             return -1;
@@ -175,7 +175,7 @@ public class Select extends Input {
      * @param index The new value
      */
     public void jsSet_selectedIndex( final int index ) {
-        final HtmlSelect htmlSelect = (HtmlSelect)getHtmlElementOrDie();
+        final HtmlSelect htmlSelect = getHtmlSelect();
         
         final Iterator iter = htmlSelect.getSelectedOptions().iterator();
         while (iter.hasNext()){
@@ -260,6 +260,15 @@ public class Select extends Input {
      */
     private HtmlSelect getHtmlSelect() {
         return (HtmlSelect)getHtmlElementOrDie();
+    }
+
+    
+    /**
+     * Selects the option with the specified value
+     * @param newValue The value of the option to select
+     */
+    public void jsSet_value(final String newValue) {
+        getHtmlSelect().setSelectedAttribute(newValue, true);
     }
 }
 

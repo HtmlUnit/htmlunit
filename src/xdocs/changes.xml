@@ -8,6 +8,9 @@
     <body>
         <release version="next" date="unknown">
             <action type="update" dev="mguillem">
+                JavaScript: setting the value attribute of a select object now selects the corresponding option.
+            </action>
+            <action type="update" dev="mguillem">
                 document.images is now a "live" collection.
             </action>
             <action type="update" dev="mguillem">
