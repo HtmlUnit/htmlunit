@@ -83,7 +83,8 @@ public class FakeWebConnection extends WebConnection {
     public WebResponse getResponse(
             final URL url,
             final SubmitMethod method,
-            final List parameters ) {
+            final List parameters,
+            final Map requestParameters ) {
 
         lastMethod_ = method;
         lastParameters_ = parameters;

@@ -6,9 +6,9 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringBufferInputStream;
@@ -18,9 +18,11 @@ import java.net.URL;
 import java.net.URLStreamHandler;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 import org.apache.commons.logging.Log;
@@ -44,6 +46,7 @@ public class WebClient {
     private ScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
     private HtmlElement elementWithFocus_;
+    private final Map requestHeaders_ = Collections.synchronizedMap(new HashMap(89));
 
     private AlertHandler   alertHandler_;
     private ConfirmHandler confirmHandler_;
@@ -138,10 +141,10 @@ public class WebClient {
     private WebConnection getWebConnection() {
         if( webConnection_ == null ) {
             if( proxyHost_ == null ) {
-                webConnection_ = new WebConnection( this );
+                webConnection_ = new HttpWebConnection( this );
             }
             else {
-                webConnection_ = new WebConnection( this, proxyHost_, proxyPort_ );
+                webConnection_ = new HttpWebConnection( this, proxyHost_, proxyPort_ );
             }
         }
 
@@ -152,7 +155,8 @@ public class WebClient {
     /**
      *  Set the object that will resolve all url requests <p />
      *
-     *  THIS METHOD IS FOR TESTING PURPOSES ONLY - DO NOT USE
+     * This method is intended for unit testing HtmlUnit itself.  It is not expected
+     * to change but you shouldn't need to call it during normal use of HtmlUnit.
      *
      * @param  webConnection The new web connection
      */
@@ -391,7 +395,7 @@ public class WebClient {
      * @param  value The value of the header
      */
     public void addRequestHeader( final String name, final String value ) {
-        getWebConnection().getRequestHeaders().put( name, value );
+        requestHeaders_.put( name, value );
     }
 
 
@@ -402,7 +406,7 @@ public class WebClient {
      * @see  #addRequestHeader
      */
     public void removeRequestHeader( final String name ) {
-        getWebConnection().getRequestHeaders().remove( name );
+        requestHeaders_.remove( name );
     }
 
 
@@ -918,7 +922,7 @@ public class WebClient {
         assertNotNull("method", method);
         assertNotNull("parameters", parameters);
 
-        final WebResponse webResponse = getWebConnection().getResponse( url, method, parameters );
+        final WebResponse webResponse = getWebConnection().getResponse( url, method, parameters, requestHeaders_ );
         final int statusCode = webResponse.getStatusCode();
 
         if( statusCode >= 301 && statusCode <=307 && isRedirectEnabled() ) {

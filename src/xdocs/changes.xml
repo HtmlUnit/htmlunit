@@ -38,6 +38,10 @@
 		<change type="fix">
 			Fixed bug where javascript Form.elements was not returning radio buttons
 		</change>
+		<change type="change">
+			Refactored the interface between WebClient and WebConnection to make it easier to
+			add custom implementations of WebConnection.
+		</change>
 	</change-log>
 </section>
 
