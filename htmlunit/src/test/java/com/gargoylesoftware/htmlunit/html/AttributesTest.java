@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.net.URL;
@@ -254,8 +255,22 @@ public class AttributesTest extends TestCase {
         else {
             final Constructor constructor = classUnderTest_.getDeclaredConstructor( 
                 new Class[]{ HtmlPage.class, Element.class } );
-            newInstance = constructor.newInstance(
-                new Object[]{page_, proxyElement});
+            try {
+                newInstance = constructor.newInstance(
+                    new Object[]{page_, proxyElement});
+            }
+            catch( final InvocationTargetException e ) {
+                final Throwable targetException = e.getTargetException();
+                if( targetException instanceof Exception ) {
+                    throw (Exception)targetException;
+                }
+                else if( targetException instanceof Error ) {
+                    throw (Error)targetException;
+                }
+                else {
+                    throw e;
+                }
+            }
         }
         
         return newInstance;
