@@ -37,18 +37,20 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
+
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  *  Tests for HtmlForm
@@ -767,5 +769,52 @@ public class HtmlFormTest extends WebTestCase {
          assertEquals( expectedParameters0, collectedParameters0 );
          assertEquals( expectedParameters1, collectedParameters1 );
      }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetInputByValue() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "    <input type='submit' name='button' value='xxx'/>"
+            + "    <input type='text' name='textfield' value='foo'/>"
+            + "    <input type='submit' name='button1' value='foo'/>"
+            + "    <input type='reset' name='button2' value='foo'/>"
+            + "    <input type='submit' name='button' value='bar'/>"
+            + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+
+        final List allInputsByValue = form.getInputsByValue("foo");
+        final ListIterator iterator = allInputsByValue.listIterator();
+        while( iterator.hasNext() ) {
+            final HtmlInput input = (HtmlInput)iterator.next();
+            iterator.set( input.getNameAttribute() );
+        }
+
+        final List expectedInputs = Arrays.asList( new String[] {
+            "textfield", "button1", "button2"
+        } );
+        assertEquals( "Get all", expectedInputs, allInputsByValue );
+        assertEquals( Collections.EMPTY_LIST, form.getInputsByValue("none-matching"));
+
+        assertEquals("Get first", "button", form.getInputByValue("bar").getNameAttribute() );
+        try {
+            form.getInputByValue("none-matching");
+            fail("Expected ElementNotFoundException");
+        }
+        catch( final ElementNotFoundException e ) {
+            // Expected path.
+        }
+    }
 }
 

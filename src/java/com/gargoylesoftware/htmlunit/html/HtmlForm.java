@@ -37,15 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.FormEncodingType;
-import com.gargoylesoftware.htmlunit.Assert;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.TextUtil;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -54,8 +45,19 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
+
+import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.FormEncodingType;
+import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
  *  Wrapper for the html element "form"
@@ -700,5 +702,24 @@ public class HtmlForm extends ClickableElement {
     public final void setTargetAttribute( final String target ) {
         Assert.notNull("target", target);
         getElement().setAttribute( "target", target );
+    }
+
+    /**
+     * Return the first input with the specified value.
+     * @param value The value
+     * @return The first input with the specified value.
+     * @throws ElementNotFoundException If no elements can be found with the specified value.
+     */
+    public HtmlInput getInputByValue( final String value ) throws ElementNotFoundException {
+        return (HtmlInput)getOneHtmlElementByAttribute("input", "value", value);
+    }
+
+    /**
+     * Return all the inputs with the specified value.
+     * @param value The value
+     * @return all the inputs with the specified value.
+     */
+    public List getInputsByValue( final String value ) {
+        return getHtmlElementsByAttribute("input", "value", value);
     }
 }

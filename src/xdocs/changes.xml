@@ -226,6 +226,12 @@
             <action type="add" dev="mbowler" id="650924">
                 Added support for window.status
             </action>
+            <action type="add" dev="mbowler" id="742519">
+                New method HtmlForm.getInputByValue() to get a single input
+            </action>
+            <action type="add" dev="mbowler" id="742519">
+                New method HtmlForm.getInputsByValue() to get multiple inputs
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
