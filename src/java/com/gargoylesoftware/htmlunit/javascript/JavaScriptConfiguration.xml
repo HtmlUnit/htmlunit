@@ -262,6 +262,7 @@
         <function name="insertBefore"/>
         <function name="removeChild"/>
         <function name="replaceChild"/>
+        <function name="hasChildNodes"/>        
     </class>
 
     <class name="Option" extends="HTMLElement">
