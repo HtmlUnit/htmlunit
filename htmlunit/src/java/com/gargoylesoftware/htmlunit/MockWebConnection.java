@@ -187,7 +187,18 @@ public class MockWebConnection extends WebConnection {
         return new WebResponse() {
             public int getStatusCode()         { return responseEntry.statusCode_;      }
             public String getStatusMessage()   { return responseEntry.statusMessage_;   }
-            public String getContentType()     { return responseEntry.contentType_;     }
+            public String getContentType()     { 
+                final String contentTypeHeaderLine = responseEntry.contentType_;
+                final int index = contentTypeHeaderLine.indexOf( ';' );
+                final String contentType;
+                if( index == -1 ) {
+                    contentType = contentTypeHeaderLine;
+                }
+                else {
+                    contentType = contentTypeHeaderLine.substring( 0, index );
+                }
+                return contentType;
+            }
             public String getContentAsString() { 
                 try {
                     return new String(responseEntry.content_, this.getContentCharSet());
@@ -219,8 +230,20 @@ public class MockWebConnection extends WebConnection {
                  * without encoding, getBytes use locale encoding.
                  */
                 return responseEntry.content_;
-           }
-            public String getContentCharSet() { return "ISO-8859-1"; }
+            }
+            public String getContentCharSet() {
+                final String contentType = responseEntry.contentType_;
+                final String prefix = "charset=";
+                final int index = contentType.indexOf(prefix);
+                final String charset;
+                if( index == -1 ) {
+                    charset = "ISO-8859-1";
+                }
+                else {
+                    charset = contentType.substring(index+prefix.length());
+                }
+                return charset;
+            }
         };
     }
 

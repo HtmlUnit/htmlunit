@@ -843,5 +843,27 @@ public class WebClientTest extends WebTestCase {
         });
         client.getPage( new URL( "http://www.yahoo.com" ) );
      }
+
+    /**
+     * Apparently if the browsers receive a charset that they don't understand, they ignore
+     * it and assume ISO-8895-1.  Ensure we do the same.
+     * @throws Exception If the test fails.
+     */
+    public void testBadCharset() throws Exception {
+        final String page1Content
+                 = "<html><head><title>foo</title>"
+                 + "</head><body></body></html>";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(
+            new URL("http://page1"), page1Content, 200, "OK", "text/html; charset=garbage", Collections.EMPTY_LIST );
+
+        client.setWebConnection( webConnection );
+
+        final Page page = client.getPage(
+                new URL( "http://page1" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertInstanceOf(page, HtmlPage.class);
+    }
 }
 
