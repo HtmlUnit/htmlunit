@@ -54,6 +54,9 @@
             <action type="update" dev="mbowler">
                 Upgraded gsbase to version 2.0.1
             </action>                 
+            <action type="update" dev="mbowler" due-to="Chris Erskine" id="1033055">
+                Updated server names for cvs access.  Patch provided by Chris Erskine.
+            </action>                 
 		</release>
 		    
         <release version="1.3-pre2" date="September 26, 2004">
