@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.URI;
@@ -1192,6 +1193,9 @@ public class WebClientTest extends WebTestCase {
         final String baseName = ClassUtils.getPackageName(getClass()).replace('.', '/') + "/testfiles/";
         final String resource = baseName + fileName;
         final URL url = getClass().getClassLoader().getResource(resource);
+        if( url == null ) {
+            throw new FileNotFoundException(fileName);
+        }
         final File file = new File(new URI(url.toString()));
         
         return file;
