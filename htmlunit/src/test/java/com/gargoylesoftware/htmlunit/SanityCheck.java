@@ -52,6 +52,7 @@ import junit.textui.TestRunner;
  * @version    $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
  */
 public class SanityCheck extends WebTestCase {
     private static final BrowserVersion BROWSER_VERSION = BrowserVersion.MOZILLA_1_0;
@@ -115,7 +116,7 @@ public class SanityCheck extends WebTestCase {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         webClient.setRedirectEnabled( true );
         final HtmlPage page = (HtmlPage)webClient.getPage( new URL( "http://www.ibm.com/" ) );
-        assertEquals( "http://www.ibm.com/us/", page.getWebResponse().getUrl().toExternalForm() );
+        assertEquals("http://www.ibm.com/us/", page.getWebResponse().getUrl());
     }
 
 

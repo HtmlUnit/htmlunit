@@ -105,7 +105,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = ( HtmlPage )pushButton.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?foo=2&button=foo",
-                secondPage.getWebResponse().getUrl().toExternalForm());
+                secondPage.getWebResponse().getUrl());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
     }
 
@@ -170,7 +170,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = ( HtmlPage )pushButton.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?button=foo&foo=4",
-            secondPage.getWebResponse().getUrl().toExternalForm() );
+            secondPage.getWebResponse().getUrl());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod() );
     }
 
@@ -832,7 +832,7 @@ public class HtmlFormTest extends WebTestCase {
         
         assertNotNull( secondPage );
         assertEquals(page.getWebResponse().getUrl().toExternalForm() + "action.html?select=second+value",
-                secondPage.getWebResponse().getUrl().toExternalForm());
+                secondPage.getWebResponse().getUrl());
     }        
     
     /**
@@ -947,7 +947,7 @@ public class HtmlFormTest extends WebTestCase {
         final Page page2 = form.submit("button");
         
         assertEquals(URL_GARGOYLE.toExternalForm() + expectedUrlEnd, 
-                page2.getWebResponse().getUrl().toExternalForm());
+                page2.getWebResponse().getUrl());
     }
 }
 

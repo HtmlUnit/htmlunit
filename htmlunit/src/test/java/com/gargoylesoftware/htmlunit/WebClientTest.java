@@ -526,7 +526,7 @@ public class WebClientTest extends WebTestCase {
         final URL url = new URL(urlString);
         final HtmlPage page = (HtmlPage) client.getPage(new WebRequestSettings(url, SubmitMethod.POST));
 
-        assertEquals(urlString, page.getWebResponse().getUrl().toExternalForm());
+        assertEquals(urlString, page.getWebResponse().getUrl());
     }
 
     /**
@@ -548,7 +548,7 @@ public class WebClientTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlAnchor link = (HtmlAnchor) page.getAnchors().get(0);
         final Page page2 = link.click(); 
-        assertEquals("http://first/foo.html?id=UYIUYTY//YTYUY..F", page2.getWebResponse().getUrl().toExternalForm());
+        assertEquals("http://first/foo.html?id=UYIUYTY//YTYUY..F", page2.getWebResponse().getUrl());
     }
 
     /**
@@ -570,7 +570,7 @@ public class WebClientTest extends WebTestCase {
         HtmlPage page = (HtmlPage) client.getPage(new URL("http://first?a=b c&d=" + ((char) 0xE9) + ((char) 0xE8)));
         assertEquals(
             "http://first?a=b%20c&d=%C3%A9%C3%A8",
-            page.getWebResponse().getUrl().toExternalForm());
+            page.getWebResponse().getUrl());
 
 
         // with query string already encoded
@@ -924,9 +924,7 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testExpandUrl() throws Exception {
-        assertEquals(
-            "http://first",
-            WebClient.expandUrl(URL_FIRST, "#second").toExternalForm());
+        assertEquals("http://first", WebClient.expandUrl(URL_FIRST, "#second"));
     }
     
     /**
@@ -935,9 +933,7 @@ public class WebClientTest extends WebTestCase {
     public void testExpandUrlWithFile() throws Exception {
         final String urlString = "http://host/page.html";
         final URL url = new URL(urlString);
-        assertEquals(
-            urlString,
-            WebClient.expandUrl(url, "#second").toExternalForm());
+        assertEquals(urlString, WebClient.expandUrl(url, "#second"));
     }
 
 
@@ -1073,7 +1069,7 @@ public class WebClientTest extends WebTestCase {
      */
     public void testExpandUrlHandlesColonsInRelativeUrl() throws Exception {
         final URL newUrl = WebClient.expandUrl( new URL("http://host/foo"), "/bar/blah:de:blah");
-        assertEquals( "http://host/bar/blah:de:blah", newUrl.toExternalForm() );
+        assertEquals("http://host/bar/blah:de:blah", newUrl);
     }
 
     /**

@@ -88,7 +88,7 @@ public class HtmlIsIndexTest extends WebTestCase {
         final List expectedParameters = new ArrayList();
         expectedParameters.add( new KeyValuePair( "enterSomeText", "Flintstone" ) );
 
-        assertEquals("url", URL_GARGOYLE.toExternalForm(), secondPage.getWebResponse().getUrl().toExternalForm());
+        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
         assertEquals( "method", SubmitMethod.POST, webConnection.getLastMethod() );
         assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
     }

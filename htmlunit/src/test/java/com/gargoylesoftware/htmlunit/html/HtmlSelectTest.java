@@ -96,7 +96,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) button.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option2&button=foo", 
-                secondPage.getWebResponse().getUrl().toExternalForm());
+                secondPage.getWebResponse().getUrl());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
@@ -130,7 +130,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) button.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?button=foo", 
-                secondPage.getWebResponse().getUrl().toExternalForm());
+                secondPage.getWebResponse().getUrl());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
@@ -165,7 +165,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) button.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option3&button=foo", 
-                secondPage.getWebResponse().getUrl().toExternalForm());
+                secondPage.getWebResponse().getUrl());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
@@ -202,7 +202,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         assertEquals("url", 
                 URL_GARGOYLE.toExternalForm() + "?select1=option1&select1=option2&select1=option3&button=foo", 
-                secondPage.getWebResponse().getUrl().toExternalForm());
+                secondPage.getWebResponse().getUrl());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
@@ -352,7 +352,7 @@ public class HtmlSelectTest extends WebTestCase {
         expectedParameters.add(new KeyValuePair("select1", "newOption"));
         expectedParameters.add(new KeyValuePair("button", "foo"));
 
-        assertEquals("url", URL_GARGOYLE.toExternalForm(), secondPage.getWebResponse().getUrl().toExternalForm());
+        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
         assertEquals("method", SubmitMethod.POST, webConnection.getLastMethod());
         assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);

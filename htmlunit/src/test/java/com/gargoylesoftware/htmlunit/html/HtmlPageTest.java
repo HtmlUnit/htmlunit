@@ -153,7 +153,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final URL expectedUrl = new URL("http://www.gargoylesoftware.com/formSubmit");
         final URL actualUrl = secondPage.getWebResponse().getUrl();
-        assertEquals("url", expectedUrl.toExternalForm(), actualUrl.toExternalForm());
+        assertEquals("url", expectedUrl, actualUrl);
         assertEquals("method", SubmitMethod.POST, webConnection.getLastMethod());
         assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);
@@ -547,38 +547,28 @@ public class HtmlPageTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final String urlString = URL_GARGOYLE.toExternalForm();
-        final HtmlPage page = (HtmlPage) client.getPage(new URL(urlString));
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
 
-        assertEquals(urlString, page.getFullyQualifiedUrl("").toExternalForm());
-        assertEquals(urlString + "foo", page.getFullyQualifiedUrl("foo").toExternalForm());
-        assertEquals("http://foo.com/bar", page
-                .getFullyQualifiedUrl("http://foo.com/bar")
-                .toExternalForm());
-        assertEquals("mailto:me@foo.com", page
-                .getFullyQualifiedUrl("mailto:me@foo.com")
-                .toExternalForm());
+        assertEquals(urlString, page.getFullyQualifiedUrl(""));
+        assertEquals(urlString + "foo", page.getFullyQualifiedUrl("foo"));
+        assertEquals("http://foo.com/bar", page.getFullyQualifiedUrl("http://foo.com/bar"));
+        assertEquals("mailto:me@foo.com", page.getFullyQualifiedUrl("mailto:me@foo.com"));
 
-        assertEquals(urlString + "foo", page.getFullyQualifiedUrl("foo").toExternalForm());
-        assertEquals(urlString + "bbb", page.getFullyQualifiedUrl("aaa/../bbb").toExternalForm());
-        assertEquals(urlString + "c/d", page.getFullyQualifiedUrl("c/./d").toExternalForm());
+        assertEquals(urlString + "foo", page.getFullyQualifiedUrl("foo"));
+        assertEquals(urlString + "bbb", page.getFullyQualifiedUrl("aaa/../bbb"));
+        assertEquals(urlString + "c/d", page.getFullyQualifiedUrl("c/./d"));
 
         final HtmlPage secondPage = (HtmlPage) client
                 .getPage(new URL(urlString + "/foo/bar?a=b&c=d"));
-        assertEquals(urlString + "foo/bar", secondPage.getFullyQualifiedUrl("").toExternalForm());
-        assertEquals(urlString + "foo/one", secondPage.getFullyQualifiedUrl("one").toExternalForm());
-        assertEquals(urlString + "two", secondPage.getFullyQualifiedUrl("/two").toExternalForm());
-        assertEquals(urlString + "foo/two?a=b", secondPage
-                .getFullyQualifiedUrl("two?a=b")
-                .toExternalForm());
+        assertEquals(urlString + "foo/bar", secondPage.getFullyQualifiedUrl(""));
+        assertEquals(urlString + "foo/one", secondPage.getFullyQualifiedUrl("one"));
+        assertEquals(urlString + "two", secondPage.getFullyQualifiedUrl("/two"));
+        assertEquals(urlString + "foo/two?a=b", secondPage.getFullyQualifiedUrl("two?a=b"));
 
         final HtmlPage thirdPage = (HtmlPage) client.getPage(new URL(
                 "http://foo.com/dog/cat/one.html"));
-        assertEquals("http://foo.com/dog/cat/one.html", thirdPage
-                .getFullyQualifiedUrl("")
-                .toExternalForm());
-        assertEquals("http://foo.com/dog/cat/two.html", thirdPage
-                .getFullyQualifiedUrl("two.html")
-                .toExternalForm());
+        assertEquals("http://foo.com/dog/cat/one.html", thirdPage.getFullyQualifiedUrl(""));
+        assertEquals("http://foo.com/dog/cat/two.html", thirdPage.getFullyQualifiedUrl("two.html"));
     }
     /**
      * @throws Exception if the test fails
@@ -590,18 +580,14 @@ public class HtmlPageTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        assertEquals("http://second", page.getFullyQualifiedUrl("").toExternalForm());
-        assertEquals("http://second/foo", page.getFullyQualifiedUrl("foo").toExternalForm());
-        assertEquals("http://foo.com/bar", page
-                .getFullyQualifiedUrl("http://foo.com/bar")
-                .toExternalForm());
-        assertEquals("mailto:me@foo.com", page
-                .getFullyQualifiedUrl("mailto:me@foo.com")
-                .toExternalForm());
+        assertEquals("http://second", page.getFullyQualifiedUrl(""));
+        assertEquals("http://second/foo", page.getFullyQualifiedUrl("foo"));
+        assertEquals("http://foo.com/bar", page.getFullyQualifiedUrl("http://foo.com/bar"));
+        assertEquals("mailto:me@foo.com", page.getFullyQualifiedUrl("mailto:me@foo.com"));
 
-        assertEquals("http://second/foo", page.getFullyQualifiedUrl("foo").toExternalForm());
-        assertEquals("http://second/bbb", page.getFullyQualifiedUrl("aaa/../bbb").toExternalForm());
-        assertEquals("http://second/c/d", page.getFullyQualifiedUrl("c/./d").toExternalForm());
+        assertEquals("http://second/foo", page.getFullyQualifiedUrl("foo"));
+        assertEquals("http://second/bbb", page.getFullyQualifiedUrl("aaa/../bbb"));
+        assertEquals("http://second/c/d", page.getFullyQualifiedUrl("c/./d"));
     }
 
     /**
@@ -825,7 +811,7 @@ public class HtmlPageTest extends WebTestCase {
 
         // avoid using equals() on URL because it takes to much time (due to ip resolution)
         assertEquals("first", collectedItems.get(0));
-        assertEquals(URL_FIRST.toExternalForm(), ((URL) collectedItems.get(1)).toExternalForm());
+        assertEquals(URL_FIRST, (URL) collectedItems.get(1));
         assertEquals(new Integer(1), collectedItems.get(2));
     }
 
@@ -951,7 +937,7 @@ public class HtmlPageTest extends WebTestCase {
 
         // avoid using equals() on URL because it takes to much time (due to ip resolution)
         assertEquals("first", collectedItems.get(0));
-        assertEquals(URL_SECOND.toExternalForm(), ((URL) collectedItems.get(1)).toExternalForm());
+        assertEquals(URL_SECOND, ((URL) collectedItems.get(1)));
         assertEquals(new Integer(3), collectedItems.get(2));
     }
 

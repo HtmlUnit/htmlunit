@@ -91,7 +91,7 @@ public final class HtmlInputTest extends WebTestCase {
         final HtmlPage secondPage = ( HtmlPage )pushButton.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?foo=2&button=foo", 
-                secondPage.getWebResponse().getUrl().toExternalForm());
+                secondPage.getWebResponse().getUrl());
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
         assertNotNull( secondPage );
     }
