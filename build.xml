@@ -109,11 +109,49 @@
 
 
 <target name="junit" description="junit">
-    <java fork="true" classname="junit.textui.TestRunner" dir="target/test-classes">
-        <arg value="com.gargoylesoftware.htmlunit.MainTestSuite"/>
+    <property name="test.data.dir" location="target/junit-data"/>
+    <property name="test.reports.dir" location="target/junit-reports"/>
+    
+    <delete dir="${test.data.dir}"/>
+    <mkdir dir="${test.data.dir}"/>
+        
+    <junit fork="true" forkmode="perBatch" 
+            errorProperty="test.failed" failureProperty="test.failed">
         <classpath refid="base.class.path"/>
         <classpath refid="test.class.path"/>
-    </java>
+        <formatter type="brief" usefile="false"/>
+        <formatter type="xml"/>
+
+        <batchtest todir="${test.data.dir}">
+            <fileset dir="target/test-classes">
+                <include name="**/*Test.class"/>
+                <exclude name="**/*$*.class"/>
+                <exclude name="**/JellyTest.class"/>
+            </fileset>
+        </batchtest>        
+        <batchtest todir="${test.data.dir}">
+            <fileset dir="target/test-classes">
+                <include name="**/JellyTest.class"/>
+                <exclude name="**/*$*.class"/>
+            </fileset>
+        </batchtest>
+    </junit>
+    
+    <delete dir="${test.reports.dir}"/> 
+    <mkdir dir="${test.reports.dir}"/>
+    <junitreport todir="${test.reports.dir}" tofile="DeleteMe.xml">
+        <fileset dir="${test.data.dir}">
+            <include name="TEST-*.xml"/>
+        </fileset>
+        <report format="frames" todir="${test.reports.dir}/junit"/>
+    </junitreport>
+    <delete file="${test.reports.dir}/DeleteMe.xml" />    
+    <echo>
+**********************
+JUnit results available here: ${test.reports.dir}/junit/index.html
+**********************
+    </echo>
+    <fail if="test.failed">Tests have failed!!</fail>
 </target>
 
 <target name="junitui" description="junitui">
