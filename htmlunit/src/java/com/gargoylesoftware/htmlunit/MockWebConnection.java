@@ -146,6 +146,7 @@ public class MockWebConnection extends WebConnection {
      * @param  parameters Any parameters
      * @param  requestParameters Any headers that need to be put into the request.
      * @return  See above
+     * @throws IOException (only for extending classes)
      */
     public WebResponse getResponse(
         final URL url,
@@ -165,6 +166,7 @@ public class MockWebConnection extends WebConnection {
      * @param  parameters Any parameters
      * @param  requestHeaders Any headers that need to be put into the request.
      * @return  See above
+     * @throws IOException (only for extending classes)
      */
     public WebResponse getResponse(
             final URL url,
