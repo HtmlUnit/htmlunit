@@ -31,21 +31,25 @@
 	<p>
 		<dl>
 			<dt>Latest stable release</dt>
-			<dd>Version <b>1.0</b>: |
-				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.0.zip?download">Download</a> |
-				<a href="docs-1.0/index.html">General documentation</a> |
-				<a href="docs-1.0/api/index.html">Javadoc API documentation</a> |
-				<a href="docs-1.0/faq.html">FAQ</a> |
+			<dd>Version <b>1.0</b>
+				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.0.zip?download">Download</a>
+				<note>
+					Technically, 1.0 is the last stable release but there have been so many
+					bug fixes and enhancements on the 1.1 stream that I can't honestly recommend
+					that anyone use 1.0 anymore.  The only "unstable" part of the 1.1 stream
+					right now is the javascript support so the "most stable" release at this point
+					would be 1.1pre5 with javascript disabled (just don't put js.jar in the
+					classpath).
+				</note>
 			</dd>
 		</dl>
 	</p>
 	<p>
 		<dl>
 			<dt>Current development release</dt>
-			<dd>Version <b>1.1pre4</b>: |
-				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.1-pre4.zip?download">Download</a> |
-				<a href="docs-1.1/index.html">General documentation</a> |
-				<a href="docs-1.1/api/index.html">Javadoc API documentation</a> |
+			<dd>Version <b>1.1pre5</b>: |
+				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.1-pre5.zip?download">Download</a> |
+				<a href="api/index.html">Javadoc API documentation</a> |
 				<a href="changes.html">Change history</a> |
 				<br />
 			</dd>
@@ -131,11 +135,16 @@
 			<dd><a href="http://jakarta.apache.org/commons/logging.html">Logging
 			from Apache</a></dd>
 
-			<dt>Tidy.jar</dt>
-			<dd><a href="http://sourceforge.net/projects/jtidy">JTidy</a>, a tool to convert
-			badly written html into proper xml so that we can build a DOM tree for it</dd>
+			<dt>nekohtml.jar [Version 0.6.6]</dt>
+			<dd><a href="http://www.apache.org/~andyc/neko/doc/html/index.html">
+			NekoHTML</a> is a tool to convert badly written html into an xml
+			dom model</dd>
 
-			<dt>js.jar</dt>
+			<dt>xercesImpl.jar and xmlParserAPIs.jar [Version 2.1.0]</dt>
+			<dd>The<a href="http://xml.apache.org/xerces2-j/index.html">
+			Xerces</a> xml parser from Apache. </dd>
+
+			<dt>js.jar [Version 1.5R3]</dt>
 			<dd><a href="http://www.mozilla.org/rhino">Rhino</a>,
 			a javascript engine from the Mozilla project.  This jar is optional - if it isn't
 			found then javascript support will be disabled but the rest of HtmlUnit will
@@ -148,6 +157,9 @@
 			an earlier version of Java, then you can
 			<a href="http://java.sun.com/products/jsse">download</a> the JSSE from the Sun website.
 		</note>
+		<warning>
+			JTidy has been removed from the build and replaced with NekoHTML and Xerces
+		</warning>
 	</p>
 </section>
 

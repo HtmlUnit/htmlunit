@@ -191,6 +191,18 @@
 	/>
 
 	<echo message=""/>
+	<echo message="Doing a final sanity check to ensure that everything that is needed has been put in the dist directory"/>
+
+	<java fork="true" classname="com.gargoylesoftware.htmlunit.Version">
+		<arg value="-SanityCheck"/>
+		<classpath>
+			<fileset dir="build/${version}/lib">
+				<include name="**/*.jar"/>
+			</fileset>
+		</classpath>
+	</java>
+
+	<echo message=""/>
 	<echo message="************************************************************"/>
 	<echo message="Full packaged build is dist/${version}.zip"/>
 	<echo message="Zipped documentation is dist/projectdocs.zip"/>
