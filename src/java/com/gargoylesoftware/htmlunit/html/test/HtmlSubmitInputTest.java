@@ -96,4 +96,34 @@ public class HtmlSubmitInputTest extends WebTestCase {
 
         assertSame( page, secondPage );
     }
+
+
+    public void testClick_onClick_JavascriptReturnsTrue() throws Exception {
+
+        final String firstContent
+                 = "<html><head><title>First</title></head><body>"
+                 + "<form name='form1' method='get' action='http://second'>"
+                 + "<input name='button' type='submit' value='PushMe' id='button1'"
+                 + "onclick='return true'/></form>"
+                 + "</body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://second"),secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+
+        client.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(
+                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlSubmitInput input = (HtmlSubmitInput)firstPage.getHtmlElementById("button1");
+        final HtmlPage secondPage = (HtmlPage)input.click();
+        assertEquals("Second", secondPage.getTitleText());
+    }
 }
