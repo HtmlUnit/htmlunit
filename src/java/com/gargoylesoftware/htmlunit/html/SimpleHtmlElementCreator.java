@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import org.w3c.dom.Element;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -32,9 +33,8 @@ class SimpleHtmlElementCreator extends HtmlElementCreator {
                 new Class[]{HtmlPage.class, Element.class});
         }
         catch( final NoSuchMethodException e ) {
-            getLog().error("Exception when getting constructor for class["+clazz.getName()+"]",e);
-            throw new IllegalStateException(
-                "Unable to get constuctor for class ["+clazz.getName()+"].  See log for details");
+            throw new ObjectInstantiationException(
+                "Unable to get constuctor for class ["+clazz.getName()+"]", e);
         }
     }
 
@@ -51,24 +51,16 @@ class SimpleHtmlElementCreator extends HtmlElementCreator {
             return (HtmlElement)constructor_.newInstance( new Object[]{page, xmlElement});
         }
         catch( final IllegalAccessException e) {
-            getLog().error("IllegalAccessException when calling constructor["+constructor_+"]",e);
-            throw new IllegalStateException(
-                "IllegalAccessException when calling constructor ["+constructor_
-                +"].  See log for details");
+            throw new ObjectInstantiationException(
+                "Exception when calling constructor ["+constructor_+"]", e);
         }
         catch( final InstantiationException e ) {
-            getLog().error("InstantiationException when calling constructor["+constructor_+"]",e);
-            throw new IllegalStateException(
-                "InstantiationException when calling constructor ["+constructor_
-                +"].  See log for details");
+            throw new ObjectInstantiationException(
+                "Exception when calling constructor ["+constructor_+"]", e);
         }
         catch( final InvocationTargetException e ) {
-            getLog().error(
-                "InvocationTargetException when calling constructor["+constructor_
-                +"]",e.getTargetException());
-            throw new IllegalStateException(
-                "InvocationTargetException when calling constructor ["+constructor_
-                +"].  See log for details");
+            throw new ObjectInstantiationException(
+                "Exception when calling constructor ["+constructor_+"]", e.getTargetException());
         }
     }
 
