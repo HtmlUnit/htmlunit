@@ -50,6 +50,20 @@ public final class HtmlPage
          extends HtmlElement
          implements Page {
 
+    /**
+     * Custom subclass used to provide access to some protected variables.
+     */
+    class MyParser extends DOMParser {
+        public HTMLConfiguration getConfiguration() {
+            return (HTMLConfiguration)fConfiguration;
+        }
+        public Document getDocument() {
+            return fDocument;
+        }
+    }
+    /** The parser that is used to create the initial dom tree */
+    private MyParser xmlParser_;
+    
     private final WebClient webClient_;
     private final URL originatingUrl_;
     private final Map elements_ = new HashMap( 89 );
@@ -210,25 +224,22 @@ public final class HtmlPage
 
         final InputStream inputStream = webResponse.getContentAsStream();
 
-        class MyParser extends DOMParser {
-            public HTMLConfiguration getConfiguration() {
-                return (HTMLConfiguration)fConfiguration;
-            }
-        };
-        final MyParser parser = new MyParser();
-
+        xmlParser_ = new MyParser();
+        
         try {
             XMLDocumentFilter[] filters = {
-                new ScriptFilter( parser.getConfiguration(), this )
+                new ScriptFilter( xmlParser_.getConfiguration(), this )
             };
-            parser.setProperty( "http://cyberneko.org/html/properties/filters", filters );
+            xmlParser_.setProperty( "http://cyberneko.org/html/properties/filters", filters );
+            
+            xmlParser_.setFeature( "http://cyberneko.org/html/features/augmentations", true );
+            xmlParser_.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
+            xmlParser_.setFeature("http://cyberneko.org/html/features/report-errors", true);
 
-            parser.setFeature( "http://cyberneko.org/html/features/augmentations", true );
-            parser.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
-            parser.setFeature("http://cyberneko.org/html/features/report-errors", true);
-
-            parser.parse( new InputSource(inputStream) );
-            return parser.getDocument();
+            xmlParser_.parse( new InputSource(inputStream) );
+            final Document document = xmlParser_.getDocument();
+            xmlParser_ = null;
+            return document;
         }
         catch( final SAXException e ) {
             throw new ObjectInstantiationException("Unable to parse html input", e);
@@ -236,6 +247,13 @@ public final class HtmlPage
     }
 
 
+    public Element getElement() {
+        final Element element = super.getElement();
+        if( element == null && xmlParser_ != null ) {
+            return xmlParser_.getDocument().getDocumentElement();
+        }
+        return element;
+    }
     /**
      *  Return the HtmlAnchor with the specified name
      *

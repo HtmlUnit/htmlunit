@@ -28,7 +28,7 @@ import org.mozilla.javascript.Scriptable;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public final class Document extends HTMLElement {
-    private NativeArray allForms_;
+//    private NativeArray allForms_;
     private DocumentAllArray allArray_;
 
 
@@ -51,6 +51,7 @@ public final class Document extends HTMLElement {
      * Initialize this object
      */
     public void initialize() {
+        /* 
         final List jsForms = new ArrayList();
 
         final List formElements
@@ -76,7 +77,7 @@ public final class Document extends HTMLElement {
             final String name = array[i].getHtmlElementOrDie().getAttributeValue("name");
             allForms_.defineProperty(name, array[i], attributes);
         }
-
+        */
         allArray_ = (DocumentAllArray)makeJavaScriptObject("DocumentAllArray");
         allArray_.initialize( (HtmlPage)getHtmlElementOrDie() );
     }
@@ -96,7 +97,38 @@ public final class Document extends HTMLElement {
      * @return The value of this attribute.
      */
     public NativeArray jsGet_forms() {
-        return allForms_;
+        // TODO: Once the page has been fully loaded, there's no need to 
+        // rebuild this array every time.  It could be cached at that point.
+        
+        final List jsForms = new ArrayList();
+
+        final List formElements
+            = getHtmlPage().getHtmlElementsByTagNames( Collections.singletonList("form") );
+        final Iterator iterator = formElements.iterator();
+        while( iterator.hasNext() ) {
+            final HtmlForm htmlForm = (HtmlForm)iterator.next();
+            final String formName = htmlForm.getAttributeValue("name");
+            if( formName.length() != 0 ) {
+                Form jsForm = (Form)htmlForm.getScriptObject();
+                if( jsForm == null ) {                
+                    jsForm = (Form)makeJavaScriptObject("Form");
+                    jsForm.setHtmlElement( htmlForm );
+                    jsForm.initialize();
+                }
+                jsForms.add(jsForm);
+            }
+        }
+
+        final int attributes = READONLY;
+        final Form[] array = new Form[jsForms.size()];
+        jsForms.toArray(array);
+        final NativeArray allForms = new NativeArray(array);
+        for( int i=0; i<array.length; i++ ) {
+            final String name = array[i].getHtmlElementOrDie().getAttributeValue("name");
+            allForms.defineProperty(name, array[i], attributes);
+        }
+        
+        return allForms;
     }
 
 
@@ -219,5 +251,41 @@ public final class Document extends HTMLElement {
         return result;
     }
 
+    /**
+     * Return the specified property or NOT_FOUND if it could not be found. This is 
+     * overridden to check to see if the name belongs to a form within this document.
+     * @param name The name of the property
+     * @param start The scriptable object that was originally queried for this property
+     * @return The property.
+     */
+    public Object get( final String name, final Scriptable start ) {
+        // Some calls to get will happen during the initialization of the superclass.
+        // At this point, we don't have enough information to do our own initialization
+        // so we have to just pass this call through to the superclass.
+        final HtmlPage htmlPage = (HtmlPage)getHtmlElementOrNull();
+        if( htmlPage == null ) {
+            return super.get(name, start);
+        }
+        
+        try {
+            final HtmlForm htmlForm = htmlPage.getFormByName(name);
+            Form jsForm = (Form)htmlForm.getScriptObject();
+            if( jsForm == null ) {
+                // Create new one here.
+                jsForm = (Form)makeJavaScriptObject("Form");
+                jsForm.setHtmlElement( htmlForm );
+                jsForm.initialize();
+                return jsForm;
+            }
+            else {
+                return jsForm;
+            }
+        }
+        catch( final ElementNotFoundException e ) {
+            // There are no forms with the specified name so pass the request
+            // up to the superclass.
+            return super.get(name, start);
+        }
+    }
 }
 

@@ -99,7 +99,7 @@ public abstract class HtmlElement {
      *
      * @return  The node
      */
-    public final Element getElement() {
+    public Element getElement() {
         return element_;
     }
 
@@ -374,6 +374,10 @@ public abstract class HtmlElement {
      */
     protected Iterator getXmlChildElements() {
         final Element rootElement = getElement();
+        if( rootElement == null ) {
+            throw new IllegalStateException(
+                "The xml element hasn't been set for this object.");
+        }
         return new Iterator() {
             private Element nextElement_ = getFirstChildElement(rootElement);
             public boolean hasNext() {

@@ -232,6 +232,16 @@ public class SimpleScriptable extends ScriptableObject {
      }
 
 
+    /**
+     * Return the html element that corresponds to this javascript object
+     * or null if an element hasn't been set.
+     * @return The html element or null
+     */
+     public final HtmlElement getHtmlElementOrNull() {
+         return htmlElement_;
+     }
+
+
      /**
       * Set the html element that corresponds to this javascript object
       * @param htmlElement The html element
