@@ -187,6 +187,7 @@
 		<function name="onblur"/>
 	</class>
 
+	<class name="Option" extends="HTMLElement"/><!-- NOT FINISHED -->
 	<class name="Password" extends="Input"/><!-- NOT FINISHED -->
 	<class name="Radio" extends="Input"/><!-- NOT FINISHED -->
 	<class name="Reset" extends="Input"/><!-- NOT FINISHED -->
