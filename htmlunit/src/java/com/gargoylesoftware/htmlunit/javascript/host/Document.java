@@ -723,5 +723,16 @@ public final class Document extends NodeImpl {
         }
         return getDomNodeOrDie().getReadyState();
     }
+
+    /**
+     * The domain name of the server that served the document, 
+     * or null if the server cannot be identified by a domain name.
+     * @return domain name
+     * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147">
+     * W3C documentation</a>
+     */
+    public String jsGet_domain() {
+    	return getHtmlPage().getWebResponse().getUrl().getHost();
+    }
 }
 

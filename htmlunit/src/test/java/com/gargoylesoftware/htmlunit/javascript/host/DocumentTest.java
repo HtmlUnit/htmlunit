@@ -1981,4 +1981,25 @@ public class DocumentTest extends WebTestCase {
 
          assertEquals( expectedAlerts, collectedAlerts );
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDomain() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.domain);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "www.gargoylesoftware.com"
+         } );
+
+         final List collectedAlerts = new ArrayList();
+         loadPage(content, collectedAlerts);
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
 }
