@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
+ * @author Marc Guillemot
  */
 public abstract class HtmlInput extends FocusableElement implements DisabledElement, SubmittableElement {
 
@@ -85,10 +86,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         Assert.notNull( "newValue", newValue );
         setAttributeValue( "value", newValue );
 
-        final String onChange = getOnChangeAttribute();
-        if( onChange.length() != 0 ) {
-            getPage().executeJavaScriptIfPossible(onChange, "onChange handler", true, this);
-        }
+        getPage().executeOnChangeHandlerIfAppropriate(this);
     }
 
 

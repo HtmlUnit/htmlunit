@@ -37,22 +37,24 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 
 /**
@@ -60,6 +62,7 @@ import java.util.List;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public class InputTest extends WebTestCase {
     /**
@@ -412,5 +415,32 @@ public class InputTest extends WebTestCase {
             new KeyValuePair("button1", "pushme")
         });
         assertEquals(expectedParameters, connection.getLastParameters()); 
+    }    
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testOnChange() throws Exception {
+        final String htmlContent = "<html><head><title>foo</title>"
+            + "</head><body>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + " <input type='text' name='text1' onchange='alert(this.value)'>"
+            + "<input name='myButton' type='button' onclick='document.form1.text1.value=\"from button\"'>"
+            + "</form>"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+
+        final HtmlForm form = page.getFormByName("form1");
+        final HtmlTextInput textinput = (HtmlTextInput) form.getInputByName("text1");
+        textinput.setValueAttribute("foo");
+        final HtmlButtonInput button = (HtmlButtonInput) form.getInputByName("myButton");
+        button.click();
+        assertEquals("from button", textinput.getValueAttribute());
+
+        final List expectedAlerts = Arrays.asList(new String[] {"foo"});
+        assertEquals(expectedAlerts, collectedAlerts);
     }    
 }

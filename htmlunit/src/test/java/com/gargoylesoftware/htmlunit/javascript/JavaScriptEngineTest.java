@@ -81,6 +81,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author Noboru Sinohara
  * @author  Darrell DeBoer
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Marc Guillemot
  */
 public class JavaScriptEngineTest extends WebTestCase {
     /**
@@ -846,6 +847,9 @@ public class JavaScriptEngineTest extends WebTestCase {
         /** @return The number of times that this engine has executed code */
         public int getExecutionCount() {
             return scriptExecutionCount_;
+        }
+        public boolean isScriptRunning() {
+            return false;
         }
     }
 }

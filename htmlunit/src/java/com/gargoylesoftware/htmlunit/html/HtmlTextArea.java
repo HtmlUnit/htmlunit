@@ -123,10 +123,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         oldText_ = (DomText)getFirstChild();
         setFirstChild(new DomText(getPage(), newValue));
 
-        final String onChange = getOnChangeAttribute();
-        if( onChange.length() != 0 ) {
-            getPage().executeJavaScriptIfPossible(onChange, "onChange handler", true, this);
-        }
+        getPage().executeOnChangeHandlerIfAppropriate(this);
     }
 
 

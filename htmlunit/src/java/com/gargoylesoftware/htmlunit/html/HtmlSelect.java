@@ -37,17 +37,16 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptResult;
-
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Collections;
 
 
 /**
@@ -59,6 +58,7 @@ import java.util.Collections;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
+ * @author Marc Guillemot
  */
 public class HtmlSelect extends FocusableElement implements DisabledElement, SubmittableElement {
 
@@ -293,15 +293,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             }
         }
 
-        final HtmlPage page = getPage();
-        final String onChange = getOnChangeAttribute();
-
-        if( onChange.length() != 0 && page.getWebClient().isJavaScriptEnabled() ) {
-            final ScriptResult scriptResult
-                = page.executeJavaScriptIfPossible( onChange, "onChange handler", true, this );
-            return scriptResult.getNewPage();
-        }
-        return page;
+        return getPage().executeOnChangeHandlerIfAppropriate(this);
     }
 
 
