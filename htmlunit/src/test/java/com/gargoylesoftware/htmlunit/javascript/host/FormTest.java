@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
 /**
  * Tests for Form
@@ -59,6 +60,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
+ * @author Marc Guillemot
  */
 public class FormTest extends WebTestCase {
     /**
@@ -610,4 +612,26 @@ public class FormTest extends WebTestCase {
     }
 
 
+    /**
+    * @throws Exception if the test fails
+    */
+    public void testLostFunction() throws Exception {
+
+        final String content
+                = "<html><head><title>foo</title><script>"
+                + " function onSubmit() { alert('hi!'); return false; }"
+                + "</script></head><body>"
+                + "<form onsubmit='return onSubmit();'>"
+                + " <input type='submit' id='clickMe' />"
+                + "</form>"
+                + "</body></html>";
+    
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlSubmitInput button = (HtmlSubmitInput)
+        page.getHtmlElementById("clickMe");
+        button.click();
+        final List expectedAlerts = Collections.singletonList("hi!");
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

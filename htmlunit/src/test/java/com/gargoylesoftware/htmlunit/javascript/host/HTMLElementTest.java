@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Chris Erskine
  * @author David D. Kilzer
  * @author Daniel Gredler
+ * @author Marc Guillemot
  * @version $Revision$
  */
 public class HTMLElementTest extends WebTestCase {
@@ -75,14 +76,15 @@ public class HTMLElementTest extends WebTestCase {
                 "    <title>test</title>\n" +
                 "    <script>\n" +
                 "    function doTest(){\n" +
-                "       var myNode = document.getElementById(\'myNode\');\n" +
+                "       var myNode = document.getElementById('myNode');\n" +
                 "       alert(myNode.title);\n" +
                 "       alert(myNode.getAttribute('title'));\n" +
+                "       alert(myNode.Title);\n" +
                 "   }\n" +
                 "    </script>\n" +
                 "</head>\n" +
-                "<body onload=\'doTest()\'>\n" +
-                "<p id=\'myNode\' title=\'a\'>\n" +
+                "<body onload='doTest()'>\n" +
+                "<p id='myNode' title='a'>\n" +
                 "</p>\n" +
                 "</body>\n" +
                 "</html>\n" +
@@ -92,7 +94,7 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals("test", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList(new String[]{
-            "a", "a"
+            "a", "a", "undefined"
         });
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -107,15 +109,18 @@ public class HTMLElementTest extends WebTestCase {
                 "    <title>test</title>\n" + 
                 "    <script>\n" + 
                 "    function doTest(){\n" + 
-                "       var myNode = document.getElementById(\'myNode\');\n" + 
+                "       var myNode = document.getElementById('myNode');\n" + 
                 "       alert(myNode.title);\n" + 
-                "       myNode.setAttribute(\'title\', \'b\');\n" + 
+                "       myNode.setAttribute('title', 'b');\n" + 
                 "       alert(myNode.title);\n" + 
+                "       alert(myNode.Title);\n" + 
+                "       myNode.Title = 'foo';\n" + 
+                "       alert(myNode.Title);\n" + 
                 "   }\n" + 
                 "    </script>\n" + 
                 "</head>\n" + 
-                "<body onload=\'doTest()\'>\n" + 
-                "<p id=\'myNode\' title=\'a\'>\n" + 
+                "<body onload='doTest()'>\n" + 
+                "<p id='myNode' title='a'>\n" + 
                 "</p>\n" + 
                 "</body>\n" + 
                 "</html>\n" + 
@@ -125,7 +130,7 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals("test", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList(new String[]{
-            "a", "b"
+            "a", "b", "undefined", "foo"
         });
 
         assertEquals(expectedAlerts, collectedAlerts);
