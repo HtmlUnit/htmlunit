@@ -165,5 +165,11 @@ public class Input extends HTMLElement {
             xmlElement.removeAttribute("disabled");
         }
     }
+
+
+    public String jsGet_tabindex() {
+        getLog().debug("Input.jsGet_tabindex not implemented");
+        return "";
+    }
 }
 
