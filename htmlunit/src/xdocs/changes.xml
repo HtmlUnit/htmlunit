@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="mguillem">
+                Added support for JS document.links.
+            </action>
             <action type="update" dev="mguillem" id="1067396">
                 IFrames can now be seen in JS as an html element too. Expressions like window.myIFrame.style.display now work.
             </action>
