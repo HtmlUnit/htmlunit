@@ -47,7 +47,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  */
 public class Anchor extends FocusableHostElement {
 
-    /**
+    private static final long serialVersionUID = -816365374422492967L;
+
+	/**
      * Create an instance.
      */
     public Anchor() {

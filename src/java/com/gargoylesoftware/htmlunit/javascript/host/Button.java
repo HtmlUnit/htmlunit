@@ -46,7 +46,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  */
 public class Button extends Input {
 
-    /**
+    private static final long serialVersionUID = -3163222167146343119L;
+
+
+	/**
      * Create an instance.
      */
     public Button() {

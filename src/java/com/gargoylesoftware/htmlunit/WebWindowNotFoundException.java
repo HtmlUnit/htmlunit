@@ -45,7 +45,8 @@ package com.gargoylesoftware.htmlunit;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class WebWindowNotFoundException extends RuntimeException {
-    private final String name_;
+    private static final long serialVersionUID = 2971032116624875170L;
+	private final String name_;
 
 
     /**

@@ -53,7 +53,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HTMLElement extends NodeImpl {
-    private Style style_;
+    private static final long serialVersionUID = -6864034414262085851L;
+	private Style style_;
 
      /**
       * Create an instance.

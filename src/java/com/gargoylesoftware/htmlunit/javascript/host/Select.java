@@ -56,7 +56,8 @@ import com.gargoylesoftware.htmlunit.javascript.OptionsArray;
  */
 public class Select extends Input {
 
-    private OptionsArray optionsArray_;
+    private static final long serialVersionUID = 4332789476842114628L;
+	private OptionsArray optionsArray_;
 
     /**
      * Create an instance.

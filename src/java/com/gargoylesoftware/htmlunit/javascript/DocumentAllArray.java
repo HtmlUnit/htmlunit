@@ -59,7 +59,8 @@ import org.mozilla.javascript.Scriptable;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class DocumentAllArray extends SimpleScriptable {
-    private HtmlPage htmlPage_;
+    private static final long serialVersionUID = 898458356155974768L;
+	private HtmlPage htmlPage_;
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.

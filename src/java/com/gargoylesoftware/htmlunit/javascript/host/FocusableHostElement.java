@@ -49,7 +49,10 @@ import com.gargoylesoftware.htmlunit.html.FocusableElement;
  */
 public class FocusableHostElement extends HTMLElement {
 
-    /**
+    private static final long serialVersionUID = 1978408728249963149L;
+
+
+	/**
      * Remove focus from this element.
      */
     public void jsFunction_blur() {

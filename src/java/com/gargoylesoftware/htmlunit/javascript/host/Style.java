@@ -54,7 +54,8 @@ import org.mozilla.javascript.Scriptable;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class Style extends SimpleScriptable {
-    private HTMLElement jsElement_;
+    private static final long serialVersionUID = -1976370264911039311L;
+	private HTMLElement jsElement_;
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.

@@ -47,7 +47,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  */
 public class Textarea extends Input {
 
-    /**
+    private static final long serialVersionUID = 49352135575074390L;
+
+
+	/**
      * Create an instance.
      */
     public Textarea() {
