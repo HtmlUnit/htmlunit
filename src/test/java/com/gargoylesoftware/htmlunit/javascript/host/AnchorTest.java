@@ -134,4 +134,36 @@ public class AnchorTest extends WebTestCase {
         
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDefaultConversionToString() throws Exception {
+        final String content
+             = "<html><head><title>AnchorTest</title><script>\n"
+             + "function test() {\n"
+             + "  alert(document.getElementById('myAnchor'));\n"
+             + "  for (var i=0; i<document.links.length; ++i)"
+             + "  {\n"
+             + "    alert(document.links[i]);\n"
+             + "  }\n"
+             + "}</script></head>"
+             + "<body onload='test()'>"
+             + "<a name='start' id='myAnchor'/>"
+             + "<a href='foo.html'>foo</a>"
+             + "<a href='javascript:void(0)'>void</a>"
+             + "<a href='#'>#</a>"
+             + "</body></html>";
+        
+        
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList( new String[]{ "", 
+                "http://www.gargoylesoftware.com/foo.html",
+                "javascript:void(0)",
+                "http://www.gargoylesoftware.com/#"} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }
