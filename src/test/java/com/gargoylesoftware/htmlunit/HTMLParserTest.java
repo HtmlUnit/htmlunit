@@ -113,7 +113,7 @@ public class HTMLParserTest extends TestCase {
         //find the copyright string
         HtmlUnitXPath xpath = new HtmlUnitXPath("//div[@id='footer']/table/tr[2]/td");
         String stringVal = xpath.stringValueOf(page).trim();
-        assertEquals("\u00A9 2002-2003, Gargoyle Software Inc.", stringVal);
+        assertEquals("\u00A9 2002-2004, Gargoyle Software Inc.", stringVal);
 
         //see if the Google adds were added via Javascript
         xpath = new HtmlUnitXPath("//iframe[@name = 'google_ads_frame']");
