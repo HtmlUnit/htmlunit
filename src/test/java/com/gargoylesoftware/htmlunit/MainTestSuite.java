@@ -86,6 +86,7 @@ public class MainTestSuite extends RecursiveTestSuite {
         System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpState", "info");
         System.getProperties().put(prefix+"org.apache.commons.httpclient.ResponseInputStream", "info");
         System.getProperties().put(prefix+"org.apache.commons.httpclient.cookie.CookieSpec", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.methods.GetMethod", "info");
+		System.getProperties().put(prefix+"org.apache.commons.httpclient.methods.GetMethod", "info");
+		System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpMethodBase", "info");
     }
 }
