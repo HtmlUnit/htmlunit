@@ -94,6 +94,25 @@ public class HTMLElement extends NodeImpl {
 
 
     /**
+     * Return the element ID.
+     * @return The ID of this element.
+     */
+    public String jsGet_id() {
+        return getHtmlElementOrDie().getId();
+    }
+
+
+    /**
+     * Set the identifier this element.
+     *
+     * @param newId The new identifier of this element.
+     */
+    public void jsSet_id( final String newId ) {
+        getHtmlElementOrDie().setId( newId );
+    }
+
+
+    /**
      * Return true if this element is disabled.
      * @return True if this element is disabled.
      */

@@ -608,7 +608,81 @@ public class DocumentTest extends WebTestCase {
              + "    alert(top.document.getElementById('input1').value);\n"
              + "}\n"
              + "</script></head><body onload='doTest()'>"
-             + "<form id='form1'><input id='input1' name='foo' type='text' value='bar' /></form>"
+             + "<form id='form1'>"
+             + "<input id='input1' name='foo' type='text' value='bar' />"
+             + "</form>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("bar");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetElementById_resetId() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var input1=top.document.getElementById('input1');\n"
+             + "    input1.id='newId';\n"
+             + "    alert(top.document.getElementById('newId').value);\n"
+             + "    alert(top.document.getElementById('input1'));\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<form id='form1'>"
+             + "<input id='input1' name='foo' type='text' value='bar' />"
+             + "</form>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList( new String[] {
+            "bar", "null"} );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetElementById_setNewId() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var div1=top.document.getElementById('div1');\n"
+             + "    div1.nextSibling.id='newId';\n"
+             + "    alert(top.document.getElementById('newId').value);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<form id='form1'>"
+             + "<div id='div1'/><input name='foo' type='text' value='bar' />"
+             + "</form>"
              + "</body></html>";
 
         webConnection.setResponse(
