@@ -43,9 +43,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * A container for all the javascript configuration information.
  *
@@ -87,18 +84,12 @@ public final class ClassConfiguration {
         init(classname, implementingClass, "");
     }
 
-    
-    private static Log getLog() {
-        return LogFactory.getLog(ClassConfiguration.class);
-    }
-
     private void init(final String classname, final String implementingClass, final String extendedClass) 
         throws ClassNotFoundException {
         className_ = classname;
-        this.extendedClass_ = extendedClass;
+        extendedClass_ = extendedClass;
         linkedClass_ = Class.forName(implementingClass);
     }
-    
     
     /**
      * @return Returns the className.
@@ -106,12 +97,14 @@ public final class ClassConfiguration {
     public String getClassName() {
         return className_;
     }
+
     /**
      * @param className The className to set.
      */
-    public void setClassName(String className) {
-        this.className_ = className;
+    public void setClassName(final String className) {
+        className_ = className;
     }
+
     /**
      * Add the property to the configuration
      * @param name - Name of the property
@@ -119,7 +112,7 @@ public final class ClassConfiguration {
      * @param writeable - Flag for if the property is writeable
      */
     public void addProperty(final String name, final boolean readable, final boolean writeable) {
-        PropertyInfo info = new PropertyInfo();
+        final PropertyInfo info = new PropertyInfo();
         info.setReadable(readable);
         info.setWriteable(writeable);
         try {
@@ -155,7 +148,7 @@ public final class ClassConfiguration {
      * @param name - Name of the function
      */
     public void addFunction(final String name) {
-        FunctionInfo info = new FunctionInfo();
+        final FunctionInfo info = new FunctionInfo();
         final Method[] methods = linkedClass_.getMethods();
         final String setMethodName = "jsFunction_" + name;
         for( int i=0; i<methods.length; i++ ) {
@@ -186,19 +179,20 @@ public final class ClassConfiguration {
         }
         property.setBrowser(new BrowserInfo(browserName));
     }
+
     /**
      * @return Returns the extendedClass.
      */
     public String getExtendedClass() {
         return extendedClass_;
     }
+
     /**
      * @param extendedClass The extendedClass to set.
      */
-    public void setExtendedClass(String extendedClass) {
-        this.extendedClass_ = extendedClass;
+    public void setExtendedClass(final String extendedClass) {
+        extendedClass_ = extendedClass;
     }
-
     
     /**
      * Return the PropertyInfo for the given property name
@@ -251,8 +245,6 @@ public final class ClassConfiguration {
         }
         return true;
     }
-
-    
     
     /**
      * Generate a hashCode for this object.  Currently, this is the hashcode for the name.
@@ -323,29 +315,33 @@ public final class ClassConfiguration {
         private Map browserMap_;
         private Method readMethod_;
         private Method writeMethod_;
+
         /**
          * @return Returns the readMethod.
          */
         public Method getReadMethod() {
             return readMethod_;
         }
+
         /**
          * @param readMethod The readMethod to set.
          */
-        public void setReadMethod(Method readMethod) {
-            this.readMethod_ = readMethod;
+        public void setReadMethod(final Method readMethod) {
+            readMethod_ = readMethod;
         }
+
         /**
          * @return Returns the writeMethod.
          */
         public Method getWriteMethod() {
             return writeMethod_;
         }
+
         /**
          * @param writeMethod The writeMethod to set.
          */
-        public void setWriteMethod(Method writeMethod) {
-            this.writeMethod_ = writeMethod;
+        public void setWriteMethod(final Method writeMethod) {
+            writeMethod_ = writeMethod;
         }
         
         private void setBrowser(final BrowserInfo browserInfo) {
@@ -356,7 +352,6 @@ public final class ClassConfiguration {
             
             browserMap_.put(browserInfo.getBrowserName(), browserInfo);
         }
-        
         
         /**
          * Test for value equality of the 2 objects
@@ -391,30 +386,18 @@ public final class ClassConfiguration {
                 (writeable_ == info.writeable_);
         }
     
-        
-        /**
-         * @return Returns the readable.
-         */
-        private boolean isReadable(){
-            return readable_;
-        }
         /**
          * @param readable The readable to set.
          */
-        private void setReadable(boolean readable) {
-            this.readable_ = readable;
+        private void setReadable(final boolean readable) {
+            readable_ = readable;
         }
-        /**
-         * @return Returns the writeable.
-         */
-        private boolean isWriteable() {
-            return writeable_;
-        }
+
         /**
          * @param writeable The writeable to set.
          */
-        private void setWriteable(boolean writeable) {
-            this.writeable_ = writeable;
+        private void setWriteable(final boolean writeable) {
+            writeable_ = writeable;
         }
     }
 
@@ -422,16 +405,6 @@ public final class ClassConfiguration {
         private boolean hasBrowsers_ = false;
         private Map browserMap_;
         private Method functionMethod_;
-        
-        private void setBrowser(final BrowserInfo browserInfo) {
-            if (browserMap_ == null) {
-                hasBrowsers_ = true;
-                browserMap_ = new HashMap();
-            }
-            
-            browserMap_.put(browserInfo.getBrowserName(), browserInfo);
-        }
-        
         
         /**
          * Test for value equality of the 2 objects
@@ -464,17 +437,19 @@ public final class ClassConfiguration {
             }
             return true;
         }
+
         /**
          * @return Returns the functionMethod.
          */
         public Method getFunctionMethod() {
             return functionMethod_;
         }
+
         /**
          * @param functionMethod The functionMethod to set.
          */
-        public void setFunctionMethod(Method functionMethod) {
-            this.functionMethod_ = functionMethod;
+        public void setFunctionMethod(final Method functionMethod) {
+            functionMethod_ = functionMethod;
         }
     }
 
@@ -483,8 +458,6 @@ public final class ClassConfiguration {
         private String minVersion_;
         private String maxVersion_;
         private String lessThanVersion_;
-        private Map browserMap_;
-        
         
         /**
          * Test for value equality of the 2 objects
@@ -519,68 +492,15 @@ public final class ClassConfiguration {
         /**
          * @param browserName - Name of the browser 
          */
-        public BrowserInfo(String browserName) {
-            this.browserName_ = browserName;
+        public BrowserInfo(final String browserName) {
+            browserName_ = browserName;
         }
-        /**
-         * @return Returns the browserMap.
-         */
-        private Map getBrowserMap() {
-            return browserMap_;
-        }
-        /**
-         * @param browserMap The browserMap to set.
-         */
-        private void setBrowserMap(Map browserMap) {
-            this.browserMap_ = browserMap;
-        }
+
         /**
          * @return Returns the browserName.
          */
         private String getBrowserName() {
             return browserName_;
-        }
-        /**
-         * @param browserName The browserName to set.
-         */
-        private void setBrowserName(String browserName) {
-            this.browserName_ = browserName;
-        }
-        /**
-         * @return Returns the lessThanVersion.
-         */
-        private String getLessThanVersion() {
-            return lessThanVersion_;
-        }
-        /**
-         * @param lessThanVersion The lessThanVersion to set.
-         */
-        private void setLessThanVersion(String lessThanVersion) {
-            this.lessThanVersion_ = lessThanVersion;
-        }
-        /**
-         * @return Returns the maxVersion.
-         */
-        private String getMaxVersion() {
-            return maxVersion_;
-        }
-        /**
-         * @param maxVersion The maxVersion to set.
-         */
-        private void setMaxVersion(String maxVersion) {
-            this.maxVersion_ = maxVersion;
-        }
-        /**
-         * @return Returns the minVersion.
-         */
-        private String getMinVersion() {
-            return minVersion_;
-        }
-        /**
-         * @param minVersion The minVersion to set.
-         */
-        private void setMinVersion(String minVersion) {
-            this.minVersion_ = minVersion;
         }
     }
 }
