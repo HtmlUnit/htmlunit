@@ -98,6 +98,31 @@ public class HtmlAnchorTest extends WebTestCase {
         assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
         assertNotNull( secondPage );
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testClickAnchorName() throws Exception {
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<a href='#clickedAnchor' id='a1'>link to foo1</a>"
+                 + "</body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://www.gargoylesoftware.com" ) );
+
+        final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a1" );
+
+        // Test that the correct value is being passed back up to the server
+        final HtmlPage secondPage = ( HtmlPage )anchor.click();
+
+        assertEquals( "url", "http://www.gargoylesoftware.com/#clickedAnchor",
+            secondPage.getWebResponse().getUrl().toExternalForm() );
+    }
 
 
     /**
