@@ -7,7 +7,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import java.io.IOException;
 import org.w3c.dom.Element;
 

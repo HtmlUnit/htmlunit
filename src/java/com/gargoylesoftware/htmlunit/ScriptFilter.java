@@ -34,7 +34,6 @@ public final class ScriptFilter extends DefaultFilter {
     private StringBuffer newContentBuffer_;
     private String systemId_;
     private int scriptCount_;
-    private String scriptType_;
 
     /**
      *  Create an instance
