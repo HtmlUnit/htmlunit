@@ -47,6 +47,7 @@ public class SimpleScriptable extends ScriptableObject {
         {"HtmlForm", "Form"},
         {"HtmlHiddenInput", "Hidden"},
         {"HtmlImage", "Image"},
+        {"HtmlInlineFrame", "Window"},
         {"HtmlOption", "Option"},
         {"HtmlPasswordInput", "Password"},
         {"HtmlRadioButtonInput", "Radio"},

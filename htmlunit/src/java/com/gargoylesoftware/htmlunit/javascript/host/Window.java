@@ -14,6 +14,7 @@ import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import java.beans.PropertyChangeEvent;
@@ -425,6 +426,24 @@ public final class Window extends SimpleScriptable {
      */
     public void jsFunction_close() {
         getLog().debug( "Window.close() not implemented" );
+    }
+
+
+    public String jsGet_src() {
+        final WebWindow webWindow = getWebWindow();
+        if( webWindow instanceof HtmlInlineFrame ) {
+            return ((HtmlInlineFrame)webWindow).getSrcAttribute();
+        }
+
+        return "";
+    }
+
+
+    public void jsSet_src( final String newValue ) {
+        final WebWindow webWindow = getWebWindow();
+        if( webWindow instanceof HtmlInlineFrame ) {
+            ((HtmlInlineFrame)webWindow).setSrcAttribute(newValue);
+        }
     }
 }
 
