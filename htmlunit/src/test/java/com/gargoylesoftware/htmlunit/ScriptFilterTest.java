@@ -60,9 +60,15 @@ public class ScriptFilterTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testScriptForEvent() throws Exception {
+        // IE accepts it with () or without
+        testScriptForEvent("onload");
+        testScriptForEvent("onload()");
+    }
+
+    private void testScriptForEvent(final String eventName) throws Exception {
         final String content
                  = "<html><head><title>foo</title>"
-                 + "<script FOR='window' EVENT='onload' LANGUAGE='javascript'>"
+                 + "<script FOR='window' EVENT='" + eventName + "' LANGUAGE='javascript'>"
                  + " document.form1.txt.value='hello';"
                  + " alert(document.form1.txt.value);"
                  + "</script></head><body>"

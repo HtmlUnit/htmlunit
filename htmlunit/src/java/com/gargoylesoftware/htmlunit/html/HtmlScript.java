@@ -193,7 +193,12 @@ public class HtmlScript extends HtmlElement {
             final String scriptCode;
             if (getEventAttribute() != ATTRIBUTE_NOT_DEFINED 
                     && getHtmlForAttribute() != ATTRIBUTE_NOT_DEFINED) {
-                final String scriptEventHandler = getHtmlForAttribute() + "." + getEventAttribute();
+                // event name can be like "onload" or "onload()"
+                String eventName = getEventAttribute();
+                if (eventName.endsWith("()")) {
+                    eventName = eventName.substring(0, eventName.length()-2);
+                }
+                final String scriptEventHandler = getHtmlForAttribute() + "." + eventName;
                 final String evhName = "htmlunit_evh_JJLL" + EventHandlerId_;
                 scriptCode = "function " + evhName + "()\n{" 
                     + textNode.getData() + "}\n"
