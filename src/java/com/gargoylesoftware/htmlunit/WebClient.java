@@ -319,8 +319,67 @@ public class WebClient {
             FailingHttpStatusCodeException {
         return getPage(webWindow, url, method, parameters, getThrowExceptionOnFailingStatusCode());
     }
+    /**
+     * Return a page.
+     *
+     * @param  webWindow The window that the new page will be loaded into.
+     * @param  url The url of the server
+     * @param  encType Encoding type of the form when done as a POST
+     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
+     * @param  parameters A list of {@link
+     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
+     *      contain the parameters to send to the server
+     * @return  The page that was loaded.
+     * @exception  IOException If an IO error occurs
+     * @exception  FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the property
+     *      "throwExceptionOnFailingStatusCode" is set to true (see {@link
+     *      #setThrowExceptionOnFailingStatusCode(boolean)})
+     */
+    public Page getPage(
+            final WebWindow webWindow,
+            final URL url,
+            final FormEncodingType encType,
+            final SubmitMethod method,
+            final List parameters )
+        throws
+            IOException,
+            FailingHttpStatusCodeException {
+        return getPage(webWindow, url, encType, method, parameters, getThrowExceptionOnFailingStatusCode());
+    }    
 
-
+    /**
+     * Return a page.
+     * 
+     * @param  webWindow The window that the new page will be loaded into.
+     * @param  url The url of the server
+     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
+     * @param  parameters A list of {@link
+     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
+     *      contain the parameters to send to the server
+     * @param throwExceptionOnFailingStatusCode true if this method should throw
+     * an exception whenever a failing status code is received.
+     * @return  The page that was loaded.
+     * @exception  IOException If an IO error occurs
+     * @exception  FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the variable
+     *      "throwExceptionOnFailingStatusCode" is set to true
+     */
+    public Page getPage(
+            final WebWindow webWindow,
+            final URL url,
+            final SubmitMethod method,
+            final List parameters,
+            final boolean throwExceptionOnFailingStatusCode )
+        throws
+            IOException,
+            FailingHttpStatusCodeException {
+                
+        return this.getPage(
+            webWindow, url, FormEncodingType.URL_ENCODED, method, 
+            parameters, throwExceptionOnFailingStatusCode);
+    }
+    
     /**
      *  Send a request to a server and return a Page that represents the
      *  response from the server. This page will be used to populate this frame.<p>
@@ -352,6 +411,7 @@ public class WebClient {
      *
      * @param  webWindow The window that the new page will be loaded into.
      * @param  url The url of the server
+     * @param  encType Encoding type of the form when done as a POST
      * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
      * @param  parameters A list of {@link
      *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
@@ -367,6 +427,7 @@ public class WebClient {
     public Page getPage(
             final WebWindow webWindow,
             final URL url,
+            final FormEncodingType encType,
             final SubmitMethod method,
             final List parameters,
             final boolean throwExceptionOnFailingStatusCode )
@@ -383,7 +444,7 @@ public class WebClient {
             webResponse = makeWebResponseForAboutUrl(webWindow,url);
         } 
         else {
-            webResponse = loadWebResponse( url, method, parameters );
+            webResponse = loadWebResponse( url, encType, method, parameters );
         }
         final String contentType = webResponse.getContentType();
         final int statusCode = webResponse.getStatusCode();
@@ -1006,7 +1067,6 @@ public class WebClient {
         };
     }
 
-
     /**
      * Load a {@link WebResponse} from the server
      * @param url The url to load the response from.
@@ -1019,12 +1079,29 @@ public class WebClient {
             final URL url, final SubmitMethod method, final List parameters)
         throws
             IOException {
+        return this.loadWebResponse(url, FormEncodingType.URL_ENCODED, method, parameters);
+    }
+
+    /**
+     * Load a {@link WebResponse} from the server
+     * @param url The url to load the response from.
+     * @param encType Encoding type of the form when done as a POST
+     * @param method The {@link SubmitMethod} to use
+     * @param parameters Any parameters that are being passed into the request
+     * @throws IOException if an IO problem occurs
+     * @return The WebResponse
+     */
+    public final WebResponse loadWebResponse(
+            final URL url, final FormEncodingType encType, final SubmitMethod method, final List parameters)
+        throws
+            IOException {
 
         Assert.notNull("url", url);
         Assert.notNull("method", method);
         Assert.notNull("parameters", parameters);
 
-        final WebResponse webResponse = getWebConnection().getResponse( url, method, parameters, requestHeaders_ );
+        final WebResponse webResponse 
+            = getWebConnection().getResponse( url, encType, method, parameters, requestHeaders_ );
         final int statusCode = webResponse.getStatusCode();
 
         if( statusCode >= 301 && statusCode <=307 && isRedirectEnabled() ) {
