@@ -153,7 +153,7 @@ public class HTMLParser {
         putFactory( HtmlUnorderedList.TAG_NAME, HtmlUnorderedList.class);
     }
 
-    private static void putFactory(String tagName, Class elementClass) {
+    private static void putFactory(final String tagName, final Class elementClass) {
         ELEMENT_FACTORIES.put(tagName, new DefaultElementFactory(elementClass));
     }
 
@@ -161,7 +161,7 @@ public class HTMLParser {
      * Set the flag to control logging html errors to the standard error
      * @param validateFlag - boolean flag to set
      */
-    public static void setValidateHtml(boolean validateFlag) {
+    public static void setValidateHtml(final boolean validateFlag) {
         ValidateHtml_ = validateFlag;
     }
 
@@ -179,7 +179,7 @@ public class HTMLParser {
      * current NekoHTML defaults.
      * @param ignoreOutsideContent - boolean flag to set
      */
-    public static void setIgnoreOutsideContent(boolean ignoreOutsideContent) {
+    public static void setIgnoreOutsideContent(final boolean ignoreOutsideContent) {
         IgnoreOutsideContent_ = ignoreOutsideContent;
     }
 
@@ -195,8 +195,8 @@ public class HTMLParser {
      * @param tagName an HTML element tag name
      * @return a factory for creating HtmlElements representing the given tag
      */
-    public static IElementFactory getFactory(String tagName) {
-        IElementFactory result = (IElementFactory)ELEMENT_FACTORIES.get(tagName);
+    public static IElementFactory getFactory(final String tagName) {
+        final IElementFactory result = (IElementFactory)ELEMENT_FACTORIES.get(tagName);
 
         //return result != null ? result : UnknownElementFactory.instance;
         if(result != null) {
@@ -248,7 +248,7 @@ public class HTMLParser {
         if( isSupportedCharacterSet(charSet) == false ) {
             charSet = "ISO-8859-1";
         }
-        XMLInputSource in = new XMLInputSource(
+        final XMLInputSource in = new XMLInputSource(
                 null,
                 webResponse.getUrl().toString(),
                 null,
