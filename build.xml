@@ -188,7 +188,7 @@
 	<zip
 		zipfile="dist/projectdocs.zip"
 		basedir="build/${version}/docs"
-		includes="**/*.html,**/*.jpg,**/*.gif"
+		includes="**/*.html,**/*.jpg,**/*.gif,**/package-list"
 		excludes="src/**"
 	/>
 
