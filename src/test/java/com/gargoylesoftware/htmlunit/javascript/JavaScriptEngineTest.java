@@ -659,12 +659,15 @@ public class JavaScriptEngineTest extends WebTestCase {
                 SubmitMethod.POST, Collections.EMPTY_LIST );
 
         assertEquals(1, countingJavaScriptEngine.getExecutionCount());
-
+        assertEquals(0, countingJavaScriptEngine.getCallCount());
+        
         ((HtmlAnchor) page.getHtmlElementById("unqualified")).click();
-        assertEquals(3, countingJavaScriptEngine.getExecutionCount());
-
+        assertEquals(1, countingJavaScriptEngine.getExecutionCount());
+        assertEquals(1, countingJavaScriptEngine.getCallCount());
+        
         ((HtmlAnchor) page.getHtmlElementById("qualified")).click();
-        assertEquals(5, countingJavaScriptEngine.getExecutionCount());
+        assertEquals(1, countingJavaScriptEngine.getExecutionCount());
+        assertEquals(2, countingJavaScriptEngine.getCallCount());
 
         final List expectedAlerts = Arrays.asList(new String[]{"unqualified: foo", "qualified: foo"});
         assertEquals(expectedAlerts, collectedAlerts);
@@ -809,6 +812,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     private static final class CountingJavaScriptEngine extends ScriptEngine {
         private ScriptEngine delegate_;
         private int scriptExecutionCount_ = 0;
+        private int scriptCallCount_ = 0;
 
         /**
          * Create an instance
@@ -836,6 +840,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         /** @inheritDoc ScriptEngine#callFunction(HtmlPage,Object,Object,Object[],HtmlElement) */
         public Object callFunction(HtmlPage htmlPage, Object javaScriptFunction, Object thisObject,
                 Object[] args, HtmlElement htmlElementScope) {
+            scriptCallCount_++;
             return delegate_.callFunction(htmlPage, javaScriptFunction, thisObject, args, htmlElementScope);
         }
 
@@ -844,6 +849,10 @@ public class JavaScriptEngineTest extends WebTestCase {
             return delegate_.toString(htmlPage, javaScriptObject);
         }
 
+        /** @return The number of times that this engine has called functions */
+        public int getCallCount() {
+            return scriptCallCount_;
+        }
         /** @return The number of times that this engine has executed code */
         public int getExecutionCount() {
             return scriptExecutionCount_;

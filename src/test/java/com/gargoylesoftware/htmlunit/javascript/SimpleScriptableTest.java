@@ -123,6 +123,7 @@ public class SimpleScriptableTest extends WebTestCase {
         // Now pull out those names that we know don't have html equivilents
         names.remove("CharacterDataImpl");
         names.remove("Document");
+        names.remove("Event");
         names.remove("History");
         names.remove("Location");
         names.remove("Navigator");

@@ -40,8 +40,12 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.IOException;
 import java.util.Map;
 
+import org.mozilla.javascript.Function;
+import org.mozilla.javascript.Scriptable;
+
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
  * Intermediate base class for "clickable" HTML elements.  As defined
@@ -87,23 +91,25 @@ public abstract class ClickableElement extends StyledElement {
         }
 
         final HtmlPage page = getPage();
-        final String onClick = getOnClickAttribute();
 
-        if( onClick.length() != 0 && page.getWebClient().isJavaScriptEnabled() ) {
-            if (isStateUpdateFirst()) {
+        final Function function = getEventHandler("onclick");
+                
+        if (function != null && page.getWebClient().isJavaScriptEnabled()) {
+           boolean stateUpdated = false;
+           if (isStateUpdateFirst()) {
                 doClickAction(page);
-                final ScriptResult scriptResult
-                        = page.executeJavaScriptIfPossible( onClick,
-                        "onClick handler for "+getClass().getName(), true, this );
-                final Page scriptPage = scriptResult.getNewPage();
-                // Are there any situations when we should return pageAfterAction?
-                return scriptPage;
-            }
-            final ScriptResult scriptResult
-                = page.executeJavaScriptIfPossible( onClick,
-                "onClick handler for "+getClass().getName(), true, this );
+                stateUpdated = true;
+           }
+           final Event event = new Event(this, this.getScriptObject());
+           
+           final Object[] args = new Object[] {event};
+           
+           final ScriptResult scriptResult = 
+               page.executeJavaScriptFunctionIfPossible(
+                       function, (Scriptable)this.getScriptObject(), args, this);
+           
             final Page scriptPage = scriptResult.getNewPage();
-            if( scriptResult.getJavaScriptResult().equals( Boolean.FALSE ) ) {
+            if( stateUpdated || scriptResult.getJavaScriptResult().equals( Boolean.FALSE ) ) {
                 return scriptPage;
             }
             else {

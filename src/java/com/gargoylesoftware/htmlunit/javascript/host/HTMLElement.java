@@ -45,6 +45,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 
@@ -398,5 +399,21 @@ public class HTMLElement extends NodeImpl {
     public void navigateHomePage() throws IOException {
         final WebClient webClient = getDomNodeOrDie().getPage().getWebClient(); 
         webClient.getPage(new URL(webClient.getHomePage()));
+    }
+    
+    /**
+     * Set the onclick event handler for this element.
+     * @param onclick the new handler
+     */
+    public void jsSet_onclick(final Function onclick) {
+        getHtmlElementOrDie().setEventHandler("onclick", onclick);
+    }
+    
+    /**
+     * Get the onclick event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Object jsGet_onclick() {
+        return getHtmlElementOrDie().getEventHandler("onclick");
     }
 }

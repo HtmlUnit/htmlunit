@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" due-to="Chris Eldredge" id="1080365">
+                Allow onclick event handler to be set by javascript.
+            </action>
             <action type="update" dev="cerskine">
             		Added logic to WebClient to allow messages from parsing the HTML to be displayed on the
             		on the console.
