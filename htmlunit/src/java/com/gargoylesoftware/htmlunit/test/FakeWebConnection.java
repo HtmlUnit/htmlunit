@@ -27,6 +27,7 @@ import java.util.Map;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Noboru Sinohara
  */
 public class FakeWebConnection extends WebConnection {
     private class ResponseEntry {
@@ -122,6 +123,19 @@ public class FakeWebConnection extends WebConnection {
             public InputStream getContentAsStream() throws IOException {
                 return TextUtil.toInputStream(responseEntry.content_);
             }
+            public byte[] getResponseBody() {
+                try{
+                    /* 
+                     * this method must return raw bytes.
+                     * without encoding, getBytes use locale encoding.
+                     */
+                    return responseEntry.content_.getBytes("ISO-8859-1");
+                }
+                catch( final java.io.UnsupportedEncodingException e ){
+                    return null;
+                }
+           }
+            public String getContentCharSet() { return "ISO-8859-1"; }
         };
     }
 

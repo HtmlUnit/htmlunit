@@ -15,6 +15,7 @@ import java.net.URL;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Noboru Sinohara
  */
 public interface WebResponse {
     /**
@@ -83,5 +84,17 @@ public interface WebResponse {
      * @return The load time.
      */
     long getLoadTimeInMilliSeconds();
+
+    /**
+     * Return the content charset value. 
+     * @return The charset value.
+     */
+    String getContentCharSet();
+
+    /**
+     * Return the response body as byte array.
+     * @return response body.
+     */
+    byte[] getResponseBody();
 }
 

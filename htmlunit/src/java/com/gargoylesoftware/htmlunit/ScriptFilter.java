@@ -24,6 +24,7 @@ import org.cyberneko.html.filters.DefaultFilter;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Noboru Sinohara
  */
 public final class ScriptFilter extends DefaultFilter {
 
@@ -89,8 +90,9 @@ public final class ScriptFilter extends DefaultFilter {
             final boolean isJavaScript = htmlPage_.isJavaScript( attrs.getValue("type"), attrs.getValue("language") );
             if( isJavaScript ) {
                 final String src = attrs.getValue("src");
+                final String charset = attrs.getValue("charset");
                 if( src != null && src.length() != 0 ) {
-                    htmlPage_.loadExternalJavaScriptFile(src);
+                    htmlPage_.loadExternalJavaScriptFile(src, charset);
                 }
 
                 scriptBuffer_ = new StringBuffer();
