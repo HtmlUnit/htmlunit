@@ -31,11 +31,13 @@ public class DocumentTest extends WebTestCase {
     public void testFormsAccessor_TwoForms() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>\n"
-                 + "alert(document.forms.length)\n"
-                 + "for( var i=0; i< document.forms.length; i++) {\n"
-                 + "    alert( document.forms[i].name )\n"
+                 + "function doTest(){\n"
+                 + "    alert(document.forms.length)\n"
+                 + "    for( var i=0; i< document.forms.length; i++) {\n"
+                 + "        alert( document.forms[i].name )\n"
+                 + "    }\n"
                  + "}\n"
-                 + "</script></head><body>\n"
+                 + "</script></head><body onload='doTest()'>\n"
                  + "<p>hello world</p>"
                  + "<form name='form1'>"
                  + "    <input type='text' name='textfield1' value='foo' />"
@@ -60,11 +62,13 @@ public class DocumentTest extends WebTestCase {
     public void testFormsAccessor_NoForms() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>\n"
-                 + "alert(document.forms.length)\n"
-                 + "for( var i=0; i< document.forms.length; i++) {\n"
-                 + "    alert( document.forms[i].name )\n"
-                 + "}\n"
-                 + "</script></head><body>\n"
+                 + "function doTest(){\n"
+                 + "    alert(document.forms.length)\n"
+                 + "    for( var i=0; i< document.forms.length; i++) {\n"
+                 + "        alert( document.forms[i].name )\n"
+                 + "    }\n"
+                 +"}\n"
+                 + "</script></head><body onload='doTest()'>\n"
                  + "<p>hello world</p>"
                  + "</body></html>";
 

@@ -65,8 +65,10 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testSetInputValue() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>"
-                 + "document.form1.textfield1.value='blue'"
-                 + "</script></head><body>"
+                 + "function doTest(){\n"
+                 + "    document.form1.textfield1.value='blue'"
+                 + "}\n"
+                 + "</script></head><body onload='doTest()'>"
                  + "<p>hello world</p>"
                  + "<form name='form1'>"
                  + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
@@ -148,9 +150,11 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testSetValuesThatAreNotStrings() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>"
-                 + "document.form1.textfield1.value=1;"
-                 + "alert(document.form1.textfield1.value)"
-                 + "</script></head><body>"
+                 + "function doTest() {\n"
+                 + "    document.form1.textfield1.value=1;"
+                 + "    alert(document.form1.textfield1.value)"
+                 + "}\n"
+                 + "</script></head><body onload='doTest()'>"
                  + "<p>hello world</p>"
                  + "<form name='form1'>"
                  + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"

@@ -8,22 +8,24 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.Scriptable;
 
 /**
  * A javascript window class
@@ -262,7 +264,15 @@ public final class Window extends SimpleScriptable {
 
         document_ = (Document)makeJavaScriptObject("Document");
         document_.setHtmlElement(htmlPage);
-        document_.initialize();
+        final PropertyChangeListener listener = new PropertyChangeListener() {
+            public void propertyChange( final PropertyChangeEvent event ) {
+                if( event.getPropertyName().equals(htmlPage.PROPERTY_ELEMENT) ) {
+                    document_.initialize();
+                    htmlPage.removePropertyChangeListener(this);
+                }
+            }
+        };
+        htmlPage.addPropertyChangeListener(listener);
 
         navigator_ = (Navigator)makeJavaScriptObject("Navigator");
         screen_ = (Screen)makeJavaScriptObject("Screen");
