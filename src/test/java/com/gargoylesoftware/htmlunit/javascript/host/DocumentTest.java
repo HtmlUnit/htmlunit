@@ -269,6 +269,44 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
+     * Tests for document.links
+     * @throws Exception if the test fails
+     */
+    public void testLinks() throws Exception {
+        final String content =
+            "<html>"
+            + "<head>"
+            + "<script>"
+            + "var oCol = document.links;"
+            + "alert(oCol.length);"
+            + "function test()"
+            + "{"
+            + "    alert(oCol.length);"
+            + "    alert(document.links.length);"
+            + "    alert(document.links == oCol);"
+            + "    alert(document.links[0].id);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + "<a href='foo.html' id='firstLink'>foo</a>"
+            + "<a href='foo2.html'>foo2</a>"
+            + "<a name='end'>"
+            + "</body>"
+            + "</html>";
+        
+        
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList( new String[]{
+                "0", "2", "2", "true", "firstLink"
+            } );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * Regression test for RFE 741930
      * @throws Exception if the test fails
      */
