@@ -55,21 +55,20 @@
                 Upgraded gsbase to version 2.0.1
             </action>                 
             <action type="update" dev="mbowler" due-to="Chris Erskine" id="1033055">
-                Updated server names for cvs access.  Patch provided by Chris Erskine.
+                Updated server names for cvs access.
             </action>                 
             <action type="update" dev="mbowler" due-to="Chris Erskine" id="1032913">
                 Added support for the javascript document.images and also for getting and setting
-                the page title.  Patch provided by Chris Erskine.
+                the page title.
             </action>  
             <action type="update" dev="mbowler" due-to="Marc Guillemot" id="1006472">
-                Patch for JS frames.length provided by Marc Guillemot
+                Patch for JS frames.length.
             </action>  
-            <action type="update" dev="mbowler" due-to="David D. Kilzer" id="975675">
-                Fixed inconsistencies in the handling of isDisabled.  Patch from David D. Kilzer based
-                on initial work by Mike Bresnahan
+            <action type="update" dev="mbowler" due-to="David D. Kilzer, Mike Bresnahan" id="975675">
+                Fixed inconsistencies in the handling of isDisabled.
             </action>  
             <action type="update" dev="mbowler" due-to="Ben Curren" id="940981">
-                Initial support for Active X objects - patch supplied by Ben Curren
+                Initial support for Active X objects.
             </action>  
             <action type="update" dev="mbowler" id="930539">
 	            INCOMPATIBLE CHANGE: The common browsers will automatically insert a tbody tag inside
@@ -80,7 +79,7 @@
                 parsed was causing an exception.
             </action>  
             <action type="update" dev="mbowler" due-to="David D. Kilzer" id="930069">
-                Added support for javascript table.rows.  Patch provided by David D. Kilzer
+                Added support for javascript table.rows.
             </action>  
             <action type="update" dev="mbowler" id="930531">
                 The common browsers always return uppercase values for the javascript nodeName property.
@@ -98,16 +97,13 @@
             <action type="update" dev="yourgod" due-to="Mike Bresnahan" id="972822">
                 Changed HtmlSelect.getSelectedOptions() to not auto-select the first
                 option if the list size > 1.
-                Patch submitted by Mike Bresnahan.
             </action>          
             <action type="update" dev="yourgod" due-to="David D. Kilzer" id="974966">
                 Refactored HtmlFileInput submission to include the filename even when 
                 there is no file submitted.
-                Patch submitted by David D. Kilzer.
             </action>        
             <action type="update" dev="yourgod" due-to="David D. Kilzer" id="956964">
                 Added support for JavaScript Window.close()
-                Patch submitted by David D. Kilzer.
             </action>
             <action type="update" dev="yourgod" due-to="David D. Kilzer" id="913740">
                 INCOMPATIBLE CHANGE: WebClient.moveFocusToElement() now takes a 
@@ -115,7 +111,6 @@
                 FocusableElement is derived from HtmlElement.
                 Added framework for focus() and blur() as well as JavaScript support 
                 for them on achors and inputs.
-                Patch submitted by David D. Kilzer.
             </action>           
             <action type="update" dev="yourgod">
                 Added support for JavaScript Element.setAttribute()
@@ -204,14 +199,12 @@
             <action type="update" dev="mbowler" due-to="Christian Sell">
                 Nested input elements, i.e. those that were not
                 immediate children of the enclosing form, were not handled.
-                Patch submitted by Christian Sell.
             </action>
             <action type="update" dev="mbowler" due-to="Christian Sell">
                 Changed the behaviour of single select lists to match the common
                 browsers.  When multiple items have the selected attribute then 
                 the last one is returned to the server.  When no items have been
                 selected, the first one is sent to the server.
-                Patch submitted by Christian Sell.
             </action>
             <action type="update" dev="mbowler">
                 Deprecated MockWebConnection.setContent() in favour of setDefaultResponse()
@@ -239,11 +232,10 @@
             </action>
             <action type="add" dev="mbowler" due-to="Alexei Goussev" id="856885">
                 Added support for Anchor.href and Anchor.getAttribute().  
-                Patch submitted by Alexei Goussev.
             </action>
             <action type="update" dev="mbowler" due-to="Alexei Goussev" id="871620">
                 Fixed bug where getting the style attribute should return an empty 
-                string instead of NOT_FOUND. Patch submitted by Alexei Goussev.
+                string instead of NOT_FOUND.
             </action>
             <action type="update" dev="yourgod">
                 Fixed bug where calling select() on an HtmlInput from JavaScript caused an
@@ -259,7 +251,7 @@
             		have one of these.
             </action>
             <action type="update" dev="mbowler" due-to="Darrell DeBoer" id="1034897">
-            		Fix for performance problem in JavaScript handling. Patch submitted by Darrell DeBoer
+            		Fix for performance problem in JavaScript handling.
             </action>
             <action type="update" dev="mbowler" id="856797">
             		If the server returns an unsupported encoding type then the browsers assume
@@ -276,7 +268,7 @@
                 INCOMPATIBLE CHANGE: There previously were three seperate tree models
                 for any given page: 1) the HtmlElement hierarchy 2) The xml DOM model and
                 3) the javascript element model.  Now the first two tree models have 
-                been merged into one.  Patch submitted by Christian Sell.
+                been merged into one.
             </action>
             <action type="update" dev="mbowler">
                 Continued migration of the build process from ant to maven.
