@@ -343,68 +343,7 @@ public final class HtmlPage
     public URL getFullyQualifiedUrl( final String relativeUrl )
         throws MalformedURLException {
 
-        // Was a protocol specified?
-        if( relativeUrl.indexOf( ":" ) != -1 ) {
-            return new URL( relativeUrl );
-        }
-
-        if( relativeUrl.startsWith("//") ) {
-            return new URL(originatingUrl_.getProtocol()+":"+relativeUrl);
-        }
-
-        final List tokens = new ArrayList();
-        final String stringToTokenize;
-        if( relativeUrl.length() == 0 ) {
-            stringToTokenize = originatingUrl_.getPath();
-        }
-        else if( relativeUrl.startsWith("/") ) {
-            stringToTokenize = relativeUrl;
-        }
-        else {
-            String path = originatingUrl_.getPath();
-            if( path.endsWith("/") == false ) {
-                path += "/..";
-            }
-            stringToTokenize = path+"/"+relativeUrl;
-        }
-        final StringTokenizer tokenizer = new StringTokenizer(stringToTokenize,"/");
-        while( tokenizer.hasMoreTokens() ) {
-            tokens.add( tokenizer.nextToken() );
-        }
-
-        for( int i=0; i<tokens.size(); i++ ) {
-            String oneToken = (String)tokens.get(i);
-            if( oneToken.length() == 0 || oneToken.equals(".") ) {
-                tokens.remove(i--);
-            }
-            else if( oneToken.equals("..") ) {
-                tokens.remove(i--);
-                if( i >= 0 ) {
-                    tokens.remove(i--);
-                }
-            }
-        }
-
-        final StringBuffer buffer = new StringBuffer();
-        buffer.append( originatingUrl_.getProtocol() );
-        buffer.append( "://" );
-        buffer.append( originatingUrl_.getHost() );
-        final int port = originatingUrl_.getPort();
-        if( port != -1 ) {
-            buffer.append( ":" );
-            buffer.append( port );
-        }
-
-        final Iterator iterator = tokens.iterator();
-        while( iterator.hasNext() ) {
-            buffer.append("/");
-            buffer.append(iterator.next());
-        }
-
-        if( tokens.isEmpty() ) {
-            buffer.append("/");
-        }
-        return new URL( buffer.toString() );
+        return webClient_.expandUrl( originatingUrl_, relativeUrl );
     }
 
 

@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -292,7 +293,7 @@ public class WebClient {
             try {
                 locationString = webResponse.getResponseHeaderValue("Location");
                 if( locationString != null ) {
-                    newUrl = new URL( locationString );
+                    newUrl = expandUrl( url, locationString );
                 }
             }
             catch( final MalformedURLException e ) {
@@ -742,6 +743,80 @@ public class WebClient {
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
+    }
+
+
+    /**
+     * @param  relativeUrl The relative url
+     * @return  See above
+     * @exception  MalformedURLException If an error occurred when creating a
+     *      URL object
+     */
+    public URL expandUrl( final URL baseUrl, final String relativeUrl )
+        throws MalformedURLException {
+
+        // Was a protocol specified?
+        if( relativeUrl.indexOf( ":" ) != -1 ) {
+            return new URL( relativeUrl );
+        }
+
+        if( relativeUrl.startsWith("//") ) {
+            return new URL(baseUrl.getProtocol()+":"+relativeUrl);
+        }
+
+        final List tokens = new ArrayList();
+        final String stringToTokenize;
+        if( relativeUrl.length() == 0 ) {
+            stringToTokenize = baseUrl.getPath();
+        }
+        else if( relativeUrl.startsWith("/") ) {
+            stringToTokenize = relativeUrl;
+        }
+        else {
+            String path = baseUrl.getPath();
+            if( path.endsWith("/") == false ) {
+                path += "/..";
+            }
+            stringToTokenize = path+"/"+relativeUrl;
+        }
+        final StringTokenizer tokenizer = new StringTokenizer(stringToTokenize,"/");
+        while( tokenizer.hasMoreTokens() ) {
+            tokens.add( tokenizer.nextToken() );
+        }
+
+        for( int i=0; i<tokens.size(); i++ ) {
+            String oneToken = (String)tokens.get(i);
+            if( oneToken.length() == 0 || oneToken.equals(".") ) {
+                tokens.remove(i--);
+            }
+            else if( oneToken.equals("..") ) {
+                tokens.remove(i--);
+                if( i >= 0 ) {
+                    tokens.remove(i--);
+                }
+            }
+        }
+
+        final StringBuffer buffer = new StringBuffer();
+        buffer.append( baseUrl.getProtocol() );
+        buffer.append( "://" );
+        buffer.append( baseUrl.getHost() );
+        final int port = baseUrl.getPort();
+        if( port != -1 ) {
+            buffer.append( ":" );
+            buffer.append( port );
+        }
+
+        final Iterator iterator = tokens.iterator();
+        while( iterator.hasNext() ) {
+            buffer.append("/");
+            buffer.append(iterator.next());
+        }
+
+        if( tokens.isEmpty() ) {
+            buffer.append("/");
+        }
+        return new URL( buffer.toString() );
     }
 }
 
