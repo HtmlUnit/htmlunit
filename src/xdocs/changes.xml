@@ -19,6 +19,9 @@
 		<change type="change">
 			Upgraded xerces to 2.2.1
 		</change>
+		<change type="change">
+			Upgraded the rhino javascript engine to version 1.5b3
+		</change>
 		<change type="new">
 			Added support for the Window.opener property
 		</change>
@@ -76,6 +79,10 @@
 		</change>
 		<change type="documentation">
 			Moved submission guidelines into their own <a href="submittingPatches.html">document</a>.
+		</change>
+		<change type="fix">
+			Fixed bug where the variable "this" in an onclick handler was a Window rather than the
+			appropriate component.
 		</change>
 	</change-log>
 </section>

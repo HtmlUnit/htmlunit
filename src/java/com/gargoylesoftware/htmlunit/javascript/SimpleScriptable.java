@@ -399,10 +399,10 @@ public class SimpleScriptable extends ScriptableObject {
       * @param htmlElement The html element
       * @return The javascript object or NOT_FOUND
       */
-    protected Object getScriptableFor( final HtmlElement htmlElement ) {
+    public SimpleScriptable getScriptableFor( final HtmlElement htmlElement ) {
         final Object scriptObject = htmlElement.getScriptObject();
         if( scriptObject != null ) {
-            return scriptObject;
+            return (SimpleScriptable)scriptObject;
         }
 
         final String fullClassName = htmlElement.getClass().getName();
@@ -470,6 +470,56 @@ public class SimpleScriptable extends ScriptableObject {
      */
     public Object getDefaultValue( final Class hint ) {
         return toString();
+    }
+
+
+    public static String getClassNameForHtmlElement( final HtmlElement htmlElement ) {
+        final String tagName = htmlElement.getTagName();
+
+        String type = null;
+        if( tagName.equals("input") ) {
+            type = htmlElement.getAttributeValue("type").toLowerCase();
+            if( type.equals("file") ) {
+                type = "FileUpload";
+            }
+
+            if( type.length() == 0 ) {
+                type = "text";
+            }
+        }
+        else if( tagName.equals("button") ) {
+            type = htmlElement.getAttributeValue("type").toLowerCase();
+            if( type.length() == 0 ) {
+                type = "button";
+            }
+        }
+        else if( tagName.equals("select") ) {
+            type = "Select";
+        }
+        else if( tagName.equals("option") ) {
+            type = "option";
+        }
+        else if( tagName.equals("textarea") ) {
+            type = "textarea";
+        }
+        else if( tagName.equals("a") ) {
+            type = "Anchor";
+        }
+        else if( tagName.equals("form") ) {
+            type = "Form";
+        }
+
+
+        if( type == null ) {
+            throw new IllegalStateException("Unexpected htmlElement ["+htmlElement+"]");
+        }
+
+        if( type.length() == 0 ) {
+            throw new IllegalStateException("Empty type string for element ["+tagName+"]");
+        }
+
+        // Uppercase the first letter and return
+        return type.substring(0,1).toUpperCase()+type.substring(1);
     }
 }
 

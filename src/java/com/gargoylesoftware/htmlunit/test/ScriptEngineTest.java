@@ -9,6 +9,7 @@ package com.gargoylesoftware.htmlunit.test;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.net.URL;
 import java.util.ArrayList;
@@ -64,7 +65,8 @@ public class ScriptEngineTest extends WebTestCase {
         final WebClient client = new WebClient();
         client.setScriptEngine( new ScriptEngine(client) {
             public Object execute(
-                    final HtmlPage htmlPage, final String sourceCode, final String sourceName ) {
+                    final HtmlPage htmlPage, final String sourceCode,
+                    final String sourceName, final HtmlElement htmlElement ) {
                 collectedScripts.add( sourceCode );
                 return null;
             }

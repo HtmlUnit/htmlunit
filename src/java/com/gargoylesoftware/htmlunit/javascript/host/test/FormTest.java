@@ -250,7 +250,7 @@ public class FormTest extends WebTestCase {
         assertEquals( "first", page.getTitleText() );
 
         final HtmlPage secondPage
-            = (HtmlPage)page.executeJavaScriptIfPossible("document.form1.submit()", "test", true).getNewPage();
+            = (HtmlPage)page.executeJavaScriptIfPossible("document.form1.submit()", "test", true, null).getNewPage();
         assertEquals( "second", secondPage.getTitleText() );
     }
 

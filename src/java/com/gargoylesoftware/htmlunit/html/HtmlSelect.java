@@ -140,7 +140,7 @@ public class HtmlSelect
 
         if( onChange.length() != 0 && page.getWebClient().isJavaScriptEnabled() ) {
             final ScriptResult scriptResult
-                = page.executeJavaScriptIfPossible( onChange, "onChange handler", true );
+                = page.executeJavaScriptIfPossible( onChange, "onChange handler", true, this );
             return scriptResult.getNewPage();
         }
         return page;

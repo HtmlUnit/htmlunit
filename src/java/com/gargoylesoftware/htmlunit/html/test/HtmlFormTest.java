@@ -471,9 +471,10 @@ public class HtmlFormTest extends WebTestCase {
         throws Exception {
 
         final String firstContent
-                 = "<html><head><title>First</title></head><body>"
-                 + "<form name='form1' method='get' action='http://second' "
-                 + "onSubmit='alert(\"clicked\");return false;'>"
+                 = "<html><head><title>First</title></head>"
+                 + "<script>function doalert(message){alert(message);}</script>"
+                 + "<body><form name='form1' method='get' action='http://second' "
+                 + "onSubmit='doalert(\"clicked\");return false;'>"
                  + "<input name='button' type='submit' value='PushMe' id='button'/></form>"
                  + "<a id='link1' href='javascript:document.form1.submit()'>Click me</a>"
                  + "</body></html>";

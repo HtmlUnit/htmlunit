@@ -9,7 +9,14 @@ package com.gargoylesoftware.htmlunit.javascript;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.javascript.host.Form;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import java.util.HashMap;
 import java.util.Map;
@@ -98,7 +105,7 @@ public final class JavaScriptEngine extends ScriptEngine {
                 "HTMLElement" ,"Window", "Document", "Form", "Input", "Navigator",
                 "Screen", "History", "Radio", "Location", "Text", "Button", "Checkbox",
                 "FileUpload", "Hidden", "Select", "Password", "Reset", "Submit", "Textarea",
-                "Image", "Style", "Option"
+                "Image", "Style", "Option", "Anchor"
             };
 
             for( int i=0; i<hostClassNames.length; i++ ) {
@@ -141,7 +148,7 @@ public final class JavaScriptEngine extends ScriptEngine {
      * @return The result of executing the specified code.
      */
     public Object execute(
-        final HtmlPage htmlPage, String sourceCode, final String sourceName ) {
+        final HtmlPage htmlPage, String sourceCode, final String sourceName, final HtmlElement htmlElementScope ) {
 
         assertNotNull( "sourceCode", sourceCode );
 
@@ -172,9 +179,21 @@ public final class JavaScriptEngine extends ScriptEngine {
         final int lineNumber = 1;
         final Object securityDomain = null;
 
+        Scriptable scope;
+        if( htmlElementScope == null ) {
+            scope = pageInfo.getScope();
+        }
+        else {
+            scope = (Scriptable)htmlElementScope.getScriptObject();
+            if( scope == null ) {
+                scope = ((SimpleScriptable)pageInfo.getScope()).getScriptableFor(htmlElementScope);
+            }
+            scope.setParentScope(pageInfo.getScope());
+        }
+
         try {
             final Object result = pageInfo.getContext().evaluateString(
-                    pageInfo.getScope(), sourceCode, sourceName, lineNumber, securityDomain );
+                    scope, sourceCode, sourceName, lineNumber, securityDomain );
             return result;
         }
         catch( final JavaScriptException e ) {

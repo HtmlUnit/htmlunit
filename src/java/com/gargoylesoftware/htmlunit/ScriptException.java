@@ -37,11 +37,19 @@ public class ScriptException extends RuntimeException {
      * of javascript.
      */
     public ScriptException( final Throwable throwable, final String scriptSourceCode ) {
-        super(throwable.getMessage());
+        super(getMessageFrom(throwable));
         throwable_ = throwable;
         scriptSourceCode_ = scriptSourceCode;
     }
 
+    private static String getMessageFrom( final Throwable throwable ) {
+        if( throwable == null ) {
+            return "null";
+        }
+        else {
+            return throwable.getMessage();
+        }
+    }
 
     /**
      * Create an instance

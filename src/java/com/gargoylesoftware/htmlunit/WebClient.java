@@ -891,7 +891,7 @@ public class WebClient {
 
         final HtmlPage enclosingPage = ((HtmlElement)webWindow).getPage();
         final ScriptResult scriptResult = enclosingPage.executeJavaScriptIfPossible(
-            url.toExternalForm(), "javascript url", false );
+            url.toExternalForm(), "javascript url", false, null );
 
         final String contentString = scriptResult.getJavaScriptResult().toString();
         return new WebResponse() {
@@ -1002,7 +1002,7 @@ public class WebClient {
             final String onBlurHandler = elementWithFocus_.getAttributeValue("onblur");
             if( onBlurHandler.length() != 0 ) {
                 elementWithFocus_.getPage().executeJavaScriptIfPossible(
-                    onBlurHandler, "OnBlur handler", true);
+                    onBlurHandler, "OnBlur handler", true, elementWithFocus_);
             }
         }
 
@@ -1011,7 +1011,7 @@ public class WebClient {
             if( onFocusHandler.length() != 0 ) {
                 final HtmlPage currentPage = newElement.getPage();
                 final Page newPage = currentPage.executeJavaScriptIfPossible(
-                    onFocusHandler, "OnFocus handler", true).getNewPage();
+                    onFocusHandler, "OnFocus handler", true, newElement).getNewPage();
 
                 // If a page reload happened as a result of the focus change then obviously this
                 // element will not have the focus because its page has gone away.

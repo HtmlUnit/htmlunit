@@ -12,6 +12,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
+import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.test.FakeWebConnection;
 import com.gargoylesoftware.htmlunit.test.WebTestCase;
@@ -288,5 +289,39 @@ public class JavaScriptEngineTest extends WebTestCase {
                 new URL( "http://first/index.html" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals("foo", page.getTitleText());
+    }
+
+
+    /**
+     * When using the syntax this.something in an onclick handler, "this" must represent
+     * the object being clicked, not the window.  Regression test.
+     */
+    public void testThisDotInOnClick() throws Exception {
+
+        final WebClient client = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final String htmlContent
+            = "<html><head><title>First</title><script>function foo(message){alert(message);}</script><body>"
+             + "<form name='form1'><input type='submit' name='button1' onClick='foo(this.name)'></form>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first/index.html"),
+            htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first/index.html" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals("First", page.getTitleText());
+
+        ((HtmlSubmitInput)page.getFormByName("form1").getInputByName("button1")).click();
+
+        final List expectedAlerts = Collections.singletonList("button1");
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 }
