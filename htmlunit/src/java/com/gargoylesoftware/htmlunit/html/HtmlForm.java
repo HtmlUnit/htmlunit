@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author  David K. Taylor
  * @author  Brad Clarke
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
  */
 public class HtmlForm extends ClickableElement {
 
@@ -275,15 +276,20 @@ public class HtmlForm extends ClickableElement {
         return submittableElements;
     }
 
-    private boolean isValidForSubmission(final HtmlElement element){
+    private boolean isValidForSubmission(final HtmlElement element, final SubmittableElement submitElement){
         final String tagName = element.getTagName();
-        if( SUBMITTABLE_ELEMENT_NAMES.contains( tagName.toLowerCase() ) == false ) {
+        if (!SUBMITTABLE_ELEMENT_NAMES.contains(tagName.toLowerCase())) {
             return false;
         }        
         if(element.isAttributeDefined("disabled")) {
             return false;
         }
-        if (! tagName.equals( "isindex" ) && !element.isAttributeDefined("name")){
+        // clicked input type="image" is submittted even if it hasn't a name
+        if (element == submitElement && element instanceof HtmlImageInput) {
+            return true;
+        }
+
+        if (!tagName.equals("isindex") && !element.isAttributeDefined("name")){
             return false;
         }
         
@@ -306,9 +312,14 @@ public class HtmlForm extends ClickableElement {
         return true;
     }
 
-    private boolean isSubmittable( final HtmlElement element, final SubmittableElement submitElement ) {
+    /**
+     * 
+     * @param submitElement The element that would have been pressed to submit the
+     * form or null if the form was submitted by javascript.
+     */
+    private boolean isSubmittable(final HtmlElement element, final SubmittableElement submitElement) {
         final String tagName = element.getTagName();
-        if (!isValidForSubmission(element)){
+        if (!isValidForSubmission(element, submitElement)){
             return false;
         }
 

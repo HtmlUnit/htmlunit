@@ -43,6 +43,8 @@ import com.gargoylesoftware.htmlunit.Page;
 import java.io.IOException;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  *  Wrapper for the html element "input"
  *
@@ -50,6 +52,7 @@ import java.util.Map;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
  */
 public class HtmlImageInput extends HtmlInput {
 
@@ -80,10 +83,19 @@ public class HtmlImageInput extends HtmlInput {
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
         final String name = getNameAttribute();
+        final String prefix;
+        // a clicked image without name sends parameter x and y
+        if (StringUtils.isEmpty(name)) {
+            prefix = "";
+        }
+        else {
+            prefix = name + ".";
+        }
+            
         if( wasPositionSpecified_ ) {
             return new KeyValuePair[]{
-                new KeyValuePair( name+".x", String.valueOf(xPosition_) ),
-                new KeyValuePair( name+".y", String.valueOf(yPosition_) )
+                new KeyValuePair(prefix + "x", String.valueOf(xPosition_)),
+                new KeyValuePair(prefix + "y", String.valueOf(yPosition_))
             };
         }
         return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getValueAttribute() )};
