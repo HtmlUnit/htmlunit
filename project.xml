@@ -62,6 +62,13 @@
                 <role>Java Developer</role>
             </roles>
         </developer>
+        <developer>
+            <name>David K. Taylor</name>
+            <id>dktaylor</id>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <contributors>
@@ -76,9 +83,6 @@
         </contributor>
         <contributor>
             <name>Alex Nikiforoff</name>
-        </contributor>
-        <contributor>
-            <name>David K. Taylor</name>
         </contributor>
     </contributors>
 
