@@ -605,5 +605,18 @@ public final class Document extends NodeImpl {
     public void jsSet_title(final String message ) {
         getHtmlPage().setTitleText(message);
     }
+    
+    /**
+     * Get the readyState of this document.  This is an IE only function
+     * @return the state - uninitilized, loading or complete - The interactive state is not returned
+     * 
+     */
+    public String jsGet_readyState() {
+        final DomNode node = getDomNodeOrDie();
+        if (node instanceof HtmlPage) {
+            return ((HtmlPage) node).getDocumentElement().getReadyState();
+        }
+        return getDomNodeOrDie().getReadyState();
+    }
 }
 

@@ -84,7 +84,11 @@
             <action type="update" dev="mbowler" id="930531">
                 The common browsers always return uppercase values for the javascript nodeName property.
                 Now HtmlUnit does as well.
-            </action>  
+            </action>
+            <action type="update" dev="mbowler" due-to="cerskine">
+                Added support for the IE attribute document.readyState.  Also added the js.log custom
+                logger to aid in debugging JavaScript errors.
+            </action>
 		</release>
 		    
         <release version="1.3-pre2" date="September 26, 2004">

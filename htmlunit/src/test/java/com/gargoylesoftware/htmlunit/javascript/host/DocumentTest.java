@@ -46,6 +46,7 @@ import java.util.List;
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -1971,7 +1972,78 @@ public class DocumentTest extends WebTestCase {
 
          assertEquals( expectedAlerts, collectedAlerts );
     }
+    
+    /**
+     * Test the ReadyState.  This should only work in IE.
+     * Currently locked out since the browser type of code is not working.
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testReadyStateNonIE() throws Exception {
+        if (true) {
+            notImplemented();
+            return;
+        }
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        final String content
+            = "<html><head>\n"
+        + "<script>\n"
+        + "function testIt() {\n"
+        + "  alert(document.readyState);\n"
+        + "}\n"
+        + "alert(document.readyState);\n"
+        + "</script>\n"
+        + "</head>\n"
+        + "<body onLoad='testIt()'></body></html>\n";
+        webConnection.setResponse(
+            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
 
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "undefined", "undefined"
+        } );
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+    
+    /**
+     * Test the ReadyState.  This should only work in IE
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testReadyStateIE() throws Exception {
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        final String content
+            = "<html><head>\n"
+        + "<script>\n"
+        + "function testIt() {\n"
+        + "  alert(document.readyState);\n"
+        + "}\n"
+        + "alert(document.readyState);\n"
+        + "</script>\n"
+        + "</head>\n"
+        + "<body onLoad='testIt()'></body></html>\n";
+        webConnection.setResponse(
+            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.getPage(URL_FIRST);
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "loading", "complete"
+        } );
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+    
     /**
      * Calling document.body before the page is fully loaded used to cause an exception.
      * @throws Exception if the test fails

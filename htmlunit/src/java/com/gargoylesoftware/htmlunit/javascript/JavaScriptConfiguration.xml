@@ -58,6 +58,9 @@
         <property name="title" readable="true" writable="true"/>
         <property name="URL" readable="true" writable="false"/>
         <property name="vlinkColor" readable="true" writable="false"/>
+        <property name="readyState" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
         <function name="write"/>
         <function name="writeln"/>
         <function name="close"/>
