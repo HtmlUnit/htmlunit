@@ -77,6 +77,7 @@ import org.apache.commons.logging.impl.SimpleLog;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author David D. Kilzer
+ * @author Marc Guillemot
  */
 public class HttpWebConnection extends WebConnection {
     private final Map httpClients_ = new HashMap( 9 );
@@ -349,7 +350,7 @@ public class HttpWebConnection extends WebConnection {
                 }
             };
             client.setState(httpState);
-            httpState.setCookiePolicy( CookiePolicy.COMPATIBILITY );
+            setCookiePolicyIfNeeded(httpState);
 
             final HostConfiguration hostConfiguration = new HostConfiguration();
             final URI uri;
@@ -375,6 +376,36 @@ public class HttpWebConnection extends WebConnection {
             httpClients_.put( key, client );
         }
         return client;
+    }
+
+
+
+    /**
+     * Return the log object for this class
+     * @return The log object
+     */
+    protected final Log getLog() {
+        return LogFactory.getLog(getClass());
+    }
+
+    /**
+     * Sets the cookie policy of the httpState only 
+     * if it is not already configured with the system property.
+     * @param httpState the state to configure
+     */
+    private void setCookiePolicyIfNeeded(final HttpState httpState) {
+        String cookiePolicy = null;
+        try {
+            cookiePolicy = System.getProperty("apache.commons.httpclient.cookiespec");
+        }
+        catch (SecurityException e) {
+            // don't do anything
+        }
+        
+        if (cookiePolicy == null) {
+            getLog().info("Setting cookie policy to: \"COMPATIBILITY\"");
+            httpState.setCookiePolicy( CookiePolicy.COMPATIBILITY );
+        }
     }
 
 

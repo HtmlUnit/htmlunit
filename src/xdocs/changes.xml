@@ -8,6 +8,9 @@
     <body>
         <release version="next" date="unknown">
             <action type="update" dev="mguillem">
+                Allow to set commons-httpclient cookie policy using system property. 
+            </action>
+            <action type="update" dev="mguillem">
                 Added support for insertAdjacentHTML.
             </action>
             <action type="update" dev="mguillem" id="930846">
