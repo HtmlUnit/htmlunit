@@ -25,6 +25,8 @@ import java.util.List;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
+ * @author Barnaby Court
  */
 public class DocumentTest extends WebTestCase {
     public DocumentTest( final String name ) {
@@ -238,6 +240,45 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * Regression test for RFE 741930
+     */
+    public void testAppendChild() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        webClient.setWebConnection( webConnection );
+
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    var form = document.forms['form1'];\n"
+            + "    var div = document.createElement( 'DIV' );\n"
+            + "    form.appendChild( div );\n"
+            + "    var elements = document.getElementsByTagName('DIV');\n"
+            + "    alert( elements.length )\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "</form>"
+            + "</body></html>";
+        webConnection.setResponse(
+            new URL("http://first"), content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals("foo", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "1"
+        } );
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
     public void testGetElementById() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -262,6 +303,37 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "First", firstPage.getTitleText() );
 
         final List expectedAlerts = Collections.singletonList("bar");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for bug 740665
+     */
+    public void testGetElementById_divId() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var element = document.getElementById('id1');\n"
+             + "    alert(element.id);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<div id='id1'></div></body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("id1");
         assertEquals( expectedAlerts, collectedAlerts );
     }
 

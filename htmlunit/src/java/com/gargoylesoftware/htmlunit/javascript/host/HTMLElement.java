@@ -18,6 +18,7 @@ import org.mozilla.javascript.Scriptable;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author Barnaby Court
  */
 public class HTMLElement extends SimpleScriptable {
     private Style style_;
@@ -118,5 +119,33 @@ public class HTMLElement extends SimpleScriptable {
         }
         return result;
     }
-}
 
+
+    /**
+     * Add an HTML element to the element
+     * @param childObject The element to add to this element
+     * @return The newly added child element.
+     */
+    public Object jsFunction_appendChild(final Object childObject) {
+        final Object appendedChild;
+        if (childObject instanceof HTMLElement) {
+            // Get XML element for the HTML element passed in
+            final HtmlElement childHtmlElement = ((HTMLElement) childObject).getHtmlElementOrDie();
+            final Element childXmlNode = childHtmlElement.getElement();
+            
+            // Get the parent XML element that the child should be added to.
+            final HtmlElement parentElement = this.getHtmlElementOrDie();
+            final Element parentXmlNode = parentElement.getElement();
+            
+            // Append the child to the parent element
+            if ( parentXmlNode.appendChild(childXmlNode) == null ) {
+                appendedChild = null;
+            } else {
+                appendedChild = childObject;
+            }
+        } else {
+            appendedChild = null;
+        }
+        return appendedChild;
+    }
+}
