@@ -6,7 +6,7 @@
     </properties>
 
     <body>
-        <release version="1.3-pre3" date="Not released yet">
+        <release version="1.3" date="November 12, 2004">
             <action type="update" dev="mbowler">
                 Upgraded commons-jelly to version 1.0-beta-4
             </action>                 
