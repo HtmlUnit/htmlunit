@@ -48,9 +48,11 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FakeWebConnection;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
  *  Tests for HtmlForm
@@ -854,6 +856,40 @@ public class HtmlFormTest extends WebTestCase {
         catch( final ElementNotFoundException e ) {
             // Expected path.
         }
+    }
+
+    /**
+     * Test that the result of the form will get loaded into the window
+     * specified by "target"
+     * @throws Exception If the test fails.
+     */
+    public void testSubmitToTargetWindow() throws Exception {
+        final String firstContent
+                 = "<html><head><title>first</title></head><body>"
+                 + "<form id='form1' target='window2' action='http://second'>"
+                 + "    <input type='submit' name='button' value='push me'/>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(
+            new URL("http://first"),firstContent,200,"OK","text/html",Collections.EMPTY_LIST );
+        webConnection.setResponseAsGenericHtml(
+            new URL("http://second"), "second");
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+            new URL( "http://first" ),
+            SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+
+        final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
+        final HtmlPage secondPage = (HtmlPage)button.click();
+        assertEquals("window2", secondPage.getEnclosingWindow().getName());
+
+        final WebWindow firstWindow  = client.getCurrentWindow();
+        assertEquals("first window name", "", firstWindow.getName() );
+        assertSame( page, firstWindow.getEnclosedPage() );
     }
 }
 
