@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.3-pre2" date="Not released yet">
+            <action type="update" dev="yourgod">
+                Fixed bug where submitting a form containing a select that had no options 
+				caused a NullPointerException.
+            </action>
             <action type="update" dev="dktaylor">
                 INCOMPATIBLE CHANGE: Changed HtmlPage so it is no longer derived from
                 HtmlElement.  It is now derived from DomNode and a new HtmlHtml element

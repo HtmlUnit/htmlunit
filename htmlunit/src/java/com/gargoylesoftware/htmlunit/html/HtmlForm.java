@@ -301,6 +301,12 @@ public class HtmlForm extends ClickableElement {
                 return false;
             }
         }
+        if ( tagName.equals("select") ) {
+            //an empty select list has no value, and is therefore not submittable
+            if (((HtmlSelect) element).getOptionSize() < 1) {
+                return false;
+            }
+        }        
 
         return true;
     }
