@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Michael Ottati
  * @author Marc Guillemot
+ * @author Daniel Gredler
  */
 public class LocationTest extends WebTestCase {
 
@@ -71,10 +72,7 @@ public class LocationTest extends WebTestCase {
      * Regression test for bug 742902
      * @throws Exception if the test fails
      */
-    public void testDocumentLocation() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-
+    public void testDocumentLocationGet() throws Exception {
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -83,27 +81,66 @@ public class LocationTest extends WebTestCase {
              + "</script></head><body onload='doTest()'>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
-        final List expectedAlerts = Collections.singletonList("http://first");
+        final List expectedAlerts = Collections.singletonList("http://www.gargoylesoftware.com");
         assertEquals( expectedAlerts, collectedAlerts );
     }
     
     /**
      * @throws Exception if the test fails
      */
-    public void testDocumentLocationHref() throws Exception {
+    public void testDocumentLocationSet() throws Exception {
+
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 
+        final String html1 =
+              "<html>\n"
+            + "<head>\n"
+            + "  <title>test1</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      document.location = '" + URL_SECOND.toExternalForm() + "';\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+        final String html2 =
+              "<html>\n"
+            + "<head>\n"
+            + "  <title>test2</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert('ok');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        webConnection.setResponse(URL_FIRST, html1);
+        webConnection.setResponse(URL_SECOND, html2);
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
+        assertEquals( "test2", page.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList( "ok" );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDocumentLocationHref() throws Exception {
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
@@ -112,17 +149,11 @@ public class LocationTest extends WebTestCase {
              + "</script></head><body onload='doTest()'>"
              + "</body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
-        final List expectedAlerts = Collections.singletonList("http://first");
+        final List expectedAlerts = Collections.singletonList("http://www.gargoylesoftware.com");
         assertEquals( expectedAlerts, collectedAlerts );
     }
     
@@ -165,7 +196,7 @@ public class LocationTest extends WebTestCase {
             "http://first",   // href
             "",               // pathname
             "",               // port
-            "http:",           // protocol
+            "http:",          // protocol
             ""                // search
         } );
         assertEquals( "simple url", expectedAlerts, collectedAlerts );
