@@ -10,6 +10,12 @@
 		<change type="fix">
 			Fixed bug where some success status codes (not 200) were being reported as errors
 		</change>
+		<change type="change">
+			Upgraded NekoHTML to version 0.7.1
+		</change>
+		<change type="change">
+			Upgraded commons-httpclient to the Nov 29, 2002 build
+		</change>
 		<change>
 			Added support for the Window.opener property
 		</change>
