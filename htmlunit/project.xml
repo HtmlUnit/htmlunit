@@ -4,7 +4,7 @@
     <pomVersion>3</pomVersion>
     <id>htmlunit</id>
     <name>htmlunit</name>
-    <currentVersion>1.2.3</currentVersion>
+    <currentVersion>CVS HEAD</currentVersion>
 
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -106,6 +106,9 @@
         <contributor>
             <name>Andreas Hangler</name>
         </contributor>
+        <contributer>
+        	<name>Jun Chen</name>
+       	</contributer>
     </contributors>
 
     <dependencies>
