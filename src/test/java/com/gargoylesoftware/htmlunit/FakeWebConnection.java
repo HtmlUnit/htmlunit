@@ -67,6 +67,17 @@ public class FakeWebConnection extends WebConnection {
             Assert.notNull("contentType", contentType);
             Assert.notNull("responseHeaders", responseHeaders);
 
+            // Validate that the response header list only contains KeyValuePairs
+            final Iterator iterator = responseHeaders.iterator();
+            while( iterator.hasNext() ) {
+                final Object object = iterator.next();
+                if( object instanceof KeyValuePair == false ) {
+                    throw new IllegalArgumentException(
+                        "Only KeyValuePairs may be in the response header list but found: "
+                        + object.getClass().getName());
+                }
+            }
+            
             content_ = content;
             statusCode_ = statusCode;
             statusMessage_ = statusMessage;
@@ -184,6 +195,16 @@ public class FakeWebConnection extends WebConnection {
     }
 
 
+    /**
+     * Set the response that will be returned when the specified url is requested.
+     * @param url The url that will return the given response
+     * @param content The content to return
+     * @param statusCode The status code to return
+     * @param statusMessage The status message to return
+     * @param contentType The content type to return
+     * @param responseHeaders A list of {@KeyValuePair}s that will be returned as
+     * response headers.
+     */
     public void setResponse(
             final URL url,
             final String content,
@@ -199,6 +220,15 @@ public class FakeWebConnection extends WebConnection {
     }
 
 
+    /**
+     * Set the response that will be returned when a url is requested that does
+     * not have a specific content set for it.
+     * 
+     * @param content The content to return
+     * @param statusCode The status code to return
+     * @param statusMessage The status message to return
+     * @param contentType The content type to return
+     */
     public void setDefaultResponse(
             final String content,
             final int statusCode,
