@@ -165,6 +165,9 @@
         <contributor>
             <name>Mike Bresnahan</name>
         </contributor>
+        <contributor>
+            <name>Sergey Gorelkin</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

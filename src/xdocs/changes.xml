@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" due-to="Sergey Gorelkin" id="1085612">
+                Fixed bug changing "//" to "/" in query parameters of urls called from a page.
+            </action>
             <action type="update" dev="mguillem">
                 When simulating IE, nodes can now be accessed directly by their name (ex: window.form1).
             </action>
