@@ -240,13 +240,12 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "</configuration>\n";
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
-        final JavaScriptConfiguration configuration;
         try {
-            configuration = JavaScriptConfiguration.getInstance(null);
+            JavaScriptConfiguration.getInstance(null);
             assertTrue("Should have thrown an exception for no browser supplied", false);
         }
         catch (final IllegalStateException e) {
-            assertTrue(true);
+            // everything is fine
         }
     }
 
