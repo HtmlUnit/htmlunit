@@ -181,6 +181,9 @@
             	Changed the behaviour of HtmlCheckBoxInput.click() to be consistent
             	with IE and Mozilla.  Patch submitted by Jun Chen.
             </action>
+            <action type="update" dev="dktaylor">
+                Fix return type from DomCharacterData.getData to be String.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
