@@ -52,24 +52,31 @@ public class KeyDataPair extends KeyValuePair {
     private static final long serialVersionUID = -1129314696176851675L;
     
     private final File fileObject_;
+    private final String contentType_;
+    private final String charset_;
 
     /**
      * Create an instance.
      *
      * @param key The key.
-     * @param value The value.
+     * @param file The file.
+     * @param contentType the content type
+     * @param charset the charset encoding
      */
-    public KeyDataPair( final String key, final String value) {
+    public KeyDataPair( final String key, final File file, final String contentType, 
+            final String charset) {
 
-        super(key, new File(value).getName());
+        super(key, file.getName());
 
-        File f = new File(value);
-        if (f.exists()) {
-            fileObject_ = f;
+        if (file.exists()) {
+            fileObject_ = file;
         }
         else {
             fileObject_ = null;
         }
+        
+        contentType_ = contentType;
+        charset_ = charset;
     }
 
 
@@ -80,4 +87,19 @@ public class KeyDataPair extends KeyValuePair {
         return fileObject_;
     }
 
+    /**
+     * Gets the charset encoding for this file upload
+     * @return the charset
+     */
+    public String getCharset() {
+        return charset_;
+    }
+
+    /**
+     * Gets the content type for this file upload
+     * @return the content type
+     */
+    public String getContentType() {
+        return contentType_;
+    }
 }
