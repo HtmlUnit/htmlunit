@@ -85,6 +85,7 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Michael Ottati
+ * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp">
  * MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
@@ -156,8 +157,7 @@ public final class Document extends NodeImpl {
             links_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
                 links_.init(getHtmlPage(), 
-                        new HtmlUnitXPath("//*[(name() = 'a' or name() = 'area') "
-                                + "and string-length(@href) > 0]"));
+                        new HtmlUnitXPath("//a[@href] | //area[@href]"));
             }
             catch (final JaxenException e) {
                 throw Context.reportRuntimeError("Failed to initialize collection document.links: " + e.getMessage());

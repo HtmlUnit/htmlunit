@@ -70,6 +70,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author  Chris Erskine
  * @author  Marc Guillemot
  * @author  Michael Ottati
+ * @author <a href="mailto:george@murnock.com">George Murnock</a>
  */
 public class DocumentTest extends WebTestCase {
     /**
@@ -287,20 +288,21 @@ public class DocumentTest extends WebTestCase {
             + "<body onload='test()'>"
             + "<a href='foo.html' id='firstLink'>foo</a>"
             + "<a href='foo2.html'>foo2</a>"
-            + "<a name='end'>"
+            + "<a name='end'/>"
+            + "<a href=''>null2</a>"
             + "</body>"
             + "</html>";
         
         
         final List collectedAlerts = new ArrayList();
         final List expectedAlerts = Arrays.asList( new String[]{
-            "0", "2", "2", "true", "firstLink"
+            "0", "3", "3", "true", "firstLink"
         } );
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
-    }
+    }   
 
     /**
      * Ensures that <tt>document.createElement()</tt> works correctly.
