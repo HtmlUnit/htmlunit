@@ -641,13 +641,21 @@ public class WebClient {
     public WebWindow openWindow( final URL url, final String windowName ) throws IOException {
         assertNotNull("windowName", windowName);
 
-        final TopLevelWindow window = new TopLevelWindow(windowName, this);
+        // TODO: Check to see if there is already a window with the specified name.  If not, create
+        // a new one
+
+        final WebWindow window;
+        if( windowName.equals("_self") ) {
+            window = getCurrentWindow();
+        }
+        else {
+            window = new TopLevelWindow(windowName, this);
+            fireWindowOpened( new WebWindowEvent(window, null, null) );
+        }
 
         if( url != null ) {
             getPage(window, url, SubmitMethod.GET, Collections.EMPTY_LIST);
         }
-
-        fireWindowOpened( new WebWindowEvent(window, null, null) );
         return window;
     }
 

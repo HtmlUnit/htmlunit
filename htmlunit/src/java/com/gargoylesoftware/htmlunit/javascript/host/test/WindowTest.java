@@ -97,6 +97,7 @@ public class WindowTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage)anchor.click();
         assertSame( firstPage, secondPage );
 
+        // Expecting contentChanged, opened, contentChanged
         assertEquals( 3, eventCatcher.getEventCount() );
 
         final WebWindow firstWebWindow
@@ -108,6 +109,56 @@ public class WindowTest extends WebTestCase {
 
         assertEquals( "First", ((HtmlPage)firstWebWindow.getEnclosedPage()).getTitleText());
         assertEquals( "Second", ((HtmlPage)secondWebWindow.getEnclosedPage()).getTitleText());
+    }
+
+
+    /**
+     * _self is a magic name.  If we call open(url, '_self') then the current window must be
+     * reloaded.
+     */
+    public void testOpenWindow_self() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title></head><body>"
+             + "<form name='form1'>"
+             + "    <a id='link' onClick='open(\"http://second\", \"_self\"); "
+             + "return false;'>Click me</a>"
+             + "</form>"
+             + "</body></html>";
+        final String secondContent
+             = "<html><head><title>Second</title></head><body></body></html>";
+
+        final EventCatcher eventCatcher = new EventCatcher();
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://second"), secondContent, 200, "OK", "text/html",
+            Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
+                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        eventCatcher.listenTo( webClient );
+
+        final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
+
+        final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("link");
+        final HtmlPage secondPage = (HtmlPage)anchor.click();
+        assertEquals( "First", firstPage.getTitleText() );
+        assertEquals( "Second", secondPage.getTitleText() );
+
+        // Expecting only a changed
+        assertEquals( 1, eventCatcher.getEventCount() );
+
+        final WebWindow secondWebWindow
+            = (WebWindow)((WebWindowEvent)eventCatcher.getEventAt(0)).getSource();
+        assertSame( webClient.getCurrentWindow(), firstWebWindow);
+        assertSame( firstWebWindow, secondWebWindow );
     }
 
 
