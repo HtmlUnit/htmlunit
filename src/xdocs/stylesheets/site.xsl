@@ -247,4 +247,9 @@ tbody {padding: 5px 5px 5px 10px;}
 </xsl:template>
 
 
+<xsl:template match="javadoc">
+	<a href="/foo"><xsl:apply-templates/></a>
+</xsl:template>
+
+
 </xsl:stylesheet>
