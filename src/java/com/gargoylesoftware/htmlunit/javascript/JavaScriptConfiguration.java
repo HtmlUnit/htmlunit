@@ -39,9 +39,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -234,36 +231,7 @@ public final class JavaScriptConfiguration {
 
 
     private InputStream getConfigurationFileAsStream() {
-        final String fileName = "/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml";
-        return getResourceAsStream(fileName);
-    }
-
-
-    private InputStream getResourceAsStream( final String name ) {
-        Assert.notNull("name", name);
-
-        InputStream inputStream = getClass().getResourceAsStream(name);
-        if( inputStream == null ) {
-            try {
-                final String localizedName = name.replace( '/', File.separatorChar );
-                inputStream = new FileInputStream( localizedName );
-            }
-            catch( final IOException e ) {
-                // Fall through
-            }
-        }
-
-        // If we are running maven tests then the path will be slightly different
-        if( inputStream == null ) {
-            try {
-                final String localizedName = ("./src/java"+name).replace( '/', File.separatorChar );
-                inputStream = new FileInputStream( localizedName );
-            }
-            catch( final IOException e ) {
-                // Fall through
-            }
-        }
-        return inputStream;
+        return getClass().getResourceAsStream("JavaScriptConfiguration.xml");
     }
 
 
