@@ -51,8 +51,9 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  *  Tests for HtmlCheckBox
  *
- * @version  $Revision$
- * @author  Mike Bresnahan
+ * @version $Revision$
+ * @author Mike Bresnahan
+ * @author Marc Guillemot
  */
 public class HtmlCheckBoxInputTest extends WebTestCase {
     /**
@@ -160,4 +161,23 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
          assertNotSame( page, secondPage );
          assertTrue( checkBox.isChecked());
      }
+
+    /**
+     * Verifies that a asText() returns "checked" or "unckecked" according to the state of the checkbox.
+     * @throws Exception if the test fails
+     */
+    public void testAsText() throws Exception {
+        final String htmlContent
+                  = "<html><head><title>foo</title></head><body>"
+                  + "<form id='form1'>"
+                  + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>"
+                  + "</form></body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlCheckBoxInput checkBox = ( HtmlCheckBoxInput )page.getHtmlElementById( "checkbox" );
+        assertEquals("unchecked", checkBox.asText());
+        checkBox.setChecked(true);
+        assertEquals("checked", checkBox.asText());
+    }
 }
