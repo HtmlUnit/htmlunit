@@ -1,7 +1,13 @@
 <?xml version="1.0"?>
 <document title="Change History">
 
-<section title="1.1-rc3">
+<section title="1.2-pre1">
+	<change-log>
+	</change-log>
+</section>
+
+
+<section title="1.1-final">
 	<change-log>
 		<change type="fix">
 			Fixed bug where loading of external javascript files would not follow redirects.
