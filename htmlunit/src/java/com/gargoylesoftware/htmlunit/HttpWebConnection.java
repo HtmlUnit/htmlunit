@@ -264,7 +264,6 @@ public class HttpWebConnection extends WebConnection {
         HttpClient client = ( HttpClient )httpClients_.get( key );
         if( client == null ) {
             client = new HttpClient();
-            client.getState().setCookiePolicy( CookiePolicy.COMPATIBILITY );
 
             // Disable informational messages from httpclient
             final Log log = LogFactory.getLog("httpclient.wire");
@@ -273,17 +272,17 @@ public class HttpWebConnection extends WebConnection {
             }
 
             // Disable certificate caching within HttpClient
-            client.setState(
-                new HttpState() {
-                    public void setCredentials(
-                        final String realm, final Credentials credentials ) {
-                    }
+            final HttpState httpState = new HttpState() {
+                public void setCredentials(
+                    final String realm, final Credentials credentials ) {
+                }
 
-
-                    public Credentials getCredentials( final String realm ) {
-                        return null;
-                    }
-                } );
+                public Credentials getCredentials( final String realm ) {
+                    return null;
+                }
+            };
+            client.setState(httpState);
+            httpState.setCookiePolicy( CookiePolicy.COMPATIBILITY );
 
             final HostConfiguration hostConfiguration = new HostConfiguration();
             final URI uri;
@@ -302,7 +301,7 @@ public class HttpWebConnection extends WebConnection {
 
             // If two clients are part of the same domain then they should share the same
             // state (ie cookies)
-            final HttpState sharedState = getStateForDomain( url.getHost() );
+            final HttpState sharedState = getStateForUrl( url );
             if( sharedState != null ) {
                 client.setState(sharedState);
             }
@@ -312,7 +311,13 @@ public class HttpWebConnection extends WebConnection {
     }
 
 
-    private synchronized HttpState getStateForDomain( final String domain ) {
+    /**
+     * Return the {@link HttpState} that is being used for a given domain
+     * @param url The url from which the domain will be determined
+     * @return The state or null if no state can be found for this domain.
+     */
+    public synchronized HttpState getStateForUrl( final URL url ) {
+        final String domain = url.getHost();
         int index = domain.lastIndexOf('.');
         if( index != -1 ) {
             index = domain.lastIndexOf(".", index-1);

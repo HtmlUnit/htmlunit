@@ -38,17 +38,22 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.DocumentAllArray;
+
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+
+import org.apache.commons.httpclient.Cookie;
+import org.apache.commons.httpclient.HttpState;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
@@ -174,14 +179,31 @@ public final class Document extends HTMLElement {
     }
 
 
+    private HttpState getHttpState() {
+        final HtmlPage htmlPage = getHtmlPage();
+        final WebConnection connection = htmlPage.getWebClient().getWebConnection();
+        final URL url = htmlPage.getWebResponse().getUrl();
+        
+        return connection.getStateForUrl( url );
+    }
     /**
      * Return the cookie attribute.  Currently hardcoded to return an empty string
      * @return The cookie attribute
      */
     public String jsGet_cookie() {
-        getLog().debug("Document.cookie not supported: returning empty string");
-        final WebResponse webResponse = ((HtmlPage)getHtmlElementOrDie()).getWebResponse();
-        return webResponse.getResponseHeaderValue("Set-Cookie");
+        final HttpState state = getHttpState();
+        final Cookie[] cookies = state.getCookies();
+        final StringBuffer buffer = new StringBuffer();
+        
+        for( int i=0; i<cookies.length; i++ ) {
+            if( i != 0 ) {
+                buffer.append(";");
+            }
+            buffer.append( cookies[i].getName() );
+            buffer.append( "=" );
+            buffer.append( cookies[i].getValue() );
+        }
+        return buffer.toString();        
     }
 
 

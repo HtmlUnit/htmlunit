@@ -130,6 +130,9 @@
             <action type="new" dev="mbowler">
             	Added support for the property Window.name
             </action>
+            <action type="new" dev="mbowler">
+            	Added read-only support for Document.cookie.
+            </action>
         </release>
 	</body>
 

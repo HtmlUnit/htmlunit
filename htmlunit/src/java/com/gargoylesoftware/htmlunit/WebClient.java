@@ -56,6 +56,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -167,11 +168,11 @@ public class WebClient {
 
 
     /**
-     *  Return the object that will resolve all url requests
-     *
-     * @return  The UrlResolver
+     * <p>Return the object that will resolve all url requests<p>
+     * <p>INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK</p>
+     * @return  The connection that will be used.
      */
-    private WebConnection getWebConnection() {
+    public synchronized WebConnection getWebConnection() {
         if( webConnection_ == null ) {
             if( proxyHost_ == null ) {
                 webConnection_ = new HttpWebConnection( this );

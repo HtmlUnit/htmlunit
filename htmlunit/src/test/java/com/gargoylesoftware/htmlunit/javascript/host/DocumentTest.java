@@ -51,6 +51,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.httpclient.Cookie;
+import org.apache.commons.httpclient.HttpState;
+
 /**
  * Tests for Document
  *
@@ -1030,12 +1033,15 @@ public class DocumentTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>"
             + "</body></html>";
 
-        final List headers = Collections.singletonList( 
-            new KeyValuePair("Set-Cookie", "one=two;three=four") );
+        final URL url = new URL("http://first");
         webConnection.setResponse(
-            new URL("http://first"), firstContent, 200, "OK", "text/html", headers );
+            url, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webClient.setWebConnection( webConnection );
 
+        final HttpState state = webConnection.getStateForUrl(url);
+        state.addCookie( new Cookie("first", "one", "two") );
+        state.addCookie( new Cookie("first", "three", "four") );
+        
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
