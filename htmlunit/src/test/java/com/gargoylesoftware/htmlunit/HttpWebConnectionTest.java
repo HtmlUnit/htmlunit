@@ -40,7 +40,10 @@ package com.gargoylesoftware.htmlunit;
 import junit.framework.TestCase;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.httpclient.Cookie;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
@@ -54,6 +57,16 @@ import java.util.Map;
  * @version $Revision$
  */
 public class HttpWebConnectionTest extends TestCase {
+
+    /**
+     * Create an instance.
+     *
+     * @param name The name of the test.
+     */
+    public HttpWebConnectionTest(String name) {
+        super(name);
+    }
+
 
     /**
      * Tests {@link HttpWebConnection#getStateForUrl(java.net.URL)} using a url with hostname
@@ -128,6 +141,39 @@ public class HttpWebConnectionTest extends TestCase {
 
 
     /**
+     * Tests that <code>.domain.org</code> is not altered by {@link HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
+     */
+    public void testMakeCookiesRFC2109Compliant_2PartDomainWithDot() {
+        assertMakeCookiesRFC2109Compliant(".domain.org", ".domain.org");
+    }
+
+
+    /**
+     * Tests that <code>domain.org</code> is changed to <code>.domain.org</code> by {@link
+     * HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
+     */
+    public void testMakeCookiesRFC2109Compliant_2PartDomainWithoutDot() {
+        assertMakeCookiesRFC2109Compliant("domain.org", ".domain.org");
+    }
+
+
+    /**
+     * Tests that <code>www.domain.org</code> is not altered by {@link HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
+     */
+    public void testMakeCookiesRFC2109Compliant_3PartDomain() {
+        assertMakeCookiesRFC2109Compliant("www.domain.org", "www.domain.org");
+    }
+
+
+    /**
+     * Tests that <code>www.sub.domain.org</code> is not altered by {@link HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
+     */
+    public void testMakeCookiesRFC2109Compliant_4PartDomain() {
+        assertMakeCookiesRFC2109Compliant("www.sub.domain.org", "www.sub.domain.org");
+    }
+
+
+    /**
      * Tests the {@link HttpWebConnection#getStateForUrl(java.net.URL)} using reflection.
      *
      * @param hostname The hostname of the url to test
@@ -162,6 +208,36 @@ public class HttpWebConnectionTest extends TestCase {
         }
         catch (MalformedURLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
+     * Sets up appropriate objects to test {@link HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
+     *
+     * @param testedDomain The domain to test in a {@link org.apache.commons.httpclient.Cookie}
+     * @param expectedDomain The expected domain set in the {@link org.apache.commons.httpclient.Cookie}
+     */
+    private void assertMakeCookiesRFC2109Compliant(String testedDomain, String expectedDomain) {
+        try {
+            Cookie cookie = new Cookie(testedDomain, "foo", "bar");
+            HttpWebConnection connection = new HttpWebConnection(new WebClient());
+            Method method = HttpWebConnection.class.getDeclaredMethod(
+                    "makeCookiesRFC2109Compliant", new Class[]{HttpState.class});
+            method.setAccessible(true);
+            HttpState httpState = new HttpState();
+            httpState.addCookie(cookie);
+            method.invoke(connection, new Object[]{httpState});
+            assertEquals(expectedDomain, cookie.getDomain());
+        }
+        catch (NoSuchMethodException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        catch (IllegalAccessException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        catch (InvocationTargetException e) {
+            throw new RuntimeException(e.getMessage());
         }
     }
 
