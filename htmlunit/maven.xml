@@ -273,9 +273,9 @@
         	    <ant:jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog"/>
             <ant:arg value="com.gargoylesoftware.htmlunit.MainTestSuite"/>
             <ant:classpath>
-                <ant:path refid="maven.dependency.classpath"/>
-                <ant:pathelement path="${maven.build.dest}"/>
                 <ant:pathelement path="target/test-classes"/>
+                <ant:pathelement path="${maven.build.dest}"/>
+                <ant:path refid="maven.dependency.classpath"/>
             </ant:classpath>
         </ant:java>
     </goal>
