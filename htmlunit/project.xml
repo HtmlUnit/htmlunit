@@ -143,6 +143,9 @@
         <contributor>
             <name>Mike Williams</name>
         </contributor>
+        <contributor>
+            <name>Mike Gallaher</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
