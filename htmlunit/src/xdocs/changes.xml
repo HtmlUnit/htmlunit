@@ -59,6 +59,12 @@
 		<change type="new">
 			Added support for indexed properties in javascript forms
 		</change>
+		<change type="change">
+			Changes in the latest versions of commons-httpclient are reusing buffers that they
+			previously weren't.  This results in a situation where trying to get the content
+			out of a WebResponse after the inital load would result in no content.  Buffering
+			is now done within HtmlUnit to avoid this problem.
+		</change>
 	</change-log>
 </section>
 

@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -283,11 +284,13 @@ public class HttpWebConnection extends WebConnection {
     private WebResponse makeWebResponse(
         final int statusCode, final HttpMethod method, final URL originatingURL ) {
 
+        final byte[] contentBuffer = method.getResponseBody();
+        final String contentAsString = method.getResponseBodyAsString();
+
         return new WebResponse() {
                 public int getStatusCode() {
                     return statusCode;
                 }
-
 
                 public String getStatusMessage() {
                     String message = method.getStatusText();
@@ -301,7 +304,6 @@ public class HttpWebConnection extends WebConnection {
 
                     return message;
                 }
-
 
                 public String getContentType() {
                     final Header contentTypeHeader  = method.getResponseHeader( "content-type" );
@@ -319,23 +321,17 @@ public class HttpWebConnection extends WebConnection {
                     }
                 }
 
-
-                public String getContentAsString()
-                    throws IOException {
-                    return method.getResponseBodyAsString();
+                public String getContentAsString() throws IOException {
+                    return contentAsString;
                 }
 
-
-                public InputStream getContentAsStream()
-                    throws IOException {
-                    return method.getResponseBodyAsStream();
+                public InputStream getContentAsStream() throws IOException {
+                    return new ByteArrayInputStream(contentBuffer);
                 }
-
 
                 public URL getUrl() {
                     return originatingURL;
                 }
-
 
                 public String getResponseHeaderValue( final String headerName ) {
                     final Header header = method.getResponseHeader(headerName);
