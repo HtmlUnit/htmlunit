@@ -495,6 +495,11 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
 
+    /**
+     * Return the javascript class name for the specified html element.
+     * @param htmlElement The element
+     * @return The class name.
+     */
     public static String getClassNameForHtmlElement( final HtmlElement htmlElement ) {
         final String tagName = htmlElement.getTagName();
 

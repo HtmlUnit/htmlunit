@@ -77,6 +77,7 @@ public final class ScriptFilter extends DefaultFilter {
      * @param element The element
      * @param attrs The xml attributes
      * @param augmentations The augmentations.
+     * @throws XNIException If a problem occurs
      */
     public void startElement(
             final QName element,
@@ -103,7 +104,7 @@ public final class ScriptFilter extends DefaultFilter {
      * Empty element.
      * @param element The element
      * @param attrs The xml attributes.
-     * @param The augmentations
+     * @param augmentations The augmentations
      * @throws XNIException if a problem occurs.
      */
     public void emptyElement(
@@ -142,7 +143,7 @@ public final class ScriptFilter extends DefaultFilter {
     /**
      *  End element.
      * @param element The element
-     * @param The augmentations
+     * @param augmentations The augmentations
      * @throws XNIException if a problem occurs.
      */
     public void endElement(
