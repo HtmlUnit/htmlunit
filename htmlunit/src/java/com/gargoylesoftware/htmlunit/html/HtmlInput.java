@@ -161,7 +161,7 @@ public class HtmlInput
      * @throws IOException If an IO error occured
      */
     protected Page doClickAction() throws IOException {
-        final String type = getTypeAttribute();
+        final String type = getTypeAttribute().toLowerCase();
         if (type.equals("image") || type.equals("submit")) {
             return getEnclosingFormOrDie().submit(this);
         } 

@@ -71,7 +71,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
                  = "<html><head><title>foo</title></head><body>"
                  + "<form id='form1'>"
                  + "<input type='submit' name='aButton' value='foo'/>"
-                 + "<input type='submit' name='button' value='foo'/>"
+                 + "<input type='suBMit' name='button' value='foo'/>"
                  + "<input type='submit' name='anotherButton' value='foo'/>"
                  + "</form></body></html>";
         final WebClient client = new WebClient();
