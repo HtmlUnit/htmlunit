@@ -198,6 +198,14 @@
             <action type="update" dev="mbowler">
                 Upgraded commons-httpclient.jar to 2.0-rc2
             </action>
+            <action type="add" dev="mbowler">
+                New method WebClient.loadWebResponseInto() which can be used to create
+                pages that were not loaded via http.
+            </action>
+            <action type="add" dev="mbowler">
+                New method StringWebResponse which can be used to easily create a 
+                WebResponse based on a string containing html.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
