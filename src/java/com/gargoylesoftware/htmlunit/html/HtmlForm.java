@@ -99,7 +99,7 @@ public class HtmlForm extends HtmlElement {
         final Iterator iterator = inputList.iterator();
         while( iterator.hasNext() ) {
             final HtmlInput input = (HtmlInput)iterator.next();
-            if( input instanceof HtmlSubmitInput ) {
+            if( input.getTypeAttribute().equals("submit")) {
                 return submit( ( SubmittableElement )input );
             }
         }

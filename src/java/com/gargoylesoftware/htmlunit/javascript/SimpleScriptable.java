@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -95,20 +94,20 @@ public class SimpleScriptable extends ScriptableObject {
         final String[][] mapping = {
             {"HtmlAnchor", "Anchor"},
             {"HtmlButton", "Button"},
-            {"HtmlButtonInput", "Button"},
-            {"HtmlCheckBoxInput", "Checkbox"},
-            {"HtmlFileInput", "FileUpload"},
+            {"HtmlInput", "Input"},
+            {"HtmlCheckBoxInput", "Input"},
+            {"HtmlFileInput", "Input"},
             {"HtmlForm", "Form"},
-            {"HtmlHiddenInput", "Hidden"},
+            {"HtmlHiddenInput", "Input"},
             {"HtmlImage", "Image"},
             {"HtmlInlineFrame", "Window"},
             {"HtmlOption", "Option"},
-            {"HtmlPasswordInput", "Password"},
-            {"HtmlRadioButtonInput", "Radio"},
-            {"HtmlResetInput", "Reset"},
+            {"HtmlPasswordInput", "Input"},
+            {"HtmlRadioButtonInput", "Input"},
+            {"HtmlResetInput", "Input"},
             {"HtmlSelect", "Select"},
-            {"HtmlSubmitInput", "Submit"},
-            {"HtmlTextInput", "Text"},
+            {"HtmlSubmitInput", "Input"},
+            {"HtmlTextInput", "Input"},
             {"HtmlTextArea", "Textarea"},
             {"HtmlElement", "HTMLElement"},
         };
@@ -464,14 +463,7 @@ public class SimpleScriptable extends ScriptableObject {
         }
 
         final String javaScriptClassName;
-        if( htmlElement instanceof HtmlButton ) {
-            // TODO: The proper solution is to make HtmlButton abstract and have a hierarchy just like HtmlInput
-            // Until that happens, we touch up the javascript name here.
-            javaScriptClassName = getJavaScriptClassNameForButtonKludge((HtmlButton)htmlElement);
-        }
-        else {
-            javaScriptClassName = (String)getHtmlJavaScriptMapping().get(htmlElement.getClass());
-        }
+        javaScriptClassName = (String)getHtmlJavaScriptMapping().get(htmlElement.getClass());
         if( javaScriptClassName == null ) {
             // We don't have a specific subclass for this element so create something generic.
             final SimpleScriptable scriptable = makeJavaScriptObject("HTMLElement");
@@ -484,47 +476,6 @@ public class SimpleScriptable extends ScriptableObject {
             scriptable.setHtmlElement(htmlElement);
             return scriptable;
         }
-    }
-
-
-    private String getJavaScriptClassNameForButtonKludge( final HtmlButton button ) {
-        final String typeAttribute = button.getTypeAttribute();
-        final String className;
-        if( typeAttribute == HtmlButton.ATTRIBUTE_NOT_DEFINED ) {
-            className = "Button";
-        }
-        else if( typeAttribute.equals("submit") ) {
-            className = "Submit";
-        }
-        else if( typeAttribute.equals("reset") ) {
-            className = "Reset";
-        }
-        else if( typeAttribute.equals("checkbox") ) {
-            className = "Checkbox";
-        }
-        else if( typeAttribute.equals("radio") ) {
-            className = "Radio";
-        }
-        else if( typeAttribute.equals("text") ) {
-            className = "Text";
-        }
-        else if( typeAttribute.equals("hidden") ) {
-            className = "Hidden";
-        }
-        else if( typeAttribute.equals("password") ) {
-            className = "Password";
-        }
-        else if( typeAttribute.equals("image") ) {
-            className = "Image";
-        }
-        else if( typeAttribute.equals("file") ) {
-            className = "File";
-        }
-        else {
-            className = "Button";
-        }
-
-        return className;
     }
 
 

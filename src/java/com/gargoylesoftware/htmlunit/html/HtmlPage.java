@@ -1132,11 +1132,8 @@ public final class HtmlPage
             if( element instanceof HtmlButton ) {
                 newPage = ((HtmlButton)element).click();
             }
-            else if( element instanceof HtmlSubmitInput ) {
-                newPage = ((HtmlSubmitInput)element).click();
-            }
-            else if( element instanceof HtmlResetInput ) {
-                newPage = ((HtmlResetInput)element).click();
+            else if( element instanceof HtmlInput ) {
+                newPage = ((HtmlInput)element).click();
             }
             else {
                 newPage = this;

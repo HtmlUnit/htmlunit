@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.w3c.dom.Element;
 
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
+
 /**
  *  The javascript object that represents something that can be put in a form.
  *
@@ -123,8 +125,14 @@ public class Input extends HTMLElement {
      *      set
      */
     public void jsSet_checked( final boolean checked ) {
-        getLog().debug( "Input.jsSet_checked(" + checked
-            + ") was called for class " + getClass().getName() );
+        String type = getHtmlElementOrDie().getAttributeValue("type");
+        if (type.equals("checkbox") || type.equals("radio")){
+            ((HtmlInput)getHtmlElementOrDie()).setChecked(checked);
+        } 
+        else {
+            getLog().debug( "Input.jsSet_checked(" + checked
+                + ") was called for class " + getClass().getName() );
+        }
     }
 
 
@@ -137,8 +145,14 @@ public class Input extends HTMLElement {
      *@return    The checked property.
      */
     public boolean jsGet_checked() {
-        getLog().warn( "Input.jsGet_checked() was called for class " + getClass().getName() );
-        return false;
+        String type = getHtmlElementOrDie().getAttributeValue("type");
+        if (type.equals("checkbox") || type.equals("radio")){
+            return ((HtmlInput)getHtmlElementOrDie()).isChecked();
+        } 
+        else {
+            getLog().warn( "Input.jsGet_checked() was called for class " + getClass().getName() );
+            return false;
+        }
     }
 
 
