@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -45,6 +46,7 @@ import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
 /**
@@ -228,5 +230,51 @@ public class HTMLElement extends NodeImpl {
      */
     public void jsSet_className(final String className) {
         getHtmlElementOrDie().setAttributeValue("class", className);
+    }
+    
+    /**
+     * Get the innerHTML attribute
+     * @return the contents of this node as html
+     */
+    public String jsGet_innerHTML() {
+        final Iterator it = getDomNodeOrDie().getChildIterator();
+        StringBuffer buf = new StringBuffer();
+        while (it.hasNext()) {
+            buf.append(((DomNode) it.next()).asXml());
+        }
+        int i;
+        removeChar(buf, "\r");
+        removeChar(buf, "\n");
+        removeChar(buf, "  ");
+        return buf.toString();
+    }
+
+
+    /**
+     * Remove all occurances of the given string.  Note that if the string
+     * is a multi-character string, only the first character is removed.
+     * @param buf - StringBuffer to remove the characters from
+     * @param str - The string with the first character to be removed.
+     */
+    private void removeChar(StringBuffer buf, String str) {
+        int i;
+        while (0 <= (i = buf.indexOf(str))) {
+            buf.deleteCharAt(i);
+        }
+    }
+    
+    /**
+     * Replace all children elements of this element with the supplied value.
+     * <b>Currently does not support html as the replacement value.</b>
+     * @param value - the new value for the contents of this node
+     */
+    public void jsSet_innerHTML(final String value) {
+        if (value.indexOf('<') >= 0) {
+            getLog().debug("Setter not implemented for complex values for innerHTML - simple text string only");
+            return;
+        }
+        final DomNode domNode = getDomNodeOrDie();
+        domNode.removeAllChildren();
+        domNode.appendChild(new DomText(domNode.getPage(), value));
     }
 }

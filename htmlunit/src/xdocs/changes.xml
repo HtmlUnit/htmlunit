@@ -13,6 +13,13 @@
             <action type="update" dev="mbowler" due-to="Marc Guillemot" id="1067471">
                 Added support for function syntax on document.all().
             </action>
+            <action type="update" dev="mbowler" due-to="Chris Erskine" id="1065797">
+                Added support for InnerHTML().
+            </action>
+            <action type="update" dev="mbowler" due-to="Chris Erskine" id="1065797">
+            		Added support for enabling the errors from
+				NekoHtml by setting a value on the WebClient.
+            </action>
 		</release>
 
         <release version="1.3" date="November 12, 2004">

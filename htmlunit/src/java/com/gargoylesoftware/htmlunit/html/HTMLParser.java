@@ -70,11 +70,13 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @version  $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David K. Taylor
+ * @author Chris Erskine
  */
 public class HTMLParser {
 
     private static final Map ELEMENT_FACTORIES = new HashMap();
-
+    private static boolean ValidateHtml_ = false;
+    
     static {
         ELEMENT_FACTORIES.put("input", InputElementFactory.instance);
 
@@ -156,6 +158,14 @@ public class HTMLParser {
         ELEMENT_FACTORIES.put(tagName, new DefaultElementFactory(elementClass));
     }
 
+    /**
+     * Set the flag to control logging html errors to the standard error
+     * @param validateFlag - boolean flag to set
+     */
+    public static void setValidateHtml(boolean validateFlag) {
+        ValidateHtml_ = validateFlag;
+    }
+        
     /**
      * @param tagName an HTML element tag name
      * @return a factory for creating HtmlElements representing the given tag
@@ -281,7 +291,9 @@ public class HTMLParser {
                 setProperty( "http://cyberneko.org/html/properties/filters", filters);
                 setFeature( "http://cyberneko.org/html/features/augmentations", true );
                 setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
-                setFeature("http://cyberneko.org/html/features/report-errors", false);
+                setFeature("http://cyberneko.org/html/features/report-errors", ValidateHtml_);
+// TODO - Tell nekoHtml to process the </body> and </html> tags - This should also be done by dynamic config.
+//                setFeature("http://cyberneko.org/html/features/balance-tags/ignore-outside-content", true);
             }
             catch (SAXException e) {
                 throw new ObjectInstantiationException("unable to create HTML parser", e);
