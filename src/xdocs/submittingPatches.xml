@@ -40,13 +40,12 @@
                         <a href="http://www.junit.org">JUnit</a>.  No code will get merged without tests.
                     </li>
                     <li>
-                        All unit tests must pass.  Occassionally this rule will be broken if it is important
-                        to get a test into the build before the code is ready but this should be very rare.
+                        All existing unit tests must pass.
                     </li>
                     <li>
                         All files must be copyright <a href="http://www.GargoyleSoftware.com">Gargoyle Software Inc.</a>
                         and must be licensed under the same
-                        license as the rest of the probject - currently an <a href="license.html">apache
+                        license as the rest of the probject - currently an <a href="license.html">Apache
                         style</a> one.  This is required so that we can make sweeping changes such as the license
                         change that we already did (from LGPL to Apache style).
                     </li>
