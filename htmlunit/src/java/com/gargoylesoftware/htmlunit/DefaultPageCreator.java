@@ -84,6 +84,9 @@ public class DefaultPageCreator implements PageCreator {
                 throw new ObjectInstantiationException("Unable to parse html input", e);
             }
         }
+        //else if( contentType.equals("application/xhtml+xml") ) {
+        // Create validated xhtml document
+        //}
         else if( contentType.equals("text/javascript") || contentType.equals("application/x-javascript") ) {
             newPage = new JavaScriptPage( webResponse, webWindow );
             webWindow.setEnclosedPage(newPage);

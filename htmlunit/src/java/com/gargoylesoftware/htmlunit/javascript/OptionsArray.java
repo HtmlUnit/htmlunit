@@ -86,14 +86,17 @@ public class OptionsArray extends SimpleScriptable {
      * @return The object or NOT_FOUND
      */
     public Object get( final int index, final Scriptable start ) {
+        Object object = null;
         try {
-            return getScriptableFor( htmlSelect_.getOption( index ) );
+            object = getScriptableFor( htmlSelect_.getOption( index ) );
         }
         catch( final IndexOutOfBoundsException e ) {
-            return NOT_FOUND;
+            object = NOT_FOUND;
         }
+        System.out.println("OptionsArray.get("+index+") "+object);
+        return object;
     }
-    
+
     /**
      * <p>Return the object at the specified index.</p>
      *
@@ -102,8 +105,7 @@ public class OptionsArray extends SimpleScriptable {
      */
     public Object jsFunction_item(final int index) {
         return get(index, null);
-
-    }    
+    }
 
 
     /**

@@ -85,7 +85,7 @@ public class Select extends Input {
             optionsArray_.initialize( htmlSelect );
         }
     }
-    
+
     /**
      * Remove option at the specified index
      * @param index The index of the item to remove
@@ -93,34 +93,34 @@ public class Select extends Input {
     public void jsFunction_remove(final int index) {
         put(index, null, null);
     }
-    
+
     /**
      * Add a new item to the list (optionally) before the specified item
      * @param newOptionObject The DomNode to insert
      * @param beforeOptionObject The DomNode to insert the previous element before (null if at end)
-     */    
+     */
     public void jsFunction_add(final Object newOptionObject, final Object beforeOptionObject) {
-        
+
         final HtmlSelect select = (HtmlSelect) getHtmlElementOrDie();
 
         final Option option = (Option) newOptionObject;
         final Option beforeOption = (Option) beforeOptionObject;
-        
+
         HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
         if ( htmlOption == null ) {
             initJavaScriptObject( option );
             htmlOption = new HtmlOption(select.getPage(), null);
             option.setDomNode( htmlOption );
         }
-        
+
         if (beforeOption == null) {
             select.appendChild(htmlOption);
-        } 
+        }
         else {
             final DomNode before = beforeOption.getDomNodeOrDie();
             before.insertBefore(htmlOption);
         }
-    }      
+    }
 
     /**
      * Return the type of this input.
@@ -235,6 +235,5 @@ public class Select extends Input {
     private HtmlSelect getHtmlSelect() {
         return (HtmlSelect)getHtmlElementOrDie();
     }
-     
 }
 
