@@ -35,6 +35,13 @@ public class UnexpectedPage implements Page {
 
 
     /**
+     * Initialize this page.
+     */
+    public void initialize() {
+    }
+
+
+    /**
      *  Return an input stream representing all the content that was returned
      *  from the server.
      *

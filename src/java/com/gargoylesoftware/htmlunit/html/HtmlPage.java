@@ -8,9 +8,11 @@ package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.HiddenWebWindow;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -89,7 +91,13 @@ public final class HtmlPage
         webResponse_ = webResponse;
         setEnclosingWindow(webWindow);
         webWindow.setEnclosedPage(this);
+    }
 
+
+    /**
+     * Initialize this page.
+     */
+    public void initialize() {
         initializeHtmlElementCreatorsIfNeeded();
         executeScriptTagsIfNeeded();
         initializeFramesIfNeeded();
@@ -751,9 +759,12 @@ public final class HtmlPage
 
     private String loadJavaScriptFromUrl( final String urlString ) {
         URL url = null;
+        final WebWindow webWindow = new HiddenWebWindow(getWebClient());
+
         try {
             url = getFullyQualifiedUrl(urlString);
-            final Page page = getWebClient().getPage( url );
+            final Page page = getWebClient().getPage(
+                webWindow, url, SubmitMethod.GET, Collections.EMPTY_LIST, false );
             final WebResponse webResponse = page.getWebResponse();
             if( webResponse.getStatusCode() == 200 ) {
                 return webResponse.getContentAsString();
@@ -767,10 +778,6 @@ public final class HtmlPage
         catch( final MalformedURLException e ) {
             getLog().error("Unable to build url for script src tag ["+urlString+"]");
             return "";
-        }
-        catch( final FailingHttpStatusCodeException e ) {
-            getLog().error("Error loading javascript from ["+url.toExternalForm()
-                +"] status=["+e.getStatusCode()+" "+e.getStatusMessage()+"]");
         }
         catch( final Exception e ) {
             getLog().error("Error loading javascript from ["+url.toExternalForm()+"]: ", e);

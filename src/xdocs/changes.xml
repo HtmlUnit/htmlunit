@@ -84,6 +84,14 @@
 			This is incorrect according to the html specification but Internet Explorer supports
 			it so we have to as well.  This will print a warning if it is used.
 		</change>
+		<change type="fix">
+			Fixed bug where script tags that loaded external files would cause the new script
+			to overwrite the existing page in the window
+		</change>
+		<change type="fix">
+			Fixed bug where a redirect called from javascript in the page load would not replace
+			the page.
+		</change>
 	</change-log>
 </section>
 

@@ -37,6 +37,13 @@ public class TextPage implements Page {
 
 
     /**
+     * Initialize this page.
+     */
+    public void initialize() {
+    }
+
+
+    /**
      *  Return the content of the page
      *
      * @return  See above

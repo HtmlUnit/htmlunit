@@ -13,6 +13,13 @@ package com.gargoylesoftware.htmlunit;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public interface Page {
+
+    /**
+     * Initialize this page.
+     */
+    void initialize();
+
+
     /**
      *  Return the web response that was originally used to create this page.
      *
