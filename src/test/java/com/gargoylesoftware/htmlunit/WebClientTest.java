@@ -100,7 +100,7 @@ public class WebClientTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         try {
-            client.getPage(new WebRequestSettings(URL_GARGOYLE).setSubmitMethod(SubmitMethod.POST));
+            client.getPage(new WebRequestSettings(URL_GARGOYLE, SubmitMethod.POST));
             fail( "Expected FailingHttpStatusCodeException" );
         }
         catch( final FailingHttpStatusCodeException e ) {
@@ -396,9 +396,7 @@ public class WebClientTest extends WebTestCase {
         webConnection.setResponse(
             URL_FIRST, firstContent, statusCode,
             "Some error", "text/html", headers );
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200,
-            "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_SECOND, secondContent);
 
         webClient.setWebConnection( webConnection );
 
@@ -410,8 +408,7 @@ public class WebClientTest extends WebTestCase {
         //
         // Second time redirection is turned on (default setting)
         //
-        page = (HtmlPage) webClient.getPage(new WebRequestSettings(url)
-                .setSubmitMethod(initialRequestMethod));
+        page = (HtmlPage) webClient.getPage(new WebRequestSettings(url, initialRequestMethod));
         webResponse = page.getWebResponse();
         if( expectedRedirectedRequestMethod == null ) {
             // No redirect should have happened
@@ -429,8 +426,7 @@ public class WebClientTest extends WebTestCase {
         // Second time redirection is turned off
         //
         webClient.setRedirectEnabled(false);
-        page = (HtmlPage) webClient.getPage(new WebRequestSettings(url)
-                .setSubmitMethod(initialRequestMethod));
+        page = (HtmlPage) webClient.getPage(new WebRequestSettings(url, initialRequestMethod));
         webResponse = page.getWebResponse();
         assertEquals( statusCode, webResponse.getStatusCode() );
         assertEquals( initialRequestMethod, webConnection.getLastMethod() );
@@ -527,8 +523,7 @@ public class WebClientTest extends WebTestCase {
 
         final String urlString = "http://first?a=b";
         final URL url = new URL(urlString);
-        final HtmlPage page = (HtmlPage) client.getPage(new WebRequestSettings(url)
-                .setSubmitMethod(SubmitMethod.POST));
+        final HtmlPage page = (HtmlPage) client.getPage(new WebRequestSettings(url, SubmitMethod.POST));
 
         assertEquals(urlString, page.getWebResponse().getUrl().toExternalForm());
     }

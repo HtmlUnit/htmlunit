@@ -180,16 +180,16 @@ public class HtmlForm extends ClickableElement {
         catch( final MalformedURLException e ) {
             throw new IllegalArgumentException( "Not a valid url: " + action );
         }
-        final WebRequestSettings params = new WebRequestSettings(url)
-            .setRequestParameters(getParameterListForSubmit(submitElement))
-                .setEncodingType(FormEncodingType.getInstance( getEnctypeAttribute() ))
-                    .setSubmitMethod(SubmitMethod.getInstance( getAttributeValue( "method" ) ));
+        final WebRequestSettings settings = new WebRequestSettings(url, 
+                SubmitMethod.getInstance( getAttributeValue("method")));
+        settings.setRequestParameters(getParameterListForSubmit(submitElement));
+        settings.setEncodingType(FormEncodingType.getInstance( getEnctypeAttribute() ));
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
         return htmlPage.getWebClient().getPage(
                 webWindow,
                 htmlPage.getResolvedTarget(getTargetAttribute()),
-                params);
+                settings);
     }
 
 

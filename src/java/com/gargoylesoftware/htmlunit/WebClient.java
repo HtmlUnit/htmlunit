@@ -448,9 +448,9 @@ public class WebClient {
         throws
             IOException,
             FailingHttpStatusCodeException {
-        return getPage(webWindow, new WebRequestSettings(url)
-                .setSubmitMethod(method)
-                .setRequestParameters(parameters));
+        final WebRequestSettings settings = new WebRequestSettings(url, method);
+        settings.setRequestParameters(parameters);
+        return getPage(webWindow, settings);
     }
 
 
@@ -583,11 +583,11 @@ public class WebClient {
         throws
             IOException,
             FailingHttpStatusCodeException {
-        final WebRequestSettings params = new WebRequestSettings(url)
-                .setSubmitMethod(method)
-                .setRequestParameters(parameters);
+        final WebRequestSettings settings = new WebRequestSettings(url);
+        settings.setSubmitMethod(method);
+        settings.setRequestParameters(parameters);
         try {
-            return getPage(webWindow, params);
+            return getPage(webWindow, settings);
         }
         catch (final FailingHttpStatusCodeException e) {
             if (throwExceptionOnFailingStatusCode) {
@@ -628,10 +628,10 @@ public class WebClient {
         throws
             IOException,
             FailingHttpStatusCodeException {
-        final WebRequestSettings params = new WebRequestSettings(url)
-                .setSubmitMethod(method)
-                .setEncodingType(encType)
-                .setRequestParameters(parameters);
+        final WebRequestSettings params = new WebRequestSettings(url, method);
+        params.setEncodingType(encType);
+        params.setRequestParameters(parameters);
+
         try {
             return getPage(webWindow, params);
         }

@@ -60,21 +60,30 @@ public class WebRequestSettings {
      * @param target The URL for this request
      */
     public WebRequestSettings(final URL target) {
-        this.url_ = target;
+        url_ = target;
     }
+
+    /**
+     * @param target The URL for this request
+     * @param submitMethod The submitMethod to set.
+     */
+    public WebRequestSettings(final URL target, final SubmitMethod submitMethod) {
+        url_ = target;
+        submitMethod_ = submitMethod;
+    }
+
     /**
      * @return the URL
      */
     public URL getURL() {
         return url_;
     }
+
     /**
      * @param url The new URL
-     * @return This object
      */
-    public WebRequestSettings setURL(final URL url) {
-        this.url_ = url;
-        return this;
+    public void setURL(final URL url) {
+        url_ = url;
     }
 
     /**
@@ -83,41 +92,40 @@ public class WebRequestSettings {
     public FormEncodingType getEncodingType() {
         return encodingType_;
     }
+
     /**
      * @param encodingType The encodingType to set.
-     * @return This object
      */
-    public WebRequestSettings setEncodingType(final FormEncodingType encodingType) {
-        this.encodingType_ = encodingType;
-        return this;
+    public void setEncodingType(final FormEncodingType encodingType) {
+        encodingType_ = encodingType;
     }
+
     /**
      * @return Returns the requestParameters.
      */
     public List getRequestParameters() {
         return requestParameters_;
     }
+
     /**
      * @param requestParameters The requestParameters to set.
-     * @return This object
      */
-    public WebRequestSettings setRequestParameters(final List requestParameters) {
-        this.requestParameters_ = requestParameters;
-        return this;
+    public void setRequestParameters(final List requestParameters) {
+        requestParameters_ = requestParameters;
     }
+
     /**
      * @return Returns the submitMethod.
      */
     public SubmitMethod getSubmitMethod() {
         return submitMethod_;
     }
+
     /**
      * @param submitMethod The submitMethod to set.
-     * @return This object
      */
-    public WebRequestSettings setSubmitMethod(final SubmitMethod submitMethod) {
-        this.submitMethod_ = submitMethod;
-        return this;
+    public void setSubmitMethod(final SubmitMethod submitMethod) {
+        submitMethod_ = submitMethod;
     }
 
     /**

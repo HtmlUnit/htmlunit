@@ -125,8 +125,7 @@ public class ScriptEngineTest extends WebTestCase {
         webConnection.setDefaultResponse( html );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = (HtmlPage) client.getPage(new WebRequestSettings(URL_GARGOYLE)
-                .setSubmitMethod(SubmitMethod.POST));
+        final HtmlPage page = (HtmlPage) client.getPage(new WebRequestSettings(URL_GARGOYLE, SubmitMethod.POST));
         return page;
     }
 }

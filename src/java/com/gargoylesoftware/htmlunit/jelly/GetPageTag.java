@@ -96,8 +96,9 @@ public class GetPageTag extends HtmlUnitTagSupport {
 
         final Page page;
         try {
-            page = webClient.getPage(new WebRequestSettings(getUrl()).setSubmitMethod(
-                    getSubmitMethod()).setRequestParameters(getParameters()));
+            final WebRequestSettings settings = new WebRequestSettings(getUrl(), getSubmitMethod());
+            settings.setRequestParameters(getParameters());
+            page = webClient.getPage(settings);
             jellyContext.setVariable( getVarValueOrDie(), page );
         }
         catch( final IOException e ) {
