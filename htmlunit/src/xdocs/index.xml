@@ -9,8 +9,7 @@
 		but is very different in implementation.  Which one is better for you depends on how
 		you like to write your tests.  HttpUnit models the http protocol so you deal with request and
 		response objects. HtmlUnit on the other hand, models the returned document so that you deal
-		with pages and form and tables.  Refer to the code samples on the "general documentation" page to
-		see what HtmlUnit code looks like.
+		with pages and form and tables.
 	</p>
 	<p>
 		HtmlUnit was written by
@@ -23,8 +22,8 @@
 <section title="Where to find...">
 	<p>
 		<dl>
-			<dt>Latest stable release <date>October 30, 2002</date></dt>
-			<dd>Version <b>1.1</b>: |
+			<dt>Latest stable release <date>November 25, 2002</date></dt>
+			<dd>Version <b>1.1 final</b>: |
 				<a href="http://prdownloads.sourceforge.net/htmlunit/HtmlUnit-1.1.zip?download">Download</a> |
 				<a href="api/index.html">Javadoc API documentation</a> |
 				<a href="changes.html">Change history</a> |
@@ -157,7 +156,7 @@
 
 <section title="JavaScript support">
 	<p>
-		Starting with the 1.1 release, HtmlUnit is beginning to support javascript.  The core
+		Starting with the 1.1 release, HtmlUnit is supporting javascript.  The core
 		javascript language is already fully supported by the Rhino javascript engine.  The
 		web browser specific host objects are being implemented now.  We are focussing on
 		those parts of javascript that are most commonly used first and will flesh out the
