@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                JavaScript: the dom node of a &lt;frame&gt; or &lt;frame&gt; is now visible to the contained page while loading.
+            </action>
             <action type="update" dev="mguillem" id="1084226">
                 JavaScript: when simulating IE, a variable named after the id of a dom node represents this dom node.  
             </action>
