@@ -1,288 +1,290 @@
 <?xml version="1.0"?>
 <configuration
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="JavaScriptConfiguration.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="JavaScriptConfiguration.xsd">
 
-	<class name="Anchor" extends="HTMLElement">
-		<javascript min-version="1.2"/>
-		<property name="name" readable="true" writable="true" always-available="true"/>
-		<property name="text" readable="true" writable="true">
-			<browser name="Netscape" min-version="4" less-than-version="5"/>
-		</property>
-	</class>
-
-
-	<class name="Button" extends="Input"/>
+    <class name="Anchor" extends="HTMLElement">
+        <javascript min-version="1.2"/>
+        <property name="name" readable="true" writable="true" always-available="true"/>
+        <property name="tabindex" readable="true" writable="true"/>
+        <property name="text" readable="true" writable="true">
+            <browser name="Netscape" min-version="4" less-than-version="5"/>
+        </property>
+    </class>
 
 
-	<class name="Checkbox" extends="Input"/>
+    <class name="Button" extends="Input"/>
 
 
-	<class name="Document" extends="HTMLElement"><!-- NOT FINISHED -->
-		<property name="alinkColor" readable="true" writable="false"/>
-		<property name="anchors" readable="true" writable="false"/>
-		<property name="applets" readable="true" writable="false"/>
-		<property name="bgColor" readable="true" writable="false"/>
-		<property name="cookie" readable="true" writable="false"/>
-		<property name="domain" readable="true" writable="false"/>
-		<property name="embeds" readable="true" writable="false">
-			<javascript min-version="1.1"/>
-		</property>
-		<property name="fgColor" readable="true" writable="false"/>
-		<property name="forms" readable="true" writable="false"/>
-		<property name="images" readable="true" writable="false">
-			<javascript min-version="1.1"/>
-		</property>
-		<property name="lastModified" readable="true" writable="false"/>
-		<property name="linkColor" readable="true" writable="false"/>
-		<property name="links" readable="true" writable="false"/>
-		<property name="location" readable="true" writable="false"/>
-		<property name="plugins" readable="true" writable="false">
-			<javascript min-version="1.1"/>
-		</property>
-		<property name="referrer" readable="true" writable="false"/>
-		<property name="title" readable="true" writable="false"/>
-		<property name="URL" readable="true" writable="false"/>
-		<property name="vlinkColor" readable="true" writable="false"/>
-		<function name="write"/>
-		<function name="writeln"/>
-		<function name="close"/>
-		<function name="getElementById"/>
-	</class>
-	<class name="FileUpload" extends="Input"/><!-- NOT FINISHED -->
-	<class name="Form" extends="HTMLElement"><!-- NOT FINISHED -->
-		<property name="name" readable="true" writable="false"/>
-		<property name="length" readable="true" writable="false"/>
-		<property name="elements" readable="true" writable="false"/>
-		<property name="action" readable="true" writable="true"/>
-		<property name="method" readable="true" writable="true"/>
-		<property name="target" readable="true" writable="true"/>
-		<property name="encoding" readable="true" writable="true"/>
-		<function name="submit"/>
-		<function name="reset"/>
-	</class>
-	<class name="Hidden" extends="Input"/><!-- NOT FINISHED -->
-
-	<class name="HTMLElement">
-		<property name="all" readable="true" writable="false">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</property>
-		<property name="children" readable="true" writable="false">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</property>
-		<property name="className" readable="true" writable="true">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-			<browser name="Netscape" min-version="6"/>
-		</property>
-		<property name="disabled" readable="true" writable="true">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</property>
-		<property name="document" readable="true" writable="false">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</property>
-		<property name="id" readable="true" writable="true">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-			<browser name="Netscape" min-version="6"/>
-		</property>
-		<property name="innerHTML" readable="true" writable="true">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-			<browser name="Netscape" min-version="6"/>
-		</property>
-		<property name="innerText" readable="true" writable="true">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</property>
-		<property name="lang" readable="true" writable="true">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-			<browser name="Netscape" min-version="6"/>
-		</property>
-		<property name="offsetHeight" readable="true" writable="false">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</property>
-		<property name="offsetLeft" readable="true" writable="false">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</property>
-		<property name="offsetParent" readable="true" writable="false">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</property>
-		<property name="offsetTop" readable="true" writable="false">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</property>
-		<property name="offsetWidth" readable="true" writable="false">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</property>
-		<property name="outerHTML" readable="true" writable="true">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</property>
-		<property name="outerText" readable="true" writable="true">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</property>
-		<property name="parentElement" readable="true" writable="false">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</property>
-		<property name="sourceIndex" readable="true" writable="false">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</property>
-		<property name="className" readable="true" writable="true">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-			<browser name="Netscape" min-version="6"/>
-		</property>
-		<property name="style" readable="true" writable="true">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-			<browser name="Netscape" min-version="6"/>
-		</property>
-		<property name="tagName" readable="true" writable="false">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-			<browser name="Netscape" min-version="6"/>
-		</property>
-		<property name="title" readable="true" writable="true">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-			<browser name="Netscape" min-version="6"/>
-		</property>
-		<function name="contains">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</function>
-		<function name="getAttribute">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-			<browser name="Netscape" min-version="6"/>
-		</function>
-		<function name="handleEvent"/>
-		<function name="getElementsByTagName"/>
-		<function name="insertAdjacentHTML">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</function>
-		<function name="insertAdjacentText">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</function>
-		<function name="removeAttribute">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-			<browser name="Netscape" min-version="6"/>
-		</function>
-		<function name="scrollIntoView">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</function>
-		<function name="setAttribute">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-			<browser name="Netscape" min-version="6"/>
-		</function>
-		<function name="onclick">
-			<javascript min-version="1.2"/>
-		</function>
-		<function name="ondblclick">
-			<javascript min-version="1.2"/>
-		</function>
-		<function name="onhelp">
-			<browser name="Microsoft Internet Explorer" min-version="4"/>
-		</function>
-		<function name="onkeydown">
-			<javascript min-version="1.2"/>
-		</function>
-		<function name="onkeypress">
-			<javascript min-version="1.2"/>
-		</function>
-		<function name="onkeyup">
-			<javascript min-version="1.2"/>
-		</function>
-		<function name="onmousedown">
-			<javascript min-version="1.2"/>
-		</function>
-		<function name="onmousemove">
-			<javascript min-version="1.2"/>
-		</function>
-		<function name="onmouseout">
-			<javascript min-version="1.2"/>
-		</function>
-		<function name="onmouseover">
-			<javascript min-version="1.2"/>
-		</function>
-		<function name="onmouseup">
-			<javascript min-version="1.2"/>
-		</function>
-	</class>
+    <class name="Checkbox" extends="Input"/>
 
 
-	<class name="Image" extends="Input">
-	</class>
+    <class name="Document" extends="HTMLElement"><!-- NOT FINISHED -->
+        <property name="alinkColor" readable="true" writable="false"/>
+        <property name="anchors" readable="true" writable="false"/>
+        <property name="applets" readable="true" writable="false"/>
+        <property name="bgColor" readable="true" writable="false"/>
+        <property name="cookie" readable="true" writable="false"/>
+        <property name="domain" readable="true" writable="false"/>
+        <property name="embeds" readable="true" writable="false">
+            <javascript min-version="1.1"/>
+        </property>
+        <property name="fgColor" readable="true" writable="false"/>
+        <property name="forms" readable="true" writable="false"/>
+        <property name="images" readable="true" writable="false">
+            <javascript min-version="1.1"/>
+        </property>
+        <property name="lastModified" readable="true" writable="false"/>
+        <property name="linkColor" readable="true" writable="false"/>
+        <property name="links" readable="true" writable="false"/>
+        <property name="location" readable="true" writable="false"/>
+        <property name="plugins" readable="true" writable="false">
+            <javascript min-version="1.1"/>
+        </property>
+        <property name="referrer" readable="true" writable="false"/>
+        <property name="title" readable="true" writable="false"/>
+        <property name="URL" readable="true" writable="false"/>
+        <property name="vlinkColor" readable="true" writable="false"/>
+        <function name="write"/>
+        <function name="writeln"/>
+        <function name="close"/>
+        <function name="getElementById"/>
+    </class>
+    <class name="FileUpload" extends="Input"/><!-- NOT FINISHED -->
+    <class name="Form" extends="HTMLElement"><!-- NOT FINISHED -->
+        <property name="name" readable="true" writable="false"/>
+        <property name="length" readable="true" writable="false"/>
+        <property name="elements" readable="true" writable="false"/>
+        <property name="action" readable="true" writable="true"/>
+        <property name="method" readable="true" writable="true"/>
+        <property name="target" readable="true" writable="true"/>
+        <property name="encoding" readable="true" writable="true"/>
+        <function name="submit"/>
+        <function name="reset"/>
+    </class>
+    <class name="Hidden" extends="Input"/><!-- NOT FINISHED -->
 
-	<class name="Input" extends="HTMLElement">
-		<property name="checked" readable="true" writable="true"/>
-		<property name="defaultChecked" readable="true" writable="true"/>
-		<property name="defaultValue" readable="true" writable="true"/>
-		<property name="form" readable="true" writable="true"/>
-		<property name="select" readable="true" writable="true"/>
-		<property name="name" readable="true" writable="true"/>
-		<property name="options" readable="true" writable="true"/>
-		<property name="selectedIndex" readable="true" writable="true"/>
-		<property name="type" readable="true" writable="true">
-			<javascript min-version="1.1"/>
-		</property>
-		<property name="value" readable="true" writable="true"/>
-		<!-- This property is only in DOM1 so it  -->
-		<property name="disabled" readable="true" writable="true"/>
-		<function name="blur"/>
-		<function name="click"/>
-		<function name="focus"/>
-		<function name="select"/>
-		<function name="onblur"/>
-		<function name="onchange"/>
-		<function name="onclick"/>
-		<function name="onfocus"/>
-		<function name="onblur"/>
-	</class>
+    <class name="HTMLElement">
+        <property name="all" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="children" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="className" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="disabled" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="document" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="id" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="innerHTML" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="innerText" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="lang" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="offsetHeight" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="offsetLeft" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="offsetParent" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="offsetTop" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="offsetWidth" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="outerHTML" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="outerText" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="parentElement" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="sourceIndex" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </property>
+        <property name="className" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="style" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="tagName" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="title" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <function name="contains">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </function>
+        <function name="getAttribute">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="6"/>
+        </function>
+        <function name="handleEvent"/>
+        <function name="getElementsByTagName"/>
+        <function name="insertAdjacentHTML">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </function>
+        <function name="insertAdjacentText">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </function>
+        <function name="removeAttribute">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="6"/>
+        </function>
+        <function name="scrollIntoView">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </function>
+        <function name="setAttribute">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="6"/>
+        </function>
+        <function name="onclick">
+            <javascript min-version="1.2"/>
+        </function>
+        <function name="ondblclick">
+            <javascript min-version="1.2"/>
+        </function>
+        <function name="onhelp">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </function>
+        <function name="onkeydown">
+            <javascript min-version="1.2"/>
+        </function>
+        <function name="onkeypress">
+            <javascript min-version="1.2"/>
+        </function>
+        <function name="onkeyup">
+            <javascript min-version="1.2"/>
+        </function>
+        <function name="onmousedown">
+            <javascript min-version="1.2"/>
+        </function>
+        <function name="onmousemove">
+            <javascript min-version="1.2"/>
+        </function>
+        <function name="onmouseout">
+            <javascript min-version="1.2"/>
+        </function>
+        <function name="onmouseover">
+            <javascript min-version="1.2"/>
+        </function>
+        <function name="onmouseup">
+            <javascript min-version="1.2"/>
+        </function>
+    </class>
 
 
-	<class name="Location">
-		<function name="reload"/>
-		<function name="refresh"/>
-	</class>
+    <class name="Image" extends="Input">
+    </class>
+
+    <class name="Input" extends="HTMLElement">
+        <property name="checked" readable="true" writable="true"/>
+        <property name="defaultChecked" readable="true" writable="true"/>
+        <property name="defaultValue" readable="true" writable="true"/>
+        <property name="form" readable="true" writable="true"/>
+        <property name="select" readable="true" writable="true"/>
+        <property name="name" readable="true" writable="true"/>
+        <property name="options" readable="true" writable="true"/>
+        <property name="selectedIndex" readable="true" writable="true"/>
+        <property name="tabindex" readable="true" writable="true"/>
+        <property name="type" readable="true" writable="true">
+            <javascript min-version="1.1"/>
+        </property>
+        <property name="value" readable="true" writable="true"/>
+        <!-- This property is only in DOM1 so it  -->
+        <property name="disabled" readable="true" writable="true"/>
+        <function name="blur"/>
+        <function name="click"/>
+        <function name="focus"/>
+        <function name="select"/>
+        <function name="onblur"/>
+        <function name="onchange"/>
+        <function name="onclick"/>
+        <function name="onfocus"/>
+        <function name="onblur"/>
+    </class>
 
 
-	<class name="Option" extends="HTMLElement">
-		<property name="text" readable="true" writable="false"/>
-		<property name="value" readable="true" writable="false"/>
-		<property name="defaultSelected" readable="true" writable="false"/>
-		<property name="selected" readable="true" writable="false"/>
-	</class>
+    <class name="Location">
+        <function name="reload"/>
+        <function name="refresh"/>
+    </class>
 
 
-	<class name="Password" extends="Input"/><!-- NOT FINISHED -->
-	<class name="Radio" extends="Input"/><!-- NOT FINISHED -->
-	<class name="Reset" extends="Input"/><!-- NOT FINISHED -->
-	<class name="Submit" extends="Input"><!-- NOT FINISHED -->
-		<property name="length" readable="true" writable="false"/>
-	</class>
-	<class name="Text" extends="Input"/><!-- NOT FINISHED -->
-	<class name="Textarea" extends="Input"/><!-- NOT FINISHED -->
-	<class name="Select" extends="Input"><!-- NOT FINISHED -->
-		<property name="length" readable="true" writable="false"/>
-	</class>
+    <class name="Option" extends="HTMLElement">
+        <property name="text" readable="true" writable="false"/>
+        <property name="value" readable="true" writable="false"/>
+        <property name="defaultSelected" readable="true" writable="false"/>
+        <property name="selected" readable="true" writable="false"/>
+    </class>
 
-	<class name="Window">
-		<!-- NOT FINISHED -->
-		<property name="location" readable="true" writable="false">
-			<browser name="Netscape" min-version="3" max-version="5"/>
-			<browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>
-			<javascript min-version="1" max-version="2"/>
-		</property>
 
-		<property name="document" readable="true" writable="false"/>
-		<property name="navigator" readable="true" writable="false"/>
-		<property name="window" readable="true" writable="false"/>
-		<property name="self" readable="true" writable="false"/>
-		<property name="location" readable="true" writable="false"/>
-		<property name="history" readable="true" writable="false"/>
-		<property name="screen" readable="true" writable="false"/>
-		<property name="top" readable="true" writable="false"/>
-		<property name="parent" readable="true" writable="false"/>
-		<property name="opener" readable="true" writable="false"/>
-		<property name="frames" readable="true" writable="false"/>
+    <class name="Password" extends="Input"/><!-- NOT FINISHED -->
+    <class name="Radio" extends="Input"/><!-- NOT FINISHED -->
+    <class name="Reset" extends="Input"/><!-- NOT FINISHED -->
+    <class name="Submit" extends="Input"><!-- NOT FINISHED -->
+        <property name="length" readable="true" writable="false"/>
+    </class>
+    <class name="Text" extends="Input"/><!-- NOT FINISHED -->
+    <class name="Textarea" extends="Input"/><!-- NOT FINISHED -->
+    <class name="Select" extends="Input"><!-- NOT FINISHED -->
+        <property name="length" readable="true" writable="false"/>
+    </class>
 
-		<function name="alert"/>
-		<function name="blur"/>
-		<function name="close"/>
-		<function name="confirm"/>
-		<function name="focus"/>
-		<function name="open"/>
-		<function name="prompt"/>
-		<function name="setTimeout"/>
-	</class>
+    <class name="Window">
+        <!-- NOT FINISHED -->
+        <property name="location" readable="true" writable="false">
+            <browser name="Netscape" min-version="3" max-version="5"/>
+            <browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>
+            <javascript min-version="1" max-version="2"/>
+        </property>
+
+        <property name="document" readable="true" writable="false"/>
+        <property name="navigator" readable="true" writable="false"/>
+        <property name="window" readable="true" writable="false"/>
+        <property name="self" readable="true" writable="false"/>
+        <property name="location" readable="true" writable="false"/>
+        <property name="history" readable="true" writable="false"/>
+        <property name="screen" readable="true" writable="false"/>
+        <property name="top" readable="true" writable="false"/>
+        <property name="parent" readable="true" writable="false"/>
+        <property name="opener" readable="true" writable="false"/>
+        <property name="frames" readable="true" writable="false"/>
+
+        <function name="alert"/>
+        <function name="blur"/>
+        <function name="close"/>
+        <function name="confirm"/>
+        <function name="focus"/>
+        <function name="open"/>
+        <function name="prompt"/>
+        <function name="setTimeout"/>
+    </class>
 </configuration>
