@@ -243,8 +243,12 @@
             		Added serialVersionUID to all classes that are Serializable but didn't already 
             		have one of these.
             </action>
-            <action type="update" dev="mbowler" due-to="" id="1034897">
+            <action type="update" dev="mbowler" due-to="Darrell DeBoer" id="1034897">
             		Fix for performance problem in JavaScript handling. Patch submitted by Darrell DeBoer
+            </action>
+            <action type="update" dev="mbowler" id="856797">
+            		If the server returns an unsupported encoding type then the browsers assume
+            		ISO-8859-1.  Now HtmlUnit does the same.
             </action>
         </release>
         

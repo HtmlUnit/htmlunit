@@ -37,25 +37,28 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
 import org.apache.xerces.parsers.AbstractSAXParser;
-import org.apache.xerces.xni.parser.XMLInputSource;
 import org.apache.xerces.xni.parser.XMLDocumentFilter;
+import org.apache.xerces.xni.parser.XMLInputSource;
 import org.cyberneko.html.HTMLConfiguration;
-import org.xml.sax.SAXException;
+import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
-import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 
-import java.util.Stack;
-import java.util.Map;
-import java.util.HashMap;
-import java.io.IOException;
-
+import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
+import com.gargoylesoftware.htmlunit.ScriptFilter;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.ScriptFilter;
-import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 
 /**
  * SAX parser implementation that uses the neko {@link org.cyberneko.html.HTMLConfiguration}
@@ -205,17 +208,37 @@ public class HTMLParser {
      */
     public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow)
             throws IOException {
-        HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(webResponse, webWindow);
-
+        final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(webResponse, webWindow);
+        String charSet = webResponse.getContentCharSet();
+        if( isSupportedCharacterSet(charSet) == false ) {
+            charSet = "ISO-8859-1";
+        }
         XMLInputSource in = new XMLInputSource(
                 null,
                 webResponse.getUrl().toString(),
                 null,
                 webResponse.getContentAsStream(),
-                webResponse.getContentCharSet());
+                charSet);
 
         domBuilder.parse(in);
         return domBuilder.page_;
+    }
+    
+    /**
+     * <p>Return true if the specified charset is supported on this platform.</p>
+     * @param charset The charset to check.
+     * @return True if this charset is supported.
+     */
+    private static boolean isSupportedCharacterSet( final String charset ) {
+        //TODO: There's got to be a cleaner way to figure out if a given encoding is
+        // supported but I couldn't find it.
+        try {
+            new InputStreamReader( new ByteArrayInputStream(new byte[0]), charset );
+            return true;
+        }
+        catch( final UnsupportedEncodingException e ) {
+            return false;
+        }
     }
 
     /**
