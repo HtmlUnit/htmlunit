@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
@@ -295,7 +296,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final HtmlElement div1 =
+        final HtmlElement div1 = (HtmlElement)
             firstPage.getHtmlElementById("body").getLastChild();
         assertEquals("div", div1.getTagName());
         assertEquals(1, div1.getNodeType());
@@ -342,7 +343,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final HtmlElement div1 =
+        final DomNode div1 =
             firstPage.getHtmlElementById("body").getLastChild();
         assertEquals(3, div1.getNodeType());
         assertEquals("Some Text", div1.getNodeValue());
@@ -780,8 +781,10 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final HtmlElement div1 = firstPage.getHtmlElementById("childDiv");
-        assertEquals("parentDiv", div1.getParentNode().getAttributeValue("id"));
+        final HtmlElement div1 =
+            (HtmlElement) firstPage.getHtmlElementById("childDiv");
+        assertEquals("parentDiv",
+            ((HtmlElement) div1.getParentNode()).getAttributeValue("id"));
 
         final List expectedAlerts = Collections.singletonList("parentDiv");
         assertEquals( expectedAlerts, collectedAlerts );
@@ -882,7 +885,8 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlElement childDiv = firstPage.getHtmlElementById("childDiv");
-        assertEquals("parentDiv", childDiv.getParentNode().getAttributeValue("id"));
+        assertEquals("parentDiv",
+            ((HtmlElement) childDiv.getParentNode()).getAttributeValue("id"));
 
         final List expectedAlerts = Collections.singletonList("parentDiv");
         assertEquals( expectedAlerts, collectedAlerts );
@@ -918,7 +922,8 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlElement div1 = firstPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv", div1.getFirstChild().getAttributeValue("id"));
+        assertEquals("childDiv", 
+            ((HtmlElement) div1.getFirstChild()).getAttributeValue("id"));
 
         final List expectedAlerts = Collections.singletonList("childDiv");
         assertEquals( expectedAlerts, collectedAlerts );
@@ -958,7 +963,8 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "First", firstPage.getTitleText() );
 
         final HtmlElement parentDiv = firstPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv", parentDiv.getFirstChild().getAttributeValue("id"));
+        assertEquals("childDiv",
+            ((HtmlElement) parentDiv.getFirstChild()).getAttributeValue("id"));
 
         final List expectedAlerts = Collections.singletonList("childDiv");
         assertEquals( expectedAlerts, collectedAlerts );
@@ -994,7 +1000,8 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "Last", lastPage.getTitleText() );
 
         final HtmlElement parentDiv = lastPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv", parentDiv.getLastChild().getAttributeValue("id"));
+        assertEquals("childDiv",
+            ((HtmlElement) parentDiv.getLastChild()).getAttributeValue("id"));
 
         final List expectedAlerts = Collections.singletonList("childDiv");
         assertEquals( expectedAlerts, collectedAlerts );
@@ -1034,7 +1041,8 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "Last", lastPage.getTitleText() );
 
         final HtmlElement parentDiv = lastPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv", parentDiv.getLastChild().getAttributeValue("id"));
+        assertEquals("childDiv",
+            ((HtmlElement) parentDiv.getLastChild()).getAttributeValue("id"));
 
         final List expectedAlerts = Collections.singletonList("childDiv");
         assertEquals( expectedAlerts, collectedAlerts );
@@ -1070,7 +1078,8 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "Last", lastPage.getTitleText() );
 
         final HtmlElement div1 = lastPage.getHtmlElementById("previousDiv");
-        assertEquals("nextDiv", div1.getNextSibling().getAttributeValue("id"));
+        assertEquals("nextDiv",
+            ((HtmlElement) div1.getNextSibling()).getAttributeValue("id"));
 
         final List expectedAlerts = Collections.singletonList("nextDiv");
         assertEquals( expectedAlerts, collectedAlerts );
@@ -1110,7 +1119,8 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "Last", lastPage.getTitleText() );
 
         final HtmlElement previousDiv = lastPage.getHtmlElementById("previousDiv");
-        assertEquals("nextDiv", previousDiv.getNextSibling().getAttributeValue("id"));
+        assertEquals("nextDiv",
+            ((HtmlElement) previousDiv.getNextSibling()).getAttributeValue("id"));
 
         final List expectedAlerts = Collections.singletonList("nextDiv");
         assertEquals( expectedAlerts, collectedAlerts );
@@ -1146,7 +1156,8 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "Last", lastPage.getTitleText() );
 
         final HtmlElement div1 = lastPage.getHtmlElementById("nextDiv");
-        assertEquals("previousDiv", div1.getPreviousSibling().getAttributeValue("id"));
+        assertEquals("previousDiv",
+            ((HtmlElement) div1.getPreviousSibling()).getAttributeValue("id"));
 
         final List expectedAlerts = Collections.singletonList("previousDiv");
         assertEquals( expectedAlerts, collectedAlerts );
@@ -1186,7 +1197,8 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "Last", lastPage.getTitleText() );
 
         final HtmlElement nextDiv = lastPage.getHtmlElementById("nextDiv");
-        assertEquals("previousDiv", nextDiv.getPreviousSibling().getAttributeValue("id"));
+        assertEquals("previousDiv",
+            ((HtmlElement) nextDiv.getPreviousSibling()).getAttributeValue("id"));
 
         final List expectedAlerts = Collections.singletonList("previousDiv");
         assertEquals( expectedAlerts, collectedAlerts );

@@ -57,7 +57,7 @@ class TableElementCreator extends HtmlElementCreator {
      * @param xmlNode The xml element that this HtmlElement corresponds to.
      * @return The new HtmlElement.
      */
-    HtmlElement create( final HtmlPage page, final Node xmlNode ) {
+    DomNode create( final HtmlPage page, final Node xmlNode ) {
         final Element xmlElement = (Element) xmlNode;
         final String tagName = page.getTagName(xmlElement);
 

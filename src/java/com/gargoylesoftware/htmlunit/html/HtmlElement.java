@@ -67,31 +67,12 @@ import org.w3c.dom.NodeList;
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author David K. Taylor
  */
-public abstract class HtmlElement {
+public abstract class HtmlElement extends DomNode {
     /** Constant meaning that the specified attribute was not defined */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
 
     /** Constant meaning that the specified attribute was found but its value was empty */
     public static final String ATTRIBUTE_VALUE_EMPTY = new String("");
-
-    private Node node_;
-    private final HtmlPage htmlPage_;
-
-    // We do lazy initialization on this since the vast majority of HtmlElement instances
-    // won't need it.
-    private PropertyChangeSupport propertyChangeSupport_ = null;
-
-    /**
-     * This is the javascript object corresponding to this html element.  It is
-     * declared as Object so that we don't have a dependancy on the rhino jar
-     * file.<p>
-     *
-     * It may be null if there isn't a corresponding javascript object.
-     */
-    private Object scriptObject_;
-
-    /** The name of the "element" property.  Used when watching property change events. */
-    public static final String PROPERTY_ELEMENT = "element";
 
     /**
      *  Create an instance
@@ -100,18 +81,7 @@ public abstract class HtmlElement {
      * @param node The XML node that represents this html element
      */
     protected HtmlElement( final HtmlPage htmlPage, final Node node ) {
-        if( this instanceof HtmlPage == false ) {
-            Assert.notNull("node", node);
-        }
-        node_ = node;
-
-        if( htmlPage == null && this instanceof HtmlPage ) {
-            htmlPage_ = ( HtmlPage )this;
-        }
-        else {
-            Assert.notNull( "htmlPage", htmlPage );
-            htmlPage_ = htmlPage;
-        }
+        super( htmlPage, node );
     }
 
 
@@ -120,26 +90,7 @@ public abstract class HtmlElement {
      * @param element The xml element.
      */
     protected final void setElement( final Element element ) {
-        Assert.notNull("element", element);
-
-        if( node_ == null ) {
-            final Object oldValue = node_;
-            node_ = element;
-            firePropertyChange(PROPERTY_ELEMENT, oldValue, element);
-        }
-        else {
-            throw new IllegalStateException("node_ has already been set");
-        }
-    }
-
-
-    /**
-     *  Return the XML node that corresponds to this component.
-     *
-     * @return  The node
-     */
-    public Node getNode() {
-        return node_;
+        super.setNode( element );
     }
 
 
@@ -150,7 +101,7 @@ public abstract class HtmlElement {
      * @return  The element
      */
     public Element getElement() {
-        return (Element) node_;
+        return (Element) getNode();
     }
 
 
@@ -439,16 +390,6 @@ public abstract class HtmlElement {
             }
         }
         return buffer.toString().trim();
-    }
-
-
-    /**
-     *  Return the HtmlPage that contains this element
-     *
-     * @return  See above
-     */
-    public HtmlPage getPage() {
-        return htmlPage_;
     }
 
 
@@ -784,101 +725,6 @@ public abstract class HtmlElement {
 
 
     /**
-     * Get the parent node of this node
-     * @return the parent node of this node
-     */
-    public HtmlElement getParentNode() {
-        return getPage().getHtmlElement(getNode().getParentNode());
-    }
-
-
-    /**
-     * Return the next sibling element in the document
-     * @return The next sibling element in the document.
-     */
-    public HtmlElement getNextSibling() {
-        return getPage().getHtmlElement(getNode().getNextSibling());
-    }
-
-
-    /**
-     * Return the previous sibling element in the document
-     * @return The previous sibling element in the document.
-     */
-    public HtmlElement getPreviousSibling() {
-        return getPage().getHtmlElement(getNode().getPreviousSibling());
-    }
-
-
-    /**
-     * Get the first child node.
-     * @return The first child node or null if the current node has
-     * no children.
-     */
-    public HtmlElement getFirstChild() {
-        return getPage().getHtmlElement(getNode().getFirstChild());
-    }
-
-
-    /**
-     * Get the last child node.
-     * @return The last child node or null if the current node has
-     * no children.
-     */
-    public HtmlElement getLastChild() {
-        return getPage().getHtmlElement(getNode().getLastChild());
-    }
-
-
-    /**
-     * Get the type of the current node.
-     * @return The node type
-     */
-    public short getNodeType() {
-        return getNode().getNodeType();
-    }
-
-
-    /**
-     * Get the name for the current node.
-     * @return The node name
-     */
-    public String getNodeName() {
-        return getNode().getNodeName();
-    }
-
-
-    /**
-     * Get the value for the current node.
-     * @return The node value
-     */
-    public String getNodeValue() {
-        return getNode().getNodeValue();
-    }
-
-
-    /**
-     * Internal use only - subject to change without notice.<p>
-     * Set the javascript object that corresponds to this element.  This is not guarenteed
-     * to be set even if there is a javascript object for this html element.
-     * @param scriptObject The javascript object.
-     */
-    public void setScriptObject( final Object scriptObject ) {
-        scriptObject_ = scriptObject;
-    }
-
-
-    /**
-     * Internal use only - subject to change without notice.<p>
-     * Return the javascript object that corresponds to this element.
-     * @return The javascript object that corresponds to this element.
-     */
-    public Object getScriptObject() {
-        return scriptObject_;
-    }
-
-
-    /**
      * Return the log object for this element.
      * @return The log object for this element.
      */
@@ -939,49 +785,4 @@ public abstract class HtmlElement {
             printWriter.println(indent+"</"+((Element)node).getTagName().toLowerCase()+">");
         }
     }
-
-
-    /**
-     * Add a property change listener to this element.
-     * @param listener The new listener.
-     */
-    public final synchronized void addPropertyChangeListener(
-        final PropertyChangeListener listener ) {
-
-        Assert.notNull("listener", listener);
-        if( propertyChangeSupport_ == null ) {
-            propertyChangeSupport_ = new PropertyChangeSupport(this);
-        }
-        propertyChangeSupport_.addPropertyChangeListener(listener);
-    }
-
-
-    /**
-     * Remove a property change listener from this element.
-     * @param listener The istener.
-     */
-    public final synchronized void removePropertyChangeListener(
-        final PropertyChangeListener listener ) {
-
-        Assert.notNull("listener", listener);
-        if( propertyChangeSupport_ != null ) {
-            propertyChangeSupport_.removePropertyChangeListener(listener);
-        }
-    }
-
-
-    /**
-     * Fire a property change event
-     * @param propertyName The name of the property.
-     * @param oldValue The old value.
-     * @param newValue The new value.
-     */
-    protected final synchronized void firePropertyChange(
-        final String propertyName, final Object oldValue, final Object newValue ) {
-
-        if( propertyChangeSupport_ != null ) {
-            propertyChangeSupport_.firePropertyChange(propertyName, oldValue, newValue);
-        }
-    }
 }
-

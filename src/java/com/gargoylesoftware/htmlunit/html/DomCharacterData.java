@@ -46,7 +46,7 @@ import org.w3c.dom.Node;
  * @version  $Revision$
  * @author  David K. Taylor
  */
-public class DomCharacterData extends HtmlElement {
+public class DomCharacterData extends DomNode {
 
     /**
      * Create an instance of DomCharacterData

@@ -75,7 +75,7 @@ public final class TextImpl extends CharacterDataImpl {
      * @return The Text node that was split from this node.
      */
     public Object jsFunction_splitText(final int offset) {
-        final DomText domText = (DomText) getHtmlElementOrDie();
+        final DomText domText = (DomText) getDomNodeOrDie();
         return getScriptableFor( domText.splitText(offset) );
     }
 }

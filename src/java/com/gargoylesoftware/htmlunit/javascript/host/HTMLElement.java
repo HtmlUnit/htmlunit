@@ -39,10 +39,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * The javascript object "HTMLElement" which is the base class for all html
@@ -53,7 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author David K. Taylor
  * @author Barnaby Court
  */
-public class HTMLElement extends SimpleScriptable {
+public class HTMLElement extends NodeImpl {
     private Style style_;
 
      /**
@@ -83,11 +82,11 @@ public class HTMLElement extends SimpleScriptable {
 
 
      /**
-      * Set the html element that corresponds to this javascript object
-      * @param htmlElement The html element
+      * Set the DOM node that corresponds to this javascript object
+      * @param domNode The DOM node
       */
-     public void setHtmlElement( final HtmlElement htmlElement ) {
-         super.setHtmlElement(htmlElement);
+     public void setDomNode( final DomNode domNode ) {
+         super.setDomNode(domNode);
 
          style_ = (Style)makeJavaScriptObject("Style");
          style_.initialize(this);
@@ -145,265 +144,5 @@ public class HTMLElement extends SimpleScriptable {
             }
         }
         return result;
-    }
-
-
-    /**
-     * Get the JavaScript property "nodeType" for the current node.
-     * @return The node type
-     */
-    public short jsGet_nodeType() {
-        return getHtmlElementOrDie().getNodeType();
-    }
-
-
-    /**
-     * Get the JavaScript property "nodeName" for the current node.
-     * @return The node name
-     */
-    public String jsGet_nodeName() {
-        return getHtmlElementOrDie().getNodeName();
-    }
-
-
-    /**
-     * Get the JavaScript property "nodeValue" for the current node.
-     * @return The node value
-     */
-    public String jsGet_nodeValue() {
-        return getHtmlElementOrDie().getNodeValue();
-    }
-
-
-    /**
-     * Set the JavaScript property "nodeValue" for the current node.
-     * @param newValue The new node value
-     */
-    public void jsSet_nodeValue( String newValue ) {
-        getHtmlElementOrDie().getNode().setNodeValue( newValue );
-    }
-
-
-    /**
-     * Add an HTML element to the element
-     * @param childObject The element to add to this element
-     * @return The newly added child element.
-     */
-    public Object jsFunction_appendChild(final Object childObject) {
-        final Object appendedChild;
-        if (childObject instanceof HTMLElement) {
-            // Get XML element for the HTML element passed in
-            final HtmlElement childHtmlElement = ((HTMLElement) childObject).getHtmlElementOrDie();
-            final Node childXmlNode = childHtmlElement.getNode();
-
-            // Get the parent XML node that the child should be added to.
-            final HtmlElement parentElement = this.getHtmlElementOrDie();
-            final Node parentXmlNode = parentElement.getNode();
-
-            // Append the child to the parent element
-            if ( parentXmlNode.appendChild(childXmlNode) == null ) {
-                appendedChild = null;
-            }
-            else {
-                appendedChild = childObject;
-            }
-        }
-        else {
-            appendedChild = null;
-        }
-        return appendedChild;
-    }
-
-
-    /**
-     * Duplicate an XML node
-     * @param deep If true, recursively clone all descendents.  Otherwise,
-     * just clone this node.
-     * @return The newly cloned node.
-     */
-    public Object jsFunction_cloneNode(final boolean deep) {
-        final HtmlElement htmlElement = getHtmlElementOrDie();
-        final Node clonedXmlNode = htmlElement.getNode().cloneNode( deep );
-        return getJavaScriptElement(htmlElement.getPage().getHtmlElement(clonedXmlNode));
-    }
-
-
-    /**
-     * Add an HTML element as a child to this element before the referenced
-     * element.  If the referenced element is null, append to the end.
-     * @param newChildObject The element to add to this element
-     * @param refChildObject The element before which to add the new child
-     * @return The newly added child element.
-     */
-    public Object jsFunction_insertBefore(final Object newChildObject,
-        final Object refChildObject) {
-        final Object appendedChild;
-        if (newChildObject instanceof HTMLElement &&
-            refChildObject instanceof HTMLElement) {
-            // Get XML elements for the HTML elements passed in
-            final HtmlElement newChildHtmlElement = ((HTMLElement) newChildObject).getHtmlElementOrDie();
-            final Node newChildXmlNode = newChildHtmlElement.getNode();
-            Node refChildXmlNode = null;
-            if (refChildObject != null) {
-                final HtmlElement refChildHtmlElement = ((HTMLElement) refChildObject).getHtmlElementOrDie();
-                refChildXmlNode = refChildHtmlElement.getNode();
-            }
-
-            // Get the parent XML element that the child should be added to.
-            final HtmlElement parentElement = this.getHtmlElementOrDie();
-            final Node parentXmlNode = parentElement.getNode();
-
-            // Append the child to the parent element
-            if ( parentXmlNode.insertBefore(newChildXmlNode,
-                refChildXmlNode) == null ) {
-                appendedChild = null;
-            }
-            else {
-                appendedChild = newChildObject;
-            }
-        }
-        else {
-            appendedChild = null;
-        }
-        return appendedChild;
-    }
-
-
-    /**
-     * Remove an HTML element from this element
-     * @param childObject The element to remove from this element
-     * @return The removed child element.
-     */
-    public Object jsFunction_removeChild(final Object childObject) {
-        final Object removedChild;
-        if (childObject instanceof HTMLElement) {
-            // Get XML element for the HTML element passed in
-            final HtmlElement childHtmlElement = ((HTMLElement) childObject).getHtmlElementOrDie();
-            final Node childXmlNode = childHtmlElement.getNode();
-
-            // Get the parent XML element that the child should be added to.
-            final HtmlElement parentElement = this.getHtmlElementOrDie();
-            final Node parentXmlNode = parentElement.getNode();
-
-            // Remove the child from the parent element
-            if ( parentXmlNode.removeChild(childXmlNode) == null ) {
-                removedChild = null;
-            }
-            else {
-                removedChild = childObject;
-                parentElement.getPage().removeHtmlElement(childXmlNode);
-            }
-        }
-        else {
-            removedChild = null;
-        }
-        return removedChild;
-    }
-
-
-    /**
-     * Replace a child HTML element with another HTML element.
-     * @param newChildObject The element to add as a child of this element
-     * @param oldChildObject The element to remove as a child of this element
-     * @return The removed child element.
-     */
-    public Object jsFunction_replaceChild(final Object newChildObject,
-        final Object oldChildObject) {
-        final Object removedChild;
-        if (newChildObject instanceof HTMLElement &&
-            oldChildObject instanceof HTMLElement) {
-            // Get XML elements for the HTML elements passed in
-            final HtmlElement newChildHtmlElement = ((HTMLElement) newChildObject).getHtmlElementOrDie();
-            final Node newChildXmlNode = newChildHtmlElement.getNode();
-            Node oldChildXmlNode = null;
-            if (oldChildObject != null) {
-                final HtmlElement oldChildHtmlElement = ((HTMLElement) oldChildObject).getHtmlElementOrDie();
-                oldChildXmlNode = oldChildHtmlElement.getNode();
-            }
-
-            // Get the parent XML element that the child should be added to.
-            final HtmlElement parentElement = this.getHtmlElementOrDie();
-            final Node parentXmlNode = parentElement.getNode();
-
-            // Replace the old child with the new child.
-            if ( parentXmlNode.replaceChild(newChildXmlNode,
-                oldChildXmlNode) == null ) {
-                removedChild = null;
-            }
-            else {
-                removedChild = oldChildObject;
-            }
-        }
-        else {
-            removedChild = null;
-        }
-        return removedChild;
-    }
-
-
-    /**
-     * Get the JavaScript property "parentNode" for the node that
-     * contains the current node.
-     * @return The parent node
-     */
-    public Object jsGet_parentNode() {
-        return getJavaScriptElement( getHtmlElementOrDie().getParentNode() );
-    }
-
-
-    /**
-     * Get the JavaScript property "nextSibling" for the node that
-     * contains the current node.
-     * @return The next sibling node or null if the current node has
-     * no next sibling.
-     */
-    public Object jsGet_nextSibling() {
-        return getJavaScriptElement( getHtmlElementOrDie().getNextSibling() );
-    }
-
-
-    /**
-     * Get the JavaScript property "previousSibling" for the node that
-     * contains the current node.
-     * @return The previous sibling node or null if the current node has
-     * no previous sibling.
-     */
-    public Object jsGet_previousSibling() {
-        return getJavaScriptElement( getHtmlElementOrDie().getPreviousSibling() );
-    }
-
-
-    /**
-     * Get the JavaScript property "firstChild" for the node that
-     * contains the current node.
-     * @return The first child node or null if the current node has
-     * no children.
-     */
-    public Object jsGet_firstChild() {
-        return getJavaScriptElement( getHtmlElementOrDie().getFirstChild() );
-    }
-
-
-    /**
-     * Get the JavaScript property "lastChild" for the node that
-     * contains the current node.
-     * @return The last child node or null if the current node has
-     * no children.
-     */
-    public Object jsGet_lastChild() {
-        return getJavaScriptElement( getHtmlElementOrDie().getLastChild() );
-    }
-
-
-    /**
-     * Get the JavaScript element for a given HtmlElement
-     * @param htmlElement The HtmlElement
-     * @return The JavaScript element or null if the HtmlElement was null.
-     */
-    protected Object getJavaScriptElement( HtmlElement htmlElement ) {
-        if ( htmlElement == null ) {
-            return null;
-        }
-        return getScriptableFor( htmlElement );
     }
 }

@@ -46,11 +46,11 @@ import org.w3c.dom.Node;
  * @version  $Revision$
  * @author David K. Taylor
  */
-public class UnknownDomNode extends HtmlElement {
+public class UnknownDomNode extends DomNode {
     /**
      *  Create an instance
      *
-     * @param  page The page that contains this element
+     * @param  page The page that contains this node
      * @param  node The XML node that represents this HTML node
      */
     UnknownDomNode( final HtmlPage page, final Node node ) {
