@@ -17,6 +17,7 @@
     <preGoal name="xdoc:transform">
         <attainGoal name="faq"/>
         <attainGoal name="createDependenciesPage"/>
+        <attainGoal name="createJavaScriptConfigurationPage"/>
         <ant:mkdir dir="${maven.build.dir}/docs/tools/eclipse"/>
         <ant:copy todir="${maven.build.dir}/docs/tools/eclipse">
             <fileset dir="ide/eclipse"/>
@@ -232,4 +233,92 @@
     	<attainGoal name="maven-pmd-plugin:register"/>
     	<attainGoal name="maven-clover-plugin:register"/>
     </postGoal>
+    
+    <goal name="createJavaScriptConfigurationPage">
+
+        <j:set var="destfile" value="${maven.build.dir}/generated-xdocs/javascriptConfiguration.xml"/>
+        <ant:mkdir dir="${maven.build.dir}/generated-xdocs"/>
+
+        <u:file var="destfileFile" name="${destfile}"/>
+        <j:set var="destfile" value="${destfileFile.getCanonicalPath()}"/>
+
+        <j:set var="outputencoding" value="${maven.docs.outputencoding}"/>
+
+        <j:file name="${destfile}" encoding="${outputencoding}" outputMode="xml">
+<document>
+
+    <properties>
+        <title>JavaScript Configuration</title>
+    </properties>
+    <body>
+        <section name="JavaScript Configuration">
+            <p>
+            	Different versions of browsers will support different features in JavaScript.
+            	The file JavaScriptConfiguration.xml tells HtmlUnit what behaviours to 
+            	expect from specific BrowserVersion's.  The rest of this document is a 
+            	formatted version of this configuration file.
+            </p>
+        </section>
+        <x:parse 
+        	var="doc" 
+        	xml="src/java/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml"/>
+        <x:set var="javascriptClasses" select="$doc/configuration/class"/>
+        <x:forEach select="$javascriptClasses" var="javascriptClass">
+        	<x:set var="className" select="string(@name)"/>
+			<section name="${className}">
+			
+	            <table>
+		            <tr>
+		            	<th>Type</th>
+		            	<th>Name</th>
+		            	<th>Readable</th>
+		            	<th>Writable</th>
+		            	<th>Constraints</th>
+		            </tr>
+			        <x:forEach select="property|function" var="property">
+			        <tr>
+			        	<td>${property.name}</td>
+			        	<td><x:expr select="@name"/></td>
+			        	<td><x:expr select="@readable"/></td>
+			        	<td><x:expr select="@writable"/></td>
+			        	<td>
+			        		<x:forEach select="javascript">
+			        			Javascript <x:expr select="@min-version"/><br />
+			        		</x:forEach>
+			        		<x:forEach select="browser">
+			        			<x:expr select="@name"/>
+			        			<x:set var="minVersion" select="string(@min-version)"/>
+			        			<x:set var="lessThanVersion" select="string(@less-than-version)"/>
+			        			<x:set var="maxVersion" select="string(@max-version)"/>
+
+								<j:choose>
+									<j:when test="${minVersion!='' and maxVersion!=''}">
+										${minVersion}-${maxVersion}
+									</j:when>
+									<j:when test="${minVersion!='' and lessThanVersion!=''}">
+										${minVersion}-${lessThanVersion} (not including ${lessThanVersion})
+									</j:when>
+									<j:when test="${minVersion!=''}">
+										${minVersion}+
+									</j:when>
+									<j:when test="${maxVersion!=''}">
+										up to ${maxVersion}
+									</j:when>
+									<j:when test="${lessThanVersion!=''}">
+										earlier than ${lessThanVersion}
+									</j:when>
+								</j:choose>
+				        		<br />
+			        		</x:forEach>
+			        	</td>
+			        </tr>
+			        </x:forEach>
+	            </table>
+            </section>
+        </x:forEach>
+    </body>
+
+</document>
+        </j:file>
+    </goal>
 </project>
