@@ -50,6 +50,7 @@ import java.util.Map;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
+ * @author Marc Guillemot
  */
 public class HtmlTextArea extends FocusableElement implements DisabledElement, SubmittableElement {
 
@@ -121,6 +122,11 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     public final void setText( final String newValue ) {
         oldText_ = (DomText)getFirstChild();
         setFirstChild(new DomText(getPage(), newValue));
+
+        final String onChange = getOnChangeAttribute();
+        if( onChange.length() != 0 ) {
+            getPage().executeJavaScriptIfPossible(onChange, "onChange handler", true, this);
+        }
     }
 
 
