@@ -119,6 +119,10 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="parentNode" readable="true" writable="false"/>
+        <property name="firstChild" readable="true" writable="false"/>
+        <property name="lastChild" readable="true" writable="false"/>
+        <property name="nextSibling" readable="true" writable="false"/>
+        <property name="previousSibling" readable="true" writable="false"/>
         <property name="sourceIndex" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>

@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -196,21 +197,93 @@ public class HTMLElement extends SimpleScriptable {
         final HtmlElement htmlElement = getHtmlElementOrDie();
         final Element xmlElement = htmlElement.getElement();
         final Node parentXmlNode = xmlElement.getParentNode();
-        if ( parentXmlNode == null ) {
+        return getJavaScriptElementFromXmlNode(parentXmlNode,
+            htmlElement.getPage());
+    }
+
+
+    /**
+     * Get the JavaScript property "nextSibling" for the node that
+     * contains the current node.
+     * @return The next sibling node or null if the current node has
+     * no next sibling.
+     */
+    public Object jsGet_nextSibling() {
+        final HtmlElement htmlElement = getHtmlElementOrDie();
+        final Element xmlElement = htmlElement.getElement();
+        final Node siblingXmlNode = xmlElement.getNextSibling();
+        return getJavaScriptElementFromXmlNode(siblingXmlNode,
+            htmlElement.getPage());
+    }
+
+
+    /**
+     * Get the JavaScript property "previousSibling" for the node that
+     * contains the current node.
+     * @return The previous sibling node or null if the current node has
+     * no previous sibling.
+     */
+    public Object jsGet_previousSibling() {
+        final HtmlElement htmlElement = getHtmlElementOrDie();
+        final Element xmlElement = htmlElement.getElement();
+        final Node siblingXmlNode = xmlElement.getPreviousSibling();
+        return getJavaScriptElementFromXmlNode(siblingXmlNode,
+            htmlElement.getPage());
+    }
+
+
+    /**
+     * Get the JavaScript property "firstChild" for the node that
+     * contains the current node.
+     * @return The first child node or null if the current node has
+     * no children.
+     */
+    public Object jsGet_firstChild() {
+        final HtmlElement htmlElement = getHtmlElementOrDie();
+        final Element xmlElement = htmlElement.getElement();
+        final Node childXmlNode = xmlElement.getFirstChild();
+        return getJavaScriptElementFromXmlNode(childXmlNode,
+            htmlElement.getPage());
+    }
+
+
+    /**
+     * Get the JavaScript property "lastChild" for the node that
+     * contains the current node.
+     * @return The last child node or null if the current node has
+     * no children.
+     */
+    public Object jsGet_lastChild() {
+        final HtmlElement htmlElement = getHtmlElementOrDie();
+        final Element xmlElement = htmlElement.getElement();
+        final Node childXmlNode = xmlElement.getLastChild();
+        return getJavaScriptElementFromXmlNode(childXmlNode,
+            htmlElement.getPage());
+    }
+
+
+    /**
+     * Get the JavaScript element corresponding to an XML node.
+     * @param xmlNode The XML node to search for.
+     * @param page The HTML document to search in.
+     * @return The JavaScript element.
+     */
+    protected Object getJavaScriptElementFromXmlNode(Node xmlNode,
+        HtmlPage page) {
+        if ( xmlNode == null ) {
             return null;
         }
-        if ( ( parentXmlNode instanceof Element ) == false ) {
-            if( parentXmlNode instanceof HTMLDocumentImpl == false ) {
+        if ( ( xmlNode instanceof Element ) == false ) {
+            if( xmlNode instanceof HTMLDocumentImpl == false ) {
                 throw new IllegalStateException(
-                    "Parent XML node is not an Element.  Only Elements are currently supported.  Parent class: "
-                    + parentXmlNode.getClass() );
+                    "XML node is not an Element.  Only Elements are currently supported.  Node class: "
+                    + xmlNode.getClass() );
             }
             return null;
         }
-        final Element parentXmlElement = (Element) parentXmlNode;
-        final HtmlElement parentHtmlElement =
-            htmlElement.getPage().getHtmlElement( parentXmlElement );
-        final Object jsParentElement = getScriptableFor( parentHtmlElement );
-        return jsParentElement;
+        final Element xmlElement = (Element) xmlNode;
+        final HtmlElement htmlElement = page.getHtmlElement( xmlElement );
+        final Object jsElement = getScriptableFor( htmlElement );
+        return jsElement;
     }
 }
