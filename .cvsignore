@@ -10,3 +10,4 @@ temp
 build_eclipse
 .checkclipse
 checkstyle.properties
+clover.license
