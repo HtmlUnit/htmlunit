@@ -353,6 +353,9 @@
         <function name="scrollTo"/>
     </class>
     
+    <class name="FrameWindow" extends="Window">
+	</class>
+
     <class name="FocusableHostElement" extends="HTMLElement">
         <function name="blur"/>
         <function name="focus"/>

@@ -61,6 +61,7 @@ import org.mozilla.javascript.ScriptableObject;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
+ * @author Marc Guillemot
  */
 public class SimpleScriptable extends ScriptableObject {
     private static final long serialVersionUID = 3120000176890886780L;
@@ -118,7 +119,7 @@ public class SimpleScriptable extends ScriptableObject {
             {"HtmlForm", "Form"},
             {"HtmlHiddenInput", "Input"},
             {"HtmlImage", "Image"},
-            {"HtmlInlineFrame", "Window"},
+            {"HtmlInlineFrame", "FrameWindow"},
             {"HtmlLabel", "FocusableHostElement"},
             {"HtmlOption", "Option"},
             {"HtmlPasswordInput", "Input"},
