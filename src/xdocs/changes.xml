@@ -100,6 +100,9 @@
             </action>
             <action type="update" dev="mbowler" due-to="Marc Guillemot" id="1053811">
                 Initial support for file urls.
+                There is a bug in commons-io that will break this when trying to read
+                file urls on another drive under windows: 
+                http://issues.apache.org/bugzilla/show_bug.cgi?id=31884
             </action>
 		</release>
 		    
