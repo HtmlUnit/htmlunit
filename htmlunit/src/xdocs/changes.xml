@@ -184,6 +184,13 @@
             <action type="update" dev="dktaylor">
                 Fix return type from DomCharacterData.getData to be String.
             </action>
+            <action type="update" dev="dktaylor">
+                Removed non-standard Element API from Text and CharacterData
+                Node classes by factoring out a DOM Node class in the html and
+                JavaScript implementations.  Return type from DOM navigation
+                methods, e.g., getFirstChild(), standardized to be DomNode
+                instead of HtmlElement.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">

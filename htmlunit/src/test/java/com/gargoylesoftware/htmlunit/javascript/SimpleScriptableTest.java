@@ -120,6 +120,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("History");
         names.remove("Location");
         names.remove("Navigator");
+        names.remove("NodeImpl");
         names.remove("Screen");
         names.remove("Style");
 

@@ -14,7 +14,7 @@
 
     <class name="Button" extends="Input"/>
 
-    <class name="CharacterDataImpl" extends="HTMLElement">
+    <class name="CharacterDataImpl" extends="NodeImpl">
         <property name="data" readable="true" writable="true"/>
         <property name="length" readable="true" writable="false"/>
         <function name="appendData"/>
@@ -73,7 +73,7 @@
     </class>
     <class name="Hidden" extends="Input"/><!-- NOT FINISHED -->
 
-    <class name="HTMLElement">
+    <class name="HTMLElement" extends="NodeImpl">
         <property name="all" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
@@ -90,7 +90,6 @@
         <property name="document" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
-        <property name="firstChild" readable="true" writable="false"/>
         <property name="id" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
@@ -106,11 +105,6 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </property>
-        <property name="lastChild" readable="true" writable="false"/>
-        <property name="nextSibling" readable="true" writable="false"/>
-        <property name="nodeName" readable="true" writable="false"/>
-        <property name="nodeType" readable="true" writable="false"/>
-        <property name="nodeValue" readable="true" writable="true"/>
         <property name="offsetHeight" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
@@ -135,8 +129,6 @@
         <property name="parentElement" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
-        <property name="parentNode" readable="true" writable="false"/>
-        <property name="previousSibling" readable="true" writable="false"/>
         <property name="sourceIndex" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
@@ -152,8 +144,6 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </property>
-        <function name="appendChild"/>
-        <function name="cloneNode"/>
         <function name="contains">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
@@ -169,7 +159,6 @@
         <function name="insertAdjacentText">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
-        <function name="insertBefore"/>
         <function name="onclick">
             <javascript min-version="1.2"/>
         </function>
@@ -207,8 +196,6 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </function>
-        <function name="removeChild"/>
-        <function name="replaceChild"/>
         <function name="scrollIntoView">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
@@ -251,6 +238,22 @@
     <class name="Location">
         <function name="reload"/>
         <function name="refresh"/>
+    </class>
+
+    <class name="NodeImpl">
+        <property name="firstChild" readable="true" writable="false"/>
+        <property name="lastChild" readable="true" writable="false"/>
+        <property name="nextSibling" readable="true" writable="false"/>
+        <property name="nodeName" readable="true" writable="false"/>
+        <property name="nodeType" readable="true" writable="false"/>
+        <property name="nodeValue" readable="true" writable="true"/>
+        <property name="parentNode" readable="true" writable="false"/>
+        <property name="previousSibling" readable="true" writable="false"/>
+        <function name="appendChild"/>
+        <function name="cloneNode"/>
+        <function name="insertBefore"/>
+        <function name="removeChild"/>
+        <function name="replaceChild"/>
     </class>
 
     <class name="Option" extends="HTMLElement">

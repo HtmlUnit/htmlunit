@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -329,13 +330,13 @@ public final class Document extends HTMLElement {
     public Object jsFunction_createTextNode( final String newData ) {
         Object result = NOT_FOUND;
         try {
-            final HtmlElement htmlElement = getHtmlElementOrDie().getPage().createTextNode(newData);
-            final Object jsElement = getScriptableFor(htmlElement);
+            final DomNode domNode = getDomNodeOrDie().getPage().createTextNode(newData);
+            final Object jsElement = getScriptableFor(domNode);
 
             if( jsElement == NOT_FOUND ) {
                 getLog().debug("createTextNode("+newData
                     +") cannot return a result as there isn't a javascript object for the DOM node "
-                    + htmlElement.getClass().getName());
+                    + domNode.getClass().getName());
             }
             else {
                 result = jsElement;

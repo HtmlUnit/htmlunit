@@ -48,12 +48,12 @@ import org.w3c.dom.Node;
  */
 abstract class HtmlElementCreator {
     /**
-     * Create an HtmlElement for the specified xmlNode, contained in the specified page.
+     * Create a DomNode for the specified xmlNode, contained in the specified page.
      *
      * @param page The page that this element will belong to.
      * @param xmlNode The XML node that this HtmlElement corresponds to.
-     * @return The new HtmlElement.
+     * @return The new DomNode.
      */
-    abstract HtmlElement create( final HtmlPage page, final Node xmlNode );
+    abstract DomNode create( final HtmlPage page, final Node xmlNode );
 }
 

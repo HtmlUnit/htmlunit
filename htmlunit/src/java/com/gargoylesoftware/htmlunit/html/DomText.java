@@ -67,6 +67,6 @@ public class DomText extends DomCharacterData {
     public DomText splitText(final int offset) {
         final Text xmlNode = (Text) getNode();
         final Text splitNode = xmlNode.splitText( offset );
-        return (DomText) getPage().getHtmlElement( splitNode );
+        return (DomText) getPage().getDomNode( splitNode );
     }
 }

@@ -86,15 +86,15 @@ class SimpleHtmlElementCreator extends HtmlElementCreator {
 
 
     /**
-     * Create an HtmlElement for the specified xmlElement, contained in the specified page.
+     * Create a DomNode for the specified xmlElement, contained in the specified page.
      *
      * @param page The page that this element will belong to.
      * @param xmlElement The xml element that this HtmlElement corresponds to.
-     * @return The new HtmlElement.
+     * @return The new DomNode.
      */
-    HtmlElement create( final HtmlPage page, final Node xmlElement ) {
+    DomNode create( final HtmlPage page, final Node xmlElement ) {
         try {
-            return (HtmlElement)constructor_.newInstance( new Object[]{page, xmlElement});
+            return (DomNode)constructor_.newInstance( new Object[]{page, xmlElement});
         }
         catch( final IllegalAccessException e) {
             throw new ObjectInstantiationException(

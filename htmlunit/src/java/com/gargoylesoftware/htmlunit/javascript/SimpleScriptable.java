@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptException;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -64,7 +65,7 @@ public class SimpleScriptable extends ScriptableObject {
     private static Map HtmlJavaScriptMap_ = null;
 
     private JavaScriptEngine.PageInfo pageInfo_;
-    private HtmlElement htmlElement_;
+    private DomNode domNode_;
 
     private class PropertyInfo {
         private Method getter_;
@@ -139,7 +140,7 @@ public class SimpleScriptable extends ScriptableObject {
             final Class clazz = getClass();
             final String className = clazz.getName();
             Map localPropertyMap = (Map)PROPERTY_MAPS.get(className);
-            if( localPropertyMap == null && htmlElement_ != null ) {
+            if( localPropertyMap == null && domNode_ != null ) {
                 try {
                     localPropertyMap = createLocalPropertyMap();
                 }
@@ -155,7 +156,7 @@ public class SimpleScriptable extends ScriptableObject {
 
     private JavaScriptConfiguration getJavaScriptConfiguration() {
         final BrowserVersion browserVersion
-            = getHtmlElementOrDie().getPage().getWebClient().getBrowserVersion();
+            = getDomNodeOrDie().getPage().getWebClient().getBrowserVersion();
         return JavaScriptConfiguration.getInstance(browserVersion);
     }
 
@@ -275,19 +276,40 @@ public class SimpleScriptable extends ScriptableObject {
 
 
     /**
+     * Return the DOM node that corresponds to this javascript object or throw
+     * an exception if one cannot be found.
+     * @return The DOM node
+     * @exception IllegalStateException If the DOM node could not be found.
+     */
+     public final DomNode getDomNodeOrDie() throws IllegalStateException {
+         if( domNode_ == null ) {
+             throw new IllegalStateException(
+                "DomNode has not been set for this SimpleScriptable: "+getClass().getName());
+         }
+         else {
+             return domNode_;
+         }
+     }
+
+
+    /**
      * Return the html element that corresponds to this javascript object or throw an exception
      * if one cannot be found.
      * @return The html element
      * @exception IllegalStateException If the html element could not be found.
      */
      public final HtmlElement getHtmlElementOrDie() throws IllegalStateException {
-         if( htmlElement_ == null ) {
-             throw new IllegalStateException(
-                "HtmlElement has not been set for this SimpleScriptable: "+getClass().getName());
-         }
-         else {
-             return htmlElement_;
-         }
+         return (HtmlElement) getDomNodeOrDie();
+     }
+
+
+    /**
+     * Return the DOM node that corresponds to this javascript object
+     * or null if a node hasn't been set.
+     * @return The DOM node or null
+     */
+     public final DomNode getDomNodeOrNull() {
+         return domNode_;
      }
 
 
@@ -297,7 +319,18 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The html element or null
      */
      public final HtmlElement getHtmlElementOrNull() {
-         return htmlElement_;
+         return (HtmlElement) getDomNodeOrNull();
+     }
+
+
+     /**
+      * Set the DOM node that corresponds to this javascript object
+      * @param domNode The DOM node
+      */
+     public void setDomNode( final DomNode domNode ) {
+         Assert.notNull("domNode", domNode);
+         domNode_ = domNode;
+         domNode_.setScriptObject(this);
      }
 
 
@@ -306,9 +339,7 @@ public class SimpleScriptable extends ScriptableObject {
       * @param htmlElement The html element
       */
      public void setHtmlElement( final HtmlElement htmlElement ) {
-         Assert.notNull("htmlElement", htmlElement);
-         htmlElement_ = htmlElement;
-         htmlElement_.setScriptObject(this);
+         setDomNode(htmlElement);
      }
 
 
@@ -322,7 +353,7 @@ public class SimpleScriptable extends ScriptableObject {
          // Some calls to get will happen during the initialization of the superclass.
          // At this point, we don't have enough information to do our own initialization
          // so we have to just pass this call through to the superclass.
-         if( htmlElement_ == null ) {
+         if( domNode_ == null ) {
              return super.get(name, start);
          }
 
@@ -379,7 +410,7 @@ public class SimpleScriptable extends ScriptableObject {
          // Some calls to put will happen during the initialization of the superclass.
          // At this point, we don't have enough information to do our own initialization
          // so we have to just pass this call through to the superclass.
-         if( htmlElement_ == null ) {
+         if( domNode_ == null ) {
              super.put(name, start, newValue);
              return;
          }
@@ -451,31 +482,31 @@ public class SimpleScriptable extends ScriptableObject {
 
 
      /**
-      * Return the javascript object that corresponds to the specified html element.
+      * Return the javascript object that corresponds to the specified DOM node.
       * New javascript objects will be created as needed.  If a javascript object
-      * cannot be created for this htmlElement then NOT_FOUND will be returned.
+      * cannot be created for this domNode then NOT_FOUND will be returned.
       *
-      * @param htmlElement The html element
+      * @param domNode The DOM node
       * @return The javascript object or NOT_FOUND
       */
-    public SimpleScriptable getScriptableFor( final HtmlElement htmlElement ) {
-        final Object scriptObject = htmlElement.getScriptObject();
+    public SimpleScriptable getScriptableFor( final DomNode domNode ) {
+        final Object scriptObject = domNode.getScriptObject();
         if( scriptObject != null ) {
             return (SimpleScriptable)scriptObject;
         }
 
         final String javaScriptClassName;
-        javaScriptClassName = (String)getHtmlJavaScriptMapping().get(htmlElement.getClass());
+        javaScriptClassName = (String)getHtmlJavaScriptMapping().get(domNode.getClass());
         if( javaScriptClassName == null ) {
             // We don't have a specific subclass for this element so create something generic.
             final SimpleScriptable scriptable = makeJavaScriptObject("HTMLElement");
-            scriptable.setHtmlElement(htmlElement);
-            //getLog().info("No javascript class found for element <"+htmlElement.getTagName()+">.  Using HTMLElement");
+            scriptable.setDomNode(domNode);
+            //getLog().info("No javascript class found for element <"+domNode.getTagName()+">.  Using HTMLElement");
             return scriptable;
         }
         else {
             final SimpleScriptable scriptable = makeJavaScriptObject(javaScriptClassName);
-            scriptable.setHtmlElement(htmlElement);
+            scriptable.setDomNode(domNode);
             return scriptable;
         }
     }

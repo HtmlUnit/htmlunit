@@ -405,7 +405,7 @@ public final class HtmlPage
     public DomText createTextNode( String data ) {
         Document document = getDocument();
         final Text xmlText = document.createTextNode( data );
-        final DomText textNode = (DomText) getHtmlElement( xmlText );
+        final DomText textNode = (DomText) getDomNode( xmlText );
         return textNode;
     }
 
@@ -465,6 +465,24 @@ public final class HtmlPage
 
     /**
      *  Given an XML node, return the HtmlElement object that corresponds to
+     *  that node or an instance of UnknownHtmlElement if one cannot be
+     *  found. <p />
+     *
+     *  If a null xmlNode is passed in then null will be returned.  This
+     *  deviates somewhat from the normal practice of throwing exceptions
+     *  on null parameters but allowing this one case of null makes a
+     *  significant amount of code elsewhere much simpler.
+     *
+     * @param  xmlNode The XML node to match
+     * @return  See above
+     */
+    public HtmlElement getHtmlElement( final Node xmlNode ) {
+        return (HtmlElement) getDomNode( xmlNode );
+    }
+
+
+    /**
+     *  Given an XML node, return the DomNode object that corresponds to
      *  that node or an instance of UnknownHtmlElement or UnknownDomNode if
      *  one cannot be found. <p />
      *
@@ -476,18 +494,18 @@ public final class HtmlPage
      * @param  xmlNode The XML node to match
      * @return  See above
      */
-    public HtmlElement getHtmlElement( final Node xmlNode ) {
+    public DomNode getDomNode( final Node xmlNode ) {
         if( xmlNode == null ) {
             return null;
         }
 
-        final HtmlElement htmlElement = ( HtmlElement )nodes_.get( xmlNode );
-        if( htmlElement != null ) {
-            return htmlElement;
+        final DomNode domNode = ( DomNode )nodes_.get( xmlNode );
+        if( domNode != null ) {
+            return domNode;
         }
 
         final HtmlElementCreator creator;
-        final HtmlElement newHtmlElement;
+        final DomNode newDomNode;
         if( xmlNode.getNodeType() == Node.ELEMENT_NODE ) {
             final String tagName = getTagName((Element) xmlNode);
             creator = ( HtmlElementCreator )
@@ -499,37 +517,37 @@ public final class HtmlPage
         }
         if( creator == null ) {
             if( xmlNode.getNodeType() == Node.ELEMENT_NODE ) {
-                newHtmlElement = new UnknownHtmlElement( this, (Element) xmlNode );
+                newDomNode = new UnknownHtmlElement( this, (Element) xmlNode );
             }
             else {
-                newHtmlElement = new UnknownDomNode( this, xmlNode );
+                newDomNode = new UnknownDomNode( this, xmlNode );
             }
         }
         else {
-            newHtmlElement = creator.create( this, xmlNode );
+            newDomNode = creator.create( this, xmlNode );
         }
-        nodes_.put( xmlNode, newHtmlElement );
-        return newHtmlElement;
+        nodes_.put( xmlNode, newDomNode );
+        return newDomNode;
     }
 
 
 
     /**
-     *  Given an XML node, remove that node and return the HtmlElement
+     *  Given an XML node, remove that node and return the DomNode
      *  object that corresponds to that node or null if one cannot be
      *  found. <p />
      *
-     *  If a null xmlElement is passed in then null will be returned.
+     *  If a null xmlNode is passed in then null will be returned.
      *
      * @param  xmlNode The XML node to remove
      * @return  See above
      */
-    public HtmlElement removeHtmlElement( final Node xmlNode ) {
+    public DomNode removeDomNode( final Node xmlNode ) {
         if( xmlNode == null ) {
             return null;
         }
 
-        return ( HtmlElement )nodes_.remove( xmlNode );
+        return ( DomNode )nodes_.remove( xmlNode );
     }
 
 

@@ -42,16 +42,10 @@ import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 /**
  * A javascript object for CharacterData.
  *
- * NOTE: This is derived from HTMLElement due to only partial support
- * for DOM in the html package.  HtmlElement is the closest class to
- * the base Node class.  You should not rely on this incorrect derivation
- * by using HTMLElement methods for CharacterData or its derived classes
- * like Text.
- *
  * @version  $Revision$
  * @author David K. Taylor
  */
-public abstract class CharacterDataImpl extends HTMLElement {
+public abstract class CharacterDataImpl extends NodeImpl {
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.
@@ -66,7 +60,7 @@ public abstract class CharacterDataImpl extends HTMLElement {
      */
     public Object jsGet_data() {
         final DomCharacterData domCharacterData =
-            (DomCharacterData) getHtmlElementOrDie();
+            (DomCharacterData) getDomNodeOrDie();
         return domCharacterData.getData();
     }
 
@@ -77,7 +71,7 @@ public abstract class CharacterDataImpl extends HTMLElement {
      */
     public void jsSet_data( final String newValue ) {
         final DomCharacterData domCharacterData =
-            (DomCharacterData) getHtmlElementOrDie();
+            (DomCharacterData) getDomNodeOrDie();
         domCharacterData.setData(newValue);
     }
 
@@ -88,7 +82,7 @@ public abstract class CharacterDataImpl extends HTMLElement {
      */
     public int jsGet_length() {
         final DomCharacterData domCharacterData =
-            (DomCharacterData) getHtmlElementOrDie();
+            (DomCharacterData) getDomNodeOrDie();
         return domCharacterData.getLength();
     }
 
@@ -99,7 +93,7 @@ public abstract class CharacterDataImpl extends HTMLElement {
      */
     public void jsFunction_appendData(final String arg) {
         final DomCharacterData domCharacterData =
-            (DomCharacterData) getHtmlElementOrDie();
+            (DomCharacterData) getDomNodeOrDie();
         domCharacterData.appendData(arg);
     }
 
@@ -111,7 +105,7 @@ public abstract class CharacterDataImpl extends HTMLElement {
      */
     public void jsFunction_deleteData(final int offset, final int count) {
         final DomCharacterData domCharacterData =
-            (DomCharacterData) getHtmlElementOrDie();
+            (DomCharacterData) getDomNodeOrDie();
         domCharacterData.deleteData(offset, count);
     }
 
@@ -124,7 +118,7 @@ public abstract class CharacterDataImpl extends HTMLElement {
      */
     public void jsFunction_insertData(final int offset, final String arg) {
         final DomCharacterData domCharacterData =
-            (DomCharacterData) getHtmlElementOrDie();
+            (DomCharacterData) getDomNodeOrDie();
         domCharacterData.insertData(offset, arg);
     }
 
@@ -140,7 +134,7 @@ public abstract class CharacterDataImpl extends HTMLElement {
     public void jsFunction_replaceData(final int offset, final int count,
         final String arg) {
         final DomCharacterData domCharacterData =
-            (DomCharacterData) getHtmlElementOrDie();
+            (DomCharacterData) getDomNodeOrDie();
         domCharacterData.replaceData(offset, count, arg);
     }
 
@@ -155,7 +149,7 @@ public abstract class CharacterDataImpl extends HTMLElement {
     public String jsFunction_substringData(final int offset,
         final int count) {
         final DomCharacterData domCharacterData =
-            (DomCharacterData) getHtmlElementOrDie();
+            (DomCharacterData) getDomNodeOrDie();
         return domCharacterData.substringData(offset, count);
     }
 }
