@@ -77,10 +77,8 @@ public interface WebResponse {
      *  Return the content from the server as a string
      *
      * @return  See above
-     * @exception  IOException If an IO problem occurs
      */
-    String getContentAsString()
-        throws IOException;
+    String getContentAsString();
 
 
     /**
