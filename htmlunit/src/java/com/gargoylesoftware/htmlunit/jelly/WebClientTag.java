@@ -43,7 +43,7 @@ import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.SimpleCredentialProvider;
+import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
 import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
@@ -83,7 +83,7 @@ public class WebClientTag extends HtmlUnitTagSupport {
             if( userId_ == null || password_ == null ) {
                 throw new JellyTagException("userid and password must either both be set or neither set");
             }
-            webClient_.setCredentialProvider( new SimpleCredentialProvider(userId_, password_) );
+            ((DefaultCredentialsProvider) webClient_.getCredentialsProvider()).addCredentials( userId_, password_ );
         }
 
         final String varName = getVarValueOrNull();

@@ -63,6 +63,7 @@ import java.util.StringTokenizer;
 
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
+import org.apache.commons.httpclient.auth.CredentialsProvider;
 import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
@@ -97,7 +98,7 @@ public class WebClient {
     private WebConnection webConnection_;
     private boolean printContentOnFailingStatusCode_ = true;
     private boolean throwExceptionOnFailingStatusCode_ = true;
-    private CredentialProvider credentialProvider_ = new DenyAllCredentialProvider();
+    private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
     private final String proxyHost_;
     private final int proxyPort_;
     private ScriptEngine scriptEngine_;
@@ -753,29 +754,25 @@ public class WebClient {
 
 
     /**
-     *  Set the credential provider that will provide the authentication
-     *  information when trying to access protected information on a web server.
-     *  This information is required when the server is using basic
-     *  authentication to protect resources. <p>
-     *
-     *  If you want to return the same user id/password combination for all
-     *  realms then use a {@link com.gargoylesoftware.htmlunit.SimpleCredentialProvider}
-     *
-     * @param  credentialProvider The credential provider
+     * Sets the credentials provider that will provide authentication information when
+     * trying to access protected information on a web server. This information is
+     * required when the server is using Basic HTTP authentication, NTLM authentication,
+     * or Digest authentication.
+     * @param credentialsProvider The new credentials provider to use to authenticate.
      */
-    public void setCredentialProvider( final CredentialProvider credentialProvider ) {
-        Assert.notNull( "credentialProvider", credentialProvider );
-        credentialProvider_ = credentialProvider;
+    public void setCredentialsProvider( final CredentialsProvider credentialsProvider ) {
+        Assert.notNull( "credentialsProvider", credentialsProvider );
+        credentialsProvider_ = credentialsProvider;
     }
 
 
     /**
-     *  Return the credential provider
-     *
-     * @return  The credential provider
+     * Returns the credentials provider for this client instance. By default, this
+     * method returns an instance of {@link DefaultCredentialsProvider}.
+     * @return The credentials provider for this client instance.
      */
-    public CredentialProvider getCredentialProvider() {
-        return credentialProvider_;
+    public CredentialsProvider getCredentialsProvider() {
+        return credentialsProvider_;
     }
 
 
@@ -799,16 +796,6 @@ public class WebClient {
         }
         catch( final Exception e ) {
             throw new IllegalStateException( message );
-        }
-    }
-
-
-    private class DenyAllCredentialProvider implements CredentialProvider {
-        /** @inheritDoc CredentialProvider#getCredentialsFor(String,int,String) */
-        public KeyValuePair getCredentialsFor(
-            final String server, final int port, final String realm ) {
-
-            return null;
         }
     }
 
