@@ -64,11 +64,18 @@ import java.util.List;
  * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  */
 public class WindowTest extends WebTestCase {
+    /**
+     * Create an instance
+     * @param name The name of the test
+     */
     public WindowTest( final String name ) {
         super(name);
     }
 
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testSetLocation() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -102,6 +109,9 @@ public class WindowTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testOpenWindow() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -234,6 +244,9 @@ public class WindowTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testParentAndTop() throws Exception {
 
         final String firstContent
@@ -285,6 +298,9 @@ public class WindowTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testConfirm() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -316,6 +332,9 @@ public class WindowTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testConfirm_noConfirmHandler() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -341,6 +360,9 @@ public class WindowTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testPrompt() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -372,6 +394,9 @@ public class WindowTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testPrompt_noPromptHandler() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -397,6 +422,9 @@ public class WindowTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testOpener() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -449,6 +477,9 @@ public class WindowTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testSetTimeout() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -480,6 +511,9 @@ public class WindowTest extends WebTestCase {
     }
     
     
+    /**
+     * @throws Exception If the test fails
+     */
     public void testAboutURL() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection =
