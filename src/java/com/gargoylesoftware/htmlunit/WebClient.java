@@ -1423,6 +1423,9 @@ public class WebClient {
     }
     
     private RefreshHandler refreshHandler_ = new DefaultRefreshHandler();
+    /**
+     * @param handler The handler to set
+     */
     public void setRefreshHandler( final RefreshHandler handler ) {
         if( handler == null ) {
             refreshHandler_ = new DefaultRefreshHandler();
@@ -1432,6 +1435,9 @@ public class WebClient {
         }
     }
     
+    /**
+     * @return The current RefreshHandler
+     */
     public RefreshHandler getRefreshHandler() {
         return refreshHandler_;
     }
