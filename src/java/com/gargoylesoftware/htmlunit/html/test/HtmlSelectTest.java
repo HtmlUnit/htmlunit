@@ -390,5 +390,35 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlSelect select = (HtmlSelect)page.getHtmlElementById("select1");
         assertTrue( select.isMultipleSelectEnabled() );
     }
+
+
+    public void testGetOptionByValue_TwoOptionsWithSameValue() throws Exception {
+
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body><form id='form1'>"
+                 + "<select name='select1'>"
+                 + "    <option value='option1'>s1o1</option>"
+                 + "    <option value='option2'>s1o2</option>"
+                 + "</select>"
+                 + "<select name='select2'>"
+                 + "    <option value='option1'>s2o1</option>"
+                 + "    <option value='option2'>s2o2</option>"
+                 + "</select>"
+                 + "<input type='submit' name='button' value='foo'/>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://www.gargoylesoftware.com" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+
+        final HtmlSelect select = ( HtmlSelect )form.getSelectsByName( "select2" ).get( 0 );
+        assertEquals( "s2o2", select.getOptionByValue("option2").asText() );
+    }
 }
 
