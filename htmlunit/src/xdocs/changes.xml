@@ -76,6 +76,10 @@
 	            Fix for bug 740605 "External script is executed before script element added".
 	            Patch submitted by David K. Taylor
             </action>
+            <action type="update" dev="mbowler" id="740665 " due-to="David K. Taylor">
+	            Fix for bug 740665 "Script attributes undefined when script executes".
+	            Patch submitted by David K. Taylor
+            </action>
         </release>
     </body>
 

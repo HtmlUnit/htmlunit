@@ -9,13 +9,15 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import org.w3c.dom.Element;
+import org.mozilla.javascript.Scriptable;
 
 /**
  * The javascript object "HTMLElement" which is the base class for all html
  * objects.  This will typically wrap an instance of {@link HtmlElement}.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public class HTMLElement extends SimpleScriptable {
     private Style style_;
@@ -96,6 +98,25 @@ public class HTMLElement extends SimpleScriptable {
      */
     public String jsGet_tagName() {
         return getHtmlElementOrDie().getTagName().toUpperCase();
+    }
+
+
+    /**
+     * Return the value of the named attribute.
+     * @return The attribute value
+     */
+    public Object get( String name, Scriptable start ) {
+        Object result = super.get( name, start );
+        if ( result == NOT_FOUND ) {
+            final HtmlElement htmlElement = getHtmlElementOrNull();
+            if( htmlElement != null) {
+                final String value = htmlElement.getAttributeValue(name);
+                if( value.length() != 0 ) {
+                    result = value;
+                }
+            }
+        }
+        return result;
     }
 }
 
