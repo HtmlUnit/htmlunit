@@ -135,6 +135,7 @@ public class SimpleScriptable extends ScriptableObject {
             {"HtmlTableBody", "TableBody"},
             {"HtmlTableFooter", "TableFooter"},
             {"HtmlTableHeader", "TableHeader"},
+            {"HtmlTableRow", "TableRow"},
             {"HtmlTextInput", "Input"},
             {"HtmlTextArea", "Textarea"},
             {"HtmlElement", "HTMLElement"},

@@ -135,9 +135,20 @@ public class RowContainer extends HTMLElement {
         }
         final boolean rowIndexValid = (r >= 0 && r < rows.jsGet_length());
         if (rowIndexValid) {
-            final SimpleScriptable row = (SimpleScriptable) rows.jsFunction_item(new Integer(r));
-            final HtmlElement newRow = row.getDomNodeOrDie().getPage().createElement("tr");
-            row.getDomNodeOrDie().insertBefore(newRow);
+            final HtmlElement newRow = rowContainer.getDomNodeOrDie().getPage().createElement("tr");
+            if (rows.jsGet_length() == 0) {
+                rowContainer.getDomNodeOrDie().appendChild(newRow);
+            }
+            else {
+                final SimpleScriptable row = (SimpleScriptable) rows.jsFunction_item(new Integer(r));
+                // if at the end, then in the same "sub-container" as the last existing row
+                if (r == rows.jsGet_length() - 1) {
+                    row.getDomNodeOrDie().getParentNode().appendChild(newRow);
+                }
+                else {
+                    row.getDomNodeOrDie().insertBefore(newRow);
+                }
+            }
             return rowContainer.getScriptableFor(newRow);
         }
         else {

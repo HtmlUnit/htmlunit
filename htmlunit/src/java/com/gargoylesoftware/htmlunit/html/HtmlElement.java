@@ -281,21 +281,34 @@ public abstract class HtmlElement extends DomNode {
 
 
     /**
+     * Return the element with the given name that enclosed this element or null if this element is
+     * no such element is found.
+     * @param tagName the name of the tag searched (case insensitive)
+     * @return  See above
+     */
+    public HtmlElement getEnclosingElement(final String tagName) {
+        final String tagNameLC = tagName.toLowerCase();
+
+        DomNode currentNode = getParentNode();
+        while (currentNode != null) {
+            if (currentNode instanceof HtmlElement
+                    && currentNode.getNodeName().equals(tagNameLC)) {
+
+                return (HtmlElement) currentNode;
+            }
+            currentNode = currentNode.getParentNode();
+        }
+        return null;
+    }
+
+    /**
      *  Return the form that enclosed this element or null if this element is
      *  not within a form.
      *
      * @return  See above
      */
     public HtmlForm getEnclosingForm() {
-
-        DomNode currentNode = getParentNode();
-        while(currentNode != null) {
-            if(currentNode instanceof HtmlForm) {
-                return (HtmlForm)currentNode;
-            }
-            currentNode = currentNode.getParentNode();
-        }
-        return null;
+        return (HtmlForm) getEnclosingElement("form");
     }
 
 

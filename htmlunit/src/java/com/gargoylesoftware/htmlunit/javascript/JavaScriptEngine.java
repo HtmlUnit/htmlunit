@@ -171,7 +171,7 @@ public final class JavaScriptEngine extends ScriptEngine {
                 "Screen", "History", "Location", "Button", "Select", "Textarea",
                 "Style", "Option", "Anchor", "Image", "TextImpl", "FocusableHostElement",
                 "ActiveXObject", "Table", "Attribute", "RowContainer", "TableBody",
-                "TableFooter", "TableHeader"
+                "TableFooter", "TableHeader", "TableRow"
             };
 
             for( int i=0; i<hostClassNames.length; i++ ) {

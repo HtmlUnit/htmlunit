@@ -72,6 +72,32 @@ public class HtmlElementTest extends WebTestCase {
         assertSame(form, input.getEnclosingForm());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetEnclosing() throws Exception {
+        final String htmlContent = ""
+            + "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<table id='table1'>"
+            + "<tr id='tr1'><td id='td1'>foo</td></tr>"
+            + "<tr id='tr2'><td id='td2'>foo</td></tr>"
+            + "</table>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlElement td1 = page.getHtmlElementById("td1");
+        assertEquals("tr1", td1.getEnclosingElement("tr").getId());
+        assertEquals("tr1", td1.getEnclosingElement("TR").getId());
+        assertEquals("table1", td1.getEnclosingElement("table").getId());
+        assertEquals("form1", td1.getEnclosingElement("form").getId());
+
+        final HtmlElement td2 = page.getHtmlElementById("td2");
+        assertEquals("tr2", td2.getEnclosingElement("tr").getId());
+        assertEquals("tr2", td2.getEnclosingElement("TR").getId());
+        assertEquals("table1", td2.getEnclosingElement("table").getId());
+        assertEquals("form1", td2.getEnclosingElement("form").getId());
+    }
 
     /**
      * @throws Exception if the test fails

@@ -452,6 +452,12 @@
 			<doclink
 				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertrow.asp"
 				descr="MSDN documentation"/>
+			<doclink
+				url="http://www.mozilla.org/docs/dom/domref/dom_html_ref31.html"
+				descr="Gecko DOM Reference"/>
+			<doclink
+				url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-39872903"
+				descr="W3C Document Object Model (DOM) Level 2"/>
         </function>
         <function name="moveRow"/>
     </class>
@@ -546,6 +552,23 @@
 
     <class name="TableHeader" extends="RowContainer"/>
 
+    <class name="TableRow" extends="HTMLElement">
+		<doclink
+			url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-6986576"
+			descr="W3c DOM Level 2"/>
+		<doclink
+			url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/tr.asp"
+			descr="MSDN documentation"/>
+        <property name="rowIndex" readable="true" writable="false">
+			<doclink
+				url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-67347567"
+				descr="W3c DOM Level 2"/>
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/rowindex.asp"
+				descr="MSDN documentation"/>
+		</property>
+	</class>
+	
     <class name="Text" extends="Input">
 		<!-- NOT FINISHED -->
 	</class>
