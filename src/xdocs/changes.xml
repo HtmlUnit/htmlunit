@@ -6,7 +6,7 @@
 		<change type="new">
 			Started tracking more information about changes
 		</change>
-		<change type="fix" reporter="Jean-Luc Vaillant" id="">
+		<change type="fix" reporter="Jean-Luc Vaillant" id="705703">
 			Fixed bug where the checked attribute wasn't always returning the correct value.
 		</change>
 		<change type="fix" reporter="Jean-Luc Vaillant" id="705693">
