@@ -404,9 +404,10 @@ public class HttpWebConnection extends WebConnection {
         final int statusCode, final HttpMethod method, final URL originatingURL, final long loadTime ) 
     throws IOException {
 
-        final String content = IOUtils.toString(method.getResponseBodyAsStream());
         return new WebResponse() {
-                public int getStatusCode() {
+        	private String content = IOUtils.toString(method.getResponseBodyAsStream(), getContentCharSet());
+
+        	public int getStatusCode() {
                     return statusCode;
                 }
 
