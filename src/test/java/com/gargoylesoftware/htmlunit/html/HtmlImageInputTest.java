@@ -89,8 +89,14 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlImageInput imageInput = (HtmlImageInput)form.getInputByName("button");
         final HtmlPage secondPage = (HtmlPage)imageInput.click();
         assertNotNull(secondPage);
+
+        final List expectedPairs = Arrays.asList( new Object[]{
+            new KeyValuePair("button.x", "0"),
+            new KeyValuePair("button.y", "0")
+        });
+
         assertEquals(
-            Collections.singletonList(new KeyValuePair("button", "foo")),
+            expectedPairs,
             webConnection.getLastParameters() );
     }
 

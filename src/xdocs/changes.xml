@@ -148,6 +148,10 @@
 				the function HtmlCheckBoxInput.click() was not returning the new page. Rather it was 
 				returning the original page.            
 			</action>
+            <action type="update" dev="mbowler" due-to="Mike Bresnahan" id="977759">
+				Fixed bug where  HtmlImageInput.click() was not including the name.x and
+				name.y attributes in the submitted request.
+			</action>
 		</release>
 		    
         <release version="1.3-pre2" date="September 26, 2004">
