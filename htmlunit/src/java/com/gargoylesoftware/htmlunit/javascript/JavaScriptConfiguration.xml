@@ -210,21 +210,13 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </property>
-        <property name="offsetHeight" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-        </property>
-        <property name="offsetLeft" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-        </property>
+        <property name="offsetHeight" readable="true" writable="false"/>
+        <property name="offsetLeft" readable="true" writable="false"/>
         <property name="offsetParent" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
-        <property name="offsetTop" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-        </property>
-        <property name="offsetWidth" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-        </property>
+        <property name="offsetTop" readable="true" writable="false"/>
+        <property name="offsetWidth" readable="true" writable="false"/>
         <property name="onclick" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="3"/>
