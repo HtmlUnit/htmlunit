@@ -54,8 +54,12 @@ public class StringWebResponse implements WebResponse {
     private final String content_;
     private final String encoding_ = "ISO-8859-1";
     private final URL url_;
-    
-    public StringWebResponse( final String content ) { 
+
+    /**
+     * Create an instance.
+     * @param content The content to return.
+     */
+    public StringWebResponse( final String content ) {
         content_ = content;
         try {
             url_ = new URL("http://first");
@@ -64,8 +68,8 @@ public class StringWebResponse implements WebResponse {
             // Theoretically impossible
             throw new IllegalStateException(e.toString());
         }
-    }        
-    
+    }
+
     /**
      *  Return the status code that was returned by the server
      *

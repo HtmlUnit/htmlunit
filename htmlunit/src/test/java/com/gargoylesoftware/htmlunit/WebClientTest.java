@@ -727,16 +727,20 @@ public class WebClientTest extends WebTestCase {
         final URL url = new URL("http://first/");
         return (HtmlPage)webClient.getPage(url, SubmitMethod.GET, Collections.EMPTY_LIST);
     }
-    
+
+    /**
+     * Test {@link WebClient#loadResponseInto(WebResponse,WebWindow)}
+     * @throws Exception If the test fails.
+     */
     public void testLoadWebResponseInto() throws Exception {
         final WebClient webClient = new WebClient();
         final WebResponse webResponse = new StringWebResponse(
             "<html><head><title>first</title></head><body></body></html>");
-            
-        final Page page = webClient.loadWebResponseInto( 
+
+        final Page page = webClient.loadWebResponseInto(
             webResponse, webClient.getCurrentWindow() );
         assertInstanceOf( page, HtmlPage.class);
-        
+
         final HtmlPage htmlPage = (HtmlPage)page;
         assertEquals("first", htmlPage.getTitleText() );
     }

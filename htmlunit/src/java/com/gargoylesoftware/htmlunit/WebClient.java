@@ -537,25 +537,25 @@ public class WebClient {
 
         return webWindow.getEnclosedPage();
     }
-    
+
     /**
      * Use the specified WebResponse to create a Page object which will then
      * get inserted into the WebWindow.  All initialization and event notification
      * will be handled here.
-     * 
+     *
      * @param webResponse The response that will be used to create the new page.
      * @param webWindow The window that the new page will be placed within.
      * @throws IOException If an IO error occurs.
      * @return The newly created page.
      */
-    public Page loadWebResponseInto( 
-            final WebResponse webResponse, final WebWindow webWindow ) 
-        throws 
+    public Page loadWebResponseInto(
+            final WebResponse webResponse, final WebWindow webWindow )
+        throws
             IOException {
-                
+
         Assert.notNull("webResponse", webResponse);
         Assert.notNull("webWindow", webWindow);
-            
+
         final Page oldPage = webWindow.getEnclosedPage();
         if (oldPage != null) {
             // Remove the old windows before create new ones.
@@ -1096,7 +1096,7 @@ public class WebClient {
     public void deregisterWebWindow( final WebWindow webWindow ) {
         Assert.notNull("webWindow", webWindow);
         webWindows_.remove(webWindow);
-        
+
         if( currentWindow_ == webWindow ) {
             if( webWindows_.size() == 0 ) {
                 // Create a new one - we always have to have at least one window.

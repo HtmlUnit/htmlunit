@@ -49,40 +49,40 @@ public final class WebWindowEvent extends EventObject {
     private final Page oldPage_;
     private final Page newPage_;
     private final int type_;
-    
+
     /** A window has opened */
     public static final int OPEN = 1;
-    
+
     /** A window has closed */
     public static final int CLOSE = 2;
-    
+
     /** The content of the window has changed */
     public static final int CHANGE = 3;
-    
-    
+
     /**
      * Create an instance
      *
      * @param webWindow The WebWindow that caused the event
+     * @param type The type - one of {@link OPEN}, {@link CLOSE} or {@link CHANGE}
      * @param oldPage The old contents of the web window
      * @param newPage The new contents of the web window
      */
-    public WebWindowEvent( 
-            final WebWindow webWindow, 
-            final int type, 
-            final Page oldPage, 
+    public WebWindowEvent(
+            final WebWindow webWindow,
+            final int type,
+            final Page oldPage,
             final Page newPage ) {
         super(webWindow);
         oldPage_ = oldPage;
         newPage_ = newPage;
-        
+
         switch( type ) {
             case OPEN:
-            case CLOSE: 
+            case CLOSE:
             case CHANGE:
                 type_ = type;
                 break;
-                
+
             default:
                 throw new IllegalArgumentException(
                     "type must be one of OPEN, CLOSE, CHANGE but got "+type);
@@ -173,13 +173,13 @@ public final class WebWindowEvent extends EventObject {
             case OPEN:
                 buffer.append("OPEN");
                 break;
-            case CLOSE: 
+            case CLOSE:
                 buffer.append("CLOSE");
                 break;
-            case CHANGE: 
+            case CHANGE:
                 buffer.append("CHANGE");
                 break;
-            default: 
+            default:
                 buffer.append(type_);
                 break;
         }
@@ -188,10 +188,10 @@ public final class WebWindowEvent extends EventObject {
         buffer.append("] newPage=[");
         buffer.append(getNewPage());
         buffer.append("])");
-        
+
         return buffer.toString();
     }
-    
+
     /** @return the event type */
     public int getEventType() {
         return type_;

@@ -223,7 +223,7 @@
             <action type="update" dev="mbowler">
                 Refactored test for window opening using the new type attribute.
             </action>
-            <action type="add" dev="mbowler" id="">
+            <action type="add" dev="mbowler" id="650924">
                 Added support for window.status
             </action>
         </release>
