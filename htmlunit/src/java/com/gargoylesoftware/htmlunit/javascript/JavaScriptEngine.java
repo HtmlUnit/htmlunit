@@ -48,7 +48,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import java.util.Iterator;
-import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.Map;
 import java.lang.ref.WeakReference;
@@ -150,42 +149,36 @@ public final class JavaScriptEngine extends ScriptEngine {
             
             final Context context = Context.enter();
             context.setOptimizationLevel(-1);
-            context.setErrorReporter(
-                new StrictErrorReporter(getScriptEngineLog()) );
+            context.setErrorReporter(new StrictErrorReporter(getScriptEngineLog()));
             final Scriptable parentScope = context.initStandardObjects(null);
 
             final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
-            final Set keys = jsConfig.keySet();
-            final Iterator it = keys.iterator();
-            String jsClassName;
-            ClassConfiguration config;
-            Class jsHostClass;
-            ScriptableObject prototype;
-            Iterator it1;
-            String entryKey;
-            FunctionObject functionObject;
+            final Iterator it = jsConfig.keySet().iterator();
             while (it.hasNext()) {
-                jsClassName = (String) it.next();
-                config = jsConfig.getClassConfiguration(jsClassName);
+                final String jsClassName = (String) it.next();
+                final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
                 if (config.isJsObject()) {
-                    jsHostClass = config.getLinkedClass();
+                    final Class jsHostClass = config.getLinkedClass();
                     ScriptableObject.defineClass(parentScope, jsHostClass);
-    // FIXME - add the method code here            
-                    prototype = (ScriptableObject) ScriptableObject.getClassPrototype(parentScope, jsClassName);
-                    it1 = config.propertyKeys().iterator();
-                    while (it1.hasNext()) {
-                        entryKey = (String) it1.next();
+    // FIXME - add the method code here
+                    final ScriptableObject prototype = (ScriptableObject) ScriptableObject
+                        .getClassPrototype(parentScope, jsClassName);
+  
+                    final Iterator propertiesIterator = config.propertyKeys().iterator();
+                    while (propertiesIterator.hasNext()) {
+                        final String entryKey = (String) propertiesIterator.next();
                         prototype.defineProperty(entryKey, null, config.getPropertyReadMethod(entryKey),
                             config.getPropertyWriteMethod(entryKey), 0);
                     }
-                    it1 = config.functionKeys().iterator();
-                    while (it1.hasNext()) {
-                        entryKey = (String) it1.next();
-                        functionObject = new FunctionObject(entryKey, config.getFunctionMethod(entryKey), prototype);
+
+                    final Iterator functionsIterator = config.functionKeys().iterator();
+                    while (functionsIterator.hasNext()) {
+                        final String entryKey = (String) functionsIterator.next();
+                        final FunctionObject functionObject = new FunctionObject(entryKey, 
+                                config.getFunctionMethod(entryKey), prototype);
                         prototype.defineProperty(entryKey, functionObject, 0);
 //        FunctionObject f = new FunctionObject(name, m, this);
 //        defineProperty(name, f, attributes);
-
                     }
                         
                 }
