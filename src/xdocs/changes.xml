@@ -38,7 +38,7 @@
                 by Mike J. Bresnahan.
             </action>
             <action type="update" dev="mbowler">
-                Updated NekoHTML to 0.7.5 plus a private fix for an infinite loop problem.
+                Updated NekoHTML to 0.7.7
             </action>
             <action type="update" dev="mbowler" due-to="Noboru Sinohara" id="721008">
                 Changed the JavaScriptEngine to use weak references for HtmlPage objects.  Previously
@@ -61,51 +61,56 @@
                 Moved all tests under src/test/java
             </action>
             <action type="update" dev="mbowler" id="713646" due-to="David K. Taylor">
-            	Fixed bug where onload handler would not execute a function if the brackets 
-            	weren't specified. Patch submitted by David K. Taylor.
+                Fixed bug where onload handler would not execute a function if the brackets
+                weren't specified. Patch submitted by David K. Taylor.
             </action>
             <action type="update" dev="mbowler" id="715379" due-to="David K. Taylor">
-            	Fixed bug "document.write of script element does not load script".  Patch submitted
-            	by David K. Taylor.
+                Fixed bug "document.write of script element does not load script".  Patch submitted
+                by David K. Taylor.
             </action>
             <action type="update" dev="mbowler" id="740636" due-to="David K. Taylor">
-	            Fix for bug 740636 "getElementsByTagName should be case insensitive". 
-	            Patch submitted by David K. Taylor
+                Fix for bug 740636 "getElementsByTagName should be case insensitive".
+                Patch submitted by David K. Taylor
             </action>
             <action type="update" dev="mbowler" id="740605 " due-to="David K. Taylor">
-	            Fix for bug 740605 "External script is executed before script element added".
-	            Patch submitted by David K. Taylor
+                Fix for bug 740605 "External script is executed before script element added".
+                Patch submitted by David K. Taylor
             </action>
             <action type="update" dev="mbowler" id="740665 " due-to="David K. Taylor">
-	            Fix for bug 740665 "Script attributes undefined when script executes".
-	            Patch submitted by David K. Taylor
+                Fix for bug 740665 "Script attributes undefined when script executes".
+                Patch submitted by David K. Taylor
             </action>
             <action type="update" dev="mbowler" id="742902 " due-to="David K. Taylor">
-	            Fix for bug 742902 "document.location prints as object reference instead of URL".
-	            Patch submitted by David K. Taylor
+                Fix for bug 742902 "document.location prints as object reference instead of URL".
+                Patch submitted by David K. Taylor
             </action>
             <action type="update" dev="mbowler" id="743241 " due-to="David K. Taylor">
-	            Fix for bug 743241 "document.write from external script is not added to document".
-	            Patch submitted by David K. Taylor
+                Fix for bug 743241 "document.write from external script is not added to document".
+                Patch submitted by David K. Taylor
             </action>
             <action type="update" dev="dktaylor" id="741930">
-	            Partial fix for RFE 741930 "document.createElement(...) and form.appendChild(...)".  This fix adds document.createElement for most element types.  It does not support input tags.
+                Partial fix for RFE 741930 "document.createElement(...) and form.appendChild(...)".
+                This fix adds document.createElement for most element types.  It does not support input tags.
             </action>
             <action type="update" dev="dktaylor">
-	            Add support for setting window.onload within a script.  Window.onload may be set to the name of a function, e.g., window.onload=initFunc;
+                Add support for setting window.onload within a script.  Window.onload may be set to
+                the name of a function, e.g., window.onload=initFunc;
             </action>
             <action type="update" dev="dktaylor" id="741930" due-to="Barnaby Court">
-	            Partial fix for RFE 741930 "document.createElement(...) and form.appendChild(...)".  This fix adds HTMLElement.appendChild.
+                Partial fix for RFE 741930 "document.createElement(...) and form.appendChild(...)".
+                This fix adds HTMLElement.appendChild.
             </action>
             <action type="update" dev="dktaylor">
-	            Add support for getting HTMLElement.parentNode.  HTMLElement.parentNode returns the node above the current node.  It returns null if there is no parent or the parent node type is not supported (not HTML).
+                Add support for getting HTMLElement.parentNode.  HTMLElement.parentNode returns the
+                node above the current node.  It returns null if there is no parent or the parent node
+                type is not supported (not HTML).
             </action>
             <action type="update" dev="mbowler">
-	            Fixed broken behaviour in Input.onclick.  Previously, if the onclick handler
-	            for a submit input didn't return true then the form would not be submitted.
-	            The html spec doesn't seem clear on this but Internet Explorer and Mozilla
-	            both allow the form to be submitted no matter what is returned from 
-	            Input.onclick.
+                Fixed broken behaviour in Input.onclick.  Previously, if the onclick handler
+                for a submit input didn't return true then the form would not be submitted.
+                The html spec doesn't seem clear on this but Internet Explorer and Mozilla
+                both allow the form to be submitted no matter what is returned from
+                Input.onclick.
             </action>
             <action type="update" dev="mbowler" due-to="Barnaby Court">
             	Moved all logic from the HtmlInput subclasses up into HtmlInput itself.
