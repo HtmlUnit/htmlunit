@@ -7,7 +7,7 @@
 			Added support for javascript:Input.disabled
 		</change>
 		<change type="change">
-			Upgraded NekoHTML to version 0.6.8
+			Upgraded NekoHTML to version 0.6.8 + patches from the author
 		</change>
 		<change type="fix">
 			Changed window.open() to understand the magic name _self
