@@ -119,9 +119,15 @@ public class Form extends HTMLElement {
                     radioButtonIterator.remove();
                 }
             }
-            final Radio radioArray[] = new Radio[collectedRadioButtons.size()];
-            defineProperty(radioButtonName, collectedRadioButtons.toArray(radioArray), attributes);
-            jsElements_.defineProperty(radioButtonName, collectedRadioButtons.toArray(radioArray), attributes);
+            if( collectedRadioButtons.size() == 1 ) {
+                defineProperty(radioButtonName, radioButton, attributes);
+                jsElements_.defineProperty(radioButtonName, radioButton, attributes);
+            }
+            else {
+                final Radio radioArray[] = new Radio[collectedRadioButtons.size()];
+                defineProperty(radioButtonName, collectedRadioButtons.toArray(radioArray), attributes);
+                jsElements_.defineProperty(radioButtonName, collectedRadioButtons.toArray(radioArray), attributes);
+            }
         }
     }
 
