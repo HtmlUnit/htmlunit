@@ -47,10 +47,6 @@ public class GetPageTag extends HtmlUnitTagSupport {
         try {
             final Page page = getWebClient().getPage( getUrl(), getSubmitMethod(), getParameters() );
             getContext().setVariable( getVarOrDie(), page );
-            System.out.println("Loaded page: "+page.getClass().getName());
-            if( page instanceof HtmlPage ) {
-                System.out.println("title=["+((HtmlPage)page).getTitleText()+"]");
-            }
         }
         catch( final IOException e ) {
             throw new JellyTagException(e);
