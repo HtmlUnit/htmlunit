@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -244,4 +245,27 @@ public class LocationTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) webClient.getPage( URL_FIRST );
         assertEquals("Second", page.getTitleText());
     }
+
+    /**
+     * Tests that location.reload() works correctly.
+     * @throws Exception If the test fails.
+     */
+    public void testReload() throws Exception {
+
+        String content =
+              "<html>\n"
+            + "  <head><title>test</title></head>\n"
+            + "  <body>\n"
+            + "    <a href='javascript:window.location.reload();' id='link1'>reload</a>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final HtmlPage page1 = loadPage(content);
+        final HtmlAnchor link = (HtmlAnchor) page1.getHtmlElementById("link1");
+        final HtmlPage page2 = (HtmlPage) link.click();
+
+        assertEquals( page1.getTitleText(), page2.getTitleText() );
+        assertNotSame( page1, page2 );
+    }
+
 }
