@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
  * The javascript object that represents a textarea
@@ -36,6 +37,16 @@ public class Textarea extends Input {
      */
     public String jsGet_type() {
         return "textarea";
+    }
+
+
+    public String jsGet_value() {
+        return ((HtmlTextArea)getHtmlElementOrDie()).getValue();
+    }
+
+
+    public void jsSet_value( final String value ) {
+        ((HtmlTextArea)getHtmlElementOrDie()).setValue(value);
     }
 }
 
