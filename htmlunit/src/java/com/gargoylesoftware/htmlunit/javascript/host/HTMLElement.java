@@ -396,10 +396,9 @@ public class HTMLElement extends SimpleScriptable {
 
 
     /**
-     * Get the JavaScript element corresponding to an XML node.
-     * @param xmlNode The XML node to search for.
-     * @param page The HTML document to search in.
-     * @return The JavaScript element.
+     * Get the JavaScript element for a given HtmlElement
+     * @param htmlElement The HtmlElement
+     * @return The JavaScript element or null if the HtmlElement was null.
      */
     protected Object getJavaScriptElement( HtmlElement htmlElement ) {
         if ( htmlElement == null ) {
