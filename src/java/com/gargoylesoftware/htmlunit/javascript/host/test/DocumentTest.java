@@ -258,7 +258,7 @@ public class DocumentTest extends WebTestCase {
 
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
 
-        final List expectedAlerts = Collections.singletonList("div");
+        final List expectedAlerts = Collections.singletonList("DIV");
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -384,5 +384,36 @@ public class DocumentTest extends WebTestCase {
 
         final List expectedAlerts = Collections.singletonList("button");
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+
+    public void testDocumentAll_IndexByInt() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var length = document.all.length;\n"
+             + "    for( i=0; i< length; i++ ) {\n"
+             + "        alert(document.all[i].tagName);\n"
+             + "    }\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList( new String[] {
+            "HTML", "HEAD", "TITLE", "SCRIPT", "BODY"} );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 }

@@ -25,6 +25,7 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.logging.Log;
@@ -221,6 +222,7 @@ public class HttpWebConnection extends WebConnection {
         HttpClient client = ( HttpClient )httpClients_.get( key );
         if( client == null ) {
             client = new HttpClient();
+            client.getState().setCookiePolicy( CookiePolicy.COMPATIBILITY );
 
             // Disable informational messages from httpclient
             final Log log = LogFactory.getLog("httpclient.wire");
