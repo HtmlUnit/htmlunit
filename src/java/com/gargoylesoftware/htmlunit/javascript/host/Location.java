@@ -108,13 +108,16 @@ public class Location extends SimpleScriptable {
     }
 
 
+    private URL getUrl() {
+        return window_.getWebWindow().getEnclosedPage().getWebResponse().getUrl();
+    }
+
     /**
      * Return the hostname that is part of the location url
      * @return The hostname
      */
     public String jsGet_hostname() {
-        final URL url = window_.getWebWindow().getEnclosedPage().getWebResponse().getUrl();
-        return url.getHost();
+        return getUrl().getHost();
     }
 
 
@@ -125,5 +128,81 @@ public class Location extends SimpleScriptable {
     public String toString() {
         return jsGet_href();
     }
+
+    /**
+     * Return the search string
+     * @return The value.
+     */
+    public String jsGet_search() {
+        final String search = getUrl().getQuery();
+        if( search == null ) {
+            return "";
+        }
+        else {
+            return "?"+search;
+        }
+    }
+
+    /**
+     * Return the value of "hash"
+     * @return The value.
+     */
+    public String jsGet_hash() {
+        final String hash = getUrl().getRef();
+        if( hash == null ) {
+            return "";
+        }
+        else {
+            return hash;
+        }
+    }
+
+    /**
+     * Return the value of "host"
+     * @return The value.
+     */
+    public String jsGet_host() {
+        final URL url = getUrl();
+        final int port = url.getPort();
+        final String host = url.getHost();
+
+        if( port == - 1 ) {
+            return host;
+        }
+        else {
+            return host+":"+port;
+        }
+    }
+
+    /**
+     * Return the value of "pathname"
+     * @return The value.
+     */
+    public String jsGet_pathname() {
+        return getUrl().getPath();
+    }
+
+    /**
+     * Return the value of "port"
+     * @return The value.
+     */
+    public String jsGet_port() {
+        final int port = getUrl().getPort();
+        if( port == -1 ) {
+            return "";
+        }
+        else {
+            return String.valueOf(port);
+        }
+    }
+
+    /**
+     * Return the value of "protocol"
+     * @return The value.
+     */
+    public String jsGet_protocol() {
+        return getUrl().getProtocol();
+    }
+
 }
 
