@@ -281,6 +281,7 @@
         <property name="frames" readable="true" writable="false"/>
         <property name="src" readable="true" writable="true"/>
         <property name="onload" readable="true" writable="true"/>
+        <property name="name" readable="true" writable="false"/>
 
         <function name="alert"/>
         <function name="blur"/>

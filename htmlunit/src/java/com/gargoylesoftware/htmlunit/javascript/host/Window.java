@@ -515,4 +515,8 @@ public final class Window extends SimpleScriptable {
 
         return "";
     }
+    
+    public String jsGet_name() {
+        return webWindow_.getName();
+    }
 }

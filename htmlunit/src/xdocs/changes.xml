@@ -124,8 +124,11 @@
             	Changed HtmlTextArea.setText() to actually modify the DOM
             	Patch provided by Barnaby Court.
             </action>
-            <action type="update" dev="mbowler" id="738548 ">
+            <action type="update" dev="mbowler" id="738548">
             	Fix for bug 738548 - "Form values are not Posted Properly to Server"
+            </action>
+            <action type="new" dev="mbowler">
+            	Added support for the property Window.name
             </action>
         </release>
 	</body>
