@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.mozilla.javascript.Function;
+
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
@@ -167,6 +169,20 @@ public class Input extends FocusableHostElement {
         }
     }
 
+    /**
+     * Set the onchange event handler for this element.
+     * @param onchange the new handler     */
+    public void jsSet_onchange(final Function onchange) {
+        getHtmlElementOrDie().setEventHandler("onchange", onchange);
+    }
+
+    /**
+     * Get the onchange event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_onchange() {
+        return getHtmlElementOrDie().getEventHandler("onchange");
+    }
 
     /**
      * Click this element.  This simulates the action of the user clicking with the mouse.

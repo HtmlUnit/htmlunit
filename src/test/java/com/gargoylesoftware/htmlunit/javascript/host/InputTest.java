@@ -445,6 +445,37 @@ public class InputTest extends WebTestCase {
     }    
 
     /**
+     * @throws Exception if the test fails
+     */
+    public void testOnChangeSetByJavaScript() throws Exception {
+        final String htmlContent = "<html><head><title>foo</title>"
+            + "</head><body>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + " <input type='text' name='text1' id='text1'>"
+            + "<input name='myButton' type='button' onclick='document.form1.text1.value=\"from button\"'>"
+            + "</form>"
+            + "<script>"
+            + "document.getElementById('text1').onchange= function(event) { alert(this.value) };"
+            + "</script>"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+
+        final HtmlForm form = page.getFormByName("form1");
+        final HtmlTextInput textinput = (HtmlTextInput) form.getInputByName("text1");
+        textinput.setValueAttribute("foo");
+        final HtmlButtonInput button = (HtmlButtonInput) form.getInputByName("myButton");
+        button.click();
+        assertEquals("from button", textinput.getValueAttribute());
+
+        final List expectedAlerts = Arrays.asList(new String[] {"foo"});
+        assertEquals(expectedAlerts, collectedAlerts);
+        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
+    }    
+
+    /**
      * Test the default value of a radio and checkbox buttons.
      * @throws Exception if the test fails
      */

@@ -141,6 +141,54 @@
 			<browser name="Microsoft Internet Explorer" min-version="4"/>
 			<browser name="Netscape" min-version="3"/>
         </property>
+        <property name="ondblclick" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
+        <property name="onblur" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
+        <property name="onfocus" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
+        <property name="onkeydown" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
+        <property name="onkeypress" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
+        <property name="onkeyup" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
+        <property name="onmousedown" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
+        <property name="onmousemove" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
+        <property name="onmouseout" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
+        <property name="onmouseover" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
+        <property name="onmouseup" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
+        <property name="onresize" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
         <property name="outerHTML" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
@@ -180,35 +228,8 @@
         <function name="insertAdjacentText">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
-        <function name="ondblclick">
-            <javascript min-version="1.2"/>
-        </function>
         <function name="onhelp">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
-        </function>
-        <function name="onkeydown">
-            <javascript min-version="1.2"/>
-        </function>
-        <function name="onkeypress">
-            <javascript min-version="1.2"/>
-        </function>
-        <function name="onkeyup">
-            <javascript min-version="1.2"/>
-        </function>
-        <function name="onmousedown">
-            <javascript min-version="1.2"/>
-        </function>
-        <function name="onmousemove">
-            <javascript min-version="1.2"/>
-        </function>
-        <function name="onmouseout">
-            <javascript min-version="1.2"/>
-        </function>
-        <function name="onmouseover">
-            <javascript min-version="1.2"/>
-        </function>
-        <function name="onmouseup">
-            <javascript min-version="1.2"/>
         </function>
         <function name="removeAttribute">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
@@ -238,6 +259,10 @@
         <property name="defaultValue" readable="true" writable="true"/>
         <property name="form" readable="true" writable="true"/>
         <property name="name" readable="true" writable="true"/>
+        <property name="onchange" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="3"/>
+        </property>
         <property name="options" readable="true" writable="true"/>
         <property name="selectedIndex" readable="true" writable="true"/>
         <property name="tabindex" readable="true" writable="true"/>
@@ -249,8 +274,6 @@
         <property name="disabled" readable="true" writable="true"/>
         <function name="click"/>
         <function name="select"/>
-        <function name="onchange"/>
-        <function name="onclick"/>
     </class>
 
     <class name="Location">

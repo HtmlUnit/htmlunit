@@ -514,4 +514,128 @@ public class HTMLElementTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetOnclick() throws Exception {
+        eventHandlerSetterGetterTest("onclick");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetOndblclick() throws Exception {
+        eventHandlerSetterGetterTest("ondblclick");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetOnblur() throws Exception {
+        eventHandlerSetterGetterTest("onblur");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetOnfocus() throws Exception {
+        eventHandlerSetterGetterTest("onfocus");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetOnkeydown() throws Exception {
+        eventHandlerSetterGetterTest("onkeydown");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetOnkeypress() throws Exception {
+        eventHandlerSetterGetterTest("onkeypress");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetOnkeyup() throws Exception {
+        eventHandlerSetterGetterTest("onkeyup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetOnmousedown() throws Exception {
+        eventHandlerSetterGetterTest("onmousedown");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetOnmouseup() throws Exception {
+        eventHandlerSetterGetterTest("onmouseup");
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetOnmouseover() throws Exception {
+        eventHandlerSetterGetterTest("onmouseover");
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetOnmouseout() throws Exception {
+        eventHandlerSetterGetterTest("onmouseout");
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetOnmousemove() throws Exception {
+        eventHandlerSetterGetterTest("onmousemove");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetOnresize() throws Exception {
+        eventHandlerSetterGetterTest("onresize");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    private void eventHandlerSetterGetterTest(String eventName) throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function handler(event) {}"
+            + "function test()\n"
+            + "{\n"
+            + "    var oDiv = document.getElementById('myDiv');\n"
+            + "    oDiv." + eventName + " = handler;\n"
+            + "    if (oDiv." + eventName + " == handler) {\n"
+            + "        alert('success');\n"
+            + "    } else {\n"
+            + "        alert('fail');\n"
+            + "    }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='myDiv'><br/><div><span>test</span></div></div>\n"
+            + "</body>\n"
+            + "</html>";
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList(new String[]{ "success" });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        HtmlPage page = loadPage(content, collectedAlerts);
+        HtmlElement div = page.getHtmlElementById("myDiv");
+        
+        assertNotNull("Event handler was not set", div.getEventHandler(eventName));
+        
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
