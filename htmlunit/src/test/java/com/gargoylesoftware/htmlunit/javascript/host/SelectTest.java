@@ -356,7 +356,7 @@ public class SelectTest extends WebTestCase {
             notImplemented();
             return;
         }
-        
+
         final String content
                  = "<html><head><title>foo</title><script>"
                  + "function doTest() {\n"
@@ -455,5 +455,4 @@ public class SelectTest extends WebTestCase {
 
          assertEquals( expectedAlerts, collectedAlerts );
     }
-    
 }
