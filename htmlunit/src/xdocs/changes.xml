@@ -17,20 +17,22 @@
                 Added support for window frames - patch from Jun Chen
             </action>
             <action type="update" dev="mbowler" id="803233" due-to="Brad Clarke">
-				an update of the version number in build.xml and outputting of 
-				a src jar for the current build
-				Patch submitted by Brad Clarke
+                an update of the version number in build.xml and outputting of
+
+                a src jar for the current build
+                Patch submitted by Brad Clarke
             </action>
             <action type="update" dev="mbowler" id="803229" due-to="Brad Clarke">
-				Added HtmlFileInput support. Patch submitted by Brad Clarke
+                Added HtmlFileInput support. Patch submitted by Brad Clarke
             </action>
             <action type="update" dev="mbowler" id="803237" due-to="Brad Clarke">
-				Upgraded junit.jar to 3.8.1
+                Upgraded junit.jar to 3.8.1
             </action>
             <action type="update" dev="mbowler" id="802285">
-				Fixed bug where HtmlPage.asText() would blow up if form tags were 
-				found between tr and td tags.  Clearly this is illegal html but
-				the browsers support it so HtmlUnit needs to as well.
+                Fixed bug where HtmlPage.asText() would blow up if form tags were
+
+                found between tr and td tags.  Clearly this is illegal html but
+                the browsers support it so HtmlUnit needs to as well.
             </action>
             <action type="update" dev="mbowler" id="805332" due-to="Brad Clarke">
 				Fixed bug where form elements without names were being submitted anyway.  Patch
@@ -38,7 +40,6 @@
             </action>
 		</release>
 
-		    
         <release version="1.2.3" date="July 31, 2003">
             <action type="add" dev="mbowler">
                 Initial support for Maven
@@ -143,54 +144,54 @@
                 Input.onclick.
             </action>
             <action type="update" dev="mbowler" due-to="Barnaby Court">
-            	Moved all logic from the HtmlInput subclasses up into HtmlInput itself.
-            	Patch provided by Barnaby Court.
+                Moved all logic from the HtmlInput subclasses up into HtmlInput itself.
+                Patch provided by Barnaby Court.
             </action>
             <action type="update" dev="mbowler" due-to="Barnaby Court">
-            	Added instructions for the "how to compile from cvs" document.
-            	Patch provided by Barnaby Court.
+                Added instructions for the "how to compile from cvs" document.
+                Patch provided by Barnaby Court.
             </action>
             <action type="update" dev="mbowler" due-to="Barnaby Court" id="759217">
-            	Changed HtmlTextArea.setText() to actually modify the DOM
-            	Patch provided by Barnaby Court.
+                Changed HtmlTextArea.setText() to actually modify the DOM
+                Patch provided by Barnaby Court.
             </action>
             <action type="update" dev="mbowler" id="738548">
-            	Fix for bug 738548 - "Form values are not Posted Properly to Server"
+                Fix for bug 738548 - "Form values are not Posted Properly to Server"
             </action>
             <action type="add" dev="mbowler">
-            	Added support for the property Window.name
+                Added support for the property Window.name
             </action>
             <action type="add" dev="mbowler">
-            	Added read-only support for Document.cookie.
+                Added read-only support for Document.cookie.
             </action>
             <action type="add" dev="mbowler" id="675597">
-            	Added support for the javascript method Window.setTimeout()
+                Added support for the javascript method Window.setTimeout()
             </action>
             <action type="update" dev="mbowler">
-            	Upgraded the rhino engine to 1.5R4.1
+                Upgraded the rhino engine to 1.5R4.1
             </action>
             <action type="update" dev="mbowler">
-            	Upgraded the xerces to 2.4
+                Upgraded the xerces to 2.4
             </action>
             <action type="add" dev="mbowler" id="742515">
-            	New method HtmlPage.getAllForms()
+                New method HtmlPage.getAllForms()
             </action>
             <action type="update" dev="mbowler">
-            	Fixed bug where inputs would not submit properly if the type attribute
-            	wasn't lowercase.
+                Fixed bug where inputs would not submit properly if the type attribute
+                wasn't lowercase.
             </action>
             <action type="update" dev="mbowler" id="744381">
-            	Changed behaviour of HtmlImageInput submission to be consistent with 
-            	what the browsers do.  If the input's name was foo we would previously
-            	send the following values to the server: foo, foo.x and foo.y.  The browsers
-            	only send foo.x and foo.y.
+                Changed behaviour of HtmlImageInput submission to be consistent with
+
+                what the browsers do.  If the input's name was foo we would previously
+                send the following values to the server: foo, foo.x and foo.y.  The browsers
+                only send foo.x and foo.y.
             </action>
             <action type="add" dev="mbowler">
-            	Added docs on configuring JSSE - contributed by Tom Hamilton
+                Added docs on configuring JSSE - contributed by Tom Hamilton
             </action>
         </release>
-	</body>
-
+    </body>
 
     <body>
         <release version="1.2.2" date="March 29, 2003">
@@ -240,7 +241,6 @@
             </action>
         </release>
 
-
         <release version="1.2.1" date="March 20, 2003">
             <action type="add" dev="mbowler">
                 Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlButtonInput#click()</javadoc>
@@ -261,7 +261,6 @@
                 did.
             </action>
         </release>
-
 
         <release version="1.2" date="March 10, 2003">
             <action type="update" dev="mbowler">
@@ -360,7 +359,6 @@
             </action>
         </release>
 
-
         <release version="1.1" date="November 25, 2002">
             <action type="update" dev="mbowler">
                 Fixed bug where loading of external javascript files would not follow redirects.
@@ -379,7 +377,6 @@
                 Fixed bug where the javascript Option.text was returning the wrong value
             </action>
         </release>
-
 
         <release version="1.1-rc2" date="November 16, 2002">
             <action type="update" dev="mbowler">
@@ -411,7 +408,6 @@
                 Improved some error handling when secondary pages are being loaded by frames
             </action>
         </release>
-
 
         <release version="1.1-rc1" date="October 29, 2002">
             <action type="update" dev="mbowler">
@@ -508,7 +504,6 @@
             </action>
         </release>
 
-
         <release version="1.1-pre5" date="September 24, 2002">
             <action type="update" dev="mbowler">
                 Changed html parser from
@@ -596,7 +591,6 @@
                 Added the constant BrowserVersion.NETSCAPE_6_2_3
             </action>
         </release>
-
 
         <release version="1.1-pre4" date="August 23, 2002">
             <action type="update" dev="mbowler">
@@ -737,7 +731,6 @@
             </action>
         </release>
 
-
         <release version="1.1-pre3" date="July 23, 2002">
             <action type="add" dev="mbowler">
                 Added HtmlElement.getParent()
@@ -792,7 +785,6 @@
                 Support for proxy server and ssl together
             </action>
         </release>
-
 
         <release version="1.1-pre2" date="July 10, 2002">
             <action type="update" dev="mbowler">
@@ -861,7 +853,6 @@
             </action>
         </release>
 
-
         <release version="1.1-pre1" date="July 2, 2002">
             <action type="add" dev="mbowler">
                 Added initial javascript support
@@ -870,7 +861,6 @@
                 Lots of bug fixes
             </action>
         </release>
-
 
         <release version="1.0" date="May 22, 2002">
             <action type="add" dev="mbowler">

@@ -31,10 +31,10 @@
                 "<a href="gettingStarted.html">Getting Started with HtmlUnit</a>" for an introduction.
             </p>
             <p>
-            	NOTE: This documentation is for the current code in CVS and may not accurately
-            	reflect the version of HtmlUnit that you have downloaded.  Refer to the
-            	documentation that came with your download for the most correct information
-         	</p>
+                NOTE: This documentation is for the current code in CVS and may not accurately
+                reflect the version of HtmlUnit that you have downloaded.  Refer to the
+                documentation that came with your download for the most correct information
+            </p>
         </section>
 
         <section name="Where to find...">
@@ -102,7 +102,6 @@
                 </ul>
             </p>
         </section>
-
 
         <section name="Features">
             <p>

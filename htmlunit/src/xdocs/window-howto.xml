@@ -27,7 +27,6 @@
             </p>
         </section>
 
-
         <section name="WebWindowEvents">
             <p>
                 If you wish to be notified when windows are created or pages are loaded, you need to register a

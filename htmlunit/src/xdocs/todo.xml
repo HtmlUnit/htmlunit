@@ -17,7 +17,6 @@
             </p>
         </section>
 
-
         <section name="Code todo's">
             <ol>
                 <li>implement Document.write()</li>
@@ -26,7 +25,6 @@
                 <li>Use HtmlUnit to verify all links in generated documentation</li>
             </ol>
         </section>
-
 
         <section name="Documentation todo's">
             <ol>

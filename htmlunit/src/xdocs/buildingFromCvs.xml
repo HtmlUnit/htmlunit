@@ -17,7 +17,6 @@
             </p>
         </section>
 
-
         <section name="Checking out">
             <p>
             Create a directory for HtmlUnit (ie c:\htmlunit or ~/htmlunit).  Change to that directory and execute the
@@ -34,7 +33,6 @@ cvs -z3 -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit co h
             </warning>
         </section>
 
-
         <section name="Compiling the code">
             <p>
                 Make sure that you have <a href="http://jakarta.apache.org/ant">Ant</a> 1.5 installed.
@@ -50,7 +48,6 @@ cvs -z3 -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit co h
                 This will delete all the existing class files and recompile all the source from scratch.
             </p>
         </section>
-
 
         <section name="Running the tests">
             <p>
@@ -70,7 +67,6 @@ cvs -z3 -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit co h
                 the javascript engine and the logging framework don't like to be reloaded.
             </p>
         </section>
-
 
         <section name="Packaging the code">
             <source>ant build</source>

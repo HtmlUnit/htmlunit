@@ -28,7 +28,6 @@
             </p>
         </section>
 
-
         <section name="Unit tests">
             <p>
                 All code must have 100% automated test coverage using the <a href="http://www.junit.org">JUnit</a>
@@ -41,7 +40,6 @@
                 majority of tests do not.
             </p>
         </section>
-
 
         <section name="Abbreviations">
             <p>
@@ -89,7 +87,6 @@
             </p>
         </section>
 
-
         <section name="The final keyword">
             <p>
                 The final keyword should be used wherever possible.  It provides information to the
@@ -121,7 +118,6 @@
             </p>
         </section>
 
-
         <section name="Import statements">
             <p>
                 Use fully qualified import statements not wildcards.  In other words, use
@@ -143,11 +139,11 @@ import java.util.ArrayList;
             <p>
                 A common complaint about this convention is "how will I know if an import isn't needed
                 anymore?".  The answer is, use a tool that warns you about this.  Eclipse and IDEA can
-                be configured to warn you about unused imports.  If your editor doesn't perform this 
+                be configured to warn you about unused imports.  If your editor doesn't perform this
+
                 check then use the ant "checkstyle" target.
             </p>
         </section>
-
 
         <section name="Indenting">
             <p>

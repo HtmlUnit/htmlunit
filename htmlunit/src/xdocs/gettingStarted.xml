@@ -34,7 +34,6 @@ public void testHomePage() throws Exception {
             ]]></source>
         </section>
 
-
         <section name="Imitating a specific browser">
             <p>
                 Often you will want to simulate a specific browser.  This is done by passing a
@@ -57,7 +56,6 @@ public void testHomePage() throws Exception {
             </p>
         </section>
 
-
         <section name="Using a proxy server">
             <p>
                 The last WebClient constructor allows you to specify proxy server information in those cases
@@ -77,7 +75,6 @@ public void testHomePage() throws Exception {
                 specific javascript behaviour still needs a lot of work.
             </p>
         </section>
-
 
         <section name="Submitting a form">
             <p>
