@@ -204,7 +204,6 @@ public final class JavaScriptConfiguration {
     private InputStream getConfigurationFileAsStream() {
         final String fileName = "/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml";
         return getResourceAsStream(fileName);
-
     }
 
 
@@ -215,6 +214,17 @@ public final class JavaScriptConfiguration {
         if( inputStream == null ) {
             try {
                 final String localizedName = name.replace( '/', File.separatorChar );
+                inputStream = new FileInputStream( localizedName );
+            }
+            catch( final IOException e ) {
+                // Fall through
+            }
+        }
+
+        // If we are running maven tests then the path will be slightly different
+        if( inputStream == null ) {
+            try {
+                final String localizedName = ("./src/java"+name).replace( '/', File.separatorChar );
                 inputStream = new FileInputStream( localizedName );
             }
             catch( final IOException e ) {
