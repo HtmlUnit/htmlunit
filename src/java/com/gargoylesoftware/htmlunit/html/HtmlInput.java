@@ -7,7 +7,11 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.Page;
 import org.w3c.dom.Element;
+import java.io.IOException;
+
 
 /**
  *  Wrapper for the html element "input"
@@ -52,6 +56,33 @@ public abstract class HtmlInput
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
         return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getValueAttribute() )};
+    }
+
+
+    /**
+     * Submit the form that contains this input.  Only a couple of the inputs
+     * support this method so it is made protected here.  Those subclasses
+     * that wish to expose it will override and make it public.
+     *
+     * @return  The Page that is the result of submitting this page to the
+     *      server
+     * @exception  IOException If an io error occurs
+     * @exception  ElementNotFoundException If a particular xml element could
+     *      not be found in the dom model
+     */
+    protected Page click()
+        throws
+            IOException,
+            ElementNotFoundException {
+
+        final String onClick = getOnClickAttribute();
+        final HtmlPage page = getPage();
+        if( onClick.length() == 0 || page.getWebClient().isJavaScriptEnabled() == false ) {
+            return getEnclosingFormOrDie().submit(this);
+        }
+        else {
+            return page.executeJavascriptIfPossible(onClick, "onClick handler for "+getClass().getName());
+        }
     }
 
 

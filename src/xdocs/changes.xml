@@ -73,6 +73,9 @@
 			tags.  Thanks to Andy Clark (author of NekoHTML) for extremely quick
 			responses to bug reports.
 		</change>
+		<change type="new">
+			Added support for HtmlImageInput.click(...)
+		</change>
 	</change-log>
 </section>
 

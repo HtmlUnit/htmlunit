@@ -227,7 +227,7 @@ public class HtmlForm extends HtmlElement {
                 final Attr checked = (Attr)element.getAttributeNode("checked");
                 return checked != null;
             }
-            if( type.equals("submit") ){
+            if( type.equals("submit") || type.equals("image") ){
                 // The one submit button that was clicked can be submitted but no other ones
                 return false;
             }
