@@ -93,6 +93,7 @@ public final class HtmlPage
     private static final int TAB_INDEX_OUT_OF_BOUNDS = -20;
     private ScriptFilter scriptFilter_;
 
+    private Object onLoad_;
 
     /**
      *  Create an instance
@@ -994,25 +995,71 @@ public final class HtmlPage
     }
 
 
-    private void executeBodyOnLoadHandlerIfNeeded() {
+    /**
+     * Return the value of the onload attribute of the enclosed body or
+     * frameset.
+     *
+     * @return the value of the onload attribute of the enclosed body or
+     * frameset.
+     */
+    private String getBodyOnLoadAttribute() {
+        final String onLoad;
         final List bodyTags = getHtmlElementsByTagNames( Collections.singletonList("body") );
         final int bodyTagCount = bodyTags.size();
         if( bodyTagCount == 0 ) {
             // Must be a frameset
+            onLoad = "";
         }
         else if( bodyTagCount == 1 ) {
             final HtmlBody body = (HtmlBody)bodyTags.get(0);
-            String onLoad = body.getOnLoadAttribute();
-            if( onLoad.length() != 0 ) {
-                if( onLoad.indexOf('(') == -1 ) {
-                    onLoad = onLoad + "()";
-                }
-                executeJavaScriptIfPossible(onLoad, "body.onLoad", false, null);
-            }
+            onLoad = body.getOnLoadAttribute();
         }
         else {
             throw new IllegalStateException(
                 "Expected no more than one body tag but found ["+bodyTagCount+"] xml="+asXml());
+        }
+        return onLoad;
+    }
+
+
+    /**
+     * Internal use only - subject to change without notice.<p>
+     * Return the javascript string for onload.
+     * @return The javascript string for onload.
+     */
+    public Object getOnLoadAttribute() {
+        if( onLoad_ != null ) {
+            return onLoad_;
+        }
+        else {
+            return getBodyOnLoadAttribute();
+        }
+    }
+
+
+    /**
+     * Internal use only - subject to change without notice.<p>
+     * Set the javascript string for onload.
+     * @param newValue The new javascript string for onload.
+     */
+    public void setOnLoadAttribute(Object newValue) {
+        onLoad_ = newValue;
+    }
+
+
+    private void executeBodyOnLoadHandlerIfNeeded() {
+        Object onLoad = getOnLoadAttribute();
+        if ( onLoad instanceof String ) {
+            String onLoadScript = (String) onLoad;
+            if( onLoadScript.length() != 0 ) {
+                if( onLoadScript.indexOf('(') == -1 ) {
+                    onLoadScript = onLoadScript + "()";
+                }
+                executeJavaScriptIfPossible(onLoadScript, "body.onLoad", false, null);
+            }
+        } else {
+            final ScriptEngine engine = getWebClient().getScriptEngine();
+            engine.callFunction( this, onLoad, null, new Object [0], null );
         }
     }
 

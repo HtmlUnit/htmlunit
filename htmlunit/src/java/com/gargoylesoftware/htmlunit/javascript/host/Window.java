@@ -453,5 +453,30 @@ public final class Window extends SimpleScriptable {
             ((HtmlInlineFrame)webWindow).setSrcAttribute(newValue);
         }
     }
-}
 
+
+    /**
+     * Set the value of the onload property.
+     * @param newValue The new value
+     */
+    public void jsSet_onload( final Object newValue ) {
+        if( webWindow_.getEnclosedPage() instanceof HtmlPage ) {
+            final HtmlPage page = (HtmlPage)webWindow_.getEnclosedPage();
+            page.setOnLoadAttribute( newValue );
+        }
+    }
+
+
+    /**
+     * Return the value of the onload property.
+     * @return the value of window.onload
+     */
+    public Object jsGet_onload() {
+        if( webWindow_.getEnclosedPage() instanceof HtmlPage ) {
+            final HtmlPage page = (HtmlPage)webWindow_.getEnclosedPage();
+            return page.getOnLoadAttribute();
+        }
+
+        return "";
+    }
+}

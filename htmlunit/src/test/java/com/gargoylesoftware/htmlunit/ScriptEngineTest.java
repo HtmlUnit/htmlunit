@@ -71,6 +71,16 @@ public class ScriptEngineTest extends WebTestCase {
                 collectedScripts.add( sourceCode );
                 return null;
             }
+            public Object callFunction(
+                    final HtmlPage htmlPage, final Object javaScriptFunction,
+                    final Object thisObject, Object [] args,
+                    final HtmlElement htmlElement ) {
+                return null;
+            }
+            public String toString(
+                    final HtmlPage htmlPage, final Object javaScriptObject ) {
+                return null;
+            }
         } );
 
         final FakeWebConnection webConnection = new FakeWebConnection( client );

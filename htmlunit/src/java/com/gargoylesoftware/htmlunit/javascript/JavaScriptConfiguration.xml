@@ -261,7 +261,7 @@
 
     <class name="Window">
         <!-- NOT FINISHED -->
-        <property name="location" readable="true" writable="false">
+        <property name="location" readable="true" writable="true">
             <browser name="Netscape" min-version="3" max-version="5"/>
             <browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>
             <javascript min-version="1" max-version="2"/>
@@ -271,13 +271,14 @@
         <property name="navigator" readable="true" writable="false"/>
         <property name="window" readable="true" writable="false"/>
         <property name="self" readable="true" writable="false"/>
-        <property name="location" readable="true" writable="false"/>
         <property name="history" readable="true" writable="false"/>
         <property name="screen" readable="true" writable="false"/>
         <property name="top" readable="true" writable="false"/>
         <property name="parent" readable="true" writable="false"/>
         <property name="opener" readable="true" writable="false"/>
         <property name="frames" readable="true" writable="false"/>
+        <property name="src" readable="true" writable="true"/>
+        <property name="onload" readable="true" writable="true"/>
 
         <function name="alert"/>
         <function name="blur"/>
