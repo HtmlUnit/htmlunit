@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2002 Gargoyle Software Inc. All rights reserved.
+ *  Copyright (C) 2002, 2003 Gargoyle Software Inc. All rights reserved.
  *
  *  This file is part of HtmlUnit. For details on use and redistribution
  *  please refer to the license.html file included with these sources.
@@ -121,7 +121,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlSelect select = ( HtmlSelect )form.getSelectsByName( "select1" ).get( 0 );
         assertNotNull(select);
-        
+
         final HtmlSubmitInput button = ( HtmlSubmitInput )form.getInputByName( "button" );
 
         // Test that the correct value is being passed back up to the server

@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2002 Gargoyle Software Inc. All rights reserved.
+ *  Copyright (C) 2002, 2003 Gargoyle Software Inc. All rights reserved.
  *
  *  This file is part of HtmlUnit. For details on use and redistribution
  *  please refer to the license.html file included with these sources.
@@ -118,8 +118,8 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlInput pushButton = ( HtmlInput )form.getInputByName( "button" );
-		assertNotNull(pushButton);
-		
+        assertNotNull(pushButton);
+
         try {
             form.setCheckedRadioButton( "foo", "4" );
             fail( "Expected foo" );

@@ -1,3 +1,9 @@
+/*
+ *  Copyright (C) 2002, 2003 Gargoyle Software Inc. All rights reserved.
+ *
+ *  This file is part of HtmlUnit. For details on use and redistribution
+ *  please refer to the license.html file included with these sources.
+ */
 package com.gargoylesoftware.htmlunit;
 
 import java.io.StringReader;
@@ -12,7 +18,11 @@ import org.cyberneko.html.HTMLConfiguration;
 import org.cyberneko.html.filters.DefaultFilter;
 
 /**
- *  Originally based on a sample written by Andy Clark
+ * A filter that will execute javascript and pass the result of any document.write calls back into
+ * the input stream.
+ *
+ * @version  $Revision$
+ * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public final class ScriptFilter extends DefaultFilter {
 

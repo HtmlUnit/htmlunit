@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2002 Gargoyle Software Inc. All rights reserved.
+ *  Copyright (C) 2002, 2003 Gargoyle Software Inc. All rights reserved.
  *
  *  This file is part of HtmlUnit. For details on use and redistribution
  *  please refer to the license.html file included with these sources.
@@ -48,8 +48,8 @@ public final class TextUtil {
             throw new NullPointerException(description);
         }
     }
-    
-    
+
+
     public static InputStream toInputStream( final String content ) {
         return new java.io.StringBufferInputStream(content);
     }

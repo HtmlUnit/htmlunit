@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2002 Gargoyle Software Inc. All rights reserved.
+ *  Copyright (C) 2002, 2003 Gargoyle Software Inc. All rights reserved.
  *
  *  This file is part of HtmlUnit. For details on use and redistribution
  *  please refer to the license.html file included with these sources.
@@ -256,7 +256,7 @@ public class HttpWebConnection extends WebConnection {
                 hostConfiguration.setProxy( getProxyHost(), getProxyPort() );
             }
             client.setHostConfiguration(hostConfiguration);
-            
+
             // If two clients are part of the same domain then they should share the same
             // state (ie cookies)
             final HttpState sharedState = getStateForDomain( url.getHost() );

@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2002 Gargoyle Software Inc. All rights reserved.
+ *  Copyright (C) 2002, 2003 Gargoyle Software Inc. All rights reserved.
  *
  *  This file is part of HtmlUnit. For details on use and redistribution
  *  please refer to the license.html file included with these sources.
@@ -57,7 +57,7 @@ public class HtmlImageInputTest extends WebTestCase {
 
         final HtmlImageInput imageInput = (HtmlImageInput)form.getInputByName("button");
         final HtmlPage secondPage = (HtmlPage)imageInput.click();
-		assertNotNull(secondPage);
+        assertNotNull(secondPage);
         assertEquals(
             Collections.singletonList(new KeyValuePair("button", "foo")),
             webConnection.getLastParameters() );

@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2002 Gargoyle Software Inc. All rights reserved.
+ *  Copyright (C) 2002, 2003 Gargoyle Software Inc. All rights reserved.
  *
  *  This file is part of HtmlUnit. For details on use and redistribution
  *  please refer to the license.html file included with these sources.
@@ -58,7 +58,7 @@ public class HtmlTextAreaTest extends WebTestCase {
         final HtmlTextArea textArea
             = ( HtmlTextArea )form.getTextAreasByName( "textArea1" ).get( 0 );
         assertNotNull(textArea);
-        
+
         final Page secondPage = form.submit();
 
         final List expectedParameters = new ArrayList();
