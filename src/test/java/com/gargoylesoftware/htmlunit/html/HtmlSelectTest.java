@@ -377,6 +377,29 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /**
+     * Test no selected options on single select lists with a size > 1
+     * 
+     * @exception  Exception If the test fails
+     */
+    public void testSelect_SingleSelectNoneSelectedButSizeGreaterThanOne() throws Exception {
+
+        final String htmlContent = "<html><head><title>foo</title></head><body>"
+            + "<form>"
+            + "<select name='select1' size='2' id='mySelect'>"
+            + "<option value='option1'>Option1</option>"
+            + "<option value='option2'>Option2</option>"
+            + "<option value='option3'>Option3</option>"
+            + "</select>"
+            + "</form></body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlSelect select = (HtmlSelect) page.getHtmlElementById("mySelect");
+
+        assertEquals(Collections.EMPTY_LIST, select.getSelectedOptions());
+    }
+
+    /**
      *  Test changing the selected option
      *
      * @exception  Exception If the test fails
