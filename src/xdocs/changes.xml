@@ -12,7 +12,7 @@
             </action>          
             <action type="update" dev="yourgod">
                 Fixed bug where the javascript value of a select list was always empty. 
-                It should not correctly be the value of the selected option.
+                It should now correctly be the value of the selected option.
             </action>                 
             <action type="update" dev="yourgod">
                 Fixed bug where the javascript value of an option element was empty
