@@ -206,7 +206,7 @@ public final class Document extends HTMLElement {
             final HtmlElement htmlElement = getHtmlElementOrDie().getPage().getHtmlElementById(id);
             final Object jsElement = getScriptableFor(htmlElement);
 
-            if( jsElement == null ) {
+            if( jsElement == NOT_FOUND ) {
                 getLog().debug("getElementById("+id
                     +") cannot return a result as there isn't a javascript object for the html element "
                     + htmlElement.getClass().getName());
