@@ -87,14 +87,14 @@ public class DocumentNavigator extends DefaultNavigator {
      */
     public Iterator getParentAxisIterator (final Object contextNode) {
         return new Iterator() {
-            private DomNode parent = ((DomNode)contextNode).getParentNode();
+            private DomNode parent_ = ((DomNode)contextNode).getParentNode();
 
             public boolean hasNext() {
-                return parent != null;
+                return parent_ != null;
             }
             public Object next() {
-                DomNode next = parent;
-                parent = null;
+                DomNode next = parent_;
+                parent_ = null;
                 return next;
             }
             public void remove() {
