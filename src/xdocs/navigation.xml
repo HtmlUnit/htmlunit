@@ -21,6 +21,13 @@
 			<item name="Submitting patches" href="/submittingPatches.html"/>
 			<item name="TODO" href="/todo.html"/>
 		</menu>
+		<menu name="SourceForge.net">
+			<item
+				name="SourceForge project page"
+				href="http://www.sourceforge.net/projects/gsbase"
+				img="http://sourceforge.net/sflogo.php?group_id=47038&amp;type=2"/>
+			<item name="Download" href="http://sourceforge.net/project/showfiles.php?group_id=47038"/>
+		</menu>
 		<menu name="HOW-TO">
 			<item name="Keyboard" href="/keyboard-howto.html"/>
 			<item name="Tables" href="/table-howto.html"/>
