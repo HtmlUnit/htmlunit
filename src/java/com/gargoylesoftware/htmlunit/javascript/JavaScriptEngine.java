@@ -60,6 +60,7 @@ import org.mozilla.javascript.ScriptableObject;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @author  David K. Taylor
+ * @author  Chris Erskine
  */
 public final class JavaScriptEngine extends ScriptEngine {
 
@@ -143,6 +144,7 @@ public final class JavaScriptEngine extends ScriptEngine {
             newPageInfo.getContext().setErrorReporter(
                 new StrictErrorReporter(getScriptEngineLog()) );
             final Scriptable parentScope = newPageInfo.getContext().initStandardObjects(null);
+            newPageInfo.getContext().setOptimizationLevel(-1);
 
             final String hostClassNames[] = {
                 "HTMLElement" ,"Window", "Document", "Form", "Input", "Navigator",

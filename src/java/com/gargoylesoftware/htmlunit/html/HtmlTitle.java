@@ -46,6 +46,7 @@ import java.util.Map;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Chris Erskine
  */
 public class HtmlTitle extends HtmlElement {
 
@@ -68,4 +69,25 @@ public class HtmlTitle extends HtmlElement {
     public String getTagName() {
         return TAG_NAME;
     }
+    
+    
+    /**
+     * Allow the text value for the title element be replaced.
+     *  
+     * @see com.gargoylesoftware.htmlunit.html.DomNode#setNodeValue(java.lang.String)
+     */
+    public void setNodeValue(String message) {
+        final DomNode child = getFirstChild();
+        if (child == null) {
+            final DomNode textNode = new DomText(getPage() , message);
+            setFirstChild(textNode);
+        }
+        else if (child instanceof DomText) {
+            ((DomText) child).setData(message);
+        }
+        else {
+            throw new IllegalStateException("For title tag, this should be a text node");
+        }
+    }
+
 }

@@ -64,6 +64,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.DocumentAllArray;
@@ -76,6 +77,7 @@ import com.gargoylesoftware.htmlunit.javascript.DocumentAllArray;
  * @author  David K. Taylor
  * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author  Chris Erskine
  */
 public final class Document extends NodeImpl {
 
@@ -250,8 +252,34 @@ public final class Document extends NodeImpl {
      * @return The value of the "images" property
      */
     public NativeArray jsGet_images() {
-        getLog().debug("Not implemented yet: document.images");
-        return new NativeArray(new Image[0]);
+        final List jsImages = new ArrayList();
+
+        final List imageElements
+            = getHtmlPage().getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("img") );
+        final Iterator iterator = imageElements.iterator();
+        while( iterator.hasNext() ) {
+            final HtmlImage htmlImage = (HtmlImage)iterator.next();
+            Image jsImage = (Image)htmlImage.getScriptObject();
+            if( jsImage == null ) {
+                jsImage = (Image)makeJavaScriptObject("Image");
+                jsImage.setHtmlElement( htmlImage );
+            }
+            jsImages.add(jsImage);
+        }
+
+        final int attributes = READONLY;
+        final Image[] array = new Image[jsImages.size()];
+        jsImages.toArray(array);
+        final NativeArray allImages = new NativeArray(array);
+        for( int i=0; i<array.length; i++ ) {
+            final String name = array[i].getHtmlElementOrDie().getAttributeValue("name");
+            getLog().debug("found image with name '" + name + "'");
+            if( name.length() != 0 ) {
+                allImages.defineProperty(name, array[i], attributes);
+            }
+        }
+
+        return allImages;
     }
 
 
@@ -554,6 +582,23 @@ public final class Document extends NodeImpl {
         final DomNode bodyElement = (DomNode) getHtmlPage().getDocumentElement()
                 .getHtmlElementsByTagName("body").get(0);
         return getScriptableFor(bodyElement);
+    }
+    
+
+    /**
+     * Gets the title of this document
+     * @return body element
+     */
+    public String jsGet_title() {
+        return getHtmlPage().getTitleText();
+    }
+    
+    /**
+     * Set the title.
+     * @param message The new title
+     */
+    public void jsSet_title(final String message ) {
+        getHtmlPage().setTitleText(message);
     }
 }
 
