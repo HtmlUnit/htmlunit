@@ -14,7 +14,7 @@
 
 <!--<property name="build.compiler" value="jikes" />-->
 <property name="build.compiler.pedantic" value="true"/>
-<property name="version" value="HtmlUnit-1.2.2" />
+<property name="version" value="HtmlUnit-1.2.3" />
 
 <property environment="env"/>
 <property name="local-repository" value ="target/repository"/>
@@ -165,6 +165,11 @@
         excludes="**/test/*,**/*.java,build.xml,lib,**/package.html"
         manifest="build/${version}/META-INF/MANIFEST.MF"/>
     <delete file="build/${version}/META-INF/MANIFEST.MF"/>
+
+    <jar
+        jarfile="build/${version}/lib/HtmlUnit-src.jar"
+        basedir="src/java"
+        includes="**/*.java"/>
 
     <javadoc
         sourcepath="src/java"
