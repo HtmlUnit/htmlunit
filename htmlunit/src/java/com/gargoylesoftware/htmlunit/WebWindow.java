@@ -45,6 +45,7 @@ package com.gargoylesoftware.htmlunit;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
+ * @author David D. Kilzer
  */
 public interface WebWindow {
 
@@ -54,6 +55,14 @@ public interface WebWindow {
      * @return The name of this window.
      */
     String getName();
+
+
+    /**
+     * Set the name of this window.
+     *
+     * @param name The new window name.
+     */
+    void setName( final String name );
 
 
     /**

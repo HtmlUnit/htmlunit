@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="mguillem" due-to="David D. Kilzer" id="1099235">
+                Made window.name writable.
+            </action>
             <action type="update" dev="mguillem" id="1100975">
                 JavaScript: document.xxx now retrieves dom node with name xxx only if it's an img or a form (input should not be retrieved).
             </action>

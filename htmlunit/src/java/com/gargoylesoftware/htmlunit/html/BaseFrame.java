@@ -56,6 +56,7 @@ import java.util.Map;
  * @author  David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
+ * @author David D. Kilzer 
  */
 public abstract class BaseFrame extends StyledElement {
 
@@ -80,6 +81,15 @@ public abstract class BaseFrame extends StyledElement {
          */
         public String getName() {
             return getNameAttribute();
+        }
+
+        /**
+         * Set the name of this window.
+         *
+         * @param name The new name of this window.
+         */
+        public void setName(String name) {
+            setNameAttribute(name);
         }
 
         /**
@@ -229,6 +239,16 @@ public abstract class BaseFrame extends StyledElement {
      */
     public final String getNameAttribute() {
         return getAttributeValue("name");
+    }
+
+
+    /**
+     * Set the value of the "name" attribute.
+     *
+     * @param name The new window name.
+     */
+    public final void setNameAttribute(String name) {
+        setAttributeValue("name", name);
     }
 
 

@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author  Marc Guillemot
  * @author  Dierk Koenig
  * @author  Chris Erskine
+ * @author  David D. Kilzer 
  */
 public class WindowTest extends WebTestCase {
     /**
@@ -1448,5 +1449,31 @@ public class WindowTest extends WebTestCase {
 
         final List expectedStatus = Arrays.asList( new String[] { "newStatus"} );
         assertEquals( "status", expectedStatus, collectedStatus );
+    }
+
+
+    /**
+     * Test <code>window.name</code>.
+     *
+     * @throws Exception If the test fails.
+     */
+    public void testWindowName() throws Exception {
+        final String windowName = "main";
+        final String content = "<html>\n"
+            + "<head><title>window.name test</title></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "alert('window.name before: ' + window.name);\n"
+            + "window.name = '" + windowName + "';\n"
+            + "alert('window.name after: ' + window.name);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>\n";
+        final List expectedAlerts =
+                Arrays.asList( new String[]{"window.name before: ", "window.name after: " + windowName} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

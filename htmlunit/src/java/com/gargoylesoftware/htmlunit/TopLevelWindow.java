@@ -44,6 +44,7 @@ package com.gargoylesoftware.htmlunit;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
+ * @author David D. Kilzer
  */
 public class TopLevelWindow implements WebWindow {
 
@@ -78,6 +79,16 @@ public class TopLevelWindow implements WebWindow {
      */
     public String getName() {
         return name_;
+    }
+
+
+    /**
+     * Set the name of this window.
+     *
+     * @param name The new name of this window.
+     */
+    public void setName(String name) {
+        name_ = name;
     }
 
 
