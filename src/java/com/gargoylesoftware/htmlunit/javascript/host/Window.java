@@ -83,6 +83,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Dierk Koenig
  * @author Daniel Gredler
  * @author David D. Kilzer
+ * @author Chris Erskine
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp">
  * MSDN documentation</a>
  */
@@ -121,7 +122,7 @@ public class Window extends SimpleScriptable {
      * The javascript function "alert()"
      * @param message The message
      */
-    public void jsFunction_alert( final String message ) {
+    public void jsxFunction_alert( final String message ) {
         final AlertHandler handler = getWebWindow().getWebClient().getAlertHandler();
         if( handler == null ) {
             getLog().warn("window.alert(\""+message+"\") no alert handler installed");
@@ -137,7 +138,7 @@ public class Window extends SimpleScriptable {
      * @param message The message
      * @return true if ok was pressed, false if cancel was pressed
      */
-    public boolean jsFunction_confirm( final String message ) {
+    public boolean jsxFunction_confirm( final String message ) {
         final ConfirmHandler handler = getWebWindow().getWebClient().getConfirmHandler();
         if( handler == null ) {
             getLog().warn("window.confirm(\""+message+"\") no confirm handler installed");
@@ -154,7 +155,7 @@ public class Window extends SimpleScriptable {
      * @param message The message
      * @return true if ok was pressed, false if cancel was pressed
      */
-    public String jsFunction_prompt( final String message ) {
+    public String jsxFunction_prompt( final String message ) {
         final PromptHandler handler = getWebWindow().getWebClient().getPromptHandler();
         if( handler == null ) {
             getLog().warn("window.prompt(\""+message+"\") no prompt handler installed");
@@ -170,7 +171,7 @@ public class Window extends SimpleScriptable {
      * Return the javascript property "document"
      * @return The document
      */
-    public Document jsGet_document() {
+    public Document jsxGet_document() {
         return document_;
     }
 
@@ -184,7 +185,7 @@ public class Window extends SimpleScriptable {
      * @param function The function object that was invoked.
      * @return The newly opened window
      */
-    public static Object jsFunction_open(
+    public static Object jsxFunction_open(
         final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
 
         final String url = getStringArg(0, args, null);
@@ -242,7 +243,7 @@ public class Window extends SimpleScriptable {
      * @param timeout the delay in milliseconds to wait before executing the code
      * @return the id of the created timer
      */
-    public int jsFunction_setTimeout(final String script, final int timeout) {
+    public int jsxFunction_setTimeout(final String script, final int timeout) {
         final Runnable runnable = new Runnable() {
             public void run() {
                 final Window window = Window.this;
@@ -298,7 +299,7 @@ public class Window extends SimpleScriptable {
      * 
      * @param timeoutId identifier for the timeout to clear (returned by <tt>setTimeout</tt>)
      */
-    public void jsFunction_clearTimeout(final int timeoutId) {
+    public void jsxFunction_clearTimeout(final int timeoutId) {
         final Thread setTimeoutThread = (Thread) timeoutThreads_.get(new Integer(timeoutId));
         if(setTimeoutThread != null) {
             setTimeoutThread.interrupt();
@@ -310,7 +311,7 @@ public class Window extends SimpleScriptable {
      * Return the javascript property "navigator"
      * @return The document
      */
-    public Navigator jsGet_navigator() {
+    public Navigator jsxGet_navigator() {
         return navigator_;
     }
 
@@ -319,7 +320,7 @@ public class Window extends SimpleScriptable {
      * Return the window property.  This is a synonym for "self"
      * @return A reference to this
      */
-    public Window jsGet_window() {
+    public Window jsxGet_window() {
         return this;
     }
 
@@ -328,7 +329,7 @@ public class Window extends SimpleScriptable {
      * Return the "self" property
      * @return this
      */
-    public Window jsGet_self() {
+    public Window jsxGet_self() {
         return this;
     }
 
@@ -337,7 +338,7 @@ public class Window extends SimpleScriptable {
      * Return the location property
      * @return The location property
      */
-    public Location jsGet_location() {
+    public Location jsxGet_location() {
         return location_;
     }
 
@@ -347,7 +348,7 @@ public class Window extends SimpleScriptable {
      * @param newLocation The url of the new content.
      * @throws IOException when location loading fails
      */
-    public void jsSet_location( final String newLocation ) throws IOException {
+    public void jsxSet_location( final String newLocation ) throws IOException {
         try {
             final HtmlPage page = (HtmlPage)webWindow_.getEnclosedPage();
             final URL url = page.getFullyQualifiedUrl(newLocation);
@@ -359,11 +360,11 @@ public class Window extends SimpleScriptable {
             webWindow_.getWebClient().getPage(webWindow_, new WebRequestSettings(url));
         }
         catch( final MalformedURLException e ) {
-            getLog().error("jsSet_location(\""+newLocation+"\") Got MalformedURLException", e);
+            getLog().error("jsxSet_location(\""+newLocation+"\") Got MalformedURLException", e);
             throw e;
         }
         catch( final IOException e ) {
-            getLog().error("jsSet_location(\""+newLocation+"\") Got IOException", e);
+            getLog().error("jsxSet_location(\""+newLocation+"\") Got IOException", e);
             throw e;
         }
     }
@@ -373,7 +374,7 @@ public class Window extends SimpleScriptable {
      * Return the "screen" property
      * @return the screen property
      */
-    public Screen jsGet_screen() {
+    public Screen jsxGet_screen() {
         return screen_;
     }
 
@@ -382,7 +383,7 @@ public class Window extends SimpleScriptable {
      * Return the "history" property
      * @return the "history" property
      */
-    public History jsGet_history() {
+    public History jsxGet_history() {
         return history_;
     }
 
@@ -418,7 +419,7 @@ public class Window extends SimpleScriptable {
      * Return the value of the top property
      * @return The value of "top"
      */
-    public SimpleScriptable jsGet_top() {
+    public SimpleScriptable jsxGet_top() {
         final WebWindow topWebWindow = webWindow_.getTopWindow();
         return (SimpleScriptable)topWebWindow.getScriptObject();
     }
@@ -428,7 +429,7 @@ public class Window extends SimpleScriptable {
      * Return the value of the parent property
      * @return the value of window.parent
      */
-    public SimpleScriptable jsGet_parent() {
+    public SimpleScriptable jsxGet_parent() {
         final WebWindow parentWebWindow = webWindow_.getParentWindow();
         return (SimpleScriptable)parentWebWindow.getScriptObject();
     }
@@ -438,7 +439,7 @@ public class Window extends SimpleScriptable {
      * Return the value of the opener property.
      * @return the value of window.opener, <code>null</code> for a top level window
      */
-    public Object jsGet_opener() {
+    public Object jsxGet_opener() {
         if( webWindow_ instanceof TopLevelWindow ) {
             final WebWindow opener = ((TopLevelWindow)webWindow_).getOpener();
             if( opener != null ) {
@@ -454,7 +455,7 @@ public class Window extends SimpleScriptable {
      * Return the value of the frames property.
      * @return The live collection of frames
      */
-    public ElementArray jsGet_frames() {
+    public ElementArray jsxGet_frames() {
         if (frames_ == null) {
             final XPath xpath;
             try {
@@ -489,7 +490,7 @@ public class Window extends SimpleScriptable {
     /**
      * Set the focus to this element.
      */
-    public void jsFunction_focus() {
+    public void jsxFunction_focus() {
         webWindow_.getWebClient().setCurrentWindow(webWindow_);
     }
 
@@ -497,7 +498,7 @@ public class Window extends SimpleScriptable {
     /**
      * Remove focus from this element
      */
-    public void jsFunction_blur() {
+    public void jsxFunction_blur() {
         getLog().debug( "Window.blur() not implemented" );
     }
 
@@ -505,7 +506,7 @@ public class Window extends SimpleScriptable {
     /**
      * Close this window
      */
-    public void jsFunction_close() {
+    public void jsxFunction_close() {
         final WebWindow window = ((HtmlPage) getDomNodeOrDie()).getEnclosingWindow();
         getWebWindow().getWebClient().deregisterWebWindow(window);
     }
@@ -516,7 +517,7 @@ public class Window extends SimpleScriptable {
      * @param x The horizontal position
      * @param y The vertical position
      */
-    public void jsFunction_moveTo(final int x, final int y) {
+    public void jsxFunction_moveTo(final int x, final int y) {
         getLog().debug( "Window.moveTo() not implemented" );
     }
 
@@ -525,7 +526,7 @@ public class Window extends SimpleScriptable {
      * @param x The horizontal position
      * @param y The vertical position
      */
-    public void jsFunction_moveBy(final int x, final int y) {
+    public void jsxFunction_moveBy(final int x, final int y) {
         getLog().debug( "Window.moveBy() not implemented" );
     }
 
@@ -534,7 +535,7 @@ public class Window extends SimpleScriptable {
      * @param width The width of the Window in pixel after resize.
      * @param height The height of the Window in pixel after resize.
      */
-    public void jsFunction_resizeTo(final int width, final int height) {
+    public void jsxFunction_resizeTo(final int width, final int height) {
         getLog().debug( "Window.resizeTo() not implemented" );
     }
 
@@ -543,7 +544,7 @@ public class Window extends SimpleScriptable {
      * @param x The horizontal position to scroll to
      * @param y The vertical position to scroll to
      */
-    public void jsFunction_scroll(final int x, final int y) {
+    public void jsxFunction_scroll(final int x, final int y) {
         getLog().debug( "Window.scroll() not implemented" );
     }
 
@@ -552,7 +553,7 @@ public class Window extends SimpleScriptable {
      * @param x The horizontal distance to scroll by
      * @param y The vertical distance to scroll by
      */
-    public void jsFunction_scrollBy(final int x, final int y) {
+    public void jsxFunction_scrollBy(final int x, final int y) {
         getLog().debug( "Window.scrollBy() not implemented" );
     }
 
@@ -560,7 +561,7 @@ public class Window extends SimpleScriptable {
      * Does nothing.
      * @param lines The number of lines to scroll down
      */
-    public void jsFunction_scrollByLines(final int lines) {
+    public void jsxFunction_scrollByLines(final int lines) {
         getLog().debug( "Window.scrollByLines() not implemented" );
     }
 
@@ -568,7 +569,7 @@ public class Window extends SimpleScriptable {
      * Does nothing.
      * @param pages The number of pages to scroll down
      */
-    public void jsFunction_scrollByPages(final int pages) {
+    public void jsxFunction_scrollByPages(final int pages) {
         getLog().debug( "Window.scrollByPages() not implemented" );
     }
 
@@ -577,7 +578,7 @@ public class Window extends SimpleScriptable {
      * @param x The horizontal position to scroll to
      * @param y The vertical position to scroll to
      */
-    public void jsFunction_scrollTo(final int x, final int y) {
+    public void jsxFunction_scrollTo(final int x, final int y) {
         getLog().debug( "Window.scrollTo() not implemented" );
     }
 
@@ -585,7 +586,7 @@ public class Window extends SimpleScriptable {
      * Set the value of the onload event handler.
      * @param newOnload The new handler
      */
-    public void jsSet_onload(final Function newOnload) {
+    public void jsxSet_onload(final Function newOnload) {
         onload_ = newOnload;
     }
 
@@ -593,7 +594,7 @@ public class Window extends SimpleScriptable {
      * Return the onload event handler function.
      * @return the onload event handler function.
      */
-    public Function jsGet_onload() {
+    public Function jsxGet_onload() {
         if (onload_ == null) {
             // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
             final HtmlPage page = (HtmlPage) webWindow_.getEnclosedPage();
@@ -615,7 +616,7 @@ public class Window extends SimpleScriptable {
      * Return the value of the name property
      * @return The window name
      */
-    public String jsGet_name() {
+    public String jsxGet_name() {
         return webWindow_.getName();
     }
 
@@ -623,7 +624,7 @@ public class Window extends SimpleScriptable {
      * Set the value of the newName property
      * @param newName The new window name
      */
-    public void jsSet_name( final String newName ) {
+    public void jsxSet_name( final String newName ) {
         webWindow_.setName(newName);
     }
 
@@ -631,7 +632,7 @@ public class Window extends SimpleScriptable {
      * Return the value of the onerror property
      * @return The value
      */
-    public String jsGet_onerror() {
+    public String jsxGet_onerror() {
         getLog().debug("Window.onerror not implemented");
         return "";
     }
@@ -640,7 +641,7 @@ public class Window extends SimpleScriptable {
      * Set the value of the onerror property
      * @param newValue The value
      */
-    public void jsSet_onerror( final String newValue) {
+    public void jsxSet_onerror( final String newValue) {
         getLog().debug("Window.onerror not implemented");
     }
 
@@ -682,7 +683,7 @@ public class Window extends SimpleScriptable {
             final DomNode domNode = thisWindow.getDomNodeOrNull();
             if (domNode != null 
                     && domNode.getPage().getWebClient().getBrowserVersion().isIE()) {
-                final NativeArray array = (NativeArray) thisWindow.document_.jsFunction_getElementsByName( name );
+                final NativeArray array = (NativeArray) thisWindow.document_.jsxFunction_getElementsByName( name );
                 if (array.getLength() == 1) {
                     result = array.get(0, this);
                 }
@@ -690,7 +691,7 @@ public class Window extends SimpleScriptable {
                     result = array;
                 }
                 else {
-                    result = thisWindow.document_.jsFunction_getElementById(name);
+                    result = thisWindow.document_.jsxFunction_getElementById(name);
                 }
             }
         }
@@ -715,7 +716,7 @@ public class Window extends SimpleScriptable {
      * MSDN documentation</a>
      * @return this method always returns <code>null</code>, like Internet Explorer
      */
-    public Object jsFunction_execScript(final String script, final String language) {
+    public Object jsxFunction_execScript(final String script, final String language) {
         if ("javascript".equalsIgnoreCase(language) || "jscript".equalsIgnoreCase(language)) {
             final HtmlPage htmlPage = document_.getHtmlPage();
             final HtmlElement doc = htmlPage.getDocumentElement();
@@ -735,7 +736,7 @@ public class Window extends SimpleScriptable {
      * Return the text from the status line.
      * @return the status line text
      */
-    public String jsGet_status() {
+    public String jsxGet_status() {
         return status_;
     }
 
@@ -743,7 +744,7 @@ public class Window extends SimpleScriptable {
      * Set the text from the status line.
      * @param message the status line text
      */
-    public void jsSet_status( final String message ) {
+    public void jsxSet_status( final String message ) {
         status_ = message;
 
         final StatusHandler statusHandler = webWindow_.getWebClient().getStatusHandler();
@@ -764,7 +765,7 @@ public class Window extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp">
      * MSDN documentation</a>
      */
-    public static int jsFunction_setInterval(final Context context, final Scriptable scriptable, 
+    public static int jsxFunction_setInterval(final Context context, final Scriptable scriptable, 
         final Object[] args,  final Function function ) {
 
         final Window thisWindow = (Window)scriptable;
@@ -780,7 +781,7 @@ public class Window extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp">
      * MSDN documentation</a>
      */
-    public void jsFunction_clearInterval(final int iIntervalId) {
+    public void jsxFunction_clearInterval(final int iIntervalId) {
         getLog().warn("Current implementation of clearInterval does nothing.");
     }
 
@@ -790,7 +791,7 @@ public class Window extends SimpleScriptable {
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref28.html">Mozilla doc</a>
      */
-    public int jsGet_innerWidth() {
+    public int jsxGet_innerWidth() {
         return 1276; // why this value? this is the current value of my Mozilla
     }
 
@@ -799,7 +800,7 @@ public class Window extends SimpleScriptable {
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref79.html">Mozilla doc</a>
      */
-    public int jsGet_outerWidth() {
+    public int jsxGet_outerWidth() {
         return 1276; // why this value? this is the current value of my Mozilla
     }
 
@@ -808,7 +809,7 @@ public class Window extends SimpleScriptable {
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref27.html">Mozilla doc</a>
      */
-    public int jsGet_innerHeight() {
+    public int jsxGet_innerHeight() {
         return 778; // why this value? this is the current value of my Mozilla
     }
 
@@ -817,7 +818,7 @@ public class Window extends SimpleScriptable {
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref78.html">Mozilla doc</a>
      */
-    public int jsGet_outerHeight() {
+    public int jsxGet_outerHeight() {
         return 936; // why this value? this is the current value of my Mozilla
     }
 }

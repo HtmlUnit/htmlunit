@@ -7,6 +7,11 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="cerskine">
+				Reworked the processing of the JavaScript functions and properties.  Names have all changed to start
+				with jsxXXX and now the functions and properties are registered with the prototypes when they are
+				defined.
+			</action>
             <action type="update" dev="mguillem">
                 INCOMPATIBLE CHANGE: replaced WebClient.setValidateHtml(boolean) with WebClient.setHTMLParserListener(HTMLParserListener)
                 allowing to programmatically catch parser messages.

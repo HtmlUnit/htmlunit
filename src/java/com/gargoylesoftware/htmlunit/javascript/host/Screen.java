@@ -46,6 +46,8 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
+ * @author Chris Erskine
+ * 
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_screen.asp">
  * MSDN documentation</a>
  * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html">Mozilla documentation</a>
@@ -83,7 +85,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>availHeight</tt> property.
      * @return the <tt>availHeight</tt> property
      */
-    public int jsGet_availHeight() {
+    public int jsxGet_availHeight() {
         return height_;
     }
 
@@ -91,7 +93,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>availLeft</tt> property.
      * @return the <tt>availLeft</tt> property
      */
-    public int jsGet_availLeft() {
+    public int jsxGet_availLeft() {
         return left_;
     }
 
@@ -99,7 +101,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>availTop</tt> property.
      * @return the <tt>availTop</tt> property
      */
-    public int jsGet_availTop() {
+    public int jsxGet_availTop() {
         return top_;
     }
 
@@ -107,7 +109,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>availWidth</tt> property.
      * @return the <tt>availWidth</tt> property
      */
-    public int jsGet_availWidth() {
+    public int jsxGet_availWidth() {
         return width_;
     }
 
@@ -115,7 +117,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>bufferDepth</tt> property.
      * @return the <tt>bufferDepth</tt> property
      */
-    public int jsGet_bufferDepth() {
+    public int jsxGet_bufferDepth() {
         return bufferDepth_;
     }
 
@@ -123,7 +125,7 @@ public class Screen extends SimpleScriptable {
      * Sets the <tt>bufferDepth</tt> property.
      * @param bufferDepth the <tt>bufferDepth</tt> property
      */
-    public void jsSet_bufferDepth(final int bufferDepth) {
+    public void jsxSet_bufferDepth(final int bufferDepth) {
         bufferDepth_ = bufferDepth;
     }
 
@@ -131,7 +133,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>colorDepth</tt> property.
      * @return the <tt>colorDepth</tt> property
      */
-    public int jsGet_colorDepth() {
+    public int jsxGet_colorDepth() {
         return colorDepth_;
     }
 
@@ -139,7 +141,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>deviceXDPI</tt> property.
      * @return the <tt>deviceXDPI</tt> property
      */
-    public int jsGet_deviceXDPI() {
+    public int jsxGet_deviceXDPI() {
         return dpi_;
     }
 
@@ -147,7 +149,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>deviceYDPI</tt> property.
      * @return the <tt>deviceYDPI</tt> property
      */
-    public int jsGet_deviceYDPI() {
+    public int jsxGet_deviceYDPI() {
         return dpi_;
     }
 
@@ -155,7 +157,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>fontSmoothingEnabled</tt> property.
      * @return the <tt>fontSmoothingEnabled</tt> property
      */
-    public boolean jsGet_fontSmoothingEnabled() {
+    public boolean jsxGet_fontSmoothingEnabled() {
         return fontSmoothingEnabled_;
     }
 
@@ -163,7 +165,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>height</tt> property.
      * @return the <tt>height</tt> property
      */
-    public int jsGet_height() {
+    public int jsxGet_height() {
         return height_;
     }
 
@@ -171,7 +173,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>left</tt> property.
      * @return the <tt>left</tt> property
      */
-    public int jsGet_left() {
+    public int jsxGet_left() {
         return left_;
     }
 
@@ -179,7 +181,7 @@ public class Screen extends SimpleScriptable {
      * Sets the <tt>left</tt> property.
      * @param left the <tt>left</tt> property
      */
-    public void jsSet_left(final int left) {
+    public void jsxSet_left(final int left) {
         left_ = left;
     }
 
@@ -187,7 +189,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>logicalXDPI</tt> property.
      * @return the <tt>logicalXDPI</tt> property
      */
-    public int jsGet_logicalXDPI() {
+    public int jsxGet_logicalXDPI() {
         return dpi_;
     }
 
@@ -195,7 +197,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>logicalYDPI</tt> property.
      * @return the <tt>logicalYDPI</tt> property
      */
-    public int jsGet_logicalYDPI() {
+    public int jsxGet_logicalYDPI() {
         return dpi_;
     }
 
@@ -203,7 +205,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>pixelDepth</tt> property.
      * @return the <tt>pixelDepth</tt> property
      */
-    public int jsGet_pixelDepth() {
+    public int jsxGet_pixelDepth() {
         return colorDepth_;
     }
 
@@ -211,7 +213,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>top</tt> property.
      * @return the <tt>top</tt> property
      */
-    public int jsGet_top() {
+    public int jsxGet_top() {
         return top_;
     }
 
@@ -219,7 +221,7 @@ public class Screen extends SimpleScriptable {
      * Sets the <tt>top</tt> property.
      * @param top the <tt>top</tt> property
      */
-    public void jsSet_top(final int top) {
+    public void jsxSet_top(final int top) {
         top_ = top;
     }
 
@@ -227,7 +229,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>updateInterval</tt> property.
      * @return the <tt>updateInterval</tt> property
      */
-    public int jsGet_updateInterval() {
+    public int jsxGet_updateInterval() {
         return updateInterval_;
     }
 
@@ -235,7 +237,7 @@ public class Screen extends SimpleScriptable {
      * Sets the <tt>updateInterval</tt> property.
      * @param updateInterval the <tt>updateInterval</tt> property
      */
-    public void jsSet_updateInterval(final int updateInterval) {
+    public void jsxSet_updateInterval(final int updateInterval) {
         updateInterval_ = updateInterval;
     }
 
@@ -243,7 +245,7 @@ public class Screen extends SimpleScriptable {
      * Return the <tt>width</tt> property.
      * @return the <tt>width</tt> property
      */
-    public int jsGet_width() {
+    public int jsxGet_width() {
         return width_;
     }
 }

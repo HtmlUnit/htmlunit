@@ -1743,10 +1743,8 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testReadyStateNonIE() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
+        final WebClient client = new WebClient(BrowserVersion.NETSCAPE_6_2_3);
+        final MockWebConnection webConnection = new MockWebConnection( client );
         final String content = "<html><head>\n"
             + "<script>\n"
             + "function testIt() {\n"
@@ -1757,8 +1755,12 @@ public class DocumentTest extends WebTestCase {
             + "</head>\n"
             + "<body onLoad='testIt()'></body></html>\n";
 
+        webConnection.setResponse(URL_FIRST, content);
+        client.setWebConnection( webConnection );
+
         final List collectedAlerts = new ArrayList();
-        loadPage(content, collectedAlerts);
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.getPage(URL_FIRST);
 
         final List expectedAlerts = Arrays.asList( new String[]{
             "undefined", "undefined"

@@ -48,6 +48,8 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
+ * @author Chris Erskine
+ * 
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_navigator.asp">
  * MSDN documentation</a>
  */
@@ -66,7 +68,7 @@ public final class Navigator extends SimpleScriptable {
      * Return the property "appCodeName".
      * @return the property "appCodeName".
      */
-    public String jsGet_appCodeName() {
+    public String jsxGet_appCodeName() {
         return getBrowserVersion().getApplicationCodeName();
     }
 
@@ -75,7 +77,7 @@ public final class Navigator extends SimpleScriptable {
      * Return the property "appMinorVersion".
      * @return the property "appMinorVersion".
      */
-    public String jsGet_appMinorVersion() {
+    public String jsxGet_appMinorVersion() {
         return getBrowserVersion().getApplicationMinorVersion();
     }
 
@@ -84,7 +86,7 @@ public final class Navigator extends SimpleScriptable {
      * Return the property "appName".
      * @return the property "appName".
      */
-    public String jsGet_appName() {
+    public String jsxGet_appName() {
         return getBrowserVersion().getApplicationName();
     }
 
@@ -93,7 +95,7 @@ public final class Navigator extends SimpleScriptable {
      * Return the property "appVersion".
      * @return the property "appVersion".
      */
-    public String jsGet_appVersion() {
+    public String jsxGet_appVersion() {
         return getBrowserVersion().getApplicationVersion();
     }
 
@@ -102,7 +104,7 @@ public final class Navigator extends SimpleScriptable {
      * Return the language of the browser (for IE).
      * @return the language.
      */
-    public String jsGet_browserLanguage() {
+    public String jsxGet_browserLanguage() {
         return getBrowserVersion().getBrowserLanguage();
     }
 
@@ -110,7 +112,7 @@ public final class Navigator extends SimpleScriptable {
      * Return the language of the browser (for Mozilla).
      * @return the language.
      */
-    public String jsGet_language() {
+    public String jsxGet_language() {
         return getBrowserVersion().getBrowserLanguage();
     }
 
@@ -118,7 +120,7 @@ public final class Navigator extends SimpleScriptable {
      * Return the property "cookieEnabled".
      * @return the property "cookieEnabled".
      */
-    public boolean jsGet_cookieEnabled() {
+    public boolean jsxGet_cookieEnabled() {
         return true;
     }
 
@@ -127,7 +129,7 @@ public final class Navigator extends SimpleScriptable {
      * Return the property "cpuClass".
      * @return the property "cpuClass".
      */
-    public String jsGet_cpuClass() {
+    public String jsxGet_cpuClass() {
         return getBrowserVersion().getCpuClass();
     }
 
@@ -135,7 +137,7 @@ public final class Navigator extends SimpleScriptable {
      * Return the property "onLine".
      * @return the property "onLine".
      */
-    public boolean jsGet_onLine() {
+    public boolean jsxGet_onLine() {
         return getBrowserVersion().isOnLine();
     }
 
@@ -144,7 +146,7 @@ public final class Navigator extends SimpleScriptable {
      * Return the property "platform".
      * @return the property "platform".
      */
-    public String jsGet_platform() {
+    public String jsxGet_platform() {
         return getBrowserVersion().getPlatform();
     }
 
@@ -153,7 +155,7 @@ public final class Navigator extends SimpleScriptable {
      * Return the property "systemLanguage".
      * @return the property "systemLanguage".
      */
-    public String jsGet_systemLanguage() {
+    public String jsxGet_systemLanguage() {
         return getBrowserVersion().getSystemLanguage();
     }
 
@@ -162,7 +164,7 @@ public final class Navigator extends SimpleScriptable {
      * Return the property "userAgent".
      * @return The property "userAgent".
      */
-    public String jsGet_userAgent() {
+    public String jsxGet_userAgent() {
         return getBrowserVersion().getUserAgent();
     }
 
@@ -171,7 +173,7 @@ public final class Navigator extends SimpleScriptable {
      * Return the property "userLanguage".
      * @return the property "userLanguage".
      */
-    public String jsGet_userLanguage() {
+    public String jsxGet_userLanguage() {
         return getBrowserVersion().getUserLanguage();
     }
 
@@ -180,7 +182,7 @@ public final class Navigator extends SimpleScriptable {
      * Return an empty array because HtmlUnit does not support embedded objects.
      * @return an empty array.
      */
-    public Object jsFunction_plugins() {
+    public Object jsxFunction_plugins() {
         return new NativeArray(0);
     }
 
@@ -189,7 +191,7 @@ public final class Navigator extends SimpleScriptable {
      * Return <tt>false</tt> always as Java support is not enabled in HtmlUnit.
      * @return false.
      */
-    public boolean jsFunction_javaEnabled() {
+    public boolean jsxFunction_javaEnabled() {
         return false;
     }
 
@@ -198,7 +200,7 @@ public final class Navigator extends SimpleScriptable {
      * Return <tt>false</tt> always as data tainting support is not enabled in HtmlUnit.
      * @return false.
      */
-    public boolean jsFunction_taintEnabled() {
+    public boolean jsxFunction_taintEnabled() {
         return false;
     }
 

@@ -95,6 +95,17 @@ public class HTMLParserListenerTest extends WebTestCase {
             builder.append(line_, other.line_);
             return builder.isEquals();
         }
+        
+        
+        /* (non-Javadoc)
+         * @see java.lang.Object#hashCode()
+         */
+        /**
+         * Stub to fix Eclipse warning
+         */
+        public int hashCode() {
+            return super.hashCode();
+        }
     };
 
     /**

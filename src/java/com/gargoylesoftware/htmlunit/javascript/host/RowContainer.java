@@ -51,8 +51,9 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * Superclass for all row-containing JavaScript host classes, including tables,
  * table headers, table bodies and table footers.
  * 
- * @author Daniel Gredler
  * @version $Revision$
+ * @author Daniel Gredler
+ * @author Chris Erskine
  */
 public class RowContainer extends HTMLElement {
 
@@ -76,7 +77,7 @@ public class RowContainer extends HTMLElement {
      * Returns the rows in the element.
      * @return The rows in the element.
      */
-    public Object jsGet_rows() {
+    public Object jsxGet_rows() {
         if (rows_ == null) {
             rows_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
@@ -95,8 +96,8 @@ public class RowContainer extends HTMLElement {
      * MSDN Documentation</a>
      * @param rowIndex the zero-based index of the row to delete.
      */
-    public void jsFunction_deleteRow(final int rowIndex) {
-        final ElementArray rows = (ElementArray) jsGet_rows();
+    public void jsxFunction_deleteRow(final int rowIndex) {
+        final ElementArray rows = (ElementArray) jsxGet_rows();
         final boolean rowIndexValid = (rowIndex >= 0 && rowIndex < rows.jsGet_length());
         if (rowIndexValid) {
             final SimpleScriptable row = (SimpleScriptable) rows.jsFunction_item(new Integer(rowIndex));
@@ -116,11 +117,11 @@ public class RowContainer extends HTMLElement {
      * @param f the function object that invoked this function.
      * @return the newly-created row.
      */
-    public static Object jsFunction_insertRow(
+    public static Object jsxFunction_insertRow(
             final Context cx, final Scriptable s, final Object[] args,
             final Function f) {
         final RowContainer rowContainer = (RowContainer) s;
-        final ElementArray rows = (ElementArray) rowContainer.jsGet_rows();
+        final ElementArray rows = (ElementArray) rowContainer.jsxGet_rows();
         final Number rowIndex;
         if (args.length > 0) {
             rowIndex = (Number) args[0];
@@ -165,8 +166,8 @@ public class RowContainer extends HTMLElement {
      * @param targetIndex the index to move the row to.
      * @return the row that was moved.
      */
-    public Object jsFunction_moveRow(final int sourceIndex, final int targetIndex) {
-        final ElementArray rows = (ElementArray) jsGet_rows();
+    public Object jsxFunction_moveRow(final int sourceIndex, final int targetIndex) {
+        final ElementArray rows = (ElementArray) jsxGet_rows();
         final boolean sourceIndexValid = (sourceIndex >= 0 && sourceIndex < rows.jsGet_length());
         final boolean targetIndexValid = (targetIndex >= 0 && targetIndex < rows.jsGet_length());
         if (sourceIndexValid && targetIndexValid) {

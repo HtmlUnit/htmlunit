@@ -58,6 +58,8 @@ import org.mozilla.javascript.Scriptable;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Kent Tong
+ * @author Chris Erskine
+ * 
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/form.asp">MSDN documentation</a>
  */
 public class Form extends HTMLElement {
@@ -93,7 +95,7 @@ public class Form extends HTMLElement {
      * Return the value of the javascript attribute "name".
      * @return The value of this attribute.
      */
-    public String jsGet_name() {
+    public String jsxGet_name() {
         return getHtmlForm().getNameAttribute();
     }
 
@@ -102,7 +104,7 @@ public class Form extends HTMLElement {
      * Return the value of the javascript attribute "elements".
      * @return The value of this attribute.
      */
-    public ElementArray jsGet_elements() {
+    public ElementArray jsxGet_elements() {
         if (elements_ == null) {
             final HtmlForm htmlForm = getHtmlForm();
             elements_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
@@ -126,8 +128,8 @@ public class Form extends HTMLElement {
      * (cf <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/length.asp">MSDN doc</a>)
      * @return The value of this attribute.
      */
-    public int jsGet_length() {
-        final int all = jsGet_elements().jsGet_length();
+    public int jsxGet_length() {
+        final int all = jsxGet_elements().jsGet_length();
         final int images = getHtmlForm().getHtmlElementsByAttribute("input", "type", "image").size();
         return all - images;
     }
@@ -137,7 +139,7 @@ public class Form extends HTMLElement {
      * Return the value of the javascript attribute "action".
      * @return The value of this attribute.
      */
-    public String jsGet_action() {
+    public String jsxGet_action() {
         return getHtmlForm().getActionAttribute();
     }
 
@@ -146,7 +148,7 @@ public class Form extends HTMLElement {
      * Set the value of the javascript attribute "action".
      * @param action The new value.
      */
-    public void jsSet_action( final String action ) {
+    public void jsxSet_action( final String action ) {
         Assert.notNull("action", action);
         getHtmlForm().setActionAttribute(action);
     }
@@ -156,7 +158,7 @@ public class Form extends HTMLElement {
      * Return the value of the javascript attribute "method".
      * @return The value of this attribute.
      */
-    public String jsGet_method() {
+    public String jsxGet_method() {
         return getHtmlForm().getMethodAttribute();
     }
 
@@ -165,7 +167,7 @@ public class Form extends HTMLElement {
      * Set the value of the javascript attribute "method".
      * @param method The new value.
      */
-    public void jsSet_method( final String method ) {
+    public void jsxSet_method( final String method ) {
         Assert.notNull("method", method);
         getHtmlForm().setMethodAttribute(method);
     }
@@ -175,7 +177,7 @@ public class Form extends HTMLElement {
      * Return the value of the javascript attribute "target".
      * @return The value of this attribute.
      */
-    public String jsGet_target() {
+    public String jsxGet_target() {
         return getHtmlForm().getTargetAttribute();
     }
 
@@ -183,7 +185,7 @@ public class Form extends HTMLElement {
      * Get the onsubmit event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onsubmit() {
+    public Function jsxGet_onsubmit() {
         return getHtmlForm().getEventHandler("onsubmit");
     }
 
@@ -191,7 +193,7 @@ public class Form extends HTMLElement {
      * Set the onsubmit event handler for this element.
      * @param onsubmit the new handler
      */
-    public void jsSet_onsubmit(final Function onsubmit) {
+    public void jsxSet_onsubmit(final Function onsubmit) {
         getHtmlForm().setEventHandler("onsubmit", onsubmit);
     }
 
@@ -199,7 +201,7 @@ public class Form extends HTMLElement {
      * Set the value of the javascript attribute "target".
      * @param target The new value.
      */
-    public void jsSet_target( final String target ) {
+    public void jsxSet_target( final String target ) {
         Assert.notNull("target", target);
         getHtmlForm().setTargetAttribute(target);
     }
@@ -209,7 +211,7 @@ public class Form extends HTMLElement {
      * Return the value of the javascript attribute "encoding".
      * @return The value of this attribute.
      */
-    public String jsGet_encoding() {
+    public String jsxGet_encoding() {
         return getHtmlForm().getEnctypeAttribute();
     }
 
@@ -218,7 +220,7 @@ public class Form extends HTMLElement {
      * Set the value of the javascript attribute "encoding".
      * @param encoding The new value.
      */
-    public void jsSet_encoding( final String encoding ) {
+    public void jsxSet_encoding( final String encoding ) {
         Assert.notNull("encoding", encoding);
         getHtmlForm().setEnctypeAttribute(encoding);
     }
@@ -233,7 +235,7 @@ public class Form extends HTMLElement {
      *
      * @throws IOException if an io error occurs
      */
-    public void jsFunction_submit() throws IOException {
+    public void jsxFunction_submit() throws IOException {
         getHtmlForm().submit();
     }
 
@@ -241,7 +243,7 @@ public class Form extends HTMLElement {
     /**
      * Reset this form
      */
-    public void jsFunction_reset() {
+    public void jsxFunction_reset() {
         getHtmlForm().reset();
     }
 
@@ -301,6 +303,6 @@ public class Form extends HTMLElement {
      * @return The property.
      */
     public Object get( final int index, final Scriptable start ) {
-        return jsGet_elements().get(index, ((Form) start).jsGet_elements());
+        return jsxGet_elements().get(index, ((Form) start).jsxGet_elements());
     }
 }

@@ -43,7 +43,12 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+
+import java.util.Iterator;
+import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.Map;
 import java.lang.ref.WeakReference;
@@ -52,6 +57,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.FunctionObject;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
@@ -138,9 +144,9 @@ public final class JavaScriptEngine extends ScriptEngine {
                 return existingPageInfo;
             }
         }
-
+        final WebClient webClient = htmlPage.getWebClient();
         try {
-            WEB_CLIENTS.set(htmlPage.getWebClient());
+            WEB_CLIENTS.set(webClient);
             
             final Context context = Context.enter();
             context.setOptimizationLevel(-1);
@@ -148,24 +154,49 @@ public final class JavaScriptEngine extends ScriptEngine {
                 new StrictErrorReporter(getScriptEngineLog()) );
             final Scriptable parentScope = context.initStandardObjects(null);
 
-            final String hostClassNames[] = {
-                "HTMLElement", "Window", "Frame", "Document", "Form", "Input", "Navigator",
-                "Screen", "History", "Location", "Button", "Select", "Textarea",
-                "Style", "Option", "Anchor", "Image", "TextImpl", "FocusableHostElement",
-                "ActiveXObject", "Table", "Attribute", "RowContainer", "TableBody",
-                "TableFooter", "TableHeader", "TableRow"
-            };
+            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
+            final Set keys = jsConfig.keySet();
+            final Iterator it = keys.iterator();
+            String jsClassName;
+            ClassConfiguration config;
+            Class jsHostClass;
+            ScriptableObject prototype;
+            Iterator it1;
+            String entryKey;
+            FunctionObject functionObject;
+            while (it.hasNext()) {
+                jsClassName = (String) it.next();
+                config = jsConfig.getClassConfiguration(jsClassName);
+                if (config.isJsObject()) {
+                    jsHostClass = config.getLinkedClass();
+                    ScriptableObject.defineClass(parentScope, jsHostClass);
+    // FIXME - add the method code here            
+                    prototype = (ScriptableObject) ScriptableObject.getClassPrototype(parentScope, jsClassName);
+                    it1 = config.propertyKeys().iterator();
+                    while (it1.hasNext()) {
+                        entryKey = (String) it1.next();
+                        prototype.defineProperty(entryKey, null, config.getPropertyReadMethod(entryKey),
+                            config.getPropertyWriteMethod(entryKey), 0);
+                    }
+                    it1 = config.functionKeys().iterator();
+                    while (it1.hasNext()) {
+                        entryKey = (String) it1.next();
+                        functionObject = new FunctionObject(entryKey, config.getFunctionMethod(entryKey), prototype);
+                        prototype.defineProperty(entryKey, functionObject, 0);
+//        FunctionObject f = new FunctionObject(name, m, this);
+//        defineProperty(name, f, attributes);
 
-            for( int i=0; i<hostClassNames.length; i++ ) {
-                final String className
-                    = "com.gargoylesoftware.htmlunit.javascript.host."+hostClassNames[i];
-                try {
-                    ScriptableObject.defineClass( parentScope, Class.forName(className) );
-                }
-                catch( final ClassNotFoundException e ) {
-                    throw new NoClassDefFoundError(className);
+                    }
+                        
                 }
             }
+            
+            
+//    Class c = Class.forName("com.gargoylesoftware.htmlunit.javascript.host.Document");
+//    ScriptableObject.defineClass(parentScope, c);
+//    Method m = c.getMethod("jsxGet_readyState", null);
+//    ScriptableObject s = (ScriptableObject) ScriptableObject.getClassPrototype(parentScope, "Document");
+//    s.defineProperty("readyState", null, m, null, 0);
 
             ScriptableObject.defineClass(parentScope, ElementArray.class);
             ScriptableObject.defineClass(parentScope, OptionsArray.class);

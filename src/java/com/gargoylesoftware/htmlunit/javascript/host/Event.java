@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @version $Revision$
  * @author <a hrer="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
  * @author Mike Bowler
+ * @author Chris Erskine
  */
 public class Event extends SimpleScriptable {
 
@@ -72,7 +73,7 @@ public class Event extends SimpleScriptable {
      * javascript getter for currentTarget property
      * @return the current target
      */
-    public Object jsGet_currentTarget() {
+    public Object jsxGet_currentTarget() {
         return currentTarget_;
     }
 

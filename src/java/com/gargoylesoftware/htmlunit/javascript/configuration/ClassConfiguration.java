@@ -51,6 +51,10 @@ import java.util.Set;
  * @author Chris Erskine
  */
 public final class ClassConfiguration {
+    private static final String GETTER_PREFIX = "jsxGet_";
+    private static final String SETTER_PREFIX = "jsxSet_";
+    private static final String FUNCTION_PREFIX = "jsxFunction_";
+    
     private HashMap propertyMap_ = new HashMap();
     private HashMap functionMap_ = new HashMap();
     private String extendedClass_;
@@ -59,6 +63,8 @@ public final class ClassConfiguration {
      */
     private String className_;
     private Class linkedClass_;
+    private Class htmlClass_;
+    private boolean jsObject_;
     
     /**
      * Constructor
@@ -66,30 +72,22 @@ public final class ClassConfiguration {
      * @param classname the name of the configuration class this entry is for
      * @param implementingClass - the fully qualified name of the class implimenting this functionality
      * @param extendedClass - The name of the class that this class extends
+     * @param htmlClass The name of the html class that this object supports
+     * @param jsObject boolean flag for if this object is a JavaScript object
      * @throws ClassNotFoundException - If the implementing class is not found
      */
-    public ClassConfiguration(final String classname, final String implementingClass, final String extendedClass) 
-        throws ClassNotFoundException {
-        init(classname, implementingClass, extendedClass);
-    }
-    
-    /**
-     * Constructor for when there is not an extending class
-     * 
-     * @param classname the name of the configuration class this entry is for
-     * @param implementingClass - the fully qualified name of the class implimenting this functionality
-     * @throws ClassNotFoundException - If the implementing class is not found
-     */
-    public ClassConfiguration(final String classname, final String implementingClass) throws ClassNotFoundException {
-        init(classname, implementingClass, "");
-    }
-
-    private void init(final String classname, final String implementingClass, final String extendedClass) 
+    public ClassConfiguration(final String classname, final String implementingClass, 
+        final String extendedClass, final String htmlClass, final boolean jsObject) 
         throws ClassNotFoundException {
         className_ = classname;
         extendedClass_ = extendedClass;
         linkedClass_ = Class.forName(implementingClass);
+        jsObject_ = jsObject;
+        if (htmlClass != null && htmlClass.length() != 0) {
+            htmlClass_ = Class.forName(htmlClass);
+        }
     }
+    
     
     /**
      * @return Returns the className.
@@ -117,18 +115,18 @@ public final class ClassConfiguration {
         info.setWriteable(writeable);
         try {
             if (readable) {
-                info.setReadMethod(linkedClass_.getMethod("jsGet_" + name, null));
+                info.setReadMethod(linkedClass_.getMethod(GETTER_PREFIX + name, null));
             }
         }
         catch (final NoSuchMethodException e) {
-            throw new IllegalStateException("Method 'jsGet_" + name + "' was not found for " + name + " property in " +
-                linkedClass_.getName());
+            throw new IllegalStateException("Method '" + GETTER_PREFIX + name + "' was not found for " 
+                + name + " property in " + linkedClass_.getName());
         }
         // For the setters, we have to loop through the methods since we do not know what type of argument
         // the method takes.
         if (writeable) {
             final Method[] methods = linkedClass_.getMethods();
-            final String setMethodName = "jsSet_" + name;
+            final String setMethodName = SETTER_PREFIX + name;
             for( int i=0; i<methods.length; i++ ) {
                 if( methods[i].getName().equals(setMethodName) && methods[i].getParameterTypes().length == 1 ) {
                     info.setWriteMethod(methods[i]);
@@ -136,7 +134,7 @@ public final class ClassConfiguration {
                 }
             }
             if(info.getWriteMethod() == null) {
-                throw new IllegalStateException("Method 'jsSet_" + name + "' was not found for " + name 
+                throw new IllegalStateException("Method '" + SETTER_PREFIX + name + "' was not found for " + name 
                     + " property in " + linkedClass_.getName());
             }
         }
@@ -144,13 +142,28 @@ public final class ClassConfiguration {
     }
     
     /**
+     * Return the set of keys for the defined properties.
+     * @return a set
+     */
+    public Set propertyKeys() {
+        return propertyMap_.keySet();
+    }
+    
+    /**
+     * Return the set of keys for the defined functions
+     * @return a set
+     */
+    public Set functionKeys() {
+        return functionMap_.keySet();
+    }
+    /**
      * Add the function to the configuration
      * @param name - Name of the function
      */
     public void addFunction(final String name) {
         final FunctionInfo info = new FunctionInfo();
         final Method[] methods = linkedClass_.getMethods();
-        final String setMethodName = "jsFunction_" + name;
+        final String setMethodName = FUNCTION_PREFIX + name;
         for( int i=0; i<methods.length; i++ ) {
             if( methods[i].getName().equals(setMethodName)) {
                 info.setFunctionMethod(methods[i]);
@@ -158,7 +171,7 @@ public final class ClassConfiguration {
             }
         }
         if(info.getFunctionMethod() == null) {
-            throw new IllegalStateException("Method 'jsFunction_" + name + "' was not found for " + name 
+            throw new IllegalStateException("Method '" + FUNCTION_PREFIX + name + "' was not found for " + name 
                 + " function in " + linkedClass_.getName());
         }
         functionMap_.put(name, info);
@@ -304,6 +317,12 @@ public final class ClassConfiguration {
         return linkedClass_;
     }
 
+    /**
+     * @return Returns the jsObject_.
+     */
+    public boolean isJsObject() {
+        return jsObject_;
+    }
     /**
      * Class used to contain the property information if the property is readable, writeable and the
      * methods that implement the get and set functions.

@@ -947,10 +947,10 @@ public final class HtmlPage extends DomNode implements Page {
 
         // onload for the window
         final Window jsWindow = (Window) getEnclosingWindow().getScriptObject();
-        if (jsWindow != null && jsWindow.jsGet_onload() != null) {
+        if (jsWindow != null && jsWindow.jsxGet_onload() != null) {
             final ScriptEngine engine = getWebClient().getScriptEngine();
             getLog().debug("Executing onload handler for the window");
-            engine.callFunction(this, jsWindow.jsGet_onload(), jsWindow, new Object[]{}, null);
+            engine.callFunction(this, jsWindow.jsxGet_onload(), jsWindow, new Object[]{}, null);
         }
 
         // the onload of the contained frames or iframe tags

@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
+ * @author Chris Erskine
  */
 public class FormField extends FocusableHostElement {
 
@@ -62,7 +63,7 @@ public class FormField extends FocusableHostElement {
      *
      *@return    The value of this attribute.
      */
-    public String jsGet_value() {
+    public String jsxGet_value() {
         return getHtmlElementOrDie().getAttributeValue( "value" );
     }
 
@@ -72,7 +73,7 @@ public class FormField extends FocusableHostElement {
      *
      *@param  newValue  The new value.
      */
-    public void jsSet_value( final String newValue ) {
+    public void jsxSet_value( final String newValue ) {
         getHtmlElementOrDie().setAttributeValue( "value", newValue );
     }
 
@@ -82,7 +83,7 @@ public class FormField extends FocusableHostElement {
      *
      *@return    The value of this attribute.
      */
-    public String jsGet_name() {
+    public String jsxGet_name() {
         return getHtmlElementOrDie().getAttributeValue( "name" );
     }
     
@@ -91,7 +92,7 @@ public class FormField extends FocusableHostElement {
      *
      *@param  newName  The new name.
      */
-    public void jsSet_name( final String newName ) {
+    public void jsxSet_name( final String newName ) {
         getHtmlElementOrDie().setAttributeValue( "name", newName );
     }    
 
@@ -101,7 +102,7 @@ public class FormField extends FocusableHostElement {
      *
      *@return The value of this attribute.
      */
-    public Form jsGet_form() {
+    public Form jsxGet_form() {
         return (Form)getScriptableFor(getHtmlElementOrDie().getEnclosingForm());
     }
 
@@ -110,7 +111,7 @@ public class FormField extends FocusableHostElement {
      *
      *@return The value of this attribute.
      */
-    public String jsGet_type() {
+    public String jsxGet_type() {
         return getHtmlElementOrDie().getAttributeValue("type");
     }
 
@@ -118,7 +119,7 @@ public class FormField extends FocusableHostElement {
      * Set the onchange event handler for this element.
      * @param onchange the new handler
      */
-    public void jsSet_onchange(final Function onchange) {
+    public void jsxSet_onchange(final Function onchange) {
         getHtmlElementOrDie().setEventHandler("onchange", onchange);
     }
 
@@ -126,7 +127,7 @@ public class FormField extends FocusableHostElement {
      * Get the onchange event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsGet_onchange() {
+    public Function jsxGet_onchange() {
         return getHtmlElementOrDie().getEventHandler("onchange");
     }
 
@@ -134,22 +135,22 @@ public class FormField extends FocusableHostElement {
      * Click this element.  This simulates the action of the user clicking with the mouse.
      * @throws IOException if this click triggers a page load that encouters problems
      */
-    public void jsFunction_click() throws IOException {
+    public void jsxFunction_click() throws IOException {
         ((ClickableElement) getHtmlElementOrDie()).click();
     }
 
     /**
      * Select this element.
      */
-    public void jsFunction_select() {
-        getLog().debug( "Input.jsFunction_select() not implemented" );
+    public void jsxFunction_select() {
+        getLog().debug( "Input.jsxFunction_select() not implemented" );
     }
 
     /**
      * Return true if this element is disabled.
      * @return True if this element is disabled.
      */
-    public boolean jsGet_disabled() {
+    public boolean jsxGet_disabled() {
         return getHtmlElementOrDie().isAttributeDefined("disabled");
     }
 
@@ -158,7 +159,7 @@ public class FormField extends FocusableHostElement {
      * Set whether or not to disable this element
      * @param disabled True if this is to be disabled.
      */
-    public void jsSet_disabled( final boolean disabled ) {
+    public void jsxSet_disabled( final boolean disabled ) {
         final HtmlElement element = getHtmlElementOrDie();
         if( disabled ) {
             element.setAttributeValue("disabled", "disabled");
@@ -172,7 +173,7 @@ public class FormField extends FocusableHostElement {
      * Return the value of the tabindex attribute.
      * @return the value of the tabindex attribute.
      */
-    public String jsGet_tabindex() {
+    public String jsxGet_tabindex() {
         return getHtmlElementOrDie().getAttributeValue("tabindex");
     }
 }

@@ -48,6 +48,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -255,6 +256,13 @@ public final class JavaScriptConfiguration {
         return inputStream;
     }
     
+    /**
+     * Get the set of keys for the class configurations.
+     * @return Set
+     */
+    public Set keySet() {
+        return configuration_.keySet();
+    }
     
     private Map buildUsageMap(final BrowserVersion browser) {
         final Map classMap = new HashMap(30);
@@ -296,8 +304,14 @@ public final class JavaScriptConfiguration {
         }
         final String linkedClassname = element.getAttribute("classname");
         final String superclassName = element.getAttribute("extends");
+        final String htmlClassname = element.getAttribute("htmlClass");
+        boolean jsObjectFlag = false;
+        final String jsObjectStr = element.getAttribute("JSObject");
+        if ("true".equalsIgnoreCase(jsObjectStr)) {
+            jsObjectFlag = true;
+        }
         final ClassConfiguration classConfiguration = 
-            new ClassConfiguration(className, linkedClassname, superclassName);
+            new ClassConfiguration(className, linkedClassname, superclassName, htmlClassname, jsObjectFlag);
         ClassnameMap_.put(linkedClassname, className);
         Node node = element.getFirstChild();
         while( node != null ) {
@@ -436,6 +450,14 @@ public final class JavaScriptConfiguration {
         return browser_;
     }
     
+    /**
+     * Get the class configuration for the supplied javascript class name
+     * @param classname The js class name
+     * @return ClassConfiguration
+     */
+    public ClassConfiguration getClassConfiguration(final String classname) {
+        return (ClassConfiguration) configuration_.get(classname);
+    }
         
     private boolean testToIncludeForBrowserConstraint(final Element element, final BrowserVersion browser) {
         if (!browser.getApplicationName().equals(element.getAttribute("name"))) {

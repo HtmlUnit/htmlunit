@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author Chris Erskine
  */
 public class Image extends HTMLElement {
 
@@ -81,7 +82,7 @@ public class Image extends HTMLElement {
      * images), on the JavaScript object itself.
      * @param src the src attribute value
      */
-    public void jsSet_src(final String src) {
+    public void jsxSet_src(final String src) {
         src_ = src;
         final HtmlImage htmlImageElement = (HtmlImage) getHtmlElementOrNull();
         if (htmlImageElement != null) {
@@ -96,7 +97,7 @@ public class Image extends HTMLElement {
      * itself.
      * @return the src attribute
      */
-    public String jsGet_src() {
+    public String jsxGet_src() {
         WebClient webClient = JavaScriptEngine.getWebClientForCurrentThread();
         HtmlPage currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
         
