@@ -60,6 +60,10 @@
             <action type="update" dev="mbowler">
                 Moved all tests under src/test/java
             </action>
+            <action type="update" dev="mbowler" id="713646" due-to="David K. Taylor">
+            	Fixed bug where onload handler would not execute a function if the brackets 
+            	weren't specified.
+            </action>
         </release>
     </body>
 
