@@ -204,6 +204,16 @@ public class SanityCheck extends WebTestCase {
 
 
     /**
+     * Test against a live server: htmlunit.sourceforge.net
+     * @throws Exception If something goes wrong.
+     */
+    public void testHtmlUnitHomepage() throws Exception {
+        final WebClient webClient = new WebClient(BROWSER_VERSION);
+        assertInstanceOf( webClient.getPage( new URL( "http://htmlunit.sourceforge.net" ) ), HtmlPage.class );
+    }
+
+
+    /**
      * Print out the name of the test that is running.
      */
     public void setUp() {
