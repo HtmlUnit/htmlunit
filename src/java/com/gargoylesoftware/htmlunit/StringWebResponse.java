@@ -62,13 +62,23 @@ public class StringWebResponse implements WebResponse {
     public StringWebResponse( final String content ) {
         content_ = content;
         try {
-            url_ = new URL("http://first");
+            url_ = new URL("http://HtmlUnitStringWebResponse");
         }
         catch( final MalformedURLException e ) {
             // Theoretically impossible
             throw new IllegalStateException(e.toString());
         }
     }
+    
+    /**
+     * Create an instance associated with an originating URL
+     * @param content The content to return.
+     * @param originatingURL The url that this should be associated with
+     */
+    public StringWebResponse( final String content, final URL originatingURL ) {
+        content_ = content;
+        url_ = originatingURL;
+    }    
 
     /**
      *  Return the status code that was returned by the server

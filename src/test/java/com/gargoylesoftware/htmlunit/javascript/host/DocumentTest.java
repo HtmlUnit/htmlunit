@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.BaseFrame.FrameWindow;
 
 /**
  * Tests for Document
@@ -2135,4 +2136,35 @@ public class DocumentTest extends WebTestCase {
         }
         fail();
     }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+     public void testDocumentWriteFrameRelativeURLMultipleFrameset() throws Exception {
+         final String framesetContent = "<html><head><title>frameset</title></head>\n"
+            + "<script>\n"
+            + "    document.write('<frameset><frame src=\"frame.html\"/></frameset>');\n"
+            + "</script>\n"
+            + "<frameset><frame src='blank.html'/></frameset>"
+            + "</html>";
+         
+         final URL baseURL = new URL("http://base/subdir/");
+         final URL framesetURL = new URL(baseURL.toExternalForm() + "test.html");
+         final URL frameURL = new URL(baseURL.toExternalForm() + "frame.html");
+         final URL blankURL = new URL(baseURL.toExternalForm() + "blank.html");
+
+         final WebClient client = new WebClient();
+         final MockWebConnection webConnection = new MockWebConnection( client );
+         webConnection.setResponse(framesetURL, framesetContent);
+         webConnection.setResponseAsGenericHtml(frameURL, "frame");
+         webConnection.setResponseAsGenericHtml(blankURL, "blank");
+         client.setWebConnection( webConnection );
+         
+         final HtmlPage framesetPage = (HtmlPage) client.getPage(framesetURL);
+         final FrameWindow frame = (FrameWindow) framesetPage.getFrames().get(0);
+         
+         assertNotNull(frame);
+         assertEquals(frameURL, frame.getEnclosedPage().getWebResponse().getUrl());
+         assertEquals("frame", ((HtmlPage)frame.getEnclosedPage()).getTitleText());
+     }    
 }

@@ -463,7 +463,8 @@ public class HTMLElement extends NodeImpl {
             // when integrated in the real page
             webClient.setJavaScriptEnabled(false);
 
-            final WebResponse webResp = new StringWebResponse("<html><body>" + htmlSnippet + "</body></html>");
+            final WebResponse webResp = new StringWebResponse("<html><body>" + htmlSnippet + "</body></html>", 
+                    getDomNodeOrDie().getPage().getWebResponse().getUrl());
             try {
                 final WebWindow pseudoWindow = new WebWindow() {
                     public Page getEnclosedPage() {
