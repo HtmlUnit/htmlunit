@@ -114,141 +114,24 @@ public final class JavaScriptConfiguration {
     }
 
 
-    /**
-     * Return true if the specified name is a valid writable property for this configuration.
-     *
-     * @param hostClass The class that the property will be defined in.
-     * @param name The name of the property.
-     * @return true if this name is valid.
-     */
-    public boolean isValidWritablePropertyName( final Class hostClass, final String name ) {
+    private int getState( final Class hostClass, final String type, final String typeName, final String booleanAttributeName ) {
         assertNotNull("hostClass", hostClass);
-        assertNotNull("name", name);
-
-        return getWritablePropertyNames(hostClass).contains(name);
-    }
-
-
-    /**
-     * Return a list containing all the names of the writable properties for the specified class.
-     * @param hostClass The class for which we are getting names.
-     * @return A list of names.
-     */
-    private List getWritablePropertyNames( final Class hostClass ) {
-        final List list = new ArrayList();
-
-        if( Input.class.isAssignableFrom(hostClass) ) {
-            list.add("value");
-            list.add("checked");
-            list.add("action");
-            list.add("method");
-            list.add("target");
-            list.add("encoding");
-        }
-
-        if( Form.class.isAssignableFrom(hostClass) ) {
-            list.add("action");
-            list.add("method");
-            list.add("target");
-            list.add("encoding");
-            list.add("style");
-        }
-
-        if( Select.class.isAssignableFrom(hostClass) ) {
-            list.add("selectedIndex");
-        }
-
-        return list;
-    }
-
-
-    /**
-     * Return true if the specified name is a valid readable property for this configuration.
-     *
-     * @param hostClass The class that the property will be defined in.
-     * @param name The name of the property.
-     * @return true if this name is valid.
-     */
-    public boolean isValidReadablePropertyName( final Class hostClass, final String name ) {
-        assertNotNull("hostClass", hostClass);
-        assertNotNull("name", name);
-
-        return getReadablePropertyNames(hostClass).contains(name);
-    }
-
-
-    /**
-     * Return a list containing all the names of the readable properties for the specified class.
-     * @param hostClass The class for which we are getting names.
-     * @return A list of names.
-     */
-    private List getReadablePropertyNames( final Class hostClass ) {
-        final List list = new ArrayList();
-
-        if( Input.class.isAssignableFrom(hostClass) ) {
-            list.add("type");
-            list.add("name");
-            list.add("checked");
-            list.add("value");
-            list.add("form");
-            list.add("style");
-        }
-
-        if( Form.class.isAssignableFrom(hostClass) ) {
-            list.add("name");
-            list.add("length");
-            list.add("elements");
-            list.add("action");
-            list.add("method");
-            list.add("target");
-            list.add("encoding");
-            list.add("style");
-        }
-
-        if( Document.class.isAssignableFrom(hostClass) ) {
-            list.add("location");
-            list.add("forms");
-            list.add("cookie");
-            list.add("style");
-            list.add("images");
-            list.add("referrer");
-            list.add("URL");
-            list.add("all");
-        }
-
-        if( Option.class.isAssignableFrom(hostClass) ) {
-            list.add("value");
-            list.add("text");
-            list.add("style");
-        }
-
-        if( Select.class.isAssignableFrom(hostClass) ) {
-            list.add("length");
-            list.add("options");
-            list.add("selectedIndex");
-        }
-
-        return list;
-    }
-
-
-    /**
-     * Return true if the specified name is a valid function for this configuration.
-     *
-     * @param hostClass The class that the property will be defined in.
-     * @param name The name of the function.
-     * @return
-     */
-    public int getFunctionNameState( final Class hostClass, final String name ) {
-        assertNotNull("hostClass", hostClass);
-        assertNotNull("name", name);
+        assertNotNull("typeName", typeName);
 
         Element classElement = getClassElement(getClassName(hostClass));
         while( classElement != null ) {
 
-            final Element functionElement = getElementByTypeAndName(classElement, "function", name);
+            final Element functionElement = getElementByTypeAndName(classElement, type, typeName);
             if( functionElement != null ) {
-                return getEnabledState(functionElement);
+                if( booleanAttributeName == null ) {
+                    return getEnabledState(functionElement);
+                }
+                else if( getBooleanAttribute(functionElement,booleanAttributeName ) )  {
+                    return getEnabledState(functionElement);
+                }
+                else {
+                    return NOT_FOUND;
+                }
             }
 
             final String superClassName = classElement.getAttribute("extends");
@@ -259,6 +142,39 @@ public final class JavaScriptConfiguration {
         }
 
         return NOT_FOUND;
+    }
+
+
+    public int getReadablePropertyNameState( final Class hostClass, final String name ) {
+        return getState(hostClass, "property", name, "readable");
+    }
+
+
+    public int getWritablePropertyNameState( final Class hostClass, final String name ) {
+        return getState(hostClass, "property", name, "writable");
+    }
+
+
+    public int getFunctionNameState( final Class hostClass, final String name ) {
+        return getState(hostClass, "function", name, null);
+    }
+
+
+    private boolean getBooleanAttribute( final Element classElement, final String attributeName ) {
+        assertNotNull("classElement", classElement);
+        assertNotNull("attributeName", attributeName);
+
+        final String value = classElement.getAttribute(attributeName);
+        if( "true".equals(value) ) {
+            return true;
+        }
+        else if( "false".equals(value) ) {
+            return false;
+        }
+        else {
+            throw new IllegalStateException("Unexpected value for attribute ["
+                +attributeName+"] on element ["+classElement+"] value=["+value+"]");
+        }
     }
 
 
