@@ -88,6 +88,9 @@
 	            Fix for bug 743241 "document.write from external script is not added to document".
 	            Patch submitted by David K. Taylor
             </action>
+            <action type="update" dev="dktaylor" id="741930">
+	            Partial fix for RFE 741930 "document.createElement(...) and form.appendChild(...)".  This fix adds document.createElement for most element types.  It does not support input tags.
+            </action>
         </release>
     </body>
 
