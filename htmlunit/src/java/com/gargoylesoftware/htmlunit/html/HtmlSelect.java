@@ -22,7 +22,7 @@ import org.w3c.dom.NodeList;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="Mike.J.Bresnahan@supervalu.com">Mike J. Bresnahan</a>
+ * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  */
 public class HtmlSelect
          extends HtmlElement

@@ -7,7 +7,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.HiddenWebWindow;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -758,14 +757,14 @@ public final class HtmlPage
 
     private String loadJavaScriptFromUrl( final String urlString ) {
         URL url = null;
-        final WebWindow webWindow = new HiddenWebWindow(getWebClient());
-
         try {
             url = getFullyQualifiedUrl(urlString);
-            final Page page = getWebClient().getPage(
-                webWindow, url, SubmitMethod.GET, Collections.EMPTY_LIST, false );
-            final WebResponse webResponse = page.getWebResponse();
+            final WebResponse webResponse= getWebClient().loadWebResponse(
+                url, SubmitMethod.GET, Collections.EMPTY_LIST);
             if( webResponse.getStatusCode() == 200 ) {
+                if( webResponse.getContentType().equals("text/javascript") == false ) {
+                    getLog().warn("Expected content type of text/javascript for remotely loaded javascript element but got ["+webResponse.getContentType()+"]");
+                }
                 return webResponse.getContentAsString();
             }
             else {
