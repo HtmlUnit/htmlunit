@@ -53,12 +53,12 @@ public final class WebWindowEvent extends EventObject {
     /**
      * Create an instance
      *
-     * @param source The WebWindow that caused the event
+     * @param webWindow The WebWindow that caused the event
      * @param oldPage The old contents of the web window
      * @param newPage The new contents of the web window
      */
-    public WebWindowEvent( final WebWindow source, final Page oldPage, final Page newPage ) {
-        super(source);
+    public WebWindowEvent( final WebWindow webWindow, final Page oldPage, final Page newPage ) {
+        super(webWindow);
         oldPage_ = oldPage;
         newPage_ = newPage;
     }

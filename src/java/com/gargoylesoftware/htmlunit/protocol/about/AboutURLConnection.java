@@ -48,15 +48,13 @@ import java.net.URLConnection;
  * @version $Revision$
  */
 public class AboutURLConnection extends URLConnection {
-//    private final String content_;
 
     /**
      * Create an instance
-     * @param url The "about:" url.
+     * @param newUrl The "about:" url.
      */
-    public AboutURLConnection(final URL url) {
-        super(url);
-//        content_ = url.toExternalForm().substring("about:".length());
+    public AboutURLConnection(final URL newUrl) {
+        super(newUrl);
     }
     /**
      * @see java.net.URLConnection#connect()
