@@ -54,8 +54,10 @@ import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.JavaScriptException;
+import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
+import org.mozilla.javascript.WrappedException;
 
 /**
  * A wrapper for the <a href="http://www.mozilla.org/rhino">Rhino javascript engine</a>
@@ -343,7 +345,18 @@ public final class JavaScriptEngine extends ScriptEngine {
                 scope, (Scriptable) thisObject, args );
             return result;
         }
-        catch( final JavaScriptException e ) {
+        catch (final ScriptException e) {
+            throw e;
+        }
+        catch (final WrappedException e) {
+            if (e.getWrappedException() instanceof ScriptException) {
+                throw (ScriptException) e.getWrappedException();
+            }
+            else {
+                throw e;
+            }
+        }
+        catch( final RhinoException e ) {
             throw new ScriptException( e, toString( htmlPage, javaScriptFunction ) );
         }
         catch( final Throwable t ) {
