@@ -245,7 +245,9 @@ public class HttpWebConnection extends WebConnection {
                         newPart = new FilePart(
                                 pairWithFile.getName(),
                                 pairWithFile.getValue(),
-                                pairWithFile.getFile());
+                                pairWithFile.getFile(),
+                                pairWithFile.getContentType(),
+                                pairWithFile.getCharset());
                     } 
                     else {
                         newPart = new StringPart(pair.getName(), pair.getValue());

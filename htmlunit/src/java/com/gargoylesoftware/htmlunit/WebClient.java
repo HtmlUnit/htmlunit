@@ -66,6 +66,7 @@ import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
 import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -1438,23 +1439,27 @@ public class WebClient {
     }
 
     /**
-     * Tries to guess the content type of the file.
+     * Tries to guess the content type of the file.<br/>
+     * This utility could be located in an helper class but we can compare this functionnality
+     * for instance with the "Helper Applications" settings of Mozilla and therefore see it as a 
+     * property of the "browser".  
      * @param file the file
      * @return "application/octet-stream" if nothing could be guessed.
-     * @throws IOException if a problem occurs
      */
-    private String guessContentType(final File file) throws IOException {
-        String contentType;
+    public String guessContentType(final File file) {
+        String contentType = null;
         InputStream inputStream = null;
         try {
             inputStream = new BufferedInputStream(new FileInputStream(file));
             contentType = URLConnection.guessContentTypeFromStream(inputStream);
         }
-        finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
+        catch (final IOException e) {
+            // nothing, silently ignore
         }
+        finally {
+            IOUtils.closeQuietly(inputStream);
+        }
+
         if (contentType == null) {
             contentType = URLConnection.guessContentTypeFromName(file.getName());
         }

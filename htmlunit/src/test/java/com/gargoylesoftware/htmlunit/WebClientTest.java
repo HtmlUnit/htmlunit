@@ -41,6 +41,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,6 +49,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
@@ -1159,6 +1161,40 @@ public class WebClientTest extends WebTestCase {
         super.tearDown();
         WebClient.setValidateHtml(false);
         WebClient.setIgnoreOutsideContent(false);
+    }
+
+    /**
+     *
+     * @throws Exception if an error occurs
+     */
+    public void testGuessContentType() throws Exception {
+        final WebClient webClient = new WebClient();
+
+        // test real files with bad file suffix
+        assertEquals("tiny-png.img", "image/png", webClient.guessContentType(getTestFile("tiny-png.img")));
+        assertEquals("tiny-jpg.img", "image/jpeg", webClient.guessContentType(getTestFile("tiny-jpg.img")));
+        assertEquals("tiny-gif.img", "image/gif", webClient.guessContentType(getTestFile("tiny-gif.img")));
+        
+        // tests empty files, type should be determined from file suffix
+        assertEquals("empty.png", "image/png", webClient.guessContentType(getTestFile("empty.png")));
+        assertEquals("empty.jpg", "image/jpeg", webClient.guessContentType(getTestFile("empty.jpg")));
+        assertEquals("empty.gif", "image/gif", webClient.guessContentType(getTestFile("empty.gif")));
+    }
+
+
+    /**
+     * Gets the file located in testfiles from the file name
+     * @param fileName the file name
+     * @return the file
+     * @throws Exception if a pb occurs
+     */
+    private File getTestFile(final String fileName) throws Exception {
+        final String baseName = ClassUtils.getPackageName(getClass()).replace('.', '/') + "/testfiles/";
+        final String resource = baseName + fileName;
+        final URL url = getClass().getClassLoader().getResource(resource);
+        final File file = new File(new URI(url.toString()));
+        
+        return file;
     }
 }
 
