@@ -269,7 +269,9 @@ public class Window extends SimpleScriptable {
                 }
             }
         };
-        new Thread(runnable).start();
+        final Thread setTimeoutThread = new Thread(runnable);
+        setTimeoutThread.setPriority(Thread.currentThread().getPriority() + 1);
+        setTimeoutThread.start();
         return 0; // to do when implementing clearTimeout
     }
 
