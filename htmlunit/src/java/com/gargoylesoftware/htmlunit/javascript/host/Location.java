@@ -55,6 +55,7 @@ import java.net.URL;
  */
 public class Location extends SimpleScriptable {
     private static final long serialVersionUID = -2907220432378132233L;
+    private static final String UNKNOWN = "Unknown";
     private Window window_;
 
     /**
@@ -90,7 +91,7 @@ public class Location extends SimpleScriptable {
     public String jsGet_href() {
         final Page page = window_.getWebWindow().getEnclosedPage();
         if( page == null ) {
-            return "Unknown";
+            return UNKNOWN;
         }
         else {
             return page.getWebResponse().getUrl().toExternalForm();
@@ -99,11 +100,19 @@ public class Location extends SimpleScriptable {
 
 
     /**
-     * Reload the window with the specified url
-     * @param href The new url
+     * Reloads the current page, possibly forcing retrieval from the server even if
+     * the browser cache contains the latest version of the document.
+     * @param force If <tt>true</tt>, force reload from server; otherwise, may reload from cache.
+     * @throws IOException When an exception occurs reloading the page.
      */
-    public void jsFunction_reload( final String href ) {
-        getLog().debug("Not implemented yet: reload("+href+")");
+    public void jsFunction_reload( final boolean force ) throws IOException {
+        String url = this.jsGet_href();
+        if( UNKNOWN.equals( url ) ) {
+            getLog().error( "Unable to reload location: current url is unknown." );
+        }
+        else {
+            this.jsSet_href( url );
+        }
     }
 
 
