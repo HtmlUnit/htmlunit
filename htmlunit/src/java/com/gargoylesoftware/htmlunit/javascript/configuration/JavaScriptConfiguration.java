@@ -44,6 +44,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -72,7 +73,6 @@ import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
  */
 public final class JavaScriptConfiguration {
     private static Document XmlDocument_;
-    private static final Object INITIALIZATION_LOCK = new Object();
 
     /** Constant indicating that this function/property is used by the specified browser version */
     public static final int ENABLED   = 1;
@@ -90,12 +90,14 @@ public final class JavaScriptConfiguration {
     private final BrowserVersion browser_;
 
 
+    /**
+     * C'tor is only called from {@link #getInstance(BrowserVersion)} which is synchronized. 
+     * @param browser the browser version to use
+     */
     private JavaScriptConfiguration(final BrowserVersion browser) {
         browser_ = browser;
-        synchronized(INITIALIZATION_LOCK) {
-            if( XmlDocument_ == null ) {
-                loadConfiguration();
-            }
+        if( XmlDocument_ == null ) {
+            loadConfiguration();
         }
 
         if( XmlDocument_ == null ) {
@@ -120,7 +122,6 @@ public final class JavaScriptConfiguration {
      */
     protected static void resetClassForTesting() {
         XmlDocument_ = null;
-//        ConfigurationMap_ = new HashMap(11);
         ConfigurationMap_ = new HashMap(11);
     }
 
@@ -134,7 +135,6 @@ public final class JavaScriptConfiguration {
     
     /**
      * Get the configuration file and make it an input reader and then pass to the method to read the file.
-     * @return
      */
     protected static void loadConfiguration() {
         try {
@@ -186,10 +186,11 @@ public final class JavaScriptConfiguration {
     
     /**
      * Return the instance that represents the configuration for the specified {@link BrowserVersion}.
+     * This method is synchronized to allow multithreaded access to the Javascript configuration.
      * @param browserVersion The {@link BrowserVersion}
      * @return The instance for the specified {@link BrowserVersion}
      */
-    public static JavaScriptConfiguration getInstance( final BrowserVersion browserVersion ) {
+    public static synchronized JavaScriptConfiguration getInstance( final BrowserVersion browserVersion ) {
         if (browserVersion == null) {
             throw new IllegalStateException("BrowserVersion must be defined");
         }
@@ -256,7 +257,7 @@ public final class JavaScriptConfiguration {
     
     
     private Map buildUsageMap(final BrowserVersion browser) {
-        Map classMap = new HashMap(30);
+        final Map classMap = new HashMap(30);
         Node node = XmlDocument_.getDocumentElement().getFirstChild();
         while( node != null ) {
             if( node instanceof Element ) {
@@ -278,7 +279,7 @@ public final class JavaScriptConfiguration {
             }
             node = node.getNextSibling();
         }
-        return classMap;
+        return Collections.unmodifiableMap(classMap);
     }
   
     /**
@@ -662,7 +663,7 @@ public final class JavaScriptConfiguration {
      * is masquerading as.
      * FIXME - Implement the Input class processing
      * @param clazz
-     * @return
+     * @return the classname
      */
     private String getClassnameForClass(final Class clazz) {
         String name = (String) ClassnameMap_.get(clazz.getName());
