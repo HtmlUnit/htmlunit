@@ -32,6 +32,8 @@ public final class ScriptFilter extends DefaultFilter {
     private final HTMLConfiguration configuration_;
     private final HtmlPage htmlPage_;
 
+    private String scriptSource_;
+    private String scriptCharset_;
     private StringBuffer scriptBuffer_;
     private StringBuffer newContentBuffer_;
     private String systemId_;
@@ -66,6 +68,8 @@ public final class ScriptFilter extends DefaultFilter {
         throws
             XNIException {
 
+        scriptSource_ = null;
+        scriptCharset_ = null;
         scriptBuffer_ = null;
         systemId_ = locator != null ? locator.getLiteralSystemId() : null;
         scriptCount_ = 0;
@@ -93,7 +97,8 @@ public final class ScriptFilter extends DefaultFilter {
                 final String src = attrs.getValue("src");
                 final String charset = attrs.getValue("charset");
                 if( src != null && src.length() != 0 ) {
-                    htmlPage_.loadExternalJavaScriptFile(src, charset);
+                    scriptSource_ = src;
+                    scriptCharset_ = charset;
                 }
 
                 scriptBuffer_ = new StringBuffer();
@@ -163,6 +168,9 @@ public final class ScriptFilter extends DefaultFilter {
             }
 
             try {
+                if( scriptSource_ != null ) {
+                    htmlPage_.loadExternalJavaScriptFile(scriptSource_, scriptCharset_);
+                }
                 final String script = scriptBuffer_.toString();
 
                 final String result = executeScript(script);
@@ -173,6 +181,8 @@ public final class ScriptFilter extends DefaultFilter {
                 }
             }
             finally {
+                scriptSource_ = null;
+                scriptCharset_ = null;
                 scriptBuffer_ = null;
             }
         }
