@@ -47,9 +47,10 @@ import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -66,6 +67,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
  * @author  Barnaby Court
+ * @author  Chris Erskine
  */
 public class DocumentTest extends WebTestCase {
     /**
@@ -1964,4 +1966,125 @@ public class DocumentTest extends WebTestCase {
         final List expectedAlerts = Collections.singletonList("IAmTheBody");
         assertEquals(expectedAlerts, collectedAlerts);
     }    
+    
+    
+    /**
+     * Test the access to the images value.  This should return the 2 images in the document
+     * @throws Exception if the test fails
+     */
+    public void testGetImages() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var allImages = document.images;\n"
+             + "    alert(allImages.length);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<img src='firstImage' name='first'>" 
+             + "<form>" 
+             + "<img src='firstImage' name='first'>" 
+             + "</form>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList(new String[] { "2" });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+    
+    /**
+     * Test setting and reading the title for an existing title
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testSettingTitle() throws Exception {
+        final String content
+            = "<html><head><title>Bad Title</title></head>\n"
+            + "<body>\n"
+        + "<script>\n"
+        + "    document.title = 'correct title';\n"
+        + "    alert(document.title)\n"
+        + "</script>\n"
+        + "</body></html>";
+ 
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("correct title", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "correct title"
+        } );
+
+        assertEquals("Test the alert", expectedAlerts, collectedAlerts );       
+    }
+
+
+    /**
+     * Test setting and reading the title for when the is not in
+     * the page to begin
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testSettingMissingTitle() throws Exception {
+        final String content
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "    document.title = 'correct title';\n"
+            + "    alert(document.title)\n"
+            + "</script>\n"
+            + "</body></html>";
+ 
+        final List collectedAlerts = new ArrayList();
+        try {
+            loadPage(content, collectedAlerts);
+        }
+        catch (ScriptException se) {
+            if (se.getEnclosedException() instanceof IllegalStateException)
+                return;
+        }
+        fail("Should have thrown IllegalState for missing title when setting the title from JavaScript");
+      }
+
+    
+    /**
+     * Test setting and reading the title for when the is not in
+     * the page to begin
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testSettingBlankTitle() throws Exception {
+        final String content
+            = "<html><head><title></title></head>\n"
+            + "<body>\n"
+        + "<script>\n"
+        + "    document.title = 'correct title';\n"
+        + "    alert(document.title)\n"
+        + "</script>\n"
+        + "</body></html>";
+ 
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+//        assertEquals("correct title", page.getTitleText());
+        assertEquals("correct title", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "correct title"
+        } );
+
+        assertEquals("Test the alert", expectedAlerts, collectedAlerts );       
+    }
+
+    
 }

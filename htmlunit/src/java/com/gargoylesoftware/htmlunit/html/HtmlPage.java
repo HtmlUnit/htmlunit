@@ -75,6 +75,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author David K. Taylor
  * @author Andreas Hangler
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Chris Erskine
  */
 public final class HtmlPage extends DomNode implements Page {
 
@@ -829,6 +830,35 @@ public final class HtmlPage extends DomNode implements Page {
      * @return the title of this page or an empty string if the title wasn't specified.
      */
     public String getTitleText() {
+        final HtmlTitle titleElement = getTitleElement();
+        if (titleElement != null) {
+            return titleElement.asText();
+        }
+        return "";
+    }
+    
+    /**
+     * Set the text for the title of this page.  If there is not a title element
+     * on this page, then one has to be generated.
+     * @param message The new text 
+     */
+    public void setTitleText(final String message) {
+        final HtmlTitle titleElement = getTitleElement();
+        if (titleElement == null) {
+            throw new IllegalStateException("Title element was not defined for this page");
+        }
+        else {
+            titleElement.setNodeValue(message);
+        }
+    }
+    
+        
+    /**
+     * Get the title element for this page.  Returns null if one is not found.
+     * 
+     * @return the title element for this page or null if this is not one.
+     */
+    private HtmlTitle getTitleElement() {
         final Iterator topIterator = getDocumentElement().getChildElementsIterator();
         while( topIterator.hasNext() ) {
             final HtmlElement topElement = (HtmlElement)topIterator.next();
@@ -837,14 +867,13 @@ public final class HtmlPage extends DomNode implements Page {
                 while( headIterator.hasNext() ) {
                     final HtmlElement headElement = (HtmlElement)headIterator.next();
                     if( headElement instanceof HtmlTitle ) {
-                        return headElement.asText();
+                        return (HtmlTitle) headElement;
                     }
                 }
             }
         }
-        return "";
+        return null;
     }
-
     /**
      * Return the value of the onload attribute of the enclosed body or
      * frameset.

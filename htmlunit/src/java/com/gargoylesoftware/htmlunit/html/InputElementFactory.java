@@ -50,7 +50,7 @@ import java.util.HashMap;
  */
 final class InputElementFactory implements IElementFactory {
 
-	/** The singleton instance */
+    /** The singleton instance */
     public static final InputElementFactory instance = new InputElementFactory();
 
     /* private singleton constructor */
