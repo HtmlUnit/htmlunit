@@ -420,35 +420,6 @@ public class WebClientTest extends WebTestCase {
             new URL("http://page1"), page1Content, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
-        /** A PageCreator that collects data */
-        class CollectingPageCreator implements PageCreator {
-            private final List list;
-            /**
-             * Create an instance
-             * @param list The list that will contain the data
-             */
-            public CollectingPageCreator( final List list ) {
-                this.list = list;
-            }
-            /**
-             * Create a page
-             * @param webClient The web client
-             * @param webResponse The web response
-             * @param webWindow The web window
-             * @return The new page
-             * @throws IOException If an IO problem occurs
-             */
-            public Page createPage(
-                final WebClient webClient,
-                final WebResponse webResponse,
-                final WebWindow webWindow )
-                throws IOException {
-
-                final Page page = new TextPage(webResponse, webWindow);
-                list.add(page);
-                return page;
-            }
-        }
         final List collectedPageCreationItems = new ArrayList();
         client.setPageCreator( new CollectingPageCreator(collectedPageCreationItems) );
 
@@ -463,6 +434,36 @@ public class WebClientTest extends WebTestCase {
         assertEquals( expectedPageCreationItems, collectedPageCreationItems );
     }
 
+
+    /** A PageCreator that collects data */
+    private class CollectingPageCreator implements PageCreator {
+        private final List collectedPages_;
+        /**
+         * Create an instance
+         * @param list The list that will contain the data
+         */
+        public CollectingPageCreator( final List list ) {
+            this.collectedPages_ = list;
+        }
+        /**
+         * Create a page
+         * @param webClient The web client
+         * @param webResponse The web response
+         * @param webWindow The web window
+         * @return The new page
+         * @throws IOException If an IO problem occurs
+         */
+        public Page createPage(
+            final WebClient webClient,
+            final WebResponse webResponse,
+            final WebWindow webWindow )
+            throws IOException {
+
+            final Page page = new TextPage(webResponse, webWindow);
+            collectedPages_.add(page);
+            return page;
+        }
+    }
 
     /**
      * Test loading a page with POST parameters.
