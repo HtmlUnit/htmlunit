@@ -469,7 +469,7 @@ public final class Window extends SimpleScriptable {
     }
 
     /**
-     * Does nothing
+     * Does nothing.
      * @param x The horizontal position
      * @param y The vertical position
      */
@@ -478,12 +478,64 @@ public final class Window extends SimpleScriptable {
     }
 
     /**
-     * Does nothing
+     * Does nothing.
+     * @param x The horizontal position
+     * @param y The vertical position
+     */
+    public void jsFunction_moveBy(final int x, final int y) {
+        getLog().debug( "Window.moveBy() not implemented" );
+    }
+
+    /**
+     * Does nothing.
      * @param width The width of the Window in pixel after resize.
      * @param height The height of the Window in pixel after resize.
      */
     public void jsFunction_resizeTo(final int width, final int height) {
         getLog().debug( "Window.resizeTo() not implemented" );
+    }
+
+    /**
+     * Does nothing.
+     * @param x The horizontal position to scroll to
+     * @param y The vertical position to scroll to
+     */
+    public void jsFunction_scroll(final int x, final int y) {
+        getLog().debug( "Window.scroll() not implemented" );
+    }
+
+    /**
+     * Does nothing.
+     * @param x The horizontal distance to scroll by
+     * @param y The vertical distance to scroll by
+     */
+    public void jsFunction_scrollBy(final int x, final int y) {
+        getLog().debug( "Window.scrollBy() not implemented" );
+    }
+
+    /**
+     * Does nothing.
+     * @param lines The number of lines to scroll down
+     */
+    public void jsFunction_scrollByLines(final int lines) {
+        getLog().debug( "Window.scrollByLines() not implemented" );
+    }
+
+    /**
+     * Does nothing.
+     * @param pages The number of pages to scroll down
+     */
+    public void jsFunction_scrollByPages(final int pages) {
+        getLog().debug( "Window.scrollByPages() not implemented" );
+    }
+
+    /**
+     * Does nothing.
+     * @param x The horizontal position to scroll to
+     * @param y The vertical position to scroll to
+     */
+    public void jsFunction_scrollTo(final int x, final int y) {
+        getLog().debug( "Window.scrollTo() not implemented" );
     }
 
     /**
