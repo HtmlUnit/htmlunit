@@ -747,6 +747,11 @@ public class WebClient {
 
 
     /**
+     * Expand a relative url relative to the specified base.  In most situations this
+     * is the same as <code>new URL(baseUrl, relativeUrl)</code> but there are some cases
+     * that URL doesn't handle correctly.
+     *
+     * @param  baseUrl The base url
      * @param  relativeUrl The relative url
      * @return  See above
      * @exception  MalformedURLException If an error occurred when creating a

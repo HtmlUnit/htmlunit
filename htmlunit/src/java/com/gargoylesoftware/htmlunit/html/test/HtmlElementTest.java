@@ -58,37 +58,6 @@ public class HtmlElementTest extends WebTestCase {
     }
 
 
-    /**
-     * It appears that Neko is doing too good a job of cleaning up the code.  It is putting
-     * a &lt;form&gt; tag into the document even when we hadn't specified one.
-     */
-    public void XXtestGetEnclosingForm_NotInAForm()
-        throws Exception {
-
-        final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<table><tr><td><input type='text' id='foo' value='foo'/></td></tr></table>"
-                 + "</body></html>";
-        final WebClient client = new WebClient();
-
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-            new URL( "http://www.gargoylesoftware.com" ),
-            SubmitMethod.POST, Collections.EMPTY_LIST );
-
-        final HtmlInput input = ( HtmlInput )page.getHtmlElementById( "foo" );
-        final HtmlForm form = input.getEnclosingForm();
-        if( form != null ) {
-            System.out.println("form id="+form.getIdAttribute());
-        }
-        System.out.println(page.getWebResponse().getContentAsString());
-        assertNull( input.getEnclosingForm() );
-    }
-
-
     public void testAsText_WithComments() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
