@@ -29,9 +29,9 @@ public class TopLevelWindow implements WebWindow {
      * @param webClient The web client that "owns" this window.
      */
     public TopLevelWindow( final String name, final WebClient webClient ) {
-        if( name == null ) {
-            throw new NullPointerException("name is null");
-        }
+        Assert.notNull("name", name);
+        Assert.notNull("webClient", webClient);
+
         name_ = name;
         webClient_ = webClient;
 

@@ -32,9 +32,7 @@ public class CollectingAlertHandler implements AlertHandler {
      * @param list The list to store alerts in.
      */
     public CollectingAlertHandler( final List list ) {
-        if( list == null ) {
-            throw new NullPointerException("list");
-        }
+        Assert.notNull("list",list);
         collectedAlerts_ = list;
     }
 
