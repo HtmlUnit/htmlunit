@@ -33,6 +33,9 @@
             <action type="update" dev="mbowler" due-to="Noboru Sinohara" id="716568">
                 Fixed bug in character encoding.  Patch supplied by Noboru Sinohara.
             </action>
+            <action type="update" dev="mbowler">
+                Updated NekoHTML to 0.7.5 plus a private fix for an infinite loop problem.
+            </action>
         </release>
     </body>
 
