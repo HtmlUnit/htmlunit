@@ -371,6 +371,7 @@ public final class HtmlPage
      * Create a new HTML element with the given tag name.  This may be
      * called if the page hasn't fully been loaded yet.
      *
+     * @param tagName The tag name
      * @return the new HTML element.
      */
     public HtmlElement createElement( String tagName ) {

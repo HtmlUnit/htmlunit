@@ -51,11 +51,18 @@ import java.util.Collections;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class HtmlOptionTest extends WebTestCase {
+    /**
+     * Create an instance
+     * @param name The name of the test
+     */
     public HtmlOptionTest( final String name ) {
         super(name);
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSelect() throws Exception {
 
         final String htmlContent

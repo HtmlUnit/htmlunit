@@ -61,11 +61,18 @@ import java.util.List;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class InputTest extends WebTestCase {
+    /**
+     * Create an instance
+     * @param name The name of the test.
+     */
     public InputTest( final String name ) {
         super(name);
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testStandardProperties_Text() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>"
@@ -96,6 +103,9 @@ public class InputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testTextProperties() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>"
@@ -154,6 +164,9 @@ public class InputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testCheckedAttribute_Checkbox() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>"
@@ -185,6 +198,9 @@ public class InputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testCheckedAttribute_Radio() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>"
@@ -231,6 +247,9 @@ public class InputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testDisabledAttribute() throws Exception {
         final String content
                  = "<html><head><title>foo</title><script>"
@@ -281,6 +300,9 @@ public class InputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testInputValue() throws Exception {
         final String htmlContent =
             "<html><head><title>foo</title><script>"

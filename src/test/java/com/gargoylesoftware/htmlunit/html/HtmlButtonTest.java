@@ -65,6 +65,9 @@ public class HtmlButtonTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testClick_onClick() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"

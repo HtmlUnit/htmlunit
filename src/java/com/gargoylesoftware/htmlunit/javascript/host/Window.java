@@ -377,17 +377,17 @@ public final class Window extends SimpleScriptable {
      * @return the value of window.parent
      */
     public SimpleScriptable jsGet_parent() {
-        final SimpleScriptable parent;
+        final SimpleScriptable parentProperty;
         if( webWindow_ instanceof TopLevelWindow ) {
-            parent = this;
+            parentProperty = this;
         }
         else {
             final WebWindow parentWebWindow
                 = ((HtmlElement)webWindow_).getPage().getEnclosingWindow();
-            parent = (SimpleScriptable)parentWebWindow.getScriptObject();
+            parentProperty = (SimpleScriptable)parentWebWindow.getScriptObject();
         }
 
-        return parent;
+        return parentProperty;
     }
 
 
@@ -519,6 +519,10 @@ public final class Window extends SimpleScriptable {
         return "";
     }
     
+    /**
+     * Return the value of the name property
+     * @return The name
+     */
     public String jsGet_name() {
         return webWindow_.getName();
     }

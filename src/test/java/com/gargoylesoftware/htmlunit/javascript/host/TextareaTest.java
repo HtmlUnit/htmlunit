@@ -51,11 +51,18 @@ import java.util.List;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class TextareaTest extends WebTestCase {
+    /**
+     * Create an instance
+     * @param name The name of the test
+     */
     public TextareaTest( final String name ) {
         super(name);
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetValue() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title><script>"

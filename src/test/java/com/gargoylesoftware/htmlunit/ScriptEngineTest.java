@@ -53,6 +53,10 @@ import java.util.List;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class ScriptEngineTest extends WebTestCase {
+    /**
+     * Create an instance
+     * @param name The name of the test
+     */
     public ScriptEngineTest( final String name ) {
         super(name);
     }

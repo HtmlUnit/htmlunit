@@ -360,6 +360,9 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetAllOptions()
         throws Exception {
 
@@ -396,6 +399,9 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSelect_OptionMultiple_NoValueOnAttribute() throws Exception {
 
         final String htmlContent
@@ -422,6 +428,9 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetOptionByValue_TwoOptionsWithSameValue() throws Exception {
 
         final String htmlContent
@@ -452,6 +461,9 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSelect_SetSelected_OnChangeHandler()
         throws Exception {
 

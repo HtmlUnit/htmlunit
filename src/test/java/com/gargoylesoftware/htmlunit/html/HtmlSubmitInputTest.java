@@ -66,6 +66,9 @@ public class HtmlSubmitInputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSubmit() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
@@ -95,6 +98,9 @@ public class HtmlSubmitInputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testClick_onClick() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
@@ -124,6 +130,9 @@ public class HtmlSubmitInputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testClick_onClick_JavascriptReturnsTrue() throws Exception {
 
         final String firstContent

@@ -65,6 +65,9 @@ public class HtmlIsIndexTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testFormSubmission()
         throws Exception {
         final String htmlContent

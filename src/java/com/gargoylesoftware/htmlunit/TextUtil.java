@@ -97,7 +97,9 @@ public final class TextUtil {
     /**
      * Convert a string into an input stream.
      * @param content The string
+     * @param encoding The encoding to use when converting the string to a stream.
      * @return The resulting input stream.
+     * @throws UnsupportedEncodingException If the encoding is not supported.
      */
     public static InputStream toInputStream( 
             final String content, 

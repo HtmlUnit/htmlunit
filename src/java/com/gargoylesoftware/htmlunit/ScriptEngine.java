@@ -116,7 +116,7 @@ public abstract class ScriptEngine {
      * @param javaScriptFunction The function to call.
      * @param thisObject The this object for class method calls.
      * @param args The list of arguments to pass to the function.
-     * @param htmlElement The html element that will act as the context.
+     * @param htmlElementScope The html element that will act as the context.
      * @return The result of the function call.
      */
     public abstract Object callFunction(

@@ -61,6 +61,9 @@ public class HtmlElementTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetEnclosingForm()
         throws Exception {
 
@@ -85,6 +88,9 @@ public class HtmlElementTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testAsText_WithComments() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
@@ -104,6 +110,8 @@ public class HtmlElementTest extends WebTestCase {
     }
 
 
+    /**
+     */
     public void testConstants() {
         assertEquals( "", HtmlElement.ATTRIBUTE_NOT_DEFINED );
         assertEquals( "", HtmlElement.ATTRIBUTE_VALUE_EMPTY );

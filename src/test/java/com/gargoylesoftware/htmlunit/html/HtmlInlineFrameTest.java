@@ -61,6 +61,9 @@ public class HtmlInlineFrameTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSetSrcAttribute() throws Exception {
         final String firstContent
                  = "<html><head><title>First</title></head><body>"
@@ -95,6 +98,9 @@ public class HtmlInlineFrameTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSetSrcAttribute_ViaJavaScript() throws Exception {
         if( false ) {
             notImplemented();

@@ -135,6 +135,9 @@ public final class TextUtilTest extends WebTestCase {
         }
     }
     
+    /**
+     * @throws Exception if the test fails
+     */
     public void testToInputStream_null() throws Exception {
         try {
             TextUtil.toInputStream(null);
@@ -146,6 +149,9 @@ public final class TextUtilTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testToInputStream() throws Exception {
         final String[][] data = {
             {"", null},

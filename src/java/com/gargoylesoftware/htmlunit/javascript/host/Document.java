@@ -274,6 +274,7 @@ public final class Document extends HTMLElement {
     /**
      * Create a new HTML element with the given tag name.
      *
+     * @param tagName The tag name
      * @return the new HTML element, or NOT_FOUND if the tag is not supported.
      */
     public Object jsFunction_createElement( final String tagName ) {

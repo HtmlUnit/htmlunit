@@ -63,7 +63,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name
+     * @param  name The name of the test
      */
     public HtmlPageTest( final String name ) {
         super( name );
@@ -71,7 +71,7 @@ public class HtmlPageTest extends WebTestCase {
 
 
     /**
-     * @exception  Exception
+     * @exception  Exception If the test fails
      */
     public void testConstructor()
         throws Exception {
@@ -102,7 +102,7 @@ public class HtmlPageTest extends WebTestCase {
 
 
     /**
-     * @exception  Exception
+     * @throws Exception if the test fails
      */
     public void testGetInputByName()
         throws Exception {
@@ -138,7 +138,7 @@ public class HtmlPageTest extends WebTestCase {
 
 
     /**
-     * @exception  Exception
+     * @throws Exception if the test fails
      */
     public void testFormSubmit()
         throws Exception {
@@ -190,7 +190,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      *  Test getHtmlElement() for all elements that can be loaded
      *
-     * @exception  Exception
+     * @throws Exception if the test fails
      */
     public void testGetHtmlElement()
         throws Exception {
@@ -281,6 +281,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetTabbableElements_None()
         throws Exception {
 
@@ -305,6 +308,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetTabbableElements_OneEnabled_OneDisabled()
         throws Exception {
 
@@ -334,6 +340,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetTabbableElements()
         throws Exception {
 
@@ -384,6 +393,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetHtmlElementByAccessKey()
         throws Exception {
 
@@ -417,6 +429,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetHtmlElementsByAccessKey()
         throws Exception {
 
@@ -446,6 +461,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testAssertAllIdAttributesUnique()
         throws Exception {
 
@@ -477,6 +495,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testAssertAllIdAttributesUnique_Duplicates()
         throws Exception {
 
@@ -515,6 +536,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testAssertAllAccessKeyAttributesUnique()
         throws Exception {
 
@@ -546,6 +570,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testAssertAllAccessKeyAttributesUnique_Duplicates()
         throws Exception {
 
@@ -584,6 +611,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testAssertAllTabIndexAttributesSet()
         throws Exception {
 
@@ -617,6 +647,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testAssertAllTabIndexAttributesSet_SomeMissing()
         throws Exception {
 
@@ -657,6 +690,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testAssertAllTabIndexAttributesSet_BadValue()
         throws Exception {
 
@@ -697,6 +733,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetFullQualifiedUrl_NoBaseSpecified() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
@@ -744,6 +783,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetFullQualifiedUrl_WithBase() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title><base href='http://second'></head><body>"
@@ -774,6 +816,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testOnLoadHandler_BodyStatement() throws Exception {
         final String content
                  = "<html><head><title>foo</title>"
@@ -792,6 +837,7 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * Regression test for bug 713646
+     * @throws Exception if the test fails
      */
     public void testOnLoadHandler_BodyName() throws Exception {
         final String content
@@ -811,6 +857,7 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * Regression test for bug 713646
+     * @throws Exception if the test fails
      */
     public void testOnLoadHandler_BodyName_NotAFunction() throws Exception {
         final String content =
@@ -831,6 +878,7 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * Regression test for window.onload property
+     * @throws Exception if the test fails
      */
     public void testOnLoadHandler_BodyNameRead() throws Exception {
         final String content
@@ -854,6 +902,7 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * Regression test for window.onload property
+     * @throws Exception if the test fails
      */
     public void testOnLoadHandler_ScriptName() throws Exception {
         final String content
@@ -875,6 +924,7 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * Regression test for window.onload property
+     * @throws Exception if the test fails
      */
     public void testOnLoadHandler_ScriptNameRead() throws Exception {
         final String content
@@ -895,6 +945,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testEmbeddedMetaTag_Regression() throws Exception {
 
         final String content
@@ -918,6 +971,9 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetPageEncoding() throws Exception {
 
         final String content
@@ -949,6 +1005,9 @@ public class HtmlPageTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetAllForms() throws Exception {
 
         final String content

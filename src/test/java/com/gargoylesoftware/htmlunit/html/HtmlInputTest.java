@@ -111,6 +111,9 @@ public final class HtmlInputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSetChecked_CheckBox()
         throws Exception {
 
@@ -141,6 +144,9 @@ public final class HtmlInputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetChecked_RadioButton()
         throws Exception {
 
@@ -170,6 +176,9 @@ public final class HtmlInputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testOnChangeHandler() throws Exception {
 
         final String htmlContent
@@ -198,6 +207,9 @@ public final class HtmlInputTest extends WebTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     public void testCheckboxDefaultValue() throws Exception {
 
         final String htmlContent

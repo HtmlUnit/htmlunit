@@ -55,17 +55,17 @@ public class HtmlInput
          extends HtmlElement
          implements SubmittableElement {
 
-	  //For Checkbox, radio
-	  private final boolean initialCheckedState_;
+    //For Checkbox, radio
+    private final boolean initialCheckedState_;
 
-	  //for Hidden, password
-	  private final String initialValue_;
+    //for Hidden, password
+    private final String initialValue_;
 
-	  //For Image
-	  private boolean wasPositionSpecified_ = false;
-	  private boolean processingClick_ = false;
-	  private int xPosition_;
-	  private int yPosition_;
+    //For Image
+    private boolean wasPositionSpecified_ = false;
+    private boolean processingClick_ = false;
+    private int xPosition_;
+    private int yPosition_;
 
     /**
      *  Create an instance
