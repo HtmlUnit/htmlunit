@@ -181,6 +181,11 @@
         <param name="project" value="saxpath"/>
         <param name="jarName" value="saxpath-1.0-FCS.jar"/>
     </antcall>
+    <antcall target="get-dependency">
+        <param name="type" value="required"/>
+        <param name="project" value="commons-io"/>
+        <param name="jarName" value="commons-io-1.0.jar"/>
+    </antcall>    
     
     <!-- optional -->
     <antcall target="get-dependency">
