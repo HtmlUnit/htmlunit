@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1085378">
+                Fixed html element property access in JS: attributes are case sensitive.
+			</action>
             <action type="update" dev="mguillem">
                 Improved JS innerHTML to allow complex html code to be set.
             </action>

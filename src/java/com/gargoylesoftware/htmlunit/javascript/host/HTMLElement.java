@@ -179,9 +179,12 @@ public class HTMLElement extends NodeImpl {
         Object result = super.get( name, start );
         if ( result == NOT_FOUND ) {
             final HtmlElement htmlElement = getHtmlElementOrNull();
-            if( htmlElement != null) {
+            // can name be an attribute of current element?
+            // first approximation: attribute are all lowercase
+            // this should be improved because it's wrong. For instance: tabIndex, hideFocus, acceptCharset
+            if ( htmlElement != null && name.toLowerCase().equals(name)) {
                 final String value = htmlElement.getAttributeValue(name);
-                if( value.length() != 0 ) {
+                if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
                     result = value;
                 }
             }
