@@ -738,5 +738,26 @@ public class HtmlPageTest extends WebTestCase {
         });
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+
+    public void testEmbeddedMetaTag() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title>"
+                 + "</head><body>"
+                 + "<table><tr><td>\n"
+                 + "<meta name=vs_targetSchema content=\"http://schemas.microsoft.com/intellisense/ie5\">"
+                 + "<form name='form1'>"
+                 + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+                 + "    <input type='text' name='textfield2' id='textfield2'/>"
+                 + "</form>"
+                 + "</td></tr></table>"
+                 + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final List expectedAlerts = Collections.EMPTY_LIST;
+        assertEquals( expectedAlerts, collectedAlerts );
+        System.out.println(page.asXml());
+    }
 }
 

@@ -11,6 +11,12 @@ package com.gargoylesoftware.htmlunit;
  * Objects of this class represent one specific version of a given browser.  Predefined
  * constants are provided for common browser versions.
  *
+ * If you wish to create a BrowserVersion for a browser that doesn't have a constant defined
+ * but aren't sure what values to pass into the constructor then point your browser at
+ * <a href="http://htmlunit.sourceforge.net/cgi-bin/browserVersion">
+ * http://htmlunit.sourceforge.net/cgi-bin/browserVersion</a>
+ * and the code will be generated for you.
+ *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
