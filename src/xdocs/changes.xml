@@ -9,6 +9,9 @@
 		<change type="change">
 			Upgraded NekoHTML to version 0.6.8
 		</change>
+		<change type="fix">
+			Changed window.open() to understand the magic name _self
+		</change>
 	</change-log>
 </section>
 
