@@ -263,7 +263,7 @@
         <dependency>
             <groupId>nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
-            <version>0.7.7</version>
+            <version>0.8.1</version>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>Converts html into an XML DOM model</htmlunit.description>

@@ -263,6 +263,9 @@
             <action type="update" dev="mbowler">
                 Fixed bug with expansion of urls that contain pound signs.
             </action>
+            <action type="update" dev="mbowler">
+                Upgraded NekoHTML to 0.8.1
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
