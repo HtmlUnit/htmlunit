@@ -251,14 +251,14 @@ public class Window extends SimpleScriptable {
                 boolean contextEntered = false;
                 try {
                     Thread.sleep(timeout);
-                    window.getLog().info("Executing timeout: " + script);
+                    window.getLog().debug("Executing timeout: " + script);
                     
                     WebWindow webWindow = window.getWebWindow(); 
                     // test that the window is always opened and the page the same 
                     if (!webWindow.getWebClient().getWebWindows().contains(webWindow)
                             || webWindow.getEnclosedPage() != page) {
                         
-                        window.getLog().info("the page that originated the setTimeout doesnt exist anymore. "
+                        window.getLog().debug("the page that originated the setTimeout doesnt exist anymore. "
                                 + "Execution cancelled.");
                         return;
                     }
