@@ -70,7 +70,7 @@ public class SimpleScriptableTest extends WebTestCase {
 
     public void testHtmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
         final Map map = SimpleScriptable.getHtmlJavaScriptMapping();
-        final String directoryName = "com/gargoylesoftware/htmlunit/javascript/host";
+        final String directoryName = "../../src/java/com/gargoylesoftware/htmlunit/javascript/host";
         final Set names = getFileNames(directoryName.replace('/', File.separatorChar));
 
         // Now pull out those names that we know don't have html equivilents

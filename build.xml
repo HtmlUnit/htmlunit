@@ -23,7 +23,7 @@
 
 
 <path id="base.class.path">
-    <pathelement path="src/java"/>
+    <pathelement path="target/classes"/>
 
     <!-- Jars for production -->
     <pathelement path="dist/lib/commons-httpclient.jar"/>
@@ -51,17 +51,26 @@
     <pathelement path="/System/Library/Frameworks/JavaVM.framework/Versions/1.4.1/Classes/classes.jar"/>
 </path>
 
+<path id="test.class.path">
+    <pathelement path="target/test-classes"/>
+</path>
+
 
 <target name="compile" description="compile">
-    <javac srcdir="src/java" destdir="src/java" debug="on" deprecation="off">
+    <javac srcdir="src/java" destdir="target/classes" debug="on" deprecation="off">
         <classpath refid="base.class.path"/>
+    </javac>
+    <javac srcdir="src/test/java" destdir="target/test-classes" debug="on" deprecation="off">
+        <classpath refid="base.class.path"/>
+        <classpath refid="test.class.path"/>
     </javac>
 </target>
 
 
 <target name="cleancompile" description="clean compile">
      <delete>
-        <fileset dir="src/java" includes="**/*.class"/>
+        <fileset dir="target/classes" includes="**/*.class"/>
+        <fileset dir="target/test-classes" includes="**/*.class"/>
     </delete>
     <antcall target="compile"/>
 </target>
@@ -69,7 +78,8 @@
 
 <target name="clean" description="clean">
      <delete>
-        <fileset dir="src/java" includes="**/*.class"/>
+        <fileset dir="target/classes" includes="**/*.class"/>
+        <fileset dir="target/test-classes" includes="**/*.class"/>
     </delete>
     <delete dir="build/${version}"/>
     <delete file="dist/projectdocs.zip"/>
@@ -253,9 +263,10 @@
 
 
 <target name="junit" description="junit">
-    <java fork="true" classname="junit.textui.TestRunner" dir="src/test/java">
-        <arg value="com.gargoylesoftware.htmlunit.test.MainTestSuite"/>
+    <java fork="true" classname="junit.textui.TestRunner" dir="target/test-classes">
+        <arg value="com.gargoylesoftware.htmlunit.MainTestSuite"/>
         <classpath refid="base.class.path"/>
+        <classpath refid="test.class.path"/>
     </java>
 </target>
 
@@ -271,6 +282,7 @@
 <target name="SanityCheck" description="DO NOT RUN THIS TASK">
     <java fork="yes" classname="com.gargoylesoftware.htmlunit.test.SanityCheck" dir="src/java">
         <classpath refid="base.class.path"/>
+        <classpath refid="test.class.path"/>
     </java>
 </target>
 
