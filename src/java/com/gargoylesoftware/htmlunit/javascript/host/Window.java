@@ -319,7 +319,7 @@ public class Window extends SimpleScriptable {
             final HtmlPage page = (HtmlPage)webWindow_.getEnclosedPage();
             final URL url = page.getFullyQualifiedUrl(newLocation);
             
-            getLog().info("window.location=" + newLocation);
+            getLog().debug("window.location=" + newLocation);
 
             webWindow_.getWebClient().getPage(
                 webWindow_, url, SubmitMethod.GET, Collections.EMPTY_LIST );
