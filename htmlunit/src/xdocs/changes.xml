@@ -1,6 +1,15 @@
 <?xml version="1.0"?>
 <document title="Change History">
 
+<section title="1.1-final">
+	<change-log>
+		<change type="fix">
+			Fixed bug where calling WebClient.open() would open a new top level window every time.
+		</change>
+	</change-log>
+</section>
+
+
 <section title="1.1-rc1">
 	<change-log>
 		<change type="change">
