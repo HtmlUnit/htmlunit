@@ -125,4 +125,22 @@ public class Option extends HTMLElement {
     public void jsSet_text( String newText ) {
         ((HtmlOption)getHtmlElementOrDie()).setLabelAttribute( newText );
     }
+
+    /**
+     * Return the value of the "selected" property
+     * @return The text property
+     */
+    public boolean jsGet_selected() {
+        final HtmlOption htmlOption = (HtmlOption) getHtmlElementOrDie();
+        return htmlOption.isSelected();
+    }
+
+
+    /**
+     * Set the value of the "selected" property
+     * @param selected The new selected property
+     */
+    public void jsSet_selected( final boolean selected ) {
+        ((HtmlOption)getHtmlElementOrDie()).setSelected( selected );
+    }
 }

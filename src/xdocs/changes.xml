@@ -7,10 +7,13 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="mguillem" id="1072996">
+                Added support for getting and setting option.selected in javascript.
+            </action>
             <action type="update" dev="mguillem">
                 Fixed bug where a NullPointerException is thrown when leaving a page containing an iframe without src attribute.
             </action>
-            <action type="update" dev="mguillem" due-to="Dierk Koenig" id="1068672">
+            <action type="add" dev="mguillem" due-to="Dierk Koenig" id="1068672">
                 Added support for window.resizeTo.
             </action>
             <action type="update" dev="mguillem" id="1068667">
