@@ -437,7 +437,7 @@ public abstract class HtmlElement extends DomNode {
 
         while(iterator.hasNext()) {
             HtmlElement next = iterator.nextElement();
-            if(next.getNodeName().equals(elementName)) {
+            if(next.getTagName().equals(elementName)) {
                 String attValue = next.getAttributeValue(attributeName);
                 if(attValue != null && attValue.equals(attributeValue)) {
                     list.add(next);
@@ -461,7 +461,7 @@ public abstract class HtmlElement extends DomNode {
 
         while(iterator.hasNext()) {
             HtmlElement next = iterator.nextElement();
-            if(acceptableTagNames.contains(next.getNodeName())) {
+            if(acceptableTagNames.contains(next.getTagName())) {
                 list.add(next);
             }
         }
@@ -482,7 +482,7 @@ public abstract class HtmlElement extends DomNode {
 
         while(iterator.hasNext()) {
             HtmlElement next = iterator.nextElement();
-            if(tagName.equals(next.getNodeName())) {
+            if(tagName.equals(next.getTagName())) {
                 list.add(next);
             }
         }

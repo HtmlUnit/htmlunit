@@ -123,12 +123,12 @@ public class HtmlSelectTest extends WebTestCase {
      *
      * @exception  Exception If the test fails
      */
-    public void testSelect_NoOptionsSelected()
+    public void testSelect_MultipleSelectNoneSelected()
         throws Exception {
 
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'><select name='select1'>"
+                 + "<form id='form1'><select name='select1' multiple>"
                  + "<option value='option1'>Option1</option>"
                  + "<option value='option2'>Option2</option>"
                  + "<option value='option3'>Option3</option>"
@@ -267,16 +267,16 @@ public class HtmlSelectTest extends WebTestCase {
 
 
     /**
-     *  Test changing the selected option
+     *  Test multiple selected options on multiple select lists
      *
      * @exception  Exception If the test fails
      */
-    public void testSelect_MultipleOptionsSelected()
+    public void testSelect_MultipleSelectMultipleSelected()
         throws Exception {
 
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'><select name='select1'>"
+                 + "<form id='form1'><select name='select1' multiple>"
                  + "<option value='option1' selected='selected'>Option1</option>"
                  + "<option value='option2'>Option2</option>"
                  + "<option value='option3' selected='selected'>Option3</option>"
@@ -302,6 +302,79 @@ public class HtmlSelectTest extends WebTestCase {
         assertEquals( expected, select.getSelectedOptions() );
     }
 
+
+    /**
+     * Test multiple selected options on single select lists. This is erroneous HTML, but
+     * browsers simply use the last option.
+     *
+     * @exception  Exception If the test fails
+     */
+    public void testSelect_SingleSelectMultipleSelected()
+        throws Exception {
+
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<form id='form1'><select name='select1'>"
+                 + "<option value='option1' selected='selected'>Option1</option>"
+                 + "<option value='option2'>Option2</option>"
+                 + "<option value='option3' selected='selected'>Option3</option>"
+                 + "</select>"
+                 + "<input type='submit' name='button' value='foo'/>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://www.gargoylesoftware.com" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+
+        final HtmlSelect select = ( HtmlSelect )form.getSelectsByName( "select1" ).get( 0 );
+        final List expected = new ArrayList();
+        expected.add( select.getOptionByValue( "option3" ) );
+
+        assertEquals( expected, select.getSelectedOptions() );
+    }
+
+
+    /**
+     * Test no selected options on single select lists. This is erroneous HTML, but
+     * browsers simply assume the first one to be selected
+     *
+     * @exception  Exception If the test fails
+     */
+    public void testSelect_SingleSelectNoneSelected()
+        throws Exception {
+
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<form id='form1'><select name='select1'>"
+                 + "<option value='option1'>Option1</option>"
+                 + "<option value='option2'>Option2</option>"
+                 + "<option value='option3'>Option3</option>"
+                 + "</select>"
+                 + "<input type='submit' name='button' value='foo'/>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://www.gargoylesoftware.com" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+
+        final HtmlSelect select = ( HtmlSelect )form.getSelectsByName( "select1" ).get( 0 );
+        final List expected = new ArrayList();
+        expected.add( select.getOptionByValue( "option1" ) );
+
+        assertEquals( expected, select.getSelectedOptions() );
+    }
 
     /**
      *  Test changing the selected option

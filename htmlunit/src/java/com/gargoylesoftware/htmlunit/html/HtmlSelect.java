@@ -85,24 +85,58 @@ public class HtmlSelect extends ClickableElement implements SubmittableElement {
     }
 
     /**
-     *  Return a List containing all of the currently selected options
+     * Return a List containing all of the currently selected options. The following special
+     * conditions can occur if the element is in single select mode:
+     * <ul>
+     * <li>if multiple options are errouneously selected, the last one is returned</li>
+     * <li>if no options are selected, the first one is returned</li>
+     * </ul>
      *
      * @return  See above
      */
     public List getSelectedOptions() {
-        final List allOptions = getAllOptions();
-        final List selectedOptions = new ArrayList( allOptions.size() );
+        List result;
 
-        final Iterator iterator = allOptions.iterator();
-        while( iterator.hasNext() ) {
-            final HtmlOption option = ( HtmlOption )iterator.next();
+        if(isMultipleSelectEnabled()) {
+            result = new ArrayList();
 
-            if( option.isSelected() ) {
-                selectedOptions.add( option );
+            DescendantElementsIterator iterator = new DescendantElementsIterator();
+            while(iterator.hasNext()) {
+                HtmlElement element = iterator.nextElement();
+                if(element instanceof HtmlOption && ((HtmlOption)element).isSelected()) {
+                    result.add(element);
+                }
             }
         }
+        else {
+            result = new ArrayList(1);
 
-        return Collections.unmodifiableList( selectedOptions );
+            HtmlOption firstOption = null;
+            HtmlOption lastOption = null;
+
+            DescendantElementsIterator iterator = new DescendantElementsIterator();
+            while(iterator.hasNext()) {
+                HtmlElement element = iterator.nextElement();
+                if(element instanceof HtmlOption) {
+                    HtmlOption option = (HtmlOption)element;
+                    if(firstOption == null) {
+                        firstOption = option; //remember in case we need it
+                    }
+                    if(option.isSelected()) {
+                        lastOption = option;
+                    }
+                }
+            }
+            if(lastOption != null) {
+                result.add(lastOption);
+            }
+            else {
+                result.add(firstOption);
+            }
+            return result;
+        }
+
+        return Collections.unmodifiableList( result );
     }
 
 

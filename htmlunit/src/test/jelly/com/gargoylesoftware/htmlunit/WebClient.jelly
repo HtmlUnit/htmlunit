@@ -47,7 +47,7 @@
 	    </h:webClient>
 	    
         <h:getPage method="get" var="page1" uri="http://first" webclient="webClient1"/>
-        <h:select var="title" xpath="string($page1/head/title)"/>
+        <h:select var="title" xpath="string($page1/html/head/title)"/>
         <test:assertEquals expected="first" actual="${title}"/>
     </test:case>
 
