@@ -217,6 +217,12 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </function>
+        <function name="addBehavior">
+            <browser name="Microsoft Internet Explorer" min-version="5"/>
+        </function>
+        <function name="removeBehavior">
+            <browser name="Microsoft Internet Explorer" min-version="5"/>
+        </function>
     </class>
 
     <class name="Image" extends="Input">

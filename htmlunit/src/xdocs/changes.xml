@@ -8,6 +8,9 @@
     <body>
         <release version="next" date="unknown">
             <action type="update" dev="mguillem" due-to="sdanig" id="1081544">
+                Implemented IE specific behavior related methods as well as default behavior "#default#homePage".
+            </action>
+            <action type="update" dev="mguillem" due-to="sdanig" id="1081544">
                 Implemented screen methods.
             </action>
             <action type="update" dev="mguillem" due-to="sdanig" id="1082509">
