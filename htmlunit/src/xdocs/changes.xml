@@ -65,6 +65,11 @@
 			Fixed bug in HtmlSelect.getOptionByValue() where searching for the option would
 			start at the top of the page instead of at the select.
 		</change>
+		<change type="change">
+			Applied patches to NekoHTML to fix problems with script tags and isindex
+			tags.  Thanks to Andy Clark (author of NekoHTML) for extremely quick
+			responses to bug reports.
+		</change>
 	</change-log>
 </section>
 
