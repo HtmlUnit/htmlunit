@@ -711,7 +711,8 @@ public final class HtmlPage
      * @param wrapSourceInFunction True if this snippet of code should be placed inside
      * a javascript function.  This is neccessary for intrinsic event handlers that may
      * try to return a value.
-     * @return A page
+     * @return A ScriptResult which will contain both the current page (which may be different than
+     * the previous page and a javascript result object.
      */
     public ScriptResult executeJavaScriptIfPossible(
         String sourceCode, final String sourceName, final boolean wrapSourceInFunction,
