@@ -9,29 +9,31 @@
     </properties>
 
     <body>
-        <menu name="Misc Project docs">
-            <item name="Building from CVS" href="/buildingFromCvs.html"/>
-            <item name="Changes" href="/changes.html"/>
-            <item name="Coding conventions" href="/codingConventions.html"/>
-            <item name="FAQ" href="/faq.html"/>
-            <item name="Getting started" href="/gettingStarted.html"/>
-            <item name="Tool support" href="/ide.html"/>
-            <item name="License" href="/license.html"/>
-            <item name="Logging" href="/logging.html"/>
-            <item name="Submitting patches" href="/submittingPatches.html"/>
-            <item name="TODO" href="/todo.html"/>
-        </menu>
         <menu name="SourceForge.net">
             <item
                 name="SourceForge project page"
-                href="http://www.sourceforge.net/projects/gsbase"
+                href="http://www.sourceforge.net/projects/htmlunit"
                 img="http://sourceforge.net/sflogo.php?group_id=47038&amp;type=2"/>
+                <!-- Verify link above - that one is likely for gsbase -->
             <item name="Download" href="http://sourceforge.net/project/showfiles.php?group_id=47038"/>
         </menu>
-        <menu name="HOW-TO">
+        <menu name="How do I...">
+            <item name="Getting started" href="/gettingStarted.html"/>
             <item name="Keyboard" href="/keyboard-howto.html"/>
             <item name="Tables" href="/table-howto.html"/>
             <item name="Window" href="/window-howto.html"/>
+        </menu>
+        <menu name="User docs">
+            <item name="Tool support" href="/ide.html"/>
+            <item name="Logging" href="/logging.html"/>
+            <item name="FAQ" href="/faq.html"/>
+        </menu>
+        <menu name="Developer docs">
+            <item name="Building from CVS" href="/buildingFromCvs.html"/>
+            <item name="Coding conventions" href="/codingConventions.html"/>
+            <item name="Submitting patches" href="/submittingPatches.html"/>
+            <item name="JavaScript engine" href="/javascript.html"/>
+            <item name="TODO" href="/todo.html"/>
         </menu>
     </body>
 </project>
