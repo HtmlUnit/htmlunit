@@ -23,6 +23,15 @@
 			predefined property in Form (ie id or action).  Fixed so that a warning is printed
 			out but page load continues.
 		</change>
+		<change type="new">
+			Added support for the javascript method Window.confirm()
+		</change>
+		<change type="new">
+			New class ConfirmHandler
+		</change>
+		<change type="new">
+			New method WebClient.setConfirmHandler()
+		</change>
 	</change-log>
 </section>
 

@@ -542,11 +542,19 @@ public class WebClient {
     }
 
 
+    /**
+     * Set the handler that will be executed when the javascript method Window.confirm() is called.
+     * @param handler The new handler or null if no handler is to be used.
+     */
     public void setConfirmHandler( final ConfirmHandler handler ) {
         confirmHandler_ = handler;
     }
 
 
+    /**
+     * Return the confirm handler.
+     * @return the confirm handler or null if one hasn't been set.
+     */
     public ConfirmHandler getConfirmHandler() {
         return confirmHandler_;
     }
