@@ -56,10 +56,12 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  *
  * @version  $Revision$
  * @author Marc Guillemot
+ * @author Mike Bowler
  * @see HtmlUnitXPath
  */
 class NodeRelativeNavigator extends DocumentNavigator {
     
+    private static final long serialVersionUID = 3833748784969691447L;
     private final DomNode rootNode_;
 
     /**
