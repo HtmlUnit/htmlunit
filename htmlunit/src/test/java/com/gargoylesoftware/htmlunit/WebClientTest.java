@@ -596,7 +596,7 @@ public class WebClientTest extends WebTestCase {
         assertEquals( "next", element, page.tabToNextElement() );
         assertEquals( "nextAgain", element, page.tabToNextElement() );
 
-        webClient.moveFocusToElement(null);
+        webClient.getElementWithFocus().blur();
         assertNull( "original", webClient.getElementWithFocus() );
 
         assertEquals( "previous", element, page.tabToPreviousElement() );
@@ -671,26 +671,6 @@ public class WebClientTest extends WebTestCase {
         final List expectedAlerts = Arrays.asList( new String[]{
             "focus-2", "blur-2", "focus-1", "blur-1", "focus-0"
         } );
-        assertEquals( expectedAlerts, collectedAlerts );
-    }
-
-
-    /**
-     * Test moving the focus to an element that isn't tabbable.
-     * @throws Exception If something goes wrong.
-     */
-    public void testMoveFocusToElement_NotTabbableElement() throws Exception {
-        final WebClient webClient = new WebClient();
-        final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
-        final HtmlElement element = page.getHtmlElementById("div1");
-
-        assertFalse( webClient.moveFocusToElement(element) );
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
-
-        final List expectedAlerts = Arrays.asList( new String[]{} );
         assertEquals( expectedAlerts, collectedAlerts );
     }
 

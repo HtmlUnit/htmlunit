@@ -102,7 +102,9 @@ public class SimpleScriptableTest extends WebTestCase {
                 URL_GARGOYLE,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals("foo", page.getTitleText());
-
+        assertEquals("focus not changed to textfield1",
+                     page.getFormByName("form1").getInputByName("textfield1"),
+                     page.getWebClient().getElementWithFocus());
         assertEquals( expectedAlerts, collectedAlerts );
     }
 

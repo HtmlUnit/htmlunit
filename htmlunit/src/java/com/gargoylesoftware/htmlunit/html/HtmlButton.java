@@ -51,7 +51,7 @@ import java.util.Map;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class HtmlButton extends ClickableElement implements SubmittableElement {
+public class HtmlButton extends FocusableElement implements SubmittableElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "button";

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2003 Gargoyle Software Inc. All rights reserved.
+ * Copyright (c) 2004 Gargoyle Software Inc. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -35,54 +35,41 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.html;
+
+import java.util.Map;
+
 
 
 /**
- * The javascript object that represents an anchor
+ * An element that can have focus and onblur/onfocus events.
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
+ * @author David D. Kilzer
+ * @version $Revision$
  */
-public class Anchor extends FocusableHostElement {
+public abstract class FocusableElement extends ClickableElement {
 
     /**
-     * Create an instance.
+     * @see ClickableElement
      */
-    public Anchor() {
+    public FocusableElement(HtmlPage page, Map attributes) {
+        super(page, attributes);
     }
 
 
     /**
-     * Javascript constructor.  This must be declared in every javascript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
+     * Remove focus from this element.
      */
-    public void jsConstructor() {
-    }
- 
-    /**
-     * Set the href property.
-     * @param href href attribute value.
-     */
-    public void jsSet_href( final String href ) {
-        getHtmlElementOrDie().setAttributeValue( "href", href );
+    public void blur() {
+        getPage().getWebClient().moveFocusFromElement(this);
     }
 
-    /**
-     * Return the value of the href property.
-     * @return The href property.
-     */
-    public String jsGet_href() {
-        return getHtmlElementOrDie().getAttributeValue( "href" );
-    }
 
     /**
-     * Gets the specified property.
-     * @param attibuteName attribute name.
-     * @return The value of the specified attribute
+     * Set the focus to this element.
      */
-    public String jsFunction_getAttribute(String attibuteName) {
-        return getHtmlElementOrDie().getAttributeValue(attibuteName);
+    public void focus() {
+        getPage().getWebClient().moveFocusToElement(this);
     }
+
 }

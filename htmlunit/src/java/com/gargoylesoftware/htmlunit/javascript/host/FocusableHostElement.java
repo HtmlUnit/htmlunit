@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2003 Gargoyle Software Inc. All rights reserved.
+ * Copyright (c) 2004 Gargoyle Software Inc. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -37,52 +37,33 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.FocusableElement;
+
+
 
 /**
- * The javascript object that represents an anchor
+ * An abstract base class for javascript objects that implement blur() and focus().
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
+ * @author David D. Kilzer
+ * @version $Revision$
  */
-public class Anchor extends FocusableHostElement {
+public class FocusableHostElement extends HTMLElement {
 
     /**
-     * Create an instance.
+     * Remove focus from this element.
      */
-    public Anchor() {
+    public void jsFunction_blur() {
+        FocusableElement element = (FocusableElement) getDomNodeOrDie();
+        element.blur();
     }
 
 
     /**
-     * Javascript constructor.  This must be declared in every javascript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
+     * Set the focus to this element.
      */
-    public void jsConstructor() {
-    }
- 
-    /**
-     * Set the href property.
-     * @param href href attribute value.
-     */
-    public void jsSet_href( final String href ) {
-        getHtmlElementOrDie().setAttributeValue( "href", href );
+    public void jsFunction_focus() {
+        FocusableElement element = (FocusableElement) getDomNodeOrDie();
+        element.focus();
     }
 
-    /**
-     * Return the value of the href property.
-     * @return The href property.
-     */
-    public String jsGet_href() {
-        return getHtmlElementOrDie().getAttributeValue( "href" );
-    }
-
-    /**
-     * Gets the specified property.
-     * @param attibuteName attribute name.
-     * @return The value of the specified attribute
-     */
-    public String jsFunction_getAttribute(String attibuteName) {
-        return getHtmlElementOrDie().getAttributeValue(attibuteName);
-    }
 }

@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class Input extends HTMLElement {
+public class Input extends FocusableHostElement {
 
     /**
      *  Create an instance.
@@ -153,22 +153,6 @@ public class Input extends HTMLElement {
             getLog().warn( "Input.jsGet_checked() was called for class " + getClass().getName() );
             return false;
         }
-    }
-
-
-    /**
-     * Set the focus to this element.
-     */
-    public void jsFunction_focus() {
-        getLog().debug( "Input.jsFunction_focus() not implemented" );
-    }
-
-
-    /**
-     * Remove focus from this element
-     */
-    public void jsFunction_blur() {
-        getLog().debug( "Input.jsFunction_blur() not implemented" );
     }
 
 

@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
+import java.util.Iterator;
 
 /**
  * Wrapper for the html element "label".
@@ -47,7 +48,7 @@ import java.util.Map;
  * @author  David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public class HtmlLabel extends ClickableElement {
+public class HtmlLabel extends FocusableElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "label";
@@ -118,5 +119,48 @@ public class HtmlLabel extends ClickableElement {
      */
     public final String getOnBlurAttribute() {
         return getAttributeValue("onblur");
+    }
+
+
+    /**
+     * Remove focus from this element.
+     */
+    public void blur() {
+        FocusableElement element = getReferencedElement();
+        if (element != null) {
+            element.blur();
+        }
+    }
+
+
+    /**
+     * Set the focus to this element.
+     */
+    public void focus() {
+        FocusableElement element = getReferencedElement();
+        if (element != null) {
+            element.focus();
+        }
+    }
+
+
+    private FocusableElement getReferencedElement() {
+        final String elementId = getAttributeValue("for");
+        if (elementId.length() != 0) {
+            final HtmlElement element = getHtmlElementById(elementId);
+            if (element != null && element instanceof HtmlInput) {
+                return (FocusableElement) element;
+            }
+        }
+        else {
+            Iterator childIterator = getChildIterator();
+            while (childIterator.hasNext()) {
+                DomNode element = (DomNode) childIterator.next();
+                if (element instanceof HtmlInput) {
+                    return (FocusableElement) element;
+                }
+            }
+        }
+        return null;
     }
 }

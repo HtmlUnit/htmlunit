@@ -7,6 +7,14 @@
 
     <body>
         <release version="1.3-pre2" date="Not released yet">
+            <action type="update" dev="yourgod" due-to="David D. Kilzer" id="913740">
+				INCOMPATIBLE CHANGE: WebClient.moveFocusToElement() now takes a 
+				FocusableElement as it's parameter instead of an HtmlElement.
+				FocusableElement is derived from HtmlElement.
+            	Added framework for focus() and blur() as well as JavaScript support 
+            	for them on achors and inputs.
+            	Patch submitted by David D. Kilzer.
+            </action>           
             <action type="update" dev="yourgod">
 				Added support for JavaScript Element.setAttribute()
             </action>        
