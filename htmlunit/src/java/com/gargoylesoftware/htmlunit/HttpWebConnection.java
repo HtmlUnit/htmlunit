@@ -9,7 +9,6 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -68,6 +67,7 @@ public class HttpWebConnection extends WebConnection {
      * @param  parameters Any parameters
      * @param  url The url of the server
      * @param  submitMethod The submit method. Ie SubmitMethod.GET
+     * @param  requestHeaders Any headers that need to be put in the request.
      * @return  See above
      * @exception  IOException If an IO error occurs
      */
