@@ -1694,7 +1694,8 @@ public class WebClient {
             return true;
         }
 
-        if( elementWithFocus_ != null ) {
+        // blur for previous element with focus... only if it belongs to the same page
+        if( elementWithFocus_ != null && elementWithFocus_.getPage() == newElement.getPage()) {
             elementWithFocus_.blur();
         }
 

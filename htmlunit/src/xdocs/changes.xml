@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1161705">
+                Javascript: fixed infinite loop caused by onblur.
+            </action>
             <action type="update" dev="mguillem">
                 The url of a page resulting of a form submission with the GET method now contains the query parameters 
                 (which are encoded when needed according to the page's encoding).
