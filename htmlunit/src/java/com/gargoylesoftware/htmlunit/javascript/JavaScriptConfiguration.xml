@@ -100,6 +100,7 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="referrer" readable="true" writable="false"/>
+        <property name="scripts" readable="true" writable="false"/>
         <property name="title" readable="true" writable="true"/>
         <property name="URL" readable="true" writable="false"/>
         <property name="vlinkColor" readable="true" writable="false"/>

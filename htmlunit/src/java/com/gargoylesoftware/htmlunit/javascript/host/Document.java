@@ -98,6 +98,7 @@ public final class Document extends NodeImpl {
     private ElementArray forms_; // has to be a member to have equality (==) working
     private ElementArray links_; // has to be a member to have equality (==) working
     private ElementArray images_; // has to be a member to have equality (==) working
+    private ElementArray scripts_; // has to be a member to have equality (==) working
 
     /** The buffer that will be used for calls to document.write() */
     private final StringBuffer writeBuffer_ = new StringBuffer();
@@ -795,5 +796,22 @@ public final class Document extends NodeImpl {
             domain_ = newDomain;
         }
     }
+    
+    /**
+     * Return the value of the javascript attribute "scripts".
+     * @return The value of this attribute.
+     */
+    public Object jsGet_scripts() {
+        if (scripts_ == null) {
+            scripts_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            try {
+                scripts_.init(getHtmlPage(), new HtmlUnitXPath("//script"));
+            }
+            catch (final JaxenException e) {
+                throw Context.reportRuntimeError("Failed to initialize collection document.scripts: " + e.getMessage());
+            }
+        }
+        return scripts_;
+    }    
 }
 
