@@ -102,7 +102,6 @@ public class HtmlInput
             final String name = getNameAttribute();
             if( wasPositionSpecified_ == true ) {
                 return new KeyValuePair[]{
-                    new KeyValuePair( name, getValueAttribute() ),
                     new KeyValuePair( name+".x", String.valueOf(xPosition_) ),
                     new KeyValuePair( name+".y", String.valueOf(yPosition_) )
                 };
