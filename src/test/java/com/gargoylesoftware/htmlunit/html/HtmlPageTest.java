@@ -1219,7 +1219,7 @@ public class HtmlPageTest extends WebTestCase {
                  + "<a href='about:blank'>link</a>"
                  + "</body></html>";
 
-        final HtmlPage page = (HtmlPage) loadPage(content);
+        final HtmlPage page = loadPage(content);
         final HtmlAnchor link = (HtmlAnchor) page.getAnchors().get(0);
         link.click();
     }
