@@ -80,6 +80,10 @@ public abstract class HtmlElement {
     }
 
 
+    /**
+     * Set the xml element that maps to this html element. 
+     * @param element The xml element.
+     */
     protected final void setElement( final Element element ) {
         assertNotNull("element", element);
 
@@ -817,7 +821,13 @@ public abstract class HtmlElement {
     }
 
 
-    public synchronized final void addPropertyChangeListener( final PropertyChangeListener listener ) {
+    /**
+     * Add a property change listener to this element.
+     * @param listener The new listener.
+     */
+    public synchronized final void addPropertyChangeListener( 
+        final PropertyChangeListener listener ) {
+            
         assertNotNull("listener", listener);
         if( propertyChangeSupport_ == null ) {
             propertyChangeSupport_ = new PropertyChangeSupport(this);
@@ -826,7 +836,13 @@ public abstract class HtmlElement {
     }
 
 
-    public synchronized final void removePropertyChangeListener( final PropertyChangeListener listener ) {
+    /**
+     * Remove a property change listener from this element.
+     * @param listener The istener.
+     */
+    public synchronized final void removePropertyChangeListener( 
+        final PropertyChangeListener listener ) {
+            
         assertNotNull("listener", listener);
         if( propertyChangeSupport_ != null ) {
             propertyChangeSupport_.removePropertyChangeListener(listener);
@@ -834,7 +850,15 @@ public abstract class HtmlElement {
     }
 
 
-    protected synchronized final void firePropertyChange( final String propertyName, final Object oldValue, final Object newValue ) {
+    /**
+     * Fire a property change event
+     * @param propertyName The name of the property.
+     * @param oldValue The old value.
+     * @param newValue The new value.
+     */
+    protected synchronized final void firePropertyChange( 
+        final String propertyName, final Object oldValue, final Object newValue ) {
+            
         if( propertyChangeSupport_ != null ) {
             propertyChangeSupport_.firePropertyChange(propertyName, oldValue, newValue);
         }
