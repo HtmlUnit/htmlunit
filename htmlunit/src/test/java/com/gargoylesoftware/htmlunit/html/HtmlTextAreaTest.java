@@ -69,10 +69,10 @@ public class HtmlTextAreaTest extends WebTestCase {
     public void testFormSubmission_OriginalData()
         throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "<textarea name='textArea1'>foo</textarea>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<textarea name='textArea1'>foo</textarea>"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
@@ -98,10 +98,10 @@ public class HtmlTextAreaTest extends WebTestCase {
     public void testFormSubmission_NewValue()
         throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "<textarea name='textArea1'>foo</textarea>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<textarea name='textArea1'>foo</textarea>"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
@@ -123,10 +123,10 @@ public class HtmlTextAreaTest extends WebTestCase {
      */
     public void testGetText() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "<textarea name='textArea1'> foo \n bar </textarea>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<textarea name='textArea1'> foo \n bar </textarea>"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 

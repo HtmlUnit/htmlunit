@@ -68,25 +68,25 @@ public class TableTest extends WebTestCase {
     public void testTableCaptions() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>\n"
-                 + "  <table id='table_1'><caption>caption1</caption><caption>caption2</caption>\n"
-                 + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
-                 + "    <tr><td colspan='2'>cell3</td></tr>\n"
-                 + "  </table>\n"
-                 + "  <script type='text/javascript' language='JavaScript'>\n"
-                 + "  <!--\n"
-                 + "    var table = document.getElementById('table_1');\n"
-                 + "    alert(table.caption.innerHTML);\n"
-                 + "    table.deleteCaption();\n"
-                 + "    alert(table.caption.innerHTML);\n"
-                 + "    table.deleteCaption();\n"
-                 + "    alert(table.caption);\n"
-                 + "    var newCaption = table.createCaption();\n"
-                 + "    newCaption.innerHTML = 'caption3';\n"
-                 + "    alert(table.caption.innerHTML);\n"
-                 + "  // -->\n"
-                 + "  </script>\n"
-                 + "</body></html>\n";
+            = "<html><head><title>foo</title></head><body>\n"
+            + "  <table id='table_1'><caption>caption1</caption><caption>caption2</caption>\n"
+            + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
+            + "    <tr><td colspan='2'>cell3</td></tr>\n"
+            + "  </table>\n"
+            + "  <script type='text/javascript' language='JavaScript'>\n"
+            + "  <!--\n"
+            + "    var table = document.getElementById('table_1');\n"
+            + "    alert(table.caption.innerHTML);\n"
+            + "    table.deleteCaption();\n"
+            + "    alert(table.caption.innerHTML);\n"
+            + "    table.deleteCaption();\n"
+            + "    alert(table.caption);\n"
+            + "    var newCaption = table.createCaption();\n"
+            + "    newCaption.innerHTML = 'caption3';\n"
+            + "    alert(table.caption.innerHTML);\n"
+            + "  // -->\n"
+            + "  </script>\n"
+            + "</body></html>\n";
 
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
@@ -101,27 +101,27 @@ public class TableTest extends WebTestCase {
     public void testTableHeaders() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>\n"
-                 + "  <table id='table_1'>\n"
-                 + "    <thead id='thead1'><tr><td>cell1</td><td>cell2</td><td>cell3</td></tr></thead>\n"
-                 + "    <thead id='thead2'><tr><td>cell7</td><td>cell8</td><td>cell9</td></tr></thead>\n"
-                 + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
-                 + "    <tr><td colspan='2'>cell3</td></tr>\n"
-                 + "  </table>\n"
-                 + "  <script type='text/javascript' language='JavaScript'>\n"
-                 + "  <!--\n"
-                 + "    var table = document.getElementById('table_1');\n"
-                 + "    alert(table.tHead.id);\n"
-                 + "    table.deleteTHead();\n"
-                 + "    alert(table.tHead.id);\n"
-                 + "    table.deleteTHead();\n"
-                 + "    alert(table.tHead);\n"
-                 + "    var newTHead = table.createTHead();\n"
-                 + "    newTHead.id = 'thead3';\n"
-                 + "    alert(table.tHead.id);\n"
-                 + "  // -->\n"
-                 + "  </script>\n"
-                 + "</body></html>\n";
+            = "<html><head><title>foo</title></head><body>\n"
+            + "  <table id='table_1'>\n"
+            + "    <thead id='thead1'><tr><td>cell1</td><td>cell2</td><td>cell3</td></tr></thead>\n"
+            + "    <thead id='thead2'><tr><td>cell7</td><td>cell8</td><td>cell9</td></tr></thead>\n"
+            + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
+            + "    <tr><td colspan='2'>cell3</td></tr>\n"
+            + "  </table>\n"
+            + "  <script type='text/javascript' language='JavaScript'>\n"
+            + "  <!--\n"
+            + "    var table = document.getElementById('table_1');\n"
+            + "    alert(table.tHead.id);\n"
+            + "    table.deleteTHead();\n"
+            + "    alert(table.tHead.id);\n"
+            + "    table.deleteTHead();\n"
+            + "    alert(table.tHead);\n"
+            + "    var newTHead = table.createTHead();\n"
+            + "    newTHead.id = 'thead3';\n"
+            + "    alert(table.tHead.id);\n"
+            + "  // -->\n"
+            + "  </script>\n"
+            + "</body></html>\n";
 
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
@@ -136,30 +136,30 @@ public class TableTest extends WebTestCase {
     public void testTableBodies() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>\n"
-                 + "  <table id='table_1'>\n"
-                 + "    <tbody id='tbody1'>\n"
-                 + "      <tr><td>cell1</td><td>cell2</td></tr>\n"
-                 + "      <tr><td>cell3</td><td>cell4</td></tr>\n"
-                 + "    </tbody>\n"
-                 + "    <tbody id='tbody2'>\n"
-                 + "      <tr><td>cell1</td><td>cell2</td></tr>\n"
-                 + "      <tr><td>cell3</td><td>cell4</td></tr>\n"
-                 + "    </tbody>\n"
-                 + "  </table>\n"
-                 + "  <script type='text/javascript' language='JavaScript'>\n"
-                 + "    var table = document.getElementById('table_1');\n"
-                 + "    var bodies = table.tBodies;\n"
-                 + "    alert(bodies.length);\n"
-                 + "    alert(bodies == table.tBodies);\n"
-                 + "    var body1 = table.tBodies[0];\n"
-                 + "    var body2 = table.tBodies[1];\n"
-                 + "    alert(table.rows.length + ' ' + body1.rows.length + ' ' + body2.rows.length);\n"
-                 + "    table.insertRow(-1); // Should add at end, to body2.\n"
-                 + "    body1.insertRow(-1); // Add one to body1, as well.\n"
-                 + "    alert(table.rows.length + ' ' + body1.rows.length + ' ' + body2.rows.length);\n"
-                 + "  </script>\n"
-                 + "</body></html>\n";
+            = "<html><head><title>foo</title></head><body>\n"
+            + "  <table id='table_1'>\n"
+            + "    <tbody id='tbody1'>\n"
+            + "      <tr><td>cell1</td><td>cell2</td></tr>\n"
+            + "      <tr><td>cell3</td><td>cell4</td></tr>\n"
+            + "    </tbody>\n"
+            + "    <tbody id='tbody2'>\n"
+            + "      <tr><td>cell1</td><td>cell2</td></tr>\n"
+            + "      <tr><td>cell3</td><td>cell4</td></tr>\n"
+            + "    </tbody>\n"
+            + "  </table>\n"
+            + "  <script type='text/javascript' language='JavaScript'>\n"
+            + "    var table = document.getElementById('table_1');\n"
+            + "    var bodies = table.tBodies;\n"
+            + "    alert(bodies.length);\n"
+            + "    alert(bodies == table.tBodies);\n"
+            + "    var body1 = table.tBodies[0];\n"
+            + "    var body2 = table.tBodies[1];\n"
+            + "    alert(table.rows.length + ' ' + body1.rows.length + ' ' + body2.rows.length);\n"
+            + "    table.insertRow(-1); // Should add at end, to body2.\n"
+            + "    body1.insertRow(-1); // Add one to body1, as well.\n"
+            + "    alert(table.rows.length + ' ' + body1.rows.length + ' ' + body2.rows.length);\n"
+            + "  </script>\n"
+            + "</body></html>\n";
 
         final List expectedAlerts = Arrays.asList(new String[] { "2", "true", "4 2 2", "6 3 3" });
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
@@ -176,24 +176,24 @@ public class TableTest extends WebTestCase {
     public void testTableRows() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>\n"
-                 + "  <table id='table_1'>\n"
-                 + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
-                 + "    <tr><td colspan='2'>cell3</td></tr>\n"
-                 + "  </table>\n"
-                 + "  <script type='text/javascript' language='JavaScript'>\n"
-                 + "  <!--\n"
-                 + "    var table = document.getElementById('table_1');\n"
-                 + "    var rows = table.rows;\n"
-                 + "    alert(rows.length);\n"
-                 + "    alert(rows == table.rows);\n"
-                 + "    table.insertRow(1);\n"
-                 + "    alert(rows.length);\n"
-                 + "    table.deleteRow(1);\n"
-                 + "    alert(rows.length);\n"
-                 + "  // -->\n"
-                 + "  </script>\n"
-                 + "</body></html>\n";
+            = "<html><head><title>foo</title></head><body>\n"
+            + "  <table id='table_1'>\n"
+            + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
+            + "    <tr><td colspan='2'>cell3</td></tr>\n"
+            + "  </table>\n"
+            + "  <script type='text/javascript' language='JavaScript'>\n"
+            + "  <!--\n"
+            + "    var table = document.getElementById('table_1');\n"
+            + "    var rows = table.rows;\n"
+            + "    alert(rows.length);\n"
+            + "    alert(rows == table.rows);\n"
+            + "    table.insertRow(1);\n"
+            + "    alert(rows.length);\n"
+            + "    table.deleteRow(1);\n"
+            + "    alert(rows.length);\n"
+            + "  // -->\n"
+            + "  </script>\n"
+            + "</body></html>\n";
 
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
@@ -259,7 +259,7 @@ public class TableTest extends WebTestCase {
         loadPage(htmlContent, collectedAlerts);
         
         final List expectedAlerts = Arrays.asList(new String[] {"2", "true", "8 2 2 2 2",
-                "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3"});
+            "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3"});
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -269,27 +269,27 @@ public class TableTest extends WebTestCase {
     public void testTableFooters() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>\n"
-                 + "  <table id='table_1'>\n"
-                 + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
-                 + "    <tr><td colspan='2'>cell3</td></tr>\n"
-                 + "    <tfoot id='tfoot1'><tr><td>cell1</td><td>cell2</td><td>cell3</td></tr></tfoot>\n"
-                 + "    <tfoot id='tfoot2'><tr><td>cell7</td><td>cell8</td><td>cell9</td></tr></tfoot>\n"
-                 + "  </table>\n"
-                 + "  <script type='text/javascript' language='JavaScript'>\n"
-                 + "  <!--\n"
-                 + "    var table = document.getElementById('table_1');\n"
-                 + "    alert(table.tFoot.id);\n"
-                 + "    table.deleteTFoot();\n"
-                 + "    alert(table.tFoot.id);\n"
-                 + "    table.deleteTFoot();\n"
-                 + "    alert(table.tFoot);\n"
-                 + "    var newTFoot = table.createTFoot();\n"
-                 + "    newTFoot.id = 'tfoot3';\n"
-                 + "    alert(table.tFoot.id);\n"
-                 + "  // -->\n"
-                 + "  </script>\n"
-                 + "</body></html>\n";
+            = "<html><head><title>foo</title></head><body>\n"
+            + "  <table id='table_1'>\n"
+            + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
+            + "    <tr><td colspan='2'>cell3</td></tr>\n"
+            + "    <tfoot id='tfoot1'><tr><td>cell1</td><td>cell2</td><td>cell3</td></tr></tfoot>\n"
+            + "    <tfoot id='tfoot2'><tr><td>cell7</td><td>cell8</td><td>cell9</td></tr></tfoot>\n"
+            + "  </table>\n"
+            + "  <script type='text/javascript' language='JavaScript'>\n"
+            + "  <!--\n"
+            + "    var table = document.getElementById('table_1');\n"
+            + "    alert(table.tFoot.id);\n"
+            + "    table.deleteTFoot();\n"
+            + "    alert(table.tFoot.id);\n"
+            + "    table.deleteTFoot();\n"
+            + "    alert(table.tFoot);\n"
+            + "    var newTFoot = table.createTFoot();\n"
+            + "    newTFoot.id = 'tfoot3';\n"
+            + "    alert(table.tFoot.id);\n"
+            + "  // -->\n"
+            + "  </script>\n"
+            + "</body></html>\n";
 
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
@@ -304,22 +304,22 @@ public class TableTest extends WebTestCase {
     public void testInsertRow() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>\n"
-                 + "  <table id='table_1'>\n"
-                 + "  <tr><td>foo</td></tr>\n"
-                 + "  </table>\n"
-                 + "  <script type='text/javascript' language='JavaScript'>\n"
-                 + "    var table = document.getElementById('table_1');\n"
-                 + "    alert(table.rows.length);\n"
-                 + "    var newRow = table.insertRow(-1);\n"
-                 + "    alert(table.rows.length);\n"
-                 + "    alert(newRow.rowIndex);\n"
-                 + "    alert(newRow.cells.length);\n"
-                 + "    var newCell = newRow.insertCell(-1);\n"
-                 + "    alert(newCell.tagName);\n"
-                 + "    alert(newRow.cells.length);\n"
-                 + "  </script>\n"
-                 + "</body></html>\n";
+            = "<html><head><title>foo</title></head><body>\n"
+            + "  <table id='table_1'>\n"
+            + "  <tr><td>foo</td></tr>\n"
+            + "  </table>\n"
+            + "  <script type='text/javascript' language='JavaScript'>\n"
+            + "    var table = document.getElementById('table_1');\n"
+            + "    alert(table.rows.length);\n"
+            + "    var newRow = table.insertRow(-1);\n"
+            + "    alert(table.rows.length);\n"
+            + "    alert(newRow.rowIndex);\n"
+            + "    alert(newRow.cells.length);\n"
+            + "    var newCell = newRow.insertCell(-1);\n"
+            + "    alert(newCell.tagName);\n"
+            + "    alert(newRow.cells.length);\n"
+            + "  </script>\n"
+            + "</body></html>\n";
 
         final List expectedAlerts = Arrays.asList(new String[] { "1", "2", "1", "0", "TD", "1" });
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);

@@ -101,15 +101,15 @@ public class JavaScriptEngineTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String content
-             = "<html><head><title>foo</title><script>"
-             + "document.form1.textfield1='blue'"
-             + "</script></head><body>"
-             + "<p>hello world</p>"
-             + "<form name='form1'>"
-             + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-             + "    <input type='text' name='textfield2' id='textfield2'/>"
-             + "</form>"
-             + "</body></html>";
+            = "<html><head><title>foo</title><script>"
+            + "document.form1.textfield1='blue'"
+            + "</script></head><body>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+            + "    <input type='text' name='textfield2' id='textfield2'/>"
+            + "</form>"
+            + "</body></html>";
 
         webConnection.setDefaultResponse( content );
         client.setWebConnection( webConnection );
@@ -126,17 +126,17 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     public void testSetInputValue() throws Exception {
         final String content
-                 = "<html><head><title>foo</title><script>"
-                 + "function doTest(){\n"
-                 + "    document.form1.textfield1.value='blue'"
-                 + "}\n"
-                 + "</script></head><body onload='doTest()'>"
-                 + "<p>hello world</p>"
-                 + "<form name='form1'>"
-                 + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-                 + "    <input type='text' name='textfield2' id='textfield2'/>"
-                 + "</form>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title><script>"
+            + "function doTest(){\n"
+            + "    document.form1.textfield1.value='blue'"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+            + "    <input type='text' name='textfield2' id='textfield2'/>"
+            + "</form>"
+            + "</body></html>";
         final List collectedAlerts = null;
         final HtmlPage page = loadPage(content, collectedAlerts);
 
@@ -150,15 +150,15 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     public void testAlert() throws Exception {
         final String content
-                 = "<html><head><title>foo</title><script>"
-                 + "alert('foo')"
-                 + "</script></head><body>"
-                 + "<p>hello world</p>"
-                 + "<form name='form1'>"
-                 + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-                 + "    <input type='text' name='textfield2' id='textfield2'/>"
-                 + "</form>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title><script>"
+            + "alert('foo')"
+            + "</script></head><body>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+            + "    <input type='text' name='textfield2' id='textfield2'/>"
+            + "</form>"
+            + "</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
@@ -176,11 +176,11 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     public void testScopeOfNewFunction() throws Exception {
         final String content
-                 = "<html><head><script>"
-                 + "var f = new Function('alert(\"foo\")');"
-                 + "f();"
-                 + "</script></head><body>"
-                 + "</body></html>";
+            = "<html><head><script>"
+            + "var f = new Function('alert(\"foo\")');"
+            + "f();"
+            + "</script></head><body>"
+            + "</body></html>";
         final List expectedAlerts = Arrays.asList( new String[]{"foo"});
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
@@ -219,16 +219,16 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     public void testScopeOfNewFunctionCalledFormOtherWindow() throws Exception {
         final String firstContent
-                 = "<html><head>"
-                 + "<script>"
-                 + "var foo = 'foo';"
-                 + "var test = new Function('alert(foo);');"
-                 + "</script>"
-                 + "</head>"
-                 + "<body onload='test()'>"
-                 + "  <iframe src='page2.html'/>"
-                 + "</body>"
-                 + "</html>";
+            = "<html><head>"
+            + "<script>"
+            + "var foo = 'foo';"
+            + "var test = new Function('alert(foo);');"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + "  <iframe src='page2.html'/>"
+            + "</body>"
+            + "</html>";
         
         final String secondContent = "<html><head><script>"
             + "var foo = 'foo2';"
@@ -262,14 +262,14 @@ public class JavaScriptEngineTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String htmlContent
-             = "<html><head><title>foo</title><script src='/foo.js' id='script1'/>"
-             + "</head><body>"
-             + "<p>hello world</p>"
-             + "<form name='form1'>"
-             + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-             + "    <input type='text' name='textfield2' id='textfield2'/>"
-             + "</form>"
-             + "</body></html>";
+            = "<html><head><title>foo</title><script src='/foo.js' id='script1'/>"
+            + "</head><body>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+            + "    <input type='text' name='textfield2' id='textfield2'/>"
+            + "</form>"
+            + "</body></html>";
 
         final String jsContent = "alert('got here');";
 
@@ -299,32 +299,32 @@ public class JavaScriptEngineTest extends WebTestCase {
      * this page has meta element , and script tag has no charset attribute
      */
         final String htmlContent
-             = "<html><head>"
-             + "<meta http-equiv='content-type' content='text/html; charset=Shift_JIS'>"
-             + "<title>foo</title>"
-         + "<script src='/foo.js' id='script1'/>"
-             + "</head><body>"
-             + "<p>hello world</p>"
-             + "<form name='form1'>"
-             + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-             + "    <input type='text' name='textfield2' id='textfield2'/>"
-             + "</form>"
-             + "</body></html>";
+            = "<html><head>"
+            + "<meta http-equiv='content-type' content='text/html; charset=Shift_JIS'>"
+            + "<title>foo</title>"
+            + "<script src='/foo.js' id='script1'/>"
+            + "</head><body>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+            + "    <input type='text' name='textfield2' id='textfield2'/>"
+            + "</form>"
+            + "</body></html>";
 
-        /*
+    /*
      * this page has no meta element , and script tag has charset attribute
      */
         final String htmlContent2
-             = "<html><head>"
-             + "<title>foo</title>"
-         + "<script src='/foo2.js' charset='Shift_JIS' id='script2'/>"
-             + "</head><body>"
-             + "<p>hello world</p>"
-             + "<form name='form1'>"
-             + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-             + "    <input type='text' name='textfield2' id='textfield2'/>"
-             + "</form>"
-             + "</body></html>";
+            = "<html><head>"
+            + "<title>foo</title>"
+            + "<script src='/foo2.js' charset='Shift_JIS' id='script2'/>"
+            + "</head><body>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+            + "    <input type='text' name='textfield2' id='textfield2'/>"
+            + "</form>"
+            + "</body></html>";
 
         /*
          * the corresponding SJIS char of '\u8868' has '\' in second byte.
@@ -366,19 +366,19 @@ public class JavaScriptEngineTest extends WebTestCase {
         final HtmlScript htmlScript =
                      (HtmlScript)page.getHtmlElementById("script1");
 
-    assertNotNull(htmlScript);
+        assertNotNull(htmlScript);
         assertEquals( expectedAlerts, collectedAlerts );
 
     /*
      * detect encoding from charset attribute of script tag
      */
-    collectedAlerts.clear();
+        collectedAlerts.clear();
         final HtmlPage page2 = ( HtmlPage )client.getPage(
              new URL( "http://www.gargoylesoftware.com/hidden"));
         final HtmlScript htmlScript2 =
                      (HtmlScript)page2.getHtmlElementById("script2");
 
-    assertNotNull(htmlScript2);
+        assertNotNull(htmlScript2);
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -389,18 +389,18 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     public void testSetValuesThatAreNotStrings() throws Exception {
         final String content
-                 = "<html><head><title>foo</title><script>"
-                 + "function doTest() {\n"
-                 + "    document.form1.textfield1.value=1;"
-                 + "    alert(document.form1.textfield1.value)"
-                 + "}\n"
-                 + "</script></head><body onload='doTest()'>"
-                 + "<p>hello world</p>"
-                 + "<form name='form1'>"
-                 + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-                 + "    <input type='text' name='textfield2' id='textfield2'/>"
-                 + "</form>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title><script>"
+            + "function doTest() {\n"
+            + "    document.form1.textfield1.value=1;"
+            + "    alert(document.form1.textfield1.value)"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+            + "    <input type='text' name='textfield2' id='textfield2'/>"
+            + "</form>"
+            + "</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
@@ -421,12 +421,12 @@ public class JavaScriptEngineTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String htmlContent
-             = "<html><head><title>foo</title><script src='./test.js'></script>"
-             + "<script>var testLocalVariable = new Array();</script>"
-             + "</head><body onload='testNestedMethod();' >"
-             + "<form name='form1' method='POST' action='../foo' >"
-             + "    <input type='submit' value='Login' name='loginButton'>"
-             + "</form></body></html>";
+            = "<html><head><title>foo</title><script src='./test.js'></script>"
+            + "<script>var testLocalVariable = new Array();</script>"
+            + "</head><body onload='testNestedMethod();' >"
+            + "<form name='form1' method='POST' action='../foo' >"
+            + "    <input type='submit' value='Login' name='loginButton'>"
+            + "</form></body></html>";
 
         final String jsContent
             = "function testNestedMethod() {\n"
@@ -450,14 +450,14 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testJavaScriptUrl() throws Exception {
 
         final String htmlContent
-             = "<html><head><script language='javascript'>"
-             + "var f1 = '<html><head><title>frame1</title></head><body><h1>frame1</h1></body></html>';\n"
-             + "var f2 = '<html><head><title>frame2</title></head><body><h1>frame2</h1></body></html>';\n"
-             + "</script></head>\n"
-             + "<frameset border='0' frameborder='0' framespacing='0' rows='100,*'>"
-             + "    <frame id='frame1' src='javascript:parent.f1'/>"
-             + "    <frame id='frame2' src='javascript:parent.f2'/>"
-             + "</frameset></html>";
+            = "<html><head><script language='javascript'>"
+            + "var f1 = '<html><head><title>frame1</title></head><body><h1>frame1</h1></body></html>';\n"
+            + "var f2 = '<html><head><title>frame2</title></head><body><h1>frame2</h1></body></html>';\n"
+            + "</script></head>\n"
+            + "<frameset border='0' frameborder='0' framespacing='0' rows='100,*'>"
+            + "    <frame id='frame1' src='javascript:parent.f1'/>"
+            + "    <frame id='frame2' src='javascript:parent.f2'/>"
+            + "</frameset></html>";
 
         createTestPageForRealBrowserIfNeeded(htmlContent, Collections.EMPTY_LIST);
         final HtmlPage page = loadPage(htmlContent);
@@ -478,12 +478,11 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     public void testJavaScriptWrappedInHtmlComments() throws Exception {
         final String htmlContent
-             = "<html><head><title>foo</title><script language='javascript'><!--\n"
-             + "function doTest() {\n"
-             + "}\n"
-             + "-->\n</script></head>\n"
-             + "<body onload='doTest()'></body></html>";
-
+            = "<html><head><title>foo</title><script language='javascript'><!--\n"
+            + "function doTest() {\n"
+            + "}\n"
+            + "-->\n</script></head>\n"
+            + "<body onload='doTest()'></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         assertEquals("foo", page.getTitleText());
     }
@@ -494,11 +493,11 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     public void testJavaScriptWrappedInHtmlComments_commentOnOpeningLine() throws Exception {
         final String htmlContent
-             = "<html><head><title>foo</title><script language='javascript'><!-- Some comment here\n"
-             + "function doTest() {\n"
-             + "}\n"
-             + "-->\n</script></head>\n"
-             + "<body onload='doTest()'></body></html>";
+            = "<html><head><title>foo</title><script language='javascript'><!-- Some comment here\n"
+            + "function doTest() {\n"
+            + "}\n"
+            + "-->\n</script></head>\n"
+            + "<body onload='doTest()'></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
         assertEquals("foo", page.getTitleText());
@@ -509,19 +508,18 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testJavaScriptWrappedInHtmlComments_allOnOneLine() throws Exception {
-        final String content =
-                "<html>\n" +
-                "  <head>\n" +
-                "    <title>test</title>\n" +
-                "    <script>var test;</script>\n" +
-                "    <!-- var test should be undefined since it's on first line -->\n" +
-                "    <!-- but there should be no index out of bounds exception  -->\n" +
-                "    <script> <!-- test = 'abc'; // --> </script>\n" +
-                "  </head>\n" +
-                "  <body onload='alert(test)'>\n" +
-                "  </body>\n" +
-                "</html>\n" +
-                "";
+        final String content 
+            = "<html>\n"
+            + "  <head>\n"
+            + "    <title>test</title>\n"
+            + "    <script>var test;</script>\n"
+            + "    <!-- var test should be undefined since it's on first line -->\n"
+            + "    <!-- but there should be no index out of bounds exception  -->\n"
+            + "    <script> <!-- test = 'abc'; // --> </script>\n"
+            + "  </head>\n"
+            + "  <body onload='alert(test)'>\n"
+            + "  </body>\n"
+            + "</html>\n";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         final List expectedAlerts = Arrays.asList( new String[]{"undefined"} );
@@ -561,10 +559,10 @@ public class JavaScriptEngineTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String htmlContent
-             = "<html><head><title>foo</title><script src='./test.js'></script>"
-             + "</head><body>"
-             + "    <script>externalMethod()</script>"
-             + "</body></html>";
+            = "<html><head><title>foo</title><script src='./test.js'></script>"
+            + "</head><body>"
+            + "    <script>externalMethod()</script>"
+            + "</body></html>";
 
         final String jsContent
             = "function externalMethod() {\n"
@@ -594,15 +592,15 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     public void testFunctionDefinedInSameFile() throws Exception {
         final String htmlContent
-             = "<html><head><title>First</title><script>"
-             + "function showFoo( foo ) {\n"
-             + "    alert( 'Foo is: |' + foo + '|' );\n"
-             + "}\n"
-             + "</script>"
-             + "</head><body><form name='form1'>"
-             + "<input name='text1' type='text'>\n"
-             + "<input name='button1' type='button' onclick='showFoo( document.form1.text1.value);'>\n"
-             + "</form></body></html>";
+            = "<html><head><title>First</title><script>"
+            + "function showFoo( foo ) {\n"
+            + "    alert( 'Foo is: |' + foo + '|' );\n"
+            + "}\n"
+            + "</script>"
+            + "</head><body><form name='form1'>"
+            + "<input name='text1' type='text'>\n"
+            + "<input name='button1' type='button' onclick='showFoo( document.form1.text1.value);'>\n"
+            + "</form></body></html>";
 
         final List collectedAlerts = new ArrayList();
 
@@ -663,19 +661,19 @@ public class JavaScriptEngineTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String content
-             = "<html><head><title>foo</title><script>"
-             + "myDate = 'foo';"
-             + "function doUnqualifiedVariableAccess() {\n"
-             + "    alert('unqualified: ' + myDate);\n"
-             + "}\n"
-             + "function doQualifiedVariableAccess() {\n"
-             + "    alert('qualified: ' + window.myDate);\n"
-             + "}\n"
-             + "</script></head><body>"
-             + "<p>hello world</p>"
-             + "<a id='unqualified' onclick='doUnqualifiedVariableAccess();'>unqualified</a>"
-             + "<a id='qualified' onclick='doQualifiedVariableAccess();'>qualified</a>"
-             + "</body></html>";
+            = "<html><head><title>foo</title><script>"
+            + "myDate = 'foo';"
+            + "function doUnqualifiedVariableAccess() {\n"
+            + "    alert('unqualified: ' + myDate);\n"
+            + "}\n"
+            + "function doQualifiedVariableAccess() {\n"
+            + "    alert('qualified: ' + window.myDate);\n"
+            + "}\n"
+            + "</script></head><body>"
+            + "<p>hello world</p>"
+            + "<a id='unqualified' onclick='doUnqualifiedVariableAccess();'>unqualified</a>"
+            + "<a id='qualified' onclick='doQualifiedVariableAccess();'>qualified</a>"
+            + "</body></html>";
 
         webConnection.setDefaultResponse( content );
         client.setWebConnection( webConnection );
@@ -840,16 +838,16 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testScriptErrorIsolated() throws Exception {
 
         final String content
-                 = "<html>"
-                 + "<head>"
-                 + "<script>alert(1);</script>"
-                 + "<script>alert(2</script>"
-                 + "<script>alert(3);</script>"
-                 + "</head>"
-                 + "<body onload='alert(4);notExisting()'>"
-                 + "<button onclick='alert(5)'>click me</button>"
-                 + "</body>"
-                 + "</html>";
+            = "<html>"
+            + "<head>"
+            + "<script>alert(1);</script>"
+            + "<script>alert(2</script>"
+            + "<script>alert(3);</script>"
+            + "</head>"
+            + "<body onload='alert(4);notExisting()'>"
+            + "<button onclick='alert(5)'>click me</button>"
+            + "</body>"
+            + "</html>";
 
         final List expectedAlerts = Arrays.asList( new String[]{ "1", "3", "4" } );
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);

@@ -74,18 +74,18 @@ public class CharacterDataImplTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    var div1=document.getElementById('div1');\n"
-             + "    var text1=div1.firstChild;\n"
-             + "    alert(text1.data);\n"
-             + "    alert(text1.length);\n"
-             + "    alert(text1.nodeType);\n"
-             + "    alert(text1.nodeValue);\n"
-             + "    alert(text1.nodeName);\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "<div id='div1'>Some Text</div></body></html>";
+            = "<html><head><title>First</title><script>"
+            + "function doTest() {\n"
+            + "    var div1=document.getElementById('div1');\n"
+            + "    var text1=div1.firstChild;\n"
+            + "    alert(text1.data);\n"
+            + "    alert(text1.length);\n"
+            + "    alert(text1.nodeType);\n"
+            + "    alert(text1.nodeValue);\n"
+            + "    alert(text1.nodeName);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -113,16 +113,16 @@ public class CharacterDataImplTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    var div1=document.getElementById('div1');\n"
-             + "    var text1=div1.firstChild;\n"
-             + "    text1.data='Some New Text';\n"
-             + "    alert(text1.data);\n"
-             + "    alert(text1.nodeValue);\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "<div id='div1'>Some Text</div></body></html>";
+            = "<html><head><title>First</title><script>"
+            + "function doTest() {\n"
+            + "    var div1=document.getElementById('div1');\n"
+            + "    var text1=div1.firstChild;\n"
+            + "    text1.data='Some New Text';\n"
+            + "    alert(text1.data);\n"
+            + "    alert(text1.nodeValue);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -150,16 +150,16 @@ public class CharacterDataImplTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    var div1=document.getElementById('div1');\n"
-             + "    var text1=div1.firstChild;\n"
-             + "    text1.nodeValue='Some New Text';\n"
-             + "    alert(text1.data);\n"
-             + "    alert(text1.nodeValue);\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "<div id='div1'>Some Text</div></body></html>";
+            = "<html><head><title>First</title><script>"
+            + "function doTest() {\n"
+            + "    var div1=document.getElementById('div1');\n"
+            + "    var text1=div1.firstChild;\n"
+            + "    text1.nodeValue='Some New Text';\n"
+            + "    alert(text1.data);\n"
+            + "    alert(text1.nodeValue);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -187,15 +187,15 @@ public class CharacterDataImplTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    var div1=document.getElementById('div1');\n"
-             + "    var text1=div1.firstChild;\n"
-             + "    text1.appendData(' Appended');\n"
-             + "    alert(text1.data);\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "<div id='div1'>Some Text</div></body></html>";
+            = "<html><head><title>First</title><script>"
+            + "function doTest() {\n"
+            + "    var div1=document.getElementById('div1');\n"
+            + "    var text1=div1.firstChild;\n"
+            + "    text1.appendData(' Appended');\n"
+            + "    alert(text1.data);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -223,15 +223,15 @@ public class CharacterDataImplTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    var div1=document.getElementById('div1');\n"
-             + "    var text1=div1.firstChild;\n"
-             + "    text1.deleteData(5, 11);\n"
-             + "    alert(text1.data);\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "<div id='div1'>Some Not So New Text</div></body></html>";
+            = "<html><head><title>First</title><script>"
+            + "function doTest() {\n"
+            + "    var div1=document.getElementById('div1');\n"
+            + "    var text1=div1.firstChild;\n"
+            + "    text1.deleteData(5, 11);\n"
+            + "    alert(text1.data);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "<div id='div1'>Some Not So New Text</div></body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -259,15 +259,15 @@ public class CharacterDataImplTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    var div1=document.getElementById('div1');\n"
-             + "    var text1=div1.firstChild;\n"
-             + "    text1.insertData(5, 'New ');\n"
-             + "    alert(text1.data);\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "<div id='div1'>Some Text</div></body></html>";
+            = "<html><head><title>First</title><script>"
+            + "function doTest() {\n"
+            + "    var div1=document.getElementById('div1');\n"
+            + "    var text1=div1.firstChild;\n"
+            + "    text1.insertData(5, 'New ');\n"
+            + "    alert(text1.data);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -295,15 +295,15 @@ public class CharacterDataImplTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    var div1=document.getElementById('div1');\n"
-             + "    var text1=div1.firstChild;\n"
-             + "    text1.replaceData(5, 3, 'New');\n"
-             + "    alert(text1.data);\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "<div id='div1'>Some Old Text</div></body></html>";
+            = "<html><head><title>First</title><script>"
+            + "function doTest() {\n"
+            + "    var div1=document.getElementById('div1');\n"
+            + "    var text1=div1.firstChild;\n"
+            + "    text1.replaceData(5, 3, 'New');\n"
+            + "    alert(text1.data);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "<div id='div1'>Some Old Text</div></body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -331,15 +331,15 @@ public class CharacterDataImplTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    var div1=document.getElementById('div1');\n"
-             + "    var text1=div1.firstChild;\n"
-             + "    alert(text1.substringData(5, 3));\n"
-             + "    alert(text1.data);\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "<div id='div1'>Some New Text</div></body></html>";
+            = "<html><head><title>First</title><script>"
+            + "function doTest() {\n"
+            + "    var div1=document.getElementById('div1');\n"
+            + "    var text1=div1.firstChild;\n"
+            + "    alert(text1.substringData(5, 3));\n"
+            + "    alert(text1.data);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "<div id='div1'>Some New Text</div></body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
@@ -367,17 +367,17 @@ public class CharacterDataImplTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
-             = "<html><head><title>First</title><script>"
-             + "function doTest() {\n"
-             + "    var div1=document.getElementById('div1');\n"
-             + "    var text1=div1.firstChild;\n"
-             + "    var text2=text1.splitText(5);\n"
-             + "    alert(text1.data);\n"
-             + "    alert(text2.data);\n"
-             + "    alert(text1.nextSibling==text2);\n"
-             + "}\n"
-             + "</script></head><body onload='doTest()'>"
-             + "<div id='div1'>Some Text</div></body></html>";
+            = "<html><head><title>First</title><script>"
+            + "function doTest() {\n"
+            + "    var div1=document.getElementById('div1');\n"
+            + "    var text1=div1.firstChild;\n"
+            + "    var text2=text1.splitText(5);\n"
+            + "    alert(text1.data);\n"
+            + "    alert(text2.data);\n"
+            + "    alert(text1.nextSibling==text2);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );

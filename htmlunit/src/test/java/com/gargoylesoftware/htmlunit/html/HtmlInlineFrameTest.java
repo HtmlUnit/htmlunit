@@ -65,9 +65,9 @@ public class HtmlInlineFrameTest extends WebTestCase {
      */
     public void testSetSrcAttribute() throws Exception {
         final String firstContent
-                 = "<html><head><title>First</title></head><body>"
-                 + "<iframe id='iframe1' src='http://second'>"
-                 + "</body></html>";
+            = "<html><head><title>First</title></head><body>"
+            + "<iframe id='iframe1' src='http://second'>"
+            + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = new WebClient();
@@ -100,10 +100,10 @@ public class HtmlInlineFrameTest extends WebTestCase {
      */
     public void testSetSrcAttribute_ViaJavaScript() throws Exception {
         final String firstContent
-                 = "<html><head><title>First</title></head><body>"
-                 + "<iframe id='iframe1' src='http://second'>"
-                 + "<script type='text/javascript'>document.getElementById('iframe1').src = 'http://third';"
-                 + "</script></body></html>";
+            = "<html><head><title>First</title></head><body>"
+            + "<iframe id='iframe1' src='http://second'>"
+            + "<script type='text/javascript'>document.getElementById('iframe1').src = 'http://third';"
+            + "</script></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = new WebClient();

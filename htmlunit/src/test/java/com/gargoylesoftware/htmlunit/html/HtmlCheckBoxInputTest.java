@@ -67,10 +67,10 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      */
     public void test_defaultState() throws Exception {
         final String htmlContent
-                  = "<html><head><title>foo</title></head><body>"
-                  + "<form id='form1'>"
-                  + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>"
-                  + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final HtmlCheckBoxInput checkBox = ( HtmlCheckBoxInput )page.getHtmlElementById( "checkbox" );
 
@@ -88,11 +88,11 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      */
     public void test_onClick() throws Exception {
         final String htmlContent
-                  = "<html><head><title>foo</title></head><body>"
-                  + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
-                  + "    <input type='checkbox' name='checkbox' id='checkbox' "
-                  + "onClick='alert(\"foo\")'>Check me</input>"
-                  + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
+            + "    <input type='checkbox' name='checkbox' id='checkbox' "
+            + "onClick='alert(\"foo\")'>Check me</input>"
+            + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlCheckBoxInput checkBox = ( HtmlCheckBoxInput )page.getHtmlElementById( "checkbox" );
@@ -115,20 +115,20 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void test_onClickThatSubmitsForm() throws Exception {
-         final String htmlContent
-                  = "<html><head><title>foo</title></head><body>"
-                  + "<form id='form1' name='form1'>"
-                  + "    <input type='checkbox' name='checkbox' id='checkbox' "
-                  + "onClick='document.form1.submit()'>Check me</input>"
-                  + "</form></body></html>";
-         final HtmlPage page = loadPage(htmlContent);
-         final HtmlCheckBoxInput checkBox = ( HtmlCheckBoxInput )page.getHtmlElementById( "checkbox" );
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1' name='form1'>"
+            + "    <input type='checkbox' name='checkbox' id='checkbox' "
+            + "onClick='document.form1.submit()'>Check me</input>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlCheckBoxInput checkBox = ( HtmlCheckBoxInput )page.getHtmlElementById( "checkbox" );
 
-         final HtmlPage secondPage = (HtmlPage)checkBox.click();
+        final HtmlPage secondPage = (HtmlPage)checkBox.click();
 
-         assertNotSame( page, secondPage );
-         assertTrue( checkBox.isChecked());
-     }
+        assertNotSame( page, secondPage );
+        assertTrue( checkBox.isChecked());
+    }
 
     /**
      * Verifies that a asText() returns "checked" or "unckecked" according to the state of the checkbox.
@@ -136,10 +136,10 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      */
     public void testAsText() throws Exception {
         final String htmlContent
-                  = "<html><head><title>foo</title></head><body>"
-                  + "<form id='form1'>"
-                  + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>"
-                  + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>"
+            + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 

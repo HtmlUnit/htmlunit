@@ -72,11 +72,11 @@ public class HtmlButtonTest extends WebTestCase {
      */
     public void testButtonClick_onClick() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
-                 + "    <button type='button' name='button' id='button' "
-                 + "onClick='alert(\"foo\")'>Push me</button>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
+            + "    <button type='button' name='button' id='button' "
+            + "onClick='alert(\"foo\")'>Push me</button>"
+            + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
@@ -95,11 +95,11 @@ public class HtmlButtonTest extends WebTestCase {
      */
     public void testSubmitClick_onClick() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
-                 + "    <button type='submit' name='button' id='button' "
-                 + "onClick='alert(\"foo\")'>Push me</button>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
+            + "    <button type='submit' name='button' id='button' "
+            + "onClick='alert(\"foo\")'>Push me</button>"
+            + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
@@ -118,11 +118,11 @@ public class HtmlButtonTest extends WebTestCase {
      */
     public void testResetClick_onClick() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
-                 + "    <button type='reset' name='button' id='button' "
-                 + "onClick='alert(\"foo\")'>Push me</button>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
+            + "    <button type='reset' name='button' id='button' "
+            + "onClick='alert(\"foo\")'>Push me</button>"
+            + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
@@ -141,22 +141,22 @@ public class HtmlButtonTest extends WebTestCase {
      */
     public void testReset() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "<input type='text' name='textfield1' id='textfield1' value='foo'/>"
-                 + "<input type='password' name='password1' id='password1' value='foo'/>"
-                 + "<input type='hidden' name='hidden1' id='hidden1' value='foo'/>"
-                 + "<input type='radio' name='radioButton' value='foo' checked/>"
-                 + "<input type='radio' name='radioButton' value='bar'/>"
-                 + "<input type='checkbox' name='checkBox' value='check'/>"
-                 + "<select id='select1'>"
-                 + "    <option id='option1' selected value='1'>Option1</option>"
-                 + "    <option id='option2' value='2'>Option2</option>"
-                 + "</select>"
-                 + "<textarea id='textarea1'>Foobar</textarea>"
-                 + "<isindex prompt='Enter some text' id='isindex1'>"
-                 + "<button type='reset' id='resetButton' value='pushme'/>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<input type='text' name='textfield1' id='textfield1' value='foo'/>"
+            + "<input type='password' name='password1' id='password1' value='foo'/>"
+            + "<input type='hidden' name='hidden1' id='hidden1' value='foo'/>"
+            + "<input type='radio' name='radioButton' value='foo' checked/>"
+            + "<input type='radio' name='radioButton' value='bar'/>"
+            + "<input type='checkbox' name='checkBox' value='check'/>"
+            + "<select id='select1'>"
+            + "    <option id='option1' selected value='1'>Option1</option>"
+            + "    <option id='option2' value='2'>Option2</option>"
+            + "</select>"
+            + "<textarea id='textarea1'>Foobar</textarea>"
+            + "<isindex prompt='Enter some text' id='isindex1'>"
+            + "<button type='reset' id='resetButton' value='pushme'/>"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
         final HtmlButton resetInput = (HtmlButton)page.getHtmlElementById( "resetButton" );
@@ -201,11 +201,11 @@ public class HtmlButtonTest extends WebTestCase {
      */
     public void testButtonTypeSubmit() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
-                 + "    <button type='submit' name='button' id='button' value='foo'"
-                 + "    >Push me</button>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
+            + "    <button type='submit' name='button' id='button' value='foo'"
+            + "    >Push me</button>"
+            + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
@@ -244,10 +244,10 @@ public class HtmlButtonTest extends WebTestCase {
     private void doTestDefaultButtonType(final BrowserVersion browserVersion,
             final String expectedType) throws Exception {
         final String firstContent
-                 = "<html><head><title>First</title></head><body>"
-                 + "<form id='form1' action='http://second'>"
-                 + "    <button name='button' id='button' value='pushme'>PushMe</button>"
-                 + "</form></body></html>";
+            = "<html><head><title>First</title></head><body>"
+            + "<form id='form1' action='http://second'>"
+            + "    <button name='button' id='button' value='pushme'>PushMe</button>"
+            + "</form></body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body'></body></html>";
         final WebClient client = new WebClient(browserVersion);

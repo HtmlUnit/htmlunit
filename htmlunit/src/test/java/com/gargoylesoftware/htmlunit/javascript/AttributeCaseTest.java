@@ -216,13 +216,13 @@ public class AttributeCaseTest extends WebTestCase {
 
         final String elementId = "p-id";
         final String content
-                = "<html><head><title>AttributeCaseTest</title></head><body>\n"
-                  + "<p id=\"" + elementId + "\" " + attributeName + "=\"" + attributeValue + "\">\n"
-                  + "<script language=\"javascript\" type=\"text/javascript\">\n<!--\n"
-                  + "  document.getElementById(\"" + elementId + "\").setAttribute(\"" + attributeName + "\", \"" +
-                  newAttributeValue + "\");\n"
-                  + "\n// -->\n</script>\n"
-                  + "</body></html>";
+            = "<html><head><title>AttributeCaseTest</title></head><body>\n"
+             + "<p id=\"" + elementId + "\" " + attributeName + "=\"" + attributeValue + "\">\n"
+             + "<script language=\"javascript\" type=\"text/javascript\">\n<!--\n"
+             + "  document.getElementById(\"" + elementId + "\").setAttribute(\"" + attributeName + "\", \"" +
+             newAttributeValue + "\");\n"
+             + "\n// -->\n</script>\n"
+             + "</body></html>";
 
         setupAttributeTest(content, elementId);
     }

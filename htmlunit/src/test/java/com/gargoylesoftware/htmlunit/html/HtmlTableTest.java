@@ -66,12 +66,12 @@ public class HtmlTableTest extends WebTestCase {
      */
     public void testGetTableCell() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<table id='table1' summary='Test table'>"
-                 + "<tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>"
-                 + "<tr><td colspan='2'>cell3</td></tr>"
-                 + "</table>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<table id='table1' summary='Test table'>"
+            + "<tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>"
+            + "<tr><td colspan='2'>cell3</td></tr>"
+            + "</table>"
+            + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
         
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
@@ -101,12 +101,12 @@ public class HtmlTableTest extends WebTestCase {
         throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<table id='table1' summary='Test table'>"
-                 + "<tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>"
-                 + "<tr><td colspan='2'>cell3</td></tr>"
-                 + "</table>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<table id='table1' summary='Test table'>"
+            + "<tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>"
+            + "<tr><td colspan='2'>cell3</td></tr>"
+            + "</table>"
+            + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
         
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
@@ -123,16 +123,16 @@ public class HtmlTableTest extends WebTestCase {
         throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<table id='table1'>"
-                 + "<tr id='row1'><td>cell1</td></tr>"
-                 + "<tr id='row2'><td>cell2</td></tr>"
-                 + "<tr id='row3'><td>cell3</td></tr>"
-                 + "<tr id='row4'><td>cell4</td></tr>"
-                 + "<tr id='row5'><td>cell5</td></tr>"
-                 + "<tr id='row6'><td>cell6</td></tr>"
-                 + "</table>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<table id='table1'>"
+            + "<tr id='row1'><td>cell1</td></tr>"
+            + "<tr id='row2'><td>cell2</td></tr>"
+            + "<tr id='row3'><td>cell3</td></tr>"
+            + "<tr id='row4'><td>cell4</td></tr>"
+            + "<tr id='row5'><td>cell5</td></tr>"
+            + "<tr id='row6'><td>cell6</td></tr>"
+            + "</table>"
+            + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
         
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
@@ -156,22 +156,22 @@ public class HtmlTableTest extends WebTestCase {
         throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<table id='table1'>"
-                 + "<thead>"
-                 + "    <tr id='row1'><td>cell1</td></tr>"
-                 + "    <tr id='row2'><td>cell2</td></tr>"
-                 + "</thead>"
-                 + "<tbody>"
-                 + "    <tr id='row3'><td>cell3</td></tr>"
-                 + "    <tr id='row4'><td>cell4</td></tr>"
-                 + "</tbody>"
-                 + "<tfoot>"
-                 + "    <tr id='row5'><td>cell5</td></tr>"
-                 + "    <tr id='row6'><td>cell6</td></tr>"
-                 + "</tfoot>"
-                 + "</table>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<table id='table1'>"
+            + "<thead>"
+            + "    <tr id='row1'><td>cell1</td></tr>"
+            + "    <tr id='row2'><td>cell2</td></tr>"
+            + "</thead>"
+            + "<tbody>"
+            + "    <tr id='row3'><td>cell3</td></tr>"
+            + "    <tr id='row4'><td>cell4</td></tr>"
+            + "</tbody>"
+            + "<tfoot>"
+            + "    <tr id='row5'><td>cell5</td></tr>"
+            + "    <tr id='row6'><td>cell6</td></tr>"
+            + "</tfoot>"
+            + "</table>"
+            + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
@@ -195,24 +195,24 @@ public class HtmlTableTest extends WebTestCase {
         throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<table id='table1'>"
-                 + "<thead>"
-                 + "    <tr id='row1'><td>cell1</td></tr>"
-                 + "    <tr id='row2'><td>cell2</td></tr>"
-                 + "</thead>"
-                 + "<tbody>"
-                 + "    <tr id='row3'><td>cell3</td></tr>"
-                 + "</tbody>"
-                 + "<tbody>"
-                 + "    <tr id='row4'><td>cell4</td></tr>"
-                 + "</tbody>"
-                 + "<tfoot>"
-                 + "    <tr id='row5'><td>cell5</td></tr>"
-                 + "    <tr id='row6'><td>cell6</td></tr>"
-                 + "</tfoot>"
-                 + "</table>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<table id='table1'>"
+            + "<thead>"
+            + "    <tr id='row1'><td>cell1</td></tr>"
+            + "    <tr id='row2'><td>cell2</td></tr>"
+            + "</thead>"
+            + "<tbody>"
+            + "    <tr id='row3'><td>cell3</td></tr>"
+            + "</tbody>"
+            + "<tbody>"
+            + "    <tr id='row4'><td>cell4</td></tr>"
+            + "</tbody>"
+            + "<tfoot>"
+            + "    <tr id='row5'><td>cell5</td></tr>"
+            + "    <tr id='row6'><td>cell6</td></tr>"
+            + "</tfoot>"
+            + "</table>"
+            + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
@@ -232,16 +232,16 @@ public class HtmlTableTest extends WebTestCase {
         throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<table id='table1'>"
-                 + "    <tr id='row1'><td>cell1</td></tr>"
-                 + "    <tr id='row2'><td>cell2</td></tr>"
-                 + "    <tr id='row3'><td>cell3</td></tr>"
-                 + "    <tr id='row4'><td>cell4</td></tr>"
-                 + "    <tr id='row5'><td>cell5</td></tr>"
-                 + "    <tr id='row6'><td>cell6</td></tr>"
-                 + "</table>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<table id='table1'>"
+            + "    <tr id='row1'><td>cell1</td></tr>"
+            + "    <tr id='row2'><td>cell2</td></tr>"
+            + "    <tr id='row3'><td>cell3</td></tr>"
+            + "    <tr id='row4'><td>cell4</td></tr>"
+            + "    <tr id='row5'><td>cell5</td></tr>"
+            + "    <tr id='row6'><td>cell6</td></tr>"
+            + "</table>"
+            + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
@@ -259,13 +259,13 @@ public class HtmlTableTest extends WebTestCase {
         throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<table id='table1' summary='Test table'>"
-                 + "<caption>MyCaption</caption>"
-                 + "<tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>"
-                 + "<tr><td colspan='2'>cell3</td></tr>"
-                 + "</table>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<table id='table1' summary='Test table'>"
+            + "<caption>MyCaption</caption>"
+            + "<tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>"
+            + "<tr><td colspan='2'>cell3</td></tr>"
+            + "</table>"
+            + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
@@ -282,14 +282,14 @@ public class HtmlTableTest extends WebTestCase {
     public void testInsertionOfTbodyTags() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<table>"
-                 + "<tr><td id='cell1'>cell1</td></tr>"
-                 + "</table>"
-                 + "<table><tbody>"
-                 + "<tr><td id='cell2'>cell1</td></tr>"
-                 + "</tbody></table>"
-                 + "</body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<table>"
+            + "<tr><td id='cell1'>cell1</td></tr>"
+            + "</table>"
+            + "<table><tbody>"
+            + "<tr><td id='cell2'>cell1</td></tr>"
+            + "</tbody></table>"
+            + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
         // Check that a <tbody> was inserted properly

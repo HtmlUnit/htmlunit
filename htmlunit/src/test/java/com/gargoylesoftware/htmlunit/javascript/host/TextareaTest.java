@@ -81,15 +81,15 @@ public class TextareaTest extends WebTestCase {
             + "<form name='form1' method='post' >"
             + "<textarea name='textarea1' cols='45' rows='4'>1234</textarea>"
             + "</form></body></html>";
-         final List collectedAlerts = new ArrayList();
-         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-         assertEquals("foo", page.getTitleText());
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
 
-         final List expectedAlerts = Arrays.asList( new String[]{
-             "1234", "PoohBear"
-         } );
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "1234", "PoohBear"
+        } );
 
-         assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
     
@@ -111,7 +111,7 @@ public class TextareaTest extends WebTestCase {
 
         final HtmlForm form = page.getFormByName("form1");
         final HtmlTextArea textarea
-        = (HtmlTextArea)form.getTextAreasByName("textarea1").get(0);
+            = (HtmlTextArea)form.getTextAreasByName("textarea1").get(0);
         textarea.setText("foo");
         final HtmlButtonInput button = (HtmlButtonInput) form.getInputByName("myButton");
         button.click();

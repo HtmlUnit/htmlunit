@@ -232,9 +232,9 @@ public class NavigatorTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String content
-                = "<html><head><title>First</title></head>"
-                + "<body onload='alert(window.navigator.appName)'></body>"
-                + "</html>";
+            = "<html><head><title>First</title></head>"
+            + "<body onload='alert(window.navigator.appName)'></body>"
+            + "</html>";
 
         webConnection.setDefaultResponse(content);
         webClient.setWebConnection(webConnection);

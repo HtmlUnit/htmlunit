@@ -65,11 +65,11 @@ public class HtmlButtonInputTest extends WebTestCase {
      */
     public void testClick_onClick() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1' onSubmit='alert(\"bar\")'>"
-                 + "    <input type='button' name='button' id='button' "
-                 + "onClick='alert(\"foo\")'>Push me</button>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1' onSubmit='alert(\"bar\")'>"
+            + "    <input type='button' name='button' id='button' "
+            + "onClick='alert(\"foo\")'>Push me</button>"
+            + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButtonInput button = ( HtmlButtonInput )page.getHtmlElementById( "button" );

@@ -67,12 +67,12 @@ public class HtmlImageInputTest extends WebTestCase {
      */
     public void testClick_NoPosition() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "<input type='image' name='aButton' value='foo'/>"
-                 + "<input type='image' name='button' value='foo'/>"
-                 + "<input type='image' name='anotherButton' value='foo'/>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<input type='image' name='aButton' value='foo'/>"
+            + "<input type='image' name='button' value='foo'/>"
+            + "<input type='image' name='anotherButton' value='foo'/>"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
         
@@ -98,12 +98,12 @@ public class HtmlImageInputTest extends WebTestCase {
      */
     public void testClick_WithPosition() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "<input type='image' name='aButton' value='foo'/>"
-                 + "<input type='image' name='button' value='foo'/>"
-                 + "<input type='image' name='anotherButton' value='foo'/>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<input type='image' name='aButton' value='foo'/>"
+            + "<input type='image' name='button' value='foo'/>"
+            + "<input type='image' name='anotherButton' value='foo'/>"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
@@ -130,10 +130,10 @@ public class HtmlImageInputTest extends WebTestCase {
      */
     public void testNoNameClick_WithPosition() throws Exception {
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "<input type='image' value='foo'/>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<input type='image' value='foo'/>"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 

@@ -171,7 +171,7 @@ public class DisabledElementTest extends WebTestCase {
      * @throws Exception If test fails
      */
     private void executeDisabledTest(final String disabledAttribute, final boolean expectedIsDisabled)
-            throws Exception {
+        throws Exception {
 
         final String htmlContent = MessageFormat.format(htmlContent_, new String[]{disabledAttribute});
         final List collectedAlerts = new ArrayList();

@@ -130,7 +130,7 @@ public abstract class WebTestCase extends BaseTestCase {
     protected static final HtmlPage loadPage( final String html, final List collectedAlerts )
         throws Exception {
      return loadPage(html,collectedAlerts, URL_GARGOYLE);
-   }
+    }
 
 
     /**
@@ -226,7 +226,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @throws IOException if writing file fails
      */
     protected void createTestPageForRealBrowserIfNeeded(final String content, final List expectedAlerts) 
-    throws IOException {
+        throws IOException {
         final Log log = LogFactory.getLog(WebTestCase.class);
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
             // should be optimized....
@@ -278,9 +278,7 @@ public abstract class WebTestCase extends BaseTestCase {
                 sb.append(", ");
             }
             final String message = (String) iter.next();
-            sb.append("{expected: \"")
-                .append(message)
-                .append("\"}");
+            sb.append("{expected: \"").append(message).append("\"}");
         }
         sb.append("];\n\n");
         sb.append(baseJS);

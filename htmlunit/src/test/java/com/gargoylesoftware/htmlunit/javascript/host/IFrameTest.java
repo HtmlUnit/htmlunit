@@ -68,12 +68,12 @@ public class IFrameTest extends WebTestCase {
      */
     public void testStyle() throws Exception {
         final String content
-             = "<html><head><title>First</title><script>\n"
-             + "function doTest() {\n"
-             + "    alert(document.getElementById('myIFrame').style == undefined);\n"
-             + "}\n</script></head>"
-             + "<body onload='doTest()'>"
-             + "<iframe id='myIFrame' src='about:blank'></iframe></body></html>";
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    alert(document.getElementById('myIFrame').style == undefined);\n"
+            + "}\n</script></head>"
+            + "<body onload='doTest()'>"
+            + "<iframe id='myIFrame' src='about:blank'></iframe></body></html>";
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
@@ -86,53 +86,53 @@ public class IFrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testReferenceFromJavaScript() throws Exception {
-      final String content
-           = "<html><head><title>First</title><script>\n"
-           + "function doTest() {\n"
-           + "    alert(window.frames.length);\n"
-           + "    alert(window.frames['myIFrame'].name);\n"
-           + "}\n</script></head>"
-           + "<body onload='doTest()'>"
-           + "<iframe name='myIFrame' src='about:blank'></iframe></body></html>";
+        final String content
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    alert(window.frames.length);\n"
+            + "    alert(window.frames['myIFrame'].name);\n"
+            + "}\n</script></head>"
+            + "<body onload='doTest()'>"
+            + "<iframe name='myIFrame' src='about:blank'></iframe></body></html>";
 
-      final List collectedAlerts = new ArrayList();
-      loadPage(content, collectedAlerts);
-      final List expectedAlerts = Arrays.asList( new String[]{"1", "myIFrame"} );
-      createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-      assertEquals( expectedAlerts, collectedAlerts );
-  }
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        final List expectedAlerts = Arrays.asList( new String[]{"1", "myIFrame"} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 
     /**
      * Tests that the <iframe> node is visible from the contained page when it is loaded
      * @throws Exception if the test fails
      */
     public void testOnLoadGetsIFrameElementByIdInParent() throws Exception {
-      final String firstContent
-           = "<html><head><title>First</title></head>"
-           + "<body>"
-           + "<iframe id='myIFrame' src='frame.html'></iframe></body></html>";
+        final String firstContent
+            = "<html><head><title>First</title></head>"
+            + "<body>"
+            + "<iframe id='myIFrame' src='frame.html'></iframe></body></html>";
 
-      final String frameContent
-      = "<html><head><title>Frame</title><script>\n"
-      + "function doTest() {\n"
-      + "    alert(parent.document.getElementById('myIFrame').tagName);\n"
-      + "}\n</script></head>"
-      + "<body onload='doTest()'>"
-      + "</body></html>";
-      
-      final WebClient webClient = new WebClient();
-      final MockWebConnection webConnection =
-          new MockWebConnection(webClient);
+        final String frameContent
+            = "<html><head><title>Frame</title><script>\n"
+            + "function doTest() {\n"
+            + "    alert(parent.document.getElementById('myIFrame').tagName);\n"
+            + "}\n</script></head>"
+            + "<body onload='doTest()'>"
+            + "</body></html>";
+              
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection =
+            new MockWebConnection(webClient);
 
-      webConnection.setDefaultResponse(frameContent);
-      webConnection.setResponse(URL_FIRST, firstContent);
-      webClient.setWebConnection(webConnection);
+        webConnection.setDefaultResponse(frameContent);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webClient.setWebConnection(webConnection);
 
-      final List collectedAlerts = new ArrayList();
-      webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-      final List expectedAlerts = Arrays.asList( new String[]{"IFRAME"} );
-      webClient.getPage(URL_FIRST);
-      assertEquals( expectedAlerts, collectedAlerts );
-  }
+        final List expectedAlerts = Arrays.asList( new String[]{"IFRAME"} );
+        webClient.getPage(URL_FIRST);
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }

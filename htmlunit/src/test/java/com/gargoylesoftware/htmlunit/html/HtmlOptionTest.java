@@ -63,14 +63,14 @@ public class HtmlOptionTest extends WebTestCase {
     public void testSelect() throws Exception {
 
         final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'><select name='select1' id='select1'>"
-                 + "<option value='option1' id='option1'>Option1</option>"
-                 + "<option value='option2' id='option2' selected='selected'>Option2</option>"
-                 + "<option value='option3' id='option3'>Option3</option>"
-                 + "</select>"
-                 + "<input type='submit' name='button' value='foo'/>"
-                 + "</form></body></html>";
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'><select name='select1' id='select1'>"
+            + "<option value='option1' id='option1'>Option1</option>"
+            + "<option value='option2' id='option2' selected='selected'>Option2</option>"
+            + "<option value='option3' id='option3'>Option3</option>"
+            + "</select>"
+            + "<input type='submit' name='button' value='foo'/>"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlOption option1 = ( HtmlOption )page.getHtmlElementById( "option1" );
@@ -100,7 +100,7 @@ public class HtmlOptionTest extends WebTestCase {
     public void testGetValue() throws Exception {
 
         final String htmlContent
-        = "<html><head><title>foo</title></head><body>"
+            = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'><select name='select1' id='select1'>"
             + "<option value='option1' id='option1'>Option1</option>"
             + "<option id='option2' selected>Number Two</option>"
@@ -128,7 +128,7 @@ public class HtmlOptionTest extends WebTestCase {
     public void testGetValue_ContentsIsValue() throws Exception {
 
         final String htmlContent
-        = "<html><head><title>foo</title></head><body>"
+            = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'>" 
             + "<select name='select1' id='select1'>"
             + "     <option id='option1'>Option1</option>"

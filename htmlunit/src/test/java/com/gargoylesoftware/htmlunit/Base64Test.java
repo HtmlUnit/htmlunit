@@ -59,14 +59,14 @@ public class Base64Test extends WebTestCase {
      */
     public void testEncode() {
         final String data[][] = {
-                {"", ""},
-                {"a", "YQ=="},
-                {"bc", "YmM="},
-                {"def", "ZGVm"},
-                {"ghij", "Z2hpag=="},
-                {"klmno", "a2xtbm8="},
-                {"pqrztu", "cHFyenR1"},
-                };
+            {"", ""},
+            {"a", "YQ=="},
+            {"bc", "YmM="},
+            {"def", "ZGVm"},
+            {"ghij", "Z2hpag=="},
+            {"klmno", "a2xtbm8="},
+            {"pqrztu", "cHFyenR1"},
+        };
 
         for( int i = 0; i < data.length; i++ ) {
             final String input = data[i][0];
