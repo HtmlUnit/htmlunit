@@ -463,7 +463,8 @@ public abstract class HtmlElement {
             throw new ElementNotFoundException( elementName, attributeName, attributeValue );
         }
         else if( listSize > 1 ) {
-            throw new IllegalStateException( "Found more than one matching element" );
+            throw new IllegalStateException( "Found more than one matching element: elementName=["
+                +elementName+"] attributeName=["+attributeName+"] attributeValue=["+attributeValue+"]");
         }
 
         return ( HtmlElement )list.get( 0 );

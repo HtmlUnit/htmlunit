@@ -126,7 +126,7 @@ public class HtmlSelect
                 final HtmlOption option = ( HtmlOption )iterator.next();
                 setSelected(
                     option.getElement(),
-                    option.getValueAttribute().equals( optionValue ) );
+                    option.getValueAttribute().equals( optionValue ) && isSelected );
             }
         }
     }
@@ -236,6 +236,8 @@ public class HtmlSelect
      */
     public HtmlOption getOptionByValue( final String value )
         throws ElementNotFoundException {
+        assertNotNull("value", value);
+
         return ( HtmlOption )getOneHtmlElementByAttribute( "option", "value", value );
     }
 
