@@ -76,8 +76,9 @@ public class Location extends SimpleScriptable {
     /**
      * Set the "href" property
      * @param href The new location
+     * @throws IOException when location loading fails
      */
-    public void jsSet_href( final String href ) {
+    public void jsSet_href( final String href ) throws IOException {
         window_.jsSet_location(href);
     }
 
