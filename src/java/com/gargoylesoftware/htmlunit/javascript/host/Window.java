@@ -71,6 +71,7 @@ import com.gargoylesoftware.htmlunit.javascript.WindowFramesArray;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author  Darrell DeBoer
  * @author Marc Guillemot
+ * @author Dierk Koenig
  */
 public final class Window extends SimpleScriptable {
 
@@ -474,6 +475,15 @@ public final class Window extends SimpleScriptable {
      */
     public void jsFunction_moveTo(final int x, final int y) {
         getLog().debug( "Window.moveTo() not implemented" );
+    }
+
+    /**
+     * Does nothing
+     * @param width The width of the Window in pixel after resize.
+     * @param height The height of the Window in pixel after resize.
+     */
+    public void jsFunction_resizeTo(final int width, final int height) {
+        getLog().debug( "Window.resizeTo() not implemented" );
     }
 
     /**
