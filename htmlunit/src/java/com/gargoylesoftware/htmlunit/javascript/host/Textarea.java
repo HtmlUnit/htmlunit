@@ -44,8 +44,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
-public class Textarea extends Input {
+public class Textarea extends FormField {
 
     private static final long serialVersionUID = 49352135575074390L;
 

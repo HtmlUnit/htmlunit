@@ -53,8 +53,9 @@ import com.gargoylesoftware.htmlunit.javascript.OptionsArray;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
+ * @author Marc Guillemot
  */
-public class Select extends Input {
+public class Select extends FormField {
 
     private static final long serialVersionUID = 4332789476842114628L;
     private OptionsArray optionsArray_;
@@ -130,11 +131,11 @@ public class Select extends Input {
      */
     public String jsGet_type() {
         final String type;
-        if( getHtmlElementOrDie().getAttributeValue("multiple").length() == 0 ) {
-            type = "select-one";
+        if (getHtmlSelect().isMultipleSelectEnabled()) {
+            type = "select-multiple";
         }
         else {
-            type = "select-multiple";
+            type = "select-one";
         }
         return type;
     }

@@ -39,12 +39,13 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object that represents a button
+ * The javascript object that represents a button (&lt;button type=...&gt;)
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
-public class Button extends Input {
+public class Button extends FormField {
 
     private static final long serialVersionUID = -3163222167146343119L;
 

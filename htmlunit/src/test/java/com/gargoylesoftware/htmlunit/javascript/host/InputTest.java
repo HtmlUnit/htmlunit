@@ -132,8 +132,8 @@ public class InputTest extends WebTestCase {
                  + "</script></head><body onload='doTest()'>"
                  + "<p>hello world</p>"
                  + "<form name='form1'>"
-                 + "    <input type='button' name='button1' />"
-                 + "    <button type='button' name='button2' />"
+                 + "    <input type='button' name='button1'></button>"
+                 + "    <button type='button' name='button2'></button>"
                  + "    <input type='checkbox' name='checkbox1' />"
                  + "    <input type='file' name='fileupload1' />"
                  + "    <input type='hidden' name='hidden1' />"
@@ -146,9 +146,9 @@ public class InputTest extends WebTestCase {
                  + "    <input type='password' name='password1' />"
                  + "    <input type='radio' name='radio1' />"
                  + "    <input type='reset' name='reset1' />"
-                 + "    <button type='reset' name='reset2' />"
+                 + "    <button type='reset' name='reset2'></button>"
                  + "    <input type='submit' name='submit1' />"
-                 + "    <button type='submit' name='submit2' />"
+                 + "    <button type='submit' name='submit2'></button>"
                  + "    <input type='text' name='textInput1' />"
                  + "    <textarea name='textarea1'>foo</textarea>"
                  + "</form>"
@@ -163,6 +163,7 @@ public class InputTest extends WebTestCase {
              "select-multiple", "password", "reset", "reset", "submit",
              "submit", "text", "textarea"
          } );
+         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
          assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -530,5 +531,25 @@ public class InputTest extends WebTestCase {
         
         final List expectedAlerts = Arrays.asList( new String[]{"on", "on"} );
         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * Test that changing type doesn't throw.
+     * Test must be extended when setting type really does something. 
+     * @throws Exception if the test fails
+     */
+    public void testChangeType() throws Exception {
+        final String content
+             = "<html><head><title>First</title><script>\n"
+             + "function doTest() {\n"
+             + "    document.myForm.myRadio.type = 'hidden';\n"
+             + "}\n</script></head>"
+             + "<body onload='doTest()'>\n"
+             + "<form name='myForm' action='foo'>\n"
+             + "<input type='radio' name='myRadio'/>"
+             + "</form></body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
     }
 }
