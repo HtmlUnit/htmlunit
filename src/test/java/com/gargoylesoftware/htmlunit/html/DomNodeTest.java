@@ -207,7 +207,7 @@ public class DomNodeTest extends WebTestCase {
 
     /**
      * Reads the position of the node amongs the children of its parent
-     * @param _node the node to look at
+     * @param node the node to look at
      * @return the position
      */
     private int readPositionAmongParentChildren(final DomNode node) {

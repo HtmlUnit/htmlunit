@@ -146,10 +146,10 @@ public final class Document extends NodeImpl {
 
 
     /**
-     * Return the value of the javascript attribute "links".
-     * @return The value of this attribute.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/links.asp"
+     * Return the value of the javascript attribute "links".  Refer also to the
+     * <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/links.asp"
      * MSDN documentation</a>
+     * @return The value of this attribute.
      */
     public Object jsGet_links() {
         if (links_ == null) {
