@@ -54,5 +54,14 @@ public final class SimpleCredentialProvider implements CredentialProvider {
             throw new NullPointerException( description );
         }
     }
+
+
+    /**
+     * Return a string representation of this object.
+     * @return a string representation of this object.
+     */
+    public String toString() {
+        return "SimpleCredentialProvider[userId=\""+keyValuePair_.getKey()+"\"]";
+    }
 }
 
