@@ -1517,7 +1517,9 @@ public class WebClient {
     }
     
     /**
-     * @param handler The handler to set
+     * Set the handler to be used whenever a refresh is triggered.  Refer
+     * to the documentation for {@link RefreshHandler} for more details.
+     * @param handler The new handler
      */
     public void setRefreshHandler( final RefreshHandler handler ) {
         if( handler == null ) {
@@ -1529,7 +1531,8 @@ public class WebClient {
     }
     
     /**
-     * @return The current RefreshHandler
+     * Return the current refresh handler or null if one has not been set.
+     * @return The current RefreshHandler or null
      */
     public RefreshHandler getRefreshHandler() {
         return refreshHandler_;
