@@ -732,7 +732,7 @@ public final class Document extends NodeImpl {
      * W3C documentation</a>
      */
     public String jsGet_domain() {
-    	return getHtmlPage().getWebResponse().getUrl().getHost();
+        return getHtmlPage().getWebResponse().getUrl().getHost();
     }
 }
 
