@@ -60,7 +60,7 @@ public class WebRequestSettings {
      * @param target The URL for this request
      */
     public WebRequestSettings(final URL target) {
-        url_ = target;
+        setURL(target);
     }
 
     /**
@@ -68,8 +68,8 @@ public class WebRequestSettings {
      * @param submitMethod The submitMethod to set.
      */
     public WebRequestSettings(final URL target, final SubmitMethod submitMethod) {
-        url_ = target;
-        submitMethod_ = submitMethod;
+        this(target);
+        setSubmitMethod(submitMethod);
     }
 
     /**
