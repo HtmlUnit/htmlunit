@@ -46,13 +46,23 @@ public class HtmlOption
      * @param selected true if this option should be selected.
      */
     public void setSelected( final boolean selected ) {
-        //TODO: If the select is single-selection then deselect others
-        if( selected ) {
-            getElement().setAttribute("selected", "selected");
+        final String value = getValueAttribute();
+        if( value.length() ==  0 ) {
+            throw new IllegalStateException("Can't select this option because it has no value set");
         }
-        else {
-            getElement().removeAttribute("selected");
+        getEnclosingSelectOrDie().setSelectedAttribute(value, selected);
+    }
+
+
+    private HtmlSelect getEnclosingSelectOrDie() {
+        HtmlElement parent = getParent();
+        while( parent != null ) {
+            if( parent instanceof HtmlSelect ) {
+                return (HtmlSelect)parent;
+            }
+            parent = parent.getParent();
         }
+        throw new IllegalStateException("Can't find enclosing select element");
     }
 
 

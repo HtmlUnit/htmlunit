@@ -3,19 +3,30 @@
 
 <section title="">
 	<p>
-		Items on this list are planned items that aren't bugs or feature requests.  Those are all
-		listed in the sourceforge tracker.  They are in no particular order.
+		Items on this list are planned items that aren't bugs or feature requests. In other words,
+		these are all those things that need to be done but aren't listed in the sourceforge
+		bug tracker.  They are in no particular order.
 	</p>
+</section>
+
+
+<section title="Code todo's">
 	<ol>
 		<li>implement Document.write()</li>
 		<li>Have TopLevelWindow's deregister themselves with WebClient when they are closed</li>
-		<li>During form.reset, all submittable fields must revert back to their original values</li>
 		<li>Upgrade HttpClient to the latest gump version</li>
-		<li>window-howto.xml</li>
 		<li>HtmlTextArea.getText() and setText() currently don't modify the dom.  This should be fixed</li>
+		<li></li>
 	</ol>
 </section>
 
+
+<section title="Documentation todo's">
+	<ol>
+		<li>window-howto.xml</li>
+		<li>Generate one big pdf from all the smaller documents</li>
+	</ol>
+</section>
 
 </document>
 
