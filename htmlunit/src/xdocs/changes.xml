@@ -76,6 +76,12 @@
 		<change type="new">
 			Added support for HtmlImageInput.click(...)
 		</change>
+		<change type="change">
+			Changed redirect logic so that on a 302 or 303 status, if the method changes
+			from post to get, the parameters will be thrown away for the second request.
+			The http spec is unclear on this exact behaviour but the common browsers seem
+			to do it this way.
+		</change>
 	</change-log>
 </section>
 
