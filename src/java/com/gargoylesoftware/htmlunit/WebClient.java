@@ -11,6 +11,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,6 +35,7 @@ import org.apache.commons.logging.LogFactory;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author Dominique Broeglin
+ * @author Noboru Sinohara
  */
 public class WebClient {
 
@@ -897,6 +899,19 @@ public class WebClient {
             public URL getUrl() { return url; }
             public String getResponseHeaderValue( final String key ) { return ""; }
             public long getLoadTimeInMilliSeconds() { return 0; }
+            public byte[] getResponseBody() {
+                try {
+                    /* 
+                     * this method must return raw bytes.
+                     * without encoding, getBytes use locale encoding.
+                     */
+                    return contentString.getBytes("ISO-8859-1");
+                }
+                catch( final UnsupportedEncodingException e ){
+                    return null;
+                }
+            }
+            public String getContentCharSet() { return "ISO-8859-1"; }
         };
     }
 

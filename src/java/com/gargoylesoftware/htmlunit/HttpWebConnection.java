@@ -20,6 +20,7 @@ import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
@@ -40,6 +41,7 @@ import org.apache.commons.logging.impl.SimpleLog;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Noboru Sinohara
  */
 public class HttpWebConnection extends WebConnection {
     private final Map httpClients_ = new HashMap( 9 );
@@ -361,6 +363,20 @@ public class HttpWebConnection extends WebConnection {
                 public long getLoadTimeInMilliSeconds() {
                     return loadTime;
                 }
+
+                public String getContentCharSet(){
+                    if( method instanceof HttpMethodBase ){
+                        return ((HttpMethodBase)method).getResponseCharSet();
+                    }
+                    else {
+                        return "ISO-8859-1";
+                    }
+                }
+                
+                public byte [] getResponseBody(){
+                    return contentBuffer;
+                }
+
             };
     }
 

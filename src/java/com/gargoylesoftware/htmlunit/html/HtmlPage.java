@@ -38,6 +38,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.apache.commons.httpclient.HttpConstants;
 
 /**
  *  A representation of an html page returned from a server. This is also the
@@ -46,6 +47,7 @@ import org.xml.sax.SAXException;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Alex Nikiforoff
+ * @author Noboru Sinohara
  */
 public final class HtmlPage
          extends HtmlElement
@@ -75,6 +77,7 @@ public final class HtmlPage
 
     private final WebClient webClient_;
     private final URL originatingUrl_;
+    private       String originalCharset_ = null;
     private final Map elements_ = new HashMap( 89 );
     private final WebResponse webResponse_;
 
@@ -258,7 +261,41 @@ public final class HtmlPage
         }
     }
 
+    /**
+     * Return the charset used in the page.
+     * The sources of this information are from 1).meta element which 
+     * http-equiv attribute value is 'content-type', or if not from
+     * the response header.
+     * @return the value of charset.
+     */
+    public String getPageEncoding(){
+        if( originalCharset_ != null ) {
+            return originalCharset_ ;
+        }
+        ArrayList ar = new ArrayList();
+        ar.add("meta");
+        List list = getHtmlElementsByTagNames(ar);
+        for(int i=0; i<list.size();i++ ){
+            HtmlMeta meta = (HtmlMeta) list.get(i);
+            String httpequiv = meta.getHttpEquivAttribute();
+            if( "content-type".equals(httpequiv.toLowerCase()) ){
+                String contents = meta.getContentAttribute();
+                int pos = contents.toLowerCase().indexOf("charset=");
+                if( pos>=0 ){
+                    originalCharset_ = contents.substring(pos+8);
+                    getLog().debug("Page Encoding detected:" + originalCharset_);
+                    return originalCharset_;
+                }
+            }
+        }
+        if( originalCharset_ == null ) {
+            originalCharset_ = webResponse_.getContentCharSet();
+        }
+        return originalCharset_;
+    }
 
+
+    
     /**
      * Return the xml element corresponding with this page.  This has been
      * overridden to ensure it returns a correct value even if the page
@@ -777,16 +814,27 @@ public final class HtmlPage
 
     /**
      * Internal use only.  This is a callback from {@link ScriptFilter} and
-     * should not be called by consumers of HtmlUnit.
+     * should not be called by consumers of HtmlUnit. this method assume the
+     * charset is null.
      * @param srcAttribute The source attribute from the script tag.
      */
     public void loadExternalJavaScriptFile( final String srcAttribute  ) {
-        final ScriptEngine engine = getWebClient().getScriptEngine();
-        if( engine != null ) {
-            engine.execute( this, loadJavaScriptFromUrl( srcAttribute ), srcAttribute, null );
-        }
+        loadExternalJavaScriptFile( srcAttribute, null );
     }
 
+    /** 
+     * Internal use only.  This is a callback from {@link ScriptFilter} and
+     * should not be called by consumers of HtmlUnit.
+     * @param srcAttribute The source attribute from the script tag.
+     * @param charset The charset attribute from the script tag.
+     */ 
+    public void loadExternalJavaScriptFile( final String srcAttribute,
+                                            final String charset  ) {
+        final ScriptEngine engine = getWebClient().getScriptEngine();
+        if( engine != null ) {
+            engine.execute( this, loadJavaScriptFromUrl( srcAttribute, charset ), srcAttribute, null );
+        }
+    }
 
     /**
      * Internal use only.  Return true if a script with the specified type and language attributes
@@ -812,21 +860,37 @@ public final class HtmlPage
     }
 
 
-    private String loadJavaScriptFromUrl( final String urlString ) {
+    private String loadJavaScriptFromUrl( final String urlString,
+                                          final String charset ) {
         URL url = null;
+        String scriptEncoding = charset;
+        getPageEncoding();
         try {
             url = getFullyQualifiedUrl(urlString);
             final WebResponse webResponse= getWebClient().loadWebResponse(
                 url, SubmitMethod.GET, Collections.EMPTY_LIST);
             if( webResponse.getStatusCode() == 200 ) {
                 final String contentType = webResponse.getContentType();
+                final String contentCharset = webResponse.getContentCharSet();
                 if( contentType.equals("text/javascript") == false
                         && contentType.equals("application/x-javascript") == false ) {
                     getLog().warn(
                         "Expected content type of text/javascript or application/x-javascript for remotely "
                         + "loaded javascript element but got [" + webResponse.getContentType()+"]");
                 }
-                return webResponse.getContentAsString();
+                if( scriptEncoding == null || scriptEncoding.length() == 0 ){
+                    if( contentCharset.equals("ISO-8859-1")==false ) {
+                        scriptEncoding = contentCharset;
+                    }
+                    else if( originalCharset_.equals("ISO-8859-1")==false ){
+                        scriptEncoding = originalCharset_ ;
+                    }
+                }
+                if( scriptEncoding == null || scriptEncoding.length() == 0 ){
+                    scriptEncoding = "ISO-8859-1";
+                }
+                byte [] data = webResponse.getResponseBody();
+                return HttpConstants.getContentString(data, 0, data.length, scriptEncoding );
             }
             else {
                 getLog().error("Error loading javascript from ["+url.toExternalForm()

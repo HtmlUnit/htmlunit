@@ -34,6 +34,7 @@ import junit.framework.AssertionFailedError;
 /**
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Noboru Sinohara
  */
 public class HtmlPageTest extends WebTestCase {
 
@@ -763,6 +764,36 @@ public class HtmlPageTest extends WebTestCase {
 
         final List expectedAlerts = Collections.EMPTY_LIST;
         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    public void testGetPageEncoding() throws Exception {
+
+        final String content
+                 = "<html><head>"
+                 + "<title>foo</title>"
+                 + "<meta http-equiv='Content-Type' content='text/html ;charset=Shift_JIS'>"
+                 + "</head><body>"
+                 + "<table><tr><td>\n"
+                 + "<meta name=vs_targetSchema content=\"http://schemas.microsoft.com/intellisense/ie5\">"
+                 + "<form name='form1'>"
+                 + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+                 + "    <input type='text' name='textfield2' id='textfield2'/>"
+                 + "</form>"
+                 + "</td></tr></table>"
+                 + "</body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setResponse(
+            new URL("http://justSJIS"), content, 
+            200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        client.setWebConnection( webConnection );
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://justSJIS" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+
+        assertEquals("Shift_JIS", page.getPageEncoding());
     }
 }
 
