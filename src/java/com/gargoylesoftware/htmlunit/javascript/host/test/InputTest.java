@@ -46,6 +46,7 @@ public class InputTest extends WebTestCase {
 
          final List collectedAlerts = new ArrayList();
          final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
 
          final List expectedAlerts = Arrays.asList( new String[]{
              "foo", "text", "textfield1", "form1", "cat"
@@ -99,6 +100,7 @@ public class InputTest extends WebTestCase {
 
          final List collectedAlerts = new ArrayList();
          final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
 
          final List expectedAlerts = Arrays.asList( new String[]{
              "button", "button", "checkbox", "file", "hidden", "select-one",

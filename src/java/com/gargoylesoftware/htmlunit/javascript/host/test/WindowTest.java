@@ -353,7 +353,6 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
         final List collectedAlerts = new ArrayList();
-        final List collectedPrompts = new ArrayList();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 

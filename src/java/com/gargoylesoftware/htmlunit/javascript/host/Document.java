@@ -107,7 +107,7 @@ public final class Document extends HTMLElement {
     public static Object jsFunction_write(
         final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
 
-        final String content = getStringArg(0, args, "");
+//        final String content = getStringArg(0, args, "");
         return null;
     }
 

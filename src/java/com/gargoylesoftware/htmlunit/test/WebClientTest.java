@@ -167,6 +167,7 @@ public class WebClientTest extends WebTestCase {
 
         final HtmlPage page = ( HtmlPage )client.getPage(
                 new URL( "http://page1" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals("foo", page.getTitleText());
 
         assertEquals( 1, collectedOpenEvents.size() );
         final WebWindowEvent openEvent = (WebWindowEvent)collectedOpenEvents.get(0);
@@ -479,7 +480,6 @@ public class WebClientTest extends WebTestCase {
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
-        final HtmlElement element = page.getHtmlElementById("submit0");
 
         assertEquals( "submit0", page.pressAccessKey('a').getAttributeValue("name") );
         assertEquals( "submit2", page.pressAccessKey('c').getAttributeValue("name") );
@@ -498,7 +498,6 @@ public class WebClientTest extends WebTestCase {
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
-        final HtmlElement element = page.getHtmlElementById("submit0");
 
         assertEquals( "submit0", page.tabToNextElement().getAttributeValue("name") );
         assertEquals( "submit1", page.tabToNextElement().getAttributeValue("name") );
@@ -517,7 +516,6 @@ public class WebClientTest extends WebTestCase {
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
-        final HtmlElement element = page.getHtmlElementById("submit0");
 
         assertEquals( "submit2", page.tabToPreviousElement().getAttributeValue("name") );
         assertEquals( "submit1", page.tabToPreviousElement().getAttributeValue("name") );

@@ -198,7 +198,6 @@ public class HtmlSelect
         final KeyValuePair[] pairs;
 
         if( fakeSelectedValues_ == null ) {
-            final StringBuffer buffer = new StringBuffer();
             final List selectedOptions = getSelectedOptions();
             final int optionCount = selectedOptions.size();
 

@@ -57,7 +57,7 @@ public class HtmlImageInputTest extends WebTestCase {
 
         final HtmlImageInput imageInput = (HtmlImageInput)form.getInputByName("button");
         final HtmlPage secondPage = (HtmlPage)imageInput.click();
-
+		assertNotNull(secondPage);
         assertEquals(
             Collections.singletonList(new KeyValuePair("button", "foo")),
             webConnection.getLastParameters() );
@@ -85,6 +85,7 @@ public class HtmlImageInputTest extends WebTestCase {
 
         final HtmlImageInput imageInput = (HtmlImageInput)form.getInputByName("button");
         final HtmlPage secondPage = (HtmlPage)imageInput.click(100,200);
+        assertNotNull(secondPage);
 
         final List expectedPairs = Arrays.asList( new Object[]{
             new KeyValuePair("button", "foo"),

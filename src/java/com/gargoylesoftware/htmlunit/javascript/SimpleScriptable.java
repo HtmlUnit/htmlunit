@@ -324,7 +324,6 @@ public class SimpleScriptable extends ScriptableObject {
                  getLog().debug("Setter not implemented for property ["+name+"]");
              }
              else {
-                 final String className = getClass().getName();
                  final Class parameterClass = info.setter_.getParameterTypes()[0];
                  if( parameterClass == "".getClass() ) {
                      newValue = newValue.toString();

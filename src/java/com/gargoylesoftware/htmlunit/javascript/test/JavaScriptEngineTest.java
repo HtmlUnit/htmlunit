@@ -94,6 +94,7 @@ public class JavaScriptEngineTest extends WebTestCase {
                  + "</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
             "foo"
@@ -135,6 +136,7 @@ public class JavaScriptEngineTest extends WebTestCase {
                 new URL( "http://www.gargoylesoftware.com" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlScript htmlScript = (HtmlScript)page.getHtmlElementById("script1");
+        assertNotNull(htmlScript);
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -157,6 +159,7 @@ public class JavaScriptEngineTest extends WebTestCase {
                  + "</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Arrays.asList( new String[]{
             "1"
@@ -171,7 +174,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final FakeWebConnection webConnection = new FakeWebConnection( client );
 
         final String htmlContent
-             = "<html><head><script src='./test.js'></script>"
+             = "<html><head><title>foo</title><script src='./test.js'></script>"
              + "<script>var testLocalVariable = new Array();</script>"
              + "</head><body onload='testNestedMethod();' >"
              + "<form name='form1' method='POST' action='../foo' >"
@@ -195,6 +198,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage )client.getPage(
                 new URL( "http://first/index.html" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals("foo", page.getTitleText());
 
     }
 
@@ -240,7 +244,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final FakeWebConnection webConnection = new FakeWebConnection( client );
 
         final String htmlContent
-             = "<html><head><script language='javascript'><!--\n"
+             = "<html><head><title>foo</title><script language='javascript'><!--\n"
              + "function doTest() {\n"
              + "}\n"
              + "-->\n</script></head>\n"
@@ -254,6 +258,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage )client.getPage(
                 new URL( "http://first/index.html" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals("foo", page.getTitleText());
 
     }
 
@@ -264,7 +269,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final FakeWebConnection webConnection = new FakeWebConnection( client );
 
         final String htmlContent
-             = "<html><head><script language='javascript'><!-- Some comment here\n"
+             = "<html><head><title>foo</title><script language='javascript'><!-- Some comment here\n"
              + "function doTest() {\n"
              + "}\n"
              + "-->\n</script></head>\n"
@@ -278,5 +283,6 @@ public class JavaScriptEngineTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage )client.getPage(
                 new URL( "http://first/index.html" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals("foo", page.getTitleText());
     }
 }
