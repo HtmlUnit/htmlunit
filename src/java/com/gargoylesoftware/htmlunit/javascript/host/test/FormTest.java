@@ -337,4 +337,39 @@ public class FormTest extends WebTestCase {
         final List expectedAlerts = Arrays.asList( new String[]{"value = 2"} );
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+
+    /**
+     * Test for a bug that appeared when visiting mail.yahoo.com.  Setting the value of one input
+     * seems to blow away the other input.
+     */
+    public void testFindInputWithoutTypeDefined() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title></head>"
+                 + "<body onload='alert(document.simple_form.login.value);'>"
+                 + "<p>hello world</p><table><tr><td>"
+                 + "<form action='login.jsp' name='simple_form'>"
+                 + "    <input name='msg' type='hidden' value='0'>"
+                 + "    <script>document.simple_form.msg.value=1</script>"
+                 + "    <input name='login' size='17' value='foo'>"
+                 + "</form></td></tr></table>"
+                 + "</body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( content );
+        client.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals("foo", page.getTitleText());
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "foo"
+        } );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }
