@@ -52,6 +52,26 @@
 				their jar file.  If that doesn't help then post something to the HtmlUnit mailing list.
 			</answer>
 		</faq-entry>
+		<faq-entry>
+			<question>
+				I get error messages about redirection being disabled but I've turned it on
+				<source>
+26.02.2003 16:07:05 org.apache.commons.httpclient.HttpMethodBase   processRedirectResponse
+INFO: Redirect requested but followRedirects is disabled
+				</source>
+			</question>
+			<answer>
+				It's an annoyance that I haven't figured out how to fix yet.
+			</answer>
+			<answer>
+				For a variety of reasons, I handle the redirection logic inside HtmlUnit rather than letting
+				commons-httpclient handle it for me.  It's commons-httpclient that is displaying that message
+				because I have explicitly disabled its redirection support.
+			</answer>
+			<answer>
+				I'd like to filter out that warning message but haven't figured out a clean way of doing it.
+			</answer>
+		</faq-entry>
 <!--
 		<faq-entry>
 			<question>
