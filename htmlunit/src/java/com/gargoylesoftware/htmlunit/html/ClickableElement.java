@@ -91,16 +91,20 @@ public abstract class ClickableElement extends StyledElement {
 
         if( onClick.length() != 0 && page.getWebClient().isJavaScriptEnabled() ) {
             if (isStateUpdateFirst()) {
-                final Page pageAfterAction = doClickAction(page);
-                page.executeJavaScriptIfPossible( onClick, "onClick handler for "+getClass().getName(), true, this );
-                return pageAfterAction;
+                doClickAction(page);
+                final ScriptResult scriptResult
+                        = page.executeJavaScriptIfPossible( onClick,
+                        "onClick handler for "+getClass().getName(), true, this );
+                final Page scriptPage = scriptResult.getNewPage();
+                // Are there any situations when we should return pageAfterAction?
+                return scriptPage;
             }
             final ScriptResult scriptResult
                 = page.executeJavaScriptIfPossible( onClick,
                 "onClick handler for "+getClass().getName(), true, this );
             final Page scriptPage = scriptResult.getNewPage();
             if( scriptResult.getJavaScriptResult().equals( Boolean.FALSE ) ) {
-                return scriptResult.getNewPage();
+                return scriptPage;
             }
             else {
                 return doClickAction(scriptPage);
