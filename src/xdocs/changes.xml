@@ -68,6 +68,10 @@
             	Fixed bug "document.write of script element does not load script".  Patch submitted
             	by David K. Taylor.
             </action>
+            <action type="update" dev="mbowler" id="740636" due-to="David K. Taylor">
+	            Fix for bug 740636 "getElementsByTagName should be case insensitive" 
+	            - patch submitted by David K. Taylor
+            </action>
         </release>
     </body>
 
