@@ -64,7 +64,16 @@
     <mkdir dir="target/test-classes"/>
 </target>
 
-<target name="compile" description="compile" depends="maketarget">
+<target name="copyconfig" description="copy config files to target">
+    <copy todir="target/classes">
+        <fileset dir="src/java">
+            <include name="**/JavaScriptConfiguration.xml"/>
+            <include name="**/JavaScriptConfiguration.xsd"/>
+        </fileset>
+    </copy>
+</target>
+
+<target name="compile" description="compile" depends="maketarget,copyconfig">
     <javac srcdir="src/java" destdir="target/classes" debug="on" deprecation="off">
         <classpath refid="base.class.path"/>
     </javac>
@@ -85,12 +94,10 @@
 
 
 <target name="clean" description="clean">
-     <delete quiet="true">
-        <fileset dir="target/classes" includes="**/*.class"/>
-        <fileset dir="target/test-classes" includes="**/*.class"/>
-    </delete>
+    <delete dir="target" quiet="true"/>
     <delete dir="build/${version}"/>
     <delete file="dist/projectdocs.zip"/>
+    <delete file="dist/${version}.zip"/>
 </target>
 
 
@@ -149,7 +156,7 @@
 
     <jar
         jarfile="build/${version}/lib/HtmlUnit.jar"
-        basedir="src/java"
+        basedir="target/classes"
         excludes="**/test/*,**/*.java,build.xml,lib,**/package.html"
         manifest="build/${version}/META-INF/MANIFEST.MF"/>
     <delete file="build/${version}/META-INF/MANIFEST.MF"/>
