@@ -80,6 +80,10 @@
 	            Fix for bug 740665 "Script attributes undefined when script executes".
 	            Patch submitted by David K. Taylor
             </action>
+            <action type="update" dev="mbowler" id="742902 " due-to="David K. Taylor">
+	            Fix for bug 742902 "document.location prints as object reference instead of URL".
+	            Patch submitted by David K. Taylor
+            </action>
         </release>
     </body>
 

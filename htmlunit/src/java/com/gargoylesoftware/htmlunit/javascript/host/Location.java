@@ -85,5 +85,14 @@ public class Location extends SimpleScriptable {
         final URL url = window_.getWebWindow().getEnclosedPage().getWebResponse().getUrl();
         return url.getHost();
     }
+
+
+    /**
+     * Return the string value of the location, which is the full URL.
+     * @return The string URL
+     */
+    public String toString() {
+        return jsGet_href();
+    }
 }
 

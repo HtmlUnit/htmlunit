@@ -150,7 +150,7 @@ public class DocumentTest extends WebTestCase {
      }
 
 
-    public void testDocumentLocation() throws Exception {
+    public void testDocumentLocationHref() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
 
@@ -158,6 +158,36 @@ public class DocumentTest extends WebTestCase {
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
              + "    alert(top.document.location.href);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("http://first");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for bug 742902
+     */
+    public void testDocumentLocation() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    alert(top.document.location);\n"
              + "}\n"
              + "</script></head><body onload='doTest()'>"
              + "</body></html>";
@@ -570,6 +600,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * Regression test for bug 740605
+     */
     public void testGetElementsByTagName_Inline() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
@@ -590,6 +623,9 @@ public class DocumentTest extends WebTestCase {
     }
 
 
+    /**
+     * Regression test for bug 740605
+     */
     public void testGetElementsByTagName_LoadScript() throws Exception {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
