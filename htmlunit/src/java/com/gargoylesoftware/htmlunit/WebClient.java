@@ -1209,8 +1209,15 @@ public class WebClient {
         if( tokens.isEmpty() || stringToTokenize.endsWith("/") ) {
             buffer.append("/");
         }
-        return makeUrl( buffer.toString() );
+        
+        String newUrlString = buffer.toString();
+        final int lastPoundSignIndex = newUrlString.lastIndexOf("#");
+        if( lastPoundSignIndex != -1 ) {
+            newUrlString = newUrlString.substring(0,lastPoundSignIndex);
+        }
+        return makeUrl( newUrlString );
     }
+    
     private WebResponse makeWebResponseForAboutUrl(
         final WebWindow webWindow,
         final URL url) {
