@@ -267,7 +267,7 @@ public class HtmlForm extends HtmlElement {
             return false;
         }
 
-        final Attr disabled = getElement().getAttributeNode("disabled");
+        final Attr disabled = element.getAttributeNode("disabled");
         if( disabled != null ) {
             return false;
         }

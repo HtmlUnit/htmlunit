@@ -18,9 +18,7 @@
             </action>
             <action type="update" dev="mbowler" id="803233" due-to="Brad Clarke">
                 an update of the version number in build.xml and outputting of
-
-                a src jar for the current build
-                Patch submitted by Brad Clarke
+                a src jar for the current build. Patch submitted by Brad Clarke
             </action>
             <action type="update" dev="mbowler" id="803229" due-to="Brad Clarke">
                 Added HtmlFileInput support. Patch submitted by Brad Clarke
@@ -30,13 +28,16 @@
             </action>
             <action type="update" dev="mbowler" id="802285">
                 Fixed bug where HtmlPage.asText() would blow up if form tags were
-
                 found between tr and td tags.  Clearly this is illegal html but
                 the browsers support it so HtmlUnit needs to as well.
             </action>
             <action type="update" dev="mbowler" id="805332" due-to="Brad Clarke">
                 Fixed bug where form elements without names were being submitted anyway.  Patch
                 supplied by Brad Clarke
+            </action>
+            <action type="update" dev="mbowler" id="808776" due-to="Brad Clarke">
+                Fixed bug where disabled elements were being submitted anyway.
+                Patch supplied by Brad Clarke
             </action>
         </release>
 
