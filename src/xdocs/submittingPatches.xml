@@ -32,8 +32,8 @@
                         already in use.  Refer to the link above to
                         see the coding conventions that we are using here.  We use checkstyle to enforce
                         many of the coding standards (some things like good naming can't be easily checked
-                        with a tool but we check as much as we can automatically).  The ant target
-                        "checkstyle" will check all the code.
+                        with a tool but we check as much as we can automatically).  The maven build should
+                        perform these checks for you.
                     </li>
                     <li>
                         Make sure the new code has automated unit tests written for
