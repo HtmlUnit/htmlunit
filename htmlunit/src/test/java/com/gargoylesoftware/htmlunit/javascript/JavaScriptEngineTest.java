@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -612,6 +610,8 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     private InputSource createInputSourceForFile( final String fileName ) throws FileNotFoundException {
-        return new InputSource( new BufferedInputStream( new FileInputStream(fileName)));
+        return new InputSource( getFileAsStream(fileName) );
     }
+    
 }
+

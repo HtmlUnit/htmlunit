@@ -71,7 +71,7 @@ public class JellyTest extends WebTestCase {
      */
     public static Test suite() throws Exception {
         final XMLOutput output = XMLOutput.createXMLOutput(System.out);
-        final File file = new File("src/test/jelly/com/gargoylesoftware/htmlunit/WebClient.jelly");
+        final File file = getFileObject("src/test/jelly/com/gargoylesoftware/htmlunit/WebClient.jelly");
         final JellyContext context = new JellyContext().runScript(file, output);
         final TestSuite answer = (TestSuite) context.getVariable("org.apache.commons.jelly.junit.suite");
         if ( answer == null ) {
