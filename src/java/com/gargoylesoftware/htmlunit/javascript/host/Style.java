@@ -39,6 +39,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+
+import java.text.MessageFormat;
+import java.text.ParseException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedMap;
@@ -52,9 +55,11 @@ import org.mozilla.javascript.Scriptable;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Daniel Gredler
  */
 public class Style extends SimpleScriptable {
     private static final long serialVersionUID = -1976370264911039311L;
+    private static final MessageFormat URL_FORMAT = new MessageFormat("url({0})");
     private HTMLElement jsElement_;
 
     /**
@@ -69,8 +74,30 @@ public class Style extends SimpleScriptable {
      * @param htmlElement The element that this style describes
      */
     public void initialize( final HTMLElement htmlElement ) {
+        // Initialize.
         Assert.notNull("htmlElement", htmlElement);
         jsElement_ = htmlElement;
+        
+        if (htmlElement.getHtmlElementOrDie().getPage().getWebClient().getBrowserVersion().isIE()) {
+            // If a behavior was specified in the style, apply the behavior.
+            for (Iterator i = getStyleMap().entrySet().iterator(); i.hasNext();) {
+                final Map.Entry entry = (Map.Entry) i.next();
+                final String key = (String) entry.getKey();
+                if ("behavior".equals(key)) {
+                    final String value = (String) entry.getValue();
+                    try {
+                        final Object[] url = URL_FORMAT.parse(value);
+                        if (url.length > 0) {
+                            jsElement_.jsFunction_addBehavior((String) url[0]);
+                            break;
+                        }
+                    }
+                    catch (final ParseException e) {
+                        getLog().warn("Invalid behavior: '" + value + "'.");
+                    }
+                }
+            }
+        }
     }
 
 

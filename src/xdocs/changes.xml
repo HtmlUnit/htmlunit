@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1110768" due-to="Daniel Gredler">
+                JavaScript: Pick up behaviors defined in style attribute when simulating IE.
+            </action>       
             <action type="update" dev="mguillem" id="1118222">
                 JavaScript: expressions like myForm.myField now look for form fields with "myField" as id or name.
             </action>

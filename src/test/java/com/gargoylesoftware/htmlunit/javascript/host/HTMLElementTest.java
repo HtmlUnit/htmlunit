@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -503,7 +504,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testInsertAdjacentHTML() throws Exception {
-            final String content = "<html><head><title>First</title>\n"
+        final String content = "<html><head><title>First</title>\n"
                 + "<script>\n"
                 + "function test()\n"
                 + "{\n"
@@ -578,23 +579,42 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAddBehaviorDefaultHomePage() throws Exception {
-        final String content = "<html>\n" +
-                "<head>\n" +
-                "    <title>Test</title>\n" +
-                "    <script>\n" +
-                "    function doTest() {\n" +
-                "       var body = document.body;\n" +
-                "       body.addBehavior('#default#homePage');\n" +
-                "       var url = '" + URL_SECOND.toExternalForm() + "';\n" +
-                "       alert('isHomePage = ' + body.isHomePage(url));\n" +
-                "       body.setHomePage(url);\n" +
-                "       alert('isHomePage = ' + body.isHomePage(url));\n" +
-                "       body.navigateHomePage();\n" +
-                "    }\n" +
-                "    </script>\n" +
-                "</head>\n" +
-                "<body onload='doTest()'>Test</body>\n" +
-                "</html>";
+
+        final URL content1Url = new URL("http://www.domain1.com/");
+        final URL content2Url = new URL("http://www.domain2.com/");
+
+        final String content1 =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "       // Test adding the behavior via script. Note that the URL\n"
+            + "       // used to test must be part of the SAME domain as this\n"
+            + "       // document, otherwise isHomePage() always returns false.\n"
+            + "       var body = document.body;\n"
+            + "       body.addBehavior('#default#homePage');\n"
+            + "       var url = '" + content1Url.toExternalForm() + "';\n"
+            + "       alert('isHomePage = ' + body.isHomePage(url));\n"
+            + "       body.setHomePage(url);\n"
+            + "       alert('isHomePage = ' + body.isHomePage(url));\n"
+            + "       // Test behavior added via style attribute.\n"
+            + "       // Also test case-insensitivity of default behavior names.\n"
+            + "       alert('isHomePage = ' + hp.isHomePage(url));\n"
+            + "       // Make sure that (as mentioned above) isHomePage() always\n"
+            + "       // returns false when the url specified is the actual\n"
+            + "       // homepage, but the document checking is on a DIFFERENT domain.\n"
+            + "       hp.setHomePage('" + content2Url.toExternalForm() + "');\n"
+            + "       alert('isHomePage = ' + hp.isHomePage(url));\n"
+            + "       // Test navigation to homepage.\n"
+            + "       body.navigateHomePage();\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "    <span id='hp' style='behavior:url(#default#homepage)'></span>\n"
+            + "  </body>\n"
+            + "</html>";
         final String content2 = "<html></html>";
         
         final WebClient client = new WebClient();
@@ -602,18 +622,20 @@ public class HTMLElementTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(URL_FIRST, content);
-        webConnection.setResponse(URL_SECOND, content2);
+        webConnection.setResponse(content1Url, content1);
+        webConnection.setResponse(content2Url, content2);
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(content1Url);
 
         final List expectedAlerts = Arrays.asList(new String[]{
             "isHomePage = false",
-            "isHomePage = true"
+            "isHomePage = true",
+            "isHomePage = true",
+            "isHomePage = false"
         });
         assertEquals(expectedAlerts, collectedAlerts);
-        assertEquals(URL_SECOND.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
+        assertEquals(content2Url.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
     }
 
     /**
