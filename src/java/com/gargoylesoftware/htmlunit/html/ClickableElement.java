@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author David D. Kilzer
  */
 public abstract class ClickableElement extends StyledElement {
 
@@ -79,8 +80,10 @@ public abstract class ClickableElement extends StyledElement {
     public Page click()
         throws IOException {
 
-        if( isDisabled() ) {
-            return getPage();
+        if( this instanceof DisabledElement ) {
+            if( ((DisabledElement) this).isDisabled() ) {
+                return getPage();
+            }
         }
 
         final HtmlPage page = getPage();
@@ -124,17 +127,6 @@ public abstract class ClickableElement extends StyledElement {
     protected Page doClickAction(Page defaultPage) throws IOException {
 
         return defaultPage;
-    }
-
-
-    /**
-     * Return true if the disabled attribute is set for this element.
-     * This is expected to be overriden by derived classes that can be
-     * disabled.
-     * @return Return true if this is disabled.
-     */
-    protected boolean isDisabled() {
-        return false;
     }
 
 

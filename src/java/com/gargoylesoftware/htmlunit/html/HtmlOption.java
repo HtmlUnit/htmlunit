@@ -46,8 +46,9 @@ import java.util.Map;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author David D. Kilzer
  */
-public class HtmlOption extends ClickableElement {
+public class HtmlOption extends ClickableElement implements DisabledElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "option";
@@ -132,6 +133,16 @@ public class HtmlOption extends ClickableElement {
 
 
     /**
+     * Return true if the disabled attribute is set for this element.
+     *
+     * @return Return true if this element is disabled.
+     */
+    public final boolean isDisabled() {
+        return isAttributeDefined("disabled");
+    }
+
+
+    /**
      * Return the value of the attribute "disabled".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
@@ -197,11 +208,11 @@ public class HtmlOption extends ClickableElement {
      * Return the value of this option as it will be submitted
      *
      * @return The value of the control
-     */    
+     */
     public String getValue() {
         if (isAttributeDefined("value")){
             return getValueAttribute();
-        } 
+        }
         else {
             return asText();
         }

@@ -49,8 +49,9 @@ import java.util.Map;
  * @author <a href="mailto:BarnabyCourt@users.sourceforge.net">Barnaby Court</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author David D. Kilzer
  */
-public class HtmlTextArea extends FocusableElement implements SubmittableElement {
+public class HtmlTextArea extends FocusableElement implements DisabledElement, SubmittableElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "textarea";
@@ -183,6 +184,16 @@ public class HtmlTextArea extends FocusableElement implements SubmittableElement
      */
     public final String getColumnsAttribute() {
         return getAttributeValue("cols");
+    }
+
+
+    /**
+     * Return true if the disabled attribute is set for this element.
+     *
+     * @return Return true if this element is disabled.
+     */
+    public final boolean isDisabled() {
+        return isAttributeDefined("disabled");
     }
 
 

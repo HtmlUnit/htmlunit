@@ -50,8 +50,9 @@ import java.util.Map;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author David D. Kilzer
  */
-public class HtmlButton extends FocusableElement implements SubmittableElement {
+public class HtmlButton extends FocusableElement implements DisabledElement, SubmittableElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "button";

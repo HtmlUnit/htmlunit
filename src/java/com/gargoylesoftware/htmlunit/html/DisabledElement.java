@@ -37,48 +37,19 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.Map;
-
 /**
- * Wrapper for the html element "optgroup".
+ *  A marker interface for those classes that can be disabled.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
  */
-public class HtmlOptionGroup extends ClickableElement implements DisabledElement {
-
-    /** the HTML tag represented by this element */
-    public static final String TAG_NAME = "optgroup";
-
-    /**
-     * Create an instance of HtmlOptionGroup
-     *
-     * @param page The HtmlPage that contains this element.
-     * @param attributes the initial attributes
-     */
-    public HtmlOptionGroup( final HtmlPage page, final Map attributes ) {
-        super(page, attributes);
-    }
-
-    /**
-     * @return the HTML tag name
-     */
-    public String getTagName() {
-        return TAG_NAME;
-    }
-
+public interface DisabledElement {
 
     /**
      * Return true if the disabled attribute is set for this element.
-     *
      * @return Return true if this element is disabled.
      */
-    public final boolean isDisabled() {
-        return isAttributeDefined("disabled");
-    }
+    boolean isDisabled();
 
 
     /**
@@ -89,20 +60,6 @@ public class HtmlOptionGroup extends ClickableElement implements DisabledElement
      * @return The value of the attribute "disabled"
      * or an empty string if that attribute isn't defined.
      */
-    public final String getDisabledAttribute() {
-        return getAttributeValue("disabled");
-    }
+    String getDisabledAttribute();
 
-
-    /**
-     * Return the value of the attribute "label".  Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "label"
-     * or an empty string if that attribute isn't defined.
-     */
-    public final String getLabelAttribute() {
-        return getAttributeValue("label");
-    }
 }
