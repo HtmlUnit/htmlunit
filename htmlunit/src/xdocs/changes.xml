@@ -111,6 +111,10 @@
             	Fixed bug where button names would get submitted twice.  Patch
             	submitted by Brad Clarke.
             </action>
+            <action type="add" dev="mbowler" id="772233">
+            	Added support for auto-refresh both from a Meta tag and from an
+            	http response header.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">

@@ -173,6 +173,7 @@ public final class HtmlPage
 
         initializeFramesIfNeeded();
         executeBodyOnLoadHandlerIfNeeded();
+        executeRefreshIfNeeded();
     }
 
 
@@ -1161,7 +1162,56 @@ public final class HtmlPage
         }
     }
 
+    /**
+     * If a refresh has been specified either through a meta tag or an http
+     * response header, then perform that refresh.
+     */
+    private void executeRefreshIfNeeded() {
+        // If this page is not in a frame then a refresh has already happened,
+        // most likely through the javascript onload handler, so we don't do a
+        // second refresh.
+        final WebWindow window = getEnclosingWindow();
+        if( window == null ) {
+            return;
+        }
 
+        final String refreshString = getRefreshStringOrNull();        
+        if( refreshString == null ) {
+            return;
+        }
+
+        final int index = refreshString.indexOf("URL=");
+        if( index == -1 ) {
+            getLog().error("Malformed refresh string ["+refreshString+"]");
+        }
+        final String newUrl = refreshString.substring(index+4);
+        try {
+            final URL url = getFullyQualifiedUrl(newUrl);
+
+            getWebClient().getPage(
+                window, url, SubmitMethod.GET, Collections.EMPTY_LIST );
+        }
+        catch( final MalformedURLException e ) {
+            getLog().error("HtmlPage refresh to ["+newUrl+"] Got MalformedURLException", e);
+        }
+        catch( final IOException e ) {
+            getLog().error("HtmlPage refresh to ["+newUrl+"] Got IOException", e);
+        }
+    }
+
+    private String getRefreshStringOrNull() {
+        final Iterator iterator
+            = getHtmlElementsByTagNames( Collections.singletonList("meta") ).iterator();
+        while( iterator.hasNext() ) {
+            final HtmlMeta meta = (HtmlMeta)iterator.next();
+            if( meta.getHttpEquivAttribute().equalsIgnoreCase("refresh") ) {
+                return meta.getContentAttribute();
+            }
+        }
+
+        return getWebResponse().getResponseHeaderValue("Refresh");
+    }
+    
     private void initializeFramesIfNeeded() {
         // The act of creating the html element will cause initialization to start
         getHtmlElementsByTagNames( Arrays.asList( new String[]{"frame", "iframe"}) );

@@ -1040,5 +1040,67 @@ public class HtmlPageTest extends WebTestCase {
         } );
         assertEquals( expectedForms, page.getAllForms() );
     }
+
+    /**
+     * Test auto-refresh from a meta tag.
+     * @throws Exception if the test fails
+     */
+    public void testRefresh_MetaTag() throws Exception {
+
+        final String firstContent
+            = "<html><head><title>first</title>"
+            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=http://second\">"
+            + "</head><body></body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body></body></html>";
+
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setResponse(
+            new URL("http://first"), firstContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://second"), secondContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+
+        assertEquals( "second", page.getTitleText() );
+    }
+
+    /**
+     * Test auto-refresh from a meta tag.
+     * @throws Exception if the test fails
+     */
+    public void testRefresh_HttpResponseHeader() throws Exception {
+
+        final String firstContent
+            = "<html><head><title>first</title>"
+            + "</head><body></body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body></body></html>";
+
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setResponse(
+            new URL("http://first"), firstContent,
+            200, "OK", "text/html",
+            Collections.singletonList(new KeyValuePair("Refresh","3;URL=http://second")) );
+        webConnection.setResponse(
+            new URL("http://second"), secondContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+
+        assertEquals( "second", page.getTitleText() );
+    }
 }
 
