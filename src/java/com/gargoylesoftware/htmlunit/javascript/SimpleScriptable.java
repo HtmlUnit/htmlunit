@@ -53,7 +53,9 @@ import org.apache.commons.collections.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.FunctionObject;
+import org.mozilla.javascript.NativeFunction;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
@@ -512,6 +514,19 @@ public class SimpleScriptable extends ScriptableObject {
          else {
              getLog().debug("No configured setter \"" + name + "\" found for " 
                      + start + ". Setting it as pure javascript property.");
+             
+             // dynamically compiled functions must have as scope the one of their birth 
+             // there is perhaps a better way to identify a dyn compiled function
+             if (newValue instanceof NativeFunction 
+                     && ((NativeFunction) newValue).getFunctionName().equals("anonymous")) {
+                 final Function function = (Function) newValue;
+     
+                 // test if the parent scope has not been already fixed
+                if (!(function.getParentScope() instanceof SimpleScriptable)) {
+                     function.setParentScope(start);
+                }
+             }
+
              super.put(name, start, newValue);
          }
      }

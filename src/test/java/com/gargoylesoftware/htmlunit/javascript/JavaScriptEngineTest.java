@@ -115,9 +115,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setDefaultResponse( content );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
 
         final HtmlTextInput textInput = (HtmlTextInput)page.getHtmlElementById("textfield1");
         assertEquals("foo", textInput.getValueAttribute());
@@ -172,6 +170,67 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
+
+    /**
+     * Checks that a dynamically compiled function works in the scope of its birth
+     * @throws Exception if the test fails
+     */
+    public void testScopeOfNewFunction() throws Exception {
+        final String content
+                 = "<html><head><script>"
+                 + "var f = new Function('alert(\"foo\")');"
+                 + "f();"
+                 + "</script></head><body>"
+                 + "</body></html>";
+        final List expectedAlerts = Arrays.asList( new String[]{"foo"});
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * Checks that a dynamically compiled function works in the scope of its birth
+     * and not the other window
+     * @throws Exception if the test fails
+     */
+    public void testScopeOfNewFunctionCalledFormOtherWindow() throws Exception {
+        final String firstContent
+                 = "<html><head>"
+                 + "<script>"
+                 + "var foo = 'foo';"
+                 + "var test = new Function('alert(foo);');"
+                 + "</script>"
+                 + "</head>"
+                 + "<body onload='test()'>"
+                 + "  <iframe src='page2.html'/>"
+                 + "</body>"
+                 + "</html>";
+        
+        final String secondContent = "<html><head><script>"
+            + "var foo = 'foo2';"
+            + "parent.test();"
+            + "var f = parent.test;"
+            + "f();"
+            + "</script></head></html>";
+
+        
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( secondContent );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        client.setWebConnection( webConnection );
+
+        final List expectedAlerts = Arrays.asList( new String[]{"foo", "foo", "foo"});
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.getPage(URL_FIRST);
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 
     /**
      * @throws Exception if the test fails
