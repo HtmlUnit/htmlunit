@@ -7,6 +7,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -32,6 +33,7 @@ import org.cyberneko.html.parsers.DOMParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  *  A representation of an html page returned from a server. This is also the
@@ -209,9 +211,8 @@ public final class HtmlPage
             parser.setFeature("http://cyberneko.org/html/features/report-errors", true);
             parser.parse( new InputSource(inputStream) );
         }
-        catch( final Exception e ) {
-            e.printStackTrace();
-            return null;
+        catch( final SAXException e ) {
+            throw new ObjectInstantiationException("Unable to parse html input", e);
         }
         return parser.getDocument();
     }

@@ -42,20 +42,17 @@ public class HtmlInlineFrame
         webClient.registerWebWindow(this);
 
         final String source = getSrcAttribute();
+        URL url = null;
         try {
-            final URL url = getPage().getFullyQualifiedUrl(source);
+            url = getPage().getFullyQualifiedUrl(source);
             setEnclosedPage( webClient.getPage(
                 this, url, SubmitMethod.GET, Collections.EMPTY_LIST, false ) );
         }
         catch( final MalformedURLException e ) {
-            getLog().error("Bad url in src attribute of iframe", e);
-            throw new IllegalStateException(
-                "Bad url in src attribute of iframe - see log for details");
+            getLog().error("Bad url in src attribute of iframe: url=["+source+"]", e);
         }
         catch( final IOException e ) {
-            getLog().error("IOException when getting content for iframe", e);
-            throw new IllegalStateException(
-                "IOException when getting content for iframe - see log for details");
+            getLog().error("IOException when getting content for iframe: url=["+url.toExternalForm()+"]", e);
         }
     }
 
