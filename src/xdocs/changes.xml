@@ -30,6 +30,9 @@
                 Many classes had their own assertNotNull() method.  Created an assert class and
                 changed all classes to use Assert.notNull() rather than seperate methods.
             </action>
+            <action type="update" dev="mbowler" due-to="Noboru Sinohara" id="716568">
+                Fixed bug in character encoding.  Patch supplied by Noboru Sinohara.
+            </action>
         </release>
     </body>
 
