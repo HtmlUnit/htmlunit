@@ -37,13 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
+
+import org.w3c.dom.Element;
+
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptResult;
-import org.w3c.dom.Element;
-import java.io.IOException;
 
 /**
  *  Wrapper for the html element "input"

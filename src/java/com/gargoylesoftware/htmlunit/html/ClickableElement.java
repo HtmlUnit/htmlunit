@@ -37,15 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
+
+import org.w3c.dom.Element;
+
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.TextUtil;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Collections;
-import java.util.List;
-import org.w3c.dom.Element;
 
 /**
  * Intermediate base class for "clickable" HTML elements.  As defined
@@ -55,8 +52,8 @@ import org.w3c.dom.Element;
  * iframe, isindex, meta, param, script, style, and title.
  *
  * @version  $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class ClickableElement
          extends StyledElement {
