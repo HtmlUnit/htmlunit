@@ -20,33 +20,36 @@ public class BrowserVersion {
     private final String userAgent_;
     private final String javaScriptVersion_;
 
+    public static final String INTERNET_EXPLORER = "Microsoft Internet Explorer";
+    public static final String NETSCAPE = "Netscape"
+
     /**
      * A fake browser that supports all the new features.  This constant is used whenever
      * you don't care which browser is being simulated.
      */
     public static final BrowserVersion FULL_FEATURED_BROWSER = new BrowserVersion(
-        "Microsoft Internet Explorer", "4.0 (compatible; MSIE 6.0b; Windows 98)",
+        INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
         "Mozilla/4.0 (compatible; MSIE 6.0b; Windows 98)", "1.2");
 
     /**
      * Mozilla 1.0
      */
     public static final BrowserVersion MOZILLA_1_0 = new BrowserVersion(
-        "Netscape", "5.0 (Windows; en-US)",
+        NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.0.0) Gecko/20020530", "1.2");
 
     /**
      * Netscape 4.79
      */
     public static final BrowserVersion NETSCAPE_4_7_9 = new BrowserVersion(
-        "Netscape", "4.79 [en] (Windows NT 5.0; U)",
+        NETSCAPE, "4.79 [en] (Windows NT 5.0; U)",
         "Mozilla/4.79 [en] (Windows NT 5.0; U)", "1.2");
 
     /**
      * Internet explorer 6.0
      */
     public static final BrowserVersion INTERNET_EXPLORER_6_0 = new BrowserVersion(
-        "Microsoft Internet Explorer", "4.0 (compatible; MSIE 6.0b; Windows 98)",
+        INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
         "4.0 (compatible; MSIE 6.0; Windows 98)", "1.2");
 
     private static BrowserVersion DefaultBrowserVersion_ = FULL_FEATURED_BROWSER;

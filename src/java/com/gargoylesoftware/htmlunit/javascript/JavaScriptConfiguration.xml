@@ -7,7 +7,7 @@
 		<javascript min-version="1.2"/>
 		<property name="name" readable="true" writable="true" always-available="true"/>
 		<property name="text" readable="true" writable="true">
-			<browser name="netscape" min-version="4" less-than-version="5"/>
+			<browser name="Netscape" min-version="4" less-than-version="5"/>
 		</property>
 	</class>
 
@@ -45,100 +45,100 @@
 
 	<class name="HTMLElement">
 		<property name="all" readable="true" writable="false">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</property>
 		<property name="children" readable="true" writable="false">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</property>
 		<property name="className" readable="true" writable="true">
-			<browser name="msie" min-version="4"/>
-			<browser name="netscape" min-version="6"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
+			<browser name="Netscape" min-version="6"/>
 		</property>
 		<property name="document" readable="true" writable="false">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</property>
 		<property name="id" readable="true" writable="true">
-			<browser name="msie" min-version="4"/>
-			<browser name="netscape" min-version="6"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
+			<browser name="Netscape" min-version="6"/>
 		</property>
 		<property name="innerHTML" readable="true" writable="true">
-			<browser name="msie" min-version="4"/>
-			<browser name="netscape" min-version="6"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
+			<browser name="Netscape" min-version="6"/>
 		</property>
 		<property name="innerText" readable="true" writable="true">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</property>
 		<property name="lang" readable="true" writable="true">
-			<browser name="msie" min-version="4"/>
-			<browser name="netscape" min-version="6"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
+			<browser name="Netscape" min-version="6"/>
 		</property>
 		<property name="offsetHeight" readable="true" writable="false">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</property>
 		<property name="offsetLeft" readable="true" writable="false">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</property>
 		<property name="offsetParent" readable="true" writable="false">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</property>
 		<property name="offsetTop" readable="true" writable="false">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</property>
 		<property name="offsetWidth" readable="true" writable="false">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</property>
 		<property name="outerHTML" readable="true" writable="true">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</property>
 		<property name="outerText" readable="true" writable="true">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</property>
 		<property name="parentElement" readable="true" writable="false">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</property>
 		<property name="sourceIndex" readable="true" writable="false">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</property>
 		<property name="className" readable="true" writable="true">
-			<browser name="msie" min-version="4"/>
-			<browser name="netscape" min-version="6"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
+			<browser name="Netscape" min-version="6"/>
 		</property>
 		<property name="style" readable="true" writable="true">
-			<browser name="msie" min-version="4"/>
-			<browser name="netscape" min-version="6"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
+			<browser name="Netscape" min-version="6"/>
 		</property>
 		<property name="tagName" readable="true" writable="false">
-			<browser name="msie" min-version="4"/>
-			<browser name="netscape" min-version="6"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
+			<browser name="Netscape" min-version="6"/>
 		</property>
 		<property name="title" readable="true" writable="true">
-			<browser name="msie" min-version="4"/>
-			<browser name="netscape" min-version="6"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
+			<browser name="Netscape" min-version="6"/>
 		</property>
 		<function name="contains">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</function>
 		<function name="getAttribute">
-			<browser name="msie" min-version="4"/>
-			<browser name="netscape" min-version="6"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
+			<browser name="Netscape" min-version="6"/>
 		</function>
 		<function name="handleEvent"/>
 		<function name="insertAdjacentHTML">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</function>
 		<function name="insertAdjacentText">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</function>
 		<function name="removeAttribute">
-			<browser name="msie" min-version="4"/>
-			<browser name="netscape" min-version="6"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
+			<browser name="Netscape" min-version="6"/>
 		</function>
 		<function name="scrollIntoView">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</function>
 		<function name="setAttribute">
-			<browser name="msie" min-version="4"/>
-			<browser name="netscape" min-version="6"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
+			<browser name="Netscape" min-version="6"/>
 		</function>
 		<function name="onclick">
 			<javascript min-version="1.2"/>
@@ -147,7 +147,7 @@
 			<javascript min-version="1.2"/>
 		</function>
 		<function name="onhelp">
-			<browser name="msie" min-version="4"/>
+			<browser name="Microsoft Internet Explorer" min-version="4"/>
 		</function>
 		<function name="onkeydown">
 			<javascript min-version="1.2"/>
@@ -224,8 +224,8 @@
 	<class name="Window">
 		<!-- NOT FINISHED -->
 		<property name="location" readable="true" writable="false">
-			<browser name="netscape" min-version="3" max-version="5"/>
-			<browser name="msie" min-version="3" max-version="5"/>
+			<browser name="Netscape" min-version="3" max-version="5"/>
+			<browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>
 			<javascript min-version="1" max-version="2"/>
 		</property>
 
