@@ -37,61 +37,58 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * A javascript object for a Navigator
+ * Tests for Navigator.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public final class Navigator extends SimpleScriptable {
+public class NavigatorTest extends WebTestCase {
 
     /**
-     * Create an instance.  Javascript objects must have a default constructor.
+     * Create an instance
+     * @param name The name of the test
      */
-    public Navigator() {}
-
-
-    /**
-     * Return the property "appName"
-     * @return The property
-     */
-    public String jsGet_appName() {
-        return getBrowserVersion().getApplicationName();
+    public NavigatorTest( final String name ) {
+        super(name);
     }
 
-
     /**
-     * Return the property "appVersion"
-     * @return The property
+     * The javaEnabled() method should always return false.  Test this
+     * @throws Exception if the test fails.
      */
-    public String jsGet_appVersion() {
-        return getBrowserVersion().getApplicationVersion();
-    }
+    public void testJavaEnabled() throws Exception {
+        final WebClient client = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
 
+        final String firstContent
+             = "<html><head><title>First</title><script>\n"
+             + "function doTest() {\n"
+             + "    alert(navigator.javaEnabled());\n"
+             + "}\n</script></head>"
+             + "<body onload='doTest()'></body></html>";
 
-    /**
-     * Return the property "userAgent"
-     * @return The property
-     */
-    public String jsGet_userAgent() {
-        return getBrowserVersion().getUserAgent();
-    }
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
 
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-    private BrowserVersion getBrowserVersion() {
-        return BrowserVersion.getDefault();
-    }
+        client.getPage(new URL("http://first"));
 
-
-    /**
-     * Return false always as java support is not enabled in HtmlUnit
-     * @return false.
-     */
-    public boolean jsFunction_javaEnabled() {
-        return false;
+        final List expectedAlerts = Arrays.asList( new String[]{"false"} );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 }
-
