@@ -35,39 +35,34 @@ cvs -z3 -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit co h
 
         <section name="Compiling the code">
             <p>
-                Make sure that you have <a href="http://jakarta.apache.org/ant">Ant</a> 1.5 installed.
-                The build.xml file is located in the root of the src directory so change to that
-                directory and execute the following commands
+                Although it is still possible to compile the code with 
+                <a href="http://ant.apache.org">Ant</a> 1.5 or higher, the preferred way
+                to build HtmlUnit is with <a href="http://maven.apache.org">maven</a>.
             </p>
-            <source>ant initialize</source>
+            <source>maven java:compile</source>
             <p>
-                This will get the libraries needed to build that are not in the CVS repository.
+                This will do an incremental compile of all the code.
             </p>
-            <source>ant cleancompile</source>
+            <source>maven clean java:compile</source>
             <p>
-                This will delete all the existing class files and recompile all the source from scratch.
+                This will do a clean compile of all the code.
             </p>
         </section>
 
         <section name="Running the tests">
             <p>
-                All the tests are based on <a href="http://www.junit.org/">JUnit</a>.  JUnit is already provided
-                in the lib directory so you don't need to install anything extra.  The main tests can be
-                executed with either the text runner or the swing runner from JUnit.  The "junit" target
-                will dump status information to the command line while "junitui" will present a swing
-                user interface with a progress bar.
+                All the tests are based on <a href="http://www.junit.org/">JUnit</a>.  The standard
+                maven way of running the tests results in a large number of test reports which can
+                be difficult to sift through to find failures.  The fast-test goal has been created
+                to provide a quick run of the tests that dumps easy status information to the command
+                line.
             </p>
-            <source>ant junit</source>
-            <br />
-            <source>ant junitui</source>
+            <source>maven htmlunit:test</source>
             <p>
-                Strangely, the Swing version takes about three times as long to execute as the text runner
-                so I rarely use it.  If you are using the Swing version then you will have to uncheck
-                "reload classes" or else all the javascript related tests will fail.  It seems that
-                the javascript engine and the logging framework don't like to be reloaded.
+            	Calling htmlunit:test will force a recompile of the java classes if needed.
             </p>
         </section>
-
+<!--
         <section name="Packaging the code">
             <source>ant build</source>
             <p>
@@ -77,5 +72,6 @@ cvs -z3 -d:pserver:anonymous@cvs.htmlunit.sourceforge.net:/cvsroot/htmlunit co h
                 called projectdocs.zip that contains all the generated documentation.
             </p>
         </section>
+-->        
     </body>
 </document>
