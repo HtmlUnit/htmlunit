@@ -67,7 +67,7 @@ public class GetPageTag extends HtmlUnitTagSupport {
     private String method_ = "get";
     private String webClientName_;
     private String xmlVarName_;
-    
+
     /**
      * Create an instance
      */
@@ -82,9 +82,9 @@ public class GetPageTag extends HtmlUnitTagSupport {
      */
     public void doTag(XMLOutput xmlOutput) throws JellyTagException {
         invokeBody(xmlOutput);
-        
+
         final JellyContext jellyContext = getContext();
-        
+
         final WebClient webClient;
         if( webClientName_ != null ) {
             webClient = (WebClient)jellyContext.getVariable(webClientName_);
@@ -95,7 +95,7 @@ public class GetPageTag extends HtmlUnitTagSupport {
         else {
             webClient = getWebClient();
         }
-        
+
         final Page page;
         try {
             page = webClient.getPage( getUrl(), getSubmitMethod(), getParameters() );
@@ -104,7 +104,7 @@ public class GetPageTag extends HtmlUnitTagSupport {
         catch( final IOException e ) {
             throw new JellyTagException(e);
         }
-        
+
         if( xmlVarName_ != null && page instanceof HtmlPage ) {
             final Document domDocument = ((HtmlPage)page).getElement().getOwnerDocument();
             final DOMReader domReader = new DOMReader();
@@ -179,7 +179,7 @@ public class GetPageTag extends HtmlUnitTagSupport {
 
     /**
      * Callback from Jelly to set the value of the method attribute.
-     * @param method The new value.
+     * @param webClientName The new value.
      */
     public void setWebclient( final String webClientName ) {
         webClientName_ = webClientName;
@@ -200,10 +200,10 @@ public class GetPageTag extends HtmlUnitTagSupport {
             throw new JellyTagException("Value of method attribute is not a valid submit method: "+method_);
         }
     }
-    
+
     /**
      * Callback from jelly to set the xmlvar attribute
-     * @param xmlVarName
+     * @param xmlVarName the xmlvar attribute
      */
     public void setXmlvar( final String xmlVarName ) {
         xmlVarName_ = xmlVarName;

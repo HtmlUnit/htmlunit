@@ -114,7 +114,7 @@ public class WebTestCase extends BaseTestCase {
             throw new AssertionFailedError("Expected null but found ["+object+"]");
         }
     }
-    
+
     /**
      * Return an input stream for the specified file name.  Refer to {@link #getFileObject(String)}
      * for details on how the file is located.
@@ -125,14 +125,15 @@ public class WebTestCase extends BaseTestCase {
     public static InputStream getFileAsStream( final String fileName ) throws FileNotFoundException {
         return new BufferedInputStream(new FileInputStream(getFileObject(fileName)));
     }
-    
+
     /**
      * Return a File object for the specified file name.  This is different from just
      * <code>new File(fileName)</code> because it will adjust the location of the file
      * depending on how the code is being executed.
-     * 
+     *
      * @param fileName The base filename.
      * @return The new File object.
+     * @throws FileNotFoundException if !file.exists()
      */
     public static File getFileObject( final String fileName ) throws FileNotFoundException {
         final String localizedName = fileName.replace( '/', File.separatorChar );
@@ -141,7 +142,7 @@ public class WebTestCase extends BaseTestCase {
         if( file.exists() == false ) {
             file = new File("../../"+localizedName);
         }
-        
+
         if( file.exists() == false ) {
             try {
                 System.out.println("currentDir="+new File(".").getCanonicalPath());
@@ -149,10 +150,8 @@ public class WebTestCase extends BaseTestCase {
             catch( final IOException e ) {
                 e.printStackTrace();
             }
-            
             throw new FileNotFoundException(localizedName);
         }
-        
         return file;
     }
 }
