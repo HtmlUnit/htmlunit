@@ -42,7 +42,7 @@ public class SimpleScriptable extends ScriptableObject {
         {"HtmlAnchor", "Anchor"},
         {"HtmlButton", "Button"},
         {"HtmlButtonInput", "Button"},
-        {"HtmlCheckBox", "Checkbox"},
+        {"HtmlCheckBoxInput", "Checkbox"},
         {"HtmlFileInput", "FileUpload"},
         {"HtmlForm", "Form"},
         {"HtmlHiddenInput", "Hidden"},
