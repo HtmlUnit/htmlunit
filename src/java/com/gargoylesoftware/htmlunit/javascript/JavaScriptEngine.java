@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -80,7 +81,7 @@ public final class JavaScriptEngine extends ScriptEngine {
 
 
     private synchronized PageInfo getPageInfo( final HtmlPage htmlPage ) {
-        assertNotNull( "htmlPage", htmlPage );
+        Assert.assertNotNull( "htmlPage", htmlPage );
 
         final PageInfo existingPageInfo = (PageInfo)pageInfos_.get(htmlPage);
         if( existingPageInfo != null ) {
@@ -147,7 +148,7 @@ public final class JavaScriptEngine extends ScriptEngine {
     public Object execute(
         final HtmlPage htmlPage, String sourceCode, final String sourceName, final HtmlElement htmlElementScope ) {
 
-        assertNotNull( "sourceCode", sourceCode );
+        Assert.assertNotNull( "sourceCode", sourceCode );
 
         // Remove html comments around the source if needed
         sourceCode = sourceCode.trim();

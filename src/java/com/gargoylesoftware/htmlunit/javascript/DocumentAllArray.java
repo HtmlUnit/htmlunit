@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -49,7 +50,7 @@ public class DocumentAllArray extends SimpleScriptable {
      * @param page The HtmlPage that this object will retrive elements from.
      */
     public void initialize( final HtmlPage page ) {
-        assertNotNull("page", page);
+        Assert.assertNotNull("page", page);
         htmlPage_ = page;
     }
 

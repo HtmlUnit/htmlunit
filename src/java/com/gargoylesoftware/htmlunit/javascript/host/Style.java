@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import java.util.Iterator;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class Style extends SimpleScriptable {
      * @param htmlElement The element that this style describes
      */
     public void initialize( final HTMLElement htmlElement ) {
-        assertNotNull("htmlElement", htmlElement);
+        Assert.assertNotNull("htmlElement", htmlElement);
         jsElement_ = htmlElement;
     }
 

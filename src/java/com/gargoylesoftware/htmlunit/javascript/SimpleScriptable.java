@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -202,9 +203,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @param object The object to check for null.
      */
     protected final void assertNotNull( final String description, final Object object ) {
-        if( object == null ) {
-            throw new NullPointerException(description);
-        }
+        Assert.assertNotNull(description, object);
     }
 
 
@@ -213,7 +212,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @param pageInfo The new pageInfo.
      */
     public final void setPageInfo( final JavaScriptEngine.PageInfo pageInfo ) {
-        assertNotNull("pageInfo", pageInfo);
+        Assert.assertNotNull("pageInfo", pageInfo);
         pageInfo_ = pageInfo;
     }
 
@@ -280,7 +279,7 @@ public class SimpleScriptable extends ScriptableObject {
       * @param htmlElement The html element
       */
      public void setHtmlElement( final HtmlElement htmlElement ) {
-         assertNotNull("htmlElement", htmlElement);
+         Assert.assertNotNull("htmlElement", htmlElement);
          htmlElement_ = htmlElement;
          htmlElement_.setScriptObject(this);
      }

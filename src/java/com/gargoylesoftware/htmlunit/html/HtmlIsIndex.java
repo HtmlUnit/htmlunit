@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import org.w3c.dom.Element;
 
@@ -39,7 +40,7 @@ public class HtmlIsIndex
      * @param newValue The value.
      */
     public void setValue( final String newValue ) {
-        assertNotNull("newValue", newValue);
+        Assert.assertNotNull("newValue", newValue);
         value_ = newValue;
     }
 

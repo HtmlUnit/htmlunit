@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
@@ -145,7 +146,7 @@ public class HtmlSelect
      * @param  optionValue The value of the new "selected" option
      */
     public void fakeSelectedAttribute( final String optionValue ) {
-        assertNotNull( "optionValue", optionValue );
+        Assert.assertNotNull( "optionValue", optionValue );
         fakeSelectedAttribute( new String[]{optionValue} );
     }
 
@@ -157,7 +158,7 @@ public class HtmlSelect
      * @param  optionValues The values of the new "selected" options
      */
     public void fakeSelectedAttribute( final String optionValues[] ) {
-        assertNotNull( "optionValues", optionValues );
+        Assert.assertNotNull( "optionValues", optionValues );
         fakeSelectedValues_ = optionValues;
     }
 
@@ -238,7 +239,7 @@ public class HtmlSelect
      */
     public HtmlOption getOptionByValue( final String value )
         throws ElementNotFoundException {
-        assertNotNull("value", value);
+        Assert.assertNotNull("value", value);
 
         return ( HtmlOption )getOneHtmlElementByAttribute( "option", "value", value );
     }

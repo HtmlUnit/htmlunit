@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
@@ -371,7 +372,7 @@ public class HtmlForm extends HtmlElement {
      */
     public List getRadioButtonsByName( final String name ) {
 
-        assertNotNull( "name", name );
+        Assert.assertNotNull( "name", name );
 
         final List results = new ArrayList();
         final HtmlPage page = getPage();
@@ -472,7 +473,7 @@ public class HtmlForm extends HtmlElement {
      * @return The first checked radio button.
      */
     public HtmlRadioButtonInput getCheckedRadioButton( final String name ) {
-        assertNotNull("name", name);
+        Assert.assertNotNull("name", name);
         final Iterator iterator = getRadioButtonsByName(name).iterator();
         while( iterator.hasNext() ) {
             final HtmlRadioButtonInput input = (HtmlRadioButtonInput)iterator.next();
@@ -752,7 +753,7 @@ public class HtmlForm extends HtmlElement {
      *      attribute isn't defined.
      */
     public final void setMethodAttribute( final String method ) {
-        assertNotNull("method", method);
+        Assert.assertNotNull("method", method);
         getElement().setAttribute( "method", method );
     }
 
@@ -796,7 +797,7 @@ public class HtmlForm extends HtmlElement {
      *      attribute isn't defined.
      */
     public final void setEnctypeAttribute( final String encoding ) {
-        assertNotNull("encoding", encoding);
+        Assert.assertNotNull("encoding", encoding);
         getElement().setAttribute( "enctype", encoding );
     }
 
@@ -875,7 +876,7 @@ public class HtmlForm extends HtmlElement {
      *      attribute isn't defined.
      */
     public final void setTargetAttribute( final String target ) {
-        assertNotNull("target", target);
+        Assert.assertNotNull("target", target);
         getElement().setAttribute( "target", target );
     }
 }

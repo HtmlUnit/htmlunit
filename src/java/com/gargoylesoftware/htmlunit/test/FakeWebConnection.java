@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.test;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
@@ -36,10 +37,10 @@ public class FakeWebConnection extends WebConnection {
                 final String contentType,
                 final List responseHeaders ) {
 
-            assertNotNull("content", content);
-            assertNotNull("statusMessage", statusMessage);
-            assertNotNull("contentType", contentType);
-            assertNotNull("responseHeaders", responseHeaders);
+            Assert.assertNotNull("content", content);
+            Assert.assertNotNull("statusMessage", statusMessage);
+            Assert.assertNotNull("contentType", contentType);
+            Assert.assertNotNull("responseHeaders", responseHeaders);
 
             content_ = content;
             statusCode_ = statusCode;

@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import org.w3c.dom.Element;
 
@@ -81,7 +82,7 @@ public class HtmlTextArea
      * @param  newValue The new value.
      */
     public final void setText( final String newValue ) {
-        assertNotNull("newValue", newValue);
+        Assert.assertNotNull("newValue", newValue);
         value_ = newValue;
     }
 

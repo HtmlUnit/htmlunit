@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.javascript.FormElementsArray;
 import java.io.IOException;
@@ -93,7 +94,7 @@ public class Form extends HTMLElement {
      * @param action The new value.
      */
     public void jsSet_action( final String action ) {
-        assertNotNull("action", action);
+        Assert.assertNotNull("action", action);
         getHtmlForm().setActionAttribute(action);
     }
 
@@ -112,7 +113,7 @@ public class Form extends HTMLElement {
      * @param method The new value.
      */
     public void jsSet_method( final String method ) {
-        assertNotNull("method", method);
+        Assert.assertNotNull("method", method);
         getHtmlForm().setMethodAttribute(method);
     }
 
@@ -131,7 +132,7 @@ public class Form extends HTMLElement {
      * @param target The new value.
      */
     public void jsSet_target( final String target ) {
-        assertNotNull("target", target);
+        Assert.assertNotNull("target", target);
         getHtmlForm().setTargetAttribute(target);
     }
 
@@ -150,7 +151,7 @@ public class Form extends HTMLElement {
      * @param encoding The new value.
      */
     public void jsSet_encoding( final String encoding ) {
-        assertNotNull("encoding", encoding);
+        Assert.assertNotNull("encoding", encoding);
         getHtmlForm().setEnctypeAttribute(encoding);
     }
 

@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import java.io.File;
 import java.io.FileInputStream;
@@ -117,8 +118,8 @@ public final class JavaScriptConfiguration {
             final String typeName,
             final String booleanAttributeName ) {
 
-        assertNotNull("hostClass", hostClass);
-        assertNotNull("typeName", typeName);
+        Assert.assertNotNull("hostClass", hostClass);
+        Assert.assertNotNull("typeName", typeName);
 
         Element classElement = getClassElement(getClassName(hostClass));
         while( classElement != null ) {
@@ -184,8 +185,8 @@ public final class JavaScriptConfiguration {
 
 
     private boolean getBooleanAttribute( final Element classElement, final String attributeName ) {
-        assertNotNull("classElement", classElement);
-        assertNotNull("attributeName", attributeName);
+        Assert.assertNotNull("classElement", classElement);
+        Assert.assertNotNull("attributeName", attributeName);
 
         final String value = classElement.getAttribute(attributeName);
         if( "true".equals(value) ) {
@@ -208,7 +209,7 @@ public final class JavaScriptConfiguration {
 
 
     private InputStream getResourceAsStream( final String name ) {
-        assertNotNull("name", name);
+        Assert.assertNotNull("name", name);
 
         InputStream inputStream = getClass().getResourceAsStream(name);
         if( inputStream == null ) {
@@ -235,15 +236,8 @@ public final class JavaScriptConfiguration {
     }
 
 
-    private void assertNotNull( final String description, final Object object ) {
-        if( object == null ) {
-            throw new NullPointerException(description);
-        }
-    }
-
-
     private String getClassName( final Class hostClass ) {
-        assertNotNull("hostClass", hostClass);
+        Assert.assertNotNull("hostClass", hostClass);
 
         final String className = hostClass.getName();
         final int index = className.lastIndexOf(".");
@@ -272,14 +266,14 @@ public final class JavaScriptConfiguration {
 
 
     private int getEnabledState( final Element element ) {
-        assertNotNull("element", element);
+        Assert.assertNotNull("element", element);
         return ENABLED;
     }
 
 
     private Element getElementByTypeAndName( final Element root, final String type, final String name ) {
-        assertNotNull("type", type);
-        assertNotNull("name", name);
+        Assert.assertNotNull("type", type);
+        Assert.assertNotNull("name", name);
 
         Node node = root.getFirstChild();
         while( node != null ) {

@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
@@ -45,7 +46,7 @@ public class FormElementsArray extends SimpleScriptable {
      * @param page The HtmlPage that this object will retrive elements from.
      */
     public void initialize( final HtmlForm form ) {
-        assertNotNull("form", form);
+        Assert.assertNotNull("form", form);
         htmlForm_ = form;
     }
 
@@ -138,7 +139,7 @@ public class FormElementsArray extends SimpleScriptable {
 
 
     private List getHtmlElementsInForm( final HtmlForm htmlForm ) {
-        assertNotNull("htmlForm", htmlForm);
+        Assert.assertNotNull("htmlForm", htmlForm);
 
         return htmlForm.getHtmlElementsByTagNames(
             Arrays.asList( new String[]{
