@@ -10,6 +10,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.FakeWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -24,6 +25,7 @@ import java.util.List;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public class DocumentTest extends WebTestCase {
     public DocumentTest( final String name ) {
@@ -287,6 +289,56 @@ public class DocumentTest extends WebTestCase {
 
         // This will blow up if the div tag hasn't been written to the document
         firstPage.getHtmlElementById("div1");
+    }
+
+
+    /**
+     * Regression test for bug 715379
+     */
+    public void testDocumentWrite_script() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        webClient.setWebConnection( webConnection );
+
+        final String mainContent
+             = "<html><head><title>Main</title></head><body>"
+             + "<iframe name=\"iframe\" id=\"iframe\" src=\"http://first\"></iframe>"
+             + "<script type=\"text/javascript\">"
+             + "document.write('<script type=\"text\\/javascript\" src=\"http://script\"><\\/script>');"
+             + "</script></body></html> ";
+        webConnection.setResponse(
+            new URL("http://main"), mainContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final String firstContent
+             = "<html><body><h1 id=\"first\">First</h1></body></html>";
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final String secondContent
+             = "<html><body><h1 id=\"second\">Second</h1></body></html>";
+        webConnection.setResponse(
+            new URL("http://second"), secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final String scriptContent
+             = "document.getElementById (\"iframe\").src = \"http://second\";";
+        webConnection.setResponse(
+            new URL("http://script"), scriptContent, 200, "OK", "text/javascript", Collections.EMPTY_LIST );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage mainPage = ( HtmlPage )webClient.getPage( new URL( "http://main" ) );
+        assertEquals( "Main", mainPage.getTitleText() );
+
+        final HtmlInlineFrame iFrame =
+          (HtmlInlineFrame) mainPage.getHtmlElementById( "iframe" );
+
+        assertEquals( "http://second", iFrame.getSrcAttribute() );
+
+        final HtmlPage enclosedPage = (HtmlPage) iFrame.getEnclosedPage();
+        // This will blow up if the script hasn't been written to the document
+        // and executed so the second page has been loaded.
+        enclosedPage.getHtmlElementById( "second" );
     }
 
 

@@ -64,6 +64,10 @@
             	Fixed bug where onload handler would not execute a function if the brackets 
             	weren't specified. Patch submitted by David K. Taylor.
             </action>
+            <action type="update" dev="mbowler" id="715379" due-to="David K. Taylor">
+            	Fixed bug "document.write of script element does not load script".  Patch submitted
+            	by David K. Taylor.
+            </action>
         </release>
     </body>
 
