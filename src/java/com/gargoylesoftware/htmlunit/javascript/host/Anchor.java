@@ -44,6 +44,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
+ * @author  David D. Kilzer
  */
 public class Anchor extends FocusableHostElement {
 
@@ -79,12 +80,4 @@ public class Anchor extends FocusableHostElement {
         return getHtmlElementOrDie().getAttributeValue( "href" );
     }
 
-    /**
-     * Gets the specified property.
-     * @param attibuteName attribute name.
-     * @return The value of the specified attribute
-     */
-    public String jsFunction_getAttribute(String attibuteName) {
-        return getHtmlElementOrDie().getAttributeValue(attibuteName);
-    }
 }

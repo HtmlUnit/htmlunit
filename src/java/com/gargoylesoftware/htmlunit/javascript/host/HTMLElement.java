@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @author Barnaby Court
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Chris Erskine
+ * @author David D. Kilzer
  */
 public class HTMLElement extends NodeImpl {
     private static final long serialVersionUID = -6864034414262085851L;
@@ -171,7 +172,17 @@ public class HTMLElement extends NodeImpl {
         }
         return result;
     }
-    
+
+
+    /**
+     * Gets the specified property.
+     * @param attibuteName attribute name.
+     * @return The value of the specified attribute
+     */
+    public String jsFunction_getAttribute(String attibuteName) {
+        return getHtmlElementOrDie().getAttributeValue(attibuteName);
+    }
+
 
     /**
      * Set an attribute.

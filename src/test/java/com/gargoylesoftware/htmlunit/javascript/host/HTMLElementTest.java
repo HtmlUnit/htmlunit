@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * 
  * @author yourgod
  * @author Chris Erskine
+ * @author David D. Kilzer
  * @version $Revision$
  *
  */
@@ -59,6 +60,38 @@ public class HTMLElementTest extends WebTestCase {
      */
     public HTMLElementTest(String name) {
         super(name);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    public void test_getAttribute() throws Exception {
+        final String content = "<html>\n" +
+                "<head>\n" +
+                "    <title>test</title>\n" +
+                "    <script>\n" +
+                "    function doTest(){\n" +
+                "       var myNode = document.getElementById(\'myNode\');\n" +
+                "       alert(myNode.title);\n" +
+                "       alert(myNode.getAttribute('title'));\n" +
+                "   }\n" +
+                "    </script>\n" +
+                "</head>\n" +
+                "<body onload=\'doTest()\'>\n" +
+                "<p id=\'myNode\' title=\'a\'>\n" +
+                "</p>\n" +
+                "</body>\n" +
+                "</html>\n" +
+                "";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("test", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "a", "a"
+        });
+
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
