@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -94,6 +95,14 @@ public class HTMLElement extends NodeImpl {
     private static final String POSITION_AFTER_BEGIN = "afterBegin";
     private static final String POSITION_BEFORE_END = "beforeEnd";
     private static final String POSITION_AFTER_END = "afterEnd";
+
+    /**
+     * The tag names of the objects for which outerHTML is readonly 
+     */
+    private static final List OUTER_HTML_READONLY 
+        = Arrays.asList(new String[]
+          { "caption", "col", "colgroup", "frameset", "html", 
+                "tbody", "td", "tfoot", "th", "thead", "tr"});
 
     private Style style_;
 
@@ -278,6 +287,21 @@ public class HTMLElement extends NodeImpl {
         return buf.toString();
     }
 
+    /**
+     * Gets the outerHTML of the node.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/outerhtml.asp">
+     * MSDN documentation</a>
+     * @return the contents of this node as html 
+     * (note: the formatting isn't currently exactly the same as IE)
+     */
+    public String jsGet_outerHTML() {
+        StringBuffer buf = new StringBuffer();
+        // we can't rely on DomNode.asXml because it adds indentation and new lines
+        printNode(buf, getDomNodeOrDie());
+
+        return buf.toString();
+    }
+
     private void printChildren(final StringBuffer buffer, final DomNode node) {
         for (final Iterator iter = node.getChildIterator(); iter.hasNext();) {
             printNode(buffer, (DomNode) iter.next());
@@ -327,6 +351,27 @@ public class HTMLElement extends NodeImpl {
             final DomNode child = (DomNode) iter.next();
             domNode.appendChild(child);
         }
+    }
+
+    /**
+     * Replace all children elements of this element with the supplied value.
+     * Sets the outerHTML of the node.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/outerhtml.asp">
+     * MSDN documentation</a>
+     * @param value - the new value for replacing this node
+     */
+    public void jsSet_outerHTML(final String value) {
+        final DomNode domNode = getDomNodeOrDie();
+        
+        if (OUTER_HTML_READONLY.contains(domNode.getNodeName())) {
+            throw Context.reportRuntimeError("outerHTML is read-only for tag " + domNode.getNodeName());
+        }
+
+        for (final Iterator iter = parseHtmlSnippet(value).iterator(); iter.hasNext();) {
+            final DomNode child = (DomNode) iter.next();
+            domNode.insertBefore(child);
+        }
+        domNode.remove();
     }
 
     /**
