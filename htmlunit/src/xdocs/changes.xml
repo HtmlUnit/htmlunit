@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="yourgod">
+                Added WebClient.setTimeout(int) and WebClient.getTimeout()
+            </action>        
             <action type="update" dev="mguillem">
                 JavaScript: all elements can now be accessed by name with syntax document.foo (like what was already working for forms).
             </action>

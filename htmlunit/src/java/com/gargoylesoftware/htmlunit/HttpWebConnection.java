@@ -42,6 +42,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -61,8 +62,11 @@ import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.methods.GetMethod;
 
-import org.apache.commons.httpclient.methods.MultipartPostMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.multipart.FilePart;
+import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
+import org.apache.commons.httpclient.methods.multipart.Part;
+import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -251,12 +255,7 @@ public class HttpWebConnection extends WebConnection {
             }
         }
         else if( method == SubmitMethod.POST ) {
-            if (encType == FormEncodingType.URL_ENCODED) {
-                httpMethod = new PostMethod( path );
-            }
-            else {
-                httpMethod = new MultipartPostMethod(path);
-            }
+            httpMethod = new PostMethod( path );
             final String queryString = url.getQuery();
             if( queryString != null ) {
                 httpMethod.setQueryString(queryString);
@@ -279,17 +278,28 @@ public class HttpWebConnection extends WebConnection {
                 }
             }
             else {
+                final List partList = new ArrayList();
                 iterator = parameters.iterator();
                 while (iterator.hasNext()) {
+                    final Part newPart;
                     final KeyValuePair pair = (KeyValuePair) iterator.next();
                     if (pair instanceof KeyDataPair) {
-                        ((MultipartPostMethod) httpMethod).addParameter(
-                                pair.getName(), pair.getValue(), ((KeyDataPair) pair).getFile());
-                    }
+                        final KeyDataPair pairWithFile = (KeyDataPair) pair;
+                        newPart = new FilePart(
+                                pairWithFile.getName(),
+                                pairWithFile.getValue(),
+                                pairWithFile.getFile());
+                    } 
                     else {
-                        ((MultipartPostMethod) httpMethod).addParameter(pair.getName(), pair.getValue());
+                        newPart = new StringPart(pair.getName(), pair.getValue());
                     }
+                    partList.add(newPart);
                 }
+                Part[] parts = new Part[partList.size()];
+                parts = (Part[]) partList.toArray(parts);
+                ((PostMethod) httpMethod).setRequestEntity(new MultipartRequestEntity(
+                        parts,
+                        httpMethod.getParams()));
             }
         }
         else {
@@ -344,6 +354,9 @@ public class HttpWebConnection extends WebConnection {
                 hostConfiguration.setProxy( getProxyHost(), getProxyPort() );
             }
             client.setHostConfiguration(hostConfiguration);
+            final int timeout = this.getWebClient().getTimeout();
+            client.getHttpConnectionManager().getParams().setSoTimeout(timeout);
+            client.getHttpConnectionManager().getParams().setConnectionTimeout(timeout);
 
             // If two clients are part of the same domain then they should share the same
             // state (ie cookies)
@@ -405,9 +418,9 @@ public class HttpWebConnection extends WebConnection {
     throws IOException {
 
         return new WebResponse() {
-        	private String content = IOUtils.toString(method.getResponseBodyAsStream(), getContentCharSet());
+            private String content_ = IOUtils.toString(method.getResponseBodyAsStream(), getContentCharSet());
 
-        	public int getStatusCode() {
+            public int getStatusCode() {
                     return statusCode;
                 }
 
@@ -441,7 +454,7 @@ public class HttpWebConnection extends WebConnection {
                 }
 
                 public String getContentAsString() {
-                    return content;
+                    return content_;
                 }
 
                 public InputStream getContentAsStream() {
@@ -477,7 +490,7 @@ public class HttpWebConnection extends WebConnection {
 
                 public byte [] getResponseBody() {
                     try {
-                        return content.getBytes(getContentCharSet());
+                        return content_.getBytes(getContentCharSet());
                     }
                     catch (UnsupportedEncodingException e) {
                         // should never occur
