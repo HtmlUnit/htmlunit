@@ -170,7 +170,7 @@ public class WebClient {
 
     private ScriptPreProcessor scriptPreProcessor_;
     private Map activeXObjectMap_ = Collections.EMPTY_MAP;
-    private RefreshHandler refreshHandler_ = new DefaultRefreshHandler();
+    private RefreshHandler refreshHandler_ = new ImmediateRefreshHandler();
     private boolean throwExceptionOnScriptError_ = true;
 
 
@@ -1710,7 +1710,7 @@ public class WebClient {
      */
     public void setRefreshHandler( final RefreshHandler handler ) {
         if( handler == null ) {
-            refreshHandler_ = new DefaultRefreshHandler();
+            refreshHandler_ = new ImmediateRefreshHandler();
         }
         else {
             refreshHandler_ = handler;

@@ -35,41 +35,49 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit;
 
 import java.net.URL;
-import java.util.List;
-
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.RefreshHandler;
 
 /**
- * A handler for page refreshes that logs the refreshes but doesn't actually
- * perform any refreshes.
- *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * The default handler for page refreshes. This refresh handler immediately
+ * refreshes the specified page, using the specified URL and ignoring the
+ * wait time.
+ * 
+ * If you want a refresh handler that does not ignore the wait time,
+ * see {@link ThreadedRefreshHandler}.
+ * 
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  */
-public class LoggingRefreshHandler implements RefreshHandler {
-    private final List list_;
-    
+public class ImmediateRefreshHandler implements RefreshHandler {
+
     /**
-     * @param list The list to add data to 
-     */
-    public LoggingRefreshHandler( final List list ) {
-        list_ = list;
-    }
-    
-    /**
-     * Logs the requested refresh, but does not actually refresh anything.
+     * Immediately refreshes the specified page using the specified URL.
      * @param page The page that is going to be refreshed.
      * @param url The URL where the new page will be loaded.
-     * @param seconds The number of seconds to wait before reloading the page.
+     * @param seconds The number of seconds to wait before reloading the page (ignored!).
      */
-    public void handleRefresh( final Page page, final URL url, final int seconds ) {
-        list_.add(((HtmlPage)page).getTitleText());
-        list_.add(url);
-        list_.add( new Integer(seconds) );
+    public void handleRefresh(final Page page, final URL url, final int seconds) {
+        final WebWindow window = page.getEnclosingWindow();
+        if( window == null ) {
+            return;
+        }
+        final WebClient client = window.getWebClient();
+        if( page.getWebResponse().getUrl().equals( url ) ) {
+            String msg = "Attempted to refresh a page using an ImmediateRefreshHandler, " +
+                "which would have caused an OutOfMemoryException; refresh aborted. " +
+                "Please use a WaitRefreshHandler instead.";
+            client.getLog().warn( msg );
+            return;
+        }
+        try {
+            client.getPage( window, new WebRequestSettings( url ) );
+        }
+        catch( final Exception e ) {
+            client.getLog().error( "Unable to refresh page!", e );
+        }
     }
+
 }

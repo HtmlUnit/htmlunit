@@ -64,7 +64,6 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -996,46 +995,52 @@ public final class HtmlPage extends DomNode implements Page {
             return;
         }
 
-        
-        int index = refreshString.indexOf(";");
-        if( index == -1 ) {
-            getLog().error("Malformed refresh string: Expecting 'URL=' but found ["+refreshString+"]");
-            return;
-        }
-        final int time = Integer.parseInt(refreshString.substring(0,index));
-        index = refreshString.indexOf("URL=", index);
-        if( index == -1 ) {
-            index = refreshString.indexOf("url=",index);
-        }
-        
-        if( index == -1 ) {
-            getLog().error("Malformed refresh string: Expecting 'URL=' but found ["+refreshString+"]");
-            return;
-        }
+        final int time;
+        final URL url;
 
-        // remove quotes if any (" and ')
-        final StringBuffer buffer = new StringBuffer(refreshString.substring(index + 4));
-        if (buffer.charAt(0) == '"' || buffer.charAt(0) == 0x27) {
-            buffer.deleteCharAt(0);
-        }
-        if (buffer.charAt(buffer.length()-1) == '"' || buffer.charAt(buffer.length()-1) == 0x27) {
-            buffer.deleteCharAt(buffer.length()-1);
-        }
+        int index = refreshString.indexOf( ";" );
+        boolean timeOnly = ( index == -1 );
 
-        final String newUrl = buffer.toString();
-        try {
-            final URL url = getFullyQualifiedUrl(newUrl);
-
-            if( getWebClient().getRefreshHandler().shouldRefresh( this, url, time ) ) {
-                getWebClient().getPage(window, new WebRequestSettings(url));
+        if( timeOnly ) {
+            // Format: <meta http-equiv='refresh' content='10'>
+            try {
+                time = Integer.parseInt( refreshString );
+            }
+            catch( final NumberFormatException e ) {
+                getLog().error( "Malformed refresh string (no ';' but not a number): " + refreshString, e );
+                return;
+            }
+            url = this.originatingUrl_;
+        }
+        else {
+            // Format: <meta http-equiv='refresh' content='10;url=http://www.blah.com'>
+            time = Integer.parseInt( refreshString.substring( 0, index ) );
+            index = refreshString.indexOf( "URL=", index );
+            if( index == -1 ) {
+                index = refreshString.indexOf( "url=", index );
+            }
+            if( index == -1 ) {
+                getLog().error( "Malformed refresh string (found ';' but no 'url='): " + refreshString );
+                return;
+            }
+            final StringBuffer buffer = new StringBuffer( refreshString.substring( index + 4 ) );
+            if( buffer.charAt( 0 ) == '"' || buffer.charAt( 0 ) == 0x27 ) {
+                buffer.deleteCharAt( 0 );
+            }
+            if( buffer.charAt( buffer.length() - 1 ) == '"' || buffer.charAt( buffer.length() - 1 ) == 0x27 ) {
+                buffer.deleteCharAt( buffer.length() - 1 );
+            }
+            final String urlString = buffer.toString();
+            try {
+                url = getFullyQualifiedUrl( urlString );
+            }
+            catch( final MalformedURLException e ) {
+                getLog().error( "Malformed url in refresh string: " + refreshString, e );
+                return;
             }
         }
-        catch( final MalformedURLException e ) {
-            getLog().error("HtmlPage refresh to ["+newUrl+"] Got MalformedURLException", e);
-        }
-        catch( final IOException e ) {
-            getLog().error("HtmlPage refresh to ["+newUrl+"] Got IOException", e);
-        }
+
+        getWebClient().getRefreshHandler().handleRefresh( this, url, time );
     }
 
     /**

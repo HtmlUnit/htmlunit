@@ -45,6 +45,7 @@ import java.util.List;
 
 import junit.framework.AssertionFailedError;
 
+import com.gargoylesoftware.htmlunit.ImmediateRefreshHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -800,6 +801,49 @@ public class HtmlPageTest extends WebTestCase {
 
         assertEquals("second", page.getTitleText());
     }
+
+    /**
+     * Test auto-refresh from a meta tag with no URL.
+     * @throws Exception if the test fails
+     */
+    public void testRefresh_MetaTag_NoUrl() throws Exception {
+
+        final String firstContent = "<html><head><title>first</title>"
+            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">"
+            + "</head><body></body></html>";
+
+        final WebClient client = new WebClient();
+        final List collectedItems = new ArrayList();
+        client.setRefreshHandler(new LoggingRefreshHandler(collectedItems));
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        client.setWebConnection(webConnection);
+
+        client.getPage(URL_FIRST);
+
+        final List expectedItems = Arrays.asList(new Object[] {"first", URL_FIRST, new Integer(1)});
+        assertEquals(expectedItems, collectedItems);
+    }
+
+    /**
+     * Ensures that if a page is supposed to refresh itself every certain amount of
+     * time, and the ImmediateRefreshHandler is being used, an OOME is avoided by
+     * not performing the refresh.
+     * @throws Exception if the test fails
+     */
+    public void testRefresh_ImmediateRefresh_AvoidOOME() throws Exception {
+
+        final String firstContent = "<html><head><title>first</title>"
+            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">"
+            + "</head><body></body></html>";
+
+        final WebClient client = new WebClient();
+        assertInstanceOf(client.getRefreshHandler(), ImmediateRefreshHandler.class);
+        loadPage(firstContent);
+        Thread.sleep(1000);
+    }
+
     /**
      * Test auto-refresh from a meta tag with url quoted.
      * @throws Exception if the test fails
@@ -873,7 +917,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Test auto-refresh from a meta tag with a refresh handler that returns false.
+     * Test auto-refresh from a meta tag with a refresh handler that doesn't refresh.
      * @throws Exception if the test fails
      */
     public void testRefresh_MetaTag_CustomRefreshHandler() throws Exception {
