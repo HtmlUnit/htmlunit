@@ -78,7 +78,7 @@ public class Input extends HTMLElement {
      *@return    The value of this attribute.
      */
     public String jsGet_type() {
-        return "Foobar";
+        return getHtmlElementOrDie().getAttributeValue("type");
     }
 
 
