@@ -823,6 +823,25 @@ public class HtmlPageTest extends WebTestCase {
 
 
     /**
+     * If the onload handler contains two statements then only the first would execute
+     * @throws Exception if the test fails
+     */
+    public void testOnLoadHandler_TwoBodyStatements() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title>"
+                 + "</head><body onLoad='alert(\"foo\");alert(\"bar\")'>"
+                 + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "foo", "bar"
+        });
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
      * Regression test for bug 713646
      * @throws Exception if the test fails
      */
