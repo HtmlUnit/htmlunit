@@ -133,21 +133,32 @@ public class HtmlSelect
      * may be the same window or it may be a freshly loaded one.
      */
     public Page setSelectedAttribute( final String optionValue, final boolean isSelected ) {
-
         try {
-            getOptionByValue( optionValue );
+            return setSelectedAttribute( getOptionByValue(optionValue), isSelected );
         }
         catch( final ElementNotFoundException e ) {
-            throw new IllegalArgumentException(
-                "optionValue was not contained in the document: " + optionValue );
+            throw new IllegalArgumentException("optionValue");
         }
+    }
+
+    /**
+     *  Set the "selected" state of the specified option. If this "select" is
+     *  single select then calling this will deselect all other options <p>
+     *
+     *  Only options that are actually in the document may be selected. If you
+     *  need to select an option that really isn't there (ie testing error
+     *  cases) then use {@link #fakeSelectedAttribute(String)} or {@link
+     *  #fakeSelectedAttribute(String[])} instead.
+     *
+     * @param  isSelected true if the option is to become selected
+     * @param  selectedOption The value of the option that is to change
+     * @return  The page that occupies this window after this change is made.  It
+     * may be the same window or it may be a freshly loaded one.
+     */
+    public Page setSelectedAttribute( final HtmlOption selectedOption, final boolean isSelected ) {
 
         if( isMultipleSelectEnabled() ) {
-            final List elements = getXmlElementsByAttribute( "option", "value", optionValue );
-            final Iterator iterator = elements.iterator();
-            while( iterator.hasNext() ) {
-                setSelected( ( Element )iterator.next(), isSelected );
-            }
+            setSelected( selectedOption.getElement(), isSelected );
         }
         else {
             final Iterator iterator = getAllOptions().iterator();
@@ -155,7 +166,7 @@ public class HtmlSelect
                 final HtmlOption option = ( HtmlOption )iterator.next();
                 setSelected(
                     option.getElement(),
-                    option.getValueAttribute().equals( optionValue ) && isSelected );
+                    option == selectedOption && isSelected );
             }
         }
 

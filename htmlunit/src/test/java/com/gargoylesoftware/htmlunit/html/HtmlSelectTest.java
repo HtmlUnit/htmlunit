@@ -497,5 +497,31 @@ public class HtmlSelectTest extends WebTestCase {
         final List expectedAlerts = Collections.singletonList("changing");
         assertEquals( expectedAlerts, collectedAlerts );
     }
-}
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetSelectionOnOptionWithNoName()throws Exception {
+
+        final String htmlContent
+            = "<html><body><form name='form' method='GET' action='action.html'>"
+            + "<select name='select' multiple size='5'>"
+            + "<option value='1'>111</option>"
+            + "<option id='option2'>222</option>"
+            + "</select>"
+            + "</form></body></html>";
+        final WebClient client = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+            new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+
+        final HtmlOption option = (HtmlOption)page.getHtmlElementById("option2");
+        option.setSelected(true);
+    }
+}
