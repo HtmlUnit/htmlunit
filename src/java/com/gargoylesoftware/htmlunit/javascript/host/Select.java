@@ -41,7 +41,6 @@ import java.util.List;
 
 import org.mozilla.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.OptionsArray;
 
@@ -155,7 +154,7 @@ public class Select extends Input {
 
     /**
      * Remove options by reducing the "length" property
-     * @param The new length property value
+     * @param newLength The new length property value
      */
     public void jsSet_length( final int newLength ) {
         if( optionsArray_ == null ) {
