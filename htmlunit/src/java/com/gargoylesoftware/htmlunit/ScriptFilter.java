@@ -101,7 +101,12 @@ public final class ScriptFilter extends DefaultFilter {
         scriptSource_ = null;
         scriptCharset_ = null;
         scriptBuffer_ = null;
-        systemId_ = locator != null ? locator.getLiteralSystemId() : null;
+        if( locator == null ) {
+            systemId_ = null;
+        }
+        else {
+            systemId_ = locator.getLiteralSystemId();
+        }
         super.startDocument( locator, encoding, augmentations );
     }
 

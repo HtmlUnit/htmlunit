@@ -47,7 +47,7 @@ import org.apache.commons.httpclient.methods.MultipartPostMethod;
  * @version  $Revision$
  * @author Brad Clarke
  */
-public class FormEncodingType {
+public final class FormEncodingType {
 
     /**
      *  URL_ENCODED
