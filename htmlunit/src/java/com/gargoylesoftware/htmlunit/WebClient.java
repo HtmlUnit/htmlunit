@@ -1251,6 +1251,7 @@ public class WebClient {
      * encoding.
      * @param url The file url
      * @return The web response
+     * @throws IOException If an IO problem occurs
      */
     private WebResponse makeWebResponseForFileUrl(final URL url) throws IOException {
         final File file = FileUtils.toFile(url);
