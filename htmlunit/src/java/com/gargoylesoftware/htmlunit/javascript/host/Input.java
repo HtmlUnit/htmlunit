@@ -167,6 +167,10 @@ public class Input extends HTMLElement {
     }
 
 
+    /**
+     * Return the value of the tabindex attribute.  Currently not implemented.
+     * @return the value of the tabindex attribute.
+     */
     public String jsGet_tabindex() {
         getLog().debug("Input.jsGet_tabindex not implemented");
         return "";

@@ -36,7 +36,8 @@ public class AssertTitleTag extends HtmlUnitTagSupport {
         }
 
         if( startsWithText_ != null && actualText.startsWith(startsWithText_) == false ) {
-            throw new JellyTagException("Expected text to start with ["+startsWithText_+"] but got ["+actualText+"] instead");
+            throw new JellyTagException("Expected text to start with ["
+                +startsWithText_+"] but got ["+actualText+"] instead");
         }
     }
 
@@ -50,6 +51,10 @@ public class AssertTitleTag extends HtmlUnitTagSupport {
     }
 
 
+    /**
+     * Set the startsWith attribute
+     * @param text the new value
+     */
     public void setStartsWith( final String text ) {
         startsWithText_ = text;
     }

@@ -43,7 +43,7 @@ public class FormElementsArray extends SimpleScriptable {
 
     /**
      * Initialize this object
-     * @param page The HtmlPage that this object will retrive elements from.
+     * @param form The HtmlForm that this object will retrive elements from.
      */
     public void initialize( final HtmlForm form ) {
         Assert.notNull("form", form);

@@ -30,7 +30,7 @@ import org.mozilla.javascript.ScriptableObject;
  */
 public class SimpleScriptable extends ScriptableObject {
     private static final Map PROPERTY_MAPS = Collections.synchronizedMap( new HashMap(89) );
-    private static Map HTML_JAVASCRIPT_MAP = null;
+    private static Map HtmlJavaScriptMap_ = null;
 
     private JavaScriptEngine.PageInfo pageInfo_;
     private HtmlElement htmlElement_;
@@ -50,9 +50,15 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
 
+    /**
+     * Return an immutable map containing the html to javascript mappings.  Keys are
+     * java classes for the various html classes (ie HtmlInput.class) and the values
+     * are the javascript class names (ie "Anchor").
+     * @return the mappings
+     */
     public static synchronized Map getHtmlJavaScriptMapping() {
-        if( HTML_JAVASCRIPT_MAP != null ) {
-            return HTML_JAVASCRIPT_MAP;
+        if( HtmlJavaScriptMap_ != null ) {
+            return HtmlJavaScriptMap_;
         }
 
         final String[][] mapping = {
@@ -91,7 +97,7 @@ public class SimpleScriptable extends ScriptableObject {
             }
         }
 
-        HTML_JAVASCRIPT_MAP = Collections.unmodifiableMap(map);
+        HtmlJavaScriptMap_ = Collections.unmodifiableMap(map);
         return map;
     }
 
