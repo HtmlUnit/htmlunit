@@ -287,7 +287,7 @@
         <function name="splitText"/>
     </class>
     <class name="Select" extends="Input"><!-- NOT FINISHED -->
-        <property name="length" readable="true" writable="length"/>
+        <property name="length" readable="true" writable="true"/>
         <function name="add"/>
         <function name="remove"/>
     </class>
