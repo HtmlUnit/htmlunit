@@ -307,5 +307,21 @@ public final class Window extends SimpleScriptable {
     public WebWindow getWebWindow() {
         return webWindow_;
     }
+
+
+    /**
+     * Set the focus to this element.
+     */
+    public void jsFunction_focus() {
+        getLog().debug( "Window.focus() not implemented" );
+    }
+
+
+    /**
+     * Remove focus from this element
+     */
+    public void jsFunction_blur() {
+        getLog().debug( "Window.blur() not implemented" );
+    }
 }
 
