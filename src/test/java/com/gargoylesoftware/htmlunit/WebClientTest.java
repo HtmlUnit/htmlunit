@@ -548,7 +548,8 @@ public class WebClientTest extends WebTestCase {
         // it could be usefull to have existing files to test in a special location in filesystem. 
         // It will be really needed when we have to test binary files using the file protocol.
         final String htmlContent = "<html><head><title>foo</title></head><body></body></html>";
-        File tmpFile = File.createTempFile("test", ".html", new File(""));
+        final File currentDirectory = new File((new File("")).getAbsolutePath());
+        final File tmpFile = File.createTempFile("test", ".html", currentDirectory);
         tmpFile.deleteOnExit();
         final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
         FileUtils.writeStringToFile(tmpFile, htmlContent, encoding);
