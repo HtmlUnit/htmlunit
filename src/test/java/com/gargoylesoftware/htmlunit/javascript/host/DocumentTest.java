@@ -2183,5 +2183,23 @@ public class DocumentTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
         assertEquals(Collections.singletonList("2"), collectedAlerts);
-    }     
+    }
+    
+    /**
+     * document.XXX should first look at elements named XXX before using standard functions.
+     * @throws Exception if the test fails
+     */
+    public void testPrecedence() throws Exception {
+        final String htmlContent = "<html><head></head>"
+            + "<body>"
+            + "<form name='writeln'>foo</form>"
+            + "<script>alert(document.writeln.tagName);</script>"
+            + "</body></html>";
+        final List expectedAlerts = Arrays.asList(new String[] {"FORM"});
+        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(htmlContent, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
