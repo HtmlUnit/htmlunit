@@ -1582,7 +1582,7 @@ public class WebClient {
     }
 
     /**
-     * Return an immutable list of open web windows.
+     * Return an immutable list of open web windows (top windows or not).
      * @return The web windows
      */
     public List getWebWindows() {
