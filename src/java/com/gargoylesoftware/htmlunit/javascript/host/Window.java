@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -244,7 +245,7 @@ public final class Window extends SimpleScriptable {
                     Context.enter();
                     final HtmlPage htmlPage = window.document_.getHtmlPage();
                     htmlPage.executeJavaScriptIfPossible(
-                        script, "Window.setTimeout()", true, htmlPage);
+                        script, "Window.setTimeout()", true, htmlPage.getDocumentElement());
                 }
                 catch( final Exception e ) {
                     window.getLog().error("Caught exception in Window.setTimeout()", e);
@@ -344,18 +345,18 @@ public final class Window extends SimpleScriptable {
 
         webWindow_ = htmlPage.getEnclosingWindow();
         webWindow_.setScriptObject(this);
-        if( webWindow_ instanceof HtmlElement ) {
-            setHtmlElement((HtmlElement)webWindow_);
+        if( webWindow_ instanceof DomNode ) {
+            setDomNode((DomNode)webWindow_);
         }
         else {
-            // Windows don't have corresponding HtmlElements so set the htmlElement
+            // Windows don't have corresponding DomNodes so set the domNode
             // variable to be the page.  If this isn't set then SimpleScriptable.get()
             // won't work properly
-            setHtmlElement(htmlPage);
+            setDomNode(htmlPage);
         }
 
         document_ = (Document)makeJavaScriptObject("Document");
-        document_.setHtmlElement(htmlPage);
+        document_.setDomNode(htmlPage);
 
         navigator_ = (Navigator)makeJavaScriptObject("Navigator");
         screen_ = (Screen)makeJavaScriptObject("Screen");
@@ -534,9 +535,9 @@ public final class Window extends SimpleScriptable {
      * @return The property.
      */
     public Object get( final String name, final Scriptable start ) {
-        // If the htmlElement hasn't been set yet then do it now.
-        if( getHtmlElementOrNull() == null && document_ != null ) {
-            setHtmlElement( document_.getHtmlPage() );
+        // If the DomNode hasn't been set yet then do it now.
+        if( getDomNodeOrNull() == null && document_ != null ) {
+            setDomNode( document_.getHtmlPage() );
         }
 
         Object result;
@@ -553,9 +554,9 @@ public final class Window extends SimpleScriptable {
 
         // If we are in a frameset then this might be a frame name
         if( result == NOT_FOUND ) {
-            final HtmlElement htmlElement = ((Window)start).getHtmlElementOrNull();
-            //System.out.println("Window.get() htmlElement=["+htmlElement+"]");
-            result = getFrameByName( htmlElement.getPage(), name );
+            final DomNode domNode = ((Window)start).getDomNodeOrNull();
+            //System.out.println("Window.get() domNode=["+domNode+"]");
+            result = getFrameByName( domNode.getPage(), name );
         }
 
         if( result == NOT_FOUND ) {
@@ -586,7 +587,7 @@ public final class Window extends SimpleScriptable {
         try {
             final HtmlPage page = window.document_.getHtmlPage();
             final ScriptResult scriptResult = page.executeJavaScriptIfPossible(
-                "return "+name+";", "variable access for "+name, true, page);
+                "return "+name+";", "variable access for "+name, true, page.getDocumentElement());
 
             return scriptResult.getJavaScriptResult();
         }
@@ -601,7 +602,7 @@ public final class Window extends SimpleScriptable {
 
     private Object getFrameByName( final HtmlPage page, final String name ) {
 
-        final Iterator iterator = page.getAllHtmlChildElements();
+        final Iterator iterator = page.getDocumentElement().getAllHtmlChildElements();
         while( iterator.hasNext() ) {
             final HtmlElement element = ( HtmlElement )iterator.next();
             final String tagName = element.getTagName();

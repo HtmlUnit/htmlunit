@@ -39,8 +39,13 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.Assert;
 
@@ -221,13 +226,129 @@ public abstract class DomNode implements Cloneable {
      */
     public abstract String getNodeName();
 
+
     /**
-     * @return  a text representation of this element that represents what would
+     *  Return a text representation of this element that represents what would
      *  be visible to the user if this page was shown in a web browser. For
      *  example, a select element would return the currently selected value as
      *  text
+     *
+     * @return  The element as text
      */
-    public abstract String asText();
+    public String asText() {
+        String text = getChildrenAsText();
+
+        // Translate non-breaking spaces to regular spaces.
+        text = text.replace((char)160,' ');
+
+        // Remove extra whitespace
+        text = reduceWhitespace(text);
+        return text;
+    }
+
+
+    /**
+     *  Return a text string that represents all the child elements as they
+     *  would be visible in a web browser
+     *
+     * @return  See above
+     * @see  #asText()
+     */
+    protected final String getChildrenAsText() {
+        StringBuffer buffer = new StringBuffer();
+        Iterator childIterator = getChildIterator();
+
+        if(!childIterator.hasNext()) {
+            return "";
+        }
+        while(childIterator.hasNext()) {
+            DomNode node = (DomNode)childIterator.next();
+            buffer.append(node.asText());
+        }
+
+        return buffer.toString();
+    }
+
+
+    /**
+     * Removes extra whitespace from a string similar to what a browser does
+     * when it displays text.
+     * @param text The text to clean up.
+     * @return The cleaned up text.
+     */
+    private static String reduceWhitespace( final String text ) {
+        final StringBuffer buffer = new StringBuffer( text.length() );
+        final int length = text.length();
+        boolean whitespace = false;
+        for( int i = 0; i < length; ++i) {
+            char ch = text.charAt(i);
+            if( whitespace ) {
+                if( Character.isWhitespace(ch) == false ) {
+                    buffer.append(ch);
+                    whitespace = false;
+                }
+            }
+            else {
+                if( Character.isWhitespace(ch) ) {
+                    whitespace = true;
+                    buffer.append(' ');
+                }
+                else {
+                    buffer.append(ch);
+                }
+            }
+        }
+        return buffer.toString().trim();
+    }
+
+    /**
+     * Return the log object for this element.
+     * @return The log object for this element.
+     */
+    protected final Log getLog() {
+        return LogFactory.getLog(getClass());
+    }
+
+    /**
+     * Return a string representation of the xml document from this element and all
+     * it's children (recursively).
+     *
+     * @return The xml string.
+     */
+    public String asXml() {
+
+        final StringWriter stringWriter = new StringWriter();
+        final PrintWriter printWriter = new PrintWriter(stringWriter);
+        printXml("", printWriter);
+        printWriter.close();
+        return stringWriter.toString();
+    }
+
+    /**
+     * recursively write the XML data for the node tree starting at <code>node</code>
+     *
+     * @param indent white space to indent child nodes
+     * @param printWriter writer where child nodes are written
+     */
+    protected void printXml( String indent, PrintWriter printWriter ) {
+
+        printWriter.println(indent+this);
+        printChildrenAsXml( indent, printWriter );
+    }
+
+    /**
+     * recursively write the XML data for the node tree starting at <code>node</code>
+     *
+     * @param indent white space to indent child nodes
+     * @param printWriter writer where child nodes are written
+     */
+    protected void printChildrenAsXml( String indent, PrintWriter printWriter ) {
+        DomNode child = getFirstChild();
+        while (child != null) {
+            child.printXml(indent+"  ", printWriter);
+            child = child.getNextSibling();
+        }
+    }
 
     /**
      * Get the value for the current node.
@@ -490,6 +611,102 @@ public abstract class DomNode implements Cloneable {
                 throw new IllegalStateException();
             }
             nextNode_.previousSibling_.remove();
+        }
+    }
+
+
+    /**
+     * Return an iterator that will recursively iterate over every child element
+     * below this one.
+     * @return The iterator.
+     */
+    public DescendantElementsIterator getAllHtmlChildElements() {
+        return new DescendantElementsIterator();
+    }
+
+    /**
+     * an iterator over all HtmlElement descendants in document order
+     */
+    protected class DescendantElementsIterator implements Iterator {
+
+        private HtmlElement nextElement_ = getFirstChildElement(DomNode.this);
+
+        /** @return is there a next one? */
+        public boolean hasNext() {
+            return nextElement_ != null;
+        }
+
+        /** @return the next one */
+        public Object next() {
+            return nextElement();
+        }
+
+        /** remove the current object */
+        public void remove() {
+            if(nextElement_ == null) {
+                throw new IllegalStateException();
+            }
+            if(nextElement_.getPreviousSibling() != null) {
+                nextElement_.getPreviousSibling().remove();
+            }
+        }
+
+        /** @return is there a next one? */
+        public HtmlElement nextElement() {
+            HtmlElement result = nextElement_;
+            setNextElement();
+            return result;
+        }
+
+        /** @return the next element */
+        private void setNextElement() {
+            HtmlElement next = getFirstChildElement(nextElement_);
+            if( next == null ) {
+                next = getNextSibling(nextElement_);
+            }
+            if( next == null ) {
+                next = getNextElementUpwards(nextElement_);
+            }
+            nextElement_ = next;
+        }
+
+        private HtmlElement getNextElementUpwards( DomNode startingNode ) {
+            if( startingNode == DomNode.this) {
+                return null;
+            }
+
+            DomNode parent = (DomNode)startingNode.getParentNode();
+            if( parent == DomNode.this ) {
+                return null;
+            }
+
+            DomNode next = parent.getNextSibling();
+            while( next != null && next instanceof HtmlElement == false ) {
+                next = next.getNextSibling();
+            }
+
+            if( next == null ) {
+                return getNextElementUpwards(parent);
+            }
+            else {
+                return (HtmlElement)next;
+            }
+        }
+
+        private HtmlElement getFirstChildElement(DomNode parent) {
+            DomNode node = parent.getFirstChild();
+            while( node != null && node instanceof HtmlElement == false ) {
+                node = node.getNextSibling();
+            }
+            return (HtmlElement)node;
+        }
+
+        private HtmlElement getNextSibling( HtmlElement element) {
+            DomNode node = element.getNextSibling();
+            while( node != null && node instanceof HtmlElement == false ) {
+                node = node.getNextSibling();
+            }
+            return (HtmlElement)node;
         }
     }
 }

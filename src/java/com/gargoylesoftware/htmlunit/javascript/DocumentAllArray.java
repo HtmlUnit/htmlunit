@@ -99,11 +99,8 @@ public class DocumentAllArray extends SimpleScriptable {
      */
     public Object get( final int index, final Scriptable start ) {
         final HtmlPage htmlPage = ((DocumentAllArray)start).htmlPage_;
-        if( index == 0 ) {
-            return getScriptableFor( htmlPage );
-        }
 
-        int elementCount = 1;
+        int elementCount = 0;
 
         final Iterator iterator = htmlPage.getAllHtmlChildElements();
         while( iterator.hasNext() ) {
@@ -136,7 +133,7 @@ public class DocumentAllArray extends SimpleScriptable {
 
         final HtmlPage htmlPage = ((DocumentAllArray)start).htmlPage_;
         try {
-            final HtmlElement htmlElement = htmlPage.getHtmlElementById(name);
+            final HtmlElement htmlElement = htmlPage.getDocumentElement().getHtmlElementById(name);
             return getScriptableFor(htmlElement);
         }
         catch( final ElementNotFoundException e ) {
@@ -178,7 +175,7 @@ public class DocumentAllArray extends SimpleScriptable {
     public Object jsGet_length() {
 
         final DocumentAllArray array = this;
-        int elementCount = 1; // First one is <html>
+        int elementCount = 0;
 
         final HtmlPage htmlPage = array.htmlPage_;
         final Iterator iterator = htmlPage.getAllHtmlChildElements();
@@ -204,7 +201,8 @@ public class DocumentAllArray extends SimpleScriptable {
 
         final DocumentAllArray array = (DocumentAllArray)scriptable;
         final String tagName = getStringArg(0, args, "");
-        final List htmlElements = array.htmlPage_.getHtmlElementsByTagNames( Collections.singletonList(tagName) );
+        final List htmlElements = array.htmlPage_.getDocumentElement().getHtmlElementsByTagNames(
+            Collections.singletonList(tagName) );
         final ListIterator iterator = htmlElements.listIterator();
         while( iterator.hasNext() ) {
             final HtmlElement element = (HtmlElement)iterator.next();

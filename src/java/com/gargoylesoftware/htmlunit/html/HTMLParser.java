@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
  *
  * @version  $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author David K. Taylor
  */
 public class HTMLParser {
 
@@ -108,6 +109,7 @@ public class HTMLParser {
         putFactory( HtmlHeader6.TAG_NAME, HtmlHeader6.class);
         putFactory( HtmlHead.TAG_NAME, HtmlHead.class);
         putFactory( HtmlHorizontalRule.TAG_NAME, HtmlHorizontalRule.class);
+        putFactory( HtmlHtml.TAG_NAME, HtmlHtml.class);
         putFactory( HtmlInlineFrame.TAG_NAME, HtmlInlineFrame.class);
         putFactory( HtmlImage.TAG_NAME, HtmlImage.class);
         putFactory( HtmlInsertedText.TAG_NAME, HtmlInsertedText.class);
@@ -220,7 +222,7 @@ public class HTMLParser {
         private Locator locator_;
         private final Stack stack_ = new Stack();
 
-        private HtmlElement currentElement_;
+        private DomNode currentNode_;
         private StringBuffer characters_;
 
         /**
@@ -284,6 +286,17 @@ public class HTMLParser {
             this.locator_ = locator;
         }
 
+        /** SAX start document event */
+        public void startDocument() throws SAXException {
+            page_ = new HtmlPage(webClient_, webResponse_.getUrl(), webResponse_, webWindow_);
+            page_.setScriptFilter(scriptFilter_);
+            scriptFilter_.setHtmlPage(page_);
+            webWindow_.setEnclosedPage(page_);
+
+            currentNode_ = page_;
+            stack_.push(currentNode_);
+        }
+
         /** SAX start event */
         public void startElement(String namespaceURI, String localName, String qName, Attributes atts)
                 throws SAXException {
@@ -291,21 +304,11 @@ public class HTMLParser {
             handleCharacters();
 
             final String tagLower = localName.toLowerCase();
-            if(page_ == null && HtmlPage.TAG_NAME.equals(tagLower)) {
-                page_ = new HtmlPage(webClient_, webResponse_.getUrl(), webResponse_, webWindow_);
-                page_.setScriptFilter(scriptFilter_);
-                scriptFilter_.setHtmlPage(page_);
-                webWindow_.setEnclosedPage(page_);
-
-                currentElement_ = page_;
-            }
-            else {
-                IElementFactory factory = getElementFactory(tagLower);
-                HtmlElement newElement = factory.createElement(page_, tagLower, atts);
-                currentElement_.appendChild(newElement);
-                currentElement_ = newElement;
-            }
-            stack_.push(currentElement_);
+            IElementFactory factory = getElementFactory(tagLower);
+            HtmlElement newElement = factory.createElement(page_, tagLower, atts);
+            currentNode_.appendChild(newElement);
+            currentNode_ = newElement;
+            stack_.push(currentNode_);
         }
 
         /** SAX end event */
@@ -316,7 +319,7 @@ public class HTMLParser {
             stack_.pop(); //remove currentElement from stack
 
             if(!stack_.isEmpty()) {
-                currentElement_ = (HtmlElement)stack_.peek();
+                currentNode_ = (DomNode)stack_.peek();
             }
         }
 
@@ -347,7 +350,7 @@ public class HTMLParser {
 
             if(characters_ != null && characters_.length() > 0) {
                 DomText text = new DomText(page_, characters_.toString());
-                currentElement_.appendChild(text);
+                currentNode_.appendChild(text);
                 characters_.setLength(0);
             }
         }
@@ -367,10 +370,6 @@ public class HTMLParser {
             else {
                 return UnknownElementFactory.instance;
             }
-        }
-
-        /** unused SAX event */
-        public void startDocument() throws SAXException {
         }
 
         /** unused SAX event */

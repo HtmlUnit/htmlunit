@@ -75,7 +75,7 @@ import com.gargoylesoftware.htmlunit.javascript.DocumentAllArray;
  * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public final class Document extends HTMLElement {
+public final class Document extends NodeImpl {
 
     private DocumentAllArray allArray_;
     private String status_ = "";
@@ -104,7 +104,7 @@ public final class Document extends HTMLElement {
     public void initialize() {
         if( allArray_ == null ) {
             allArray_ = (DocumentAllArray)makeJavaScriptObject("DocumentAllArray");
-            allArray_.initialize( (HtmlPage)getHtmlElementOrDie() );
+            allArray_.initialize( (HtmlPage)getDomNodeOrDie() );
         }
     }
 
@@ -114,7 +114,7 @@ public final class Document extends HTMLElement {
      * @return The page.
      */
     public HtmlPage getHtmlPage() {
-        return (HtmlPage)getHtmlElementOrDie();
+        return (HtmlPage)getDomNodeOrDie();
     }
 
 
@@ -129,7 +129,7 @@ public final class Document extends HTMLElement {
         final List jsForms = new ArrayList();
 
         final List formElements
-            = getHtmlPage().getHtmlElementsByTagNames( Collections.singletonList("form") );
+            = getHtmlPage().getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("form") );
         final Iterator iterator = formElements.iterator();
         while( iterator.hasNext() ) {
             final HtmlForm htmlForm = (HtmlForm)iterator.next();
@@ -174,7 +174,7 @@ public final class Document extends HTMLElement {
 
         if( document.writeBuffer_ == null ) {
             // open() hasn't been called
-            final HtmlPage page = (HtmlPage)document.getHtmlElementOrDie();
+            final HtmlPage page = (HtmlPage)document.getDomNodeOrDie();
             page.getScriptFilter().write(content);
         }
         else {
@@ -238,7 +238,7 @@ public final class Document extends HTMLElement {
      * @return The value of the "location" property
      */
     public Location jsGet_location() {
-        final WebWindow webWindow = ((HtmlPage)getHtmlElementOrDie()).getEnclosingWindow();
+        final WebWindow webWindow = ((HtmlPage)getDomNodeOrDie()).getEnclosingWindow();
         return ((Window)webWindow.getScriptObject()).jsGet_location();
     }
 
@@ -335,7 +335,7 @@ public final class Document extends HTMLElement {
         else {
             final WebResponse webResponse
                 = new StringWebResponse(document.writeBuffer_.toString());
-            final HtmlPage page = document.getHtmlElementOrDie().getPage();
+            final HtmlPage page = document.getDomNodeOrDie().getPage();
             final WebClient webClient = page.getWebClient();
             final WebWindow window = page.getEnclosingWindow();
 
@@ -347,14 +347,11 @@ public final class Document extends HTMLElement {
     }
 
     /**
-     * Get the JavaScript property "parentNode" for the node that
-     * contains the current node.
-     * @return The parent node
+     * Get the JavaScript property "documentElement" for the document.
+     * @return The root node for the document.
      */
-    public Object jsGet_parentNode() {
-        // Work around the fact that HtmlPage is both the HTML element
-        // and the Document node.
-        return null;
+    public Object jsGet_documentElement() {
+        return getScriptableFor(((HtmlPage)getDomNodeOrDie()).getDocumentElement());
     }
 
 
@@ -423,7 +420,7 @@ public final class Document extends HTMLElement {
     public Object jsFunction_getElementById( final String id ) {
         Object result = null;
         try {
-            final HtmlElement htmlElement = getHtmlElementOrDie().getPage().getHtmlElementById(id);
+            final HtmlElement htmlElement = ((HtmlPage)getDomNodeOrDie()).getDocumentElement().getHtmlElementById(id);
             final Object jsElement = getScriptableFor(htmlElement);
 
             if( jsElement == NOT_FOUND ) {
@@ -448,8 +445,9 @@ public final class Document extends HTMLElement {
      * @return the list of elements
      */
     public Object jsFunction_getElementsByTagName( final String tagName ) {
-        final HtmlPage page = getHtmlElementOrDie().getPage();
-        final List list = page.getHtmlElementsByTagNames(Collections.singletonList(tagName.toLowerCase()));
+        final HtmlPage page = (HtmlPage)getDomNodeOrDie();
+        final List list = page.getDocumentElement().getHtmlElementsByTagNames(
+            Collections.singletonList(tagName.toLowerCase()));
         final ListIterator iterator = list.listIterator();
         while(iterator.hasNext()) {
             final HtmlElement htmlElement = (HtmlElement)iterator.next();
@@ -471,7 +469,7 @@ public final class Document extends HTMLElement {
         // Some calls to get will happen during the initialization of the superclass.
         // At this point, we don't have enough information to do our own initialization
         // so we have to just pass this call through to the superclass.
-        final HtmlPage htmlPage = (HtmlPage)getHtmlElementOrNull();
+        final HtmlPage htmlPage = (HtmlPage)getDomNodeOrNull();
         if( htmlPage == null ) {
             return super.get(name, start);
         }

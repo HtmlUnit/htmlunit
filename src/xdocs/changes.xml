@@ -17,6 +17,13 @@
                 3) the javascript element model.  Now the first two tree models have 
                 been merged into one.  Patch submitted by Christian Sell.
             </action>
+            <action type="update" dev="dktaylor">
+                INCOMPATIBLE CHANGE: Changed HtmlPage so it is no longer derived from
+                HtmlElement.  It is now derived from DomNode and a new HtmlHtml element
+                represents the root element of the document.  Similarly, Document in
+                JavaScript is no longer derived from HTMLElement, but is derived from
+                NodeImpl instead.
+            </action>
             <action type="update" dev="mbowler">
                 Continued migration of the build process from ant to maven.
             </action>
@@ -275,6 +282,15 @@
             <action type="update" dev="mbowler">
                 Added MockWebConnection in the deployable tree and changed FakeWebConnection
                 (in the test tree) to subclass that.
+            </action>
+            <action type="add" dev="dktaylor">
+                Add HtmlPage.getDocumentElement() and Document.documentElement in JavaScript.
+            </action>
+            <action type="update" dev="dktaylor">
+                Improved speed of getElementById().
+            </action>
+            <action type="update" dev="dktaylor">
+                Change the node type and node name for HtmlPage and Document in JavaScript.
             </action>
         </release>
 

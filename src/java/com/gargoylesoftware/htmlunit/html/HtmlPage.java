@@ -44,8 +44,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -62,8 +64,8 @@ import org.apache.commons.httpclient.HttpConstants;
 import org.mozilla.javascript.Function;
 
 /**
- *  A representation of an html page returned from a server. This is also the
- *  wrapper for the html element "html"
+ *  A representation of an html page returned from a server.  This class is the
+ *  DOM Document implementation.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -73,15 +75,14 @@ import org.mozilla.javascript.Function;
  * @author Andreas Hangler
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
-public final class HtmlPage extends HtmlElement implements Page {
-
-    /** the HTML tag represented by this element */
-    public static final String TAG_NAME = "html";
+public final class HtmlPage extends DomNode implements Page {
 
     private final WebClient webClient_;
     private final URL originatingUrl_;
     private       String originalCharset_ = null;
     private final WebResponse webResponse_;
+    private final Map idMap_ = new HashMap();
+    private       HtmlElement documentElement_ = null;
 
     private WebWindow enclosingWindow_;
 
@@ -89,12 +90,13 @@ public final class HtmlPage extends HtmlElement implements Page {
 
     private static final int TAB_INDEX_NOT_SPECIFIED = -10;
     private static final int TAB_INDEX_OUT_OF_BOUNDS = -20;
+
     private ScriptFilter scriptFilter_;
 
     private Object onLoad_;
 
     /**
-     *  Create an instance
+     *  Create an instance of HtmlPage
      *
      * @param  webClient The WebClient that was used to load this page
      * @param  webResponse The web response that was used to create this page
@@ -107,7 +109,7 @@ public final class HtmlPage extends HtmlElement implements Page {
             final WebResponse webResponse,
             final WebWindow webWindow ) {
 
-        super(null, null);
+        super(null);
 
         webClient_ = webClient;
         originatingUrl_ = originatingUrl;
@@ -118,13 +120,6 @@ public final class HtmlPage extends HtmlElement implements Page {
         if( engine != null ) {
             engine.initialize(this);
         }
-    }
-
-    /**
-     * @return the HTML tag name
-     */
-    public String getTagName() {
-        return TAG_NAME;
     }
 
     /**
@@ -157,6 +152,37 @@ public final class HtmlPage extends HtmlElement implements Page {
     }
 
     /**
+     * Get the type of the current node.
+     * @return The node type
+     */
+    public short getNodeType() {
+        return DOCUMENT_NODE;
+    }
+
+    /**
+     * Get the name for the current node.
+     * @return The node name
+     */
+    public String getNodeName() {
+        return "#document";
+    }
+
+    /**
+     * Get the root element of this document.
+     * @return The root element
+     */
+    public HtmlElement getDocumentElement() {
+        if (documentElement_ == null) {
+            DomNode childNode = getFirstChild();
+            while (childNode != null && ! (childNode instanceof HtmlElement)) {
+                childNode = childNode.getNextSibling();
+            }
+            documentElement_ = (HtmlElement) childNode;
+        }
+        return documentElement_;
+    }
+
+    /**
      * Return the charset used in the page.
      * The sources of this information are from 1).meta element which
      * http-equiv attribute value is 'content-type', or if not from
@@ -169,7 +195,7 @@ public final class HtmlPage extends HtmlElement implements Page {
         }
         ArrayList ar = new ArrayList();
         ar.add("meta");
-        List list = getHtmlElementsByTagNames(ar);
+        List list = getDocumentElement().getHtmlElementsByTagNames(ar);
         for(int i=0; i<list.size();i++ ){
             HtmlMeta meta = (HtmlMeta) list.get(i);
             String httpequiv = meta.getHttpEquivAttribute();
@@ -208,7 +234,7 @@ public final class HtmlPage extends HtmlElement implements Page {
      * @throws com.gargoylesoftware.htmlunit.ElementNotFoundException If the anchor could not be found.
      */
     public HtmlAnchor getAnchorByName( final String name ) throws ElementNotFoundException {
-        return ( HtmlAnchor )getPage().getOneHtmlElementByAttribute( "a", "name", name );
+        return ( HtmlAnchor )getDocumentElement().getOneHtmlElementByAttribute( "a", "name", name );
     }
 
     /**
@@ -219,7 +245,7 @@ public final class HtmlPage extends HtmlElement implements Page {
      * @throws ElementNotFoundException If the anchor could not be found.
      */
     public HtmlAnchor getAnchorByHref( final String href ) throws ElementNotFoundException {
-        return ( HtmlAnchor )getPage().getOneHtmlElementByAttribute( "a", "href", href );
+        return ( HtmlAnchor )getDocumentElement().getOneHtmlElementByAttribute( "a", "href", href );
     }
 
 
@@ -228,7 +254,7 @@ public final class HtmlPage extends HtmlElement implements Page {
      * @return All the anchors in this page.
      */
     public List getAnchors() {
-        return getHtmlElementsByTagNames( Collections.singletonList("a") );
+        return getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("a") );
     }
 
 
@@ -259,7 +285,7 @@ public final class HtmlPage extends HtmlElement implements Page {
      * @exception ElementNotFoundException If no forms match the specifed result.
      */
     public HtmlForm getFormByName( final String name ) throws ElementNotFoundException {
-        final List forms = getHtmlElementsByAttribute( "form", "name", name );
+        final List forms = getDocumentElement().getHtmlElementsByAttribute( "form", "name", name );
         if( forms.size() == 0 ) {
             throw new ElementNotFoundException( "form", "name", name );
         }
@@ -273,7 +299,7 @@ public final class HtmlPage extends HtmlElement implements Page {
      * @return All the forms.
      */
     public List getAllForms() {
-        return getHtmlElementsByTagNames( Arrays.asList(new String[]{"form"}) );
+        return getDocumentElement().getHtmlElementsByTagNames( Arrays.asList(new String[]{"form"}) );
     }
 
     /**
@@ -297,7 +323,7 @@ public final class HtmlPage extends HtmlElement implements Page {
     public URL getFullyQualifiedUrl( final String relativeUrl )
         throws MalformedURLException {
 
-        final List baseElements = getHtmlElementsByTagNames( Collections.singletonList("base"));
+        final List baseElements = getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("base"));
         final URL baseUrl;
         if( baseElements.isEmpty() ) {
             baseUrl = originatingUrl_;
@@ -325,7 +351,7 @@ public final class HtmlPage extends HtmlElement implements Page {
     public String getResolvedTarget( final String elementTarget ) {
 
         final List baseElements =
-        getHtmlElementsByTagNames( Collections.singletonList("base"));
+        getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("base"));
         final String resolvedTarget;
         if( baseElements.isEmpty() ) {
             resolvedTarget = elementTarget;
@@ -348,45 +374,6 @@ public final class HtmlPage extends HtmlElement implements Page {
      */
     public WebResponse getWebResponse() {
         return webResponse_;
-    }
-
-
-    /**
-     *  Return the value of the attribute "lang". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
-     *
-     * @return  The value of the attribute "lang" or an empty string if that
-     *      attribute isn't defined.
-     */
-    public final String getLangAttribute() {
-        return getAttributeValue( "lang" );
-    }
-
-
-    /**
-     *  Return the value of the attribute "xml:lang". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
-     *
-     * @return  The value of the attribute "xml:lang" or an empty string if that
-     *      attribute isn't defined.
-     */
-    public final String getXmlLangAttribute() {
-        return getAttributeValue( "xml:lang" );
-    }
-
-
-    /**
-     *  Return the value of the attribute "dir". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
-     *
-     * @return  The value of the attribute "dir" or an empty string if that
-     *      attribute isn't defined.
-     */
-    public final String getTextDirectionAttribute() {
-        return getAttributeValue( "dir" );
     }
 
 
@@ -584,7 +571,7 @@ public final class HtmlPage extends HtmlElement implements Page {
 
         final List acceptableTagNames = Arrays.asList(
                 new Object[]{"a", "area", "button", "input", "object", "select", "textarea"} );
-        final List tabbableElements = getHtmlElementsByTagNames( acceptableTagNames );
+        final List tabbableElements = getDocumentElement().getHtmlElementsByTagNames( acceptableTagNames );
 
         final Iterator iterator = tabbableElements.iterator();
         while( iterator.hasNext() ) {
@@ -827,7 +814,7 @@ public final class HtmlPage extends HtmlElement implements Page {
      * @return the title of this page or an empty string if the title wasn't specified.
      */
     public String getTitleText() {
-        final Iterator topIterator = getChildElementsIterator();
+        final Iterator topIterator = getDocumentElement().getChildElementsIterator();
         while( topIterator.hasNext() ) {
             final HtmlElement topElement = (HtmlElement)topIterator.next();
             if( topElement instanceof HtmlHead ) {
@@ -852,7 +839,8 @@ public final class HtmlPage extends HtmlElement implements Page {
      */
     private String getBodyOnLoadAttribute() {
         final String onLoad;
-        final List bodyTags = getHtmlElementsByTagNames( Collections.singletonList("body") );
+        final List bodyTags =
+            getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("body") );
         final int bodyTagCount = bodyTags.size();
         if( bodyTagCount == 0 ) {
             // Must be a frameset
@@ -899,13 +887,12 @@ public final class HtmlPage extends HtmlElement implements Page {
     private void executeOnLoadHandlersIfNeeded() {
         executeOneOnLoadHandler( getOnLoadAttribute() );
 
-        DescendantElementsIterator iterator = new DescendantElementsIterator();
-
-        while(iterator.hasNext()) {
-            HtmlElement next = iterator.nextElement();
-            if(next instanceof HtmlFrame) {
-                executeOneOnLoadHandler(((HtmlFrame)next).getOnLoadAttribute());
-            }
+        List list = getDocumentElement().getHtmlElementsByTagNames(
+            Collections.singletonList("frame") );
+        final int listSize = list.size();
+        for(int i=0; i<listSize;i++ ){
+            final HtmlFrame frame = (HtmlFrame) list.get(i);
+            executeOneOnLoadHandler(frame.getOnLoadAttribute());
         }
     }
 
@@ -981,7 +968,7 @@ public final class HtmlPage extends HtmlElement implements Page {
      */
     private String getRefreshStringOrNull() {
         final Iterator iterator
-            = getHtmlElementsByTagNames( Collections.singletonList("meta") ).iterator();
+            = getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("meta") ).iterator();
         while( iterator.hasNext() ) {
             final HtmlMeta meta = (HtmlMeta)iterator.next();
             if( meta.getHttpEquivAttribute().equalsIgnoreCase("refresh") ) {
@@ -1000,7 +987,7 @@ public final class HtmlPage extends HtmlElement implements Page {
      * Deregister frames that are no longer in use.
      */
     public void deregisterFramesIfNeeded() {
-        List list = getHtmlElementsByTagNames( Arrays.asList( new String[]{"frame", "iframe"}) );
+        List list = getFrames();
         final int listSize = list.size();
         for(int i=0; i<listSize;i++ ){
             final WebWindow window = (WebWindow) list.get(i);
@@ -1016,7 +1003,7 @@ public final class HtmlPage extends HtmlElement implements Page {
      * @return a list of all frames and iframes
      */
     public List getFrames() {
-        return getHtmlElementsByTagNames( Arrays.asList( new String[]{
+        return getDocumentElement().getHtmlElementsByTagNames( Arrays.asList( new String[]{
             "frame", "iframe" } ) );
     }
 
@@ -1166,5 +1153,42 @@ public final class HtmlPage extends HtmlElement implements Page {
     public ScriptFilter getScriptFilter() {
         return scriptFilter_;
     }
-}
 
+
+    /**
+     *  Return the html element with the specified id. If more than one element
+     *  has this id (not allowed by the html spec) then return the first one.
+     *
+     * @param  id The id value to search by
+     * @return  The html element found
+     * @exception  ElementNotFoundException If no element was found that matches
+     *      the id
+     */
+    public HtmlElement getHtmlElementById( final String id )
+        throws ElementNotFoundException {
+
+        HtmlElement idElement = (HtmlElement) idMap_.get(id);
+        if(idElement != null) {
+            return idElement;
+        }
+        throw new ElementNotFoundException( "*", "id", id );
+    }
+
+    /**
+     * Add an element to the ID map.
+     *
+     * @param idElement the element with an ID attribute to add.
+     */
+    void addIdElement(HtmlElement idElement) {
+        idMap_.put(idElement.getAttributeValue("id"), idElement);
+    }
+
+    /**
+     * Remove an element from the ID map.
+     *
+     * @param idElement the element with an ID attribute to remove.
+     */
+    void removeIdElement(HtmlElement idElement) {
+        idMap_.remove(idElement.getAttributeValue("id"));
+    }
+}
