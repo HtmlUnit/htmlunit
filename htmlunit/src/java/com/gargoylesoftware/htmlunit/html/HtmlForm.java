@@ -11,6 +11,7 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -115,12 +116,12 @@ public class HtmlForm extends HtmlElement {
                 }
             }
 
-            if( action.toLowerCase().startsWith("javascript:") ) {
+            if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
                 return htmlPage.executeJavascriptIfPossible( action, "Form action" );
             }
         }
         else {
-            if( action.toLowerCase().startsWith("javascript:") ) {
+            if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
                 // The action is javascript but javascript isn't enabled.  Return
                 // the current page.
                 return htmlPage;

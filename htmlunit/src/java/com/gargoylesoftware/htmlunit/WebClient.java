@@ -7,10 +7,15 @@
 package com.gargoylesoftware.htmlunit;
 
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLStreamHandler;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -50,6 +55,9 @@ public class WebClient {
     private final List webWindows_ = new ArrayList();
 
     private WebWindow currentWindow_ = new TopLevelWindow("", this);
+
+    private static URLStreamHandler javaScriptUrlStreamHandler_
+        = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
 
 
     /**
@@ -284,6 +292,10 @@ public class WebClient {
             IOException,
             FailingHttpStatusCodeException {
 
+        final String protocol = url.getProtocol();
+        if( protocol.equals("javascript") ) {
+            throw new IllegalArgumentException("Javascript urls not supported yet ["+url.toExternalForm()+"]");
+        }
         final WebResponse webResponse = getWebConnection().getResponse( url, method, parameters );
         final String contentType = webResponse.getContentType();
         final int statusCode = webResponse.getStatusCode();
@@ -343,7 +355,7 @@ public class WebClient {
     }
 
 
-    private void assertNotNull( final String description, final Object object ) {
+    private static void assertNotNull( final String description, final Object object ) {
         if( object == null ) {
             throw new NullPointerException( description );
         }
@@ -794,6 +806,18 @@ public class WebClient {
     }
 
 
+    private static URL makeUrl( final String urlString ) throws MalformedURLException {
+        assertNotNull("urlString", urlString);
+
+        if( TextUtil.startsWithIgnoreCase(urlString, "javascript:") ) {
+            return new URL(null, urlString, javaScriptUrlStreamHandler_);
+        }
+        else {
+            return new URL(urlString);
+        }
+    }
+
+
     /**
      * Expand a relative url relative to the specified base.  In most situations this
      * is the same as <code>new URL(baseUrl, relativeUrl)</code> but there are some cases
@@ -805,16 +829,16 @@ public class WebClient {
      * @exception  MalformedURLException If an error occurred when creating a
      *      URL object
      */
-    public URL expandUrl( final URL baseUrl, final String relativeUrl )
+    public static URL expandUrl( final URL baseUrl, final String relativeUrl )
         throws MalformedURLException {
 
         // Was a protocol specified?
         if( relativeUrl.indexOf( ":" ) != -1 ) {
-            return new URL( relativeUrl );
+            return makeUrl( relativeUrl );
         }
 
         if( relativeUrl.startsWith("//") ) {
-            return new URL(baseUrl.getProtocol()+":"+relativeUrl);
+            return makeUrl(baseUrl.getProtocol()+":"+relativeUrl);
         }
 
         final List tokens = new ArrayList();
@@ -869,7 +893,7 @@ public class WebClient {
         if( tokens.isEmpty() ) {
             buffer.append("/");
         }
-        return new URL( buffer.toString() );
+        return makeUrl( buffer.toString() );
     }
 }
 

@@ -11,6 +11,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -748,7 +749,7 @@ public final class HtmlPage
                 // Unless otherwise specified, we have to assume that any script is javascript
                 boolean isJavaScript = true;
                 if( languageAttribute.length() != 0  ) {
-                    isJavaScript = languageAttribute.toLowerCase().startsWith("javascript");
+                    isJavaScript = TextUtil.startsWithIgnoreCase(languageAttribute, "javascript");
                 }
                 else if(  typeAttribute.length() != 0 ) {
                     isJavaScript = typeAttribute.equals( "text/javascript" );
