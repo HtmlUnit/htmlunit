@@ -42,12 +42,16 @@ public class MainTestSuite extends RecursiveTestSuite {
         System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog", "trace");
 
         final String prefix = "org.apache.commons.logging.simplelog.log.";
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpMethod", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpConnection", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpClient", "info");
         System.getProperties().put(prefix+"org.apache.commons.httpclient.Authenticator", "info");
         System.getProperties().put(prefix+"org.apache.commons.httpclient.Cookie", "info");
-        System.getProperties().put(prefix+"org.apache.commons.httpclient.methods.GetMethod", "info");
+        System.getProperties().put(prefix+"org.apache.commons.httpclient.HeaderElement", "info");
+        System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpClient", "info");
+        System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpConnection", "info");
+        System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpMethod", "info");
+        System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpParser", "info");
+        System.getProperties().put(prefix+"org.apache.commons.httpclient.HttpState", "info");
         System.getProperties().put(prefix+"org.apache.commons.httpclient.ResponseInputStream", "info");
+        System.getProperties().put(prefix+"org.apache.commons.httpclient.cookie.CookieSpec", "info");
+        System.getProperties().put(prefix+"org.apache.commons.httpclient.methods.GetMethod", "info");
     }
 }
