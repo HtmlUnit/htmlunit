@@ -39,19 +39,25 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
+import org.xml.sax.helpers.AttributesImpl;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -59,6 +65,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.IElementFactory;
 
 /**
  * The javascript object "HTMLElement" which is the base class for all html
@@ -79,6 +86,11 @@ public class HTMLElement extends NodeImpl {
     private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
     private static final int BEHAVIOR_ID_UNKNOWN = -1;
     private static final int BEHAVIOR_ID_HOMEPAGE = 0;
+    private static final String POSITION_BEFORE_BEGIN = "beforeBegin";
+    private static final String POSITION_AFTER_BEGIN = "afterBegin";
+    private static final String POSITION_BEFORE_END = "beforeEnd";
+    private static final String POSITION_AFTER_END = "afterEnd";
+
     private Style style_;
 
      /**
@@ -301,33 +313,171 @@ public class HTMLElement extends NodeImpl {
 
     /**
      * Replace all children elements of this element with the supplied value.
-     * <b>Currently does not support html as the replacement value.</b>
      * @param value - the new value for the contents of this node
      */
     public void jsSet_innerHTML(final String value) {
         final DomNode domNode = getDomNodeOrDie();
         domNode.removeAllChildren();
 
-        if (value.indexOf('<') >= 0) {
+        for (final Iterator iter = parseHtmlSnippet(value).iterator(); iter.hasNext();) {
+            final DomNode child = (DomNode) iter.next();
+            domNode.appendChild(child);
+        }
+    }
+
+    /**
+     * Parses the html code
+     * @param htmlSnippet the html code extract to parse
+     * @return collection of {@link DomNode}: the parsed nodes
+     */
+    private Collection parseHtmlSnippet(final String htmlSnippet) {
+        if (htmlSnippet.indexOf('<') >= 0) {
             // build a pseudo WebResponse
-            final WebResponse webResp = new StringWebResponse("<html><body>" + value + "</body></html>");
+            final WebClient webClient = getDomNodeOrDie().getPage().getWebClient();
+            final WebResponse webResp = new StringWebResponse("<html><body>" + htmlSnippet + "</body></html>");
             try {
-                final HtmlPage pseudoPage = HTMLParser.parse(webResp, getDomNodeOrDie().getPage().getEnclosingWindow());
+                final WebWindow pseudoWindow = new WebWindow() {
+                    public Page getEnclosedPage() {
+                        return null;
+                    }
+                    public String getName() {
+                        return null;
+                    }
+                    public WebWindow getParentWindow() {
+                        return null;
+                    }
+                    public Object getScriptObject() {
+                        return null;
+                    }
+                    public WebWindow getTopWindow() {
+                        return null;
+                    }
+                    public WebClient getWebClient() {
+                        return webClient;
+                    }
+                    public void setEnclosedPage(final Page page) {
+                    }
+                    public void setScriptObject(final Object scriptObject) {
+                    }
+                };
+                final HtmlPage pseudoPage = HTMLParser.parse(webResp, pseudoWindow);
                 final HtmlBody body = (HtmlBody) pseudoPage.getDocumentElement().getFirstChild();
-                for (final Iterator iter = body.getChildIterator(); iter.hasNext();)
-                {
-                    final HtmlElement child = (HtmlElement) iter.next();
-                    domNode.appendChild(child);
+                
+                Collection nodes = new ArrayList();
+                for (Iterator iter = body.getChildIterator(); iter.hasNext();) {
+                    DomNode child = (DomNode) iter.next();
+                    nodes.add(copy(child, getHtmlElementOrDie().getPage()));
                 }
+                return nodes;
             }
             catch (final IOException e) {
                 // should not occur
                 getLog().warn("Unexpected exception occured while setting innerHTML");
+                return Collections.EMPTY_LIST;
+            }
+            catch (final Exception e) {
+                return Collections.EMPTY_LIST;
             }
         }
         else {
             // just text, keep it simple
-            domNode.appendChild(new DomText(domNode.getPage(), value));
+            final DomNode node = new DomText(getDomNodeOrDie().getPage(), htmlSnippet);
+            return Collections.singleton(node);
+        }
+    }
+
+    /**
+     * Copies the node to make it available to the page.
+     * All this stuff just to change the htmlPage_ property on all nodes!
+     * @param _child
+     * @param _page
+     * @return a node with the same properties but bound to the page. 
+     */
+    private DomNode copy(final DomNode node, final HtmlPage page) {
+        final DomNode copy;
+        if (node instanceof DomText) {
+            copy = new DomText(page, node.getNodeValue());
+        }
+        else {
+            final HtmlElement htmlElt = (HtmlElement) node;
+            IElementFactory factory = HTMLParser.getFactory(htmlElt.getNodeName());
+            final AttributesImpl attributes = new AttributesImpl();
+            for (Iterator iter = htmlElt.getAttributeEntriesIterator(); iter.hasNext();) {
+                final Map.Entry entry = (Map.Entry) iter.next();
+                attributes.addAttribute(null, (String) entry.getKey(), null, null, (String) entry.getValue());
+            }
+            copy = factory.createElement(page, node.getNodeName(), attributes);
+            for (Iterator iter = node.getChildIterator(); iter.hasNext();) {
+                final DomNode child = (DomNode) iter.next();
+                copy.appendChild(copy(child, page));
+            }
+        }
+        
+        return copy;
+    }
+
+
+    /**
+     * Inserts the given HTML text into the element at the location.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertadjacenthtml.asp">
+     * MSDN documentation</a>
+     * @param where specifies where to insert the HTML text, using one of the following value:
+     *         beforeBegin, afterBegin, beforeEnd, afterEnd
+     * @param text the HTML text to insert
+     */
+    public void jsFunction_insertAdjacentHTML(final String where, final String text) {
+        final DomNode currentNode = getDomNodeOrDie();
+        final DomNode node;
+        final boolean append;
+        
+        // compute the where and how the new nodes should be added
+        if (POSITION_AFTER_BEGIN.equals(where)) {
+            if (currentNode.getFirstChild() == null) {
+                // new nodes should appended to the children of current node
+                node = currentNode;
+                append = true;
+            }
+            else {
+                // new nodes should be inserted before first child
+                node = currentNode.getFirstChild();
+                append = false;
+            }
+        }
+        else if (POSITION_BEFORE_BEGIN.equals(where)) {
+            // new nodes should be inserted before current node
+            node = currentNode;
+            append = false;
+        }
+        else if (POSITION_BEFORE_END.equals(where)) {
+            // new nodes should appended to the children of current node
+            node = currentNode;
+            append = true;
+        }
+        else if (POSITION_AFTER_END.equals(where)) {
+            if (currentNode.getNextSibling() == null) {
+                // new nodes should appended to the children of parent node
+                node = currentNode.getParentNode();
+                append = true;
+            }
+            else {
+                // new nodes should be inserted before current node's next sibling
+                node = currentNode.getNextSibling();
+                append = false;
+            }
+        }
+        else {
+            throw Context.reportRuntimeError("Illegal position value: \"" + where + "\"");
+        }
+
+        // add the new nodes
+        for (final Iterator iter = parseHtmlSnippet(text).iterator(); iter.hasNext();) {
+            final DomNode child = (DomNode) iter.next();
+            if (append) {
+                node.appendChild(child);
+            }
+            else {
+                node.insertBefore(child);
+            }
         }
     }
 
