@@ -786,27 +786,17 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testSetTimeout() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
-
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final String firstContent
+        final String content
             = "<html><body><script language='JavaScript'>window.setTimeout('alert(\"Yo!\")',1);"
             + "</script></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
-
-        webClient.getPage(
-            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        loadPage(content, collectedAlerts);
 
         final int waitTime = 50;
         final int maxTime = 1000;
         for( int time = 0; time < maxTime; time+=waitTime ) {
-            if( collectedAlerts.isEmpty() == false ) {
+            if(!collectedAlerts.isEmpty()) {
                 assertEquals( Collections.singletonList("Yo!"), collectedAlerts );
                 return;
             }
@@ -815,6 +805,34 @@ public class WindowTest extends WebTestCase {
         fail("No alerts written within "+maxTime+"ms");
     }
 
+    /**
+     * Test that a script started by a timer is not executed if it the page that started it
+     * is not loaded anymore.
+     * @throws Exception If the test fails
+     */
+    public void testSetTimeoutStopped() throws Exception {
+        final String firstContent
+            = "<html><head>"
+            + "<script language='JavaScript'>window.setTimeout('alert(\"Yo!\")', 1000);</script>"
+            + "</head><body onload='document.location.replace(\"http://second\")'></body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals("Second", page.getTitleText());
+
+        Thread.sleep(2000); // after this delay we can expect that the timer will never evaluate
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+    }
 
     /**
      * @throws Exception If the test fails
