@@ -20,8 +20,8 @@ import org.w3c.dom.Element;
  */
 public class HtmlImageInput extends HtmlInput {
     private boolean wasPositionSpecified_ = false;
-    private int x_;
-    private int y_;
+    private int xPosition_;
+    private int yPosition_;
 
 
     /**
@@ -71,8 +71,8 @@ public class HtmlImageInput extends HtmlInput {
             ElementNotFoundException {
 
         wasPositionSpecified_ = true;
-        x_ = x;
-        y_ = y;
+        xPosition_ = x;
+        yPosition_ = y;
         return super.click();
     }
 
@@ -91,8 +91,8 @@ public class HtmlImageInput extends HtmlInput {
         if( wasPositionSpecified_ == true ) {
             return new KeyValuePair[]{
                 new KeyValuePair( name, getValueAttribute() ),
-                new KeyValuePair( name+".x", String.valueOf(x_) ),
-                new KeyValuePair( name+".y", String.valueOf(y_) )
+                new KeyValuePair( name+".x", String.valueOf(xPosition_) ),
+                new KeyValuePair( name+".y", String.valueOf(yPosition_) )
             };
         }
         else {
