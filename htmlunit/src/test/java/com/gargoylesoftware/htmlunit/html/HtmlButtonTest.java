@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -54,6 +55,7 @@ import java.util.List;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
+ * @author  Brad Clarke
  */
 public class HtmlButtonTest extends WebTestCase {
     /**
@@ -234,5 +236,43 @@ public class HtmlButtonTest extends WebTestCase {
         assertEquals( "foo", ((HtmlHiddenInput)page.getHtmlElementById("hidden1")).getValueAttribute());
         assertEquals( "foo", ((HtmlPasswordInput)page.getHtmlElementById("password1")).getValueAttribute());
         assertEquals( "", ((HtmlIsIndex)page.getHtmlElementById("isindex1")).getValue());
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testButtonTypeSubmit() throws Exception {
+        final String htmlContent
+                 = "<html><head><title>foo</title></head><body>"
+                 + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
+                 + "    <button type='submit' name='button' id='button' value='foo'"
+                 + "    >Push me</button>"
+                 + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
+        client.setAlertHandler(alertHandler);
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://www.gargoylesoftware.com" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
+
+        final HtmlPage secondPage = (HtmlPage)button.click();
+
+        final List expectedAlerts = Arrays.asList( new String[]{"bar"} );
+        assertEquals( expectedAlerts, collectedAlerts );
+
+        assertNotSame( page, secondPage );
+        final List expectedParameters = Arrays.asList( new Object[]{
+            new KeyValuePair("button", "foo")
+        } );
+        final List collectedParameters = webConnection.getLastParameters();
+
+        assertEquals( expectedParameters, collectedParameters );
     }
 }
