@@ -83,6 +83,7 @@ public class HTMLElementTest extends WebTestCase {
                 "       alert(myNode.title);\n" +
                 "       alert(myNode.getAttribute('title'));\n" +
                 "       alert(myNode.Title);\n" +
+                "       alert(myNode.getAttribute('class'));\n" +
                 "   }\n" +
                 "    </script>\n" +
                 "</head>\n" +
@@ -92,13 +93,15 @@ public class HTMLElementTest extends WebTestCase {
                 "</body>\n" +
                 "</html>\n" +
                 "";
+        final List expectedAlerts = Arrays.asList(new String[]{
+                "a", "a", "undefined", "null"
+            });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("test", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList(new String[]{
-            "a", "a", "undefined"
-        });
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
