@@ -40,11 +40,13 @@ package com.gargoylesoftware.htmlunit;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HostConfiguration;
@@ -57,8 +59,9 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
-import org.apache.commons.httpclient.methods.MultipartPostMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
+
+import org.apache.commons.httpclient.methods.MultipartPostMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -329,7 +332,7 @@ public class HttpWebConnection extends WebConnection {
             final HostConfiguration hostConfiguration = new HostConfiguration();
             final URI uri;
             try {
-                uri = new URI(url.toExternalForm());
+                uri = new URI(url.toExternalForm(), false);
             }
             catch( final URIException e ) {
                 // Theoretically impossible but ....
@@ -397,8 +400,10 @@ public class HttpWebConnection extends WebConnection {
 
 
     private WebResponse makeWebResponse(
-        final int statusCode, final HttpMethod method, final URL originatingURL, final long loadTime ) {
+        final int statusCode, final HttpMethod method, final URL originatingURL, final long loadTime ) 
+    throws IOException {
 
+        final String content = method.getResponseBodyAsString();
         return new WebResponse() {
                 public int getStatusCode() {
                     return statusCode;
@@ -434,11 +439,11 @@ public class HttpWebConnection extends WebConnection {
                 }
 
                 public String getContentAsString() {
-                    return method.getResponseBodyAsString();
+                    return content;
                 }
 
                 public InputStream getContentAsStream() {
-                    return new ByteArrayInputStream(method.getResponseBody());
+                    return new ByteArrayInputStream(getResponseBody());
                 }
 
                 public URL getUrl() {
@@ -468,8 +473,14 @@ public class HttpWebConnection extends WebConnection {
                     }
                 }
 
-                public byte [] getResponseBody(){
-                    return method.getResponseBody();
+                public byte [] getResponseBody() {
+                    try {
+                        return content.getBytes(getContentCharSet());
+                    }
+                    catch (UnsupportedEncodingException e) {
+                        // should never occur
+                        throw new RuntimeException(e);
+                    }
                 }
 
             };
