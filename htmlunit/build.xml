@@ -193,7 +193,7 @@
     <antcall target="get-dependency">
         <param name="type" value="optional"/>
         <param name="project" value="rhino"/>
-        <param name="jarName" value="rhino-1.5R4.1.jar"/>
+        <param name="jarName" value="js-1.6R1.jar"/>
     </antcall>
     
     <!-- test -->
@@ -227,7 +227,7 @@
     <antcall target="get-dependency">
         <param name="type" value="jelly"/>
         <param name="project" value="commons-jelly"/>
-        <param name="jarName" value="commons-jelly-1.0-beta-4.jar"/>
+        <param name="jarName" value="commons-jelly-1.0-RC1.jar"/>
     </antcall>
     <antcall target="get-dependency">
         <param name="type" value="jelly"/>
