@@ -50,6 +50,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.httpclient.HttpConstants;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Assert;
@@ -89,7 +91,8 @@ public final class HtmlPage extends DomNode implements Page {
     private WebWindow enclosingWindow_;
 
     private static int FunctionWrapperCount_ = 0;
-
+    private final Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
+    
     private static final int TAB_INDEX_NOT_SPECIFIED = -10;
     private static final int TAB_INDEX_OUT_OF_BOUNDS = -20;
 
@@ -151,6 +154,7 @@ public final class HtmlPage extends DomNode implements Page {
      */
     public void initialize() throws IOException {
         insertTbodyTagsAsNeeded();
+        documentElement_.setReadyState(READY_STATE_COMPLETE);
         executeOnLoadHandlersIfNeeded();
         executeRefreshIfNeeded();
     }
@@ -694,6 +698,7 @@ public final class HtmlPage extends DomNode implements Page {
             // loaded javascript
             final String wrapperName = "GargoyleWrapper"+(FunctionWrapperCount_++);
             sourceCode = "function "+wrapperName+"() {"+sourceCode+"\n}";
+            getJsLog().debug("Now build JS function\n" + sourceCode);
             engine.execute( this, sourceCode, "Wrapper definition for "+sourceName, htmlElement );
             result = engine.execute( this, wrapperName+"()", sourceName, htmlElement );
         }
@@ -709,6 +714,14 @@ public final class HtmlPage extends DomNode implements Page {
         return new ScriptResult( result, firstWindow.getEnclosedPage() );
     }
 
+    /**
+     * Return the log object for this element.
+     * @return The log object for this element.
+     */
+    protected Log getJsLog() {
+        return javascriptLog_;
+    }
+ 
     /**
      * Internal use only.  This is a callback from {@link ScriptFilter} and
      * should not be called by consumers of HtmlUnit. this method assume the

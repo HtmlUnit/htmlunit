@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.Assert;
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Chris Erskine
  */
 public abstract class DomNode implements Cloneable {
     /**
@@ -72,6 +73,22 @@ public abstract class DomNode implements Cloneable {
      * node type constant for <code>Text</code> nodes.
      */
     public static final short TEXT_NODE                 = 3;
+
+    /**
+     * readyState constant for IE.
+     */
+    public static final String READY_STATE_UNINITIALIZED = "uninitialized";
+
+    /**
+     * readyState constant for IE.
+     */
+    public static final String READY_STATE_LOADING = "loading";
+
+    /**
+     * readyState constant for IE.
+     */
+    public static final String READY_STATE_COMPLETE = "complete";
+
 
     /** the owning page of this node */
     private final HtmlPage htmlPage_;
@@ -102,6 +119,13 @@ public abstract class DomNode implements Cloneable {
      */
     private Object scriptObject_;
 
+    /**
+     * Ready state is is an IE only value that is available to a large number of elements.
+     *
+     */
+    // TODO - Add processing for the other elements - Currently only body.
+    private String readyState_ = READY_STATE_UNINITIALIZED;
+
     // We do lazy initialization on this since the vast majority of
     // HtmlElement instances won't need it.
     private PropertyChangeSupport propertyChangeSupport_ = null;
@@ -115,6 +139,7 @@ public abstract class DomNode implements Cloneable {
      * @param htmlPage The page that contains this node
      */
     protected DomNode(final HtmlPage htmlPage) {
+        readyState_ = READY_STATE_LOADING;      // At this time, I should be loading the object.
         htmlPage_ = htmlPage;
     }
 
@@ -706,5 +731,21 @@ public abstract class DomNode implements Cloneable {
             }
             return (HtmlElement)node;
         }
+    }
+
+    /**
+     * Return the readyState of this element.  IE only.
+     * @return String - The current readyState for this element.
+     */
+    public String getReadyState() {
+        return readyState_;
+    }
+
+    /**
+     * Set the readyState for this element.  IE only.
+     * @param state - The value to set the current state to.
+     */
+    public void setReadyState(final String state) {
+        readyState_ = state;
     }
 }
