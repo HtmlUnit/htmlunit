@@ -710,21 +710,40 @@ public class Window extends SimpleScriptable {
         }
     }
 
-
     /**
-     * Does nothing.
-     * @param expression the script code
-     * @param language the language in which the code is executed
+     * Executes the specified script code as long as the laguage is JavaScript or JScript. Does
+     * nothing if the language specified is VBScript.
+     * @param script the script code to execute
+     * @param language the language of the specified code ("JavaScript", "JScript" or "VBScript")
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/execscript.asp">
      * MSDN documentation</a>
-     * @return this method always returns <code>null</code> as Internet Explorer does
+     * @return this method always returns <code>null</code>, like Internet Explorer
      */
-    public Object jsFunction_execScript(final String expression, final String language) {
-        getLog().warn("Current implementation of Window.execScript() does nothing");
-        
+    public Object jsFunction_execScript(final String script, final String language) {
+        if ("javascript".equalsIgnoreCase(language) || "jscript".equalsIgnoreCase(language)) {
+            boolean contextEntered = false;
+            try {
+                Context.enter();
+                contextEntered = true;
+                final HtmlPage htmlPage = document_.getHtmlPage();
+                final HtmlElement doc = htmlPage.getDocumentElement();
+                htmlPage.executeJavaScriptIfPossible(script, "Window.execScript()", true, doc);
+            }
+            finally {
+                if (contextEntered) {
+                    Context.exit();
+                }
+            }
+        }
+        else if ("vbscript".equalsIgnoreCase(language)) {
+            getLog().warn("VBScript not supported in Window.execScript().");
+        }
+        else {
+            // Unrecognized language: use the IE error message ("Invalid class string").
+            throw Context.reportRuntimeError("Invalid class string");
+        }
         return null;
     }
-
 
     /**
      * Return the text from the status line.

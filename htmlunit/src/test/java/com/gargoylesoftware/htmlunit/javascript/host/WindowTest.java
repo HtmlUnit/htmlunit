@@ -1419,17 +1419,36 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test that Window.execScript method gets correctly called and doesn't throw
-     * by the scripting engine even if it does nothing.
+     * Test that Window.execScript method gets called correctly.
      * @throws Exception if the test fails
      */
     public void testExecScript() throws Exception {
-        final String content
-                 = "<html><head><title>foo</title><script>"
-                 + "window.execScript('', 'VBScript');"
-                 + "</script></head><body>"
-                 + "</body></html>";
-        loadPage(content);
+        final String content = "<html>\n"
+            + "<head><title>test</title>\n"
+            + "<script>\n"
+            + "  function test()\n"
+            + "  {\n"
+            + "    window.execScript('alert(\"JavaScript\")', 'JavaScript');\n"
+            + "    window.execScript('alert(\"JScript\")',    'JScript');\n"
+            + "    window.execScript('alert(\"VBScript\")',   'VBScript');\n"
+            + "    try {\n"
+            + "      window.execScript('alert(\"BadLanguage\")', 'BadLanguage');\n"
+            + "    }\n"
+            + "    catch(e) {\n"
+            + "      alert(e.message);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1'>blah</div>\n"
+            + "</body>\n"
+            + "</html>\n";
+        final List expectedAlerts = Arrays.asList( new String[]{"JavaScript", "JScript", "Invalid class string"} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
    /**
