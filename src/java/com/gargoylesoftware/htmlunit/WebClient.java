@@ -39,6 +39,8 @@ public class WebClient {
     private boolean javaScriptEnabled_ = true;
 
     private AlertHandler alertHandler_;
+    private ConfirmHandler confirmHandler_;
+
     private BrowserVersion browserVersion_ = BrowserVersion.getDefault();
     private boolean isRedirectEnabled_ = true;
     private PageCreator pageCreator_ = new DefaultPageCreator();
@@ -537,6 +539,16 @@ public class WebClient {
      */
     public AlertHandler getAlertHandler() {
         return alertHandler_;
+    }
+
+
+    public void setConfirmHandler( final ConfirmHandler handler ) {
+        confirmHandler_ = handler;
+    }
+
+
+    public ConfirmHandler getConfirmHandler() {
+        return confirmHandler_;
     }
 
 

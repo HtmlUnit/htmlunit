@@ -7,6 +7,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
+import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -62,6 +63,22 @@ public final class Window extends SimpleScriptable {
         }
         else {
             handler.handleAlert(document_.getHtmlPage(), message);
+        }
+    }
+
+
+    /**
+     * The javascript function "confirm()"
+     * @param message The message
+     */
+    public boolean jsFunction_confirm( final String message ) {
+        final ConfirmHandler handler = getJavaScriptEngine().getWebClient().getConfirmHandler();
+        if( handler == null ) {
+            getLog().warn("window.confirm(\""+message+"\") no confirm handler installed");
+            return false;
+        }
+        else {
+            return handler.handleConfirm(document_.getHtmlPage(), message);
         }
     }
 
