@@ -46,7 +46,7 @@ public class MockActiveXObject {
     /**
      * Test a property
      */
-    public String Message = "ActiveX is working!";
+    public static final String MESSAGE = "ActiveX is working!";
 
     /**
      * Test a function call
