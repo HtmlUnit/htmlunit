@@ -106,9 +106,10 @@
         <contributor>
             <name>Andreas Hangler</name>
         </contributor>
-        <contributer>
+        <contributor>
             <name>Jun Chen</name>
-        </contributer>
+            <email>chen_jun@users.sourceforge.net</email>
+        </contributor>
     </contributors>
 
     <dependencies>
