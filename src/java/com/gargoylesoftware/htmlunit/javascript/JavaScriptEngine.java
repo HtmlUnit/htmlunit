@@ -147,7 +147,7 @@ public final class JavaScriptEngine extends ScriptEngine {
      * @return The JavaScript execution scope.
      */
     private Scriptable getScope(
-	final PageInfo pageInfo, final HtmlElement htmlElementScope ) {
+        final PageInfo pageInfo, final HtmlElement htmlElementScope ) {
 
         Scriptable scope;
         if( htmlElementScope == null ) {
@@ -232,7 +232,12 @@ public final class JavaScriptEngine extends ScriptEngine {
      * @return The result of the function call.
      */
     public Object callFunction(
-	final HtmlPage htmlPage, final Object javaScriptFunction, final Object thisObject, Object [] args, final HtmlElement htmlElementScope ) {
+            final HtmlPage htmlPage, 
+            final Object javaScriptFunction, 
+            final Object thisObject, 
+            final Object [] args, 
+            final HtmlElement htmlElementScope ) {
+                
         final PageInfo pageInfo = getPageInfo(htmlPage);
 
         final Scriptable scope = getScope( pageInfo, htmlElementScope );

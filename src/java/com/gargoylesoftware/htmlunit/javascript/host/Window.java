@@ -464,7 +464,8 @@ public final class Window extends SimpleScriptable {
             final HtmlPage page = (HtmlPage)webWindow_.getEnclosedPage();
             if ( newValue instanceof Function ) {
                 page.setOnLoadAttribute( newValue );
-            } else {
+            } 
+            else {
                 getLog().error( "Invalid value set to window.onload.  Value class: " + newValue.getClass () );
             }
         }
