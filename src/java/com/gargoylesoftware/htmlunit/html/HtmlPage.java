@@ -49,7 +49,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.httpclient.HttpConstants;
+import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Function;
@@ -843,7 +843,7 @@ public final class HtmlPage extends DomNode implements Page {
                     scriptEncoding = "ISO-8859-1";
                 }
                 byte [] data = webResponse.getResponseBody();
-                return HttpConstants.getContentString(data, 0, data.length, scriptEncoding );
+                return EncodingUtil.getString(data, 0, data.length, scriptEncoding );
             }
             else {
                 getLog().error("Error loading javascript from ["+url.toExternalForm()
