@@ -60,7 +60,6 @@ System.out.println( "Cell (1,2)="+ table.getCellAt(1,2);
             </p>
         </section>
 
-
         <section name="More complex table">
             <p>
                 The next examples will use a more complicated table that includes table header, footer and body

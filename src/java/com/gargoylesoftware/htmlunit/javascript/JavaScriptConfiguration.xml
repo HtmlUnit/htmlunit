@@ -12,12 +12,9 @@
         </property>
     </class>
 
-
     <class name="Button" extends="Input"/>
 
-
     <class name="Checkbox" extends="Input"/>
-
 
     <class name="Document" extends="HTMLElement"><!-- NOT FINISHED -->
         <property name="alinkColor" readable="true" writable="false"/>
@@ -203,7 +200,6 @@
         </function>
     </class>
 
-
     <class name="Image" extends="Input">
     </class>
 
@@ -234,12 +230,10 @@
         <function name="onblur"/>
     </class>
 
-
     <class name="Location">
         <function name="reload"/>
         <function name="refresh"/>
     </class>
-
 
     <class name="Option" extends="HTMLElement">
         <property name="text" readable="true" writable="false"/>
@@ -247,7 +241,6 @@
         <property name="defaultSelected" readable="true" writable="false"/>
         <property name="selected" readable="true" writable="false"/>
     </class>
-
 
     <class name="Password" extends="Input"/><!-- NOT FINISHED -->
     <class name="Radio" extends="Input"/><!-- NOT FINISHED -->

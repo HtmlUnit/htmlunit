@@ -9,8 +9,8 @@
     </properties>
 
     <body>
-	    <search/>
-    
+        <search/>
+
         <menu name="SourceForge.net">
             <item
                 name="SourceForge project page"
@@ -36,16 +36,16 @@
             <item name="JavaScript engine" href="/javascript.html"/>
             <item name="TODO" href="/todo.html"/>
         </menu>
-        
-		<footer>
-			<div style="text-align: right">
-			Project hosting by:<br />
-    		<a href="http://sourceforge.net/projects/htmlunit">
-	        <img src="http://sourceforge.net/sflogo.php?group_id=47038&amp;type=2" alt="Sourceforge Logo" border="0" />
-		    </a>
-		    </div>
-	   </footer>        
+
+        <footer>
+            <div style="text-align: right">
+            Project hosting by:<br />
+            <a href="http://sourceforge.net/projects/htmlunit">
+            <img src="http://sourceforge.net/sflogo.php?group_id=47038&amp;type=2" alt="Sourceforge Logo" border="0" />
+            </a>
+            </div>
+       </footer>
+
     </body>
 </project>
-
 

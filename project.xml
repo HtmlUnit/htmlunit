@@ -107,8 +107,8 @@
             <name>Andreas Hangler</name>
         </contributor>
         <contributer>
-        	<name>Jun Chen</name>
-       	</contributer>
+            <name>Jun Chen</name>
+        </contributer>
     </contributors>
 
     <dependencies>
@@ -203,7 +203,7 @@
                 <htmlunit.description>Javabean support</htmlunit.description>
             </properties>
         </dependency>
-       
+
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>

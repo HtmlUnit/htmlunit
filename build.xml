@@ -3,14 +3,13 @@
  This is a configuration file for the ant build tool
  http://jakarta.apache.org/ant/index.html
  $Revision$
- 
+
  Authors:
- 	Mike Bowler
- 	David K. Taylor
+    Mike Bowler
+    David K. Taylor
 -->
 
 <project name="HtmlUnit" default="cleancompile" basedir=".">
-
 
 <!--<property name="build.compiler" value="jikes" />-->
 <property name="build.compiler.pedantic" value="true"/>
@@ -23,7 +22,6 @@
 <taskdef name="checkstyle"
     classname="com.puppycrawl.tools.checkstyle.CheckStyleTask"
     classpath="build/lib/checkstyle-all.jar" />
-
 
 <path id="base.class.path">
     <pathelement path="target/classes"/>
@@ -54,7 +52,6 @@
     <pathelement path="/System/Library/Frameworks/JavaVM.framework/Versions/1.4.1/Classes/classes.jar"/>
 </path>
 
-
 <path id="test.class.path">
     <pathelement path="target/test-classes"/>
 </path>
@@ -83,7 +80,6 @@
     </javac>
 </target>
 
-
 <target name="cleancompile" description="clean compile">
      <delete quiet="true">
         <fileset dir="target/classes" includes="**/*.class"/>
@@ -92,11 +88,10 @@
     <antcall target="compile"/>
 </target>
 
-
 <target name="clean" description="clean">
-	<!-- Note that we can't just delete 'target' because this would then blow
-	     away the repository which is needed for the compile.  Instead we delete
-	     all the individual directories under target *except* for 'repository' -->
+    <!-- Note that we can't just delete 'target' because this would then blow
+         away the repository which is needed for the compile.  Instead we delete
+         all the individual directories under target *except* for 'repository' -->
     <delete dir="target/classes" quiet="true"/>
     <delete dir="target/test-classes" quiet="true"/>
 
@@ -104,7 +99,6 @@
     <delete file="dist/projectdocs.zip"/>
     <delete file="dist/${version}.zip"/>
 </target>
-
 
 <target name="validate" description="Validate">
     <xmlvalidate
@@ -120,7 +114,6 @@
         </xmlcatalog>
     </xmlvalidate>
 </target>
-
 
 <target name="build" depends="compile" description="build">
     <tstamp>
@@ -269,7 +262,6 @@
     -->
 </target>
 
-
 <target name="doclint" description="doclint">
     <javadoc
         sourcepath="src/java"
@@ -286,7 +278,6 @@
     </javadoc>
 </target>
 
-
 <target name="junit" description="junit">
     <java fork="true" classname="junit.textui.TestRunner" dir="target/test-classes">
         <arg value="com.gargoylesoftware.htmlunit.MainTestSuite"/>
@@ -295,7 +286,6 @@
     </java>
 </target>
 
-
 <target name="junitui" description="junitui">
     <java fork="yes" classname="junit.swingui.TestRunner" dir="src/java">
         <arg value="com.gargoylesoftware.htmlunit.test.MainTestSuite"/>
@@ -303,14 +293,12 @@
     </java>
 </target>
 
-
 <target name="SanityCheck" description="DO NOT RUN THIS TASK">
     <java fork="yes" classname="com.gargoylesoftware.htmlunit.SanityCheck" dir="src/java">
         <classpath refid="base.class.path"/>
         <classpath refid="test.class.path"/>
     </java>
 </target>
-
 
 <target name="checkstyle" description="Check all the coding conventions">
     <!-- Check production code -->
@@ -325,7 +313,6 @@
     </checkstyle>
 </target>
 
-
 <target name="jellytest" description="DO NOT RUN THIS TASK">
     <java fork="yes" classname="org.apache.commons.jelly.Jelly" dir=".">
         <classpath refid="base.class.path"/>
@@ -334,16 +321,20 @@
 </target>
 
 <target name="get-dependency">
-	<mkdir dir="${local-repository}/${project}/jars/"/>
-	<get 
-		src="${remote-repository}/${project}/jars/${jarName}" 
-		dest="${local-repository}/${project}/jars/${jarName}"/>
+    <mkdir dir="${local-repository}/${project}/jars/"/>
+    <get
+
+        src="${remote-repository}/${project}/jars/${jarName}"
+
+        dest="${local-repository}/${project}/jars/${jarName}"/>
 </target>
 
-<target 
-	name="initialize" 
-	description="Get all the required dependencies from a remote repository">
-	
+<target
+
+    name="initialize"
+
+    description="Get all the required dependencies from a remote repository">
+
     <antcall target="get-dependency">
         <param name="project" value="commons-jelly"/>
         <param name="jarName" value="commons-jelly-SNAPSHOT.jar"/>

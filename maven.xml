@@ -114,7 +114,6 @@
         </j:file>
     </goal>
 
-
     <goal
         name="buildzip"
         prereqs="xdoc:init, java:jar, javadoc:generate"
@@ -173,7 +172,7 @@
             </ant:fileset>
         </ant:copy>
 
-		<!-- Build the zip -->
+        <!-- Build the zip -->
         <zip
             destfile="${maven.dist.bin.assembly.dir}/${maven.final.name}.zip"
             basedir="${maven.dist.bin.assembly.dir}/${maven.final.name}"/>
