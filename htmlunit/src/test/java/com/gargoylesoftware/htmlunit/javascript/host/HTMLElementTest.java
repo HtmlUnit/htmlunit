@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * Tests for NodeImpl
  * 
  * @author yourgod
+ * @author Chris Erskine
  * @version $Revision$
  *
  */
@@ -91,5 +92,89 @@ public class HTMLElementTest extends WebTestCase {
         });
 
         assertEquals(expectedAlerts, collectedAlerts);
-    }  
+    }
+
+    /**
+     * Test for getElementsByTagName
+     * @throws Exception
+     */
+    public void testGetElementsByTagName() throws Exception {
+        final String content
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "var a1 = document.getElementsByTagName('td');\n"
+            + "alert('all = ' + a1.length);\n"
+            + "var firstRow = document.getElementById('r1');\n"
+            + "var rowOnly = firstRow.getElementsByTagName('td');\n"
+            + "alert('row = ' + rowOnly.length);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<table>\n"
+            + "<tr id='r1'><td>1</td><td>2</td></tr>\n"
+            + "<tr id='r2'><td>3</td><td>4</td></tr>\n"
+            + "</table>\n"
+            + "</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "all = 4", "row = 2"
+        });
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+    
+    /**
+     * Test getting the class for the element
+     * @throws Exception
+     */
+    public void testGetClassName() throws Exception {
+        final String content
+            = "<html><head><style>.x {  font: 8pt Arial bold;  }</style>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "    var ele = document.getElementById('pid');\n"
+            + "    var aClass = ele.className;\n"
+            + "    alert('the class is ' + aClass);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p id='pid' class='x'>text</p>\n"
+            + "</body></html>\n";
+          
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "the class is x"
+        });
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+    /**
+     * Test getting the class for the element
+     * @throws Exception
+     */
+    public void testSetClassName() throws Exception {
+        final String content
+            = "<html><head><style>.x {  font: 8pt Arial bold;  }</style>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "    var ele = document.getElementById('pid');\n"
+            + "    ele.className = 'z';"
+            + "    var aClass = ele.className;\n"
+            + "    alert('the class is ' + aClass);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p id='pid' class='x'>text</p>\n"
+            + "</body></html>\n";
+          
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "the class is z"
+        });
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

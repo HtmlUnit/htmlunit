@@ -120,7 +120,10 @@
 				Changed HtmlElement.getOneHtmlElement() to match the documented behaviour
 				in the case where multiple matches were found.
             </action>
-           
+            <action type="add" dev="mbowler" due-to="Chris Erskine" id="1058238">
+				Added getElementsByTagName(), getClassName() and setClassName() to HTMLElement
+            </action>
+
 		</release>
 		    
         <release version="1.3-pre2" date="September 26, 2004">

@@ -37,6 +37,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.ListIterator;
+
+import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -51,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @author David K. Taylor
  * @author Barnaby Court
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Chris Erskine
  */
 public class HTMLElement extends NodeImpl {
     private static final long serialVersionUID = -6864034414262085851L;
@@ -77,7 +83,7 @@ public class HTMLElement extends NodeImpl {
      * @return The style object
      */
     public Object jsGet_style() {
-        getLog().debug("HTMLElement.jsGet_Style() style=["+style_+"]");
+//        getLog().debug("HTMLElement.jsGet_Style() style=["+style_+"]");
         return style_;
     }
 
@@ -177,5 +183,39 @@ public class HTMLElement extends NodeImpl {
      */
     public void jsFunction_setAttribute(final String name, final String value) {
         getHtmlElementOrDie().setAttributeValue(name, value);
-    }    
+    }
+    
+    /**
+     * Return all the elements with the specified tag name
+     * @param tagName The name to search for
+     * @return the list of elements
+     */
+    public Object jsFunction_getElementsByTagName( final String tagName ) {
+        final HtmlElement element = (HtmlElement)getDomNodeOrDie();
+        final List list = element.getHtmlElementsByTagNames(
+            Collections.singletonList(tagName.toLowerCase()));
+        final ListIterator iterator = list.listIterator();
+        while(iterator.hasNext()) {
+            final HtmlElement htmlElement = (HtmlElement)iterator.next();
+            iterator.set( getScriptableFor(htmlElement) );
+        }
+
+        return new NativeArray( list.toArray() );
+    }
+  
+    /**
+     * Return the class defined for this element
+     * @return the class name
+     */
+    public Object jsGet_className() {
+        return getHtmlElementOrDie().getAttributeValue("class");
+    }
+
+    /**
+     * Set the class attribute for this element.
+     * @param className - the new class name
+     */
+    public void jsSet_className(final String className) {
+        getHtmlElementOrDie().setAttributeValue("class", className);
+    }
 }
