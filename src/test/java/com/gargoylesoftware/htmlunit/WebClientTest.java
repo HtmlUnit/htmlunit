@@ -50,7 +50,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
@@ -1190,9 +1189,7 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception if a pb occurs
      */
     private File getTestFile(final String fileName) throws Exception {
-        final String baseName = ClassUtils.getPackageName(getClass()).replace('.', '/') + "/testfiles/";
-        final String resource = baseName + fileName;
-        final URL url = getClass().getClassLoader().getResource(resource);
+        final URL url = getClass().getResource("testfiles/" + fileName);
         if( url == null ) {
             throw new FileNotFoundException(fileName);
         }
