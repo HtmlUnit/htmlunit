@@ -455,6 +455,8 @@ public class HtmlForm extends HtmlElement {
     /**
      * Return the first checked radio button with the specified name.  If none of
      * the radio buttons by that name are checked then return null.
+     * @param name The name of the radio button
+     * @return The first checked radio button.
      */
     public HtmlRadioButtonInput getCheckedRadioButton( final String name ) {
         assertNotNull("name", name);

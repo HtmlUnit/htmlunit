@@ -41,8 +41,12 @@ public class HtmlOption
     }
 
 
-    //TODO: If the select is single-selection then deselect others
+    /**
+     * Set the selected state of this option
+     * @param selected true if this option should be selected.
+     */
     public void setSelected( final boolean selected ) {
+        //TODO: If the select is single-selection then deselect others
         if( selected ) {
             getElement().setAttribute("selected", "selected");
         }
@@ -52,6 +56,9 @@ public class HtmlOption
     }
 
 
+    /**
+     * Reset the option to its original selected state.
+     */
     public void reset() {
         if( initialSelectedState_ ) {
             getElement().setAttribute("selected", "selected");
