@@ -672,7 +672,6 @@ public class WebClient {
      * @param url The url to load content from or null if no content is to be loaded.
      * @param windowName The name of the new window
      * @return The new window.
-     * @exception  IOException If an IO error occurs
      */
     public WebWindow openWindow( final URL url, final String windowName ) {
         assertNotNull("windowName", windowName);

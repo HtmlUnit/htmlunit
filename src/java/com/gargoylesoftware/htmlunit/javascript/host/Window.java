@@ -118,6 +118,7 @@ public final class Window extends SimpleScriptable {
      * @param windowName The name of the window
      * @param features The features - not currently implemented
      * @param replaceCurrentEntryInBrowsingHistory How will this affect the history object?
+     * @return The newly opened window
      */
     public Window jsFunction_open(
             final String url,
