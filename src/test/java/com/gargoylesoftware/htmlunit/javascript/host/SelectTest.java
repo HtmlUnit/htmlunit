@@ -37,11 +37,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 
 /**
@@ -124,5 +131,39 @@ public class SelectTest extends WebTestCase {
          } );
 
          assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     *
+     * @throws Exception if the test fails
+     */
+    public void testGetOptionByIndex() throws Exception {
+        final String content
+            = "<html><head><title>first</title><script language='JavaScript'>"
+            //+ "//<!--"
+            + "function buggy(){\n"
+            + "var option1 = document.f1.elements['select'][0];\n"
+            + "alert(option1!=null);\n"
+            + "}\n"
+            //+ "//-->\n"
+            + "</script></head><body onload='buggy();'>"
+            + "<form name='f1' action='xxx.html'><SELECT name='select'>"
+            + "<OPTION value='A'>111</OPTION>"
+            + "<OPTION value='B'>222</OPTION>"
+            + "</SELECT></form></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setContent( content );
+        client.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals("first", page.getTitleText());
+        assertEquals( Collections.singletonList("true"), collectedAlerts );
     }
 }

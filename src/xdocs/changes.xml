@@ -104,6 +104,9 @@
             <action type="update" dev="mbowler" id="799839">
             	Fixed bug where an option without a value could not be selected.
             </action>
+            <action type="update" dev="mbowler" id="799752">
+            	Fixed bug where Select[index] wasn't returning options.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">

@@ -37,9 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.List;
+
+import org.mozilla.javascript.Scriptable;
+
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
-import java.util.List;
 
 /**
  * The javascript object that represents a select
@@ -136,6 +139,16 @@ public class Select extends Input {
     public int jsGet_length() {
         final HtmlSelect htmlSelect = (HtmlSelect)getHtmlElementOrDie();
         return htmlSelect.getAllOptions().size();
+    }
+
+    /**
+     * Return the specified indexed property
+     * @param index The index of the property
+     * @param start The scriptable object that was originally queried for this property
+     * @return The property.
+     */
+    public Object get( final int index, final Scriptable start ) {
+        return jsGet_options()[index];
     }
 }
 
