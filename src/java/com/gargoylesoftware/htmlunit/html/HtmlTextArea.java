@@ -85,8 +85,7 @@ public class HtmlTextArea
      * @return The text
      */
     public final String getText() {
-        HTMLTextAreaElementImpl textElement = (HTMLTextAreaElementImpl) getElement();
-        return textElement.getTextContent();
+        return asText();
     }
 
 

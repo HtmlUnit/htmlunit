@@ -368,6 +368,9 @@ public abstract class HtmlElement {
 
         final StringBuffer buffer = new StringBuffer();
         final NodeList nodeList = getElement().getChildNodes();
+        if( nodeList == null ) {
+            return "";
+        }
         final int nodeCount = nodeList.getLength();
         final HtmlPage page = getPage();
 
