@@ -41,18 +41,23 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
 import org.apache.xerces.parsers.AbstractSAXParser;
+import org.apache.xerces.util.DefaultErrorHandler;
+import org.apache.xerces.xni.XNIException;
 import org.apache.xerces.xni.parser.XMLInputSource;
+import org.apache.xerces.xni.parser.XMLParseException;
 import org.cyberneko.html.HTMLConfiguration;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -73,7 +78,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 public class HTMLParser {
 
     private static final Map ELEMENT_FACTORIES = new HashMap();
-    private static boolean ValidateHtml_ = false;
     private static boolean IgnoreOutsideContent_ = false;
     
     static {
@@ -155,22 +159,6 @@ public class HTMLParser {
 
     private static void putFactory(final String tagName, final Class elementClass) {
         ELEMENT_FACTORIES.put(tagName, new DefaultElementFactory(elementClass));
-    }
-
-    /**
-     * Set the flag to control logging html errors to the standard error
-     * @param validateFlag - boolean flag to set
-     */
-    public static void setValidateHtml(final boolean validateFlag) {
-        ValidateHtml_ = validateFlag;
-    }
-
-    /**
-     * Get the state of the logging flag for html errors
-     * @return - The current state
-     */
-    public static boolean getValidateHtml() {
-        return ValidateHtml_;
     }
 
     /**
@@ -306,10 +294,20 @@ public class HTMLParser {
             webResponse_ = webResponse;
             webWindow_ = webWindow;
 
+            final HTMLParserListener listener = webWindow.getWebClient().getHTMLParserListener();
+            final boolean reportErrors;
+            if (listener != null) {
+                reportErrors = true;
+                fConfiguration.setErrorHandler(new HTMLErrorHandler(listener, webResponse.getUrl()));
+            }
+            else {
+                reportErrors = false;
+            }
+
             try {
                 setFeature( "http://cyberneko.org/html/features/augmentations", true );
                 setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
-                setFeature("http://cyberneko.org/html/features/report-errors", ValidateHtml_);
+                setFeature("http://cyberneko.org/html/features/report-errors", reportErrors);
                 setFeature("http://cyberneko.org/html/features/balance-tags/ignore-outside-content",
                     IgnoreOutsideContent_);
             }
@@ -451,5 +449,38 @@ public class HTMLParser {
         /** @inheritDoc ContentHandler#skippedEntity(String) */
         public void skippedEntity(final String name) throws SAXException {
         }
+    }
+}
+
+/**
+ * Utility to transmit parsing errors to a {@link HTMLParserListener}.
+ */
+class HTMLErrorHandler extends DefaultErrorHandler {
+    private final HTMLParserListener listener_;
+    private final URL url_;
+
+    HTMLErrorHandler(final HTMLParserListener listener, final URL url) {
+        Assert.notNull("listener", listener);
+        Assert.notNull("url", url);
+        listener_ = listener;
+        url_ = url;
+    }
+
+    public void error(final String domain, final String key, 
+            final XMLParseException exception) throws XNIException {
+        listener_.error(exception.getMessage(), 
+                url_,
+                exception.getLineNumber(), 
+                exception.getColumnNumber(),
+                key);
+    }
+
+    public void warning(final String domain, final String key, 
+            final XMLParseException exception) throws XNIException {           
+        listener_.warning(exception.getMessage(), 
+                url_,
+                exception.getLineNumber(), 
+                exception.getColumnNumber(),
+                key);
     }
 }

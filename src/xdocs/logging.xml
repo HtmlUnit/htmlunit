@@ -31,6 +31,17 @@
                 order from least serious to most serious).
             </p>
         </section>
+        <section name="Noteworthy loggers">
+            <p>
+				In htmlunit, each class has its own log named according to the class's fully qualified name
+				<ul>
+				<li>httpclient.wire.content: log for all content transmitted to and from servers (see <a href="http://jakarta.apache.org/commons/httpclient/logging.html">
+				HttpClient Logging Practices</a>)</li>
+				<li>httpclient.wire.header: log for all headers transmitted to and from servers (see <a href="http://jakarta.apache.org/commons/httpclient/logging.html">
+				HttpClient Logging Practices</a>)</li>
+				<li>
+			</p>
+		</section>
         <section name="Logging HTML parsing errors">
         	<p>
         		The package used to parse the HTML has the ability to log errors from parsing source.  These errors
