@@ -194,7 +194,8 @@
         prereqs="test:compile">
 
         <ant:java fork="true" classname="junit.textui.TestRunner" dir="target/test-classes">
-            <arg value="com.gargoylesoftware.htmlunit.MainTestSuite"/>
+        	    <ant:jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog"/>
+            <ant:arg value="com.gargoylesoftware.htmlunit.MainTestSuite"/>
             <ant:classpath>
                 <ant:path refid="maven.dependency.classpath"/>
                 <ant:pathelement path="${maven.build.dest}"/>
