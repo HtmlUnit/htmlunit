@@ -8,6 +8,9 @@
     <body>
         <release version="next" date="unknown">
             <action type="update" dev="mguillem">
+                document.images is now a "live" collection.
+            </action>
+            <action type="update" dev="mguillem">
                 Added DebuggingWebConnection, a web connection that saves the received responses and builds an overview. 
 				Sometimes usefull at conception time to understand what is "browsed".
             </action>

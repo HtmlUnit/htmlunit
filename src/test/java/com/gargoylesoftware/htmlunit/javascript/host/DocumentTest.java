@@ -1670,13 +1670,18 @@ public class DocumentTest extends WebTestCase {
         final String firstContent
              = "<html><head><title>First</title><script>"
              + "function doTest() {\n"
-             + "    var allImages = document.images;\n"
+             + "    alert(document.images.length);\n"
              + "    alert(allImages.length);\n"
+             + "    alert(document.images == allImages);\n"
              + "}\n"
              + "</script></head><body onload='doTest()'>"
-             + "<img src='firstImage' name='first'>" 
+             + "<img src='firstImage'>" 
+             + "<script>"
+             + "var allImages = document.images;\n"
+             + "alert(allImages.length);\n"
+             + "</script>"
              + "<form>" 
-             + "<img src='firstImage' name='first'>" 
+             + "<img src='2ndImage'>" 
              + "</form>"
              + "</body></html>";
 
@@ -1684,7 +1689,8 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
-        final List expectedAlerts = Arrays.asList(new String[] { "2" });
+        final List expectedAlerts = Arrays.asList(new String[] { "1", "2", "2", "true" });
+        createTestPageForRealBrowserIfNeeded(firstContent, expectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
     

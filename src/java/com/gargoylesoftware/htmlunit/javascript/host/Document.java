@@ -39,11 +39,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -71,7 +69,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.ElementArray;
@@ -99,6 +96,7 @@ public final class Document extends NodeImpl {
     private ElementArray all_; // has to be a member to have equality (==) working
     private ElementArray forms_; // has to be a member to have equality (==) working
     private ElementArray links_; // has to be a member to have equality (==) working
+    private ElementArray images_; // has to be a member to have equality (==) working
 
     /** The buffer that will be used for calls to document.write() */
     private StringBuffer writeBuffer_;
@@ -311,34 +309,17 @@ public final class Document extends NodeImpl {
      * Return the value of the "images" property.
      * @return The value of the "images" property
      */
-    public NativeArray jsGet_images() {
-        final List jsImages = new ArrayList();
-
-        final List imageElements
-            = getHtmlPage().getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("img") );
-        final Iterator iterator = imageElements.iterator();
-        while( iterator.hasNext() ) {
-            final HtmlImage htmlImage = (HtmlImage)iterator.next();
-            Image jsImage = (Image)htmlImage.getScriptObject();
-            if( jsImage == null ) {
-                jsImage = (Image)makeJavaScriptObject("Image");
-                jsImage.setHtmlElement( htmlImage );
+    public Object jsGet_images() {
+        if (images_ == null) {
+            images_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            try {
+                images_.init(getHtmlPage(), new HtmlUnitXPath("//img"));
             }
-            jsImages.add(jsImage);
-        }
-
-        final int attributes = READONLY;
-        final Image[] array = new Image[jsImages.size()];
-        jsImages.toArray(array);
-        final NativeArray allImages = new NativeArray(array);
-        for( int i=0; i<array.length; i++ ) {
-            final String name = array[i].getHtmlElementOrDie().getAttributeValue("name");
-            if( name.length() != 0 ) {
-                allImages.defineProperty(name, array[i], attributes);
+            catch (final JaxenException e) {
+                throw Context.reportRuntimeError("Failed to initialize collection document.images: " + e.getMessage());
             }
         }
-
-        return allImages;
+        return images_;
     }
 
 
