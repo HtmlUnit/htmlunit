@@ -62,7 +62,7 @@ public class Version {
         final Package aPackage = Package.getPackage("com.gargoylesoftware.htmlunit");
 
         System.out.println("HTMLUnit");
-        System.out.println("Copyright (C) 2002, 2003 Gargoyle Software Inc. All rights reserved.");
+        System.out.println("Copyright (C) 2002, 2004 Gargoyle Software Inc. All rights reserved.");
 
         if( aPackage != null ) {
             System.out.println("Version: "+aPackage.getImplementationVersion());
