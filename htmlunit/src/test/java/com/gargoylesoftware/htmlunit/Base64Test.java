@@ -42,6 +42,7 @@ package com.gargoylesoftware.htmlunit;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @deprecated Marked deprecated to avoid warnings as it tests a deprecated class
  */
 public class Base64Test extends WebTestCase {
     /**

@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1109224" due-to="Hans Donner">
+                Use commons-codec's Base64. Marked custom Base64 as deprecated.
+            </action>        
             <action type="update" dev="mguillem" id="1002140" due-to="Daniel Gredler">
                 Fixed NullPointerException thrown in JavaScript by createElement('input')
             </action>        
