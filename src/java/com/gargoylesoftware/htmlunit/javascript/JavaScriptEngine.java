@@ -58,6 +58,7 @@ import org.mozilla.javascript.ScriptableObject;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  */
 public final class JavaScriptEngine extends ScriptEngine {
     /** Information specific to the javascript engine */
@@ -150,6 +151,7 @@ public final class JavaScriptEngine extends ScriptEngine {
 
             ScriptableObject.defineClass(parentScope, DocumentAllArray.class);
             ScriptableObject.defineClass(parentScope, FormElementsArray.class);
+            ScriptableObject.defineClass(parentScope, WindowFramesArray.class);
 
             final Window window = (Window)newPageInfo.getContext().newObject(
                 parentScope, "Window", new Object[0]);

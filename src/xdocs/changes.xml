@@ -13,7 +13,9 @@
             <action type="update" dev="mbowler" id="797144 ">
                 Added support for the about: protocol - patch from Jun Chen
             </action>
-
+            <action type="update" dev="mbowler" id="797144 ">
+                Added support for window frames - patch from Jun Chen
+            </action>
 		</release>
 
 		    
