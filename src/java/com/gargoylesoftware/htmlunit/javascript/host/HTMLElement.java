@@ -37,14 +37,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
 import org.mozilla.javascript.NativeArray;
+import org.mozilla.javascript.PropertyException;
 import org.mozilla.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -60,9 +64,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Chris Erskine
  * @author David D. Kilzer
+ * @author Daniel Gredler
+ * @author Marc Guillemot
  */
 public class HTMLElement extends NodeImpl {
     private static final long serialVersionUID = -6864034414262085851L;
+    private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
+    private static final int BEHAVIOR_ID_UNKNOWN = -1;
+    private static final int BEHAVIOR_ID_HOMEPAGE = 0;
     private Style style_;
 
      /**
@@ -86,7 +95,6 @@ public class HTMLElement extends NodeImpl {
      * @return The style object
      */
     public Object jsGet_style() {
-//        getLog().debug("HTMLElement.jsGet_Style() style=["+style_+"]");
         return style_;
     }
 
@@ -275,5 +283,76 @@ public class HTMLElement extends NodeImpl {
         final DomNode domNode = getDomNodeOrDie();
         domNode.removeAllChildren();
         domNode.appendChild(new DomText(domNode.getPage(), value));
+    }
+
+    /**
+     * Adds the specified behavior to this HTML element. Currently only supports
+     * the following default IE behaviors:
+     * <ul>
+     *   <li>#default#homePage</li>
+     * </ul>
+     * @param behavior the URL of the behavior to add, or a default behavior name
+     * @return an identifier that can be user later to detach the behavior from the element
+     * @throws PropertyException if behaviour's methods could be registered
+     */
+    public int jsFunction_addBehavior(final String behavior) throws PropertyException {
+        if (BEHAVIOR_HOMEPAGE.equals(behavior)) {
+            Class c = this.getClass();
+            defineFunctionProperties(new String[] {"isHomePage"}, c, 0);
+            defineFunctionProperties(new String[] {"setHomePage"}, c, 0);
+            defineFunctionProperties(new String[] {"navigateHomePage"}, c, 0);
+            return BEHAVIOR_ID_HOMEPAGE;
+        }
+        
+        getLog().warn("Unimplemented behavior: " + behavior);
+
+        return BEHAVIOR_ID_UNKNOWN;
+    }
+
+    /**
+     * Removes the behavior corresponding to the specified identifier from this element.
+     * @param id the identifier for the behavior to remove
+     */
+    public void jsFunction_removeBehavior(int id) {
+        switch (id) {
+            case BEHAVIOR_ID_HOMEPAGE:
+                this.delete("isHomePage");
+                this.delete("setHomePage");
+                this.delete("navigateHomePage");
+                break;
+            default:
+                getLog().warn("Unexpected behavior id: " + id + ". Ignoring.");
+        }
+    }
+
+    /**
+     * Returns <tt>true</tt> if the specified URL is the web client's current
+     * homepage. Part of the <tt>#default#homePage</tt> default IE behavior
+     * implementation.
+     * @param url the URL to check
+     * @return <tt>true</tt> if the specified URL is the current homepage
+     */
+    public boolean isHomePage(final String url) {
+        final String home = getDomNodeOrDie().getPage().getWebClient().getHomePage();
+        return (home != null && home.equals(url));
+    }
+
+    /**
+     * Sets the web client's current homepage. Part of the <tt>#default#homePage</tt>
+     * default IE behavior implementation.
+     * @param url the new homepage URL
+     */
+    public void setHomePage(final String url) {
+        this.getDomNodeOrDie().getPage().getWebClient().setHomePage(url);
+    }
+
+    /**
+     * Causes the web client to navigate to the current home page. Part of the
+     * <tt>#default#homePage</tt> default IE behavior implementation.
+     * @throws IOException if loading home page fails
+     */
+    public void navigateHomePage() throws IOException {
+        final WebClient webClient = getDomNodeOrDie().getPage().getWebClient(); 
+        webClient.getPage(new URL(webClient.getHomePage()));
     }
 }

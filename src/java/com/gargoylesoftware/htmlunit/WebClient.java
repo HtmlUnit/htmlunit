@@ -86,6 +86,7 @@ import org.apache.commons.logging.LogFactory;
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Daniel Gredler
  */
 public class WebClient {
 
@@ -97,6 +98,7 @@ public class WebClient {
     private final int proxyPort_;
     private ScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
+    private String homePage_;
     private FocusableElement elementWithFocus_;
     private final Map requestHeaders_ = Collections.synchronizedMap(new HashMap(89));
 
@@ -180,6 +182,7 @@ public class WebClient {
     public WebClient( final BrowserVersion browserVersion ) {
         Assert.notNull("browserVersion", browserVersion);
 
+        homePage_ = "http://www.gargoylesoftware.com/";
         browserVersion_ = browserVersion;
         proxyHost_ = null;
         proxyPort_ = 0;
@@ -202,6 +205,7 @@ public class WebClient {
         Assert.notNull("browserVersion", browserVersion);
         Assert.notNull( "proxyHost", proxyHost );
 
+        homePage_ = "http://www.gargoylesoftware.com/";
         browserVersion_ = browserVersion;
         proxyHost_ = proxyHost;
         proxyPort_ = proxyPort;
@@ -773,6 +777,24 @@ public class WebClient {
      */
     public boolean isJavaScriptEnabled() {
         return javaScriptEnabled_ && scriptEngine_ != null;
+    }
+
+
+    /**
+     * Returns the client's current homepage.
+     * @return the client's current homepage.
+     */
+    public String getHomePage() {
+        return homePage_;
+    }
+
+
+    /**
+     * Sets the client's homepage.
+     * @param homePage the new homepage URL
+     */
+    public void setHomePage(String homePage) {
+        homePage_ = homePage;
     }
 
 

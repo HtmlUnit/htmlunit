@@ -41,6 +41,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -50,8 +53,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author yourgod
  * @author Chris Erskine
  * @author David D. Kilzer
+ * @author Daniel Gredler
  * @version $Revision$
- *
  */
 public class HTMLElementTest extends WebTestCase {
 
@@ -277,4 +280,80 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * Test the <tt>#default#homePage</tt> default IE behavior.
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testAddBehaviorDefaultHomePage() throws Exception {
+        final String content = "<html>\n" +
+                "<head>\n" +
+                "    <title>Test</title>\n" +
+                "    <script>\n" +
+                "    function doTest() {\n" +
+                "       var body = document.body;\n" +
+                "       body.addBehavior('#default#homePage');\n" +
+                "       var url = '" + URL_SECOND.toExternalForm() + "';\n" +
+                "       alert('isHomePage = ' + body.isHomePage(url));\n" +
+                "       body.setHomePage(url);\n" +
+                "       alert('isHomePage = ' + body.isHomePage(url));\n" +
+                "       body.navigateHomePage();\n" +
+                "    }\n" +
+                "    </script>\n" +
+                "</head>\n" +
+                "<body onload='doTest()'>Test</body>\n" +
+                "</html>";
+        final String content2 = "<html></html>";
+        
+        final WebClient client = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, content);
+        webConnection.setResponse(URL_SECOND, content2);
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "isHomePage = false",
+            "isHomePage = true"
+        });
+        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(URL_SECOND.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
+    }
+
+    /**
+     * Test the removal of behaviors.
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testRemoveBehavior() throws Exception {
+        final String content = "<html>\n" +
+                "<head>\n" +
+                "    <title>Test</title>\n" +
+                "    <script>\n" +
+                "    function doTest() {\n" +
+                "       var body = document.body;\n" +
+                "       alert('body.isHomePage = ' + body.isHomePage);\n" +
+                "       var id = body.addBehavior('#default#homePage');\n" +
+                "       alert('body.isHomePage = ' + body.isHomePage('not the home page'));\n" +
+                "       body.removeBehavior(id);\n" +
+                "       alert('body.isHomePage = ' + body.isHomePage);\n" +
+                "    }\n" +
+                "    </script>\n" +
+                "</head>\n" +
+                "<body onload='doTest()'>Test</body>\n" +
+                "</html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "body.isHomePage = undefined",
+            "body.isHomePage = false",
+            "body.isHomePage = undefined"
+        });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
