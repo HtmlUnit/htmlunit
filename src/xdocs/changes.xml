@@ -82,6 +82,9 @@
 			The http spec is unclear on this exact behaviour but the common browsers seem
 			to do it this way.
 		</change>
+		<change type="new">
+			Added the constant BrowserVersion.NETSCAPE_6_2_3
+		</change>
 	</change-log>
 </section>
 

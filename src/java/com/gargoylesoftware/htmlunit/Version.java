@@ -20,6 +20,7 @@ public class Version {
     /**
      * The main entry point into this class.
      * @param args The arguments passed on the command line
+     * @throws Exception If an error occurs
      */
     public static void main( final String args[] ) throws Exception {
         if( args.length == 1 && args[0].equals("-SanityCheck") ) {
@@ -38,7 +39,7 @@ public class Version {
     }
 
 
-    public static void runSanityCheck() throws Exception {
+    private static void runSanityCheck() throws Exception {
         final WebClient webClient = new WebClient();
         final HtmlPage page = (HtmlPage)webClient.getPage(
             new URL("http://htmlunit.sourceforge.net/index.html") );

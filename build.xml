@@ -285,7 +285,7 @@
 		<property key="checkstyle.const.pattern" value="^[A-Z](_?[A-Z0-9]+)*$"/>
 		<property key="checkstyle.local.var.pattern" value="^i|[a-z][a-zA-Z0-9]+$"/>
 		<property key="checkstyle.pattern.member" value="^[a-z][a-zA-Z0-9_]+_$"/>
-		<property key="checkstyle.pattern.method" value="^+|[a-z][a-zA-Z0-9]+$"/>
+		<property key="checkstyle.pattern.method" value="^[a-z][a-zA-Z0-9_]+$"/>
 		<property key="checkstyle.pattern.param" value="^[a-z][a-zA-Z0-9]+$"/>
 		<property key="checkstyle.pattern.public.member" value="^$"/>
 		<property key="checkstyle.pattern.static" value="^[A-Z][a-zA-Z0-9_]+_$"/>
