@@ -93,7 +93,7 @@ public class HtmlTable extends HtmlElement {
             final Node node = nodeList.item( i );
             if( node instanceof Element ) {
                 final Element element = ( Element )node;
-                final String tagName = element.getTagName();
+                final String tagName = getTagName(element);
                 if( tagName.equals( "tr" ) ) {
                     list.add( new HtmlTableRow( page, element, rowIndex ) );
                     rowIndex++;
@@ -107,7 +107,7 @@ public class HtmlTable extends HtmlElement {
                         final Node subNode = subList.item(subListIndex);
                         if( subNode instanceof Element ) {
                             final Element subElement = (Element)subNode;
-                            if( subElement.getTagName().equals("tr") ) {
+                            if( getTagName(subElement).equals("tr") ) {
                                 list.add( new HtmlTableRow( page, subElement, rowIndex ) );
                                 rowIndex++;
                             }

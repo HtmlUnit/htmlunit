@@ -132,12 +132,11 @@ public class Form extends HTMLElement {
 
 
     private static String getClassNameForFormElement( final HtmlElement htmlElement ) {
-        final Element xmlElement = htmlElement.getElement();
-        final String tagName = xmlElement.getTagName();
+        final String tagName = htmlElement.getTagName();
 
         String type = null;
         if( tagName.equals("input") ) {
-            type = xmlElement.getAttribute("type").toLowerCase();
+            type = htmlElement.getAttributeValue("type").toLowerCase();
             if( type.equals("file") ) {
                 type = "FileUpload";
             }
@@ -147,7 +146,7 @@ public class Form extends HTMLElement {
             }
         }
         else if( tagName.equals("button") ) {
-            type = xmlElement.getAttribute("type").toLowerCase();
+            type = htmlElement.getAttributeValue("type").toLowerCase();
             if( type.length() == 0 ) {
                 type = "button";
             }

@@ -34,7 +34,7 @@ public class HtmlOption
      * @return  See above
      */
     public boolean isSelected() {
-        return getSelectedAttribute().length() != 0;
+        return isAttributeDefined("selected");
     }
 
 

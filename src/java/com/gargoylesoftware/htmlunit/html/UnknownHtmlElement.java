@@ -33,7 +33,7 @@ public class UnknownHtmlElement extends HtmlElement {
      * @return  The tag name
      */
     public String getName() {
-        return getElement().getTagName();
+        return getElement().getTagName().toLowerCase();
     }
 }
 

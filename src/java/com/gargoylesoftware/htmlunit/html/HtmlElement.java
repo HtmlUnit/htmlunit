@@ -48,6 +48,7 @@ public abstract class HtmlElement {
      */
     private Object scriptObject_;
 
+
     /**
      *  Create an instance
      *
@@ -102,8 +103,8 @@ public abstract class HtmlElement {
         while( iterator.hasNext() ) {
             final Element element = ( Element )iterator.next();
 
-            if( element.getTagName().equals( elementName )
-                     && element.getAttribute( attributeName ).equals( attributeValue ) ) {
+            if( getTagName(element).equals( elementName )
+                 && getAttributeValue(element, attributeName ).equals( attributeValue ) ) {
                 collectedElements.add( element );
             }
         }
@@ -122,8 +123,25 @@ public abstract class HtmlElement {
      * @return  The value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
      * or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
-    public String getAttributeValue( final String attributeName ) {
-        final Attr attribute = (Attr)getElement().getAttributeNode(attributeName);
+    public final String getAttributeValue( final String attributeName ) {
+        return getAttributeValue( getElement(), attributeName );
+    }
+
+
+    /**
+     *  Return the value of the specified attribute or an empty string.  If the
+     * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
+     * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
+     * attribute was specified but it was empty.
+     *
+     * @param  attributeName the name of the attribute
+     * @return  The value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
+     * or {@link #ATTRIBUTE_VALUE_EMPTY}
+     */
+    public final String getAttributeValue( final Element element, final String attributeName ) {
+        assertNotNull("element", element);
+
+        final Attr attribute = (Attr)element.getAttributeNode(attributeName.toUpperCase());
         if( attribute == null ) {
             return ATTRIBUTE_NOT_DEFINED;
         }
@@ -147,7 +165,18 @@ public abstract class HtmlElement {
      * @return true if the attribute is defined
      */
     public boolean isAttributeDefined( final String attributeName ) {
-        return (Attr)getElement().getAttributeNode(attributeName) != null;
+        return getAttributeValue(attributeName) != ATTRIBUTE_NOT_DEFINED;
+    }
+
+
+    public final String getTagName() {
+        return getTagName(getElement());
+    }
+
+
+    public final String getTagName( final Element element ) {
+        assertNotNull("element", element);
+        return element.getTagName().toLowerCase();
     }
 
 
@@ -162,7 +191,7 @@ public abstract class HtmlElement {
         while( currentNode != null ) {
             if( currentNode instanceof Element ) {
                 final Element element = ( Element )currentNode;
-                if( element.getTagName().equals( "form" ) ) {
+                if( getTagName(element).equals( "form" ) ) {
                     return ( HtmlForm )getPage().getHtmlElement( element );
                 }
             }
@@ -208,7 +237,7 @@ public abstract class HtmlElement {
         }
 
         buffer.append( "[<" );
-        buffer.append( element.getTagName() );
+        buffer.append( getTagName(element) );
 
         final NamedNodeMap attributeMap = element.getAttributes();
         final int attributeCount = attributeMap.getLength();
@@ -435,10 +464,11 @@ public abstract class HtmlElement {
 
         assertNotNull( "id", id );
         assertNotEmpty( "id", id );
+
         final Iterator iterator = getXmlChildElements();
         while( iterator.hasNext() ) {
             final Element xmlElement = ( Element )iterator.next();
-            final String idValue = xmlElement.getAttribute( "id" );
+            final String idValue = getAttributeValue( xmlElement, "id" );
             if( id.equals( idValue ) ) {
                 return getPage().getHtmlElement( xmlElement );
             }
@@ -523,7 +553,7 @@ public abstract class HtmlElement {
         final Iterator xmlIterator = getXmlChildElements();
         while( xmlIterator.hasNext() ) {
             final Element xmlElement = ( Element )xmlIterator.next();
-            if( acceptableTagNames.contains( xmlElement.getTagName() ) ) {
+            if( acceptableTagNames.contains( getTagName(xmlElement) ) ) {
                 collectedElements.add( page.getHtmlElement( xmlElement ) );
             }
         }

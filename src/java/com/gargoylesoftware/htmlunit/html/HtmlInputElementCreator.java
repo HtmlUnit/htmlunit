@@ -24,11 +24,11 @@ class HtmlInputElementCreator extends HtmlElementCreator {
      * @return The new HtmlElement.
      */
     HtmlElement create( final HtmlPage page, final Element xmlElement ) {
-        if( xmlElement.getTagName().equals("input") == false ) {
-            throw new IllegalArgumentException("tagName is not 'input': "+xmlElement.getTagName());
+        if( page.getTagName(xmlElement).equals("input") == false ) {
+            throw new IllegalArgumentException("tagName is not 'input': "+page.getTagName(xmlElement));
         }
 
-        final String type = xmlElement.getAttribute("type").toLowerCase();
+        final String type = xmlElement.getAttribute("TYPE").toLowerCase();
 
         if( type.length() == 0 ) {
             // This is really an illegal value but the common browsers seem to

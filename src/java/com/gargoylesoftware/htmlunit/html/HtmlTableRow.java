@@ -71,7 +71,7 @@ public class HtmlTableRow extends HtmlElement {
             final Node node = nodeList.item( i );
             if( node instanceof Element ) {
                 final Element element = (Element)node;
-                final String tagName = element.getTagName();
+                final String tagName = getTagName(element);
 
                 if( tagName.equals( "td" ) ) {
                     list.add( new HtmlTableDataCell( page, element, rowIndex, columnIndex++ ) );
