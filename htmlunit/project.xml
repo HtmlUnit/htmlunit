@@ -164,7 +164,7 @@
     <build>
         <nagEmailAddress>htmlunit@GargoyleSoftware.com</nagEmailAddress>
         <sourceDirectory>src/java</sourceDirectory>
-        <unitTestSourceDirectory>src/java</unitTestSourceDirectory>
+        <unitTestSourceDirectory>src/test/java</unitTestSourceDirectory>
         <integrationUnitTestSourceDirectory/>
         <aspectSourceDirectory/>
 

@@ -253,7 +253,7 @@
 
 
 <target name="junit" description="junit">
-    <java fork="true" classname="junit.textui.TestRunner" dir="src/java">
+    <java fork="true" classname="junit.textui.TestRunner" dir="src/test/java">
         <arg value="com.gargoylesoftware.htmlunit.test.MainTestSuite"/>
         <classpath refid="base.class.path"/>
     </java>
@@ -277,13 +277,14 @@
 
 <target name="checkstyle" description="Check all the coding conventions">
     <!-- Check production code -->
+    <!--
     <checkstyle properties="build/checkstyle-prod.properties">
         <fileset dir="src/java" includes="**/*.java" excludes="**/test/*"/>
     </checkstyle>
-
+-->
     <!-- Check tests - test code is a bit more lenient -->
-    <checkstyle properties="build/checkstyle-test.properties">
-        <fileset dir="src/java" includes="**/test/*.java"/>
+    <checkstyle properties="build/checkstyle-prod.properties">
+        <fileset dir="src/test/java"/>
     </checkstyle>
 </target>
 
