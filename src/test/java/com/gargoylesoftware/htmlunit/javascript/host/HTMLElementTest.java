@@ -148,7 +148,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</table>\n"
             + "</body></html>\n";
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        loadPage(content, collectedAlerts);
 
         final List expectedAlerts = Arrays.asList(new String[]{
             "all = 4", "row = 2"
@@ -175,7 +175,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</body></html>\n";
           
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        loadPage(content, collectedAlerts);
 
         final List expectedAlerts = Arrays.asList(new String[]{
             "the class is x"
@@ -202,7 +202,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</body></html>\n";
           
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        loadPage(content, collectedAlerts);
 
         final List expectedAlerts = Arrays.asList(new String[]{
             "the class is z"
