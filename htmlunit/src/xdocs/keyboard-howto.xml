@@ -19,9 +19,9 @@
 	</p>
 	<p>
 		To simulate keyboard navigation via the tab key, you can call
-		<javadoc>com.gargoylesoftware.htmlunit.WebClient#tabToNextElement()</javadoc>
+		<javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage#tabToNextElement()</javadoc>
 		and
-		<javadoc>com.gargoylesoftware.htmlunit.WebClient#tabToPreviousElement()</javadoc>
+		<javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage#tabToPreviousElement()</javadoc>
 		to cycle forward or backwards through the defined tab order.  This tab order is
 		defined by the
 		<a href="http://www.w3.org/TR/html401/interact/forms.html#adef-tabindex">tabindex</a>
