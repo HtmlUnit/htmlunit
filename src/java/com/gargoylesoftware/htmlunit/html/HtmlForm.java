@@ -63,6 +63,7 @@ import org.w3c.dom.Element;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
+ * @author  Brad Clarke
  */
 public class HtmlForm extends ClickableElement {
 
@@ -270,9 +271,9 @@ public class HtmlForm extends ClickableElement {
         if( disabled != null ) {
             return false;
         }
-       if( ! tagName.equals( "isindex" ) && getAttributeValue(element, "name" ).equals("") ) {
-           return false;
-       }
+        if( ! tagName.equals( "isindex" ) && getAttributeValue(element, "name" ).equals("") ) {
+            return false;
+        }
         if( tagName.equals( "input" ) ) {
             final String type = getAttributeValue(element, "type" ).toLowerCase();
             if( type.equals( "radio" ) || type.equals( "checkbox" ) ) {
@@ -280,6 +281,13 @@ public class HtmlForm extends ClickableElement {
                 return checked != null;
             }
             if( type.equals("submit") || type.equals("image") ){
+                // The one submit button that was clicked can be submitted but no other ones
+                return false;
+            }
+        }
+        if ( tagName.equals("button") ) {
+            final String type = getAttributeValue(element, "type" ).toLowerCase();
+            if( type.equals("submit") ){
                 // The one submit button that was clicked can be submitted but no other ones
                 return false;
             }

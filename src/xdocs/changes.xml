@@ -107,6 +107,10 @@
             <action type="update" dev="mbowler" id="799752">
             	Fixed bug where Select[index] wasn't returning options.
             </action>
+            <action type="update" dev="mbowler" id="824145" due-to="Brad Clarke">
+            	Fixed bug where button names would get submitted twice.  Patch
+            	submitted by Brad Clarke.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
