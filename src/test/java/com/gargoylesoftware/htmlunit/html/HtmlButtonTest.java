@@ -283,7 +283,7 @@ public class HtmlButtonTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDefaultButtonType_StandardsCompliantBrowser() throws Exception {
-        assertEquals("submit", getDefaultButtonType(BrowserVersion.MOZILLA_1_0));
+        doTestDefaultButtonType(BrowserVersion.MOZILLA_1_0, "submit");
     }
 
     /**
@@ -291,25 +291,44 @@ public class HtmlButtonTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDefaultButtonType_InternetExplorer() throws Exception {
-        assertEquals("button", getDefaultButtonType(BrowserVersion.INTERNET_EXPLORER_6_0));
+        doTestDefaultButtonType(BrowserVersion.INTERNET_EXPLORER_6_0, "button");
     }
     
-    private String getDefaultButtonType( final BrowserVersion browserVersion ) throws Exception {
-        final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "    <button name='button' id='button'>PushMe</button>"
+    private void doTestDefaultButtonType( final BrowserVersion browserVersion, final String expectedType ) throws Exception {
+        final String firstContent
+                 = "<html><head><title>First</title></head><body>"
+                 + "<form id='form1' action='http://second'>"
+                 + "    <button name='button' id='button' value='pushme'>PushMe</button>"
                  + "</form></body></html>";
+        final String secondContent
+            = "<html><head><title>Second</title></head><body'></body></html>";
         final WebClient client = new WebClient(browserVersion);
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
+        webConnection.setResponse(
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
+                URL_FIRST,
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
-        return button.getTypeAttribute();
+        assertEquals( expectedType, button.getTypeAttribute() );
+        
+        final HtmlPage page2 = (HtmlPage)button.click();
+        final List expectedParameters;
+        final String expectedSecondPageTitle;
+        if( expectedType.equals("submit") ) {
+            expectedParameters = Collections.singletonList( new KeyValuePair("button", "pushme"));
+            expectedSecondPageTitle = "Second";
+        }
+        else {
+            expectedParameters = Collections.EMPTY_LIST;
+            expectedSecondPageTitle = "First";
+        }
+        assertEquals( expectedParameters, webConnection.getLastParameters() );
+        assertEquals( expectedSecondPageTitle, page2.getTitleText() );
     }
 }
