@@ -150,9 +150,7 @@ public final class HtmlPage extends DomNode implements Page {
      * @throws IOException If an IO problem occurs.
      */
     public void initialize() throws IOException {
-        //executeJavaScriptIfPossible("", "Dummy stub just to get javascript initialized", false, null);
-
-        //initializeFramesIfNeeded();
+        insertTbodyTagsAsNeeded();
         executeOnLoadHandlersIfNeeded();
         executeRefreshIfNeeded();
     }
@@ -1253,5 +1251,32 @@ public final class HtmlPage extends DomNode implements Page {
      */
     void removeIdElement(HtmlElement idElement) {
         idMap_.remove(idElement.getAttributeValue("id"));
+    }
+    
+    private void insertTbodyTagsAsNeeded() {
+        final Iterator iterator = getDocumentElement().getHtmlElementsByTagName("table").iterator();
+        while( iterator.hasNext() ) {
+            final HtmlTable table = (HtmlTable)iterator.next();
+            DomNode child = table.getFirstChild();
+            while( child != null && child instanceof HtmlElement == false ) {
+                child = child.getNextSibling();
+            }
+            if( child instanceof HtmlTableRow ) {
+                final HtmlTableBody body = new HtmlTableBody(this, Collections.EMPTY_MAP);
+                final List nodesToMove = new ArrayList();
+                child = table.getFirstChild();
+                while( child != null ) {
+                    nodesToMove.add(child);
+                    child = child.getNextSibling();
+                }
+                
+                final Iterator movingIterator = nodesToMove.iterator();
+                while( movingIterator.hasNext() ) {
+                    child = (DomNode)movingIterator.next();
+                    body.appendChild(child);
+                }
+                table.appendChild(body);
+            }
+        }
     }
 }
