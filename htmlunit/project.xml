@@ -133,6 +133,9 @@
         <contributor>
             <name>Marc Guillemot</name>
         </contributor>
+        <contributor>
+            <name>David D. Kilzer</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
