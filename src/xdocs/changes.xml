@@ -6,7 +6,7 @@
     </properties>
 
     <body>
-        <release version="next" date="unknown">
+        <release version="1.5" date="March 13, 2005">
             <action type="update" dev="mguillem" id="976077">
                 Determine content-type of uploaded files.
             </action>
