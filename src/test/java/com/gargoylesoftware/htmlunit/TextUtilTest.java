@@ -37,6 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 /**
  *  Tests for TextUtil.
  *
@@ -128,6 +132,36 @@ public final class TextUtilTest extends WebTestCase {
             assertFalse(
                 "stringToCheck=["+stringToCheck+"] prefix=["+prefix+"]",
                 TextUtil.startsWithIgnoreCase(stringToCheck, prefix));
+        }
+    }
+    
+    public void testToInputStream_null() throws Exception {
+        try {
+            TextUtil.toInputStream(null);
+            fail("Expected NullPointerException");
+        }
+        catch( final NullPointerException e ) {
+            // Expected path
+        }
+    }
+
+
+    public void testToInputStream() throws Exception {
+        final String[][] data = {
+            {"", null},
+            {"a", "a"},
+            {"abcdefABCDEF", "abcdefABCDEF"},
+        };
+        final String encoding = "ISO-8859-1";
+        
+        for( int i=0; i<data.length; i++ ) {
+            final String input = data[i][0];
+            final String expectedResult = data[i][1];
+            
+            final InputStream inputStream = TextUtil.toInputStream(input, encoding);
+            final String actualResult 
+                = new BufferedReader( new InputStreamReader(inputStream, encoding) ).readLine();
+            assertEquals( expectedResult, actualResult);
         }
     }
 }

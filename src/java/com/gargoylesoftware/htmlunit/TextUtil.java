@@ -37,7 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Utility methods relating to text.
@@ -80,6 +85,43 @@ public final class TextUtil {
      * @return The resulting input stream.
      */
     public static InputStream toInputStream( final String content ) {
-        return new java.io.StringBufferInputStream(content);
+        try {
+            return toInputStream(content, "ISO-8859-1");
+        }
+        catch( final UnsupportedEncodingException e ) {
+            throw new IllegalStateException(
+                "ISO-8859-1 is an unsupported encoding!  You may have a corrupted installation of java.");
+        }
+    }
+    
+    /**
+     * Convert a string into an input stream.
+     * @param content The string
+     * @return The resulting input stream.
+     */
+    public static InputStream toInputStream( 
+            final String content, 
+            final String encoding ) 
+        throws
+            UnsupportedEncodingException {
+
+        try {                
+            final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(content.length()*2);
+            final OutputStreamWriter writer = new OutputStreamWriter(byteArrayOutputStream, encoding);
+            writer.write(content);
+            writer.flush();
+            
+            final byte[] byteArray = byteArrayOutputStream.toByteArray();
+            return new ByteArrayInputStream(byteArray);
+        }
+        catch( final UnsupportedEncodingException e ) {
+            throw e;
+        }
+        catch( final IOException e ) {
+            // Theoretically impossible since all the "IO" is in memory but it's a 
+            // checked exception so we have to catch it.
+            e.printStackTrace();
+            throw new IllegalStateException("Exception when converting a string to an input stream: "+e);
+        }
     }
 }
