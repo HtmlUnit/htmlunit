@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="add" dev="mguillem">
+                JavaScript: added dummy implementation of window.execScript doing nothing.
+            </action>        
             <action type="add" dev="mguillem" due-to="Daniel Gredler" id="1096133">
                 JavaScript: added attribute support.
             </action>

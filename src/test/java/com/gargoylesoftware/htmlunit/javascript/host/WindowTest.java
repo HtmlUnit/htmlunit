@@ -1437,4 +1437,19 @@ public class WindowTest extends WebTestCase {
         final List expectedAlerts = Arrays.asList( new String[]{"form1", "form2", "2", "4"} );
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+
+    /**
+     * Test that Window.execScript method gets correctly called and handled
+     * by the scripting engine even if it does nothing.
+     * @throws Exception if the test fails
+     */
+    public void testExecScript() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>"
+                 + "window.execScript('', 'VBScript');"
+                 + "</script></head><body>"
+                 + "</body></html>";
+        loadPage(content);
+    }
 }

@@ -692,4 +692,19 @@ public class Window extends SimpleScriptable {
         }
         return NOT_FOUND;
     }
+
+
+    /**
+     * Does nothing.
+     * @param expression the script code
+     * @param language the language in which the code is executed
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/execscript.asp">
+     * MSDN documentation</a>
+     * @return this method always returns <code>null</code> as Internet Explorer does
+     */
+    public Object jsFunction_execScript(final String expression, final String language) {
+        getLog().warn("Current implementation of Window.execScript() does nothing");
+        
+        return null;
+    }
 }
