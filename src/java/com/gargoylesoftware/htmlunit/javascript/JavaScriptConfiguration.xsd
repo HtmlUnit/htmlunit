@@ -6,13 +6,21 @@
 
 	<xsd:complexType name="configurationType">
 		<xsd:sequence>
+			<xsd:element name="doclink" type="doclinkType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="class" type="classType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
 
+	<xsd:complexType name="doclinkType">
+		<xsd:attribute name="url" type="xsd:string" use="required"/>
+		<xsd:attribute name="descr" type="xsd:string"/>
+	</xsd:complexType>
+
+
 	<xsd:complexType name="classType">
 		<xsd:sequence>
+			<xsd:element name="doclink" type="doclinkType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="javascript" type="requiredJavascriptType" minOccurs="0" maxOccurs="1"/>
 			<xsd:element name="property" type="propertyType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="function" type="functionType" minOccurs="0" maxOccurs="unbounded"/>
@@ -24,6 +32,7 @@
 
 	<xsd:complexType name="propertyType">
 		<xsd:sequence>
+			<xsd:element name="doclink" type="doclinkType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="browser" type="requiredBrowserType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="javascript" type="requiredJavascriptType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
@@ -36,6 +45,7 @@
 
 	<xsd:complexType name="functionType">
 		<xsd:sequence>
+			<xsd:element name="doclink" type="doclinkType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="browser" type="requiredBrowserType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="javascript" type="requiredJavascriptType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>

@@ -335,18 +335,61 @@
         <x:parse 
         	var="doc" 
         	xml="src/java/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml"/>
+
+
+		<x:set var="javascriptDocLinks" select="$doc/configuration/doclink"/>
+		<x:if select="$javascriptDocLinks">
+			<section name="Documentation links">
+				<ul>
+		    	    <x:forEach select="$javascriptDocLinks" var="javascriptDocLink">
+			    	    <x:set var="linkUrl" select="string(@url)"/>
+			    	    <x:set var="linkDescr" select="string(@descr)"/>
+		    	    	<li>
+							<j:choose>
+								<j:when test="${linkDescr!=''}">
+										<a href="${linkUrl}" target="_blank">${linkDescr}</a>
+								</j:when>
+								<j:otherwise>
+										<a href="${linkUrl}" target="_blank">${linkUrl}</a>
+								</j:otherwise>
+							</j:choose>
+		    	    	</li>
+		        	</x:forEach>
+		    	</ul>
+		    </section>
+		</x:if>
+
+
         <x:set var="javascriptClasses" select="$doc/configuration/class"/>
         <x:forEach select="$javascriptClasses" var="javascriptClass">
         	<x:set var="className" select="string(@name)"/>
 			<section name="${className}">
+				<a name="${className}"/>
+    			<ul>
+		    	    <x:forEach select="doclink">
+			    	    <x:set var="linkUrl" select="string(@url)"/>
+			    	    <x:set var="linkDescr" select="string(@descr)"/>
+			    	    <li>
+							<j:choose>
+								<j:when test="${linkDescr!=''}">
+										<a href="${linkUrl}" target="_blank">${linkDescr}</a>
+								</j:when>
+								<j:otherwise>
+										<a href="${linkUrl}" target="_blank">${linkUrl}</a>
+								</j:otherwise>
+							</j:choose>
+						</li>
+		        	</x:forEach>
+	        	</ul>
 			
 	            <table>
 		            <tr>
 		            	<th>Type</th>
 		            	<th>Name</th>
 		            	<th>Readable</th>
-		            	<th>Writable</th>
+		            	<th>Writeable</th>
 		            	<th>Constraints</th>
+		            	<th>Documentation links</th>
 		            </tr>
 			        <x:forEach select="property|function" var="property">
 			        <tr>
@@ -356,10 +399,10 @@
 			        	<td><x:expr select="@writable"/></td>
 			        	<td>
 			        		<x:forEach select="javascript">
-			        			Javascript <x:expr select="@min-version"/><br />
+			        				Javascript &#160; <x:expr select="@min-version"/><br />
 			        		</x:forEach>
 			        		<x:forEach select="browser">
-			        			<x:expr select="@name"/>
+			        			<x:expr select="@name"/>&#160;
 			        			<x:set var="minVersion" select="string(@min-version)"/>
 			        			<x:set var="lessThanVersion" select="string(@less-than-version)"/>
 			        			<x:set var="maxVersion" select="string(@max-version)"/>
@@ -381,8 +424,25 @@
 										earlier than ${lessThanVersion}
 									</j:when>
 								</j:choose>
-				        		<br />
+								<br />
 			        		</x:forEach>
+			        	</td>
+			        	<td>
+			        		<x:if select="doclink">
+					    	    <x:forEach select="doclink">
+						    	    <x:set var="linkUrl" select="string(@url)"/>
+						    	    <x:set var="linkDescr" select="string(@descr)"/>
+									<j:choose>
+										<j:when test="${linkDescr!=''}">
+												<a href="${linkUrl}" target="_blank">${linkDescr}</a>
+										</j:when>
+										<j:otherwise>
+												<a href="${linkUrl}" target="_blank">${linkUrl}</a>
+										</j:otherwise>
+									</j:choose>
+					        	</x:forEach>
+					        	<br />
+							</x:if>
 			        	</td>
 			        </tr>
 			        </x:forEach>
