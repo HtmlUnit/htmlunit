@@ -81,4 +81,9 @@ public class JellyTest extends WebTestCase {
         }
         return answer;
     }
+    /**
+     * Empty test method to stop warnings
+     */    
+    public void testNothing() {
+    }
 }
