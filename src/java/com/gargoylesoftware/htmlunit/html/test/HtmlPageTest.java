@@ -32,6 +32,8 @@ import java.util.List;
 import junit.framework.AssertionFailedError;
 
 /**
+ * Tests for HtmlPage.
+ *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
@@ -785,7 +787,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final FakeWebConnection webConnection = new FakeWebConnection( client );
         webConnection.setResponse(
-            new URL("http://justSJIS"), content, 
+            new URL("http://justSJIS"), content,
             200, "OK", "text/html", Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );

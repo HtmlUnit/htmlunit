@@ -47,10 +47,11 @@ public class WebClientTest extends WebTestCase {
 
 
     /**
-     * @exception  Exception
+     * Test the situation where credentials are required but they haven't been specified.
+     *
+     * @throws Exception If something goes wrong.
      */
-    public void testCredentialProvider_NoCredentials()
-        throws Exception {
+    public void testCredentialProvider_NoCredentials() throws Exception {
 
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
@@ -75,6 +76,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     * Test that {@link WebClient#assertionFailed(String)} actually throws an exception.
+     * @throws Exception If something goes wrong.
+     */
     public void testAssertionFailed() {
         final WebClient client = new WebClient();
 
@@ -88,6 +93,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     * Test that the "changed" window event gets fired at the appropriate time.
+     * @throws Exception If something goes wrong.
+     */
     public void testHtmlWindowEvents_changed() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
@@ -136,6 +145,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     * Test that the "opened" window event gets fired at the appropriate time.
+     * @throws Exception If something goes wrong.
+     */
     public void testHtmlWindowEvents_opened() throws Exception {
         final String page1Content
                  = "<html><head><title>foo</title>"
@@ -176,6 +189,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     * Test a 301 redirection code where the original request was a GET.
+     * @throws Exception If something goes wrong.
+     */
     public void testRedirection301_MovedPermanently_GetMethod() throws Exception {
         final int statusCode = 301;
         final SubmitMethod initialRequestMethod = SubmitMethod.GET;
@@ -190,6 +207,7 @@ public class WebClientTest extends WebTestCase {
      * to a request other than GET or HEAD, the user agent MUST NOT automatically
      * redirect the request unless it can be confirmed by the user, since this
      * might change the conditions under which the request was issued.
+     * @throws Exception If something goes wrong.
      */
     public void testRedirection301_MovedPermanently_PostMethod() throws Exception {
         final int statusCode = 301;
@@ -208,6 +226,7 @@ public class WebClientTest extends WebTestCase {
      * of the original request method. The status codes 303 and 307 have
      * been added for servers that wish to make unambiguously clear which
      * kind of reaction is expected of the client.
+     * @throws Exception If something goes wrong.
      */
     public void testRedirection302_MovedTemporarily_PostMethod() throws Exception {
         final int statusCode = 302;
@@ -218,6 +237,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     * Test a 302 redirection code.
+     * @throws Exception If something goes wrong.
+     */
     public void testRedirection302_MovedTemporarily_GetMethod() throws Exception {
         final int statusCode = 302;
         final SubmitMethod initialRequestMethod = SubmitMethod.GET;
@@ -227,7 +250,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
-    // Should be same as 302
+    /**
+     * Tests a 303 redirection code.  This should be the same as a 302.
+     * @throws Exception If something goes wrong.
+     */
     public void testRedirection303_SeeOther_GetMethod() throws Exception {
         final int statusCode = 303;
         final SubmitMethod initialRequestMethod = SubmitMethod.GET;
@@ -237,7 +263,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
-    // Should be same as 302
+    /**
+     * Tests a 303 redirection code - this should be the same as a 302.
+     * @throws Exception If something goes wrong.
+     */
     public void testRedirection303_SeeOther_PostMethod() throws Exception {
         final int statusCode = 303;
         final SubmitMethod initialRequestMethod = SubmitMethod.POST;
@@ -247,6 +276,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     * Tests a 307 redirection code.
+     * @throws Exception If something goes wrong.
+     */
     public void testRedirection307_TemporaryRedirect_GetMethod() throws Exception {
         final int statusCode = 307;
         final SubmitMethod initialRequestMethod = SubmitMethod.GET;
@@ -256,6 +289,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     * Tests a 307 redirection code.
+     * @throws Exception If something goes wrong.
+     */
     public void testRedirection307_TemporaryRedirect_PostMethod() throws Exception {
         final int statusCode = 307;
         final SubmitMethod initialRequestMethod = SubmitMethod.POST;
@@ -266,10 +303,12 @@ public class WebClientTest extends WebTestCase {
 
 
     /**
+     * Basic logic for all the redirection tests.
      *
      * @param statusCode The code to return from the initial request
-     * @param The submit method of the second (redirected) request.  If a redirect
-     * is not expected to happen then this must be null
+     * @param initialRequestMethod The initial request.
+     * @param expectedRedirectedRequestMethod The submit method of the second (redirected) request.
+     * If a redirect is not expected to happen then this must be null
      */
     private void doTestRedirection(
             final int statusCode,
@@ -331,6 +370,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     * Test passing in a null page creator.
+     * @throws Exception If something goes wrong.
+     */
     public void testSetPageCreator_null() {
         final WebClient webClient = new WebClient();
         try {
@@ -343,6 +386,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     *
+     * @throws Exception If something goes wrong.
+     */
     public void testSetPageCreator() throws Exception {
         final String page1Content
                  = "<html><head><title>foo</title>"
@@ -387,6 +434,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     *
+     * @throws Exception If something goes wrong.
+     */
     public void testLoadPage_PostWithParameters() throws Exception {
 
         final String htmlContent
@@ -407,6 +458,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     *
+     * @throws Exception If something goes wrong.
+     */
     public void testRedirectViaJavaScriptDuringInitialPageLoad() throws Exception {
         final String firstContent = "<html><head><title>First</title><script>"
             + "location.href='http://second'"
@@ -431,6 +486,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     *
+     * @throws Exception If something goes wrong.
+     */
     public void testKeyboard_NoTabbableElements() throws Exception {
         final WebClient webClient = new WebClient();
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[0]);
@@ -447,6 +506,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     *
+     * @throws Exception If something goes wrong.
+     */
     public void testKeyboard_OneTabbableElement() throws Exception {
         final WebClient webClient = new WebClient();
         final List collectedAlerts = new ArrayList();
@@ -474,6 +537,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     *
+     * @throws Exception If something goes wrong.
+     */
     public void testAccessKeys() throws Exception {
         final WebClient webClient = new WebClient();
         final List collectedAlerts = new ArrayList();
@@ -492,6 +559,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     *
+     * @throws Exception If something goes wrong.
+     */
     public void testTabNext() throws Exception {
         final WebClient webClient = new WebClient();
         final List collectedAlerts = new ArrayList();
@@ -510,6 +581,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     *
+     * @throws Exception If something goes wrong.
+     */
     public void testTabPrevious() throws Exception {
         final WebClient webClient = new WebClient();
         final List collectedAlerts = new ArrayList();
@@ -528,6 +603,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     *
+     * @throws Exception If something goes wrong.
+     */
     public void testMoveFocusToElement_NotTabbableElement() throws Exception {
         final WebClient webClient = new WebClient();
         final List collectedAlerts = new ArrayList();
@@ -544,6 +623,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     *
+     * @throws Exception If something goes wrong.
+     */
     public void testPressAccessKey_Button() throws Exception {
         final WebClient webClient = new WebClient();
         final List collectedAlerts = new ArrayList();
@@ -562,6 +645,10 @@ public class WebClientTest extends WebTestCase {
     }
 
 
+    /**
+     *
+     * @throws Exception If something goes wrong.
+     */
     private HtmlPage getPageForKeyboardTest(
         final WebClient webClient, final String[] tabIndexValues ) throws Exception {
 
@@ -588,7 +675,8 @@ public class WebClientTest extends WebTestCase {
         buffer.append("<div id='div1'>foo</div>"); // something that isn't tabbable
 
         // Elements that are tabbable but are disabled
-        buffer.append("<button name='button1' id='button1' disabled onclick='alert(\"buttonPushed\")' accesskey='1'>foo</button>");
+        buffer.append("<button name='button1' id='button1' disabled onclick='alert(\"buttonPushed\")' ");
+        buffer.append("accesskey='1'>foo</button>");
 
         buffer.append("</form></body></html>");
 

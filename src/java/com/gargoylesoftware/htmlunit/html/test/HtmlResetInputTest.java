@@ -24,7 +24,7 @@ import java.net.URL;
 import java.util.Collections;
 
 /**
- *  Tests for HtmlSubmitInput
+ *  Tests for HtmlResetInput
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

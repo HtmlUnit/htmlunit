@@ -26,6 +26,8 @@ import java.util.List;
 
 
 /**
+ * Tests for the Javascript engine
+ *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
@@ -150,29 +152,14 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testExternalScriptEncoding() throws Exception {
         final WebClient client = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( client );
-        /* 
-	 * this page has meta element , and script tag has no charset attribute
-	 */
+        /*
+     * this page has meta element , and script tag has no charset attribute
+     */
         final String htmlContent
              = "<html><head>"
              + "<meta http-equiv='content-type' content='text/html; charset=Shift_JIS'>"
              + "<title>foo</title>"
-	     + "<script src='/foo.js' id='script1'/>"
-             + "</head><body>"
-             + "<p>hello world</p>"
-             + "<form name='form1'>"
-             + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-             + "    <input type='text' name='textfield2' id='textfield2'/>"
-             + "</form>"
-             + "</body></html>";
-        
-        /* 
-	 * this page has no meta element , and script tag has charset attribute
-	 */
-        final String htmlContent2
-             = "<html><head>"
-             + "<title>foo</title>"
-	     + "<script src='/foo2.js' charset='Shift_JIS' id='script2'/>"
+         + "<script src='/foo.js' id='script1'/>"
              + "</head><body>"
              + "<p>hello world</p>"
              + "<form name='form1'>"
@@ -181,65 +168,80 @@ public class JavaScriptEngineTest extends WebTestCase {
              + "</form>"
              + "</body></html>";
 
-        /* 
+        /*
+     * this page has no meta element , and script tag has charset attribute
+     */
+        final String htmlContent2
+             = "<html><head>"
+             + "<title>foo</title>"
+         + "<script src='/foo2.js' charset='Shift_JIS' id='script2'/>"
+             + "</head><body>"
+             + "<p>hello world</p>"
+             + "<form name='form1'>"
+             + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+             + "    <input type='text' name='textfield2' id='textfield2'/>"
+             + "</form>"
+             + "</body></html>";
+
+        /*
          * the corresponding SJIS char of '\u8868' has '\' in second byte.
-         * if encoding is misspecificated, 
+         * if encoding is misspecificated,
          * this cause 'unterminated string reteral error'
          */
-        final String jsContent = "alert('\u8868');"; 
+        final String jsContent = "alert('\u8868');";
 
         webConnection.setResponse(
             new URL("http://www.gargoylesoftware.com"),
             htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        
+
         webConnection.setResponse(
             new URL("http://www.gargoylesoftware.com/hidden"),
             htmlContent2, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         webConnection.setResponse(
             new URL("http://www.gargoylesoftware.com/foo.js"),
-	    // make SJIS bytes as responsebody
-            new String(jsContent.getBytes("SJIS"),"8859_1"), 
-	    200, "OK", "text/javascript", Collections.EMPTY_LIST );
+        // make SJIS bytes as responsebody
+            new String(jsContent.getBytes("SJIS"),"8859_1"),
+        200, "OK", "text/javascript", Collections.EMPTY_LIST );
 
-	/*
-	 * foo2.js is same with foo.js
-	 */
+    /*
+     * foo2.js is same with foo.js
+     */
         webConnection.setResponse(
             new URL("http://www.gargoylesoftware.com/foo2.js"),
-	    // make SJIS bytes as responsebody
-            new String(jsContent.getBytes("SJIS"),"8859_1"), 
-	    200, "OK", "text/javascript", Collections.EMPTY_LIST );
+        // make SJIS bytes as responsebody
+            new String(jsContent.getBytes("SJIS"),"8859_1"),
+        200, "OK", "text/javascript", Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
 
         final List expectedAlerts = Collections.singletonList("\u8868");
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-	
-	/*
-	 * detect encoding from meta tag
-	 */
+
+    /*
+     * detect encoding from meta tag
+     */
         final HtmlPage page = ( HtmlPage )client.getPage(
-		     new URL( "http://www.gargoylesoftware.com" ),
-		     SubmitMethod.POST, Collections.EMPTY_LIST );
+             new URL( "http://www.gargoylesoftware.com" ),
+             SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlScript htmlScript =
                      (HtmlScript)page.getHtmlElementById("script1");
 
-	assertNotNull(htmlScript);
+    assertNotNull(htmlScript);
         assertEquals( expectedAlerts, collectedAlerts );
 
-	/*
-	 * detect encoding from charset attribute of script tag
-	 */
-	collectedAlerts.clear();
+    /*
+     * detect encoding from charset attribute of script tag
+     */
+    collectedAlerts.clear();
         final HtmlPage page2 = ( HtmlPage )client.getPage(
-		     new URL( "http://www.gargoylesoftware.com/hidden" ),
-		     SubmitMethod.POST, Collections.EMPTY_LIST );
+             new URL( "http://www.gargoylesoftware.com/hidden" ),
+             SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlScript htmlScript2 =
                      (HtmlScript)page2.getHtmlElementById("script2");
 
-	assertNotNull(htmlScript2);
+    assertNotNull(htmlScript2);
         assertEquals( expectedAlerts, collectedAlerts );
     }
 

@@ -14,6 +14,8 @@ import java.util.List;
 
 
 /**
+ * Tests for Select.
+ *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */

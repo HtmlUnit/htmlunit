@@ -24,6 +24,8 @@ import java.util.HashSet;
 import java.util.TreeSet;
 
 /**
+ * Tests for SimpleScriptable.
+ *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */

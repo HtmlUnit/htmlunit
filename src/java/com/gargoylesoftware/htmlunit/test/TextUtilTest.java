@@ -8,12 +8,25 @@ package com.gargoylesoftware.htmlunit.test;
 
 import com.gargoylesoftware.htmlunit.TextUtil;
 
+/**
+ *  Tests for TextUtil.
+ *
+ * @version  $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ */
 public final class TextUtilTest extends WebTestCase {
-    public TextUtilTest( final String args ) {
-        super(args);
+    /**
+     * Create an instance.
+     * @param name The name of the test.
+     */
+    public TextUtilTest( final String name ) {
+        super(name);
     }
 
 
+    /**
+     * Test startsWithIgnoreCase() with null values.
+     */
     public void testStartsWithIgnoreCase_nulls() {
         try {
             TextUtil.startsWithIgnoreCase(null, "foo");
@@ -33,6 +46,9 @@ public final class TextUtilTest extends WebTestCase {
     }
 
 
+    /**
+     * Test startsWithIgnoreCase() with an empty prefix
+     */
     public void testStartsWithIgnoreCase_emptyPrefix() {
         try {
             TextUtil.startsWithIgnoreCase("foo", "");
@@ -44,6 +60,9 @@ public final class TextUtilTest extends WebTestCase {
     }
 
 
+    /**
+     * Test a variety of cases that should return true.
+     */
     public void testStartsWithIgnoreCase_ShouldReturnTrue() {
         final String[][] data = {
             {"foo","foo"},
@@ -63,6 +82,9 @@ public final class TextUtilTest extends WebTestCase {
     }
 
 
+    /**
+     * Test a variety of cases that should return false.
+     */
     public void testStartsWithIgnoreCase_ShouldReturnFalse() {
         final String[][] data = {
             {"","foo"},

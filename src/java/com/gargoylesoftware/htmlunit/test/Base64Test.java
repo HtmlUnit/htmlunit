@@ -9,6 +9,8 @@ package com.gargoylesoftware.htmlunit.test;
 import com.gargoylesoftware.htmlunit.Base64;
 
 /**
+ * Tests for Base64
+ *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */

@@ -18,6 +18,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Tests for Style.
+ *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
