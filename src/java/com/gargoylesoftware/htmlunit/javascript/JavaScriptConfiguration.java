@@ -202,7 +202,7 @@ public final class JavaScriptConfiguration {
 
 
     private InputStream getConfigurationFileAsStream() {
-        final String fileName = "com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml";
+        final String fileName = "/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml";
         return getResourceAsStream(fileName);
 
     }
