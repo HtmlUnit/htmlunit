@@ -228,10 +228,16 @@ public class HTMLElement extends NodeImpl {
     /**
      * Gets the specified property.
      * @param attributeName attribute name.
-     * @return The value of the specified attribute
+     * @return The value of the specified attribute, <code>null</code> if the attribute is not defined
      */
     public String jsFunction_getAttribute(final String attributeName) {
-        return getHtmlElementOrDie().getAttributeValue(attributeName);
+        final String value = getHtmlElementOrDie().getAttributeValue(attributeName);
+        if (value == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+            return null;
+        }
+        else {
+            return value;
+        }
     }
 
     /**
