@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" due-to="Dierk Koenig" id="1068672">
+                Added support for window.resizeTo.
+            </action>
             <action type="update" dev="mguillem" id="1068667">
                 Fixed wrong values of window.opener: now null (instead of undefined) when no opener 
                 and null when a link opens in "_top".

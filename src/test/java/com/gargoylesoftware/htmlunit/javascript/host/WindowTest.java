@@ -37,13 +37,21 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowEvent;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
@@ -52,13 +60,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Tests for Window
@@ -69,6 +70,7 @@ import java.util.List;
  * @author  David K. Taylor
  * @author  Darrell DeBoer
  * @author  Marc Guillemot
+ * @author  Dierk Koenig
  */
 public class WindowTest extends WebTestCase {
     /**
@@ -1249,4 +1251,19 @@ public class WindowTest extends WebTestCase {
                  + "</body></html>";
         loadPage(content);
     }
+
+    /**
+     * Tests that the Window.resizeTo method gets correctly called and
+     * handled by the scripting engine.
+     * @throws Exception if the test fails
+     */
+    public void testResizeTo() throws Exception {
+        String content = "<html><head><title>foo</title><script>\n"
+                 + "window.resizeTo(10, 20);\n"
+                 + "window.resizeTo(-10, 20);\n"
+                 + "</script></head><body></body></html>";
+        loadPage(content);
+        loadPage(content);
+    }
+
 }
