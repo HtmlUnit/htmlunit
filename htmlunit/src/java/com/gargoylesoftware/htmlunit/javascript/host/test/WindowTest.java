@@ -398,4 +398,39 @@ public class WindowTest extends WebTestCase {
         final List expectedAlerts = Arrays.asList( new String[]{ "one", "two", "three" } );
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+
+    public void testSetTimeout() throws Exception {
+        if(true) {
+            notImplemented();
+            return;
+        }
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent
+            = "<html><body><script language='JavaScript'>window.setTimeout('alert(\"Yo!\")',0);"
+            + "</script></body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
+                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+
+        final int waitTime = 50;
+        final int maxTime = 1000;
+        for( int time = 0; time < maxTime; time+=waitTime ) {
+            if( collectedAlerts.isEmpty() == false ) {
+                assertEquals( Collections.singletonList("Yo!"), collectedAlerts );
+                return;
+            }
+            Thread.sleep(waitTime);
+        }
+        fail("No alerts written within "+maxTime+"ms");
+    }
 }

@@ -175,6 +175,43 @@ public final class Window extends SimpleScriptable {
 
 
     /**
+     * Set a chunk of javascript to be invoked at some specified time later.
+     *
+     * @param context The javascript Context
+     * @param scriptable The object that the function was called on.
+     * @param args The arguments passed to the function.
+     * @param function The function object that was invoked.
+     * @return The newly opened window
+     */
+    public static Object jsFunction_setTimeout(
+        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
+        ((Window)scriptable).getLog().debug( "Window.setTimeout() not implemented" );
+        return NOT_FOUND;
+/* commented out for now as this doesn't work - come back to it later
+        final String script = getStringArg(0, args, null);
+        final int timeout = getIntArg(1, args, 0);
+
+        final Runnable runnable = new Runnable() {
+            public void run() {
+                final Window window = (Window)scriptable;
+                try {
+                    Thread.sleep(timeout);
+
+                    final HtmlPage htmlPage = window.document_.getHtmlPage();
+                    htmlPage.executeJavaScriptIfPossible(script, "Window.setTimeout()", true, null);
+                }
+                catch( final Exception e ) {
+                    window.getLog().error("Caught exception in Window.setTimeout()", e);
+                }
+            }
+        };
+        new Thread(runnable).start();
+        return null;
+*/
+    }
+
+
+    /**
      * Return the javascript property "navigator"
      * @return The document
      */
