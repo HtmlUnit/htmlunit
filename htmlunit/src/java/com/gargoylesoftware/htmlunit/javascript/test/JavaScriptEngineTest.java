@@ -232,4 +232,29 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals( "frame1", page1.getTitleText() );
         assertEquals( "frame2", page2.getTitleText() );
     }
+
+
+    public void testJavaScriptWrappedInHtmlComments() throws Exception {
+
+        final WebClient client = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+
+        final String htmlContent
+             = "<html><head><script language='javascript'><!--\n"
+             + "function doTest() {\n"
+             + "    alert('one')\n"
+             + "}\n"
+             + "-->\n</script></head>\n"
+             + "<body onload='doTest()'></body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first/index.html"),
+            htmlContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                new URL( "http://first/index.html" ),
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+
+    }
 }
