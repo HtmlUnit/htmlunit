@@ -39,12 +39,10 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -69,27 +67,13 @@ public class HtmlFrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSrcOfBlankAndEmpty() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection =
-            new MockWebConnection(webClient);
-        final List collectedAlerts = new ArrayList();
-
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
         final String firstContent
             = "<html><head><title>first</title></head>"
             + "<frameset cols='20%,80%'>"
             + "    <frame src='' id='frame1'>"
             + "    <frame src='about:blank'  id='frame2'>"
             + "</frameset></html>";
-        webConnection.setResponse( URL_FIRST, firstContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST);
-
-        webClient.setWebConnection(webConnection);
-
-        final HtmlPage page = (HtmlPage)webClient.getPage(
-            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
-        assertEquals( "first", page.getTitleText() );
+        final HtmlPage page = loadPage(firstContent);
 
         final HtmlFrame frame1 = (HtmlFrame)page.getHtmlElementById("frame1");
         assertEquals( "frame1", "", ((HtmlPage)frame1.getEnclosedPage()).getTitleText() );
@@ -136,13 +120,6 @@ public class HtmlFrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDocumentWrite() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection =
-            new MockWebConnection(webClient);
-        final List collectedAlerts = new ArrayList();
-
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
         final String firstContent
             = "<html><head><title>first</title></head>"
             + "<frameset cols='20%,80%'>"
@@ -151,13 +128,8 @@ public class HtmlFrameTest extends WebTestCase {
             + "'<html><head><title>generated</title></head><body>generated</body></html>');"
             + "frame1.document.close()\"  id='frame2'>"
             + "</frameset></html>";
-        webConnection.setResponse( URL_FIRST, firstContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST);
-
-        webClient.setWebConnection(webConnection);
-
-        final HtmlPage page = (HtmlPage)webClient.getPage(
-            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
+        final HtmlPage page = loadPage(firstContent);
+        
         assertEquals( "first", page.getTitleText() );
 
         final HtmlFrame frame1 = (HtmlFrame)page.getHtmlElementById("frame1");

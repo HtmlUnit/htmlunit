@@ -45,7 +45,6 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -487,7 +486,7 @@ public class FormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFindInputWithoutTypeDefined() throws Exception {
-        final String content
+        final String htmlContent
                  = "<html><head><title>foo</title></head>"
                  + "<body onload='alert(document.simple_form.login.value);'>"
                  + "<p>hello world</p><table><tr><td>"
@@ -497,18 +496,10 @@ public class FormTest extends WebTestCase {
                  + "    <input name='login' size='17' value='foo'>"
                  + "</form></td></tr></table>"
                  + "</body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+
         assertEquals("foo", page.getTitleText());
         final List expectedAlerts = Arrays.asList( new String[]{
             "foo"

@@ -39,13 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -75,19 +70,8 @@ public class HtmlButtonInputTest extends WebTestCase {
                  + "    <input type='button' name='button' id='button' "
                  + "onClick='alert(\"foo\")'>Push me</button>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
-        client.setAlertHandler(alertHandler);
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButtonInput button = ( HtmlButtonInput )page.getHtmlElementById( "button" );
 
         final HtmlPage secondPage = (HtmlPage)button.click();

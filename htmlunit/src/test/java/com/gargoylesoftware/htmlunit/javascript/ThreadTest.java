@@ -37,15 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.ArrayList;
+
+import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 
 
@@ -127,9 +124,6 @@ public class ThreadTest extends WebTestCase {
          * @see SimpleScriptableTest#testCallInheritedFunction()
          */
         public void testCallInheritedFunction() throws Exception {
-
-            final WebClient client = new WebClient();
-            final MockWebConnection webConnection = new MockWebConnection(client);
             final String content
                     = "<html><head><title>foo</title><script>"
                       + "function doTest() {\n"
@@ -143,19 +137,14 @@ public class ThreadTest extends WebTestCase {
                       + "</form>"
                       + "</body></html>";
 
-            webConnection.setDefaultResponse(content);
-            client.setWebConnection(webConnection);
-
-            final List expectedAlerts = Collections.singletonList("past focus");
             final List collectedAlerts = new ArrayList();
-            client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-            final HtmlPage page = (HtmlPage) client.getPage(
-                    URL_GARGOYLE, SubmitMethod.POST, Collections.EMPTY_LIST);
+            final HtmlPage page = loadPage(content, collectedAlerts);
+            
             assertEquals("foo", page.getTitleText());
             assertEquals("focus not changed to textfield1",
                          page.getFormByName("form1").getInputByName("textfield1"),
                          page.getWebClient().getElementWithFocus());
+            final List expectedAlerts = Collections.singletonList("past focus");
             assertEquals(expectedAlerts, collectedAlerts);
         }
     }

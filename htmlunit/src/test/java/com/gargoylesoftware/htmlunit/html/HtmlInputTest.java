@@ -37,16 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  *  Tests for HtmlInput
@@ -70,8 +68,7 @@ public final class HtmlInputTest extends WebTestCase {
      *
      * @exception  Exception If the test fails
      */
-    public void testRadioButtonsAreMutuallyExclusive()
-        throws Exception {
+    public void testRadioButtonsAreMutuallyExclusive() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
                  + "<form id='form1'>"
@@ -80,15 +77,9 @@ public final class HtmlInputTest extends WebTestCase {
                  + "<input type='radio' name='foo' value='3'/>"
                  + "<input type='submit' name='button' value='foo'/>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlRadioButtonInput radioButton = form.getRadioButtonInput( "foo", "2" );
@@ -103,8 +94,7 @@ public final class HtmlInputTest extends WebTestCase {
         expectedParameters.add( new KeyValuePair( "foo", "2" ) );
         expectedParameters.add( new KeyValuePair( "button", "foo" ) );
 
-        assertEquals( "url", new URL( "http://www.gargoylesoftware.com/" ),
-            secondPage.getWebResponse().getUrl() );
+        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
         assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
         assertNotNull( secondPage );
@@ -114,9 +104,7 @@ public final class HtmlInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testSetChecked_CheckBox()
-        throws Exception {
-
+    public void testSetChecked_CheckBox() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
                  + "<form id='form1'>"
@@ -124,15 +112,8 @@ public final class HtmlInputTest extends WebTestCase {
                  + "<input type='checkbox' name='bar'/>"
                  + "<input type='submit' name='button' value='foo'/>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
+        final HtmlPage page = loadPage(htmlContent);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlCheckBoxInput checkbox = ( HtmlCheckBoxInput )form.getInputByName( "foo" );
@@ -147,9 +128,7 @@ public final class HtmlInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testGetChecked_RadioButton()
-        throws Exception {
-
+    public void testGetChecked_RadioButton() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
                  + "<form id='form1'>"
@@ -157,15 +136,8 @@ public final class HtmlInputTest extends WebTestCase {
                  + "<input type='RADIO' name='radio1' value='bar' checked>"
                  + "<input type='submit' name='button' value='foo'>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
+        final HtmlPage page = loadPage(htmlContent);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final List radioButtons = form.getRadioButtonsByName("radio1");
@@ -186,18 +158,9 @@ public final class HtmlInputTest extends WebTestCase {
                  + "<form id='form1'>"
                  + "<input type='text' name='text1' onchange='alert(\"changed\")')>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
         final HtmlTextInput input = (HtmlTextInput)form.getInputByName("text1");
 
@@ -206,26 +169,17 @@ public final class HtmlInputTest extends WebTestCase {
         assertEquals( Collections.singletonList("changed"), collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
     public void testCheckboxDefaultValue() throws Exception {
-
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
                  + "<form id='form1'>"
                  + "<input type='checkbox' name='checkbox1')>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
+        final HtmlPage page = loadPage(htmlContent);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
         final HtmlCheckBoxInput input = (HtmlCheckBoxInput)form.getInputByName("checkbox1");
         assertEquals( "on", input.getValueAttribute() );
@@ -245,15 +199,8 @@ public final class HtmlInputTest extends WebTestCase {
             + "<input type='radio' name='foo' value='3'/>"
             + "<input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
-        final WebClient client = new WebClient();
+        final HtmlPage page = loadPage(htmlContent);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlRadioButtonInput radioButton = form.getRadioButtonInput( "foo", "2" );

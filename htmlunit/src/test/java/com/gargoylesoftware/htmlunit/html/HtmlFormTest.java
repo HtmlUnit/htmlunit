@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -86,15 +85,9 @@ public class HtmlFormTest extends WebTestCase {
                  + "<input type='radio' name='foo' value='3'/>"
                  + "<input type='submit' name='button' value='foo'/>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-            URL_GARGOYLE,
-            SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
+        
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput pushButton = ( HtmlSubmitInput )form.getInputByName( "button" );
@@ -111,8 +104,7 @@ public class HtmlFormTest extends WebTestCase {
         expectedParameters.add( new KeyValuePair( "foo", "2" ) );
         expectedParameters.add( new KeyValuePair( "button", "foo" ) );
 
-        assertEquals( "url", new URL( "http://www.gargoylesoftware.com/" ),
-            secondPage.getWebResponse().getUrl() );
+        assertEquals( "url", URL_GARGOYLE, secondPage.getWebResponse().getUrl() );
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
         assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
         assertNotNull( secondPage );
@@ -134,15 +126,8 @@ public class HtmlFormTest extends WebTestCase {
                  + "<input type='radio' name='foo' value='3'/>"
                  + "<input type='submit' name='button' value='foo'/>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
+        final HtmlPage page = loadPage(htmlContent);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-            URL_GARGOYLE,
-            SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlInput pushButton = form.getInputByName( "button" );
@@ -173,15 +158,9 @@ public class HtmlFormTest extends WebTestCase {
                  + "<input type='radio' name='foo' value='3'/>"
                  + "<input type='submit' name='button' value='foo'/>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
+        
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput pushButton = ( HtmlSubmitInput )form.getInputByName( "button" );
@@ -195,7 +174,7 @@ public class HtmlFormTest extends WebTestCase {
         expectedParameters.add( new KeyValuePair( "button", "foo" ) );
         expectedParameters.add( new KeyValuePair( "foo", "4" ) );
 
-        assertEquals( "url", new URL( "http://www.gargoylesoftware.com/" ),
+        assertEquals( "url", URL_GARGOYLE,
             secondPage.getWebResponse().getUrl() );
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
         assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
@@ -213,15 +192,8 @@ public class HtmlFormTest extends WebTestCase {
                  + "<form id='form1'>"
                  + "<input type='submit' name='button' value='foo'/>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         // Regression test: this used to blow up
@@ -240,15 +212,9 @@ public class HtmlFormTest extends WebTestCase {
                  + "    <input type='text' name='textfield' value='*'/>"
                  + "    <input type='submit' name='button' value='foo'/>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
+        
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
@@ -288,8 +254,7 @@ public class HtmlFormTest extends WebTestCase {
 
         client.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -326,8 +291,7 @@ public class HtmlFormTest extends WebTestCase {
 
         client.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -364,8 +328,7 @@ public class HtmlFormTest extends WebTestCase {
 
         client.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -401,8 +364,7 @@ public class HtmlFormTest extends WebTestCase {
 
         client.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -436,8 +398,7 @@ public class HtmlFormTest extends WebTestCase {
 
         client.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -451,7 +412,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSubmitRadioButton() throws Exception {
-        final String firstContent
+        final String htmlContent
                  = "<html><body><form method='POST' action='http://first'>"
                  + "<table><tr> <td ><input type='radio' name='name1' value='foo'> "
                  + "Option 1</td> </tr>"
@@ -461,16 +422,8 @@ public class HtmlFormTest extends WebTestCase {
                  + "</table><input type='submit' value='Login' name='loginButton1'></form>"
                  + "</body></html>";
 
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        
         final HtmlSubmitInput loginButton
             = (HtmlSubmitInput)page.getDocumentElement().getOneHtmlElementByAttribute("input","value","Login");
         loginButton.click();
@@ -503,8 +456,7 @@ public class HtmlFormTest extends WebTestCase {
 
         client.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlResetInput button = (HtmlResetInput)firstPage.getHtmlElementById("button");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -549,8 +501,7 @@ public class HtmlFormTest extends WebTestCase {
 
         client.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("link1");
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -572,15 +523,9 @@ public class HtmlFormTest extends WebTestCase {
                  + "    <input type='text' name='textfield'/>"
                  + "    <input type='submit' name='button' value='foo'/>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
+        
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
@@ -607,15 +552,8 @@ public class HtmlFormTest extends WebTestCase {
                  + "    <input type='submit' name='button' value='foo'/>"
                  + "    </noscript>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         // Was failing at this point
@@ -644,9 +582,7 @@ public class HtmlFormTest extends WebTestCase {
             URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlForm form = ( HtmlForm )firstPage.getHtmlElementById( "form1" );
 
         final HtmlPage secondPage = (HtmlPage) form.submit("foo");
@@ -664,15 +600,9 @@ public class HtmlFormTest extends WebTestCase {
                 + "    <input type='text' id='textfield' value='blah'/>"
                 + "    <input type='submit' name='button' value='foo'/>"
                 + "</form></body></html>";
-       final WebClient client = new WebClient();
-
-       final MockWebConnection webConnection = new MockWebConnection( client );
-       webConnection.setDefaultResponse( htmlContent );
-       client.setWebConnection( webConnection );
-
-       final HtmlPage page = ( HtmlPage )client.getPage(
-               URL_FIRST,
-               SubmitMethod.POST, Collections.EMPTY_LIST );
+       final HtmlPage page = loadPage(htmlContent);
+       final MockWebConnection webConnection = getMockConnection(page);
+       
        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
        final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
@@ -696,15 +626,8 @@ public class HtmlFormTest extends WebTestCase {
            + "    <input type='text' id='textfield' value='blah' name='textfield' />"
            + "    <button type='submit' id='button' value='Go'>Go</button>"
            + "</form></body></html>";
-       final WebClient client = new WebClient();
-
-       final MockWebConnection webConnection = new MockWebConnection( client );
-       webConnection.setDefaultResponse( htmlContent );
-       client.setWebConnection( webConnection );
-
-       final HtmlPage page = ( HtmlPage )client.getPage(
-               URL_FIRST,
-               SubmitMethod.POST, Collections.EMPTY_LIST );
+       final HtmlPage page = loadPage(htmlContent);
+       final MockWebConnection webConnection = getMockConnection(page);
        
        final HtmlButton button = (HtmlButton) page.getHtmlElementById( "button" );
        button.click();
@@ -731,15 +654,9 @@ public class HtmlFormTest extends WebTestCase {
                  + "        </td></tr>"
                  + "     </table>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
+        
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
@@ -765,15 +682,9 @@ public class HtmlFormTest extends WebTestCase {
             + "    <input type='text' name='textfield' value='blah' disabled />"
             + "    <input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-            URL_FIRST,
-            SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
+        
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
@@ -808,15 +719,9 @@ public class HtmlFormTest extends WebTestCase {
              + "<input type=checkbox name=Format value='' onclick='setFormat()'>"
              + "    <input type='submit' name='button' value='foo'/>"
              + "</form></body></html>";
-         final WebClient client = new WebClient();
-
-         final MockWebConnection webConnection = new MockWebConnection( client );
-         webConnection.setDefaultResponse( htmlContent );
-         client.setWebConnection( webConnection );
-
-         final HtmlPage page = ( HtmlPage )client.getPage(
-             URL_FIRST,
-             SubmitMethod.POST, Collections.EMPTY_LIST );
+         final HtmlPage page = loadPage(htmlContent);
+         final MockWebConnection webConnection = getMockConnection(page);
+         
          final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
          final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) form.getInputByName("Format");
@@ -856,15 +761,8 @@ public class HtmlFormTest extends WebTestCase {
             + "    <input type='reset' name='button2' value='foo'/>"
             + "    <input type='submit' name='button' value='bar'/>"
             + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final List allInputsByValue = form.getInputsByValue("foo");
@@ -910,9 +808,7 @@ public class HtmlFormTest extends WebTestCase {
             URL_SECOND, "second");
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-            URL_FIRST,
-            SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
@@ -934,16 +830,8 @@ public class HtmlFormTest extends WebTestCase {
         + "<select name='select'>"
         + "</select>"
         + "</form></body></html>";
-        final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
         
         final HtmlPage secondPage = ( HtmlPage ) page.getFormByName("form").submit();
         
@@ -963,16 +851,8 @@ public class HtmlFormTest extends WebTestCase {
         + "     <option selected>second value</option>"
         + "</select>"
         + "</form></body></html>";
-        final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
         
         final HtmlPage secondPage = ( HtmlPage ) page.getFormByName("form").submit();
         
@@ -997,15 +877,9 @@ public class HtmlFormTest extends WebTestCase {
              + "</td></tr></table>"
              + "<input id='submitButton' name='submit' type='submit'/>"
              + "</form></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
+        
         final HtmlInput submitButton = (HtmlInput)page.getHtmlElementById("submitButton");
         submitButton.click();
         

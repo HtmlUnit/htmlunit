@@ -1242,7 +1242,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals( "First", firstPage.getTitleText() );
 
-        assertEquals( Collections.singletonList("http://www.gargoylesoftware.com"), collectedAlerts );
+        assertEquals(Collections.singletonList(URL_GARGOYLE.toExternalForm()), collectedAlerts);
     }
 
     /**

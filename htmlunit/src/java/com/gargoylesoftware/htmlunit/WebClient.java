@@ -272,213 +272,6 @@ public class WebClient {
         webConnection_ = webConnection;
     }
 
-
-    /**
-     *  Send a request to a server and return a Page that represents the
-     *  response from the server. This is the same as calling {@link
-     *  #getPage(WebWindow,URL,SubmitMethod,List)} with the current window,
-     *  the GET method and no parameters
-     *
-     * @param  url The url of the server
-     * @return  See above
-     * @exception  IOException If an IO error occurs
-     * @exception  FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the property
-     *      "throwExceptionOnFailingStatusCode" is set to true (see {@link
-     *      #setThrowExceptionOnFailingStatusCode(boolean)})
-     */
-    public Page getPage( final URL url )
-        throws IOException, FailingHttpStatusCodeException {
-
-        return getPage( getCurrentWindow(), url, SubmitMethod.GET, Collections.EMPTY_LIST );
-    }
-
-
-    /**
-     *  Send a request to a server and return a Page that represents the
-     *  response from the server. This is the same as calling {@link
-     *  #getPage(WebWindow,URL,SubmitMethod,List)} with the current window.
-     *
-     * @param  url The url of the server
-     * @param method The submit method to use when sending the request to the server
-     * @param  parameters A list of {@link KeyValuePair}'s that are the parameters
-     * to the request
-     * @return  See above
-     * @exception  IOException If an IO error occurs
-     * @exception  FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the property
-     *      "throwExceptionOnFailingStatusCode" is set to true (see {@link
-     *      #setThrowExceptionOnFailingStatusCode(boolean)})
-     */
-    public Page getPage(
-            final URL url,
-            final SubmitMethod method,
-            final List parameters )
-        throws
-            IOException,
-            FailingHttpStatusCodeException {
-
-        return getPage( getCurrentWindow(), url, method, parameters );
-    }
-
-
-    /**
-     * Return a page.
-     *
-     * @param  webWindow The window that the new page will be loaded into.
-     * @param  url The url of the server
-     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
-     * @param  parameters A list of {@link
-     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
-     *      contain the parameters to send to the server
-     * @return  The page that was loaded.
-     * @exception  IOException If an IO error occurs
-     * @exception  FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the property
-     *      "throwExceptionOnFailingStatusCode" is set to true (see {@link
-     *      #setThrowExceptionOnFailingStatusCode(boolean)})
-     */
-    public Page getPage(
-            final WebWindow webWindow,
-            final URL url,
-            final SubmitMethod method,
-            final List parameters )
-        throws
-            IOException,
-            FailingHttpStatusCodeException {
-        return getPage(webWindow, url, method, parameters, getThrowExceptionOnFailingStatusCode());
-    }
-
-
-    /**
-     * Return a page.
-     *
-     * @param  webWindow The window from which the load is initiated.  If target
-     * is not specified then this will also be the window into which the new page
-     * is loaded.
-     * @param  url The url of the server
-     * @param  target The name of the window where the page will be loaded.
-     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
-     * @param  parameters A list of {@link
-     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
-     *      contain the parameters to send to the server
-     * @return  The page that was loaded.
-     * @exception  IOException If an IO error occurs
-     * @exception  FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the property
-     *      "throwExceptionOnFailingStatusCode" is set to true (see {@link
-     *      #setThrowExceptionOnFailingStatusCode(boolean)})
-     */
-    public Page getPage(
-            final WebWindow webWindow,
-            final URL url,
-            final String target,
-            final SubmitMethod method,
-            final List parameters )
-        throws
-            IOException,
-            FailingHttpStatusCodeException {
-        return getPage(openTargetWindow( webWindow, target, "_self" ), url,
-            method, parameters, getThrowExceptionOnFailingStatusCode());
-    }
-
-
-    /**
-     * Return a page.
-     *
-     * @param  webWindow The window that the new page will be loaded into.
-     * @param  url The url of the server
-     * @param  encType Encoding type of the form when done as a POST
-     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
-     * @param  parameters A list of {@link
-     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
-     *      contain the parameters to send to the server
-     * @return  The page that was loaded.
-     * @exception  IOException If an IO error occurs
-     * @exception  FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the property
-     *      "throwExceptionOnFailingStatusCode" is set to true (see {@link
-     *      #setThrowExceptionOnFailingStatusCode(boolean)})
-     */
-    public Page getPage(
-            final WebWindow webWindow,
-            final URL url,
-            final FormEncodingType encType,
-            final SubmitMethod method,
-            final List parameters )
-        throws
-            IOException,
-            FailingHttpStatusCodeException {
-        return getPage(webWindow, url, encType, method, parameters, getThrowExceptionOnFailingStatusCode());
-    }
-
-
-    /**
-     * Return a page.
-     *
-     * @param  webWindow The window that the new page will be loaded into.
-     * @param  url The url of the server
-     * @param  target The name of the window where the page will be loaded.
-     * @param  encType Encoding type of the form when done as a POST
-     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
-     * @param  parameters A list of {@link
-     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
-     *      contain the parameters to send to the server
-     * @return  The page that was loaded.
-     * @exception  IOException If an IO error occurs
-     * @exception  FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the property
-     *      "throwExceptionOnFailingStatusCode" is set to true (see {@link
-     *      #setThrowExceptionOnFailingStatusCode(boolean)})
-     */
-    public Page getPage(
-            final WebWindow webWindow,
-            final URL url,
-            final String target,
-            final FormEncodingType encType,
-            final SubmitMethod method,
-            final List parameters )
-        throws
-            IOException,
-            FailingHttpStatusCodeException {
-        return getPage(openTargetWindow( webWindow, target, "_self" ),
-            url, encType, method, parameters,
-            getThrowExceptionOnFailingStatusCode());
-    }
-
-
-    /**
-     * Return a page.
-     *
-     * @param  webWindow The window that the new page will be loaded into.
-     * @param  url The url of the server
-     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
-     * @param  parameters A list of {@link
-     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
-     *      contain the parameters to send to the server
-     * @param throwExceptionOnFailingStatusCode true if this method should throw
-     * an exception whenever a failing status code is received.
-     * @return  The page that was loaded.
-     * @exception  IOException If an IO error occurs
-     * @exception  FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the variable
-     *      "throwExceptionOnFailingStatusCode" is set to true
-     */
-    public Page getPage(
-            final WebWindow webWindow,
-            final URL url,
-            final SubmitMethod method,
-            final List parameters,
-            final boolean throwExceptionOnFailingStatusCode )
-        throws
-            IOException,
-            FailingHttpStatusCodeException {
-
-        return this.getPage(
-            webWindow, url, FormEncodingType.URL_ENCODED, method,
-            parameters, throwExceptionOnFailingStatusCode);
-    }
-
     /**
      *  Send a request to a server and return a Page that represents the
      *  response from the server. This page will be used to populate this frame.<p>
@@ -514,45 +307,37 @@ public class WebClient {
      *    </tr>
      *  </table>
      *
-     * @param  webWindow The window that the new page will be loaded into.
-     * @param  url The url of the server
-     * @param  encType Encoding type of the form when done as a POST
-     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
-     * @param  parameters A list of {@link
-     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
-     *      contain the parameters to send to the server
-     * @param throwExceptionOnFailingStatusCode true if this method should throw
-     * an exception whenever a failing status code is received.
-     * @return  The page that was loaded.
+     *
+     * @param  webWindow The WebWindow to load this request into
+     * @param  parameters Parameter object for the web request
+     * @return  See above
      * @exception  IOException If an IO error occurs
      * @exception  FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the variable
-     *      "throwExceptionOnFailingStatusCode" is set to true
+     *      failing status code AND the property
+     *      "throwExceptionOnFailingStatusCode" is set to true 
+     *      
+     * @see #setThrowExceptionOnFailingStatusCode(boolean)
+     * @see WebRequestSettings
      */
-    public Page getPage(
-            final WebWindow webWindow,
-            final URL url,
-            final FormEncodingType encType,
-            final SubmitMethod method,
-            final List parameters,
-            final boolean throwExceptionOnFailingStatusCode )
-        throws
-            IOException,
-            FailingHttpStatusCodeException {
-
-        final String protocol = url.getProtocol();
+    public Page getPage( final WebWindow webWindow, final WebRequestSettings parameters )
+        throws IOException, FailingHttpStatusCodeException {
+        final String protocol = parameters.getURL().getProtocol();
         final WebResponse webResponse;
         if( protocol.equals("javascript") ) {
-            webResponse = makeWebResponseForJavaScriptUrl(webWindow, url);
+            webResponse = makeWebResponseForJavaScriptUrl(webWindow, parameters.getURL());
         }
         else if (protocol.equals("about")) {
-            webResponse = makeWebResponseForAboutUrl(url);
+            webResponse = makeWebResponseForAboutUrl(parameters.getURL());
         }
         else if (protocol.equals("file")) {
-            webResponse = makeWebResponseForFileUrl(url);
+            webResponse = makeWebResponseForFileUrl(parameters.getURL());
         }
         else {
-            webResponse = loadWebResponse( url, encType, method, parameters );
+            webResponse = loadWebResponse(
+                    parameters.getURL(),
+                    parameters.getEncodingType(),
+                    parameters.getSubmitMethod(),
+                    parameters.getRequestParameters());
         }
         final String contentType = webResponse.getContentType();
         final int statusCode = webResponse.getStatusCode();
@@ -567,11 +352,290 @@ public class WebClient {
 
         loadWebResponseInto(webResponse, webWindow);
 
-        if( throwExceptionOnFailingStatusCode == true && wasResponseSuccessful == false ) {
+        if( getThrowExceptionOnFailingStatusCode() == true && wasResponseSuccessful == false ) {
             throw new FailingHttpStatusCodeException( statusCode, webResponse.getStatusMessage() );
         }
 
-        return webWindow.getEnclosedPage();
+        return webWindow.getEnclosedPage();    
+    }
+    
+    /**
+     * For internal use only 
+     * @see getPage(WebWindow,WebRequestSettings)
+     */
+    public Page getPage(final WebWindow opener, final String target, final WebRequestSettings params)
+            throws FailingHttpStatusCodeException, IOException {
+        return getPage(openTargetWindow(opener, target, "_self"), params);
+    }
+
+    /**
+     *  Convenience method to load a URL into the current WebWindow
+     * @see #getPage(WebWindow, WebRequestSettings)}
+     */
+    public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
+        return getPage(getCurrentWindow(), new WebRequestSettings(url));
+    }
+    
+    /**
+     * Convenience method to load a web request into the current WebWindow
+     *
+     * @see #getPage(WebWindow, WebRequestSettings)}
+     */
+    public Page getPage(final WebRequestSettings request) throws IOException,
+            FailingHttpStatusCodeException {
+        return getPage(getCurrentWindow(), request);
+    }    
+
+
+    /**
+     *  Send a request to a server and return a Page that represents the
+     *  response from the server. This is the same as calling {@link
+     *  #getPage(WebWindow,URL,SubmitMethod,List)} with the current window.
+     *
+     * @param  url The url of the server
+     * @param method The submit method to use when sending the request to the server
+     * @param  parameters A list of {@link KeyValuePair}'s that are the parameters
+     * to the request
+     * @return  See above
+     * @exception  IOException If an IO error occurs
+     * @exception  FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the property
+     *      "throwExceptionOnFailingStatusCode" is set to true (see {@link
+     *      #setThrowExceptionOnFailingStatusCode(boolean)})
+     * @deprecated Use {@link #getPage(WebRequestSettings)}
+     */
+    public Page getPage(
+            final URL url,
+            final SubmitMethod method,
+            final List parameters )
+        throws
+            IOException,
+            FailingHttpStatusCodeException {
+
+        return getPage( getCurrentWindow(), url, method, parameters );
+    }
+
+
+    /**
+     * Return a page.
+     *
+     * @param  webWindow The window that the new page will be loaded into.
+     * @param  url The url of the server
+     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
+     * @param  parameters A list of {@link
+     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
+     *      contain the parameters to send to the server
+     * @return  The page that was loaded.
+     * @exception  IOException If an IO error occurs
+     * @exception  FailingHttpStatusCodeException If the server returns a
+     *      failing status code 
+     * @see #setThrowExceptionOnFailingStatusCode(boolean)
+     * @see FailingHttpStatusCodeException
+     * @deprecated Use {@link #getPage(WebWindow, WebRequestSettings)}
+     */
+    public Page getPage(
+            final WebWindow webWindow,
+            final URL url,
+            final SubmitMethod method,
+            final List parameters )
+        throws
+            IOException,
+            FailingHttpStatusCodeException {
+        return getPage(webWindow, new WebRequestSettings(url)
+                .setSubmitMethod(method)
+                .setRequestParameters(parameters));
+    }
+
+
+    /**
+     * Return a page.
+     *
+     * @param  webWindow The window from which the load is initiated.  If target
+     * is not specified then this will also be the window into which the new page
+     * is loaded.
+     * @param  url The url of the server
+     * @param  target The name of the window where the page will be loaded.
+     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
+     * @param  parameters A list of {@link
+     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
+     *      contain the parameters to send to the server
+     * @return  The page that was loaded.
+     * @exception  IOException If an IO error occurs
+     * @exception  FailingHttpStatusCodeException If the server returns a
+     *      failing status code
+     * @see #setThrowExceptionOnFailingStatusCode(boolean)
+     * @see FailingHttpStatusCodeException
+     * @deprecated Use {@link #getPage(WebWindow, WebRequestSettings)}
+     */
+    public Page getPage(
+            final WebWindow webWindow,
+            final URL url,
+            final String target,
+            final SubmitMethod method,
+            final List parameters )
+        throws
+            IOException,
+            FailingHttpStatusCodeException {
+        return getPage(openTargetWindow( webWindow, target, "_self" ), url,
+            method, parameters, getThrowExceptionOnFailingStatusCode());
+    }
+
+
+    /**
+     * Return a page.
+     *
+     * @param  webWindow The window that the new page will be loaded into.
+     * @param  url The url of the server
+     * @param  encType Encoding type of the form when done as a POST
+     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
+     * @param  parameters A list of {@link
+     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
+     *      contain the parameters to send to the server
+     * @return  The page that was loaded.
+     * @exception  IOException If an IO error occurs
+     * @exception  FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the property
+     *      "throwExceptionOnFailingStatusCode" is set to true (see {@link
+     *      #setThrowExceptionOnFailingStatusCode(boolean)})
+     * @deprecated Use {@link #getPage(WebWindow, WebRequestSettings)}
+     */
+    public Page getPage(
+            final WebWindow webWindow,
+            final URL url,
+            final FormEncodingType encType,
+            final SubmitMethod method,
+            final List parameters )
+        throws
+            IOException,
+            FailingHttpStatusCodeException {
+        return getPage(webWindow, url, encType, method, parameters, getThrowExceptionOnFailingStatusCode());
+    }
+
+
+    /**
+     * Return a page.
+     *
+     * @param  webWindow The window that the new page will be loaded into.
+     * @param  url The url of the server
+     * @param  target The name of the window where the page will be loaded.
+     * @param  encType Encoding type of the form when done as a POST
+     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
+     * @param  parameters A list of {@link
+     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
+     *      contain the parameters to send to the server
+     * @return  The page that was loaded.
+     * @exception  IOException If an IO error occurs
+     * @exception  FailingHttpStatusCodeException If the server returns a
+     *      failing status code 
+     * @see #setThrowExceptionOnFailingStatusCode(boolean)
+     * @see FailingHttpStatusCodeException
+     * @deprecated Use {@link #getPage(WebWindow, WebRequestSettings)}
+     */
+    public Page getPage(
+            final WebWindow webWindow,
+            final URL url,
+            final String target,
+            final FormEncodingType encType,
+            final SubmitMethod method,
+            final List parameters )
+        throws
+            IOException,
+            FailingHttpStatusCodeException {
+        return getPage(openTargetWindow( webWindow, target, "_self" ),
+            url, encType, method, parameters,
+            getThrowExceptionOnFailingStatusCode());
+    }
+
+
+    /**
+     * Return a page.
+     *
+     * @param  webWindow The window that the new page will be loaded into.
+     * @param  url The url of the server
+     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
+     * @param  parameters A list of {@link
+     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
+     *      contain the parameters to send to the server
+     * @param throwExceptionOnFailingStatusCode true if this method should throw
+     * an exception whenever a failing status code is received.
+     * @return  The page that was loaded.
+     * @exception  IOException If an IO error occurs
+     * @exception  FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the variable
+     *      "throwExceptionOnFailingStatusCode" is set to true
+     * @see #setThrowExceptionOnFailingStatusCode(boolean)
+     * @see FailingHttpStatusCodeException
+     * @deprecated Use {@link #getPage(WebWindow, WebRequestSettings)}
+     */
+    public Page getPage(
+            final WebWindow webWindow,
+            final URL url,
+            final SubmitMethod method,
+            final List parameters,
+            final boolean throwExceptionOnFailingStatusCode )
+        throws
+            IOException,
+            FailingHttpStatusCodeException {
+        final WebRequestSettings params = new WebRequestSettings(url)
+                .setSubmitMethod(method)
+                .setRequestParameters(parameters);
+        try {
+            return getPage(webWindow, params);
+        }
+        catch (final FailingHttpStatusCodeException e) {
+            if (throwExceptionOnFailingStatusCode) {
+                throw e;
+            }
+            else {
+                return webWindow.getEnclosedPage();
+            }
+        }
+    }
+
+    /**
+     * @param  webWindow The window that the new page will be loaded into.
+     * @param  url The url of the server
+     * @param  encType Encoding type of the form when done as a POST
+     * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
+     * @param  parameters A list of {@link
+     *      com.gargoylesoftware.htmlunit.KeyValuePair KeyValuePair}'s that
+     *      contain the parameters to send to the server
+     * @param throwExceptionOnFailingStatusCode true if this method should throw
+     * an exception whenever a failing status code is received.
+     * @return  The page that was loaded.
+     * @exception  IOException If an IO error occurs
+     * @exception  FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the variable
+     *      "throwExceptionOnFailingStatusCode" is set to true
+     * @see #setThrowExceptionOnFailingStatusCode(boolean)
+     * @see FailingHttpStatusCodeException
+     * @deprecated Use {@link #getPage(WebWindow, WebRequestSettings)}
+     */
+    public Page getPage(
+            final WebWindow webWindow,
+            final URL url,
+            final FormEncodingType encType,
+            final SubmitMethod method,
+            final List parameters,
+            final boolean throwExceptionOnFailingStatusCode )
+        throws
+            IOException,
+            FailingHttpStatusCodeException {
+        final WebRequestSettings params = new WebRequestSettings(url)
+                .setSubmitMethod(method)
+                .setEncodingType(encType)
+                .setRequestParameters(parameters);
+        try {
+            return getPage(webWindow, params);
+        }
+        catch (final FailingHttpStatusCodeException e){
+            if (throwExceptionOnFailingStatusCode){
+                throw e;
+            }
+            else {
+                return webWindow.getEnclosedPage();
+            }
+        }
     }
 
     /**

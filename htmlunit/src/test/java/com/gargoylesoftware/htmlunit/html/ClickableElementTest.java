@@ -39,13 +39,11 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -101,9 +99,7 @@ public class ClickableElementTest extends WebTestCase {
         final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
         client.setAlertHandler(alertHandler);
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = ( HtmlPage ) client.getPage(URL_GARGOYLE);
         final ClickableElement clickable = ( ClickableElement )page.getHtmlElementById( "clickId" );
 
         for (int i=0; i<numClicks; i++) {

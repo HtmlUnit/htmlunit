@@ -51,6 +51,7 @@ import org.apache.commons.jelly.XMLOutput;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 
 /**
  * Jelly tag to load a page from a server.
@@ -95,7 +96,8 @@ public class GetPageTag extends HtmlUnitTagSupport {
 
         final Page page;
         try {
-            page = webClient.getPage( getUrl(), getSubmitMethod(), getParameters() );
+            page = webClient.getPage(new WebRequestSettings(getUrl()).setSubmitMethod(
+                    getSubmitMethod()).setRequestParameters(getParameters()));
             jellyContext.setVariable( getVarValueOrDie(), page );
         }
         catch( final IOException e ) {

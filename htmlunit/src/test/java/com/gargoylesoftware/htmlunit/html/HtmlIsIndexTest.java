@@ -37,16 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  *  Tests for HtmlIsIndex
@@ -75,15 +73,9 @@ public class HtmlIsIndexTest extends WebTestCase {
                  + "<form id='form1'>"
                  + "<isindex prompt='enterSomeText'></isindex>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-            URL_GARGOYLE,
-            SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
+        
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlIsIndex isInput =
@@ -95,8 +87,7 @@ public class HtmlIsIndexTest extends WebTestCase {
         final List expectedParameters = new ArrayList();
         expectedParameters.add( new KeyValuePair( "enterSomeText", "Flintstone" ) );
 
-        assertEquals( "url", new URL( "http://www.gargoylesoftware.com/" ),
-            secondPage.getWebResponse().getUrl() );
+        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
         assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
     }

@@ -37,17 +37,19 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.KeyValuePair;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import junit.framework.AssertionFailedError;
+
+import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for HtmlPage.
@@ -66,779 +68,569 @@ public class HtmlPageTest extends WebTestCase {
      *
      * @param  name The name of the test
      */
-    public HtmlPageTest( final String name ) {
-        super( name );
+    public HtmlPageTest(final String name) {
+        super(name);
     }
-
 
     /**
      * @exception  Exception If the test fails
      */
-    public void testConstructor()
-        throws Exception {
+    public void testConstructor() throws Exception {
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<p>hello world</p>"
+            + "<form id='form1' action='/formSubmit' method='post'>"
+            + "<input type='text' NAME='textInput1' value='textInput1'/>"
+            + "<input type='text' name='textInput2' value='textInput2'/>"
+            + "<input type='hidden' name='hidden1' value='hidden1'/>"
+            + "<input type='submit' name='submitInput1' value='push me'/>"
+            + "</form>"
+            + "</body></html>";
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<p>hello world</p>"
-                 + "<form id='form1' action='/formSubmit' method='post'>"
-                 + "<input type='text' NAME='textInput1' value='textInput1'/>"
-                 + "<input type='text' name='textInput2' value='textInput2'/>"
-                 + "<input type='hidden' name='hidden1' value='hidden1'/>"
-                 + "<input type='submit' name='submitInput1' value='push me'/>"
-                 + "</form>"
-                 + "</body></html>";
-
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
         assertEquals("foo", page.getTitleText());
     }
 
-
     /**
      * @throws Exception if the test fails
      */
-    public void testGetInputByName()
-        throws Exception {
+    public void testGetInputByName() throws Exception {
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<p>hello world</p>"
+            + "<form id='form1' action='/formSubmit' method='post'>"
+            + "<input type='text' NAME='textInput1' value='textInput1'/>"
+            + "<input type='text' name='textInput2' value='textInput2'/>"
+            + "<input type='hidden' name='hidden1' value='hidden1'/>"
+            + "<input type='submit' name='submitInput1' value='push me'/>"
+            + "</form>"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<p>hello world</p>"
-                 + "<form id='form1' action='/formSubmit' method='post'>"
-                 + "<input type='text' NAME='textInput1' value='textInput1'/>"
-                 + "<input type='text' name='textInput2' value='textInput2'/>"
-                 + "<input type='hidden' name='hidden1' value='hidden1'/>"
-                 + "<input type='submit' name='submitInput1' value='push me'/>"
-                 + "</form>"
-                 + "</body></html>";
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlInput input = form.getInputByName("textInput1");
+        assertEquals("name", "textInput1", input.getNameAttribute());
 
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
-        final HtmlInput input = form.getInputByName( "textInput1" );
-        assertEquals( "name", "textInput1", input.getNameAttribute() );
-
-        assertEquals( "value", "textInput1", input.getValueAttribute() );
-        assertEquals( "type", "text", input.getTypeAttribute() );
+        assertEquals("value", "textInput1", input.getValueAttribute());
+        assertEquals("type", "text", input.getTypeAttribute());
     }
 
-
     /**
      * @throws Exception if the test fails
      */
-    public void testFormSubmit()
-        throws Exception {
+    public void testFormSubmit() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<p>hello world</p>"
-                 + "<form id='form1' action='/formSubmit' method='PoSt'>"
-                 + "<input type='text' NAME='textInput1' value='textInput1'/>"
-                 + "<input type='text' name='textInput2' value='textInput2'/>"
-                 + "<input type='hidden' name='hidden1' value='hidden1'/>"
-                 + "<input type='submit' name='submitInput1' value='push me'/>"
-                 + "</form>"
-                 + "</body></html>";
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<p>hello world</p>"
+            + "<form id='form1' action='/formSubmit' method='PoSt'>"
+            + "<input type='text' NAME='textInput1' value='textInput1'/>"
+            + "<input type='text' name='textInput2' value='textInput2'/>"
+            + "<input type='hidden' name='hidden1' value='hidden1'/>"
+            + "<input type='submit' name='submitInput1' value='push me'/>"
+            + "</form>"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
 
-        final WebClient client = new WebClient();
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlInput textInput = form.getInputByName("textInput1");
+        textInput.setValueAttribute("foo");
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
-        final HtmlInput textInput = form.getInputByName( "textInput1" );
-        textInput.setValueAttribute( "foo" );
-
-        final HtmlSubmitInput button = ( HtmlSubmitInput )form.getInputByName( "submitInput1" );
-        final HtmlPage secondPage = ( HtmlPage )button.click();
+        final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("submitInput1");
+        final HtmlPage secondPage = (HtmlPage) button.click();
 
         final List expectedParameters = new ArrayList();
-        expectedParameters.add( new KeyValuePair( "textInput1", "foo" ) );
-        expectedParameters.add( new KeyValuePair( "textInput2", "textInput2" ) );
-        expectedParameters.add( new KeyValuePair( "hidden1", "hidden1" ) );
-        expectedParameters.add( new KeyValuePair( "submitInput1", "push me" ) );
+        expectedParameters.add(new KeyValuePair("textInput1", "foo"));
+        expectedParameters.add(new KeyValuePair("textInput2", "textInput2"));
+        expectedParameters.add(new KeyValuePair("hidden1", "hidden1"));
+        expectedParameters.add(new KeyValuePair("submitInput1", "push me"));
 
-        final URL expectedUrl = new URL( "http://www.gargoylesoftware.com/formSubmit" );
+        final URL expectedUrl = new URL("http://www.gargoylesoftware.com/formSubmit");
         final URL actualUrl = secondPage.getWebResponse().getUrl();
-        assertEquals( "url", expectedUrl.toExternalForm(), actualUrl.toExternalForm() );
-        assertEquals( "method", SubmitMethod.POST, webConnection.getLastMethod() );
-        assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
-        assertNotNull( secondPage );
+        assertEquals("url", expectedUrl.toExternalForm(), actualUrl.toExternalForm());
+        assertEquals("method", SubmitMethod.POST, webConnection.getLastMethod());
+        assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
+        assertNotNull(secondPage);
     }
-
 
     /**
      *  Test getHtmlElement() for all elements that can be loaded
      *
      * @throws Exception if the test fails
      */
-    public void testGetHtmlElement()
-        throws Exception {
+    public void testGetHtmlElement() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "    <p>hello world</p>"
-                 + "    <form id='form1' id='form1' action='/formSubmit' method='post'>"
-                 + "    <input type='text' NAME='textInput1' value='textInput1'/>"
-                 + "    <button type='submit' name='button1'>foobar</button>"
-                 + "    <select name='select1'>"
-                 + "        <option value='option1'>Option1</option>"
-                 + "    </select>"
-                 + "    <textarea name='textArea1'>foobar</textarea>"
-                 + "    </form>"
-                 + "    <a href='http://www.foo.com' name='anchor1'>foo.com</a>"
-                 + "    <table id='table1'>"
-                 + "        <tr>"
-                 + "            <th id='header1'>Header</th>"
-                 + "            <td id='data1'>Data</td>"
-                 + "        </tr>"
-                 + "    </table>"
-                 + "</body></html>";
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "    <p>hello world</p>"
+            + "    <form id='form1' id='form1' action='/formSubmit' method='post'>"
+            + "    <input type='text' NAME='textInput1' value='textInput1'/>"
+            + "    <button type='submit' name='button1'>foobar</button>"
+            + "    <select name='select1'>"
+            + "        <option value='option1'>Option1</option>"
+            + "    </select>"
+            + "    <textarea name='textArea1'>foobar</textarea>"
+            + "    </form>"
+            + "    <a href='http://www.foo.com' name='anchor1'>foo.com</a>"
+            + "    <table id='table1'>"
+            + "        <tr>"
+            + "            <th id='header1'>Header</th>"
+            + "            <td id='data1'>Data</td>"
+            + "        </tr>"
+            + "    </table>"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
 
-        final WebClient client = new WebClient();
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        assertSame("form1", form, page.getHtmlElementById("form1")); //huh??
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
+        final HtmlInput input = form.getInputByName("textInput1");
+        assertSame("input1", input, form.getInputByName("textInput1")); //??
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlButton button = (HtmlButton) form.getButtonsByName("button1").get(0);
+        assertSame("button1", button, form.getButtonsByName("button1").get(0));
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
-        assertSame( "form1", form, page.getHtmlElementById( "form1" ) ); //huh??
+        final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
+        assertSame("select1", select, form.getSelectsByName("select1").get(0));
 
-        final HtmlInput input = form.getInputByName( "textInput1" );
-        assertSame( "input1", input, form.getInputByName( "textInput1" ) ); //??
+        final HtmlOption option = select.getOptionByValue("option1");
+        assertSame("option1", option, select.getOptionByValue("option1"));
 
-        final HtmlButton button = ( HtmlButton )form.getButtonsByName( "button1" ).get( 0 );
-        assertSame( "button1", button, form.getButtonsByName( "button1" ).get( 0 ) );
+        final HtmlTable table = (HtmlTable) page.getHtmlElementById("table1");
+        assertSame("table1", table, page.getHtmlElementById("table1"));
 
-        final HtmlSelect select = ( HtmlSelect )form.getSelectsByName( "select1" ).get( 0 );
-        assertSame( "select1", select, form.getSelectsByName( "select1" ).get( 0 ) );
+        final HtmlAnchor anchor = page.getAnchorByName("anchor1");
+        assertSame("anchor1", anchor, page.getAnchorByName("anchor1"));
+        assertSame("anchor3", anchor, page.getAnchorByHref("http://www.foo.com"));
+        assertSame("anchor4", anchor, page.getFirstAnchorByText("foo.com"));
 
-        final HtmlOption option = select.getOptionByValue( "option1" );
-        assertSame( "option1", option, select.getOptionByValue( "option1" ) );
+        final HtmlTableRow tableRow = table.getRow(0);
+        assertSame("tableRow1", tableRow, table.getRow(0));
 
-        final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
-        assertSame( "table1", table, page.getHtmlElementById( "table1" ) );
+        final HtmlTableHeaderCell tableHeaderCell = (HtmlTableHeaderCell) tableRow.getCell(0);
+        assertSame("tableHeaderCell1", tableHeaderCell, tableRow.getCell(0));
+        assertSame("tableHeaderCell2", tableHeaderCell, page.getHtmlElementById("header1"));
 
-        final HtmlAnchor anchor = page.getAnchorByName( "anchor1" );
-        assertSame( "anchor1", anchor, page.getAnchorByName( "anchor1" ) );
-        assertSame( "anchor3", anchor, page.getAnchorByHref("http://www.foo.com") );
-        assertSame( "anchor4", anchor, page.getFirstAnchorByText("foo.com") );
+        final HtmlTableDataCell tableDataCell = (HtmlTableDataCell) tableRow.getCell(1);
+        assertSame("tableDataCell1", tableDataCell, tableRow.getCell(1));
+        assertSame("tableDataCell2", tableDataCell, page.getHtmlElementById("data1"));
 
-        final HtmlTableRow tableRow = table.getRow( 0 );
-        assertSame( "tableRow1", tableRow, table.getRow( 0 ) );
-
-        final HtmlTableHeaderCell tableHeaderCell = (HtmlTableHeaderCell)tableRow.getCell( 0 );
-        assertSame( "tableHeaderCell1", tableHeaderCell, tableRow.getCell( 0 ) );
-        assertSame( "tableHeaderCell2", tableHeaderCell, page.getHtmlElementById( "header1" ) );
-
-        final HtmlTableDataCell tableDataCell = (HtmlTableDataCell)tableRow.getCell( 1 );
-        assertSame( "tableDataCell1", tableDataCell, tableRow.getCell( 1 ) );
-        assertSame( "tableDataCell2", tableDataCell, page.getHtmlElementById( "data1" ) );
-
-        final HtmlTextArea textArea
-            = ( HtmlTextArea )form.getTextAreasByName( "textArea1" ).get( 0 );
-        assertSame( "textArea1", textArea, form.getTextAreasByName( "textArea1" ).get( 0 ) );
+        final HtmlTextArea textArea = (HtmlTextArea) form.getTextAreasByName("textArea1").get(0);
+        assertSame("textArea1", textArea, form.getTextAreasByName("textArea1").get(0));
     }
-
 
     /**
      * @throws Exception if the test fails
      */
-    public void testGetTabbableElements_None()
-        throws Exception {
+    public void testGetTabbableElements_None() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<p>hello world</p>"
-                 + "<table><tr><td>foo</td></tr></table>"
-                 + "</body></html>";
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<p>hello world</p>"
+            + "<table><tr><td>foo</td></tr></table>"
+            + "</body></html>";
 
-        final WebClient client = new WebClient();
+        final HtmlPage page = loadPage(htmlContent);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
-        assertEquals( Collections.EMPTY_LIST, page.getTabbableElements() );
+        assertEquals(Collections.EMPTY_LIST, page.getTabbableElements());
     }
-
 
     /**
      * @throws Exception if the test fails
      */
-    public void testGetTabbableElements_OneEnabled_OneDisabled()
-        throws Exception {
+    public void testGetTabbableElements_OneEnabled_OneDisabled() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<form><p>hello world</p>"
-                 + "<input name='foo' type='submit' disabled='disabled' id='foo'/>"
-                 + "<input name='bar' type='submit' id='bar'/>"
-                 + "</form></body></html>";
-
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<form><p>hello world</p>"
+            + "<input name='foo' type='submit' disabled='disabled' id='foo'/>"
+            + "<input name='bar' type='submit' id='bar'/>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
 
         final List expectedElements = new ArrayList();
-        expectedElements.add( page.getHtmlElementById( "bar" ) );
+        expectedElements.add(page.getHtmlElementById("bar"));
 
-        assertEquals( expectedElements, page.getTabbableElements() );
+        assertEquals(expectedElements, page.getTabbableElements());
     }
-
 
     /**
      * @throws Exception if the test fails
      */
-    public void testGetTabbableElements()
-        throws Exception {
+    public void testGetTabbableElements() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<a id='a' tabindex='1'>foo</a>"
-                 + "<a id='b'>foo</a>"
-                 + "<form>"
-                 + "<a id='c' tabindex='3'>foo</a>"
-                 + "<a id='d' tabindex='2'>foo</a>"
-                 + "<a id='e' tabindex='0'>foo</a>"
-                 + "</form>"
-                 + "<a id='f' tabindex='3'>foo</a>"
-                 + "<a id='g' tabindex='1'>foo</a>"
-                 + "<a id='q' tabindex='-1'>foo</a>"
-                 + "<form><p>hello world</p>"
-                 + "<input name='foo' type='submit' disabled='disabled' id='foo'/>"
-                 + "<input name='bar' type='submit' id='bar'/>"
-                 + "</form></body></html>";
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<a id='a' tabindex='1'>foo</a>"
+            + "<a id='b'>foo</a>"
+            + "<form>"
+            + "<a id='c' tabindex='3'>foo</a>"
+            + "<a id='d' tabindex='2'>foo</a>"
+            + "<a id='e' tabindex='0'>foo</a>"
+            + "</form>"
+            + "<a id='f' tabindex='3'>foo</a>"
+            + "<a id='g' tabindex='1'>foo</a>"
+            + "<a id='q' tabindex='-1'>foo</a>"
+            + "<form><p>hello world</p>"
+            + "<input name='foo' type='submit' disabled='disabled' id='foo'/>"
+            + "<input name='bar' type='submit' id='bar'/>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
 
-        final WebClient client = new WebClient();
+        final List expectedElements = Arrays.asList(new Object[] {page.getHtmlElementById("a"),
+                page.getHtmlElementById("g"), page.getHtmlElementById("d"),
+                page.getHtmlElementById("c"), page.getHtmlElementById("f"),
+                page.getHtmlElementById("e"), page.getHtmlElementById("b"),
+                page.getHtmlElementById("bar")});
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
+        assertEquals(expectedElements, page.getTabbableElements());
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
-
-        final List expectedElements = Arrays.asList( new Object[]{
-                page.getHtmlElementById( "a" ),
-                page.getHtmlElementById( "g" ),
-                page.getHtmlElementById( "d" ),
-                page.getHtmlElementById( "c" ),
-                page.getHtmlElementById( "f" ),
-                page.getHtmlElementById( "e" ),
-                page.getHtmlElementById( "b" ),
-                page.getHtmlElementById( "bar" )} );
-
-        assertEquals( expectedElements, page.getTabbableElements() );
-
-        final List expectedIds = Arrays.asList( new String[]{
-                "a", "g", "d", "c", "f", "e", "b", "bar"} );
-        assertEquals( expectedIds, page.getTabbableElementIds() );
+        final List expectedIds = Arrays
+                .asList(new String[] {"a", "g", "d", "c", "f", "e", "b", "bar"});
+        assertEquals(expectedIds, page.getTabbableElementIds());
     }
-
 
     /**
      * @throws Exception if the test fails
      */
-    public void testGetHtmlElementByAccessKey()
-        throws Exception {
+    public void testGetHtmlElementByAccessKey() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<a id='a' accesskey='a'>foo</a>"
-                 + "<a id='b'>foo</a>"
-                 + "<form>"
-                 + "<a id='c' accesskey='c'>foo</a>"
-                 + "</form>"
-                 + "<form><p>hello world</p>"
-                 + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
-                 + "<input name='bar' type='submit' id='bar'/>"
-                 + "</form></body></html>";
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<a id='a' accesskey='a'>foo</a>"
+            + "<a id='b'>foo</a>"
+            + "<form>"
+            + "<a id='c' accesskey='c'>foo</a>"
+            + "</form>"
+            + "<form><p>hello world</p>"
+            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
+            + "<input name='bar' type='submit' id='bar'/>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
 
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
-
-        assertEquals( page.getHtmlElementById( "a" ), page.getHtmlElementByAccessKey( 'A' ) );
-        assertEquals( page.getHtmlElementById( "c" ), page.getHtmlElementByAccessKey( 'c' ) );
-        assertNull( page.getHtmlElementByAccessKey( 'z' ) );
+        assertEquals(page.getHtmlElementById("a"), page.getHtmlElementByAccessKey('A'));
+        assertEquals(page.getHtmlElementById("c"), page.getHtmlElementByAccessKey('c'));
+        assertNull(page.getHtmlElementByAccessKey('z'));
     }
-
 
     /**
      * @throws Exception if the test fails
      */
-    public void testGetHtmlElementsByAccessKey()
-        throws Exception {
+    public void testGetHtmlElementsByAccessKey() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head><body>"
-                 + "<a id='a' accesskey='a'>foo</a>"
-                 + "<a id='b' accesskey='a'>foo</a>"
-                 + "<form>"
-                 + "<a id='c' accesskey='c'>foo</a>"
-                 + "</form></body></html>";
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head><body>"
+            + "<a id='a' accesskey='a'>foo</a>"
+            + "<a id='b' accesskey='a'>foo</a>"
+            + "<form>"
+            + "<a id='c' accesskey='c'>foo</a>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
 
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
-
-        final List expectedElements = Arrays.asList( new Object[]{
-            page.getHtmlElementById( "a" ), page.getHtmlElementById( "b" ) } );
+        final List expectedElements = Arrays.asList(new Object[] {page.getHtmlElementById("a"),
+                page.getHtmlElementById("b")});
         final List collectedElements = page.getHtmlElementsByAccessKey('a');
-        assertEquals( expectedElements, collectedElements );
+        assertEquals(expectedElements, collectedElements);
     }
-
 
     /**
      * @throws Exception if the test fails
      */
-    public void testAssertAllIdAttributesUnique()
-        throws Exception {
+    public void testAssertAllIdAttributesUnique() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<a id='a' accesskey='a'>foo</a>"
-                 + "<a id='b'>foo</a>"
-                 + "<form>"
-                 + "<a id='c' accesskey='c'>foo</a>"
-                 + "</form>"
-                 + "<form><p>hello world</p>"
-                 + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
-                 + "<input name='bar' type='submit' id='bar'/>"
-                 + "</form></body></html>";
-
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<a id='a' accesskey='a'>foo</a>"
+            + "<a id='b'>foo</a>"
+            + "<form>"
+            + "<a id='c' accesskey='c'>foo</a>"
+            + "</form>"
+            + "<form><p>hello world</p>"
+            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
+            + "<input name='bar' type='submit' id='bar'/>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
 
         page.assertAllIdAttributesUnique();
     }
 
-
     /**
      * @throws Exception if the test fails
      */
-    public void testAssertAllIdAttributesUnique_Duplicates()
-        throws Exception {
+    public void testAssertAllIdAttributesUnique_Duplicates() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<a id='a' accesskey='a'>foo</a>"
-                 + "<a id='b'>foo</a>"
-                 + "<form>"
-                 + "<a id='c' accesskey='c'>foo</a>"
-                 + "</form>"
-                 + "<form><p>hello world</p>"
-                 + "<input name='foo' type='submit' disabled='disabled' id='a' accesskey='f'/>"
-                 + "<input name='bar' type='submit' id='bar'/>"
-                 + "</form></body></html>";
-
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<a id='dupeID' accesskey='a'>foo</a>"
+            + "<a id='b'>foo</a>"
+            + "<form>"
+            + "<a id='c' accesskey='c'>foo</a>"
+            + "</form>"
+            + "<form><p>hello world</p>"
+            + "<input name='foo' type='submit' disabled='disabled' id='dupeID' accesskey='f'/>"
+            + "<input name='bar' type='submit' id='bar'/>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
 
         try {
             page.assertAllIdAttributesUnique();
+            fail("Expected AssertionFailedError");
         }
-        catch( final AssertionFailedError e ) {
-            return;
+        catch (final AssertionFailedError e) {
+            assertTrue("dupeID", e.getMessage().contains("dupeID"));
         }
-
-        fail( "Expected AssertionFailedError" );
     }
-
 
     /**
      * @throws Exception if the test fails
      */
-    public void testAssertAllAccessKeyAttributesUnique()
-        throws Exception {
+    public void testAssertAllAccessKeyAttributesUnique() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<a id='a' accesskey='a'>foo</a>"
-                 + "<a id='b'>foo</a>"
-                 + "<form>"
-                 + "<a id='c' accesskey='c'>foo</a>"
-                 + "</form>"
-                 + "<form><p>hello world</p>"
-                 + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
-                 + "<input name='bar' type='submit' id='bar'/>"
-                 + "</form></body></html>";
-
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<a id='a' accesskey='a'>foo</a>"
+            + "<a id='b'>foo</a>"
+            + "<form>"
+            + "<a id='c' accesskey='c'>foo</a>"
+            + "</form>"
+            + "<form><p>hello world</p>"
+            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
+            + "<input name='bar' type='submit' id='bar'/>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
 
         page.assertAllAccessKeyAttributesUnique();
     }
 
-
     /**
      * @throws Exception if the test fails
      */
-    public void testAssertAllAccessKeyAttributesUnique_Duplicates()
-        throws Exception {
+    public void testAssertAllAccessKeyAttributesUnique_Duplicates() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<a id='a' accesskey='a'>foo</a>"
-                 + "<a id='b'>foo</a>"
-                 + "<form>"
-                 + "<a id='c' accesskey='c'>foo</a>"
-                 + "</form>"
-                 + "<form><p>hello world</p>"
-                 + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
-                 + "<input name='bar' type='submit' id='bar' accesskey='a'/>"
-                 + "</form></body></html>";
-
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<a id='a' accesskey='a'>foo</a>"
+            + "<a id='b'>foo</a>"
+            + "<form>"
+            + "<a id='c' accesskey='c'>foo</a>"
+            + "</form>"
+            + "<form><p>hello world</p>"
+            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
+            + "<input name='bar' type='submit' id='bar' accesskey='a'/>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
 
         try {
             page.assertAllAccessKeyAttributesUnique();
+            fail("Expected AssertionFailedError");
         }
-        catch( final AssertionFailedError e ) {
-            return;
+        catch (final AssertionFailedError e) {
+            //pass
         }
 
-        fail( "Expected AssertionFailedError" );
     }
-
 
     /**
      * @throws Exception if the test fails
      */
-    public void testAssertAllTabIndexAttributesSet()
-        throws Exception {
+    public void testAssertAllTabIndexAttributesSet() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<a id='a' tabindex='1'>foo</a>"
-                 + "<form>"
-                 + "<a id='c' tabindex='3'>foo</a>"
-                 + "<a id='d' tabindex='2'>foo</a>"
-                 + "<a id='e' tabindex='0'>foo</a>"
-                 + "</form>"
-                 + "<a id='f' tabindex='3'>foo</a>"
-                 + "<a id='g' tabindex='1'>foo</a>"
-                 + "<a id='q' tabindex='5'>foo</a>"
-                 + "<form><p>hello world</p>"
-                 + "</form></body></html>";
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<a id='a' tabindex='1'>foo</a>"
+            + "<form>"
+            + "<a id='c' tabindex='3'>foo</a>"
+            + "<a id='d' tabindex='2'>foo</a>"
+            + "<a id='e' tabindex='0'>foo</a>"
+            + "</form>"
+            + "<a id='f' tabindex='3'>foo</a>"
+            + "<a id='g' tabindex='1'>foo</a>"
+            + "<a id='q' tabindex='5'>foo</a>"
+            + "<form><p>hello world</p>"
+            + "</form></body></html>";
 
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
 
         page.assertAllTabIndexAttributesSet();
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testAssertAllTabIndexAttributesSet_SomeMissing() throws Exception {
+
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<a id='a' tabindex='1'>foo</a>"
+            + "<form>"
+            + "<a id='c' tabindex='3'>foo</a>"
+            + "<a id='d' tabindex='2'>foo</a>"
+            + "<a id='e' tabindex='0'>foo</a>"
+            + "</form>"
+            + "<a id='f' tabindex='3'>foo</a>"
+            + "<a id='g'>foo</a>"
+            + "<a id='q' tabindex='1'>foo</a>"
+            + "<form><p>hello world</p>"
+            + "</form></body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        try {
+            page.assertAllTabIndexAttributesSet();
+            fail("Expected AssertionFailedError");
+        }
+        catch (final AssertionFailedError e) {
+            //pass
+        }
+    }
 
     /**
      * @throws Exception if the test fails
      */
-    public void testAssertAllTabIndexAttributesSet_SomeMissing()
-        throws Exception {
+    public void testAssertAllTabIndexAttributesSet_BadValue() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<a id='a' tabindex='1'>foo</a>"
-                 + "<form>"
-                 + "<a id='c' tabindex='3'>foo</a>"
-                 + "<a id='d' tabindex='2'>foo</a>"
-                 + "<a id='e' tabindex='0'>foo</a>"
-                 + "</form>"
-                 + "<a id='f' tabindex='3'>foo</a>"
-                 + "<a id='g'>foo</a>"
-                 + "<a id='q' tabindex='1'>foo</a>"
-                 + "<form><p>hello world</p>"
-                 + "</form></body></html>";
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<a id='a' tabindex='1'>foo</a>"
+            + "<form>"
+            + "<a id='c' tabindex='3'>foo</a>"
+            + "<a id='d' tabindex='2'>foo</a>"
+            + "<a id='e' tabindex='0'>foo</a>"
+            + "</form>"
+            + "<a id='f' tabindex='3'>foo</a>"
+            + "<a id='g' tabindex='1'>foo</a>"
+            + "<a id='q' tabindex='300000'>foo</a>"
+            + "<form><p>hello world</p>"
+            + "</form></body></html>";
 
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
 
         try {
             page.assertAllTabIndexAttributesSet();
+            fail("Expected AssertionFailedError");
         }
-        catch( final AssertionFailedError e ) {
-            return;
+        catch (final AssertionFailedError e) {
+            //pass
         }
-
-        fail( "Expected AssertionFailedError" );
     }
-
-
-    /**
-     * @throws Exception if the test fails
-     */
-    public void testAssertAllTabIndexAttributesSet_BadValue()
-        throws Exception {
-
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<a id='a' tabindex='1'>foo</a>"
-                 + "<form>"
-                 + "<a id='c' tabindex='3'>foo</a>"
-                 + "<a id='d' tabindex='2'>foo</a>"
-                 + "<a id='e' tabindex='0'>foo</a>"
-                 + "</form>"
-                 + "<a id='f' tabindex='3'>foo</a>"
-                 + "<a id='g' tabindex='1'>foo</a>"
-                 + "<a id='q' tabindex='300000'>foo</a>"
-                 + "<form><p>hello world</p>"
-                 + "</form></body></html>";
-
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
-
-        try {
-            page.assertAllTabIndexAttributesSet();
-        }
-        catch( final AssertionFailedError e ) {
-            return;
-        }
-
-        fail( "Expected AssertionFailedError" );
-    }
-
 
     /**
      * @throws Exception if the test fails
      */
     public void testGetFullQualifiedUrl_NoBaseSpecified() throws Exception {
-        final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "<form id='form1'>"
-                 + "<table><tr><td><input type='text' id='foo'/></td></tr></table>"
-                 + "</form></body></html>";
+        final String htmlContent = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<table><tr><td><input type='text' id='foo'/></td></tr></table>"
+            + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(htmlContent);
+        client.setWebConnection(webConnection);
 
-        final String urlString = "http://www.gargoylesoftware.com/";
-        final HtmlPage page =
-            ( HtmlPage )client.getPage( new URL( urlString ),
-            SubmitMethod.POST, Collections.EMPTY_LIST );
+        final String urlString = URL_GARGOYLE.toExternalForm();
+        final HtmlPage page = (HtmlPage) client.getPage(new URL(urlString));
 
-        assertEquals( urlString, page.getFullyQualifiedUrl("").toExternalForm() );
-        assertEquals( urlString+"foo", page.getFullyQualifiedUrl("foo").toExternalForm() );
-        assertEquals( "http://foo.com/bar",
-            page.getFullyQualifiedUrl("http://foo.com/bar").toExternalForm() );
-        assertEquals( "mailto:me@foo.com",
-            page.getFullyQualifiedUrl("mailto:me@foo.com").toExternalForm() );
+        assertEquals(urlString, page.getFullyQualifiedUrl("").toExternalForm());
+        assertEquals(urlString + "foo", page.getFullyQualifiedUrl("foo").toExternalForm());
+        assertEquals("http://foo.com/bar", page
+                .getFullyQualifiedUrl("http://foo.com/bar")
+                .toExternalForm());
+        assertEquals("mailto:me@foo.com", page
+                .getFullyQualifiedUrl("mailto:me@foo.com")
+                .toExternalForm());
 
-        assertEquals( urlString+"foo", page.getFullyQualifiedUrl("foo").toExternalForm() );
-        assertEquals( urlString+"bbb", page.getFullyQualifiedUrl("aaa/../bbb").toExternalForm() );
-        assertEquals( urlString+"c/d", page.getFullyQualifiedUrl("c/./d").toExternalForm() );
+        assertEquals(urlString + "foo", page.getFullyQualifiedUrl("foo").toExternalForm());
+        assertEquals(urlString + "bbb", page.getFullyQualifiedUrl("aaa/../bbb").toExternalForm());
+        assertEquals(urlString + "c/d", page.getFullyQualifiedUrl("c/./d").toExternalForm());
 
-        final HtmlPage secondPage = ( HtmlPage )client.getPage(
-            new URL( urlString + "/foo/bar?a=b&c=d" ), SubmitMethod.POST, Collections.EMPTY_LIST );
-        assertEquals( urlString+"foo/bar", secondPage.getFullyQualifiedUrl("").toExternalForm() );
-        assertEquals( urlString+"foo/one",
-            secondPage.getFullyQualifiedUrl("one").toExternalForm() );
-        assertEquals( urlString+"two", secondPage.getFullyQualifiedUrl("/two").toExternalForm() );
-        assertEquals( urlString+"foo/two?a=b",
-            secondPage.getFullyQualifiedUrl("two?a=b").toExternalForm() );
+        final HtmlPage secondPage = (HtmlPage) client
+                .getPage(new URL(urlString + "/foo/bar?a=b&c=d"));
+        assertEquals(urlString + "foo/bar", secondPage.getFullyQualifiedUrl("").toExternalForm());
+        assertEquals(urlString + "foo/one", secondPage.getFullyQualifiedUrl("one").toExternalForm());
+        assertEquals(urlString + "two", secondPage.getFullyQualifiedUrl("/two").toExternalForm());
+        assertEquals(urlString + "foo/two?a=b", secondPage
+                .getFullyQualifiedUrl("two?a=b")
+                .toExternalForm());
 
-        final HtmlPage thirdPage = ( HtmlPage )client.getPage(
-            new URL( "http://foo.com/dog/cat/one.html" ),
-            SubmitMethod.POST, Collections.EMPTY_LIST );
-        assertEquals( "http://foo.com/dog/cat/one.html",
-            thirdPage.getFullyQualifiedUrl("").toExternalForm() );
-        assertEquals( "http://foo.com/dog/cat/two.html",
-            thirdPage.getFullyQualifiedUrl("two.html").toExternalForm() );
+        final HtmlPage thirdPage = (HtmlPage) client.getPage(new URL(
+                "http://foo.com/dog/cat/one.html"));
+        assertEquals("http://foo.com/dog/cat/one.html", thirdPage
+                .getFullyQualifiedUrl("")
+                .toExternalForm());
+        assertEquals("http://foo.com/dog/cat/two.html", thirdPage
+                .getFullyQualifiedUrl("two.html")
+                .toExternalForm());
     }
-
-
     /**
      * @throws Exception if the test fails
      */
     public void testGetFullQualifiedUrl_WithBase() throws Exception {
-        final String htmlContent
-                 = "<html><head><title>foo</title><base href='http://second'></head><body>"
-                 + "<form id='form1'>"
-                 + "<table><tr><td><input type='text' id='foo'/></td></tr></table>"
-                 + "</form></body></html>";
-        final WebClient client = new WebClient();
+        final String htmlContent = "<html><head><title>foo</title><base href='http://second'></head><body>"
+            + "<form id='form1'>"
+            + "<table><tr><td><input type='text' id='foo'/></td></tr></table>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
+        assertEquals("http://second/", page.getFullyQualifiedUrl("").toExternalForm());
+        assertEquals("http://second/foo", page.getFullyQualifiedUrl("foo").toExternalForm());
+        assertEquals("http://foo.com/bar", page
+                .getFullyQualifiedUrl("http://foo.com/bar")
+                .toExternalForm());
+        assertEquals("mailto:me@foo.com", page
+                .getFullyQualifiedUrl("mailto:me@foo.com")
+                .toExternalForm());
 
-        final String urlString = "http://first/";
-        final HtmlPage page =
-            ( HtmlPage )client.getPage( new URL( urlString ),
-            SubmitMethod.POST, Collections.EMPTY_LIST );
-
-        assertEquals( "http://second/", page.getFullyQualifiedUrl("").toExternalForm() );
-        assertEquals( "http://second/foo", page.getFullyQualifiedUrl("foo").toExternalForm() );
-        assertEquals( "http://foo.com/bar",
-            page.getFullyQualifiedUrl("http://foo.com/bar").toExternalForm() );
-        assertEquals( "mailto:me@foo.com",
-            page.getFullyQualifiedUrl("mailto:me@foo.com").toExternalForm() );
-
-        assertEquals( "http://second/foo", page.getFullyQualifiedUrl("foo").toExternalForm() );
-        assertEquals( "http://second/bbb", page.getFullyQualifiedUrl("aaa/../bbb").toExternalForm() );
-        assertEquals( "http://second/c/d", page.getFullyQualifiedUrl("c/./d").toExternalForm() );
+        assertEquals("http://second/foo", page.getFullyQualifiedUrl("foo").toExternalForm());
+        assertEquals("http://second/bbb", page.getFullyQualifiedUrl("aaa/../bbb").toExternalForm());
+        assertEquals("http://second/c/d", page.getFullyQualifiedUrl("c/./d").toExternalForm());
     }
-
 
     /**
      * @throws Exception if the test fails
      */
     public void testOnLoadHandler_BodyStatement() throws Exception {
-        final String content
-                 = "<html><head><title>foo</title>"
-                 + "</head><body onLoad='alert(\"foo\")'>"
-                 + "</body></html>";
+        final String htmlContent = "<html><head><title>foo</title>"
+            + "</head><body onLoad='alert(\"foo\")'>"
+            + "</body></html>";
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "foo"
-        });
-        assertEquals( expectedAlerts, collectedAlerts );
+        final List expectedAlerts = Arrays.asList(new String[] {"foo"});
+        assertEquals(expectedAlerts, collectedAlerts);
     }
-
 
     /**
      * If the onload handler contains two statements then only the first would execute
      * @throws Exception if the test fails
      */
     public void testOnLoadHandler_TwoBodyStatements() throws Exception {
-        final String content
-                 = "<html><head><title>foo</title>"
-                 + "</head><body onLoad='alert(\"foo\");alert(\"bar\")'>"
-                 + "</body></html>";
+        final String htmlContent = "<html><head><title>foo</title>"
+            + "</head><body onLoad='alert(\"foo\");alert(\"bar\")'>"
+            + "</body></html>";
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "foo", "bar"
-        });
-        assertEquals( expectedAlerts, collectedAlerts );
+        final List expectedAlerts = Arrays.asList(new String[] {"foo", "bar"});
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -846,19 +638,16 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnLoadHandler_BodyName() throws Exception {
-        final String content
-                 = "<html><head><title>foo</title>"
-                 + "<script type='text/javascript'>"
-                 + "window.onload=function(){alert('foo')}</script>"
-                 + "</head><body></body></html>";
+        final String htmlContent = "<html><head><title>foo</title>"
+            + "<script type='text/javascript'>"
+            + "window.onload=function(){alert('foo')}</script>"
+            + "</head><body></body></html>";
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "foo"
-        });
-        assertEquals( expectedAlerts, collectedAlerts );
+        final List expectedAlerts = Arrays.asList(new String[] {"foo"});
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -866,91 +655,80 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnLoadHandler_BodyName_NotAFunction() throws Exception {
-        final String content =
-            "<html><head><title>foo</title></head>"
-                + "<body onLoad='foo=4711'>"
-                + "<a name='alert' href='javascript:alert(foo)'/>"
-                + "</body></html>";
+        final String htmlContent = "<html><head><title>foo</title></head>"
+            + "<body onLoad='foo=4711'>"
+            + "<a name='alert' href='javascript:alert(foo)'/>"
+            + "</body></html>";
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         page.getAnchorByName("alert").click();
 
-        final List expectedAlerts = Arrays.asList(new String[] { "4711" });
+        final List expectedAlerts = Arrays.asList(new String[] {"4711"});
         assertEquals(expectedAlerts, collectedAlerts);
     }
-
 
     /**
      * Regression test for window.onload property
      * @throws Exception if the test fails
      */
     public void testOnLoadHandler_ScriptName() throws Exception {
-        final String content
-                 = "<html><head><title>foo</title>"
-                 + "<script type='text/javascript'>\n"
-                 + "load=function(){alert('foo')};\n"
-                 + "onload=load\n"
-                 + "</script></head><body></body></html>";
+        final String htmlContent = "<html><head><title>foo</title>"
+            + "<script type='text/javascript'>\n"
+            + "load=function(){alert('foo')};\n"
+            + "onload=load\n"
+            + "</script></head><body></body></html>";
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "foo"
-        });
-        assertEquals( expectedAlerts, collectedAlerts );
+        final List expectedAlerts = Arrays.asList(new String[] {"foo"});
+        assertEquals(expectedAlerts, collectedAlerts);
     }
-
 
     /**
      * Regression test for window.onload property
      * @throws Exception if the test fails
      */
     public void testOnLoadHandler_ScriptNameRead() throws Exception {
-        final String content
-                 = "<html><head><title>foo</title>"
-                 + "<script type='text/javascript'>\n"
-                 + "load=function(){};\n"
-                 + "onload=load;\n"
-                 + "alert(onload);\n"
-                 + "</script></head><body></body></html>";
+        final String htmlContent = "<html><head><title>foo</title>"
+            + "<script type='text/javascript'>\n"
+            + "load=function(){};\n"
+            + "onload=load;\n"
+            + "alert(onload);\n"
+            + "</script></head><body></body></html>";
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "\nfunction () {\n}\n"
-        });
-        assertEquals( expectedAlerts, collectedAlerts );
+        final List expectedAlerts = Arrays.asList(new String[] {"\nfunction () {\n}\n"});
+        assertEquals(expectedAlerts, collectedAlerts);
     }
-
 
     /**
      * @throws Exception if the test fails
      */
     public void testEmbeddedMetaTag_Regression() throws Exception {
 
-        final String content
-                 = "<html><head><title>foo</title>"
-                 + "</head><body>"
-                 + "<table><tr><td>\n"
-                 + "<meta name=vs_targetSchema content=\"http://schemas.microsoft.com/intellisense/ie5\">"
-                 + "<form name='form1'>"
-                 + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-                 + "    <input type='text' name='textfield2' id='textfield2'/>"
-                 + "</form>"
-                 + "</td></tr></table>"
-                 + "</body></html>";
+        final String htmlContent = "<html><head><title>foo</title>"
+            + "</head><body>"
+            + "<table><tr><td>\n"
+            + "<meta name=vs_targetSchema content=\"http://schemas.microsoft.com/intellisense/ie5\">"
+            + "<form name='form1'>"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+            + "    <input type='text' name='textfield2' id='textfield2'/>"
+            + "</form>"
+            + "</td></tr></table>"
+            + "</body></html>";
         final List collectedAlerts = new ArrayList();
 
         // This used to blow up on page load
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final List expectedAlerts = Collections.EMPTY_LIST;
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -958,69 +736,46 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testGetPageEncoding() throws Exception {
 
-        final String content
-                 = "<html><head>"
-                 + "<title>foo</title>"
-                 + "<meta http-equiv='Content-Type' content='text/html ;charset=Shift_JIS'>"
-                 + "</head><body>"
-                 + "<table><tr><td>\n"
-                 + "<meta name=vs_targetSchema content=\"http://schemas.microsoft.com/intellisense/ie5\">"
-                 + "<form name='form1'>"
-                 + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-                 + "    <input type='text' name='textfield2' id='textfield2'/>"
-                 + "</form>"
-                 + "</td></tr></table>"
-                 + "</body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            new URL("http://justSJIS"), content,
-            200, "OK", "text/html", Collections.EMPTY_LIST );
-
-        client.setWebConnection( webConnection );
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                new URL( "http://justSJIS" ),
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final String htmlContent = "<html><head>"
+            + "<title>foo</title>"
+            + "<meta http-equiv='Content-Type' content='text/html ;charset=Shift_JIS'>"
+            + "</head><body>"
+            + "<table><tr><td>\n"
+            + "<meta name=vs_targetSchema content=\"http://schemas.microsoft.com/intellisense/ie5\">"
+            + "<form name='form1'>"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
+            + "    <input type='text' name='textfield2' id='textfield2'/>"
+            + "</form>"
+            + "</td></tr></table>"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
 
         assertEquals("Shift_JIS", page.getPageEncoding());
     }
-
 
     /**
      * @throws Exception if the test fails
      */
     public void testGetAllForms() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<form name='one'>"
-                 + "<a id='c' accesskey='c'>foo</a>"
-                 + "</form>"
-                 + "<form name='two'>"
-                 + "<a id='c' accesskey='c'>foo</a>"
-                 + "</form>"
-                 + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
-                 + "<input name='bar' type='submit' id='bar'/>"
-                 + "</form></body></html>";
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<form name='one'>"
+            + "<a id='c' accesskey='c'>foo</a>"
+            + "</form>"
+            + "<form name='two'>"
+            + "<a id='c' accesskey='c'>foo</a>"
+            + "</form>"
+            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
+            + "<input name='bar' type='submit' id='bar'/>"
+            + "</form></body></html>";
 
-        final WebClient client = new WebClient();
+        final HtmlPage page = loadPage(htmlContent);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
-
-        final List expectedForms = Arrays.asList( new HtmlForm[]{
-            page.getFormByName("one"),
-            page.getFormByName("two")
-        } );
-        assertEquals( expectedForms, page.getAllForms() );
+        final List expectedForms = Arrays.asList(new HtmlForm[] {page.getFormByName("one"),
+                page.getFormByName("two")});
+        assertEquals(expectedForms, page.getAllForms());
     }
 
     /**
@@ -1029,45 +784,38 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testRefresh_MetaTag_DefaultRefreshHandler() throws Exception {
 
-        final String firstContent
-            = "<html><head><title>first</title>"
+        final String firstContent = "<html><head><title>first</title>"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=http://second\">"
             + "</head><body></body></html>";
-        final String secondContent
-            = "<html><head><title>second</title></head><body></body></html>";
+        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
 
-        assertEquals( "second", page.getTitleText() );
+        assertEquals("second", page.getTitleText());
     }
-
     /**
      * Test auto-refresh from a meta tag with url quoted.
      * @throws Exception if the test fails
      */
     public void testRefresh_MetaTagQuoted() throws Exception {
-        final String firstContent
-            = "<html><head><title>first</title>"
+        final String firstContent = "<html><head><title>first</title>"
             + "<META HTTP-EQUIV='Refresh' CONTENT='0;URL=\"http://second\"'>"
             + "</head><body></body></html>";
-        final String secondContent
-            = "<html><head><title>second</title></head><body></body></html>";
+        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
 
@@ -1079,19 +827,17 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRefresh_MetaTagPartlyQuoted() throws Exception {
-        final String firstContent
-            = "<html><head><title>first</title>"
+        final String firstContent = "<html><head><title>first</title>"
             + "<META HTTP-EQUIV='Refresh' CONTENT=\"0;URL='http://second\">"
             + "</head><body></body></html>";
-        final String secondContent
-            = "<html><head><title>second</title></head><body></body></html>";
+        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
 
@@ -1104,21 +850,19 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testRefresh_MetaTagNoScript() throws Exception {
 
-        final String firstContent
-            = "<html><head><title>first</title>"
+        final String firstContent = "<html><head><title>first</title>"
             + "<noscript>"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;URL=http://second\">"
             + "</noscript>"
             + "</head><body></body></html>";
-        final String secondContent
-            = "<html><head><title>second</title></head><body></body></html>";
+        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
@@ -1134,125 +878,85 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testRefresh_MetaTag_CustomRefreshHandler() throws Exception {
 
-        final String firstContent
-            = "<html><head><title>first</title>"
+        final String firstContent = "<html><head><title>first</title>"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=http://second\">"
             + "</head><body></body></html>";
-        final String secondContent
-            = "<html><head><title>second</title></head><body></body></html>";
+        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
         final List collectedItems = new ArrayList();
-        client.setRefreshHandler( new LoggingRefreshHandler(collectedItems) );
-        
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST );
-        client.setWebConnection( webConnection );
+        client.setRefreshHandler(new LoggingRefreshHandler(collectedItems));
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        client.setWebConnection(webConnection);
 
-        assertEquals( "first", page.getTitleText() );
-        
-        final List expectedItems = Arrays.asList( new Object[] {
-            "first", URL_SECOND, new Integer(3)                                             
-        } );                                             
-        assertEquals( expectedItems, collectedItems );
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+
+        assertEquals("first", page.getTitleText());
+
+        final List expectedItems = Arrays.asList(new Object[] {"first", URL_SECOND, new Integer(3)});
+        assertEquals(expectedItems, collectedItems);
     }
-    
+
     /**
      * Test auto-refresh from a response header.
      * @throws Exception if the test fails
      */
     public void testRefresh_HttpResponseHeader() throws Exception {
 
-        final String firstContent
-            = "<html><head><title>first</title>"
+        final String firstContent = "<html><head><title>first</title>"
             + "</head><body></body></html>";
-        final String secondContent
-            = "<html><head><title>second</title></head><body></body></html>";
+        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent,
-            200, "OK", "text/html",
-            Collections.singletonList(new KeyValuePair("Refresh","3;URL=http://second")) );
-        webConnection.setResponse(
-            URL_SECOND, secondContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST );
-        client.setWebConnection( webConnection );
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections
+                .singletonList(new KeyValuePair("Refresh", "3;URL=http://second")));
+        webConnection.setResponse(URL_SECOND, secondContent);
+        client.setWebConnection(webConnection);
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
 
-        assertEquals( "second", page.getTitleText() );
+        assertEquals("second", page.getTitleText());
     }
-
 
     /**
      * @throws Exception if the test fails
      */
     public void testDocumentElement() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "</body></html>";
-
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
 
         final HtmlElement root = page.getDocumentElement();
 
         assertNotNull(root);
-        assertEquals( "html", root.getTagName() );
-        assertSame( page, root.getParentNode() );
+        assertEquals("html", root.getTagName());
+        assertSame(page, root.getParentNode());
     }
-
 
     /**
      * @throws Exception if the test fails
      */
     public void testDocumentNodeType() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "</body></html>";
-
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
 
         final HtmlElement root = page.getDocumentElement();
 
-        assertEquals( DomNode.DOCUMENT_NODE, page.getNodeType() );
-        assertEquals( DomNode.ELEMENT_NODE, root.getNodeType() );
-        assertEquals( "#document", page.getNodeName() );
+        assertEquals(DomNode.DOCUMENT_NODE, page.getNodeType());
+        assertEquals(DomNode.ELEMENT_NODE, root.getNodeType());
+        assertEquals("#document", page.getNodeName());
     }
 
     /**
@@ -1261,15 +965,14 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testDeregisterFrameWithoutSrc() throws Exception {
 
-        final String content
-                 = "<html>"
-                 + "<head><title>foo</title></head>"
-                 + "<body>"
-                 + "<iframe />"
-                 + "<a href='about:blank'>link</a>"
-                 + "</body></html>";
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "<iframe />"
+            + "<a href='about:blank'>link</a>"
+            + "</body></html>";
 
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(htmlContent);
         final HtmlAnchor link = (HtmlAnchor) page.getAnchors().get(0);
         link.click();
     }
@@ -1279,13 +982,12 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnLoadReturn() throws Exception {
-        final String content = "<html><head><title>foo</title></head>\n"
+        final String htmlContent = "<html><head><title>foo</title></head>\n"
             + "<body onload='return true'>\n"
             + "</body></html>";
 
-         loadPage(content);
+        loadPage(htmlContent);
     }
-
 
     /**
      * Test that wrong formed html code is parsed like browsers do
@@ -1297,25 +999,24 @@ public class HtmlPageTest extends WebTestCase {
             return;
         }
 
-        final String content = "<div>"
-                 + "<html>"
-                 + "<head><title>foo</title>"
-                 + "<script>"
-                 + "var toto = 12345;"
-                 + "</script>"
-                 + "</head>"
-                 + "<body onload='alert(toto)'>"
-                 + "blabla"
-                 + "</body>"
-                 + "</html>";
+        final String htmlContent = "<div>"
+            + "<html>"
+            + "<head><title>foo</title>"
+            + "<script>"
+            + "var toto = 12345;"
+            + "</script>"
+            + "</head>"
+            + "<body onload='alert(toto)'>"
+            + "blabla"
+            + "</body>"
+            + "</html>";
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        final List expectedAlerts = Arrays.asList( new String[]{ "12345" });
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final List expectedAlerts = Arrays.asList(new String[] {"12345"});
+        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
         assertEquals("foo", page.getTitleText());
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
-

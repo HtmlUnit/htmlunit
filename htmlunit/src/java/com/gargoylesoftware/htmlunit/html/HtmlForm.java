@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
@@ -170,8 +171,6 @@ public class HtmlForm extends ClickableElement {
             }
         }
 
-        final List parameterList = getParameterListForSubmit(submitElement);
-
         final URL url;
         try {
             url = htmlPage.getFullyQualifiedUrl( action );
@@ -179,12 +178,16 @@ public class HtmlForm extends ClickableElement {
         catch( final MalformedURLException e ) {
             throw new IllegalArgumentException( "Not a valid url: " + action );
         }
-        final FormEncodingType encType = FormEncodingType.getInstance( this.getEnctypeAttribute() );
-        final SubmitMethod method = SubmitMethod.getInstance( getAttributeValue( "method" ) );
+        final WebRequestSettings params = new WebRequestSettings(url)
+            .setRequestParameters(getParameterListForSubmit(submitElement))
+            .setEncodingType(FormEncodingType.getInstance( getEnctypeAttribute() ))
+            .setSubmitMethod(SubmitMethod.getInstance( getAttributeValue( "method" ) ));
+
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        return htmlPage.getWebClient().getPage( webWindow, url,
-            htmlPage.getResolvedTarget(getTargetAttribute()), encType, method,
-            parameterList );
+        return htmlPage.getWebClient().getPage(
+                webWindow,
+                htmlPage.getResolvedTarget(getTargetAttribute()),
+                params);
     }
 
 

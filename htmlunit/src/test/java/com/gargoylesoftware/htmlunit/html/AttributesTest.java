@@ -41,16 +41,12 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -88,7 +84,7 @@ public class AttributesTest extends WebTestCase {
      * @throws Exception If the tests cannot be created.
      */
     public static Test suite() throws Exception {
-        final HtmlPage page = createDummyPage();
+        final HtmlPage page = loadPage("<html><head><title>foo</title></head><body></body></html>");
 
         final TestSuite suite = new TestSuite();
         final String[] classesToTest = new String[] {
@@ -265,25 +261,5 @@ public class AttributesTest extends WebTestCase {
         }
 
         return newInstance;
-    }
-
-    /**
-     * Create an HtmlPage that will be used through the tests.
-     * @return The new page.
-     * @throws Exception If the page cannot be created.
-     */
-    private static HtmlPage createDummyPage() throws Exception {
-        final String htmlContent
-                 = "<html><head><title>foo</title></head><body>"
-                 + "</body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        return (HtmlPage)client.getPage(
-            URL_FIRST,
-            SubmitMethod.POST, Collections.EMPTY_LIST );
     }
 }

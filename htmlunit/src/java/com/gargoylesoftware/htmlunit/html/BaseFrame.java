@@ -37,16 +37,16 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebWindow;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collections;
 import java.util.Map;
+
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
  * Base class for frame and iframe.
@@ -204,11 +204,15 @@ public abstract class BaseFrame extends StyledElement {
             URL url = null;
             try {
                 url = getPage().getFullyQualifiedUrl(srcAttribute);
-                getPage().getWebClient().getPage(
-                    enclosedWindow_, url, SubmitMethod.GET, Collections.EMPTY_LIST, false );
             }
             catch( final MalformedURLException e ) {
                 getLog().error("Bad url in src attribute of " + getTagName() + ": url=["+srcAttribute+"]", e);
+            }   
+            try {
+                getPage().getWebClient().getPage(enclosedWindow_, new WebRequestSettings(url));
+            }
+            catch (final FailingHttpStatusCodeException e){
+                // do nothing
             }
             catch( final IOException e ) {
                 getLog().error("IOException when getting content for " + getTagName() 

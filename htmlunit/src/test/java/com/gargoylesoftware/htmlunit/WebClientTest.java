@@ -97,9 +97,7 @@ public class WebClientTest extends WebTestCase {
         client.setWebConnection( webConnection );
 
         try {
-            client.getPage(
-                    URL_GARGOYLE,
-                    SubmitMethod.POST, Collections.EMPTY_LIST );
+            client.getPage(new WebRequestSettings(URL_GARGOYLE).setSubmitMethod(SubmitMethod.POST));
             fail( "Expected FailingHttpStatusCodeException" );
         }
         catch( final FailingHttpStatusCodeException e ) {
@@ -142,9 +140,7 @@ public class WebClientTest extends WebTestCase {
         webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_GARGOYLE);
         final HtmlAnchor anchor = ( HtmlAnchor )firstPage.getHtmlElementById( "a2" );
 
         final List firstExpectedEvents = Arrays.asList( new Object[] {
@@ -172,7 +168,7 @@ public class WebClientTest extends WebTestCase {
     public void testHtmlWindowEvents_opened() throws Exception {
         final String page1Content
                  = "<html><head><title>foo</title>"
-                 + "<script>window.open('http://page2', 'myNewWindow')</script>"
+                 + "<script>window.open('" + URL_SECOND.toExternalForm() + "', 'myNewWindow')</script>"
                  + "</head><body>"
                  + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>"
                  + "</body></html>";
@@ -183,15 +179,12 @@ public class WebClientTest extends WebTestCase {
         eventCatcher.listenTo(client);
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            new URL("http://page1"), page1Content, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            new URL("http://page2"), page2Content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, page1Content);
+        webConnection.setResponse(URL_SECOND, page2Content);
 
         client.setWebConnection( webConnection );
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(
-                new URL( "http://page1" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
         assertEquals("foo", firstPage.getTitleText());
 
         final WebWindow firstWindow = client.getCurrentWindow();
@@ -414,7 +407,8 @@ public class WebClientTest extends WebTestCase {
         //
         // Second time redirection is turned on (default setting)
         //
-        page = (HtmlPage)webClient.getPage(url, initialRequestMethod, Collections.EMPTY_LIST);
+        page = (HtmlPage) webClient.getPage(new WebRequestSettings(url)
+                .setSubmitMethod(initialRequestMethod));
         webResponse = page.getWebResponse();
         if( expectedRedirectedRequestMethod == null ) {
             // No redirect should have happened
@@ -432,7 +426,8 @@ public class WebClientTest extends WebTestCase {
         // Second time redirection is turned off
         //
         webClient.setRedirectEnabled(false);
-        page = (HtmlPage)webClient.getPage(url, initialRequestMethod, Collections.EMPTY_LIST);
+        page = (HtmlPage) webClient.getPage(new WebRequestSettings(url)
+                .setSubmitMethod(initialRequestMethod));
         webResponse = page.getWebResponse();
         assertEquals( statusCode, webResponse.getStatusCode() );
         assertEquals( initialRequestMethod, webConnection.getLastMethod() );
@@ -469,14 +464,13 @@ public class WebClientTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
-            new URL("http://page1"), page1Content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, page1Content, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
         client.setWebConnection( webConnection );
         final List collectedPageCreationItems = new ArrayList();
         client.setPageCreator( new CollectingPageCreator(collectedPageCreationItems) );
 
-        final Page page = client.getPage(
-                new URL( "http://page1" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        final Page page = client.getPage(URL_FIRST);
         assertTrue( "instanceof TextPage", page instanceof TextPage );
 
         final List expectedPageCreationItems = Arrays.asList( new Object[] {
@@ -528,12 +522,12 @@ public class WebClientTest extends WebTestCase {
         webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-            new URL( "http://first?a=b" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        final String urlString = "http://first?a=b";
+        final URL url = new URL(urlString);
+        final HtmlPage page = (HtmlPage) client.getPage(new WebRequestSettings(url)
+                .setSubmitMethod(SubmitMethod.POST));
 
-        assertEquals(
-            "http://first?a=b",
-            page.getWebResponse().getUrl().toExternalForm() );
+        assertEquals(urlString, page.getWebResponse().getUrl().toExternalForm());
     }
 
     /**
@@ -654,8 +648,7 @@ public class WebClientTest extends WebTestCase {
 
         final URL url = URL_FIRST;
 
-        final HtmlPage page = (HtmlPage)webClient.getPage(
-            url, SubmitMethod.GET, Collections.EMPTY_LIST);
+        final HtmlPage page = (HtmlPage)webClient.getPage(url);
         assertEquals("Second", page.getTitleText());
     }
 
@@ -844,7 +837,7 @@ public class WebClientTest extends WebTestCase {
         webClient.setWebConnection( webConnection );
 
         final URL url = new URL("http://first/");
-        return (HtmlPage)webClient.getPage(url, SubmitMethod.GET, Collections.EMPTY_LIST);
+        return (HtmlPage)webClient.getPage(url);
     }
 
     /**
@@ -1026,13 +1019,11 @@ public class WebClientTest extends WebTestCase {
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            new URL("http://page1"), page1Content, 200, "OK", "text/html; charset=garbage", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, page1Content, "text/html; charset=garbage");
 
         client.setWebConnection( webConnection );
 
-        final Page page = client.getPage(
-                new URL( "http://page1" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        final Page page = client.getPage(URL_FIRST);
         assertInstanceOf(page, HtmlPage.class);
     }
     

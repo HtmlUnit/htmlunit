@@ -37,11 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.Collections;
-
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -71,15 +66,7 @@ public class TableElementCreatorTest extends WebTestCase {
             + "<body><table>"
             + "<tr><form><td>a</td></form></tr>"
             + "</table></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
 
         // Calling asText() will invoke the element creator which in turn will blow up
         page.asText();

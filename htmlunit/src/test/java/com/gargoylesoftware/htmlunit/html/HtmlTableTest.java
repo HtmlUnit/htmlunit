@@ -38,12 +38,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -68,9 +64,7 @@ public class HtmlTableTest extends WebTestCase {
      *
      * @exception  Exception If the test fails
      */
-    public void testGetTableCell()
-        throws Exception {
-
+    public void testGetTableCell() throws Exception {
         final String htmlContent
                  = "<html><head><title>foo</title></head><body>"
                  + "<table id='table1' summary='Test table'>"
@@ -78,15 +72,8 @@ public class HtmlTableTest extends WebTestCase {
                  + "<tr><td colspan='2'>cell3</td></tr>"
                  + "</table>"
                  + "</body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
 
         final HtmlTableCell cell1 = table.getCellAt( 0, 0 );
@@ -120,15 +107,8 @@ public class HtmlTableTest extends WebTestCase {
                  + "<tr><td colspan='2'>cell3</td></tr>"
                  + "</table>"
                  + "</body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
 
         final HtmlTableCell cell = table.getCellAt( 99, 0 );
@@ -153,15 +133,8 @@ public class HtmlTableTest extends WebTestCase {
                  + "<tr id='row6'><td>cell6</td></tr>"
                  + "</table>"
                  + "</body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
+        
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
 
         final List expectedRows = new ArrayList();
@@ -199,15 +172,8 @@ public class HtmlTableTest extends WebTestCase {
                  + "</tfoot>"
                  + "</table>"
                  + "</body></html>";
-        final WebClient client = new WebClient();
+        final HtmlPage page = loadPage(htmlContent);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
 
         final List expectedRows = new ArrayList();
@@ -247,15 +213,8 @@ public class HtmlTableTest extends WebTestCase {
                  + "</tfoot>"
                  + "</table>"
                  + "</body></html>";
-        final WebClient client = new WebClient();
+        final HtmlPage page = loadPage(htmlContent);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
 
         assertNotNull( table.getHeader() );
@@ -283,15 +242,8 @@ public class HtmlTableTest extends WebTestCase {
                  + "    <tr id='row6'><td>cell6</td></tr>"
                  + "</table>"
                  + "</body></html>";
-        final WebClient client = new WebClient();
+        final HtmlPage page = loadPage(htmlContent);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_GARGOYLE,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
 
         assertEquals( null, table.getHeader() );
@@ -314,15 +266,8 @@ public class HtmlTableTest extends WebTestCase {
                  + "<tr><td colspan='2'>cell3</td></tr>"
                  + "</table>"
                  + "</body></html>";
-        final WebClient client = new WebClient();
+        final HtmlPage page = loadPage(htmlContent);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
 
         assertEquals("MyCaption", table.getCaptionText());
@@ -345,15 +290,7 @@ public class HtmlTableTest extends WebTestCase {
                  + "<tr><td id='cell2'>cell1</td></tr>"
                  + "</tbody></table>"
                  + "</body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
 
         // Check that a <tbody> was inserted properly
         final HtmlTableDataCell cell1 = ( HtmlTableDataCell )page.getHtmlElementById( "cell1" );

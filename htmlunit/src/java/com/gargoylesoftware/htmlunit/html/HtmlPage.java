@@ -64,6 +64,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -1038,8 +1039,7 @@ public final class HtmlPage extends DomNode implements Page {
             final URL url = getFullyQualifiedUrl(newUrl);
 
             if( getWebClient().getRefreshHandler().shouldRefresh( this, url, time ) ) {
-                getWebClient().getPage(
-                        window, url, SubmitMethod.GET, Collections.EMPTY_LIST );
+                getWebClient().getPage(window, new WebRequestSettings(url));
             }
         }
         catch( final MalformedURLException e ) {

@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Collections;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -83,9 +82,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
 
         client.setWebConnection( webConnection );
 
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST,
-                SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
         assertEquals( "First", page.getTitleText() );
 
         final HtmlInlineFrame iframe = (HtmlInlineFrame)page.getHtmlElementById("iframe1");

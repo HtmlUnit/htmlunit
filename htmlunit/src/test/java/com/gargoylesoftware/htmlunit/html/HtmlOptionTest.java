@@ -37,10 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.Collections;
-
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -74,14 +71,7 @@ public class HtmlOptionTest extends WebTestCase {
                  + "</select>"
                  + "<input type='submit' name='button' value='foo'/>"
                  + "</form></body></html>";
-        final WebClient client = new WebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(
-                URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlPage page = loadPage(htmlContent);
 
         final HtmlOption option1 = ( HtmlOption )page.getHtmlElementById( "option1" );
         final HtmlOption option2 = ( HtmlOption )page.getHtmlElementById( "option2" );
