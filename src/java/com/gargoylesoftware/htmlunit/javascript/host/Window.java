@@ -21,6 +21,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.Function;
 
 /**
  * A javascript window class
@@ -114,22 +117,25 @@ public final class Window extends SimpleScriptable {
     /**
      * Open a new window
      *
-     * @param url The url that will be used to load the content of the new window.
-     * @param windowName The name of the window
-     * @param features The features - not currently implemented
-     * @param replaceCurrentEntryInBrowsingHistory How will this affect the history object?
+     * @param context The javascript Context
+     * @param scriptable The object that the function was called on.
+     * @param args The arguments passed to the function.
+     * @param function The function object that was invoked.
      * @return The newly opened window
      */
-    public Window jsFunction_open(
-            final String url,
-            final String windowName,
-            final String features,
-            final boolean replaceCurrentEntryInBrowsingHistory ) {
+    public static Object jsFunction_open(
+        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
 
-        if( features.equals("undefined") == false
+        final String url = getStringArg(0, args);
+        final String windowName = getStringArg(1, args);
+        final String features = getStringArg(2, args);
+        final boolean replaceCurrentEntryInBrowsingHistory = getBooleanArg(3, args, false);
+        final Window thisWindow = (Window)scriptable;
+
+        if( features != null
                 || replaceCurrentEntryInBrowsingHistory == true ) {
 
-            getLog().debug(
+            thisWindow.getLog().debug(
                 "Window.open: features and replaceCurrentEntryInBrowsingHistory "
                 + "not implemented: url=["+url
                 + "] windowName=["+windowName
@@ -138,8 +144,9 @@ public final class Window extends SimpleScriptable {
                 + "]");
         }
 
-        final WebWindow newWebWindow
-            =  webWindow_.getWebClient().openWindow( makeUrlForOpenWindow(url), windowName );
+        final URL newUrl = thisWindow.makeUrlForOpenWindow(url);
+        final WebWindow newWebWindow=  thisWindow.webWindow_.getWebClient().openWindow(
+            newUrl, windowName, thisWindow.webWindow_ );
         return (Window)newWebWindow.getScriptObject();
     }
 
@@ -249,6 +256,9 @@ public final class Window extends SimpleScriptable {
 
         webWindow_ = htmlPage.getEnclosingWindow();
         webWindow_.setScriptObject(this);
+        if( webWindow_ instanceof HtmlElement ) {
+            setHtmlElement((HtmlElement)webWindow_);
+        }
 
         document_ = (Document)makeJavaScriptObject("Document");
         document_.setHtmlElement(htmlPage);
@@ -300,12 +310,18 @@ public final class Window extends SimpleScriptable {
 
 
     /**
-     * Return the value of the opener property.  Currently not implemented
+     * Return the value of the opener property.
      * @return the value of window.opener
      */
-    public SimpleScriptable jsGet_opener() {
-        getLog().debug("Window.jsGet_opener() Not implemented");
-        return null;
+    public Object jsGet_opener() {
+        if( webWindow_ instanceof TopLevelWindow ) {
+            final WebWindow opener = ((TopLevelWindow)webWindow_).getOpener();
+            if( opener != null ) {
+                return (Window)opener.getScriptObject();
+            }
+        }
+
+        return NOT_FOUND;
     }
 
 
