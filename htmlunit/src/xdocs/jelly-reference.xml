@@ -22,13 +22,123 @@
         		It then dumps out the title of that page to the console.
         	</p>
             <source><![CDATA[
-<h:webClient browserVersion="INTERNET_EXPLORER_6_0">
-    <h:getPage method="get" var="page1" uri="http://first"/>
-    Page title is ${page1.titleText}
-</h:webClient>
+<?xml version="1.0"?>
+<test:suite 
+	xmlns:h="jelly:com.gargoylesoftware.htmlunit.jelly.HtmlUnitTagLibrary">
+            
+	<h:webClient browserVersion="INTERNET_EXPLORER_6_0">
+	    <h:getPage method="get" var="page1" uri="http://first"/>
+	    Page title is ${page1.titleText}
+	</h:webClient>
+</test:suite>
             ]]></source>
         </section>
-    </body>
+        
+        <section name="webClient tag">
+        	<p>
+        		This tag represents one instance of the WebClient.  Pages will be loaded
+        		using this instance.
+        	</p>
+        	<table>
+        		<tr>
+        			<th>Attribute</th>
+        			<th>Description</th>
+        			<th>Mandatory</th>
+        		</tr>
+        		<tr>
+        			<td>var</td>
+        			<td>
+        				The name of the jelly variable that will contain the instance of 
+        				WebClient.
+        			</td>
+        			<td>No</td>
+        		</tr>
+        		<tr>
+        			<td>browserVersion</td>
+        			<td>
+        				The browser version that will be used for this instance of WebClient.
+        				This value must be the name of one of the named constants in the
+        				BrowserVersion class.
+        			</td>
+        			<td>No</td>
+        		</tr>
+        	</table>
+        </section>
 
+        <section name="getPage tag">
+        	<p>
+        		This tag will load and return a page
+        	</p>
+        	<table>
+        		<tr>
+        			<th>Attribute</th>
+        			<th>Description</th>
+        			<th>Mandatory</th>
+        		</tr>
+        		<tr>
+        			<td>var</td>
+        			<td>
+        				The name of the jelly variable that will contain the returned
+        				Page.
+        			</td>
+        			<td>Yes</td>
+        		</tr>
+        		<tr>
+        			<td>method</td>
+        			<td>
+        				The http method.  One of "get" or "post".
+        			</td>
+        			<td>No</td>
+        		</tr>
+        		<tr>
+        			<td>uri</td>
+        			<td>
+        				The uri to load.  Ie "http://htmlunit.sourceforge.net/"
+        			</td>
+        			<td>No</td>
+        		</tr>
+        		<tr>
+        			<td>webClient</td>
+        			<td>
+        				The web client to use.  If not specified then HtmlUnit will walk 
+        				up the tag hierarchy looking for an enclosing web client tag.
+        				If a web client cannot be found either way then an exception
+        				will be thrown.
+        			</td>
+        			<td>No</td>
+        		</tr>
+        	</table>
+        </section>
+
+        <section name="mockWebConnection tag">
+        	<p>
+        		Specify a fake WebConnection for the purpose of testing the jelly tags
+        		themselves.  mockWebResponse objects 
+        		will be placed within this element to specify content to return for given
+        		urls.
+        	</p>
+        </section>
+
+        <section name="mockWebRequest tag">
+        	<p>
+        		Specify the content to return for a given request.
+        	</p>
+        	<table>
+        		<tr>
+        			<th>Attribute</th>
+        			<th>Description</th>
+        			<th>Mandatory</th>
+        		</tr>
+        		<tr>
+        			<td>url</td>
+        			<td>
+        				When this url is loaded via getPage, the body of this element
+        				will be returned.
+        			</td>
+        			<td>No</td>
+        		</tr>
+        	</table>
+        </section>
+    </body>
 </document>
 
