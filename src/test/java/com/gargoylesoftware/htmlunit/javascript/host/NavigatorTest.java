@@ -44,7 +44,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -70,7 +70,7 @@ public class NavigatorTest extends WebTestCase {
      */
     public void testJavaEnabled() throws Exception {
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
              = "<html><head><title>First</title><script>\n"

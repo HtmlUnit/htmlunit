@@ -117,9 +117,9 @@ public class ScriptEngineTest extends WebTestCase {
             }
         } );
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
-        webConnection.setContent( html );
+        webConnection.setDefaultResponse( html );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(

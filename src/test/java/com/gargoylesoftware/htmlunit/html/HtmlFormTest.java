@@ -46,7 +46,6 @@ import java.util.ListIterator;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -89,8 +88,8 @@ public class HtmlFormTest extends WebTestCase {
                  + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( htmlContent );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
@@ -137,8 +136,8 @@ public class HtmlFormTest extends WebTestCase {
                  + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( htmlContent );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
@@ -176,8 +175,8 @@ public class HtmlFormTest extends WebTestCase {
                  + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( htmlContent );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
@@ -216,8 +215,8 @@ public class HtmlFormTest extends WebTestCase {
                  + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( htmlContent );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
@@ -243,8 +242,8 @@ public class HtmlFormTest extends WebTestCase {
                  + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( htmlContent );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
@@ -281,7 +280,7 @@ public class HtmlFormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
@@ -319,7 +318,7 @@ public class HtmlFormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
@@ -357,7 +356,7 @@ public class HtmlFormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
@@ -394,7 +393,7 @@ public class HtmlFormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
@@ -431,7 +430,7 @@ public class HtmlFormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
@@ -464,7 +463,7 @@ public class HtmlFormTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 
@@ -496,7 +495,7 @@ public class HtmlFormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
@@ -539,7 +538,7 @@ public class HtmlFormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
@@ -572,8 +571,8 @@ public class HtmlFormTest extends WebTestCase {
                  + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( htmlContent );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
@@ -607,8 +606,8 @@ public class HtmlFormTest extends WebTestCase {
                  + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( htmlContent );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
@@ -635,7 +634,7 @@ public class HtmlFormTest extends WebTestCase {
                  = "<html><head><title>Second</title></head><body'></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
@@ -664,8 +663,8 @@ public class HtmlFormTest extends WebTestCase {
                 + "</form></body></html>";
        final WebClient client = new WebClient();
 
-       final FakeWebConnection webConnection = new FakeWebConnection( client );
-       webConnection.setContent( htmlContent );
+       final MockWebConnection webConnection = new MockWebConnection( client );
+       webConnection.setDefaultResponse( htmlContent );
        client.setWebConnection( webConnection );
 
        final HtmlPage page = ( HtmlPage )client.getPage(
@@ -701,8 +700,8 @@ public class HtmlFormTest extends WebTestCase {
                  + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( htmlContent );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
@@ -735,8 +734,8 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( htmlContent );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(
@@ -778,8 +777,8 @@ public class HtmlFormTest extends WebTestCase {
              + "</form></body></html>";
          final WebClient client = new WebClient();
 
-         final FakeWebConnection webConnection = new FakeWebConnection( client );
-         webConnection.setContent( htmlContent );
+         final MockWebConnection webConnection = new MockWebConnection( client );
+         webConnection.setDefaultResponse( htmlContent );
          client.setWebConnection( webConnection );
 
          final HtmlPage page = ( HtmlPage )client.getPage(
@@ -826,8 +825,8 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( htmlContent );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(

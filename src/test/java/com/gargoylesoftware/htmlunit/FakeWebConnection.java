@@ -38,13 +38,14 @@
 package com.gargoylesoftware.htmlunit;
 
 
+
 /**
  *  A fake HttpProcessor for testing purposes only
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
- * deprecated Use {@link MockWebConnection} instead.
+ * @deprecated Use {@link MockWebConnection} instead.
  */
 public class FakeWebConnection extends MockWebConnection {
     /**
@@ -54,6 +55,17 @@ public class FakeWebConnection extends MockWebConnection {
      */
     public FakeWebConnection( final WebClient webClient ) {
         super( webClient );
+    }
+
+
+    /**
+     * Set the response that will be returned when a url is requested that does
+     * not have a specific content set for it.
+     *
+     * @param content The content to return
+     */
+    public void setContent( final String content ) {
+        setDefaultResponse(content);
     }
 }
 

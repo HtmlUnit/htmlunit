@@ -84,7 +84,7 @@ public class MockResponseTag extends HtmlUnitTagSupport {
             return (MockWebConnection)webConnection;
         }
         throw new JellyTagException(
-            "WebClient is not using a FakeWebConnection - have you used the mockWebConnection tag?");
+            "WebClient is not using a MockWebConnection - have you used the mockWebConnection tag?");
     }
 
     /**

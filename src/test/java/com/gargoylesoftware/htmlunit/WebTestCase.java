@@ -94,8 +94,8 @@ public class WebTestCase extends BaseTestCase {
             client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
         }
 
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
-        webConnection.setContent( html );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( html );
         client.setWebConnection( webConnection );
 
         final HtmlPage page = ( HtmlPage )client.getPage(

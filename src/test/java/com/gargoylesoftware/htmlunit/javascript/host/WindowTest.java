@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import java.net.URL;
 import java.util.ArrayList;
@@ -81,7 +81,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testSetLocation() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title></head><body>"
@@ -117,7 +117,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testOpenWindow() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
@@ -180,7 +180,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testOpenWindow_base() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
@@ -232,7 +232,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testOpenWindow_blank() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
@@ -310,7 +310,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testOpenWindow_self() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title></head><body>"
@@ -360,7 +360,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testOpenWindow_top() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title></head><body>"
@@ -441,7 +441,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testOpenWindow_parent() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title></head><body>"
@@ -522,7 +522,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testAlert_NoAlertHandler() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
             = "<html><head><title>First</title><script>function doTest(){alert('foo')}</script></head>"
@@ -568,7 +568,7 @@ public class WindowTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
         webConnection.setResponse(
@@ -604,7 +604,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testConfirm() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         final List collectedAlerts = new ArrayList();
         final List collectedConfirms = new ArrayList();
 
@@ -638,7 +638,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testConfirm_noConfirmHandler() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         final List collectedAlerts = new ArrayList();
         final List collectedConfirms = new ArrayList();
 
@@ -666,7 +666,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testPrompt() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         final List collectedAlerts = new ArrayList();
         final List collectedPrompts = new ArrayList();
 
@@ -700,7 +700,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testPrompt_noPromptHandler() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         final List collectedAlerts = new ArrayList();
         final List collectedPrompts = new ArrayList();
 
@@ -728,7 +728,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testOpener() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         final List collectedAlerts = new ArrayList();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -783,7 +783,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testSetTimeout() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -817,8 +817,8 @@ public class WindowTest extends WebTestCase {
      */
     public void testAboutURL() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection =
-            new FakeWebConnection(webClient);
+        final MockWebConnection webConnection =
+            new MockWebConnection(webClient);
         final String firstContent =
             "<html><body><script language='JavaScript'>"
                 + "w2=window.open(\"about:blank\", \"AboutBlank\");"
@@ -852,8 +852,8 @@ public class WindowTest extends WebTestCase {
      */
     public void testWindowFrames() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection =
-            new FakeWebConnection(webClient);
+        final MockWebConnection webConnection =
+            new MockWebConnection(webClient);
         final List collectedAlerts = new ArrayList();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -886,8 +886,8 @@ public class WindowTest extends WebTestCase {
      */
     public void testJavascriptVariableFromWindow() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection =
-            new FakeWebConnection(webClient);
+        final MockWebConnection webConnection =
+            new MockWebConnection(webClient);
         final List collectedAlerts = new ArrayList();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -913,8 +913,8 @@ public class WindowTest extends WebTestCase {
      */
     public void testJavascriptVariableFromWindow_NotFound() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection =
-            new FakeWebConnection(webClient);
+        final MockWebConnection webConnection =
+            new MockWebConnection(webClient);
         final List collectedAlerts = new ArrayList();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -940,8 +940,8 @@ public class WindowTest extends WebTestCase {
      */
     public void testGetFrameByName() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection =
-            new FakeWebConnection(webClient);
+        final MockWebConnection webConnection =
+            new MockWebConnection(webClient);
         final List collectedAlerts = new ArrayList();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

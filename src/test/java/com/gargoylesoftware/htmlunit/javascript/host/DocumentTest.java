@@ -47,7 +47,7 @@ import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.FakeWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.StatusHandler;
@@ -170,7 +170,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testFormArray() throws Exception {
         final WebClient client = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String firstContent
                  = "<html><head><SCRIPT lang=\"JavaScript\">"
@@ -211,7 +211,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testDocumentLocationHref() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -242,7 +242,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testDocumentLocation() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -273,7 +273,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testDocumentCreateElement() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -319,7 +319,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testDocumentCreateTextNode() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -365,7 +365,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testAppendChild() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webClient.setWebConnection( webConnection );
 
         final String content
@@ -405,7 +405,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testAppendChild_textNode() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webClient.setWebConnection( webConnection );
 
         final String content
@@ -444,7 +444,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testCloneNode() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webClient.setWebConnection( webConnection );
 
         final String content
@@ -486,7 +486,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testInsertBefore() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webClient.setWebConnection( webConnection );
 
         final String content
@@ -524,7 +524,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testRemoveChild() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webClient.setWebConnection( webConnection );
 
         final String content
@@ -562,7 +562,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testReplaceChild() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webClient.setWebConnection( webConnection );
 
         final String content
@@ -600,7 +600,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testGetElementById() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -633,7 +633,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testGetElementById_resetId() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -670,7 +670,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testGetElementById_setNewId() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -706,7 +706,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testGetElementById_divId() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -738,7 +738,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testGetElementById_scriptId() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script id='script1'>"
@@ -769,7 +769,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testGetElementById_scriptType() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title>"
@@ -801,7 +801,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testGetElementById_scriptSrc() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webClient.setWebConnection( webConnection );
 
         final String firstContent
@@ -836,7 +836,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testParentNode_Nested() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -873,7 +873,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testParentNode_Document() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -904,7 +904,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testParentNode_CreateElement() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -936,7 +936,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testParentNode_AppendChild() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -975,7 +975,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testDocumentElement() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -1009,7 +1009,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testFirstChild_Nested() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -1046,7 +1046,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testFirstChild_AppendChild() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -1087,7 +1087,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testLastChild_Nested() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String lastContent
              = "<html><head><title>Last</title><script>"
@@ -1124,7 +1124,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testLastChild_AppendChild() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String lastContent
              = "<html><head><title>Last</title><script>"
@@ -1165,7 +1165,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testNextSibling_Nested() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String lastContent
              = "<html><head><title>Last</title><script>"
@@ -1202,7 +1202,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testNextSibling_AppendChild() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String lastContent
              = "<html><head><title>Last</title><script>"
@@ -1243,7 +1243,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testPreviousSibling_Nested() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String lastContent
              = "<html><head><title>Last</title><script>"
@@ -1280,7 +1280,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testPreviousSibling_AppendChild() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String lastContent
              = "<html><head><title>Last</title><script>"
@@ -1320,7 +1320,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testAllProperty_KeyByName() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -1356,7 +1356,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testAllProperty_CalledDuringPageLoad() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><body>"
@@ -1386,7 +1386,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testDocumentWrite() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title></head><body>"
@@ -1414,7 +1414,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testDocumentWrite_LoadScript() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webClient.setWebConnection( webConnection );
 
         final String firstContent
@@ -1446,7 +1446,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testDocumentWrite_script() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webClient.setWebConnection( webConnection );
 
         final String mainContent
@@ -1496,7 +1496,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testGetReferrer() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title></head><body onload='alert(document.referrer);'>"
@@ -1522,7 +1522,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testGetReferrer_NoneSpecified() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title></head><body onload='alert(document.referrer);'>"
@@ -1548,7 +1548,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testGetURL() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title></head><body onload='alert(document.URL);'>"
@@ -1574,7 +1574,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testGetElementsByTagName() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -1609,7 +1609,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testGetElementsByTagName_CaseInsensitive() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -1644,7 +1644,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testGetElementsByTagName_Inline() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webClient.setWebConnection( webConnection );
 
         final String firstContent
@@ -1670,7 +1670,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testGetElementsByTagName_LoadScript() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
         webClient.setWebConnection( webConnection );
 
         final String firstContent
@@ -1698,7 +1698,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testDocumentAll_IndexByInt() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -1732,7 +1732,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testDocumentAll_tags() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
              = "<html><head><title>First</title><script>"
@@ -1769,7 +1769,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testCookie_read() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
             = "<html><head><title>First</title><script>"
@@ -1812,7 +1812,7 @@ public class DocumentTest extends WebTestCase {
      */
     public void testStatus() throws Exception {
         final WebClient webClient = new WebClient();
-        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final String firstContent
             = "<html><head><title>First</title><script>"
