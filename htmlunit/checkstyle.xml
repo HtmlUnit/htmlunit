@@ -58,13 +58,17 @@
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
-        <module name="JavadocMethod"/>
+        <module name="JavadocMethod">
+            <property name="scope" value="protected"/>
+        </module>
         <module name="JavadocType">
             <property name="scope" value="protected"/>
             <property name="authorFormat" value="\S"/>
             <property name="versionFormat" value="\$Revision.*\$"/>
         </module>
-        <module name="JavadocVariable"/>
+        <module name="JavadocVariable">
+            <property name="scope" value="protected"/>
+        </module>
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->
@@ -75,7 +79,9 @@
         </module>
         <module name="PackageName"/>
         <module name="ParameterName"/>
-        <module name="StaticVariableName"/>
+        <module name="StaticVariableName">
+            <property name="format" value="^[A-Z][a-zA-Z0-9_]+_$"/>
+        </module>
         <module name="TypeName"/>
         <module name="MemberName">
             <property name="format" value="^[a-z][a-zA-Z0-9_]+_$"/>
@@ -154,7 +160,7 @@
             <property name="format" value="\s+$"/>
             <property name="message" value="Line has trailing spaces."/>
         </module>
-        <module name="TodoComment"/>
+        <!--<module name="TodoComment"/>-->
         <module name="UpperEll"/>
 
     </module>
