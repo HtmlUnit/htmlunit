@@ -88,6 +88,7 @@ public class WebClient {
     private AlertHandler   alertHandler_;
     private ConfirmHandler confirmHandler_;
     private PromptHandler  promptHandler_;
+    private StatusHandler  statusHandler_;
 
     private BrowserVersion browserVersion_ = BrowserVersion.getDefault();
     private boolean isRedirectEnabled_ = true;
@@ -804,6 +805,23 @@ public class WebClient {
         return promptHandler_;
     }
 
+
+    /**
+     * Set the status handler for this webclient.
+     * @param statusHandler The new alerthandler or null if none is specified.
+     */
+    public void setStatusHandler( final StatusHandler statusHandler ) {
+        statusHandler_ = statusHandler;
+    }
+
+
+    /**
+     * Return the status handler for this webclient.
+     * @return the status handler or null if one hasn't been set.
+     */
+    public StatusHandler getStatusHandler() {
+        return statusHandler_;
+    }
 
     /**
      * Return the current browser version
