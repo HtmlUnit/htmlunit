@@ -107,7 +107,7 @@ public class HtmlTable extends ClickableElement {
     /**
      * @return  an iterator over all the HtmlTableRow objects
      */
-    public RowIterator getRowIterator() {
+    private RowIterator getRowIterator() {
         return new RowIterator();
     }
 
@@ -365,7 +365,7 @@ public class HtmlTable extends ClickableElement {
      * an iterator that moves over all rows in tis table. The iterator will also
      * enter into nested row group elements (header, footer and body)
      */
-    protected class RowIterator implements Iterator {
+    private class RowIterator implements Iterator {
 
         private HtmlTableRow nextRow_;
         private TableRowGroup currentGroup_;
