@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
  *  A representation of an html page returned from a server.  This class is the
@@ -1398,12 +1399,21 @@ public final class HtmlPage extends DomNode implements Page {
      * may be this or it may be a freshly loaded page. 
      */
     Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
-        final String onChange = htmlElement.getAttributeValue("onchange");
+        final Function onchange = htmlElement.getEventHandler("onchange");
         final ScriptEngine engine = getWebClient().getScriptEngine();
-        if (onChange.length() != 0 && getWebClient().isJavaScriptEnabled() 
+        if (onchange != null && getWebClient().isJavaScriptEnabled()
                 && engine != null && !engine.isScriptRunning()) {
-            final ScriptResult scriptResult
-                = executeJavaScriptIfPossible( onChange, "onChange handler", true, htmlElement );
+
+            final Event event = new Event(this, this.getScriptObject());
+            final Object[] args = new Object[] {event};
+            
+            final ScriptResult scriptResult =
+                executeJavaScriptFunctionIfPossible(
+                        onchange, 
+                        (Scriptable)htmlElement.getScriptObject(),
+                        args,
+                        htmlElement);
+            
             return scriptResult.getNewPage();
         }
 

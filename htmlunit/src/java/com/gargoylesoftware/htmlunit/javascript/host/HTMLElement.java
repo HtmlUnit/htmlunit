@@ -612,7 +612,7 @@ public class HTMLElement extends NodeImpl {
      * Get the onclick event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Object jsGet_onclick() {
+    public Function jsGet_onclick() {
         return getHtmlElementOrDie().getEventHandler("onclick");
     }
 
@@ -635,5 +635,196 @@ public class HTMLElement extends NodeImpl {
             throw Context.reportRuntimeError("Failed initializing children: " + e.getMessage());
         }
         return children;
+    }
+
+     /**
+     * Set the ondblclick event handler for this element.
+     * @param ondblclick the new handler     */
+    public void jsSet_ondblclick(final Function ondblclick) {
+        getHtmlElementOrDie().setEventHandler("ondblclick", ondblclick);
+    }
+
+    /**
+     * Get the ondblclick event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_ondblclick() {
+        return getHtmlElementOrDie().getEventHandler("ondblclick");
+    }
+
+    /**
+     * Set the onblur event handler for this element.
+     * @param onblur the new handler
+     */
+    public void jsSet_onblur(final Function onblur) {
+        getHtmlElementOrDie().setEventHandler("onblur", onblur);
+    }
+
+    /**
+     * Get the onblur event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_onblur() {
+        return getHtmlElementOrDie().getEventHandler("onblur");
+    }
+
+    /**
+     * Set the onfocus event handler for this element.
+     * @param onfocus the new handler
+     */
+    public void jsSet_onfocus(final Function onfocus) {
+        getHtmlElementOrDie().setEventHandler("onfocus", onfocus);
+    }
+
+    /**
+     * Get the onfocus event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_onfocus() {
+        return getHtmlElementOrDie().getEventHandler("onfocus");
+    }
+
+    /**
+     * Set the onkeydown event handler for this element.
+     * @param onkeydown the new handler
+     */
+    public void jsSet_onkeydown(final Function onkeydown) {
+        getHtmlElementOrDie().setEventHandler("onkeydown", onkeydown);
+    }
+
+    /**
+     * Get the onkeydown event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_onkeydown() {
+        return getHtmlElementOrDie().getEventHandler("onkeydown");
+    }
+
+    /**
+     * Set the onkeypress event handler for this element.
+     * @param onkeypress the new handler
+     */
+    public void jsSet_onkeypress(final Function onkeypress) {
+        getHtmlElementOrDie().setEventHandler("onkeypress", onkeypress);
+    }
+
+    /**
+     * Get the onkeypress event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_onkeypress() {
+        return getHtmlElementOrDie().getEventHandler("onkeypress");
+    }
+
+    /**
+     * Set the onkeyup event handler for this element.
+     * @param onkeyup the new handler
+     */
+    public void jsSet_onkeyup(final Function onkeyup) {
+        getHtmlElementOrDie().setEventHandler("onkeyup", onkeyup);
+    }
+
+    /**
+     * Get the onkeyup event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_onkeyup() {
+        return getHtmlElementOrDie().getEventHandler("onkeyup");
+    }
+
+    /**
+     * Set the onmousedown event handler for this element.
+     * @param onmousedown the new handler
+     */
+    public void jsSet_onmousedown(final Function onmousedown) {
+        getHtmlElementOrDie().setEventHandler("onmousedown", onmousedown);
+    }
+
+    /**
+     * Get the onmousedown event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_onmousedown() {
+        return getHtmlElementOrDie().getEventHandler("onmousedown");
+    }
+
+    /**
+     * Set the onmousemove event handler for this element.
+     * @param onmousemove the new handler
+     */
+    public void jsSet_onmousemove(final Function onmousemove) {
+        getHtmlElementOrDie().setEventHandler("onmousemove", onmousemove);
+    }
+
+    /**
+     * Get the onmousemove event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_onmousemove() {
+        return getHtmlElementOrDie().getEventHandler("onmousemove");
+    }
+
+    /**
+     * Set the onmouseout event handler for this element.
+     * @param onmouseout the new handler
+     */
+    public void jsSet_onmouseout(final Function onmouseout) {
+        getHtmlElementOrDie().setEventHandler("onmouseout", onmouseout);
+    }
+
+    /**
+     * Get the onmouseout event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_onmouseout() {
+        return getHtmlElementOrDie().getEventHandler("onmouseout");
+    }
+
+    /**
+     * Set the onmouseover event handler for this element.
+     * @param onmouseover the new handler
+     */
+    public void jsSet_onmouseover(final Function onmouseover) {
+        getHtmlElementOrDie().setEventHandler("onmouseover", onmouseover);
+    }
+
+    /**
+     * Get the onmouseover event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_onmouseover() {
+        return getHtmlElementOrDie().getEventHandler("onmouseover");
+    }
+
+    /**
+     * Set the onmouseup event handler for this element.
+     * @param onmouseup the new handler
+     */
+    public void jsSet_onmouseup(final Function onmouseup) {
+        getHtmlElementOrDie().setEventHandler("onmouseup", onmouseup);
+    }
+
+    /**
+     * Get the onmouseup event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_onmouseup() {
+        return getHtmlElementOrDie().getEventHandler("onmouseup");
+    }
+
+    /**
+     * Set the onresize event handler for this element.
+     * @param onresize the new handler
+     */
+    public void jsSet_onresize(final Function onresize) {
+        getHtmlElementOrDie().setEventHandler("onresize", onresize);
+    }
+
+    /**
+     * Get the onresize event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Function jsGet_onresize() {
+        return getHtmlElementOrDie().getEventHandler("onresize");
     }
 }
