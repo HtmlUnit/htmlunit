@@ -105,6 +105,9 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final FakeWebConnection webConnection = new FakeWebConnection( webClient );
 
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        
         final String firstContent
              = "<html><head><title>First</title></head><body>"
              + "<form name='form1'>"
@@ -113,7 +116,9 @@ public class WindowTest extends WebTestCase {
              + "</form>"
              + "</body></html>";
         final String secondContent
-             = "<html><head><title>Second</title></head><body></body></html>";
+             = "<html><head><title>Second</title></head><body>"
+             + "<script>alert(self.name)</script>"
+             + "</body></html>";
 
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo( webClient );
@@ -149,6 +154,10 @@ public class WindowTest extends WebTestCase {
         final WebWindowEvent changedEvent = (WebWindowEvent)eventCatcher.getEventAt(2);
         assertNull( changedEvent.getOldPage() );
         assertEquals( "Second", ((HtmlPage)changedEvent.getNewPage()).getTitleText() );
+        
+        assertEquals(
+            Collections.singletonList("MyNewWindow"),
+            collectedAlerts);
     }
 
 
