@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1093017" due-to="David D. Kilzer">
+                Submit form elements in the same order that they appear in the HTML form.
+            </action>
             <action type="update" dev="yourgod">
 				Upgraded commons-httpclient to version 3.0rc1
 			</action>        

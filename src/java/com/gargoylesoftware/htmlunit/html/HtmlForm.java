@@ -201,7 +201,7 @@ public class HtmlForm extends ClickableElement {
      * @return The list of {@link KeyValuePair}s.
      */
     public final List getParameterListForSubmit( final SubmittableElement submitElement ) {
-        final Collection submittableElements = getAllSubmittableElements();
+        final Collection submittableElements = getAllSubmittableElements(submitElement);
 
         final List parameterList = new ArrayList( submittableElements.size() );
         final Iterator iterator = submittableElements.iterator();
@@ -209,12 +209,6 @@ public class HtmlForm extends ClickableElement {
             final SubmittableElement element = ( SubmittableElement )iterator.next();
             final KeyValuePair[] pairs = element.getSubmitKeyValuePairs();
 
-            for( int i = 0; i < pairs.length; i++ ) {
-                parameterList.add( pairs[i] );
-            }
-        }
-        if( submitElement != null && isValidForSubmission((HtmlElement) submitElement) ) {
-            final KeyValuePair[] pairs = submitElement.getSubmitKeyValuePairs();
             for( int i = 0; i < pairs.length; i++ ) {
                 parameterList.add( pairs[i] );
             }
@@ -262,16 +256,18 @@ public class HtmlForm extends ClickableElement {
      *  Return a collection of elements that represent all the "submittable"
      *  elements in this form
      *
+     * @param submitElement The element that would have been pressed to submit the
+     * form or null if the form was submitted by javascript.
      * @return  See above
      */
-    public Collection getAllSubmittableElements() {
+    public Collection getAllSubmittableElements(final SubmittableElement submitElement) {
 
         final List submittableElements = new ArrayList();
 
         final DescendantElementsIterator iterator = getAllHtmlChildElements();
         while( iterator.hasNext() ) {
             final HtmlElement element = ( HtmlElement )iterator.next();
-            if( isSubmittable(element) ) {
+            if( isSubmittable(element, submitElement) ) {
                 submittableElements.add(element);
             }
         }
@@ -310,13 +306,16 @@ public class HtmlForm extends ClickableElement {
         return true;
     }
 
-    private boolean isSubmittable( final HtmlElement element ) {
+    private boolean isSubmittable( final HtmlElement element, final SubmittableElement submitElement ) {
         final String tagName = element.getTagName();
         if (!isValidForSubmission(element)){
             return false;
         }
 
         // The one submit button that was clicked can be submitted but no other ones
+        if (element == submitElement) {
+            return true;
+        }
         if( tagName.equals( "input" ) ) {
             final HtmlInput input = (HtmlInput)element;
             final String type = input.getTypeAttribute().toLowerCase();
