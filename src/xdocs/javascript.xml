@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>JavaScript Support</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <revision>$Revision$</revision>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                Core language support for JavaScript is provided by the
+                <a href="http://www.mozilla.org/rhino">Mozilla Rhino</a> engine.  What HtmlUnit provides
+                are all the browser specific host objects such as Document or Navigator.
+            </p>
+        </section>
+
+        <section name="SimpleScriptable">
+            <p>
+                All of HtmlUnit's JavaScript objects subclass SimpleScripable either directly or indirectly.
+                This class contains all the common methods needed by the HtmlUnit host objects.  Additionally,
+                it changes the way that javascript method lookup happens.  The rhino engine doesn't walk
+                up the class hierarchy when looking for methods starting with jsGet_, jsSet_ or jsFunction.
+                SimpleScriptable changes this so that the superclass hierarchy is walked.
+            </p>
+        </section>
+
+        <section name="JavaScriptConfiguration.xml">
+            <p>
+                Different browsers and versions of browsers support different javascript properties and functions.
+                The file JavaScriptConfiguration.xml contains all of this browser specific information.  The plan
+                is to have properties and functions present or not based on the information in this file.  Today
+                not all of that support is present.
+            </p>
+        </section>
+    </body>
+</document>
