@@ -45,6 +45,10 @@
 		<change type="new">
 			Added support for the Javascript Style object
 		</change>
+		<change type="fix">
+			Fixed bug where comments on the same line of an opening html comment inside a script tag
+			were being treated as javascript rather than as comment
+		</change>
 	</change-log>
 </section>
 
