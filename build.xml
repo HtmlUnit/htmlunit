@@ -75,6 +75,17 @@
         <classpath refid="test.class.path"/>
     </javac>
 </target>
+<target name="jar" description="Make a jar of HtmlUnit" depends="compile">
+    <jar
+        jarfile="build/HtmlUnit.jar"
+        basedir="target/classes"
+        excludes="**/test/*,**/*.java,build.xml,lib,**/package.html"
+    />
+    <jar
+        jarfile="build/HtmlUnit-src.jar"
+        basedir="src/java"
+        includes="**/*.java"/>    
+</target>
 
 <target name="cleancompile" description="clean compile">
      <delete quiet="true">
