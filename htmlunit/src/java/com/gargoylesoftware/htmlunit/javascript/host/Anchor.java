@@ -37,6 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.MalformedURLException;
+
+import org.mozilla.javascript.Context;
+
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+
 
 /**
  * The javascript object that represents an anchor
@@ -45,6 +52,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
  * @author  David D. Kilzer
+ * @author  Marc Guillemot
  */
 public class Anchor extends FocusableHostElement {
 
@@ -80,4 +88,43 @@ public class Anchor extends FocusableHostElement {
         return getHtmlElementOrDie().getAttributeValue( "href" );
     }
 
+    /**
+     * Calls for instance for implicit conversion to string
+     * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#getDefaultValue(java.lang.Class)
+     * @param hint the type hint
+     * @return the default value
+     */
+    public Object getDefaultValue(final Class hint) {
+        final HtmlAnchor link = (HtmlAnchor) getHtmlElementOrDie();
+        final String href = link.getHrefAttribute();
+        
+        final String response;
+        if (href == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+            response = ""; // for example for named anchors
+        }
+        else {
+            final int indexAnchor = href.indexOf('#');
+            final String beforeAnchor;
+            final String anchorPart; 
+            if (indexAnchor == -1) {
+                beforeAnchor = href;
+                anchorPart = "";
+            }
+            else {
+                beforeAnchor = href.substring(0, indexAnchor);
+                anchorPart = href.substring(indexAnchor);
+            }
+
+            try {
+                response = link.getPage().getFullyQualifiedUrl(beforeAnchor).toExternalForm()
+                + anchorPart;
+            }
+            catch (MalformedURLException e) {
+                throw Context.reportRuntimeError("Problem reading url: " + e);
+            }
+        }
+        
+        return response;
+    }
+    
 }

@@ -8,6 +8,9 @@
     <body>
         <release version="next" date="unknown">
             <action type="update" dev="mguillem">
+                JavaScript: default conversion to string of an anchor returns the fully qualified url specified by the href.
+            </action>
+            <action type="update" dev="mguillem">
                 JavaScript: the dom node of a &lt;frame&gt; or &lt;frame&gt; is now visible to the contained page while loading.
             </action>
             <action type="update" dev="mguillem" id="1084226">
