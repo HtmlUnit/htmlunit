@@ -1,695 +1,701 @@
 <?xml version="1.0"?>
 <document>
-	<properties>
-		<title>Changes</title>
-		<author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
-	</properties>
+    <properties>
+        <title>Changes</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+    </properties>
 
-	<body>
-		<release version="1.2.2" date="March 29, 2003">
-			<action type="add" dev="mbowler">
-				Started tracking more information about changes
-			</action>
-			<action type="update" due-to="Jean-Luc Vaillant" id="705703" dev="mbowler">
-				Fixed bug where the checked attribute wasn't always returning the correct value.
-			</action>
-			<action type="update" due-to="Jean-Luc Vaillant" id="705693" dev="mbowler">
-				Fixed bug where checkboxes were returning the wrong value if they hadn't explicitly
-				been set by the server.
-			</action>
-			<action type="add" id="705951" dev="mbowler">
-				Added support for javascript Document.getElementsByTagName()
-			</action>
-			<action type="update" id="707750" due-to="Mabel Chow" dev="mbowler">
-				Fixed bug where document.all wasn't being initialized correctly until after the entire page had
-				loaded.  This meant that javascript that executed during page load would blow up when trying
-				to access document.all.
-			</action>
-			<action type="add" due-to="Teo Kian Lee" dev="mbowler">
-				Added support for location.hostname which fixed all but one of the tests in the sanity check.
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for document.all[index]
-			</action>
-			<action type="update" dev="mbowler">
-				Changed the javascript tagName attribute to return uppercase values according to spec
-			</action>
-			<action type="update" dev="mbowler">
-				Updated configuration file with more functions/properties
-			</action>
-			<action type="add" due-to="Mabel Chow" dev="mbowler">
-				Added support for document.all.tags()
-			</action>
-			<action type="update" due-to="Dominique Broeglin" patch-author="Dominique Broeglin" dev="mbowler">
-				Fixed bug in expansion of relative urls
-			</action>
-			<action type="add" id="709740" due-to="David K. Taylor" dev="mbowler">
-				Added support for setting the src attribute on an iframe via javascript.  Setting this attribute
-				will cause the iframe to be reloaded with new content.
-			</action>
-			<action type="update" id="707343" dev="mbowler">
-				Improved the documentation for WebWindowEvent handling as the behaviour wasn't really
-				self explanatory.
-			</action>
-		</release>
+    <body>
+        <release version="1.2.2" date="unknown">
+        </release>
+    </body>
 
 
-		<release version="1.2.1" date="March 20, 2003">
-			<action type="add" dev="mbowler">
-				Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlButtonInput#click()</javadoc>
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed a bug in javascript loading where external scripts were being loaded after the page was fully
-				parsed rather than as each &lt;script&gt; tag was being handled.  This resulted in situations where
-				javascript that was executed during the parsing of the page would not be able to access functions
-				declared in the external javascript files.
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug in HtmlForm.getRadioButtonsByName() where it would not match elements with an
-				uppercase value for "radio"
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed a bunch of places that were declared to throw
-				<javadoc>com.gargoylesoftware.htmlunit.ElementNotFoundException</javadoc> but never actually
-				did.
-			</action>
-		</release>
+    <body>
+        <release version="1.2.2" date="March 29, 2003">
+            <action type="add" dev="mbowler">
+                Started tracking more information about changes
+            </action>
+            <action type="update" due-to="Jean-Luc Vaillant" id="705703" dev="mbowler">
+                Fixed bug where the checked attribute wasn't always returning the correct value.
+            </action>
+            <action type="update" due-to="Jean-Luc Vaillant" id="705693" dev="mbowler">
+                Fixed bug where checkboxes were returning the wrong value if they hadn't explicitly
+                been set by the server.
+            </action>
+            <action type="add" id="705951" dev="mbowler">
+                Added support for javascript Document.getElementsByTagName()
+            </action>
+            <action type="update" id="707750" due-to="Mabel Chow" dev="mbowler">
+                Fixed bug where document.all wasn't being initialized correctly until after the entire page had
+                loaded.  This meant that javascript that executed during page load would blow up when trying
+                to access document.all.
+            </action>
+            <action type="add" due-to="Teo Kian Lee" dev="mbowler">
+                Added support for location.hostname which fixed all but one of the tests in the sanity check.
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for document.all[index]
+            </action>
+            <action type="update" dev="mbowler">
+                Changed the javascript tagName attribute to return uppercase values according to spec
+            </action>
+            <action type="update" dev="mbowler">
+                Updated configuration file with more functions/properties
+            </action>
+            <action type="add" due-to="Mabel Chow" dev="mbowler">
+                Added support for document.all.tags()
+            </action>
+            <action type="update" due-to="Dominique Broeglin" patch-author="Dominique Broeglin" dev="mbowler">
+                Fixed bug in expansion of relative urls
+            </action>
+            <action type="add" id="709740" due-to="David K. Taylor" dev="mbowler">
+                Added support for setting the src attribute on an iframe via javascript.  Setting this attribute
+                will cause the iframe to be reloaded with new content.
+            </action>
+            <action type="update" id="707343" dev="mbowler">
+                Improved the documentation for WebWindowEvent handling as the behaviour wasn't really
+                self explanatory.
+            </action>
+        </release>
 
 
-		<release version="1.2" date="March 10, 2003">
-			<action type="update" dev="mbowler">
-				Fixed bug where redirection didn't happen correctly if the location header contained
-				multiple entries seperated by commas
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where some success status codes (not 200) were being reported as errors
-			</action>
-			<action type="update" dev="mbowler">
-				Upgraded NekoHTML to version 0.7.4
-			</action>
-			<action type="update" dev="mbowler">
-				Upgraded commons-httpclient to 2.0beta3
-			</action>
-			<action type="update" dev="mbowler">
-				Upgraded xerces to 2.2.1
-			</action>
-			<action type="update" dev="mbowler">
-				Upgraded the rhino javascript engine to version 1.5b3
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for the Window.opener property
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where javascript that was enclosed in html comment tags would blow up
-			</action>
-			<action type="add" dev="mbowler">
-				Initial support for keyboard navigation
-			</action>
-			<action type="add" dev="mbowler">
-				Initial draft of a howto for keyboard navigation
-			</action>
-			<action type="add" dev="mbowler">
-				New method:
-				<javadoc>com.gargoylesoftware.htmlunit.html.HtmlButton#isDisabled()</javadoc>
-			</action>
-			<action type="update" dev="mbowler">
-				The click() method on buttons now do nothing if that element is disabled
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where javascript Form.elements was not returning radio buttons
-			</action>
-			<action type="update" dev="mbowler">
-				Refactored the interface between WebClient and WebConnection to make it easier to
-				add custom implementations of WebConnection.
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for the Javascript Style object
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where comments on the same line of an opening html comment inside a script tag
-				were being treated as javascript rather than as comment
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where clicking on a checkbox would submit the form.
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where form.submit() was always loading into the default WebWindow, not the
-				current one.
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for indexed properties in javascript forms
-			</action>
-			<action type="update" dev="mbowler">
-				Changes in the latest versions of commons-httpclient are reusing buffers that they
-				previously weren't.  This results in a situation where trying to get the content
-				out of a WebResponse after the inital load would result in no content.  Buffering
-				is now done within HtmlUnit to avoid this problem.
-			</action>
-			<action type="add" dev="mbowler">
-				New method
-				<javadoc>com.gargoylesoftware.htmlunit.WebResponse#getLoadTimeInMilliSeconds()</javadoc>
-				to measure load times of specific pages.  This is intended for performance tuning of
-				web applications
-			</action>
-			<action type="update" dev="mbowler">
-				Moved submission guidelines into their own <a href="submittingPatches.html">document</a>.
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where the variable "this" in an onclick handler was a Window rather than the
-				appropriate component.
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for onchange handlers in input tags
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for javascript document.referrer
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for javascript document.URL
-			</action>
-			<action type="add" dev="mbowler">
-				Added initial support for javascript document.write().  Calling document.write() to add content
-				while the page is loading is working.  Using it to write to a different frame is not.
-			</action>
-		</release>
+        <release version="1.2.1" date="March 20, 2003">
+            <action type="add" dev="mbowler">
+                Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlButtonInput#click()</javadoc>
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed a bug in javascript loading where external scripts were being loaded after the page was fully
+                parsed rather than as each &lt;script&gt; tag was being handled.  This resulted in situations where
+                javascript that was executed during the parsing of the page would not be able to access functions
+                declared in the external javascript files.
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug in HtmlForm.getRadioButtonsByName() where it would not match elements with an
+                uppercase value for "radio"
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed a bunch of places that were declared to throw
+                <javadoc>com.gargoylesoftware.htmlunit.ElementNotFoundException</javadoc> but never actually
+                did.
+            </action>
+        </release>
 
 
-		<release version="1.1" date="November 25, 2002">
-			<action type="update" dev="mbowler">
-				Fixed bug where loading of external javascript files would not follow redirects.
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where accessing radio buttons by name wasn't working correctly
-			</action>
-			<action type="update" dev="mbowler">
-				Stubbed out Window.close()
-			</action>
-			<action type="update" dev="mbowler">
-				If there is only one radio button with a given name then javascript should be returning
-				the radio button, not an array of buttons.  The code was always returning an array.
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where the javascript Option.text was returning the wrong value
-			</action>
-		</release>
+        <release version="1.2" date="March 10, 2003">
+            <action type="update" dev="mbowler">
+                Fixed bug where redirection didn't happen correctly if the location header contained
+                multiple entries seperated by commas
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where some success status codes (not 200) were being reported as errors
+            </action>
+            <action type="update" dev="mbowler">
+                Upgraded NekoHTML to version 0.7.4
+            </action>
+            <action type="update" dev="mbowler">
+                Upgraded commons-httpclient to 2.0beta3
+            </action>
+            <action type="update" dev="mbowler">
+                Upgraded xerces to 2.2.1
+            </action>
+            <action type="update" dev="mbowler">
+                Upgraded the rhino javascript engine to version 1.5b3
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for the Window.opener property
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where javascript that was enclosed in html comment tags would blow up
+            </action>
+            <action type="add" dev="mbowler">
+                Initial support for keyboard navigation
+            </action>
+            <action type="add" dev="mbowler">
+                Initial draft of a howto for keyboard navigation
+            </action>
+            <action type="add" dev="mbowler">
+                New method:
+                <javadoc>com.gargoylesoftware.htmlunit.html.HtmlButton#isDisabled()</javadoc>
+            </action>
+            <action type="update" dev="mbowler">
+                The click() method on buttons now do nothing if that element is disabled
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where javascript Form.elements was not returning radio buttons
+            </action>
+            <action type="update" dev="mbowler">
+                Refactored the interface between WebClient and WebConnection to make it easier to
+                add custom implementations of WebConnection.
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for the Javascript Style object
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where comments on the same line of an opening html comment inside a script tag
+                were being treated as javascript rather than as comment
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where clicking on a checkbox would submit the form.
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where form.submit() was always loading into the default WebWindow, not the
+                current one.
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for indexed properties in javascript forms
+            </action>
+            <action type="update" dev="mbowler">
+                Changes in the latest versions of commons-httpclient are reusing buffers that they
+                previously weren't.  This results in a situation where trying to get the content
+                out of a WebResponse after the inital load would result in no content.  Buffering
+                is now done within HtmlUnit to avoid this problem.
+            </action>
+            <action type="add" dev="mbowler">
+                New method
+                <javadoc>com.gargoylesoftware.htmlunit.WebResponse#getLoadTimeInMilliSeconds()</javadoc>
+                to measure load times of specific pages.  This is intended for performance tuning of
+                web applications
+            </action>
+            <action type="update" dev="mbowler">
+                Moved submission guidelines into their own <a href="submittingPatches.html">document</a>.
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where the variable "this" in an onclick handler was a Window rather than the
+                appropriate component.
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for onchange handlers in input tags
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for javascript document.referrer
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for javascript document.URL
+            </action>
+            <action type="add" dev="mbowler">
+                Added initial support for javascript document.write().  Calling document.write() to add content
+                while the page is loading is working.  Using it to write to a different frame is not.
+            </action>
+        </release>
 
 
-		<release version="1.1-rc2" date="November 16, 2002">
-			<action type="update" dev="mbowler">
-				Fixed bug where calling WebClient.open() would open a new top level window every time.
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where javascript:Window.open() was not returning the new window object
-			</action>
-			<action type="add" developer="Mike J. Bresnahan" dev="mbowler">
-				Added support for onchange handler in HtmlSelect
-			</action>
-			<action type="update" dev="mbowler">
-				Cleaned up some javadoc warnings
-			</action>
-			<action type="add" dev="mbowler">
-				New method
-				<javadoc>com.gargoylesoftware.htmlunit.WebClient#loadWebResponse(java.net.URL, com.gargoylesoftware.htmlunit.SubmitMethod, java.util.List)</javadoc>
-			</action>
-			<action type="update" dev="mbowler">
-				Removed the need for HiddenWebWindow - javascript files are now loaded via
-				<javadoc>com.gargoylesoftware.htmlunit.WebClient#loadWebResponse(java.net.URL, com.gargoylesoftware.htmlunit.SubmitMethod, java.util.List)</javadoc>.
-				This should fix an intermittant bug where an UnsupportedOperationException was being called from
-				the HiddenWebWindow if a javascript file was returned with a content type of "text/html"
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where javascript:option.getValue() was returning the text, not the value
-			</action>
-			<action type="update" dev="mbowler">
-				Improved some error handling when secondary pages are being loaded by frames
-			</action>
-		</release>
+        <release version="1.1" date="November 25, 2002">
+            <action type="update" dev="mbowler">
+                Fixed bug where loading of external javascript files would not follow redirects.
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where accessing radio buttons by name wasn't working correctly
+            </action>
+            <action type="update" dev="mbowler">
+                Stubbed out Window.close()
+            </action>
+            <action type="update" dev="mbowler">
+                If there is only one radio button with a given name then javascript should be returning
+                the radio button, not an array of buttons.  The code was always returning an array.
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where the javascript Option.text was returning the wrong value
+            </action>
+        </release>
 
 
-		<release version="1.1-rc1" date="October 29, 2002">
-			<action type="update" dev="mbowler">
-				Upgraded commons-logging.jar to 1.0.2
-			</action>
-			<action type="update" dev="mbowler">
-				Upgraded commons-httpclient.jar to Oct 20/2002 gump build
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for javascript:Input.disabled
-			</action>
-			<action type="update" dev="mbowler">
-				Upgraded NekoHTML to version 0.6.8 + patches from the author
-			</action>
-			<action type="update" dev="mbowler">
-				Changed window.open() to understand the magic name _self
-			</action>
-			<action type="add" dev="mbowler">
-				Added <javadoc>com.gargoylesoftware.htmlunit.html.HtmlOption#setSelected(boolean)</javadoc>
-			</action>
-			<action type="add" dev="mbowler">
-				Completed support for reset buttons
-			</action>
-			<action type="update" dev="mbowler">
-				Page load was blowing up if the name of an input was the same as the name of a
-				predefined property in Form (ie id or action). Fixed so that if the input has the
-				same name as a predefined property, the input wins.
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for the javascript method Window.confirm()
-			</action>
-			<action type="add" dev="mbowler">
-				New interface <javadoc>com.gargoylesoftware.htmlunit.ConfirmHandler</javadoc>
-			</action>
-			<action type="add" dev="mbowler">
-				New method <javadoc>com.gargoylesoftware.htmlunit.WebClient#setConfirmHandler(com.gargoylesoftware.htmlunit.ConfirmHandler)</javadoc>
-				and <javadoc>com.gargoylesoftware.htmlunit.WebClient#getConfirmHandler()</javadoc>
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for the javascript method Window.prompt()
-			</action>
-			<action type="add" dev="mbowler">
-				New interface <javadoc>com.gargoylesoftware.htmlunit.PromptHandler</javadoc>
-			</action>
-			<action type="add" dev="mbowler">
-				New method
-				<javadoc>com.gargoylesoftware.htmlunit.WebClient#setPromptHandler(com.gargoylesoftware.htmlunit.PromptHandler)</javadoc> and
-				<javadoc>com.gargoylesoftware.htmlunit.WebClient#getPromptHandler()</javadoc>
-			</action>
-			<action type="add" dev="mbowler">
-				New method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlForm#getParameterListForSubmit()</javadoc>.
-				This method is intended as a debugging aid.
-			</action>
-			<action type="update" dev="mbowler">
-				Page load would blow up if no body tag found.  Framesets aren't required to
-				have body tags
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for javascript urls in Frame and IFrame src tags
-			</action>
-			<action type="update" dev="mbowler">
-				Improved some error messages during initialization
-			</action>
-			<action type="add" dev="mbowler">
-				New class <javadoc>com.gargoylesoftware.htmlunit.ObjectInstantiationException</javadoc>
-			</action>
-			<action type="add" dev="mbowler">
-				Added protocol package for url protocols and added protocol/javascript package for
-				code that supports javascript urls
-			</action>
-			<action type="update" dev="mbowler">
-				Removed deprecated method WebClient.setBrowserVersion(BrowserVersion).  No replacement
-				for this method - browser versions must be set in the constructor of the WebClient.
-			</action>
-			<action type="update" dev="mbowler">
-				Removed deprecated method HtmlPage.executeJavascriptIfPossible(String,String). Use
-				HtmlPage.executeJavaScriptIfPossible(String,String,boolean) instead.
-			</action>
-			<action type="update" dev="mbowler">
-				Removed deprecated method HtmlPage.getTitle().  Use HtmlPage.getTitleText() instead.
-			</action>
-			<action type="update" dev="mbowler">
-				Added support for manipulating the disabled attribute of any element via javascript.
-				This is incorrect according to the html specification but Internet Explorer supports
-				it so we have to as well.  This will print a warning if it is used.
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where script tags that loaded external files would cause the new script
-				to overwrite the existing page in the window
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where a redirect called from javascript in the page load would not replace
-				the page.
-			</action>
-		</release>
+        <release version="1.1-rc2" date="November 16, 2002">
+            <action type="update" dev="mbowler">
+                Fixed bug where calling WebClient.open() would open a new top level window every time.
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where javascript:Window.open() was not returning the new window object
+            </action>
+            <action type="add" developer="Mike J. Bresnahan" dev="mbowler">
+                Added support for onchange handler in HtmlSelect
+            </action>
+            <action type="update" dev="mbowler">
+                Cleaned up some javadoc warnings
+            </action>
+            <action type="add" dev="mbowler">
+                New method
+                <javadoc>com.gargoylesoftware.htmlunit.WebClient#loadWebResponse(java.net.URL, com.gargoylesoftware.htmlunit.SubmitMethod, java.util.List)</javadoc>
+            </action>
+            <action type="update" dev="mbowler">
+                Removed the need for HiddenWebWindow - javascript files are now loaded via
+                <javadoc>com.gargoylesoftware.htmlunit.WebClient#loadWebResponse(java.net.URL, com.gargoylesoftware.htmlunit.SubmitMethod, java.util.List)</javadoc>.
+                This should fix an intermittant bug where an UnsupportedOperationException was being called from
+                the HiddenWebWindow if a javascript file was returned with a content type of "text/html"
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where javascript:option.getValue() was returning the text, not the value
+            </action>
+            <action type="update" dev="mbowler">
+                Improved some error handling when secondary pages are being loaded by frames
+            </action>
+        </release>
 
 
-		<release version="1.1-pre5" date="September 24, 2002">
-			<action type="update" dev="mbowler">
-				Changed html parser from
-				<a href="http://sourceforge.net/projects/jtidy">JTidy</a> to
-				<a href="http://www.apache.org/~andyc/neko/doc/index.html">CyberNeko</a>.
-				CyberNeko is better at parsing really bad html but this now gives us a dependancy on the
-				<a href="http://xml.apache.org/xerces2-j/">xerces parser from apache</a>.
-			</action>
-			<action type="update" dev="mbowler">
-				The directory structure has undergone a significant change and is now checked in under
-				a single module ("htmlunit") in cvs.  This should only affect those people who are
-				checking out code directly from cvs.
-			</action>
-			<action type="update" dev="mbowler">
-				Upgraded checkstyle to version 2.4
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for document.location (an alias for window.location)
-			</action>
-			<action type="update" dev="mbowler">
-				Changed initialization order in HtmlPage so that the enclosing window
-				is initialized before the javascript is run
-			</action>
-			<action type="update" dev="mbowler">
-				BEHAVIOUR CHANGE: WebClients may no longer change browser versions after creation.
-				This is required because some of the javascript bits initialize differently
-				depending on which browser is in use.  If we allowed the browser version to
-				change then behaviour would be very unpredictable.
-			</action>
-			<action type="add" dev="mbowler">
-				Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage#getFirstAnchorByText(java.lang.String)</javadoc>
-			</action>
-			<action type="update" dev="mbowler">
-				First steps towards having property/function information in a configuration file
-			</action>
-			<action type="add" dev="mbowler">
-				Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage#getHtmlElementsByAccessKey(char)</javadoc>
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for javascript:document.getElementById()
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for javascript:document.all[string]
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where relative urls were not being expanded in certain situations
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug in relative url expansion that was blowing up on urls like //foo.com
-			</action>
-			<action type="update" dev="mbowler">
-				Upgraded commons-httpclient.jar and commons-logging.jar to the Aug 30 gump build
-			</action>
-			<action type="add" dev="mbowler">
-				Added <javadoc>com.gargoylesoftware.htmlunit.html.HtmlElement#asXml()</javadoc>
-			</action>
-			<action type="add" dev="mbowler">
-				Added <javadoc>com.gargoylesoftware.htmlunit.WebClient#expandUrl(java.net.URL, java.lang.String)</javadoc>
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where relative urls in redirects were not being expanded.
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug in
-				<javadoc>com.gargoylesoftware.htmlunit.html.HtmlSelect#getOptionByValue(java.lang.String)</javadoc>
-				where searching for the option would start at the top of the page instead of at the select.
-			</action>
-			<action type="update" dev="mbowler">
-				Applied patches to NekoHTML to fix problems with script tags and isindex
-				tags.  Thanks to Andy Clark (author of NekoHTML) for extremely quick
-				responses to bug reports.
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for
-				<javadoc>com.gargoylesoftware.htmlunit.html.HtmlImageInput#click()</javadoc> and
-				<javadoc>com.gargoylesoftware.htmlunit.html.HtmlImageInput#click(int, int)</javadoc>
-			</action>
-			<action type="update" dev="mbowler">
-				Changed redirect logic so that on a 302 or 303 status, if the method changes
-				from post to get, the parameters will be thrown away for the second request.
-				The http spec is unclear on this exact behaviour but the common browsers seem
-				to do it this way.
-			</action>
-			<action type="add" dev="mbowler">
-				Added the constant BrowserVersion.NETSCAPE_6_2_3
-			</action>
-		</release>
+        <release version="1.1-rc1" date="October 29, 2002">
+            <action type="update" dev="mbowler">
+                Upgraded commons-logging.jar to 1.0.2
+            </action>
+            <action type="update" dev="mbowler">
+                Upgraded commons-httpclient.jar to Oct 20/2002 gump build
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for javascript:Input.disabled
+            </action>
+            <action type="update" dev="mbowler">
+                Upgraded NekoHTML to version 0.6.8 + patches from the author
+            </action>
+            <action type="update" dev="mbowler">
+                Changed window.open() to understand the magic name _self
+            </action>
+            <action type="add" dev="mbowler">
+                Added <javadoc>com.gargoylesoftware.htmlunit.html.HtmlOption#setSelected(boolean)</javadoc>
+            </action>
+            <action type="add" dev="mbowler">
+                Completed support for reset buttons
+            </action>
+            <action type="update" dev="mbowler">
+                Page load was blowing up if the name of an input was the same as the name of a
+                predefined property in Form (ie id or action). Fixed so that if the input has the
+                same name as a predefined property, the input wins.
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for the javascript method Window.confirm()
+            </action>
+            <action type="add" dev="mbowler">
+                New interface <javadoc>com.gargoylesoftware.htmlunit.ConfirmHandler</javadoc>
+            </action>
+            <action type="add" dev="mbowler">
+                New method <javadoc>com.gargoylesoftware.htmlunit.WebClient#setConfirmHandler(com.gargoylesoftware.htmlunit.ConfirmHandler)</javadoc>
+                and <javadoc>com.gargoylesoftware.htmlunit.WebClient#getConfirmHandler()</javadoc>
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for the javascript method Window.prompt()
+            </action>
+            <action type="add" dev="mbowler">
+                New interface <javadoc>com.gargoylesoftware.htmlunit.PromptHandler</javadoc>
+            </action>
+            <action type="add" dev="mbowler">
+                New method
+                <javadoc>com.gargoylesoftware.htmlunit.WebClient#setPromptHandler(com.gargoylesoftware.htmlunit.PromptHandler)</javadoc> and
+                <javadoc>com.gargoylesoftware.htmlunit.WebClient#getPromptHandler()</javadoc>
+            </action>
+            <action type="add" dev="mbowler">
+                New method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlForm#getParameterListForSubmit()</javadoc>.
+                This method is intended as a debugging aid.
+            </action>
+            <action type="update" dev="mbowler">
+                Page load would blow up if no body tag found.  Framesets aren't required to
+                have body tags
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for javascript urls in Frame and IFrame src tags
+            </action>
+            <action type="update" dev="mbowler">
+                Improved some error messages during initialization
+            </action>
+            <action type="add" dev="mbowler">
+                New class <javadoc>com.gargoylesoftware.htmlunit.ObjectInstantiationException</javadoc>
+            </action>
+            <action type="add" dev="mbowler">
+                Added protocol package for url protocols and added protocol/javascript package for
+                code that supports javascript urls
+            </action>
+            <action type="update" dev="mbowler">
+                Removed deprecated method WebClient.setBrowserVersion(BrowserVersion).  No replacement
+                for this method - browser versions must be set in the constructor of the WebClient.
+            </action>
+            <action type="update" dev="mbowler">
+                Removed deprecated method HtmlPage.executeJavascriptIfPossible(String,String). Use
+                HtmlPage.executeJavaScriptIfPossible(String,String,boolean) instead.
+            </action>
+            <action type="update" dev="mbowler">
+                Removed deprecated method HtmlPage.getTitle().  Use HtmlPage.getTitleText() instead.
+            </action>
+            <action type="update" dev="mbowler">
+                Added support for manipulating the disabled attribute of any element via javascript.
+                This is incorrect according to the html specification but Internet Explorer supports
+                it so we have to as well.  This will print a warning if it is used.
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where script tags that loaded external files would cause the new script
+                to overwrite the existing page in the window
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where a redirect called from javascript in the page load would not replace
+                the page.
+            </action>
+        </release>
 
 
-		<release version="1.1-pre4" date="August 23, 2002">
-			<action type="update" dev="mbowler">
-				Changed the <a href="license.html">license</a> used by HtmlUnit to an apache style one
-			</action>
-			<action type="update" dev="mbowler">
-				Changed default value of WebClient.isRedirectEnabled() to false to be
-				consistent with pre2
-			</action>
-			<action type="update" dev="mbowler">
-				Updated look of documentation
-			</action>
-			<action type="add" dev="mbowler">
-				Started migrating System.out.println calls over to commons-logging.  Refer
-				to the <a href="logging.html">logging tutorial</a> for information on customizing this.
-			</action>
-			<action type="add" dev="mbowler">
-				Support for onClick handlers in HtmlSubmitInput
-			</action>
-			<action type="update" dev="mbowler">
-				Support for onClick handlers in HtmlButton
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where NullPointerException would be thrown if window.alert() was
-				called and no AlertHandler had been registered
-			</action>
-			<action type="add" dev="mbowler">
-				Support for onload handler on the body tag
-			</action>
-			<action type="add" dev="mbowler">
-				Support for customizing the page types.  See WebClient.setPageCreator()
-			</action>
-			<action type="add" dev="mbowler">
-				Added HtmlElement.hasHtmlElementWithId()
-			</action>
-			<action type="update" dev="mbowler">
-				Renamed DefaultAlertHandler to CollectingAlertHandler
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed NullPointerException in HtmlForm during submission of a form containing
-				a radio button
-			</action>
-			<action type="add" dev="mbowler">
-				Stubbed out the following methods on Input: click(), focus(), blur(), select()
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for inherited functions to SimpleScriptable.  Previously only getters
-				and setters were supported.
-			</action>
-			<action type="update" dev="mbowler">
-				Changed SimpleScriptable.getLog() to create a new log object each time.  This is
-				neccessary since in rhino, functions don't know who their object is.  A way for
-				functions to learn about their objects will have to be determined.
-			</action>
-			<action type="add" dev="mbowler">
-				Added a javascript style object
-			</action>
-			<action type="add" dev="mbowler">
-				Added new method HtmlElement.isAttributeDefined()
-			</action>
-			<action type="update" dev="mbowler">
-				Changed HtmlElement.getAttributeValue() to return constants indicating whether
-				the attribute was defined with an empty value or just not defined.  Both of
-				these constants are empty strings so the behaviour of this method hasn't
-				changed.
-			</action>
-			<action type="add" dev="mbowler">
-				Added a tutorial section on the main page and added a link to the table tutorial
-			</action>
-			<action type="add" dev="mbowler">
-				Started writing the table tutorial - still needs a lot of work
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for the javascript function Form.submit()
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug where javascript:document.forms[formName] was blowing up
-			</action>
-			<action type="update" dev="mbowler">
-				Changed logic behind anchor onClick() handler to abort the click if javascript returns false
-			</action>
-			<action type="update" dev="mbowler">
-				Changed logic behind form onSubmit() handler to abort the submit if javascript returns false
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed WebConnection so that it now passes the query string through on post requests
-			</action>
-			<action type="add" dev="mbowler">
-				Added HtmlFrame class.  Loading a page containing frames will cause those frames to be
-				automatically loaded as well.
-			</action>
-			<action type="update" dev="mbowler">
-				Added support for loading iframes
-			</action>
-			<action type="add" dev="mbowler">
-				Added HtmlFrameSet class
-			</action>
-			<action type="add" dev="mbowler">
-				Added a <a href="codingConventions.html">coding conventions</a> document
-			</action>
-			<action type="add" dev="mbowler">
-				Added a <a href="buildingFromCvs.html">"how to get the latest code from cvs"</a> document
-			</action>
-			<action type="update" dev="mbowler">
-				Renamed WebWindow.getPage() and setPage() to getEnclosedPage() and setEnclosedPage() to
-				avoid conflict with getPage in HtmlElement
-			</action>
-			<action type="add" dev="mbowler">
-				Added WebClient.getWebWindowByName()
-			</action>
-			<action type="add" dev="mbowler">
-				New class WebWindowNotFoundException
-			</action>
-			<action type="update" dev="mbowler">
-				When checking to see if a script is javascript we previously assumed that the
-				script was not and then looked for proof that it was.  This gives us behaviour
-				that is different from browsers in some situations.  The logic has been
-				changed so that now it assumed that any script IS javascript unless there
-				is proof otherwise.
-			</action>
-			<action type="add" dev="mbowler">
-				New method HtmlPage.getFrames()
-			</action>
-			<action type="add" dev="mbowler">
-				Initial support for resetting forms.  None of the elements actually revert to
-				their previous values yet but onReset handlers will be run if specified.
-			</action>
-			<action type="add" dev="mbowler">
-				New method HtmlTable.getCaptionText()
-			</action>
-			<action type="update" dev="mbowler">
-				Deprecated HtmlPage.getTitle() to be replaced with HtmlPage.getTitleText().  This
-				will be removed before the final release of 1.1
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for the javascript properties: Select.options, Select.selectedIndex,
-				Select.length and Option.value
-			</action>
-		</release>
+        <release version="1.1-pre5" date="September 24, 2002">
+            <action type="update" dev="mbowler">
+                Changed html parser from
+                <a href="http://sourceforge.net/projects/jtidy">JTidy</a> to
+                <a href="http://www.apache.org/~andyc/neko/doc/index.html">CyberNeko</a>.
+                CyberNeko is better at parsing really bad html but this now gives us a dependancy on the
+                <a href="http://xml.apache.org/xerces2-j/">xerces parser from apache</a>.
+            </action>
+            <action type="update" dev="mbowler">
+                The directory structure has undergone a significant change and is now checked in under
+                a single module ("htmlunit") in cvs.  This should only affect those people who are
+                checking out code directly from cvs.
+            </action>
+            <action type="update" dev="mbowler">
+                Upgraded checkstyle to version 2.4
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for document.location (an alias for window.location)
+            </action>
+            <action type="update" dev="mbowler">
+                Changed initialization order in HtmlPage so that the enclosing window
+                is initialized before the javascript is run
+            </action>
+            <action type="update" dev="mbowler">
+                BEHAVIOUR CHANGE: WebClients may no longer change browser versions after creation.
+                This is required because some of the javascript bits initialize differently
+                depending on which browser is in use.  If we allowed the browser version to
+                change then behaviour would be very unpredictable.
+            </action>
+            <action type="add" dev="mbowler">
+                Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage#getFirstAnchorByText(java.lang.String)</javadoc>
+            </action>
+            <action type="update" dev="mbowler">
+                First steps towards having property/function information in a configuration file
+            </action>
+            <action type="add" dev="mbowler">
+                Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage#getHtmlElementsByAccessKey(char)</javadoc>
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for javascript:document.getElementById()
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for javascript:document.all[string]
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where relative urls were not being expanded in certain situations
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug in relative url expansion that was blowing up on urls like //foo.com
+            </action>
+            <action type="update" dev="mbowler">
+                Upgraded commons-httpclient.jar and commons-logging.jar to the Aug 30 gump build
+            </action>
+            <action type="add" dev="mbowler">
+                Added <javadoc>com.gargoylesoftware.htmlunit.html.HtmlElement#asXml()</javadoc>
+            </action>
+            <action type="add" dev="mbowler">
+                Added <javadoc>com.gargoylesoftware.htmlunit.WebClient#expandUrl(java.net.URL, java.lang.String)</javadoc>
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where relative urls in redirects were not being expanded.
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug in
+                <javadoc>com.gargoylesoftware.htmlunit.html.HtmlSelect#getOptionByValue(java.lang.String)</javadoc>
+                where searching for the option would start at the top of the page instead of at the select.
+            </action>
+            <action type="update" dev="mbowler">
+                Applied patches to NekoHTML to fix problems with script tags and isindex
+                tags.  Thanks to Andy Clark (author of NekoHTML) for extremely quick
+                responses to bug reports.
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for
+                <javadoc>com.gargoylesoftware.htmlunit.html.HtmlImageInput#click()</javadoc> and
+                <javadoc>com.gargoylesoftware.htmlunit.html.HtmlImageInput#click(int, int)</javadoc>
+            </action>
+            <action type="update" dev="mbowler">
+                Changed redirect logic so that on a 302 or 303 status, if the method changes
+                from post to get, the parameters will be thrown away for the second request.
+                The http spec is unclear on this exact behaviour but the common browsers seem
+                to do it this way.
+            </action>
+            <action type="add" dev="mbowler">
+                Added the constant BrowserVersion.NETSCAPE_6_2_3
+            </action>
+        </release>
 
 
-		<release version="1.1-pre3" date="July 23, 2002">
-			<action type="add" dev="mbowler">
-				Added HtmlElement.getParent()
-			</action>
-			<action type="add" dev="mbowler">
-				Added HtmlElement.getNextSibling()
-			</action>
-			<action type="add" dev="mbowler">
-				Added HtmlElement.getPreviousSibling()
-			</action>
-			<action type="update" dev="mbowler">
-				Changed WebConnection so that cookies will be shared among servers in
-				the same domain
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for redirection - WebClient.setRedirectEnabled(boolean)
-			</action>
-			<action type="add" dev="mbowler">
-				Added method on WebResponse to access the response headers
-			</action>
-			<action type="add" dev="mbowler">
-				Many new javascript objects - this will be transparent to users of HtmlUnit
-			</action>
-			<action type="update" dev="mbowler">
-				Lots of refactoring in the javascript portion
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed a NullPointerException if the server doesn't return a content-type header
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed HtmlElement.childrenAsText() so that it ignores comments
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for Input.checked
-			</action>
-			<action type="add" dev="mbowler">
-				Added some constants to BrowserVersion for various browsers
-			</action>
-			<action type="update" dev="mbowler">
-				Upgraded gsbase.jar to version 1.8
-			</action>
-			<action type="update" dev="mbowler">
-				Replaced js.jar with a version that has been compiled with debug support
-			</action>
-			<action type="update" dev="mbowler">
-				Upgraded commons-httpclient.jar to the July 27 gump build.
-			</action>
-			<action type="add" dev="mbowler">
-				Added commons-logging.jar (July 27 gump build) which is needed by httpclient
-			</action>
-			<action type="add" dev="mbowler">
-				Support for proxy server and ssl together
-			</action>
-		</release>
+        <release version="1.1-pre4" date="August 23, 2002">
+            <action type="update" dev="mbowler">
+                Changed the <a href="license.html">license</a> used by HtmlUnit to an apache style one
+            </action>
+            <action type="update" dev="mbowler">
+                Changed default value of WebClient.isRedirectEnabled() to false to be
+                consistent with pre2
+            </action>
+            <action type="update" dev="mbowler">
+                Updated look of documentation
+            </action>
+            <action type="add" dev="mbowler">
+                Started migrating System.out.println calls over to commons-logging.  Refer
+                to the <a href="logging.html">logging tutorial</a> for information on customizing this.
+            </action>
+            <action type="add" dev="mbowler">
+                Support for onClick handlers in HtmlSubmitInput
+            </action>
+            <action type="update" dev="mbowler">
+                Support for onClick handlers in HtmlButton
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where NullPointerException would be thrown if window.alert() was
+                called and no AlertHandler had been registered
+            </action>
+            <action type="add" dev="mbowler">
+                Support for onload handler on the body tag
+            </action>
+            <action type="add" dev="mbowler">
+                Support for customizing the page types.  See WebClient.setPageCreator()
+            </action>
+            <action type="add" dev="mbowler">
+                Added HtmlElement.hasHtmlElementWithId()
+            </action>
+            <action type="update" dev="mbowler">
+                Renamed DefaultAlertHandler to CollectingAlertHandler
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed NullPointerException in HtmlForm during submission of a form containing
+                a radio button
+            </action>
+            <action type="add" dev="mbowler">
+                Stubbed out the following methods on Input: click(), focus(), blur(), select()
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for inherited functions to SimpleScriptable.  Previously only getters
+                and setters were supported.
+            </action>
+            <action type="update" dev="mbowler">
+                Changed SimpleScriptable.getLog() to create a new log object each time.  This is
+                neccessary since in rhino, functions don't know who their object is.  A way for
+                functions to learn about their objects will have to be determined.
+            </action>
+            <action type="add" dev="mbowler">
+                Added a javascript style object
+            </action>
+            <action type="add" dev="mbowler">
+                Added new method HtmlElement.isAttributeDefined()
+            </action>
+            <action type="update" dev="mbowler">
+                Changed HtmlElement.getAttributeValue() to return constants indicating whether
+                the attribute was defined with an empty value or just not defined.  Both of
+                these constants are empty strings so the behaviour of this method hasn't
+                changed.
+            </action>
+            <action type="add" dev="mbowler">
+                Added a tutorial section on the main page and added a link to the table tutorial
+            </action>
+            <action type="add" dev="mbowler">
+                Started writing the table tutorial - still needs a lot of work
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for the javascript function Form.submit()
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug where javascript:document.forms[formName] was blowing up
+            </action>
+            <action type="update" dev="mbowler">
+                Changed logic behind anchor onClick() handler to abort the click if javascript returns false
+            </action>
+            <action type="update" dev="mbowler">
+                Changed logic behind form onSubmit() handler to abort the submit if javascript returns false
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed WebConnection so that it now passes the query string through on post requests
+            </action>
+            <action type="add" dev="mbowler">
+                Added HtmlFrame class.  Loading a page containing frames will cause those frames to be
+                automatically loaded as well.
+            </action>
+            <action type="update" dev="mbowler">
+                Added support for loading iframes
+            </action>
+            <action type="add" dev="mbowler">
+                Added HtmlFrameSet class
+            </action>
+            <action type="add" dev="mbowler">
+                Added a <a href="codingConventions.html">coding conventions</a> document
+            </action>
+            <action type="add" dev="mbowler">
+                Added a <a href="buildingFromCvs.html">"how to get the latest code from cvs"</a> document
+            </action>
+            <action type="update" dev="mbowler">
+                Renamed WebWindow.getPage() and setPage() to getEnclosedPage() and setEnclosedPage() to
+                avoid conflict with getPage in HtmlElement
+            </action>
+            <action type="add" dev="mbowler">
+                Added WebClient.getWebWindowByName()
+            </action>
+            <action type="add" dev="mbowler">
+                New class WebWindowNotFoundException
+            </action>
+            <action type="update" dev="mbowler">
+                When checking to see if a script is javascript we previously assumed that the
+                script was not and then looked for proof that it was.  This gives us behaviour
+                that is different from browsers in some situations.  The logic has been
+                changed so that now it assumed that any script IS javascript unless there
+                is proof otherwise.
+            </action>
+            <action type="add" dev="mbowler">
+                New method HtmlPage.getFrames()
+            </action>
+            <action type="add" dev="mbowler">
+                Initial support for resetting forms.  None of the elements actually revert to
+                their previous values yet but onReset handlers will be run if specified.
+            </action>
+            <action type="add" dev="mbowler">
+                New method HtmlTable.getCaptionText()
+            </action>
+            <action type="update" dev="mbowler">
+                Deprecated HtmlPage.getTitle() to be replaced with HtmlPage.getTitleText().  This
+                will be removed before the final release of 1.1
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for the javascript properties: Select.options, Select.selectedIndex,
+                Select.length and Option.value
+            </action>
+        </release>
 
 
-		<release version="1.1-pre2" date="July 10, 2002">
-			<action type="update" dev="mbowler">
-				Fixed NullPointerException due to a bug in JTidy - thanks to
-				Mike J Bresnahan for tracking this one right into the JTidy source.
-			</action>
-			<action type="add" dev="mbowler">
-				HtmlAnchor now supports javascript urls and onClick handlers
-			</action>
-			<action type="add" dev="mbowler">
-				Ability to set the emulated browser via WebClient.setBrowserVersion(BrowserVersion)
-			</action>
-			<action type="add" dev="mbowler">
-				Stubbed out a bunch of javascript methods that are used by the popular websites.
-				Each stubbed out method will print a diagnostic message when it is called
-				to alert the user to the fact that it was called.  This is just a temporary
-				measure to ensure that HtmlUnit doesn't blow up when hitting common sites.
-				These methods *will* be implemented properly at some point.
-			</action>
-			<action type="add" dev="mbowler">
-				Added WebWindow
-			</action>
-			<action type="add" dev="mbowler">
-				Added TopLevelWindow
-			</action>
-			<action type="add" dev="mbowler">
-				Added WebWindowListener
-			</action>
-			<action type="add" dev="mbowler">
-				Added WebWindowEvent
-			</action>
-			<action type="add" dev="mbowler">
-				Added WebWindowAdapter
-			</action>
-			<action type="add" dev="mbowler">
-				Added initial support for javascript:open().  Does not currently support
-				features or browser history
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed some cases in HtmlPage.getFullyQualifiedUrl() that weren't expanding properly
-			</action>
-			<action type="add" dev="mbowler">
-				Added HtmlTitle
-			</action>
-			<action type="add" dev="mbowler">
-				Added HtmlPage.getTitle()
-			</action>
-			<action type="add" dev="mbowler">
-				Added javascript window.location="some url"
-			</action>
-			<action type="add" dev="mbowler">
-				Stubbed out the javascript history object
-			</action>
-			<action type="add" dev="mbowler">
-				Added support javascript urls in HtmlForm submission
-			</action>
-			<action type="add" dev="mbowler">
-				Added support for HtmlForm.onSubmit()
-			</action>
-			<action type="update" dev="mbowler">
-				Rewrote logic for handling relative urls
-			</action>
-			<action type="update" dev="mbowler">
-				Fixed bug in HtmlRadioButtonInput that was causing isChecked() to return false
-				in some cases even if the checked attribute was there.
-			</action>
-		</release>
+        <release version="1.1-pre3" date="July 23, 2002">
+            <action type="add" dev="mbowler">
+                Added HtmlElement.getParent()
+            </action>
+            <action type="add" dev="mbowler">
+                Added HtmlElement.getNextSibling()
+            </action>
+            <action type="add" dev="mbowler">
+                Added HtmlElement.getPreviousSibling()
+            </action>
+            <action type="update" dev="mbowler">
+                Changed WebConnection so that cookies will be shared among servers in
+                the same domain
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for redirection - WebClient.setRedirectEnabled(boolean)
+            </action>
+            <action type="add" dev="mbowler">
+                Added method on WebResponse to access the response headers
+            </action>
+            <action type="add" dev="mbowler">
+                Many new javascript objects - this will be transparent to users of HtmlUnit
+            </action>
+            <action type="update" dev="mbowler">
+                Lots of refactoring in the javascript portion
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed a NullPointerException if the server doesn't return a content-type header
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed HtmlElement.childrenAsText() so that it ignores comments
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for Input.checked
+            </action>
+            <action type="add" dev="mbowler">
+                Added some constants to BrowserVersion for various browsers
+            </action>
+            <action type="update" dev="mbowler">
+                Upgraded gsbase.jar to version 1.8
+            </action>
+            <action type="update" dev="mbowler">
+                Replaced js.jar with a version that has been compiled with debug support
+            </action>
+            <action type="update" dev="mbowler">
+                Upgraded commons-httpclient.jar to the July 27 gump build.
+            </action>
+            <action type="add" dev="mbowler">
+                Added commons-logging.jar (July 27 gump build) which is needed by httpclient
+            </action>
+            <action type="add" dev="mbowler">
+                Support for proxy server and ssl together
+            </action>
+        </release>
 
 
-		<release version="1.1-pre1" date="July 2, 2002">
-			<action type="add" dev="mbowler">
-				Added initial javascript support
-			</action>
-			<action type="update" dev="mbowler">
-				Lots of bug fixes
-			</action>
-		</release>
+        <release version="1.1-pre2" date="July 10, 2002">
+            <action type="update" dev="mbowler">
+                Fixed NullPointerException due to a bug in JTidy - thanks to
+                Mike J Bresnahan for tracking this one right into the JTidy source.
+            </action>
+            <action type="add" dev="mbowler">
+                HtmlAnchor now supports javascript urls and onClick handlers
+            </action>
+            <action type="add" dev="mbowler">
+                Ability to set the emulated browser via WebClient.setBrowserVersion(BrowserVersion)
+            </action>
+            <action type="add" dev="mbowler">
+                Stubbed out a bunch of javascript methods that are used by the popular websites.
+                Each stubbed out method will print a diagnostic message when it is called
+                to alert the user to the fact that it was called.  This is just a temporary
+                measure to ensure that HtmlUnit doesn't blow up when hitting common sites.
+                These methods *will* be implemented properly at some point.
+            </action>
+            <action type="add" dev="mbowler">
+                Added WebWindow
+            </action>
+            <action type="add" dev="mbowler">
+                Added TopLevelWindow
+            </action>
+            <action type="add" dev="mbowler">
+                Added WebWindowListener
+            </action>
+            <action type="add" dev="mbowler">
+                Added WebWindowEvent
+            </action>
+            <action type="add" dev="mbowler">
+                Added WebWindowAdapter
+            </action>
+            <action type="add" dev="mbowler">
+                Added initial support for javascript:open().  Does not currently support
+                features or browser history
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed some cases in HtmlPage.getFullyQualifiedUrl() that weren't expanding properly
+            </action>
+            <action type="add" dev="mbowler">
+                Added HtmlTitle
+            </action>
+            <action type="add" dev="mbowler">
+                Added HtmlPage.getTitle()
+            </action>
+            <action type="add" dev="mbowler">
+                Added javascript window.location="some url"
+            </action>
+            <action type="add" dev="mbowler">
+                Stubbed out the javascript history object
+            </action>
+            <action type="add" dev="mbowler">
+                Added support javascript urls in HtmlForm submission
+            </action>
+            <action type="add" dev="mbowler">
+                Added support for HtmlForm.onSubmit()
+            </action>
+            <action type="update" dev="mbowler">
+                Rewrote logic for handling relative urls
+            </action>
+            <action type="update" dev="mbowler">
+                Fixed bug in HtmlRadioButtonInput that was causing isChecked() to return false
+                in some cases even if the checked attribute was there.
+            </action>
+        </release>
 
 
-		<release version="1.0" date="May 22, 2002">
-			<action type="add" dev="mbowler">
-				Initial release
-			</action>
-		</release>
-	</body>
+        <release version="1.1-pre1" date="July 2, 2002">
+            <action type="add" dev="mbowler">
+                Added initial javascript support
+            </action>
+            <action type="update" dev="mbowler">
+                Lots of bug fixes
+            </action>
+        </release>
+
+
+        <release version="1.0" date="May 22, 2002">
+            <action type="add" dev="mbowler">
+                Initial release
+            </action>
+        </release>
+    </body>
 </document>
 

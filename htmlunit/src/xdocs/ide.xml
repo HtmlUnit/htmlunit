@@ -1,29 +1,29 @@
 <?xml version="1.0"?>
 <document>
 
-	<properties>
-		<title>Tool Support</title>
-		<author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
-		<revision>$Revision$</revision>
-	</properties>
+    <properties>
+        <title>Tool Support</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <revision>$Revision$</revision>
+    </properties>
 
-	<body>
-		<section>
-			<p>
-				The following information and/or files have been contributed
-			</p>
-		</section>
+    <body>
+        <section>
+            <p>
+                The following information and/or files have been contributed
+            </p>
+        </section>
 
-		<section name="Eclipse">
-			<p>
-				The following eclipse project files have been contributed by
-				<a href="mailto:bclarke@booksys.com">Brad Clarke</a>
-				<ul>
-					<li><a href="tools/eclipse/.project">.project</a></li>
-					<li><a href="tools/eclipse/.classpath">.classpath</a></li>
-				</ul>
-			</p>
+        <section name="Eclipse">
+            <p>
+                The following eclipse project files have been contributed by
+                <a href="mailto:bclarke@booksys.com">Brad Clarke</a>
+                <ul>
+                    <li><a href="tools/eclipse/.project">.project</a></li>
+                    <li><a href="tools/eclipse/.classpath">.classpath</a></li>
+                </ul>
+            </p>
 
-		</section>
-	</body>
+        </section>
+    </body>
 </document>
