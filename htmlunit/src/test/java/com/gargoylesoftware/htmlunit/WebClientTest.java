@@ -47,6 +47,7 @@ import java.util.List;
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -114,7 +115,8 @@ public class WebClientTest extends WebTestCase {
 
 
     /**
-     * Test that the "changed" window event gets fired at the appropriate time.
+     * Test that the {@link CHANGE} window event gets fired at the
+     * appropriate time.
      * @throws Exception If something goes wrong.
      */
     public void testHtmlWindowEvents_changed() throws Exception {
@@ -153,7 +155,8 @@ public class WebClientTest extends WebTestCase {
 
 
     /**
-     * Test that the "opened" window event gets fired at the appropriate time.
+     * Test that the {@link WindowEvent.OPEN} window event gets fired at
+     * the appropriate time.
      * @throws Exception If something goes wrong.
      */
     public void testHtmlWindowEvents_opened() throws Exception {
@@ -190,6 +193,59 @@ public class WebClientTest extends WebTestCase {
                 secondWindow, WebWindowEvent.CHANGE, null, secondWindow.getEnclosedPage()),
             new WebWindowEvent(
                 firstWindow, WebWindowEvent.CHANGE, null, firstPage),
+        } );
+        assertEquals( expectedEvents, eventCatcher.getEvents() );
+    }
+
+
+    /**
+     * Test that the {@link WindowEvent.CLOSE} window event gets fired at
+     * the appropriate time.
+     * @throws Exception If something goes wrong.
+     */
+    public void testHtmlWindowEvents_closedFromFrame() throws Exception {
+        final String firstContent
+                 = "<html><head><title>first</title></head><body>"
+                 + "<iframe src='http://third' id='frame1'>"
+                 + "<a href='http://second' id='a2'>link to foo2</a>"
+                 + "</body></html>";
+        final String secondContent
+                 = "<html><head><title>second</title></head><body></body></html>";
+        final String thirdContent
+                 = "<html><head><title>third</title></head><body></body></html>";
+        final WebClient client = new WebClient();
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://second"), secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://third"), thirdContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        client.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(
+                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        assertEquals("first", firstPage.getTitleText());
+
+        final EventCatcher eventCatcher = new EventCatcher();
+        eventCatcher.listenTo(client);
+
+        final HtmlInlineFrame frame = (HtmlInlineFrame)firstPage.getHtmlElementById("frame1");
+        final HtmlPage thirdPage = (HtmlPage)frame.getEnclosedPage();
+
+        // Load the second page
+        final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById( "a2" );
+        final HtmlPage secondPage = (HtmlPage)anchor.click();
+        assertEquals("second", secondPage.getTitleText());
+
+        final WebWindow firstWindow = client.getCurrentWindow();
+        final List expectedEvents = Arrays.asList( new Object[] {
+            new WebWindowEvent(
+                frame, WebWindowEvent.CLOSE, thirdPage, null),
+            new WebWindowEvent(
+                firstWindow, WebWindowEvent.CHANGE, firstPage, secondPage),
         } );
         assertEquals( expectedEvents, eventCatcher.getEvents() );
     }
