@@ -58,6 +58,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  */
 public class ElementArray extends SimpleScriptable implements Function {
 
+    private static final long serialVersionUID = 4049916048017011764L;
+    
     private HtmlElement[] elements_;
 
     /**
