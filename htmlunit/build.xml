@@ -12,280 +12,285 @@
 <property name="build.compiler.pedantic" value="true"/>
 <property name="version" value="HtmlUnit-1.2.2" />
 
+<property environment="env"/>
+<property name="maven-repository" value ="${env.MAVEN_HOME}/repository"/>
+
+<property name="maven-repository" value="" />
+
 <taskdef name="checkstyle"
-	classname="com.puppycrawl.tools.checkstyle.CheckStyleTask"
-	classpath="build/lib/checkstyle-all.jar" />
+    classname="com.puppycrawl.tools.checkstyle.CheckStyleTask"
+    classpath="build/lib/checkstyle-all.jar" />
 
 
 <path id="base.class.path">
-	<pathelement path="src/java"/>
+    <pathelement path="src/java"/>
 
-	<!-- Jars for production -->
-	<pathelement path="dist/lib/commons-httpclient.jar"/>
-	<pathelement path="dist/lib/commons-logging.jar"/>
-	<pathelement path="dist/lib/js.jar"/>
-	<pathelement path="dist/lib/nekohtml.jar"/>
-	<pathelement path="dist/lib/xercesImpl.jar"/>
-	<pathelement path="dist/lib/xmlParserAPIs.jar"/>
+    <!-- Jars for production -->
+    <pathelement path="dist/lib/commons-httpclient.jar"/>
+    <pathelement path="dist/lib/commons-logging.jar"/>
+    <pathelement path="dist/lib/js.jar"/>
+    <pathelement path="dist/lib/nekohtml.jar"/>
+    <pathelement path="dist/lib/xercesImpl.jar"/>
+    <pathelement path="dist/lib/xmlParserAPIs.jar"/>
 
-	<pathelement path="/usr/local/jelly/lib/commons-jelly-1.0-beta-4-SNAPSHOT.jar"/>
-	<pathelement path="/usr/local/maven-1.0-beta-7/repository/commons-cli/jars/commons-cli-SNAPSHOT.jar"/>
-	<pathelement path="/usr/local/maven-1.0-beta-7/repository/dom4j/jars/dom4j-1.4-dev-8.jar"/>
-	<pathelement path="/usr/local/maven-1.0-beta-7/repository/commons-collections/jars/commons-collections-2.1.jar"/>
-	<pathelement path="/usr/local/maven-1.0-beta-7/repository/commons-beanutils/jars/commons-beanutils-1.6.1.jar"/>
+    <pathelement path="${maven-repository}/commons-jelly/jars/commons-jelly-SNAPSHOT.jar"/>
+    <pathelement path="${maven-repository}/commons-cli/jars/commons-cli-SNAPSHOT.jar"/>
+    <pathelement path="${maven-repository}/dom4j/jars/dom4j-1.4-dev-8.jar"/>
+    <pathelement path="${maven-repository}/commons-collections/jars/commons-collections-2.1.jar"/>
+    <pathelement path="${maven-repository}/commons-beanutils/jars/commons-beanutils-1.6.1.jar"/>
 
-	<!-- Jars for testing and development -->
-	<pathelement path="build/lib/junit.jar"/>
-	<pathelement path="build/lib/gsbase.jar"/>
-	<pathelement path="build/lib/doclint.jar"/>
+    <!-- Jars for testing and development -->
+    <pathelement path="build/lib/junit.jar"/>
+    <pathelement path="build/lib/gsbase.jar"/>
+    <pathelement path="build/lib/doclint.jar"/>
 
-	<!-- Required so that jikes can find the JDK classes on Mac OS/X -->
-	<pathelement path="/System/Library/Frameworks/JavaVM.framework/Versions/1.3.1/Classes/classes.jar"/>
-	<pathelement path="/System/Library/Frameworks/JavaVM.framework/Versions/1.4.1/Classes/classes.jar"/>
+    <!-- Required so that jikes can find the JDK classes on Mac OS/X -->
+    <pathelement path="/System/Library/Frameworks/JavaVM.framework/Versions/1.3.1/Classes/classes.jar"/>
+    <pathelement path="/System/Library/Frameworks/JavaVM.framework/Versions/1.4.1/Classes/classes.jar"/>
 </path>
 
 
 <target name="compile" description="compile">
-	<javac srcdir="src/java" destdir="src/java" debug="on" deprecation="off">
-		<classpath refid="base.class.path"/>
-	</javac>
+    <javac srcdir="src/java" destdir="src/java" debug="on" deprecation="off">
+        <classpath refid="base.class.path"/>
+    </javac>
 </target>
 
 
 <target name="cleancompile" description="clean compile">
-	 <delete>
-		<fileset dir="src/java" includes="**/*.class"/>
-	</delete>
-	<antcall target="compile"/>
+     <delete>
+        <fileset dir="src/java" includes="**/*.class"/>
+    </delete>
+    <antcall target="compile"/>
 </target>
 
 
 <target name="clean" description="clean">
-	 <delete>
-		<fileset dir="src/java" includes="**/*.class"/>
-	</delete>
-	<delete dir="build/${version}"/>
-	<delete file="dist/projectdocs.zip"/>
+     <delete>
+        <fileset dir="src/java" includes="**/*.class"/>
+    </delete>
+    <delete dir="build/${version}"/>
+    <delete file="dist/projectdocs.zip"/>
 </target>
 
 
 <target name="validate" description="Validate">
-	<xmlvalidate
-		failonerror="yes" lenient="no" warn="yes"
-		file="src/java/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml"
-		classname="org.apache.xerces.parsers.SAXParser"
-		classpath="dist/lib/xercesImpl.jar">
+    <xmlvalidate
+        failonerror="yes" lenient="no" warn="yes"
+        file="src/java/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml"
+        classname="org.apache.xerces.parsers.SAXParser"
+        classpath="dist/lib/xercesImpl.jar">
 
-		<xmlcatalog>
-			<entity
-				publicId="JavaScriptConfiguration.xsd"
-				location="src/java/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xsd"/>
-		</xmlcatalog>
-	</xmlvalidate>
+        <xmlcatalog>
+            <entity
+                publicId="JavaScriptConfiguration.xsd"
+                location="src/java/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xsd"/>
+        </xmlcatalog>
+    </xmlvalidate>
 </target>
 
 
 <target name="build" depends="compile" description="build">
-	<tstamp>
-		<format property="timestamp-now" pattern="d-MMM-yyyy hh:mma" locale="en"/>
-	</tstamp>
+    <tstamp>
+        <format property="timestamp-now" pattern="d-MMM-yyyy hh:mma" locale="en"/>
+    </tstamp>
 
-	<delete dir="build/${version}"/>
+    <delete dir="build/${version}"/>
 
-	<mkdir dir="build/${version}/"/>
-	<mkdir dir="build/${version}/docs"/>
-	<mkdir dir="build/${version}/docs/api"/>
-	<mkdir dir="build/${version}/lib"/>
-	<mkdir dir="build/${version}/src"/>
-	<mkdir dir="build/${version}/META-INF"/>
+    <mkdir dir="build/${version}/"/>
+    <mkdir dir="build/${version}/docs"/>
+    <mkdir dir="build/${version}/docs/api"/>
+    <mkdir dir="build/${version}/lib"/>
+    <mkdir dir="build/${version}/src"/>
+    <mkdir dir="build/${version}/META-INF"/>
 
-	<manifest file="build/${version}/META-INF/MANIFEST.MF">
-		<attribute name="Main-Class" value="com.gargoylesoftware.htmlunit.Version"/>
+    <manifest file="build/${version}/META-INF/MANIFEST.MF">
+        <attribute name="Main-Class" value="com.gargoylesoftware.htmlunit.Version"/>
 
-		<section name="com/gargoylesoftware/htmlunit/">
-			<attribute name="Sealed" value="true"/>
-			<attribute name="Specification-Title" value="HtmlUnit"/>
-			<attribute name="Specification-Version" value="${version}"/>
-			<attribute name="Specification-Vendor" value="Gargoyle Software Inc."/>
-			<attribute name="Implementation-Title" value="HtmlUnit"/>
-			<attribute name="Implementation-Version" value="${version} ${timestamp-now}"/>
-			<attribute name="Implementation-Vendor" value="Gargoyle Software Inc."/>
-		</section>
-		<section name="com/gargoylesoftware/htmlunit/html/">
-			<attribute name="Sealed" value="true"/>
-		</section>
-		<section name="com/gargoylesoftware/htmlunit/javascript/">
-			<attribute name="Sealed" value="true"/>
-		</section>
-		<section name="com/gargoylesoftware/htmlunit/javascript/host/">
-			<attribute name="Sealed" value="true"/>
-		</section>
-	</manifest>
+        <section name="com/gargoylesoftware/htmlunit/">
+            <attribute name="Sealed" value="true"/>
+            <attribute name="Specification-Title" value="HtmlUnit"/>
+            <attribute name="Specification-Version" value="${version}"/>
+            <attribute name="Specification-Vendor" value="Gargoyle Software Inc."/>
+            <attribute name="Implementation-Title" value="HtmlUnit"/>
+            <attribute name="Implementation-Version" value="${version} ${timestamp-now}"/>
+            <attribute name="Implementation-Vendor" value="Gargoyle Software Inc."/>
+        </section>
+        <section name="com/gargoylesoftware/htmlunit/html/">
+            <attribute name="Sealed" value="true"/>
+        </section>
+        <section name="com/gargoylesoftware/htmlunit/javascript/">
+            <attribute name="Sealed" value="true"/>
+        </section>
+        <section name="com/gargoylesoftware/htmlunit/javascript/host/">
+            <attribute name="Sealed" value="true"/>
+        </section>
+    </manifest>
 
-	<jar
-		jarfile="build/${version}/lib/HtmlUnit.jar"
-		basedir="src/java"
-		excludes="**/test/*,**/*.java,build.xml,lib,**/package.html"
-		manifest="build/${version}/META-INF/MANIFEST.MF"/>
-	<delete file="build/${version}/META-INF/MANIFEST.MF"/>
+    <jar
+        jarfile="build/${version}/lib/HtmlUnit.jar"
+        basedir="src/java"
+        excludes="**/test/*,**/*.java,build.xml,lib,**/package.html"
+        manifest="build/${version}/META-INF/MANIFEST.MF"/>
+    <delete file="build/${version}/META-INF/MANIFEST.MF"/>
 
-	<javadoc
-		sourcepath="src/java"
-		destdir="build/${version}/docs/api"
-		packagenames="${packageList}"
-		version="yes"
-		author="yes"
-		windowtitle="${version}"
-		doctitle="${version}">
+    <javadoc
+        sourcepath="src/java"
+        destdir="build/${version}/docs/api"
+        packagenames="${packageList}"
+        version="yes"
+        author="yes"
+        windowtitle="${version}"
+        doctitle="${version}">
 
-		<classpath refid="base.class.path"/>
-		<packageset dir="src/java" defaultexcludes="no">
-			<exclude name="**/test" />
-		</packageset>
-		<link href="http://java.sun.com/j2se/1.4.1/docs/api"/>
-	</javadoc>
+        <classpath refid="base.class.path"/>
+        <packageset dir="src/java" defaultexcludes="no">
+            <exclude name="**/test" />
+        </packageset>
+        <link href="http://java.sun.com/j2se/1.4.1/docs/api"/>
+    </javadoc>
 
-	<copy todir="build/${version}/src">
-		<fileset dir="src/java">
-			<exclude name="**/*.class"/>
-			<exclude name="test/**"/>
-		</fileset>
-	</copy>
+    <copy todir="build/${version}/src">
+        <fileset dir="src/java">
+            <exclude name="**/*.class"/>
+            <exclude name="test/**"/>
+        </fileset>
+    </copy>
 
-	<!-- Build the docs -->
-	<style
-		basedir="src/xdocs"
-		destdir="build/${version}/docs"
-		extension=".html"
-		style="src/xdocs/stylesheets/site.xsl"
-		includes="*.xml">
-		<param name="pathToRoot" expression=""/>
-	</style>
-	<!--
-	<style
-		basedir="src/xdocs"
-		destdir="build/${version}/docs"
-		extension=".html"
-		style="/docs/site.xsl"
-		includes="**/*.xml"
-		excludes="*.xml">
-		<param name="pathToRoot" expression="../"/>
-	</style>
-	-->
-	<copy todir="build/${version}/docs" >
-		<fileset dir="src/xdocs/images" >
-			<include name="**/*.jpg"/>
-			<include name="**/*.gif"/>
-		</fileset>
-	</copy>
+    <!-- Build the docs -->
+    <style
+        basedir="src/xdocs"
+        destdir="build/${version}/docs"
+        extension=".html"
+        style="src/xdocs/stylesheets/site.xsl"
+        includes="*.xml">
+        <param name="pathToRoot" expression=""/>
+    </style>
+    <!--
+    <style
+        basedir="src/xdocs"
+        destdir="build/${version}/docs"
+        extension=".html"
+        style="/docs/site.xsl"
+        includes="**/*.xml"
+        excludes="*.xml">
+        <param name="pathToRoot" expression="../"/>
+    </style>
+    -->
+    <copy todir="build/${version}/docs" >
+        <fileset dir="src/xdocs/images" >
+            <include name="**/*.jpg"/>
+            <include name="**/*.gif"/>
+        </fileset>
+    </copy>
 
-	<copy todir="build/${version}/docs/tools" >
-		<fileset dir="ide" />
-	</copy>
+    <copy todir="build/${version}/docs/tools" >
+        <fileset dir="ide" />
+    </copy>
 
-	<copy todir="build/${version}/lib">
-		<fileset dir="dist/lib">
-			<include name="*.jar"/>
-		</fileset>
-	</copy>
+    <copy todir="build/${version}/lib">
+        <fileset dir="dist/lib">
+            <include name="*.jar"/>
+        </fileset>
+    </copy>
 
-	<zip
-		zipfile="dist/${version}.zip"
-		basedir="build"
-		includes="${version}/**"
-	/>
+    <zip
+        zipfile="dist/${version}.zip"
+        basedir="build"
+        includes="${version}/**"
+    />
 
-	<!-- Build the documentation zip file for uploading -->
-	<zip
-		zipfile="dist/projectdocs.zip"
-		basedir="build/${version}/docs"
-		includes="**/*.html,**/*.jpg,**/*.gif,**/package-list,tools/**/*"
-		excludes="src/**"
-	/>
+    <!-- Build the documentation zip file for uploading -->
+    <zip
+        zipfile="dist/projectdocs.zip"
+        basedir="build/${version}/docs"
+        includes="**/*.html,**/*.jpg,**/*.gif,**/package-list,tools/**/*"
+        excludes="src/**"
+    />
 
-	<echo message=""/>
-	<echo message="Doing a final sanity check to ensure that everything that is needed has been put in the dist directory"/>
+    <echo message=""/>
+    <echo message="Doing a final sanity check to ensure that everything that is needed has been put in the dist directory"/>
 
-	<java fork="true" classname="com.gargoylesoftware.htmlunit.Version">
-		<arg value="-SanityCheck"/>
-		<classpath>
-			<fileset dir="build/${version}/lib">
-				<include name="**/*.jar"/>
-			</fileset>
-		</classpath>
-	</java>
+    <java fork="true" classname="com.gargoylesoftware.htmlunit.Version">
+        <arg value="-SanityCheck"/>
+        <classpath>
+            <fileset dir="build/${version}/lib">
+                <include name="**/*.jar"/>
+            </fileset>
+        </classpath>
+    </java>
 
-	<echo message=""/>
-	<echo message="************************************************************"/>
-	<echo message="Full packaged build is dist/${version}.zip"/>
-	<echo message="Zipped documentation is dist/projectdocs.zip"/>
-	<echo message="  "/>
-	<echo message="An unzipped build suitable for browsing is in build/${version}"/>
-	<echo message="************************************************************"/>
-	<!--
-	<delete dir="build/${version}"/>
-	-->
+    <echo message=""/>
+    <echo message="************************************************************"/>
+    <echo message="Full packaged build is dist/${version}.zip"/>
+    <echo message="Zipped documentation is dist/projectdocs.zip"/>
+    <echo message="  "/>
+    <echo message="An unzipped build suitable for browsing is in build/${version}"/>
+    <echo message="************************************************************"/>
+    <!--
+    <delete dir="build/${version}"/>
+    -->
 </target>
 
 
 <target name="doclint" description="doclint">
-	<javadoc
-		sourcepath="src/java"
-		packagenames="${packageList}"
-		version="no"
-		author="no"
-		doclet="com.jollem.doclint.DocLint"
-		docletPath="build/lib/doclint.jar">
+    <javadoc
+        sourcepath="src/java"
+        packagenames="${packageList}"
+        version="no"
+        author="no"
+        doclet="com.jollem.doclint.DocLint"
+        docletPath="build/lib/doclint.jar">
 
-		<classpath refid="base.class.path"/>
-		<packageset dir="src/java" defaultexcludes="no">
-			<exclude name="**/test" />
-		</packageset>
-	</javadoc>
+        <classpath refid="base.class.path"/>
+        <packageset dir="src/java" defaultexcludes="no">
+            <exclude name="**/test" />
+        </packageset>
+    </javadoc>
 </target>
 
 
 <target name="junit" description="junit">
-	<java fork="true" classname="junit.textui.TestRunner" dir="src/java">
-		<arg value="com.gargoylesoftware.htmlunit.test.MainTestSuite"/>
-		<classpath refid="base.class.path"/>
-	</java>
+    <java fork="true" classname="junit.textui.TestRunner" dir="src/java">
+        <arg value="com.gargoylesoftware.htmlunit.test.MainTestSuite"/>
+        <classpath refid="base.class.path"/>
+    </java>
 </target>
 
 
 <target name="junitui" description="junitui">
-	<java fork="yes" classname="junit.swingui.TestRunner" dir="src/java">
-		<arg value="com.gargoylesoftware.htmlunit.test.MainTestSuite"/>
-		<classpath refid="base.class.path"/>
-	</java>
+    <java fork="yes" classname="junit.swingui.TestRunner" dir="src/java">
+        <arg value="com.gargoylesoftware.htmlunit.test.MainTestSuite"/>
+        <classpath refid="base.class.path"/>
+    </java>
 </target>
 
 
 <target name="SanityCheck" description="DO NOT RUN THIS TASK">
-	<java fork="yes" classname="com.gargoylesoftware.htmlunit.test.SanityCheck" dir="src/java">
-		<classpath refid="base.class.path"/>
-	</java>
+    <java fork="yes" classname="com.gargoylesoftware.htmlunit.test.SanityCheck" dir="src/java">
+        <classpath refid="base.class.path"/>
+    </java>
 </target>
 
 
 <target name="checkstyle" description="Check all the coding conventions">
-	<!-- Check production code -->
-	<checkstyle properties="build/checkstyle-prod.properties">
-		<fileset dir="src/java" includes="**/*.java" excludes="**/test/*"/>
-	</checkstyle>
+    <!-- Check production code -->
+    <checkstyle properties="build/checkstyle-prod.properties">
+        <fileset dir="src/java" includes="**/*.java" excludes="**/test/*"/>
+    </checkstyle>
 
-	<!-- Check tests - test code is a bit more lenient -->
-	<checkstyle properties="build/checkstyle-test.properties">
-		<fileset dir="src/java" includes="**/test/*.java"/>
-	</checkstyle>
+    <!-- Check tests - test code is a bit more lenient -->
+    <checkstyle properties="build/checkstyle-test.properties">
+        <fileset dir="src/java" includes="**/test/*.java"/>
+    </checkstyle>
 </target>
 
 
 <target name="jellytest" description="DO NOT RUN THIS TASK">
-	<java fork="yes" classname="org.apache.commons.jelly.Jelly" dir=".">
-		<classpath refid="base.class.path"/>
-		<arg value="htmlunit.jelly"/>
-	</java>
+    <java fork="yes" classname="org.apache.commons.jelly.Jelly" dir=".">
+        <classpath refid="base.class.path"/>
+        <arg value="test.jelly"/>
+    </java>
 </target>
 
 </project>
