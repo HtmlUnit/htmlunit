@@ -64,12 +64,12 @@
 		<faq id="RedirectionDiagnosticMessages">
 			<question>
 				I get error messages about redirection being disabled but I've turned it on
+			</question>
+			<answer>
 				<source>
 26.02.2003 16:07:05 org.apache.commons.httpclient.HttpMethodBase   processRedirectResponse
 INFO: Redirect requested but followRedirects is disabled
 				</source>
-			</question>
-			<answer>
 				<p>
 					It's an annoyance that I haven't figured out how to fix yet.
 				</p>
@@ -83,6 +83,42 @@ INFO: Redirect requested but followRedirects is disabled
 					number of people have pointed out that it's easy to disable a message if you know which logger
 					is being used.  The problem is that there isn't a way to disable the messages without knowing
 					the logger in use.
+				</p>
+			</answer>
+		</faq>
+		<faq>
+			<question>
+				What version will feature X be in?
+			</question>
+			<answer>
+				<p>
+					There is no "roadmap" of releases.  Features will be added as 
+					they are written.
+				</p>
+				<p>
+					Changes to the product (including new features) are implemented by 
+					volunteers in their spare time.  If feature X is important to you 
+					and nobody seems to be working on it then perhaps you should consider 
+					writing it yourself and <a href="submittingPatches.html">submitting a 
+					patch</a>.
+				</p>
+			</answer>
+		</faq>
+		<faq>
+			<question>
+				How do I get commit rights for the cvs repository?
+			</question>
+			<answer>
+				<p>
+					Submit a bunch of patches that improve the product and when the
+					existing commiters are satisfied with your work, you will be given
+					commit access.
+				</p>
+				<p>
+					As a rule of thumb, if your patches need to be "touched up" before
+					they can be committed, then you won't be getting commit access.  Refer
+					to the page on <a href="submittingPatches.html">submitting patches</a>
+					for an idea of what is expected.
 				</p>
 			</answer>
 		</faq>
