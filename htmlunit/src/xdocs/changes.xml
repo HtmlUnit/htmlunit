@@ -127,13 +127,13 @@
             <action type="update" dev="mbowler" id="738548">
             	Fix for bug 738548 - "Form values are not Posted Properly to Server"
             </action>
-            <action type="new" dev="mbowler">
+            <action type="add" dev="mbowler">
             	Added support for the property Window.name
             </action>
-            <action type="new" dev="mbowler">
+            <action type="add" dev="mbowler">
             	Added read-only support for Document.cookie.
             </action>
-            <action type="new" dev="mbowler" id="675597">
+            <action type="add" dev="mbowler" id="675597">
             	Added support for the javascript method Window.setTimeout()
             </action>
             <action type="update" dev="mbowler">
@@ -142,7 +142,7 @@
             <action type="update" dev="mbowler">
             	Upgraded the xerces to 2.4
             </action>
-            <action type="new" dev="mbowler" id="742515">
+            <action type="add" dev="mbowler" id="742515">
             	New method HtmlPage.getAllForms()
             </action>
             <action type="update" dev="mbowler">
@@ -154,6 +154,9 @@
             	what the browsers do.  If the input's name was foo we would previously
             	send the following values to the server: foo, foo.x and foo.y.  The browsers
             	only send foo.x and foo.y.
+            </action>
+            <action type="add" dev="mbowler">
+            	Added docs on configuring JSSE - contributed by Tom Hamilton
             </action>
         </release>
 	</body>
