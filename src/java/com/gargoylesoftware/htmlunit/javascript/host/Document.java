@@ -90,6 +90,7 @@ public final class Document extends NodeImpl {
     private static final long serialVersionUID = -7646789903352066465L;
     private String status_ = "";
     private ElementArray all_; // has to be a member to have equality (==) working
+    private ElementArray forms_; // has to be a member to have equality (==) working
 
     /** The buffer that will be used for calls to document.write() */
     private StringBuffer writeBuffer_;
@@ -122,37 +123,17 @@ public final class Document extends NodeImpl {
      * Return the value of the javascript attribute "forms".
      * @return The value of this attribute.
      */
-    public NativeArray jsGet_forms() {
-        // TODO: Once the page has been fully loaded, there's no need to
-        // rebuild this array every time.  It could be cached at that point.
-
-        final List jsForms = new ArrayList();
-
-        final List formElements
-            = getHtmlPage().getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("form") );
-        final Iterator iterator = formElements.iterator();
-        while( iterator.hasNext() ) {
-            final HtmlForm htmlForm = (HtmlForm)iterator.next();
-            Form jsForm = (Form)htmlForm.getScriptObject();
-            if( jsForm == null ) {
-                jsForm = (Form)makeJavaScriptObject("Form");
-                jsForm.setHtmlElement( htmlForm );
+    public Object jsGet_forms() {
+        if (forms_ == null) {
+            forms_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            try {
+                forms_.init(getHtmlPage(), new HtmlUnitXPath("//form"));
             }
-            jsForms.add(jsForm);
-        }
-
-        final int attributes = READONLY;
-        final Form[] array = new Form[jsForms.size()];
-        jsForms.toArray(array);
-        final NativeArray allForms = new NativeArray(array);
-        for( int i=0; i<array.length; i++ ) {
-            final String name = array[i].getHtmlElementOrDie().getAttributeValue("name");
-            if( name.length() != 0 ) {
-                allForms.defineProperty(name, array[i], attributes);
+            catch (final JaxenException e) {
+                throw Context.reportRuntimeError("Failed to initialize collection document.forms: " + e.getMessage());
             }
         }
-
-        return allForms;
+        return forms_;
     }
 
 

@@ -658,4 +658,28 @@ public class FormTest extends WebTestCase {
         final List expectedAlerts = Arrays.asList( new String[]{"0", "1", "1", "true"});
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetFormFromFormsById() throws Exception {
+        final String content =
+            "<html>"
+            + "<head></head>"
+            + "<body onload=\"alert(document.forms['myForm'].action)\">"
+            + "<form id='myForm' action='foo.html'>"
+            + "</form>"
+            + "</body>"
+            + "</html>";
+        
+        
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList( new String[]{
+                "foo.html"
+            } );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
