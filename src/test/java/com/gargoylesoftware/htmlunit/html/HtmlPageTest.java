@@ -1223,5 +1223,17 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlAnchor link = (HtmlAnchor) page.getAnchors().get(0);
         link.click();
     }
+
+    /**
+     * Test that a return statement in onload doesn't throw any exception
+     * @throws Exception if the test fails
+     */
+    public void testOnLoadReturn() throws Exception {
+        final String content = "<html><head><title>foo</title></head>\n"
+            + "<body onload='return true'>\n"
+            + "</body></html>";
+
+         loadPage(content);
+    }
 }
 
