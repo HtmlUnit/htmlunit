@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.protocol.about;
 
-import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandler;
@@ -56,7 +55,7 @@ public class Handler extends URLStreamHandler {
      * @return The connection.
      * @throws IOException If an IO problem occurs
      */
-    protected URLConnection openConnection( final URL url ) throws IOException {
+    protected URLConnection openConnection( final URL url ) {
         return new AboutURLConnection(url);
     }
 

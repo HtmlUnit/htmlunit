@@ -432,11 +432,11 @@ public class HttpWebConnection extends WebConnection {
                     }
                 }
 
-                public String getContentAsString() throws IOException {
+                public String getContentAsString() {
                     return contentAsString;
                 }
 
-                public InputStream getContentAsStream() throws IOException {
+                public InputStream getContentAsStream() {
                     return new ByteArrayInputStream(contentBuffer);
                 }
 

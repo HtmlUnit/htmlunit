@@ -76,10 +76,8 @@ public class HtmlForm extends HtmlElement {
      *
      * @param  htmlPage The page that contains this element
      * @param  element The xml element that represents this form in the DOM
-     * @throws  IOException If an io error occurs
      */
-    HtmlForm( final HtmlPage htmlPage, final Element element )
-        throws IOException {
+    HtmlForm( final HtmlPage htmlPage, final Element element ) {
         super( htmlPage, element );
     }
 

@@ -139,15 +139,12 @@ public final class HtmlPage
      * @param  webResponse The web response that was used to create this page
      * @param  originatingUrl The url that was used to load this page.
      * @param  webWindow The window that this page is being loaded into.
-     * @exception  IOException If an IO error occurs
      */
     public HtmlPage(
             final WebClient webClient,
             final URL originatingUrl,
             final WebResponse webResponse,
-            final WebWindow webWindow )
-        throws
-            IOException {
+            final WebWindow webWindow ) {
 
         super( null, null );
 
