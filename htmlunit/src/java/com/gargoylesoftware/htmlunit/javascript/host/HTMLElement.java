@@ -9,6 +9,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.mozilla.javascript.Scriptable;
 
 /**
@@ -147,5 +148,29 @@ public class HTMLElement extends SimpleScriptable {
             appendedChild = null;
         }
         return appendedChild;
+    }
+
+
+    /**
+     * Get the JavaScript property "parentNode" for the node that
+     * contains the current node.
+     * @return The parent node
+     */
+    public Object jsGet_parentNode() {
+        final HtmlElement htmlElement = getHtmlElementOrDie();
+        final Element xmlElement = htmlElement.getElement();
+        final Node parentXmlNode = xmlElement.getParentNode();
+        if ( parentXmlNode == null ) {
+            return null;
+        }
+        if ( ! ( parentXmlNode instanceof Element ) ) {
+	    getLog().warn( "Parent XML node is not an Element.  Only Elements are currently supported.  Parent class: " + parentXmlNode.getClass() );
+            return null;
+        }
+        final Element parentXmlElement = (Element) parentXmlNode;
+        final HtmlElement parentHtmlElement =
+            htmlElement.getPage().getHtmlElement( parentXmlElement );
+        final Object jsParentElement = getScriptableFor( parentHtmlElement );
+        return jsParentElement;
     }
 }

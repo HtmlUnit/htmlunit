@@ -462,7 +462,11 @@ public final class Window extends SimpleScriptable {
     public void jsSet_onload( final Object newValue ) {
         if( webWindow_.getEnclosedPage() instanceof HtmlPage ) {
             final HtmlPage page = (HtmlPage)webWindow_.getEnclosedPage();
-            page.setOnLoadAttribute( newValue );
+            if ( newValue instanceof Function ) {
+                page.setOnLoadAttribute( newValue );
+            } else {
+                getLog().error( "Invalid value set to window.onload.  Value class: " + newValue.getClass () );
+            }
         }
     }
 
