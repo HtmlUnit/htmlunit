@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * An array returned by frames property of Window
  *
  * @author <a href="mailto:chen_jun@users.sourceforge.net>Chen Jun</a>
+ * @author Marc Guillemot
  * @version $Revision$
  */
 public class WindowFramesArray extends SimpleScriptable {
@@ -111,7 +112,7 @@ public class WindowFramesArray extends SimpleScriptable {
                 return ((WebWindow) frames.get(i)).getScriptObject();
             }
         }
-        return NOT_FOUND;
+        return super.get(name, start);
     }
 
     /**
@@ -133,6 +134,11 @@ public class WindowFramesArray extends SimpleScriptable {
     /**
      * <p>Return the number of elements in this array</p>
      *
+     * Warning: if there is a frame named "length" (what for an idea!), 
+     * a js expression like "frames.length" will currently always return the frame 
+     * with the given name. That is not what all browsers do (for instance Mozilla 1.5 
+     * works this way but not IE6)
+     * 
      * @return The number of elements in the array
      */
     public int jsGet_length() {

@@ -130,6 +130,9 @@
         <contributor>
             <name>Chris Erskine</name>
         </contributor>
+        <contributor>
+            <name>Marc Guillemot</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

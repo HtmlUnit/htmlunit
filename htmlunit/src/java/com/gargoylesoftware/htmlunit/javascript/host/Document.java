@@ -73,11 +73,12 @@ import com.gargoylesoftware.htmlunit.javascript.DocumentAllArray;
  * A javascript object for a Document
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
- * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
+ * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
- * @author  Chris Erskine
+ * @author Chris Erskine
+ * @author Marc Guillemot
  */
 public final class Document extends NodeImpl {
 

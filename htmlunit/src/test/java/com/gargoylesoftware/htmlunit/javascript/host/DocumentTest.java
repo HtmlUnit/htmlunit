@@ -68,6 +68,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author  David K. Taylor
  * @author  Barnaby Court
  * @author  Chris Erskine
+ * @author  Marc Guillemot
  */
 public class DocumentTest extends WebTestCase {
     /**
@@ -2086,5 +2087,28 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Test the alert", expectedAlerts, collectedAlerts );       
     }
 
-    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testTitle() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>\n"
+                 + "function doTest(){\n"
+                 + "    alert(document.title)\n"
+                 + "}\n"
+                 + "</script></head>\n"
+             + "<body onload='doTest()'>\n"
+                 + "</body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         final HtmlPage page = loadPage(content, collectedAlerts);
+         assertEquals("foo", page.getTitleText());
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "foo"
+         } );
+
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
 }
