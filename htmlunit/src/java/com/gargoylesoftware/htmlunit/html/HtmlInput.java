@@ -45,6 +45,11 @@ public abstract class HtmlInput
     public void setValueAttribute( final String newValue ) {
         assertNotNull( "newValue", newValue );
         getElement().setAttribute( "value", newValue );
+
+        final String onChange = getOnChangeAttribute();
+        if( onChange.length() != 0 ) {
+            getPage().executeJavaScriptIfPossible(onChange, "onChange handler", true, this);
+        }
     }
 
 
