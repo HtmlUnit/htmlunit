@@ -276,7 +276,8 @@ public final class Document extends HTMLElement {
      * @return the list of elements
      */
     public Object jsFunction_getElementsByTagName( final String tagName ) {
-        final List list = getHtmlElementOrDie().getPage().getHtmlElementsByTagNames(Collections.singletonList(tagName.toLowerCase()));
+        final HtmlPage page = getHtmlElementOrDie().getPage();
+        final List list = page.getHtmlElementsByTagNames(Collections.singletonList(tagName.toLowerCase()));
         final ListIterator iterator = list.listIterator();
         while(iterator.hasNext()) {
             final HtmlElement htmlElement = (HtmlElement)iterator.next();

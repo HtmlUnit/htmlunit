@@ -870,7 +870,9 @@ public class DocumentTest extends WebTestCase {
         webClient.setWebConnection( webConnection );
 
         final String firstContent
-            = "<html><body><script type=\"text/javascript\">alert(document.getElementsByTagName('script').length);</script></body></html>";
+            = "<html><body><script type=\"text/javascript\">" 
+            + "alert(document.getElementsByTagName('script').length);"
+            + "</script></body></html>";
         webConnection.setResponse(
             new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
 

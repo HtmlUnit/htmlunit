@@ -141,10 +141,12 @@ public class HTMLElement extends SimpleScriptable {
             // Append the child to the parent element
             if ( parentXmlNode.appendChild(childXmlNode) == null ) {
                 appendedChild = null;
-            } else {
+            } 
+            else {
                 appendedChild = childObject;
             }
-        } else {
+        } 
+        else {
             appendedChild = null;
         }
         return appendedChild;
@@ -163,8 +165,9 @@ public class HTMLElement extends SimpleScriptable {
         if ( parentXmlNode == null ) {
             return null;
         }
-        if ( ! ( parentXmlNode instanceof Element ) ) {
-	    getLog().warn( "Parent XML node is not an Element.  Only Elements are currently supported.  Parent class: " + parentXmlNode.getClass() );
+        if ( ( parentXmlNode instanceof Element ) == false ) {
+            getLog().warn( "Parent XML node is not an Element.  Only Elements are currently supported.  Parent class: " 
+                + parentXmlNode.getClass() );
             return null;
         }
         final Element parentXmlElement = (Element) parentXmlNode;

@@ -1057,7 +1057,8 @@ public final class HtmlPage
                 }
                 executeJavaScriptIfPossible(onLoadScript, "body.onLoad", false, null);
             }
-        } else {
+        } 
+        else {
             final ScriptEngine engine = getWebClient().getScriptEngine();
             engine.callFunction( this, onLoad, null, new Object [0], null );
         }
