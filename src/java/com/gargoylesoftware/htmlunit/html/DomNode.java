@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.Assert;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Chris Erskine
+ * @author Mike Williams
  */
 public abstract class DomNode implements Cloneable {
     /**
@@ -432,7 +433,7 @@ public abstract class DomNode implements Cloneable {
     public Object getScriptObject() {
         return scriptObject_;
     }
-
+    
     /**
      * append a child node to the end of the current list
      * @param node the node to append
@@ -444,7 +445,6 @@ public abstract class DomNode implements Cloneable {
         if(node != this) {
             node.basicRemove();
         }
-
         if(firstChild_ == null) {
             firstChild_ = node;
             firstChild_.previousSibling_ = node;
@@ -506,15 +506,17 @@ public abstract class DomNode implements Cloneable {
      * cut off all relationships this node has with siblings an parents
      */
     private void basicRemove() {
-
         if(parent_ != null && parent_.firstChild_ == this) {
-            parent_.firstChild_ = null;
+            parent_.firstChild_ = nextSibling_;
         }
         else if(previousSibling_ != null) {
             previousSibling_.nextSibling_ = nextSibling_;
         }
         if(nextSibling_ != null) {
             nextSibling_.previousSibling_ = previousSibling_;
+        }
+        if(parent_ != null && this == parent_.getLastChild()) {
+            parent_.firstChild_.previousSibling_ = previousSibling_;
         }
 
         nextSibling_ = null;

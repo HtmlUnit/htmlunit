@@ -104,6 +104,9 @@
                 file urls on another drive under windows: 
                 http://issues.apache.org/bugzilla/show_bug.cgi?id=31884
             </action>
+            <action type="update" dev="mbowler" due-to="Mike Williams" id="1051885">
+				Fixes for buggy link management in DomNode.basicRemove()
+            </action>
 		</release>
 		    
         <release version="1.3-pre2" date="September 26, 2004">

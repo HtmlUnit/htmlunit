@@ -54,6 +54,7 @@ import java.util.List;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  Mike Williams
  */
 public class HtmlSelectTest extends WebTestCase {
 
@@ -620,4 +621,118 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlOption option = (HtmlOption)page.getHtmlElementById("option2");
         option.setSelected(true);
     }
+    
+    private void checkOptions(HtmlSelect select) {
+        List options = select.getAllOptions();
+        if (options.isEmpty()) {
+            assertNull(select.getFirstChild());
+            assertNull(select.getLastChild());
+        } 
+        else {
+            assertEquals(options.get(0), select.getFirstChild());
+            assertEquals(options.get(options.size()-1), select.getLastChild());
+        }
+    }
+    
+    /** @throws Exception if the test fails */
+    public void testRemoveOptionsFromSelect() throws Exception {
+
+        final String htmlContent
+            = "<html><body><form name='form' method='GET' action='action.html'>"
+            + "<select name='select' id='theSelect'>"
+            + "<option value='a'>111</option>"
+            + "<option value='b'>222</option>"
+            + "<option value='c'>333</option>"
+            + "<option value='d'>444</option>"
+            + "</select>"
+            + "</form></body></html>";
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+
+        final HtmlSelect theSelect = (HtmlSelect) page.getHtmlElementById("theSelect");
+        assertNotNull(theSelect);
+        
+        assertEquals(4, theSelect.getAllOptions().size());
+        assertEquals("a", theSelect.getOption(0).getValue());
+        assertEquals("b", theSelect.getOption(1).getValue());
+        assertEquals("c", theSelect.getOption(2).getValue());
+        assertEquals("d", theSelect.getOption(3).getValue());
+        
+        // remove from the middle
+        theSelect.getOption(1).remove();
+        checkOptions(theSelect);
+        assertEquals(3, theSelect.getAllOptions().size());
+        assertEquals("a", theSelect.getOption(0).getValue());
+        assertEquals("c", theSelect.getOption(1).getValue());
+        assertEquals("d", theSelect.getOption(2).getValue());
+
+        // remove from the end
+        theSelect.getOption(2).remove();
+        checkOptions(theSelect);
+        assertEquals(2, theSelect.getAllOptions().size());
+        assertEquals("a", theSelect.getOption(0).getValue());
+        assertEquals("c", theSelect.getOption(1).getValue());
+
+        // remove from the front
+        theSelect.getOption(0).remove();
+        checkOptions(theSelect);
+        assertEquals(1, theSelect.getAllOptions().size());
+        assertEquals("c", theSelect.getOption(0).getValue());
+        
+        // remove from the last one
+        theSelect.getOption(0).remove();
+        checkOptions(theSelect);
+        assertEquals(0, theSelect.getAllOptions().size());
+    }
+    
+    /** @throws Exception If the test fails */
+    public void testEditOptions() throws Exception {
+
+        final String htmlContent
+            = "<html><body><form name='form' method='GET' action='action.html'>"
+            + "<select name='select' id='theSelect'>"
+            + "<option value='a'>111</option>"
+            + "<option value='b'>222</option>"
+            + "<option value='c'>333</option>"
+            + "</select>"
+            + "</form></body></html>";
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST );
+            
+        final HtmlSelect theSelect = (HtmlSelect) page.getHtmlElementById("theSelect");
+
+        assertNotNull(theSelect);
+        assertEquals(3, theSelect.getAllOptions().size());
+        
+        appendOption(theSelect, "d");
+        assertEquals(4, theSelect.getAllOptions().size());
+        assertEquals("d", theSelect.getOption(3).getValue());
+
+        theSelect.setOptionSize(1);
+        assertEquals(1, theSelect.getAllOptions().size());
+        assertEquals("a", theSelect.getOption(0).getValue());
+
+        appendOption(theSelect, "x");
+        assertEquals(2, theSelect.getAllOptions().size());
+        assertEquals("x", theSelect.getOption(1).getValue());
+            
+    }
+    
+    void appendOption(HtmlSelect select, String value) {
+        HtmlOption option = new HtmlOption(select.getPage(), null);
+        option.setValueAttribute(value);
+        option.setLabelAttribute(value);
+        select.appendOption(option);
+    }
+    
 }
