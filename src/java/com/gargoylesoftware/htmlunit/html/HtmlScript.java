@@ -171,7 +171,6 @@ public class HtmlScript extends HtmlElement {
 
     /**
      * For internal use only
-     * @param node
      */
     void executeScriptIfNeeded() {
         final HtmlPage page = getPage();
