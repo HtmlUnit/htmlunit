@@ -68,7 +68,7 @@ public class ClickableElementTest extends WebTestCase {
     /**
      * Full page driver for onClick tests.
      *
-     * @param htmlBody HTML fragment for body of page with clickable element
+     * @param htmlContent HTML fragment for body of page with clickable element
      * identified by clickId ID attribute.  Must have onClick that raises
      * an alert of "foo".
      * @throws Exception if the test fails
@@ -99,7 +99,7 @@ public class ClickableElementTest extends WebTestCase {
     /**
      * Body driver for onClick tests.
      *
-     * @tagName HTML tag name for simple tag with text body.
+     * @param htmlBody HTML text body
      * @throws Exception if the test fails
      */
     private void onClickBodyTest(String htmlBody) throws Exception {
@@ -111,11 +111,11 @@ public class ClickableElementTest extends WebTestCase {
     /**
      * Simple tag name driver for onClick tests.
      *
-     * @tagName HTML tag name for simple tag with text body.
+     * @param tagName HTML tag name for simple tag with text body
      * @throws Exception if the test fails
      */
     private void onClickSimpleTest(String tagName) throws Exception {
-        onClickPageTest("<body><" + tagName + " id='clickId' onClick='alert(\"foo\")'>Text</" + tagName + "></body>");
+        onClickBodyTest("<body><" + tagName + " id='clickId' onClick='alert(\"foo\")'>Text</" + tagName + "></body>");
     }
 
 
