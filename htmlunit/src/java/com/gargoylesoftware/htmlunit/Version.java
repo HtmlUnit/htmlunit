@@ -8,6 +8,13 @@ package com.gargoylesoftware.htmlunit;
 
 public class Version {
     public static void main( final String args[] ) {
-        System.out.println("HTMLUnit (c) Gargoyle Software Inc.");
+        final Package aPackage = Package.getPackage("com.gargoylesoftware.htmlunit");
+
+        System.out.println("HTMLUnit");
+        System.out.println("Copyright (C) 2002 Gargoyle Software. All rights reserved.");
+
+        if( aPackage != null ) {
+            System.out.println("Version: "+aPackage.getImplementationVersion());
+        }
     }
 }
