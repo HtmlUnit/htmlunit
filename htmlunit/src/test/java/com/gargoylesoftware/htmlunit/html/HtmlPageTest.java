@@ -822,8 +822,10 @@ public class HtmlPageTest extends WebTestCase {
 
         client.getPage(URL_FIRST);
 
-        final List expectedItems = Arrays.asList(new Object[] {"first", URL_FIRST, new Integer(1)});
-        assertEquals(expectedItems, collectedItems);
+        // avoid using equals() on URL because it takes to much time (due to ip resolution)
+        assertEquals("first", collectedItems.get(0));
+        assertEquals(URL_FIRST.toExternalForm(), ((URL) collectedItems.get(1)).toExternalForm());
+        assertEquals(new Integer(1), collectedItems.get(2));
     }
 
     /**
@@ -946,8 +948,10 @@ public class HtmlPageTest extends WebTestCase {
 
         assertEquals("first", page.getTitleText());
 
-        final List expectedItems = Arrays.asList(new Object[] {"first", URL_SECOND, new Integer(3)});
-        assertEquals(expectedItems, collectedItems);
+        // avoid using equals() on URL because it takes to much time (due to ip resolution)
+        assertEquals("first", collectedItems.get(0));
+        assertEquals(URL_SECOND.toExternalForm(), ((URL) collectedItems.get(1)).toExternalForm());
+        assertEquals(new Integer(3), collectedItems.get(2));
     }
 
     /**

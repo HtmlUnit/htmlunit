@@ -67,7 +67,7 @@ public class ImmediateRefreshHandler implements RefreshHandler {
             return;
         }
         final WebClient client = window.getWebClient();
-        if( page.getWebResponse().getUrl().equals( url ) ) {
+        if( page.getWebResponse().getUrl().toExternalForm().equals( url.toExternalForm() ) ) {
             final String msg = "Refresh Aborted by HtmlUnit: " +
                 "Attempted to refresh a page using an ImmediateRefreshHandler " +
                 "which could have caused an OutOfMemoryError " +

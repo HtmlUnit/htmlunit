@@ -2164,7 +2164,7 @@ public class DocumentTest extends WebTestCase {
          final FrameWindow frame = (FrameWindow) framesetPage.getFrames().get(0);
          
          assertNotNull(frame);
-         assertEquals(frameURL, frame.getEnclosedPage().getWebResponse().getUrl());
+         assertEquals(frameURL.toExternalForm(), frame.getEnclosedPage().getWebResponse().getUrl().toExternalForm());
          assertEquals("frame", ((HtmlPage)frame.getEnclosedPage()).getTitleText());
      }
      
