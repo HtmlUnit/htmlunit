@@ -58,6 +58,7 @@ public class SelectTest extends WebTestCase {
                  + "    var options = document.form1.select1.options;\n"
                  + "    for( i=0; i<options.length; i++ ) {\n"
                  + "        alert(options[i].value);\n"
+                 + "        alert(options[i].text);\n"
                  + "    }\n"
                  + "}</script></head><body onload='doTest()'>"
                  + "<p>hello world</p>"
@@ -74,7 +75,7 @@ public class SelectTest extends WebTestCase {
          final HtmlPage page = loadPage(content, collectedAlerts);
 
          final List expectedAlerts = Arrays.asList( new String[]{
-             "value1", "value2", "value3"
+             "value1", "One", "value2", "Two", "value3", "Three"
          } );
 
          assertEquals( expectedAlerts, collectedAlerts );

@@ -45,6 +45,6 @@ public class Option extends HTMLElement {
      * @return The text property
      */
     public String jsGet_text() {
-        return jsGet_value();
+        return ((HtmlOption)getHtmlElementOrDie()).asText();
     }
 }
