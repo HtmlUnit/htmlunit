@@ -99,5 +99,13 @@ public class HtmlImageInput extends HtmlInput {
             return new KeyValuePair[]{new KeyValuePair( name, getValueAttribute() )};
         }
     }
+
+
+    /**
+     * Reset the value of this element to its initial state.  This is a no-op for
+     * this component.
+     */
+    public void reset() {
+    }
 }
 

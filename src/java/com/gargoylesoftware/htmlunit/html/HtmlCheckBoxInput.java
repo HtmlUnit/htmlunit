@@ -16,6 +16,8 @@ import org.w3c.dom.Element;
  */
 public class HtmlCheckBoxInput extends HtmlInput {
 
+    private final boolean initialCheckedState_;
+
     /**
      *  Create an instance
      *
@@ -24,6 +26,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     HtmlCheckBoxInput( final HtmlPage page, final Element element ) {
         super( page, element );
+        initialCheckedState_ = isAttributeDefined("checked");
     }
 
 
@@ -49,6 +52,14 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     public boolean isChecked() {
         return getAttributeValue("checked").length() != 0;
+    }
+
+
+    /**
+     * Return the value of this element to what it was at the time the page was loaded.
+     */
+    public void reset() {
+        setChecked(initialCheckedState_);
     }
 }
 

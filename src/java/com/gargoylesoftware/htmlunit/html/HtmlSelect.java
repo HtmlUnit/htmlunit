@@ -208,7 +208,11 @@ public class HtmlSelect
      * Return the value of this element to what it was at the time the page was loaded.
      */
     public void reset() {
-        getLog().debug("reset() not implemented for this element");
+        final Iterator iterator = getAllOptions().iterator();
+        while( iterator.hasNext() ) {
+            final HtmlOption option = (HtmlOption)iterator.next();
+            option.reset();
+        }
     }
 
 

@@ -12,6 +12,12 @@
 		<change type="fix">
 			Changed window.open() to understand the magic name _self
 		</change>
+		<change type="new">
+			Added HtmlOption.setSelected(boolean)
+		</change>
+		<change type="new">
+			Completed support for reset buttons
+		</change>
 	</change-log>
 </section>
 

@@ -64,5 +64,13 @@ public class HtmlSubmitInput extends HtmlInput {
             ElementNotFoundException {
         return super.click();
     }
+
+
+    /**
+     * Reset the value of this element to its initial state.  This is a no-op for
+     * this component.
+     */
+    public void reset() {
+    }
 }
 

@@ -54,5 +54,12 @@ public class HtmlResetInput extends HtmlInput {
             return page.executeJavascriptIfPossible(onClick, "HtmlResetInput onClick handler");
         }
     }
+
+
+    /**
+     * Reset this element to its original values.  This is a no-op for a button.
+     */
+    public void reset() {
+    }
 }
 
