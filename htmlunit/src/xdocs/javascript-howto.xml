@@ -127,5 +127,15 @@ public void testAlerts() throws Exception {
         		WebClient.setStatusHandler() for details on these.
         	</p>
         </section>
+
+
+        <section name="onfocus and onblur handlers">
+        	<p>
+        		The method WebClient.moveFocusToElement(...) will change the focus
+        		to the appropriate element.  The onfocus and onblur handlers will
+        		be called appropriately as elements gain or lose focus.
+        	</p>
+        </section>
     </body>
+
 </document>
