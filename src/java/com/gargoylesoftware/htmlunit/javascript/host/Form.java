@@ -103,10 +103,13 @@ public class Form extends HTMLElement {
 
     /**
      * Return the value of the javascript attribute "length".
+     * Does not count input type=image elements as browsers (IE6, Mozilla 1.7) do
+     * (cf <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/length.asp">MSDN doc</a>)
      * @return The value of this attribute.
      */
     public int jsGet_length() {
-        return jsGet_elements().jsGet_length();
+        return jsGet_elements().jsGet_length() 
+            - getHtmlForm().getHtmlElementsByAttribute("input", "type", "image").size();
     }
 
 
@@ -247,7 +250,7 @@ public class Form extends HTMLElement {
       * @return The property.
       */
      public Object get( final int index, final Scriptable start ) {
-         return jsGet_elements().get(index, start);
+         return jsGet_elements().get(index, ((Form) start).jsGet_elements());
      }
 }
 
