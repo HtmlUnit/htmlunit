@@ -556,4 +556,57 @@ public class FormTest extends WebTestCase {
         assertEquals( expectedParameters, webConnection.getLastParameters());
     }
 
+    /**
+     * Test form.length
+     * @throws Exception if the test fails
+     */
+    public void testLength() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>\n"
+                 + "function doTest(){\n"
+                 + "    alert(document.form1.length);"
+                 + "}\n"
+                 + "</script></head><body onload='doTest()'>\n"
+                 + "<form name='form1'>"
+                 + "    <input type='radio' name='radio1' value='1'/>"
+                 + "    <input type='image' src='foo' value='1'/>"
+                 + "    <input type='submit' name='submit1' value='1'/>"
+                 + "</form>"
+                 + "</body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         loadPage(content, collectedAlerts);
+
+         final List expectedAlerts = Arrays.asList( new String[]{
+             "2"
+         } );
+
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGet() throws Exception {
+        final String content
+                 = "<html><head><title>foo</title><script>\n"
+                 + "function doTest(){\n"
+                 + "    alert(document.form1[0].name)\n"
+                 + "}\n"
+                 + "</script></head><body onload='doTest()'>\n"
+                 + "<p>hello world</p>"
+                 + "<form name='form1'>"
+                 + "    <input type='button' name='button1' />"
+                 + "</form>"
+                 + "</body></html>";
+
+         final List collectedAlerts = new ArrayList();
+         loadPage(content, collectedAlerts);
+
+         final List expectedAlerts = Arrays.asList( new String[]{ "button1" } );
+
+         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
 }

@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                Fixed bug in JS accessing form elements through syntax like myForm[i] and don't count inputs with type=image in form.length as browsers do.
+            </action>
             <action type="update" dev="mguillem" id="1081557">
                 Automatically add value="on" for radio buttons and checkboxes without value attribute (available for JS access and used when submitting a form as browsers do).
             </action>
