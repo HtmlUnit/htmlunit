@@ -9,10 +9,17 @@ package com.gargoylesoftware.htmlunit.javascript;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import org.mozilla.javascript.Scriptable;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
+import org.mozilla.javascript.NativeArray;
+import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Element;
 
 /**
@@ -97,10 +104,6 @@ public class DocumentAllArray extends SimpleScriptable {
             return result;
         }
 
-        if( name.equals("length") ) {
-            return getLength( (DocumentAllArray)start );
-        }
-
         final HtmlPage htmlPage = ((DocumentAllArray)start).htmlPage_;
         try {
             final HtmlElement htmlElement = htmlPage.getHtmlElementById(name);
@@ -140,7 +143,9 @@ public class DocumentAllArray extends SimpleScriptable {
     * to detect if an element has been inserted or removed, it isn't safe to
     * cache the array/<p>
     */
-     private static Integer getLength( final DocumentAllArray array ) {
+    public Object jsGet_length() {
+
+        final DocumentAllArray array = this;
         int elementCount = 1; // First one is <html>
 
         final HtmlPage htmlPage = array.htmlPage_;
@@ -151,5 +156,20 @@ public class DocumentAllArray extends SimpleScriptable {
         }
 
         return new Integer(elementCount);
+    }
+
+
+    public static Object jsFunction_tags(
+        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
+
+        final DocumentAllArray array = (DocumentAllArray)scriptable;
+        final String tagName = getStringArg(0, args, "");
+        final List htmlElements = array.htmlPage_.getHtmlElementsByTagNames( Collections.singletonList(tagName) );
+        final ListIterator iterator = htmlElements.listIterator();
+        while( iterator.hasNext() ) {
+            final HtmlElement element = (HtmlElement)iterator.next();
+            iterator.set( array.getScriptableFor(element) );
+        }
+        return new NativeArray( htmlElements.toArray() );
     }
 }

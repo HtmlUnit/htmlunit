@@ -416,4 +416,38 @@ public class DocumentTest extends WebTestCase {
             "HTML", "HEAD", "TITLE", "SCRIPT", "BODY"} );
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+
+    public void testDocumentAll_tags() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var inputs = document.all.tags('input');\n"
+             + "    var inputCount = inputs.length;\n"
+             + "    for( i=0; i< inputCount; i++ ) {\n"
+             + "        alert(inputs[i].name);\n"
+             + "    }\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<input type='text' name='a' value='1'>"
+             + "<input type='text' name='b' value='1'>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList( new String[] {
+            "a", "b"} );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }

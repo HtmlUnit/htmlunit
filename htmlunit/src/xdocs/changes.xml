@@ -33,6 +33,9 @@
 		<change type="change">
 			Updated configuration file with more functions/properties
 		</change>
+		<change type="new" reporter="Mabel Chow">
+			Added support for document.all.tags()
+		</change>
 	</change-log>
 </section>
 
