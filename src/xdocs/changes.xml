@@ -15,6 +15,16 @@
 		<change type="documentation">
 			Cleaned up some javadoc warnings
 		</change>
+		<change type="new">
+			New method
+			<javadoc>com.gargoylesoftware.htmlunit.WebClient#loadWebResponse(java.net.URL, com.gargoylesoftware.htmlunit.SubmitMethod, java.util.List)</javadoc>
+		</change>
+		<change type="change">
+			Removed the need for HiddenWebWindow - javascript files are now loaded via
+			<javadoc>com.gargoylesoftware.htmlunit.WebClient#loadWebResponse(java.net.URL, com.gargoylesoftware.htmlunit.SubmitMethod, java.util.List)</javadoc>.
+			This should fix an intermittant bug where an UnsupportedOperationException was being called from
+			the HiddenWebWindow if a javascript file was returned with a content type of "text/html"
+		</change>
 	</change-log>
 </section>
 

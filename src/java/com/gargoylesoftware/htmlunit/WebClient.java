@@ -909,5 +909,18 @@ public class WebClient {
             public String getResponseHeaderValue( final String key ) { return ""; }
         };
     }
+
+
+    public final WebResponse loadWebResponse(
+            final URL url, final SubmitMethod method, final List parameters)
+        throws
+            IOException {
+
+        assertNotNull("url", url);
+        assertNotNull("method", method);
+        assertNotNull("parameters", parameters);
+
+        return getWebConnection().getResponse( url, method, parameters );
+    }
 }
 
