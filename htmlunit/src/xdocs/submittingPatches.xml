@@ -40,7 +40,7 @@
                         <a href="http://www.junit.org">JUnit</a>.  No code will get merged without tests.
                     </li>
                     <li>
-                        All unit tests should pass.  Occassionally this rule will be broken if it is important
+                        All unit tests must pass.  Occassionally this rule will be broken if it is important
                         to get a test into the build before the code is ready but this should be very rare.
                     </li>
                     <li>
