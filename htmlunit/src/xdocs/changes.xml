@@ -84,6 +84,10 @@
 	            Fix for bug 742902 "document.location prints as object reference instead of URL".
 	            Patch submitted by David K. Taylor
             </action>
+            <action type="update" dev="mbowler" id="743241 " due-to="David K. Taylor">
+	            Fix for bug 743241 "document.write from external script is not added to document".
+	            Patch submitted by David K. Taylor
+            </action>
         </release>
     </body>
 

@@ -417,6 +417,37 @@ public class DocumentTest extends WebTestCase {
 
 
     /**
+     * Regression test for bug 743241
+     */
+    public void testDocumentWrite_LoadScript() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        webClient.setWebConnection( webConnection );
+
+        final String firstContent
+             = "<html><head><title>First</title></head><body>"
+             + "<script src='http://script'></script>"
+             + "</form></body></html>";
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final String scriptContent
+             = "document.write(\"<div id='div1'></div>\");";
+        webConnection.setResponse(
+            new URL("http://script"), scriptContent, 200, "OK", "text/javascript", Collections.EMPTY_LIST );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        // This will blow up if the div tag hasn't been written to the document
+        firstPage.getHtmlElementById("div1");
+    }
+
+
+    /**
      * Regression test for bug 715379
      */
     public void testDocumentWrite_script() throws Exception {
