@@ -240,8 +240,8 @@ public final class HtmlPage extends DomNode implements Page {
      * @param tagName The tag name, preferrably in lowercase
      * @return the new HTML element.
      */
-    public HtmlElement createElement(String tagName) {
-        String tagLower = tagName.toLowerCase();
+    public HtmlElement createElement(final String tagName) {
+        final String tagLower = tagName.toLowerCase();
         return HTMLParser.getFactory(tagLower).createElement(this, tagLower, null);
     }
 
@@ -735,10 +735,10 @@ public final class HtmlPage extends DomNode implements Page {
      * the previous page and a javascript result object.
      */
     public ScriptResult executeJavaScriptFunctionIfPossible(
-            Function function,
-            Scriptable thisObject,
-            Object[] args,
-            HtmlElement htmlElementScope) {
+            final Function function,
+            final Scriptable thisObject,
+            final Object[] args,
+            final HtmlElement htmlElementScope) {
         
         final WebWindow window = getEnclosingWindow();
         getWebClient().pushClearFirstWindow();
@@ -830,7 +830,7 @@ public final class HtmlPage extends DomNode implements Page {
                 if( scriptEncoding == null || scriptEncoding.length() == 0 ){
                     scriptEncoding = "ISO-8859-1";
                 }
-                byte [] data = webResponse.getResponseBody();
+                final byte [] data = webResponse.getResponseBody();
                 return EncodingUtil.getString(data, 0, data.length, scriptEncoding );
             }
             else {
@@ -1015,7 +1015,7 @@ public final class HtmlPage extends DomNode implements Page {
         }
 
         // remove quotes if any (" and ')
-        StringBuffer buffer = new StringBuffer(refreshString.substring(index + 4));
+        final StringBuffer buffer = new StringBuffer(refreshString.substring(index + 4));
         if (buffer.charAt(0) == '"' || buffer.charAt(0) == 0x27) {
             buffer.deleteCharAt(0);
         }
@@ -1307,7 +1307,7 @@ public final class HtmlPage extends DomNode implements Page {
      *
      * @param idElement the element with an ID attribute to remove.
      */
-    void removeIdElement(HtmlElement idElement) {
+    void removeIdElement(final HtmlElement idElement) {
         idMap_.remove(idElement.getAttributeValue("id"));
     }
     
