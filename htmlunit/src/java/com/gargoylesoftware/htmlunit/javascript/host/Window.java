@@ -43,10 +43,12 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
+import java.util.Iterator;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
+import org.w3c.dom.Element;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
@@ -58,6 +60,7 @@ import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -563,8 +566,9 @@ public final class Window extends SimpleScriptable {
             setHtmlElement( document_.getHtmlPage() );
         }
 
-        final Window window;
         Object result;
+
+        final Window window;
         if( start == this ) {
             result = super.get(name, start);
             window = this;
@@ -573,6 +577,14 @@ public final class Window extends SimpleScriptable {
             result = start.get(name, start);
             window = (Window)start;
         }
+
+        // If we are in a frameset then this might be a frame name
+        if( result == NOT_FOUND ) {
+            final HtmlElement htmlElement = ((Window)start).getHtmlElementOrNull();
+            //System.out.println("Window.get() htmlElement=["+htmlElement+"]");
+            result = getFrameByName( htmlElement, name );
+        }
+
         if( result == NOT_FOUND ) {
             result = getJavaScriptVariable(window, name);
         }
@@ -611,5 +623,32 @@ public final class Window extends SimpleScriptable {
         finally {
             getViaJavaScriptInProgress_ = false;
         }
+    }
+
+
+    private Object getFrameByName( final HtmlElement element, final String name ) {
+        final HtmlPage page = element.getPage();
+        final Iterator xmlIterator = page.getXmlChildElements();
+        while( xmlIterator.hasNext() ) {
+            final Element xmlElement = ( Element )xmlIterator.next();
+            final String tagName = page.getTagName(xmlElement);
+            if( tagName.equals("body") ) {
+                // Framesets don't contain body tags so if we find one of these
+                // then we can leave early.
+                return NOT_FOUND;
+            }
+            if( "frame".equals( tagName ) ) {
+                if( page.getAttributeValue(xmlElement, "name").equals(name) ) {
+                    HtmlFrame frame = (HtmlFrame)page.getHtmlElement(xmlElement);
+                    final Object scriptObject = frame.getScriptObject();
+                    if( scriptObject == null ) {
+                        getLog().error("Window.getFrameByName() scriptObject not initialized yet");
+                        return NOT_FOUND;
+                    }
+                    return scriptObject;
+                }
+            }
+        }
+        return NOT_FOUND;
     }
 }

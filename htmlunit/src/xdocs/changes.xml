@@ -124,8 +124,12 @@
                  so doing things such as converting &lt;br&gt; to line breaks and removing 
                  extra white space should not happen. Patch supplied by Brad Clarke.
             </action>
+            <action type="update" dev="mbowler" id="824069">
+				Fixed exception when trying to reference one frame by name from 
+				another in JavaScript. For example "parent.nav.document", where 
+				nav is the name of the frame. 
+            </action>
         </release>
-
         <release version="1.2.3" date="July 31, 2003">
             <action type="add" dev="mbowler">
                 Initial support for Maven
