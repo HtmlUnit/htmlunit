@@ -120,4 +120,45 @@ public class FrameTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+    
+    /**
+     * Regression test for 
+     * http://sourceforge.net/tracker/index.php?func=detail&aid=1101525&group_id=47038&atid=448266
+     * @throws Exception if the test fails
+     */
+    public void testLocation() throws Exception {
+        
+        if (true) {
+            notImplemented();
+            return;
+        }
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection =
+            new MockWebConnection(webClient);
+        final List collectedAlerts = new ArrayList();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent
+            = "<html><head><title>first</title></head>"
+            + "<frameset cols='*' onload='Frame1.location = \"frame.html\"'>"
+            + "    <frame name='Frame1' src='subdir/frame.html'>"
+            + "</frameset></html>";
+        final String defaultContent
+        = "<html><head><script>alert(location)</script></head></html>";
+
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setDefaultResponse(defaultContent);
+
+        final List expectedAlerts = Arrays.asList( new String[] {URL_FIRST.toExternalForm() + "/subdir/frame.html",
+                URL_FIRST.toExternalForm() + "/frame.html"} );
+
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals("first", page.getTitleText());
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+    
 }
