@@ -275,7 +275,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("div", div1.getNodeName());
 
         final List expectedAlerts = Arrays.asList( new String[]{
-            "DIV", "1", "null", "div"
+            "DIV", "1", "null", "DIV"
         } );
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -1983,7 +1983,7 @@ public class DocumentTest extends WebTestCase {
                  + "</script></head><body></body></html>";
 
          final List collectedAlerts = new ArrayList();
-         final HtmlPage page = loadPage(content, collectedAlerts);
+         loadPage(content, collectedAlerts);
 
          final List expectedAlerts = Collections.singletonList("undefined");
          assertEquals( expectedAlerts, collectedAlerts );

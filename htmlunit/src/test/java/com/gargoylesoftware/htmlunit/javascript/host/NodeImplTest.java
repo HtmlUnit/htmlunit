@@ -187,4 +187,29 @@ public class NodeImplTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
     
+    /**
+     * The common browsers always return node names in uppercase.  Test this.
+     * @throws Exception on test failure
+     */
+    public void testNodeNameIsUppercase() throws Exception {
+        final String content = "<html><head><title>test_hasChildNodes</title>"
+                + "<script>"
+                + "function doTest(){"
+                + "    alert(document.getElementById('myNode').nodeName);"
+                + "}"
+                + "</script>"
+                + "</head><body onload='doTest()'>"
+                + "<div id='myNode'>hello world<span>Child Node</span></div>"
+                + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("test_hasChildNodes", page.getTitleText());
+
+        final List expectedAlerts = Arrays.asList(new String[]{
+            "DIV"
+        });
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
