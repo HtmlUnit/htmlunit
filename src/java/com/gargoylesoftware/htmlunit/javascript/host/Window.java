@@ -51,8 +51,6 @@ import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
-import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -71,6 +69,7 @@ import com.gargoylesoftware.htmlunit.javascript.WindowFramesArray;
  * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @author  David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author  Darrell DeBoer
  */
 public final class Window extends SimpleScriptable {
 
@@ -82,13 +81,6 @@ public final class Window extends SimpleScriptable {
     private History history_;
     private Location location_;
     private WindowFramesArray windowFramesArray_;
-
-    /**
-     * Kludge to avoid stack overflow problems.  This will be set to true if we
-     * are executing a javascript method to retrieve a value (see getJavaScriptVariable)
-     * and false otherwise.
-     */
-    private boolean getViaJavaScriptInProgress_ = false;
 
     /**
      * Create an instance.  The rhino engine requires all host objects
@@ -542,65 +534,20 @@ public final class Window extends SimpleScriptable {
             setDomNode( document_.getHtmlPage() );
         }
 
-        Object result;
-
-        final Window window;
-        if( start == this ) {
-            result = super.get(name, start);
-            window = this;
-        }
-        else {
-            result = start.get(name, start);
-            window = (Window)start;
-        }
+        Object result = super.get(name, start);
 
         // If we are in a frameset then this might be a frame name
         if( result == NOT_FOUND ) {
             final DomNode domNode = ((Window)start).getDomNodeOrNull();
-            //System.out.println("Window.get() domNode=["+domNode+"]");
             result = getFrameByName( domNode.getPage(), name );
         }
 
+        // Ask the parent scope, as it may be a variable access like "window.myVar"
         if( result == NOT_FOUND ) {
-            result = getJavaScriptVariable(window, name);
+            result = this.getParentScope().get(name, start);
         }
         return result;
     }
-
-    /**
-     * Use a dynamically created javascript method to retrieve a variable that
-     * we can't get any other way.
-     * @param window The window that contains the variable.
-     * @param name The name of the variable.
-     * @return The value of the variable or {@link #NOT_FOUND} if it cannot be found.
-     */
-    private Object getJavaScriptVariable( final Window window, final String name ) {
-        if( window.document_ == null ) {
-            return NOT_FOUND;
-        }
-
-        // Set this flag to indicate that we are already calling this method.  This
-        // is to avoid stack overflows.  Admittedly ugly but the best I could think
-        // of.
-        if( getViaJavaScriptInProgress_ == true ) {
-            return NOT_FOUND;
-        }
-        getViaJavaScriptInProgress_ = true;
-        try {
-            final HtmlPage page = window.document_.getHtmlPage();
-            final ScriptResult scriptResult = page.executeJavaScriptIfPossible(
-                "return "+name+";", "variable access for "+name, true, page.getDocumentElement());
-
-            return scriptResult.getJavaScriptResult();
-        }
-        catch( final ScriptException t ) {
-            return NOT_FOUND;
-        }
-        finally {
-            getViaJavaScriptInProgress_ = false;
-        }
-    }
-
 
     private Object getFrameByName( final HtmlPage page, final String name ) {
 

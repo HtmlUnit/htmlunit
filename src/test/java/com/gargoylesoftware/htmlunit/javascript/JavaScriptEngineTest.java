@@ -55,10 +55,13 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -73,6 +76,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
+ * @author  Darrell DeBoer
  */
 public class JavaScriptEngineTest extends WebTestCase {
     /**
@@ -527,10 +531,14 @@ public class JavaScriptEngineTest extends WebTestCase {
             jsContent, 200, "OK", "text/javascript", Collections.EMPTY_LIST );
         client.setWebConnection( webConnection );
 
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
         final HtmlPage page = ( HtmlPage )client.getPage(
                 new URL( "http://first/index.html" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
         assertEquals("foo", page.getTitleText());
+        assertEquals( Collections.singletonList("Got to external method"), collectedAlerts );
     }
 
 
@@ -609,8 +617,86 @@ public class JavaScriptEngineTest extends WebTestCase {
 
     }
 
+    /**
+     * Test that the javascript engine gets called correctly for variable access.
+     */
+    public void testJavaScriptEngineCallsForVariableAccess() throws IOException {
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String content
+             = "<html><head><title>foo</title><script>"
+             + "myDate = 'foo';"
+             + "function doUnqualifiedVariableAccess() {\n"
+             + "    alert('unqualified: ' + myDate);\n"
+             + "}\n"
+             + "function doQualifiedVariableAccess() {\n"
+             + "    alert('qualified: ' + window.myDate);\n"
+             + "}\n"
+             + "</script></head><body>"
+             + "<p>hello world</p>"
+             + "<a id='unqualified' onclick='doUnqualifiedVariableAccess();'>unqualified</a>"
+             + "<a id='qualified' onclick='doQualifiedVariableAccess();'>qualified</a>"
+             + "</body></html>";
+
+        webConnection.setDefaultResponse( content );
+        client.setWebConnection( webConnection );
+        final CountingJavaScriptEngine countingJavaScriptEngine = new CountingJavaScriptEngine(client.getScriptEngine());
+        client.setScriptEngine(countingJavaScriptEngine);
+
+        final HtmlPage page = ( HtmlPage )client.getPage(
+                URL_GARGOYLE,
+                SubmitMethod.POST, Collections.EMPTY_LIST );
+
+        assertEquals(1, countingJavaScriptEngine.getExecutionCount());
+
+        ((HtmlAnchor) page.getHtmlElementById("unqualified")).click();
+        assertEquals(3, countingJavaScriptEngine.getExecutionCount());
+
+        ((HtmlAnchor) page.getHtmlElementById("qualified")).click();
+        assertEquals(5, countingJavaScriptEngine.getExecutionCount());
+
+        final List expectedAlerts = Arrays.asList(new String[]{"unqualified: foo", "qualified: foo"});
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
     private InputSource createInputSourceForFile( final String fileName ) throws FileNotFoundException {
         return new InputSource( getFileAsStream(fileName) );
+    }
+
+    private static final class CountingJavaScriptEngine extends ScriptEngine
+    {
+        private ScriptEngine delegate_;
+        private int scriptExecutionCount = 0;
+
+        protected CountingJavaScriptEngine(ScriptEngine delegate) {
+            super(delegate.getWebClient());
+            delegate_ = delegate;
+        }
+
+        public void initialize(HtmlPage page) {
+            delegate_.initialize(page);
+        }
+
+        public Object execute(HtmlPage htmlPage, String sourceCode, String sourceName, HtmlElement htmlElement) {
+            scriptExecutionCount++;
+            return delegate_.execute(htmlPage, sourceCode, sourceName, htmlElement);
+        }
+
+        public Object callFunction(HtmlPage htmlPage, Object javaScriptFunction, Object thisObject, Object[] args, HtmlElement htmlElementScope) {
+            return delegate_.callFunction(htmlPage, javaScriptFunction, thisObject, args, htmlElementScope);
+        }
+
+        public String toString(HtmlPage htmlPage, Object javaScriptObject) {
+            return delegate_.toString(htmlPage, javaScriptObject);
+        }
+
+        public int getExecutionCount() {
+            return scriptExecutionCount;
+        }
     }
 }
 

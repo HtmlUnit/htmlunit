@@ -67,6 +67,7 @@ import java.util.List;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @author  David K. Taylor
+ * @author  Darrell DeBoer
  */
 public class WindowTest extends WebTestCase {
     /**
@@ -907,6 +908,122 @@ public class WindowTest extends WebTestCase {
             URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
         assertEquals( Collections.singletonList("foo"), collectedAlerts );
         assertEquals( "first", page.getTitleText() );
+    }
+
+    /**
+     * Variables that are defined inside javascript should be accessible through the
+     * window object (ie window.myVariable).  Test that this works.
+     * @throws Exception If the test fails.
+     */
+    public void testJavascriptVariableFromTopAndParentFrame() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final List collectedAlerts = new ArrayList();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent
+             = "<html><head><title>First</title></head><body><script>"
+             + "myVariable = 'first'"
+             + "  </script><iframe name='left' src='http://second' />"
+             + "</body></html>";
+        webConnection.setResponse(
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+
+        final String secondContent
+             = "<html><head><title>Second</title></head><body><script>"
+             + "myVariable = 'second'"
+             + "  </script><iframe name='innermost' src='http://third' />"
+             + "</body></html>";
+        webConnection.setResponse(
+            URL_SECOND, secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+
+        final String thirdContent
+             = "<html><head><title>Third</title><script>"
+               + "myVariable = 'third';\n"
+               + "function doTest() {\n"
+               + "alert('parent.myVariable = ' + parent.myVariable);\n"
+               + "alert('top.myVariable = ' + top.myVariable);\n"
+               + "}\n"
+             + "</script></head>"
+             + "<body onload='doTest()'></body></html>";
+
+        webConnection.setResponse(
+            URL_THIRD, thirdContent,200,"OK","text/html",Collections.EMPTY_LIST );
+
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage)webClient.getPage(
+            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
+        assertEquals( "First", page.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "parent.myVariable = second",
+            "top.myVariable = first",
+        } );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+    /**
+     * Variables that are defined inside javascript should be accessible through the
+     * window object (ie window.myVariable).  Test that this works.
+     * @throws Exception If the test fails.
+     */
+    public void testJavascriptVariableFromNamedFrame() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection =
+            new MockWebConnection(webClient);
+        final List collectedAlerts = new ArrayList();
+
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String firstContent
+            = "<html><head><title>first</title></head>"
+            + "<frameset cols='20%,80%'>"
+            + "    <frameset rows='30%,70%'>"
+            + "        <frame src='http://second' name='second'>"
+            + "        <frame src='http://third' name='third'>"
+            + "    </frameset>"
+            + "    <frame src='http://fourth' name='fourth'>"
+            + "</frameset></html>";
+        webConnection.setResponse( URL_FIRST, firstContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST);
+
+        final String secondContent
+            = "<html><head><title>second</title></head><body><script>"
+              + "myVariable = 'second';\n"
+              + "</script><p>second</p></body></html>";
+        webConnection.setResponse( URL_SECOND, secondContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST);
+
+        final String thirdContent
+            = "<html><head><title>third</title></head><body><script>"
+              + "myVariable = 'third';\n"
+              + "</script><p>third</p></body></html>";
+        webConnection.setResponse( URL_THIRD, thirdContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST);
+
+        final String fourthContent
+            = "<html><head><title>fourth</title></head><body onload='doTest()'><script>\n"
+            + "myVariable = 'fourth';\n"
+            + "function doTest() {\n"
+            + "alert('parent.second.myVariable = ' + parent.second.myVariable);\n"
+            + "alert('parent.third.myVariable = ' + parent.third.myVariable);\n"
+            + "}\n"
+            + "</script></body></html>";
+        webConnection.setResponse( new URL("http://fourth"), fourthContent,
+            200, "OK", "text/html", Collections.EMPTY_LIST);
+
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage)webClient.getPage(
+            URL_FIRST, SubmitMethod.POST, Collections.EMPTY_LIST);
+        assertEquals( "first", page.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "parent.second.myVariable = second",
+            "parent.third.myVariable = third",
+        } );
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
     /**

@@ -176,6 +176,9 @@
             		Added serialVersionUID to all classes that are Serializable but didn't already 
             		have one of these.
             </action>
+            <action type="update" dev="mbowler" due-to="" id="1034897">
+            		Fix for performance problem in JavaScript handling. Patch submitted by Darrell DeBoer
+            </action>
         </release>
         
         <release version="1.3-pre1" date="November 7, 2003">
