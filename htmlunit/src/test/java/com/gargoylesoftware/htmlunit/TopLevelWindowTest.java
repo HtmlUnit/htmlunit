@@ -75,7 +75,7 @@ public class TopLevelWindowTest extends WebTestCase {
         final List expectedEvents = Arrays.asList( new Object[] {
             new WebWindowEvent(windowToClose, WebWindowEvent.CLOSE, null, null)
         } );
-        eventCatcher.assertEventsAppearEquals(expectedEvents);
+        assertEquals( expectedEvents, eventCatcher.getEvents() );
 
         // Since this was the only open window, a new window should have
         // been created when this one was closed.  Verify this.
