@@ -40,6 +40,10 @@ public final class JavaScriptConfiguration {
     private static org.w3c.dom.Document XmlDocument_;
     private static final Object INITIALIZATION_LOCK = new Object();
 
+    public static final int ENABLED   = 1;
+    public static final int DISABLED  = 2;
+    public static final int NOT_FOUND = 3;
+
     private static Map ConfigurationMap_ = new HashMap(11);
 
 
@@ -233,9 +237,9 @@ public final class JavaScriptConfiguration {
      *
      * @param hostClass The class that the property will be defined in.
      * @param name The name of the function.
-     * @return true if this name is valid.
+     * @return
      */
-    public boolean isValidFunctionName( final Class hostClass, final String name ) {
+    public int getFunctionNameState( final Class hostClass, final String name ) {
         assertNotNull("hostClass", hostClass);
         assertNotNull("name", name);
 
@@ -244,7 +248,7 @@ public final class JavaScriptConfiguration {
 
             final Element functionElement = getElementByTypeAndName(classElement, "function", name);
             if( functionElement != null ) {
-                return isEnabled(functionElement);
+                return getEnabledState(functionElement);
             }
 
             final String superClassName = classElement.getAttribute("extends");
@@ -254,42 +258,7 @@ public final class JavaScriptConfiguration {
             }
         }
 
-        return false;
-        //return getFunctionNames(hostClass).contains(name);
-    }
-
-
-    /**
-     * Return a list containing all the names of the functions for the specified class.
-     * @param hostClass The class for which we are getting names.
-     * @return A list of names.
-     */
-    private List getFunctionNames( final Class hostClass ) {
-        final List list = new ArrayList();
-
-        if( Input.class.isAssignableFrom(hostClass) ) {
-            list.add("focus");
-            list.add("blur");
-            list.add("click");
-            list.add("select");
-        }
-
-        if( Window.class.isAssignableFrom(hostClass) ) {
-            list.add("alert");
-        }
-
-        if( Form.class.isAssignableFrom(hostClass) ) {
-            list.add("submit");
-            list.add("reset");
-        }
-
-        if( Document.class.isAssignableFrom(hostClass) ) {
-            list.add("write");
-            list.add("writeln");
-            list.add("close");
-        }
-
-        return list;
+        return NOT_FOUND;
     }
 
 
@@ -353,9 +322,9 @@ public final class JavaScriptConfiguration {
     }
 
 
-    private boolean isEnabled( final Element element ) {
+    private int getEnabledState( final Element element ) {
         assertNotNull("element", element);
-        return true;
+        return ENABLED;
     }
 
 

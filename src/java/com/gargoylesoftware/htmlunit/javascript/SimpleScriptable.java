@@ -119,13 +119,15 @@ public class SimpleScriptable extends ScriptableObject {
             }
             else if( methodName.startsWith("jsFunction_") ) {
                 final String functionName = methodName.substring("jsFunction_".length());
-                if( configuration.isValidFunctionName(clazz, functionName) ) {
+                final int state = configuration.getFunctionNameState(clazz, functionName);
+
+                if( state == configuration.ENABLED ) {
                     final FunctionObject functionObject
                         = new FunctionObject(functionName, methods[i], this);
                     getPropertyInfo(localPropertyMap, functionName).function_ = functionObject;
                 }
-                else {
-                    getLog().trace("Function ["+functionName+"] not used by this browser version");
+                else if( state == configuration.NOT_FOUND ) {
+                    getLog().trace("Function ["+functionName+"] not found in configuration");
                 }
             }
         }
@@ -258,8 +260,8 @@ public class SimpleScriptable extends ScriptableObject {
 
          final PropertyInfo info = (PropertyInfo)getPropertyMap().get(name);
          final boolean isReadablePropertyName = configuration.isValidReadablePropertyName(clazz, name);
-         final boolean isFunctionName = configuration.isValidFunctionName(clazz, name);
-         if( isReadablePropertyName && isFunctionName ) {
+         final int functionNameState = configuration.getFunctionNameState(clazz, name);
+         if( isReadablePropertyName && functionNameState == configuration.ENABLED ) {
              throw new IllegalStateException("Name is both a property and a function: name=["
                 +name+"] class=["+clazz.getName()+"]");
          }
@@ -279,7 +281,7 @@ public class SimpleScriptable extends ScriptableObject {
                  }
              }
          }
-         else if( isFunctionName ) {
+         else if( functionNameState == configuration.ENABLED ) {
              if( info == null || info.function_ == null ) {
                  getLog().debug("Function not implemented ["+name+"]");
                  result = NOT_FOUND;
@@ -293,36 +295,6 @@ public class SimpleScriptable extends ScriptableObject {
          }
 
          return result;
-/*
-         if( info == null || ( info.getter_ == null && info.function_ == null ) ) {
-             final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
-             if( configuration.isValidReadablePropertyName(getClass(), name) ) {
-                 getLog().debug("Getter not implemented for property ["+name+"]");
-             }
-             else if( configuration.isValidFunctionName(getClass(), name) ) {
-                 getLog().debug("Function not implemented ["+name+"]");
-             }
-
-             final Object result = super.get(name, start);
-             if( result == Context.getUndefinedValue() ) {
-                 getLog().trace("Getter/function not found for name ["+name+"]");
-             }
-             //getLog().trace("** Getter/function not found for name ["+name+"]");
-
-             return result;
-         }
-
-         if( info.function_ != null ) {
-             return info.function_;
-         }
-
-         try {
-             return info.getter_.invoke( this, new Object[0] );
-         }
-         catch( final Exception e ) {
-             throw new ScriptException(e);
-         }
-*/
      }
 
 
