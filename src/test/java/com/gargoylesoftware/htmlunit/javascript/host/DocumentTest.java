@@ -627,6 +627,286 @@ public class DocumentTest extends WebTestCase {
 
 
     /**
+     * Regression test for firstChild with nested elements
+     * @throws Exception if the test fails
+     */
+    public void testFirstChild_Nested() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var div1=document.getElementById('parentDiv');\n"
+             + "    alert(div1.firstChild.id);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<div id='parentDiv'><div id='childDiv'/><div id='childDiv2'/></div>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("childDiv");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for firstChild and appendChild
+     * @throws Exception if the test fails
+     */
+    public void testFirstChild_AppendChild() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+             = "<html><head><title>First</title><script>"
+             + "function doTest() {\n"
+             + "    var childDiv=document.getElementById('childDiv');\n"
+             + "    var parentDiv=document.getElementById('parentDiv');\n"
+             + "    parentDiv.appendChild(childDiv);\n"
+             + "    var childDiv2=document.getElementById('childDiv2');\n"
+             + "    parentDiv.appendChild(childDiv2);\n"
+             + "    alert(parentDiv.firstChild.id);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<div id='parentDiv'/><div id='childDiv'/><div id='childDiv2'/>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("childDiv");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for lastChild with nested elements
+     * @throws Exception if the test fails
+     */
+    public void testLastChild_Nested() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String lastContent
+             = "<html><head><title>Last</title><script>"
+             + "function doTest() {\n"
+             + "    var div1=document.getElementById('parentDiv');\n"
+             + "    alert(div1.lastChild.id);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<div id='parentDiv'><div id='childDiv1'/><div id='childDiv'/></div>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://last"), lastContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage lastPage = ( HtmlPage )webClient.getPage( new URL( "http://last" ) );
+        assertEquals( "Last", lastPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("childDiv");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for lastChild and appendChild
+     * @throws Exception if the test fails
+     */
+    public void testLastChild_AppendChild() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String lastContent
+             = "<html><head><title>Last</title><script>"
+             + "function doTest() {\n"
+             + "    var childDiv1=document.getElementById('childDiv1');\n"
+             + "    var parentDiv=document.getElementById('parentDiv');\n"
+             + "    parentDiv.appendChild(childDiv1);\n"
+             + "    var childDiv=document.getElementById('childDiv');\n"
+             + "    parentDiv.appendChild(childDiv);\n"
+             + "    alert(parentDiv.lastChild.id);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<div id='parentDiv'/><div id='childDiv1'/><div id='childDiv'/>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://last"), lastContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage lastPage = ( HtmlPage )webClient.getPage( new URL( "http://last" ) );
+        assertEquals( "Last", lastPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("childDiv");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for nextSibling with nested elements
+     * @throws Exception if the test fails
+     */
+    public void testNextSibling_Nested() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String lastContent
+             = "<html><head><title>Last</title><script>"
+             + "function doTest() {\n"
+             + "    var div1=document.getElementById('previousDiv');\n"
+             + "    alert(div1.nextSibling.id);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<div id='parentDiv'><div id='previousDiv'/><div id='nextDiv'/></div>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://last"), lastContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage lastPage = ( HtmlPage )webClient.getPage( new URL( "http://last" ) );
+        assertEquals( "Last", lastPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("nextDiv");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for nextSibling and appendChild
+     * @throws Exception if the test fails
+     */
+    public void testNextSibling_AppendChild() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String lastContent
+             = "<html><head><title>Last</title><script>"
+             + "function doTest() {\n"
+             + "    var previousDiv=document.getElementById('previousDiv');\n"
+             + "    var parentDiv=document.getElementById('parentDiv');\n"
+             + "    parentDiv.appendChild(previousDiv);\n"
+             + "    var nextDiv=document.getElementById('nextDiv');\n"
+             + "    parentDiv.appendChild(nextDiv);\n"
+             + "    alert(previousDiv.nextSibling.id);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<div id='parentDiv'/><div id='junk1'/><div id='previousDiv'/><div id='junk2'/><div id='nextDiv'/>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://last"), lastContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage lastPage = ( HtmlPage )webClient.getPage( new URL( "http://last" ) );
+        assertEquals( "Last", lastPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("nextDiv");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for previousSibling with nested elements
+     * @throws Exception if the test fails
+     */
+    public void testPreviousSibling_Nested() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String lastContent
+             = "<html><head><title>Last</title><script>"
+             + "function doTest() {\n"
+             + "    var div1=document.getElementById('nextDiv');\n"
+             + "    alert(div1.previousSibling.id);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<div id='parentDiv'><div id='previousDiv'/><div id='nextDiv'/></div>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://last"), lastContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage lastPage = ( HtmlPage )webClient.getPage( new URL( "http://last" ) );
+        assertEquals( "Last", lastPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("previousDiv");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for previousSibling and appendChild
+     * @throws Exception if the test fails
+     */
+    public void testPreviousSibling_AppendChild() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String lastContent
+             = "<html><head><title>Last</title><script>"
+             + "function doTest() {\n"
+             + "    var previousDiv=document.getElementById('previousDiv');\n"
+             + "    var parentDiv=document.getElementById('parentDiv');\n"
+             + "    parentDiv.appendChild(previousDiv);\n"
+             + "    var nextDiv=document.getElementById('nextDiv');\n"
+             + "    parentDiv.appendChild(nextDiv);\n"
+             + "    alert(nextDiv.previousSibling.id);\n"
+             + "}\n"
+             + "</script></head><body onload='doTest()'>"
+             + "<div id='parentDiv'/><div id='junk1'/><div id='previousDiv'/><div id='junk2'/><div id='nextDiv'/>"
+             + "</body></html>";
+
+        webConnection.setResponse(
+            new URL("http://last"), lastContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage lastPage = ( HtmlPage )webClient.getPage( new URL( "http://last" ) );
+        assertEquals( "Last", lastPage.getTitleText() );
+
+        final List expectedAlerts = Collections.singletonList("previousDiv");
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
      * @throws Exception if the test fails
      */
     public void testAllProperty_KeyByName() throws Exception {

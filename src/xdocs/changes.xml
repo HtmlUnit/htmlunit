@@ -55,6 +55,15 @@
             <action type="update" dev="mbowler" id="814741" due-to="Brad Clarke">
                 Added support for Window.focus().  Patch supplied by Brad Clarke
             </action>
+            <action type="update" dev="dktaylor">
+                Add support for getting HTMLElement.firstChild, lastChild,
+                nextSibling and previousSibling.  HTMLElement.firstChild returns
+                the first node below the current node.  HTMLElement.lastChild
+                returns the last node below the current node.  HTMLElement.nextSibling
+                returns the node after the current node.  HTMLElement.previousSibling
+                returns the node before the current node.  They each return null
+                if there is no such node or the node type is not supported (not HTML).
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">
