@@ -356,4 +356,25 @@ public class InputTest extends WebTestCase {
         final HtmlForm form = page.getFormByName("form1");
         form.submit();
     }    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testThisDotFormInOnClick() throws Exception {
+        final String htmlContent = "<html>"
+                + "<head><title>First</title></head>"
+                + "<body>"
+                + "<form name=\"form1\">"
+                + "<input type=\"submit\" name=\"button1\" onClick=\"this.form.target='_blank'; return false;\">"
+                + "</form>"
+                + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+        assertEquals("First", page.getTitleText());
+
+        assertEquals("", page.getFormByName("form1").getTargetAttribute());
+
+        ((HtmlSubmitInput) page.getFormByName("form1").getInputByName("button1")).click();
+
+        assertEquals("_blank", page.getFormByName("form1").getTargetAttribute());
+    }    
 }
