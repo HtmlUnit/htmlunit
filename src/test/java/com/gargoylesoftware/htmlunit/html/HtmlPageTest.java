@@ -588,7 +588,7 @@ public class HtmlPageTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        assertEquals("http://second/", page.getFullyQualifiedUrl("").toExternalForm());
+        assertEquals("http://second", page.getFullyQualifiedUrl("").toExternalForm());
         assertEquals("http://second/foo", page.getFullyQualifiedUrl("foo").toExternalForm());
         assertEquals("http://foo.com/bar", page
                 .getFullyQualifiedUrl("http://foo.com/bar")

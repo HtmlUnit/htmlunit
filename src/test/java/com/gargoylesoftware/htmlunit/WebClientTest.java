@@ -65,6 +65,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author David D. Kilzer
  * @author Chris Erskine
+ * @author Hans Donner
  */
 public class WebClientTest extends WebTestCase {
 
@@ -898,9 +899,21 @@ public class WebClientTest extends WebTestCase {
      */
     public void testExpandUrl() throws Exception {
         assertEquals(
-            "http://first/",
+            "http://first",
             WebClient.expandUrl(URL_FIRST, "#second").toExternalForm());
     }
+    
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testExpandUrlWithFile() throws Exception {
+        final String urlString = "http://host/page.html";
+        final URL url = new URL(urlString);
+        assertEquals(
+            urlString,
+            WebClient.expandUrl(url, "#second").toExternalForm());
+    }
+
 
     /** Test the accessors for refreshHandler */
     public void testRefreshHandlerAccessors() {

@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1101525" due-to="Hans Donner">
+                Fixed wrond urls expansion with "#".
+            </action>        
             <action type="update" dev="mguillem" id="1106319" due-to="Daniel Gredler">
                 JavaScript: improved window.execScript to execute JavaScript code.
             </action>        

@@ -37,6 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.net.URL;
+import java.util.Properties;
+
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -48,6 +51,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author Hans Donner
  */
 public class HtmlFrameSetTest extends WebTestCase {
 
@@ -133,4 +137,78 @@ public class HtmlFrameSetTest extends WebTestCase {
         assertSame( firstPage, ((BaseFrame.FrameWindow) secondWebWindow).getEnclosingPage() );
         assertEquals( "Second", ((HtmlPage)secondWebWindow.getEnclosedPage()).getTitleText() );
     }
+
+    /**
+     * <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1101525&group_id=47038&atid=448266">
+     * Bug report 1101525 </a>
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testLoadingFrameSetWithRelativePaths()
+        throws Exception {
+
+        final String framesContent 
+                = "<html><head><title>Frames</title></head>"
+                + "<frameset rows='110,*'>"
+                + "  <frame src='subdir1/menu.html' name='menu' scrolling='no' border='0' noresize>"
+                + "  <frame src='subdir2/first.html' name='test' border='0' auto>"
+                + "</frameset>" 
+                + "<noframes>"
+                + "  <body>Frames not supported</body>" 
+                + "</noframes>"
+                + "</html>";
+        final String menuContent 
+                = "<html><head><title>Menu</title></head>"
+                + "<body>"
+                + "  <script language='javascript'>"
+                + "    function changeEditPage() {parent.test.location='../second.html';}"
+                + "  </script>"
+                + "  <a name ='changePage' onClick='javascript:changeEditPage();' href='#'>Click</a>."
+                + "</body>"
+                + "</html>";
+        final String firstContent
+                = "<html><head><title>First</title></head>"
+                + "<body>First/body>" 
+                + "</html>";
+        final String secondContent
+                = "<html><head><title>Second</title></head>"
+                + "<body>Second</body>" 
+                + "</html>";
+        final String baseUrl = "http://framestest";
+        
+        final URL framesURL = new URL(baseUrl + "/frames.html");
+        final URL menuURL = new URL(baseUrl + "/subdir1/menu.html");
+        final URL firstURL = new URL(baseUrl + "/subdir2/first.html");
+        final URL secondURL = new URL(baseUrl + "/second.html");
+
+        final Properties properties = System.getProperties();
+        properties.put("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.SimpleLog");
+        properties.put("org.apache.commons.logging.simplelog.defaultlog", "trace");
+
+        final WebClient webClient = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        webConnection.setResponse(framesURL, framesContent);
+        webConnection.setResponse(menuURL, menuContent);
+        webConnection.setResponse(firstURL, firstContent);
+        webConnection.setResponse(secondURL, secondContent);
+
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage framesPage = (HtmlPage) webClient.getPage(framesURL);
+        assertEquals( "Frames", framesPage.getTitleText() );
+      
+        final WebWindow menuWebWindow = webClient.getWebWindowByName("menu");
+        final HtmlPage menuPage = (HtmlPage) menuWebWindow.getEnclosedPage();
+        assertEquals( "Menu", menuPage.getTitleText() );
+
+        final WebWindow testWebWindow = webClient.getWebWindowByName("test");
+        assertEquals( "First", ((HtmlPage) testWebWindow.getEnclosedPage()).getTitleText() );
+
+        final HtmlAnchor changePage = menuPage.getAnchorByName("changePage");
+        changePage.click();
+        assertEquals( "Second", ((HtmlPage) testWebWindow.getEnclosedPage()).getTitleText() );
+        
+    }
+
 }

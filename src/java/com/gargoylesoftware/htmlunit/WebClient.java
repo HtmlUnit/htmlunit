@@ -87,6 +87,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
  * @author Chris Erskine
  * @author Daniel Gredler
  * @author Sergey Gorelkin
+ * @author Hans Donner
  */
 public class WebClient {
 
@@ -321,6 +322,9 @@ public class WebClient {
      */
     public Page getPage( final WebWindow webWindow, final WebRequestSettings parameters )
         throws IOException, FailingHttpStatusCodeException {
+
+        getLog().debug("Get page for window named '" + webWindow.getName() + "', using " + parameters);
+        
         final String protocol = parameters.getURL().getProtocol();
         final WebResponse webResponse;
         if( protocol.equals("javascript") ) {
@@ -1059,7 +1063,7 @@ public class WebClient {
      * @return The new window.
      */
     public WebWindow openWindow( final URL url, String windowName, final WebWindow opener ) {
-        WebWindow window = openTargetWindow( opener, windowName, "_blank" );
+        final WebWindow window = openTargetWindow( opener, windowName, "_blank" );
         if( url != null ) {
             try {
                 getPage(window, url, SubmitMethod.GET, Collections.EMPTY_LIST);
@@ -1252,71 +1256,95 @@ public class WebClient {
 
 
     /**
-     * Expand a relative url relative to the specified base.  In most situations this
-     * is the same as <code>new URL(baseUrl, relativeUrl)</code> but there are some cases
-     * that URL doesn't handle correctly.
-     *
-     * @param  baseUrl The base url
-     * @param  relativeUrl The relative url
-     * @return  See above
-     * @exception  MalformedURLException If an error occurred when creating a
-     *      URL object
+     * Expand a relative url relative to the specified base. In most situations
+     * this is the same as <code>new URL(baseUrl, relativeUrl)</code> but
+     * there are some cases that URL doesn't handle correctly.
+     * 
+     * @param baseUrl The base url
+     * @param relativeUrl The relative url
+     * @return See above
+     * @exception MalformedURLException If an error occurred when creating a URL
+     *                object
+     * @see <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>
+     *      regarding Relative Uniform Resource Locators
      */
-    public static URL expandUrl( final URL baseUrl, String relativeUrl )
+    public static URL expandUrl( final URL baseUrl, final String relativeUrl )
         throws MalformedURLException {
 
-        // Was a protocol specified?
-        final int colonIndex = relativeUrl.indexOf(":");
-        if( colonIndex != -1 ) {
+        String parseUrl = relativeUrl;
+        if (parseUrl == null) {
+            parseUrl = "";
+        } 
+      
+        // section 2.4.2 - parsing scheme
+        final int schemeIndex = parseUrl.indexOf(":");
+        if( schemeIndex != -1 ) {
             boolean isProtocolSpecified = true;
-            for( int i=0; i<colonIndex; i++ ) {
-                if( Character.isLetter(relativeUrl.charAt(i)) == false ) {
+            for( int i=0; i<schemeIndex; i++ ) {
+                if( Character.isLetter(parseUrl.charAt(i)) == false ) {
                     isProtocolSpecified = false;
                     break;
                 }
             }
             if( isProtocolSpecified == true ) {
-                return makeUrl( relativeUrl );
+                return makeUrl( parseUrl);
             }
         }
 
-        if( relativeUrl.startsWith("//") ) {
-            return makeUrl(baseUrl.getProtocol()+":"+relativeUrl);
+        // section 2.4.3 - parsing network location/login
+        if( parseUrl.startsWith("//") ) {
+            return makeUrl(baseUrl.getProtocol()+":"+parseUrl);
         }
 
+        // section 2.4.1 - parsing fragment
+        final int fragmentIndex = parseUrl.lastIndexOf("#");
+        if( fragmentIndex != -1 ) {
+            parseUrl = parseUrl.substring(0, fragmentIndex);
+        }
+
+
+        // section 2.4.4 - parsing query
+        String stringQuery = null;
+        final int queryIndex = parseUrl.lastIndexOf("?");
+        if( queryIndex != -1 ) {
+            stringQuery = parseUrl.substring(queryIndex);
+            parseUrl = parseUrl.substring(0, queryIndex);
+        }
+
+        // section 2.4.5 - parsing parameters
+        String stringParameters = null;        
+        final int parametersIndex = parseUrl.lastIndexOf(";");
+        if( parametersIndex != -1 ) {
+            stringParameters = parseUrl.substring(parametersIndex);
+            parseUrl = parseUrl.substring(0, parametersIndex);
+        }
+
+        // section 2.4.6 - parse path
         final List tokens = new ArrayList();
         final String stringToTokenize;
-        if( relativeUrl.length() == 0 ) {
+        if( parseUrl.trim().length() == 0 ) {
             stringToTokenize = baseUrl.getPath();
         }
-        else if( relativeUrl.startsWith("/") ) {
-            stringToTokenize = relativeUrl;
+        else 
+            if( parseUrl.startsWith("/") ) {
+            stringToTokenize = parseUrl;
         }
         else {
             String path = baseUrl.getPath();
-            if( path.endsWith("/") == false ) {
+            if( !path.endsWith("/") && parseUrl.length() != 0) {
                 path += "/..";
             }
-            stringToTokenize = path+"/"+relativeUrl;
+            stringToTokenize = path+"/"+parseUrl;
         }
 
-        String stringParams = null;
-        final String pathToTokenize;
-        final int indexQuery = stringToTokenize.indexOf('?');
-        if (indexQuery > 0) {
-            stringParams = stringToTokenize.substring(indexQuery);
-            pathToTokenize = stringToTokenize.substring(0, indexQuery);
-        }
-        else {
-            pathToTokenize = stringToTokenize;
-        }
+        final String pathToTokenize = stringToTokenize;
         final StringTokenizer tokenizer = new StringTokenizer(pathToTokenize, "/");
         while( tokenizer.hasMoreTokens() ) {
             tokens.add( tokenizer.nextToken() );
         }
 
         for( int i=0; i<tokens.size(); i++ ) {
-            String oneToken = (String)tokens.get(i);
+            final String oneToken = (String)tokens.get(i);
             if( oneToken.length() == 0 || oneToken.equals(".") ) {
                 tokens.remove(i--);
             }
@@ -1344,18 +1372,17 @@ public class WebClient {
             buffer.append(iterator.next());
         }
 
-        if( tokens.isEmpty() || pathToTokenize.endsWith("/") ) {
+        if( pathToTokenize.endsWith("/") ) {
             buffer.append("/");
         }
 
-        if (stringParams != null) {
-            buffer.append(stringParams);
+        if (stringParameters != null) {
+            buffer.append(stringParameters);
         }
-        String newUrlString = buffer.toString();
-        final int lastPoundSignIndex = newUrlString.lastIndexOf("#");
-        if( lastPoundSignIndex != -1 ) {
-            newUrlString = newUrlString.substring(0,lastPoundSignIndex);
+        if (stringQuery != null) {
+            buffer.append(stringQuery);
         }
+        final String newUrlString = buffer.toString();
         return makeUrl( newUrlString );
     }
 
@@ -1465,6 +1492,8 @@ public class WebClient {
         Assert.notNull("method", method);
         Assert.notNull("parameters", parameters);
         
+        getLog().debug("Load response for " + url.toExternalForm());
+        
         final URL fixedUrl = encodeUrl(url);
 
         final WebResponse webResponse
@@ -1479,7 +1508,7 @@ public class WebClient {
                 if( locationString != null ) {
                     // HttpClient sometimes returns a delimited list of values where the delimiter is a comma.
                     // We'll take a guess and go with the first value.
-                    int indexOfComma = locationString.indexOf(',');
+                    final int indexOfComma = locationString.indexOf(',');
                     if( indexOfComma >= 0) {
                        newUrl = expandUrl( fixedUrl, locationString.substring(0, indexOfComma));
                     }
@@ -1716,7 +1745,7 @@ public class WebClient {
      * Set the flag on the HtmlParse to log html errors to standard error
      * @param validateFlag The boolean flag to enable or disable parsing errors
      */
-    public static void setValidateHtml(boolean validateFlag) {
+    public static void setValidateHtml(final boolean validateFlag) {
         HTMLParser.setValidateHtml(validateFlag);
     }
 
@@ -1734,7 +1763,7 @@ public class WebClient {
      * @param ignoreOutsideContent The boolean flag to enable or disable the support of 
      *          content outside of the HTML and BODY tags
      */
-    public static void setIgnoreOutsideContent(boolean ignoreOutsideContent) {
+    public static void setIgnoreOutsideContent(final boolean ignoreOutsideContent) {
         HTMLParser.setIgnoreOutsideContent(ignoreOutsideContent);
     }
 
