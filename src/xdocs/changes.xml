@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                When simulating IE, nodes can now be accessed directly by their name (ex: window.form1).
+            </action>
             <action type="update" dev="mguillem" due-to="Daniel Gredler" id="1085878">
                 Improved ElementArray: fix for empty collection and addition of method namedItem().
             </action>

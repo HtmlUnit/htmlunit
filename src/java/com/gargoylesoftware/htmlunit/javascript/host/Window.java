@@ -46,6 +46,7 @@ import java.util.List;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
@@ -632,6 +633,23 @@ public final class Window extends SimpleScriptable {
         // Ask the parent scope, as it may be a variable access like "window.myVar"
         if( result == NOT_FOUND ) {
             result = this.getParentScope().get(name, start);
+        }
+
+        // See if it is an attempt to access an element directly by name if we are emulating IE.
+        if (result == NOT_FOUND) {
+            // this tests are quite silly and should be removed when custom JS objects have a clean
+            // way to get the WebClient they are running in.
+            final DomNode domNode = ((Window) start).getDomNodeOrNull();
+            if (domNode != null 
+                    && domNode.getPage().getWebClient().getBrowserVersion().isIE()) {
+                final NativeArray array = (NativeArray) ((Window) start).document_.jsFunction_getElementsByName( name );
+                if (array.getLength() == 1) {
+                    result = array.get(0, this);
+                }
+                else if (array.getLength() > 1) {
+                    result = array;
+                }
+            }
         }
         return result;
     }

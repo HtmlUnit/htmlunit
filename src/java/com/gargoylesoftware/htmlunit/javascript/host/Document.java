@@ -459,8 +459,8 @@ public final class Document extends NodeImpl {
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to null
             
-            final BrowserVersion browser = this.getHtmlPage().getEnclosingWindow().getWebClient().getBrowserVersion();
-            if (BrowserVersion.INTERNET_EXPLORER.equals(browser.getApplicationName())) {
+            final BrowserVersion browser = this.getHtmlPage().getWebClient().getBrowserVersion();
+            if (browser.isIE()) {
                 NativeArray elements = (NativeArray) jsFunction_getElementsByName(id);
                 result = elements.get(0, this);
                 if (result instanceof UniqueTag) {
