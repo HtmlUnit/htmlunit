@@ -112,9 +112,8 @@ public class HtmlUnitXPathTest extends WebTestCase {
      * @throws Exception if test fails
      */
     public void testElementOrder() throws Exception {
-        if (true) {
+        if (notYetImplemented()) {
             // due to bug http://jira.codehaus.org/browse/JAXEN-55
-            notImplemented();
             return;
         }
 

@@ -567,8 +567,7 @@ public class InputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDefaultValues() throws Exception {
-        if (true) {
-            notImplemented();
+        if (notYetImplemented()) {
             return;
         }
         

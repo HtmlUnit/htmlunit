@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author David K. Taylor
  * @author Andreas Hangler
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
  */
 public class HtmlPageTest extends WebTestCase {
 
@@ -1048,8 +1049,7 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testWrongHtml_TagBeforeHtml() throws Exception {
-        if (true) {
-            notImplemented();
+        if (notYetImplemented()) {
             return;
         }
 

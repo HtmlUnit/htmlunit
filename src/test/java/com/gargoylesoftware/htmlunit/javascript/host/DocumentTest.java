@@ -1743,10 +1743,10 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testReadyStateNonIE() throws Exception {
-        if (true) {
-            notImplemented();
+        if (notYetImplemented()) {
             return;
         }
+
         final String content = "<html><head>\n"
             + "<script>\n"
             + "function testIt() {\n"
