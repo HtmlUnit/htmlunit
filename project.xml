@@ -142,7 +142,7 @@
         <dependency>
             <groupId>commons-jelly</groupId>
             <artifactId>commons-jelly</artifactId>
-            <version>20030711.034327</version>
+            <version>20030902.160215</version>
             <url>http://jakarta.apache.org/commons/jelly</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
@@ -285,6 +285,17 @@
             <artifactId>commons-jelly-tags-xml</artifactId>
             <version>20030211.142705</version>
             <url>http://jakarta.apache.org/commons/jelly/libs/xml/</url>
+            <properties>
+                <classloader>root.maven</classloader>
+                <htmlunit.group>test</htmlunit.group>
+                <htmlunit.description>Support for building HtmlUnit</htmlunit.description>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>commons-jelly</groupId>
+            <artifactId>commons-jelly-tags-junit</artifactId>
+            <version>20030211.141731</version>
+            <url>http://jakarta.apache.org/commons/jelly/libs/junit/</url>
             <properties>
                 <classloader>root.maven</classloader>
                 <htmlunit.group>test</htmlunit.group>
