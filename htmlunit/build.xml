@@ -135,6 +135,7 @@
 		<packageset dir="src/java" defaultexcludes="no">
 			<exclude name="**/test" />
 		</packageset>
+		<link href="http://java.sun.com/j2se/1.4.1/docs/api"/>
 	</javadoc>
 
 	<copy todir="build/${version}/src">
