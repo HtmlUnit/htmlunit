@@ -514,10 +514,11 @@ public abstract class HtmlElement extends DomNode {
 
         final List list = new ArrayList();
         final DescendantElementsIterator iterator = new DescendantElementsIterator();
-
+        final String lowerCaseTagName = elementName.toLowerCase();
+        
         while(iterator.hasNext()) {
             final HtmlElement next = iterator.nextElement();
-            if(next.getTagName().equals(elementName)) {
+            if(next.getTagName().equals(lowerCaseTagName)) {
                 final String attValue = next.getAttributeValue(attributeName);
                 if(attValue != null && attValue.equals(attributeValue)) {
                     list.add(next);
@@ -537,13 +538,11 @@ public abstract class HtmlElement extends DomNode {
     public final List getHtmlElementsByTagNames( final List acceptableTagNames ) {
 
         final List list = new ArrayList();
-        final DescendantElementsIterator iterator = new DescendantElementsIterator();
-
+        final Iterator iterator = acceptableTagNames.iterator();
+        
         while(iterator.hasNext()) {
-            final HtmlElement next = iterator.nextElement();
-            if(acceptableTagNames.contains(next.getTagName())) {
-                list.add(next);
-            }
+            final String next = iterator.next().toString().toLowerCase();
+            list.addAll(getHtmlElementsByTagName(next));
         }
         return list;
     }
@@ -559,10 +558,11 @@ public abstract class HtmlElement extends DomNode {
 
         final List list = new ArrayList();
         final DescendantElementsIterator iterator = new DescendantElementsIterator();
-
+        final String lowerCaseTagName = tagName.toLowerCase();
+        
         while(iterator.hasNext()) {
             final HtmlElement next = iterator.nextElement();
-            if(tagName.equals(next.getTagName())) {
+            if(lowerCaseTagName.equals(next.getTagName())) {
                 list.add(next);
             }
         }
