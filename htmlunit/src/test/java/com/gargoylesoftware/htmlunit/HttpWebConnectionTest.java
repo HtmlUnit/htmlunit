@@ -42,13 +42,11 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
-import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpMethodBase;
@@ -270,42 +268,6 @@ public class HttpWebConnectionTest extends BaseTestCase {
         assertGetStateForUrl("LOCALHOST");
     }
 
-
-    /**
-     * Tests that <code>.domain.org</code> is not altered 
-     * by {@link HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
-     */
-    public void testMakeCookiesRFC2109Compliant_2PartDomainWithDot() {
-        assertMakeCookiesRFC2109Compliant(".domain.org", ".domain.org");
-    }
-
-
-    /**
-     * Tests that <code>domain.org</code> is changed to <code>.domain.org</code> by {@link
-     * HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
-     */
-    public void testMakeCookiesRFC2109Compliant_2PartDomainWithoutDot() {
-        assertMakeCookiesRFC2109Compliant("domain.org", ".domain.org");
-    }
-
-
-    /**
-     * Tests that <code>www.domain.org</code> is not altered 
-     * by {@link HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
-     */
-    public void testMakeCookiesRFC2109Compliant_3PartDomain() {
-        assertMakeCookiesRFC2109Compliant("www.domain.org", "www.domain.org");
-    }
-
-
-    /**
-     * Tests that <code>www.sub.domain.org</code> is not altered 
-     * by {@link HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
-     */
-    public void testMakeCookiesRFC2109Compliant_4PartDomain() {
-        assertMakeCookiesRFC2109Compliant("www.sub.domain.org", "www.sub.domain.org");
-    }
-
     /**
      * Test creation of a web response
      * @throws Exception If the test fails
@@ -378,35 +340,4 @@ public class HttpWebConnectionTest extends BaseTestCase {
             throw new RuntimeException(e);
         }
     }
-
-
-    /**
-     * Sets up appropriate objects to test {@link HttpWebConnection#makeCookiesRFC2109Compliant(HttpState)}.
-     *
-     * @param testedDomain The domain to test in a {@link org.apache.commons.httpclient.Cookie}
-     * @param expectedDomain The expected domain set in the {@link org.apache.commons.httpclient.Cookie}
-     */
-    private void assertMakeCookiesRFC2109Compliant(String testedDomain, String expectedDomain) {
-        try {
-            final Cookie cookie = new Cookie(testedDomain, "foo", "bar");
-            final HttpWebConnection connection = new HttpWebConnection(new WebClient());
-            final Method method = HttpWebConnection.class.getDeclaredMethod(
-                    "makeCookiesRFC2109Compliant", new Class[]{HttpState.class});
-            method.setAccessible(true);
-            final HttpState httpState = new HttpState();
-            httpState.addCookie(cookie);
-            method.invoke(connection, new Object[]{httpState});
-            assertEquals(expectedDomain, cookie.getDomain());
-        }
-        catch (NoSuchMethodException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-        catch (IllegalAccessException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-        catch (InvocationTargetException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-
 }

@@ -45,7 +45,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HostConfiguration;
@@ -58,8 +57,6 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
-import org.apache.commons.httpclient.Cookie;
-import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.MultipartPostMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -162,7 +159,6 @@ public class HttpWebConnection extends WebConnection {
                     endTime = System.currentTimeMillis();
                 }
             }
-            makeCookiesRFC2109Compliant(httpClient.getState());
             return makeWebResponse( responseCode, httpMethod, url, endTime-startTime );
         }
         catch( final HttpException e ) {
@@ -189,27 +185,6 @@ public class HttpWebConnection extends WebConnection {
             }
         }
     }
-
-    /**
-     * <p>This is to work around the fact that the common browsers support broken cookies as per
-     * the cookie spec.  We'll clean up the domain here so that httpclient will pass the cookies
-     * upwards.</p>
-     * 
-     * <p>This is package scope so that the tests can get at it.  This method will likely
-     * disappear in future</p>
-     * @param httpState The state to adjust.
-     */
-    void makeCookiesRFC2109Compliant(HttpState httpState) {
-        Cookie[] cookies = httpState.getCookies();
-        for (int i = 0; i < cookies.length; i++) {
-            String domain = cookies[i].getDomain();
-            StringTokenizer tokenizer = new StringTokenizer(domain, ".");
-            if (tokenizer.countTokens() == 2 && !domain.startsWith(".")) {
-                cookies[i].setDomain("." + domain);
-            }
-        }
-    }
-
 
     private KeyValuePair getCredentials(
             final HttpMethod httpMethod, final URL url ) {
@@ -350,7 +325,6 @@ public class HttpWebConnection extends WebConnection {
                 }
             };
             client.setState(httpState);
-            setCookiePolicyIfNeeded(httpState);
 
             final HostConfiguration hostConfiguration = new HostConfiguration();
             final URI uri;
@@ -386,26 +360,6 @@ public class HttpWebConnection extends WebConnection {
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
-    }
-
-    /**
-     * Sets the cookie policy of the httpState only 
-     * if it is not already configured with the system property.
-     * @param httpState the state to configure
-     */
-    private void setCookiePolicyIfNeeded(final HttpState httpState) {
-        String cookiePolicy = null;
-        try {
-            cookiePolicy = System.getProperty("apache.commons.httpclient.cookiespec");
-        }
-        catch (SecurityException e) {
-            // don't do anything
-        }
-        
-        if (cookiePolicy == null) {
-            getLog().info("Setting cookie policy to: \"COMPATIBILITY\"");
-            httpState.setCookiePolicy( CookiePolicy.COMPATIBILITY );
-        }
     }
 
 

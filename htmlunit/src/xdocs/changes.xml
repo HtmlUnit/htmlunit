@@ -7,6 +7,13 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem" id="1058846">
+				Possibly incompatible change: Removed fix trying to mimic browser kludge for non-RFC2019-compliant cookies as it causes new problems.
+            </action>
+            <action type="update" dev="mguillem">
+				Possibly incompatible change: Don't set httpclient's cookie policy to COMPATIBILITY anymore what lets user configure it directly 
+				or use the default (RFC2109).
+            </action>
             <action type="add" dev="mguillem">
                 Added support for setting cookies from JS (like document.cookie = "foo=something").
             </action>
