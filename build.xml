@@ -17,9 +17,8 @@
 <property name="version" value="HtmlUnit-1.2.2" />
 
 <property environment="env"/>
-<property name="maven-repository" value ="${env.MAVEN_HOME}/repository"/>
-
-<property name="maven-repository" value="" />
+<property name="local-repository" value ="target/repository"/>
+<property name="remote-repository" value="http://www.ibiblio.org/maven"/>
 
 <taskdef name="checkstyle"
     classname="com.puppycrawl.tools.checkstyle.CheckStyleTask"
@@ -37,13 +36,13 @@
     <pathelement path="dist/lib/xercesImpl.jar"/>
     <pathelement path="dist/lib/xmlParserAPIs.jar"/>
 
-    <pathelement path="${maven-repository}/commons-jelly/jars/commons-jelly-SNAPSHOT.jar"/>
-    <pathelement path="${maven-repository}/commons-jelly/jars/commons-jelly-tags-log-SNAPSHOT.jar"/>
-    <pathelement path="${maven-repository}/commons-cli/jars/commons-cli-SNAPSHOT.jar"/>
-    <pathelement path="${maven-repository}/commons-jexl/jars/commons-jexl-SNAPSHOT.jar"/>
-    <pathelement path="${maven-repository}/dom4j/jars/dom4j-1.4-dev-8.jar"/>
-    <pathelement path="${maven-repository}/commons-collections/jars/commons-collections-2.1.jar"/>
-    <pathelement path="${maven-repository}/commons-beanutils/jars/commons-beanutils-1.6.1.jar"/>
+    <pathelement path="${local-repository}/commons-jelly/jars/commons-jelly-SNAPSHOT.jar"/>
+    <pathelement path="${local-repository}/commons-jelly/jars/commons-jelly-tags-log-SNAPSHOT.jar"/>
+    <pathelement path="${local-repository}/commons-cli/jars/commons-cli-SNAPSHOT.jar"/>
+    <pathelement path="${local-repository}/commons-jexl/jars/commons-jexl-SNAPSHOT.jar"/>
+    <pathelement path="${local-repository}/dom4j/jars/dom4j-1.4-dev-8.jar"/>
+    <pathelement path="${local-repository}/commons-collections/jars/commons-collections-2.1.jar"/>
+    <pathelement path="${local-repository}/commons-beanutils/jars/commons-beanutils-1.6.1.jar"/>
 
     <!-- Jars for testing and development -->
     <pathelement path="build/lib/junit.jar"/>
@@ -54,6 +53,7 @@
     <pathelement path="/System/Library/Frameworks/JavaVM.framework/Versions/1.3.1/Classes/classes.jar"/>
     <pathelement path="/System/Library/Frameworks/JavaVM.framework/Versions/1.4.1/Classes/classes.jar"/>
 </path>
+
 
 <path id="test.class.path">
     <pathelement path="target/test-classes"/>
@@ -94,7 +94,8 @@
 
 
 <target name="clean" description="clean">
-    <delete dir="target" quiet="true"/>
+    <delete dir="target/classes" quiet="true"/>
+    <delete dir="target/test-classes" quiet="true"/>
     <delete dir="build/${version}"/>
     <delete file="dist/projectdocs.zip"/>
     <delete file="dist/${version}.zip"/>
@@ -321,6 +322,47 @@
         <classpath refid="base.class.path"/>
         <arg value="test.jelly"/>
     </java>
+</target>
+
+<target name="get-dependency">
+	<mkdir dir="${local-repository}/${project}/jars/"/>
+	<get 
+		src="${remote-repository}/${project}/jars/${jarName}" 
+		dest="${local-repository}/${project}/jars/${jarName}"/>
+</target>
+
+<target 
+	name="initialize" 
+	description="Get all the required dependencies from a remote repository">
+	
+    <antcall target="get-dependency">
+        <param name="project" value="commons-jelly"/>
+        <param name="jarName" value="commons-jelly-SNAPSHOT.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="project" value="commons-jelly"/>
+        <param name="jarName" value="commons-jelly-tags-log-SNAPSHOT.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="project" value="commons-cli"/>
+        <param name="jarName" value="commons-cli-SNAPSHOT.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="project" value="commons-jexl"/>
+        <param name="jarName" value="commons-jexl-SNAPSHOT.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="project" value="dom4j"/>
+        <param name="jarName" value="dom4j-1.4-dev-8.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="project" value="commons-collections"/>
+        <param name="jarName" value="commons-collections-2.1.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="project" value="commons-beanutils"/>
+        <param name="jarName" value="commons-beanutils-1.6.1.jar"/>
+    </antcall>
 </target>
 
 </project>
