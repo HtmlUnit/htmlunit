@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<document title="Submitting patches">
+
+<section>
+	<p>
+		Contributions are always welcome but please note the following:
+		<ul>
+			<li>
+				Make sure the code follows the <a href="codingConventions.html">coding conventions</a>
+				already in use.  Failing to do this just means more work for the maintainers as the
+				code will have to be "cleaned up" prior to merging.  Refer to the link above to
+				see the coding conventions that we are using here.  We use checkstyle to enforce
+				many of the coding standards (some things like good naming can't be easily checked
+				with a tool but we check as much as we can automatically).  The ant target
+				"checkstyle" will check all the code.
+			</li>
+			<li>
+				Make sure the new code has automated unit tests written for
+				<a href="http://www.junit.org">JUnit</a>.  No code will get merged without tests so
+				if you don't do this then once again, it makes work for the maintainers.
+			</li>
+			<li>
+				All unit tests should pass.  Occassionally this rule will be broken if it is important
+				to get a test into the build before the code is ready.
+			</li>
+			<li>
+				All files must be copyright Gargoyle Software and must be licensed under the same
+				license as the rest of the probject - currently an <a href="license.html">apache
+				style</a> one.
+			</li>
+			<li>
+				All non-private methods must have full javadoc before we put out a release.  If you
+				make changes to a given file then you are expected to add an author tag at the top
+				of the file.  @author tags are written in chronological order with the original
+				author at the top.  Refer to <a href="http://java.sun.com/j2se/javadoc/writingdoccomments/">
+				How to Write JavaDoc</a> for more specific information on javadoc.
+			</li>
+		</ul>
+		Patches are more likely to be accepted if there isn't a lot of extra work for the
+		maintainers to do before committing.
+	</p>
+	<p>
+		Additional documentation or code samples are always appreciated.  We're focussed on writing
+		code and documentation often gets neglected.
+	</p>
+</section>
+
+
+</document>
+

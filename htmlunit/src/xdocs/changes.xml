@@ -65,6 +65,15 @@
 			out of a WebResponse after the inital load would result in no content.  Buffering
 			is now done within HtmlUnit to avoid this problem.
 		</change>
+		<change type="new">
+			New method
+			<javadoc>com.gargoylesoftware.htmlunit.WebResponse#getLoadTimeInMilliSeconds()</javadoc>
+			to measure load times of specific pages.  This is intended for performance tuning of
+			web applications
+		</change>
+		<change type="documentation">
+			Moved submission guidelines into their own <a href="submittingPatches.html">document</a>.
+		</change>
 	</change-log>
 </section>
 
