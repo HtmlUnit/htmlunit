@@ -52,7 +52,7 @@ public class HtmlAnchor
 
         if( onClick.length() != 0 && page.getWebClient().isJavaScriptEnabled() ) {
             final ScriptResult scriptResult
-                = page.executeJavaScriptIfPossible( onClick, "onClick handler", true );
+                = page.executeJavaScriptIfPossible( onClick, "onClick handler", true, this );
             if( scriptResult.getJavaScriptResult().equals( Boolean.FALSE ) ) {
                 return scriptResult.getNewPage();
             }
@@ -65,7 +65,7 @@ public class HtmlAnchor
             }
         }
         else if( TextUtil.startsWithIgnoreCase(href, "javascript:") ) {
-            return page.executeJavaScriptIfPossible( href, "javascript url", true ).getNewPage();
+            return page.executeJavaScriptIfPossible( href, "javascript url", true, this ).getNewPage();
         }
         else {
             final URL url = page.getFullyQualifiedUrl( getHrefAttribute() );

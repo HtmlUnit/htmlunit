@@ -63,7 +63,7 @@ public final class HtmlPage
     }
     /** The parser that is used to create the initial dom tree */
     private MyParser xmlParser_;
-    
+
     private final WebClient webClient_;
     private final URL originatingUrl_;
     private final Map elements_ = new HashMap( 89 );
@@ -225,13 +225,13 @@ public final class HtmlPage
         final InputStream inputStream = webResponse.getContentAsStream();
 
         xmlParser_ = new MyParser();
-        
+
         try {
             XMLDocumentFilter[] filters = {
                 new ScriptFilter( xmlParser_.getConfiguration(), this )
             };
             xmlParser_.setProperty( "http://cyberneko.org/html/properties/filters", filters );
-            
+
             xmlParser_.setFeature( "http://cyberneko.org/html/features/augmentations", true );
             xmlParser_.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
             xmlParser_.setFeature("http://cyberneko.org/html/features/report-errors", true);
@@ -714,7 +714,8 @@ public final class HtmlPage
      * @return A page
      */
     public ScriptResult executeJavaScriptIfPossible(
-        String sourceCode, final String sourceName, final boolean wrapSourceInFunction ) {
+        String sourceCode, final String sourceName, final boolean wrapSourceInFunction,
+        final HtmlElement htmlElement ) {
 
         final ScriptEngine engine = getWebClient().getScriptEngine();
         if( engine == null ) {
@@ -736,11 +737,11 @@ public final class HtmlPage
             // loaded javascript
             final String wrapperName = "GargoyleWrapper"+(FunctionWrapperCount_++);
             sourceCode = "function "+wrapperName+"() {"+sourceCode+"\n}";
-            engine.execute( this, sourceCode, "Wrapper definition for "+sourceName );
-            result = engine.execute( this, wrapperName+"()", sourceName );
+            engine.execute( this, sourceCode, "Wrapper definition for "+sourceName, htmlElement );
+            result = engine.execute( this, wrapperName+"()", sourceName, htmlElement );
         }
         else {
-            result = engine.execute( this, sourceCode, sourceName );
+            result = engine.execute( this, sourceCode, sourceName, htmlElement );
         }
 
         return new ScriptResult( result, window.getEnclosedPage() );
@@ -757,7 +758,7 @@ public final class HtmlPage
             return;
         }
 
-        executeJavaScriptIfPossible("", "Dummy stub just to get javascript initialized", false);
+        executeJavaScriptIfPossible("", "Dummy stub just to get javascript initialized", false, null);
 
         final Iterator iterator = getXmlChildElements();
         while( iterator.hasNext() ) {
@@ -779,7 +780,7 @@ public final class HtmlPage
                 if( isJavaScript ) {
                     final String sourceUrl = htmlScript.getSrcAttribute();
                     if( sourceUrl.length() != 0 ) {
-                        engine.execute( this, loadJavaScriptFromUrl( sourceUrl ), sourceUrl );
+                        engine.execute( this, loadJavaScriptFromUrl( sourceUrl ), sourceUrl, null );
                     }
                 }
             }
@@ -873,7 +874,7 @@ public final class HtmlPage
             final HtmlBody body = (HtmlBody)bodyTags.get(0);
             final String onLoad = body.getOnLoadAttribute();
             if( onLoad.length() != 0 ) {
-                executeJavaScriptIfPossible(onLoad, "body.onLoad", false);
+                executeJavaScriptIfPossible(onLoad, "body.onLoad", false, null);
             }
         }
         else {

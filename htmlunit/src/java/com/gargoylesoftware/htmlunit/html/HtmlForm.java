@@ -111,14 +111,14 @@ public class HtmlForm extends HtmlElement {
             final String onSubmit = getOnSubmitAttribute();
             if( onSubmit.length() != 0 ) {
                 final ScriptResult scriptResult
-                    = htmlPage.executeJavaScriptIfPossible( onSubmit, "onSubmit", true );
+                    = htmlPage.executeJavaScriptIfPossible( onSubmit, "onSubmit", true, this );
                 if( scriptResult.getJavaScriptResult().equals(Boolean.FALSE) ) {
                     return scriptResult.getNewPage();
                 }
             }
 
             if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
-                return htmlPage.executeJavaScriptIfPossible( action, "Form action", false ).getNewPage();
+                return htmlPage.executeJavaScriptIfPossible( action, "Form action", false, this ).getNewPage();
             }
         }
         else {
@@ -193,7 +193,7 @@ public class HtmlForm extends HtmlElement {
             final String onReset = getOnResetAttribute();
             if( onReset.length() != 0 ) {
                 final ScriptResult scriptResult
-                    = htmlPage.executeJavaScriptIfPossible( onReset, "onReset", true );
+                    = htmlPage.executeJavaScriptIfPossible( onReset, "onReset", true, this );
                 if( scriptResult.getJavaScriptResult().equals(Boolean.FALSE) ) {
                     return scriptResult.getNewPage();
                 }

@@ -8,17 +8,17 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object that represents a "submit" input
+ * The javascript object that represents an anchor
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public class Submit extends Input {
+public class Anchor extends HTMLElement {
 
     /**
      * Create an instance.
      */
-    public Submit() {
+    public Anchor() {
     }
 
 
@@ -27,18 +27,6 @@ public class Submit extends Input {
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
-    }
-
-
-    /**
-     * Return the type of this input.
-     * @return The type
-     */
-    public String jsGet_type() {
-        return "submit";
-    }
-    public String jsGet_name() {
-        return getHtmlElementOrDie().getAttributeValue( "name" );
     }
 }
 

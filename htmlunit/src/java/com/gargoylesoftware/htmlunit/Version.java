@@ -43,7 +43,7 @@ public class Version {
         final WebClient webClient = new WebClient();
         final HtmlPage page = (HtmlPage)webClient.getPage(
             new URL("http://htmlunit.sourceforge.net/index.html") );
-        page.executeJavaScriptIfPossible("document.location", "SanityCheck", false);
+        page.executeJavaScriptIfPossible("document.location", "SanityCheck", false, null);
         System.out.println("SanityCheck complete.");
     }
 

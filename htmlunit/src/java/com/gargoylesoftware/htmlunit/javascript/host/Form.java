@@ -69,9 +69,10 @@ public class Form extends HTMLElement {
             final HtmlElement htmlElement = (HtmlElement)iterator.next();
             final String name = htmlElement.getAttributeValue("name");
             if( name.length() != 0 ) {
-                final String className = getClassNameForFormElement(htmlElement);
+                final String className = getClassNameForHtmlElement(htmlElement);
                 final SimpleScriptable jsElement = makeJavaScriptObject( className );
                 jsElement.setHtmlElement(htmlElement);
+                htmlElement.setScriptObject(jsElement);
                 allJsElements.add(jsElement);
 
                 if( htmlElement instanceof HtmlRadioButtonInput ) {
@@ -131,49 +132,6 @@ public class Form extends HTMLElement {
                 jsElements_.defineProperty(radioButtonName, collectedRadioButtons.toArray(radioArray), attributes);
             }
         }
-    }
-
-
-    private static String getClassNameForFormElement( final HtmlElement htmlElement ) {
-        final String tagName = htmlElement.getTagName();
-
-        String type = null;
-        if( tagName.equals("input") ) {
-            type = htmlElement.getAttributeValue("type").toLowerCase();
-            if( type.equals("file") ) {
-                type = "FileUpload";
-            }
-
-            if( type.length() == 0 ) {
-                type = "text";
-            }
-        }
-        else if( tagName.equals("button") ) {
-            type = htmlElement.getAttributeValue("type").toLowerCase();
-            if( type.length() == 0 ) {
-                type = "button";
-            }
-        }
-        else if( tagName.equals("select") ) {
-            type = "Select";
-        }
-        else if( tagName.equals("option") ) {
-            type = "option";
-        }
-        else if( tagName.equals("textarea") ) {
-            type = "textarea";
-        }
-
-        if( type == null ) {
-            throw new IllegalStateException("Unexpected htmlElement ["+htmlElement+"]");
-        }
-
-        if( type.length() == 0 ) {
-            throw new IllegalStateException("Empty type string for element ["+tagName+"]");
-        }
-
-        // Uppercase the first letter and return
-        return type.substring(0,1).toUpperCase()+type.substring(1);
     }
 
 

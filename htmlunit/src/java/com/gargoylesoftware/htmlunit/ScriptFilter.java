@@ -172,7 +172,7 @@ public final class ScriptFilter extends DefaultFilter {
 
     private synchronized String executeScript( final String script ) {
         newContentBuffer_ = null;
-        htmlPage_.executeJavaScriptIfPossible(script, "Embedded script", false);
+        htmlPage_.executeJavaScriptIfPossible(script, "Embedded script", false, null);
         if( newContentBuffer_ == null ) {
             return "";
         }
