@@ -11,6 +11,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -456,6 +457,47 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage)button.click();
 
         assertSame( firstPage, secondPage );
+        assertEquals( Collections.singletonList("clicked"), collectedAlerts );
+    }
+
+
+    /**
+     * Simulate a bug report where an anchor contained javascript that caused a form submit.
+     * According to the bug report, the form would be submitted even though the onsubmit
+     * handler would return false.  This wasn't reproducible but I added a test for it anyway.
+     */
+    public void testSubmit_AnchorCausesSubmit_onSubmitHandler_returnFalse()
+        throws Exception {
+
+        final String firstContent
+                 = "<html><head><title>First</title></head><body>"
+                 + "<form name='form1' method='get' action='http://second' "
+                 + "onSubmit='alert(\"clicked\");return false;'>"
+                 + "<input name='button' type='submit' value='PushMe' id='button'/></form>"
+                 + "<a id='link1' href='javascript:document.form1.submit()'>Click me</a>"
+                 + "</body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final FakeWebConnection webConnection = new FakeWebConnection( client );
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(
+            new URL("http://second"),secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+
+        client.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(
+                new URL( "http://first" ), SubmitMethod.POST, Collections.EMPTY_LIST );
+        final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("link1");
+
+        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        final HtmlPage secondPage = (HtmlPage)anchor.click();
+        assertSame( firstPage, secondPage );
+
         assertEquals( Collections.singletonList("clicked"), collectedAlerts );
     }
 }
