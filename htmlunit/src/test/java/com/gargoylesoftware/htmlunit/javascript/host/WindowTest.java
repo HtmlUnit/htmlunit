@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowEvent;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -989,5 +990,59 @@ public class WindowTest extends WebTestCase {
             "fourth-third=http://third",
         } );
         assertEquals( expectedAlerts, collectedAlerts );
+    }
+    
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testSetOpenerLocationHrefRelative() throws Exception {
+        if (true) {
+            notImplemented();
+            return;
+        }
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+
+        final String aContent
+        = "<html><head><title>A</title></head><body>"
+        + "<button id='clickme' onClick='window.open(\"b/b.html\");'>Click me</a>"
+        + "</body></html>";
+        final String bContent
+        = "<html><head><title>B</title></head><body>"
+        + "<button id='clickme' onClick='opener.location.href=\"../c.html\";'>Click me</a>"
+        + "</body></html>";        
+        final String cContent
+        = "<html><head><title>C</title></head><body></body></html>";
+        final String failContent
+        = "<html><head><title>FAILURE!!!</title></head><body></body></html>";        
+
+        webConnection.setResponse(
+                new URL("http://opener/test/a.html"), aContent, 200, "OK", "text/html",
+                Collections.EMPTY_LIST );
+        webConnection.setResponse(
+                new URL("http://opener/test/b/b.html"), bContent, 200, "OK", "text/html",
+                Collections.EMPTY_LIST );
+        webConnection.setResponse(
+                new URL("http://opener/test/c.html"), cContent, 200, "OK", "text/html",
+                Collections.EMPTY_LIST );
+        webConnection.setResponse(
+                new URL("http://opener/c.html"), failContent, 200, "OK", "text/html",
+                Collections.EMPTY_LIST );        
+        
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
+                new URL("http://opener/test/a.html"));
+        assertEquals( "A", firstPage.getTitleText() );
+
+        final HtmlButton buttonA = (HtmlButton)firstPage.getHtmlElementById("clickme");
+        final HtmlPage secondPage = (HtmlPage)buttonA.click();
+        assertNotNull("B", secondPage);
+        assertEquals( "B", secondPage.getTitleText() );
+
+        final HtmlButton buttonB = (HtmlButton)secondPage.getHtmlElementById("clickme");
+        final HtmlPage thirdPage = (HtmlPage)buttonB.click();
+        assertNotNull("C", thirdPage);
+        assertEquals( "C", thirdPage.getTitleText() );        
     }
 }
