@@ -1091,14 +1091,16 @@ public final class HtmlPage extends DomNode implements Page {
      * Deregister frames that are no longer in use.
      */
     public void deregisterFramesIfNeeded() {
-        for (Iterator iter = getFrames().iterator(); iter.hasNext();) {
+        for (final Iterator iter = getFrames().iterator(); iter.hasNext();) {
             final WebWindow window = (WebWindow) iter.next();
             webClient_.deregisterWebWindow( window );
-            HtmlPage page = (HtmlPage) window.getEnclosedPage();
-            if (page != null) {
-                // seems quite silly, but for instance if the src attribute of an iframe is not
-                // set, the error only occurs when leaving the page
-                page.deregisterFramesIfNeeded();
+            if (window.getEnclosedPage() instanceof HtmlPage) {
+                final HtmlPage page = (HtmlPage) window.getEnclosedPage();
+                if (page != null) {
+                    // seems quite silly, but for instance if the src attribute of an iframe is not
+                    // set, the error only occurs when leaving the page
+                    page.deregisterFramesIfNeeded();
+                }
             }
         }
     }
