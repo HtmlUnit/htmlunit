@@ -11,7 +11,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringBufferInputStream;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -900,7 +899,7 @@ public class WebClient {
             public String getStatusMessage() { return "OK"; }
             public String getContentType() { return "text/html"; }
             public String getContentAsString() { return contentString; }
-            public InputStream getContentAsStream(){ return new StringBufferInputStream(contentString); }
+            public InputStream getContentAsStream(){ return TextUtil.toInputStream(contentString); }
             public URL getUrl() { return url; }
             public String getResponseHeaderValue( final String key ) { return ""; }
             public long getLoadTimeInMilliSeconds() { return 0; }

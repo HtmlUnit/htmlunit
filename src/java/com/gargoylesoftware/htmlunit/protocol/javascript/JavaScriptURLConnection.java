@@ -6,10 +6,10 @@
  */
 package com.gargoylesoftware.htmlunit.protocol.javascript;
 
+import com.gargoylesoftware.htmlunit.TextUtil;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.io.StringBufferInputStream;
 import java.io.InputStream;
 
 /**
@@ -47,6 +47,6 @@ public class JavaScriptURLConnection extends URLConnection {
      * @throws IOException If an IO error occurs.
      */
     public InputStream getInputStream() throws IOException {
-        return new StringBufferInputStream(content_);
+        return TextUtil.toInputStream(content_);
     }
 }
