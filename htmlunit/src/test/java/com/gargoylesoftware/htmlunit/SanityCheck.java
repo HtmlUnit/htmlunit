@@ -236,6 +236,30 @@ public class SanityCheck extends WebTestCase {
      * correctly for POST methods.
      * @throws Exception If something goes wrong.
      */
+    public void testPostMethodWithDuplicateParameters() throws Exception {
+        final WebClient webClient = new WebClient();
+        final HtmlPage firstPage = (HtmlPage)webClient.getPage(getPrintEnvUrl());
+
+        assertEquals("GET", firstPage.getHtmlElementById("REQUEST_METHOD").asText());
+
+        final HtmlForm form = firstPage.getFormByName("form1");
+        form.setMethodAttribute("post");
+
+        final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button1");
+        button.getElement().setAttribute("name", "textfield1");
+        
+        final HtmlPage secondPage = (HtmlPage)button.click();
+        assertEquals("POST", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
+        assertEquals("", secondPage.getHtmlElementById("QUERY_STRING").asText());
+        assertEquals("textfield1=*&textfield1=PushMe",
+            secondPage.getHtmlElementById("CONTENT").asText());
+    }
+
+    /**
+     * Test against htmlunit.sourceforge.net to make sure parameters are being passed
+     * correctly for POST methods.
+     * @throws Exception If something goes wrong.
+     */
     public void testPostMethodWithParameters() throws Exception {
         final WebClient webClient = new WebClient();
         final HtmlPage firstPage = (HtmlPage)webClient.getPage(getPrintEnvUrl());
