@@ -1021,8 +1021,17 @@ public final class HtmlPage extends DomNode implements Page {
             getLog().error("Malformed refresh string: Expecting 'URL=' but found ["+refreshString+"]");
             return;
         }
-        
-        final String newUrl = refreshString.substring(index+4);
+
+        // remove quotes if any (" and ')
+        StringBuffer buffer = new StringBuffer(refreshString.substring(index + 4));
+        if (buffer.charAt(0) == '"' || buffer.charAt(0) == 0x27) {
+            buffer.deleteCharAt(0);
+        }
+        if (buffer.charAt(buffer.length()-1) == '"' || buffer.charAt(buffer.length()-1) == 0x27) {
+            buffer.deleteCharAt(buffer.length()-1);
+        }
+
+        final String newUrl = buffer.toString();
         try {
             final URL url = getFullyQualifiedUrl(newUrl);
 
@@ -1041,20 +1050,39 @@ public final class HtmlPage extends DomNode implements Page {
 
     /**
      * Return an auto-refresh string if specified.  This will look in both the meta
-     * tags and inside the http response headers.
+     * tags (taking care of &lt;noscript&gt; if any) and inside the http response headers.
      * @return the auto-refresh string.
      */
     private String getRefreshStringOrNull() {
         final Iterator iterator
             = getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("meta") ).iterator();
+        final boolean javaScriptEnabled = getWebClient().isJavaScriptEnabled();
         while( iterator.hasNext() ) {
-            final HtmlMeta meta = (HtmlMeta)iterator.next();
-            if( meta.getHttpEquivAttribute().equalsIgnoreCase("refresh") ) {
+            final HtmlMeta meta = (HtmlMeta) iterator.next();
+            if( meta.getHttpEquivAttribute().equalsIgnoreCase("refresh") 
+                    && (!javaScriptEnabled || getFirstParent(meta, HtmlNoScript.TAG_NAME) == null)) {
                 return meta.getContentAttribute();
             }
         }
 
         return getWebResponse().getResponseHeaderValue("Refresh");
+    }
+    
+    /**
+     * Gets the first parent with the given node name
+     * @param node the node to start with
+     * @param nodeName the name of the search node
+     * @return <code>null</code> if no parent found with this name
+     */
+    private DomNode getFirstParent(final DomNode node, final String nodeName) {
+        DomNode parent = node.getParentNode();
+        while (parent != null) {
+            if (parent.getNodeName().equals(nodeName)) {
+                return parent;
+            }
+            parent = parent.getParentNode();
+        }
+        return null;
     }
 
     /**

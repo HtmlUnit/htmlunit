@@ -7,6 +7,9 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="mguillem">
+                Improved Refresh meta tag support: Take care of enclosing &lt;noscript&gt; tags and correctly interpret quoted urls.
+            </action>
             <action type="update" dev="mguillem" due-to="sdanig" id="1081544">
                 Implemented IE specific behavior related methods as well as default behavior "#default#homePage".
             </action>
