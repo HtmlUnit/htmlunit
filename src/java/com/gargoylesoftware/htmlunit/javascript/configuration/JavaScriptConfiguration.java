@@ -143,9 +143,11 @@ public final class JavaScriptConfiguration {
                 getLog().error("Unable to load JavaScriptConfiguration.xml");
             }
             loadConfiguration(reader);
+            reader.close();
         }
         catch( final Exception e ) {
             getLog().error("Error when loading JavascriptConfiguration.xml", e);
+            e.printStackTrace();
         }
     }
 
@@ -292,10 +294,10 @@ public final class JavaScriptConfiguration {
             return null;
         }
         final String linkedClassname = element.getAttribute("classname");
-        final ClassConfiguration classConfiguration = new ClassConfiguration(linkedClassname);
         final String superclassName = element.getAttribute("extends");
+        final ClassConfiguration classConfiguration = 
+            new ClassConfiguration(className, linkedClassname, superclassName);
         ClassnameMap_.put(linkedClassname, className);
-        classConfiguration.setExtendedClass(superclassName);
         Node node = element.getFirstChild();
         while( node != null ) {
             if( node instanceof Element ) {
