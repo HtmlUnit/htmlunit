@@ -93,9 +93,6 @@ public class SimpleScriptable extends ScriptableObject {
     private Map createLocalPropertyMap() throws Exception {
         final Class clazz = getClass();
         final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
-        final List readableProperties = configuration.getReadablePropertyNames(clazz);
-        final List writableProperties = configuration.getWritablePropertyNames(clazz);
-        final List functions = configuration.getFunctionNames(clazz);
 
         final Map localPropertyMap = new HashMap(89);
 
@@ -104,7 +101,7 @@ public class SimpleScriptable extends ScriptableObject {
             final String methodName = methods[i].getName();
             if( methodName.startsWith("jsGet_")  && methods[i].getParameterTypes().length == 0 ) {
                 final String propertyName = methodName.substring(6);
-                if( readableProperties.contains(propertyName) ) {
+                if( configuration.isValidReadablePropertyName(clazz, propertyName) ) {
                     getPropertyInfo(localPropertyMap, propertyName).getter_ = methods[i];
                 }
                 else {
@@ -115,7 +112,7 @@ public class SimpleScriptable extends ScriptableObject {
                 && methods[i].getParameterTypes().length == 1 ) {
 
                 final String propertyName = methodName.substring(6);
-                if( writableProperties.contains(propertyName) ) {
+                if( configuration.isValidWritablePropertyName(clazz, propertyName) ) {
                     getPropertyInfo(localPropertyMap, propertyName).setter_ = methods[i];
                 }
                 else {
@@ -124,7 +121,7 @@ public class SimpleScriptable extends ScriptableObject {
             }
             else if( methodName.startsWith("jsFunction_") ) {
                 final String functionName = methodName.substring("jsFunction_".length());
-                if( functions.contains(functionName) ) {
+                if( configuration.isValidFunctionName(clazz, functionName) ) {
                     final FunctionObject functionObject
                         = new FunctionObject(functionName, methods[i], this);
                     getPropertyInfo(localPropertyMap, functionName).function_ = functionObject;
@@ -261,10 +258,10 @@ public class SimpleScriptable extends ScriptableObject {
          final PropertyInfo info = (PropertyInfo)getPropertyMap().get(name);
          if( info == null || ( info.getter_ == null && info.function_ == null ) ) {
              final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
-             if( configuration.getReadablePropertyNames(getClass()).contains(name) ) {
+             if( configuration.isValidReadablePropertyName(getClass(), name) ) {
                  getLog().warn("Getter not implemented for property ["+name+"]");
              }
-             else if( configuration.getFunctionNames(getClass()).contains(name) ) {
+             else if( configuration.isValidFunctionName(getClass(), name) ) {
                  getLog().warn("Function not implemented ["+name+"]");
              }
 
@@ -308,7 +305,7 @@ public class SimpleScriptable extends ScriptableObject {
          final PropertyInfo info = (PropertyInfo)getPropertyMap().get(name);
          if( info == null || info.setter_ == null ) {
              final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
-             if( configuration.getReadablePropertyNames(getClass()).contains(name) ) {
+             if( configuration.isValidReadablePropertyName(getClass(), name) ) {
                  getLog().warn("Setter not implemented for property ["+name+"]");
              }
 

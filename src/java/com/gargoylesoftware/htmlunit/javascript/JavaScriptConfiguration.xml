@@ -37,7 +37,19 @@
 		<property name="value" readable="true" writable="true"/>
 	</class>
 
-	<class name="window">
+	<class name="Document"/><!-- NOT FINISHED -->
+	<class name="FileUpload"/>
+	<class name="Form"/>
+	<class name="Hidden"/>
+	<class name="Password"/>
+	<class name="Radio"/>
+	<class name="Reset"/>
+	<class name="Submit"/>
+	<class name="Text"/>
+	<class name="Textarea"/>
+
+	<class name="Window">
+		<!-- NOT FINISHED -->
 		<property name="location" readable="true" writable="false">
 			<browser name="netscape" min-version="3" max-version="5"/>
 			<browser name="msie" min-version="3" max-version="5"/>
