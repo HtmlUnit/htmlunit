@@ -952,9 +952,9 @@ public class WebClientTest extends WebTestCase {
     /** Test the accessors for refreshHandler */
     public void testRefreshHandlerAccessors() {
         final WebClient webClient = new WebClient();
-        assertInstanceOf( webClient.getRefreshHandler(), DefaultRefreshHandler.class );
+        assertInstanceOf( webClient.getRefreshHandler(), ImmediateRefreshHandler.class );
         
-        final RefreshHandler handler = new DefaultRefreshHandler() {};
+        final RefreshHandler handler = new ImmediateRefreshHandler() {};
         webClient.setRefreshHandler( handler );
         assertSame( handler, webClient.getRefreshHandler() );
     }

@@ -39,22 +39,23 @@ package com.gargoylesoftware.htmlunit;
 
 import java.net.URL;
 
-
 /**
- * A handler for page refreshes.  This will be called before a given page is refreshed
- * and will dictate if the refresh continues.  A refresh can be triggered via javascript,
- * a response header or a meta tag..
- *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * A handler for page refreshes. A refresh can be triggered by a response header
+ * or a meta tag.
+ * 
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Daniel Gredler
  */
 public interface RefreshHandler {
+
     /**
-     * Return true if the refresh should continue.
-     * @param page The page that is going to be refreshed
-     * @param url The url where the new page will be loaded.
-     * @param timeBeforeRefresh The time in seconds before the refresh occurs.
-     * @return True if the refresh should continue.
+     * Refreshes the specified page using the specified URL after the specified number
+     * of seconds.
+     * @param page The page that is going to be refreshed.
+     * @param url The URL where the new page will be loaded.
+     * @param seconds The number of seconds to wait before reloading the page.
      */
-    boolean shouldRefresh( final Page page, final URL url, final int timeBeforeRefresh );
+    void handleRefresh( final Page page, final URL url, final int seconds );
+
 }

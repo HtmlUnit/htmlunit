@@ -7,6 +7,15 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="yourgod" id="1143982" due-to="sdanig">
+                Fixed bug with meta refresh that only contained a number. Patch from sdanig.
+            </action>        
+            <action type="update" dev="yourgod" id="1145869" due-to="sdanig">
+                INCOMPATIBLE CHANGE: RefeshHandler interface changed and they must now do the 
+                refresh themselves. DefaultRefreshHandler was replaced with 
+                ImmediateRefreshHandler (the new default) and ThreadedRefreshHandler.
+                Patch from sdanig.
+            </action>
             <action type="update" dev="yourgod" id="1144103" due-to="sdanig">
                 INCOMPATIBLE CHANGE: com.gargoylesoftware.htmlunit.CredentialProvider has been removed.
                 You should now use org.apache.commons.httpclient.auth.CredentialsProvider instead.

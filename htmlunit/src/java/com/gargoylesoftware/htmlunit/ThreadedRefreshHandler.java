@@ -39,24 +39,45 @@ package com.gargoylesoftware.htmlunit;
 
 import java.net.URL;
 
-
 /**
- * A handler for page refreshes.  This will be called before a given page is refreshed
- * and will dictate if the refresh continues.  A refresh can be triggered via javascript,
- * a response header or a meta tag..
- *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * This refresh handler spawns a new thread that waits the specified
+ * number of seconds before refreshing the specified page, using the
+ * specified URL.
+ * 
+ * If you want a refresh handler that ignores the wait time, see
+ * {@link ImmediateRefreshHandler}.
+ * 
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Daniel Gredler
  */
-public class DefaultRefreshHandler implements RefreshHandler {
+public class ThreadedRefreshHandler implements RefreshHandler {
+
     /**
-     * Return true if the refresh should continue.
-     * @param page The page that is going to be refreshed
-     * @param url The url where the new page will be loaded.
-     * @param timeBeforeRefresh The time in seconds before the refresh occurs.
-     * @return True if the refresh should continue.
+     * Refreshes the specified page using the specified URL after the specified number
+     * of seconds.
+     * @param page The page that is going to be refreshed.
+     * @param url The URL where the new page will be loaded.
+     * @param seconds The number of seconds to wait before reloading the page.
      */
-    public boolean shouldRefresh( final Page page, final URL url, final int timeBeforeRefresh ) {
-        return true;
+    public void handleRefresh(final Page page, final URL url, final int seconds) {
+        final Thread thread = new Thread( "Default Refresh Handler Thread" ) {
+            public void run() {
+                try {
+                    Thread.sleep( seconds * 1000 );
+                    final WebWindow window = page.getEnclosingWindow();
+                    if( window == null ) {
+                        return;
+                    }
+                    final WebClient client = window.getWebClient();
+                    client.getPage( window, new WebRequestSettings( url ) );
+                }
+                catch( final Exception e ) {
+                    page.getEnclosingWindow().getWebClient().getLog().error( "Unable to refresh page!", e );
+                }
+            }
+        };
+        thread.start();
     }
+
 }
