@@ -351,13 +351,15 @@ public class WebClient {
         final Page newPage = pageCreator_.createPage( this, webResponse, webWindow );
         webWindow.setEnclosedPage(newPage);
 
+        newPage.initialize();
+
         fireWindowContentChanged( new WebWindowEvent(webWindow, oldPage, newPage) );
 
         if( throwExceptionOnFailingStatusCode == true && wasResponseSuccessful == false ) {
             throw new FailingHttpStatusCodeException( statusCode, webResponse.getStatusMessage() );
         }
 
-        return newPage;
+        return webWindow.getEnclosedPage();
     }
 
 
