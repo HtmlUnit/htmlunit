@@ -195,7 +195,7 @@ public class Table extends RowContainer {
      * Deletes this table's thead element. If the table has multiple thead elements, this
      * method deletes only the first thead element. If this table does not have any thead
      * elements, this method does nothing.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp">
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletethead.asp">
      * MSDN Documentation</a>
      */
     public void jsFunction_deleteTHead() {
