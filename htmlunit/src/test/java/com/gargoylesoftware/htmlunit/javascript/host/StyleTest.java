@@ -113,7 +113,7 @@ public class StyleTest extends WebTestCase {
              + "    style.color = 'pink';\n"
              + "    alert(style.color);\n"
              + "}\n</script></head>"
-             + "<body onload='doTest()'>" 
+             + "<body onload='doTest()'>"
              + "<div id='div1' style='color: black;background:blue;foo:bar'>foo</div></body></html>";
 
         webConnection.setResponse(

@@ -63,7 +63,7 @@ import org.w3c.dom.Element;
  * dynamically generate tests for all the various attributes.  The code
  * is fairly complicated but doing it this way is much easier than writing
  * individual tests for all the attributes.</p>
- * 
+ *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
@@ -73,50 +73,50 @@ public class AttributesTest extends TestCase {
     private final Method method_;
     private final HtmlPage page_;
     private final String attributeName_;
-    
+
     private static final List EXCLUDED_METHODS = new ArrayList();
     static {
-        EXCLUDED_METHODS.add("getHtmlElementsByAttribute");    
-        EXCLUDED_METHODS.add("getOneHtmlElementByAttribute");    
+        EXCLUDED_METHODS.add("getHtmlElementsByAttribute");
+        EXCLUDED_METHODS.add("getOneHtmlElementByAttribute");
     }
 
     /**
      * Return a test suite containing a seperate test for each attribute
      * on each element.
-     * 
+     *
      * @return The test suite
      * @throws Exception If the tests cannot be created.
      */
     public static Test suite() throws Exception {
         final HtmlPage page = createDummyPage();
-        
+
         final TestSuite suite = new TestSuite();
         final String[] classesToTest = new String[] {
-            "HtmlAddress", "HtmlAnchor", "HtmlApplet", "HtmlArea", 
-            "HtmlBase", "HtmlBaseFont", "HtmlBidirectionalOverride", 
-            "HtmlBlockQuote", "HtmlBody", "HtmlBreak", "HtmlButton", 
-            "HtmlButtonInput", "HtmlCaption", "HtmlCenter", 
-            "HtmlCheckBoxInput", "HtmlDefinitionDescription", 
-            "HtmlDefinitionList", "HtmlDefinitionTerm", 
-            "HtmlDeletedText", "HtmlDivision", "HtmlElement", 
-            "HtmlFieldSet", "HtmlFileInput", "HtmlFont", "HtmlForm", 
-            "HtmlFrame", "HtmlFrameSet", "HtmlHead", "HtmlHeader1", 
-            "HtmlHeader2", "HtmlHeader3", "HtmlHeader4", "HtmlHeader5", 
-            "HtmlHeader6", "HtmlHiddenInput", "HtmlHorizontalRule", 
-            "HtmlImage", "HtmlImageInput", "HtmlInlineFrame", 
-            "HtmlInlineQuotation", 
-            "HtmlInsertedText", "HtmlIsIndex", "HtmlLabel", 
+            "HtmlAddress", "HtmlAnchor", "HtmlApplet", "HtmlArea",
+            "HtmlBase", "HtmlBaseFont", "HtmlBidirectionalOverride",
+            "HtmlBlockQuote", "HtmlBody", "HtmlBreak", "HtmlButton",
+            "HtmlButtonInput", "HtmlCaption", "HtmlCenter",
+            "HtmlCheckBoxInput", "HtmlDefinitionDescription",
+            "HtmlDefinitionList", "HtmlDefinitionTerm",
+            "HtmlDeletedText", "HtmlDivision", "HtmlElement",
+            "HtmlFieldSet", "HtmlFileInput", "HtmlFont", "HtmlForm",
+            "HtmlFrame", "HtmlFrameSet", "HtmlHead", "HtmlHeader1",
+            "HtmlHeader2", "HtmlHeader3", "HtmlHeader4", "HtmlHeader5",
+            "HtmlHeader6", "HtmlHiddenInput", "HtmlHorizontalRule",
+            "HtmlImage", "HtmlImageInput", "HtmlInlineFrame",
+            "HtmlInlineQuotation",
+            "HtmlInsertedText", "HtmlIsIndex", "HtmlLabel",
             "HtmlLegend", "HtmlLink", "HtmlListItem", "HtmlMap",
-            "HtmlMenu", "HtmlMeta", "HtmlNoFrames", "HtmlNoScript", 
-            "HtmlObject", "HtmlOption", "HtmlOptionGroup", "HtmlOrderedList", 
-            /*"HtmlPage",*/ "HtmlParagraph", "HtmlParameter", "HtmlPasswordInput", 
-            "HtmlPreformattedText", "HtmlRadioButtonInput", "HtmlResetInput", 
-            "HtmlScript", "HtmlSelect", "HtmlSpan", "HtmlStyle", "HtmlSubmitInput", 
-            "HtmlTable", "HtmlTableBody", /*"HtmlTableCell",*/ "HtmlTableColumn", 
-            "HtmlTableColumnGroup", "HtmlTableData", "HtmlTableDataCell", 
-            "HtmlTableFooter", "HtmlTableHeader", "HtmlTableHeaderCell", 
-            "HtmlTableRow", "HtmlTextArea", "HtmlTextDirection", "HtmlTextInput", 
-            "HtmlTitle", "HtmlUnorderedList" 
+            "HtmlMenu", "HtmlMeta", "HtmlNoFrames", "HtmlNoScript",
+            "HtmlObject", "HtmlOption", "HtmlOptionGroup", "HtmlOrderedList",
+            /*"HtmlPage",*/ "HtmlParagraph", "HtmlParameter", "HtmlPasswordInput",
+            "HtmlPreformattedText", "HtmlRadioButtonInput", "HtmlResetInput",
+            "HtmlScript", "HtmlSelect", "HtmlSpan", "HtmlStyle", "HtmlSubmitInput",
+            "HtmlTable", "HtmlTableBody", /*"HtmlTableCell",*/ "HtmlTableColumn",
+            "HtmlTableColumnGroup", "HtmlTableData", "HtmlTableDataCell",
+            "HtmlTableFooter", "HtmlTableHeader", "HtmlTableHeaderCell",
+            "HtmlTableRow", "HtmlTextArea", "HtmlTextDirection", "HtmlTextInput",
+            "HtmlTitle", "HtmlUnorderedList"
         };
         for( int i=0; i<classesToTest.length; i++ ) {
             final Class clazz = Class.forName(
@@ -125,28 +125,28 @@ public class AttributesTest extends TestCase {
         }
         return suite;
     }
-    
+
     /**
      * Add all the tests for a given class.
-     * 
+     *
      * @param clazz The class to create tests for.
      * @param page The HtmlPage that will be passed into the constructor of the
      * objects to be tested.
      * @param suite The suite that all the tests will be placed inside.
      * @throws Exception If the tests cannot be created.
      */
-    private static void addTestsForClass( 
-            final Class clazz, 
-            final HtmlPage page, 
-            final TestSuite suite ) 
+    private static void addTestsForClass(
+            final Class clazz,
+            final HtmlPage page,
+            final TestSuite suite )
         throws
             Exception {
 
         final Method[] methods = clazz.getMethods();
         for( int i=0; i<methods.length; i++ ) {
             final String methodName = methods[i].getName();
-            if( methodName.startsWith("get") 
-                && methodName.endsWith("Attribute") 
+            if( methodName.startsWith("get")
+                && methodName.endsWith("Attribute")
                 && EXCLUDED_METHODS.contains(methodName) == false ) {
 
                 String attributeName = methodName.substring(3, methodName.length()-9).toLowerCase();
@@ -168,11 +168,11 @@ public class AttributesTest extends TestCase {
                 else if( attributeName.equals("acceptcharset") ) {
                     attributeName = "accept-charset";
                 }
-                suite.addTest( new AttributesTest(attributeName, clazz, methods[i], page) );                
+                suite.addTest( new AttributesTest(attributeName, clazz, methods[i], page) );
             }
         }
     }
-    
+
     /**
      * Create an instance of the test.  This will test one specific attribute
      * on one specific class.
@@ -185,7 +185,7 @@ public class AttributesTest extends TestCase {
     public AttributesTest (
             final String attributeName,
             final Class classUnderTest,
-            final Method method, 
+            final Method method,
             final HtmlPage page ) {
 
         super( createTestName(classUnderTest, method) );
@@ -210,7 +210,7 @@ public class AttributesTest extends TestCase {
         String className = clazz.getName();
         final int index = className.lastIndexOf('.');
         className = className.substring(index+1);
-        
+
         return "testAttributes_"+className+"_"+method.getName();
     }
 
@@ -220,16 +220,16 @@ public class AttributesTest extends TestCase {
      */
     protected void runTest() throws Exception {
         final String value = new String("value");
-        
+
         final List collectedAttributeRequests = new ArrayList();
         final Element proxyElement = createProxyElement(value, collectedAttributeRequests);
         final Object objectToTest = getNewInstanceForClassUnderTest(proxyElement);
-        
+
         collectedAttributeRequests.clear();
         final Object noObjects[] = new Object[0];
         final Object result = method_.invoke( objectToTest, noObjects );
         assertSame( value, result );
-        
+
         final List expectedAttributeRequests = new ArrayList();
         expectedAttributeRequests.add(attributeName_.toUpperCase());
         assertEquals( expectedAttributeRequests, collectedAttributeRequests);
@@ -253,7 +253,7 @@ public class AttributesTest extends TestCase {
             newInstance = new HtmlTableDataCell(page_, proxyElement, 1, 1 );
         }
         else {
-            final Constructor constructor = classUnderTest_.getDeclaredConstructor( 
+            final Constructor constructor = classUnderTest_.getDeclaredConstructor(
                 new Class[]{ HtmlPage.class, Element.class } );
             try {
                 newInstance = constructor.newInstance(
@@ -272,13 +272,13 @@ public class AttributesTest extends TestCase {
                 }
             }
         }
-        
+
         return newInstance;
     }
-    
+
     /**
      * Create a {@link Proxy} {@link Element}
-     * @param value The value that will be returned when the attribute value is 
+     * @param value The value that will be returned when the attribute value is
      * requested.
      * @param collectedAttributeRequests A list into which all the attribute
      * requests will be placed.

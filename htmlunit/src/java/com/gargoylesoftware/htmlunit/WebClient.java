@@ -95,10 +95,10 @@ public class WebClient {
     private final List webWindows_ = new ArrayList();
 
     private WebWindow currentWindow_ = new TopLevelWindow("", this);
-    
+
     private static URLStreamHandler JavaScriptUrlStreamHandler_
         = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
-    private static URLStreamHandler AboutUrlStreamHandler_ 
+    private static URLStreamHandler AboutUrlStreamHandler_
         = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
     //singleton WebResponse for "about:blank"
     private static final WebResponse WEB_RESPONSE_FOR_ABOUT_BLANK = new WebResponse() {
@@ -120,7 +120,7 @@ public class WebClient {
         public URL getUrl() {
             try {
                 return new URL(null,"about:blank",AboutUrlStreamHandler_);
-            } 
+            }
             catch (MalformedURLException e) {
                 // impossible
                 e.printStackTrace();
@@ -346,11 +346,11 @@ public class WebClient {
             IOException,
             FailingHttpStatusCodeException {
         return getPage(webWindow, url, encType, method, parameters, getThrowExceptionOnFailingStatusCode());
-    }    
+    }
 
     /**
      * Return a page.
-     * 
+     *
      * @param  webWindow The window that the new page will be loaded into.
      * @param  url The url of the server
      * @param  method The submit method. Ie Submit.GET or SubmitMethod.POST
@@ -374,12 +374,12 @@ public class WebClient {
         throws
             IOException,
             FailingHttpStatusCodeException {
-                
+
         return this.getPage(
-            webWindow, url, FormEncodingType.URL_ENCODED, method, 
+            webWindow, url, FormEncodingType.URL_ENCODED, method,
             parameters, throwExceptionOnFailingStatusCode);
     }
-    
+
     /**
      *  Send a request to a server and return a Page that represents the
      *  response from the server. This page will be used to populate this frame.<p>
@@ -439,10 +439,10 @@ public class WebClient {
         final WebResponse webResponse;
         if( protocol.equals("javascript") ) {
             webResponse = makeWebResponseForJavaScriptUrl(webWindow, url);
-        } 
+        }
         else if (protocol.equals("about")) {
             webResponse = makeWebResponseForAboutUrl(webWindow,url);
-        } 
+        }
         else {
             webResponse = loadWebResponse( url, encType, method, parameters );
         }
@@ -933,10 +933,10 @@ public class WebClient {
 
         if( TextUtil.startsWithIgnoreCase(urlString, "javascript:") ) {
             return new URL(null, urlString, JavaScriptUrlStreamHandler_);
-        } 
+        }
         else if (TextUtil.startsWithIgnoreCase(urlString,"about:")){
             return new URL(null, urlString, AboutUrlStreamHandler_);
-        } 
+        }
         else {
             return new URL(urlString);
         }
@@ -1053,7 +1053,7 @@ public class WebClient {
             public long getLoadTimeInMilliSeconds() { return 0; }
             public byte[] getResponseBody() {
                 try {
-                    /* 
+                    /*
                      * this method must return raw bytes.
                      * without encoding, getBytes use locale encoding.
                      */
@@ -1100,7 +1100,7 @@ public class WebClient {
         Assert.notNull("method", method);
         Assert.notNull("parameters", parameters);
 
-        final WebResponse webResponse 
+        final WebResponse webResponse
             = getWebConnection().getResponse( url, encType, method, parameters, requestHeaders_ );
         final int statusCode = webResponse.getStatusCode();
 

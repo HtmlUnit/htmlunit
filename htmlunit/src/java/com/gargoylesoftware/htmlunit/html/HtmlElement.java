@@ -347,10 +347,10 @@ public abstract class HtmlElement {
      */
     public String asText() {
         String text = getChildrenAsText();
-        
+
         // Translate non-breaking spaces to regular spaces.
         text = text.replace((char)160,' ');
-        
+
         // Remove extra whitespace
         text = reduceWhitespace(text);
         return text;
@@ -398,7 +398,7 @@ public abstract class HtmlElement {
 
 
     /**
-     * Removes extra whitespace from a string similar to what a browser does 
+     * Removes extra whitespace from a string similar to what a browser does
      * when it displays text.
      * @param text The text to clean up.
      * @return The cleaned up text.

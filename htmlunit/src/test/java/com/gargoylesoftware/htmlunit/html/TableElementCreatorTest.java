@@ -81,7 +81,7 @@ public class TableElementCreatorTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage )client.getPage(
                 new URL( "http://first" ),
                 SubmitMethod.POST, Collections.EMPTY_LIST );
-                
+
         // Calling asText() will invoke the element creator which in turn will blow up
         page.asText();
     }

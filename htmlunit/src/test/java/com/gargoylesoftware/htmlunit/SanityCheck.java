@@ -100,7 +100,7 @@ public class SanityCheck extends WebTestCase {
      */
     public void testYahoo_Spanish() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
-        assertInstanceOf( 
+        assertInstanceOf(
             webClient.getPage( new URL( "http://edit.europe.yahoo.com/config/mail?.intl=es" ) ), HtmlPage.class );
     }
 
@@ -155,8 +155,8 @@ public class SanityCheck extends WebTestCase {
         try {
             final WebClient webClient = new WebClient(BROWSER_VERSION);
             webClient.setPrintContentOnFailingStatusCode(true);
-            assertInstanceOf( 
-                webClient.getPage( new URL( "https://sourceforge.net/projects/htmlunit/" ) ), 
+            assertInstanceOf(
+                webClient.getPage( new URL( "https://sourceforge.net/projects/htmlunit/" ) ),
                 HtmlPage.class );
         }
         catch( final MalformedURLException e ) {
@@ -257,7 +257,7 @@ public class SanityCheck extends WebTestCase {
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button1");
         button.getElement().setAttribute("name", "textfield1");
-        
+
         final HtmlPage secondPage = (HtmlPage)button.click();
         assertEquals("POST", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
         assertEquals("", secondPage.getHtmlElementById("QUERY_STRING").asText());

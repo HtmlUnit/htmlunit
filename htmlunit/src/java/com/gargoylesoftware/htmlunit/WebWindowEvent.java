@@ -88,8 +88,7 @@ public final class WebWindowEvent extends EventObject {
     public int hashCode() {
         return source.hashCode();
     }
-    
-    
+
     /**
      * Return the oldPage
      * @return the page or null if the window has no page

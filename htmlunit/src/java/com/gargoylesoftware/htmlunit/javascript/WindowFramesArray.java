@@ -46,8 +46,8 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * An array returned by frames property of Window 
- *   
+ * An array returned by frames property of Window
+ *
  * @author <a href="mailto:chen_jun@users.sourceforge.net>Chen Jun</a>
  * @version 1.0, 2003-8-23
  */
@@ -88,7 +88,7 @@ public class WindowFramesArray extends SimpleScriptable {
     }
 
     /**
-     * Return the frame at the specified name or NOT_FOUND.  
+     * Return the frame at the specified name or NOT_FOUND.
      *
      * @param name The name.
      * @param start The object that get is being called on.

@@ -423,7 +423,7 @@ public class WebClientTest extends WebTestCase {
         /** A PageCreator that collects data */
         class CollectingPageCreator implements PageCreator {
             private final List list;
-            /** 
+            /**
              * Create an instance
              * @param list The list that will contain the data
              */
@@ -678,7 +678,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Return a loaded page for one of the keyboard tests.
      * @param webClient the WebClient to load the page from.
-     * @param tabIndexValues The tab index values.  One input will be created for each item 
+     * @param tabIndexValues The tab index values.  One input will be created for each item
      * in this list.
      * @throws Exception If something goes wrong.
      */

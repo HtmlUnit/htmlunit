@@ -128,7 +128,7 @@ public class Input extends HTMLElement {
         String type = getHtmlElementOrDie().getAttributeValue("type");
         if (type.equals("checkbox") || type.equals("radio")){
             ((HtmlInput)getHtmlElementOrDie()).setChecked(checked);
-        } 
+        }
         else {
             getLog().debug( "Input.jsSet_checked(" + checked
                 + ") was called for class " + getClass().getName() );
@@ -148,7 +148,7 @@ public class Input extends HTMLElement {
         String type = getHtmlElementOrDie().getAttributeValue("type");
         if (type.equals("checkbox") || type.equals("radio")){
             return ((HtmlInput)getHtmlElementOrDie()).isChecked();
-        } 
+        }
         else {
             getLog().warn( "Input.jsGet_checked() was called for class " + getClass().getName() );
             return false;

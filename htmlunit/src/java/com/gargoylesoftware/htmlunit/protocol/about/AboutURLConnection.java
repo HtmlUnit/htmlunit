@@ -43,7 +43,7 @@ import java.net.URLConnection;
 
 /**
  * A URLConnection for supporting "about:" urls
- *  
+ *
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @version 1.0, 2003-8-24
  */

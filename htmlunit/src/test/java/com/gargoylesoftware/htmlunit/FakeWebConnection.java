@@ -79,7 +79,7 @@ public class FakeWebConnection extends WebConnection {
                         + object.getClass().getName());
                 }
             }
-            
+
             content_ = content;
             statusCode_ = statusCode;
             statusMessage_ = statusMessage;
@@ -124,7 +124,7 @@ public class FakeWebConnection extends WebConnection {
         final SubmitMethod method,
         final List parameters,
         final Map requestParameters ) {
-        
+
         return this.getResponse(url, FormEncodingType.URL_ENCODED, method, parameters, requestParameters);
     }
 
@@ -182,7 +182,7 @@ public class FakeWebConnection extends WebConnection {
             }
             public byte[] getResponseBody() {
                 try{
-                    /* 
+                    /*
                      * this method must return raw bytes.
                      * without encoding, getBytes use locale encoding.
                      */
@@ -245,7 +245,7 @@ public class FakeWebConnection extends WebConnection {
     /**
      * Set the response that will be returned when a url is requested that does
      * not have a specific content set for it.
-     * 
+     *
      * @param content The content to return
      * @param statusCode The status code to return
      * @param statusMessage The status message to return

@@ -250,7 +250,7 @@ public class HttpWebConnection extends WebConnection {
         else if( method == SubmitMethod.POST ) {
             if (encType == FormEncodingType.URL_ENCODED) {
                 httpMethod = new PostMethod( path );
-            } 
+            }
             else {
                 httpMethod = new MultipartPostMethod(path);
             }
@@ -260,8 +260,8 @@ public class HttpWebConnection extends WebConnection {
             }
             Iterator iterator;
 
-            // Note that this has to be done in two loops otherwise it won't 
-            // be able to support two elements with the same name.            
+            // Note that this has to be done in two loops otherwise it won't
+            // be able to support two elements with the same name.
             iterator = parameters.iterator();
             if (encType == FormEncodingType.URL_ENCODED) {
                 while( iterator.hasNext() ) {
@@ -274,7 +274,7 @@ public class HttpWebConnection extends WebConnection {
                     final NameValuePair pair = ( NameValuePair )iterator.next();
                     ( ( PostMethod )httpMethod ).addParameter( pair.getName(), pair.getValue() );
                 }
-            } 
+            }
             else {
                 iterator = parameters.iterator();
                 while (iterator.hasNext()) {
@@ -283,11 +283,11 @@ public class HttpWebConnection extends WebConnection {
                         File f = (File) ((KeyDataPair)pair).getData();
                         if (f.exists()){
                             ((MultipartPostMethod) httpMethod).addParameter(pair.getName(), f);
-                        } 
+                        }
                         else {
                             ((MultipartPostMethod) httpMethod).addParameter(pair.getName(), pair.getValue());
                         }
-                    } 
+                    }
                     else {
                         ((MultipartPostMethod) httpMethod).addParameter(pair.getName(), pair.getValue());
                     }
@@ -466,7 +466,7 @@ public class HttpWebConnection extends WebConnection {
                         return "ISO-8859-1";
                     }
                 }
-                
+
                 public byte [] getResponseBody(){
                     return contentBuffer;
                 }

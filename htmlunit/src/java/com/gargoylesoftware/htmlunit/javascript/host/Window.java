@@ -355,7 +355,7 @@ public final class Window extends SimpleScriptable {
 
         location_ = (Location)makeJavaScriptObject("Location");
         location_.initialize(this);
-        
+
         windowFramesArray_ =(WindowFramesArray)makeJavaScriptObject("WindowFramesArray");
         windowFramesArray_.initialize(htmlPage);
     }
@@ -489,7 +489,7 @@ public final class Window extends SimpleScriptable {
             final HtmlPage page = (HtmlPage)webWindow_.getEnclosedPage();
             if ( newValue instanceof Function ) {
                 page.setOnLoadAttribute( newValue );
-            } 
+            }
             else {
                 getLog().error( "Invalid value set to window.onload.  Value class: " + newValue.getClass () );
             }
@@ -509,7 +509,7 @@ public final class Window extends SimpleScriptable {
 
         return "";
     }
-    
+
     /**
      * Return the value of the name property
      * @return The name

@@ -184,7 +184,7 @@ public final class Document extends HTMLElement {
         final HtmlPage htmlPage = getHtmlPage();
         final WebConnection connection = htmlPage.getWebClient().getWebConnection();
         final URL url = htmlPage.getWebResponse().getUrl();
-        
+
         return connection.getStateForUrl( url );
     }
     /**
@@ -195,7 +195,7 @@ public final class Document extends HTMLElement {
         final HttpState state = getHttpState();
         final Cookie[] cookies = state.getCookies();
         final StringBuffer buffer = new StringBuffer();
-        
+
         for( int i=0; i<cookies.length; i++ ) {
             if( i != 0 ) {
                 buffer.append(";");
@@ -204,7 +204,7 @@ public final class Document extends HTMLElement {
             buffer.append( "=" );
             buffer.append( cookies[i].getValue() );
         }
-        return buffer.toString();        
+        return buffer.toString();
     }
 
 

@@ -645,7 +645,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) form.submit("foo");
         assertEquals( "Second", secondPage.getTitleText() );
     }
-    
+
    /**
     * @throws Exception if the test fails
     */
@@ -677,6 +677,6 @@ public class HtmlFormTest extends WebTestCase {
        final List collectedParameters = webConnection.getLastParameters();
 
        assertEquals( expectedParameters, collectedParameters );
-   }    
+   }
 }
 
