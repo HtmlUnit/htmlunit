@@ -327,4 +327,11 @@
         <function name="onblur"/>
         <function name="onfocus"/>
     </class>    
+    
+    <class name="ActiveXObject">
+	    <function name="ActiveXObject">
+	        <browser name="Microsoft Internet Explorer"/>
+	    </function>
+	</class>
+    
 </configuration>

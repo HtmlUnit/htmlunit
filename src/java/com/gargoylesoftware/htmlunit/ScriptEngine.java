@@ -47,6 +47,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  */
 public abstract class ScriptEngine {
     private final WebClient webClient_;
@@ -149,4 +150,31 @@ public abstract class ScriptEngine {
     public Log getScriptEngineLog() {
         return scriptEngineLog_;
     }
+    
+    /**
+     * Pre process the specified source code in the context of the given page using the processor specified
+     * in the webclient. This method delegates to the pre processor handler specified in the
+     * <code>WebClient</code>. If no pre processor handler is defined, the original source code is returned
+     * unchanged.
+     * @param htmlPage The page
+     * @param sourceCode The code to process.
+     * @param sourceName A name for the chunk of code.  This will be used in error messages.
+     * @param htmlElement The html element that will act as the context.
+     * @return The source code after being pre processed
+     * @see com.gargoylesoftware.htmlunit.ScriptPreProcessor
+     */
+    public String preProcess(
+        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement ) {
+
+        String newSourceCode = sourceCode;
+        final ScriptPreProcessor preProcessor = getWebClient().getScriptPreProcessor();
+        if ( preProcessor != null ) {
+            newSourceCode = preProcessor.preProcess(htmlPage, sourceCode, sourceName, htmlElement);
+            if ( newSourceCode == null ) {
+                newSourceCode = "";
+            }
+        }
+        return newSourceCode;
+    }
+
 }

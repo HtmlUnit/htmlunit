@@ -61,6 +61,7 @@ import org.mozilla.javascript.ScriptableObject;
  * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @author  David K. Taylor
  * @author  Chris Erskine
+ * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  */
 public final class JavaScriptEngine extends ScriptEngine {
 
@@ -109,6 +110,8 @@ public final class JavaScriptEngine extends ScriptEngine {
      */
     private final Map pageInfos_ = new WeakHashMap(89);
 
+    private static final ThreadLocal WEB_CLIENTS = new ThreadLocal();
+    
     /**
      * Create an instance for the specified webclient
      *
@@ -139,6 +142,7 @@ public final class JavaScriptEngine extends ScriptEngine {
         try {
             final PageInfo newPageInfo = new PageInfo(this);
 
+            WEB_CLIENTS.set(htmlPage.getWebClient());
             newPageInfo.context_ = Context.enter();
             newPageInfo.context_.setOptimizationLevel(-1);
             newPageInfo.getContext().setErrorReporter(
@@ -149,7 +153,8 @@ public final class JavaScriptEngine extends ScriptEngine {
             final String hostClassNames[] = {
                 "HTMLElement" ,"Window", "Document", "Form", "Input", "Navigator",
                 "Screen", "History", "Location", "Button", "Select", "Textarea",
-                "Style", "Option", "Anchor", "Image", "TextImpl", "FocusableHostElement"
+                "Style", "Option", "Anchor", "Image", "TextImpl", "FocusableHostElement",
+                "ActiveXObject"
             };
 
             for( int i=0; i<hostClassNames.length; i++ ) {
@@ -225,6 +230,9 @@ public final class JavaScriptEngine extends ScriptEngine {
         final HtmlPage htmlPage, String sourceCode, final String sourceName, final HtmlElement htmlElementScope ) {
 
         Assert.notNull( "sourceCode", sourceCode );
+
+        // Pre process the source code
+        sourceCode = preProcess(htmlPage, sourceCode, sourceName, htmlElementScope);
 
         // Remove html comments around the source if needed
         sourceCode = sourceCode.trim();
@@ -314,6 +322,15 @@ public final class JavaScriptEngine extends ScriptEngine {
 
         final String result = Context.toString( javaScriptObject );
         return result;
+    }
+
+    /** 
+     * Return the WebClient that is executing on the current thread.  If no client
+     * can be found then return null.
+     * @return The web client.
+     */
+    public static WebClient getWebClientForCurrentThread() {
+        return (WebClient)WEB_CLIENTS.get();
     }
 }
 
