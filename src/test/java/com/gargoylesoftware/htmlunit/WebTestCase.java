@@ -37,12 +37,20 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.base.testing.BaseTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
+
 import junit.framework.AssertionFailedError;
+
+import com.gargoylesoftware.base.testing.BaseTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Common superclass for HtmlUnit tests
@@ -105,6 +113,47 @@ public class WebTestCase extends BaseTestCase {
         if( object != null ) {
             throw new AssertionFailedError("Expected null but found ["+object+"]");
         }
+    }
+    
+    /**
+     * Return an input stream for the specified file name.  Refer to {@link #getFileObject(String)}
+     * for details on how the file is located.
+     * @param fileName The base file name.
+     * @return The input stream.
+     * @throws FileNotFoundException If the file cannot be found.
+     */
+    public static InputStream getFileAsStream( final String fileName ) throws FileNotFoundException {
+        return new BufferedInputStream(new FileInputStream(getFileObject(fileName)));
+    }
+    
+    /**
+     * Return a File object for the specified file name.  This is different from just
+     * <code>new File(fileName)</code> because it will adjust the location of the file
+     * depending on how the code is being executed.
+     * 
+     * @param fileName The base filename.
+     * @return The new File object.
+     */
+    public static File getFileObject( final String fileName ) throws FileNotFoundException {
+        final String localizedName = fileName.replace( '/', File.separatorChar );
+
+        File file = new File(localizedName);
+        if( file.exists() == false ) {
+            file = new File("../../"+localizedName);
+        }
+        
+        if( file.exists() == false ) {
+            try {
+                System.out.println("currentDir="+new File(".").getCanonicalPath());
+            }
+            catch( final IOException e ) {
+                e.printStackTrace();
+            }
+            
+            throw new FileNotFoundException(localizedName);
+        }
+        
+        return file;
     }
 }
 
