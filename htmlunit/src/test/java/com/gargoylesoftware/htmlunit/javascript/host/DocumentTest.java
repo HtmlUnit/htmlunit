@@ -1008,4 +1008,42 @@ public class DocumentTest extends WebTestCase {
             "a", "b"} );
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+
+    public void testCookie_read() throws Exception {
+        final WebClient webClient = new WebClient();
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+
+        final String firstContent
+            = "<html><head><title>First</title><script>"
+            + "function doTest() {\n"
+            + "    var cookieSet = document.cookie.split(';');\n"
+            + "    var setSize = cookieSet.length;\n"
+            + "    var crumbs;\n"
+            + "    var x=0;\n"
+            + "    for (x=0;((x<setSize)); x++) {\n"
+            + "        crumbs = cookieSet[x].split('=');\n"
+            + "        alert ( crumbs[0] );\n"
+            + "        alert ( crumbs[1] );\n"
+            + "    } \n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>"
+            + "</body></html>";
+
+        final List headers = Collections.singletonList( 
+            new KeyValuePair("Set-Cookie", "one=two;three=four") );
+        webConnection.setResponse(
+            new URL("http://first"), firstContent, 200, "OK", "text/html", headers );
+        webClient.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
+        assertEquals( "First", firstPage.getTitleText() );
+
+        final List expectedAlerts = Arrays.asList( new String[] {
+            "one", "two", "three", "four"} );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }
