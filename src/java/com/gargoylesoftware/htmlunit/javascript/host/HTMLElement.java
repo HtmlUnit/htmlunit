@@ -547,7 +547,7 @@ public class HTMLElement extends NodeImpl {
     }
 
     /**
-     * Gets the attributs of the element in the form of a {@link Attributes} 
+     * Gets the attributes of the element in the form of a {@link org.xml.sax.Attributes} 
      * @param element the element to read the attributes from
      * @return the attributes
      */
