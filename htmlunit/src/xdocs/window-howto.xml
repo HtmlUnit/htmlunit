@@ -1,13 +1,26 @@
 <?xml version="1.0"?>
 <document title="Window Tutorial">
 
-<section title="Simple behaviour">
+<section title="Overview">
 	<p>
-		The first set of examples will use this simple html.
+		All pages are contained within
+		<javadoc>com.gargoylesoftware.htmlunit.WebWindow</javadoc> objects.  This could be a
+		<javadoc>com.gargoylesoftware.htmlunit.TopLevelWindow</javadoc> representing an actual
+		browser window, an
+		<javadoc>com.gargoylesoftware.htmlunit.HtmlFrame</javadoc> representing a &lt;frame&gt;
+		element or an
+		<javadoc>com.gargoylesoftware.htmlunit.HtmlInlineFrame</javadoc> representing an
+		&lt;iframe&gt; element.
 	</p>
-	<source><![CDATA[
-	]]></source>
+	<p>
+		When a <javadoc>com.gargoylesoftware.htmlunit.WebClient</javadoc> is first instantiated,
+		a <javadoc>com.gargoylesoftware.htmlunit.TopLevelWindow</javadoc> is automatically created.
+		You could think of this as being the first window displayed by a web browser.  Calling
+		<javadoc>com.gargoylesoftware.htmlunit.WebClient#getPage()</javadoc> will load the
+		new page into this window.
+	</p>
 </section>
+
 
 </document>
 
