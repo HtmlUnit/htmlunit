@@ -22,6 +22,12 @@
 		<change type="fix">
 			Fixed bug where javascript that was enclosed in html comment tags would blow up
 		</change>
+		<change type="new">
+			Initial support for keyboard navigation
+		</change>
+		<change type="documentation">
+			Initial draft of a howto for keyboard navigation
+		</change>
 	</change-log>
 </section>
 

@@ -866,5 +866,97 @@ public final class HtmlPage
         return getHtmlElementsByTagNames( Arrays.asList( new String[]{
             "frame", "iframe" } ) );
     }
+
+
+    /**
+     * Simulate pressing an access key.  This may change the focus.
+     *
+     * @param accessKey The key that will be pressed.
+     * @return The element that has the focus after pressing this access key or null if no element
+     * has the focus.
+     */
+    public HtmlElement pressAccessKey( final char accessKey ) {
+        final HtmlElement element = getHtmlElementByAccessKey(accessKey);
+        final WebClient webClient = getWebClient();
+        if( element != null ) {
+            webClient.moveFocusToElement(element);
+        }
+        return webClient.getElementWithFocus();
+    }
+
+
+    /**
+     * Move the focus to the next element in the tab order.  To determine the specified tab
+     * order, refer to {@link HtmlPage#getTabbableElements()}
+     */
+    public HtmlElement tabToNextElement() {
+        final List elements = getTabbableElements();
+        if( elements.isEmpty() ) {
+            getWebClient().moveFocusToElement(null);
+            return null;
+        }
+
+        final HtmlElement elementWithFocus = getWebClient().getElementWithFocus();
+        final HtmlElement elementToGiveFocus;
+        if( elementWithFocus == null ) {
+            elementToGiveFocus = (HtmlElement)elements.get(0);
+        }
+        else {
+            final int index = elements.indexOf( elementWithFocus );
+            if( index == -1 ) {
+                // The element with focus isn't on this page
+                elementToGiveFocus = (HtmlElement)elements.get(0);
+            }
+            else {
+                if( index == elements.size() - 1 ) {
+                    elementToGiveFocus = (HtmlElement)elements.get(0);
+                }
+                else {
+                    elementToGiveFocus = (HtmlElement)elements.get(index+1);
+                }
+            }
+        }
+
+        getWebClient().moveFocusToElement( elementToGiveFocus );
+        return elementToGiveFocus;
+    }
+
+
+    /**
+     * Move the focus to the previous element in the tab order.  To determine the specified tab
+     * order, refer to {@link HtmlPage#getTabbableElements()}
+     */
+    public HtmlElement tabToPreviousElement() {
+        final List elements = getTabbableElements();
+        if( elements.isEmpty() ) {
+            getWebClient().moveFocusToElement(null);
+            return null;
+        }
+
+        final HtmlElement elementWithFocus = getWebClient().getElementWithFocus();
+        final HtmlElement elementToGiveFocus;
+        if( elementWithFocus == null ) {
+            elementToGiveFocus = (HtmlElement)elements.get(elements.size()-1);
+        }
+        else {
+            final int index = elements.indexOf( elementWithFocus );
+            if( index == -1 ) {
+                // The element with focus isn't on this page
+                elementToGiveFocus = (HtmlElement)elements.get(elements.size()-1);
+            }
+            else {
+                if( index == 0 ) {
+                    elementToGiveFocus = (HtmlElement)elements.get(elements.size()-1);
+                }
+                else {
+                    elementToGiveFocus = (HtmlElement)elements.get(index-1);
+                }
+            }
+        }
+
+        getWebClient().moveFocusToElement( elementToGiveFocus );
+        return elementToGiveFocus;
+    }
+
 }
 

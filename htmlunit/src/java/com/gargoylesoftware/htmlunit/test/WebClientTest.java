@@ -6,6 +6,7 @@
  */
 package com.gargoylesoftware.htmlunit.test;
 
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -18,6 +19,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowAdapter;
 import com.gargoylesoftware.htmlunit.WebWindowEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.IOException;
 import java.net.URL;
@@ -425,6 +427,137 @@ public class WebClientTest extends WebTestCase {
         final HtmlPage page = (HtmlPage)webClient.getPage(
             url, SubmitMethod.GET, Collections.EMPTY_LIST);
         assertEquals("Second", page.getTitleText());
+    }
+
+
+    public void testKeyboard_NoTabbableElements() throws Exception {
+        final WebClient webClient = new WebClient();
+        final HtmlPage page = getPageForKeyboardTest(webClient, new String[0]);
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        assertNull( "original", webClient.getElementWithFocus() );
+        assertNull( "next", page.tabToNextElement() );
+        assertNull( "previous", page.tabToPreviousElement() );
+        assertNull( "accesskey", page.pressAccessKey('a') );
+
+        final List expectedAlerts = Collections.EMPTY_LIST;
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+
+    public void testKeyboard_OneTabbableElement() throws Exception {
+        final WebClient webClient = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ null });
+        final HtmlElement element = page.getHtmlElementById("submit0");
+
+        assertNull( "original", webClient.getElementWithFocus() );
+        assertNull( "accesskey", page.pressAccessKey('x') );
+
+        assertEquals( "next", element, page.tabToNextElement() );
+        assertEquals( "nextAgain", element, page.tabToNextElement() );
+
+        webClient.moveFocusToElement(null);
+        assertNull( "original", webClient.getElementWithFocus() );
+
+        assertEquals( "previous", element, page.tabToPreviousElement() );
+        assertEquals( "previousAgain", element, page.tabToPreviousElement() );
+
+        assertEquals( "accesskey", element, page.pressAccessKey('z') );
+
+        final List expectedAlerts = Arrays.asList( new String[]{"focus-0", "blur-0", "focus-0"} );
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+
+    public void testAccessKeys() throws Exception {
+        final WebClient webClient = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
+        final HtmlElement element = page.getHtmlElementById("submit0");
+
+        assertEquals( "submit0", page.pressAccessKey('a').getAttributeValue("name") );
+        assertEquals( "submit2", page.pressAccessKey('c').getAttributeValue("name") );
+        assertEquals( "submit1", page.pressAccessKey('b').getAttributeValue("name") );
+    }
+
+
+    public void testTabNext() throws Exception {
+        final WebClient webClient = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
+        final HtmlElement element = page.getHtmlElementById("submit0");
+
+        assertEquals( "submit0", page.tabToNextElement().getAttributeValue("name") );
+        assertEquals( "submit1", page.tabToNextElement().getAttributeValue("name") );
+        assertEquals( "submit2", page.tabToNextElement().getAttributeValue("name") );
+    }
+
+
+    public void testTabPrevious() throws Exception {
+        final WebClient webClient = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
+        final HtmlElement element = page.getHtmlElementById("submit0");
+
+        assertEquals( "submit2", page.tabToPreviousElement().getAttributeValue("name") );
+        assertEquals( "submit1", page.tabToPreviousElement().getAttributeValue("name") );
+        assertEquals( "submit0", page.tabToPreviousElement().getAttributeValue("name") );
+    }
+
+
+    public void testMoveFocusToElement_NotTabbableElement() {
+        notImplemented();
+    }
+    public void testMoveFocusToElement_ElementNotOwnedByThisWebClient() {
+        notImplemented();
+    }
+    public void testPressAccessKey_Button() {
+        notImplemented();
+    }
+
+
+    private HtmlPage getPageForKeyboardTest(
+        final WebClient webClient, final String[] tabIndexValues ) throws Exception {
+
+        final StringBuffer buffer = new StringBuffer();
+        buffer.append(
+            "<html><head><title>First</title></head><body><form name='form1' action='/foo' method='post'>");
+
+        for( int i=0; i<tabIndexValues.length; i++ ) {
+            buffer.append( "<input type='submit' name='submit");
+            buffer.append(i);
+            buffer.append("' id='submit");
+            buffer.append(i);
+            buffer.append("'");
+            if( tabIndexValues[i] != null ) {
+                buffer.append(" tabindex='");
+                buffer.append(tabIndexValues[i]);
+                buffer.append("'");
+            }
+            buffer.append(" onblur='alert(\"blur-"+i+"\")'");
+            buffer.append(" onfocus='alert(\"focus-"+i+"\")'");
+            buffer.append(" accesskey='"+(char)('a'+i)+"'");
+            buffer.append(">");
+        }
+        buffer.append("</form></body></html>");
+
+        final FakeWebConnection webConnection = new FakeWebConnection( webClient );
+        webConnection.setResponse(
+            new URL("http://first"), buffer.toString(), 200, "OK", "text/html", Collections.EMPTY_LIST );
+        webClient.setWebConnection( webConnection );
+
+        final URL url = new URL("http://first");
+        return (HtmlPage)webClient.getPage(url, SubmitMethod.GET, Collections.EMPTY_LIST);
     }
 }
 
