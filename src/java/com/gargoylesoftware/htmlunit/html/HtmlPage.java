@@ -763,7 +763,9 @@ public final class HtmlPage
                 url, SubmitMethod.GET, Collections.EMPTY_LIST);
             if( webResponse.getStatusCode() == 200 ) {
                 if( webResponse.getContentType().equals("text/javascript") == false ) {
-                    getLog().warn("Expected content type of text/javascript for remotely loaded javascript element but got ["+webResponse.getContentType()+"]");
+                    getLog().warn(
+                        "Expected content type of text/javascript for remotely loaded javascript element but got ["
+                        +webResponse.getContentType()+"]");
                 }
                 return webResponse.getContentAsString();
             }

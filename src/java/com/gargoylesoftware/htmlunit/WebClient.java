@@ -911,6 +911,14 @@ public class WebClient {
     }
 
 
+    /**
+     * Load a {@link WebResponse} from the server
+     * @param url The url to load the response from.
+     * @param method The {@link SubmitMethod} to use
+     * @param parameters Any parameters that are being passed into the request
+     * @throws IOException if an IO problem occurs
+     * @return The WebResponse
+     */
     public final WebResponse loadWebResponse(
             final URL url, final SubmitMethod method, final List parameters)
         throws
