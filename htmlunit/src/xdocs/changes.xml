@@ -64,6 +64,13 @@
                 returns the node before the current node.  They each return null
                 if there is no such node or the node type is not supported (not HTML).
             </action>
+            <action type="update" dev="dktaylor">
+                Add support for HTMLElement.removeChild and insertBefore.
+                HTMLElement.removeChild removes an Element from the HTML document.
+                It returns the removed Element which is no longer part of the HTML
+                document.  HTMLElement.insertBefore adds a new child element before
+                another child element.  It returns the newly added child element.
+            </action>
         </release>
 
         <release version="1.2.3" date="July 31, 2003">

@@ -53,6 +53,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Comment;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -629,13 +630,10 @@ public abstract class HtmlElement {
         Assert.notNull( "id", id );
         assertNotEmpty( "id", id );
 
-        final Iterator iterator = getXmlChildElements();
-        while( iterator.hasNext() ) {
-            final Element xmlElement = ( Element )iterator.next();
-            final String idValue = getAttributeValue( xmlElement, "id" );
-            if( id.equals( idValue ) ) {
-                return getPage().getHtmlElement( xmlElement );
-            }
+        final Document xmlDocument = getElement().getOwnerDocument();
+        final Element xmlElement = xmlDocument.getElementById(id);
+        if( xmlElement != null ) {
+            return getPage().getHtmlElement( xmlElement );
         }
 
         throw new ElementNotFoundException( "*", "id", id );

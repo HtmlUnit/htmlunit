@@ -473,6 +473,26 @@ public final class HtmlPage
     }
 
 
+
+    /**
+     *  Given an XML element, remove that element and return the HtmlElement
+     *  object that corresponds to that element or null if one cannot be
+     *  found. <p />
+     *
+     *  If a null xmlElement is passed in then null will be returned.
+     *
+     * @param  xmlElement The XML element to remove
+     * @return  See above
+     */
+    public HtmlElement removeHtmlElement( final Element xmlElement ) {
+        if( xmlElement == null ) {
+            return null;
+        }
+
+        return ( HtmlElement )elements_.remove( xmlElement );
+    }
+
+
     /**
      * Return the first form that matches the specifed name
      * @param name The name to search for

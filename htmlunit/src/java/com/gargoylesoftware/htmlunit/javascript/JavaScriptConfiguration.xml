@@ -143,6 +143,8 @@
             <browser name="Netscape" min-version="6"/>
         </property>
         <function name="appendChild"/>
+        <function name="insertBefore"/>
+        <function name="removeChild"/>
         <function name="contains">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>

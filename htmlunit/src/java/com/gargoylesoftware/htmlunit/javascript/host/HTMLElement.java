@@ -189,6 +189,79 @@ public class HTMLElement extends SimpleScriptable {
 
 
     /**
+     * Add an HTML element as a child to this element before the referenced
+     * element.  If the referenced element is null, append to the end.
+     * @param newChildObject The element to add to this element
+     * @param refChildObject The element before which to add the new child
+     * @return The newly added child element.
+     */
+    public Object jsFunction_insertBefore(final Object newChildObject,
+        final Object refChildObject) {
+        final Object appendedChild;
+        if (newChildObject instanceof HTMLElement &&
+            refChildObject instanceof HTMLElement) {
+            // Get XML elements for the HTML elements passed in
+            final HtmlElement newChildHtmlElement = ((HTMLElement) newChildObject).getHtmlElementOrDie();
+            final Element newChildXmlNode = newChildHtmlElement.getElement();
+            Element refChildXmlNode = null;
+            if (refChildObject != null) {
+                final HtmlElement refChildHtmlElement = ((HTMLElement) refChildObject).getHtmlElementOrDie();
+                refChildXmlNode = refChildHtmlElement.getElement();
+            }
+
+            // Get the parent XML element that the child should be added to.
+            final HtmlElement parentElement = this.getHtmlElementOrDie();
+            final Element parentXmlNode = parentElement.getElement();
+
+            // Append the child to the parent element
+            if ( parentXmlNode.insertBefore(newChildXmlNode,
+                refChildXmlNode) == null ) {
+                appendedChild = null;
+            }
+            else {
+                appendedChild = newChildObject;
+            }
+        }
+        else {
+            appendedChild = null;
+        }
+        return appendedChild;
+    }
+
+
+    /**
+     * Remove an HTML element from this element
+     * @param childObject The element to remove from this element
+     * @return The removed child element.
+     */
+    public Object jsFunction_removeChild(final Object childObject) {
+        final Object removedChild;
+        if (childObject instanceof HTMLElement) {
+            // Get XML element for the HTML element passed in
+            final HtmlElement childHtmlElement = ((HTMLElement) childObject).getHtmlElementOrDie();
+            final Element childXmlNode = childHtmlElement.getElement();
+
+            // Get the parent XML element that the child should be added to.
+            final HtmlElement parentElement = this.getHtmlElementOrDie();
+            final Element parentXmlNode = parentElement.getElement();
+
+            // Remove the child from the parent element
+            if ( parentXmlNode.removeChild(childXmlNode) == null ) {
+                removedChild = null;
+            }
+            else {
+                removedChild = childObject;
+                parentElement.getPage().removeHtmlElement(childXmlNode);
+            }
+        }
+        else {
+            removedChild = null;
+        }
+        return removedChild;
+    }
+
+
+    /**
      * Get the JavaScript property "parentNode" for the node that
      * contains the current node.
      * @return The parent node
