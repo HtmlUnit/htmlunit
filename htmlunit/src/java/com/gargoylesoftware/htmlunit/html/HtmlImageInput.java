@@ -100,9 +100,7 @@ public class HtmlImageInput extends HtmlInput {
      * @exception  IOException If an io error occurs
      */
     public Page click() throws IOException {
-
-        wasPositionSpecified_ = false;
-        return super.click();
+        return click(0,0);
     }
 
     /**
