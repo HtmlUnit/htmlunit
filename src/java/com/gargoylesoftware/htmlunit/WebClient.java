@@ -33,6 +33,7 @@ import org.apache.commons.logging.LogFactory;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
+ * @author Dominique Broeglin
  */
 public class WebClient {
 
@@ -876,7 +877,7 @@ public class WebClient {
             buffer.append(iterator.next());
         }
 
-        if( tokens.isEmpty() ) {
+        if( tokens.isEmpty() || stringToTokenize.endsWith("/") ) {
             buffer.append("/");
         }
         return makeUrl( buffer.toString() );

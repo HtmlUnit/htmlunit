@@ -36,6 +36,9 @@
 		<change type="new" reporter="Mabel Chow">
 			Added support for document.all.tags()
 		</change>
+		<change type="fix" reporter="Dominique Broeglin" patch-author="Dominique Broeglin">
+			Fixed bug in expansion of relative urls
+		</change>
 	</change-log>
 </section>
 
