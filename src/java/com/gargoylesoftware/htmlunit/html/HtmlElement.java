@@ -766,7 +766,7 @@ public abstract class HtmlElement {
         for( int i = 0; i < childCount; i++ ) {
             final Node node = childNodes.item( i );
             if( node instanceof Element ) {
-                result.add( page.getHtmlElement( ( Element )node ) );
+                result.add( page.getHtmlElement( node ) );
             }
         }
 
@@ -779,7 +779,7 @@ public abstract class HtmlElement {
      * @return the parent element of this element
      */
     public HtmlElement getParent() {
-        return getPage().getHtmlElement((Element)getElement().getParentNode());
+        return getPage().getHtmlElement(getElement().getParentNode());
     }
 
 
@@ -788,7 +788,7 @@ public abstract class HtmlElement {
      * @return The next sibling element in the document.
      */
     public HtmlElement getNextSibling() {
-        return getPage().getHtmlElement((Element)getElement().getNextSibling());
+        return getPage().getHtmlElement(getElement().getNextSibling());
     }
 
 
@@ -797,7 +797,7 @@ public abstract class HtmlElement {
      * @return The previous sibling element in the document.
      */
     public HtmlElement getPreviousSibling() {
-        return getPage().getHtmlElement((Element)getElement().getPreviousSibling());
+        return getPage().getHtmlElement(getElement().getPreviousSibling());
     }
 
 

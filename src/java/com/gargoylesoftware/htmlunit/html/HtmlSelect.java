@@ -110,7 +110,7 @@ public class HtmlSelect
 
         int i;
         for( i = 0; i < nodeCount; i++ ) {
-            allOptions.add( page.getHtmlElement( ( Element )nodeList.item( i ) ) );
+            allOptions.add( page.getHtmlElement( nodeList.item( i ) ) );
         }
 
         return Collections.unmodifiableList( allOptions );
