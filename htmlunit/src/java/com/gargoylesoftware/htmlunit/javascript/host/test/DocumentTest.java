@@ -257,7 +257,8 @@ public class DocumentTest extends WebTestCase {
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( new URL( "http://first" ) );
-
+        assertEquals("", firstPage.getTitleText());
+        
         final List expectedAlerts = Collections.singletonList("DIV");
         assertEquals( expectedAlerts, collectedAlerts );
     }

@@ -6,22 +6,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.javascript.FormElementsArray;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
 import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.NativeArray;
 
 /**
  * A javascript object representing a Form.

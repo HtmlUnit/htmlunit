@@ -9,7 +9,6 @@ package com.gargoylesoftware.htmlunit.jelly;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;

@@ -438,9 +438,6 @@ public class SimpleScriptable extends ScriptableObject {
             return (SimpleScriptable)scriptObject;
         }
 
-        final String fullClassName = htmlElement.getClass().getName();
-        final String className = fullClassName.substring( fullClassName.lastIndexOf(".") + 1 );
-
         final String javaScriptClassName;
         if( htmlElement instanceof HtmlButton ) {
             // TODO: The proper solution is to make HtmlButton abstract and have a hierarchy just like HtmlInput
