@@ -9,6 +9,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.javascript.FormElementsArray;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import java.io.IOException;
 import java.util.Arrays;
@@ -17,6 +18,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.NativeArray;
@@ -29,8 +31,9 @@ import org.mozilla.javascript.NativeArray;
  */
 public class Form extends HTMLElement {
 
-    private NativeArray jsElements_;
-    private Map overridingProperties_ = Collections.synchronizedMap(new HashMap(89));
+//    private NativeArray jsElements_;
+//    private Map overridingProperties_ = Collections.synchronizedMap(new HashMap(89));
+    private FormElementsArray formElementsArray_;
 
     /**
      * Create an instance.  A default constructor is required for all javascript objects.
@@ -52,85 +55,11 @@ public class Form extends HTMLElement {
      */
     public void initialize() {
 
-        getHtmlElementOrDie().setScriptObject(this);
-
-        final List allJsElements = new ArrayList();
-
-        final int attributes = READONLY;
-        final List elementList = getHtmlForm().getHtmlElementsByTagNames(
-            Arrays.asList( new String[]{
-                "input", "button", "option", "select", "textarea"
-            } ) );
-
-        final List radioButtons = new ArrayList();
-
-        final Iterator iterator = elementList.iterator();
-        while( iterator.hasNext() ) {
-            final HtmlElement htmlElement = (HtmlElement)iterator.next();
-            final String name = htmlElement.getAttributeValue("name");
-            if( name.length() != 0 ) {
-                final String className = getClassNameForHtmlElement(htmlElement);
-                final SimpleScriptable jsElement = makeJavaScriptObject( className );
-                jsElement.setHtmlElement(htmlElement);
-                htmlElement.setScriptObject(jsElement);
-                allJsElements.add(jsElement);
-
-                if( htmlElement instanceof HtmlRadioButtonInput ) {
-                    radioButtons.add(htmlElement);
-                }
-                else {
-                    overridingProperties_.put( name, jsElement );
-                }
-            }
-        }
-
-        final Scriptable array[] = new Scriptable[allJsElements.size()];
-        allJsElements.toArray(array);
-        jsElements_ = new NativeArray(array);
-        final Iterator scriptableIterator = allJsElements.iterator();
-        while( scriptableIterator.hasNext() ) {
-            final SimpleScriptable scriptable = (SimpleScriptable)scriptableIterator.next();
-            if( scriptable.getHtmlElementOrDie() instanceof HtmlRadioButtonInput == false ) {
-                final String name = scriptable.getHtmlElementOrDie().getAttributeValue("name");
-                jsElements_.defineProperty(name, scriptable, attributes);
-            }
-        }
-
-
-        // If the element is a radio button then set the value of the property to an array
-        // of radio buttons with the specified name
-        while( radioButtons.isEmpty() == false ) {
-            final List collectedRadioButtons = new ArrayList(radioButtons.size());
-            final Iterator radioButtonIterator = radioButtons.iterator();
-            final HtmlRadioButtonInput firstRadioButton
-                = (HtmlRadioButtonInput)radioButtonIterator.next();
-            final String radioButtonName = firstRadioButton.getNameAttribute();
-
-            Radio radioButton = (Radio)makeJavaScriptObject("Radio");
-            radioButton.setHtmlElement(firstRadioButton);
-            collectedRadioButtons.add(radioButton);
-            radioButtonIterator.remove();
-
-            while( radioButtonIterator.hasNext() ) {
-                HtmlRadioButtonInput eachRadioButton
-                    = (HtmlRadioButtonInput)radioButtonIterator.next();
-                if( eachRadioButton.getNameAttribute().equals(radioButtonName) ) {
-                    radioButton = (Radio)makeJavaScriptObject("Radio");
-                    radioButton.setHtmlElement(eachRadioButton);
-
-                    collectedRadioButtons.add(radioButton);
-                    radioButtonIterator.remove();
-                }
-            }
-            if( collectedRadioButtons.size() == 1 ) {
-                defineProperty(radioButtonName, radioButton, attributes);
-                jsElements_.defineProperty(radioButtonName, radioButton, attributes);
-            }
-            else {
-                final Radio radioArray[] = new Radio[collectedRadioButtons.size()];
-                defineProperty(radioButtonName, collectedRadioButtons.toArray(radioArray), attributes);
-                jsElements_.defineProperty(radioButtonName, collectedRadioButtons.toArray(radioArray), attributes);
-            }
+        final HtmlForm htmlForm = getHtmlForm();
+        htmlForm.setScriptObject(this);
+        if( formElementsArray_ == null ) {
+            formElementsArray_ = (FormElementsArray)makeJavaScriptObject("FormElementsArray");
+            formElementsArray_.initialize( htmlForm );
         }
     }
 
@@ -148,8 +77,8 @@ public class Form extends HTMLElement {
      * Return the value of the javascript attribute "elements".
      * @return The value of this attribute.
      */
-    public Scriptable jsGet_elements() {
-        return jsElements_;
+    public FormElementsArray jsGet_elements() {
+        return formElementsArray_;
     }
 
 
@@ -157,8 +86,8 @@ public class Form extends HTMLElement {
      * Return the value of the javascript attribute "length".
      * @return The value of this attribute.
      */
-    public long jsGet_length() {
-        return jsElements_.jsGet_length();
+    public int jsGet_length() {
+        return jsGet_elements().jsGet_length();
     }
 
 
@@ -279,39 +208,13 @@ public class Form extends HTMLElement {
              return super.get(name, start);
          }
 
-        final List elementList = htmlForm.getHtmlElementsByTagNames(
-            Arrays.asList( new String[]{
-                "input", "button", "option", "select", "textarea"
-            } ) );
-        HtmlElement htmlElement;
-        final Iterator iterator = elementList.iterator();
-        while( iterator.hasNext() ) {
-            htmlElement = (HtmlElement)iterator.next();
-            if( htmlElement.getAttributeValue("name").equals(name) ) {
-                if( htmlElement instanceof HtmlRadioButtonInput ) {
-                    final List collectedRadioButtons = new ArrayList(elementList.size());
-                    collectedRadioButtons.add(getScriptableFor(htmlElement));
-                    while( iterator.hasNext() ) {
-                        htmlElement = (HtmlElement)iterator.next();
-                        if( htmlElement instanceof HtmlRadioButtonInput
-                            && ((HtmlRadioButtonInput)htmlElement).getNameAttribute().equals(name) ) {
-                            collectedRadioButtons.add(getScriptableFor(htmlElement));
-                        }
-                    }
-                    if( collectedRadioButtons.size() == 1 ) {
-                        return collectedRadioButtons.get(0);
-                    }
-                    else {
-                        return new NativeArray( collectedRadioButtons.toArray() );
-                    }
-                }
-                else {
-                    return getScriptableFor(htmlElement);
-                }
-            }
-        }
-
-        return super.get(name, start);
+         if( formElementsArray_ != null ) {
+             final Object result = formElementsArray_.get( name, start );
+             if( result != NOT_FOUND ) {
+                 return result;
+             }
+         }
+         return super.get(name, start);
      }
 
 
@@ -322,7 +225,7 @@ public class Form extends HTMLElement {
       * @return The property.
       */
      public Object get( final int index, final Scriptable start ) {
-         return jsElements_.get(index, start);
+         return jsGet_elements().get(index, start);
      }
 }
 

@@ -114,6 +114,7 @@ public final class JavaScriptEngine extends ScriptEngine {
             }
 
             ScriptableObject.defineClass(parentScope, DocumentAllArray.class);
+            ScriptableObject.defineClass(parentScope, FormElementsArray.class);
 
             final Window window = (Window)newPageInfo.getContext().newObject(
                 parentScope, "Window", new Object[0]);
