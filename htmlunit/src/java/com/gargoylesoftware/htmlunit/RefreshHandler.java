@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -55,7 +56,8 @@ public interface RefreshHandler {
      * @param page The page that is going to be refreshed.
      * @param url The URL where the new page will be loaded.
      * @param seconds The number of seconds to wait before reloading the page.
+     * @throws IOException if the refresh fails
      */
-    void handleRefresh( final Page page, final URL url, final int seconds );
+    void handleRefresh( final Page page, final URL url, final int seconds ) throws IOException;
 
 }

@@ -7,6 +7,12 @@
 
     <body>
         <release version="next" date="unknown">
+            <action type="update" dev="yourgod">
+                A RefeshHandler can now throw IOExceptions instead of handling them.
+                Updated ImmediateRefeshHandler and ThreadedRefeshHandler to make refresh failures
+                exceptions instead of just log messages.
+                Added WaitingRefeshHandler for waiting real time on the current thread.
+            </action>
             <action type="update" dev="mguillem">
                 Javascript: the type property of input elements can now be changed.
             </action>       

@@ -981,7 +981,7 @@ public final class HtmlPage extends DomNode implements Page {
      * If a refresh has been specified either through a meta tag or an http
      * response header, then perform that refresh.
      */
-    private void executeRefreshIfNeeded() {
+    private void executeRefreshIfNeeded() throws IOException {
         // If this page is not in a frame then a refresh has already happened,
         // most likely through the javascript onload handler, so we don't do a
         // second refresh.
@@ -1036,7 +1036,7 @@ public final class HtmlPage extends DomNode implements Page {
             }
             catch( final MalformedURLException e ) {
                 getLog().error( "Malformed url in refresh string: " + refreshString, e );
-                return;
+                throw e;
             }
         }
 

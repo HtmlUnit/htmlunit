@@ -840,7 +840,13 @@ public class HtmlPageTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         assertInstanceOf(client.getRefreshHandler(), ImmediateRefreshHandler.class);
-        loadPage(firstContent);
+        try {
+            loadPage(firstContent);
+            fail("should have thrown");
+        } 
+        catch (final RuntimeException e){
+            assertTrue(e.getMessage().indexOf("could have caused an OutOfMemoryError") > -1);
+        }
         Thread.sleep(1000);
     }
 
