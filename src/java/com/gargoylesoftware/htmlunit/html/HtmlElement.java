@@ -243,7 +243,9 @@ public abstract class HtmlElement extends DomNode {
     public final void setEventHandler(final String eventName, final String jsSnippet) {
        
       BaseFunction function = new BaseFunction() {
-          private String eventHandlerWrapperName_;
+        private static final long serialVersionUID = 3257850965406068787L;
+        
+        private String eventHandlerWrapperName_;
           public Object call(final Context cx, final Scriptable scope,
             final Scriptable thisObj, final Object[] args)
             throws JavaScriptException {
