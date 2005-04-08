@@ -480,6 +480,30 @@ public class WindowTest extends WebTestCase {
         }
     }
 
+    /**
+     * Regression test to reproduce a known bug
+     * @throws Exception if the test fails
+     */
+    public void testOpenWindow_emptyUrl() throws Exception {
+        final String content
+            = "<html><head><script>"
+            + "var w = window.open('');"
+            + "alert(w ? w.document.location : w);"
+            + "</script></head>"
+            + "<body></body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlertsMoz = Arrays.asList( new String[] {"null"} ); 
+        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        createTestPageForRealBrowserIfNeeded(content, expectedAlertsMoz);
+        assertEquals(expectedAlertsMoz, collectedAlerts);
+        
+        collectedAlerts.clear();
+        final List expectedAlertsIE = Arrays.asList( new String[] {"about:blank"} ); 
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        createTestPageForRealBrowserIfNeeded(content, expectedAlertsIE);
+        assertEquals(expectedAlertsIE, collectedAlerts);
+    }
 
     /**
      * Regression test to reproduce a known bug

@@ -130,6 +130,23 @@ public class WebClient {
         = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
     private static URLStreamHandler AboutUrlStreamHandler_
         = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
+
+    /**
+     * URL for "about:blank"
+     */
+    public static final URL URL_ABOUT_BLANK;
+    static {
+        URL tmpUrl = null;
+        try {
+            tmpUrl = new URL(null, "about:blank", AboutUrlStreamHandler_);
+        }
+        catch (final MalformedURLException e) {
+            // impossible
+            e.printStackTrace();
+        }
+        URL_ABOUT_BLANK = tmpUrl;
+    }
+
     //singleton WebResponse for "about:blank"
     private static final WebResponse WEB_RESPONSE_FOR_ABOUT_BLANK = new WebResponse() {
         public int getStatusCode() {
@@ -148,14 +165,7 @@ public class WebClient {
             return TextUtil.toInputStream("");
         }
         public URL getUrl() {
-            try {
-                return new URL(null,"about:blank",AboutUrlStreamHandler_);
-            }
-            catch (final MalformedURLException e) {
-                // impossible
-                e.printStackTrace();
-                return null;
-            }
+            return URL_ABOUT_BLANK;
         }
         public List getResponseHeaders() {
             return Collections.EMPTY_LIST;

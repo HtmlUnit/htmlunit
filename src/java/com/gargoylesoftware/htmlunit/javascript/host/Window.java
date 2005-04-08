@@ -60,6 +60,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
@@ -186,7 +187,7 @@ public class Window extends SimpleScriptable {
      * @return The newly opened window
      */
     public static Object jsxFunction_open(
-        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
+        final Context context, final Scriptable scriptable, final Object[] args, final Function function ) {
 
         final String url = getStringArg(0, args, null);
         final String windowName = getStringArg(1, args, "");
@@ -213,9 +214,15 @@ public class Window extends SimpleScriptable {
     }
 
 
-    private URL makeUrlForOpenWindow( final String urlString ) {
-        if( urlString.length() == 0 ) {
-            return null;
+    private URL makeUrlForOpenWindow(final String urlString) {
+        if (urlString.length() == 0) {
+            // IE handles "" as "about:blank" in window.open
+            if (getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+                return WebClient.URL_ABOUT_BLANK;
+            }
+            else {
+                return null;
+            }
         }
 
         try {
