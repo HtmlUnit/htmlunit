@@ -242,7 +242,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "</configuration>\n";
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
-        final JavaScriptConfiguration configuration = JavaScriptConfiguration.getTestInstance();
+        final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
             Document.class.getName(), null, null, true);
         expectedConfig.addProperty("readyState", true, false);
@@ -486,7 +486,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception Exception on error
      */
     public void testConfigurationFile() throws Exception {
-        final JavaScriptConfiguration configuration = JavaScriptConfiguration.getTestInstance();
+        final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
         
         Iterator it = configuration.keyIterator();
         while (it.hasNext()) {
@@ -504,20 +504,20 @@ public class JavaScriptConfigurationTest extends WebTestCase {
                 if (name.startsWith("jsxGet_")) {
                     elementName = name.substring(7);
                     theMethod = configuration.getPropertyReadMethod(classname, elementName);
-                    assertNotNull("No definition found for " + name + " defined in " + clazz.getName(), 
-                        theMethod);
+                    assertNotNull("No definition found for " + name + " defined in " + clazz.getName()
+                        + " for object " + classname, theMethod);
                 }
                 else if (name.startsWith("jsxSet_")) {
                     elementName = name.substring(7);
                     theMethod = configuration.getPropertyWriteMethod(classname, elementName);
-                    assertNotNull("No definition found for " + name + " defined in " + clazz.getName(), 
-                        theMethod);
+                    assertNotNull("No definition found for " + name + " defined in " + clazz.getName()
+                        + " for object " + classname, theMethod);
                 } 
                 else if (name.startsWith("jsxFunction_")) {
                     elementName = name.substring(12);
                     theMethod = configuration.getFunctionMethod(classname, elementName);
-                    assertNotNull("No definition found for " + name + " defined in " + clazz.getName(), 
-                        theMethod);
+                    assertNotNull("No definition found for " + name + " defined in " + clazz.getName()
+                        + " for object " + classname, theMethod);
                 }
             }
         }

@@ -61,10 +61,10 @@ public final class ClassConfiguration {
     /**
      * The fully qualified name of the class that implements this class.
      */
-    private String className_;
-    private Class linkedClass_;
-    //private Class htmlClass_;
-    private boolean jsObject_;
+    private final String className_;
+    private final Class linkedClass_;
+    private final String htmlClassname_;
+    private final boolean jsObject_;
     
     /**
      * Constructor
@@ -84,7 +84,10 @@ public final class ClassConfiguration {
         linkedClass_ = Class.forName(implementingClass);
         jsObject_ = jsObject;
         if (htmlClass != null && htmlClass.length() != 0) {
-            //htmlClass_ = Class.forName(htmlClass);
+            htmlClassname_ = htmlClass;
+        }
+        else {
+            htmlClassname_ = null;
         }
     }
     
@@ -96,12 +99,6 @@ public final class ClassConfiguration {
         return className_;
     }
 
-    /**
-     * @param className The className to set.
-     */
-    public void setClassName(final String className) {
-        className_ = className;
-    }
 
     /**
      * Add the property to the configuration
@@ -316,9 +313,16 @@ public final class ClassConfiguration {
     public Class getLinkedClass() {
         return linkedClass_;
     }
+    
+    /**
+     * @return Returns the htmlClassname.
+     */
+    public String getHtmlClassname() {
+        return htmlClassname_;
+    }
 
     /**
-     * @return Returns the jsObject_.
+     * @return Returns the jsObject.
      */
     public boolean isJsObject() {
         return jsObject_;
@@ -522,4 +526,5 @@ public final class ClassConfiguration {
             return browserName_;
         }
     }
+
 }

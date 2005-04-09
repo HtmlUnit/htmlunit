@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+			<action type="update" dev="cerskine">
+				Now load the mapping of html classes to their respective JS classes from the configuration
+				file.
+			</action>
             <action type="update" dev="mguillem" id="1179134">
                 Javascript: when simulating IE, window.open("") handles empty string as "about:blank".
             </action>

@@ -86,7 +86,8 @@ public final class JavaScriptConfiguration {
 
     private static Map ConfigurationMap_ = new HashMap(11);
     private static HashMap ClassnameMap_ = new HashMap();
-
+    private static Map HtmlJavaScriptMap_;
+    
     private final Map configuration_;
     private final BrowserVersion browser_;
 
@@ -165,8 +166,6 @@ public final class JavaScriptConfiguration {
             final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware( true );
             factory.setValidating( false );
-//            factory.setNamespaceAware( false );
-//            factory.setValidating( true );
 
             final DocumentBuilder documentBuilder = factory.newDocumentBuilder();
             documentBuilder.setErrorHandler( new StrictErrorHandler() );
@@ -207,13 +206,13 @@ public final class JavaScriptConfiguration {
 
 
     /**
-     * Return the instance that represents the configuration for all browsers.  This is a superset
-     * of a configuration which is used for validation of the system only.
-     * @return The instance for the specified {@link BrowserVersion}
+     * Return the configuration that has all entries.  No constraints are put on the returned
+     * entries.
+     * 
+     * @return The instance containing all entries from the configuration file.
      */
-    protected static JavaScriptConfiguration getTestInstance() {
-        JavaScriptConfiguration configuration = 
-            new JavaScriptConfiguration(null);
+    static JavaScriptConfiguration getAllEntries() {
+        JavaScriptConfiguration configuration = new JavaScriptConfiguration(null);
         return configuration;
     }
 
@@ -557,7 +556,6 @@ public final class JavaScriptConfiguration {
         ClassConfiguration config;
         Method theMethod;
         while (classname.length() > 0) {
-            getLog().debug("Test for getter " + propertyName + " in class " + classname);
             config = (ClassConfiguration) configuration_.get(classname);
             if (config == null) {
                 return null;
@@ -576,7 +574,6 @@ public final class JavaScriptConfiguration {
         String workname = classname;
         ClassConfiguration config;
         while (workname.length() > 0) {
-            getLog().debug("Test for property " + propertyName + " in class " + workname);
             config = (ClassConfiguration) configuration_.get(workname);
             final ClassConfiguration.PropertyInfo info = config.getPropertyInfo(propertyName);
             if (info != null) {
@@ -608,7 +605,6 @@ public final class JavaScriptConfiguration {
         ClassConfiguration config;
         Method theMethod;
         while (classname.length() > 0) {
-            getLog().debug("Test for setter " + propertyName + " in class " + classname);
             config = (ClassConfiguration) configuration_.get(classname);
             theMethod = config.getPropertyWriteMethod(propertyName);
             if (theMethod != null) {
@@ -642,7 +638,6 @@ public final class JavaScriptConfiguration {
         ClassConfiguration config;
         Method theMethod;
         while (classname.length() > 0) {
-            getLog().debug("Test for function " + functionName + " in class " + classname);
             config = (ClassConfiguration) configuration_.get(classname);
             theMethod = config.getFunctionMethod(functionName);
             if (theMethod != null) {
@@ -695,4 +690,49 @@ public final class JavaScriptConfiguration {
         }
         return name;
     }
+
+    /**
+     * Return an immutable map containing the html to javascript mappings.  Keys are
+     * java classes for the various html classes (ie HtmlInput.class) and the values
+     * are the javascript class names (ie "Anchor").
+     * @return the mappings
+     */
+    public static Map getHtmlJavaScriptMapping() {
+        if( HtmlJavaScriptMap_ != null ) {
+            return HtmlJavaScriptMap_;
+        }
+        final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
+        
+        final Iterator it = configuration.keyIterator();
+        String jsClassname;
+        String htmlClassname;
+        ClassConfiguration classConfig;
+        Class htmlClass;
+        final Map map = new HashMap();
+
+        while (it.hasNext()) {
+            jsClassname = (String) it.next();
+            classConfig = configuration.getClassConfiguration(jsClassname);
+            htmlClassname = classConfig.getHtmlClassname();
+            if (htmlClassname != null) {
+                try {
+                    htmlClass = Class.forName(htmlClassname);
+                    // preload and validate that the class exists
+                    getLog().debug("Mapping " + htmlClass.getName() + " to " + jsClassname);
+                    while (!classConfig.isJsObject()) {
+                        jsClassname = classConfig.getExtendedClass();
+                        classConfig = configuration.getClassConfiguration(jsClassname);
+                        getLog().debug("   testing to use " + jsClassname);
+                    }
+
+                    map.put( htmlClass, jsClassname );
+                }
+                catch( final ClassNotFoundException e ) {
+                    throw new NoClassDefFoundError(e.getMessage());
+                }
+            }
+        }
+        HtmlJavaScriptMap_ = Collections.unmodifiableMap(map);
+        return HtmlJavaScriptMap_;
+    }    
 }

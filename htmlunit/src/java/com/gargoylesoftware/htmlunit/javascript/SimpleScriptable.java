@@ -39,8 +39,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.collections.Transformer;
@@ -72,8 +70,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 public class SimpleScriptable extends ScriptableObject {
     private static final long serialVersionUID = 3120000176890886780L;
     
-    private static Map HtmlJavaScriptMap_ = null;
-
     private JavaScriptEngine.PageInfo pageInfo_;
     private DomNode domNode_;
 
@@ -92,58 +88,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @return the mappings
      */
     public static synchronized Map getHtmlJavaScriptMapping() {
-        if( HtmlJavaScriptMap_ != null ) {
-            return HtmlJavaScriptMap_;
-        }
-
-        final String[][] mapping = {
-            {"DomText", "TextImpl"},
-            {"HtmlAnchor", "Anchor"},
-            {"HtmlArea", "FocusableHostElement"},
-            {"HtmlButton", "Button"},
-            {"HtmlButtonInput", "Input"},
-            {"HtmlCheckBoxInput", "Input"},
-            {"HtmlFileInput", "Input"},
-            {"HtmlForm", "Form"},
-            {"HtmlHiddenInput", "Input"},
-            {"HtmlImage", "Image"},
-            {"HtmlImageInput", "Input"},
-            {"HtmlFrame", "Frame"},
-            {"HtmlInlineFrame", "Frame"},
-            {"HtmlLabel", "FocusableHostElement"},
-            {"HtmlOption", "Option"},
-            {"HtmlPasswordInput", "Input"},
-            {"HtmlRadioButtonInput", "Input"},
-            {"HtmlResetInput", "Input"},
-            {"HtmlSelect", "Select"},
-            {"HtmlSubmitInput", "Input"},
-            {"HtmlTable", "Table"},
-            {"HtmlTableBody", "TableBody"},
-            {"HtmlTableFooter", "TableFooter"},
-            {"HtmlTableHeader", "TableHeader"},
-            {"HtmlTableRow", "TableRow"},
-            {"HtmlTextInput", "Input"},
-            {"HtmlTextArea", "Textarea"},
-            {"HtmlElement", "HTMLElement"},
-        };
-
-        final Map map = new HashMap();
-        for( int i=0; i<mapping.length; i++ ) {
-            final String htmlClassName = mapping[i][0];
-            final String javaScriptClassName = mapping[i][1];
-
-            try {
-                final Class htmlClass = Class.forName("com.gargoylesoftware.htmlunit.html."+htmlClassName);
-                Class.forName("com.gargoylesoftware.htmlunit.javascript.host."+javaScriptClassName);
-                map.put( htmlClass, javaScriptClassName );
-            }
-            catch( final ClassNotFoundException e ) {
-                throw new NoClassDefFoundError(e.getMessage());
-            }
-        }
-
-        HtmlJavaScriptMap_ = Collections.unmodifiableMap(map);
-        return map;
+        return JavaScriptConfiguration.getHtmlJavaScriptMapping();
     }
 
 
