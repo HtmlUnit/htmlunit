@@ -160,7 +160,6 @@ public final class JavaScriptEngine extends ScriptEngine {
                 if (config.isJsObject()) {
                     final Class jsHostClass = config.getLinkedClass();
                     ScriptableObject.defineClass(parentScope, jsHostClass);
-    // FIXME - add the method code here
                     final ScriptableObject prototype = (ScriptableObject) ScriptableObject
                         .getClassPrototype(parentScope, jsClassName);
   
@@ -177,20 +176,11 @@ public final class JavaScriptEngine extends ScriptEngine {
                         final FunctionObject functionObject = new FunctionObject(entryKey, 
                                 config.getFunctionMethod(entryKey), prototype);
                         prototype.defineProperty(entryKey, functionObject, 0);
-//        FunctionObject f = new FunctionObject(name, m, this);
-//        defineProperty(name, f, attributes);
                     }
                         
                 }
             }
             
-            
-//    Class c = Class.forName("com.gargoylesoftware.htmlunit.javascript.host.Document");
-//    ScriptableObject.defineClass(parentScope, c);
-//    Method m = c.getMethod("jsxGet_readyState", null);
-//    ScriptableObject s = (ScriptableObject) ScriptableObject.getClassPrototype(parentScope, "Document");
-//    s.defineProperty("readyState", null, m, null, 0);
-
             ScriptableObject.defineClass(parentScope, ElementArray.class);
             ScriptableObject.defineClass(parentScope, OptionsArray.class);
 
