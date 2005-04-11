@@ -245,4 +245,36 @@ public class NodeImplTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+    
+    /**
+     * Regression test to verify that insertBefore correctly appends
+     * the new child object when the reference child object is null.
+     * @throws Exception if the test fails
+     */
+    public void test_insertBefore_nullRef() throws Exception {
+        final String content = "<html><head><title>test_insertBefore</title>"
+                        + "<script>"
+                        + "function doTest() {"
+                        + "var nodeToInsert = document.getElementById('nodeToInsert');"
+                        + "var aNode = document.getElementById('myNode');"
+                        + "aNode.insertBefore(nodeToInsert, null);"
+                        + "alert(aNode.childNodes.length);"
+                        + "alert(aNode.childNodes[2].nodeName);"
+                        + "}"
+                        + "</script>"
+                        + "</head><body onload='doTest()'>"
+                        + "<h2 id='nodeToInsert'>Bottom</h2>"
+                        + "<div id='myNode'><span>Child Node 1-A</span>"
+                        + "<h1>Child Node 2-A</h1></div>"
+                        + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+
+        final List expectedAlerts = Arrays.asList(new String[] { "3", "H2" });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("test_insertBefore", page.getTitleText());
+        assertEquals(expectedAlerts, collectedAlerts);
+    }    
 }
