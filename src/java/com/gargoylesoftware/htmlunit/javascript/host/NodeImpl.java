@@ -172,8 +172,7 @@ public class NodeImpl extends SimpleScriptable {
             final Object newChildObject, final Object refChildObject) {
         Object appendedChild = null;
 
-        if (newChildObject instanceof NodeImpl &&
-            refChildObject instanceof NodeImpl) {
+        if (newChildObject instanceof NodeImpl) {
 
             final DomNode newChildNode =
                 ((NodeImpl) newChildObject).getDomNodeOrDie();
@@ -190,6 +189,9 @@ public class NodeImpl extends SimpleScriptable {
             if (refChildNode != null ) {
                 refChildNode.insertBefore(newChildNode);
                 appendedChild = newChildObject;
+            }
+            else {
+                getDomNodeOrDie().appendChild(newChildNode);
             }
         }
         return appendedChild;
