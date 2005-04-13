@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -130,4 +131,27 @@ public class FrameTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
     
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testContentDocument() throws Exception {
+        final String content
+            = "<html><head><title>first</title>"
+                + "<script>"
+                + "function test()\n"
+                + "{\n"
+                + "  alert(document.getElementById('myFrame').contentDocument == frames.foo.document);\n"
+                + "}\n"
+                + "</script></head>"
+                + "<frameset rows='*' onload='test()'>"
+                + "<frame name='foo' id='myFrame' src='about:blank'/>"
+                + "</frameset>"
+                + "</html>";
+        final List expectedAlerts = Arrays.asList( new String[]{"true"} );
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

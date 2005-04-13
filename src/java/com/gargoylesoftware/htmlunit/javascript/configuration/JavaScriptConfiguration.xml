@@ -223,6 +223,9 @@
             <browser name="Netscape" min-version="3"/>
         </property>
         <property name="src" readable="true" writable="true"/>
+        <property name="contentDocument" readable="true" writable="false">
+            <browser name="Netscape"/>
+        </property>
     </class>
 
 

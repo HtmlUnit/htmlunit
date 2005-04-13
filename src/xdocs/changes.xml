@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                Javascript: implemented property contentDocument for frames and iframes on Mozilla.
+            </action>
             <action type="update" dev="mguillem" id="1180352" due-to="George Murnock">
                 Javascript: fixed error occuring in NodeImpl insertBefore() with null reference child object.
             </action>
