@@ -37,11 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.Page;
-
 import java.io.IOException;
 import java.util.Map;
+
+import org.mozilla.javascript.Function;
+import org.mozilla.javascript.Scriptable;
+
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
  *  Wrapper for the html element "input"
@@ -98,7 +102,8 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     public void setChecked( final boolean isChecked ) {
         final HtmlForm form = getEnclosingForm();
-
+        final boolean changed = isChecked() != isChecked;
+        
         if( isChecked ) {
             try {
                 form.setCheckedRadioButton( getNameAttribute(), getValueAttribute() );
@@ -110,6 +115,16 @@ public class HtmlRadioButtonInput extends HtmlInput {
         }
         else {
             removeAttribute( "checked" );
+        }
+        
+        final Function onchangeHandler = getEventHandler("onchange");
+        final HtmlPage page = getPage();
+
+        if (changed && onchangeHandler != null && page.getWebClient().isJavaScriptEnabled()) {
+            final Event event = new Event(this, getScriptObject());
+            final Object[] args = new Object[] {event};
+            page.executeJavaScriptFunctionIfPossible(
+                onchangeHandler, (Scriptable) getScriptObject(), args, this);
         }
     }
 

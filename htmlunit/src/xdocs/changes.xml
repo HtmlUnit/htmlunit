@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1183019" due-to="Chris Eldredge">
+                Javascript: the onchange event handler of a radio button is now invoked when its state is changed.
+            </action>
             <action type="update" dev="mguillem">
                 Javascript: implemented property contentDocument for frames and iframes on Mozilla.
             </action>
