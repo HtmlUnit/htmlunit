@@ -74,4 +74,52 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         radio.setChecked(true);
         assertEquals("checked", radio.asText());
     }
+        
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testOnchangeHandlerInvoked() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "    <input type='radio' name='radio' id='radio'"
+            + "onchange='this.value=\"new\" + this.checked'>Check me</input>"
+            + "</form></body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+        
+        final HtmlRadioButtonInput radio = (HtmlRadioButtonInput) page.getHtmlElementById("radio");
+        
+        assertFalse(radio.isChecked());
+        
+        radio.setChecked(true);
+        
+        assertTrue(radio.isChecked());
+        
+        assertEquals("newtrue", radio.getValueAttribute());
+    }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testOnchangeHandlerNotInvokedIfNotChanged() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "    <input type='radio' name='radio' id='radio'"
+            + "onchange='this.value=\"new\" + this.checked'>Check me</input>"
+            + "</form></body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+        
+        final HtmlRadioButtonInput radio = (HtmlRadioButtonInput) page.getHtmlElementById("radio");
+        
+        assertFalse(radio.isChecked());
+        
+        radio.setChecked(false);
+        
+        assertFalse(radio.isChecked());
+        
+        assertEquals("on", radio.getValueAttribute());
+    }
 }
