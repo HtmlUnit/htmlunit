@@ -42,7 +42,6 @@ import java.net.MalformedURLException;
 import org.mozilla.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
@@ -55,6 +54,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Chris Erskine
+ * @author Marc Guillemot
  */
 public class Image extends HTMLElement {
 
@@ -98,14 +98,11 @@ public class Image extends HTMLElement {
      * @return the src attribute
      */
     public String jsxGet_src() {
-        WebClient webClient = JavaScriptEngine.getWebClientForCurrentThread();
-        HtmlPage currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
-        
-        HtmlElement htmlImageElement = getHtmlElementOrNull();
-        if ( htmlImageElement != null ) {
-            String srcValue = htmlImageElement.getAttributeValue( "src" );
+        final HtmlImage htmlImageElement = (HtmlImage) getHtmlElementOrNull();
+        if (htmlImageElement != null) {
+            final String srcValue = htmlImageElement.getSrcAttribute();
             try {
-                return currentPage.getFullyQualifiedUrl(srcValue).toExternalForm();
+                return htmlImageElement.getPage().getFullyQualifiedUrl(srcValue).toExternalForm();
             } 
             catch (final MalformedURLException e) {
                 throw Context.reportRuntimeError("Unable to create fully qualified URL for src attribute of image: " 
@@ -113,6 +110,12 @@ public class Image extends HTMLElement {
             }
         }
         else {
+            // this is an image instantiated in js with "new Image()" and not yet added to the DOM tree.
+            // this way to get the "active" page is probably wrong because there is no reason 
+            // that the page in which script is currently executed is contained the current window of the "browser"
+            // but as long as we don't have a clean way to get the page from the js Context...
+            final WebClient webClient = JavaScriptEngine.getWebClientForCurrentThread();
+            final HtmlPage currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
             try {
                 return currentPage.getFullyQualifiedUrl(src_).toExternalForm();
             }
@@ -123,4 +126,3 @@ public class Image extends HTMLElement {
         }
     }
 }
-
