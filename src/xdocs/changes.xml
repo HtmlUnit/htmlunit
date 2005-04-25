@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="yourgod">
+                Upgraded commons-httpclient to version 3.0rc2
+            </action>        
             <action type="update" dev="mguillem" id="1188143" due-to="Bruce Faulkner">
                 Javascript: insertRow now accepts the number of rows as parameter value.
             </action>
