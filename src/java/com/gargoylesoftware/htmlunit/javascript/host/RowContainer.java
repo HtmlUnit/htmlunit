@@ -136,10 +136,10 @@ public class RowContainer extends HTMLElement {
         else {
             r = rowIndex.intValue();
         }
-        final boolean rowIndexValid = (r >= 0 && r < rows.jsGet_length());
+        final boolean rowIndexValid = (r >= 0 && r <= rows.jsGet_length());
         if (rowIndexValid) {
             final HtmlElement newRow = rowContainer.getDomNodeOrDie().getPage().createElement("tr");
-            if (rows.jsGet_length() == 0) {
+            if (rows.jsGet_length() == 0 || (r == rows.jsGet_length())) {
                 rowContainer.getDomNodeOrDie().appendChild(newRow);
             }
             else {
