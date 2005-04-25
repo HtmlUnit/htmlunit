@@ -109,7 +109,7 @@
     <delete dir="${test.data.dir}"/>
     <mkdir dir="${test.data.dir}"/>
         
-    <junit fork="true" forkmode="perBatch" 
+    <junit fork="true" forkmode="perBatch" dir="${basedir}"
             errorProperty="test.failed" failureProperty="test.failed">
         <classpath refid="test.class.path"/>
         <formatter type="brief" usefile="false"/>
