@@ -139,5 +139,30 @@ public class ImageTest extends WebTestCase {
         
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
-    }      
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void test_AttributeName() throws Exception {
+        final String content
+            = "<html><head><title></title><script>"
+            + "function test()\n"
+            + "{\n"
+            + "  var oImg = document.getElementById('myImage');\n"
+            + "  oImg.name = 'foo';\n"
+            + "  alert(oImg.name);\n"
+            +"}\n"
+            + "</script></head><body onload='test()'>"
+            + "<img src='foo.png' id='myImage'>"
+            + "</body></html>";
+
+        final List expectedAlerts = Arrays.asList(new String[]{"foo"});
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }
