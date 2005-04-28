@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1183971" due-to="Bruce Faulkner">
+                Javascript: fixed exception occuring while changing type of input created via document.createElement().
+            </action>
             <action type="update" dev="yourgod">
                 Upgraded commons-httpclient to version 3.0rc2
             </action>        

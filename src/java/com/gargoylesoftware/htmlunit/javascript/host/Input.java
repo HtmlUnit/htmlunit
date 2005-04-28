@@ -77,7 +77,8 @@ public class Input extends FormField {
      * @param newType the new type to set
      */
     public void jsxSet_type(final String newType) {
-        final HtmlInput input = getHtmlInputOrDie();
+        HtmlInput input = getHtmlInputOrDie();
+
         if (!input.getTypeAttribute().equalsIgnoreCase(newType)) {
             final AttributesImpl attributes = readAttributes(input);
             final int index = attributes.getIndex("type");
@@ -85,7 +86,21 @@ public class Input extends FormField {
 
             final HtmlInput newInput = (HtmlInput) InputElementFactory.instance
                 .createElement(input.getPage(), "input", attributes);
-            input.replace(newInput);
+
+            // Added check to make sure there is a previous sibling before trying to replace
+            // newly created input variable which has yet to be inserted into DOM tree
+            if(input.getPreviousSibling() != null) {
+                // if the input has a previous sibling, then it was already in the
+                // DOM tree and can be replaced
+                input.replace(newInput);
+            }            
+            else {
+                // the input hasn't yet been inserted into the DOM tree (likely has been
+                // created via document.createElement()), so simply replace it with the
+                // new Input instance created in the code above
+                input = newInput;
+            }
+            
             input.setScriptObject(null);
             setDomNode(newInput, true);
         }
