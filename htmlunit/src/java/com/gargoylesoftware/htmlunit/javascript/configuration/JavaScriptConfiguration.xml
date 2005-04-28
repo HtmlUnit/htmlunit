@@ -418,7 +418,7 @@
         </function>
     </class>
 
-    <class name="Image" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Image"
+    <class name="Image" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Image"
 		JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
         <property name="src" readable="true" writable="true"/>
     </class>
