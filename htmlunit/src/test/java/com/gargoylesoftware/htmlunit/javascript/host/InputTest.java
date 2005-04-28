@@ -619,4 +619,30 @@ public class InputTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testCreateInputAndChangeType() throws Exception {
+        final String content
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var input = document.createElement('INPUT');\n"
+            + "    alert(input.type);\n"
+            + "    input.type = 'hidden';\n"
+            + "    alert(input.type);\n"
+            + "    myForm.appendChild(input);"
+            + "}\n</script></head>"
+            + "<body onload='doTest()'>\n"
+            + "<form name='myForm' action='foo'>\n"
+            + "</form></body></html>";
+
+        final List expectedAlerts = Arrays.asList( new String[]{"text", "hidden"} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
 }
