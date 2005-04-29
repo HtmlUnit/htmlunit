@@ -84,6 +84,15 @@ public abstract class WebConnection {
         proxyPort_ = proxyPort;
     }
 
+    /**
+     *  Submit a request and retrieve a response
+     *
+     * @param  webRequestSettings Settings to make the request with
+     * @return  See above
+     * @exception  IOException If an IO error occurs
+     */
+    public abstract WebResponse getResponse(final WebRequestSettings webRequestSettings)
+        throws IOException;
 
     /**
      *  Submit a request and retrieve a response
@@ -94,14 +103,21 @@ public abstract class WebConnection {
      * @param  requestHeaders Any headers that need to be put into the request.
      * @return  See above
      * @exception  IOException If an IO error occurs
+     * @deprecated Use {@link #getResponse(WebRequestSettings)}
      */
-    public abstract WebResponse getResponse(
+    public WebResponse getResponse(
             final URL url,
             final SubmitMethod submitMethod,
             final List parameters,
             final Map requestHeaders )
         throws
-            IOException;
+            IOException {
+        final WebRequestSettings wrs = new WebRequestSettings(url);
+        wrs.setSubmitMethod(submitMethod);
+        wrs.setRequestParameters(parameters);
+        wrs.setAdditionalHeaders(requestHeaders);
+        return getResponse(wrs);
+    }
 
     /**
      *  Submit a request and retrieve a response
@@ -113,15 +129,23 @@ public abstract class WebConnection {
      * @param  requestHeaders Any headers that need to be put into the request.
      * @return  See above
      * @exception  IOException If an IO error occurs
+     * @deprecated Use {@link #getResponse(WebRequestSettings)}
      */
-    public abstract WebResponse getResponse(
+    public WebResponse getResponse(
             final URL url,
             final FormEncodingType encType,
             final SubmitMethod submitMethod,
             final List parameters,
             final Map requestHeaders )
         throws
-            IOException;
+            IOException {
+        final WebRequestSettings wrs = new WebRequestSettings(url);
+        wrs.setEncodingType(encType);
+        wrs.setSubmitMethod(submitMethod);
+        wrs.setRequestParameters(parameters);
+        wrs.setAdditionalHeaders(requestHeaders);
+        return getResponse(wrs);
+    }
 
     /**
      * Return the web client

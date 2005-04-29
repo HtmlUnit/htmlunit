@@ -43,7 +43,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -192,10 +191,7 @@ public class HTMLParserTest extends WebTestCase {
         
         final WebClient webClient = new WebClient();
         final WebResponse webResponse = new HttpWebConnection(webClient).getResponse(
-                htmlUnitSite,
-                SubmitMethod.GET,
-                Collections.EMPTY_LIST,
-                Collections.EMPTY_MAP
+                new WebRequestSettings(htmlUnitSite)
         );
 
         final HtmlPage page = HTMLParser.parse(webResponse, webClient.getCurrentWindow());

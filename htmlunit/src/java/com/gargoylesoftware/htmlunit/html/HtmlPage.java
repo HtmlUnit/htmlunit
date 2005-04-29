@@ -61,9 +61,9 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -806,8 +806,8 @@ public final class HtmlPage extends DomNode implements Page {
         getPageEncoding();
         try {
             url = getFullyQualifiedUrl(urlString);
-            final WebResponse webResponse= getWebClient().loadWebResponse(
-                url, SubmitMethod.GET, Collections.EMPTY_LIST);
+            final WebRequestSettings requestSettings = new WebRequestSettings(url);
+            final WebResponse webResponse = getWebClient().loadWebResponse(requestSettings);
             if( webResponse.getStatusCode() == 200 ) {
                 final String contentType = webResponse.getContentType();
                 final String contentCharset = webResponse.getContentCharSet();

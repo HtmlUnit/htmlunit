@@ -41,17 +41,15 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebConnection;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
@@ -102,32 +100,11 @@ public class DebuggingWebConnection extends WebConnection {
     
     /**
      * Calls the wrapped webconnection and save the received response.
-     * @see com.gargoylesoftware.htmlunit.WebConnection#getResponse(URL, 
-     * FormEncodingType, SubmitMethod, List, Map)
+     * @see com.gargoylesoftware.htmlunit.WebConnection#getResponse(WebRequestSettings)
      */
-    public WebResponse getResponse(final URL url, final FormEncodingType encType,
-        final SubmitMethod submitMethod, final List parameters, final Map requestHeaders)
-        throws IOException {
-        final WebResponse response = wrappedWebConnection_.getResponse(url, encType,
-                submitMethod, parameters, requestHeaders);
-        saveResponse(response, submitMethod);
-
-        return response;
-    }
-
-
-    /**
-     * Calls the wrapped webconnection and save the received response.
-     * @see com.gargoylesoftware.htmlunit.WebConnection#getResponse(URL, 
-     * SubmitMethod, List, Map)
-     */
-    public WebResponse getResponse(final URL url, final SubmitMethod submitMethod,
-            final List parameters, final Map requestHeaders) throws IOException {
-
-        final WebResponse response = wrappedWebConnection_.getResponse(url,
-                submitMethod, parameters, requestHeaders);
-        saveResponse(response, submitMethod);
-
+    public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
+        final WebResponse response = wrappedWebConnection_.getResponse(webRequestSettings);
+        saveResponse(response, webRequestSettings.getSubmitMethod());
         return response;
     }
 
