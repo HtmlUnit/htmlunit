@@ -313,10 +313,18 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
+     * @see #getForms
+     * @deprecated Use {@link #getForms} instead. 
+     */
+    public List getAllForms() {
+        return getForms();
+    }
+    
+    /**
      * Return a list of all the forms in the page.
      * @return All the forms.
      */
-    public List getAllForms() {
+    public List getForms() {
         return getDocumentElement().getHtmlElementsByTagNames( Arrays.asList(new String[]{"form"}) );
     }
 

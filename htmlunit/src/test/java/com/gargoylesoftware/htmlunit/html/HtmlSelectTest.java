@@ -90,7 +90,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
 
         // Test that the select is being correctly identified as a submittable element
-        assertCollectionsEqual(Arrays.asList(new Object[] {select, button}), form.getAllSubmittableElements(button));
+        assertCollectionsEqual(Arrays.asList(new Object[] {select, button}), form.getSubmittableElements(button));
 
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
@@ -361,7 +361,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testGetAllOptions() throws Exception {
+    public void testGetOptions() throws Exception {
 
         final String htmlContent = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'><select name='select1'>"
@@ -384,7 +384,7 @@ public class HtmlSelectTest extends WebTestCase {
         expectedOptions.add(select.getOptionByValue("option2"));
         expectedOptions.add(select.getOptionByValue("option3"));
 
-        assertEquals(expectedOptions, select.getAllOptions());
+        assertEquals(expectedOptions, select.getOptions());
     }
 
     /**
@@ -476,7 +476,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     private void checkOptions(final HtmlSelect select) {
-        final List options = select.getAllOptions();
+        final List options = select.getOptions();
         if (options.isEmpty()) {
             assertNull(select.getFirstChild());
             assertNull(select.getLastChild());
@@ -503,7 +503,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlSelect theSelect = (HtmlSelect) page.getHtmlElementById("theSelect");
         assertNotNull(theSelect);
 
-        assertEquals(4, theSelect.getAllOptions().size());
+        assertEquals(4, theSelect.getOptions().size());
         assertEquals("a", theSelect.getOption(0).getValue());
         assertEquals("b", theSelect.getOption(1).getValue());
         assertEquals("c", theSelect.getOption(2).getValue());
@@ -512,7 +512,7 @@ public class HtmlSelectTest extends WebTestCase {
         // remove from the middle
         theSelect.getOption(1).remove();
         checkOptions(theSelect);
-        assertEquals(3, theSelect.getAllOptions().size());
+        assertEquals(3, theSelect.getOptions().size());
         assertEquals("a", theSelect.getOption(0).getValue());
         assertEquals("c", theSelect.getOption(1).getValue());
         assertEquals("d", theSelect.getOption(2).getValue());
@@ -520,20 +520,20 @@ public class HtmlSelectTest extends WebTestCase {
         // remove from the end
         theSelect.getOption(2).remove();
         checkOptions(theSelect);
-        assertEquals(2, theSelect.getAllOptions().size());
+        assertEquals(2, theSelect.getOptions().size());
         assertEquals("a", theSelect.getOption(0).getValue());
         assertEquals("c", theSelect.getOption(1).getValue());
 
         // remove from the front
         theSelect.getOption(0).remove();
         checkOptions(theSelect);
-        assertEquals(1, theSelect.getAllOptions().size());
+        assertEquals(1, theSelect.getOptions().size());
         assertEquals("c", theSelect.getOption(0).getValue());
 
         // remove from the last one
         theSelect.getOption(0).remove();
         checkOptions(theSelect);
-        assertEquals(0, theSelect.getAllOptions().size());
+        assertEquals(0, theSelect.getOptions().size());
     }
 
     /** @throws Exception If the test fails */
@@ -551,18 +551,18 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlSelect theSelect = (HtmlSelect) page.getHtmlElementById("theSelect");
 
         assertNotNull(theSelect);
-        assertEquals(3, theSelect.getAllOptions().size());
+        assertEquals(3, theSelect.getOptions().size());
 
         appendOption(theSelect, "d");
-        assertEquals(4, theSelect.getAllOptions().size());
+        assertEquals(4, theSelect.getOptions().size());
         assertEquals("d", theSelect.getOption(3).getValue());
 
         theSelect.setOptionSize(1);
-        assertEquals(1, theSelect.getAllOptions().size());
+        assertEquals(1, theSelect.getOptions().size());
         assertEquals("a", theSelect.getOption(0).getValue());
 
         appendOption(theSelect, "x");
-        assertEquals(2, theSelect.getAllOptions().size());
+        assertEquals(2, theSelect.getOptions().size());
         assertEquals("x", theSelect.getOption(1).getValue());
 
     }

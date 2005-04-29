@@ -744,7 +744,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testGetAllForms() throws Exception {
+    public void testGetForms() throws Exception {
 
         final String htmlContent = "<html>"
             + "<head><title>foo</title></head>"
@@ -763,7 +763,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final List expectedForms = Arrays.asList(new HtmlForm[] {page.getFormByName("one"),
                 page.getFormByName("two")});
-        assertEquals(expectedForms, page.getAllForms());
+        assertEquals(expectedForms, page.getForms());
     }
 
     /**

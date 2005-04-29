@@ -166,7 +166,7 @@ public class Select extends FormField {
             return -1;
         }
         else {
-            final List allOptions = htmlSelect.getAllOptions();
+            final List allOptions = htmlSelect.getOptions();
             return allOptions.indexOf(selectedOptions.get(0));
         }
     }
@@ -189,7 +189,7 @@ public class Select extends FormField {
             return;
         }
         
-        final List allOptions = htmlSelect.getAllOptions();
+        final List allOptions = htmlSelect.getOptions();
          
         final HtmlOption itemToSelect = (HtmlOption) allOptions.get(index);
         htmlSelect.setSelectedAttribute(itemToSelect, true);
