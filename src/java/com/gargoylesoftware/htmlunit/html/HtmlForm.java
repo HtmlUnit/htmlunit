@@ -280,6 +280,13 @@ public class HtmlForm extends ClickableElement {
         return htmlPage;
     }
 
+    /**
+     * @see #getSubmittableElements
+     * @deprecated Use {@link #getSubmittableElements} instead. 
+     */
+    public Collection getAllSubmittableElements(final SubmittableElement submitElement) {
+        return getSubmittableElements(submitElement);
+    }
 
     /**
      *  Return a collection of elements that represent all the "submittable"
@@ -289,7 +296,7 @@ public class HtmlForm extends ClickableElement {
      * form or null if the form was submitted by javascript.
      * @return  See above
      */
-    public Collection getAllSubmittableElements(final SubmittableElement submitElement) {
+    public Collection getSubmittableElements(final SubmittableElement submitElement) {
 
         final List submittableElements = new ArrayList();
 
@@ -373,18 +380,24 @@ public class HtmlForm extends ClickableElement {
 
         return true;
     }
-
-
+    
+    /**
+     * @see #getInputsByName
+     * @deprecated Use {@link #getInputsByName} instead. 
+     */
+    public List getAllInputsByName( final String name ) {
+        return getInputsByName(name);
+    }
+    
     /**
      *  Return the input tags that have the specified name
      *
      * @param  name The name of the input
      * @return  A list of HtmlInputs
      */
-    public List getAllInputsByName( final String name ) {
+    public List getInputsByName( final String name ) {
         return getHtmlElementsByAttribute( "input", "name", name );
     }
-
 
     /**
      *  Return the first input with the specified name
