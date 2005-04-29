@@ -149,42 +149,17 @@ public class MockWebConnection extends WebConnection {
     }
 
     /**
-     *  Submit a request to the processor
-     *
-     * @param  url The url of the server
-     * @param  method The submit method. Ie SubmitMethod.GET
-     * @param  parameters Any parameters
-     * @param  requestParameters Any headers that need to be put into the request.
-     * @return  See above
-     * @throws IOException (only for extending classes)
-     */
-    public WebResponse getResponse(
-        final URL url,
-        final SubmitMethod method,
-        final List parameters,
-        final Map requestParameters ) throws IOException {
-
-        return this.getResponse(url, FormEncodingType.URL_ENCODED, method, parameters, requestParameters);
-    }
-
-    /**
      *  Submit a request and retrieve a response
      *
-     * @param  url The url of the server
-     * @param  encType form encoding type to use for POST method
-     * @param  method The submit method. Ie SubmitMethod.GET
-     * @param  parameters Any parameters
-     * @param  requestHeaders Any headers that need to be put into the request.
+     * @param  webRequestSettings Settings to make the request with
      * @return  See above
      * @throws IOException (only for extending classes)
      */
-    public WebResponse getResponse(
-            final URL url,
-            final FormEncodingType encType,
-            final SubmitMethod method,
-            final List parameters,
-            final Map requestHeaders ) throws IOException {
-
+    public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
+        final URL url = webRequestSettings.getURL();
+        final SubmitMethod method = webRequestSettings.getSubmitMethod();
+        final List parameters = webRequestSettings.getRequestParameters();
+        
         getLog().debug("Getting response for " + url.toExternalForm());
         
         lastMethod_ = method;

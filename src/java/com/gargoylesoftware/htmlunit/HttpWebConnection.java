@@ -109,46 +109,23 @@ public class HttpWebConnection extends WebConnection {
         super(webClient, proxyHost, proxyPort);
     }
 
-    /**
-     *  Submit a request and retrieve a response
-     *
-     * @param  parameters Any parameters
-     * @param  url The url of the server
-     * @param  submitMethod The submit method. Ie SubmitMethod.GET
-     * @param  requestHeaders Any headers that need to be put in the request.
-     * @return  See above
-     * @exception  IOException If an IO error occurs
-     */
-    public WebResponse getResponse(
-            final URL url,
-            final SubmitMethod submitMethod,
-            final List parameters,
-            final Map requestHeaders )
-        throws
-            IOException {
-        return this.getResponse(url, FormEncodingType.URL_ENCODED, submitMethod, parameters, requestHeaders);
-    }
 
     /**
      *  Submit a request and retrieve a response
      *
-     * @param  parameters Any parameters
-     * @param  url The url of the server
-     * @param  encType Encoding type of the form when done as a POST
-     * @param  submitMethod The submit method. Ie SubmitMethod.GET
-     * @param  requestHeaders Any headers that need to be put in the request.
+     * @param  webRequestSettings Settings to make the request with
      * @return  See above
      * @exception  IOException If an IO error occurs
      */
-    public WebResponse getResponse(
-            final URL url,
-            final FormEncodingType encType,
-            final SubmitMethod submitMethod,
-            final List parameters,
-            final Map requestHeaders )
-        throws
-            IOException {
-
+    public WebResponse getResponse(final WebRequestSettings webRequestSettings)
+        throws IOException {
+        
+        final URL url = webRequestSettings.getURL();
+        final FormEncodingType encType = webRequestSettings.getEncodingType();
+        final SubmitMethod submitMethod = webRequestSettings.getSubmitMethod();
+        final List parameters = webRequestSettings.getRequestParameters();
+        final Map requestHeaders = webRequestSettings.getAdditionalHeaders();
+        
         final HttpClient httpClient = getHttpClientFor( url );
 
         try {
@@ -175,8 +152,12 @@ public class HttpWebConnection extends WebConnection {
                 if( url.getQuery() != null ) {
                     buffer.append(url.getQuery());
                 }
-
-                return getResponse( new URL(buffer.toString()), submitMethod, parameters, requestHeaders );
+                //TODO: There might be a bug here since the original encoding type is lost.
+                final WebRequestSettings newRequest = new WebRequestSettings(new URL(buffer.toString()));
+                newRequest.setSubmitMethod(submitMethod);
+                newRequest.setRequestParameters(parameters);
+                newRequest.setAdditionalHeaders(requestHeaders);
+                return getResponse(newRequest);
             }
             else {
                 e.printStackTrace();

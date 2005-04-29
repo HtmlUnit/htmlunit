@@ -1531,12 +1531,15 @@ public class WebClient {
      * @param parameters Any parameters that are being passed into the request
      * @throws IOException if an IO problem occurs
      * @return The WebResponse
+     * @deprecated Use {@link #loadWebResponse(WebRequestSettings)}
      */
     public final WebResponse loadWebResponse(
             final URL url, final SubmitMethod method, final List parameters)
         throws
             IOException {
-        return this.loadWebResponse(url, FormEncodingType.URL_ENCODED, method, parameters);
+        final WebRequestSettings wrs=  new WebRequestSettings(url, method);
+        wrs.setRequestParameters(parameters);
+        return loadWebResponse(wrs);        
     }
 
     /**
@@ -1547,22 +1550,42 @@ public class WebClient {
      * @param parameters Any parameters that are being passed into the request
      * @throws IOException if an IO problem occurs
      * @return The WebResponse
+     * @deprecated Use {@link #loadWebResponse(WebRequestSettings)}
      */
     public final WebResponse loadWebResponse(
             final URL url, final FormEncodingType encType, final SubmitMethod method, final List parameters)
         throws
             IOException {
-
+        final WebRequestSettings wrs = new WebRequestSettings(url, method);
+        wrs.setEncodingType(encType);
+        wrs.setRequestParameters(parameters);
+        return loadWebResponse(wrs);
+    }
+    /**
+     * Load a {@link WebResponse} from the server
+     * @param webRequestSettings settings to use when making the request
+     * @throws IOException if an IO problem occurs
+     * @return The WebResponse
+     */    
+    public final WebResponse loadWebResponse(final WebRequestSettings webRequestSettings)
+        throws
+            IOException {
+        final URL url = webRequestSettings.getURL();
+        final SubmitMethod method = webRequestSettings.getSubmitMethod();
+        final List parameters = webRequestSettings.getRequestParameters();
+        
         Assert.notNull("url", url);
         Assert.notNull("method", method);
         Assert.notNull("parameters", parameters);
         
         getLog().debug("Load response for " + url.toExternalForm());
         
+        //TODO: this should probably be handled inside of WebRequestSettings and
+        // could cause a bug if anything above here reads the url again
         final URL fixedUrl = encodeUrl(url);
+        webRequestSettings.setURL(fixedUrl);
 
-        final WebResponse webResponse
-            = getWebConnection().getResponse( fixedUrl, encType, method, parameters, requestHeaders_ );
+        final WebResponse webResponse = getWebConnection().getResponse(webRequestSettings);
         final int statusCode = webResponse.getStatusCode();
 
         if( statusCode >= 301 && statusCode <=307 && isRedirectEnabled() ) {
@@ -1598,11 +1621,14 @@ public class WebClient {
             }
             else if( ( statusCode == 301 || statusCode == 307 )
                 && method.equals(SubmitMethod.GET) ) {
-
-                return loadWebResponse( newUrl, SubmitMethod.GET, parameters );
+                
+                final WebRequestSettings wrs = new WebRequestSettings(newUrl);
+                wrs.setRequestParameters(parameters);
+                return loadWebResponse(wrs);
             }
             else if( statusCode == 302 || statusCode == 303 ) {
-                return loadWebResponse( newUrl, SubmitMethod.GET, Collections.EMPTY_LIST );
+                final WebRequestSettings wrs = new WebRequestSettings(newUrl);
+                return loadWebResponse(wrs);                
             }
         }
 

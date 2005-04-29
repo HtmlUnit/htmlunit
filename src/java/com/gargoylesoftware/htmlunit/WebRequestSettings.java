@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.ClassUtils;
 
@@ -55,6 +56,7 @@ public class WebRequestSettings {
     private SubmitMethod submitMethod_ = SubmitMethod.GET;
     private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
     private List requestParameters_ = Collections.EMPTY_LIST;
+    private Map additionalHeaders_ = Collections.EMPTY_MAP;
 
     /**
      * @param target The URL for this request
@@ -126,6 +128,19 @@ public class WebRequestSettings {
      */
     public void setSubmitMethod(final SubmitMethod submitMethod) {
         submitMethod_ = submitMethod;
+    }
+    /**
+     * @return Returns the additionalHeaders.
+     */
+    public Map getAdditionalHeaders() {
+        return additionalHeaders_;
+    }
+
+    /**
+     * @param additionalHeaders The additionalHeaders to set.
+     */
+    public void setAdditionalHeaders(final Map additionalHeaders) {
+        this.additionalHeaders_ = additionalHeaders;
     }
 
     /**

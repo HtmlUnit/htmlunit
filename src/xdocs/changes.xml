@@ -7,6 +7,13 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="yourgod">
+                More refactoring and deprecation to use WebRequestSettings.
+                WebRequestSettings now has get/setAdditionalHeaders, patch submitted by Daniel Gredler.
+                INCOMPATIBLE CHANGE: Third party extenders of WebConnection will need to 
+                implement getResponse(WebRequestSettings) in place of other getResponse methods,
+                which have been deprecated and given default implementations that call this method.
+            </action>
             <action type="update" dev="mguillem" id="1183971" due-to="Bruce Faulkner">
                 Javascript: fixed exception occuring while changing type of input created via document.createElement().
             </action>
