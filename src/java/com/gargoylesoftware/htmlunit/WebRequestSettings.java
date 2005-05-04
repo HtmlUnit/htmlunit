@@ -140,7 +140,7 @@ public class WebRequestSettings {
      * @param additionalHeaders The additionalHeaders to set.
      */
     public void setAdditionalHeaders(final Map additionalHeaders) {
-        this.additionalHeaders_ = additionalHeaders;
+        additionalHeaders_ = additionalHeaders;
     }
 
     /**

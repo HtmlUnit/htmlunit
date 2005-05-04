@@ -164,7 +164,7 @@ public class HtmlForm extends ClickableElement {
                         && htmlPage.getWebClient().isJavaScriptEnabled()) {
                     final ScriptResult scriptResult = htmlPage
                             .executeJavaScriptFunctionIfPossible(onsubmit,
-                                    (Scriptable) this.getScriptObject(),
+                                    (Scriptable) getScriptObject(),
                                     new Object[0], this);
                     if (scriptResult.getJavaScriptResult()
                             .equals(Boolean.FALSE)) {

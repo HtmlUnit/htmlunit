@@ -292,7 +292,7 @@ public class HttpWebConnection extends WebConnection {
                 hostConfiguration.setProxy( getProxyHost(), getProxyPort() );
             }
             client.setHostConfiguration(hostConfiguration);
-            final int timeout = this.getWebClient().getTimeout();
+            final int timeout = getWebClient().getTimeout();
             client.getHttpConnectionManager().getParams().setSoTimeout(timeout);
             client.getHttpConnectionManager().getParams().setConnectionTimeout(timeout);
 

@@ -100,13 +100,13 @@ public abstract class ClickableElement extends StyledElement {
                 doClickAction(page);
                 stateUpdated = true;
             }
-            final Event event = new Event(this, this.getScriptObject());
+            final Event event = new Event(this, getScriptObject());
             
             final Object[] args = new Object[] {event};
             
             final ScriptResult scriptResult = 
                 page.executeJavaScriptFunctionIfPossible(
-                    function, (Scriptable)this.getScriptObject(), args, this);
+                    function, (Scriptable) getScriptObject(), args, this);
             
             final Page scriptPage = scriptResult.getNewPage();
             if( stateUpdated || scriptResult.getJavaScriptResult().equals( Boolean.FALSE ) ) {

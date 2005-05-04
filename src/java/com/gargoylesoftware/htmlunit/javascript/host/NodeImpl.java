@@ -138,7 +138,7 @@ public class NodeImpl extends SimpleScriptable {
                 ((NodeImpl) childObject).getDomNodeOrDie();
 
             // Get the parent XML node that the child should be added to.
-            final DomNode parentNode = this.getDomNodeOrDie();
+            final DomNode parentNode = getDomNodeOrDie();
 
             // Append the child to the parent node
             parentNode.appendChild(childDomNode);
