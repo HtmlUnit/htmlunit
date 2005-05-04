@@ -472,7 +472,7 @@ public class Window extends SimpleScriptable {
                 // should never occur
                 throw Context.reportRuntimeError("Failed initializing frame collections: " + e.getMessage());
             }
-            final HtmlPage page = (HtmlPage) this.getWebWindow().getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
             frames_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             Transformer toEnclosedWindow = new Transformer() {
                 public Object transform(final Object obj) {
@@ -675,7 +675,7 @@ public class Window extends SimpleScriptable {
 
         // Ask the parent scope, as it may be a variable access like "window.myVar"
         if( result == NOT_FOUND ) {
-            result = this.getParentScope().get(name, start);
+            result = getParentScope().get(name, start);
             // seems to be a bug in Rhino, workaround as long as the bug is not fixed
             // https://bugzilla.mozilla.org/show_bug.cgi?id=277462
             if ("Function".equals(name)) {

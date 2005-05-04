@@ -104,15 +104,15 @@ public class SelectTag extends TagSupport implements VariableContext {
     /**
      * @param var the variable name to define for this expression
      */
-    public void setVar(String var) {
-        this.var_ = var;
+    public void setVar(final String var) {
+        var_ = var;
     }
 
     /**
      * @param xpath the XPath expression to evaluate.
      */
-    public void setXpath(String xpath) {
-        this.xpath_ = xpath;
+    public void setXpath(final String xpath) {
+        xpath_ = xpath;
     }
 
     /**

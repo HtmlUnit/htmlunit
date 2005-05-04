@@ -341,8 +341,8 @@ public class HTMLParser {
          * set the document locator
          * @param locator
          */
-        public void setDocumentLocator(Locator locator) {
-            this.locator_ = locator;
+        public void setDocumentLocator(final Locator locator) {
+            locator_ = locator;
         }
 
         /** @inheritDoc ContentHandler#startDocument() */

@@ -1019,7 +1019,7 @@ public final class HtmlPage extends DomNode implements Page {
                 getLog().error( "Malformed refresh string (no ';' but not a number): " + refreshString, e );
                 return;
             }
-            url = this.originatingUrl_;
+            url = originatingUrl_;
         }
         else {
             // Format: <meta http-equiv='refresh' content='10;url=http://www.blah.com'>
@@ -1366,7 +1366,7 @@ public final class HtmlPage extends DomNode implements Page {
         if (onchange != null && getWebClient().isJavaScriptEnabled()
                 && engine != null && !engine.isScriptRunning()) {
 
-            final Event event = new Event(this, this.getScriptObject());
+            final Event event = new Event(this, getScriptObject());
             final Object[] args = new Object[] {event};
             
             final ScriptResult scriptResult =

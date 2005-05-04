@@ -57,7 +57,7 @@ public abstract class DomCharacterData extends DomNode {
      */
     public DomCharacterData(final HtmlPage page, final String data) {
         super(page);
-        this.data_ = data;
+        data_ = data;
     }
 
 
@@ -100,7 +100,7 @@ public abstract class DomCharacterData extends DomNode {
      * @param newData The string to be appended to the character data.
      */
     public void appendData(final String newData) {
-        this.data_ += newData;
+        data_ += newData;
     }
 
 

@@ -80,8 +80,8 @@ public class DomText extends DomCharacterData {
         if (getParentNode() != null) {
             newText.setParentNode(getParentNode());
             newText.setPreviousSibling(this);
-            newText.setNextSibling(this.getNextSibling());
-            this.setNextSibling(newText);
+            newText.setNextSibling(getNextSibling());
+            setNextSibling(newText);
         }
 
         return newText;

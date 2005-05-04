@@ -489,7 +489,7 @@ public class WebClientTest extends WebTestCase {
          * @param list The list that will contain the data
          */
         public CollectingPageCreator( final List list ) {
-            this.collectedPages_ = list;
+            collectedPages_ = list;
         }
         /**
          * Create a page

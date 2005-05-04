@@ -79,7 +79,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
      * @param password The password for the new credentials.
      */
     public void addCredentials( final String username, final String password ) {
-        this.addCredentials( username, password, AuthScope.ANY_HOST, AuthScope.ANY_PORT, AuthScope.ANY_REALM );
+        addCredentials( username, password, AuthScope.ANY_HOST, AuthScope.ANY_PORT, AuthScope.ANY_REALM );
     }
 
     /**
@@ -105,7 +105,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
      * @param password The password for the new credentials.
      */
     public void addProxyCredentials( final String username, final String password ) {
-        this.addProxyCredentials( username, password, AuthScope.ANY_HOST, AuthScope.ANY_PORT );
+        addProxyCredentials( username, password, AuthScope.ANY_HOST, AuthScope.ANY_PORT );
     }
 
     /**

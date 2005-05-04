@@ -625,7 +625,7 @@ public final class Document extends NodeImpl {
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to null
             
-            final BrowserVersion browser = this.getHtmlPage().getWebClient().getBrowserVersion();
+            final BrowserVersion browser = getHtmlPage().getWebClient().getBrowserVersion();
             if (browser.isIE()) {
                 final NativeArray elements = (NativeArray) jsxFunction_getElementsByName(id);
                 result = elements.get(0, this);
@@ -774,7 +774,7 @@ public final class Document extends NodeImpl {
     public String jsxGet_domain() {
         if (domain_ == null) {
             domain_ = getHtmlPage().getWebResponse().getUrl().getHost();
-            final BrowserVersion browser = this.getHtmlPage().getWebClient().getBrowserVersion();
+            final BrowserVersion browser = getHtmlPage().getWebClient().getBrowserVersion();
             if (browser.isNetscape()) {
                 domain_ = domain_.toLowerCase();
             }

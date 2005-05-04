@@ -192,7 +192,7 @@ public class MockWebConnection extends WebConnection {
             }
             public String getContentAsString() { 
                 try {
-                    return new String(responseEntry.content_, this.getContentCharSet());
+                    return new String(responseEntry.content_, getContentCharSet());
                 }
                 catch (final UnsupportedEncodingException e) {
                     return null;

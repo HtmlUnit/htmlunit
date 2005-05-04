@@ -86,7 +86,7 @@ public class Form extends HTMLElement {
      */
     public void setHtmlElement( final HtmlElement htmlElement ) {
         super.setHtmlElement( htmlElement );
-        final HtmlForm htmlForm = this.getHtmlForm();
+        final HtmlForm htmlForm = getHtmlForm();
         htmlForm.setScriptObject( this );
     }
 

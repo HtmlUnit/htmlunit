@@ -62,7 +62,7 @@ public class UnknownHtmlElement extends ClickableElement {
      */
     UnknownHtmlElement(final HtmlPage page, final String tagName, final Map attributes) {
         super(page, attributes);
-        this.tagName_ = tagName.toLowerCase();
+        tagName_ = tagName.toLowerCase();
     }
 
     /**
