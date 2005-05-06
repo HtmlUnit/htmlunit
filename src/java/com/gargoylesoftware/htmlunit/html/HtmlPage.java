@@ -1409,4 +1409,10 @@ public final class HtmlPage extends DomNode implements Page {
             removeIdElement((HtmlElement) node);
         }
     }
+    /**
+     * @see DomNode#asXml()
+     */
+    public String asXml() {
+        return getDocumentElement().asXml();
+    }
 }
