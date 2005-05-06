@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="yourgod" id="1085986">
+                HtmlPage.asXml() was outputting some junk at the top of the page. This 
+                has been removed.
+            </action>
             <action type="update" dev="yourgod" id="1194006" due-to="Daniel Gredler">
                 Added XMLHttpRequest support. Patch submitted by Daniel Gredler.
             </action>

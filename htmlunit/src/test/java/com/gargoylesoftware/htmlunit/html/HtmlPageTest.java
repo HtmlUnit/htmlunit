@@ -1059,4 +1059,15 @@ public class HtmlPageTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+    /**
+     * @exception  Exception If the test fails
+     */
+    public void testAsXml() throws Exception {
+        final String htmlContent = "<html><head><title>foo</title></head>"
+            + "<body><p>helloworld</p></body>"
+            + "</html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+        assertEquals(htmlContent, page.asXml().replaceAll("\\s", ""));
+    }    
 }
