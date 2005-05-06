@@ -39,9 +39,11 @@ package com.gargoylesoftware.htmlunit;
 
 import java.net.URL;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.httpclient.auth.CredentialsProvider;
 import org.apache.commons.lang.ClassUtils;
 
 /**
@@ -55,8 +57,12 @@ public class WebRequestSettings {
     private URL url_;
     private SubmitMethod submitMethod_ = SubmitMethod.GET;
     private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
+    private Map additionalHeaders_ = new HashMap();
+    private CredentialsProvider credentialsProvider_ = null;
+
+    /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
     private List requestParameters_ = Collections.EMPTY_LIST;
-    private Map additionalHeaders_ = Collections.EMPTY_MAP;
+    private String requestBody_ = null;
 
     /**
      * @param target The URL for this request
@@ -111,9 +117,41 @@ public class WebRequestSettings {
 
     /**
      * @param requestParameters The requestParameters to set.
+     * @throws RuntimeException If the request body has already been set.
      */
-    public void setRequestParameters(final List requestParameters) {
+    public void setRequestParameters(final List requestParameters) throws RuntimeException {
+        if( requestBody_ != null ) {
+            final String msg = "Trying to set the request parameters, but the request body has already been specified;"
+                             + "the two are mutually exclusive!";
+            throw new RuntimeException( msg );
+        }
         requestParameters_ = requestParameters;
+    }
+
+    /**
+     * Returns the body content to be submitted if this is a <tt>POST</tt> request. Ignored for
+     * all other request types. Should not be used in combination with parameters.
+     * @return The body content to be submitted if this is a <tt>POST</tt> request.
+     */
+    public String getRequestBody() {
+        return requestBody_;
+    }
+
+    /**
+     * @param requestBody The body content to be submitted if this is a <tt>POST</tt> request.
+     * @throws RuntimeException If the request parameters have already been set or this is not a <tt>POST</tt> request.
+     */
+    public void setRequestBody(final String requestBody) throws RuntimeException {
+        if( requestParameters_ != null && requestParameters_.size() > 0 ) {
+            String msg = "Trying to set the request body, but the request parameters have already been specified;"
+                       + "the two are mutually exclusive!";
+            throw new RuntimeException( msg );
+        }
+        if( submitMethod_ != SubmitMethod.POST ) {
+            String msg = "The request body may only be set for POST requests!";
+            throw new RuntimeException( msg );
+        }
+        requestBody_ = requestBody;
     }
 
     /**
@@ -144,6 +182,28 @@ public class WebRequestSettings {
     }
 
     /**
+     * Adds the specified name/value pair to the additional headers.
+     * @param name The name of the additional header.
+     * @param value The value of the additional header.
+     */
+    public void addAdditionalHeader(final String name, final String value) {
+        additionalHeaders_.put( name, value );
+    }
+
+    /**
+     * @return Returns the credentialsProvider.
+     */
+    public CredentialsProvider getCredentialsProvider() {
+        return credentialsProvider_;
+    }
+    /**
+     * @param credentialsProvider The credentialProvider to set.
+     */
+    public void setCredentialsProvider(final CredentialsProvider credentialsProvider) {
+        credentialsProvider_ = credentialsProvider;
+    }
+
+    /**
      * Return a string representation of this object
      * @return  See above
      */
@@ -157,6 +217,8 @@ public class WebRequestSettings {
         buffer.append(", " + submitMethod_);
         buffer.append(", " + encodingType_);
         buffer.append(", " + requestParameters_);
+        buffer.append(", " + additionalHeaders_);
+        buffer.append(", " + credentialsProvider_);
         buffer.append(">]");
 
         return buffer.toString();

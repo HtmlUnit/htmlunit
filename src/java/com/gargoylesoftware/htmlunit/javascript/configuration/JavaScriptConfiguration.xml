@@ -771,4 +771,20 @@
         <function name="setTimeout"/>
     </class>
 
+    <class name="XMLHttpRequest" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest" JSObject="true">
+      <doclink url="http://developer.apple.com/internet/webcontent/xmlhttpreq.html" descr="Safari documenation"/>
+      <property name="onreadystatechange" readable="true" writable="true"/>
+      <property name="readyState" readable="true" writable="false"/>
+      <property name="responseText" readable="true" writable="false"/>
+      <property name="responseXML" readable="true" writable="false"/>
+      <property name="status" readable="true" writable="false"/>
+      <property name="statusText" readable="true" writable="false"/>
+      <function name="abort"/>
+      <function name="getAllResponseHeaders"/>
+      <function name="getResponseHeader"/>
+      <function name="open"/>
+      <function name="send"/>
+      <function name="setRequestHeader"/>
+    </class>
+
 </configuration>
