@@ -63,6 +63,7 @@ import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
@@ -117,24 +118,24 @@ public class HttpWebConnection extends WebConnection {
      * @return  See above
      * @exception  IOException If an IO error occurs
      */
-    public WebResponse getResponse(final WebRequestSettings webRequestSettings)
-        throws IOException {
-        
+    public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
+
         final URL url = webRequestSettings.getURL();
         final FormEncodingType encType = webRequestSettings.getEncodingType();
         final SubmitMethod submitMethod = webRequestSettings.getSubmitMethod();
         final List parameters = webRequestSettings.getRequestParameters();
+        final String body = webRequestSettings.getRequestBody();
         final Map requestHeaders = webRequestSettings.getAdditionalHeaders();
-        
+        final CredentialsProvider credentialsProvider = webRequestSettings.getCredentialsProvider();
+
         final HttpClient httpClient = getHttpClientFor( url );
 
         try {
-            long startTime, endTime;
-
-            HttpMethod httpMethod = makeHttpMethod( url, encType, submitMethod, parameters, requestHeaders );
-            startTime = System.currentTimeMillis();
-            int responseCode = httpClient.executeMethod( httpMethod );
-            endTime = System.currentTimeMillis();
+            final HttpMethod httpMethod = makeHttpMethod( url, encType, submitMethod, parameters, body,
+                requestHeaders, credentialsProvider );
+            final long startTime = System.currentTimeMillis();
+            final int responseCode = httpClient.executeMethod( httpMethod );
+            final long endTime = System.currentTimeMillis();
             return makeWebResponse( responseCode, httpMethod, url, endTime-startTime );
         }
         catch( final HttpException e ) {
@@ -166,12 +167,26 @@ public class HttpWebConnection extends WebConnection {
         }
     }
 
+    /**
+     * Creates an <tt>HttpMethod</tt> instance according to the specified parameters.
+     * @param url The URL which the method is to hit.
+     * @param encType The form encoding type whith the method is to use.
+     * @param method The type of method that is to be returned.
+     * @param parameters The parameters that the returned method is to submit to the web server.
+     * @param body The request body that the method is to send to the server. Used only for POST requests.
+     * @param requestHeaders The request headers that the returned method is to submit to the web server.
+     * @param credentialsProvider The custom credentials provider (if any) that the method is to use.
+     * @return The <tt>HttpMethod</tt> instance constructed according to the specified parameters.
+     * @throws IOException
+     */
     private HttpMethod makeHttpMethod(
             final URL url,
             final FormEncodingType encType,
             final SubmitMethod method,
             final List parameters,
-            final Map requestHeaders )
+            final String body,
+            final Map requestHeaders,
+            final CredentialsProvider credentialsProvider)
         throws
             IOException {
 
@@ -197,6 +212,9 @@ public class HttpWebConnection extends WebConnection {
             final String queryString = url.getQuery();
             if( queryString != null ) {
                 httpMethod.setQueryString(queryString);
+            }
+            if( body != null ) {
+                ( (PostMethod) httpMethod ).setRequestEntity( new StringRequestEntity( body ) );
             }
             Iterator iterator;
 
@@ -257,7 +275,11 @@ public class HttpWebConnection extends WebConnection {
                 return false;
             }
         };
+
         httpMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, noAutoRetry);
+        if(credentialsProvider != null) {
+            httpMethod.getParams().setParameter(CredentialsProvider.PROVIDER, credentialsProvider);
+        }
         return httpMethod;
     }
 

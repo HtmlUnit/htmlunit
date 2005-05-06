@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="yourgod" id="1194006" due-to="Daniel Gredler">
+                Added XMLHttpRequest support. Patch submitted by Daniel Gredler.
+            </action>
             <action type="update" dev="yourgod" id="1080774" due-to="Daniel Gredler">
                 Deprecated and renamed getAll<Something>s methods to get<Something>s to 
                 make them easier to find.
