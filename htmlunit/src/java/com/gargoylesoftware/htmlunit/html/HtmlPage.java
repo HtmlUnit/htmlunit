@@ -313,6 +313,8 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
+     * Return a list of all the forms in the page.
+     * @return All the forms.
      * @see #getForms
      * @deprecated Use {@link #getForms} instead. 
      */
