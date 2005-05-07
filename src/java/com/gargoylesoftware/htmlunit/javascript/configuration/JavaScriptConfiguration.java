@@ -294,6 +294,7 @@ public final class JavaScriptConfiguration {
      * @param className The name of the class element
      * @param element The element to parse
      * @return ClassConfiguration
+     * @throws ClassNotFoundException If the specified class could not be found
      */
     private ClassConfiguration parseClassElement(final String className, final Element element) 
         throws ClassNotFoundException {

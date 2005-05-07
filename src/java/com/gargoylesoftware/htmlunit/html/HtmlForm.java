@@ -281,7 +281,12 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * @see #getSubmittableElements
+     *  Return a collection of elements that represent all the "submittable"
+     *  elements in this form
+     *
+     * @param submitElement The element that would have been pressed to submit the
+     * form or null if the form was submitted by javascript.
+     * @return  See above
      * @deprecated Use {@link #getSubmittableElements} instead. 
      */
     public Collection getAllSubmittableElements(final SubmittableElement submitElement) {
@@ -382,7 +387,11 @@ public class HtmlForm extends ClickableElement {
     }
     
     /**
-     * @see #getInputsByName
+     *  Return the input tags that have the specified name
+     *
+     * @param  name The name of the input
+     * @return  A list of HtmlInputs
+     * @see #getInputsByName(String)
      * @deprecated Use {@link #getInputsByName} instead. 
      */
     public List getAllInputsByName( final String name ) {

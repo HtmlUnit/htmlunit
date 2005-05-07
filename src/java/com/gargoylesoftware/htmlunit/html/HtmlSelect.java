@@ -153,6 +153,9 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
 
 
     /**
+     *  Return a List containing all the options
+     *
+     * @return  See above
      * @see #getOptions
      * @deprecated Use {@link #getOptions} instead. 
      */

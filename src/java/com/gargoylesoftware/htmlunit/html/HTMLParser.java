@@ -466,6 +466,7 @@ class HTMLErrorHandler extends DefaultErrorHandler {
         url_ = url;
     }
 
+    /** @see DefaultErrorHandler#error(String,String,XMLParseException) */
     public void error(final String domain, final String key, 
             final XMLParseException exception) throws XNIException {
         listener_.error(exception.getMessage(), 
@@ -475,6 +476,7 @@ class HTMLErrorHandler extends DefaultErrorHandler {
                 key);
     }
 
+    /** @see DefaultErrorHandler#warning(String,String,XMLParseException) */
     public void warning(final String domain, final String key, 
             final XMLParseException exception) throws XNIException {           
         listener_.warning(exception.getMessage(), 

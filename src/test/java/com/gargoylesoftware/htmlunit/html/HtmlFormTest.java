@@ -955,6 +955,9 @@ public class HtmlFormTest extends WebTestCase {
 
     /**
      * Utility for {@link #testUrlAfterSubmit()}
+     * @param method The form method to use
+     * @param action The form action to use
+     * @param expectedUrlEnd The expected url
      * @throws Exception if the test fails
      */
     private void testUrlAfterSubmit(final String method, final String action, final String expectedUrlEnd)

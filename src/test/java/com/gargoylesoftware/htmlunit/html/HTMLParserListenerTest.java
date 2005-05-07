@@ -65,6 +65,12 @@ public class HTMLParserListenerTest extends WebTestCase {
 
         /**
          * Utility class to hold data. 
+         * @param error The error
+         * @param message The message
+         * @param url The url
+         * @param line The line number
+         * @param column The column number
+         * @param key Ignored value
          */
         MessageInfo(final boolean error, final String message, final URL url,
                 final int line, final int column, final String key) {
@@ -76,12 +82,14 @@ public class HTMLParserListenerTest extends WebTestCase {
             // ignore key
         }
 
+        /** @see Object#toString() */
         public String toString() {
             return message_ + " (" + url_ + " " + line_ + ":" + column_ + ")";
         }
 
         /**
          * Compares according to error, message, url and line.
+         * @see Object#equals(Object)
          */
         public boolean equals(final Object obj) {
             if (!(obj instanceof MessageInfo)) {
@@ -97,11 +105,9 @@ public class HTMLParserListenerTest extends WebTestCase {
         }
         
         
-        /* (non-Javadoc)
-         * @see java.lang.Object#hashCode()
-         */
         /**
          * Stub to fix Eclipse warning
+         * @see Object#hashCode()
          */
         public int hashCode() {
             return super.hashCode();
