@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * Tests for HtmlPage.
@@ -1059,6 +1060,7 @@ public class HtmlPageTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
      * @exception  Exception If the test fails
      */
@@ -1069,5 +1071,25 @@ public class HtmlPageTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
         assertEquals(htmlContent, page.asXml().replaceAll("\\s", ""));
+    }
+
+    /**
+     * @exception  Exception If the test fails
+     */
+    public void testAsXml2() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+            
+        final String htmlContent = "<html><head><title>foo</title>"
+            + "<script>var test = 15 < 16;</script></head>"
+            + "</head>"
+            + "<body onload='test=(1 > 2) && (45 < 78)'><p>helloworld</p></body>"
+            + "</html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+        getMockConnection(page).setDefaultResponse(page.asXml(), 200, "OK", "text/xml");
+        final XmlPage xmlPage = (XmlPage) page.getWebClient().getPage(URL_FIRST);
+        assertNotNull("xml document could not be parsed", xmlPage.getXmlDocument());
     }    
 }
