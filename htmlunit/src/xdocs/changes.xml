@@ -11,7 +11,7 @@
                 Added XMLHttpRequest support. Patch submitted by Daniel Gredler.
             </action>
             <action type="update" dev="yourgod" id="1080774" due-to="Daniel Gredler">
-                Deprecated and renamed getAll<Something>s methods to get<Something>s to 
+                Deprecated and renamed getAll&lt;Something&gt;s methods to get&lt;Something&gt;s to 
                 make them easier to find.
             </action>
             <action type="update" dev="yourgod">
