@@ -43,15 +43,18 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import junit.framework.AssertionFailedError;
 
 import com.gargoylesoftware.htmlunit.ImmediateRefreshHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * Tests for HtmlPage.
@@ -1087,9 +1090,10 @@ public class HtmlPageTest extends WebTestCase {
             + "<body onload='test=(1 > 2) && (45 < 78)'><p>helloworld</p></body>"
             + "</html>";
 
-        final HtmlPage page = loadPage(htmlContent);
-        getMockConnection(page).setDefaultResponse(page.asXml(), 200, "OK", "text/xml");
-        final XmlPage xmlPage = (XmlPage) page.getWebClient().getPage(URL_FIRST);
-        assertNotNull("xml document could not be parsed", xmlPage.getXmlDocument());
-    }    
+        HtmlPage page = loadPage(htmlContent);
+        assertNotNull("xml document could not be parsed", page.asXml());
+        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        final DocumentBuilder builder = factory.newDocumentBuilder();
+        builder.parse(TextUtil.toInputStream(page.asXml()));
+    }
 }
