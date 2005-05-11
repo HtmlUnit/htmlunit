@@ -6,7 +6,7 @@
     </properties>
 
     <body>
-        <release version="NextRelease" date="Unknown">
+        <release version="1.6" date="May 10, 2005">
             <action type="update" dev="yourgod" id="1194006" due-to="Daniel Gredler">
                 Added XMLHttpRequest support. Patch submitted by Daniel Gredler.
             </action>
