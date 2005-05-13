@@ -6,6 +6,11 @@
     </properties>
 
     <body>
+        <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                A click on a &lt;label ...&gt; is now propagated to the referenced element.
+            </action>
+        </release>
         <release version="1.6" date="May 10, 2005">
             <action type="update" dev="yourgod" id="1194006" due-to="Daniel Gredler">
                 Added XMLHttpRequest support. Patch submitted by Daniel Gredler.

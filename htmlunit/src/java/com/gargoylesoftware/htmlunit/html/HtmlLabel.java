@@ -37,8 +37,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Iterator;
+
+import com.gargoylesoftware.htmlunit.Page;
 
 /**
  * Wrapper for the html element "label".
@@ -162,5 +165,28 @@ public class HtmlLabel extends FocusableElement {
             }
         }
         return null;
+    }
+    
+    /**
+     * Clicks the label and propagates to the referenced element.
+     * @see ClickableElement#click()
+     */
+    public Page click() throws IOException {
+        // first the click on the label
+        final Page page = super.click();
+        
+        // not sure which page we should return
+        final Page response;
+
+        // then the click on the referenced element
+        final FocusableElement element = getReferencedElement();
+        if (element != null) {
+            response = element.click();
+        }
+        else {
+            response = page;
+        }
+
+        return response;
     }
 }
