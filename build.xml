@@ -198,7 +198,7 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
     <antcall target="get-dependency">
         <param name="type" value="required"/>
         <param name="project" value="jaxen"/>
-        <param name="jarName" value="jaxen-1.0-FCS-full.jar"/>
+        <param name="jarName" value="jaxen-1.1-beta-6.jar"/>
     </antcall>
     <antcall target="get-dependency">
         <param name="type" value="required"/>
