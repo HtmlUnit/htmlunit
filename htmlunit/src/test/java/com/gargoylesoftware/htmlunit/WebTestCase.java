@@ -403,8 +403,10 @@ public abstract class WebTestCase extends BaseTestCase {
             getLog().info(testMethod.getName() + " fails what is normal as it is not yet implemented");
             // method execution failed, it is really "not yet implemented"
         }
-        
-        notYetImplementedFlag.set(null);
+        finally {
+            notYetImplementedFlag.set(null);
+        }
+
         return true;
     }
 
