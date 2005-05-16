@@ -46,11 +46,11 @@ import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.functors.NOPTransformer;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
+import org.jaxen.saxpath.SAXPathException;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
-import org.saxpath.SAXPathException;
 
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;

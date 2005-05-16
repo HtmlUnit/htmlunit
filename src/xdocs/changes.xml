@@ -8,6 +8,10 @@
     <body>
         <release version="NextRelease" date="Unknown">
             <action type="update" dev="mguillem">
+                Upgraded jaxen to 1.1-beta-6 (even if it's a "beta", this is the version 
+                recommended by jaxen developers and it fixes the element order bug).
+            </action>
+            <action type="update" dev="mguillem">
                 A click on a &lt;label ...&gt; is now propagated to the referenced element.
             </action>
         </release>
