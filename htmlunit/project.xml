@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project>
-
     <pomVersion>3</pomVersion>
-    <id>htmlunit</id>
+    <id>htmlunit:htmlunit</id>
+    <artifactId>htmlunit</artifactId>
     <name>htmlunit</name>
+    <groupId>htmlunit</groupId>
     <currentVersion>1.6</currentVersion>
-
     <organization>
         <name>Gargoyle Software Inc.</name>
         <url>http://www.GargoyleSoftware.com/</url>
@@ -13,27 +13,19 @@
     </organization>
     <inceptionYear>2002</inceptionYear>
     <package>com.gargoylesoftware.htmlunit</package>
-    <logo></logo>
     <gumpRepositoryId>htmlunit</gumpRepositoryId>
-
-    <description>
-        A tool for testing web based applications
-    </description>
+    <description>A tool for testing web based applications</description>
     <shortDescription>HtmlUnit</shortDescription>
-
     <url>http://htmlunit.sourceforge.net</url>
     <issueTrackingUrl>http://sourceforge.net/tracker/?group_id=47038&amp;atid=448266</issueTrackingUrl>
-
     <siteAddress>htmlunit.sourceforge.net</siteAddress>
     <siteDirectory>/home/groups/h/ht/htmlunit/htdocs</siteDirectory>
     <distributionDirectory>/home/groups/h/ht/htmlunit/htdocs/nightly</distributionDirectory>
-
-	<repository>
-	    <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/htmlunit:htmlunit</connection>
-	    <developerConnection>scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/htmlunit:htmlunit/</developerConnection>
-	    <url>http://cvs.sourceforge.net/viewcvs.py/htmlunit/htmlunit</url>
+    <repository>
+        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/htmlunit:htmlunit</connection>
+        <developerConnection>scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/htmlunit:htmlunit/</developerConnection>
+        <url>http://cvs.sourceforge.net/viewcvs.py/htmlunit/htmlunit</url>
     </repository>
-  
     <licenses>
         <license>
             <name>The HtmlUnit Software License</name>
@@ -41,7 +33,6 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
     <versions>
         <version>
             <id>2.0</id>
@@ -49,7 +40,6 @@
             <tag>2.0</tag>
         </version>
     </versions>
-
     <mailingLists>
         <mailingList>
             <name>HtmlUnit Users</name>
@@ -64,25 +54,17 @@
             <archive>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</archive>
         </mailingList>
     </mailingLists>
-
     <developers>
         <developer>
             <name>Mike Bowler</name>
             <id>mbowler</id>
             <email>mbowler@GargoyleSoftware.com</email>
             <organization>Gargoyle Software Inc.</organization>
-            <roles>
-                <role>Release Manager</role>
-                <role>Java Developer</role>
-            </roles>
             <timezone>-5</timezone>
         </developer>
         <developer>
             <name>David K. Taylor</name>
             <id>dktaylor</id>
-            <roles>
-                <role>Java Developer</role>
-            </roles>
         </developer>
         <developer>
             <name>Brad Clarke</name>
@@ -90,30 +72,20 @@
             <email>yourgod@users.sourceforge.net</email>
             <url>http://www.bradclarke.com/</url>
             <timezone>-6</timezone>
-            <roles>
-                <role>Java Developer</role>
-            </roles>
         </developer>
         <developer>
             <name>Marc Guillemot</name>
             <id>mguillem</id>
             <email>mguillem@users.sourceforge.net</email>
             <timezone>+1</timezone>
-            <roles>
-                <role>Java Developer</role>
-            </roles>
         </developer>
         <developer>
             <name>Chris Erskine</name>
             <id>cerskine</id>
             <email>cerskine@users.sourceforge.net</email>
             <timezone>-7</timezone>
-            <roles>
-                <role>Java Developer</role>
-            </roles>
         </developer>
     </developers>
-
     <contributors>
         <contributor>
             <name>Noboru Sinohara</name>
@@ -197,6 +169,7 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
+            <type>jar</type>
             <url>http://www.junit.org/</url>
             <properties>
                 <htmlunit.group>test</htmlunit.group>
@@ -207,17 +180,18 @@
             <groupId>junitperf</groupId>
             <artifactId>junitperf</artifactId>
             <version>1.8</version>
+            <type>jar</type>
             <url>http://www.clarkware.com</url>
             <properties>
                 <htmlunit.group>test</htmlunit.group>
                 <htmlunit.description>Additional support for testing</htmlunit.description>
             </properties>
         </dependency>
-
         <dependency>
             <groupId>commons-jelly</groupId>
             <artifactId>commons-jelly</artifactId>
             <version>1.0-RC1</version>
+            <type>jar</type>
             <url>http://jakarta.apache.org/commons/jelly</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
@@ -228,6 +202,7 @@
             <groupId>commons-jelly</groupId>
             <artifactId>commons-jelly-tags-log</artifactId>
             <version>1.0</version>
+            <type>jar</type>
             <url>http://jakarta.apache.org/commons/jelly</url>
             <properties>
                 <htmlunit.group>Jelly</htmlunit.group>
@@ -238,6 +213,7 @@
             <groupId>commons-jelly</groupId>
             <artifactId>commons-jelly-tags-xml</artifactId>
             <version>1.0</version>
+            <type>jar</type>
             <url>http://jakarta.apache.org/commons/jelly/libs/xml/</url>
             <properties>
                 <classloader>root.maven</classloader>
@@ -249,6 +225,7 @@
             <groupId>commons-jelly</groupId>
             <artifactId>commons-jelly-tags-junit</artifactId>
             <version>1.0</version>
+            <type>jar</type>
             <url>http://jakarta.apache.org/commons/jelly/libs/junit/</url>
             <properties>
                 <classloader>root.maven</classloader>
@@ -260,6 +237,7 @@
             <groupId>commons-jexl</groupId>
             <artifactId>commons-jexl</artifactId>
             <version>1.0</version>
+            <type>jar</type>
             <url>http://jakarta.apache.org/commons/jexl</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
@@ -270,6 +248,7 @@
             <groupId>commons-cli</groupId>
             <artifactId>commons-cli</artifactId>
             <version>1.0</version>
+            <type>jar</type>
             <url>http://jakarta.apache.org/commons/cli</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
@@ -280,6 +259,7 @@
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
             <version>1.5</version>
+            <type>jar</type>
             <url>http://www.dom4j.org/</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
@@ -289,7 +269,8 @@
         <dependency>
             <groupId>jaxen</groupId>
             <artifactId>jaxen</artifactId>
-            <version>1.0-FCS-full</version>
+            <version>1.1-beta-6</version>
+            <type>jar</type>
             <url>http://jaxen.org/</url>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
@@ -300,17 +281,18 @@
             <groupId>saxpath</groupId>
             <artifactId>saxpath</artifactId>
             <version>1.0-FCS</version>
+            <type>jar</type>
             <url>http://saxpath.org/</url>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>XPath support</htmlunit.description>
             </properties>
         </dependency>
-        
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.1</version>
+            <type>jar</type>
             <url>http://jakarta.apache.org/commons/collections.html</url>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
@@ -321,28 +303,29 @@
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
             <version>1.7.0</version>
+            <type>jar</type>
             <url>http://jakarta.apache.org/commons/beanutils</url>
             <properties>
                 <htmlunit.group>jelly</htmlunit.group>
                 <htmlunit.description>Javabean support</htmlunit.description>
             </properties>
         </dependency>
-
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.0</version>
+            <type>jar</type>
             <url>http://jakarta.apache.org/commons/lang</url>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>Core Language Utilities</htmlunit.description>
             </properties>
         </dependency>
-
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
             <version>3.0-rc2</version>
+            <type>jar</type>
             <url>http://jakarta.apache.org/commons/httpclient</url>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
@@ -353,6 +336,7 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.3</version>
+            <type>jar</type>
             <url>http://jakarta.apache.org/commons/codec</url>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
@@ -363,6 +347,7 @@
             <groupId>gsbase</groupId>
             <artifactId>gsbase</artifactId>
             <version>2.0.1</version>
+            <type>jar</type>
             <url>http://gsbase.sourceforge.net</url>
             <properties>
                 <htmlunit.group>test</htmlunit.group>
@@ -373,6 +358,7 @@
             <groupId>rhino</groupId>
             <artifactId>js</artifactId>
             <version>1.6R1</version>
+            <type>jar</type>
             <url>http://www.mozilla.org/rhino</url>
             <properties>
                 <htmlunit.group>optional</htmlunit.group>
@@ -383,6 +369,7 @@
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
             <version>2.6.2</version>
+            <type>jar</type>
             <url>http://xml.apache.org/xerces2-j/index.html</url>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
@@ -393,6 +380,7 @@
             <groupId>xerces</groupId>
             <artifactId>xmlParserAPIs</artifactId>
             <version>2.2.1</version>
+            <type>jar</type>
             <url>http://xml.apache.org/xerces2-j/index.html</url>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
@@ -403,6 +391,7 @@
             <groupId>nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
             <version>0.9.4</version>
+            <type>jar</type>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>Converts html into an XML DOM model</htmlunit.description>
@@ -412,6 +401,7 @@
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.0.4</version>
+            <type>jar</type>
             <url>http://jakarta.apache.org/commons/logging.html</url>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
@@ -422,6 +412,7 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>1.0</version>
+            <type>jar</type>
             <url>http://jakarta.apache.org/commons/io/</url>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
@@ -429,20 +420,15 @@
             </properties>
         </dependency>
     </dependencies>
-
     <build>
         <nagEmailAddress>htmlunit@GargoyleSoftware.com</nagEmailAddress>
         <sourceDirectory>src/java</sourceDirectory>
         <unitTestSourceDirectory>src/test/java</unitTestSourceDirectory>
-        <integrationUnitTestSourceDirectory/>
-        <aspectSourceDirectory/>
-
         <unitTest>
             <includes>
                 <include>**/*Test.java</include>
             </includes>
         </unitTest>
-
         <jarResources>
             <includes>
                 <include>**/*.xml</include>
@@ -450,3 +436,4 @@
         </jarResources>
     </build>
 </project>
+

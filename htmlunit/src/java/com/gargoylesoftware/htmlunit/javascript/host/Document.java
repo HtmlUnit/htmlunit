@@ -700,12 +700,13 @@ public final class Document extends NodeImpl {
         // document.xxx allows to retrieve some elements by name like img or form but not input, a, ...
         // TODO: behaviour for iframe seems to differ between IE and Moz
         final ElementArray collection = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+        final String xpathExpr = "//*[(@name = '" + name + "' and (name() = 'img' or name() = 'form'))]";
         try {
-            collection.init(htmlPage, new HtmlUnitXPath("//*[(@name = '" + name 
-                    + "' and (name() = 'img' or name() = 'form'))"));
+            collection.init(htmlPage, new HtmlUnitXPath(xpathExpr));
         }
         catch (final JaxenException e) {
-            throw Context.reportRuntimeError("Failed to initialize collection: " + e.getMessage());
+            throw Context.reportRuntimeError("Failed to initialize collection (using xpath " + xpathExpr 
+                    + "): " + e.getMessage());
         }
 
         final int size = collection.jsGet_length(); 
