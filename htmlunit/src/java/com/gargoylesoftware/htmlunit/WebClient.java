@@ -1585,6 +1585,9 @@ public class WebClient {
         final URL fixedUrl = encodeUrl(url);
         webRequestSettings.setURL(fixedUrl);
 
+        // adds the headers that are sent on every request
+        webRequestSettings.getAdditionalHeaders().putAll(requestHeaders_);
+        
         final WebResponse webResponse = getWebConnection().getResponse(webRequestSettings);
         final int statusCode = webResponse.getStatusCode();
 

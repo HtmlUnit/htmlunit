@@ -8,6 +8,10 @@
     <body>
         <release version="NextRelease" date="Unknown">
             <action type="update" dev="mguillem">
+                Send headers added with WebClient.addRequestHeader to the server again 
+                (bug introduced in release 1.6).
+            </action>
+            <action type="update" dev="mguillem">
                 Upgraded jaxen to 1.1-beta-6 (even if it's a "beta", this is the version 
                 recommended by jaxen developers and it fixes the element order bug).
             </action>
