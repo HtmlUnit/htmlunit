@@ -129,6 +129,7 @@ public class MockWebConnection extends WebConnection {
 
     private SubmitMethod lastMethod_;
     private List lastParameters_;
+    private Map lastAdditionalHeaders_;
     private HttpState httpState_ = new HttpState();
 
     /**
@@ -164,6 +165,7 @@ public class MockWebConnection extends WebConnection {
         
         lastMethod_ = method;
         lastParameters_ = parameters;
+        lastAdditionalHeaders_ = webRequestSettings.getAdditionalHeaders();
 
         ResponseEntry entry = (ResponseEntry)responseMap_.get(url.toExternalForm());
         if( entry == null ) {
@@ -405,5 +407,15 @@ public class MockWebConnection extends WebConnection {
     public HttpState getStateForUrl( final URL url ) {
         return httpState_;
     }
+
+    /**
+     *  Return the additional headers that were used in the in the last call 
+     *  to {@link #getResponse(WebRequestSettings)}.
+     * @return  See above
+     */
+    public Map getLastAdditionalHeaders() {
+        return lastAdditionalHeaders_;
+    }
+    
 }
 

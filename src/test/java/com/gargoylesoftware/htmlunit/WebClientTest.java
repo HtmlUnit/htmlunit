@@ -1184,4 +1184,28 @@ public class WebClientTest extends WebTestCase {
         
         return file;
     }
+
+    /**
+     * Test that additional header are correctly transmitted to the web connection.
+     * @throws Exception If something goes wrong.
+     */
+    public void testRequestHeader() throws Exception {
+        final String content = "<html></html>";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(content);
+        client.setWebConnection( webConnection );
+
+        client.getPage(URL_FIRST);
+        assertNull(webConnection.getLastAdditionalHeaders().get("foo-header"));
+
+        client.addRequestHeader("foo-header", "foo value");
+        client.getPage(URL_FIRST);
+        assertEquals("foo value", webConnection.getLastAdditionalHeaders().get("foo-header"));
+        
+        client.removeRequestHeader("foo-header");
+        client.getPage(URL_FIRST);
+        assertNull(webConnection.getLastAdditionalHeaders().get("foo-header"));
+    }
 }
