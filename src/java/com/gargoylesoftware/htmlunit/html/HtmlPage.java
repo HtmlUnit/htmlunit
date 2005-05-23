@@ -789,6 +789,8 @@ public final class HtmlPage extends DomNode implements Page {
     /**
      * Internal use only.  Return true if a script with the specified type and language attributes
      * is actually JavaScript.
+     * According to <a href="http://www.w3.org/TR/REC-html40/types.html#h-6.7">W3C recommendation</a>
+     * are content types case insensitive.
      * @param typeAttribute The type attribute specified in the script tag.
      * @param languageAttribute The language attribute specified in the script tag.
      * @return true if the script is javascript
@@ -796,11 +798,11 @@ public final class HtmlPage extends DomNode implements Page {
     public static boolean isJavaScript( final String typeAttribute, final String languageAttribute ) {
         // Unless otherwise specified, we have to assume that any script is javascript
         final boolean isJavaScript;
-        if( languageAttribute != null && languageAttribute.length() != 0  ) {
+        if( languageAttribute != null && languageAttribute.length() != 0 ) {
             isJavaScript = TextUtil.startsWithIgnoreCase(languageAttribute, "javascript");
         }
-        else if(  typeAttribute != null && typeAttribute.length() != 0 ) {
-            isJavaScript = typeAttribute.equals( "text/javascript" );
+        else if( typeAttribute != null && typeAttribute.length() != 0 ) {
+            isJavaScript = typeAttribute.equalsIgnoreCase( "text/javascript" );
         }
         else {
             isJavaScript = true;

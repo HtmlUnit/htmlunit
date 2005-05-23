@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" due-to="Ray Suliteanu">
+                In a script tag &lt;script type="..."&gt;, the value of the type attribute is case insensitive.
+            </action>
             <action type="update" dev="mguillem">
                 Send headers added with WebClient.addRequestHeader to the server again 
                 (bug introduced in release 1.6).

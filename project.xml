@@ -163,6 +163,9 @@
         <contributor>
             <name>Bruce Faulkner</name>
         </contributor>
+        <contributor>
+        	<name>Ray Suliteanu</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
