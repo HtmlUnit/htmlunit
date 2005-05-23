@@ -50,7 +50,6 @@ import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
-import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
@@ -690,11 +689,11 @@ public class Window extends SimpleScriptable {
             final DomNode domNode = thisWindow.getDomNodeOrNull();
             if (domNode != null 
                     && domNode.getPage().getWebClient().getBrowserVersion().isIE()) {
-                final NativeArray array = (NativeArray) thisWindow.document_.jsxFunction_getElementsByName( name );
-                if (array.getLength() == 1) {
-                    result = array.get(0, this);
+                final ElementArray array = (ElementArray) thisWindow.document_.jsxFunction_getElementsByName( name );
+                if (array.jsGet_length() == 1) {
+                    result = array.get(0, array);
                 }
-                else if (array.getLength() > 1) {
+                else if (array.jsGet_length() > 1) {
                     result = array;
                 }
                 else {

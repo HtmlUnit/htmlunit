@@ -1288,19 +1288,21 @@ public class DocumentTest extends WebTestCase {
             = "<html><head><title>First</title><script>"
             + "function doTest() {\n"
             + "    var elements = document.getElementsByTagName('input');\n"
-            + "    for( i=0; i<elements.length; i++ ) {\n"
+            + "    for (var i=0; i<elements.length; i++) {\n"
             + "        alert(elements[i].type);\n"
+            + "        alert(elements.item(i).type);\n"
             + "    }\n"
+            + "    alert(elements == document.getElementsByTagName('input'));\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>"
             + "<form><input type='button' name='button1' value='pushme'></form>"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
-        assertEquals( "First", firstPage.getTitleText() );
+        final List expectedAlerts = Arrays.asList(new String[]{"button", "button", "true"});
+        createTestPageForRealBrowserIfNeeded(firstContent, expectedAlerts);
 
-        final List expectedAlerts = Collections.singletonList("button");
+        final List collectedAlerts = new ArrayList();
+        loadPage(firstContent, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1569,8 +1571,9 @@ public class DocumentTest extends WebTestCase {
             = "<html><head><title>First</title><script>"
             + "function doTest() {\n"
             + "    var elements = document.getElementsByName('name1');\n"
-            + "    for( i=0; i<elements.length; i++ ) {\n"
+            + "    for (var i=0; i<elements.length; i++) {\n"
             + "        alert(elements[i].value);\n"
+            + "        alert(elements.item(i).value);\n"
             + "    }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>"
@@ -1581,11 +1584,12 @@ public class DocumentTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
-        assertEquals( "First", firstPage.getTitleText() );
+        final List expectedAlerts = Arrays.asList(
+                new String[] { "value1", "value1", "value2", "value2" });
+        createTestPageForRealBrowserIfNeeded(firstContent, expectedAlerts);
 
-        final List expectedAlerts = Arrays.asList(new String[] { "value1", "value2" });
+        final List collectedAlerts = new ArrayList();
+        loadPage(firstContent, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
     

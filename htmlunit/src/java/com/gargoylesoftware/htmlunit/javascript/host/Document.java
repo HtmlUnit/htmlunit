@@ -39,21 +39,19 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
+import org.jaxen.XPathFunctionContext;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
-import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.UniqueTag;
 
@@ -70,7 +68,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
+import com.gargoylesoftware.htmlunit.html.xpath.FunctionContextWrapper;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
+import com.gargoylesoftware.htmlunit.html.xpath.LowerCaseFunction;
 import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 
 /**
@@ -105,10 +105,15 @@ public final class Document extends NodeImpl {
     private boolean writeInCurrentDocument_ = true;
     private String domain_;
 
+    private final FunctionContextWrapper functionContext_;
+
     /**
      * Create an instance.  Javascript objects must have a default constructor.
      */
     public Document() {
+        // add custom functions to custom context
+        functionContext_ = new FunctionContextWrapper(XPathFunctionContext.getInstance());
+        functionContext_.registerFunction("lower-case", new LowerCaseFunction());
     }
 
 
@@ -627,8 +632,8 @@ public final class Document extends NodeImpl {
             
             final BrowserVersion browser = getHtmlPage().getWebClient().getBrowserVersion();
             if (browser.isIE()) {
-                final NativeArray elements = (NativeArray) jsxFunction_getElementsByName(id);
-                result = elements.get(0, this);
+                final ElementArray elements = (ElementArray) jsxFunction_getElementsByName(id);
+                result = elements.get(0, elements);
                 if (result instanceof UniqueTag) {
                     return null;
                 }
@@ -648,12 +653,18 @@ public final class Document extends NodeImpl {
      * @return the list of elements
      */
     public Object jsxFunction_getElementsByTagName( final String tagName ) {
-        final HtmlPage page = (HtmlPage)getDomNodeOrDie();
-        final List list = page.getDocumentElement().getHtmlElementsByTagNames(
-            Collections.singletonList(tagName.toLowerCase()));
-        CollectionUtils.transform(list, getTransformerScriptableFor());
+        final ElementArray collection = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+        try {
+            final HtmlUnitXPath xpath = new HtmlUnitXPath("//*[lower-case(name()) = '" + tagName.toLowerCase() + "']");
+            xpath.setFunctionContext(functionContext_);
+            collection.init(getHtmlPage(), xpath);
+        }
+        catch (final JaxenException e) {
+            throw Context.reportRuntimeError(
+                    "Failed to initialize collection document.getElementsByTagName: " + e.getMessage());
+        }
 
-        return new NativeArray( list.toArray() );
+        return collection;
     }
 
     /**
@@ -666,18 +677,18 @@ public final class Document extends NodeImpl {
      * @return NodeList of elements
      */
     public Object jsxFunction_getElementsByName( final String elementName ) {
-        final HtmlPage page = (HtmlPage)getDomNodeOrDie();
+        final ElementArray collection = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
         final String exp = "//*[@name='" + elementName + "']";
-        final List list;
         try {
             final HtmlUnitXPath xpath = new HtmlUnitXPath(exp);
-            list = xpath.selectNodes(page);
-        } 
-        catch (final JaxenException e) {
-            return new NativeArray(0);
+            collection.init(getHtmlPage(), xpath);
         }
-        CollectionUtils.transform(list, getTransformerScriptableFor());
-        return new NativeArray( list.toArray() );
+        catch (final JaxenException e) {
+            throw Context.reportRuntimeError(
+                    "Failed to initialize collection document.getElementsByName: " + e.getMessage());
+        }
+
+        return collection;
     }
 
 

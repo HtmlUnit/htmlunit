@@ -374,4 +374,27 @@ public class ElementArray extends SimpleScriptable implements Function {
         }
         return super.toString();
     }
+    
+    /**
+     * Called for the js "==".
+     * @see org.mozilla.javascript.ScriptableObject#equivalentValues(java.lang.Object)
+     */
+    protected Object equivalentValues(final Object other) {
+        if (other == this) {
+            return Boolean.TRUE;
+        }
+        else if (other instanceof ElementArray) {
+            final ElementArray otherArray = (ElementArray) other;
+            if (node_ == otherArray.node_ 
+                    && xpath_.toString().equals(otherArray.xpath_.toString()) 
+                    && transformer_.equals(otherArray.transformer_)) {
+                return Boolean.TRUE;
+            }
+            else {
+                return NOT_FOUND;
+            }
+        }
+        
+        return super.equivalentValues(other);
+    }
 }

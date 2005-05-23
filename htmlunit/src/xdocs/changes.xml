@@ -7,6 +7,11 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1204922">
+                Javascript: document.getElementsByTagName and document.getElementsByName 
+                now return an ElementArray (instead of a NativeArray) allowing expressions
+                like "document.getElementsByTagName('a').item(0)".
+            </action>
             <action type="update" dev="mguillem" due-to="Ray Suliteanu">
                 In a script tag &lt;script type="..."&gt;, the value of the type attribute is case insensitive.
             </action>
