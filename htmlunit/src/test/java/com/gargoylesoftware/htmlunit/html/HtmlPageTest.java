@@ -1096,4 +1096,13 @@ public class HtmlPageTest extends WebTestCase {
         final DocumentBuilder builder = factory.newDocumentBuilder();
         builder.parse(TextUtil.toInputStream(page.asXml()));
     }
+
+    /**
+     * Regression test for bug 1204637
+     * @exception  Exception If the test fails
+     */
+    public void testIsJavascript() throws Exception {
+        assertTrue(HtmlPage.isJavaScript("text/javascript", null));
+        assertTrue(HtmlPage.isJavaScript("text/JavaScript", null));
+    }
 }
