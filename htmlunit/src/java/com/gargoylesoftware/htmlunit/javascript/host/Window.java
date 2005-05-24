@@ -827,4 +827,15 @@ public class Window extends SimpleScriptable {
     public int jsxGet_outerHeight() {
         return 936; // why this value? this is the current value of my Mozilla
     }
+    /**
+     * Prints the current page.
+     * Current implementation does nothing.
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref85.html">
+     * Mozilla documentation</a>
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/print.asp">
+     * MSDN documentation</a>
+     */
+    public void jsxFunction_print() {
+        getLog().debug( "window.print() not implemented" );
+    }
 }

@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="yourgod">
+                JavaScript: Added window.print() as unimplemented method.
+            </action>
             <action type="update" dev="mguillem" id="1204922">
                 Javascript: document.getElementsByTagName and document.getElementsByName 
                 now return an ElementArray (instead of a NativeArray) allowing expressions
