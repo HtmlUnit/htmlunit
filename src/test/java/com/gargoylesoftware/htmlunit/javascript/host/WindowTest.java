@@ -1597,4 +1597,19 @@ public class WindowTest extends WebTestCase {
         loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testPrint() throws Exception {
+        final String content = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "window.print();\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        loadPage(content);
+    }    
 }

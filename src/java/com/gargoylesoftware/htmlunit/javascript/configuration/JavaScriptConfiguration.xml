@@ -757,6 +757,7 @@
         <function name="moveTo"/>
         <function name="open"/>
         <function name="prompt"/>
+        <function name="print"/>
         <function name="resizeTo"/>
         <function name="scroll"/>
         <function name="scrollBy"/>
