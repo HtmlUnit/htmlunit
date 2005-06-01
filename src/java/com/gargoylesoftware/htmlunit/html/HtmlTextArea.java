@@ -51,13 +51,14 @@ import java.util.Map;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
  * @author Marc Guillemot
+ * @author Daniel Gredler
  */
 public class HtmlTextArea extends FocusableElement implements DisabledElement, SubmittableElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "textarea";
 
-    private DomText oldText_;
+    private String defaultValue_;
 
     /**
      *  Create an instance
@@ -67,6 +68,26 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      */
     public HtmlTextArea( final HtmlPage page, final Map attributes ) {
         super( page, attributes );
+    }
+
+    /**
+     * Initializes the default value if necessary. We cannot do it in the constructor
+     * because the child node variable will not have been initialized yet. Must be called
+     * from all methods that use the default value.
+     */
+    private void initDefaultValue() {
+        if( defaultValue_ == null ) {
+            DomText child = (DomText) getFirstChild();
+            if( child != null ) {
+                defaultValue_ = child.getData();
+                if( defaultValue_ == null ) {
+                    defaultValue_ = "";
+                }
+            }
+            else {
+                defaultValue_ = "";
+            }
+        }
     }
 
     /**
@@ -120,13 +141,14 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      * @param  newValue The new value.
      */
     public final void setText( final String newValue ) {
-        oldText_ = (DomText)getFirstChild();
-        final DomText newText = new DomText(getPage(), newValue); 
-        if (oldText_ == null) {
-            appendChild(newText);
+        initDefaultValue();
+        final DomText child = (DomText) getFirstChild();
+        if (child == null) {
+            final DomText newChild = new DomText(getPage(), newValue); 
+            appendChild( newChild );
         }
         else {
-            oldText_.replace(newText);
+            child.setData( newValue );
         }
 
         getPage().executeOnChangeHandlerIfAppropriate(this);
@@ -148,12 +170,61 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
 
 
     /**
-     * Return the value of this element to what it was at the time the page was loaded.
+     * {@inheritDoc}
+     * @see SubmittableElement#reset()
      */
     public void reset() {
-        if(oldText_ != null) {
-            getFirstChild().replace(oldText_);
+        initDefaultValue();
+        setText( defaultValue_ );
+    }
+
+
+    /**
+     * {@inheritDoc}
+     * @see SubmittableElement#setDefaultValue(String)
+     */
+    public void setDefaultValue( final String defaultValue ) {
+        initDefaultValue();
+        if( defaultValue == null ) {
+            defaultValue_ = "";
         }
+        else {
+            defaultValue_ = defaultValue;
+        }
+    }
+
+
+    /**
+     * {@inheritDoc}
+     * @see SubmittableElement#getDefaultValue()
+     */
+    public String getDefaultValue() {
+        initDefaultValue();
+        return defaultValue_;
+    }
+
+
+    /**
+     * {@inheritDoc} This implementation is empty; only checkboxes and radio buttons
+     * really care what the default checked value is.
+     * @see SubmittableElement#setDefaultChecked(boolean)
+     * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
+     * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
+     */
+    public void setDefaultChecked( final boolean defaultChecked ) {
+        // Empty.
+    }
+
+
+    /**
+     * {@inheritDoc} This implementation returns <tt>false</tt>; only checkboxes and
+     * radio buttons really care what the default checked value is.
+     * @see SubmittableElement#isDefaultChecked()
+     * @see HtmlRadioButtonInput#isDefaultChecked()
+     * @see HtmlCheckBoxInput#isDefaultChecked()
+     */
+    public boolean isDefaultChecked() {
+        return false;
     }
 
 

@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1209947" due-to="Daniel Gredler">
+                Implemented form reset, defaultValue and defaultChecked.
+            </action>
             <action type="update" dev="yourgod">
                 JavaScript: Added window.print() as unimplemented method.
             </action>

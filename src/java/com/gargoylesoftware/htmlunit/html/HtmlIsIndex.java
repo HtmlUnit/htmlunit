@@ -50,6 +50,7 @@ import java.util.Map;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Daniel Gredler
  */
 public class HtmlIsIndex extends StyledElement implements SubmittableElement {
 
@@ -111,10 +112,54 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
 
 
     /**
-     * Return the value of this element to what it was at the time the page was loaded.
+     * {@inheritDoc}
+     * @see SubmittableElement#reset()
      */
     public void reset() {
         value_ = "";
+    }
+
+
+    /**
+     * {@inheritDoc}
+     * @see SubmittableElement#setDefaultValue(String)
+     */
+    public void setDefaultValue( final String defaultValue ) {
+        // The reset() method does nothing, so this method doesn't have to, either.
+    }
+
+
+    /**
+     * {@inheritDoc}
+     * @see SubmittableElement#setDefaultValue(String)
+     */
+    public String getDefaultValue() {
+        // The reset() method does nothing, so this method doesn't have to, either.
+        return "";
+    }
+
+
+    /**
+     * {@inheritDoc} This implementation is empty; only checkboxes and radio buttons
+     * really care what the default checked value is.
+     * @see SubmittableElement#setDefaultChecked(boolean)
+     * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
+     * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
+     */
+    public void setDefaultChecked( final boolean defaultChecked ) {
+        // Empty.
+    }
+
+
+    /**
+     * {@inheritDoc} This implementation returns <tt>false</tt>; only checkboxes and
+     * radio buttons really care what the default checked value is.
+     * @see SubmittableElement#isDefaultChecked()
+     * @see HtmlRadioButtonInput#isDefaultChecked()
+     * @see HtmlCheckBoxInput#isDefaultChecked()
+     */
+    public boolean isDefaultChecked() {
+        return false;
     }
 
 

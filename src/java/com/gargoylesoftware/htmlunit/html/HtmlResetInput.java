@@ -48,6 +48,7 @@ import java.util.Map;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Daniel Gredler
  */
 public class HtmlResetInput extends HtmlInput {
 
@@ -77,5 +78,12 @@ public class HtmlResetInput extends HtmlInput {
         return getEnclosingFormOrDie().reset();
     }
 
-}
+    /**
+     * {@inheritDoc} This method <b>does nothing</b> for reset input elements.
+     * @see SubmittableElement#reset()
+     */
+    public void reset() {
+        // Empty.
+    }
 
+}

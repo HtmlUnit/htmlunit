@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Daniel Gredler
  */
 public class HtmlFileInput extends HtmlInput {
 
@@ -60,6 +61,10 @@ public class HtmlFileInput extends HtmlInput {
      */
     public HtmlFileInput( final HtmlPage page, final Map attributes ) {
         super( page, attributes );
+        setValueAttribute( "" );
+        if( page.getWebClient().getBrowserVersion().isIE() ) {
+            setDefaultValue( "" );
+        }
     }
 
     /**
@@ -83,5 +88,22 @@ public class HtmlFileInput extends HtmlInput {
         return new KeyValuePair[] { new KeyDataPair(getNameAttribute(), file, contentType,
                 charset) };
     }
-    
+
+    /**
+     * {@inheritDoc} This method <b>does nothing</b> for file input elements.
+     * @see SubmittableElement#reset()
+     */
+    public void reset() {
+        // Empty.
+    }
+
+    /**
+     * {@inheritDoc} Overriden so that this does not set the value attribute when emulating
+     * Netscape browsers.
+     * @see HtmlInput#setDefaultValue(String)
+     */
+    public void setDefaultValue( final String defaultValue ) {
+        setDefaultValue( defaultValue, false );
+    }
+
 }

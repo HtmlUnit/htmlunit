@@ -56,11 +56,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author Mike Bresnahan
+ * @author Daniel Gredler
  */
 public class HtmlRadioButtonInput extends HtmlInput {
 
-    //For Checkbox, radio
-    private final boolean initialCheckedState_;
+    private boolean defaultCheckedState_;
 
     /**
      * Create an instance
@@ -78,16 +78,15 @@ public class HtmlRadioButtonInput extends HtmlInput {
             setAttributeValue("value", "on");
         }
 
-        //From the checkbox creator
-        initialCheckedState_ = isAttributeDefined("checked");
+        defaultCheckedState_ = isAttributeDefined("checked");
     }
 
-
     /**
-     * Reset this element to its original values.
+     * {@inheritDoc}
+     * @see SubmittableElement#reset()
      */
     public void reset() {
-        if( initialCheckedState_ ) {
+        if( defaultCheckedState_ ) {
             setAttributeValue("checked", "checked");
         }
         else {
@@ -154,6 +153,34 @@ public class HtmlRadioButtonInput extends HtmlInput {
     protected Page doClickAction(final Page defaultPage) throws IOException {
         setChecked(true);
         return defaultPage;
+    }
+
+    /**
+     * {@inheritDoc} Also sets the value to the new default value.
+     * @see SubmittableElement#setDefaultValue(String)
+     */
+    public void setDefaultValue( final String defaultValue ) {
+        super.setDefaultValue( defaultValue );
+        setValueAttribute( defaultValue );
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see SubmittableElement#setDefaultChecked(boolean)
+     */
+    public void setDefaultChecked( final boolean defaultChecked ) {
+        defaultCheckedState_ = defaultChecked;
+        if( getPage().getWebClient().getBrowserVersion().isNetscape() ) {
+            setChecked( defaultChecked );
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see SubmittableElement#isDefaultChecked()
+     */
+    public boolean isDefaultChecked() {
+        return defaultCheckedState_;
     }
 
 }
