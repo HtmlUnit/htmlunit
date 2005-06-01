@@ -92,5 +92,26 @@ public class Textarea extends FormField {
     public void jsxSet_value( final String value ) {
         ((HtmlTextArea)getHtmlElementOrDie()).setText(value);
     }
+
+    /**
+     * Returns the textarea's default value, used if the containing form gets reset.
+     * @return The textarea's default value, used if the containing form gets reset.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp">
+     * MSDN Documentation</a>
+     */
+    public String jsxGet_defaultValue() {
+        return ((HtmlTextArea)getHtmlElementOrDie()).getDefaultValue();
+    }
+
+    /**
+     * Sets the textarea's default value, used if the containing form gets reset.
+     * @param defaultValue The textarea's default value, used if the containing form gets reset.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp">
+     * MSDN Documentation</a>
+     */
+    public void jsxSet_defaultValue( final String defaultValue ) {
+        ((HtmlTextArea)getHtmlElementOrDie()).setDefaultValue( defaultValue );
+    }
+
 }
 

@@ -48,6 +48,7 @@ import java.util.Map;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Daniel Gredler
  */
 public class HtmlSubmitInput extends HtmlInput {
 
@@ -75,6 +76,14 @@ public class HtmlSubmitInput extends HtmlInput {
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
         return getEnclosingFormOrDie().submit(this);
+    }
+
+    /**
+     * {@inheritDoc} This method <b>does nothing</b> for submit input elements.
+     * @see SubmittableElement#reset()
+     */
+    public void reset() {
+        // Empty.
     }
 
 }

@@ -54,11 +54,14 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
  * @author Marc Guillemot
+ * @author Daniel Gredler
  */
 public abstract class HtmlInput extends FocusableElement implements DisabledElement, SubmittableElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "input";
+
+    private String defaultValue_;
 
     /**
      *  Create an instance
@@ -68,6 +71,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      */
     public HtmlInput( final HtmlPage page, final Map attributes ) {
         super( page, attributes );
+        defaultValue_ = getValueAttribute();
     }
 
     /**
@@ -373,11 +377,70 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
 
 
     /**
-     * Reset this element to its original values.
+     * {@inheritDoc}
+     * @see SubmittableElement#reset()
      */
     public void reset() {
-        // By default this does nothing.  Derived classes will override.
+        setValueAttribute( defaultValue_ );
     }
+
+
+    /**
+     * {@inheritDoc} Also sets the value attribute when emulating Netscape browsers.
+     * @see SubmittableElement#setDefaultValue(String)
+     * @see HtmlFileInput#setDefaultValue(String)
+     */
+    public void setDefaultValue( final String defaultValue ) {
+        final boolean modifyValue = getPage().getWebClient().getBrowserVersion().isNetscape();
+        setDefaultValue( defaultValue, modifyValue );
+    }
+
+
+    /**
+     * Sets the default value, optionally also modifying the current value.
+     * @param defaultValue The new default value.
+     * @param modifyValue Whether or not to set the current value to the default value.
+     */
+    protected void setDefaultValue( final String defaultValue, final boolean modifyValue ) {
+        defaultValue_ = defaultValue;
+        if( modifyValue ) {
+            setValueAttribute( defaultValue );
+        }
+    }
+
+
+    /**
+     * {@inheritDoc}
+     * @see SubmittableElement#getDefaultValue()
+     */
+    public String getDefaultValue() {
+        return defaultValue_;
+    }
+
+
+    /**
+     * {@inheritDoc} The default implementation is empty; only checkboxes and radio buttons
+     * really care what the default checked value is.
+     * @see SubmittableElement#setDefaultChecked(boolean)
+     * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
+     * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
+     */
+    public void setDefaultChecked( final boolean defaultChecked ) {
+        // Empty.
+    }
+
+
+    /**
+     * {@inheritDoc} The default implementation returns <tt>false</tt>; only checkboxes and
+     * radio buttons really care what the default checked value is.
+     * @see SubmittableElement#isDefaultChecked()
+     * @see HtmlRadioButtonInput#isDefaultChecked()
+     * @see HtmlCheckBoxInput#isDefaultChecked()
+     */
+    public boolean isDefaultChecked() {
+        return false;
+    }
+
 
     /**
      *  Set the "checked" attribute

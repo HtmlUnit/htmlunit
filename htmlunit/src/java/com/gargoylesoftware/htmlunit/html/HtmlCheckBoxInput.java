@@ -52,11 +52,11 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author Mike Bresnahan
+ * @author Daniel Gredler
  */
 public class HtmlCheckBoxInput extends HtmlInput {
 
-    //For Checkbox, radio
-    private final boolean initialCheckedState_;
+    private boolean defaultCheckedState_;
 
     /**
      * Create an instance.
@@ -70,7 +70,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
         super( page, attributes );
 
         //From the checkbox creator
-        initialCheckedState_ = isAttributeDefined("checked");
+        defaultCheckedState_ = isAttributeDefined("checked");
 
         // default value for both IE6 and Mozilla 1.7 even if spec says it is unspecified
         if (getAttributeValue("value") == ATTRIBUTE_NOT_DEFINED) {
@@ -80,10 +80,11 @@ public class HtmlCheckBoxInput extends HtmlInput {
 
 
     /**
-     * Reset this element to its original values.
+     * {@inheritDoc}
+     * @see SubmittableElement#reset()
      */
     public void reset() {
-        setChecked(initialCheckedState_);
+        setChecked( defaultCheckedState_ );
     }
 
     /**
@@ -139,5 +140,34 @@ public class HtmlCheckBoxInput extends HtmlInput {
     protected boolean isStateUpdateFirst() {
         return true;
     }
+
+    /**
+     * {@inheritDoc} Also sets the value to the new default value.
+     * @see SubmittableElement#setDefaultValue(String)
+     */
+    public void setDefaultValue( final String defaultValue ) {
+        super.setDefaultValue( defaultValue );
+        setValueAttribute( defaultValue );
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see SubmittableElement#setDefaultChecked(boolean)
+     */
+    public void setDefaultChecked( final boolean defaultChecked ) {
+        defaultCheckedState_ = defaultChecked;
+        if( getPage().getWebClient().getBrowserVersion().isNetscape() ) {
+            setChecked( defaultChecked );
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see SubmittableElement#isDefaultChecked()
+     */
+    public boolean isDefaultChecked() {
+        return defaultCheckedState_;
+    }
+
 }
 

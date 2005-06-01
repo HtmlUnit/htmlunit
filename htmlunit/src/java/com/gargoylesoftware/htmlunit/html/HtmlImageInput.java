@@ -53,6 +53,7 @@ import org.apache.commons.lang.StringUtils;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
+ * @author Daniel Gredler
  */
 public class HtmlImageInput extends HtmlInput {
 
@@ -60,6 +61,7 @@ public class HtmlImageInput extends HtmlInput {
     private boolean wasPositionSpecified_ = false;
     private int xPosition_;
     private int yPosition_;
+
 
     /**
      *  Create an instance
@@ -153,5 +155,14 @@ public class HtmlImageInput extends HtmlInput {
         yPosition_ = y;
         return super.click();
     }
-}
 
+    /**
+     * {@inheritDoc} Also sets the value to the new default value, just like IE.
+     * @see SubmittableElement#setDefaultValue(String)
+     */
+    public void setDefaultValue( final String defaultValue ) {
+        super.setDefaultValue( defaultValue );
+        setValueAttribute( defaultValue );
+    }
+
+}

@@ -46,6 +46,7 @@ import java.util.Map;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Daniel Gredler
  */
 public class HtmlButtonInput extends HtmlInput {
 
@@ -58,5 +59,14 @@ public class HtmlButtonInput extends HtmlInput {
     public HtmlButtonInput( final HtmlPage page, final Map attributes) {
         super( page, attributes);
     }
+
+    /**
+     * {@inheritDoc} This method <b>does nothing</b> for button input elements.
+     * @see SubmittableElement#reset()
+     */
+    public void reset() {
+        // Empty.
+    }
+
 }
 

@@ -116,17 +116,9 @@ public class Input extends FormField {
      *      set
      */
     public void jsxSet_checked( final boolean checked ) {
-        final HtmlInput input = getHtmlInputOrDie();
-        final String type = input.getTypeAttribute().toLowerCase();
-        if (type.equals("checkbox") || type.equals("radio")){
-            input.setChecked(checked);
-        }
-        else {
-            getLog().debug( "Input.jsxSet_checked(" + checked
-                + ") was called for class " + getClass().getName() );
-        }
+        ((HtmlInput)getDomNodeOrDie()).setChecked( checked );
     }
-    
+
     /**
      * Commodity for <code>(HtmlInput) getHtmlElementOrDie()</code>
      * @return the bound html input
@@ -134,7 +126,6 @@ public class Input extends FormField {
     protected HtmlInput getHtmlInputOrDie() {
         return (HtmlInput) getHtmlElementOrDie();
     }
-
 
     /**
      *  Return the value of the checked property. Although this property is
@@ -145,15 +136,47 @@ public class Input extends FormField {
      *@return    The checked property.
      */
     public boolean jsxGet_checked() {
-        final HtmlInput input = getHtmlInputOrDie();
-        final String type = input.getTypeAttribute().toLowerCase();
-        if (type.equals("checkbox") || type.equals("radio")){
-            return input.isChecked();
-        }
-        else {
-            getLog().warn( "Input.jsxGet_checked() was called for class " + getClass().getName() );
-            return false;
-        }
+        return ((HtmlInput)getDomNodeOrDie()).isChecked();
+    }
+
+    /**
+     * Returns the input's default value, used if the containing form gets reset.
+     * @return The input's default value, used if the containing form gets reset.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp">
+     * MSDN Documentation</a>
+     */
+    public String jsxGet_defaultValue() {
+        return ((HtmlInput)getDomNodeOrDie()).getDefaultValue();
+    }
+
+    /**
+     * Sets the input's default value, used if the containing form gets reset.
+     * @param defaultValue The input's default value, used if the containing form gets reset.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp">
+     * MSDN Documentation</a>
+     */
+    public void jsxSet_defaultValue( final String defaultValue ) {
+        ((HtmlInput)getDomNodeOrDie()).setDefaultValue( defaultValue );
+    }
+
+    /**
+     * Returns the input's default checked value, used if the containing form gets reset.
+     * @return The input's default checked value, used if the containing form gets reset.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultchecked.asp">
+     * MSDN Documentation</a>
+     */
+    public boolean jsxGet_defaultChecked() {
+        return ((HtmlInput)getDomNodeOrDie()).isDefaultChecked();
+    }
+
+    /**
+     * Sets the input's default checked value, used if the containing form gets reset.
+     * @param defaultChecked The input's default checked value, used if the containing form gets reset.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultchecked.asp">
+     * MSDN Documentation</a>
+     */
+    public void jsxSet_defaultChecked( final boolean defaultChecked ) {
+        ((HtmlInput)getDomNodeOrDie()).setDefaultChecked( defaultChecked );
     }
 
 }

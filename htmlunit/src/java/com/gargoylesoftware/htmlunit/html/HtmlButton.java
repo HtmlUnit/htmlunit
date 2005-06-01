@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
+ * @author Daniel Gredler
  */
 public class HtmlButton extends FocusableElement implements DisabledElement, SubmittableElement {
 
@@ -149,10 +150,54 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
 
 
     /**
-     * Return the value of this element to what it was at the time the page was loaded.
+     * {@inheritDoc}
+     * @see SubmittableElement#reset()
      */
     public void reset() {
         getLog().debug("reset() not implemented for this element");
+    }
+
+
+    /**
+     * {@inheritDoc}
+     * @see SubmittableElement#setDefaultValue(String)
+     */
+    public void setDefaultValue( final String defaultValue ) {
+        getLog().debug("setDefaultValue() not implemented for this element");
+    }
+
+
+    /**
+     * {@inheritDoc}
+     * @see SubmittableElement#getDefaultValue()
+     */
+    public String getDefaultValue() {
+        getLog().debug("getDefaultValue() not implemented for this element");
+        return "";
+    }
+
+
+    /**
+     * {@inheritDoc} This implementation is empty; only checkboxes and radio buttons
+     * really care what the default checked value is.
+     * @see SubmittableElement#setDefaultChecked(boolean)
+     * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
+     * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
+     */
+    public void setDefaultChecked( final boolean defaultChecked ) {
+        // Empty.
+    }
+
+
+    /**
+     * {@inheritDoc} This implementation returns <tt>false</tt>; only checkboxes and
+     * radio buttons really care what the default checked value is.
+     * @see SubmittableElement#isDefaultChecked()
+     * @see HtmlRadioButtonInput#isDefaultChecked()
+     * @see HtmlCheckBoxInput#isDefaultChecked()
+     */
+    public boolean isDefaultChecked() {
+        return false;
     }
 
 

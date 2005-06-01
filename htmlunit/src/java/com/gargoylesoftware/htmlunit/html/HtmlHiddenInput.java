@@ -46,30 +46,17 @@ import java.util.Map;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Daniel Gredler
  */
 public class HtmlHiddenInput extends HtmlInput {
 
-    //for Hidden, password
-    private final String initialValue_;
-
     /**
-     *  Create an instance
-     *
+     * Create an instance.
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
     public HtmlHiddenInput( final HtmlPage page, final Map attributes ) {
         super( page, attributes );
-
-        initialValue_ = getValueAttribute();
     }
 
-
-    /**
-     * Reset this element to its original values.
-     */
-    public void reset() {
-        setValueAttribute(initialValue_);
-    }
 }
-
