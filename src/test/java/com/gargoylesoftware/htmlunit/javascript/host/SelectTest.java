@@ -43,8 +43,11 @@ import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
@@ -603,5 +606,39 @@ public class SelectTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * Test for bug 1159709. As notYetImplemented because solution is not so simple.
+     * @throws Exception if the test fails
+     */
+    public void testRightPageAfterOnchange() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        
+        final String content
+            = "<html><body>"
+            + "<iframe src='fooIFrame.html'></iframe>"
+            + "<form name='form1' action='http://first' method='post'>"
+            + "    <select name='select1' onchange='this.form.submit()'>"
+            + "        <option value='option1' selected='true' name='option1'>One</option>"
+            + "        <option value='option2' name='option2'>Two</option>"
+            + "    </select>"
+            + "</form>"
+            + "</body></html>";
+    
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        webConnection.setDefaultResponse("<html><body></body></html>");
+        webConnection.setResponse(URL_FIRST, content);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlForm form = page.getFormByName("form1");
+        final HtmlSelect select = form.getSelectByName("select1");
+        final Page page2 = select.setSelectedAttribute("option2", true);
+        assertEquals("http://first", page2.getWebResponse().getUrl());
     }
 }
