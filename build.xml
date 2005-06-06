@@ -55,7 +55,7 @@
 <target name="compile" description="compile" depends="maketarget">
     <javac srcdir="${base.src.dir}" destdir="${base.classes.dir}" 
             debug="on" deprecation="off" 
-            source="1.3" target="1.3" encoding="ISO-8859-1">
+            source="1.4" target="1.4" encoding="ISO-8859-1">
         <classpath refid="base.class.path"/>
     </javac>
     <copy todir="${base.classes.dir}">
@@ -65,7 +65,7 @@
     </copy>    
     <javac srcdir="${test.src.dir}" destdir="${test.classes.dir}" 
             debug="on" deprecation="off" 
-            source="1.3" target="1.3" encoding="ISO-8859-1">
+            source="1.4" target="1.4" encoding="ISO-8859-1">
         <classpath refid="test.class.path"/>
     </javac>
     <copy todir="${test.classes.dir}">
