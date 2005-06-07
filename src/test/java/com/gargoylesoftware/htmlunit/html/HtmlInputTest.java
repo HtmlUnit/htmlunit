@@ -222,6 +222,20 @@ public final class HtmlInputTest extends WebTestCase {
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         
         assertEquals("text", form.getInputByName("foo").getTypeAttribute());
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testOnChangeHandlerNotFiredOnLoad() throws Exception {
+
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<input type='file' name='text1' onchange='alert(\"changed\")')>"
+            + "</form></body></html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(htmlContent, collectedAlerts);
+        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
     }    
 }
 
