@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1210742">
+                JavaScript: handle position in insertAjacentHTML as case insensitive as IE does.
+            </action>
             <action type="update" dev="mguillem" id="1216267">
                 HtmlOption.click() now selects the option.
             </action>
