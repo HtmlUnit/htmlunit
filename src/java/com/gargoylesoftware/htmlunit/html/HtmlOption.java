@@ -37,7 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
 import java.util.Map;
+
+import com.gargoylesoftware.htmlunit.Page;
 
 /**
  *  Wrapper for the html element "option"
@@ -47,6 +50,7 @@ import java.util.Map;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
+ * @author Marc Guillemot
  */
 public class HtmlOption extends ClickableElement implements DisabledElement {
 
@@ -216,5 +220,16 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
         else {
             return asText();
         }
+    }
+
+    /**
+     * Selects the option if it's not already selected
+     * @see ClickableElement#doClickAction(Page)
+     */
+    protected Page doClickAction(final Page defaultPage) throws IOException {
+        if (!isSelected()) {
+            setSelected(true);
+        }
+        return defaultPage;
     }
 }
