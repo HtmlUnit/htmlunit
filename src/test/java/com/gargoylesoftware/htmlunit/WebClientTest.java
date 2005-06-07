@@ -1208,4 +1208,46 @@ public class WebClientTest extends WebTestCase {
         client.getPage(URL_FIRST);
         assertNull(webConnection.getLastAdditionalHeaders().get("foo-header"));
     }
+
+    /**
+     * Test that content type is looked in a case insensitive way.
+     * Cf <a href="http://www.ietf.org/rfc/rfc2045.txt">RFC 2045</a>:
+     * "All media type values, subtype values, and parameter names as defined 
+     * are case-insensitive".
+     * @throws Exception If something goes wrong.
+     */
+    public void testContentTypeCaseInsensitive() throws Exception {
+        final String content = "<html><head>"
+            + "<script type='Text/Javascript' src='foo.js'></script>"
+            + "</head></html>";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse("alert('foo')", 200, "OK", "Text/Javascript");
+        client.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        final List expectedAlerts = Arrays.asList( new String[]{"foo"} );
+
+        webConnection.setResponse(URL_FIRST, content, "Text/Html");
+        assertInstanceOf(client.getPage(URL_FIRST), HtmlPage.class);
+        assertEquals( expectedAlerts, collectedAlerts );
+        
+        webConnection.setResponse(URL_FIRST, content, "Text/XHtml");
+        collectedAlerts.clear();
+        assertInstanceOf(client.getPage(URL_FIRST), HtmlPage.class);
+        assertEquals( expectedAlerts, collectedAlerts );
+
+        webConnection.setResponse(URL_FIRST, content, "Text/Xml");
+        assertInstanceOf(client.getPage(URL_FIRST), XmlPage.class);
+        webConnection.setResponse(URL_FIRST, content, "ApplicaTion/Xml");
+        assertInstanceOf(client.getPage(URL_FIRST), XmlPage.class);
+
+        webConnection.setResponse(URL_FIRST, content, "Text/Plain");
+        assertInstanceOf(client.getPage(URL_FIRST), TextPage.class);
+
+        webConnection.setResponse(URL_FIRST, "", "Text/JavaScript");
+        assertInstanceOf(client.getPage(URL_FIRST), JavaScriptPage.class);
+    }
 }

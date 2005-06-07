@@ -77,7 +77,7 @@ public class DefaultPageCreator implements PageCreator {
             final WebWindow webWindow )
         throws
             IOException {
-        final String contentType = webResponse.getContentType();
+        final String contentType = webResponse.getContentType().toLowerCase();
         final Page newPage;
         
         if( contentType.equals( "text/html" ) || contentType.equals( "text/xhtml" ) ) {

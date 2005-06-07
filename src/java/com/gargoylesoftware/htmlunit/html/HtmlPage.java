@@ -823,8 +823,8 @@ public final class HtmlPage extends DomNode implements Page {
             if( webResponse.getStatusCode() == 200 ) {
                 final String contentType = webResponse.getContentType();
                 final String contentCharset = webResponse.getContentCharSet();
-                if( contentType.equals("text/javascript") == false
-                        && contentType.equals("application/x-javascript") == false ) {
+                if (!contentType.equalsIgnoreCase("text/javascript")
+                        && !contentType.equalsIgnoreCase("application/x-javascript")) {
                     getLog().warn(
                         "Expected content type of text/javascript or application/x-javascript for remotely "
                         + "loaded javascript element " + url + " but got [" + webResponse.getContentType()+"]");
