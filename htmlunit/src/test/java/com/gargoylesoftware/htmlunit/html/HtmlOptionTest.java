@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -46,6 +44,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public class HtmlOptionTest extends WebTestCase {
     /**
@@ -107,13 +106,8 @@ public class HtmlOptionTest extends WebTestCase {
             + "</select>"
             + "<input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
-        final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage page = loadPage(htmlContent);
 
         final HtmlOption option1 = ( HtmlOption )page.getHtmlElementById( "option1" );
         final HtmlOption option2 = ( HtmlOption )page.getHtmlElementById( "option2" );
@@ -121,7 +115,7 @@ public class HtmlOptionTest extends WebTestCase {
         assertEquals("option1", option1.getValue());
         assertEquals("Number Two", option2.getValue());
 
-    }    
+    }
     /**
      * @throws Exception if the test fails
      */
@@ -136,19 +130,37 @@ public class HtmlOptionTest extends WebTestCase {
             + "</select>"
             + "<input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
-        final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
-
-        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage page = loadPage(htmlContent);
 
         final HtmlOption option1 = ( HtmlOption )page.getHtmlElementById( "option1" );
         final HtmlOption option2 = ( HtmlOption )page.getHtmlElementById( "option2" );
         
         assertEquals("Option1", option1.getValue());
         assertEquals("Number Two", option2.getValue());
+    }        
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testClick() throws Exception {
+
+        final String htmlContent
+            = "<html><body>"
+            + "<form id='form1'>" 
+            + "<select name='select1' id='select1'>"
+            + "     <option id='option1'>Option1</option>"
+            + "     <option id='option2' selected>Number Two</option>"
+            + "</select>"
+            + "<input type='submit' name='button' value='foo'/>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlOption option1 = (HtmlOption) page.getHtmlElementById("option1");
+        assertFalse(option1.isSelected());
+        option1.click();
+        assertTrue(option1.isSelected());
+        option1.click();
+        assertTrue(option1.isSelected());
     }        
 }
