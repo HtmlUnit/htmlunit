@@ -61,7 +61,7 @@ public class HtmlFileInput extends HtmlInput {
      */
     public HtmlFileInput( final HtmlPage page, final Map attributes ) {
         super( page, attributes );
-        setValueAttribute( "" );
+        setAttributeValue( "value", "" );
         if( page.getWebClient().getBrowserVersion().isIE() ) {
             setDefaultValue( "" );
         }

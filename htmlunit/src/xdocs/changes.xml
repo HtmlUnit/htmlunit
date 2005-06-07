@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="yourgod">
+                JavaScript: Fixed bug with onchange handler being fired for all input type="file" 
+                on creation.
+            </action>
             <action type="update" dev="mguillem" id="1210742">
                 JavaScript: handle position in insertAjacentHTML as case insensitive as IE does.
             </action>
