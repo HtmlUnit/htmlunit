@@ -432,11 +432,6 @@
                 <include>**/*Test.java</include>
             </includes>
         </unitTest>
-        <jarResources>
-            <includes>
-                <include>**/*.xml</include>
-            </includes>
-        </jarResources>
     </build>
 </project>
 
