@@ -592,7 +592,7 @@ public class HTMLElement extends NodeImpl {
         final boolean append;
         
         // compute the where and how the new nodes should be added
-        if (POSITION_AFTER_BEGIN.equals(where)) {
+        if (POSITION_AFTER_BEGIN.equalsIgnoreCase(where)) {
             if (currentNode.getFirstChild() == null) {
                 // new nodes should appended to the children of current node
                 node = currentNode;
@@ -604,17 +604,17 @@ public class HTMLElement extends NodeImpl {
                 append = false;
             }
         }
-        else if (POSITION_BEFORE_BEGIN.equals(where)) {
+        else if (POSITION_BEFORE_BEGIN.equalsIgnoreCase(where)) {
             // new nodes should be inserted before current node
             node = currentNode;
             append = false;
         }
-        else if (POSITION_BEFORE_END.equals(where)) {
+        else if (POSITION_BEFORE_END.equalsIgnoreCase(where)) {
             // new nodes should appended to the children of current node
             node = currentNode;
             append = true;
         }
-        else if (POSITION_AFTER_END.equals(where)) {
+        else if (POSITION_AFTER_END.equalsIgnoreCase(where)) {
             if (currentNode.getNextSibling() == null) {
                 // new nodes should appended to the children of parent node
                 node = currentNode.getParentNode();

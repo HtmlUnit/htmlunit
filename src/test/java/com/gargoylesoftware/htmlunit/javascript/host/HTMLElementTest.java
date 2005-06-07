@@ -43,6 +43,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -52,7 +53,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for NodeImpl
+ * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.HTMLElement}.
  * 
  * @author yourgod
  * @author Chris Erskine
@@ -509,15 +510,26 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testInsertAdjacentHTML() throws Exception {
+        testInsertAdjacentHTML("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
+        testInsertAdjacentHTML("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    void testInsertAdjacentHTML(final String beforeEnd, 
+            final String afterEnd, final String beforeBegin, final String afterBegin) 
+        throws Exception {
+
         final String content = "<html><head><title>First</title>\n"
                 + "<script>\n"
                 + "function test()\n"
                 + "{\n"
                 + "  var oDiv = document.getElementById('middle');\n"
-                + "  oDiv.insertAdjacentHTML('beforeEnd', ' <div id=3>before end</div> ');\n"
-                + "  oDiv.insertAdjacentHTML('afterEnd', ' <div id=4>after end</div> ');\n"
-                + "  oDiv.insertAdjacentHTML('beforeBegin', ' <div id=1>before begin</div> ');\n"
-                + "  oDiv.insertAdjacentHTML('afterBegin', ' <div id=2>after begin</div> ');\n"
+                + "  oDiv.insertAdjacentHTML('" + beforeEnd + "', ' <div id=3>before end</div> ');\n"
+                + "  oDiv.insertAdjacentHTML('" + afterEnd + "', ' <div id=4>after end</div> ');\n"
+                + "  oDiv.insertAdjacentHTML('" + beforeBegin + "', ' <div id=1>before begin</div> ');\n"
+                + "  oDiv.insertAdjacentHTML('" + afterBegin + "', ' <div id=2>after begin</div> ');\n"
                 + "  var coll = document.getElementsByTagName('DIV');\n"
                 + "  for (var i=0; i<coll.length; ++i) {\n"
                 + "    alert(coll[i].id);\n"
@@ -533,11 +545,13 @@ public class HTMLElementTest extends WebTestCase {
                 + "</div>\n"
                 + "</body></html>";
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, 
+                collectedAlerts);
 
         final List expectedAlerts = Arrays.asList(new String[]{
             "outside", "1", "middle", "2", "3", "4"
         });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
 
         final HtmlElement elt = page.getHtmlElementById("outside");
