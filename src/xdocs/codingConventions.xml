@@ -149,6 +149,19 @@ import java.util.ArrayList;
                 Indent by using spaces, not tabs.  Indent four (4) spaces at a time.
             </p>
         </section>
+        
+        <section name="Deprecation">
+            <p>
+                From time to time code needs to be removed from public APIs. When possible we will
+                deprecate the existing API (using the javadoc @deprecated tag). Code deprecated in
+                this way should be left in the source for at least 6 months and at least 2 releases,
+                meaning the time could be longer than 6 months if there are not 2 releases in a
+                6 month period but never less than 6 months.
+                
+                When deprecation is not possible a <a href="changes-report.html">change log</a> message
+                containing "INCOMPATIBLE CHANGE" should be added to make these changes easy to find.
+            </p>
+        </section>        
     </body>
 </document>
 
