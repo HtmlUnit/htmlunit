@@ -159,7 +159,6 @@ public final class HtmlPage extends DomNode implements Page {
         executeRefreshIfNeeded();
     }
 
-
     /**
      * Clean up this page.
      * @throws IOException If an IO problem occurs.
@@ -685,7 +684,7 @@ public final class HtmlPage extends DomNode implements Page {
      * try to return a value.
      * @param htmlElement The html element for which this script is being executed.
      * This element will be the context during the javascript execution.  If null,
-     * the context will default to the page.
+     * the context will default to the window.
      * @return A ScriptResult which will contain both the current page (which may be different than
      * the previous page and a javascript result object.
      */
@@ -1111,7 +1110,6 @@ public final class HtmlPage extends DomNode implements Page {
         }
     }
 
-
     /**
      * Return a list containing all the frames (from frame and iframe tags) in this page.
      * @return a list of {@link BaseFrame.FrameWindow}
@@ -1413,10 +1411,12 @@ public final class HtmlPage extends DomNode implements Page {
             removeIdElement((HtmlElement) node);
         }
     }
+
     /**
      * @see DomNode#asXml()
      */
     public String asXml() {
         return getDocumentElement().asXml();
     }
+
 }

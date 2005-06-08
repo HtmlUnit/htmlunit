@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1213455" due-to="Daniel Gredler">
+            	JavaScript: use the Window as the top scope in Rhino JavaScript engine.
+            </action>
             <action type="update" dev="yourgod">
                 JavaScript: Fixed bug with onchange handler being fired for all input type="file" 
                 on creation.

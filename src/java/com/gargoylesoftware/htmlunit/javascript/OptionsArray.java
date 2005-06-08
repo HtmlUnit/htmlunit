@@ -124,7 +124,6 @@ public class OptionsArray extends SimpleScriptable {
             final Option option = (Option) newValue;
             HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
             if ( htmlOption == null ) {
-                initJavaScriptObject( option );
                 htmlOption = new HtmlOption(htmlSelect_.getPage(), null);
                 option.setDomNode( htmlOption );
                 // BUG: Set the text and value.

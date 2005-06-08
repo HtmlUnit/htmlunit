@@ -43,7 +43,6 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -86,7 +85,7 @@ public class ActiveXObject extends SimpleScriptable {
         if( !(args[0] instanceof String) ) {
             throw Context.reportRuntimeError( "ActiveXObject Error: constructor parameter must be a String." );
         }
-        final Map map = JavaScriptEngine.getWebClientForCurrentThread().getActiveXObjectMap();
+        final Map map = getWindow( ctorObj ).getWebWindow().getWebClient().getActiveXObjectMap();
         if ( map == null ) {
              throw Context.reportRuntimeError( "ActiveXObject Error: the map is null." );
         }

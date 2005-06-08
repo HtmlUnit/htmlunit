@@ -66,11 +66,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author  David K. Taylor
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Daniel Gredler
  */
 public class SimpleScriptable extends ScriptableObject {
     private static final long serialVersionUID = 3120000176890886780L;
-    
-    private JavaScriptEngine.PageInfo pageInfo_;
+
     private DomNode domNode_;
 
 
@@ -116,43 +116,22 @@ public class SimpleScriptable extends ScriptableObject {
 
 
     /**
-     * Set the page info.  This contains information specific to the rhino engine.
-     * @param pageInfo The new pageInfo.
-     */
-    public final void setPageInfo( final JavaScriptEngine.PageInfo pageInfo ) {
-        Assert.notNull("pageInfo", pageInfo);
-        pageInfo_ = pageInfo;
-    }
-
-    /**
      * Create a new javascript object
      * @param className The class name of the new object
      * @return The new object
      */
     public SimpleScriptable makeJavaScriptObject( final String className ) {
-        final JavaScriptEngine.PageInfo pageInfo = getPageInfo();
-
-        final SimpleScriptable newObject;
+        final Context c = JavaScriptEngine.enterContext();
         try {
-            newObject = (SimpleScriptable) Context.getCurrentContext().newObject(
-                pageInfo.getScope(), className);
-            initJavaScriptObject( newObject );
-            return newObject;
+            final SimpleScriptable scriptable = (SimpleScriptable) c.newObject(this, className);
+            return scriptable;
         }
         catch( final Exception e ) {
             throw new ScriptException(e);
         }
-    }
-
-
-    /**
-     * Initialize a new javascript object
-     * @param newObject The JavaScript object to initialize.
-     */
-    protected void initJavaScriptObject( final SimpleScriptable newObject ) {
-        final JavaScriptEngine.PageInfo pageInfo = getPageInfo();
-
-        newObject.setPageInfo( pageInfo );
+        finally {
+            Context.exit();
+        }
     }
 
 
@@ -380,18 +359,6 @@ public class SimpleScriptable extends ScriptableObject {
 
 
     /**
-     * Gets the associated page info
-     * @return the info
-     */
-    protected JavaScriptEngine.PageInfo getPageInfo() {
-        if( pageInfo_ == null ) {
-            throw new IllegalStateException("pageInfo_ has not been initialized!");
-        }
-        return pageInfo_;
-    }
-
-
-    /**
      * Return the javascript object that corresponds to the specified object.
      * New javascript objects will be created as needed.  If a javascript object
      * cannot be created for a domNode then NOT_FOUND will be returned.
@@ -524,21 +491,30 @@ public class SimpleScriptable extends ScriptableObject {
     public Object getDefaultValue( final Class hint ) {
         return toString();
     }
-    
+
     /**
-     * Gets the window that is (or should be) the scope for this object
-     * @return the window
-     * @throws RuntimeException if the window can't be found, what should never occurs
+     * Gets the window that is the top scope for this object.
+     * @return The window associated with this object.
+     * @throws RuntimeException If the window cannot be found, which should never occur.
      */
     protected Window getWindow() throws RuntimeException {
-        Scriptable current = this;
-        while (current != null) {
-            if (current instanceof Window) {
-                return (Window) current;
-            }
-            current = current.getParentScope();
-        }
-        throw new RuntimeException("Unable to find associated window to " + this);
+        return getWindow( this );
     }
-}
 
+    /**
+     * Gets the window that is the top scope for the specified object.
+     * @param s The JavaScript object whose associated window is to be returned.
+     * @return The window associated with the specified JavaScript object.
+     * @throws RuntimeException If the window cannot be found, which should never occur.
+     */
+    protected static Window getWindow( final Scriptable s ) throws RuntimeException {
+        final Scriptable top = ScriptableObject.getTopLevelScope( s );
+        if( top instanceof Window ) {
+            return (Window) top;
+        }
+        else {
+            throw new RuntimeException("Unable to find window associated with " + s);
+        }
+    }
+
+}

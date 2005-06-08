@@ -6,4 +6,5 @@
 
 <suppressions>
     <suppress checks="FileLength" files="DocumentTest.java"/>
+    <suppress checks="LineLength" files="JavaScriptEngine.java"/> <!-- for a long href in a javadoc link -->
 </suppressions>
