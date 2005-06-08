@@ -134,7 +134,6 @@ public class SimpleScriptable extends ScriptableObject {
         }
     }
 
-
     /**
      * Return the DOM node that corresponds to this javascript object or throw
      * an exception if one cannot be found.
@@ -517,4 +516,12 @@ public class SimpleScriptable extends ScriptableObject {
         }
     }
 
+    /**
+     * Gets the scriptable used at starting scope for the execution of current script.
+     * @return the scope as defined in {@link JavaScriptEngine#callFunction}
+     * or {@link JavaScriptEngine#execute}.
+     */
+    protected Scriptable getStartingScope() {
+        return (Scriptable) Context.getCurrentContext().getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+    }
 }
