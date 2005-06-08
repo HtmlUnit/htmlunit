@@ -98,10 +98,6 @@ public class FrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testLocation() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection =
             new MockWebConnection(webClient);

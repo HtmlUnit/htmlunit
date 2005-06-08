@@ -84,6 +84,15 @@ public final class JavaScriptEngine extends ScriptEngine {
 
     private static final ThreadLocal javaScriptRunning_ = new ThreadLocal();
     private static final ContextListener contextListener_;
+    
+    /**
+     * Key used to place the scope in which the execution of some javascript code
+     * started (in {@link #callFunction} or {@link #execute}) as thread local attribute 
+     * in current context.<br/>
+     * This is needed to resolve some relative locations relatively to the page 
+     * in which the script is executed and not to the page which location is changed.
+     */
+    static final String KEY_STARTING_SCOPE = "startingScope";
 
     /**
      * Initialize a context listener so we can count JS contexts and make sure we
@@ -231,6 +240,7 @@ public final class JavaScriptEngine extends ScriptEngine {
         final Boolean javaScriptAlreadyRunning = (Boolean) javaScriptRunning_.get();
         javaScriptRunning_.set(Boolean.TRUE);
         final Context context = enterContext();
+        context.putThreadLocal(KEY_STARTING_SCOPE, scope);
         try {
             final Object result = context.evaluateString( scope, sourceCode, sourceName, lineNumber, securityDomain );
             return result;
@@ -283,6 +293,7 @@ public final class JavaScriptEngine extends ScriptEngine {
         javaScriptRunning_.set(Boolean.TRUE);
         final Function function = (Function) javaScriptFunction;
         final Context context = enterContext();
+        context.putThreadLocal(KEY_STARTING_SCOPE, scope);
         try {
             final Object result = function.call( context, scope, (Scriptable) thisObject, args );
             return result;

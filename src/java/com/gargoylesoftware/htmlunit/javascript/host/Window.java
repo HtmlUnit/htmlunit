@@ -346,7 +346,9 @@ public class Window extends SimpleScriptable {
      */
     public void jsxSet_location( final String newLocation ) throws IOException {
         try {
-            final HtmlPage page = (HtmlPage)webWindow_.getEnclosedPage();
+            // url should be resolved from the page in which the js is executed
+            // cf test FrameTest#testLocation
+            final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
             final URL url = page.getFullyQualifiedUrl(newLocation);
             
             getLog().debug(
