@@ -44,7 +44,6 @@ import org.mozilla.javascript.Context;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 
 
 /**
@@ -111,10 +110,7 @@ public class Image extends HTMLElement {
         }
         else {
             // this is an image instantiated in js with "new Image()" and not yet added to the DOM tree.
-            // this way to get the "active" page is probably wrong because there is no reason 
-            // that the page in which script is currently executed is contained the current window of the "browser"
-            // but as long as we don't have a clean way to get the page from the js Context...
-            final WebClient webClient = JavaScriptEngine.getWebClientForCurrentThread();
+            final WebClient webClient = getWindow().getWebWindow().getWebClient();
             final HtmlPage currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
             try {
                 return currentPage.getFullyQualifiedUrl(src_).toExternalForm();

@@ -57,9 +57,11 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mozilla.javascript.Context;
 
 import com.gargoylesoftware.base.testing.BaseTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * Common superclass for HtmlUnit tests
@@ -70,6 +72,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Michael Ottati
+ * @author Daniel Gredler
  */
 public abstract class WebTestCase extends BaseTestCase {
     /** Constant for the url http://first which is used in the tests. */
@@ -103,6 +106,7 @@ public abstract class WebTestCase extends BaseTestCase {
             throw new IllegalStateException("Unable to create url constants");
         }
     }
+
     /**
      * Create an instance.
      * @param name The name of the test.
@@ -369,11 +373,43 @@ public abstract class WebTestCase extends BaseTestCase {
         return (MockWebConnection) page.getWebClient().getWebConnection();
     }
 
-
+    /**
+     * Overriden so that we can assert the state after running each test.
+     * @see TestCase#runTest()
+     */
+    protected void runTest() throws Throwable {
+        // Run the actual testcase.
+        super.runTest();
+        try {
+            // Make sure all the JavaScript contexts were exited.
+            int count = JavaScriptEngine.getContextCount();
+            if( count != 0 ) {
+                final String are;
+                final String s;
+                if( count != 1 ) {
+                    are = "are";
+                    s = "s";
+                }
+                else {
+                    are = "is";
+                    s = "";
+                }
+                throw new Exception( "There " + are + " " + count + " unexited context" + s + "!" );
+            }
+        }
+        finally {
+            // If this test went badly, we don't want it to mess up all the
+            // tests that get run after this one, so we make sure all of our
+            // JavaScript contexts have been exited (at least on this thread).
+            while( Context.getCurrentContext() != null ) {
+                Context.exit();
+            }
+        }
+    }
 
     /**
      * Runs the calling JUnit test again and fails only if it already runs.<br/>
-     * This is helpfull for tests that don't currently work but should work one day,
+     * This is helpful for tests that don't currently work but should work one day,
      * when the tested functionality has been implemented.<br/>
      * The right way to use it is:
      * <pre>

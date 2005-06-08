@@ -880,23 +880,21 @@ public class JavaScriptEngineTest extends WebTestCase {
             return delegate_.callFunction(htmlPage, javaScriptFunction, thisObject, args, htmlElementScope);
         }
 
-        /** @inheritDoc ScriptEngine#toString(HtmlPage,Object) */
-        public String toString(final HtmlPage htmlPage, final Object javaScriptObject) {
-            return delegate_.toString(htmlPage, javaScriptObject);
-        }
-
         /** @return The number of times that this engine has called functions */
         public int getCallCount() {
             return scriptCallCount_;
         }
+
         /** @return The number of times that this engine has executed code */
         public int getExecutionCount() {
             return scriptExecutionCount_;
         }
+
         /** @return true if the script is running */
         public boolean isScriptRunning() {
             return false;
         }
     }
+
 }
 

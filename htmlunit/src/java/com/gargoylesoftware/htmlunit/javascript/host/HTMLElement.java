@@ -912,14 +912,6 @@ public class HTMLElement extends NodeImpl {
         return false;
     }
 
-    /**
-     * Returns the JavaScript object for the window containing this HTML element's page.
-     * @return the JavaScript object for the window containing this HTML element's page.
-     */
-    protected Window getWindow() {
-        return (Window) getDomNodeOrDie().getPage().getEnclosingWindow().getScriptObject();
-    }
-
     //----------------------- START #default#homePage BEHAVIOR -----------------------
 
     /**

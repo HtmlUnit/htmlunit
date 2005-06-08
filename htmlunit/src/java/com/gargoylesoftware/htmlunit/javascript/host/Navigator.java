@@ -210,7 +210,7 @@ public final class Navigator extends SimpleScriptable {
      * @return the default browser version.
      */
     private BrowserVersion getBrowserVersion() {
-        return getPageInfo().getScope().getWebWindow().getWebClient().getBrowserVersion();
+        return getWindow().getWebWindow().getWebClient().getBrowserVersion();
     }
 
 }

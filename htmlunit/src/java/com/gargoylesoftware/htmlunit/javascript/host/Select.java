@@ -112,7 +112,6 @@ public class Select extends FormField {
 
         HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
         if ( htmlOption == null ) {
-            initJavaScriptObject( option );
             htmlOption = new HtmlOption(select.getPage(), null);
             option.setDomNode( htmlOption );
         }

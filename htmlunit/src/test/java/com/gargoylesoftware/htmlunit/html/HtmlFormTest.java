@@ -50,9 +50,9 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
 
 /**
  * Tests for {@link HtmlForm}.
@@ -680,6 +680,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSubmit_CheckboxClicked() throws Exception {
+
         final String htmlContent
             = "<html><head><title>foo</title>"
             + "<script language='javascript'>"
@@ -694,36 +695,36 @@ public class HtmlFormTest extends WebTestCase {
             + "</script>"
             + "</head><body>"
             + "<form name='form1' id='form1' method='post'>"
-            + "<input type=checkbox name=Format value='' onclick='setFormat()'>"
+            + "    <input type=checkbox name=Format value='' onclick='setFormat()'>"
             + "    <input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
-        final MockWebConnection webConnection = getMockConnection(page);
-         
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
-        final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) form.getInputByName("Format");
+        final HtmlPage page1 = loadPage( htmlContent );
+        final MockWebConnection webConnection1 = getMockConnection( page1 );
+        final HtmlForm form1 = (HtmlForm) page1.getHtmlElementById( "form1" );
+        final HtmlSubmitInput button1 = (HtmlSubmitInput) form1.getInputByName( "button" );
 
-        final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
-
-        final List expectedParameters0 = Arrays.asList( new Object[]{
-            new KeyValuePair("button", "foo")
-        } );
-        final List expectedParameters1 = Arrays.asList( new Object[]{
-            new KeyValuePair("Format", "html"),
-            new KeyValuePair("button", "foo")
+        final HtmlPage page2 = (HtmlPage) button1.click();
+        final List collectedParameters1 = webConnection1.getLastParameters();
+        final List expectedParameters1 = Arrays.asList( new Object[] {
+            new KeyValuePair( "button", "foo" )
         } );
 
+        final MockWebConnection webConnection2 = getMockConnection( page2 );
+        final HtmlForm form2 = (HtmlForm) page2.getHtmlElementById( "form1" );
+        final HtmlCheckBoxInput checkBox2 = (HtmlCheckBoxInput) form2.getInputByName( "Format" );
+        final HtmlSubmitInput button2 = (HtmlSubmitInput) form2.getInputByName( "button" );
 
-        button.click();
-        final List collectedParameters0 = webConnection.getLastParameters();
+        checkBox2.click();
+        button2.click();
+        final List collectedParameters2 = webConnection2.getLastParameters();
+        final List expectedParameters2 = Arrays.asList( new Object[] {
+            new KeyValuePair( "Format", "html" ),
+            new KeyValuePair( "button", "foo" )
+        } );
 
-        checkBox.click();
-        button.click();
-        final List collectedParameters1 = webConnection.getLastParameters();
-
-        assertEquals( expectedParameters0, collectedParameters0 );
         assertEquals( expectedParameters1, collectedParameters1 );
+        assertEquals( expectedParameters2, collectedParameters2 );
     }
 
     /**

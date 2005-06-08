@@ -111,10 +111,6 @@ public class ScriptEngineTest extends WebTestCase {
                     final HtmlElement htmlElement ) {
                 return null;
             }
-            public String toString(
-                    final HtmlPage htmlPage, final Object javaScriptObject ) {
-                return null;
-            }
             public boolean isScriptRunning() {
                 return false;
             }

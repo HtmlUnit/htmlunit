@@ -49,10 +49,13 @@ import org.apache.commons.logging.LogFactory;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Marc Guillemot
+ * @author Daniel Gredler
  */
 public abstract class ScriptEngine {
+
+    private static final Log ScriptEngineLog_ = LogFactory.getLog( ScriptEngine.class );
+
     private final WebClient webClient_;
-    private final Log scriptEngineLog_ = LogFactory.getLog(ScriptEngine.class);
 
     /**
      * Create an instance for the specifed web client
@@ -135,23 +138,13 @@ public abstract class ScriptEngine {
 
 
     /**
-     * Return the string representation of the JavaScript object in the context of the given page.
-     * @param htmlPage The page
-     * @param javaScriptObject The object to represent at a string.
-     * @return The result string.
-     */
-    public abstract String toString(
-        final HtmlPage htmlPage, final Object javaScriptObject );
-
-
-    /**
      * Return the log object that is being used to log information about the script engine.
      * @return The log
      */
-    public Log getScriptEngineLog() {
-        return scriptEngineLog_;
+    public static Log getScriptEngineLog() {
+        return ScriptEngineLog_;
     }
-    
+
     /**
      * Pre process the specified source code in the context of the given page using the processor specified
      * in the webclient. This method delegates to the pre processor handler specified in the

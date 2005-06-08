@@ -1240,8 +1240,8 @@ public class WebClient {
 
 
     /**
-     * Remove a web window to the list of available windows.  This is intended as
-     * an internal api only and may change without notice..
+     * Remove a web window from the list of available windows.  This is intended as
+     * an internal api only and may change without notice.
      * @param webWindow The WebWindow to remove
      */
     public void deregisterWebWindow( final WebWindow webWindow ) {

@@ -254,7 +254,6 @@ public class Window extends SimpleScriptable {
             public void run() {
                 final Window window = Window.this;
                 final Page page = window.getWebWindow().getEnclosedPage();
-                boolean contextEntered = false;
                 try {
                     Thread.sleep(timeout);
                     window.getLog().debug("Executing timeout: " + script);
@@ -269,9 +268,6 @@ public class Window extends SimpleScriptable {
                         return;
                     }
 
-                    // Register this thread with the rhino engine
-                    Context.enter();
-                    contextEntered = true;
                     final HtmlPage htmlPage = window.document_.getHtmlPage();
                     htmlPage.executeJavaScriptIfPossible(
                         script, "Window.setTimeout()", true, htmlPage.getDocumentElement());
@@ -281,12 +277,6 @@ public class Window extends SimpleScriptable {
                 }
                 catch( final Exception e ) {
                     window.getLog().error("Caught exception in Window.setTimeout()", e);
-                }
-                finally {
-                    if (contextEntered) {
-                        // Deregister this thread with the rhino engine
-                        Context.exit();
-                    }
                 }
             }
         };
@@ -669,16 +659,8 @@ public class Window extends SimpleScriptable {
         // If we are in a frameset or have an iframe then this might be a frame name
         if( result == NOT_FOUND ) {
             final DomNode domNode = thisWindow.getDomNodeOrNull();
-            result = getFrameByName( domNode.getPage(), name );
-        }
-
-        // Ask the parent scope, as it may be a variable access like "window.myVar"
-        if( result == NOT_FOUND ) {
-            result = getParentScope().get(name, start);
-            // seems to be a bug in Rhino, workaround as long as the bug is not fixed
-            // https://bugzilla.mozilla.org/show_bug.cgi?id=277462
-            if ("Function".equals(name)) {
-                result = new ScoperFunctionObject((Function) result, start);
+            if( domNode != null ) {
+                result = getFrameByName( domNode.getPage(), name );
             }
         }
 
