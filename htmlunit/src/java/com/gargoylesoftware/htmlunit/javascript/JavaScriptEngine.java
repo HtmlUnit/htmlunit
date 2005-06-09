@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -357,7 +358,7 @@ public final class JavaScriptEngine extends ScriptEngine {
      * @see Context#exit()
      */
     private static class ContextListener implements ContextFactory.Listener {
-        private final Set contexts_ = new HashSet();
+        private final Set contexts_ = Collections.synchronizedSet(new HashSet());
         public void contextCreated( final Context c ) {
             contexts_.add( c );
         }
