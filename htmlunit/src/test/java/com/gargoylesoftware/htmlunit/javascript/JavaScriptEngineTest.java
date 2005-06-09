@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -240,6 +241,45 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
         client.getPage(URL_FIRST);
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * If a reference has been hold on a page and the page is not
+     * anymore the one contained in "its" window, javascript execution should
+     * work... a bit
+     * @throws Exception if the test fails
+     */
+    public void testScopeInInactivePage() throws Exception {
+        final String firstContent
+            = "<html><head>"
+            + "<script>"
+            + "var foo = 'foo';"
+            + "</script>"
+            + "</head>"
+            + "<body>"
+            + "  <a href='page2.html'>to page 2</a>"
+            + "  <div id='testdiv' onclick='alert(foo)'>foo</div>"
+            + "</body>"
+            + "</html>";
+        
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse("<html></html>");
+        webConnection.setResponse(URL_FIRST, firstContent);
+        client.setWebConnection( webConnection );
+
+        final List expectedAlerts = Arrays.asList( new String[]{"foo"});
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        ClickableElement div = ((ClickableElement) page.getHtmlElementById("testdiv"));
+
+        ((HtmlAnchor) page.getAnchors().get(0)).click();
+        // ignore response, and click in the page again
+        div.click();
 
         assertEquals( expectedAlerts, collectedAlerts );
     }

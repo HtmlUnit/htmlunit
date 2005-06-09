@@ -400,7 +400,10 @@ public class SimpleScriptable extends ScriptableObject {
         }
         scriptable.setDomNode(domNode);
         // parent scope needs to be set to "window" (no simple unit test found to illustrate the necessity)
-        scriptable.setParentScope((Scriptable) domNode.getPage().getEnclosingWindow().getScriptObject());
+        // if navigation has continued, the window may contain an other page as the on to which the current node
+        // belongs to
+        // see test JavaScriptEngineTest#testScopeInInactivePage
+        scriptable.setParentScope(ScriptableObject.getTopLevelScope((Scriptable) domNode.getPage().getScriptObject()));
         return scriptable;
     }
 
