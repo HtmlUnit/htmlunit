@@ -1607,5 +1607,146 @@ public class WindowTest extends WebTestCase {
             + "</html>\n";
 
         loadPage(content);
+    }
+    /**
+     * Open a window with only an image for content, then try to set focus to it.
+     *
+     * @throws Exception If the test fails.
+     */
+    public void testOpenWindow_image() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        final String firstContent = "<html><head><title>First</title></head><body>"
+            + "<form name='form1'>"
+            + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
+            + "return false;'>Click me</a>"
+            + "</form>"
+            + "</body></html>";
+        final String secondContent = new String(new char[]{
+            'G', 'I', 'F', '8', '9', 'a', 0x01, 0x00,
+            0x01, 0x00, 0x80, 0x00, 0x00, 0xfe, 0xd4, 0xaf,
+            0x00, 0x00, 0x00, 0x21, 0xf9, 0x04, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x2c, 0x00, 0x00, 0x00, 0x00,
+            0x01, 0x00, 0x01, 0x00, 0x00, 0x02, 0x02, 0x44,
+            0x01, 0x00, 0x3b});
+
+        final EventCatcher eventCatcher = new EventCatcher();
+
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "image/gif", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
+
+        eventCatcher.listenTo(webClient);
+
+        final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
+
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final Page secondPage = anchor.click();
+        assertEquals("First", firstPage.getTitleText());
+        assertEquals("image/gif", secondPage.getWebResponse().getContentType());
+
+        assertEquals(2, eventCatcher.getEventCount());
+
+        final WebWindow secondWebWindow = (WebWindow) eventCatcher.getEventAt(0).getSource();
+        
+        assertSame(webClient.getCurrentWindow(), secondWebWindow);
+        assertNotSame(firstWebWindow, secondWebWindow);
+    }
+    
+    /**
+     * Open a window with only text for content, then try to set focus to it.
+     *
+     * @throws Exception If the test fails.
+     */
+    public void testOpenWindow_text() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }        
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        final String firstContent = "<html><head><title>First</title></head><body>"
+            + "<form name='form1'>"
+            + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
+            + "return false;'>Click me</a>"
+            + "</form>"
+            + "</body></html>";
+        final String secondContent = new String("Hello World");
+
+        final EventCatcher eventCatcher = new EventCatcher();
+
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/plain", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
+
+        eventCatcher.listenTo(webClient);
+
+        final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
+
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final Page secondPage = anchor.click();
+        assertEquals("First", firstPage.getTitleText());
+        assertEquals("text/plain", secondPage.getWebResponse().getContentType());
+
+        assertEquals(2, eventCatcher.getEventCount());
+
+        final WebWindow secondWebWindow = (WebWindow) eventCatcher.getEventAt(0).getSource();
+        
+        assertSame(webClient.getCurrentWindow(), secondWebWindow);
+        assertNotSame(firstWebWindow, secondWebWindow);
     }    
+    /**
+     * Open a window with only text for content, then try to set focus to it.
+     *
+     * @throws Exception If the test fails.
+     */
+    public void testOpenWindow_html() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        final String firstContent = "<html><head><title>First</title></head><body>"
+            + "<form name='form1'>"
+            + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
+            + "return false;'>Click me</a>"
+            + "</form>"
+            + "</body></html>";
+        final String secondContent = new String("<html><head><title>Second</title></head><body>"
+            + "<p>Hello World</p>"
+            + "</body></html>");
+
+        final EventCatcher eventCatcher = new EventCatcher();
+
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
+
+        eventCatcher.listenTo(webClient);
+
+        final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
+
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final Page secondPage = anchor.click();
+        assertEquals("First", firstPage.getTitleText());
+        assertEquals("text/html", secondPage.getWebResponse().getContentType());
+
+        assertEquals(2, eventCatcher.getEventCount());
+
+        final WebWindow secondWebWindow = (WebWindow) eventCatcher.getEventAt(0).getSource();
+        
+        assertSame(webClient.getCurrentWindow(), secondWebWindow);
+        assertNotSame(firstWebWindow, secondWebWindow);
+    }
 }
