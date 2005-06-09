@@ -41,6 +41,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -90,7 +93,18 @@ public class ThreadTest extends WebTestCase {
         assertTrue("thread4 not successful", thread4.isSuccessful());
     }
 
-
+    /**
+     * run this test many times
+     * @return a suite
+     */
+    public static junit.framework.Test suite() {
+        final TestSuite suite = new TestSuite("Run this many times");
+        final TestCase test = new ThreadTest("testJavaScriptEngineInMultipleThreads");
+        for (int i = 1; i < 100; i++) {
+            suite.addTest(test);
+        }
+        return suite;
+    }
     /** A test object for threads*/
     private static class TestThread extends Thread {
 
