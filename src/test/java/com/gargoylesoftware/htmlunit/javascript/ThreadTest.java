@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import junit.framework.TestCase;
+import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -97,11 +97,11 @@ public class ThreadTest extends WebTestCase {
      * run this test many times
      * @return a suite
      */
-    public static junit.framework.Test suite() {
+    public static Test suite() {
         final TestSuite suite = new TestSuite("Run this many times");
-        final TestCase test = new ThreadTest("testJavaScriptEngineInMultipleThreads");
+        suite.addTestSuite(ThreadTest.class);
         for (int i = 1; i < 100; i++) {
-            suite.addTest(test);
+            suite.addTest(new ThreadTest("testJavaScriptEngineInMultipleThreads"));
         }
         return suite;
     }
