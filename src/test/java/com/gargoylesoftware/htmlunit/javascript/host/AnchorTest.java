@@ -44,6 +44,7 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -165,5 +166,24 @@ public class AnchorTest extends WebTestCase {
         loadPage(content, collectedAlerts);
 
         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testOnClickAnchorHRef() throws Exception {
+        final String content
+            = "<html>"
+            + "<body>"
+            + "<a href='#' onclick='document.form1.submit()'>link 1</a>"
+            + "<form name='form1' action='foo.html' method='post'>"
+            + "<input name='testText'>"
+            + "</form>"
+            + "</body></html>";
+        
+        final HtmlPage page1 = loadPage(content);
+        final Page page2 = page1.getAnchorByHref("#").click();
+
+        assertEquals("http://www.gargoylesoftware.com/foo.html",  page2.getWebResponse().getUrl());
     }
 }
