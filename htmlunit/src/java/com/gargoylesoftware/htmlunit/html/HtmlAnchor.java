@@ -97,7 +97,7 @@ public class HtmlAnchor extends FocusableElement {
                     + defaultPage.getEnclosingWindow().getName()
                     + "', using href '" + href + "'");
 
-        if( href != null && href.length() > 0 ) {
+        if( href != null && href.length() > 0 && !href.startsWith("#")) {
             final HtmlPage page = getPage();
             if( TextUtil.startsWithIgnoreCase(href, "javascript:") ) {
                 return page.executeJavaScriptIfPossible(

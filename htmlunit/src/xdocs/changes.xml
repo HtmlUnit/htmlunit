@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1220522">
+            	Don't perform server request when a link is clicked if href is just an anchor (like "#").
+            </action>
             <action type="update" dev="mguillem" id="1101525">
             	JavaScript: resolve relative locations from the originating page.
             </action>
