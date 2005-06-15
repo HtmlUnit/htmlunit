@@ -168,4 +168,26 @@ public class HtmlUnitXPathTest extends WebTestCase {
         assertEquals(4, ((Double) xpath.evaluate(page)).intValue());
 
     }
+
+    /**
+     * Tests xpath where results are attributes.
+     * @throws Exception if test fails
+     */
+    public void testListAttributesResult() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        
+        final String content
+            = "<html>\n"
+            + "<body>"
+            + "<img src='foo.png'>"
+            + "<img src='foo2.png'>"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(content);
+        
+        final HtmlUnitXPath xpath = new HtmlUnitXPath("//img/@src");
+        xpath.selectNodes(page); // fails here
+    }
 }
