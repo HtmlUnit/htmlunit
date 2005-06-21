@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1221161" due-to="Denis N. Antonioli">
+            	INCOMPATIBLE CHANGE: HtmlElement.getAttributeEntriesIterator now return an iterator
+            	on HtmlAttr (and not Map.Entry) allowing XPath expressions that return a list of node attributes.
+            </action>
             <action type="update" dev="mguillem" id="1220522">
             	Don't perform server request when a link is clicked if href is just an anchor (like "#").
             </action>

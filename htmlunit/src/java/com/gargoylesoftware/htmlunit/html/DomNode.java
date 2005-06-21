@@ -62,6 +62,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Chris Erskine
  * @author Mike Williams
  * @author Marc Guillemot
+ * @author Denis N. Antonioli
  */
 public abstract class DomNode implements Cloneable {
     /**
@@ -76,6 +77,10 @@ public abstract class DomNode implements Cloneable {
      * node type constant for <code>Text</code> nodes.
      */
     public static final short TEXT_NODE                 = 3;
+    /**
+     * node type constant for <code>Attribute</code> nodes.
+     */
+    public static final short ATTRIBUTE_NODE             = 4;
 
     /**
      * readyState constant for IE.
