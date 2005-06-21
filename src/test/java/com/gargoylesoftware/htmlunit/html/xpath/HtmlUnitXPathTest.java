@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html.xpath;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -174,20 +175,35 @@ public class HtmlUnitXPathTest extends WebTestCase {
      * @throws Exception if test fails
      */
     public void testListAttributesResult() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        
         final String content
-            = "<html>\n"
-            + "<body>"
-            + "<img src='foo.png'>"
-            + "<img src='foo2.png'>"
+            = "<html><body>"
+            + "<img src='1.png'>"
+            + "<img src='2.png'>"
+            + "<img src='3.png'>"
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);
         
-        final HtmlUnitXPath xpath = new HtmlUnitXPath("//img/@src");
-        xpath.selectNodes(page); // fails here
+        final XPath xpath = new HtmlUnitXPath("//img/@src");
+        final List nameList = xpath.selectNodes(page);
+        final List valueList = new ArrayList(nameList);
+
+        final List expectedName = Arrays.asList(new String[]{"src", "src", "src"});
+        final Transformer nameReader = new Transformer() {
+            public Object transform(final Object obj) {
+                return ((DomNode) obj).getNodeName();
+            }
+        };
+        CollectionUtils.transform(nameList, nameReader);
+        assertEquals(expectedName, nameList);
+
+        final List expectedValue = Arrays.asList(new String[]{"1.png", "2.png", "3.png"});
+        final Transformer valueReader = new Transformer() {
+            public Object transform(final Object obj) {
+                return ((DomNode) obj).getNodeValue();
+            }
+        };
+        CollectionUtils.transform(valueList, valueReader);
+        assertEquals(expectedValue, valueList);
     }
 }

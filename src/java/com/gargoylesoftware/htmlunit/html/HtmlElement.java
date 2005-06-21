@@ -65,6 +65,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
  * @author Mike Gallaher
+ * @author Denis N. Antonioli
  */
 public abstract class HtmlElement extends DomNode {
 
@@ -198,11 +199,11 @@ public abstract class HtmlElement extends DomNode {
     }
 
     /**
-     * @return an iterator over the {@link java.util.Map.Entry} objects representing the
+     * @return an iterator over the {@link HtmlAttr} objects representing the
      * attributes of this element. Each entry holds a string key and a string value
      */
     public Iterator getAttributeEntriesIterator() {
-        return attributes_.entrySet().iterator();
+        return new MapEntryWrappingIterator(attributes_.entrySet().iterator(), this);
     }
 
     /**
@@ -702,6 +703,58 @@ public abstract class HtmlElement extends DomNode {
                 next = next.getNextSibling();
             }
             nextElement_ = (HtmlElement)next;
+        }
+    }
+
+    /**
+     * Converts an iteration of plain {@link java.util.Map.Entry} into an iteration of {@link HtmlAttr}.
+     *
+     * @author Denis N. Antonioli
+     */
+    public static class MapEntryWrappingIterator implements Iterator {
+        /**
+         * The original Iterator on the attribute map.
+         */
+        private final Iterator baseIter_;
+        /**
+         * The page enclosing the HtmlElement that contains these attributes.
+         */
+        private final HtmlElement element_;
+
+        /**
+         * Wraps a new iterator around an iterator of attributes.
+         *
+         * @param iterator An iterator of Map.Entry.
+         * @param htmlElement the Parent of all the attributes.
+         */
+        public MapEntryWrappingIterator(final Iterator iterator, final HtmlElement htmlElement) {
+            baseIter_ = iterator;
+            element_ = htmlElement;
+        }
+
+        /**
+         * Delegates to wrapped Iterator.
+         *
+         * @return true if the iterator has more elements.
+         */
+        public boolean hasNext() {
+            return baseIter_.hasNext();
+        }
+
+        /**
+         * Wraps the next entry into a new HtmlAttr.
+         *
+         * @return Next entry.
+         */
+        public Object next() {
+            return new HtmlAttr(element_, (Map.Entry) baseIter_.next());
+        }
+
+        /**
+         * Delegates to wrapped Iterator.
+         */
+        public void remove() {
+            baseIter_.remove();
         }
     }
 }
