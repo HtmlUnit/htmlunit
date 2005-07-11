@@ -1,4 +1,4 @@
-<project default="java:jar"
+<project default="jar:jar"
     xmlns:j="jelly:core"
     xmlns:u="jelly:util"
     xmlns:ant="jelly:ant"
@@ -163,7 +163,7 @@
 
     <goal
         name="htmlunit:build-bin-dist"
-        prereqs="java:jar, site"
+        prereqs="jar:jar, site"
         description="Builds the binary distribution">
 
         <ant:mkdir dir="${maven.dist.bin.assembly.dir}/${maven.final.name}"/>
