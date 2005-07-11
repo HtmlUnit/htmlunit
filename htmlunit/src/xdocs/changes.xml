@@ -8,8 +8,11 @@
     <body>
         <release version="NextRelease" date="Unknown">
             <action type="update" dev="yourgod">
+                Upgraded commons-jelly to version 1.0
+            </action>
+            <action type="update" dev="yourgod">
                 Upgraded commons-httpclient to version 3.0rc3
-            </action>    
+            </action>
             <action type="update" dev="yourgod" id="1195509" due-to="dlevine004">
                 Added method for setting HttpClient's virtual host
             </action>
