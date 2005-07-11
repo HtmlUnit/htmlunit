@@ -66,7 +66,7 @@ public class MainTestSuite extends RecursiveTestSuite {
     public MainTestSuite( final String name ) throws IOException {
         super( new File("."), new AcceptAllTestFilter() );
 
-        enableAllLogging();
+        //enableAllLogging();
     }
 
 
