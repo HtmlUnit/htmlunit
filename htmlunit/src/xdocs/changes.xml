@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="yourgod" id="1195509" due-to="dlevine004">
+                Added method for setting HttpClient's virtual host
+            </action>
             <action type="update" dev="mguillem" id="1221161" due-to="Denis N. Antonioli">
             	INCOMPATIBLE CHANGE: HtmlElement.getAttributeEntriesIterator now return an iterator
             	on HtmlAttr (and not Map.Entry) allowing XPath expressions that return a list of node attributes.

@@ -89,6 +89,8 @@ import org.apache.commons.logging.impl.SimpleLog;
 public class HttpWebConnection extends WebConnection {
     private final Map httpClients_ = new HashMap( 9 );
 
+    private String virtualHost_ = null;
+
     /**
      *  Create an instance that will not use a proxy server
      *
@@ -324,6 +326,10 @@ public class HttpWebConnection extends WebConnection {
             if( sharedState != null ) {
                 client.setState(sharedState);
             }
+            
+            if (virtualHost_ != null) {
+                client.getParams().setVirtualHost(virtualHost_);
+            }                    
             httpClients_.put( key, client );
         }
         return client;
@@ -338,7 +344,22 @@ public class HttpWebConnection extends WebConnection {
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
     }
+    
+    /**
+     * set the virtual host
+     * @param virtualHost The virtualHost to set.
+     */
+    public void setVirtualHost(final String virtualHost) {
+        virtualHost_ = virtualHost;
+    }
 
+    /**
+     * Get the virtual host
+     * @return virtualHost The current virtualHost 
+     */
+    public String getVirtualHost() {
+        return virtualHost_;
+    }
 
     /**
      * Return the {@link HttpState} that is being used for a given domain
