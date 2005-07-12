@@ -23,7 +23,7 @@
                     </li>
                     <li>
                         Build the zip
-                        <source>maven clean buildzip</source>
+                        <source>maven clean htmlunit:build-bin-dist</source>
                     </li>
                     <li>
                         Upload that zip to SourceForge following 
