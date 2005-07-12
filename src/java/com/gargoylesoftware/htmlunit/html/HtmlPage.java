@@ -1318,12 +1318,18 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
-     * Remove an element from the ID map.
+     * Remove an element and its children from the ID map.
      *
      * @param idElement the element with an ID attribute to remove.
      */
     void removeIdElement(final HtmlElement idElement) {
         idMap_.remove(idElement.getAttributeValue("id"));
+        
+        // remove ids from children
+        for (final Iterator iter=idElement.getChildElementsIterator(); iter.hasNext();) {
+            final HtmlElement child = (HtmlElement) iter.next(); 
+            idMap_.remove(child.getAttributeValue("id"));
+        }
     }
     
     private void insertTbodyTagsAsNeeded() {

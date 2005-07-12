@@ -48,6 +48,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import junit.framework.AssertionFailedError;
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ImmediateRefreshHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -1104,5 +1105,41 @@ public class HtmlPageTest extends WebTestCase {
     public void testIsJavascript() throws Exception {
         assertTrue(HtmlPage.isJavaScript("text/javascript", null));
         assertTrue(HtmlPage.isJavaScript("text/JavaScript", null));
+    }
+
+    /**
+     * Regression test for bug 1233519
+     * @exception  Exception If the test fails
+     */
+    public void testGetHtmlElementByIdAfterRemove() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head>\n"
+            + "<body>"
+            + "<div id='div1'>"
+            + "<div id='div2'>"
+            + "</div>"
+            + "</div>"
+            + "</body>"
+            + "</html>";
+        
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlElement div1 = page.getHtmlElementById("div1");
+        page.getHtmlElementById("div2"); // would throw if not found
+        div1.remove();
+        try {
+            page.getHtmlElementById("div1"); // throws if not found
+            fail("div1 should have been removed");
+        }
+        catch (final ElementNotFoundException e) {
+            // nothing
+        }
+        
+        try {
+            page.getHtmlElementById("div2"); // throws if not found
+            fail("div2 should have been removed");
+        }
+        catch (final ElementNotFoundException e) {
+            // nothing
+        }
     }
 }

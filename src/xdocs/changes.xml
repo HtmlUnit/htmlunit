@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1233519">
+            	Children of removed nodes were erroneously still available by id using
+            	HtmlPage.getElementById.
+            </action>
             <action type="update" dev="yourgod">
                 Upgraded commons-jelly to version 1.0
             </action>
