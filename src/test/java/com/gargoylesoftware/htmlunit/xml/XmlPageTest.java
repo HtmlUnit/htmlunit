@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for SimpleScriptable.
+ * Tests for {@link XmlPage}.
  *
  * @version  $Revision$
  * @author Marc Guillemot
@@ -63,9 +63,6 @@ public class XmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testValidDocument() throws Exception {
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
-
         final String content
             = "<?xml version=\"1.0\"?>"
              + "<foo>\n"
@@ -73,20 +70,33 @@ public class XmlPageTest extends WebTestCase {
              + "    <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
-        webConnection.setDefaultResponse(content, 200, "OK", "text/xml");
-        client.setWebConnection( webConnection );
+        final XmlPage xmlPage = testXmlDocument(content, "text/xml");
+        assertEquals("foo", xmlPage.getXmlDocument().getFirstChild().getNodeName());
+    }
 
+
+    /**
+     * Utility method to test xml page of different mime types
+     * @param content the xml content
+     * @return the page returned by the WebClient
+     * @throws Exception if a problem occurs
+     */
+    private XmlPage testXmlDocument(final String content, final String mimeType) throws Exception
+    {
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse(content, 200, "OK", mimeType);
+        client.setWebConnection( webConnection );
         final Page page = client.getPage(URL_FIRST);
         assertEquals(URL_FIRST, page.getWebResponse().getUrl());
         assertEquals("OK", page.getWebResponse().getStatusMessage());
         assertEquals(200, page.getWebResponse().getStatusCode());
-        assertEquals("text/xml", page.getWebResponse().getContentType());
-
+        assertEquals(mimeType, page.getWebResponse().getContentType());
         assertInstanceOf(page, XmlPage.class);
         final XmlPage xmlPage = (XmlPage) page;
         assertEquals(content, xmlPage.getContent());
         assertNotNull(xmlPage.getXmlDocument());
-        assertEquals("foo", xmlPage.getXmlDocument().getFirstChild().getNodeName());
+        return xmlPage;
     }
 
 
@@ -119,5 +129,25 @@ public class XmlPageTest extends WebTestCase {
         final XmlPage xmlPage = (XmlPage) page;
         assertEquals(content, xmlPage.getContent());
         assertNull(xmlPage.getXmlDocument());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testVoiceXML() throws Exception {
+        final String content =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" 
+            + "<vxml xmlns=\"http://www.w3.org/2001/vxml\"" 
+            + "  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" 
+            + "  xsi:schemaLocation=\"http://www.w3.org/2001/vxml "
+            + "   http://www.w3.org/TR/voicexml20/vxml.xsd\""
+            + "   version=\"2.0\">"
+            + "  <form>"
+            + "    <block>Hello World!</block>"
+            + "  </form>"
+            + "</vxml>";
+
+        final XmlPage xmlPage = testXmlDocument(content, "application/voicexml+xml");
+        assertEquals("vxml", xmlPage.getXmlDocument().getFirstChild().getNodeName());
     }
 }
