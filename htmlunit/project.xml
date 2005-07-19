@@ -396,7 +396,7 @@
         <dependency>
             <groupId>nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
-            <version>0.9.4</version>
+            <version>0.9.5</version>
             <type>jar</type>
             <properties>
                 <htmlunit.group>required</htmlunit.group>
