@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author Marc Guillemot
  * @author Mike Bresnahan
  * @author Daniel Gredler
+ * @author Bruce Faulkner
  */
 public class HtmlRadioButtonInput extends HtmlInput {
 
@@ -183,5 +184,12 @@ public class HtmlRadioButtonInput extends HtmlInput {
         return defaultCheckedState_;
     }
 
+    /**
+     * {@inheritDoc}
+     * @see com.gargoylesoftware.htmlunit.html.ClickableElement#isStateUpdateFirst()
+     */
+    protected boolean isStateUpdateFirst() {
+        return true;
+    }
 }
 

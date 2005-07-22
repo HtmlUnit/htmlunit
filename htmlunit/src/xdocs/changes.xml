@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1241739" due-to="Bruce Faulkner">
+                Set state of radio button before executing onclick handler.
+            </action>          
             <action type="update" dev="mguillem">
                 Upgraded nekohtml to version 0.9.5
             </action>          
