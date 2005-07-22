@@ -37,6 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -45,6 +49,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Mike Bresnahan
  * @author Marc Guillemot
+ * @author Bruce Faulkner
  */
 public class HtmlRadioButtonInputTest extends WebTestCase {
     /**
@@ -121,5 +126,52 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         assertFalse(radio.isChecked());
         
         assertEquals("on", radio.getValueAttribute());
+    }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testUpdateStateFirstForOnclickHandler() throws Exception {
+        final String htmlContent 
+            = "<html><head><title>foo</title></head><body>"
+            + "<script type='text/javascript'>"
+            + "    function itemOnClickHandler() {"
+            + "        var oneItem = document.getElementById('oneItem');"
+            + "        var twoItems = document.getElementById('twoItems');"
+            + "        alert('oneItem.checked: ' + oneItem.checked + ' twoItems.checked: ' + twoItems.checked);"
+            + "    }"
+            + "</script>"
+            + "<form name='testForm'>"
+            + "Number of items:"
+            + "<input type='radio' name='numOfItems' value='1' checked='checked' "
+            + "  onclick='itemOnClickHandler()' id='oneItem'>"
+            + "<label for='oneItem'>1</label>"
+            + "<input type='radio' name='numOfItems' value='2' onclick='itemOnClickHandler()' id='twoItems'>"
+            + "<label for='twoItems'>2</label>" 
+            + "</form></body></html>";
+        
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+
+        final HtmlRadioButtonInput oneItem = (HtmlRadioButtonInput) page.getHtmlElementById("oneItem");
+        final HtmlRadioButtonInput twoItems = (HtmlRadioButtonInput) page.getHtmlElementById("twoItems");
+
+        assertTrue(oneItem.isChecked());
+        assertFalse(twoItems.isChecked());
+
+        twoItems.click();
+
+        assertTrue(twoItems.isChecked());
+        assertFalse(oneItem.isChecked());
+
+        oneItem.click();
+
+        assertTrue(oneItem.isChecked());
+        assertFalse(twoItems.isChecked());
+
+        final List expectedAlerts = Arrays.asList(new String[] { 
+            "oneItem.checked: false twoItems.checked: true",
+            "oneItem.checked: true twoItems.checked: false"});
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
