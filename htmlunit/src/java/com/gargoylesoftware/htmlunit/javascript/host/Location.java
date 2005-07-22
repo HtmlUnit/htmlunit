@@ -107,7 +107,7 @@ public class Location extends SimpleScriptable {
      * @throws IOException When an exception occurs reloading the page.
      */
     public void jsxFunction_reload( final boolean force ) throws IOException {
-        String url = jsxGet_href();
+        final String url = jsxGet_href();
         if( UNKNOWN.equals( url ) ) {
             getLog().error( "Unable to reload location: current url is unknown." );
         }

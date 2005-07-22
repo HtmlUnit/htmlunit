@@ -488,7 +488,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     public void testConfigurationFile() throws Exception {
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
         
-        Iterator it = configuration.keyIterator();
+        final Iterator it = configuration.keyIterator();
         while (it.hasNext()) {
             final String classname = (String) it.next();
             getLog().debug("Now testing for class " + classname);
@@ -526,19 +526,19 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
     
     private boolean checkForIgnore(final String methodName, final String classname) {
-        String[] ignoreList = { "Button|jsxGet_form",
-                                "FormField|jsxGet_form",
-                                "FileUpload|jsxGet_form",
-                                "Radio|jsxGet_form",
-                                "Reset|jsxGet_form",
-                                "Submit|jsxGet_form",
-                                "Checkbox|jsxGet_form",
-                                "Hidden|jsxGet_form",
-                                "Select|jsxGet_form",
-                                "Textarea|jsxGet_form",
-                                "Input|jsxGet_form",
-                                "Password|jsxGet_form",
-                                "CharacterDataImpl|jsxGet_tabindex"};
+        final String[] ignoreList = { "Button|jsxGet_form",
+            "FormField|jsxGet_form",
+            "FileUpload|jsxGet_form",
+            "Radio|jsxGet_form",
+            "Reset|jsxGet_form",
+            "Submit|jsxGet_form",
+            "Checkbox|jsxGet_form",
+            "Hidden|jsxGet_form",
+            "Select|jsxGet_form",
+            "Textarea|jsxGet_form",
+            "Input|jsxGet_form",
+            "Password|jsxGet_form",
+            "CharacterDataImpl|jsxGet_tabindex"};
         final String key = classname + "|" + methodName;
         for (int i = 0; i < ignoreList.length; i++) {
             if (ignoreList[i].equals(key)) {

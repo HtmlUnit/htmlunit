@@ -382,7 +382,7 @@ public abstract class WebTestCase extends BaseTestCase {
         super.runTest();
         try {
             // Make sure all the JavaScript contexts were exited.
-            int count = JavaScriptEngine.getContextCount();
+            final int count = JavaScriptEngine.getContextCount();
             if( count != 0 ) {
                 final String are;
                 final String s;

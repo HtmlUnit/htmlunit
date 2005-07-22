@@ -212,7 +212,7 @@ public final class JavaScriptConfiguration {
      * @return The instance containing all entries from the configuration file.
      */
     static JavaScriptConfiguration getAllEntries() {
-        JavaScriptConfiguration configuration = new JavaScriptConfiguration(null);
+        final JavaScriptConfiguration configuration = new JavaScriptConfiguration(null);
         return configuration;
     }
 
@@ -684,7 +684,7 @@ public final class JavaScriptConfiguration {
      * @return the classname
      */
     private String getClassnameForClass(final Class clazz) {
-        String name = (String) ClassnameMap_.get(clazz.getName());
+        final String name = (String) ClassnameMap_.get(clazz.getName());
         if (name == null) {
             throw new IllegalStateException("Did not find the mapping of the class to the classname for " +
                 clazz.getName());
