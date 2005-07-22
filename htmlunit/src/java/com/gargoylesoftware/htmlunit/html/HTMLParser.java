@@ -363,8 +363,18 @@ public class HTMLParser {
             handleCharacters();
 
             final String tagLower = localName.toLowerCase();
+            
+            // add a <tbody> if a <tr> is directly in <table> 
+            if (tagLower.equals("tr") && currentNode_.getNodeName().equals("table")) {
+                final IElementFactory factory = getElementFactory("tbody");
+                final HtmlElement newElement = factory.createElement(page_, "tbody", null);
+                currentNode_.appendChild(newElement);
+                currentNode_ = newElement;
+                stack_.push(currentNode_);
+            }
+
             final IElementFactory factory = getElementFactory(tagLower);
-            HtmlElement newElement = factory.createElement(page_, tagLower, atts);
+            final HtmlElement newElement = factory.createElement(page_, tagLower, atts);
             currentNode_.appendChild(newElement);
             currentNode_ = newElement;
             stack_.push(currentNode_);
@@ -376,6 +386,11 @@ public class HTMLParser {
 
             handleCharacters();
             stack_.pop(); //remove currentElement from stack
+
+            // if we have added a extra node (tbody), we should remove it
+            if (!currentNode_.getNodeName().equalsIgnoreCase(localName)) {
+                stack_.pop(); //remove extra node from stack
+            }
 
             if(!stack_.isEmpty()) {
                 currentNode_ = (DomNode)stack_.peek();
