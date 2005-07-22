@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -303,6 +304,32 @@ public class HtmlTableTest extends WebTestCase {
         assertInstanceOf( cell2.getParentNode(), HtmlTableRow.class );
         assertInstanceOf( cell2.getParentNode().getParentNode(), HtmlTableBody.class );
         assertInstanceOf( cell2.getParentNode().getParentNode().getParentNode(), HtmlTable.class );
+    }
+
+    /**
+     * Regression test for bug 1210751: JavaScript inside <table> run twice.
+     * @throws Exception if the test fails
+     */
+    public void testJSInTable() throws Exception {
+
+        final String content
+            = "<html><head><title>foo</title></head><body>"
+            + "<table>"
+            + "<tr><td>cell1</td></tr>"
+            + "<script>alert('foo');</script>"
+            + "<tr><td>cell1</td></tr>"
+            + "</table>"
+            + "<div id='div1'>foo</div>"
+            + "<script>alert(document.getElementById('div1').parentNode.tagName);</script>"
+            + "</body></html>";
+
+        final List expectedAlerts = Arrays.asList( new String[]{ "foo", "BODY" } );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 }
 
