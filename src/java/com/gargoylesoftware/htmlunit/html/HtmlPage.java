@@ -1011,7 +1011,7 @@ public final class HtmlPage extends DomNode implements Page {
         final URL url;
 
         int index = refreshString.indexOf( ";" );
-        boolean timeOnly = ( index == -1 );
+        final boolean timeOnly = ( index == -1 );
 
         if( timeOnly ) {
             // Format: <meta http-equiv='refresh' content='10'>

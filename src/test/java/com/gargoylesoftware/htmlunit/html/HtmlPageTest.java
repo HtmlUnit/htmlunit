@@ -1091,7 +1091,7 @@ public class HtmlPageTest extends WebTestCase {
             + "<body onload='test=(1 > 2) && (45 < 78)'><p>helloworld</p></body>"
             + "</html>";
 
-        HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(htmlContent);
         assertNotNull("xml document could not be parsed", page.asXml());
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         final DocumentBuilder builder = factory.newDocumentBuilder();

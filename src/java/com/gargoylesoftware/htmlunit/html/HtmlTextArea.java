@@ -77,7 +77,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      */
     private void initDefaultValue() {
         if( defaultValue_ == null ) {
-            DomText child = (DomText) getFirstChild();
+            final DomText child = (DomText) getFirstChild();
             if( child != null ) {
                 defaultValue_ = child.getData();
                 if( defaultValue_ == null ) {

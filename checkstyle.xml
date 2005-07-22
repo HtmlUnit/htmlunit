@@ -156,8 +156,7 @@
             <property name="ignoreFormat" value="serialVersionUID$"/>
         </module>
         <module name="FinalLocalVariable">
-            <property name="tokens" value="VARIABLE_DEF"/>
-            <property name="tokens" value="PARAMETER_DEF"/>
+            <property name="tokens" value="VARIABLE_DEF,PARAMETER_DEF"/>
         </module>
         
         <!-- Uncomment to find the TODOs without a helpful IDE -->

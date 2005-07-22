@@ -646,7 +646,7 @@ public class WebClientTest extends WebTestCase {
         final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
         FileUtils.writeStringToFile(tmpFile, xmlContent, encoding);
 
-        URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
+        final URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
         
         final WebClient client = new WebClient();
         final XmlPage page = (XmlPage) client.getPage(fileURL);

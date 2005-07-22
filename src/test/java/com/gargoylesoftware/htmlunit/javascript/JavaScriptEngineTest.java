@@ -275,7 +275,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        ClickableElement div = ((ClickableElement) page.getHtmlElementById("testdiv"));
+        final ClickableElement div = ((ClickableElement) page.getHtmlElementById("testdiv"));
 
         ((HtmlAnchor) page.getAnchors().get(0)).click();
         // ignore response, and click in the page again

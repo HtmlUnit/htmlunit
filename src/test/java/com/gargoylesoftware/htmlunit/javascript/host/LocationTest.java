@@ -252,7 +252,7 @@ public class LocationTest extends WebTestCase {
      */
     public void testReload() throws Exception {
 
-        String content =
+        final String content =
               "<html>\n"
             + "  <head><title>test</title></head>\n"
             + "  <body>\n"

@@ -213,10 +213,10 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     public String jsxFunction_getAllResponseHeaders() {
         if( page_ != null ) {
-            StringBuffer buffer = new StringBuffer();
+            final StringBuffer buffer = new StringBuffer();
             final List headers = page_.getWebResponse().getResponseHeaders();
             for( final Iterator i = headers.iterator(); i.hasNext(); ) {
-                NameValuePair header = (NameValuePair) i.next();
+                final NameValuePair header = (NameValuePair) i.next();
                 buffer.append(header.getName()).append(": ").append(header.getValue()).append("\n");
             }
             return buffer.toString();
@@ -264,7 +264,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             settings.setSubmitMethod( submitMethod );
             if( user != null ) {
-                DefaultCredentialsProvider dcp = new DefaultCredentialsProvider();
+                final DefaultCredentialsProvider dcp = new DefaultCredentialsProvider();
                 dcp.addCredentials( user, password );
                 settings.setCredentialsProvider( dcp );
             }
@@ -299,8 +299,8 @@ public class XMLHttpRequest extends SimpleScriptable {
                     final String contentType = page.getWebResponse().getContentType();
                     if( "text/xml".equals( contentType ) == false ) {
                         setState( STATE_LOADING, context );
-                        String msg = "The Content-Type of the data returned from the server must be 'text/xml'; " +
-                            "actual content type was '" + contentType + "'.";
+                        final String msg = "The Content-Type of the data returned from the server must be 'text/xml'; "
+                            + "actual content type was '" + contentType + "'.";
                         throw Context.reportRuntimeError( msg );
                     }
                     page_ = (XmlPage) page;

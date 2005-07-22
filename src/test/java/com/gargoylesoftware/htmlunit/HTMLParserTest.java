@@ -196,7 +196,7 @@ public class HTMLParserTest extends WebTestCase {
         final HtmlPage page = HTMLParser.parse(webResponse, webClient.getCurrentWindow());
 
         //find the copyright string
-        HtmlUnitXPath xpath = new HtmlUnitXPath("//div[@id='footer']/div[@class='xright']");
+        final HtmlUnitXPath xpath = new HtmlUnitXPath("//div[@id='footer']/div[@class='xright']");
         final String stringVal = xpath.stringValueOf(page).trim();
         assertEquals("\u00A9 2002-2005, Gargoyle Software Inc.", stringVal);
 
