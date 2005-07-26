@@ -87,7 +87,7 @@ public class DomNodeTest extends WebTestCase {
     public void testReplace() throws Exception {
         final String content
             = "<html><head></head><body>\n"
-            + "<br><div id='tag'/><br></body></html>\n";
+            + "<br><div id='tag'/><br><div id='tag2'/></body></html>\n";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
@@ -107,6 +107,14 @@ public class DomNodeTest extends WebTestCase {
         assertSame(newNode, previousSibling.getNextSibling());
         assertSame(newNode, nextSibling.getPreviousSibling());
         assertEquals(position, readPositionAmongParentChildren(newNode));
+
+        final Map attributes = new HashMap();
+        attributes.put("id", "tag2"); // with the same id as the node to replace 
+        final DomNode node2 = page.getHtmlElementById("tag2");
+        assertEquals("div", node2.getNodeName());
+        final DomNode node3 = new HtmlSpan(page, attributes);
+        node2.replace(node3);
+        assertEquals("span", page.getHtmlElementById("tag2").getTagName());
     }
 
     /**
