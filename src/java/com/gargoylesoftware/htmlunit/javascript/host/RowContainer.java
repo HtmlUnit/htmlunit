@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Chris Erskine
+ * @author Marc Guillemot
  */
 public class RowContainer extends HTMLElement {
 
@@ -81,13 +82,21 @@ public class RowContainer extends HTMLElement {
         if (rows_ == null) {
             rows_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
-                rows_.init(getDomNodeOrDie(), new HtmlUnitXPath(".//tr"));
+                rows_.init(getDomNodeOrDie(), new HtmlUnitXPath(getXPathRows()));
             }
             catch (final JaxenException e) {
                 throw Context.reportRuntimeError("Failed to initialize rowContainer.rows: " + e.getMessage());
             }
         }
         return rows_;
+    }
+
+    /**
+     * Gets the xpath expression allowing to get the rows of the container relatively to the container
+     * @return the expression
+     */
+    protected String getXPathRows() {
+        return "./tr";
     }
 
     /**
@@ -121,42 +130,56 @@ public class RowContainer extends HTMLElement {
             final Context cx, final Scriptable s, final Object[] args,
             final Function f) {
         final RowContainer rowContainer = (RowContainer) s;
-        final ElementArray rows = (ElementArray) rowContainer.jsxGet_rows();
-        final Number rowIndex;
+        final int rowIndex;
         if (args.length > 0) {
-            rowIndex = (Number) args[0];
+            rowIndex = ((Number) args[0]).intValue();
         }
         else {
-            rowIndex = null;
+            rowIndex = -1;
         }
+
+        final ElementArray rows = (ElementArray) rowContainer.jsxGet_rows();
+        final int nbRows = rows.jsGet_length();
         final int r;
-        if (rowIndex == null || rowIndex.intValue() == -1) {
-            r = rows.jsGet_length() - 1;
+        if (rowIndex == -1 || rowIndex == nbRows) {
+            r = Math.max(0, nbRows - 1);
         }
         else {
-            r = rowIndex.intValue();
+            r = rowIndex;
         }
-        final boolean rowIndexValid = (r >= 0 && r <= rows.jsGet_length());
-        if (rowIndexValid) {
-            final HtmlElement newRow = rowContainer.getDomNodeOrDie().getPage().createElement("tr");
-            if (rows.jsGet_length() == 0 || (r == rows.jsGet_length())) {
-                rowContainer.getDomNodeOrDie().appendChild(newRow);
+        
+        if (r < 0 || r > nbRows) {
+            throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount "
+                    + "(index: " + rowIndex + ", " + nbRows + " rows)");
+        }
+
+        return rowContainer.insertRow(r);
+    }
+
+    /**
+     * Insert a new row at the given position 
+     * @param index the index where the row should be inserted (0 <= index < nbRows)
+     * @return the inserted row
+     */
+    protected Object insertRow(final int index) {
+        final ElementArray rows = (ElementArray) jsxGet_rows();
+        final int nbRows = rows.jsGet_length();
+
+        final HtmlElement newRow = getDomNodeOrDie().getPage().createElement("tr");
+        if (nbRows == 0) {
+            getDomNodeOrDie().appendChild(newRow);
+        }
+        else {
+            final SimpleScriptable row = (SimpleScriptable) rows.jsFunction_item(new Integer(index));
+            // if at the end, then in the same "sub-container" as the last existing row
+            if (index >= nbRows - 1) {
+                row.getDomNodeOrDie().getParentNode().appendChild(newRow);
             }
             else {
-                final SimpleScriptable row = (SimpleScriptable) rows.jsFunction_item(new Integer(r));
-                // if at the end, then in the same "sub-container" as the last existing row
-                if (r == rows.jsGet_length() - 1) {
-                    row.getDomNodeOrDie().getParentNode().appendChild(newRow);
-                }
-                else {
-                    row.getDomNodeOrDie().insertBefore(newRow);
-                }
+                row.getDomNodeOrDie().insertBefore(newRow);
             }
-            return rowContainer.getScriptableFor(newRow);
         }
-        else {
-            throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount");
-        }
+        return getScriptableFor(newRow);
     }
 
     /**

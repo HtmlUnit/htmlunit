@@ -37,11 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 
@@ -53,6 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Chris Erskine
+ * @author Marc Guillemot
  */
 public class Table extends RowContainer {
 
@@ -125,7 +128,7 @@ public class Table extends RowContainer {
         if (tBodies_ == null) {
             tBodies_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
-                tBodies_.init(getDomNodeOrDie(), new HtmlUnitXPath("//tbody"));
+                tBodies_.init(getDomNodeOrDie(), new HtmlUnitXPath("./tbody"));
             }
             catch (final JaxenException e) {
                 throw Context.reportRuntimeError("Failed to initialize collection table.tBodies: " + e.getMessage());
@@ -203,4 +206,26 @@ public class Table extends RowContainer {
         getHtmlElementOrDie().removeChild("thead", 0);
     }
 
+    /**
+     * @see com.gargoylesoftware.htmlunit.javascript.host.RowContainer#getXPathRows()
+     */
+    protected String getXPathRows() {
+        return "./node()/tr";
+    }
+  
+    /**
+     * Handle special case where table is empty
+     * @see com.gargoylesoftware.htmlunit.javascript.host.RowContainer#insertRow(int)
+     */
+    protected Object insertRow(final int index) {
+        // check if a tbody should be created
+        final List tagNames = Arrays.asList(new String[] {"tbody", "thead", "tfoot"} );
+        if (getHtmlElementOrDie().getHtmlElementsByTagNames(tagNames).isEmpty()) {
+            final HtmlElement tBody = getHtmlElementOrDie().appendChildIfNoneExists("tbody");
+            return ((RowContainer) getScriptableFor(tBody)).insertRow(0);
+        }
+        else {
+            return super.insertRow(index);
+        }
+    }
 }

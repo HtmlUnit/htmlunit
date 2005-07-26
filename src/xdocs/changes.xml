@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1244839">
+                JavaScript: fixed behavior of table.insertRow and table.rows.length for tables containing nested tables.
+            </action>          
             <action type="update" dev="mguillem" id="1244959">
                 Improved the way getHtmlElementById handle pages containing multiple elements with the same id.
             </action>          
