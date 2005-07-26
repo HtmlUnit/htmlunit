@@ -140,6 +140,20 @@ public class Input extends FormField {
     }
 
     /**
+     * Uses {@link #jsxSet_type(String)} if attribute's name is type to
+     * replace DOM node as well as long as we have subclasses of {@link HtmlInput}.
+     * @see com.gargoylesoftware.htmlunit.javascript.host.HTMLElement#jsxFunction_setAttribute
+     */
+    public void jsxFunction_setAttribute(final String name, final String value) {
+        if ("type".equals(name)) {
+            jsxSet_type(value);
+        }
+        else {
+            super.jsxFunction_setAttribute(name, value);
+        }
+    }
+
+    /**
      * Returns the input's default value, used if the containing form gets reset.
      * @return The input's default value, used if the containing form gets reset.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp">

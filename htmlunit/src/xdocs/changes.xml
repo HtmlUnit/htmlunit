@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1244923">
+                JavaScript: made input.setAttribute("type", xxx) behave the same than input.type = xxxx.
+            </action>          
             <action type="update" dev="mguillem" id="1210751">
                 JavaScript: fixed double execution of script inside <table>.
             </action>          
