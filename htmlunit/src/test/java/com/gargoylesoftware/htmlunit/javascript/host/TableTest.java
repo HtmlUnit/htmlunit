@@ -335,4 +335,111 @@ public class TableTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Regression test for bug 1244839
+     * @throws Exception if the test fails
+     */
+    public void testInsertRowNested() throws Exception {
+
+        final String content =
+            "<html><head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  var container = document.getElementById('mytable');"
+            + "  alert(container.id);"
+            + "  var tableRow = container.insertRow(1);"
+            + "  alert(tableRow.parentNode.parentNode.id);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + "<table id='mytable'>"
+            + "<tr>"
+            + "<td>"
+            + "  <table id='nested'><tr><td></td></tr></table>"
+            + "</td></tr>"
+            + "</table>"
+            + "</body>"
+            + "</html>";
+
+        final List expectedAlerts = Arrays.asList(new String[] { "mytable", "mytable" });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test that a tbody is created
+     * @throws Exception if the test fails
+     */
+    public void testInsertRowInEmtpyTable() throws Exception {
+
+        final String content =
+            "<html><head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  var oTable = document.getElementById('mytable');"
+            + "  var tableRow = oTable.insertRow(0);"
+            + "  alert(tableRow.parentNode.tagName);"
+            + "  alert(tableRow.parentNode.parentNode.tagName);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + "<table id='mytable'>"
+            + "</table>"
+            + "</body>"
+            + "</html>";
+
+        final List expectedAlerts = Arrays.asList(new String[] { "TBODY", "TABLE" });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+
+    /**
+     * Tests length, tBodies on nested rows
+     * @throws Exception if the test fails
+     */
+    public void testNestedTables() throws Exception {
+
+        final String content =
+            "<html><head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  var myTable = document.getElementById('mytable');"
+            + "  alert(myTable.rows.length);"
+            + "  alert(myTable.tBodies.length);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + "<table id='mytable'>"
+            + "<tr>"
+            + "<td>"
+            + "  <table id='nested'><tr><td></td></tr></table>"
+            + "</td></tr>"
+            + "</table>"
+            + "</body>"
+            + "</html>";
+
+        final List expectedAlerts = Arrays.asList(new String[] { "1", "1" });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
