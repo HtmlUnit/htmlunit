@@ -48,6 +48,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.lang.StringUtils;
@@ -89,7 +90,7 @@ public final class HtmlPage extends DomNode implements Page {
     private final URL originatingUrl_;
     private       String originalCharset_ = null;
     private final WebResponse webResponse_;
-    private final Map idMap_ = new HashMap();
+    private final Map idMap_ = new HashMap(); // a map of (id, List(HtmlElement))
     private       HtmlElement documentElement_ = null;
 
     private WebWindow enclosingWindow_;
@@ -1297,9 +1298,9 @@ public final class HtmlPage extends DomNode implements Page {
     public HtmlElement getHtmlElementById( final String id )
         throws ElementNotFoundException {
 
-        final HtmlElement idElement = (HtmlElement) idMap_.get(id);
-        if(idElement != null) {
-            return idElement;
+        final List elements = (List) idMap_.get(id);
+        if (elements != null) {
+            return (HtmlElement) elements.get(0);
         }
         throw new ElementNotFoundException( "*", "id", id );
     }
@@ -1312,7 +1313,12 @@ public final class HtmlPage extends DomNode implements Page {
     void addIdElement(final HtmlElement idElement) {
         final String id = idElement.getId();
         if (!StringUtils.isEmpty(id)) {
-            idMap_.put(id, idElement);
+            List elements = (List) idMap_.get(id);
+            if (elements == null) {
+                elements = new Vector();
+                idMap_.put(id, elements);
+            }
+            elements.add(idElement);
         }
     }
 
@@ -1322,12 +1328,18 @@ public final class HtmlPage extends DomNode implements Page {
      * @param idElement the element with an ID attribute to remove.
      */
     void removeIdElement(final HtmlElement idElement) {
-        idMap_.remove(idElement.getAttributeValue("id"));
+        final List elements = (List) idMap_.remove(idElement.getAttributeValue("id"));
+        // if other elements have the same id (not legal for spec, but happens), then
+        // only one element to remove
+        if (elements != null && elements.size() != 1) {
+            elements.remove(idElement);
+            idMap_.put(idElement.getAttributeValue("id"), elements);
+        }
         
         // remove ids from children
         for (final Iterator iter=idElement.getChildElementsIterator(); iter.hasNext();) {
             final HtmlElement child = (HtmlElement) iter.next(); 
-            idMap_.remove(child.getAttributeValue("id"));
+            removeIdElement(child);
         }
     }
     

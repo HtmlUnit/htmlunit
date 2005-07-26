@@ -1142,4 +1142,25 @@ public class HtmlPageTest extends WebTestCase {
             // nothing
         }
     }
+
+    /**
+     * Test getHtmlElementById() when 2 elements have the same id and the first one
+     * is removed.
+     * @exception  Exception If the test fails
+     */
+    public void testGetHtmlElementById_idTwice() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head>\n"
+            + "<body>"
+            + "<div id='id1'>foo</div>"
+            + "<span id='id1'>bla</span>"
+            + "</body>"
+            + "</html>";
+        
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlElement elt1 = page.getHtmlElementById("id1");
+        assertEquals("div", elt1.getNodeName());
+        elt1.remove();
+        assertEquals("span", page.getHtmlElementById("id1").getNodeName());
+    }
 }
