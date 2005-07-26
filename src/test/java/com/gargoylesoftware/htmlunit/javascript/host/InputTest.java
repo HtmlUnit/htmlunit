@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
@@ -547,18 +548,22 @@ public class InputTest extends WebTestCase {
             + "    alert(input.type);\n"
             + "    input.type = 'hidden';\n"
             + "    alert(input.type);\n"
+            + "    input.setAttribute('type', 'image');\n"
+            + "    alert(input.type);\n"
             + "}\n</script></head>"
             + "<body onload='doTest()'>\n"
             + "<form name='myForm' action='foo'>\n"
             + "<input type='radio' name='myRadio'/>"
             + "</form></body></html>";
 
-        final List expectedAlerts = Arrays.asList( new String[]{"radio", "hidden"} );
+        final List expectedAlerts = Arrays.asList( new String[]{"radio", "hidden", "image"} );
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
-        loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
+        
+        assertInstanceOf(page.getFormByName("myForm").getInputByName("myRadio"), HtmlImageInput.class);
     }
     
     /**
