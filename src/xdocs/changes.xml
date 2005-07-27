@@ -7,24 +7,29 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1159709">
+                JavaScript: fixed execution of onchange handlers to really return 
+                "The page that occupies this window after this method completes" as defined by
+                the javadoc.
+            </action>
             <action type="update" dev="mguillem" id="1244839">
                 JavaScript: fixed behavior of table.insertRow and table.rows.length for tables containing nested tables.
-            </action>          
+            </action>
             <action type="update" dev="mguillem" id="1244959">
                 Improved the way getHtmlElementById handle pages containing multiple elements with the same id.
-            </action>          
+            </action>
             <action type="update" dev="mguillem" id="1244923">
                 JavaScript: made input.setAttribute("type", xxx) behave the same than input.type = xxxx.
-            </action>          
+            </action>
             <action type="update" dev="mguillem" id="1210751">
                 JavaScript: fixed double execution of script inside <table>.
-            </action>          
+            </action>
             <action type="update" dev="mguillem" id="1241739" due-to="Bruce Faulkner">
                 Set state of radio button before executing onclick handler.
-            </action>          
+            </action>
             <action type="update" dev="mguillem">
                 Upgraded nekohtml to version 0.9.5
-            </action>          
+            </action>
             <action type="update" dev="mguillem">
             	Load responses which content type matches regular expression 
             	"application/.*\+xml" as XmlPage (rather than UnexpectedPage).
