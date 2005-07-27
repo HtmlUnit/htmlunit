@@ -44,6 +44,7 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -593,4 +594,34 @@ public class HtmlSelectTest extends WebTestCase {
         select.appendOption(option);
     }
 
+    /**
+     * Test that setSelectedAttribute returns the right page.
+     * 
+     * @exception  Exception If the test fails
+     */
+    public void testSetSelectedAttributeReturnedPage() throws Exception {
+        final String content = "<html><head><title>foo</title>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  document.getElementById('iframe').src = 'about:blank';"
+            + "}"
+            + "</script>"
+            + "</head><body>"
+            + "<form>"
+            + "<select name='select1' size='1' id='mySelect' onchange='test()'>"
+            + "<option value='option1'>option 1</option>"
+            + "<option value='option2'>option 2</option>"
+            + "</select>"
+            + "</form>"
+            + "<iframe id='iframe' src='about:blank'></iframe>"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(content);
+
+        final HtmlSelect select = (HtmlSelect) page.getHtmlElementById("mySelect");
+        final HtmlOption option = select.getOptionByValue("option2");
+        final Page page2 = select.setSelectedAttribute(option, true);
+        assertEquals(page, page2);
+    }
 }

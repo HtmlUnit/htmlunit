@@ -613,10 +613,6 @@ public class SelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRightPageAfterOnchange() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        
         final String content
             = "<html><body>"
             + "<iframe src='fooIFrame.html'></iframe>"

@@ -1368,7 +1368,13 @@ public final class HtmlPage extends DomNode implements Page {
                         args,
                         htmlElement);
             
-            return scriptResult.getNewPage();
+            if (getWebClient().getWebWindows().contains(getEnclosingWindow())) {
+                return getEnclosingWindow().getEnclosedPage(); // may be itself or a newly loaded one
+            }
+            else {
+                // current window doesn't exist anymore
+                return scriptResult.getNewPage();
+            }
         }
 
         return this;
