@@ -7,6 +7,11 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                HtmlOption's value attribute initial value is the text of the option if 
+                no attribute is found as defined in HTML 4.01. 
+                Deprecated HtmlOption.getValue().
+            </action>
             <action type="update" dev="mguillem" id="1159709">
                 JavaScript: fixed execution of onchange handlers to really return 
                 "The page that occupies this window after this method completes" as defined by

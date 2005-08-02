@@ -364,7 +364,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
 
             for( int i = 0; i < optionCount; i++ ) {
                 final HtmlOption option = ( HtmlOption )selectedOptions.get( i );
-                pairs[i] = new KeyValuePair( name, option.getValue() );
+                pairs[i] = new KeyValuePair( name, option.getValueAttribute() );
             }
         }
         else {

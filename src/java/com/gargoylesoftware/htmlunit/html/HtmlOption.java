@@ -188,9 +188,9 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * Return the value of the attribute "value".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
-     *
+     * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION">
+     * initial value if value attribute is not set</a>
      * @return The value of the attribute "value"
-     * or an empty string if that attribute isn't defined.
      */
     public final String getValueAttribute() {
         return getAttributeValue("value");
@@ -209,17 +209,12 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Return the value of this option as it will be submitted
-     *
+     * Same as {@link #getValueAttribute()}.
      * @return The value of the control
+     * @deprecated
      */
     public String getValue() {
-        if (isAttributeDefined("value")){
-            return getValueAttribute();
-        }
-        else {
-            return asText();
-        }
+        return getValueAttribute();
     }
 
     /**
@@ -231,5 +226,19 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
             setSelected(true);
         }
         return defaultPage;
+    }
+    
+    /**
+     * 
+     * @see com.gargoylesoftware.htmlunit.html.DomNode#appendChild(com.gargoylesoftware.htmlunit.html.DomNode)
+     */
+    public DomNode appendChild(final DomNode node) {
+        // default value is the text of the option
+        // see http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION
+        if (getAttributeValue("value") == ATTRIBUTE_NOT_DEFINED) {
+            setAttributeValue("value", node.asText());
+        }
+
+        return super.appendChild(node);
     }
 }
