@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- *  Tests for HtmlOption
+ *  Tests for {@link HtmlOption}.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -112,8 +112,8 @@ public class HtmlOptionTest extends WebTestCase {
         final HtmlOption option1 = ( HtmlOption )page.getHtmlElementById( "option1" );
         final HtmlOption option2 = ( HtmlOption )page.getHtmlElementById( "option2" );
         
-        assertEquals("option1", option1.getValue());
-        assertEquals("Number Two", option2.getValue());
+        assertEquals("option1", option1.getValueAttribute());
+        assertEquals("Number Two", option2.getValueAttribute());
 
     }
     /**
@@ -136,8 +136,8 @@ public class HtmlOptionTest extends WebTestCase {
         final HtmlOption option1 = ( HtmlOption )page.getHtmlElementById( "option1" );
         final HtmlOption option2 = ( HtmlOption )page.getHtmlElementById( "option2" );
         
-        assertEquals("Option1", option1.getValue());
-        assertEquals("Number Two", option2.getValue());
+        assertEquals("Option1", option1.getValueAttribute());
+        assertEquals("Number Two", option2.getValueAttribute());
     }        
 
     /**

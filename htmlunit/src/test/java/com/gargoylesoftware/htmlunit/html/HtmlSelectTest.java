@@ -410,7 +410,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testGetOptionByValue_TwoOptionsWithSameValue() throws Exception {
+    public void testGetOptionByValue() throws Exception {
 
         final String htmlContent = "<html><head><title>foo</title></head><body><form id='form1'>"
             + "<select name='select1'>"
@@ -420,6 +420,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "<select name='select2'>"
             + "    <option value='option1'>s2o1</option>"
             + "    <option value='option2'>s2o2</option>"
+            + "    <option>s2o3</option>"
             + "</select>"
             + "<input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
@@ -429,6 +430,8 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select2").get(0);
         assertEquals("s2o2", select.getOptionByValue("option2").asText());
+
+        assertEquals(select.getOption(2), select.getOptionByValue("s2o3"));
     }
 
     /**
@@ -505,31 +508,31 @@ public class HtmlSelectTest extends WebTestCase {
         assertNotNull(theSelect);
 
         assertEquals(4, theSelect.getOptions().size());
-        assertEquals("a", theSelect.getOption(0).getValue());
-        assertEquals("b", theSelect.getOption(1).getValue());
-        assertEquals("c", theSelect.getOption(2).getValue());
-        assertEquals("d", theSelect.getOption(3).getValue());
+        assertEquals("a", theSelect.getOption(0).getValueAttribute());
+        assertEquals("b", theSelect.getOption(1).getValueAttribute());
+        assertEquals("c", theSelect.getOption(2).getValueAttribute());
+        assertEquals("d", theSelect.getOption(3).getValueAttribute());
 
         // remove from the middle
         theSelect.getOption(1).remove();
         checkOptions(theSelect);
         assertEquals(3, theSelect.getOptions().size());
-        assertEquals("a", theSelect.getOption(0).getValue());
-        assertEquals("c", theSelect.getOption(1).getValue());
-        assertEquals("d", theSelect.getOption(2).getValue());
+        assertEquals("a", theSelect.getOption(0).getValueAttribute());
+        assertEquals("c", theSelect.getOption(1).getValueAttribute());
+        assertEquals("d", theSelect.getOption(2).getValueAttribute());
 
         // remove from the end
         theSelect.getOption(2).remove();
         checkOptions(theSelect);
         assertEquals(2, theSelect.getOptions().size());
-        assertEquals("a", theSelect.getOption(0).getValue());
-        assertEquals("c", theSelect.getOption(1).getValue());
+        assertEquals("a", theSelect.getOption(0).getValueAttribute());
+        assertEquals("c", theSelect.getOption(1).getValueAttribute());
 
         // remove from the front
         theSelect.getOption(0).remove();
         checkOptions(theSelect);
         assertEquals(1, theSelect.getOptions().size());
-        assertEquals("c", theSelect.getOption(0).getValue());
+        assertEquals("c", theSelect.getOption(0).getValueAttribute());
 
         // remove from the last one
         theSelect.getOption(0).remove();
@@ -556,15 +559,15 @@ public class HtmlSelectTest extends WebTestCase {
 
         appendOption(theSelect, "d");
         assertEquals(4, theSelect.getOptions().size());
-        assertEquals("d", theSelect.getOption(3).getValue());
+        assertEquals("d", theSelect.getOption(3).getValueAttribute());
 
         theSelect.setOptionSize(1);
         assertEquals(1, theSelect.getOptions().size());
-        assertEquals("a", theSelect.getOption(0).getValue());
+        assertEquals("a", theSelect.getOption(0).getValueAttribute());
 
         appendOption(theSelect, "x");
         assertEquals(2, theSelect.getOptions().size());
-        assertEquals("x", theSelect.getOption(1).getValue());
+        assertEquals("x", theSelect.getOption(1).getValueAttribute());
 
     }
 

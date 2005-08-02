@@ -94,7 +94,7 @@ public class Option extends HTMLElement {
      * @return The value property
      */
     public String jsxGet_value() {
-        return ((HtmlOption)getHtmlElementOrDie()).getValue();
+        return ((HtmlOption)getHtmlElementOrDie()).getValueAttribute();
     }
 
     /**
