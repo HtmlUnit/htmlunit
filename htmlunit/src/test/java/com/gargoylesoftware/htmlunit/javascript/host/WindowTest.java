@@ -1158,6 +1158,35 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
+     * Test the window.closed property
+     * @throws Exception if the test fails.
+     */
+    public void testClosed() throws Exception {
+        final String content = "<html><head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  alert(window.closed);"
+            + "  var newWindow = window.open('about:blank', 'foo');"
+            + "  alert(newWindow.closed);"
+            + "  newWindow.close();"
+            + "  alert(newWindow.closed);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + "</body></html>";
+
+        final List expectedAlerts = Arrays.asList( new String[]{"false", "false", "true"});
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * Test closing using javascript
      * @throws Exception if the test fails.
      */

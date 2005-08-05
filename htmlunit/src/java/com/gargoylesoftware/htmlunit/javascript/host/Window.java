@@ -505,10 +505,16 @@ public class Window extends SimpleScriptable {
      * Close this window
      */
     public void jsxFunction_close() {
-        final WebWindow window = ((HtmlPage) getDomNodeOrDie()).getEnclosingWindow();
-        getWebWindow().getWebClient().deregisterWebWindow(window);
+        getWebWindow().getWebClient().deregisterWebWindow(getWebWindow());
     }
 
+    /**
+     * Indicates if this window is closed
+     * @return <code>true</code> if this window is closed
+     */
+    public boolean jsxGet_closed() {
+        return !getWebWindow().getWebClient().getWebWindows().contains(getWebWindow());
+    }
 
     /**
      * Does nothing.

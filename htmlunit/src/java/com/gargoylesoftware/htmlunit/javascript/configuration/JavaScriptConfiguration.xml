@@ -715,6 +715,7 @@
         <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp"
                 descr="MSDN documenation"/>
 
+        <property name="closed" readable="true" writable="false"/>
         <property name="document" readable="true" writable="false"/>
         <property name="frames" readable="true" writable="false"/>
         <property name="history" readable="true" writable="false"/>
