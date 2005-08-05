@@ -8,6 +8,9 @@
     <body>
         <release version="NextRelease" date="Unknown">
             <action type="update" dev="mguillem">
+                JavaScript: added support for window.closed. 
+            </action>
+            <action type="update" dev="mguillem">
                 HtmlOption's value attribute initial value is the text of the option if 
                 no attribute is found as defined in HTML 4.01. 
                 Deprecated HtmlOption.getValue().
