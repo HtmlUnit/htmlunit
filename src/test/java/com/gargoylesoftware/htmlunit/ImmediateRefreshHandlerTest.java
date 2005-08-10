@@ -38,108 +38,54 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.List;
 
 /**
- *  A response from a web server
+ * Tests for {@link com.gargoylesoftware.htmlunit.ImmediateRefreshHandler}.
  *
- * @version  $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author Noboru Sinohara
+ * @version $Revision$
  * @author Marc Guillemot
  */
-public interface WebResponse {
+public final class ImmediateRefreshHandlerTest extends WebTestCase {
     /**
-     *  Return the status code that was returned by the server
-     *
-     * @return  See above.
+     * Create an instance.
+     * @param name The name of the test.
      */
-    int getStatusCode();
-
-
-    /**
-     *  Return the status message that was returned from the server
-     *
-     * @return  See above
-     */
-    String getStatusMessage();
+    public ImmediateRefreshHandlerTest( final String name ) {
+        super(name);
+    }
 
 
     /**
-     *  Return the content type returned from the server. Ie "text/html"
-     *
-     * @return  See above
+     * Regression test for bug 1211980: redirect on the same page after a post
+     * @throws Exception if the test fails
      */
-    String getContentType();
-
-
-    /**
-     *  Return the content from the server as a string
-     *
-     * @return  See above
-     */
-    String getContentAsString();
-
-
-    /**
-     *  Return the content from the server as an input stream
-     *
-     * @return  See above
-     * @exception  IOException If an IO problem occurs
-     */
-    InputStream getContentAsStream()
-        throws IOException;
-
-
-    /**
-     * Return the URL that was used to load this page.
-     *
-     * @return The originating URL
-     */
-    URL getUrl();
-
-
-    /**
-     * Return the method used for the request resulting into this response.
-     * @return the method
-     */
-    SubmitMethod getRequestMethod();
-
-    /**
-     * Return the response headers as a List of {@link org.apache.commons.httpclient.NameValuePair}s.
-     * 
-     * @return a List of {@link org.apache.commons.httpclient.NameValuePair}s.
-     */
-    List getResponseHeaders();
-
-
-    /**
-     * Return the value of the specified header from this response.
-     *
-     * @param headerName The name of the header
-     * @return The value of the specified header
-     */
-    String getResponseHeaderValue( final String headerName );
-
-
-    /**
-     * Return the time it took to load this web response in milliseconds.
-     * @return The load time.
-     */
-    long getLoadTimeInMilliSeconds();
-
-    /**
-     * Return the content charset value.
-     * @return The charset value.
-     */
-    String getContentCharSet();
-
-    /**
-     * Return the response body as byte array.
-     * @return response body.
-     */
-    byte[] getResponseBody();
+    public void testRefreshSamePageAfterPost() throws Exception {
+        final WebClient client = new WebClient();
+        client.setRefreshHandler(new ImmediateRefreshHandler());
+        
+        // connection will return a page with <meta ... refresh> for the first call
+        // and the same page without it for the other calls
+        final MockWebConnection webConnection = new MockWebConnection( client ) {
+            private int nbCalls_ = 0;
+            public WebResponse getResponse(final WebRequestSettings settings)
+                    throws IOException {
+                String content = "<html><head>";
+                if (nbCalls_ == 0) {
+                    content += "<meta http-equiv='refresh' content='0;url=" + URL_GARGOYLE.toExternalForm() + "'>";
+                }
+                content += "</head><body></body></html>";
+                ++nbCalls_;
+                return new StringWebResponse(content, settings.getURL()) {
+                        public SubmitMethod getRequestMethod() {
+                            return settings.getSubmitMethod();
+                        }
+                    };
+            }
+        };
+        client.setWebConnection( webConnection );
+        
+        final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE);
+        settings.setSubmitMethod(SubmitMethod.POST);
+        client.getPage(settings);
+    }
 }
-

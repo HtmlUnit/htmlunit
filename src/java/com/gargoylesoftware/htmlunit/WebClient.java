@@ -148,41 +148,7 @@ public class WebClient {
     }
 
     //singleton WebResponse for "about:blank"
-    private static final WebResponse WEB_RESPONSE_FOR_ABOUT_BLANK = new WebResponse() {
-        public int getStatusCode() {
-            return 200;
-        }
-        public String getStatusMessage() {
-            return "OK";
-        }
-        public String getContentType() {
-            return "text/html";
-        }
-        public String getContentAsString() {
-            return "";
-        }
-        public InputStream getContentAsStream() {
-            return TextUtil.toInputStream("");
-        }
-        public URL getUrl() {
-            return URL_ABOUT_BLANK;
-        }
-        public List getResponseHeaders() {
-            return Collections.EMPTY_LIST;
-        }
-        public String getResponseHeaderValue(final String key) {
-            return "";
-        }
-        public long getLoadTimeInMilliSeconds() {
-            return 0;
-        }
-        public byte[] getResponseBody() {
-            return "".getBytes();
-        }
-        public String getContentCharSet() {
-            return "ISO-8859-1";
-        }
-    };
+    private static final WebResponse WEB_RESPONSE_FOR_ABOUT_BLANK = new StringWebResponse("", URL_ABOUT_BLANK);
 
     private ScriptPreProcessor scriptPreProcessor_;
     private Map activeXObjectMap_ = Collections.EMPTY_MAP;
@@ -1440,39 +1406,9 @@ public class WebClient {
         final String str = FileUtils.readFileToString(file, encoding);
         final String contentType = guessContentType(file);
         
-        return new WebResponse() {
-            public int getStatusCode() {
-                return 200;
-            }
-            public String getStatusMessage() {
-                return "OK";
-            }
+        return new StringWebResponse(str, url) {
             public String getContentType() {
                 return contentType;
-            }
-            public String getContentAsString() {
-                return str;
-            }
-            public InputStream getContentAsStream() {
-                return TextUtil.toInputStream(str);
-            }
-            public URL getUrl() {
-                return url;
-            }
-            public List getResponseHeaders() {
-                return Collections.EMPTY_LIST;
-            }
-            public String getResponseHeaderValue(final String key) {
-                return "";
-            }
-            public long getLoadTimeInMilliSeconds() {
-                return 0;
-            }
-            public byte[] getResponseBody() {
-                return str.getBytes();
-            }
-            public String getContentCharSet() {
-                return encoding;
             }
         };
     }
