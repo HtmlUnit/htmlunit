@@ -49,6 +49,7 @@ import org.mozilla.javascript.Scriptable;
  * @version  $Revision$
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
  */
 public class OptionsArray extends SimpleScriptable {
     private static final long serialVersionUID = -4790255174217201235L;
@@ -125,8 +126,6 @@ public class OptionsArray extends SimpleScriptable {
             HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
             if ( htmlOption == null ) {
                 htmlOption = new HtmlOption(htmlSelect_.getPage(), null);
-                option.setDomNode( htmlOption );
-                // BUG: Set the text and value.
             }
             if ( index >= jsGet_length() ) {
                 // Add a new option at the end.
@@ -135,6 +134,11 @@ public class OptionsArray extends SimpleScriptable {
             else {
                 // Replace the indexed option.
                 htmlSelect_.replaceOption( index, htmlOption );
+            }
+            
+            // newly created HtmlOption needs to be associated to its js object
+            if (option.getDomNodeOrNull() == null) {
+                option.setDomNode( htmlOption );
             }
         }
     }

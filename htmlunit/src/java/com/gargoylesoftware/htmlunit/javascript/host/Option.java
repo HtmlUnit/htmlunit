@@ -41,17 +41,19 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 
 /**
- * The javascript object that represents a select
+ * The javascript object that represents an option.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
  * @author Chris Erskine
+ * @author Marc Guillemot
  */
 public class Option extends HTMLElement {
     private static final long serialVersionUID = 947015932373556314L;
     private String text_;
     private String value_;
+    private boolean selected_;
 
     /**
      * Create an instance.
@@ -83,9 +85,8 @@ public class Option extends HTMLElement {
         super.setDomNode( domNode );
         if ( value_ != null ) {
             jsxSet_value( value_ );
-        }
-        if ( text_ != null ) {
             jsxSet_text( text_ );
+            jsxSet_selected(selected_);
         }
     }
 
@@ -94,6 +95,11 @@ public class Option extends HTMLElement {
      * @return The value property
      */
     public String jsxGet_value() {
+        final HtmlOption htmlOption = getHtmlOption();
+        if (htmlOption == null) {
+            return value_;
+        }
+        
         return ((HtmlOption)getHtmlElementOrDie()).getValueAttribute();
     }
 
@@ -102,7 +108,13 @@ public class Option extends HTMLElement {
      * @param newValue The value property
      */
     public void jsxSet_value( final String newValue ) {
-        ((HtmlOption)getHtmlElementOrDie()).setValueAttribute( newValue );
+        final HtmlOption htmlOption = getHtmlOption();
+        if (htmlOption == null) {
+            value_ = newValue;
+        }
+        else {
+            htmlOption.setValueAttribute( newValue );
+        }
     }
 
 
@@ -111,20 +123,32 @@ public class Option extends HTMLElement {
      * @return The text property
      */
     public String jsxGet_text() {
-        final HtmlOption htmlOption = (HtmlOption) getHtmlElementOrDie();
+        final HtmlOption htmlOption = getHtmlOption();
+        if (htmlOption == null) {
+            return text_;
+        }
         if ( htmlOption.isAttributeDefined( "label" ) ) {
             return htmlOption.getLabelAttribute();
         }
         return htmlOption.asText();
     }
 
+    private HtmlOption getHtmlOption() {
+        return (HtmlOption) getHtmlElementOrNull();
+    }
 
     /**
      * Set the value of the "text" property
      * @param newText The text property
      */
     public void jsxSet_text( final String newText ) {
-        ((HtmlOption)getHtmlElementOrDie()).setLabelAttribute( newText );
+        final HtmlOption htmlOption = getHtmlOption();
+        if (htmlOption == null) {
+            text_ = newText;
+        }
+        else {
+            htmlOption.setLabelAttribute( newText );
+        }
     }
 
     /**
@@ -132,7 +156,10 @@ public class Option extends HTMLElement {
      * @return The text property
      */
     public boolean jsxGet_selected() {
-        final HtmlOption htmlOption = (HtmlOption) getHtmlElementOrDie();
+        final HtmlOption htmlOption = getHtmlOption();
+        if (htmlOption == null) {
+            return selected_;
+        }
         return htmlOption.isSelected();
     }
 
@@ -142,6 +169,12 @@ public class Option extends HTMLElement {
      * @param selected The new selected property
      */
     public void jsxSet_selected( final boolean selected ) {
-        ((HtmlOption)getHtmlElementOrDie()).setSelected( selected );
+        final HtmlOption htmlOption = getHtmlOption();
+        if (htmlOption == null) {
+            selected_ = selected;
+        }
+        else {
+            htmlOption.setSelected( selected );
+        }
     }
 }

@@ -343,6 +343,50 @@ public class SelectTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    public void testAddOptionSelected() throws Exception {
+        final String content
+            = "<html><head><title>foo</title><script>"
+            + "function doTest() {\n"
+            + "    var oSelect = document.form1.select1;\n"
+            + "    var options = oSelect.options;\n"
+            + "    var firstSelectedIndex = oSelect.selectedIndex;\n"
+            + "    alert(firstSelectedIndex);\n"
+            + "    alert(options[firstSelectedIndex].selected);\n"
+            + "    var index = options.length;\n"
+            + "    var oOption = new Option('Four','value4');\n"
+            + "    oOption.selected = true;\n"
+            + "    options[index] = oOption;\n"
+            + "    alert(options.length);\n"
+            + "    alert(options[index].text);\n"
+            + "    alert(options[index].value);\n"
+            + "    alert(options[index].selected);\n"
+            + "    alert(oSelect.selectedIndex);\n"
+            + "    alert(options[firstSelectedIndex].selected);\n"
+            + "}</script></head><body onload='doTest()'>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <select name='select1'>"
+            + "        <option name='option1' value='value1'>One</option>"
+            + "        <option name='option2' value='value2' selected>Two</option>"
+            + "        <option name='option3' value='value3'>Three</option>"
+            + "    </select>"
+            + "</form>"
+            + "</body></html>";
+
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "1", "true", "4", "Four", "value4", "true", "3", "false"
+        } );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
     public void testAddOptionWithAddMethod() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>"

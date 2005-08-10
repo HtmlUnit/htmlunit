@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1151593">
+                JavaScript: fixed properties text, value and selected for Option objects 
+                created from JavaScript and not yet added to a select.
+            </action>
             <action type="update" dev="mguillem" id="1211980">
                 Added WebResponse.getRequestMethod().
                 ImmediateRefreshHandler now accepts a refresh to the same url if the first request was a POST.
