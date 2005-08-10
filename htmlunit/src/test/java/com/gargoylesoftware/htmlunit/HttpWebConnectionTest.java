@@ -48,7 +48,6 @@ import java.net.URL;
 import java.util.Map;
 
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -285,7 +284,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
         final int httpStatus = 200;
         final long loadTime = 500L;
 
-        final HttpMethod httpMethod = new GetMethod(url.toString());
+        final HttpMethodBase httpMethod = new GetMethod(url.toString());
         final Field field = HttpMethodBase.class.getDeclaredField("responseBody");
         field.setAccessible(true);
         field.set(httpMethod, content.getBytes());
@@ -293,7 +292,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
         final HttpWebConnection connection = new HttpWebConnection(new WebClient());
         final Method method =
                 connection.getClass().getDeclaredMethod("makeWebResponse", new Class[]{
-                    int.class, HttpMethod.class, URL.class, long.class});
+                    int.class, HttpMethodBase.class, URL.class, long.class});
         method.setAccessible(true);
 
         final WebResponse response =

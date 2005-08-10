@@ -133,7 +133,7 @@ public class HttpWebConnection extends WebConnection {
         final HttpClient httpClient = getHttpClientFor( url );
 
         try {
-            final HttpMethod httpMethod = makeHttpMethod( url, encType, submitMethod, parameters, body,
+            final HttpMethodBase httpMethod = makeHttpMethod( url, encType, submitMethod, parameters, body,
                 requestHeaders, credentialsProvider );
             final long startTime = System.currentTimeMillis();
             final int responseCode = httpClient.executeMethod( httpMethod );
@@ -181,7 +181,7 @@ public class HttpWebConnection extends WebConnection {
      * @return The <tt>HttpMethod</tt> instance constructed according to the specified parameters.
      * @throws IOException
      */
-    private HttpMethod makeHttpMethod(
+    private HttpMethodBase makeHttpMethod(
             final URL url,
             final FormEncodingType encType,
             final SubmitMethod method,
@@ -192,7 +192,7 @@ public class HttpWebConnection extends WebConnection {
         throws
             IOException {
 
-        final HttpMethod httpMethod;
+        final HttpMethodBase httpMethod;
         String path = url.getPath();
         if( path.length() == 0 ) {
             path = "/";
@@ -395,17 +395,11 @@ public class HttpWebConnection extends WebConnection {
 
 
     private WebResponse makeWebResponse(
-        final int statusCode, final HttpMethod method, final URL originatingURL, final long loadTime ) 
+        final int statusCode, final HttpMethodBase method, final URL originatingURL, final long loadTime ) 
         throws IOException {
         
         // determine charset
-        final String contentCharSet;
-        if (method instanceof HttpMethodBase) {
-            contentCharSet = ((HttpMethodBase) method).getResponseCharSet();
-        }
-        else {
-            contentCharSet = "ISO-8859-1";
-        }
+        final String contentCharSet = method.getResponseCharSet();
 
         // HttpMethod.getResponseBodyAsStream may return null if no body is available
         final InputStream bodyStream = method.getResponseBodyAsStream();
@@ -421,6 +415,9 @@ public class HttpWebConnection extends WebConnection {
             private String content_ = content;
             private String contentCharSet_ = contentCharSet;
 
+            public SubmitMethod getRequestMethod() {
+                return SubmitMethod.getInstance(method.getName());
+            }
             public int getStatusCode() {
                 return statusCode;
             }

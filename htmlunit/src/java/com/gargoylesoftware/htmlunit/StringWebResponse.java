@@ -51,6 +51,7 @@ import java.util.List;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public class StringWebResponse implements WebResponse {
     private final String content_;
@@ -81,6 +82,14 @@ public class StringWebResponse implements WebResponse {
         content_ = content;
         url_ = originatingURL;
     }    
+
+    /**
+     * @see com.gargoylesoftware.htmlunit.WebResponse#getRequestMethod()
+     * @return {@link SubmitMethod#GET}
+     */
+    public SubmitMethod getRequestMethod() {
+        return SubmitMethod.GET;
+    }
 
     /**
      *  Return the status code that was returned by the server

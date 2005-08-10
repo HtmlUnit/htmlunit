@@ -178,6 +178,9 @@ public class MockWebConnection extends WebConnection {
 
         final ResponseEntry responseEntry = entry;
         return new WebResponse() {
+            public SubmitMethod getRequestMethod() {
+                return webRequestSettings.getSubmitMethod();
+            }
             public int getStatusCode()         { return responseEntry.statusCode_;      }
             public String getStatusMessage()   { return responseEntry.statusMessage_;   }
             public String getContentType()     { 
