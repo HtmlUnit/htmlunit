@@ -113,7 +113,6 @@ public class Select extends FormField {
         HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
         if ( htmlOption == null ) {
             htmlOption = new HtmlOption(select.getPage(), null);
-            option.setDomNode( htmlOption );
         }
 
         if (beforeOption == null) {
@@ -122,6 +121,11 @@ public class Select extends FormField {
         else {
             final DomNode before = beforeOption.getDomNodeOrDie();
             before.insertBefore(htmlOption);
+        }
+        
+        // newly created HtmlOption needs to be associated to its js object
+        if (option.getDomNodeOrNull() == null) {
+            option.setDomNode( htmlOption );
         }
     }
 
