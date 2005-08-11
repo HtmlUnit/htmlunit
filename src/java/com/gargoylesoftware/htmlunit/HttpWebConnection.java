@@ -287,7 +287,20 @@ public class HttpWebConnection extends WebConnection {
 
 
     private synchronized HttpClient getHttpClientFor( final URL url ) {
-        final String key = url.getProtocol() + "://" + url.getHost().toLowerCase();
+        final int port;
+        if (url.getPort() == -1) {
+            if ("http".equals(url.getProtocol())) {
+                port = 80;
+            }
+            else {
+                port = 443;
+            }
+        }
+        else {
+            port = url.getPort();
+        }
+        final String key = url.getProtocol() + "://" + url.getHost().toLowerCase() 
+            + ":" + port;
 
         HttpClient client = ( HttpClient )httpClients_.get( key );
         if( client == null ) {
