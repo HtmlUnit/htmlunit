@@ -38,7 +38,7 @@
                 JavaScript: made input.setAttribute("type", xxx) behave the same than input.type = xxxx.
             </action>
             <action type="update" dev="mguillem" id="1210751">
-                JavaScript: fixed double execution of script inside <table>.
+                JavaScript: fixed double execution of script inside &lt;table&gt;.
             </action>
             <action type="update" dev="mguillem" id="1241739" due-to="Bruce Faulkner">
                 Set state of radio button before executing onclick handler.
