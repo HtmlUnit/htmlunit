@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                Fixed infinite loop when DefaultCredentialsProvider provides invalid credential.
+                Ensure that the web connection uses the CredentialProvider configured for the WebClient.
+            </action>
             <action type="update" dev="mguillem" id="1195099">
                 Handle port correctly when handling a redirection to an other port on the same host.
             </action>

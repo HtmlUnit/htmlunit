@@ -37,9 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
@@ -47,6 +50,8 @@ import org.apache.commons.httpclient.auth.AuthScheme;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.auth.CredentialsNotAvailableException;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Default HtmlUnit implementation of the <tt>CredentialsProvider</tt> interface. Provides
@@ -58,15 +63,15 @@ import org.apache.commons.httpclient.auth.CredentialsProvider;
  */
 public class DefaultCredentialsProvider implements CredentialsProvider {
 
-    private final Map credentials_;
-    private final Map proxyCredentials_;
+    private final Map credentials_ = new HashMap();
+    private final Map proxyCredentials_ = new HashMap();
+    private final Set answerMarks_ = Collections.synchronizedSortedSet(new TreeSet());
 
     /**
      * Creates a new <tt>DefaultCredentialsProvider</tt> instance.
      */
     public DefaultCredentialsProvider() {
-        credentials_ = new HashMap();
-        proxyCredentials_ = new HashMap();
+        // nothing
     }
 
     /**
@@ -97,6 +102,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
         final AuthScope scope = new AuthScope( host, port, realm, AuthScope.ANY_SCHEME );
         final Credentials c = new UsernamePasswordCredentials( username, password );
         credentials_.put( scope, c );
+        answerMarks_.clear(); // don't need to be precise, will cause in worst case one extra request
+        getLog().debug(hashCode() + " Flushed marked answers");
     }
 
     /**
@@ -119,20 +126,33 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
         final AuthScope scope = new AuthScope( host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME );
         final Credentials c = new UsernamePasswordCredentials( username, password );
         proxyCredentials_.put( scope, c );
+        answerMarks_.clear(); // don't need to be precise, will cause in worst case one extra request
+        getLog().debug("Flushed marked answers");
     }
 
     /**
-     * Returns the credentials associated with the specified scheme, host and port.
+     * Returns the credentials associated with the specified scheme, host and port
      * @param scheme The authentication scheme being used (basic, digest, NTLM, etc).
      * @param host The host we are authenticating for.
      * @param port The port we are authenticating for.
      * @param proxy Whether or not we are authenticating using a proxy.
-     * @return The credentials correponding to the specified schem, host and port.
+     * @return The credentials correponding to the specified schem, host and port or <code>null</code> if already asked
+     * for it to avoid infinite loop
      * @throws CredentialsNotAvailableException If the specified credentials cannot be provided due to an error.
      * @see CredentialsProvider#getCredentials(AuthScheme, String, int, boolean)
      */
     public Credentials getCredentials( final AuthScheme scheme, final String host, final int port, final boolean proxy )
         throws CredentialsNotAvailableException {
+        
+        // it's the responsibility of the CredentialProvider to answer only once with a given Credentials 
+        // to avoid infinte loop if it is incorrect
+        // see http://issues.apache.org/bugzilla/show_bug.cgi?id=8140
+        if (alreadyAnswered(scheme, host, port, proxy)) {
+            getLog().debug("Already answered for " + buildKey(scheme, host, port, proxy)
+                    + " returning null");
+            return null;
+        }
+        
         final Map credentials;
         if( proxy ) {
             credentials = proxyCredentials_;
@@ -144,17 +164,42 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
             final Map.Entry entry = (Map.Entry) i.next();
             final AuthScope scope = (AuthScope) entry.getKey();
             final Credentials c = (Credentials) entry.getValue();
-            if( scope.getScheme() == AuthScope.ANY_SCHEME || scope.getScheme().equals(scheme.getSchemeName()) ) {
-                if( scope.getHost() == AuthScope.ANY_HOST || scope.getHost().equals(host) ) {
-                    if( scope.getPort() == AuthScope.ANY_PORT || scope.getPort() == port ) {
-                        if( scope.getRealm() == AuthScope.ANY_REALM || scope.getRealm().equals(scheme.getRealm()) ) {
-                            return c;
-                        }
-                    }
-                }
+            if ( (scope.getScheme() == AuthScope.ANY_SCHEME || scope.getScheme().equals(scheme.getSchemeName()))
+                && ( scope.getHost() == AuthScope.ANY_HOST || scope.getHost().equals(host) )
+                && ( scope.getPort() == AuthScope.ANY_PORT || scope.getPort() == port )
+                && ( scope.getRealm() == AuthScope.ANY_REALM || scope.getRealm().equals(scheme.getRealm()))) {
+
+                markAsAnswered(scheme, host, port, proxy);
+                getLog().debug("Returning " + c + " for " + buildKey(scheme, host, port, proxy));
+                return c;
             }
         }
+
+        getLog().debug("No credential found for " + buildKey(scheme, host, port, proxy));
         return null;
+    }
+
+    /**
+     * Indicates if this provider has already provided an answer for this (scheme, host, port, proxy)
+     */
+    private boolean alreadyAnswered(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
+        return answerMarks_.contains(buildKey(scheme, host, port, proxy));
+    }
+
+    private void markAsAnswered(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
+        answerMarks_.add(buildKey(scheme, host, port, proxy));
+    }
+    
+    private Object buildKey(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
+        return scheme.getSchemeName() + " " + scheme.getRealm() + " " + host + ":" + port + " " + proxy;
+    }
+    
+    /**
+     * Return the log object for this class
+     * @return The log object
+     */
+    protected final Log getLog() {
+        return LogFactory.getLog(getClass());
     }
 
 }

@@ -312,9 +312,6 @@ public class HttpWebConnection extends WebConnection {
                 ((SimpleLog)log).setLevel( SimpleLog.LOG_LEVEL_WARN );
             }
 
-            // Tell the client where to get its credentials from.
-            client.getParams().setParameter( CredentialsProvider.PROVIDER, getWebClient().getCredentialsProvider() );
-
             final HostConfiguration hostConfiguration = new HostConfiguration();
             final URI uri;
             try {
@@ -345,6 +342,11 @@ public class HttpWebConnection extends WebConnection {
             }                    
             httpClients_.put( key, client );
         }
+
+        // Tell the client where to get its credentials from 
+        // (it may have changed on the webClient since last call to getHttpClientFor(...))
+        client.getParams().setParameter( CredentialsProvider.PROVIDER, getWebClient().getCredentialsProvider() );
+
         return client;
     }
 
