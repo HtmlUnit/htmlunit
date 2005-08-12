@@ -103,7 +103,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
         final Credentials c = new UsernamePasswordCredentials( username, password );
         credentials_.put( scope, c );
         answerMarks_.clear(); // don't need to be precise, will cause in worst case one extra request
-        getLog().debug(hashCode() + " Flushed marked answers");
+        getLog().debug("Flushed marked answers");
     }
 
     /**
