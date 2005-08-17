@@ -249,7 +249,7 @@ public class HttpWebConnection extends WebConnection {
                                 pairWithFile.getFile(),
                                 pairWithFile.getContentType(),
                                 pairWithFile.getCharset());
-                    } 
+                    }
                     else {
                         newPart = new StringPart(pair.getName(), pair.getValue());
                     }
@@ -285,22 +285,22 @@ public class HttpWebConnection extends WebConnection {
         return httpMethod;
     }
 
-
-    private synchronized HttpClient getHttpClientFor( final URL url ) {
-        final int port;
+    private int getPort(final URL url) {
         if (url.getPort() == -1) {
             if ("http".equals(url.getProtocol())) {
-                port = 80;
+                return 80;
             }
             else {
-                port = 443;
+                return 443;
             }
         }
         else {
-            port = url.getPort();
+            return url.getPort();
         }
-        final String key = url.getProtocol() + "://" + url.getHost().toLowerCase() 
-            + ":" + port;
+    }
+
+    private synchronized HttpClient getHttpClientFor( final URL url ) {
+        final String key = url.getProtocol() + "://" + url.getHost().toLowerCase() + ":" + getPort(url);
 
         HttpClient client = ( HttpClient )httpClients_.get( key );
         if( client == null ) {
@@ -336,14 +336,14 @@ public class HttpWebConnection extends WebConnection {
             if( sharedState != null ) {
                 client.setState(sharedState);
             }
-            
+
             if (virtualHost_ != null) {
                 client.getParams().setVirtualHost(virtualHost_);
-            }                    
+            }
             httpClients_.put( key, client );
         }
 
-        // Tell the client where to get its credentials from 
+        // Tell the client where to get its credentials from
         // (it may have changed on the webClient since last call to getHttpClientFor(...))
         client.getParams().setParameter( CredentialsProvider.PROVIDER, getWebClient().getCredentialsProvider() );
 
@@ -359,7 +359,7 @@ public class HttpWebConnection extends WebConnection {
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
     }
-    
+
     /**
      * set the virtual host
      * @param virtualHost The virtualHost to set.
@@ -389,10 +389,10 @@ public class HttpWebConnection extends WebConnection {
         }
         final String rootDomain;
         if( index == -1 ) {
-            rootDomain = domain;
+            rootDomain = domain + ":" + getPort(url);
         }
         else {
-            rootDomain = domain.substring(index+1);
+            rootDomain = domain.substring(index+1) + ":" + getPort(url);
         }
 
         final Iterator iterator = httpClients_.entrySet().iterator();
@@ -410,9 +410,9 @@ public class HttpWebConnection extends WebConnection {
 
 
     private WebResponse makeWebResponse(
-        final int statusCode, final HttpMethodBase method, final URL originatingURL, final long loadTime ) 
+        final int statusCode, final HttpMethodBase method, final URL originatingURL, final long loadTime )
         throws IOException {
-        
+
         // determine charset
         final String contentCharSet = method.getResponseCharSet();
 
