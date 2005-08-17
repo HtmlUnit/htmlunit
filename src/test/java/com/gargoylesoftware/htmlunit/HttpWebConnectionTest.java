@@ -329,7 +329,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
             httpState.setAccessible(true);
             httpState.set(httpClient, expectedHttpState);
 
-            map.put("http://" + hostname.toLowerCase(), httpClient);
+            map.put("http://" + hostname.toLowerCase() + ":80", httpClient);
 
             final URL url = new URL("http://" + hostname + "/context");
             final HttpState actualHttpState = connection.getStateForUrl(url);
