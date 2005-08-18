@@ -7,6 +7,11 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1210726">
+                When posting a form as multipart/form-data don't send Content-Transfer-Encoding
+                headers for the parts and send Content-Type headers only for files like browsers
+                do.
+            </action>
             <action type="update" dev="mguillem" id="1119937">
                 When posting a form, use encoding from accept-charset attribute if any else
                 from page to encode the posted parameters.
