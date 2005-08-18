@@ -67,6 +67,7 @@ import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
+import org.apache.commons.httpclient.methods.multipart.PartBase;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
@@ -90,6 +91,12 @@ public class HttpWebConnection extends WebConnection {
     private final Map httpClients_ = new HashMap( 9 );
 
     private String virtualHost_ = null;
+    // http://jakarta.apache.org/commons/httpclient/3.0/exception-handling.html#Automatic%20exception%20recovery
+    private static final HttpMethodRetryHandler NoAutoRetry = new HttpMethodRetryHandler() {
+        public boolean retryMethod(final HttpMethod arg0, final IOException arg1, final int arg2) {
+            return false;
+        }
+    };
 
     /**
      *  Create an instance that will not use a proxy server
@@ -220,7 +227,7 @@ public class HttpWebConnection extends WebConnection {
                 final List partList = new ArrayList();
                 final Iterator iterator = webRequestSettings.getRequestParameters().iterator();
                 while (iterator.hasNext()) {
-                    final Part newPart;
+                    final PartBase newPart;
                     final KeyValuePair pair = (KeyValuePair) iterator.next();
                     if (pair instanceof KeyDataPair) {
                         final KeyDataPair pairWithFile = (KeyDataPair) pair;
@@ -229,11 +236,15 @@ public class HttpWebConnection extends WebConnection {
                                 pairWithFile.getValue(),
                                 pairWithFile.getFile(),
                                 pairWithFile.getContentType(),
-                                pairWithFile.getCharset());
+                                null);
+                        // Firefox and IE seem not to specify a charset for a file part
+                        newPart.setCharSet(null);
                     }
                     else {
-                        newPart = new StringPart(pair.getName(), pair.getValue());
+                        newPart = new StringPart(pair.getName(), pair.getValue(), webRequestSettings.getCharset());
+                        newPart.setContentType(null); // Firefox and IE seem not to send a content type
                     }
+                    newPart.setTransferEncoding(null); // Firefox and IE don't send transfer encoding headers
                     partList.add(newPart);
                 }
                 Part[] parts = new Part[partList.size()];
@@ -253,14 +264,8 @@ public class HttpWebConnection extends WebConnection {
 
         writeRequestHeadersToHttpMethod(httpMethod, webRequestSettings.getAdditionalHeaders());
         httpMethod.setFollowRedirects(false);
-        // http://jakarta.apache.org/commons/httpclient/3.0/exception-handling.html#Automatic%20exception%20recovery
-        final HttpMethodRetryHandler noAutoRetry = new HttpMethodRetryHandler() {
-            public boolean retryMethod(final HttpMethod arg0, final IOException arg1, final int arg2) {
-                return false;
-            }
-        };
 
-        httpMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, noAutoRetry);
+        httpMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, NoAutoRetry);
         if (webRequestSettings.getCredentialsProvider() != null) {
             httpMethod.getParams().setParameter(CredentialsProvider.PROVIDER,
                     webRequestSettings.getCredentialsProvider());
