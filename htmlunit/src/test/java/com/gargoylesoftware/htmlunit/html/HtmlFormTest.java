@@ -43,6 +43,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
@@ -91,7 +93,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-        
+
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput pushButton = ( HtmlSubmitInput )form.getInputByName( "button" );
@@ -159,7 +161,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-        
+
         final HtmlForm form = (HtmlForm) page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput pushButton = ( HtmlSubmitInput )form.getInputByName( "button" );
@@ -186,7 +188,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        
+
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         // Regression test: this used to blow up
@@ -207,7 +209,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-        
+
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
@@ -407,7 +409,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
-        
+
         final HtmlSubmitInput loginButton
             = (HtmlSubmitInput)page.getDocumentElement().getOneHtmlElementByAttribute("input","value","Login");
         loginButton.click();
@@ -505,7 +507,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-        
+
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
@@ -533,7 +535,7 @@ public class HtmlFormTest extends WebTestCase {
             + "    </noscript>"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        
+
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         // Was failing at this point
@@ -580,7 +582,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-       
+
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
@@ -606,7 +608,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-       
+
         final HtmlButton button = (HtmlButton) page.getHtmlElementById( "button" );
         button.click();
 
@@ -616,7 +618,8 @@ public class HtmlFormTest extends WebTestCase {
         final List collectedParameters = webConnection.getLastParameters();
 
         assertEquals( expectedParameters, collectedParameters );
-    }   
+    }
+
     /**
      * @throws Exception if the test fails
      */
@@ -634,7 +637,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-        
+
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
@@ -662,7 +665,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-        
+
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
@@ -741,7 +744,7 @@ public class HtmlFormTest extends WebTestCase {
             + "    <input type='submit' name='button' value='bar'/>"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        
+
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final List allInputsByValue = form.getInputsByValue("foo");
@@ -796,7 +799,7 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals("first window name", "", firstWindow.getName() );
         assertSame( page, firstWindow.getEnclosedPage() );
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -809,13 +812,13 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-        
+
         final HtmlPage secondPage = ( HtmlPage ) page.getFormByName("form").submit();
-        
+
         assertNotNull( secondPage );
         assertEquals( "parameters", Collections.EMPTY_LIST, webConnection.getLastParameters() );
-    }    
-    
+    }
+
     /**
      * @throws Exception if the test fails
      */
@@ -830,12 +833,12 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final HtmlPage secondPage = (HtmlPage) page.getFormByName("form").submit();
-        
+
         assertNotNull( secondPage );
         assertEquals(page.getWebResponse().getUrl().toExternalForm() + "action.html?select=second+value",
                 secondPage.getWebResponse().getUrl());
-    }        
-    
+    }
+
     /**
      * At one point this test was failing because deeply nested inputs weren't getting picked up.
      * @throws Exception if the test fails
@@ -850,12 +853,12 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-        
+
         final HtmlInput submitButton = (HtmlInput)page.getHtmlElementById("submitButton");
         submitButton.click();
-        
+
         final List collectedParameters = webConnection.getLastParameters();
-        final List expectedParameters = Arrays.asList( new Object[] { 
+        final List expectedParameters = Arrays.asList( new Object[] {
             new KeyValuePair("data", "NOT_SUBMITTED"),
             new KeyValuePair("submit", "")
         } );
@@ -928,7 +931,7 @@ public class HtmlFormTest extends WebTestCase {
         testUrlAfterSubmit("get", "foo?foo=12", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
         testUrlAfterSubmit("post", "foo", "foo");
         testUrlAfterSubmit("post", "foo?foo=12", "foo?foo=12");
-        
+
         // test with anchor: the expected values are not correct as the anchors are discarded
         // but in a first time, as long as htmlunit doesn't handle them correctly...
         // then, these test should be removed and testUrlAfterSubmitWithAnchor should be activated
@@ -973,9 +976,81 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         final Page page2 = form.submit("button");
-        
-        assertEquals(URL_GARGOYLE.toExternalForm() + expectedUrlEnd, 
+
+        assertEquals(URL_GARGOYLE.toExternalForm() + expectedUrlEnd,
                 page2.getWebResponse().getUrl());
+    }
+
+    /**
+     * Utility for {@link #testUrlAfterSubmit()}
+     * @throws Exception if the test fails
+     */
+    public void testSubmitRequestCharset() throws Exception {
+        testSubmitRequestCharset("UTF-8", null, null, "UTF-8");
+        testSubmitRequestCharset(null, "UTF-8", null, "UTF-8");
+        testSubmitRequestCharset("ISO-8859-1", null, "UTF-8", "UTF-8");
+        testSubmitRequestCharset("ISO-8859-1", null, "UTF-8, ISO-8859-1", "UTF-8");
+        testSubmitRequestCharset("UTF-8", null, "ISO-8859-1 UTF-8", "ISO-8859-1");
+        testSubmitRequestCharset("ISO-8859-1", null, "UTF-8, ISO-8859-1", "UTF-8");
+    }
+
+    /**
+     * Utility for {@link #testSubmitRequestCharset()}
+     * @param headerCharset the charset for the content type header if not null
+     * @param metaCharset the charset for the meta http-equiv content type tag if not null
+     * @param formCharset the charset for the form's accept-charset attribute if not null
+     * @param expectedRequestCharset the charset expected for the form submission
+     * @throws Exception if the test fails
+     */
+    private void testSubmitRequestCharset(final String headerCharset,
+            final String metaCharset, final String formCharset,
+            final String expectedRequestCharset) throws Exception {
+
+        final String formAcceptCharset;
+        if (formCharset == null) {
+            formAcceptCharset = "";
+        }
+        else {
+            formAcceptCharset = " accept-charset='" + formCharset + "'";
+        }
+
+        final String metaContentType;
+        if (metaCharset == null) {
+            metaContentType = "";
+        }
+        else {
+            metaContentType = "<meta http-equiv='Content-Type' content='text/html; charset="
+                + metaCharset + "'>";
+        }
+
+        final String content = "<html><head><title>foo</title>"
+            + metaContentType
+            + "</head><body>"
+            + "<form name='form1' method='post' action='foo'"
+            + formAcceptCharset + ">"
+            + "<input type='text' name='textField' value='foo'/>"
+            + "<input type='text' name='nonAscii' value='Floßfahrt'/>"
+            + "<input type='submit' name='button' value='foo'/>"
+            + "</form></body></html>";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        client.setWebConnection( webConnection );
+
+        String contentType = "text/html";
+        if (headerCharset != null) {
+            contentType += ";charset=" + headerCharset;
+        }
+        webConnection.setDefaultResponse(content, 200, "ok", contentType);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+
+        final String firstPageEncoding = StringUtils.defaultString(metaCharset, headerCharset);
+        assertEquals(firstPageEncoding, page.getPageEncoding());
+
+        final HtmlForm form = page.getFormByName("form1");
+        form.getInputByName("button").click();
+
+        assertEquals(expectedRequestCharset, webConnection.getLastWebRequestSettings().getCharset());
     }
 }
 

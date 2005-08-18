@@ -63,8 +63,8 @@ import org.apache.commons.logging.LogFactory;
 public class MockWebConnection extends WebConnection {
     private class ResponseEntry {
         private void validateParameters(
-                final Object content, 
-                final String statusMessage, 
+                final Object content,
+                final String statusMessage,
                 final String contentType,
                 final List responseHeaders) {
             Assert.notNull("content", content);
@@ -80,8 +80,8 @@ public class MockWebConnection extends WebConnection {
                             "Only KeyValuePairs may be in the response header list but found: "
                             + object.getClass().getName());
                 }
-            }               
-        }          
+            }
+        }
 
         /**
          * Create a new instance
@@ -112,7 +112,7 @@ public class MockWebConnection extends WebConnection {
         private final String contentType_;
         private final List responseHeaders_;
     }
-    
+
     private byte[] stringToByteArray(final String content) {
         byte[] contentBytes;
         try {
@@ -122,14 +122,12 @@ public class MockWebConnection extends WebConnection {
             contentBytes = new byte[0];
         }
         return contentBytes;
-    }    
+    }
 
     private final Map responseMap_ = new HashMap(10);
     private ResponseEntry defaultResponseEntry_;
 
-    private SubmitMethod lastMethod_;
-    private List lastParameters_;
-    private Map lastAdditionalHeaders_;
+    private WebRequestSettings lastRequest_;
     private HttpState httpState_ = new HttpState();
 
     /**
@@ -158,14 +156,10 @@ public class MockWebConnection extends WebConnection {
      */
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
         final URL url = webRequestSettings.getURL();
-        final SubmitMethod method = webRequestSettings.getSubmitMethod();
-        final List parameters = webRequestSettings.getRequestParameters();
-        
+
         getLog().debug("Getting response for " + url.toExternalForm());
-        
-        lastMethod_ = method;
-        lastParameters_ = parameters;
-        lastAdditionalHeaders_ = webRequestSettings.getAdditionalHeaders();
+
+        lastRequest_ = webRequestSettings;
 
         ResponseEntry entry = (ResponseEntry)responseMap_.get(url.toExternalForm());
         if( entry == null ) {
@@ -183,7 +177,7 @@ public class MockWebConnection extends WebConnection {
             }
             public int getStatusCode()         { return responseEntry.statusCode_;      }
             public String getStatusMessage()   { return responseEntry.statusMessage_;   }
-            public String getContentType()     { 
+            public String getContentType()     {
                 final String contentTypeHeaderLine = responseEntry.contentType_;
                 final int index = contentTypeHeaderLine.indexOf( ';' );
                 final String contentType;
@@ -195,7 +189,7 @@ public class MockWebConnection extends WebConnection {
                 }
                 return contentType;
             }
-            public String getContentAsString() { 
+            public String getContentAsString() {
                 try {
                     return new String(responseEntry.content_, getContentCharSet());
                 }
@@ -251,7 +245,7 @@ public class MockWebConnection extends WebConnection {
      * @return  See above
      */
     public SubmitMethod getLastMethod() {
-        return lastMethod_;
+        return lastRequest_.getSubmitMethod();
     }
 
 
@@ -261,7 +255,7 @@ public class MockWebConnection extends WebConnection {
      * @return  See above
      */
     public List getLastParameters() {
-        return lastParameters_;
+        return lastRequest_.getRequestParameters();
     }
 
 
@@ -283,11 +277,10 @@ public class MockWebConnection extends WebConnection {
             final String contentType,
             final List responseHeaders ) {
 
-        setResponse(url, stringToByteArray(content), statusCode, statusMessage, 
+        setResponse(url, stringToByteArray(content), statusCode, statusMessage,
                     contentType, responseHeaders);
-        
     }
-    
+
     /**
      * Set the response that will be returned when the specified url is requested.
      * @param url The url that will return the given response
@@ -309,7 +302,7 @@ public class MockWebConnection extends WebConnection {
         final ResponseEntry responseEntry =
             new ResponseEntry(content, statusCode, statusMessage, contentType, responseHeaders);
         responseMap_.put( url.toExternalForm(), responseEntry );
-    }    
+    }
 
     /**
      * Convenience method that is the same as calling
@@ -417,8 +410,16 @@ public class MockWebConnection extends WebConnection {
      * @return  See above
      */
     public Map getLastAdditionalHeaders() {
-        return lastAdditionalHeaders_;
+        return lastRequest_.getAdditionalHeaders();
     }
-    
+
+    /**
+     * Return the {@link WebRequestSettings} that was used in the in the last call 
+     * to {@link #getResponse(WebRequestSettings)}.
+     * @return  See above
+     */
+    public WebRequestSettings getLastWebRequestSettings() {
+        return lastRequest_;
+    }
 }
 

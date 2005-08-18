@@ -123,18 +123,11 @@ public class HttpWebConnection extends WebConnection {
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
 
         final URL url = webRequestSettings.getURL();
-        final FormEncodingType encType = webRequestSettings.getEncodingType();
-        final SubmitMethod submitMethod = webRequestSettings.getSubmitMethod();
-        final List parameters = webRequestSettings.getRequestParameters();
-        final String body = webRequestSettings.getRequestBody();
-        final Map requestHeaders = webRequestSettings.getAdditionalHeaders();
-        final CredentialsProvider credentialsProvider = webRequestSettings.getCredentialsProvider();
 
         final HttpClient httpClient = getHttpClientFor( url );
 
         try {
-            final HttpMethodBase httpMethod = makeHttpMethod( url, encType, submitMethod, parameters, body,
-                requestHeaders, credentialsProvider );
+            final HttpMethodBase httpMethod = makeHttpMethod(webRequestSettings);
             final long startTime = System.currentTimeMillis();
             final int responseCode = httpClient.executeMethod( httpMethod );
             final long endTime = System.currentTimeMillis();
@@ -157,9 +150,9 @@ public class HttpWebConnection extends WebConnection {
                 }
                 //TODO: There might be a bug here since the original encoding type is lost.
                 final WebRequestSettings newRequest = new WebRequestSettings(new URL(buffer.toString()));
-                newRequest.setSubmitMethod(submitMethod);
-                newRequest.setRequestParameters(parameters);
-                newRequest.setAdditionalHeaders(requestHeaders);
+                newRequest.setSubmitMethod(webRequestSettings.getSubmitMethod());
+                newRequest.setRequestParameters(webRequestSettings.getRequestParameters());
+                newRequest.setAdditionalHeaders(webRequestSettings.getAdditionalHeaders());
                 return getResponse(newRequest);
             }
             else {
@@ -171,73 +164,61 @@ public class HttpWebConnection extends WebConnection {
 
     /**
      * Creates an <tt>HttpMethod</tt> instance according to the specified parameters.
-     * @param url The URL which the method is to hit.
-     * @param encType The form encoding type whith the method is to use.
-     * @param method The type of method that is to be returned.
-     * @param parameters The parameters that the returned method is to submit to the web server.
-     * @param body The request body that the method is to send to the server. Used only for POST requests.
-     * @param requestHeaders The request headers that the returned method is to submit to the web server.
-     * @param credentialsProvider The custom credentials provider (if any) that the method is to use.
      * @return The <tt>HttpMethod</tt> instance constructed according to the specified parameters.
      * @throws IOException
      */
-    private HttpMethodBase makeHttpMethod(
-            final URL url,
-            final FormEncodingType encType,
-            final SubmitMethod method,
-            final List parameters,
-            final String body,
-            final Map requestHeaders,
-            final CredentialsProvider credentialsProvider)
+    private HttpMethodBase makeHttpMethod(final WebRequestSettings webRequestSettings)
         throws
             IOException {
 
         final HttpMethodBase httpMethod;
-        String path = url.getPath();
+        String path = webRequestSettings.getURL().getPath();
         if( path.length() == 0 ) {
             path = "/";
         }
-        if( method == SubmitMethod.GET ) {
+        if (SubmitMethod.GET == webRequestSettings.getSubmitMethod()) {
             httpMethod = new GetMethod( path );
-            if( parameters.isEmpty() ) {
-                final String queryString = url.getQuery();
+
+            if (webRequestSettings.getRequestParameters().isEmpty() ) {
+                final String queryString = webRequestSettings.getURL().getQuery();
                 httpMethod.setQueryString( queryString );
             }
             else {
-                final NameValuePair[] pairs = new NameValuePair[parameters.size()];
-                parameters.toArray( pairs );
+                final NameValuePair[] pairs = new NameValuePair[webRequestSettings.getRequestParameters().size()];
+                webRequestSettings.getRequestParameters().toArray( pairs );
                 httpMethod.setQueryString( pairs );
             }
         }
-        else if( method == SubmitMethod.POST ) {
-            httpMethod = new PostMethod( path );
-            final String queryString = url.getQuery();
+        else if (SubmitMethod.POST  == webRequestSettings.getSubmitMethod()) {
+            final PostMethod postMethod = new PostMethod( path );
+            postMethod.getParams().setContentCharset(webRequestSettings.getCharset());
+
+            final String queryString = webRequestSettings.getURL().getQuery();
             if( queryString != null ) {
-                httpMethod.setQueryString(queryString);
+                postMethod.setQueryString(queryString);
             }
-            if( body != null ) {
-                ( (PostMethod) httpMethod ).setRequestEntity( new StringRequestEntity( body ) );
+            if (webRequestSettings.getRequestBody() != null ) {
+                postMethod.setRequestEntity( new StringRequestEntity(webRequestSettings.getRequestBody()) );
             }
-            Iterator iterator;
 
             // Note that this has to be done in two loops otherwise it won't
             // be able to support two elements with the same name.
-            iterator = parameters.iterator();
-            if (encType == FormEncodingType.URL_ENCODED) {
+            if (webRequestSettings.getEncodingType() == FormEncodingType.URL_ENCODED) {
+                Iterator iterator = webRequestSettings.getRequestParameters().iterator();
                 while( iterator.hasNext() ) {
                     final NameValuePair pair = ( NameValuePair )iterator.next();
-                    ( ( PostMethod )httpMethod ).removeParameter( pair.getName(), pair.getValue() );
+                    postMethod.removeParameter( pair.getName(), pair.getValue() );
                 }
 
-                iterator = parameters.iterator();
+                iterator = webRequestSettings.getRequestParameters().iterator();
                 while( iterator.hasNext() ) {
                     final NameValuePair pair = ( NameValuePair )iterator.next();
-                    ( ( PostMethod )httpMethod ).addParameter( pair.getName(), pair.getValue() );
+                    postMethod.addParameter( pair.getName(), pair.getValue() );
                 }
             }
             else {
                 final List partList = new ArrayList();
-                iterator = parameters.iterator();
+                final Iterator iterator = webRequestSettings.getRequestParameters().iterator();
                 while (iterator.hasNext()) {
                     final Part newPart;
                     final KeyValuePair pair = (KeyValuePair) iterator.next();
@@ -257,19 +238,20 @@ public class HttpWebConnection extends WebConnection {
                 }
                 Part[] parts = new Part[partList.size()];
                 parts = (Part[]) partList.toArray(parts);
-                ((PostMethod) httpMethod).setRequestEntity(new MultipartRequestEntity(
+                postMethod.setRequestEntity(new MultipartRequestEntity(
                         parts,
-                        httpMethod.getParams()));
+                        postMethod.getParams()));
             }
+            httpMethod = postMethod;
         }
         else {
-            throw new IllegalStateException( "Submit method not yet supported: " + method );
+            throw new IllegalStateException("Submit method not yet supported: " + webRequestSettings.getSubmitMethod());
         }
 
         httpMethod.setRequestHeader(
                 "User-Agent", getWebClient().getBrowserVersion().getUserAgent() );
 
-        writeRequestHeadersToHttpMethod( httpMethod, requestHeaders );
+        writeRequestHeadersToHttpMethod(httpMethod, webRequestSettings.getAdditionalHeaders());
         httpMethod.setFollowRedirects(false);
         // http://jakarta.apache.org/commons/httpclient/3.0/exception-handling.html#Automatic%20exception%20recovery
         final HttpMethodRetryHandler noAutoRetry = new HttpMethodRetryHandler() {
@@ -279,8 +261,9 @@ public class HttpWebConnection extends WebConnection {
         };
 
         httpMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, noAutoRetry);
-        if(credentialsProvider != null) {
-            httpMethod.getParams().setParameter(CredentialsProvider.PROVIDER, credentialsProvider);
+        if (webRequestSettings.getCredentialsProvider() != null) {
+            httpMethod.getParams().setParameter(CredentialsProvider.PROVIDER,
+                    webRequestSettings.getCredentialsProvider());
         }
         return httpMethod;
     }

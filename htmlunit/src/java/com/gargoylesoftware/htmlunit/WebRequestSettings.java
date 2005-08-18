@@ -59,6 +59,7 @@ public class WebRequestSettings {
     private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
     private Map additionalHeaders_ = new HashMap();
     private CredentialsProvider credentialsProvider_ = null;
+    private String charset_ = "ISO-8859-1";
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
     private List requestParameters_ = Collections.EMPTY_LIST;
@@ -224,4 +225,19 @@ public class WebRequestSettings {
         return buffer.toString();
     }
 
+    /**
+     * Gets the charset to use to perform the request
+     * @return the charset.
+     */
+    public String getCharset() {
+        return charset_;
+    }
+
+    /**
+     * Sets the charset. Default value is "ISO-8859-1"
+     * @param charset the new charset
+     */
+    public void setCharset(final String charset) {
+        charset_ = charset;
+    }
 }
