@@ -309,7 +309,7 @@ public class WebClient {
         throws IOException, FailingHttpStatusCodeException {
 
         getLog().debug("Get page for window named '" + webWindow.getName() + "', using " + parameters);
-        
+
         final String protocol = parameters.getURL().getProtocol();
         final WebResponse webResponse;
         if( protocol.equals("javascript") ) {
@@ -322,11 +322,7 @@ public class WebClient {
             webResponse = makeWebResponseForFileUrl(parameters.getURL());
         }
         else {
-            webResponse = loadWebResponse(
-                    parameters.getURL(),
-                    parameters.getEncodingType(),
-                    parameters.getSubmitMethod(),
-                    parameters.getRequestParameters());
+            webResponse = loadWebResponse(parameters);
         }
         final String contentType = webResponse.getContentType();
         final int statusCode = webResponse.getStatusCode();
@@ -345,9 +341,9 @@ public class WebClient {
             throw new FailingHttpStatusCodeException( statusCode, webResponse.getStatusMessage() );
         }
 
-        return webWindow.getEnclosedPage();    
+        return webWindow.getEnclosedPage();
     }
-    
+
     /**
      * <p>For internal use only</p>
      * <p>Open a new web window and populate it with a page loaded by 
@@ -380,7 +376,7 @@ public class WebClient {
     public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
         return getPage(getCurrentWindow(), new WebRequestSettings(url));
     }
-    
+
     /**
      * Convenience method to load a web request into the current WebWindow
      *  @param request The request parameters 
@@ -394,7 +390,7 @@ public class WebClient {
     public Page getPage(final WebRequestSettings request) throws IOException,
             FailingHttpStatusCodeException {
         return getPage(getCurrentWindow(), request);
-    }    
+    }
 
 
     /**
@@ -1085,7 +1081,7 @@ public class WebClient {
 
         Assert.notNull("opener", opener);
         Assert.notNull("defaultName", defaultName);
-        
+
         String windowToOpen = windowName;
         if( windowToOpen == null || windowToOpen.length() == 0 ) {
             windowToOpen = defaultName;
@@ -1270,8 +1266,8 @@ public class WebClient {
         String parseUrl = relativeUrl;
         if (parseUrl == null) {
             parseUrl = "";
-        } 
-      
+        }
+
         // section 2.4.2 - parsing scheme
         final int schemeIndex = parseUrl.indexOf(":");
         if( schemeIndex != -1 ) {
@@ -1308,7 +1304,7 @@ public class WebClient {
         }
 
         // section 2.4.5 - parsing parameters
-        String stringParameters = null;        
+        String stringParameters = null;
         final int parametersIndex = parseUrl.lastIndexOf(";");
         if( parametersIndex != -1 ) {
             stringParameters = parseUrl.substring(parametersIndex);
@@ -1400,12 +1396,12 @@ public class WebClient {
      */
     private WebResponse makeWebResponseForFileUrl(final URL url) throws IOException {
         final File file = FileUtils.toFile(url);
-        
+
         // take default encoding of the computer (in J2SE5 it's easier but...)
         final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
         final String str = FileUtils.readFileToString(file, encoding);
         final String contentType = guessContentType(file);
-        
+
         return new StringWebResponse(str, url) {
             public String getContentType() {
                 return contentType;
@@ -1475,7 +1471,7 @@ public class WebClient {
             IOException {
         final WebRequestSettings wrs=  new WebRequestSettings(url, method);
         wrs.setRequestParameters(parameters);
-        return loadWebResponse(wrs);        
+        return loadWebResponse(wrs);
     }
 
     /**
@@ -1502,20 +1498,20 @@ public class WebClient {
      * @param webRequestSettings settings to use when making the request
      * @throws IOException if an IO problem occurs
      * @return The WebResponse
-     */    
+     */
     public final WebResponse loadWebResponse(final WebRequestSettings webRequestSettings)
         throws
             IOException {
         final URL url = webRequestSettings.getURL();
         final SubmitMethod method = webRequestSettings.getSubmitMethod();
         final List parameters = webRequestSettings.getRequestParameters();
-        
+
         Assert.notNull("url", url);
         Assert.notNull("method", method);
         Assert.notNull("parameters", parameters);
-        
+
         getLog().debug("Load response for " + url.toExternalForm());
-        
+
         //TODO: this should probably be handled inside of WebRequestSettings and
         // could cause a bug if anything above here reads the url again
         final URL fixedUrl = encodeUrl(url);
@@ -1523,7 +1519,7 @@ public class WebClient {
 
         // adds the headers that are sent on every request
         webRequestSettings.getAdditionalHeaders().putAll(requestHeaders_);
-        
+
         final WebResponse webResponse = getWebConnection().getResponse(webRequestSettings);
         final int statusCode = webResponse.getStatusCode();
 
@@ -1560,14 +1556,14 @@ public class WebClient {
             }
             else if( ( statusCode == 301 || statusCode == 307 )
                 && method.equals(SubmitMethod.GET) ) {
-                
+
                 final WebRequestSettings wrs = new WebRequestSettings(newUrl);
                 wrs.setRequestParameters(parameters);
                 return loadWebResponse(wrs);
             }
             else if( statusCode == 302 || statusCode == 303 ) {
                 final WebRequestSettings wrs = new WebRequestSettings(newUrl);
-                return loadWebResponse(wrs);                
+                return loadWebResponse(wrs);
             }
         }
 
@@ -1585,11 +1581,11 @@ public class WebClient {
     protected URL encodeUrl(final URL url) throws MalformedURLException, URIException {
         // just look at urls with query string (better test?)
         final String str = url.toExternalForm();
-        final int queryStart = url.toExternalForm().indexOf('?'); 
+        final int queryStart = url.toExternalForm().indexOf('?');
         if (queryStart != -1) {
             // extract query string: browsers seem not to encode everything, for instance not "#"
             final String query;
-            final int anchorStart = str.indexOf('#'); 
+            final int anchorStart = str.indexOf('#');
             if (anchorStart < queryStart) {
                 query = str.substring(queryStart);
             }
@@ -1600,7 +1596,7 @@ public class WebClient {
             // url may be partially encoded like "http://first?a=b%20c&d=e f"
 //          // don't re-encode the %'s from already encoded items
             final BitSet partiallyEncodedQuery = new BitSet(256);
-            partiallyEncodedQuery.set('%'); 
+            partiallyEncodedQuery.set('%');
             partiallyEncodedQuery.or(URI.allowed_query);
             final String fixedQuery = URIUtil.encode(query, partiallyEncodedQuery);
             if (query.equals(fixedQuery)) {
@@ -1617,7 +1613,7 @@ public class WebClient {
         }
 
     }
-    
+
     /**
      * Remove the focus to the specified component.  This will trigger any relevant javascript
      * event handlers.
@@ -1712,7 +1708,7 @@ public class WebClient {
     public List getWebWindows() {
         return Collections.unmodifiableList(webWindows_);
     }
-    
+
     /**
      * Set the handler to be used whenever a refresh is triggered.  Refer
      * to the documentation for {@link RefreshHandler} for more details.
@@ -1726,7 +1722,7 @@ public class WebClient {
             refreshHandler_ = handler;
         }
     }
-    
+
     /**
      * Return the current refresh handler or null if one has not been set.
      * @return The current RefreshHandler or null
@@ -1734,7 +1730,7 @@ public class WebClient {
     public RefreshHandler getRefreshHandler() {
         return refreshHandler_;
     }
-    
+
     /**
      * Set the script pre processor for this webclient.
      * @param scriptPreProcessor The new preprocessor or null if none is specified
@@ -1810,7 +1806,7 @@ public class WebClient {
     public static boolean getIgnoreOutsideContent() {
         return HTMLParser.getIgnoreOutsideContent();
     }
-    
+
     /**
      * Gets the timeout value for the WebConnection
      * 
@@ -1842,8 +1838,7 @@ public class WebClient {
     public boolean isThrowExceptionOnScriptError() {
         return throwExceptionOnScriptError_;
     }
-    
-    
+
     /**
      * Changes the behavior of this webclient when a script error occurs.
      * @param newValue indicates if exception should be thrown or not

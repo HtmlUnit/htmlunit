@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1119937">
+                When posting a form, use encoding from accept-charset attribute if any else
+                from page to encode the posted parameters.
+            </action>
             <action type="update" dev="mguillem">
                 Fixed infinite loop when DefaultCredentialsProvider provides invalid credential.
                 Ensure that the web connection uses the CredentialProvider configured for the WebClient.

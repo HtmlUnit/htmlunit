@@ -172,7 +172,7 @@ public class HtmlForm extends ClickableElement {
                     }
                 }
             }
-    
+
             if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
                  return htmlPage.executeJavaScriptIfPossible( action, "Form action", false, this ).getNewPage();
             }
@@ -211,6 +211,7 @@ public class HtmlForm extends ClickableElement {
         final WebRequestSettings settings = new WebRequestSettings(url, method);
         settings.setRequestParameters(parameters);
         settings.setEncodingType(FormEncodingType.getInstance( getEnctypeAttribute() ));
+        settings.setCharset(getSubmitCharset());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
         return htmlPage.getWebClient().getPage(
@@ -219,6 +220,21 @@ public class HtmlForm extends ClickableElement {
                 settings);
     }
 
+
+    /**
+     * Gets the charset to use for the form submission. This is the first one
+     * from the list provided in {@link #getAcceptCharsetAttribute()} if any
+     * or the page's charset else
+     * @return see above
+     */
+    private String getSubmitCharset() {
+        if (getAcceptCharsetAttribute().length() > 0) {
+            return getAcceptCharsetAttribute().trim().replaceAll("[ ,].*", "");
+        }
+        else {
+            return getPage().getPageEncoding();
+        }
+    }
 
     /**
      * Return a list of {@link KeyValuePair}s that represent the data that will be
@@ -320,7 +336,7 @@ public class HtmlForm extends ClickableElement {
         final String tagName = element.getTagName();
         if (!SUBMITTABLE_ELEMENT_NAMES.contains(tagName.toLowerCase())) {
             return false;
-        }        
+        }
         if(element.isAttributeDefined("disabled")) {
             return false;
         }
@@ -332,11 +348,11 @@ public class HtmlForm extends ClickableElement {
         if (!tagName.equals("isindex") && !element.isAttributeDefined("name")){
             return false;
         }
-        
+
         if( ! tagName.equals( "isindex" ) && element.getAttributeValue("name").equals("") ) {
             return false;
-        }        
-        
+        }
+
         if( tagName.equals( "input" ) ) {
             final String type = element.getAttributeValue("type").toLowerCase();
             if( type.equals( "radio" ) || type.equals( "checkbox" ) ) {
@@ -348,7 +364,7 @@ public class HtmlForm extends ClickableElement {
             if (((HtmlSelect) element).getOptionSize() < 1) {
                 return false;
             }
-        }          
+        }
         return true;
     }
 
@@ -385,7 +401,7 @@ public class HtmlForm extends ClickableElement {
 
         return true;
     }
-    
+
     /**
      *  Return the input tags that have the specified name
      *
@@ -397,7 +413,7 @@ public class HtmlForm extends ClickableElement {
     public List getAllInputsByName( final String name ) {
         return getInputsByName(name);
     }
-    
+
     /**
      *  Return the input tags that have the specified name
      *
@@ -769,9 +785,9 @@ public class HtmlForm extends ClickableElement {
 
 
     /**
-     *  Return the value of the attribute "accept-charset". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "accept-charset". Refer to the <a
+     * href='http://www.w3.org/TR/html401/interact/forms.html#adef-accept-charset'>
+     * HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return  The value of the attribute "accept-charset" or an empty string
      *      if that attribute isn't defined.
