@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                Trim the text of HtmlOption when it is used as initial value attribute
+                (when no attribute is found as defined in HTML 4.01).
+            </action>
             <action type="update" dev="mguillem" id="1264271" due-to="Bruce Faulkner">
                 JavaScript: fixed problem occuring while reading properties of nodes retrieved with childNodes().
             </action>

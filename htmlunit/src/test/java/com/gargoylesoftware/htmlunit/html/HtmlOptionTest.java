@@ -92,7 +92,7 @@ public class HtmlOptionTest extends WebTestCase {
         assertFalse( option2.isSelected() );
         assertFalse( option3.isSelected() );
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -111,7 +111,7 @@ public class HtmlOptionTest extends WebTestCase {
 
         final HtmlOption option1 = ( HtmlOption )page.getHtmlElementById( "option1" );
         final HtmlOption option2 = ( HtmlOption )page.getHtmlElementById( "option2" );
-        
+
         assertEquals("option1", option1.getValueAttribute());
         assertEquals("Number Two", option2.getValueAttribute());
 
@@ -123,22 +123,26 @@ public class HtmlOptionTest extends WebTestCase {
 
         final String htmlContent
             = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>" 
+            + "<form id='form1'>"
             + "<select name='select1' id='select1'>"
             + "     <option id='option1'>Option1</option>"
             + "     <option id='option2' selected>Number Two</option>"
+            + "     <option id='option3'>\n  Number 3 with blanks </option>"
             + "</select>"
             + "<input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlOption option1 = ( HtmlOption )page.getHtmlElementById( "option1" );
-        final HtmlOption option2 = ( HtmlOption )page.getHtmlElementById( "option2" );
-        
+        final HtmlOption option1 = (HtmlOption) page.getHtmlElementById("option1");
         assertEquals("Option1", option1.getValueAttribute());
+
+        final HtmlOption option2 = (HtmlOption) page.getHtmlElementById("option2");
         assertEquals("Number Two", option2.getValueAttribute());
-    }        
+
+        final HtmlOption option3 = (HtmlOption) page.getHtmlElementById("option3");
+        assertEquals("Number 3 with blanks", option3.getValueAttribute());
+    }
 
     /**
      * @throws Exception if the test fails
@@ -147,7 +151,7 @@ public class HtmlOptionTest extends WebTestCase {
 
         final String htmlContent
             = "<html><body>"
-            + "<form id='form1'>" 
+            + "<form id='form1'>"
             + "<select name='select1' id='select1'>"
             + "     <option id='option1'>Option1</option>"
             + "     <option id='option2' selected>Number Two</option>"
@@ -162,5 +166,5 @@ public class HtmlOptionTest extends WebTestCase {
         assertTrue(option1.isSelected());
         option1.click();
         assertTrue(option1.isSelected());
-    }        
+    }
 }

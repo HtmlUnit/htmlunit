@@ -227,18 +227,20 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
         }
         return defaultPage;
     }
-    
+
     /**
      * 
      * @see com.gargoylesoftware.htmlunit.html.DomNode#appendChild(com.gargoylesoftware.htmlunit.html.DomNode)
      */
     public DomNode appendChild(final DomNode node) {
+        final DomNode addedNode = super.appendChild(node);
+
         // default value is the text of the option
         // see http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION
         if (getAttributeValue("value") == ATTRIBUTE_NOT_DEFINED) {
-            setAttributeValue("value", node.asText());
+            setAttributeValue("value", asText());
         }
 
-        return super.appendChild(node);
+        return addedNode;
     }
 }
