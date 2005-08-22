@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1264271" due-to="Bruce Faulkner">
+                JavaScript: fixed problem occuring while reading properties of nodes retrieved with childNodes().
+            </action>
             <action type="update" dev="mguillem" id="1210726">
                 When posting a form as multipart/form-data don't send Content-Transfer-Encoding
                 headers for the parts and send Content-Type headers only for files like browsers

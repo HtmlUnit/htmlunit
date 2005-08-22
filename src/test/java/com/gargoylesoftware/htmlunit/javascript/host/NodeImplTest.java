@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * 
  * @author yourgod
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author Bruce Faulkner
  * @version $Revision$
  *
  */
@@ -112,7 +113,8 @@ public class NodeImplTest extends WebTestCase {
         });
 
         assertEquals(expectedAlerts, collectedAlerts);
-    }    
+    }
+
     /**
      * Regression test for removeChild
      * @throws Exception if the test fails
@@ -187,7 +189,7 @@ public class NodeImplTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
-    
+
     /**
      * The common browsers always return node names in uppercase.  Test this.
      * @throws Exception on test failure
@@ -213,23 +215,23 @@ public class NodeImplTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * @throws Exception on test failure
      */
     public void test_getChildNodes() throws Exception {
-        final String content = "<html><head><title>test_getChildNodes</title>"            
+        final String content = "<html><head><title>test_getChildNodes</title>"
             + "<script>"
             + "function doTest() {"
             + "var aNode = document.getElementById('myNode');"
-            + "alert(aNode.childNodes.length);"            
+            + "alert(aNode.childNodes.length);"
             + "alert(aNode.childNodes[0].nodeName);"
             + "alert(aNode.childNodes[0].childNodes.length);"
             + "alert(aNode.childNodes[0].childNodes[0].nodeName);"
             + "alert(aNode.childNodes[0].childNodes[1].nodeName);"
             + "alert(aNode.childNodes[1].nodeName);"
             + "}"
-            + "</script>"            
+            + "</script>"
             + "</head><body onload='doTest()'>"
             + "<div id='myNode'><span>Child Node 1-A"
             + "<h1>Child Node 1-B</h1></span>"
@@ -245,7 +247,45 @@ public class NodeImplTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
+
+    /**
+     * @throws Exception on test failure
+     */
+    public void test_getChildNodesProperties() throws Exception {
+        final String content = "<html><head><title>test_getChildNodes</title>"
+            + "<script>"
+            + "function doTest() {"
+            + "    var testForm = document.getElementById('testForm');"
+            + "    var childNodes = testForm.childNodes;"
+            + "    var length = childNodes.length;"
+            + "    alert('length: ' + length);"
+            + "    for (var i=0; i < length; i++) {"
+            + "        var tempNode = childNodes.item(i);"
+            + "        alert('tempNode.name: ' + tempNode.name);"
+            + "    }"
+            + "}"
+            + "</script>"
+            + "</head><body onload='doTest()'>"
+            + "<form name='testForm' id='testForm'>foo\n" // some text, because IE doesn't see "\n" as a text node here
+            + "<input type='hidden' name='input1' value='1'>\n"
+            + "<input type='hidden' name='input2' value='2'>\n"
+            + "</form>"
+            + "</body></html>";
+
+        final List expectedAlerts = Arrays.asList(new String[] { "length: 5",
+            "tempNode.name: undefined", "tempNode.name: input1", "tempNode.name: undefined",
+            "tempNode.name: input2", "tempNode.name: undefined" });
+
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        assertEquals("test_getChildNodes", page.getTitleText());
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
     /**
      * Regression test to verify that insertBefore correctly appends
      * the new child object when the reference child object is null.
@@ -276,5 +316,5 @@ public class NodeImplTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("test_insertBefore", page.getTitleText());
         assertEquals(expectedAlerts, collectedAlerts);
-    }    
+    }
 }
