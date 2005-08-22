@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Chris Erskine
+ * @author Bruce Faulkner
  */
 public class NodeImpl extends SimpleScriptable {
 
@@ -95,7 +96,7 @@ public class NodeImpl extends SimpleScriptable {
     public String jsxGet_nodeName() {
         final DomNode domNode = getDomNodeOrDie();
         String nodeName = domNode.getNodeName();
-        
+
         // If this is an HtmlElement then flip the result to uppercase.  This should really be
         // changed in HtmlElement itself but that would break backwards compatibility fairly
         // significantly as that one is documented as always returning a lowercase value.
@@ -217,7 +218,7 @@ public class NodeImpl extends SimpleScriptable {
         }
         return removedChild;
     }
-    
+
     /**
      * Returns whether this node has any children.
      * @return boolean true if this node has any children, false otherwise.
@@ -225,7 +226,7 @@ public class NodeImpl extends SimpleScriptable {
     public boolean jsxFunction_hasChildNodes() {
         return getDomNodeOrDie().getChildIterator().hasNext();
     }
-    
+
     /**
      * Returns the child nodes of the current element.
      * @return The child nodes of the current element.
@@ -234,15 +235,15 @@ public class NodeImpl extends SimpleScriptable {
         if (childNodes_ == null) {
             childNodes_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
-                childNodes_.init(getDomNodeOrDie(), new HtmlUnitXPath("./* | text()"));
+                childNodes_.init(getDomNodeOrDie(), new HtmlUnitXPath("(./* | text())"));
             }
             catch (final JaxenException je) {
-                throw Context.reportRuntimeError("Failed to initialize collection element.childNodes: " 
+                throw Context.reportRuntimeError("Failed to initialize collection element.childNodes: "
                         + je.getMessage());
             }
         }
-        return childNodes_;            
-    }    
+        return childNodes_;
+    }
 
 
     /**
