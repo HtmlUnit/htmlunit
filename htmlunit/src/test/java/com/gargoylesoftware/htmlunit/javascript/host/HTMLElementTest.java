@@ -515,6 +515,10 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * @param beforeEnd data to insert
+     * @param afterEnd data to insert
+     * @param beforeBegin data to insert
+     * @param afterBegin data to insert
      * @throws Exception if the test fails
      */
     void testInsertAdjacentHTML(final String beforeEnd, 

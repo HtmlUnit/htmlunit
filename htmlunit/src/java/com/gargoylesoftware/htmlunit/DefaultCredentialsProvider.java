@@ -180,16 +180,35 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
     }
 
     /**
-     * Indicates if this provider has already provided an answer for this (scheme, host, port, proxy)
+     * Indicates if this provider has already provided an answer for this (scheme, host, port, proxy).
+     * @param scheme The scheme
+     * @param host the server name.
+     * @param port the server port.
+     * @param proxy is proxy
+     * @return true if the provider has already provided an answer for this.
      */
     private boolean alreadyAnswered(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
         return answerMarks_.contains(buildKey(scheme, host, port, proxy));
     }
 
+    /**
+     * @param scheme The scheme
+     * @param host the server name.
+     * @param port the server port.
+     * @param proxy is proxy
+     */
     private void markAsAnswered(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
         answerMarks_.add(buildKey(scheme, host, port, proxy));
     }
     
+    /**
+     * Build a key with the specified data
+     * @param scheme The scheme
+     * @param host the server name.
+     * @param port the server port.
+     * @param proxy is proxy
+     * @return the new key.
+     */
     private Object buildKey(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
         return scheme.getSchemeName() + " " + scheme.getRealm() + " " + host + ":" + port + " " + proxy;
     }

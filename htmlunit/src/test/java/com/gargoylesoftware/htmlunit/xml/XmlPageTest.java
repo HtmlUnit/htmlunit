@@ -78,6 +78,7 @@ public class XmlPageTest extends WebTestCase {
     /**
      * Utility method to test xml page of different mime types
      * @param content the xml content
+     * @param mimeType The mime type
      * @return the page returned by the WebClient
      * @throws Exception if a problem occurs
      */

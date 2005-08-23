@@ -171,6 +171,7 @@ public class HttpWebConnection extends WebConnection {
 
     /**
      * Creates an <tt>HttpMethod</tt> instance according to the specified parameters.
+     * @param webRequestSettings the parameters.
      * @return The <tt>HttpMethod</tt> instance constructed according to the specified parameters.
      * @throws IOException
      */
