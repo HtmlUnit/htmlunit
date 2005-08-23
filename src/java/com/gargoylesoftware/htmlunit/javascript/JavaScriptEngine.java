@@ -154,6 +154,9 @@ public final class JavaScriptEngine extends ScriptEngine {
      * @param config The configuration settings for the class to be configured.
      * @param scope The scope within which to configure the class.
      * @param name The name under which the class will be available in JavaScript.
+     * @throws InstantiationException If the new class cannot be instantiated
+     * @throws IllegalAccessException If we don't have access to create the new instance.
+     * @throws InvocationTargetException if an exception is thrown during creation of the new object.
      */
     private void configureClass( final ClassConfiguration config, final Scriptable scope, final String name )
         throws InstantiationException, IllegalAccessException, InvocationTargetException {
@@ -365,6 +368,7 @@ public final class JavaScriptEngine extends ScriptEngine {
         public void contextReleased( final Context c ) {
             contexts_.remove( c );
         }
+        /** @return the context count */
         public int getContextCount() {
             return contexts_.size();
         }
