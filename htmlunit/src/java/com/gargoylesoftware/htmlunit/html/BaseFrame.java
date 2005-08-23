@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author David D. Kilzer 
+ * @author Stefan Anzinger
  */
 public abstract class BaseFrame extends StyledElement {
 
@@ -66,7 +67,7 @@ public abstract class BaseFrame extends StyledElement {
     public final class FrameWindow implements WebWindow {
         private Page enclosedPage_;
         private Object scriptObject_;
-        
+
         /**
          * Private constructor as instanciation is not allowed directly.
          */
@@ -155,7 +156,7 @@ public abstract class BaseFrame extends StyledElement {
         public void setScriptObject( final Object scriptObject ) {
             scriptObject_ = scriptObject;
         }
-        
+
         /**
          * Return the html page in wich the &lt;frame&gt; or &lt;iframe&gt; tag is contained
          * for this frame window.
@@ -194,8 +195,9 @@ public abstract class BaseFrame extends StyledElement {
             // Nothing to load
             source = "about:blank";
         }
-
+        getPage().getWebClient().pushClearFirstWindow();
         loadInnerPageIfPossible(source);
+        getPage().getWebClient().popFirstWindow();
     }
 
     private void loadInnerPageIfPossible(final String srcAttribute) {
@@ -207,7 +209,7 @@ public abstract class BaseFrame extends StyledElement {
             }
             catch( final MalformedURLException e ) {
                 getLog().error("Bad url in src attribute of " + getTagName() + ": url=["+srcAttribute+"]", e);
-            }   
+            }
             try {
                 getPage().getWebClient().getPage(enclosedWindow_, new WebRequestSettings(url));
             }
@@ -215,7 +217,7 @@ public abstract class BaseFrame extends StyledElement {
                 // do nothing
             }
             catch( final IOException e ) {
-                getLog().error("IOException when getting content for " + getTagName() 
+                getLog().error("IOException when getting content for " + getTagName()
                         + ": url=["+url.toExternalForm()+"]", e);
             }
         }
@@ -362,8 +364,8 @@ public abstract class BaseFrame extends StyledElement {
     public Page getEnclosedPage() {
         return getEnclosedWindow().getEnclosedPage();
     }
-    
-    
+
+
     /**
      * Gets the window enclosed in this frame.
      * @return the window
