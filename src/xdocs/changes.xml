@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1153775">
+                 JavaScript: img nodes can be accessed by id or name within a form.
+            </action>
             <action type="update" dev="mguillem" id="1265410" due-to="Stefan Anzinger">
                  Click on a javascript link loading a page containing frames now return
                  the main loaded page and not a frame anymore.

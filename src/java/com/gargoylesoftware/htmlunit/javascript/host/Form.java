@@ -59,6 +59,7 @@ import org.mozilla.javascript.Scriptable;
  * @author Daniel Gredler
  * @author Kent Tong
  * @author Chris Erskine
+ * @author Marc Guillemot
  * 
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/form.asp">MSDN documentation</a>
  */
@@ -110,8 +111,8 @@ public class Form extends HTMLElement {
             elements_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
                 final XPath xpath = new HtmlUnitXPath("//*[(name() = 'input' or name() = 'button'"
-                        + " or name() = 'select' or name() = 'textarea')]", 
-                        HtmlUnitXPath.buildSubtreeNavigator(htmlForm)); 
+                        + " or name() = 'select' or name() = 'textarea')]",
+                        HtmlUnitXPath.buildSubtreeNavigator(htmlForm));
                 elements_.init(htmlForm, xpath);
             }
             catch (final JaxenException e) {
@@ -264,34 +265,48 @@ public class Form extends HTMLElement {
      * @return The property.
      */
     Object get(final String name) {
-        // Try to get the element or elements specified from the form element array 
+        // Try to get the element or elements specified from the form element array
         // (except input type="image" that can't be accessed this way)
         final ElementArray elements = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
         final HtmlForm htmlForm = getHtmlForm();
         try {
             final XPath xpath = new HtmlUnitXPath("//*[(@name = '" + name + "' or @id = '" + name + "')"
                     + " and ((name() = 'input' and translate(@type, 'IMAGE', 'image') != 'image') or name() = 'button'"
-                    + " or name() = 'select' or name() = 'textarea')]", 
-                    HtmlUnitXPath.buildSubtreeNavigator(htmlForm)); 
+                    + " or name() = 'select' or name() = 'textarea')]",
+                    HtmlUnitXPath.buildSubtreeNavigator(htmlForm));
             elements.init(htmlForm, xpath);
         }
         catch (final JaxenException e) {
             throw Context.reportRuntimeError("Failed to initialize collection: " + e.getMessage());
         }
-        
+
+        int nbElements = elements.jsGet_length();
+        // if no form field is found, IE and Firefox are able to find img by id or name
+        if (nbElements == 0) {
+            try {
+                final XPath xpath = new HtmlUnitXPath("//*[(@name = '" + name + "' or @id = '" + name + "')"
+                        + " and name() = 'img']",
+                        HtmlUnitXPath.buildSubtreeNavigator(htmlForm));
+                elements.init(htmlForm, xpath);
+            }
+            catch (final JaxenException e) {
+                throw Context.reportRuntimeError("Failed to initialize collection: " + e.getMessage());
+            }
+        }
+
         Object result = elements;
-        final int nbElements = elements.jsGet_length();
+        nbElements = elements.jsGet_length();
         if (nbElements == 0) {
             result = NOT_FOUND;
         }
         else if (nbElements == 1) {
             result = elements.get(0, elements);
         }
-        
+
         if (result == NOT_FOUND) {
             result = super.get( name, this );
         }
-        
+
         return result;
     }
 
