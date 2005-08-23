@@ -387,7 +387,7 @@ public class FormTest extends WebTestCase {
      * @param browserVersion The version of the browser to emulate.
      * @throws Exception if the test fails
      */
-    private void formResetTest(final BrowserVersion browserVersion, final List expected) 
+    private void formResetTest(final BrowserVersion browserVersion, final List expected)
         throws Exception {
 
         final String html = "<html>\n" +
@@ -455,7 +455,7 @@ public class FormTest extends WebTestCase {
             "        alertOne('textarea', textarea1);\n" +
             "      }\n" +
             "      function alertOne(text, field) {\n" +
-            "        alert(text + ': ' + field.value + ' ' + field.defaultValue " + 
+            "        alert(text + ': ' + field.value + ' ' + field.defaultValue " +
             "          + ' ' + field.checked + ' ' + field.defaultChecked);\n" +
             "      }\n" +
             "    </script>\n" +
@@ -561,7 +561,6 @@ public class FormTest extends WebTestCase {
         assertEquals( "MyNewWindow", secondPage.getEnclosingWindow().getName() );
     }
 
-    
     /**
      * @throws Exception if the test fails
      */
@@ -594,7 +593,6 @@ public class FormTest extends WebTestCase {
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
     }
-    
 
     /**
      * @throws Exception if the test fails
@@ -705,7 +703,7 @@ public class FormTest extends WebTestCase {
         } );
         assertEquals( expectedAlerts, collectedAlerts );
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -806,7 +804,7 @@ public class FormTest extends WebTestCase {
             + " <input type='submit' id='clickMe' />"
             + "</form>"
             + "</body></html>";
-    
+
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlSubmitInput button = (HtmlSubmitInput)
@@ -831,7 +829,7 @@ public class FormTest extends WebTestCase {
             + " <input type='submit' id='clickMe' />"
             + "</form>"
             + "</body></html>";
-     
+
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlSubmitInput button = (HtmlSubmitInput)
@@ -883,8 +881,7 @@ public class FormTest extends WebTestCase {
             + "</form>"
             + "</body>"
             + "</html>";
-        
-        
+
         final List collectedAlerts = new ArrayList();
         final List expectedAlerts = Arrays.asList( new String[]{
             "foo.html"
@@ -908,7 +905,7 @@ public class FormTest extends WebTestCase {
             + "</form>"
             + "</body>"
             + "</html>";
-        
+
         final List collectedAlerts = new ArrayList();
         final List expectedAlerts = Arrays.asList( new String[]{ "text" } );
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -994,6 +991,41 @@ public class FormTest extends WebTestCase {
             + "</body>"
             + "</html>";
         final List expectedAlerts = Arrays.asList( new String[]{ "before", "2" } );
+        final List collectedAlerts = new ArrayList();
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testNonFieldChildFound() throws Exception {
+        final String content = "<html><head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "    var oForm = document.testForm;"
+            + "    alert(oForm.img.tagName);"
+            + "    alert(oForm.img1.id);"
+            + "    alert(oForm.img2.id);"
+            + "    alert(oForm.testSpan == undefined);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + " <form name='testForm' action='foo'>"
+            + " <input type='text' id='img' value='before'/>"
+            + " <img name='img' id='idImg' src='foo.png'/>"
+            + " <img name='img1' id='idImg1' src='foo.png'/>"
+            + " <img id='img2' src='foo.png'/>"
+            + " <span id='testSpan'>foo</span>"
+            + " </form>"
+            + "</body>"
+            + "</html>";
+        final List expectedAlerts = Arrays.asList(
+            new String[]{ "INPUT", "idImg1", "img2", "true" } );
         final List collectedAlerts = new ArrayList();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
