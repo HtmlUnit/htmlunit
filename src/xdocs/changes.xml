@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1265410" due-to="Stefan Anzinger">
+                 Click on a javascript link loading a page containing frames now return
+                 the main loaded page and not a frame anymore.
+            </action>
             <action type="update" dev="mguillem">
                 Trim the text of HtmlOption when it is used as initial value attribute
                 (when no attribute is found as defined in HTML 4.01).

@@ -169,6 +169,9 @@
         <contributor>
         	<name>Denis N. Antonioli</name>
         </contributor>
+        <contributor>
+        	<name>Stefan Anzinger</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

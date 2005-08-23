@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author Stefan Anzinger
  */
 public class HtmlAnchorTest extends WebTestCase {
 
@@ -239,7 +240,7 @@ public class HtmlAnchorTest extends WebTestCase {
             + "</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        
+
         final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
 
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
@@ -304,6 +305,39 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAnchor testAnchor = page.getAnchorByName("testJavascript");
         testAnchor.click();  // blows up here
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testClick_javascriptUrl_targetPageWithIframe() throws Exception {
+        final String firstContent
+            = " <html>"
+            + "<head><title>Page A</title></head>"
+            + "<body><a href='#' onclick=\"document.location.href='http://second'\" id='link'>link</a></body>"
+            + "</html>";
+        final String secondContent
+            = "<html>"
+            + "<head><title>Page B</title></head>"
+            + "<body><iframe src='http://third'></iframe></body>"
+            + "</html>";
+        final String thirdContent
+            = "<html>"
+            + "<head><title>Page C</title></head>"
+            + "<body>test</body>"
+            + "</html>";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, firstContent);
+        conn.setResponse(URL_SECOND, secondContent);
+        conn.setResponse(URL_THIRD, thirdContent);
+        client.setWebConnection(conn);
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlAnchor a = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlPage secondPage = (HtmlPage) a.click();
+        assertEquals("url", URL_SECOND, secondPage.getWebResponse().getUrl());
+        assertEquals("title", "Page B", secondPage.getTitleText());
     }
 }
 
