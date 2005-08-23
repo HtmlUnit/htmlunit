@@ -38,7 +38,11 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -146,17 +150,17 @@ public class HtmlFrameSetTest extends WebTestCase {
     public void testLoadingFrameSetWithRelativePaths()
         throws Exception {
 
-        final String framesContent 
+        final String framesContent
             = "<html><head><title>Frames</title></head>"
             + "<frameset rows='110,*'>"
             + "  <frame src='subdir1/menu.html' name='menu' scrolling='no' border='0' noresize>"
             + "  <frame src='subdir2/first.html' name='test' border='0' auto>"
-            + "</frameset>" 
+            + "</frameset>"
             + "<noframes>"
-            + "  <body>Frames not supported</body>" 
+            + "  <body>Frames not supported</body>"
             + "</noframes>"
             + "</html>";
-        final String menuContent 
+        final String menuContent
             = "<html><head><title>Menu</title></head>"
             + "<body>"
             + "  <script language='javascript'>"
@@ -167,14 +171,14 @@ public class HtmlFrameSetTest extends WebTestCase {
             + "</html>";
         final String firstContent
             = "<html><head><title>First</title></head>"
-            + "<body>First/body>" 
+            + "<body>First/body>"
             + "</html>";
         final String secondContent
             = "<html><head><title>Second</title></head>"
-            + "<body>Second</body>" 
+            + "<body>Second</body>"
             + "</html>";
         final String baseUrl = "http://framestest";
-        
+
         final URL framesURL = new URL(baseUrl + "/frames.html");
         final URL menuURL = new URL(baseUrl + "/subdir1/menu.html");
         final URL firstURL = new URL(baseUrl + "/subdir2/first.html");
@@ -192,7 +196,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final HtmlPage framesPage = (HtmlPage) webClient.getPage(framesURL);
         assertEquals( "Frames", framesPage.getTitleText() );
-      
+
         final WebWindow menuWebWindow = webClient.getWebWindowByName("menu");
         final HtmlPage menuPage = (HtmlPage) menuWebWindow.getEnclosedPage();
         assertEquals( "Menu", menuPage.getTitleText() );
@@ -203,7 +207,57 @@ public class HtmlFrameSetTest extends WebTestCase {
         final HtmlAnchor changePage = menuPage.getAnchorByName("changePage");
         changePage.click();
         assertEquals( "Second", ((HtmlPage) testWebWindow.getEnclosedPage()).getTitleText() );
-        
     }
 
+    /**
+     * Forward referencing issue in FrameSet.
+     * Test for bug 1239285
+     * https://sourceforge.net/tracker/index.php?func=detail&aid=1239285&group_id=47038&atid=448266
+     * @throws Exception if the test fails
+     */
+    public void testFrameOnloadAccessOtherFrame()
+        throws Exception {
+
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final String framesContent
+            = "<html><head><title>Main</title>"
+            + "</head>"
+            + "  <frameset cols='18%,*'>"
+            + "    <frame name='menu' src='http://second'>"
+            + "    <frame name='button_pallete' src='about:blank'>"
+            + "  </frameset>"
+            + "</html>";
+
+        final String menuContent = "<html><head><title>Menu</title>"
+            + "  <script>"
+            + "    function init()"
+            + "    {"
+            + "      var oFrame = top.button_pallete;"
+            + "      alert((oFrame == null) ? 'Failure' : 'Success'); "
+            + "    }"
+            + "  </script>"
+            + "</head>"
+            + "<body onload='init()'></body></html>";
+
+        final WebClient webClient = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+
+        final List collectedAlerts = new ArrayList();
+        final List expectedAlerts = Arrays.asList( new String[]{"Success"} );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        webConnection.setResponse(URL_FIRST, framesContent);
+        webConnection.setResponse(URL_SECOND, menuContent);
+
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage framesPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals( "Main", framesPage.getTitleText());
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
