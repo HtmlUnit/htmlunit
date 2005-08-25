@@ -1250,15 +1250,15 @@ public class WebClient {
     /**
      * Expand a relative url relative to the specified base. In most situations
      * this is the same as <code>new URL(baseUrl, relativeUrl)</code> but
-     * there are some cases that URL doesn't handle correctly.
+     * there are some cases that URL doesn't handle correctly. See 
+     * <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>
+     * regarding Relative Uniform Resource Locators for more information.
      * 
      * @param baseUrl The base url
      * @param relativeUrl The relative url
      * @return See above
      * @exception MalformedURLException If an error occurred when creating a URL
      *                object
-     * @see <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>
-     *      regarding Relative Uniform Resource Locators
      */
     public static URL expandUrl( final URL baseUrl, final String relativeUrl )
         throws MalformedURLException {
