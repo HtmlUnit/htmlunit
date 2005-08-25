@@ -287,7 +287,16 @@
         </property>
         <property name="offsetHeight" readable="true" writable="false"/>
         <property name="offsetLeft" readable="true" writable="false"/>
-        <property name="offsetParent" notImplemented="true" readable="true" writable="false">
+        <property name="offsetParent" readable="true" writable="false">
+			<doclink
+				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetparent.asp"
+				descr="MSDN documentation"/>
+			<doclink
+				url="http://www.mozilla.org/docs/dom/domref/dom_el_ref20.html"
+				descr="Gecko DOM reference"/>
+			<doclink
+				url="http://www.webreference.com/dhtml/diner/realpos1/5.html"
+				descr="DHTML Lab"/>
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="offsetTop" readable="true" writable="false"/>
