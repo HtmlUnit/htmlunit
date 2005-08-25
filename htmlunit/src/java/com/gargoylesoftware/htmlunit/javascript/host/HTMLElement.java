@@ -69,6 +69,8 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTable;
+import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.IElementFactory;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.ElementArray;
@@ -87,6 +89,7 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Hans Donner
+ * @author Bruce Faulkner
  */
 public class HTMLElement extends NodeImpl {
     private static final long serialVersionUID = -6864034414262085851L;
@@ -103,9 +106,9 @@ public class HTMLElement extends NodeImpl {
     /**
      * The tag names of the objects for which outerHTML is readonly 
      */
-    private static final List OUTER_HTML_READONLY = 
+    private static final List OUTER_HTML_READONLY =
         Arrays.asList(new String[] {
-            "caption", "col", "colgroup", "frameset", "html", 
+            "caption", "col", "colgroup", "frameset", "html",
             "tbody", "td", "tfoot", "th", "thead", "tr"});
 
     private Style style_;
@@ -215,13 +218,13 @@ public class HTMLElement extends NodeImpl {
             if ( htmlElement != null && name.toLowerCase().equals(name)) {
                 final String value = htmlElement.getAttributeValue(name);
                 if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
-                    getLog().debug("Found attribute for evalution of property \"" + name 
+                    getLog().debug("Found attribute for evalution of property \"" + name
                             + "\" for of " + start);
                     result = value;
                 }
             }
         }
-        
+
         return result;
     }
 
@@ -300,7 +303,7 @@ public class HTMLElement extends NodeImpl {
 
         return new NativeArray( list.toArray() );
     }
-    
+
     /**
      * Return the class defined for this element
      * @return the class name
@@ -316,7 +319,7 @@ public class HTMLElement extends NodeImpl {
     public void jsxSet_className(final String className) {
         getHtmlElementOrDie().setAttributeValue("class", className);
     }
-    
+
     /**
      * Get the innerHTML attribute
      * @return the contents of this node as html
@@ -340,8 +343,7 @@ public class HTMLElement extends NodeImpl {
 
         return buf.toString();
     }
-    
-    
+
     /**
      * Gets the outerHTML of the node.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/outerhtml.asp">
@@ -360,28 +362,28 @@ public class HTMLElement extends NodeImpl {
     private void printChildren(final StringBuffer buffer, final DomNode node) {
         printChildren(buffer, node, true);
     }
-    
+
     private void printChildren(final StringBuffer buffer, final DomNode node, final boolean asInnerHTML) {
         for (final Iterator iter = node.getChildIterator(); iter.hasNext();) {
             printNode(buffer, (DomNode) iter.next(), asInnerHTML);
         }
     }
-   
+
     private void printNode(final StringBuffer buffer, final DomNode node) {
         printNode(buffer, node, true);
     }
-    
+
     private void printNode(
             final StringBuffer buffer, final DomNode node,
             final boolean asInnerHTML) {
         if (node instanceof DomCharacterData) {
             buffer.append(node.getNodeValue().replaceAll("  ", " ")); // remove white space sequences
         }
-        else if (asInnerHTML) { 
+        else if (asInnerHTML) {
             final HtmlElement htmlElt = (HtmlElement) node;
             buffer.append("<");
             buffer.append(htmlElt.getTagName());
-            
+
             // the attributes
             for (final Iterator iterator=htmlElt.getAttributeEntriesIterator(); iterator.hasNext(); ) {
                 buffer.append(' ' );
@@ -395,7 +397,7 @@ public class HTMLElement extends NodeImpl {
                 buffer.append("/");
             }
             buffer.append(">");
-            
+
             printChildren(buffer, node, asInnerHTML);
             if (htmlElt.getFirstChild() != null) {
                 buffer.append("</");
@@ -414,7 +416,7 @@ public class HTMLElement extends NodeImpl {
             }
 
         }
-    }    
+    }
 
     /**
      * Replace all children elements of this element with the supplied value.
@@ -442,7 +444,6 @@ public class HTMLElement extends NodeImpl {
         domNode.appendChild(node);
     }
 
-    
     /**
      * Replace all children elements of this element with the supplied value.
      * Sets the outerHTML of the node.
@@ -452,7 +453,7 @@ public class HTMLElement extends NodeImpl {
      */
     public void jsxSet_outerHTML(final String value) {
         final DomNode domNode = getDomNodeOrDie();
-        
+
         if (OUTER_HTML_READONLY.contains(domNode.getNodeName())) {
             throw Context.reportRuntimeError("outerHTML is read-only for tag " + domNode.getNodeName());
         }
@@ -478,7 +479,7 @@ public class HTMLElement extends NodeImpl {
             // when integrated in the real page
             webClient.setJavaScriptEnabled(false);
 
-            final WebResponse webResp = new StringWebResponse("<html><body>" + htmlSnippet + "</body></html>", 
+            final WebResponse webResp = new StringWebResponse("<html><body>" + htmlSnippet + "</body></html>",
                     getDomNodeOrDie().getPage().getWebResponse().getUrl());
             try {
                 final WebWindow pseudoWindow = new WebWindow() {
@@ -510,7 +511,7 @@ public class HTMLElement extends NodeImpl {
                 };
                 final HtmlPage pseudoPage = HTMLParser.parse(webResp, pseudoWindow);
                 final HtmlBody body = (HtmlBody) pseudoPage.getDocumentElement().getFirstChild();
-                
+
                 final Collection nodes = new ArrayList();
                 for (final Iterator iter = body.getChildIterator(); iter.hasNext();) {
                     final DomNode child = (DomNode) iter.next();
@@ -520,7 +521,7 @@ public class HTMLElement extends NodeImpl {
             }
             catch (final Exception e) {
                 getLog().error("Unexpected exception occured while parsing html snippet", e);
-                throw Context.reportRuntimeError("Unexpected exception occured while parsing html snippet: " 
+                throw Context.reportRuntimeError("Unexpected exception occured while parsing html snippet: "
                         + e.getMessage());
             }
             finally {
@@ -557,7 +558,7 @@ public class HTMLElement extends NodeImpl {
                 copy.appendChild(copy(child, page));
             }
         }
-        
+
         return copy;
     }
 
@@ -574,7 +575,7 @@ public class HTMLElement extends NodeImpl {
             final String value = (String) entry.getValue();
             attributes.addAttribute(null, name, name, null, value);
         }
-        
+
         return attributes;
     }
 
@@ -590,7 +591,7 @@ public class HTMLElement extends NodeImpl {
         final DomNode currentNode = getDomNodeOrDie();
         final DomNode node;
         final boolean append;
-        
+
         // compute the where and how the new nodes should be added
         if (POSITION_AFTER_BEGIN.equalsIgnoreCase(where)) {
             if (currentNode.getFirstChild() == null) {
@@ -951,7 +952,7 @@ public class HTMLElement extends NodeImpl {
      * @throws IOException if loading home page fails
      */
     public void navigateHomePage() throws IOException {
-        final WebClient webClient = getDomNodeOrDie().getPage().getWebClient(); 
+        final WebClient webClient = getDomNodeOrDie().getPage().getWebClient();
         webClient.getPage(new URL(webClient.getHomePage()));
     }
 
@@ -982,7 +983,7 @@ public class HTMLElement extends NodeImpl {
     public Object jsxGet_children() {
         final DomNode element = getDomNodeOrDie();
         final ElementArray children = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
-        
+
         try {
             final XPath xpath = new HtmlUnitXPath("./*", HtmlUnitXPath.buildSubtreeNavigator(element));
             children.init(element, xpath);
@@ -1223,6 +1224,33 @@ public class HTMLElement extends NodeImpl {
      */
     public int jsxGet_offsetTop() {
         return 1;
+    }
+
+    /**
+     * Get the offsetParent for this element
+     * @return the offsetParent for this element
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetparent.asp">
+     * MSDN documentation</a>
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_el_ref20.html">Gecko DOM reference</a>
+     */
+    public Object jsxGet_offsetParent() {
+        DomNode currentElement = getHtmlElementOrDie();
+        Object offsetParent = null;
+        while (currentElement != null) {
+            final DomNode parentNode = currentElement.getParentNode();
+            // According to the Microsoft and Mozilla documentation, and from experimentation
+            // in the IE and Firefox browsers, the offsetParent is the container
+            // (<td>, <table>, <body>) nearest to the node
+            if ((parentNode instanceof HtmlTableDataCell) ||
+                (parentNode instanceof HtmlTable) ||
+                (parentNode instanceof HtmlBody)) {
+                offsetParent = parentNode.getScriptObject();
+                break;
+            }
+            currentElement = currentElement.getParentNode();
+        }
+
+        return offsetParent;
     }
 
     /**

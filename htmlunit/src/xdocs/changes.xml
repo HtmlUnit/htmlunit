@@ -6,6 +6,11 @@
     </properties>
 
     <body>
+        <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1267106" due-to="Bruce Faulkner">
+                 JavaScript: implemented property offsetParent.
+            </action>
+        </release>
         <release version="1.7" date="Aug 23, 2005">
             <action type="update" dev="mguillem" id="1153775">
                  JavaScript: img nodes can be accessed by id or name within a form.
