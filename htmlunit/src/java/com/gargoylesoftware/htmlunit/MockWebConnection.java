@@ -37,18 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -59,60 +58,9 @@ import org.apache.commons.logging.LogFactory;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author Marc Guillemot
+ * @author Brad Clarke
  */
 public class MockWebConnection extends WebConnection {
-    private class ResponseEntry {
-        private void validateParameters(
-                final Object content,
-                final String statusMessage,
-                final String contentType,
-                final List responseHeaders) {
-            Assert.notNull("content", content);
-            Assert.notNull("statusMessage", statusMessage);
-            Assert.notNull("contentType", contentType);
-            Assert.notNull("responseHeaders", responseHeaders);
-            // Validate that the response header list only contains KeyValuePairs
-            final Iterator iterator = responseHeaders.iterator();
-            while( iterator.hasNext() ) {
-                final Object object = iterator.next();
-                if( object instanceof KeyValuePair == false ) {
-                    throw new IllegalArgumentException(
-                            "Only KeyValuePairs may be in the response header list but found: "
-                            + object.getClass().getName());
-                }
-            }
-        }
-
-        /**
-         * Create a new instance
-         * @param content The content as a byte array
-         * @param statusCode The status code
-         * @param statusMessage The status message
-         * @param contentType The content type
-         * @param responseHeaders a list of response headers
-         */
-        public ResponseEntry(
-                final byte[] content,
-                final int statusCode,
-                final String statusMessage,
-                final String contentType,
-                final List responseHeaders ) {
-
-            validateParameters(content, statusMessage, contentType, responseHeaders);
-            content_ = content;
-            statusCode_ = statusCode;
-            statusMessage_ = statusMessage;
-            contentType_ = contentType;
-            responseHeaders_ = Collections.unmodifiableList(responseHeaders);
-        }
-
-        private final int statusCode_;
-        private final String statusMessage_;
-        private final byte[] content_;
-        private final String contentType_;
-        private final List responseHeaders_;
-    }
-
     private byte[] stringToByteArray(final String content) {
         byte[] contentBytes;
         try {
@@ -125,7 +73,7 @@ public class MockWebConnection extends WebConnection {
     }
 
     private final Map responseMap_ = new HashMap(10);
-    private ResponseEntry defaultResponseEntry_;
+    private WebResponseData defaultResponse_;
 
     private WebRequestSettings lastRequest_;
     private HttpState httpState_ = new HttpState();
@@ -135,8 +83,8 @@ public class MockWebConnection extends WebConnection {
      *
      * @param  webClient The web client
      */
-    public MockWebConnection( final WebClient webClient ) {
-        super( webClient );
+    public MockWebConnection(final WebClient webClient) {
+        super(webClient);
     }
 
     /**
@@ -161,83 +109,19 @@ public class MockWebConnection extends WebConnection {
 
         lastRequest_ = webRequestSettings;
 
-        ResponseEntry entry = (ResponseEntry)responseMap_.get(url.toExternalForm());
-        if( entry == null ) {
-            entry = defaultResponseEntry_;
-            if( entry == null ) {
-                throw new IllegalStateException(
-                    "No response specified that can handle url ["+url.toExternalForm()+"]");
+        WebResponseData response = (WebResponseData) responseMap_.get(url.toExternalForm());
+        if (response == null) {
+            response = defaultResponse_;
+            if (response == null) {
+                throw new IllegalStateException("No response specified that can handle url ["
+                    + url.toExternalForm()
+                    + "]");
             }
         }
 
-        final ResponseEntry responseEntry = entry;
-        return new WebResponse() {
-            public SubmitMethod getRequestMethod() {
-                return webRequestSettings.getSubmitMethod();
-            }
-            public int getStatusCode()         { return responseEntry.statusCode_;      }
-            public String getStatusMessage()   { return responseEntry.statusMessage_;   }
-            public String getContentType()     {
-                final String contentTypeHeaderLine = responseEntry.contentType_;
-                final int index = contentTypeHeaderLine.indexOf( ';' );
-                final String contentType;
-                if( index == -1 ) {
-                    contentType = contentTypeHeaderLine;
-                }
-                else {
-                    contentType = contentTypeHeaderLine.substring( 0, index );
-                }
-                return contentType;
-            }
-            public String getContentAsString() {
-                try {
-                    return new String(responseEntry.content_, getContentCharSet());
-                }
-                catch (final UnsupportedEncodingException e) {
-                    return null;
-                }
-            }
-            public URL getUrl()                { return url;                           }
-            public List getResponseHeaders()   { return responseEntry.responseHeaders_; }
-            public long getLoadTimeInMilliSeconds() { return 0; }
-
-            public String getResponseHeaderValue( final String headerName ) {
-                final Iterator iterator = responseEntry.responseHeaders_.iterator();
-                while( iterator.hasNext() ) {
-                    final KeyValuePair pair = (KeyValuePair)iterator.next();
-                    if( pair.getKey().equals( headerName ) ) {
-                        return pair.getValue();
-                    }
-                }
-                return null;
-            }
-
-            public InputStream getContentAsStream() {
-                return new ByteArrayInputStream(responseEntry.content_);
-            }
-            public byte[] getResponseBody() {
-                /*
-                 * this method must return raw bytes.
-                 * without encoding, getBytes use locale encoding.
-                 */
-                return responseEntry.content_;
-            }
-            public String getContentCharSet() {
-                final String contentType = responseEntry.contentType_;
-                final String prefix = "charset=";
-                final int index = contentType.indexOf(prefix);
-                final String charset;
-                if( index == -1 ) {
-                    charset = "ISO-8859-1";
-                }
-                else {
-                    charset = contentType.substring(index+prefix.length());
-                }
-                return charset;
-            }
-        };
+        return new WebResponseImpl(response, webRequestSettings.getURL(), webRequestSettings
+                .getSubmitMethod(), 0);
     }
-
 
     /**
      *  Return the method that was used in the last call to submitRequest()
@@ -248,7 +132,6 @@ public class MockWebConnection extends WebConnection {
         return lastRequest_.getSubmitMethod();
     }
 
-
     /**
      *  Return the parameters that were used in the last call to submitRequest()
      *
@@ -258,7 +141,6 @@ public class MockWebConnection extends WebConnection {
         return lastRequest_.getRequestParameters();
     }
 
-
     /**
      * Set the response that will be returned when the specified url is requested.
      * @param url The url that will return the given response
@@ -269,16 +151,16 @@ public class MockWebConnection extends WebConnection {
      * @param responseHeaders A list of {@link KeyValuePair}s that will be returned as
      * response headers.
      */
-    public void setResponse(
-            final URL url,
-            final String content,
-            final int statusCode,
-            final String statusMessage,
-            final String contentType,
-            final List responseHeaders ) {
+    public void setResponse(final URL url, final String content, final int statusCode,
+            final String statusMessage, final String contentType, final List responseHeaders) {
 
-        setResponse(url, stringToByteArray(content), statusCode, statusMessage,
-                    contentType, responseHeaders);
+        setResponse(
+                url,
+                stringToByteArray(content),
+                statusCode,
+                statusMessage,
+                contentType,
+                responseHeaders);
     }
 
     /**
@@ -291,17 +173,17 @@ public class MockWebConnection extends WebConnection {
      * @param responseHeaders A list of {@link KeyValuePair}s that will be returned as
      * response headers.
      */
-    public void setResponse(
-            final URL url,
-            final byte[] content,
-            final int statusCode,
-            final String statusMessage,
-            final String contentType,
-            final List responseHeaders ) {
+    public void setResponse(final URL url, final byte[] content, final int statusCode,
+            final String statusMessage, final String contentType, final List responseHeaders) {
 
-        final ResponseEntry responseEntry =
-            new ResponseEntry(content, statusCode, statusMessage, contentType, responseHeaders);
-        responseMap_.put( url.toExternalForm(), responseEntry );
+        final List compiledHeaders = new ArrayList(responseHeaders);
+        compiledHeaders.add(new NameValuePair("Content-Type", contentType));
+        final WebResponseData responseEntry = new WebResponseData(
+                content,
+                statusCode,
+                statusMessage,
+                compiledHeaders);
+        responseMap_.put(url.toExternalForm(), responseEntry);
     }
 
     /**
@@ -312,8 +194,8 @@ public class MockWebConnection extends WebConnection {
      * @param url The url that will return the given response
      * @param content The content to return
      */
-    public void setResponse( final URL url, final String content ) {
-        setResponse( url, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+    public void setResponse(final URL url, final String content) {
+        setResponse(url, content, 200, "OK", "text/html", Collections.EMPTY_LIST);
     }
 
     /**
@@ -326,7 +208,7 @@ public class MockWebConnection extends WebConnection {
      * @param contentType The content type to return
      */
     public void setResponse(final URL url, final String content, final String contentType) {
-        setResponse( url, content, 200, "OK", contentType, Collections.EMPTY_LIST );
+        setResponse(url, content, 200, "OK", contentType, Collections.EMPTY_LIST);
     }
 
     /**
@@ -337,14 +219,10 @@ public class MockWebConnection extends WebConnection {
      * @param url The url that will return the given response
      * @param title The title of the page
      */
-    public void setResponseAsGenericHtml(
-            final URL url,
-            final String title ) {
+    public void setResponseAsGenericHtml(final URL url, final String title) {
 
-        final String content = "<html><head><title>"+title+"</title></head><body></body></html>";
-        final ResponseEntry responseEntry
-            = new ResponseEntry(stringToByteArray(content), 200, "OK", "text/html", Collections.EMPTY_LIST);
-        responseMap_.put( url.toExternalForm(), responseEntry );
+        final String content = "<html><head><title>" + title + "</title></head><body></body></html>";
+        setResponse(url, content);
     }
 
     /**
@@ -356,11 +234,8 @@ public class MockWebConnection extends WebConnection {
      * @param statusMessage The status message to return
      * @param contentType The content type to return
      */
-    public void setDefaultResponse(
-            final String content,
-            final int statusCode,
-            final String statusMessage,
-            final String contentType ) {
+    public void setDefaultResponse(final String content, final int statusCode,
+            final String statusMessage, final String contentType) {
 
         setDefaultResponse(stringToByteArray(content), statusCode, statusMessage, contentType);
     }
@@ -374,14 +249,17 @@ public class MockWebConnection extends WebConnection {
      * @param statusMessage The status message to return
      * @param contentType The content type to return
      */
-    public void setDefaultResponse(
-            final byte[] content,
-            final int statusCode,
-            final String statusMessage,
-            final String contentType ) {
+    public void setDefaultResponse(final byte[] content, final int statusCode,
+            final String statusMessage, final String contentType) {
 
-        defaultResponseEntry_ = new ResponseEntry(content, statusCode, statusMessage,
-                contentType, Collections.EMPTY_LIST);
+        final List compiledHeaders = new ArrayList();
+        compiledHeaders.add(new NameValuePair("Content-Type", contentType));
+        final WebResponseData responseEntry = new WebResponseData(
+                content,
+                statusCode,
+                statusMessage,
+                compiledHeaders);
+        defaultResponse_ = responseEntry;
     }
 
     /**
@@ -390,17 +268,16 @@ public class MockWebConnection extends WebConnection {
      *
      * @param content The content to return
      */
-    public void setDefaultResponse( final String content ) {
+    public void setDefaultResponse(final String content) {
         setDefaultResponse(content, 200, "OK", "text/html");
     }
-
 
     /**
      * Return the {@link HttpState} that is being used for a given domain
      * @param url The url from which the domain will be determined
      * @return The state or null if no state can be found for this domain.
      */
-    public HttpState getStateForUrl( final URL url ) {
+    public HttpState getStateForUrl(final URL url) {
         return httpState_;
     }
 
@@ -422,4 +299,3 @@ public class MockWebConnection extends WebConnection {
         return lastRequest_;
     }
 }
-

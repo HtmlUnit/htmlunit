@@ -37,10 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,7 +67,6 @@ import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.httpclient.methods.multipart.PartBase;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.apache.commons.httpclient.params.HttpMethodParams;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.SimpleLog;
@@ -86,6 +82,7 @@ import org.apache.commons.logging.impl.SimpleLog;
  * @author Noboru Sinohara
  * @author David D. Kilzer
  * @author Marc Guillemot
+ * @author Brad Clarke
  */
 public class HttpWebConnection extends WebConnection {
     private final Map httpClients_ = new HashMap( 9 );
@@ -397,114 +394,33 @@ public class HttpWebConnection extends WebConnection {
         return null;
     }
 
+    /**
+     * Converts the HttpMethod into a WebResponse
+     */
+    private WebResponse makeWebResponse(final int statusCode, final HttpMethodBase method,
+            final URL originatingURL, final long loadTime) throws IOException {
 
-    private WebResponse makeWebResponse(
-        final int statusCode, final HttpMethodBase method, final URL originatingURL, final long loadTime )
-        throws IOException {
-
-        // determine charset
-        final String contentCharSet = method.getResponseCharSet();
-
-        // HttpMethod.getResponseBodyAsStream may return null if no body is available
-        final InputStream bodyStream = method.getResponseBodyAsStream();
-        final String content;
-        if (bodyStream == null) {
-            content = "";
+        String statusMessage = method.getStatusText();
+        if (statusMessage == null || statusMessage.length() == 0) {
+            statusMessage = HttpStatus.getStatusText(statusCode);
         }
-        else {
-            content = IOUtils.toString(bodyStream, contentCharSet);
+        if (statusMessage == null) {
+            statusMessage = "Unknown status code";
+        }
+        final List headers = new ArrayList();
+        final Header[] array = method.getResponseHeaders();
+        for (int i = 0; i < array.length; i++) {
+            headers.add(new NameValuePair(array[i].getName(), array[i].getValue()));
         }
 
-        return new WebResponse() {
-            private String content_ = content;
-            private String contentCharSet_ = contentCharSet;
+        final WebResponseData responseData = new WebResponseData(
+                method.getResponseBodyAsStream(),
+                statusCode,
+                statusMessage,
+                headers);
 
-            public SubmitMethod getRequestMethod() {
-                return SubmitMethod.getInstance(method.getName());
-            }
-            public int getStatusCode() {
-                return statusCode;
-            }
-
-            public String getStatusMessage() {
-                String message = method.getStatusText();
-                if( message == null || message.length() == 0 ) {
-                    message = HttpStatus.getStatusText( statusCode );
-                }
-
-                if( message == null ) {
-                    message = "Unknown status code";
-                }
-
-                return message;
-            }
-
-            public String getContentType() {
-                final Header contentTypeHeader  = method.getResponseHeader( "content-type" );
-                if( contentTypeHeader == null ) {
-                    // Not technically legal but some servers don't return a content-type
-                    return "";
-                }
-                final String contentTypeHeaderLine = contentTypeHeader.getValue();
-                final int index = contentTypeHeaderLine.indexOf( ';' );
-                if( index == -1 ) {
-                    return contentTypeHeaderLine;
-                }
-                else {
-                    return contentTypeHeaderLine.substring( 0, index );
-                }
-            }
-
-            public String getContentAsString() {
-                return content_;
-            }
-
-            public InputStream getContentAsStream() {
-                return new ByteArrayInputStream(getResponseBody());
-            }
-
-            public URL getUrl() {
-                return originatingURL;
-            }
-
-            public List getResponseHeaders() {
-                final List headers = new ArrayList();
-                final Header[] array = method.getResponseHeaders();
-                for( int i = 0; i < array.length; i++ ) {
-                    headers.add( new NameValuePair( array[i].getName(), array[i].getValue() ) );
-                }
-                return headers;
-            }
-
-            public String getResponseHeaderValue( final String headerName ) {
-                final Header header = method.getResponseHeader(headerName);
-                if( header == null ) {
-                    return null;
-                }
-                else {
-                    return header.getValue();
-                }
-            }
-
-            public long getLoadTimeInMilliSeconds() {
-                return loadTime;
-            }
-
-            public String getContentCharSet(){
-                return contentCharSet_;
-            }
-
-            public byte [] getResponseBody() {
-                try {
-                    return content_.getBytes(getContentCharSet());
-                }
-                catch (final UnsupportedEncodingException e) {
-                    // should never occur
-                    throw new RuntimeException(e);
-                }
-            }
-
-        };
+        final SubmitMethod requestMethod = SubmitMethod.getInstance(method.getName());
+        return new WebResponseImpl(responseData, originatingURL, requestMethod, loadTime);
     }
 
 

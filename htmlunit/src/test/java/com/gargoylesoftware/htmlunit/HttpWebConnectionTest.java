@@ -50,9 +50,15 @@ import java.util.Map;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.httpclient.StatusLine;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.mortbay.http.HttpContext;
+import org.mortbay.http.HttpServer;
+import org.mortbay.http.SocketListener;
+import org.mortbay.http.handler.ResourceHandler;
 
 import com.gargoylesoftware.base.testing.BaseTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 
 
@@ -285,9 +291,14 @@ public class HttpWebConnectionTest extends BaseTestCase {
         final long loadTime = 500L;
 
         final HttpMethodBase httpMethod = new GetMethod(url.toString());
-        final Field field = HttpMethodBase.class.getDeclaredField("responseBody");
-        field.setAccessible(true);
-        field.set(httpMethod, content.getBytes());
+        final Field responseBodyField = HttpMethodBase.class.getDeclaredField("responseBody");
+        responseBodyField.setAccessible(true);
+        responseBodyField.set(httpMethod, content.getBytes());
+        
+        final StatusLine statusLine = new StatusLine("HTTP/1.0 200 OK");
+        final Field statusLineField = HttpMethodBase.class.getDeclaredField("statusLine");
+        statusLineField.setAccessible(true);
+        statusLineField.set(httpMethod, statusLine);
 
         final HttpWebConnection connection = new HttpWebConnection(new WebClient());
         final Method method =
@@ -344,5 +355,37 @@ public class HttpWebConnectionTest extends BaseTestCase {
         catch (final MalformedURLException e) {
             throw new RuntimeException(e);
         }
+    }
+    
+    /**
+     * Testing Jetty
+     * @throws Exception on failure
+     */
+    public void testJettyProofOfConcept() throws Exception {
+        final HttpServer server = new HttpServer();
+        final SocketListener listener = new SocketListener();
+        listener.setPort(12345);
+        server.addListener(listener);
+
+        final HttpContext context = new HttpContext();
+        context.setContextPath("/");
+        context.setResourceBase("./");
+        context.addHandler(new ResourceHandler());
+        server.addContext(context);
+
+        server.start();
+        
+        final WebClient client = new WebClient();
+        final Page page = client.getPage(new URL("http://localhost:12345/"));
+        final WebConnection defaultConnection = page
+                .getEnclosingWindow()
+                .getWebClient()
+                .getWebConnection();
+        assertInstanceOf(
+                "HttpWebConnection should be the default",
+                defaultConnection,
+                HttpWebConnection.class);
+        assertInstanceOf("Response should be (mostly) valid HTML", page, HtmlPage.class);
+
     }
 }
