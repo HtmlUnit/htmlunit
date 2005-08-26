@@ -248,7 +248,17 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
         <param name="project" value="gsbase"/>
         <param name="jarName" value="gsbase-2.0.jar"/>
     </antcall>
-        
+    <antcall target="get-dependency">
+        <param name="type" value="test"/>
+        <param name="project" value="jetty"/>
+        <param name="jarName" value="org.mortbay.jetty-5.1.4.jar"/>
+    </antcall>
+    <antcall target="get-dependency">
+        <param name="type" value="test"/>
+        <param name="project" value="javax.servlet"/>
+        <param name="jarName" value="servlet-api-2.4.jar"/>
+    </antcall>
+    
     <!-- jelly -->
     <antcall target="get-dependency">
         <param name="type" value="jelly"/>

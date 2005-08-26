@@ -428,6 +428,28 @@
                 <htmlunit.description>IO utilities</htmlunit.description>
             </properties>
         </dependency>
+        <dependency>
+            <groupId>jetty</groupId>
+            <artifactId>org.mortbay.jetty</artifactId>
+            <version>5.1.4</version>
+            <type>jar</type>
+            <url>http://jetty.mortbay.org/jetty/</url>
+            <properties>
+                <htmlunit.group>test</htmlunit.group>
+                <htmlunit.description>Jetty</htmlunit.description>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.4</version>
+            <type>jar</type>
+            <url>http://java.sun.com/products/servlet/index.jsp</url>
+            <properties>
+                <htmlunit.group>test</htmlunit.group>
+                <htmlunit.description>Jetty</htmlunit.description>
+            </properties>
+        </dependency>
     </dependencies>
     <build>
         <nagEmailAddress>htmlunit@GargoyleSoftware.com</nagEmailAddress>
