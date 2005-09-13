@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.PrintWriter;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 /**
  * representation of a text node in the Html DOM
  *
@@ -120,9 +122,8 @@ public class DomText extends DomCharacterData {
      * @param printWriter writer where child nodes are written
      */
     protected void printXml( final String indent, final PrintWriter printWriter ) {
-
         printWriter.print(indent);
-        printWriter.println(getData());
+        printWriter.println(StringEscapeUtils.escapeXml(getData()));
         printChildrenAsXml( indent, printWriter );
     }
 }

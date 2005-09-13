@@ -91,11 +91,11 @@ public class DomNodeTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
-        
+
         final DomNode previousSibling = node.getPreviousSibling();
         final DomNode nextSibling = node.getNextSibling();
         final DomNode parent = node.getParentNode();
-        
+
         // position among parent's children
         final int position = readPositionAmongParentChildren(node);
 
@@ -109,7 +109,7 @@ public class DomNodeTest extends WebTestCase {
         assertEquals(position, readPositionAmongParentChildren(newNode));
 
         final Map attributes = new HashMap();
-        attributes.put("id", "tag2"); // with the same id as the node to replace 
+        attributes.put("id", "tag2"); // with the same id as the node to replace
         final DomNode node2 = page.getHtmlElementById("tag2");
         assertEquals("div", node2.getNodeName());
         final DomNode node3 = new HtmlSpan(page, attributes);
@@ -127,7 +127,7 @@ public class DomNodeTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
-        
+
         final Map attributes = new HashMap();
         attributes.put("id", "newElt");
         final DomNode newNode = new HtmlDivision(page, attributes);
@@ -149,7 +149,7 @@ public class DomNodeTest extends WebTestCase {
         catch (final ElementNotFoundException e) {
             // nothing to do, it's ok
         }
-        
+
         newNode.insertBefore(node);
         page.getHtmlElementById("tag");
     }
@@ -164,9 +164,9 @@ public class DomNodeTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
-        
+
         final DomNode parent = node.getParentNode();
-        
+
         // position among parent's children
         final int position = readPositionAmongParentChildren(node);
 
@@ -193,11 +193,11 @@ public class DomNodeTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
-        
+
         final DomNode previousSibling = node.getPreviousSibling();
         final DomNode nextSibling = node.getNextSibling();
         final DomNode parent = node.getParentNode();
-        
+
         // position among parent's children
         final int position = readPositionAmongParentChildren(node);
 

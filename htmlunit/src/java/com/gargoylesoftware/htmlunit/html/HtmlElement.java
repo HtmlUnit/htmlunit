@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Function;
 
@@ -80,7 +81,7 @@ public abstract class HtmlElement extends DomNode {
 
     /** the map holding event handlers */
     private Map eventHandlers_;
-    
+
     /**
      *  Create an instance
      *
@@ -110,7 +111,7 @@ public abstract class HtmlElement extends DomNode {
         final HtmlElement newnode = (HtmlElement) super.cloneNode(deep);
 
         newnode.attributes_ = new HashMap();
-      
+
         for (final Iterator it = attributes_.keySet().iterator(); it.hasNext();) {
             final Object key = it.next();
 
@@ -125,7 +126,7 @@ public abstract class HtmlElement extends DomNode {
 
         return newnode;
     }
-    
+
     /**
      *  Return the value of the specified attribute or an empty string.  If the
      * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
@@ -158,7 +159,7 @@ public abstract class HtmlElement extends DomNode {
     public final void setAttributeValue(final String attributeName, final String attributeValue) {
 
         String value = attributeValue;
-        
+
         if(attributes_ == Collections.EMPTY_MAP) {
             attributes_ = new HashMap();
         }
@@ -215,7 +216,7 @@ public abstract class HtmlElement extends DomNode {
     public final Function getEventHandler(final String eventName) {
        return (Function) eventHandlers_.get(eventName);
     }
-    
+
     /**
      * Register a Function as an event handler.
      * @param eventName Name of event such as "onclick" or "onblur", etc.
@@ -227,7 +228,7 @@ public abstract class HtmlElement extends DomNode {
         }
         eventHandlers_.put(eventName, eventHandler);
     }
-    
+
     /**
      * Register a snippet of javascript code as an event handler.  The javascript code will
      * be wrapped inside a unique function declaration which provides one argument named
@@ -236,10 +237,10 @@ public abstract class HtmlElement extends DomNode {
      * @param jsSnippet executable javascript code
      */
     public final void setEventHandler(final String eventName, final String jsSnippet) {
-       
+
         final BaseFunction function = new EventHandler(this, jsSnippet);
         setEventHandler(eventName, function);
-        getLog().debug("Created event handler " + function.getFunctionName() 
+        getLog().debug("Created event handler " + function.getFunctionName()
                 + " for " + eventName + " on " + this);
     }
 
@@ -342,12 +343,12 @@ public abstract class HtmlElement extends DomNode {
         final boolean hasChildren = (getFirstChild() != null);
         printWriter.print(indent+"<"+getTagName().toLowerCase());
         final Map attributeMap = attributes_;
-        for( final Iterator it=attributeMap.keySet().iterator(); it.hasNext(); ) {
+        for (final Iterator it=attributeMap.keySet().iterator(); it.hasNext(); ) {
             printWriter.print(" ");
-            final String name = (String)it.next();
+            final String name = (String) it.next();
             printWriter.print(name);
             printWriter.print("=\"");
-            printWriter.print(attributeMap.get(name));
+            printWriter.print(StringEscapeUtils.escapeXml(attributeMap.get(name).toString()));
             printWriter.print("\"");
         }
 
@@ -360,7 +361,6 @@ public abstract class HtmlElement extends DomNode {
             printWriter.println(indent+"</"+getTagName().toLowerCase()+">");
         }
     }
-
 
     /**
      *  Return a string representation of this object
@@ -516,7 +516,7 @@ public abstract class HtmlElement extends DomNode {
         final List list = new ArrayList();
         final DescendantElementsIterator iterator = new DescendantElementsIterator();
         final String lowerCaseTagName = elementName.toLowerCase();
-        
+
         while(iterator.hasNext()) {
             final HtmlElement next = iterator.nextElement();
             if(next.getTagName().equals(lowerCaseTagName)) {
@@ -540,7 +540,7 @@ public abstract class HtmlElement extends DomNode {
 
         final List list = new ArrayList();
         final Iterator iterator = acceptableTagNames.iterator();
-        
+
         while(iterator.hasNext()) {
             final String next = iterator.next().toString().toLowerCase();
             list.addAll(getHtmlElementsByTagName(next));
@@ -560,7 +560,7 @@ public abstract class HtmlElement extends DomNode {
         final List list = new ArrayList();
         final DescendantElementsIterator iterator = new DescendantElementsIterator();
         final String lowerCaseTagName = tagName.toLowerCase();
-        
+
         while(iterator.hasNext()) {
             final HtmlElement next = iterator.nextElement();
             if(lowerCaseTagName.equals(next.getTagName())) {

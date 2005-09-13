@@ -837,7 +837,7 @@ public class HtmlPageTest extends WebTestCase {
         try {
             loadPage(firstContent);
             fail("should have thrown");
-        } 
+        }
         catch (final RuntimeException e){
             assertTrue(e.getMessage().indexOf("could have caused an OutOfMemoryError") > -1);
         }
@@ -1081,14 +1081,10 @@ public class HtmlPageTest extends WebTestCase {
      * @exception  Exception If the test fails
      */
     public void testAsXml2() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-            
         final String htmlContent = "<html><head><title>foo</title>"
             + "<script>var test = 15 < 16;</script></head>"
             + "</head>"
-            + "<body onload='test=(1 > 2) && (45 < 78)'><p>helloworld</p></body>"
+            + "<body onload='test=(1 > 2) && (45 < 78)'><p>helloworld &amp;amp; helloall</p></body>"
             + "</html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -1121,7 +1117,7 @@ public class HtmlPageTest extends WebTestCase {
             + "</div>"
             + "</body>"
             + "</html>";
-        
+
         final HtmlPage page = loadPage(htmlContent);
         final HtmlElement div1 = page.getHtmlElementById("div1");
         page.getHtmlElementById("div2"); // would throw if not found
@@ -1133,7 +1129,7 @@ public class HtmlPageTest extends WebTestCase {
         catch (final ElementNotFoundException e) {
             // nothing
         }
-        
+
         try {
             page.getHtmlElementById("div2"); // throws if not found
             fail("div2 should have been removed");
@@ -1156,7 +1152,7 @@ public class HtmlPageTest extends WebTestCase {
             + "<span id='id1'>bla</span>"
             + "</body>"
             + "</html>";
-        
+
         final HtmlPage page = loadPage(htmlContent);
         final HtmlElement elt1 = page.getHtmlElementById("id1");
         assertEquals("div", elt1.getNodeName());

@@ -439,7 +439,7 @@ public abstract class DomNode implements Cloneable {
         }
         return scriptObject_;
     }
-    
+
     /**
      * append a child node to the end of the current list
      * @param node the node to append
@@ -511,7 +511,7 @@ public abstract class DomNode implements Cloneable {
         newNode.nextSibling_ = this;
         previousSibling_ = newNode;
         newNode.parent_ = parent_;
-        
+
         getHtmlPage().notifyNodeAdded(newNode);
     }
 
@@ -753,7 +753,7 @@ public abstract class DomNode implements Cloneable {
     public void setReadyState(final String state) {
         readyState_ = state;
     }
-    
+
     /**
      * Remove all the children of this node.
      *
