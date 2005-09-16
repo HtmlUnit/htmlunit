@@ -49,6 +49,7 @@ import java.io.UnsupportedEncodingException;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Brad Clarke
  */
 public final class TextUtil {
     /** Private constructor to prevent instantiation */
@@ -125,5 +126,23 @@ public final class TextUtil {
             e.printStackTrace();
             throw new IllegalStateException("Exception when converting a string to an input stream: "+e);
         }
+    }
+
+    /**
+     * Convert a string into a byte array using a default encoding of ISO-8859-1. 
+     * 
+     * @param content The string to convert, assumed to be ISO-8859-1 encoded
+     * @return The String as a byte[]. If the default encoding is not supported an 
+     *         empty byte[] will be returned.
+     */
+    public static byte[] stringToByteArray(final String content) {
+        byte[] contentBytes;
+        try {
+            contentBytes = content.getBytes("ISO-8859-1");
+        }
+        catch (final UnsupportedEncodingException e) {
+            contentBytes = new byte[0];
+        }
+        return contentBytes;
     }
 }

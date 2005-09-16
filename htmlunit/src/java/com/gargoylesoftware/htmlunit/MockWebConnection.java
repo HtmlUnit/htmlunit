@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,17 +60,6 @@ import org.apache.commons.logging.LogFactory;
  * @author Brad Clarke
  */
 public class MockWebConnection extends WebConnection {
-    private byte[] stringToByteArray(final String content) {
-        byte[] contentBytes;
-        try {
-            contentBytes = content.getBytes("ISO-8859-1");
-        }
-        catch (final UnsupportedEncodingException e) {
-            contentBytes = new byte[0];
-        }
-        return contentBytes;
-    }
-
     private final Map responseMap_ = new HashMap(10);
     private WebResponseData defaultResponse_;
 
@@ -156,7 +144,7 @@ public class MockWebConnection extends WebConnection {
 
         setResponse(
                 url,
-                stringToByteArray(content),
+                TextUtil.stringToByteArray(content),
                 statusCode,
                 statusMessage,
                 contentType,
@@ -237,7 +225,7 @@ public class MockWebConnection extends WebConnection {
     public void setDefaultResponse(final String content, final int statusCode,
             final String statusMessage, final String contentType) {
 
-        setDefaultResponse(stringToByteArray(content), statusCode, statusMessage, contentType);
+        setDefaultResponse(TextUtil.stringToByteArray(content), statusCode, statusMessage, contentType);
     }
 
     /**
