@@ -37,13 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.httpclient.NameValuePair;
 
 /**
  * A simple WebResponse created from a string.  Content is assumed to be
@@ -52,154 +51,55 @@ import java.util.List;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author Brad Clarke
  */
-public class StringWebResponse implements WebResponse {
-    private final String content_;
-    private final String encoding_ = "ISO-8859-1";
-    private final URL url_;
+public class StringWebResponse extends WebResponseImpl {
+
+    /**
+     * Helper method for constructors. Converts the passed string into
+     * WebResponseData with other defaults specified.
+     * 
+     * @param contentString String to be converted to WebResponseData
+     * @return A simple WebResponseData with defaults specified
+     */
+    private static WebResponseData getWebResponseData(final String contentString) {
+        final byte[] content = TextUtil.stringToByteArray(contentString);
+        final List compiledHeaders = new ArrayList();
+        compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
+        return new WebResponseData(content, 200, "OK", compiledHeaders);
+    }
+
+    /**
+     * Helper method for constructors. Gets the default URL that is used
+     * if none is specified. Mostly exists to deal with the checked exception
+     * on the URL constructor.
+     * 
+     * @return The default URL
+     */
+    private static URL getURL() {
+        try {
+            return new URL("http://HtmlUnitStringWebResponse");
+        }
+        catch (final MalformedURLException e) {
+            // Theoretically impossible
+            throw new IllegalStateException(e.toString());
+        }
+    }
 
     /**
      * Create an instance.
      * @param content The content to return.
      */
-    public StringWebResponse( final String content ) {
-        content_ = content;
-        try {
-            url_ = new URL("http://HtmlUnitStringWebResponse");
-        }
-        catch( final MalformedURLException e ) {
-            // Theoretically impossible
-            throw new IllegalStateException(e.toString());
-        }
+    public StringWebResponse(final String content) {
+        super(getWebResponseData(content), getURL(), SubmitMethod.GET, 0);
     }
-    
+
     /**
      * Create an instance associated with an originating URL
      * @param content The content to return.
      * @param originatingURL The url that this should be associated with
      */
-    public StringWebResponse( final String content, final URL originatingURL ) {
-        content_ = content;
-        url_ = originatingURL;
-    }    
-
-    /**
-     * @see com.gargoylesoftware.htmlunit.WebResponse#getRequestMethod()
-     * @return {@link SubmitMethod#GET}
-     */
-    public SubmitMethod getRequestMethod() {
-        return SubmitMethod.GET;
-    }
-
-    /**
-     *  Return the status code that was returned by the server
-     *
-     * @return  See above.
-     */
-    public int getStatusCode() {
-        return 200;
-    }
-
-    /**
-     *  Return the status message that was returned from the server
-     *
-     * @return  See above
-     */
-    public String getStatusMessage() {
-        return "OK";
-    }
-
-
-    /**
-     *  Return the content type returned from the server. Ie "text/html"
-     *
-     * @return  See above
-     */
-    public String getContentType() {
-        return "text/html";
-    }
-
-
-    /**
-     *  Return the content from the server as a string
-     *
-     * @return  See above
-     */
-    public String getContentAsString() {
-        return content_;
-    }
-
-
-    /**
-     *  Return the content from the server as an input stream
-     *
-     * @return  See above
-     * @exception  IOException If an IO problem occurs
-     */
-    public InputStream getContentAsStream() throws IOException {
-        return TextUtil.toInputStream( content_, encoding_ );
-    }
-
-
-    /**
-     * Return the URL that was used to load this page.
-     *
-     * @return The originating URL
-     */
-    public URL getUrl() {
-        return url_;
-    }
-
-
-    /**
-     * Return the response headers as a List of {@link org.apache.commons.httpclient.NameValuePair}s.
-     * 
-     * @return an empty list.
-     */
-    public List getResponseHeaders() {
-        return Collections.EMPTY_LIST;
-    }
-
-
-    /**
-     * Return the value of the specified header from this response.
-     *
-     * @param headerName The name of the header
-     * @return The value of the specified header
-     */
-    public String getResponseHeaderValue( final String headerName ) {
-        return "";
-    }
-
-
-    /**
-     * Return the time it took to load this web response in milliseconds.
-     * @return The load time.
-     */
-    public long getLoadTimeInMilliSeconds() {
-        return 0;
-    }
-
-    /**
-     * Return the content charset value.
-     * @return The charset value.
-     */
-    public String getContentCharSet() {
-        return encoding_;
-    }
-
-    /**
-     * Return the response body as byte array.
-     * @return response body.
-     */
-    public byte[] getResponseBody() {
-        try {
-            return content_.getBytes(encoding_);
-        }
-        catch( final UnsupportedEncodingException e ) {
-            e.printStackTrace();
-            return new byte[0];
-        }
+    public StringWebResponse(final String content, final URL originatingURL) {
+        super(getWebResponseData(content), originatingURL, SubmitMethod.GET, 0);
     }
 }
-
