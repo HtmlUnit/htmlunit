@@ -42,15 +42,17 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for XMLHttpRequest.
+ * Tests for {@link XMLHttpRequest}.
  * 
  * @author Daniel Gredler
+ * @author Marc Guillemot
  * @version $Revision$
  */
 public class XMLHttpRequestTest extends WebTestCase {
@@ -70,23 +72,74 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * Tests synchronous use of XMLHttpRequest, using Mozilla style object creation.
+     * Tests synchronous use of XMLHttpRequest.
      * @throws Exception If the test fails.
      */
-    public void testSyncUseWithMozillaStyleCreation() throws Exception {
+    public void testSyncUse() throws Exception {
+        testSyncUse(BrowserVersion.MOZILLA_1_0);
+        testSyncUse(BrowserVersion.INTERNET_EXPLORER_6_0);
+    }
+
+    /**
+     * Tests Mozilla and IE style object creation.
+     * @throws Exception If the test fails.
+     */
+    public void testCreation() throws Exception {
+        testCreation(BrowserVersion.MOZILLA_1_0, Arrays.asList(new String[] {"[object XMLHttpRequest]"}));
+        testCreation(BrowserVersion.INTERNET_EXPLORER_6_0, Arrays.asList( new String[] {"activeX created"}));
+    }
+
+    /**
+     * Tests Mozilla style object creation.
+     * @throws Exception If the test fails.
+     */
+    void testCreation(final BrowserVersion browser, final List expected) throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          alert(new XMLHttpRequest());\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "        {\n"
+            + "          new ActiveXObject('Microsoft.XMLHTTP');"
+            + "          alert('activeX created');"
+            + "        }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body></body>\n"
+            + "</html>";
+
+        createTestPageForRealBrowserIfNeeded(html, expected);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(browser, html, collectedAlerts);
+
+        assertEquals( expected, collectedAlerts );
+    }
+
+    /**
+     * Tests synchronous use of XMLHttpRequest.
+     * @throws Exception If the test fails.
+     */
+    void testSyncUse(final BrowserVersion browserVersion) throws Exception {
 
         final String html =
               "<html>\n"
             + "  <head>\n"
             + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
-            + "      var request;\n"
             + "      function testSync() {\n"
-            + "        request = new XMLHttpRequest();\n"
+            + "        var request;\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
             + "        alert(request.readyState);\n"
             + "        request.open('GET', '" + URL_SECOND.toExternalForm() + "', false);\n"
             + "        alert(request.readyState);\n"
-            + "        request.send();\n"
+            + "        request.send('');\n"
             + "        alert(request.readyState);\n"
             + "        alert(request.responseText);\n"
             + "      }\n"
@@ -98,11 +151,11 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final String xml =
               "<xml>\n"
-            + "  <content>blah</content>\n"
-            + "  <content>blah2</content>\n"
+            + "<content>blah</content>\n"
+            + "<content>blah2</content>\n"
             + "</xml>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = new WebClient(browserVersion);
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
         final MockWebConnection webConnection = new MockWebConnection( client );
@@ -119,8 +172,12 @@ public class XMLHttpRequestTest extends WebTestCase {
      * Tests asynchronous use of XMLHttpRequest, using Mozilla style object creation.
      * @throws Exception If the test fails.
      */
-    public void testAsyncUseWithMozillaStyleCreation() throws Exception {
+    public void testAsyncUse() throws Exception {
+        testAsyncUse(BrowserVersion.MOZILLA_1_0);
+        testAsyncUse(BrowserVersion.INTERNET_EXPLORER_6_0);
+    }
 
+    void testAsyncUse(final BrowserVersion browserVersion) throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -128,15 +185,19 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "    <script>\n"
             + "      var request;\n"
             + "      function testAsync() {\n"
-            + "        request = new XMLHttpRequest();\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
             + "        request.onreadystatechange = onReadyStateChange;\n"
             + "        alert(request.readyState);\n"
             + "        request.open('GET', '" + URL_SECOND.toExternalForm() + "', true);\n"
-            + "        request.send();\n"
+            + "        request.send('');\n"
             + "      }\n"
             + "      function onReadyStateChange() {\n"
             + "        alert(request.readyState);\n"
-            + "        alert(request.responseText);\n"
+            + "        if (request.readyState == 4)\n"
+            + "          alert(request.responseText);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -146,11 +207,11 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final String xml =
               "<xml2>\n"
-            + "  <content2>sdgxsdgx</content2>\n"
-            + "  <content2>sdgxsdgx2</content2>\n"
+            + "<content2>sdgxsdgx</content2>\n"
+            + "<content2>sdgxsdgx2</content2>\n"
             + "</xml2>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = new WebClient(browserVersion);
         final List collectedAlerts = Collections.synchronizedList( new ArrayList() );
         client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
         final MockWebConnection webConnection = new MockWebConnection( client );
@@ -159,7 +220,8 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection( webConnection );
         client.getPage( URL_FIRST );
 
-        final String[] s = new String[] { UNINITIALIZED, LOADING, "", LOADED, "", INTERACTIVE, xml, COMPLETED, xml };
+        final String[] s = new String[] { UNINITIALIZED,
+            LOADING, LOADING, LOADED, INTERACTIVE, COMPLETED, xml };
         final List alerts = Collections.synchronizedList( Arrays.asList( s ) );
 
         final int waitTime = 50;

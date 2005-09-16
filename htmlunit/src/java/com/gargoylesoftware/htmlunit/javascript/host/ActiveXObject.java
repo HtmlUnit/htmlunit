@@ -37,10 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.FunctionObject;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -76,7 +78,7 @@ public class ActiveXObject extends SimpleScriptable {
             final Context cx, final Object[] args, final Function ctorObj,
             final boolean inNewExpr) {
         if( args.length < 1 || args.length > 2 ) {
-            throw Context.reportRuntimeError( 
+            throw Context.reportRuntimeError(
                     "ActiveXObject Error: constructor must have one or two String parameters." );
         }
         if( args[0] == Context.getUndefinedValue() ) {
@@ -90,6 +92,16 @@ public class ActiveXObject extends SimpleScriptable {
              throw Context.reportRuntimeError( "ActiveXObject Error: the map is null." );
         }
         final Object mapValue = map.get(args[0]);
+
+        // quick and dirty hack
+        // the js configuration should probably be extended to allow to specify something like
+        // <class name="XMLHttpRequest"
+        //   classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest"
+        //   activeX="Microsoft.XMLHTTP">
+        // and to build the object from the config
+        if ("Microsoft.XMLHTTP".equals(args[0])) {
+            return buildXMLHTTPActiveX();
+        }
         if( mapValue == null ) {
             throw Context.reportRuntimeError( "ActiveXObject Error: no map for " + args[0] + "." );
         }
@@ -102,12 +114,68 @@ public class ActiveXObject extends SimpleScriptable {
         try {
             final Class xClass = Class.forName(xClassString);
             object = xClass.newInstance();
-        } 
+        }
         catch( final Exception e ) {
             throw Context.reportRuntimeError( "ActiveXObject Error: failed instantiating class " + xClassString +
                     " because " + e.getMessage() + "." );
         }
         return Context.toObject( object, ctorObj );
+    }
+
+    private static Scriptable buildXMLHTTPActiveX() {
+        final SimpleScriptable resp = new XMLHttpRequest();
+
+        // the properties
+        addProperty(resp, "onreadystatechange", "jsxGet_onreadystatechange", "jsxSet_onreadystatechange");
+        addProperty(resp, "readyState", "jsxGet_readyState", null);
+        addProperty(resp, "responseText", "jsxGet_responseText", null);
+        addProperty(resp, "responseXML", "jsxGet_responseXML", null);
+        addProperty(resp, "status", "jsxGet_status", null);
+        addProperty(resp, "statusText", "jsxGet_statusText", null);
+
+        // the functions
+        addFunction(resp, "abort", "jsxFunction_abort");
+        addFunction(resp, "abort", "jsxFunction_abort");
+        addFunction(resp, "getAllResponseHeaders", "jsxFunction_getAllResponseHeaders");
+        addFunction(resp, "getResponseHeader", "jsxFunction_getResponseHeader");
+        addFunction(resp, "open", "jsxFunction_open");
+        addFunction(resp, "send", "jsxFunction_send");
+        addFunction(resp, "setRequestHeader", "jsxFunction_setRequestHeader");
+
+        return resp;
+    }
+
+    private static void addFunction(final SimpleScriptable scriptable,
+            final String jsMethodName, final String javaMethodName) {
+        final Method javaFunction = getMethod(scriptable.getClass(), javaMethodName);
+        final FunctionObject fo = new FunctionObject(null, javaFunction, scriptable);
+        scriptable.defineProperty(jsMethodName, fo, READONLY);
+    }
+
+    static void addProperty(final SimpleScriptable scriptable, final String propertyName,
+            final String getterName, final String setterName) {
+        scriptable.defineProperty(propertyName, null,
+                getMethod(scriptable.getClass(), getterName),
+                getMethod(scriptable.getClass(), setterName), PERMANENT);
+    }
+
+    /**
+     * Gets the first method found of the class with the given name 
+     * @param clazz the class to search on
+     * @param name the name of the searched method
+     * @return <code>null</code> if not found
+     */
+    static Method getMethod(final Class clazz, final String name) {
+        if (name == null) {
+            return null;
+        }
+        final Method[] methods = clazz.getMethods();
+        for (int i=0; i<methods.length; ++i) {
+            if (methods[i].getName().equals(name)) {
+                return methods[i];
+            }
+        }
+        return null;
     }
 
     /**
