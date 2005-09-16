@@ -795,6 +795,7 @@
 
     <class name="XMLHttpRequest" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest" JSObject="true">
       <doclink url="http://developer.apple.com/internet/webcontent/xmlhttpreq.html" descr="Safari documenation"/>
+      <browser name="Netscape"/>
       <property name="onreadystatechange" readable="true" writable="true"/>
       <property name="readyState" readable="true" writable="false"/>
       <property name="responseText" readable="true" writable="false"/>

@@ -123,6 +123,11 @@ public class XMLHttpRequest extends SimpleScriptable {
             final Scriptable scope = stateChangeHandler_.getParentScope();
             final Object[] args = new Object[ 0 ];
             stateChangeHandler_.call( context, scope, this, args );
+            // quite strange but IE and Mozilla seem both to fire state loading twice
+            // in async mode (at least with html of the unit tests)
+            if (async_ && STATE_LOADING == state) {
+                stateChangeHandler_.call( context, scope, this, args );
+            }
         }
     }
 
@@ -292,7 +297,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             public void run() {
                 try {
                     setState( STATE_LOADED, context );
-                    if( content != null && ! "undefined".equals( content ) ) {
+                    if (content != null && !"undefined".equals(content) && content.length() > 0) {
                         requestSettings_.setRequestBody( content );
                     }
                     final Page page = wc.getPage( requestSettings_ );
@@ -340,5 +345,4 @@ public class XMLHttpRequest extends SimpleScriptable {
             throw Context.reportRuntimeError( "The open() method must be called before setRequestHeader()." );
         }
     }
-
 }
