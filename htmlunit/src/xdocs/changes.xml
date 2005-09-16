@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                 JavaScript: default conversion of host objects to string is now "[object Xxxx]" like what Mozilla does
+            </action>
             <action type="update" dev="mguillem" id="1289462" due-to="loddel">
                  DomNode.asXml() now produces correct xml encoding special characters.
             </action>

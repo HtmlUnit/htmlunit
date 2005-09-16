@@ -141,6 +141,21 @@ public class Location extends SimpleScriptable {
         return getUrl().getHost();
     }
 
+    /**
+     * Return the javascript default value of this object.  
+     * This is the javascript equivalent of a toString() in java when hint is String.class.
+     *
+     * @param hint A hint as to the format of the default value.
+     * @return the href if a String is asked else the result of parent's call
+     */
+    public Object getDefaultValue( final Class hint ) {
+        if (hint == null || String.class.equals(hint)) {
+            return jsxGet_href();
+        }
+        else {
+            return super.getDefaultValue(hint);
+        }
+    }
 
     /**
      * Return the string value of the location, which is the full URL.

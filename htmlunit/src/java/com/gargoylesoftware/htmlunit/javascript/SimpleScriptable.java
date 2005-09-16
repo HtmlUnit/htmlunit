@@ -258,7 +258,7 @@ public class SimpleScriptable extends ScriptableObject {
                 throw new ScriptException(e);
             }
         }
-        
+
         // this may help to find which properties htmlunit should impement
         if (result == NOT_FOUND) {
             getLog().debug("Property \"" + name + "\" of " + start + " not defined as fixed property");
@@ -293,9 +293,9 @@ public class SimpleScriptable extends ScriptableObject {
                     + "Cant set it to: " + newValue);
             }
             else {
-                getLog().debug("No configured setter \"" + name + "\" found for " 
+                getLog().debug("No configured setter \"" + name + "\" found for "
                     + start + ". Setting it as pure javascript property.");
-               
+
                 super.put(name, start, newValue);
             }
         }
@@ -312,7 +312,7 @@ public class SimpleScriptable extends ScriptableObject {
             }
             try {
                 setterMethod.invoke(
-                    simpleScriptable.findMatchingScriptable(start, setterMethod), 
+                    simpleScriptable.findMatchingScriptable(start, setterMethod),
                     new Object[]{ newValue } );
             }
             catch( final InvocationTargetException e ) {
@@ -369,9 +369,9 @@ public class SimpleScriptable extends ScriptableObject {
         if (object instanceof WebWindow) {
             return (SimpleScriptable) ((WebWindow) object).getScriptObject();
         }
-        
-        final DomNode domNode = (DomNode) object; 
-        
+
+        final DomNode domNode = (DomNode) object;
+
         final Object scriptObject = domNode.getScriptObject();
         if( scriptObject != null ) {
             return (SimpleScriptable)scriptObject;
@@ -416,7 +416,7 @@ public class SimpleScriptable extends ScriptableObject {
         return new Transformer() {
             public Object transform(final Object obj) {
                 return getScriptableFor(obj);
-            }    
+            }
         };
     }
 
@@ -491,7 +491,12 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The default value.
      */
     public Object getDefaultValue( final Class hint ) {
-        return toString();
+        if (String.class.equals(hint)) {
+            return "[object " + getClassName() + "]";
+        }
+        else {
+            return super.getDefaultValue(hint);
+        }
     }
 
     /**
