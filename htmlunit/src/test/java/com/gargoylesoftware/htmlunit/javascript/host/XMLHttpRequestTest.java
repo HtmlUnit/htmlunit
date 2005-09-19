@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -236,4 +237,51 @@ public class XMLHttpRequestTest extends WebTestCase {
         fail( "Unable to collect expected alerts within " + maxTime + "ms; collected alerts: " + collectedAlerts );
     }
 
+    /**
+     * Regression test for bug 1209692
+     * http://sourceforge.net/tracker/index.php?func=detail&aid=1209692&group_id=47038&atid=448266 
+     * @throws Exception If the test fails.
+     */
+    public void testRelativeUrl() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      function testSync() {\n"
+            + "        var request;\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.open('GET', '/foo.xml', false);\n"
+            + "        request.send('');\n"
+            + "        alert(request.readyState);\n"
+            + "        alert(request.responseText);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='testSync()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "<content>blah2</content>\n"
+            + "</xml>";
+
+        final WebClient client = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, html);
+        final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
+        webConnection.setResponse(urlPage2, xml, 200, "OK", "text/xml", Collections.EMPTY_LIST);
+        client.setWebConnection( webConnection );
+        client.getPage(URL_FIRST);
+
+        final List alerts = Arrays.asList( new String[] { COMPLETED, xml } );
+        assertEquals( alerts, collectedAlerts );
+    }
 }

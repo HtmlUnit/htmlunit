@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -259,8 +260,9 @@ public class XMLHttpRequest extends SimpleScriptable {
         final String user, final String password ) {
         // (URL + Method + User + Password) become a WebRequestSettings instance.
         try {
-            WebRequestSettings settings = new WebRequestSettings( new URL( url ) );
-            SubmitMethod submitMethod;
+            final URL fullUrl = ((HtmlPage) getWindow().getWebWindow().getEnclosedPage()).getFullyQualifiedUrl(url);
+            final WebRequestSettings settings = new WebRequestSettings(fullUrl);
+            final SubmitMethod submitMethod;
             if( "POST".equalsIgnoreCase( method ) ) {
                 submitMethod = SubmitMethod.POST;
             }
