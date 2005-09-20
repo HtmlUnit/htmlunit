@@ -91,9 +91,9 @@ public class FrameTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
-     * Regression test for 
+     * Regression test for
      * http://sourceforge.net/tracker/index.php?func=detail&aid=1101525&group_id=47038&atid=448266
      * @throws Exception if the test fails
      */
@@ -126,7 +126,7 @@ public class FrameTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -147,6 +147,42 @@ public class FrameTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Regression test for bug 1236048
+     * http://sourceforge.net/tracker/index.php?func=detail&aid=1236048&group_id=47038&atid=448266
+     * @throws Exception if the test fails
+     */
+    public void testWriteFrameset() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final String content1 = "<html><head>"
+            + "<script>"
+            + "    document.write('<frameset>');"
+            + "    document.write('<frame src=\"page2.html\" name=\"leftFrame\">');"
+            + "    document.write('</frameset>');"
+            + "</script>"
+            + "</head></html>";
+        final String content2 = "<html><head><script>alert(2)</script></head></html>";
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webClient.setWebConnection(webConnection);
+
+        webConnection.setDefaultResponse(content2);
+        webConnection.setResponse(URL_FIRST, content1);
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final List expectedAlerts = Arrays.asList( new String[]{"2"} );
+
+        webClient.getPage(URL_FIRST);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
