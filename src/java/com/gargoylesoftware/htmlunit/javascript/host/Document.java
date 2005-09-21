@@ -75,7 +75,7 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 
 /**
  * A JavaScript object for a Document.
- * 
+ *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
@@ -99,6 +99,7 @@ public final class Document extends NodeImpl {
     private ElementArray links_; // has to be a member to have equality (==) working
     private ElementArray images_; // has to be a member to have equality (==) working
     private ElementArray scripts_; // has to be a member to have equality (==) working
+    private ElementArray anchors_; // has to be a member to have equality (==) working
 
     /** The buffer that will be used for calls to document.write() */
     private final StringBuffer writeBuffer_ = new StringBuffer();
@@ -162,7 +163,7 @@ public final class Document extends NodeImpl {
         if (links_ == null) {
             links_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
-                links_.init(getHtmlPage(), 
+                links_.init(getHtmlPage(),
                         new HtmlUnitXPath("//a[@href] | //area[@href]"));
             }
             catch (final JaxenException e) {
@@ -170,6 +171,35 @@ public final class Document extends NodeImpl {
             }
         }
         return links_;
+    }
+
+    /**
+     * Return the value of the javascript attribute "anchors".
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/anchors.asp">
+     * MSDN documentation</a>
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543">
+     * Gecko DOM reference</a>
+     * @return The value of this attribute.
+     */
+    public Object jsxGet_anchors() {
+        if (anchors_ == null) {
+            anchors_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            try {
+                final String xpath;
+                if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+                    xpath = "//a[@name or @id]";
+                }
+                else {
+                    xpath = "//a[@name]";
+                }
+
+                anchors_.init(getHtmlPage(), new HtmlUnitXPath(xpath));
+            }
+            catch (final JaxenException e) {
+                throw Context.reportRuntimeError("Failed to initialize collection document.anchors: " + e.getMessage());
+            }
+        }
+        return anchors_;
     }
 
     /**
@@ -236,12 +266,12 @@ public final class Document extends NodeImpl {
             if (canAlreadyBeParsed(bufferedContent)) {
                 writeBuffer_.setLength(0);
                 getLog().debug("parsing buffered content: " + bufferedContent);
-    
+
                 final HtmlPage page = (HtmlPage) getDomNodeOrDie();
                 // get the node at which end the parsed content should be added
                 HtmlElement current = getLastHtmlElement(page.getDocumentElement());
                 getLog().debug("current: " + current);
-                
+
                 // quick and dirty workaround as long as IFRAME JS object aren't an HTMLElement
                 if (current instanceof HtmlInlineFrame) {
                     current = (HtmlElement) current.getParentNode();
@@ -254,7 +284,6 @@ public final class Document extends NodeImpl {
             }
         }
     }
-    
 
     /**
      * Indicates if the content is a well formed html snippet that can already be parsed to be added
@@ -268,7 +297,7 @@ public final class Document extends NodeImpl {
         if (count(contentLowerCase, "<script") != count(contentLowerCase, "</script>")) {
             return false;
         }
-            
+
         return true;
     }
 
@@ -297,13 +326,13 @@ public final class Document extends NodeImpl {
      * @return the searched node
      */
     HtmlElement getLastHtmlElement(final HtmlElement node) {
-        final DomNode lastChild = node.getLastChild(); 
-        if (lastChild == null 
+        final DomNode lastChild = node.getLastChild();
+        if (lastChild == null
                 || !(lastChild instanceof HtmlElement)
                 || lastChild instanceof HtmlScript) {
             return node;
         }
-        
+
         return getLastHtmlElement((HtmlElement) lastChild);
     }
 
@@ -343,7 +372,7 @@ public final class Document extends NodeImpl {
     /**
      * Adds a cookie
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cookie.asp">
-     * MSDN documentation</a> 
+     * MSDN documentation</a>
      * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
      */
     public void jsxSet_cookie(final String newCookie) {
@@ -368,11 +397,11 @@ public final class Document extends NodeImpl {
         final String name = StringUtils.substringBefore(nameValue, "=");
         final String value = StringUtils.substringAfter(nameValue, "=");
 
-        final Map attributes = new HashMap(); 
+        final Map attributes = new HashMap();
         // default values
         attributes.put("domain", currentURL.getHost());
-        // default value "" as it seems that org.apache.commons.httpclient.cookie.CookieSpec 
-        // doesn't like null as path 
+        // default value "" as it seems that org.apache.commons.httpclient.cookie.CookieSpec
+        // doesn't like null as path
         attributes.put("path", "");
 
         while (st.hasMoreTokens()) {
@@ -385,7 +414,7 @@ public final class Document extends NodeImpl {
                 attributes.put(token, Boolean.TRUE);
             }
         }
-        
+
         final String domain = (String) attributes.get("domain");
         final String path = (String) attributes.get("path");
         final Date expires = null;
@@ -498,7 +527,7 @@ public final class Document extends NodeImpl {
         if (!document.writeInCurrentDocument_) {
             document.getLog().warn("open() called when document is already open.");
         }
-        document.writeInCurrentDocument_ = false; 
+        document.writeInCurrentDocument_ = false;
         return null;
     }
 
@@ -567,7 +596,7 @@ public final class Document extends NodeImpl {
 
     /**
      * Creates a new HTML attribute with the specified name.
-     * 
+     *
      * @param attributeName the name of the attribute to create
      * @return an attribute with the specified name.
      */
@@ -629,7 +658,7 @@ public final class Document extends NodeImpl {
         }
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to null
-            
+
             final BrowserVersion browser = getHtmlPage().getWebClient().getBrowserVersion();
             if (browser.isIE()) {
                 final ElementArray elements = (ElementArray) jsxFunction_getElementsByName(id);
@@ -640,7 +669,7 @@ public final class Document extends NodeImpl {
                 getLog().warn("getElementById(" + id + ") did a getElementByName for Internet Explorer");
                 return result;
             }
-            getLog().warn("getElementById(" + id 
+            getLog().warn("getElementById(" + id
                 + ") cannot return a result as there isn't a javascript object for the html element ");
         }
         return result;
@@ -669,10 +698,10 @@ public final class Document extends NodeImpl {
 
     /**
      * Returns all HTML elements that have a "name" attribute with the given value
-     * 
+     *
      * Refer to <a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-71555259">
      * The DOM spec</a> for details.
-     * 
+     *
      * @param elementName - value of the "name" attribute to look for
      * @return NodeList of elements
      */
@@ -716,14 +745,14 @@ public final class Document extends NodeImpl {
             collection.init(htmlPage, new HtmlUnitXPath(xpathExpr));
         }
         catch (final JaxenException e) {
-            throw Context.reportRuntimeError("Failed to initialize collection (using xpath " + xpathExpr 
+            throw Context.reportRuntimeError("Failed to initialize collection (using xpath " + xpathExpr
                     + "): " + e.getMessage());
         }
 
-        final int size = collection.jsGet_length(); 
+        final int size = collection.jsGet_length();
         if (size == 1) {
             return collection.get(0, collection);
-        } 
+        }
         else if (size > 1) {
             return collection;
         }
@@ -745,7 +774,6 @@ public final class Document extends NodeImpl {
             return getScriptableFor(bodyElement);
         }
     }
-    
 
     /**
      * Gets the title of this document
@@ -754,7 +782,7 @@ public final class Document extends NodeImpl {
     public String jsxGet_title() {
         return getHtmlPage().getTitleText();
     }
-    
+
     /**
      * Set the title.
      * @param message The new title
@@ -762,11 +790,10 @@ public final class Document extends NodeImpl {
     public void jsxSet_title(final String message ) {
         getHtmlPage().setTitleText(message);
     }
-    
+
     /**
      * Get the readyState of this document.  This is an IE only function
      * @return the state - uninitilized, loading or complete - The interactive state is not returned
-     * 
      */
     public String jsxGet_readyState() {
         final DomNode node = getDomNodeOrDie();
@@ -777,7 +804,7 @@ public final class Document extends NodeImpl {
     }
 
     /**
-     * The domain name of the server that served the document, 
+     * The domain name of the server that served the document,
      * or null if the server cannot be identified by a domain name.
      * @return domain name
      * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147">
@@ -791,7 +818,7 @@ public final class Document extends NodeImpl {
                 domain_ = domain_.toLowerCase();
             }
         }
- 
+
         return domain_;
     }
 
@@ -830,9 +857,9 @@ public final class Document extends NodeImpl {
             return;
         }
 
-        if (newDomain.indexOf(".") == -1 
+        if (newDomain.indexOf(".") == -1
                 || !currentDomain.toLowerCase().endsWith("." + newDomain.toLowerCase())) {
-            throw Context.reportRuntimeError("Illegal domain value, can not set domain from: \"" 
+            throw Context.reportRuntimeError("Illegal domain value, can not set domain from: \""
                     + currentDomain + "\" to: \"" + newDomain +"\"");
         }
 
@@ -844,7 +871,7 @@ public final class Document extends NodeImpl {
             domain_ = newDomain;
         }
     }
-    
+
     /**
      * Return the value of the javascript attribute "scripts".
      * @return The value of this attribute.
@@ -860,6 +887,6 @@ public final class Document extends NodeImpl {
             }
         }
         return scripts_;
-    }    
+    }
 }
 

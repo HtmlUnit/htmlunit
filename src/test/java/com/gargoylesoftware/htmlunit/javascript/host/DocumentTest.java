@@ -254,14 +254,64 @@ public class DocumentTest extends WebTestCase {
             + "</form>"
             + "</body>"
             + "</html>";
-        
-        
+
+
         final List collectedAlerts = new ArrayList();
         final List expectedAlerts = Arrays.asList( new String[]{
             "0", "1", "1", "true"
         } );
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Tests for document.anchors
+     * @throws Exception if the test fails
+     */
+    public void testAnchors() throws Exception {
+        testAnchors(BrowserVersion.MOZILLA_1_0,
+                Arrays.asList( new String[]{ "0", "1", "1", "true", "name: end"} ));
+        testAnchors(BrowserVersion.INTERNET_EXPLORER_6_0,
+            Arrays.asList( new String[]{ "0", "3", "3", "true", "id: firstLink"} ));
+    }
+
+    /**
+     * Tests for document.anchors
+     * @throws Exception if the test fails
+     */
+    void testAnchors(final BrowserVersion browserVersion, final List expectedAlerts) throws Exception {
+        final String content =
+            "<html>"
+            + "<head>"
+            + "<script>"
+            + "var oCol = document.anchors;"
+            + "alert(oCol.length);"
+            + "function test()"
+            + "{"
+            + "    alert(oCol.length);"
+            + "    alert(document.anchors.length);"
+            + "    alert(document.anchors == oCol);"
+            + "    if (document.anchors[0].name)"
+            + "     alert('name: ' + document.anchors[0].name);"
+            + "    else"
+            + "     alert('id: ' + document.anchors[0].id);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + "<a href='foo.html' id='firstLink'>foo</a>"
+            + "<a href='foo2.html'>foo2</a>"
+            + "<a name='end'/>"
+            + "<a href=''>null2</a>"
+            + "<a id='endId'/>"
+            + "</body>"
+            + "</html>";
+
+        final List collectedAlerts = new ArrayList();
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(browserVersion, content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -293,8 +343,7 @@ public class DocumentTest extends WebTestCase {
             + "<a href=''>null2</a>"
             + "</body>"
             + "</html>";
-        
-        
+
         final List collectedAlerts = new ArrayList();
         final List expectedAlerts = Arrays.asList( new String[]{
             "0", "3", "3", "true", "firstLink"
@@ -303,7 +352,7 @@ public class DocumentTest extends WebTestCase {
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
-    }   
+    }
 
     /**
      * Ensures that <tt>document.createElement()</tt> works correctly.
@@ -347,10 +396,10 @@ public class DocumentTest extends WebTestCase {
             + "  </body>\n"
             + "</html>\n";
 
-        final List expectedAlerts = Arrays.asList( 
+        final List expectedAlerts = Arrays.asList(
                 new String[]{ "DIV", "1", "null", "DIV", "button1value", "text1value", "text" } );
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
-        
+
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals( "First", page.getTitleText() );
@@ -1120,7 +1169,7 @@ public class DocumentTest extends WebTestCase {
             firstPage.getHtmlElementById("div1");
             firstPage.getHtmlElementById("div2");
             firstPage.getHtmlElementById("div3");
-        } 
+        }
         catch (final ElementNotFoundException e) {
             fail("Element not written to page as expected: " + e.getMessage());
         }
@@ -1153,7 +1202,7 @@ public class DocumentTest extends WebTestCase {
 
         try {
             firstPage.getHtmlElementById("div1");
-        } 
+        }
         catch (final ElementNotFoundException e) {
             fail("Element not written to page as expected");
         }
@@ -1204,7 +1253,7 @@ public class DocumentTest extends WebTestCase {
         // and executed so the second page has been loaded.
         enclosedPage.getHtmlElementById( "second" );
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -1212,9 +1261,9 @@ public class DocumentTest extends WebTestCase {
         final String mainContent
             = "<html><head><title>First</title></head><body>"
             + "<script type='text/javascript'>"
-            + "document.write('<a id=\"blah\">Hello World</a>');" 
+            + "document.write('<a id=\"blah\">Hello World</a>');"
             + "alert(document.getElementById('blah').tagName);"
-            + "</script>" 
+            + "</script>"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -1222,7 +1271,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         assertEquals(collectedAlerts, Collections.singletonList("A"));
-    }    
+    }
 
     /**
      * @throws Exception if the test fails
@@ -1577,8 +1626,8 @@ public class DocumentTest extends WebTestCase {
             + "    }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>"
-            + "<form>" 
-            + "<input type='radio' name='name1' value='value1'>" 
+            + "<form>"
+            + "<input type='radio' name='name1' value='value1'>"
             + "<input type='radio' name='name1' value='value2'>"
             + "<input type='button' name='name2' value='value3'>"
             + "</form>"
@@ -1592,7 +1641,7 @@ public class DocumentTest extends WebTestCase {
         loadPage(firstContent, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -1609,8 +1658,8 @@ public class DocumentTest extends WebTestCase {
 
         final List expectedAlerts = Collections.singletonList("IAmTheBody");
         assertEquals(expectedAlerts, collectedAlerts);
-    }    
-    
+    }
+
     /**
      * Test the access to the images value.  This should return the 2 images in the document
      * @throws Exception if the test fails
@@ -1624,13 +1673,13 @@ public class DocumentTest extends WebTestCase {
             + "    alert(document.images == allImages);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>"
-            + "<img src='firstImage'>" 
+            + "<img src='firstImage'>"
             + "<script>"
             + "var allImages = document.images;\n"
             + "alert(allImages.length);\n"
             + "</script>"
-            + "<form>" 
-            + "<img src='2ndImage'>" 
+            + "<form>"
+            + "<img src='2ndImage'>"
             + "</form>"
             + "</body></html>";
 
@@ -1642,10 +1691,10 @@ public class DocumentTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(firstContent, expectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * Test setting and reading the title for an existing title
-     * 
+     *
      * @throws Exception if the test fails
      */
     public void testSettingTitle() throws Exception {
@@ -1657,7 +1706,7 @@ public class DocumentTest extends WebTestCase {
             + "    alert(document.title)\n"
             + "</script>\n"
             + "</body></html>";
- 
+
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("correct title", page.getTitleText());
@@ -1666,13 +1715,13 @@ public class DocumentTest extends WebTestCase {
             "correct title"
         } );
 
-        assertEquals("Test the alert", expectedAlerts, collectedAlerts );       
+        assertEquals("Test the alert", expectedAlerts, collectedAlerts );
     }
 
     /**
      * Test setting and reading the title for when the is not in
      * the page to begin
-     * 
+     *
      * @throws Exception if the test fails
      */
     public void testSettingMissingTitle() throws Exception {
@@ -1688,13 +1737,13 @@ public class DocumentTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         final List expectedAlerts = Arrays.asList( new String[]{ "correct title" } );
 
-        assertEquals("Test the alert", expectedAlerts, collectedAlerts );       
+        assertEquals("Test the alert", expectedAlerts, collectedAlerts );
     }
-    
+
     /**
      * Test setting and reading the title for when the is not in
      * the page to begin
-     * 
+     *
      * @throws Exception if the test fails
      */
     public void testSettingBlankTitle() throws Exception {
@@ -1705,7 +1754,7 @@ public class DocumentTest extends WebTestCase {
             + "    alert(document.title)\n"
             + "</script>\n"
             + "</body></html>";
- 
+
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("correct title", page.getTitleText());
@@ -1714,7 +1763,7 @@ public class DocumentTest extends WebTestCase {
             "correct title"
         } );
 
-        assertEquals("Test the alert", expectedAlerts, collectedAlerts );       
+        assertEquals("Test the alert", expectedAlerts, collectedAlerts );
     }
 
     /**
@@ -1739,11 +1788,11 @@ public class DocumentTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
-    
+
     /**
      * Test the ReadyState.  This should only work in IE.
      * Currently locked out since the browser type of code is not working.
-     * 
+     *
      * @throws Exception if the test fails
      */
     public void testReadyStateNonIE() throws Exception {
@@ -1772,10 +1821,10 @@ public class DocumentTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
-    
+
     /**
      * Test the ReadyState.  This should only work in IE
-     * 
+     *
      * @throws Exception if the test fails
      */
     public void testReadyStateIE() throws Exception {
@@ -1803,7 +1852,7 @@ public class DocumentTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
-    
+
     /**
      * Calling document.body before the page is fully loaded used to cause an exception.
      * @throws Exception if the test fails
@@ -1844,7 +1893,7 @@ public class DocumentTest extends WebTestCase {
         } );
         assertEquals( expectedAlerts, collectedAlerts );
     }
-    
+
     /**
      * IE has a bug which returns the element by name if it can not find it by ID.
      * @throws Exception if the test fails
@@ -1874,7 +1923,7 @@ public class DocumentTest extends WebTestCase {
         } );
         assertEquals( expectedAlerts, collectedAlerts );
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -1882,11 +1931,11 @@ public class DocumentTest extends WebTestCase {
         checkCookie(Document.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "", "first", false);
         checkCookie(Document.buildCookie("toto=", URL_FIRST), "toto", "", "", "first", false);
         checkCookie(Document.buildCookie("toto=foo;secure", URL_FIRST), "toto", "foo", "", "first", true);
-        checkCookie(Document.buildCookie("toto=foo;path=/myPath;secure", URL_FIRST), 
+        checkCookie(Document.buildCookie("toto=foo;path=/myPath;secure", URL_FIRST),
                 "toto", "foo", "/myPath", "first", true);
     }
-    
-    private void checkCookie(final Cookie cookie, final String name, final String value, 
+
+    private void checkCookie(final Cookie cookie, final String name, final String value,
             final String path, final String domain, final boolean secure) {
         assertEquals(name, cookie.getName());
         assertEquals(value, cookie.getValue());
@@ -2148,7 +2197,7 @@ public class DocumentTest extends WebTestCase {
         }
         fail();
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -2159,7 +2208,7 @@ public class DocumentTest extends WebTestCase {
             + "</script>\n"
             + "<frameset><frame src='blank.html'/></frameset>"
             + "</html>";
-         
+
         final URL baseURL = new URL("http://base/subdir/");
         final URL framesetURL = new URL(baseURL.toExternalForm() + "test.html");
         final URL frameURL = new URL(baseURL.toExternalForm() + "frame.html");
@@ -2171,15 +2220,15 @@ public class DocumentTest extends WebTestCase {
         webConnection.setResponseAsGenericHtml(frameURL, "frame");
         webConnection.setResponseAsGenericHtml(blankURL, "blank");
         client.setWebConnection( webConnection );
-         
+
         final HtmlPage framesetPage = (HtmlPage) client.getPage(framesetURL);
         final FrameWindow frame = (FrameWindow) framesetPage.getFrames().get(0);
-         
+
         assertNotNull(frame);
         assertEquals(frameURL.toExternalForm(), frame.getEnclosedPage().getWebResponse().getUrl().toExternalForm());
         assertEquals("frame", ((HtmlPage)frame.getEnclosedPage()).getTitleText());
     }
-     
+
      /**
      * @throws Exception if the test fails
      */
@@ -2196,7 +2245,7 @@ public class DocumentTest extends WebTestCase {
         loadPage(htmlContent, collectedAlerts);
         assertEquals(Collections.singletonList("2"), collectedAlerts);
     }
-    
+
     /**
      * document.XXX should first look at elements named XXX before using standard functions.
      * @throws Exception if the test fails
