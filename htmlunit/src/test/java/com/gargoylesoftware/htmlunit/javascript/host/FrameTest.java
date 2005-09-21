@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,6 +55,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version  $Revision$
  * @author Chris Erskine
  * @author Marc Guillemot
+ * @author Thomas Robbs
  */
 public class FrameTest extends WebTestCase {
     /**
@@ -184,6 +186,45 @@ public class FrameTest extends WebTestCase {
 
         webClient.getPage(URL_FIRST);
 
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Regression test fo Bug #1289060
+     * http://sourceforge.net/tracker/index.php?func=detail&aid=1289060&group_id=47038&atid=448266
+     *
+     * @throws Exception if the test fails
+     */
+    public void testFrameLoadedAfterParent() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+
+        final String mainContent
+            = "<html><head><title>first</title></head><body>"
+            + "<iframe name='testFrame' src='testFrame.html'></iframe>"
+            + "<div id='aButton'>test text</div>"
+            + "</body></html>";
+        final String frameContent
+            = "<html><head></head><body>"
+            + "<script>"
+            + "alert(top.document.getElementById('aButton').tagName);"
+            + "</script>"
+            + "</body></html>";
+
+        webConnection.setResponse(URL_GARGOYLE, mainContent);
+        webConnection.setResponse(new URL(URL_GARGOYLE.toString() + "testFrame.html" ), frameContent);
+
+        webClient.setWebConnection(webConnection);
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final List expectedAlerts = Arrays.asList( new String[]{"DIV"} );
+
+        webClient.getPage( URL_GARGOYLE );
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
