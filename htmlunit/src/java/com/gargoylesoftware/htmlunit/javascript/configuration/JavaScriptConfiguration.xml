@@ -95,7 +95,14 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="alinkColor" notImplemented="true" readable="true" writable="false"/>
-        <property name="anchors" notImplemented="true" readable="true" writable="false"/>
+        <property name="anchors" readable="true" writable="false">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/anchors.asp"
+                descr="MSDN documentation"/>
+            <doclink
+                url="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543"
+				descr="Gecko DOM reference"/>
+		</property>
         <property name="applets" notImplemented="true" readable="true" writable="false"/>
         <property name="body" readable="true" writable="false"/>
         <property name="bgColor" notImplemented="true" readable="true" writable="false"/>
