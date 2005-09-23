@@ -8,6 +8,7 @@
     Mike Bowler
     David K. Taylor
     Brad Clarke
+    Tony Graham
 -->
 
 <project name="HtmlUnit" default="jar" basedir=".">
@@ -29,6 +30,10 @@
 <!-- Some mirrors you can substitute are listed here: 
     http://maven.apache.org/faq.html#ibiblio-mirrors
 -->
+
+<!-- Default proxy properties defining that... no proxy is used -->
+<property name="proxy.host" value=""/>
+<property name="proxy.port" value="80"/>
     
 <path id="base.class.path">
     <pathelement path="${base.classes.dir}"/>
@@ -157,6 +162,8 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
 <target name="get-jars"
         description="Get all the required dependencies from a remote repository">
     
+    <setproxy proxyhost="${proxy.host}" proxyport="${proxy.port}"/>
+
     <!-- required -->
     <antcall target="get-dependency">
         <param name="type" value="required"/>
