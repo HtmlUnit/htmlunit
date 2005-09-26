@@ -911,6 +911,39 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * Test scrolls (real values don't matter currently).
+     *
+     * @throws Exception if the test fails
+     */
+    public void testScrolls() throws Exception {
+        final String content = "<html>\n"
+              + "<head>\n"
+              + "    <title>Test</title>\n"
+              + "</head>\n"
+              + "<body>"
+              + "</div></body>\n"
+              + "<div id='div1'>foo</div>"
+              + "<script>\n"
+              + "function alertScrolls(_oElt)\n"
+              + "{\n"
+              + "  alert(typeof _oElt.scrollHeight);\n"
+              + "  alert(typeof _oElt.scrollWidth);\n"
+              + "  alert(typeof _oElt.scrollLeft);\n"
+              + "  _oElt.scrollLeft = 123;\n"
+              + "  alert(typeof _oElt.scrollTop);\n"
+              + "  _oElt.scrollTop = 123;\n"
+              + "}\n"
+              + "alertScrolls(document.body);\n"
+              + "alertScrolls(document.getElementById('div1'));\n"
+              + "</script></body></html>";
+        final List expectedAlerts = Collections.nCopies(8, "number");
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * Test offsetParent property.
      *
      * @throws Exception if the test fails

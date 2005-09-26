@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                 JavaScript: added dummy implementation of the properties scrollHeight, scrollLeft,
+                 scrollTop and scrollWidth for html elements.
+            </action>
             <action type="update" dev="mguillem" id="1280127">
                  JavaScript: added document.anchors.
             </action>
