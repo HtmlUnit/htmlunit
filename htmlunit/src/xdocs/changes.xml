@@ -8,6 +8,9 @@
     <body>
         <release version="NextRelease" date="Unknown">
             <action type="update" dev="mguillem">
+                 JavaScript: in a frameset, document.body returns the frameset node.
+            </action>
+            <action type="update" dev="mguillem">
                  JavaScript: added dummy implementation of the properties scrollHeight, scrollLeft,
                  scrollTop and scrollWidth for html elements.
             </action>
