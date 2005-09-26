@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -765,7 +766,8 @@ public final class Document extends NodeImpl {
      * @return body element
      */
     public Object jsxGet_body() {
-        final List list = getHtmlPage().getDocumentElement().getHtmlElementsByTagName("body");
+        final List tagNames = Arrays.asList(new String[] {"body", "frameset"});
+        final List list = getHtmlPage().getDocumentElement().getHtmlElementsByTagNames(tagNames);
         if( list.size() == 0 ) {
             return NOT_FOUND;
         }

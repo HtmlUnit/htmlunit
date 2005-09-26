@@ -1647,16 +1647,29 @@ public class DocumentTest extends WebTestCase {
      */
     public void testDocumentBody_read() throws Exception {
 
-        final String firstContent = "<html><head><title>First</title></head>"
+        final String html = "<html><head><title>First</title></head>"
             + "<body id='IAmTheBody' onload='alert(document.body.id)'>"
             + "</body></html>";
 
+        final List expectedAlerts  = new ArrayList();
+        expectedAlerts.add("IAmTheBody");
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+
         final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
 
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
-        assertEquals("First", firstPage.getTitleText());
+        final String html2 = "<html>"
+            + "<frameset onload='alert(document.body.tagName)'>"
+            + "<frame src='about:blank' name='foo'>"
+            + "</frameset></html>";
 
-        final List expectedAlerts = Collections.singletonList("IAmTheBody");
+        expectedAlerts.clear();
+        collectedAlerts.clear();
+
+        expectedAlerts.add("FRAMESET");
+
+        loadPage(html2, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
