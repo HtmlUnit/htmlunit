@@ -103,6 +103,9 @@ public class HTMLElement extends NodeImpl {
     static final String POSITION_BEFORE_END = "beforeEnd";
     static final String POSITION_AFTER_END = "afterEnd";
 
+    private int scrollLeft_ = 0;
+    private int scrollTop_ = 0;
+
     /**
      * The tag names of the objects for which outerHTML is readonly 
      */
@@ -978,7 +981,7 @@ public class HTMLElement extends NodeImpl {
      * Get the children of the current node.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/children.asp">
      * MSDN documentation</a>
-     * @return the child at the given position 
+     * @return the child at the given position
      */
     public Object jsxGet_children() {
         final DomNode element = getDomNodeOrDie();
@@ -1259,5 +1262,62 @@ public class HTMLElement extends NodeImpl {
      */
     public String toString() {
         return "HTMLElement for " + getHtmlElementOrNull();
+    }
+
+
+    /**
+     * Get the scrollTop for this element.
+     * @return a dummy value (default is 0)
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/scrollTop.asp">
+     * MSDN documentation</a>
+     */
+    public int jsxGet_scrollTop() {
+        return scrollTop_;
+    }
+
+    /**
+     * Set the scrollTop for this element.
+     * @param scroll the new value
+     */
+    public void jsxSet_scrollTop(final int scroll) {
+        scrollTop_ = scroll;
+    }
+
+    /**
+     * Get the scrollLeft for this element.
+     * @return a dummy value (default is 0)
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/scrollLeft.asp">
+     * MSDN documentation</a>
+     */
+    public int jsxGet_scrollLeft() {
+        return scrollLeft_;
+    }
+
+    /**
+     * Set the scrollLeft for this element.
+     * @param scroll the new value
+     */
+    public void jsxSet_scrollLeft(final int scroll) {
+        scrollLeft_ = scroll;
+    }
+
+    /**
+     * Get the scrollHeight for this element.
+     * @return a dummy value of 10
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/scrollHeight.asp">
+     * MSDN documentation</a>
+     */
+    public int jsxGet_scrollHeight() {
+        return 10;
+    }
+
+    /**
+     * Get the scrollWidth for this element.
+     * @return a dummy value of 10
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/scrollWidth.asp">
+     * MSDN documentation</a>
+     */
+    public int jsxGet_scrollWidth() {
+        return 10;
     }
 }

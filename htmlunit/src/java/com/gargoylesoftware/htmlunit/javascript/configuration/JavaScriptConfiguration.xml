@@ -372,6 +372,10 @@
         <property name="parentElement" notImplemented="true" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
+        <property name="scrollHeight" readable="true" writable="false"/>
+        <property name="scrollLeft" readable="true" writable="true"/>
+        <property name="scrollTop" readable="true" writable="true"/>
+        <property name="scrollWidth" readable="true" writable="false"/>
         <property name="sourceIndex" notImplemented="true" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
