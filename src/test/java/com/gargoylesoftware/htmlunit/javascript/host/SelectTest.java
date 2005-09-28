@@ -42,6 +42,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -137,12 +138,12 @@ public class SelectTest extends WebTestCase {
         } );
 
         assertEquals( expectedAlerts, collectedAlerts );
-         
+
         final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
         final HtmlPage newPage = (HtmlPage) button.click();
-         
+
         final MockWebConnection webConnection = (MockWebConnection) newPage.getWebClient().getWebConnection();
-         
+
         assertEquals("http://test?submit=button", newPage.getWebResponse().getUrl());
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
     }
@@ -271,7 +272,7 @@ public class SelectTest extends WebTestCase {
             + "</SELECT></form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        
+
         assertEquals("first", page.getTitleText());
         assertEquals( Collections.singletonList("true"), collectedAlerts );
     }
@@ -408,13 +409,49 @@ public class SelectTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
+        final List expectedAlerts = Arrays.asList( new String[] {"4", "Four", "value4"} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "4", "Four", "value4"
-        } );
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
+     * Regression test for bug 1304741
+     * https://sourceforge.net/tracker/index.php?func=detail&aid=1304741&group_id=47038&atid=448266
+     * @throws Exception if the test fails
+     */
+    public void testAddWith1Arg() throws Exception {
+        final String content
+            = "<html><head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + " var oSelect = document.forms.testForm.testSelect;"
+            + " alert(oSelect.length);"
+            + " var opt = new Option('foo', '123');"
+            + " oSelect.add(opt);"
+            + " alert(oSelect.length);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + ""
+            + "<body onload='test()'>"
+            + "<form name='testForm'>"
+            + "<select name='testSelect'></select>"
+            + "</form>"
+            + "</body></html>";
+
+        final List expectedAlerts = Arrays.asList( new String[]{ "0", "1" } );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -551,7 +588,7 @@ public class SelectTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -580,7 +617,7 @@ public class SelectTest extends WebTestCase {
         } );
 
         assertEquals( expectedAlerts, collectedAlerts );
-    }    
+    }
 
     /**
      * changed made through JS should not trigger an onchange
@@ -598,13 +635,13 @@ public class SelectTest extends WebTestCase {
             + "<option value='R' selected>red</option>"
             + "</select>"
             + "</form>"
-            + "</body>" 
+            + "</body>"
             + "</html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlSelect selectA = page.getFormByName("myForm").getSelectByName("a");
         final HtmlOption optionA2 = selectA.getOption(1);
-         
+
         assertEquals("two", optionA2.asText());
 
         final HtmlSelect selectB = page.getFormByName("myForm").getSelectByName("b");
@@ -640,12 +677,12 @@ public class SelectTest extends WebTestCase {
             + "    </select>"
             + "</form>"
             + "</body></html>";
-    
+
         final List expectedAlerts = Arrays.asList( new String[]{
             "0", "1"
         } );
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-    
+
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
@@ -667,7 +704,7 @@ public class SelectTest extends WebTestCase {
             + "    </select>"
             + "</form>"
             + "</body></html>";
-    
+
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
