@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.Iterator;
 import java.util.List;
 
+import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -108,7 +109,21 @@ public class Select extends FormField {
         final HtmlSelect select = getHtmlSelect();
 
         final Option option = (Option) newOptionObject;
-        final Option beforeOption = (Option) beforeOptionObject;
+        final Option beforeOption;
+        if (beforeOptionObject == null) {
+            beforeOption = null;
+        }
+        else if (Context.getUndefinedValue().equals(beforeOptionObject)) {
+            if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+                beforeOption = null;
+            }
+            else {
+                throw Context.reportRuntimeError("Not enough arguments [SelectElement.add]");
+            }
+        }
+        else {
+            beforeOption = (Option) beforeOptionObject;
+        }
 
         HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
         if ( htmlOption == null ) {
@@ -122,7 +137,7 @@ public class Select extends FormField {
             final DomNode before = beforeOption.getDomNodeOrDie();
             before.insertBefore(htmlOption);
         }
-        
+
         // newly created HtmlOption needs to be associated to its js object
         if (option.getDomNodeOrNull() == null) {
             option.setDomNode( htmlOption );
@@ -181,7 +196,7 @@ public class Select extends FormField {
      */
     public void jsxSet_selectedIndex( final int index ) {
         final HtmlSelect htmlSelect = getHtmlSelect();
-        
+
         final Iterator iter = htmlSelect.getSelectedOptions().iterator();
         while (iter.hasNext()){
             final HtmlOption itemToUnSelect = (HtmlOption) iter.next();
@@ -191,13 +206,13 @@ public class Select extends FormField {
             htmlSelect.fakeSelectedAttribute("");
             return;
         }
-        
+
         final List allOptions = htmlSelect.getOptions();
-         
+
         final HtmlOption itemToSelect = (HtmlOption) allOptions.get(index);
         htmlSelect.setSelectedAttribute(itemToSelect, true);
     }
-    
+
     /**
      * Return the actual value of the selected Option
      * @return The value
@@ -267,7 +282,7 @@ public class Select extends FormField {
         return (HtmlSelect)getHtmlElementOrDie();
     }
 
-    
+
     /**
      * Selects the option with the specified value
      * @param newValue The value of the option to select
