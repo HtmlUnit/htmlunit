@@ -62,7 +62,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.BaseFrame.FrameWindow;
 
 /**
- * Tests for Document
+ * Tests for {@link Document}.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -2275,5 +2275,40 @@ public class DocumentTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testFrames() throws Exception {
+        final String html = "<html><head><script>"
+            + "function test(){"
+            + "  if (document.frames)"
+            + "  {"
+            + "    alert(document.frames == window.frames);"
+            + "    alert(document.frames.length);"
+            + "    alert(document.frames(0).location);"
+            + "    alert(document.frames('foo').location);"
+            + "  }"
+            + "  else"
+            + "    alert('not defined');"
+            + "}"
+            + "</script></head><body onload='test();'>"
+            + "<iframe src='about:blank' name='foo'></iframe>"
+            + "</body></html> ";
+
+        final List collectedAlerts = new ArrayList();
+
+        // test for IE
+        final List expectedAlerts = Arrays.asList( new String[]{
+            "true", "1", "about:blank", "about:blank"} );
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+
+        // test for Mozilla
+        collectedAlerts.clear();
+        loadPage(BrowserVersion.MOZILLA_1_0, html, collectedAlerts);
+        assertEquals(Collections.singletonList("not defined"), collectedAlerts);
     }
 }
