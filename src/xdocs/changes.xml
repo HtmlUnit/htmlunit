@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                 JavaScript: added support for document.frames (specific to IE).
+            </action>
             <action type="update" dev="mguillem" id="1304741">
                  JavaScript: when simulating IE, second parameter in Select.add can be omitted.
             </action>

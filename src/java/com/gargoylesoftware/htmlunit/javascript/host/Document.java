@@ -890,5 +890,15 @@ public final class Document extends NodeImpl {
         }
         return scripts_;
     }
+
+    /**
+     * Return the value of the frames property.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/frames.asp">
+     * MSDN documentation</a>
+     * @return The live collection of frames
+     */
+    public Object jsxGet_frames() {
+        return getWindow().jsxGet_frames();
+    }
 }
 
