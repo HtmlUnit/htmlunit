@@ -122,6 +122,12 @@
         </property>
         <property name="fgColor" notImplemented="true" readable="true" writable="false"/>
         <property name="forms" readable="true" writable="false"/>
+        <property name="frames" readable="true" writable="false">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/frames.asp"
+                descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+		</property>
         <property name="images" readable="true" writable="false">
             <javascript min-version="1.1"/>
         </property>
