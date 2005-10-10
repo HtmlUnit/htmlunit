@@ -159,10 +159,6 @@ public class FrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testWriteFrameset() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         final String content1 = "<html><head>"
             + "<script>"
             + "    document.write('<frameset>');"
@@ -196,10 +192,6 @@ public class FrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFrameLoadedAfterParent() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 
