@@ -166,6 +166,14 @@ public abstract class BaseFrame extends StyledElement {
         public HtmlPage getEnclosingPage() {
             return getPage();
         }
+
+        /**
+         * Gives a basic representation for debugging purposes
+         * @return a basic representation
+         */
+        public String toString() {
+            return "FrameWindow[name=\""+getName()+"\"]";
+        }
     }
 
     private final WebWindow enclosedWindow_ = new FrameWindow();

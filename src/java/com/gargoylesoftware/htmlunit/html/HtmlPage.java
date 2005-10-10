@@ -97,7 +97,7 @@ public final class HtmlPage extends DomNode implements Page {
 
     private static int FunctionWrapperCount_ = 0;
     private final Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
-    
+
     private static final int TAB_INDEX_NOT_SPECIFIED = -10;
     private static final int TAB_INDEX_OUT_OF_BOUNDS = -20;
 
@@ -116,7 +116,7 @@ public final class HtmlPage extends DomNode implements Page {
             final WebResponse webResponse,
             final WebWindow webWindow ) {
         this(originatingUrl, webResponse, webWindow);
-    }    
+    }
     /**
      *  Create an instance of HtmlPage
      *
@@ -155,6 +155,7 @@ public final class HtmlPage extends DomNode implements Page {
      */
     public void initialize() throws IOException {
         getDocumentElement().setReadyState(READY_STATE_COMPLETE);
+        loadFrames();
         executeOnLoadHandlersIfNeeded();
         executeRefreshIfNeeded();
     }
@@ -320,7 +321,7 @@ public final class HtmlPage extends DomNode implements Page {
     public List getAllForms() {
         return getForms();
     }
-    
+
     /**
      * Return a list of all the forms in the page.
      * @return All the forms.
@@ -746,7 +747,7 @@ public final class HtmlPage extends DomNode implements Page {
             final Scriptable thisObject,
             final Object[] args,
             final HtmlElement htmlElementScope) {
-        
+
         final WebWindow window = getEnclosingWindow();
         getWebClient().pushClearFirstWindow();
 
@@ -756,14 +757,14 @@ public final class HtmlPage extends DomNode implements Page {
         }
 
         final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
-        
+
         WebWindow firstWindow = getWebClient().popFirstWindow();
         if ( firstWindow == null) {
             firstWindow = window;
         }
         return new ScriptResult(result, firstWindow.getEnclosedPage());
     }
-    
+
     /**
      * Return the log object for this element.
      * @return The log object for this element.
@@ -771,7 +772,7 @@ public final class HtmlPage extends DomNode implements Page {
     protected Log getJsLog() {
         return javascriptLog_;
     }
- 
+
     /**
      * Internal use only.
      * @param srcAttribute The source attribute from the script tag.
@@ -888,7 +889,7 @@ public final class HtmlPage extends DomNode implements Page {
         }
         return "";
     }
-    
+
     /**
      * Set the text for the title of this page.  If there is not a title element
      * on this page, then one has to be generated.
@@ -914,7 +915,7 @@ public final class HtmlPage extends DomNode implements Page {
 
         titleElement.setNodeValue(message);
     }
-    
+
     /**
      * Get the first child of startElement that is an instance of the given class.
      * @param startElement The parent element
@@ -929,10 +930,10 @@ public final class HtmlPage extends DomNode implements Page {
                 return element;
             }
         }
-        
+
         return null;
     }
-    
+
     /**
      * Get the title element for this page.  Returns null if one is not found.
      * 
@@ -1066,7 +1067,7 @@ public final class HtmlPage extends DomNode implements Page {
         final boolean javaScriptEnabled = getWebClient().isJavaScriptEnabled();
         while( iterator.hasNext() ) {
             final HtmlMeta meta = (HtmlMeta) iterator.next();
-            if( meta.getHttpEquivAttribute().equalsIgnoreCase("refresh") 
+            if( meta.getHttpEquivAttribute().equalsIgnoreCase("refresh")
                     && (!javaScriptEnabled || getFirstParent(meta, HtmlNoScript.TAG_NAME) == null)) {
                 return meta.getContentAttribute();
             }
@@ -1074,7 +1075,7 @@ public final class HtmlPage extends DomNode implements Page {
 
         return getWebResponse().getResponseHeaderValue("Refresh");
     }
-    
+
     /**
      * Gets the first parent with the given node name
      * @param node the node to start with
@@ -1146,7 +1147,7 @@ public final class HtmlPage extends DomNode implements Page {
 
         throw new ElementNotFoundException("frame or iframe", "name", name);
     }
-    
+
     /**
      * Simulate pressing an access key.  This may change the focus, may click buttons and may invoke
      * javascript.
@@ -1335,14 +1336,14 @@ public final class HtmlPage extends DomNode implements Page {
             elements.remove(idElement);
             idMap_.put(idElement.getAttributeValue("id"), elements);
         }
-        
+
         // remove ids from children
         for (final Iterator iter=idElement.getChildElementsIterator(); iter.hasNext();) {
-            final HtmlElement child = (HtmlElement) iter.next(); 
+            final HtmlElement child = (HtmlElement) iter.next();
             removeIdElement(child);
         }
     }
-    
+
     /**
      * Executes the onchange script code for this element if this is appropriate. 
      * This means that the element must have an onchange script, script must be enabled 
@@ -1360,14 +1361,14 @@ public final class HtmlPage extends DomNode implements Page {
 
             final Event event = new Event(this, getScriptObject());
             final Object[] args = new Object[] {event};
-            
+
             final ScriptResult scriptResult =
                 executeJavaScriptFunctionIfPossible(
-                        onchange, 
+                        onchange,
                         (Scriptable)htmlElement.getScriptObject(),
                         args,
                         htmlElement);
-            
+
             if (getWebClient().getWebWindows().contains(getEnclosingWindow())) {
                 return getEnclosingWindow().getEnclosedPage(); // may be itself or a newly loaded one
             }
@@ -1388,9 +1389,6 @@ public final class HtmlPage extends DomNode implements Page {
         if (node instanceof HtmlElement) {
             addIdElement((HtmlElement) node);
         }
-        if (node instanceof BaseFrame) {
-            ((BaseFrame) node).loadInnerPage();
-        }
         if (node instanceof HtmlScript) {
             final HtmlScript scriptNode = (HtmlScript) node;
             getLog().debug("Script node added: " + scriptNode.asXml());
@@ -1409,10 +1407,36 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
+     * Loads the content of the contained frames. This is done after the page is completely
+     * loaded to allow script contained in the frames to reference elements from the
+     * page located after the closing </frame> tag. 
+     */
+    void loadFrames() {
+        final List frameTags = Arrays.asList(new String[] {"frame", "iframe"});
+        final List frames = getDocumentElement().getHtmlElementsByTagNames(frameTags);
+        for (final Iterator iter=frames.iterator(); iter.hasNext();) {
+            ((BaseFrame) iter.next()).loadInnerPage();
+        }
+    }
+
+    /**
      * @see DomNode#asXml()
      */
     public String asXml() {
         return getDocumentElement().asXml();
     }
 
+    /**
+     * Gives a basic representation for debugging purposes
+     * @return a basic representation
+     */
+    public String toString() {
+        final StringBuffer buffer = new StringBuffer();
+        buffer.append("HtmlPage(")
+            .append(getWebResponse().getUrl())
+            .append(")@")
+            .append(hashCode());
+
+        return buffer.toString();
+    }
 }
