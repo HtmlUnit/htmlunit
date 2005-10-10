@@ -1432,11 +1432,10 @@ public final class HtmlPage extends DomNode implements Page {
      */
     public String toString() {
         final StringBuffer buffer = new StringBuffer();
-        buffer.append("HtmlPage(")
-            .append(getWebResponse().getUrl())
-            .append(")@")
-            .append(hashCode());
-
+        buffer.append("HtmlPage(");
+        buffer.append(getWebResponse().getUrl());
+        buffer.append(")@");
+        buffer.append(hashCode());
         return buffer.toString();
     }
 }
