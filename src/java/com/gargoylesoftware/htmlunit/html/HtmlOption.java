@@ -94,7 +94,15 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @param selected true if this option should be selected.
      */
     public void setSelected( final boolean selected ) {
-        getEnclosingSelectOrDie().setSelectedAttribute(this, selected);
+        final HtmlSelect select = (HtmlSelect) getEnclosingElement("select");
+        if (select != null) {
+            getEnclosingSelectOrDie().setSelectedAttribute(this, selected);
+        }
+        else {
+            // for instance from JS for an option created by document.createElement('option')
+            // and not yet added to a select
+            setSelectedInternal(selected);
+        }
     }
 
 
@@ -114,12 +122,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * Reset the option to its original selected state.
      */
     public void reset() {
-        if( initialSelectedState_ ) {
-            setAttributeValue("selected", "selected");
-        }
-        else {
-            removeAttribute("selected");
-        }
+        setSelectedInternal(initialSelectedState_);
     }
 
 
@@ -242,5 +245,19 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
         }
 
         return addedNode;
+    }
+
+    /**
+     * For internal use only.
+     * Sets/remove the selected attribute to reflect the select state
+     * @param selected the selected status
+     */
+    void setSelectedInternal(final boolean selected) {
+        if (selected) {
+            setAttributeValue("selected", "selected");
+        }
+        else {
+            removeAttribute("selected");
+        }
     }
 }

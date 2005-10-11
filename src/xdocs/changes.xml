@@ -7,9 +7,13 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1323425">
+                Javascript: allow to change selected attribute of options created with
+				document.createElement('option') and not yet added to a select.
+            </action>
             <action type="update" dev="mguillem" id="1289060">
-                 Load frames content first after the page is loaded to allow access to the whole page
-.                for scripts contained in the frames.
+                Load frames content first after the page is loaded to allow access to the whole page
+                for scripts contained in the frames.
             </action>
             <action type="update" dev="mguillem">
                  JavaScript: added support for document.frames (specific to IE).

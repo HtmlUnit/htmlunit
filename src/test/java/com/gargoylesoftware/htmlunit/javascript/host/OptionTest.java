@@ -93,4 +93,25 @@ public class OptionTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+    /**
+     * Regression test for bug 1323425
+     * http://sourceforge.net/tracker/index.php?func=detail&aid=1323425&group_id=47038&atid=448266
+     * @throws Exception if the test fails
+     */
+    public void testSelectingOrphanedOptionCreatedByDocument() throws Exception {
+        final String content = "<html>"
+            + "<body>"
+            + "<form name='myform'/>"
+            + "<script language='javascript'>"
+            + "var select = document.createElement('select');"
+            + "var opt = document.createElement('option');"
+            + "opt.value = 'x';"
+            + "opt.selected = true;"
+            + "select.appendChild(opt);"
+            + "document.myform.appendChild(select);"
+            + "</script>"
+            + "</body></html>";
+        loadPage(content);
+    }
 }

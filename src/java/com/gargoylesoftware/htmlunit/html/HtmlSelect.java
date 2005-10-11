@@ -119,8 +119,8 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             final DescendantElementsIterator iterator = new DescendantElementsIterator();
             while(iterator.hasNext()) {
                 final HtmlElement element = iterator.nextElement();
-                if(element instanceof HtmlOption) {
-                    HtmlOption option = (HtmlOption)element;
+                if (element instanceof HtmlOption) {
+                    final HtmlOption option = (HtmlOption) element;
                     if(firstOption == null) {
                         firstOption = option; //remember in case we need it
                     }
@@ -136,7 +136,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
                 int theSize;
                 try {
                     theSize = Integer.parseInt(getSizeAttribute());
-                } 
+                }
                 catch (final NumberFormatException e) {
                     // Differet browsers have different (and odd) tolerances for invalid
                     // size attributes so we'll just assume anything invalid is "1"
@@ -163,7 +163,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public List getAllOptions() {
         return getOptions();
     }
-    
+
     /**
      *  Return a List containing all the options
      *
@@ -295,13 +295,13 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      */
     public Page setSelectedAttribute( final HtmlOption selectedOption, final boolean isSelected ) {
         if( isMultipleSelectEnabled() ) {
-            setSelected( selectedOption, isSelected );
+            selectedOption.setSelectedInternal(isSelected);
         }
         else {
-            final Iterator iterator = getAllOptions().iterator();
+            final Iterator iterator = getOptions().iterator();
             while( iterator.hasNext() ) {
                 final HtmlOption option = ( HtmlOption )iterator.next();
-                setSelected(option, option == selectedOption && isSelected );
+                option.setSelectedInternal(option == selectedOption && isSelected);
             }
         }
 
@@ -331,17 +331,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         Assert.notNull( "optionValues", optionValues );
         fakeSelectedValues_ = optionValues;
     }
-
-
-    private void setSelected(final HtmlOption option, final boolean isSelected ) {
-        if( isSelected ) {
-            option.setAttributeValue( "selected", "selected" );
-        }
-        else {
-            option.removeAttribute( "selected" );
-        }
-    }
-
 
     /**
      *  Return an array of KeyValuePairs that are the values that will be sent
@@ -374,7 +363,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
                     pairsList.add(new KeyValuePair( name, fakeSelectedValues_[i] ));
                 }
             }
-            pairs = (KeyValuePair[]) pairsList.toArray(new KeyValuePair[pairsList.size()]); 
+            pairs = (KeyValuePair[]) pairsList.toArray(new KeyValuePair[pairsList.size()]);
         }
         return pairs;
     }
@@ -384,7 +373,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * Return the value of this element to what it was at the time the page was loaded.
      */
     public void reset() {
-        final Iterator iterator = getAllOptions().iterator();
+        final Iterator iterator = getOptions().iterator();
         while( iterator.hasNext() ) {
             final HtmlOption option = (HtmlOption)iterator.next();
             option.reset();
@@ -478,7 +467,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
 
         final List options;
         if( isMultipleSelectEnabled() ) {
-            options = getAllOptions();
+            options = getOptions();
         }
         else {
             options = getSelectedOptions();
