@@ -75,11 +75,11 @@ public abstract class ClickableElement extends StyledElement {
 
 
     /**
-     *  Simulate clicking this link
+     * Simulate clicking this element.
      *
-     * @return  The page that occupies this window after this element is
-     * clicked.  It may be the same window or it may be a freshly loaded one.
-     * @exception  IOException If an IO error occurs
+     * @return The page that occupies this window after this element is
+     * clicked. It may be the same window or it may be a freshly loaded one.
+     * @exception IOException If an IO error occurs
      */
     public Page click()
         throws IOException {
@@ -93,7 +93,7 @@ public abstract class ClickableElement extends StyledElement {
         final HtmlPage page = getPage();
 
         final Function function = getEventHandler("onclick");
-                
+
         if (function != null && page.getWebClient().isJavaScriptEnabled()) {
             boolean stateUpdated = false;
             if (isStateUpdateFirst()) {
@@ -101,13 +101,13 @@ public abstract class ClickableElement extends StyledElement {
                 stateUpdated = true;
             }
             final Event event = new Event(this, getScriptObject());
-            
+
             final Object[] args = new Object[] {event};
-            
-            final ScriptResult scriptResult = 
+
+            final ScriptResult scriptResult =
                 page.executeJavaScriptFunctionIfPossible(
                     function, (Scriptable) getScriptObject(), args, this);
-            
+
             final Page scriptPage = scriptResult.getNewPage();
             if( stateUpdated || scriptResult.getJavaScriptResult().equals( Boolean.FALSE ) ) {
                 return scriptPage;
@@ -124,8 +124,9 @@ public abstract class ClickableElement extends StyledElement {
 
     /**
      * This method will be called if there either wasn't an onclick handler or
-     * there was but the result of that handler was true.  This is the default
-     * behaviour of clicking the element.  The default implementation returns
+     * there was but the result of that handler wasn't <code>false</code>.
+     * This is the default behaviour of clicking the element.  
+     * The default implementation returns
      * the current page - subclasses requiring different behaviour (like
      * {@link HtmlSubmitInput}) will override this method.
      *
