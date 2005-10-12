@@ -48,11 +48,12 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- *  Tests for ClickableElementTest
+ * Tests for {@link ClickableElement}.
  *
- * @version  $Revision$
- * @author  David K. Taylor
+ * @version $Revision$
+ * @author David K. Taylor
  * @author Chris Erskine
+ * @author Marc Guillemot
  */
 public class ClickableElementTest extends WebTestCase {
     /**
@@ -87,7 +88,7 @@ public class ClickableElementTest extends WebTestCase {
      * @param expectedAlerts List of expected popup values
      * @throws Exception if the test fails
      */
-    private void onClickPageTest(final String htmlContent, final int numClicks, final List expectedAlerts) 
+    private void onClickPageTest(final String htmlContent, final int numClicks, final List expectedAlerts)
         throws Exception {
         final BrowserVersion bv = new BrowserVersion("Netscape", "7", "", "1.2", 7);
         final WebClient client = new WebClient(bv);
@@ -963,19 +964,16 @@ public class ClickableElementTest extends WebTestCase {
     public void testVariable_onClick() throws Exception {
         onClickSimpleTest("var");
     }
-    
+
     /**
      * Test setting onClick handler from inside the onClick handler
      *
      * @throws Exception if the test fails
      */
     public void testSetOnClick() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final List expectedAlerts = Arrays.asList(new String[] {"foo"});
-        onClickPageTest("<body><form>" +
-                "<button type='button' id='clickId' onclick='alert(\"foo\"); onclick==\"\";'>Item</button>" +
-                "</form></body>", 2, expectedAlerts);
-    }    
+        onClickPageTest("<html><body><form>" +
+                "<button type='button' id='clickId' onclick='alert(\"foo\"); onclick=null;'>Item</button>" +
+                "</form></body></html>", 2, expectedAlerts);
+    }
 }

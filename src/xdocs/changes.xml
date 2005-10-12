@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1260369">
+                Javascript: allow to set current node's property within onclick event handler.
+            </action>
             <action type="update" dev="mguillem" id="1209682">
                 Javascript: XMLHttpRequest now accepts non xml responses.
             </action>

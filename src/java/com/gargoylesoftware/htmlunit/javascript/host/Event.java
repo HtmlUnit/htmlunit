@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author <a hrer="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
  * @author Mike Bowler
  * @author Chris Erskine
+ * @author Marc Guillemot
  */
 public class Event extends SimpleScriptable {
 
@@ -65,8 +66,9 @@ public class Event extends SimpleScriptable {
         super();
 
         currentTarget_ = currentTarget;
+        setParentScope((SimpleScriptable) domNode.getScriptObject());
 
-        super.setDomNode(domNode, false);
+        setDomNode(domNode, false);
     }
 
     /**

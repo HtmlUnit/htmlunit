@@ -95,7 +95,7 @@ public class SimpleScriptable extends ScriptableObject {
 
     private JavaScriptConfiguration getJavaScriptConfiguration() {
         final BrowserVersion browserVersion
-            = getDomNodeOrDie().getPage().getWebClient().getBrowserVersion();
+            = getWindow().getWebWindow().getWebClient().getBrowserVersion();
         return JavaScriptConfiguration.getInstance(browserVersion);
     }
 
@@ -531,5 +531,23 @@ public class SimpleScriptable extends ScriptableObject {
      */
     protected Scriptable getStartingScope() {
         return (Scriptable) Context.getCurrentContext().getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+    }
+
+    /**
+     * 
+     * @see org.mozilla.javascript.Scriptable#has(java.lang.String, org.mozilla.javascript.Scriptable)
+     */
+    public boolean has(final String name, final Scriptable start) {
+        final SimpleScriptable simpleScriptable = (SimpleScriptable) start;
+
+        final JavaScriptConfiguration configuration = simpleScriptable.getJavaScriptConfiguration();
+        // getters and setters are defined on prototypes
+        if ((start == start.getPrototype() || simpleScriptable.getDomNodeOrNull() != null)
+                && configuration.getPropertyReadMethod(getClass(), name) != null) {
+            return true;
+        }
+        else {
+            return super.has(name, start);
+        }
     }
 }
