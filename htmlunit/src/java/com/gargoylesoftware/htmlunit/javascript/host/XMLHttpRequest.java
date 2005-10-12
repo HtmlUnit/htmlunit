@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * A JavaScript object for a XMLHttpRequest.
  * 
  * @author Daniel Gredler
+ * @author Marc Guillemot
  * @version $Revision$
  * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>
  */
@@ -84,7 +85,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     private WebRequestSettings requestSettings_;
     private boolean async_;
     private Thread requestThread_;
-    private XmlPage page_;
+    private Page page_;
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -105,7 +106,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Sets the event handler that fires on every state change.
      * @param stateChangeHandler The event handler that fires on every state change.
      */
-    public void jsxSet_onreadystatechange( Function stateChangeHandler ) {
+    public void jsxSet_onreadystatechange( final Function stateChangeHandler ) {
         stateChangeHandler_ = stateChangeHandler;
     }
 
@@ -153,7 +154,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     public String jsxGet_responseText() {
         if( page_ != null ) {
-            return page_.getContent();
+            return page_.getWebResponse().getContentAsString();
         }
         else {
             getLog().debug( "XMLHttpRequest.responseText was retrieved before the response was available." );
@@ -166,11 +167,11 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return A DOM-compatible document object version of the data retrieved from the server.
      */
     public Object jsxGet_responseXML() {
-        if( page_ != null ) {
-            return page_.getXmlDocument();
+        if (page_ != null && page_ instanceof XmlPage) {
+            return ((XmlPage) page_).getXmlDocument();
         }
         else {
-            getLog().error( "XMLHttpRequest.responseXML was retrieved before the response was available." );
+            getLog().debug("XMLHttpRequest.responseXML was called but the response is " + page_);
             return null;
         }
     }
@@ -302,15 +303,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                     if (content != null && !"undefined".equals(content) && content.length() > 0) {
                         requestSettings_.setRequestBody( content );
                     }
-                    final Page page = wc.getPage( requestSettings_ );
-                    final String contentType = page.getWebResponse().getContentType();
-                    if( "text/xml".equals( contentType ) == false ) {
-                        setState( STATE_LOADING, context );
-                        final String msg = "The Content-Type of the data returned from the server must be 'text/xml'; "
-                            + "actual content type was '" + contentType + "'.";
-                        throw Context.reportRuntimeError( msg );
-                    }
-                    page_ = (XmlPage) page;
+                    page_ = wc.getPage( requestSettings_ );
                     setState( STATE_INTERACTIVE, context );
                     setState( STATE_COMPLETED, context );
                 }

@@ -277,11 +277,46 @@ public class XMLHttpRequestTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(URL_FIRST, html);
         final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
-        webConnection.setResponse(urlPage2, xml, 200, "OK", "text/xml", Collections.EMPTY_LIST);
+        webConnection.setResponse(urlPage2, xml, "text/xml");
         client.setWebConnection( webConnection );
         client.getPage(URL_FIRST);
 
         final List alerts = Arrays.asList( new String[] { COMPLETED, xml } );
+        assertEquals( alerts, collectedAlerts );
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    public void testResponseText_NotXml() throws Exception {
+        final String html = "<html><head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  var request;"
+            + "  if (window.XMLHttpRequest)"
+            + "    request = new XMLHttpRequest();"
+            + "  else if (window.ActiveXObject)"
+            + "    request = new ActiveXObject('Microsoft.XMLHTTP');"
+            + "  request.open('GET', 'foo.txt', false);"
+            + "  request.send('');"
+            + "  alert(request.responseText);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'></body></html>";
+
+        final WebClient client = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, html);
+        final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.txt");
+        webConnection.setResponse(urlPage2, "bla bla", "text/plain");
+        client.setWebConnection( webConnection );
+        client.getPage(URL_FIRST);
+
+        final List alerts = Arrays.asList( new String[] { "bla bla" } );
         assertEquals( alerts, collectedAlerts );
     }
 }
