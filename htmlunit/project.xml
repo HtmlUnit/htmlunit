@@ -333,7 +333,7 @@
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
-            <version>3.0-rc3</version>
+            <version>3.0-rc4</version>
             <type>jar</type>
             <url>http://jakarta.apache.org/commons/httpclient</url>
             <properties>
