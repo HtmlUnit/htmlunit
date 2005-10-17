@@ -153,7 +153,7 @@ public class HtmlForm extends ClickableElement {
      * @return  A new Page that reflects the results of this submission
      * @exception  IOException If an IO error occurs
      */
-    Page submit( final SubmittableElement submitElement ) throws IOException {
+    public Page submit( final SubmittableElement submitElement ) throws IOException {
 
         final String action = getActionAttribute();
         final HtmlPage htmlPage = getPage();
