@@ -292,37 +292,56 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Sends the specified content to the server in an HTTP request and receives the response.
      * @param content The body of the message being sent with the request.
      */
-    public void jsxFunction_send( final String content ) {
-        // Create and start a thread in which to execute the request.
-        final WebClient wc = getWindow().getWebWindow().getWebClient();
-        final Context context = Context.getCurrentContext();
-        final Thread t = new Thread( "XMLHttpRequest.send() Thread" ) {
-            public void run() {
-                try {
-                    setState( STATE_LOADED, context );
-                    if (content != null && !"undefined".equals(content) && content.length() > 0) {
-                        requestSettings_.setRequestBody( content );
+    public void jsxFunction_send( final Object content ) {
+        if (async_) {
+            // Create and start a thread in which to execute the request.
+            final Thread t = new Thread( "XMLHttpRequest.send() Thread" ) {
+                public void run() {
+                    final Context context = Context.enter();
+                    try {
+                        doSend(content, context);
                     }
-                    page_ = wc.getPage( requestSettings_ );
-                    setState( STATE_INTERACTIVE, context );
-                    setState( STATE_COMPLETED, context );
+                    finally {
+                        Context.exit();
+                    }
                 }
-                catch( final IOException e ) {
-                    setState( STATE_LOADING, context );
-                    throw Context.reportRuntimeError( "Unable to send the XMLHttpRequest: " + e );
+            };
+            requestThread_ = t;
+            getLog().debug("Starting XMLHttpRequest thread for asynchronous request");
+            requestThread_.start();
+        }
+        else {
+            doSend(content, Context.getCurrentContext());
+        }
+    }
+
+    /**
+     * The real send job
+     * @param content the content to send
+     * @param context the current context
+     */
+    private void doSend(final Object content, final Context context) {
+        final WebClient wc = getWindow().getWebWindow().getWebClient();
+        try {
+            setState( STATE_LOADED, context );
+            if (Context.getUndefinedValue().equals(content) && wc.getBrowserVersion().isNetscape()) {
+                throw Context.reportRuntimeError("XMLHttpRequest.send: not enough arguments");
+            }
+
+            if (content != null && !Context.getUndefinedValue().equals(content)) {
+                final String body = Context.toString(content);
+                if (body.length() > 0) {
+                    getLog().debug("Setting request body to: " + body);
+                    requestSettings_.setRequestBody(body);
                 }
             }
-        };
-        requestThread_ = t;
-        requestThread_.start();
-        // If the call is to be synchronous, wait for the thread to return.
-        if( ! async_ ) {
-            try {
-                requestThread_.join();
-            }
-            catch( final InterruptedException e ) {
-                getLog().info( t.getName() + " interrupted; abort() probably called." );
-            }
+            page_ = wc.getPage( requestSettings_ );
+            setState( STATE_INTERACTIVE, context );
+            setState( STATE_COMPLETED, context );
+        }
+        catch( final IOException e ) {
+            setState( STATE_LOADING, context );
+            throw Context.reportRuntimeError( "Unable to send the XMLHttpRequest: " + e );
         }
     }
 

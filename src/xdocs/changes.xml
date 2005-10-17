@@ -8,6 +8,10 @@
     <body>
         <release version="NextRelease" date="Unknown">
             <action type="update" dev="mguillem">
+                JavaScript: XMLHttpRequest.send now accepts null as parameter 
+				and fails when simulating Mozilla if called with no parameter like the browser does.
+            </action>
+            <action type="update" dev="mguillem">
                 Upgraded commons-httpclient to version 3.0rc4.
             </action>
             <action type="update" dev="mguillem" id="1260369">

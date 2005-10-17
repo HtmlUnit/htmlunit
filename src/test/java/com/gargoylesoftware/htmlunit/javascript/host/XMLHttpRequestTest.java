@@ -217,7 +217,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse( URL_FIRST, html );
-        webConnection.setResponse( URL_SECOND, xml, 200, "OK", "text/xml", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_SECOND, xml, "text/xml");
         client.setWebConnection( webConnection );
         client.getPage( URL_FIRST );
 
@@ -318,5 +318,78 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final List alerts = Arrays.asList( new String[] { "bla bla" } );
         assertEquals( alerts, collectedAlerts );
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    public void testSendNull() throws Exception {
+        final String html = "<html><head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  var request;"
+            + "  if (window.XMLHttpRequest)"
+            + "    request = new XMLHttpRequest();"
+            + "  else if (window.ActiveXObject)"
+            + "    request = new ActiveXObject('Microsoft.XMLHTTP');"
+            + "  request.open('GET', 'foo.txt', false);"
+            + "  request.send(null);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'></body></html>";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setDefaultResponse("");
+        client.setWebConnection( webConnection );
+        client.getPage(URL_FIRST);
+    }
+
+    /**
+     * Test calls to send() without any argument
+     * @throws Exception if the test fails.
+     */
+    public void testSendNoArg() throws Exception {
+        testSendNoArg(BrowserVersion.INTERNET_EXPLORER_6_0);
+        // Mozilla fails if no arg is provided.
+        try {
+            testSendNoArg(BrowserVersion.MOZILLA_1_0);
+            fail("Should have thrown");
+        }
+        catch (final Exception e) {
+            // nothing
+            assertTrue(e.getMessage().indexOf("not enough arguments") != -1);
+        }
+
+    }
+    /**
+     * @throws Exception if the test fails.
+     */
+    private void testSendNoArg(final BrowserVersion browserVersion) throws Exception {
+        final String html = "<html><head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  var request;"
+            + "  if (window.XMLHttpRequest)"
+            + "    request = new XMLHttpRequest();"
+            + "  else if (window.ActiveXObject)"
+            + "    request = new ActiveXObject('Microsoft.XMLHTTP');"
+            + "  request.open('GET', 'foo.txt', false);"
+            + "  request.send();"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'></body></html>";
+
+        final WebClient client = new WebClient(browserVersion);
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setDefaultResponse("");
+        client.setWebConnection( webConnection );
+        client.getPage(URL_FIRST);
     }
 }
