@@ -246,7 +246,7 @@ public class HtmlForm extends ClickableElement {
      * @return The list of {@link KeyValuePair}s.
      */
     public final List getParameterListForSubmit( final SubmittableElement submitElement ) {
-        final Collection submittableElements = getAllSubmittableElements(submitElement);
+        final Collection submittableElements = getSubmittableElements(submitElement);
 
         final List parameterList = new ArrayList( submittableElements.size() );
         final Iterator iterator = submittableElements.iterator();
