@@ -8,6 +8,9 @@
     <body>
         <release version="NextRelease" date="Unknown">
             <action type="update" dev="mguillem">
+                JavaScript: added support for property contentWindow on (i)frames.
+            </action>
+            <action type="update" dev="mguillem">
                 Upgraded rhino JavaScript library to 1.6R2. 
                 Noteworthy is that the JavaScript stack trace is now added in the normal Java 
                 stack trace (bug 274467 reported by Daniel Gredler, 

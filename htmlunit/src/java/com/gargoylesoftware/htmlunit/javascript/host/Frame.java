@@ -42,7 +42,8 @@ import org.mozilla.javascript.Function;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 
 /**
- * A JavaScript object for a frame and iframe.
+ * A JavaScript object for a {@link com.gargoylesoftware.htmlunit.html.HtmlFrame}
+ * and {@link com.gargoylesoftware.htmlunit.html.HtmlInlineFrame}.
  * 
  * @version $Revision$
  * @author Marc Guillemot
@@ -82,6 +83,18 @@ public class Frame extends HTMLElement {
      */
     public Document jsxGet_contentDocument() {
         return ((Window) getFrame().getEnclosedWindow().getScriptObject()).jsxGet_document();
+    }
+
+    /**
+     * Returns the window the frame contains, if any
+     * @return the window
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref5.html">
+     * Gecko DOM Reference</a>
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/contentwindow.asp">
+     * MSDN documentation</a>
+     */
+    public Window jsxGet_contentWindow() {
+        return (Window) getFrame().getEnclosedWindow().getScriptObject();
     }
 
     /**
