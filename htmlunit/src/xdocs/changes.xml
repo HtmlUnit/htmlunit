@@ -7,11 +7,15 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1239285">
+                Fill frame windows with about:blank when the declaring tag is found 
+                to allow JavaScript to run on it before the real content is loaded.
+            </action>
             <action type="update" dev="yourgod">
                 Upgraded commons-httpclient to version 3.0rc4 in ant as well.
                 Made HtmlForm.submit(SubmittableElement) public to simulate 
                 keyboard submits (more to come later).
-            </action>        
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: XMLHttpRequest.send now accepts null as parameter 
 				and fails when simulating Mozilla if called with no parameter like the browser does.
