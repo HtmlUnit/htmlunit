@@ -154,6 +154,29 @@ public class FrameTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    public void testContentWindow() throws Exception {
+        final String content
+            = "<html><head><title>first</title>"
+                + "<script>"
+                + "function test()\n"
+                + "{\n"
+                + "  alert(document.getElementById('myFrame').contentWindow == frames.foo);\n"
+                + "}\n"
+                + "</script></head>"
+                + "<frameset rows='*' onload='test()'>"
+                + "<frame name='foo' id='myFrame' src='about:blank'/>"
+                + "</frameset>"
+                + "</html>";
+        final List expectedAlerts = Arrays.asList( new String[]{"true"} );
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+    /**
      * Regression test for bug 1236048
      * http://sourceforge.net/tracker/index.php?func=detail&aid=1236048&group_id=47038&atid=448266
      * @throws Exception if the test fails

@@ -239,6 +239,7 @@
         <property name="contentDocument" readable="true" writable="false">
             <browser name="Netscape"/>
         </property>
+        <property name="contentWindow" readable="true" writable="false"/>
     </class>
 
 
