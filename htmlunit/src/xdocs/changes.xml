@@ -7,6 +7,12 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                Upgraded rhino JavaScript library to 1.6R2. 
+                Noteworthy is that the JavaScript stack trace is now added in the normal Java 
+                stack trace (bug 274467 reported by Daniel Gredler, 
+                see http://www.mozilla.org/rhino/rhino16R2.html for full change log).
+            </action>
             <action type="update" dev="mguillem" id="1239285">
                 Fill frame windows with about:blank when the declaring tag is found 
                 to allow JavaScript to run on it before the real content is loaded.

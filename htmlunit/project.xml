@@ -366,7 +366,7 @@
         <dependency>
             <groupId>rhino</groupId>
             <artifactId>js</artifactId>
-            <version>1.6R1</version>
+            <version>1.6R2</version>
             <type>jar</type>
             <url>http://www.mozilla.org/rhino</url>
             <properties>

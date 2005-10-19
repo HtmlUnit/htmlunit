@@ -63,7 +63,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
 /**
- * Tests for Window
+ * Tests for {@link Window}.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -493,13 +493,13 @@ public class WindowTest extends WebTestCase {
             + "<body></body></html>";
 
         final List collectedAlerts = new ArrayList();
-        final List expectedAlertsMoz = Arrays.asList( new String[] {"null"} ); 
+        final List expectedAlertsMoz = Arrays.asList( new String[] {"null"} );
         loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
         createTestPageForRealBrowserIfNeeded(content, expectedAlertsMoz);
         assertEquals(expectedAlertsMoz, collectedAlerts);
-        
+
         collectedAlerts.clear();
-        final List expectedAlertsIE = Arrays.asList( new String[] {"about:blank"} ); 
+        final List expectedAlertsIE = Arrays.asList( new String[] {"about:blank"} );
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
         createTestPageForRealBrowserIfNeeded(content, expectedAlertsIE);
         assertEquals(expectedAlertsIE, collectedAlerts);
@@ -787,8 +787,6 @@ public class WindowTest extends WebTestCase {
 
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
         loadPage(content, collectedAlerts);
-        
-        // 
     }
 
     /**
@@ -917,7 +915,6 @@ public class WindowTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -1114,7 +1111,7 @@ public class WindowTest extends WebTestCase {
         } );
         assertEquals( expectedAlerts, collectedAlerts );
     }
-    
+
     /**
      * @throws Exception If the test fails
      */
@@ -1129,17 +1126,17 @@ public class WindowTest extends WebTestCase {
         final String bContent
             = "<html><head><title>B</title></head><body>"
             + "<button id='clickme' onClick='opener.location.href=\"../c.html\";'>Click me</a>"
-            + "</body></html>";        
+            + "</body></html>";
         final String cContent
             = "<html><head><title>C</title></head><body></body></html>";
         final String failContent
-            = "<html><head><title>FAILURE!!!</title></head><body></body></html>";        
+            = "<html><head><title>FAILURE!!!</title></head><body></body></html>";
 
         webConnection.setResponse(new URL("http://opener/test/a.html"), aContent);
         webConnection.setResponse(new URL("http://opener/test/b/b.html"), bContent);
         webConnection.setResponse(new URL("http://opener/test/c.html"), cContent);
         webConnection.setResponse(new URL("http://opener/c.html"), failContent);
-        
+
         webClient.setWebConnection( webConnection );
 
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage(
@@ -1154,7 +1151,7 @@ public class WindowTest extends WebTestCase {
         final HtmlButton buttonB = (HtmlButton)secondPage.getHtmlElementById("clickme");
         final HtmlPage thirdPage = (HtmlPage)buttonB.click();
         assertNotNull("C", thirdPage);
-        assertEquals( "C", thirdPage.getTitleText() );        
+        assertEquals( "C", thirdPage.getTitleText() );
     }
 
     /**
@@ -1205,7 +1202,7 @@ public class WindowTest extends WebTestCase {
         final String secondContent
             = "<html><head><title>Second</title></head><body>"
              + "<h1>Second</h1><form>"
-             + "<input type='submit' name='action' value='Close' id='button' " 
+             + "<input type='submit' name='action' value='Close' id='button' "
              + "onclick='window.close(); return false;'>"
              + "</form></body></html>";
 
@@ -1238,8 +1235,8 @@ public class WindowTest extends WebTestCase {
         assertEquals(firstWindow, webClient.getCurrentWindow());
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-    }    
-    
+    }
+
     /**
      * Test that length of frames collection is retrieved
      * @throws Exception if the test fails
@@ -1485,7 +1482,7 @@ public class WindowTest extends WebTestCase {
             + "      window.execScript('alert(\"BadLanguage\")', 'BadLanguage');\n"
             + "    }\n"
             + "    catch(e) {\n"
-            + "      alert(e.message);\n"
+            + "      alert(e.message.substr(0, 20)); // msg now contains info on error location\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -1684,11 +1681,11 @@ public class WindowTest extends WebTestCase {
         assertEquals(2, eventCatcher.getEventCount());
 
         final WebWindow secondWebWindow = (WebWindow) eventCatcher.getEventAt(0).getSource();
-        
+
         assertSame(webClient.getCurrentWindow(), secondWebWindow);
         assertNotSame(firstWebWindow, secondWebWindow);
     }
-    
+
     /**
      * Open a window with only text for content, then try to set focus to it.
      *
@@ -1697,7 +1694,7 @@ public class WindowTest extends WebTestCase {
     public void testOpenWindow_text() throws Exception {
         if (notYetImplemented()) {
             return;
-        }        
+        }
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
@@ -1730,10 +1727,10 @@ public class WindowTest extends WebTestCase {
         assertEquals(2, eventCatcher.getEventCount());
 
         final WebWindow secondWebWindow = (WebWindow) eventCatcher.getEventAt(0).getSource();
-        
+
         assertSame(webClient.getCurrentWindow(), secondWebWindow);
         assertNotSame(firstWebWindow, secondWebWindow);
-    }    
+    }
     /**
      * Open a window with only text for content, then try to set focus to it.
      *
@@ -1774,7 +1771,7 @@ public class WindowTest extends WebTestCase {
         assertEquals(2, eventCatcher.getEventCount());
 
         final WebWindow secondWebWindow = (WebWindow) eventCatcher.getEventAt(0).getSource();
-        
+
         assertSame(webClient.getCurrentWindow(), secondWebWindow);
         assertNotSame(firstWebWindow, secondWebWindow);
     }
