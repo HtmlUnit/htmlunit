@@ -218,10 +218,6 @@ public class HtmlFrameSetTest extends WebTestCase {
     public void testFrameOnloadAccessOtherFrame()
         throws Exception {
 
-        if (notYetImplemented()) {
-            return;
-        }
-
         final String framesContent
             = "<html><head><title>Main</title>"
             + "</head>"

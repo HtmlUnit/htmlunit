@@ -154,8 +154,8 @@ public final class HtmlPage extends DomNode implements Page {
      * @throws IOException If an IO problem occurs.
      */
     public void initialize() throws IOException {
-        getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         loadFrames();
+        getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         executeOnLoadHandlersIfNeeded();
         executeRefreshIfNeeded();
     }

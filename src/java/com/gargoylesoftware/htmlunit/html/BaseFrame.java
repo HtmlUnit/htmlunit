@@ -190,6 +190,20 @@ public abstract class BaseFrame extends StyledElement {
 
         final WebClient webClient = page.getWebClient();
         webClient.registerWebWindow(enclosedWindow_);
+
+        try {
+            // put about:blank in the window to allow JS to run on this frame before the
+            // real content is loaded
+            getPage().getWebClient().pushClearFirstWindow();
+            getPage().getWebClient().getPage(enclosedWindow_, new WebRequestSettings(WebClient.URL_ABOUT_BLANK));
+            getPage().getWebClient().popFirstWindow();
+        }
+        catch (final FailingHttpStatusCodeException e) {
+            // should never occur
+        }
+        catch (final IOException e) {
+            // should never occur
+        }
     }
 
 
