@@ -8,6 +8,10 @@
     <body>
         <release version="NextRelease" date="Unknown">
             <action type="update" dev="mguillem">
+                Upgraded jaxen to 1.1-beta-8 (even if it's a "beta", this is the version 
+                recommended by jaxen developers).
+            </action>
+            <action type="update" dev="mguillem">
                 JavaScript: added support for property contentWindow on (i)frames.
             </action>
             <action type="update" dev="mguillem">
