@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -931,6 +932,9 @@ public class HtmlFormTest extends WebTestCase {
         testUrlAfterSubmit("get", "foo?foo=12", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
         testUrlAfterSubmit("post", "foo", "foo");
         testUrlAfterSubmit("post", "foo?foo=12", "foo?foo=12");
+        testUrlAfterSubmit("post", "", "");
+        testUrlAfterSubmit("post", "?a=1&b=2", "?a=1&b=2");
+        testUrlAfterSubmit(new URL("http://first?a=1&b=2"), "post", "", "");
 
         // test with anchor: the expected values are not correct as the anchors are discarded
         // but in a first time, as long as htmlunit doesn't handle them correctly...
@@ -964,7 +968,8 @@ public class HtmlFormTest extends WebTestCase {
      * @param expectedUrlEnd The expected url
      * @throws Exception if the test fails
      */
-    private void testUrlAfterSubmit(final String method, final String action, final String expectedUrlEnd)
+    private void testUrlAfterSubmit(final URL url, final String method, final String action,
+            final String expectedUrlEnd)
         throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>"
@@ -973,12 +978,25 @@ public class HtmlFormTest extends WebTestCase {
             + "<input type='text' name='nonAscii' value='Floßfahrt'/>"
             + "<input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(htmlContent, null, url);
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         final Page page2 = form.submit("button");
 
-        assertEquals(URL_GARGOYLE.toExternalForm() + expectedUrlEnd,
+        assertEquals(url.toExternalForm() + expectedUrlEnd,
                 page2.getWebResponse().getUrl());
+    }
+
+    /**
+     * Utility for {@link #testUrlAfterSubmit()}. Calls {@link #testUrlAfterSubmit(URL, String, String, String)} with
+     * URL_GARGOYLE.
+     * @param method The form method to use
+     * @param action The form action to use
+     * @param expectedUrlEnd The expected url
+     * @throws Exception if the test fails
+     */
+    private void testUrlAfterSubmit(final String method, final String action, final String expectedUrlEnd)
+        throws Exception {
+        testUrlAfterSubmit(URL_GARGOYLE, method, action, expectedUrlEnd);
     }
 
     /**
