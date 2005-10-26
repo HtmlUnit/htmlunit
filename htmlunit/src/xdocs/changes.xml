@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1334541" due-to="ianzlovejoy">
+				Fixed requested url for post form with empty action and orginal page containing
+                a query string or action containing only a query string.
+            </action>
             <action type="update" dev="mguillem">
                 Upgraded jaxen to 1.1-beta-8 (even if it's a "beta", this is the version 
                 recommended by jaxen developers).

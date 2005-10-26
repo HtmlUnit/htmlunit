@@ -67,6 +67,7 @@ import org.apache.commons.httpclient.auth.CredentialsProvider;
 import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -857,7 +858,7 @@ public class WebClient {
      * Sets the client's homepage.
      * @param homePage the new homepage URL
      */
-    public void setHomePage(String homePage) {
+    public void setHomePage(final String homePage) {
         homePage_ = homePage;
     }
 
@@ -1248,7 +1249,7 @@ public class WebClient {
 
 
     /**
-     * Expand a relative url relative to the specified base. In most situations
+     * Expands a relative url relative to the specified base. In most situations
      * this is the same as <code>new URL(baseUrl, relativeUrl)</code> but
      * there are some cases that URL doesn't handle correctly. See 
      * <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>
@@ -1263,10 +1264,10 @@ public class WebClient {
     public static URL expandUrl( final URL baseUrl, final String relativeUrl )
         throws MalformedURLException {
 
-        String parseUrl = relativeUrl;
-        if (parseUrl == null) {
-            parseUrl = "";
+        if (StringUtils.isEmpty(relativeUrl)) {
+            return baseUrl;
         }
+        String parseUrl = relativeUrl;
 
         // section 2.4.2 - parsing scheme
         final int schemeIndex = parseUrl.indexOf(":");

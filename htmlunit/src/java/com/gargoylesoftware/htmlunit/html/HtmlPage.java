@@ -87,7 +87,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 public final class HtmlPage extends DomNode implements Page {
 
     private final WebClient webClient_;
-    private final URL originatingUrl_;
     private       String originalCharset_ = null;
     private final WebResponse webResponse_;
     private final Map idMap_ = new HashMap(); // a map of (id, List(HtmlElement))
@@ -132,7 +131,6 @@ public final class HtmlPage extends DomNode implements Page {
         super(null);
 
         webClient_ = webWindow.getWebClient();
-        originatingUrl_ = originatingUrl;
         webResponse_ = webResponse;
         setEnclosingWindow(webWindow);
 
@@ -354,13 +352,13 @@ public final class HtmlPage extends DomNode implements Page {
         final List baseElements = getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("base"));
         final URL baseUrl;
         if( baseElements.isEmpty() ) {
-            baseUrl = originatingUrl_;
+            baseUrl = webResponse_.getUrl();
         }
         else {
             final HtmlBase htmlBase = (HtmlBase)baseElements.get(0);
             final String href = htmlBase.getHrefAttribute();
             if (href == null || href.length() == 0) {
-                baseUrl = originatingUrl_;
+                baseUrl = webResponse_.getUrl();
             }
             else {
                 baseUrl = new URL(href);
@@ -1023,7 +1021,7 @@ public final class HtmlPage extends DomNode implements Page {
                 getLog().error( "Malformed refresh string (no ';' but not a number): " + refreshString, e );
                 return;
             }
-            url = originatingUrl_;
+            url = webResponse_.getUrl();
         }
         else {
             // Format: <meta http-equiv='refresh' content='10;url=http://www.blah.com'>

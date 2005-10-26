@@ -544,10 +544,10 @@ public class WebClientTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
-        
+
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlAnchor link = (HtmlAnchor) page.getAnchors().get(0);
-        final Page page2 = link.click(); 
+        final Page page2 = link.click();
         assertEquals("http://first/foo.html?id=UYIUYTY//YTYUY..F", page2.getWebResponse().getUrl());
     }
 
@@ -559,7 +559,7 @@ public class WebClientTest extends WebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>"
             + "</body></html>";
-        
+
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -578,24 +578,24 @@ public class WebClientTest extends WebTestCase {
         assertEquals(
             "http://first?a=b%20c&d=%C3%A9%C3%A8",
             page.getWebResponse().getUrl().toExternalForm());
-        
+
         // with query string partially encoded
         page = (HtmlPage) client.getPage(new URL("http://first?a=b%20c&d=e f"));
         assertEquals(
             "http://first?a=b%20c&d=e%20f",
             page.getWebResponse().getUrl().toExternalForm());
-        
+
         // with anchor
         page = (HtmlPage) client.getPage(new URL("http://first?a=b c#myAnchor"));
         assertEquals(
             "http://first?a=b%20c#myAnchor",
             page.getWebResponse().getUrl().toExternalForm());
-        
+
         // with query string containing encoded "&", "=", "+", ",", and "$"
         page = (HtmlPage) client.getPage(new URL("http://first?a=%26%3D%20%2C%24"));
         assertEquals(
             "http://first?a=%26%3D%20%2C%24",
-            page.getWebResponse().getUrl().toExternalForm());        
+            page.getWebResponse().getUrl().toExternalForm());
     }
 
     /**
@@ -605,7 +605,7 @@ public class WebClientTest extends WebTestCase {
     public void testLoadFilePage() throws Exception {
 
         // create a real file to read
-        // it could be usefull to have existing files to test in a special location in filesystem. 
+        // it could be usefull to have existing files to test in a special location in filesystem.
         // It will be really needed when we have to test binary files using the file protocol.
         final String htmlContent = "<html><head><title>foo</title></head><body></body></html>";
         final File currentDirectory = new File((new File("")).getAbsolutePath());
@@ -615,7 +615,7 @@ public class WebClientTest extends WebTestCase {
         FileUtils.writeStringToFile(tmpFile, htmlContent, encoding);
 
         final URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
-        
+
         final WebClient client = new WebClient();
         final HtmlPage page = (HtmlPage) client.getPage(fileURL);
 
@@ -647,13 +647,13 @@ public class WebClientTest extends WebTestCase {
         FileUtils.writeStringToFile(tmpFile, xmlContent, encoding);
 
         final URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
-        
+
         final WebClient client = new WebClient();
         final XmlPage page = (XmlPage) client.getPage(fileURL);
 
         assertEquals(xmlContent, page.getWebResponse().getContentAsString());
         // "text/xml" or "application/xml", it doesn't matter
-        assertEquals("/xml", StringUtils.substring(page.getWebResponse().getContentType(), -4)); 
+        assertEquals("/xml", StringUtils.substring(page.getWebResponse().getContentType(), -4));
         assertEquals(200, page.getWebResponse().getStatusCode());
     }
 
@@ -883,13 +883,13 @@ public class WebClientTest extends WebTestCase {
         final HtmlPage htmlPage = (HtmlPage)page;
         assertEquals("first", htmlPage.getTitleText() );
     }
-    
+
     /**
      * Verifies that exceptions are thrown on failing status code and the returned page
      * is still set as the current page in the WebWindow.
      * 
      * @throws Exception if test fails
-     */  
+     */
     public void testGetPageFailingStatusCode() throws Exception {
         final String firstContent = "<html><head><title>Hello World</title></head><body></body></html>";
 
@@ -909,14 +909,14 @@ public class WebClientTest extends WebTestCase {
         try {
             webClient.getPage(URL_FIRST);
             fail("Should have thrown");
-        } 
+        }
         catch (final FailingHttpStatusCodeException e) {
             assertEquals(e.getStatusCode(), 500);
             assertEquals(e.getStatusMessage(), "BOOM");
         }
         final HtmlPage page = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
         assertEquals("Hello World", page.getTitleText());
-    }    
+    }
 
     /**
      * Test {@link WebClient#expandUrl(URL,String)} for the case where an anchor name
@@ -925,8 +925,10 @@ public class WebClientTest extends WebTestCase {
      */
     public void testExpandUrl() throws Exception {
         assertEquals("http://first", WebClient.expandUrl(URL_FIRST, "#second"));
+        assertEquals("http://first?a=1&b=2", WebClient.expandUrl(new URL("http://first?a=1&b=2"), ""));
+        assertEquals("http://first?b=2&c=3", WebClient.expandUrl(new URL("http://first?a=1&b=2"), "?b=2&c=3"));
     }
-    
+
     /**
      * @throws Exception If the test fails.
      */
@@ -941,12 +943,12 @@ public class WebClientTest extends WebTestCase {
     public void testRefreshHandlerAccessors() {
         final WebClient webClient = new WebClient();
         assertInstanceOf( webClient.getRefreshHandler(), ImmediateRefreshHandler.class );
-        
+
         final RefreshHandler handler = new ImmediateRefreshHandler() {};
         webClient.setRefreshHandler( handler );
         assertSame( handler, webClient.getRefreshHandler() );
     }
-    
+
     /** 
      * Test the script preprocessor
      * @throws IOException if the test fails
@@ -1005,7 +1007,7 @@ public class WebClientTest extends WebTestCase {
         });
         client.getPage( new URL( "http://www.yahoo.com" ) );
     }
-    
+
     /** 
      * Test the ScriptPreProcessor's ability to filter out a javascript method
      * that is not implemented without affecting the rest of the page.
@@ -1013,7 +1015,7 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testScriptPreProcessor_UnimplementedJavascript() throws Exception {
-        
+
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection( client );
         final String content = "<html><head><title>foo</title></head><body>"
@@ -1037,7 +1039,7 @@ public class WebClientTest extends WebTestCase {
         final List alerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(alerts));
         client.getPage( new URL( "http://page" ) );
-        
+
         assertEquals(1, alerts.size());
         assertEquals("implemented function", alerts.get(0).toString());
     }
@@ -1061,7 +1063,7 @@ public class WebClientTest extends WebTestCase {
         final Page page = client.getPage(URL_FIRST);
         assertInstanceOf(page, HtmlPage.class);
     }
-    
+
     /**
      * Colons are legal in the path of a url but {@link WebClient#expandUrl(URL,String)} was
      * blowing up on this case.  Ensure it's fixed.
@@ -1118,7 +1120,7 @@ public class WebClientTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
-        
+
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
@@ -1130,7 +1132,7 @@ public class WebClientTest extends WebTestCase {
             "null", "null"} );
         assertEquals( expectedAlerts, collectedAlerts );
     }
-    
+
     /**
      * Test setting the NekoHTML logging and parsing flags
      * 
@@ -1161,7 +1163,7 @@ public class WebClientTest extends WebTestCase {
         assertEquals("tiny-png.img", "image/png", webClient.guessContentType(getTestFile("tiny-png.img")));
         assertEquals("tiny-jpg.img", "image/jpeg", webClient.guessContentType(getTestFile("tiny-jpg.img")));
         assertEquals("tiny-gif.img", "image/gif", webClient.guessContentType(getTestFile("tiny-gif.img")));
-        
+
         // tests empty files, type should be determined from file suffix
         assertEquals("empty.png", "image/png", webClient.guessContentType(getTestFile("empty.png")));
         assertEquals("empty.jpg", "image/jpeg", webClient.guessContentType(getTestFile("empty.jpg")));
@@ -1181,7 +1183,7 @@ public class WebClientTest extends WebTestCase {
             throw new FileNotFoundException(fileName);
         }
         final File file = new File(new URI(url.toString()));
-        
+
         return file;
     }
 
@@ -1203,7 +1205,7 @@ public class WebClientTest extends WebTestCase {
         client.addRequestHeader("foo-header", "foo value");
         client.getPage(URL_FIRST);
         assertEquals("foo value", webConnection.getLastAdditionalHeaders().get("foo-header"));
-        
+
         client.removeRequestHeader("foo-header");
         client.getPage(URL_FIRST);
         assertNull(webConnection.getLastAdditionalHeaders().get("foo-header"));
@@ -1233,7 +1235,7 @@ public class WebClientTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, content, "Text/Html");
         assertInstanceOf(client.getPage(URL_FIRST), HtmlPage.class);
         assertEquals( expectedAlerts, collectedAlerts );
-        
+
         webConnection.setResponse(URL_FIRST, content, "Text/XHtml");
         collectedAlerts.clear();
         assertInstanceOf(client.getPage(URL_FIRST), HtmlPage.class);
