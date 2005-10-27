@@ -92,16 +92,19 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * selected properties of sibling option elements
      *
      * @param selected true if this option should be selected.
+     * @return  The page that occupies this window after this change is made.  It
+     * may be the same window or it may be a freshly loaded one.
      */
-    public void setSelected( final boolean selected ) {
+    public Page setSelected( final boolean selected ) {
         final HtmlSelect select = (HtmlSelect) getEnclosingElement("select");
         if (select != null) {
-            getEnclosingSelectOrDie().setSelectedAttribute(this, selected);
+            return getEnclosingSelectOrDie().setSelectedAttribute(this, selected);
         }
         else {
             // for instance from JS for an option created by document.createElement('option')
             // and not yet added to a select
             setSelectedInternal(selected);
+            return getPage();
         }
     }
 
@@ -226,7 +229,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
         if (!isSelected()) {
-            setSelected(true);
+            return setSelected(true);
         }
         return defaultPage;
     }
