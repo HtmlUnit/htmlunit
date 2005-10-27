@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- *  Tests for HtmlSelect
+ * Tests for {@link HtmlSelect}.
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -96,7 +96,7 @@ public class HtmlSelectTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
 
-        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option2&button=foo", 
+        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option2&button=foo",
                 secondPage.getWebResponse().getUrl());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
@@ -130,7 +130,7 @@ public class HtmlSelectTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
 
-        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?button=foo", 
+        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?button=foo",
                 secondPage.getWebResponse().getUrl());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
@@ -165,7 +165,7 @@ public class HtmlSelectTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
 
-        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option3&button=foo", 
+        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option3&button=foo",
                 secondPage.getWebResponse().getUrl());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
@@ -201,8 +201,8 @@ public class HtmlSelectTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
 
-        assertEquals("url", 
-                URL_GARGOYLE.toExternalForm() + "?select1=option1&select1=option2&select1=option3&button=foo", 
+        assertEquals("url",
+                URL_GARGOYLE.toExternalForm() + "?select1=option1&select1=option2&select1=option3&button=foo",
                 secondPage.getWebResponse().getUrl());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
@@ -626,5 +626,25 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlOption option = select.getOptionByValue("option2");
         final Page page2 = select.setSelectedAttribute(option, true);
         assertEquals(page, page2);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testOnChangeResultPage() throws Exception {
+
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<select name='select1' id='select1' onchange='location=\"about:blank\"'>"
+            + "     <option id='option1'>Option1</option>"
+            + "     <option id='option2' selected>Number Two</option>"
+            + "</select>"
+            + "</form></body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlOption option1 = (HtmlOption) page.getHtmlElementById("option1");
+        assertEquals("about:blank", option1.click().getWebResponse().getUrl());
     }
 }
