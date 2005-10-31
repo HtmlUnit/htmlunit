@@ -132,7 +132,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             if(lastOption != null) {
                 result.add(lastOption);
             }
-            else {
+            else if (firstOption != null) {
                 int theSize;
                 try {
                     theSize = Integer.parseInt(getSizeAttribute());
@@ -146,7 +146,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
                     result.add(firstOption);
                 }
             }
-            return result;
         }
 
         return Collections.unmodifiableList( result );

@@ -596,7 +596,8 @@ public class SelectTest extends WebTestCase {
         final String content
             = "<html><head><title>foo</title><script>"
             + "function doTest() {\n"
-            + "    alert(document.form1.select1.value);\n"
+            + "    for (var i=1; i<6; ++i)\n"
+            + "    alert(document.form1['select' + i].value);\n"
             + "}</script></head><body onload='doTest()'>"
             + "<p>hello world</p>"
             + "<form name='form1'>"
@@ -605,16 +606,29 @@ public class SelectTest extends WebTestCase {
             + "        <option name='option2' selected is='test'>Two</option>"
             + "        <option name='option3'>Three</option>"
             + "    </select>"
+            + "    <select name='select2'>"
+            + "    </select>"
+            + "    <select name='select3' multiple>"
+            + "        <option name='option1'>One</option>"
+            + "        <option name='option2' selected>Two</option>"
+            + "        <option name='option3' selected>Three</option>"
+            + "    </select>"
+            + "    <select name='select4' multiple>"
+            + "        <option name='option1'>One</option>"
+            + "        <option name='option2'>Two</option>"
+            + "        <option name='option3'>Three</option>"
+            + "    </select>"
+            + "    <select name='select5' multiple>"
+            + "    </select>"
             + "</form>"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
+        final List expectedAlerts = Arrays.asList(new String[] {"Two", "", "Two", "", ""});
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "Two"
-        } );
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
