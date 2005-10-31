@@ -218,9 +218,14 @@ public class Select extends FormField {
      * @return The value
      */
     public String jsxGet_value() {
-        final int selectedIndex = jsxGet_selectedIndex();
-        final Option selectedOption = (Option) jsxGet_options().jsFunction_item(selectedIndex);
-        return selectedOption.jsxGet_value();
+        final HtmlSelect htmlSelect = getHtmlSelect();
+        final List selectedOptions = htmlSelect.getSelectedOptions();
+        if (selectedOptions.isEmpty()) {
+            return "";
+        }
+        else {
+            return ((HtmlOption) selectedOptions.get(0)).getValueAttribute();
+        }
     }
 
     /**
