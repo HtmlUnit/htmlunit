@@ -96,8 +96,10 @@ public class HTMLElement extends NodeImpl {
     private static final int BEHAVIOR_ID_UNKNOWN = -1;
     private static final int BEHAVIOR_ID_CLIENT_CAPS = 0;
     private static final int BEHAVIOR_ID_HOMEPAGE = 1;
+    private static final int BEHAVIOR_ID_DOWNLOAD = 2;
     private static final String BEHAVIOR_CLIENT_CAPS = "#default#clientCaps";
     private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
+    private static final String BEHAVIOR_DOWNLOAD = "#default#download";
     static final String POSITION_BEFORE_BEGIN = "beforeBegin";
     static final String POSITION_AFTER_BEGIN = "afterBegin";
     static final String POSITION_BEFORE_END = "beforeEnd";
@@ -652,6 +654,7 @@ public class HTMLElement extends NodeImpl {
      * <ul>
      *   <li>#default#clientCaps</li>
      *   <li>#default#homePage</li>
+     *   <li>#default#download</li>
      * </ul>
      * @param behavior the URL of the behavior to add, or a default behavior name
      * @return an identifier that can be user later to detach the behavior from the element
@@ -686,6 +689,11 @@ public class HTMLElement extends NodeImpl {
             defineFunctionProperties(new String[] {"setHomePage"}, c, 0);
             defineFunctionProperties(new String[] {"navigateHomePage"}, c, 0);
             return BEHAVIOR_ID_HOMEPAGE;
+        }
+        else if (BEHAVIOR_DOWNLOAD.equalsIgnoreCase(behavior)) {
+            final Class c = getClass();
+            defineFunctionProperties(new String[] {"startDownload"}, c, 0);
+            return BEHAVIOR_ID_DOWNLOAD;
         }
         else {
             getLog().warn("Unimplemented behavior: " + behavior);
@@ -915,6 +923,79 @@ public class HTMLElement extends NodeImpl {
     public boolean isComponentInstalled(final String id, final String idType, final String minVersion) {
         return false;
     }
+
+    //----------------------- START #default#download BEHAVIOR -----------------------
+    /**
+     * Implementation of the IE behavior #default#download
+     * @param uri The URI of the download source
+     * @param callback the mehtod which should be called when the download is finished
+     * @see <a href="http://msdn.microsoft.com/workshop/author/behaviors/reference/methods/startdownload.asp">
+     * MSDN documentation</a>
+     * @throws MalformedURLException If the url cannot be created
+     */
+    public void startDownload(final String uri, final Function callback) throws MalformedURLException {
+        final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final URL url = page.getFullyQualifiedUrl(uri);
+        if (!page.getWebResponse().getUrl().getHost().equals(url.getHost())) {
+            throw Context.reportRuntimeError("Not authorized url: " + url);
+        }
+        final Thread t = new DownloadBehaviorDownloader(url, callback);
+        getLog().debug("Starting download thread for " + url);
+        t.start();
+    }
+
+    /**
+     * A helper class for the IE behavior #default#download
+     * This represents a download action. The download is handeled
+     * asynchronously, when the download is finished, the method specified
+     * by callback is called with one argument - the content of the response as string.
+     * @see #startDownload(String, Function)
+     * @author Stefan Anzinger <stefan@anzinger.net>
+     */
+    private class DownloadBehaviorDownloader extends Thread {
+        private final  URL url_;
+        private final Function callback_;
+        private Context context_;
+
+        /**
+         * @param url The URL to download
+         * @param callback The function to callback
+         */
+        public DownloadBehaviorDownloader(final URL url, final Function callback) {
+            super("Downloader for behavior #default#download '" + url + "'");
+            url_ = url;
+            callback_ = callback;
+        }
+
+        /**
+         * Does the download and calls the callback method
+         */
+        public void run() {
+            context_ = Context.enter();
+            try {
+                final WebClient wc = getWindow().getWebWindow().getWebClient();
+                final String content = wc.getPage(url_).getWebResponse().getContentAsString();
+                String message = "Downloaded content: ";
+                if(content.length() > 512) {
+                    message += content.substring(512) + " ...";
+                }
+                else {
+                    message += content;
+                }
+                getLog().debug(message);
+                final Scriptable scope = callback_.getParentScope();
+                final Object[] args = new Object[] { content };
+                callback_.call( context_, scope, scope, args);
+            }
+            catch(final Exception e) {
+                getLog().error("Behavior #default#download: Cannot download " + url_, e);
+            }
+            finally {
+                Context.exit();
+            }
+        }
+    }
+    //----------------------- END #default#download BEHAVIOR -----------------------
 
     //----------------------- START #default#homePage BEHAVIOR -----------------------
 

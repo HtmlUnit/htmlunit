@@ -612,7 +612,66 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
         assertEquals(content2Url.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
     }
-    /**
+   /**
+    * Test the <tt>#default#download</tt> default IE behavior.
+    *
+    * @throws Exception if the test fails
+    */
+    public void testAddBehaviorDefaultDownload() throws Exception {
+        final URL content1Url = new URL("http://www.domain1.com/");
+        final URL content2Url = new URL("http://www.domain1.com/test.txt");
+        // The download behavior doesn't accept downloads from a different domain ...
+        final URL content3Url = new URL("http://www.domain2.com/test.txt");
+
+        final String content1 =
+             "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "      hp.startDownload('test.txt', callback);\n"
+            + "      try {\n"
+            + "      hp.startDownload('http://www.domain2.com/test.txt', callback);\n"
+            + "      }\n"
+            + "      catch (e)\n"
+            + "      {\n"
+            + "        alert('Refused');\n"
+            + "      }\n"
+            + "    }\n"
+            + "    function callback(content) {\n"
+            + "      alert(content);\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "    <span id='hp' style='behavior:url(#default#download)'></span>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final WebClient client = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(content1Url, content1);
+        webConnection.setResponse(content2Url, "foo");
+        webConnection.setResponse(content3Url, "foo2");
+        client.setWebConnection( webConnection );
+        client.getPage(content1Url);
+
+        final List expectedAlerts = Arrays.asList(new String[]{ "foo", "Refused" });
+        final int waitTime = 50;
+        final int maxTime = 1000;
+        for( int time = 0; time < maxTime; time += waitTime ) {
+            if( expectedAlerts.size() <= collectedAlerts.size() ) {
+                assertEquals(expectedAlerts, collectedAlerts);
+                return;
+            }
+            Thread.sleep( waitTime );
+        }
+        fail( "Unable to collect expected alerts within " + maxTime + "ms; collected alerts: " + collectedAlerts );
+    }
+
+   /**
      * Test the removal of behaviors.
      *
      * @throws Exception if the test fails
