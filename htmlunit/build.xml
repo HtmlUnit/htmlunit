@@ -226,7 +226,7 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
     <antcall target="get-dependency">
         <param name="type" value="optional"/>
         <param name="project" value="rhino"/>
-        <param name="jarName" value="js-1.6R1.jar"/>
+        <param name="jarName" value="js-1.6R2.jar"/>
     </antcall>
     
     <!-- test -->
