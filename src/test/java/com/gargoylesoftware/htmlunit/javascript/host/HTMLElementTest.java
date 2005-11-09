@@ -629,7 +629,6 @@ public class HTMLElementTest extends WebTestCase {
             + "    <title>Test</title>\n"
             + "    <script>\n"
             + "    function doTest() {\n"
-            + "      hp.startDownload('test.txt', callback);\n"
             + "      try {\n"
             + "      hp.startDownload('http://www.domain2.com/test.txt', callback);\n"
             + "      }\n"
@@ -637,6 +636,7 @@ public class HTMLElementTest extends WebTestCase {
             + "      {\n"
             + "        alert('Refused');\n"
             + "      }\n"
+            + "      hp.startDownload('test.txt', callback);\n"
             + "    }\n"
             + "    function callback(content) {\n"
             + "      alert(content);\n"
@@ -658,7 +658,7 @@ public class HTMLElementTest extends WebTestCase {
         client.setWebConnection( webConnection );
         client.getPage(content1Url);
 
-        final List expectedAlerts = Arrays.asList(new String[]{ "foo", "Refused" });
+        final List expectedAlerts = Arrays.asList(new String[]{ "Refused", "foo" });
         final int waitTime = 50;
         final int maxTime = 1000;
         for( int time = 0; time < maxTime; time += waitTime ) {
