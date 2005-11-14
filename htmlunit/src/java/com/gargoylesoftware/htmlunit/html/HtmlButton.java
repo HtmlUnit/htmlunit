@@ -41,7 +41,6 @@ import java.io.IOException;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 
@@ -84,20 +83,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
      */
     public void setValueAttribute( final String newValue ) {
         setAttributeValue( "value", newValue );
-    }
-
-    /**
-     *  Submit the form.
-     *
-     * @deprecated Use {@link #click()} instead
-     * @return  The Page that wraps the response from the server
-     * @exception  IOException If an IO problem occurs
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
-     */
-    public Page submit() throws IOException, ElementNotFoundException {
-
-        return click();
     }
 
     /**

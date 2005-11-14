@@ -39,8 +39,6 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.httpclient.HttpState;
 
@@ -93,59 +91,6 @@ public abstract class WebConnection {
      */
     public abstract WebResponse getResponse(final WebRequestSettings webRequestSettings)
         throws IOException;
-
-    /**
-     *  Submit a request and retrieve a response
-     *
-     * @param  parameters Any parameters
-     * @param  url The url of the server
-     * @param  submitMethod The submit method. Ie SubmitMethod.GET
-     * @param  requestHeaders Any headers that need to be put into the request.
-     * @return  See above
-     * @exception  IOException If an IO error occurs
-     * @deprecated Use {@link #getResponse(WebRequestSettings)}
-     */
-    public WebResponse getResponse(
-            final URL url,
-            final SubmitMethod submitMethod,
-            final List parameters,
-            final Map requestHeaders )
-        throws
-            IOException {
-        final WebRequestSettings wrs = new WebRequestSettings(url);
-        wrs.setSubmitMethod(submitMethod);
-        wrs.setRequestParameters(parameters);
-        wrs.setAdditionalHeaders(requestHeaders);
-        return getResponse(wrs);
-    }
-
-    /**
-     *  Submit a request and retrieve a response
-     *
-     * @param  parameters Any parameters
-     * @param  url The url of the server
-     * @param  encType Encoding type of the form when done as a POST
-     * @param  submitMethod The submit method. Ie SubmitMethod.GET
-     * @param  requestHeaders Any headers that need to be put into the request.
-     * @return  See above
-     * @exception  IOException If an IO error occurs
-     * @deprecated Use {@link #getResponse(WebRequestSettings)}
-     */
-    public WebResponse getResponse(
-            final URL url,
-            final FormEncodingType encType,
-            final SubmitMethod submitMethod,
-            final List parameters,
-            final Map requestHeaders )
-        throws
-            IOException {
-        final WebRequestSettings wrs = new WebRequestSettings(url);
-        wrs.setEncodingType(encType);
-        wrs.setSubmitMethod(submitMethod);
-        wrs.setRequestParameters(parameters);
-        wrs.setAdditionalHeaders(requestHeaders);
-        return getResponse(wrs);
-    }
 
     /**
      * Return the web client

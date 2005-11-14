@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="add" dev="yourgod">
+                All code deprecated prior to 1.6 has been removed
+            </action>        
             <action type="add" dev="mguillem" due-to="Stefan Anzinger" id="1343212">
                 JavaScript: added implementation of IE behavior "#default#download".
             </action>

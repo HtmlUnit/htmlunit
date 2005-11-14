@@ -59,7 +59,6 @@ import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
@@ -75,7 +74,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author David K. Taylor
  * @author Chris Erskine
  */
-public class HTMLParser {
+public final class HTMLParser {
 
     private static final Map ELEMENT_FACTORIES = new HashMap();
     private static boolean IgnoreOutsideContent_ = false;
@@ -197,28 +196,10 @@ public class HTMLParser {
 
     /**
      * You should never need to create one of these!
-     * @deprecated
      */    
-    public HTMLParser() {
+    private HTMLParser() {
     }
 
-    /**
-     * This method should no longer be used
-     *
-     * @param webClient NOT USED
-     * @param webResponse the response data
-     * @param webWindow the web window into which the page is to be loaded
-     * @return the page object which forms the root of the DOM tree, or <code>null</code> if the &lt;HTML&gt;
-     * tag is missing
-     * @throws java.io.IOException io error
-     * @deprecated
-     */
-    public HtmlPage parse(
-            final WebClient webClient, 
-            final WebResponse webResponse, 
-            final WebWindow webWindow) throws IOException {
-        return parse(webResponse, webWindow);
-    }
     /**
      * parse the HTML content from the given WebResponse into an object tree representation
      *
