@@ -75,17 +75,6 @@ public abstract class ScriptEngine {
         return webClient_;
     }
 
-
-    /**
-     * Throw a NullPointerException with the specified description if the object is null.
-     * @param description The description
-     * @param object The object to check for null.
-     * @deprecated Use {@link Assert#notNull(String,Object)}
-     */
-    protected final void assertNotNull( final String description, final Object object ) {
-        Assert.notNull(description, object);
-    }
-
     /**
      * perform initialization for the given page
      * @param page the page to initialize for

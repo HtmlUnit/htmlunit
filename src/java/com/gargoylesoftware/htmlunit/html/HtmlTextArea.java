@@ -101,39 +101,10 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      * Return the value that would be displayed in the text area
      *
      * @return The text
-     * @deprecated Use {@link #getText()} instead
-     */
-    public final String getValue() {
-        return getText();
-    }
-
-
-    /**
-     * Return the value that would be displayed in the text area
-     *
-     * @return The text
      */
     public final String getText() {
         return getChildrenAsText();
     }
-
-
-    /**
-     *  Set the new value of this text area.
-     *
-     * @param  newValue The new value or null if the original value returned
-     *      from the server should be used
-     * @deprecated Use {@link #setText(String)} instead
-     */
-    public final void setValue( final String newValue ) {
-        if( newValue == null ) {
-            reset();
-        }
-        else {
-            setText(newValue);
-        }
-    }
-
 
     /**
      *  Set the new value of this text area.

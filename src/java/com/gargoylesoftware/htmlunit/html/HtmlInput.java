@@ -481,24 +481,4 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         // By default this is no different than a click without coordinates.
         return click();
     }
-
-    /**
-     *  Submit the form that contains this input
-     *
-     * @deprecated Use {@link #click()} instead
-     * @return  The Page that is the result of submitting this page to the
-     *      server
-     * @exception  IOException If an io error occurs
-     * @exception  ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
-     */
-    public Page submit()
-        throws
-            IOException,
-            ElementNotFoundException {
-
-        return click();
-    }
-
-
 }

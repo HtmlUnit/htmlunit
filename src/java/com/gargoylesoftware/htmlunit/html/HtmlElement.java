@@ -38,8 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -605,21 +603,6 @@ public abstract class HtmlElement extends DomNode {
             final HtmlElement child = (HtmlElement) children.get(i);
             child.remove();
         }
-    }
-
-    /**
-     *  Create a URL object from the specified href
-     *
-     * @param  href The href
-     * @return  A URL
-     * @exception  MalformedURLException If a URL cannot be created from this
-     *      href
-     * @deprecated Use {@link HtmlPage#getFullyQualifiedUrl(String)} instead.
-     */
-    public final URL makeUrlFromHref( final String href )
-        throws MalformedURLException {
-
-            return getPage().getFullyQualifiedUrl(href);
     }
 
     /**

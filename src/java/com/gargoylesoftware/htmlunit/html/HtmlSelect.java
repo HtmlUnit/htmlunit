@@ -151,18 +151,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         return Collections.unmodifiableList( result );
     }
 
-
-    /**
-     *  Return a List containing all the options
-     *
-     * @return  See above
-     * @see #getOptions
-     * @deprecated Use {@link #getOptions} instead. 
-     */
-    public List getAllOptions() {
-        return getOptions();
-    }
-
     /**
      *  Return a List containing all the options
      *

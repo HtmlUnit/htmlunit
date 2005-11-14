@@ -101,22 +101,6 @@ public final class HtmlPage extends DomNode implements Page {
     private static final int TAB_INDEX_OUT_OF_BOUNDS = -20;
 
     /**
-     *  This constructor should no longer be used
-     *
-     * @param  webClient NOT USED
-     * @param  webResponse The web response that was used to create this page
-     * @param  originatingUrl The url that was used to load this page.
-     * @param  webWindow The window that this page is being loaded into.
-     * @deprecated
-     */
-    public HtmlPage(
-            final WebClient webClient,
-            final URL originatingUrl,
-            final WebResponse webResponse,
-            final WebWindow webWindow ) {
-        this(originatingUrl, webResponse, webWindow);
-    }
-    /**
      *  Create an instance of HtmlPage
      *
      * @param  originatingUrl The url that was used to load this page.
@@ -308,16 +292,6 @@ public final class HtmlPage extends DomNode implements Page {
         else {
             return ( HtmlForm )forms.get( 0 );
         }
-    }
-
-    /**
-     * Return a list of all the forms in the page.
-     * @return All the forms.
-     * @see #getForms
-     * @deprecated Use {@link #getForms} instead. 
-     */
-    public List getAllForms() {
-        return getForms();
     }
 
     /**
