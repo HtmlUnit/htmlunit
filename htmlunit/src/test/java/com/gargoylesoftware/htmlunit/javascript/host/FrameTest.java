@@ -242,4 +242,49 @@ public class FrameTest extends WebTestCase {
         webClient.getPage( URL_GARGOYLE );
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Regression test for bug 1192854.
+     * @throws Exception if the test fails
+     */
+    public void testFrameTag1192854() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String htmlContent
+            = "<html>\n"
+            + "<script>\n"
+            + "var root=this;"
+            + "function listframes(frame) {\n"
+            + "  if (frame == null) {\n"
+            + "    alert('frame=null');\n"
+            + "  } else {\n"
+            + "    alert('frame=OK');\n"
+            + "    var len = frame.frames.length;\n"
+            + "    alert('frames.length=' + len);\n"
+            + "    for (var i=0; i<len; i++) {\n"
+            + "      listframes(frame.frames[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "}\n"
+            + "document.write('<frameset id=\"frameset1\" "
+            + "rows=\"50,50\"><frame id=\"frame1-1\" "
+            + "src=\"about:blank\"><frame id=\"frame1-2\" "
+            + "src=\"about:blank\"></frameset>');\n"
+            + "listframes(root);\n"
+            + "</script>\n"
+            + "</html>";
+
+        final List expectedAlerts = Arrays.asList( new String[]{"frame=OK",
+            "frames.length=2",
+            "frame=OK",
+            "frames.length=0",
+            "frame=OK",
+            "frames.length=0"});
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(htmlContent,collectedAlerts);
+
+        assertEquals(collectedAlerts,expectedAlerts);
+    }
 }
