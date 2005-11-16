@@ -49,13 +49,13 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.xml.XmlPage;
+import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
  * A JavaScript object for a XMLHttpRequest.
@@ -85,7 +85,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     private WebRequestSettings requestSettings_;
     private boolean async_;
     private Thread requestThread_;
-    private Page page_;
+    private WebResponse webResponse_;
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -153,8 +153,8 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return A string version of the data retrieved from the server.
      */
     public String jsxGet_responseText() {
-        if( page_ != null ) {
-            return page_.getWebResponse().getContentAsString();
+        if( webResponse_ != null ) {
+            return webResponse_.getContentAsString();
         }
         else {
             getLog().debug( "XMLHttpRequest.responseText was retrieved before the response was available." );
@@ -167,11 +167,18 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return A DOM-compatible document object version of the data retrieved from the server.
      */
     public Object jsxGet_responseXML() {
-        if (page_ != null && page_ instanceof XmlPage) {
-            return ((XmlPage) page_).getXmlDocument();
+        if (webResponse_.getContentType().indexOf("xml") != -1) {
+            try {
+                return XmlUtil.buildDocument(webResponse_);
+            }
+            catch (final Exception e) {
+                getLog().warn("Failed parsing xml document " + webResponse_.getUrl() + ": " + e.getMessage());
+                return null;
+            }
         }
         else {
-            getLog().debug("XMLHttpRequest.responseXML was called but the response is " + page_);
+            getLog().debug("XMLHttpRequest.responseXML was called but the response is "
+                    + webResponse_.getContentType());
             return null;
         }
     }
@@ -182,8 +189,8 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return The numeric status returned by the server.
      */
     public int jsxGet_status() {
-        if( page_ != null ) {
-            return page_.getWebResponse().getStatusCode();
+        if( webResponse_ != null ) {
+            return webResponse_.getStatusCode();
         }
         else {
             getLog().error( "XMLHttpRequest.status was retrieved before the response was available." );
@@ -196,8 +203,8 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return The string message accompanying the status code.
      */
     public String jsxGet_statusText() {
-        if( page_ != null ) {
-            return page_.getWebResponse().getStatusMessage();
+        if( webResponse_ != null ) {
+            return webResponse_.getStatusMessage();
         }
         else {
             getLog().error( "XMLHttpRequest.statusText was retrieved before the response was available." );
@@ -219,10 +226,10 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return The labels and values of all the HTTP headers.
      */
     public String jsxFunction_getAllResponseHeaders() {
-        if( page_ != null ) {
+        if (webResponse_ != null) {
             final StringBuffer buffer = new StringBuffer();
-            final List headers = page_.getWebResponse().getResponseHeaders();
-            for( final Iterator i = headers.iterator(); i.hasNext(); ) {
+            final List headers = webResponse_.getResponseHeaders();
+            for (final Iterator i = headers.iterator(); i.hasNext(); ) {
                 final NameValuePair header = (NameValuePair) i.next();
                 buffer.append(header.getName()).append(": ").append(header.getValue()).append("\n");
             }
@@ -240,8 +247,8 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return The value of the specified HTTP header.
      */
     public String jsxFunction_getResponseHeader( final String headerName ) {
-        if( page_ != null ) {
-            return page_.getWebResponse().getResponseHeaderValue( headerName );
+        if (webResponse_ != null) {
+            return webResponse_.getResponseHeaderValue(headerName);
         }
         else {
             getLog().error( "XMLHttpRequest.getResponseHeader() was called before the response was available." );
@@ -335,7 +342,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                     requestSettings_.setRequestBody(body);
                 }
             }
-            page_ = wc.getPage( requestSettings_ );
+            webResponse_ = wc.loadWebResponse(requestSettings_);
             setState( STATE_INTERACTIVE, context );
             setState( STATE_COMPLETED, context );
         }
