@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link XMLHttpRequest}.
@@ -160,8 +161,8 @@ public class XMLHttpRequestTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse( URL_FIRST, html );
-        webConnection.setResponse( URL_SECOND, xml, 200, "OK", "text/xml", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setResponse(URL_SECOND, xml, "text/xml");
         client.setWebConnection( webConnection );
         client.getPage( URL_FIRST );
 
@@ -216,7 +217,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         final List collectedAlerts = Collections.synchronizedList( new ArrayList() );
         client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse( URL_FIRST, html );
+        webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponse(URL_SECOND, xml, "text/xml");
         client.setWebConnection( webConnection );
         client.getPage( URL_FIRST );
@@ -365,6 +366,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         }
 
     }
+
     /**
      * @throws Exception if the test fails.
      */
@@ -391,5 +393,37 @@ public class XMLHttpRequestTest extends WebTestCase {
         webConnection.setDefaultResponse("");
         client.setWebConnection( webConnection );
         client.getPage(URL_FIRST);
+    }
+
+    /**
+     * Regression test for bug 1357412.
+     * Response received by the XMLHttpRequest should not come in any window
+     * @throws Exception if the test fails.
+     */
+    public void testResponseNotInWindow() throws Exception {
+        final String html = "<html><head><title>foo</title>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  var request;"
+            + "  if (window.XMLHttpRequest)"
+            + "    request = new XMLHttpRequest();"
+            + "  else if (window.ActiveXObject)"
+            + "    request = new ActiveXObject('Microsoft.XMLHTTP');"
+            + "  request.open('GET', 'foo.txt', false);"
+            + "  request.send();"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'></body></html>";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setDefaultResponse("");
+        client.setWebConnection( webConnection );
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        assertEquals(URL_FIRST, page.getWebResponse().getUrl());
+        assertEquals("foo", page.getTitleText());
     }
 }

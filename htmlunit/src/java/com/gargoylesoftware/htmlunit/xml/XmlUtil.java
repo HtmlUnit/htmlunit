@@ -38,114 +38,92 @@
 package com.gargoylesoftware.htmlunit.xml;
 
 import java.io.IOException;
+import java.io.StringReader;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
- * A page that will be returned for response with content type "text/xml".
- * It doesn't implement itself {@link org.w3c.dom.Document} to allow to see the source of badly formed
- * xml responses.
- * @version  $Revision$
+ * Provides facility method to work with xml responses.
+ * This class is only intended for htmlUnit's internal use.
+ * @version $Revision$
  * @author Marc Guillemot
  */
-public class XmlPage implements Page {
-    private final String content_;
-    private Document document_;
+public final class XmlUtil {
+    private static final ErrorHandler DISCARD_MESSAGES_HANDLER = new ErrorHandler() {
+        /**
+         * Does nothing as we're not interested in.
+         * @see org.xml.sax.ErrorHandler#error(org.xml.sax.SAXParseException)
+         */
+        public void error(final SAXParseException exception) throws SAXException {
+            // Does nothing as we're not interested in.
+        }
+        /**
+         * Does nothing as we're not interested in.
+         * @see org.xml.sax.ErrorHandler#fatalError(org.xml.sax.SAXParseException)
+         */
+        public void fatalError(final SAXParseException exception)
+            throws SAXException {
 
-    private WebWindow enclosingWindow_;
-    private final WebResponse webResponse_;
+            // Does nothing as we're not interested in.
+        }
+
+        /**
+         * Does nothing as we're not interested in.
+         * @see org.xml.sax.ErrorHandler#warning(org.xml.sax.SAXParseException)
+         */
+        public void warning(final SAXParseException exception)
+            throws SAXException {
+
+            // Does nothing as we're not interested in.
+        }
+    };
 
     /**
-     * Create an instance. 
+     * Utility class, hide constructor
+     */
+    private XmlUtil() {
+        // nothing
+    }
+
+    /**
+     * Builds a document from the content of the webresponse. 
      * A warning is logged if an exception is thrown while parsing the xml content 
      * (for instance when the content is not a valid xml and can't be parsed).
      *
      * @param  webResponse The response from the server
-     * @param  enclosingWindow The window that holds the page.
      * @throws IOException If the page could not be created
+     * @return the parse result
+     * @throws SAXException if the parsing fails
+     * @throws ParserConfigurationException if a DocumentBuilder cannot be created
      */
-    public XmlPage( final WebResponse webResponse, final WebWindow enclosingWindow ) throws IOException {
-        webResponse_ = webResponse;
-        content_ = webResponse.getContentAsString();
-        enclosingWindow_ = enclosingWindow;
+    public static Document buildDocument(final WebResponse webResponse)
+        throws IOException, SAXException, ParserConfigurationException {
 
-        try {
-            document_ = XmlUtil.buildDocument(webResponse);
-        }
-        catch (final SAXException e) {
-            getLog().warn("Failed parsing xml document " + webResponse.getUrl() + ": " + e.getMessage());
-        }
-        catch (final ParserConfigurationException e) {
-            getLog().warn("Failed parsing xml document " + webResponse.getUrl() + ": " + e.getMessage());
-        }
-    }
-
-
-    /**
-     * Clean up this page.
-     */
-    public void cleanUp() {
-    }
-
-
-    /**
-     *  Return the content of the page
-     *
-     * @return  See above
-     */
-    public String getContent() {
-        return content_;
-    }
-
-
-    /**
-     * Return the window that this page is sitting inside.
-     *
-     * @return The enclosing frame or null if this page isn't inside a frame.
-     */
-    public WebWindow getEnclosingWindow() {
-        return enclosingWindow_;
+        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        final InputSource source = new InputSource(new StringReader(webResponse.getContentAsString()));
+        final DocumentBuilder builder = factory.newDocumentBuilder();
+        builder.setErrorHandler(DISCARD_MESSAGES_HANDLER);
+        return builder.parse(source);
     }
 
     /**
      * Return the log object for this web client
      * @return The log object
      */
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
-    }
-
-
-    /**
-     *  Return the web response that was originally used to create this page.
-     *
-     * @return  The web response
-     */
-    public WebResponse getWebResponse() {
-        return webResponse_;
-    }
-
-    /**
-     * Gets the DOM representation of the xml content 
-     * @return <code>null</code> if the content couldn't be parsed.
-     */
-    public Document getXmlDocument() {
-        return document_;
-    }
-
-    /**
-     * Initialize this page.
-     */
-    public void initialize() {
+    protected static Log getLog() {
+        return LogFactory.getLog(XmlUtil.class);
     }
 }
 
