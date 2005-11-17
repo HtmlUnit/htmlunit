@@ -90,7 +90,7 @@ public final class HtmlInputTest extends WebTestCase {
         // Test that only one value for the radio button is being passed back to the server
         final HtmlPage secondPage = ( HtmlPage )pushButton.click();
 
-        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?foo=2&button=foo", 
+        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?foo=2&button=foo",
                 secondPage.getWebResponse().getUrl());
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
         assertNotNull( secondPage );
@@ -180,7 +180,7 @@ public final class HtmlInputTest extends WebTestCase {
         final HtmlCheckBoxInput input = (HtmlCheckBoxInput)form.getInputByName("checkbox1");
         assertEquals( "on", input.getValueAttribute() );
     }
-    
+
     /**
      *  Test that clicking a radio button will select it
      *
@@ -200,11 +200,11 @@ public final class HtmlInputTest extends WebTestCase {
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
         final HtmlRadioButtonInput radioButton = form.getRadioButtonInput( "foo", "2" );
-        
+
         assertFalse("Should not be checked before click", radioButton.isChecked());
         radioButton.click();
         assertTrue("Should be checked after click", radioButton.isChecked());
-    }    
+    }
 
     /**
      *  Test that default type of input is text
@@ -217,12 +217,13 @@ public final class HtmlInputTest extends WebTestCase {
             + "<form id='form1'>"
             + "<input name='foo'/>"
             + "</form></body></html>";
-        
+
         final HtmlPage page = loadPage(htmlContent);
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
-        
+
         assertEquals("text", form.getInputByName("foo").getTypeAttribute());
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -236,6 +237,24 @@ public final class HtmlInputTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
-    }    
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testBadInputType() throws Exception {
+
+        final String htmlContent
+            = "<html><head><title>foo</title></head>"
+            + "<body onload='alert(document.form1.text1.type)'>"
+            + "<form name='form1'>"
+            + "<input type='foo' name='text1'>"
+            + "</form></body></html>";
+        final List expectedAlerts = Collections.singletonList("text");
+        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(htmlContent, collectedAlerts);
+    }
 }
 
