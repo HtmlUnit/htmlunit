@@ -7,9 +7,15 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+				Consider inputs with invalid type as text inputs.
+            </action>
+            <action type="update" dev="mguillem" id="1357412">
+				JavaScript: responses to XMLHttpRequest don't disturb window contents anymore.
+            </action>
             <action type="add" dev="yourgod">
                 All code deprecated prior to 1.6 has been removed
-            </action>        
+            </action>
             <action type="add" dev="mguillem" due-to="Stefan Anzinger" id="1343212">
                 JavaScript: added implementation of IE behavior "#default#download".
             </action>

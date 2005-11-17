@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
 
 import java.util.Map;
@@ -45,8 +47,9 @@ import java.util.HashMap;
 /**
  * A specialized creator that knows how to create input objects
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
  */
 public final class InputElementFactory implements IElementFactory {
 
@@ -127,8 +130,18 @@ public final class InputElementFactory implements IElementFactory {
             result = new HtmlFileInput(page, attributeMap);
         }
         else {
-            throw new IllegalArgumentException("Unexpected input type ["+type+"]");
+            getLog().info("Bad input type: \"" + type + "\", creating a text input");
+            result = new HtmlTextInput(page, attributeMap);
         }
         return result;
+    }
+
+
+    /**
+     * Return the log that is being used for all scripting objects
+     * @return The log.
+     */
+    protected Log getLog() {
+        return LogFactory.getLog(getClass());
     }
 }
