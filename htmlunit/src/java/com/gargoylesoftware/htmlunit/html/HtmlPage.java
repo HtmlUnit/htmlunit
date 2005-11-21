@@ -1291,7 +1291,9 @@ public final class HtmlPage extends DomNode implements Page {
                 elements = new Vector();
                 idMap_.put(id, elements);
             }
-            elements.add(idElement);
+            else if (!elements.contains(idElement)) {
+                elements.add(idElement);
+            }
         }
     }
 
