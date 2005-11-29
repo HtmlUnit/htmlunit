@@ -45,6 +45,7 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -56,7 +57,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
 
 /**
- * Tests for Select.
+ * Tests for {@link Select}.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -704,7 +705,7 @@ public class SelectTest extends WebTestCase {
     }
 
     /**
-     * Test for bug 1159709. As notYetImplemented because solution is not so simple.
+     * Test for bug 1159709.
      * @throws Exception if the test fails
      */
     public void testRightPageAfterOnchange() throws Exception {
@@ -731,5 +732,50 @@ public class SelectTest extends WebTestCase {
         final HtmlSelect select = form.getSelectByName("select1");
         final Page page2 = select.setSelectedAttribute("option2", true);
         assertEquals("http://first", page2.getWebResponse().getUrl());
+    }
+
+    /**
+     * Test that options delegates to select (bug 1111597)
+     * @throws Exception if the test fails
+     */
+    public void testOptionsDelegateToSelect() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final String content
+            = "<html><head>"
+            + "<script>"
+            + "function doTest() {"
+            + "  var s = document.getElementById('select1');"
+            + "  alert(s.childNodes.length);"
+            + "  alert(s.options.childNodes.length);"
+            + "  alert(s.selectedIndex);"
+            + "  alert(s.options.selectedIndex);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='doTest()'>"
+            + "<form name='test'>"
+            + "<select id='select1'>"
+            + "<option>a</option>"
+            + "<option selected='selected'>b</option>"
+            + "</select></form>"
+            + "</body></html>";
+
+        final List expectedAlerts = Arrays.asList( new String[]{"2", "2", "1", "1"} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        assertEquals( expectedAlerts, collectedAlerts );
+
+        try {
+            loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+            fail("Should have thrown a JS error");
+        }
+        catch (final ScriptException e) {
+            // that's ok
+        }
     }
 }
