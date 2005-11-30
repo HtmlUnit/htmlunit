@@ -7,6 +7,11 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1369514">
+                Javascript: getElementsByTagName now returns an ElementArray (instead of a 
+                NativeArray) for html elements allowing expressions like 
+                "myForm.getElementsByTagName('input')['one']".
+            </action>
             <action type="update" dev="mguillem" id="1111597" due-to="Daniel Gredler">
 				JavaScript: when simulating IE, options collection delegates to select 
 				when the requested property/method doesn't exist.

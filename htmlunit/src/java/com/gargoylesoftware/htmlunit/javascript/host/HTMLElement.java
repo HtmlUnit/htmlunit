@@ -48,12 +48,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
-import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -300,13 +298,18 @@ public class HTMLElement extends NodeImpl {
      * @return the list of elements
      */
     public Object jsxFunction_getElementsByTagName( final String tagName ) {
-        final HtmlElement element = (HtmlElement)getDomNodeOrDie();
-        final List list = element.getHtmlElementsByTagNames(
-            Collections.singletonList(tagName.toLowerCase()));
+        final HtmlElement element = (HtmlElement) getDomNodeOrDie();
+        final ElementArray collection = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+        try {
+            final String xpath = "//" + tagName.toLowerCase();
+            collection.init(element, new HtmlUnitXPath(xpath, HtmlUnitXPath.buildSubtreeNavigator(element)));
+        }
+        catch (final JaxenException e) {
+            throw Context.reportRuntimeError("Failed to initialize collection getElementsByTagName("
+                    + tagName + "): " + e.getMessage());
+        }
 
-        CollectionUtils.transform(list, getTransformerScriptableFor());
-
-        return new NativeArray( list.toArray() );
+        return collection;
     }
 
     /**

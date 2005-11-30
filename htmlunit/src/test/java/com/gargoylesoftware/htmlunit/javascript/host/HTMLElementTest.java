@@ -248,11 +248,45 @@ public class HTMLElementTest extends WebTestCase {
             + "<tr id='r2'><td>3</td><td>4</td></tr>\n"
             + "</table>\n"
             + "</body></html>\n";
+        final List expectedAlerts = Arrays.asList(new String[]{ "all = 4", "row = 2" });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final List expectedAlerts = Arrays.asList(new String[]{
-            "all = 4", "row = 2"
-        });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test that {@link HTMLElement#jsxFunction_getElementsByTagName} returns an associative array.
+     * Test for bug 1369514.^
+     * @throws Exception if the test fails
+     */
+    public void testGetElementsByTagNameCollection() throws Exception {
+        final String content
+            = "<html><head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  var form1 = document.getElementById('form1');"
+            + "  var elements = form1.getElementsByTagName('input');"
+            + "  alert(elements['one'].name );"
+            + "  alert(elements['two'].name );"
+            + "  alert(elements['three'].name);"
+            + "}"
+            + "</script></head>"
+            + "<body onload='test()'>"
+            + "<form id='form1'>"
+            + "<input id='one' name='first' type='text'>"
+            + "<input id='two' name='second' type='text'>"
+            + "<input id='three' name='third' type='text'>"
+            + "</form>"
+            + "</body></html>";
+
+        final List expectedAlerts = Arrays.asList(new String[]{ "first", "second", "third" });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
