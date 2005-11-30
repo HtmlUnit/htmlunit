@@ -41,6 +41,8 @@ import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.host.Option;
+import com.gargoylesoftware.htmlunit.javascript.host.Select;
+
 import org.mozilla.javascript.Scriptable;
 
 /**
@@ -50,6 +52,7 @@ import org.mozilla.javascript.Scriptable;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
+ * @author Daniel Gredler
  */
 public class OptionsArray extends SimpleScriptable {
     private static final long serialVersionUID = -4790255174217201235L;
@@ -98,6 +101,28 @@ public class OptionsArray extends SimpleScriptable {
         return object;
     }
 
+
+    /**
+     * Returns the object with the specified name. If the specified object
+     * is not found and we are emulating IE, this method delegates the call
+     * to the parent select.
+     * 
+     * @param name The name of the object to return.
+     * @param start The object from which to get the named object.
+     * @return The object corresponding to the specified name or <tt>NOT_FOUND</tt>.
+     */
+    public Object get( final String name, final Scriptable start ) {
+        Object object = super.get( name, start );
+        if( object == NOT_FOUND ) {
+            if( getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE() ) {
+                final Select select = (Select) htmlSelect_.getScriptObject();
+                object = select.get( name, start );
+            }
+        }
+        return object;
+    }
+
+
     /**
      * <p>Return the object at the specified index.</p>
      *
@@ -135,7 +160,7 @@ public class OptionsArray extends SimpleScriptable {
                 // Replace the indexed option.
                 htmlSelect_.replaceOption( index, htmlOption );
             }
-            
+
             // newly created HtmlOption needs to be associated to its js object
             if (option.getDomNodeOrNull() == null) {
                 option.setDomNode( htmlOption );

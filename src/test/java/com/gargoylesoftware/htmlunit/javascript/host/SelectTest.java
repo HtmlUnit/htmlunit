@@ -735,13 +735,10 @@ public class SelectTest extends WebTestCase {
     }
 
     /**
-     * Test that options delegates to select (bug 1111597)
-     * @throws Exception if the test fails
+     * Test that options delegates to select (bug 1111597).
+     * @throws Exception if the test fails.
      */
     public void testOptionsDelegateToSelect() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
 
         final String content
             = "<html><head>"
