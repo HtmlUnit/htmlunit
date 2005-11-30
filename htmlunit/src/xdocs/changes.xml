@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1111597" due-to="Daniel Gredler">
+				JavaScript: when simulating IE, options collection delegates to select 
+				when the requested property/method doesn't exist.
+            </action>
             <action type="update" dev="mguillem">
 				Consider inputs with invalid type as text inputs.
             </action>
