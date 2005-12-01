@@ -197,7 +197,7 @@
         <property name="encoding" readable="true" writable="true"/>
         <property name="length" readable="true" writable="false"/>
         <property name="method" readable="true" writable="true"/>
-        <property name="name" readable="true" writable="false"/>
+        <property name="name" readable="true" writable="true"/>
         <property name="onsubmit" readable="true" writable="true"/>
         <property name="target" readable="true" writable="true"/>
 

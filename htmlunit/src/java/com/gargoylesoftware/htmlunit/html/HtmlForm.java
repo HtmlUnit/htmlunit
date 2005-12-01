@@ -174,7 +174,7 @@ public class HtmlForm extends ClickableElement {
             }
 
             if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
-                 return htmlPage.executeJavaScriptIfPossible( action, "Form action", false, this ).getNewPage();
+                return htmlPage.executeJavaScriptIfPossible( action, "Form action", false, this ).getNewPage();
             }
         }
         else {
@@ -689,6 +689,17 @@ public class HtmlForm extends ClickableElement {
         return getAttributeValue( "name" );
     }
 
+
+    /**
+     *  Set the value of the attribute "name". Refer to the <a
+     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     *  details on the use of this attribute.<p>
+     *
+     * @param name the new value
+     */
+    public final void setNameAttribute(final String name) {
+        setAttributeValue("name", name);
+    }
 
     /**
      *  Return the value of the attribute "enctype". Refer to the <a
