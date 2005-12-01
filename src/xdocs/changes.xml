@@ -7,6 +7,13 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1370049" due-to="Paul King">
+                Fixed mangled binary files loaded with the file protocol for non ISO-8859-1
+                default system file encoding.
+            </action>
+            <action type="update" dev="mguillem">
+                Upgraded commons-io to 1.1.
+            </action>
             <action type="update" dev="mguillem" id="1370468">
                 Form's name now writable (both in DOM and in Javascript).
             </action>
