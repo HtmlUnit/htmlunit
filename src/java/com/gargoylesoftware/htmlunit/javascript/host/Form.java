@@ -100,6 +100,15 @@ public class Form extends HTMLElement {
         return getHtmlForm().getNameAttribute();
     }
 
+    /**
+     * Set the value of the javascript attribute "name".
+     * @param name The new value.
+     */
+    public void jsxSet_name(final String name) {
+        Assert.notNull("name", name);
+        getHtmlForm().setNameAttribute(name);
+    }
+
 
     /**
      * Return the value of the javascript attribute "elements".

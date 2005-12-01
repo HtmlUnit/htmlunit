@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1370468">
+                Form's name now writable (both in DOM and in Javascript).
+            </action>
             <action type="update" dev="mguillem" id="1369514">
                 Javascript: getElementsByTagName now returns an ElementArray (instead of a 
                 NativeArray) for html elements allowing expressions like 

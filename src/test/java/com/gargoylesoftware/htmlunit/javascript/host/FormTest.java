@@ -210,6 +210,18 @@ public class FormTest extends WebTestCase {
         assertEquals( newValue, form.getActionAttribute() );
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testNameProperty() throws Exception {
+        final String jsProperty = "name";
+        final String htmlProperty = "name";
+        final String oldValue = "myForm";
+        final String newValue = "testForm";
+
+        final HtmlForm form = doTestProperty( jsProperty, htmlProperty, oldValue, newValue );
+        assertEquals( newValue, form.getNameAttribute() );
+    }
 
     /**
      * @throws Exception if the test fails
@@ -264,26 +276,25 @@ public class FormTest extends WebTestCase {
         final String content
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
-            + "    alert(document.form1."+jsProperty+");\n"
-            + "    document.form1."+jsProperty+"='"+newValue+"'\n"
-            + "    alert(document.form1."+jsProperty+");\n"
+            + "    alert(document.forms[0]."+jsProperty+");\n"
+            + "    document.forms[0]."+jsProperty+"='"+newValue+"'\n"
+            + "    alert(document.forms[0]."+jsProperty+");\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>"
-            + "<form name='form1' "+htmlProperty+"='"+oldValue+"'>"
+            + "<form " + htmlProperty + "='" + oldValue + "'>"
             + "    <input type='button' name='button1' />"
             + "</form>"
             + "</body></html>";
 
+        final List expectedAlerts = Arrays.asList( new String[]{oldValue, newValue} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            oldValue, newValue
-        } );
-
         assertEquals( expectedAlerts, collectedAlerts );
-        return page.getFormByName("form1");
+        return (HtmlForm) page.getForms().get(0);
     }
 
 
