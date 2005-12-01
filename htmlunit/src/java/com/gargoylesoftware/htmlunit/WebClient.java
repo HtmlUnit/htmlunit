@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -61,6 +62,7 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
@@ -95,6 +97,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
  * @author Daniel Gredler
  * @author Sergey Gorelkin
  * @author Hans Donner
+ * @author Paul King
  */
 public class WebClient {
 
@@ -1145,17 +1148,47 @@ public class WebClient {
      */
     private WebResponse makeWebResponseForFileUrl(final URL url) throws IOException {
         final File file = FileUtils.toFile(url);
-
-        // take default encoding of the computer (in J2SE5 it's easier but...)
-        final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
-        final String str = FileUtils.readFileToString(file, encoding);
         final String contentType = guessContentType(file);
 
-        return new StringWebResponse(str, url) {
-            public String getContentType() {
-                return contentType;
-            }
-        };
+        if (contentType.startsWith("text")) {
+            // take default encoding of the computer (in J2SE5 it's easier but...)
+            final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
+            final String str = IOUtils.toString(new FileInputStream(file), encoding);
+            return new StringWebResponse(str, url) {
+                public String getContentType() {
+                    return contentType;
+                }
+            };
+        }
+        else {
+            final byte[] data = IOUtils.toByteArray(new FileInputStream(file));
+            return new BinaryWebResponse(data, url, contentType);
+        }
+    }
+
+    /**
+     * A simple WebResponse created from a byte array.  Content is assumed to be
+     * of some binary type.
+     *
+     * @author Paul King
+     */
+    private static final class BinaryWebResponse extends WebResponseImpl {
+        private final byte[] data_;
+
+        private static WebResponseData getWebResponseData(final byte[] data, final String contentType) {
+            final List compiledHeaders = new ArrayList();
+            compiledHeaders.add(new NameValuePair("Content-Type", contentType));
+            return new WebResponseData(data, 200, "OK", compiledHeaders);
+        }
+
+        private BinaryWebResponse(final byte[] data, final URL originatingURL, final String contentType) {
+            super(getWebResponseData(data, contentType), originatingURL, SubmitMethod.GET, 0);
+            data_ = data;
+        }
+
+        public InputStream getContentAsStream() {
+            return new ByteArrayInputStream(data_);
+        }
     }
 
     /**

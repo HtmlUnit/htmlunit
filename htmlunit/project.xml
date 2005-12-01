@@ -172,6 +172,9 @@
         <contributor>
         	<name>Stefan Anzinger</name>
         </contributor>
+        <contributor>
+        	<name>Paul King</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
@@ -420,7 +423,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
             <type>jar</type>
             <url>http://jakarta.apache.org/commons/io/</url>
             <properties>

@@ -42,6 +42,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.FileInputStream;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
@@ -70,6 +72,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author David D. Kilzer
  * @author Chris Erskine
  * @author Hans Donner
+ * @author Paul King
  */
 public class WebClientTest extends WebTestCase {
 
@@ -1168,6 +1171,40 @@ public class WebClientTest extends WebTestCase {
         assertEquals("empty.png", "image/png", webClient.guessContentType(getTestFile("empty.png")));
         assertEquals("empty.jpg", "image/jpeg", webClient.guessContentType(getTestFile("empty.jpg")));
         assertEquals("empty.gif", "image/gif", webClient.guessContentType(getTestFile("empty.gif")));
+    }
+
+
+    /**
+     * Test that no encoding disturb file reads from filesystem.
+     * For instance this test failed under Linux with LANG=de_DE.UTF-8 or LANG=C
+     * but worked for LANG=de_DE.ISO-8859-1
+     * @throws Exception if the test fails.
+     */
+    public void testBinaryFileFromFileSystem() throws Exception {
+        final String testfileName = "tiny-jpg.img";
+        final File testfile = getTestFile(testfileName);
+        final byte[] directBytes = IOUtils.toByteArray(new FileInputStream(testfile));
+        final String directStr = hexRepresentation(directBytes);
+        final WebClient client = new WebClient();
+        final Page testpage = client.getPage(testfile.toURL());
+        final byte[] webclientBytes = IOUtils.toByteArray(testpage.getWebResponse().getContentAsStream());
+        final String webclientStr = hexRepresentation(webclientBytes);
+        assertEquals(directStr, webclientStr);
+    }
+
+    /**
+     * Helper to make hex diff human easier to read for human eyes
+     * @param digest the bytes
+     * @return the hex representation
+     */
+    private static String hexRepresentation(final byte[] digest) {
+        final StringBuffer hexString = new StringBuffer();
+        for (int i = 0; i < digest.length; i++) {
+            final byte b = digest[i];
+            hexString.append(Integer.toHexString(0xFF & b));
+            hexString.append(" ");
+        }
+        return hexString.toString().trim();
     }
 
 
