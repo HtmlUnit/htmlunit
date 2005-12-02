@@ -43,87 +43,48 @@ import java.net.URL;
 import org.apache.commons.httpclient.HttpState;
 
 /**
- *  An object that handles the actual communication portion of page
- *  retrieval/submission <p />
+ * An object that handles the actual communication portion of page
+ * retrieval/submission.
  *
- *  THIS CLASS IS FOR INTERNAL USE ONLY
+ * THIS CLASS IS FOR INTERNAL USE ONLY
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Daniel Gredler
  */
 public abstract class WebConnection {
-    private final String proxyHost_;
-    private final int proxyPort_;
+
     private final WebClient webClient_;
 
-
     /**
-     *  Create an instance that will not use a proxy server
-     *
-     * @param  webClient The WebClient that is using this connection
+     * Creates a new web connection instance.
+     * @param webClient The WebClient that is using this connection.
      */
     public WebConnection( final WebClient webClient ) {
         webClient_ = webClient;
-        proxyHost_ = null;
-        proxyPort_ = 0;
-    }
-
-
-    /**
-     *  Create an instance that will use the specified proxy server
-     *
-     * @param  proxyHost The server that will act as proxy
-     * @param  proxyPort The port to use on the proxy server
-     * @param  webClient The web client that is using this connection
-     */
-    public WebConnection( final WebClient webClient, final String proxyHost, final int proxyPort ) {
-        webClient_ = webClient;
-        proxyHost_ = proxyHost;
-        proxyPort_ = proxyPort;
     }
 
     /**
-     *  Submit a request and retrieve a response
-     *
-     * @param  webRequestSettings Settings to make the request with
-     * @return  See above
-     * @exception  IOException If an IO error occurs
+     * Submits a request and retrieves a response.
+     * @param webRequestSettings Settings to make the request with.
+     * @return The response to the request defined by the specified request settings.
+     * @exception IOException If an IO error occurs.
      */
-    public abstract WebResponse getResponse(final WebRequestSettings webRequestSettings)
-        throws IOException;
+    public abstract WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException;
 
     /**
-     * Return the web client
+     * Return the web client.
      * @return The web client.
      */
     public final WebClient getWebClient() {
         return webClient_;
     }
 
-
     /**
-     * Return the proxy host
-     * @return The proxy host.
-     */
-    public final String getProxyHost() {
-        return proxyHost_;
-    }
-
-
-    /**
-     * Return the proxy port.
-     * @return The proxy port.
-     */
-    public final int getProxyPort() {
-        return proxyPort_;
-    }
-
-
-    /**
-     * Return the {@link HttpState} that is being used for a given domain
-     * @param url The url from which the domain will be determined
+     * Return the {@link HttpState} that is being used for a given domain.
+     * @param url The url from which the domain will be determined.
      * @return The state or null if no state can be found for this domain.
      */
     public abstract HttpState getStateForUrl( final URL url );
-}
 
+}
