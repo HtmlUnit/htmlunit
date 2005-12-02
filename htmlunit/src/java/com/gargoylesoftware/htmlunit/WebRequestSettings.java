@@ -55,6 +55,8 @@ import org.apache.commons.lang.ClassUtils;
  */
 public class WebRequestSettings {
     private URL url_;
+    private String proxyHost_ = null;
+    private int proxyPort_ = 0;
     private SubmitMethod submitMethod_ = SubmitMethod.GET;
     private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
     private Map additionalHeaders_ = new HashMap();
@@ -93,6 +95,34 @@ public class WebRequestSettings {
      */
     public void setURL(final URL url) {
         url_ = url;
+    }
+
+    /**
+     * @return The proxy host.
+     */
+    public String getProxyHost() {
+        return proxyHost_;
+    }
+
+    /**
+     * @param proxyHost The new proxy host.
+     */
+    public void setProxyHost( final String proxyHost ) {
+        proxyHost_ = proxyHost;
+    }
+
+    /**
+     * @return The proxy port.
+     */
+    public int getProxyPort() {
+        return proxyPort_;
+    }
+
+    /**
+     * @param proxyPort The new proxy port.
+     */
+    public void setProxyPort( final int proxyPort ) {
+        proxyPort_ = proxyPort;
     }
 
     /**

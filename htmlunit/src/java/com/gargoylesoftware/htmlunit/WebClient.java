@@ -61,6 +61,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
@@ -107,6 +108,7 @@ public class WebClient {
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
     private final String proxyHost_;
     private final int proxyPort_;
+    private final Map proxyBypassHosts_;
     private ScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
     private String homePage_;
@@ -179,6 +181,7 @@ public class WebClient {
         browserVersion_ = browserVersion;
         proxyHost_ = null;
         proxyPort_ = 0;
+        proxyBypassHosts_ = new HashMap();
         try {
             scriptEngine_ = createJavaScriptEngineIfPossible( this );
         }
@@ -202,6 +205,7 @@ public class WebClient {
         browserVersion_ = browserVersion;
         proxyHost_ = proxyHost;
         proxyPort_ = proxyPort;
+        proxyBypassHosts_ = new HashMap();
         try {
             scriptEngine_ = createJavaScriptEngineIfPossible( this );
         }
@@ -238,14 +242,8 @@ public class WebClient {
      */
     public synchronized WebConnection getWebConnection() {
         if( webConnection_ == null ) {
-            if( proxyHost_ == null ) {
-                webConnection_ = new HttpWebConnection( this );
-            }
-            else {
-                webConnection_ = new HttpWebConnection( this, proxyHost_, proxyPort_ );
-            }
+            webConnection_ = new HttpWebConnection( this );
         }
-
         return webConnection_;
     }
 
@@ -313,6 +311,15 @@ public class WebClient {
         throws IOException, FailingHttpStatusCodeException {
 
         getLog().debug("Get page for window named '" + webWindow.getName() + "', using " + parameters);
+
+        // If the request settings don't specify a custom proxy, use the default client proxy...
+        if( parameters.getProxyHost() == null ) {
+            // ...unless the host needs to bypass the configured client proxy!
+            if( ! shouldBypassProxy( parameters.getURL().getHost() ) ) {
+                parameters.setProxyHost( proxyHost_ );
+                parameters.setProxyPort( proxyPort_ );
+            }
+        }
 
         final String protocol = parameters.getURL().getProtocol();
         final WebResponse webResponse;
@@ -611,6 +618,47 @@ public class WebClient {
      */
     public void setHomePage(final String homePage) {
         homePage_ = homePage;
+    }
+
+
+    /**
+     * Any hosts matched by the specified regular expression pattern will bypass the configured proxy.
+     * @param pattern A regular expression pattern that matches the hostnames of the hosts which should
+     * bypass the configured proxy.
+     * @see Pattern
+     */
+    public void addHostsToProxyBypass( final String pattern ) {
+        proxyBypassHosts_.put( pattern, Pattern.compile( pattern ) );
+    }
+
+
+    /**
+     * Any hosts matched by the specified regular expression pattern will no longer bypass the configured proxy.
+     * @param pattern The previously added regular expression pattern.
+     * @see Pattern
+     */
+    public void removeHostsFromProxyBypass( final String pattern ) {
+        proxyBypassHosts_.remove( pattern );
+    }
+
+
+    /**
+     * Returns <tt>true</tt> if the host with the specified hostname should be accessed bypassing the
+     * configured proxy.
+     * @param hostname The name of the host to check.
+     * @return <tt>true</tt> if the host with the specified hostname should be accessed bypassing the
+     * configured proxy, <tt>false</tt> otherwise.
+     */
+    private boolean shouldBypassProxy( final String hostname ) {
+        boolean bypass = false;
+        for( final Iterator i = proxyBypassHosts_.values().iterator(); i.hasNext(); ) {
+            final Pattern p = (Pattern) i.next();
+            if( p.matcher( hostname ).find() ) {
+                bypass = true;
+                break;
+            }
+        }
+        return bypass;
     }
 
 

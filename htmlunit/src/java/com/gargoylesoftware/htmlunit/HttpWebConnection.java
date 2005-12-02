@@ -95,25 +95,13 @@ public class HttpWebConnection extends WebConnection {
         }
     };
 
+
     /**
-     *  Create an instance that will not use a proxy server
-     *
+     * Create a new HTTP web connection instance.
      * @param  webClient The WebClient that is using this connection
      */
     public HttpWebConnection( final WebClient webClient ) {
         super(webClient);
-    }
-
-
-    /**
-     *  Create an instance that will use the specified proxy server
-     *
-     * @param  proxyHost The server that will act as proxy
-     * @param  proxyPort The port to use on the proxy server
-     * @param  webClient The web client that is using this connection
-     */
-    public HttpWebConnection( final WebClient webClient, final String proxyHost, final int proxyPort ) {
-        super(webClient, proxyHost, proxyPort);
     }
 
 
@@ -128,7 +116,7 @@ public class HttpWebConnection extends WebConnection {
 
         final URL url = webRequestSettings.getURL();
 
-        final HttpClient httpClient = getHttpClientFor( url );
+        final HttpClient httpClient = getHttpClientFor( url, webRequestSettings );
 
         try {
             final HttpMethodBase httpMethod = makeHttpMethod(webRequestSettings);
@@ -285,7 +273,7 @@ public class HttpWebConnection extends WebConnection {
         }
     }
 
-    private synchronized HttpClient getHttpClientFor( final URL url ) {
+    private synchronized HttpClient getHttpClientFor( final URL url, final WebRequestSettings webRequestSettings ) {
         final String key = url.getProtocol() + "://" + url.getHost().toLowerCase() + ":" + getPort(url);
 
         HttpClient client = ( HttpClient )httpClients_.get( key );
@@ -308,8 +296,10 @@ public class HttpWebConnection extends WebConnection {
                 throw new IllegalStateException("Unable to create URI from URL: "+url.toExternalForm());
             }
             hostConfiguration.setHost(uri);
-            if( getProxyHost() != null ) {
-                hostConfiguration.setProxy( getProxyHost(), getProxyPort() );
+            if( webRequestSettings.getProxyHost() != null ) {
+                final String proxyHost = webRequestSettings.getProxyHost();
+                final int proxyPort = webRequestSettings.getProxyPort();
+                hostConfiguration.setProxy( proxyHost, proxyPort );
             }
             client.setHostConfiguration(hostConfiguration);
             final int timeout = getWebClient().getTimeout();
