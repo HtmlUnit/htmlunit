@@ -558,6 +558,44 @@ public class SelectTest extends WebTestCase {
     }
 
     /**
+     * Test that option array is filled with empty options when lenght is increased.
+     * Test case for bug 1370484
+     * @throws Exception if the test fails
+     */
+    public void testIncreaseOptionsSettingLength() throws Exception {
+        final String content
+            = "<html><head><title>foo</title><script>"
+            + "function doTest() {\n"
+            + "    var options = document.form1.select1.options;\n"
+            + "    alert(options.length);\n"
+            + "    options.length = 2;\n"
+            + "    alert(options.length);\n"
+            + "    alert(options[1].text);\n"
+            + "    alert(options[1].value);\n"
+            + "    options.length = 50;\n"
+            + "    options[49].text = 'foo';\n"
+            + "    options[49].value = 'fooValue';\n"
+            + "    alert(options[49].text);\n"
+            + "    alert(options[49].value);\n"
+            + "}</script></head><body onload='doTest()'>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <select name='select1'>"
+            + "        <option name='option1' value='value1'>One</option>"
+            + "    </select>"
+            + "</form>"
+            + "</body></html>";
+
+        final List expectedAlerts = Arrays.asList( new String[]{"1", "2", "", "", "foo", "fooValue"} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     public void testOptionArrayHasItemMethod() throws Exception {
