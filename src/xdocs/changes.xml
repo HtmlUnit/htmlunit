@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1224239" due-to="Vikram Shitole / Daniel Gredler">
+                Fixed support for NTLM proxy.
+            </action>
             <action type="update" dev="mguillem" id="1370484">
                 JavaScript: setting options' length to a value greater than current.
                 size fills option array with empty options.
