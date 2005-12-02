@@ -180,10 +180,20 @@ public class OptionsArray extends SimpleScriptable {
 
 
     /**
-     * Remove options by reducing the "length" property
+     * Change the number of options: removes options if the new lenght
+     * is less than the current one else add new empty options to reach the
+     * new length.
      * @param newLength The new length property value
      */
     public void jsSet_length( final int newLength ) {
-        htmlSelect_.setOptionSize( newLength );
+        final int currentLength = htmlSelect_.getOptionSize();
+        if (currentLength > newLength) {
+            htmlSelect_.setOptionSize( newLength );
+        }
+        else {
+            for (int i=currentLength; i<newLength; ++i) {
+                htmlSelect_.appendOption(new HtmlOption(htmlSelect_.getPage(), null));
+            }
+        }
     }
 }

@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1370484">
+                JavaScript: setting options' length to a value greater than current.
+                size fills option array with empty options.
+            </action>
             <action type="update" dev="mguillem" id="1370049" due-to="Paul King">
                 Fixed mangled binary files loaded with the file protocol for non ISO-8859-1
                 default system file encoding.
