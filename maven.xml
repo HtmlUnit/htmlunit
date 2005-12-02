@@ -282,7 +282,7 @@
         description="Run all the tests and output results to the console."
         prereqs="test:compile">
 
-        <ant:java fork="true" classname="junit.textui.TestRunner" dir="target/test-classes">
+        <ant:java fork="true" classname="junit.textui.TestRunner" dir="target/test-classes" failonerror="true">
               <ant:jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog"/>
             <ant:arg value="com.gargoylesoftware.htmlunit.MainTestSuite"/>
             <ant:classpath>
