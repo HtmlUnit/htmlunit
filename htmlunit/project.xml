@@ -175,6 +175,9 @@
         <contributor>
         	<name>Paul King</name>
         </contributor>
+        <contributor>
+        	<name>Vikram Shitole</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

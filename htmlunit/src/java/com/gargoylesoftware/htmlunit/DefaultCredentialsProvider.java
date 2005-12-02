@@ -45,6 +45,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.commons.httpclient.Credentials;
+import org.apache.commons.httpclient.NTCredentials;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthScheme;
 import org.apache.commons.httpclient.auth.AuthScope;
@@ -59,6 +60,7 @@ import org.apache.commons.logging.LogFactory;
  * authentication, and Basic HTTP authentication.
  * 
  * @author Daniel Gredler
+ * @author Vikram Shitole
  * @version $Revision$
  */
 public class DefaultCredentialsProvider implements CredentialsProvider {
@@ -102,8 +104,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
         final AuthScope scope = new AuthScope( host, port, realm, AuthScope.ANY_SCHEME );
         final Credentials c = new UsernamePasswordCredentials( username, password );
         credentials_.put( scope, c );
-        answerMarks_.clear(); // don't need to be precise, will cause in worst case one extra request
-        getLog().debug("Flushed marked answers");
+        clearAnswered(); // don't need to be precise, will cause in worst case one extra request
     }
 
     /**
@@ -126,8 +127,26 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
         final AuthScope scope = new AuthScope( host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME );
         final Credentials c = new UsernamePasswordCredentials( username, password );
         proxyCredentials_.put( scope, c );
-        answerMarks_.clear(); // don't need to be precise, will cause in worst case one extra request
-        getLog().debug("Flushed marked answers");
+        clearAnswered(); // don't need to be precise, will cause in worst case one extra request
+    }
+
+    /**
+     * Adds NTLM proxy credentials for the specified username/password on the specified host/port.
+     * @param username The username for the new credentials. This should not include the domain to authenticate with.
+     * For example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not.
+     * @param password The password for the new credentials.
+     * @param host The host to which to the new credentials apply (<tt>null</tt> if applicable to any host).
+     * @param port The port to which to the new credentials apply (negative if applicable to any port).
+     * @param clientHost The host the authentication request is originating from. Essentially, the computer name for
+     * this machine.
+     * @param clientDomain The domain to authenticate within.
+     */
+    public void addNTLMProxyCredentials( final String username, final String password, final String host,
+            final int port, final String clientHost, final String clientDomain ) {
+        final AuthScope scope = new AuthScope( host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME );
+        final Credentials c = new NTCredentials( username, password, clientHost, clientDomain );
+        proxyCredentials_.put( scope, c );
+        clearAnswered(); // don't need to be precise, will cause in worst case one extra request
     }
 
     /**
@@ -143,8 +162,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
      */
     public Credentials getCredentials( final AuthScheme scheme, final String host, final int port, final boolean proxy )
         throws CredentialsNotAvailableException {
-        
-        // it's the responsibility of the CredentialProvider to answer only once with a given Credentials 
+
+        // it's the responsibility of the CredentialProvider to answer only once with a given Credentials
         // to avoid infinte loop if it is incorrect
         // see http://issues.apache.org/bugzilla/show_bug.cgi?id=8140
         if (alreadyAnswered(scheme, host, port, proxy)) {
@@ -152,7 +171,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
                     + " returning null");
             return null;
         }
-        
+
         final Map credentials;
         if( proxy ) {
             credentials = proxyCredentials_;
@@ -200,7 +219,15 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
     private void markAsAnswered(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
         answerMarks_.add(buildKey(scheme, host, port, proxy));
     }
-    
+
+    /**
+     * Clears the cache of answered (scheme, host, port, proxy) combinations.
+     */
+    private void clearAnswered() {
+        answerMarks_.clear();
+        getLog().debug( "Flushed marked answers" );
+    }
+
     /**
      * Build a key with the specified data
      * @param scheme The scheme
@@ -212,7 +239,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
     private Object buildKey(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
         return scheme.getSchemeName() + " " + scheme.getRealm() + " " + host + ":" + port + " " + proxy;
     }
-    
+
     /**
      * Return the log object for this class
      * @return The log object
