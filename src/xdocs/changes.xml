@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1238429" due-to="Daniel Gredler">
+                JavaScript: made Location properties writable.
+            </action>
             <action type="update" dev="mguillem" id="1224239" due-to="Daniel Gredler">
                 Added possibility to bypass configured proxy for some hosts.
             </action>

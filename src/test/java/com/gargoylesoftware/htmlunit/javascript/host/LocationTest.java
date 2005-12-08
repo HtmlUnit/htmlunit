@@ -68,7 +68,7 @@ public class LocationTest extends WebTestCase {
     public LocationTest( final String name ) {
         super(name);
     }
-    
+
     /**
      * Regression test for bug 742902
      * @throws Exception if the test fails
@@ -90,7 +90,7 @@ public class LocationTest extends WebTestCase {
         final List expectedAlerts = Collections.singletonList(URL_GARGOYLE.toExternalForm());
         assertEquals( expectedAlerts, collectedAlerts );
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -157,11 +157,11 @@ public class LocationTest extends WebTestCase {
         final List expectedAlerts = Collections.singletonList(URL_GARGOYLE.toExternalForm());
         assertEquals( expectedAlerts, collectedAlerts );
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
-    public void testLocation_variousAttributes() throws Exception {
+    public void testGetVariousAttributes() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection( client );
 
@@ -203,20 +203,179 @@ public class LocationTest extends WebTestCase {
         assertEquals( "simple url", expectedAlerts, collectedAlerts );
 
         collectedAlerts.clear();
-        
+
         // Try page with all the appropriate parts
         client.getPage( new URL("http://www.first:77/foo?bar#wahoo") );
         expectedAlerts = Arrays.asList( new String[]{
-            "wahoo",                             // hash 
+            "wahoo",                             // hash
             "www.first:77",                      // host
             "www.first",                         // hostname
             "http://www.first:77/foo?bar#wahoo", // href
             "/foo",                              // pathname
             "77",                                // port
-            "http:",                              // protocol 
+            "http:",                             // protocol
             "?bar"                               // search
         } );
         assertEquals( "complete url", expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testSetHash() throws Exception {
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final String html
+            = "<html><head><title>Test</title></head>\n"
+            + "<body><a id='a' onclick='location.hash=\"b\"'>go</a><h2 id='b'>...</h2></body></html>";
+        final URL url2 = new URL( URL_FIRST + "#b" );
+        webConnection.setResponse( URL_FIRST, html );
+        webConnection.setResponse( url2, html );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage) webClient.getPage( URL_FIRST );
+        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById( "a" );
+        final HtmlPage page2 = (HtmlPage) anchor.click();
+        assertEquals( url2.toExternalForm(), page2.getWebResponse().getUrl().toExternalForm() );
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testSetHostname() throws Exception {
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final URL url = new URL( "http://abc.com/index.html#bottom" );
+        final URL url2 = new URL( "http://xyz.com/index.html#bottom" );
+        final String html
+            = "<html><head><title>Test 1</title></head>\n"
+            + "<body onload='location.hostname=\"xyz.com\"'>...</body></html>";
+        final String html2
+            = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        webConnection.setResponse( url, html );
+        webConnection.setResponse( url2, html2 );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage) webClient.getPage( url );
+        assertEquals( "Test 2", page.getTitleText() );
+        assertEquals( url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm() );
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testSetHostWithoutPort() throws Exception {
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final URL url = new URL( "http://abc.com/index.html#bottom" );
+        final URL url2 = new URL( "http://xyz.com/index.html#bottom" );
+        final String html
+            = "<html><head><title>Test 1</title></head>\n"
+            + "<body onload='location.host=\"xyz.com\"'>...</body></html>";
+        final String html2
+            = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        webConnection.setResponse( url, html );
+        webConnection.setResponse( url2, html2 );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage) webClient.getPage( url );
+        assertEquals( "Test 2", page.getTitleText() );
+        assertEquals( url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm() );
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testSetHostWithPort() throws Exception {
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final URL url = new URL( "http://abc.com/index.html#bottom" );
+        final URL url2 = new URL( "http://xyz.com:8080/index.html#bottom" );
+        final String html
+            = "<html><head><title>Test 1</title></head>\n"
+            + "<body onload='location.host=\"xyz.com:8080\"'>...</body></html>";
+        final String html2
+            = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        webConnection.setResponse( url, html );
+        webConnection.setResponse( url2, html2 );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage) webClient.getPage( url );
+        assertEquals( "Test 2", page.getTitleText() );
+        assertEquals( url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm() );
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testSetPathname() throws Exception {
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final URL url = new URL( "http://abc.com/index.html?blah=bleh" );
+        final URL url2 = new URL( "http://abc.com/en/index.html?blah=bleh" );
+        final String html
+            = "<html><head><title>Test 1</title></head>\n"
+            + "<body onload='location.pathname=\"/en/index.html\"'>...</body></html>";
+        final String html2
+            = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        webConnection.setResponse( url, html );
+        webConnection.setResponse( url2, html2 );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage) webClient.getPage( url );
+        assertEquals( "Test 2", page.getTitleText() );
+        assertEquals( url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm() );
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testSetPort() throws Exception {
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final URL url = new URL( "http://abc.com/index.html#bottom" );
+        final URL url2 = new URL( "http://abc.com:88/index.html#bottom" );
+        final String html
+            = "<html><head><title>Test 1</title></head>\n"
+            + "<body onload='location.port=\"88\"'>...</body></html>";
+        final String html2
+            = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        webConnection.setResponse( url, html );
+        webConnection.setResponse( url2, html2 );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage) webClient.getPage( url );
+        assertEquals( "Test 2", page.getTitleText() );
+        assertEquals( url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm() );
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testSetProtocol() throws Exception {
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final URL url = new URL( "http://abc.com/index.html?blah=bleh" );
+        final URL url2 = new URL( "ftp://abc.com/index.html?blah=bleh" );
+        final String html
+            = "<html><head><title>Test 1</title></head>\n"
+            + "<body onload='location.protocol=\"ftp\"'>...</body></html>";
+        final String html2
+            = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        webConnection.setResponse( url, html );
+        webConnection.setResponse( url2, html2 );
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage) webClient.getPage( url );
+        assertEquals( "Test 2", page.getTitleText() );
+        assertEquals( url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm() );
     }
 
     /**
@@ -233,6 +392,32 @@ public class LocationTest extends WebTestCase {
             + "    location.replace('" + URL_SECOND.toExternalForm() + "');\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>"
+            + "</body></html>";
+
+        final String secondContent
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webClient.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage) webClient.getPage( URL_FIRST );
+        assertEquals("Second", page.getTitleText());
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testAssign() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+
+        final String firstContent
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    location.assign('" + URL_SECOND.toExternalForm() + "');\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
         final String secondContent

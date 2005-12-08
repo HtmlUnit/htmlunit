@@ -479,18 +479,18 @@
 
     <class name="Location" classname="com.gargoylesoftware.htmlunit.javascript.host.Location"
 		JSObject="true">
-        <property name="hash" readable="true" writable="false"/>
-        <property name="host" readable="true" writable="false"/>
-        <property name="hostname" readable="true" writable="false"/>
+        <property name="hash" readable="true" writable="true"/>
+        <property name="host" readable="true" writable="true"/>
+        <property name="hostname" readable="true" writable="true"/>
         <property name="href" readable="true" writable="true"/>
-        <property name="pathname" readable="true" writable="false"/>
-        <property name="port" readable="true" writable="false"/>
-        <property name="protocol" readable="true" writable="false"/>
-        <property name="search" readable="true" writable="false"/>
+        <property name="pathname" readable="true" writable="true"/>
+        <property name="port" readable="true" writable="true"/>
+        <property name="protocol" readable="true" writable="true"/>
+        <property name="search" readable="true" writable="true"/>
 
+        <function name="assign"/>
         <function name="reload"/>
         <function name="replace"/>
-        <function name="refresh" notImplemented="true"/>
     </class>
 
     <class name="Navigator" classname="com.gargoylesoftware.htmlunit.javascript.host.Navigator"
