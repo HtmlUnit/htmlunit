@@ -750,11 +750,20 @@ public final class HtmlPage extends DomNode implements Page {
      * @param srcAttribute The source attribute from the script tag.
      * @param charset The charset attribute from the script tag.
      */
-    public void loadExternalJavaScriptFile( final String srcAttribute,
+    void loadExternalJavaScriptFile( final String srcAttribute,
                                             final String charset  ) {
         final ScriptEngine engine = getWebClient().getScriptEngine();
-        if( engine != null ) {
-            engine.execute( this, loadJavaScriptFromUrl( srcAttribute, charset ), srcAttribute, null );
+        if (engine != null) {
+            final URL scriptURL;
+            try {
+                scriptURL = getFullyQualifiedUrl(srcAttribute);
+            }
+            catch( final MalformedURLException e ) {
+                getLog().error("Unable to build url for script src tag [" + srcAttribute + "]");
+                return;
+            }
+
+            engine.execute(this, loadJavaScriptFromUrl(scriptURL, charset), scriptURL.toExternalForm(), null);
         }
     }
 
@@ -783,13 +792,16 @@ public final class HtmlPage extends DomNode implements Page {
         return isJavaScript;
     }
 
-    private String loadJavaScriptFromUrl( final String urlString,
-                                          final String charset ) {
-        URL url = null;
+    /**
+     * 
+     * @param url the url of the script
+     * @param charset the charset to use to read the text
+     * @return the content of the file
+     */
+    private String loadJavaScriptFromUrl(final URL url, final String charset ) {
         String scriptEncoding = charset;
         getPageEncoding();
         try {
-            url = getFullyQualifiedUrl(urlString);
             final WebRequestSettings requestSettings = new WebRequestSettings(url);
             final WebResponse webResponse = getWebClient().loadWebResponse(requestSettings);
             if( webResponse.getStatusCode() == 200 ) {
@@ -801,32 +813,28 @@ public final class HtmlPage extends DomNode implements Page {
                         "Expected content type of text/javascript or application/x-javascript for remotely "
                         + "loaded javascript element " + url + " but got [" + webResponse.getContentType()+"]");
                 }
-                if( scriptEncoding == null || scriptEncoding.length() == 0 ){
-                    if( contentCharset.equals("ISO-8859-1")==false ) {
+                if (StringUtils.isEmpty(scriptEncoding)) {
+                    if (!contentCharset.equals("ISO-8859-1")) {
                         scriptEncoding = contentCharset;
                     }
-                    else if( originalCharset_.equals("ISO-8859-1")==false ){
+                    else if (!originalCharset_.equals("ISO-8859-1")) {
                         scriptEncoding = originalCharset_ ;
                     }
-                }
-                if( scriptEncoding == null || scriptEncoding.length() == 0 ){
-                    scriptEncoding = "ISO-8859-1";
+                    else {
+                        scriptEncoding = "ISO-8859-1";
+                    }
                 }
                 final byte [] data = webResponse.getResponseBody();
-                return EncodingUtil.getString(data, 0, data.length, scriptEncoding );
+                return EncodingUtil.getString(data, 0, data.length, scriptEncoding);
             }
             else {
-                getLog().error("Error loading javascript from ["+url.toExternalForm()
-                    +"] status=["+webResponse.getStatusCode()+" "
-                    +webResponse.getStatusMessage()+"]");
+                getLog().error("Error loading javascript from [" + url.toExternalForm()
+                    + "] status=[" + webResponse.getStatusCode() + " "
+                    + webResponse.getStatusMessage() + "]");
             }
         }
-        catch( final MalformedURLException e ) {
-            getLog().error("Unable to build url for script src tag ["+urlString+"]");
-            return "";
-        }
         catch( final Exception e ) {
-            getLog().error("Error loading javascript from ["+url.toExternalForm()+"]: ", e);
+            getLog().error("Error loading javascript from [" + url.toExternalForm() + "]: ", e);
         }
         return "";
     }
