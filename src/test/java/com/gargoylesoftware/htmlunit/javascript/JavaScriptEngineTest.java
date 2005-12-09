@@ -200,7 +200,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -221,7 +221,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "  <iframe src='page2.html'/>"
             + "</body>"
             + "</html>";
-        
+
         final String secondContent = "<html><head><script>"
             + "var foo = 'foo2';"
             + "parent.test();"
@@ -229,7 +229,6 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "f();"
             + "</script></head></html>";
 
-        
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setDefaultResponse( secondContent );
@@ -263,7 +262,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "  <div id='testdiv' onclick='alert(foo)'>foo</div>"
             + "</body>"
             + "</html>";
-        
+
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setDefaultResponse("<html></html>");
@@ -305,7 +304,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String jsContent = "alert('got here');";
 
         webConnection.setResponse(URL_GARGOYLE, htmlContent);
-        webConnection.setResponse(new URL("http://www.gargoylesoftware.com/foo.js"), jsContent, 
+        webConnection.setResponse(new URL("http://www.gargoylesoftware.com/foo.js"), jsContent,
                 "text/javascript");
         client.setWebConnection( webConnection );
 
@@ -319,6 +318,48 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
+    /**
+     * Test that the url of the page containing the script is contained in the exception's message
+     * @throws Exception if the test fails
+     */
+    public void testScriptErrorContainsPageUrl() throws Exception {
+
+        // embedded script
+        final String content1
+            = "<html><head><script>a.foo</script>"
+            + "</head><body>"
+            + "</body></html>";
+
+        try {
+            loadPage(content1);
+        }
+        catch (final Exception e) {
+            assertTrue(e.getMessage().indexOf(URL_GARGOYLE.toString()) > -1);
+        }
+
+        // external script
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+
+        final String content2
+            = "<html><head><title>foo</title><script src='/foo.js'/>"
+            + "</head><body>"
+            + "</body></html>";
+
+        final String jsContent = "a.foo = 213;";
+
+        webConnection.setResponse(URL_GARGOYLE, content2);
+        final URL urlScript = new URL("http://www.gargoylesoftware.com/foo.js");
+        webConnection.setResponse(urlScript, jsContent, "text/javascript");
+        client.setWebConnection( webConnection );
+
+        try {
+            client.getPage(URL_GARGOYLE);
+        }
+        catch (final Exception e) {
+            assertTrue(e.getMessage().indexOf(urlScript.toString()) > -1);
+        }
+    }
 
     /**
      * @throws Exception if the test fails
@@ -464,7 +505,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "    if (testLocalVariable == null)\n"
             + "        testLocalVariable = 'foo';\n"
             + "} ";
-        
+
         webConnection.setResponse(URL_FIRST, htmlContent);
         webConnection.setResponse(new URL("http://first/test.js"), jsContent, "text/javascript");
         client.setWebConnection( webConnection );
@@ -539,7 +580,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testJavaScriptWrappedInHtmlComments_allOnOneLine() throws Exception {
-        final String content 
+        final String content
             = "<html>\n"
             + "  <head>\n"
             + "    <title>test</title>\n"
@@ -688,11 +729,11 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         assertEquals(1, countingJavaScriptEngine.getExecutionCount());
         assertEquals(0, countingJavaScriptEngine.getCallCount());
-        
+
         ((HtmlAnchor) page.getHtmlElementById("unqualified")).click();
         assertEquals(1, countingJavaScriptEngine.getExecutionCount());
         assertEquals(1, countingJavaScriptEngine.getCallCount());
-        
+
         ((HtmlAnchor) page.getHtmlElementById("qualified")).click();
         assertEquals(1, countingJavaScriptEngine.getExecutionCount());
         assertEquals(2, countingJavaScriptEngine.getCallCount());
@@ -710,7 +751,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             loadPage(getJavaScriptContent( "new ActiveXObject()" ));
             fail( "An exception should be thrown for zero argument constructor." );
-        } 
+        }
         catch( final ScriptException e ) {
             // Success
         }
@@ -718,7 +759,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             loadPage(getJavaScriptContent( "new ActiveXObject(1, '2', '3')" ));
             fail( "An exception should be thrown for a three argument constructor." );
-        } 
+        }
         catch( final ScriptException e ) {
             // Success
         }
@@ -726,7 +767,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             loadPage(getJavaScriptContent( "new ActiveXObject(a)" ));
             fail( "An exception should be thrown for an undefined parameter in the constructor." );
-        } 
+        }
         catch( final ScriptException e ) {
             // Success
         }
@@ -734,7 +775,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             loadPage(getJavaScriptContent( "new ActiveXObject(10)" ));
             fail( "An exception should be thrown for an integer parameter in the constructor." );
-        } 
+        }
         catch( final ScriptException e ) {
             // Success
         }
@@ -742,17 +783,17 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             loadPage(getJavaScriptContent( "new ActiveXObject('UnknownObject')" ));
             fail( "An exception should be thrown for a null map." );
-        } 
+        }
         catch( final ScriptException e ) {
             // Success
         }
     }
-    
+
     /**
      * Test that Java objects placed in the active x map can be instantiated and used within
      * javascript using the IE specific ActiveXObject constructor.
      * @throws Exception If the test fails
-     */    
+     */
     public void testActiveXObjectWithMap() throws Exception {
         final Map activexToJavaMapping = new HashMap();
         activexToJavaMapping.put(
@@ -761,7 +802,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         activexToJavaMapping.put(
                 "FakeObject",
                 "com.gargoylesoftware.htmlunit.javascript.NoSuchObject");
-        activexToJavaMapping.put("BadObject", new Object());        
+        activexToJavaMapping.put("BadObject", new Object());
 
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -774,7 +815,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for non existent object in the map." );
-        } 
+        }
         catch( final ScriptException e ) {
             // Success
         }
@@ -783,7 +824,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for an invalid object in the map." );
-        } 
+        }
         catch( final ScriptException e ) {
             // Success
         }
@@ -793,13 +834,13 @@ public class JavaScriptEngineTest extends WebTestCase {
         try {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for a non existent object in the map." );
-        } 
+        }
         catch( final ScriptException e ) {
             // Success
         }
 
         assertEquals("should no alerts yet", Collections.EMPTY_LIST, collectedAlerts);
-        
+
         // Try a valid object in the map
         webConnection.setDefaultResponse( getJavaScriptContent(
                 "var t = new ActiveXObject('MockActiveXObject'); alert(t.MESSAGE);" ) );
@@ -810,15 +851,14 @@ public class JavaScriptEngineTest extends WebTestCase {
                 collectedAlerts);
 
         collectedAlerts.clear();
-        
+
         webConnection.setDefaultResponse( getJavaScriptContent(
                 "var t = new ActiveXObject('MockActiveXObject', 'server'); alert(t.GetMessage());" ) );
         client.getPage( new URL( "http://www.yahoo.com" ) );
         assertEquals(
                 "The active x object did not bind to the object.",
                 Collections.singletonList(new MockActiveXObject().GetMessage()),
-                collectedAlerts);        
-        
+                collectedAlerts);
     }
 
     private String getJavaScriptContent( final String javascript ) {
@@ -833,7 +873,6 @@ public class JavaScriptEngineTest extends WebTestCase {
              + "</body></html>";
     }
 
-    
     /**
      * Check that wrong javascript just causes its context to fail but not the whole page.
      * @throws Exception If something goes wrong.
@@ -876,11 +915,10 @@ public class JavaScriptEngineTest extends WebTestCase {
         // and with script exception not thrown
         client.setThrowExceptionOnScriptError(false);
         client.getPage(URL_FIRST);
-        
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
-    
+
     private static final class CountingJavaScriptEngine extends ScriptEngine {
         private ScriptEngine delegate_;
         private int scriptExecutionCount_ = 0;
@@ -890,7 +928,7 @@ public class JavaScriptEngineTest extends WebTestCase {
          * Create an instance
          * @param delegate The ScriptEngine that we're wrapping.
          */
-        protected CountingJavaScriptEngine(ScriptEngine delegate) {
+        protected CountingJavaScriptEngine(final ScriptEngine delegate) {
             super(delegate.getWebClient());
             delegate_ = delegate;
         }

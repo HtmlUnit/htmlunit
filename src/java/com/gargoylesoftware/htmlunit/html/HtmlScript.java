@@ -158,7 +158,7 @@ public class HtmlScript extends HtmlElement {
     public final String getDeferAttribute() {
         return getAttributeValue("defer");
     }
-    
+
     /**
      * Executes the content as a script if it is a text node
      * @see com.gargoylesoftware.htmlunit.html.DomNode#appendChild(com.gargoylesoftware.htmlunit.html.DomNode)
@@ -174,7 +174,7 @@ public class HtmlScript extends HtmlElement {
      */
     void executeScriptIfNeeded() {
         final HtmlPage page = getPage();
-        
+
         if (!page.getWebClient().isJavaScriptEnabled()) {
             return;
         }
@@ -190,7 +190,7 @@ public class HtmlScript extends HtmlElement {
         else if (getFirstChild() != null) {
             final DomCharacterData textNode = (DomCharacterData) getFirstChild();
             final String scriptCode;
-            if (getEventAttribute() != ATTRIBUTE_NOT_DEFINED 
+            if (getEventAttribute() != ATTRIBUTE_NOT_DEFINED
                     && getHtmlForAttribute() != ATTRIBUTE_NOT_DEFINED) {
                 // event name can be like "onload" or "onload()"
                 String eventName = getEventAttribute();
@@ -199,14 +199,15 @@ public class HtmlScript extends HtmlElement {
                 }
                 final String scriptEventHandler = getHtmlForAttribute() + "." + eventName;
                 final String evhName = "htmlunit_evh_JJLL" + EventHandlerId_;
-                scriptCode = "function " + evhName + "()\n{" 
+                scriptCode = "function " + evhName + "()\n{"
                     + textNode.getData() + "}\n"
                     + scriptEventHandler + "=" + evhName + ";";
             }
             else {
                 scriptCode = textNode.getData();
             }
-            getPage().executeJavaScriptIfPossible(scriptCode, "Embedded script", false, null);
+            getPage().executeJavaScriptIfPossible(scriptCode,
+                    "Embedded script in " + getPage().getWebResponse().getUrl().toExternalForm(), false, null);
         }
-    }  
+    }
 }
