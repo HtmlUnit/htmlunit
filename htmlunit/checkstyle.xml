@@ -150,11 +150,6 @@
         <!-- See http://checkstyle.sf.net/config_misc.html -->
         <module name="UpperEll"/>
         
-        <!--module name="usage.OneMethodPrivateField"/-->
-        <module name="usage.UnusedLocalVariable"/>
-        <module name="usage.UnusedPrivateField">
-            <property name="ignoreFormat" value="serialVersionUID$"/>
-        </module>
         <module name="FinalLocalVariable">
             <property name="tokens" value="VARIABLE_DEF,PARAMETER_DEF"/>
         </module>
