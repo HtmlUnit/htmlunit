@@ -322,6 +322,7 @@
         <attainGoal name="maven-simian-plugin:register"/>
         <attainGoal name="maven-pmd-plugin:register"/>
         <attainGoal name="maven-clover-plugin:register"/>
+		<attainGoal name="maven-changelog-plugin:deregister"/>        
     </postGoal>
     
     <goal name="createJavaScriptConfigurationPage" description="Create the javascript configuration page">
