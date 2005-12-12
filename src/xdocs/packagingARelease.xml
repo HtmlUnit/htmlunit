@@ -14,6 +14,42 @@
                 of much use to anyone else.
             </p>
             <p>
+            	If this is the first time you're doing a release you'll need to perform
+            	some setup.
+            	<ol>
+	            	<li>
+	            		Get a new version of the maven clover plugin:
+	            		<source>maven plugin:download -DartifactId=maven-clover-plugin -DgroupId=maven -Dversion=1.9.1</source>
+            		</li>
+            		<li>
+            			Create a .cvspass file for the changelog plugin:
+            			<source>maven changelog:create-cvspass</source>
+           			</li>
+           			<li>
+           				You might also need to specify the following properties to maven.
+           				You can do this with a build.properties file, in the project
+           				directory or in your home directory, or on the command line
+           				with the -D option.
+<source>
+maven.username=(your sf.net username)
+maven.scp.executable=(full path to a scp app if no "scp" on your path)
+maven.ssh.executable=(full path to a ssh app if no "ssh" on your path)
+</source>
+
+						As an example, my setup is:
+<source>
+maven.username=yourgod
+maven.scp.executable=C:/programs/ssh/pscp.exe
+maven.ssh.executable=C:/programs/ssh/plink.exe
+</source>
+						Also, since I am using putty I needed to manually connect to
+						the server once to authorize the host. You may need to do something
+						similar for your ssh client.
+						<source>c:\programs\ssh\plink.exe -l yourgod projects.sourceforge.net</source>
+           			</li>
+           		</ol>
+       		</p>
+            <p>
                 <ol>
                     <li>
                         Update the version number in project.xml
