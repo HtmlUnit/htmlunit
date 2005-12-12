@@ -169,7 +169,7 @@ public class HtmlLabel extends FocusableElement {
     
     /**
      * Clicks the label and propagates to the referenced element.
-     * @see ClickableElement#click()
+     * {@inheritDoc}
      */
     public Page click() throws IOException {
         // first the click on the label

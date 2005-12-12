@@ -100,7 +100,7 @@ public class DebuggingWebConnection extends WebConnection {
     
     /**
      * Calls the wrapped webconnection and save the received response.
-     * @see com.gargoylesoftware.htmlunit.WebConnection#getResponse(WebRequestSettings)
+     * {@inheritDoc}
      */
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
         final WebResponse response = wrappedWebConnection_.getResponse(webRequestSettings);
@@ -109,8 +109,8 @@ public class DebuggingWebConnection extends WebConnection {
     }
 
     /**
-     * Calls the wrapped webConnection
-     * @see com.gargoylesoftware.htmlunit.WebConnection#getStateForUrl(java.net.URL)
+     * Calls the wrapped webConnection.
+     * {@inheritDoc}
      */
     public HttpState getStateForUrl(final URL url) {
         return wrappedWebConnection_.getStateForUrl(url);

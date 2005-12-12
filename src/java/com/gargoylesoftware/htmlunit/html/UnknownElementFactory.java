@@ -59,7 +59,7 @@ public final class UnknownElementFactory implements IElementFactory {
     }
 
     /**
-     * @see IElementFactory#createElement(HtmlPage, String, Attributes)
+     * {@inheritDoc}
      */
     public HtmlElement createElement(
             final HtmlPage page, final String tagName,

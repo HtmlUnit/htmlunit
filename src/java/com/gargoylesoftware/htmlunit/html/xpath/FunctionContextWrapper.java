@@ -68,7 +68,7 @@ public class FunctionContextWrapper implements FunctionContext {
     /**
      * First look at the locally defined function and if none found calls the wrapped
      * context. 
-     * @see FunctionContext#getFunction(java.lang.String, java.lang.String, java.lang.String)
+     * {@inheritDoc}
      */
     public Function getFunction(final String namespaceURI, final String prefix, final String localName) 
         throws UnresolvableException {

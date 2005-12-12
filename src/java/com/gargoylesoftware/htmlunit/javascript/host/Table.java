@@ -207,15 +207,15 @@ public class Table extends RowContainer {
     }
 
     /**
-     * @see com.gargoylesoftware.htmlunit.javascript.host.RowContainer#getXPathRows()
+     * {@inheritDoc}
      */
     protected String getXPathRows() {
         return "./node()/tr";
     }
   
     /**
-     * Handle special case where table is empty
-     * @see com.gargoylesoftware.htmlunit.javascript.host.RowContainer#insertRow(int)
+     * Handle special case where table is empty.
+     * {@inheritDoc}
      */
     protected Object insertRow(final int index) {
         // check if a tbody should be created

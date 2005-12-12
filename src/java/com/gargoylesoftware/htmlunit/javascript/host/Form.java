@@ -83,7 +83,7 @@ public class Form extends HTMLElement {
 
 
     /**
-     * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#setHtmlElement(HtmlElement)
+     * {@inheritDoc}
      */
     public void setHtmlElement( final HtmlElement htmlElement ) {
         super.setHtmlElement( htmlElement );

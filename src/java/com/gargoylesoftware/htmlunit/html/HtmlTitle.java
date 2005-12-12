@@ -74,8 +74,7 @@ public class HtmlTitle extends HtmlElement {
     
     /**
      * Allow the text value for the title element be replaced.
-     *  
-     * @see com.gargoylesoftware.htmlunit.html.DomNode#setNodeValue(java.lang.String)
+     * {@inheritDoc}
      */
     public void setNodeValue(final String message) {
         final DomNode child = getFirstChild();

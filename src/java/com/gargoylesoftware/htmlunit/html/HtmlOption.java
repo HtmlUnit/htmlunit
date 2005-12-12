@@ -224,8 +224,8 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Selects the option if it's not already selected
-     * @see ClickableElement#doClickAction(Page)
+     * Selects the option if it's not already selected.
+     * {@inheritDoc}
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
         if (!isSelected()) {
@@ -235,8 +235,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * 
-     * @see com.gargoylesoftware.htmlunit.html.DomNode#appendChild(com.gargoylesoftware.htmlunit.html.DomNode)
+     * {@inheritDoc}
      */
     public DomNode appendChild(final DomNode node) {
         final DomNode addedNode = super.appendChild(node);

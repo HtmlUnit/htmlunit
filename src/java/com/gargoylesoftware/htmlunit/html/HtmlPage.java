@@ -1403,7 +1403,7 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
-     * @see DomNode#asXml()
+     * {@inheritDoc}
      */
     public String asXml() {
         return getDocumentElement().asXml();
