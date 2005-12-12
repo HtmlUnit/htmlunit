@@ -714,7 +714,7 @@ public final class HtmlPage extends DomNode implements Page {
      * @return A ScriptResult which will contain both the current page (which may be different than
      * the previous page and a javascript result object.
      */
-    public ScriptResult executeJavaScriptFunctionIfPossible(
+    ScriptResult executeJavaScriptFunctionIfPossible(
             final Function function,
             final Scriptable thisObject,
             final Object[] args,
