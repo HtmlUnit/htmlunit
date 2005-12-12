@@ -24,7 +24,7 @@
     <repository>
         <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/htmlunit:htmlunit</connection>
         <developerConnection>scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/htmlunit:htmlunit/</developerConnection>
-        <url>http://cvs.sourceforge.net/viewcvs.py/htmlunit/htmlunit</url>
+        <url>http://cvs.sourceforge.net/viewcvs.py/htmlunit/htmlunit/</url>
     </repository>
     <licenses>
         <license>
