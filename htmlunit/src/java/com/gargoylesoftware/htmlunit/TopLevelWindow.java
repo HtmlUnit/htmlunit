@@ -87,7 +87,7 @@ public class TopLevelWindow implements WebWindow {
      *
      * @param name The new name of this window.
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         name_ = name;
     }
 

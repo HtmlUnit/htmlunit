@@ -212,7 +212,7 @@ public abstract class HtmlElement extends DomNode {
      * handler has been defined
      */
     public final Function getEventHandler(final String eventName) {
-       return (Function) eventHandlers_.get(eventName);
+        return (Function) eventHandlers_.get(eventName);
     }
 
     /**

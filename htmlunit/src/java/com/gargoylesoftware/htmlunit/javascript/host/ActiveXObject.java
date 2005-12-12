@@ -88,8 +88,8 @@ public class ActiveXObject extends SimpleScriptable {
             throw Context.reportRuntimeError( "ActiveXObject Error: constructor parameter must be a String." );
         }
         final Map map = getWindow( ctorObj ).getWebWindow().getWebClient().getActiveXObjectMap();
-        if ( map == null ) {
-             throw Context.reportRuntimeError( "ActiveXObject Error: the map is null." );
+        if (map == null) {
+            throw Context.reportRuntimeError("ActiveXObject Error: the map is null.");
         }
         final Object mapValue = map.get(args[0]);
 

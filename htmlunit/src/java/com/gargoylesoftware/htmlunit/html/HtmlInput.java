@@ -458,7 +458,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * @return  See above
      */
     public boolean isChecked() {
-         return isAttributeDefined("checked");
+        return isAttributeDefined("checked");
     }
 
 
