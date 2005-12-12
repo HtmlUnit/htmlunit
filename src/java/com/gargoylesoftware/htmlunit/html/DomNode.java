@@ -199,7 +199,7 @@ public abstract class DomNode implements Cloneable {
      * set the aprent node
      * @param parent the parent node
      */
-    protected void setParentNode(DomNode parent) {
+    protected void setParentNode(final DomNode parent) {
         parent_ = parent;
     }
 
@@ -233,12 +233,12 @@ public abstract class DomNode implements Cloneable {
     }
 
     /** @param previous set the previousSibling field value */
-    protected void setPreviousSibling(DomNode previous) {
+    protected void setPreviousSibling(final DomNode previous) {
         previousSibling_ = previous;
     }
 
     /** @param next set the nextSibling field value */
-    protected void setNextSibling(DomNode next) {
+    protected void setNextSibling(final DomNode next) {
         nextSibling_ = next;
     }
 
@@ -456,7 +456,7 @@ public abstract class DomNode implements Cloneable {
             firstChild_.previousSibling_ = node;
         }
         else {
-            DomNode last = getLastChild();
+            final DomNode last = getLastChild();
 
             last.nextSibling_ = node;
             node.previousSibling_ = last;

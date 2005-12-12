@@ -401,7 +401,7 @@ public class BrowserVersion {
     /**
      * @param browserVersion The browserVersion to set.
      */
-    public void setBrowserVersion(float browserVersion) {
+    public void setBrowserVersion(final float browserVersion) {
         browserVersionNumeric_ = browserVersion;
     }
     /**

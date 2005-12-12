@@ -65,21 +65,22 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
         
         // connection will return a page with <meta ... refresh> for the first call
         // and the same page without it for the other calls
-        final MockWebConnection webConnection = new MockWebConnection( client ) {
+        final MockWebConnection webConnection = new MockWebConnection(client) {
             private int nbCalls_ = 0;
-            public WebResponse getResponse(final WebRequestSettings settings)
-                    throws IOException {
+            public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
                 String content = "<html><head>";
                 if (nbCalls_ == 0) {
-                    content += "<meta http-equiv='refresh' content='0;url=" + URL_GARGOYLE.toExternalForm() + "'>";
+                    content += "<meta http-equiv='refresh' content='0;url="
+                        + URL_GARGOYLE.toExternalForm()
+                        + "'>";
                 }
                 content += "</head><body></body></html>";
                 ++nbCalls_;
                 return new StringWebResponse(content, settings.getURL()) {
-                        public SubmitMethod getRequestMethod() {
-                            return settings.getSubmitMethod();
-                        }
-                    };
+                    public SubmitMethod getRequestMethod() {
+                        return settings.getSubmitMethod();
+                    }
+                };
             }
         };
         client.setWebConnection( webConnection );
