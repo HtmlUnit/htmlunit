@@ -375,7 +375,7 @@ public abstract class WebTestCase extends BaseTestCase {
 
     /**
      * Overriden so that we can assert the state after running each test.
-     * @see junit.framework.TestCase#runTest()
+     * {@inheritDoc}
      */
     protected void runTest() throws Throwable {
         // Run the actual testcase.

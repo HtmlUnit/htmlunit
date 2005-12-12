@@ -534,8 +534,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * 
-     * @see org.mozilla.javascript.Scriptable#has(java.lang.String, org.mozilla.javascript.Scriptable)
+     * {@inheritDoc}
      */
     public boolean has(final String name, final Scriptable start) {
         final SimpleScriptable simpleScriptable = (SimpleScriptable) start;

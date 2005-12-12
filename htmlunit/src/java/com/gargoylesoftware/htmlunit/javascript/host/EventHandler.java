@@ -71,8 +71,7 @@ public class EventHandler extends BaseFunction {
     }
 
     /**
-     * The function call.
-     * @see org.mozilla.javascript.BaseFunction#call(Context, Scriptable, Scriptable, Object[])
+     * {@inheritDoc}
      */
     public Object call(final Context cx, final Scriptable scope,
         final Scriptable thisObj, final Object[] args)
@@ -100,8 +99,7 @@ public class EventHandler extends BaseFunction {
     }
     
     /**
-     * 
-     * @see org.mozilla.javascript.IdScriptableObject#get(java.lang.String, org.mozilla.javascript.Scriptable)
+     * {@inheritDoc}
      */
     public Object get(final String name, final Scriptable start) {
         // quick and dirty

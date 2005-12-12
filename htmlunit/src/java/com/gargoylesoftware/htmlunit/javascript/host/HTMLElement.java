@@ -1341,8 +1341,8 @@ public class HTMLElement extends NodeImpl {
     }
 
     /**
-     * Just for debug purposes
-     * @see java.lang.Object#toString()
+     * Just for debug purposes.
+     * {@inheritDoc}
      */
     public String toString() {
         return "HTMLElement for " + getHtmlElementOrNull();

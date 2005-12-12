@@ -160,8 +160,8 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Executes the content as a script if it is a text node
-     * @see com.gargoylesoftware.htmlunit.html.DomNode#appendChild(com.gargoylesoftware.htmlunit.html.DomNode)
+     * Executes the content as a script if it is a text node.
+     * {@inheritDoc}
      */
     public DomNode appendChild(final DomNode node) {
         final DomNode response = super.appendChild(node);

@@ -257,8 +257,8 @@ public final class ClassConfiguration {
     }
     
     /**
-     * Generate a hashCode for this object.  Currently, this is the hashcode for the name.
-     * @see java.lang.Object#hashCode()
+     * Currently, this is the hashcode for the name.
+     * {@inheritDoc}
      */
     public int hashCode() {
         return className_.hashCode();

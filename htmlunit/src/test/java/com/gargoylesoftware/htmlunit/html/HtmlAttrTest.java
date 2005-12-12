@@ -111,9 +111,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     * Sets up the fixture.
-     *
-     * @see junit.framework.TestCase#setUp()
+     * {@inheritDoc}
      */
     protected void setUp() throws Exception {
         super.setUp();

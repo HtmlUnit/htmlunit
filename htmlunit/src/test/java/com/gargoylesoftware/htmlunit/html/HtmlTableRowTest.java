@@ -74,7 +74,9 @@ public class HtmlTableRowTest extends WebTestCase {
     private HtmlTableRow rowClone_;
     private HtmlTableCell cellClone_;
 
-    /** @see junit.framework.TestCase#setUp() */
+    /**
+     * {@inheritDoc} 
+     */
     public void setUp() throws Exception {
         page_ = loadPage(htmlContent);
         client_ = page_.getWebClient();

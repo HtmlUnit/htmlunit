@@ -56,7 +56,7 @@ import org.jaxen.function.StringFunction;
  */
 public class LowerCaseFunction implements Function {
     /**
-     * @see Function#call(org.jaxen.Context, java.util.List)
+     * {@inheritDoc}
      */
     public Object call(final Context context, final List arguments)
         throws FunctionCallException {

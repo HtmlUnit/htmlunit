@@ -126,7 +126,7 @@ public class ElementArray extends SimpleScriptable implements Function {
     }
 
     /**
-     * @see Function#call(Context, Scriptable, Scriptable, Object[])
+     * {@inheritDoc}
      */
     public final Object call(
             final Context context, final Scriptable scope,
@@ -139,7 +139,7 @@ public class ElementArray extends SimpleScriptable implements Function {
     }
 
     /**
-     * @see Function#construct(Context, Scriptable, Object[])
+     * {@inheritDoc}
      */
     public final Scriptable construct(
             final Context arg0, final Scriptable arg1, final Object[] arg2)
@@ -168,7 +168,7 @@ public class ElementArray extends SimpleScriptable implements Function {
     /**
      * Returns the element at the specified index, or <tt>NOT_FOUND</tt> if the
      * index is invalid.
-     * @see org.mozilla.javascript.ScriptableObject#get(int, Scriptable)
+     * {@inheritDoc}
      */
     public final Object get( final int index, final Scriptable start ) {
         final ElementArray array = (ElementArray) start;
@@ -233,7 +233,7 @@ public class ElementArray extends SimpleScriptable implements Function {
      * the array, that element is returned. Finally, if it is the name of an element or
      * elements in the array, then all those elements are returned. Otherwise,
      * {@link #NOT_FOUND} is returned.
-     * @see org.mozilla.javascript.ScriptableObject#get(String, Scriptable)
+     * {@inheritDoc}
      */
     public final Object get( final String name, final Scriptable start ) {
         // If the name of a property was specified, return the property value.
@@ -366,7 +366,7 @@ public class ElementArray extends SimpleScriptable implements Function {
     
     /**
      * Just for debug purpose.
-     * @see java.lang.Object#toString()
+     * {@inheritDoc}
      */
     public String toString() {
         if (xpath_ != null) {
@@ -377,7 +377,7 @@ public class ElementArray extends SimpleScriptable implements Function {
     
     /**
      * Called for the js "==".
-     * @see org.mozilla.javascript.ScriptableObject#equivalentValues(java.lang.Object)
+     * {@inheritDoc}
      */
     protected Object equivalentValues(final Object other) {
         if (other == this) {
