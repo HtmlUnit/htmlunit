@@ -53,6 +53,7 @@ import org.mozilla.javascript.Scriptable;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Bruce Faulkner
  */
 public class OptionsArray extends SimpleScriptable {
     private static final long serialVersionUID = -4790255174217201235L;
@@ -114,7 +115,26 @@ public class OptionsArray extends SimpleScriptable {
     public Object get( final String name, final Scriptable start ) {
         Object object = super.get( name, start );
         if( object == NOT_FOUND ) {
+            // First, check the prototype chain for the OptionsArray to see if the
+            // name exists elsewhere on the chain before looking to the Select object;
+            // this must be done in case a property or method with the same name
+            // is found on the Select object (e.g. "add") but which has different parameters.
+            // Doing a search on the prototoype before a search on the Select will avoid a
+            // "TypeError: Method "add" called on incompatible object."
+            final Scriptable prototype = this.getPrototype();
+            if (prototype instanceof OptionsArray) {
+                object = prototype.get(name, start);
+                if (object != NOT_FOUND) {
+                    return object;
+                }
+            }
+            else {
+                return NOT_FOUND;
+            }
+
             if( getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE() ) {
+                // If the name was NOT_FOUND on the prototype, then just drop through
+                // to search on the Select for IE only
                 final Select select = (Select) htmlSelect_.getScriptObject();
                 object = select.get( name, start );
             }
@@ -196,4 +216,64 @@ public class OptionsArray extends SimpleScriptable {
             }
         }
     }
+
+    /**
+     * Add a new item to the option collection
+     * 
+     * <p> 
+     * <b><i>Implementation Note:</i></b> The specification for the JavaScript add() method 
+     * actually calls for the optional newIndex parameter to be an integer. However, the 
+     * newIndex parameter is specified as an Object here rather than an int because of the 
+     * way Rhino and HtmlUnit process optional parameters for the JavaScript method calls. 
+     * If the newIndex parameter were specified as an int, then the Undefined value for an 
+     * integer is specified as NaN (Not A Number, which is a Double value), but Rhino 
+     * translates this value into 0 (perhaps correctly?) when converting NaN into an int. 
+     * As a result, when the newIndex parameter is not specified, it is impossible to make 
+     * a distinction between a caller of the form add(someObject) and add (someObject, 0). 
+     * Since the behavior of these two call forms is different, the newIndex parameter is 
+     * specified as an Object. If the newIndex parameter is not specified by the actual 
+     * JavaScript code being run, then newIndex is of type org.mozilla.javascript.Undefined. 
+     * If the newIndex parameter is specified, then it should be of type java.lang.Number and 
+     * can be converted into an integer value.
+     * </p>
+     * <p>
+     * This method will call the {@link #put} method for actually adding the element to the
+     * collection.
+     * </p>
+     * <p>
+     * According to 
+     * <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/add.asp">the
+     * Microsoft DHTML reference page for the JavaScript add() method of the options collection</a>, 
+     * the index parameter is specified as follows:
+     * <dl>
+     * <dt></dt>
+     * <dd>
+     * <i>Optional. Integer that specifies the index position in the collection where the element is 
+     * placed. If no value is given, the method places the element at the end of the collection.</i>
+     * </dl>
+     * </p>
+     * 
+     * @param newOptionObject The DomNode to insert in the collection
+     * @param newIndex An optional parameter which specifies the index position in the 
+     * collection where the element is placed. If no value is given, the method places 
+     * the element at the end of the collection.
+     * 
+     * @see #put   
+     */
+    public void jsFunction_add(final Object newOptionObject, final Object newIndex)
+    {
+        // If newIndex is undefined, then the item will be appended to the end of
+        // the list
+        int index = jsGet_length();
+
+        // If newIndex was specified, then use it
+        if (newIndex instanceof Number) {
+            index = ((Number) newIndex).intValue();
+        }
+
+        // The put method either appends or replaces an object in the list,
+        // depending on the value of index
+        put(index, null, newOptionObject);
+    }
+
 }

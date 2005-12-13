@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1378925" due-to="Bruce Faulkner">
+                 JavaScript: Implement add() method for OptionsArray to avoid TypeError.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: added the full url of the file containing the script beeing executed
                 in the exception message when a script error occurs.

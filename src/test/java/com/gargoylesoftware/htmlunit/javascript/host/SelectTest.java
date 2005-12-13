@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
  * @author Marc Guillemot
+ * @author Bruce Faulkner
  */
 public class SelectTest extends WebTestCase {
     /**
@@ -813,4 +814,45 @@ public class SelectTest extends WebTestCase {
             // that's ok
         }
     }
+
+    /**
+     * Test that options delegates to select (bug 1111597).
+     * @throws Exception if the test fails.
+     */
+    public void testOptionsArrayAdd() throws Exception {
+
+        final String content
+            = "<html><head>"
+            + "<script>"
+            + "function doTest() {"
+            + "  var s = document.getElementById('select1');"
+            + "  var lengthBefore = s.options.length;"
+            + "  alert(lengthBefore);"
+            + "  alert(s.options.item(lengthBefore - 1).text);"
+            + "  var opt = document.createElement(\"OPTION\");"
+            + "  opt.value = 'c';"
+            + "  opt.text = 'c';"
+            + "  s.options.add(opt);"
+            + "  var lengthAfterAdd = s.options.length;"
+            + "  alert(lengthAfterAdd);"
+            + "  alert(s.options.item(lengthAfterAdd - 1).text);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='doTest()'>"
+            + "<form name='test'>"
+            + "<select id='select1'>"
+            + "<option>a</option>"
+            + "<option selected='selected'>b</option>"
+            + "</select></form>"
+            + "</body></html>";
+
+        final List expectedAlerts = Arrays.asList( new String[]{"2", "b", "3", "c"} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
 }
