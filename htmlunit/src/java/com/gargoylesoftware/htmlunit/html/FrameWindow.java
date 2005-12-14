@@ -35,90 +35,71 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.html;
+
+import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.WebWindowImpl;
 
 /**
- * A window representing a top level browser window.
- *
+ * The web window for a frame or iframe.
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
- * @author David D. Kilzer
+ * @author Brad Clarke
  */
-public class TopLevelWindow extends WebWindowImpl {
-
-    private String name_;
-    private WebWindow opener_;
-
+public class FrameWindow extends WebWindowImpl {
+    private final BaseFrame frame_;
     /**
-     * Create an instance.
-     * @param name The name of the new window
-     * @param webClient The web client that "owns" this window.
+     * Create an instance for a given frame
      */
-    public TopLevelWindow(final String name, final WebClient webClient) {
-        super(webClient);
-        Assert.notNull("name", name);
-        name_ = name;
+    FrameWindow(final BaseFrame frame) {
+        super(frame.getPage().getWebClient());
+        frame_ = frame;
     }
 
     /**
      * {@inheritDoc}
+     * A FrameWindow shares it's name with it's containing frame.
      */
     public String getName() {
-        return name_;
+        return frame_.getNameAttribute();
     }
 
     /**
      * {@inheritDoc}
+     * A FrameWindow shares it's name with it's containing frame.
      */
     public void setName(final String name) {
-        name_ = name;
+        frame_.setNameAttribute(name);
     }
 
     /**
      * {@inheritDoc}
-     * Since this is a top level window, return this window.
      */
     public WebWindow getParentWindow() {
-        return this;
+        return frame_.getPage().getEnclosingWindow();
     }
 
     /**
      * {@inheritDoc}
-     * Since this is a top level window, return this window.
      */
     public WebWindow getTopWindow() {
-        return this;
+        return getParentWindow().getTopWindow();
     }
 
     /**
-     * Return a string representation of this object
-     * @return A string representation of this object
+     * Return the html page in wich the &lt;frame&gt; or &lt;iframe&gt; tag is contained
+     * for this frame window.
+     * This is a facility method for <code>(HtmlPage) (getParentWindow().getEnclosedPage())</code>.
+     * @return the page in the parent window.
+     */
+    public HtmlPage getEnclosingPage() {
+        return frame_.getPage();
+    }
+
+    /**
+     * Gives a basic representation for debugging purposes
+     * @return a basic representation
      */
     public String toString() {
-        return "TopLevelWindow[name=\"" + getName() + "\"]";
-    }
-
-    /**
-     * Set the opener property.  This is the WebWindow that caused this new window to be opened.
-     * @param opener The new opener
-     */
-    public void setOpener(final WebWindow opener) {
-        opener_ = opener;
-    }
-
-    /**
-     * Return the opener property.  This is the WebWindow that caused this new window to be opened.
-     * @return The opener
-     */
-    public WebWindow getOpener() {
-        return opener_;
-    }
-
-    /**
-     * Close this window.
-     */
-    public void close() {
-        getWebClient().deregisterWebWindow(this);
+        return "FrameWindow[name=\"" + getName() + "\"]";
     }
 }

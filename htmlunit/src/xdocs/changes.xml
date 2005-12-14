@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="yourgod">
+                 BaseFrame.FrameWindow has been deprecated and replaced with a top level
+                 FrameWindow class.
+            </action>        
             <action type="update" dev="mguillem">
                  JavaScript: fixed exception occuring when addBehavior is called twice for the same
                  behavior.

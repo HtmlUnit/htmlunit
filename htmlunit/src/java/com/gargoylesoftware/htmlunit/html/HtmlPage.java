@@ -1116,10 +1116,10 @@ public final class HtmlPage extends DomNode implements Page {
      * @return The first frame found.
      * @exception ElementNotFoundException If no frame exist in this page with the specified name.
      */
-    public BaseFrame.FrameWindow getFrameByName(final String name) throws ElementNotFoundException {
+    public FrameWindow getFrameByName(final String name) throws ElementNotFoundException {
         final List frames = getFrames();
         for (final Iterator iter = frames.iterator(); iter.hasNext();) {
-            final BaseFrame.FrameWindow frame = (BaseFrame.FrameWindow) iter.next();
+            final FrameWindow frame = (FrameWindow) iter.next();
             if (frame.getName().equals(name)) {
                 return frame;
             }

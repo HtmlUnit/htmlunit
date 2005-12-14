@@ -38,87 +38,59 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- * A window representing a top level browser window.
- *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
- * @author David D. Kilzer
+ * Base class for common WebWindow functionality
+ * 
+ * @version $Revision$
+ * @author Brad Clarke
  */
-public class TopLevelWindow extends WebWindowImpl {
-
-    private String name_;
-    private WebWindow opener_;
+public abstract class WebWindowImpl implements WebWindow {
+    private WebClient webClient_;
+    private Page enclosedPage_;
+    private Object scriptObject_;
 
     /**
-     * Create an instance.
-     * @param name The name of the new window
+     * Creates a window and associates it with the client
+     * 
      * @param webClient The web client that "owns" this window.
      */
-    public TopLevelWindow(final String name, final WebClient webClient) {
-        super(webClient);
-        Assert.notNull("name", name);
-        name_ = name;
+    public WebWindowImpl(final WebClient webClient) {
+        Assert.notNull("webClient", webClient);
+        webClient_ = webClient;
+        webClient_.registerWebWindow(this);
     }
 
     /**
      * {@inheritDoc}
      */
-    public String getName() {
-        return name_;
+    public WebClient getWebClient() {
+        return webClient_;
     }
 
     /**
      * {@inheritDoc}
      */
-    public void setName(final String name) {
-        name_ = name;
+    public Page getEnclosedPage() {
+        return enclosedPage_;
     }
 
     /**
      * {@inheritDoc}
-     * Since this is a top level window, return this window.
      */
-    public WebWindow getParentWindow() {
-        return this;
+    public void setEnclosedPage(final Page page) {
+        enclosedPage_ = page;
     }
 
     /**
      * {@inheritDoc}
-     * Since this is a top level window, return this window.
      */
-    public WebWindow getTopWindow() {
-        return this;
+    public void setScriptObject(final Object scriptObject) {
+        scriptObject_ = scriptObject;
     }
 
     /**
-     * Return a string representation of this object
-     * @return A string representation of this object
+     * {@inheritDoc}
      */
-    public String toString() {
-        return "TopLevelWindow[name=\"" + getName() + "\"]";
-    }
-
-    /**
-     * Set the opener property.  This is the WebWindow that caused this new window to be opened.
-     * @param opener The new opener
-     */
-    public void setOpener(final WebWindow opener) {
-        opener_ = opener;
-    }
-
-    /**
-     * Return the opener property.  This is the WebWindow that caused this new window to be opened.
-     * @return The opener
-     */
-    public WebWindow getOpener() {
-        return opener_;
-    }
-
-    /**
-     * Close this window.
-     */
-    public void close() {
-        getWebClient().deregisterWebWindow(this);
+    public Object getScriptObject() {
+        return scriptObject_;
     }
 }
