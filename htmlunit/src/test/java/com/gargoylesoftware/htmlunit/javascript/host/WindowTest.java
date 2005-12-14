@@ -1775,4 +1775,42 @@ public class WindowTest extends WebTestCase {
         assertSame(webClient.getCurrentWindow(), secondWebWindow);
         assertNotSame(firstWebWindow, secondWebWindow);
     }
+    /**
+     * Tests that nested setTimeouts that are deeper than Thread.MAX_PRIORITY
+     * do not cause an exception.
+     * @throws Exception If the test fails
+     */
+    public void testNestedSetTimeoutAboveMaxPriority() throws Exception {
+        final int max = Thread.MAX_PRIORITY + 1;
+        final String content = "<html><body><script language='JavaScript'>"
+            + "var depth = 0;\n"
+            + "var maxdepth = "
+            + max
+            + ";\n"
+            + "function addAnother() {\n"
+            + "  if (depth < maxdepth) {\n"
+            + "    window.alert('ping');\n"
+            + "    depth++;\n"
+            + "    window.setTimeout('addAnother();', 1);\n"
+            + "  }\n"
+            + "}\n"
+            + "addAnother();\n"
+            + "</script></body></html>";
+
+        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        loadPage(content, collectedAlerts);
+
+        final int waitTime = 50;
+        final int maxTime = 1000;
+        final List expectedAlerts = Arrays.asList(new String[] {"ping", "ping", "ping", "ping",
+            "ping", "ping", "ping", "ping", "ping", "ping", "ping",});
+        for (int time = 0; time < maxTime; time += waitTime) {
+            if (collectedAlerts.size() == expectedAlerts.size()) {
+                assertEquals(expectedAlerts, collectedAlerts);
+                return;
+            }
+            Thread.sleep(waitTime);
+        }
+        fail(max + " alerts not collected in " + maxTime + "ms");
+    }    
 }
