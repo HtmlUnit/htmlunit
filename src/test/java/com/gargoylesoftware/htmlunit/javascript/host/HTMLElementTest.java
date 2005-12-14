@@ -570,6 +570,7 @@ public class HTMLElementTest extends WebTestCase {
                 "       alert('body.cpuClass = ' + body.cpuClass);\n" +
                 "       var id = body.addBehavior('#default#clientCaps');\n" +
                 "       alert('body.cpuClass = ' + body.cpuClass);\n" +
+                "       var id2 = body.addBehavior('#default#clientCaps');\n" +
                 "       body.removeBehavior(id);\n" +
                 "       alert('body.cpuClass = ' + body.cpuClass);\n" +
                 "    }\n" +
@@ -577,19 +578,20 @@ public class HTMLElementTest extends WebTestCase {
                 "</head>\n" +
                 "<body onload='doTest()'>Test</body>\n" +
                 "</html>";
-        final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
         final List expectedAlerts = Arrays.asList(new String[]{
             "body.cpuClass = undefined",
-            "body.cpuClass = " + page.getWebClient().getBrowserVersion().getCpuClass(),
+            "body.cpuClass = " + BrowserVersion.getDefault().getCpuClass(),
             "body.cpuClass = undefined"
         });
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
      * Test the <tt>#default#homePage</tt> default IE behavior.
-     *
      * @throws Exception if the test fails
      */
     public void testAddBehaviorDefaultHomePage() throws Exception {

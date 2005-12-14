@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                 JavaScript: fixed exception occuring when addBehavior is called twice for the same
+                 behavior.
+            </action>
             <action type="update" dev="mguillem" id="1378925" due-to="Bruce Faulkner">
                  JavaScript: Implement add() method for OptionsArray to avoid TypeError.
             </action>
