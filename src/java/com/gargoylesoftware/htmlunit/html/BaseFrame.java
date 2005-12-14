@@ -61,122 +61,19 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  */
 public abstract class BaseFrame extends StyledElement {
 
+    private final WebWindow enclosedWindow_ = new FrameWindow(this);
     /**
-     * The web window for a frame or iframe.
+     * {@inheritDoc} 
+     * @deprecated Please use {@link com.gargoylesoftware.htmlunit.html.FrameWindow} instead
      */
-    public final class FrameWindow implements WebWindow {
-        private Page enclosedPage_;
-        private Object scriptObject_;
-
+    public final class FrameWindow extends com.gargoylesoftware.htmlunit.html.FrameWindow {
         /**
-         * Private constructor as instanciation is not allowed directly.
+         * {@inheritDoc}
          */
-        private FrameWindow() {
-            // nothing to do
-        }
-
-        /**
-         * Return the name of this window.
-         *
-         * @return The name of this window.
-         */
-        public String getName() {
-            return getNameAttribute();
-        }
-
-        /**
-         * Set the name of this window.
-         *
-         * @param name The new name of this window.
-         */
-        public void setName(final String name) {
-            setNameAttribute(name);
-        }
-
-        /**
-         * Return the currently loaded page or null if no page has been loaded.
-         *
-         * @return The currently loaded page or null if no page has been loaded.
-         */
-        public Page getEnclosedPage() {
-            return enclosedPage_;
-        }
-
-        /**
-         * Set the currently loaded page.
-         *
-         * @param page The new page or null if there is no page (ie empty window)
-         */
-        public void setEnclosedPage( final Page page ) {
-            enclosedPage_ = page;
-        }
-
-        /**
-         * Return the window that contains this window.
-         *
-         * @return The parent window.
-         */
-        public WebWindow getParentWindow() {
-            return getPage().getEnclosingWindow();
-        }
-
-        /**
-         * Return the top level window that contains this window.
-         *
-         * @return The top level window that contains this window.
-         */
-        public WebWindow getTopWindow() {
-            return getParentWindow().getTopWindow();
-        }
-
-        /**
-         * Return the web client that "owns" this window.
-         *
-         * @return The web client or null if this window has been closed.
-         */
-        public WebClient getWebClient() {
-            return getPage().getWebClient();
-        }
-
-        /**
-         * Internal use only - subject to change without notice.<p>
-         * Return the javascript object that corresponds to this window.
-         * @return The javascript object that corresponds to this window.
-         */
-        public Object getScriptObject() {
-            return scriptObject_;
-        }
-
-        /**
-         * Internal use only - subject to change without notice.<p>
-         * Set the javascript object that corresponds to this node.  This is not
-         * guarenteed to be set.
-         * @param scriptObject The javascript object.
-         */
-        public void setScriptObject( final Object scriptObject ) {
-            scriptObject_ = scriptObject;
-        }
-
-        /**
-         * Return the html page in wich the &lt;frame&gt; or &lt;iframe&gt; tag is contained
-         * for this frame window.
-         * This is a facility method for <code>(HtmlPage) (getParentWindow().getEnclosedPage())</code>.
-         * @return the page in the parent window.
-         */
-        public HtmlPage getEnclosingPage() {
-            return getPage();
-        }
-
-        /**
-         * Gives a basic representation for debugging purposes
-         * @return a basic representation
-         */
-        public String toString() {
-            return "FrameWindow[name=\""+getName()+"\"]";
+        FrameWindow(final BaseFrame frame) {
+            super(frame);
         }
     }
-
-    private final WebWindow enclosedWindow_ = new FrameWindow();
 
     /**
      * Create an instance of BaseFrame
@@ -187,9 +84,6 @@ public abstract class BaseFrame extends StyledElement {
     protected BaseFrame( final HtmlPage page, final Map attributes) {
 
         super(page, attributes);
-
-        final WebClient webClient = page.getWebClient();
-        webClient.registerWebWindow(enclosedWindow_);
 
         try {
             // put about:blank in the window to allow JS to run on this frame before the

@@ -74,8 +74,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.html.FocusableElement;
+import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -1272,12 +1272,12 @@ public class WebClient {
     }
 
     private WebResponse makeWebResponseForJavaScriptUrl( final WebWindow webWindow, final URL url ) {
-        if (!(webWindow instanceof BaseFrame.FrameWindow)) {
+        if (!(webWindow instanceof FrameWindow)) {
             throw new IllegalArgumentException(
                 "javascript urls can only be used to load content into frames and iframes");
         }
 
-        final BaseFrame.FrameWindow frameWindow = (BaseFrame.FrameWindow) webWindow;
+        final FrameWindow frameWindow = (FrameWindow) webWindow;
         final HtmlPage enclosingPage = frameWindow.getEnclosingPage();
         final ScriptResult scriptResult = enclosingPage.executeJavaScriptIfPossible(
             url.toExternalForm(), "javascript url", false, null );
