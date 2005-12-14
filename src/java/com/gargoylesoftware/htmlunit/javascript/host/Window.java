@@ -257,12 +257,12 @@ public class Window extends SimpleScriptable {
                 try {
                     Thread.sleep(timeout);
                     window.getLog().debug("Executing timeout: " + script);
-                    
-                    final WebWindow webWindow = window.getWebWindow(); 
-                    // test that the window is always opened and the page the same 
+
+                    final WebWindow webWindow = window.getWebWindow();
+                    // test that the window is always opened and the page the same
                     if (!webWindow.getWebClient().getWebWindows().contains(webWindow)
                             || webWindow.getEnclosedPage() != page) {
-                        
+
                         window.getLog().debug("the page that originated the setTimeout doesnt exist anymore. "
                                 + "Execution cancelled.");
                         return;
@@ -284,7 +284,7 @@ public class Window extends SimpleScriptable {
         final String threadName = "HtmlUnit setTimeout() Thread " + id;
         final Thread setTimeoutThread = new Thread(runnable, threadName);
         timeoutThreads_.put(new Integer(id), setTimeoutThread);
-        setTimeoutThread.setPriority(Thread.currentThread().getPriority() + 1);
+        setTimeoutThread.setPriority(Math.min(Thread.MAX_PRIORITY, Thread.currentThread().getPriority() + 1));
         setTimeoutThread.start();
         return id;
     }
@@ -350,7 +350,7 @@ public class Window extends SimpleScriptable {
             // cf test FrameTest#testLocation
             final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
             final URL url = page.getFullyQualifiedUrl(newLocation);
-            
+
             getLog().debug(
                 "window.location=" + newLocation + " (" + url.toExternalForm()
                         + "), for window named '" + webWindow_.getName() + "'");
@@ -677,7 +677,7 @@ public class Window extends SimpleScriptable {
             // this tests are quite silly and should be removed when custom JS objects have a clean
             // way to get the WebClient they are running in.
             final DomNode domNode = thisWindow.getDomNodeOrNull();
-            if (domNode != null 
+            if (domNode != null
                     && domNode.getPage().getWebClient().getBrowserVersion().isIE()) {
                 final ElementArray array = (ElementArray) thisWindow.document_.jsxFunction_getElementsByName( name );
                 if (array.jsGet_length() == 1) {
@@ -761,7 +761,7 @@ public class Window extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp">
      * MSDN documentation</a>
      */
-    public static int jsxFunction_setInterval(final Context context, final Scriptable scriptable, 
+    public static int jsxFunction_setInterval(final Context context, final Scriptable scriptable,
         final Object[] args,  final Function function ) {
 
         final Window thisWindow = (Window)scriptable;
