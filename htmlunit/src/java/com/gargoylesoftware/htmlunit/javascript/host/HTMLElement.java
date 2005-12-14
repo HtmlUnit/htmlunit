@@ -44,9 +44,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
@@ -103,6 +105,7 @@ public class HTMLElement extends NodeImpl {
     static final String POSITION_BEFORE_END = "beforeEnd";
     static final String POSITION_AFTER_END = "afterEnd";
 
+    private final Set behaviors_ = new HashSet();
     private int scrollLeft_ = 0;
     private int scrollTop_ = 0;
 
@@ -663,6 +666,11 @@ public class HTMLElement extends NodeImpl {
      * @return an identifier that can be user later to detach the behavior from the element
      */
     public int jsxFunction_addBehavior(final String behavior) {
+        // if behavior already defined, then nothing to do
+        if (behaviors_.contains(behavior)) {
+            return 0;
+        }
+
         if (BEHAVIOR_CLIENT_CAPS.equalsIgnoreCase(behavior)) {
             final Class c = getClass();
             defineProperty("availHeight", c, 0);
@@ -684,6 +692,7 @@ public class HTMLElement extends NodeImpl {
             defineFunctionProperties(new String[] {"doComponentRequest"}, c, 0);
             defineFunctionProperties(new String[] {"getComponentVersion"}, c, 0);
             defineFunctionProperties(new String[] {"isComponentInstalled"}, c, 0);
+            behaviors_.add(BEHAVIOR_CLIENT_CAPS);
             return BEHAVIOR_ID_CLIENT_CAPS;
         }
         else if (BEHAVIOR_HOMEPAGE.equalsIgnoreCase(behavior)) {
@@ -691,11 +700,13 @@ public class HTMLElement extends NodeImpl {
             defineFunctionProperties(new String[] {"isHomePage"}, c, 0);
             defineFunctionProperties(new String[] {"setHomePage"}, c, 0);
             defineFunctionProperties(new String[] {"navigateHomePage"}, c, 0);
+            behaviors_.add(BEHAVIOR_CLIENT_CAPS);
             return BEHAVIOR_ID_HOMEPAGE;
         }
         else if (BEHAVIOR_DOWNLOAD.equalsIgnoreCase(behavior)) {
             final Class c = getClass();
             defineFunctionProperties(new String[] {"startDownload"}, c, 0);
+            behaviors_.add(BEHAVIOR_DOWNLOAD);
             return BEHAVIOR_ID_DOWNLOAD;
         }
         else {
@@ -730,11 +741,17 @@ public class HTMLElement extends NodeImpl {
                 delete("doComponentRequest");
                 delete("getComponentVersion");
                 delete("isComponentInstalled");
+                behaviors_.remove(BEHAVIOR_CLIENT_CAPS);
                 break;
             case BEHAVIOR_ID_HOMEPAGE:
                 delete("isHomePage");
                 delete("setHomePage");
                 delete("navigateHomePage");
+                behaviors_.remove(BEHAVIOR_HOMEPAGE);
+                break;
+            case BEHAVIOR_ID_DOWNLOAD:
+                delete("startDownload");
+                behaviors_.remove(BEHAVIOR_DOWNLOAD);
                 break;
             default:
                 getLog().warn("Unexpected behavior id: " + id + ". Ignoring.");
