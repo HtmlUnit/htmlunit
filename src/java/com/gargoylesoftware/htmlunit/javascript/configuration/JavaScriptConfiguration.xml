@@ -17,12 +17,12 @@
         descr="HTML and DHTML Reference on MSDN"/>
 
     <class name="ActiveXObject" classname="com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject"
- 				JSObject="true">
+        JSObject="true">
         <browser name="Microsoft Internet Explorer" min-version="4"/>
     </class>
 
     <class name="Anchor" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Anchor"
-				JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAnchor">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAnchor">
         <javascript min-version="1.2"/>
         
         <property name="href" readable="true" writable="true"/>
@@ -35,14 +35,12 @@
         </property>
     </class>
 
+    <class name="Area" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"
+        JSObject="false"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
+    </class>
 
-	<class name="Area" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"
-		JSObject="false"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
-	</class>
-
-
-	<class name="Attribute" classname="com.gargoylesoftware.htmlunit.javascript.host.Attribute"
-		JSObject="true">
+    <class name="Attribute" classname="com.gargoylesoftware.htmlunit.javascript.host.Attribute"
+        JSObject="true">
         <property name="expando" readable="true" writable="false"/>
         <property name="firstChild" readable="true" writable="false"/>
         <property name="lastChild" readable="true" writable="false"/>
@@ -56,16 +54,16 @@
         <property name="previousSibling" readable="true" writable="false"/>
         <property name="specified" readable="true" writable="false"/>
         <property name="value" readable="true" writable="true"/>
-	</class>
+    </class>
 
     <class name="Button" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.Button"
-		JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlButton"/>
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlButton"/>
 
     <class name="ButtonInput" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"
-		JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlButtonInput"/>
+        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlButtonInput"/>
 
     <class name="CharacterDataImpl" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl"
-		JSObject="false">
+        JSObject="false">
         <property name="data" readable="true" writable="true"/>
         <property name="length" readable="true" writable="false"/>
         <property name="tabindex" notImplemented="true" readable="true" writable="true"/>
@@ -78,10 +76,10 @@
     </class>
 
     <class name="Checkbox" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"
-		JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput"/>
+        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput"/>
 
     <class name="Document" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Document"
-				JSObject="true">
+        JSObject="true">
         <!-- NOT FINISHED -->
 
         <doclink
@@ -101,8 +99,8 @@
                 descr="MSDN documentation"/>
             <doclink
                 url="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543"
-				descr="Gecko DOM reference"/>
-		</property>
+                descr="Gecko DOM reference"/>
+        </property>
         <property name="applets" notImplemented="true" readable="true" writable="false"/>
         <property name="body" readable="true" writable="false"/>
         <property name="bgColor" notImplemented="true" readable="true" writable="false"/>
@@ -127,7 +125,7 @@
                 url="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/frames.asp"
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
-		</property>
+        </property>
         <property name="images" readable="true" writable="false">
             <javascript min-version="1.1"/>
         </property>
@@ -169,29 +167,29 @@
     </class>
 
     <class name="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.Event"
-		JSObject="false">
+        JSObject="false">
         <property name="currentTarget" readable="true" writable="false"/>
     </class>
 
     <class name="FileUpload" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"
-		JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFileInput">
+        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFileInput">
         <!-- NOT FINISHED -->
     </class>
 
     <class name="FocusableHostElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"
-		JSObject="true">
+        JSObject="true">
         <function name="blur"/>
         <function name="focus"/>
     </class>
 
     <class name="Form" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Form"
-		JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlForm">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlForm">
         <!-- NOT FINISHED -->
-        
+
         <doclink
             url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/form.asp"
             descr="MSDN documentation"/>
-        
+
         <property name="action" readable="true" writable="true"/>
         <property name="elements" readable="true" writable="false"/>
         <property name="encoding" readable="true" writable="true"/>
@@ -207,7 +205,7 @@
 
 
     <class name="FormField" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FormField"
-		JSObject="false">
+        JSObject="false">
         <property name="disabled" readable="true" writable="true"/>
         <property name="form" notImplemented="true" readable="true" writable="true"/>
         <property name="form" readable="true" writable="false"/>
@@ -228,9 +226,8 @@
         <function name="select"/>
     </class>
 
-
     <class name="Frame" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Frame"
-		JSObject="true"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrame">
+        JSObject="true"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrame">
         <property name="onload" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="3"/>
@@ -242,20 +239,17 @@
         <property name="contentWindow" readable="true" writable="false"/>
     </class>
 
-
-	<class name="FrameInline" extends="Frame" classname="com.gargoylesoftware.htmlunit.javascript.host.Frame"
-		JSObject="false"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineFrame">
-	</class>
-
-
+    <class name="FrameInline" extends="Frame" classname="com.gargoylesoftware.htmlunit.javascript.host.Frame"
+        JSObject="false"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineFrame">
+    </class>
 
     <class name="Hidden" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"
-		JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHiddenInput">
+        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHiddenInput">
         <!-- NOT FINISHED -->
     </class>
 
     <class name="History" classname="com.gargoylesoftware.htmlunit.javascript.host.History"
-		JSObject="true">
+        JSObject="true">
         <property name="length" readable="true" writable="false"/>
 
         <function name="back"/>
@@ -264,7 +258,7 @@
     </class>
 
     <class name="HTMLElement" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLElement"
-		JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlElement">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlElement">
         <property name="all" notImplemented="true" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
@@ -302,15 +296,15 @@
         <property name="offsetHeight" readable="true" writable="false"/>
         <property name="offsetLeft" readable="true" writable="false"/>
         <property name="offsetParent" readable="true" writable="false">
-			<doclink
-				url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetparent.asp"
-				descr="MSDN documentation"/>
-			<doclink
-				url="http://www.mozilla.org/docs/dom/domref/dom_el_ref20.html"
-				descr="Gecko DOM reference"/>
-			<doclink
-				url="http://www.webreference.com/dhtml/diner/realpos1/5.html"
-				descr="DHTML Lab"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetparent.asp"
+                descr="MSDN documentation"/>
+            <doclink
+                url="http://www.mozilla.org/docs/dom/domref/dom_el_ref20.html"
+                descr="Gecko DOM reference"/>
+            <doclink
+                url="http://www.webreference.com/dhtml/diner/realpos1/5.html"
+                descr="DHTML Lab"/>
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="offsetTop" readable="true" writable="false"/>
@@ -446,17 +440,17 @@
     </class>
 
     <class name="Image" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Image"
-		JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
         <property name="src" readable="true" writable="true"/>
     </class>
 
     <class name="ImageInput" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"
-		JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImageInput">
+        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImageInput">
         <!-- NOT FINISHED -->
     </class>
 
     <class name="Input" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"
-		JSObject="true">
+        JSObject="true">
         <property name="checked" readable="true" writable="true"/>
         <property name="defaultChecked" readable="true" writable="true">
             <doclink
@@ -473,12 +467,12 @@
         </property>
     </class>
 
-	<class name="Label" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"
-		JSObject="false"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLabel">
-	</class>
+    <class name="Label" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"
+        JSObject="false"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLabel">
+    </class>
 
     <class name="Location" classname="com.gargoylesoftware.htmlunit.javascript.host.Location"
-		JSObject="true">
+        JSObject="true">
         <property name="hash" readable="true" writable="true"/>
         <property name="host" readable="true" writable="true"/>
         <property name="hostname" readable="true" writable="true"/>
@@ -494,7 +488,7 @@
     </class>
 
     <class name="Navigator" classname="com.gargoylesoftware.htmlunit.javascript.host.Navigator"
-		JSObject="true">
+        JSObject="true">
         <doclink
             url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_navigator.asp"
             descr="MSDN documentation"/>
@@ -523,7 +517,7 @@
     </class>
 
     <class name="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.NodeImpl"
-		JSObject="false">
+        JSObject="false">
         <property name="childNodes" readable="true" writable="false"/>
         <property name="firstChild" readable="true" writable="false"/>
         <property name="lastChild" readable="true" writable="false"/>
@@ -543,7 +537,7 @@
     </class>
 
     <class name="Option" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Option"
-		JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOption">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOption">
         <property name="defaultSelected" notImplemented="true" readable="true" writable="false"/>
         <property name="selected" readable="true" writable="true"/>
         <property name="text" readable="true" writable="true"/>
@@ -551,17 +545,17 @@
     </class>
 
     <class name="Password" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"
-		JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlPasswordInput">
+        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlPasswordInput">
         <!-- NOT FINISHED -->
     </class>
 
     <class name="Radio" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"
-		JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput">
+        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput">
         <!-- NOT FINISHED -->
     </class>
 
     <class name="RowContainer" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.RowContainer"
-		JSObject="true">
+        JSObject="true">
         <property name="rows" readable="true" writable="false"/>
         
         <function name="deleteRow">
@@ -584,12 +578,12 @@
     </class>
 
     <class name="Reset" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"
-		JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlResetInput">
+        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlResetInput">
         <!-- NOT FINISHED -->
     </class>
 
     <class name="Screen" classname="com.gargoylesoftware.htmlunit.javascript.host.Screen"
-		JSObject="true">
+        JSObject="true">
         <doclink
             url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_screen.asp"
             descr="MSDN documentation"/>
@@ -617,7 +611,7 @@
     </class>
 
     <class name="Select" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.Select"
-		JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSelect">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSelect">
         <!-- NOT FINISHED -->
         
         <property name="length" readable="true" writable="true"/>
@@ -628,12 +622,12 @@
         <function name="remove"/>
     </class>
 
-	<class name="Style" classname="com.gargoylesoftware.htmlunit.javascript.host.Style"
-		JSObject="true">
-	</class>
+    <class name="Style" classname="com.gargoylesoftware.htmlunit.javascript.host.Style"
+        JSObject="true">
+    </class>
 
     <class name="Submit" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"
-		JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSubmitInput">
+        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSubmitInput">
         <!-- NOT FINISHED -->
 <!-- 
         <property name="length" readable="true" writable="false"/>
@@ -641,7 +635,7 @@
     </class>
 
     <class name="Table" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.Table"
-		JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTable">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTable">
         <property name="caption" readable="true" writable="false"/>
         <property name="tBodies" readable="true" writable="false"/>
         <property name="tFoot" readable="true" writable="false"/>
@@ -680,16 +674,37 @@
     </class>
 
     <class name="TableBody" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.TableBody"
-		JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableBody"/>
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableBody"/>
+
+    <class name="TableCell" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.TableCell"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableCell">
+        <doclink
+            url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-82915075"
+            descr="W3C DOM Level 2"/>
+        <doclink
+            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/th.asp"
+            descr="MSDN documentation (TH)"/>
+        <doclink
+            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/td.asp"
+            descr="MSDN documentation (TD)"/>
+        <property name="cellIndex" readable="true" writable="false">
+            <doclink
+                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-80748363"
+                descr="W3C DOM Level 2"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cellindex.asp"
+                descr="MSDN documentation"/>
+        </property>
+    </class>
 
     <class name="TableFooter" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.TableFooter"
-		JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableFooter"/>
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableFooter"/>
 
     <class name="TableHeader" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.TableHeader"
-		JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableHeader"/>
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableHeader"/>
 
     <class name="TableRow" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.TableRow"
-		JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableRow">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableRow">
         <doclink
             url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-6986576"
             descr="W3c DOM Level 2"/>
@@ -716,12 +731,12 @@
     </class>
 
     <class name="Text" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"
-		JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextInput">
+        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextInput">
         <!-- NOT FINISHED -->
     </class>
 
     <class name="Textarea" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.Textarea"
-		JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextArea">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextArea">
         <!-- NOT FINISHED -->
         <property name="defaultValue" readable="true" writable="true">
             <doclink
@@ -731,12 +746,12 @@
     </class>
 
     <class name="TextImpl" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.TextImpl"
-		JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomText">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomText">
         <function name="splitText"/>
     </class>
 
     <class name="Window" classname="com.gargoylesoftware.htmlunit.javascript.host.Window"
-		JSObject="true">
+        JSObject="true">
         <!-- NOT FINISHED -->
         
         <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp"
