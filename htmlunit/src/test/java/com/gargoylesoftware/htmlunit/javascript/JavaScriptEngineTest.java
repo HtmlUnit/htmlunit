@@ -919,6 +919,52 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * Test that prototype changes are made in the right scope.
+     * Problem reported by Bruce Faulnker in the dev mailing list.
+     * @throws Exception If something goes wrong.
+     */
+    public void testPrototypeScope() throws Exception {
+
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final String content1
+            = "<html><head>"
+            + "<script>"
+            + "window.open('second.html', 'secondWindow');"
+            + "</script>"
+            + "</head><body></body></html>";
+
+        final String content2
+            = "<html><head>"
+            + "<script>\n"
+            + "alert('in page 2');\n"
+            + "String.prototype.foo = function()\n"
+            + "{\n"
+            + "   alert('in foo');\n"
+            + "};\n"
+            + "var testString = 'some string';\n"
+            + "testString.foo();\n"
+            + "</script>"
+            + "</head><body></body></html>";
+
+        final String[] expectedAlerts = { "in page 2", "in foo" };
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(content2);
+        webConnection.setResponse(URL_FIRST, content1);
+        client.setWebConnection(webConnection);
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        client.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
     private static final class CountingJavaScriptEngine extends ScriptEngine {
         private ScriptEngine delegate_;
         private int scriptExecutionCount_ = 0;
