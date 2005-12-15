@@ -199,10 +199,10 @@ public class TableTest extends WebTestCase {
 
         final List expectedAlerts = Arrays.asList(new String[] { "2", "true", "3", "2", "3" });
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
-        
+
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
-        
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -258,10 +258,9 @@ public class TableTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>\n";
 
-        
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
-        
+
         final List expectedAlerts = Arrays.asList(new String[] {"2", "true", "8 2 2 2 2",
             "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3"});
         assertEquals(expectedAlerts, collectedAlerts);
@@ -300,6 +299,35 @@ public class TableTest extends WebTestCase {
 
         final List expectedAlerts = Arrays.asList(new String[] { "tfoot1", "tfoot2", "null", "tfoot3" });
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testCellIndex() throws Exception {
+
+        final String htmlContent
+            = "<html><head><title>Test</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('th1').cellIndex);\n"
+            + "    alert(document.getElementById('th2').cellIndex);\n"
+            + "    alert(document.getElementById('td1').cellIndex);\n"
+            + "    alert(document.getElementById('td2').cellIndex);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'><table>\n"
+            + "<tr><th id='th1'>a</th><th id='th2'>b</th></tr>\n"
+            + "<tr><td id='td1'>c</td><td id='td2'>d</td></tr>\n"
+            + "</table></body></html>";
+
+        final List expectedAlerts = Arrays.asList( new String[] { "0", "1", "0", "1" } );
+        createTestPageForRealBrowserIfNeeded( htmlContent, expectedAlerts );
+
+        final List collectedAlerts = new ArrayList();
+        loadPage( htmlContent, collectedAlerts );
+
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
     /**

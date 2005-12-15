@@ -178,6 +178,9 @@
         <contributor>
         	<name>Vikram Shitole</name>
         </contributor>
+        <contributor>
+        	<name>Mark van Leeuwen</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

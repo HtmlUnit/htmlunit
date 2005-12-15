@@ -388,7 +388,13 @@ public class SimpleScriptable extends ScriptableObject {
      */
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
 
-        final String javaScriptClassName = (String)getHtmlJavaScriptMapping().get(domNode.getClass());
+        // Get the JS class name for the specified DOM node.
+        // Walk up the inheritance chain if necessary.
+        String javaScriptClassName = null;
+        for( Class c = domNode.getClass(); javaScriptClassName == null && c != null; c = c.getSuperclass() ) {
+            javaScriptClassName = (String) getHtmlJavaScriptMapping().get( c );
+        }
+
         final SimpleScriptable scriptable;
         if (javaScriptClassName == null) {
             // We don't have a specific subclass for this element so create something generic.

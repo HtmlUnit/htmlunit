@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2005 Gargoyle Software Inc. All rights reserved.
+ * Copyright (c) 2005 Gargoyle Software Inc. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -35,72 +35,38 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.Map;
-
+import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
+import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 
 /**
- *  An abstract cell that provides the implementation for HtmlTableDataCell and
- *  HtmlTableHeaderCell.
+ * The JavaScript object representing a TD or TH.
  *
- * @version  $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
- * @see  HtmlTableDataCell
- * @see  HtmlTableHeaderCell
+ * @author <a href="https://sourceforge.net/users/marlee/">Mark van Leeuwen</a>
+ * @version $Revision$
  */
-public abstract class HtmlTableCell extends ClickableElement {
+public class TableCell extends HTMLElement {
+
+    private static final long serialVersionUID = -4321684413510290017L;
 
     /**
-     *  Create an instance
-     *
-     * @param  page The page that this element is contained within
-     * @param attributes the initial attributes
+     * JavaScript constructor. This must be declared in every JavaScript file because
+     * the Rhino engine won't walk up the hierarchy looking for constructors.
      */
-    protected HtmlTableCell(final HtmlPage page, final Map attributes) {
-        super( page, attributes );
+    public void jsConstructor() {
     }
 
     /**
-     *  Return the value of the colspan attribute or 1 if the attribute wasn't
-     *  specified
-     *
-     * @return  See above
+     * Returns the index of this cell within the parent row.
+     * @return The index of this cell within the parent row.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cellindex.asp">
+     * MSDN Documentation</a>
      */
-    public int getColumnSpan() {
-        final String spanString = getAttributeValue( "colspan" );
-        if( spanString == null || spanString.length() == 0 ) {
-            return 1;
-        }
-        else {
-            return Integer.parseInt( spanString );
-        }
-    }
-
-    /**
-     *  Return the value of the rowspan attribute or 1 if the attribute wasn't
-     *  specified
-     *
-     * @return  See above
-     */
-    public int getRowSpan() {
-        final String spanString = getAttributeValue( "rowspan" );
-        if( spanString == null || spanString.length() == 0 ) {
-            return 1;
-        }
-        else {
-            return Integer.parseInt( spanString );
-        }
-    }
-
-    /**
-     * Returns the table row containing this cell.
-     * @return The table row containing this cell.
-     */
-    public HtmlTableRow getEnclosingRow() {
-        return (HtmlTableRow) getEnclosingElement( "tr" );
+    public Integer jsxGet_cellIndex() {
+        final HtmlTableCell cell = (HtmlTableCell) getHtmlElementOrDie();
+        final HtmlTableRow row = cell.getEnclosingRow();
+        return new Integer( row.getCells().indexOf( cell ) );
     }
 
 }
