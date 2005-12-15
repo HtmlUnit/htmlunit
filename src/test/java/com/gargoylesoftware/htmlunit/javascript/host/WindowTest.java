@@ -1802,10 +1802,8 @@ public class WindowTest extends WebTestCase {
 
         final int waitTime = 50;
         final int maxTime = 1000;
-        final List expectedAlerts = new ArrayList();
-        for (int i = 0; i < max; i++) {
-            expectedAlerts.add("ping");
-        }
+        final List expectedAlerts = Collections.nCopies(max, "ping");
+
         for (int time = 0; time < maxTime; time += waitTime) {
             if (collectedAlerts.size() == expectedAlerts.size()) {
                 assertEquals(expectedAlerts, collectedAlerts);
@@ -1814,5 +1812,5 @@ public class WindowTest extends WebTestCase {
             Thread.sleep(waitTime);
         }
         fail(max + " alerts not collected in " + maxTime + "ms");
-    }    
+    }
 }
