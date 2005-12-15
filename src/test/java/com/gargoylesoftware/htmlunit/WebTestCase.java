@@ -47,6 +47,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -91,7 +92,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * The name of the system property used to determine if files should be generated
      * or not in {@link #createTestPageForRealBrowserIfNeeded(String,List)}
      */
-    public static final String PROPERTY_GENERATE_TESTPAGES 
+    public static final String PROPERTY_GENERATE_TESTPAGES
         = "com.gargoylesoftware.htmlunit.WebTestCase.GenerateTestpages";
 
     static {
@@ -172,7 +173,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @return The new page.
      * @throws Exception If something goes wrong.
      */
-    protected static final HtmlPage loadPage( final String html, final List collectedAlerts, 
+    protected static final HtmlPage loadPage( final String html, final List collectedAlerts,
             final URL url ) throws Exception {
 
         return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, url);
@@ -187,7 +188,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @return The new page.
      * @throws Exception If something goes wrong.
      */
-    protected static final HtmlPage loadPage(final BrowserVersion browserVersion, 
+    protected static final HtmlPage loadPage(final BrowserVersion browserVersion,
             final String html, final List collectedAlerts, final URL url)
         throws Exception {
 
@@ -246,6 +247,18 @@ public abstract class WebTestCase extends BaseTestCase {
     }
 
     /**
+     * Facility method to avoid having to create explicitely a list from
+     * a String[] (for example when testing received alerts).
+     * Transforms the String[] to a List before calling 
+     * {@link junit.framework.Assert#assertEquals(java.lang.Object, java.lang.Object)}. 
+     * @param expected the expected strings
+     * @param actual the collection of strings to test
+     */
+    protected void assertEquals(final String[] expected, final List actual) {
+        assertEquals(Arrays.asList(expected), actual);
+    }
+
+    /**
      * Facility to test external form of an url.
      * @param message the message to display if assertion fails
      * @param expectedUrl the string representation of the expected url
@@ -296,24 +309,36 @@ public abstract class WebTestCase extends BaseTestCase {
     }
 
     /**
+     * Facility method transforming expectedAlerts to a list and calling
+     * {@link #createTestPageForRealBrowserIfNeeded(String, List)}
+     * @param content the content of the html page
+     * @param expectedAlerts the expected alerts
+     * @throws IOException if writing file fails
+     */
+    protected void createTestPageForRealBrowserIfNeeded(final String content, final String[] expectedAlerts)
+        throws IOException {
+        createTestPageForRealBrowserIfNeeded(content, Arrays.asList(expectedAlerts));
+    }
+
+    /**
      * Generates an instrumented html file in the temporary dir to easily make a manual test in a real browser.
      * The file is generated only if the system property {@link #PROPERTY_GENERATE_TESTPAGES} is set. 
      * @param content the content of the html page
      * @param expectedAlerts the expected alerts
      * @throws IOException if writing file fails
      */
-    protected void createTestPageForRealBrowserIfNeeded(final String content, final List expectedAlerts) 
+    protected void createTestPageForRealBrowserIfNeeded(final String content, final List expectedAlerts)
         throws IOException {
         final Log log = LogFactory.getLog(WebTestCase.class);
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
             // should be optimized....
-            
+
             // calls to alert() should be replaced by call to custom function
-            String newContent = StringUtils.replace(content, 
+            String newContent = StringUtils.replace(content,
                     "alert(", "htmlunitReserved_catchedAlert(");
-            
+
             final String instrumentationJS = createInstrumentationScript(expectedAlerts);
-            
+
             // first version, we assume that there is a <head> and a </body> or a </frameset>
             newContent = StringUtils.replaceOnce(newContent, "<head>", "<head>" + instrumentationJS);
             final String endScript = "\n<script>htmlunitReserved_addSummaryAfterOnload();</script>\n";
@@ -329,7 +354,7 @@ public abstract class WebTestCase extends BaseTestCase {
             log.info("Test file written: " + f.getAbsolutePath());
         }
         else {
-            log.debug("System property \"" + PROPERTY_GENERATE_TESTPAGES 
+            log.debug("System property \"" + PROPERTY_GENERATE_TESTPAGES
                     + "\" not set, don't generate test html page for real browser");
         }
     }
@@ -345,7 +370,7 @@ public abstract class WebTestCase extends BaseTestCase {
                 "com/gargoylesoftware/htmlunit/alertVerifier.js");
         final String baseJS = IOUtils.toString(is);
         IOUtils.closeQuietly(is);
-        
+
         final StringBuffer sb = new StringBuffer();
         sb.append("\n<script type='text/javascript'>\n");
         sb.append("var htmlunitReserved_tab = [");
@@ -428,7 +453,7 @@ public abstract class WebTestCase extends BaseTestCase {
             return false;
         }
         notYetImplementedFlag.set(Boolean.TRUE);
-        
+
         final Method testMethod = findRunningJUnitTestMethod();
         try {
             getLog().info("Running " + testMethod.getName() + " as not yet implemented");
@@ -471,7 +496,7 @@ public abstract class WebTestCase extends BaseTestCase {
                 }
             }
         }
-            
+
         throw new RuntimeException("No JUnit test case method found in call stack");
     }
 
@@ -485,12 +510,12 @@ public abstract class WebTestCase extends BaseTestCase {
         final String name = method.getName();
         final Class[] parameters = method.getParameterTypes();
         final Class returnType = method.getReturnType();
-        
-        return parameters.length == 0 && name.startsWith("test") 
+
+        return parameters.length == 0 && name.startsWith("test")
             && returnType.equals(Void.TYPE)
             && Modifier.isPublic(method.getModifiers());
     }
-    
+
     private static final ThreadLocal notYetImplementedFlag = new ThreadLocal();
 }
 
