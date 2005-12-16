@@ -321,16 +321,10 @@ public class WebClient {
             }
         }
 
-        final String protocol = parameters.getURL().getProtocol();
         final WebResponse webResponse;
-        if( protocol.equals("javascript") ) {
+        final String protocol = parameters.getURL().getProtocol();
+        if (protocol.equals("javascript")) {
             webResponse = makeWebResponseForJavaScriptUrl(webWindow, parameters.getURL());
-        }
-        else if (protocol.equals("about")) {
-            webResponse = makeWebResponseForAboutUrl(parameters.getURL());
-        }
-        else if (protocol.equals("file")) {
-            webResponse = makeWebResponseForFileUrl(parameters.getURL());
         }
         else {
             webResponse = loadWebResponse(parameters);
@@ -1265,7 +1259,12 @@ public class WebClient {
             contentType = URLConnection.guessContentTypeFromName(file.getName());
         }
         if (contentType == null) {
-            contentType = "application/octet-stream";
+            if (file.getName().endsWith(".js")) {
+                contentType = "text/javascript";
+            }
+            else {
+                contentType = "application/octet-stream";
+            }
         }
 
         return contentType;
@@ -1287,12 +1286,37 @@ public class WebClient {
     }
 
     /**
-     * Load a {@link WebResponse} from the server
+     * Loads a {@link WebResponse} from the server
      * @param webRequestSettings settings to use when making the request
      * @throws IOException if an IO problem occurs
      * @return The WebResponse
      */
     public final WebResponse loadWebResponse(final WebRequestSettings webRequestSettings)
+        throws
+            IOException {
+
+        final WebResponse response;
+        final String protocol = webRequestSettings.getURL().getProtocol();
+        if (protocol.equals("about")) {
+            response = makeWebResponseForAboutUrl(webRequestSettings.getURL());
+        }
+        else if (protocol.equals("file")) {
+            response = makeWebResponseForFileUrl(webRequestSettings.getURL());
+        }
+        else {
+            response = loadWebResponseFromWebConnection(webRequestSettings);
+        }
+
+        return response;
+    }
+
+    /**
+     * Loads a {@link WebResponse} from the server through the WebConnection.
+     * @param webRequestSettings settings to use when making the request
+     * @throws IOException if an IO problem occurs
+     * @return The WebResponse
+     */
+    private WebResponse loadWebResponseFromWebConnection(final WebRequestSettings webRequestSettings)
         throws
             IOException {
         final URL url = webRequestSettings.getURL();
