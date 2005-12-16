@@ -155,7 +155,6 @@ public class HtmlForm extends ClickableElement {
      */
     public Page submit( final SubmittableElement submitElement ) throws IOException {
 
-        final String action = getActionAttribute();
         final HtmlPage htmlPage = getPage();
         if( htmlPage.getWebClient().isJavaScriptEnabled() ) {
             if( submitElement != null ) {
@@ -173,12 +172,13 @@ public class HtmlForm extends ClickableElement {
                 }
             }
 
+            final String action = getActionAttribute();
             if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
                 return htmlPage.executeJavaScriptIfPossible( action, "Form action", false, this ).getNewPage();
             }
         }
         else {
-            if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
+            if( TextUtil.startsWithIgnoreCase(getActionAttribute(), "javascript:") ) {
                 // The action is javascript but javascript isn't enabled.  Return
                 // the current page.
                 return htmlPage;
@@ -188,7 +188,7 @@ public class HtmlForm extends ClickableElement {
         final List parameters = getParameterListForSubmit(submitElement);
         final SubmitMethod method = SubmitMethod.getInstance( getAttributeValue("method"));
 
-        String actionUrl = action;
+        String actionUrl = getActionAttribute();
         if (SubmitMethod.GET.equals(method)) {
             // discard anchor (not fully correct, but quick fix)
             actionUrl = StringUtils.substringBefore(actionUrl, "#");

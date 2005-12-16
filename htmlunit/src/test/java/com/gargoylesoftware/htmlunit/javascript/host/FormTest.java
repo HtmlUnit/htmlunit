@@ -45,8 +45,10 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -540,6 +542,31 @@ public class FormTest extends WebTestCase {
         assertEquals( "second", secondPage.getTitleText() );
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testOnSubmitChangesAction() throws Exception {
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+
+        final String firstContent
+            = "<html><body>\n"
+            + "<form name='form1' action='http://second' onsubmit='this.action = \"http://third\"' method='post'>"
+            + "    <input type='submit' id='button1' />"
+            + "</form>"
+            + "</body></html>";
+        final String defaultContent = "<html></html>";
+
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setDefaultResponse(defaultContent);
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        final Page page2 = ((ClickableElement) page.getHtmlElementById("button1")).click();
+
+        assertEquals("http://third", page2.getWebResponse().getUrl());
+    }
 
     /**
      * @throws Exception if the test fails
