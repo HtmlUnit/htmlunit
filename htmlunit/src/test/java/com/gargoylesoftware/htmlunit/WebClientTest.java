@@ -977,6 +977,8 @@ public class WebClientTest extends WebTestCase {
         assertEquals("http://first", WebClient.expandUrl(URL_FIRST, "#second"));
         assertEquals("http://first?a=1&b=2", WebClient.expandUrl(new URL("http://first?a=1&b=2"), ""));
         assertEquals("http://first?b=2&c=3", WebClient.expandUrl(new URL("http://first?a=1&b=2"), "?b=2&c=3"));
+        assertEquals("file:/home/myself/test.js",
+                WebClient.expandUrl(new URL("file:/home/myself/myTest.html"), "test.js"));
     }
 
     /**
@@ -1218,6 +1220,7 @@ public class WebClientTest extends WebTestCase {
         assertEquals("empty.png", "image/png", webClient.guessContentType(getTestFile("empty.png")));
         assertEquals("empty.jpg", "image/jpeg", webClient.guessContentType(getTestFile("empty.jpg")));
         assertEquals("empty.gif", "image/gif", webClient.guessContentType(getTestFile("empty.gif")));
+        assertEquals("empty.js", "text/javascript", webClient.guessContentType(getTestFile("empty.js")));
     }
 
 
@@ -1335,5 +1338,39 @@ public class WebClientTest extends WebTestCase {
 
         webConnection.setResponse(URL_FIRST, "", "Text/JavaScript");
         assertInstanceOf(client.getPage(URL_FIRST), JavaScriptPage.class);
+    }
+
+    /**
+     * Load a javascript function from an external file using src references
+     * inside a script element. 
+     * 
+     * @throws Exception if the test fails 
+     */
+    public void testLoadFilePageWithExternalJS() throws Exception {
+        final File currentDirectory = new File((new File("")).getAbsolutePath());
+
+        final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
+
+        // javascript file
+        final File tmpFileJS = File.createTempFile("test", ".js", currentDirectory);
+        tmpFileJS.deleteOnExit();
+        FileUtils.writeStringToFile(tmpFileJS, "alert('foo')", encoding);
+
+        // html file
+        final String html = "<html><head></head><body>"
+            + "<script language='javascript' type='text/javascript' src='" + tmpFileJS.getName() + "'></script>"
+            + "</body></html>";
+        final File tmpFile = File.createTempFile("test", ".html", currentDirectory);
+        tmpFile.deleteOnExit();
+        FileUtils.writeStringToFile(tmpFile, html, encoding);
+
+        final URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
+        final WebClient webClient = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.getPage(fileURL);
+
+        final String[] expectedAlerts = {"foo"};
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
