@@ -44,6 +44,7 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -338,6 +339,32 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) a.click();
         assertEquals("url", URL_SECOND, secondPage.getWebResponse().getUrl());
         assertEquals("title", "Page B", secondPage.getTitleText());
+    }
+    
+    /**
+     * Test for new openLinkInNewWindow() method
+     * @throws Exception on test failure
+     */
+    public void testOpenLinkInNewWindow() throws Exception {
+        final String htmlContent = "<html><head><title>foo</title></head><body>"
+            + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a1");
+
+        assertEquals("size incorrect before test", 1, page.getWebClient().getWebWindows().size());
+
+        final HtmlPage secondPage = (HtmlPage) anchor.openLinkInNewWindow();
+
+        assertNotSame("new page not returned", page, secondPage);
+        assertInstanceOf(
+                "new page in wrong window type",
+                secondPage.getEnclosingWindow(),
+                TopLevelWindow.class);
+        assertEquals("new window not created", 2, page.getWebClient().getWebWindows().size());
+        assertNotSame("new window not used", page.getEnclosingWindow(), secondPage
+                .getEnclosingWindow());
     }
 }
 
