@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="yourgod">
+                 Added HtmlAnchor.openLinkInNewWindow()
+            </action>        
             <action type="update" dev="mguillem" id="1382013">
                  JavaScript: changes on form's action attribute in onSubmit were ignored.
             </action>

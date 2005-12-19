@@ -38,12 +38,14 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
  *  Wrapper for the html element "a"
@@ -301,5 +303,25 @@ public class HtmlAnchor extends FocusableElement {
      */
     public final String getTargetAttribute() {
         return getAttributeValue("target");
+    }
+    
+    /**
+     * Open this link in a new window, much as web browsers do when you
+     * shift-click a link or use the context menu to open in a new window.
+     * 
+     * It should be noted that even web browsers will sometimes not give the
+     * expected result when using this method of following links. Links that
+     * have no real href and rely on javascript to do their work will fail.
+     * 
+     * @return The Page opened by this link, nested in a new TopLevelWindow
+     * @throws MalformedURLException if the href could not be converted to
+     *         a valid URL
+     */
+    public final Page openLinkInNewWindow() throws MalformedURLException {
+        final URL target = getPage().getFullyQualifiedUrl(getHrefAttribute());
+        final WebWindow newWindow = getPage().getWebClient().openWindow(
+                target,
+                "HtmlAnchor.openLinkInNewWindow() target");
+        return newWindow.getEnclosedPage();
     }
 }
