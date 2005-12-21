@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                 Upgraded commons-httpclient to version 3.0.
+            </action>
             <action type="update" dev="mguillem" id="1385864" due-to="Paul King">
                  Fixed NPE thrown when JS error occurs on click when ThrowExceptionOnScriptError is false.
             </action>
