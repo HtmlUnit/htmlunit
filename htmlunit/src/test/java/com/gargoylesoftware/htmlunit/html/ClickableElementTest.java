@@ -90,12 +90,28 @@ public class ClickableElementTest extends WebTestCase {
      */
     private void onClickPageTest(final String htmlContent, final int numClicks, final List expectedAlerts)
         throws Exception {
+        onClickPageTest(htmlContent, numClicks, expectedAlerts, false);
+    }
+
+        /**
+        * Full page driver for onClick tests.
+        *
+        * @param htmlContent HTML fragment for body of page with clickable element
+        * identified by clickId ID attribute.
+        * @param numClicks number of times to click element
+        * @param expectedAlerts List of expected popup values
+        * @param exceptionOnError
+        * @throws Exception if the test fails
+        */
+    private void onClickPageTest(final String htmlContent, final int numClicks,
+            final List expectedAlerts, final boolean exceptionOnError) throws Exception {
         final BrowserVersion bv = new BrowserVersion("Netscape", "7", "", "1.2", 7);
         final WebClient client = new WebClient(bv);
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setDefaultResponse( htmlContent );
         client.setWebConnection( webConnection );
+        client.setThrowExceptionOnScriptError(exceptionOnError);
 
         final List collectedAlerts = new ArrayList();
         final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
@@ -323,6 +339,20 @@ public class ClickableElementTest extends WebTestCase {
      */
     public void testDefinitionDescription_onClick() throws Exception {
         onClickBodyTest("<body><dl><dt>Term</dt><dd id='clickId' onClick='alert(\"foo\")'>Definition</dd></dl></body>");
+    }
+
+
+    /**
+     * Test that no NPE is thrown when JS fails on link click 
+     * and WebClient.setThrowExceptionOnScriptError(false) is used.
+     * Test for bug 1385864.
+     * @throws Exception if the test fails
+     */
+    public void testJavaScriptError_onClick() throws Exception {
+        onClickPageTest("<html><head></head><body>"
+                + "<form method='POST'><input type='button' id='clickId' onclick='y()'></form>"
+                + "</body></html>",
+                1, new ArrayList(), false);
     }
 
 
