@@ -109,7 +109,7 @@ public abstract class ClickableElement extends StyledElement {
                     function, (Scriptable) getScriptObject(), args, this);
 
             final Page scriptPage = scriptResult.getNewPage();
-            if( stateUpdated || scriptResult.getJavaScriptResult().equals( Boolean.FALSE ) ) {
+            if (stateUpdated || Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
                 return scriptPage;
             }
             else {
