@@ -168,7 +168,7 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
     <antcall target="get-dependency">
         <param name="type" value="required"/>
         <param name="project" value="commons-httpclient"/>
-        <param name="jarName" value="commons-httpclient-3.0-rc4.jar"/>
+        <param name="jarName" value="commons-httpclient-3.0.jar"/>
     </antcall>
     <antcall target="get-dependency">
         <param name="type" value="required"/>
