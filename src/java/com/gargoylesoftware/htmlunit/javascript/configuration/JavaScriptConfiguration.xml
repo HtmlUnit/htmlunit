@@ -168,7 +168,21 @@
 
     <class name="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.Event"
         JSObject="false">
-        <property name="currentTarget" readable="true" writable="false"/>
+        <doclink
+            url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event"
+            descr="W3C Document Object Model (DOM) Level 2"/>
+        <property name="target" readable="true" writable="false">
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="currentTarget" readable="true" writable="false">
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="srcElement" readable="true" writable="true">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/srcelement.asp"
+                descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer" min-version="5"/>
+        </property>
     </class>
 
     <class name="FileUpload" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"

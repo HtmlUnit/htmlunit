@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -134,6 +135,39 @@ public class EventTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    public void testEventTargetSameAsThis() throws Exception {
+        final List expectedAlerts = Collections.singletonList("pass");
+        final String content
+            = "<html><head></head><body>\n"
+            + "<input type='button' id='clickId'/>\n"
+            + "<script>\n"
+            + "function handler(event) {\n"
+            + "alert(event.target == this ? 'pass' : event.target + '!=' + this); }\n"
+            + "document.getElementById('clickId').onclick = handler;</script>\n"
+            + "</body></html>\n";
+        onClickPageTest(BrowserVersion.NETSCAPE_6_2_3, content, expectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testEventSrcElementSameAsThis() throws Exception {
+        final List expectedAlerts = Collections.singletonList("pass");
+        final String content
+            = "<html><head></head><body>\n"
+            + "<input type='button' id='clickId'/>\n"
+            + "<script>\n"
+            + "function handler(event) {\n"
+            + "event = event ? event : window.event;\n"
+            + "alert(event.srcElement == this ? 'pass' : event.srcElement + '!=' + this); }\n"
+            + "document.getElementById('clickId').onclick = handler;</script>\n"
+            + "</body></html>\n";
+        onClickPageTest(BrowserVersion.INTERNET_EXPLORER_6_0, content, expectedAlerts);
+    }
+
+    /**
      *  event.currentTarget == this inside javascript event handler 
      * @throws Exception if the test fails
      */
@@ -147,17 +181,21 @@ public class EventTest extends WebTestCase {
             + "alert(event.currentTarget == this ? 'pass' : event.currentTarget + '!=' + this); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>\n";
-        onClickPageTest(content, expectedAlerts);
+        onClickPageTest(BrowserVersion.NETSCAPE_6_2_3, content, expectedAlerts);
     }
 
     private void onClickPageTest(final String content, final List expectedAlerts) throws Exception, IOException {
-        final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        onClickPageTest( BrowserVersion.getDefault(), content, expectedAlerts );
+    }
 
-        final ClickableElement clickable = (ClickableElement)page.getHtmlElementById("clickId");
+    private void onClickPageTest( final BrowserVersion version, final String content, final List expectedAlerts )
+        throws Exception, IOException {
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage( version, content, collectedAlerts );
+        final ClickableElement clickable = (ClickableElement) page.getHtmlElementById( "clickId" );
         clickable.click();
-        
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
     /**
@@ -178,7 +216,7 @@ public class EventTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
