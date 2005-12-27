@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1281651" due-to="Stefan Anzinger">
+                 JavaScript: added support for properties target and srcElement on events.
+            </action>
             <action type="update" dev="mguillem">
                  Upgraded commons-httpclient to version 3.0.
             </action>

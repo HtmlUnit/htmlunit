@@ -41,46 +41,74 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- *  JavaScript object representing an Event that is passed into Event Handlers
- * when they are invoked.  For general information on which properties and functions
+ * JavaScript object representing an Event that is passed into Event Handlers
+ * when they are invoked. For general information on which properties and functions
  * should be supported, see <a href="www.mozilla.org/docs/dom/domref/dom_event_ref.html">
- * the mozilla docs</a>.
- * 
+ * the mozilla docs</a> or <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event">
+ * the W3C DOM Level 2 Event Documentation</a>.
+ *
  * @version $Revision$
  * @author <a hrer="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
  * @author Mike Bowler
  * @author Chris Erskine
  * @author Marc Guillemot
+ * @author Daniel Gredler
  */
 public class Event extends SimpleScriptable {
 
     private static final long serialVersionUID = 4050485607908455730L;
-    private Object currentTarget_;
+    private Object srcElement_;     // IE-only writeable equivalent of target.
+    private Object target_;         // W3C standard read-only equivalent of srcElement.
+    private Object currentTarget_;  // Changes during event capturing and bubbling.
 
     /**
-     * Creates a new instance.
-     * @param domNode The DomNode that triggered the Event.
-     * @param currentTarget The current target Event is being propagated on behalf of.
+     * Creates a new event instance.
+     * @param domNode The DOM node that triggered the event.
+     * @param target The (original) target of the event.
      */
-    public Event(final DomNode domNode, final Object currentTarget) {
-        super();
-
-        currentTarget_ = currentTarget;
+    public Event(final DomNode domNode, final Object target) {
+        srcElement_ = target;
+        target_ = target;
+        currentTarget_ = target;
         setParentScope((SimpleScriptable) domNode.getScriptObject());
-
         setDomNode(domNode, false);
     }
 
     /**
-     * javascript getter for currentTarget property
-     * @return the current target
+     * Returns the object that fired the event. This is an IE-only property.
+     * @return The object that fired the event.
+     */
+    public Object jsxGet_srcElement() {
+        return srcElement_;
+    }
+
+    /**
+     * Sets the object that fired the event. This is an IE-only property.
+     * @param srcElement The object that fired the event.
+     */
+    public void jsxSet_srcElement(final Object srcElement) {
+        srcElement_ = srcElement;
+    }
+
+    /**
+     * Returns the event target to which the event was originally dispatched.
+     * @return The event target to which the event was originally dispatched.
+     */
+    public Object jsxGet_target() {
+        return target_;
+    }
+
+    /**
+     * Returns the event target whose event listeners are currently being processed. This
+     * is useful during event capturing and event bubbling.
+     * @return The current event target.
      */
     public Object jsxGet_currentTarget() {
         return currentTarget_;
     }
 
     /**
-     * @return string description of Event and related fields
+     * {@inheritDoc}
      */
     public String toString() {
         final StringBuffer buffer = new StringBuffer("Event: (");
@@ -89,4 +117,5 @@ public class Event extends SimpleScriptable {
         buffer.append(");");
         return buffer.toString();
     }
+
 }
