@@ -494,11 +494,6 @@ public class HTMLElement extends NodeImpl {
                     getDomNodeOrDie().getPage().getWebResponse().getUrl());
             try {
                 final WebWindow pseudoWindow = new WebWindowImpl(webClient) {
-                    public String getName() {
-                        return null;
-                    }
-                    public void setName(final String name) {
-                    }
                     public WebWindow getParentWindow() {
                         return null;
                     }

@@ -47,7 +47,6 @@ package com.gargoylesoftware.htmlunit;
  */
 public class TopLevelWindow extends WebWindowImpl {
 
-    private String name_;
     private WebWindow opener_;
 
     /**
@@ -58,21 +57,7 @@ public class TopLevelWindow extends WebWindowImpl {
     public TopLevelWindow(final String name, final WebClient webClient) {
         super(webClient);
         Assert.notNull("name", name);
-        name_ = name;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getName() {
-        return name_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setName(final String name) {
-        name_ = name;
+        setName(name);
     }
 
     /**
