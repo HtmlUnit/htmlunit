@@ -41,9 +41,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.collections.Transformer;
 import org.jaxen.JaxenException;
@@ -97,8 +95,6 @@ public class Window extends SimpleScriptable {
     private History history_;
     private Location location_;
     private Function onload_;
-    private final Map timeoutThreads_ = new HashMap();
-    private int nextTimeoutId_;
     private String status_ = "";
     private ElementArray frames_; // has to be a member to have equality (==) working
 
@@ -250,45 +246,10 @@ public class Window extends SimpleScriptable {
      * @return the id of the created timer
      */
     public int jsxFunction_setTimeout(final String script, final int timeout) {
-        final Runnable runnable = new Runnable() {
-            public void run() {
-                final Window window = Window.this;
-                final Page page = window.getWebWindow().getEnclosedPage();
-                try {
-                    Thread.sleep(timeout);
-                    window.getLog().debug("Executing timeout: " + script);
-
-                    final WebWindow webWindow = window.getWebWindow();
-                    // test that the window is always opened and the page the same
-                    if (!webWindow.getWebClient().getWebWindows().contains(webWindow)
-                            || webWindow.getEnclosedPage() != page) {
-
-                        window.getLog().debug("the page that originated the setTimeout doesnt exist anymore. "
-                                + "Execution cancelled.");
-                        return;
-                    }
-
-                    final HtmlPage htmlPage = window.document_.getHtmlPage();
-                    htmlPage.executeJavaScriptIfPossible(
-                        script, "Window.setTimeout()", true, htmlPage.getDocumentElement());
-                }
-                catch( final InterruptedException e ) {
-                    window.getLog().debug("JavaScript timeout thread interrupted; clearTimeout() probably called.");
-                }
-                catch( final Exception e ) {
-                    window.getLog().error("Caught exception in Window.setTimeout()", e);
-                }
-            }
-        };
-        final int id = nextTimeoutId_++;
-        final String threadName = "HtmlUnit setTimeout() Thread " + id;
-        final Thread setTimeoutThread = new Thread(runnable, threadName);
-        timeoutThreads_.put(new Integer(id), setTimeoutThread);
-        setTimeoutThread.setPriority(Math.min(Thread.MAX_PRIORITY, Thread.currentThread().getPriority() + 1));
-        setTimeoutThread.start();
+        final Runnable setTimeoutThread = new JavaScriptBackgroundJob(this, timeout, script, false);
+        final int id = getWebWindow().getThreadManager().startThread(setTimeoutThread);
         return id;
     }
-
 
     /**
      * Cancels a time-out previously set with the <tt>setTimeout</tt> method.
@@ -296,10 +257,7 @@ public class Window extends SimpleScriptable {
      * @param timeoutId identifier for the timeout to clear (returned by <tt>setTimeout</tt>)
      */
     public void jsxFunction_clearTimeout(final int timeoutId) {
-        final Thread setTimeoutThread = (Thread) timeoutThreads_.get(new Integer(timeoutId));
-        if(setTimeoutThread != null) {
-            setTimeoutThread.interrupt();
-        }
+        getWebWindow().getThreadManager().stopThread(timeoutId);
     }
 
 
@@ -752,33 +710,28 @@ public class Window extends SimpleScriptable {
     /**
      * Set a chunk of javascript to be invoked each time a specified number of milliseconds has elapsed
      * Current implementation does nothing.
-     * @param context The javascript Context
-     * @param scriptable The object that the function was called on.
-     * @param args The arguments passed to the function. First arg must be a function or a string containing
-     * the code to execute. 2nd arg is the interval in milliseconds
-     * @param function The function object that was invoked.
+
+     * @param script the code to execute
+     * @param timeout the delay in milliseconds to wait before executing the code
      * @return the id of the created interval
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp">
      * MSDN documentation</a>
      */
-    public static int jsxFunction_setInterval(final Context context, final Scriptable scriptable,
-        final Object[] args,  final Function function ) {
-
-        final Window thisWindow = (Window)scriptable;
-
-        thisWindow.getLog().warn("Current implementation of setInterval does nothing.");
-        return 0;
+    public int jsxFunction_setInterval(final String script, final int timeout) {
+        final Runnable setTimeoutThread = new JavaScriptBackgroundJob(this, timeout, script, true);
+        final int id = getWebWindow().getThreadManager().startThread(setTimeoutThread);
+        return id;
     }
 
     /**
      * Cancels the interval previously started using the setInterval method.
      * Current implementation does nothing.
-     * @param iIntervalId specifies the interval to cancel as returned by the setInterval method.
+     * @param intervalID specifies the interval to cancel as returned by the setInterval method.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp">
      * MSDN documentation</a>
      */
-    public void jsxFunction_clearInterval(final int iIntervalId) {
-        getLog().warn("Current implementation of clearInterval does nothing.");
+    public void jsxFunction_clearInterval(final int intervalID) {
+        getWebWindow().getThreadManager().stopThread(intervalID);
     }
 
 

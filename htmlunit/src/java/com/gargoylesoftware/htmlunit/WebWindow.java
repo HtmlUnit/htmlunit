@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-
 /**
  *  An interface that represents one window in a browser.  It could be a top level window
  *  or a frame.
@@ -109,7 +108,8 @@ public interface WebWindow {
 
 
     /**
-     * Internal use only - subject to change without notice.<p>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
      * Set the javascript object that corresponds to this element.  This is not guarenteed
      * to be set even if there is a javascript object for this html element.
      * @param scriptObject The javascript object.
@@ -118,10 +118,22 @@ public interface WebWindow {
 
 
     /**
-     * Internal use only - subject to change without notice.<p>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
      * Return the javascript object that corresponds to this element.
      * @return The javascript object that corresponsd to this element.
      */
     Object getScriptObject();
+
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
+     * Currently exposed here for testing purposes, a better API will be added in the 
+     * future and this will become a completely internal class.
+     * 
+     * @return The ThreadManager for this WebWindow
+     */
+    ThreadManager getThreadManager();
 }
 
