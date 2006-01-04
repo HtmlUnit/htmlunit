@@ -162,7 +162,8 @@ public abstract class DomNode implements Cloneable {
     }
 
     /**
-     * Internal use only - subject to change without notice.<p>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
      * Set the javascript object that corresponds to this node.  This is not
      * guarenteed to be set even if there is a javascript object for this
      * DOM node.
@@ -427,7 +428,8 @@ public abstract class DomNode implements Cloneable {
     }
 
     /**
-     * Internal use only - subject to change without notice.<p>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
      * The logic of when and where the js object is created needs a clean up: functions using
      * a js object of a dom node should not have to look if they should create it first 
      * Return the javascript object that corresponds to this node.

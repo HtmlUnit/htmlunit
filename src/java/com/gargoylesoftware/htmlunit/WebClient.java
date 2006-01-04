@@ -221,7 +221,7 @@ public class WebClient {
      * @param  webClient The webclient that we are creating the script engine for.
      * @return A javascript engine or null if one could not be created.
      */
-    public static JavaScriptEngine createJavaScriptEngineIfPossible( final WebClient webClient ) {
+    private static JavaScriptEngine createJavaScriptEngineIfPossible( final WebClient webClient ) {
         try {
             Class.forName( "org.mozilla.javascript.Context" );
             return new JavaScriptEngine( webClient );
@@ -236,8 +236,9 @@ public class WebClient {
 
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
      * <p>Return the object that will resolve all url requests<p>
-     * <p>INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK</p>
      * @return  The connection that will be used.
      */
     public synchronized WebConnection getWebConnection() {
@@ -350,7 +351,8 @@ public class WebClient {
     }
 
     /**
-     * <p>For internal use only</p>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
      * <p>Open a new web window and populate it with a page loaded by 
      * {@link #getPage(WebWindow,WebRequestSettings)}</p>
      * 
@@ -985,8 +987,9 @@ public class WebClient {
 
 
     /**
-     * Add a new web window to the list of available windows.  This is intended as
-     * an internal api only and may change without notice..
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
+     * Add a new web window to the list of available windows.
      * @param webWindow The new WebWindow
      */
     public void registerWebWindow( final WebWindow webWindow ) {
@@ -996,8 +999,9 @@ public class WebClient {
 
 
     /**
-     * Remove a web window from the list of available windows.  This is intended as
-     * an internal api only and may change without notice.
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
+     * Remove a web window from the list of available windows.
      * @param webWindow The WebWindow to remove
      */
     public void deregisterWebWindow( final WebWindow webWindow ) {

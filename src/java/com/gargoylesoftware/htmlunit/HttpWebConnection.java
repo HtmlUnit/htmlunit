@@ -72,10 +72,10 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.SimpleLog;
 
 /**
- *  An object that handles the actual communication portion of page
- *  retrieval/submission <p />
- *
- *  THIS CLASS IS FOR INTERNAL USE ONLY
+ * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+ *  
+ * An object that handles the actual communication portion of page
+ * retrieval/submission
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
