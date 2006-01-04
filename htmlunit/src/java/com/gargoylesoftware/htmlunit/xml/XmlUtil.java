@@ -55,8 +55,10 @@ import org.xml.sax.SAXParseException;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
+ * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+ * 
  * Provides facility method to work with xml responses.
- * This class is only intended for htmlUnit's internal use.
+ * 
  * @version $Revision$
  * @author Marc Guillemot
  */
