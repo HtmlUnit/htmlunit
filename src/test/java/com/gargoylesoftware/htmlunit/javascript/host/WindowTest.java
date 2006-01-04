@@ -756,20 +756,10 @@ public class WindowTest extends WebTestCase {
             + "</script></body></html>";
 
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
-        loadPage(content, collectedAlerts);
-
-        final int waitTime = 50;
-        final int maxTime = 1000;
-        for( int time = 0; time < maxTime; time+=waitTime ) {
-            if(!collectedAlerts.isEmpty()) {
-                assertEquals( Collections.singletonList("Yo!"), collectedAlerts );
-                return;
-            }
-            Thread.sleep(waitTime);
-        }
-        fail("No alerts written within "+maxTime+"ms");
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
+        assertEquals(Collections.singletonList("Yo!"), collectedAlerts);
     }
-
 
     /**
      * Just tests that setting and clearing an interval doesn't throw
@@ -790,7 +780,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test that a script started by a timer is not executed if it the page that started it
+     * Test that a script started by a timer is stopped if the page that started it
      * is not loaded anymore.
      * @throws Exception If the test fails
      */
@@ -813,8 +803,7 @@ public class WindowTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("Second", page.getTitleText());
-
-        Thread.sleep(2000); // after this delay we can expect that the timer will never evaluate
+        assertEquals("no thread should be running", 0, page.getEnclosingWindow().getThreadManager().activeCount());
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
 
@@ -841,8 +830,8 @@ public class WindowTest extends WebTestCase {
             + "</html>";
 
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
-        loadPage(content, collectedAlerts);
-        Thread.sleep(2200);
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        page.getEnclosingWindow().getThreadManager().joinAll(2000);
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
 
@@ -1798,19 +1787,8 @@ public class WindowTest extends WebTestCase {
             + "</script></body></html>";
 
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
-        loadPage(content, collectedAlerts);
-
-        final int waitTime = 50;
-        final int maxTime = 1000;
-        final List expectedAlerts = Collections.nCopies(max, "ping");
-
-        for (int time = 0; time < maxTime; time += waitTime) {
-            if (collectedAlerts.size() == expectedAlerts.size()) {
-                assertEquals(expectedAlerts, collectedAlerts);
-                return;
-            }
-            Thread.sleep(waitTime);
-        }
-        fail(max + " alerts not collected in " + maxTime + "ms");
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertTrue("threads did not stop in time", page.getEnclosingWindow().getThreadManager().joinAll(1000));
+        assertEquals(Collections.nCopies(max, "ping"), collectedAlerts);
     }
 }

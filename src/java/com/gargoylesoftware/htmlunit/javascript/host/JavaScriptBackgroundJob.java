@@ -35,73 +35,70 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.WebWindowImpl;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * The web window for a frame or iframe.
+ * 
  * @version  $Revision$
  * @author Brad Clarke
+ *
  */
-public class FrameWindow extends WebWindowImpl {
-    private final BaseFrame frame_;
-    /**
-     * Create an instance for a given frame
-     */
-    FrameWindow(final BaseFrame frame) {
-        super(frame.getPage().getWebClient());
-        frame_ = frame;
-        final WebWindowImpl parent = (WebWindowImpl) getParentWindow();
-        parent.addChildWindow(this);
-    }
+class JavaScriptBackgroundJob implements Runnable {
 
-    /**
-     * {@inheritDoc}
-     * A FrameWindow shares it's name with it's containing frame.
-     */
-    public String getName() {
-        return frame_.getNameAttribute();
+    private Log getLog() {
+        return LogFactory.getLog(getClass());
     }
+    private final Window window_;
+    private final int timeout_;
+    private final String script_;
+    private final boolean loopForever_;
 
-    /**
-     * {@inheritDoc}
-     * A FrameWindow shares it's name with it's containing frame.
-     */
-    public void setName(final String name) {
-        frame_.setNameAttribute(name);
+    JavaScriptBackgroundJob(final Window window, final int timeout, final String script,
+            final boolean loopForever) {
+        window_ = window;
+        timeout_ = timeout;
+        loopForever_ = loopForever;
+        script_ = script;
     }
+    public void run() {
+        final Page page = window_.getWebWindow().getEnclosedPage();
+        try {
+            do {
+                Thread.sleep(timeout_);
+                getLog().debug("Executing JavaScriptBackgroundJob: " + script_);
 
-    /**
-     * {@inheritDoc}
-     */
-    public WebWindow getParentWindow() {
-        return frame_.getPage().getEnclosingWindow();
-    }
+                final WebWindow webWindow = window_.getWebWindow();
+                // test that the window is always opened and the page the same
+                if (!webWindow.getWebClient().getWebWindows().contains(webWindow)
+                    || webWindow.getEnclosedPage() != page) {
 
-    /**
-     * {@inheritDoc}
-     */
-    public WebWindow getTopWindow() {
-        return getParentWindow().getTopWindow();
-    }
+                    getLog().debug(
+                            "the page that originated this job doesnt exist anymore. "
+                                + "Execution cancelled.");
+                    return;
+                }
 
-    /**
-     * Return the html page in wich the &lt;frame&gt; or &lt;iframe&gt; tag is contained
-     * for this frame window.
-     * This is a facility method for <code>(HtmlPage) (getParentWindow().getEnclosedPage())</code>.
-     * @return the page in the parent window.
-     */
-    public HtmlPage getEnclosingPage() {
-        return frame_.getPage();
-    }
-
-    /**
-     * Gives a basic representation for debugging purposes
-     * @return a basic representation
-     */
-    public String toString() {
-        return "FrameWindow[name=\"" + getName() + "\"]";
+                final HtmlPage htmlPage = (HtmlPage) window_.getWebWindow().getEnclosedPage();
+                htmlPage.executeJavaScriptIfPossible(
+                        script_,
+                        "JavaScriptBackgroundJob",
+                        true,
+                        htmlPage.getDocumentElement());
+            }
+            while (loopForever_);
+        }
+        catch (final InterruptedException e) {
+            getLog().debug("JavaScript timeout thread interrupted; clearTimeout() probably called.");
+        }
+        catch (final Exception e) {
+            getLog().error("Caught exception in Window.setTimeout()", e);
+        }
     }
 }

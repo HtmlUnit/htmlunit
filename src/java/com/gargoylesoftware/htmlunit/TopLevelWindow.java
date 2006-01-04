@@ -119,6 +119,7 @@ public class TopLevelWindow extends WebWindowImpl {
      * Close this window.
      */
     public void close() {
+        destroyChildren();
         getWebClient().deregisterWebWindow(this);
     }
 }

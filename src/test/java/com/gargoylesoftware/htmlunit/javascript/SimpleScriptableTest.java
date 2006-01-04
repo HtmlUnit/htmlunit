@@ -137,6 +137,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("ScoperFunctionObject");
         names.remove("RowContainer");
         names.remove("FormField");
+        names.remove("JavaScriptBackgroundJob");
 
         assertEquals( new TreeSet(names), new TreeSet(map.values()) );
     }

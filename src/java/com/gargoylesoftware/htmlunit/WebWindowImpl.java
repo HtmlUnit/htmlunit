@@ -37,8 +37,18 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
+import com.gargoylesoftware.htmlunit.html.FrameWindow;
+
 /**
- * Base class for common WebWindow functionality
+ * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+ * 
+ * Base class for common WebWindow functionality. While public, this class is not 
+ * exposed in any other places of the API. Internally we can cast to this class
+ * when we need access to functionality that is not present in {@link WebWindow}
  * 
  * @version $Revision$
  * @author Brad Clarke
@@ -47,6 +57,8 @@ public abstract class WebWindowImpl implements WebWindow {
     private WebClient webClient_;
     private Page enclosedPage_;
     private Object scriptObject_;
+    private ThreadManager threadManager_ = new ThreadManager();
+    private List childWindows_ = new ArrayList();
 
     /**
      * Creates a window and associates it with the client
@@ -77,6 +89,10 @@ public abstract class WebWindowImpl implements WebWindow {
      * {@inheritDoc}
      */
     public void setEnclosedPage(final Page page) {
+        if (page == enclosedPage_) {
+            return;
+        }
+        destroyChildren();
         enclosedPage_ = page;
     }
 
@@ -92,5 +108,33 @@ public abstract class WebWindowImpl implements WebWindow {
      */
     public Object getScriptObject() {
         return scriptObject_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public ThreadManager getThreadManager() {
+        return threadManager_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
+     * Adds a child to this window, for shutdown purposes.
+     * 
+     * @param child The child window to associate with this window.
+     */
+    public void addChildWindow(final FrameWindow child) {
+        childWindows_.add(child);
+    }
+
+    void destroyChildren() {
+        getThreadManager().interruptAll();
+        final ListIterator iter = childWindows_.listIterator();
+        while (iter.hasNext()) {
+            final WebWindowImpl child = (WebWindowImpl) iter.next();
+            child.destroyChildren();
+            iter.remove();
+        }
     }
 }

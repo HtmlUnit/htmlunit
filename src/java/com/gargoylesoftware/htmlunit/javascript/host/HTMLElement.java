@@ -57,11 +57,11 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.xml.sax.helpers.AttributesImpl;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.WebWindowImpl;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -493,31 +493,17 @@ public class HTMLElement extends NodeImpl {
             final WebResponse webResp = new StringWebResponse("<html><body>" + htmlSnippet + "</body></html>",
                     getDomNodeOrDie().getPage().getWebResponse().getUrl());
             try {
-                final WebWindow pseudoWindow = new WebWindow() {
-                    public Page getEnclosedPage() {
-                        return null;
-                    }
+                final WebWindow pseudoWindow = new WebWindowImpl(webClient) {
                     public String getName() {
                         return null;
                     }
                     public void setName(final String name) {
-                        // nothing
                     }
                     public WebWindow getParentWindow() {
                         return null;
                     }
-                    public Object getScriptObject() {
-                        return null;
-                    }
                     public WebWindow getTopWindow() {
                         return null;
-                    }
-                    public WebClient getWebClient() {
-                        return webClient;
-                    }
-                    public void setEnclosedPage(final Page page) {
-                    }
-                    public void setScriptObject(final Object scriptObject) {
                     }
                 };
                 final HtmlPage pseudoPage = HTMLParser.parse(webResp, pseudoWindow);

@@ -7,37 +7,42 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="yourgod">
+                Implemented setInterval/clearInterval and thread management for setTimeout 
+                and setInterval threads. Thanks to Steven Grimm and Daniel Gredler for patches that
+                were helpful in the implementation.
+            </action>        
             <action type="update" dev="mguillem" id="1281651" due-to="Stefan Anzinger">
-                 JavaScript: added support for properties target and srcElement on events.
+                JavaScript: added support for properties target and srcElement on events.
             </action>
             <action type="update" dev="mguillem">
-                 Upgraded commons-httpclient to version 3.0.
+                Upgraded commons-httpclient to version 3.0.
             </action>
             <action type="update" dev="mguillem" id="1385864" due-to="Paul King">
-                 Fixed NPE thrown when JS error occurs on click when ThrowExceptionOnScriptError is false.
+                Fixed NPE thrown when JS error occurs on click when ThrowExceptionOnScriptError is false.
             </action>
             <action type="update" dev="yourgod">
-                 Added HtmlAnchor.openLinkInNewWindow()
+                Added HtmlAnchor.openLinkInNewWindow()
             </action>        
             <action type="update" dev="mguillem" id="1382013">
-                 JavaScript: changes on form's action attribute in onSubmit were ignored.
+                JavaScript: changes on form's action attribute in onSubmit were ignored.
             </action>
             <action type="update" dev="mguillem" id="1381734">
-                 Allow external scripts to be loaded using file protocol.
+                Allow external scripts to be loaded using file protocol.
             </action>
             <action type="update" dev="mguillem" id="1369052" due-to="Mark van Leeuwen">
-                 JavaScript: added support for property cellIndex on td and th eleements.
+                JavaScript: added support for property cellIndex on td and th eleements.
             </action>
             <action type="update" dev="yourgod">
-                 BaseFrame.FrameWindow has been deprecated and replaced with a top level
-                 FrameWindow class.
+                BaseFrame.FrameWindow has been deprecated and replaced with a top level
+                FrameWindow class.
             </action>        
             <action type="update" dev="mguillem">
-                 JavaScript: fixed exception occuring when addBehavior is called twice for the same
-                 behavior.
+                JavaScript: fixed exception occuring when addBehavior is called twice for the same
+                behavior.
             </action>
             <action type="update" dev="mguillem" id="1378925" due-to="Bruce Faulkner">
-                 JavaScript: Implement add() method for OptionsArray to avoid TypeError.
+                JavaScript: Implement add() method for OptionsArray to avoid TypeError.
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: added the full url of the file containing the script beeing executed
