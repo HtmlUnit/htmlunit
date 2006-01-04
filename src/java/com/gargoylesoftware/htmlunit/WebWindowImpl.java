@@ -59,6 +59,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private Object scriptObject_;
     private ThreadManager threadManager_ = new ThreadManager();
     private List childWindows_ = new ArrayList();
+    private String name_ = "";
 
     /**
      * Creates a window and associates it with the client
@@ -137,4 +138,18 @@ public abstract class WebWindowImpl implements WebWindow {
             iter.remove();
         }
     }
+    
+    /**
+     * {@inheritDoc}
+     */    
+    public String getName() {
+        return name_;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */    
+    public void setName(final String name) {
+        name_ = name;
+    }    
 }
