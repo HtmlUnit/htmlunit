@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem" id="1105226">
+                Fixed bad handling of comma in Location header of redirections (30x)
+            </action>
             <action type="update" dev="yourgod">
                 Implemented setInterval/clearInterval and thread management for setTimeout 
                 and setInterval threads. Thanks to Steven Grimm and Daniel Gredler for patches that
