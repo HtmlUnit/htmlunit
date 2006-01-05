@@ -62,7 +62,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
- *  Tests for WebClient
+ * Tests for {@link WebClient}.
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -321,6 +321,14 @@ public class WebClientTest extends WebTestCase {
 
 
     /**
+     * Test a 302 redirection code with "," in url parameters.
+     * @throws Exception If something goes wrong.
+     */
+    public void testRedirection302_MovedTemporarily_CommaInParameters() throws Exception {
+        doTestRedirection(302, SubmitMethod.GET, SubmitMethod.GET, "http://second/foo.html?foo1=abc&foo2=1,2,3,4");
+    }
+
+    /**
      * Tests a 303 redirection code.  This should be the same as a 302.
      * @throws Exception If something goes wrong.
      */
@@ -388,6 +396,27 @@ public class WebClientTest extends WebTestCase {
         throws
              Exception {
 
+        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod, "http://second");
+    }
+
+    /**
+     * Basic logic for all the redirection tests.
+     *
+     * @param statusCode The code to return from the initial request
+     * @param initialRequestMethod The initial request.
+     * @param expectedRedirectedRequestMethod The submit method of the second (redirected) request.
+     * If a redirect is not expected to happen then this must be null
+     * @param newLocation the Location set in the redirection header
+     * @throws Exception if the test fails.
+     */
+    private void doTestRedirection(
+            final int statusCode,
+            final SubmitMethod initialRequestMethod,
+            final SubmitMethod expectedRedirectedRequestMethod,
+            final String newLocation )
+        throws
+             Exception {
+
         final String firstContent = "<html><head><title>First</title></head><body></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
@@ -396,12 +425,12 @@ public class WebClientTest extends WebTestCase {
         webClient.setPrintContentOnFailingStatusCode(false);
 
         final List headers = Collections.singletonList(
-            new KeyValuePair("Location", "http://second") );
+            new KeyValuePair("Location", newLocation) );
         final MockWebConnection webConnection = new MockWebConnection( webClient );
         webConnection.setResponse(
             URL_FIRST, firstContent, statusCode,
             "Some error", "text/html", headers );
-        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(new URL(newLocation), secondContent);
 
         webClient.setWebConnection( webConnection );
 
@@ -423,6 +452,7 @@ public class WebClientTest extends WebTestCase {
         else {
             // A redirect should have happened
             assertEquals( 200, webResponse.getStatusCode() );
+            assertEquals(newLocation, webResponse.getUrl() );
             assertEquals( "Second", page.getTitleText() );
             assertEquals( expectedRedirectedRequestMethod, webConnection.getLastMethod() );
         }

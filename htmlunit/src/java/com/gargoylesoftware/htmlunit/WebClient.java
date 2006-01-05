@@ -1349,17 +1349,7 @@ public class WebClient {
             String locationString = null;
             try {
                 locationString = webResponse.getResponseHeaderValue("Location");
-                if( locationString != null ) {
-                    // HttpClient sometimes returns a delimited list of values where the delimiter is a comma.
-                    // We'll take a guess and go with the first value.
-                    final int indexOfComma = locationString.indexOf(',');
-                    if( indexOfComma >= 0) {
-                        newUrl = expandUrl( fixedUrl, locationString.substring(0, indexOfComma));
-                    }
-                    else {
-                        newUrl = expandUrl( fixedUrl, locationString);
-                    }
-                }
+                newUrl = expandUrl( fixedUrl, locationString);
             }
             catch( final MalformedURLException e ) {
                 getLog().warn("Got a redirect status code ["+statusCode+" "
