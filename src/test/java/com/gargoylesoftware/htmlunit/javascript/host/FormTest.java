@@ -1071,4 +1071,29 @@ public class FormTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * This test shows a problem in current implementation of host object with visible constructors
+     * used to retrieve JS object associated to a particular DOM node. The general problem needs
+     * later.
+     * @throws Exception if the test fails
+     */
+    public void testFormIsNotAConstructor() throws Exception {
+        final String content = "<html><head>"
+            + "<script>"
+            + "var Form = {};"
+            + "function test()"
+            + "{"
+            + "    document.getElementById('formId');"
+            + "}"
+            + "</script></head>"
+            + "<body onload='test()'>"
+            + "   <form id='formId' name='formName'>"
+            + "     <input type='text' name='field1' value='barney'>"
+            + "     <input type='submit'>"
+            + "</body>"
+            + "</html>";
+        createTestPageForRealBrowserIfNeeded(content, Collections.EMPTY_LIST);
+        loadPage(content);
+    }
 }

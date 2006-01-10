@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Map;
 
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.logging.Log;
@@ -56,6 +55,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
@@ -78,17 +78,6 @@ public class SimpleScriptable extends ScriptableObject {
      * Create an instance.  Javascript objects must have a default constructor.
      */
     public SimpleScriptable() {
-    }
-
-
-    /**
-     * Return an immutable map containing the html to javascript mappings.  Keys are
-     * java classes for the various html classes (ie HtmlInput.class) and the values
-     * are the javascript class names (ie "Anchor").
-     * @return the mappings
-     */
-    public static synchronized Map getHtmlJavaScriptMapping() {
-        return JavaScriptConfiguration.getHtmlJavaScriptMapping();
     }
 
 
@@ -388,29 +377,52 @@ public class SimpleScriptable extends ScriptableObject {
      */
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
 
-        // Get the JS class name for the specified DOM node.
-        // Walk up the inheritance chain if necessary.
-        String javaScriptClassName = null;
-        for( Class c = domNode.getClass(); javaScriptClassName == null && c != null; c = c.getSuperclass() ) {
-            javaScriptClassName = (String) getHtmlJavaScriptMapping().get( c );
-        }
+        JavaScriptEngine.enterContext();
 
-        final SimpleScriptable scriptable;
-        if (javaScriptClassName == null) {
-            // We don't have a specific subclass for this element so create something generic.
-            scriptable = makeJavaScriptObject("HTMLElement");
-            getLog().debug("No javascript class found for element <"+domNode.getNodeName()+">. Using HTMLElement");
+        try {
+            // Get the JS class name for the specified DOM node.
+            // Walk up the inheritance chain if necessary.
+            Class javaScriptClass = null;
+            for( Class c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass() ) {
+                javaScriptClass = (Class) JavaScriptConfiguration.getHtmlJavaScriptMapping().get( c );
+            }
+
+            final SimpleScriptable scriptable;
+            if (javaScriptClass == null) {
+                // We don't have a specific subclass for this element so create something generic.
+                scriptable = new HTMLElement();
+                getLog().debug("No javascript class found for element <"+domNode.getNodeName()+">. Using HTMLElement");
+            }
+            else {
+                try {
+                    scriptable = (SimpleScriptable) javaScriptClass.newInstance();
+                }
+                catch (final InstantiationException e) {
+                    throw new ScriptException(e);
+                }
+                catch (final IllegalAccessException e) {
+                    throw new ScriptException(e);
+                }
+            }
+            // parent scope needs to be set to the enclosing "window" (no simple unit test found to illustrate the
+            // necessity) if navigation has continued, the window may contain an other page as the one to which
+            // the current node belongs to.
+            // See test JavaScriptEngineTest#testScopeInInactivePage
+            if (domNode.getPage().getEnclosingWindow().getEnclosedPage() == domNode.getPage()) {
+                scriptable.setParentScope(getWindow());
+            }
+            else {
+                scriptable.setParentScope(ScriptableObject.getTopLevelScope(
+                        (Scriptable) domNode.getPage().getScriptObject()));
+            }
+
+            scriptable.setDomNode(domNode);
+
+            return scriptable;
         }
-        else {
-            scriptable = makeJavaScriptObject(javaScriptClassName);
+        finally {
+            Context.exit();
         }
-        scriptable.setDomNode(domNode);
-        // parent scope needs to be set to "window" (no simple unit test found to illustrate the necessity)
-        // if navigation has continued, the window may contain an other page as the on to which the current node
-        // belongs to
-        // see test JavaScriptEngineTest#testScopeInInactivePage
-        scriptable.setParentScope(ScriptableObject.getTopLevelScope((Scriptable) domNode.getPage().getScriptObject()));
-        return scriptable;
     }
 
 

@@ -87,7 +87,7 @@ public final class JavaScriptConfiguration {
     private static Map ConfigurationMap_ = new HashMap(11);
     private static HashMap ClassnameMap_ = new HashMap();
     private static Map HtmlJavaScriptMap_;
-    
+
     private final Map configuration_;
     private final BrowserVersion browser_;
 
@@ -116,7 +116,7 @@ public final class JavaScriptConfiguration {
     protected static boolean isDocumentLoaded() {
         return XmlDocument_ != null;
     }
-    
+
     /**
      * Reset the this class to it's intial state.  This method is
      * used for testing only.
@@ -134,7 +134,7 @@ public final class JavaScriptConfiguration {
     protected static void setXmlDocument(final Document document) {
         XmlDocument_ = document;
     }
-    
+
     /**
      * Get the configuration file and make it an input reader and then pass to the method to read the file.
      */
@@ -153,7 +153,7 @@ public final class JavaScriptConfiguration {
         }
     }
 
-    
+
     /**
      * Load the configuration from a supplied Reader
      * 
@@ -183,7 +183,7 @@ public final class JavaScriptConfiguration {
         }
     }
 
-    
+
     /**
      * Return the instance that represents the configuration for the specified {@link BrowserVersion}.
      * This method is synchronized to allow multithreaded access to the Javascript configuration.
@@ -194,8 +194,7 @@ public final class JavaScriptConfiguration {
         if (browserVersion == null) {
             throw new IllegalStateException("BrowserVersion must be defined");
         }
-        JavaScriptConfiguration configuration = 
-            (JavaScriptConfiguration)ConfigurationMap_.get(browserVersion);
+        JavaScriptConfiguration configuration = (JavaScriptConfiguration)ConfigurationMap_.get(browserVersion);
 
         if( configuration == null ) {
             configuration = new JavaScriptConfiguration(browserVersion);
@@ -217,12 +216,12 @@ public final class JavaScriptConfiguration {
     }
 
 
-    
+
     private static Log getLog() {
         return LogFactory.getLog(JavaScriptConfiguration.class);
     }
 
-    
+
     private static Reader getConfigurationFileAsReader() {
         final String fileName = "/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml";
         return new InputStreamReader(getResourceAsStream(fileName));
@@ -254,7 +253,7 @@ public final class JavaScriptConfiguration {
         }
         return inputStream;
     }
-    
+
     /**
      * Get the set of keys for the class configurations.
      * @return Set
@@ -262,7 +261,7 @@ public final class JavaScriptConfiguration {
     public Set keySet() {
         return configuration_.keySet();
     }
-    
+
     private Map buildUsageMap(final BrowserVersion browser) {
         final Map classMap = new HashMap(30);
         Node node = XmlDocument_.getDocumentElement().getFirstChild();
@@ -288,7 +287,7 @@ public final class JavaScriptConfiguration {
         }
         return Collections.unmodifiableMap(classMap);
     }
-  
+
     /**
      * Parse the class element to build the class configuration
      * @param className The name of the class element
@@ -296,7 +295,7 @@ public final class JavaScriptConfiguration {
      * @return ClassConfiguration
      * @throws ClassNotFoundException If the specified class could not be found
      */
-    private ClassConfiguration parseClassElement(final String className, final Element element) 
+    private ClassConfiguration parseClassElement(final String className, final Element element)
         throws ClassNotFoundException {
         final String notImplemented = element.getAttribute("notImplemented");
         if ("true".equalsIgnoreCase(notImplemented)) {
@@ -310,7 +309,7 @@ public final class JavaScriptConfiguration {
         if ("true".equalsIgnoreCase(jsObjectStr)) {
             jsObjectFlag = true;
         }
-        final ClassConfiguration classConfiguration = 
+        final ClassConfiguration classConfiguration =
             new ClassConfiguration(className, linkedClassname, superclassName, htmlClassname, jsObjectFlag);
         ClassnameMap_.put(linkedClassname, className);
         Node node = element.getFirstChild();
@@ -334,7 +333,7 @@ public final class JavaScriptConfiguration {
                     // ignore this link
                 }
                 else {
-                    throw new IllegalStateException("Do not understand element type '" 
+                    throw new IllegalStateException("Do not understand element type '"
                         + tagName + "' in '" + linkedClassname + "'");
                 }
             }
@@ -342,7 +341,7 @@ public final class JavaScriptConfiguration {
         }
         return classConfiguration;
     }
-    
+
     /**
      * Parse out the values for the property.
      * 
@@ -370,7 +369,7 @@ public final class JavaScriptConfiguration {
         }
         classConfiguration.addProperty(propertyName, readable, writeable);
     }
-    
+
     /**
      * Parse out the values from the function element.
      * 
@@ -430,7 +429,7 @@ public final class JavaScriptConfiguration {
         }
         return false;
     }
-    
+
     /**
      * Test to see if the supplied configuration matches for the parsed configuration for the nameds class
      * This is a method for testing.
@@ -449,7 +448,7 @@ public final class JavaScriptConfiguration {
     public BrowserVersion getBrowser() {
         return browser_;
     }
-    
+
     /**
      * Get the class configuration for the supplied javascript class name
      * @param classname The js class name
@@ -458,7 +457,7 @@ public final class JavaScriptConfiguration {
     public ClassConfiguration getClassConfiguration(final String classname) {
         return (ClassConfiguration) configuration_.get(classname);
     }
-        
+
     private boolean testToIncludeForBrowserConstraint(final Element element, final BrowserVersion browser) {
         if (!browser.getApplicationName().equals(element.getAttribute("name"))) {
             return false;
@@ -467,9 +466,9 @@ public final class JavaScriptConfiguration {
         float maxVersion;
         if (max.length() == 0) {
             maxVersion = 0;
-        } 
+        }
         else {
-            maxVersion = Float.parseFloat(max);                
+            maxVersion = Float.parseFloat(max);
         }
         if ((maxVersion > 0) && (browser.getBrowserVersionNumeric() > maxVersion)) {
             return false;
@@ -481,42 +480,42 @@ public final class JavaScriptConfiguration {
             minVersion = 0;
         }
         else {
-            minVersion = Float.parseFloat(min);                
+            minVersion = Float.parseFloat(min);
         }
         if ((minVersion > 0) && (browser.getBrowserVersionNumeric() < minVersion)) {
             return false;
         }
         return true;
     }
-    
-    
+
+
     private boolean testToIncludeForJSConstraint(final Element element, final BrowserVersion browser) {
         final String max = element.getAttribute("max-version");
         float maxVersion;
         if (max.length() == 0) {
             maxVersion = 0;
-        } 
+        }
         else {
-            maxVersion = Float.parseFloat(max);                
+            maxVersion = Float.parseFloat(max);
         }
         if ((maxVersion > 0) && (browser.getJavaScriptVersionNumeric() > maxVersion)) {
             return false;
         }
-        
+
         float minVersion;
         final String min = element.getAttribute("min-version");
         if (min.length() == 0) {
             minVersion = 0;
         }
         else {
-            minVersion = Float.parseFloat(min);                
+            minVersion = Float.parseFloat(min);
         }
         if ((minVersion > 0) && (browser.getJavaScriptVersionNumeric() < minVersion)) {
             return false;
         }
         return true;
     }
-    
+
     /**
      * Get an iterator over the keys in the configuration - For testing only
      * @return Iterator
@@ -524,7 +523,7 @@ public final class JavaScriptConfiguration {
     protected Iterator keyIterator() {
         return configuration_.keySet().iterator();
     }
-    
+
     /**
      * Return the class for the given class name
      * @param classname The classname that you want the implementing class for.  For testing only.
@@ -534,7 +533,7 @@ public final class JavaScriptConfiguration {
         final ClassConfiguration config = (ClassConfiguration) configuration_.get(classname);
         return config.getLinkedClass();
     }
-    
+
     /**
      * Get the method that implements the getter for the given property based upon the class object.
      * @param clazz The actual class to use as reference
@@ -545,7 +544,7 @@ public final class JavaScriptConfiguration {
         final String classname = getClassnameForClass(clazz);
         return getPropertyReadMethod(classname, propertyName);
     }
-    
+
     /**
      * Return the method that implements the get function for in the class for the given class
      * 
@@ -567,10 +566,10 @@ public final class JavaScriptConfiguration {
             }
             classname = config.getExtendedClass();
         }
-        return null;         
+        return null;
     }
 
-    
+
     private ClassConfiguration.PropertyInfo findPropertyInChain(final String classname, final String propertyName) {
         String workname = classname;
         ClassConfiguration config;
@@ -594,7 +593,7 @@ public final class JavaScriptConfiguration {
         final String classname = getClassnameForClass(clazz);
         return getPropertyWriteMethod(classname, propertyName);
     }
-    
+
     /**
      * Return the method that implements the set function in the class for the given class
      * 
@@ -613,7 +612,7 @@ public final class JavaScriptConfiguration {
             }
             classname = config.getExtendedClass();
         }
-        return null;         
+        return null;
     }
 
 
@@ -627,7 +626,7 @@ public final class JavaScriptConfiguration {
         final String classname = getClassnameForClass(clazz);
         return getFunctionMethod(classname, functionName);
     }
-    
+
     /**
      * Return the method that implements the given function in the class for the given class
      * 
@@ -646,9 +645,9 @@ public final class JavaScriptConfiguration {
             }
             classname = config.getExtendedClass();
         }
-        return null;         
+        return null;
     }
-    
+
     /**
      * Check to see if there is an entry for the given property.
      * @param clazz The class the property is for
@@ -674,7 +673,7 @@ public final class JavaScriptConfiguration {
         }
         return true;
     }
-    
+
     /**
      * Return the classname that the given class implements.  If the class is
      * the input class, then the name is extracted from the type that the Input class
@@ -703,21 +702,17 @@ public final class JavaScriptConfiguration {
             return HtmlJavaScriptMap_;
         }
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
-        
+
         final Iterator it = configuration.keyIterator();
-        String jsClassname;
-        String htmlClassname;
-        ClassConfiguration classConfig;
-        Class htmlClass;
         final Map map = new HashMap();
 
         while (it.hasNext()) {
-            jsClassname = (String) it.next();
-            classConfig = configuration.getClassConfiguration(jsClassname);
-            htmlClassname = classConfig.getHtmlClassname();
+            String jsClassname = (String) it.next();
+            ClassConfiguration classConfig = configuration.getClassConfiguration(jsClassname);
+            final String htmlClassname = classConfig.getHtmlClassname();
             if (htmlClassname != null) {
                 try {
-                    htmlClass = Class.forName(htmlClassname);
+                    final Class htmlClass = Class.forName(htmlClassname);
                     // preload and validate that the class exists
                     getLog().debug("Mapping " + htmlClass.getName() + " to " + jsClassname);
                     while (!classConfig.isJsObject()) {
@@ -726,14 +721,14 @@ public final class JavaScriptConfiguration {
                         getLog().debug("   testing to use " + jsClassname);
                     }
 
-                    map.put( htmlClass, jsClassname );
+                    map.put( htmlClass, classConfig.getLinkedClass());
                 }
-                catch( final ClassNotFoundException e ) {
+                catch (final ClassNotFoundException e) {
                     throw new NoClassDefFoundError(e.getMessage());
                 }
             }
         }
         HtmlJavaScriptMap_ = Collections.unmodifiableMap(map);
         return HtmlJavaScriptMap_;
-    }    
+    }
 }

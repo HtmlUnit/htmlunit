@@ -63,10 +63,20 @@ public class Style extends SimpleScriptable {
     private static final MessageFormat URL_FORMAT = new MessageFormat("url({0})");
     private HTMLElement jsElement_;
 
+
     /**
      * Create an instance.  Javascript objects must have a default constructor.
      */
     public Style() {
+    }
+
+    /**
+     * Create an instance and set its parent scope to the one of the provided element
+     * @param htmlElement the element to which this style is bound
+     */
+    Style(final HTMLElement htmlElement) {
+        setParentScope(this.getStartingScope());
+        initialize(htmlElement);
     }
 
 
@@ -74,11 +84,11 @@ public class Style extends SimpleScriptable {
      * Initialize the object
      * @param htmlElement The element that this style describes
      */
-    public void initialize( final HTMLElement htmlElement ) {
+    void initialize( final HTMLElement htmlElement ) {
         // Initialize.
         Assert.notNull("htmlElement", htmlElement);
         jsElement_ = htmlElement;
-        
+
         if (htmlElement.getHtmlElementOrDie().getPage().getWebClient().getBrowserVersion().isIE()) {
             // If a behavior was specified in the style, apply the behavior.
             for (final Iterator i = getStyleMap().entrySet().iterator(); i.hasNext();) {

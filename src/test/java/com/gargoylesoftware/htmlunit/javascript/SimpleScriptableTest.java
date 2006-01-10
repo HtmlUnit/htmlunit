@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -46,12 +47,17 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Transformer;
+import org.apache.commons.lang.ClassUtils;
+
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
  * Tests for SimpleScriptable.
@@ -109,13 +115,12 @@ public class SimpleScriptableTest extends WebTestCase {
                      page.getFormByName("form1").getInputByName("textfield1"),
                      page.getWebClient().getElementWithFocus());
         assertEquals( expectedAlerts, collectedAlerts );
-        
     }
 
     /**
      */
     public void testHtmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
-        final Map map = SimpleScriptable.getHtmlJavaScriptMapping();
+        final Map map = JavaScriptConfiguration.getHtmlJavaScriptMapping();
         final String directoryName = "../../src/java/com/gargoylesoftware/htmlunit/javascript/host";
         final Set names = getFileNames(directoryName.replace('/', File.separatorChar));
 
@@ -139,7 +144,14 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("FormField");
         names.remove("JavaScriptBackgroundJob");
 
-        assertEquals( new TreeSet(names), new TreeSet(map.values()) );
+        final Transformer class2ShortName = new Transformer() {
+            public Object transform(final Object obj) {
+                return ClassUtils.getShortClassName((Class) obj);
+            };
+        };
+        final Collection hostClassNames = new ArrayList(map.values());
+        CollectionUtils.transform(hostClassNames, class2ShortName);
+        assertEquals( new TreeSet(names),  new TreeSet(hostClassNames));
     }
 
     private Set getFileNames( final String directoryName ) {
