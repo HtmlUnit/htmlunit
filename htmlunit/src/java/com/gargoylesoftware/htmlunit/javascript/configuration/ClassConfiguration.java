@@ -54,7 +54,7 @@ public final class ClassConfiguration {
     private static final String GETTER_PREFIX = "jsxGet_";
     private static final String SETTER_PREFIX = "jsxSet_";
     private static final String FUNCTION_PREFIX = "jsxFunction_";
-    
+
     private HashMap propertyMap_ = new HashMap();
     private HashMap functionMap_ = new HashMap();
     private String extendedClass_;
@@ -65,7 +65,7 @@ public final class ClassConfiguration {
     private final Class linkedClass_;
     private final String htmlClassname_;
     private final boolean jsObject_;
-    
+
     /**
      * Constructor
      * 
@@ -76,8 +76,8 @@ public final class ClassConfiguration {
      * @param jsObject boolean flag for if this object is a JavaScript object
      * @throws ClassNotFoundException - If the implementing class is not found
      */
-    public ClassConfiguration(final String classname, final String implementingClass, 
-        final String extendedClass, final String htmlClass, final boolean jsObject) 
+    public ClassConfiguration(final String classname, final String implementingClass,
+        final String extendedClass, final String htmlClass, final boolean jsObject)
         throws ClassNotFoundException {
         className_ = classname;
         extendedClass_ = extendedClass;
@@ -90,8 +90,8 @@ public final class ClassConfiguration {
             htmlClassname_ = null;
         }
     }
-    
-    
+
+
     /**
      * @return Returns the className.
      */
@@ -116,7 +116,7 @@ public final class ClassConfiguration {
             }
         }
         catch (final NoSuchMethodException e) {
-            throw new IllegalStateException("Method '" + GETTER_PREFIX + name + "' was not found for " 
+            throw new IllegalStateException("Method '" + GETTER_PREFIX + name + "' was not found for "
                 + name + " property in " + linkedClass_.getName());
         }
         // For the setters, we have to loop through the methods since we do not know what type of argument
@@ -131,13 +131,13 @@ public final class ClassConfiguration {
                 }
             }
             if(info.getWriteMethod() == null) {
-                throw new IllegalStateException("Method '" + SETTER_PREFIX + name + "' was not found for " + name 
+                throw new IllegalStateException("Method '" + SETTER_PREFIX + name + "' was not found for " + name
                     + " property in " + linkedClass_.getName());
             }
         }
         propertyMap_.put(name, info);
     }
-    
+
     /**
      * Return the set of keys for the defined properties.
      * @return a set
@@ -145,7 +145,7 @@ public final class ClassConfiguration {
     public Set propertyKeys() {
         return propertyMap_.keySet();
     }
-    
+
     /**
      * Return the set of keys for the defined functions
      * @return a set
@@ -168,20 +168,20 @@ public final class ClassConfiguration {
             }
         }
         if(info.getFunctionMethod() == null) {
-            throw new IllegalStateException("Method '" + FUNCTION_PREFIX + name + "' was not found for " + name 
+            throw new IllegalStateException("Method '" + FUNCTION_PREFIX + name + "' was not found for " + name
                 + " function in " + linkedClass_.getName());
         }
         functionMap_.put(name, info);
     }
 
-    
+
     /**
      * Set the browser information for this named property
      * @param propertyName - Name of the property to set
      * @param browserName - Browser name to set
      * @throws IllegalStateException - Property does not exist
      */
-    public void setBrowser(final String propertyName, final String browserName) 
+    public void setBrowser(final String propertyName, final String browserName)
         throws IllegalStateException {
         final PropertyInfo property = getPropertyInfo(propertyName);
         if (property == null) {
@@ -203,7 +203,7 @@ public final class ClassConfiguration {
     public void setExtendedClass(final String extendedClass) {
         extendedClass_ = extendedClass;
     }
-    
+
     /**
      * Return the PropertyInfo for the given property name
      * @param propertyName Name of property
@@ -212,7 +212,7 @@ public final class ClassConfiguration {
     protected PropertyInfo getPropertyInfo(final String propertyName) {
         return (PropertyInfo) propertyMap_.get(propertyName);
     }
-    
+
 
     private FunctionInfo getFunctionInfo(final String functionName) {
         return (FunctionInfo) functionMap_.get(functionName);
@@ -244,7 +244,7 @@ public final class ClassConfiguration {
                 return false;
             }
         }
-        
+
         final Set fkeys = config.functionMap_.keySet();
         final Iterator fit = fkeys.iterator();
         while (fit.hasNext()) {
@@ -255,7 +255,7 @@ public final class ClassConfiguration {
         }
         return true;
     }
-    
+
     /**
      * Currently, this is the hashcode for the name.
      * {@inheritDoc}
@@ -263,7 +263,7 @@ public final class ClassConfiguration {
     public int hashCode() {
         return className_.hashCode();
     }
-    
+
     /**
      * Gets the method that implements the getter for the named property
      * 
@@ -277,7 +277,7 @@ public final class ClassConfiguration {
         }
         return info.getReadMethod();
     }
-    
+
     /**
      * Gets the method that implements the setter for the named property
      * 
@@ -291,7 +291,7 @@ public final class ClassConfiguration {
         }
         return info.getWriteMethod();
     }
-    
+
     /**
      * Gets the method that implements the given function
      * 
@@ -305,15 +305,15 @@ public final class ClassConfiguration {
         }
         return info.getFunctionMethod();
     }
-    
+
     /**
-     * 
+     * Gets the class of the Javascript host object
      * @return Returns the linkedClass.
      */
     public Class getLinkedClass() {
         return linkedClass_;
     }
-    
+
     /**
      * @return Returns the htmlClassname.
      */
@@ -366,16 +366,16 @@ public final class ClassConfiguration {
         public void setWriteMethod(final Method writeMethod) {
             writeMethod_ = writeMethod;
         }
-        
+
         private void setBrowser(final BrowserInfo browserInfo) {
             if (browserMap_ == null) {
                 hasBrowsers_ = true;
                 browserMap_ = new HashMap();
             }
-            
+
             browserMap_.put(browserInfo.getBrowserName(), browserInfo);
         }
-        
+
         /**
          * Test for value equality of the 2 objects
          * 
@@ -408,7 +408,7 @@ public final class ClassConfiguration {
             return (readable_ == info.readable_) &&
                 (writeable_ == info.writeable_);
         }
-    
+
         /**
          * @param readable The readable to set.
          */
@@ -428,7 +428,7 @@ public final class ClassConfiguration {
         private boolean hasBrowsers_ = false;
         private Map browserMap_;
         private Method functionMethod_;
-        
+
         /**
          * Test for value equality of the 2 objects
          * 
@@ -481,7 +481,7 @@ public final class ClassConfiguration {
         private String minVersion_;
         private String maxVersion_;
         private String lessThanVersion_;
-        
+
         /**
          * Test for value equality of the 2 objects
          * 

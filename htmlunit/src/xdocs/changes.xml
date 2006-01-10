@@ -7,6 +7,11 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                JavaScript: fixed exception in access to a DOM node when the page contains 
+				a custom object with the same name as the one used by htmlunit for the host object (caused error like:
+				"Form" is not a constructor).
+            </action>
             <action type="update" dev="mguillem" id="1105226">
                 Fixed bad handling of comma in Location header of redirections (30x)
             </action>

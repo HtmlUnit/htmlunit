@@ -151,8 +151,7 @@ public class HTMLElement extends NodeImpl {
     public void setDomNode( final DomNode domNode ) {
         super.setDomNode(domNode);
 
-        style_ = (Style)makeJavaScriptObject("Style");
-        style_.initialize(this);
+        style_ = new Style(this);
     }
 
 
