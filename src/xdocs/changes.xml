@@ -7,6 +7,9 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="yourgod">
+                Modified XmlHttpRequest to use new thread management API for asyc requests.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: fixed exception in access to a DOM node when the page contains 
 				a custom object with the same name as the one used by htmlunit for the host object (caused error like:

@@ -84,7 +84,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     private Function stateChangeHandler_;
     private WebRequestSettings requestSettings_;
     private boolean async_;
-    private Thread requestThread_;
+    private int threadID_;
     private WebResponse webResponse_;
 
     /**
@@ -216,9 +216,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Cancels the current HTTP request.
      */
     public void jsxFunction_abort() {
-        if( requestThread_ != null ) {
-            requestThread_.interrupt();
-        }
+        getWindow().getWebWindow().getThreadManager().stopThread(threadID_);
     }
 
     /**
@@ -302,7 +300,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     public void jsxFunction_send( final Object content ) {
         if (async_) {
             // Create and start a thread in which to execute the request.
-            final Thread t = new Thread( "XMLHttpRequest.send() Thread" ) {
+            final Runnable t = new Runnable() {
                 public void run() {
                     final Context context = Context.enter();
                     try {
@@ -313,9 +311,8 @@ public class XMLHttpRequest extends SimpleScriptable {
                     }
                 }
             };
-            requestThread_ = t;
             getLog().debug("Starting XMLHttpRequest thread for asynchronous request");
-            requestThread_.start();
+            threadID_ = getWindow().getWebWindow().getThreadManager().startThread(t);
         }
         else {
             doSend(content, Context.getCurrentContext());
