@@ -147,7 +147,7 @@ public class SimpleScriptableTest extends WebTestCase {
         final Transformer class2ShortName = new Transformer() {
             public Object transform(final Object obj) {
                 return ClassUtils.getShortClassName((Class) obj);
-            };
+            }
         };
         final Collection hostClassNames = new ArrayList(map.values());
         CollectionUtils.transform(hostClassNames, class2ShortName);
