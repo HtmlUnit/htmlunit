@@ -46,6 +46,7 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -220,22 +221,14 @@ public class XMLHttpRequestTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponse(URL_SECOND, xml, "text/xml");
         client.setWebConnection( webConnection );
-        client.getPage( URL_FIRST );
+        final Page page = client.getPage( URL_FIRST );
 
         final String[] s = new String[] { UNINITIALIZED,
             LOADING, LOADING, LOADED, INTERACTIVE, COMPLETED, xml };
         final List alerts = Collections.synchronizedList( Arrays.asList( s ) );
-
-        final int waitTime = 50;
-        final int maxTime = 1000;
-        for( int time = 0; time < maxTime; time += waitTime ) {
-            if( alerts.size() == collectedAlerts.size() ) {
-                assertEquals( alerts, collectedAlerts );
-                return;
-            }
-            Thread.sleep( waitTime );
-        }
-        fail( "Unable to collect expected alerts within " + maxTime + "ms; collected alerts: " + collectedAlerts );
+        
+        assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
+        assertEquals( alerts, collectedAlerts );
     }
 
     /**
