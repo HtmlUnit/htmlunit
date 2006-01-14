@@ -198,7 +198,7 @@ public class HTMLParserTest extends WebTestCase {
         //find the copyright string
         final HtmlUnitXPath xpath = new HtmlUnitXPath("//div[@id='footer']/div[@class='xright']");
         final String stringVal = xpath.stringValueOf(page).trim();
-        assertEquals("\u00A9 2002-2005, Gargoyle Software Inc.", stringVal);
+        assertEquals("\u00A9 2002-2006, Gargoyle Software Inc.", stringVal);
 
         //see if the Google adds were added via Javascript
         /* google ads not on page anymore
