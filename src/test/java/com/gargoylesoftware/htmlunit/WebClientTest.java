@@ -946,6 +946,7 @@ public class WebClientTest extends WebTestCase {
         catch (final FailingHttpStatusCodeException e) {
             assertEquals(e.getStatusCode(), 500);
             assertEquals(e.getStatusMessage(), "BOOM");
+            assertEquals(firstContent, e.getResponse().getContentAsString());
         }
         final HtmlPage page = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
         assertEquals("Hello World", page.getTitleText());

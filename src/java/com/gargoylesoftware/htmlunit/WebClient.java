@@ -343,8 +343,8 @@ public class WebClient {
 
         loadWebResponseInto(webResponse, webWindow);
 
-        if( getThrowExceptionOnFailingStatusCode() && !wasResponseSuccessful) {
-            throw new FailingHttpStatusCodeException( statusCode, webResponse.getStatusMessage() );
+        if (isThrowExceptionOnFailingStatusCode() && !wasResponseSuccessful) {
+            throw new FailingHttpStatusCodeException(webResponse);
         }
 
         return webWindow.getEnclosedPage();
@@ -479,11 +479,21 @@ public class WebClient {
      *
      * @return  See above
      * @see  #setThrowExceptionOnFailingStatusCode
+     * @deprecated after 1.7. Use {@link #isThrowExceptionOnFailingStatusCode()} instead
      */
     public boolean getThrowExceptionOnFailingStatusCode() {
         return throwExceptionOnFailingStatusCode_;
     }
 
+
+    /**
+     * Return true if an exception will be thrown in the event of a failing response code.
+     * @return See above
+     * @see #setThrowExceptionOnFailingStatusCode
+     */
+    public boolean isThrowExceptionOnFailingStatusCode() {
+        return throwExceptionOnFailingStatusCode_;
+    }
 
     /**
      *  Set a header which will be sent up on EVERY request from this client.
