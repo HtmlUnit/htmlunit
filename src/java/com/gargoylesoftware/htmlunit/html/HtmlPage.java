@@ -1093,7 +1093,7 @@ public final class HtmlPage extends DomNode implements Page {
 
     /**
      * Return a list containing all the frames (from frame and iframe tags) in this page.
-     * @return a list of {@link BaseFrame.FrameWindow}
+     * @return a list of {@link FrameWindow}
      */
     public List getFrames() {
         final List list = new ArrayList();
