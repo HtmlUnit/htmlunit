@@ -38,29 +38,43 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- *  An exception that is thrown when the server returns a failing status code
+ * An exception that is thrown when the server returns a failing status code.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public class FailingHttpStatusCodeException extends RuntimeException {
     private static final long serialVersionUID = 4080165207084775250L;
-    
-    private final int statusCode_;
-    private final String statusMessage_;
 
+    private final int statusCode_; // to remove together with the deprecated c'tor
+    private final String statusMessage_; // to remove together with the deprecated c'tor
+    private final WebResponse response_;
 
     /**
      *  Create an instance
      *
      * @param  statusCode The failing status code
      * @param  statusMessage The message associated with the failing code
+     * @deprecated after 1.7 since it doesn't allow to acces the received response 
      */
     public FailingHttpStatusCodeException( final int statusCode, final String statusMessage ) {
-        super( "" + statusCode + " " + statusMessage );
-
         statusCode_ = statusCode;
         statusMessage_ = statusMessage;
+        response_ = null;
+    }
+
+
+    /**
+     * Create an instance
+     *
+     * @param failingResponse the failing response
+     */
+    public FailingHttpStatusCodeException(final WebResponse failingResponse) {
+
+        statusCode_ = failingResponse.getStatusCode();
+        statusMessage_ = failingResponse.getStatusMessage();
+        response_ = failingResponse;
     }
 
 
@@ -81,6 +95,21 @@ public class FailingHttpStatusCodeException extends RuntimeException {
      */
     public String getStatusMessage() {
         return statusMessage_;
+    }
+
+    /**
+     * @see java.lang.Throwable#getMessage()
+     */
+    public String getMessage() {
+        return "" + getStatusCode() + " " + getStatusMessage();
+    }
+
+    /**
+     * Gets the failing response
+     * @return the response
+     */
+    public WebResponse getResponse() {
+        return response_;
     }
 }
 

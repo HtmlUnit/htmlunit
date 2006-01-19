@@ -7,8 +7,11 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                FailingHttpStatusCodeException now contains the failing WebResponse.
+            </action>
             <action type="update" dev="yourgod">
-                Modified XmlHttpRequest to use new thread management API for asyc requests.
+                Modified XmlHttpRequest to use new thread management API for async requests.
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: fixed exception in access to a DOM node when the page contains 
