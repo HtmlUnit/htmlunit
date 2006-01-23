@@ -8,6 +8,9 @@
     <body>
         <release version="NextRelease" date="Unknown">
             <action type="update" dev="mguillem">
+                JavaScript: fixed parent scope wrongly set on Style object.
+            </action>
+            <action type="update" dev="mguillem">
                 FailingHttpStatusCodeException now contains the failing WebResponse.
             </action>
             <action type="update" dev="yourgod">

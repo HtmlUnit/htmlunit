@@ -75,7 +75,7 @@ public class Style extends SimpleScriptable {
      * @param htmlElement the element to which this style is bound
      */
     Style(final HTMLElement htmlElement) {
-        setParentScope(this.getStartingScope());
+        setParentScope(htmlElement.getParentScope());
         initialize(htmlElement);
     }
 

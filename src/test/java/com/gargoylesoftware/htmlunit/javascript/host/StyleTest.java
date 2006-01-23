@@ -43,6 +43,7 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -156,10 +157,31 @@ public class StyleTest extends WebTestCase {
 
         final List expectedAlerts = Arrays.asList( new String[]{"", "hidden"} );
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        
+
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
 
         assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * Checks that the scopes are correctly set on the style element (wasn't working in CVS snapshot 2005.01.23)
+     * @throws Exception if the test fails
+     */
+    public void testOnclickAccessStyle() throws Exception {
+        final String content = "<html><head><title>Color Change Page</title>"
+             + "<script>"
+             + "function test(obj)"
+             + "{"
+             + "   obj.style.backgroundColor = 'yellow';"
+             + "}"
+             + "</script>"
+             + "</head>"
+             + "<body>"
+             + "<span id='red' onclick='test(this)'>foo</span>"
+             + "</body></html>";
+
+        final HtmlPage page = loadPage(content);
+        ((ClickableElement) page.getHtmlElementById("red")).click();
     }
 }
