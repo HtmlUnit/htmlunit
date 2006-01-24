@@ -8,6 +8,9 @@
     <body>
         <release version="NextRelease" date="Unknown">
             <action type="update" dev="mguillem">
+                DefaultPageCreator now builds an XmlPage and not a TextPage for responses with content type "text/vnd.wap.wml".
+            </action>
+            <action type="update" dev="mguillem">
                 JavaScript: fixed parent scope wrongly set on Style object.
             </action>
             <action type="update" dev="mguillem">

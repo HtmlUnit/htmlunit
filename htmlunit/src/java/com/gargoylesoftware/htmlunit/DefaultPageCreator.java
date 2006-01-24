@@ -79,30 +79,26 @@ public class DefaultPageCreator implements PageCreator {
             IOException {
         final String contentType = webResponse.getContentType().toLowerCase();
         final Page newPage;
-        
-        if( contentType.equals( "text/html" ) || contentType.equals( "text/xhtml" ) ) {
+
+        final String pageType = determinePageType(contentType);
+        if (pageType.equals("html")) {
             newPage = createHtmlPage(webResponse, webWindow);
         }
-        else if( contentType.equals("application/xhtml+xml") ) {
-            //Should create a validated XML document but for now just make what we can 
-            newPage = createHtmlPage(webResponse, webWindow);
-        }
-        else if( contentType.equals("text/javascript") || contentType.equals("application/x-javascript") ) {
+        else if (pageType.equals("javascript")) {
             newPage = createJavaScriptPage(webResponse, webWindow);
         }
-        else if (contentType.equals("text/xml") || contentType.equals("application/xml")
-                || contentType.matches("application/.*\\+xml")) {
+        else if (pageType.equals("xml")) {
             newPage = createXmlPage(webResponse, webWindow);
         }
-        else if( contentType.startsWith( "text/" ) ) {
+        else if (pageType.equals("text")) {
             newPage = createTextPage(webResponse, webWindow);
         }
         else {
             newPage = createUnexpectedPage(webResponse, webWindow);
         }
-        return newPage;    
-
+        return newPage;
     }
+
     /**
      * Create a HtmlPage for this WebResponse
      * 
@@ -136,7 +132,7 @@ public class DefaultPageCreator implements PageCreator {
      * @param webResponse The page's source
      * @param webWindow The WebWindow to place the TextPage in
      * @return The newly created TextPage
-     */    
+     */
     protected TextPage createTextPage(final WebResponse webResponse, final WebWindow webWindow) {
         final TextPage newPage;
         newPage = new TextPage( webResponse, webWindow );
@@ -150,13 +146,13 @@ public class DefaultPageCreator implements PageCreator {
      * @param webResponse The page's source
      * @param webWindow The WebWindow to place the UnexpectedPage in
      * @return The newly created UnexpectedPage
-     */    
+     */
     protected UnexpectedPage createUnexpectedPage(final WebResponse webResponse, final WebWindow webWindow) {
         final UnexpectedPage newPage;
         newPage = new UnexpectedPage( webResponse, webWindow );
         webWindow.setEnclosedPage(newPage);
         return newPage;
-    }    
+    }
 
     /**
      * Create an XmlPage for this WebResponse
@@ -165,10 +161,39 @@ public class DefaultPageCreator implements PageCreator {
      * @param webWindow The WebWindow to place the TextPage in
      * @return The newly created TextPage
      * @throws IOException If the page could not be created
-     */    
+     */
     protected XmlPage createXmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
         final XmlPage newPage = new XmlPage( webResponse, webWindow );
         webWindow.setEnclosedPage(newPage);
         return newPage;
+    }
+
+    /**
+     * Determines the kind of page to create from the content type
+     * @param contentType
+     * @return "xml", "html", "javascript", "text" or "unknown"
+     */
+    String determinePageType(final String contentType) {
+        if (contentType.equals("text/html") || contentType.equals("text/xhtml")) {
+            return "html";
+        }
+        else if( contentType.equals("application/xhtml+xml") ) {
+            //Should create a validated XML document but for now just make what we can
+            return "html";
+        }
+        else if( contentType.equals("text/javascript") || contentType.equals("application/x-javascript") ) {
+            return "javascript";
+        }
+        else if (contentType.equals("text/xml") || contentType.equals("application/xml")
+                || contentType.matches(".*\\+xml")
+                || contentType.equals("text/vnd.wap.wml")) {
+            return "xml";
+        }
+        else if( contentType.startsWith( "text/" ) ) {
+            return "text";
+        }
+        else {
+            return "unknown";
+        }
     }
 }
