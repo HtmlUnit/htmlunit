@@ -165,10 +165,16 @@ public class ThreadManager {
      * a 1 second wait for those threads to stop just to be sure.
      */
     public void interruptAll() {
-        final Iterator iter = threadMap_.values().iterator();
+        Iterator iter = threadMap_.values().iterator();
         while (iter.hasNext()) {
-            final Thread thread = (Thread) iter.next();
-            thread.interrupt();
+            try {
+                final Thread thread = (Thread) iter.next();
+                thread.interrupt();
+            }
+            catch (final ConcurrentModificationException e) {
+                //easiest to just start over
+                iter = threadMap_.values().iterator();
+            }
         }
         try {
             joinAll(1000);
