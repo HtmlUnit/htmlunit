@@ -98,7 +98,7 @@ public class FailingHttpStatusCodeException extends RuntimeException {
     }
 
     /**
-     * @see java.lang.Throwable#getMessage()
+     * {@inheritDoc}
      */
     public String getMessage() {
         return "" + getStatusCode() + " " + getStatusMessage();
