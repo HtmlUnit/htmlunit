@@ -7,6 +7,10 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="yourgod">
+                Fixed a bug that could cause a ConcurrentModificationException when navigating away
+                from a page with javascript running in the background.
+            </action>
             <action type="update" dev="mguillem">
                 DefaultPageCreator now builds an XmlPage and not a TextPage for responses with content type "text/vnd.wap.wml".
             </action>
