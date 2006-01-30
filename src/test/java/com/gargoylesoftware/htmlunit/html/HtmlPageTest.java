@@ -575,24 +575,40 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals("http://foo.com/dog/cat/one.html", thirdPage.getFullyQualifiedUrl(""));
         assertEquals("http://foo.com/dog/cat/two.html", thirdPage.getFullyQualifiedUrl("two.html"));
     }
+
     /**
      * @throws Exception if the test fails
      */
     public void testGetFullQualifiedUrl_WithBase() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title><base href='http://second'></head><body>"
+        testGetFullQualifiedUrl_WithBase("http", "");
+        testGetFullQualifiedUrl_WithBase("http", ":8080");
+        testGetFullQualifiedUrl_WithBase("https", "");
+        testGetFullQualifiedUrl_WithBase("https", ":2005");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    private void testGetFullQualifiedUrl_WithBase(final String baseProtocol, final String basePortPart)
+        throws Exception {
+
+        final String baseUrl = baseProtocol + "://second" + basePortPart;
+        final String htmlContent = "<html><head><title>foo</title>"
+            + "<base href='" + baseUrl + "'>"
+            + "</head><body>"
             + "<form id='form1'>"
             + "<table><tr><td><input type='text' id='foo'/></td></tr></table>"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        assertEquals("http://second", page.getFullyQualifiedUrl(""));
-        assertEquals("http://second/foo", page.getFullyQualifiedUrl("foo"));
+        assertEquals(baseUrl, page.getFullyQualifiedUrl(""));
+        assertEquals(baseUrl + "/foo", page.getFullyQualifiedUrl("foo"));
+        assertEquals(baseUrl + "/foo.js", page.getFullyQualifiedUrl("/foo.js"));
         assertEquals("http://foo.com/bar", page.getFullyQualifiedUrl("http://foo.com/bar"));
         assertEquals("mailto:me@foo.com", page.getFullyQualifiedUrl("mailto:me@foo.com"));
 
-        assertEquals("http://second/foo", page.getFullyQualifiedUrl("foo"));
-        assertEquals("http://second/bbb", page.getFullyQualifiedUrl("aaa/../bbb"));
-        assertEquals("http://second/c/d", page.getFullyQualifiedUrl("c/./d"));
+        assertEquals(baseUrl + "/bbb", page.getFullyQualifiedUrl("aaa/../bbb"));
+        assertEquals(baseUrl + "/c/d", page.getFullyQualifiedUrl("c/./d"));
     }
 
     /**
