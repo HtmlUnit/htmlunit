@@ -59,8 +59,10 @@ import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -760,6 +762,9 @@ public final class HtmlPage extends DomNode implements Page {
             }
             catch( final MalformedURLException e ) {
                 getLog().error("Unable to build url for script src tag [" + srcAttribute + "]");
+                if (getWebClient().isThrowExceptionOnScriptError()) {
+                    throw new ScriptException(e);
+                }
                 return;
             }
 
@@ -831,10 +836,14 @@ public final class HtmlPage extends DomNode implements Page {
                 getLog().error("Error loading javascript from [" + url.toExternalForm()
                     + "] status=[" + webResponse.getStatusCode() + " "
                     + webResponse.getStatusMessage() + "]");
+                throw new FailingHttpStatusCodeException(webResponse);
             }
         }
         catch( final Exception e ) {
             getLog().error("Error loading javascript from [" + url.toExternalForm() + "]: ", e);
+            if (getWebClient().isThrowExceptionOnScriptError()) {
+                throw new ScriptException(e);
+            }
         }
         return "";
     }

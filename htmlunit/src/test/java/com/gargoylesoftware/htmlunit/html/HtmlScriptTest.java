@@ -35,87 +35,64 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.html;
+
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.ScriptException;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * An exception that is thrown when the server returns a failing status code.
- *
+ * Tests for {@link HtmlScript}.
+ * 
  * @version $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  */
-public class FailingHttpStatusCodeException extends RuntimeException {
-    private static final long serialVersionUID = 4080165207084775250L;
-
-    private final int statusCode_; // to remove together with the deprecated c'tor
-    private final String statusMessage_; // to remove together with the deprecated c'tor
-    private final WebResponse response_;
-
-    /**
-     *  Create an instance
-     *
-     * @param  statusCode The failing status code
-     * @param  statusMessage The message associated with the failing code
-     * @deprecated after 1.7 since it doesn't allow to acces the received response 
-     */
-    public FailingHttpStatusCodeException( final int statusCode, final String statusMessage ) {
-        statusCode_ = statusCode;
-        statusMessage_ = statusMessage;
-        response_ = null;
-    }
-
+public class HtmlScriptTest extends WebTestCase {
 
     /**
      * Create an instance
-     *
-     * @param failingResponse the failing response
+     * 
+     * @param name
+     *            Name of the test
      */
-    public FailingHttpStatusCodeException(final WebResponse failingResponse) {
-
-        statusCode_ = failingResponse.getStatusCode();
-        statusMessage_ = failingResponse.getStatusMessage();
-        response_ = failingResponse;
-    }
-
-
-    /**
-     *  Return the failing status code
-     *
-     * @return  the code
-     */
-    public int getStatusCode() {
-        return statusCode_;
-    }
-
-
-    /**
-     *  Return the message associated with the failing status code
-     *
-     * @return  The message
-     */
-    public String getStatusMessage() {
-        return statusMessage_;
+    public HtmlScriptTest(final String name) {
+        super(name);
     }
 
     /**
-     * {@inheritDoc}
+     * @exception Exception
+     *                If the test fails
      */
-    public String getMessage() {
-        final String message = "" + getStatusCode() + " " + getStatusMessage();
-        if (getResponse() == null) {
-            return message;
+    public void testBadExternalScriptReference() throws Exception {
+
+        final String html = "<html><head><title>foo</title>"
+                + "<script src='notExisting.js'></script>"
+                + "</head><body></body></html>";
+
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse("", 404, "not found", "text/html");
+        webConnection.setResponse(URL_FIRST, html);
+        client.setWebConnection(webConnection);
+
+        try {
+            client.getPage(URL_FIRST);
+            fail("Should throw");
         }
-        else {
-            return message + " for " + getResponse().getUrl().toExternalForm();
-        }
-    }
+        catch (final ScriptException e) {
+            assertTrue("exception contains url of failing script", e
+                    .getMessage().indexOf(URL_FIRST.toExternalForm()) > -1);
 
-    /**
-     * Gets the failing response
-     * @return the response
-     */
-    public WebResponse getResponse() {
-        return response_;
+            assertNotNull(e.getCause());
+            assertEquals(FailingHttpStatusCodeException.class, e.getCause()
+                    .getClass());
+            final FailingHttpStatusCodeException cause = (FailingHttpStatusCodeException) e
+                    .getCause();
+            assertEquals(404, cause.getStatusCode());
+            assertEquals("not found", cause.getStatusMessage());
+        }
     }
 }
-

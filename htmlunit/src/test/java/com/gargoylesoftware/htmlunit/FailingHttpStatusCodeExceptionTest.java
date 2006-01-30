@@ -37,85 +37,44 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.util.Collections;
+
+import org.apache.commons.lang.ArrayUtils;
+
 /**
- * An exception that is thrown when the server returns a failing status code.
- *
+ * Tests for {@link FailingHttpStatusCodeException}..
+ * 
  * @version $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  */
-public class FailingHttpStatusCodeException extends RuntimeException {
-    private static final long serialVersionUID = 4080165207084775250L;
-
-    private final int statusCode_; // to remove together with the deprecated c'tor
-    private final String statusMessage_; // to remove together with the deprecated c'tor
-    private final WebResponse response_;
-
+public final class FailingHttpStatusCodeExceptionTest extends WebTestCase {
     /**
-     *  Create an instance
-     *
-     * @param  statusCode The failing status code
-     * @param  statusMessage The message associated with the failing code
-     * @deprecated after 1.7 since it doesn't allow to acces the received response 
+     * Create an instance.
+     * 
+     * @param name
+     *            The name of the test.
      */
-    public FailingHttpStatusCodeException( final int statusCode, final String statusMessage ) {
-        statusCode_ = statusCode;
-        statusMessage_ = statusMessage;
-        response_ = null;
-    }
-
-
-    /**
-     * Create an instance
-     *
-     * @param failingResponse the failing response
-     */
-    public FailingHttpStatusCodeException(final WebResponse failingResponse) {
-
-        statusCode_ = failingResponse.getStatusCode();
-        statusMessage_ = failingResponse.getStatusMessage();
-        response_ = failingResponse;
-    }
-
-
-    /**
-     *  Return the failing status code
-     *
-     * @return  the code
-     */
-    public int getStatusCode() {
-        return statusCode_;
-    }
-
-
-    /**
-     *  Return the message associated with the failing status code
-     *
-     * @return  The message
-     */
-    public String getStatusMessage() {
-        return statusMessage_;
+    public FailingHttpStatusCodeExceptionTest(final String name) {
+        super(name);
     }
 
     /**
-     * {@inheritDoc}
+     * @throws Exception
+     *             if the test fails
      */
-    public String getMessage() {
-        final String message = "" + getStatusCode() + " " + getStatusMessage();
-        if (getResponse() == null) {
-            return message;
-        }
-        else {
-            return message + " for " + getResponse().getUrl().toExternalForm();
-        }
-    }
+    public void testConstructorWitWebResponse() throws Exception {
+        final WebResponseData webResponseData = new WebResponseData(
+                ArrayUtils.EMPTY_BYTE_ARRAY, 404, "not found",
+                Collections.EMPTY_LIST);
+        final WebResponse webResponse = new WebResponseImpl(webResponseData,
+                URL_FIRST, SubmitMethod.GET, 10);
+        final FailingHttpStatusCodeException e = new FailingHttpStatusCodeException(
+                webResponse);
 
-    /**
-     * Gets the failing response
-     * @return the response
-     */
-    public WebResponse getResponse() {
-        return response_;
+        assertEquals(webResponse, e.getResponse());
+        assertEquals(webResponse.getStatusMessage(), e.getStatusMessage());
+        assertEquals(webResponse.getStatusCode(), e.getStatusCode());
+        assertTrue("message doesn't contain failing url", e.getMessage()
+                .indexOf(URL_FIRST.toExternalForm()) > -1);
     }
 }
-

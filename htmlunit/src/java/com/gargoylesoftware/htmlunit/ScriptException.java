@@ -56,7 +56,6 @@ import org.mozilla.javascript.WrappedException;
  */
 public class ScriptException extends RuntimeException {
     private static final long serialVersionUID = 4788896649084231283L;
-    private final Throwable throwable_;
     private final String scriptSourceCode_;
 
 
@@ -69,8 +68,7 @@ public class ScriptException extends RuntimeException {
      * of javascript.
      */
     public ScriptException( final Throwable throwable, final String scriptSourceCode ) {
-        super(getMessageFrom(throwable));
-        throwable_ = throwable;
+        super(getMessageFrom(throwable), throwable);
         scriptSourceCode_ = scriptSourceCode;
     }
 
@@ -96,9 +94,10 @@ public class ScriptException extends RuntimeException {
     /**
      * Return the enclosed exception.
      * @return The enclosed exception
+     * @deprecated after 1.7. Use {@link Throwable#getCause()} instead
      */
     public Throwable getEnclosedException() {
-        return throwable_;
+        return getCause();
     }
 
     /**
@@ -137,9 +136,9 @@ public class ScriptException extends RuntimeException {
 
         printWriter.println("======= EXCEPTION START ========");
 
-        if( throwable_ != null ) {
-            if( throwable_ instanceof EcmaError ) {
-                final EcmaError ecmaError = (EcmaError)throwable_;
+        if (getCause() != null ) {
+            if( getCause() instanceof EcmaError ) {
+                final EcmaError ecmaError = (EcmaError) getCause();
                 printWriter.print("EcmaError: ");
                 printWriter.print("lineNumber=[");
                 printWriter.print(ecmaError.lineNumber());
@@ -157,13 +156,13 @@ public class ScriptException extends RuntimeException {
                 printWriter.println();
             }
             else {
-                printWriter.println("Exception class=["+throwable_.getClass().getName()+"]");
+                printWriter.println("Exception class=["+getCause().getClass().getName()+"]");
             }
         }
 
         super.printStackTrace(printWriter);
-        if( throwable_ != null && throwable_ instanceof JavaScriptException ) {
-            final Object value = ((JavaScriptException)throwable_).getValue();
+        if( getCause() != null && getCause() instanceof JavaScriptException ) {
+            final Object value = ((JavaScriptException) getCause()).getValue();
 
             printWriter.print("JavaScriptException value = ");
             if( value instanceof Throwable ) {
@@ -173,8 +172,8 @@ public class ScriptException extends RuntimeException {
                 printWriter.println(value);
             }
         }
-        else if( throwable_ != null && throwable_ instanceof WrappedException ) {
-            final WrappedException wrappedException = (WrappedException)throwable_;
+        else if (getCause() != null && getCause() instanceof WrappedException ) {
+            final WrappedException wrappedException = (WrappedException) getCause();
             printWriter.print("WrappedException: ");
             wrappedException.printStackTrace(printWriter);
 
@@ -187,9 +186,9 @@ public class ScriptException extends RuntimeException {
                 innerException.printStackTrace(printWriter);
             }
         }
-        else if( throwable_ != null ) {
+        else if (getCause() != null) {
             printWriter.println( "Enclosed exception: " );
-            throwable_.printStackTrace( printWriter );
+            getCause().printStackTrace( printWriter );
         }
 
         if( scriptSourceCode_ != null && scriptSourceCode_.length() > 0 ) {
@@ -253,8 +252,8 @@ public class ScriptException extends RuntimeException {
             return -1;
         }
 
-        if( throwable_ instanceof EcmaError ) {
-            final EcmaError ecmaError = (EcmaError)throwable_;
+        if (getCause() instanceof EcmaError) {
+            final EcmaError ecmaError = (EcmaError) getCause();
             return ecmaError.lineNumber();
         }
 

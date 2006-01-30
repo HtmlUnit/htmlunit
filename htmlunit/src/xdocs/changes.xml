@@ -7,6 +7,16 @@
 
     <body>
         <release version="NextRelease" date="Unknown">
+            <action type="update" dev="mguillem">
+                Throw ScriptException (unless WebClient.isThrowExceptionOnScriptError() is false) when the source 
+                of an external script can't be loaded.
+            </action>
+            <action type="update" dev="mguillem">
+                Deprecated ScriptException.getEnclosedException. Use getCause instead.
+            </action>
+            <action type="update" dev="mguillem">
+                Added url of the failed request in message of FailingHttpStatusCodeException.
+            </action>
             <action type="update" dev="yourgod">
                 Fixed a bug that could cause a ConcurrentModificationException when navigating away
                 from a page with javascript running in the background.

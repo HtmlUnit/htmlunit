@@ -37,85 +37,44 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+
 /**
- * An exception that is thrown when the server returns a failing status code.
- *
+ * Tests for {@link ScriptException}..
+ * 
  * @version $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  */
-public class FailingHttpStatusCodeException extends RuntimeException {
-    private static final long serialVersionUID = 4080165207084775250L;
-
-    private final int statusCode_; // to remove together with the deprecated c'tor
-    private final String statusMessage_; // to remove together with the deprecated c'tor
-    private final WebResponse response_;
+public final class ScriptExceptionTest extends WebTestCase {
 
     /**
-     *  Create an instance
-     *
-     * @param  statusCode The failing status code
-     * @param  statusMessage The message associated with the failing code
-     * @deprecated after 1.7 since it doesn't allow to acces the received response 
+     * Create an instance.
+     * @param name The name of the test.
      */
-    public FailingHttpStatusCodeException( final int statusCode, final String statusMessage ) {
-        statusCode_ = statusCode;
-        statusMessage_ = statusMessage;
-        response_ = null;
-    }
-
-
-    /**
-     * Create an instance
-     *
-     * @param failingResponse the failing response
-     */
-    public FailingHttpStatusCodeException(final WebResponse failingResponse) {
-
-        statusCode_ = failingResponse.getStatusCode();
-        statusMessage_ = failingResponse.getStatusMessage();
-        response_ = failingResponse;
-    }
-
-
-    /**
-     *  Return the failing status code
-     *
-     * @return  the code
-     */
-    public int getStatusCode() {
-        return statusCode_;
-    }
-
-
-    /**
-     *  Return the message associated with the failing status code
-     *
-     * @return  The message
-     */
-    public String getStatusMessage() {
-        return statusMessage_;
+    public ScriptExceptionTest(final String name) {
+        super(name);
     }
 
     /**
-     * {@inheritDoc}
+     * @throws Exception if the test fails
      */
-    public String getMessage() {
-        final String message = "" + getStatusCode() + " " + getStatusMessage();
-        if (getResponse() == null) {
-            return message;
-        }
-        else {
-            return message + " for " + getResponse().getUrl().toExternalForm();
-        }
+    public void testConstructor() throws Exception {
+        final String message = "bla bla";
+        final Throwable t = new RuntimeException(message);
+        final ScriptException exception = new ScriptException(t);
+
+        assertEquals(t, exception.getCause());
+        assertEquals(message, exception.getMessage());
     }
 
     /**
-     * Gets the failing response
-     * @return the response
+     * To remove when deprecated method have been removed
+     * @deprecated
+     * @throws Exception if the test fails
      */
-    public WebResponse getResponse() {
-        return response_;
+    public void testDeprecated() throws Exception {
+        final Throwable t = new RuntimeException();
+        final ScriptException exception = new ScriptException(t);
+
+        assertEquals(t, exception.getEnclosedException());
     }
 }
-
