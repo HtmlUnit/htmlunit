@@ -56,7 +56,7 @@ import java.util.Map;
 public class ThreadManager {
 
     private Map threadMap_ = Collections.synchronizedMap(new HashMap());
-    
+
     /**
      * @return The number of tracked threads. 
      */
@@ -135,24 +135,27 @@ public class ThreadManager {
      * 
      * @param maxWaitMillis The maximum time that should be waited, in milliseconds. 
      *        This is not an exact time but will be fairly close.
-     * @throws InterruptedException if any of the worker threads do (really
-     *         shouldn't happen)
      * @return true if all threads expired in the specified time
      */
-    public boolean joinAll(long maxWaitMillis) throws InterruptedException {
-        master: while (maxWaitMillis > 0 && threadMap_.size() > 0) {
-            final Iterator iter = threadMap_.values().iterator();
+    public boolean joinAll(long maxWaitMillis) {
+        while (maxWaitMillis > 0 && !threadMap_.isEmpty()) {
+            Iterator iter = threadMap_.values().iterator();
             while (maxWaitMillis > 0 && iter.hasNext()) {
                 final Thread thread;
                 try {
                     thread = (Thread) iter.next();
                 }
                 catch (final ConcurrentModificationException e) {
-                    //need to get a new iterator
-                    continue master;
+                    iter = threadMap_.values().iterator();
+                    continue;
                 }
                 final long before = System.currentTimeMillis();
-                thread.join(maxWaitMillis);
+                try {
+                    thread.join(maxWaitMillis);
+                }
+                catch (final InterruptedException e) {
+                    throw new RuntimeException("Main thread interrupted", e);
+                }
                 maxWaitMillis = maxWaitMillis - (System.currentTimeMillis() - before);
             }
         }
@@ -167,20 +170,16 @@ public class ThreadManager {
     public void interruptAll() {
         Iterator iter = threadMap_.values().iterator();
         while (iter.hasNext()) {
+            final Thread thread;
             try {
-                final Thread thread = (Thread) iter.next();
-                thread.interrupt();
+                thread = (Thread) iter.next();
             }
             catch (final ConcurrentModificationException e) {
-                //easiest to just start over
                 iter = threadMap_.values().iterator();
+                continue;
             }
+            thread.interrupt();
         }
-        try {
-            joinAll(1000);
-        }
-        catch (final InterruptedException e) {
-            throw new RuntimeException("Main thread interrupted", e);
-        }
+        joinAll(1000);
     }
 }
