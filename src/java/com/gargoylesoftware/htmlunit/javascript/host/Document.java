@@ -48,6 +48,7 @@ import java.util.StringTokenizer;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
 import org.jaxen.XPathFunctionContext;
@@ -60,7 +61,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -338,22 +338,26 @@ public final class Document extends NodeImpl {
     }
 
 
-    private HttpState getHttpState() {
-        final HtmlPage htmlPage = getHtmlPage();
-        final WebConnection connection = htmlPage.getWebClient().getWebConnection();
-        final URL url = htmlPage.getWebResponse().getUrl();
-
-        return connection.getStateForUrl( url );
-    }
-
     /**
      * Return the cookie attribute.
      * @return The cookie attribute
      */
     public String jsxGet_cookie() {
-        final HttpState state = getHttpState();
-        final Cookie[] cookies = state.getCookies();
-        if( cookies == null ) {
+        final HtmlPage page = getHtmlPage();
+        final HttpState state = page.getWebClient().getWebConnection().getState();
+        final URL url = page.getWebResponse().getUrl();
+        final boolean secure = "https".equals(url.getProtocol());
+        final int port;
+        if (url.getPort() != -1) {
+            port = url.getPort();
+        }
+        else {
+            port = url.getDefaultPort();
+        }
+
+        final Cookie[] cookies = CookiePolicy.getDefaultSpec().match(url.getHost(), port,
+                url.getPath(), secure, state.getCookies());
+        if (cookies == null ) {
             return "";
         }
 
@@ -377,7 +381,7 @@ public final class Document extends NodeImpl {
      * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
      */
     public void jsxSet_cookie(final String newCookie) {
-        final HttpState state = getHttpState();
+        final HttpState state = getHtmlPage().getWebClient().getWebConnection().getState();
 
         final Cookie cookie = buildCookie(newCookie, getHtmlPage().getWebResponse().getUrl());
         state.addCookie(cookie);

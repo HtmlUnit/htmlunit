@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
-import java.net.URL;
 
 import org.apache.commons.httpclient.HttpState;
 
@@ -51,6 +50,7 @@ import org.apache.commons.httpclient.HttpState;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
 public abstract class WebConnection {
 
@@ -89,10 +89,9 @@ public abstract class WebConnection {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * 
-     * Return the {@link HttpState} that is being used for a given domain.
-     * @param url The url from which the domain will be determined.
-     * @return The state or null if no state can be found for this domain.
+     * Return the {@link HttpState} that is being used.
+     * @return the state.
      */
-    public abstract HttpState getStateForUrl( final URL url );
+    public abstract HttpState getState();
 
 }

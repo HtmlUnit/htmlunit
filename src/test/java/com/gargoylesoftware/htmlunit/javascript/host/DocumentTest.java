@@ -1597,9 +1597,9 @@ public class DocumentTest extends WebTestCase {
         webConnection.setResponse(url, firstContent);
         webClient.setWebConnection( webConnection );
 
-        final HttpState state = webConnection.getStateForUrl(url);
-        state.addCookie( new Cookie("first", "one", "two") );
-        state.addCookie( new Cookie("first", "three", "four") );
+        final HttpState state = webConnection.getState();
+        state.addCookie( new Cookie("first", "one", "two", "/", -1, false) );
+        state.addCookie( new Cookie("first", "three", "four", "/", -1, false) );
 
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
