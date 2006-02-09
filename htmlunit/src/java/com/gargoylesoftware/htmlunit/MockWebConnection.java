@@ -261,11 +261,10 @@ public class MockWebConnection extends WebConnection {
     }
 
     /**
-     * Return the {@link HttpState} that is being used for a given domain
-     * @param url The url from which the domain will be determined
-     * @return The state or null if no state can be found for this domain.
+     * Return the {@link HttpState}
+     * @return The state.
      */
-    public HttpState getStateForUrl(final URL url) {
+    public HttpState getState() {
         return httpState_;
     }
 

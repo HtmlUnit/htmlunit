@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -85,9 +84,10 @@ import org.apache.commons.logging.impl.SimpleLog;
  * @author Brad Clarke
  */
 public class HttpWebConnection extends WebConnection {
-    private final Map httpClients_ = new HashMap( 9 );
+    private HttpClient httpClient_;
 
     private String virtualHost_ = null;
+
     // http://jakarta.apache.org/commons/httpclient/3.0/exception-handling.html#Automatic%20exception%20recovery
     private static final HttpMethodRetryHandler NoAutoRetry = new HttpMethodRetryHandler() {
         public boolean retryMethod(final HttpMethod arg0, final IOException arg1, final int arg2) {
@@ -116,12 +116,13 @@ public class HttpWebConnection extends WebConnection {
 
         final URL url = webRequestSettings.getURL();
 
-        final HttpClient httpClient = getHttpClientFor( url, webRequestSettings );
+        final HttpClient httpClient = getHttpClient();
 
         try {
             final HttpMethodBase httpMethod = makeHttpMethod(webRequestSettings);
+            final HostConfiguration hostConfiguration = getHostConfiguration(webRequestSettings);
             final long startTime = System.currentTimeMillis();
-            final int responseCode = httpClient.executeMethod( httpMethod );
+            final int responseCode = httpClient.executeMethod(hostConfiguration, httpMethod);
             final long endTime = System.currentTimeMillis();
             return makeWebResponse( responseCode, httpMethod, url, endTime-startTime );
         }
@@ -153,6 +154,33 @@ public class HttpWebConnection extends WebConnection {
             }
         }
     }
+
+    /**
+     * Gets the host configuration for the request.
+     * Should we cache it?
+     * @param webRequestSettings the current request settings
+     * @return the host configuration to use for this request
+     */
+    private HostConfiguration getHostConfiguration(final WebRequestSettings webRequestSettings) {
+        final HostConfiguration hostConfiguration = new HostConfiguration();
+        final URL url = webRequestSettings.getURL();
+        final URI uri;
+        try {
+            uri = new URI(url.toExternalForm(), false);
+        }
+        catch( final URIException e ) {
+            // Theoretically impossible but ....
+            throw new IllegalStateException("Unable to create URI from URL: "+url.toExternalForm());
+        }
+        hostConfiguration.setHost(uri);
+        if( webRequestSettings.getProxyHost() != null ) {
+            final String proxyHost = webRequestSettings.getProxyHost();
+            final int proxyPort = webRequestSettings.getProxyPort();
+            hostConfiguration.setProxy( proxyHost, proxyPort );
+        }
+        return hostConfiguration;
+    }
+
 
     /**
      * Creates an <tt>HttpMethod</tt> instance according to the specified parameters.
@@ -259,26 +287,10 @@ public class HttpWebConnection extends WebConnection {
         return httpMethod;
     }
 
-    private int getPort(final URL url) {
-        if (url.getPort() == -1) {
-            if ("http".equals(url.getProtocol())) {
-                return 80;
-            }
-            else {
-                return 443;
-            }
-        }
-        else {
-            return url.getPort();
-        }
-    }
+    private synchronized HttpClient getHttpClient() {
 
-    private synchronized HttpClient getHttpClientFor( final URL url, final WebRequestSettings webRequestSettings ) {
-        final String key = url.getProtocol() + "://" + url.getHost().toLowerCase() + ":" + getPort(url);
-
-        HttpClient client = ( HttpClient )httpClients_.get( key );
-        if( client == null ) {
-            client = new HttpClient();
+        if (httpClient_ == null ) {
+            httpClient_ = new HttpClient();
 
             // Disable informational messages from httpclient
             final Log log = LogFactory.getLog("httpclient.wire");
@@ -286,44 +298,21 @@ public class HttpWebConnection extends WebConnection {
                 ((SimpleLog)log).setLevel( SimpleLog.LOG_LEVEL_WARN );
             }
 
-            final HostConfiguration hostConfiguration = new HostConfiguration();
-            final URI uri;
-            try {
-                uri = new URI(url.toExternalForm(), false);
-            }
-            catch( final URIException e ) {
-                // Theoretically impossible but ....
-                throw new IllegalStateException("Unable to create URI from URL: "+url.toExternalForm());
-            }
-            hostConfiguration.setHost(uri);
-            if( webRequestSettings.getProxyHost() != null ) {
-                final String proxyHost = webRequestSettings.getProxyHost();
-                final int proxyPort = webRequestSettings.getProxyPort();
-                hostConfiguration.setProxy( proxyHost, proxyPort );
-            }
-            client.setHostConfiguration(hostConfiguration);
             final int timeout = getWebClient().getTimeout();
-            client.getHttpConnectionManager().getParams().setSoTimeout(timeout);
-            client.getHttpConnectionManager().getParams().setConnectionTimeout(timeout);
+            httpClient_.getHttpConnectionManager().getParams().setSoTimeout(timeout);
+            httpClient_.getHttpConnectionManager().getParams().setConnectionTimeout(timeout);
 
-            // If two clients are part of the same domain then they should share the same
-            // state (ie cookies)
-            final HttpState sharedState = getStateForUrl( url );
-            if( sharedState != null ) {
-                client.setState(sharedState);
-            }
 
             if (virtualHost_ != null) {
-                client.getParams().setVirtualHost(virtualHost_);
+                httpClient_.getParams().setVirtualHost(virtualHost_);
             }
-            httpClients_.put( key, client );
         }
 
         // Tell the client where to get its credentials from
         // (it may have changed on the webClient since last call to getHttpClientFor(...))
-        client.getParams().setParameter( CredentialsProvider.PROVIDER, getWebClient().getCredentialsProvider() );
+        httpClient_.getParams().setParameter( CredentialsProvider.PROVIDER, getWebClient().getCredentialsProvider() );
 
-        return client;
+        return httpClient_;
     }
 
 
@@ -353,35 +342,11 @@ public class HttpWebConnection extends WebConnection {
     }
 
     /**
-     * Return the {@link HttpState} that is being used for a given domain
-     * @param url The url from which the domain will be determined
-     * @return The state or null if no state can be found for this domain.
+     * Return the {@link HttpState} that is being used.
+     * @return The state.
      */
-    public synchronized HttpState getStateForUrl( final URL url ) {
-        final String domain = url.getHost().toLowerCase();
-        int index = domain.lastIndexOf('.');
-        if( index != -1 ) {
-            index = domain.lastIndexOf(".", index-1);
-        }
-        final String rootDomain;
-        if( index == -1 ) {
-            rootDomain = domain + ":" + getPort(url);
-        }
-        else {
-            rootDomain = domain.substring(index+1) + ":" + getPort(url);
-        }
-
-        final Iterator iterator = httpClients_.entrySet().iterator();
-        while( iterator.hasNext() ) {
-            final Map.Entry entry = (Map.Entry)iterator.next();
-            final String key = (String)entry.getKey();
-            final String host = key.substring(key.indexOf("://") + 3);
-            if( host.equals(rootDomain) || host.endsWith("."+rootDomain) ) {
-                return ((HttpClient)entry.getValue()).getState();
-            }
-        }
-
-        return null;
+    public HttpState getState() {
+        return httpClient_.getState();
     }
 
     /**

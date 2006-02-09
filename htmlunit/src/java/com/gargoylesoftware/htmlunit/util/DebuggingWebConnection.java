@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit.util;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
 
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.io.FileUtils;
@@ -86,7 +85,7 @@ public class DebuggingWebConnection extends WebConnection {
      * The report will be reportBaseName + ".html" in the temp file.
      * @throws IOException in case of problems writing the files.
      */
-    public DebuggingWebConnection(final WebConnection webConnection, 
+    public DebuggingWebConnection(final WebConnection webConnection,
             final String reportBaseName) throws IOException {
 
         super(webConnection.getWebClient());
@@ -96,8 +95,7 @@ public class DebuggingWebConnection extends WebConnection {
         javaScriptFile_ = File.createTempFile(reportBaseName_, ".js");
         createOverview();
     }
-    
-    
+
     /**
      * Calls the wrapped webconnection and save the received response.
      * {@inheritDoc}
@@ -112,11 +110,11 @@ public class DebuggingWebConnection extends WebConnection {
      * Calls the wrapped webConnection.
      * {@inheritDoc}
      */
-    public HttpState getStateForUrl(final URL url) {
-        return wrappedWebConnection_.getStateForUrl(url);
+    public HttpState getState() {
+        return wrappedWebConnection_.getState();
     }
 
-    
+
     /**
      * Save the response content in the temp dir and add it to the summary page
      * @param response the response to save
@@ -141,22 +139,22 @@ public class DebuggingWebConnection extends WebConnection {
         FileUtils.writeStringToFile(f, content, response.getContentCharSet());
         LOG.info("Created file " + f.getAbsolutePath()
                 + " for response " + counter_ + ": " + response.getUrl());
-        
+
         final FileWriter jsFileWriter = new FileWriter(javaScriptFile_, true);
-        jsFileWriter.write("tab[tab.length] = {code: " + response.getStatusCode() + ", " 
+        jsFileWriter.write("tab[tab.length] = {code: " + response.getStatusCode() + ", "
                 + "fileName: '" + f.getName() + "', "
                 + "contentType: '" + response.getContentType() + "', "
                 + "method: '" + submitMethod.getName() + "', "
                 + "url: '" + response.getUrl() + "'}\n");
         jsFileWriter.close();
     }
-    
+
     /**
      * Creates the summary file and the javascript file that will be updated for each received response
      * @throws IOException if a problem occurs writing the file
      */
     private void createOverview() throws IOException {
-        
+
         FileUtils.writeStringToFile(javaScriptFile_, "var tab = [];\n", "ISO-8859-1");
 
         final File summary = new File(javaScriptFile_.getParentFile(), reportBaseName_ + ".html");
@@ -177,7 +175,7 @@ public class DebuggingWebConnection extends WebConnection {
             + "</script>\n"
             + "</ol>"
             + "</body></html>";
-        
+
         FileUtils.writeStringToFile(summary, content, "ISO-8859-1");
         LOG.info("Summary will be in " + summary.getAbsolutePath());
     }

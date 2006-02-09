@@ -43,13 +43,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
 
-import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.StatusLine;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.mortbay.http.HttpContext;
@@ -208,76 +204,6 @@ public class HttpWebConnectionTest extends BaseTestCase {
     }
 
 
-    /**
-     * Tests {@link HttpWebConnection#getStateForUrl(java.net.URL)} using a url with hostname
-     * <code>gargoylesoftware.com</code>.
-     */
-    public void testGetStateForUrl_gargoylesoftware_com() {
-        assertGetStateForUrl("gargoylesoftware.com");
-    }
-
-
-    /**
-     * Tests {@link HttpWebConnection#getStateForUrl(java.net.URL)} using a url with hostname
-     * <code>www.gargoylesoftware.com</code>.
-     */
-    public void testGetStateForUrl_www_gargoylesoftware_com() {
-        assertGetStateForUrl("www.gargoylesoftware.com");
-    }
-
-
-    /**
-     * Tests {@link HttpWebConnection#getStateForUrl(java.net.URL)} using a url with hostname
-     * <code>www.sub.gargoylesoftware.com</code>.
-     */
-    public void testGetStateForUrl_www_sub_gargoylesoftware_com() {
-        assertGetStateForUrl("www.sub.gargoylesoftware.com");
-    }
-
-
-    /**
-     * Tests {@link HttpWebConnection#getStateForUrl(java.net.URL)} using a url with hostname
-     * <code>localhost</code>.
-     */
-    public void testGetStateForUrl_localhost() {
-        assertGetStateForUrl("localhost");
-    }
-
-
-    /**
-     * Tests {@link HttpWebConnection#getStateForUrl(java.net.URL)} using a url with hostname
-     * <code>GARGOYLESOFTWARE.COM</code>.
-     */
-    public void testGetStateForUrl_GARGOYLESOFTWARE_COM() {
-        assertGetStateForUrl("GARGOYLESOFTWARE.COM");
-    }
-
-
-    /**
-     * Tests {@link HttpWebConnection#getStateForUrl(java.net.URL)} using a url with hostname
-     * <code>WWW.GARGOYLESOFTWARE.COM</code>.
-     */
-    public void testGetStateForUrl_WWW_GARGOYLESOFTWARE_COM() {
-        assertGetStateForUrl("WWW.GARGOYLESOFTWARE.COM");
-    }
-
-
-    /**
-     * Tests {@link HttpWebConnection#getStateForUrl(java.net.URL)} using a url with hostname
-     * <code>WWW.SUB.GARGOYLESOFTWARE.COM</code>.
-     */
-    public void testGetStateForUrl_WWW_SUB_GARGOYLESOFTWARE_COM() {
-        assertGetStateForUrl("WWW.SUB.GARGOYLESOFTWARE.COM");
-    }
-
-
-    /**
-     * Tests {@link HttpWebConnection#getStateForUrl(java.net.URL)} using a url with hostname
-     * <code>LOCALHOST</code>.
-     */
-    public void testGetStateForUrl_LOCALHOST() {
-        assertGetStateForUrl("LOCALHOST");
-    }
 
     /**
      * Test creation of a web response
@@ -294,7 +220,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
         final Field responseBodyField = HttpMethodBase.class.getDeclaredField("responseBody");
         responseBodyField.setAccessible(true);
         responseBodyField.set(httpMethod, content.getBytes());
-        
+
         final StatusLine statusLine = new StatusLine("HTTP/1.0 200 OK");
         final Field statusLineField = HttpMethodBase.class.getDeclaredField("statusLine");
         statusLineField.setAccessible(true);
@@ -318,45 +244,6 @@ public class HttpWebConnectionTest extends BaseTestCase {
         assertEquals(new ByteArrayInputStream(content.getBytes()), response.getContentAsStream());
     }
 
-
-    /**
-     * Tests the {@link HttpWebConnection#getStateForUrl(java.net.URL)} using reflection.
-     *
-     * @param hostname The hostname of the url to test
-     */
-    private void assertGetStateForUrl(final String hostname) {
-
-        final HttpWebConnection connection = new HttpWebConnection(new WebClient());
-        try {
-
-            final Field httpClients = connection.getClass().getDeclaredField("httpClients_");
-            httpClients.setAccessible(true);
-            final Map map = (Map) httpClients.get(connection);
-
-            final HttpState expectedHttpState = new HttpState();
-
-            final HttpClient httpClient = new HttpClient();
-            final Field httpState = httpClient.getClass().getDeclaredField("state");
-            httpState.setAccessible(true);
-            httpState.set(httpClient, expectedHttpState);
-
-            map.put("http://" + hostname.toLowerCase() + ":80", httpClient);
-
-            final URL url = new URL("http://" + hostname + "/context");
-            final HttpState actualHttpState = connection.getStateForUrl(url);
-            assertSame(expectedHttpState, actualHttpState);
-        }
-        catch (final NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        }
-        catch (final IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-        catch (final MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    
     /**
      * Testing Jetty
      * @throws Exception on failure
@@ -374,7 +261,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
         server.addContext(context);
 
         server.start();
-        
+
         final WebClient client = new WebClient();
         final Page page = client.getPage(new URL("http://localhost:12345/"));
         final WebConnection defaultConnection = page
