@@ -170,10 +170,10 @@ public class DefaultPageCreator implements PageCreator {
 
     /**
      * Determines the kind of page to create from the content type
-     * @param contentType
+     * @param contentType The content type to evaluate
      * @return "xml", "html", "javascript", "text" or "unknown"
      */
-    String determinePageType(final String contentType) {
+    protected String determinePageType(final String contentType) {
         if (contentType.equals("text/html") || contentType.equals("text/xhtml")) {
             return "html";
         }
