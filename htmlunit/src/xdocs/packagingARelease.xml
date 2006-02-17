@@ -21,10 +21,6 @@
 	            		Get a new version of the maven clover plugin:
 	            		<source>maven plugin:download -DartifactId=maven-clover-plugin -DgroupId=maven -Dversion=1.9.1</source>
             		</li>
-            		<li>
-            			Create a .cvspass file for the changelog plugin:
-            			<source>maven changelog:create-cvspass</source>
-           			</li>
            			<li>
            				You might also need to specify the following properties to maven.
            				You can do this with a build.properties file, in the project
@@ -50,6 +46,7 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
            		</ol>
        		</p>
             <p>
+                Now do this for each release:
                 <ol>
                     <li>
                         Update the version number in project.xml
@@ -59,10 +56,10 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                     </li>
                     <li>
                         Build the zip
-                        <source>maven clean htmlunit:build-bin-dist</source>
+                        <source>maven clean htmlunit:build-bin-dist htmlunit:build-src-dist</source>
                     </li>
                     <li>
-                        Upload that zip to SourceForge following 
+                        Upload the two zip files to SourceForge following 
                         <a href="http://sourceforge.net/docman/display_doc.php?docid=6445&amp;group_id=1">
                         these instructions</a>
                     </li>
@@ -81,7 +78,7 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                     </li>
                     <li>
                         Deploy this new version to the maven repository as 
-                        <a href="http://maven.apache.org/repository-upload.html">described here</a>
+                        <a href="http://maven.apache.org/maven-1.x/reference/repository-upload.html">described here</a>
                     </li>
                 </ol>
             </p>

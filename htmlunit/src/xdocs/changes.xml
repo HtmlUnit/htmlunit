@@ -6,7 +6,7 @@
     </properties>
 
     <body>
-        <release version="NextRelease" date="Unknown">
+        <release version="1.8" date="Feb 17, 2006">
             <action type="update" dev="mguillem" id="1280422">
                 Cookies can now be shared between http and https.
             </action>
@@ -572,8 +572,8 @@
                 Created new WebClient.getPage() methods and deprecated old ones.
             </action>        
             <action type="update" dev="yourgod">
-                Stopped httpclient from automatically retrying failed connections 5 times
-                http://jakarta.apache.org/commons/httpclient/3.0/exception-handling.html#Automatic%20exception%20recovery
+                Stopped httpclient from automatically retrying failed connections 5 times: 
+                <a href="http://jakarta.apache.org/commons/httpclient/3.0/exception-handling.html#Automatic%20exception%20recovery">Reference Link</a>
             </action>          
             <action type="update" dev="yourgod">
                 A failure when setting a location from javascript now throws an exception
