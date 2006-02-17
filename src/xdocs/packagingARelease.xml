@@ -52,7 +52,7 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                         Update the version number in project.xml
                     </li>
                     <li>
-                        Update the version number and release date in changes.xml
+                        Update the version number and release date in src/xdocs/changes.xml
                     </li>
                     <li>
                         Build the zip
@@ -64,13 +64,12 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                         these instructions</a>
                     </li>
                     <li>
+                        Update src/xdocs/index.xml with the new version number and URL of the release.
+                    </li>
+                    <li>
                         Assuming that everything has gone smoothly so far, make sure everything is checked
                         in and tag the repository with a name like this "HtmlUnit-1dot1" that reflects
                         the current build version.
-                    </li>
-                    <li>
-                        Increment the version number in project.xml to indicate that the docs are now
-                        reflecting a future version and not what what had been released.
                     </li>
                     <li>
                         Rebuild and redeploy the site documentation.
@@ -78,7 +77,7 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                     </li>
                     <li>
                         Deploy this new version to the maven repository as 
-                        <a href="http://maven.apache.org/maven-1.x/reference/repository-upload.html">described here</a>
+                        <a href="http://maven.apache.org/maven-1.x/reference/repository-upload.html">described here</a>.
                     </li>
                 </ol>
             </p>
