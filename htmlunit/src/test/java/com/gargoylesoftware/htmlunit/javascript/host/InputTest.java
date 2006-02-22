@@ -45,8 +45,10 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
@@ -59,7 +61,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 
 /**
- * Tests for Inputs
+ * Tests for Inputs and buttons.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -362,7 +364,7 @@ public class InputTest extends WebTestCase {
 
         final HtmlForm form = page.getFormByName("form1");
         form.submit();
-    }    
+    }
 
     /**
      * @throws Exception if the test fails
@@ -385,7 +387,7 @@ public class InputTest extends WebTestCase {
 
         assertEquals("_blank", page.getFormByName("form1").getTargetAttribute());
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -450,8 +452,8 @@ public class InputTest extends WebTestCase {
             new KeyValuePair("changed", "foo"),
             new KeyValuePair("button1", "pushme")
         });
-        assertEquals(expectedParameters, connection.getLastParameters()); 
-    }    
+        assertEquals(expectedParameters, connection.getLastParameters());
+    }
 
     /**
      * @throws Exception if the test fails
@@ -478,7 +480,7 @@ public class InputTest extends WebTestCase {
 
         final List expectedAlerts = Arrays.asList(new String[] {"foo"});
         assertEquals(expectedAlerts, collectedAlerts);
-    }    
+    }
 
     /**
      * @throws Exception if the test fails
@@ -509,7 +511,7 @@ public class InputTest extends WebTestCase {
         final List expectedAlerts = Arrays.asList(new String[] {"foo"});
         assertEquals(expectedAlerts, collectedAlerts);
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
-    }    
+    }
 
     /**
      * Test the default value of a radio and checkbox buttons.
@@ -530,7 +532,7 @@ public class InputTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        
+
         final List expectedAlerts = Arrays.asList( new String[]{"on", "on"} );
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -562,10 +564,10 @@ public class InputTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
-        
+
         assertInstanceOf(page.getFormByName("myForm").getInputByName("myRadio"), HtmlImageInput.class);
     }
-    
+
     /**
      * Inputs have properties not only from there own type.
      * Works with Mozilla, Firefox and IE... but not with htmlunit now.
@@ -575,7 +577,7 @@ public class InputTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        
+
         final String content
             = "<html><head></head><body>\n"
                 + "<form name='myForm'>\n"
@@ -590,7 +592,7 @@ public class InputTest extends WebTestCase {
                 + "<script>\n"
                 + "function details(_oInput)\n"
                 + "{\n"
-                + "  alert(_oInput.type + ': '\n" 
+                + "  alert(_oInput.type + ': '\n"
                 + "  + _oInput.checked + ', ' \n"
                 + "  + _oInput.defaultChecked + ', '\n"
                 + "  + ((String(_oInput.click).indexOf('function') > 0) ? 'function' : 'unknown') + ', '\n"
@@ -650,4 +652,23 @@ public class InputTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testButtonOutsideForm() throws Exception {
+        final String content
+            = "<html><head><title>foo</title></head><body>"
+            + "<button id='clickMe' onclick='alert(123)'>click me</button>\n"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        final Page page2 = ((ClickableElement) page.getHtmlElementById("clickMe")).click();
+
+        assertSame(page, page2);
+
+        final String[] expectedAlerts = { "123" };
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

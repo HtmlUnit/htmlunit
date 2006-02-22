@@ -6,6 +6,11 @@
     </properties>
 
     <body>
+        <release version="next">
+            <action type="update" dev="mguillem">
+				Allow &lt;button...&gt;s located outside of a form to be clicked and their onclick handler to be called.
+			</action>
+		</release>
         <release version="1.8" date="Feb 17, 2006">
             <action type="update" dev="mguillem" id="1280422">
                 Cookies can now be shared between http and https.
