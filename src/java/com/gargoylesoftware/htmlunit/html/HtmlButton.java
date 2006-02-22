@@ -99,15 +99,18 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
         final String type = getTypeAttribute().toLowerCase();
-        if (type.equals("submit")) {
-            return getEnclosingFormOrDie().submit(this);
+
+        final HtmlForm form = getEnclosingForm();
+        if (form != null) {
+            if (type.equals("submit")) {
+                return form.submit(this);
+            }
+            else if (type.equals("reset")){
+                return form.reset();
+            }
         }
-        else if (type.equals("reset")){
-            return getEnclosingFormOrDie().reset();
-        }
-        else {
-            return defaultPage;
-        }
+
+        return defaultPage;
     }
 
 
