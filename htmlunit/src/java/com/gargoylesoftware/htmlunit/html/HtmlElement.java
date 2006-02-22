@@ -323,7 +323,7 @@ public abstract class HtmlElement extends DomNode {
     public HtmlForm getEnclosingFormOrDie() throws IllegalStateException {
         final HtmlForm form = getEnclosingForm();
         if( form == null ) {
-            throw new IllegalStateException("Element is not comtained within a form: "+this);
+            throw new IllegalStateException("Element is not contained within a form: " + this);
         }
 
         return form;
