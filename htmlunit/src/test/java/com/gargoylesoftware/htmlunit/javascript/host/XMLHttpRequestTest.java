@@ -226,7 +226,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         final String[] s = new String[] { UNINITIALIZED,
             LOADING, LOADING, LOADED, INTERACTIVE, COMPLETED, xml };
         final List alerts = Collections.synchronizedList( Arrays.asList( s ) );
-        
+
         assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
         assertEquals( alerts, collectedAlerts );
     }
@@ -311,6 +311,49 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.getPage(URL_FIRST);
 
         final List alerts = Arrays.asList( new String[] { "bla bla" } );
+        assertEquals( alerts, collectedAlerts );
+    }
+
+
+    /**
+     * Test access to the XML DOM
+     * @throws Exception if the test fails.
+     */
+    public void testResponseXML() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final String html = "<html><head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  var request;"
+            + "  if (window.XMLHttpRequest)"
+            + "    request = new XMLHttpRequest();"
+            + "  else if (window.ActiveXObject)"
+            + "    request = new ActiveXObject('Microsoft.XMLHTTP');"
+            + "  request.open('GET', 'foo.xml', false);"
+            + "  request.send('');"
+            + "  alert(request.responseXML.childNodes);"
+            + "  alert(request.responseXML.childNodes[0].nodeName);"
+            + "  alert(request.responseXML.childNodes[0].firstChild.nodeName);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'></body></html>";
+
+        final WebClient client = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, html);
+        final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
+        webConnection.setResponse(urlPage2, "<bla><foo/></bla>", "text/xml");
+        client.setWebConnection( webConnection );
+        client.getPage(URL_FIRST);
+
+        final String[] alerts = { "bla", "foo" };
         assertEquals( alerts, collectedAlerts );
     }
 
