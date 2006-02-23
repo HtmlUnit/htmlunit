@@ -697,7 +697,7 @@ public final class JavaScriptConfiguration {
      * are the javascript class names (ie "Anchor").
      * @return the mappings
      */
-    public static Map getHtmlJavaScriptMapping() {
+    public static synchronized Map getHtmlJavaScriptMapping() {
         if( HtmlJavaScriptMap_ != null ) {
             return HtmlJavaScriptMap_;
         }
