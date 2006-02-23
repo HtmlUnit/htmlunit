@@ -5,7 +5,7 @@
     <artifactId>htmlunit</artifactId>
     <name>htmlunit</name>
     <groupId>htmlunit</groupId>
-    <currentVersion>1.8</currentVersion>
+    <currentVersion>1.9-prerelease</currentVersion>
     <organization>
         <name>Gargoyle Software Inc.</name>
         <url>http://www.GargoyleSoftware.com/</url>
