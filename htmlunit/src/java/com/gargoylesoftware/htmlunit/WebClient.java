@@ -1364,26 +1364,26 @@ public class WebClient {
             catch( final MalformedURLException e ) {
                 getLog().warn("Got a redirect status code ["+statusCode+" "
                     +webResponse.getStatusMessage()
-                    +"] but the location is not a valid url ["+locationString+"]");
+                    +"] but the location is not a valid url ["+locationString+"]. Skipping redirection processing.");
+                return webResponse;
             }
+
             getLog().debug("Got a redirect status code ["+statusCode
                 +"] new location=["+locationString+"]");
+
             if( webResponse.getUrl().toExternalForm().equals(locationString) ) {
                 getLog().warn("Got a redirect but the location is the same as the page we just loaded ["
-                    +locationString+"]");
-            }
-            else if( newUrl == null ) {
-                // We don't have a new location to go to so just fall through
+                    +locationString+"]. Skipping redirection.");
             }
             else if( ( statusCode == 301 || statusCode == 307 )
                 && method.equals(SubmitMethod.GET) ) {
 
-                final WebRequestSettings wrs = new WebRequestSettings(newUrl);
+                final WebRequestSettings wrs = new WebRequestSettings(webRequestSettings, newUrl);
                 wrs.setRequestParameters(parameters);
                 return loadWebResponse(wrs);
             }
             else if( statusCode == 302 || statusCode == 303 ) {
-                final WebRequestSettings wrs = new WebRequestSettings(newUrl);
+                final WebRequestSettings wrs = new WebRequestSettings(webRequestSettings, newUrl);
                 return loadWebResponse(wrs);
             }
         }
