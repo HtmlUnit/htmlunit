@@ -415,12 +415,49 @@ public class WebClientTest extends WebTestCase {
             final SubmitMethod expectedRedirectedRequestMethod,
             final String newLocation )
         throws
+        Exception {
+
+        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod, newLocation, false);
+        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod, newLocation, true);
+    }
+
+    /**
+     * Basic logic for all the redirection tests.
+     *
+     * @param statusCode The code to return from the initial request
+     * @param initialRequestMethod The initial request.
+     * @param expectedRedirectedRequestMethod The submit method of the second (redirected) request.
+     * If a redirect is not expected to happen then this must be null
+     * @param newLocation the Location set in the redirection header
+     * @param useProxy indicates if the test should be performed with a proxy
+     * @throws Exception if the test fails.
+     */
+    private void doTestRedirection(
+            final int statusCode,
+            final SubmitMethod initialRequestMethod,
+            final SubmitMethod expectedRedirectedRequestMethod,
+            final String newLocation,
+            final boolean useProxy)
+        throws
              Exception {
 
         final String firstContent = "<html><head><title>First</title></head><body></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient;
+        final String proxyHost;
+        final int proxyPort;
+        if (useProxy) {
+            proxyHost = "someHost";
+            proxyPort = 12233345;
+            webClient = new WebClient(BrowserVersion.getDefault(), proxyHost, proxyPort);
+        }
+        else {
+            proxyHost = null;
+            proxyPort = 0;
+            webClient = new WebClient();
+        }
+
         webClient.setThrowExceptionOnFailingStatusCode(false);
         webClient.setPrintContentOnFailingStatusCode(false);
 
@@ -456,6 +493,8 @@ public class WebClientTest extends WebTestCase {
             assertEquals( "Second", page.getTitleText() );
             assertEquals( expectedRedirectedRequestMethod, webConnection.getLastMethod() );
         }
+        assertEquals(proxyHost, webConnection.getLastWebRequestSettings().getProxyHost());
+        assertEquals(proxyPort, webConnection.getLastWebRequestSettings().getProxyPort());
 
         //
         // Second time redirection is turned off
@@ -465,6 +504,8 @@ public class WebClientTest extends WebTestCase {
         webResponse = page.getWebResponse();
         assertEquals( statusCode, webResponse.getStatusCode() );
         assertEquals( initialRequestMethod, webConnection.getLastMethod() );
+        assertEquals(proxyHost, webConnection.getLastWebRequestSettings().getProxyHost());
+        assertEquals(proxyPort, webConnection.getLastWebRequestSettings().getProxyPort());
 
     }
 

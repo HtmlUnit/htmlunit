@@ -7,6 +7,9 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem" id="1439464">
+				Use configured proxy when performing a request after a redirection.
+			</action>
             <action type="update" dev="mguillem">
 				Allow &lt;button...&gt;s located outside of a form to be clicked and their onclick handler to be called.
 			</action>

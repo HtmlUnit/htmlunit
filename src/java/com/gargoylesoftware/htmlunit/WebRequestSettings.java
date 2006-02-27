@@ -74,6 +74,19 @@ public class WebRequestSettings {
         setURL(target);
     }
 
+
+    /**
+     * Instantiate a {@link WebRequestSettings} for the given url using the proxy configuration from the original 
+     * request
+     * @param originalRequest the original request
+     * @param target The URL for this request
+     */
+    public WebRequestSettings(final WebRequestSettings originalRequest, final URL target) {
+        this(target);
+        setProxyHost(originalRequest.getProxyHost());
+        setProxyPort(originalRequest.getProxyPort());
+    }
+
     /**
      * @param target The URL for this request
      * @param submitMethod The submitMethod to set.
