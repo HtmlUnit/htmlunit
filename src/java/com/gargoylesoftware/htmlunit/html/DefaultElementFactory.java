@@ -44,6 +44,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.HashMap;
 
+import org.apache.commons.collections.map.ListOrderedMap;
 import org.xml.sax.Attributes;
 
 /**
@@ -91,8 +92,8 @@ class DefaultElementFactory implements IElementFactory {
 
         try {
             Map attributeMap = null;
-            if(attributes != null) {
-                attributeMap = new HashMap(attributes.getLength());
+            if (attributes != null) {
+                attributeMap = ListOrderedMap.decorate(new HashMap(attributes.getLength())); // preserve insertion order
                 for(int i=0; i < attributes.getLength(); i++) {
                     attributeMap.put(attributes.getLocalName(i), attributes.getValue(i));
                 }

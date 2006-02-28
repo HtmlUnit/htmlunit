@@ -45,6 +45,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
 
+import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.StatusLine;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -62,9 +63,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * Tests methods in {@link HttpWebConnection} class.
  *
  * @author David D. Kilzer
+ * @author Marc Guillemot
  * @version $Revision$
  */
 public class HttpWebConnectionTest extends BaseTestCase {
+    private HttpServer httpServer_;
 
     /**
      * Assert that the two byte arrays are equal
@@ -249,18 +252,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @throws Exception on failure
      */
     public void testJettyProofOfConcept() throws Exception {
-        final HttpServer server = new HttpServer();
-        final SocketListener listener = new SocketListener();
-        listener.setPort(12345);
-        server.addListener(listener);
-
-        final HttpContext context = new HttpContext();
-        context.setContextPath("/");
-        context.setResourceBase("./");
-        context.addHandler(new ResourceHandler());
-        server.addContext(context);
-
-        server.start();
+        setupWebServer(12345);
 
         final WebClient client = new WebClient();
         final Page page = client.getPage(new URL("http://localhost:12345/"));
@@ -274,5 +266,59 @@ public class HttpWebConnectionTest extends BaseTestCase {
                 HttpWebConnection.class);
         assertInstanceOf("Response should be (mostly) valid HTML", page, HtmlPage.class);
 
+    }
+
+
+    /**
+     * Starts the webserver on the given port
+     * @param port the port on which the server should be started
+     * @throws Exception
+     */
+    private void setupWebServer(final int port) throws Exception {
+        httpServer_ = new HttpServer();
+
+        final SocketListener listener = new SocketListener();
+        listener.setPort(port);
+        httpServer_.addListener(listener);
+
+        final HttpContext context = new HttpContext();
+        context.setContextPath("/");
+        context.setResourceBase("./");
+        context.addHandler(new ResourceHandler());
+        httpServer_.addContext(context);
+
+        httpServer_.start();
+    }
+
+    /**
+     * Stops the web server if it has been started.
+     * @see junit.framework.TestCase#tearDown()
+     */
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        if (httpServer_ != null) {
+            httpServer_.stop();
+        }
+    }
+
+    /**
+     * Test for feature request 1438216: HttpWebConnection should allow extension to create the HttpClient
+     * @throws Exception if the test fails
+     */
+    public void testDesignedForExtension() throws Exception {
+        setupWebServer(12345);
+
+        final WebClient webClient = new WebClient();
+        final boolean[] tabCalled = { false };
+        final WebConnection myWebConnection = new HttpWebConnection(webClient) {
+            protected HttpClient createHttpClient() {
+                tabCalled[0] = true;
+                return new HttpClient();
+            }
+        };
+
+        webClient.setWebConnection(myWebConnection);
+        webClient.getPage(new URL("http://localhost:12345/"));
+        assertTrue("createHttpClient as not been called", tabCalled[0]);
     }
 }

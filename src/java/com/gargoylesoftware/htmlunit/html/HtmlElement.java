@@ -198,7 +198,8 @@ public abstract class HtmlElement extends DomNode {
 
     /**
      * @return an iterator over the {@link HtmlAttr} objects representing the
-     * attributes of this element. Each entry holds a string key and a string value
+     * attributes of this element. Each entry holds a string key and a string value.
+     * The elements are ordered as found in the html source code.
      */
     public Iterator getAttributeEntriesIterator() {
         return new MapEntryWrappingIterator(attributes_.entrySet().iterator(), this);
