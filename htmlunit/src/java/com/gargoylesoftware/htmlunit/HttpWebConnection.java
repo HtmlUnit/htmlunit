@@ -290,7 +290,7 @@ public class HttpWebConnection extends WebConnection {
     private synchronized HttpClient getHttpClient() {
 
         if (httpClient_ == null ) {
-            httpClient_ = new HttpClient();
+            httpClient_ = createHttpClient();
 
             // Disable informational messages from httpclient
             final Log log = LogFactory.getLog("httpclient.wire");
@@ -315,6 +315,16 @@ public class HttpWebConnection extends WebConnection {
         return httpClient_;
     }
 
+    /**
+     * Creates the httpClient that will be used by this WebConnection.
+     * Extensions may override this method to create the HttpClient with for instance a custom 
+     * {@link org.apache.commons.httpclient.HttpConnectionManager} to perform some tracking 
+     * (see feature request 1438216).
+     * @return the client
+     */
+    protected HttpClient createHttpClient() {
+        return new HttpClient();
+    }
 
 
     /**

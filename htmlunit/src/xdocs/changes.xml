@@ -7,6 +7,13 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem" id="1419050">
+				HtmlElement.getAttributeEntriesIterator now returns the attributes in the order in 
+				which they appear in the html source code.
+			</action>
+            <action type="update" dev="mguillem" id="1438216">
+				HttpWebConnection now allows extensions to simply override HttpClient creation.
+			</action>
             <action type="update" dev="mguillem" id="1439464">
 				Use configured proxy when performing a request after a redirection.
 			</action>
