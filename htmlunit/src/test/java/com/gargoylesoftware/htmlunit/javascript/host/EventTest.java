@@ -184,6 +184,36 @@ public class EventTest extends WebTestCase {
         onClickPageTest(BrowserVersion.NETSCAPE_6_2_3, content, expectedAlerts);
     }
 
+    /**
+     * Tests that event fires on key press.
+     * @throws Exception if the test fails
+     */
+    public void testEventOnKeyDown () throws Exception {
+        final String content
+            = "<html><head></head><body>\n"
+            + "<button type='button' id='clickId'/>\n"
+            + "<script>\n"
+            + "function handler(e) {\n"
+            + "if (e.keyCode == 65) {\n"
+            + "    alert('pass');"
+            + "} else {"
+            + "    alert('fail:' + e.keyCode);"
+            + "}"
+            + "}\n"
+            + "document.getElementById('clickId').onkeydown = handler;"
+            + "document.getElementById('clickId').onclick = handler;</script>\n"
+            + "</body></html>\n";
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage( BrowserVersion.getDefault(), content, collectedAlerts );
+        final ClickableElement element = (ClickableElement) page.getHtmlElementById( "clickId" );
+        element.keyDown(65); // A
+        element.keyDown(66); // B
+        element.click();
+        final String[] expectedAlerts = {"pass", "fail:66", "fail:undefined"};
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
     private void onClickPageTest(final String content, final List expectedAlerts) throws Exception, IOException {
         onClickPageTest( BrowserVersion.getDefault(), content, expectedAlerts );
     }

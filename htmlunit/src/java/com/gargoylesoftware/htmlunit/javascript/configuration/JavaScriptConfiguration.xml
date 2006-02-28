@@ -183,6 +183,7 @@
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="5"/>
         </property>
+        <property name="keyCode" readable="true" writable="false"/>
     </class>
 
     <class name="FileUpload" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"

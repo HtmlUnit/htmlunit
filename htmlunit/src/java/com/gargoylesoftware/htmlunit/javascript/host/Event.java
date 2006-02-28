@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.mozilla.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -53,6 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Brad Murray
  */
 public class Event extends SimpleScriptable {
 
@@ -60,6 +63,7 @@ public class Event extends SimpleScriptable {
     private Object srcElement_;     // IE-only writeable equivalent of target.
     private Object target_;         // W3C standard read-only equivalent of srcElement.
     private Object currentTarget_;  // Changes during event capturing and bubbling.
+    private Object keyCode_;        // Key code for a keypress
 
     /**
      * Creates a new event instance.
@@ -70,6 +74,22 @@ public class Event extends SimpleScriptable {
         srcElement_ = target;
         target_ = target;
         currentTarget_ = target;
+        keyCode_ = Context.getUndefinedValue();
+        setParentScope((SimpleScriptable) domNode.getScriptObject());
+        setDomNode(domNode, false);
+    }
+
+    /**
+     * Creates a new event instance for a keypress event.
+     * @param domNode the DOM node that triggered the event.
+     * @param target The (original) target of the event.
+     * @param keyCode The key code associated with the event.
+     */
+    public Event(final DomNode domNode, final Object target, final int keyCode) {
+        srcElement_ = target;
+        target_ = target;
+        currentTarget_ = target;
+        keyCode_ = new Integer (keyCode);
         setParentScope((SimpleScriptable) domNode.getScriptObject());
         setDomNode(domNode, false);
     }
@@ -105,6 +125,14 @@ public class Event extends SimpleScriptable {
      */
     public Object jsxGet_currentTarget() {
         return currentTarget_;
+    }
+
+    /**
+     * Returns the key code associated with the event.
+     * @return The key code associated with the event.
+     */
+    public Object jsxGet_keyCode () {
+        return keyCode_;
     }
 
     /**

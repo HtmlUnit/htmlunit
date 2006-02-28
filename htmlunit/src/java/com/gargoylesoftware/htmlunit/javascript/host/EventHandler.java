@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class EventHandler extends BaseFunction {
     private static final long serialVersionUID = 3257850965406068787L;
-    
+
     private final HtmlElement htmlElement_;
     private final String jsSnippet_;
     private Function realFunction_;
@@ -97,7 +97,7 @@ public class EventHandler extends BaseFunction {
     public Object getDefaultValue(final Class typeHint) {
         return jsSnippet_;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -116,7 +116,7 @@ public class EventHandler extends BaseFunction {
 
         return super.get(name, start);
     }
-    
+
     /**
      * Return the log
      * @return The log.
