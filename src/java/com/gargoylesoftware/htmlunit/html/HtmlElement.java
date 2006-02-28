@@ -49,9 +49,11 @@ import java.util.NoSuchElementException;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 
 /**
@@ -328,6 +330,28 @@ public abstract class HtmlElement extends DomNode {
         }
 
         return form;
+    }
+
+    /**
+     * Simulate pressing a key on this element
+     *
+     * @param keyCode the key you wish to press
+     */
+    public void keyDown(final int keyCode) {
+        if (this instanceof DisabledElement) {
+            if (((DisabledElement) this).isDisabled()) {
+                return;
+            }
+        }
+
+        final HtmlPage page = getPage();
+        final Function function = getEventHandler("onkeydown");
+
+        if (function != null && page.getWebClient().isJavaScriptEnabled()) {
+            final Event event = new Event(this, getScriptObject(), keyCode);
+            final Object[] args = new Object[] {event};
+            page.executeJavaScriptFunctionIfPossible(function, (Scriptable) getScriptObject(), args, this);
+        }
     }
 
     /**

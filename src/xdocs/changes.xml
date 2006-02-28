@@ -7,6 +7,9 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem" id="1436102" due-to="Brad Murray">
+				Added support for firing onkeydown events.
+			</action>
             <action type="update" dev="mguillem" id="1419050">
 				HtmlElement.getAttributeEntriesIterator now returns the attributes in the order in 
 				which they appear in the html source code.

@@ -182,6 +182,9 @@
         <contributor>
         	<name>Mark van Leeuwen</name>
         </contributor>
+        <contributor>
+        	<name>Brad Murray</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
