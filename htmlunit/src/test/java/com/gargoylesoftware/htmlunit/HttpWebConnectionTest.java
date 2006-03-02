@@ -291,8 +291,8 @@ public class HttpWebConnectionTest extends BaseTestCase {
     }
 
     /**
+     * {@inheritDoc}
      * Stops the web server if it has been started.
-     * @see junit.framework.TestCase#tearDown()
      */
     protected void tearDown() throws Exception {
         super.tearDown();
