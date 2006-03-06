@@ -46,6 +46,9 @@
                 continue to work but some functions will not.
             </p>
             <p>
+                Htmlunit releases containe all needed jars and you don´t need to retrieve them from other locations.
+            </p>
+            <p>
                 If you're using maven to build your project and just want to know what dependencies
                 to add to your POM, just scroll down to the <a href="#pomDependencies">next section</a>.
             </p>
