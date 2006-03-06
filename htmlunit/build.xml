@@ -215,11 +215,8 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
         <param name="project" value="commons-collections"/>
         <param name="jarName" value="commons-collections-3.1.jar"/>
     </antcall>
-    
-    
-    <!-- optional -->
     <antcall target="get-dependency">
-        <param name="type" value="optional"/>
+        <param name="type" value="required"/>
         <param name="project" value="rhino"/>
         <param name="jarName" value="js-1.6R2.jar"/>
     </antcall>
