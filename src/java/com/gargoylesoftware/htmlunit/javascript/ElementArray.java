@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -55,7 +54,6 @@ import org.mozilla.javascript.Scriptable;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.Util;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -76,7 +74,7 @@ public class ElementArray extends SimpleScriptable implements Function {
      */
     public static final String JS_OBJECT_NAME = "ElementArray";
     private static final long serialVersionUID = 4049916048017011764L;
-    
+
     private XPath xpath_;
     private DomNode node_;
     /**
@@ -89,7 +87,7 @@ public class ElementArray extends SimpleScriptable implements Function {
      * Create an instance. Javascript objects must have a default constructor.
      */
     public ElementArray() {
-        
+        // nothing
     }
 
     /**
@@ -100,7 +98,6 @@ public class ElementArray extends SimpleScriptable implements Function {
      */
     public void init(final DomNode node, final XPath xpath) {
         init(node, xpath, NOPTransformer.INSTANCE);
-        
     }
 
     /**
@@ -172,44 +169,14 @@ public class ElementArray extends SimpleScriptable implements Function {
      */
     public final Object get( final int index, final Scriptable start ) {
         final ElementArray array = (ElementArray) start;
-        final List elements = array.getElementsSorted();
-        
+        final List elements = array.getElements();
+
         if( index >= 0 && index < elements.size()) {
-            return getScriptableFor(elements.get(index));
+            return getScriptableFor(transformer_.transform(elements.get(index)));
         }
         else {
             return NOT_FOUND;
         }
-    }
-
-    /**
-     * Due to bug in Jaxen: http://jira.codehaus.org/browse/JAXEN-55
-     * the nodes returned by the xpath evaluation are not correctly sorted.
-     * We have therefore to sort them.
-     * @return the sorted list.
-     */
-    private List getElementsSorted() {
-        final List nodes = getElements();
-        final List sortedNodes;
-        if (nodes.size() > 1) {
-            sortedNodes = new ArrayList();
-            for (final Iterator iter = Util.getFollowingAxisIterator(node_); iter.hasNext();) {
-                final Object node = iter.next();
-                if (nodes.contains(node)) {
-                    sortedNodes.add(node);
-                    nodes.remove(node);
-                    if (nodes.isEmpty()) {
-                        break; // nothing to sort anymore
-                    }
-                }
-            }
-        }
-        else {
-            sortedNodes = nodes; // already "sorted"
-        }
-        
-        CollectionUtils.transform(sortedNodes, transformer_);
-        return sortedNodes;
     }
 
     /**
@@ -219,7 +186,7 @@ public class ElementArray extends SimpleScriptable implements Function {
      */
     private List getElements() {
         try {
-            final List list = xpath_.selectNodes(node_); 
+            final List list = xpath_.selectNodes(node_);
             return list;
         }
         catch (final JaxenException e) {
@@ -241,8 +208,8 @@ public class ElementArray extends SimpleScriptable implements Function {
         if( result != NOT_FOUND ) {
             return result;
         }
-        
-        final ElementArray currentArray = ((ElementArray) start); 
+
+        final ElementArray currentArray = ((ElementArray) start);
         final List elements = currentArray.getElements();
         CollectionUtils.transform(elements, transformer_);
 
@@ -288,21 +255,21 @@ public class ElementArray extends SimpleScriptable implements Function {
         catch (final SAXPathException e) {
             throw Context.reportRuntimeError("Failed getting sub elements by name" + e.getMessage());
         }
-        
+
         // Test to see if we are trying to get the length of this array?  If so, pass the processing up
         // to the higher level processing
         if ("length".equals(name)) {
             return NOT_FOUND;
         }
-        
+
         final List subElements = array.getElements();
         if (subElements.size() > 1) {
-            getLog().debug("Property \"" + name + "\" evaluated (by name) to " + array + " with " 
+            getLog().debug("Property \"" + name + "\" evaluated (by name) to " + array + " with "
                     + subElements.size() + " elements");
             return array;
         }
         else if (subElements.size() == 1) {
-            final SimpleScriptable singleResult = getScriptableFor(subElements.get(0)); 
+            final SimpleScriptable singleResult = getScriptableFor(subElements.get(0));
             getLog().debug("Property \"" + name + "\" evaluated (by name) to " + singleResult);
             return singleResult;
         }
@@ -363,7 +330,7 @@ public class ElementArray extends SimpleScriptable implements Function {
         return array;
     }
 
-    
+
     /**
      * Just for debug purpose.
      * {@inheritDoc}
@@ -374,7 +341,7 @@ public class ElementArray extends SimpleScriptable implements Function {
         }
         return super.toString();
     }
-    
+
     /**
      * Called for the js "==".
      * {@inheritDoc}
@@ -385,8 +352,8 @@ public class ElementArray extends SimpleScriptable implements Function {
         }
         else if (other instanceof ElementArray) {
             final ElementArray otherArray = (ElementArray) other;
-            if (node_ == otherArray.node_ 
-                    && xpath_.toString().equals(otherArray.xpath_.toString()) 
+            if (node_ == otherArray.node_
+                    && xpath_.toString().equals(otherArray.xpath_.toString())
                     && transformer_.equals(otherArray.transformer_)) {
                 return Boolean.TRUE;
             }
@@ -394,7 +361,7 @@ public class ElementArray extends SimpleScriptable implements Function {
                 return NOT_FOUND;
             }
         }
-        
+
         return super.equivalentValues(other);
     }
 }
