@@ -227,7 +227,7 @@
             <type>jar</type>
             <url>http://jakarta.apache.org/commons/jelly</url>
             <properties>
-                <htmlunit.group>Jelly</htmlunit.group>
+                <htmlunit.group>jelly</htmlunit.group>
                 <htmlunit.description>Jelly tags for logging</htmlunit.description>
             </properties>
         </dependency>
@@ -372,7 +372,7 @@
             <type>jar</type>
             <url>http://www.mozilla.org/rhino</url>
             <properties>
-                <htmlunit.group>optional</htmlunit.group>
+                <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>Needed for javascript support</htmlunit.description>
             </properties>
         </dependency>
