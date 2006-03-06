@@ -43,33 +43,40 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+
 import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.WrappedException;
+
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * An exception that will be thrown if an error occurs during the processing of
  * a script.
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public class ScriptException extends RuntimeException {
     private static final long serialVersionUID = 4788896649084231283L;
     private final String scriptSourceCode_;
+    private final HtmlPage page_;
 
 
     /**
      * Create an instance
-     *
+     * @param page the page in which the script causing this exception was executed
      * @param throwable The exception that was thrown from the script engine.
      * @param scriptSourceCode The code that was being executed when this exception
      * was thrown.  This may be null if the exception was not caused by execution
      * of javascript.
      */
-    public ScriptException( final Throwable throwable, final String scriptSourceCode ) {
+    public ScriptException(final HtmlPage page, final Throwable throwable,
+            final String scriptSourceCode ) {
         super(getMessageFrom(throwable), throwable);
         scriptSourceCode_ = scriptSourceCode;
+        page_ = page;
     }
 
     private static String getMessageFrom( final Throwable throwable ) {
@@ -83,11 +90,11 @@ public class ScriptException extends RuntimeException {
 
     /**
      * Create an instance
-     *
+     * @param page the page in which the script causing this exception was executed
      * @param throwable The exception that was thrown from the script engine.
      */
-    public ScriptException( final Throwable throwable ) {
-        this( throwable, null );
+    public ScriptException(final HtmlPage page, final Throwable throwable ) {
+        this(page, throwable, null);
     }
 
 
@@ -258,5 +265,15 @@ public class ScriptException extends RuntimeException {
         }
 
         return -1;
+    }
+
+    /**
+     * Gets the html page in which the script error occured.<br/>
+     * Caution: this page may be only partially parsed if the exception occured in a script
+     * executed at parsing time.
+     * @return the page
+     */
+    public HtmlPage getPage() {
+        return page_;
     }
 }

@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.apache.commons.collections.Transformer;
@@ -50,7 +49,6 @@ import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -116,7 +114,7 @@ public class SimpleScriptable extends ScriptableObject {
             return scriptable;
         }
         catch( final Exception e ) {
-            throw new ScriptException(e);
+            throw Context.throwAsScriptRuntimeEx(e);
         }
         finally {
             Context.exit();
@@ -244,7 +242,7 @@ public class SimpleScriptable extends ScriptableObject {
                 result = propertyMethod.invoke(this, new Object[0]);
             }
             catch (final Exception e) {
-                throw new ScriptException(e);
+                throw Context.throwAsScriptRuntimeEx(e);
             }
         }
 
@@ -304,11 +302,8 @@ public class SimpleScriptable extends ScriptableObject {
                     simpleScriptable.findMatchingScriptable(start, setterMethod),
                     new Object[]{ newValue } );
             }
-            catch( final InvocationTargetException e ) {
-                throw new ScriptException(e.getTargetException());
-            }
             catch( final Exception e ) {
-                throw new ScriptException(e);
+                throw Context.throwAsScriptRuntimeEx(e);
             }
 
         }
@@ -397,11 +392,8 @@ public class SimpleScriptable extends ScriptableObject {
                 try {
                     scriptable = (SimpleScriptable) javaScriptClass.newInstance();
                 }
-                catch (final InstantiationException e) {
-                    throw new ScriptException(e);
-                }
-                catch (final IllegalAccessException e) {
-                    throw new ScriptException(e);
+                catch (final Exception e) {
+                    throw Context.throwAsScriptRuntimeEx(e);
                 }
             }
             // parent scope needs to be set to the enclosing "window" (no simple unit test found to illustrate the
