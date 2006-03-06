@@ -37,9 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for {@link ScriptException}..
+ * Tests for {@link ScriptException}.
  * 
  * @version $Revision$
  * @author Marc Guillemot
@@ -48,19 +49,23 @@ public final class ScriptExceptionTest extends WebTestCase {
 
     /**
      * Create an instance.
-     * @param name The name of the test.
+     * 
+     * @param name
+     *            The name of the test.
      */
     public ScriptExceptionTest(final String name) {
         super(name);
     }
 
     /**
-     * @throws Exception if the test fails
+     * @throws Exception
+     *             if the test fails
      */
     public void testConstructor() throws Exception {
         final String message = "bla bla";
         final Throwable t = new RuntimeException(message);
-        final ScriptException exception = new ScriptException(t);
+        final HtmlPage page = loadPage("<html></html>");
+        final ScriptException exception = new ScriptException(page, t);
 
         assertEquals(t, exception.getCause());
         assertEquals(message, exception.getMessage());
@@ -68,13 +73,33 @@ public final class ScriptExceptionTest extends WebTestCase {
 
     /**
      * To remove when deprecated method have been removed
+     * 
      * @deprecated
-     * @throws Exception if the test fails
+     * @throws Exception
+     *             if the test fails
      */
     public void testDeprecated() throws Exception {
         final Throwable t = new RuntimeException();
-        final ScriptException exception = new ScriptException(t);
+        final HtmlPage page = loadPage("<html></html>");
+        final ScriptException exception = new ScriptException(page, t);
 
         assertEquals(t, exception.getEnclosedException());
+    }
+
+    /**
+     * Test access to the page where the exception occured from the exception
+     * 
+     * @throws Exception
+     *             if the test fails
+     */
+    public void testGetPage() throws Exception {
+        final String html = "<html><script>notExisting()</script></html>";
+
+        try {
+            loadPage(html);
+        }
+        catch (final ScriptException e) {
+            assertEquals(URL_GARGOYLE, e.getPage().getWebResponse().getUrl());
+        }
     }
 }

@@ -85,7 +85,7 @@ public final class JavaScriptEngine extends ScriptEngine {
 
     private static final ThreadLocal javaScriptRunning_ = new ThreadLocal();
     private static final ContextListener contextListener_;
-    
+
     /**
      * Key used to place the scope in which the execution of some javascript code
      * started (in {@link #callFunction} or {@link #execute}) as thread local attribute 
@@ -142,7 +142,7 @@ public final class JavaScriptEngine extends ScriptEngine {
         }
         catch( final Exception e ) {
             getLog().error("Exception while initializing JavaScript for the page", e);
-            throw new ScriptException(e);
+            throw new ScriptException(htmlPage, e);
         }
         finally {
             Context.exit();
@@ -250,12 +250,12 @@ public final class JavaScriptEngine extends ScriptEngine {
             return result;
         }
         catch (final Exception e ) {
-            final ScriptException scriptException = new ScriptException( e, sourceCode );  
+            final ScriptException scriptException = new ScriptException(htmlPage, e, sourceCode );
             if (getWebClient().isThrowExceptionOnScriptError()) {
                 throw scriptException;
             }
             else {
-                // use a ScriptException to log it because it provides good information 
+                // use a ScriptException to log it because it provides good information
                 // on the source code
                 getLog().info("Catched script exception", scriptException);
                 return null;
@@ -291,7 +291,7 @@ public final class JavaScriptEngine extends ScriptEngine {
         else {
             scope = (Window) htmlPage.getEnclosingWindow().getScriptObject();
         }
-        // some js code (like onchange handlers) should not be triggered from JS code: 
+        // some js code (like onchange handlers) should not be triggered from JS code:
         // => keep trace of JS running or not
         final Boolean javaScriptAlreadyRunning = (Boolean) javaScriptRunning_.get();
         javaScriptRunning_.set(Boolean.TRUE);
@@ -304,12 +304,12 @@ public final class JavaScriptEngine extends ScriptEngine {
         }
         catch (final Exception e ) {
             final String sourceCode = context.decompileFunction(function, 2);
-            final ScriptException scriptException = new ScriptException( e, sourceCode);  
+            final ScriptException scriptException = new ScriptException(htmlPage, e, sourceCode);
             if (getWebClient().isThrowExceptionOnScriptError()) {
                 throw scriptException;
             }
             else {
-                // use a ScriptException to log it because it provides good information 
+                // use a ScriptException to log it because it provides good information
                 // on the source code
                 getLog().info("Catched script exception", scriptException);
                 return null;
