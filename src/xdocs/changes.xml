@@ -7,6 +7,9 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem" id="1437068">
+				Encode path part of urls containing illegal characters.
+			</action>
             <action type="update" dev="mguillem" id="1436102" due-to="Brad Murray">
 				Added support for firing onkeydown events.
 			</action>
