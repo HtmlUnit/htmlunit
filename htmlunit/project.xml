@@ -280,7 +280,7 @@
         <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
-            <version>1.5</version>
+            <version>1.6.1</version>
             <type>jar</type>
             <url>http://www.dom4j.org/</url>
             <properties>
