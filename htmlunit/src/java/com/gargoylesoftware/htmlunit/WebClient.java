@@ -1392,48 +1392,65 @@ public class WebClient {
     }
 
     /**
-     * Encodes illegal parameter in query string (if any) as done by browsers.
-     * Example: change "http://first?a=b c" to "http://first?a=b%20c"  
+     * Encodes illegal parameter in path or query string (if any) as done by browsers.
+     * Example: changes "http://first?a=b c" to "http://first?a=b%20c"  
      * @param url the url to encode
      * @return the provided url if no change needed, the fixed url else
      * @throws MalformedURLException if the new URL could note be instantiated
      * @throws URIException if the default protocol charset is not supported
      */
     protected URL encodeUrl(final URL url) throws MalformedURLException, URIException {
-        // just look at urls with query string (better test?)
-        final String str = url.toExternalForm();
-        final int queryStart = url.toExternalForm().indexOf('?');
-        if (queryStart != -1) {
-            // extract query string: browsers seem not to encode everything, for instance not "#"
-            final String query;
-            final int anchorStart = str.indexOf('#');
-            if (anchorStart < queryStart) {
-                query = str.substring(queryStart);
+        final String path = url.getPath();
+        final String fixedPath = encode(path, URI.allowed_abs_path);
+        final String query = url.getQuery();
+        final String fixedQuery = encode(query, URI.allowed_query);
+
+        if (!StringUtils.equals(path, fixedPath) || !StringUtils.equals(query, fixedQuery)) {
+            final StringBuffer newUrl = new StringBuffer();
+            newUrl.append(url.getProtocol());
+            newUrl.append("://");
+            newUrl.append(url.getHost());
+            if (url.getPort() != -1) {
+                newUrl.append(":");
+                newUrl.append(url.getPort());
             }
-            else {
-                query = str.substring(queryStart, anchorStart);
+            newUrl.append(fixedPath);
+            if (url.getUserInfo() != null) {
+                newUrl.append(url.getUserInfo());
+            }
+            if (fixedQuery != null) {
+                newUrl.append("?");
+                newUrl.append(fixedQuery);
+            }
+            if (url.getRef() != null) {
+                newUrl.append("#");
+                newUrl.append(url.getRef());
             }
 
-            // url may be partially encoded like "http://first?a=b%20c&d=e f"
-//          // don't re-encode the %'s from already encoded items
-            final BitSet partiallyEncodedQuery = new BitSet(256);
-            partiallyEncodedQuery.set('%');
-            partiallyEncodedQuery.or(URI.allowed_query);
-            final String fixedQuery = URIUtil.encode(query, partiallyEncodedQuery);
-            if (query.equals(fixedQuery)) {
-                return url;
-            }
-            else {
-                final StringBuffer newUrl = new StringBuffer(str);
-                newUrl.replace(queryStart, queryStart + query.length(), fixedQuery);
-                return new URL(newUrl.toString());
-            }
+            return new URL(newUrl.toString());
         }
         else {
             return url;
         }
-
     }
+
+    /**
+     * Encodes unallowed characters in a string
+     * @param str the string to encode
+     * @param allowed the allowed characters
+     * @return the encoded string
+     * @throws URIException if encoding fails
+     */
+    private String encode(final String str, final BitSet allowed) throws URIException {
+        if (str == null) {
+            return null;
+        }
+        final BitSet bits = new BitSet(str.length());
+        bits.set('%');
+        bits.or(allowed);
+        return URIUtil.encode(str, bits);
+    }
+
 
     /**
      * Remove the focus to the specified component.  This will trigger any relevant javascript
