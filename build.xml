@@ -282,7 +282,7 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
     <antcall target="get-dependency">
         <param name="type" value="jelly"/>
         <param name="project" value="dom4j"/>
-        <param name="jarName" value="dom4j-1.5.jar"/>
+        <param name="jarName" value="dom4j-1.6.1.jar"/>
     </antcall>
     <antcall target="get-dependency">
         <param name="type" value="jelly"/>
