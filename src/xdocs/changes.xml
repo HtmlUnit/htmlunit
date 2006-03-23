@@ -7,6 +7,9 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="yourgod">
+                HtmlOption.asText() now respects the label attribute as browsers do.
+			</action>        
             <action type="update" dev="mguillem" id="1437068">
 				Encode path part of urls containing illegal characters.
 			</action>

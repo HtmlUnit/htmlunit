@@ -167,4 +167,27 @@ public class HtmlOptionTest extends WebTestCase {
         option1.click();
         assertTrue(option1.isSelected());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testAsText() throws Exception {
+        final String htmlContent = "<html><head><title>foo</title></head><body>"
+            + "<form><select>"
+            + "<option id='option1'>option1</option>"
+            + "<option id='option2' label='Number Two'/>"
+            + "<option id='option3' label='overridden'>Number Three</option>"
+            + "</select>"
+            + "</form></body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlOption option1 = (HtmlOption) page.getHtmlElementById("option1");
+        final HtmlOption option2 = (HtmlOption) page.getHtmlElementById("option2");
+        final HtmlOption option3 = (HtmlOption) page.getHtmlElementById("option3");
+
+        assertEquals("option1", option1.asText());
+        assertEquals("Number Two", option2.asText());
+        assertEquals("overridden", option3.asText());
+    }
 }
