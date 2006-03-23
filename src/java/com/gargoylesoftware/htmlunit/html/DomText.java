@@ -126,4 +126,12 @@ public class DomText extends DomCharacterData {
         printWriter.println(StringEscapeUtils.escapeXml(getData()));
         printChildrenAsXml( indent, printWriter );
     }
+
+    /**
+     * Gives a simple representation to facilitate debugging
+     * @return a simple representation
+     */
+    public String toString() {
+        return asText();
+    }
 }
