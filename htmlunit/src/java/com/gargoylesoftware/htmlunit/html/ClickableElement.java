@@ -41,7 +41,6 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.mozilla.javascript.Function;
-import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -60,6 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
+ * @author Marc Guillemot
  */
 public abstract class ClickableElement extends StyledElement {
 
@@ -100,13 +100,7 @@ public abstract class ClickableElement extends StyledElement {
                 doClickAction(page);
                 stateUpdated = true;
             }
-            final Event event = new Event(this, getScriptObject());
-
-            final Object[] args = new Object[] {event};
-
-            final ScriptResult scriptResult =
-                page.executeJavaScriptFunctionIfPossible(
-                    function, (Scriptable) getScriptObject(), args, this);
+            final ScriptResult scriptResult = runEventHandler(function, new Event(this));
 
             final Page scriptPage = scriptResult.getNewPage();
             if (stateUpdated || Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
@@ -120,7 +114,6 @@ public abstract class ClickableElement extends StyledElement {
             return doClickAction(page);
         }
     }
-
 
     /**
      * This method will be called if there either wasn't an onclick handler or

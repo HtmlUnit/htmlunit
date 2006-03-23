@@ -1351,15 +1351,7 @@ public final class HtmlPage extends DomNode implements Page {
         if (onchange != null && getWebClient().isJavaScriptEnabled()
                 && engine != null && !engine.isScriptRunning()) {
 
-            final Event event = new Event(this, getScriptObject());
-            final Object[] args = new Object[] {event};
-
-            final ScriptResult scriptResult =
-                executeJavaScriptFunctionIfPossible(
-                        onchange,
-                        (Scriptable)htmlElement.getScriptObject(),
-                        args,
-                        htmlElement);
+            final ScriptResult scriptResult = htmlElement.runEventHandler(onchange, new Event(htmlElement));
 
             if (getWebClient().getWebWindows().contains(getEnclosingWindow())) {
                 return getEnclosingWindow().getEnclosedPage(); // may be itself or a newly loaded one

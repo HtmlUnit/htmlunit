@@ -48,8 +48,8 @@ import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- *  Tests that when DOM events such as "onclick" have access
- * to an Event object with context information.
+ * Tests that when DOM events such as "onclick" have access
+ * to an {@link Event} object with context information.
  * 
  * @version  $Revision$
  * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
@@ -249,4 +249,43 @@ public class EventTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+
+    /**
+     * Test event transmission to event handler
+     * @throws Exception if the test fails
+     */
+    public void testEventTransmission() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content =
+            "<html><body><span id='clickMe'>foo</span>\n"
+            + "<script>\n"
+            + "function handler(e) {\n"
+            + "  alert(e == null);\n"
+            + "  alert(window.event == null);\n"
+            + "  var theEvent = (e != null) ? e : window.event;\n"
+            + "  var target = theEvent.target ? theEvent.target : theEvent.srcElement;\n"
+            + "  alert(target.tagName);\n"
+            + "}"
+            + "document.getElementById('clickMe').onclick = handler;"
+            + "</script></body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        HtmlPage page = loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        ((ClickableElement) page.getHtmlElementById("clickMe")).click();
+
+        String[] expectedAlerts = { "false", "true", "SPAN" };
+        assertEquals( expectedAlerts, collectedAlerts );
+
+        collectedAlerts.clear();
+        page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        ((ClickableElement) page.getHtmlElementById("clickMe")).click();
+
+        expectedAlerts = new String[] { "true", "false", "SPAN" };
+        assertEquals( expectedAlerts, collectedAlerts );
+
+    }
+
 }
