@@ -52,7 +52,7 @@ import org.apache.commons.httpclient.HttpState;
  * @author Daniel Gredler
  * @author Marc Guillemot
  */
-abstract class WebConnectionImpl implements WebConnection {
+public abstract class WebConnectionImpl implements WebConnection {
 
     private final WebClient webClient_;
 
