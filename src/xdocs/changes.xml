@@ -8,6 +8,9 @@
     <body>
         <release version="next">
             <action type="update" dev="yourgod">
+                Implemented window.setTimeout(function, int) and window.setInterval(function, int)
+			</action>        
+            <action type="update" dev="yourgod">
                 HtmlOption.asText() now respects the label attribute as browsers do.
 			</action>        
             <action type="update" dev="mguillem" id="1437068">

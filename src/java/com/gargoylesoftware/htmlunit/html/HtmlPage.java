@@ -705,6 +705,8 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
      * Execute a Function in the given context.
      *
      * @param function The javascript Function to call.
@@ -716,7 +718,7 @@ public final class HtmlPage extends DomNode implements Page {
      * @return A ScriptResult which will contain both the current page (which may be different than
      * the previous page and a javascript result object.
      */
-    ScriptResult executeJavaScriptFunctionIfPossible(
+    public ScriptResult executeJavaScriptFunctionIfPossible(
             final Function function,
             final Scriptable thisObject,
             final Object[] args,
@@ -748,7 +750,8 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
-     * Internal use only.
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
      * @param srcAttribute The source attribute from the script tag.
      * @param charset The charset attribute from the script tag.
      */
@@ -773,7 +776,9 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
-     * Internal use only.  Return true if a script with the specified type and language attributes
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>  
+     * 
+     * Return true if a script with the specified type and language attributes
      * is actually JavaScript.
      * According to <a href="http://www.w3.org/TR/REC-html40/types.html#h-6.7">W3C recommendation</a>
      * are content types case insensitive.
@@ -1366,7 +1371,8 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
-     * For internal used only
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
      * @param node the node that has just been added to the document.
      */
     void notifyNodeAdded(final DomNode node) {
@@ -1381,7 +1387,8 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
-     * For internal used only
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
      * @param node the node that has just been removed from the tree
      */
     void notifyNodeRemoved(final DomNode node) {

@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.StatusHandler;
+import com.gargoylesoftware.htmlunit.ThreadManager;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -760,6 +761,21 @@ public class WindowTest extends WebTestCase {
         assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
         assertEquals(Collections.singletonList("Yo!"), collectedAlerts);
     }
+    
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testSetTimeoutByReference() throws Exception {
+        final String content = "<html><body><script language='JavaScript'>"
+            + "function doTimeout() { alert('Yo!'); }"
+            + "window.setTimeout(doTimeout,1);"
+            + "</script></body></html>";
+
+        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
+        assertEquals(Collections.singletonList("Yo!"), collectedAlerts);
+    }    
 
     /**
      * Just tests that setting and clearing an interval doesn't throw
@@ -778,6 +794,39 @@ public class WindowTest extends WebTestCase {
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
         loadPage(content, collectedAlerts);
     }
+    
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testSetIntervalFunctionReference() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    var threadID;\n"
+            + "    function test() {\n"
+            + "      threadID = setInterval(doAlert, 100);\n"
+            + "    }\n"
+            + "    var iterationNumber=0;"
+            + "    function doAlert() {\n"
+            + "      alert('blah');\n"
+            + "      if (++iterationNumber >= 3) {"
+            + "        clearInterval(threadID);"
+            + "      }"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        final ThreadManager threadManager = page.getEnclosingWindow().getThreadManager();
+        threadManager.joinAll(1000);
+        assertEquals(0, threadManager.activeCount());
+        assertEquals(Collections.nCopies(3, "blah"), collectedAlerts);
+    }    
 
     /**
      * Test that a script started by a timer is stopped if the page that started it
