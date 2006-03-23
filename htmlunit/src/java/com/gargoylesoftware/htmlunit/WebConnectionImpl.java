@@ -48,11 +48,24 @@ import org.apache.commons.httpclient.HttpState;
  * retrieval/submission.
  *
  * @version  $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Marc Guillemot
  */
-public interface WebConnection {
+abstract class WebConnectionImpl implements WebConnection {
+
+    private final WebClient webClient_;
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
+     * Creates a new web connection instance.
+     * @param webClient The WebClient that is using this connection.
+     */
+    public WebConnectionImpl( final WebClient webClient ) {
+        webClient_ = webClient;
+    }
+
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * 
@@ -61,7 +74,7 @@ public interface WebConnection {
      * @return The response to the request defined by the specified request settings.
      * @exception IOException If an IO error occurs.
      */
-    WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException;
+    public abstract WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException;
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -69,8 +82,9 @@ public interface WebConnection {
      * Return the web client.
      * @return The web client.
      */
-    WebClient getWebClient();
-
+    public final WebClient getWebClient() {
+        return webClient_;
+    }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -78,6 +92,6 @@ public interface WebConnection {
      * Return the {@link HttpState} that is being used.
      * @return the state.
      */
-    HttpState getState();
+    public abstract HttpState getState();
 
 }

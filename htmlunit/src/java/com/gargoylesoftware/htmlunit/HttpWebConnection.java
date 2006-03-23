@@ -83,7 +83,7 @@ import org.apache.commons.logging.impl.SimpleLog;
  * @author Marc Guillemot
  * @author Brad Clarke
  */
-public class HttpWebConnection extends WebConnection {
+public class HttpWebConnection extends WebConnectionImpl {
     private HttpClient httpClient_;
 
     private String virtualHost_ = null;

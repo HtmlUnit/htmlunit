@@ -40,13 +40,14 @@ package com.gargoylesoftware.htmlunit.util;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
-import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -70,7 +71,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * @version  $Revision$
  * @author Marc Guillemot
  */
-public class DebuggingWebConnection extends WebConnection {
+public class DebuggingWebConnection extends WebConnectionWrapper {
     private static final Log LOG = LogFactory.getLog(DebuggingWebConnection.class);
 
     private int counter_ = 0;
@@ -88,7 +89,7 @@ public class DebuggingWebConnection extends WebConnection {
     public DebuggingWebConnection(final WebConnection webConnection,
             final String reportBaseName) throws IOException {
 
-        super(webConnection.getWebClient());
+        super(webConnection);
 
         wrappedWebConnection_ = webConnection;
         reportBaseName_ = reportBaseName;
@@ -102,26 +103,17 @@ public class DebuggingWebConnection extends WebConnection {
      */
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
         final WebResponse response = wrappedWebConnection_.getResponse(webRequestSettings);
-        saveResponse(response, webRequestSettings.getSubmitMethod());
+        saveResponse(response, webRequestSettings);
         return response;
     }
 
     /**
-     * Calls the wrapped webConnection.
-     * {@inheritDoc}
-     */
-    public HttpState getState() {
-        return wrappedWebConnection_.getState();
-    }
-
-
-    /**
      * Save the response content in the temp dir and add it to the summary page
      * @param response the response to save
-     * @param submitMethod the method used to get the response
+     * @param settings the settings used to get the response
      * @throws IOException if a problem occurs writing the file
      */
-    private void saveResponse(final WebResponse response, final SubmitMethod submitMethod)
+    protected void saveResponse(final WebResponse response, final WebRequestSettings settings)
         throws IOException {
         counter_++;
         final String extension;
@@ -140,13 +132,37 @@ public class DebuggingWebConnection extends WebConnection {
         LOG.info("Created file " + f.getAbsolutePath()
                 + " for response " + counter_ + ": " + response.getUrl());
 
+        final StringBuffer buffer = new StringBuffer();
+        buffer.append("tab[tab.length] = {code: " + response.getStatusCode() + ", ");
+        buffer.append("fileName: '" + f.getName() + "', ");
+        buffer.append("contentType: '" + response.getContentType() + "', ");
+        buffer.append("method: '" + settings.getSubmitMethod().getName() + "', ");
+        buffer.append("url: '" + response.getUrl() + ",");
+        buffer.append("headers: " + nameValueListToJsMap(response.getResponseHeaders()));
+        buffer.append("'};\n");
         final FileWriter jsFileWriter = new FileWriter(javaScriptFile_, true);
-        jsFileWriter.write("tab[tab.length] = {code: " + response.getStatusCode() + ", "
-                + "fileName: '" + f.getName() + "', "
-                + "contentType: '" + response.getContentType() + "', "
-                + "method: '" + submitMethod.getName() + "', "
-                + "url: '" + response.getUrl() + "'}\n");
+        jsFileWriter.write(buffer.toString());
+
         jsFileWriter.close();
+    }
+
+    /**
+     * Produces a String that will produce a JS map like "{'key1': 'value1', 'key 2': 'value2'}"
+     * @param headers a list of {@link NameValuePair} 
+     * @return the JS String
+     */
+    static String nameValueListToJsMap(final List headers) {
+        if (headers == null || headers.isEmpty()) {
+            return "{}";
+        }
+        final StringBuffer buffer = new StringBuffer("{");
+        for (final Iterator iter=headers.iterator(); iter.hasNext();) {
+            final NameValuePair header = (NameValuePair) iter.next();
+            buffer.append("\"" + header.getName() + "\": \"" + header.getValue() + "\", ");
+        }
+        buffer.delete(buffer.length()-2, buffer.length());
+        buffer.append("}");
+        return buffer.toString();
     }
 
     /**
