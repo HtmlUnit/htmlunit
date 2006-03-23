@@ -68,9 +68,9 @@ public class Event extends SimpleScriptable {
     /**
      * Creates a new event instance.
      * @param domNode The DOM node that triggered the event.
-     * @param target The (original) target of the event.
      */
-    public Event(final DomNode domNode, final Object target) {
+    public Event(final DomNode domNode) {
+        final Object target = domNode.getScriptObject();
         srcElement_ = target;
         target_ = target;
         currentTarget_ = target;
@@ -82,10 +82,10 @@ public class Event extends SimpleScriptable {
     /**
      * Creates a new event instance for a keypress event.
      * @param domNode the DOM node that triggered the event.
-     * @param target The (original) target of the event.
      * @param keyCode The key code associated with the event.
      */
-    public Event(final DomNode domNode, final Object target, final int keyCode) {
+    public Event(final DomNode domNode, final int keyCode) {
+        final Object target = domNode.getScriptObject();
         srcElement_ = target;
         target_ = target;
         currentTarget_ = target;
