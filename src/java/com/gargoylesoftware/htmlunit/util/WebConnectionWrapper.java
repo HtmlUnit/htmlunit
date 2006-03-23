@@ -70,24 +70,24 @@ public class WebConnectionWrapper implements WebConnection {
     }
 
     /**
+     * {@inheritDoc}
      * The default behavior of this method is to return getResponse() on the wrapped connection object.
-     * @see WebConnection#getResponse
      */
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
         return wrappedWebConnection_.getResponse(webRequestSettings);
     }
 
     /**
+     * {@inheritDoc}
      * The default behavior of this method is to return getState() on the wrapped connection object.
-     * @see WebConnection#getState()
      */
     public HttpState getState() {
         return wrappedWebConnection_.getState();
     }
 
     /**
+     * {@inheritDoc}
      * The default behavior of this method is to return getWebClient() on the wrapped connection object.
-     * @see WebConnection#getWebClient()
      */
     public WebClient getWebClient() {
         return wrappedWebConnection_.getWebClient();
