@@ -80,15 +80,9 @@ public class HtmlAreaTest extends WebTestCase {
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(
-            URL_FIRST, firstContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_SECOND, secondContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST );
-        webConnection.setResponse(
-            URL_THIRD, thirdContent,
-            200, "OK", "text/html", Collections.EMPTY_LIST );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
 
         client.setWebConnection( webConnection );
         return client;
