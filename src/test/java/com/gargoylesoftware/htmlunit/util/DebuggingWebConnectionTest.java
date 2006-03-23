@@ -35,49 +35,53 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.util;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.httpclient.NameValuePair;
+
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
- * 
- * An object that handles the actual communication portion of page
- * retrieval/submission.
+ * Tests for {@link DebuggingWebConnection}.
  *
- * @version  $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author Daniel Gredler
+ * @version $Revision$
  * @author Marc Guillemot
  */
-public interface WebConnection {
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
-     * Submits a request and retrieves a response.
-     * @param webRequestSettings Settings to make the request with.
-     * @return The response to the request defined by the specified request settings.
-     * @exception IOException If an IO error occurs.
-     */
-    WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException;
+public class DebuggingWebConnectionTest extends WebTestCase {
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
-     * Return the web client.
-     * @return The web client.
+     * Creates a new instance.
+     * @param name The name of the new instance.
      */
-    WebClient getWebClient();
-
+    public DebuggingWebConnectionTest(final String name) {
+        super( name );
+    }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
-     * Return the {@link HttpState} that is being used.
-     * @return the state.
+     * @throws Exception If the test fails.
      */
-    HttpState getState();
+    public void testNameValueListToJsMap() throws Exception {
+        assertEquals("{}", DebuggingWebConnection.nameValueListToJsMap(null));
+        assertEquals("{}", DebuggingWebConnection.nameValueListToJsMap(Collections.EMPTY_LIST));
+
+        List list = Collections.singletonList(new NameValuePair("name", "value"));
+        assertEquals("{\"name\": \"value\"}",
+                DebuggingWebConnection.nameValueListToJsMap(list));
+
+        list = Collections.singletonList(new NameValuePair("na me", "value"));
+        assertEquals("{\"na me\": \"value\"}",
+                DebuggingWebConnection.nameValueListToJsMap(list));
+
+        list = new ArrayList();
+        list.add(new NameValuePair("na me", "value1"));
+        list.add(new NameValuePair("key", "value 2"));
+        list.add(new NameValuePair("key 2", "value 3"));
+        final String expected = "{'na me': 'value1', 'key': 'value 2', 'key 2': 'value 3'}".replaceAll("'", "\"");
+        assertEquals(expected, DebuggingWebConnection.nameValueListToJsMap(list));
+    }
 
 }

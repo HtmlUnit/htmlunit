@@ -35,49 +35,62 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.util;
 
 import java.io.IOException;
 
 import org.apache.commons.httpclient.HttpState;
 
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebConnection;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebResponse;
+
 /**
- * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
- * 
- * An object that handles the actual communication portion of page
- * retrieval/submission.
- *
- * @version  $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author Daniel Gredler
+ * Provides a convenient implementation of the WebConneciton interface that can be subclassed by developers 
+ * wishing to adapt a particular WebConnection. 
+ * This class implements the Wrapper or Decorator pattern. Methods default to calling through to the wrapped 
+ * web connection object.
+ * @version $Revision$
  * @author Marc Guillemot
  */
-public interface WebConnection {
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
-     * Submits a request and retrieves a response.
-     * @param webRequestSettings Settings to make the request with.
-     * @return The response to the request defined by the specified request settings.
-     * @exception IOException If an IO error occurs.
-     */
-    WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException;
+public class WebConnectionWrapper implements WebConnection {
+    private final WebConnection wrappedWebConnection_;
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
-     * Return the web client.
-     * @return The web client.
+     * Constructs a WebConnection object wrapping provided WebConnection.
+     * @param webConnection the webConnection that does the real work
+     * @throws IllegalArgumentException if the connection is <code>null</code>
      */
-    WebClient getWebClient();
-
+    public WebConnectionWrapper(final WebConnection webConnection) throws IllegalArgumentException {
+        if (webConnection == null) {
+            throw new IllegalArgumentException("Wrapped connection can't be null");
+        }
+        wrappedWebConnection_ = webConnection;
+    }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
-     * Return the {@link HttpState} that is being used.
-     * @return the state.
+     * The default behavior of this method is to return getResponse() on the wrapped connection object.
+     * @see WebConnection#getResponse
      */
-    HttpState getState();
+    public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
+        return wrappedWebConnection_.getResponse(webRequestSettings);
+    }
+
+    /**
+     * The default behavior of this method is to return getState() on the wrapped connection object.
+     * @see WebConnection#getState()
+     */
+    public HttpState getState() {
+        return wrappedWebConnection_.getState();
+    }
+
+    /**
+     * The default behavior of this method is to return getWebClient() on the wrapped connection object.
+     * @see WebConnection#getWebClient()
+     */
+    public WebClient getWebClient() {
+        return wrappedWebConnection_.getWebClient();
+    }
 
 }

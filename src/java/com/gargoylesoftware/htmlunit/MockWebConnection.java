@@ -59,7 +59,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Marc Guillemot
  * @author Brad Clarke
  */
-public class MockWebConnection extends WebConnection {
+public class MockWebConnection extends WebConnectionImpl {
     private final Map responseMap_ = new HashMap(10);
     private WebResponseData defaultResponse_;
 
