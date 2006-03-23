@@ -262,4 +262,16 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
             removeAttribute("selected");
         }
     }
+
+    /**
+     * {@inheritDoc}
+     * This implementation will show the label attribute before the 
+     * content of the tag if the attribute exists.
+     */
+    public String asText() {
+        if (getLabelAttribute() != ATTRIBUTE_NOT_DEFINED){
+            return getLabelAttribute();
+        }
+        return super.asText();
+    }
 }
