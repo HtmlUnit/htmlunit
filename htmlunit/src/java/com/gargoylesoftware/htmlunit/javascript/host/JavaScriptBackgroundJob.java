@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -59,6 +60,7 @@ class JavaScriptBackgroundJob implements Runnable {
     private final int timeout_;
     private final String script_;
     private final boolean loopForever_;
+    private final Function function_;
 
     JavaScriptBackgroundJob(final Window window, final int timeout, final String script,
             final boolean loopForever) {
@@ -66,13 +68,27 @@ class JavaScriptBackgroundJob implements Runnable {
         timeout_ = timeout;
         loopForever_ = loopForever;
         script_ = script;
+        function_ = null;
+    }
+    JavaScriptBackgroundJob(final Window window, final int timeout, final Function function,
+            final boolean loopForever) {
+        window_ = window;
+        timeout_ = timeout;
+        loopForever_ = loopForever;
+        script_ = null;
+        function_ = function;
     }
     public void run() {
         final Page page = window_.getWebWindow().getEnclosedPage();
         try {
             do {
                 Thread.sleep(timeout_);
-                getLog().debug("Executing JavaScriptBackgroundJob: " + script_);
+                if (function_ == null) {
+                    getLog().debug("Executing JavaScriptBackgroundJob: " + script_);
+                }
+                else {
+                    getLog().debug("Executing JavaScriptBackgroundJob: (function reference) ");
+                }
 
                 final WebWindow webWindow = window_.getWebWindow();
                 // test that the window is always opened and the page the same
@@ -86,11 +102,20 @@ class JavaScriptBackgroundJob implements Runnable {
                 }
 
                 final HtmlPage htmlPage = (HtmlPage) window_.getWebWindow().getEnclosedPage();
-                htmlPage.executeJavaScriptIfPossible(
-                        script_,
-                        "JavaScriptBackgroundJob",
-                        true,
-                        htmlPage.getDocumentElement());
+                if (function_ == null) {
+                    htmlPage.executeJavaScriptIfPossible(
+                            script_,
+                            "JavaScriptBackgroundJob",
+                            true,
+                            htmlPage.getDocumentElement());
+                }
+                else {
+                    htmlPage.executeJavaScriptFunctionIfPossible(
+                            function_,
+                            window_,
+                            new Object[0],
+                            htmlPage.getDocumentElement());
+                }
             }
             while (loopForever_);
         }

@@ -234,22 +234,57 @@ public class Window extends SimpleScriptable {
             return null;
         }
     }
-
+    
+    /**
+     * Makes the job object for setTimeout and setInterval
+     * 
+     * @param codeToExec either a Function or a String of the javascript code
+     * @param timeout time to wait
+     * @param thisWindow the window to associate the thread with
+     * @param loopForever if the thread should keep looping (setTimeout vs setInterval)
+     * @return
+     */
+    private static JavaScriptBackgroundJob createJavaScriptBackgroundJob(final Object codeToExec,
+            final int timeout, final Window thisWindow, final boolean loopForever) {
+        if (codeToExec == null) {
+            throw Context.reportRuntimeError("Function not provided");
+        }
+        else if (codeToExec instanceof String) {
+            final String scriptString = (String) codeToExec;
+            return new JavaScriptBackgroundJob(thisWindow, timeout, scriptString, loopForever);
+        }
+        else if (codeToExec instanceof Function) {
+            final Function scriptFunction = (Function) codeToExec;
+            return new JavaScriptBackgroundJob(thisWindow, timeout, scriptFunction, loopForever);
+        }
+        else {
+            throw Context.reportRuntimeError("Unknown type for function");
+        }
+    }
 
     /**
      * Set a chunk of javascript to be invoked at some specified time later.
      * The invocation occurs only if the window is opened after the delay
      * and does not contain an other page than the one that originated the setTimeout. 
-     *
-     * @param script the code to execute
-     * @param timeout the delay in milliseconds to wait before executing the code
+     * 
+     * JavaScript param 1: The code to execute, either a String or a Function.
+     * JavaScript param 2: the delay in milliseconds to wait before executing the code.
+     * 
+     * @param context The javascript Context
+     * @param scriptable The object that the function was called on.
+     * @param args The arguments passed to the function.
+     * @param function The function object that was invoked.
      * @return the id of the created timer
      */
-    public int jsxFunction_setTimeout(final String script, final int timeout) {
-        final Runnable setTimeoutThread = new JavaScriptBackgroundJob(this, timeout, script, false);
-        final int id = getWebWindow().getThreadManager().startThread(setTimeoutThread);
+    public static int jsxFunction_setTimeout(final Context context, final Scriptable scriptable,
+            final Object[] args, final Function function) {
+        final Window thisWindow = (Window) scriptable;
+        final Object codeToExec = getObjectArg(0, args, null);
+        final int timeout = getIntArg(1, args, 0);
+        final Runnable job = createJavaScriptBackgroundJob(codeToExec, timeout, thisWindow, false);
+        final int id = thisWindow.getWebWindow().getThreadManager().startThread(job);
         return id;
-    }
+    }        
 
     /**
      * Cancels a time-out previously set with the <tt>setTimeout</tt> method.
@@ -710,16 +745,27 @@ public class Window extends SimpleScriptable {
     /**
      * Set a chunk of javascript to be invoked each time a specified number of milliseconds has elapsed
      * Current implementation does nothing.
-
-     * @param script the code to execute
-     * @param timeout the delay in milliseconds to wait before executing the code
-     * @return the id of the created interval
+     * 
+     * JavaScript param 1: The code to execute, either a String or a Function.
+     * JavaScript param 2: the delay in milliseconds to wait before executing the code.
+     * 
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp">
      * MSDN documentation</a>
+     * 
+     * @param context The javascript Context
+     * @param scriptable The object that the function was called on.
+     * @param args The arguments passed to the function.
+     * @param function The function object that was invoked.
+     * @return the id of the created interval
      */
-    public int jsxFunction_setInterval(final String script, final int timeout) {
-        final Runnable setTimeoutThread = new JavaScriptBackgroundJob(this, timeout, script, true);
-        final int id = getWebWindow().getThreadManager().startThread(setTimeoutThread);
+    public static int jsxFunction_setInterval(final Context context, final Scriptable scriptable,
+            final Object[] args, final Function function) {
+        final Window thisWindow = (Window) scriptable;
+        final Object codeToExec = getObjectArg(0, args, null);
+        final int timeout = getIntArg(1, args, 0);
+
+        final Runnable job = createJavaScriptBackgroundJob(codeToExec, timeout, thisWindow, true);
+        final int id = thisWindow.getWebWindow().getThreadManager().startThread(job);
         return id;
     }
 
