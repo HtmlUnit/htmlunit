@@ -1018,13 +1018,13 @@ public class WebClient {
         Assert.notNull("webWindow", webWindow);
         webWindows_.remove(webWindow);
 
-        if( currentWindow_ == webWindow ) {
+        if( getCurrentWindow() == webWindow ) {
             if( webWindows_.size() == 0 ) {
                 // Create a new one - we always have to have at least one window.
-                currentWindow_ = new TopLevelWindow("", this);
+                setCurrentWindow(new TopLevelWindow("", this));
             }
             else {
-                currentWindow_ = (WebWindow)webWindows_.get(0);
+                setCurrentWindow((WebWindow)webWindows_.get(0));
             }
         }
         fireWindowClosed(new WebWindowEvent(webWindow, WebWindowEvent.CLOSE, webWindow.getEnclosedPage(), null));
