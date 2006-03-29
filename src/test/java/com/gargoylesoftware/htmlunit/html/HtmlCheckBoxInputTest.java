@@ -148,4 +148,25 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
         checkBox.setChecked(true);
         assertEquals("checked", checkBox.asText());
     }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testOnchangeFires() throws Exception {
+        final String content = "<html><head><title>foo</title>"
+            + "</head><body>"
+            + "<form>"
+            + "<input type='checkbox' id='chkbox' onchange='alert(\"foo\");' />"
+            + "</form>"
+            + "</body></html>";
+
+        final List expectedAlerts = Arrays.asList(new String[] {"foo"});
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlCheckBoxInput checkbox = (HtmlCheckBoxInput) page.getHtmlElementById("chkbox");
+        checkbox.setChecked(true);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }        
 }
