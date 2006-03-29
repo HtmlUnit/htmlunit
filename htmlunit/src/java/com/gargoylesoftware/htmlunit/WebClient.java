@@ -313,15 +313,6 @@ public class WebClient {
 
         getLog().debug("Get page for window named '" + webWindow.getName() + "', using " + parameters);
 
-        // If the request settings don't specify a custom proxy, use the default client proxy...
-        if( parameters.getProxyHost() == null ) {
-            // ...unless the host needs to bypass the configured client proxy!
-            if( ! shouldBypassProxy( parameters.getURL().getHost() ) ) {
-                parameters.setProxyHost( proxyHost_ );
-                parameters.setProxyPort( proxyPort_ );
-            }
-        }
-
         final WebResponse webResponse;
         final String protocol = parameters.getURL().getProtocol();
         if (protocol.equals("javascript")) {
@@ -1342,6 +1333,15 @@ public class WebClient {
         Assert.notNull("parameters", parameters);
 
         getLog().debug("Load response for " + url.toExternalForm());
+
+        // If the request settings don't specify a custom proxy, use the default client proxy...
+        if( webRequestSettings.getProxyHost() == null ) {
+            // ...unless the host needs to bypass the configured client proxy!
+            if( ! shouldBypassProxy( webRequestSettings.getURL().getHost() ) ) {
+                webRequestSettings.setProxyHost( proxyHost_ );
+                webRequestSettings.setProxyPort( proxyPort_ );
+            }
+        }
 
         //TODO: this should probably be handled inside of WebRequestSettings and
         // could cause a bug if anything above here reads the url again

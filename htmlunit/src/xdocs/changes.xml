@@ -7,15 +7,18 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem" id="1460444">
+                Proxy settings now respected to load external JavaScript files.
+			</action>
             <action type="update" dev="yourgod">
         		HtmlCheckBoxInput.setChecked() now fires the JavaScript onchange event.
-			</action>        
+			</action>
             <action type="update" dev="yourgod">
                 Implemented window.setTimeout(function, int) and window.setInterval(function, int)
-			</action>        
+			</action>
             <action type="update" dev="yourgod">
                 HtmlOption.asText() now respects the label attribute as browsers do.
-			</action>        
+			</action>
             <action type="update" dev="mguillem" id="1437068">
 				Encode path part of urls containing illegal characters.
 			</action>
