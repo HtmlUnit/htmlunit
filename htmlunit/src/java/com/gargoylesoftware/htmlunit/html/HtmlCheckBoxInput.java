@@ -99,6 +99,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
         else {
             removeAttribute( "checked" );
         }
+        getPage().executeOnChangeHandlerIfAppropriate(this);
     }
 
     /**
