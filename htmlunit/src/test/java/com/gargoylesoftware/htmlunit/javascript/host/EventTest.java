@@ -288,4 +288,30 @@ public class EventTest extends WebTestCase {
 
     }
 
+
+    /**
+     * Test that the event handler is correctly parsed even if it contains comments.
+     * It seems that it is correctly parsed and stored in non public field 
+     * org.apache.xerces.util.XMLAttributesImpl#nonNormalizedValue
+     * but that getValue(i) returns a normalized value. Furthermore access seems not possible as
+     * we just see an org.apache.xerces.parsers.AbstractSAXParser.AttributesProxy
+     * @throws Exception if the test fails
+     */
+    public void testCommentInEventHandlerDeclaration() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content
+            = "<html><head></head>"
+            + "<body onload='alert(1);\n"
+            + "// a comment within the onload declaration\n"
+            + "alert(2)'>"
+            + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        final String[] expectedAlerts = { "1", "2" };
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
