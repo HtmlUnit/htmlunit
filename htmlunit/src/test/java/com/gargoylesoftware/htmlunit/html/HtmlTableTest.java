@@ -44,7 +44,7 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- *  Tests for HtmlTable
+ * Tests for HtmlTable
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -74,7 +74,7 @@ public class HtmlTableTest extends WebTestCase {
             + "</table>"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        
+
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
 
         final HtmlTableCell cell1 = table.getCellAt( 0, 0 );
@@ -90,6 +90,42 @@ public class HtmlTableTest extends WebTestCase {
         final HtmlTableCell cell4 = table.getCellAt( 0, 2 );
         assertEquals( "cell4 contents", "cell4", cell4.asText() );
         assertSame( "cells (0,2) and (1,2)", cell4, table.getCellAt( 1, 2 ) );
+    }
+
+    /**
+     *  Test getCellAt(int,int) with colspan
+     *
+     * @exception  Exception If the test fails
+     */
+    public void testGetCellAt() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<table id='table1'>"
+            + "<tr><td>row 1 col 1</td></tr>"
+            + "<tr><td>row 2 col 1</td><td>row 2 col 2</td></tr>"
+            + "<tr><td colspan='1'>row 3 col 1&2</td></tr>"
+            + "</table>"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
+
+        final HtmlTableCell cell1 = table.getCellAt( 0, 0 );
+        assertEquals( "cell (0,0) contents", "row 1 col 1", cell1.asText() );
+
+        final HtmlTableCell cell2 = table.getCellAt( 0, 1 );
+        assertEquals( "cell (0,1) contents", null, cell2 );
+
+        final HtmlTableCell cell3 = table.getCellAt( 1, 0 );
+        assertEquals( "cell (1,0) contents", "row 2 col 1", cell3.asText() );
+
+        final HtmlTableCell cell4 = table.getCellAt( 1, 1 );
+        assertEquals( "cell (1,1) contents", "row 2 col 2", cell4.asText() );
+
+        final HtmlTableCell cell5 = table.getCellAt( 2, 0 );
+        assertEquals( "cell (2, 0) contents", "row 3 col 1&2", cell5.asText() );
+        final HtmlTableCell cell6 = table.getCellAt( 2, 1 );
+        assertEquals( "cell (2, 1) contents", null, cell6 );
     }
 
 
@@ -109,7 +145,7 @@ public class HtmlTableTest extends WebTestCase {
             + "</table>"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        
+
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
 
         final HtmlTableCell cell = table.getCellAt( 99, 0 );
@@ -135,7 +171,7 @@ public class HtmlTableTest extends WebTestCase {
             + "</table>"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        
+
         final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
 
         final List expectedRows = new ArrayList();

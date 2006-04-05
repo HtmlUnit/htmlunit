@@ -7,6 +7,9 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem" id="1455390" due-to="Julien Henry">
+                Fixed HtmlTable.getCellAt when table contains a rowspan.
+			</action>
             <action type="update" dev="mguillem" id="1460444">
                 Proxy settings now respected to load external JavaScript files.
 			</action>

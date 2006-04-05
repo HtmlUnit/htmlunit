@@ -185,6 +185,9 @@
         <contributor>
         	<name>Brad Murray</name>
         </contributor>
+        <contributor>
+        	<name>Julien Henry</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
