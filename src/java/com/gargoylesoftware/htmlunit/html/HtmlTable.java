@@ -90,11 +90,10 @@ public class HtmlTable extends ClickableElement {
         final RowIterator rowIterator = getRowIterator();
         for(int rowNo = 0; rowIterator.hasNext(); rowNo++) {
             final HtmlTableRow row = rowIterator.nextRow();
-
             final HtmlTableRow.CellIterator cellIterator = row.getCellIterator();
             for(int colNo = 0; cellIterator.hasNext(); colNo++) {
                 final HtmlTableCell cell = cellIterator.nextCell();
-                if(rowNo + cell.getRowSpan() > rowIndex) {
+                if( rowNo <= rowIndex && rowNo + cell.getRowSpan() > rowIndex) {
                     if(colNo <= columnIndex && colNo + cell.getColumnSpan() > columnIndex) {
                         return cell;
                     }
