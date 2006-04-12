@@ -41,15 +41,17 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Iterator;
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
  * Wrapper for the html element "label".
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
  */
 public class HtmlLabel extends FocusableElement {
 
@@ -147,12 +149,22 @@ public class HtmlLabel extends FocusableElement {
     }
 
 
-    private FocusableElement getReferencedElement() {
-        final String elementId = getAttributeValue("for");
-        if (elementId.length() != 0) {
-            final HtmlElement element = getHtmlElementById(elementId);
-            if (element != null && element instanceof HtmlInput) {
-                return (FocusableElement) element;
+    /**
+     * Gets the element referenced by this label. That is the element in the page which id is 
+     * equal to the value of the for attribute of this label.
+     * @return the element, <code>null</code> if not found
+     */
+    public FocusableElement getReferencedElement() {
+        final String elementId = getForAttribute();
+        if (!ATTRIBUTE_NOT_DEFINED.equals(elementId)) {
+            try {
+                final HtmlElement element = getHtmlElementById(elementId);
+                if (element instanceof FocusableElement) {
+                    return (FocusableElement) element;
+                }
+            }
+            catch (final ElementNotFoundException e) {
+                return null;
             }
         }
         else {
@@ -166,7 +178,7 @@ public class HtmlLabel extends FocusableElement {
         }
         return null;
     }
-    
+
     /**
      * Clicks the label and propagates to the referenced element.
      * {@inheritDoc}
@@ -174,7 +186,7 @@ public class HtmlLabel extends FocusableElement {
     public Page click() throws IOException {
         // first the click on the label
         final Page page = super.click();
-        
+
         // not sure which page we should return
         final Page response;
 

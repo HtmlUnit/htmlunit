@@ -96,9 +96,9 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * may be the same window or it may be a freshly loaded one.
      */
     public Page setSelected( final boolean selected ) {
-        final HtmlSelect select = (HtmlSelect) getEnclosingElement("select");
+        final HtmlSelect select = getEnclosingSelect();
         if (select != null) {
-            return getEnclosingSelectOrDie().setSelectedAttribute(this, selected);
+            return select.setSelectedAttribute(this, selected);
         }
         else {
             // for instance from JS for an option created by document.createElement('option')
@@ -109,15 +109,12 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
 
-    private HtmlSelect getEnclosingSelectOrDie() {
-        DomNode parent = getParentNode();
-        while( parent != null ) {
-            if( parent instanceof HtmlSelect ) {
-                return (HtmlSelect)parent;
-            }
-            parent = parent.getParentNode();
-        }
-        throw new IllegalStateException("Can't find enclosing select element");
+    /**
+     * Gets the enclosing select of this option
+     * @return <code>null</code> if no select is found (for instance malformed html)
+     */
+    public HtmlSelect getEnclosingSelect() {
+        return (HtmlSelect) getEnclosingElement("select");
     }
 
 

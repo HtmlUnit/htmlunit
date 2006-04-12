@@ -83,4 +83,26 @@ public class HtmlLabelTest extends WebTestCase {
         label.click();
         assertFalse(checkBox.isChecked());
     }
+
+    /**
+     * 
+     * @throws Exception if the test fails
+     */
+    public void test_getReferencedElement() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + " <input type='checkbox' name='checkbox' id='testCheckbox'/>"
+            + " <label for='testCheckbox' id='testLabel1'>Check me</label>"
+            + " <label for='notExisting' id='testLabel2'>Check me too</label>"
+            + "</form></body></html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) page.getHtmlElementById("testCheckbox");
+
+        final HtmlLabel label = (HtmlLabel) page.getHtmlElementById("testLabel1");
+        assertSame(checkBox, label.getReferencedElement());
+        final HtmlLabel label2 = (HtmlLabel) page.getHtmlElementById("testLabel2");
+        assertNull(label2.getReferencedElement());
+    }
 }
