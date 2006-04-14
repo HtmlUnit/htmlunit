@@ -321,4 +321,14 @@ public class HttpWebConnectionTest extends BaseTestCase {
         webClient.getPage(new URL("http://localhost:12345/"));
         assertTrue("createHttpClient as not been called", tabCalled[0]);
     }
+
+    /**
+     * Was throwing a NPE on 14.04.06
+     * @throws Exception if the test fails
+     */
+    public void testStateAccess() throws Exception {
+
+        final WebClient webClient = new WebClient();
+        webClient.getWebConnection().getState();
+    }
 }

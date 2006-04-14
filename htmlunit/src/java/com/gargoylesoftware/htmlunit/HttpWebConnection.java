@@ -356,7 +356,7 @@ public class HttpWebConnection extends WebConnectionImpl {
      * @return The state.
      */
     public HttpState getState() {
-        return httpClient_.getState();
+        return getHttpClient().getState();
     }
 
     /**
