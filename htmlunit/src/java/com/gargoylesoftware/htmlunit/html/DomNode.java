@@ -292,7 +292,13 @@ public abstract class DomNode implements Cloneable {
         }
         while(childIterator.hasNext()) {
             final DomNode node = (DomNode)childIterator.next();
+            if (!(node instanceof DomText)) {
+                buffer.append(" ");
+            }
             buffer.append(node.asText());
+            if (!(node instanceof DomText)) {
+                buffer.append(" ");
+            }
         }
 
         return buffer.toString();
@@ -305,14 +311,14 @@ public abstract class DomNode implements Cloneable {
      * @param text The text to clean up.
      * @return The cleaned up text.
      */
-    private static String reduceWhitespace( final String text ) {
+    protected static String reduceWhitespace( final String text ) {
         final StringBuffer buffer = new StringBuffer( text.length() );
         final int length = text.length();
         boolean whitespace = false;
         for( int i = 0; i < length; ++i) {
             final char ch = text.charAt(i);
-            if( whitespace ) {
-                if( Character.isWhitespace(ch) == false ) {
+            if (whitespace) {
+                if (!Character.isWhitespace(ch)) {
                     buffer.append(ch);
                     whitespace = false;
                 }

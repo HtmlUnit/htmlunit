@@ -160,10 +160,10 @@ public class HtmlUnitXPathTest extends WebTestCase {
 
         final HtmlPage page = loadPage(content);
         assertEquals("foo", page.getTitleText());
-        
+
         final HtmlUnitXPath xpath = new HtmlUnitXPath("count(//select[@name='select1']/option)");
         assertEquals(3, ((Double) xpath.evaluate(page)).intValue());
-        
+
         final HtmlAnchor link = (HtmlAnchor) page.getAnchors().get(0);
         link.click();
         assertEquals(4, ((Double) xpath.evaluate(page)).intValue());
@@ -183,7 +183,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);
-        
+
         final XPath xpath = new HtmlUnitXPath("//img/@src");
         final List nameList = xpath.selectNodes(page);
         final List valueList = new ArrayList(nameList);
@@ -206,4 +206,21 @@ public class HtmlUnitXPathTest extends WebTestCase {
         CollectionUtils.transform(valueList, valueReader);
         assertEquals(expectedValue, valueList);
     }
+
+
+    /**
+     * Test if option/text() is cleaned like other text()
+     * @throws Exception if test fails
+     */
+    public void testOptionText() throws Exception {
+        final String content = "<html><head><title>Test page</title></head>\n"
+            + "<body><form name='foo'>"
+            + "<select name='test'><option value='1'>foo&nbsp;and&nbsp;foo</option></select>"
+            + "</form></body></html>";
+
+        final HtmlPage page = loadPage(content);
+        final HtmlUnitXPath xpath = new HtmlUnitXPath("string(//option)");
+        assertEquals("foo and foo", xpath.selectSingleNode(page));
+    }
+
 }
