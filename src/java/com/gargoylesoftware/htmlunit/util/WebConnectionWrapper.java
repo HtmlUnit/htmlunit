@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
- * Provides a convenient implementation of the WebConneciton interface that can be subclassed by developers 
+ * Provides a convenient implementation of the {@link WebConnection} interface that can be subclassed by developers 
  * wishing to adapt a particular WebConnection. 
  * This class implements the Wrapper or Decorator pattern. Methods default to calling through to the wrapped 
  * web connection object.
