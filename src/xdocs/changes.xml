@@ -8,6 +8,9 @@
     <body>
         <release version="next">
             <action type="update" dev="mguillem">
+                DomText.asText() now cleans up &amp;nbsp; and multiple blanks as other DomNodes do.
+			</action>
+            <action type="update" dev="mguillem">
                 Added facility methods HtmlOption.getEnclosingSelect() and HtmlLabel.getReferencedElement().
 			</action>
             <action type="update" dev="mguillem" id="1455390" due-to="Julien Henry">

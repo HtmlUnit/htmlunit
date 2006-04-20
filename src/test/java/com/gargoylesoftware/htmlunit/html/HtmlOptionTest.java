@@ -177,6 +177,7 @@ public class HtmlOptionTest extends WebTestCase {
             + "<option id='option1'>option1</option>"
             + "<option id='option2' label='Number Two'/>"
             + "<option id='option3' label='overridden'>Number Three</option>"
+            + "<option id='option4'>Number&nbsp;4</option>"
             + "</select>"
             + "</form></body></html>";
 
@@ -185,9 +186,11 @@ public class HtmlOptionTest extends WebTestCase {
         final HtmlOption option1 = (HtmlOption) page.getHtmlElementById("option1");
         final HtmlOption option2 = (HtmlOption) page.getHtmlElementById("option2");
         final HtmlOption option3 = (HtmlOption) page.getHtmlElementById("option3");
+        final HtmlOption option4 = (HtmlOption) page.getHtmlElementById("option4");
 
         assertEquals("option1", option1.asText());
         assertEquals("Number Two", option2.asText());
         assertEquals("overridden", option3.asText());
+        assertEquals("Number 4", option4.asText());
     }
 }

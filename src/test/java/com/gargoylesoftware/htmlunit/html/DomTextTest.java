@@ -60,9 +60,6 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAsText() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><body><span id='foo'>a b&nbsp;c  d &nbsp;e</span></body></html>";
 
         final HtmlPage page = loadPage(content);
