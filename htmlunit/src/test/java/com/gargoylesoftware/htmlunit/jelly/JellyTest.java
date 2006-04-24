@@ -35,15 +35,11 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit;
-
-import java.io.File;
+package com.gargoylesoftware.htmlunit.jelly;
 
 import junit.framework.Test;
-import junit.framework.TestSuite;
 
-import org.apache.commons.jelly.JellyContext;
-import org.apache.commons.jelly.XMLOutput;
+import org.apache.commons.jelly.tags.junit.JellyTestSuite;
 
 
 /**
@@ -52,16 +48,7 @@ import org.apache.commons.jelly.XMLOutput;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public class JellyTest extends WebTestCase {
-
-    /**
-     *  Create an instance
-     *
-     * @param  name The name of the test
-     */
-    public JellyTest( final String name ) {
-        super( name );
-    }
+public class JellyTest extends JellyTestSuite {
 
     /**
      * Return a suite of jelly tests.
@@ -70,16 +57,7 @@ public class JellyTest extends WebTestCase {
      * @throws Exception When bad things happen
      */
     public static Test suite() throws Exception {
-        final XMLOutput output = XMLOutput.createXMLOutput(System.out);
-        final File file = getFileObject("src/test/jelly/com/gargoylesoftware/htmlunit/WebClient.jelly");
-        final JellyContext context = new JellyContext().runScript(file, output);
-        final TestSuite answer = (TestSuite) context.getVariable("org.apache.commons.jelly.junit.suite");
-        if ( answer == null ) {
-            System.out.println( "Could not find a TestSuite created by Jelly for the script:" + file );
-            // return an empty test suite
-            return new TestSuite();
-        }
-        return answer;
+        return createTestSuite(JellyTest.class, "WebClient.jelly");
     }
     /**
      * Empty test method to stop warnings

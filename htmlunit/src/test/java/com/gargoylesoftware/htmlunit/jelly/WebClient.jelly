@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<test:suite 
+	xmlns:j="jelly:core" 
+	xmlns:test="jelly:junit"
+	xmlns:x="jelly:xml"
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="jelly:com.gargoylesoftware.htmlunit.jelly.HtmlUnitTagLibrary">
+
+    <test:case name="testGetPage_insideWebClientTag">
+	    <h:webClient browserVersion="INTERNET_EXPLORER_6_0">
+	    	<h:mockWebConnection>
+	    		<h:mockResponse url="http://first">
+	    			<html><head><title>first</title></head><body></body></html>
+	    		</h:mockResponse>
+	    	</h:mockWebConnection>
+	    	
+	        <h:getPage method="get" var="page1" uri="http://first"/>
+	        <test:assertEquals expected="first" actual="${page1.titleText}"/>
+	    </h:webClient>
+    </test:case>
+    
+    <test:case name="testGetPage_outsideWebClientTag">
+	    <h:webClient var="webClient1">
+	    	<h:mockWebConnection>
+	    		<h:mockResponse url="http://second">
+	    			<html><head><title>second</title></head><body></body></html>
+	    		</h:mockResponse>
+	    	</h:mockWebConnection>
+	    </h:webClient>
+	    
+        <h:getPage method="get" var="page2" uri="http://second" webclient="webClient1"/>
+	    <test:assertEquals expected="second" actual="${page2.titleText}"/>
+    </test:case>
+
+    <test:case name="testBrowserVersion">
+	    <h:webClient var="webClient1" browserVersion="MOZILLA_1_0"/>
+	    <test:assertEquals expected="Netscape" actual="${webClient1.browserVersion.applicationName}"/>
+    </test:case>
+
+    <test:case name="testXmlVarAttribute">
+	    <h:webClient var="webClient1">
+	    	<h:mockWebConnection>
+	    		<h:mockResponse url="http://first">
+	    			<html><head><title>first</title></head><body></body></html>
+	    		</h:mockResponse>
+	    	</h:mockWebConnection>
+	    </h:webClient>
+	    
+        <h:getPage method="get" var="page1" uri="http://first" webclient="webClient1"/>
+        <!--h:select var="title" xpath="string($page1/html/head/title)"/>
+        <test:assertEquals expected="first" actual="${title}"/-->
+    </test:case>
+
+</test:suite>
