@@ -254,7 +254,11 @@
               <ant:include name="**/package.html"/>
               <ant:include name="LICENSE.txt"/>
               <ant:exclude name="target/**"/>
+              <ant:exclude name="ant-target/**"/>
+              <ant:exclude name="ant-jars/**"/>
+              <ant:exclude name="build_eclipse/**"/>
               <ant:exclude name="build.properties"/>
+              <ant:exclude name="checkstyle.properties"/>
             </ant:fileset>
          </ant:copy>
          <ant:replace 
