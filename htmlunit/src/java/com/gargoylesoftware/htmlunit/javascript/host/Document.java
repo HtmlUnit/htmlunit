@@ -570,6 +570,22 @@ public final class Document extends NodeImpl {
         return getScriptableFor(((HtmlPage)getDomNodeOrDie()).getDocumentElement());
     }
 
+    /**
+     * Get the window in which this document is contained.
+     * @return the window
+     */
+    public Object jsxGet_defaultView() {
+        return getWindow();
+    }
+
+
+    /**
+     * Get the window in which this document is contained.
+     * @return the window
+     */
+    public Object jsxGet_parentWindow() {
+        return getWindow();
+    }
 
     /**
      * Create a new HTML element with the given tag name.

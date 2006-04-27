@@ -109,6 +109,9 @@
                 url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cookie.asp"
                 descr="MSDN documentation"/>
         </property>
+        <property name="defaultView" readable="true" writable="false">
+            <browser name="Netscape"/>
+        </property>
         <property name="documentElement" readable="true" writable="false"/>
         <property name="domain" readable="true" writable="true">
             <doclink
@@ -136,6 +139,9 @@
             <doclink
                 url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_location.asp"
                 descr="MSDN documentation"/>
+        </property>
+        <property name="parentWindow" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
         </property>
         <property name="plugins" notImplemented="true" readable="true" writable="false">
             <javascript min-version="1.1"/>
@@ -385,6 +391,7 @@
         <property name="outerText" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
+        <property name="ownerDocument" readable="true" writable="false"/>
         <property name="parentElement" notImplemented="true" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>

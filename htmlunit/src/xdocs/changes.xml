@@ -8,6 +8,12 @@
     <body>
         <release version="next">
             <action type="update" dev="mguillem">
+                JavaScript: added support for properties defaultView (Mozilla) and parentWindow (IE) on Document.
+			</action>
+            <action type="update" dev="mguillem">
+                JavaScript: added support for property ownerDocument on HtmlElements.
+			</action>
+            <action type="update" dev="mguillem">
                 DomText.asText() now cleans up &amp;nbsp; and multiple blanks as other DomNodes do.
 			</action>
             <action type="update" dev="mguillem">

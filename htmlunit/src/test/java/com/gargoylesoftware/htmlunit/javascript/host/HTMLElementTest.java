@@ -36,6 +36,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +50,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
 /**
  * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.HTMLElement}.
  *
@@ -101,6 +103,33 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals("test", page.getTitleText());
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    public void testOwnerDocument() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "<script>\n"
+            + "function test()"
+            + "{"
+            + "    alert(document == document.body.ownerDocument);"
+            + "    alert(document == document.getElementById('foo').ownerDocument);"
+            + "}"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='foo'>bla</div>\n"
+            + "</body>\n"
+            + "</html>";
+        final List expectedAlerts = Arrays.asList(new String[]{ "true", "true" });
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
     /**
      * @throws Exception on test failure
      */
