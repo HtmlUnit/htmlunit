@@ -206,6 +206,14 @@ public class HTMLElement extends NodeImpl {
         return getHtmlElementOrDie().getTagName().toUpperCase();
     }
 
+    /**
+     * Return the owner document
+     * @return the document
+     */
+    public Object jsxGet_ownerDocument() {
+        return getWindow().jsxGet_document();
+    }
+
 
     /**
      * Return the value of the named attribute.

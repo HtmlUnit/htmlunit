@@ -2311,4 +2311,32 @@ public class DocumentTest extends WebTestCase {
         loadPage(BrowserVersion.MOZILLA_1_0, html, collectedAlerts);
         assertEquals(Collections.singletonList("not defined"), collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDefaultViewAndParentWindow() throws Exception {
+        final String html = "<html><head><script>"
+            + "function test(){"
+            + "    alert(document.defaultView == window);"
+            + "    alert(document.parentWindow == window);"
+            + "}"
+            + "</script></head><body onload='test()'>"
+            + "</body></html> ";
+
+        final List collectedAlerts = new ArrayList();
+
+        // test for Mozilla
+        final String[] expectedAlertsMoz = { "true", "false" };
+        createTestPageForRealBrowserIfNeeded(html, expectedAlertsMoz);
+        loadPage(BrowserVersion.MOZILLA_1_0, html, collectedAlerts);
+        assertEquals(expectedAlertsMoz, collectedAlerts);
+
+        // test for IE
+        final String[] expectedAlertsIE = { "false", "true"};
+        collectedAlerts.clear();
+        createTestPageForRealBrowserIfNeeded(html, expectedAlertsIE);
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, html, collectedAlerts);
+        assertEquals(expectedAlertsIE, collectedAlerts);
+    }
 }
