@@ -8,6 +8,9 @@
     <body>
         <release version="next">
             <action type="update" dev="mguillem">
+                Upgraded commons-httpclient to version 3.0.1.
+			</action>
+            <action type="update" dev="mguillem">
                 JavaScript: added support for properties defaultView (Mozilla) and parentWindow (IE) on Document.
 			</action>
             <action type="update" dev="mguillem">
