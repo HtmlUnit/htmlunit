@@ -814,7 +814,17 @@
         <property name="top" readable="true" writable="false"/>
         <property name="window" readable="true" writable="false"/>
         
+        <function name="addEventListener">
+            <doclink url="http://developer.mozilla.org/en/docs/DOM:element.addEventListener"
+                    descr="Mozilla documenation"/>
+            <browser name="Netscape"/>
+        </function>
         <function name="alert"/>
+        <function name="attachEvent">
+            <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/attachevent.asp"
+                    descr="MSDN documenation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
         <function name="blur"/>
         <function name="clearInterval">
             <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp"
@@ -823,6 +833,11 @@
         <function name="clearTimeout"/>
         <function name="close"/>
         <function name="confirm"/>
+        <function name="detachEvent">
+            <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/detachevent.asp"
+                    descr="MSDN documenation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
         <function name="execScript">
             <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/execscript.asp"
                     descr="MSDN documenation"/>
@@ -834,6 +849,11 @@
         <function name="open"/>
         <function name="prompt"/>
         <function name="print"/>
+        <function name="removeEventListener">
+            <doclink url="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener"
+                    descr="Mozilla documenation"/>
+            <browser name="Netscape"/>
+        </function>
         <function name="resizeTo"/>
         <function name="scroll"/>
         <function name="scrollBy"/>

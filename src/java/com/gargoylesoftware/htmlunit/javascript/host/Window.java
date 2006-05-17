@@ -41,9 +41,15 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.collections.Transformer;
+import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
@@ -97,6 +103,7 @@ public class Window extends SimpleScriptable {
     private Function onload_;
     private String status_ = "";
     private ElementArray frames_; // has to be a member to have equality (==) working
+    private Map eventHandlers_ = new HashMap();
 
     /**
      * Create an instance.  The rhino engine requires all host objects
@@ -234,7 +241,7 @@ public class Window extends SimpleScriptable {
             return null;
         }
     }
-    
+
     /**
      * Makes the job object for setTimeout and setInterval
      * 
@@ -242,7 +249,7 @@ public class Window extends SimpleScriptable {
      * @param timeout time to wait
      * @param thisWindow the window to associate the thread with
      * @param loopForever if the thread should keep looping (setTimeout vs setInterval)
-     * @return
+     * @return the job
      */
     private static JavaScriptBackgroundJob createJavaScriptBackgroundJob(final Object codeToExec,
             final int timeout, final Window thisWindow, final boolean loopForever) {
@@ -284,7 +291,7 @@ public class Window extends SimpleScriptable {
         final Runnable job = createJavaScriptBackgroundJob(codeToExec, timeout, thisWindow, false);
         final int id = thisWindow.getWebWindow().getThreadManager().startThread(job);
         return id;
-    }        
+    }
 
     /**
      * Cancels a time-out previously set with the <tt>setTimeout</tt> method.
@@ -606,6 +613,98 @@ public class Window extends SimpleScriptable {
         }
         else {
             return onload_;
+        }
+    }
+
+    /**
+     * Gets the listeners registered for the given type
+     * @param type the type of event
+     * @return a list of {@link Function}
+     */
+    public List getListeners(final String type) {
+        return (List) ObjectUtils.defaultIfNull(eventHandlers_.get(type), Collections.EMPTY_LIST);
+    }
+
+    /**
+     * Internal function adding an event listener
+     * @param type the event type to listen for (like "load")
+     * @param listener the event listener
+     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
+     * @return <code>true</code> if the listener has been added
+     */
+    protected boolean addEventListener(final String type, final Function listener, final boolean useCapture) {
+        List listeners = (List) eventHandlers_.get(type);
+        if (listeners == null) {
+            listeners = new Vector();
+            eventHandlers_.put(type, listeners);
+        }
+
+        if (listeners.contains(listener)) {
+            getLog().debug(type + " listener already registered, skipping it (" + listener + ")");
+            return false;
+        }
+        else {
+            listeners.add(listener);
+            return true;
+        }
+    }
+
+    /**
+     * Allows the registration of event listeners on the event target
+     * @param type the event type to listen for (like "load")
+     * @param listener the event listener
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/attachevent.asp">
+     * MSDN documentation</a>
+     * @return <code>true</code> if the listener has been added
+     */
+    public boolean jsxFunction_attachEvent(final String type, final Function listener) {
+        return addEventListener(StringUtils.substring(type, 2), listener, true);
+    }
+
+    /**
+     * Allows the registration of event listeners on the event target
+     * @param type the event type to listen for (like "onload")
+     * @param listener the event listener
+     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
+     * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.addEventListener">Mozilla documentation</a>
+     */
+    public void jsxFunction_addEventListener(final String type, final Function listener, final boolean useCapture) {
+        addEventListener(type, listener, useCapture);
+    }
+
+    /**
+     * Allows the removal of event listeners on the event target
+     * @param type the event type to listen for (like "onload")
+     * @param listener the event listener
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/detachevent.asp">
+     * MSDN documentation</a>
+     */
+    public void jsxFunction_detachEvent(final String type, final Function listener) {
+        removeEventListener(StringUtils.substring(type, 2), listener, true);
+    }
+
+    /**
+     * Allows the removal of event listeners on the event target
+     * @param type the event type to listen for (like "load")
+     * @param listener the event listener
+     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
+     * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener">Mozilla documentation</a>
+     */
+    public void jsxFunction_removeEventListener(final String type, final Function listener, final boolean useCapture) {
+        removeEventListener(type, listener, useCapture);
+    }
+
+    /**
+     * Allows the removal of event listeners on the event target
+     * @param type the event type to listen for (like "load")
+     * @param listener the event listener
+     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
+     * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener">Mozilla documentation</a>
+     */
+    protected void removeEventListener(final String type, final Function listener, final boolean useCapture) {
+        final List listeners = (List) eventHandlers_.get(type);
+        if (listeners != null) {
+            listeners.remove(listener);
         }
     }
 

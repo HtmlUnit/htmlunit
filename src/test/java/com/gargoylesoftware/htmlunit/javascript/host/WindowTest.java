@@ -761,7 +761,7 @@ public class WindowTest extends WebTestCase {
         assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
         assertEquals(Collections.singletonList("Yo!"), collectedAlerts);
     }
-    
+
     /**
      * @throws Exception If the test fails
      */
@@ -775,7 +775,7 @@ public class WindowTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
         assertEquals(Collections.singletonList("Yo!"), collectedAlerts);
-    }    
+    }
 
     /**
      * Just tests that setting and clearing an interval doesn't throw
@@ -794,7 +794,7 @@ public class WindowTest extends WebTestCase {
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
         loadPage(content, collectedAlerts);
     }
-    
+
     /**
      * @throws Exception If the test fails
      */
@@ -826,7 +826,7 @@ public class WindowTest extends WebTestCase {
         threadManager.joinAll(1000);
         assertEquals(0, threadManager.activeCount());
         assertEquals(Collections.nCopies(3, "blah"), collectedAlerts);
-    }    
+    }
 
     /**
      * Test that a script started by a timer is stopped if the page that started it
@@ -1565,6 +1565,63 @@ public class WindowTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testAddOnLoadEventListener() throws Exception {
+        final String content = "<html>\n"
+            + "<head><title>test</title>\n"
+            + "<script>\n"
+            + "  function test1() { alert('test1'); }\n"
+            + "  function test2() { alert('test2'); }\n"
+            + "  function test3() { alert('test3'); }\n"
+            + "alert(window.addEventListener == null);"
+            + "alert(window.attachEvent == null);"
+            + "alert(window.removeEventListener == null);"
+            + "alert(window.detachEvent == null);"
+            + "window.addEventListener('load', test1, true);"
+            + "window.addEventListener('load', test1, true);"
+            + "window.addEventListener('load', test2, true);"
+            + "window.addEventListener('load', test3, true);"
+            + "window.removeEventListener('load', test3, true);"
+            + "</script></head>\n"
+            + "<body onload='alert(\"onload\")'></body></html>\n";
+        final String[] expectedAlerts = {"false", "true", "false", "true", "test1", "test2", "onload"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testAttachOnLoadEvent() throws Exception {
+        final String content = "<html>\n"
+            + "<head><title>test</title>\n"
+            + "<script>\n"
+            + "  function test1() { alert('test1'); }\n"
+            + "  function test2() { alert('test2'); }\n"
+            + "  function test3() { alert('test3'); }\n"
+            + "alert(window.addEventListener == null);"
+            + "alert(window.attachEvent == null);"
+            + "alert(window.removeEventListener == null);"
+            + "alert(window.detachEvent == null);"
+            + "window.attachEvent('onload', test1);"
+            + "window.attachEvent('onload', test1);"
+            + "window.attachEvent('onload', test2);"
+            + "window.attachEvent('onload', test3);"
+            + "window.detachEvent('onload', test3);"
+            + "</script></head>\n"
+            + "<body onload='alert(\"onload\")'></body></html>\n";
+        final String[] expectedAlerts = {"true", "false", "true", "false", "test1", "test2", "onload"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
