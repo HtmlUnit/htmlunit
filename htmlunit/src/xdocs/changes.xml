@@ -8,6 +8,10 @@
     <body>
         <release version="next">
             <action type="update" dev="mguillem">
+                JavaScript: added addEventListener/attachEvent, removeEventListener/detachEvent to Window, 
+                allowing to register load events on a window.
+			</action>
+            <action type="update" dev="mguillem">
                 Upgraded commons-httpclient to version 3.0.1.
 			</action>
             <action type="update" dev="mguillem">
