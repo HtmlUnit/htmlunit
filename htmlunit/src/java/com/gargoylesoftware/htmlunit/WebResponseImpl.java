@@ -46,6 +46,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Simple base class for WebResponse
@@ -54,6 +58,7 @@ import org.apache.commons.httpclient.NameValuePair;
  * @author Brad Clarke
  */
 public class WebResponseImpl implements WebResponse {
+    private final Log log_ = LogFactory.getLog(WebResponseImpl.class);
     private URL url_;
     private SubmitMethod requestMethod_;
     private long loadTime_;
@@ -169,21 +174,30 @@ public class WebResponseImpl implements WebResponse {
 
     /**
      * {@inheritDoc}
-     * This redoes some of the work that HttpMethodBase will do for use but
-     * we must redo it for MockWebConnection to be consistent.
+     * If no charset is specified in headers, then try to guess it from the content.
+     * Currently only UTF-8 with BOM marker is detected this way.
+     * @see <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Wikipedia - Byte Order Mark</a>
+     * @return the charset, ISO-8859-1 if it can't be determined
      */
     public String getContentCharSet() {
         final String contentTypeHeader = getResponseHeaderValue("content-type");
-        if (contentTypeHeader == null) {
-            // Not technically legal but some servers don't return a content-type
-            return "ISO-8859-1";
+        String charSet = StringUtils.substringAfter(contentTypeHeader, "charset=");
+        if (StringUtils.isEmpty(charSet)) {
+            log_.debug("No charset specified in header, trying to guess it from content");
+            // try to guess it from content
+            final byte[] markerUTF8 = {(byte) 0xef, (byte) 0xbb, (byte) 0xbf};
+            if (ArrayUtils.isEquals(markerUTF8, ArrayUtils.subarray(responseData_.getBody(), 0, 3))) {
+                log_.debug("UTF-8 marker found");
+                charSet = "UTF-8";
+            }
+            else {
+                log_.debug("Nothing guessed, supposing that it is ISO-8859-1");
+                // default value as long as we are not able to do a better guess
+                charSet = "ISO-8859-1";
+            }
         }
-        final String prefix = "charset=";
-        final int index = contentTypeHeader.indexOf(prefix);
-        if (index == -1) {
-            return "ISO-8859-1";
-        }
-        return contentTypeHeader.substring(index + prefix.length());
+
+        return charSet;
     }
 
     /**

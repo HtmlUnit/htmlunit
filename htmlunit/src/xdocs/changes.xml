@@ -8,6 +8,9 @@
     <body>
         <release version="next">
             <action type="update" dev="mguillem">
+                Use Byte Order Mark to regognize UTF-8 content when no charset header is provided.
+			</action>
+            <action type="update" dev="mguillem">
                 JavaScript: added addEventListener/attachEvent, removeEventListener/detachEvent to Window, 
                 allowing to register load events on a window.
 			</action>
