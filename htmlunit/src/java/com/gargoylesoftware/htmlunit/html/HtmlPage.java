@@ -51,6 +51,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import org.apache.commons.httpclient.util.EncodingUtil;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -953,10 +954,17 @@ public final class HtmlPage extends DomNode implements Page {
 
         // onload for the window
         final Window jsWindow = (Window) getEnclosingWindow().getScriptObject();
-        if (jsWindow != null && jsWindow.jsxGet_onload() != null) {
+        if (jsWindow != null) {
             final ScriptEngine engine = getWebClient().getScriptEngine();
-            getLog().debug("Executing onload handler for the window");
-            engine.callFunction(this, jsWindow.jsxGet_onload(), jsWindow, new Object[]{}, null);
+            for (final Iterator iter = jsWindow.getListeners("load").iterator(); iter.hasNext(); ) {
+                final Function listener = (Function) iter.next();
+                getLog().debug("Executing load listener for the window: " + listener);
+                engine.callFunction(this, listener, jsWindow, ArrayUtils.EMPTY_OBJECT_ARRAY, null);
+            }
+            if (jsWindow.jsxGet_onload() != null) {
+                getLog().debug("Executing onload handler for the window");
+                engine.callFunction(this, jsWindow.jsxGet_onload(), jsWindow, ArrayUtils.EMPTY_OBJECT_ARRAY, null);
+            }
         }
 
         // the onload of the contained frames or iframe tags
