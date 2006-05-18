@@ -23,8 +23,8 @@
             following commands.  When prompted for a password, just press the enter key.
             </p>
             <source>
-cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/htmlunit login
-cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/htmlunit co htmlunit
+cvs -d:pserver:anonymous@htmlunit.cvs.sourceforge.net:/cvsroot/htmlunit login
+cvs -z3 -d:pserver:anonymous@htmlunit.cvs.sourceforge.net:/cvsroot/htmlunit co htmlunit
             </source>
         </section>
 
