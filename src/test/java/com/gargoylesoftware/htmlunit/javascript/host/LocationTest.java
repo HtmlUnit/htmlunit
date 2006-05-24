@@ -45,6 +45,7 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -451,6 +452,30 @@ public class LocationTest extends WebTestCase {
 
         assertEquals( page1.getTitleText(), page2.getTitleText() );
         assertNotSame( page1, page2 );
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testChangeLocationToNonHtml() throws Exception {
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+
+        final String html =
+              "<html><head>\n"
+            + "  <script>\n"
+            + "      document.location.href = 'foo.txt';\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body></body></html>";
+
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setResponse(new URL(URL_FIRST.toExternalForm() + "/foo.txt"), "bla bla", "text/plain");
+        webClient.setWebConnection( webConnection );
+
+        final Page page = webClient.getPage(URL_FIRST);
+        assertEquals("bla bla", page.getWebResponse().getContentAsString());
     }
 
 }

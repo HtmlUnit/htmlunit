@@ -7,6 +7,10 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem" id="1494421">
+                JavaScript: ensure that the page beeing loaded has not already been replaced in its window
+                by a new one through JavaScript before executing onload handlers.
+			</action>
             <action type="update" dev="mguillem">
                 Use Byte Order Mark to regognize UTF-8 content when no charset header is provided.
 			</action>
