@@ -421,7 +421,10 @@ public class WebClient {
             firstWindowStack_.push(webWindow);
         }
 
-        newPage.initialize();
+        // the page beeing loaded may already have been replaced by an other one through js code
+        if (webWindow.getEnclosedPage() == newPage) {
+            newPage.initialize();
+        }
 
         fireWindowContentChanged( new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage) );
         return newPage;
