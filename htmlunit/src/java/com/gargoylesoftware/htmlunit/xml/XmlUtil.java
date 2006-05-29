@@ -114,6 +114,7 @@ public final class XmlUtil {
         throws IOException, SAXException, ParserConfigurationException {
 
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
         final InputSource source = new InputSource(new StringReader(webResponse.getContentAsString()));
         final DocumentBuilder builder = factory.newDocumentBuilder();
         builder.setErrorHandler(DISCARD_MESSAGES_HANDLER);

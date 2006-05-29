@@ -7,6 +7,9 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem">
+                XmlPage: parse xml pages namespace aware.
+			</action>
             <action type="update" dev="mguillem" id="1494421">
                 JavaScript: ensure that the page beeing loaded has not already been replaced in its window
                 by a new one through JavaScript before executing onload handlers.
