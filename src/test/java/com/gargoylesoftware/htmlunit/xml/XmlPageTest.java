@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.xml;
 
+import org.w3c.dom.Node;
+
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -55,6 +57,27 @@ public class XmlPageTest extends WebTestCase {
      */
     public XmlPageTest( final String name ) {
         super(name);
+    }
+
+    /**
+     * Tests namespace
+     * @throws Exception if the test fails
+     */
+    public void testNamespace() throws Exception {
+        final String content
+            = "<?xml version='1.0'?>\n"
+            + "<RDF xmlns='http://www.w3.org/1999/02/22-rdf-syntax-ns#' "
+            + "xmlns:em='http://www.mozilla.org/2004/em-rdf#'>"
+            + "<Description about='urn:mozilla:install-manifest'>"
+            + "<em:name>My Plugin</em:name>\n"
+            + "</Description>\n"
+            + "</RDF>\n";
+
+        final XmlPage xmlPage = testXmlDocument(content, "text/xml");
+        final Node node = xmlPage.getXmlDocument().getFirstChild().getFirstChild().getFirstChild();
+        assertEquals("em:name", node.getNodeName());
+        assertEquals("name", node.getLocalName());
+        assertEquals("http://www.mozilla.org/2004/em-rdf#", node.getNamespaceURI());
     }
 
 
@@ -137,9 +160,9 @@ public class XmlPageTest extends WebTestCase {
      */
     public void testVoiceXML() throws Exception {
         final String content =
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" 
-            + "<vxml xmlns=\"http://www.w3.org/2001/vxml\"" 
-            + "  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" 
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<vxml xmlns=\"http://www.w3.org/2001/vxml\""
+            + "  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
             + "  xsi:schemaLocation=\"http://www.w3.org/2001/vxml "
             + "   http://www.w3.org/TR/voicexml20/vxml.xsd\""
             + "   version=\"2.0\">"
