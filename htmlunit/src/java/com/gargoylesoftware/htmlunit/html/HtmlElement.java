@@ -365,7 +365,7 @@ public abstract class HtmlElement extends DomNode {
 
         final Object[] args = new Object[] {event};
         return page.executeJavaScriptFunctionIfPossible(
-                handler, (Scriptable) getScriptObject(), args, this);
+                handler, (Scriptable) event.jsxGet_target(), args, this);
     }
 
     /**

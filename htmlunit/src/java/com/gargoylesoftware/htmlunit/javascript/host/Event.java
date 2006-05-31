@@ -75,7 +75,7 @@ public class Event extends SimpleScriptable {
         target_ = target;
         currentTarget_ = target;
         keyCode_ = Context.getUndefinedValue();
-        setParentScope((SimpleScriptable) domNode.getScriptObject());
+        setParentScope((SimpleScriptable) target);
         setDomNode(domNode, false);
     }
 
@@ -85,13 +85,8 @@ public class Event extends SimpleScriptable {
      * @param keyCode The key code associated with the event.
      */
     public Event(final DomNode domNode, final int keyCode) {
-        final Object target = domNode.getScriptObject();
-        srcElement_ = target;
-        target_ = target;
-        currentTarget_ = target;
+        this(domNode);
         keyCode_ = new Integer (keyCode);
-        setParentScope((SimpleScriptable) domNode.getScriptObject());
-        setDomNode(domNode, false);
     }
 
     /**

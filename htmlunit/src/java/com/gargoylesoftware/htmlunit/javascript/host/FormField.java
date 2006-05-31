@@ -42,7 +42,9 @@ import java.io.IOException;
 import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 
 /**
  * Base class for all javascript object correspondig to form fields.
@@ -57,6 +59,20 @@ public class FormField extends FocusableHostElement {
 
     private static final long serialVersionUID = 3712016051364495710L;
 
+
+    /**
+     * Sets the associated dom node and sets the enclosing form as parent scope of the current element
+     * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#setDomNode(DomNode)
+     * @param domNode The DOM node
+     */
+    public void setDomNode(final DomNode domNode) {
+        super.setDomNode(domNode);
+
+        final HtmlForm form = ((HtmlElement) domNode).getEnclosingForm();
+        if (form != null) {
+            setParentScope(getScriptableFor(form));
+        }
+    }
 
     /**
      *  Return the value of the javascript attribute "value".
@@ -86,7 +102,7 @@ public class FormField extends FocusableHostElement {
     public String jsxGet_name() {
         return getHtmlElementOrDie().getAttributeValue( "name" );
     }
-    
+
     /**
      *  Set the value of the javascript attribute "name".
      *
@@ -94,7 +110,7 @@ public class FormField extends FocusableHostElement {
      */
     public void jsxSet_name( final String newName ) {
         getHtmlElementOrDie().setAttributeValue( "name", newName );
-    }    
+    }
 
 
     /**

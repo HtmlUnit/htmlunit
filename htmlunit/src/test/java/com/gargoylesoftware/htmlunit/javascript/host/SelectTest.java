@@ -855,4 +855,32 @@ public class SelectTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
+    /**
+     * Test that select delegates submit to form
+     * @throws Exception if the test fails.
+     */
+    public void testOnChangeCallsFormSubmit() throws Exception {
+
+        final String content
+            = "<html><head>"
+            + "</head>"
+            + "<body>"
+            + "<form name='test' action='foo'>"
+            + "<select name='select1' onchange='submit()'>"
+            + "<option>a</option>"
+            + "<option selected='selected'>b</option>"
+            + "</select></form>"
+            + "</body></html>";
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        webConnection.setDefaultResponse("<html><title>page 2</title><body></body></html>");
+        webConnection.setResponse(URL_FIRST, content);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page2 = (HtmlPage) page.getFormByName("test").getSelectByName("select1").getOption(0).click();
+        assertEquals("page 2", page2.getTitleText());
+    }
 }

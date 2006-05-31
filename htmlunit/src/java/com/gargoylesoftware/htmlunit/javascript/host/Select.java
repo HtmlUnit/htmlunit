@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.OptionsArray;
 
 /**
- * The javascript object that represents a select
+ * The javascript object for {@link HtmlSelect}.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -75,7 +75,6 @@ public class Select extends FormField {
      */
     public void jsConstructor() {
     }
-
 
     /**
      * Initialize the object.

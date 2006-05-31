@@ -8,6 +8,14 @@
     <body>
         <release version="next">
             <action type="update" dev="mguillem">
+                Upgraded jaxen to 1.1-beta-9 (even if it's a "beta", this is the version 
+                recommended by jaxen developers).
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: set form as parent scope for form fields (allows handlers to call directly form 
+                methods like submit()).
+			</action>
+            <action type="update" dev="mguillem">
                 XmlPage: parse xml pages namespace aware.
 			</action>
             <action type="update" dev="mguillem" id="1494421">
