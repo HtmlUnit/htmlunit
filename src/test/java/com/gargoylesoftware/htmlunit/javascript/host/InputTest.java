@@ -671,4 +671,31 @@ public class InputTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Test that field delegates submit to form
+     * @throws Exception if the test fails.
+     */
+    public void testOnChangeCallsFormSubmit() throws Exception {
+
+        final String content
+            = "<html><head>"
+            + "</head>"
+            + "<body>"
+            + "<form name='test' action='foo'>"
+            + "<input name='field1' onchange='submit()'>"
+            + "</form>"
+            + "</body></html>";
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        webConnection.setDefaultResponse("<html><title>page 2</title><body></body></html>");
+        webConnection.setResponse(URL_FIRST, content);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page2 = (HtmlPage) page.getFormByName("test").getInputByName("field1").setValueAttribute("bla");
+        assertEquals("page 2", page2.getTitleText());
+    }
 }

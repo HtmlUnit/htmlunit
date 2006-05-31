@@ -82,15 +82,16 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     }
 
     /**
-     *  Set the content of the "value" attribute
-     *
-     * @param  newValue The new content
+     * Set the content of the "value" attribute, executing onchange handlers if appropriate.
+     * @param newValue The new content
+     * @return the page that occupies this window after this value is set. 
+     * It may be the same window or it may be a freshly loaded one.
      */
-    public void setValueAttribute( final String newValue ) {
+    public Page setValueAttribute( final String newValue ) {
         Assert.notNull( "newValue", newValue );
         setAttributeValue( "value", newValue );
 
-        getPage().executeOnChangeHandlerIfAppropriate(this);
+        return getPage().executeOnChangeHandlerIfAppropriate(this);
     }
 
 
