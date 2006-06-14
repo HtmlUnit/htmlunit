@@ -363,6 +363,20 @@ public class WebClient {
     }
 
     /**
+     * Convenience method to build an URL and load it into the current WebWindow
+     * @param url The url of the new content.
+     * @return The new page.
+     * @throws  FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the property
+     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     * @throws IOException If an IO problem occurs. 
+     * @throws MalformedURLException if no url can be created from the provided string 
+     */
+    public Page getPage(final String url) throws IOException, FailingHttpStatusCodeException, MalformedURLException {
+        return getPage(new URL(url));
+    }
+
+    /**
      * Convenience method to load a URL into the current WebWindow
      * @param url The url of the new content.
      * @return The new page.
