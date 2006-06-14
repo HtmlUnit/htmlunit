@@ -1477,4 +1477,21 @@ public class WebClientTest extends WebTestCase {
         final String[] expectedAlerts = {"foo"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Test that WebClient.getPage(String) calls WebClient.getPage(URL) with the right URL
+     * @throws Exception if the test fails 
+     */
+    public void testGetPageWithStringArg() throws Exception {
+        final URL[] calledUrls = {null};
+        final WebClient wc = new WebClient() {
+            public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
+                calledUrls[0] = url;
+                return null;
+            }
+        };
+
+        wc.getPage(URL_GARGOYLE.toExternalForm());
+        assertEquals(URL_GARGOYLE, calledUrls[0]);
+    }
 }
