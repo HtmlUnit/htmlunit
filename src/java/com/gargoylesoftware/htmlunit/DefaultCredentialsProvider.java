@@ -61,6 +61,7 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author Daniel Gredler
  * @author Vikram Shitole
+ * @author Marc Guillemot
  * @version $Revision$
  */
 public class DefaultCredentialsProvider implements CredentialsProvider {
@@ -131,6 +132,25 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
     }
 
     /**
+     * Adds NTLM credentials for the specified username/password on the specified host/port.
+     * @param username The username for the new credentials. This should not include the domain to authenticate with.
+     * For example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not.
+     * @param password The password for the new credentials.
+     * @param host The host to which to the new credentials apply (<tt>null</tt> if applicable to any host).
+     * @param port The port to which to the new credentials apply (negative if applicable to any port).
+     * @param clientHost The host the authentication request is originating from. Essentially, the computer name for
+     * this machine.
+     * @param clientDomain The domain to authenticate within.
+     */
+    public void addNTLMCredentials( final String username, final String password, final String host,
+            final int port, final String clientHost, final String clientDomain ) {
+        final AuthScope scope = new AuthScope( host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME );
+        final Credentials c = new NTCredentials( username, password, clientHost, clientDomain );
+        credentials_.put( scope, c );
+        clearAnswered(); // don't need to be precise, will cause in worst case one extra request
+    }
+
+    /**
      * Adds NTLM proxy credentials for the specified username/password on the specified host/port.
      * @param username The username for the new credentials. This should not include the domain to authenticate with.
      * For example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not.
@@ -179,14 +199,13 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
         else {
             credentials = credentials_;
         }
-        for( final Iterator i = credentials.entrySet().iterator(); i.hasNext(); ) {
+
+        for (final Iterator i = credentials.entrySet().iterator(); i.hasNext(); ) {
             final Map.Entry entry = (Map.Entry) i.next();
             final AuthScope scope = (AuthScope) entry.getKey();
             final Credentials c = (Credentials) entry.getValue();
-            if ( (scope.getScheme() == AuthScope.ANY_SCHEME || scope.getScheme().equals(scheme.getSchemeName()))
-                && ( scope.getHost() == AuthScope.ANY_HOST || scope.getHost().equals(host) )
-                && ( scope.getPort() == AuthScope.ANY_PORT || scope.getPort() == port )
-                && ( scope.getRealm() == AuthScope.ANY_REALM || scope.getRealm().equals(scheme.getRealm()))) {
+            if (matchScheme(scope, scheme) && matchHost(scope, host)
+                    && matchPort(scope, port) && matchRealm(scope, scheme)) {
 
                 markAsAnswered(scheme, host, port, proxy);
                 getLog().debug("Returning " + c + " for " + buildKey(scheme, host, port, proxy));
@@ -199,6 +218,42 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
     }
 
     /**
+     * @param scheme the request scheme for which Credentials are asked
+     * @param scope the configured autorization scope
+     * @return <code>true</code> if the scope's realm matches the one of the scheme 
+     */
+    protected boolean matchRealm(final AuthScope scope, final AuthScheme scheme) {
+        return scope.getRealm() == AuthScope.ANY_REALM || scope.getRealm().equals(scheme.getRealm());
+    }
+
+    /**
+     * @param port the request port for which Credentials are asked
+     * @param scope the configured autorization scope
+     * @return <code>true</code> if the scope's port matches the provided one 
+     */
+    protected boolean matchPort(final AuthScope scope, final int port) {
+        return scope.getPort() == AuthScope.ANY_PORT || scope.getPort() == port;
+    }
+
+    /**
+     * @param host the request host for which Credentials are asked
+     * @param scope the configured autorization scope
+     * @return <code>true</code> if the scope's host matches the provided one 
+     */
+    protected boolean matchHost(final AuthScope scope, final String host) {
+        return scope.getHost() == AuthScope.ANY_HOST || scope.getHost().equals(host);
+    }
+
+    /**
+     * @param scheme the request scheme for which Credentials are asked
+     * @param scope the configured autorization scope
+     * @return <code>true</code> if the scope's scheme matches the provided one 
+     */
+    protected boolean matchScheme(final AuthScope scope, final AuthScheme scheme) {
+        return scope.getScheme() == AuthScope.ANY_SCHEME || scope.getScheme().equals(scheme.getSchemeName());
+    }
+
+    /**
      * Indicates if this provider has already provided an answer for this (scheme, host, port, proxy).
      * @param scheme The scheme
      * @param host the server name.
@@ -206,7 +261,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
      * @param proxy is proxy
      * @return true if the provider has already provided an answer for this.
      */
-    private boolean alreadyAnswered(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
+    protected boolean alreadyAnswered(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
         return answerMarks_.contains(buildKey(scheme, host, port, proxy));
     }
 
@@ -216,14 +271,14 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
      * @param port the server port.
      * @param proxy is proxy
      */
-    private void markAsAnswered(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
+    protected void markAsAnswered(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
         answerMarks_.add(buildKey(scheme, host, port, proxy));
     }
 
     /**
      * Clears the cache of answered (scheme, host, port, proxy) combinations.
      */
-    private void clearAnswered() {
+    protected void clearAnswered() {
         answerMarks_.clear();
         getLog().debug( "Flushed marked answers" );
     }
@@ -236,7 +291,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider {
      * @param proxy is proxy
      * @return the new key.
      */
-    private Object buildKey(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
+    protected Object buildKey(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
         return scheme.getSchemeName() + " " + scheme.getRealm() + " " + host + ":" + port + " " + proxy;
     }
 
