@@ -8,6 +8,12 @@
     <body>
         <release version="next">
             <action type="update" dev="mguillem">
+                Added possibility to configure NTLM credentials for the DefaultCredentialsProvider.
+            </action>
+            <action type="update" dev="mguillem">
+                Added facility method WebClient.getPage(String).
+            </action>
+            <action type="update" dev="mguillem">
                 Upgraded jaxen to 1.1-beta-9 (even if it's a "beta", this is the version 
                 recommended by jaxen developers).
             </action>
