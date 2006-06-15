@@ -7,7 +7,10 @@
 
     <body>
         <release version="next">
-            <action type="update" dev="mguillem">
+            <action type="update" dev="mguillem" id="1439904">
+                JavaScript: added support IE style of events (window.event).
+            </action>
+            <action type="update" dev="mguillem" id="1472307">
                 Added possibility to configure NTLM credentials for the DefaultCredentialsProvider.
             </action>
             <action type="update" dev="mguillem">

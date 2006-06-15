@@ -49,16 +49,14 @@ import java.util.NoSuchElementException;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Function;
-import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 
 /**
- *  An abstract wrapper for html elements
+ * An abstract wrapper for html elements
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -350,22 +348,8 @@ public abstract class HtmlElement extends DomNode {
         final Function function = getEventHandler("onkeydown");
 
         if (function != null && page.getWebClient().isJavaScriptEnabled()) {
-            runEventHandler(function, new Event(this, keyCode));
+            getPage().runEventHandler(function, new Event(this, keyCode));
         }
-    }
-
-    /**
-     * Runs an event handler taking car to pass him the event in the right form
-     * @param handler the handler function
-     * @param event the event that is beeing triggered
-     * @return the script execution result
-     */
-    protected ScriptResult runEventHandler(final Function handler, final Event event) {
-        final HtmlPage page = getPage();
-
-        final Object[] args = new Object[] {event};
-        return page.executeJavaScriptFunctionIfPossible(
-                handler, (Scriptable) event.jsxGet_target(), args, this);
     }
 
     /**

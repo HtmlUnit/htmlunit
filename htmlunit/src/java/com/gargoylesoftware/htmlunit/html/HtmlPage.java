@@ -70,6 +70,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
@@ -955,15 +956,17 @@ public final class HtmlPage extends DomNode implements Page {
         // onload for the window
         final Window jsWindow = (Window) getEnclosingWindow().getScriptObject();
         if (jsWindow != null) {
-            final ScriptEngine engine = getWebClient().getScriptEngine();
+            final Event loadEvent = new Event(getDocumentElement());
+
             for (final Iterator iter = jsWindow.getListeners("load").iterator(); iter.hasNext(); ) {
                 final Function listener = (Function) iter.next();
                 getLog().debug("Executing load listener for the window: " + listener);
-                engine.callFunction(this, listener, jsWindow, ArrayUtils.EMPTY_OBJECT_ARRAY, null);
+                runEventHandler(listener, loadEvent);
             }
+
             if (jsWindow.jsxGet_onload() != null) {
                 getLog().debug("Executing onload handler for the window");
-                engine.callFunction(this, jsWindow.jsxGet_onload(), jsWindow, ArrayUtils.EMPTY_OBJECT_ARRAY, null);
+                runEventHandler(jsWindow.jsxGet_onload(), loadEvent);
             }
         }
 
@@ -986,8 +989,7 @@ public final class HtmlPage extends DomNode implements Page {
         getLog().debug("Executing onload handler, for " + element);
         final Function onloadFunction = element.getEventHandler("onload");
         if (onloadFunction != null) {
-            final ScriptEngine engine = getWebClient().getScriptEngine();
-            engine.callFunction(this, onloadFunction, element.getScriptObject(), new Object[]{}, element);
+            runEventHandler(onloadFunction, new Event(element));
         }
     }
 
@@ -1364,7 +1366,7 @@ public final class HtmlPage extends DomNode implements Page {
         if (onchange != null && getWebClient().isJavaScriptEnabled()
                 && engine != null && !engine.isScriptRunning()) {
 
-            final ScriptResult scriptResult = htmlElement.runEventHandler(onchange, new Event(htmlElement));
+            final ScriptResult scriptResult = runEventHandler(onchange, new Event(htmlElement));
 
             if (getWebClient().getWebWindows().contains(getEnclosingWindow())) {
                 return getEnclosingWindow().getEnclosedPage(); // may be itself or a newly loaded one
@@ -1436,5 +1438,33 @@ public final class HtmlPage extends DomNode implements Page {
         buffer.append(")@");
         buffer.append(hashCode());
         return buffer.toString();
+    }
+
+
+    /**
+     * Runs an event handler taking car to pass him the event in the right form
+     * @param handler the handler function
+     * @param event the event that is beeing triggered
+     * @return the script execution result
+     */
+    protected ScriptResult runEventHandler(final Function handler, final Event event) {
+
+        final Window window = (Window) getEnclosingWindow().getScriptObject();
+        final Object[] args;
+        if (getWebClient().getBrowserVersion().isIE()) {
+            args = ArrayUtils.EMPTY_OBJECT_ARRAY;
+            window.setEvent(event);
+        }
+        else {
+            args = new Object[] {event};
+        }
+
+        final SimpleScriptable target = (SimpleScriptable) event.jsxGet_target();
+        final ScriptResult result = executeJavaScriptFunctionIfPossible(
+                handler, target, args, target.getHtmlElementOrDie());
+
+        window.setEvent(null); // reset event
+
+        return result;
     }
 }

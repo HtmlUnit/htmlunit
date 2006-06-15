@@ -781,6 +781,9 @@
 
         <property name="closed" readable="true" writable="false"/>
         <property name="document" readable="true" writable="false"/>
+        <property name="event" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="frames" readable="true" writable="false"/>
         <property name="history" readable="true" writable="false"/>
         <property name="innerHeight" readable="true" writable="false">
