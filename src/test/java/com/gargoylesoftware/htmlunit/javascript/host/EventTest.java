@@ -104,8 +104,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     *  Verify that javascript snippets have a variable named 'event' available
-     * to them.
+     * Verify that javascript snippets have a variable named 'event' available to them.
      * @throws Exception if the test fails
      */
     public void testEventArgDefinedByWrapper() throws Exception {
@@ -115,7 +114,8 @@ public class EventTest extends WebTestCase {
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId' onclick=\"alert(event ? 'defined' : 'undefined')\"/>\n"
             + "</body></html>\n";
-        onClickPageTest(content, expectedAlerts);
+        onClickPageTest(BrowserVersion.MOZILLA_1_0, content, expectedAlerts);
+        onClickPageTest(BrowserVersion.INTERNET_EXPLORER_6_0, content, expectedAlerts);
     }
 
     /**
@@ -131,7 +131,7 @@ public class EventTest extends WebTestCase {
             + "function handler(event) { alert(event ? 'defined' : 'undefined'); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>\n";
-        onClickPageTest(content, expectedAlerts);
+        onClickPageTest(BrowserVersion.MOZILLA_1_0, content, expectedAlerts);
     }
 
     /**
@@ -193,7 +193,8 @@ public class EventTest extends WebTestCase {
             = "<html><head></head><body>\n"
             + "<button type='button' id='clickId'/>\n"
             + "<script>\n"
-            + "function handler(e) {\n"
+            + "function handler(_e) {\n"
+            + "  var e = _e ? _e : window.event;"
             + "if (e.keyCode == 65) {\n"
             + "    alert('pass');"
             + "} else {"
@@ -205,7 +206,7 @@ public class EventTest extends WebTestCase {
             + "</body></html>\n";
 
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage( BrowserVersion.getDefault(), content, collectedAlerts );
+        final HtmlPage page = loadPage(content, collectedAlerts );
         final ClickableElement element = (ClickableElement) page.getHtmlElementById( "clickId" );
         element.keyDown(65); // A
         element.keyDown(66); // B
@@ -256,9 +257,6 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testEventTransmission() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content =
             "<html><body><span id='clickMe'>foo</span>\n"
             + "<script>\n"
@@ -288,6 +286,29 @@ public class EventTest extends WebTestCase {
 
     }
 
+
+
+    /**
+     * Test that the event property of the window is available
+     * @throws Exception if the test fails
+     */
+    public void testIEWindowEvent() throws Exception {
+        final String content =
+            "<html><head>"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(window.event == null);\n"
+            + "  alert(event == null);\n"
+            + "}"
+            + "</script>"
+            + "</head><body onload='test()'></body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+
+        final String[] expectedAlerts = { "false", "false"};
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 
     /**
      * Test that the event handler is correctly parsed even if it contains comments.

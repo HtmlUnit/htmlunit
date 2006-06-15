@@ -67,7 +67,15 @@ public class EventHandler extends BaseFunction {
      */
     public EventHandler(final HtmlElement htmlElement, final String jsSnippet) {
         htmlElement_ = htmlElement;
-        jsSnippet_ = "function(event) {" + jsSnippet + "}";
+
+        final String functionSignature;
+        if (htmlElement.getPage().getWebClient().getBrowserVersion().isIE()) {
+            functionSignature = "function()";
+        }
+        else {
+            functionSignature = "function(event)";
+        }
+        jsSnippet_ =  functionSignature + " {" + jsSnippet + "}";
     }
 
     /**

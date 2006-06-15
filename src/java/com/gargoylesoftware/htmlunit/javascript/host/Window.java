@@ -101,6 +101,7 @@ public class Window extends SimpleScriptable {
     private History history_;
     private Location location_;
     private Function onload_;
+    private Object event_;
     private String status_ = "";
     private ElementArray frames_; // has to be a member to have equality (==) working
     private Map eventHandlers_ = new HashMap();
@@ -178,6 +179,21 @@ public class Window extends SimpleScriptable {
         return document_;
     }
 
+    /**
+     * Return the current event
+     * @return <code>null</code> if no event is currently available
+     */
+    public Object jsxGet_event() {
+        return event_;
+    }
+
+    /**
+     * Sets the current event
+     * @param event the event
+     */
+    public void setEvent(final Object event) {
+        event_ = event;
+    }
 
     /**
      * Open a new window
