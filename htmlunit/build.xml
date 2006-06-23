@@ -203,7 +203,7 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
     <antcall target="get-dependency">
         <param name="type" value="required"/>
         <param name="project" value="commons-io"/>
-        <param name="jarName" value="commons-io-1.1.jar"/>
+        <param name="jarName" value="commons-io-1.2.jar"/>
     </antcall>    
     <antcall target="get-dependency">
         <param name="type" value="required"/>
