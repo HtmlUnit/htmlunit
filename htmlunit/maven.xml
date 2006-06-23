@@ -274,6 +274,12 @@
 
 	<!-- copy resource files for the tests -->
     <postGoal name="test:compile">
+        <ant:copy todir="target/test-classes/com/gargoylesoftware/htmlunit/jelly">
+            <ant:fileset dir="${basedir}/src/test/java/com/gargoylesoftware/htmlunit/jelly">
+                <ant:include name="*.jelly"/>
+			    <ant:exclude name="CVS"/>
+            </ant:fileset>
+        </ant:copy>    
         <ant:copy todir="target/test-classes/com/gargoylesoftware/htmlunit/testfiles">
             <ant:fileset dir="${basedir}/src/test/java/com/gargoylesoftware/htmlunit/testfiles">
 			    <ant:exclude name="CVS"/>
