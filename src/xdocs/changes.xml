@@ -8,6 +8,12 @@
     <body>
         <release version="next">
             <action type="update" dev="yourgod">
+                Upgraded commons-collections to version 3.2
+            </action>
+            <action type="update" dev="yourgod">
+                Upgraded commons-logging to version 1.1
+            </action>
+            <action type="update" dev="yourgod">
                 Upgraded commons-io to version 1.2
             </action>
             <action type="update" dev="mguillem" id="1439904">

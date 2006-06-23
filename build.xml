@@ -193,7 +193,7 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
     <antcall target="get-dependency">
         <param name="type" value="required"/>
         <param name="project" value="commons-logging"/>
-        <param name="jarName" value="commons-logging-1.0.4.jar"/>
+        <param name="jarName" value="commons-logging-1.1.jar"/>
     </antcall>
     <antcall target="get-dependency">
         <param name="type" value="required"/>
@@ -213,7 +213,7 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
     <antcall target="get-dependency">
         <param name="type" value="required"/>
         <param name="project" value="commons-collections"/>
-        <param name="jarName" value="commons-collections-3.1.jar"/>
+        <param name="jarName" value="commons-collections-3.2.jar"/>
     </antcall>
     <antcall target="get-dependency">
         <param name="type" value="required"/>
