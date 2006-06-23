@@ -221,8 +221,8 @@ public void testAlerts() throws Exception {
                 <tr>
                     <td>onsubmit</td>
                     <td>
-                    	This will be triggered when a form is submitted either by
-                    	HtmlForm.submit() or via the javascript submit() method.
+                    	This will be triggered when a form is submitted using a control
+                    	on the form.
                     </td>
                 </tr>
                 <tr>
