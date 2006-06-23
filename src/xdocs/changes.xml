@@ -7,6 +7,9 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="yourgod">
+                Upgraded commons-io to version 1.2
+            </action>
             <action type="update" dev="mguillem" id="1439904">
                 JavaScript: added support IE style of events (window.event).
             </action>
