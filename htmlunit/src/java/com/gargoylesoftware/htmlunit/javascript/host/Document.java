@@ -690,7 +690,7 @@ public final class Document extends NodeImpl {
                 getLog().warn("getElementById(" + id + ") did a getElementByName for Internet Explorer");
                 return result;
             }
-            getLog().warn("getElementById(" + id
+            getLog().debug("getElementById(" + id
                 + ") cannot return a result as there isn't a javascript object for the html element ");
         }
         return result;
