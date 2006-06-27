@@ -55,6 +55,9 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                         Update the version number and release date in src/xdocs/changes.xml
                     </li>
                     <li>
+                        Update the version number and release date in src/xdocs/index.xml
+                    </li>
+                    <li>
                         Build the zip
                         <source>maven clean htmlunit:build-bin-dist htmlunit:build-src-dist</source>
                     </li>
@@ -62,9 +65,6 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                         Upload the two zip files to SourceForge following 
                         <a href="http://sourceforge.net/docman/display_doc.php?docid=6445&amp;group_id=1">
                         these instructions</a>
-                    </li>
-                    <li>
-                        Update src/xdocs/index.xml with the new version number and URL of the release.
                     </li>
                     <li>
                         Assuming that everything has gone smoothly so far, make sure everything is checked
