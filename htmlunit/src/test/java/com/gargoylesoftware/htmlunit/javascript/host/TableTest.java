@@ -193,11 +193,13 @@ public class TableTest extends WebTestCase {
             + "    alert(rows.length);\n"
             + "    table.insertRow(rows.length);\n"
             + "    alert(rows.length);\n"
+            + "    table.deleteRow(-1);\n"
+            + "    alert(rows.length);\n"
             + "  // -->\n"
             + "  </script>\n"
             + "</body></html>\n";
 
-        final List expectedAlerts = Arrays.asList(new String[] { "2", "true", "3", "2", "3" });
+        final List expectedAlerts = Arrays.asList(new String[] { "2", "true", "3", "2", "3", "2" });
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
