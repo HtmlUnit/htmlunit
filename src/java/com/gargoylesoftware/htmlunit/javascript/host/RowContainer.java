@@ -105,8 +105,11 @@ public class RowContainer extends HTMLElement {
      * MSDN Documentation</a>
      * @param rowIndex the zero-based index of the row to delete.
      */
-    public void jsxFunction_deleteRow(final int rowIndex) {
+    public void jsxFunction_deleteRow(int rowIndex) {
         final ElementArray rows = (ElementArray) jsxGet_rows();
+        if (rowIndex == -1){
+            rowIndex = rows.jsGet_length() - 1;
+        }
         final boolean rowIndexValid = (rowIndex >= 0 && rowIndex < rows.jsGet_length());
         if (rowIndexValid) {
             final SimpleScriptable row = (SimpleScriptable) rows.jsFunction_item(new Integer(rowIndex));

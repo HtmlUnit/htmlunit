@@ -6,6 +6,11 @@
     </properties>
 
     <body>
+        <release version="next">
+            <action type="update" dev="yourgod">
+                JavaScript: table/tbody.deleteRow(-1) will now delete the last row
+            </action>
+        </release>
         <release version="1.9" date="Jun 27, 2006">
             <action type="update" dev="yourgod">
                 Upgraded commons-collections to version 3.2
