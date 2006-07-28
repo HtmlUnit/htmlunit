@@ -228,7 +228,7 @@ public class Window extends SimpleScriptable {
         final URL newUrl = thisWindow.makeUrlForOpenWindow(url);
         final WebWindow newWebWindow=  thisWindow.webWindow_.getWebClient().openWindow(
             newUrl, windowName, thisWindow.webWindow_ );
-        return (Window)newWebWindow.getScriptObject();
+        return newWebWindow.getScriptObject();
     }
 
 
@@ -457,7 +457,7 @@ public class Window extends SimpleScriptable {
         if( webWindow_ instanceof TopLevelWindow ) {
             final WebWindow opener = ((TopLevelWindow)webWindow_).getOpener();
             if( opener != null ) {
-                return (Window)opener.getScriptObject();
+                return opener.getScriptObject();
             }
         }
 
