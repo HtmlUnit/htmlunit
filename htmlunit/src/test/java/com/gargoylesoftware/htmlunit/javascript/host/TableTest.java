@@ -182,7 +182,6 @@ public class TableTest extends WebTestCase {
             + "    <tr><td colspan='2'>cell3</td></tr>\n"
             + "  </table>\n"
             + "  <script type='text/javascript' language='JavaScript'>\n"
-            + "  <!--\n"
             + "    var table = document.getElementById('table_1');\n"
             + "    var rows = table.rows;\n"
             + "    alert(rows.length);\n"
@@ -195,7 +194,6 @@ public class TableTest extends WebTestCase {
             + "    alert(rows.length);\n"
             + "    table.deleteRow(-1);\n"
             + "    alert(rows.length);\n"
-            + "  // -->\n"
             + "  </script>\n"
             + "</body></html>\n";
 
@@ -204,6 +202,40 @@ public class TableTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Regression test for bug 1528024
+     * @see <a href="https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1528024&group_id=47038">bug</a>
+     * @throws Exception if the test fails
+     */
+    public void testTableHeadRows() throws Exception {
+
+        final String html = "<html><head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  var t = document.getElementById('myTable');"
+            + "  alert(t.rows[0].cells.length);"
+            + "  alert(t.rows[1].cells.length);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + "<table id='myTable'>"
+            + "<tr><th>Some Heading</th></tr>"  
+            + "<tr><td>some desc</td></tr>"
+            + "</table>"
+            + "</body>"
+            + "</html>";
+
+        final List expectedAlerts = Arrays.asList(new String[] { "1", "1"});
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
