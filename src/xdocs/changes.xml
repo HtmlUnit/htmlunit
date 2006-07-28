@@ -7,6 +7,9 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem" id="1528024">
+                JavaScript: cells collection for rows now takes th into account.
+            </action>
             <action type="update" dev="yourgod">
                 JavaScript: table/tbody.deleteRow(-1) will now delete the last row
             </action>

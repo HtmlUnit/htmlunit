@@ -92,7 +92,7 @@ public class TableRow extends HTMLElement {
         if (cells_ == null) {
             cells_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
             try {
-                cells_.init(getDomNodeOrDie(), new HtmlUnitXPath(".//td"));
+                cells_.init(getDomNodeOrDie(), new HtmlUnitXPath("./td|th"));
             }
             catch (final JaxenException e) {
                 throw Context.reportRuntimeError("Failed to initialize row.cells: " + e.getMessage());
