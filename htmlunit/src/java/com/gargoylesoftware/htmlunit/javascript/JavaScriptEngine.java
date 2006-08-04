@@ -340,6 +340,7 @@ public final class JavaScriptEngine extends ScriptEngine {
         if( returningNewContext ) {
             context.setOptimizationLevel( -1 );
             context.setErrorReporter( new StrictErrorReporter( getScriptEngineLog() ) );
+            context.setWrapFactory(new HtmlUnitWrapFactory());
         }
         return context;
     }
