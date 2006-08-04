@@ -49,6 +49,8 @@ import java.util.StringTokenizer;
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
+import org.apache.commons.httpclient.util.DateUtil;
+import org.apache.commons.httpclient.util.DateParseException;
 import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
 import org.jaxen.XPathFunctionContext;
@@ -388,7 +390,6 @@ public final class Document extends NodeImpl {
         getLog().info("Added cookie: " + cookie);
     }
 
-
     /**
      * Builds a cookie object from the string representation allowed in JS
      * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
@@ -399,8 +400,8 @@ public final class Document extends NodeImpl {
         final StringTokenizer st = new StringTokenizer(newCookie, ";");
         final String nameValue = st.nextToken();
 
-        final String name = StringUtils.substringBefore(nameValue, "=");
-        final String value = StringUtils.substringAfter(nameValue, "=");
+        final String name = StringUtils.substringBefore(nameValue, "=").trim();
+        final String value = StringUtils.substringAfter(nameValue, "=").trim();
 
         final Map attributes = new HashMap();
         // default values
@@ -413,16 +414,28 @@ public final class Document extends NodeImpl {
             final String token = st.nextToken();
             final int indexEqual = token.indexOf("=");
             if (indexEqual > -1) {
-                attributes.put(token.substring(0, indexEqual), token.substring(indexEqual+1));
+                attributes.put(token.substring(0, indexEqual).toLowerCase().trim(),
+                        token.substring(indexEqual+1).trim());
             }
             else {
-                attributes.put(token, Boolean.TRUE);
+                attributes.put(token.toLowerCase().trim(), Boolean.TRUE);
+            }
+        }
+
+        // Try to parse the <expires> value as a date if specified
+        Date expires = null;
+        final String date = (String) attributes.get("expires");
+        if (date != null){
+            try {
+                expires = DateUtil.parseDate(date); 
+            } 
+            catch (final DateParseException e) { 
+                // nothing
             }
         }
 
         final String domain = (String) attributes.get("domain");
         final String path = (String) attributes.get("path");
-        final Date expires = null;
         final boolean secure = (attributes.get("secure") != null);
         final Cookie cookie = new Cookie(domain, name, value, path, expires, secure);
 
