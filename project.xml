@@ -188,6 +188,9 @@
         <contributor>
         	<name>Julien Henry</name>
         </contributor>
+        <contributor>
+        	<name>Andre Soereng</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

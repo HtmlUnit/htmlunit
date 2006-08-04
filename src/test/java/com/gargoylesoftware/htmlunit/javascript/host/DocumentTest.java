@@ -42,9 +42,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Date;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.httpclient.util.DateUtil;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -1941,21 +1943,37 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testBuildCookie() throws Exception {
-        checkCookie(Document.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "", "first", false);
-        checkCookie(Document.buildCookie("toto=", URL_FIRST), "toto", "", "", "first", false);
-        checkCookie(Document.buildCookie("toto=foo;secure", URL_FIRST), "toto", "foo", "", "first", true);
+        checkCookie(Document.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "", "first", false, null);
+        checkCookie(Document.buildCookie("toto=", URL_FIRST), "toto", "", "", "first", false, null);
+        checkCookie(Document.buildCookie("toto=foo;secure", URL_FIRST), "toto", "foo", "", "first", true, null);
         checkCookie(Document.buildCookie("toto=foo;path=/myPath;secure", URL_FIRST),
-                "toto", "foo", "/myPath", "first", true);
+                "toto", "foo", "/myPath", "first", true, null);
+
+        // Check that leading and trailing whitespaces are ignored
+        checkCookie(Document.buildCookie("   toto=foo;  path=/myPath  ; secure  ", URL_FIRST),
+                "toto", "foo", "/myPath", "first", true, null);
+
+        // Check that we accept reserved attribute names (e.g expires, domain) in any case
+        checkCookie(Document.buildCookie("toto=foo; PATH=/myPath; SeCURE", URL_FIRST),
+                "toto", "foo", "/myPath", "first", true, null);
+
+        // Check that we are able to parse and set the expiration date correctly
+        final String dateString = "Fri, 21 Jul 2006 20:47:11 UTC";
+        final Date date = DateUtil.parseDate(dateString);
+        checkCookie(Document.buildCookie("toto=foo; expires=" + dateString, URL_FIRST),
+                "toto", "foo", "", "first", false, date);
+
     }
 
     private void checkCookie(final Cookie cookie, final String name, final String value,
-            final String path, final String domain, final boolean secure) {
+            final String path, final String domain, final boolean secure, final Date date) {
         assertEquals(name, cookie.getName());
         assertEquals(value, cookie.getValue());
         assertNull(cookie.getComment());
         assertEquals(path, cookie.getPath());
         assertEquals(domain, cookie.getDomain());
         assertEquals(secure, cookie.getSecure());
+        assertEquals(date, cookie.getExpiryDate());
     }
 
     /**
