@@ -7,6 +7,9 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem" id="1415496">
+                JavaScript: XMLHttpRequest.responseXml NodeList elements now accesible by index.
+            </action> 
             <action type="update" dev="mguillem" id="1525234" due-to="Andre Soereng">
                 JavaScript: take expiration date into account when creating cookies.
             </action> 

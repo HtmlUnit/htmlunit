@@ -320,9 +320,6 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testResponseXML() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
 
         final String html = "<html><head>"
             + "<script>"
@@ -335,9 +332,15 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "    request = new ActiveXObject('Microsoft.XMLHTTP');"
             + "  request.open('GET', 'foo.xml', false);"
             + "  request.send('');"
-            + "  alert(request.responseXML.childNodes);"
-            + "  alert(request.responseXML.childNodes[0].nodeName);"
-            + "  alert(request.responseXML.childNodes[0].firstChild.nodeName);"
+            + "  var childNodes = request.responseXML.childNodes;"
+            + "  alert(childNodes.length);"
+            + "  var rootNode = childNodes[0];"
+            + "  alert(rootNode.nodeName);"
+            + "  alert(rootNode.attributes[0].nodeName);"
+            + "  alert(rootNode.attributes[0].nodeValue);"
+            + "  alert(rootNode.attributes['someAttr'] == rootNode.attributes[0]);"
+            + "  alert(rootNode.firstChild.nodeName);"
+            + "  alert(rootNode.firstChild.childNodes.length);"
             + "}"
             + "</script>"
             + "</head>"
@@ -349,11 +352,11 @@ public class XMLHttpRequestTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(URL_FIRST, html);
         final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
-        webConnection.setResponse(urlPage2, "<bla><foo/></bla>", "text/xml");
+        webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi/><fi/></foo></bla>", "text/xml");
         client.setWebConnection( webConnection );
         client.getPage(URL_FIRST);
 
-        final String[] alerts = { "bla", "foo" };
+        final String[] alerts = { "1", "bla", "someAttr", "someValue", "true", "foo", "2" };
         assertEquals( alerts, collectedAlerts );
     }
 
