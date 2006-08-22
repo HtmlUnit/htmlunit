@@ -501,8 +501,13 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The default value.
      */
     public Object getDefaultValue( final Class hint ) {
-        if (String.class.equals(hint)) {
-            return "[object " + getClassName() + "]";
+        if (String.class.equals(hint) || hint == null) {
+            if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+                return "[object]"; // the super helpfull IE solution
+            }
+            else {
+                return "[object " + getClassName() + "]"; // not fully correct as htmlunit names are not FF ones
+            }
         }
         else {
             return super.getDefaultValue(hint);
