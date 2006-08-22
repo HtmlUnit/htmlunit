@@ -29,20 +29,15 @@
             <p>
             This example shows how to iterate over all the rows and cells
             <source>
-final WebClient webClient = new WebClient();
-final HtmlPage page = (HtmlPage)webClient.getPage( new URL("http://foo.com") );
-
 final HtmlTable table = (HtmlTable)page.getHtmlElementById("table1");
 final List rows = table.getRows();
-final Iterator rowIterator = rows.iterator();
-while( rowIterator.hasNext() ) {
-    final HtmlTableRow row = (HtmlTableRow)iterator.next();
+for (final Iterator rowIterator = rows.iterator(); rowIterator.hasNext(); ) {
+    final HtmlTableRow row = (HtmlTableRow) rowIterator.next();
     System.out.println("Found row");
     final List cells = row.getCells();
-    final Iterator cellIterator = cells.iterator();
-    while( cellIterator.hasNext() ) {
-        final TableCell cell = (TableCell)cellIterator.next();
-        System.out.println("   Found cell: "+cell.asText());
+    for (final Iterator cellIterator = cells.iterator(); cellIterator.hasNext();) {
+        final HtmlTableCell cell = (HtmlTableCell) cellIterator.next();
+        System.out.println("   Found cell: " + cell.asText());
     }
 }
             </source>
