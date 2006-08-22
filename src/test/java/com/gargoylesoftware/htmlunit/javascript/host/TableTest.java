@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -502,6 +503,60 @@ public class TableTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+    
+    /**
+     * Tests string default values
+     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1538136&group_id=47038
+     * @throws Exception if the test fails
+     */
+    public void testStringValuesIE() throws Exception {
+        final String[] expectedAlerts = { "table: [object]", "row: [object]", "cell: [object]" };
+        testStringValues(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlerts);
+    }
+
+    /**
+     * Test string values for FF. Currently not working as htmlunit's object names don't map FF ones
+     * @throws Exception if the test fails
+     */
+    public void testStringValuesFF() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String[] expectedAlerts = { "table: [object HTMLTableElement]", 
+                "row: [object HTMLRowElement]", "cell: [object HTMLCellElement]" };
+        testStringValues(BrowserVersion.MOZILLA_1_0, expectedAlerts);
+    }
+
+    /**
+     * Utility method
+     */
+    private void testStringValues(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+        final String content =
+            "<html><head>"
+            + "  <script>"
+            + "    function test()"
+            + "    {"
+            + "      alert('table: ' + document.getElementById('myTable'));" 
+            + "      alert('row: ' + document.getElementById('myRow'));"
+            + "      alert('cell: ' + document.getElementById('myCell'));"
+            + "    }"
+            + "  </script>"
+            + "  </head>"
+            + "  <body onload='test()'>"
+            + "    <table id='myTable'>"
+            + "      <tr id='myRow'>"
+            + "        <th id='myCell'>Foo</th>"
+            + "      </tr>"
+            + "    </table>"
+            + "  </body>"
+            + "</html>";
+        
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
