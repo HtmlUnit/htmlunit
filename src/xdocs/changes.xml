@@ -7,6 +7,9 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem" id="1244810" due-to="Daniel Gredler">
+                Transparently decompress server response if gzipped for transfer.
+            </action>
             <action type="update" dev="mguillem" id="1538136">
                 JavaScript: fixed default String conversion of tables, table rows and table cells
             </action>

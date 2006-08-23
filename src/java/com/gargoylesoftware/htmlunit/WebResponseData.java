@@ -37,14 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Simple data object to simplify WebResponse creation
@@ -70,10 +73,16 @@ public class WebResponseData {
             final List responseHeaders) {
 
         validateHeaders(responseHeaders);
-        body_ = body;
         statusCode_ = statusCode;
         statusMessage_ = statusMessage;
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
+
+        try {
+            body_ = getBody( new ByteArrayInputStream( body ), responseHeaders );
+        }
+        catch (final IOException e) {
+            body_ = body;
+        }
     }
 
     /**
@@ -90,10 +99,10 @@ public class WebResponseData {
             final String statusMessage, final List responseHeaders) throws IOException {
 
         validateHeaders(responseHeaders);
-        body_ = IOUtils.toByteArray(bodyStream);
         statusCode_ = statusCode;
         statusMessage_ = statusMessage;
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
+        body_ = getBody( bodyStream, responseHeaders );
     }
 
     /** 
@@ -107,11 +116,38 @@ public class WebResponseData {
         while (iterator.hasNext()) {
             final Object object = iterator.next();
             if (object instanceof NameValuePair == false) {
-                throw new IllegalArgumentException(
-                        "Only KeyValuePairs may be in the response header list but found: "
-                            + object.getClass().getName());
+                final String name = object.getClass().getName();
+                final String msg = "Only NameValuePairs may be in the response header list, but found a " + name + ".";
+                throw new IllegalArgumentException( msg );
             }
         }
+    }
+
+    /**
+     * Returns the body byte array contained by the specified input stream.
+     * If the response headers indicate that the data has been compressed,
+     * the data stream is handled appropriately.
+     * @param stream The input stream which contains the body.
+     * @param headers The response headers.
+     * @return The specified body stream, as a byte array.
+     * @throws IOException If a stream error occurs.
+     */
+    private byte[] getBody( InputStream stream, final List headers ) throws IOException {
+        String encoding = null;
+        for (final Iterator i = headers.iterator(); i.hasNext(); ) {
+            final NameValuePair header = (NameValuePair) i.next();
+            final String headerName = header.getName().trim();
+            if( headerName.equalsIgnoreCase( "content-encoding" ) ) {
+                encoding = header.getValue();
+                break;
+            }
+        }
+        if( encoding != null ) {
+            if( StringUtils.contains( encoding, "gzip" ) ) {
+                stream = new GZIPInputStream( stream );
+            }
+        }
+        return IOUtils.toByteArray( stream );
     }
 
     /**
