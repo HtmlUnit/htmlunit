@@ -61,6 +61,8 @@ import org.w3c.dom.NodeList;
  * @version $Revision: 1158 $
  */
 public class ScriptableWrapper extends ScriptableObject {
+    private static final long serialVersionUID = 1736378450382368760L;
+
     private final Map properties_ = new HashMap();
 
     private Method getByIndexMethod_;
@@ -127,7 +129,7 @@ public class ScriptableWrapper extends ScriptableObject {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      * @see org.mozilla.javascript.ScriptableObject#get(java.lang.String, org.mozilla.javascript.Scriptable)
      */
     public Object get(final String name, final Scriptable start) {
@@ -158,7 +160,7 @@ public class ScriptableWrapper extends ScriptableObject {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      * @see org.mozilla.javascript.ScriptableObject#has(java.lang.String,
      *      org.mozilla.javascript.Scriptable)
      */
@@ -192,7 +194,7 @@ public class ScriptableWrapper extends ScriptableObject {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      * @see org.mozilla.javascript.ScriptableObject#get(int, org.mozilla.javascript.Scriptable)
      */
     public Object get(final int index, final Scriptable start) {
@@ -208,7 +210,7 @@ public class ScriptableWrapper extends ScriptableObject {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
      */
     public Object getDefaultValue(final Class hint) {
@@ -229,7 +231,7 @@ public class ScriptableWrapper extends ScriptableObject {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      * @see org.mozilla.javascript.ScriptableObject#getClassName()
      */
     public String getClassName() {

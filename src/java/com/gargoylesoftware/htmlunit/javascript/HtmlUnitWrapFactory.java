@@ -54,7 +54,7 @@ public class HtmlUnitWrapFactory extends WrapFactory {
     /**
      * Wraps Objects used by htmlunit (like {@link NodeList}) or delegates to
      * parent class.
-     * 
+     * {@inheritDoc}
      * @see org.mozilla.javascript.WrapFactory#wrapAsJavaObject(org.mozilla.javascript.Context,
      *      org.mozilla.javascript.Scriptable, java.lang.Object,
      *      java.lang.Class)
