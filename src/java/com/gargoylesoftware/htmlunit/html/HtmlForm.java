@@ -374,14 +374,14 @@ public class HtmlForm extends ClickableElement {
         if( tagName.equals( "input" ) ) {
             final HtmlInput input = (HtmlInput)element;
             final String type = input.getTypeAttribute().toLowerCase();
-            if( type.equals("submit") || type.equals("image") ){
+            if( type.equals("submit") || type.equals("image") || type.equals("reset")){
                 return false;
             }
         }
         if ( tagName.equals("button") ) {
             final HtmlButton button = (HtmlButton)element;
             final String type = button.getTypeAttribute().toLowerCase();
-            if( type.equals("submit") ){
+            if( type.equals("submit") || type.equals("reset")){
                 return false;
             }
         }

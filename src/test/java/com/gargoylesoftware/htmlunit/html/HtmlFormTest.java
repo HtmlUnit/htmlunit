@@ -679,6 +679,34 @@ public class HtmlFormTest extends WebTestCase {
 
         assertEquals( expectedParameters, collectedParameters );
     }
+    
+    /**
+     * Reset buttons should not be sucessful controls.
+     * @see <a href="http://www.w3.org/TR/html4/interact/forms.html#h-17.13.2">Spec</a>
+     * @throws Exception if the test fails
+     */
+    public void testSubmit_IgnoresResetControls() throws Exception {
+        final String htmlContent = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1' method='post'>"
+            + "    <button type='reset' name='buttonreset' value='buttonreset'/>"
+            + "    <input type='reset' name='reset' value='reset'/>"
+            + "    <input type='submit' name='submit' value='submit'/>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
+
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+
+        final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("submit");
+        button.click();
+
+        final List expectedParameters = Arrays.asList(new Object[] {new KeyValuePair(
+                "submit",
+                "submit")});
+        final List collectedParameters = webConnection.getLastParameters();
+
+        assertEquals(expectedParameters, collectedParameters);
+    }    
 
     /**
      * @throws Exception if the test fails
