@@ -52,13 +52,13 @@ import org.apache.commons.lang.StringUtils;
  */
 public class WebResponseDataTest extends WebTestCase {
 
-    private final static String GZIPPED_FILE = "test.html.gz";
+    private static final String GZIPPED_FILE = "test.html.gz";
 
     /**
      * Create an instance.
      * @param name The name of the test.
      */
-    public WebResponseDataTest( String name ) {
+    public WebResponseDataTest( final String name ) {
         super( name );
     }
 
