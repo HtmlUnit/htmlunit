@@ -234,16 +234,6 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
     </antcall>
     <antcall target="get-dependency">
         <param name="type" value="test"/>
-        <param name="project" value="commons-jelly"/>
-        <param name="jarName" value="commons-jelly-tags-junit-1.0.jar"/>
-    </antcall>
-    <antcall target="get-dependency">
-        <param name="type" value="test"/>
-        <param name="project" value="commons-jelly"/>
-        <param name="jarName" value="commons-jelly-tags-xml-1.0.jar"/>
-    </antcall>
-    <antcall target="get-dependency">
-        <param name="type" value="test"/>
         <param name="project" value="gsbase"/>
         <param name="jarName" value="gsbase-2.0.jar"/>
     </antcall>
@@ -258,37 +248,6 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
         <param name="jarName" value="servlet-api-2.4.jar"/>
     </antcall>
     
-    <!-- jelly -->
-    <antcall target="get-dependency">
-        <param name="type" value="jelly"/>
-        <param name="project" value="commons-jelly"/>
-        <param name="jarName" value="commons-jelly-1.0.jar"/>
-    </antcall>
-    <antcall target="get-dependency">
-        <param name="type" value="jelly"/>
-        <param name="project" value="commons-jelly"/>
-        <param name="jarName" value="commons-jelly-tags-log-1.0.jar"/>
-    </antcall>
-    <antcall target="get-dependency">
-        <param name="type" value="jelly"/>
-        <param name="project" value="commons-jexl"/>
-        <param name="jarName" value="commons-jexl-1.0.jar"/>
-    </antcall>
-    <antcall target="get-dependency">
-        <param name="type" value="jelly"/>
-        <param name="project" value="commons-cli"/>
-        <param name="jarName" value="commons-cli-1.0.jar"/>
-    </antcall>
-    <antcall target="get-dependency">
-        <param name="type" value="jelly"/>
-        <param name="project" value="dom4j"/>
-        <param name="jarName" value="dom4j-1.6.1.jar"/>
-    </antcall>
-    <antcall target="get-dependency">
-        <param name="type" value="jelly"/>
-        <param name="project" value="commons-beanutils"/>
-        <param name="jarName" value="commons-beanutils-1.7.0.jar"/>
-    </antcall>
 </target>
 
 </project>

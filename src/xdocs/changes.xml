@@ -7,6 +7,9 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem">
+                Removed Jelly support.
+            </action>
             <action type="update" dev="mguillem" id="1545598">
                 Updated doc to reflect migration from CVS to SVN.
             </action>
