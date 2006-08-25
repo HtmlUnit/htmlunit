@@ -229,11 +229,6 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
     </antcall>
     <antcall target="get-dependency">
         <param name="type" value="test"/>
-        <param name="project" value="junitperf"/>
-        <param name="jarName" value="junitperf-1.8.jar"/>
-    </antcall>
-    <antcall target="get-dependency">
-        <param name="type" value="test"/>
         <param name="project" value="gsbase"/>
         <param name="jarName" value="gsbase-2.0.jar"/>
     </antcall>

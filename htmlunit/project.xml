@@ -205,17 +205,6 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>junitperf</groupId>
-            <artifactId>junitperf</artifactId>
-            <version>1.8</version>
-            <type>jar</type>
-            <url>http://www.clarkware.com</url>
-            <properties>
-                <htmlunit.group>test</htmlunit.group>
-                <htmlunit.description>Additional support for testing</htmlunit.description>
-            </properties>
-        </dependency>
-        <dependency>
             <groupId>jaxen</groupId>
             <artifactId>jaxen</artifactId>
             <version>1.1-beta-9</version>

@@ -69,20 +69,6 @@
 
             </j:forEach>
 
-            <tr><th>Optional JARs for jelly scripting support</th><th>Description</th></tr>
-            <j:forEach var="lib" items="${pom.artifacts}">
-                <j:set var="dep" value="${lib.dependency}"/>
-                <j:if test="${dep.getProperty('htmlunit.group')=='jelly'}">
-                    <tr>
-                    <tr>
-
-                        <td><a href="${dep.url}">${dep.artifact}</a></td>
-                        <td>${dep.getProperty('htmlunit.description')}</td>
-                    </tr>
-                    </tr>
-                </j:if>
-            </j:forEach>
-
             <tr><th>Optional JARs for running the unit tests</th><th>Description</th></tr>
 
             <j:forEach var="lib" items="${pom.artifacts}">
@@ -128,7 +114,7 @@
             </p>
             <p>
                 Note that if you are reading this on the HtmlUnit website then the version numbers
-                reflect what is currently in CVS, not neccessarily what versions are in use in
+                reflect what is currently in SVN, not neccessarily what versions are in use in
                 the distribution that you have downloaded.  In particular, the version number
                 for HtmlUnit itself may not reflect a version currently available in the maven
                 repository.
@@ -244,7 +230,6 @@
               <ant:include name="**/*.xsl"/>
               <ant:include name="**/*.jsl"/>
               <ant:include name="**/*.fml"/>
-              <ant:include name="**/*.jelly"/>
               <ant:include name="**/*.gif"/>
               <ant:include name="**/*.jpg"/>
               <ant:include name="**/*.img"/>
@@ -274,15 +259,9 @@
 
 	<!-- copy resource files for the tests -->
     <postGoal name="test:compile">
-        <ant:copy todir="target/test-classes/com/gargoylesoftware/htmlunit/jelly">
-            <ant:fileset dir="${basedir}/src/test/java/com/gargoylesoftware/htmlunit/jelly">
-                <ant:include name="*.jelly"/>
-			    <ant:exclude name="CVS"/>
-            </ant:fileset>
-        </ant:copy>    
         <ant:copy todir="target/test-classes/com/gargoylesoftware/htmlunit/testfiles">
             <ant:fileset dir="${basedir}/src/test/java/com/gargoylesoftware/htmlunit/testfiles">
-			    <ant:exclude name="CVS"/>
+			    <ant:exclude name=".svn"/>
             </ant:fileset>
         </ant:copy>
     </postGoal>
