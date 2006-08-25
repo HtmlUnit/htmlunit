@@ -216,85 +216,6 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>commons-jelly</groupId>
-            <artifactId>commons-jelly</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
-            <url>http://jakarta.apache.org/commons/jelly</url>
-            <properties>
-                <htmlunit.group>jelly</htmlunit.group>
-                <htmlunit.description>Jelly itself</htmlunit.description>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>commons-jelly</groupId>
-            <artifactId>commons-jelly-tags-log</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
-            <url>http://jakarta.apache.org/commons/jelly</url>
-            <properties>
-                <htmlunit.group>jelly</htmlunit.group>
-                <htmlunit.description>Jelly tags for logging</htmlunit.description>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>commons-jelly</groupId>
-            <artifactId>commons-jelly-tags-xml</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
-            <url>http://jakarta.apache.org/commons/jelly/libs/xml/</url>
-            <properties>
-                <classloader>root.maven</classloader>
-                <htmlunit.group>test</htmlunit.group>
-                <htmlunit.description>Support for building HtmlUnit</htmlunit.description>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>commons-jelly</groupId>
-            <artifactId>commons-jelly-tags-junit</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
-            <url>http://jakarta.apache.org/commons/jelly/libs/junit/</url>
-            <properties>
-                <classloader>root.maven</classloader>
-                <htmlunit.group>test</htmlunit.group>
-                <htmlunit.description>Support for building HtmlUnit</htmlunit.description>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>commons-jexl</groupId>
-            <artifactId>commons-jexl</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
-            <url>http://jakarta.apache.org/commons/jexl</url>
-            <properties>
-                <htmlunit.group>jelly</htmlunit.group>
-                <htmlunit.description>Expression language</htmlunit.description>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>commons-cli</groupId>
-            <artifactId>commons-cli</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
-            <url>http://jakarta.apache.org/commons/cli</url>
-            <properties>
-                <htmlunit.group>jelly</htmlunit.group>
-                <htmlunit.description>Command line interface</htmlunit.description>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>1.6.1</version>
-            <type>jar</type>
-            <url>http://www.dom4j.org/</url>
-            <properties>
-                <htmlunit.group>jelly</htmlunit.group>
-                <htmlunit.description>XML DOM wrapper</htmlunit.description>
-            </properties>
-        </dependency>
-        <dependency>
             <groupId>jaxen</groupId>
             <artifactId>jaxen</artifactId>
             <version>1.1-beta-9</version>
@@ -314,17 +235,6 @@
             <properties>
                 <htmlunit.group>required</htmlunit.group>
                 <htmlunit.description>Collection classes</htmlunit.description>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.7.0</version>
-            <type>jar</type>
-            <url>http://jakarta.apache.org/commons/beanutils</url>
-            <properties>
-                <htmlunit.group>jelly</htmlunit.group>
-                <htmlunit.description>Javabean support</htmlunit.description>
             </properties>
         </dependency>
         <dependency>
