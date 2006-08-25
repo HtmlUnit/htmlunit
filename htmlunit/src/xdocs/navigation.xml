@@ -27,11 +27,10 @@
         </menu>
         <menu name="User docs">
             <item name="Logging" href="/logging.html"/>
-            <item name="Jelly reference" href="/jelly-reference.html"/>
             <item name="FAQ" href="/faq.html"/>
         </menu>
         <menu name="Developer docs">
-            <item name="Building from CVS" href="/buildingFromCvs.html"/>
+            <item name="Building from SVN" href="/buildingFromSVN.html"/>
             <item name="Coding conventions" href="/codingConventions.html"/>
             <item name="Submitting bugs" href="/submittingBugs.html"/>
             <item name="Submitting patches" href="/submittingPatches.html"/>

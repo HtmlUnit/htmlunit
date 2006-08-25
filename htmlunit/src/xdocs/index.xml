@@ -102,7 +102,7 @@
                         <a href="submittingPatches.html">Submitting patches</a>
                     </li>
                     <li>
-                        <a href="buildingFromCvs.html">Getting and building the most recent code from CVS</a>
+                        <a href="buildingFromSVN.html">Getting and building the most recent code from SVN</a>
                     </li>
                 </ul>
             </p>
