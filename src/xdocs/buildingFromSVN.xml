@@ -2,29 +2,29 @@
 <document>
 
     <properties>
-        <title>Building HtmlUnit from CVS</title>
+        <title>Building HtmlUnit from SVN</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
         <author email="BarnabyCourt@users.sourceforge.net">BarnabyCourt</author>
+        <author email="mguillem@users.sourceforge.net">Marc Guillemot</author>
         <revision>$Revision$</revision>
     </properties>
 
     <body>
         <section>
             <p>
-                Building HtmlUnit from the cvs repository will give you the latest version of the code.  At
-                any time, all the code in cvs should be compilable and should pass all the unit tests.  There
+                Building HtmlUnit from the SVN repository will give you the latest version of the code.  At
+                any time, all the code in SVN should be compilable and should pass all the unit tests.  There
                 is no guarantee that it will be full featured - this is a work in progress.
             </p>
         </section>
 
         <section name="Checking out">
             <p>
-            Create a directory for HtmlUnit (ie c:\htmlunit or ~/htmlunit).  Change to that directory and execute the
-            following commands.  When prompted for a password, just press the enter key.
+            Create a directory for HtmlUnit (for instance c:\htmlunit or ~/htmlunit).  Change to that directory and execute the
+            following commands.
             </p>
             <source>
-cvs -d:pserver:anonymous@htmlunit.cvs.sourceforge.net:/cvsroot/htmlunit login
-cvs -z3 -d:pserver:anonymous@htmlunit.cvs.sourceforge.net:/cvsroot/htmlunit co htmlunit
+svn co https://svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .
             </source>
         </section>
 
@@ -32,7 +32,7 @@ cvs -z3 -d:pserver:anonymous@htmlunit.cvs.sourceforge.net:/cvsroot/htmlunit co h
             <p>
                 Although it is still possible to compile the code with 
                 <a href="http://ant.apache.org">Ant</a> 1.5 or higher, the preferred way
-                to build HtmlUnit is with <a href="http://maven.apache.org">maven</a>.
+                to build HtmlUnit is with <a href="http://maven.apache.org">maven 1</a>.
             </p>
             <source>maven java:compile</source>
             <p>
