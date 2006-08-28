@@ -443,6 +443,9 @@ public abstract class DomNode implements Cloneable {
      */
     public Object getScriptObject() {
         if (scriptObject_ == null) {
+            if (this == getPage()) {
+                throw new IllegalStateException("No script object associated with the HtmlPage");
+            }
             scriptObject_ = ((SimpleScriptable) getPage().getScriptObject()).makeScriptableFor(this);
         }
         return scriptObject_;
