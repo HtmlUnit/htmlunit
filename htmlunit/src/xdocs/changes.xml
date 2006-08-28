@@ -8,6 +8,10 @@
     <body>
         <release version="next">
             <action type="update" dev="mguillem">
+            	INCOMPATIBLE CHANGE: OK button is now simulated for javascript confirm calls when no ConfirmHandler is
+            	installed (it was was the Cancel button previously).
+            </action>
+            <action type="update" dev="mguillem">
                 Removed Jelly support.
             </action>
             <action type="update" dev="mguillem" id="1545598">

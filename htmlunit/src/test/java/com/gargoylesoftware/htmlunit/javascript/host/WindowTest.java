@@ -614,26 +614,15 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testConfirm_noConfirmHandler() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-        final List collectedAlerts = new ArrayList();
-        final List collectedConfirms = new ArrayList();
-
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>"
             + "</head><body onload='doTest()'></body></html>";
 
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webClient.setWebConnection( webConnection );
-
         getLog().warn("Warning for no confirm handler expected next");
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage(URL_FIRST);
-        assertEquals( "First", firstPage.getTitleText() );
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
 
-        assertEquals( Collections.EMPTY_LIST, collectedConfirms );
-        assertEquals( Collections.singletonList("false"), collectedAlerts );
+        assertEquals( Collections.singletonList("true"), collectedAlerts );
     }
 
 

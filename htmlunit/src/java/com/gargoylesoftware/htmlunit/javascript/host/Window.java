@@ -142,11 +142,12 @@ public class Window extends SimpleScriptable {
      * @param message The message
      * @return true if ok was pressed, false if cancel was pressed
      */
-    public boolean jsxFunction_confirm( final String message ) {
+    public boolean jsxFunction_confirm(final String message) {
         final ConfirmHandler handler = getWebWindow().getWebClient().getConfirmHandler();
-        if( handler == null ) {
-            getLog().warn("window.confirm(\""+message+"\") no confirm handler installed");
-            return false;
+        if (handler == null) {
+            getLog().warn("window.confirm(\"" 
+                    + message + "\") no confirm handler installed, simulating the OK button");
+            return true;
         }
         else {
             return handler.handleConfirm(document_.getHtmlPage(), message);
