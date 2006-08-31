@@ -264,6 +264,11 @@
 			    <ant:exclude name=".svn"/>
             </ant:fileset>
         </ant:copy>
+        <ant:copy todir="target/test-classes/">
+            <ant:fileset dir="${basedir}/src/test/java/">
+			    <ant:include name="**/*.html.gz"/>
+            </ant:fileset>
+        </ant:copy>
     </postGoal>
 
     <!-- Run all the tests as quickly as possible.  This only outputs results
