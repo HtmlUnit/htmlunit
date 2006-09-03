@@ -40,8 +40,13 @@ package com.gargoylesoftware.htmlunit;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -56,6 +61,7 @@ import java.util.Map;
 public class ThreadManager {
 
     private Map threadMap_ = Collections.synchronizedMap(new HashMap());
+    private static final Log LOG = LogFactory.getLog(ThreadManager.class);
 
     /**
      * @return The number of tracked threads. 
@@ -90,12 +96,13 @@ public class ThreadManager {
      * objects as up to date as possible.
      * 
      * @param job The job to start
+     * @param label a job description
      * @return ID of the new thread, suitable for use in JavaScript and required
      * when calling {@link #stopThread(int)} 
      */
-    public int startThread(final Runnable job) {
+    public int startThread(final Runnable job, final String label) {
         final int myThreadID = NextThreadID_++;
-        final Thread newThread = new Thread(job, "HtmlUnit Managed Thread #" + myThreadID) {
+        final Thread newThread = new Thread(job, "HtmlUnit Managed Thread #" + myThreadID + ": " + label) {
             public void run() {
                 try {
                     super.run();
@@ -139,6 +146,7 @@ public class ThreadManager {
      */
     public boolean joinAll(long maxWaitMillis) {
         while (maxWaitMillis > 0 && !threadMap_.isEmpty()) {
+
             Iterator iter = threadMap_.values().iterator();
             while (maxWaitMillis > 0 && iter.hasNext()) {
                 final Thread thread;
@@ -151,35 +159,26 @@ public class ThreadManager {
                 }
                 final long before = System.currentTimeMillis();
                 try {
+                    LOG.info("Trying to join: " + thread);
                     thread.join(maxWaitMillis);
                 }
                 catch (final InterruptedException e) {
-                    throw new RuntimeException("Main thread interrupted", e);
+                    throw new RuntimeException("Thread " + thread + " interrupted", e);
                 }
                 maxWaitMillis = maxWaitMillis - (System.currentTimeMillis() - before);
             }
         }
         return threadMap_.size() == 0;
     }
+
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
-     * Attempts to stop running threads. Currently allows up to 
-     * a 1 second wait for those threads to stop just to be sure.
+     * Attempts to stop running threads.
      */
     public void interruptAll() {
-        Iterator iter = threadMap_.values().iterator();
-        while (iter.hasNext()) {
-            final Thread thread;
-            try {
-                thread = (Thread) iter.next();
-            }
-            catch (final ConcurrentModificationException e) {
-                iter = threadMap_.values().iterator();
-                continue;
-            }
-            thread.interrupt();
+        final Set keys = new HashSet(threadMap_.keySet());
+        for (final Iterator iter=keys.iterator(); iter.hasNext();) {
+            stopThread(((Integer) iter.next()).intValue());
         }
-        joinAll(1000);
     }
 }

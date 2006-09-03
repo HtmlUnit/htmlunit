@@ -312,7 +312,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 }
             };
             getLog().debug("Starting XMLHttpRequest thread for asynchronous request");
-            threadID_ = getWindow().getWebWindow().getThreadManager().startThread(t);
+            threadID_ = getWindow().getWebWindow().getThreadManager().startThread(t, "XMLHttpRequest.send");
         }
         else {
             doSend(content, Context.getCurrentContext());
