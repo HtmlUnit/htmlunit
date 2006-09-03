@@ -306,7 +306,7 @@ public class Window extends SimpleScriptable {
         final Object codeToExec = getObjectArg(0, args, null);
         final int timeout = getIntArg(1, args, 0);
         final Runnable job = createJavaScriptBackgroundJob(codeToExec, timeout, thisWindow, false);
-        final int id = thisWindow.getWebWindow().getThreadManager().startThread(job);
+        final int id = thisWindow.getWebWindow().getThreadManager().startThread(job, "window.setTimeout");
         return id;
     }
 
@@ -881,7 +881,7 @@ public class Window extends SimpleScriptable {
         final int timeout = getIntArg(1, args, 0);
 
         final Runnable job = createJavaScriptBackgroundJob(codeToExec, timeout, thisWindow, true);
-        final int id = thisWindow.getWebWindow().getThreadManager().startThread(job);
+        final int id = thisWindow.getWebWindow().getThreadManager().startThread(job, "window.setInterval");
         return id;
     }
 
