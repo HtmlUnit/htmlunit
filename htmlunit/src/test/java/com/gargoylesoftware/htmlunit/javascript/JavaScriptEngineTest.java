@@ -965,6 +965,42 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    public void testTimeout() throws Exception {
+      
+        final long timeout = 2000;
+        JavaScriptEngine.setTimeout(timeout);
+        final WebClient client = new WebClient();
+        client.setThrowExceptionOnScriptError(false);
+
+        final String content = "<html><body><script>while(1) {}</script></body></html>";
+        
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(content);
+        client.setWebConnection(webConnection);
+
+        final Exception[] exceptions = { null }; 
+        final Thread runner = new Thread() {
+            public void run() {
+                try {
+                    client.getPage(URL_FIRST);
+                }
+                catch (final Exception e) {
+                    exceptions[0] = e;
+                }
+            }
+        };
+        
+        runner.start();
+
+        // Wait longer just to be sure we don't conclude too early
+        runner.join(timeout * 2);
+        if (runner.isAlive()) {
+            runner.interrupt();
+            fail("Script was still running after timeout");
+        }
+        assertNull(exceptions[0]);
+    }
+
     private static final class CountingJavaScriptEngine extends ScriptEngine {
         private ScriptEngine delegate_;
         private int scriptExecutionCount_ = 0;
