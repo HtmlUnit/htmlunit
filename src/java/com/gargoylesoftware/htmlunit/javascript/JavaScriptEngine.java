@@ -100,8 +100,11 @@ public final class JavaScriptEngine extends ScriptEngine {
      * are freeing them as necessary.
      */
     static {
+        final HtmlUnitContextFactory contextFactory = new HtmlUnitContextFactory(getScriptEngineLog());
+        ContextFactory.initGlobal(contextFactory);
+
         contextListener_ = new ContextListener();
-        ContextFactory.getGlobal().addListener( contextListener_ );
+        contextFactory.addListener( contextListener_ );
     }
 
     /**
@@ -121,7 +124,7 @@ public final class JavaScriptEngine extends ScriptEngine {
         Assert.notNull( "htmlPage", htmlPage );
         final WebClient webClient = htmlPage.getWebClient();
 
-        final Context context = enterContext();
+        final Context context = Context.enter();
         try {
             final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
             final Window window = (Window) context.initStandardObjects( new Window() );
@@ -243,7 +246,7 @@ public final class JavaScriptEngine extends ScriptEngine {
 
         final Boolean javaScriptAlreadyRunning = (Boolean) javaScriptRunning_.get();
         javaScriptRunning_.set(Boolean.TRUE);
-        final Context context = enterContext();
+        final Context context = Context.enter();
         context.putThreadLocal(KEY_STARTING_SCOPE, scope);
         try {
             final Object result = context.evaluateString( scope, sourceCode, sourceName, lineNumber, securityDomain );
@@ -258,6 +261,15 @@ public final class JavaScriptEngine extends ScriptEngine {
                 // use a ScriptException to log it because it provides good information
                 // on the source code
                 getLog().info("Catched script exception", scriptException);
+                return null;
+            }
+        }
+        catch (final TimeoutError e) {
+            if (getWebClient().isThrowExceptionOnScriptError()) {
+                throw new RuntimeException(e);
+            }
+            else {
+                getLog().info("Catched script timeout error", e);
                 return null;
             }
         }
@@ -296,7 +308,7 @@ public final class JavaScriptEngine extends ScriptEngine {
         final Boolean javaScriptAlreadyRunning = (Boolean) javaScriptRunning_.get();
         javaScriptRunning_.set(Boolean.TRUE);
         final Function function = (Function) javaScriptFunction;
-        final Context context = enterContext();
+        final Context context = Context.enter();
         context.putThreadLocal(KEY_STARTING_SCOPE, scope);
         try {
             final Object result = function.call( context, scope, (Scriptable) thisObject, args );
@@ -315,6 +327,15 @@ public final class JavaScriptEngine extends ScriptEngine {
                 return null;
             }
         }
+        catch (final TimeoutError e) {
+            if (getWebClient().isThrowExceptionOnScriptError()) {
+                throw new RuntimeException(e);
+            }
+            else {
+                getLog().info("Catched script timeout error", e);
+                return null;
+            }
+        }
         finally {
             javaScriptRunning_.set(javaScriptAlreadyRunning);
             Context.exit();
@@ -330,19 +351,24 @@ public final class JavaScriptEngine extends ScriptEngine {
         return Boolean.TRUE.equals(javaScriptRunning_.get());
     }
 
-    /**
-     * Calls {@link Context#enter()} and initializes the context as necessary before returning it.
-     * @return A fully initialized JavaScript context associated with the current thread.
+    /** 
+     * Set the number of milliseconds a script is allowed to execute before
+     * being terminated. A value of 0 or less means no timeout.
+     *
+     * @param timeout the timeout value
      */
-    public static Context enterContext() {
-        final boolean returningNewContext = ( Context.getCurrentContext() == null );
-        final Context context = Context.enter();
-        if( returningNewContext ) {
-            context.setOptimizationLevel( -1 );
-            context.setErrorReporter( new StrictErrorReporter( getScriptEngineLog() ) );
-            context.setWrapFactory(new HtmlUnitWrapFactory());
-        }
-        return context;
+    public static void setTimeout(final long timeout) {
+        HtmlUnitContextFactory.setTimeout(timeout);
+    }
+
+    /**
+     * Returns the number of milliseconds a script is allowed to execute before
+     * being terminated. A value of 0 or less means no timeout.
+     *
+     * @return the timeout value
+     */
+    public static long getTimeout() {
+        return HtmlUnitContextFactory.getTimeout();
     }
 
     /**

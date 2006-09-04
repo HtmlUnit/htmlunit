@@ -108,7 +108,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The new object
      */
     public SimpleScriptable makeJavaScriptObject( final String className ) {
-        final Context c = JavaScriptEngine.enterContext();
+        final Context c = Context.enter();
         try {
             final SimpleScriptable scriptable = (SimpleScriptable) c.newObject(this, className);
             return scriptable;
@@ -372,7 +372,7 @@ public class SimpleScriptable extends ScriptableObject {
      */
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
 
-        JavaScriptEngine.enterContext();
+        Context.enter();
 
         try {
             // Get the JS class name for the specified DOM node.

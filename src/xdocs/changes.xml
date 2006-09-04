@@ -7,6 +7,9 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem" id="1525269" due-to="Andre Soereng">
+                JavaScript: allow to specify a maximal script execution time.
+            </action>
             <action type="update" dev="mguillem">
             	INCOMPATIBLE CHANGE: OK button is now simulated for javascript confirm calls when no ConfirmHandler is
             	installed (it was was the Cancel button previously).
