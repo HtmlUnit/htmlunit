@@ -657,6 +657,37 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals( Collections.singletonList("Got to external method"), collectedAlerts );
     }
 
+    /**
+     * Regression test for https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1552746&group_id=47038
+     * @throws Exception if the test fails
+     */
+    public void testExternalScriptWithNewLineBeforeClosingScriptTag() throws Exception {
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+
+        final String htmlContent
+            = "<html><head><title>foo</title>"
+            + "</head><body>\n"
+            + "<script src='test.js'>\n</script>" // \n between opening and closing tag is important
+            + "</body></html>";
+
+        final String jsContent
+            = "function externalMethod() {\n"
+            + "    alert('Got to external method');\n"
+            + "} \n"
+            + "externalMethod();";
+
+        webConnection.setResponse(URL_FIRST, htmlContent);
+        webConnection.setDefaultResponse(jsContent, 200, "OK", "text/javascript");
+        client.setWebConnection( webConnection );
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        client.getPage(URL_FIRST);
+        assertEquals( Collections.singletonList("Got to external method"), collectedAlerts );
+    }
 
     /**
      * Test case for bug 707134.  Currently I am unable to reproduce the problem.

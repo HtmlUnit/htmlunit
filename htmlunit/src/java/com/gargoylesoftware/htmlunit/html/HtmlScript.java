@@ -165,29 +165,7 @@ public class HtmlScript extends HtmlElement {
      */
     public DomNode appendChild(final DomNode node) {
         final DomNode response = super.appendChild(node);
-        executeScriptIfNeeded();
-        return response;
-    }
-
-    /**
-     * For internal use only
-     */
-    void executeScriptIfNeeded() {
-        final HtmlPage page = getPage();
-
-        if (!page.getWebClient().isJavaScriptEnabled()) {
-            return;
-        }
-        if (!HtmlPage.isJavaScript(getTypeAttribute(), getLanguageAttribute())) {
-            getLog().debug("Script is not javascript. Skipping execution.");
-            return;
-        }
-
-        if (getSrcAttribute() != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
-            getLog().debug("Loading external javascript: " + getSrcAttribute());
-            page.loadExternalJavaScriptFile(getSrcAttribute(), getCharsetAttribute());
-        }
-        else if (getFirstChild() != null) {
+        if (getSrcAttribute() == HtmlElement.ATTRIBUTE_NOT_DEFINED && isExecutionNeeded()) {
             final DomCharacterData textNode = (DomCharacterData) getFirstChild();
             final String scriptCode;
             if (getEventAttribute() != ATTRIBUTE_NOT_DEFINED
@@ -208,6 +186,42 @@ public class HtmlScript extends HtmlElement {
             }
             getPage().executeJavaScriptIfPossible(scriptCode,
                     "Embedded script in " + getPage().getWebResponse().getUrl().toExternalForm(), false, null);
+        }
+        return response;
+    }
+
+    /**
+     * Indicates if script execution is needed (possible)
+     * @return <code>true</code> if script should be execute
+     */
+    private boolean isExecutionNeeded() {
+        final HtmlPage page = getPage();
+
+        if (!page.getWebClient().isJavaScriptEnabled()) {
+            return false;
+        }
+        if (!HtmlPage.isJavaScript(getTypeAttribute(), getLanguageAttribute())) {
+            getLog().warn("Script is not javascript (type: " + getTypeAttribute() 
+                    + ", language: " + getLanguageAttribute() + "). Skipping execution.");
+            return false;
+        }
+        
+        return true;
+    }
+
+    /**
+     * For internal use only
+     */
+    void executeScriptIfNeeded() {
+        final HtmlPage page = getPage();
+
+        if (!isExecutionNeeded()) {
+            return;
+        }
+
+        if (getSrcAttribute() != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+            getLog().debug("Loading external javascript: " + getSrcAttribute());
+            page.loadExternalJavaScriptFile(getSrcAttribute(), getCharsetAttribute());
         }
     }
 }
