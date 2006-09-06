@@ -7,6 +7,10 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem" id="1552746">
+                JavaScript: fixed double execution of external javascript files occuring when text contained
+                between &lt;script src=...&gt; and &lt;/script&gt;..
+            </action>
             <action type="update" dev="mguillem" id="1525269" due-to="Andre Soereng">
                 JavaScript: allow to specify a maximal script execution time.
             </action>
