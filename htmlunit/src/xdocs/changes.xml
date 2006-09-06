@@ -9,7 +9,7 @@
         <release version="next">
             <action type="update" dev="mguillem" id="1552746">
                 JavaScript: fixed double execution of external javascript files occuring when text contained
-                between &lt;script src=...&gt; and &lt;/script&gt;..
+                between &lt;script src=...&gt; and &lt;/script&gt;.
             </action>
             <action type="update" dev="mguillem" id="1525269" due-to="Andre Soereng">
                 JavaScript: allow to specify a maximal script execution time.
@@ -31,7 +31,7 @@
                 Transparently decompress server response if gzipped for transfer.
             </action>
             <action type="update" dev="mguillem" id="1538136">
-                JavaScript: fixed default String conversion of tables, table rows and table cells
+                JavaScript: fixed default String conversion of objects (like table, table row, table cell, collection).
             </action>
             <action type="update" dev="mguillem" id="1415496">
                 JavaScript: XMLHttpRequest.responseXml NodeList elements now accesible by index.
