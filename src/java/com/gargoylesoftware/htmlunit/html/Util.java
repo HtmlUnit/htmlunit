@@ -95,11 +95,23 @@ public final class Util {
     public static Iterator getFollowingAxisIterator (final DomNode contextNode) {
         return new NodeIterator (contextNode) {
             protected DomNode getFirstNode (final DomNode node) {
-                return getNextNode(node);
+                if (node == null) {
+                   return null;
+                } 
+                else {
+                    final DomNode sibling = node.getNextSibling();
+                    if (sibling == null) {
+                       return getFirstNode(node.getParentNode());
+                    }
+                    else {
+                       return sibling;
+                    }
+                }
             }
+
             protected DomNode getNextNode (final DomNode node) {
                 if (node == null) {
-                    return null;
+                   return null;
                 }
                 else {
                     DomNode n = node.getFirstChild();
@@ -107,25 +119,12 @@ public final class Util {
                         n = node.getNextSibling();
                     }
                     if (n == null) {
-                        return getParentNext(node.getParentNode());
+                        return getFirstNode(node.getParentNode());
                     }
                     else {
                         return n;
                     }
                 }
-            }
-            
-            protected DomNode getParentNext(final DomNode node) {
-                if (node == null) {
-                    return null;
-                }
-
-                DomNode n = node.getNextSibling(); 
-                if (n == null) {
-                    n = getParentNext(node.getParentNode());
-                }
-
-                return n;
             }
         };
     }

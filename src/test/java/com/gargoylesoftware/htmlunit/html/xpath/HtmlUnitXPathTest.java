@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -222,5 +223,41 @@ public class HtmlUnitXPathTest extends WebTestCase {
         final HtmlUnitXPath xpath = new HtmlUnitXPath("string(//option)");
         assertEquals("foo and foo", xpath.selectSingleNode(page));
     }
+    
+    /**
+     * Regression test for
+     * https://sourceforge.net/tracker/index.php?func=detail&aid=1527799&group_id=47038&atid=448266
+     * @throws Exception if test fails
+     */
+    public void testFollowingAxis() throws Exception {
+        final String content = "<html><title>XPath tests</title><body>"
+            + "<table id='table1'>"
+            + "<tr id='tr1'>"
+            + "<td id='td11'>a3</td>"
+            + "<td id='td12'>c</td>"
+            + "</tr>"
+            + "<tr id='tr2'>"
+            + "<td id='td21'>a4</td>"
+            + "<td id='td22'>c</td>"
+            + "</tr>"
+            + "</table>"
+            + "</body></html>";
 
+        final HtmlPage page = loadPage(content);
+        final HtmlElement td12 = page.getHtmlElementById("td12");
+        final HtmlElement tr2 = page.getHtmlElementById("tr2");
+        final HtmlElement td21 = page.getHtmlElementById("td21");
+        final HtmlElement td22 = page.getHtmlElementById("td22");
+        testXPath(page, "//*[contains(.,'a4')]/following::td[.='c']", new Object[] {td22});
+
+        testXPath(page, "//body/following::*", new Object[] {});
+        testXPath(page, "//html/following::*", new Object[] {});
+        testXPath(page, "//table/following::*", new Object[] {});
+        testXPath(page, "//td[@id='td11']/following::*", new Object[] {td12, tr2, td21, td22});
+    }
+    
+    private void testXPath(final HtmlPage page, final String xpathExpr, final Object[] expectedNodes) throws Exception {
+        final HtmlUnitXPath xpath = new HtmlUnitXPath(xpathExpr);
+        assertEquals(Arrays.asList(expectedNodes), xpath.selectNodes(page));
+    }
 }

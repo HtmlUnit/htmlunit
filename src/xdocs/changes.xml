@@ -7,6 +7,9 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem" id="1527799">
+                XPath: fixed wrong behavior with following axis.
+            </action>
             <action type="update" dev="mguillem" id="1552746">
                 JavaScript: fixed double execution of external javascript files occuring when text contained
                 between &lt;script src=...&gt; and &lt;/script&gt;.
