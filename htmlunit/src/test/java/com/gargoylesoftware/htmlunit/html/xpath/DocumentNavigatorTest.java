@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * <p>Tests for the DocumentNavigator
+ * Tests for the DocumentNavigator
  *
  * @version $Revision$
  * @author Marc Guillemot
@@ -78,20 +78,6 @@ public class DocumentNavigatorTest extends WebTestCase {
     public DocumentNavigatorTest( final String name ) throws Exception {
         super( name );
         page_ = loadPage(CONTENT);
-    }
-
-    /**
-     * Test evaluation of some simple paths
-     * @throws Exception if test fails
-     */
-    public void testFollowingAxisIterator() throws Exception {
-        
-        final List expected = Arrays.asList(new String[] {"html", "head", "title", "#text", "body", "a", "#text"});
-        final Collection received= CollectionUtils
-            .collect(NAVIGATOR.getFollowingAxisIterator(page_), 
-                NODE_TO_NODENAME);
-        assertEquals(expected, received);
-        
     }
 
     /**
