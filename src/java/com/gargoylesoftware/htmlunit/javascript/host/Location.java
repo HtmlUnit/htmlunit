@@ -144,7 +144,7 @@ public class Location extends SimpleScriptable {
     public void jsxFunction_replace( final String href ) throws IOException {
         final WebWindow webWindow = window_.getWebWindow();
         final URL url = ((HtmlPage) webWindow.getEnclosedPage()).getFullyQualifiedUrl( href );
-        webWindow.getWebClient().getPage(url);
+        setUrl(url);
     }
 
     /**

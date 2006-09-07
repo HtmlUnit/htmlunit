@@ -7,6 +7,9 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem" id="1491743">
+                JavaScript: Location.replace wrongly loaded new url in top window.
+            </action>
             <action type="update" dev="mguillem" id="1527799">
                 XPath: fixed wrong behavior with following axis.
             </action>
