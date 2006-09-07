@@ -48,11 +48,12 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for Location.
+ * Tests for {@link Location}.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -452,6 +453,48 @@ public class LocationTest extends WebTestCase {
 
         assertEquals( page1.getTitleText(), page2.getTitleText() );
         assertNotSame( page1, page2 );
+    }
+
+    /**
+     * Regression test fo Bug #1289060
+     * http://sourceforge.net/tracker/index.php?func=detail&aid=1289060&group_id=47038&atid=448266
+     *
+     * @throws Exception if the test fails
+     */
+    public void testReplaceWithFrame() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+
+        final String mainContent
+            = " <html>"
+            + " <frameset rows='100,*'>"
+            + "     <frame name='menu' src='menu.html'/>"
+            + "     <frame name='content' src='content.html'/>"
+            + " </frameset>"
+            + " </html>";
+        final String frameMenu = 
+            "<html><body>"
+            + "<a href='#' id='myLink' target='content' "
+            + "onclick='parent.frames.content.location.replace(\"test.html\");'>Test2</a>"
+            + "</body></html>";
+        final String frameContent = "<html><head><title>Start content</title></head><body></body></html>";
+        final String frameTest = "<html><head><title>Test</title></head><body></body></html>";
+
+        webConnection.setResponse(URL_FIRST, mainContent);
+        webConnection.setResponse(new URL(URL_FIRST.toString() + "/menu.html" ), frameMenu);
+        webConnection.setResponse(new URL(URL_FIRST.toString() + "/content.html" ), frameContent);
+        webConnection.setResponse(new URL(URL_FIRST.toString() + "/test.html" ), frameTest);
+
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals(3, webClient.getWebWindows().size());
+        assertEquals("Start content", ((HtmlPage) page.getFrameByName("content").getEnclosedPage()).getTitleText());
+        
+        final HtmlPage menuPage = (HtmlPage) page.getFrameByName("menu").getEnclosedPage();
+        ((ClickableElement) menuPage.getHtmlElementById("myLink")).click();
+        assertEquals(3, webClient.getWebWindows().size());
+        assertEquals("Test", ((HtmlPage) page.getFrameByName("content").getEnclosedPage()).getTitleText());
     }
 
     /**
