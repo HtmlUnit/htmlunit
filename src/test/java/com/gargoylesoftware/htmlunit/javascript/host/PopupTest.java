@@ -35,81 +35,47 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.WebWindowImpl;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * The web window for a frame or iframe.
- * @version  $Revision$
- * @author Brad Clarke
+ * Tests for {@link Popup}.
+ *
+ * @version  $Revision: 1129 $
+ * @author Marc Guillemot
  */
-public class FrameWindow extends WebWindowImpl {
-    private final BaseFrame frame_;
-    /**
-     * Create an instance for a given frame
-     */
-    FrameWindow(final BaseFrame frame) {
-        super(frame.getPage().getWebClient());
-        frame_ = frame;
-        final WebWindowImpl parent = (WebWindowImpl) getParentWindow();
-        parent.addChildWindow(this);
-    }
+public class PopupTest extends WebTestCase {
 
     /**
-     * {@inheritDoc}
-     * A FrameWindow shares it's name with it's containing frame.
+     * Create an instance
+     * @param name The name of the test
      */
-    public String getName() {
-        return frame_.getNameAttribute();
+    public PopupTest( final String name ) {
+        super(name);
     }
 
-    /**
-     * {@inheritDoc}
-     * A FrameWindow shares it's name with it's containing frame.
-     */
-    public void setName(final String name) {
-        frame_.setNameAttribute(name);
-    }
 
     /**
-     * {@inheritDoc}
+     * Just test that a standard use of popup works without exception
+     * @throws Exception if the test fails
      */
-    public WebWindow getParentWindow() {
-        return frame_.getPage().getEnclosingWindow();
+    public void testPopup() throws Exception {
+        final String content = "<html><head><title>First</title><body>\n"
+            + "<script>\n"
+            + "var oPopup = window.createPopup();"
+            + "var oPopupBody = oPopup.document.body;"
+            + "oPopupBody.innerHTML = 'bla bla';"
+            + "oPopup.show(100, 100, 200, 50, document.body);"
+            + "</script>"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public WebWindow getTopWindow() {
-        return getParentWindow().getTopWindow();
-    }
-
-    /**
-     * Return the html page in wich the &lt;frame&gt; or &lt;iframe&gt; tag is contained
-     * for this frame window.
-     * This is a facility method for <code>(HtmlPage) (getParentWindow().getEnclosedPage())</code>.
-     * @return the page in the parent window.
-     */
-    public HtmlPage getEnclosingPage() {
-        return frame_.getPage();
-    }
-    
-    /**
-     * Gets the DOM node of the (i)frame containing this window.
-     * @return the dom node
-     */
-    public BaseFrame getFrameElement() {
-        return frame_;
-    }
-
-    /**
-     * Gives a basic representation for debugging purposes
-     * @return a basic representation
-     */
-    public String toString() {
-        return "FrameWindow[name=\"" + getName() + "\"]";
-    }
 }

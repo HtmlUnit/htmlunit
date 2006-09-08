@@ -550,6 +550,11 @@
         <property name="parentNode" readable="true" writable="false"/>
         <property name="previousSibling" readable="true" writable="false"/>
 
+        <function name="addEventListener">
+            <doclink url="http://developer.mozilla.org/en/docs/DOM:element.addEventListener"
+                    descr="Mozilla documenation"/>
+            <browser name="Netscape"/>
+        </function>
         <function name="appendChild"/>
         <function name="cloneNode"/>
         <function name="hasChildNodes"/>        
@@ -569,6 +574,15 @@
     <class name="Password" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"
         JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlPasswordInput">
         <!-- NOT FINISHED -->
+    </class>
+
+    <class name="Popup" classname="com.gargoylesoftware.htmlunit.javascript.host.Popup" JSObject="true">
+      <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/popup.asp" descr="MSDN documenation"/>
+      <browser name="Microsoft Internet Explorer"/>
+      <property name="document" readable="true" writable="false"/>
+      <property name="isOpen" readable="true" writable="false"/>
+      <function name="hide"/>
+      <function name="show"/>
     </class>
 
     <class name="Radio" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"
@@ -784,6 +798,7 @@
         <property name="event" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>
+        <property name="frameElement" readable="true" writable="false"/>
         <property name="frames" readable="true" writable="false"/>
         <property name="history" readable="true" writable="false"/>
         <property name="innerHeight" readable="true" writable="false">
@@ -836,6 +851,11 @@
         <function name="clearTimeout"/>
         <function name="close"/>
         <function name="confirm"/>
+        <function name="createPopup">
+            <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createpopup.asp"
+                    descr="MSDN documenation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
         <function name="detachEvent">
             <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/detachevent.asp"
                     descr="MSDN documenation"/>
@@ -846,6 +866,7 @@
                     descr="MSDN documenation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
+        <function name="eval"/>
         <function name="focus"/>
         <function name="moveBy"/>
         <function name="moveTo"/>

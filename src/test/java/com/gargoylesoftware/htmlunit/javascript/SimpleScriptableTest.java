@@ -143,6 +143,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("RowContainer");
         names.remove("FormField");
         names.remove("JavaScriptBackgroundJob");
+        names.remove("Popup");
 
         final Transformer class2ShortName = new Transformer() {
             public Object transform(final Object obj) {

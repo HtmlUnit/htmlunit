@@ -8,6 +8,18 @@
     <body>
         <release version="next">
             <action type="update" dev="mguillem">
+                JavaScript: window.eval now evaluates in the right window scope.
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: added basic support for addEventListener on DOM nodes (Mozilla).
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: added support for window.createPopup (Internet Explorer).
+            </action>
+            <action type="update" dev="mguillem">
+                Added FrameWindow.getFrameElement and support for Javascript's frameElement property on windows.
+            </action>
+            <action type="update" dev="mguillem">
                 Parser: automatically add an &lt;head&gt; element if none present in html source 
                 (as done by Internet Explorer and Firefox).
             </action>

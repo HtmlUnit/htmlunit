@@ -1886,4 +1886,34 @@ public class WindowTest extends WebTestCase {
         assertTrue("threads did not stop in time", page.getEnclosingWindow().getThreadManager().joinAll(1000));
         assertEquals(Collections.nCopies(max, "ping"), collectedAlerts);
     }
+
+    /**
+     * Tests that nested setTimeouts that are deeper than Thread.MAX_PRIORITY
+     * do not cause an exception.
+     * @throws Exception If the test fails
+     */
+    public void testEvalScope() throws Exception {
+        final String content = "<html><body>"
+            + "<iframe src='iframe.html'></iframe>"
+            + "</body></html>";
+        final String iframe = "<html><body>"
+            + "<script>"
+            + "window.parent.eval('var foo = 1');"
+            + "alert(window.parent.foo)"
+            + "</script>"
+            + "</body></html>";
+
+        final WebClient webClient = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        webConnection.setResponse(URL_FIRST, content);
+        webConnection.setDefaultResponse(iframe);
+        webClient.setWebConnection( webConnection );
+
+        webClient.getPage(URL_FIRST);
+        final String[] expectedAlersts = { "1" };
+        assertEquals(expectedAlersts, collectedAlerts);
+    }
 }
