@@ -7,6 +7,10 @@
 
     <body>
         <release version="next">
+            <action type="update" dev="mguillem">
+                Parser: automatically add an &lt;head&gt; element if none present in html source 
+                (as done by Internet Explorer and Firefox).
+            </action>
             <action type="update" dev="mguillem" id="1491743">
                 JavaScript: Location.replace wrongly loaded new url in top window.
             </action>

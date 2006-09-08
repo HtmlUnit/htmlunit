@@ -110,7 +110,7 @@ public class HTMLElement extends NodeImpl {
     private int scrollTop_ = 0;
 
     /**
-     * The tag names of the objects for which outerHTML is readonly 
+     * The tag names of the objects for which outerHTML is readonly
      */
     private static final List OUTER_HTML_READONLY =
         Arrays.asList(new String[] {
@@ -260,7 +260,7 @@ public class HTMLElement extends NodeImpl {
      * Set an attribute.
      * See also <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-F68F082">
      * the DOM reference</a>
-     * 
+     *
      * @param name Name of the attribute to set
      * @param value Value to set the attribute to
      */
@@ -270,7 +270,7 @@ public class HTMLElement extends NodeImpl {
 
     /**
      * Remove an attribute.
-     * 
+     *
      * @param name Name of the attribute to remove
      */
     public void jsxFunction_removeAttribute(final String name) {
@@ -366,7 +366,7 @@ public class HTMLElement extends NodeImpl {
      * Gets the outerHTML of the node.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/outerhtml.asp">
      * MSDN documentation</a>
-     * @return the contents of this node as html 
+     * @return the contents of this node as html
      * (note: the formatting isn't currently exactly the same as IE)
      */
     public String jsxGet_outerHTML() {
@@ -509,7 +509,7 @@ public class HTMLElement extends NodeImpl {
                     }
                 };
                 final HtmlPage pseudoPage = HTMLParser.parse(webResp, pseudoWindow);
-                final HtmlBody body = (HtmlBody) pseudoPage.getDocumentElement().getFirstChild();
+                final HtmlBody body = (HtmlBody) pseudoPage.getDocumentElement().getLastChild();
 
                 final Collection nodes = new ArrayList();
                 for (final Iterator iter = body.getChildIterator(); iter.hasNext();) {
@@ -538,10 +538,10 @@ public class HTMLElement extends NodeImpl {
     /**
      * Copies the node to make it available to the page.
      * All this stuff just to change the htmlPage_ property on all nodes!
-     * 
+     *
      * @param node The node to copy.
      * @param page The page containing the node.
-     * @return a node with the same properties but bound to the page. 
+     * @return a node with the same properties but bound to the page.
      */
     private DomNode copy(final DomNode node, final HtmlPage page) {
         final DomNode copy;
@@ -562,7 +562,7 @@ public class HTMLElement extends NodeImpl {
     }
 
     /**
-     * Gets the attributes of the element in the form of a {@link org.xml.sax.Attributes} 
+     * Gets the attributes of the element in the form of a {@link org.xml.sax.Attributes}
      * @param element the element to read the attributes from
      * @return the attributes
      */
