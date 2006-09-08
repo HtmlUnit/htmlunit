@@ -181,4 +181,12 @@ public class ThreadManager {
             stopThread(((Integer) iter.next()).intValue());
         }
     }
+
+    /**
+     * Gives a basic representation for debug purposes.
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        return "ThreadManager: " + threadMap_; 
+    }
 }
