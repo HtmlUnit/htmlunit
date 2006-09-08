@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -338,5 +339,18 @@ public class NodeImpl extends SimpleScriptable {
             return null;
         }
         return getScriptableFor( domNode );
+    }
+
+
+    /**
+     * Allows the registration of event listeners on the event target.<br> 
+     * <b>Note</b: does currently nothing, only a placeholder.
+     * @param type the event type to listen for (like "onclick")
+     * @param listener the event listener
+     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
+     * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.addEventListener">Mozilla documentation</a>
+     */
+    public void jsxFunction_addEventListener(final String type, final Function listener, final boolean useCapture) {
+        getLog().warn("addEventListener for \"" + type + "\" not implemented, no event will be triggered");
     }
 }

@@ -68,6 +68,7 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
@@ -232,6 +233,27 @@ public class Window extends SimpleScriptable {
         return newWebWindow.getScriptObject();
     }
 
+
+    /**
+     * Creates a popup window Open a new window
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createpopup.asp">
+     * MSDN documentation</a>
+     * @param context The javascript Context
+     * @param scriptable The object that the function was called on.
+     * @param args The arguments passed to the function.
+     * @param function The function object that was invoked.
+     * @return The created popup
+     */
+    public static Popup jsxFunction_createPopup(
+        final Context context, final Scriptable scriptable, final Object[] args, final Function function ) {
+
+        final Window thisWindow = (Window) scriptable;
+
+        final Popup popup = (Popup) thisWindow.makeJavaScriptObject("Popup");
+        popup.init(thisWindow.getWebWindow().getWebClient());
+        
+        return popup;
+    }
 
     private URL makeUrlForOpenWindow(final String urlString) {
         if (urlString.length() == 0) {
@@ -465,6 +487,20 @@ public class Window extends SimpleScriptable {
         return null;
     }
 
+
+    /**
+     * Return the (i)frame in which the window is contained.
+     * @return <code>null</code> for a top level window
+     */
+    public Object jsxGet_frameElement() {
+        final WebWindow window = getWebWindow();
+        if (window instanceof FrameWindow) {
+            return ((FrameWindow) window).getFrameElement().getScriptObject();
+        }
+        else {
+            return null;
+        }
+    }
 
     /**
      * Return the value of the frames property.
@@ -823,9 +859,7 @@ public class Window extends SimpleScriptable {
      */
     public Object jsxFunction_execScript(final String script, final String language) {
         if ("javascript".equalsIgnoreCase(language) || "jscript".equalsIgnoreCase(language)) {
-            final HtmlPage htmlPage = document_.getHtmlPage();
-            final HtmlElement doc = htmlPage.getDocumentElement();
-            htmlPage.executeJavaScriptIfPossible(script, "Window.execScript()", true, doc);
+            jsxFunction_eval(script);
         }
         else if ("vbscript".equalsIgnoreCase(language)) {
             getLog().warn("VBScript not supported in Window.execScript().");
@@ -835,6 +869,16 @@ public class Window extends SimpleScriptable {
             throw Context.reportRuntimeError("Invalid class string");
         }
         return null;
+    }
+
+    /**
+     * Executes the specified script code in the scope of this window.
+     * @param script some javascript code
+     * @return the evaluation result
+     */
+    public Object jsxFunction_eval(final String script) {
+        final HtmlPage htmlPage = document_.getHtmlPage();
+        return htmlPage.executeJavaScriptIfPossible(script, "Window.eval()", false, null).getJavaScriptResult();
     }
 
     /**
