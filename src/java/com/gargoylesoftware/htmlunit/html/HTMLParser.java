@@ -78,7 +78,7 @@ public final class HTMLParser {
 
     private static final Map ELEMENT_FACTORIES = new HashMap();
     private static boolean IgnoreOutsideContent_ = false;
-    
+
     static {
         ELEMENT_FACTORIES.put("input", InputElementFactory.instance);
 
@@ -162,7 +162,7 @@ public final class HTMLParser {
 
     /**
      * Set the flag to control validation of the HTML content that is outside of the
-     * BODY and HTML tags.  This flag is false by default to maintain compatability with 
+     * BODY and HTML tags.  This flag is false by default to maintain compatability with
      * current NekoHTML defaults.
      * @param ignoreOutsideContent - boolean flag to set
      */
@@ -196,7 +196,7 @@ public final class HTMLParser {
 
     /**
      * You should never need to create one of these!
-     */    
+     */
     private HTMLParser() {
     }
 
@@ -226,7 +226,7 @@ public final class HTMLParser {
         domBuilder.parse(in);
         return domBuilder.page_;
     }
-    
+
     /**
      * <p>Return true if the specified charset is supported on this platform.</p>
      * @param charset The charset to check.
@@ -263,6 +263,7 @@ public final class HTMLParser {
 
         private DomNode currentNode_;
         private StringBuffer characters_;
+        private boolean headParsed_ = false;
 
         /**
          * create a new builder for parsing the given response contents
@@ -344,9 +345,19 @@ public final class HTMLParser {
             handleCharacters();
 
             final String tagLower = localName.toLowerCase();
-            
-            // add a <tbody> if a <tr> is directly in <table> 
-            if (tagLower.equals("tr") && currentNode_.getNodeName().equals("table")) {
+
+            if (tagLower.equals("head")) {
+                headParsed_ = true;
+            }
+            // add a head if none was there
+            else if (!headParsed_ && (tagLower.equals("body") || tagLower.equals("frameset"))) {
+                final IElementFactory factory = getElementFactory("head");
+                final HtmlElement newElement = factory.createElement(page_, "head", null);
+                currentNode_.appendChild(newElement);
+                headParsed_ = true;
+            }
+            // add a <tbody> if a <tr> is directly in <table>
+            else if (tagLower.equals("tr") && currentNode_.getNodeName().equals("table")) {
                 final IElementFactory factory = getElementFactory("tbody");
                 final HtmlElement newElement = factory.createElement(page_, "tbody", null);
                 currentNode_.appendChild(newElement);
@@ -463,21 +474,21 @@ class HTMLErrorHandler extends DefaultErrorHandler {
     }
 
     /** @see DefaultErrorHandler#error(String,String,XMLParseException) */
-    public void error(final String domain, final String key, 
+    public void error(final String domain, final String key,
             final XMLParseException exception) throws XNIException {
-        listener_.error(exception.getMessage(), 
+        listener_.error(exception.getMessage(),
                 url_,
-                exception.getLineNumber(), 
+                exception.getLineNumber(),
                 exception.getColumnNumber(),
                 key);
     }
 
     /** @see DefaultErrorHandler#warning(String,String,XMLParseException) */
-    public void warning(final String domain, final String key, 
-            final XMLParseException exception) throws XNIException {           
-        listener_.warning(exception.getMessage(), 
+    public void warning(final String domain, final String key,
+            final XMLParseException exception) throws XNIException {
+        listener_.warning(exception.getMessage(),
                 url_,
-                exception.getLineNumber(), 
+                exception.getLineNumber(),
                 exception.getColumnNumber(),
                 key);
     }
