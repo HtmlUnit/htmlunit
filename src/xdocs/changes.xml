@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.10-prerelease">
+            <action type="update" dev="mguillem" id="1495132">
+                JavaScript: use of HTMLElement.innerHTML should not cause registration of a WebWindow.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: window.eval now evaluates in the right window scope.
             </action>

@@ -393,10 +393,7 @@ public class HTMLElementTest extends WebTestCase {
                 "";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final List expectedAlerts = Arrays.asList(new String[]{
-            "Old = <b>Old innerHTML</b>",
-            "New = New cell value"
-        });
+        final String[] expectedAlerts = { "Old = <b>Old innerHTML</b>", "New = New cell value" };
         assertEquals(expectedAlerts, collectedAlerts);
     }
     /**
@@ -424,16 +421,15 @@ public class HTMLElementTest extends WebTestCase {
                 "";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final List expectedAlerts = Arrays.asList(new String[]{
-            "Old = <b>Old innerHTML</b>",
-            "New =  <b><i id=\"newElt\">New cell value</i></b>",
-            "I"
-        });
+        final String[] expectedAlerts = { "Old = <b>Old innerHTML</b>", 
+                "New =  <b><i id=\"newElt\">New cell value</i></b>", 
+                "I" };
         assertEquals(expectedAlerts, collectedAlerts);
         final HtmlElement pElt = page.getHtmlElementById("myNode");
         assertEquals("p", pElt.getNodeName());
         final HtmlElement elt = page.getHtmlElementById("newElt");
         assertEquals("New cell value", elt.asText());
+        assertEquals(1, page.getWebClient().getWebWindows().size());
     }
     /**
      * Test the use of innerHTML to set a new input

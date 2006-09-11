@@ -507,6 +507,9 @@ public class HTMLElement extends NodeImpl {
                     public WebWindow getTopWindow() {
                         return null;
                     }
+                    protected void performRegistration() {
+                        // nothing
+                    }
                 };
                 final HtmlPage pseudoPage = HTMLParser.parse(webResp, pseudoWindow);
                 final HtmlBody body = (HtmlBody) pseudoPage.getDocumentElement().getLastChild();
