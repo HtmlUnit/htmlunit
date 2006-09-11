@@ -6,7 +6,7 @@
     </properties>
 
     <body>
-        <release version="next">
+        <release version="1.10-prerelease">
             <action type="update" dev="mguillem">
                 JavaScript: window.eval now evaluates in the right window scope.
             </action>
