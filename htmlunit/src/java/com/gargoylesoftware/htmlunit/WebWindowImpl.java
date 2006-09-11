@@ -69,6 +69,13 @@ public abstract class WebWindowImpl implements WebWindow {
     public WebWindowImpl(final WebClient webClient) {
         Assert.notNull("webClient", webClient);
         webClient_ = webClient;
+        performRegistration();
+    }
+
+    /**
+     * Registers the window with the client.
+     */
+    protected void performRegistration() {
         webClient_.registerWebWindow(this);
     }
 
