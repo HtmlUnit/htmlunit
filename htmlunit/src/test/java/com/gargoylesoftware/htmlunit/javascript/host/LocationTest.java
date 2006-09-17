@@ -521,4 +521,23 @@ public class LocationTest extends WebTestCase {
         assertEquals("bla bla", page.getWebResponse().getContentAsString());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testJSLocation() throws Exception {
+
+        final String html =
+              "<html><head>\n"
+            + "  <script>\n"
+            + "      document.location.href = 'javascript:alert(\"foo\")';\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body></body></html>";
+
+        final String[] expectedAlerts = { "foo" };
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
+        
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
