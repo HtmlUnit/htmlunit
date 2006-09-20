@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.10-prerelease">
+            <action type="update" dev="mguillem" id="1531821">
+                Follow redirection to the same Url if original method was a POST. Handle redirections
+                like browsers do rather than according to the RFC.
+            </action>
             <action type="update" dev="mguillem" id="1345136">
                 JavaScript: allow script to set a "javascript:..." location.
             </action>

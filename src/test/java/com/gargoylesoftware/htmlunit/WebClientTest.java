@@ -271,20 +271,68 @@ public class WebClientTest extends WebTestCase {
         doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
     }
 
+    /**
+     * Common utility for GET after POST redirection on same urls 
+     * @param statusCode The code to return from the initial request
+     * @throws Exception if the test fails.
+     */
+    private void doTestRedirectionSameUrlAfterPost(final int statusCode)
+        throws
+             Exception {
+
+        final String firstContent = "<html><head><title>First</title></head><body></body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient webClient = new WebClient();
+
+        final List headers = Collections.singletonList(
+                new KeyValuePair("Location", URL_FIRST.toExternalForm()) );
+        
+        // builds a webconnection that first sends a redirect and then a "normal" response for
+        // the same requested url
+        final MockWebConnection webConnection = new MockWebConnection(webClient) {
+            private int count_ = 0;
+            public WebResponse getResponse(final WebRequestSettings _webRequestSettings) throws IOException {
+                ++count_;
+                if (count_ == 1) {
+                    final WebResponse response = super.getResponse(_webRequestSettings);
+                    setResponse(_webRequestSettings.getURL(), secondContent);
+                    return response;
+                }
+                else {
+                    return super.getResponse(_webRequestSettings);
+                }
+            }
+        };
+        webConnection.setResponse(
+                URL_FIRST, firstContent, statusCode,
+                "Some error", "text/html", headers );
+        webClient.setWebConnection( webConnection );
+
+        HtmlPage page = (HtmlPage) webClient.getPage(new WebRequestSettings(URL_FIRST, SubmitMethod.POST));
+        final WebResponse webResponse = page.getWebResponse();
+        // A redirect should have happened
+        assertEquals(200, webResponse.getStatusCode());
+        assertEquals(URL_FIRST, webResponse.getUrl());
+        assertEquals("Second", page.getTitleText());
+        assertEquals(SubmitMethod.GET, webResponse.getRequestMethod());
+    }
 
     /**
      * From the http spec:  If the 301 status code is received in response
      * to a request other than GET or HEAD, the user agent MUST NOT automatically
      * redirect the request unless it can be confirmed by the user, since this
      * might change the conditions under which the request was issued.
+     * BUT Firefox follows the redirection
      * @throws Exception If something goes wrong.
      */
     public void testRedirection301_MovedPermanently_PostMethod() throws Exception {
         final int statusCode = 301;
         final SubmitMethod initialRequestMethod = SubmitMethod.POST;
-        final SubmitMethod expectedRedirectedRequestMethod = null;
+        final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
 
         doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
+        doTestRedirectionSameUrlAfterPost(statusCode);
     }
 
 
@@ -304,6 +352,7 @@ public class WebClientTest extends WebTestCase {
         final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
 
         doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
+        doTestRedirectionSameUrlAfterPost(statusCode);
     }
 
 
@@ -351,6 +400,7 @@ public class WebClientTest extends WebTestCase {
         final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
 
         doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
+        doTestRedirectionSameUrlAfterPost(statusCode);
     }
 
 
