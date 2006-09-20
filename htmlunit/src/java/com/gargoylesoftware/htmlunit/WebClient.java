@@ -1388,19 +1388,21 @@ public class WebClient {
             getLog().debug("Got a redirect status code ["+statusCode
                 +"] new location=["+locationString+"]");
 
-            if( webResponse.getUrl().toExternalForm().equals(locationString) ) {
+            if (webRequestSettings.getSubmitMethod().equals(SubmitMethod.GET) 
+                    && webResponse.getUrl().toExternalForm().equals(locationString) ) {
                 getLog().warn("Got a redirect but the location is the same as the page we just loaded ["
-                    +locationString+"]. Skipping redirection.");
+                    + locationString + "]. Skipping redirection.");
             }
-            else if( ( statusCode == 301 || statusCode == 307 )
+            else if ((statusCode == 301 || statusCode == 307)
                 && method.equals(SubmitMethod.GET) ) {
 
                 final WebRequestSettings wrs = new WebRequestSettings(webRequestSettings, newUrl);
                 wrs.setRequestParameters(parameters);
                 return loadWebResponse(wrs);
             }
-            else if( statusCode == 302 || statusCode == 303 ) {
+            else if (statusCode <= 303) {
                 final WebRequestSettings wrs = new WebRequestSettings(webRequestSettings, newUrl);
+                wrs.setSubmitMethod(SubmitMethod.GET);
                 return loadWebResponse(wrs);
             }
         }
