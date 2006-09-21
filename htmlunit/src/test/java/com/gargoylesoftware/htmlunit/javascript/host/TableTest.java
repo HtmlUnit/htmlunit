@@ -460,7 +460,7 @@ public class TableTest extends WebTestCase {
             + "</body>"
             + "</html>";
 
-        final List expectedAlerts = Arrays.asList(new String[] { "TBODY", "TABLE" });
+        final String[] expectedAlerts = { "TBODY", "TABLE" };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -469,6 +469,39 @@ public class TableTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * Test that a tbody is created
+     * @throws Exception if the test fails
+     */
+    public void testInsertRowInTableWithEmtpyTbody() throws Exception {
+
+        final String content =
+            "<html><head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  var oTable = document.getElementById('mytable');"
+            + "  alert(oTable.lastChild.tagName);"
+            + "  var tableRow = oTable.insertRow(0);"
+            + "  alert(oTable.lastChild.tagName);"
+            + "  alert(tableRow.parentNode.tagName);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'>"
+            + "<table id='mytable'><tbody></tbody>"
+            + "</table>"
+            + "</body>"
+            + "</html>";
+
+        final String[] expectedAlerts = { "TBODY", "TBODY", "TBODY" };
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 
     /**
      * Tests length, tBodies on nested rows
