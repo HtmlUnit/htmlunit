@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.10-prerelease">
+            <action type="update" dev="mguillem" id="1562461">
+                JavaScript: fixed bug in table.insertRow with empty tbody.
+            </action>
             <action type="update" dev="mguillem" id="1531821">
                 Follow redirection to the same Url if original method was a POST. Handle redirections
                 like browsers do rather than according to the RFC.
