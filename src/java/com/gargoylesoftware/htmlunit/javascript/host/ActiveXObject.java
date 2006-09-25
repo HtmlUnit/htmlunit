@@ -87,11 +87,7 @@ public class ActiveXObject extends SimpleScriptable {
         if( !(args[0] instanceof String) ) {
             throw Context.reportRuntimeError( "ActiveXObject Error: constructor parameter must be a String." );
         }
-        final Map map = getWindow( ctorObj ).getWebWindow().getWebClient().getActiveXObjectMap();
-        if (map == null) {
-            throw Context.reportRuntimeError("ActiveXObject Error: the map is null.");
-        }
-        final Object mapValue = map.get(args[0]);
+        final String activeXName = (String) args[0];
 
         // quick and dirty hack
         // the js configuration should probably be extended to allow to specify something like
@@ -99,14 +95,20 @@ public class ActiveXObject extends SimpleScriptable {
         //   classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest"
         //   activeX="Microsoft.XMLHTTP">
         // and to build the object from the config
-        if ("Microsoft.XMLHTTP".equals(args[0])) {
+        if (isXMLHttpRequest((String) args[0])) {
             return buildXMLHTTPActiveX();
         }
+
+        final Map map = getWindow( ctorObj ).getWebWindow().getWebClient().getActiveXObjectMap();
+        if (map == null) {
+            throw Context.reportRuntimeError("ActiveXObject Error: the map is null.");
+        }
+        final Object mapValue = map.get(activeXName);
         if( mapValue == null ) {
-            throw Context.reportRuntimeError( "ActiveXObject Error: no map for " + args[0] + "." );
+            throw Context.reportRuntimeError( "ActiveXObject Error: no value for " + activeXName + "." );
         }
         if( !(mapValue instanceof String) ) {
-            throw Context.reportRuntimeError( "ActiveXObject Error: value for " + args[0] + " is not a String." );
+            throw Context.reportRuntimeError( "ActiveXObject Error: value for " + activeXName + " is not a String." );
         }
 
         final String xClassString = (String)mapValue;
@@ -120,6 +122,15 @@ public class ActiveXObject extends SimpleScriptable {
                     " because " + e.getMessage() + "." );
         }
         return Context.toObject( object, ctorObj );
+    }
+
+    /**
+     * Indicates if the ActiveX name is one flavour of XMLHttpRequest
+     * @param name the ActiveX name
+     * @return <code>true</code> if this is an XMLHttpRequest
+     */
+    static boolean isXMLHttpRequest(final String name) {
+        return name != null && ("Microsoft.XMLHTTP".equals(name) || name.startsWith("Msxml2.XMLHTTP"));
     }
 
     private static Scriptable buildXMLHTTPActiveX() {
