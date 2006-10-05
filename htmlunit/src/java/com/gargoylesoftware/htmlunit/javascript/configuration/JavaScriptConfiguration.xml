@@ -87,7 +87,7 @@
             descr="WC3 Documentation (Level 1)"/>
         <doclink
             url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp"
-            descr="MSDN documenation"/>
+            descr="MSDN documentation"/>
 
         <property name="all" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
@@ -552,12 +552,27 @@
 
         <function name="addEventListener">
             <doclink url="http://developer.mozilla.org/en/docs/DOM:element.addEventListener"
-                    descr="Mozilla documenation"/>
+                    descr="Mozilla documentation"/>
             <browser name="Netscape"/>
+        </function>
+        <function name="attachEvent">
+            <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/attachevent.asp"
+                    descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
+        <function name="removeEventListener">
+            <doclink url="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener"
+                    descr="Mozilla documentation"/>
+            <browser name="Netscape"/>
+        </function>
+        <function name="detachEvent">
+            <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/detachevent.asp"
+                    descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="appendChild"/>
         <function name="cloneNode"/>
-        <function name="hasChildNodes"/>        
+        <function name="hasChildNodes"/>
         <function name="insertBefore"/>
         <function name="removeChild"/>
         <function name="replaceChild"/>
@@ -577,7 +592,7 @@
     </class>
 
     <class name="Popup" classname="com.gargoylesoftware.htmlunit.javascript.host.Popup" JSObject="true">
-      <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/popup.asp" descr="MSDN documenation"/>
+      <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/popup.asp" descr="MSDN documentation"/>
       <browser name="Microsoft Internet Explorer"/>
       <property name="document" readable="true" writable="false"/>
       <property name="isOpen" readable="true" writable="false"/>
@@ -791,7 +806,7 @@
         <!-- NOT FINISHED -->
         
         <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp"
-                descr="MSDN documenation"/>
+                descr="MSDN documentation"/>
 
         <property name="closed" readable="true" writable="false"/>
         <property name="document" readable="true" writable="false"/>
@@ -834,36 +849,36 @@
         
         <function name="addEventListener">
             <doclink url="http://developer.mozilla.org/en/docs/DOM:element.addEventListener"
-                    descr="Mozilla documenation"/>
+                    descr="Mozilla documentation"/>
             <browser name="Netscape"/>
         </function>
         <function name="alert"/>
         <function name="attachEvent">
             <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/attachevent.asp"
-                    descr="MSDN documenation"/>
+                    descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="blur"/>
         <function name="clearInterval">
             <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp"
-                    descr="MSDN documenation"/>
+                    descr="MSDN documentation"/>
         </function>
         <function name="clearTimeout"/>
         <function name="close"/>
         <function name="confirm"/>
         <function name="createPopup">
             <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createpopup.asp"
-                    descr="MSDN documenation"/>
+                    descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="detachEvent">
             <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/detachevent.asp"
-                    descr="MSDN documenation"/>
+                    descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="execScript">
             <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/execscript.asp"
-                    descr="MSDN documenation"/>
+                    descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="eval"/>
@@ -875,7 +890,7 @@
         <function name="print"/>
         <function name="removeEventListener">
             <doclink url="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener"
-                    descr="Mozilla documenation"/>
+                    descr="Mozilla documentation"/>
             <browser name="Netscape"/>
         </function>
         <function name="resizeTo"/>
@@ -887,13 +902,13 @@
         <function name="setInterval">
             <doclink
                 url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp"
-                descr="MSDN documenation"/>
+                descr="MSDN documentation"/>
         </function>
         <function name="setTimeout"/>
     </class>
 
     <class name="XMLHttpRequest" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest" JSObject="true">
-      <doclink url="http://developer.apple.com/internet/webcontent/xmlhttpreq.html" descr="Safari documenation"/>
+      <doclink url="http://developer.apple.com/internet/webcontent/xmlhttpreq.html" descr="Safari documentation"/>
       <browser name="Netscape"/>
       <property name="onreadystatechange" readable="true" writable="true"/>
       <property name="readyState" readable="true" writable="false"/>

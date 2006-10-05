@@ -2310,23 +2310,22 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Just test that addEventListener does't break.
-     * TODO: improve addEventListener to make it really handle the event
      * @throws Exception if the test fails
      */
-    public void testAddEventListenerDoesntBreak() throws Exception {
+    public void testAddEventListener() throws Exception {
         final String content = "<html><body>"
             + "<script>"
             + "function test()"
             + "{"
             + "  alert('in test');"
             + "}"
-            + "window.document.addEventListener('click', test, false);"
+            + "document.addEventListener('click', test, false);"
             + "</script>"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
-        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        HtmlPage page = loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        assertNotNull( page.getEventHandler( "click" ) );
     }
 
 }

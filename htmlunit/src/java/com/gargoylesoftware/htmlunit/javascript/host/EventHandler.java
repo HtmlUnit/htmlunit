@@ -45,7 +45,7 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -56,20 +56,20 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 public class EventHandler extends BaseFunction {
     private static final long serialVersionUID = 3257850965406068787L;
 
-    private final HtmlElement htmlElement_;
+    private final DomNode node_;
     private final String jsSnippet_;
     private Function realFunction_;
 
     /**
      * Builds a function that will execute the javascript code provided
-     * @param htmlElement the element for which the event is build
+     * @param node the element for which the event is build
      * @param jsSnippet the javascript code
      */
-    public EventHandler(final HtmlElement htmlElement, final String jsSnippet) {
-        htmlElement_ = htmlElement;
+    public EventHandler(final DomNode node, final String jsSnippet) {
+        node_ = node;
 
         final String functionSignature;
-        if (htmlElement.getPage().getWebClient().getBrowserVersion().isIE()) {
+        if (node.getPage().getWebClient().getBrowserVersion().isIE()) {
             functionSignature = "function()";
         }
         else {
@@ -86,10 +86,10 @@ public class EventHandler extends BaseFunction {
         throws JavaScriptException {
 
         // the js object to which this event is attached has to be the scope
-        final SimpleScriptable jsObj = (SimpleScriptable) htmlElement_.getScriptObject();
+        final SimpleScriptable jsObj = (SimpleScriptable) node_.getScriptObject();
         // compile "just in time"
         if (realFunction_ == null) {
-            realFunction_ = cx.compileFunction(jsObj, jsSnippet_, "event for " + htmlElement_, 1, null);
+            realFunction_ = cx.compileFunction(jsObj, jsSnippet_, "event for " + node_, 1, null);
         }
 
         final Object result = realFunction_.call(cx, scope, thisObj, args);
