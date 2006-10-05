@@ -47,13 +47,11 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.apache.commons.lang.StringEscapeUtils;
-import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 
 /**
  * An abstract wrapper for html elements
@@ -79,9 +77,6 @@ public abstract class HtmlElement extends DomNode {
     /** the map holding the attribute values by name */
     private Map attributes_;
 
-    /** the map holding event handlers */
-    private Map eventHandlers_;
-
     /**
      *  Create an instance
      *
@@ -92,7 +87,6 @@ public abstract class HtmlElement extends DomNode {
     protected HtmlElement(final HtmlPage htmlPage, final Map attributes) {
 
         super(htmlPage);
-        eventHandlers_ = Collections.EMPTY_MAP;
         if(attributes != null) {
             attributes_ = attributes;
             attributesToEventHandlers();
@@ -205,43 +199,6 @@ public abstract class HtmlElement extends DomNode {
      */
     public Iterator getAttributeEntriesIterator() {
         return new MapEntryWrappingIterator(attributes_.entrySet().iterator(), this);
-    }
-
-    /**
-     *  Return a Function to be executed when a given event occurs.
-     * @param eventName Name of event such as "onclick" or "onblur", etc.
-     * @return A rhino javascript executable Function, or null if no event
-     * handler has been defined
-     */
-    public final Function getEventHandler(final String eventName) {
-        return (Function) eventHandlers_.get(eventName);
-    }
-
-    /**
-     * Register a Function as an event handler.
-     * @param eventName Name of event such as "onclick" or "onblur", etc.
-     * @param eventHandler A rhino javascript executable Function
-     */
-    public final void setEventHandler(final String eventName, final Function eventHandler) {
-        if (eventHandlers_ == Collections.EMPTY_MAP) {
-            eventHandlers_ = new HashMap();
-        }
-        eventHandlers_.put(eventName, eventHandler);
-    }
-
-    /**
-     * Register a snippet of javascript code as an event handler.  The javascript code will
-     * be wrapped inside a unique function declaration which provides one argument named
-     * "event"
-     * @param eventName Name of event such as "onclick" or "onblur", etc.
-     * @param jsSnippet executable javascript code
-     */
-    public final void setEventHandler(final String eventName, final String jsSnippet) {
-
-        final BaseFunction function = new EventHandler(this, jsSnippet);
-        setEventHandler(eventName, function);
-        getLog().debug("Created event handler " + function.getFunctionName()
-                + " for " + eventName + " on " + this);
     }
 
     /**
