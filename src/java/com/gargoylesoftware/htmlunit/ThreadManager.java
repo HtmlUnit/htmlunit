@@ -159,7 +159,7 @@ public class ThreadManager {
                 }
                 final long before = System.currentTimeMillis();
                 try {
-                    LOG.info("Trying to join: " + thread);
+                    LOG.debug("Trying to join: " + thread);
                     thread.join(maxWaitMillis);
                 }
                 catch (final InterruptedException e) {
