@@ -341,6 +341,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "  alert(rootNode.attributes['someAttr'] == rootNode.attributes[0]);"
             + "  alert(rootNode.firstChild.nodeName);"
             + "  alert(rootNode.firstChild.childNodes.length);"
+            + "  alert(childNodes.item(1).nodeName);"
             + "}"
             + "</script>"
             + "</head>"
@@ -356,7 +357,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection( webConnection );
         client.getPage(URL_FIRST);
 
-        final String[] alerts = { "1", "bla", "someAttr", "someValue", "true", "foo", "2" };
+        final String[] alerts = { "1", "bla", "someAttr", "someValue", "true", "foo", "2", "foo" };
         assertEquals( alerts, collectedAlerts );
     }
 
