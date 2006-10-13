@@ -341,7 +341,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "  alert(rootNode.attributes['someAttr'] == rootNode.attributes[0]);"
             + "  alert(rootNode.firstChild.nodeName);"
             + "  alert(rootNode.firstChild.childNodes.length);"
-            + "  alert(childNodes.item(1).nodeName);"
+            + "  alert(request.responseXML.getElementsByTagName('fi').item(0).attributes[0].nodeValue);"
             + "}"
             + "</script>"
             + "</head>"
@@ -353,11 +353,11 @@ public class XMLHttpRequestTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(URL_FIRST, html);
         final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
-        webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi/><fi/></foo></bla>", "text/xml");
+        webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>", "text/xml");
         client.setWebConnection( webConnection );
         client.getPage(URL_FIRST);
 
-        final String[] alerts = { "1", "bla", "someAttr", "someValue", "true", "foo", "2", "foo" };
+        final String[] alerts = { "1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1" };
         assertEquals( alerts, collectedAlerts );
     }
 
