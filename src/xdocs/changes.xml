@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.10-prerelease">
+            <action type="update" dev="mguillem">
+                JavaScript: item(xx) method now works correctly on node list.
+            </action>
             <action type="update" dev="mguillem" due-to="Daniel Gredler">
                 JavaScript: improved support for addEventListener on DOM nodes (Mozilla) and added support for attachEvent (Internet explorer).
             </action>

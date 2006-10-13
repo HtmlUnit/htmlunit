@@ -99,7 +99,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
                 final Method item = javaObject.getClass().getMethod("item",
                         new Class[] { Integer.TYPE });
-                defineProperty("item", new FunctionObject("item", item, this),
+                defineProperty("item", new MethodWrapper("item", staticType, new Class[] { Integer.TYPE }),
                         0);
 
                 final Method toString = getClass().getMethod("jsToString",
@@ -113,8 +113,8 @@ public class ScriptableWrapper extends ScriptableObject {
                     final Method getNamedItem = javaObject.getClass()
                             .getMethod("getNamedItem",
                                     new Class[] { String.class });
-                    defineProperty("getNamedItem", new FunctionObject(
-                            "getNamedItem", getNamedItem, this), 0);
+                    defineProperty("getNamedItem", 
+                            new MethodWrapper("getNamedItem", staticType, new Class[] { String.class }), 0);
 
                     getByNameFallback_ = getNamedItem;
                 }
@@ -236,5 +236,13 @@ public class ScriptableWrapper extends ScriptableObject {
      */
     public String getClassName() {
         return jsClassName_;
+    }
+    
+    /**
+     * Gets the java object made availabe to javascript through this wrapper
+     * @return the wrapped object
+     */
+    public Object getWrappedObject() {
+        return javaObject_;
     }
 }
