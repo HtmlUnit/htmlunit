@@ -118,8 +118,8 @@ public class HttpWebConnection extends WebConnectionImpl {
 
         final HttpClient httpClient = getHttpClient();
 
+        final HttpMethodBase httpMethod = makeHttpMethod(webRequestSettings);
         try {
-            final HttpMethodBase httpMethod = makeHttpMethod(webRequestSettings);
             final HostConfiguration hostConfiguration = getHostConfiguration(webRequestSettings);
             final long startTime = System.currentTimeMillis();
             final int responseCode = httpClient.executeMethod(hostConfiguration, httpMethod);
@@ -152,6 +152,9 @@ public class HttpWebConnection extends WebConnectionImpl {
                 e.printStackTrace();
                 throw new RuntimeException( "HTTP Error: " + e.getMessage() );
             }
+        }
+        finally {
+            httpMethod.releaseConnection();
         }
     }
 
