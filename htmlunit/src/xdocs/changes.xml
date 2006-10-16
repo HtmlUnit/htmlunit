@@ -8,6 +8,9 @@
     <body>
         <release version="1.10-prerelease">
             <action type="update" dev="mguillem">
+                Fixed incorrect handling of web connections (missing call to releaseConnection()).
+            </action>
+            <action type="update" dev="mguillem">
                 JavaScript: item(xx) method now works correctly on node list.
             </action>
             <action type="update" dev="mguillem" due-to="Daniel Gredler">
