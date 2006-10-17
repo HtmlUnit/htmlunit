@@ -280,7 +280,7 @@
 
     <class name="HTMLElement" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlElement">
-        <property name="all" notImplemented="true" readable="true" writable="false">
+        <property name="all" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="children" readable="true" writable="false">
@@ -923,5 +923,4 @@
       <function name="send"/>
       <function name="setRequestHeader"/>
     </class>
-
 </configuration>
