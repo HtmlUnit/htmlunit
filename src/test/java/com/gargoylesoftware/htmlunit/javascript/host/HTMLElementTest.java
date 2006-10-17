@@ -108,15 +108,7 @@ public class HTMLElementTest extends WebTestCase {
         		"all node for testA: IMG ", "all node for testImg: ", "all node for testDiv2: "};
 
         final List collectedAlerts = new ArrayList();
-        try
-        {
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, firstContent, collectedAlerts);
-
-        }
-        catch (Exception e)
-        {
-        	int i = 1;
-        }
         assertEquals( expectedAlerts, collectedAlerts );
     }
     
