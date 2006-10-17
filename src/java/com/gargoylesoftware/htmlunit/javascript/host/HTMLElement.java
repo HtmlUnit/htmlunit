@@ -106,6 +106,7 @@ public class HTMLElement extends NodeImpl {
     static final String POSITION_AFTER_END = "afterEnd";
 
     private final Set behaviors_ = new HashSet();
+    private ElementArray all_; // has to be a member to have equality (==) working
     private int scrollLeft_ = 0;
     private int scrollTop_ = 0;
 
@@ -133,6 +134,23 @@ public class HTMLElement extends NodeImpl {
     public void jsConstructor() {
     }
 
+
+    /**
+     * Return the value of the "all" property.
+     * @return The value of the "all" property
+     */
+    public ElementArray jsxGet_all() {
+        if (all_ == null) {
+            all_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            try {
+                all_.init(getDomNodeOrDie(), new HtmlUnitXPath(".//*"));
+            }
+            catch (final JaxenException e) {
+                throw Context.reportRuntimeError("Failed to initialize collection all: " + e.getMessage());
+            }
+        }
+        return all_;
+    }
 
     /**
      * Return the style object for this element.

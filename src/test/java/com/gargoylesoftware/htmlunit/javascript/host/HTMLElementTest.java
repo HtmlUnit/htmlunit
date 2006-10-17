@@ -71,6 +71,56 @@ public class HTMLElementTest extends WebTestCase {
     public HTMLElementTest(final String name) {
         super(name);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testAll_IndexByInt() throws Exception {
+        final String firstContent = "<html><head>"
+        + "<script>"
+        + "function test()"
+        + "{"
+        + "  dumpAll('body');"
+        + "  dumpAll('testDiv');"
+        + "  dumpAll('testA');"
+        + "  dumpAll('testImg');"
+        + "  dumpAll('testDiv2');"
+        + "}"
+        + "function dumpAll(_id)"
+        + "{"
+        + "  var oNode = document.getElementById(_id);"
+        + "  var col = oNode.all;"
+        + "  var str = 'all node for ' + _id + ': ';"
+        + "  for (var i=0; i<col.length; ++i)"
+        + "  {"
+        + "    str += col[i].tagName + ' ';"
+        + "  }"
+        + "  alert(str);"
+        + "}"
+        + "</script>"
+        + "</head>"
+        + "<body onload='test()' id='body'>"
+        + "<div id='testDiv'>foo<a href='foo.html' id='testA'><img src='foo.png' id='testImg'></a></div>"
+        + "<div id='testDiv2'>foo</div>"
+        + "</body></html>";
+
+        final String[] expectedAlerts = { "all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
+        		"all node for testA: IMG ", "all node for testImg: ", "all node for testDiv2: "};
+
+        final List collectedAlerts = new ArrayList();
+        try
+        {
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, firstContent, collectedAlerts);
+
+        }
+        catch (Exception e)
+        {
+        	int i = 1;
+        }
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+    
+    
     /**
      * @throws Exception on test failure
      */
