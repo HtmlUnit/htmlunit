@@ -104,6 +104,33 @@ public class IFrameTest extends WebTestCase {
     }
 
     /**
+     * Regression test for bug 1562872
+     * @throws Exception if the test fails
+     */
+    public void testDirectAccessPerName() throws Exception {
+    	if (notYetImplemented()) {
+    		return;
+    	}
+        final String content
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    alert(myIFrame.location);\n"
+            + "    alert(Frame.location);\n"
+            + "}\n</script></head>"
+            + "<body onload='doTest()'>"
+            + "<iframe name='myIFrame' src='about:blank'></iframe>"
+            + "<iframe name='Frame' src='about:blank'></iframe>"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final String[] expectedAlerts = {"about:blank", "about:blank"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+
+    /**
      * Tests that the <iframe> node is visible from the contained page when it is loaded
      * @throws Exception if the test fails
      */
