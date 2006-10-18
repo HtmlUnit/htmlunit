@@ -53,6 +53,7 @@ import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.HttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
@@ -326,7 +327,9 @@ public class HttpWebConnection extends WebConnectionImpl {
      * @return the client
      */
     protected HttpClient createHttpClient() {
-        return new HttpClient();
+        final MultiThreadedHttpConnectionManager connectionManager = 
+            new MultiThreadedHttpConnectionManager();
+        return new HttpClient(connectionManager);
     }
 
 
