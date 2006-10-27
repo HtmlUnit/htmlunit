@@ -37,34 +37,39 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.Map;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Wrapper for the html element "input" of type "hidden".
+ * Tests for {@link HtmlHiddenInput}.
  *
- * @version  $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
- * @author Daniel Gredler
+ * @version $Revision: 1172 $
  * @author Marc Guillemot
  */
-public class HtmlHiddenInput extends HtmlInput {
-
+public class HtmlHiddenInputTest extends WebTestCase {
     /**
-     * Create an instance.
-     * @param  page The page that contains this element
-     * @param attributes the initial attributes
+     *  Create an instance
+     *
+     * @param  name The name of the test
      */
-    public HtmlHiddenInput( final HtmlPage page, final Map attributes ) {
-        super( page, attributes );
+    public HtmlHiddenInputTest( final String name ) {
+        super( name );
     }
 
+
     /**
-     * @see com.gargoylesoftware.htmlunit.html.HtmlInput#asText()
-     * @return an empty string as an hidden field is not visible
+     * Verifies that a asText() returns "checked" or "unckecked" according to the state of the checkbox.
+     * @throws Exception if the test fails
      */
-    public String asText() {
-        return "";
+    public void testAsText() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "    <input type='hidden' name='foo' id='foo' value='bla'>"
+            + "</form></body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlInput input = (HtmlInput) page.getHtmlElementById("foo");
+        assertEquals("", input.asText());
     }
 }

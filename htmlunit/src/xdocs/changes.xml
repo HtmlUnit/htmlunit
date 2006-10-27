@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.10-prerelease">
+            <action type="update" dev="mguillem" id="1570567">
+                Fixed asText() for hidden input. Now returns an empty string.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: only style's built in properties are of type String (with emtpy string as default value)
             </action>
