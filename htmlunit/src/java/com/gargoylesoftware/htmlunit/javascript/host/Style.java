@@ -75,21 +75,21 @@ public class Style extends SimpleScriptable {
      * These are IE properties, this should be configured per browser
      */
     private static final String[] STYLE_PROPERTIES = { "backgroundColor",
-            "bottom", "clear", "clip", "color", "direction",
-            "display", "font", "fontFamily", "fontSize", "fontStyle",
-            "fontWeight", "fontWeight", "hasLayout", "height", "layoutFlow",
-            "layoutGrid", "layoutGridMode", "left", "letterSpacing",
-            "lineHeight", "maxHeight", "maxWidth", "minHeight", "minWidth",
-            "padding", "paddingBottom", "paddingLeft", "paddingRight",
-            "paddingTop", "pixelBottom", "pixelHeight", "pixelLeft",
-            "pixelRight", "pixelTop", "pixelWidth", "posBottom", "posHeight",
-            "position", "posLeft", "posRight", "posTop", "posWidth", "right",
-            "styleFloat", "textAutospace", "textDecoration",
-            "textDecorationBlink", "textDecorationLineThrough",
-            "textDecorationNone", "textDecorationOverline",
-            "textDecorationUnderline", "textTransform",
-            "textUnderlinePosition", "top", "unicodeBidi", "visibility",
-            "width", "wordSpacing", "wordWrap", "zoom" };
+        "bottom", "clear", "clip", "color", "direction",
+        "display", "font", "fontFamily", "fontSize", "fontStyle",
+        "fontWeight", "fontWeight", "hasLayout", "height", "layoutFlow",
+        "layoutGrid", "layoutGridMode", "left", "letterSpacing",
+        "lineHeight", "maxHeight", "maxWidth", "minHeight", "minWidth",
+        "padding", "paddingBottom", "paddingLeft", "paddingRight",
+        "paddingTop", "pixelBottom", "pixelHeight", "pixelLeft",
+        "pixelRight", "pixelTop", "pixelWidth", "posBottom", "posHeight",
+        "position", "posLeft", "posRight", "posTop", "posWidth", "right",
+        "styleFloat", "textAutospace", "textDecoration",
+        "textDecorationBlink", "textDecorationLineThrough",
+        "textDecorationNone", "textDecorationOverline",
+        "textDecorationUnderline", "textTransform",
+        "textUnderlinePosition", "top", "unicodeBidi", "visibility",
+        "width", "wordSpacing", "wordWrap", "zoom" };
 
     private static final Set STYLE_ALLOWED_PROPERTIES;
     
@@ -211,6 +211,11 @@ public class Style extends SimpleScriptable {
         setStyleAttribute(name, (String) newValue);
     }
 
+    /**
+     * Sets the specified style attribute
+     * @param name the attribute name
+     * @param newValue the attribute value
+     */
     protected void setStyleAttribute(final String name, final String newValue) {
         final Map styleMap = getStyleMap();
         styleMap.put(name, newValue);
@@ -262,6 +267,7 @@ public class Style extends SimpleScriptable {
 
     /**
      * Sets the object's behavior
+     * @param newValue the new behavior
      */
     public void jsxSet_behavior(final String newValue) {
         setStyleAttribute("behavior", newValue);
