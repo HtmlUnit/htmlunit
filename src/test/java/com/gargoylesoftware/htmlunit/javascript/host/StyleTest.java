@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for Style.
+ * Tests for {@link Style}.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -71,20 +71,24 @@ public class StyleTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    var style = document.getElementById('div1').style;\n"
+            + "    var node = document.getElementById('div1');\n"
+            + "    var style = node.style;\n"
             + "    alert(style.color);\n"
             + "    style.color = 'pink';\n"
             + "    alert(style.color);\n"
+            + "    alert(node.getAttribute('style'));\n"
             + "}\n</script></head>"
             + "<body onload='doTest()'><div id='div1' style='color: black'>foo</div></body></html>";
+
+        final String[] expectedAlerts = {"black", "pink", "color: pink;"};
+        createTestPageForRealBrowserIfNeeded(firstContent, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList( new String[]{"black", "pink"} );
         assertEquals( expectedAlerts, collectedAlerts );
 
-        assertEquals("color: pink; ", page.getHtmlElementById("div1").getAttributeValue("style") );
+        assertEquals("color: pink;", page.getHtmlElementById("div1").getAttributeValue("style") );
     }
 
 
@@ -110,7 +114,7 @@ public class StyleTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
 
         assertEquals(
-            "background: blue; color: pink; foo: bar; ",
+            "background: blue; color: pink; foo: bar;",
             page.getHtmlElementById("div1").getAttributeValue("style") );
     }
 
@@ -136,7 +140,7 @@ public class StyleTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
 
-        assertEquals("color: pink; ", page.getHtmlElementById("div1").getAttributeValue("style") );
+        assertEquals("color: pink;", page.getHtmlElementById("div1").getAttributeValue("style") );
     }
 
     /**
@@ -152,15 +156,39 @@ public class StyleTest extends WebTestCase {
             + "    alert(oDiv.style.visibility);\n"
             + "    oDiv.style.visibility = 'hidden';\n"
             + "    alert(oDiv.style.visibility);\n"
+            + "    alert(oDiv.style.behavior);\n"
             + "}\n</script></head>"
             + "<body onload='doTest()'>"
             + "<div id='div1'>foo</div></body></html>";
 
-        final List expectedAlerts = Arrays.asList( new String[]{"", "hidden"} );
+        final String[] expectedAlerts = {"", "hidden", "undefined"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testIEStyle() throws Exception {
+        final String content
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var oDiv = document.getElementById('div1');\n"
+            + "    alert(oDiv.style.behavior);\n"
+            + "}\n"
+            + "</script></head>"
+            + "<body onload='doTest()'>"
+            + "<div id='div1'>foo</div></body></html>";
+
+        final String[] expectedAlerts = {""};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
 
         assertEquals( expectedAlerts, collectedAlerts );
     }

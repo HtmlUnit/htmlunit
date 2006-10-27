@@ -402,10 +402,6 @@
         <property name="sourceIndex" notImplemented="true" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
-        <property name="style" notImplemented="true" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Netscape" min-version="6"/>
-        </property>
         <property name="style" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
@@ -527,14 +523,15 @@
         <property name="language" readable="true" writable="false">
             <browser name="Netscape"/>
         </property>
+        <property name="mimeTypes" readable="true" writable="false"/>
         <property name="onLine" readable="true" writable="false"/>
         <property name="platform" readable="true" writable="false"/>
+        <property name="plugins" readable="true" writable="false"/>
         <property name="systemLanguage" readable="true" writable="false"/>
         <property name="userAgent" readable="true" writable="false"/>
         <property name="userLanguage" readable="true" writable="false"/>
     
         <function name="javaEnabled"/>
-        <function name="plugins"/>
         <function name="taintEnabled"/>
     </class>
 
@@ -675,6 +672,9 @@
 
     <class name="Style" classname="com.gargoylesoftware.htmlunit.javascript.host.Style"
         JSObject="true">
+        <property name="behavior" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
     </class>
 
     <class name="Submit" extends="Input" classname="com.gargoylesoftware.htmlunit.javascript.host.Input"
