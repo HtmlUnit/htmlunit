@@ -118,7 +118,7 @@ public class StyleTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testStyle_OneUndefinedCssAttribute() throws Exception {
-        final String firstContent
+        final String content
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var style = document.getElementById('div1').style;\n"
@@ -129,10 +129,11 @@ public class StyleTest extends WebTestCase {
             + "}\n</script></head>"
             + "<body onload='doTest()'><div id='div1'>foo</div></body></html>";
 
+        final String[] expectedAlerts = {"null", "", "pink"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(firstContent, collectedAlerts);
+        final HtmlPage page = loadPage(content, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList( new String[]{"null", "", "pink"} );
         assertEquals( expectedAlerts, collectedAlerts );
 
         assertEquals("color: pink; ", page.getHtmlElementById("div1").getAttributeValue("style") );
@@ -183,5 +184,27 @@ public class StyleTest extends WebTestCase {
 
         final HtmlPage page = loadPage(content);
         ((ClickableElement) page.getHtmlElementById("red")).click();
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testAccessProperties() throws Exception {
+        final String content = "<html><head><title>First</title><script>\n"
+                + "function doTest() {\n"
+                + "    var oDiv = document.getElementById('div1');\n"
+                + "    alert(typeof oDiv.style.visibility);\n"
+                + "    alert(typeof oDiv.style.color);\n"
+                + "    alert(typeof oDiv.style.foo);\n"
+                + "}\n</script></head>"
+                + "<body onload='doTest()'>"
+                + "<div id='div1'>foo</div></body></html>";
+
+        final String[] expectedAlerts = {"string", "string", "undefined"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 }

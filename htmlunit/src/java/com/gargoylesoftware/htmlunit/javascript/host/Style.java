@@ -42,56 +42,97 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.mozilla.javascript.Scriptable;
 
 /**
  * A javascript object for a Style
- *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * 
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Daniel Gredler
  * @author Chris Erskine
  */
 public class Style extends SimpleScriptable {
     private static final long serialVersionUID = -1976370264911039311L;
-    private static final MessageFormat URL_FORMAT = new MessageFormat("url({0})");
+
+    private static final MessageFormat URL_FORMAT = new MessageFormat(
+            "url({0})");
+
     private HTMLElement jsElement_;
 
+    /**
+     * These are IE properties, this should be configured per browser
+     */
+    private static final String[] STYLE_PROPERTIES = { "backgroundColor",
+            "behavior", "bottom", "clear", "clip", "color", "direction",
+            "display", "font", "fontFamily", "fontSize", "fontStyle",
+            "fontWeight", "fontWeight", "hasLayout", "height", "layoutFlow",
+            "layoutGrid", "layoutGridMode", "left", "letterSpacing",
+            "lineHeight", "maxHeight", "maxWidth", "minHeight", "minWidth",
+            "padding", "paddingBottom", "paddingLeft", "paddingRight",
+            "paddingTop", "pixelBottom", "pixelHeight", "pixelLeft",
+            "pixelRight", "pixelTop", "pixelWidth", "posBottom", "posHeight",
+            "position", "posLeft", "posRight", "posTop", "posWidth", "right",
+            "styleFloat", "textAutospace", "textDecoration",
+            "textDecorationBlink", "textDecorationLineThrough",
+            "textDecorationNone", "textDecorationOverline",
+            "textDecorationUnderline", "textTransform",
+            "textUnderlinePosition", "top", "unicodeBidi", "visibility",
+            "width", "wordSpacing", "wordWrap", "zoom" };
+
+    private static final Set STYLE_ALLOWED_PROPERTIES;
+    
+    static {
+        final Set set = new HashSet();
+        CollectionUtils.addAll(set, STYLE_PROPERTIES);
+        STYLE_ALLOWED_PROPERTIES = Collections.unmodifiableSet(set);
+    }
 
     /**
-     * Create an instance.  Javascript objects must have a default constructor.
+     * Create an instance. Javascript objects must have a default constructor.
      */
     public Style() {
     }
 
     /**
-     * Create an instance and set its parent scope to the one of the provided element
-     * @param htmlElement the element to which this style is bound
+     * Create an instance and set its parent scope to the one of the provided
+     * element
+     * 
+     * @param htmlElement
+     *            the element to which this style is bound
      */
     Style(final HTMLElement htmlElement) {
         setParentScope(htmlElement.getParentScope());
         initialize(htmlElement);
     }
 
-
     /**
      * Initialize the object
-     * @param htmlElement The element that this style describes
+     * 
+     * @param htmlElement
+     *            The element that this style describes
      */
-    void initialize( final HTMLElement htmlElement ) {
+    void initialize(final HTMLElement htmlElement) {
         // Initialize.
         Assert.notNull("htmlElement", htmlElement);
         jsElement_ = htmlElement;
 
-        if (htmlElement.getHtmlElementOrDie().getPage().getWebClient().getBrowserVersion().isIE()) {
+        if (htmlElement.getHtmlElementOrDie().getPage().getWebClient()
+                .getBrowserVersion().isIE()) {
             // If a behavior was specified in the style, apply the behavior.
-            for (final Iterator i = getStyleMap().entrySet().iterator(); i.hasNext();) {
+            for (final Iterator i = getStyleMap().entrySet().iterator(); i
+                    .hasNext();) {
                 final Map.Entry entry = (Map.Entry) i.next();
                 final String key = (String) entry.getKey();
                 if ("behavior".equals(key)) {
@@ -111,24 +152,32 @@ public class Style extends SimpleScriptable {
         }
     }
 
-
     /**
      * Return the specified property or NOT_FOUND if it could not be found.
-     * @param name The name of the property
-     * @param start The scriptable object that was originally queried for this property
+     * 
+     * @param name
+     *            The name of the property
+     * @param start
+     *            The scriptable object that was originally queried for this
+     *            property
      * @return The property.
      */
-    public Object get( final String name, final Scriptable start ) {
+    public Object get(final String name, final Scriptable start) {
         final Object result = super.get(name, start);
 
-        // We only handle the logic here if 1) we have been fully initialized and 2) the
+        if (!STYLE_ALLOWED_PROPERTIES.contains(name)) {
+            return super.get(name, start);
+        }
+
+        // We only handle the logic here if 1) we have been fully initialized
+        // and 2) the
         // superclass wasn't able to find anything with the matching name.
-        if( jsElement_ == null || result != NOT_FOUND ) {
+        if (jsElement_ == null || result != NOT_FOUND) {
             return result;
         }
 
         final Object value = getStyleMap().get(name);
-        if( value == null ) {
+        if (value == null) {
             return "";
         }
         else {
@@ -136,53 +185,62 @@ public class Style extends SimpleScriptable {
         }
     }
 
-
     /**
      * Set the specified property
-     * @param name The name of the property
-     * @param start The scriptable object that was originally invoked for this property
-     * @param newValue The new value
+     * 
+     * @param name
+     *            The name of the property
+     * @param start
+     *            The scriptable object that was originally invoked for this
+     *            property
+     * @param newValue
+     *            The new value
      */
-    public void put( final String name, final Scriptable start, final Object newValue ) {
-        // Some calls to put will happen during the initialization of the superclass.
-        // At this point, we don't have enough information to do our own initialization
+    public void put(final String name, final Scriptable start,
+            final Object newValue) {
+        // Some calls to put will happen during the initialization of the
+        // superclass.
+        // At this point, we don't have enough information to do our own
+        // initialization
         // so we have to just pass this call through to the superclass.
-        if( jsElement_ == null ) {
+        if (jsElement_ == null || !STYLE_ALLOWED_PROPERTIES.contains(name)) {
             super.put(name, start, newValue);
             return;
         }
 
         final Map styleMap = getStyleMap();
-        styleMap.put( name, newValue );
+        styleMap.put(name, newValue);
 
         final StringBuffer buffer = new StringBuffer();
 
         final Iterator iterator = styleMap.entrySet().iterator();
-        while( iterator.hasNext() ) {
-            final Map.Entry entry = (Map.Entry)iterator.next();
-            buffer.append( entry.getKey() );
-            buffer.append( ": " );
-            buffer.append( entry.getValue() );
-            buffer.append( "; " );
+        while (iterator.hasNext()) {
+            final Map.Entry entry = (Map.Entry) iterator.next();
+            buffer.append(entry.getKey());
+            buffer.append(": ");
+            buffer.append(entry.getValue());
+            buffer.append("; ");
         }
-        jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
+        jsElement_.getHtmlElementOrDie().setAttributeValue("style",
+                buffer.toString());
     }
 
-
     private Map getStyleMap() {
-        // This must be a SortedMap so that the tests get results back in a defined order.
+        // This must be a SortedMap so that the tests get results back in a
+        // defined order.
         final SortedMap styleMap = new TreeMap();
 
-        final String styleAttribute = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
+        final String styleAttribute = jsElement_.getHtmlElementOrDie()
+                .getAttributeValue("style");
         final StringTokenizer tokenizer = new StringTokenizer(styleAttribute, ";");
-        while( tokenizer.hasMoreTokens() ) {
+        while (tokenizer.hasMoreTokens()) {
             final String token = tokenizer.nextToken();
             final int index = token.indexOf(":");
-            if( index != -1 ) {
-                final String key = token.substring(0,index).trim();
-                final String value = token.substring(index+1).trim();
+            if (index != -1) {
+                final String key = token.substring(0, index).trim();
+                final String value = token.substring(index + 1).trim();
 
-                styleMap.put( key, value );
+                styleMap.put(key, value);
             }
         }
 
