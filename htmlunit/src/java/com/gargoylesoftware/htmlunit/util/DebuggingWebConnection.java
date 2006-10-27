@@ -137,9 +137,9 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         buffer.append("fileName: '" + f.getName() + "', ");
         buffer.append("contentType: '" + response.getContentType() + "', ");
         buffer.append("method: '" + settings.getSubmitMethod().getName() + "', ");
-        buffer.append("url: '" + response.getUrl() + ",");
+        buffer.append("url: '" + response.getUrl() + "', ");
         buffer.append("headers: " + nameValueListToJsMap(response.getResponseHeaders()));
-        buffer.append("'};\n");
+        buffer.append("};\n");
         final FileWriter jsFileWriter = new FileWriter(javaScriptFile_, true);
         jsFileWriter.write(buffer.toString());
 
@@ -158,7 +158,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         final StringBuffer buffer = new StringBuffer("{");
         for (final Iterator iter=headers.iterator(); iter.hasNext();) {
             final NameValuePair header = (NameValuePair) iter.next();
-            buffer.append("\"" + header.getName() + "\": \"" + header.getValue() + "\", ");
+            buffer.append("'" + header.getName() + "': '" + header.getValue().replaceAll("'", "\\'") + "', ");
         }
         buffer.delete(buffer.length()-2, buffer.length());
         buffer.append("}");
