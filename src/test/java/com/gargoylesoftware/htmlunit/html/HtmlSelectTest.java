@@ -320,19 +320,20 @@ public class HtmlSelectTest extends WebTestCase {
     public void testSetSelected_IllegalValue() throws Exception {
 
         final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1' method='post'><select name='select1'>"
+            + "<form id='form1'><select name='select1'>"
             + "<option value='option1' selected='selected'>Option1</option>"
             + "<option value='option2'>Option2</option>"
             + "<option value='option3'>Option3</option>"
             + "</select>"
+            + "<select name='select2'>"
+            + "</select>"
             + "<input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
+        final HtmlSelect select = form.getSelectByName("select1");
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
 
         // Change the value
@@ -346,6 +347,9 @@ public class HtmlSelectTest extends WebTestCase {
 
         select.fakeSelectedAttribute("newOption");
 
+        final HtmlSelect select2 = form.getSelectByName("select2");
+        select2.fakeSelectedAttribute("fakedValue");
+
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
 
@@ -353,9 +357,8 @@ public class HtmlSelectTest extends WebTestCase {
         expectedParameters.add(new KeyValuePair("select1", "newOption"));
         expectedParameters.add(new KeyValuePair("button", "foo"));
 
-        assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
-        assertEquals("method", SubmitMethod.POST, webConnection.getLastMethod());
-        assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
+        assertEquals("url", "http://www.gargoylesoftware.com/?select1=newOption&select2=fakedValue&button=foo", 
+                secondPage.getWebResponse().getUrl());
         assertNotNull(secondPage);
     }
 

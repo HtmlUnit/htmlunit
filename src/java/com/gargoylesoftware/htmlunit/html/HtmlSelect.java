@@ -357,6 +357,14 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
 
 
     /**
+     * Indicates if this select is submittable
+     * @return <code>false</code> if not
+     */
+    boolean isValidForSubmission() {
+        return getOptionSize() > 0 || (fakeSelectedValues_ != null && fakeSelectedValues_.length > 0);
+    }
+
+    /**
      * Return the value of this element to what it was at the time the page was loaded.
      */
     public void reset() {
@@ -465,7 +473,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
 
         final Iterator iterator = options.iterator();
         while( iterator.hasNext() ) {
-            if( isFirstTimeThrough == true ) {
+            if (isFirstTimeThrough) {
                 isFirstTimeThrough = false;
             }
             else {
