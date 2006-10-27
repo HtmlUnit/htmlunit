@@ -37,9 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.Assert;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.Collections;
@@ -53,6 +50,9 @@ import java.util.TreeMap;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.mozilla.javascript.Scriptable;
+
+import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * A javascript object for a Style
@@ -75,7 +75,7 @@ public class Style extends SimpleScriptable {
      * These are IE properties, this should be configured per browser
      */
     private static final String[] STYLE_PROPERTIES = { "backgroundColor",
-            "behavior", "bottom", "clear", "clip", "color", "direction",
+            "bottom", "clear", "clip", "color", "direction",
             "display", "font", "fontFamily", "fontSize", "fontStyle",
             "fontWeight", "fontWeight", "hasLayout", "height", "layoutFlow",
             "layoutGrid", "layoutGridMode", "left", "letterSpacing",
@@ -108,9 +108,7 @@ public class Style extends SimpleScriptable {
     /**
      * Create an instance and set its parent scope to the one of the provided
      * element
-     * 
-     * @param htmlElement
-     *            the element to which this style is bound
+     * @param htmlElement the element to which this style is bound
      */
     Style(final HTMLElement htmlElement) {
         setParentScope(htmlElement.getParentScope());
@@ -127,6 +125,7 @@ public class Style extends SimpleScriptable {
         // Initialize.
         Assert.notNull("htmlElement", htmlElement);
         jsElement_ = htmlElement;
+        setDomNode(htmlElement.getDomNodeOrNull(), false);
 
         if (htmlElement.getHtmlElementOrDie().getPage().getWebClient()
                 .getBrowserVersion().isIE()) {
@@ -163,20 +162,25 @@ public class Style extends SimpleScriptable {
      * @return The property.
      */
     public Object get(final String name, final Scriptable start) {
-        final Object result = super.get(name, start);
 
-        if (!STYLE_ALLOWED_PROPERTIES.contains(name)) {
-            return super.get(name, start);
+        final Object result;
+        if (STYLE_ALLOWED_PROPERTIES.contains(name)) {
+            result = getStyleAttribute(name);
+        }
+        else {
+            result = super.get(name, start);
         }
 
-        // We only handle the logic here if 1) we have been fully initialized
-        // and 2) the
-        // superclass wasn't able to find anything with the matching name.
-        if (jsElement_ == null || result != NOT_FOUND) {
-            return result;
-        }
+        return result;
+    }
 
-        final Object value = getStyleMap().get(name);
+    /**
+     * Gets the style attribute value
+     * @param name the style attribute name
+     * @return empty string if noting found
+     */
+    protected String getStyleAttribute(final String name) {
+        final String value = (String) getStyleMap().get(name);
         if (value == null) {
             return "";
         }
@@ -188,13 +192,9 @@ public class Style extends SimpleScriptable {
     /**
      * Set the specified property
      * 
-     * @param name
-     *            The name of the property
-     * @param start
-     *            The scriptable object that was originally invoked for this
-     *            property
-     * @param newValue
-     *            The new value
+     * @param name The name of the property
+     * @param start The scriptable object that was originally invoked for this property
+     * @param newValue The new value
      */
     public void put(final String name, final Scriptable start,
             final Object newValue) {
@@ -208,6 +208,10 @@ public class Style extends SimpleScriptable {
             return;
         }
 
+        setStyleAttribute(name, (String) newValue);
+    }
+
+    protected void setStyleAttribute(final String name, final String newValue) {
         final Map styleMap = getStyleMap();
         styleMap.put(name, newValue);
 
@@ -216,13 +220,14 @@ public class Style extends SimpleScriptable {
         final Iterator iterator = styleMap.entrySet().iterator();
         while (iterator.hasNext()) {
             final Map.Entry entry = (Map.Entry) iterator.next();
+            buffer.append(" ");
             buffer.append(entry.getKey());
             buffer.append(": ");
             buffer.append(entry.getValue());
-            buffer.append("; ");
+            buffer.append(";");
         }
-        jsElement_.getHtmlElementOrDie().setAttributeValue("style",
-                buffer.toString());
+        buffer.deleteCharAt(0);
+        jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
     }
 
     private Map getStyleMap() {
@@ -245,5 +250,20 @@ public class Style extends SimpleScriptable {
         }
 
         return styleMap;
+    }
+
+    /**
+     * Gets the object's behavior
+     * @return the behavior.
+     */
+    public String jsxGet_behavior() {
+        return getStyleAttribute("behavior");
+    }
+
+    /**
+     * Sets the object's behavior
+     */
+    public void jsxSet_behavior(final String newValue) {
+        setStyleAttribute("behavior", newValue);
     }
 }
