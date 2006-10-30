@@ -224,4 +224,12 @@ public class HtmlScript extends HtmlElement {
             page.loadExternalJavaScriptFile(getSrcAttribute(), getCharsetAttribute());
         }
     }
+
+    /**
+     * @see com.gargoylesoftware.htmlunit.html.HtmlInput#asText()
+     * @return an empty string as the content of script is not visible by itself
+     */
+    public String asText() {
+        return "";
+    }
 }

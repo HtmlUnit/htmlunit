@@ -95,4 +95,21 @@ public class HtmlScriptTest extends WebTestCase {
             assertEquals("not found", cause.getStatusMessage());
         }
     }
+
+    /**
+     * Verifies that a asText() returns "checked" or "unckecked" according to the state of the checkbox.
+     * @throws Exception if the test fails
+     */
+    public void testAsText() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<script id='script1'>"
+            + "    var foo = 132;"
+            + "</script></body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlScript script = (HtmlScript) page.getHtmlElementById("script1");
+        assertEquals("", script.asText());
+    }
 }
