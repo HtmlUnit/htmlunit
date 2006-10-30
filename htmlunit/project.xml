@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <pomVersion>3</pomVersion>
-    <id>htmlunit:htmlunit</id>
+    <id>htmlunit</id>
     <artifactId>htmlunit</artifactId>
     <name>htmlunit</name>
     <groupId>htmlunit</groupId>

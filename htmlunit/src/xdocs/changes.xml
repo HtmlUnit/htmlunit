@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.10-prerelease">
+            <action type="update" dev="mguillem" id="1575783">
+                Removed ":" in project id to avoid problems on Windows with plugins like idea.
+            </action>
             <action type="update" dev="mguillem">
                 Upgraded jaxen to 1.1-beta-11 (even if it's a "beta", this is the version 
                 recommended by jaxen developers).
