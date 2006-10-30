@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.10-prerelease">
+            <action type="update" dev="mguillem">
+                JavaScript: added minimal support for navigator.mimeTypes (Firefox).
+            </action>
             <action type="update" dev="mguillem" id="1570484">
                 Fixed select's faked selections are ignored, if select is empty.
             </action>

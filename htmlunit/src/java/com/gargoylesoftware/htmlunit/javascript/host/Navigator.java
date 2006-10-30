@@ -182,10 +182,17 @@ public final class Navigator extends SimpleScriptable {
      * Return an empty array because HtmlUnit does not support embedded objects.
      * @return an empty array.
      */
-    public Object jsxFunction_plugins() {
+    public Object jsxGet_plugins() {
         return new NativeArray(0);
     }
 
+    /**
+     * Return an empty array because HtmlUnit does not support embedded objects.
+     * @return an empty array.
+     */
+    public Object jsxGet_mimeTypes() {
+        return new NativeArray(0);
+    }
 
     /**
      * Return <tt>false</tt> always as Java support is not enabled in HtmlUnit.
