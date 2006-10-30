@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.10-prerelease">
+            <action type="update" dev="mguillem" id="1587246">
+                Fixed asText() for script node. Now returns an empty string.
+            </action>
             <action type="update" dev="mguillem" id="1575783">
                 Removed ":" in project id to avoid problems on Windows with plugins like idea.
             </action>
