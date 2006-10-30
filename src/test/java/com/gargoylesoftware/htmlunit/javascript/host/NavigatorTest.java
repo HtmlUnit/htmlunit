@@ -263,4 +263,31 @@ public class NavigatorTest extends WebTestCase {
         final List expectedAlerts = Arrays.asList(new String[]{ BrowserVersion.MOZILLA_1_0.getBrowserLanguage() });
         assertEquals(expectedAlerts, collectedAlerts);
     }    
+
+    /**
+     * Test some Mozilla properties (minimal tests are support is not completed)
+     * @throws Exception if the test fails.
+     */
+    public void testMozilla() throws Exception {
+
+        final String content
+            = "<html><head><title>First</title></head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  alert(typeof window.navigator.mimeTypes.length);"
+            + "  alert(typeof window.navigator.plugins.length);"
+            + "}"
+            + "</script>"
+            + "<body onload='test()'></body>"
+            + "</html>";
+
+        final String[] expectedAlerts = { "number", "number"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }    
 }
