@@ -8,6 +8,13 @@
     <body>
         <release version="1.10-prerelease">
             <action type="update" dev="mguillem">
+                Upgraded jaxen to 1.1-beta-11 (even if it's a "beta", this is the version 
+                recommended by jaxen developers).
+            </action>
+            <action type="update" dev="mguillem" id="1559903">
+                Added Maven compliant scopes in project.xml.
+            </action>
+            <action type="update" dev="mguillem">
                 JavaScript: added minimal support for navigator.mimeTypes (Firefox).
             </action>
             <action type="update" dev="mguillem" id="1570484">
