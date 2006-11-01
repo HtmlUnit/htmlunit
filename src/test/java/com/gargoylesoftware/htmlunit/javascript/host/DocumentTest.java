@@ -2212,7 +2212,36 @@ public class DocumentTest extends WebTestCase {
         assertEquals("frame", ((HtmlPage)frame.getEnclosedPage()).getTitleText());
     }
 
-     /**
+   /**
+    * Test for 1185389
+    * @throws Exception if the test fails
+    */
+   public void testWriteAddNodesToCorrectParent() throws Exception {
+       if (notYetImplemented()) {
+           return;
+       }
+
+       final String content = "<html><head><title>foo</title></head>\n"
+           + "<body id=\"theBody\">\n"
+           + "<script>\n"
+           + "document.write('<p id=\"para1\">Paragraph #1</p>');\n"
+           + "document.write('<p id=\"para2\">Paragraph #2</p>');\n"
+           + "document.write('<p id=\"para3\">Paragraph #3</p>');\n"
+           + "alert(document.getElementById('para1').parentNode.id);\n"
+           + "alert(document.getElementById('para2').parentNode.id);\n"            
+           + "alert(document.getElementById('para3').parentNode.id);\n"            
+           + "</script>\n"
+           + "</body></html>";
+
+       final String[] expectedAlerts = {"theBody", "theBody", "theBody"};
+       createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+       final List collectedAlerts = new ArrayList();
+       loadPage(content, collectedAlerts);
+       assertEquals( expectedAlerts, collectedAlerts );
+   }
+   
+   /**
      * @throws Exception if the test fails
      */
     public void testScriptsArray() throws Exception {
