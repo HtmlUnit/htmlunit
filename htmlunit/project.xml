@@ -22,9 +22,9 @@
     <siteDirectory>/home/groups/h/ht/htmlunit/htdocs</siteDirectory>
     <distributionDirectory>/home/groups/h/ht/htmlunit/htdocs/nightly</distributionDirectory>
     <repository>
-        <connection>scm:cvs:pserver:anonymous@htmlunit.cvs.sourceforge.net:/cvsroot/htmlunit:htmlunit</connection>
-        <developerConnection>scm:cvs:ext:${maven.username}@htmlunit.cvs.sourceforge.net:/cvsroot/htmlunit:htmlunit/</developerConnection>
-        <url>http://htmlunit.cvs.sourceforge.net/htmlunit</url>
+        <connection>scm:svn:https://svn.sourceforge.net/svnroot/htmlunit</connection>
+        <developerConnection>scm:svn:https://${maven.username}@svn.sourceforge.net/svnroot/htmlunit</developerConnection>
+        <url>https://svn.sourceforge.net/svnroot/htmlunit</url>
     </repository>
     <licenses>
         <license>
