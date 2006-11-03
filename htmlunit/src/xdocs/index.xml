@@ -34,7 +34,7 @@
                 <a href="gettingStarted.html">"Getting Started with HtmlUnit"</a> for an introduction.
             </p>
             <p>
-                NOTE: This documentation is for the current code in CVS and may not accurately
+                NOTE: This documentation is for the current code in SVN and may not accurately
                 reflect the version of HtmlUnit that you have downloaded.  Refer to the
                 documentation that came with your download for the most correct information
             </p>
@@ -51,18 +51,10 @@
                         </a>.
                     </dd>
                 -->
-                <!-- No pre-releases at the moment
-                    <dt>Latest pre-release (unstable) <date>September 26, 2004</date></dt>
-                    <dd>
-                        <a href="http://prdownloads.sourceforge.net/htmlunit/htmlunit-1.3-pre2.zip?download">
-                            Download version 1.3-pre2
-                        </a>.
-                    </dd>
-                -->
-                    <dt>Latest stable release <date>June 27, 2006</date></dt>
+                    <dt>Latest stable release <date>Nov 3, 2006</date></dt>
                     <dd>
                         <a href="http://sourceforge.net/project/showfiles.php?group_id=47038">
-                            version 1.9
+                            version 1.10
                         </a>
                     </dd>
                 </dl>
