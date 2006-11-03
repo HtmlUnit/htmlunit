@@ -6,7 +6,7 @@
     </properties>
 
     <body>
-        <release version="1.10-prerelease">
+        <release version="1.10" date="Nov 03, 2006">
             <action type="update" dev="mguillem" id="1587246">
                 Fixed asText() for script node. Now returns an empty string.
             </action>
