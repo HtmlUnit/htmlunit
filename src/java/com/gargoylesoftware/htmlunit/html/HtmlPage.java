@@ -328,18 +328,24 @@ public final class HtmlPage extends DomNode implements Page {
         throws MalformedURLException {
 
         final List baseElements = getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("base"));
-        final URL baseUrl;
+        URL baseUrl;
         if( baseElements.isEmpty() ) {
             baseUrl = webResponse_.getUrl();
         }
         else {
-            final HtmlBase htmlBase = (HtmlBase)baseElements.get(0);
+            final HtmlBase htmlBase = (HtmlBase) baseElements.get(0);
             final String href = htmlBase.getHrefAttribute();
-            if (href == null || href.length() == 0) {
+            if (StringUtils.isEmpty(href)) {
                 baseUrl = webResponse_.getUrl();
             }
             else {
-                baseUrl = new URL(href);
+                try {
+                    baseUrl = new URL(href);
+                }
+                catch (final MalformedURLException e) {
+                    getLog().warn("Invalid base url: \"" + href + "\", ignoring it");
+                    baseUrl = webResponse_.getUrl();
+                }
             }
         }
         return WebClient.expandUrl( baseUrl, relativeUrl );

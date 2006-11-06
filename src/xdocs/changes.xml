@@ -6,6 +6,11 @@
     </properties>
 
     <body>
+        <release version="1.11-prerelease">
+            <action type="update" dev="mguillem" id="1579511">
+                Ignore invalid urls specified in &lt;base href="..."/&gt;.
+            </action>
+        </release>
         <release version="1.10" date="Nov 03, 2006">
             <action type="update" dev="mguillem" id="1587246">
                 Fixed asText() for script node. Now returns an empty string.
