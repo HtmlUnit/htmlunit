@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem" id="1570478">
+                JavaScript: allow to add options to a select with an index as second argument
+                when simulating Internet Explorer.
+            </action>
             <action type="update" dev="mguillem" id="1579511">
                 Ignore invalid urls specified in &lt;base href="..."/&gt;.
             </action>

@@ -43,7 +43,6 @@ import java.util.List;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.OptionsArray;
@@ -51,9 +50,9 @@ import com.gargoylesoftware.htmlunit.javascript.OptionsArray;
 /**
  * The javascript object for {@link HtmlSelect}.
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  * @author Marc Guillemot
  * @author Chris Erskine
  */
@@ -101,31 +100,74 @@ public class Select extends FormField {
     /**
      * Add a new item to the list (optionally) before the specified item
      * @param newOptionObject The DomNode to insert
+     * @param arg2 for Firefox: the DomNode to insert the previous element before (null if at end),
+     * for Internet Explorer: the index where the element should be placed (optional)
+     */
+    public void jsxFunction_add(final Option newOptionObject, final Object arg2) {
+
+        if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+        	add_IE(newOptionObject, arg2);
+        }
+        else {
+        	add(newOptionObject, arg2);
+        }
+    }
+    
+    /**
+     * Add a new item to the list (optionally) at the specified index in IE way
+     * @param newOptionObject The DomNode to insert
+     * @param index (optional) the index where the node should be inserted
+     */
+    protected void add_IE(final Option newOptionObject, final Object index) {
+        final HtmlSelect select = getHtmlSelect();
+        final HtmlOption beforeOption;
+        if (Context.getUndefinedValue().equals(index)) {
+        	beforeOption = null;
+        }
+        else {
+        	final int intIndex = ((Integer) Context.jsToJava(index, Integer.class)).intValue();
+        	if (intIndex >= select.getOptionSize()) {
+        		beforeOption = null;
+        	}
+        	else {
+        		beforeOption = select.getOption(intIndex);
+        	}
+        }
+        
+        addBefore(newOptionObject, beforeOption);
+    }
+
+    /**
+     * Add a new item to the list (optionally) before the specified item in Mozilla way
+     * @param newOptionObject The DomNode to insert
      * @param beforeOptionObject The DomNode to insert the previous element before (null if at end)
      */
-    public void jsxFunction_add(final Object newOptionObject, final Object beforeOptionObject) {
-
-        final HtmlSelect select = getHtmlSelect();
-
-        final Option option = (Option) newOptionObject;
-        final Option beforeOption;
+    protected void add(final Option newOptionObject, final Object beforeOptionObject) {
+        final HtmlOption beforeOption;
         if (beforeOptionObject == null) {
             beforeOption = null;
         }
         else if (Context.getUndefinedValue().equals(beforeOptionObject)) {
-            if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-                beforeOption = null;
-            }
-            else {
-                throw Context.reportRuntimeError("Not enough arguments [SelectElement.add]");
-            }
+            throw Context.reportRuntimeError("Not enough arguments [SelectElement.add]");
         }
         else {
-            beforeOption = (Option) beforeOptionObject;
+            beforeOption = (HtmlOption) ((Option) beforeOptionObject).getDomNodeOrDie();
         }
+        addBefore(newOptionObject, beforeOption);
+    }
+    
+    /**
+     * Adds the option (and create the associated dom node if needed) before the specified one
+     * or at the end if the specified one in null
+     * @param newOptionObject the new option to add
+     * @param beforeOption the option that should be after the option to add
+     */
+    protected void addBefore(final Option newOptionObject, final HtmlOption beforeOption) {
 
-        HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
-        if ( htmlOption == null ) {
+        final HtmlSelect select = getHtmlSelect();
+
+        HtmlOption htmlOption = (HtmlOption) newOptionObject.getHtmlElementOrNull();
+        if (htmlOption == null) {
             htmlOption = new HtmlOption(select.getPage(), null);
         }
 
@@ -133,13 +175,12 @@ public class Select extends FormField {
             select.appendChild(htmlOption);
         }
         else {
-            final DomNode before = beforeOption.getDomNodeOrDie();
-            before.insertBefore(htmlOption);
+            beforeOption.insertBefore(htmlOption);
         }
 
         // newly created HtmlOption needs to be associated to its js object
-        if (option.getDomNodeOrNull() == null) {
-            option.setDomNode( htmlOption );
+        if (newOptionObject.getDomNodeOrNull() == null) {
+        	newOptionObject.setDomNode( htmlOption );
         }
     }
 

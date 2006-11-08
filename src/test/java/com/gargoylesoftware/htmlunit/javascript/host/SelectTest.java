@@ -317,7 +317,7 @@ public class SelectTest extends WebTestCase {
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
             + "    var index = options.length;\n"
-            + "    options[index]=new Option('Four','value4');\n"
+            + "    options[index] = new Option('Four','value4');\n"
             + "    alert(options.length);\n"
             + "    alert(options[index].text);\n"
             + "    alert(options[index].value);\n"
@@ -390,7 +390,7 @@ public class SelectTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testAddOptionWithAddMethod() throws Exception {
+    public void testAddOptionWithAddMethod_FF() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>"
             + "function doTest() {\n"
@@ -411,17 +411,50 @@ public class SelectTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final List expectedAlerts = Arrays.asList( new String[] {"4", "Four", "value4"} );
+        final String[] expectedAlerts = {"4", "Four", "value4"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-
+        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
+    /**
+     * Test for bug 1570478.
+     * @throws Exception if the test fails
+     */
+    public void testAddOptionWithAddMethod_IE() throws Exception {
+        final String content
+            = "<html><head><title>foo</title><script>"
+            + "function doTest() {\n"
+            + "    var oSelect = document.form1.select1;\n"
+            + "    oSelect.add(new Option('Four', 'value4'));\n"
+            + "    alert(oSelect.length);\n"
+            + "    alert(oSelect[oSelect.length-1].text);\n"
+            + "    alert(oSelect[oSelect.length-1].value);\n"
+            + "    oSelect.add(new Option('Three b', 'value3b'), 3);\n"
+            + "    alert(oSelect[3].text);\n"
+            + "    alert(oSelect[3].value);\n"
+            + "}</script></head><body onload='doTest()'>"
+            + "<p>hello world</p>"
+            + "<form name='form1'>"
+            + "    <select name='select1'>"
+            + "        <option name='option1' value='value1'>One</option>"
+            + "        <option name='option2' value='value2' selected>Two</option>"
+            + "        <option name='option3' value='value3'>Three</option>"
+            + "    </select>"
+            + "</form>"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"4", "Four", "value4", "Three b", "value3b"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 
     /**
      * Regression test for bug 1304741
