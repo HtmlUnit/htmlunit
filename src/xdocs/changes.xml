@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem" id="1592299">
+                JavaScript: fixed bug preventing to set non String style properties.
+            </action>
             <action type="update" dev="mguillem" id="1570478">
                 JavaScript: allow to add options to a select with an index as second argument
                 when simulating Internet Explorer.

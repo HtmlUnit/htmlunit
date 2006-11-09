@@ -235,4 +235,26 @@ public class StyleTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+    /**
+     * Regression test for bug 1592299
+     * @throws Exception if the test fails
+     */
+    public void testSetStylePropertyNonString() throws Exception {
+        final String content = "<html><head><title>First</title><script>\n"
+                + "function doTest() {\n"
+                + "    var oDiv1 = document.getElementById('div1');\n"
+                + "    oDiv1.style.pixelLeft = 123;\n"
+                + "    alert(oDiv1.style.pixelLeft);\n"
+                + "}\n</script></head>"
+                + "<body onload='doTest()'>"
+                + "<div id='div1'>foo</div></body></html>";
+
+        final String[] expectedAlerts = { "123" };
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }

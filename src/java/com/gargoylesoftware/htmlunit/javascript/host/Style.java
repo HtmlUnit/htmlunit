@@ -49,6 +49,7 @@ import java.util.StringTokenizer;
 import java.util.TreeMap;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.Assert;
@@ -207,8 +208,10 @@ public class Style extends SimpleScriptable {
             super.put(name, start, newValue);
             return;
         }
+        
+        final String styleValue = (String) Context.jsToJava(newValue, String.class);
 
-        setStyleAttribute(name, (String) newValue);
+        setStyleAttribute(name, styleValue);
     }
 
     /**
