@@ -106,10 +106,10 @@ public class Select extends FormField {
     public void jsxFunction_add(final Option newOptionObject, final Object arg2) {
 
         if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-        	add_IE(newOptionObject, arg2);
+            add_IE(newOptionObject, arg2);
         }
         else {
-        	add(newOptionObject, arg2);
+            add(newOptionObject, arg2);
         }
     }
     
@@ -122,16 +122,16 @@ public class Select extends FormField {
         final HtmlSelect select = getHtmlSelect();
         final HtmlOption beforeOption;
         if (Context.getUndefinedValue().equals(index)) {
-        	beforeOption = null;
+            beforeOption = null;
         }
         else {
-        	final int intIndex = ((Integer) Context.jsToJava(index, Integer.class)).intValue();
-        	if (intIndex >= select.getOptionSize()) {
-        		beforeOption = null;
-        	}
-        	else {
-        		beforeOption = select.getOption(intIndex);
-        	}
+            final int intIndex = ((Integer) Context.jsToJava(index, Integer.class)).intValue();
+            if (intIndex >= select.getOptionSize()) {
+                beforeOption = null;
+            }
+            else {
+                beforeOption = select.getOption(intIndex);
+            }
         }
         
         addBefore(newOptionObject, beforeOption);
@@ -180,7 +180,7 @@ public class Select extends FormField {
 
         // newly created HtmlOption needs to be associated to its js object
         if (newOptionObject.getDomNodeOrNull() == null) {
-        	newOptionObject.setDomNode( htmlOption );
+            newOptionObject.setDomNode( htmlOption );
         }
     }
 
