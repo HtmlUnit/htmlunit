@@ -47,6 +47,7 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
+import org.w3c.dom.Document;
 
 import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -55,6 +56,7 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
@@ -86,6 +88,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     private boolean async_;
     private int threadID_;
     private WebResponse webResponse_;
+    private String overridenMimeType_;
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -169,7 +172,8 @@ public class XMLHttpRequest extends SimpleScriptable {
     public Object jsxGet_responseXML() {
         if (webResponse_.getContentType().indexOf("xml") != -1) {
             try {
-                return XmlUtil.buildDocument(webResponse_);
+                final Document doc = XmlUtil.buildDocument(webResponse_);
+                return Context.javaToJS(doc, this);
             }
             catch (final Exception e) {
                 getLog().warn("Failed parsing xml document " + webResponse_.getUrl() + ": " + e.getMessage());
@@ -339,7 +343,17 @@ public class XMLHttpRequest extends SimpleScriptable {
                     requestSettings_.setRequestBody(body);
                 }
             }
-            webResponse_ = wc.loadWebResponse(requestSettings_);
+            final WebResponse webResponse = wc.loadWebResponse(requestSettings_);
+            if (overridenMimeType_ == null) {
+                webResponse_ = webResponse;
+            }
+            else {
+                webResponse_ = new WebResponseWrapper(webResponse) {
+                    public String getContentType() {
+                        return overridenMimeType_;
+                    }
+                };
+            }
             setState( STATE_INTERACTIVE, context );
             setState( STATE_COMPLETED, context );
         }
@@ -362,5 +376,16 @@ public class XMLHttpRequest extends SimpleScriptable {
         else {
             throw Context.reportRuntimeError( "The open() method must be called before setRequestHeader()." );
         }
+    }
+    
+    /**
+     * Override the mime type returned by the server (if any). This may be used, for example, to force a stream 
+     * to be treated and parsed as text/xml, even if the server does not report it as such. 
+     * This must be done before the send method is invoked.
+     * @param mimeType the type used to override that returned by the server (if any)
+     * @see <a href="http://xulplanet.com/references/objref/XMLHttpRequest.html#method_overrideMimeType">XUL Planet</a>
+     */
+    public void jsxFunction_overrideMimeType(final String mimeType) {
+        overridenMimeType_ = mimeType;
     }
 }

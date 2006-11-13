@@ -920,6 +920,7 @@
       <function name="getAllResponseHeaders"/>
       <function name="getResponseHeader"/>
       <function name="open"/>
+      <function name="overrideMimeType"/>
       <function name="send"/>
       <function name="setRequestHeader"/>
     </class>

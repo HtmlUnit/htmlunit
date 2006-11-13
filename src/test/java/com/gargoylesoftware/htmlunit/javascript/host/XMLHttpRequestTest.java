@@ -466,4 +466,42 @@ public class XMLHttpRequestTest extends WebTestCase {
         assertEquals(URL_FIRST, page.getWebResponse().getUrl());
         assertEquals("foo", page.getTitleText());
     }
+
+    /**
+     * Test Mozilla's overrideMimeType method
+     * @throws Exception if the test fails.
+     */
+    public void testOverrideMimeType() throws Exception {
+
+        final String html = "<html><head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  var request = new XMLHttpRequest();"
+            + "  request.open('GET', 'foo.xml.txt', false);"
+            + "  request.send('');"
+            + "  alert(request.responseXML == null);"
+            + "  request.overrideMimeType('text/xml');"
+            + "  request.open('GET', 'foo.xml.txt', false);"
+            + "  request.send('');"
+            + "  alert(request.responseXML == null);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()'></body></html>";
+
+        final WebClient client = new WebClient(BrowserVersion.MOZILLA_1_0);
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, html);
+        final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml.txt");
+        webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>", "text/plain");
+        client.setWebConnection( webConnection );
+        client.getPage(URL_FIRST);
+
+        final String[] alerts = { "true", "false" };
+        assertEquals( alerts, collectedAlerts );
+    }
+
 }
