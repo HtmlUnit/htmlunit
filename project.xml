@@ -191,6 +191,9 @@
         <contributor>
         	<name>Andre Soereng</name>
         </contributor>
+        <contributor>
+        	<name>Karel Kolman</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowImpl;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
+import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -568,6 +569,9 @@ public class HTMLElement extends NodeImpl {
         final DomNode copy;
         if (node instanceof DomText) {
             copy = new DomText(page, node.getNodeValue());
+        }
+        else if (node instanceof DomComment) {
+            copy = new DomComment(page, node.getNodeValue());
         }
         else {
             final HtmlElement htmlElt = (HtmlElement) node;

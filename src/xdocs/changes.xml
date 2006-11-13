@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem" id="1591212" due-to="Karel Kolman">
+                Added support for comments: &lt;!-- some comment --&gt;. Patch from Karel Kolman.
+            </action>
             <action type="update" dev="mguillem" id="1204628">
                 JavaScript: added XMLHttpRequest.overrideMimeType.
             </action>

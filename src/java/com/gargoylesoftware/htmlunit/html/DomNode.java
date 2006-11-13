@@ -87,6 +87,10 @@ public abstract class DomNode implements Cloneable {
      * node type constant for <code>Attribute</code> nodes.
      */
     public static final short ATTRIBUTE_NODE             = 4;
+    /**
+     * node type constant for <code>Comment</code> nodes.
+     */
+    public static final short COMMENT_NODE             = 5;
 
     /**
      * readyState constant for IE.

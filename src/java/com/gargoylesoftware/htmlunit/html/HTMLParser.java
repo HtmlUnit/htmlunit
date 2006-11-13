@@ -56,6 +56,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
+import org.xml.sax.ext.LexicalHandler;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
@@ -249,7 +250,7 @@ public final class HTMLParser {
      * the ContentHandler interface. Thus all parser APIs are kept private. The ContentHandler methods
      * consume SAX events to build the page DOM
      */
-    private static class HtmlUnitDOMBuilder extends AbstractSAXParser implements ContentHandler /*, LexicalHandler */ {
+    private static class HtmlUnitDOMBuilder extends AbstractSAXParser implements ContentHandler, LexicalHandler {
 
         private final WebResponse webResponse_;
         private final WebWindow webWindow_;
@@ -292,6 +293,10 @@ public final class HTMLParser {
                 setFeature("http://cyberneko.org/html/features/report-errors", reportErrors);
                 setFeature("http://cyberneko.org/html/features/balance-tags/ignore-outside-content",
                     IgnoreOutsideContent_);
+
+                setContentHandler(this);
+                setLexicalHandler(this); //comments and CDATA
+
             }
             catch (final SAXException e) {
                 throw new ObjectInstantiationException("unable to create HTML parser", e);
@@ -305,10 +310,6 @@ public final class HTMLParser {
          * @throws java.io.IOException
          */
         public void parse(final XMLInputSource inputSource) throws IOException {
-
-            setContentHandler(this);
-            //setLexicalHandler(this); comments and CDATA
-
             super.parse(inputSource);
         }
 
@@ -455,6 +456,38 @@ public final class HTMLParser {
 
         /** @inheritDoc ContentHandler#skippedEntity(String) */
         public void skippedEntity(final String name) throws SAXException {
+        }
+
+        // LexicalHandler methods
+
+        /** @inheritDoc LexicalHandler#comment(char[],int,int) */
+        public void comment(final char[] ch, final int start, final int length) {
+            final DomComment comment = new DomComment(page_, String.valueOf(ch, start, length));
+            currentNode_.appendChild(comment);
+        }
+        
+        /** @inheritDoc LexicalHandler#endCDATA() */
+        public void endCDATA() {
+        }
+
+        /** @inheritDoc LexicalHandler#endDTD() */
+        public void endDTD() {
+        }
+
+        /** @inheritDoc LexicalHandler#endEntity() */
+        public void endEntity(final String name) {
+        }
+
+        /** @inheritDoc LexicalHandler#startCDATA() */
+        public void startCDATA() {
+        }
+
+        /** @inheritDoc LexicalHandler#startDTD(String,String,String) */
+        public void startDTD(final String name, final String publicId, final String systemId) {
+        }
+
+        /** @inheritDoc LexicalHandler#startEntity(String) */
+        public void startEntity(final String name) {
         }
     }
 }

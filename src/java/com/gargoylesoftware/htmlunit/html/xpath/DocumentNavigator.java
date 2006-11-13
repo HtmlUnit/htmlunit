@@ -46,6 +46,7 @@ import org.jaxen.XPath;
 import org.jaxen.JaxenException;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.Util;
@@ -298,7 +299,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return true if the node is a comment, false otherwise.
      */
     public boolean isComment (final Object object) {
-        return false;
+        return (object instanceof DomComment);
     }
 
     /**
