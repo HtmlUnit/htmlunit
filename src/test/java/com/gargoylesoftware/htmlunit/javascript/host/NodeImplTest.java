@@ -42,8 +42,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -54,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author yourgod
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Bruce Faulkner
+ * @author Marc Guillemot
  * @version $Revision$
  *
  */
@@ -292,29 +295,52 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void test_insertBefore_nullRef() throws Exception {
+    	test_insertBefore(BrowserVersion.MOZILLA_1_0, "aNode.insertBefore(nodeToInsert, null);");
+    	test_insertBefore(BrowserVersion.INTERNET_EXPLORER_6_0, "aNode.insertBefore(nodeToInsert, null);");
+    }
+
+    /**
+     * Regression test to verify that insertBefore correctly appends
+     * the new child object when the reference child object is null.
+     * @throws Exception if the test fails
+     */
+    public void test_insertBefore_noSecondArg() throws Exception {
+    	test_insertBefore(BrowserVersion.INTERNET_EXPLORER_6_0, "aNode.insertBefore(nodeToInsert);");
+    	try {
+    		test_insertBefore(BrowserVersion.MOZILLA_1_0, "aNode.insertBefore(nodeToInsert);");
+    		fail();
+    	}
+    	catch (final ScriptException e) {
+    		final String message = e.getMessage();
+    		assertTrue(message, message.indexOf("not enough arguments") > -1);
+    	}
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    void test_insertBefore(final BrowserVersion browserVersion, final String insertJSLine) throws Exception {
         final String content = "<html><head><title>test_insertBefore</title>"
-                        + "<script>"
-                        + "function doTest() {"
-                        + "var nodeToInsert = document.getElementById('nodeToInsert');"
-                        + "var aNode = document.getElementById('myNode');"
-                        + "aNode.insertBefore(nodeToInsert, null);"
-                        + "alert(aNode.childNodes.length);"
-                        + "alert(aNode.childNodes[2].nodeName);"
-                        + "}"
-                        + "</script>"
-                        + "</head><body onload='doTest()'>"
-                        + "<h2 id='nodeToInsert'>Bottom</h2>"
-                        + "<div id='myNode'><span>Child Node 1-A</span>"
-                        + "<h1>Child Node 2-A</h1></div>"
-                        + "</body></html>";
+            + "<script>"
+            + "function doTest() {"
+            + "var nodeToInsert = document.getElementById('nodeToInsert');"
+            + "var aNode = document.getElementById('myNode');"
+            + insertJSLine
+            + "alert(aNode.childNodes.length);"
+            + "alert(aNode.childNodes[2].nodeName);"
+            + "}"
+            + "</script>"
+            + "</head><body onload='doTest()'>"
+            + "<h2 id='nodeToInsert'>Bottom</h2>"
+            + "<div id='myNode'><span>Child Node 1-A</span>"
+            + "<h1>Child Node 2-A</h1></div>"
+            + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
 
-        final List expectedAlerts = Arrays.asList(new String[] { "3", "H2" });
+        final String[] expectedAlerts = {"3", "H2"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("test_insertBefore", page.getTitleText());
+        loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
