@@ -461,7 +461,7 @@ public abstract class WebTestCase extends BaseTestCase {
             fail(testMethod.getName() + " is marked as not implemented but already works");
         }
         catch (final Exception e) {
-            getLog().info(testMethod.getName() + " fails what is normal as it is not yet implemented");
+            getLog().info(testMethod.getName() + " fails which is normal as it is not yet implemented");
             // method execution failed, it is really "not yet implemented"
         }
         finally {
