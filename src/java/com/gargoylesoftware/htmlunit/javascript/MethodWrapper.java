@@ -155,5 +155,5 @@ public class MethodWrapper extends ScriptableObject implements Function {
     public Scriptable construct(final Context context, final Scriptable scope, final Object[] args) {
         throw Context.reportRuntimeError("Function " + method_.getName() + " can't be used as a constructor");
     }
-    
+
 }

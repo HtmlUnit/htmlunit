@@ -196,4 +196,5 @@ class PopupPseudoWebWindow implements WebWindow {
     public void setScriptObject(final Object scriptObject) {
         scriptObject_ = scriptObject;
     }
+
 }
