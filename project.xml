@@ -374,6 +374,12 @@
             <includes>
                 <include>**/*Test.java</include>
             </includes>
+            <resources>
+                <resource>
+                    <directory>src/test/resources</directory>
+                    <includes>prototype</includes>
+                </resource>
+            </resources>
         </unitTest>
     </build>
 </project>

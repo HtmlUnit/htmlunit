@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Prototype Unit test file</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <script src="../../dist/prototype.js" type="text/javascript"></script>
+  <script src="../lib/unittest.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="../test.css" type="text/css" />
+  <style type="text/css" media="screen">
+  /* <![CDATA[ */
+    #testcss1 { font-size:11px; color: #f00; }
+    #testcss2 { font-size:12px; color: #0f0; display: none; }
+  /* ]]> */
+  </style>
+</head>
+<body>
+<h1>Prototype Unit test file</h1>
+<p>
+  Test of utility functions in form.js
+</p>
+
+<!-- Log output -->
+<div id="testlog"> </div>
+
+<form id="form">
+  <input type="text" name="val1" id="input_enabled" value="4" />
+  <div>This is not a form element</div>
+  <input type="text" name="val2" id="input_disabled" disabled="disabled" value="5" />
+  <input type="submit" />
+</form>
+<form id="form_selects">
+  <select name="vu">
+     <option value="1" selected="selected">One</option>
+     <option value="2">Two</option>
+     <option value="3">Three</option>
+  </select>
+  <select name="vm[]" multiple="multiple">
+     <option value="1" selected="selected">One</option>
+     <option value="2">Two</option>
+     <option value="3" selected="selected">Three</option>
+  </select>
+  <select name="nvu">
+     <option selected="selected">One</option>
+     <option value="2">Two</option>
+     <option value="3">Three</option>
+  </select>
+  <select name="nvm[]" multiple="multiple">
+     <option selected="selected">One</option>
+     <option>Two</option>
+     <option selected="selected">Three</option>
+  </select>
+  <select name="evu">
+     <option value="" selected="selected">One</option>
+     <option value="2">Two</option>
+     <option value="3">Three</option>
+  </select>
+  <select name="evm[]" multiple="multiple">
+     <option value="" selected="selected">One</option>
+     <option>Two</option>
+     <option selected="selected">Three</option>
+  </select>
+</form>
+
+<form id="form_getelements">
+  <select id="tf_selectOne" name="tf_selectOne"><option></option><option>1</option></select>
+  <textarea id="tf_textarea" name="tf_textarea"></textarea>
+  <input type="checkbox" id="tf_checkbox" name="tf_checkbox" value="on" />
+  <select id="tf_selectMany" name="tf_selectMany" multiple="multiple"></select>
+  <input type="text" id="tf_text" name="tf_text" />
+  <div>This is not a form element</div>
+  <input type="radio" id="tf_radio" name="tf_radio" value="on" />
+  <input type="hidden" id="tf_hidden" name="tf_hidden" />
+  <input type="password" id="tf_password" name="tf_password" />
+</form>
+
+<!-- Tests follow -->
+<script type="text/javascript" language="javascript" charset="utf-8">
+// <![CDATA[
+  var callbackCounter = 0;
+
+  new Test.Unit.Runner({
+    
+    // Make sure to set defaults in the test forms, as some browsers override this
+    // with previously entered values on page reload
+    setup: function(){ with(this) {
+      $('input_enabled').value = '4';
+      $('input_disabled').value = '5';
+      
+      $('tf_selectOne').selectedIndex = 0;
+      $('tf_textarea').value = '';
+      $('tf_text').value = '';
+      $('tf_hidden').value = '';
+      $('tf_password').value = '';
+      $('tf_checkbox').checked = false;
+      $('tf_radio').checked = false;
+    }},
+    
+    testFormElementEventObserver: function(){ with(this) {
+      var observer = new Form.Element.EventObserver('input_enabled', function(){
+        callbackCounter++;
+      });
+      
+      assertEqual(0, callbackCounter);
+      $('input_enabled').value = 'boo!';
+      observer.onElementEvent(); // can't test the event directly, simulating
+      assertEqual(1, callbackCounter);
+    }},
+    
+    testFormElementEnabling: function(){ with(this) {
+      assert($('input_disabled').disabled);
+      $('input_disabled').enable();
+      assert(!$('input_disabled').disabled);
+      $('input_disabled').disable();
+      assert($('input_disabled').disabled);
+      
+      assert(!$('input_enabled').disabled);
+      $('input_enabled').disable();
+      assert($('input_enabled').disabled);
+      $('input_enabled').enable();
+      assert(!$('input_enabled').disabled);
+    }},
+    
+    testFormGetElements: function() {with(this) {
+      var formElements = $('form_getelements').getElements();
+      assertEqual(8, formElements.length);
+      assertEqual('tf_selectOne', formElements[0].id);
+      assertEqual('tf_textarea', formElements[1].id);
+      assertEqual('tf_checkbox', formElements[2].id);
+      assertEqual('tf_selectMany', formElements[3].id);
+      assertEqual('tf_text', formElements[4].id);
+      assertEqual('tf_radio', formElements[5].id);
+      assertEqual('tf_hidden', formElements[6].id);
+      assertEqual('tf_password', formElements[7].id);
+    }},
+    
+    testFormSerialize: function() {with(this){
+      assertEqual('tf_selectOne=&tf_textarea=&tf_text=&tf_hidden=&tf_password=', 
+        Form.serialize('form_getelements'));
+        
+      $('tf_selectOne').selectedIndex = 1;
+      $('tf_textarea').value = "boo hoo!";
+      $('tf_text').value = "123öäü";
+      $('tf_hidden').value = "moo%hoo&test";
+      $('tf_password').value = 'sekrit code';
+      $('tf_checkbox').checked = true;
+      $('tf_radio').checked = true;
+      
+      assertEqual(
+        'tf_selectOne=1&tf_textarea=boo%20hoo!&tf_checkbox=on&tf_text=123%C3%B6%C3%A4%C3%BC&'+
+        'tf_radio=on&tf_hidden=moo%25hoo%26test&tf_password=sekrit%20code',
+        Form.serialize('form_getelements'));
+
+      // Checks that disabled element is not included in serialized form.
+      $('input_enabled').enable();
+      assertEqual('val1=4', Form.serialize('form'));
+
+       // Checks that select-related serializations work just fine
+       assertEqual('vu=1&vm%5B%5D=1&vm%5B%5D=3&nvu=One&nvm%5B%5D=One&nvm%5B%5D=Three&evu=&evm%5B%5D=&evm%5B%5D=Three', Form.serialize('form_selects'));
+    }}
+    
+  }, 'testlog');
+// ]]>
+</script>
+</body>
+</html>
