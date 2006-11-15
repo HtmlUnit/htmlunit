@@ -182,12 +182,12 @@ public class NodeImpl extends SimpleScriptable {
             final DomNode refChildNode;
             // IE accepts non standard calls with only one arg
             if (Context.getUndefinedValue().equals(refChildObject)) {
-            	if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-            		refChildNode = null;
-            	}
-            	else {
-            		throw Context.reportRuntimeError("insertBefore: not enough arguments");
-            	}
+                if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+                    refChildNode = null;
+                }
+                else {
+                    throw Context.reportRuntimeError("insertBefore: not enough arguments");
+                }
             }
             else if (refChildObject != null) {
                 refChildNode = ((NodeImpl) refChildObject).getDomNodeOrDie();
