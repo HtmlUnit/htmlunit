@@ -964,7 +964,8 @@ public final class HtmlPage extends DomNode implements Page {
         if (jsWindow != null) {
             final Event loadEvent = new Event(getDocumentElement());
 
-            for (final Iterator iter = jsWindow.getListeners("load").iterator(); iter.hasNext(); ) {
+            final List onLoadHandlers = new ArrayList(jsWindow.getListeners("load"));
+            for (final Iterator iter = onLoadHandlers.iterator(); iter.hasNext(); ) {
                 final Function listener = (Function) iter.next();
                 getLog().debug("Executing load listener for the window: " + listener);
                 runEventHandler(listener, loadEvent);

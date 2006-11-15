@@ -1615,6 +1615,29 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
+     * Regression test for 1596926
+     * @throws Exception If the test fails.
+     */
+    public void testDetachEventInAttachEvent() throws Exception {
+        final String content = "<html>\n"
+            + "<head><title>test</title>\n"
+            + "<script>\n"
+            + "function test()" 
+            + "{"
+            + "  window.detachEvent('onload', test);"
+            + "  alert('detached');"
+            + "}"
+            + "window.attachEvent('onload', test);"
+            + "</script></head>\n"
+            + "<body></body></html>\n";
+        final String[] expectedAlerts = {"detached"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     public void testStatus() throws Exception {
