@@ -153,6 +153,34 @@ public class SelectTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    public void testSetSelectedIndexInvalidValue() throws Exception {
+        final String content
+            = "<html><head><title>foo</title><script>"
+            + "function doTest() {\n"
+            + "    document.form1.select1.selectedIndex = -1;\n"
+            + "    document.form1.select1.selectedIndex = 2;\n"
+            + "}</script></head><body onload='doTest()'>"
+            + "<p>hello world</p>"
+            + "<form name='form1' action='http://test' method='get'>"
+            + "    <select name='select1'>"
+            + "        <option value='option1' name='option1'>One</option>"
+            + "        <option value='option2' name='option2' selected>Two</option>"
+            + "        <option value='option3' name='option3'>Three</option>"
+            + "    </select>"
+            + "    <input type='submit' id='clickMe' name='submit' value='button'>"
+            + "</form>"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(content);
+        final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
+        final HtmlPage newPage = (HtmlPage) button.click();
+
+        assertEquals("http://test?select1=option3&submit=button", newPage.getWebResponse().getUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetOptions() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>"

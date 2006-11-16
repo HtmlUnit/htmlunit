@@ -43,6 +43,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.ArrayUtils;
+
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
@@ -337,7 +339,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         final String name = getNameAttribute();
         final KeyValuePair[] pairs;
 
-        if( fakeSelectedValues_ == null ) {
+        if (ArrayUtils.isEmpty(fakeSelectedValues_)) {
             final List selectedOptions = getSelectedOptions();
             final int optionCount = selectedOptions.size();
 

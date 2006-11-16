@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem" id="1592726">
+                JavaScript: fixed select.selectedIndex = -1 should not be irreversible.
+            </action>
             <action type="update" dev="mguillem" id="1592728">
                 JavaScript: setting option's selected status to false when it is already false
                 shouldn't reset the whole select.
