@@ -114,4 +114,36 @@ public class OptionTest extends WebTestCase {
             + "</body></html>";
         loadPage(content);
     }
+
+    /**
+     * Regression test for 1592728 
+     * @throws Exception if the test fails
+     */
+    public void testSetSelected() throws Exception {
+        final String content
+            = "<html><head><title>foo</title><script>"
+            + "function doTest() {\n"
+            + "  var sel = document.form1.select1;" 
+            + "  alert(sel.selectedIndex);"
+            + "  sel.options[0].selected = false;"
+            + "  alert(sel.selectedIndex);"
+            + "}</script></head><body onload='doTest()'>"
+            + "<form name='form1'>"
+            + "    <select name='select1' onchange='this.form.submit()'>"
+            + "        <option value='option1' name='option1'>One</option>"
+            + "        <option value='option2' name='option2'>Two</option>"
+            + "        <option value='option3' name='option3' selected>Three</option>"
+            + "    </select>"
+            + "</form>"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"2", "2"};
+
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }

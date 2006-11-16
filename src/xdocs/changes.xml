@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem" id="1592728">
+                JavaScript: setting option's selected status to false when it is already false
+                shouldn't reset the whole select.
+            </action>
             <action type="update" dev="mguillem" id="1596926">
                 JavaScript: fixed java.util.ConcurrentModificationException occuring when some onload event is
                 removed during execution of an onload event.
