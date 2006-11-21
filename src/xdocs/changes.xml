@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem">
+                Fixed asText() for style node. Now returns an empty string.
+            </action>
             <action type="update" dev="mguillem" id="1592726">
                 JavaScript: fixed select.selectedIndex = -1 should not be irreversible.
             </action>

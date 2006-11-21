@@ -45,6 +45,7 @@ import java.util.Map;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
  */
 public class HtmlStyle extends HtmlElement {
 
@@ -143,5 +144,13 @@ public class HtmlStyle extends HtmlElement {
      */
     public final String getTitleAttribute() {
         return getAttributeValue("title");
+    }
+
+    /**
+     * @see com.gargoylesoftware.htmlunit.html.HtmlInput#asText()
+     * @return an empty string as the content of style is not visible by itself
+     */
+    public String asText() {
+        return "";
     }
 }
