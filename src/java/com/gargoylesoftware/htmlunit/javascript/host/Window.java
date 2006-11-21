@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
@@ -215,21 +216,30 @@ public class Window extends SimpleScriptable {
         final boolean replaceCurrentEntryInBrowsingHistory = getBooleanArg(3, args, false);
         final Window thisWindow = (Window)scriptable;
 
-        if( features != null
-                || replaceCurrentEntryInBrowsingHistory == true ) {
-
+        if (features != null || replaceCurrentEntryInBrowsingHistory) {
             thisWindow.getLog().debug(
                 "Window.open: features and replaceCurrentEntryInBrowsingHistory "
-                + "not implemented: url=["+url
-                + "] windowName=["+windowName
-                + "] features=["+features
-                + "] replaceCurrentEntry=["+replaceCurrentEntryInBrowsingHistory
+                + "not implemented: url=[" + url
+                + "] windowName=[" + windowName
+                + "] features=[" + features
+                + "] replaceCurrentEntry=[" + replaceCurrentEntryInBrowsingHistory
                 + "]");
         }
 
+        final WebClient webClient = thisWindow.webWindow_.getWebClient();
+        // if specified name is the one of an existing window, the hold it
+        if (StringUtils.isEmpty(url) && !"".equals(windowName)) {
+        	final WebWindow webWindow;
+        	try {
+        		webWindow = webClient.getWebWindowByName(windowName);
+        		return webWindow.getScriptObject();
+        	}
+        	catch (final WebWindowNotFoundException e) {
+        		// nothing
+        	}
+        }
         final URL newUrl = thisWindow.makeUrlForOpenWindow(url);
-        final WebWindow newWebWindow=  thisWindow.webWindow_.getWebClient().openWindow(
-            newUrl, windowName, thisWindow.webWindow_ );
+        final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, thisWindow.webWindow_);
         return newWebWindow.getScriptObject();
     }
 

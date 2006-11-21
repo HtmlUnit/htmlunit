@@ -482,6 +482,35 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
+     * Regression test for 1592723: window.open('', 'someName') should
+     * retrieve existing window named 'someName' rather than opening a new window
+     * if such a window exists.
+     * @throws Exception if the test fails
+     */
+    public void testOpenWindow_existingWindow() throws Exception {
+        final String content
+            = "<html><head><script>"
+            + "function test()"
+            + "{"
+            + "  var w1 = window.open('about:blank', 'foo');"
+            + "  alert(w1 != null);"
+            + "  var w2 = window.open('', 'foo');"
+            + "  alert(w1 == w2);"
+            + "  var w3 = window.open('', 'myFrame');"
+            + "  alert(w3 == window.frames.myFrame);"
+            + "}"
+            + "</script></head><body onload='test()'>"
+            + "<iframe name='myFrame' id='myFrame'></iframe>"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final String[] expectedAlerts = {"true", "true", "true"};
+        loadPage(content, collectedAlerts);
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * Regression test to reproduce a known bug
      * @throws Exception if the test fails
      */
