@@ -248,7 +248,7 @@ public class Select extends FormField {
             return;
         }
         else {
-        	htmlSelect.fakeSelectedAttribute(ArrayUtils.EMPTY_STRING_ARRAY);
+            htmlSelect.fakeSelectedAttribute(ArrayUtils.EMPTY_STRING_ARRAY);
         }
 
         final List allOptions = htmlSelect.getOptions();

@@ -283,12 +283,12 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * may be the same window or it may be a freshly loaded one.
      */
     public Page setSelectedAttribute( final HtmlOption selectedOption, final boolean isSelected ) {
-    	if (selectedOption.isSelected() == isSelected) {
-    		// nothing to do
-    		return getPage();
-    	}
+        if (selectedOption.isSelected() == isSelected) {
+            // nothing to do
+            return getPage();
+        }
 
-    	if( isMultipleSelectEnabled() ) {
+        if( isMultipleSelectEnabled() ) {
             selectedOption.setSelectedInternal(isSelected);
         }
         else {

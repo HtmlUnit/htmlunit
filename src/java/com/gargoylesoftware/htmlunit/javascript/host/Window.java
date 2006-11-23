@@ -229,14 +229,14 @@ public class Window extends SimpleScriptable {
         final WebClient webClient = thisWindow.webWindow_.getWebClient();
         // if specified name is the one of an existing window, the hold it
         if (StringUtils.isEmpty(url) && !"".equals(windowName)) {
-        	final WebWindow webWindow;
-        	try {
-        		webWindow = webClient.getWebWindowByName(windowName);
-        		return webWindow.getScriptObject();
-        	}
-        	catch (final WebWindowNotFoundException e) {
-        		// nothing
-        	}
+            final WebWindow webWindow;
+            try {
+                webWindow = webClient.getWebWindowByName(windowName);
+                return webWindow.getScriptObject();
+            }
+            catch (final WebWindowNotFoundException e) {
+                // nothing
+            }
         }
         final URL newUrl = thisWindow.makeUrlForOpenWindow(url);
         final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, thisWindow.webWindow_);
