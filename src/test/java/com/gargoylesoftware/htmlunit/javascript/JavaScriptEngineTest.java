@@ -598,6 +598,16 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testEventHandlerWithComment() throws Exception {
+        final String content = "<html><body onLoad='alert(\"test\"); // xxx'></body></html>";
+        final String[] expectedAlerts = { "test" };
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 
     /**
      * When using the syntax this.something in an onclick handler, "this" must represent

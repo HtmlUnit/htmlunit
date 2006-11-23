@@ -75,7 +75,7 @@ public class EventHandler extends BaseFunction {
         else {
             functionSignature = "function(event)";
         }
-        jsSnippet_ =  functionSignature + " {" + jsSnippet + "}";
+        jsSnippet_ =  functionSignature + " {" + jsSnippet + "\n}";
     }
 
     /**
