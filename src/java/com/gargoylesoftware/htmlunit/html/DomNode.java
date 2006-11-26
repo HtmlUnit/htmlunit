@@ -312,7 +312,8 @@ public abstract class DomNode implements Cloneable {
             if (node instanceof DomText) {
                 textBuffer.append(((DomText) node).getData());
                 isText = true;
-            } else {
+            }
+            else {
                 if (isText) {
                     buffer.append(reduceWhitespace(textBuffer.toString()));
                     textBuffer.setLength(0);

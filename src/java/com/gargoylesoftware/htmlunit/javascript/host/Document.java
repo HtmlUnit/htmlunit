@@ -297,59 +297,64 @@ public final class Document extends NodeImpl {
     private boolean canAlreadyBeParsed(final String content) {
         // all <script> must have their </script> because the parser doesn't close automatically this tag
         // All tags must be complete, that is from '<' to '>'.
-        final int TAG_OUTSIDE = 0;
-        final int TAG_START = 1;
-        final int TAG_IN_NAME = 2;
-        final int TAG_INSIDE = 3;
-        int tagState = TAG_OUTSIDE;
+        final int tagOutside = 0;
+        final int tagSart = 1;
+        final int tagInName = 2;
+        final int tagInside = 3;
+        int tagState = tagOutside;
         int tagNameBeginIndex = 0;
         int scriptTagCount = 0;
         boolean tagIsOpen = true;
         for (int index = 0; index < content.length(); index++) {
             final char currentChar = content.charAt(index);
             switch (tagState) {
-                case TAG_OUTSIDE:
+                case tagOutside:
                     if (currentChar == '<') {
-                        tagState = TAG_START;
+                        tagState = tagSart;
                         tagIsOpen = true;
                     }
                     break;
-                case TAG_START:
+                case tagSart:
                     if (currentChar == '/') {
                         tagIsOpen = false;
                         tagNameBeginIndex = index + 1;
-                    } else {
+                    } 
+                    else {
                         tagNameBeginIndex = index;
                     }
-                    tagState = TAG_IN_NAME;
+                    tagState = tagInName;
                     break;
-                case TAG_IN_NAME:
+                case tagInName:
                     if (! Character.isLetter(currentChar)) {
                         final String tagName = content.substring(tagNameBeginIndex, index);
                         if (tagName.equalsIgnoreCase("script")) {
                             if (tagIsOpen) {
                                 scriptTagCount++;
-                            } else if (scriptTagCount > 0) {
+                            }
+                            else if (scriptTagCount > 0) {
                                 // Ignore extra close tags for now.  Let the
                                 // parser deal with them.
                                 scriptTagCount--;
                             }
                         }
                         if (currentChar == '>') {
-                            tagState = TAG_OUTSIDE;
-                        } else {
-                            tagState = TAG_INSIDE;
+                            tagState = tagOutside;
+                        }
+                        else {
+                            tagState = tagInside;
                         }
                     }
                     break;
-                case TAG_INSIDE:
+                case tagInside:
                     if (currentChar == '>') {
-                        tagState = TAG_OUTSIDE;
+                        tagState = tagOutside;
                     }
                     break;
+                default:
+                    // nothing
             }
         }
-        if (scriptTagCount > 0 || tagState != TAG_OUTSIDE) {
+        if (scriptTagCount > 0 || tagState != tagOutside) {
             return false;
         }
 
