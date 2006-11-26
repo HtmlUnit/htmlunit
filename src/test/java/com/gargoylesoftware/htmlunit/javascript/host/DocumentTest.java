@@ -2007,6 +2007,27 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    public void testWriteWithSpace() throws Exception {
+        final String content = "<html><body><script>\n"
+            + "document.write('Hello ');\n"
+            + "document.write('World');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final List expectedAlerts = Arrays.asList( new String[]{} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        client.setWebConnection(webConnection);
+        webConnection.setResponse(URL_FIRST, content);
+        HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        assertTrue(page.asText().indexOf("Hello World")>=0);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
     public void testWriteScriptInManyTimes() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"

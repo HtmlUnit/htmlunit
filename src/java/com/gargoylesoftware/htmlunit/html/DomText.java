@@ -101,9 +101,6 @@ public class DomText extends DomCharacterData {
         String text = getData();
 
         if (!(getParentNode() instanceof HtmlTextArea)) {
-            // Translate non-breaking spaces to regular spaces.
-            text = text.replace((char)160,' ');
-
             // Remove extra whitespace
             text = reduceWhitespace(text);
         }

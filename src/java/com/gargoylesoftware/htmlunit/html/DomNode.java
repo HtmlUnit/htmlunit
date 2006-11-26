@@ -283,9 +283,6 @@ public abstract class DomNode implements Cloneable {
     public String asText() {
         String text = getChildrenAsText();
 
-        // Translate non-breaking spaces to regular spaces.
-        text = text.replace((char)160,' ');
-
         // Remove extra whitespace
         text = reduceWhitespace(text);
         return text;
@@ -306,15 +303,32 @@ public abstract class DomNode implements Cloneable {
         if(!childIterator.hasNext()) {
             return "";
         }
+        // Whitespace between adjacent text nodes should reamin as a single
+        // space.  So, append raw adjacent text and reduce it as a whole.
+        boolean isText = false;
+        final StringBuffer textBuffer = new StringBuffer();
         while(childIterator.hasNext()) {
             final DomNode node = (DomNode)childIterator.next();
-            if (!(node instanceof DomText)) {
+            if (node instanceof DomText) {
+                textBuffer.append(((DomText) node).getData());
+                isText = true;
+            } else {
+                if (isText) {
+                    buffer.append(reduceWhitespace(textBuffer.toString()));
+                    textBuffer.setLength(0);
+                    isText = false;
+                }
+                buffer.append(" ");
+                buffer.append(node.asText());
                 buffer.append(" ");
             }
-            buffer.append(node.asText());
-            if (!(node instanceof DomText)) {
-                buffer.append(" ");
+        }
+        if (isText) {
+            String text = textBuffer.toString();
+            if (!(this instanceof HtmlTextArea)) {
+                text = reduceWhitespace(text);
             }
+            buffer.append(text);
         }
 
         return buffer.toString();
@@ -332,7 +346,13 @@ public abstract class DomNode implements Cloneable {
         final int length = text.length();
         boolean whitespace = false;
         for( int i = 0; i < length; ++i) {
-            final char ch = text.charAt(i);
+            char ch = text.charAt(i);
+
+            // Translate non-breaking space to regular space.
+            if (ch == (char)160) {
+                ch = ' ';
+            }
+
             if (whitespace) {
                 if (!Character.isWhitespace(ch)) {
                     buffer.append(ch);
