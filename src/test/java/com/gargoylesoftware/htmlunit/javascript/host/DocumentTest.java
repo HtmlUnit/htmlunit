@@ -2028,6 +2028,32 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    public void testWriteWithSplitAnchorTag() throws Exception {
+        final String content = "<html><body><script>\n"
+            + "document.write(\"<a href=\'start.html\");\n"
+            + "document.write(\"\'>\");\n"
+            + "document.write('click here</a>');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final List expectedAlerts = Arrays.asList( new String[]{} );
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        client.setWebConnection(webConnection);
+        webConnection.setResponse(URL_FIRST, content);
+        HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        List anchorList = page.getAnchors();
+        assertEquals(1, anchorList.size());
+        HtmlAnchor anchor = (HtmlAnchor) anchorList.get(0);
+        assertEquals("start.html", anchor.getHrefAttribute());
+        assertEquals("click here", anchor.asText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
     public void testWriteScriptInManyTimes() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"

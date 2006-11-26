@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="dktaylor" id="1124613">
+                Fixed document.write problem when <a...> written in 2 times
+                by checking for complete HTML tags before parsing.
+            </action>
             <action type="update" dev="dktaylor" id="1493455">
                 Fixed document.write() does not keep ending spaces by reducing
                 text of adjacent text nodes as a whole instead of separately.

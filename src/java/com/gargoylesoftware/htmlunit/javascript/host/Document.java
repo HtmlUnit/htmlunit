@@ -296,30 +296,64 @@ public final class Document extends NodeImpl {
      */
     private boolean canAlreadyBeParsed(final String content) {
         // all <script> must have their </script> because the parser doesn't close automatically this tag
-        final String contentLowerCase = content.toLowerCase();
-        if (count(contentLowerCase, "<script") != count(contentLowerCase, "</script>")) {
+        // All tags must be complete, that is from '<' to '>'.
+        final int TAG_OUTSIDE = 0;
+        final int TAG_START = 1;
+        final int TAG_IN_NAME = 2;
+        final int TAG_INSIDE = 3;
+        int tagState = TAG_OUTSIDE;
+        int tagNameBeginIndex = 0;
+        int scriptTagCount = 0;
+        boolean tagIsOpen = true;
+        for (int index = 0; index < content.length(); index++) {
+            final char currentChar = content.charAt(index);
+            switch (tagState) {
+                case TAG_OUTSIDE:
+                    if (currentChar == '<') {
+                        tagState = TAG_START;
+                        tagIsOpen = true;
+                    }
+                    break;
+                case TAG_START:
+                    if (currentChar == '/') {
+                        tagIsOpen = false;
+                        tagNameBeginIndex = index + 1;
+                    } else {
+                        tagNameBeginIndex = index;
+                    }
+                    tagState = TAG_IN_NAME;
+                    break;
+                case TAG_IN_NAME:
+                    if (! Character.isLetter(currentChar)) {
+                        final String tagName = content.substring(tagNameBeginIndex, index);
+                        if (tagName.equalsIgnoreCase("script")) {
+                            if (tagIsOpen) {
+                                scriptTagCount++;
+                            } else if (scriptTagCount > 0) {
+                                // Ignore extra close tags for now.  Let the
+                                // parser deal with them.
+                                scriptTagCount--;
+                            }
+                        }
+                        if (currentChar == '>') {
+                            tagState = TAG_OUTSIDE;
+                        } else {
+                            tagState = TAG_INSIDE;
+                        }
+                    }
+                    break;
+                case TAG_INSIDE:
+                    if (currentChar == '>') {
+                        tagState = TAG_OUTSIDE;
+                    }
+                    break;
+            }
+        }
+        if (scriptTagCount > 0 || tagState != TAG_OUTSIDE) {
             return false;
         }
 
         return true;
-    }
-
-
-    /**
-     * Computes the number of occurences of the searched string in the in string
-     * @param in the string to search in
-     * @param what the string to search for
-     * @return 0 or more
-     */
-    private int count(final String in, final String what) {
-        int index = in.indexOf(what);
-        int nbOccurences = 0;
-        while (index != -1) {
-            ++nbOccurences;
-            index = in.indexOf(what, index + 1);
-        }
-
-        return nbOccurences;
     }
 
 
