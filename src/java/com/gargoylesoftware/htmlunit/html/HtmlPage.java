@@ -676,7 +676,7 @@ public final class HtmlPage extends DomNode implements Page {
         final HtmlElement htmlElement ) {
 
         final ScriptEngine engine = getWebClient().getScriptEngine();
-        if( engine == null ) {
+        if( ! getWebClient().isJavaScriptEnabled() || engine == null ) {
             return new ScriptResult(null, this);
         }
 
@@ -736,7 +736,7 @@ public final class HtmlPage extends DomNode implements Page {
         getWebClient().pushClearFirstWindow();
 
         final ScriptEngine engine = getWebClient().getScriptEngine();
-        if( engine == null ) {
+        if( ! getWebClient().isJavaScriptEnabled() || engine == null ) {
             return new ScriptResult(null, this);
         }
 
@@ -766,7 +766,7 @@ public final class HtmlPage extends DomNode implements Page {
     void loadExternalJavaScriptFile( final String srcAttribute,
                                             final String charset  ) {
         final ScriptEngine engine = getWebClient().getScriptEngine();
-        if (engine != null) {
+        if (getWebClient().isJavaScriptEnabled() && engine != null) {
             final URL scriptURL;
             try {
                 scriptURL = getFullyQualifiedUrl(srcAttribute);

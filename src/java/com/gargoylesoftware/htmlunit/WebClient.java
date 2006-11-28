@@ -578,12 +578,7 @@ public class WebClient {
      * @return  the current script engine
      */
     public ScriptEngine getScriptEngine() {
-        if( javaScriptEnabled_ == true ) {
-            return scriptEngine_;
-        }
-        else {
-            return null;
-        }
+        return scriptEngine_;
     }
 
 

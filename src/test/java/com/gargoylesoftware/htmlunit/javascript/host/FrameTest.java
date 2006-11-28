@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Thomas Robbs
+ * @author David K. Taylor
  */
 public class FrameTest extends WebTestCase {
     /**
@@ -248,9 +249,6 @@ public class FrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFrameTag1192854() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String htmlContent
             = "<html>\n"
             + "<script>\n"
@@ -275,7 +273,7 @@ public class FrameTest extends WebTestCase {
             + "</script>\n"
             + "</html>";
 
-        final List expectedAlerts = Arrays.asList( new String[]{"frame=OK",
+        final List expectedAlerts = Arrays.asList(new String[]{"frame=OK",
             "frames.length=2",
             "frame=OK",
             "frames.length=0",
@@ -283,8 +281,8 @@ public class FrameTest extends WebTestCase {
             "frames.length=0"});
 
         final List collectedAlerts = new ArrayList();
-        loadPage(htmlContent,collectedAlerts);
+        loadPage(htmlContent, collectedAlerts);
 
-        assertEquals(collectedAlerts,expectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
