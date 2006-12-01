@@ -44,6 +44,7 @@ import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -96,21 +97,28 @@ public class HtmlArea extends FocusableElement {
 
         final String href = getHrefAttribute();
         if( href != null && href.length() > 0 ) {
-            final URL url;
-            try {
-                url = enclosingPage.getFullyQualifiedUrl( getHrefAttribute() );
+            final HtmlPage page = getPage();
+            if( TextUtil.startsWithIgnoreCase(href, "javascript:") ) {
+                return page.executeJavaScriptIfPossible(
+                    href, "javascript url", true, this ).getNewPage();
             }
-            catch( final MalformedURLException e ) {
-                throw new IllegalStateException(
-                    "Not a valid url: " + getHrefAttribute() );
-            }
-            final WebRequestSettings settings = new WebRequestSettings(url, 
-                    SubmitMethod.getInstance(getAttributeValue("method")));
-            final WebWindow webWindow = enclosingPage.getEnclosingWindow();
-            return webClient.getPage(
+            else {
+                final URL url;
+                try {
+                    url = enclosingPage.getFullyQualifiedUrl( getHrefAttribute() );
+                }
+                catch( final MalformedURLException e ) {
+                    throw new IllegalStateException(
+                        "Not a valid url: " + getHrefAttribute() );
+                }
+                final WebRequestSettings settings = new WebRequestSettings(url, 
+                        SubmitMethod.getInstance(getAttributeValue("method")));
+                final WebWindow webWindow = enclosingPage.getEnclosingWindow();
+                return webClient.getPage(
                     webWindow,
                     enclosingPage.getResolvedTarget(getTargetAttribute()),
                     settings);
+            }
         }
         else {
             return defaultPage;

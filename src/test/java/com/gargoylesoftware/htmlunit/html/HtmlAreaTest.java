@@ -137,4 +137,58 @@ public class HtmlAreaTest extends WebTestCase {
         assertEquals( Collections.singletonList("foo"), collectedAlerts);
         assertEquals("second", thirdPage.getTitleText());
     }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testClick_javascriptUrl() throws Exception {
+
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body><map>"
+            + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>"
+            + "</map></body></html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+
+        final HtmlArea area = ( HtmlArea )page.getHtmlElementById( "a2" );
+
+        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+
+        final HtmlPage secondPage = ( HtmlPage )area.click();
+
+        assertEquals( Collections.singletonList("clicked"), collectedAlerts );
+        assertSame( page, secondPage );
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testClick_javascriptUrl_javascriptDisabled() throws Exception {
+
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body><map>"
+            + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>"
+            + "</map></body></html>";
+        final WebClient client = new WebClient();
+        client.setJavaScriptEnabled(false);
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setDefaultResponse( htmlContent );
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = ( HtmlPage )client.getPage(URL_GARGOYLE);
+        final HtmlArea area = ( HtmlArea )page.getHtmlElementById( "a2" );
+
+        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+
+        final HtmlPage secondPage = ( HtmlPage )area.click();
+
+        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertSame( page, secondPage );
+    }
 }
