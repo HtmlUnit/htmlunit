@@ -1940,8 +1940,6 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Tests that nested setTimeouts that are deeper than Thread.MAX_PRIORITY
-     * do not cause an exception.
      * @throws Exception If the test fails
      */
     public void testEvalScope() throws Exception {
