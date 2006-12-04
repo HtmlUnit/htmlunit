@@ -143,6 +143,7 @@ public class PrototypeTest extends WebTestCase {
 
         final WebClient client = new WebClient( BrowserVersion.INTERNET_EXPLORER_6_0 );
         final URL url = getClass().getClassLoader().getResource( "prototype/1.5.0-rc1/test/unit/" + filename );
+        assertNotNull(url);
 
         final HtmlPage page = (HtmlPage) client.getPage( url );
         page.getEnclosingWindow().getThreadManager().joinAll( 10000 );
