@@ -45,6 +45,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
@@ -112,6 +113,31 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals("foo", textInput.getValueAttribute());
     }
 
+    /**
+     * Regression test for bug
+     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1609944&group_id=47038
+     * @throws Exception if the test fails
+     */
+    public void testOnloadJavascriptFunction() throws Exception {
+    	if (notYetImplemented()) {
+    		return;
+    	}
+    	
+        final String content
+            = "<html><head><title>foo</title><script>"
+            + "function onload() {alert('foo');}"
+            + "</script></head><body>"
+            + "</body></html>";
+
+        final String[] expectedAlerts = { "foo" };
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+    
     /**
      * Try to set the value of a text input field.
      * @throws Exception if the test fails
