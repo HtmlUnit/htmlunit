@@ -45,6 +45,7 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.FocusableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -215,6 +216,28 @@ public class EventTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testEventOnBlur() throws Exception {
+        final String content
+            = "<html><head></head><body>\n"
+            + "<form action='foo'>\n"
+            + "<input name='textField' id='textField' onblur='alert(event != null)'>\n"
+            + "<input type='submit' id='otherField'>\n"
+            + "</form>\n"
+            + "</body></html>\n";
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts );
+        final FocusableElement element = (FocusableElement) page.getHtmlElementById("textField");
+        element.focus();
+        final FocusableElement otherElement = (FocusableElement) page.getHtmlElementById("otherField");
+        otherElement.focus();
+        final String[] expectedAlerts = {"true"};
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
     private void onClickPageTest(final String content, final List expectedAlerts) throws Exception, IOException {
         onClickPageTest( BrowserVersion.getDefault(), content, expectedAlerts );
     }

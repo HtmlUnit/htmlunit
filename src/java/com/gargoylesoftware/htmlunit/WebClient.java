@@ -1469,27 +1469,22 @@ public class WebClient {
     /**
      * Remove the focus to the specified component.  This will trigger any relevant javascript
      * event handlers.
-     *
      * @param oldElement The element that will lose the focus.
      * @see #moveFocusToElement(FocusableElement)
      * @return true if the focus changed and a new page was not loaded
+     * @deprecated Use {@link HtmlPage#moveFocusToElement} with <code>null</code> as parameter on the desired page instead
      */
     public boolean moveFocusFromElement( final FocusableElement oldElement ) {
         if (oldElement != null && elementWithFocus_ == oldElement) {
-            final String onBlurHandler = oldElement.getAttributeValue("onblur");
-            if( onBlurHandler.length() != 0 ) {
-                final HtmlPage currentPage = oldElement.getPage();
-                final Page newPage = currentPage.executeJavaScriptIfPossible(
-                    onBlurHandler, "OnBlur handler", true, oldElement).getNewPage();
-
-                // If a page reload happened as a result of the focus change then obviously this
-                // element will not have the focus because its page has gone away.
-                if( currentPage != newPage ) {
-                    elementWithFocus_ = null;
-                    return false;
-                }
-            }
+            final HtmlPage page = oldElement.getPage();
+            page.moveFocusToElement(null);
             elementWithFocus_ = null;
+
+            // If a page reload happened as a result of the focus change then obviously this
+            // element will not have the focus because its page has gone away.
+            if (page != page.getEnclosingWindow().getEnclosedPage()) {
+                return false;
+            }
             return true;
         }
         return false;
@@ -1507,39 +1502,16 @@ public class WebClient {
      * @see HtmlPage#tabToPreviousElement()
      * @see HtmlPage#pressAccessKey(char)
      * @see HtmlPage#assertAllTabIndexAttributesSet()
+     * @deprecated Use {@link HtmlPage#moveFocusToElement(FocusableElement)} on the desired page instead
      */
-    public boolean moveFocusToElement( final FocusableElement newElement ) {
+    public boolean moveFocusToElement(final FocusableElement newElement) {
 
         if( newElement == null ) {
             throw new IllegalArgumentException("Cannot move focus to null");
         }
 
-        if( elementWithFocus_ == newElement ) {
-            // nothing to do
-            return true;
-        }
-
-        // blur for previous element with focus... only if it belongs to the same page
-        if( elementWithFocus_ != null && elementWithFocus_.getPage() == newElement.getPage()) {
-            elementWithFocus_.blur();
-        }
-
-        final String onFocusHandler = newElement.getAttributeValue("onfocus");
-        if( onFocusHandler.length() != 0 ) {
-            final HtmlPage currentPage = newElement.getPage();
-            final Page newPage = currentPage.executeJavaScriptIfPossible(
-                onFocusHandler, "OnFocus handler", true, newElement).getNewPage();
-
-            // If a page reload happened as a result of the focus change then obviously this
-            // element will not have the focus because its page has gone away.
-            if( currentPage != newPage ) {
-                elementWithFocus_ = null;
-                return false;
-            }
-        }
-
         elementWithFocus_ = newElement;
-        return true;
+        return newElement.getPage().moveFocusToElement(newElement);
     }
 
 
@@ -1548,6 +1520,7 @@ public class WebClient {
      *
      * @return The element with focus or null.
      * @see #moveFocusToElement(FocusableElement)
+     * @deprecated Use {link {@link HtmlPage#getElementWithFocus()} on the desired page instead.
      */
     public FocusableElement getElementWithFocus() {
         return elementWithFocus_;

@@ -7,6 +7,12 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem">
+                JavaScript: provide the event object to onfocus and onblur handlers.
+            </action>
+            <action type="update" dev="mguillem">
+                Moved focus related methods from WebClient to HtmlPage and deprecated them on WebClient.
+            </action>
             <action type="update" dev="dktaylor" id="1605997">
                 Fixed AREA elements can't handle javascript hrefs by
                 copying code from anchor element.

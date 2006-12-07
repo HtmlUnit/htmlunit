@@ -63,7 +63,7 @@ public abstract class FocusableElement extends ClickableElement {
      * Remove focus from this element.
      */
     public void blur() {
-        getPage().getWebClient().moveFocusFromElement(this);
+        getPage().moveFocusToElement(null);
     }
 
 
@@ -71,7 +71,7 @@ public abstract class FocusableElement extends ClickableElement {
      * Set the focus to this element.
      */
     public void focus() {
-        getPage().getWebClient().moveFocusToElement(this);
+        getPage().moveFocusToElement(this);
     }
 
 }

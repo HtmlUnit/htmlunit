@@ -340,7 +340,13 @@ public abstract class WebTestCase extends BaseTestCase {
             final String instrumentationJS = createInstrumentationScript(expectedAlerts);
 
             // first version, we assume that there is a <head> and a </body> or a </frameset>
-            newContent = StringUtils.replaceOnce(newContent, "<head>", "<head>" + instrumentationJS);
+            if (newContent.indexOf("<head>") > -1) {
+                newContent = StringUtils.replaceOnce(newContent, "<head>", "<head>" + instrumentationJS);
+            }
+            else {
+                newContent = StringUtils.replaceOnce(newContent, "<html>", 
+                        "<html>\n<head>\n" + instrumentationJS + "\n</head>\n");
+            }
             final String endScript = "\n<script>htmlunitReserved_addSummaryAfterOnload();</script>\n";
             if (newContent.indexOf("</body>") != -1) {
                 newContent = StringUtils.replaceOnce(newContent, "</body>",  endScript + "</body>");

@@ -95,6 +95,7 @@ public final class HtmlPage extends DomNode implements Page {
     private final WebResponse webResponse_;
     private final Map idMap_ = new HashMap(); // a map of (id, List(HtmlElement))
     private       HtmlElement documentElement_ = null;
+    private FocusableElement elementWithFocus_ = null;
 
     private WebWindow enclosingWindow_;
 
@@ -993,10 +994,19 @@ public final class HtmlPage extends DomNode implements Page {
      * @param element The element that contains the onload attribute.
      */
     private void executeOneOnLoadHandler(final HtmlElement element) {
-        getLog().debug("Executing onload handler, for " + element);
-        final Function onloadFunction = element.getEventHandler("onload");
-        if (onloadFunction != null) {
-            runEventHandler(onloadFunction, new Event(element));
+        executeEventHandler(element, "onload");
+    }
+
+    /**
+     * Execute a single onload handler.  This will either be a string which
+     * will be executed as javascript, or a javascript Function.
+     * @param element The element that contains the onload attribute.
+     */
+    private void executeEventHandler(final HtmlElement element, final String handlerName) {
+        final Function function = element.getEventHandler(handlerName);
+        if (function != null) {
+            getLog().debug("Executing " + handlerName + " handler, for " + element);
+            runEventHandler(function, new Event(element));
         }
     }
 
@@ -1171,7 +1181,6 @@ public final class HtmlPage extends DomNode implements Page {
      */
     public HtmlElement pressAccessKey( final char accessKey ) throws IOException {
         final HtmlElement element = getHtmlElementByAccessKey(accessKey);
-        final WebClient webClient = getWebClient();
         if( element != null ) {
             if( element instanceof FocusableElement ) {
                 ((FocusableElement) element).focus();
@@ -1203,13 +1212,13 @@ public final class HtmlPage extends DomNode implements Page {
                 newPage = this;
             }
 
-            if( newPage != this && webClient.getElementWithFocus() == element ) {
+            if( newPage != this && getElementWithFocus() == element ) {
                 // The page was reloaded therefore no element on this page will have the focus.
-                webClient.getElementWithFocus().blur();
+                getElementWithFocus().blur();
             }
         }
 
-        return webClient.getElementWithFocus();
+        return getElementWithFocus();
     }
 
 
@@ -1221,17 +1230,15 @@ public final class HtmlPage extends DomNode implements Page {
      */
     public HtmlElement tabToNextElement() {
         final List elements = getTabbableElements();
-        final FocusableElement elementWithFocus = getWebClient().getElementWithFocus();
-        if( elements.isEmpty() ) {
-            if (elementWithFocus != null) {
-                elementWithFocus.blur();
-            }
+        if (elements.isEmpty()) {
+            moveFocusToElement(null);
             return null;
         }
 
         final HtmlElement elementToGiveFocus;
+        final FocusableElement elementWithFocus = getElementWithFocus();
         if( elementWithFocus == null ) {
-            elementToGiveFocus = (HtmlElement)elements.get(0);
+            elementToGiveFocus = (HtmlElement) elements.get(0);
         }
         else {
             final int index = elements.indexOf( elementWithFocus );
@@ -1250,7 +1257,7 @@ public final class HtmlPage extends DomNode implements Page {
         }
 
         if( elementToGiveFocus instanceof FocusableElement ) {
-            ((FocusableElement) elementToGiveFocus).focus();
+            moveFocusToElement((FocusableElement) elementToGiveFocus);
         }
         return elementToGiveFocus;
     }
@@ -1264,15 +1271,13 @@ public final class HtmlPage extends DomNode implements Page {
      */
     public HtmlElement tabToPreviousElement() {
         final List elements = getTabbableElements();
-        final FocusableElement elementWithFocus = getWebClient().getElementWithFocus();
         if( elements.isEmpty() ) {
-            if (elementWithFocus != null) {
-                elementWithFocus.blur();
-            }
+            moveFocusToElement(null);
             return null;
         }
 
         final HtmlElement elementToGiveFocus;
+        final FocusableElement elementWithFocus = getElementWithFocus();
         if( elementWithFocus == null ) {
             elementToGiveFocus = (HtmlElement)elements.get(elements.size()-1);
         }
@@ -1293,7 +1298,7 @@ public final class HtmlPage extends DomNode implements Page {
         }
 
         if( elementToGiveFocus instanceof FocusableElement ) {
-            ((FocusableElement) elementToGiveFocus).focus();
+            moveFocusToElement((FocusableElement) elementToGiveFocus);
         }
         return elementToGiveFocus;
     }
@@ -1473,5 +1478,51 @@ public final class HtmlPage extends DomNode implements Page {
         window.setEvent(null); // reset event
 
         return result;
+    }
+
+
+    /**
+     * Move the focus to the specified component.  This will trigger any relevant javascript
+     * event handlers.
+     *
+     * @param newElement The element that will recieve the focus, use <code>null</code> to remove focus from any element
+     * @return true if the specified element now has the focus.
+     * @see #getElementWithFocus()
+     * @see #tabToNextElement()
+     * @see #tabToPreviousElement()
+     * @see #pressAccessKey(char)
+     * @see #assertAllTabIndexAttributesSet()
+     */
+    public boolean moveFocusToElement(final FocusableElement newElement) {
+
+        if (elementWithFocus_ == newElement) {
+            // nothing to do
+            return true;
+        }
+        else if (newElement != null && newElement.getPage() != this) {
+            throw new IllegalArgumentException("Can't move focus to an element from an other page");
+        }
+
+        if (elementWithFocus_ != null) {
+            executeEventHandler(elementWithFocus_, "onblur");
+        }
+
+        elementWithFocus_ = newElement;
+        if (newElement != null) {
+            executeEventHandler(elementWithFocus_, "onfocus");
+        }
+
+        // If a page reload happened as a result of the focus change then obviously this
+        // element will not have the focus because its page has gone away.
+        return this == getEnclosingWindow().getEnclosedPage();
+    }
+
+    /**
+     * Return the element with the focus or null if no element has the focus.
+     * @return The element with focus or null.
+     * @see #moveFocusToElement(FocusableElement)
+     */
+    public FocusableElement getElementWithFocus() {
+        return elementWithFocus_;
     }
 }

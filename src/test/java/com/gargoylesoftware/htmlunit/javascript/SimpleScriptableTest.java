@@ -113,7 +113,7 @@ public class SimpleScriptableTest extends WebTestCase {
         assertEquals("foo", page.getTitleText());
         assertEquals("focus not changed to textfield1",
                      page.getFormByName("form1").getInputByName("textfield1"),
-                     page.getWebClient().getElementWithFocus());
+                     page.getElementWithFocus());
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
