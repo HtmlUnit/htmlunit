@@ -23,7 +23,7 @@
                 be properly initialized with JavaScriptEngine.
             </action>
             <action type="update" dev="dktaylor" id="1124613">
-                Fixed document.write problem when <a...> written in 2 times
+                Fixed document.write problem when &lt;a...&gt; written in 2 times
                 by checking for complete HTML tags before parsing.
             </action>
             <action type="update" dev="dktaylor" id="1493455">
