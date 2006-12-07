@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -85,8 +84,7 @@ public class FocusableElementTest extends WebTestCase {
         element.focus();
         element.blur();
 
-        final List expectedAlerts =
-                Arrays.asList(new String[]{"foo onfocus", "foo onblur", "foo onfocus", "foo onblur"});
+        final String[] expectedAlerts = {"foo onfocus", "foo onblur", "foo onfocus", "foo onblur"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
