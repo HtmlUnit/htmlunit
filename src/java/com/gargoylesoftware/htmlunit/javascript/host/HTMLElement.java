@@ -413,7 +413,11 @@ public class HTMLElement extends NodeImpl {
     private void printNode(
             final StringBuffer buffer, final DomNode node,
             final boolean asInnerHTML) {
-        if (node instanceof DomCharacterData) {
+
+        if (node instanceof DomComment) {
+            buffer.append("<!--" + node.getNodeValue().replaceAll("  ", " ") + "-->");
+        }
+        else if (node instanceof DomCharacterData) {
             buffer.append(node.getNodeValue().replaceAll("  ", " ")); // remove white space sequences
         }
         else if (asInnerHTML) {

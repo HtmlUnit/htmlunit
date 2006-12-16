@@ -438,6 +438,7 @@ public class HTMLElementTest extends WebTestCase {
         final String[] expectedAlerts = { "Old = <b>Old innerHTML</b>", "New = New cell value" };
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
      * Test the use of innerHTML to set new html code
      * @throws Exception if the test fails
@@ -457,16 +458,16 @@ public class HTMLElementTest extends WebTestCase {
                 "    </script>\n" +
                 "</head>\n" +
                 "<body onload='doTest()'>\n" +
-                "<p id='myNode'><b>Old innerHTML</b></p>\n" +
+                "<p id='myNode'><b>Old innerHTML</b><!-- old comment --></p>\n" +
                 "</body>\n" +
-                "</html>\n" +
-                "";
+                "</html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = { "Old = <b>Old innerHTML</b>", 
+        final String[] expectedAlerts = { "Old = <b>Old innerHTML</b><!-- old comment -->", 
                 "New =  <b><i id=\"newElt\">New cell value</i></b>", 
                 "I" };
         assertEquals(expectedAlerts, collectedAlerts);
+
         final HtmlElement pElt = page.getHtmlElementById("myNode");
         assertEquals("p", pElt.getNodeName());
         final HtmlElement elt = page.getHtmlElementById("newElt");
