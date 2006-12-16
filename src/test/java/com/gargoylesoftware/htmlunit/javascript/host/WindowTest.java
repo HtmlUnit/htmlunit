@@ -1942,7 +1942,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
-    public void testEvalScope() throws Exception {
+    public void testEvalScopeOtherWindow() throws Exception {
         final String content = "<html><body>"
             + "<iframe src='iframe.html'></iframe>"
             + "</body></html>";
@@ -1965,5 +1965,56 @@ public class WindowTest extends WebTestCase {
         webClient.getPage(URL_FIRST);
         final String[] expectedAlersts = { "1" };
         assertEquals(expectedAlersts, collectedAlerts);
+    }
+
+    /**
+     * Regression test for [ 1608555 ] JavaScript: window.eval does evaluate local scope
+     * https://sourceforge.net/tracker/index.php?func=detail&aid=1608555&group_id=47038&atid=448266
+     * @throws Exception
+     */
+    public void testEvalScopeLocal() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final String content = "<html><body><form id='formtest'><input id='element' value='elementValue'/></form>"
+        + "<script> \n"
+        + "var docPatate = 'patate';"
+        + "function test() {\n"
+        + " var f = document.forms['formtest']; \n"
+        + " alert(eval(\"document.forms['formtest'].element.value\")); \n"
+        + " alert(f.element.value); \n"
+        + " alert(eval('f.element.value')); \n"
+        + "}\n"
+        + "test(); \n"
+        + "</script>"
+        + "</body></html>";
+
+        final String[] expectedAlerts = {"elementValue", "elementValue", "elementValue"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testFunctionEquality() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final String content = "<html><body>"
+            + "<script>"
+            + "alert(window.focus == window.focus)"
+            + "</script>"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final String[] expectedAlerts = {"true"};
+        loadPage(content, collectedAlerts);
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

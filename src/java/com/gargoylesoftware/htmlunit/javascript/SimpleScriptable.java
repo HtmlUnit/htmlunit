@@ -210,6 +210,13 @@ public class SimpleScriptable extends ScriptableObject {
         // Some calls to get will happen during the initialization of the superclass.
         // At this point, we don't have enough information to do our own initialization
         // so we have to just pass this call through to the superclass.
+
+        // Hack to make eval work in other window scope when needed
+        // see unit tests. Todo: find a clean way to handle that
+        if (name == "eval" && start == getWindow()) {
+            return super.get(name, start); // will return native eval function
+        }
+
         if( domNode_ == null ) {
             final Object result = super.get(name, start);
             // this may help to find which properties htmlunit should impement

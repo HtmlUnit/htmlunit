@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem" id="1608555">
+                JavaScript: fixed regression introduced in 1.10 on window.eval for local scope.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: provide the event object to onfocus and onblur handlers.
             </action>
