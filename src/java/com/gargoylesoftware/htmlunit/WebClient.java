@@ -1472,7 +1472,8 @@ public class WebClient {
      * @param oldElement The element that will lose the focus.
      * @see #moveFocusToElement(FocusableElement)
      * @return true if the focus changed and a new page was not loaded
-     * @deprecated Use {@link HtmlPage#moveFocusToElement} with <code>null</code> as parameter on the desired page instead
+     * @deprecated Use {@link HtmlPage#moveFocusToElement} with <code>null</code> as parameter 
+     * on the desired page instead
      */
     public boolean moveFocusFromElement( final FocusableElement oldElement ) {
         if (oldElement != null && elementWithFocus_ == oldElement) {
