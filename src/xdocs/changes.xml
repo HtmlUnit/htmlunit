@@ -7,6 +7,12 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="dktaylor" id="1040244">
+                Fixed Non-html reply in window.open() doesn't create window
+                object by restructing initialization of windows and pages.
+                Added line/column numbering of HTML elements for embedded
+                script names that are easier to debug.
+            </action>
             <action type="update" dev="mguillem" id="1608555">
                 JavaScript: fixed regression introduced in 1.10 on window.eval for local scope.
             </action>

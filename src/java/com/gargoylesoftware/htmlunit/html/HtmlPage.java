@@ -123,10 +123,7 @@ public final class HtmlPage extends DomNode implements Page {
         webResponse_ = webResponse;
         setEnclosingWindow(webWindow);
 
-        final ScriptEngine engine = getWebClient().getScriptEngine();
-        if( engine != null ) {
-            engine.initialize(this);
-        }
+        webClient_.initialize(this);
     }
 
     /**

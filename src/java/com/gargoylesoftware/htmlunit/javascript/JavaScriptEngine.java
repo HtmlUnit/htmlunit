@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
@@ -70,10 +71,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * and may change without notice.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
- * @author  David K. Taylor
- * @author  Chris Erskine
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
+ * @author David K. Taylor
+ * @author Chris Erskine
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author David D. Kilzer
  * @author Marc Guillemot
@@ -119,10 +120,10 @@ public final class JavaScriptEngine extends ScriptEngine {
     /**
      * {@inheritDoc}
      */
-    public void initialize( final HtmlPage htmlPage ) {
+    public void initialize( final WebWindow webWindow ) {
 
-        Assert.notNull( "htmlPage", htmlPage );
-        final WebClient webClient = htmlPage.getWebClient();
+        Assert.notNull( "webWindow", webWindow );
+        final WebClient webClient = webWindow.getWebClient();
 
         final Context context = Context.enter();
         try {
@@ -141,11 +142,11 @@ public final class JavaScriptEngine extends ScriptEngine {
 
             ScriptableObject.defineClass(window, ElementArray.class);
             ScriptableObject.defineClass(window, OptionsArray.class);
-            window.initialize(htmlPage);
+            window.initialize(webWindow);
         }
         catch( final Exception e ) {
             getLog().error("Exception while initializing JavaScript for the page", e);
-            throw new ScriptException(htmlPage, e);
+            throw new ScriptException(null, e); // BUG: null is not useful.
         }
         finally {
             Context.exit();

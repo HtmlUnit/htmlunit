@@ -80,6 +80,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  *  An object that represents a web browser
@@ -127,7 +128,7 @@ public class WebClient {
     private final Set webWindowListeners_ = new HashSet(5);
     private final List webWindows_ = Collections.synchronizedList(new ArrayList());
 
-    private WebWindow currentWindow_ = new TopLevelWindow("", this);
+    private WebWindow currentWindow_ ;
     private Stack firstWindowStack_ = new Stack();
     private int timeout_ = 0;
     private HTMLParserListener htmlParserListener_;
@@ -188,6 +189,8 @@ public class WebClient {
         catch( final NoClassDefFoundError e ) {
             scriptEngine_ = null;
         }
+        // The window must be constructed after the script engine.
+        currentWindow_ = new TopLevelWindow("", this);
     }
 
 
@@ -212,6 +215,8 @@ public class WebClient {
         catch( final NoClassDefFoundError e ) {
             scriptEngine_ = null;
         }
+        // The window must be constructed after the script engine.
+        currentWindow_ = new TopLevelWindow("", this);
     }
 
 
@@ -870,6 +875,9 @@ public class WebClient {
                 getLog().error("Error when loading content into window", e);
             }
         }
+        else {
+            initializeEmptyWindow(window);
+        }
         return window;
     }
 
@@ -996,6 +1004,48 @@ public class WebClient {
         }
 
         throw new WebWindowNotFoundException(name);
+    }
+
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
+     * Initialize a new web window for JavaScript.
+     * @param webWindow The new WebWindow
+     */
+    public void initialize( final WebWindow webWindow ) {
+        Assert.notNull("webWindow", webWindow);
+        if (scriptEngine_ != null) {
+            scriptEngine_.initialize(webWindow);
+        }
+    }
+
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
+     * Initialize a new page for JavaScript.
+     * @param newPage The new page.
+     */
+    public void initialize( final Page newPage ) {
+        Assert.notNull("newPage", newPage);
+        if (scriptEngine_ != null) {
+            ((Window) newPage.getEnclosingWindow().getScriptObject()).initialize(newPage);
+        }
+    }
+
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * 
+     * Initialize a new empty web window for JavaScript.
+     * @param webWindow The new WebWindow
+     */
+    public void initializeEmptyWindow( final WebWindow webWindow ) {
+        Assert.notNull("webWindow", webWindow);
+        if (scriptEngine_ != null) {
+            ((Window) webWindow.getScriptObject()).initialize();
+        }
     }
 
 

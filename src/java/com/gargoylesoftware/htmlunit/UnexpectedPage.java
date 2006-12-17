@@ -63,6 +63,9 @@ public class UnexpectedPage implements Page {
     public UnexpectedPage( final WebResponse webResponse, final WebWindow enclosingWindow ) {
         webResponse_ = webResponse;
         enclosingWindow_ = enclosingWindow;
+
+        final WebClient webClient = enclosingWindow.getWebClient();
+        webClient.initialize(this);
     }
 
 

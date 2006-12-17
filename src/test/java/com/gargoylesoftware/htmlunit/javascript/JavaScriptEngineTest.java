@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -68,12 +69,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * Tests for the Javascript engine
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
- * @author  Darrell DeBoer
+ * @author Darrell DeBoer
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author David K. Taylor
  */
 public class JavaScriptEngineTest extends WebTestCase {
     /**
@@ -1083,11 +1085,11 @@ public class JavaScriptEngineTest extends WebTestCase {
         }
 
         /**
-         * Initialize with a given page.
-         * @param page The page.
+         * Initialize with a given window.
+         * @param window The window.
          */
-        public void initialize(final HtmlPage page) {
-            delegate_.initialize(page);
+        public void initialize(final WebWindow window) {
+            delegate_.initialize(window);
         }
 
         /** @inheritDoc ScriptEngine#execute(HtmlPage,String,String,HtmlElement) */

@@ -49,9 +49,10 @@ import java.util.Map;
  * (ie <code>document.write("&lt;span id='mySpan'/>"); document.getElementById("mySpan").tagName;</code>
  * can't work with a filter).  
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
+ * @author David K. Taylor
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">
  * DOM Level 1</a>
  * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">
@@ -185,7 +186,11 @@ public class HtmlScript extends HtmlElement {
                 scriptCode = textNode.getData();
             }
             getPage().executeJavaScriptIfPossible(scriptCode,
-                    "Embedded script in " + getPage().getWebResponse().getUrl().toExternalForm(), false, null);
+                    "Embedded script in " +
+                    getPage().getWebResponse().getUrl().toExternalForm() +
+                    " from (" + getStartLineNumber() + ", " +
+                    getStartColumnNumber() + ") to (" + getEndLineNumber() +
+                    ", " + getEndColumnNumber() + ")", false, null);
         }
         return response;
     }

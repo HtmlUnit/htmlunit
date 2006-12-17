@@ -67,14 +67,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * Tests for {@link Window}.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
- * @author  David K. Taylor
- * @author  Darrell DeBoer
- * @author  Marc Guillemot
- * @author  Dierk Koenig
- * @author  Chris Erskine
- * @author  David D. Kilzer 
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
+ * @author David K. Taylor
+ * @author Darrell DeBoer
+ * @author Marc Guillemot
+ * @author Dierk Koenig
+ * @author Chris Erskine
+ * @author David D. Kilzer 
  */
 public class WindowTest extends WebTestCase {
     /**
@@ -1776,9 +1776,6 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testOpenWindow_image() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
@@ -1828,9 +1825,6 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testOpenWindow_text() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
@@ -1840,7 +1834,7 @@ public class WindowTest extends WebTestCase {
             + "return false;'>Click me</a>"
             + "</form>"
             + "</body></html>";
-        final String secondContent = new String("Hello World");
+        final String secondContent = "Hello World";
 
         final EventCatcher eventCatcher = new EventCatcher();
 
@@ -1867,6 +1861,93 @@ public class WindowTest extends WebTestCase {
         assertSame(webClient.getCurrentWindow(), secondWebWindow);
         assertNotSame(firstWebWindow, secondWebWindow);
     }
+
+    /**
+     * Open a window with only XML for content, then try to set focus to it.
+     *
+     * @throws Exception If the test fails.
+     */
+    public void testOpenWindow_xml() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        final String firstContent = "<html><head><title>First</title></head><body>"
+            + "<form name='form1'>"
+            + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
+            + "return false;'>Click me</a>"
+            + "</form>"
+            + "</body></html>";
+        final String secondContent = "<junk></junk>";
+
+        final EventCatcher eventCatcher = new EventCatcher();
+
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/xml", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
+
+        eventCatcher.listenTo(webClient);
+
+        final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
+
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final Page secondPage = anchor.click();
+        assertEquals("First", firstPage.getTitleText());
+        assertEquals("text/xml", secondPage.getWebResponse().getContentType());
+
+        assertEquals(2, eventCatcher.getEventCount());
+
+        final WebWindow secondWebWindow = (WebWindow) eventCatcher.getEventAt(0).getSource();
+
+        assertSame(webClient.getCurrentWindow(), secondWebWindow);
+        assertNotSame(firstWebWindow, secondWebWindow);
+    }
+
+    /**
+     * Open a window with only javascript for content, then try to set focus to it.
+     *
+     * @throws Exception If the test fails.
+     */
+    public void testOpenWindow_javascript() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        final String firstContent = "<html><head><title>First</title></head><body>"
+            + "<form name='form1'>"
+            + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
+            + "return false;'>Click me</a>"
+            + "</form>"
+            + "</body></html>";
+        final String secondContent = "var x=1;";
+
+        final EventCatcher eventCatcher = new EventCatcher();
+
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/javascript", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
+
+        eventCatcher.listenTo(webClient);
+
+        final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
+
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final Page secondPage = anchor.click();
+        assertEquals("First", firstPage.getTitleText());
+        assertEquals("text/javascript", secondPage.getWebResponse().getContentType());
+
+        assertEquals(2, eventCatcher.getEventCount());
+
+        final WebWindow secondWebWindow = (WebWindow) eventCatcher.getEventAt(0).getSource();
+
+        assertSame(webClient.getCurrentWindow(), secondWebWindow);
+        assertNotSame(firstWebWindow, secondWebWindow);
+    }
+
     /**
      * Open a window with only text for content, then try to set focus to it.
      *

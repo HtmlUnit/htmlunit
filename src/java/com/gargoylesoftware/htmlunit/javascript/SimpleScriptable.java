@@ -60,8 +60,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * A javascript object for a Location
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Daniel Gredler
@@ -70,12 +70,14 @@ public class SimpleScriptable extends ScriptableObject {
     private static final long serialVersionUID = 3120000176890886780L;
 
     private DomNode domNode_;
+    private boolean isInitialized_;
 
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.
      */
     public SimpleScriptable() {
+        isInitialized_ = false;
     }
 
 
@@ -184,10 +186,19 @@ public class SimpleScriptable extends ScriptableObject {
      */
     protected void setDomNode( final DomNode domNode, final boolean assignScriptObject ) {
         Assert.notNull("domNode", domNode);
+        isInitialized_ = true;
         domNode_ = domNode;
         if (assignScriptObject) {
             domNode_.setScriptObject(this);
         }
+    }
+
+    /**
+     * Mark the SimpleScriptable as initialized when its JavaScript properties
+     * are defined.
+     */
+    protected void setInitialized() {
+        isInitialized_ = true;
     }
 
     /**
@@ -207,17 +218,17 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The property.
      */
     public Object get( final String name, final Scriptable start ) {
-        // Some calls to get will happen during the initialization of the superclass.
-        // At this point, we don't have enough information to do our own initialization
-        // so we have to just pass this call through to the superclass.
-
         // Hack to make eval work in other window scope when needed
         // see unit tests. Todo: find a clean way to handle that
         if (name == "eval" && start == getWindow()) {
             return super.get(name, start); // will return native eval function
         }
 
-        if( domNode_ == null ) {
+        // Some calls to get will happen during the initialization of the
+        // superclass.  At this point, we don't have enough information to
+        // do our own initialization so we have to just pass this call
+        // through to the superclass.
+        if( domNode_ == null && ! isInitialized_) {
             final Object result = super.get(name, start);
             // this may help to find which properties htmlunit should impement
             if (result == NOT_FOUND) {
@@ -273,7 +284,7 @@ public class SimpleScriptable extends ScriptableObject {
         // At this point, we don't have enough information to do our own initialization
         // so we have to just pass this call through to the superclass.
         final SimpleScriptable simpleScriptable = (SimpleScriptable) start;
-        if (simpleScriptable.domNode_ == null ) {
+        if (simpleScriptable.domNode_ == null && ! isInitialized_) {
             super.put(name, start, newValue);
             return;
         }

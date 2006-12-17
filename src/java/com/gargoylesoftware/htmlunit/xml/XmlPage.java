@@ -47,6 +47,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
@@ -56,6 +57,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * xml responses.
  * @version  $Revision$
  * @author Marc Guillemot
+ * @author David K. Taylor
  */
 public class XmlPage implements Page {
     private final String content_;
@@ -77,6 +79,9 @@ public class XmlPage implements Page {
         webResponse_ = webResponse;
         content_ = webResponse.getContentAsString();
         enclosingWindow_ = enclosingWindow;
+
+        final WebClient webClient = enclosingWindow_.getWebClient();
+        webClient.initialize(this);
 
         try {
             document_ = XmlUtil.buildDocument(webResponse);

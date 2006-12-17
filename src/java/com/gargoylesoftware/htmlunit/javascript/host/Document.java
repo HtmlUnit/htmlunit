@@ -108,6 +108,7 @@ public final class Document extends NodeImpl {
     private final StringBuffer writeBuffer_ = new StringBuffer();
     private boolean writeInCurrentDocument_ = true;
     private String domain_;
+    private Window window_;
 
     private final FunctionContextWrapper functionContext_;
 
@@ -128,6 +129,14 @@ public final class Document extends NodeImpl {
     public void jsConstructor() {
     }
 
+    /**
+     * Define the Window JavaScript object that encloses this Document object.
+     *
+     * @param window The Window JavaScript object that encloses this document.
+     */
+    void setWindow(Window window) {
+        window_ = window;
+    }
 
     /**
      * Return the html page that this document is modeling..
@@ -135,6 +144,16 @@ public final class Document extends NodeImpl {
      */
     public HtmlPage getHtmlPage() {
         return (HtmlPage)getDomNodeOrDie();
+    }
+
+
+    /**
+     * Return the html page that this document is modeling or null if the
+     * page is empty.
+     * @return The page.
+     */
+    public HtmlPage getHtmlPageOrNull() {
+        return (HtmlPage)getDomNodeOrNull();
     }
 
 
@@ -487,8 +506,7 @@ public final class Document extends NodeImpl {
      * @return The value of the "location" property
      */
     public Location jsxGet_location() {
-        final WebWindow webWindow = ((HtmlPage)getDomNodeOrDie()).getEnclosingWindow();
-        return ((Window)webWindow.getScriptObject()).jsxGet_location();
+        return window_.jsxGet_location();
     }
 
 
@@ -502,8 +520,7 @@ public final class Document extends NodeImpl {
      * @throws IOException when location loading fails
      */
     public void jsxSet_location(final String location) throws IOException {
-        final WebWindow webWindow = getHtmlPage().getEnclosingWindow();
-        ((Window)webWindow.getScriptObject()).jsxSet_location(location);
+        window_.jsxSet_location(location);
     }
 
 

@@ -157,6 +157,26 @@ public abstract class DomNode implements Cloneable {
     public static final String PROPERTY_ELEMENT = "element";
 
     /**
+     * The line number in the source page where the DOM node starts.
+     */
+    private int startLineNumber_;
+
+    /**
+     * The column number in the source page where the DOM node starts.
+     */
+    private int startColumnNumber_;
+
+    /**
+     * The line number in the source page where the DOM node ends.
+     */
+    private int endLineNumber_;
+
+    /**
+     * The column number in the source page where the DOM node ends.
+     */
+    private int endColumnNumber_;
+
+    /**
      *  Create an instance
      *
      * @param htmlPage The page that contains this node
@@ -165,8 +185,71 @@ public abstract class DomNode implements Cloneable {
         readyState_ = READY_STATE_LOADING;      // At this time, I should be loading the object.
         htmlPage_ = htmlPage;
         eventHandlers_ = Collections.EMPTY_MAP;
+        startLineNumber_ = 0;
+        startColumnNumber_ = 0;
+        endLineNumber_ = 0;
+        endColumnNumber_ = 0;
     }
 
+    /**
+     * Set the line and column numbers in the source page where the
+     * DOM node starts.
+     *
+     * @param startLineNumber The line number where the DOM node starts.
+     * @param startColumnNumber The column number where the DOM node starts.
+     */
+    void setStartLocation(int startLineNumber, int startColumnNumber) {
+        startLineNumber_ = startLineNumber;
+        startColumnNumber_ = startColumnNumber;
+    }
+
+    /**
+     * Set the line and column numbers in the source page where the
+     * DOM node ends.
+     *
+     * @param endLineNumber The line number where the DOM node ends.
+     * @param endColumnNumber The column number where the DOM node ends.
+     */
+    void setEndLocation(int endLineNumber, int endColumnNumber) {
+        endLineNumber_ = endLineNumber;
+        endColumnNumber_ = endColumnNumber;
+    }
+
+    /**
+     * Get the line number in the source page where the DOM node starts.
+     *
+     * @return See above.
+     */
+    public int getStartLineNumber() {
+        return startLineNumber_;
+    }
+
+    /**
+     * Get the column number in the source page where the DOM node starts.
+     *
+     * @return See above.
+     */
+    public int getStartColumnNumber() {
+        return startColumnNumber_;
+    }
+
+    /**
+     * Get the line number in the source page where the DOM node ends.
+     *
+     * @return See above.
+     */
+    public int getEndLineNumber() {
+        return endLineNumber_;
+    }
+
+    /**
+     * Get the column number in the source page where the DOM node ends.
+     *
+     * @return See above.
+     */
+    public int getEndColumnNumber() {
+        return endColumnNumber_;
+    }
 
     /**
      *  Return the HtmlPage that contains this node

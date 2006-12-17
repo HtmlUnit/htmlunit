@@ -46,10 +46,11 @@ import org.apache.commons.logging.LogFactory;
  *  An abstract base class for scripting engines.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author David K. Taylor
  */
 public abstract class ScriptEngine {
 
@@ -76,10 +77,10 @@ public abstract class ScriptEngine {
     }
 
     /**
-     * perform initialization for the given page
-     * @param page the page to initialize for
+     * perform initialization for the given webWindow
+     * @param webWindow the web window to initialize for
      */
-    public abstract void initialize(final HtmlPage page);
+    public abstract void initialize(final WebWindow webWindow);
 
     /**
      * Execute the specified source code in the context of the given page.

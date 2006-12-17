@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * A JavaScript object for IE's Popu.
  * 
  * @author Marc Guillemot
+ * @author David K. Taylor
  * @version $Revision: 1223 $
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/popup.asp">MSDN documentation</a>
  */
@@ -126,6 +127,8 @@ class PopupPseudoWebWindow implements WebWindow {
     
     PopupPseudoWebWindow(final WebClient webClient) {
         webClient_ = webClient;
+
+        webClient_.initialize(this);
     }
     /**
      * @see com.gargoylesoftware.htmlunit.WebWindow#getEnclosedPage()

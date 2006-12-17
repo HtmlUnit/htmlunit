@@ -57,6 +57,7 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
+import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
@@ -444,20 +445,16 @@ public class Window extends SimpleScriptable {
 
     /**
      * Initialize the object.
-     * @param htmlPage The html page containing the javascript.
+     * @param webWindow The web window containing the javascript.
      * @exception Exception If an error occurs.
      */
-    public void initialize( final HtmlPage htmlPage ) throws Exception {
+    public void initialize( final WebWindow webWindow ) throws Exception {
 
-        webWindow_ = htmlPage.getEnclosingWindow();
+        webWindow_ = webWindow;
         webWindow_.setScriptObject(this);
-        // Windows don't have corresponding DomNodes so set the domNode
-        // variable to be the page.  If this isn't set then SimpleScriptable.get()
-        // won't work properly
-        setDomNode(htmlPage);
 
         document_ = (Document) makeJavaScriptObject("Document");
-        document_.setDomNode(htmlPage);
+        document_.setWindow(this);
 
         navigator_ = (Navigator)makeJavaScriptObject("Navigator");
         navigator_.setParentScope(this);
@@ -466,6 +463,35 @@ public class Window extends SimpleScriptable {
 
         location_ = (Location)makeJavaScriptObject("Location");
         location_.initialize(this);
+    }
+
+
+    /**
+     * Initialize the object.
+     * @param enclosedPage The page containing the javascript.
+     */
+    public void initialize( final Page enclosedPage ) {
+        if (enclosedPage instanceof HtmlPage) {
+            final HtmlPage htmlPage = (HtmlPage) enclosedPage;
+
+            // Windows don't have corresponding DomNodes so set the domNode
+            // variable to be the page.  If this isn't set then SimpleScriptable.get()
+            // won't work properly
+            setDomNode(htmlPage);
+
+            Assert.notNull( "document_", document_ );
+            document_.setDomNode(htmlPage);
+        }
+        else {
+            setInitialized();
+        }
+    }
+
+    /**
+     * Initialize the object.  Only call for Windows with no contents.
+     */
+    public void initialize() {
+        setInitialized();
     }
 
 
@@ -820,7 +846,10 @@ public class Window extends SimpleScriptable {
     public Object get( final String name, final Scriptable start ) {
         // If the DomNode hasn't been set yet then do it now.
         if( getDomNodeOrNull() == null && document_ != null ) {
-            setDomNode( document_.getHtmlPage() );
+            final HtmlPage htmlPage = document_.getHtmlPageOrNull();
+            if (htmlPage != null) {
+                setDomNode(htmlPage);
+            }
         }
 
         Object result = super.get(name, start);

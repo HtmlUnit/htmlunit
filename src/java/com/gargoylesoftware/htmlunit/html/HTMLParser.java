@@ -333,6 +333,7 @@ public final class HTMLParser {
             page_ = new HtmlPage(webResponse_.getUrl(), webResponse_, webWindow_);
             webWindow_.setEnclosedPage(page_);
 
+            page_.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
             currentNode_ = page_;
             stack_.push(currentNode_);
         }
@@ -368,6 +369,7 @@ public final class HTMLParser {
 
             final IElementFactory factory = getElementFactory(tagLower);
             final HtmlElement newElement = factory.createElement(page_, tagLower, atts);
+            newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
             currentNode_.appendChild(newElement);
             currentNode_ = newElement;
             stack_.push(currentNode_);
@@ -378,7 +380,8 @@ public final class HTMLParser {
             throws SAXException {
 
             handleCharacters();
-            stack_.pop(); //remove currentElement from stack
+            final DomNode previousNode = (DomNode) stack_.pop(); //remove currentElement from stack
+            previousNode.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 
             // if we have added a extra node (tbody), we should remove it
             if (!currentNode_.getNodeName().equalsIgnoreCase(localName)) {
@@ -440,6 +443,7 @@ public final class HTMLParser {
 
         /** @inheritDoc ContentHandler#endDocument() */
         public void endDocument() throws SAXException {
+            page_.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
         }
 
         /** @inheritDoc ContentHandler#startPrefixMapping(String,String) */

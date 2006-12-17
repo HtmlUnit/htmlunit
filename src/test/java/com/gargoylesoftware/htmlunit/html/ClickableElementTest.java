@@ -258,7 +258,7 @@ public class ClickableElementTest extends WebTestCase {
     public void testButton_onClickTwice() throws Exception {
         final List expectedAlerts = Arrays.asList(new String[] {"foo0", "foo1"});
         onClickPageTest("<body><form>" +
-                "<button id='clickId' onClick='alert(\"foo\" + count++)'>Item</button>" +
+                "<button id='clickId' onClick='alert(\"foo\" + count++); return false;'>Item</button>" +
                 "<script> var count = 0 </script>" +
                 "</form></body>", 2, expectedAlerts);
     }

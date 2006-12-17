@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
  * 
  * @version $Revision$
  * @author Brad Clarke
+ * @author David K. Taylor
  */
 public abstract class WebWindowImpl implements WebWindow {
     private WebClient webClient_;
@@ -70,6 +71,7 @@ public abstract class WebWindowImpl implements WebWindow {
         Assert.notNull("webClient", webClient);
         webClient_ = webClient;
         performRegistration();
+        webClient_.initialize(this);
     }
 
     /**

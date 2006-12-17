@@ -56,13 +56,14 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Daniel Gredler
+ * @author David K. Taylor
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_location.asp">
  * MSDN Documentation</a>
  */
 public class Location extends SimpleScriptable {
 
     private static final long serialVersionUID = -2907220432378132233L;
-    private static final String UNKNOWN = "Unknown";
+    private static final String UNKNOWN = "null";
     private Window window_;
 
     /**

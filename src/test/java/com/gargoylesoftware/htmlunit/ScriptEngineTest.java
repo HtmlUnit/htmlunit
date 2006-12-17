@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author David K. Taylor
  */
 public class ScriptEngineTest extends WebTestCase {
     /**
@@ -97,7 +98,7 @@ public class ScriptEngineTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         client.setScriptEngine( new ScriptEngine(client) {
-            public void initialize(final HtmlPage page) {
+            public void initialize(final WebWindow window) {
             }
             public Object execute(
                     final HtmlPage htmlPage, final String sourceCode,
