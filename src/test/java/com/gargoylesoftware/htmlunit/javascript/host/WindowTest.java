@@ -2054,10 +2054,6 @@ public class WindowTest extends WebTestCase {
      * @throws Exception
      */
     public void testEvalScopeLocal() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         final String content = "<html><body><form id='formtest'><input id='element' value='elementValue'/></form>"
         + "<script> \n"
         + "var docPatate = 'patate';"

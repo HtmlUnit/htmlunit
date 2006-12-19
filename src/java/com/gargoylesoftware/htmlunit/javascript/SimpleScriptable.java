@@ -220,7 +220,7 @@ public class SimpleScriptable extends ScriptableObject {
     public Object get( final String name, final Scriptable start ) {
         // Hack to make eval work in other window scope when needed
         // see unit tests. Todo: find a clean way to handle that
-        if (name == "eval" && start == getWindow()) {
+        if ("eval".equals(name) && start == getWindow()) {
             return super.get(name, start); // will return native eval function
         }
 
