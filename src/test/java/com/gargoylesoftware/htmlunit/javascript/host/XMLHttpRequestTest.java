@@ -504,4 +504,74 @@ public class XMLHttpRequestTest extends WebTestCase {
         assertEquals( alerts, collectedAlerts );
     }
 
-}
+    /**
+     * Regression test for bug 1611097.
+     * https://sourceforge.net/tracker/index.php?func=detail&aid=1611097&group_id=47038&atid=448266
+     * Caution: the problem appeared with jdk 1.4 but not with jdk 1.5 as String contains a 
+     * replace(CharSequence, CharSequence) method in this version
+     * @throws Exception if the test fails
+     */
+    public void testReplaceOnTextData() throws Exception {
+    	testReplaceOnTextData(BrowserVersion.MOZILLA_1_0);
+    	testReplaceOnTextData(BrowserVersion.INTERNET_EXPLORER_6_0);
+    }
+
+    /**
+     * @param browserVersion the browser version to simulate
+     * @throws Exception if the test fails
+     */
+    void testReplaceOnTextData(final BrowserVersion browserVersion) throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      var request;\n"
+            + "      function testAsync() {\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.onreadystatechange = onReadyStateChange;\n"
+            + "        request.open('GET', '" + URL_SECOND.toExternalForm() + "', false);\n"
+            + "        request.send('');\n"
+            + "      }\n"
+            + "      function onReadyStateChange() {\n"
+            + "        if (request.readyState == 4){\n"
+            + "          var theXML = request.responseXML;\n"
+            + "          var theDoc = theXML.documentElement;\n"
+            + "          var theElements = theDoc.getElementsByTagName(\"update\");\n"
+            + "          var theUpdate = theElements[0];\n"
+            + "          var theData = theUpdate.firstChild.data;\n"
+            + "          theResult = theData.replace('a','i');\n"
+            + "          alert(theResult)\n"
+            + "          theResult = theData.replace('abcde', 'xxxxx');\n"
+            + "          alert(theResult)\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='testAsync()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<updates>\n"
+            + "<update>abcdefg</update>\n"
+            + "<update>hijklmn</update>\n"
+            + "</updates>";
+
+        final WebClient client = new WebClient(browserVersion);
+        final List collectedAlerts = Collections.synchronizedList( new ArrayList() );
+        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection( webConnection );
+        client.getPage( URL_FIRST );
+
+        final String[] alerts = { "ibcdefg", "xxxxxfg" };
+
+        assertEquals( alerts, collectedAlerts );
+    }
+ }

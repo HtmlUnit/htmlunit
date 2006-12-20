@@ -51,6 +51,13 @@ import org.w3c.dom.NodeList;
  */
 public class HtmlUnitWrapFactory extends WrapFactory {
 
+	/**
+	 * Constructor
+	 */
+	public HtmlUnitWrapFactory() {
+		setJavaPrimitiveWrap(false); // we don't want to wrap String and Co
+	}
+	
     /**
      * Wraps Objects used by htmlunit (like {@link NodeList}) or delegates to
      * parent class.
