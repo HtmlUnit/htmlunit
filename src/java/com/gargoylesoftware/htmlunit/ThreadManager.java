@@ -54,8 +54,9 @@ import org.apache.commons.logging.LogFactory;
  * This is a class that provides thread handling services to internal clients
  * as well as exposes some of the status of these threads to the public API.
  * 
- * @version  $Revision$
+ * @version $Revision$
  * @author Brad Clarke
+ * @author Marc Guillemot
  *
  */
 public class ThreadManager {
@@ -76,6 +77,7 @@ public class ThreadManager {
      * JVM this could become unpredictable.
      */
     private static int NextThreadID_ = 1;
+
     /**
      * HtmlUnit threads are started at a higher priority than the priority
      * of the first thread to ask for HtmlUnit thread handling services. Assuming
@@ -86,6 +88,17 @@ public class ThreadManager {
     private static final int PRIORITY = Math.min(Thread.MAX_PRIORITY, Thread
             .currentThread()
             .getPriority() + 1);
+
+    /**
+     * Gets the next thread id in a thread safe way
+     * @return the next id
+     */
+    private int getNextThreadId() {
+        synchronized (ThreadManager.class) {
+            return NextThreadID_++;
+        }
+    }
+
     /** 
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * 
@@ -101,7 +114,7 @@ public class ThreadManager {
      * when calling {@link #stopThread(int)} 
      */
     public int startThread(final Runnable job, final String label) {
-        final int myThreadID = NextThreadID_++;
+        final int myThreadID = getNextThreadId();
         final Thread newThread = new Thread(job, "HtmlUnit Managed Thread #" + myThreadID + ": " + label) {
             public void run() {
                 try {
@@ -118,6 +131,7 @@ public class ThreadManager {
         newThread.start();
         return myThreadID;
     }
+
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * 
