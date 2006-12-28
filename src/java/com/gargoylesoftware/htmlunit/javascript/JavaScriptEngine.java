@@ -94,7 +94,7 @@ public final class JavaScriptEngine extends ScriptEngine {
      * This is needed to resolve some relative locations relatively to the page 
      * in which the script is executed and not to the page which location is changed.
      */
-    static final String KEY_STARTING_SCOPE = "startingScope";
+    public static final String KEY_STARTING_SCOPE = "startingScope";
 
     /**
      * Initialize a context listener so we can count JS contexts and make sure we

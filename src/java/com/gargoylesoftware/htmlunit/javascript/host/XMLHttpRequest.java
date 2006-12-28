@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
@@ -304,10 +305,13 @@ public class XMLHttpRequest extends SimpleScriptable {
     public void jsxFunction_send( final Object content ) {
         if (async_) {
             // Create and start a thread in which to execute the request.
+            final Object startingScope = getWindow();
+
             final Runnable t = new Runnable() {
                 public void run() {
                     final Context context = Context.enter();
                     try {
+                        Context.getCurrentContext().putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, startingScope);
                         doSend(content, context);
                     }
                     finally {

@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -574,4 +575,42 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         assertEquals( alerts, collectedAlerts );
     }
+
+    public void testSetLocation() throws Exception {
+        testSetLocation(BrowserVersion.MOZILLA_1_0);
+        testSetLocation(BrowserVersion.INTERNET_EXPLORER_6_0);
+    }
+
+    void testSetLocation(final BrowserVersion browserVersion) throws Exception {
+        final String content =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>Page1</title>\n"
+            + "    <script>\n"
+            + "      var request;\n"
+            + "      function testAsync() {\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.onreadystatechange = onReadyStateChange;\n"
+            + "        request.open('GET', 'about:blank', true);\n"
+            + "        request.send('');\n"
+            + "      }\n"
+            + "      function onReadyStateChange() {\n"
+            + "        if (request.readyState == 4) {\n"
+            + "          window.location.href = 'about:blank';\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='testAsync()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final WebWindow window = loadPage(content).getEnclosingWindow();
+        assertTrue("thread failed to stop in 2 seconds", window.getThreadManager().joinAll(4000));
+        assertEquals("about:blank", window.getEnclosedPage().getWebResponse().getUrl());
+    }
+
  }
