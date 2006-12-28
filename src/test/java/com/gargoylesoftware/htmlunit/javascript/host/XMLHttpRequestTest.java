@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,6 +49,8 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -609,8 +612,68 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "</html>";
 
         final WebWindow window = loadPage(content).getEnclosingWindow();
-        assertTrue("thread failed to stop in 2 seconds", window.getThreadManager().joinAll(4000));
+        assertTrue("thread failed to stop in 4 seconds", window.getThreadManager().joinAll(4000));
         assertEquals("about:blank", window.getEnclosedPage().getWebResponse().getUrl());
     }
 
- }
+
+    /**
+     * Asynchron callback should be called in "main" js thread and not parallel to other js execution
+     * https://sourceforge.net/tracker/index.php?func=detail&aid=1508377&group_id=47038&atid=448266
+     * @throws Exception if the test fails.
+     */
+    public void testNoParallelJSExecutionInPage() throws Exception {
+
+        final String content = "<html><head><script>"
+            + "function getXMLHttpRequest() {"
+            + " if (window.XMLHttpRequest)"
+            + "        return new XMLHttpRequest();"
+            + " else if (window.ActiveXObject)"
+            + "        return new ActiveXObject('Microsoft.XMLHTTP');"
+            + "}"
+            + "var j = 0;"
+            + "function test()"
+            + "{"
+            + " req = getXMLHttpRequest();"
+            + " req.onreadystatechange = handler;"
+            + " req.open('post', 'foo.xml', true);"
+            + " req.send('');"
+            + " alert('before long loop');"
+            + " for (var i = 0; i < 5000; i++) {"
+            + "     j = j + 1;"
+            + " }"
+            + " alert('after long loop');"
+            + "}"
+            + "function handler()"
+            + "{"
+            + " if (req.readyState == 4)"
+            + " {"
+            + "     alert('ready state handler, content loaded: j=' + j);"
+            + " }"
+            + "}"
+            + "</script></head>"
+            + "<body onload='test()'></body></html>";
+
+        final WebClient client = new WebClient();
+        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
+        final MockWebConnection webConnection = new MockWebConnection( client )
+        {
+            public WebResponse getResponse(final WebRequestSettings _webRequestSettings) throws IOException {
+                collectedAlerts.add(_webRequestSettings.getURL().toExternalForm());
+                return super.getResponse(_webRequestSettings);
+            }
+        };
+        webConnection.setResponse(URL_FIRST, content);
+        final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
+        webConnection.setResponse(urlPage2, "<foo/>", "text/xml");
+        client.setWebConnection( webConnection );
+        final Page page = client.getPage(URL_FIRST);
+
+        assertTrue("thread failed to stop in 4 seconds", page.getEnclosingWindow().getThreadManager().joinAll(4000));
+
+        final String[] alerts = { URL_FIRST.toExternalForm(), "before long loop", "after long loop", 
+                urlPage2.toExternalForm(), "ready state handler, content loaded: j=5000" };
+        assertEquals( alerts, collectedAlerts );
+    }
+}

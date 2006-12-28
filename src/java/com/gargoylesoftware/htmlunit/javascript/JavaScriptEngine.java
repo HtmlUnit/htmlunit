@@ -89,8 +89,7 @@ public final class JavaScriptEngine extends ScriptEngine {
 
     /**
      * Key used to place the scope in which the execution of some javascript code
-     * started (in {@link #callFunction} or {@link #execute}) as thread local attribute 
-     * in current context.<br/>
+     * started as thread local attribute in current context.<br/>
      * This is needed to resolve some relative locations relatively to the page 
      * in which the script is executed and not to the page which location is changed.
      */
@@ -250,7 +249,11 @@ public final class JavaScriptEngine extends ScriptEngine {
         final Context context = Context.enter();
         context.putThreadLocal(KEY_STARTING_SCOPE, scope);
         try {
-            final Object result = context.evaluateString( scope, sourceCode, sourceName, lineNumber, securityDomain );
+            final Object result;
+            synchronized (htmlPage) // 2 scripts can't be executed in parallel for one page
+            {
+                result = context.evaluateString( scope, sourceCode, sourceName, lineNumber, securityDomain );
+            }
             return result;
         }
         catch (final Exception e ) {
@@ -312,8 +315,7 @@ public final class JavaScriptEngine extends ScriptEngine {
         final Context context = Context.enter();
         context.putThreadLocal(KEY_STARTING_SCOPE, scope);
         try {
-            final Object result = function.call( context, scope, (Scriptable) thisObject, args );
-            return result;
+            return callFunction(htmlPage, function, context, scope, (Scriptable) thisObject, args);
         }
         catch (final Exception e ) {
             final String sourceCode = context.decompileFunction(function, 2);
@@ -340,6 +342,25 @@ public final class JavaScriptEngine extends ScriptEngine {
         finally {
             javaScriptRunning_.set(javaScriptAlreadyRunning);
             Context.exit();
+        }
+    }
+
+    /**
+     * Calls the given function taking care of synchronisation issues. 
+     * @param htmlPage the html page that caused this script to executed
+     * @param function the js function to execute
+     * @param context the context in which execution should occur
+     * @param scope the execution scope
+     * @param thisObject the 'this' object
+     * @param args the function's arguments
+     * @return the function result
+     */
+    public Object callFunction(final HtmlPage htmlPage, final Function function, final Context context, 
+            final Scriptable scope, final Scriptable thisObject, final Object[] args) {
+
+        synchronized (htmlPage) // 2 scripts can't be executed in parallel for one page
+        {
+            return function.call(context, scope, thisObject, args);
         }
     }
 

@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem" id="1508377">
+                JavaScript: ensure that script execution is synchronized on the owning html page
+                (for instance using XMLHttpRequest asynchronously).
+            </action>
             <action type="update" dev="mguillem" id="1584525" due-to="kkolman">
                 JavaScript: made ThreadManager thread safe.
             </action>

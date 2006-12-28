@@ -44,6 +44,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.lang.ArrayUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
@@ -90,6 +91,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     private int threadID_;
     private WebResponse webResponse_;
     private String overridenMimeType_;
+    private HtmlPage containingPage_;
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -122,17 +124,26 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     private void setState( final int state, Context context ) {
         state_ = state;
-        if( stateChangeHandler_ != null ) {
-            if( context == null ) {
+        if (stateChangeHandler_ != null) {
+            if (context == null) {
                 context = Context.getCurrentContext();
             }
             final Scriptable scope = stateChangeHandler_.getParentScope();
-            final Object[] args = new Object[ 0 ];
-            stateChangeHandler_.call( context, scope, this, args );
-            // quite strange but IE and Mozilla seem both to fire state loading twice
-            // in async mode (at least with html of the unit tests)
+            final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getScriptEngine();
+            
+            final int nbExecutions;
             if (async_ && STATE_LOADING == state) {
-                stateChangeHandler_.call( context, scope, this, args );
+                // quite strange but IE and Mozilla seem both to fire state loading twice
+                // in async mode (at least with html of the unit tests)
+                nbExecutions = 2;
+            }
+            else {
+                nbExecutions = 1;
+            }
+            
+            for (int i=0; i<nbExecutions; ++i) {
+                jsEngine.callFunction(containingPage_, stateChangeHandler_, context, 
+                        this, scope, ArrayUtils.EMPTY_OBJECT_ARRAY);
             }
         }
     }
@@ -270,8 +281,10 @@ public class XMLHttpRequest extends SimpleScriptable {
     public void jsxFunction_open( final String method, final String url, final boolean async,
         final String user, final String password ) {
         // (URL + Method + User + Password) become a WebRequestSettings instance.
+        
+        containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
         try {
-            final URL fullUrl = ((HtmlPage) getWindow().getWebWindow().getEnclosedPage()).getFullyQualifiedUrl(url);
+            final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
             final WebRequestSettings settings = new WebRequestSettings(fullUrl);
             final SubmitMethod submitMethod;
             if( "POST".equalsIgnoreCase( method ) ) {
