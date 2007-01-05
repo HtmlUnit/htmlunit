@@ -41,6 +41,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -224,10 +225,40 @@ public final class HTMLParser {
                 webResponse.getContentAsStream(),
                 charSet);
 
-        domBuilder.parse(in);
+        try {
+            domBuilder.parse(in);
+        }
+        catch (final XNIException e) {
+            // extract enclosed exception
+            final Throwable origin = extractNestedException(e);
+            throw new RuntimeException("Failed parsing content from " + webResponse.getUrl(), origin);
+        }
         return domBuilder.page_;
     }
 
+    /**
+     * Extract nested exception within an XNIException
+     * (Nekohtml uses reflection and generated exceptions are wrapped many times
+     * within XNIException and InvocationTargetException)
+     * @param e the original XNIException
+     * @return the cause exception
+     */
+    static Throwable extractNestedException(final Throwable e) {
+        Throwable originalException = e;
+        Throwable cause = ((XNIException) e).getException();
+        while (cause != null) {
+            originalException = cause;
+            if (cause instanceof XNIException) {
+                cause = ((XNIException) cause).getException();
+            } else if (cause instanceof InvocationTargetException) {
+                cause = cause.getCause();
+            } else {
+                cause = null;
+            }
+        }
+        return originalException;
+    }
+    
     /**
      * <p>Return true if the specified charset is supported on this platform.</p>
      * @param charset The charset to check.

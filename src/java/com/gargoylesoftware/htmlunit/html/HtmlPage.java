@@ -122,8 +122,6 @@ public final class HtmlPage extends DomNode implements Page {
         webClient_ = webWindow.getWebClient();
         webResponse_ = webResponse;
         setEnclosingWindow(webWindow);
-
-        webClient_.initialize(this);
     }
 
     /**

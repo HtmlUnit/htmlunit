@@ -43,6 +43,7 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * Tests that have to do with when the scripting engine is called.  Javascript
@@ -97,9 +98,7 @@ public class ScriptEngineTest extends WebTestCase {
         throws Exception {
 
         final WebClient client = new WebClient();
-        client.setScriptEngine( new ScriptEngine(client) {
-            public void initialize(final WebWindow window) {
-            }
+        client.setScriptEngine( new JavaScriptEngine(client) {
             public Object execute(
                     final HtmlPage htmlPage, final String sourceCode,
                     final String sourceName, final HtmlElement htmlElement ) {

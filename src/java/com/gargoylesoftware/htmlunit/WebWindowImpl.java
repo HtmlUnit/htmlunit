@@ -71,7 +71,6 @@ public abstract class WebWindowImpl implements WebWindow {
         Assert.notNull("webClient", webClient);
         webClient_ = webClient;
         performRegistration();
-        webClient_.initialize(this);
     }
 
     /**
@@ -104,6 +103,8 @@ public abstract class WebWindowImpl implements WebWindow {
         }
         destroyChildren();
         enclosedPage_ = page;
+        webClient_.initialize(this);
+        webClient_.initialize(page);
     }
 
     /**

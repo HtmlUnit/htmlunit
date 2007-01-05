@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem" id="1627983">
+                JavaScript: fixed bad initialisation of JavaScript context when window content changes 
+                (was introduced since last release in fixed for bug 1040244).
+            </action>
             <action type="update" dev="mguillem" id="1508377">
                 JavaScript: ensure that script execution is synchronized on the owning html page
                 (for instance using XMLHttpRequest asynchronously).

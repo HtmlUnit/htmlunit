@@ -1063,8 +1063,7 @@ public class FormTest extends WebTestCase {
             + " </form>"
             + "</body>"
             + "</html>";
-        final List expectedAlerts = Arrays.asList(
-            new String[]{ "INPUT", "idImg1", "img2", "true" } );
+        final String[] expectedAlerts = { "INPUT", "idImg1", "img2", "true"};
         final List collectedAlerts = new ArrayList();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
@@ -1095,5 +1094,52 @@ public class FormTest extends WebTestCase {
             + "</html>";
         createTestPageForRealBrowserIfNeeded(content, Collections.EMPTY_LIST);
         loadPage(content);
+    }
+    
+    /**
+     * Test that the form from the right page is returned after browsing.
+     * Regression test for
+     * http://sourceforge.net/tracker/index.php?func=detail&aid=1627983&group_id=47038&atid=448266
+     * @throws Exception if the test fails
+     */
+    public void testFormAccessAfterBrowsing() throws Exception {
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection( client );
+
+        final String firstContent = "<html><head><title>first</title>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  alert('page 1: ' + document.forms[0].name);"
+            + "  document.location = 'page2.html';"
+            + ""
+            + "}"
+            + "</script>"
+            + "</head><body onload='test()'>\n"
+            + "<form name='formPage1' action='foo'>"
+            + "</form>"
+            + "</body></html>";
+        final String secondContent = "<html><head><title>first</title>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  alert('page 2: ' + document.forms[0].name);"
+            + "}"
+            + "</script>"
+            + "</head><body onload='test()'>\n"
+            + "<form name='formPage2' action='foo'>"
+            + "</form>"
+            + "</body></html>";
+
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setDefaultResponse(secondContent);
+        client.setWebConnection( webConnection );
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+    client.getPage(URL_FIRST);
+
+        final String[] expectedAlerts = { "page 1: formPage1", "page 2: formPage2"};
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

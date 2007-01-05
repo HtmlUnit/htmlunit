@@ -82,7 +82,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @see <a href="http://groups-beta.google.com/group/netscape.public.mozilla.jseng/browse_thread/thread/b4edac57329cf49f/069e9307ec89111f">
  * Rhino and Java Browser</a>
  */
-public final class JavaScriptEngine extends ScriptEngine {
+public class JavaScriptEngine extends ScriptEngine {
 
     private static final ThreadLocal javaScriptRunning_ = new ThreadLocal();
     private static final ContextListener contextListener_;

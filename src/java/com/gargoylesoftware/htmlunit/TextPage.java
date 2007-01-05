@@ -61,9 +61,6 @@ public class TextPage implements Page {
         webResponse_ = webResponse;
         content_ = webResponse.getContentAsString();
         enclosingWindow_ = enclosingWindow;
-
-        final WebClient webClient = enclosingWindow_.getWebClient();
-        webClient.initialize(this);
     }
 
 

@@ -1044,6 +1044,7 @@ public class WebClient {
     public void initializeEmptyWindow( final WebWindow webWindow ) {
         Assert.notNull("webWindow", webWindow);
         if (scriptEngine_ != null) {
+            initialize(webWindow);
             ((Window) webWindow.getScriptObject()).initialize();
         }
     }
