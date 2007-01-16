@@ -250,9 +250,11 @@ public final class HTMLParser {
             originalException = cause;
             if (cause instanceof XNIException) {
                 cause = ((XNIException) cause).getException();
-            } else if (cause instanceof InvocationTargetException) {
+            }
+            else if (cause instanceof InvocationTargetException) {
                 cause = cause.getCause();
-            } else {
+            }
+            else {
                 cause = null;
             }
         }
