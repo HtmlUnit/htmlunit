@@ -138,10 +138,11 @@ public final class HtmlPage extends DomNode implements Page {
     public void initialize() throws IOException {
         loadFrames();
         getDocumentElement().setReadyState(READY_STATE_COMPLETE);
+        
         executeOnLoadHandlersIfNeeded();
         executeRefreshIfNeeded();
     }
-
+    
     /**
      * Clean up this page.
      * @throws IOException If an IO problem occurs.
@@ -190,26 +191,22 @@ public final class HtmlPage extends DomNode implements Page {
      * @return the value of charset.
      */
     public String getPageEncoding() {
-        if( originalCharset_ != null ) {
+        if (originalCharset_ != null) {
             return originalCharset_ ;
         }
-        final ArrayList ar = new ArrayList();
-        ar.add("meta");
-        final List list = getDocumentElement().getHtmlElementsByTagNames(ar);
-        for(int i=0; i<list.size();i++ ){
+
+        final List list = getMetaTags("content-type");
+        for (int i=0; i<list.size();i++) {
             final HtmlMeta meta = (HtmlMeta) list.get(i);
-            final String httpequiv = meta.getHttpEquivAttribute();
-            if( "content-type".equals(httpequiv.toLowerCase()) ){
-                final String contents = meta.getContentAttribute();
-                final int pos = contents.toLowerCase().indexOf("charset=");
-                if( pos>=0 ){
-                    originalCharset_ = contents.substring(pos+8);
-                    getLog().debug("Page Encoding detected: " + originalCharset_);
-                    return originalCharset_;
-                }
+            final String contents = meta.getContentAttribute();
+            final int pos = contents.toLowerCase().indexOf("charset=");
+            if (pos >= 0) {
+                originalCharset_ = contents.substring(pos+8);
+                getLog().debug("Page Encoding detected: " + originalCharset_);
+                return originalCharset_;
             }
         }
-        if( originalCharset_ == null ) {
+        if (originalCharset_ == null) {
             originalCharset_ = webResponse_.getContentCharSet();
         }
         return originalCharset_;
@@ -1078,13 +1075,11 @@ public final class HtmlPage extends DomNode implements Page {
      * @return the auto-refresh string.
      */
     private String getRefreshStringOrNull() {
-        final Iterator iterator
-            = getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("meta") ).iterator();
+        final Iterator iterator = getMetaTags("refresh").iterator();
         final boolean javaScriptEnabled = getWebClient().isJavaScriptEnabled();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlMeta meta = (HtmlMeta) iterator.next();
-            if( meta.getHttpEquivAttribute().equalsIgnoreCase("refresh")
-                    && (!javaScriptEnabled || getFirstParent(meta, HtmlNoScript.TAG_NAME) == null)) {
+            if ((!javaScriptEnabled || getFirstParent(meta, HtmlNoScript.TAG_NAME) == null)) {
                 return meta.getContentAttribute();
             }
         }
@@ -1519,5 +1514,23 @@ public final class HtmlPage extends DomNode implements Page {
      */
     public FocusableElement getElementWithFocus() {
         return elementWithFocus_;
+    }
+
+    /**
+     * Gets the meta tag for a give http-equiv value
+     * @param httpEquiv the http-equiv value
+     * @return a list of {@link HtmlMeta}
+     */
+    protected List getMetaTags(final String httpEquiv) {
+        final String nameLC = httpEquiv.toLowerCase();
+        final List tags = getDocumentElement().getHtmlElementsByTagNames(Collections.singletonList("meta"));
+        for (final Iterator iter = tags.iterator(); iter.hasNext();) {
+            final HtmlMeta element = (HtmlMeta) iter.next();
+            if (!nameLC.equals(element.getHttpEquivAttribute().toLowerCase())) {
+                iter.remove();
+            }
+        }
+        
+        return tags;
     }
 }

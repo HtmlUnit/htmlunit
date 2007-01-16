@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem">
+                Set cookies defined in meta tags with http-equiv equals to set-cookie.
+            </action>
             <action type="update" dev="mguillem" id="1628521" due-to="Andre Soereng">
                 Fixed NullPointerException occuring while submitting a from which onsubmit handler returns null.
             </action>

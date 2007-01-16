@@ -39,6 +39,11 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import org.apache.commons.httpclient.Cookie;
+import org.apache.commons.httpclient.util.DateParseException;
+import org.apache.commons.httpclient.util.DateUtil;
+import org.apache.commons.lang.StringUtils;
+
 
 /**
  * Wrapper for the html element "meta".
@@ -60,6 +65,41 @@ public class HtmlMeta extends HtmlElement {
      */
     public HtmlMeta( final HtmlPage page, final Map attributes ) {
         super(page, attributes);
+        
+        if ("set-cookie".equalsIgnoreCase(getHttpEquivAttribute())) {
+            performSetCookie();
+        }
+    }
+
+    /**
+     * Handles the cookies specified in meta tags
+     * like <meta http-equiv='set-cookie' content='webm=none; path=/;'>
+     */
+    protected void performSetCookie() {
+        final String[] parts = getContentAttribute().split("\\s*;\\s*");
+        final String name = StringUtils.substringBefore(parts[0], "=");
+        final String value = StringUtils.substringAfter(parts[0], "=");
+        final Cookie cookie = new Cookie(getPage().getWebResponse().getUrl().getHost(), name, value);
+        for (int i = 1; i < parts.length; i++) {
+            final String partName = StringUtils.substringBefore(parts[i], "=").trim().toLowerCase();
+            final String partValue = StringUtils.substringAfter(parts[i], "=").trim();
+            if ("path".equals(partName)) {
+                cookie.setPath(partValue);
+            }
+            else if ("expires".equals(partName)) {
+                try {
+                    cookie.setExpiryDate(DateUtil.parseDate(partValue));
+                }
+                catch (final DateParseException e) {
+                    getLog().warn("set-cookie http-equiv meta tag: can't parse expiration date >" 
+                            + partValue + "<. Ignoring");
+                }
+            }
+            else {
+                getLog().warn("set-cookie http-equiv meta tag: unknown attribute >" + partName + "<. Ignoring");
+            }
+            getPage().getWebClient().getWebConnection().getState().addCookie(cookie);
+        }
     }
 
     /**

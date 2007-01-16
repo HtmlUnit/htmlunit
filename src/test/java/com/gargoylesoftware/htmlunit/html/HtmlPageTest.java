@@ -46,6 +46,8 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.httpclient.Cookie;
+
 import junit.framework.AssertionFailedError;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -1187,4 +1189,33 @@ public class HtmlPageTest extends WebTestCase {
         elt1.remove();
         assertEquals("span", page.getHtmlElementById("id1").getNodeName());
     }
+
+    /**
+     * Test the set-cookie meta tag
+     * @throws Exception if the test fails
+     */
+    public void testSetCookieMetaTag() throws Exception {
+
+        final String content = "<html><head><title>first</title>"
+            + "<meta http-equiv='set-cookie' content='webm=none; path=/;'>"
+            + "</head><body>"
+            + "<script>alert(document.cookie)</script>"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"webm=none"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+        
+        final Cookie[] cookies = page.getWebClient().getWebConnection().getState().getCookies();
+        assertEquals(1, cookies.length);
+        final Cookie cookie = cookies[0];
+        assertEquals(page.getWebResponse().getUrl().getHost(), cookie.getDomain());
+        assertEquals("webm", cookie.getName());
+        assertEquals("none", cookie.getValue());
+        assertEquals("/", cookie.getPath());
+    }
+
 }
