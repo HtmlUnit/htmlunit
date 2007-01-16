@@ -293,6 +293,32 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals( Collections.singletonList("clicked"), collectedAlerts );
     }
 
+    /**
+     * Regression test for bug 1628521
+     * Nullpointer exception when submitting forms
+     * @throws Exception if the test fails
+     */
+    public void testSubmit_onSubmitHandler_fails() throws Exception {
+
+         final String firstContent
+            = "<html><head><title>First</title></head><body>"
+            + "<form method='get' action='http://second' onSubmit='return null'>"
+            + "<input name='button' type='submit' value='PushMe' id='button'/></form>"
+            + "</body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setDefaultResponse(secondContent);
+
+        client.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlSubmitInput button = (HtmlSubmitInput) firstPage.getHtmlElementById("button");
+        final HtmlPage secondPage = (HtmlPage) button.click();
+        assertEquals("Second", secondPage.getTitleText());
+    }
 
     /**
      * @throws Exception if the test fails

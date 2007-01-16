@@ -165,20 +165,19 @@ public class HtmlForm extends ClickableElement {
                             .executeJavaScriptFunctionIfPossible(onsubmit,
                                     (Scriptable) getScriptObject(),
                                     new Object[0], this);
-                    if (scriptResult.getJavaScriptResult()
-                            .equals(Boolean.FALSE)) {
+                    if (Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
                         return scriptResult.getNewPage();
                     }
                 }
             }
 
             final String action = getActionAttribute();
-            if( TextUtil.startsWithIgnoreCase(action, "javascript:") ) {
-                return htmlPage.executeJavaScriptIfPossible( action, "Form action", false, this ).getNewPage();
+            if (TextUtil.startsWithIgnoreCase(action, "javascript:")) {
+                return htmlPage.executeJavaScriptIfPossible(action, "Form action", false, this).getNewPage();
             }
         }
         else {
-            if( TextUtil.startsWithIgnoreCase(getActionAttribute(), "javascript:") ) {
+            if (TextUtil.startsWithIgnoreCase(getActionAttribute(), "javascript:")) {
                 // The action is javascript but javascript isn't enabled.  Return
                 // the current page.
                 return htmlPage;
