@@ -1240,9 +1240,10 @@ public class WebClient {
     }
 
     private WebResponse makeWebResponseForAboutUrl(final URL url) {
-        if (!url.toExternalForm().substring("about:".length()).equalsIgnoreCase("blank")){
+        final String urlWithoutQuery = StringUtils.substringBefore(url.toExternalForm(), "?");
+        if (!StringUtils.substringAfter(urlWithoutQuery, "about:").equalsIgnoreCase("blank")) {
             throw new IllegalArgumentException(
-                url.toExternalForm()+"is not supported, only about:blank is supported now.");
+                url.toExternalForm() + "is not supported, only about:blank is supported now.");
         }
         return WEB_RESPONSE_FOR_ABOUT_BLANK;
     }

@@ -51,8 +51,6 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.lang.StringUtils;
 import org.mozilla.javascript.Function;
-import org.mozilla.javascript.Scriptable;
-
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -64,9 +62,10 @@ import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
- *  Wrapper for the html element "form"
+ * Wrapper for the html element "form"
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -156,15 +155,11 @@ public class HtmlForm extends ClickableElement {
     public Page submit( final SubmittableElement submitElement ) throws IOException {
 
         final HtmlPage htmlPage = getPage();
-        if( htmlPage.getWebClient().isJavaScriptEnabled() ) {
-            if( submitElement != null ) {
+        if (htmlPage.getWebClient().isJavaScriptEnabled()) {
+            if (submitElement != null) {
                 final Function onsubmit = getEventHandler("onsubmit");
-                if (onsubmit != null
-                        && htmlPage.getWebClient().isJavaScriptEnabled()) {
-                    final ScriptResult scriptResult = htmlPage
-                            .executeJavaScriptFunctionIfPossible(onsubmit,
-                                    (Scriptable) getScriptObject(),
-                                    new Object[0], this);
+                if (onsubmit != null) {
+                    final ScriptResult scriptResult = getPage().runEventHandler(onsubmit, new Event(this));
                     if (Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
                         return scriptResult.getNewPage();
                     }

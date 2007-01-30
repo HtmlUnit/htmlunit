@@ -1142,4 +1142,50 @@ public class FormTest extends WebTestCase {
         final String[] expectedAlerts = { "page 1: formPage1", "page 2: formPage2"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Test that the event object is correctly made available
+     * Regression test for
+     * https://sourceforge.net/tracker/index.php?func=detail&aid=1648014&group_id=47038&atid=448266
+     * @throws Exception if the test fails
+     */
+    public void testOnSubmitEvent() throws Exception {
+        final String[] expectedAlertsIE = {"srcElement null: false", "srcElement==form: true", "target null: true", "target==form: false"};
+        testOnSubmitEvent(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
+
+        final String[] expectedAlertsFF = {"srcElement null: true", "srcElement==form: false", "target null: false", "target==form: true"};
+        testOnSubmitEvent(BrowserVersion.NETSCAPE_6_2_3, expectedAlertsFF);
+    }
+
+    protected void testOnSubmitEvent(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+        final WebClient client = new WebClient(browserVersion);
+        final MockWebConnection webConnection = new MockWebConnection(client);
+
+        final String content = "<html><head><title>first</title>"
+            + "<script>"
+            + "function test(_event)"
+            + "{"
+            + "  var oEvent = _event ? _event : window.event;"
+            + "  alert('srcElement null: ' + (oEvent.srcElement == null));"
+            + "  alert('srcElement==form: ' + (oEvent.srcElement == document.forms[0]));"
+            + "  alert('target null: ' + (oEvent.target == null));"
+            + "  alert('target==form: ' + (oEvent.target == document.forms[0]));"
+            + "}"
+            + "</script>"
+            + "</head><body>"
+            + "<form name='formPage1' action='about:blank' onsubmit='test(event)'>"
+            + "<input type='submit' id='theButton'>"
+            + "</form>"
+            + "</body></html>";
+
+        webConnection.setResponse(URL_FIRST, content);
+        client.setWebConnection( webConnection );
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        ((ClickableElement) page.getHtmlElementById("theButton")).click();
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
