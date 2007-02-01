@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
 
 /**
- * Tests for {@link Select}.
+ * Tests for {@link HTMLSelectElement}.
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

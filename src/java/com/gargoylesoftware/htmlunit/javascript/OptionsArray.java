@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.host.Option;
-import com.gargoylesoftware.htmlunit.javascript.host.Select;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement;
 
 import org.mozilla.javascript.Scriptable;
 
@@ -135,7 +135,7 @@ public class OptionsArray extends SimpleScriptable {
             if( getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE() ) {
                 // If the name was NOT_FOUND on the prototype, then just drop through
                 // to search on the Select for IE only
-                final Select select = (Select) htmlSelect_.getScriptObject();
+                final HTMLSelectElement select = (HTMLSelectElement) htmlSelect_.getScriptObject();
                 object = select.get( name, start );
             }
         }

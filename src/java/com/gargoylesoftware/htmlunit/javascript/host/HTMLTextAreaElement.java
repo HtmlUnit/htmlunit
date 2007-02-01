@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Marc Guillemot
  * @author Chris Erskine
  */
-public class Textarea extends FormField {
+public class HTMLTextAreaElement extends FormField {
 
     private static final long serialVersionUID = 49352135575074390L;
 
@@ -55,7 +55,7 @@ public class Textarea extends FormField {
     /**
      * Create an instance.
      */
-    public Textarea() {
+    public HTMLTextAreaElement() {
     }
 
 

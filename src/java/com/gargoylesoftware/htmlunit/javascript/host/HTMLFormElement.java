@@ -63,7 +63,7 @@ import org.mozilla.javascript.Scriptable;
  * 
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/form.asp">MSDN documentation</a>
  */
-public class Form extends HTMLElement {
+public class HTMLFormElement extends HTMLElement {
 
     private static final long serialVersionUID = -1860993922147246513L;
     private ElementArray elements_; // has to be a member to have equality (==) working
@@ -71,7 +71,7 @@ public class Form extends HTMLElement {
     /**
      * Create an instance.  A default constructor is required for all javascript objects.
      */
-    public Form() { }
+    public HTMLFormElement() { }
 
 
     /**
@@ -265,7 +265,7 @@ public class Form extends HTMLElement {
      * @return The property.
      */
     public Object get( final String name, final Scriptable start ) {
-        return ((Form) start).get(name);
+        return ((HTMLFormElement) start).get(name);
     }
 
     /**
@@ -327,6 +327,6 @@ public class Form extends HTMLElement {
      * @return The property.
      */
     public Object get( final int index, final Scriptable start ) {
-        return jsxGet_elements().get(index, ((Form) start).jsxGet_elements());
+        return jsxGet_elements().get(index, ((HTMLFormElement) start).jsxGet_elements());
     }
 }

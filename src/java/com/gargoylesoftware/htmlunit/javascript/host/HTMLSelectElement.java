@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.OptionsArray;
  * @author Marc Guillemot
  * @author Chris Erskine
  */
-public class Select extends FormField {
+public class HTMLSelectElement extends FormField {
 
     private static final long serialVersionUID = 4332789476842114628L;
     private OptionsArray optionsArray_;
@@ -65,7 +65,7 @@ public class Select extends FormField {
     /**
      * Create an instance.
      */
-    public Select() {
+    public HTMLSelectElement() {
     }
 
 

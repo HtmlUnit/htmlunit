@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.html.InputElementFactory;
  * @author Marc Guillemot
  * @author Chris Erskine
  */
-public class Input extends FormField {
+public class HTMLInputElement extends FormField {
 
     private static final long serialVersionUID = 3712016051364495710L;
 
@@ -59,7 +59,7 @@ public class Input extends FormField {
     /**
      *  Create an instance.
      */
-    public Input() {
+    public HTMLInputElement() {
     }
 
 
