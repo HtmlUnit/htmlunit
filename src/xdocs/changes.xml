@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem">
+                JavaScript: provide event object as argument when calling onload listeners attached with attachEvent (Internet explorer).
+            </action>
             <action type="update" dev="mguillem" id="1648014">
                 JavaScript: provide the event object to onsubmit handlers.
             </action>

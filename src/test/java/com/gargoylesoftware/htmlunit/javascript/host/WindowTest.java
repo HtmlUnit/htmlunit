@@ -1622,7 +1622,7 @@ public class WindowTest extends WebTestCase {
         final String content = "<html>\n"
             + "<head><title>test</title>\n"
             + "<script>\n"
-            + "  function test1() { alert('test1'); }\n"
+            + "  function test1(_e) { alert('test1, param null: ' + (_e == null)); }\n"
             + "  function test2() { alert('test2'); }\n"
             + "  function test3() { alert('test3'); }\n"
             + "alert(window.addEventListener == null);"
@@ -1636,7 +1636,7 @@ public class WindowTest extends WebTestCase {
             + "window.detachEvent('onload', test3);"
             + "</script></head>\n"
             + "<body onload='alert(\"onload\")'></body></html>\n";
-        final String[] expectedAlerts = {"true", "false", "true", "false", "test1", "test2", "onload"};
+        final String[] expectedAlerts = {"true", "false", "true", "false", "test1, param null: false", "test2", "onload"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);

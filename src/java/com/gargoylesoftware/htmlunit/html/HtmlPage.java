@@ -429,7 +429,7 @@ public final class HtmlPage extends DomNode implements Page {
     public List getTabbableElements() {
 
         final List acceptableTagNames = Arrays.asList(
-                new Object[]{"a", "area", "button", "input", "object", "select", "textarea"} );
+                new Object[] {"a", "area", "button", "input", "object", "select", "textarea"} );
         final List tabbableElements = new ArrayList();
 
         final DescendantElementsIterator iterator = getAllHtmlChildElements();
@@ -961,7 +961,7 @@ public final class HtmlPage extends DomNode implements Page {
             for (final Iterator iter = onLoadHandlers.iterator(); iter.hasNext(); ) {
                 final Function listener = (Function) iter.next();
                 getLog().debug("Executing load listener for the window: " + listener);
-                runEventHandler(listener, loadEvent);
+                runEventHandler(listener, loadEvent, true);
             }
 
             if (jsWindow.jsxGet_onload() != null) {
@@ -1450,14 +1450,26 @@ public final class HtmlPage extends DomNode implements Page {
      * @return the script execution result
      */
     protected ScriptResult runEventHandler(final Function handler, final Event event) {
+        return runEventHandler(handler, event, false);
+    }
+
+    /**
+     * Runs an event handler taking car to pass him the event in the right form
+     * @param handler the handler function
+     * @param event the event that is beeing triggered
+     * @param isListener indicates if the function is a listener and therefore if the event has to be passed
+     * as parameter even if browser is IE)
+     * @return the script execution result
+     */
+    protected ScriptResult runEventHandler(final Function handler, final Event event, final boolean isListener) {
 
         final Window window = (Window) getEnclosingWindow().getScriptObject();
-        final Object[] args;
+        Object[] args = ArrayUtils.EMPTY_OBJECT_ARRAY;
         if (getWebClient().getBrowserVersion().isIE()) {
-            args = ArrayUtils.EMPTY_OBJECT_ARRAY;
             window.setEvent(event);
         }
-        else {
+        // listeners and handlers in non IE browser need to receive the event as argument
+        if (isListener || !getWebClient().getBrowserVersion().isIE()) {
             args = new Object[] {event};
         }
 
