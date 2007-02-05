@@ -63,9 +63,6 @@ public class PrototypeTest extends WebTestCase {
     }
 
     public void testArray() throws Exception {
-        if( notYetImplemented() ) {
-            return;
-        }
         test( "array.html", 12, 49 );
     }
 
@@ -91,9 +88,6 @@ public class PrototypeTest extends WebTestCase {
     }
 
     public void testEnumerable() throws Exception {
-        if( notYetImplemented() ) {
-            return;
-        }
         test( "enumerable.html", 23, 67 );
     }
 
@@ -119,9 +113,6 @@ public class PrototypeTest extends WebTestCase {
     }
 
     public void testRange() throws Exception {
-        if( notYetImplemented() ) {
-            return;
-        }
         test( "range.html", 6, 21 );
     }
 
