@@ -1217,5 +1217,27 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals("none", cookie.getValue());
         assertEquals("/", cookie.getPath());
     }
+    
+    /**
+     * Regression test for bug 1658273
+     * @throws Exception if the test fails
+     */
+    public void testOnLoadHandler_idChange() throws Exception {
+        final String content = "<html><head><title>foo</title>"
+            + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>'"
+            + "<script type='text/javascript'>"
+            + "document.getElementById('id1').id = 'id3';"
+            + "alert(document.getElementById('id2').className);"
+            + "alert(document.getElementById('id3').className);"
+            + "</script>"
+            + "</head><body></body></html>";
+        
+        final String[] expectedAlerts = {"cl2", "cl1"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }    
 }

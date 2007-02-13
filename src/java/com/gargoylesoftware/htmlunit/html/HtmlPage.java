@@ -1333,11 +1333,11 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
-     * Remove an element and its children from the ID map.
-     *
+     * Remove an element and optionally its children from the ID map.
      * @param idElement the element with an ID attribute to remove.
+     * @param recursive indicates if children must be removed too
      */
-    void removeIdElement(final HtmlElement idElement) {
+    void removeIdElement(final HtmlElement idElement, final boolean recursive) {
         final List elements = (List) idMap_.remove(idElement.getAttributeValue("id"));
         // if other elements have the same id (not legal for spec, but happens), then
         // only one element to remove
@@ -1347,11 +1347,23 @@ public final class HtmlPage extends DomNode implements Page {
         }
 
         // remove ids from children
-        for (final Iterator iter=idElement.getChildElementsIterator(); iter.hasNext();) {
-            final HtmlElement child = (HtmlElement) iter.next();
-            removeIdElement(child);
+        if (recursive) {
+            for (final Iterator iter=idElement.getChildElementsIterator(); iter.hasNext();) {
+                final HtmlElement child = (HtmlElement) iter.next();
+                removeIdElement(child, true);
+            }
         }
     }
+    
+    /**
+     * Remove an element from the ID map.
+     *
+     * @param idElement the element with an ID attribute to remove.
+     */
+    void removeIdElement(final HtmlElement idElement) {
+        removeIdElement(idElement, false);
+    }
+    
 
     /**
      * Executes the onchange script code for this element if this is appropriate. 
@@ -1405,7 +1417,7 @@ public final class HtmlPage extends DomNode implements Page {
      */
     void notifyNodeRemoved(final DomNode node) {
         if (node instanceof HtmlElement) {
-            removeIdElement((HtmlElement) node);
+            removeIdElement((HtmlElement) node, true);
         }
     }
 
