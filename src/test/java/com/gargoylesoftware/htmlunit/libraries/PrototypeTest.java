@@ -67,9 +67,6 @@ public class PrototypeTest extends WebTestCase {
     }
 
     public void testBase() throws Exception {
-        if( notYetImplemented() ) {
-            return;
-        }
         test( "base.html", 4, 48 );
     }
 

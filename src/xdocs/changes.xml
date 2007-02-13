@@ -7,8 +7,11 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem">
+                Upgraded dependencies to Jaxen 1.1, commons-lang 2.2, rhino 1.6R5, commons-io 1.3.
+            </action>
             <action type="update" dev="mguillem" id="1658273" due-to="kkolman">
-                Changing element id should not impact child nodes..
+                Changing element id should not impact child nodes.
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: provide event object as argument when calling onload listeners attached with attachEvent (Internet explorer).
