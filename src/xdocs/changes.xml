@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem" id="1619765">
+                Allow redirections to the same url with a maximal number of 20.
+            </action>
             <action type="update" dev="mguillem">
                 Fixed HtmlHtml.getXmlLangAttribute().
             </action>

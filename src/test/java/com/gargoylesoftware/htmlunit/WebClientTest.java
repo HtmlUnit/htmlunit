@@ -471,6 +471,54 @@ public class WebClientTest extends WebTestCase {
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod, newLocation, true);
     }
 
+
+    /**
+     * Browsers allow many redirections to the same url before to stop redirections.
+     * See Bug 1619765 and feature request 1472343.
+     * @throws Exception if the test fails.
+     */
+    public void testRedirectionSameURL() throws Exception {
+        final HtmlPage page1 = getPageWithRedirectionsSameURL(1);
+        assertEquals("Second", page1.getTitleText());
+
+        final HtmlPage page2 = getPageWithRedirectionsSameURL(30);
+        assertEquals("Redirect needed 21", page2.getWebResponse().getStatusMessage());
+    }
+    
+    private HtmlPage getPageWithRedirectionsSameURL(final int nbRedirections) throws Exception {
+        final String firstContent = "<html><head><title>First</title></head><body></body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient webClient = new WebClient();
+
+        final URL url = URL_FIRST;
+        final List headers = Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()) );
+        final MockWebConnection webConnection = new MockWebConnection(webClient) {
+            private int count_ = 0;
+            public WebResponse getResponse(final WebRequestSettings _webRequestSettings) throws IOException {
+                ++count_;
+                if (count_ < nbRedirections) {
+                    setResponse(url, firstContent, 302, "Redirect needed " + count_, "text/html", headers);
+                    return super.getResponse(_webRequestSettings);
+                }
+                else if (count_ == nbRedirections) {
+                    final WebResponse response = super.getResponse(_webRequestSettings);
+                    setResponse(_webRequestSettings.getURL(), secondContent);
+                    return response;
+                }
+                else {
+                    return super.getResponse(_webRequestSettings);
+                }
+            }
+        };
+        webConnection.setResponse(url, firstContent, 302, "Redirect needed", "text/html", headers);
+        webClient.setWebConnection( webConnection );
+        webClient.setThrowExceptionOnFailingStatusCode(false);
+
+        
+        return (HtmlPage) webClient.getPage(url);
+    }
+
     /**
      * Basic logic for all the redirection tests.
      *

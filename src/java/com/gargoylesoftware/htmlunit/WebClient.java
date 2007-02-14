@@ -115,6 +115,7 @@ public class WebClient {
     private String homePage_;
     private FocusableElement elementWithFocus_;
     private final Map requestHeaders_ = Collections.synchronizedMap(new HashMap(89));
+    private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20; // like Firefox default value for network.http.redirection-limit
 
     private AlertHandler   alertHandler_;
     private ConfirmHandler confirmHandler_;
@@ -1373,7 +1374,7 @@ public class WebClient {
             response = makeWebResponseForFileUrl(webRequestSettings.getURL());
         }
         else {
-            response = loadWebResponseFromWebConnection(webRequestSettings);
+            response = loadWebResponseFromWebConnection(webRequestSettings, ALLOWED_REDIRECTIONS_SAME_URL);
         }
 
         return response;
@@ -1385,7 +1386,7 @@ public class WebClient {
      * @throws IOException if an IO problem occurs
      * @return The WebResponse
      */
-    private WebResponse loadWebResponseFromWebConnection(final WebRequestSettings webRequestSettings)
+    private WebResponse loadWebResponseFromWebConnection(final WebRequestSettings webRequestSettings, int nbAllowedRedirections)
         throws
             IOException {
         final URL url = webRequestSettings.getURL();
@@ -1418,7 +1419,7 @@ public class WebClient {
         final WebResponse webResponse = getWebConnection().getResponse(webRequestSettings);
         final int statusCode = webResponse.getStatusCode();
 
-        if( statusCode >= 301 && statusCode <=307 && isRedirectEnabled() ) {
+        if (statusCode >= 301 && statusCode <=307 && isRedirectEnabled()) {
             URL newUrl = null;
             String locationString = null;
             try {
@@ -1432,13 +1433,20 @@ public class WebClient {
                 return webResponse;
             }
 
-            getLog().debug("Got a redirect status code ["+statusCode
-                +"] new location=["+locationString+"]");
+            getLog().debug("Got a redirect status code [" + statusCode + "] new location=[" + locationString + "]");
 
             if (webRequestSettings.getSubmitMethod().equals(SubmitMethod.GET) 
                     && webResponse.getUrl().toExternalForm().equals(locationString) ) {
-                getLog().warn("Got a redirect but the location is the same as the page we just loaded ["
-                    + locationString + "]. Skipping redirection.");
+
+                if (nbAllowedRedirections == 0) {
+                    getLog().warn("Max redirections allowed to the same location reached for ["
+                            + locationString + "]. Skipping redirection.");
+                }
+                else {
+                    getLog().debug("Got a redirect with location same as the page we just loaded. "
+                            + "Nb self redirection allowed: " + nbAllowedRedirections);
+                    return loadWebResponseFromWebConnection(webRequestSettings, nbAllowedRedirections-1);
+                }
             }
             else if ((statusCode == 301 || statusCode == 307)
                 && method.equals(SubmitMethod.GET) ) {
