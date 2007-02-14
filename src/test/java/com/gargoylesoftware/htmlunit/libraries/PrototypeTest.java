@@ -95,6 +95,11 @@ public class PrototypeTest extends WebTestCase {
         test( "form.html", 4, 21 );
     }
 
+    /**
+     * Blocked by Rhino bug 370279
+     * https://bugzilla.mozilla.org/show_bug.cgi?id=370279
+     * @throws Exception
+     */
     public void testHash() throws Exception {
         if( notYetImplemented() ) {
             return;
@@ -120,6 +125,11 @@ public class PrototypeTest extends WebTestCase {
         test( "selector.html", 18, 46 );
     }
 
+    /**
+     * Blocked by Rhino bug 369860
+     * https://bugzilla.mozilla.org/show_bug.cgi?id=369860
+     * @throws Exception
+     */
     public void testString() throws Exception {
         if( notYetImplemented() ) {
             return;
