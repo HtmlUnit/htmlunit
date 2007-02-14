@@ -76,7 +76,7 @@ public class DefaultElementFactoryTest extends WebTestCase {
         final AttributesImpl atts = new AttributesImpl();
         atts.addAttribute( null, "href", "href", null, "http://www.google.com" );
         atts.addAttribute( null, "tabindex", "tabindex", null, "2" );
-        atts.addAttribute( null, "accesskey", "accessKey", null, "F" );
+        atts.addAttribute( null, "accesskey", "accesskey", null, "F" );
 
         // Access the factory.
         final DefaultElementFactory defaultElementFactory = new DefaultElementFactory( HtmlAnchor.class );

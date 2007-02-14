@@ -95,7 +95,7 @@ class DefaultElementFactory implements IElementFactory {
             if (attributes != null) {
                 attributeMap = ListOrderedMap.decorate(new HashMap(attributes.getLength())); // preserve insertion order
                 for(int i=0; i < attributes.getLength(); i++) {
-                    attributeMap.put(attributes.getLocalName(i), attributes.getValue(i));
+                    attributeMap.put(attributes.getQName(i), attributes.getValue(i));
                 }
             }
             final HtmlElement element = (HtmlElement)constructor_.newInstance(new Object[]{page, attributeMap});
