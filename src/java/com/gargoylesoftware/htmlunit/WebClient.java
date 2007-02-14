@@ -115,7 +115,11 @@ public class WebClient {
     private String homePage_;
     private FocusableElement elementWithFocus_;
     private final Map requestHeaders_ = Collections.synchronizedMap(new HashMap(89));
-    private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20; // like Firefox default value for network.http.redirection-limit
+
+    /**
+     * like Firefox default value for network.http.redirection-limit
+     */
+    private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20;
 
     private AlertHandler   alertHandler_;
     private ConfirmHandler confirmHandler_;
@@ -1386,7 +1390,8 @@ public class WebClient {
      * @throws IOException if an IO problem occurs
      * @return The WebResponse
      */
-    private WebResponse loadWebResponseFromWebConnection(final WebRequestSettings webRequestSettings, int nbAllowedRedirections)
+    private WebResponse loadWebResponseFromWebConnection(final WebRequestSettings webRequestSettings, 
+                final int nbAllowedRedirections)
         throws
             IOException {
         final URL url = webRequestSettings.getURL();
