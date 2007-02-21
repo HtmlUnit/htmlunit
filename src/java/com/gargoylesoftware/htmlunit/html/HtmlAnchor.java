@@ -78,21 +78,16 @@ public class HtmlAnchor extends FocusableElement {
     }
 
     /**
-     * This method will be called if there either wasn't an onclick handler or
-     * there was but the result of that handler was true.  This is the default
-     * behaviour of clicking the element.  For this anchor element, the default
-     * behavior is to open the HREF page, or execute the HREF if it is a
-     * javascript: URL.
-     *
-     * @param defaultPage The default page to return if the action does not
-     * load a new page.
+     * Same as {@link #doClickAction(Page)} except that it accepts an href suffix needed when a click is 
+     * performed on an image map to pass information on the click position.
+     * @param defaultPage The default page to return if the action does not load a new page.
+     * @param hrefSuffix the suffix to add to the anchor's href attribute (for instance coordinates from an image map)
      * @return The page that is currently loaded after execution of this method
      * @throws IOException If an IO error occured
      */
-    protected Page doClickAction(final Page defaultPage) throws IOException {
+    protected Page doClickAction(final Page defaultPage, final String hrefSuffix) throws IOException {
 
-
-        final String href = getHrefAttribute();
+        final String href = getHrefAttribute() + hrefSuffix;
 
         getLog().debug(
             "do click action in window '"
@@ -121,6 +116,22 @@ public class HtmlAnchor extends FocusableElement {
         else {
             return defaultPage;
         }
+    }
+
+    /**
+     * This method will be called if there either wasn't an onclick handler or
+     * there was but the result of that handler was true.  This is the default
+     * behaviour of clicking the element.  For this anchor element, the default
+     * behavior is to open the HREF page, or execute the HREF if it is a
+     * javascript: URL.
+     *
+     * @param defaultPage The default page to return if the action does not
+     * load a new page.
+     * @return The page that is currently loaded after execution of this method
+     * @throws IOException If an IO error occured
+     */
+    protected Page doClickAction(final Page defaultPage) throws IOException {
+        return doClickAction(defaultPage, "");
     }
 
 

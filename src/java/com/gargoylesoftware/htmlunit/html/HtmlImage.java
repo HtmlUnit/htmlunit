@@ -37,7 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
 import java.util.Map;
+
+import com.gargoylesoftware.htmlunit.Page;
 
 /**
  * Wrapper for the html element "img".
@@ -51,6 +54,8 @@ public class HtmlImage extends ClickableElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "img";
+    private int lastIsMapClickX_ = 0;
+    private int lastIsMapClickY_ = 0;
 
     /**
      * Create an instance of HtmlImage
@@ -222,5 +227,56 @@ public class HtmlImage extends ClickableElement {
      */
     public final String getVspaceAttribute() {
         return getAttributeValue("vspace");
+    }
+    
+    /**
+     * Simulate clicking this element at the given position. 
+     * This makes only sense for an image map (currently only server side) where the position matters.
+     *
+     * @param x the x position of the click
+     * @param y the y position of the click
+     * @return The page that occupies this window after this element is
+     * clicked. It may be the same window or it may be a freshly loaded one.
+     * @exception IOException If an IO error occurs
+     */
+    public Page click(final int x, final int y)
+        throws IOException {
+        
+        lastIsMapClickX_ = x;
+        lastIsMapClickY_ = y;
+        return super.click();
+    }
+    
+    /**
+     * Simulate clicking this element.
+     *
+     * @return The page that occupies this window after this element is
+     * clicked. It may be the same window or it may be a freshly loaded one.
+     * @exception IOException If an IO error occurs
+     */
+    public Page click() throws IOException {
+        return click(0, 0);
+    }
+
+    /**
+     * Performs the click action on the enclosing A tag (if any).
+     * @param defaultPage The default page to return if the action does not load a new page.
+     * @return The page that is currently loaded after execution of this method
+     * @throws IOException If an IO error occured
+     */
+    protected Page doClickAction(final Page defaultPage) throws IOException {
+        final HtmlAnchor anchor = (HtmlAnchor) getEnclosingElement("a");
+        if (anchor == null) {
+            return super.doClickAction(defaultPage);
+        }
+        else {
+            if (getIsmapAttribute() != ATTRIBUTE_NOT_DEFINED) {
+                final String suffix = "?" + lastIsMapClickX_ + "," + lastIsMapClickY_;
+                return anchor.doClickAction(defaultPage, suffix);
+            }
+            else {
+                return anchor.doClickAction(defaultPage);
+            }
+        }
     }
 }
