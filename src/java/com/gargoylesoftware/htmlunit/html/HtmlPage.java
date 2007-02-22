@@ -248,7 +248,7 @@ public final class HtmlPage extends DomNode implements Page {
 
     /**
      * Return a list of all anchors contained in this page.
-     * @return All the anchors in this page.
+     * @return the list of {@link HtmlAnchor} in this page.
      */
     public List getAnchors() {
         return getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("a") );
