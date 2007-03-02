@@ -61,6 +61,7 @@ public class DefaultPageCreatorTest extends WebTestCase {
     public void testDeterminePageType() {
         final DefaultPageCreator creator = new DefaultPageCreator();
 
+        assertEquals("html", creator.determinePageType("application/vnd.wap.xhtml+xml"));
         assertEquals("html", creator.determinePageType("application/xhtml+xml"));
         assertEquals("html", creator.determinePageType("text/html"));
         assertEquals("html", creator.determinePageType("text/xhtml"));

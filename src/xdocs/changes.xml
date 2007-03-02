@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem" id="1672392">
+                Parse as html all responses with content type ending with "xhtml+xml" like XHTML mobile profile documents (application/vnd.wap.xhtml+xml).
+            </action>
             <action type="update" dev="mguillem" id="1665629">
                 Improved HtmlPage.getAnchors's javadoc.
             </action>

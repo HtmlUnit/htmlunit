@@ -177,7 +177,7 @@ public class DefaultPageCreator implements PageCreator {
         if (contentType.equals("text/html") || contentType.equals("text/xhtml")) {
             return "html";
         }
-        else if( contentType.equals("application/xhtml+xml") ) {
+        else if (contentType.endsWith("xhtml+xml")) {
             //Should create a validated XML document but for now just make what we can
             return "html";
         }
