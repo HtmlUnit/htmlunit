@@ -1,0 +1,351 @@
+<!-- 
+CAUTION: migration from maven 1 to maven 2 as build system for htmlunit is still work in progress.
+The reference stays the maven 1 build.
+ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>htmlunit</artifactId>
+	<groupId>net.sourceforge.htmlunit</groupId>
+	<version>1.11-SNAPSHOT</version>
+	<name>HtmlUnit</name>
+	<organization>
+
+		<name>Gargoyle Software Inc.</name>
+		<url>http://www.GargoyleSoftware.com/</url>
+	</organization>
+	<packaging>jar</packaging>
+	<description>A tool for testing web based applications</description>
+	<url>http://htmlunit.sourceforge.net</url>
+
+	<issueManagement>
+		<system>sourceforge</system>
+		<url>
+			http://sourceforge.net/tracker/?group_id=47038
+		</url>
+	</issueManagement>
+	<inceptionYear>2002</inceptionYear>
+	<licenses>
+
+		<license>
+			<name>The HtmlUnit Software License</name>
+			<url>http://htmlunit.sourceforge.net/license.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+
+		<connection>
+			scm:svn:https://svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit
+		</connection>
+		<developerConnection>
+			scm:svn:https://svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit
+		</developerConnection>
+		<url>http://svn.sourceforge.net/viewcvs.cgi/htmlunit/</url>
+	</scm>
+	<mailingLists>
+
+		<mailingList>
+			<name>HtmlUnit Users</name>
+			<subscribe>
+				http://lists.sourceforge.net/lists/listinfo/htmlunit-user
+			</subscribe>
+			<unsubscribe>
+				http://lists.sourceforge.net/lists/listinfo/htmlunit-user
+			</unsubscribe>
+			<archive>
+
+				http://lists.sourceforge.net/lists/listinfo/htmlunit-user
+			</archive>
+			<post>htmlunit-users@lists.sourceforge.net</post>
+		</mailingList>
+		<mailingList>
+			<name>HtmlUnit Developers</name>
+			<subscribe>
+				http://lists.sourceforge.net/lists/listinfo/htmlunit-develop
+			</subscribe>
+
+			<unsubscribe>
+				http://lists.sourceforge.net/lists/listinfo/htmlunit-develop
+			</unsubscribe>
+			<archive>
+				http://lists.sourceforge.net/lists/listinfo/htmlunit-develop
+			</archive>
+			<post>htmlunit-development@lists.sourceforge.net</post>
+		</mailingList>		
+	</mailingLists>
+	<developers>
+
+		<developer>
+			<name>Mike Bowler</name>
+			<id>mbowler</id>
+			<email>mbowler@GargoyleSoftware.com</email>
+			<organization>Gargoyle Software Inc.</organization>
+			<url>
+				http://www.sphericalimprovement.com/blogs/mbowler/
+			</url>
+
+			<timezone>-5</timezone>
+		</developer>
+		<developer>
+			<name>David K. Taylor</name>
+			<id>dktaylor</id>
+		</developer>
+		<developer>
+
+			<name>Brad Clarke</name>
+			<id>yourgod</id>
+			<email>yourgod@users.sourceforge.net</email>
+			<url>http://www.bradclarke.com/</url>
+			<timezone>-6</timezone>
+		</developer>
+
+		<developer>
+			<name>Marc Guillemot</name>
+			<id>mguillem</id>
+			<email>mguillem@users.sourceforge.net</email>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+
+			<name>Chris Erskine</name>
+			<id>cerskine</id>
+			<email>cerskine@users.sourceforge.net</email>
+			<timezone>-7</timezone>
+		</developer>
+	</developers>
+	<contributors>
+
+		<contributor>
+			<name>Noboru Sinohara</name>
+		</contributor>
+		<contributor>
+			<name>Mike J. Bresnahan</name>
+			<email>gudujarlson@sf.net</email>
+		</contributor>
+
+		<contributor>
+			<name>Dominique Broeglin</name>
+		</contributor>
+		<contributor>
+			<name>Alex Nikiforoff</name>
+		</contributor>
+		<contributor>
+			<name>Barnaby Court</name>
+
+		</contributor>
+		<contributor>
+			<name>Andreas Hangler</name>
+		</contributor>
+		<contributor>
+			<name>Jun Chen</name>
+			<email>chen_jun@users.sourceforge.net</email>
+
+		</contributor>
+		<contributor>
+			<name>Christian Sell</name>
+			<email>cse@dynabean.de</email>
+		</contributor>
+		<contributor>
+			<name>Darrell DeBoer</name>
+
+		</contributor>
+		<contributor>
+			<name>David D. Kilzer</name>
+		</contributor>
+		<contributor>
+			<name>Ben Curren</name>
+			<email>bcurren@esomnie.com</email>
+
+		</contributor>
+		<contributor>
+			<name>Mike Williams</name>
+		</contributor>
+		<contributor>
+			<name>Mike Gallaher</name>
+		</contributor>
+		<contributor>
+
+			<name>Dierk Koenig</name>
+		</contributor>
+		<contributor>
+			<name>Daniel Gredler</name>
+		</contributor>
+		<contributor>
+			<name>Mike Bresnahan</name>
+
+		</contributor>
+		<contributor>
+			<name>Sergey Gorelkin</name>
+		</contributor>
+		<contributor>
+			<name>Chris Eldredge</name>
+		</contributor>
+		<contributor>
+
+			<name>Hans Donner</name>
+		</contributor>
+		<contributor>
+			<name>Michael Ottati</name>
+		</contributor>
+		<contributor>
+			<name>George Murnock</name>
+
+		</contributor>
+		<contributor>
+			<name>Kent Tong</name>
+		</contributor>
+		<contributor>
+			<name>Alfred Nathaniel</name>
+		</contributor>
+		<contributor>
+
+			<name>Bruce Faulkner</name>
+		</contributor>
+		<contributor>
+			<name>Ray Suliteanu</name>
+		</contributor>
+		<contributor>
+			<name>Denis N. Antonioli</name>
+
+		</contributor>
+		<contributor>
+			<name>Stefan Anzinger</name>
+		</contributor>
+		<contributor>
+			<name>Paul King</name>
+		</contributor>
+		<contributor>
+
+			<name>Vikram Shitole</name>
+		</contributor>
+		<contributor>
+			<name>Mark van Leeuwen</name>
+		</contributor>
+		<contributor>
+			<name>Brad Murray</name>
+
+		</contributor>
+		<contributor>
+			<name>Julien Henry</name>
+		</contributor>
+		<contributor>
+			<name>Andre Soereng</name>
+		</contributor>
+	</contributors>
+
+	<build>
+		<sourceDirectory>src/java</sourceDirectory>		
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.2</version>
+
+		</dependency>
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>gsbase</groupId>
+
+			<artifactId>gsbase</artifactId>
+			<version>2.0.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>rhino</groupId>
+			<artifactId>js</artifactId>
+
+			<version>1.6R5</version>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xmlParserAPIs</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>nekohtml</groupId>
+
+			<artifactId>nekohtml</artifactId>
+			<version>0.9.5</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1</version>
+
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+
+			<groupId>jetty</groupId>
+			<artifactId>org.mortbay.jetty</artifactId>
+			<version>5.1.4</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<distributionManagement>
+
+		<site>
+			<id>htmlunit-website</id>
+			<name>HtmlUnit WebSite - Sourceforge</name>
+			<url>
+				scp://shell.sourceforge.net/home/groups/h/ht/htmlunit/htdocs/
+			</url>
+		</site>
+		<repository>
+
+			<id>htmlunit-m2-repo</id>
+			<url>
+				scpexe://shell.sourceforge.net/home/groups/h/ht/htmlunit/htdocs/m2-repo
+			</url>
+			<name>HtmlUnit Maven 2 Repository</name>
+		</repository>
+		<snapshotRepository>
+			<id>htmlunit-m2-repo-snapshots</id>
+
+			<url>
+				scpexe://shell.sourceforge.net/home/groups/h/ht/htmlunit/htdocs/m2-repo-snapshots
+			</url>
+			<name>HtmlUnit Maven 2 Snapshots Repository</name>
+		</snapshotRepository>
+	</distributionManagement>
+</project>
