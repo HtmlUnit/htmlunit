@@ -178,11 +178,6 @@ public class HTMLSelectElement extends FormField {
         else {
             beforeOption.insertBefore(htmlOption);
         }
-
-        // newly created HtmlOption needs to be associated to its js object
-        if (newOptionObject.getDomNodeOrNull() == null) {
-            newOptionObject.setDomNode( htmlOption );
-        }
     }
 
     /**

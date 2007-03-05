@@ -96,18 +96,36 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * may be the same window or it may be a freshly loaded one.
      */
     public Page setSelected( final boolean selected ) {
-        final HtmlSelect select = getEnclosingSelect();
-        if (select != null) {
-            return select.setSelectedAttribute(this, selected);
-        }
-        else {
-            // for instance from JS for an option created by document.createElement('option')
-            // and not yet added to a select
-            setSelectedInternal(selected);
+        if (selected == isSelected()) {
             return getPage();
         }
+        else {
+            final HtmlSelect select = getEnclosingSelect();
+            if (select != null) {
+                return select.setSelectedAttribute(this, selected);
+            }
+            else {
+                // for instance from JS for an option created by document.createElement('option')
+                // and not yet added to a select
+                setSelectedInternal(selected);
+                return getPage();
+            }
+        }
     }
-
+    
+    /**
+     * {@inheritDoc}
+     * @see DomNode#insertBefore(DomNode)
+     */
+    public void insertBefore(final DomNode newNode) throws IllegalStateException {
+        super.insertBefore(newNode);
+        if (newNode instanceof HtmlOption) {
+            final HtmlOption option = (HtmlOption) newNode;
+            if (option.isSelected()) {
+                getEnclosingSelect().setSelectedAttribute(option, true);
+            }
+        }
+    }
 
     /**
      * Gets the enclosing select of this option

@@ -226,12 +226,16 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public void replaceOption( final int index, final HtmlOption newOption ) {
 
         final ChildElementsIterator iterator = new ChildElementsIterator();
-        for(int i=0; iterator.hasNext(); i++) {
+        for (int i=0; iterator.hasNext(); i++) {
             final HtmlElement element = iterator.nextElement();
-            if(i == index) {
+            if (i == index) {
                 element.replace(newOption);
                 return;
             }
+        }
+
+        if (newOption.isSelected()) {
+            setSelectedAttribute(newOption, true);
         }
     }
 
@@ -244,6 +248,20 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         appendChild( newOption ) ;
     }
 
+    /**
+     * {@inheritDoc}
+     * @see DomNode#appendChild(DomNode)
+     */
+    public DomNode appendChild(final DomNode node) {
+        final DomNode response = super.appendChild(node);
+        if (node instanceof HtmlOption) {
+            final HtmlOption option = (HtmlOption) node;
+            if (option.isSelected()) {
+                setSelectedAttribute(option, true);
+            }
+        }
+        return response;
+    }
 
     /**
      *  Set the "selected" state of the specified option. If this "select" is
@@ -283,12 +301,11 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * may be the same window or it may be a freshly loaded one.
      */
     public Page setSelectedAttribute( final HtmlOption selectedOption, final boolean isSelected ) {
-        if (selectedOption.isSelected() == isSelected) {
-            // nothing to do
-            return getPage();
-        }
+        final boolean triggerHandler  = (selectedOption.isSelected() != isSelected);
 
-        if( isMultipleSelectEnabled() ) {
+        // caution the HtmlOption may have been created from js and therefore the select now need
+        // to "know" that it is selected 
+        if (isMultipleSelectEnabled()) {
             selectedOption.setSelectedInternal(isSelected);
         }
         else {
@@ -299,7 +316,13 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             }
         }
 
-        return getPage().executeOnChangeHandlerIfAppropriate(this);
+        if (triggerHandler) {
+            return getPage().executeOnChangeHandlerIfAppropriate(this);
+        }
+        else {
+            // nothing to do
+            return getPage();
+        }
     }
 
 

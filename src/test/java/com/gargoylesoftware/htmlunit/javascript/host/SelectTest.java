@@ -404,9 +404,7 @@ public class SelectTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "1", "true", "4", "Four", "value4", "true", "3", "false"
-        } );
+        final String[] expectedAlerts = { "1", "true", "4", "Four", "value4", "true", "3", "false" };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();

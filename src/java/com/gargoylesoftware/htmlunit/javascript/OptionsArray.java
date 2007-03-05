@@ -168,10 +168,7 @@ public class OptionsArray extends SimpleScriptable {
         }
         else {
             final Option option = (Option) newValue;
-            HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
-            if ( htmlOption == null ) {
-                htmlOption = new HtmlOption(htmlSelect_.getPage(), null);
-            }
+            final HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
             if ( index >= jsGet_length() ) {
                 // Add a new option at the end.
                 htmlSelect_.appendOption( htmlOption );
@@ -179,11 +176,6 @@ public class OptionsArray extends SimpleScriptable {
             else {
                 // Replace the indexed option.
                 htmlSelect_.replaceOption( index, htmlOption );
-            }
-
-            // newly created HtmlOption needs to be associated to its js object
-            if (option.getDomNodeOrNull() == null) {
-                option.setDomNode( htmlOption );
             }
         }
     }

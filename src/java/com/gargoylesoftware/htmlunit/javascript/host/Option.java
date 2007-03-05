@@ -37,8 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * The javascript object that represents an option.
@@ -51,9 +51,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
  */
 public class Option extends HTMLElement {
     private static final long serialVersionUID = 947015932373556314L;
-    private String text_;
-    private String value_;
-    private boolean selected_;
 
     /**
      * Create an instance.
@@ -69,24 +66,15 @@ public class Option extends HTMLElement {
      * @param newValue The value
      */
     public void jsConstructor( final String newText, final String newValue ) {
-        if ( newText != null && ! newText.equals( "undefined" ) ) {
-            text_ = newText;
-        }
-        if ( newValue != null && ! newValue.equals( "undefined" ) ) {
-            value_ = newValue;
-        }
-    }
+        final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final HtmlOption htmlOption = new HtmlOption(page, null);
+        setDomNode(htmlOption);
 
-     /**
-      * Set the DOM node that corresponds to this javascript object
-      * @param domNode The DOM node
-      */
-    public void setDomNode( final DomNode domNode ) {
-        super.setDomNode( domNode );
-        if ( value_ != null ) {
-            jsxSet_value( value_ );
-            jsxSet_text( text_ );
-            jsxSet_selected(selected_);
+        if (newText != null && ! newText.equals("undefined")) {
+            htmlOption.setLabelAttribute(newText);
+        }
+        if (newValue != null && ! newValue.equals("undefined")) {
+            htmlOption.setValueAttribute(newValue);
         }
     }
 
@@ -95,12 +83,7 @@ public class Option extends HTMLElement {
      * @return The value property
      */
     public String jsxGet_value() {
-        final HtmlOption htmlOption = getHtmlOption();
-        if (htmlOption == null) {
-            return value_;
-        }
-        
-        return ((HtmlOption)getHtmlElementOrDie()).getValueAttribute();
+        return getHtmlOption().getValueAttribute();
     }
 
     /**
@@ -108,13 +91,7 @@ public class Option extends HTMLElement {
      * @param newValue The value property
      */
     public void jsxSet_value( final String newValue ) {
-        final HtmlOption htmlOption = getHtmlOption();
-        if (htmlOption == null) {
-            value_ = newValue;
-        }
-        else {
-            htmlOption.setValueAttribute( newValue );
-        }
+        getHtmlOption().setValueAttribute( newValue );
     }
 
 
@@ -124,9 +101,6 @@ public class Option extends HTMLElement {
      */
     public String jsxGet_text() {
         final HtmlOption htmlOption = getHtmlOption();
-        if (htmlOption == null) {
-            return text_;
-        }
         if ( htmlOption.isAttributeDefined( "label" ) ) {
             return htmlOption.getLabelAttribute();
         }
@@ -141,14 +115,8 @@ public class Option extends HTMLElement {
      * Set the value of the "text" property
      * @param newText The text property
      */
-    public void jsxSet_text( final String newText ) {
-        final HtmlOption htmlOption = getHtmlOption();
-        if (htmlOption == null) {
-            text_ = newText;
-        }
-        else {
-            htmlOption.setLabelAttribute( newText );
-        }
+    public void jsxSet_text(final String newText) {
+        getHtmlOption().setLabelAttribute(newText);
     }
 
     /**
@@ -156,11 +124,7 @@ public class Option extends HTMLElement {
      * @return The text property
      */
     public boolean jsxGet_selected() {
-        final HtmlOption htmlOption = getHtmlOption();
-        if (htmlOption == null) {
-            return selected_;
-        }
-        return htmlOption.isSelected();
+        return getHtmlOption().isSelected();
     }
 
 
@@ -169,12 +133,6 @@ public class Option extends HTMLElement {
      * @param selected The new selected property
      */
     public void jsxSet_selected( final boolean selected ) {
-        final HtmlOption htmlOption = getHtmlOption();
-        if (htmlOption == null) {
-            selected_ = selected;
-        }
-        else {
-            htmlOption.setSelected( selected );
-        }
+        getHtmlOption().setSelected( selected );
     }
 }

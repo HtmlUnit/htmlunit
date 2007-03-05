@@ -146,4 +146,33 @@ public class OptionTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+    /**
+     * Regression test for 1672048 
+     * @throws Exception if the test fails
+     */
+    public void testSetAttribute() throws Exception {
+        final String content
+            = "<html><head><title>foo</title><script>"
+            + "function doTest() {\n"
+            + "  document.getElementById('option1').setAttribute('class', 'bla bla');" 
+            + "  var o = new Option('some text', 'some value');" 
+            + "  o.setAttribute('class', 'myClass');\n"
+            + "}</script></head><body onload='doTest()'>"
+            + "<form name='form1'>"
+            + "    <select name='select1'>"
+            + "        <option value='option1' id='option1' name='option1'>One</option>"
+            + "    </select>"
+            + "</form>"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {};
+
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }
