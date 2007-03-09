@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem">
+                Added facility method DomNode.getByXPath(xpathExpr).
+            </action>
             <action type="update" dev="mguillem" id="1672048">
                 JavaScript: Option.setAttribute now works even if option has not yet been added to a select.
             </action>

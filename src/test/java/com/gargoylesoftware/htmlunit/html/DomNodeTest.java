@@ -230,4 +230,33 @@ public class DomNodeTest extends WebTestCase {
 
         return -1;
     }
-}
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetByXPath() throws Exception {
+        final String htmlContent
+            = "<html><head><title>my title</title></head><body>"
+            + "<p id='p1'><ul><li>foo 1</li><li>foo 2</li></li></p>"
+            + "<div><span>bla</span></div>"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+
+        final List results = page.getByXPath("//title");
+        assertEquals(1, results.size());
+        final HtmlTitle title = (HtmlTitle) results.get(0);
+        assertEquals("my title", title.asText());
+
+        final HtmlHead head = (HtmlHead) title.getParentNode();
+        assertEquals(results, head.getByXPath("//title"));
+        assertEquals(results, head.getByXPath("/title"));
+        assertEquals(results, head.getByXPath("title"));
+
+        final HtmlParagraph p = (HtmlParagraph) page.getByXPath("//p").get(0);
+        assertEquals(p, page.getHtmlElementById("p1"));
+        final List lis = p.getByXPath("ul/li");
+        assertEquals(2, lis.size());
+        assertEquals(lis, page.getByXPath("//ul/li"));
+
+        assertEquals(2, ((Number) p.getByXPath("count(//li)").get(0)).intValue());
+    } }

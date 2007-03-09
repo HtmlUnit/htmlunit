@@ -44,15 +44,19 @@ import java.io.StringWriter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jaxen.JaxenException;
+import org.jaxen.Navigator;
 import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 
@@ -946,4 +950,21 @@ public abstract class DomNode implements Cloneable {
             it.remove();
         }
     }
+
+    /**
+     * Facility to evaluate an xpath from the current node. The current node is considered as the
+     * document root for the evaluation therefore parent nodes can't be reached.
+     * @param xpathExpr the xpath expression
+     * @return See {@link XPath#selectNodes(Object)}
+     * @throws JaxenException if the xpath expression can't be parsed/evaluated
+     */
+    public List getByXPath(final String xpathExpr) throws JaxenException {
+        if (xpathExpr == null) {
+            throw new NullPointerException("Null is not a valid xpath expression");
+        }
+
+        final Navigator navigator = HtmlUnitXPath.buildSubtreeNavigator(this);
+        final HtmlUnitXPath xpath = new HtmlUnitXPath(xpathExpr, navigator);
+        return xpath.selectNodes(this);
+    } 
 }
