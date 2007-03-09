@@ -1,0 +1,51 @@
+<!-- 
+This file is referenced from cruisecontrol's config.xml and contains the project definition.
+
+Available entities are:
+basedir
+hostname
+defaultmailhost
+-->
+
+
+<project name="htmlunit" buildafterfailed="false">
+		<modificationset quietperiod="120">
+			<svn localworkingcopy="&basedir;/htmlunit/cruisecontrol/checkout"/>
+		</modificationset>
+		<schedule>
+			<!-- buildfile is relative to checkout dir -->
+			<ant
+				buildfile="&basedir;/htmlunit/cruisecontrol/checkout/cruise/build.xml"
+				antWorkingDir="&basedir;/htmlunit/cruisecontrol/checkout"
+				usedebug="false"
+				uselogger="true"
+				>
+                            <property name="reporting-app-dir" value="&basedir;/htmlunit/&hostname;/htmlunit/"/>
+                        </ant>
+		</schedule>
+		<listeners>
+                    <currentbuildstatuslistener file="&basedir;/htmlunit/cruisecontrol/logs/status.txt"/>
+                </listeners>
+                <log dir="&basedir;/htmlunit/cruisecontrol/logs">
+			<!--merge dir="&basedir;/htmlunit/cruisecontrol/checkout/target/test-reports/"/-->
+		</log>
+		<publishers>
+			<!-- htmlemail is used only for explicit subscribers -->
+			<htmlemail
+				buildresultsurl="http://&hostname;/htmlunit/"
+				mailhost="&defaultmailhost;"
+				returnaddress="build-support@canoo.com"
+				spamwhilebroken="false"
+				skipusers="true"
+				logdir="&basedir;/htmlunit/cruisecontrol/logs"
+				xslfile="&basedir;/htmlunit/cruisecontrol/checkout/cruise/htmlmail.xsl"
+				>
+				<always address="mguillemot@yahoo.fr"/>
+			</htmlemail>
+			<XSLTLogPublisher
+				directory="&basedir;/htmlunit/&hostname;/htmlunit/"
+				outfilename="buildstatus.rss"
+				xsltfile="&basedir;/htmlunit/cruisecontrol/checkout/cruise/buildstatus.xsl"
+				/>
+		</publishers>
+</project>
