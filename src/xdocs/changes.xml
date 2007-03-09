@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem" id="1676667">
+                Form should not send push buttons on submit.
+            </action>
             <action type="update" dev="mguillem">
                 Added facility method DomNode.getByXPath(xpathExpr).
             </action>

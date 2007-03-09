@@ -1031,6 +1031,8 @@ public class HtmlFormTest extends WebTestCase {
             + "<input type='text' name='textField' value='foo'/>"
             + "<input type='text' name='nonAscii' value='Floßfahrt'/>"
             + "<input type='submit' name='button' value='foo'/>"
+            + "<input type='button' name='inputButton' value='foo'/>"
+            + "<button type='button' name='buttonButton' value='foo'/>"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent, null, url);
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
