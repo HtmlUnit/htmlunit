@@ -21,7 +21,7 @@ defaultmailhost
 				uselogger="true"
 				>
                             <property name="reporting-app-dir" value="&basedir;/htmlunit/&hostname;/htmlunit/"/>
-                        </ant>
+            </ant>
 		</schedule>
 		<listeners>
 	        <currentbuildstatuslistener file="&basedir;/htmlunit/cruisecontrol/logs/status.txt"/>
