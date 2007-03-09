@@ -1,14 +1,16 @@
 <?xml version="1.0"?>
 <!--
  This is a configuration file for the ant build tool
- http://jakarta.apache.org/ant/index.html
+ http://ant.apache.org
  $Revision$
+
 
  Authors:
     Mike Bowler
     David K. Taylor
     Brad Clarke
     Tony Graham
+    Marc Guillemot
 -->
 
 <project name="HtmlUnit" default="jar" basedir=".">
@@ -31,10 +33,6 @@
     http://maven.apache.org/faq.html#ibiblio-mirrors
 -->
 
-<!-- Default proxy properties defining that... no proxy is used -->
-<property name="proxy.host" value=""/>
-<property name="proxy.port" value="80"/>
-    
 <path id="base.class.path">
     <pathelement path="${base.classes.dir}"/>
 
@@ -164,11 +162,10 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
         description="Delete existing jars">
      <delete dir="${jars.dir}"/>
 </target>
-<target name="get-jars"
+
+	<target name="get-jars" depends="setProxy"
         description="Get all the required dependencies from a remote repository">
     
-    <setproxy proxyhost="${proxy.host}" proxyport="${proxy.port}"/>
-
     <!-- required -->
     <antcall target="get-dependency">
         <param name="type" value="required"/>
@@ -243,6 +240,10 @@ JUnit results available here: ${test.reports.dir}/junit/index.html
         <param name="jarName" value="org.mortbay.jetty-5.1.4.jar"/>
     </antcall>
 </target>
+
+	<target name="setProxy" if="proxy.host" description="configures the proxy if needed">
+	    <setproxy proxyhost="${proxy.host}" proxyport="${proxy.port}"/>
+	</target>
 
 	<target name="cruise" depends="get-jars,jar" description="Called by Cruise Control during a build">
 	</target>
