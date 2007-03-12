@@ -25,7 +25,6 @@
 <property name="target.dir" value ="ant-target"/>
 <property name="base.classes.dir" value ="${target.dir}/classes"/>
 <property name="test.classes.dir" value ="${target.dir}/test-classes"/>
-<property name="test.data.dir" location="${target.dir}/junit-data"/>
 <property name="test.reports.dir" location="${target.dir}/junit-reports"/>
 
 <property name="remote.repository" value="http://www.ibiblio.org/maven/"/>
@@ -114,8 +113,8 @@
 </target>
 
 <target name="junit" description="junit">
-    <delete dir="${test.data.dir}"/>
-    <mkdir dir="${test.data.dir}"/>
+    <delete dir="${test.reports.dir}"/>
+    <mkdir dir="${test.reports.dir}"/>
         
     <junit fork="true" forkmode="perBatch" dir="${basedir}"
             errorProperty="test.failed" failureProperty="test.failed">
@@ -123,7 +122,7 @@
         <formatter type="brief" usefile="false"/>
         <formatter type="xml"/>
 
-        <batchtest todir="${test.data.dir}">
+        <batchtest todir="${test.reports.dir}">
             <fileset dir="${test.classes.dir}">
                 <include name="**/*Test.class"/>
                 <exclude name="**/*$*.class"/>
@@ -133,16 +132,15 @@
     
     <delete dir="${test.reports.dir}"/> 
     <mkdir dir="${test.reports.dir}"/>
-    <junitreport todir="${test.data.dir}" tofile="DeleteMe.xml">
-        <fileset dir="${test.data.dir}">
+    <junitreport todir="${test.reports.dir}">
+        <fileset dir="${test.reports.dir}">
             <include name="TEST-*.xml"/>
         </fileset>
-        <report format="frames" todir="${test.reports.dir}/junit/"/>
+        <report format="frames" todir="${test.reports.dir}"/>
     </junitreport>
-    <delete file="${test.data.dir}/DeleteMe.xml" />    
     <echo>
 **********************
-JUnit results available here: ${test.reports.dir}/junit/index.html
+JUnit results available here: ${test.reports.dir}/index.html
 **********************
     </echo>
     <fail if="test.failed">Tests have failed!!</fail>
