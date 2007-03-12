@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem" id="1562872">
+                Renamed frame host class to avoid conflict when a frame has 'Frame' as name.
+            </action>
             <action type="update" dev="mguillem" id="1676667">
                 Form should not send push buttons on submit.
             </action>

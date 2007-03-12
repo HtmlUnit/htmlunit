@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for Window
+ * Tests for {@link HTMLFrameElement}.
  *
  * @version  $Revision$
  * @author Chris Erskine
@@ -58,12 +58,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Thomas Robbs
  * @author David K. Taylor
  */
-public class FrameTest extends WebTestCase {
+public class HTMLFrameElementTest extends WebTestCase {
     /**
      * Create an instance
      * @param name The name of the test
      */
-    public FrameTest( final String name ) {
+    public HTMLFrameElementTest( final String name ) {
         super(name);
     }
 

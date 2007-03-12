@@ -247,7 +247,7 @@
         <function name="select"/>
     </class>
 
-    <class name="Frame" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Frame"
+    <class name="HTMLFrameElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFrameElement"
         JSObject="true"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrame">
         <property name="onload" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
@@ -260,7 +260,7 @@
         <property name="contentWindow" readable="true" writable="false"/>
     </class>
 
-    <class name="FrameInline" extends="Frame" classname="com.gargoylesoftware.htmlunit.javascript.host.Frame"
+    <class name="FrameInline" extends="HTMLFrameElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFrameElement"
         JSObject="false"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineFrame">
     </class>
 

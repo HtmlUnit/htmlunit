@@ -108,9 +108,6 @@ public class IFrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDirectAccessPerName() throws Exception {
-    	if (notYetImplemented()) {
-    		return;
-    	}
         final String content
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"

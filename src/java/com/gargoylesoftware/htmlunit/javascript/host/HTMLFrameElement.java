@@ -49,13 +49,13 @@ import com.gargoylesoftware.htmlunit.html.BaseFrame;
  * @author Marc Guillemot
  * @author Chris Erskine
  */
-public class Frame extends HTMLElement {
+public class HTMLFrameElement extends HTMLElement {
     private static final long serialVersionUID = 3761121622400448304L;
 
     /**
      * Create an instance.  A default constructor is required for all javascript objects.
      */
-    public Frame() { }
+    public HTMLFrameElement() { }
 
 
     /**
