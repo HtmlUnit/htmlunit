@@ -65,7 +65,6 @@ import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
@@ -395,33 +394,7 @@ public class Window extends SimpleScriptable {
      * @throws IOException when location loading fails
      */
     public void jsxSet_location( final String newLocation ) throws IOException {
-        // url should be resolved from the page in which the js is executed
-        // cf test FrameTest#testLocation
-        final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
-
-        if (newLocation.startsWith("javascript:")) {
-            final String script = newLocation.substring(11);
-            page.executeJavaScriptIfPossible(script, "new location value", false, null);
-        }
-        else {
-            try {
-                final URL url = page.getFullyQualifiedUrl(newLocation);
-    
-                getLog().debug(
-                    "window.location=" + newLocation + " (" + url.toExternalForm()
-                            + "), for window named '" + webWindow_.getName() + "'");
-    
-                webWindow_.getWebClient().getPage(webWindow_, new WebRequestSettings(url));
-            }
-            catch( final MalformedURLException e ) {
-                getLog().error("jsxSet_location(\""+newLocation+"\") Got MalformedURLException", e);
-                throw e;
-            }
-            catch( final IOException e ) {
-                getLog().error("jsxSet_location(\""+newLocation+"\") Got IOException", e);
-                throw e;
-            }
-        }
+        location_.jsxSet_href(newLocation);
     }
 
 

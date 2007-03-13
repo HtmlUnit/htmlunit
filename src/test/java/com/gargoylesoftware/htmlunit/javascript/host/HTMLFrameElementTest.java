@@ -95,12 +95,18 @@ public class HTMLFrameElementTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+
     /**
      * Regression test for
      * http://sourceforge.net/tracker/index.php?func=detail&aid=1101525&group_id=47038&atid=448266
      * @throws Exception if the test fails
      */
     public void testLocation() throws Exception {
+        testLocation("Frame1.location = \"frame.html\"");
+        testLocation("Frame1.location.replace(\"frame.html\")");
+    }
+
+    private void testLocation(final String jsExpr) throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection =
             new MockWebConnection(webClient);
@@ -110,7 +116,7 @@ public class HTMLFrameElementTest extends WebTestCase {
 
         final String firstContent
             = "<html><head><title>first</title></head>"
-            + "<frameset cols='*' onload='Frame1.location = \"frame.html\"'>"
+            + "<frameset cols='*' onload='" + jsExpr + "'>"
             + "    <frame name='Frame1' src='subdir/frame.html'>"
             + "</frameset></html>";
         final String defaultContent

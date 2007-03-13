@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import com.gargoylesoftware.htmlunit.Page;
@@ -114,7 +115,7 @@ public class Location extends SimpleScriptable {
      * MSDN Documentation</a>
      */
     public void jsxFunction_assign( final String url ) throws IOException {
-        jsxFunction_replace( url );
+        jsxSet_href(url);
     }
 
     /**
@@ -137,15 +138,13 @@ public class Location extends SimpleScriptable {
 
     /**
      * Reloads the window using the specified URL.
-     * @param href The new URL to use to reload the window.
+     * @param url The new URL to use to reload the window.
      * @throws IOException When there is a problem loading the new page.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/replace.asp">
      * MSDN Documentation</a>
      */
-    public void jsxFunction_replace( final String href ) throws IOException {
-        final WebWindow webWindow = window_.getWebWindow();
-        final URL url = ((HtmlPage) webWindow.getEnclosedPage()).getFullyQualifiedUrl( href );
-        setUrl(url);
+    public void jsxFunction_replace(final String url) throws IOException {
+        jsxSet_href(url);
     }
 
     /**
@@ -166,13 +165,36 @@ public class Location extends SimpleScriptable {
 
     /**
      * Set the location URL to an entirely new value.
-     * @param href The new location URL.
+     * @param newLocation The new location URL.
      * @throws IOException If loading the specified location fails.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/href_3.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_href( final String href ) throws IOException {
-        window_.jsxSet_location(href);
+    public void jsxSet_href(final String newLocation) throws IOException {
+        // url should be resolved from the page in which the js is executed
+        // cf test FrameTest#testLocation
+        final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
+
+        if (newLocation.startsWith("javascript:")) {
+            final String script = newLocation.substring(11);
+            page.executeJavaScriptIfPossible(script, "new location value", false, null);
+        }
+        else {
+            try {
+                final URL url = page.getFullyQualifiedUrl(newLocation);
+
+                final WebWindow webWindow = getWindow().getWebWindow();
+                webWindow.getWebClient().getPage(webWindow, new WebRequestSettings(url));
+            }
+            catch( final MalformedURLException e ) {
+                getLog().error("jsxSet_location(\""+newLocation+"\") Got MalformedURLException", e);
+                throw e;
+            }
+            catch( final IOException e ) {
+                getLog().error("jsxSet_location(\""+newLocation+"\") Got IOException", e);
+                throw e;
+            }
+        }
     }
 
     /**
