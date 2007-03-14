@@ -39,9 +39,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.HTMLElement}.
+ * Tests for {@link HTMLElement}.
  *
  * @author yourgod
  * @author Chris Erskine
@@ -136,9 +136,7 @@ public class HTMLElementTest extends WebTestCase {
                 "</body>\n" +
                 "</html>\n" +
                 "";
-        final List expectedAlerts = Arrays.asList(new String[]{
-            "a", "a", "undefined", "null"
-        });
+        final String[] expectedAlerts = {"a", "a", "undefined", "null"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
@@ -165,7 +163,8 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='foo'>bla</div>\n"
             + "</body>\n"
             + "</html>";
-        final List expectedAlerts = Arrays.asList(new String[]{ "true", "true" });
+
+        final String[] expectedAlerts = { "true", "true" };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
@@ -200,11 +199,10 @@ public class HTMLElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("test", page.getTitleText());
-        final List expectedAlerts = Arrays.asList(new String[]{
-            "a", "b", "undefined", "foo"
-        });
+        final String[] expectedAlerts = {"a", "b", "undefined", "foo"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
      * @throws Exception on test failure
      */
@@ -245,7 +243,7 @@ public class HTMLElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("test", page.getTitleText());
-        final List expectedAlerts = Arrays.asList(new String[]{
+        final String[] expectedAlerts = {
             "expando=true",
             "firstChild=null",
             "lastChild=null",
@@ -259,10 +257,11 @@ public class HTMLElementTest extends WebTestCase {
             "previousSibling=null",
             "specified=true",
             "value=bleh",
-        });
+        };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
      * @throws Exception on test failure
      */
@@ -294,11 +293,10 @@ public class HTMLElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("test", page.getTitleText());
-        final List expectedAlerts = Arrays.asList(new String[]{
-            "left", "left", "right", "right"
-        });
+        final String[] expectedAlerts = {"left", "left", "right", "right"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
      * Test for getElementsByTagName
      * @throws Exception if the test fails
@@ -319,7 +317,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<tr id='r2'><td>3</td><td>4</td></tr>\n"
             + "</table>\n"
             + "</body></html>\n";
-        final List expectedAlerts = Arrays.asList(new String[]{ "all = 4", "row = 2" });
+        final String[] expectedAlerts = { "all = 4", "row = 2" };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -353,7 +351,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final List expectedAlerts = Arrays.asList(new String[]{ "first", "second", "third" });
+        final String[] expectedAlerts = { "first", "second", "third" };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -380,11 +378,10 @@ public class HTMLElementTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final List expectedAlerts = Arrays.asList(new String[]{
-            "the class is x"
-        });
+        final String[] expectedAlerts = {"the class is x"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
      * Test getting the class for the element
      * @throws Exception if the test fails
@@ -405,9 +402,7 @@ public class HTMLElementTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final List expectedAlerts = Arrays.asList(new String[]{
-            "the class is z"
-        });
+        final String[] expectedAlerts = {"the class is z"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -474,6 +469,7 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals("New cell value", elt.asText());
         assertEquals(1, page.getWebClient().getWebWindows().size());
     }
+
     /**
      * Test the use of innerHTML to set a new input
      * @throws Exception if the test fails
@@ -496,11 +492,12 @@ public class HTMLElementTest extends WebTestCase {
                 "</html>\n" +
                 "";
         final List collectedAlerts = new ArrayList();
-        final List expectedAlerts = Arrays.asList(new String[]{ "true" });
+        final String[] expectedAlerts = { "true" };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
      *
      * @throws Exception if the test fails
@@ -525,15 +522,16 @@ public class HTMLElementTest extends WebTestCase {
                 "</html>\n" +
                 "";
         final List collectedAlerts = new ArrayList();
-        final List expectedAlerts = Arrays.asList(new String[]{
+        final String[] expectedAlerts = {
             "Old = <b id=\"innerNode\">Old outerHTML</b>",
             "New = New cell value"
-        });
+        };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
      * Test the use of outerHTML to set new html code
      * @throws Exception if the test fails
@@ -558,11 +556,11 @@ public class HTMLElementTest extends WebTestCase {
                 "</body>\n" +
                 "</html>\n" +
                 "";
-        final List expectedAlerts = Arrays.asList(new String[]{
+        final String[] expectedAlerts = {
             "Old = <b id=\"innerNode\">Old outerHTML</b>",
             "New =  <b><i id=\"newElt\">New cell value</i></b>",
             "I"
-        });
+        };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
@@ -572,6 +570,7 @@ public class HTMLElementTest extends WebTestCase {
         final HtmlElement elt = page.getHtmlElementById("newElt");
         assertEquals("New cell value", elt.asText());
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -579,6 +578,7 @@ public class HTMLElementTest extends WebTestCase {
         testInsertAdjacentHTML("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
         testInsertAdjacentHTML("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
     }
+
     /**
      * @param beforeEnd data to insert
      * @param afterEnd data to insert
@@ -615,14 +615,13 @@ public class HTMLElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content,
                 collectedAlerts);
-        final List expectedAlerts = Arrays.asList(new String[]{
-            "outside", "1", "middle", "2", "3", "4"
-        });
+        final String[] expectedAlerts = {"outside", "1", "middle", "2", "3", "4"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
         final HtmlElement elt = page.getHtmlElementById("outside");
         assertEquals("before begin after begin inside before end after end", elt.asText());
     }
+
     /**
      * Test the <tt>#default#clientCaps</tt> default IE behavior.
      *
@@ -646,11 +645,11 @@ public class HTMLElementTest extends WebTestCase {
                 "</head>\n" +
                 "<body onload='doTest()'>Test</body>\n" +
                 "</html>";
-        final List expectedAlerts = Arrays.asList(new String[]{
+        final String[] expectedAlerts = {
             "body.cpuClass = undefined",
             "body.cpuClass = " + BrowserVersion.getDefault().getCpuClass(),
             "body.cpuClass = undefined"
-        });
+        };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -707,16 +706,17 @@ public class HTMLElementTest extends WebTestCase {
         webConnection.setResponse(content2Url, content2);
         client.setWebConnection( webConnection );
         final HtmlPage page = (HtmlPage) client.getPage(content1Url);
-        final List expectedAlerts = Arrays.asList(new String[]{
+        final String[] expectedAlerts = {
             "isHomePage = false",
             "isHomePage = true",
             "isHomePage = true",
             "isHomePage = false"
-        });
+        };
         assertEquals(expectedAlerts, collectedAlerts);
         assertEquals(content2Url.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
     }
-   /**
+
+    /**
     * Test the <tt>#default#download</tt> default IE behavior.
     *
     * @throws Exception if the test fails
@@ -762,11 +762,11 @@ public class HTMLElementTest extends WebTestCase {
         client.setWebConnection( webConnection );
         client.getPage(content1Url);
 
-        final List expectedAlerts = Arrays.asList(new String[]{ "Refused", "foo" });
+        final String[] expectedAlerts = { "Refused", "foo" };
         final int waitTime = 50;
         final int maxTime = 1000;
         for( int time = 0; time < maxTime; time += waitTime ) {
-            if( expectedAlerts.size() <= collectedAlerts.size() ) {
+            if (expectedAlerts.length <= collectedAlerts.size()) {
                 assertEquals(expectedAlerts, collectedAlerts);
                 return;
             }
@@ -799,13 +799,14 @@ public class HTMLElementTest extends WebTestCase {
                 "</html>";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final List expectedAlerts = Arrays.asList(new String[]{
+        final String[] expectedAlerts = {
             "body.isHomePage = undefined",
             "body.isHomePage = false",
             "body.isHomePage = undefined"
-        });
+        };
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -830,89 +831,103 @@ public class HTMLElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
         final List collectedAlerts = new ArrayList();
-        final List expectedAlerts = Arrays.asList(new String[]{ "BR", "DIV", "2", "3" });
+        final String[] expectedAlerts = { "BR", "DIV", "2", "3" };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
      * @throws Exception if the test fails
      */
     public void testSetOnclick() throws Exception {
         eventHandlerSetterGetterTest("onclick");
     }
+
     /**
      * @throws Exception if the test fails
      */
     public void testSetOndblclick() throws Exception {
         eventHandlerSetterGetterTest("ondblclick");
     }
+
     /**
      * @throws Exception if the test fails
      */
     public void testSetOnblur() throws Exception {
         eventHandlerSetterGetterTest("onblur");
     }
+
     /**
      * @throws Exception if the test fails
      */
     public void testSetOnfocus() throws Exception {
         eventHandlerSetterGetterTest("onfocus");
     }
+
     /**
      * @throws Exception if the test fails
      */
     public void testSetOnkeydown() throws Exception {
         eventHandlerSetterGetterTest("onkeydown");
     }
+
     /**
      * @throws Exception if the test fails
      */
     public void testSetOnkeypress() throws Exception {
         eventHandlerSetterGetterTest("onkeypress");
     }
+
     /**
      * @throws Exception if the test fails
      */
     public void testSetOnkeyup() throws Exception {
         eventHandlerSetterGetterTest("onkeyup");
     }
+
     /**
      * @throws Exception if the test fails
      */
     public void testSetOnmousedown() throws Exception {
         eventHandlerSetterGetterTest("onmousedown");
     }
+
     /**
      * @throws Exception if the test fails
      */
     public void testSetOnmouseup() throws Exception {
         eventHandlerSetterGetterTest("onmouseup");
     }
+
     /**
      * @throws Exception if the test fails
      */
     public void testSetOnmouseover() throws Exception {
         eventHandlerSetterGetterTest("onmouseover");
     }
+
     /**
      * @throws Exception if the test fails
      */
     public void testSetOnmouseout() throws Exception {
         eventHandlerSetterGetterTest("onmouseout");
     }
+
     /**
      * @throws Exception if the test fails
      */
     public void testSetOnmousemove() throws Exception {
         eventHandlerSetterGetterTest("onmousemove");
     }
+
     /**
      * @throws Exception if the test fails
      */
     public void testSetOnresize() throws Exception {
         eventHandlerSetterGetterTest("onresize");
     }
+
     /**
      * @param eventName The name of the event
      * @throws Exception if the test fails
@@ -939,7 +954,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
         final List collectedAlerts = new ArrayList();
-        final List expectedAlerts = Arrays.asList(new String[]{ "success" });
+        final String[] expectedAlerts = { "success" };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlElement div = page.getHtmlElementById("myDiv");
@@ -948,8 +963,8 @@ public class HTMLElementTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
-     *
      * @throws Exception if the test fails
      */
     public void testGetSetInnerTextSimple() throws Exception {
@@ -970,15 +985,13 @@ public class HTMLElementTest extends WebTestCase {
                 "</body>\n" +
                 "</html>\n" +
                 "";
-        final List expectedAlerts = Arrays.asList(new String[]{
-            "Old = Old \r\ninnerText",
-            "New = New cell value"
-        });
+        final String[] expectedAlerts = {"Old = Old \r\ninnerText", "New = New cell value"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
      *
      * @throws Exception if the test fails
@@ -993,7 +1006,7 @@ public class HTMLElementTest extends WebTestCase {
             + "  <a onClick='javascript:test();' href='#' name='hash'>Click</a>"
             + "</body>"
             + "</html>";
-        final List expectedAlerts = Arrays.asList(new String[]{"test hash"});
+        final String[] expectedAlerts = {"test hash"};
         // first use direct load
         final List loadCollectedAlerts = new ArrayList();
         final HtmlPage loadPage = loadPage(content, loadCollectedAlerts);
@@ -1015,6 +1028,7 @@ public class HTMLElementTest extends WebTestCase {
 
         assertEquals(expectedAlerts, clientCollectedAlertsHandler.getCollectedAlerts());
     }
+
     /**
      * Test the removal of attributes from HTMLElements.
      *
@@ -1036,12 +1050,13 @@ public class HTMLElementTest extends WebTestCase {
                 "<body onload='doTest()'><div id='aDiv' name='removeMe'>" +
                "</div></body>\n" +
                 "</html>";
-        final List expectedAlerts = Arrays.asList(new String[]{"removeMe", "null"});
+        final String[] expectedAlerts = {"removeMe", "null"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
     /**
      * Test offsets (real values don't matter currently).
      *
@@ -1166,16 +1181,46 @@ public class HTMLElementTest extends WebTestCase {
             + "</div>\n"
             + "</body></html>";
 
-        final List expectedAlerts = Arrays.asList(new String[]{
+        final String[] expectedAlerts = {
             "element: span3 offsetParent: td2", "element: td2 offsetParent: table2",
             "element: tr2 offsetParent: table2", "element: table2 offsetParent: td1",
             "element: td1 offsetParent: table1", "element: tr1 offsetParent: table1",
             "element: table1 offsetParent: body1", "element: span2 offsetParent: body1",
             "element: span1 offsetParent: body1", "element: div1 offsetParent: body1",
-            "element: body1 offsetParent: null"});
+            "element: body1 offsetParent: null"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testPrototype() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>Prototype test</title>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "    var d = document.getElementById('foo');"
+            + "    alert(d.foo);"
+            + "    alert(d.myFunction);"
+            + "    HTMLElement.prototype.foo = 123;"
+            + "    HTMLElement.prototype.myFunction = function() { return 'from myFunction'; };"
+            + "    alert(d.foo);"
+            + "    alert(d.myFunction());"
+            + "}"
+            + "</script></head><body onload='test()''>"
+            + "<div id='foo'>bla</div>"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"undefined", "undefined", "123", "from myFunction"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
