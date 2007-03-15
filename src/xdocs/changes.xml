@@ -6,7 +6,7 @@
     </properties>
 
     <body>
-        <release version="1.11-prerelease">
+        <release version="1.11" date="Mar 15, 2007">
             <action type="update" dev="mguillem" id="1669097">
             	Respect non proxy hosts in redirects from a host using proxy.
             </action>

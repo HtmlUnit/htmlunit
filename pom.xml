@@ -8,7 +8,7 @@ The reference stays the maven 1 build.
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>htmlunit</artifactId>
 	<groupId>net.sourceforge.htmlunit</groupId>
-	<version>1.11-SNAPSHOT</version>
+	<version>1.11</version>
 	<name>HtmlUnit</name>
 	<organization>
 
