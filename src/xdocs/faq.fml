@@ -106,9 +106,9 @@ INFO: Redirect requested but followRedirects is disabled
 			</answer>
 		</faq>
 
-		<faq id="CVSRights">
+		<faq id="SVNRights">
 			<question>
-				How do I get commit rights for the CVS repository?
+				How do I get commit rights for the SVN repository?
 			</question>
 			<answer>
 				<p>
