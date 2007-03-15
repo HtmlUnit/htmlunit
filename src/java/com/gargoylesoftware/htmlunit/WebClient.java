@@ -1405,9 +1405,9 @@ public class WebClient {
         getLog().debug("Load response for " + url.toExternalForm());
 
         // If the request settings don't specify a custom proxy, use the default client proxy...
-        if( webRequestSettings.getProxyHost() == null ) {
+        if (webRequestSettings.getProxyHost() == null) {
             // ...unless the host needs to bypass the configured client proxy!
-            if( ! shouldBypassProxy( webRequestSettings.getURL().getHost() ) ) {
+            if (!shouldBypassProxy(webRequestSettings.getURL().getHost())) {
                 webRequestSettings.setProxyHost( proxyHost_ );
                 webRequestSettings.setProxyPort( proxyPort_ );
             }
@@ -1456,12 +1456,12 @@ public class WebClient {
             else if ((statusCode == 301 || statusCode == 307)
                 && method.equals(SubmitMethod.GET) ) {
 
-                final WebRequestSettings wrs = new WebRequestSettings(webRequestSettings, newUrl);
+                final WebRequestSettings wrs = new WebRequestSettings(newUrl);
                 wrs.setRequestParameters(parameters);
                 return loadWebResponse(wrs);
             }
             else if (statusCode <= 303) {
-                final WebRequestSettings wrs = new WebRequestSettings(webRequestSettings, newUrl);
+                final WebRequestSettings wrs = new WebRequestSettings(newUrl);
                 wrs.setSubmitMethod(SubmitMethod.GET);
                 return loadWebResponse(wrs);
             }

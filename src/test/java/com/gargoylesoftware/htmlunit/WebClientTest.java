@@ -1136,6 +1136,43 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
+     * Regression test for 
+     * https://sourceforge.net/tracker/index.php?func=detail&aid=1669097&group_id=47038&atid=448266
+     * @throws Exception If the test fails.
+     */
+    public void testProxyConfigWithRedirect() throws Exception {
+
+        final String defaultProxyHost = "defaultProxyHost";
+        final int defaultProxyPort = 777;
+        final String html = "<html><head><title>Hello World</title></head><body></body></html>";
+        final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0,
+                defaultProxyHost, defaultProxyPort);
+
+        webClient.addHostsToProxyBypass("hostToByPass");
+        
+        final String location2 = "http://hostToByPass/foo.html";
+        final List headers = Collections.singletonList(new KeyValuePair("Location", location2));
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webConnection.setResponse(URL_FIRST, html, 302, "Some error", "text/html", headers);
+        webConnection.setResponse(new URL(location2), "<html><head><title>2nd page</title></head></html>");
+        webClient.setWebConnection(webConnection);
+
+        final Page page2 = webClient.getPage(URL_FIRST);
+        webClient.getPage(URL_FIRST);
+        assertEquals(null, webConnection.getLastWebRequestSettings().getProxyHost() );
+        assertEquals(0, webConnection.getLastWebRequestSettings().getProxyPort() );
+        assertEquals(location2, page2.getWebResponse().getUrl());
+
+        // Make sure default proxy settings are used.
+        webClient.setThrowExceptionOnFailingStatusCode(false);
+        webClient.setRedirectEnabled(false);
+        final Page page1 = webClient.getPage(URL_FIRST);
+        assertEquals(defaultProxyHost, webConnection.getLastWebRequestSettings().getProxyHost() );
+        assertEquals(defaultProxyPort, webConnection.getLastWebRequestSettings().getProxyPort() );
+        assertEquals(URL_FIRST, page1.getWebResponse().getUrl());
+    }
+
+    /**
      * @throws Exception If the test fails.
      */
     public void testProxyConfigForJS() throws Exception {

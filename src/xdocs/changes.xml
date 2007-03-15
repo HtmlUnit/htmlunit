@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.11-prerelease">
+            <action type="update" dev="mguillem" id="1669097">
+            	Respect non proxy hosts in redirects from a host using proxy.
+            </action>
             <action type="update" dev="mguillem">
             	JavaScript: resolve relative locations from the originating page for Location's href, replace and assign.
             </action>
