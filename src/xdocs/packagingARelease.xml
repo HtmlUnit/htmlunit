@@ -58,6 +58,9 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                         Update the version number and release date in src/xdocs/index.xml
                     </li>
                     <li>
+                        Update the version number and release date in src/xdocs/changes.xml
+                    </li>
+                    <li>
                         Build the zip
                         <source>maven clean htmlunit:build-bin-dist htmlunit:build-src-dist</source>
                     </li>
