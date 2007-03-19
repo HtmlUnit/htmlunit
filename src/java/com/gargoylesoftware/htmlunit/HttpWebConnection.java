@@ -223,7 +223,7 @@ public class HttpWebConnection extends WebConnectionImpl {
                 postMethod.setQueryString(queryString);
             }
             if (webRequestSettings.getRequestBody() != null ) {
-                postMethod.setRequestEntity( new StringRequestEntity(webRequestSettings.getRequestBody()) );
+                postMethod.setRequestEntity( new StringRequestEntity(webRequestSettings.getRequestBody(), null, webRequestSettings.getCharset()) );
             }
 
             // Note that this has to be done in two loops otherwise it won't

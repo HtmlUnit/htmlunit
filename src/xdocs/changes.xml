@@ -6,6 +6,11 @@
     </properties>
 
     <body>
+        <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1681779">
+            	JavaScript: XMLHttpRequest now encodes post body in UTF-8.
+            </action>
+        </release>
         <release version="1.11" date="Mar 15, 2007">
             <action type="update" dev="mguillem" id="1669097">
             	Respect non proxy hosts in redirects from a host using proxy.

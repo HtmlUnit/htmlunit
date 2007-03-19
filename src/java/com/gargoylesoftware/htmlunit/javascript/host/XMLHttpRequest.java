@@ -358,6 +358,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 if (body.length() > 0) {
                     getLog().debug("Setting request body to: " + body);
                     requestSettings_.setRequestBody(body);
+                    requestSettings_.setCharset("UTF-8");
                 }
             }
             final WebResponse webResponse = wc.loadWebResponse(requestSettings_);
