@@ -1038,6 +1038,8 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * Test that prototype changes are made in the right scope.
      * Problem reported by Bruce Faulnker in the dev mailing list.
+     * This is due to a Rhino bug:
+     * https://bugzilla.mozilla.org/show_bug.cgi?id=374918
      * @throws Exception If something goes wrong.
      */
     public void testPrototypeScope() throws Exception {
