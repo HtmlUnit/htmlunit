@@ -128,13 +128,16 @@ public class Window extends SimpleScriptable {
      * The javascript function "alert()"
      * @param message The message
      */
-    public void jsxFunction_alert( final String message ) {
+    public void jsxFunction_alert(final Object message) {
+        // use Object as parameter and perform String conversion by ourself
+        // this allows to place breakpoint here and "see" the message object and its properties
+        final String stringMessage = Context.toString(message);
         final AlertHandler handler = getWebWindow().getWebClient().getAlertHandler();
-        if( handler == null ) {
-            getLog().warn("window.alert(\""+message+"\") no alert handler installed");
+        if (handler == null) {
+            getLog().warn("window.alert(\"" + stringMessage + "\") no alert handler installed");
         }
         else {
-            handler.handleAlert(document_.getHtmlPage(), message);
+            handler.handleAlert(document_.getHtmlPage(), stringMessage);
         }
     }
 
