@@ -102,9 +102,7 @@ public class AnchorTest extends WebTestCase {
         
         anchor.click();
         
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "testsite1.html", "testsite1.html", "testsite2.html", "testsite2.html", "13", "testanchor"
-        } );
+        final String[] expectedAlerts = { "http://x/testsite1.html", "testsite1.html", "http://x/testsite2.html", "testsite2.html", "13", "testanchor"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -185,5 +183,109 @@ public class AnchorTest extends WebTestCase {
         final Page page2 = page1.getAnchorByHref("#").click();
 
         assertEquals("http://www.gargoylesoftware.com/foo.html",  page2.getWebResponse().getUrl());
+    }
+
+    public void testReadWriteAnchorTarget() throws Exception {
+        final String content 
+            = "<html>"
+            + "<body onload=\"document.links[0].target += 'K';\">"
+            + "<a href='#' target='O'>link 1</a>"
+            + "</body></html>";
+        final HtmlPage page1 = loadPage(content);
+        final HtmlAnchor link = (HtmlAnchor)page1.getAnchors().get(0);
+        assertEquals("OK", link.getTargetAttribute());
+    }
+    
+    public void testReadWriteAnchorSearch() throws Exception {
+        final String content 
+            = "<html>"
+            + "<body onload=\"document.links[0].search += '&p2=2';\">"
+            + "<a href='foo.html?p1=1' target='O'>link 1</a>"
+            + "</body></html>";
+        final HtmlPage page1 = loadPage(content);
+        final HtmlAnchor link = (HtmlAnchor)page1.getAnchors().get(0);
+        assertEquals("http://www.gargoylesoftware.com/foo.html?p1=1&p2=2", link.getHrefAttribute());
+    }
+
+    public void testReadWriteAnchorHash() throws Exception {
+        final String content 
+            = "<html>"
+            + "<body onload=\"document.links[0].hash += 'K';\">"
+            + "<a href='foo.html#O'>link 1</a>"
+            + "</body></html>";
+        final HtmlPage page1 = loadPage(content);
+        final HtmlAnchor link = (HtmlAnchor)page1.getAnchors().get(0);
+        assertEquals("http://www.gargoylesoftware.com/foo.html#OK", link.getHrefAttribute());
+    }
+
+    public void testReadWriteAnchorPort() throws Exception {
+        final String content 
+            = "<html>"
+            + "<body onload=\"document.links[0].port += '80';"
+            + "    document.links[1].port += '80'; \">"
+            + "<a href='foo.html#O'>link 1</a>"
+            + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 1</a>"
+            + "</body></html>";
+        final HtmlPage page1 = loadPage(content);
+        HtmlAnchor link = (HtmlAnchor) page1.getAnchors().get(0);
+        assertEquals("http://www.gargoylesoftware.com:80/foo.html#O", link.getHrefAttribute());
+        link = (HtmlAnchor) page1.getAnchors().get(1);
+        assertEquals("http://www.gargoylesoftware.com:8080/foo.html#O", link.getHrefAttribute());
+    }
+
+    public void testReadWritePathname() throws Exception {
+        final String content 
+            = "<html>"
+            + "<body onload=\"document.links[0].pathname = '/bar' + document.links[0].pathname;\">"
+            + "<a href='foo.html#B'>link 1</a>"
+            + "</body></html>";
+        final HtmlPage page1 = loadPage(content);
+        final HtmlAnchor link = (HtmlAnchor) page1.getAnchors().get(0);
+        assertEquals("http://www.gargoylesoftware.com/bar/foo.html#B", link.getHrefAttribute());
+    }
+
+    public void testReadWriteProtocol() throws Exception {
+        final String content 
+            = "<html>"
+            + "<body onload=\"document.links[0].protocol = document.links[0].protocol.substring(0,4) + 's:';\">"
+            + "<a href='foo.html#B'>link 1</a>"
+            + "</body></html>";
+        final HtmlPage page1 = loadPage(content);
+        final HtmlAnchor link = (HtmlAnchor)page1.getAnchors().get(0);
+        assertEquals("https://www.gargoylesoftware.com/foo.html#B", link.getHrefAttribute());
+    }
+
+    public void testReadWriteAnchorHost() throws Exception {
+        final String content 
+            = "<html>"
+            + "<body onload=\"document.links[0].host += 'motion:8080';" 
+            +    " document.links[1].host += 'motion';" 
+            +    " document.links[2].host += '80';" 
+            +    " document.links[3].host = 'www.gargoylesoftware.com'; \">"
+            + "<a href='foo.html#O'>link 0</a>"
+            + "<a href='foo.html#O'>link 1</a>"
+            + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 2</a>"
+            + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 3</a>"
+            + "</body></html>";
+        final HtmlPage page1 = loadPage(content);
+        HtmlAnchor link = (HtmlAnchor)page1.getAnchors().get(0);
+        assertEquals("http://www.gargoylesoftware.commotion:8080/foo.html#O", link.getHrefAttribute());
+        link = (HtmlAnchor) page1.getAnchors().get(1);
+        assertEquals("http://www.gargoylesoftware.commotion/foo.html#O", link.getHrefAttribute());
+        link = (HtmlAnchor) page1.getAnchors().get(2);
+        assertEquals("http://www.gargoylesoftware.com:8080/foo.html#O", link.getHrefAttribute());
+        link = (HtmlAnchor) page1.getAnchors().get(3);
+        assertEquals("http://www.gargoylesoftware.com/foo.html#O", link.getHrefAttribute());
+    }
+
+    public void testReadWriteAnchorHostname() throws Exception {
+        final String content 
+            = "<html>"
+            + "<body onload=\"document.links[0].hostname += 'motion';\">"
+            + "<a href='foo.html#O'>link 1</a>"
+            + "</body></html>";
+        final HtmlPage page1 = loadPage(content);
+        final HtmlAnchor link = (HtmlAnchor) page1.getAnchors().get(0);
+        assertEquals("http://www.gargoylesoftware.commotion/foo.html#O", link.getHrefAttribute());
     }
 }

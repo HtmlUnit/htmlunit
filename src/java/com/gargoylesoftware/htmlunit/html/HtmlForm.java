@@ -184,7 +184,7 @@ public class HtmlForm extends ClickableElement {
 
         String actionUrl = getActionAttribute();
         if (SubmitMethod.GET.equals(method)) {
-            // discard anchor (not fully correct, but quick fix)
+            final String anchor = StringUtils.substringAfter(actionUrl, "#");
             actionUrl = StringUtils.substringBefore(actionUrl, "#");
 
             final NameValuePair[] pairs = new NameValuePair[parameters.size()];
@@ -192,6 +192,9 @@ public class HtmlForm extends ClickableElement {
             final String queryFromFields = EncodingUtil.formUrlEncode(pairs, getPage().getPageEncoding());
             // action may already contain some query parameters: they have to be removed
             actionUrl = StringUtils.substringBefore(actionUrl, "?") + "?" + queryFromFields;
+            if (anchor.length() > 0) {
+                actionUrl += "#" + anchor;
+            }
             parameters.clear(); // parameters have been added to query
         }
         final URL url;

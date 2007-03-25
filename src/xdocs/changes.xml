@@ -7,6 +7,12 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1686412" due-to="Bruce Chapman">
+            	JavaScript: added support for following properties on HtmlAnchor: hash, host, hostname, pathname, port, protocol, search and target.
+            </action>
+            <action type="update" dev="mguillem">
+            	Handle correctly anchors (alias reference) in urls after form submission.
+            </action>
             <action type="update" dev="mguillem" id="1681779">
             	JavaScript: XMLHttpRequest now encodes post body in UTF-8.
             </action>

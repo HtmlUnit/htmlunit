@@ -990,25 +990,12 @@ public class HtmlFormTest extends WebTestCase {
         testUrlAfterSubmit("post", "?a=1&b=2", "?a=1&b=2");
         testUrlAfterSubmit(new URL("http://first?a=1&b=2"), "post", "", "");
 
-        // test with anchor: the expected values are not correct as the anchors are discarded
-        // but in a first time, as long as htmlunit doesn't handle them correctly...
-        // then, these test should be removed and testUrlAfterSubmitWithAnchor should be activated
-        testUrlAfterSubmit("get", "foo#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
-        testUrlAfterSubmit("get", "foo?foo=12#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
-        testUrlAfterSubmit("post", "foo#anchor", "foo");
-        testUrlAfterSubmit("post", "foo?foo=12#anchor", "foo?foo=12");
     }
 
     /**
-     * Test doesn't work now because we don't handle anchors as we should for instance in
-     * {@link WebClient#expandUrl}.
      * @throws Exception if the test fails
      */
-    public void testUrlAfterSubmitWithAnchor()
-        throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
+    public void testUrlAfterSubmitWithAnchor() throws Exception {
         testUrlAfterSubmit("get", "foo#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
         testUrlAfterSubmit("get", "foo?foo=12#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
         testUrlAfterSubmit("post", "foo#anchor", "foo#anchor");

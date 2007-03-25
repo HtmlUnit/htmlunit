@@ -1213,7 +1213,7 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testExpandUrl() throws Exception {
-        assertEquals("http://first", WebClient.expandUrl(URL_FIRST, "#second"));
+        assertEquals("http://first#second", WebClient.expandUrl(URL_FIRST, "#second"));
         assertEquals("http://first?a=1&b=2", WebClient.expandUrl(new URL("http://first?a=1&b=2"), ""));
         assertEquals("http://first?b=2&c=3", WebClient.expandUrl(new URL("http://first?a=1&b=2"), "?b=2&c=3"));
         assertEquals("file:/home/myself/test.js",
@@ -1226,7 +1226,7 @@ public class WebClientTest extends WebTestCase {
     public void testExpandUrlWithFile() throws Exception {
         final String urlString = "http://host/page.html";
         final URL url = new URL(urlString);
-        assertEquals(urlString, WebClient.expandUrl(url, "#second"));
+        assertEquals(urlString + "#second", WebClient.expandUrl(url, "#second"));
     }
 
 

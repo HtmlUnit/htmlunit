@@ -194,6 +194,9 @@
         <contributor>
         	<name>Karel Kolman</name>
         </contributor>
+        <contributor>
+        	<name>Bruce Chapman</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

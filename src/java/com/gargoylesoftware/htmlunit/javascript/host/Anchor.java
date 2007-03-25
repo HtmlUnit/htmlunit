@@ -39,10 +39,13 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.net.MalformedURLException;
 
+import org.apache.commons.lang.StringUtils;
 import org.mozilla.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
+import java.net.URL;
 
 
 /**
@@ -78,15 +81,247 @@ public class Anchor extends FocusableHostElement {
      * @param href href attribute value.
      */
     public void jsxSet_href( final String href ) {
-        getHtmlElementOrDie().setAttributeValue( "href", href );
+        getHtmlElementOrDie().setAttributeValue("href", href);
     }
 
     /**
-     * Return the value of the href property.
+     * Return the value of the href property of this link.
      * @return The href property.
      */
-    public String jsxGet_href() {
-        return getHtmlElementOrDie().getAttributeValue( "href" );
+    public String jsxGet_href() throws Exception {
+        return getUrl().toString();
+    }
+    
+    /**
+     * set the target property of this link.
+     * @param target target attribute value.
+     */
+    public void jsxSet_target(final String target) {
+        getHtmlElementOrDie().setAttributeValue("target", target);
+    }
+
+    /**
+     * Return the value of the target property of this link.
+     * @return The href property.
+     */
+    public String jsxGet_target() {
+        return getHtmlElementOrDie().getAttributeValue( "target" );
+    }
+    
+    /**
+     * Returns this link's current URL.
+     */
+    private URL getUrl() throws Exception {
+        final HtmlAnchor anchor = (HtmlAnchor) getHtmlElementOrDie(); 
+        return anchor.getPage().getFullyQualifiedUrl(anchor.getHrefAttribute());
+    }
+    
+    /**
+     * sets the href attribute of this link to the specified URL.
+     */
+    private void setUrl(final URL url) {
+        getHtmlElementOrDie().setAttributeValue("href", url.toString());
+    }
+    
+    /**
+     * Returns the search portion of the link's URL (the portion starting with 
+     * '?' and up to but not including any '#').
+     * @return The search portion of the link's URL.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/search.asp">
+     * MSDN Documentation</a>
+     */
+    public String jsxGet_search() throws Exception {
+        final String query = getUrl().getQuery();
+        if (query == null) {
+            return "";
+        }
+        else {
+            return "?" + query;
+        }
+    }
+
+    /**
+     * Sets the search portion of the link's URL (the portion starting with '?' 
+     * and up to but not including any '#')..
+     * @param search The new search portion of the link's URL.
+     * @throws Exception If an error occurs.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/search.asp">
+     * MSDN Documentation</a>
+     */
+    public void jsxSet_search(final String search) throws Exception {
+        final String query;
+        if (search == null || "?".equals(search) || "".equals(search)) {
+            query = null;
+        }
+        else if (search.charAt(0) == '?') {
+            query = search.substring(1);
+        }
+        else {
+            query = search;
+        }
+
+        setUrl(UrlUtils.getUrlWithNewQuery(getUrl(), query));
+    }
+    
+    /**
+     * Returns the hash portion of the link's URL (the portion following the '#').
+     * @return The hash portion of the link's URL.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hash.asp">
+     * MSDN Documentation</a>
+     */
+    public String jsxGet_hash() throws Exception {
+        final String hash = getUrl().getRef();
+        if (hash == null) {
+            return "";
+        }
+        else {
+            return hash;
+        }
+    }
+
+    /**
+     * Sets the hash portion of the link's URL (the portion following the '#').
+     * @param hash The new hash portion of the link's URL.
+     * @throws Exception If an error occurs.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hash.asp">
+     * MSDN Documentation</a>
+     */
+    public void jsxSet_hash( final String hash ) throws Exception {
+        setUrl( UrlUtils.getUrlWithNewRef( getUrl(), hash ) );
+    }
+
+    /**
+     * Returns the host portion of the link's URL (the '[hostname]:[port]' portion).
+     * @return The host portion of the link's URL.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
+     * MSDN Documentation</a>
+     */
+    public String jsxGet_host() throws Exception {
+        final URL url = getUrl();
+        final int port = url.getPort();
+        final String host = url.getHost();
+
+        if (port == -1) {
+            return host;
+        }
+        else {
+            return host + ":" + port;
+        }
+    }
+
+    /**
+     * Sets the host portion of the link's URL (the '[hostname]:[port]' portion).
+     * @param host The new host portion of the link's URL.
+     * @throws Exception If an error occurs.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
+     * MSDN Documentation</a>
+     */
+    public void jsxSet_host( final String host ) throws Exception {
+        final String hostname;
+        final int port;
+        final int index = host.indexOf(':');
+        if (index != -1) {
+            hostname = host.substring(0, index);
+            port = Integer.parseInt( host.substring(index+1) );
+        }
+        else {
+            hostname = host;
+            port = -1;
+        }
+        final URL url1 = UrlUtils.getUrlWithNewHost( getUrl(), hostname );
+        final URL url2 = UrlUtils.getUrlWithNewPort( url1, port );
+        setUrl( url2 );
+    }
+
+    /**
+     * Returns the hostname portion of the link's URL.
+     * @return The hostname portion of the link's URL.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
+     * MSDN Documentation</a>
+     */
+    public String jsxGet_hostname() throws Exception {
+        return getUrl().getHost();
+    }
+
+    /**
+     * Sets the hostname portion of the link's URL.
+     * @param hostname The new hostname portion of the link's URL.
+     * @throws Exception If an error occurs.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
+     * MSDN Documentation</a>
+     */
+    public void jsxSet_hostname( final String hostname ) throws Exception {
+        setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
+    }
+
+    /**
+     * Returns the pathname portion of the link's URL.
+     * @return The pathname portion of the link's URL.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/pathname.asp">
+     * MSDN Documentation</a>
+     */
+    public String jsxGet_pathname() throws Exception {
+        return getUrl().getPath();
+    }
+
+    /**
+     * Sets the pathname portion of the link's URL.
+     * @param pathname The new pathname portion of the link's URL.
+     * @throws Exception If an error occurs.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/pathname.asp">
+     * MSDN Documentation</a>
+     */
+    public void jsxSet_pathname( final String pathname ) throws Exception {
+        setUrl( UrlUtils.getUrlWithNewPath( getUrl(), pathname ) );
+    }
+
+    /**
+     * Returns the port portion of the link's URL.
+     * @return The port portion of the link's URL.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/port.asp">
+     * MSDN Documentation</a>
+     */
+    public String jsxGet_port() throws Exception {
+        final int port = getUrl().getPort();
+        if (port == -1) {
+            return "";
+        }
+        else {
+            return String.valueOf(port);
+        }
+    }
+
+    /**
+     * Sets the port portion of the link's URL.
+     * @param port The new port portion of the link's URL.
+     * @throws Exception If an error occurs.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/port.asp">
+     * MSDN Documentation</a>
+     */
+    public void jsxSet_port(final String port) throws Exception {
+        setUrl( UrlUtils.getUrlWithNewPort( getUrl(), Integer.parseInt( port ) ) );
+    }
+
+    /**
+     * Returns the protocol portion of the link's URL, including the trailing ':'.
+     * @return The protocol portion of the link's URL, including the trailing ':'.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/protocol.asp">
+     * MSDN Documentation</a>
+     */
+    public String jsxGet_protocol() throws Exception {
+        return getUrl().getProtocol() + ":";
+    }
+
+    /**
+     * Sets the protocol portion of the link's URL.
+     * @param protocol The new protocol portion of the link's URL.
+     * @throws Exception If an error occurs.
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/protocol.asp">
+     * MSDN Documentation</a>
+     */
+    public void jsxSet_protocol( final String protocol ) throws Exception {
+        final String bareProtocol = StringUtils.substringBefore(protocol, ":");
+        setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), bareProtocol));
     }
 
     /**

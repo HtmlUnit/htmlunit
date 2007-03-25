@@ -26,6 +26,14 @@
         <javascript min-version="1.2"/>
         
         <property name="href" readable="true" writable="true"/>
+        <property name="target" readable="true" writable="true"/>
+        <property name="search" readable="true" writable="true"/>
+        <property name="hash" readable="true" writable="true"/>
+        <property name="port" readable="true" writable="true"/>
+        <property name="pathname" readable="true" writable="true"/>
+        <property name="host" readable="true" writable="true"/>
+        <property name="hostname" readable="true" writable="true"/>
+        <property name="protocol" readable="true" writable="true"/>
         <property name="name" notImplemented="true" readable="true" writable="true">
         </property>
         <property name="tabindex" notImplemented="true" readable="true" writable="true">

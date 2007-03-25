@@ -1157,10 +1157,11 @@ public class WebClient {
 
         // section 2.4.1 - parsing fragment
         final int fragmentIndex = parseUrl.lastIndexOf("#");
-        if( fragmentIndex != -1 ) {
+        String reference = null;
+        if (fragmentIndex != -1) {
+            reference = StringUtils.substringAfterLast(parseUrl, "#");
             parseUrl = parseUrl.substring(0, fragmentIndex);
         }
-
 
         // section 2.4.4 - parsing query
         String stringQuery = null;
@@ -1239,6 +1240,9 @@ public class WebClient {
         }
         if (stringQuery != null) {
             buffer.append(stringQuery);
+        }
+        if (reference != null) {
+            buffer.append("#").append(reference);
         }
         final String newUrlString = buffer.toString();
         return makeUrl( newUrlString );
