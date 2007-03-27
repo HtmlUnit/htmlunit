@@ -499,6 +499,7 @@ public final class HTMLParser {
 
         /** @inheritDoc LexicalHandler#comment(char[],int,int) */
         public void comment(final char[] ch, final int start, final int length) {
+            handleCharacters();
             final DomComment comment = new DomComment(page_, String.valueOf(ch, start, length));
             currentNode_.appendChild(comment);
         }

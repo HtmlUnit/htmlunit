@@ -80,4 +80,16 @@ public class DomCommentTest extends WebTestCase {
         assertEquals(comment, node.asXml());
     }
 
+    
+     /**
+     * Test comment and character data sibling correctness
+     * @throws Exception if the test fails
+     */
+    public void testTextSibling() throws Exception {
+        final String content = "<html><body id='body'><!-- c1 -->text<!-- c2 --></body></html>";
+        final HtmlPage page = loadPage(content);
+        final DomNode node = page.getHtmlElementById("body").getFirstChild();
+
+        assertEquals(DomText.NODE_NAME, node.getNextSibling().getNodeName());
+    }
 }
