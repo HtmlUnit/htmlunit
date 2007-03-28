@@ -56,11 +56,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
 /**
- * Tests for Form
+ * Tests for {@link HTMLFormElement}.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  * @author Marc Guillemot
  * @author Chris Erskine
  */
@@ -1187,5 +1187,27 @@ public class FormTest extends WebTestCase {
         ((ClickableElement) page.getHtmlElementById("theButton")).click();
 
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * In action "this" should be the window and not the form
+     * @throws Exception if the test fails
+     */
+    public void testThisInJavascriptAction() throws Exception {
+        final String content
+            = "<html>"
+            + "<body>"
+            + "<form action='javascript:alert(this == window)'>"
+            + "<input type='submit' id='theButton'>"
+            + "</form>"
+            + "</body></html>";
+        
+        final List collectedAlerts = new ArrayList();
+        final String[] expectedAlerts = {"true"};
+        final HtmlPage page1 = loadPage(content, collectedAlerts);
+        final Page page2 = ((ClickableElement) page1.getHtmlElementById("theButton")).click();
+
+        assertEquals(expectedAlerts, collectedAlerts);
+        assertSame(page1, page2);
     }
 }

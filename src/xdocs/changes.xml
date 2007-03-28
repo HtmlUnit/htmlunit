@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1689798">
+            	JavaScript: "this" should be the window and not the current node in javascript href of link and area as well as in javascript action of forms.
+            </action>
             <action type="update" dev="mguillem" id="1686412" due-to="Karel Kolman">
             	Fixed wrong parsing order of comment and text nodes.
             </action>

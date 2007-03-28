@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -47,15 +46,15 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for Anchor.
+ * Tests for {@link Anchor}.
  *
  * @version  $Revision$
  * @author  <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
+ * @author Marc Guillemot
  */
 public class AnchorTest extends WebTestCase {
 
@@ -126,7 +125,7 @@ public class AnchorTest extends WebTestCase {
         
         
         final List collectedAlerts = new ArrayList();
-        final List expectedAlerts = Arrays.asList( new String[]{ "true", "not defined" } );
+        final String[] expectedAlerts = {"true", "not defined"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 
@@ -156,10 +155,10 @@ public class AnchorTest extends WebTestCase {
         
         
         final List collectedAlerts = new ArrayList();
-        final List expectedAlerts = Arrays.asList( new String[]{ "", 
+        final String[] expectedAlerts = { "", 
             "http://www.gargoylesoftware.com/foo.html",
             "javascript:void(0)",
-            "http://www.gargoylesoftware.com/#"} );
+            "http://www.gargoylesoftware.com/#"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 
@@ -183,6 +182,28 @@ public class AnchorTest extends WebTestCase {
         final Page page2 = page1.getAnchorByHref("#").click();
 
         assertEquals("http://www.gargoylesoftware.com/foo.html",  page2.getWebResponse().getUrl());
+    }
+
+    /**
+     * Regression test for
+     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1689798&group_id=47038
+     * in href, "this" should be the window and not the link
+     * @throws Exception if the test fails
+     */
+    public void testThisInJavascriptHRef() throws Exception {
+        final String content
+            = "<html>"
+            + "<body>"
+            + "<a href='javascript:alert(this == window)'>link 1</a>"
+            + "</body></html>";
+        
+        final List collectedAlerts = new ArrayList();
+        final String[] expectedAlerts = {"true"};
+        final HtmlPage page1 = loadPage(content, collectedAlerts);
+        final Page page2 = ((HtmlAnchor) page1.getAnchors().get(0)).click();
+
+        assertEquals(expectedAlerts, collectedAlerts);
+        assertSame(page1, page2);
     }
 
     public void testReadWriteAnchorTarget() throws Exception {

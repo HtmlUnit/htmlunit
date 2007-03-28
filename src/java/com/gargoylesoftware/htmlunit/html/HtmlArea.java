@@ -100,7 +100,7 @@ public class HtmlArea extends FocusableElement {
             final HtmlPage page = getPage();
             if( TextUtil.startsWithIgnoreCase(href, "javascript:") ) {
                 return page.executeJavaScriptIfPossible(
-                    href, "javascript url", true, this ).getNewPage();
+                    href, "javascript url", false, null).getNewPage();
             }
             else {
                 final URL url;

@@ -168,7 +168,7 @@ public class HtmlForm extends ClickableElement {
 
             final String action = getActionAttribute();
             if (TextUtil.startsWithIgnoreCase(action, "javascript:")) {
-                return htmlPage.executeJavaScriptIfPossible(action, "Form action", false, this).getNewPage();
+                return htmlPage.executeJavaScriptIfPossible(action, "Form action", false, null).getNewPage();
             }
         }
         else {

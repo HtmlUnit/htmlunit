@@ -43,6 +43,7 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -191,4 +192,24 @@ public class HtmlAreaTest extends WebTestCase {
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
         assertSame( page, secondPage );
     }
+
+    /**
+     * In action "this" should be the window and not the area
+     * @throws Exception if the test fails
+     */
+    public void testThisInJavascriptHRef() throws Exception {
+
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body><map>"
+            + "<area href='javascript:alert(this == window)' id='a2' coords='0,0,10,10'/>"
+            + "</map></body></html>";
+        final List collectedAlerts = new ArrayList();
+        final String[] expectedAlerts = {"true"};
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final Page page2 = ((HtmlArea) page.getHtmlElementById("a2")).click();
+
+        assertEquals(expectedAlerts, collectedAlerts);
+        assertSame(page, page2);
+    }
+
 }
