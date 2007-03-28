@@ -469,7 +469,7 @@ public class HTMLElement extends NodeImpl {
 
         for (final Iterator iter = parseHtmlSnippet(value).iterator(); iter.hasNext();) {
             final DomNode child = (DomNode) iter.next();
-            domNode.appendChild(child);
+            appendChildStepByStep(domNode, child);
         }
     }
 
@@ -501,7 +501,7 @@ public class HTMLElement extends NodeImpl {
 
         for (final Iterator iter = parseHtmlSnippet(value).iterator(); iter.hasNext();) {
             final DomNode child = (DomNode) iter.next();
-            domNode.insertBefore(child);
+            insertBeforeStepByStep(domNode, child);
         }
         domNode.remove();
     }
@@ -663,14 +663,46 @@ public class HTMLElement extends NodeImpl {
         for (final Iterator iter = parseHtmlSnippet(text).iterator(); iter.hasNext();) {
             final DomNode child = (DomNode) iter.next();
             if (append) {
-                node.appendChild(child);
+                appendChildStepByStep(node, child);
             }
             else {
-                node.insertBefore(child);
+                insertBeforeStepByStep(node, child);
             }
         }
+
+    }
+    
+    private void appendChildStepByStep(final DomNode target, final DomNode child) {
+        final Collection coll = new ArrayList();
+        for (final Iterator iter = child.getChildIterator(); iter.hasNext();) {
+            coll.add((DomNode)iter.next());
+            iter.remove();
+        }
+        
+        target.appendChild(child);
+        
+        for (final Iterator iter = coll.iterator(); iter.hasNext();) {
+            appendChildStepByStep(child, (DomNode)iter.next());
+        }
+        
     }
 
+    private void insertBeforeStepByStep(final DomNode target, final DomNode child) {
+        final Collection coll = new ArrayList();
+        for (final Iterator iter = child.getChildIterator(); iter.hasNext();) {
+            coll.add((DomNode)iter.next());
+            iter.remove();
+        }
+        
+        target.insertBefore(child);
+        
+        for (final Iterator iter = coll.iterator(); iter.hasNext();) {
+            appendChildStepByStep(child, (DomNode)iter.next());
+        }
+        
+    }
+    
+    
     /**
      * Adds the specified behavior to this HTML element. Currently only supports
      * the following default IE behaviors:

@@ -166,6 +166,14 @@ public class HtmlScript extends HtmlElement {
      */
     public DomNode appendChild(final DomNode node) {
         final DomNode response = super.appendChild(node);
+        executeInlineScriptIfNeeded();
+        return response;
+    }
+
+    /**
+     * For internal use only
+     */
+    void executeInlineScriptIfNeeded() {
         if (getSrcAttribute() == HtmlElement.ATTRIBUTE_NOT_DEFINED && isExecutionNeeded()) {
             final DomCharacterData textNode = (DomCharacterData) getFirstChild();
             final String scriptCode;
@@ -192,7 +200,6 @@ public class HtmlScript extends HtmlElement {
                     getStartColumnNumber() + ") to (" + getEndLineNumber() +
                     ", " + getEndColumnNumber() + ")", false, null);
         }
-        return response;
     }
 
     /**
@@ -227,6 +234,9 @@ public class HtmlScript extends HtmlElement {
         if (getSrcAttribute() != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
             getLog().debug("Loading external javascript: " + getSrcAttribute());
             page.loadExternalJavaScriptFile(getSrcAttribute(), getCharsetAttribute());
+        }
+        else if (getFirstChild() != null) {
+            executeInlineScriptIfNeeded();
         }
     }
 

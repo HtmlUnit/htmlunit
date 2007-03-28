@@ -2059,14 +2059,13 @@ public class DocumentTest extends WebTestCase {
             + "<script>\n"
             + "document.write('<script src=\"script.js\">');"
             + "document.write('<' + '/script>');"
+            + "document.write('<script>alert(\"foo2\");</' + 'script>');"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "foo"
-        } );
+        final String[] expectedAlerts = { "foo", "foo2" };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final URL scriptUrl = new URL(URL_FIRST.toExternalForm() + "/script.js");
@@ -2083,6 +2082,49 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
+    /**
+     * Test for 1613119
+     * @throws Exception if the test fails
+     */
+    public void testWriteAddNodesInCorrectPositions() throws Exception {
+        final String content = "<html><head><title>foo</title></head>\n"
+            + "<body id=\"theBody\">\n"
+            + "<div id='target1'></div>"
+            + "<script>\n"
+            + "document.write(\""
+            + "<div>"
+            + "  <sc\"+\"ript id='scr1'>document.write('<div id=\\\"div1\\\" />');</s\"+\"cript>"
+            + "  <sc\"+\"ript id='scr2'>document.write('<div id=\\\"div2\\\" />');</s\"+\"cript>"
+            + "</div>"
+            + "\");"
+ /*           + "document.getElementById('target1').innerHTML = \""
+            + "<div>"
+            + "  <sc\"+\"ript id='scr3'>document.write('<div id=\\\"div3\\\" />');</s\"+\"cript>"
+            + "  <sc\"+\"ript id='scr4'>document.write('<div id=\\\"div4\\\" />');</s\"+\"cript>"
+            + "</div>"
+            + "\";"
+  */
+            + "</script>\n"
+            + "<script>\n"
+            + "function alertId(obj) { alert(obj != null ? obj.id : 'null'); }\n"
+            + "alertId(document.getElementById('div1').previousSibling);\n"
+            + "alertId(document.getElementById('div2').previousSibling);\n"
+ /*           + "alertId(document.getElementById('div3').previousSibling);\n"
+            + "alertId(document.getElementById('div4').previousSibling);\n"
+  */
+            + "</script>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"scr1", "scr2"/*, "scr3", "scr4"*/};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        
+        assertEquals( expectedAlerts, collectedAlerts );
+        
+    }    
+  
     /**
      * @throws Exception if the test fails
      */

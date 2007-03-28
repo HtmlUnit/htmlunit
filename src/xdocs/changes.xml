@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1613119" due-to="Karel Kolman">
+            	JavaScript: fixed non executed scripts added wit document.write.
+            </action>
             <action type="update" dev="mguillem" id="1689798">
             	JavaScript: "this" should be the window and not the current node in javascript href of link and area as well as in javascript action of forms.
             </action>
