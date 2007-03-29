@@ -74,6 +74,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.ElementArray;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -107,12 +108,22 @@ public class Window extends SimpleScriptable {
     private String status_ = "";
     private ElementArray frames_; // has to be a member to have equality (==) working
     private Map eventHandlers_ = new HashMap();
+    private final JavaScriptEngine scriptEngine_;
 
     /**
      * Create an instance.  The rhino engine requires all host objects
      * to have a default constructor.
      */
-    public Window() {
+    public Window(final JavaScriptEngine scriptEngine) {
+        scriptEngine_ = scriptEngine;
+    }
+    
+    /**
+     * Gets the Javascript Engine responsible for this object.
+     * @return the javascript engine
+     */
+    public JavaScriptEngine getJavaScriptEngine() {
+        return scriptEngine_;
     }
 
 

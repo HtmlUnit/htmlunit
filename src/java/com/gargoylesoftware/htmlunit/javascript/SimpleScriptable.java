@@ -223,6 +223,11 @@ public class SimpleScriptable extends ScriptableObject {
         if ("eval".equals(name) && start == getStartingScope()) {
             return super.get(name, start); // will return native eval function
         }
+        
+        if ("foo".equals(name))
+        {
+            getLog().info("Searching for foo from "+ start + System.identityHashCode(start));
+        }
 
         // Some calls to get will happen during the initialization of the
         // superclass.  At this point, we don't have enough information to
@@ -425,6 +430,8 @@ public class SimpleScriptable extends ScriptableObject {
                 scriptable.setParentScope(ScriptableObject.getTopLevelScope(
                         (Scriptable) domNode.getPage().getScriptObject()));
             }
+            
+            scriptable.setPrototype(getWindow().getJavaScriptEngine().getPrototype(javaScriptClass, getWindow()));
 
             scriptable.setDomNode(domNode);
 

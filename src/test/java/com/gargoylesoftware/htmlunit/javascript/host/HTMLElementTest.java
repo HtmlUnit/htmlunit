@@ -1198,26 +1198,30 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testPrototype() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><head><title>Prototype test</title>"
             + "<script>"
             + "function test()"
             + "{"
             + "    var d = document.getElementById('foo');"
-            + "    alert(d.foo);"
+            + "    alert(d.foo);\n"
             + "    alert(d.myFunction);"
+            + "    var link = document.getElementById('testLink');"
+            + "    alert(link.foo);\n"
+            + "    alert(link.myFunction);"
             + "    HTMLElement.prototype.foo = 123;"
             + "    HTMLElement.prototype.myFunction = function() { return 'from myFunction'; };"
             + "    alert(d.foo);"
             + "    alert(d.myFunction());"
+            + "    alert(link.foo);\n"
+            + "    alert(link.myFunction());"
             + "}"
             + "</script></head><body onload='test()''>"
             + "<div id='foo'>bla</div>"
+            + "<a id='testLink' href='foo'>bla</a>"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"undefined", "undefined", "123", "from myFunction"};
+        final String[] expectedAlerts = {"undefined", "undefined", "undefined", "undefined", 
+                "123", "from myFunction", "123", "from myFunction"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);

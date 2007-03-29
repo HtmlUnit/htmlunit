@@ -40,9 +40,12 @@ package com.gargoylesoftware.htmlunit.javascript;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -86,6 +89,11 @@ public class JavaScriptEngine extends ScriptEngine {
 
     private static final ThreadLocal javaScriptRunning_ = new ThreadLocal();
     private static final ContextListener contextListener_;
+    /**
+     * Map of (Window, protypes map).
+     */
+    private final Map prototypesPerWindow = new WeakHashMap();
+
 
     /**
      * Key used to place the scope in which the execution of some javascript code
@@ -124,24 +132,42 @@ public class JavaScriptEngine extends ScriptEngine {
         Assert.notNull( "webWindow", webWindow );
         final WebClient webClient = webWindow.getWebClient();
 
+        final Map prototypes = new HashMap();
         final Context context = Context.enter();
         try {
             final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
-            final Window window = (Window) context.initStandardObjects( new Window() );
+            final Window window = (Window) context.initStandardObjects( new Window(this) );
 
             final Iterator it = jsConfig.keySet().iterator();
             while (it.hasNext()) {
                 final String jsClassName = (String) it.next();
                 final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
                 final boolean isWindow = Window.class.getName().equals( config.getLinkedClass().getName() );
-                if( config.isJsObject() && !isWindow ) {
-                    configureClass( config, window, jsClassName );
+                if (config.isJsObject() && !isWindow) {
+                    final Scriptable prototype = configureClass(config, window, jsClassName);
+                    prototypes.put(config.getLinkedClass(), prototype);
                 }
             }
 
             ScriptableObject.defineClass(window, ElementArray.class);
             ScriptableObject.defineClass(window, OptionsArray.class);
             window.initialize(webWindow);
+
+            // configure the prototypes chains
+            for (final Iterator iter = prototypes.values().iterator(); iter.hasNext();) {
+                Scriptable prototype = (Scriptable) iter.next();
+                Class theClass = prototype.getClass();
+                Scriptable superPrototype = null;
+                while (theClass != null && superPrototype == null) {
+                    theClass = theClass.getSuperclass();
+                    superPrototype = (Scriptable) prototypes.get(theClass);
+                    if (superPrototype != null) {
+                        prototype.setPrototype(superPrototype);
+                    }
+                }
+            }
+            
+            prototypesPerWindow.put(window, prototypes);
         }
         catch( final Exception e ) {
             getLog().error("Exception while initializing JavaScript for the page", e);
@@ -152,6 +178,16 @@ public class JavaScriptEngine extends ScriptEngine {
         }
     }
 
+    Scriptable getPrototype(final Class jsClass, final Window scope)
+    {
+        final Map prototypes = (Map) prototypesPerWindow.get(scope);
+        if (prototypes != null) {
+            return (Scriptable) prototypes.get(jsClass);
+        }
+        
+        return null;
+    }
+
     /**
      * Configures the specified class for access via JavaScript.
      * @param config The configuration settings for the class to be configured.
@@ -160,8 +196,9 @@ public class JavaScriptEngine extends ScriptEngine {
      * @throws InstantiationException If the new class cannot be instantiated
      * @throws IllegalAccessException If we don't have access to create the new instance.
      * @throws InvocationTargetException if an exception is thrown during creation of the new object.
+     * @return the created prototype
      */
-    private void configureClass( final ClassConfiguration config, final Scriptable scope, final String name )
+    private Scriptable configureClass( final ClassConfiguration config, final Scriptable scope, final String name )
         throws InstantiationException, IllegalAccessException, InvocationTargetException {
 
         final Class jsHostClass = config.getLinkedClass();
@@ -183,6 +220,8 @@ public class JavaScriptEngine extends ScriptEngine {
             final FunctionObject functionObject = new FunctionObject(entryKey, method, prototype);
             prototype.defineProperty(entryKey, functionObject, 0);
         }
+        
+        return prototype;
     }
 
     /**
