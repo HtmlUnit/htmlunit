@@ -224,11 +224,6 @@ public class SimpleScriptable extends ScriptableObject {
             return super.get(name, start); // will return native eval function
         }
         
-        if ("foo".equals(name))
-        {
-            getLog().info("Searching for foo from "+ start + System.identityHashCode(start));
-        }
-
         // Some calls to get will happen during the initialization of the
         // superclass.  At this point, we don't have enough information to
         // do our own initialization so we have to just pass this call
