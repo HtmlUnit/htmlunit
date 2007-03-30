@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1690203" due-to="Ahmed Ashour">
+                JavaScript: added support for property parentElement on DOM nodes (IE specific).
+            </action>
             <action type="update" dev="mguillem">
             	JavaScript: configure correctly the prototype hierarchy on created host objects.
             </action>

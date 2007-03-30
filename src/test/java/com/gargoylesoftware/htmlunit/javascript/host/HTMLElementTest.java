@@ -1227,4 +1227,36 @@ public class HTMLElementTest extends WebTestCase {
         loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    public void testParentElement() throws Exception {
+        final String[] alertsIE = {"null", "[object]"};
+        testParentElement(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
+        final String[] alertsFF = {"undefined", "undefined"};
+        testParentElement(BrowserVersion.MOZILLA_1_0, alertsFF);
+        final String[] alertsNS = {"undefined", "undefined"};
+        testParentElement(BrowserVersion.NETSCAPE_4_7_9, alertsNS);
+    }
+    
+    private void testParentElement(final BrowserVersion browser, final String[] expectedAlerts)
+        throws Exception {
+
+        final String content
+            = "<html id='htmlID'>"
+            + "<head>"
+            + "</head>"
+            + "<body>"
+            + "<div id='divID'/>"
+            + "<script language=\"javascript\">"
+            + "    alert( document.getElementById( 'htmlID' ).parentElement );"
+            + "    alert( document.getElementById( 'divID'  ).parentElement );"
+            + "</script>"
+            + "</body>"
+            + "</html>";
+
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(browser, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

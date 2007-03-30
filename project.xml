@@ -197,6 +197,9 @@
         <contributor>
         	<name>Bruce Chapman</name>
         </contributor>
+        <contributor>
+        	<name>Ahmed Ashour</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
@@ -380,8 +383,10 @@
             <resources>
                 <resource>
                     <directory>src/test/resources</directory>
+<!-- 
                     <includes>prototype</includes>
-                </resource>
+ -->
+                 </resource>
             </resources>
         </unitTest>
     </build>

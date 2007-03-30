@@ -400,7 +400,7 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="ownerDocument" readable="true" writable="false"/>
-        <property name="parentElement" notImplemented="true" readable="true" writable="false">
+        <property name="parentElement" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
         <property name="scrollHeight" readable="true" writable="false"/>

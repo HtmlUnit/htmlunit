@@ -1470,4 +1470,20 @@ public class HTMLElement extends NodeImpl {
     public int jsxGet_scrollWidth() {
         return 10;
     }
+
+    /**
+     * Get the JavaScript property "parentElement".
+     * <p>It is identical to {@link #jsxGet_parentNode()}
+     *    with the exception of <tt>HTML</tt>, which has a <tt>null</tt> parent element.
+     * @return The parent element
+     * @see #jsxGet_parentNode()
+     */
+    public Object jsxGet_parentElement() {
+        if ("html".equalsIgnoreCase(getDomNodeOrDie().getNodeName())) {
+            return null;
+        }
+        else {
+            return jsxGet_parentNode();
+        }
+    }
 }
