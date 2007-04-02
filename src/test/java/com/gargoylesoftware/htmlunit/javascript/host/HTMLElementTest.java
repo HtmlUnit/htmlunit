@@ -62,6 +62,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Hans Donner
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Bruce Faulkner
+ * @author Ahmed Ashour
  * @version $Revision$
  */
 public class HTMLElementTest extends WebTestCase {
@@ -493,6 +494,26 @@ public class HTMLElementTest extends WebTestCase {
                 "";
         final List collectedAlerts = new ArrayList();
         final String[] expectedAlerts = { "true" };
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test setting innerHTML to empty string
+     * @throws Exception if the test fails
+     */
+    public void testSetInnerHTMLEmpty() throws Exception {
+        final String content = "<html><head></head><body>"
+                + "<div id='testDiv'>foo</div>"
+                + "<script language='javascript'>"
+                + "    var node = document.getElementById('testDiv');"
+                + "    node.innerHTML = '';"
+                + "    alert('Empty ChildrenLength: ' + node.childNodes.length);"
+                + "</script></body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final String[] expectedAlerts = {"Empty ChildrenLength: 0"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);

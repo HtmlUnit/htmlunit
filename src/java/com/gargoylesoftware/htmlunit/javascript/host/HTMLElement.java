@@ -91,6 +91,7 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
  * @author Marc Guillemot
  * @author Hans Donner
  * @author Bruce Faulkner
+ * @author Ahmed Ashour
  */
 public class HTMLElement extends NodeImpl {
     private static final long serialVersionUID = -6864034414262085851L;
@@ -467,9 +468,11 @@ public class HTMLElement extends NodeImpl {
         final DomNode domNode = getDomNodeOrDie();
         domNode.removeAllChildren();
 
-        for (final Iterator iter = parseHtmlSnippet(value).iterator(); iter.hasNext();) {
-            final DomNode child = (DomNode) iter.next();
-            appendChildStepByStep(domNode, child);
+        if (!"".equals(value)) {
+            for (final Iterator iter = parseHtmlSnippet(value).iterator(); iter.hasNext();) {
+                final DomNode child = (DomNode) iter.next();
+                appendChildStepByStep(domNode, child);
+            }
         }
     }
 
