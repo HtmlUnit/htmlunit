@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -49,6 +50,7 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -941,5 +943,27 @@ public class SelectTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         final HtmlPage page2 = (HtmlPage) page.getFormByName("test").getSelectByName("select1").getOption(0).click();
         assertEquals("page 2", page2.getTitleText());
+    }
+
+    /**
+     * Test for 1684652
+     * @throws Exception if the test fails
+     */
+    public void testSelectedIndexReset() throws Exception {
+        final String content
+        = "<html><head><title>first</title></head>"
+            + "<body onload='document.forms[0].testSelect.selectedIndex = -1; document.forms[0].testSelect.options[0].selected=true;'>"
+            + "<form>"
+            + "<select name='testSelect'>"
+            + "<option value='testValue'>value</option>"
+            + "</select>"
+            + "<input id='testButton' type='submit'>"
+            + "</form>"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(content);
+        final Page page2 = ((ClickableElement) page.getHtmlElementById("testButton")).click();
+        final URL url2 = page2.getWebResponse().getUrl();
+        assertTrue("Select in url " + url2, url2.toExternalForm().indexOf("testSelect=testValue") != -1);
     }
 }

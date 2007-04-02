@@ -303,6 +303,8 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public Page setSelectedAttribute( final HtmlOption selectedOption, final boolean isSelected ) {
         final boolean triggerHandler  = (selectedOption.isSelected() != isSelected);
 
+        fakeSelectedValues_ = null;
+
         // caution the HtmlOption may have been created from js and therefore the select now need
         // to "know" that it is selected 
         if (isMultipleSelectEnabled()) {
