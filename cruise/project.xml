@@ -27,7 +27,7 @@ defaultmailhost
 	        <currentbuildstatuslistener file="&basedir;/htmlunit/cruisecontrol/logs/status.txt"/>
         </listeners>
         <log dir="&basedir;/htmlunit/cruisecontrol/logs">
-			<merge dir="&basedir;/htmlunit/cruisecontrol/checkout/ant-target/junit-reports/"/>
+			<merge dir="&basedir;/htmlunit/cruisecontrol/checkout/ant-target/junit-results/"/>
 		</log>
 		<publishers>
 			<!-- htmlemail is used only for explicit subscribers -->
