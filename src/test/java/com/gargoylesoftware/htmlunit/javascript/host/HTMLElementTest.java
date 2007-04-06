@@ -508,7 +508,7 @@ public class HTMLElementTest extends WebTestCase {
                 + "<div id='testDiv'>foo</div>"
                 + "<script language='javascript'>"
                 + "    var node = document.getElementById('testDiv');"
-                + "    node.innerHTML = null;"
+                + "    node.innerHTML = '';"
                 + "    alert('Empty ChildrenLength: ' + node.childNodes.length);"
                 + "</script></body></html>";
 
