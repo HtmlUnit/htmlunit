@@ -25,6 +25,7 @@
 <property name="target.dir" value ="ant-target"/>
 <property name="base.classes.dir" value ="${target.dir}/classes"/>
 <property name="test.classes.dir" value ="${target.dir}/test-classes"/>
+<property name="test.results.dir" location="${target.dir}/junit-results"/>
 <property name="test.reports.dir" location="${target.dir}/junit-reports"/>
 
 <property name="remote.repository" value="http://www.ibiblio.org/maven/"/>
@@ -112,17 +113,16 @@
     </xmlvalidate>
 </target>
 
-<target name="junit" description="junit">
-    <delete dir="${test.reports.dir}"/>
-    <mkdir dir="${test.reports.dir}"/>
+<target name="junit" depends="compile" description="junit">
+    <delete dir="${test.results.dir}"/>
+    <mkdir dir="${test.results.dir}"/>
         
     <junit fork="true" forkmode="perBatch" dir="${basedir}"
             errorProperty="test.failed" failureProperty="test.failed">
         <classpath refid="test.class.path"/>
-        <formatter type="brief" usefile="false"/>
         <formatter type="xml"/>
 
-        <batchtest todir="${test.reports.dir}">
+        <batchtest todir="${test.results.dir}">
             <fileset dir="${test.classes.dir}">
                 <include name="**/*Test.class"/>
                 <exclude name="**/*$*.class"/>
@@ -133,7 +133,7 @@
     <delete dir="${test.reports.dir}"/> 
     <mkdir dir="${test.reports.dir}"/>
     <junitreport todir="${test.reports.dir}">
-        <fileset dir="${test.reports.dir}">
+        <fileset dir="${test.results.dir}">
             <include name="TEST-*.xml"/>
         </fileset>
         <report format="frames" todir="${test.reports.dir}"/>
