@@ -75,6 +75,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author Marc Guillemot
  * @author George Murnock
  * @author Kent Tong
+ * @author Ahmed Ashour
  */
 public class HtmlForm extends ClickableElement {
 
@@ -84,7 +85,7 @@ public class HtmlForm extends ClickableElement {
     private static final Collection SUBMITTABLE_ELEMENT_NAMES =
         Arrays.asList( new String[]{"input", "button", "select", "textarea", "isindex"} );
 
-    private KeyValuePair fakeSelectedRadioButton_ = null;
+    private KeyValuePair fakeSelectedRadioButton_;
 
     /**
      *  Create an instance
@@ -209,6 +210,7 @@ public class HtmlForm extends ClickableElement {
         settings.setRequestParameters(parameters);
         settings.setEncodingType(FormEncodingType.getInstance( getEnctypeAttribute() ));
         settings.setCharset(getSubmitCharset());
+        settings.addAdditionalHeader("Referer", htmlPage.getWebResponse().getUrl().toExternalForm());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
         return htmlPage.getWebClient().getPage(

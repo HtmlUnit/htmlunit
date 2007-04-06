@@ -100,6 +100,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Sergey Gorelkin
  * @author Hans Donner
  * @author Paul King
+ * @author Ahmed Ashour
  */
 public class WebClient {
 
@@ -874,7 +875,11 @@ public class WebClient {
         final WebWindow window = openTargetWindow( opener, windowName, "_blank" );
         if( url != null ) {
             try {
-                getPage(window, new WebRequestSettings(url));
+                final WebRequestSettings settings = new WebRequestSettings(url);
+                final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
+                if (!getBrowserVersion().isIE() )
+                    settings.addAdditionalHeader("Referer", openerPage.getWebResponse().getUrl().toExternalForm());
+                getPage(window, settings);
             }
             catch( final IOException e ) {
                 getLog().error("Error when loading content into window", e);

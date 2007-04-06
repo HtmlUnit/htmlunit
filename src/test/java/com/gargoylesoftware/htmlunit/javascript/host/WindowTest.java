@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -74,7 +75,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Marc Guillemot
  * @author Dierk Koenig
  * @author Chris Erskine
- * @author David D. Kilzer 
+ * @author David D. Kilzer
+ * @author Ahmed Ashour
  */
 public class WindowTest extends WebTestCase {
     /**
@@ -1992,6 +1994,46 @@ public class WindowTest extends WebTestCase {
         assertSame(webClient.getCurrentWindow(), secondWebWindow);
         assertNotSame(firstWebWindow, secondWebWindow);
     }
+
+    /**
+     * Test the 'Referer' HTTP header by window.open
+     * @throws Exception if the test fails.
+     */
+    public void testOpenWindow_refererHeader() throws Exception {
+        final String headerIE = null;
+        testOpenWindow_refererHeader(BrowserVersion.INTERNET_EXPLORER_6_0, headerIE);
+
+        final String headerFF = URL_FIRST.toString();
+        testOpenWindow_refererHeader(BrowserVersion.MOZILLA_1_0, headerFF);
+
+        final String headerNS = URL_FIRST.toString();
+        testOpenWindow_refererHeader(BrowserVersion.NETSCAPE_4_7_9, headerNS);
+    }
+
+    private void testOpenWindow_refererHeader(final BrowserVersion browser, final String expectedRefererHeader) throws Exception {
+        final String firstContent = "<html><head></head>"
+            + "<body>"
+            + "<button id='clickme' onClick='window.open(\"http://second\");'>Click me</a>"
+            + "</body></html>";
+
+        final String secondContent
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = new WebClient(browser);
+        final MockWebConnection conn = new MockWebConnection(client);
+        client.setWebConnection(conn);
+
+        conn.setResponse(URL_FIRST, firstContent);
+        conn.setResponse(URL_SECOND, secondContent);
+        
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlButton buttonA = (HtmlButton)firstPage.getHtmlElementById("clickme");
+        
+        buttonA.click();
+        final Map lastAdditionalHeaders = conn.getLastAdditionalHeaders();
+        assertEquals(expectedRefererHeader, lastAdditionalHeaders.get("Referer"));
+    }
+
     /**
      * Tests that nested setTimeouts that are deeper than Thread.MAX_PRIORITY
      * do not cause an exception.

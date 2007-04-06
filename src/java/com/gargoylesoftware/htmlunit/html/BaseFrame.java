@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Marc Guillemot
  * @author David D. Kilzer 
  * @author Stefan Anzinger
+ * @author Ahmed Ashour
  */
 public abstract class BaseFrame extends StyledElement {
 
@@ -126,7 +127,9 @@ public abstract class BaseFrame extends StyledElement {
                 getLog().error("Bad url in src attribute of " + getTagName() + ": url=["+srcAttribute+"]", e);
             }
             try {
-                getPage().getWebClient().getPage(enclosedWindow_, new WebRequestSettings(url));
+                final WebRequestSettings settings = new WebRequestSettings(url);
+                settings.addAdditionalHeader("Referer", getPage().getWebResponse().getUrl().toExternalForm());
+                getPage().getWebClient().getPage(enclosedWindow_, settings);
             }
             catch (final FailingHttpStatusCodeException e){
                 // do nothing

@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -55,6 +56,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Stefan Anzinger
+ * @author Ahmed Ashour
  */
 public class HtmlAnchorTest extends WebTestCase {
 
@@ -366,5 +368,32 @@ public class HtmlAnchorTest extends WebTestCase {
         assertNotSame("new window not used", page.getEnclosingWindow(), secondPage
                 .getEnclosingWindow());
     }
-}
 
+    /**
+     * Test the 'Referer' HTTP header
+     * @throws Exception on test failure
+     */
+    public void testClick_refererHeader() throws Exception {
+        final String firstContent
+            = "<html><head><title>Page A</title></head>"
+            + "<body><a href='http://second' id='link'>link</a></body>"
+            + "</html>";
+        final String secondContent
+            = "<html><head><title>Page B</title></head>"
+            + "<body></body>"
+            + "</html>";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, firstContent);
+        conn.setResponse(URL_SECOND, secondContent);
+        client.setWebConnection(conn);
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlAnchor a = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        a.click();
+
+        final Map lastAdditionalHeaders = conn.getLastAdditionalHeaders();
+        assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get("Referer"));
+    }
+
+}

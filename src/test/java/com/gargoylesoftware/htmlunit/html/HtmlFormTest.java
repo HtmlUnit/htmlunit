@@ -43,6 +43,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -65,6 +66,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
  * @author George Murnock
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlFormTest extends WebTestCase {
     /**
@@ -950,7 +952,36 @@ public class HtmlFormTest extends WebTestCase {
         assertCollectionsEqual(expectedParameters, collectedParameters);
     }
 
-     /**
+    /**
+     * Test the 'Referer' HTTP header
+     * @throws Exception on test failure
+     */
+    public void testSubmit_refererHeader() throws Exception {
+        final String firstContent
+            = "<html><head><title>First</title></head><body>"
+            + "<form method='post' action='http://second'>"
+            + "<input name='button' type='submit' value='PushMe' id='button'/></form>"
+            + "</body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        client.setWebConnection( webConnection );
+
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlSubmitInput button = (HtmlSubmitInput) firstPage.getHtmlElementById("button");
+
+        button.click();
+
+        final Map lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
+        assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get("Referer"));
+    }
+
+    /**
       * Simulate a bug report where using JavaScript to submit a form that contains a
       * JavaScript action causes a an "IllegalArgumentException: javascript urls can only
       * be used to load content into frames and iframes."

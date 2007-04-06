@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1693423" due-to="Ahmed Ashour">
+                Set Referer header on outgoing requests.
+            </action>
             <action type="update" dev="mguillem" id="1692811" due-to="Ahmed Ashour">
                 JavaScript: setting innerHTML to null shouldn't create any text node for Firefox.
             </action>

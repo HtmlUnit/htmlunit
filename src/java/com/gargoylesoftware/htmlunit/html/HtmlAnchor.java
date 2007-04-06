@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Ahmed Ashour
  */
 public class HtmlAnchor extends FocusableElement {
 
@@ -102,6 +103,8 @@ public class HtmlAnchor extends FocusableElement {
             }
             else {
                 final URL url = page.getFullyQualifiedUrl(href);
+                final WebRequestSettings settings = new WebRequestSettings(url);
+                settings.addAdditionalHeader("Referer", page.getWebResponse().getUrl().toExternalForm());
                 getLog().debug(
                     "Getting page for " + url.toExternalForm()
                             + ", derived from href '" + href
@@ -110,7 +113,7 @@ public class HtmlAnchor extends FocusableElement {
                 return page.getWebClient().getPage(
                         page.getEnclosingWindow(),
                         page.getResolvedTarget(getTargetAttribute()),
-                        new WebRequestSettings(url));
+                        settings);
             }
         }
         else {

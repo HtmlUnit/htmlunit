@@ -41,6 +41,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -55,6 +56,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Hans Donner
+ * @author Ahmed Ashour
  */
 public class HtmlFrameSetTest extends WebTestCase {
 
@@ -256,4 +258,37 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testRefererHeader()
+        throws Exception {
+
+        final String firstContent
+            = "<html><head><title>First</title></head>"
+            + "<frameset cols='130,*'>"
+            + "  <frame scrolling='no' name='left' src='http://second' frameborder='1' />"
+            + "  <noframes>"
+            + "    <body>Frames not supported</body>"
+            + "  </noframes>"
+            + "</frameset>"
+            + "</html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient webClient = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
+
+        final Map lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
+        assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get("Referer"));
+    }
+
 }
