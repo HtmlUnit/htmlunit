@@ -7,11 +7,14 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1692811" due-to="Ahmed Ashour">
+                JavaScript: setting innerHTML to null shouldn't create any text node for Firefox.
+            </action>
             <action type="update" dev="mguillem" id="1684652">
                 JavaScript: fixed remaining problem of submitted select values when select.selectedIndex = -1 has been used before setting an other value.
             </action>
             <action type="update" dev="mguillem" id="1692572" due-to="Ahmed Ashour">
-                JavaScript: setting innerHTML to emtpy string souldn't create any text node.
+                JavaScript: setting innerHTML to emtpy string shouldn't create any text node.
             </action>
             <action type="update" dev="mguillem" id="1690203" due-to="Ahmed Ashour">
                 JavaScript: added support for property parentElement on DOM nodes (IE specific).

@@ -57,6 +57,7 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.xml.sax.helpers.AttributesImpl;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -464,12 +465,20 @@ public class HTMLElement extends NodeImpl {
      * Replace all children elements of this element with the supplied value.
      * @param value - the new value for the contents of this node
      */
-    public void jsxSet_innerHTML(final String value) {
+    public void jsxSet_innerHTML(final Object value) {
         final DomNode domNode = getDomNodeOrDie();
         domNode.removeAllChildren();
 
-        if (!"".equals(value)) {
-            for (final Iterator iter = parseHtmlSnippet(value).iterator(); iter.hasNext();) {
+        final BrowserVersion browserVersion = getWindow().getWebWindow().getWebClient().getBrowserVersion();
+        
+        // null && IE     -> add child
+        // null && non-IE -> Don't add
+        // ''             -> Don't add 
+        if ((value == null && browserVersion.isIE()) 
+            || (value != null && !"".equals(value))) {
+
+            final String valueAsString = Context.toString(value);
+            for (final Iterator iter = parseHtmlSnippet(valueAsString).iterator(); iter.hasNext();) {
                 final DomNode child = (DomNode) iter.next();
                 appendChildStepByStep(domNode, child);
             }

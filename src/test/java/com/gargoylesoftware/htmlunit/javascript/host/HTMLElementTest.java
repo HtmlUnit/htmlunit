@@ -508,7 +508,7 @@ public class HTMLElementTest extends WebTestCase {
                 + "<div id='testDiv'>foo</div>"
                 + "<script language='javascript'>"
                 + "    var node = document.getElementById('testDiv');"
-                + "    node.innerHTML = '';"
+                + "    node.innerHTML = null;"
                 + "    alert('Empty ChildrenLength: ' + node.childNodes.length);"
                 + "</script></body></html>";
 
@@ -516,6 +516,36 @@ public class HTMLElementTest extends WebTestCase {
         final String[] expectedAlerts = {"Empty ChildrenLength: 0"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test setting innerHTML to null
+     * @throws Exception if the test fails
+     */
+    public void testSetInnerHTMLNull() throws Exception {
+        final String[] alertsIE = {"Null ChildrenLength: 1"};
+        testSetInnerHTMLNull(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
+        final String[] alertsFF = {"Null ChildrenLength: 0"};
+        testSetInnerHTMLNull(BrowserVersion.MOZILLA_1_0, alertsFF);
+    }
+
+    /**
+     * Test setting innerHTML to null
+     * @see #testSetInnerHTMLNull()
+     */
+    private void testSetInnerHTMLNull(final BrowserVersion browserVersion, String[] expectedAlerts) throws Exception {
+        final String content = "<html><head></head><body>"
+                + "<div id='testDiv'>foo</div>"
+                + "<script language='javascript'>"
+                + "    var node = document.getElementById('testDiv');"
+                + "    node.innerHTML = null;"
+                + "    alert('Null ChildrenLength: ' + node.childNodes.length);"
+                + "</script></body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
