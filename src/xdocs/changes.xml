@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1689214" due-to="Ahmed Ashour">
+                Don't execute JavaScript in &lt;noframes&gt; and &lt;iframe&gt;.
+            </action>
             <action type="update" dev="mguillem" id="1693423" due-to="Ahmed Ashour">
                 Set Referer header on outgoing requests.
             </action>

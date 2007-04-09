@@ -87,6 +87,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Chris Erskine
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public final class HtmlPage extends DomNode implements Page {
 
@@ -1407,7 +1408,10 @@ public final class HtmlPage extends DomNode implements Page {
             if (elem instanceof HtmlScript) {
                 final HtmlScript scriptNode = (HtmlScript) node;
                 getLog().debug("Script node added: " + scriptNode.asXml());
-                scriptNode.executeScriptIfNeeded();
+
+                if (scriptNode.canExecute()) {
+                    scriptNode.executeScriptIfNeeded();
+                }
             } 
             else {
                 final List scripts = elem.getHtmlElementsByTagName("script");

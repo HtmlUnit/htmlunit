@@ -291,4 +291,38 @@ public class HtmlFrameSetTest extends WebTestCase {
         assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get("Referer"));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testScriptUnderNoFrames() throws Exception {
+        final String firstContent
+            = "<html><head><title>first</title></head>"
+            + "<frameset cols='100%'>"
+            + "  <frame src='http://second'' id='frame1'/>"
+            + "  <noframes>"
+            + "    <div><script>alert(1);</script></div>"
+            + "    <script src='http://third'></script>"
+            +"   </noframes>"
+            + "</frameset></html>";
+        final String secondContent
+            = "<html><body><script>alert(2);</script></body></html>";
+        final String thirdContent
+            = "alert('3');";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent, "text/javascript");
+
+        client.setWebConnection( webConnection );
+        
+        final String[] expectedAlerts = {"2"};
+        ArrayList collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        
+        client.getPage(URL_FIRST);
+        assertEquals( expectedAlerts, collectedAlerts );
+    }    
+
 }

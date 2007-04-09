@@ -37,8 +37,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -48,6 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ahmed Ashour
  */
 public class HtmlInlineFrameTest extends WebTestCase {
     /**
@@ -101,7 +105,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
     public void testSetSrcAttribute_ViaJavaScript() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>"
-            + "<iframe id='iframe1' src='http://second'>"
+            + "<iframe id='iframe1' src='http://second'></iframe>"
             + "<script type='text/javascript'>document.getElementById('iframe1').src = 'http://third';"
             + "</script></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
@@ -121,5 +125,38 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
         assertEquals( "http://third", iframe.getSrcAttribute() );
         assertEquals( "Third", ((HtmlPage)iframe.getEnclosedPage()).getTitleText() );
+    }
+
+    /**
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testScriptUnderIFrame() throws Exception {
+        final String firstContent
+            = "<html><body>"
+            + "<iframe src='http://second'>"
+            + "  <div><script>alert(1);</script></div>"
+            + "  <script src='http://third'></script>"
+            + "</iframe>"
+            + "</body></html>";
+        final String secondContent
+            = "<html><body><script>alert(2);</script></body></html>";
+        final String thirdContent
+            = "alert('3');";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent, "text/javascript");
+
+        client.setWebConnection( webConnection );
+        
+        final String[] expectedAlerts = {"2"};
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        
+        client.getPage(URL_FIRST);
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 }

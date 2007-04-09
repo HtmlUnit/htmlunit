@@ -53,6 +53,7 @@ import java.util.Map;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author David K. Taylor
+ * @author Ahmed Ashour
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">
  * DOM Level 1</a>
  * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">
@@ -166,8 +167,23 @@ public class HtmlScript extends HtmlElement {
      */
     public DomNode appendChild(final DomNode node) {
         final DomNode response = super.appendChild(node);
-        executeInlineScriptIfNeeded();
+        if (canExecute()) {
+            executeInlineScriptIfNeeded();
+        }
         return response;
+    }
+
+    /**
+     * Indicates if the script can be executed
+     * @return <code>false</code> if the script is nested in a node preventing its execution
+     */
+    boolean canExecute() {
+        for (DomNode o = this; o != null; o = o.getParentNode()) {
+            if (o instanceof HtmlInlineFrame || o instanceof HtmlNoFrames) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
