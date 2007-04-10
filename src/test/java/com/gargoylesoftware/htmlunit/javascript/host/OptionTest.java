@@ -175,4 +175,41 @@ public class OptionTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testOptionIndexOutOfBound() throws Exception {
+        final String content
+            = "<html><head><title>foo</title><script>"
+            + "function doTest()"
+            + "{"
+            + "  var options = document.getElementById('testSelect').options;" 
+            + "  alert(options[55]);"
+            + "  try"
+            + "  {"
+            + "    alert(options[-55]);" 
+            + "  }"
+            + "  catch (e)"
+            + "  {"
+            + "    alert('catched exception for negative index');" 
+            + "  }"
+            + "}"
+            + "</script></head><body onload='doTest()'>"
+            + "<form name='form1'>"
+            + "    <select name='select1' id='testSelect'>"
+            + "        <option value='option1' name='option1'>One</option>"
+            + "    </select>"
+            + "</form>"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"undefined", "catched exception for negative index"};
+
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }

@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem">
+                JavaScript: handle out of bound indexes on options as browsers do (undefined when too high and exception when negative).
+            </action>
             <action type="update" dev="mguillem" id="799817" due-to="Ahmed Ashour">
                 Added (limited) support for client side map.
             </action>

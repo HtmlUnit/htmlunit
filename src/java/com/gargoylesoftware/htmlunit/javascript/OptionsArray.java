@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.host.Option;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement;
 
+import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
 /**
@@ -92,14 +93,18 @@ public class OptionsArray extends SimpleScriptable {
      * @return The object or NOT_FOUND
      */
     public Object get( final int index, final Scriptable start ) {
-        Object object = null;
-        try {
-            object = getScriptableFor( htmlSelect_.getOption( index ) );
+        final Object response;
+        if (index < 0) {
+            throw Context.reportRuntimeError("Index or size is negative");
         }
-        catch( final IndexOutOfBoundsException e ) {
-            object = NOT_FOUND;
+        else if (index >= htmlSelect_.getOptionSize()) {
+            response = Context.getUndefinedValue();
         }
-        return object;
+        else {
+            response = getScriptableFor(htmlSelect_.getOption(index));
+        }
+
+        return response;
     }
 
 
