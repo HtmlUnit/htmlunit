@@ -1475,7 +1475,7 @@ public class WebClientTest extends WebTestCase {
         final byte[] directBytes = IOUtils.toByteArray(new FileInputStream(testfile));
         final String directStr = hexRepresentation(directBytes);
         final WebClient client = new WebClient();
-        final Page testpage = client.getPage(testfile.toURL());
+        final Page testpage = client.getPage(testfile.toURI().toURL());
         final byte[] webclientBytes = IOUtils.toByteArray(testpage.getWebResponse().getContentAsStream());
         final String webclientStr = hexRepresentation(webclientBytes);
         assertEquals(directStr, webclientStr);
