@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.net.URL;
+
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -45,6 +47,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision: 1129 $
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlImageTest extends WebTestCase {
     /**
@@ -96,4 +99,59 @@ public class HtmlImageTest extends WebTestCase {
         }
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testUseMapClick() throws Exception {
+        testUseMapClick(0, 0, "/");
+        testUseMapClick(10, 10, "a.html");
+        testUseMapClick(20, 10, "a.html");
+        testUseMapClick(29, 10, "b.html");
+        testUseMapClick(50, 50, "/");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    private void testUseMapClick(final int x, final int y, final String urlSuffix) throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<img id='myImg' src='foo.png' usemap='#map1'>"
+            + "<map name='map1'>"
+            + "<area href='a.html' shape='rect' coords='5,5,20,20'>"
+            + "<area href='b.html' shape='circle' coords='25,10,10'>"
+            + "</map>"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+        
+        final HtmlImage img = (HtmlImage) page.getHtmlElementById("myImg");
+        
+        final Page page2 = img.click(x, y);
+        final URL url = page2.getWebResponse().getUrl();
+        assertTrue(url.toExternalForm(), url.toExternalForm().endsWith(urlSuffix));
+    }
+
+    /**
+     * Tests circle radius of percentage value, Not Yet Implemented
+     * @throws Exception
+     */
+    public void testUseMapClick_CircleRadiusPercentage() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<img id='myImg' src='foo.png' usemap='#map1'>"
+            + "<map name='map1'>"
+            + "<area href='a.html' shape='rect' coords='5,5,20,20'>"
+            + "<area href='b.html' shape='circle' coords='25,10,10%'>"
+            + "</map>"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+        
+        final HtmlImage img = (HtmlImage) page.getHtmlElementById("myImg");
+        
+        img.click(0, 0);
+    }
 }

@@ -37,10 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -52,10 +57,12 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 /**
  * Wrapper for the html element "area".
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlArea extends FocusableElement {
 
@@ -252,5 +259,65 @@ public class HtmlArea extends FocusableElement {
      */
     public final String getTargetAttribute() {
         return getAttributeValue("target");
+    }
+
+    /**
+     * Indicates if this area contains the give point
+     * @param x the x coordinate of the point
+     * @param y the y coordinate of the point
+     * @return <code>true</code> if the point is contained in this area
+     */
+    boolean containsPoint(final int x, final int y) {
+        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), "rect").toLowerCase();
+
+        if ("default".equals(shape) && getCoordsAttribute() != null) {
+            return true;
+        }
+        else if ("rect".equals(shape) && getCoordsAttribute() != null) {
+            final String[] coords = getCoordsAttribute().split(",");
+            final double leftX = Double.parseDouble( coords[0].trim() );
+            final double topY = Double.parseDouble( coords[1].trim() );
+            final double rightX = Double.parseDouble( coords[2].trim() );
+            final double bottomY = Double.parseDouble( coords[3].trim() );
+            final Rectangle2D rectangle = new Rectangle2D.Double(leftX, topY, 
+                    rightX - leftX + 1, bottomY - topY + 1);
+            if (rectangle.contains(x, y))
+                return true;
+        }
+        else if ("circle".equals(shape) && getCoordsAttribute() != null) {
+            final String[] coords = getCoordsAttribute().split(",");
+            double centerX = Double.parseDouble( coords[0].trim() );
+            double centerY = Double.parseDouble( coords[1].trim() );
+            final String radiusString = coords[2].trim();
+            
+            final int radius;
+            try {
+                radius = Integer.parseInt( radiusString );
+            }
+            catch (final NumberFormatException nfe) {
+                throw new NumberFormatException("Circle radius of " + radiusString + " is not yet implemented.");
+            }
+            final Ellipse2D ellipse = new Ellipse2D.Double(centerX - radius / 2, centerY - radius / 2, 
+                    radius, radius);
+            if (ellipse.contains(x, y))
+                return true;
+        }
+        else if ("poly".equals(shape) && getCoordsAttribute() != null ) {
+            final String[] coords = getCoordsAttribute().split(",");
+            final GeneralPath path = new GeneralPath();
+            for (int i=0; i + 1 < coords.length; i+=2) {
+                if (i == 0) {
+                    path.moveTo(Float.parseFloat(coords[i]), Float.parseFloat(coords[i+1]));
+                }
+                else {
+                    path.lineTo(Float.parseFloat(coords[i]), Float.parseFloat(coords[i+1]));
+                }
+            }
+            path.closePath();
+            if (path.contains(x, y))
+                return true;
+        }
+        
+        return false;
     }
 }

@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
@@ -49,13 +50,14 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author  David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Ahmed Ashour
  */
 public class HtmlImage extends ClickableElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "img";
-    private int lastIsMapClickX_ = 0;
-    private int lastIsMapClickY_ = 0;
+    private int lastClickX_;
+    private int lastClickY_;
 
     /**
      * Create an instance of HtmlImage
@@ -242,8 +244,8 @@ public class HtmlImage extends ClickableElement {
     public Page click(final int x, final int y)
         throws IOException {
         
-        lastIsMapClickX_ = x;
-        lastIsMapClickY_ = y;
+        lastClickX_ = x;
+        lastClickY_ = y;
         return super.click();
     }
     
@@ -265,17 +267,34 @@ public class HtmlImage extends ClickableElement {
      * @throws IOException If an IO error occured
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
-        final HtmlAnchor anchor = (HtmlAnchor) getEnclosingElement("a");
-        if (anchor == null) {
+        if (getUseMapAttribute() != ATTRIBUTE_NOT_DEFINED) {
+            // remove initial '#'
+            final String mapName = getUseMapAttribute().substring(1);
+            final HtmlMap map = (HtmlMap) getPage().getDocumentElement().getOneHtmlElementByAttribute("map", "name", mapName);
+            for (final Iterator it = map.getChildElementsIterator(); it.hasNext(); ) {
+                final HtmlElement element = (HtmlElement) it.next();
+                if (element instanceof HtmlArea) {
+                    final HtmlArea area = (HtmlArea) element;
+                    if (area.containsPoint(lastClickX_, lastClickY_)){
+                        return area.doClickAction(defaultPage);
+                    }
+                }
+            }
+            
             return super.doClickAction(defaultPage);
         }
         else {
-            if (getIsmapAttribute() != ATTRIBUTE_NOT_DEFINED) {
-                final String suffix = "?" + lastIsMapClickX_ + "," + lastIsMapClickY_;
-                return anchor.doClickAction(defaultPage, suffix);
+            final HtmlAnchor anchor = (HtmlAnchor) getEnclosingElement("a");
+            if (anchor == null) {
+                return super.doClickAction(defaultPage);
             }
             else {
-                return anchor.doClickAction(defaultPage);
+                if (getIsmapAttribute() != ATTRIBUTE_NOT_DEFINED) {
+                    final String suffix = "?" + lastClickX_ + "," + lastClickY_;
+                    return anchor.doClickAction(defaultPage, suffix);
+                }
+                else
+                    return anchor.doClickAction(defaultPage);
             }
         }
     }
