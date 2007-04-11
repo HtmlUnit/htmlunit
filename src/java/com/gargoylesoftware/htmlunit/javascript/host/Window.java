@@ -274,7 +274,7 @@ public class Window extends SimpleScriptable {
         final Window thisWindow = (Window) scriptable;
 
         final Popup popup = (Popup) thisWindow.makeJavaScriptObject("Popup");
-        popup.init(thisWindow.getWebWindow().getWebClient());
+        popup.init(thisWindow.getWebWindow());
         
         return popup;
     }

@@ -499,6 +499,35 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    public void testGetSetInnerHTMLChar() throws Exception {
+        final String content = "<html>\n" +
+            "<head>\n" +
+            "    <title>test</title>\n" +
+            "    <script>\n" +
+            "    function doTest(){\n" +
+            "       var myNode = document.getElementById('myNode');\n" +
+            "       alert('Old = ' + myNode.innerHTML);\n" +
+            "       myNode.innerHTML = 'New  cell value &amp; \\u0110 &#272;';\n" +
+            "       alert('New = ' + myNode.innerHTML);\n" +
+            "   }\n" +
+            "    </script>\n" +
+            "</head>\n" +
+            "<body onload='doTest()'>\n" +
+            "<p id='myNode'><b>Old innerHTML</b></p>\n" +
+            "</body>\n" +
+            "</html>\n" +
+            "";
+        final String[] expectedAlerts = {
+                "Old = <b>Old innerHTML</b>",
+                "New = New cell value & \u0110 \u0110" // TODO this is wrong should be &amp;
+        };
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
     /**
      * Test setting innerHTML to empty string
      * @throws Exception if the test fails

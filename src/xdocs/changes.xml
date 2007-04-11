@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1541150" due-to="Sam Hough and Ahmed Ashour">
+                JavaScript: fixed set innerHTML uses 8bits for all chars and ignores some HTML.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: handle out of bound indexes on options as browsers do (undefined when too high and exception when negative).
             </action>

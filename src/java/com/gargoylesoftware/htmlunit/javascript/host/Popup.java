@@ -42,6 +42,7 @@ import java.util.Collections;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ThreadManager;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
@@ -58,6 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class Popup extends SimpleScriptable {
 
+    private static final long serialVersionUID = 2016351591254223906L;
     private boolean opened_;
     private Document document_;
 
@@ -68,13 +70,15 @@ public class Popup extends SimpleScriptable {
         opened_ = false;
     }
     
-    void init(final WebClient webClient) {
+    void init(final WebWindow openerWindow) {
         // build document
         document_ = (Document) makeJavaScriptObject("Document");
 
         // create the "page" associated to the document
-        final WebWindow popupPseudoWindow = new PopupPseudoWebWindow(webClient);
-        final HtmlPage popupPage = new HtmlPage(null, null, popupPseudoWindow);
+        final WebWindow popupPseudoWindow = new PopupPseudoWebWindow(openerWindow.getWebClient());
+        // take the WebResponse of the opener (not really correct, but...)
+        final WebResponse webResponse = openerWindow.getEnclosedPage().getWebResponse();
+        final HtmlPage popupPage = new HtmlPage(null, webResponse, popupPseudoWindow);
         popupPseudoWindow.setEnclosedPage(popupPage);
         final HtmlHtml html = new HtmlHtml(popupPage, Collections.EMPTY_MAP);
         popupPage.appendChild(html);

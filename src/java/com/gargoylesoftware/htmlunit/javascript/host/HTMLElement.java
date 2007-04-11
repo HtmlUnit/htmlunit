@@ -40,10 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -55,25 +52,22 @@ import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
+import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.WebWindowImpl;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
-import com.gargoylesoftware.htmlunit.html.IElementFactory;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 
@@ -478,10 +472,7 @@ public class HTMLElement extends NodeImpl {
             || (value != null && !"".equals(value))) {
 
             final String valueAsString = Context.toString(value);
-            for (final Iterator iter = parseHtmlSnippet(valueAsString).iterator(); iter.hasNext();) {
-                final DomNode child = (DomNode) iter.next();
-                appendChildStepByStep(domNode, child);
-            }
+            parseHtmlSnippet(domNode, true, valueAsString);
         }
     }
 
@@ -511,10 +502,7 @@ public class HTMLElement extends NodeImpl {
             throw Context.reportRuntimeError("outerHTML is read-only for tag " + domNode.getNodeName());
         }
 
-        for (final Iterator iter = parseHtmlSnippet(value).iterator(); iter.hasNext();) {
-            final DomNode child = (DomNode) iter.next();
-            insertBeforeStepByStep(domNode, child);
-        }
+        parseHtmlSnippet(domNode, false, value);
         domNode.remove();
     }
 
@@ -523,83 +511,28 @@ public class HTMLElement extends NodeImpl {
      * @param htmlSnippet the html code extract to parse
      * @return collection of {@link DomNode}: the parsed nodes
      */
-    private Collection parseHtmlSnippet(final String htmlSnippet) {
-        if (htmlSnippet.indexOf('<') >= 0) {
-            // build a pseudo WebResponse
-            final WebClient webClient = getDomNodeOrDie().getPage().getWebClient();
-            final boolean jsEnabled = webClient.isJavaScriptEnabled();
-            // disable js while interpreting the html snippet: it only needs to be interpreted
-            // when integrated in the real page
-            webClient.setJavaScriptEnabled(false);
-
-            final WebResponse webResp = new StringWebResponse("<html><body>" + htmlSnippet + "</body></html>",
-                    getDomNodeOrDie().getPage().getWebResponse().getUrl());
-            try {
-                final WebWindow pseudoWindow = new WebWindowImpl(webClient) {
-                    public WebWindow getParentWindow() {
-                        return null;
-                    }
-                    public WebWindow getTopWindow() {
-                        return null;
-                    }
-                    protected void performRegistration() {
-                        // nothing
-                    }
-                };
-                final HtmlPage pseudoPage = HTMLParser.parse(webResp, pseudoWindow);
-                final HtmlBody body = (HtmlBody) pseudoPage.getDocumentElement().getLastChild();
-
-                final Collection nodes = new ArrayList();
-                for (final Iterator iter = body.getChildIterator(); iter.hasNext();) {
-                    final DomNode child = (DomNode) iter.next();
-                    nodes.add(copy(child, getHtmlElementOrDie().getPage()));
+    private void parseHtmlSnippet(final DomNode target, final boolean append, final String source) {
+        DomNode proxyNode = new HtmlDivision(target.getPage(), null) {
+            public DomNode appendChild(final DomNode node) {
+                if (append) {
+                    return target.appendChild(node);
+                } else {
+                    target.insertBefore(node);
+                    return node;
                 }
-                return nodes;
             }
-            catch (final Exception e) {
-                getLog().error("Unexpected exception occured while parsing html snippet", e);
-                throw Context.reportRuntimeError("Unexpected exception occured while parsing html snippet: "
-                        + e.getMessage());
-            }
-            finally {
-                // set javascript enabled back to original state
-                webClient.setJavaScriptEnabled(jsEnabled);
-            }
+        };
+        try {
+            HTMLParser.parseFragment(proxyNode, source);
+        } catch (IOException e) {
+            getLog().error("Unexpected exception occured while parsing html snippet", e);
+            throw Context.reportRuntimeError("Unexpected exception occured while parsing html snippet: "
+                    + e.getMessage());
+        } catch (SAXException e) {
+            getLog().error("Unexpected exception occured while parsing html snippet", e);
+            throw Context.reportRuntimeError("Unexpected exception occured while parsing html snippet: "
+                    + e.getMessage());
         }
-        else {
-            // just text, keep it simple
-            final DomNode node = new DomText(getDomNodeOrDie().getPage(), htmlSnippet);
-            return Collections.singleton(node);
-        }
-    }
-
-    /**
-     * Copies the node to make it available to the page.
-     * All this stuff just to change the htmlPage_ property on all nodes!
-     *
-     * @param node The node to copy.
-     * @param page The page containing the node.
-     * @return a node with the same properties but bound to the page.
-     */
-    private DomNode copy(final DomNode node, final HtmlPage page) {
-        final DomNode copy;
-        if (node instanceof DomText) {
-            copy = new DomText(page, node.getNodeValue());
-        }
-        else if (node instanceof DomComment) {
-            copy = new DomComment(page, node.getNodeValue());
-        }
-        else {
-            final HtmlElement htmlElt = (HtmlElement) node;
-            final IElementFactory factory = HTMLParser.getFactory(htmlElt.getNodeName());
-            copy = factory.createElement(page, node.getNodeName(), readAttributes(htmlElt));
-            for (final Iterator iter = node.getChildIterator(); iter.hasNext();) {
-                final DomNode child = (DomNode) iter.next();
-                copy.appendChild(copy(child, page));
-            }
-        }
-
-        return copy;
     }
 
     /**
@@ -672,48 +605,9 @@ public class HTMLElement extends NodeImpl {
         }
 
         // add the new nodes
-        for (final Iterator iter = parseHtmlSnippet(text).iterator(); iter.hasNext();) {
-            final DomNode child = (DomNode) iter.next();
-            if (append) {
-                appendChildStepByStep(node, child);
-            }
-            else {
-                insertBeforeStepByStep(node, child);
-            }
-        }
+        parseHtmlSnippet(node, append, text); 
 
     }
-    
-    private void appendChildStepByStep(final DomNode target, final DomNode child) {
-        final Collection coll = new ArrayList();
-        for (final Iterator iter = child.getChildIterator(); iter.hasNext();) {
-            coll.add((DomNode)iter.next());
-            iter.remove();
-        }
-        
-        target.appendChild(child);
-        
-        for (final Iterator iter = coll.iterator(); iter.hasNext();) {
-            appendChildStepByStep(child, (DomNode)iter.next());
-        }
-        
-    }
-
-    private void insertBeforeStepByStep(final DomNode target, final DomNode child) {
-        final Collection coll = new ArrayList();
-        for (final Iterator iter = child.getChildIterator(); iter.hasNext();) {
-            coll.add((DomNode)iter.next());
-            iter.remove();
-        }
-        
-        target.insertBefore(child);
-        
-        for (final Iterator iter = coll.iterator(); iter.hasNext();) {
-            appendChildStepByStep(child, (DomNode)iter.next());
-        }
-        
-    }
-    
     
     /**
      * Adds the specified behavior to this HTML element. Currently only supports

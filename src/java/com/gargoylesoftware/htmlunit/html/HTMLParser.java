@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -203,6 +204,28 @@ public final class HTMLParser {
     }
 
     /**
+      * parse the HTML content from the given String into an object tree representation
+      *
+      * @param parent the parent for the new nodes
+      * @param source the (X)HTML to be parsed
+      * @throws java.io.IOException io error
+      */
+    public static void parseFragment(final DomNode parent, final String source)
+    throws SAXException, IOException {
+
+        final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(parent, parent.getPage().getWebResponse().getUrl());
+        domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
+        final XMLInputSource in = new XMLInputSource(
+                null,
+                parent.getPage().getWebResponse().getUrl().toString(),
+                null,
+                new StringReader(source),
+                null);
+
+        domBuilder.parse(in);
+    }
+    
+    /**
      * parse the HTML content from the given WebResponse into an object tree representation
      *
      * @param webResponse the response data
@@ -213,9 +236,12 @@ public final class HTMLParser {
      */
     public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow)
         throws IOException {
-        final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(webResponse, webWindow);
+        final HtmlPage page = new HtmlPage(webResponse.getUrl(), webResponse, webWindow);
+        webWindow.setEnclosedPage(page);
+                
+        final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, webResponse.getUrl());
         String charSet = webResponse.getContentCharSet();
-        if( isSupportedCharacterSet(charSet) == false ) {
+        if (!isSupportedCharacterSet(charSet)) {
             charSet = "ISO-8859-1";
         }
         final XMLInputSource in = new XMLInputSource(
@@ -285,12 +311,7 @@ public final class HTMLParser {
      */
     private static class HtmlUnitDOMBuilder extends AbstractSAXParser implements ContentHandler, LexicalHandler {
 
-        private final WebResponse webResponse_;
-        private final WebWindow webWindow_;
-
-        // private final ScriptFilter scriptFilter_;
-
-        private HtmlPage page_;
+        private final HtmlPage page_;
 
         private Locator locator_;
         private final Stack stack_ = new Stack();
@@ -304,17 +325,18 @@ public final class HTMLParser {
          * @param webResponse the response data
          * @param webWindow the web window into which the page is to be loaded
          */
-        public HtmlUnitDOMBuilder(final WebResponse webResponse, final WebWindow webWindow) {
+        private HtmlUnitDOMBuilder(final DomNode page, final URL url) {
             super(new HTMLConfiguration());
+            this.page_ = page.getPage();
 
-            webResponse_ = webResponse;
-            webWindow_ = webWindow;
-
-            final HTMLParserListener listener = webWindow.getWebClient().getHTMLParserListener();
+            currentNode_ = page;
+            stack_.push(currentNode_);
+            
+            final HTMLParserListener listener = page_.getWebClient().getHTMLParserListener();
             final boolean reportErrors;
             if (listener != null) {
                 reportErrors = true;
-                fConfiguration.setErrorHandler(new HTMLErrorHandler(listener, webResponse.getUrl()));
+                fConfiguration.setErrorHandler(new HTMLErrorHandler(listener, url));
             }
             else {
                 reportErrors = false;
@@ -363,12 +385,6 @@ public final class HTMLParser {
 
         /** @inheritDoc ContentHandler#startDocument() */
         public void startDocument() throws SAXException {
-            page_ = new HtmlPage(webResponse_.getUrl(), webResponse_, webWindow_);
-            webWindow_.setEnclosedPage(page_);
-
-            page_.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
-            currentNode_ = page_;
-            stack_.push(currentNode_);
         }
 
         /** @inheritDoc ContentHandler#startElement(String,String,String,Attributes) */
@@ -476,6 +492,7 @@ public final class HTMLParser {
 
         /** @inheritDoc ContentHandler#endDocument() */
         public void endDocument() throws SAXException {
+            handleCharacters();
             page_.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
         }
 
