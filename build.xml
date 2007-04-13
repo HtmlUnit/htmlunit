@@ -83,13 +83,17 @@
     </copy>
 </target>
 <target name="jar" description="Make a jar of HtmlUnit" depends="clean,compile,junit">
-    <jar
-        jarfile="${target.dir}/HtmlUnit.jar"
+	<mkdir dir="${target.dir}/distrib"/>
+	<tstamp>
+	    <format property="now" pattern="yyyyMMdd.hhmm" locale="en"/>
+	</tstamp>
+	<jar
+        jarfile="${target.dir}/distrib/HtmlUnit-${now}.jar"
         basedir="${base.classes.dir}"
         excludes="**/test/*,**/*.java,build.xml,lib,**/package.html"
     />
     <jar
-        jarfile="${target.dir}/HtmlUnit-src.jar"
+        jarfile="${target.dir}/distrib/HtmlUnit-src-${now}.jar"
         basedir="${base.src.dir}"
         includes="**/*.java"/>
 </target>
