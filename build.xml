@@ -82,18 +82,22 @@
         </fileset>
     </copy>
 </target>
+<target name="cruise-set-jar-suffix">
+    <tstamp>
+        <format property="now" pattern="yyyyMMdd.hhmm" locale="en"/>
+    </tstamp>
+    <property name="jar.suffix" value="-${now}"/>
+</target>
 <target name="jar" description="Make a jar of HtmlUnit" depends="clean,compile,junit">
+    <property name="jar.suffix" value=""/>
 	<mkdir dir="${target.dir}/distrib"/>
-	<tstamp>
-	    <format property="now" pattern="yyyyMMdd.hhmm" locale="en"/>
-	</tstamp>
 	<jar
-        jarfile="${target.dir}/distrib/HtmlUnit-${now}.jar"
+        jarfile="${target.dir}/distrib/HtmlUnit${jar.suffix}.jar"
         basedir="${base.classes.dir}"
         excludes="**/test/*,**/*.java,build.xml,lib,**/package.html"
     />
     <jar
-        jarfile="${target.dir}/distrib/HtmlUnit-src-${now}.jar"
+        jarfile="${target.dir}/distrib/HtmlUnit-src${jar.suffix}.jar"
         basedir="${base.src.dir}"
         includes="**/*.java"/>
 </target>
@@ -125,6 +129,7 @@
             errorProperty="test.failed" failureProperty="test.failed">
         <classpath refid="test.class.path"/>
         <formatter type="xml"/>
+        <formatter type="brief" usefile="false"/>
 
         <batchtest todir="${test.results.dir}">
             <fileset dir="${test.classes.dir}">
@@ -252,6 +257,6 @@ JUnit results available here: ${test.reports.dir}/index.html
 	    <setproxy proxyhost="${proxy.host}" proxyport="${proxy.port}"/>
 	</target>
 
-	<target name="cruise" depends="get-jars,jar" description="Called by Cruise Control during a build">
+	<target name="cruise" depends="get-jars,cruise-set-jar-suffix,jar" description="Called by Cruise Control during a build">
 	</target>
 </project>
