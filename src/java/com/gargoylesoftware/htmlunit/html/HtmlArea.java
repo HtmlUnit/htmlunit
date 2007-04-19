@@ -281,13 +281,14 @@ public class HtmlArea extends FocusableElement {
             final double bottomY = Double.parseDouble( coords[3].trim() );
             final Rectangle2D rectangle = new Rectangle2D.Double(leftX, topY, 
                     rightX - leftX + 1, bottomY - topY + 1);
-            if (rectangle.contains(x, y))
+            if (rectangle.contains(x, y)) {
                 return true;
+            }
         }
         else if ("circle".equals(shape) && getCoordsAttribute() != null) {
             final String[] coords = getCoordsAttribute().split(",");
-            double centerX = Double.parseDouble( coords[0].trim() );
-            double centerY = Double.parseDouble( coords[1].trim() );
+            final double centerX = Double.parseDouble( coords[0].trim() );
+            final double centerY = Double.parseDouble( coords[1].trim() );
             final String radiusString = coords[2].trim();
             
             final int radius;
@@ -299,8 +300,9 @@ public class HtmlArea extends FocusableElement {
             }
             final Ellipse2D ellipse = new Ellipse2D.Double(centerX - radius / 2, centerY - radius / 2, 
                     radius, radius);
-            if (ellipse.contains(x, y))
+            if (ellipse.contains(x, y)) {
                 return true;
+            }
         }
         else if ("poly".equals(shape) && getCoordsAttribute() != null ) {
             final String[] coords = getCoordsAttribute().split(",");
@@ -314,8 +316,9 @@ public class HtmlArea extends FocusableElement {
                 }
             }
             path.closePath();
-            if (path.contains(x, y))
+            if (path.contains(x, y)) {
                 return true;
+            }
         }
         
         return false;
