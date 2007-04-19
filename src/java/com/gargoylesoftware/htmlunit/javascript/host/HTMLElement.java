@@ -516,7 +516,8 @@ public class HTMLElement extends NodeImpl {
             public DomNode appendChild(final DomNode node) {
                 if (append) {
                     return target.appendChild(node);
-                } else {
+                }
+                else {
                     target.insertBefore(node);
                     return node;
                 }
@@ -524,11 +525,13 @@ public class HTMLElement extends NodeImpl {
         };
         try {
             HTMLParser.parseFragment(proxyNode, source);
-        } catch (IOException e) {
+        }
+        catch (final IOException e) {
             getLog().error("Unexpected exception occured while parsing html snippet", e);
             throw Context.reportRuntimeError("Unexpected exception occured while parsing html snippet: "
                     + e.getMessage());
-        } catch (SAXException e) {
+        }
+        catch (final SAXException e) {
             getLog().error("Unexpected exception occured while parsing html snippet", e);
             throw Context.reportRuntimeError("Unexpected exception occured while parsing html snippet: "
                     + e.getMessage());
