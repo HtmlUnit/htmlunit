@@ -92,8 +92,7 @@ public class JavaScriptEngine extends ScriptEngine {
     /**
      * Map of (Window, protypes map).
      */
-    private final Map prototypesPerWindow = new WeakHashMap();
-
+    private final Map prototypesPerWindow_ = new WeakHashMap();
 
     /**
      * Key used to place the scope in which the execution of some javascript code
@@ -155,7 +154,7 @@ public class JavaScriptEngine extends ScriptEngine {
 
             // configure the prototypes chains
             for (final Iterator iter = prototypes.values().iterator(); iter.hasNext();) {
-                Scriptable prototype = (Scriptable) iter.next();
+                final Scriptable prototype = (Scriptable) iter.next();
                 Class theClass = prototype.getClass();
                 Scriptable superPrototype = null;
                 while (theClass != null && superPrototype == null) {
@@ -167,7 +166,7 @@ public class JavaScriptEngine extends ScriptEngine {
                 }
             }
             
-            prototypesPerWindow.put(window, prototypes);
+            prototypesPerWindow_.put(window, prototypes);
         }
         catch( final Exception e ) {
             getLog().error("Exception while initializing JavaScript for the page", e);
@@ -178,14 +177,20 @@ public class JavaScriptEngine extends ScriptEngine {
         }
     }
 
-    Scriptable getPrototype(final Class jsClass, final Window scope)
-    {
-        final Map prototypes = (Map) prototypesPerWindow.get(scope);
+    /**
+     * Returns the prototype object corresponding to the specified class inside the specified scope.
+     * @param jsClass the class whose prototype is to be returned
+     * @param scope the scope of the requested prototype
+     * @return the prototype object corresponding to the specified class inside the specified scope
+     */
+    Scriptable getPrototype(final Class jsClass, final Window scope) {
+        final Map prototypes = (Map) prototypesPerWindow_.get(scope);
         if (prototypes != null) {
             return (Scriptable) prototypes.get(jsClass);
         }
-        
-        return null;
+        else {
+            return null;
+        }
     }
 
     /**
