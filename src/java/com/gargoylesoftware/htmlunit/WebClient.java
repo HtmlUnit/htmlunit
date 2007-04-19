@@ -877,8 +877,9 @@ public class WebClient {
             try {
                 final WebRequestSettings settings = new WebRequestSettings(url);
                 final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
-                if (!getBrowserVersion().isIE() )
+                if (!getBrowserVersion().isIE() ) {
                     settings.addAdditionalHeader("Referer", openerPage.getWebResponse().getUrl().toExternalForm());
+                }
                 getPage(window, settings);
             }
             catch( final IOException e ) {
