@@ -51,9 +51,9 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 /**
  * Base class for frame and iframe.
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author David D. Kilzer 
@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 public abstract class BaseFrame extends StyledElement {
 
     private final WebWindow enclosedWindow_ = new FrameWindow(this);
+
     /**
      * @deprecated Please use {@link com.gargoylesoftware.htmlunit.html.FrameWindow} instead
      */
@@ -117,14 +118,18 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     private void loadInnerPageIfPossible(final String srcAttribute) {
-
         if( srcAttribute.length() != 0 ) {
             URL url = null;
             try {
                 url = getPage().getFullyQualifiedUrl(srcAttribute);
             }
             catch( final MalformedURLException e ) {
-                getLog().error("Bad url in src attribute of " + getTagName() + ": url=["+srcAttribute+"]", e);
+                getLog().error("Bad url in src attribute of " + getTagName() + ": url=[" + srcAttribute + "]", e);
+            }
+            final URL pageUrl = getPage().getWebResponse().getUrl();
+            if(url != null && url.sameFile(pageUrl)) {
+                getLog().warn("Ignoring recursive src attribute of " + getTagName() + ": url=[" + srcAttribute + "]");
+                return;
             }
             try {
                 final WebRequestSettings settings = new WebRequestSettings(url);

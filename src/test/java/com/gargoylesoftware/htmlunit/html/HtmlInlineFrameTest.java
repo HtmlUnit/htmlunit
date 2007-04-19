@@ -47,22 +47,22 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- *  Tests for HtmlInlineFrame
+ * Unit tests for {@link HtmlInlineFrame}.
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
 public class HtmlInlineFrameTest extends WebTestCase {
+
     /**
-     *  Create an instance
+     * Creates an instance.
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public HtmlInlineFrameTest( final String name ) {
         super( name );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -98,6 +98,18 @@ public class HtmlInlineFrameTest extends WebTestCase {
         assertEquals( "Third", ((HtmlPage)iframe.getEnclosedPage()).getTitleText() );
     }
 
+    /**
+     * Tests that a recursive src attribute (i.e. src="#xyz") doesn't result in an
+     * infinite loop (bug 1699125).
+     *
+     * @throws Exception if an error occurs
+     */
+    public void testRecursiveSrcAttribute() throws Exception {
+        final String html = "<html><body><iframe id='a' src='#abc'></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("a");
+        assertNotNull(iframe.getEnclosedPage());
+    }
 
     /**
      * @throws Exception if the test fails
@@ -159,4 +171,5 @@ public class HtmlInlineFrameTest extends WebTestCase {
         client.getPage(URL_FIRST);
         assertEquals( expectedAlerts, collectedAlerts );
     }
+
 }

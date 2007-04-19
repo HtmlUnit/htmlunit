@@ -40,11 +40,11 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 /**
- * Wrapper for the html element "iframe".
+ * Wrapper for the HTML element "iframe".
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  */
@@ -52,7 +52,6 @@ public class HtmlInlineFrame extends BaseFrame {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "iframe";
-
 
     /**
      * Create an instance of HtmlInlineFrame
