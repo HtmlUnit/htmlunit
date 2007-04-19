@@ -45,17 +45,17 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 
 
 /**
- * Tests for {@link ElementArray}.
+ * Tests for {@link HTMLCollection}.
  * @version $Revision: 1129 $
  * @author Marc Guillemot
  */
-public class ElementArrayTest extends WebTestCase {
+public class HTMLCollectionTest extends WebTestCase {
 
 	/**
      * Create an instance
      * @param name The name of the test
      */
-    public ElementArrayTest(final String name) {
+    public HTMLCollectionTest(final String name) {
         super(name);
     }
 
