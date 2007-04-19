@@ -204,16 +204,18 @@ public final class HTMLParser {
     }
 
     /**
-      * parse the HTML content from the given String into an object tree representation
+      * Parses the HTML content from the given string into an object tree representation.
       *
       * @param parent the parent for the new nodes
       * @param source the (X)HTML to be parsed
-      * @throws java.io.IOException io error
+      * @throws SAXException if a SAX error occurs
+      * @throws IOException if an IO error occurs
       */
     public static void parseFragment(final DomNode parent, final String source)
-    throws SAXException, IOException {
+        throws SAXException, IOException {
 
-        final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(parent, parent.getPage().getWebResponse().getUrl());
+        final URL url = parent.getPage().getWebResponse().getUrl();
+        final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(parent, url);
         domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
         final XMLInputSource in = new XMLInputSource(
                 null,
@@ -224,7 +226,7 @@ public final class HTMLParser {
 
         domBuilder.parse(in);
     }
-    
+
     /**
      * parse the HTML content from the given WebResponse into an object tree representation
      *
@@ -309,7 +311,7 @@ public final class HTMLParser {
      * the ContentHandler interface. Thus all parser APIs are kept private. The ContentHandler methods
      * consume SAX events to build the page DOM
      */
-    private static class HtmlUnitDOMBuilder extends AbstractSAXParser implements ContentHandler, LexicalHandler {
+    private static final class HtmlUnitDOMBuilder extends AbstractSAXParser implements ContentHandler, LexicalHandler {
 
         private final HtmlPage page_;
 
