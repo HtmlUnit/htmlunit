@@ -11,14 +11,12 @@ The reference stays the maven 1 build.
 	<version>1.11</version>
 	<name>HtmlUnit</name>
 	<organization>
-
 		<name>Gargoyle Software Inc.</name>
 		<url>http://www.GargoyleSoftware.com/</url>
 	</organization>
 	<packaging>jar</packaging>
 	<description>A tool for testing web based applications</description>
 	<url>http://htmlunit.sourceforge.net</url>
-
 	<issueManagement>
 		<system>sourceforge</system>
 		<url>
@@ -27,7 +25,6 @@ The reference stays the maven 1 build.
 	</issueManagement>
 	<inceptionYear>2002</inceptionYear>
 	<licenses>
-
 		<license>
 			<name>The HtmlUnit Software License</name>
 			<url>http://htmlunit.sourceforge.net/license.html</url>
@@ -35,7 +32,6 @@ The reference stays the maven 1 build.
 		</license>
 	</licenses>
 	<scm>
-
 		<connection>
 			scm:svn:https://svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit
 		</connection>
@@ -45,7 +41,6 @@ The reference stays the maven 1 build.
 		<url>http://svn.sourceforge.net/viewcvs.cgi/htmlunit/</url>
 	</scm>
 	<mailingLists>
-
 		<mailingList>
 			<name>HtmlUnit Users</name>
 			<subscribe>
@@ -55,7 +50,6 @@ The reference stays the maven 1 build.
 				http://lists.sourceforge.net/lists/listinfo/htmlunit-user
 			</unsubscribe>
 			<archive>
-
 				http://lists.sourceforge.net/lists/listinfo/htmlunit-user
 			</archive>
 			<post>htmlunit-users@lists.sourceforge.net</post>
@@ -65,7 +59,6 @@ The reference stays the maven 1 build.
 			<subscribe>
 				http://lists.sourceforge.net/lists/listinfo/htmlunit-develop
 			</subscribe>
-
 			<unsubscribe>
 				http://lists.sourceforge.net/lists/listinfo/htmlunit-develop
 			</unsubscribe>
@@ -76,7 +69,6 @@ The reference stays the maven 1 build.
 		</mailingList>		
 	</mailingLists>
 	<developers>
-
 		<developer>
 			<name>Mike Bowler</name>
 			<id>mbowler</id>
@@ -85,7 +77,6 @@ The reference stays the maven 1 build.
 			<url>
 				http://www.sphericalimprovement.com/blogs/mbowler/
 			</url>
-
 			<timezone>-5</timezone>
 		</developer>
 		<developer>
@@ -93,14 +84,12 @@ The reference stays the maven 1 build.
 			<id>dktaylor</id>
 		</developer>
 		<developer>
-
 			<name>Brad Clarke</name>
 			<id>yourgod</id>
 			<email>yourgod@users.sourceforge.net</email>
 			<url>http://www.bradclarke.com/</url>
 			<timezone>-6</timezone>
 		</developer>
-
 		<developer>
 			<name>Marc Guillemot</name>
 			<id>mguillem</id>
@@ -108,15 +97,19 @@ The reference stays the maven 1 build.
 			<timezone>+1</timezone>
 		</developer>
 		<developer>
-
 			<name>Chris Erskine</name>
 			<id>cerskine</id>
 			<email>cerskine@users.sourceforge.net</email>
 			<timezone>-7</timezone>
 		</developer>
+		<developer>
+			<name>Daniel Gredler</name>
+			<id>sdanig</id>
+			<email>sdanig@users.sourceforge.net</email>
+			<timezone>-5</timezone>
+		</developer>
 	</developers>
 	<contributors>
-
 		<contributor>
 			<name>Noboru Sinohara</name>
 		</contributor>
@@ -124,7 +117,6 @@ The reference stays the maven 1 build.
 			<name>Mike J. Bresnahan</name>
 			<email>gudujarlson@sf.net</email>
 		</contributor>
-
 		<contributor>
 			<name>Dominique Broeglin</name>
 		</contributor>
@@ -133,7 +125,6 @@ The reference stays the maven 1 build.
 		</contributor>
 		<contributor>
 			<name>Barnaby Court</name>
-
 		</contributor>
 		<contributor>
 			<name>Andreas Hangler</name>
@@ -141,7 +132,6 @@ The reference stays the maven 1 build.
 		<contributor>
 			<name>Jun Chen</name>
 			<email>chen_jun@users.sourceforge.net</email>
-
 		</contributor>
 		<contributor>
 			<name>Christian Sell</name>
@@ -149,7 +139,6 @@ The reference stays the maven 1 build.
 		</contributor>
 		<contributor>
 			<name>Darrell DeBoer</name>
-
 		</contributor>
 		<contributor>
 			<name>David D. Kilzer</name>
@@ -157,7 +146,6 @@ The reference stays the maven 1 build.
 		<contributor>
 			<name>Ben Curren</name>
 			<email>bcurren@esomnie.com</email>
-
 		</contributor>
 		<contributor>
 			<name>Mike Williams</name>
@@ -166,15 +154,10 @@ The reference stays the maven 1 build.
 			<name>Mike Gallaher</name>
 		</contributor>
 		<contributor>
-
 			<name>Dierk Koenig</name>
 		</contributor>
 		<contributor>
-			<name>Daniel Gredler</name>
-		</contributor>
-		<contributor>
 			<name>Mike Bresnahan</name>
-
 		</contributor>
 		<contributor>
 			<name>Sergey Gorelkin</name>
@@ -183,7 +166,6 @@ The reference stays the maven 1 build.
 			<name>Chris Eldredge</name>
 		</contributor>
 		<contributor>
-
 			<name>Hans Donner</name>
 		</contributor>
 		<contributor>
@@ -191,7 +173,6 @@ The reference stays the maven 1 build.
 		</contributor>
 		<contributor>
 			<name>George Murnock</name>
-
 		</contributor>
 		<contributor>
 			<name>Kent Tong</name>
@@ -200,7 +181,6 @@ The reference stays the maven 1 build.
 			<name>Alfred Nathaniel</name>
 		</contributor>
 		<contributor>
-
 			<name>Bruce Faulkner</name>
 		</contributor>
 		<contributor>
@@ -208,7 +188,6 @@ The reference stays the maven 1 build.
 		</contributor>
 		<contributor>
 			<name>Denis N. Antonioli</name>
-
 		</contributor>
 		<contributor>
 			<name>Stefan Anzinger</name>
@@ -217,7 +196,6 @@ The reference stays the maven 1 build.
 			<name>Paul King</name>
 		</contributor>
 		<contributor>
-
 			<name>Vikram Shitole</name>
 		</contributor>
 		<contributor>
@@ -225,7 +203,6 @@ The reference stays the maven 1 build.
 		</contributor>
 		<contributor>
 			<name>Brad Murray</name>
-
 		</contributor>
 		<contributor>
 			<name>Julien Henry</name>
@@ -234,7 +211,6 @@ The reference stays the maven 1 build.
 			<name>Andre Soereng</name>
 		</contributor>
 	</contributors>
-
 	<build>
 		<sourceDirectory>src/java</sourceDirectory>		
 	</build>
@@ -243,7 +219,6 @@ The reference stays the maven 1 build.
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.2</version>
-
 		</dependency>
 		<dependency>
 			<groupId>jaxen</groupId>
@@ -251,7 +226,6 @@ The reference stays the maven 1 build.
 			<version>1.1</version>
 		</dependency>
 		<dependency>
-
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 			<version>3.2</version>
@@ -259,7 +233,6 @@ The reference stays the maven 1 build.
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-
 			<version>2.2</version>
 		</dependency>
 		<dependency>
@@ -267,7 +240,6 @@ The reference stays the maven 1 build.
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.0.1</version>
 		</dependency>
-
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
@@ -275,7 +247,6 @@ The reference stays the maven 1 build.
 		</dependency>
 		<dependency>
 			<groupId>gsbase</groupId>
-
 			<artifactId>gsbase</artifactId>
 			<version>2.0.1</version>
 			<scope>test</scope>
@@ -283,7 +254,6 @@ The reference stays the maven 1 build.
 		<dependency>
 			<groupId>rhino</groupId>
 			<artifactId>js</artifactId>
-
 			<version>1.6R5</version>
 		</dependency>
 		<dependency>
@@ -291,7 +261,6 @@ The reference stays the maven 1 build.
 			<artifactId>xercesImpl</artifactId>
 			<version>2.6.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xmlParserAPIs</artifactId>
@@ -299,7 +268,6 @@ The reference stays the maven 1 build.
 		</dependency>
 		<dependency>
 			<groupId>nekohtml</groupId>
-
 			<artifactId>nekohtml</artifactId>
 			<version>0.9.5</version>
 		</dependency>
@@ -307,7 +275,6 @@ The reference stays the maven 1 build.
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>1.1</version>
-
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -315,7 +282,6 @@ The reference stays the maven 1 build.
 			<version>1.3</version>
 		</dependency>
 		<dependency>
-
 			<groupId>jetty</groupId>
 			<artifactId>org.mortbay.jetty</artifactId>
 			<version>5.1.4</version>
@@ -323,7 +289,6 @@ The reference stays the maven 1 build.
 		</dependency>
 	</dependencies>
 	<distributionManagement>
-
 		<site>
 			<id>htmlunit-website</id>
 			<name>HtmlUnit WebSite - Sourceforge</name>
@@ -332,7 +297,6 @@ The reference stays the maven 1 build.
 			</url>
 		</site>
 		<repository>
-
 			<id>htmlunit-m2-repo</id>
 			<url>
 				scpexe://shell.sourceforge.net/home/groups/h/ht/htmlunit/htdocs/m2-repo
@@ -341,7 +305,6 @@ The reference stays the maven 1 build.
 		</repository>
 		<snapshotRepository>
 			<id>htmlunit-m2-repo-snapshots</id>
-
 			<url>
 				scpexe://shell.sourceforge.net/home/groups/h/ht/htmlunit/htdocs/m2-repo-snapshots
 			</url>
