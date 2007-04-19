@@ -46,9 +46,9 @@ import com.gargoylesoftware.htmlunit.Page;
 /**
  * Wrapper for the html element "img".
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
@@ -270,7 +270,8 @@ public class HtmlImage extends ClickableElement {
         if (getUseMapAttribute() != ATTRIBUTE_NOT_DEFINED) {
             // remove initial '#'
             final String mapName = getUseMapAttribute().substring(1);
-            final HtmlMap map = (HtmlMap) getPage().getDocumentElement().getOneHtmlElementByAttribute("map", "name", mapName);
+            final HtmlElement doc = getPage().getDocumentElement();
+            final HtmlMap map = (HtmlMap) doc.getOneHtmlElementByAttribute("map", "name", mapName);
             for (final Iterator it = map.getChildElementsIterator(); it.hasNext(); ) {
                 final HtmlElement element = (HtmlElement) it.next();
                 if (element instanceof HtmlArea) {
@@ -280,7 +281,6 @@ public class HtmlImage extends ClickableElement {
                     }
                 }
             }
-            
             return super.doClickAction(defaultPage);
         }
         else {
@@ -293,9 +293,11 @@ public class HtmlImage extends ClickableElement {
                     final String suffix = "?" + lastClickX_ + "," + lastClickY_;
                     return anchor.doClickAction(defaultPage, suffix);
                 }
-                else
+                else {
                     return anchor.doClickAction(defaultPage);
+                }
             }
         }
     }
+
 }
