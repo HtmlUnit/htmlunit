@@ -77,8 +77,8 @@ import org.apache.commons.logging.impl.SimpleLog;
  * An object that handles the actual communication portion of page
  * retrieval/submission
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author David D. Kilzer
  * @author Marc Guillemot
@@ -193,8 +193,7 @@ public class HttpWebConnection extends WebConnectionImpl {
      * @throws IOException
      */
     private HttpMethodBase makeHttpMethod(final WebRequestSettings webRequestSettings)
-        throws
-            IOException {
+        throws IOException {
 
         final HttpMethodBase httpMethod;
         String path = webRequestSettings.getURL().getPath();
@@ -223,7 +222,9 @@ public class HttpWebConnection extends WebConnectionImpl {
                 postMethod.setQueryString(queryString);
             }
             if (webRequestSettings.getRequestBody() != null ) {
-                postMethod.setRequestEntity( new StringRequestEntity(webRequestSettings.getRequestBody(), null, webRequestSettings.getCharset()) );
+                final String body = webRequestSettings.getRequestBody();
+                final String charset = webRequestSettings.getCharset();
+                postMethod.setRequestEntity( new StringRequestEntity(body, null, charset) );
             }
 
             // Note that this has to be done in two loops otherwise it won't
