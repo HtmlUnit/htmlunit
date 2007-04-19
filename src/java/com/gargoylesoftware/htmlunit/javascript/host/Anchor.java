@@ -51,11 +51,11 @@ import java.net.URL;
 /**
  * The javascript object that represents an anchor
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
- * @author  David D. Kilzer
- * @author  Marc Guillemot
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
+ * @author David D. Kilzer
+ * @author Marc Guillemot
  * @author Chris Erskine
  */
 public class Anchor extends FocusableHostElement {
@@ -68,14 +68,13 @@ public class Anchor extends FocusableHostElement {
     public Anchor() {
     }
 
-
     /**
      * Javascript constructor.  This must be declared in every javascript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
     }
- 
+
     /**
      * Set the href property.
      * @param href href attribute value.
@@ -87,11 +86,12 @@ public class Anchor extends FocusableHostElement {
     /**
      * Return the value of the href property of this link.
      * @return The href property.
+     * @throws Exception If an error occurs.
      */
     public String jsxGet_href() throws Exception {
         return getUrl().toString();
     }
-    
+
     /**
      * set the target property of this link.
      * @param target target attribute value.
@@ -107,26 +107,29 @@ public class Anchor extends FocusableHostElement {
     public String jsxGet_target() {
         return getHtmlElementOrDie().getAttributeValue( "target" );
     }
-    
+
     /**
      * Returns this link's current URL.
+     * @return This link's current URL.
+     * @throws Exception If an error occurs.
      */
     private URL getUrl() throws Exception {
         final HtmlAnchor anchor = (HtmlAnchor) getHtmlElementOrDie(); 
         return anchor.getPage().getFullyQualifiedUrl(anchor.getHrefAttribute());
     }
-    
+
     /**
      * sets the href attribute of this link to the specified URL.
      */
     private void setUrl(final URL url) {
         getHtmlElementOrDie().setAttributeValue("href", url.toString());
     }
-    
+
     /**
      * Returns the search portion of the link's URL (the portion starting with 
      * '?' and up to but not including any '#').
      * @return The search portion of the link's URL.
+     * @throws Exception If an error occurs.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/search.asp">
      * MSDN Documentation</a>
      */
@@ -162,10 +165,11 @@ public class Anchor extends FocusableHostElement {
 
         setUrl(UrlUtils.getUrlWithNewQuery(getUrl(), query));
     }
-    
+
     /**
      * Returns the hash portion of the link's URL (the portion following the '#').
      * @return The hash portion of the link's URL.
+     * @throws Exception If an error occurs.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hash.asp">
      * MSDN Documentation</a>
      */
@@ -193,6 +197,7 @@ public class Anchor extends FocusableHostElement {
     /**
      * Returns the host portion of the link's URL (the '[hostname]:[port]' portion).
      * @return The host portion of the link's URL.
+     * @throws Exception If an error occurs.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
      * MSDN Documentation</a>
      */
@@ -236,6 +241,7 @@ public class Anchor extends FocusableHostElement {
     /**
      * Returns the hostname portion of the link's URL.
      * @return The hostname portion of the link's URL.
+     * @throws Exception If an error occurs.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
      * MSDN Documentation</a>
      */
@@ -257,6 +263,7 @@ public class Anchor extends FocusableHostElement {
     /**
      * Returns the pathname portion of the link's URL.
      * @return The pathname portion of the link's URL.
+     * @throws Exception If an error occurs.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/pathname.asp">
      * MSDN Documentation</a>
      */
@@ -278,6 +285,7 @@ public class Anchor extends FocusableHostElement {
     /**
      * Returns the port portion of the link's URL.
      * @return The port portion of the link's URL.
+     * @throws Exception If an error occurs.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/port.asp">
      * MSDN Documentation</a>
      */
@@ -305,6 +313,7 @@ public class Anchor extends FocusableHostElement {
     /**
      * Returns the protocol portion of the link's URL, including the trailing ':'.
      * @return The protocol portion of the link's URL, including the trailing ':'.
+     * @throws Exception If an error occurs.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/protocol.asp">
      * MSDN Documentation</a>
      */
