@@ -154,7 +154,7 @@ public class OptionsArray extends SimpleScriptable {
      * @param index The index
      * @return The object or NOT_FOUND
      */
-    public Object jsFunction_item(final int index) {
+    public Object jsxFunction_item(final int index) {
         return get(index, null);
     }
 
@@ -174,7 +174,7 @@ public class OptionsArray extends SimpleScriptable {
         else {
             final Option option = (Option) newValue;
             final HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
-            if ( index >= jsGet_length() ) {
+            if ( index >= jsxGet_length() ) {
                 // Add a new option at the end.
                 htmlSelect_.appendOption( htmlOption );
             }
@@ -191,7 +191,7 @@ public class OptionsArray extends SimpleScriptable {
     *
     * @return The number of elements in the array
     */
-    public int jsGet_length() {
+    public int jsxGet_length() {
         return htmlSelect_.getOptionSize();
     }
 
@@ -202,7 +202,7 @@ public class OptionsArray extends SimpleScriptable {
      * new length.
      * @param newLength The new length property value
      */
-    public void jsSet_length( final int newLength ) {
+    public void jsxSet_length( final int newLength ) {
         final int currentLength = htmlSelect_.getOptionSize();
         if (currentLength > newLength) {
             htmlSelect_.setOptionSize( newLength );
@@ -257,11 +257,11 @@ public class OptionsArray extends SimpleScriptable {
      * 
      * @see #put   
      */
-    public void jsFunction_add(final Object newOptionObject, final Object newIndex)
+    public void jsxFunction_add(final Object newOptionObject, final Object newIndex)
     {
         // If newIndex is undefined, then the item will be appended to the end of
         // the list
-        int index = jsGet_length();
+        int index = jsxGet_length();
 
         // If newIndex was specified, then use it
         if (newIndex instanceof Number) {

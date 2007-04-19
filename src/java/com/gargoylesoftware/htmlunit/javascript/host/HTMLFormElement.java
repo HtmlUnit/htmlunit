@@ -139,7 +139,7 @@ public class HTMLFormElement extends HTMLElement {
      * @return The value of this attribute.
      */
     public int jsxGet_length() {
-        final int all = jsxGet_elements().jsGet_length();
+        final int all = jsxGet_elements().jsxGet_length();
         final int images = getHtmlForm().getHtmlElementsByAttribute("input", "type", "image").size();
         return all - images;
     }
@@ -289,7 +289,7 @@ public class HTMLFormElement extends HTMLElement {
             throw Context.reportRuntimeError("Failed to initialize collection: " + e.getMessage());
         }
 
-        int nbElements = elements.jsGet_length();
+        int nbElements = elements.jsxGet_length();
         // if no form field is found, IE and Firefox are able to find img by id or name
         if (nbElements == 0) {
             try {
@@ -304,7 +304,7 @@ public class HTMLFormElement extends HTMLElement {
         }
 
         Object result = elements;
-        nbElements = elements.jsGet_length();
+        nbElements = elements.jsxGet_length();
         if (nbElements == 0) {
             result = NOT_FOUND;
         }

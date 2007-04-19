@@ -838,7 +838,7 @@ public final class Document extends NodeImpl {
                     + "): " + e.getMessage());
         }
 
-        final int size = collection.jsGet_length();
+        final int size = collection.jsxGet_length();
         if (size == 1) {
             return collection.get(0, collection);
         }

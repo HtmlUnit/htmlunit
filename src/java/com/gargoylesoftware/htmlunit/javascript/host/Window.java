@@ -858,10 +858,10 @@ public class Window extends SimpleScriptable {
             if (domNode != null
                     && domNode.getPage().getWebClient().getBrowserVersion().isIE()) {
                 final ElementArray array = (ElementArray) thisWindow.document_.jsxFunction_getElementsByName( name );
-                if (array.jsGet_length() == 1) {
+                if (array.jsxGet_length() == 1) {
                     result = array.get(0, array);
                 }
-                else if (array.jsGet_length() > 1) {
+                else if (array.jsxGet_length() > 1) {
                     result = array;
                 }
                 else {

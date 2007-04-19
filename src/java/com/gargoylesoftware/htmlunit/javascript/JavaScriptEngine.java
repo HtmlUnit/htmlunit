@@ -148,8 +148,6 @@ public class JavaScriptEngine extends ScriptEngine {
                 }
             }
 
-            ScriptableObject.defineClass(window, ElementArray.class);
-            ScriptableObject.defineClass(window, OptionsArray.class);
             window.initialize(webWindow);
 
             // configure the prototypes chains

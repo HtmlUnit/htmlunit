@@ -107,12 +107,12 @@ public class RowContainer extends HTMLElement {
      */
     public void jsxFunction_deleteRow(int rowIndex) {
         final ElementArray rows = (ElementArray) jsxGet_rows();
-        if (rowIndex == -1){
-            rowIndex = rows.jsGet_length() - 1;
+        if (rowIndex == -1) {
+            rowIndex = rows.jsxGet_length() - 1;
         }
-        final boolean rowIndexValid = (rowIndex >= 0 && rowIndex < rows.jsGet_length());
+        final boolean rowIndexValid = (rowIndex >= 0 && rowIndex < rows.jsxGet_length());
         if (rowIndexValid) {
-            final SimpleScriptable row = (SimpleScriptable) rows.jsFunction_item(new Integer(rowIndex));
+            final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(new Integer(rowIndex));
             row.getDomNodeOrDie().remove();
         }
     }
@@ -142,7 +142,7 @@ public class RowContainer extends HTMLElement {
         }
 
         final ElementArray rows = (ElementArray) rowContainer.jsxGet_rows();
-        final int nbRows = rows.jsGet_length();
+        final int nbRows = rows.jsxGet_length();
         final int r;
         if (rowIndex == -1 || rowIndex == nbRows) {
             r = Math.max(0, nbRows - 1);
@@ -166,14 +166,14 @@ public class RowContainer extends HTMLElement {
      */
     protected Object insertRow(final int index) {
         final ElementArray rows = (ElementArray) jsxGet_rows();
-        final int nbRows = rows.jsGet_length();
+        final int nbRows = rows.jsxGet_length();
 
         final HtmlElement newRow = getDomNodeOrDie().getPage().createElement("tr");
         if (nbRows == 0) {
             getDomNodeOrDie().appendChild(newRow);
         }
         else {
-            final SimpleScriptable row = (SimpleScriptable) rows.jsFunction_item(new Integer(index));
+            final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(new Integer(index));
             // if at the end, then in the same "sub-container" as the last existing row
             if (index >= nbRows - 1) {
                 row.getDomNodeOrDie().getParentNode().appendChild(newRow);
@@ -194,11 +194,11 @@ public class RowContainer extends HTMLElement {
      */
     public Object jsxFunction_moveRow(final int sourceIndex, final int targetIndex) {
         final ElementArray rows = (ElementArray) jsxGet_rows();
-        final boolean sourceIndexValid = (sourceIndex >= 0 && sourceIndex < rows.jsGet_length());
-        final boolean targetIndexValid = (targetIndex >= 0 && targetIndex < rows.jsGet_length());
+        final boolean sourceIndexValid = (sourceIndex >= 0 && sourceIndex < rows.jsxGet_length());
+        final boolean targetIndexValid = (targetIndex >= 0 && targetIndex < rows.jsxGet_length());
         if (sourceIndexValid && targetIndexValid) {
-            final SimpleScriptable sourceRow = (SimpleScriptable) rows.jsFunction_item(new Integer(sourceIndex));
-            final SimpleScriptable targetRow = (SimpleScriptable) rows.jsFunction_item(new Integer(targetIndex));
+            final SimpleScriptable sourceRow = (SimpleScriptable) rows.jsxFunction_item(new Integer(sourceIndex));
+            final SimpleScriptable targetRow = (SimpleScriptable) rows.jsxFunction_item(new Integer(targetIndex));
             targetRow.getDomNodeOrDie().insertBefore(sourceRow.getDomNodeOrDie());
             return sourceRow;
         }

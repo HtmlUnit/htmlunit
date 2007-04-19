@@ -283,7 +283,7 @@ public class ElementArray extends SimpleScriptable implements Function {
      * @return The length of this element array.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/length.asp">MSDN doc</a>
      */
-    public final int jsGet_length() {
+    public final int jsxGet_length() {
         return getElements().size();
     }
 
@@ -293,7 +293,7 @@ public class ElementArray extends SimpleScriptable implements Function {
      * @return The element or elements corresponding to the specified index or key.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/item.asp">MSDN doc</a>
      */
-    public final Object jsFunction_item( final Object index ) {
+    public final Object jsxFunction_item( final Object index ) {
         return get( index );
     }
 
@@ -304,7 +304,7 @@ public class ElementArray extends SimpleScriptable implements Function {
      * @return The element or elements corresponding to the specified name or id.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/nameditem.asp">MSDN doc</a>
      */
-    public final Object jsFunction_namedItem( final String name ) {
+    public final Object jsxFunction_namedItem( final String name ) {
         return get( name );
     }
 
@@ -316,7 +316,7 @@ public class ElementArray extends SimpleScriptable implements Function {
      * @return All the elements in this element array that have the specified tag name.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/tags.asp">MSDN doc</a>
      */
-    public final Object jsFunction_tags( final String tagName ) {
+    public final Object jsxFunction_tags( final String tagName ) {
         final ElementArray array = (ElementArray) makeJavaScriptObject(JS_OBJECT_NAME);
         try {
             final String newXPathExpr = xpath_.toString() + "[name() = '" + tagName.toLowerCase() + "']";

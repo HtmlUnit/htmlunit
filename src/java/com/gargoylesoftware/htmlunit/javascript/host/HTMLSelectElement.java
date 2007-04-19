@@ -275,7 +275,7 @@ public class HTMLSelectElement extends FormField {
         if( optionsArray_ == null ) {
             initialize();
         }
-        return optionsArray_.jsGet_length();
+        return optionsArray_.jsxGet_length();
     }
 
 
@@ -287,7 +287,7 @@ public class HTMLSelectElement extends FormField {
         if( optionsArray_ == null ) {
             initialize();
         }
-        optionsArray_.jsSet_length( newLength );
+        optionsArray_.jsxSet_length( newLength );
     }
 
     /**
