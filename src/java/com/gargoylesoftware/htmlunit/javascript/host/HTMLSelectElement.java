@@ -46,7 +46,7 @@ import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
-import com.gargoylesoftware.htmlunit.javascript.OptionsArray;
+import com.gargoylesoftware.htmlunit.javascript.HTMLOptionsCollection;
 
 /**
  * The javascript object for {@link HtmlSelect}.
@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.javascript.OptionsArray;
 public class HTMLSelectElement extends FormField {
 
     private static final long serialVersionUID = 4332789476842114628L;
-    private OptionsArray optionsArray_;
+    private HTMLOptionsCollection optionsArray_;
 
     /**
      * Create an instance.
@@ -85,7 +85,7 @@ public class HTMLSelectElement extends FormField {
         final HtmlSelect htmlSelect = getHtmlSelect();
         htmlSelect.setScriptObject(this);
         if( optionsArray_ == null ) {
-            optionsArray_ = (OptionsArray)makeJavaScriptObject("OptionsArray");
+            optionsArray_ = (HTMLOptionsCollection)makeJavaScriptObject("HTMLOptionsCollection");
             optionsArray_.initialize( htmlSelect );
         }
     }
@@ -200,7 +200,7 @@ public class HTMLSelectElement extends FormField {
      * Return the value of the "options" property
      * @return The options property
      */
-    public OptionsArray jsxGet_options() {
+    public HTMLOptionsCollection jsxGet_options() {
 
         if( optionsArray_ == null ) {
             initialize();

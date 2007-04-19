@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
-import com.gargoylesoftware.htmlunit.javascript.ElementArray;
+import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 
 import java.io.IOException;
 
@@ -66,7 +66,7 @@ import org.mozilla.javascript.Scriptable;
 public class HTMLFormElement extends HTMLElement {
 
     private static final long serialVersionUID = -1860993922147246513L;
-    private ElementArray elements_; // has to be a member to have equality (==) working
+    private HTMLCollection elements_; // has to be a member to have equality (==) working
 
     /**
      * Create an instance.  A default constructor is required for all javascript objects.
@@ -114,10 +114,10 @@ public class HTMLFormElement extends HTMLElement {
      * Return the value of the javascript attribute "elements".
      * @return The value of this attribute.
      */
-    public ElementArray jsxGet_elements() {
+    public HTMLCollection jsxGet_elements() {
         if (elements_ == null) {
             final HtmlForm htmlForm = getHtmlForm();
-            elements_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            elements_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
             try {
                 final XPath xpath = new HtmlUnitXPath("//*[(name() = 'input' or name() = 'button'"
                         + " or name() = 'select' or name() = 'textarea')]",
@@ -276,7 +276,7 @@ public class HTMLFormElement extends HTMLElement {
     Object get(final String name) {
         // Try to get the element or elements specified from the form element array
         // (except input type="image" that can't be accessed this way)
-        final ElementArray elements = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+        final HTMLCollection elements = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
         final HtmlForm htmlForm = getHtmlForm();
         try {
             final XPath xpath = new HtmlUnitXPath("//*[(@name = '" + name + "' or @id = '" + name + "')"

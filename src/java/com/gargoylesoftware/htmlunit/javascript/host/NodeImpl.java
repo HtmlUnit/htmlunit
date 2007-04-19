@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
-import com.gargoylesoftware.htmlunit.javascript.ElementArray;
+import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 
 /**
  * The javascript object "NodeImpl" which is the base class for all DOM
@@ -62,7 +62,7 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
  */
 public class NodeImpl extends SimpleScriptable {
 
-    private ElementArray childNodes_; //has to be a member to have equality (==) working
+    private HTMLCollection childNodes_; //has to be a member to have equality (==) working
     private static final long serialVersionUID = -5695262053081637445L;
 
 
@@ -243,7 +243,7 @@ public class NodeImpl extends SimpleScriptable {
      */
     public Object jsxGet_childNodes() {
         if (childNodes_ == null) {
-            childNodes_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            childNodes_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
             try {
                 childNodes_.init(getDomNodeOrDie(), new HtmlUnitXPath("(./* | text())"));
             }

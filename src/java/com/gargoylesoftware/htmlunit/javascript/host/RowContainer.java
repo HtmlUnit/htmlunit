@@ -44,7 +44,7 @@ import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
-import com.gargoylesoftware.htmlunit.javascript.ElementArray;
+import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -59,7 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 public class RowContainer extends HTMLElement {
 
     private static final long serialVersionUID = 3258129146093056308L;
-    private ElementArray rows_; // has to be a member to have equality (==) working
+    private HTMLCollection rows_; // has to be a member to have equality (==) working
 
     /**
      * Create an instance.
@@ -80,7 +80,7 @@ public class RowContainer extends HTMLElement {
      */
     public Object jsxGet_rows() {
         if (rows_ == null) {
-            rows_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            rows_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
             try {
                 rows_.init(getDomNodeOrDie(), new HtmlUnitXPath(getXPathRows()));
             }
@@ -106,7 +106,7 @@ public class RowContainer extends HTMLElement {
      * @param rowIndex the zero-based index of the row to delete.
      */
     public void jsxFunction_deleteRow(int rowIndex) {
-        final ElementArray rows = (ElementArray) jsxGet_rows();
+        final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
         if (rowIndex == -1) {
             rowIndex = rows.jsxGet_length() - 1;
         }
@@ -141,7 +141,7 @@ public class RowContainer extends HTMLElement {
             rowIndex = -1;
         }
 
-        final ElementArray rows = (ElementArray) rowContainer.jsxGet_rows();
+        final HTMLCollection rows = (HTMLCollection) rowContainer.jsxGet_rows();
         final int nbRows = rows.jsxGet_length();
         final int r;
         if (rowIndex == -1 || rowIndex == nbRows) {
@@ -165,7 +165,7 @@ public class RowContainer extends HTMLElement {
      * @return the inserted row
      */
     protected Object insertRow(final int index) {
-        final ElementArray rows = (ElementArray) jsxGet_rows();
+        final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
         final int nbRows = rows.jsxGet_length();
 
         final HtmlElement newRow = getDomNodeOrDie().getPage().createElement("tr");
@@ -193,7 +193,7 @@ public class RowContainer extends HTMLElement {
      * @return the row that was moved.
      */
     public Object jsxFunction_moveRow(final int sourceIndex, final int targetIndex) {
-        final ElementArray rows = (ElementArray) jsxGet_rows();
+        final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
         final boolean sourceIndexValid = (sourceIndex >= 0 && sourceIndex < rows.jsxGet_length());
         final boolean targetIndexValid = (targetIndex >= 0 && targetIndex < rows.jsxGet_length());
         if (sourceIndexValid && targetIndexValid) {

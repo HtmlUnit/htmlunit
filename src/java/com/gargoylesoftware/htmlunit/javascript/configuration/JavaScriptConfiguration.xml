@@ -212,13 +212,13 @@
     </class>
 
 
-    <class name="OptionsArray" classname="com.gargoylesoftware.htmlunit.javascript.OptionsArray" JSObject="true">
+    <class name="HTMLOptionsCollection" classname="com.gargoylesoftware.htmlunit.javascript.HTMLOptionsCollection" JSObject="true">
         <property name="length" readable="true" writable="true"/>
         <function name="add"/>
         <function name="item"/>
     </class>
 
-    <class name="ElementArray" classname="com.gargoylesoftware.htmlunit.javascript.ElementArray" JSObject="true">
+    <class name="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.HTMLCollection" JSObject="true">
         <property name="length" readable="true" writable="false"/>
         <function name="item"/>
         <function name="namedItem"/>

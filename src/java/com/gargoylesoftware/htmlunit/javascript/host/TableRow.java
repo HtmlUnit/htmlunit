@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
-import com.gargoylesoftware.htmlunit.javascript.ElementArray;
+import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 
 /**
  * A JavaScript object representing a TR.
@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
  */
 public class TableRow extends HTMLElement {
     private static final long serialVersionUID = 3256441404401397812L;
-    private ElementArray cells_; // has to be a member to have equality (==) working
+    private HTMLCollection cells_; // has to be a member to have equality (==) working
 
     /**
      * Create an instance.
@@ -90,7 +90,7 @@ public class TableRow extends HTMLElement {
      */
     public Object jsxGet_cells() {
         if (cells_ == null) {
-            cells_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            cells_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
             try {
                 cells_.init(getDomNodeOrDie(), new HtmlUnitXPath("./td|th"));
             }

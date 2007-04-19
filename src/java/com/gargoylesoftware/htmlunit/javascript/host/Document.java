@@ -74,7 +74,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.xpath.FunctionContextWrapper;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.html.xpath.LowerCaseFunction;
-import com.gargoylesoftware.htmlunit.javascript.ElementArray;
+import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 
 /**
  * A JavaScript object for a Document.
@@ -97,12 +97,12 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 public final class Document extends NodeImpl {
 
     private static final long serialVersionUID = -7646789903352066465L;
-    private ElementArray all_; // has to be a member to have equality (==) working
-    private ElementArray forms_; // has to be a member to have equality (==) working
-    private ElementArray links_; // has to be a member to have equality (==) working
-    private ElementArray images_; // has to be a member to have equality (==) working
-    private ElementArray scripts_; // has to be a member to have equality (==) working
-    private ElementArray anchors_; // has to be a member to have equality (==) working
+    private HTMLCollection all_; // has to be a member to have equality (==) working
+    private HTMLCollection forms_; // has to be a member to have equality (==) working
+    private HTMLCollection links_; // has to be a member to have equality (==) working
+    private HTMLCollection images_; // has to be a member to have equality (==) working
+    private HTMLCollection scripts_; // has to be a member to have equality (==) working
+    private HTMLCollection anchors_; // has to be a member to have equality (==) working
 
     /** The buffer that will be used for calls to document.write() */
     private final StringBuffer writeBuffer_ = new StringBuffer();
@@ -163,7 +163,7 @@ public final class Document extends NodeImpl {
      */
     public Object jsxGet_forms() {
         if (forms_ == null) {
-            forms_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            forms_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
             try {
                 forms_.init(getHtmlPage(), new HtmlUnitXPath("//form"));
             }
@@ -183,7 +183,7 @@ public final class Document extends NodeImpl {
      */
     public Object jsxGet_links() {
         if (links_ == null) {
-            links_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            links_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
             try {
                 links_.init(getHtmlPage(),
                         new HtmlUnitXPath("//a[@href] | //area[@href]"));
@@ -205,7 +205,7 @@ public final class Document extends NodeImpl {
      */
     public Object jsxGet_anchors() {
         if (anchors_ == null) {
-            anchors_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            anchors_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
             try {
                 final String xpath;
                 if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
@@ -530,7 +530,7 @@ public final class Document extends NodeImpl {
      */
     public Object jsxGet_images() {
         if (images_ == null) {
-            images_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            images_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
             try {
                 images_.init(getHtmlPage(), new HtmlUnitXPath("//img"));
             }
@@ -570,9 +570,9 @@ public final class Document extends NodeImpl {
      * Return the value of the "all" property.
      * @return The value of the "all" property
      */
-    public ElementArray jsxGet_all() {
+    public HTMLCollection jsxGet_all() {
         if (all_ == null) {
-            all_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            all_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
             try {
                 all_.init(getHtmlPage(), new HtmlUnitXPath("//*"));
             }
@@ -751,7 +751,7 @@ public final class Document extends NodeImpl {
 
             final BrowserVersion browser = getHtmlPage().getWebClient().getBrowserVersion();
             if (browser.isIE()) {
-                final ElementArray elements = (ElementArray) jsxFunction_getElementsByName(id);
+                final HTMLCollection elements = (HTMLCollection) jsxFunction_getElementsByName(id);
                 result = elements.get(0, elements);
                 if (result instanceof UniqueTag) {
                     return null;
@@ -771,7 +771,7 @@ public final class Document extends NodeImpl {
      * @return the list of elements
      */
     public Object jsxFunction_getElementsByTagName( final String tagName ) {
-        final ElementArray collection = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+        final HTMLCollection collection = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
         try {
             final HtmlUnitXPath xpath = new HtmlUnitXPath("//*[lower-case(name()) = '" + tagName.toLowerCase() + "']");
             xpath.setFunctionContext(functionContext_);
@@ -795,7 +795,7 @@ public final class Document extends NodeImpl {
      * @return NodeList of elements
      */
     public Object jsxFunction_getElementsByName( final String elementName ) {
-        final ElementArray collection = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+        final HTMLCollection collection = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
         final String exp = "//*[@name='" + elementName + "']";
         try {
             final HtmlUnitXPath xpath = new HtmlUnitXPath(exp);
@@ -828,7 +828,7 @@ public final class Document extends NodeImpl {
 
         // document.xxx allows to retrieve some elements by name like img or form but not input, a, ...
         // TODO: behaviour for iframe seems to differ between IE and Moz
-        final ElementArray collection = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+        final HTMLCollection collection = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
         final String xpathExpr = "//*[(@name = '" + name + "' and (name() = 'img' or name() = 'form'))]";
         try {
             collection.init(htmlPage, new HtmlUnitXPath(xpathExpr));
@@ -968,7 +968,7 @@ public final class Document extends NodeImpl {
      */
     public Object jsxGet_scripts() {
         if (scripts_ == null) {
-            scripts_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            scripts_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
             try {
                 scripts_.init(getHtmlPage(), new HtmlUnitXPath("//script"));
             }

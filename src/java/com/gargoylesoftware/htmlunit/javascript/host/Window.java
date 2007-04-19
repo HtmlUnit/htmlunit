@@ -73,7 +73,7 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
-import com.gargoylesoftware.htmlunit.javascript.ElementArray;
+import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -106,7 +106,7 @@ public class Window extends SimpleScriptable {
     private Function onload_;
     private Object event_;
     private String status_ = "";
-    private ElementArray frames_; // has to be a member to have equality (==) working
+    private HTMLCollection frames_; // has to be a member to have equality (==) working
     private Map eventHandlers_ = new HashMap();
     private final JavaScriptEngine scriptEngine_;
 
@@ -536,7 +536,7 @@ public class Window extends SimpleScriptable {
      * Return the value of the frames property.
      * @return The live collection of frames
      */
-    public ElementArray jsxGet_frames() {
+    public HTMLCollection jsxGet_frames() {
         if (frames_ == null) {
             final XPath xpath;
             try {
@@ -547,7 +547,7 @@ public class Window extends SimpleScriptable {
                 throw Context.reportRuntimeError("Failed initializing frame collections: " + e.getMessage());
             }
             final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
-            frames_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            frames_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
             Transformer toEnclosedWindow = new Transformer() {
                 public Object transform(final Object obj) {
                     return ((BaseFrame) obj).getEnclosedWindow();
@@ -857,7 +857,7 @@ public class Window extends SimpleScriptable {
             final DomNode domNode = thisWindow.getDomNodeOrNull();
             if (domNode != null
                     && domNode.getPage().getWebClient().getBrowserVersion().isIE()) {
-                final ElementArray array = (ElementArray) thisWindow.document_.jsxFunction_getElementsByName( name );
+                final HTMLCollection array = (HTMLCollection) thisWindow.document_.jsxFunction_getElementsByName( name );
                 if (array.jsxGet_length() == 1) {
                     result = array.get(0, array);
                 }

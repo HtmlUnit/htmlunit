@@ -45,7 +45,7 @@ import org.mozilla.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
-import com.gargoylesoftware.htmlunit.javascript.ElementArray;
+import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 
 /**
  * A JavaScript object representing a Table.
@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.javascript.ElementArray;
 public class Table extends RowContainer {
 
     private static final long serialVersionUID = 2779888994049521608L;
-    private ElementArray tBodies_; // has to be a member to have equality (==) working
+    private HTMLCollection tBodies_; // has to be a member to have equality (==) working
 
     /**
      * Create an instance.
@@ -126,7 +126,7 @@ public class Table extends RowContainer {
      */
     public Object jsxGet_tBodies() {
         if (tBodies_ == null) {
-            tBodies_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            tBodies_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
             try {
                 tBodies_.init(getDomNodeOrDie(), new HtmlUnitXPath("./tbody"));
             }

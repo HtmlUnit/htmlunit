@@ -50,11 +50,13 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Document;
 
+import com.gargoylesoftware.htmlunit.AjaxController;
 import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -316,7 +318,16 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param content The body of the message being sent with the request.
      */
     public void jsxFunction_send( final Object content ) {
-        if (async_) {
+        prepareRequest(content);
+
+        final WebWindow webWindow = getWindow().getWebWindow();
+        final AjaxController ajaxController = webWindow.getWebClient().getAjaxController();
+        final boolean synchron = ajaxController.processSynchron((HtmlPage) webWindow.getEnclosedPage(), requestSettings_, async_);
+
+        if (synchron) {
+            doSend(Context.getCurrentContext());
+        }
+        else {
             // Create and start a thread in which to execute the request.
             final Object startingScope = getWindow();
 
@@ -325,7 +336,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                     final Context context = Context.enter();
                     try {
                         Context.getCurrentContext().putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, startingScope);
-                        doSend(content, context);
+                        doSend(context);
                     }
                     finally {
                         Context.exit();
@@ -335,8 +346,25 @@ public class XMLHttpRequest extends SimpleScriptable {
             getLog().debug("Starting XMLHttpRequest thread for asynchronous request");
             threadID_ = getWindow().getWebWindow().getThreadManager().startThread(t, "XMLHttpRequest.send");
         }
-        else {
-            doSend(content, Context.getCurrentContext());
+    }
+
+    /**
+     * Prepares the WebRequestSettings that will be sent
+     * @param content the content to send
+     */
+    private void prepareRequest(final Object content) {
+        final WebClient wc = getWindow().getWebWindow().getWebClient();
+        if (Context.getUndefinedValue().equals(content) && wc.getBrowserVersion().isNetscape()) {
+            throw Context.reportRuntimeError("XMLHttpRequest.send: not enough arguments");
+        }
+
+        if (content != null && !Context.getUndefinedValue().equals(content)) {
+            final String body = Context.toString(content);
+            if (body.length() > 0) {
+                getLog().debug("Setting request body to: " + body);
+                requestSettings_.setRequestBody(body);
+                requestSettings_.setCharset("UTF-8");
+            }
         }
     }
 
@@ -345,22 +373,10 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param content the content to send
      * @param context the current context
      */
-    private void doSend(final Object content, final Context context) {
+    private void doSend(final Context context) {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         try {
             setState( STATE_LOADED, context );
-            if (Context.getUndefinedValue().equals(content) && wc.getBrowserVersion().isNetscape()) {
-                throw Context.reportRuntimeError("XMLHttpRequest.send: not enough arguments");
-            }
-
-            if (content != null && !Context.getUndefinedValue().equals(content)) {
-                final String body = Context.toString(content);
-                if (body.length() > 0) {
-                    getLog().debug("Setting request body to: " + body);
-                    requestSettings_.setRequestBody(body);
-                    requestSettings_.setCharset("UTF-8");
-                }
-            }
             final WebResponse webResponse = wc.loadWebResponse(requestSettings_);
             if (overridenMimeType_ == null) {
                 webResponse_ = webResponse;

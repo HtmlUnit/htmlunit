@@ -56,14 +56,14 @@ import org.mozilla.javascript.Scriptable;
  * @author Daniel Gredler
  * @author Bruce Faulkner
  */
-public class OptionsArray extends SimpleScriptable {
+public class HTMLOptionsCollection extends SimpleScriptable {
     private static final long serialVersionUID = -4790255174217201235L;
     private HtmlSelect htmlSelect_;
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.
      */
-    public OptionsArray() {
+    public HTMLOptionsCollection() {
     }
 
 
@@ -120,14 +120,14 @@ public class OptionsArray extends SimpleScriptable {
     public Object get( final String name, final Scriptable start ) {
         Object object = super.get( name, start );
         if( object == NOT_FOUND ) {
-            // First, check the prototype chain for the OptionsArray to see if the
+            // First, check the prototype chain for the HTMLOptionsCollection to see if the
             // name exists elsewhere on the chain before looking to the Select object;
             // this must be done in case a property or method with the same name
             // is found on the Select object (e.g. "add") but which has different parameters.
             // Doing a search on the prototoype before a search on the Select will avoid a
             // "TypeError: Method "add" called on incompatible object."
             final Scriptable prototype = this.getPrototype();
-            if (prototype instanceof OptionsArray) {
+            if (prototype instanceof HTMLOptionsCollection) {
                 object = prototype.get(name, start);
                 if (object != NOT_FOUND) {
                     return object;

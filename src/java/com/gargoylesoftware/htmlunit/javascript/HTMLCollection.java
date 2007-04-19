@@ -68,11 +68,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @author Marc Guillemot
  * @author Chris Erskine
  */
-public class ElementArray extends SimpleScriptable implements Function {
+public class HTMLCollection extends SimpleScriptable implements Function {
     /**
      * The name of the js object corresponding to this class as registered by the javascript context
      */
-    public static final String JS_OBJECT_NAME = "ElementArray";
+    public static final String JS_OBJECT_NAME = "HTMLCollection";
     private static final long serialVersionUID = 4049916048017011764L;
 
     private XPath xpath_;
@@ -86,7 +86,7 @@ public class ElementArray extends SimpleScriptable implements Function {
     /**
      * Create an instance. Javascript objects must have a default constructor.
      */
-    public ElementArray() {
+    public HTMLCollection() {
         // nothing
     }
 
@@ -168,7 +168,7 @@ public class ElementArray extends SimpleScriptable implements Function {
      * {@inheritDoc}
      */
     public final Object get( final int index, final Scriptable start ) {
-        final ElementArray array = (ElementArray) start;
+        final HTMLCollection array = (HTMLCollection) start;
         final List elements = array.getElements();
 
         if( index >= 0 && index < elements.size()) {
@@ -209,7 +209,7 @@ public class ElementArray extends SimpleScriptable implements Function {
             return result;
         }
 
-        final ElementArray currentArray = ((ElementArray) start);
+        final HTMLCollection currentArray = ((HTMLCollection) start);
         final List elements = currentArray.getElements();
         CollectionUtils.transform(elements, transformer_);
 
@@ -238,7 +238,7 @@ public class ElementArray extends SimpleScriptable implements Function {
         }
 
         // See if there are any elements in the element array with the specified name.
-        final ElementArray array = (ElementArray) currentArray.makeJavaScriptObject(JS_OBJECT_NAME);
+        final HTMLCollection array = (HTMLCollection) currentArray.makeJavaScriptObject(JS_OBJECT_NAME);
         try {
             final String newCondition = "@name = '" + name + "'";
             final String currentXPathExpr = currentArray.xpath_.toString();
@@ -317,7 +317,7 @@ public class ElementArray extends SimpleScriptable implements Function {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/tags.asp">MSDN doc</a>
      */
     public final Object jsxFunction_tags( final String tagName ) {
-        final ElementArray array = (ElementArray) makeJavaScriptObject(JS_OBJECT_NAME);
+        final HTMLCollection array = (HTMLCollection) makeJavaScriptObject(JS_OBJECT_NAME);
         try {
             final String newXPathExpr = xpath_.toString() + "[name() = '" + tagName.toLowerCase() + "']";
             array.init(node_, xpath_.getNavigator().parseXPath(newXPathExpr));
@@ -350,8 +350,8 @@ public class ElementArray extends SimpleScriptable implements Function {
         if (other == this) {
             return Boolean.TRUE;
         }
-        else if (other instanceof ElementArray) {
-            final ElementArray otherArray = (ElementArray) other;
+        else if (other instanceof HTMLCollection) {
+            final HTMLCollection otherArray = (HTMLCollection) other;
             if (node_ == otherArray.node_
                     && xpath_.toString().equals(otherArray.xpath_.toString())
                     && transformer_.equals(otherArray.transformer_)) {

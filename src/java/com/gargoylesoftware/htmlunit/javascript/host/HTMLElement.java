@@ -69,7 +69,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
-import com.gargoylesoftware.htmlunit.javascript.ElementArray;
+import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 
 /**
  * The javascript object "HTMLElement" which is the base class for all html
@@ -103,7 +103,7 @@ public class HTMLElement extends NodeImpl {
     static final String POSITION_AFTER_END = "afterEnd";
 
     private final Set behaviors_ = new HashSet();
-    private ElementArray all_; // has to be a member to have equality (==) working
+    private HTMLCollection all_; // has to be a member to have equality (==) working
     private int scrollLeft_ = 0;
     private int scrollTop_ = 0;
 
@@ -136,9 +136,9 @@ public class HTMLElement extends NodeImpl {
      * Return the value of the "all" property.
      * @return The value of the "all" property
      */
-    public ElementArray jsxGet_all() {
+    public HTMLCollection jsxGet_all() {
         if (all_ == null) {
-            all_ = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+            all_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
             try {
                 all_.init(getDomNodeOrDie(), new HtmlUnitXPath(".//*"));
             }
@@ -324,7 +324,7 @@ public class HTMLElement extends NodeImpl {
      */
     public Object jsxFunction_getElementsByTagName( final String tagName ) {
         final HtmlElement element = (HtmlElement) getDomNodeOrDie();
-        final ElementArray collection = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+        final HTMLCollection collection = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
         try {
             final String xpath = "//" + tagName.toLowerCase();
             collection.init(element, new HtmlUnitXPath(xpath, HtmlUnitXPath.buildSubtreeNavigator(element)));
@@ -1044,7 +1044,7 @@ public class HTMLElement extends NodeImpl {
      */
     public Object jsxGet_children() {
         final DomNode element = getDomNodeOrDie();
-        final ElementArray children = (ElementArray) makeJavaScriptObject(ElementArray.JS_OBJECT_NAME);
+        final HTMLCollection children = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
 
         try {
             final XPath xpath = new HtmlUnitXPath("./*", HtmlUnitXPath.buildSubtreeNavigator(element));
