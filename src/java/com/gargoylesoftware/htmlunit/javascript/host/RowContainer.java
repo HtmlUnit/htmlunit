@@ -107,10 +107,11 @@ public class RowContainer extends HTMLElement {
      */
     public void jsxFunction_deleteRow(int rowIndex) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
-        if (rowIndex == -1) {
-            rowIndex = rows.jsxGet_length() - 1;
+        final int rowCount = rows.jsxGet_length();
+        if (rowIndex == -1){
+            rowIndex = rowCount - 1;
         }
-        final boolean rowIndexValid = (rowIndex >= 0 && rowIndex < rows.jsxGet_length());
+        final boolean rowIndexValid = (rowIndex >= 0 && rowIndex < rowCount);
         if (rowIndexValid) {
             final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(new Integer(rowIndex));
             row.getDomNodeOrDie().remove();
@@ -142,18 +143,18 @@ public class RowContainer extends HTMLElement {
         }
 
         final HTMLCollection rows = (HTMLCollection) rowContainer.jsxGet_rows();
-        final int nbRows = rows.jsxGet_length();
+        final int rowCount = rows.jsxGet_length();
         final int r;
-        if (rowIndex == -1 || rowIndex == nbRows) {
-            r = Math.max(0, nbRows - 1);
+        if (rowIndex == -1 || rowIndex == rowCount) {
+            r = Math.max(0, rowCount - 1);
         }
         else {
             r = rowIndex;
         }
         
-        if (r < 0 || r > nbRows) {
+        if (r < 0 || r > rowCount) {
             throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount "
-                    + "(index: " + rowIndex + ", " + nbRows + " rows)");
+                    + "(index: " + rowIndex + ", " + rowCount + " rows)");
         }
 
         return rowContainer.insertRow(r);
@@ -166,16 +167,15 @@ public class RowContainer extends HTMLElement {
      */
     protected Object insertRow(final int index) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
-        final int nbRows = rows.jsxGet_length();
-
+        final int rowCount = rows.jsxGet_length();
         final HtmlElement newRow = getDomNodeOrDie().getPage().createElement("tr");
-        if (nbRows == 0) {
+        if (rowCount == 0) {
             getDomNodeOrDie().appendChild(newRow);
         }
         else {
             final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(new Integer(index));
             // if at the end, then in the same "sub-container" as the last existing row
-            if (index >= nbRows - 1) {
+            if (index >= rowCount - 1) {
                 row.getDomNodeOrDie().getParentNode().appendChild(newRow);
             }
             else {
@@ -194,8 +194,9 @@ public class RowContainer extends HTMLElement {
      */
     public Object jsxFunction_moveRow(final int sourceIndex, final int targetIndex) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
-        final boolean sourceIndexValid = (sourceIndex >= 0 && sourceIndex < rows.jsxGet_length());
-        final boolean targetIndexValid = (targetIndex >= 0 && targetIndex < rows.jsxGet_length());
+        final int rowCount = rows.jsxGet_length();
+        final boolean sourceIndexValid = (sourceIndex >= 0 && sourceIndex < rowCount);
+        final boolean targetIndexValid = (targetIndex >= 0 && targetIndex < rowCount);
         if (sourceIndexValid && targetIndexValid) {
             final SimpleScriptable sourceRow = (SimpleScriptable) rows.jsxFunction_item(new Integer(sourceIndex));
             final SimpleScriptable targetRow = (SimpleScriptable) rows.jsxFunction_item(new Integer(targetIndex));
