@@ -111,13 +111,14 @@ public class Window extends SimpleScriptable {
     private final JavaScriptEngine scriptEngine_;
 
     /**
-     * Create an instance.  The rhino engine requires all host objects
-     * to have a default constructor.
+     * Creates an instance.
+     *
+     * @param scriptEngine The JavaScript engine responsible for the new window instance.
      */
     public Window(final JavaScriptEngine scriptEngine) {
         scriptEngine_ = scriptEngine;
     }
-    
+
     /**
      * Gets the Javascript Engine responsible for this object.
      * @return the javascript engine
@@ -126,14 +127,13 @@ public class Window extends SimpleScriptable {
         return scriptEngine_;
     }
 
-
     /**
      * Javascript constructor.  This must be declared in every javascript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
+        // Empty.
     }
-
 
     /**
      * The javascript function "alert()"
@@ -152,7 +152,6 @@ public class Window extends SimpleScriptable {
         }
     }
 
-
     /**
      * The javascript function "confirm()"
      * @param message The message
@@ -170,7 +169,6 @@ public class Window extends SimpleScriptable {
         }
     }
 
-
     /**
      * The javascript function "prompt()"
      * @param message The message
@@ -186,7 +184,6 @@ public class Window extends SimpleScriptable {
             return handler.handlePrompt(document_.getHtmlPage(), message);
         }
     }
-
 
     /**
      * Return the javascript property "document"
@@ -831,6 +828,7 @@ public class Window extends SimpleScriptable {
      * @return The property.
      */
     public Object get( final String name, final Scriptable start ) {
+
         // If the DomNode hasn't been set yet then do it now.
         if( getDomNodeOrNull() == null && document_ != null ) {
             final HtmlPage htmlPage = document_.getHtmlPageOrNull();
@@ -855,13 +853,13 @@ public class Window extends SimpleScriptable {
             // this tests are quite silly and should be removed when custom JS objects have a clean
             // way to get the WebClient they are running in.
             final DomNode domNode = thisWindow.getDomNodeOrNull();
-            if (domNode != null
-                    && domNode.getPage().getWebClient().getBrowserVersion().isIE()) {
-                final HTMLCollection array = (HTMLCollection) thisWindow.document_.jsxFunction_getElementsByName( name );
-                if (array.jsxGet_length() == 1) {
+            if (domNode != null && domNode.getPage().getWebClient().getBrowserVersion().isIE()) {
+                final HTMLCollection array = (HTMLCollection) thisWindow.document_.jsxFunction_getElementsByName(name);
+                final int length = array.jsxGet_length();
+                if (length == 1) {
                     result = array.get(0, array);
                 }
-                else if (array.jsxGet_length() > 1) {
+                else if (length > 1) {
                     result = array;
                 }
                 else {
@@ -869,6 +867,7 @@ public class Window extends SimpleScriptable {
                 }
             }
         }
+
         return result;
     }
 
