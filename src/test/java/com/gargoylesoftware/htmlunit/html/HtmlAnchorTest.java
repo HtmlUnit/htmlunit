@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -50,9 +51,9 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- *  Tests for HtmlAnchor
+ * Unit tests for {@link HtmlAnchor}.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Stefan Anzinger
@@ -69,6 +70,26 @@ public class HtmlAnchorTest extends WebTestCase {
         super( name );
     }
 
+    /**
+     * Verifies that anchor href attributes are trimmed of whitespace (bug 1658064),
+     * just like they are in IE and Firefox.
+     * @throws Exception If an error occurs.
+     */
+    public void testHrefTrimmed() throws Exception {
+
+        final String html = "<html><body onload='" +
+            "alert(document.getElementById(\"a\").href.length);" +
+            "alert(document.getElementById(\"b\").href.length);'>" +
+            "<a href=' http://a/ ' id='a'>a</a> " +
+            "<a href='  http://b/    ' id='b'>b</a>" +
+            "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList( new String[] { "9", "9" } );
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 
     /**
      * @throws Exception if the test fails
@@ -96,6 +117,7 @@ public class HtmlAnchorTest extends WebTestCase {
         assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
         assertNotNull( secondPage );
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -116,12 +138,10 @@ public class HtmlAnchorTest extends WebTestCase {
         assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
     }
 
-
     /**
      * @throws Exception if the test fails
      */
-    public void testClick_onClickHandler()
-        throws Exception {
+    public void testClick_onClickHandler() throws Exception {
 
         final String firstContent
             = "<html><head><title>First</title></head><body>"
@@ -153,12 +173,10 @@ public class HtmlAnchorTest extends WebTestCase {
         assertEquals( "Second", secondPage.getTitleText() );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
-    public void testClick_onClickHandler_returnFalse()
-        throws Exception {
+    public void testClick_onClickHandler_returnFalse() throws Exception {
 
         final String firstContent
             = "<html><head><title>First</title></head><body>"
@@ -189,7 +207,6 @@ public class HtmlAnchorTest extends WebTestCase {
         assertEquals( Collections.singletonList("clicked"), collectedAlerts );
         assertSame( page, secondPage );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -229,7 +246,6 @@ public class HtmlAnchorTest extends WebTestCase {
         assertNotNull( secondPage );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -253,7 +269,6 @@ public class HtmlAnchorTest extends WebTestCase {
         assertEquals( Collections.singletonList("clicked"), collectedAlerts );
         assertSame( page, secondPage );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -286,7 +301,6 @@ public class HtmlAnchorTest extends WebTestCase {
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
         assertSame( page, secondPage );
     }
-
 
     /**
      * @throws Exception if the test fails

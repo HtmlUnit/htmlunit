@@ -186,7 +186,7 @@ public class HtmlAnchor extends FocusableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getHrefAttribute() {
-        return getAttributeValue("href");
+        return getAttributeValue("href").trim();
     }
 
 
