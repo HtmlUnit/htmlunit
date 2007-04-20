@@ -126,8 +126,12 @@ public abstract class BaseFrame extends StyledElement {
             catch( final MalformedURLException e ) {
                 getLog().error("Bad url in src attribute of " + getTagName() + ": url=[" + srcAttribute + "]", e);
             }
+            if(url == null) {
+                getLog().warn("Ignoring invalid src attribute of " + getTagName() + ": url=[" + srcAttribute + "]");
+                return;
+            }
             final URL pageUrl = getPage().getWebResponse().getUrl();
-            if(url != null && url.sameFile(pageUrl)) {
+            if(url.sameFile(pageUrl)) {
                 getLog().warn("Ignoring recursive src attribute of " + getTagName() + ": url=[" + srcAttribute + "]");
                 return;
             }

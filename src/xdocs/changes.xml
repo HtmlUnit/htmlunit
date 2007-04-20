@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="sdanig" id="1699119">
+                Fixed NPE exception triggered by invalid iframe/frame src attribute.
+            </action>
             <action type="update" dev="sdanig" id="1699125">
                 Fixed infinite loop triggered by recursive iframe/frame src attribute.
             </action>

@@ -112,6 +112,19 @@ public class HtmlInlineFrameTest extends WebTestCase {
     }
 
     /**
+     * Tests that an invalid src attribute (i.e. src="foo://bar") doesn't result
+     * in a NPE (bug 1699119).
+     * 
+     * @throws Exception if an error occurs
+     */
+    public void testInvalidSrcAttribute() throws Exception {
+        final String html = "<html><body><iframe id='a' src='foo://bar'></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("a");
+        assertNotNull(iframe.getEnclosedPage());
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     public void testSetSrcAttribute_ViaJavaScript() throws Exception {
