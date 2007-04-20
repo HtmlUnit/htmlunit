@@ -305,7 +305,8 @@ public abstract class HtmlElement extends DomNode {
         final Function function = getEventHandler("onkeydown");
 
         if (function != null && page.getWebClient().isJavaScriptEnabled()) {
-            getPage().runEventHandler(function, new Event(this, keyCode));
+            final Event event = new Event(this, Event.TYPE_KEY_DOWN, keyCode);
+            getPage().runEventHandler(function, event);
         }
     }
 

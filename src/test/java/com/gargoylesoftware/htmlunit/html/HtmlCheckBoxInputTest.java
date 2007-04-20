@@ -87,19 +87,20 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void test_onClick() throws Exception {
+
         final String htmlContent
             = "<html><head><title>foo</title></head><body>"
             + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
             + "    <input type='checkbox' name='checkbox' id='checkbox' "
-            + "onClick='alert(\"foo\")'>Check me</input>"
+            + "onClick='alert(\"foo\");alert(event.type);'>Check me</input>"
             + "</form></body></html>";
+
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlCheckBoxInput checkBox = ( HtmlCheckBoxInput )page.getHtmlElementById( "checkbox" );
-
         final HtmlPage secondPage = (HtmlPage)checkBox.click();
 
-        final List expectedAlerts = Arrays.asList( new String[]{"foo"} );
+        final List expectedAlerts = Arrays.asList( new String[] {"foo", "click"} );
         assertEquals( expectedAlerts, collectedAlerts );
 
         assertSame( page, secondPage );

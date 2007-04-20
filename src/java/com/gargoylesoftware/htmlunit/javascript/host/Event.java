@@ -59,21 +59,45 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class Event extends SimpleScriptable {
 
+    /** The click event type, triggered by "onclick" event handlers. */
+    public static final String TYPE_CLICK = "click";
+
+    /** The submit event type, triggered by "onsubmit" event handlers. */
+    public static final String TYPE_SUBMIT = "submit";
+
+    /** The change event type, triggered by "onchange" event handlers. */
+    public static final String TYPE_CHANGE = "change";
+
+    /** The load event type, triggered by "onload" event handlers. */
+    public static final String TYPE_LOAD = "load";
+
+    /** The focus event type, triggered by "onfocus" event handlers. */
+    public static final String TYPE_FOCUS = "focus";
+
+    /** The blur event type, triggered by "onblur" event handlers. */
+    public static final String TYPE_BLUR = "blur";
+
+    /** The key down event type, triggered by "onkeydown" event handlers. */
+    public static final String TYPE_KEY_DOWN = "keydown";
+
     private static final long serialVersionUID = 4050485607908455730L;
     private Object srcElement_;     // IE-only writeable equivalent of target.
     private Object target_;         // W3C standard read-only equivalent of srcElement.
     private Object currentTarget_;  // Changes during event capturing and bubbling.
+    private String type_;           // The event type.
     private Object keyCode_;        // Key code for a keypress
 
     /**
      * Creates a new event instance.
      * @param domNode The DOM node that triggered the event.
+     * @param type The event type.
      */
-    public Event(final DomNode domNode) {
+    public Event(final DomNode domNode, final String type) {
         final Object target = domNode.getScriptObject();
         srcElement_ = target;
         target_ = target;
         currentTarget_ = target;
+        type_ = type;
         keyCode_ = Context.getUndefinedValue();
         setParentScope((SimpleScriptable) target);
         setDomNode(domNode, false);
@@ -82,11 +106,12 @@ public class Event extends SimpleScriptable {
     /**
      * Creates a new event instance for a keypress event.
      * @param domNode the DOM node that triggered the event.
+     * @param type The event type.
      * @param keyCode The key code associated with the event.
      */
-    public Event(final DomNode domNode, final int keyCode) {
-        this(domNode);
-        keyCode_ = new Integer (keyCode);
+    public Event(final DomNode domNode, final String type, final int keyCode) {
+        this(domNode, type);
+        keyCode_ = new Integer(keyCode);
     }
 
     /**
@@ -123,10 +148,18 @@ public class Event extends SimpleScriptable {
     }
 
     /**
+     * Returns the event type.
+     * @return The event type.
+     */
+    public String jsxGet_type() {
+        return type_;
+    }
+
+    /**
      * Returns the key code associated with the event.
      * @return The key code associated with the event.
      */
-    public Object jsxGet_keyCode () {
+    public Object jsxGet_keyCode() {
         return keyCode_;
     }
 

@@ -160,7 +160,8 @@ public class HtmlForm extends ClickableElement {
             if (submitElement != null) {
                 final Function onsubmit = getEventHandler("onsubmit");
                 if (onsubmit != null) {
-                    final ScriptResult scriptResult = getPage().runEventHandler(onsubmit, new Event(this));
+                    final Event event = new Event(this, Event.TYPE_SUBMIT);
+                    final ScriptResult scriptResult = getPage().runEventHandler(onsubmit, event);
                     if (Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
                         return scriptResult.getNewPage();
                     }

@@ -956,7 +956,8 @@ public final class HtmlPage extends DomNode implements Page {
         // onload for the window
         final Window jsWindow = (Window) getEnclosingWindow().getScriptObject();
         if (jsWindow != null) {
-            final Event loadEvent = new Event(getDocumentElement());
+
+            final Event loadEvent = new Event(getDocumentElement(), Event.TYPE_LOAD);
 
             final List onLoadHandlers = new ArrayList(jsWindow.getListeners("load"));
             for (final Iterator iter = onLoadHandlers.iterator(); iter.hasNext(); ) {
@@ -987,19 +988,20 @@ public final class HtmlPage extends DomNode implements Page {
      * @param element The element that contains the onload attribute.
      */
     private void executeOneOnLoadHandler(final HtmlElement element) {
-        executeEventHandler(element, "onload");
+        executeEventHandler(element, "onload", Event.TYPE_LOAD);
     }
 
     /**
-     * Execute a single onload handler.  This will either be a string which
-     * will be executed as javascript, or a javascript Function.
-     * @param element The element that contains the onload attribute.
+     * Execute an event handler.
+     * @param element The event's owner.
+     * @param handlerName The event handler's name.
+     * @param eventType The event type.
      */
-    private void executeEventHandler(final HtmlElement element, final String handlerName) {
+    private void executeEventHandler(final HtmlElement element, final String handlerName, final String eventType) {
         final Function function = element.getEventHandler(handlerName);
         if (function != null) {
-            getLog().debug("Executing " + handlerName + " handler, for " + element);
-            runEventHandler(function, new Event(element));
+            getLog().debug("Executing " + handlerName + " handler for " + element);
+            runEventHandler(function, new Event(element, eventType));
         }
     }
 
@@ -1381,7 +1383,8 @@ public final class HtmlPage extends DomNode implements Page {
         if (onchange != null && getWebClient().isJavaScriptEnabled()
                 && engine != null && !engine.isScriptRunning()) {
 
-            final ScriptResult scriptResult = runEventHandler(onchange, new Event(htmlElement));
+            final Event event = new Event(htmlElement, Event.TYPE_CHANGE);
+            final ScriptResult scriptResult = runEventHandler(onchange, event);
 
             if (getWebClient().getWebWindows().contains(getEnclosingWindow())) {
                 return getEnclosingWindow().getEnclosedPage(); // may be itself or a newly loaded one
@@ -1532,12 +1535,12 @@ public final class HtmlPage extends DomNode implements Page {
         }
 
         if (elementWithFocus_ != null) {
-            executeEventHandler(elementWithFocus_, "onblur");
+            executeEventHandler(elementWithFocus_, "onblur", Event.TYPE_BLUR);
         }
 
         elementWithFocus_ = newElement;
         if (newElement != null) {
-            executeEventHandler(elementWithFocus_, "onfocus");
+            executeEventHandler(elementWithFocus_, "onfocus", Event.TYPE_FOCUS);
         }
 
         // If a page reload happened as a result of the focus change then obviously this

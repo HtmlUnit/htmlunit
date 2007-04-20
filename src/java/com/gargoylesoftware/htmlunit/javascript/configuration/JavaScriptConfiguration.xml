@@ -197,6 +197,7 @@
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="5"/>
         </property>
+        <property name="type" readable="true" writable="false"/>
         <property name="keyCode" readable="true" writable="false"/>
     </class>
 

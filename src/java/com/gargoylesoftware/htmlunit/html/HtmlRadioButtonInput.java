@@ -120,7 +120,8 @@ public class HtmlRadioButtonInput extends HtmlInput {
         final HtmlPage page = getPage();
 
         if (changed && onchangeHandler != null && page.getWebClient().isJavaScriptEnabled()) {
-            getPage().runEventHandler(onchangeHandler, new Event(this));
+            final Event event = new Event(this, Event.TYPE_CHANGE);
+            getPage().runEventHandler(onchangeHandler, event);
         }
     }
 
