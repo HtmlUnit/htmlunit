@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="sdanig" id="1695279">
+                JavaScript: ignore invalid script.src attribute used by jQuery ("//:").
+            </action>
             <action type="update" dev="sdanig" id="1658064">
                 Trim whitespace off of anchor href attributes.
             </action>

@@ -62,8 +62,7 @@ public class HtmlScriptTest extends WebTestCase {
     }
 
     /**
-     * @exception Exception
-     *                If the test fails
+     * @throws Exception If an error occurs.
      */
     public void testBadExternalScriptReference() throws Exception {
 
@@ -97,8 +96,7 @@ public class HtmlScriptTest extends WebTestCase {
     }
 
     /**
-     * Verifies that a asText() returns "checked" or "unckecked" according to the state of the checkbox.
-     * @throws Exception if the test fails
+     * @throws Exception If an error occurs.
      */
     public void testAsText() throws Exception {
         final String htmlContent
@@ -112,4 +110,14 @@ public class HtmlScriptTest extends WebTestCase {
         final HtmlScript script = (HtmlScript) page.getHtmlElementById("script1");
         assertEquals("", script.asText());
     }
+
+    /**
+     * Verifies that the weird script src attribute used by the jQuery JavaScript library is
+     * ignored silently (bug 1695279).
+     * @throws Exception If the test fails.
+     */
+    public void testInvalidJQuerySrcAttribute() throws Exception {
+        loadPage("<html><body><script src='//:'></script></body></html>");
+    }
+
 }

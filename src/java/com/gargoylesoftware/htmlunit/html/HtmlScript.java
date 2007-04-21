@@ -47,22 +47,26 @@ import java.util.Map;
  * containing the script is added to the HtmlScript.<br>
  * The ScriptFilter feature of NekoHtml can't be used because it doesn't allow immediate access to the DOM 
  * (ie <code>document.write("&lt;span id='mySpan'/>"); document.getElementById("mySpan").tagName;</code>
- * can't work with a filter).  
- * @version  $Revision$
+ * can't work with a filter).
+ *
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author David K. Taylor
  * @author Ahmed Ashour
- * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">
- * DOM Level 1</a>
- * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">
- * DOM Level 2</a>
+ * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">DOM Level 1</a>
+ * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">DOM Level 2</a>
  */
 public class HtmlScript extends HtmlElement {
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "script";
+
+    /** Invalid source attribute which should be ignored (used by JS libraries like jQuery). */
+    private static final String SLASH_SLASH_COLON = "//:";
+
+    /** Not really used? */
     private static int EventHandlerId_;
 
     /**
@@ -94,7 +98,6 @@ public class HtmlScript extends HtmlElement {
         return getAttributeValue("charset");
     }
 
-
     /**
      * Return the value of the attribute "type".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -107,7 +110,6 @@ public class HtmlScript extends HtmlElement {
         return getAttributeValue("type");
     }
 
-
     /**
      * Return the value of the attribute "language".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -119,7 +121,6 @@ public class HtmlScript extends HtmlElement {
     public final String getLanguageAttribute() {
         return getAttributeValue("language");
     }
-
 
     /**
      * Return the value of the attribute "src".  Refer to the
@@ -174,7 +175,7 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Indicates if the script can be executed
+     * Indicates if the script can be executed.
      * @return <code>false</code> if the script is nested in a node preventing its execution
      */
     boolean canExecute() {
@@ -187,7 +188,7 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * For internal use only
+     * For internal use only.
      */
     void executeInlineScriptIfNeeded() {
         if (getSrcAttribute() == HtmlElement.ATTRIBUTE_NOT_DEFINED && isExecutionNeeded()) {
@@ -219,7 +220,7 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Indicates if script execution is needed (possible)
+     * Indicates if script execution is needed (possible).
      * @return <code>true</code> if script should be execute
      */
     private boolean isExecutionNeeded() {
@@ -238,18 +239,19 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * For internal use only
+     * For internal use only.
      */
     void executeScriptIfNeeded() {
-        final HtmlPage page = getPage();
-
         if (!isExecutionNeeded()) {
             return;
         }
-
-        if (getSrcAttribute() != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
-            getLog().debug("Loading external javascript: " + getSrcAttribute());
-            page.loadExternalJavaScriptFile(getSrcAttribute(), getCharsetAttribute());
+        final String src = getSrcAttribute();
+        if(src.equals(SLASH_SLASH_COLON)){
+            return;
+        }
+        if (src != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+            getLog().debug("Loading external javascript: " + src);
+            getPage().loadExternalJavaScriptFile(src, getCharsetAttribute());
         }
         else if (getFirstChild() != null) {
             executeInlineScriptIfNeeded();
@@ -263,4 +265,5 @@ public class HtmlScript extends HtmlElement {
     public String asText() {
         return "";
     }
+
 }
