@@ -287,6 +287,12 @@
         JSObject="false"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineFrame">
     </class>
 
+    <class name="FrameSet" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FrameSet"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrameSet">
+        <property name="rows" readable="true" writable="true"/>
+        <property name="cols" readable="true" writable="true"/>
+    </class>
+
     <class name="Hidden" extends="HTMLInputElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
         JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHiddenInput">
         <!-- NOT FINISHED -->
@@ -947,4 +953,5 @@
       <function name="send"/>
       <function name="setRequestHeader"/>
     </class>
+
 </configuration>
