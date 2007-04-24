@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
-
 /**
  * Wrapper for the html element "script".<br>
  * When a script tag references an externat script (with attribute src) it gets executed when the node
@@ -55,8 +54,11 @@ import java.util.Map;
  * @author Marc Guillemot
  * @author David K. Taylor
  * @author Ahmed Ashour
- * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">DOM Level 1</a>
- * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">DOM Level 2</a>
+ * @see <a
+ *      href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">DOM
+ *      Level 1</a>
+ * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">DOM
+ *      Level 2</a>
  */
 public class HtmlScript extends HtmlElement {
 
@@ -168,74 +170,51 @@ public class HtmlScript extends HtmlElement {
      */
     public DomNode appendChild(final DomNode node) {
         final DomNode response = super.appendChild(node);
-        if (canExecute()) {
-            executeInlineScriptIfNeeded();
-        }
+        executeInlineScriptIfNeeded();
         return response;
-    }
-
-    /**
-     * Indicates if the script can be executed.
-     * @return <code>false</code> if the script is nested in a node preventing its execution
-     */
-    boolean canExecute() {
-        for (DomNode o = this; o != null; o = o.getParentNode()) {
-            if (o instanceof HtmlInlineFrame || o instanceof HtmlNoFrames) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
      * For internal use only.
      */
     void executeInlineScriptIfNeeded() {
-        if (getSrcAttribute() == HtmlElement.ATTRIBUTE_NOT_DEFINED && isExecutionNeeded()) {
-            final DomCharacterData textNode = (DomCharacterData) getFirstChild();
-            final String scriptCode;
-            if (getEventAttribute() != ATTRIBUTE_NOT_DEFINED
-                    && getHtmlForAttribute() != ATTRIBUTE_NOT_DEFINED) {
-                // event name can be like "onload" or "onload()"
-                String eventName = getEventAttribute();
-                if (eventName.endsWith("()")) {
-                    eventName = eventName.substring(0, eventName.length()-2);
-                }
-                final String scriptEventHandler = getHtmlForAttribute() + "." + eventName;
-                final String evhName = "htmlunit_evh_JJLL" + EventHandlerId_;
-                scriptCode = "function " + evhName + "()\n{"
-                    + textNode.getData() + "}\n"
-                    + scriptEventHandler + "=" + evhName + ";";
-            }
-            else {
-                scriptCode = textNode.getData();
-            }
-            getPage().executeJavaScriptIfPossible(scriptCode,
-                    "Embedded script in " +
-                    getPage().getWebResponse().getUrl().toExternalForm() +
-                    " from (" + getStartLineNumber() + ", " +
-                    getStartColumnNumber() + ") to (" + getEndLineNumber() +
-                    ", " + getEndColumnNumber() + ")", false, null);
-        }
-    }
 
-    /**
-     * Indicates if script execution is needed (possible).
-     * @return <code>true</code> if script should be execute
-     */
-    private boolean isExecutionNeeded() {
-        final HtmlPage page = getPage();
+        if (!isExecutionNeeded()) {
+            return;
+        }
 
-        if (!page.getWebClient().isJavaScriptEnabled()) {
-            return false;
+        final String src = getSrcAttribute();
+        if (src != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+            return;
         }
-        if (!HtmlPage.isJavaScript(getTypeAttribute(), getLanguageAttribute())) {
-            getLog().warn("Script is not javascript (type: " + getTypeAttribute() 
-                    + ", language: " + getLanguageAttribute() + "). Skipping execution.");
-            return false;
+
+        final DomCharacterData textNode = (DomCharacterData) getFirstChild();
+        final String forr = getHtmlForAttribute();
+        String event = getEventAttribute();
+
+        final String scriptCode;
+        if (event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
+            // The event name can be like "onload" or "onload()".
+            if (event.endsWith("()")) {
+                event = event.substring(0, event.length() - 2);
+            }
+            final String handler = forr + "." + event;
+            final String functionName = "htmlunit_event_handler_JJLL" + EventHandlerId_;
+            scriptCode = "function " + functionName + "()\n" +
+                "{" + textNode.getData() + "}\n" +
+                handler + "=" + functionName + ";";
         }
-        
-        return true;
+        else {
+            scriptCode = textNode.getData();
+        }
+
+        final String url = getPage().getWebResponse().getUrl().toExternalForm();
+        final int line1 = getStartLineNumber();
+        final int line2 = getEndLineNumber();
+        final int col1 = getStartColumnNumber();
+        final int col2 = getEndColumnNumber();
+        final String desc = "Script in " + url + " from (" + line1 + ", " + col1 + ") to (" + line2 + ", " + col2 + ")";
+        getPage().executeJavaScriptIfPossible(scriptCode, desc, false, null);
     }
 
     /**
@@ -246,7 +225,7 @@ public class HtmlScript extends HtmlElement {
             return;
         }
         final String src = getSrcAttribute();
-        if(src.equals(SLASH_SLASH_COLON)){
+        if (src.equals(SLASH_SLASH_COLON)) {
             return;
         }
         if (src != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
@@ -256,6 +235,44 @@ public class HtmlScript extends HtmlElement {
         else if (getFirstChild() != null) {
             executeInlineScriptIfNeeded();
         }
+    }
+
+    /**
+     * Indicates if script execution is needed (possible).
+     * 
+     * @return <code>true</code> if script should be executed.
+     */
+    private boolean isExecutionNeeded() {
+
+        final HtmlPage page = getPage();
+
+        // If JavaScript is disabled, we don't need to execute.
+        if (!page.getWebClient().isJavaScriptEnabled()) {
+            return false;
+        }
+
+        // If the script node is nested in an iframe or a noframes node, we don't need to execute.
+        for (DomNode o = this; o != null; o = o.getParentNode()) {
+            if (o instanceof HtmlInlineFrame || o instanceof HtmlNoFrames) {
+                return false;
+            }
+        }
+
+        // If the underlying page no longer owns its window, the client has moved on (possibly
+        // because another script set window.location.href), and we don't need to execute.
+        if (page.getEnclosingWindow() != null && page.getEnclosingWindow().getEnclosedPage() != page) {
+            return false;
+        }
+
+        // If the script language is not JavaScript, we can't execute.
+        if (!HtmlPage.isJavaScript(getTypeAttribute(), getLanguageAttribute())) {
+            final String t = getTypeAttribute();
+            final String l = getLanguageAttribute();
+            getLog().warn("Script is not javascript (type: " + t + ", language: " + l + "). Skipping execution.");
+            return false;
+        }
+
+        return true;
     }
 
     /**

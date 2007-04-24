@@ -37,11 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Tests for {@link HtmlScript}.
@@ -118,6 +122,40 @@ public class HtmlScriptTest extends WebTestCase {
      */
     public void testInvalidJQuerySrcAttribute() throws Exception {
         loadPage("<html><body><script src='//:'></script></body></html>");
+    }
+
+    /**
+     * Verifies that if a script element executes "window.location.href=someotherpage", then subsequent
+     * script tags, and any onload handler for the original page do not run.
+     */
+   public void testChangingLocationSkipsFurtherScriptsOnPage() throws Exception {
+
+       final String firstPage
+           = "<html><head></head>"
+           + "<body onload='alert(\"body onload executing but should be skipped\")'>"
+           + "<script>alert('First script executes')</script>"
+           + "<script>window.location.href='" + URL_SECOND + "'</script>"
+           + "<script>alert('Third script executing but should be skipped')</script>"
+           +"</body></html>";
+
+       final String secondPage
+           = "<html><head></head><body>"
+           + "<script>alert('Second page loading')</script>"
+           + "</body></html>";
+
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstPage);
+        webConnection.setResponse(URL_SECOND, secondPage);
+        client.setWebConnection(webConnection);
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        client.getPage(URL_FIRST);
+        final List expectedAlerts = Arrays.asList(new String[] { "First script executes", "Second page loading" });
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
 }
