@@ -109,17 +109,11 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     }
 
     /**
-     *  Return a text representation of this element that represents what would
-     *  be visible to the user if this page was shown in a web browser. For
-     *  example, a select element would return the currently selected value as
-     *  text
-     *
-     * @return  The element as text
+     * {@inheritDoc}
      */
     public String asText() {
         return getValueAttribute();
     }
-
 
     /**
      * Return the value of the attribute "type".  Refer to the

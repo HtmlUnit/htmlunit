@@ -61,10 +61,10 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 
 /**
- *  Base class for nodes in the Html DOM tree. This class is modelled after the
- * W3c DOM specification, but does not implement it.
+ * Base class for nodes in the HTML DOM tree. This class is modelled after the
+ * W3C DOM specification, but does not implement it.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author David K. Taylor
@@ -358,23 +358,19 @@ public abstract class DomNode implements Cloneable {
      */
     public abstract String getNodeName();
 
-
     /**
-     *  Return a text representation of this element that represents what would
+     *  Returns a text representation of this element that represents what would
      *  be visible to the user if this page was shown in a web browser. For
-     *  example, a select element would return the currently selected value as
-     *  text
+     *  example, a single-selection select element would return the currently selected
+     *  value as text.
      *
-     * @return  The element as text
+     * @return The element as text.
      */
     public String asText() {
         String text = getChildrenAsText();
-
-        // Remove extra whitespace
         text = reduceWhitespace(text);
         return text;
     }
-
 
     /**
      *  Return a text string that represents all the child elements as they

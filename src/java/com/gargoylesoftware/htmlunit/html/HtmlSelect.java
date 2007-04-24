@@ -52,9 +52,9 @@ import com.gargoylesoftware.htmlunit.Page;
 
 
 /**
- *  Wrapper for the html element "select"
+ * Wrapper for the HTML element "select".
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author David K. Taylor
@@ -69,7 +69,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public static final String TAG_NAME = "select";
 
     private String[] fakeSelectedValues_;
-
 
     /**
      *  Create an instance
@@ -481,46 +480,37 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         return ( HtmlOption )getOneHtmlElementByAttribute( "option", "value", value );
     }
 
-
     /**
-     *  Return a text representation of this element that represents what would
-     *  be visible to the user if this page was shown in a web browser. For
-     *  example, a select element would return the currently selected value as
-     *  text
+     *  Returns a text representation of this element that represents what would
+     *  be visible to the user if this page was shown in a web browser. If the user
+     *  can only select one option at a time, this method returns the selected option.
+     *  If the user can select multiple options, this method returns all options.
      *
-     * @return  The element as text
+     * @return The element as text.
      */
     public String asText() {
 
         final List options;
-        if( isMultipleSelectEnabled() ) {
+        if(isMultipleSelectEnabled()) {
             options = getOptions();
         }
         else {
             options = getSelectedOptions();
         }
 
-        boolean isFirstTimeThrough = true;
         final StringBuffer buffer = new StringBuffer();
-
-        final Iterator iterator = options.iterator();
-        while( iterator.hasNext() ) {
-            if (isFirstTimeThrough) {
-                isFirstTimeThrough = false;
+        for (final Iterator i = options.iterator(); i.hasNext();) {
+            final HtmlOption currentOption = (HtmlOption) i.next();
+            if (currentOption != null) {
+                buffer.append(currentOption.asText());
             }
-            else {
-                buffer.append( "\n" );
-            }
-
-            final HtmlOption currentOption = ( HtmlOption )iterator.next();
-            if( currentOption != null) {
-                buffer.append( currentOption.asText() );
+            if (i.hasNext()) {
+                buffer.append("\n");
             }
         }
 
         return buffer.toString();
     }
-
 
     /**
      *  Return the value of the attribute "name". Refer to the <a

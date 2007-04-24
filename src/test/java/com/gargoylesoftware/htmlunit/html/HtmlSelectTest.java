@@ -574,6 +574,13 @@ public class HtmlSelectTest extends WebTestCase {
 
     }
 
+    void appendOption(final HtmlSelect select, final String value) {
+        final HtmlOption option = new HtmlOption(select.getPage(), null);
+        option.setValueAttribute(value);
+        option.setLabelAttribute(value);
+        select.appendOption(option);
+    }
+
     /**
      * Test that asText() returns a blank string if nothing is selected.
      * 
@@ -593,11 +600,23 @@ public class HtmlSelectTest extends WebTestCase {
         assertEquals("", select.asText());
     }
 
-    void appendOption(final HtmlSelect select, final String value) {
-        final HtmlOption option = new HtmlOption(select.getPage(), null);
-        option.setValueAttribute(value);
-        option.setLabelAttribute(value);
-        select.appendOption(option);
+    /**
+     * Verifies that asText() returns all options when multiple options are selectable, instead of just
+     * the selected ones.
+     * @throws Exception If an error occurs.
+     */
+    public void testAsTextWithMultipleSelect() throws Exception {
+        final String html =
+            "<html><body><form>\n" +
+            "<select name='a' multiple>\n" +
+            "<option value='1'>foo</option>\n" +
+            "<option value='2'>bar</option>\n" +
+            "<option value='3'>baz</option>\n" +
+            "</select>\n" +
+            "</form></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlSelect select = (HtmlSelect) page.getDocumentElement().getHtmlElementsByTagName("select").get(0);
+        assertEquals("foo\nbar\nbaz", select.asText());
     }
 
     /**

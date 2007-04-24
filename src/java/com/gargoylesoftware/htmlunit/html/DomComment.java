@@ -73,19 +73,14 @@ public class DomComment extends DomCharacterData {
     public String getNodeName() {
         return NODE_NAME;
     }
-    
+
     /**
-     *  Return a text representation of this element that represents what would
-     *  be visible to the user if this page was shown in a web browser. For
-     *  example, a select element would return the currently selected value as
-     *  text
-     *
-     * @return  The element as text
+     * {@inheritDoc}
      */
     public String asText() {
         return "";
     }
-    
+
     /**
      * recursively write the XML data for the node tree starting at <code>node</code>
      *

@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="sdanig" id="1634051">
+                Verify correct behavior of HtmlSelect#asText() with multiple selections, fix JavaDoc.
+            </action>
             <action type="update" dev="sdanig" id="1705559" due-to="Bruce Chapman">
                 JavaScript: add support for frameset.rows and frameset.cols properties.
             </action>
