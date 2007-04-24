@@ -409,5 +409,40 @@ public class HtmlAnchorTest extends WebTestCase {
         final Map lastAdditionalHeaders = conn.getLastAdditionalHeaders();
         assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get("Referer"));
     }
+    
+    /**
+     * https://sourceforge.net/tracker/index.php?func=detail&aid=1587110&group_id=47038&atid=448266
+     * 
+     * Links with an href and a non-false returning onclick that opens a new window should still
+     * open the href in the first window.
+     * 
+     * @throws Exception on test failure
+     */
+    public void testCorrectLinkTargetWhenOnclickOpensWindow() throws Exception {
+        final String firstContent = "<html><head><title>First</title></head><body>"
+            + "<a href='"
+            + URL_SECOND.toExternalForm()
+            + "' id='clickme' onclick=\"window.open('', 'newWindow');\">X</a>"
+            + "</body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
+        final WebClient client = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        client.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("clickme");
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
+
+        assertEquals("Second window did not open", 2, client.getWebWindows().size());
+        assertNotSame("New Page was not returned", firstPage, secondPage);
+        assertEquals("Wrong new Page returned", "Second", secondPage.getTitleText());
+        assertSame("New Page not in correct WebWindow", firstPage.getEnclosingWindow(), secondPage
+                .getEnclosingWindow());
+    }
 }
