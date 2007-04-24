@@ -83,6 +83,12 @@ public abstract class ScriptEngine {
     public abstract void initialize(final WebWindow webWindow);
 
     /**
+     * release this object from managing a WebWindow
+     * @param webWindow the web window to initialize for
+     */
+    public abstract void release(final WebWindow webWindow);
+    
+    /**
      * Execute the specified source code in the context of the given page.
      * @param htmlPage The page
      * @param sourceCode The code to execute.

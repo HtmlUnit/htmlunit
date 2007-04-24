@@ -464,6 +464,12 @@ public class JavaScriptEngine extends ScriptEngine {
             return contexts_.size();
         }
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void release(final WebWindow webWindow){
+        prototypesPerWindow_.remove(webWindow.getScriptObject());
+    }
 }
 

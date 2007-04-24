@@ -1141,6 +1141,13 @@ public class JavaScriptEngineTest extends WebTestCase {
             delegate_.initialize(window);
         }
 
+        /**
+         * {@inheritDoc}
+         */
+        public void release(WebWindow webWindow) {
+            delegate_.release(webWindow);
+        }
+
         /** @inheritDoc ScriptEngine#execute(HtmlPage,String,String,HtmlElement) */
         public Object execute(
                 final HtmlPage htmlPage, final String sourceCode,
