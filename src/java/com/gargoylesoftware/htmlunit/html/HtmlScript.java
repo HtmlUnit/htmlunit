@@ -54,11 +54,9 @@ import java.util.Map;
  * @author Marc Guillemot
  * @author David K. Taylor
  * @author Ahmed Ashour
- * @see <a
- *      href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">DOM
- *      Level 1</a>
- * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">DOM
- *      Level 2</a>
+ * @author Daniel Gredler
+ * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">DOM Level 1</a>
+ * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">DOM Level 2</a>
  */
 public class HtmlScript extends HtmlElement {
 
@@ -269,6 +267,16 @@ public class HtmlScript extends HtmlElement {
             final String t = getTypeAttribute();
             final String l = getLanguageAttribute();
             getLog().warn("Script is not javascript (type: " + t + ", language: " + l + "). Skipping execution.");
+            return false;
+        }
+
+        // If the script's root ancestor node is not the page, the the script is not a part of the page.
+        // If it isn't yet part of the page, don't execute the script; it's probably just being cloned.
+        DomNode root = this;
+        while (root.getParentNode() != null) {
+            root = root.getParentNode();
+        }
+        if (root != getPage()) {
             return false;
         }
 

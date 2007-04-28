@@ -1411,7 +1411,7 @@ public final class HtmlPage extends DomNode implements Page {
                 final HtmlScript scriptNode = (HtmlScript) node;
                 getLog().debug("Script node added: " + scriptNode.asXml());
                 scriptNode.executeScriptIfNeeded();
-            } 
+            }
             else {
                 final List scripts = elem.getHtmlElementsByTagName("script");
                 for (final Iterator iter = scripts.iterator(); iter.hasNext();){

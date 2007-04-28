@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="sdanig" id="1707788">
+                JavaScript: Cloning a script node should not execute the script.
+            </action>
             <action type="update" dev="sdanig" id="1706237">
                 JavaScript: Don't run scripts after the window location changes.
             </action>

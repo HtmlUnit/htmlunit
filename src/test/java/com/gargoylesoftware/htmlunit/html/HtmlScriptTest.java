@@ -37,29 +37,29 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Tests for {@link HtmlScript}.
  * 
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Daniel Gredler
  */
 public class HtmlScriptTest extends WebTestCase {
 
     /**
-     * Create an instance
-     * 
-     * @param name
-     *            Name of the test
+     * Creates an instance.
+     * @param name The name of the test.
      */
     public HtmlScriptTest(final String name) {
         super(name);
@@ -155,6 +155,21 @@ public class HtmlScriptTest extends WebTestCase {
 
         client.getPage(URL_FIRST);
         final List expectedAlerts = Arrays.asList(new String[] { "First script executes", "Second page loading" });
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Verifies that a script element is not run when it is cloned.
+     * See bug 1707788.
+     * @throws Exception If an error occurs.
+     */
+    public void testScriptIsNotRunWhenCloned() throws Exception {
+
+        final String html = "<html><body onload='document.body.cloneNode(true)'><script>alert('a')</script></body></html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
+
+        final List expectedAlerts = Arrays.asList(new String[] { "a" });
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
