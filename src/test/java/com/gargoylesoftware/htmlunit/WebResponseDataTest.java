@@ -58,8 +58,8 @@ public class WebResponseDataTest extends WebTestCase {
      * Create an instance.
      * @param name The name of the test.
      */
-    public WebResponseDataTest( final String name ) {
-        super( name );
+    public WebResponseDataTest(final String name) {
+        super(name);
     }
 
     /**
@@ -68,15 +68,27 @@ public class WebResponseDataTest extends WebTestCase {
      */
     public void testGZippedContent() throws Exception {
 
-        final InputStream stream = getClass().getResourceAsStream( GZIPPED_FILE );
-        final byte[] zippedContent = IOUtils.toByteArray( stream );
+        final InputStream stream = getClass().getResourceAsStream(GZIPPED_FILE);
+        final byte[] zippedContent = IOUtils.toByteArray(stream);
 
         final List headers = new ArrayList();
-        headers.add( new KeyValuePair( "Content-Encoding", "gzip" ) );
+        headers.add(new KeyValuePair("Content-Encoding", "gzip"));
 
-        final WebResponseData data = new WebResponseData( zippedContent, 200, "OK", headers );
-        final String body = new String( data.getBody(), "UTF-8" );
-        assertTrue( StringUtils.contains( body, "Test" ) );
+        final WebResponseData data = new WebResponseData(zippedContent, 200, "OK", headers);
+        final String body = new String(data.getBody(), "UTF-8");
+        assertTrue(StringUtils.contains(body, "Test"));
+    }
+
+    /**
+     * Verifies that a null body input stream is handled correctly. A null body may be sent, for
+     * example, when a 304 (Not Modified) response is sent to the client. See bug 1706505.
+     * @throws Exception If the test fails.
+     */
+    public void testNullBody() throws Exception {
+        InputStream body = null;
+        List headers = new ArrayList();
+        WebResponseData data = new WebResponseData(body, 304, "NOT_MODIFIED", headers);
+        assertNull(data.getBody());
     }
 
 }

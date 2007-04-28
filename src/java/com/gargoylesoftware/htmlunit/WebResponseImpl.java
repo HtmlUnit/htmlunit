@@ -52,17 +52,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Simple base class for WebResponse
- * 
- * @version  $Revision$
+ * Simple base class for {@link WebResponse}.
+ *
+ * @version $Revision$
  * @author Brad Clarke
  */
 public class WebResponseImpl implements WebResponse {
+
     private final Log log_ = LogFactory.getLog(WebResponseImpl.class);
     private URL url_;
     private SubmitMethod requestMethod_;
     private long loadTime_;
-
     private WebResponseData responseData_;
 
     /**
@@ -116,7 +116,13 @@ public class WebResponseImpl implements WebResponse {
      */
     public String getContentAsString() {
         try {
-            return new String(responseData_.getBody(), getContentCharSet());
+            final byte[] body = responseData_.getBody();
+            if (body != null) {
+                return new String(body, getContentCharSet());
+            }
+            else {
+                return null;
+            }
         }
         catch (final UnsupportedEncodingException e) {
             return null;
@@ -127,7 +133,13 @@ public class WebResponseImpl implements WebResponse {
      * {@inheritDoc}
      */
     public InputStream getContentAsStream() throws IOException {
-        return new ByteArrayInputStream(responseData_.getBody());
+        final byte[] body = responseData_.getBody();
+        if (body != null) {
+            return new ByteArrayInputStream(body);
+        }
+        else {
+            return null;
+        }
     }
 
     /**
@@ -184,9 +196,9 @@ public class WebResponseImpl implements WebResponse {
         String charSet = StringUtils.substringAfter(contentTypeHeader, "charset=");
         if (StringUtils.isEmpty(charSet)) {
             log_.debug("No charset specified in header, trying to guess it from content");
-            // try to guess it from content
-            final byte[] markerUTF8 = {(byte) 0xef, (byte) 0xbb, (byte) 0xbf};
-            if (ArrayUtils.isEquals(markerUTF8, ArrayUtils.subarray(responseData_.getBody(), 0, 3))) {
+            final byte[] body = responseData_.getBody();
+            final byte[] markerUTF8 = { (byte) 0xef, (byte) 0xbb, (byte) 0xbf };
+            if (body != null && ArrayUtils.isEquals(markerUTF8, ArrayUtils.subarray(body, 0, 3))) {
                 log_.debug("UTF-8 marker found");
                 charSet = "UTF-8";
             }
@@ -196,7 +208,6 @@ public class WebResponseImpl implements WebResponse {
                 charSet = "ISO-8859-1";
             }
         }
-
         return charSet;
     }
 
@@ -206,4 +217,5 @@ public class WebResponseImpl implements WebResponse {
     public byte[] getResponseBody() {
         return responseData_.getBody();
     }
+
 }

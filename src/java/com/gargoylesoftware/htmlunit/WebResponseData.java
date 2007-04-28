@@ -50,12 +50,14 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * Simple data object to simplify WebResponse creation
- * 
- * @version  $Revision$
+ * Simple data object to simplify WebResponse creation.
+ *
+ * @version $Revision$
  * @author Brad Clarke
+ * @author Daniel Gredler
  */
 public class WebResponseData {
+
     private byte[] body_;
     private int statusCode_;
     private String statusMessage_;
@@ -126,13 +128,17 @@ public class WebResponseData {
     /**
      * Returns the body byte array contained by the specified input stream.
      * If the response headers indicate that the data has been compressed,
-     * the data stream is handled appropriately.
+     * the data stream is handled appropriately. If the specified stream is
+     * <tt>null</tt>, this method returns <tt>null</tt>.
      * @param stream The input stream which contains the body.
      * @param headers The response headers.
      * @return The specified body stream, as a byte array.
      * @throws IOException If a stream error occurs.
      */
     private byte[] getBody( InputStream stream, final List headers ) throws IOException {
+        if (stream == null) {
+            return null;
+        }
         String encoding = null;
         for (final Iterator i = headers.iterator(); i.hasNext(); ) {
             final NameValuePair header = (NameValuePair) i.next();

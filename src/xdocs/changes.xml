@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="sdanig" id="1706505" due-to="mtamme">
+                Avoid NPEs for responses with null bodies (ie 304 Not Modified responses).
+            </action>
             <action type="update" dev="sdanig" id="1707788" due-to="Bruce Chapman">
                 JavaScript: Cloning a script node should not execute the script.
             </action>
