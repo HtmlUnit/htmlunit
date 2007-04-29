@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="sdanig" id="1707726" due-to="Bruce Chapman">
+                When cloning nodes, clone the id attribute as well.
+            </action>
             <action type="update" dev="sdanig" id="1706505" due-to="mtamme">
                 Avoid NPEs for responses with null bodies (ie 304 Not Modified responses).
             </action>

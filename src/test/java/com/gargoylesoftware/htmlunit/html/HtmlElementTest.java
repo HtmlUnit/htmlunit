@@ -37,30 +37,58 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- *  Tests for HtmlElement
+ * Unit tests for {@link HtmlElement}.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Denis N. Antonioli
+ * @author Daniel Gredler
  */
 public class HtmlElementTest extends WebTestCase {
+
     /**
-     *  Create an instance
-     *
-     * @param  name The name of the test
+     * Creates an instance.
+     * @param name The name of the test.
      */
     public HtmlElementTest( final String name ) {
         super( name );
     }
 
+    /**
+     * Verifies that cloned node attributes have the same initial values, but changes can be made
+     * to the clone without affecting the original node, and that the id attribute is treated the
+     * same as all the other attributes. See bug 1707726.
+     * @throws Exception If an error occurs.
+     */
+    public void testClonedNodeAttributes() throws Exception {
+        String html = "<html><body id='a' title='b'><script>\n" +
+                "var x = document.body.cloneNode(true);\n" +
+                "alert(document.body==x);\n" +
+                "alert(document.getElementById('a')==document.body);\n" +
+                "alert(document.body.id);\n" +
+                "alert(x.id);\n" +
+                "alert(document.body.title);\n" +
+                "alert(x.title);\n" +
+                "x.title='c';\n" +
+                "alert(document.body.title);\n" +
+                "alert(x.title);\n" +
+                "</script></body></html>\n";
+        List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
+        List expectedAlerts = Arrays.asList(new String[] {"false", "true", "a", "a", "b", "b", "b", "c"});
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 
     /**
      * @throws Exception if the test fails

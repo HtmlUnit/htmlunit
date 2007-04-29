@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
 /**
  * An abstract wrapper for html elements
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author David K. Taylor
@@ -68,17 +68,17 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  */
 public abstract class HtmlElement extends DomNode {
 
-    /** Constant meaning that the specified attribute was not defined */
+    /** Constant meaning that the specified attribute was not defined. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
 
-    /** Constant meaning that the specified attribute was found but its value was empty */
+    /** Constant meaning that the specified attribute was found but its value was empty. */
     public static final String ATTRIBUTE_VALUE_EMPTY = new String("");
 
-    /** the map holding the attribute values by name */
+    /** The map holding the attribute values, keyed by name. */
     private Map attributes_;
 
     /**
-     *  Create an instance
+     * Creates an instance.
      *
      * @param htmlPage The page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
@@ -101,27 +101,17 @@ public abstract class HtmlElement extends DomNode {
      * {@inheritDoc}
      */
     public DomNode cloneNode(final boolean deep) {
-        final HtmlElement newnode = (HtmlElement) super.cloneNode(deep);
-
-        newnode.attributes_ = new HashMap();
-
+        final HtmlElement newNode = (HtmlElement) super.cloneNode(deep);
+        newNode.attributes_ = new HashMap();
         for (final Iterator it = attributes_.keySet().iterator(); it.hasNext();) {
             final Object key = it.next();
-
-            if ("id".equals(key)) {
-                continue;
-            }
-
-            newnode.setAttributeValue((String) key, (String) attributes_.get(key));
+            newNode.setAttributeValue((String) key, (String) attributes_.get(key));
         }
-
-        newnode.setId(ATTRIBUTE_VALUE_EMPTY);
-
-        return newnode;
+        return newNode;
     }
 
     /**
-     *  Return the value of the specified attribute or an empty string.  If the
+     * Return the value of the specified attribute or an empty string.  If the
      * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
      * attribute was specified but it was empty.

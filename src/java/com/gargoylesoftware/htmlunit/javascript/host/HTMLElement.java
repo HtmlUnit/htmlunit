@@ -72,10 +72,10 @@ import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 
 /**
- * The javascript object "HTMLElement" which is the base class for all html
- * objects.  This will typically wrap an instance of {@link HtmlElement}.
+ * The javascript object "HTMLElement" which is the base class for all HTML
+ * objects. This will typically wrap an instance of {@link HtmlElement}.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Barnaby Court
@@ -89,6 +89,7 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
  * @author Ahmed Ashour
  */
 public class HTMLElement extends NodeImpl {
+
     private static final long serialVersionUID = -6864034414262085851L;
     private static final int BEHAVIOR_ID_UNKNOWN = -1;
     private static final int BEHAVIOR_ID_CLIENT_CAPS = 0;
@@ -121,16 +122,16 @@ public class HTMLElement extends NodeImpl {
      * Create an instance.
      */
     public HTMLElement() {
+        // Empty.
     }
-
 
     /**
      * Javascript constructor.  This must be declared in every javascript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
+        // Empty.
     }
-
 
     /**
      * Return the value of the "all" property.

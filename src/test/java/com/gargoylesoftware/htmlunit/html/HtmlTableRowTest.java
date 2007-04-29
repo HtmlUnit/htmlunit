@@ -44,13 +44,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 
 /**
- * Tests for HtmlTableRow
- * 
+ * Tests for {@link HtmlTableRow}.
+ *
  * @version $Revision$
  * @author <a href="mailto:gallaherm@pragmatics.com">Mike Gallaher </a>
  * @author Mike Bowler
  */
 public class HtmlTableRowTest extends WebTestCase {
+
     /**
      * Create an instance.
      * @param name The name of the test
@@ -150,33 +151,6 @@ public class HtmlTableRowTest extends WebTestCase {
      */
     public void testClonedCellHasClonedRowAsParent() throws Exception {
         assertSame(rowClone_, cellClone_.getParentNode());
-    }
-
-    /**
-     * Ensure the cloned row has a different id than the original.
-     */
-    public void testClonedRowHasDifferentId() {
-        assertFalse(row_.getId().equals(rowClone_.getId()));
-        assertEquals("", rowClone_.getId());
-    }
-
-    /**
-     * Ensure the cloned cell has a different id than the original.
-     */
-    public void testClonedCellHasDifferentId() {
-        assertFalse(cell_.getId().equals(cellClone_.getId()));
-        assertEquals("", cellClone_.getId());
-    }
-
-    /**
-     * Ensure the cloned cell's child has a different id than the original's
-     * child.
-     */
-    public void testClonedCellChildHasDifferentId() {
-        final HtmlElement cellChild = (HtmlElement) cell_.getFirstChild();
-        final HtmlElement cellChildClone = (HtmlElement) cellClone_.getFirstChild();
-        assertFalse(cellChild.getId().equals(cellChildClone.getId()));
-        assertEquals("", cellChildClone.getId());
     }
 
     /**
