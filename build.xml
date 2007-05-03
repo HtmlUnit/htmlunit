@@ -207,8 +207,6 @@ JUnit results available here: ${test.reports.dir}/index.html
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<target name="checkstyle" depends="-getCheckstyle" description="Checks the constistency of htmlunit source code">
 
-		<!-- coding conventions -->
-
 		<taskdef resource="checkstyletask.properties" classpath="${jars.dir}/checkstyle/checkstyle-4.3/checkstyle-all-4.3.jar"/>
 		
 		<checkstyle config="checkstyle.xml">
