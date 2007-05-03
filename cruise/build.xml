@@ -1,6 +1,5 @@
 <project name="htmlunit-cruisecontrol-starter" default="cruise"> 
 
-
 	<property name="svn.tag" value="https://svn.canoo.com/versions/htmlunit/"/>
 	<property name="dir.checkout" value=".."/>
 	<property name="svn.user" value="canoo.shared"/>
