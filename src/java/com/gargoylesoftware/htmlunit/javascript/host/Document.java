@@ -134,7 +134,7 @@ public final class Document extends NodeImpl {
      *
      * @param window The Window JavaScript object that encloses this document.
      */
-    void setWindow(Window window) {
+    void setWindow(final Window window) {
         window_ = window;
     }
 

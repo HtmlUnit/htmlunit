@@ -202,7 +202,7 @@ public abstract class DomNode implements Cloneable {
      * @param startLineNumber The line number where the DOM node starts.
      * @param startColumnNumber The column number where the DOM node starts.
      */
-    void setStartLocation(int startLineNumber, int startColumnNumber) {
+    void setStartLocation(final int startLineNumber, final int startColumnNumber) {
         startLineNumber_ = startLineNumber;
         startColumnNumber_ = startColumnNumber;
     }
@@ -214,7 +214,7 @@ public abstract class DomNode implements Cloneable {
      * @param endLineNumber The line number where the DOM node ends.
      * @param endColumnNumber The column number where the DOM node ends.
      */
-    void setEndLocation(int endLineNumber, int endColumnNumber) {
+    void setEndLocation(final int endLineNumber, final int endColumnNumber) {
         endLineNumber_ = endLineNumber;
         endColumnNumber_ = endColumnNumber;
     }

@@ -59,11 +59,11 @@ public final class Util {
      * @return A possibly-empty iterator (not null).
      */
     public static Iterator getFollowingSiblingAxisIterator(final DomNode contextNode) {
-        return new NodeIterator (contextNode) {
-            protected DomNode getFirstNode (final DomNode node) {
+        return new NodeIterator(contextNode) {
+            protected DomNode getFirstNode(final DomNode node) {
                 return getNextNode(node);
             }
-            protected DomNode getNextNode (final DomNode node) {
+            protected DomNode getNextNode(final DomNode node) {
                 return node.getNextSibling();
             }
         };
@@ -75,7 +75,7 @@ public final class Util {
      * @param contextNode The context node for the preceding sibling axis.
      * @return A possibly-empty iterator (not null).
      */
-    public static Iterator getPrecedingSiblingAxisIterator (final DomNode contextNode) {
+    public static Iterator getPrecedingSiblingAxisIterator(final DomNode contextNode) {
         return new NodeIterator (contextNode) {
             protected DomNode getFirstNode (final DomNode node) {
                 return getNextNode(node);
@@ -92,26 +92,26 @@ public final class Util {
      * @param contextNode The context node for the following axis.
      * @return A possibly-empty iterator (not null).
      */
-    public static Iterator getFollowingAxisIterator (final DomNode contextNode) {
+    public static Iterator getFollowingAxisIterator(final DomNode contextNode) {
         return new NodeIterator (contextNode) {
             protected DomNode getFirstNode (final DomNode node) {
                 if (node == null) {
-                   return null;
+                    return null;
                 } 
                 else {
                     final DomNode sibling = node.getNextSibling();
                     if (sibling == null) {
-                       return getFirstNode(node.getParentNode());
+                        return getFirstNode(node.getParentNode());
                     }
                     else {
-                       return sibling;
+                        return sibling;
                     }
                 }
             }
 
-            protected DomNode getNextNode (final DomNode node) {
+            protected DomNode getNextNode(final DomNode node) {
                 if (node == null) {
-                   return null;
+                    return null;
                 }
                 else {
                     DomNode n = node.getFirstChild();

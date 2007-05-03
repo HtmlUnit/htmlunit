@@ -195,7 +195,7 @@ public class ThreadManager {
 
     /**
      * Gives a basic representation for debug purposes.
-     * @see java.lang.Object#toString()
+     * {@inheritDoc}
      */
     public String toString() {
         return "ThreadManager: " + threadMap_; 

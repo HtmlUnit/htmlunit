@@ -54,6 +54,7 @@ import org.mozilla.javascript.ScriptableObject;
  */
 public class MethodWrapper extends ScriptableObject implements Function {
 
+    private static final long serialVersionUID = 6106771000496895783L;
     private final Class clazz_;
     private final Method method_;
     private final int[] jsTypeTags_;
@@ -88,6 +89,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
 
     /**
      * @see org.mozilla.javascript.ScriptableObject#getClassName()
+     * @return a name based on the method name
      */
     public String getClassName() {
         return "function " + method_.getName();
@@ -95,6 +97,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
 
     /**
      * @see org.mozilla.javascript.Function#call(Context, Scriptable, Scriptable, Object[])
+     * {@inheritDoc}
      */
     public Object call(final Context context, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         final Object javaResp;
@@ -151,6 +154,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
 
     /**
      * @see org.mozilla.javascript.Function#construct(Context, Scriptable, Object[])
+     * {@inheritDoc}
      */
     public Scriptable construct(final Context context, final Scriptable scope, final Object[] args) {
         throw Context.reportRuntimeError("Function " + method_.getName() + " can't be used as a constructor");
