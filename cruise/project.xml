@@ -30,7 +30,7 @@ defaultmailhost
 			<merge dir="&basedir;/htmlunit/cruisecontrol/checkout/ant-target/junit-results/"/>
 		</log>
 		<publishers>
-			<artifactspublisher dir="ant-target/distrib" dest="htmlunit" />
+			<artifactspublisher dir="&basedir;/ant-target/distrib" dest="htmlunit" />
 			<!-- htmlemail is used only for explicit subscribers -->
 			<htmlemail
 				buildresultsurl="http://&hostname;/htmlunit/"
