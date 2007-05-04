@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1705521" due-to="Bruce Chapman">
+                DomNode.DescendantElementsIterator.remove() now throws UnsupportedOperationException 
+                (previous behavior was not correct).
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: added support for label property on Option objects.
             </action>

@@ -849,14 +849,10 @@ public abstract class DomNode implements Cloneable {
             return nextElement();
         }
 
-        /** remove the current object */
+        /** remove the current object.
+         @throw UnsupportedOperationException always*/
         public void remove() {
-            if(nextElement_ == null) {
-                throw new IllegalStateException();
-            }
-            if(nextElement_.getPreviousSibling() != null) {
-                nextElement_.getPreviousSibling().remove();
-            }
+            throw new UnsupportedOperationException();
         }
 
         /** @return is there a next one? */
