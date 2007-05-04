@@ -67,7 +67,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 /**
  * Tests for {@link Window}.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @author David K. Taylor
@@ -77,16 +77,17 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Chris Erskine
  * @author David D. Kilzer
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class WindowTest extends WebTestCase {
+
     /**
-     * Create an instance
-     * @param name The name of the test
+     * Creates an instance.
+     * @param name The name of the test.
      */
     public WindowTest( final String name ) {
         super(name);
     }
-
 
     /**
      * @throws Exception If the test fails
@@ -1571,7 +1572,7 @@ public class WindowTest extends WebTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "<script>\n"
-            + "  var oldOnLoad = window.onload;;\n"
+            + "  var oldOnLoad = window.onload;\n"
             + "  window.onload = test2;\n"
             + "  function test2()\n"
             + "  {\n"
@@ -1585,6 +1586,24 @@ public class WindowTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Verifies that you can set window.onload to an anonymous function. See bug 1708532.
+     * @throws Exception If an error occurs.
+     */
+    public void testOnloadAnonymousFunction() throws Exception {
+
+        if(notYetImplemented()){
+            return;
+        }
+
+        final String html = "<html><body><script>window.onload = new function() {alert('a')}</script></body></html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
+
+        final String[] expectedAlerts = { "a" };
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
