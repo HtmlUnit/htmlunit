@@ -606,7 +606,8 @@
 
     <class name="Option" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Option"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOption">
-        <property name="defaultSelected" notImplemented="true" readable="true" writable="false"/>
+        <property name="defaultSelected" readable="true" writable="false"/>
+        <property name="label" readable="true" writable="true"/>
         <property name="selected" readable="true" writable="true"/>
         <property name="text" readable="true" writable="true"/>
         <property name="value" readable="true" writable="true"/>

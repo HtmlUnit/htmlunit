@@ -1595,11 +1595,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testOnloadAnonymousFunction() throws Exception {
 
-        if(notYetImplemented()){
-            return;
-        }
-
-        final String html = "<html><body><script>window.onload = new function() {alert('a')}</script></body></html>";
+        final String html = "<html><body><script>window.onload = function() {alert('a')}</script></body></html>";
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
 

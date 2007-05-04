@@ -155,6 +155,17 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     public final String getSelectedAttribute() {
         return getAttributeValue("selected");
     }
+    
+    /**
+     * Return whether this Option is selected by default. 
+     * That is whether the "selected"
+     * attribute exists when the Option is constructed. This also determines
+     * the value of getSelectedAttribute() after a reset() on the form.
+     * @return whether the option is selected by default.
+     */
+    public final boolean isDefaultSelected() {
+        return initialSelectedState_;
+    }
 
 
     /**

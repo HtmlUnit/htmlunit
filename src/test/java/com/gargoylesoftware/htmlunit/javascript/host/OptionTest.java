@@ -212,4 +212,49 @@ public class OptionTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testConstructor() throws Exception {
+        final String content
+            = "<html><head><title>foo</title><script>"
+            + "function dumpOption(_o) {"
+            + "  return 'text: ' + _o.text "
+            + " + ', label: ' + _o.label" 
+            + " + ', value: ' + _o.value" 
+            + " + ', defaultSelected: ' + _o.defaultSelected"
+            + " + ', selected: ' + _o.selected;"
+            + "}\n"
+            + "function doTest() {"
+            + "   var o2 = new Option('Option 2', '2');\n"
+            + "   alert('o2: ' + dumpOption(o2));\n"
+            + "   var o3 = new Option('Option 3', '3', true, false); \n"
+            + "   alert('o3: ' + dumpOption(o3));\n"
+            + "   document.form1.select1.appendChild(o3);\n"
+            + "   alert(document.form1.select1.options.selectedIndex);"
+            + "   document.form1.reset();"
+            + "   alert(document.form1.select1.options.selectedIndex);"
+            + "}"
+            + "</script></head><body onload='doTest()'>"
+            + "<form name='form1'>"
+            + "    <select name='select1' id='testSelect'>"
+            + "        <option value='option1' name='option1'>One</option>"
+            + "    </select>"
+            + "</form>"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {
+        		"o2: text: Option 2, label: , value: 2, defaultSelected: false, selected: false",
+        		"o3: text: Option 3, label: , value: 3, defaultSelected: true, selected: false",
+        		"0",
+        		"1"
+        };
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
 }

@@ -37,8 +37,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The javascript object that represents an option.
@@ -65,13 +68,19 @@ public class Option extends HTMLElement {
      * @param newText The text
      * @param newValue The value
      */
-    public void jsConstructor( final String newText, final String newValue ) {
+    public void jsConstructor(final String newText, final String newValue, boolean defaultSelected, boolean selected) {
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
-        final HtmlOption htmlOption = new HtmlOption(page, null);
+        Map atts = null;
+        if (defaultSelected) {
+            atts = new HashMap(1);
+            atts.put("selected", "selected");
+        }
+        final HtmlOption htmlOption = new HtmlOption(page, atts);
+        htmlOption.setSelected(selected);
         setDomNode(htmlOption);
 
-        if (newText != null && ! newText.equals("undefined")) {
-            htmlOption.setLabelAttribute(newText);
+        if (newText != null && !newText.equals("undefined")) {
+            htmlOption.appendChild(new DomText(page, newText));
         }
         if (newValue != null && ! newValue.equals("undefined")) {
             htmlOption.setValueAttribute(newValue);
@@ -134,5 +143,29 @@ public class Option extends HTMLElement {
      */
     public void jsxSet_selected( final boolean selected ) {
         getHtmlOption().setSelected( selected );
+    }
+    
+    /**
+     * Return the value of the "defaultSelected" property
+     * @return The text property
+     */
+    public boolean jsxGet_defaultSelected() {
+        return getHtmlOption().isDefaultSelected();
+    }
+
+    /**
+     * Return the value of the "label" property
+     * @return The label property
+     */
+    public String jsxGet_label() {
+        return getHtmlOption().getLabelAttribute();
+    }
+
+    /**
+     * Set the value of the "label" property
+     * @param selected The new label property
+     */
+    public void jsxSet_label(final String label) {
+        getHtmlOption().setLabelAttribute(label);
     }
 }

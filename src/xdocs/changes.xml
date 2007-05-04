@@ -7,6 +7,15 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem">
+                JavaScript: added support for label property on Option objects.
+            </action>
+            <action type="update" dev="mguillem" due-to="Bruce Chapman">
+                JavaScript: added support for defaultSelected property on Option objects.
+            </action>
+            <action type="update" dev="mguillem" id="1705517" due-to="Bruce Chapman">
+                JavaScript: allow selected and defaultSelected attribute in Option constructor.
+            </action>
             <action type="update" dev="sdanig">
                 JavaScript: Add support for script.src, script.type, script.readyState and script.onreadystatechange.
             </action>
