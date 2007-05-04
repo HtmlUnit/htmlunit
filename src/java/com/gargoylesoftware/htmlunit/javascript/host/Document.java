@@ -882,15 +882,22 @@ public final class Document extends NodeImpl {
     }
 
     /**
-     * Get the readyState of this document.  This is an IE only function
-     * @return the state - uninitilized, loading or complete - The interactive state is not returned
+     * Returns the ready state of the document. This is an IE-only property.
+     * @return The ready state of the document.
+     * @see {@link DomNode#STATE_UNINITIALIZED}
+     * @see {@link DomNode#STATE_LOADING}
+     * @see {@link DomNode#STATE_LOADED}
+     * @see {@link DomNode#STATE_INTERACTIVE}
+     * @see {@link DomNode#STATE_COMPLETE}
      */
     public String jsxGet_readyState() {
         final DomNode node = getDomNodeOrDie();
         if (node instanceof HtmlPage) {
             return ((HtmlPage) node).getDocumentElement().getReadyState();
         }
-        return getDomNodeOrDie().getReadyState();
+        else {
+            return node.getReadyState();
+        }
     }
 
     /**

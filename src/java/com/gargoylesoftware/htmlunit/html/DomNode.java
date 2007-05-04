@@ -73,44 +73,39 @@ import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
  * @author Mike Williams
  * @author Marc Guillemot
  * @author Denis N. Antonioli
+ * @author Daniel Gredler
  */
 public abstract class DomNode implements Cloneable {
-    /**
-     * node type constant for the <code>Document</code> node.
-     */
-    public static final short DOCUMENT_NODE             = 0;
-    /**
-     * node type constant for <code>Element</code> nodes.
-     */
-    public static final short ELEMENT_NODE              = 1;
-    /**
-     * node type constant for <code>Text</code> nodes.
-     */
-    public static final short TEXT_NODE                 = 3;
-    /**
-     * node type constant for <code>Attribute</code> nodes.
-     */
-    public static final short ATTRIBUTE_NODE             = 4;
-    /**
-     * node type constant for <code>Comment</code> nodes.
-     */
-    public static final short COMMENT_NODE             = 5;
 
-    /**
-     * readyState constant for IE.
-     */
-    public static final String READY_STATE_UNINITIALIZED = "uninitialized";
+    /** Node type constant for the <code>Document</code> node. */
+    public static final short DOCUMENT_NODE = 0;
 
-    /**
-     * readyState constant for IE.
-     */
-    public static final String READY_STATE_LOADING = "loading";
+    /** Node type constant for <code>Element</code> nodes. */
+    public static final short ELEMENT_NODE = 1;
 
-    /**
-     * readyState constant for IE.
-     */
-    public static final String READY_STATE_COMPLETE = "complete";
+    /** Node type constant for <code>Text</code> nodes. */
+    public static final short TEXT_NODE = 3;
 
+    /** Node type constant for <code>Attribute</code> nodes. */
+    public static final short ATTRIBUTE_NODE = 4;
+
+    /** Node type constant for <code>Comment</code> nodes. */
+    public static final short COMMENT_NODE = 5;
+
+    /** A ready state constant for IE (state 1). */
+    public static final String STATE_UNINITIALIZED = "uninitialized";
+
+    /** A ready state constant for IE (state 2). */
+    public static final String STATE_LOADING = "loading";
+
+    /** A ready state constant for IE (state 3). */
+    public static final String STATE_LOADED = "loaded";
+
+    /** A ready state constant for IE (state 4). */
+    public static final String STATE_INTERACTIVE = "interactive";
+
+    /** A ready state constant for IE (state 5). */
+    public static final String STATE_COMPLETE = "complete";
 
     /** the owning page of this node */
     private final HtmlPage htmlPage_;
@@ -146,15 +141,10 @@ public abstract class DomNode implements Cloneable {
      */
     private Map eventHandlers_;
 
-    /**
-     * Ready state is is an IE only value that is available to a large number of elements.
-     *
-     */
-    // TODO - Add processing for the other elements - Currently only body.
-    private String readyState_ = READY_STATE_UNINITIALIZED;
+    /** The ready state is is an IE-only value that is available to a large number of elements. */
+    private String readyState_;
 
-    // We do lazy initialization on this since the vast majority of
-    // HtmlElement instances won't need it.
+    /** We do lazy initialization on this since the vast majority of HtmlElement instances won't need it. */
     private PropertyChangeSupport propertyChangeSupport_ = null;
 
     /** The name of the "element" property.  Used when watching property change events. */
@@ -181,12 +171,11 @@ public abstract class DomNode implements Cloneable {
     private int endColumnNumber_;
 
     /**
-     *  Create an instance
-     *
-     * @param htmlPage The page that contains this node
+     * Creates an instance.
+     * @param htmlPage The page which contains this node.
      */
     protected DomNode(final HtmlPage htmlPage) {
-        readyState_ = READY_STATE_LOADING;      // At this time, I should be loading the object.
+        readyState_ = STATE_LOADING;
         htmlPage_ = htmlPage;
         eventHandlers_ = Collections.EMPTY_MAP;
         startLineNumber_ = 0;
@@ -615,7 +604,7 @@ public abstract class DomNode implements Cloneable {
     }
 
     /**
-     * insert a new child node before this node into the child relationship this node is a
+     * Inserts a new child node before this node into the child relationship this node is a
      * part of.
      *
      * @param newNode the new node to insert
@@ -655,7 +644,6 @@ public abstract class DomNode implements Cloneable {
             throw new IllegalStateException();
         }
         basicRemove();
-
         getHtmlPage().notifyNodeRemoved(this);
     }
 
@@ -682,7 +670,7 @@ public abstract class DomNode implements Cloneable {
     }
 
     /**
-     * replace this node with another node in the child relationship is part of
+     * Replaces this node with another node.
      *
      * @param newNode the node to replace this one
      * @throws IllegalStateException if this node is not a child of any other node
@@ -690,6 +678,21 @@ public abstract class DomNode implements Cloneable {
     public void replace(final DomNode newNode) throws IllegalStateException {
         insertBefore(newNode);
         remove();
+    }
+
+    /**
+     * Lifecycle method invoked whenever a node is added to a page. Intended to
+     * be overriden by nodes which need to perform custom logic when they are
+     * added to a page. This method is recursive, so if you override it, please
+     * be sure to call <tt>super.onAddedToPage()</tt>.
+     */
+    protected void onAddedToPage() {
+        if (firstChild_ != null) {
+            for (final Iterator i = getChildIterator(); i.hasNext();) {
+                final DomNode child = (DomNode) i.next();
+                child.onAddedToPage();
+            }
+        }
     }
 
     /**
@@ -830,7 +833,7 @@ public abstract class DomNode implements Cloneable {
     }
 
     /**
-     * an iterator over all HtmlElement descendants in document order
+     * An iterator over all HtmlElement descendants in document order.
      */
     protected class DescendantElementsIterator implements Iterator {
 
@@ -915,16 +918,16 @@ public abstract class DomNode implements Cloneable {
     }
 
     /**
-     * Return the readyState of this element.  IE only.
-     * @return String - The current readyState for this element.
+     * Return this node's ready state (IE only).
+     * @return This node's ready state.
      */
     public String getReadyState() {
         return readyState_;
     }
 
     /**
-     * Set the readyState for this element.  IE only.
-     * @param state - The value to set the current state to.
+     * Sets this node's ready state (IE only).
+     * @param state This node's ready state.
      */
     public void setReadyState(final String state) {
         readyState_ = state;

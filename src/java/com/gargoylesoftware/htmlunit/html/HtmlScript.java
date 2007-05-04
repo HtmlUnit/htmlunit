@@ -39,6 +39,10 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import org.mozilla.javascript.Function;
+
+import com.gargoylesoftware.htmlunit.javascript.host.Script;
+
 /**
  * Wrapper for the html element "script".<br>
  * When a script tag references an externat script (with attribute src) it gets executed when the node
@@ -163,7 +167,7 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Executes the content as a script if it is a text node.
+     * Executes the content as a script if said content is a text node.
      * {@inheritDoc}
      */
     public DomNode appendChild(final DomNode node) {
@@ -173,9 +177,21 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * For internal use only.
+     * Executes the <tt>onreadystatechange</tt> handler when simlating IE,
+     * as well as executing the script itself, if necessary.
+     * {@inheritDoc}
      */
-    void executeInlineScriptIfNeeded() {
+    protected void onAddedToPage() {
+        getLog().debug("Script node added: " + asXml());
+        executeOnReadyStateChangeHandlerIfNecessary();
+        executeScriptIfNeeded();
+        super.onAddedToPage();
+    }
+
+    /**
+     * Executes this script node as inline script if necessary and/or possible.
+     */
+    private void executeInlineScriptIfNeeded() {
 
         if (!isExecutionNeeded()) {
             return;
@@ -216,16 +232,19 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * For internal use only.
+     * Executes this script node if necessary and/or possible.
      */
-    void executeScriptIfNeeded() {
+    private void executeScriptIfNeeded() {
+
         if (!isExecutionNeeded()) {
             return;
         }
+
         final String src = getSrcAttribute();
         if (src.equals(SLASH_SLASH_COLON)) {
             return;
         }
+
         if (src != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
             getLog().debug("Loading external javascript: " + src);
             getPage().loadExternalJavaScriptFile(src, getCharsetAttribute());
@@ -236,9 +255,9 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Indicates if script execution is needed (possible).
+     * Indicates if script execution is necessary and/or possible.
      * 
-     * @return <code>true</code> if script should be executed.
+     * @return <code>true</code> if the script should be executed.
      */
     private boolean isExecutionNeeded() {
 
@@ -281,6 +300,22 @@ public class HtmlScript extends HtmlElement {
         }
 
         return true;
+    }
+
+    /**
+     * Sets the <tt>readyState</tt> to {@link DomNode#STATE_COMPLETE} and executes the
+     * <tt>onreadystatechange</tt> handler when simulating IE. Note that script nodes go
+     * straight to the {@link DomNode#STATE_COMPLETE} state, skipping all previous states.
+     */
+    private void executeOnReadyStateChangeHandlerIfNecessary() {
+        if (getPage().getWebClient().getBrowserVersion().isIE()) {
+            setReadyState(STATE_COMPLETE);
+            final Script script = (Script) getScriptObject();
+            final Function handler = script.jsxGet_onreadystatechange();
+            if (handler != null) {
+                getPage().executeJavaScriptFunctionIfPossible(handler, script, new Object[0], this);
+            }
+        }
     }
 
     /**

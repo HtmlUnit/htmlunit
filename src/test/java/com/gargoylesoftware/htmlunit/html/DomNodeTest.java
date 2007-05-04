@@ -45,6 +45,7 @@ import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.DomNode.DescendantElementsIterator;
 
 /**
  *  Tests for DomNode
@@ -259,4 +260,35 @@ public class DomNodeTest extends WebTestCase {
         assertEquals(lis, page.getByXPath("//ul/li"));
 
         assertEquals(2, ((Number) p.getByXPath("count(//li)").get(0)).intValue());
-    } }
+    }
+
+    /**
+     * Verifies that {@link DomNode#getAllHtmlChildElements()} returns descendant elements in the correct order.
+     * @throws Exception If an error occurs.
+     */
+    public void testGetAllHtmlChildElementsOrder() throws Exception {
+        final String html =
+            "<html><body id='0'>\n" +
+            "<span id='I'><span id='I.1'><span id='I.1.a'/><span id='I.1.b'/><span id='I.1.c'/></span><span id='I.2'><span id='I.2.a'/></span></span>\n" +
+            "<span id='II'/>\n" +
+            "<span id='III'><span id='III.1'><span id='III.1.a'/></span></span>\n" +
+            "</body></html>\n";
+        final HtmlPage page = loadPage(html);
+        final DescendantElementsIterator iterator = page.getDocumentElement().getAllHtmlChildElements();
+        assertEquals("", iterator.nextElement().getId());
+        assertEquals("0", iterator.nextElement().getId());
+        assertEquals("I", iterator.nextElement().getId());
+        assertEquals("I.1", iterator.nextElement().getId());
+        assertEquals("I.1.a", iterator.nextElement().getId());
+        assertEquals("I.1.b", iterator.nextElement().getId());
+        assertEquals("I.1.c", iterator.nextElement().getId());
+        assertEquals("I.2", iterator.nextElement().getId());
+        assertEquals("I.2.a", iterator.nextElement().getId());
+        assertEquals("II", iterator.nextElement().getId());
+        assertEquals("III", iterator.nextElement().getId());
+        assertEquals("III.1", iterator.nextElement().getId());
+        assertEquals("III.1.a", iterator.nextElement().getId());
+        assertFalse(iterator.hasNext());
+    }
+
+}

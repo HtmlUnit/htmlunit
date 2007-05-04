@@ -659,8 +659,7 @@
         <!-- NOT FINISHED -->
     </class>
 
-    <class name="Screen" classname="com.gargoylesoftware.htmlunit.javascript.host.Screen"
-        JSObject="true">
+    <class name="Screen" classname="com.gargoylesoftware.htmlunit.javascript.host.Screen" JSObject="true">
         <doclink
             url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_screen.asp"
             descr="MSDN documentation"/>
@@ -699,8 +698,19 @@
         <function name="remove"/>
     </class>
 
-    <class name="Style" classname="com.gargoylesoftware.htmlunit.javascript.host.Style"
-        JSObject="true">
+    <class name="Script" classname="com.gargoylesoftware.htmlunit.javascript.host.Script" JSObject="true"
+        htmlClass="com.gargoylesoftware.htmlunit.html.HtmlScript" extends="HTMLElement">
+        <property name="onreadystatechange" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="readyState" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="src" readable="true" writable="true"/>
+        <property name="type" readable="true" writable="true"/>
+    </class>
+
+    <class name="Style" classname="com.gargoylesoftware.htmlunit.javascript.host.Style" JSObject="true">
         <property name="behavior" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -937,21 +947,21 @@
     </class>
 
     <class name="XMLHttpRequest" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest" JSObject="true">
-      <doclink url="http://developer.apple.com/internet/webcontent/xmlhttpreq.html" descr="Safari documentation"/>
-      <browser name="Netscape"/>
-      <property name="onreadystatechange" readable="true" writable="true"/>
-      <property name="readyState" readable="true" writable="false"/>
-      <property name="responseText" readable="true" writable="false"/>
-      <property name="responseXML" readable="true" writable="false"/>
-      <property name="status" readable="true" writable="false"/>
-      <property name="statusText" readable="true" writable="false"/>
-      <function name="abort"/>
-      <function name="getAllResponseHeaders"/>
-      <function name="getResponseHeader"/>
-      <function name="open"/>
-      <function name="overrideMimeType"/>
-      <function name="send"/>
-      <function name="setRequestHeader"/>
+        <doclink url="http://developer.apple.com/internet/webcontent/xmlhttpreq.html" descr="Safari documentation"/>
+        <browser name="Netscape"/>
+        <property name="onreadystatechange" readable="true" writable="true"/>
+        <property name="readyState" readable="true" writable="false"/>
+        <property name="responseText" readable="true" writable="false"/>
+        <property name="responseXML" readable="true" writable="false"/>
+        <property name="status" readable="true" writable="false"/>
+        <property name="statusText" readable="true" writable="false"/>
+        <function name="abort"/>
+        <function name="getAllResponseHeaders"/>
+        <function name="getResponseHeader"/>
+        <function name="open"/>
+        <function name="overrideMimeType"/>
+        <function name="send"/>
+        <function name="setRequestHeader"/>
     </class>
 
 </configuration>

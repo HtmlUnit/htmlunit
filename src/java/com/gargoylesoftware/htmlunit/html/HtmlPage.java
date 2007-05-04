@@ -75,11 +75,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
- *  A representation of an html page returned from a server.  This class is the
- *  DOM Document implementation.
+ * A representation of an HTML page returned from a server. This class is the
+ * DOM Document implementation.
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Alex Nikiforoff
  * @author Noboru Sinohara
  * @author David K. Taylor
@@ -138,12 +138,11 @@ public final class HtmlPage extends DomNode implements Page {
      */
     public void initialize() throws IOException {
         loadFrames();
-        getDocumentElement().setReadyState(READY_STATE_COMPLETE);
-        
+        getDocumentElement().setReadyState(STATE_COMPLETE);
         executeOnLoadHandlersIfNeeded();
         executeRefreshIfNeeded();
     }
-    
+
     /**
      * Clean up this page.
      * @throws IOException If an IO problem occurs.
@@ -1406,21 +1405,8 @@ public final class HtmlPage extends DomNode implements Page {
     void notifyNodeAdded(final DomNode node) {
         if (node instanceof HtmlElement) {
             addIdElement((HtmlElement) node);
-            final HtmlElement elem = (HtmlElement) node;
-            if (elem instanceof HtmlScript) {
-                final HtmlScript scriptNode = (HtmlScript) node;
-                getLog().debug("Script node added: " + scriptNode.asXml());
-                scriptNode.executeScriptIfNeeded();
-            }
-            else {
-                final List scripts = elem.getHtmlElementsByTagName("script");
-                for (final Iterator iter = scripts.iterator(); iter.hasNext();){
-                    final HtmlScript scriptNode = (HtmlScript)iter.next();
-                    getLog().debug("Script node added: " + scriptNode.asXml());
-                    scriptNode.executeScriptIfNeeded();
-                }
-            }
         }
+        node.onAddedToPage();
     }
 
     /**
