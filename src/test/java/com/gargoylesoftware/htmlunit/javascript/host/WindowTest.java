@@ -1590,16 +1590,24 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Verifies that you can set window.onload to an anonymous function. See bug 1708532.
+     * Verifies that you can set window.onload to something else than a function. 
+     * See bug 1708532 & 1201561.
      * @throws Exception If an error occurs.
      */
-    public void testOnloadAnonymousFunction() throws Exception {
+    public void testOnloadNotAFunction() throws Exception {
 
-        final String html = "<html><body><script>window.onload = function() {alert('a')}</script></body></html>";
+        final String html = "<html><body><script>"
+        	+ "window.onload = new function() {alert('a')};"
+        	+ "window.onload = undefined;"
+        	+ "alert(window.onload);"
+        	+ "</script></body></html>";
+
+        final String[] expectedAlerts = { "a", "undefined" };
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
 
-        final String[] expectedAlerts = { "a" };
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

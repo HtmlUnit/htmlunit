@@ -965,9 +965,9 @@ public final class HtmlPage extends DomNode implements Page {
                 runEventHandler(listener, loadEvent, true);
             }
 
-            if (jsWindow.jsxGet_onload() != null) {
+            if (jsWindow.getOnloadHandler() != null) {
                 getLog().debug("Executing onload handler for the window");
-                runEventHandler(jsWindow.jsxGet_onload(), loadEvent);
+                runEventHandler(jsWindow.getOnloadHandler(), loadEvent);
             }
         }
 

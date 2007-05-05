@@ -103,7 +103,7 @@ public class Window extends SimpleScriptable {
     private Screen screen_;
     private History history_;
     private Location location_;
-    private Function onload_;
+    private Object onload_;
     private Object event_;
     private String status_ = "";
     private HTMLCollection frames_; // has to be a member to have equality (==) working
@@ -670,15 +670,16 @@ public class Window extends SimpleScriptable {
      * Set the value of the onload event handler.
      * @param newOnload The new handler
      */
-    public void jsxSet_onload(final Function newOnload) {
+    public void jsxSet_onload(final Object newOnload) {
         onload_ = newOnload;
     }
 
     /**
-     * Return the onload event handler function.
-     * @return the onload event handler function.
+     * Return the onload property (caution this is not necessary a function if something else has
+     * been set)
+     * @return the onload property
      */
-    public Function jsxGet_onload() {
+    public Object jsxGet_onload() {
         if (onload_ == null) {
             // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
             final HtmlPage page = (HtmlPage) webWindow_.getEnclosedPage();
@@ -696,6 +697,19 @@ public class Window extends SimpleScriptable {
         }
     }
 
+    /**
+     * Return the onload event handler function.
+     * @return <code>null</code> if onload has been set to something that is not a function
+     */
+    public Function getOnloadHandler() {
+    	final Object response = jsxGet_onload();
+    	if (response instanceof Function) {
+    		return (Function) response;
+    	}
+
+   		return null;
+    }
+    
     /**
      * Gets the listeners registered for the given type
      * @param type the type of event
