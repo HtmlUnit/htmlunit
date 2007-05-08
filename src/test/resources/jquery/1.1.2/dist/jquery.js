@@ -840,7 +840,7 @@ jQuery.fn = jQuery.prototype = {
 	clone: function(deep) {
 		return this.pushStack( jQuery.map( this, function(a){
 			var a = a.cloneNode( deep != undefined ? deep : true );
-			a.danielgredler = null; // drop danielgredler expando to avoid firing incorrect events
+			a.$events = null; // drop $events expando to avoid firing incorrect events
 			return a;
 		}) );
 	},
@@ -2763,16 +2763,16 @@ jQuery.event = {
 			handler.guid = this.guid++;
 
 		// Init the element's event structure
-		if (!element.danielgredler)
-			element.danielgredler = {};
+		if (!element.$events)
+			element.$events = {};
 
 		// Get the current list of functions bound to this event
-		var handlers = element.danielgredler[type];
+		var handlers = element.$events[type];
 
 		// If it hasn't been initialized yet
 		if (!handlers) {
 			// Init the event handler queue
-			handlers = element.danielgredler[type] = {};
+			handlers = element.$events[type] = {};
 
 			// Remember an existing handler, if it's already there
 			if (element["on" + type])
@@ -2796,30 +2796,30 @@ jQuery.event = {
 
 	// Detach an event or set of events from an element
 	remove: function(element, type, handler) {
-		if (element.danielgredler) {
+		if (element.$events) {
 			var i,j,k;
 			if ( type && type.type ) { // type is actually an event object here
 				handler = type.handler;
 				type    = type.type;
 			}
 			
-			if (type && element.danielgredler[type])
+			if (type && element.$events[type])
 				// remove the given handler for the given type
 				if ( handler )
-					delete element.danielgredler[type][handler.guid];
+					delete element.$events[type][handler.guid];
 					
 				// remove all handlers for the given type
 				else
-					for ( i in element.danielgredler[type] )
-						delete element.danielgredler[type][i];
+					for ( i in element.$events[type] )
+						delete element.$events[type][i];
 						
 			// remove all handlers		
 			else
-				for ( j in element.danielgredler )
+				for ( j in element.$events )
 					this.remove( element, j );
 			
 			// remove event handler if no more handlers exist
-			for ( k in element.danielgredler[type] )
+			for ( k in element.$events[type] )
 				if (k) {
 					k = true;
 					break;
@@ -2870,7 +2870,7 @@ jQuery.event = {
 		// returned undefined or false
 		var returnValue;
 
-		var c = this.danielgredler[event.type];
+		var c = this.$events[event.type];
 
 		var args = [].slice.call( arguments, 1 );
 		args.unshift( event );
