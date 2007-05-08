@@ -36,12 +36,13 @@ defaultmailhost
 				buildresultsurl="http://&hostname;/htmlunit/"
 				mailhost="&defaultmailhost;"
 				returnaddress="build-support@canoo.com"
-				spamwhilebroken="false"
-				skipusers="true"
+				defaultsuffix="@users.sourceforge.net"
+				reportsuccess="always"
 				logdir="&basedir;/htmlunit/cruisecontrol/logs"
 				xslfile="&basedir;/htmlunit/cruisecontrol/checkout/cruise/htmlmail.xsl"
 				>
 				<always address="mguillemot@yahoo.fr"/>
+				<failure address="htmlunit-develop@lists.sourceforge.net" reportWhenFixed="true"/>
 			</htmlemail>
 			<XSLTLogPublisher
 				directory="&basedir;/htmlunit/&hostname;/htmlunit/"
