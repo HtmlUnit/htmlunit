@@ -58,6 +58,7 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
@@ -83,6 +84,7 @@ import org.apache.commons.logging.impl.SimpleLog;
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Brad Clarke
+ * @author Ahmed Ashour
  */
 public class HttpWebConnection extends WebConnectionImpl {
     private HttpClient httpClient_;
@@ -288,6 +290,10 @@ public class HttpWebConnection extends WebConnectionImpl {
         if (webRequestSettings.getCredentialsProvider() != null) {
             httpMethod.getParams().setParameter(CredentialsProvider.PROVIDER,
                     webRequestSettings.getCredentialsProvider());
+        }
+        
+        if( !getWebClient().isCookiesEnabled() ) {
+            httpMethod.getParams().setCookiePolicy( CookiePolicy.IGNORE_COOKIES );
         }
         return httpMethod;
     }

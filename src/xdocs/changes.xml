@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="asashour">
+                WebClient can now enable/disable cookies support
+            </action>
             <action type="update" dev="mguillem" id="1201561">
                 JavaScript: allow to set window.onload to something else than a function.
             </action>

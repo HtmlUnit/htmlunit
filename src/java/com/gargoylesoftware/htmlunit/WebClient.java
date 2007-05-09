@@ -113,6 +113,7 @@ public class WebClient {
     private final Map proxyBypassHosts_;
     private ScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
+    private boolean cookiesEnabled_ = true;
     private String homePage_;
     private FocusableElement elementWithFocus_;
     private final Map requestHeaders_ = Collections.synchronizedMap(new HashMap(89));
@@ -622,6 +623,23 @@ public class WebClient {
         return javaScriptEnabled_ && scriptEngine_ != null;
     }
 
+    /**
+     * Enable/disable cookies support.  By default, this property is enabled.
+     *
+     * @param isEnabled true to enable cookies support.
+     */
+    public void setCookiesEnabled( final boolean isEnabled ) {
+        cookiesEnabled_ = isEnabled;
+    }
+    
+    /**
+     * Return true if cookies are enabled.
+     *
+     * @return true if cookies are enabled.
+     */
+    public boolean isCookiesEnabled() {
+        return cookiesEnabled_;
+    }
 
     /**
      * Returns the client's current homepage.
