@@ -177,7 +177,7 @@ public class Location extends SimpleScriptable {
 
         if (newLocation.startsWith("javascript:")) {
             final String script = newLocation.substring(11);
-            page.executeJavaScriptIfPossible(script, "new location value", false, null);
+            page.executeJavaScriptIfPossible(script, "new location value", null);
         }
         else {
             try {

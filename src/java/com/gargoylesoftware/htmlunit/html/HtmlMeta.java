@@ -91,12 +91,12 @@ public class HtmlMeta extends HtmlElement {
                     cookie.setExpiryDate(DateUtil.parseDate(partValue));
                 }
                 catch (final DateParseException e) {
-                    getLog().warn("set-cookie http-equiv meta tag: can't parse expiration date >" 
-                            + partValue + "<. Ignoring");
+                	notifyIncorrectness("set-cookie http-equiv meta tag: can't parse expiration date >" 
+                            + partValue + "<.");
                 }
             }
             else {
-                getLog().warn("set-cookie http-equiv meta tag: unknown attribute >" + partName + "<. Ignoring");
+            	notifyIncorrectness("set-cookie http-equiv meta tag: unknown attribute >" + partName + "<");
             }
             getPage().getWebClient().getWebConnection().getState().addCookie(cookie);
         }

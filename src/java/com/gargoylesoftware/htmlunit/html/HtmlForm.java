@@ -170,7 +170,7 @@ public class HtmlForm extends ClickableElement {
 
             final String action = getActionAttribute();
             if (TextUtil.startsWithIgnoreCase(action, "javascript:")) {
-                return htmlPage.executeJavaScriptIfPossible(action, "Form action", false, null).getNewPage();
+                return htmlPage.executeJavaScriptIfPossible(action, "Form action", null).getNewPage();
             }
         }
         else {
@@ -274,22 +274,24 @@ public class HtmlForm extends ClickableElement {
      */
     public Page reset() {
         final HtmlPage htmlPage = getPage();
-        if( htmlPage.getWebClient().isJavaScriptEnabled() ) {
-            final String onReset = getOnResetAttribute();
-            if( onReset.length() != 0 ) {
-                final ScriptResult scriptResult
-                    = htmlPage.executeJavaScriptIfPossible( onReset, "onReset", true, this );
-                if( scriptResult.getJavaScriptResult().equals(Boolean.FALSE) ) {
+        if (htmlPage.getWebClient().isJavaScriptEnabled() ) {
+            final Function function = getEventHandler("onreset");
+
+            if (function != null) {
+                final Event event = new Event(this, Event.TYPE_RESET);
+                final ScriptResult scriptResult = getPage().runEventHandler(function, event);
+
+                if (Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
                     return scriptResult.getNewPage();
                 }
             }
         }
 
         final Iterator elementIterator = getAllHtmlChildElements();
-        while( elementIterator.hasNext() ) {
+        while (elementIterator.hasNext()) {
             final Object next = elementIterator.next();
-            if( next instanceof SubmittableElement ) {
-                ((SubmittableElement)next).reset();
+            if (next instanceof SubmittableElement) {
+                ((SubmittableElement) next).reset();
             }
         }
 

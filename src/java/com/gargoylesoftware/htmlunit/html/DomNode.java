@@ -56,6 +56,7 @@ import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
@@ -733,7 +734,7 @@ public abstract class DomNode implements Cloneable {
      */
     public final void setEventHandler(final String eventName, final String jsSnippet) {
 
-        final BaseFunction function = new EventHandler(this, jsSnippet);
+        final BaseFunction function = new EventHandler(this, eventName, jsSnippet);
         setEventHandler(eventName, function);
         getLog().debug("Created event handler " + function.getFunctionName()
                 + " for " + eventName + " on " + this);
@@ -962,4 +963,13 @@ public abstract class DomNode implements Cloneable {
         final HtmlUnitXPath xpath = new HtmlUnitXPath(xpathExpr, navigator);
         return xpath.selectNodes(this);
     } 
+    
+    /**
+     * Facility to notify the registered {@link IncorrectnessListener} of something that is not fully correct
+     * @param message the notification
+     */
+    protected void notifyIncorrectness(final String message) {
+    	final IncorrectnessListener incorrectnessListener = getPage().getWebClient().getIncorrectnessListener();
+    	incorrectnessListener.notify(message, this);
+    }
 }

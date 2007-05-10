@@ -7,6 +7,15 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem">
+                Added IncorrectnessListener to get notified of things that HtmlUnit cope with but that don't respect standards.
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: provide the event object to onreset handlers.
+            </action>
+            <action type="update" dev="mguillem">
+                Added ScriptException.printScriptStackTrace to retrieve the stack trace of the script execution.
+            </action>
             <action type="update" dev="asashour">
                 WebClient can now enable/disable cookies support
             </action>

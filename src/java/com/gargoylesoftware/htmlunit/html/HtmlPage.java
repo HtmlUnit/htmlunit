@@ -100,7 +100,6 @@ public final class HtmlPage extends DomNode implements Page {
 
     private WebWindow enclosingWindow_;
 
-    private static int FunctionWrapperCount_ = 0;
     private final Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
 
     private static final int TAB_INDEX_NOT_SPECIFIED = -10;
@@ -336,7 +335,7 @@ public final class HtmlPage extends DomNode implements Page {
                     baseUrl = new URL(href);
                 }
                 catch (final MalformedURLException e) {
-                    getLog().warn("Invalid base url: \"" + href + "\", ignoring it");
+                	notifyIncorrectness("Invalid base url: \"" + href + "\", ignoring it");
                     baseUrl = webResponse_.getUrl();
                 }
             }
@@ -655,9 +654,6 @@ public final class HtmlPage extends DomNode implements Page {
      * @param sourceCode The javascript code to execute.
      * @param sourceName The name for this chunk of code.  This name will be displayed
      * in any error messages.
-     * @param wrapSourceInFunction True if this snippet of code should be placed inside
-     * a javascript function.  This is neccessary for intrinsic event handlers that may
-     * try to return a value.
      * @param htmlElement The html element for which this script is being executed.
      * This element will be the context during the javascript execution.  If null,
      * the context will default to the window.
@@ -665,7 +661,7 @@ public final class HtmlPage extends DomNode implements Page {
      * the previous page and a javascript result object.
      */
     public ScriptResult executeJavaScriptIfPossible(
-        String sourceCode, final String sourceName, final boolean wrapSourceInFunction,
+        String sourceCode, final String sourceName, 
         final HtmlElement htmlElement ) {
 
         final ScriptEngine engine = getWebClient().getScriptEngine();
@@ -683,19 +679,7 @@ public final class HtmlPage extends DomNode implements Page {
 
         final WebWindow window = getEnclosingWindow();
         getWebClient().pushClearFirstWindow();
-        final Object result;
-        if( wrapSourceInFunction ) {
-            // Something that isn't likely to collide with the name of a function in the
-            // loaded javascript
-            final String wrapperName = "GargoyleWrapper"+(FunctionWrapperCount_++);
-            sourceCode = "function "+wrapperName+"() {"+sourceCode+"\n}";
-            getJsLog().debug("Now build JS function\n" + sourceCode);
-            engine.execute( this, sourceCode, "Wrapper definition for "+sourceName, htmlElement );
-            result = engine.execute( this, wrapperName+"()", sourceName, htmlElement );
-        }
-        else {
-            result = engine.execute( this, sourceCode, sourceName, htmlElement );
-        }
+        final Object result = engine.execute( this, sourceCode, sourceName, htmlElement );
 
         WebWindow firstWindow = getWebClient().popFirstWindow();
         if ( firstWindow == null) {

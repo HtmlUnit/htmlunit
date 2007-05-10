@@ -117,6 +117,7 @@ public class WebClient {
     private String homePage_;
     private FocusableElement elementWithFocus_;
     private final Map requestHeaders_ = Collections.synchronizedMap(new HashMap(89));
+    private IncorrectnessListener incorrectnessListener = new IncorrectnessListenerImpl();
 
     /**
      * like Firefox default value for network.http.redirection-limit
@@ -1382,7 +1383,7 @@ public class WebClient {
         final FrameWindow frameWindow = (FrameWindow) webWindow;
         final HtmlPage enclosingPage = frameWindow.getEnclosingPage();
         final ScriptResult scriptResult = enclosingPage.executeJavaScriptIfPossible(
-            url.toExternalForm(), "javascript url", false, null );
+            url.toExternalForm(), "javascript url", null);
 
         final String contentString = scriptResult.getJavaScriptResult().toString();
         return new StringWebResponse(contentString);
@@ -1461,9 +1462,10 @@ public class WebClient {
                 newUrl = expandUrl( fixedUrl, locationString);
             }
             catch( final MalformedURLException e ) {
-                getLog().warn("Got a redirect status code ["+statusCode+" "
-                    +webResponse.getStatusMessage()
-                    +"] but the location is not a valid url ["+locationString+"]. Skipping redirection processing.");
+                getIncorrectnessListener().notify("Got a redirect status code [" + statusCode + " "
+                    + webResponse.getStatusMessage()
+                    + "] but the location is not a valid url ["+locationString+"]. Skipping redirection processing.",
+                    this);
                 return webResponse;
             }
 
@@ -1766,5 +1768,28 @@ public class WebClient {
     public void setThrowExceptionOnScriptError(final boolean newValue) {
         throwExceptionOnScriptError_ = newValue;
     }
+
+
+    /**
+     * Gets the current listener for encountered incorrectness 
+     * (except html parsing messages that are handled by the
+     * html parser listener).
+     * @return the current listener (not <code>null</code>). 
+     * Default is an instance of {@link IncorrectnessListenerImpl}
+     */
+	public IncorrectnessListener getIncorrectnessListener() {
+		return incorrectnessListener;
+	}
+
+	/**
+	 * Allow to define a new listener
+	 * @param listener the new value (not <code>null</code>)
+	 */
+	public void setIncorrectnessListener(final IncorrectnessListener listener) {
+		if (listener == null) {
+			throw new NullPointerException();
+		}
+		incorrectnessListener = listener;
+	}
 }
 

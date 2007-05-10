@@ -451,32 +451,24 @@ public class HtmlFormTest extends WebTestCase {
     public void testReset_onResetHandler()
         throws Exception {
 
-        final String firstContent
+        final String html
             = "<html><head><title>First</title></head><body>"
             + "<form method='get' action='http://second' "
-            + "onReset='alert(\"clicked\");'>"
+            + "onReset='alert(\"clicked\");alert(event.type)'>"
             + "<input name='button' type='reset' value='PushMe' id='button'/></form>"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-
-        client.setWebConnection( webConnection );
-
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage firstPage = loadPage(html, collectedAlerts);
         final HtmlResetInput button = (HtmlResetInput)firstPage.getHtmlElementById("button");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
-        final HtmlPage secondPage = (HtmlPage)button.click();
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+        final HtmlPage secondPage = (HtmlPage) button.click();
+        assertSame(firstPage, secondPage);
 
-        assertSame( firstPage, secondPage );
-        assertEquals( Collections.singletonList("clicked"), collectedAlerts );
+        final String[] expectedAlerts = {"clicked", "reset"};
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
 

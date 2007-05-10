@@ -37,6 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+import org.apache.commons.io.IOUtils;
+
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -58,8 +65,7 @@ public final class ScriptExceptionTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception
-     *             if the test fails
+     * @throws Exception if the test fails
      */
     public void testConstructor() throws Exception {
         final String message = "bla bla";
@@ -73,9 +79,7 @@ public final class ScriptExceptionTest extends WebTestCase {
 
     /**
      * Test access to the page where the exception occured from the exception
-     * 
-     * @throws Exception
-     *             if the test fails
+     * @throws Exception if the test fails
      */
     public void testGetPage() throws Exception {
         final String html = "<html><script>notExisting()</script></html>";
@@ -87,5 +91,42 @@ public final class ScriptExceptionTest extends WebTestCase {
             assertEquals(URL_GARGOYLE, e.getPage().getWebResponse().getUrl());
         }
     }
+    
+    /**
+     * Test the JavaScript stacktrace.
+     * Note: this test will fail when the information (line, col, source name) provided to execute
+     * scripts is improved. In this case this unit test should be adapted IF the provided information
+     * in the script stack trace gets better and provides more usefull information to understand the
+     * cause of a problem.
+     * @throws Exception if the test fails
+     */
+    public void testScriptStackTrace() throws Exception {
+    	testScriptStackTrace("ScriptExceptionTest1");
+    	testScriptStackTrace("ScriptExceptionTest2");
+    }
 
+    private void testScriptStackTrace(final String baseFileName) throws Exception {
+    	try {
+            loadPage(getFileContent(baseFileName + ".html"));
+        }
+        catch (final ScriptException e) {
+        	final StringWriter stringWriter = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(stringWriter);
+        	e.printScriptStackTrace(printWriter);
+        	
+            final String expectedTrace = getFileContent(baseFileName + ".txt");
+        	assertEquals(expectedTrace, stringWriter.toString());
+        	return;
+        }
+        fail("Exception not thrown");
+    }
+
+	private String getFileContent(final String fileName) throws IOException {
+		final InputStream stream = getClass().getClassLoader().getResourceAsStream("com/gargoylesoftware/htmlunit/" + fileName);
+		assertNotNull(fileName, stream);
+    	final StringWriter stringWriter = new StringWriter();
+		IOUtils.copy(stream, stringWriter);
+		IOUtils.closeQuietly(stream);
+		return stringWriter.toString();
+	}
 }

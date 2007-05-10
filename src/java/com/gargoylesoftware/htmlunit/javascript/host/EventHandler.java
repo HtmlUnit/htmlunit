@@ -57,16 +57,19 @@ public class EventHandler extends BaseFunction {
     private static final long serialVersionUID = 3257850965406068787L;
 
     private final DomNode node_;
+    private final String eventName_;
     private final String jsSnippet_;
     private Function realFunction_;
 
     /**
      * Builds a function that will execute the javascript code provided
      * @param node the element for which the event is build
+     * @param eventName the event for which this handler is created
      * @param jsSnippet the javascript code
      */
-    public EventHandler(final DomNode node, final String jsSnippet) {
+    public EventHandler(final DomNode node, final String eventName, final String jsSnippet) {
         node_ = node;
+        eventName_ = eventName;
 
         final String functionSignature;
         if (node.getPage().getWebClient().getBrowserVersion().isIE()) {
@@ -89,7 +92,7 @@ public class EventHandler extends BaseFunction {
         final SimpleScriptable jsObj = (SimpleScriptable) node_.getScriptObject();
         // compile "just in time"
         if (realFunction_ == null) {
-            realFunction_ = cx.compileFunction(jsObj, jsSnippet_, "event for " + node_, 1, null);
+            realFunction_ = cx.compileFunction(jsObj, jsSnippet_, eventName_ + " event for " + node_, 1, null);
         }
 
         final Object result = realFunction_.call(cx, scope, thisObj, args);

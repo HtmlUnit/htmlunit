@@ -106,7 +106,6 @@ class JavaScriptBackgroundJob implements Runnable {
                     htmlPage.executeJavaScriptIfPossible(
                             script_,
                             "JavaScriptBackgroundJob",
-                            true,
                             htmlPage.getDocumentElement());
                 }
                 else {

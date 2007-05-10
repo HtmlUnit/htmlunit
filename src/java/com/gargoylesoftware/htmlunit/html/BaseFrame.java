@@ -118,21 +118,18 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     private void loadInnerPageIfPossible(final String srcAttribute) {
-        if( srcAttribute.length() != 0 ) {
-            URL url = null;
+        if (srcAttribute.length() != 0) {
+            final URL url;
             try {
                 url = getPage().getFullyQualifiedUrl(srcAttribute);
             }
-            catch( final MalformedURLException e ) {
-                getLog().error("Bad url in src attribute of " + getTagName() + ": url=[" + srcAttribute + "]", e);
-            }
-            if(url == null) {
-                getLog().warn("Ignoring invalid src attribute of " + getTagName() + ": url=[" + srcAttribute + "]");
+            catch (final MalformedURLException e) {
+            	notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + srcAttribute + "]. Ignored");
                 return;
             }
             final URL pageUrl = getPage().getWebResponse().getUrl();
-            if(url.sameFile(pageUrl)) {
-                getLog().warn("Ignoring recursive src attribute of " + getTagName() + ": url=[" + srcAttribute + "]");
+            if (url.sameFile(pageUrl)) {
+            	notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + srcAttribute + "]. Ignored.");
                 return;
             }
             try {
@@ -143,7 +140,7 @@ public abstract class BaseFrame extends StyledElement {
             catch (final FailingHttpStatusCodeException e){
                 // do nothing
             }
-            catch( final IOException e ) {
+            catch (final IOException e) {
                 getLog().error("IOException when getting content for " + getTagName()
                         + ": url=["+url.toExternalForm()+"]", e);
             }

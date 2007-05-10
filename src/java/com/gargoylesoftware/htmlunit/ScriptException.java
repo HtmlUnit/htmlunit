@@ -43,6 +43,7 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.StringTokenizer;
 
 import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.JavaScriptException;
@@ -266,4 +267,27 @@ public class ScriptException extends RuntimeException {
     public HtmlPage getPage() {
         return page_;
     }
+    
+    /**
+     * Print the script stack trace. 
+     * This represents only the script calls. 
+     * @param writer where the stack trace will be written
+     */
+    public void printScriptStackTrace(final PrintWriter writer) {
+        final StringWriter stringWriter = new StringWriter();
+        final PrintWriter printWriter = new PrintWriter(stringWriter);
+
+        getCause().printStackTrace(printWriter);
+
+        writer.print(getCause().getMessage());
+        final StringTokenizer st = new StringTokenizer(stringWriter.toString(), "\r\n");
+        while (st.hasMoreTokens()) {
+        	final String line = st.nextToken();
+        	if (line.indexOf("at script") != -1) {
+        		writer.println();
+        		writer.print(line.replaceFirst("at script\\.?", "at "));
+        	}
+        }
+    }
+
 }

@@ -924,7 +924,7 @@ public class Window extends SimpleScriptable {
      */
     public Object jsxFunction_eval(final String script) {
         final HtmlPage htmlPage = document_.getHtmlPage();
-        return htmlPage.executeJavaScriptIfPossible(script, "Window.eval()", false, null).getJavaScriptResult();
+        return htmlPage.executeJavaScriptIfPossible(script, "Window.eval()", null).getJavaScriptResult();
     }
 
     /**
