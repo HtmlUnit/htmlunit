@@ -97,16 +97,6 @@ public class ScriptException extends RuntimeException {
         this(page, throwable, null);
     }
 
-
-    /**
-     * Return the enclosed exception.
-     * @return The enclosed exception
-     * @deprecated after 1.7. Use {@link Throwable#getCause()} instead
-     */
-    public Throwable getEnclosedException() {
-        return getCause();
-    }
-
     /**
      * Print the stack trace to System.out. If this exception contains another
      * exception then the stack traces for both will be printed.

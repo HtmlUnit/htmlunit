@@ -72,21 +72,6 @@ public final class ScriptExceptionTest extends WebTestCase {
     }
 
     /**
-     * To remove when deprecated method have been removed
-     * 
-     * @deprecated
-     * @throws Exception
-     *             if the test fails
-     */
-    public void testDeprecated() throws Exception {
-        final Throwable t = new RuntimeException();
-        final HtmlPage page = loadPage("<html></html>");
-        final ScriptException exception = new ScriptException(page, t);
-
-        assertEquals(t, exception.getEnclosedException());
-    }
-
-    /**
      * Test access to the page where the exception occured from the exception
      * 
      * @throws Exception
@@ -102,4 +87,5 @@ public final class ScriptExceptionTest extends WebTestCase {
             assertEquals(URL_GARGOYLE, e.getPage().getWebResponse().getUrl());
         }
     }
+
 }

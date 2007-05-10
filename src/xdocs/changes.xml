@@ -27,6 +27,11 @@
                 JavaScript: allow selected and defaultSelected attribute in Option constructor.
             </action>
             <action type="update" dev="sdanig">
+                INCOMPATIBLE CHANGE: Remove HtmlOption#getValue() (deprecated nearly two years ago),
+                remove FailingHttpStatusCodeException#FailingHttpStatusCodeException(int, String) (deprecated
+                over a year ago), remove ScriptException#getEnclosedException() (deprecated over a year ago).
+            </action>
+            <action type="update" dev="sdanig">
                 JavaScript: Add support for script.src, script.type, script.readyState and script.onreadystatechange.
             </action>
             <action type="update" dev="sdanig" id="1707726" due-to="Bruce Chapman">

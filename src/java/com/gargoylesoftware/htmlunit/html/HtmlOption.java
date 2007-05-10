@@ -241,15 +241,6 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Same as {@link #getValueAttribute()}.
-     * @return The value of the control
-     * @deprecated
-     */
-    public String getValue() {
-        return getValueAttribute();
-    }
-
-    /**
      * Selects the option if it's not already selected.
      * {@inheritDoc}
      */
