@@ -117,19 +117,19 @@ public abstract class BaseFrame extends StyledElement {
         getPage().getWebClient().popFirstWindow();
     }
 
-    private void loadInnerPageIfPossible(final String srcAttribute) {
-        if (srcAttribute.length() != 0) {
+    private void loadInnerPageIfPossible(final String src) {
+        if (src.length() != 0) {
             final URL url;
             try {
-                url = getPage().getFullyQualifiedUrl(srcAttribute);
+                url = getPage().getFullyQualifiedUrl(src);
             }
             catch (final MalformedURLException e) {
-            	notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + srcAttribute + "]. Ignored");
+                notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + src + "]. Ignored.");
                 return;
             }
             final URL pageUrl = getPage().getWebResponse().getUrl();
             if (url.sameFile(pageUrl)) {
-            	notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + srcAttribute + "]. Ignored.");
+                notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + src + "]. Ignored.");
                 return;
             }
             try {
@@ -164,7 +164,6 @@ public abstract class BaseFrame extends StyledElement {
         return getAttributeValue("longdesc");
     }
 
-
     /**
      * Return the value of the attribute "name".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -177,7 +176,6 @@ public abstract class BaseFrame extends StyledElement {
         return getAttributeValue("name");
     }
 
-
     /**
      * Set the value of the "name" attribute.
      *
@@ -186,7 +184,6 @@ public abstract class BaseFrame extends StyledElement {
     public final void setNameAttribute(final String name) {
         setAttributeValue("name", name);
     }
-
 
     /**
      * Return the value of the attribute "src".  Refer to the
@@ -200,7 +197,6 @@ public abstract class BaseFrame extends StyledElement {
         return getAttributeValue("src");
     }
 
-
     /**
      * Return the value of the attribute "frameborder".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -212,7 +208,6 @@ public abstract class BaseFrame extends StyledElement {
     public final String getFrameBorderAttribute() {
         return getAttributeValue("frameborder");
     }
-
 
     /**
      * Return the value of the attribute "marginwidth".  Refer to the
@@ -226,7 +221,6 @@ public abstract class BaseFrame extends StyledElement {
         return getAttributeValue("marginwidth");
     }
 
-
     /**
      * Return the value of the attribute "marginheight".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -238,7 +232,6 @@ public abstract class BaseFrame extends StyledElement {
     public final String getMarginHeightAttribute() {
         return getAttributeValue("marginheight");
     }
-
 
     /**
      * Return the value of the attribute "noresize".  Refer to the
@@ -252,7 +245,6 @@ public abstract class BaseFrame extends StyledElement {
         return getAttributeValue("noresize");
     }
 
-
     /**
      * Return the value of the attribute "scrolling".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -264,7 +256,6 @@ public abstract class BaseFrame extends StyledElement {
     public final String getScrollingAttribute() {
         return getAttributeValue("scrolling");
     }
-
 
     /**
      * Return the value of the attribute "onload".  This attribute is not
@@ -278,7 +269,6 @@ public abstract class BaseFrame extends StyledElement {
         return getAttributeValue("onload");
     }
 
-
     /**
      * Return the currently loaded page in the enclosed window.
      * This is a facility method for <code>getEnclosedWindow().getEnclosedPage()</code>.
@@ -289,7 +279,6 @@ public abstract class BaseFrame extends StyledElement {
         return getEnclosedWindow().getEnclosedPage();
     }
 
-
     /**
      * Gets the window enclosed in this frame.
      * @return the window
@@ -297,7 +286,6 @@ public abstract class BaseFrame extends StyledElement {
     public WebWindow getEnclosedWindow() {
         return enclosedWindow_;
     }
-
 
     /**
      * Set the value of the "src" attribute.  Also load the frame with the specified url if possible.
@@ -307,4 +295,5 @@ public abstract class BaseFrame extends StyledElement {
         setAttributeValue("src", attribute);
         loadInnerPageIfPossible(attribute);
     }
+
 }
