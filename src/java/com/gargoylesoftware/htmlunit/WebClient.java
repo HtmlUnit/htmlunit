@@ -117,7 +117,7 @@ public class WebClient {
     private String homePage_;
     private FocusableElement elementWithFocus_;
     private final Map requestHeaders_ = Collections.synchronizedMap(new HashMap(89));
-    private IncorrectnessListener incorrectnessListener = new IncorrectnessListenerImpl();
+    private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
 
     /**
      * like Firefox default value for network.http.redirection-limit
@@ -1769,27 +1769,25 @@ public class WebClient {
         throwExceptionOnScriptError_ = newValue;
     }
 
+    /**
+     * Gets the current listener for encountered incorrectness (except HTML parsing messages that
+     * are handled by the HTML parser listener). Default value is an instance of
+     * {@link IncorrectnessListenerImpl}.
+     * @return the current listener (not <code>null</code>).
+     */
+    public IncorrectnessListener getIncorrectnessListener() {
+        return incorrectnessListener_;
+    }
 
     /**
-     * Gets the current listener for encountered incorrectness 
-     * (except html parsing messages that are handled by the
-     * html parser listener).
-     * @return the current listener (not <code>null</code>). 
-     * Default is an instance of {@link IncorrectnessListenerImpl}
+     * Returns the current HTML incorrectness listener.
+     * @param listener the new value (not <code>null</code>)
      */
-	public IncorrectnessListener getIncorrectnessListener() {
-		return incorrectnessListener;
-	}
+    public void setIncorrectnessListener(final IncorrectnessListener listener) {
+        if (listener == null) {
+            throw new NullPointerException("Null incorrectness listener.");
+        }
+        incorrectnessListener_ = listener;
+    }
 
-	/**
-	 * Allow to define a new listener
-	 * @param listener the new value (not <code>null</code>)
-	 */
-	public void setIncorrectnessListener(final IncorrectnessListener listener) {
-		if (listener == null) {
-			throw new NullPointerException();
-		}
-		incorrectnessListener = listener;
-	}
 }
-
