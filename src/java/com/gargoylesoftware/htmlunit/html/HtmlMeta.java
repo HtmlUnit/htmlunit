@@ -46,10 +46,10 @@ import org.apache.commons.lang.StringUtils;
 
 
 /**
- * Wrapper for the html element "meta".
+ * Wrapper for the HTML element "meta".
  *
- * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlMeta extends HtmlElement {
@@ -91,12 +91,12 @@ public class HtmlMeta extends HtmlElement {
                     cookie.setExpiryDate(DateUtil.parseDate(partValue));
                 }
                 catch (final DateParseException e) {
-                	notifyIncorrectness("set-cookie http-equiv meta tag: can't parse expiration date >" 
+                    notifyIncorrectness("set-cookie http-equiv meta tag: can't parse expiration date >" 
                             + partValue + "<.");
                 }
             }
             else {
-            	notifyIncorrectness("set-cookie http-equiv meta tag: unknown attribute >" + partName + "<");
+                notifyIncorrectness("set-cookie http-equiv meta tag: unknown attribute >" + partName + "<");
             }
             getPage().getWebClient().getWebConnection().getState().addCookie(cookie);
         }
@@ -121,7 +121,6 @@ public class HtmlMeta extends HtmlElement {
         return getAttributeValue("lang");
     }
 
-
     /**
      * Return the value of the attribute "xml:lang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -133,7 +132,6 @@ public class HtmlMeta extends HtmlElement {
     public final String getXmlLangAttribute() {
         return getAttributeValue("xml:lang");
     }
-
 
     /**
      * Return the value of the attribute "dir".  Refer to the
@@ -147,7 +145,6 @@ public class HtmlMeta extends HtmlElement {
         return getAttributeValue("dir");
     }
 
-
     /**
      * Return the value of the attribute "http-equiv".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -159,7 +156,6 @@ public class HtmlMeta extends HtmlElement {
     public final String getHttpEquivAttribute() {
         return getAttributeValue("http-equiv");
     }
-
 
     /**
      * Return the value of the attribute "name".  Refer to the
@@ -173,7 +169,6 @@ public class HtmlMeta extends HtmlElement {
         return getAttributeValue("name");
     }
 
-
     /**
      * Return the value of the attribute "content".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -186,7 +181,6 @@ public class HtmlMeta extends HtmlElement {
         return getAttributeValue("content");
     }
 
-
     /**
      * Return the value of the attribute "scheme".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -198,4 +192,5 @@ public class HtmlMeta extends HtmlElement {
     public final String getSchemeAttribute() {
         return getAttributeValue("scheme");
     }
+
 }

@@ -335,7 +335,7 @@ public final class HtmlPage extends DomNode implements Page {
                     baseUrl = new URL(href);
                 }
                 catch (final MalformedURLException e) {
-                	notifyIncorrectness("Invalid base url: \"" + href + "\", ignoring it");
+                    notifyIncorrectness("Invalid base url: \"" + href + "\", ignoring it");
                     baseUrl = webResponse_.getUrl();
                 }
             }
@@ -1524,7 +1524,7 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
-     * Gets the meta tag for a give http-equiv value
+     * Gets the meta tag for a given http-equiv value.
      * @param httpEquiv the http-equiv value
      * @return a list of {@link HtmlMeta}
      */
@@ -1537,7 +1537,7 @@ public final class HtmlPage extends DomNode implements Page {
                 iter.remove();
             }
         }
-        
         return tags;
     }
+
 }
