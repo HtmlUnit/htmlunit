@@ -586,22 +586,9 @@ public abstract class DomNode implements Cloneable {
         }
         node.parent_ = this;
 
-        getHtmlPage().notifyNodeAdded(node);
+        getPage().notifyNodeAdded(node);
 
         return node;
-    }
-
-    /**
-     * Gets the html page to which this objects belongs
-     * @return the html page
-     */
-    private HtmlPage getHtmlPage() {
-        if (this instanceof HtmlPage) {
-            return (HtmlPage) this;
-        }
-        else {
-            return htmlPage_;
-        }
     }
 
     /**
@@ -633,7 +620,7 @@ public abstract class DomNode implements Cloneable {
         previousSibling_ = newNode;
         newNode.parent_ = parent_;
 
-        getHtmlPage().notifyNodeAdded(newNode);
+        getPage().notifyNodeAdded(newNode);
     }
 
     /**
@@ -645,7 +632,7 @@ public abstract class DomNode implements Cloneable {
             throw new IllegalStateException();
         }
         basicRemove();
-        getHtmlPage().notifyNodeRemoved(this);
+        getPage().notifyNodeRemoved(this);
     }
 
     /**
