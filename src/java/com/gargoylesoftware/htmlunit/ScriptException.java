@@ -60,17 +60,17 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  */
 public class ScriptException extends RuntimeException {
+
     private static final long serialVersionUID = 4788896649084231283L;
     private final String scriptSourceCode_;
     private final HtmlPage page_;
 
-
     /**
-     * Create an instance
+     * Creates an instance.
      * @param page the page in which the script causing this exception was executed
      * @param throwable The exception that was thrown from the script engine.
      * @param scriptSourceCode The code that was being executed when this exception
-     * was thrown.  This may be null if the exception was not caused by execution
+     * was thrown. This may be null if the exception was not caused by execution
      * of javascript.
      */
     public ScriptException(final HtmlPage page, final Throwable throwable,
@@ -282,11 +282,11 @@ public class ScriptException extends RuntimeException {
         writer.print(getCause().getMessage());
         final StringTokenizer st = new StringTokenizer(stringWriter.toString(), "\r\n");
         while (st.hasMoreTokens()) {
-        	final String line = st.nextToken();
-        	if (line.indexOf("at script") != -1) {
-        		writer.println();
-        		writer.print(line.replaceFirst("at script\\.?", "at "));
-        	}
+            final String line = st.nextToken();
+            if (line.indexOf("at script") != -1) {
+                writer.println();
+                writer.print(line.replaceFirst("at script\\.?", "at "));
+            }
         }
     }
 
