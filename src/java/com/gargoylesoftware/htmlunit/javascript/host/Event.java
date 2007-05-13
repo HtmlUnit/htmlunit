@@ -81,9 +81,9 @@ public class Event extends SimpleScriptable {
     public static final String TYPE_KEY_DOWN = "keydown";
 
     /** The submit event type, triggered by "onreset" event handlers. */
-	public static final String TYPE_RESET = "reset";
+    public static final String TYPE_RESET = "reset";
 
-	private static final long serialVersionUID = 4050485607908455730L;
+    private static final long serialVersionUID = 4050485607908455730L;
 
     private Object srcElement_;     // IE-only writeable equivalent of target.
     private Object target_;         // W3C standard read-only equivalent of srcElement.
