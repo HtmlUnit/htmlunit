@@ -702,14 +702,15 @@ public class Window extends SimpleScriptable {
      * @return <code>null</code> if onload has been set to something that is not a function
      */
     public Function getOnloadHandler() {
-    	final Object response = jsxGet_onload();
-    	if (response instanceof Function) {
-    		return (Function) response;
-    	}
-
-   		return null;
+        final Object handler = jsxGet_onload();
+        if (handler instanceof Function) {
+            return (Function) handler;
+        }
+        else {
+            return null;
+        }
     }
-    
+
     /**
      * Gets the listeners registered for the given type
      * @param type the type of event
