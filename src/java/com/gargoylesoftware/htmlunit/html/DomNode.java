@@ -952,11 +952,12 @@ public abstract class DomNode implements Cloneable {
     } 
     
     /**
-     * Facility to notify the registered {@link IncorrectnessListener} of something that is not fully correct
+     * Facility to notify the registered {@link IncorrectnessListener} of something that is not fully correct.
      * @param message the notification
      */
     protected void notifyIncorrectness(final String message) {
-    	final IncorrectnessListener incorrectnessListener = getPage().getWebClient().getIncorrectnessListener();
-    	incorrectnessListener.notify(message, this);
+        final IncorrectnessListener incorrectnessListener = getPage().getWebClient().getIncorrectnessListener();
+        incorrectnessListener.notify(message, this);
     }
+
 }
