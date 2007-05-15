@@ -343,7 +343,12 @@ public final class HtmlPage extends DomNode implements Page {
 
         // to handle http: and http:/ in FF (Bug 1714767)
         if( getWebClient().getBrowserVersion().isNetscape() ) {
+            boolean incorrectnessNotified = false;
             while( relativeUrl.startsWith( "http:" ) && !relativeUrl.startsWith( "http://" ) ) {
+                if( !incorrectnessNotified ) {
+                    notifyIncorrectness( "Incorrect URL \"" + relativeUrl + "\" has been corrected" );
+                    incorrectnessNotified = true;
+                }
                 relativeUrl = "http:/" + relativeUrl.substring( 5 );
             }
         }
