@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="asashour" id="1714767">
+                Tolerate URL starting with http:/ and http: in Firefox
+            </action>
             <action type="update" dev="mguillem">
                 Added IncorrectnessListener to get notified of things that HtmlUnit cope with but that don't respect standards.
             </action>

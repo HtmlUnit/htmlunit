@@ -46,10 +46,11 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.commons.httpclient.Cookie;
-
 import junit.framework.AssertionFailedError;
 
+import org.apache.commons.httpclient.Cookie;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ImmediateRefreshHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
@@ -69,6 +70,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Andreas Hangler
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlPageTest extends WebTestCase {
 
@@ -1241,4 +1243,36 @@ public class HtmlPageTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }    
+
+    /**
+     * Test for bug 1714767
+     * @throws Exception if the test fails
+     */
+    public void testNoSlashURL() throws Exception {
+        testNoSlashURL( "http:/second" );
+        testNoSlashURL( "http:second" );
+    }
+
+    private void testNoSlashURL( final String url ) throws Exception {
+        final String firstContent
+            = "<html><body>"
+            + "<iframe id='myIFrame' src='" + url + "'></iframe>"
+            + "</body></html>";
+    
+        final String secondContent
+            = "<html><body></body></html>";
+        final WebClient client = new WebClient(BrowserVersion.MOZILLA_1_0);
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        client.setWebConnection( webConnection );
+    
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
+        final HtmlInlineFrame iframe = (HtmlInlineFrame)firstPage.getHtmlElementById( "myIFrame" );
+        
+        assertEquals( URL_SECOND, iframe.getEnclosedPage().getWebResponse().getUrl() );
+    }
+
 }

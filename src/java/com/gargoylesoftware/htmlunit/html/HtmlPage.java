@@ -316,7 +316,7 @@ public final class HtmlPage extends DomNode implements Page {
      * @exception  MalformedURLException If an error occurred when creating a
      *      URL object
      */
-    public URL getFullyQualifiedUrl( final String relativeUrl )
+    public URL getFullyQualifiedUrl( String relativeUrl )
         throws MalformedURLException {
 
         final List baseElements = getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("base"));
@@ -340,6 +340,14 @@ public final class HtmlPage extends DomNode implements Page {
                 }
             }
         }
+
+        // to handle http: and http:/ in FF (Bug 1714767)
+        if( getWebClient().getBrowserVersion().isNetscape() ) {
+            while( relativeUrl.startsWith( "http:" ) && !relativeUrl.startsWith( "http://" ) ) {
+                relativeUrl = "http:/" + relativeUrl.substring( 5 );
+            }
+        }
+
         return WebClient.expandUrl( baseUrl, relativeUrl );
     }
 
