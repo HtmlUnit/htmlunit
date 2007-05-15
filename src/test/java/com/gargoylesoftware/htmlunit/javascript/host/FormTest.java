@@ -1137,7 +1137,7 @@ public class FormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-    client.getPage(URL_FIRST);
+        client.getPage(URL_FIRST);
 
         final String[] expectedAlerts = { "page 1: formPage1", "page 2: formPage2"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1150,14 +1150,23 @@ public class FormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnSubmitEvent() throws Exception {
-        final String[] expectedAlertsIE = {"srcElement null: false", "srcElement==form: true", "target null: true", "target==form: false"};
+        final String[] expectedAlertsIE = {"srcElement null: false", "srcElement==form: true", 
+            "target null: true", "target==form: false"};
         testOnSubmitEvent(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
 
-        final String[] expectedAlertsFF = {"srcElement null: true", "srcElement==form: false", "target null: false", "target==form: true"};
+        final String[] expectedAlertsFF = {"srcElement null: true", "srcElement==form: false", 
+            "target null: false", "target==form: true"};
         testOnSubmitEvent(BrowserVersion.NETSCAPE_6_2_3, expectedAlertsFF);
     }
 
-    protected void testOnSubmitEvent(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+    /**
+     * 
+     * @param browserVersion browser version
+     * @param expectedAlerts expected alerts
+     * @throws Exception If the test fails
+     */
+    protected void testOnSubmitEvent(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
         final WebClient client = new WebClient(browserVersion);
         final MockWebConnection webConnection = new MockWebConnection(client);
 

@@ -106,7 +106,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = { "all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
-        		"all node for testA: IMG ", "all node for testImg: ", "all node for testDiv2: "};
+            "all node for testA: IMG ", "all node for testImg: ", "all node for testDiv2: "};
 
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, firstContent, collectedAlerts);
@@ -460,8 +460,8 @@ public class HTMLElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final String[] expectedAlerts = { "Old = <b>Old innerHTML</b><!-- old comment -->", 
-                "New =  <b><i id=\"newElt\">New cell value</i></b>", 
-                "I" };
+            "New =  <b><i id=\"newElt\">New cell value</i></b>", 
+            "I" };
         assertEquals(expectedAlerts, collectedAlerts);
 
         final HtmlElement pElt = page.getHtmlElementById("myNode");
@@ -499,6 +499,9 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testGetSetInnerHTMLChar() throws Exception {
         final String content = "<html>\n" +
             "<head>\n" +
@@ -518,8 +521,8 @@ public class HTMLElementTest extends WebTestCase {
             "</html>\n" +
             "";
         final String[] expectedAlerts = {
-                "Old = <b>Old innerHTML</b>",
-                "New = New cell value & \u0110 \u0110" // TODO this is wrong should be &amp;
+            "Old = <b>Old innerHTML</b>",
+            "New = New cell value & \u0110 \u0110" // TODO this is wrong should be &amp;
         };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
@@ -563,7 +566,8 @@ public class HTMLElementTest extends WebTestCase {
      * Test setting innerHTML to null
      * @see #testSetInnerHTMLNull()
      */
-    private void testSetInnerHTMLNull(final BrowserVersion browserVersion, String[] expectedAlerts) throws Exception {
+    private void testSetInnerHTMLNull(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
         final String content = "<html><head></head><body>"
                 + "<div id='testDiv'>foo</div>"
                 + "<script language='javascript'>"

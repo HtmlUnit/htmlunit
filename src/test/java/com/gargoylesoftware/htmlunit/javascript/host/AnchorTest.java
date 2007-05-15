@@ -267,6 +267,9 @@ public class AnchorTest extends WebTestCase {
         assertEquals("http://www.gargoylesoftware.com:8080/foo.html#O", link.getHrefAttribute());
     }
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testReadWritePathname() throws Exception {
         final String content 
             = "<html>"
@@ -278,6 +281,9 @@ public class AnchorTest extends WebTestCase {
         assertEquals("http://www.gargoylesoftware.com/bar/foo.html#B", link.getHrefAttribute());
     }
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testReadWriteProtocol() throws Exception {
         final String content 
             = "<html>"
@@ -289,6 +295,9 @@ public class AnchorTest extends WebTestCase {
         assertEquals("https://www.gargoylesoftware.com/foo.html#B", link.getHrefAttribute());
     }
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testReadWriteAnchorHost() throws Exception {
         final String content 
             = "<html>"
@@ -312,6 +321,9 @@ public class AnchorTest extends WebTestCase {
         assertEquals("http://www.gargoylesoftware.com/foo.html#O", link.getHrefAttribute());
     }
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testReadWriteAnchorHostname() throws Exception {
         final String content 
             = "<html>"

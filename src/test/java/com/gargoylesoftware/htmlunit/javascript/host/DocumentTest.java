@@ -2021,7 +2021,7 @@ public class DocumentTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client);
         client.setWebConnection(webConnection);
         webConnection.setResponse(URL_FIRST, content);
-        HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertTrue(page.asText().indexOf("Hello World")>=0);
     }
 
@@ -2043,10 +2043,10 @@ public class DocumentTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client);
         client.setWebConnection(webConnection);
         webConnection.setResponse(URL_FIRST, content);
-        HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        List anchorList = page.getAnchors();
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final List anchorList = page.getAnchors();
         assertEquals(1, anchorList.size());
-        HtmlAnchor anchor = (HtmlAnchor) anchorList.get(0);
+        final HtmlAnchor anchor = (HtmlAnchor) anchorList.get(0);
         assertEquals("start.html", anchor.getHrefAttribute());
         assertEquals("click here", anchor.asText());
     }
@@ -2218,7 +2218,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = 
-            { "d4.d3.d2.d1.gargoylesoftware.com", "d4.d3.d2.d1.gargoylesoftware.com", "d1.gargoylesoftware.com" };
+        { "d4.d3.d2.d1.gargoylesoftware.com", "d4.d3.d2.d1.gargoylesoftware.com", "d1.gargoylesoftware.com" };
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts, new URL("http://d4.d3.d2.d1.gargoylesoftware.com"));
@@ -2305,30 +2305,30 @@ public class DocumentTest extends WebTestCase {
     * Test for 1185389
     * @throws Exception if the test fails
     */
-   public void testWriteAddNodesToCorrectParent() throws Exception {
-       if (notYetImplemented()) {
-           return;
-       }
+    public void testWriteAddNodesToCorrectParent() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
 
-       final String content = "<html><head><title>foo</title></head>\n"
-           + "<body id=\"theBody\">\n"
-           + "<script>\n"
-           + "document.write('<p id=\"para1\">Paragraph #1</p>');\n"
-           + "document.write('<p id=\"para2\">Paragraph #2</p>');\n"
-           + "document.write('<p id=\"para3\">Paragraph #3</p>');\n"
-           + "alert(document.getElementById('para1').parentNode.id);\n"
-           + "alert(document.getElementById('para2').parentNode.id);\n"            
-           + "alert(document.getElementById('para3').parentNode.id);\n"            
-           + "</script>\n"
-           + "</body></html>";
+        final String content = "<html><head><title>foo</title></head>\n"
+            + "<body id=\"theBody\">\n"
+            + "<script>\n"
+            + "document.write('<p id=\"para1\">Paragraph #1</p>');\n"
+            + "document.write('<p id=\"para2\">Paragraph #2</p>');\n"
+            + "document.write('<p id=\"para3\">Paragraph #3</p>');\n"
+            + "alert(document.getElementById('para1').parentNode.id);\n"
+            + "alert(document.getElementById('para2').parentNode.id);\n"            
+            + "alert(document.getElementById('para3').parentNode.id);\n"            
+            + "</script>\n"
+            + "</body></html>";
 
-       final String[] expectedAlerts = {"theBody", "theBody", "theBody"};
-       createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final String[] expectedAlerts = {"theBody", "theBody", "theBody"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-       final List collectedAlerts = new ArrayList();
-       loadPage(content, collectedAlerts);
-       assertEquals( expectedAlerts, collectedAlerts );
-   }
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
    
    /**
      * @throws Exception if the test fails
@@ -2442,7 +2442,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
-        HtmlPage page = loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
         assertNotNull( page.getEventHandler( "click" ) );
     }
 

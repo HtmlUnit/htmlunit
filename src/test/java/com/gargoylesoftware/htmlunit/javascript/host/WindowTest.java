@@ -2121,7 +2121,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Regression test for [ 1608555 ] JavaScript: window.eval does evaluate local scope
      * https://sourceforge.net/tracker/index.php?func=detail&aid=1608555&group_id=47038&atid=448266
-     * @throws Exception
+     * @throws Exception If the test fails
      */
     public void testEvalScopeLocal() throws Exception {
         final String content = "<html><body><form id='formtest'><input id='element' value='elementValue'/></form>"

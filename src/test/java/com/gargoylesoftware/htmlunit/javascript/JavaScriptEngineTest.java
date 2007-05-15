@@ -121,10 +121,10 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnloadJavascriptFunction() throws Exception {
-    	if (notYetImplemented()) {
-    		return;
-    	}
-    	
+        if (notYetImplemented()) {
+            return;
+        }
+        
         final String content
             = "<html><head><title>foo</title><script>"
             + "function onload() {alert('foo');}"
@@ -993,8 +993,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1680026&group_id=47038
      * @throws Exception If something goes wrong.
      */
-    public void testIEConditionalCompilation() throws Exception 
-    {
+    public void testIEConditionalCompilation() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -1083,6 +1082,9 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testTimeout() throws Exception {
       
         final long timeout = 2000;
@@ -1144,7 +1146,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         /**
          * {@inheritDoc}
          */
-        public void release(WebWindow webWindow) {
+        public void release(final WebWindow webWindow) {
             delegate_.release(webWindow);
         }
 

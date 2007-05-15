@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2002-2006 Gargoyle Software Inc. All rights reserved.
  *

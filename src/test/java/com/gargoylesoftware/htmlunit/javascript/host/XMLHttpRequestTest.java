@@ -357,7 +357,8 @@ public class XMLHttpRequestTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(URL_FIRST, html);
         final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
-        webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>", "text/xml");
+        webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>",
+                "text/xml");
         client.setWebConnection( webConnection );
         client.getPage(URL_FIRST);
 
@@ -500,7 +501,8 @@ public class XMLHttpRequestTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(URL_FIRST, html);
         final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml.txt");
-        webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>", "text/plain");
+        webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>",
+                "text/plain");
         client.setWebConnection( webConnection );
         client.getPage(URL_FIRST);
 
@@ -516,8 +518,8 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testReplaceOnTextData() throws Exception {
-    	testReplaceOnTextData(BrowserVersion.MOZILLA_1_0);
-    	testReplaceOnTextData(BrowserVersion.INTERNET_EXPLORER_6_0);
+        testReplaceOnTextData(BrowserVersion.MOZILLA_1_0);
+        testReplaceOnTextData(BrowserVersion.INTERNET_EXPLORER_6_0);
     }
 
     /**
@@ -579,6 +581,9 @@ public class XMLHttpRequestTest extends WebTestCase {
         assertEquals( alerts, collectedAlerts );
     }
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testSetLocation() throws Exception {
         testSetLocation(BrowserVersion.MOZILLA_1_0);
         testSetLocation(BrowserVersion.INTERNET_EXPLORER_6_0);
@@ -659,9 +664,9 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
         final MockWebConnection webConnection = new MockWebConnection( client )
         {
-            public WebResponse getResponse(final WebRequestSettings _webRequestSettings) throws IOException {
-                collectedAlerts.add(_webRequestSettings.getURL().toExternalForm());
-                return super.getResponse(_webRequestSettings);
+            public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
+                collectedAlerts.add(webRequestSettings.getURL().toExternalForm());
+                return super.getResponse(webRequestSettings);
             }
         };
         webConnection.setResponse(URL_FIRST, content);
