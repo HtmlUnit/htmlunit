@@ -101,32 +101,33 @@ public final class ScriptExceptionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testScriptStackTrace() throws Exception {
-    	testScriptStackTrace("ScriptExceptionTest1");
-    	testScriptStackTrace("ScriptExceptionTest2");
+        testScriptStackTrace("ScriptExceptionTest1");
+        testScriptStackTrace("ScriptExceptionTest2");
     }
 
     private void testScriptStackTrace(final String baseFileName) throws Exception {
-    	try {
+        try {
             loadPage(getFileContent(baseFileName + ".html"));
         }
         catch (final ScriptException e) {
-        	final StringWriter stringWriter = new StringWriter();
+            final StringWriter stringWriter = new StringWriter();
             final PrintWriter printWriter = new PrintWriter(stringWriter);
-        	e.printScriptStackTrace(printWriter);
-        	
+            e.printScriptStackTrace(printWriter);
+            
             final String expectedTrace = getFileContent(baseFileName + ".txt");
-        	assertEquals(expectedTrace, stringWriter.toString());
-        	return;
+            assertEquals(expectedTrace, stringWriter.toString());
+            return;
         }
         fail("Exception not thrown");
     }
 
-	private String getFileContent(final String fileName) throws IOException {
-		final InputStream stream = getClass().getClassLoader().getResourceAsStream("com/gargoylesoftware/htmlunit/" + fileName);
-		assertNotNull(fileName, stream);
-    	final StringWriter stringWriter = new StringWriter();
-		IOUtils.copy(stream, stringWriter);
-		IOUtils.closeQuietly(stream);
-		return stringWriter.toString();
-	}
+    private String getFileContent(final String fileName) throws IOException {
+        final InputStream stream = getClass().getClassLoader().
+            getResourceAsStream("com/gargoylesoftware/htmlunit/" + fileName);
+        assertNotNull(fileName, stream);
+        final StringWriter stringWriter = new StringWriter();
+        IOUtils.copy(stream, stringWriter);
+        IOUtils.closeQuietly(stream);
+        return stringWriter.toString();
+    }
 }

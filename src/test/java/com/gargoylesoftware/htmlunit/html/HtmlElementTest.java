@@ -72,7 +72,7 @@ public class HtmlElementTest extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testClonedNodeAttributes() throws Exception {
-        String html = "<html><body id='a' title='b'><script>\n" +
+        final String html = "<html><body id='a' title='b'><script>\n" +
                 "var x = document.body.cloneNode(true);\n" +
                 "alert(document.body==x);\n" +
                 "alert(document.getElementById('a')==document.body);\n" +
@@ -84,9 +84,9 @@ public class HtmlElementTest extends WebTestCase {
                 "alert(document.body.title);\n" +
                 "alert(x.title);\n" +
                 "</script></body></html>\n";
-        List collectedAlerts = new ArrayList();
+        final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
-        List expectedAlerts = Arrays.asList(new String[] {"false", "true", "a", "a", "b", "b", "b", "c"});
+        final List expectedAlerts = Arrays.asList(new String[] {"false", "true", "a", "a", "b", "b", "b", "c"});
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

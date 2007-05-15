@@ -59,30 +59,30 @@ public final class IncorrectnessListenerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testNotification() throws Exception {
-    	final String html = "<html><head>"
-    		+ "<meta http-equiv='set-cookie' content='webm=none; path=/; expires=abcdef;'>"
-    		+ "</head>"
-    		+ "<body></body>"
-    		+ "</html>";
-    	
-    	final WebClient webClient = new WebClient();
-    	final List collectedIncorrectness = new ArrayList();
-    	final IncorrectnessListener listener = new IncorrectnessListener()
-    	{
-    		public void notify(final String message, final Object origin) {
-    			collectedIncorrectness.add(message);
-    		}
-    	};
-    	webClient.setIncorrectnessListener(listener);
+        final String html = "<html><head>"
+                + "<meta http-equiv='set-cookie' content='webm=none; path=/; expires=abcdef;'>"
+                + "</head>"
+                + "<body></body>"
+                + "</html>";
 
-    	final MockWebConnection webConnection = new MockWebConnection(webClient);
-    	webClient.setWebConnection(webConnection);
-    	webConnection.setDefaultResponse(html);
-    	webClient.getPage(URL_FIRST);
-    	
-    	final String[] expectedIncorrectness = {
-    	    "set-cookie http-equiv meta tag: can't parse expiration date >abcdef<."
-    	};
-    	assertEquals(expectedIncorrectness, collectedIncorrectness);
+        final WebClient webClient = new WebClient();
+        final List collectedIncorrectness = new ArrayList();
+        final IncorrectnessListener listener = new IncorrectnessListener()
+        {
+            public void notify(final String message, final Object origin) {
+                collectedIncorrectness.add(message);
+            }
+        };
+        webClient.setIncorrectnessListener(listener);
+        
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webClient.setWebConnection(webConnection);
+        webConnection.setDefaultResponse(html);
+        webClient.getPage(URL_FIRST);
+        
+        final String[] expectedIncorrectness = {
+            "set-cookie http-equiv meta tag: can't parse expiration date >abcdef<."
+        };
+        assertEquals(expectedIncorrectness, collectedIncorrectness);
     }
 }

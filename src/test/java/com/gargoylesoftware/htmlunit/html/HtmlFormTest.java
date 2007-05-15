@@ -302,7 +302,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     public void testSubmit_onSubmitHandler_fails() throws Exception {
 
-         final String firstContent
+        final String firstContent
             = "<html><head><title>First</title></head><body>"
             + "<form method='get' action='http://second' onSubmit='return null'>"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>"

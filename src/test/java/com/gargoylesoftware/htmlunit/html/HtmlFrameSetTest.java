@@ -318,7 +318,7 @@ public class HtmlFrameSetTest extends WebTestCase {
         client.setWebConnection( webConnection );
         
         final String[] expectedAlerts = {"2"};
-        ArrayList collectedAlerts = new ArrayList();
+        final ArrayList collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
         
         client.getPage(URL_FIRST);

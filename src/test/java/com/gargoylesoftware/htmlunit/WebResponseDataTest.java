@@ -85,9 +85,9 @@ public class WebResponseDataTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testNullBody() throws Exception {
-        InputStream body = null;
-        List headers = new ArrayList();
-        WebResponseData data = new WebResponseData(body, 304, "NOT_MODIFIED", headers);
+        final InputStream body = null;
+        final List headers = new ArrayList();
+        final WebResponseData data = new WebResponseData(body, 304, "NOT_MODIFIED", headers);
         assertNull(data.getBody());
     }
 

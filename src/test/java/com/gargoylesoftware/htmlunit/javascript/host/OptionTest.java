@@ -245,10 +245,10 @@ public class OptionTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {
-        		"o2: text: Option 2, label: , value: 2, defaultSelected: false, selected: false",
-        		"o3: text: Option 3, label: , value: 3, defaultSelected: true, selected: false",
-        		"0",
-        		"1"
+            "o2: text: Option 2, label: , value: 2, defaultSelected: false, selected: false",
+            "o3: text: Option 3, label: , value: 3, defaultSelected: true, selected: false",
+            "0",
+            "1"
         };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 

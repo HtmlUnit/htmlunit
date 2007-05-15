@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  */
 public class HTMLCollectionTest extends WebTestCase {
 
-	/**
+    /**
      * Create an instance
      * @param name The name of the test
      */
@@ -90,12 +90,12 @@ public class HTMLCollectionTest extends WebTestCase {
         }
 
         final String content = "<html><head><title>foo</title><script>"
-        + "function test(){\n"
-        + "    alert(typeof document.links.toString)\n"
-        +"}\n"
-        + "</script></head><body onload='test()'>"
-        + "<a href='bla.html'>link</a>"
-        + "</body></html>";
+            + "function test(){\n"
+            + "    alert(typeof document.links.toString)\n"
+            +"}\n"
+            + "</script></head><body onload='test()'>"
+            + "<a href='bla.html'>link</a>"
+            + "</body></html>";
 
         final String[] expectedAlerts = {"function"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);

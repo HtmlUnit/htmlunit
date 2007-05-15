@@ -78,32 +78,32 @@ public class HTMLElementTest extends WebTestCase {
      */
     public void testAll_IndexByInt() throws Exception {
         final String firstContent = "<html><head>"
-        + "<script>"
-        + "function test()"
-        + "{"
-        + "  dumpAll('body');"
-        + "  dumpAll('testDiv');"
-        + "  dumpAll('testA');"
-        + "  dumpAll('testImg');"
-        + "  dumpAll('testDiv2');"
-        + "}"
-        + "function dumpAll(_id)"
-        + "{"
-        + "  var oNode = document.getElementById(_id);"
-        + "  var col = oNode.all;"
-        + "  var str = 'all node for ' + _id + ': ';"
-        + "  for (var i=0; i<col.length; ++i)"
-        + "  {"
-        + "    str += col[i].tagName + ' ';"
-        + "  }"
-        + "  alert(str);"
-        + "}"
-        + "</script>"
-        + "</head>"
-        + "<body onload='test()' id='body'>"
-        + "<div id='testDiv'>foo<a href='foo.html' id='testA'><img src='foo.png' id='testImg'></a></div>"
-        + "<div id='testDiv2'>foo</div>"
-        + "</body></html>";
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  dumpAll('body');"
+            + "  dumpAll('testDiv');"
+            + "  dumpAll('testA');"
+            + "  dumpAll('testImg');"
+            + "  dumpAll('testDiv2');"
+            + "}"
+            + "function dumpAll(_id)"
+            + "{"
+            + "  var oNode = document.getElementById(_id);"
+            + "  var col = oNode.all;"
+            + "  var str = 'all node for ' + _id + ': ';"
+            + "  for (var i=0; i<col.length; ++i)"
+            + "  {"
+            + "    str += col[i].tagName + ' ';"
+            + "  }"
+            + "  alert(str);"
+            + "}"
+            + "</script>"
+            + "</head>"
+            + "<body onload='test()' id='body'>"
+            + "<div id='testDiv'>foo<a href='foo.html' id='testA'><img src='foo.png' id='testImg'></a></div>"
+            + "<div id='testDiv2'>foo</div>"
+            + "</body></html>";
 
         final String[] expectedAlerts = { "all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
         		"all node for testA: IMG ", "all node for testImg: ", "all node for testDiv2: "};
@@ -1301,13 +1301,16 @@ public class HTMLElementTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"undefined", "undefined", "undefined", "undefined", 
-                "123", "from myFunction", "123", "from myFunction"};
+            "123", "from myFunction", "123", "from myFunction"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testParentElement() throws Exception {
         final String[] alertsIE = {"null", "[object]"};
         testParentElement(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);

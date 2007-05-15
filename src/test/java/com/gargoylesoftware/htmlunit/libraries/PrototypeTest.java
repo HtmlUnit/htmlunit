@@ -47,14 +47,21 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for compatibility with the <a href="http://prototype.conio.net/">Prototype JavaScript library</a>.
  *
+ * @version $Revision: 1432 $
  * @author Daniel Gredler
  */
 public class PrototypeTest extends WebTestCase {
 
-    public PrototypeTest( String name ) {
+    /**
+     * @param name The name of the test.
+     */
+    public PrototypeTest( final String name ) {
         super( name );
     }
 
+    /**
+     * @throws Exception If test fails.
+     */
     public void testAjax() throws Exception {
         if( notYetImplemented() ) {
             return;
@@ -62,14 +69,23 @@ public class PrototypeTest extends WebTestCase {
         test( "ajax.html", 3, 11 );
     }
 
+    /**
+     * @throws Exception If test fails.
+     */
     public void testArray() throws Exception {
         test( "array.html", 12, 49 );
     }
 
+    /**
+     * @throws Exception If test fails.
+     */
     public void testBase() throws Exception {
         test( "base.html", 4, 48 );
     }
 
+    /**
+     * @throws Exception If test fails.
+     */
     public void testDom() throws Exception {
         if( notYetImplemented() ) {
             return;
@@ -77,6 +93,9 @@ public class PrototypeTest extends WebTestCase {
         test( "dom.html", 25, 254 );
     }
 
+    /**
+     * @throws Exception If test fails.
+     */
     public void testElementMixins() throws Exception {
         if( notYetImplemented() ) {
             return;
@@ -84,10 +103,16 @@ public class PrototypeTest extends WebTestCase {
         test( "element_mixins.html", 4, 7 );
     }
 
+    /**
+     * @throws Exception If test fails.
+     */
     public void testEnumerable() throws Exception {
         test( "enumerable.html", 23, 67 );
     }
 
+    /**
+     * @throws Exception If test fails.
+     */
     public void testForm() throws Exception {
         if( notYetImplemented() ) {
             return;
@@ -98,7 +123,7 @@ public class PrototypeTest extends WebTestCase {
     /**
      * Blocked by Rhino bug 370279
      * https://bugzilla.mozilla.org/show_bug.cgi?id=370279
-     * @throws Exception
+     * @throws Exception If test fails.
      */
     public void testHash() throws Exception {
         if( notYetImplemented() ) {
@@ -107,6 +132,9 @@ public class PrototypeTest extends WebTestCase {
         test( "hash.html", 5, 19 );
     }
 
+    /**
+     * @throws Exception If test fails.
+     */
     public void testPosition() throws Exception {
         if( notYetImplemented() ) {
             return;
@@ -114,10 +142,16 @@ public class PrototypeTest extends WebTestCase {
         test( "position.html", 5, 28 );
     }
 
+    /**
+     * @throws Exception If test fails.
+     */
     public void testRange() throws Exception {
         test( "range.html", 6, 21 );
     }
 
+    /**
+     * @throws Exception If test fails.
+     */
     public void testSelector() throws Exception {
         if( notYetImplemented() ) {
             return;
@@ -128,7 +162,7 @@ public class PrototypeTest extends WebTestCase {
     /**
      * Blocked by Rhino bug 369860
      * https://bugzilla.mozilla.org/show_bug.cgi?id=369860
-     * @throws Exception
+     * @throws Exception If test fails.
      */
     public void testString() throws Exception {
         if( notYetImplemented() ) {

@@ -42,7 +42,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -63,7 +62,7 @@ public class JQueryTest extends WebTestCase {
      *
      * @param name The name of the test.
      */
-    public JQueryTest(String name) {
+    public JQueryTest(final String name) {
         super(name);
     }
 
@@ -87,15 +86,15 @@ public class JQueryTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(60000);
 
-        HtmlElement doc = page.getDocumentElement();
-        HtmlParagraph p = (HtmlParagraph) doc.getHtmlElementsByAttribute("p", "class", "result").get(0);
-        String status1 = p.getFirstChild().asText();
-        String status2 = p.getFirstChild().getNextSibling().getNextSibling().asText();
+        final HtmlElement doc = page.getDocumentElement();
+        final HtmlParagraph p = (HtmlParagraph) doc.getHtmlElementsByAttribute("p", "class", "result").get(0);
+        final String status1 = p.getFirstChild().asText();
+        final String status2 = p.getFirstChild().getNextSibling().getNextSibling().asText();
         getLog().info("Ran the jQuery unit tests. " + status1 + " " + status2);
 
         final List failedGroups = doc.getHtmlElementsByAttribute("li", "class", "fail");
         for (final Iterator i = failedGroups.iterator(); i.hasNext();) {
-            DomNode group = (DomNode) i.next();
+            final DomNode group = (DomNode) i.next();
             getLog().info("jQuery failure: " + group.asText());
         }
 

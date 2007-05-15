@@ -292,15 +292,15 @@ public class WebClientTest extends WebTestCase {
         // the same requested url
         final MockWebConnection webConnection = new MockWebConnection(webClient) {
             private int count_ = 0;
-            public WebResponse getResponse(final WebRequestSettings _webRequestSettings) throws IOException {
+            public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
                 ++count_;
                 if (count_ == 1) {
-                    final WebResponse response = super.getResponse(_webRequestSettings);
-                    setResponse(_webRequestSettings.getURL(), secondContent);
+                    final WebResponse response = super.getResponse(webRequestSettings);
+                    setResponse(webRequestSettings.getURL(), secondContent);
                     return response;
                 }
                 else {
-                    return super.getResponse(_webRequestSettings);
+                    return super.getResponse(webRequestSettings);
                 }
             }
         };
@@ -309,7 +309,7 @@ public class WebClientTest extends WebTestCase {
                 "Some error", "text/html", headers );
         webClient.setWebConnection( webConnection );
 
-        HtmlPage page = (HtmlPage) webClient.getPage(new WebRequestSettings(URL_FIRST, SubmitMethod.POST));
+        final HtmlPage page = (HtmlPage) webClient.getPage(new WebRequestSettings(URL_FIRST, SubmitMethod.POST));
         final WebResponse webResponse = page.getWebResponse();
         // A redirect should have happened
         assertEquals(200, webResponse.getStatusCode());
@@ -495,19 +495,19 @@ public class WebClientTest extends WebTestCase {
         final List headers = Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()) );
         final MockWebConnection webConnection = new MockWebConnection(webClient) {
             private int count_ = 0;
-            public WebResponse getResponse(final WebRequestSettings _webRequestSettings) throws IOException {
+            public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
                 ++count_;
                 if (count_ < nbRedirections) {
                     setResponse(url, firstContent, 302, "Redirect needed " + count_, "text/html", headers);
-                    return super.getResponse(_webRequestSettings);
+                    return super.getResponse(webRequestSettings);
                 }
                 else if (count_ == nbRedirections) {
-                    final WebResponse response = super.getResponse(_webRequestSettings);
-                    setResponse(_webRequestSettings.getURL(), secondContent);
+                    final WebResponse response = super.getResponse(webRequestSettings);
+                    setResponse(webRequestSettings.getURL(), secondContent);
                     return response;
                 }
                 else {
-                    return super.getResponse(_webRequestSettings);
+                    return super.getResponse(webRequestSettings);
                 }
             }
         };

@@ -67,8 +67,11 @@ public class Option extends HTMLElement {
      * the rhino engine won't walk up the hierarchy looking for constructors.
      * @param newText The text
      * @param newValue The value
+     * @param defaultSelected Whether the option is initially selected
+     * @param selected The current selection state of the option 
      */
-    public void jsConstructor(final String newText, final String newValue, boolean defaultSelected, boolean selected) {
+    public void jsConstructor(final String newText, final String newValue, 
+            final boolean defaultSelected, final boolean selected) {
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
         Map atts = null;
         if (defaultSelected) {
@@ -163,7 +166,7 @@ public class Option extends HTMLElement {
 
     /**
      * Set the value of the "label" property
-     * @param selected The new label property
+     * @param label The new label property
      */
     public void jsxSet_label(final String label) {
         getHtmlOption().setLabelAttribute(label);

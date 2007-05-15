@@ -951,8 +951,9 @@ public class SelectTest extends WebTestCase {
      */
     public void testSelectedIndexReset() throws Exception {
         final String content
-        = "<html><head><title>first</title></head>"
-            + "<body onload='document.forms[0].testSelect.selectedIndex = -1; document.forms[0].testSelect.options[0].selected=true;'>"
+            = "<html><head><title>first</title></head>"
+            + "<body onload='document.forms[0].testSelect.selectedIndex = -1; "
+            + "document.forms[0].testSelect.options[0].selected=true;'>"
             + "<form>"
             + "<select name='testSelect'>"
             + "<option value='testValue'>value</option>"

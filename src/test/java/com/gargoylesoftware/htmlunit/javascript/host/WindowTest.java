@@ -1597,10 +1597,10 @@ public class WindowTest extends WebTestCase {
     public void testOnloadNotAFunction() throws Exception {
 
         final String html = "<html><body><script>"
-        	+ "window.onload = new function() {alert('a')};"
-        	+ "window.onload = undefined;"
-        	+ "alert(window.onload);"
-        	+ "</script></body></html>";
+            + "window.onload = new function() {alert('a')};"
+            + "window.onload = undefined;"
+            + "alert(window.onload);"
+            + "</script></body></html>";
 
         final String[] expectedAlerts = { "a", "undefined" };
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
@@ -1661,7 +1661,8 @@ public class WindowTest extends WebTestCase {
             + "window.detachEvent('onload', test3);"
             + "</script></head>\n"
             + "<body onload='alert(\"onload\")'></body></html>\n";
-        final String[] expectedAlerts = {"true", "false", "true", "false", "test1, param null: false", "test2", "onload"};
+        final String[] expectedAlerts = {"true", "false", "true", "false", 
+            "test1, param null: false", "test2", "onload"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
@@ -2033,7 +2034,11 @@ public class WindowTest extends WebTestCase {
         testOpenWindow_refererHeader(BrowserVersion.NETSCAPE_4_7_9, headerNS);
     }
 
-    private void testOpenWindow_refererHeader(final BrowserVersion browser, final String expectedRefererHeader) throws Exception {
+    /**
+     * @throws Exception If the test fails
+     */
+    private void testOpenWindow_refererHeader(final BrowserVersion browser,
+            final String expectedRefererHeader) throws Exception {
         final String firstContent = "<html><head></head>"
             + "<body>"
             + "<button id='clickme' onClick='window.open(\"http://second\");'>Click me</a>"
@@ -2120,17 +2125,17 @@ public class WindowTest extends WebTestCase {
      */
     public void testEvalScopeLocal() throws Exception {
         final String content = "<html><body><form id='formtest'><input id='element' value='elementValue'/></form>"
-        + "<script> \n"
-        + "var docPatate = 'patate';"
-        + "function test() {\n"
-        + " var f = document.forms['formtest']; \n"
-        + " alert(eval(\"document.forms['formtest'].element.value\")); \n"
-        + " alert(f.element.value); \n"
-        + " alert(eval('f.element.value')); \n"
-        + "}\n"
-        + "test(); \n"
-        + "</script>"
-        + "</body></html>";
+            + "<script> \n"
+            + "var docPatate = 'patate';"
+            + "function test() {\n"
+            + " var f = document.forms['formtest']; \n"
+            + " alert(eval(\"document.forms['formtest'].element.value\")); \n"
+            + " alert(f.element.value); \n"
+            + " alert(eval('f.element.value')); \n"
+            + "}\n"
+            + "test(); \n"
+            + "</script>"
+            + "</body></html>";
 
         final String[] expectedAlerts = {"elementValue", "elementValue", "elementValue"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);

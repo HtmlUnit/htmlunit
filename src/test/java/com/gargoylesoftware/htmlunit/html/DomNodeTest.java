@@ -269,7 +269,8 @@ public class DomNodeTest extends WebTestCase {
     public void testGetAllHtmlChildElementsOrder() throws Exception {
         final String html =
             "<html><body id='0'>\n" +
-            "<span id='I'><span id='I.1'><span id='I.1.a'/><span id='I.1.b'/><span id='I.1.c'/></span><span id='I.2'><span id='I.2.a'/></span></span>\n" +
+            "<span id='I'><span id='I.1'><span id='I.1.a'/><span id='I.1.b'/><span id='I.1.c'/></span>" +
+            "<span id='I.2'><span id='I.2.a'/></span></span>\n" +
             "<span id='II'/>\n" +
             "<span id='III'><span id='III.1'><span id='III.1.a'/></span></span>\n" +
             "</body></html>\n";

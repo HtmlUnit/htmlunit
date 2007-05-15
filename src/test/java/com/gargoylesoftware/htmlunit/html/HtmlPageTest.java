@@ -622,7 +622,8 @@ public class HtmlPageTest extends WebTestCase {
 
         // invalid base url should be ignored
         assertEquals("http://somewhere.com/", page.getFullyQualifiedUrl("http://somewhere.com/"));
-        assertEquals(page.getWebResponse().getUrl().toExternalForm() + "foo.html", page.getFullyQualifiedUrl("foo.html"));
+        assertEquals(page.getWebResponse().getUrl().toExternalForm() + "foo.html",
+                page.getFullyQualifiedUrl("foo.html"));
     }
 
     /**

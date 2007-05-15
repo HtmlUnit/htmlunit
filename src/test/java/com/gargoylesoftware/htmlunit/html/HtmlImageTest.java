@@ -133,7 +133,7 @@ public class HtmlImageTest extends WebTestCase {
 
     /**
      * Tests circle radius of percentage value, Not Yet Implemented
-     * @throws Exception
+     * @throws Exception if the test fails
      */
     public void testUseMapClick_CircleRadiusPercentage() throws Exception {
         if (notYetImplemented()) {

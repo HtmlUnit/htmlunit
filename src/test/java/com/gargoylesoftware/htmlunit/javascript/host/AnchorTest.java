@@ -101,7 +101,8 @@ public class AnchorTest extends WebTestCase {
         
         anchor.click();
         
-        final String[] expectedAlerts = { "http://x/testsite1.html", "testsite1.html", "http://x/testsite2.html", "testsite2.html", "13", "testanchor"};
+        final String[] expectedAlerts = { "http://x/testsite1.html", "testsite1.html",
+            "http://x/testsite2.html", "testsite2.html", "13", "testanchor"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -206,6 +207,9 @@ public class AnchorTest extends WebTestCase {
         assertSame(page1, page2);
     }
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testReadWriteAnchorTarget() throws Exception {
         final String content 
             = "<html>"
@@ -217,6 +221,9 @@ public class AnchorTest extends WebTestCase {
         assertEquals("OK", link.getTargetAttribute());
     }
     
+    /**
+     * @throws Exception If the test fails
+     */
     public void testReadWriteAnchorSearch() throws Exception {
         final String content 
             = "<html>"
@@ -228,6 +235,9 @@ public class AnchorTest extends WebTestCase {
         assertEquals("http://www.gargoylesoftware.com/foo.html?p1=1&p2=2", link.getHrefAttribute());
     }
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testReadWriteAnchorHash() throws Exception {
         final String content 
             = "<html>"
@@ -239,6 +249,9 @@ public class AnchorTest extends WebTestCase {
         assertEquals("http://www.gargoylesoftware.com/foo.html#OK", link.getHrefAttribute());
     }
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testReadWriteAnchorPort() throws Exception {
         final String content 
             = "<html>"

@@ -127,21 +127,22 @@ public class HtmlScriptTest extends WebTestCase {
     /**
      * Verifies that if a script element executes "window.location.href=someotherpage", then subsequent
      * script tags, and any onload handler for the original page do not run.
+     * @throws Exception If the test fails
      */
-   public void testChangingLocationSkipsFurtherScriptsOnPage() throws Exception {
+    public void testChangingLocationSkipsFurtherScriptsOnPage() throws Exception {
 
-       final String firstPage
-           = "<html><head></head>"
-           + "<body onload='alert(\"body onload executing but should be skipped\")'>"
-           + "<script>alert('First script executes')</script>"
-           + "<script>window.location.href='" + URL_SECOND + "'</script>"
-           + "<script>alert('Third script executing but should be skipped')</script>"
-           +"</body></html>";
+        final String firstPage
+            = "<html><head></head>"
+            + "<body onload='alert(\"body onload executing but should be skipped\")'>"
+            + "<script>alert('First script executes')</script>"
+            + "<script>window.location.href='" + URL_SECOND + "'</script>"
+            + "<script>alert('Third script executing but should be skipped')</script>"
+            +"</body></html>";
 
-       final String secondPage
-           = "<html><head></head><body>"
-           + "<script>alert('Second page loading')</script>"
-           + "</body></html>";
+        final String secondPage
+            = "<html><head></head><body>"
+            + "<script>alert('Second page loading')</script>"
+            + "</body></html>";
 
         final WebClient client = new WebClient();
 
@@ -165,7 +166,8 @@ public class HtmlScriptTest extends WebTestCase {
      */
     public void testScriptIsNotRunWhenCloned() throws Exception {
 
-        final String html = "<html><body onload='document.body.cloneNode(true)'><script>alert('a')</script></body></html>";
+        final String html = "<html><body onload='document.body.cloneNode(true)'>" + 
+            "<script>alert('a')</script></body></html>";
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
 
