@@ -60,6 +60,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public abstract class ClickableElement extends StyledElement {
 
@@ -83,7 +84,22 @@ public abstract class ClickableElement extends StyledElement {
      */
     public Page click()
         throws IOException {
+        return click( false, false, false );
+    }
 
+    /**
+     * Simulate clicking this element.
+     *
+     * @param shiftKey true if SHIFT is presssed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     * 
+     * @return The page that occupies this window after this element is
+     * clicked. It may be the same window or it may be a freshly loaded one.
+     * @exception IOException If an IO error occurs
+     */
+    public Page click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+        throws IOException {
         if( this instanceof DisabledElement ) {
             if( ((DisabledElement) this).isDisabled() ) {
                 return getPage();
@@ -100,7 +116,7 @@ public abstract class ClickableElement extends StyledElement {
                 doClickAction(page);
                 stateUpdated = true;
             }
-            final Event event = new Event(this, Event.TYPE_CLICK);
+            final Event event = new Event(this, Event.TYPE_CLICK, shiftKey, ctrlKey, altKey );
             final ScriptResult scriptResult = getPage().runEventHandler(function, event);
             final Page scriptPage = scriptResult.getNewPage();
             if (stateUpdated || Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {

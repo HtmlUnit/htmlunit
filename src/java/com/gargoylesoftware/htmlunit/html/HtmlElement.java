@@ -65,6 +65,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author Mike Gallaher
  * @author Denis N. Antonioli
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public abstract class HtmlElement extends DomNode {
 
@@ -285,6 +286,18 @@ public abstract class HtmlElement extends DomNode {
      * @param keyCode the key you wish to press
      */
     public void keyDown(final int keyCode) {
+        keyDown(keyCode, false, false, false);
+    }
+
+    /**
+     * Simulate pressing a key on this element
+     *
+     * @param keyCode the key you wish to press
+     * @param shiftKey true if SHIFT is presssed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     */
+    public void keyDown(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         if (this instanceof DisabledElement) {
             if (((DisabledElement) this).isDisabled()) {
                 return;
@@ -295,7 +308,7 @@ public abstract class HtmlElement extends DomNode {
         final Function function = getEventHandler("onkeydown");
 
         if (function != null && page.getWebClient().isJavaScriptEnabled()) {
-            final Event event = new Event(this, Event.TYPE_KEY_DOWN, keyCode);
+            final Event event = new Event(this, Event.TYPE_KEY_DOWN, keyCode, shiftKey, ctrlKey, altKey);
             getPage().runEventHandler(function, event);
         }
     }

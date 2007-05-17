@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Brad Murray
+ * @author Ahmed Ashour
  */
 public class Event extends SimpleScriptable {
 
@@ -90,6 +91,10 @@ public class Event extends SimpleScriptable {
     private Object currentTarget_;  // Changes during event capturing and bubbling.
     private String type_;           // The event type.
     private Object keyCode_;        // Key code for a keypress
+    
+    private boolean shiftKey_;
+    private boolean ctrlKey_;
+    private boolean altKey_;
 
     /**
      * Creates a new event instance.
@@ -97,11 +102,27 @@ public class Event extends SimpleScriptable {
      * @param type The event type.
      */
     public Event(final DomNode domNode, final String type) {
+        this(domNode, type, false, false, false);
+    }
+
+    /**
+     * Creates a new event instance.
+     * @param domNode The DOM node that triggered the event.
+     * @param type The event type.
+     * @param shiftKey true if SHIFT is presssed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     */
+    public Event(final DomNode domNode, final String type,
+            final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final Object target = domNode.getScriptObject();
         srcElement_ = target;
         target_ = target;
         currentTarget_ = target;
         type_ = type;
+        shiftKey_ = shiftKey;
+        ctrlKey_ = ctrlKey;
+        altKey_ = altKey;
         keyCode_ = Context.getUndefinedValue();
         setParentScope((SimpleScriptable) target);
         setDomNode(domNode, false);
@@ -114,7 +135,21 @@ public class Event extends SimpleScriptable {
      * @param keyCode The key code associated with the event.
      */
     public Event(final DomNode domNode, final String type, final int keyCode) {
-        this(domNode, type);
+        this(domNode, type, keyCode, false, false, false);
+    }
+
+    /**
+     * Creates a new event instance for a keypress event.
+     * @param domNode the DOM node that triggered the event.
+     * @param type The event type.
+     * @param keyCode The key code associated with the event.
+     * @param shiftKey true if SHIFT is presssed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     */
+    public Event(final DomNode domNode, final String type, final int keyCode,
+            final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        this(domNode, type, shiftKey, ctrlKey, altKey);
         keyCode_ = new Integer(keyCode);
     }
 
@@ -165,6 +200,27 @@ public class Event extends SimpleScriptable {
      */
     public Object jsxGet_keyCode() {
         return keyCode_;
+    }
+
+    /**
+     * @return whether SHIFT has been pressed during this event or not.
+     */
+    public boolean jsxGet_shiftKey() {
+        return shiftKey_;
+    }
+
+    /**
+     * @return whether CTRL has been pressed during this event or not.
+     */
+    public boolean jsxGet_ctrlKey() {
+        return ctrlKey_;
+    }
+
+    /**
+     * @return whether ALT has been pressed during this event or not.
+     */
+    public boolean jsxGet_altKey() {
+        return altKey_;
     }
 
     /**

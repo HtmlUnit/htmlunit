@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -46,6 +47,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.FocusableElement;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -54,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * 
  * @version  $Revision$
  * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
+ * @author Ahmed Ashour
  */
 public class EventTest extends WebTestCase {
 
@@ -189,7 +192,7 @@ public class EventTest extends WebTestCase {
      * Tests that event fires on key press.
      * @throws Exception if the test fails
      */
-    public void testEventOnKeyDown () throws Exception {
+    public void testEventOnKeyDown() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<button type='button' id='clickId'/>\n"
@@ -216,6 +219,74 @@ public class EventTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testEventOnKeyDown_Shift_Ctrl_Alt() throws Exception {
+        testEventOnKeyDown_Shift_Ctrl_Alt( false, false, false, new String[] {"false,false,false"} );
+        testEventOnKeyDown_Shift_Ctrl_Alt( true,  false, false, new String[] {"true,false,false"} );
+        testEventOnKeyDown_Shift_Ctrl_Alt( false, true,  false, new String[] {"false,true,false"} );
+        testEventOnKeyDown_Shift_Ctrl_Alt( false, false, true,  new String[] {"false,false,true"} );
+        testEventOnKeyDown_Shift_Ctrl_Alt( true,  true,  true,  new String[] {"true,true,true"} );
+    }
+
+    private void testEventOnKeyDown_Shift_Ctrl_Alt(final boolean shiftKey,
+            final boolean ctrlKey, final boolean altKey, final String[] expectedAlerts ) throws Exception {
+        final String content
+            = "<html><head></head><body>\n"
+            + "<button type='button' id='clickId'/>\n"
+            + "<script>\n"
+            + "function handler(_e) {\n"
+            + "  var e = _e ? _e : window.event;\n"
+            + "  alert( e.shiftKey + ',' + e.ctrlKey + ',' + e.altKey );\n"
+            + "}\n"
+            + "document.getElementById('clickId').onkeydown = handler;\n"
+            + "</script>\n"
+            + "</body></html>\n";
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts );
+        final ClickableElement element = (ClickableElement) page.getHtmlElementById( "clickId" );
+        element.keyDown(65, shiftKey, ctrlKey, altKey );
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testEventOnClick_Shift_Ctrl_Alt() throws Exception {
+        testEventOnClick_Shift_Ctrl_Alt( false, false, false, new String[] {"false,false,false"} );
+        testEventOnClick_Shift_Ctrl_Alt( true,  false, false, new String[] {"true,false,false"} );
+        testEventOnClick_Shift_Ctrl_Alt( false, true,  false, new String[] {"false,true,false"} );
+        testEventOnClick_Shift_Ctrl_Alt( false, false, true,  new String[] {"false,false,true"} );
+        testEventOnClick_Shift_Ctrl_Alt( true,  true,  true,  new String[] {"true,true,true"} );
+    }
+
+    private void testEventOnClick_Shift_Ctrl_Alt(final boolean shiftKey,
+            final boolean ctrlKey, final boolean altKey, final String[] expectedAlerts ) throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body\n>"
+            + "<form id='form1'>\n"
+            + "    <button name='button' id='button'>Push me</button>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + "function handler(_e) {\n"
+            + "  var e = _e ? _e : window.event;\n"
+            + "  alert( e.shiftKey + ',' + e.ctrlKey + ',' + e.altKey );\n"
+            + "}\n"
+            + "document.getElementById('button').onclick = handler;\n"
+            + "</script>\n"
+            + "</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final HtmlButton button = ( HtmlButton )page.getHtmlElementById( "button" );
+
+        final HtmlPage secondPage = (HtmlPage)button.click( shiftKey, ctrlKey, altKey );
+
+        assertEquals( expectedAlerts, collectedAlerts );
+
+        assertSame( page, secondPage );
+    }
 
     /**
      * @throws Exception if the test fails

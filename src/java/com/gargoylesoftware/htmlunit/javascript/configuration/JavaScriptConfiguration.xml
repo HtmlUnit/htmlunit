@@ -199,6 +199,9 @@
         </property>
         <property name="type" readable="true" writable="false"/>
         <property name="keyCode" readable="true" writable="false"/>
+        <property name="shiftKey" readable="true" writable="false"/>
+        <property name="ctrlKey" readable="true" writable="false"/>
+        <property name="altKey" readable="true" writable="false"/>
     </class>
 
     <class name="FileUpload" extends="HTMLInputElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"

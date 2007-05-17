@@ -7,8 +7,11 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour" id="1168346">
+                JavaScript: Add support for event.shiftKey, event.ctrlKey, and event.altKey.
+            </action>
             <action type="update" dev="asashour" id="1714767">
-                Tolerate URL starting with http:/ and http: in Firefox
+                Tolerate URL starting with http:/ and http: in Firefox.
             </action>
             <action type="update" dev="mguillem">
                 Added IncorrectnessListener to get notified of things that HtmlUnit cope with but that don't respect standards.
@@ -19,8 +22,8 @@
             <action type="update" dev="mguillem">
                 Added ScriptException.printScriptStackTrace to retrieve the stack trace of the script execution.
             </action>
-            <action type="update" dev="asashour">
-                WebClient can now enable/disable cookies support
+            <action type="add" dev="asashour">
+                WebClient can now enable/disable cookies support.
             </action>
             <action type="update" dev="mguillem" id="1201561">
                 JavaScript: allow to set window.onload to something else than a function.
