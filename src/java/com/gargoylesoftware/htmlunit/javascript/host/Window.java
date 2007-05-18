@@ -55,6 +55,7 @@ import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.Assert;
@@ -108,6 +109,7 @@ public class Window extends SimpleScriptable {
     private String status_ = "";
     private HTMLCollection frames_; // has to be a member to have equality (==) working
     private Map eventHandlers_ = new HashMap();
+    private Map prototypes_ = new HashMap(); 
     private final JavaScriptEngine scriptEngine_;
 
     /**
@@ -128,11 +130,21 @@ public class Window extends SimpleScriptable {
     }
 
     /**
-     * Javascript constructor.  This must be declared in every javascript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
+     * Returns the prototype object corresponding to the specified HtmlUnit class inside the window scope.
+     * @param jsClass the class whose prototype is to be returned
+     * @param scope the scope of the requested prototype
+     * @return the prototype object corresponding to the specified class inside the specified scope
      */
-    public void jsConstructor() {
-        // Empty.
+    public Scriptable getPrototype(final Class jsClass) {
+        return (Scriptable) prototypes_.get(jsClass);
+    }
+
+    /**
+     * Sets the prototypes for HtmlUnit host classes
+     * @param map a Map of ({@link Class}, {@link Scriptable})
+     */
+    public void setPrototypes(final Map map) {
+        prototypes_ = map;
     }
 
     /**
@@ -270,8 +282,10 @@ public class Window extends SimpleScriptable {
 
         final Window thisWindow = (Window) scriptable;
 
-        final Popup popup = (Popup) thisWindow.makeJavaScriptObject("Popup");
-        popup.init(thisWindow.getWebWindow());
+        final Popup popup = new Popup();
+        popup.setParentScope(thisWindow);
+        popup.setPrototype(thisWindow.getPrototype(Popup.class));
+        popup.init(thisWindow);
         
         return popup;
     }
@@ -437,15 +451,29 @@ public class Window extends SimpleScriptable {
         webWindow_ = webWindow;
         webWindow_.setScriptObject(this);
 
-        document_ = (Document) makeJavaScriptObject("Document");
+        document_ = new Document();
+        document_.setParentScope(this);
+        document_.setPrototype(getPrototype(Document.class));
         document_.setWindow(this);
+        if (webWindow.getEnclosedPage() instanceof HtmlPage) {
+            document_.setDomNode((DomNode) webWindow.getEnclosedPage());
+        }
 
-        navigator_ = (Navigator)makeJavaScriptObject("Navigator");
+        navigator_ = new Navigator();
         navigator_.setParentScope(this);
-        screen_ = (Screen)makeJavaScriptObject("Screen");
-        history_ = (History)makeJavaScriptObject("History");
+        navigator_.setPrototype(getPrototype(Navigator.class));
 
-        location_ = (Location)makeJavaScriptObject("Location");
+        screen_ = new Screen();
+        screen_.setParentScope(this);
+        screen_.setPrototype(getPrototype(Screen.class));
+
+        history_ = new History();
+        history_.setParentScope(this);
+        history_.setPrototype(getPrototype(History.class));
+
+        location_ = new Location();
+        location_.setParentScope(this);
+        location_.setPrototype(getPrototype(Location.class));
         location_.initialize(this);
     }
 
@@ -544,8 +572,8 @@ public class Window extends SimpleScriptable {
                 throw Context.reportRuntimeError("Failed initializing frame collections: " + e.getMessage());
             }
             final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
-            frames_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
-            Transformer toEnclosedWindow = new Transformer() {
+            frames_ = new HTMLCollection(this);
+            final Transformer toEnclosedWindow = new Transformer() {
                 public Object transform(final Object obj) {
                     return ((BaseFrame) obj).getEnclosedWindow();
                 }
@@ -844,6 +872,12 @@ public class Window extends SimpleScriptable {
      */
     public Object get( final String name, final Scriptable start ) {
 
+        // Hack to make eval work in other window scope when needed
+        // see unit tests. Todo: find a clean way to handle that
+        if ("eval".equals(name) && getStartingScope() != start) {
+            return ((ScriptableObject) start).getAssociatedValue("custom_eval");
+        }
+
         // If the DomNode hasn't been set yet then do it now.
         if( getDomNodeOrNull() == null && document_ != null ) {
             final HtmlPage htmlPage = document_.getHtmlPageOrNull();
@@ -906,7 +940,8 @@ public class Window extends SimpleScriptable {
      */
     public Object jsxFunction_execScript(final String script, final String language) {
         if ("javascript".equalsIgnoreCase(language) || "jscript".equalsIgnoreCase(language)) {
-            jsxFunction_eval(script);
+            custom_eval(script);
+            return null;
         }
         else if ("vbscript".equalsIgnoreCase(language)) {
             getLog().warn("VBScript not supported in Window.execScript().");
@@ -920,12 +955,15 @@ public class Window extends SimpleScriptable {
 
     /**
      * Executes the specified script code in the scope of this window.
+     * This is used only when eval() is called on a Window other than the starting scope
      * @param script some javascript code
      * @return the evaluation result
      */
-    public Object jsxFunction_eval(final String script) {
-        final HtmlPage htmlPage = document_.getHtmlPage();
-        return htmlPage.executeJavaScriptIfPossible(script, "Window.eval()", null).getJavaScriptResult();
+    public Object custom_eval(final String scriptCode) {
+        
+        final Context context = Context.getCurrentContext();
+        final org.mozilla.javascript.Script script = context.compileString(scriptCode, "eval body", 0, null);
+        return script.exec(context, this);
     }
 
     /**

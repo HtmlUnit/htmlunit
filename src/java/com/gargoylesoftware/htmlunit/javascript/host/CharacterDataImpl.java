@@ -46,7 +46,10 @@ import com.gargoylesoftware.htmlunit.html.DomCharacterData;
  * @author David K. Taylor
  * @author Chris Erskine
  */
-public abstract class CharacterDataImpl extends NodeImpl {
+public class CharacterDataImpl extends NodeImpl {
+
+    private static final long serialVersionUID = 5413850371617638797L;
+
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.

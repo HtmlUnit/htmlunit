@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashMap;
@@ -45,7 +46,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.WeakHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -65,7 +65,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
+import com.gargoylesoftware.htmlunit.javascript.host.Image;
+import com.gargoylesoftware.htmlunit.javascript.host.Option;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest;
 
 /**
  * A wrapper for the <a href="http://www.mozilla.org/rhino">Rhino javascript engine</a>
@@ -89,10 +93,6 @@ public class JavaScriptEngine extends ScriptEngine {
 
     private static final ThreadLocal javaScriptRunning_ = new ThreadLocal();
     private static final ContextListener contextListener_;
-    /**
-     * Map of (Window, protypes map).
-     */
-    private final Map prototypesPerWindow_ = new WeakHashMap();
 
     /**
      * Key used to place the scope in which the execution of some javascript code
@@ -132,39 +132,89 @@ public class JavaScriptEngine extends ScriptEngine {
         final WebClient webClient = webWindow.getWebClient();
 
         final Map prototypes = new HashMap();
+        final Map prototypesPerJSName = new HashMap();
         final Context context = Context.enter();
+        final Window window = new Window(this);
         try {
             final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
-            final Window window = (Window) context.initStandardObjects( new Window(this) );
-
+            context.initStandardObjects(window);
+            
             final Iterator it = jsConfig.keySet().iterator();
             while (it.hasNext()) {
                 final String jsClassName = (String) it.next();
                 final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
                 final boolean isWindow = Window.class.getName().equals( config.getLinkedClass().getName() );
-                if (config.isJsObject() && !isWindow) {
+                if (isWindow) {
+                    configurePropertiesAndFunctions(config, window);
+                }
+                else {
                     final Scriptable prototype = configureClass(config, window, jsClassName);
-                    prototypes.put(config.getLinkedClass(), prototype);
+                    if (config.isJsObject()) {
+                        prototypes.put(config.getLinkedClass(), prototype);
+                        
+                        // for FF, place object with prototype property in Window scope
+                        if (!getWebClient().getBrowserVersion().isIE()) {
+                            final Scriptable obj = (Scriptable) config.getLinkedClass().newInstance();
+                            obj.put("prototype", obj, prototype);
+                            obj.setPrototype(prototype);
+                            ScriptableObject.defineProperty(window, 
+                                    config.getClassName(), obj, ScriptableObject.DONTENUM);
+                        }
+                    }
+                    prototypesPerJSName.put(config.getClassName(), prototype);
                 }
             }
 
-            window.initialize(webWindow);
-
-            // configure the prototypes chains
-            for (final Iterator iter = prototypes.values().iterator(); iter.hasNext();) {
-                final Scriptable prototype = (Scriptable) iter.next();
-                Class theClass = prototype.getClass();
-                Scriptable superPrototype = null;
-                while (theClass != null && superPrototype == null) {
-                    theClass = theClass.getSuperclass();
-                    superPrototype = (Scriptable) prototypes.get(theClass);
-                    if (superPrototype != null) {
-                        prototype.setPrototype(superPrototype);
-                    }
+            // once all prototypes have been build, it's possible to configure the chains
+            for (final Iterator iter = prototypesPerJSName.entrySet().iterator(); iter.hasNext();) {
+                final Map.Entry entry = (Map.Entry) iter.next();
+                final String name = (String) entry.getKey();
+                final ClassConfiguration config = jsConfig.getClassConfiguration(name);
+                if (config.getExtendedClass() != null) {
+                    final Scriptable prototype = (Scriptable) entry.getValue();
+                    final Scriptable parentPrototype = (Scriptable) prototypesPerJSName.get(config.getExtendedClass());
+                    prototype.setPrototype(parentPrototype);
                 }
             }
             
-            prototypesPerWindow_.put(window, prototypes);
+            // eval hack (cf unit tests testEvalScopeOtherWindow and testEvalScopeLocal
+            final Class[] evalFnTypes = {String.class};
+            final Member evalFn = Window.class.getMethod("custom_eval", evalFnTypes);
+            final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
+            window.associateValue("custom_eval", jsCustomEval);
+            
+            
+            // configure constructors (TODO: read it from config file)
+            // Option
+            final Scriptable optionPrototype = (Scriptable) prototypesPerJSName.get("Option");
+            final Class[] types = {String.class, String.class, Boolean.TYPE, Boolean.TYPE};
+            final Member optionCtor = Option.class.getMethod("jsConstructor", types);
+            final FunctionObject jsOptionCtor = new FunctionObject("Option", optionCtor, window);
+            jsOptionCtor.addAsConstructor(window, optionPrototype);
+            // Image
+            final Scriptable imagePrototype = (Scriptable) prototypesPerJSName.get("Image");
+            final Member imageCtor = Image.class.getMethod("jsConstructor", null);
+            final FunctionObject jsImageCtor = new FunctionObject("Image", imageCtor, window);
+            jsImageCtor.addAsConstructor(window, imagePrototype);
+            // XMLHttpRequest
+            final Scriptable xhrPrototype = (Scriptable) prototypesPerJSName.get("XMLHttpRequest");
+            if (xhrPrototype != null) {
+                final Member xhrCtor = XMLHttpRequest.class.getConstructor(null);
+                final FunctionObject jsXhrCtor = new FunctionObject("XMLHttpRequest", xhrCtor, window);
+                jsXhrCtor.addAsConstructor(window, xhrPrototype);
+            }
+            // ActiveXObject
+            final Scriptable activeXObjectPrototype = (Scriptable) prototypesPerJSName.get("ActiveXObject");
+            if (activeXObjectPrototype != null) {
+                final Class[] types2 = {Context.class, (new Object[]{}).getClass(), Function.class, Boolean.TYPE};
+                final Member activeXOjbectCtor = ActiveXObject.class.getMethod("jsConstructor", types2);
+                final FunctionObject jsActiveXCtor = new FunctionObject("ActiveXObject", activeXOjbectCtor, window);
+                jsActiveXCtor.addAsConstructor(window, activeXObjectPrototype);
+            }
+            // Popup
+            
+            window.setPrototypes(prototypes);
+            window.initialize(webWindow);
         }
         catch( final Exception e ) {
             getLog().error("Exception while initializing JavaScript for the page", e);
@@ -176,55 +226,51 @@ public class JavaScriptEngine extends ScriptEngine {
     }
 
     /**
-     * Returns the prototype object corresponding to the specified class inside the specified scope.
-     * @param jsClass the class whose prototype is to be returned
-     * @param scope the scope of the requested prototype
-     * @return the prototype object corresponding to the specified class inside the specified scope
-     */
-    Scriptable getPrototype(final Class jsClass, final Window scope) {
-        final Map prototypes = (Map) prototypesPerWindow_.get(scope);
-        if (prototypes != null) {
-            return (Scriptable) prototypes.get(jsClass);
-        }
-        else {
-            return null;
-        }
-    }
-
-    /**
      * Configures the specified class for access via JavaScript.
      * @param config The configuration settings for the class to be configured.
-     * @param scope The scope within which to configure the class.
+     * @param window The scope within which to configure the class.
      * @param name The name under which the class will be available in JavaScript.
      * @throws InstantiationException If the new class cannot be instantiated
      * @throws IllegalAccessException If we don't have access to create the new instance.
      * @throws InvocationTargetException if an exception is thrown during creation of the new object.
      * @return the created prototype
      */
-    private Scriptable configureClass( final ClassConfiguration config, final Scriptable scope, final String name )
+    private Scriptable configureClass( final ClassConfiguration config, final Scriptable window, final String name )
         throws InstantiationException, IllegalAccessException, InvocationTargetException {
 
         final Class jsHostClass = config.getLinkedClass();
-        ScriptableObject.defineClass(scope, jsHostClass);
-        final ScriptableObject prototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, name);
+        final ScriptableObject prototype = (ScriptableObject) jsHostClass.newInstance();
+        prototype.setParentScope(window);
 
+        configurePropertiesAndFunctions(config, prototype);
+        
+        return prototype;
+    }
+
+    /**
+     * Configure properties and functions on the object
+     * @param config the configuration for the object
+     * @param scriptable the object to configure
+     */
+    private void configurePropertiesAndFunctions(final ClassConfiguration config, final ScriptableObject scriptable) {
+        
+        // the properties
         final Iterator propertiesIterator = config.propertyKeys().iterator();
         while (propertiesIterator.hasNext()) {
             final String entryKey = (String) propertiesIterator.next();
             final Method readMethod = config.getPropertyReadMethod(entryKey);
             final Method writeMethod = config.getPropertyWriteMethod(entryKey);
-            prototype.defineProperty(entryKey, null, readMethod, writeMethod, 0);
+            scriptable.defineProperty(entryKey, null, readMethod, writeMethod, 0);
         }
 
+        // the functions
         final Iterator functionsIterator = config.functionKeys().iterator();
         while (functionsIterator.hasNext()) {
             final String entryKey = (String) functionsIterator.next();
             final Method method = config.getFunctionMethod(entryKey);
-            final FunctionObject functionObject = new FunctionObject(entryKey, method, prototype);
-            prototype.defineProperty(entryKey, functionObject, 0);
+            final FunctionObject functionObject = new FunctionObject(entryKey, method, scriptable);
+            scriptable.defineProperty(entryKey, functionObject, 0);
         }
-        
-        return prototype;
     }
 
     /**
@@ -463,13 +509,6 @@ public class JavaScriptEngine extends ScriptEngine {
         public int getContextCount() {
             return contexts_.size();
         }
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    public void release(final WebWindow webWindow){
-        prototypesPerWindow_.remove(webWindow.getScriptObject());
     }
 }
 

@@ -69,10 +69,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @author Chris Erskine
  */
 public class HTMLCollection extends SimpleScriptable implements Function {
-    /**
-     * The name of the js object corresponding to this class as registered by the javascript context
-     */
-    public static final String JS_OBJECT_NAME = "HTMLCollection";
     private static final long serialVersionUID = 4049916048017011764L;
 
     private XPath xpath_;
@@ -88,6 +84,14 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      */
     public HTMLCollection() {
         // nothing
+    }
+
+    /**
+     * Create an instance
+     */
+    public HTMLCollection(final SimpleScriptable parentScope_) {
+        setParentScope(parentScope_);
+        setPrototype(getPrototype(getClass()));
     }
 
     /**
@@ -112,14 +116,6 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         node_ = node;
         xpath_ = xpath;
         transformer_ = transformer;
-    }
-
-    /**
-     * Javascript constructor. This must be declared in every javascript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
-     */
-    public final void jsConstructor() {
-        // Empty.
     }
 
     /**
@@ -238,7 +234,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         }
 
         // See if there are any elements in the element array with the specified name.
-        final HTMLCollection array = (HTMLCollection) currentArray.makeJavaScriptObject(JS_OBJECT_NAME);
+        final HTMLCollection array = new HTMLCollection(currentArray);
         try {
             final String newCondition = "@name = '" + name + "'";
             final String currentXPathExpr = currentArray.xpath_.toString();
@@ -317,7 +313,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/tags.asp">MSDN doc</a>
      */
     public final Object jsxFunction_tags( final String tagName ) {
-        final HTMLCollection array = (HTMLCollection) makeJavaScriptObject(JS_OBJECT_NAME);
+        final HTMLCollection array = new HTMLCollection(this);
         try {
             final String newXPathExpr = xpath_.toString() + "[name() = '" + tagName.toLowerCase() + "']";
             array.init(node_, xpath_.getNavigator().parseXPath(newXPathExpr));

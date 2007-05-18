@@ -147,7 +147,6 @@ public abstract class WebWindowImpl implements WebWindow {
             child.destroyChildren();
             iter.remove();
         }
-        webClient_.getScriptEngine().release(this);
     }
     
     /**

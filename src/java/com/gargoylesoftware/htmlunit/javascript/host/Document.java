@@ -163,7 +163,7 @@ public final class Document extends NodeImpl {
      */
     public Object jsxGet_forms() {
         if (forms_ == null) {
-            forms_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+            forms_ = new HTMLCollection(this);
             try {
                 forms_.init(getHtmlPage(), new HtmlUnitXPath("//form"));
             }
@@ -183,7 +183,7 @@ public final class Document extends NodeImpl {
      */
     public Object jsxGet_links() {
         if (links_ == null) {
-            links_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+            links_ = new HTMLCollection(this);
             try {
                 links_.init(getHtmlPage(),
                         new HtmlUnitXPath("//a[@href] | //area[@href]"));
@@ -205,7 +205,7 @@ public final class Document extends NodeImpl {
      */
     public Object jsxGet_anchors() {
         if (anchors_ == null) {
-            anchors_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+            anchors_ = new HTMLCollection(this);
             try {
                 final String xpath;
                 if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
@@ -228,16 +228,17 @@ public final class Document extends NodeImpl {
      * javascript function "write" may accept a variable number of args.
      * It's not documented by W3C, Mozilla or MSDN but works with Mozilla and IE.
      * @param context The javascript context
-     * @param scriptable The scriptable
+     * @param thisObj The scriptable
      * @param args The arguments passed into the method.
      * @param function The function.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/write.asp">
      * MSDN documentation</a>
      */
     public static void jsxFunction_write(
-        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
+        final Context context, final Scriptable thisObj, final Object[] args,  final Function function ) {
 
-        ((Document) scriptable).write(concatArgsAsString(args));
+        final Document thisAsDocument = getDocument(thisObj);
+        thisAsDocument.write(concatArgsAsString(args));
     }
 
 
@@ -258,17 +259,42 @@ public final class Document extends NodeImpl {
      * javascript function "writeln" may accept a variable number of args.
      * It's not documented by W3C, Mozilla or MSDN but works with Mozilla and IE.
      * @param context The javascript context
-     * @param scriptable The scriptable
+     * @param thisAsDocument The scriptable
      * @param args The arguments passed into the method.
      * @param function The function.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/writeln.asp">
      * MSDN documentation</a>
      */
     public static void jsxFunction_writeln(
-        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
+        final Context context, final Scriptable thisObj, final Object[] args,  final Function function ) {
 
-        ((Document) scriptable).write(concatArgsAsString(args) + "\n");
+        final Document thisAsDocument = getDocument(thisObj);
+        thisAsDocument.write(concatArgsAsString(args) + "\n");
     }
+
+    /**
+     * Gets the document instance.
+     * @param document maybe the prototype when function is used without "this"
+     * @return the current document
+     */
+    private static Document getDocument(final Scriptable thisObj) {
+        // if function is used "detached", then thisObj is the top scope (ie Window), not the real object
+        // cf unit test DocumentTest#testDocumentWrite_AssignedToVar
+        if (thisObj instanceof Document) {
+            return (Document) thisObj;
+        }
+        else {
+            final Window window = getWindow(thisObj);
+            final BrowserVersion browser = window.getWebWindow().getWebClient().getBrowserVersion();
+            if (browser.isIE()) {
+                return window.jsxGet_document();
+            }
+            else {
+                throw Context.reportRuntimeError("Function can't be used detached from document");
+            }
+        }
+    }
+
 
     /**
      * javascript function "write".
@@ -530,7 +556,7 @@ public final class Document extends NodeImpl {
      */
     public Object jsxGet_images() {
         if (images_ == null) {
-            images_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+            images_ = new HTMLCollection(this);
             try {
                 images_.init(getHtmlPage(), new HtmlUnitXPath("//img"));
             }
@@ -572,7 +598,7 @@ public final class Document extends NodeImpl {
      */
     public HTMLCollection jsxGet_all() {
         if (all_ == null) {
-            all_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+            all_ = new HTMLCollection(this);
             try {
                 all_.init(getHtmlPage(), new HtmlUnitXPath("//*"));
             }
@@ -690,8 +716,10 @@ public final class Document extends NodeImpl {
      * @param attributeName the name of the attribute to create
      * @return an attribute with the specified name.
      */
-    public Attribute jsxFunction_createAttribute( final String attributeName ) {
-        final Attribute att = (Attribute) makeJavaScriptObject(Attribute.JS_OBJECT_NAME);
+    public Attribute jsxFunction_createAttribute(final String attributeName) {
+        final Attribute att = new Attribute();
+        att.setPrototype(getPrototype(Attribute.class));
+        att.setParentScope(getWindow());
         att.init(attributeName, null);
         return att;
     }
@@ -771,7 +799,7 @@ public final class Document extends NodeImpl {
      * @return the list of elements
      */
     public Object jsxFunction_getElementsByTagName( final String tagName ) {
-        final HTMLCollection collection = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+        final HTMLCollection collection = new HTMLCollection(this);
         try {
             final HtmlUnitXPath xpath = new HtmlUnitXPath("//*[lower-case(name()) = '" + tagName.toLowerCase() + "']");
             xpath.setFunctionContext(functionContext_);
@@ -795,7 +823,7 @@ public final class Document extends NodeImpl {
      * @return NodeList of elements
      */
     public Object jsxFunction_getElementsByName( final String elementName ) {
-        final HTMLCollection collection = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+        final HTMLCollection collection = new HTMLCollection(this);
         final String exp = "//*[@name='" + elementName + "']";
         try {
             final HtmlUnitXPath xpath = new HtmlUnitXPath(exp);
@@ -817,18 +845,28 @@ public final class Document extends NodeImpl {
      * @param start The scriptable object that was originally queried for this property
      * @return The property.
      */
-    public Object get( final String name, final Scriptable start ) {
+    public Object get( final String name, final Scriptable start) {
+        if ("writeln".equals(name))
+        {
+            System.out.println("links on " + start);
+        }
+        // properties and methods are defined on the prototype
+        if (this == start) {
+            return NOT_FOUND;
+        }
+
+        final Document document = (Document) start;
         // Some calls to get will happen during the initialization of the superclass.
         // At this point, we don't have enough information to do our own initialization
         // so we have to just pass this call through to the superclass.
-        final HtmlPage htmlPage = (HtmlPage)getDomNodeOrNull();
+        final HtmlPage htmlPage = (HtmlPage) document.getDomNodeOrNull();
         if( htmlPage == null ) {
             return super.get(name, start);
         }
 
         // document.xxx allows to retrieve some elements by name like img or form but not input, a, ...
         // TODO: behaviour for iframe seems to differ between IE and Moz
-        final HTMLCollection collection = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+        final HTMLCollection collection = new HTMLCollection(document);
         final String xpathExpr = "//*[(@name = '" + name + "' and (name() = 'img' or name() = 'form'))]";
         try {
             collection.init(htmlPage, new HtmlUnitXPath(xpathExpr));
@@ -975,7 +1013,7 @@ public final class Document extends NodeImpl {
      */
     public Object jsxGet_scripts() {
         if (scripts_ == null) {
-            scripts_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+            scripts_ = new HTMLCollection(this);
             try {
                 scripts_.init(getHtmlPage(), new HtmlUnitXPath("//script"));
             }

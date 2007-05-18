@@ -97,9 +97,6 @@ public class PrototypeTest extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testElementMixins() throws Exception {
-        if( notYetImplemented() ) {
-            return;
-        }
         test( "element_mixins.html", 4, 7 );
     }
 

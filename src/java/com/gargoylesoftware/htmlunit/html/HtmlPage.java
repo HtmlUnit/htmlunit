@@ -725,11 +725,11 @@ public final class HtmlPage extends DomNode implements Page {
         final WebWindow window = getEnclosingWindow();
         getWebClient().pushClearFirstWindow();
 
-        final ScriptEngine engine = getWebClient().getScriptEngine();
-        if( ! getWebClient().isJavaScriptEnabled() || engine == null ) {
+        if (!getWebClient().isJavaScriptEnabled()) {
             return new ScriptResult(null, this);
         }
 
+        final ScriptEngine engine = getWebClient().getScriptEngine();
         final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
 
         WebWindow firstWindow = getWebClient().popFirstWindow();

@@ -243,7 +243,7 @@ public class NodeImpl extends SimpleScriptable {
      */
     public Object jsxGet_childNodes() {
         if (childNodes_ == null) {
-            childNodes_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+            childNodes_ = new HTMLCollection(this);
             try {
                 childNodes_.init(getDomNodeOrDie(), new HtmlUnitXPath("(./* | text())"));
             }

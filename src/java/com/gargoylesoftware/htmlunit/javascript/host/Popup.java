@@ -70,10 +70,14 @@ public class Popup extends SimpleScriptable {
         opened_ = false;
     }
     
-    void init(final WebWindow openerWindow) {
+    void init(final Window openerJSWindow) {
         // build document
-        document_ = (Document) makeJavaScriptObject("Document");
+        
+        document_ = new Document();
+        document_.setPrototype(openerJSWindow.getPrototype(Document.class));
+        document_.setParentScope(this);
 
+        final WebWindow openerWindow = openerJSWindow.getWebWindow();
         // create the "page" associated to the document
         final WebWindow popupPseudoWindow = new PopupPseudoWebWindow(openerWindow.getWebClient());
         // take the WebResponse of the opener (not really correct, but...)

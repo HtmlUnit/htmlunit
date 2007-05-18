@@ -71,26 +71,17 @@ public class HTMLFrameElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFrameName() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection =
-            new MockWebConnection(webClient);
-        final List collectedAlerts = new ArrayList();
 
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final String firstContent
+        final String html
             = "<html><head><title>first</title></head>"
             + "<frameset cols='20%,80%'>"
             + "    <frame id='frame1'>"
             + "    <frame name='Frame2' onload='alert(this.name)' id='frame2'>"
             + "</frameset></html>";
-        final List expectedAlerts = Arrays.asList( new String[]{"Frame2"} );
+        final String[] expectedAlerts = {"Frame2"};
 
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webClient.setWebConnection(webConnection);
-
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
-        assertEquals("first", page.getTitleText());
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }

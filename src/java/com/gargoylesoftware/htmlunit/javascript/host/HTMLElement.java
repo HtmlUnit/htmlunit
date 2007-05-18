@@ -139,7 +139,7 @@ public class HTMLElement extends NodeImpl {
      */
     public HTMLCollection jsxGet_all() {
         if (all_ == null) {
-            all_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+            all_ = new HTMLCollection(this);
             try {
                 all_.init(getDomNodeOrDie(), new HtmlUnitXPath(".//*"));
             }
@@ -170,7 +170,6 @@ public class HTMLElement extends NodeImpl {
         style_ = new Style(this);
     }
 
-
     /**
      * Return the element ID.
      * @return The ID of this element.
@@ -179,16 +178,29 @@ public class HTMLElement extends NodeImpl {
         return getHtmlElementOrDie().getId();
     }
 
-
     /**
      * Set the identifier this element.
-     *
      * @param newId The new identifier of this element.
      */
     public void jsxSet_id( final String newId ) {
         getHtmlElementOrDie().setId( newId );
     }
 
+    /**
+     * Return the element title.
+     * @return The ID of this element.
+     */
+    public String jsxGet_title() {
+        return getHtmlElementOrDie().getAttributeValue("title");
+    }
+
+    /**
+     * Set the title of this element.
+     * @param newTitle The new identifier of this element.
+     */
+    public void jsxSet_title(final String newTitle) {
+        getHtmlElementOrDie().setAttributeValue("title", newTitle);
+    }
 
     /**
      * Return true if this element is disabled.
@@ -238,6 +250,11 @@ public class HTMLElement extends NodeImpl {
      * @return The attribute value
      */
     public Object get( final String name, final Scriptable start ) {
+        // properties and methods are defined on the prototype => only prototype can investigate if nothing found
+        if (this == start) {
+            return super.get(name, start);
+        }
+
         Object result = super.get( name, start );
         if ( result == NOT_FOUND ) {
             final HtmlElement htmlElement = getHtmlElementOrNull();
@@ -299,7 +316,9 @@ public class HTMLElement extends NodeImpl {
      * @return the attribute node for the specified attribute.
      */
     public Object jsxFunction_getAttributeNode(final String attributeName) {
-        final Attribute att = (Attribute) makeJavaScriptObject(Attribute.JS_OBJECT_NAME);
+        final Attribute att = new Attribute();
+        att.setPrototype(getPrototype(Attribute.class));
+        att.setParentScope(getWindow());
         att.init(attributeName, getHtmlElementOrDie());
         return att;
     }
@@ -325,7 +344,7 @@ public class HTMLElement extends NodeImpl {
      */
     public Object jsxFunction_getElementsByTagName( final String tagName ) {
         final HtmlElement element = (HtmlElement) getDomNodeOrDie();
-        final HTMLCollection collection = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+        final HTMLCollection collection = new HTMLCollection(this);
         try {
             final String xpath = "//" + tagName.toLowerCase();
             collection.init(element, new HtmlUnitXPath(xpath, HtmlUnitXPath.buildSubtreeNavigator(element)));
@@ -1045,7 +1064,7 @@ public class HTMLElement extends NodeImpl {
      */
     public Object jsxGet_children() {
         final DomNode element = getDomNodeOrDie();
-        final HTMLCollection children = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+        final HTMLCollection children = new HTMLCollection(this);
 
         try {
             final XPath xpath = new HtmlUnitXPath("./*", HtmlUnitXPath.buildSubtreeNavigator(element));

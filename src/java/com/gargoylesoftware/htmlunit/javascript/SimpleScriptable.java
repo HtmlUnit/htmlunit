@@ -43,7 +43,6 @@ import org.apache.commons.collections.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
-import org.mozilla.javascript.FunctionObject;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
@@ -101,26 +100,6 @@ public class SimpleScriptable extends ScriptableObject {
         }
 
         return javaClassName.substring(index+1);
-    }
-
-
-    /**
-     * Create a new javascript object
-     * @param className The class name of the new object
-     * @return The new object
-     */
-    public SimpleScriptable makeJavaScriptObject( final String className ) {
-        final Context c = Context.enter();
-        try {
-            final SimpleScriptable scriptable = (SimpleScriptable) c.newObject(this, className);
-            return scriptable;
-        }
-        catch( final Exception e ) {
-            throw Context.throwAsScriptRuntimeEx(e);
-        }
-        finally {
-            Context.exit();
-        }
     }
 
     /**
@@ -209,70 +188,6 @@ public class SimpleScriptable extends ScriptableObject {
         setDomNode(htmlElement);
     }
 
-
-    /**
-     * Return the specified property or NOT_FOUND if it could not be found.  This could also be 
-     * a call to a function so check it out as a function also.
-     * @param name The name of the property
-     * @param start The scriptable object that was originally queried for this property
-     * @return The property.
-     */
-    public Object get( final String name, final Scriptable start ) {
-        // Hack to make eval work in other window scope when needed
-        // see unit tests. Todo: find a clean way to handle that
-        if ("eval".equals(name) && start == getStartingScope()) {
-            return super.get(name, start); // will return native eval function
-        }
-        
-        // Some calls to get will happen during the initialization of the
-        // superclass.  At this point, we don't have enough information to
-        // do our own initialization so we have to just pass this call
-        // through to the superclass.
-        if( domNode_ == null && ! isInitialized_) {
-            final Object result = super.get(name, start);
-            // this may help to find which properties htmlunit should impement
-            if (result == NOT_FOUND) {
-                getLog().debug("Property \"" + name + "\" of " + start + " not defined as pure js property");
-            }
-            return result;
-        }
-
-        final JavaScriptConfiguration configuration = getJavaScriptConfiguration();
-        final Class clazz = getClass();
-        final Object result;
-
-        final Method propertyMethod = configuration.getPropertyReadMethod(clazz, name);
-        final Method functionMethod = configuration.getFunctionMethod(clazz, name);
-        if (propertyMethod != null && functionMethod != null) {
-            throw new IllegalStateException("Name is both a property and a function: name=["
-                + name + "] class=[" + clazz.getName() + "]");
-        }
-        if (propertyMethod == null) {
-            if (functionMethod == null) {
-                result = super.get(name, start);
-            }
-            else {
-                result = new FunctionObject(name, functionMethod, this);
-            }
-        }
-        else {
-            try {
-                result = propertyMethod.invoke(this, new Object[0]);
-            }
-            catch (final Exception e) {
-                throw Context.throwAsScriptRuntimeEx(e);
-            }
-        }
-
-        // this may help to find which properties htmlunit should impement
-        if (result == NOT_FOUND) {
-            getLog().debug("Property \"" + name + "\" of " + start + " not defined as fixed property");
-        }
-
-        return result;
-    }
-
-
     /**
      * Set the specified property
      * @param name The name of the property
@@ -280,6 +195,8 @@ public class SimpleScriptable extends ScriptableObject {
      * @param newValue The new value
      */
     public void put( final String name, final Scriptable start, Object newValue ) {
+        // TODO: should be removed!!!
+
         // Some calls to put will happen during the initialization of the superclass.
         // At this point, we don't have enough information to do our own initialization
         // so we have to just pass this call through to the superclass.
@@ -390,52 +307,55 @@ public class SimpleScriptable extends ScriptableObject {
      */
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
 
-        Context.enter();
-
-        try {
-            // Get the JS class name for the specified DOM node.
-            // Walk up the inheritance chain if necessary.
-            Class javaScriptClass = null;
-            for( Class c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass() ) {
-                javaScriptClass = (Class) JavaScriptConfiguration.getHtmlJavaScriptMapping().get( c );
-            }
-
-            final SimpleScriptable scriptable;
-            if (javaScriptClass == null) {
-                // We don't have a specific subclass for this element so create something generic.
-                scriptable = new HTMLElement();
-                getLog().debug("No javascript class found for element <"+domNode.getNodeName()+">. Using HTMLElement");
-            }
-            else {
-                try {
-                    scriptable = (SimpleScriptable) javaScriptClass.newInstance();
-                }
-                catch (final Exception e) {
-                    throw Context.throwAsScriptRuntimeEx(e);
-                }
-            }
-            // parent scope needs to be set to the enclosing "window" (no simple unit test found to illustrate the
-            // necessity) if navigation has continued, the window may contain an other page as the one to which
-            // the current node belongs to.
-            // See test JavaScriptEngineTest#testScopeInInactivePage
-            if (domNode.getPage().getEnclosingWindow().getEnclosedPage() == domNode.getPage()) {
-                scriptable.setParentScope(getWindow());
-            }
-            else {
-                scriptable.setParentScope(ScriptableObject.getTopLevelScope(
-                        (Scriptable) domNode.getPage().getScriptObject()));
-            }
-            
-            scriptable.setPrototype(getWindow().getJavaScriptEngine().getPrototype(javaScriptClass, getWindow()));
-
-            scriptable.setDomNode(domNode);
-
-            return scriptable;
+        // Get the JS class name for the specified DOM node.
+        // Walk up the inheritance chain if necessary.
+        Class javaScriptClass = null;
+        for( Class c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass() ) {
+            javaScriptClass = (Class) JavaScriptConfiguration.getHtmlJavaScriptMapping().get( c );
         }
-        finally {
-            Context.exit();
+
+        final SimpleScriptable scriptable;
+        if (javaScriptClass == null) {
+            // We don't have a specific subclass for this element so create something generic.
+            scriptable = new HTMLElement();
+            getLog().debug("No javascript class found for element <"+domNode.getNodeName()+">. Using HTMLElement");
         }
+        else {
+            try {
+                scriptable = (SimpleScriptable) javaScriptClass.newInstance();
+            }
+            catch (final Exception e) {
+                throw Context.throwAsScriptRuntimeEx(e);
+            }
+        }
+        // parent scope needs to be set to the enclosing "window" (no simple unit test found to illustrate the
+        // necessity) if navigation has continued, the window may contain an other page as the one to which
+        // the current node belongs to.
+        // See test JavaScriptEngineTest#testScopeInInactivePage
+        if (domNode.getPage().getEnclosingWindow().getEnclosedPage() == domNode.getPage()) {
+            scriptable.setParentScope(getWindow());
+        }
+        else {
+            scriptable.setParentScope(ScriptableObject.getTopLevelScope(
+                    (Scriptable) domNode.getPage().getScriptObject()));
+        }
+        
+        scriptable.setPrototype(getPrototype(javaScriptClass));
+        scriptable.setDomNode(domNode);
+
+        return scriptable;
     }
+
+
+    /**
+     * Get the prototype object for the given host class
+     * @param javaScriptClass the host class
+     * @return the prototype
+     */
+    protected Scriptable getPrototype(final Class javaScriptClass) {
+        return getWindow().getPrototype(javaScriptClass);
+    }
+
 
 
     /**
@@ -566,22 +486,5 @@ public class SimpleScriptable extends ScriptableObject {
      */
     protected Scriptable getStartingScope() {
         return (Scriptable) Context.getCurrentContext().getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public boolean has(final String name, final Scriptable start) {
-        final SimpleScriptable simpleScriptable = (SimpleScriptable) start;
-
-        final JavaScriptConfiguration configuration = simpleScriptable.getJavaScriptConfiguration();
-        // getters and setters are defined on prototypes
-        if ((start == start.getPrototype() || simpleScriptable.getDomNodeOrNull() != null)
-                && configuration.getPropertyReadMethod(getClass(), name) != null) {
-            return true;
-        }
-        else {
-            return super.has(name, start);
-        }
     }
 }

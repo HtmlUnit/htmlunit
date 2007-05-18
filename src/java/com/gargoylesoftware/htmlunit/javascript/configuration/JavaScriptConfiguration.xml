@@ -34,7 +34,7 @@
         <property name="host" readable="true" writable="true"/>
         <property name="hostname" readable="true" writable="true"/>
         <property name="protocol" readable="true" writable="true"/>
-        <property name="name" notImplemented="true" readable="true" writable="true">
+        <property name="name" readable="true" writable="true">
         </property>
         <property name="tabindex" notImplemented="true" readable="true" writable="true">
         </property>
@@ -67,9 +67,6 @@
     <class name="Button" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.Button"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlButton"/>
 
-    <class name="ButtonInput" extends="HTMLInputElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
-        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlButtonInput"/>
-
     <class name="CharacterDataImpl" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl"
         JSObject="false">
         <property name="data" readable="true" writable="true"/>
@@ -82,9 +79,6 @@
         <function name="replaceData"/>
         <function name="substringData"/>
     </class>
-
-    <class name="Checkbox" extends="HTMLInputElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
-        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput"/>
 
     <class name="Document" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Document"
         JSObject="true">
@@ -180,8 +174,7 @@
         <function name="writeln"/>
     </class>
 
-    <class name="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.Event"
-        JSObject="false">
+    <class name="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.Event" JSObject="true">
         <doclink
             url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event"
             descr="W3C Document Object Model (DOM) Level 2"/>
@@ -202,11 +195,6 @@
         <property name="shiftKey" readable="true" writable="false"/>
         <property name="ctrlKey" readable="true" writable="false"/>
         <property name="altKey" readable="true" writable="false"/>
-    </class>
-
-    <class name="FileUpload" extends="HTMLInputElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
-        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFileInput">
-        <!-- NOT FINISHED -->
     </class>
 
     <class name="FocusableHostElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"
@@ -280,6 +268,7 @@
             <browser name="Netscape" min-version="3"/>
         </property>
         <property name="src" readable="true" writable="true"/>
+        <property name="name" readable="true" writable="true"/>
         <property name="contentDocument" readable="true" writable="false">
             <browser name="Netscape"/>
         </property>
@@ -294,11 +283,6 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrameSet">
         <property name="rows" readable="true" writable="true"/>
         <property name="cols" readable="true" writable="true"/>
-    </class>
-
-    <class name="Hidden" extends="HTMLInputElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
-        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHiddenInput">
-        <!-- NOT FINISHED -->
     </class>
 
     <class name="History" classname="com.gargoylesoftware.htmlunit.javascript.host.History"
@@ -442,7 +426,7 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </property>
-        <property name="title" notImplemented="true" readable="true" writable="true">
+        <property name="title" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </property>
@@ -494,13 +478,8 @@
         <property name="src" readable="true" writable="true"/>
     </class>
 
-    <class name="ImageInput" extends="HTMLInputElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
-        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImageInput">
-        <!-- NOT FINISHED -->
-    </class>
-
     <class name="HTMLInputElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
-        JSObject="true">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInput">
         <property name="checked" readable="true" writable="true"/>
         <property name="defaultChecked" readable="true" writable="true">
             <doclink
@@ -616,11 +595,6 @@
         <property name="value" readable="true" writable="true"/>
     </class>
 
-    <class name="Password" extends="HTMLInputElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
-        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlPasswordInput">
-        <!-- NOT FINISHED -->
-    </class>
-
     <class name="Popup" classname="com.gargoylesoftware.htmlunit.javascript.host.Popup" JSObject="true">
       <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/popup.asp" descr="MSDN documentation"/>
       <browser name="Microsoft Internet Explorer"/>
@@ -628,11 +602,6 @@
       <property name="isOpen" readable="true" writable="false"/>
       <function name="hide"/>
       <function name="show"/>
-    </class>
-
-    <class name="Radio" extends="HTMLInputElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
-        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput">
-        <!-- NOT FINISHED -->
     </class>
 
     <class name="RowContainer" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.RowContainer"
@@ -656,11 +625,6 @@
                 descr="W3C Document Object Model (DOM) Level 2"/>
         </function>
         <function name="moveRow"/>
-    </class>
-
-    <class name="Reset" extends="HTMLInputElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
-        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlResetInput">
-        <!-- NOT FINISHED -->
     </class>
 
     <class name="Screen" classname="com.gargoylesoftware.htmlunit.javascript.host.Screen" JSObject="true">
@@ -718,14 +682,6 @@
         <property name="behavior" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
-    </class>
-
-    <class name="Submit" extends="HTMLInputElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
-        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSubmitInput">
-        <!-- NOT FINISHED -->
-<!-- 
-        <property name="length" readable="true" writable="false"/>
- -->
     </class>
 
     <class name="Table" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.Table"
@@ -824,11 +780,6 @@
         </function>
     </class>
 
-    <class name="Text" extends="HTMLInputElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
-        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextInput">
-        <!-- NOT FINISHED -->
-    </class>
-
     <class name="HTMLTextAreaElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTextAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextArea">
         <!-- NOT FINISHED -->
@@ -924,7 +875,6 @@
                     descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
-        <function name="eval"/>
         <function name="focus"/>
         <function name="moveBy"/>
         <function name="moveTo"/>

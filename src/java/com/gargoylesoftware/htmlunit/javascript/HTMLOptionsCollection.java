@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 
 /**
  * This is the array returned by the "options" property of Select.
@@ -66,14 +67,13 @@ public class HTMLOptionsCollection extends SimpleScriptable {
     public HTMLOptionsCollection() {
     }
 
-
     /**
-     * Javascript constructor.  This must be declared in every javascript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
+     * Create an instance
      */
-    public final void jsConstructor() {
+    public HTMLOptionsCollection(final SimpleScriptable parentScope_) {
+        setParentScope(parentScope_);
+        setPrototype(getPrototype(getClass()));
     }
-
 
     /**
      * Initialize this object
@@ -141,7 +141,7 @@ public class HTMLOptionsCollection extends SimpleScriptable {
                 // If the name was NOT_FOUND on the prototype, then just drop through
                 // to search on the Select for IE only
                 final HTMLSelectElement select = (HTMLSelectElement) htmlSelect_.getScriptObject();
-                object = select.get( name, start );
+                object = ScriptableObject.getProperty(select, name);
             }
         }
         return object;

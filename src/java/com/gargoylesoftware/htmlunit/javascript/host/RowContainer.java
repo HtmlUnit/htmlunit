@@ -80,7 +80,7 @@ public class RowContainer extends HTMLElement {
      */
     public Object jsxGet_rows() {
         if (rows_ == null) {
-            rows_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+            rows_ = new HTMLCollection(this);
             try {
                 rows_.init(getDomNodeOrDie(), new HtmlUnitXPath(getXPathRows()));
             }

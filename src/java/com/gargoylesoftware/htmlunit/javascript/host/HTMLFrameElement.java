@@ -57,15 +57,6 @@ public class HTMLFrameElement extends HTMLElement {
      */
     public HTMLFrameElement() { }
 
-
-    /**
-     * Javascript constructor.  This must be declared in every javascript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
-     */
-    public final void jsConstructor() {
-    }
-
-
     /**
      * Return the value of url loaded in the frame
      * @return The value of this attribute.
@@ -73,7 +64,6 @@ public class HTMLFrameElement extends HTMLElement {
     public String jsxGet_src() {
         return getFrame().getSrcAttribute();
     }
-
 
     /**
      * Returns the document the frame contains, if any
@@ -103,6 +93,22 @@ public class HTMLFrameElement extends HTMLElement {
      */
     public void jsxSet_src(final String src) {
         getFrame().setSrcAttribute(src);
+    }
+
+    /**
+     * Return the value of the name attribute
+     * @return The value of this attribute.
+     */
+    public String jsxGet_name() {
+        return getFrame().getNameAttribute();
+    }
+
+    /**
+     * Set the value of the name attribute.
+     * @param name The new value.
+     */
+    public void jsxSet_name(final String name) {
+        getFrame().setNameAttribute(name);
     }
 
     private BaseFrame getFrame() {

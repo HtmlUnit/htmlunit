@@ -113,6 +113,7 @@ public class Style extends SimpleScriptable {
      */
     Style(final HTMLElement htmlElement) {
         setParentScope(htmlElement.getParentScope());
+        setPrototype(getPrototype(Style.class));
         initialize(htmlElement);
     }
 

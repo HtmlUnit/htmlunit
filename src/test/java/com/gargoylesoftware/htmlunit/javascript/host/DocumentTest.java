@@ -167,22 +167,39 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDocumentWrite_AssignedToVar() throws Exception {
+        // IE accept use of detached function 
+        final String[] expectedAlertsIE = {};
+        testDocumentWrite_AssignedToVar(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
+
+        // but FF doesn't 
+        final String[] expectedAlertsFF = {"exception occured"};
+        testDocumentWrite_AssignedToVar(BrowserVersion.MOZILLA_1_0, expectedAlertsFF);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    private void testDocumentWrite_AssignedToVar(final BrowserVersion browserVersion, final String[] expectedAlerts)
+            throws Exception {
+
         final String content
             = "<html><head><title>foo</title><script>\n"
             + "function doTheFoo() {\n"
-            + "var d=document.writeln\n"
+            + "var d = document.writeln\n"
+            + "try {\n"
             + "d('foo')\n"
+            + "} catch (e) { alert('exception occured') }\n"
             + "document.writeln('foo')\n"
             + "}"
             + "</script></head><body onload='doTheFoo()'>\n"
             + "<p>hello world</p>"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List expectedAlerts = Collections.EMPTY_LIST;
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(browserVersion, content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
 
         assertEquals( expectedAlerts, collectedAlerts );
     }

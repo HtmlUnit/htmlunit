@@ -126,7 +126,7 @@ public class Table extends RowContainer {
      */
     public Object jsxGet_tBodies() {
         if (tBodies_ == null) {
-            tBodies_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+            tBodies_ = new HTMLCollection(this);
             try {
                 tBodies_.init(getDomNodeOrDie(), new HtmlUnitXPath("./tbody"));
             }

@@ -121,10 +121,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnloadJavascriptFunction() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        
         final String content
             = "<html><head><title>foo</title><script>"
             + "function onload() {alert('foo');}"
@@ -1141,13 +1137,6 @@ public class JavaScriptEngineTest extends WebTestCase {
          */
         public void initialize(final WebWindow window) {
             delegate_.initialize(window);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        public void release(final WebWindow webWindow) {
-            delegate_.release(webWindow);
         }
 
         /** @inheritDoc ScriptEngine#execute(HtmlPage,String,String,HtmlElement) */

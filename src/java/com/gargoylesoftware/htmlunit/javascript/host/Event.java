@@ -125,6 +125,7 @@ public class Event extends SimpleScriptable {
         altKey_ = altKey;
         keyCode_ = Context.getUndefinedValue();
         setParentScope((SimpleScriptable) target);
+        setPrototype(getPrototype(getClass()));
         setDomNode(domNode, false);
     }
 
@@ -151,6 +152,12 @@ public class Event extends SimpleScriptable {
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         this(domNode, type, shiftKey, ctrlKey, altKey);
         keyCode_ = new Integer(keyCode);
+    }
+
+    /**
+     * Used to build the prototype
+     */
+    public Event() {
     }
 
     /**

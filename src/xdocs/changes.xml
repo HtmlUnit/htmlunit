@@ -7,6 +7,18 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1609944">
+                JavaScript: allow function named onload.
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: made equality tests on functions working.
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: don't allow usage of write(ln) detached from document object when simulating Firefox.
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: large internal refactoring for a better Rhino usage.
+            </action>
             <action type="add" dev="asashour" id="1168346">
                 JavaScript: Add support for event.shiftKey, event.ctrlKey, and event.altKey.
             </action>

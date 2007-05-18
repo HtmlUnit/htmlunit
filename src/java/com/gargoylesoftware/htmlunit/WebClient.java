@@ -1101,7 +1101,6 @@ public class WebClient {
     public void deregisterWebWindow( final WebWindow webWindow ) {
         Assert.notNull("webWindow", webWindow);
         webWindows_.remove(webWindow);
-        scriptEngine_.release(webWindow);
 
         if( getCurrentWindow() == webWindow ) {
             if( webWindows_.size() == 0 ) {

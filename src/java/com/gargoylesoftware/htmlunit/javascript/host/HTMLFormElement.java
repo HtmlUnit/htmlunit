@@ -117,7 +117,7 @@ public class HTMLFormElement extends HTMLElement {
     public HTMLCollection jsxGet_elements() {
         if (elements_ == null) {
             final HtmlForm htmlForm = getHtmlForm();
-            elements_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+            elements_ = new HTMLCollection(this);
             try {
                 final XPath xpath = new HtmlUnitXPath("//*[(name() = 'input' or name() = 'button'"
                         + " or name() = 'select' or name() = 'textarea')]",
@@ -265,7 +265,15 @@ public class HTMLFormElement extends HTMLElement {
      * @return The property.
      */
     public Object get( final String name, final Scriptable start ) {
-        return ((HTMLFormElement) start).get(name);
+        if (this == start) {
+            return super.get(name, start);
+        }
+        // first look at form elements by name/id
+        Object response = ((HTMLFormElement) start).get(name);
+        if (response == NOT_FOUND) {
+            response = super.get(name, start);
+        }
+        return response;
     }
 
     /**
@@ -276,7 +284,7 @@ public class HTMLFormElement extends HTMLElement {
     Object get(final String name) {
         // Try to get the element or elements specified from the form element array
         // (except input type="image" that can't be accessed this way)
-        final HTMLCollection elements = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+        final HTMLCollection elements = new HTMLCollection(this);
         final HtmlForm htmlForm = getHtmlForm();
         try {
             final XPath xpath = new HtmlUnitXPath("//*[(@name = '" + name + "' or @id = '" + name + "')"

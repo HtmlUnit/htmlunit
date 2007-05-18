@@ -90,7 +90,7 @@ public class TableRow extends HTMLElement {
      */
     public Object jsxGet_cells() {
         if (cells_ == null) {
-            cells_ = (HTMLCollection) makeJavaScriptObject(HTMLCollection.JS_OBJECT_NAME);
+            cells_ = new HTMLCollection(this);
             try {
                 cells_.init(getDomNodeOrDie(), new HtmlUnitXPath("./td|th"));
             }

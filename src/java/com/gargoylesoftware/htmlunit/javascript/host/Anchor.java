@@ -93,6 +93,23 @@ public class Anchor extends FocusableHostElement {
     }
 
     /**
+     * Set the name property.
+     * @param name name attribute value.
+     */
+    public void jsxSet_name(final String name) {
+        getHtmlElementOrDie().setAttributeValue("name", name);
+    }
+
+    /**
+     * Return the value of the name property of this link.
+     * @return The name property.
+     * @throws Exception If an error occurs.
+     */
+    public String jsxGet_name() throws Exception {
+        return getHtmlElementOrDie().getAttributeValue("name");
+    }
+
+    /**
      * set the target property of this link.
      * @param target target attribute value.
      */

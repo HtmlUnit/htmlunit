@@ -54,12 +54,6 @@ public class Attribute extends SimpleScriptable {
     private static final long serialVersionUID = 3256441425892750900L;
 
     /**
-     * The name of the JavaScript object corresponding to this class as registered
-     * by the JavaScript context.
-     */
-    public static final String JS_OBJECT_NAME = "Attribute";
-
-    /**
      * The name of this attribute.
      */
     private String name_;

@@ -2148,10 +2148,6 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testFunctionEquality() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         final String content = "<html><body>"
             + "<script>"
             + "alert(window.focus == window.focus)"
