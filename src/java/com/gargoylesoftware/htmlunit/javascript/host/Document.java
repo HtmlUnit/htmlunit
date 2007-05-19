@@ -259,7 +259,7 @@ public final class Document extends NodeImpl {
      * javascript function "writeln" may accept a variable number of args.
      * It's not documented by W3C, Mozilla or MSDN but works with Mozilla and IE.
      * @param context The javascript context
-     * @param thisAsDocument The scriptable
+     * @param thisObj The scriptable
      * @param args The arguments passed into the method.
      * @param function The function.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/writeln.asp">
@@ -846,8 +846,7 @@ public final class Document extends NodeImpl {
      * @return The property.
      */
     public Object get( final String name, final Scriptable start) {
-        if ("writeln".equals(name))
-        {
+        if ("writeln".equals(name)) {
             System.out.println("links on " + start);
         }
         // properties and methods are defined on the prototype

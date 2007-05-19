@@ -132,7 +132,6 @@ public class Window extends SimpleScriptable {
     /**
      * Returns the prototype object corresponding to the specified HtmlUnit class inside the window scope.
      * @param jsClass the class whose prototype is to be returned
-     * @param scope the scope of the requested prototype
      * @return the prototype object corresponding to the specified class inside the specified scope
      */
     public Scriptable getPrototype(final Class jsClass) {
@@ -956,7 +955,7 @@ public class Window extends SimpleScriptable {
     /**
      * Executes the specified script code in the scope of this window.
      * This is used only when eval() is called on a Window other than the starting scope
-     * @param script some javascript code
+     * @param scriptCode some javascript code
      * @return the evaluation result
      */
     public Object custom_eval(final String scriptCode) {

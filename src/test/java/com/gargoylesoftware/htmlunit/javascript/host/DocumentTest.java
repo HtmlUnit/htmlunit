@@ -180,7 +180,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void testDocumentWrite_AssignedToVar(final BrowserVersion browserVersion, final String[] expectedAlerts)
-            throws Exception {
+        throws Exception {
 
         final String content
             = "<html><head><title>foo</title><script>\n"

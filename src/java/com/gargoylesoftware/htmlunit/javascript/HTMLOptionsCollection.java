@@ -69,9 +69,10 @@ public class HTMLOptionsCollection extends SimpleScriptable {
 
     /**
      * Create an instance
+     * @param parentScope parent scope
      */
-    public HTMLOptionsCollection(final SimpleScriptable parentScope_) {
-        setParentScope(parentScope_);
+    public HTMLOptionsCollection(final SimpleScriptable parentScope) {
+        setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
     }
 

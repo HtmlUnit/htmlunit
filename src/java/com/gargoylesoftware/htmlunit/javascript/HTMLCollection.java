@@ -88,9 +88,10 @@ public class HTMLCollection extends SimpleScriptable implements Function {
 
     /**
      * Create an instance
+     * @param parentScope parent scope
      */
-    public HTMLCollection(final SimpleScriptable parentScope_) {
-        setParentScope(parentScope_);
+    public HTMLCollection(final SimpleScriptable parentScope) {
+        setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
     }
 
