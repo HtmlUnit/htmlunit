@@ -608,7 +608,6 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String html
             = "<html><head><title>foo</title>"
             + "<script language='javascript'><!-- alert(1);</script>" 
-            + "alert(2);</script>"
             + "</head>\n"
             + "<body></body></html>";
 
