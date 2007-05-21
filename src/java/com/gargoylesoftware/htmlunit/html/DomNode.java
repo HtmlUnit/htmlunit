@@ -75,6 +75,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
  * @author Marc Guillemot
  * @author Denis N. Antonioli
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public abstract class DomNode implements Cloneable {
 
@@ -816,7 +817,7 @@ public abstract class DomNode implements Cloneable {
      * below this one.
      * @return The iterator.
      */
-    public DescendantElementsIterator getAllHtmlChildElements() {
+    public Iterator getAllHtmlChildElements() {
         return new DescendantElementsIterator();
     }
 

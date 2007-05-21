@@ -310,7 +310,7 @@ public class HtmlForm extends ClickableElement {
 
         final List submittableElements = new ArrayList();
 
-        final DescendantElementsIterator iterator = getAllHtmlChildElements();
+        final Iterator iterator = getAllHtmlChildElements();
         while( iterator.hasNext() ) {
             final HtmlElement element = ( HtmlElement )iterator.next();
             if( isSubmittable(element, submitElement) ) {
@@ -424,9 +424,9 @@ public class HtmlForm extends ClickableElement {
         throws
             ElementNotFoundException {
 
-        final DescendantElementsIterator iterator = getAllHtmlChildElements();
+        final Iterator iterator = getAllHtmlChildElements();
         while( iterator.hasNext() ) {
-            final HtmlElement element = iterator.nextElement();
+            final HtmlElement element = (HtmlElement)iterator.next();
 
             if( element instanceof HtmlRadioButtonInput
                     && element.getAttributeValue("name").equals( name ) ) {
@@ -506,7 +506,7 @@ public class HtmlForm extends ClickableElement {
 
         final List results = new ArrayList();
 
-        final DescendantElementsIterator iterator = getAllHtmlChildElements();
+        final Iterator iterator = getAllHtmlChildElements();
         while( iterator.hasNext() ) {
             final HtmlElement element = ( HtmlElement )iterator.next();
             if( element instanceof HtmlRadioButtonInput
@@ -541,9 +541,9 @@ public class HtmlForm extends ClickableElement {
         //radios also in the case where the specified one is not found
         final HtmlInput inputToSelect = getRadioButtonInput( name, value );
 
-        final DescendantElementsIterator iterator = getAllHtmlChildElements();
+        final Iterator iterator = getAllHtmlChildElements();
         while( iterator.hasNext() ) {
-            final HtmlElement element = iterator.nextElement();
+            final HtmlElement element = (HtmlElement)iterator.next();
             if( element instanceof HtmlRadioButtonInput
                      && element.getAttributeValue("name").equals( name ) ) {
 
@@ -605,9 +605,9 @@ public class HtmlForm extends ClickableElement {
 
         Assert.notNull("name", name);
 
-        final DescendantElementsIterator iterator = getAllHtmlChildElements();
+        final Iterator iterator = getAllHtmlChildElements();
         while( iterator.hasNext() ) {
-            final HtmlElement element = iterator.nextElement();
+            final HtmlElement element = (HtmlElement)iterator.next();
             if( element instanceof HtmlRadioButtonInput
                      && element.getAttributeValue("name").equals( name ) ) {
 

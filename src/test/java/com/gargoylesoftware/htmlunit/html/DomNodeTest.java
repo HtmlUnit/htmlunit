@@ -275,7 +275,8 @@ public class DomNodeTest extends WebTestCase {
             "<span id='III'><span id='III.1'><span id='III.1.a'/></span></span>\n" +
             "</body></html>\n";
         final HtmlPage page = loadPage(html);
-        final DescendantElementsIterator iterator = page.getDocumentElement().getAllHtmlChildElements();
+        final DescendantElementsIterator iterator = (DescendantElementsIterator)
+            page.getDocumentElement().getAllHtmlChildElements();
         assertEquals("", iterator.nextElement().getId());
         assertEquals("0", iterator.nextElement().getId());
         assertEquals("I", iterator.nextElement().getId());

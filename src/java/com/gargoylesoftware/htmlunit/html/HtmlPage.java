@@ -444,9 +444,9 @@ public final class HtmlPage extends DomNode implements Page {
                 new Object[] {"a", "area", "button", "input", "object", "select", "textarea"} );
         final List tabbableElements = new ArrayList();
 
-        final DescendantElementsIterator iterator = getAllHtmlChildElements();
+        final Iterator iterator = getAllHtmlChildElements();
         while( iterator.hasNext() ) {
-            final HtmlElement element = iterator.nextElement();
+            final HtmlElement element = (HtmlElement)iterator.next();
             final String tagName = element.getTagName();
             if( acceptableTagNames.contains( tagName ) ) {
                 final boolean isDisabled = element.isAttributeDefined("disabled");
@@ -557,9 +557,9 @@ public final class HtmlPage extends DomNode implements Page {
         final List acceptableTagNames = Arrays.asList(
                 new Object[]{"a", "area", "button", "input", "label", "legend", "textarea"} );
 
-        final DescendantElementsIterator iterator = getAllHtmlChildElements();
+        final Iterator iterator = getAllHtmlChildElements();
         while( iterator.hasNext() ) {
-            final HtmlElement element = iterator.nextElement();
+            final HtmlElement element = (HtmlElement)iterator.next();
             if( acceptableTagNames.contains( element.getTagName() ) ) {
                 final String accessKeyAttribute = element.getAttributeValue("accesskey");
                 if( searchString.equalsIgnoreCase( accessKeyAttribute ) ) {
@@ -612,9 +612,9 @@ public final class HtmlPage extends DomNode implements Page {
 
         final List accessKeyList = new ArrayList();
 
-        final DescendantElementsIterator iterator = getAllHtmlChildElements();
+        final Iterator iterator = getAllHtmlChildElements();
         while( iterator.hasNext() ) {
-            final String id = iterator.nextElement().getAttributeValue("accesskey" );
+            final String id = ((HtmlElement)iterator.next()).getAttributeValue("accesskey" );
             if( id != null && id.length() != 0 ) {
                 if( accessKeyList.contains( id ) ) {
                     webClient_.assertionFailed( "Duplicate access key: " + id );
@@ -637,9 +637,9 @@ public final class HtmlPage extends DomNode implements Page {
     public void assertAllIdAttributesUnique() {
         final List idList = new ArrayList();
 
-        final DescendantElementsIterator iterator = getAllHtmlChildElements();
+        final Iterator iterator = getAllHtmlChildElements();
         while( iterator.hasNext() ) {
-            final String id = iterator.nextElement().getAttributeValue("id");
+            final String id = ((HtmlElement)iterator.next()).getAttributeValue("id");
             if( id != null && id.length() != 0 ) {
                 if( idList.contains( id ) ) {
                     webClient_.assertionFailed( "Duplicate ID: " + id );
