@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Document;
  *
  * @version  $Revision$
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public class JavaScriptConfigurationTest extends WebTestCase {
     /**
@@ -155,7 +156,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
-            Document.class.getName(), null, null, true);
+            Document.class.getName(), null, null, null, true);
         expectedConfig.addProperty("readyState", true, false);
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -190,7 +191,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final BrowserVersion browser = BrowserVersion.NETSCAPE_6_2_3;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
-            Document.class.getName(), null, null, true);
+            Document.class.getName(), null, null, null, true);
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
     
@@ -244,7 +245,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
-            Document.class.getName(), null, null, true);
+            Document.class.getName(), null, null, null, true);
         expectedConfig.addProperty("readyState", true, false);
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -313,7 +314,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
-            Document.class.getName(), null, null, true);
+            Document.class.getName(), null, null, null, true);
         assertTrue("Document should not property did not match", 
             configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -347,7 +348,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
-            Document.class.getName(), null, null, true);
+            Document.class.getName(), null, null, null, true);
         assertTrue("Document should not property did not match", 
             configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -382,7 +383,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
-            Document.class.getName(), null, null, true);
+            Document.class.getName(), null, null, null, true);
         assertTrue("Document should not property did not match", 
             configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -408,7 +409,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
-            Document.class.getName(), null, null, true);
+            Document.class.getName(), null, null, null, true);
         expectedConfig.addFunction("createAttribute");
         assertTrue("Document function did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -436,7 +437,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final BrowserVersion browser = BrowserVersion.FULL_FEATURED_BROWSER;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
         final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
-            Document.class.getName(), null, null, true);
+            Document.class.getName(), null, null, null, true);
         assertTrue("Document function did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
 

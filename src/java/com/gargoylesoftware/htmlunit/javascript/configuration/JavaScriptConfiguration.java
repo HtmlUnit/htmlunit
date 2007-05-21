@@ -69,8 +69,9 @@ import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
  * A container for all the javascript configuration information.
  * TODO - Need to add the logic to support the browser and javascript conditionals in the Class elements.
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public final class JavaScriptConfiguration {
     private static Document XmlDocument_;
@@ -302,6 +303,7 @@ public final class JavaScriptConfiguration {
             return null;
         }
         final String linkedClassname = element.getAttribute("classname");
+        final String jsConstructor = element.getAttribute( "jsConstructor" );
         final String superclassName = element.getAttribute("extends");
         final String htmlClassname = element.getAttribute("htmlClass");
         boolean jsObjectFlag = false;
@@ -310,7 +312,8 @@ public final class JavaScriptConfiguration {
             jsObjectFlag = true;
         }
         final ClassConfiguration classConfiguration =
-            new ClassConfiguration(className, linkedClassname, superclassName, htmlClassname, jsObjectFlag);
+            new ClassConfiguration(className, linkedClassname, jsConstructor,
+                    superclassName, htmlClassname, jsObjectFlag);
         ClassnameMap_.put(linkedClassname, className);
         Node node = element.getFirstChild();
         while( node != null ) {

@@ -49,6 +49,7 @@ import java.util.Set;
  * @version  $Revision$
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public final class ClassConfiguration {
     private static final String GETTER_PREFIX = "jsxGet_";
@@ -63,6 +64,10 @@ public final class ClassConfiguration {
      */
     private final String className_;
     private final Class linkedClass_;
+    /**
+     * The constructor method in the {@link #linkedClass_}
+     */
+    private final Method jsConstructor_;
     private final String htmlClassname_;
     private final boolean jsObject_;
 
@@ -71,17 +76,36 @@ public final class ClassConfiguration {
      * 
      * @param classname the name of the configuration class this entry is for
      * @param implementingClass - the fully qualified name of the class implimenting this functionality
+     * @param jsConstructor the constructor of method <code>implementingClass</code>
      * @param extendedClass - The name of the class that this class extends
      * @param htmlClass The name of the html class that this object supports
      * @param jsObject boolean flag for if this object is a JavaScript object
      * @throws ClassNotFoundException - If the implementing class is not found
      */
-    public ClassConfiguration(final String classname, final String implementingClass,
+    public ClassConfiguration(final String classname, final String implementingClass, final String jsConstructor,
         final String extendedClass, final String htmlClass, final boolean jsObject)
         throws ClassNotFoundException {
         className_ = classname;
         extendedClass_ = extendedClass;
         linkedClass_ = Class.forName(implementingClass);
+        if (jsConstructor != null && jsConstructor.length() != 0) {
+            Method foundCtor = null;
+            final Method[] methods = linkedClass_.getMethods();
+            for( int i=0; i < methods.length; i++ ) {
+                if( methods[i].getName().equals( jsConstructor ) ) {
+                    foundCtor = methods[i];
+                    break;
+                }
+            }
+            if( foundCtor == null ) {
+                throw new IllegalStateException( "Constructor method \"" + jsConstructor + 
+                        "\" in class \"" + implementingClass + " is not found." );
+            }
+            jsConstructor_ = foundCtor;
+        }
+        else {
+            jsConstructor_ = null;
+        }
         jsObject_ = jsObject;
         if (htmlClass != null && htmlClass.length() != 0) {
             htmlClassname_ = htmlClass;
@@ -314,6 +338,14 @@ public final class ClassConfiguration {
         return linkedClass_;
     }
 
+    /**
+     * Gets the JavaScript constroctor method in {@link #getLinkedClass()}
+     * @return Returns the constructor Method.
+     */
+    public Method getJsConstructor() {
+        return jsConstructor_;
+    }
+    
     /**
      * @return Returns the htmlClassname.
      */

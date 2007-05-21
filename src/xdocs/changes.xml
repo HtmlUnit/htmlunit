@@ -8,6 +8,10 @@
     <body>
         <release version="1.12-prerelease">
             <action type="update" dev="asashour">
+                JavaScript: Objects are configured to be 'constructable' from XML config file: "Option", "Image", "XMLHttpRequest", "ActiveXObject"
+            </action>
+
+            <action type="update" dev="asashour">
                 DomNode#getAllHtmlChildElements() now returns Iterator.
             </action>
             <action type="update" dev="mguillem" id="1714762">

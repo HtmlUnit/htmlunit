@@ -17,7 +17,7 @@
         descr="HTML and DHTML Reference on MSDN"/>
 
     <class name="ActiveXObject" classname="com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject"
-        JSObject="true">
+        jsConstructor="jsConstructor" JSObject="true">
         <browser name="Microsoft Internet Explorer" min-version="4"/>
     </class>
 
@@ -474,7 +474,7 @@
     </class>
 
     <class name="Image" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Image"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
+        jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
         <property name="src" readable="true" writable="true"/>
     </class>
 
@@ -587,7 +587,7 @@
     </class>
 
     <class name="Option" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Option"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOption">
+        jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOption">
         <property name="defaultSelected" readable="true" writable="false"/>
         <property name="label" readable="true" writable="true"/>
         <property name="selected" readable="true" writable="true"/>
@@ -900,7 +900,8 @@
         <function name="setTimeout"/>
     </class>
 
-    <class name="XMLHttpRequest" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest" JSObject="true">
+    <class name="XMLHttpRequest" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest"
+        jsConstructor="jsConstructor" JSObject="true">
         <doclink url="http://developer.apple.com/internet/webcontent/xmlhttpreq.html" descr="Safari documentation"/>
         <browser name="Netscape"/>
         <property name="onreadystatechange" readable="true" writable="true"/>

@@ -65,11 +65,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
-import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
-import com.gargoylesoftware.htmlunit.javascript.host.Image;
-import com.gargoylesoftware.htmlunit.javascript.host.Option;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest;
 
 /**
  * A wrapper for the <a href="http://www.mozilla.org/rhino">Rhino javascript engine</a>
@@ -86,6 +82,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest;
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  * @see <a href="http://groups-beta.google.com/group/netscape.public.mozilla.jseng/browse_thread/thread/b4edac57329cf49f/069e9307ec89111f">
  * Rhino and Java Browser</a>
  */
@@ -183,36 +180,19 @@ public class JavaScriptEngine extends ScriptEngine {
             final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
             window.associateValue("custom_eval", jsCustomEval);
             
-            
-            // configure constructors (TODO: read it from config file)
-            // Option
-            final Scriptable optionPrototype = (Scriptable) prototypesPerJSName.get("Option");
-            final Class[] types = {String.class, String.class, Boolean.TYPE, Boolean.TYPE};
-            final Member optionCtor = Option.class.getMethod("jsConstructor", types);
-            final FunctionObject jsOptionCtor = new FunctionObject("Option", optionCtor, window);
-            jsOptionCtor.addAsConstructor(window, optionPrototype);
-            // Image
-            final Scriptable imagePrototype = (Scriptable) prototypesPerJSName.get("Image");
-            final Member imageCtor = Image.class.getMethod("jsConstructor", null);
-            final FunctionObject jsImageCtor = new FunctionObject("Image", imageCtor, window);
-            jsImageCtor.addAsConstructor(window, imagePrototype);
-            // XMLHttpRequest
-            final Scriptable xhrPrototype = (Scriptable) prototypesPerJSName.get("XMLHttpRequest");
-            if (xhrPrototype != null) {
-                final Member xhrCtor = XMLHttpRequest.class.getConstructor(null);
-                final FunctionObject jsXhrCtor = new FunctionObject("XMLHttpRequest", xhrCtor, window);
-                jsXhrCtor.addAsConstructor(window, xhrPrototype);
+            for( final Iterator classnames = jsConfig.keySet().iterator(); classnames.hasNext(); ) {
+                final String jsClassName = (String) classnames.next();
+                final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
+                final Method jsConstructor = config.getJsConstructor();
+                if( jsConstructor != null ) {
+                    final Scriptable prototype = (Scriptable) prototypesPerJSName.get(jsClassName);
+                    if( prototype != null ) {
+                        final FunctionObject jsCtor = new FunctionObject(jsClassName, jsConstructor, window);
+                        jsCtor.addAsConstructor(window, prototype);
+                    }
+                }
             }
-            // ActiveXObject
-            final Scriptable activeXObjectPrototype = (Scriptable) prototypesPerJSName.get("ActiveXObject");
-            if (activeXObjectPrototype != null) {
-                final Class[] types2 = {Context.class, (new Object[]{}).getClass(), Function.class, Boolean.TYPE};
-                final Member activeXOjbectCtor = ActiveXObject.class.getMethod("jsConstructor", types2);
-                final FunctionObject jsActiveXCtor = new FunctionObject("ActiveXObject", activeXOjbectCtor, window);
-                jsActiveXCtor.addAsConstructor(window, activeXObjectPrototype);
-            }
-            // Popup
-            
+
             window.setPrototypes(prototypes);
             window.initialize(webWindow);
         }

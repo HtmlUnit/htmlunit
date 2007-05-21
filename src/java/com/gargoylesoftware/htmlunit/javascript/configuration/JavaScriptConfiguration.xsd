@@ -34,7 +34,8 @@
 		<xsd:attribute name="name" type="xsd:string" use="required"/>
 		<xsd:attribute name="notImplemented" type="xsd:boolean" default="false"/>
 		<xsd:attribute name="classname" type="xsd:string" use="required"/>
-    <xsd:attribute name="htmlClass" type="xsd:string"/>
+		<xsd:attribute name="jsConstructor" type="xsd:string"/>
+		<xsd:attribute name="htmlClass" type="xsd:string"/>
 		<xsd:attribute name="JSObject" type="xsd:boolean" default="false"/>
 		<xsd:attribute name="extends" type="xsd:string"/>
 	</xsd:complexType>
