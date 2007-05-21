@@ -306,16 +306,16 @@ public class JavaScriptEngine extends ScriptEngine {
             int startIndex = 4;
 
             final int endIndex;
-            if( sourceCode.endsWith("-->") ) {
-                endIndex = sourceCode.length()-3;
+            if (sourceCode.endsWith("-->")) {
+                endIndex = sourceCode.length() - 4;
             }
             else {
-                endIndex = sourceCode.length();
+                endIndex = sourceCode.length() - 1;
             }
 
             // Anything on the same line as the opening comment should be ignored
             char eachChar = sourceCode.charAt(startIndex);
-            while( startIndex < endIndex && eachChar != '\n' && eachChar != '\r' ) {
+            while (startIndex < endIndex && eachChar != '\n' && eachChar != '\r') {
                 eachChar = sourceCode.charAt( ++startIndex );
             }
 

@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1714762">
+                Fixed exception occuring handling script tag with one line content starting with &lt;!-- and without closing --!&gt;.
+            </action>
             <action type="update" dev="mguillem" id="1609944">
                 JavaScript: allow function named onload.
             </action>

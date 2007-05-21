@@ -594,9 +594,31 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "}\n"
             + "-->\n</script></head>\n"
             + "<body onload='doTest()'></body></html>";
-
+    
         final HtmlPage page = loadPage(htmlContent);
         assertEquals("foo", page.getTitleText());
+    }
+
+
+    /**
+     * Regression test for bug 1714762
+     * @throws Exception if the test fails
+     */
+    public void testJavaScriptWrappedInHtmlComments_commentNotClosed() throws Exception {
+        final String html
+            = "<html><head><title>foo</title>"
+            + "<script language='javascript'><!-- alert(1);</script>" 
+            + "alert(2);</script>"
+            + "</head>\n"
+            + "<body></body></html>";
+
+        final String[] expectedAlerts = {};
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
 
