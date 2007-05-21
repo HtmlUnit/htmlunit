@@ -607,7 +607,8 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testJavaScriptWrappedInHtmlComments_commentNotClosed() throws Exception {
         final String html
             = "<html><head><title>foo</title>"
-            + "<script language='javascript'><!-- alert(1);</script>" 
+            + "<script language='javascript'><!-- alert(1);</script>\n" 
+            + "<script language='javascript'><!-- </script>\n" 
             + "</head>\n"
             + "<body></body></html>";
 

@@ -302,7 +302,7 @@ public class JavaScriptEngine extends ScriptEngine {
 
         // Remove html comments around the source if needed
         sourceCode = sourceCode.trim();
-        if( sourceCode.startsWith("<!--") ) {
+        if (sourceCode.startsWith("<!--")) {
             int startIndex = 4;
 
             final int endIndex;
@@ -312,14 +312,19 @@ public class JavaScriptEngine extends ScriptEngine {
             else {
                 endIndex = sourceCode.length() - 1;
             }
-
-            // Anything on the same line as the opening comment should be ignored
-            char eachChar = sourceCode.charAt(startIndex);
-            while (startIndex < endIndex && eachChar != '\n' && eachChar != '\r') {
-                eachChar = sourceCode.charAt( ++startIndex );
+            
+            if (startIndex >= endIndex) {
+                sourceCode = "";
             }
+            else {
+                // Anything on the same line as the opening comment should be ignored
+                char eachChar = sourceCode.charAt(startIndex);
+                while (startIndex < endIndex && eachChar != '\n' && eachChar != '\r') {
+                    eachChar = sourceCode.charAt( ++startIndex );
+                }
 
-            sourceCode = sourceCode.substring(startIndex, endIndex);
+                sourceCode = sourceCode.substring(startIndex, endIndex);
+            }
         }
 
         final Scriptable scope;
