@@ -96,7 +96,7 @@ public class ScriptTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
-        webConnection.setResponse(URL_SECOND, js);
+        webConnection.setResponse(URL_SECOND, js, "text/javascript");
         client.setWebConnection(webConnection);
 
         client.getPage(URL_FIRST);
