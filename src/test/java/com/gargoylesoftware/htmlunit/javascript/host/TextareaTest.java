@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -52,10 +53,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * Tests for Inputs
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class TextareaTest extends WebTestCase {
+
     /**
      * Create an instance
      * @param name The name of the test
@@ -63,7 +66,6 @@ public class TextareaTest extends WebTestCase {
     public TextareaTest( final String name ) {
         super(name);
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -145,4 +147,82 @@ public class TextareaTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception If test fails
+     */
+    public void testTextLength() throws Exception {
+        final String[] alertsIE = {"undefined","undefined"};
+        testTextLength(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
+        final String[] alertsFF = {"11","0"};
+        testTextLength(BrowserVersion.MOZILLA_1_0, alertsFF);
+    }
+
+    private void testTextLength(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+        final String content = "<html>\n"
+            + "<body>\n"
+            + "<textarea id='myTextArea'></textarea>\n"
+            + "<script>\n"
+            + "    var textarea = document.getElementById( 'myTextArea' );\n"
+            + "    textarea.value = 'hello there';\n"
+            + "    alert( textarea.textLength );\n"
+            + "    textarea.value = '';\n"
+            + "    alert( textarea.textLength );\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception If test fails
+     */
+    public void testSelection() throws Exception {
+        testSelection(3, 10, BrowserVersion.INTERNET_EXPLORER_6_0, 
+                new String[] {"undefined,undefined", "3,undefined", "3,10"});
+        testSelection(3, 10, BrowserVersion.MOZILLA_1_0, 
+                new String[] {"11,11", "3,11", "3,10"});
+        
+        testSelection(-3, 15, BrowserVersion.INTERNET_EXPLORER_6_0, 
+                new String[] {"undefined,undefined", "-3,undefined", "-3,15"});
+        testSelection(-3, 15, BrowserVersion.MOZILLA_1_0, 
+                new String[] {"11,11", "0,11", "0,11"});
+
+        testSelection(10, 5, BrowserVersion.INTERNET_EXPLORER_6_0, 
+                new String[] {"undefined,undefined", "10,undefined", "10,5"});
+        testSelection(10, 5, BrowserVersion.MOZILLA_1_0, 
+                new String[] {"11,11", "10,11", "5,5"});
+    }
+
+    private void testSelection(final int selectionStart, final int selectionEnd,
+            final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+        final String content = "<html>\n"
+            + "<body>\n"
+            + "<textarea id='myTextArea'></textarea>\n"
+            + "<script>\n"
+            + "    var textarea = document.getElementById( 'myTextArea' );\n"
+            + "    textarea.value = 'Hello there';\n"
+            + "    alert( textarea.selectionStart + ',' + textarea.selectionEnd );\n"
+            + "    textarea.selectionStart = " + selectionStart + ";\n"
+            + "    alert( textarea.selectionStart + ',' + textarea.selectionEnd );\n"
+            + "    textarea.selectionEnd = " + selectionEnd + ";\n"
+            + "    alert( textarea.selectionStart + ',' + textarea.selectionEnd );\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }

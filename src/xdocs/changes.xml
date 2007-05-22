@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour" id="1714772">
+                JavaScript: add support for textarea.selectionStart, textarea.selectionEnd, and textarea.textLength (#1714772).
+            </action>
             <action type="update" dev="asashour">
                 DomNode#getAllHtmlChildElements() now returns Iterator.
             </action>

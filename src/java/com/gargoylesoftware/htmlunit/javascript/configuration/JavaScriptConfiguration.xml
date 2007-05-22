@@ -788,6 +788,15 @@
                 url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp"
                 descr="MSDN documentation"/>
         </property>
+        <property name="textLength" readable="true" writable="false">
+            <browser name="Netscape"/>
+        </property>
+        <property name="selectionStart" readable="true" writable="true">
+            <browser name="Netscape"/>
+        </property>
+        <property name="selectionEnd" readable="true" writable="true">
+            <browser name="Netscape"/>
+        </property>
     </class>
 
     <class name="TextImpl" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.TextImpl"

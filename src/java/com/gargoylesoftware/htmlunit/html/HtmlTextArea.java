@@ -52,6 +52,7 @@ import java.util.Map;
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class HtmlTextArea extends FocusableElement implements DisabledElement, SubmittableElement {
 
@@ -60,6 +61,10 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
 
     private String defaultValue_;
 
+    private int selectionStart_;
+    
+    private int selectionEnd_;
+    
     /**
      *  Create an instance
      *
@@ -123,6 +128,8 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         }
 
         getPage().executeOnChangeHandlerIfAppropriate(this);
+        setSelectionStart( newValue.length() );
+        setSelectionEnd( newValue.length() );
     }
 
 
@@ -350,4 +357,71 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     public final String getOnChangeAttribute() {
         return getAttributeValue("onchange");
     }
+
+    /**
+     * Returns the selected text contained in this HtmlTextArea, <code>null</code> if no selection (Firefox only).
+     * @return the text
+     */
+    public String getSelectedText() {
+        String text = null;
+        if( selectionStart_ != selectionEnd_ ) {
+            text = getText().substring( selectionStart_, selectionEnd_ );
+        }
+        return text;
+    }
+    
+    /**
+     * Returns the selected text's start position (Firefox only).
+     * @return the start position >= 0
+     */
+    public int getSelectionStart() {
+        return selectionStart_;
+    }
+
+    /**
+     * Sets the selection start to the specified position (Firefox only).
+     * @param selectionStart the start position of the text >= 0
+     */
+    public void setSelectionStart(int selectionStart) {
+        if( selectionStart < 0 ) {
+            selectionStart = 0;
+        }
+        final int length = getText().length();
+        if( selectionStart > length ) {
+            selectionStart = length;
+        }
+        if( selectionEnd_ < selectionStart ) {
+            selectionEnd_ = selectionStart;
+        }
+        this.selectionStart_ = selectionStart; 
+    }
+    
+
+    /**
+     * Returns the selected text's end position (Firefox only).
+     * @return the end position >= 0
+     */
+    public int getSelectionEnd() {
+        return selectionEnd_;
+    }
+ 
+    /**
+     * Sets the selection end to the specified position (Firefox only). 
+     * @param selectionEnd the end position of the text >= 0
+
+     */
+    public void setSelectionEnd(int selectionEnd) {
+        if( selectionEnd < 0 ) {
+            selectionEnd = 0;
+        }
+        final int length = getText().length();
+        if( selectionEnd > length ) {
+            selectionEnd = length;
+        }
+        if( selectionEnd < selectionStart_ ) {
+            selectionStart_ = selectionEnd;
+        }
+        this.selectionEnd_ = selectionEnd;
+    }
+
 }

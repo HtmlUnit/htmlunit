@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public class HTMLTextAreaElement extends FormField {
 
@@ -113,5 +114,44 @@ public class HTMLTextAreaElement extends FormField {
         ((HtmlTextArea)getHtmlElementOrDie()).setDefaultValue( defaultValue );
     }
 
-}
+    /**
+     * Gets the value of "textLength" attribute
+     * @return the text length
+     */
+    public int jsxGet_textLength() {
+        return jsxGet_value().length();
+    }
 
+    /**
+     * Gets the value of "selectionStart" attribute
+     * @return the selection start
+     */
+    public int jsxGet_selectionStart() {
+        return ((HtmlTextArea)getHtmlElementOrDie()).getSelectionStart();
+    }
+
+    /**
+     * Sets the value of "selectionStart" attribute
+     * @param start selection start
+     */
+    public void jsxSet_selectionStart( final int start) {
+        ((HtmlTextArea)getHtmlElementOrDie()).setSelectionStart(start);
+    }
+
+    /**
+     * Gets the value of "selectionEnd" attribute
+     * @return the selection end
+     */
+    public int jsxGet_selectionEnd() {
+        return ((HtmlTextArea)getHtmlElementOrDie()).getSelectionEnd();
+    }
+
+    /**
+     * Sets the value of "selectionEnd" attribute
+     * @param end selection end
+     */
+    public void jsxSet_selectionEnd( final int end) {
+        ((HtmlTextArea)getHtmlElementOrDie()).setSelectionEnd(end);
+    }
+
+}
