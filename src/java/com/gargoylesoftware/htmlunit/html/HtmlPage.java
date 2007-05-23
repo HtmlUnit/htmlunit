@@ -1049,19 +1049,25 @@ public final class HtmlPage extends DomNode implements Page {
                 return;
             }
             final StringBuffer buffer = new StringBuffer( refreshString.substring( index + 4 ) );
-            if( buffer.charAt( 0 ) == '"' || buffer.charAt( 0 ) == 0x27 ) {
-                buffer.deleteCharAt( 0 );
+            if( buffer.toString().trim().length() == 0 ) {
+                //content='10; URL=' is treated as content='10'
+                url = webResponse_.getUrl();
             }
-            if( buffer.charAt( buffer.length() - 1 ) == '"' || buffer.charAt( buffer.length() - 1 ) == 0x27 ) {
-                buffer.deleteCharAt( buffer.length() - 1 );
-            }
-            final String urlString = buffer.toString();
-            try {
-                url = getFullyQualifiedUrl( urlString );
-            }
-            catch( final MalformedURLException e ) {
-                getLog().error( "Malformed url in refresh string: " + refreshString, e );
-                throw e;
+            else {
+                if( buffer.charAt( 0 ) == '"' || buffer.charAt( 0 ) == 0x27 ) {
+                    buffer.deleteCharAt( 0 );
+                }
+                if( buffer.charAt( buffer.length() - 1 ) == '"' || buffer.charAt( buffer.length() - 1 ) == 0x27 ) {
+                    buffer.deleteCharAt( buffer.length() - 1 );
+                }
+                final String urlString = buffer.toString();
+                try {
+                    url = getFullyQualifiedUrl( urlString );
+                }
+                catch( final MalformedURLException e ) {
+                    getLog().error( "Malformed url in refresh string: " + refreshString, e );
+                    throw e;
+                }
             }
         }
 

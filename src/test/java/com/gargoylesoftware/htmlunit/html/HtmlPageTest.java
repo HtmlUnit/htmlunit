@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,9 +56,12 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ImmediateRefreshHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -1273,6 +1277,38 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlInlineFrame iframe = (HtmlInlineFrame)firstPage.getHtmlElementById( "myIFrame" );
         
         assertEquals( URL_SECOND, iframe.getEnclosedPage().getWebResponse().getUrl() );
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    public void testMetaTagWithEmptyURL() throws Exception {
+        final WebClient client = new WebClient();
+        client.setRefreshHandler(new ImmediateRefreshHandler());
+        
+        // connection will return a page with <meta ... refresh> for the first call
+        // and the same page without it for the other calls
+        final MockWebConnection webConnection = new MockWebConnection(client) {
+            private int nbCalls_ = 0;
+            public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
+                String content = "<html><head>";
+                if (nbCalls_ == 0) {
+                    content += "<meta http-equiv='refresh' content='1; URL='>";
+                }
+                content += "</head><body></body></html>";
+                ++nbCalls_;
+                return new StringWebResponse(content, settings.getURL()) {
+                    public SubmitMethod getRequestMethod() {
+                        return settings.getSubmitMethod();
+                    }
+                };
+            }
+        };
+        client.setWebConnection( webConnection );
+        
+        final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE);
+        settings.setSubmitMethod(SubmitMethod.POST);
+        client.getPage(settings);
     }
 
 }
