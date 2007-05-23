@@ -9,10 +9,10 @@
 
     <body>
         <section>
-        	    <p>
-        	        The <a href="dependencies.html">dependencies page</a> lists all the jars that you will need
-        	        to have in your classpath.
-        	    </p>
+            <p>
+                The <a href="dependencies.html">dependencies page</a> lists all the jars that you will need
+                to have in your classpath.
+            </p>
             <p>
                 The class <javadoc>com.gargoylesoftware.htmlunit.WebClient</javadoc> is the
                 main starting point.  This simulates a web browser and will be used to execute
@@ -31,8 +31,7 @@
             <source><![CDATA[
 public void testHomePage() throws Exception {
     final WebClient webClient = new WebClient();
-    final URL url = new URL("http://htmlunit.sourceforge.net");
-    final HtmlPage page = (HtmlPage)webClient.getPage(url);
+    final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
     assertEquals( "htmlunit - Welcome to HtmlUnit", page.getTitleText() );
 }
             ]]></source>
@@ -48,8 +47,7 @@ public void testHomePage() throws Exception {
             <source><![CDATA[
 public void testHomePage() throws Exception {
     final WebClient webClient = new WebClient(BrowserVersion.MOZILLA_1_0);
-    final URL url = new URL("http://htmlunit.sourceforge.net");
-    final HtmlPage page = (HtmlPage)webClient.getPage(url);
+    final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
     assertEquals( "htmlunit - Welcome to HtmlUnit", page.getTitleText() );
 }
             ]]></source>
@@ -68,9 +66,8 @@ public void testHomePage() throws Exception {
             <source><![CDATA[
 public void testHomePage() throws Exception {
     final WebClient webClient = new WebClient(
-    	BrowserVersion.MOZILLA_1_0, "http://myproxyserver", 8000);
-    final URL url = new URL("http://htmlunit.sourceforge.net");
-    final HtmlPage page = (HtmlPage)webClient.getPage(url);
+        BrowserVersion.MOZILLA_1_0, "http://myproxyserver", 8000);
+    final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
     assertEquals( "htmlunit - Welcome to HtmlUnit", page.getTitleText() );
 }
             ]]></source>
@@ -89,25 +86,24 @@ public void testHomePage() throws Exception {
             <source><![CDATA[
 public void testHomePage() throws Exception {
     final WebClient webClient = new WebClient();
-    final URL url = new URL("http://htmlunit.sourceforge.net");
 
     // Get the first page
-    final HtmlPage page1 = (HtmlPage)webClient.getPage(url);
+    final HtmlPage page1 = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
 
     // Get the form that we are dealing with and within that form, 
     // find the submit button and the field that we want to change.
     final HtmlForm form = page1.getFormByName("myform");
     final HtmlSubmitInput button 
-    	= (HtmlSubmitInput)form.getInputByName("submitbutton");
+        = (HtmlSubmitInput) form.getInputByName("submitbutton");
     final HtmlTextInput textField 
-    	= (HtmlTextInput)form.getInputByName("userid");
+        = (HtmlTextInput) form.getInputByName("userid");
 
     // Change the value of the text field
     textField.setValueAttribute("root");
 
     // Now submit the form by clicking the button and get back the 
     // second page.
-    final HtmlPage page2 = (HtmlPage)button.click();
+    final HtmlPage page2 = (HtmlPage) button.click();
 }
             ]]></source>
 
