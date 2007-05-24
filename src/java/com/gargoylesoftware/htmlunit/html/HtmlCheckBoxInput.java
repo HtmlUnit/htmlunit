@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author Marc Guillemot
  * @author Mike Bresnahan
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class HtmlCheckBoxInput extends HtmlInput {
 
@@ -91,15 +92,17 @@ public class HtmlCheckBoxInput extends HtmlInput {
      *  Set the "checked" attribute
      *
      * @param  isChecked true if this element is to be selected
+     * @return The page that occupies this window after setting checked status.
+     * It may be the same window or it may be a freshly loaded one.
      */
-    public void setChecked( final boolean isChecked ) {
+    public Page setChecked( final boolean isChecked ) {
         if( isChecked ) {
             setAttributeValue( "checked", "checked" );
         }
         else {
             removeAttribute( "checked" );
         }
-        getPage().executeOnChangeHandlerIfAppropriate(this);
+        return getPage().executeOnChangeHandlerIfAppropriate(this);
     }
 
     /**

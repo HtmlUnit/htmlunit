@@ -41,15 +41,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for HtmlRadioButton
+ * Tests for HtmlRadioButtonInput
  *
  * @version $Revision$
  * @author Mike Bresnahan
  * @author Marc Guillemot
  * @author Bruce Faulkner
+ * @author Ahmed Ashour
  */
 public class HtmlRadioButtonInputTest extends WebTestCase {
     /**
@@ -174,4 +177,33 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
             "oneItem.checked: true twoItems.checked: false"});
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetChecked() throws Exception {
+        final String firstContent
+            = "<html><head><title>First</title></head><body>"
+            + "<form>"
+            + "<input id='myRadio' type='radio' onchange=\"window.location.href='http://second'\">"
+            + "</form>"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>Second</title></head><body></body></html>";
+        
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        client.setWebConnection( webConnection );
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlRadioButtonInput radio = (HtmlRadioButtonInput) page.getHtmlElementById( "myRadio" );
+
+        final HtmlPage secondPage = (HtmlPage) radio.setChecked( true );
+
+        assertEquals( "Second", secondPage.getTitleText() );
+    }
+
 }

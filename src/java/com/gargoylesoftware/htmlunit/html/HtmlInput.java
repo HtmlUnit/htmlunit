@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public abstract class HtmlInput extends FocusableElement implements DisabledElement, SubmittableElement {
 
@@ -441,9 +442,12 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      *  Set the "checked" attribute
      *
      * @param  isChecked true if this element is to be selected
+     * @return The page that occupies this window after setting checked status.
+     * It may be the same window or it may be a freshly loaded one.
      */
-    public void setChecked( final boolean isChecked ) {
-        // By default this does nothing.  Derived classes will override.
+    public Page setChecked( final boolean isChecked ) {
+        // By default this returns the current page.  Derived classes will override.
+        return getPage();
     }
 
 

@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="asashour" id="1724889">
+                HtmlInput (HtmlCheckBoxInput and HtmlRadioButtonInput): #setChecked now returns Page (#1724889).
+            </action>
             <action type="fix" dev="asashour" id="1725162">
                 Javascript: Correct handling of comments (#1725162).
             </action>

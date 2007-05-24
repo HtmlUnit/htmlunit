@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author Mike Bresnahan
  * @author Daniel Gredler
  * @author Bruce Faulkner
+ * @author Ahmed Ashour
  */
 public class HtmlRadioButtonInput extends HtmlInput {
 
@@ -98,8 +99,10 @@ public class HtmlRadioButtonInput extends HtmlInput {
      *  Set the "checked" attribute
      *
      * @param  isChecked true if this element is to be selected
+     * @return The page that occupies this window after setting checked status.
+     * It may be the same window or it may be a freshly loaded one.
      */
-    public void setChecked( final boolean isChecked ) {
+    public Page setChecked( final boolean isChecked ) {
         final HtmlForm form = getEnclosingForm();
         final boolean changed = isChecked() != isChecked;
 
@@ -117,12 +120,13 @@ public class HtmlRadioButtonInput extends HtmlInput {
         }
 
         final Function onchangeHandler = getEventHandler("onchange");
-        final HtmlPage page = getPage();
+        Page page = getPage();
 
-        if (changed && onchangeHandler != null && page.getWebClient().isJavaScriptEnabled()) {
+        if (changed && onchangeHandler != null && ((HtmlPage)page).getWebClient().isJavaScriptEnabled()) {
             final Event event = new Event(this, Event.TYPE_CHANGE);
-            getPage().runEventHandler(onchangeHandler, event);
+            page = getPage().runEventHandler(onchangeHandler, event).getNewPage();
         }
+        return page;
     }
 
     /**
