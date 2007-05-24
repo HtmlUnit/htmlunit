@@ -47,9 +47,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.xml.sax.SAXException;
@@ -57,6 +59,8 @@ import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -953,7 +957,6 @@ public class HTMLElement extends NodeImpl {
     private class DownloadBehaviorDownloader extends Thread {
         private final  URL url_;
         private final Function callback_;
-        private Context context_;
 
         /**
          * @param url The URL to download
@@ -969,22 +972,23 @@ public class HTMLElement extends NodeImpl {
          * Does the download and calls the callback method
          */
         public void run() {
-                    
-            try {
-                final WebClient wc = getWindow().getWebWindow().getWebClient();
+            final WebClient wc = getWindow().getWebWindow().getWebClient();
+            final Scriptable scope = callback_.getParentScope();
+            final WebRequestSettings settings = new WebRequestSettings(url_);
 
-                final String content = wc.getPage(url_).getWebResponse().getContentAsString();
-                String message = "Downloaded content: ";
-                if (content.length() > 512) {
-                    message += content.substring(512) + " ...";
-                }
-                else {
-                    message += content;
-                }
-                getLog().debug(message);
-                final Scriptable scope = callback_.getParentScope();
+            try {
+                final WebResponse webResponse = wc.loadWebResponse(settings);
+                final String content = webResponse.getContentAsString();
+                getLog().debug("Downloaded content: " + StringUtils.abbreviate(content, 512));
                 final Object[] args = new Object[] { content };
-                callback_.call( context_, scope, scope, args);
+                final ContextAction action = new ContextAction()
+                {
+                    public Object run(final Context cx) {
+                        callback_.call(cx, scope, scope, args);
+                        return null;
+                    }
+                };
+                Context.call(action);
             }
             catch (final Exception e) {
                 getLog().error("Behavior #default#download: Cannot download " + url_, e);
