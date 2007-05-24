@@ -969,12 +969,13 @@ public class HTMLElement extends NodeImpl {
          * Does the download and calls the callback method
          */
         public void run() {
-            context_ = Context.enter();
+                    
             try {
                 final WebClient wc = getWindow().getWebWindow().getWebClient();
+
                 final String content = wc.getPage(url_).getWebResponse().getContentAsString();
                 String message = "Downloaded content: ";
-                if(content.length() > 512) {
+                if (content.length() > 512) {
                     message += content.substring(512) + " ...";
                 }
                 else {
@@ -985,11 +986,8 @@ public class HTMLElement extends NodeImpl {
                 final Object[] args = new Object[] { content };
                 callback_.call( context_, scope, scope, args);
             }
-            catch(final Exception e) {
+            catch (final Exception e) {
                 getLog().error("Behavior #default#download: Cannot download " + url_, e);
-            }
-            finally {
-                Context.exit();
             }
         }
     }

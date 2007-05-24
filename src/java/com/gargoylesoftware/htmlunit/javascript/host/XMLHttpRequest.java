@@ -46,6 +46,7 @@ import java.util.List;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.ArrayUtils;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Document;
@@ -331,18 +332,20 @@ public class XMLHttpRequest extends SimpleScriptable {
             // Create and start a thread in which to execute the request.
             final Object startingScope = getWindow();
 
+            final ContextAction action = new ContextAction()
+            {
+            	public Object run(final Context cx) {
+                    cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, startingScope);
+                    doSend(cx);
+            		return null;
+            	}
+            };
             final Runnable t = new Runnable() {
                 public void run() {
-                    final Context context = Context.enter();
-                    try {
-                        Context.getCurrentContext().putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, startingScope);
-                        doSend(context);
-                    }
-                    finally {
-                        Context.exit();
-                    }
+                    Context.call(action);
                 }
             };
+
             getLog().debug("Starting XMLHttpRequest thread for asynchronous request");
             threadID_ = getWindow().getWebWindow().getThreadManager().startThread(t, "XMLHttpRequest.send");
         }

@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem">
+                JavaScript [internal]: use Context.call(ContextAction) for faster JavaScript execution.
+            </action>
             <action type="update" dev="asashour" id="1722665">
                 Meta Refresh empty URL is handled (#1722665).
             </action>
@@ -29,7 +32,7 @@
                 JavaScript: don't allow usage of write(ln) detached from document object when simulating Firefox.
             </action>
             <action type="update" dev="mguillem">
-                JavaScript: large internal refactoring for a better Rhino usage.
+                JavaScript [internal]: large refactoring for a better Rhino usage.
             </action>
             <action type="add" dev="asashour" id="1168346">
                 JavaScript: Add support for event.shiftKey, event.ctrlKey, and event.altKey.

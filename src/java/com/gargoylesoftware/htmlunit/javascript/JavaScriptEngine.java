@@ -40,16 +40,14 @@ package com.gargoylesoftware.htmlunit.javascript;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.FunctionObject;
@@ -89,7 +87,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 public class JavaScriptEngine extends ScriptEngine {
 
     private static final ThreadLocal javaScriptRunning_ = new ThreadLocal();
-    private static final ContextListener contextListener_;
 
     /**
      * Key used to place the scope in which the execution of some javascript code
@@ -106,9 +103,6 @@ public class JavaScriptEngine extends ScriptEngine {
     static {
         final HtmlUnitContextFactory contextFactory = new HtmlUnitContextFactory(getScriptEngineLog());
         ContextFactory.initGlobal(contextFactory);
-
-        contextListener_ = new ContextListener();
-        contextFactory.addListener( contextListener_ );
     }
 
     /**
@@ -126,84 +120,99 @@ public class JavaScriptEngine extends ScriptEngine {
     public void initialize( final WebWindow webWindow ) {
 
         Assert.notNull( "webWindow", webWindow );
-        final WebClient webClient = webWindow.getWebClient();
 
-        final Map prototypes = new HashMap();
-        final Map prototypesPerJSName = new HashMap();
-        final Context context = Context.enter();
-        final Window window = new Window(this);
-        try {
-            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
-            context.initStandardObjects(window);
-            
-            final Iterator it = jsConfig.keySet().iterator();
-            while (it.hasNext()) {
-                final String jsClassName = (String) it.next();
-                final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
-                final boolean isWindow = Window.class.getName().equals( config.getLinkedClass().getName() );
-                if (isWindow) {
-                    configurePropertiesAndFunctions(config, window);
+        final ContextAction action = new ContextAction()
+        {
+        	public Object run(final Context cx) {
+                try {
+                    init(webWindow, cx);
                 }
-                else {
-                    final Scriptable prototype = configureClass(config, window, jsClassName);
-                    if (config.isJsObject()) {
-                        prototypes.put(config.getLinkedClass(), prototype);
-                        
-                        // for FF, place object with prototype property in Window scope
-                        if (!getWebClient().getBrowserVersion().isIE()) {
-                            final Scriptable obj = (Scriptable) config.getLinkedClass().newInstance();
-                            obj.put("prototype", obj, prototype);
-                            obj.setPrototype(prototype);
-                            ScriptableObject.defineProperty(window, 
-                                    config.getClassName(), obj, ScriptableObject.DONTENUM);
-                        }
-                    }
-                    prototypesPerJSName.put(config.getClassName(), prototype);
+                catch( final Exception e ) {
+                    getLog().error("Exception while initializing JavaScript for the page", e);
+                    throw new ScriptException(null, e); // BUG: null is not useful.
                 }
-            }
+        		
+        		return null;
+        	}
+        };
 
-            // once all prototypes have been build, it's possible to configure the chains
-            for (final Iterator iter = prototypesPerJSName.entrySet().iterator(); iter.hasNext();) {
-                final Map.Entry entry = (Map.Entry) iter.next();
-                final String name = (String) entry.getKey();
-                final ClassConfiguration config = jsConfig.getClassConfiguration(name);
-                if (config.getExtendedClass() != null) {
-                    final Scriptable prototype = (Scriptable) entry.getValue();
-                    final Scriptable parentPrototype = (Scriptable) prototypesPerJSName.get(config.getExtendedClass());
-                    prototype.setPrototype(parentPrototype);
-                }
-            }
-            
-            // eval hack (cf unit tests testEvalScopeOtherWindow and testEvalScopeLocal
-            final Class[] evalFnTypes = {String.class};
-            final Member evalFn = Window.class.getMethod("custom_eval", evalFnTypes);
-            final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
-            window.associateValue("custom_eval", jsCustomEval);
-            
-            for( final Iterator classnames = jsConfig.keySet().iterator(); classnames.hasNext(); ) {
-                final String jsClassName = (String) classnames.next();
-                final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
-                final Method jsConstructor = config.getJsConstructor();
-                if( jsConstructor != null ) {
-                    final Scriptable prototype = (Scriptable) prototypesPerJSName.get(jsClassName);
-                    if( prototype != null ) {
-                        final FunctionObject jsCtor = new FunctionObject(jsClassName, jsConstructor, window);
-                        jsCtor.addAsConstructor(window, prototype);
-                    }
-                }
-            }
-
-            window.setPrototypes(prototypes);
-            window.initialize(webWindow);
-        }
-        catch( final Exception e ) {
-            getLog().error("Exception while initializing JavaScript for the page", e);
-            throw new ScriptException(null, e); // BUG: null is not useful.
-        }
-        finally {
-            Context.exit();
-        }
+        Context.call(action);
     }
+
+    /**
+     * Initialises all the JS stuff for the window
+     * @param webWindow the web window
+     * @param context the current context
+     * @throws Exception if something ging wrong
+     */
+	private void init(final WebWindow webWindow, final Context context) throws Exception {
+		final WebClient webClient = webWindow.getWebClient();
+		final Map prototypes = new HashMap();
+		final Map prototypesPerJSName = new HashMap();
+		final Window window = new Window(this);
+		final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
+		context.initStandardObjects(window);
+		
+		final Iterator it = jsConfig.keySet().iterator();
+		while (it.hasNext()) {
+		    final String jsClassName = (String) it.next();
+		    final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
+		    final boolean isWindow = Window.class.getName().equals( config.getLinkedClass().getName() );
+		    if (isWindow) {
+		        configurePropertiesAndFunctions(config, window);
+		    }
+		    else {
+		        final Scriptable prototype = configureClass(config, window, jsClassName);
+		        if (config.isJsObject()) {
+		            prototypes.put(config.getLinkedClass(), prototype);
+		            
+		            // for FF, place object with prototype property in Window scope
+		            if (!getWebClient().getBrowserVersion().isIE()) {
+		                final Scriptable obj = (Scriptable) config.getLinkedClass().newInstance();
+		                obj.put("prototype", obj, prototype);
+		                obj.setPrototype(prototype);
+		                ScriptableObject.defineProperty(window, 
+		                        config.getClassName(), obj, ScriptableObject.DONTENUM);
+		            }
+		        }
+		        prototypesPerJSName.put(config.getClassName(), prototype);
+		    }
+		}
+
+		// once all prototypes have been build, it's possible to configure the chains
+		for (final Iterator iter = prototypesPerJSName.entrySet().iterator(); iter.hasNext();) {
+		    final Map.Entry entry = (Map.Entry) iter.next();
+		    final String name = (String) entry.getKey();
+		    final ClassConfiguration config = jsConfig.getClassConfiguration(name);
+		    if (config.getExtendedClass() != null) {
+		        final Scriptable prototype = (Scriptable) entry.getValue();
+		        final Scriptable parentPrototype = (Scriptable) prototypesPerJSName.get(config.getExtendedClass());
+		        prototype.setPrototype(parentPrototype);
+		    }
+		}
+		
+		// eval hack (cf unit tests testEvalScopeOtherWindow and testEvalScopeLocal
+		final Class[] evalFnTypes = {String.class};
+		final Member evalFn = Window.class.getMethod("custom_eval", evalFnTypes);
+		final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
+		window.associateValue("custom_eval", jsCustomEval);
+		
+		for( final Iterator classnames = jsConfig.keySet().iterator(); classnames.hasNext(); ) {
+		    final String jsClassName = (String) classnames.next();
+		    final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
+		    final Method jsConstructor = config.getJsConstructor();
+		    if( jsConstructor != null ) {
+		        final Scriptable prototype = (Scriptable) prototypesPerJSName.get(jsClassName);
+		        if( prototype != null ) {
+		            final FunctionObject jsCtor = new FunctionObject(jsClassName, jsConstructor, window);
+		            jsCtor.addAsConstructor(window, prototype);
+		        }
+		    }
+		}
+
+		window.setPrototypes(prototypes);
+		window.initialize(webWindow);
+	}
 
     /**
      * Configures the specified class for access via JavaScript.
@@ -307,57 +316,25 @@ public class JavaScriptEngine extends ScriptEngine {
             }
         }
 
-        final Scriptable scope;
-        if( htmlElement != null ) {
-            scope = (Scriptable) htmlElement.getScriptObject();
-        }
-        else {
-            scope = (Window) htmlPage.getEnclosingWindow().getScriptObject();
-        }
+        final Scriptable scope = getScope(htmlPage, htmlElement);
         final int lineNumber = 1;
-        final Object securityDomain = null;
 
-        final Boolean javaScriptAlreadyRunning = (Boolean) javaScriptRunning_.get();
-        javaScriptRunning_.set(Boolean.TRUE);
-        final Context context = Context.enter();
-        context.putThreadLocal(KEY_STARTING_SCOPE, scope);
-        try {
-            final Object result;
-            synchronized (htmlPage) // 2 scripts can't be executed in parallel for one page
-            {
-                result = context.evaluateString( scope, sourceCode, sourceName, lineNumber, securityDomain );
-            }
-            return result;
-        }
-        catch (final Exception e ) {
-            final ScriptException scriptException = new ScriptException(htmlPage, e, sourceCode );
-            if (getWebClient().isThrowExceptionOnScriptError()) {
-                throw scriptException;
-            }
-            else {
-                // use a ScriptException to log it because it provides good information
-                // on the source code
-                getLog().info("Catched script exception", scriptException);
-                return null;
-            }
-        }
-        catch (final TimeoutError e) {
-            if (getWebClient().isThrowExceptionOnScriptError()) {
-                throw new RuntimeException(e);
-            }
-            else {
-                getLog().info("Catched script timeout error", e);
-                return null;
-            }
-        }
-        finally {
-            javaScriptRunning_.set(javaScriptAlreadyRunning);
-            Context.exit();
-        }
+        final String source = sourceCode;
+        final ContextAction action = new HtmlUnitContextAction(scope, htmlPage)
+        {
+        	public Object doRun(final Context cx) {
+                return cx.evaluateString(scope, source, sourceName, lineNumber, null);
+        	}
+
+        	protected String getSourceCode(final Context cx) {
+        		return source;
+        	}
+        };
+        
+        return Context.call(action);
     }
 
-
-    /**
+	/**
      * Call a JavaScript function and return the result.
      * @param htmlPage The page
      * @param javaScriptFunction The function to call.
@@ -373,50 +350,31 @@ public class JavaScriptEngine extends ScriptEngine {
             final Object [] args,
             final HtmlElement htmlElement ) {
 
-        final Scriptable scope;
-        if( htmlElement != null ) {
+        final Scriptable scope = getScope(htmlPage, htmlElement);
+        
+        final Function function = (Function) javaScriptFunction;
+        final ContextAction action = new HtmlUnitContextAction(scope, htmlPage)
+        {
+        	public Object doRun(final Context cx) {
+                return callFunction(htmlPage, function, cx, scope, (Scriptable) thisObject, args);
+        	}
+        	protected String getSourceCode(final Context cx) {
+        		return cx.decompileFunction(function, 2);
+        	}
+        };
+        return Context.call(action);
+    }
+
+	private Scriptable getScope(final HtmlPage htmlPage, final HtmlElement htmlElement) {
+		final Scriptable scope;
+		if (htmlElement != null) {
             scope = (Scriptable) htmlElement.getScriptObject();
         }
         else {
             scope = (Window) htmlPage.getEnclosingWindow().getScriptObject();
         }
-        // some js code (like onchange handlers) should not be triggered from JS code:
-        // => keep trace of JS running or not
-        final Boolean javaScriptAlreadyRunning = (Boolean) javaScriptRunning_.get();
-        javaScriptRunning_.set(Boolean.TRUE);
-        final Function function = (Function) javaScriptFunction;
-        final Context context = Context.enter();
-        context.putThreadLocal(KEY_STARTING_SCOPE, scope);
-        try {
-            return callFunction(htmlPage, function, context, scope, (Scriptable) thisObject, args);
-        }
-        catch (final Exception e ) {
-            final String sourceCode = context.decompileFunction(function, 2);
-            final ScriptException scriptException = new ScriptException(htmlPage, e, sourceCode);
-            if (getWebClient().isThrowExceptionOnScriptError()) {
-                throw scriptException;
-            }
-            else {
-                // use a ScriptException to log it because it provides good information
-                // on the source code
-                getLog().info("Catched script exception", scriptException);
-                return null;
-            }
-        }
-        catch (final TimeoutError e) {
-            if (getWebClient().isThrowExceptionOnScriptError()) {
-                throw new RuntimeException(e);
-            }
-            else {
-                getLog().info("Catched script timeout error", e);
-                return null;
-            }
-        }
-        finally {
-            javaScriptRunning_.set(javaScriptAlreadyRunning);
-            Context.exit();
-        }
-    }
+		return scope;
+	}
 
     /**
      * Calls the given function taking care of synchronisation issues. 
@@ -467,33 +425,57 @@ public class JavaScriptEngine extends ScriptEngine {
     }
 
     /**
-     * Returns the current number of unexited contexts.
-     * @return The current number of unexited contexts.
-     * @see Context#enter()
-     * @see Context#exit()
+     * Facility for ContextAction usage.
+     * ContextAction should be prefered because according to Rhino doc it 
+     * "guarantees proper association of Context instances with the current thread and is faster". 
      */
-    public static int getContextCount() {
-        return contextListener_.getContextCount();
-    }
+    private abstract class HtmlUnitContextAction implements ContextAction {
+    	private final Scriptable scope_;
+    	private final HtmlPage htmlPage_;
+    	public HtmlUnitContextAction(final Scriptable scope, final HtmlPage htmlPage) {
+    		scope_ = scope;
+    		htmlPage_ = htmlPage;
+    	}
 
-    /**
-     * Listens to <tt>Context</tt> creation and release events so we can ensure that resources
-     * are being released by the JavaScript engine.
-     * @see Context#enter()
-     * @see Context#exit()
-     */
-    private static class ContextListener implements ContextFactory.Listener {
-        private final Set contexts_ = Collections.synchronizedSet(new HashSet());
-        public void contextCreated( final Context c ) {
-            contexts_.add( c );
-        }
-        public void contextReleased( final Context c ) {
-            contexts_.remove( c );
-        }
-        /** @return the context count */
-        public int getContextCount() {
-            return contexts_.size();
-        }
+    	public final Object run(final Context cx) {
+            final Boolean javaScriptAlreadyRunning = (Boolean) javaScriptRunning_.get();
+            javaScriptRunning_.set(Boolean.TRUE);
+
+            try {
+                cx.putThreadLocal(KEY_STARTING_SCOPE, scope_);
+                synchronized (htmlPage_) // 2 scripts can't be executed in parallel for one page
+                {
+            		return doRun(cx);
+                }
+            }
+            catch (final Exception e ) {
+                final ScriptException scriptException = new ScriptException(htmlPage_, e, getSourceCode(cx));
+                if (getWebClient().isThrowExceptionOnScriptError()) {
+                    throw scriptException;
+                }
+                else {
+                    // use a ScriptException to log it because it provides good information
+                    // on the source code
+                    getLog().info("Catched script exception", scriptException);
+                    return null;
+                }
+            }
+            catch (final TimeoutError e) {
+                if (getWebClient().isThrowExceptionOnScriptError()) {
+                    throw new RuntimeException(e);
+                }
+                else {
+                    getLog().info("Catched script timeout error", e);
+                    return null;
+                }
+            }
+            finally {
+                javaScriptRunning_.set(javaScriptAlreadyRunning);
+            }
+    	}
+
+		protected abstract Object doRun(final Context cx);
+
+		protected abstract String getSourceCode(final Context cx);
     }
 }
-

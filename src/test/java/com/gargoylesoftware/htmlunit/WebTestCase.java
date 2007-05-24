@@ -58,11 +58,9 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.mozilla.javascript.Context;
 
 import com.gargoylesoftware.base.testing.BaseTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * Common superclass for HtmlUnit tests
@@ -402,40 +400,6 @@ public abstract class WebTestCase extends BaseTestCase {
      */
     protected static final MockWebConnection getMockConnection(final HtmlPage page) {
         return (MockWebConnection) page.getWebClient().getWebConnection();
-    }
-
-    /**
-     * Overriden so that we can assert the state after running each test.
-     * {@inheritDoc}
-     */
-    protected void runTest() throws Throwable {
-        // Run the actual testcase.
-        super.runTest();
-        try {
-            // Make sure all the JavaScript contexts were exited.
-            final int count = JavaScriptEngine.getContextCount();
-            if( count != 0 ) {
-                final String are;
-                final String s;
-                if( count != 1 ) {
-                    are = "are";
-                    s = "s";
-                }
-                else {
-                    are = "is";
-                    s = "";
-                }
-                throw new Exception( "There " + are + " " + count + " unexited context" + s + "!" );
-            }
-        }
-        finally {
-            // If this test went badly, we don't want it to mess up all the
-            // tests that get run after this one, so we make sure all of our
-            // JavaScript contexts have been exited (at least on this thread).
-            while( Context.getCurrentContext() != null ) {
-                Context.exit();
-            }
-        }
     }
 
     /**
