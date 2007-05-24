@@ -334,11 +334,11 @@ public class XMLHttpRequest extends SimpleScriptable {
 
             final ContextAction action = new ContextAction()
             {
-            	public Object run(final Context cx) {
+                public Object run(final Context cx) {
                     cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, startingScope);
                     doSend(cx);
-            		return null;
-            	}
+                    return null;
+                }
             };
             final Runnable t = new Runnable() {
                 public void run() {

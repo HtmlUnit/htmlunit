@@ -123,7 +123,7 @@ public class JavaScriptEngine extends ScriptEngine {
 
         final ContextAction action = new ContextAction()
         {
-        	public Object run(final Context cx) {
+            public Object run(final Context cx) {
                 try {
                     init(webWindow, cx);
                 }
@@ -131,9 +131,9 @@ public class JavaScriptEngine extends ScriptEngine {
                     getLog().error("Exception while initializing JavaScript for the page", e);
                     throw new ScriptException(null, e); // BUG: null is not useful.
                 }
-        		
-        		return null;
-        	}
+                
+                return null;
+            }
         };
 
         Context.call(action);
@@ -145,74 +145,74 @@ public class JavaScriptEngine extends ScriptEngine {
      * @param context the current context
      * @throws Exception if something ging wrong
      */
-	private void init(final WebWindow webWindow, final Context context) throws Exception {
-		final WebClient webClient = webWindow.getWebClient();
-		final Map prototypes = new HashMap();
-		final Map prototypesPerJSName = new HashMap();
-		final Window window = new Window(this);
-		final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
-		context.initStandardObjects(window);
-		
-		final Iterator it = jsConfig.keySet().iterator();
-		while (it.hasNext()) {
-		    final String jsClassName = (String) it.next();
-		    final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
-		    final boolean isWindow = Window.class.getName().equals( config.getLinkedClass().getName() );
-		    if (isWindow) {
-		        configurePropertiesAndFunctions(config, window);
-		    }
-		    else {
-		        final Scriptable prototype = configureClass(config, window, jsClassName);
-		        if (config.isJsObject()) {
-		            prototypes.put(config.getLinkedClass(), prototype);
-		            
-		            // for FF, place object with prototype property in Window scope
-		            if (!getWebClient().getBrowserVersion().isIE()) {
-		                final Scriptable obj = (Scriptable) config.getLinkedClass().newInstance();
-		                obj.put("prototype", obj, prototype);
-		                obj.setPrototype(prototype);
-		                ScriptableObject.defineProperty(window, 
-		                        config.getClassName(), obj, ScriptableObject.DONTENUM);
-		            }
-		        }
-		        prototypesPerJSName.put(config.getClassName(), prototype);
-		    }
-		}
+    private void init(final WebWindow webWindow, final Context context) throws Exception {
+        final WebClient webClient = webWindow.getWebClient();
+        final Map prototypes = new HashMap();
+        final Map prototypesPerJSName = new HashMap();
+        final Window window = new Window(this);
+        final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
+        context.initStandardObjects(window);
+        
+        final Iterator it = jsConfig.keySet().iterator();
+        while (it.hasNext()) {
+            final String jsClassName = (String) it.next();
+            final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
+            final boolean isWindow = Window.class.getName().equals( config.getLinkedClass().getName() );
+            if (isWindow) {
+                configurePropertiesAndFunctions(config, window);
+            }
+            else {
+                final Scriptable prototype = configureClass(config, window, jsClassName);
+                if (config.isJsObject()) {
+                    prototypes.put(config.getLinkedClass(), prototype);
+                    
+                    // for FF, place object with prototype property in Window scope
+                    if (!getWebClient().getBrowserVersion().isIE()) {
+                        final Scriptable obj = (Scriptable) config.getLinkedClass().newInstance();
+                        obj.put("prototype", obj, prototype);
+                        obj.setPrototype(prototype);
+                        ScriptableObject.defineProperty(window, 
+                                config.getClassName(), obj, ScriptableObject.DONTENUM);
+                    }
+                }
+                prototypesPerJSName.put(config.getClassName(), prototype);
+            }
+        }
 
-		// once all prototypes have been build, it's possible to configure the chains
-		for (final Iterator iter = prototypesPerJSName.entrySet().iterator(); iter.hasNext();) {
-		    final Map.Entry entry = (Map.Entry) iter.next();
-		    final String name = (String) entry.getKey();
-		    final ClassConfiguration config = jsConfig.getClassConfiguration(name);
-		    if (config.getExtendedClass() != null) {
-		        final Scriptable prototype = (Scriptable) entry.getValue();
-		        final Scriptable parentPrototype = (Scriptable) prototypesPerJSName.get(config.getExtendedClass());
-		        prototype.setPrototype(parentPrototype);
-		    }
-		}
-		
-		// eval hack (cf unit tests testEvalScopeOtherWindow and testEvalScopeLocal
-		final Class[] evalFnTypes = {String.class};
-		final Member evalFn = Window.class.getMethod("custom_eval", evalFnTypes);
-		final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
-		window.associateValue("custom_eval", jsCustomEval);
-		
-		for( final Iterator classnames = jsConfig.keySet().iterator(); classnames.hasNext(); ) {
-		    final String jsClassName = (String) classnames.next();
-		    final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
-		    final Method jsConstructor = config.getJsConstructor();
-		    if( jsConstructor != null ) {
-		        final Scriptable prototype = (Scriptable) prototypesPerJSName.get(jsClassName);
-		        if( prototype != null ) {
-		            final FunctionObject jsCtor = new FunctionObject(jsClassName, jsConstructor, window);
-		            jsCtor.addAsConstructor(window, prototype);
-		        }
-		    }
-		}
+        // once all prototypes have been build, it's possible to configure the chains
+        for (final Iterator iter = prototypesPerJSName.entrySet().iterator(); iter.hasNext();) {
+            final Map.Entry entry = (Map.Entry) iter.next();
+            final String name = (String) entry.getKey();
+            final ClassConfiguration config = jsConfig.getClassConfiguration(name);
+            if (config.getExtendedClass() != null) {
+                final Scriptable prototype = (Scriptable) entry.getValue();
+                final Scriptable parentPrototype = (Scriptable) prototypesPerJSName.get(config.getExtendedClass());
+                prototype.setPrototype(parentPrototype);
+            }
+        }
+        
+        // eval hack (cf unit tests testEvalScopeOtherWindow and testEvalScopeLocal
+        final Class[] evalFnTypes = {String.class};
+        final Member evalFn = Window.class.getMethod("custom_eval", evalFnTypes);
+        final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
+        window.associateValue("custom_eval", jsCustomEval);
+        
+        for( final Iterator classnames = jsConfig.keySet().iterator(); classnames.hasNext(); ) {
+            final String jsClassName = (String) classnames.next();
+            final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
+            final Method jsConstructor = config.getJsConstructor();
+            if( jsConstructor != null ) {
+                final Scriptable prototype = (Scriptable) prototypesPerJSName.get(jsClassName);
+                if( prototype != null ) {
+                    final FunctionObject jsCtor = new FunctionObject(jsClassName, jsConstructor, window);
+                    jsCtor.addAsConstructor(window, prototype);
+                }
+            }
+        }
 
-		window.setPrototypes(prototypes);
-		window.initialize(webWindow);
-	}
+        window.setPrototypes(prototypes);
+        window.initialize(webWindow);
+    }
 
     /**
      * Configures the specified class for access via JavaScript.
@@ -322,19 +322,19 @@ public class JavaScriptEngine extends ScriptEngine {
         final String source = sourceCode;
         final ContextAction action = new HtmlUnitContextAction(scope, htmlPage)
         {
-        	public Object doRun(final Context cx) {
+            public Object doRun(final Context cx) {
                 return cx.evaluateString(scope, source, sourceName, lineNumber, null);
-        	}
+            }
 
-        	protected String getSourceCode(final Context cx) {
-        		return source;
-        	}
+            protected String getSourceCode(final Context cx) {
+                return source;
+            }
         };
         
         return Context.call(action);
     }
 
-	/**
+    /**
      * Call a JavaScript function and return the result.
      * @param htmlPage The page
      * @param javaScriptFunction The function to call.
@@ -355,26 +355,26 @@ public class JavaScriptEngine extends ScriptEngine {
         final Function function = (Function) javaScriptFunction;
         final ContextAction action = new HtmlUnitContextAction(scope, htmlPage)
         {
-        	public Object doRun(final Context cx) {
+            public Object doRun(final Context cx) {
                 return callFunction(htmlPage, function, cx, scope, (Scriptable) thisObject, args);
-        	}
-        	protected String getSourceCode(final Context cx) {
-        		return cx.decompileFunction(function, 2);
-        	}
+            }
+            protected String getSourceCode(final Context cx) {
+                return cx.decompileFunction(function, 2);
+            }
         };
         return Context.call(action);
     }
 
-	private Scriptable getScope(final HtmlPage htmlPage, final HtmlElement htmlElement) {
-		final Scriptable scope;
-		if (htmlElement != null) {
+    private Scriptable getScope(final HtmlPage htmlPage, final HtmlElement htmlElement) {
+        final Scriptable scope;
+        if (htmlElement != null) {
             scope = (Scriptable) htmlElement.getScriptObject();
         }
         else {
             scope = (Window) htmlPage.getEnclosingWindow().getScriptObject();
         }
-		return scope;
-	}
+        return scope;
+    }
 
     /**
      * Calls the given function taking care of synchronisation issues. 
@@ -430,14 +430,14 @@ public class JavaScriptEngine extends ScriptEngine {
      * "guarantees proper association of Context instances with the current thread and is faster". 
      */
     private abstract class HtmlUnitContextAction implements ContextAction {
-    	private final Scriptable scope_;
-    	private final HtmlPage htmlPage_;
-    	public HtmlUnitContextAction(final Scriptable scope, final HtmlPage htmlPage) {
-    		scope_ = scope;
-    		htmlPage_ = htmlPage;
-    	}
+        private final Scriptable scope_;
+        private final HtmlPage htmlPage_;
+        public HtmlUnitContextAction(final Scriptable scope, final HtmlPage htmlPage) {
+            scope_ = scope;
+            htmlPage_ = htmlPage;
+        }
 
-    	public final Object run(final Context cx) {
+        public final Object run(final Context cx) {
             final Boolean javaScriptAlreadyRunning = (Boolean) javaScriptRunning_.get();
             javaScriptRunning_.set(Boolean.TRUE);
 
@@ -445,7 +445,7 @@ public class JavaScriptEngine extends ScriptEngine {
                 cx.putThreadLocal(KEY_STARTING_SCOPE, scope_);
                 synchronized (htmlPage_) // 2 scripts can't be executed in parallel for one page
                 {
-            		return doRun(cx);
+                    return doRun(cx);
                 }
             }
             catch (final Exception e ) {
@@ -472,10 +472,10 @@ public class JavaScriptEngine extends ScriptEngine {
             finally {
                 javaScriptRunning_.set(javaScriptAlreadyRunning);
             }
-    	}
+        }
 
-		protected abstract Object doRun(final Context cx);
+        protected abstract Object doRun(final Context cx);
 
-		protected abstract String getSourceCode(final Context cx);
+        protected abstract String getSourceCode(final Context cx);
     }
 }
