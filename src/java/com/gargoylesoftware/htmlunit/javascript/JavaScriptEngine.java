@@ -296,10 +296,10 @@ public class JavaScriptEngine extends ScriptEngine {
 
             final int endIndex;
             if (sourceCode.endsWith("-->")) {
-                endIndex = sourceCode.length() - 4;
+                endIndex = sourceCode.length() - 3;
             }
             else {
-                endIndex = sourceCode.length() - 1;
+                endIndex = sourceCode.length();
             }
             
             if (startIndex >= endIndex) {
@@ -307,9 +307,11 @@ public class JavaScriptEngine extends ScriptEngine {
             }
             else {
                 // Anything on the same line as the opening comment should be ignored
-                char eachChar = sourceCode.charAt(startIndex);
-                while (startIndex < endIndex && eachChar != '\n' && eachChar != '\r') {
-                    eachChar = sourceCode.charAt( ++startIndex );
+                for( ; startIndex < endIndex; startIndex++ ) {
+                    final char eachChar = sourceCode.charAt(startIndex);
+                    if( eachChar == '\n' || eachChar == '\r' ) {
+                        break;
+                    }
                 }
 
                 sourceCode = sourceCode.substring(startIndex, endIndex);

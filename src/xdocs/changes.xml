@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="fix" dev="asashour" id="1725162">
+                Javascript: Correct handling of comments (#1725162).
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript [internal]: use Context.call(ContextAction) for faster JavaScript execution.
             </action>

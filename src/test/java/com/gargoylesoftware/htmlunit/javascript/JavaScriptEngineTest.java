@@ -583,6 +583,24 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals("foo", page.getTitleText());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testJavaScriptWrappedInHtmlComments2() throws Exception {
+        final String content =
+            "<html><head>\n"
+            + "<script><!-- \n"
+            + " alert('1')"
+            + "--></script>"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"1"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 
     /**
      * @throws Exception if the test fails
