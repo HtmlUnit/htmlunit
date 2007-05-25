@@ -42,7 +42,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for Table.
@@ -51,6 +55,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  * @version $Revision$
  */
 public class TableTest extends WebTestCase {
@@ -592,4 +597,29 @@ public class TableTest extends WebTestCase {
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public static void testWidth() throws Exception {
+        final String content
+            = "<html><head></head><body>\n"
+                + "<table id='tableID' style=\"background:blue\"><tr><td></td></tr></table>\n"
+                + "<script language=\"javascript\">\n"
+                + "    var table = document.getElementById( 'tableID' );\n"
+                + "    table.width = '200';\n"
+                + "</script></body></html>";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(content);
+        client.setWebConnection(webConnection);
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        final String xml = page.asXml();
+        assertTrue( xml.indexOf( "width=\"200\"" ) != -1 );
+    }
+
 }

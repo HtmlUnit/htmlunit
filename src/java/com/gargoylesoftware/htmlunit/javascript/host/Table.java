@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class Table extends RowContainer {
 
@@ -229,4 +230,21 @@ public class Table extends RowContainer {
             return super.insertRow(index);
         }
     }
+
+    /**
+     * Returns the <tt>width</tt> attribute.
+     * @return the <tt>width</tt> attribute.
+     */
+    public String jsxGet_width() {
+        return getHtmlElementOrDie().getAttributeValue("width" );
+    }
+    
+    /**
+     * Sets the <tt>width</tt> attribute.
+     * @param width The <tt>width</tt> attribute.
+     */
+    public void jsxSet_width(final String width) {
+        getHtmlElementOrDie().setAttributeValue("width", width );
+    }
+
 }

@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour" id="1691024">
+                Add support for table.width (#1691024).
+            </action>
             <action type="update" dev="asashour" id="1724889">
                 HtmlInput (HtmlCheckBoxInput and HtmlRadioButtonInput): #setChecked now returns Page (#1724889).
             </action>

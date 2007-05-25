@@ -690,6 +690,7 @@
         <property name="tBodies" readable="true" writable="false"/>
         <property name="tFoot" readable="true" writable="false"/>
         <property name="tHead" readable="true" writable="false"/>
+        <property name="width" readable="true" writable="true"/>
         
         <function name="createCaption">
             <doclink
