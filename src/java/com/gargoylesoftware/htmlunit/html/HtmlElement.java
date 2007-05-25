@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -46,6 +47,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.mozilla.javascript.Function;
 
@@ -322,24 +324,43 @@ public abstract class HtmlElement extends DomNode {
     protected void printXml( final String indent, final PrintWriter printWriter ) {
 
         final boolean hasChildren = (getFirstChild() != null);
-        printWriter.print(indent+"<"+getTagName().toLowerCase());
-        final Map attributeMap = attributes_;
-        for (final Iterator it=attributeMap.keySet().iterator(); it.hasNext(); ) {
+        printWriter.print(indent + "<");
+        printOpeningTagContentAsXml(printWriter);
+
+        if (!hasChildren && !isEmptyXmlTagExpanded()) {
+            printWriter.print("/>");
+        }
+        else {
+            printWriter.println(">");
+            printChildrenAsXml(indent, printWriter);
+            printWriter.println(indent + "</" + getTagName() + ">");
+        }
+    }
+    
+    /**
+     * Indicates if a node without children should be written in expanded form as xml
+     * (ie with closing tag rather than with "/&gt;)
+     * @return <code>false</code>
+     */
+    protected boolean isEmptyXmlTagExpanded() {
+        return false;
+    }
+
+    /**
+     * Prints the content between "&lt;" and "&gt;" (or "/&gt;") in the output of the tag name
+     * and its attributes in xml format.
+     * @param printWriter the writer to print in
+     */
+    protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
+        printWriter.print(getTagName());
+
+        for (final Iterator it=attributes_.keySet().iterator(); it.hasNext(); ) {
             printWriter.print(" ");
             final String name = (String) it.next();
             printWriter.print(name);
             printWriter.print("=\"");
-            printWriter.print(StringEscapeUtils.escapeXml(attributeMap.get(name).toString()));
+            printWriter.print(StringEscapeUtils.escapeXml(attributes_.get(name).toString()));
             printWriter.print("\"");
-        }
-
-        if( ! hasChildren ) {
-            printWriter.print("/");
-        }
-        printWriter.println(">");
-        printChildrenAsXml( indent, printWriter );
-        if( hasChildren ) {
-            printWriter.println(indent+"</"+getTagName().toLowerCase()+">");
         }
     }
 
@@ -351,27 +372,15 @@ public abstract class HtmlElement extends DomNode {
     public String toString() {
         final StringBuffer buffer = new StringBuffer();
 
-        final String className = getClass().getName();
-        final int index = className.lastIndexOf( '.' );
-        if( index == -1 ) {
-            buffer.append( className );
-        }
-        else {
-            buffer.append( className.substring( index + 1 ) );
-        }
+        buffer.append(ClassUtils.getShortClassName(getClass()));
+        buffer.append("[<");
 
-        buffer.append( "[<" );
-        buffer.append(getTagName());
+        final StringWriter writer = new StringWriter();
+        final PrintWriter printWriter = new PrintWriter(writer);
+        printOpeningTagContentAsXml(printWriter);
+        buffer.append(writer.toString());
 
-        for(final Iterator iterator=attributes_.keySet().iterator(); iterator.hasNext(); ) {
-            buffer.append( ' ' );
-            final String name = (String)iterator.next();
-            buffer.append(name);
-            buffer.append( "=\"" );
-            buffer.append(attributes_.get(name));
-            buffer.append( "\"" );
-        }
-        buffer.append( ">]" );
+        buffer.append(">]");
 
         return buffer.toString();
     }
