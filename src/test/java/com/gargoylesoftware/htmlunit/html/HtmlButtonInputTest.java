@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -76,7 +75,7 @@ public class HtmlButtonInputTest extends WebTestCase {
 
         final HtmlPage secondPage = (HtmlPage)button.click();
 
-        final List expectedAlerts = Arrays.asList( new String[]{"foo"} );
+        final String[] expectedAlerts = new String[] {"foo"};
         assertEquals( expectedAlerts, collectedAlerts );
 
         assertSame( page, secondPage );

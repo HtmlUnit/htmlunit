@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -359,7 +358,7 @@ public class HtmlTableTest extends WebTestCase {
             + "<script>alert(document.getElementById('div1').parentNode.tagName);</script>"
             + "</body></html>";
 
-        final List expectedAlerts = Arrays.asList( new String[]{ "foo", "BODY" } );
+        final String[] expectedAlerts = new String[] {"foo", "BODY"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();

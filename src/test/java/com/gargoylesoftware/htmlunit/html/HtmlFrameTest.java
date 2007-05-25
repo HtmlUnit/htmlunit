@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -99,7 +98,7 @@ public class HtmlFrameTest extends WebTestCase {
             + "    <frame id='frame1'>"
             + "    <frame onload='alert(this.tagName)' id='frame2'>"
             + "</frameset></html>";
-        final List expectedAlerts = Arrays.asList( new String[]{"FRAME"} );
+        final String[] expectedAlerts = new String[] {"FRAME"};
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);

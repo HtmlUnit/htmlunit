@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -116,8 +115,8 @@ public class HTMLFrameElementTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(defaultContent);
 
-        final List expectedAlerts = Arrays.asList( new String[] {URL_FIRST.toExternalForm() + "/subdir/frame.html",
-                URL_FIRST.toExternalForm() + "/frame.html"} );
+        final String[] expectedAlerts = new String[] {URL_FIRST.toExternalForm() + "/subdir/frame.html",
+                URL_FIRST.toExternalForm() + "/frame.html"};
 
         webClient.setWebConnection(webConnection);
 
@@ -143,7 +142,7 @@ public class HTMLFrameElementTest extends WebTestCase {
                 + "<frame name='foo' id='myFrame' src='about:blank'/>"
                 + "</frameset>"
                 + "</html>";
-        final List expectedAlerts = Arrays.asList( new String[]{"true"} );
+        final String[] expectedAlerts = new String[] {"true"};
 
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
@@ -167,7 +166,7 @@ public class HTMLFrameElementTest extends WebTestCase {
                 + "<frame name='foo' id='myFrame' src='about:blank'/>"
                 + "</frameset>"
                 + "</html>";
-        final List expectedAlerts = Arrays.asList( new String[]{"true"} );
+        final String[] expectedAlerts = new String[] {"true"};
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
@@ -199,7 +198,7 @@ public class HTMLFrameElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final List expectedAlerts = Arrays.asList( new String[]{"2"} );
+        final String[] expectedAlerts = new String[] {"2"};
 
         webClient.getPage(URL_FIRST);
 
@@ -235,7 +234,7 @@ public class HTMLFrameElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final List expectedAlerts = Arrays.asList( new String[]{"DIV"} );
+        final String[] expectedAlerts = new String[] {"DIV"};
 
         webClient.getPage( URL_GARGOYLE );
         assertEquals(expectedAlerts, collectedAlerts);
@@ -270,12 +269,12 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "</script>\n"
             + "</html>";
 
-        final List expectedAlerts = Arrays.asList(new String[]{"frame=OK",
+        final String[] expectedAlerts = new String[] {"frame=OK",
             "frames.length=2",
             "frame=OK",
             "frames.length=0",
             "frame=OK",
-            "frames.length=0"});
+            "frames.length=0"};
 
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);

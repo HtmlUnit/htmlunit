@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -86,7 +85,7 @@ public class HtmlElementTest extends WebTestCase {
                 "</script></body></html>\n";
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
-        final List expectedAlerts = Arrays.asList(new String[] {"false", "true", "a", "a", "b", "b", "b", "c"});
+        final String[] expectedAlerts = new String[] {"false", "true", "a", "a", "b", "b", "b", "c"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

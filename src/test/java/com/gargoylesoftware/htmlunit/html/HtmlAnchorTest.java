@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -87,7 +86,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList( new String[] { "9", "9" } );
+        final String[] expectedAlerts = new String[] {"9", "9"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

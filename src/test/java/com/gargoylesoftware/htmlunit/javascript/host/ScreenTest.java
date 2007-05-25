@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -105,7 +104,7 @@ public class ScreenTest extends WebTestCase {
             + "</body></html>";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final List expectedAlerts = Arrays.asList(new String[]{"16"});
+        final String[] expectedAlerts = new String[] {"16"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

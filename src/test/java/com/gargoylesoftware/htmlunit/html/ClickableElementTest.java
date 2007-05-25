@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -75,7 +74,7 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void onClickPageTest(final String htmlContent) throws Exception {
-        final List expectedAlerts = Arrays.asList( new String[]{"foo"} );
+        final String[] expectedAlerts = new String[] {"foo"};
         onClickPageTest(htmlContent, 1, expectedAlerts);
     }
 
@@ -85,10 +84,10 @@ public class ClickableElementTest extends WebTestCase {
      * @param htmlContent HTML fragment for body of page with clickable element
      * identified by clickId ID attribute.
      * @param numClicks number of times to click element
-     * @param expectedAlerts List of expected popup values
+     * @param expectedAlerts Array of expected popup values
      * @throws Exception if the test fails
      */
-    private void onClickPageTest(final String htmlContent, final int numClicks, final List expectedAlerts)
+    private void onClickPageTest(final String htmlContent, final int numClicks, final String[] expectedAlerts)
         throws Exception {
         onClickPageTest(htmlContent, numClicks, expectedAlerts, false);
     }
@@ -99,12 +98,12 @@ public class ClickableElementTest extends WebTestCase {
         * @param htmlContent HTML fragment for body of page with clickable element
         * identified by clickId ID attribute.
         * @param numClicks number of times to click element
-        * @param expectedAlerts List of expected popup values
+        * @param expectedAlerts Array of expected popup values
         * @param exceptionOnError
         * @throws Exception if the test fails
         */
     private void onClickPageTest(final String htmlContent, final int numClicks,
-            final List expectedAlerts, final boolean exceptionOnError) throws Exception {
+            final String[] expectedAlerts, final boolean exceptionOnError) throws Exception {
         final BrowserVersion bv = new BrowserVersion("Netscape", "7", "", "1.2", 7);
         final WebClient client = new WebClient(bv);
 
@@ -256,7 +255,7 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testButton_onClickTwice() throws Exception {
-        final List expectedAlerts = Arrays.asList(new String[] {"foo0", "foo1"});
+        final String[] expectedAlerts = new String[] {"foo0", "foo1"};
         onClickPageTest("<body><form>" +
                 "<button id='clickId' onClick='alert(\"foo\" + count++); return false;'>Item</button>" +
                 "<script> var count = 0 </script>" +
@@ -352,7 +351,7 @@ public class ClickableElementTest extends WebTestCase {
         onClickPageTest("<html><head></head><body>"
                 + "<form method='POST'><input type='button' id='clickId' onclick='y()'></form>"
                 + "</body></html>",
-                1, new ArrayList(), false);
+                1, new String[0], false);
     }
 
 
@@ -1001,7 +1000,7 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSetOnClick() throws Exception {
-        final List expectedAlerts = Arrays.asList(new String[] {"foo"});
+        final String[] expectedAlerts = new String[] {"foo"};
         onClickPageTest("<html><body><form>" +
                 "<button type='button' id='clickId' onclick='alert(\"foo\"); onclick=null;'>Item</button>" +
                 "</form></body></html>", 2, expectedAlerts);

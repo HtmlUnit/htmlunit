@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -109,7 +108,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
 
         submitInput.click();
 
-        final List expectedAlerts = Arrays.asList( new String[]{"foo","bar"} );
+        final String[] expectedAlerts = new String[] {"foo","bar"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 

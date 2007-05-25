@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -87,9 +86,7 @@ public class TextareaTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "1234", "PoohBear"
-        } );
+        final String[] expectedAlerts = new String[] {"1234", "PoohBear"};
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -118,7 +115,7 @@ public class TextareaTest extends WebTestCase {
         final HtmlButtonInput button = (HtmlButtonInput) form.getInputByName("myButton");
         button.click();
 
-        final List expectedAlerts = Arrays.asList(new String[] {"foo"});
+        final String[] expectedAlerts = new String[] {"foo"};
         assertEquals(expectedAlerts, collectedAlerts);
     }    
 
@@ -140,7 +137,7 @@ public class TextareaTest extends WebTestCase {
             + "</script>"
             + "</body>"
             + "</html>";
-        final List expectedAlerts = Arrays.asList( new String[]{ "TEXTAREA", "INPUT" } );
+        final String[] expectedAlerts = new String[] {"TEXTAREA", "INPUT"};
         final List collectedAlerts = new ArrayList();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);

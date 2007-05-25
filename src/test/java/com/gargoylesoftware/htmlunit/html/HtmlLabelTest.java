@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -78,7 +77,7 @@ public class HtmlLabelTest extends WebTestCase {
         final HtmlLabel label = (HtmlLabel) page.getHtmlElementById("testLabel");
         label.click();
         assertTrue(checkBox.isChecked());
-        final List expectedAlerts = Arrays.asList( new String[]{"label", "checkbox"} );
+        final String[] expectedAlerts = new String[] {"label", "checkbox"};
         assertEquals(expectedAlerts, collectedAlerts);
         label.click();
         assertFalse(checkBox.isChecked());

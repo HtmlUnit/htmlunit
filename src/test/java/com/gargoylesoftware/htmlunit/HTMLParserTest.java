@@ -42,7 +42,6 @@ import java.net.SocketException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -116,7 +115,7 @@ public class HTMLParserTest extends WebTestCase {
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
-        final List expectedAlerts = Arrays.asList(new String[]{"myForm"});
+        final String[] expectedAlerts = new String[] {"myForm"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         loadPage(content, collectedAlerts);
@@ -151,7 +150,7 @@ public class HTMLParserTest extends WebTestCase {
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
-        final List expectedAlerts = Arrays.asList(new String[]{"first"});
+        final String[] expectedAlerts = new String[] {"first"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         loadPage(content, collectedAlerts);

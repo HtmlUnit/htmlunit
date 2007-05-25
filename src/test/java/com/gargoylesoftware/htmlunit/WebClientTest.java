@@ -897,7 +897,7 @@ public class WebClientTest extends WebTestCase {
 
         assertEquals( "accesskey", element, page.pressAccessKey('z') );
 
-        final List expectedAlerts = Arrays.asList( new String[]{"focus-0", "blur-0", "focus-0"} );
+        final String[] expectedAlerts = new String[] {"focus-0", "blur-0", "focus-0"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -917,9 +917,9 @@ public class WebClientTest extends WebTestCase {
         assertEquals( "submit2", page.pressAccessKey('c').getAttributeValue("name") );
         assertEquals( "submit1", page.pressAccessKey('b').getAttributeValue("name") );
 
-        final List expectedAlerts = Arrays.asList( new String[]{
+        final String[] expectedAlerts = new String[]{
             "focus-0", "blur-0", "focus-2", "blur-2", "focus-1"
-        } );
+        };
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -939,9 +939,9 @@ public class WebClientTest extends WebTestCase {
         assertEquals( "submit1", page.tabToNextElement().getAttributeValue("name") );
         assertEquals( "submit2", page.tabToNextElement().getAttributeValue("name") );
 
-        final List expectedAlerts = Arrays.asList( new String[]{
+        final String[] expectedAlerts = new String[]{
             "focus-0", "blur-0", "focus-1", "blur-1", "focus-2"
-        } );
+        };
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -961,9 +961,9 @@ public class WebClientTest extends WebTestCase {
         assertEquals( "submit1", page.tabToPreviousElement().getAttributeValue("name") );
         assertEquals( "submit0", page.tabToPreviousElement().getAttributeValue("name") );
 
-        final List expectedAlerts = Arrays.asList( new String[]{
+        final String[] expectedAlerts = new String[]{
             "focus-2", "blur-2", "focus-1", "blur-1", "focus-0"
-        } );
+        };
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -1419,8 +1419,7 @@ public class WebClientTest extends WebTestCase {
         final HtmlPage pageInFrame = (HtmlPage) ((WebWindow) page.getFrames().get(0)).getEnclosedPage();
         ((HtmlAnchor) pageInFrame.getAnchors().get(0)).click();
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "null", "null"} );
+        final String[] expectedAlerts = new String[] {"null", "null"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -1556,7 +1555,7 @@ public class WebClientTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-        final List expectedAlerts = Arrays.asList( new String[]{"foo"} );
+        final String[] expectedAlerts = new String[] {"foo"};
 
         webConnection.setResponse(URL_FIRST, content, "Text/Html");
         assertInstanceOf(client.getPage(URL_FIRST), HtmlPage.class);

@@ -84,7 +84,7 @@ public class HtmlButtonTest extends WebTestCase {
 
         final HtmlPage secondPage = (HtmlPage)button.click();
 
-        final List expectedAlerts = Arrays.asList( new String[]{"foo"} );
+        final String[] expectedAlerts = new String[] {"foo"};
         assertEquals( expectedAlerts, collectedAlerts );
 
         assertSame( page, secondPage );
@@ -107,7 +107,7 @@ public class HtmlButtonTest extends WebTestCase {
 
         final HtmlPage secondPage = (HtmlPage)button.click();
 
-        final List expectedAlerts = Arrays.asList( new String[]{"foo", "bar"} );
+        final String[] expectedAlerts = new String[] {"foo", "bar"};
         assertEquals( expectedAlerts, collectedAlerts );
 
         assertNotSame( page, secondPage );
@@ -130,7 +130,7 @@ public class HtmlButtonTest extends WebTestCase {
 
         final HtmlPage secondPage = (HtmlPage)button.click();
 
-        final List expectedAlerts = Arrays.asList( new String[]{"foo", "reset"} );
+        final String[] expectedAlerts = new String[] {"foo", "reset"};
         assertEquals( expectedAlerts, collectedAlerts );
 
         assertSame( page, secondPage );
@@ -213,7 +213,7 @@ public class HtmlButtonTest extends WebTestCase {
 
         final HtmlPage secondPage = (HtmlPage)button.click();
 
-        final List expectedAlerts = Arrays.asList( new String[]{"bar"} );
+        final String[] expectedAlerts = new String[] {"bar"};
         assertEquals( expectedAlerts, collectedAlerts );
 
         assertNotSame( page, secondPage );

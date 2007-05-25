@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -245,7 +244,7 @@ public class HtmlFrameSetTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final List collectedAlerts = new ArrayList();
-        final List expectedAlerts = Arrays.asList( new String[]{"Success"} );
+        final String[] expectedAlerts = new String[] {"Success"};
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         webConnection.setResponse(URL_FIRST, framesContent);

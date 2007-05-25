@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -84,7 +83,7 @@ public class FrameSetTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(framesetContent, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList(new String[] { "20%,*", "*,*" });
+        final String[] expectedAlerts = new String[] {"20%,*", "*,*"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -121,7 +120,7 @@ public class FrameSetTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, frameContent);
         webClient.setWebConnection(webConnection);
 
-        final List expectedAlerts = Arrays.asList(new String[] { "20%,*", "*,*" });
+        final String[] expectedAlerts = new String[] {"20%,*", "*,*"};
         webClient.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }

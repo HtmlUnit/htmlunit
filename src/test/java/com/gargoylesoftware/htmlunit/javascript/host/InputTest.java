@@ -103,9 +103,9 @@ public class InputTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList( new String[]{
+        final String[] expectedAlerts = new String[]{
             "foo", "text", "textfield1", "form1", "cat"
-        } );
+        };
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -162,11 +162,11 @@ public class InputTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList( new String[]{
+        final String[] expectedAlerts = new String[]{
             "button", "button", "checkbox", "file", "hidden", "select-one",
             "select-multiple", "password", "reset", "reset", "submit",
             "submit", "text", "textarea"
-        } );
+        };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         assertEquals( expectedAlerts, collectedAlerts );
@@ -199,10 +199,7 @@ public class InputTest extends WebTestCase {
         ((HtmlAnchor)page.getHtmlElementById("clickme")).click();
         assertTrue( checkBox.isChecked() );
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "false", "true"
-        } );
-
+        final String[] expectedAlerts = new String[] {"false", "true"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -248,9 +245,9 @@ public class InputTest extends WebTestCase {
         assertTrue( radioB.isChecked() );
         assertFalse( radioC.isChecked() );
 
-        final List expectedAlerts = Arrays.asList( new String[]{
+        final String[] expectedAlerts = new String[]{
             "true", "false", "false", "false", "true", "false"
-        } );
+        };
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -301,9 +298,9 @@ public class InputTest extends WebTestCase {
         assertFalse( button2.isDisabled() );
         assertTrue ( button3.isDisabled() );
 
-        final List expectedAlerts = Arrays.asList( new String[]{
+        final String[] expectedAlerts = new String[]{
             "false", "true", "false", "true", "false", "true"
-        } );
+        };
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -414,7 +411,7 @@ public class InputTest extends WebTestCase {
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
-        final List expectedAlerts = Arrays.asList(new String[] {"true", "true", "true", "true", "true"});
+        final String[] expectedAlerts = new String[] {"true", "true", "true", "true", "true"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
         loadPage(htmlContent, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -445,7 +442,7 @@ public class InputTest extends WebTestCase {
         final HtmlForm form = page.getFormByName("form1");
         form.getInputByName("button1").click();
 
-        final List expectedAlerts = Arrays.asList(new String[] {"changed"});
+        final String[] expectedAlerts = new String[] {"changed"};
         assertEquals(expectedAlerts, collectedAlerts);
 
         final List expectedParameters = Arrays.asList(new Object[] {
@@ -478,7 +475,7 @@ public class InputTest extends WebTestCase {
         button.click();
         assertEquals("from button", textinput.getValueAttribute());
 
-        final List expectedAlerts = Arrays.asList(new String[] {"foo"});
+        final String[] expectedAlerts = new String[] {"foo"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -508,7 +505,7 @@ public class InputTest extends WebTestCase {
         button.click();
         assertEquals("from button", textinput.getValueAttribute());
 
-        final List expectedAlerts = Arrays.asList(new String[] {"foo"});
+        final String[] expectedAlerts = new String[] {"foo"};
         assertEquals(expectedAlerts, collectedAlerts);
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
     }
@@ -533,7 +530,7 @@ public class InputTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList( new String[]{"on", "on"} );
+        final String[] expectedAlerts = new String[] {"on", "on"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -558,7 +555,7 @@ public class InputTest extends WebTestCase {
             + "<input type='radio' name='myRadio'/>"
             + "</form></body></html>";
 
-        final List expectedAlerts = Arrays.asList( new String[]{"radio", "hidden", "image"} );
+        final String[] expectedAlerts = new String[] {"radio", "hidden", "image"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -611,7 +608,7 @@ public class InputTest extends WebTestCase {
                 + "details(oForm.myPwd);\n"
                 + "</script>\n"
                 + "</body></html>";
-        final List expectedAlerts = Arrays.asList( new String[]{
+        final String[] expectedAlerts = new String[]{
             "button: false, false, function, function, , ",
             "submit: false, false, function, function, submit it!, submit it!",
             "file: false, false, function, function, , ",
@@ -619,7 +616,7 @@ public class InputTest extends WebTestCase {
             "radio: true, true, function, function, , on",
             "text: false, false, function, function, , ",
             "password: false, false, function, function, , "
-        } );
+        };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -644,7 +641,7 @@ public class InputTest extends WebTestCase {
             + "<form name='myForm' action='foo'>\n"
             + "</form></body></html>";
 
-        final List expectedAlerts = Arrays.asList( new String[]{"text", "hidden"} );
+        final String[] expectedAlerts = new String[] {"text", "hidden"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();

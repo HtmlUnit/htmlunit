@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -87,10 +86,7 @@ public class NodeImplTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("test_hasChildNodes", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList(new String[]{
-            "true"
-        });
-
+        final String[] expectedAlerts = new String[] {"true"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
     /**
@@ -111,10 +107,7 @@ public class NodeImplTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("test_hasChildNodes", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList(new String[]{
-            "false"
-        });
-
+        final String[] expectedAlerts = new String[] {"false"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -148,9 +141,7 @@ public class NodeImplTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals("foo", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "true", "true"
-        } );
+        final String[] expectedAlerts = new String[] {"true", "true"};
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -186,9 +177,7 @@ public class NodeImplTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals("foo", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "true", "true"
-        } );
+        final String[] expectedAlerts = new String[] {"true", "true"};
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -212,10 +201,7 @@ public class NodeImplTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("test_hasChildNodes", page.getTitleText());
 
-        final List expectedAlerts = Arrays.asList(new String[]{
-            "DIV"
-        });
-
+        final String[] expectedAlerts = new String[] {"DIV"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -241,7 +227,7 @@ public class NodeImplTest extends WebTestCase {
             + "<h2>Child Node 2-A</h2></div>"
             + "</body></html>";
 
-        final List expectedAlerts = Arrays.asList(new String[] { "2", "SPAN", "2", "#text", "H1", "H2" });
+        final String[] expectedAlerts = new String[] {"2", "SPAN", "2", "#text", "H1", "H2"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -276,9 +262,9 @@ public class NodeImplTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final List expectedAlerts = Arrays.asList(new String[] { "length: 5",
+        final String[] expectedAlerts = new String[] {"length: 5",
             "tempNode.name: undefined", "tempNode.name: input1", "tempNode.name: undefined",
-            "tempNode.name: input2", "tempNode.name: undefined" });
+            "tempNode.name: input2", "tempNode.name: undefined"};
 
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 

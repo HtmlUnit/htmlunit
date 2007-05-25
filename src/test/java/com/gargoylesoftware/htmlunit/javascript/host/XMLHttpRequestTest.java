@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -92,15 +91,15 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testCreation() throws Exception {
-        testCreation(BrowserVersion.MOZILLA_1_0, Arrays.asList(new String[] {"[object XMLHttpRequest]"}));
-        testCreation(BrowserVersion.INTERNET_EXPLORER_6_0, Arrays.asList( new String[] {"activeX created"}));
+        testCreation(BrowserVersion.MOZILLA_1_0, new String[] {"[object XMLHttpRequest]"});
+        testCreation(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"activeX created"});
     }
 
     /**
      * Tests Mozilla style object creation.
      * @throws Exception If the test fails.
      */
-    void testCreation(final BrowserVersion browser, final List expected) throws Exception {
+    void testCreation(final BrowserVersion browser, final String[] expected) throws Exception {
         final String html =
             "<html>\n"
             + "  <head>\n"
@@ -171,7 +170,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection( webConnection );
         client.getPage( URL_FIRST );
 
-        final List alerts = Arrays.asList( new String[] { UNINITIALIZED, LOADING, COMPLETED, xml } );
+        final String[] alerts = new String[] {UNINITIALIZED, LOADING, COMPLETED, xml};
         assertEquals( alerts, collectedAlerts );
     }
 
@@ -227,9 +226,8 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection( webConnection );
         final Page page = client.getPage( URL_FIRST );
 
-        final String[] s = new String[] { UNINITIALIZED,
+        final String[] alerts = new String[] { UNINITIALIZED,
             LOADING, LOADING, LOADED, INTERACTIVE, COMPLETED, xml };
-        final List alerts = Collections.synchronizedList( Arrays.asList( s ) );
 
         assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
         assertEquals( alerts, collectedAlerts );
@@ -279,7 +277,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection( webConnection );
         client.getPage(URL_FIRST);
 
-        final List alerts = Arrays.asList( new String[] { COMPLETED, xml } );
+        final String[] alerts = new String[] {COMPLETED, xml};
         assertEquals( alerts, collectedAlerts );
     }
 
@@ -314,7 +312,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection( webConnection );
         client.getPage(URL_FIRST);
 
-        final List alerts = Arrays.asList( new String[] { "bla bla" } );
+        final String[] alerts = new String[] {"bla bla"};
         assertEquals( alerts, collectedAlerts );
     }
 

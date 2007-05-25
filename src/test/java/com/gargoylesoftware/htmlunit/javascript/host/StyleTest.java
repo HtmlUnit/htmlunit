@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -110,7 +109,7 @@ public class StyleTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList( new String[]{"black", "pink"} );
+        final String[] expectedAlerts = new String[] {"black", "pink"};
         assertEquals( expectedAlerts, collectedAlerts );
 
         assertEquals(

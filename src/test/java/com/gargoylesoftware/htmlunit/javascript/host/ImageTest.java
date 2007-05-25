@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -79,9 +78,9 @@ public class ImageTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList( new String[]{
+        final String[] expectedAlerts = new String[]{
             "http://www.gargoylesoftware.com/foo.gif"
-        } );
+        };
 
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
@@ -133,9 +132,9 @@ public class ImageTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList( new String[]{
+        final String[] expectedAlerts = new String[]{
             "http://www.gargoylesoftware.com/bar.gif"
-        } );
+        };
         
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
@@ -157,7 +156,7 @@ public class ImageTest extends WebTestCase {
             + "<img src='foo.png' id='myImage'>"
             + "</body></html>";
 
-        final List expectedAlerts = Arrays.asList(new String[]{"foo"});
+        final String[] expectedAlerts = new String[] {"foo"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();

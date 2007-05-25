@@ -37,12 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import junit.textui.TestRunner;
+
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
-import java.net.MalformedURLException;
-import java.net.URL;
-import junit.textui.TestRunner;
 
 /**
  *  This class runs live tests against popular webservers just to make sure

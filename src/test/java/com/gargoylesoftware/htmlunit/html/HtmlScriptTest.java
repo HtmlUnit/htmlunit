@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -155,7 +154,7 @@ public class HtmlScriptTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         client.getPage(URL_FIRST);
-        final List expectedAlerts = Arrays.asList(new String[] { "First script executes", "Second page loading" });
+        final String[] expectedAlerts = new String[] {"First script executes", "Second page loading"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -171,7 +170,7 @@ public class HtmlScriptTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList(new String[] { "a" });
+        final String[] expectedAlerts = new String[] {"a"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

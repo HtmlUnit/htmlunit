@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -78,7 +77,7 @@ public class IFrameTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final List expectedAlerts = Arrays.asList( new String[]{"false"} );
+        final String[] expectedAlerts = new String[] {"false"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -98,7 +97,7 @@ public class IFrameTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final List expectedAlerts = Arrays.asList( new String[]{"1", "myIFrame"} );
+        final String[] expectedAlerts = new String[] {"1", "myIFrame"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -156,7 +155,7 @@ public class IFrameTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final List expectedAlerts = Arrays.asList( new String[]{"IFRAME"} );
+        final String[] expectedAlerts = new String[] {"IFRAME"};
         webClient.getPage(URL_FIRST);
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -176,7 +175,7 @@ public class IFrameTest extends WebTestCase {
                 + "<body onload='test()'>"
                 + "<iframe name='foo' id='myFrame' src='about:blank'></iframe>"
                 + "</body></html>";
-        final List expectedAlerts = Arrays.asList( new String[]{"true"} );
+        final String[] expectedAlerts = new String[] {"true"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -201,7 +200,7 @@ public class IFrameTest extends WebTestCase {
                 + "<body onload='test()'>"
                 + "<iframe name='foo' id='myFrame' src='about:blank'></iframe>"
                 + "</body></html>";
-        final List expectedAlerts = Arrays.asList( new String[]{"true"} );
+        final String[] expectedAlerts = new String[] {"true"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();

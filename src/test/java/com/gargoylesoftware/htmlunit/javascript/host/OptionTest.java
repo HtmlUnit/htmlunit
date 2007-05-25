@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -81,10 +80,10 @@ public class OptionTest extends WebTestCase {
             + "<p>hello world</p>"
             + "</body></html>";
 
-        final List expectedAlerts = Arrays.asList( new String[]{
+        final String[] expectedAlerts = new String[]{
             "some text", "some value", "false",
             "some other text", "some other value", "true"
-        } );
+        };
 
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 

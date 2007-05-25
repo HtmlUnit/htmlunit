@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -100,7 +99,7 @@ public class ScriptTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         client.getPage(URL_FIRST);
-        final List expectedAlerts = Arrays.asList(new String[] { "1", "2", "b=complete", "3" });
+        final String[] expectedAlerts = new String[] { "1", "2", "b=complete", "3" };
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

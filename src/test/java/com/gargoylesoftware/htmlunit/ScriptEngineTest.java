@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -86,8 +85,7 @@ public class ScriptEngineTest extends WebTestCase {
         loadPageAndCollectScripts(content, collectedScripts);
 
         // NO MORE: The last expected is the dummy stub that is needed to initialize the javascript engine
-        final List expectedScripts = Arrays.asList( new String[]{
-            "One", "Two", "Three"} );
+        final String[] expectedScripts = new String[] {"One", "Two", "Three"};
 
         assertEquals( expectedScripts, collectedScripts );
     }

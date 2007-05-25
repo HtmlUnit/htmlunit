@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -172,9 +171,9 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         assertTrue(oneItem.isChecked());
         assertFalse(twoItems.isChecked());
 
-        final List expectedAlerts = Arrays.asList(new String[] { 
+        final String[] expectedAlerts = new String[] { 
             "oneItem.checked: false twoItems.checked: true",
-            "oneItem.checked: true twoItems.checked: false"});
+            "oneItem.checked: true twoItems.checked: false"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

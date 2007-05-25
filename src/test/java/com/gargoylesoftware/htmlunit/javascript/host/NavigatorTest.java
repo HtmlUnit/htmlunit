@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -206,9 +205,7 @@ public class NavigatorTest extends WebTestCase {
                 "</html>";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final List expectedAlerts = Arrays.asList(new String[]{
-            name + " = " + value
-        });
+        final String[] expectedAlerts = new String[] {name + " = " + value};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -234,7 +231,7 @@ public class NavigatorTest extends WebTestCase {
 
         webClient.getPage(URL_FIRST);
 
-        final List expectedAlerts = Arrays.asList(new String[]{ "Netscape" });
+        final String[] expectedAlerts = new String[] {"Netscape"};
         assertEquals(expectedAlerts, collectedAlerts);
     }    
     
@@ -260,7 +257,7 @@ public class NavigatorTest extends WebTestCase {
 
         webClient.getPage(URL_FIRST);
 
-        final List expectedAlerts = Arrays.asList(new String[]{ BrowserVersion.MOZILLA_1_0.getBrowserLanguage() });
+        final String[] expectedAlerts = new String[] {BrowserVersion.MOZILLA_1_0.getBrowserLanguage()};
         assertEquals(expectedAlerts, collectedAlerts);
     }    
 

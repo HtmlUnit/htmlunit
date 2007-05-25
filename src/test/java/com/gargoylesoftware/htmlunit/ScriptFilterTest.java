@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -75,9 +74,7 @@ public class ScriptFilterTest extends WebTestCase {
             + "<form name='form1'><input type=text name='txt'></form></body></html>";
         final List collectedAlerts = new ArrayList();
 
-        final List expectedAlerts = Arrays.asList( new String[]{
-            "hello"
-        });
+        final String[] expectedAlerts = new String[]{ "hello" };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         loadPage(content, collectedAlerts);
