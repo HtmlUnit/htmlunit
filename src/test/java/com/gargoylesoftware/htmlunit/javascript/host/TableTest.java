@@ -38,13 +38,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -97,7 +93,7 @@ public class TableTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList(new String[] { "caption1", "caption2", "null", "caption3" });
+        final String[] expectedAlerts = { "caption1", "caption2", "null", "caption3" };
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -132,7 +128,7 @@ public class TableTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList(new String[] { "thead1", "thead2", "null", "thead3" });
+        final String[] expectedAlerts = { "thead1", "thead2", "null", "thead3" };
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -167,7 +163,7 @@ public class TableTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>\n";
 
-        final List expectedAlerts = Arrays.asList(new String[] { "2", "true", "4 2 2", "6 3 3" });
+        final String[] expectedAlerts = {"2", "true", "4 2 2", "6 3 3"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -203,7 +199,7 @@ public class TableTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>\n";
 
-        final List expectedAlerts = Arrays.asList(new String[] { "2", "true", "3", "2", "3", "2" });
+        final String[] expectedAlerts = {"2", "true", "3", "2", "3", "2"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -237,7 +233,7 @@ public class TableTest extends WebTestCase {
             + "</body>"
             + "</html>";
 
-        final List expectedAlerts = Arrays.asList(new String[] { "1", "1"});
+        final String[] expectedAlerts = {"1", "1"};
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -301,8 +297,8 @@ public class TableTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList(new String[] {"2", "true", "8 2 2 2 2",
-            "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3"});
+        final String[] expectedAlerts = {"2", "true", "8 2 2 2 2",
+            "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -337,7 +333,7 @@ public class TableTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
 
-        final List expectedAlerts = Arrays.asList(new String[] { "tfoot1", "tfoot2", "null", "tfoot3" });
+        final String[] expectedAlerts = { "tfoot1", "tfoot2", "null", "tfoot3" };
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -361,7 +357,7 @@ public class TableTest extends WebTestCase {
             + "<tr><td id='td1'>c</td><td id='td2'>d</td></tr>\n"
             + "</table></body></html>";
 
-        final List expectedAlerts = Arrays.asList( new String[] { "0", "1", "0", "1" } );
+        final String[] expectedAlerts = { "0", "1", "0", "1" };
         createTestPageForRealBrowserIfNeeded( htmlContent, expectedAlerts );
 
         final List collectedAlerts = new ArrayList();
@@ -395,7 +391,7 @@ public class TableTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>\n";
 
-        final List expectedAlerts = Arrays.asList(new String[] { "1", "2", "1", "0", "TD", "1", "2" });
+        final String[] expectedAlerts = { "1", "2", "1", "0", "TD", "1", "2" };
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -432,7 +428,7 @@ public class TableTest extends WebTestCase {
             + "</body>"
             + "</html>";
 
-        final List expectedAlerts = Arrays.asList(new String[] { "mytable", "mytable" });
+        final String[] expectedAlerts = { "mytable", "mytable" };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -535,7 +531,7 @@ public class TableTest extends WebTestCase {
             + "</body>"
             + "</html>";
 
-        final List expectedAlerts = Arrays.asList(new String[] { "1", "1" });
+        final String[] expectedAlerts = { "1", "1" };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -601,23 +597,16 @@ public class TableTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
-    public static void testWidth() throws Exception {
+    public void testWidth() throws Exception {
         final String content
             = "<html><head></head><body>\n"
-                + "<table id='tableID' style=\"background:blue\"><tr><td></td></tr></table>\n"
-                + "<script language=\"javascript\">\n"
-                + "    var table = document.getElementById( 'tableID' );\n"
+                + "<table id='tableID' style='background:blue'><tr><td></td></tr></table>\n"
+                + "<script language='javascript'>\n"
+                + "    var table = document.getElementById('tableID');\n"
                 + "    table.width = '200';\n"
                 + "</script></body></html>";
 
-        final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(client);
-        webConnection.setDefaultResponse(content);
-        client.setWebConnection(webConnection);
-
-        final List collectedAlerts = new ArrayList();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        final HtmlPage page = loadPage(content);
         final String xml = page.asXml();
         assertTrue( xml.indexOf( "width=\"200\"" ) != -1 );
     }
