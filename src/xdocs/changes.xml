@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem">
+                asXml() now expands tags for iframe and script to make generated xml interpretable as html by browsers.
+            </action>
             <action type="add" dev="asashour" id="1691024">
                 Add support for table.width (#1691024).
             </action>

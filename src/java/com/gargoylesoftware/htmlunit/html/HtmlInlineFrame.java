@@ -69,4 +69,13 @@ public class HtmlInlineFrame extends BaseFrame {
     public String getTagName() {
         return TAG_NAME;
     }
+
+    /**
+     * Indicates if a node without children should be written in expanded form as xml
+     * (ie with closing tag rather than with "/&gt;)
+     * @return <code>true</code> to make generated xml readable as html
+     */
+    protected boolean isEmptyXmlTagExpanded() {
+        return true;
+    }
 }

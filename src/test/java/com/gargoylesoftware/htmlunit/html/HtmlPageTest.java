@@ -1113,6 +1113,31 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         assertEquals(htmlContent, page.asXml().replaceAll("\\s", ""));
     }
+        
+    /**
+     * Test that the generated xml is valid as html code too
+     * @exception  Exception If the test fails
+     */
+    public void testAsXmlValidHtmlOutput() throws Exception {
+        final String html = 
+            "<html><head><title>foo</title>"
+            + "<script src='script.js'></script></head>"
+            + "<body><iframe src='about:blank'></iframe></body>"
+            + "</html>";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(html);
+        webConnection.setResponse(new URL(URL_FIRST, "script.js"), "", "text/javascript");
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+
+        assertEquals(html, page.asXml()
+                .replaceAll("[\\n\\r]", "")
+                .replaceAll("\\s\\s+", "")
+                .replaceAll("\"", "'"));
+    }
 
     /**
      * @exception  Exception If the test fails
