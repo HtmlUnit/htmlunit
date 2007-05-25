@@ -2463,4 +2463,26 @@ public class DocumentTest extends WebTestCase {
         assertNotNull( page.getEventHandler( "click" ) );
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testPut() throws Exception
+    {
+        final String html = "<html><body>"
+                + "<script>"
+                + "alert(document.foo);"
+                + "if (!document.foo) document.foo = 123;"
+                + "alert(document.foo);"
+                + "</script>"
+                + "</form>" + "</body>" + "</html>";
+
+        final String[] expectedAlerts = {"undefined", "123"};
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
+        
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

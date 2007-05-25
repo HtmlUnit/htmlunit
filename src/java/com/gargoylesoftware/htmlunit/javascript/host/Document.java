@@ -846,12 +846,9 @@ public final class Document extends NodeImpl {
      * @return The property.
      */
     public Object get( final String name, final Scriptable start) {
-        if ("writeln".equals(name)) {
-            System.out.println("links on " + start);
-        }
         // properties and methods are defined on the prototype
         if (this == start) {
-            return NOT_FOUND;
+            return super.get(name, start);
         }
 
         final Document document = (Document) start;
