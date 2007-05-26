@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Chris Erskine
  * @author Daniel Gredler
  * @author David K. Taylor
+ * @author Ahmed Ashour
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_location.asp">
  * MSDN Documentation</a>
  */
@@ -145,6 +146,14 @@ public class Location extends SimpleScriptable {
      */
     public void jsxFunction_replace(final String url) throws IOException {
         jsxSet_href(url);
+    }
+
+    /**
+     * Returns the location URL.
+     * @return the location URL.
+     */
+    public String jsxFunction_toString() {
+        return jsxGet_href();
     }
 
     /**

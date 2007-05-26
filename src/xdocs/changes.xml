@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour" id="1725742">
+                JavaScript: Add support for location.toString() (#1725742).
+            </action>
             <action type="update" dev="mguillem">
                 asXml() now expands tags for iframe and script to make generated xml interpretable as html by browsers.
             </action>

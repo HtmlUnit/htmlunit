@@ -56,10 +56,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * Tests for {@link Location}.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Michael Ottati
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class LocationTest extends WebTestCase {
 
@@ -540,4 +541,23 @@ public class LocationTest extends WebTestCase {
         
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testToString() throws Exception {
+        final String content =
+            "<html><head>"
+            + "<script>"
+            + " alert( window.location.toString() );"
+            + "</script>"
+            + "<body>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = { URL_GARGOYLE.toExternalForm() };
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }

@@ -514,6 +514,7 @@
         <function name="assign"/>
         <function name="reload"/>
         <function name="replace"/>
+        <function name="toString"/>
     </class>
 
     <class name="Navigator" classname="com.gargoylesoftware.htmlunit.javascript.host.Navigator"
