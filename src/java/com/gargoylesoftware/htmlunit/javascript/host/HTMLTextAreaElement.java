@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * The javascript object that represents a textarea
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour

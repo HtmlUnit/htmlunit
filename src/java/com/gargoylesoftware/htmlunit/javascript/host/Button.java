@@ -42,7 +42,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  * The javascript object that represents a button (&lt;button type=...&gt;)
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  */
 public class Button extends FormField {

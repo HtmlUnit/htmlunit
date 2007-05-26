@@ -43,7 +43,7 @@ import java.util.Map;
  * Wrapper for the html element "head".
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public class HtmlHead extends HtmlElement {

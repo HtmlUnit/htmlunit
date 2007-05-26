@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *  Tests for HtmlResetInput
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class HtmlResetInputTest extends WebTestCase {
     /**

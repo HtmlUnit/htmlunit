@@ -67,12 +67,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * Tests for {@link Document}.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
- * @author  Barnaby Court
- * @author  Chris Erskine
- * @author  Marc Guillemot
- * @author  Michael Ottati
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
+ * @author Barnaby Court
+ * @author Chris Erskine
+ * @author Marc Guillemot
+ * @author Michael Ottati
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  */
 public class DocumentTest extends WebTestCase {

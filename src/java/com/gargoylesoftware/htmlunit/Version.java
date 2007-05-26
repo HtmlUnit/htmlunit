@@ -45,7 +45,7 @@ import java.net.URL;
  * that will be executed if the jar file is run.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class Version {
     /**

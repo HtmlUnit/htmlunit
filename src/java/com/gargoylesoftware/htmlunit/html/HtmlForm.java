@@ -68,9 +68,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * Wrapper for the html element "form"
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
- * @author  Brad Clarke
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
+ * @author Brad Clarke
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author George Murnock

@@ -63,9 +63,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * Tests for SimpleScriptable.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  <a href="mailto:BarnabyCourt@users.sourceforge.net">Barnaby Court</a>
- * @author  David K. Taylor
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:BarnabyCourt@users.sourceforge.net">Barnaby Court</a>
+ * @author David K. Taylor
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Marc Guillemot
  * @author Chris Erskine

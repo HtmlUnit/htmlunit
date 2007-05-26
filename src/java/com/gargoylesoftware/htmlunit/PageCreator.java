@@ -46,7 +46,7 @@ import java.io.IOException;
  * be done as early as possible, e.g. to allow for re-loading of pages during page parsing.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public interface PageCreator {

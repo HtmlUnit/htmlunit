@@ -41,7 +41,7 @@ package com.gargoylesoftware.htmlunit;
  * An adapter for the WebWindowListener interface.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class WebWindowAdapter implements WebWindowListener {
 

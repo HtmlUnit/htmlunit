@@ -41,7 +41,7 @@ package com.gargoylesoftware.htmlunit;
  * This object contains the result of executing a chunk of script code.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public final class ScriptResult {
     private final Object javaScriptResult_;

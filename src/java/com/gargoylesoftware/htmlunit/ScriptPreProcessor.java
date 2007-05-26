@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * is called. It gives developers the oportunity to modify the script to be executed.
  *
  * @version  $Revision$
- * @author  <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  */
 public interface ScriptPreProcessor {
     /**

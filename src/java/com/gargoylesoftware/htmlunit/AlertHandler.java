@@ -43,7 +43,7 @@ package com.gargoylesoftware.htmlunit;
  * is called.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public interface AlertHandler {
     /**

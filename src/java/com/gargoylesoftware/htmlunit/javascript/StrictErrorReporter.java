@@ -46,7 +46,7 @@ import org.mozilla.javascript.EvaluatorException;
  * A javascript error reporter that will log all warnings and errors, no matter how trivial.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class StrictErrorReporter implements ErrorReporter {
     private final Log log_;

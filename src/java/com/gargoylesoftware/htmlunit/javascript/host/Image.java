@@ -50,8 +50,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * The javascript object that represents an "Image"
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Chris Erskine
  * @author Marc Guillemot
  */

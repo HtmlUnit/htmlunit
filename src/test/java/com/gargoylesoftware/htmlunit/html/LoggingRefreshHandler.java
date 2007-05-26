@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.RefreshHandler;
  * perform any refreshes.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  */
 public class LoggingRefreshHandler implements RefreshHandler {

@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * A javascript object for a Screen
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Chris Erskine
  */
 public class History extends SimpleScriptable {

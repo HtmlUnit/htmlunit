@@ -43,7 +43,7 @@ package com.gargoylesoftware.htmlunit;
  * method Window.confirm() is called.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public interface ConfirmHandler {
     /**

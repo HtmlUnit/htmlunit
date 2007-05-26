@@ -47,8 +47,8 @@ import java.util.Map;
  * The javascript object that represents an option.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  * @author Chris Erskine
  * @author Marc Guillemot
  */

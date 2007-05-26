@@ -42,7 +42,7 @@ package com.gargoylesoftware.htmlunit;
  * a given name.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class WebWindowNotFoundException extends RuntimeException {
     private static final long serialVersionUID = 2971032116624875170L;

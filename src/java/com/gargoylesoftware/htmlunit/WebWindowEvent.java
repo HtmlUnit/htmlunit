@@ -43,8 +43,8 @@ import java.util.EventObject;
  * An event that will be fired when a WebWindow changes.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  */
 public final class WebWindowEvent extends EventObject {
     private static final long serialVersionUID = 6693838158619061745L;

@@ -42,8 +42,8 @@ package com.gargoylesoftware.htmlunit;
  *  or a frame.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author  David K. Taylor
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  * @author David D. Kilzer
  */
 public interface WebWindow {
