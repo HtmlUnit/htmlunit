@@ -586,7 +586,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String content =
             "<html><head>\n"
             + "<script><!-- \n"
-            + " alert('1')"
+            + " alert('1')\n"
             + "--></script>"
             + "</head>\n"
             + "<body>\n"
