@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="asashour">
+                JavaScript: Simulate browser behavior for comments that have last line of "statement--&gt;", but not "statement//--&gt;".
+            </action>
             <action type="add" dev="asashour" id="1725742">
                 JavaScript: Add support for location.toString() (#1725742).
             </action>

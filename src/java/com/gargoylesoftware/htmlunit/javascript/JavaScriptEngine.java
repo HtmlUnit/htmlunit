@@ -294,14 +294,35 @@ public class JavaScriptEngine extends ScriptEngine {
         if (sourceCode.startsWith("<!--")) {
             int startIndex = 4;
 
-            final int endIndex;
+            int endIndex;
             if (sourceCode.endsWith("-->")) {
                 endIndex = sourceCode.length() - 3;
+
+                // check for last line that has 
+                // "statement-->", but not "statement//-->"
+                int lastLineIndex;
+                for( lastLineIndex = endIndex; lastLineIndex > startIndex; lastLineIndex-- ) {
+                    final char eachChar = sourceCode.charAt( lastLineIndex );
+                    if( eachChar == '\n' || eachChar == '\r' ) {
+                        final String lastLine = sourceCode.substring(lastLineIndex + 1, endIndex);
+                        if(lastLine.indexOf( "//" ) == -1 && lastLine.trim().length() != 0) {
+                            if( getWebClient().getBrowserVersion().isIE() ) {
+                                //IE ignores last line
+                                endIndex = lastLineIndex;
+                            }
+                            else {
+                                //FF gives syntax error
+                                throw new IllegalArgumentException( "Syntax error for \"" + lastLine +  "-->" + '"');
+                            }
+                        }
+                        break;
+                    }
+                }
             }
             else {
                 endIndex = sourceCode.length();
             }
-            
+
             if (startIndex >= endIndex) {
                 sourceCode = "";
             }

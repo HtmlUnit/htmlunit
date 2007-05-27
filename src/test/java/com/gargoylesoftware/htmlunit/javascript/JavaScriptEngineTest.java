@@ -75,6 +75,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author David K. Taylor
+ * @author Ahmed Ashour
  */
 public class JavaScriptEngineTest extends WebTestCase {
     /**
@@ -1207,5 +1208,73 @@ public class JavaScriptEngineTest extends WebTestCase {
         }
     }
 
-}
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testCommentNoDoubleSlashIE() throws Exception {
+        final String content =
+            "<html><head>\n"
+            + "<script><!-- alert(1);\n"
+            + " alert(2);\n"
+            + "alert(3) --></script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
 
+        final String[] expectedAlert = new String[] {"2"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlert, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testCommentNoDoubleSlashFF() throws Exception {
+        final String content =
+            "<html><head>\n"
+            + "<script><!-- alert(1);\n"
+            + " alert(2);\n"
+            + "alert(3) --></script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        try {
+            loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+            fail();
+        }
+        catch( final Exception e ) {
+            //expected exception
+        }
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testComment() throws Exception {
+        testComment(BrowserVersion.FULL_FEATURED_BROWSER);
+        testComment(BrowserVersion.MOZILLA_1_0);
+    }
+    
+    /**
+     * @throws Exception If the test fails
+     */
+    private void testComment(final BrowserVersion browserVersion) throws Exception {
+        final String content =
+            "<html><head>\n"
+            + "<script><!-- alert(1);\n"
+            + " alert(2);\n"
+            + "alert(3)//--></script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        final String[] expectedAlert = new String[] {"2", "3"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlert, collectedAlerts);
+    }
+
+}
