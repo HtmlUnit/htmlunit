@@ -68,7 +68,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * Tests for HtmlPage.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author David K. Taylor
  * @author Andreas Hangler

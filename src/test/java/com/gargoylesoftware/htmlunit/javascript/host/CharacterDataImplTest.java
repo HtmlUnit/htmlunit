@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * Tests for CharacterDataImpl
  *
  * @version  $Revision$
- * @author  David K. Taylor
+ * @author David K. Taylor
  */
 public class CharacterDataImplTest extends WebTestCase {
     /**

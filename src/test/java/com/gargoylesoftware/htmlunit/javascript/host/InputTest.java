@@ -64,7 +64,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * Tests for Inputs and buttons.
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Chris Erskine
  */

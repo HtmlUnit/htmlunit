@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * Tests for Images
  *
  * @version  $Revision$
- * @author  <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author <a href="mailto:george@murnock.com">George Murnock</a>
  */
 public class ImageTest extends WebTestCase {
     /**

@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *  Tests for HtmlButtonInput
  *
  * @version  $Revision$
- * @author  <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class HtmlButtonInputTest extends WebTestCase {
     /**
