@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * 
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class DomTextTest extends WebTestCase {
 
@@ -60,13 +61,19 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAsText() throws Exception {
-        final String content = "<html><body><span id='foo'>a b&nbsp;c  d &nbsp;e</span></body></html>";
+        testAsText( "a b&nbsp;c  d &nbsp;e",  "a b c d  e" );
+        testAsText( "a b&nbsp;c  d &nbsp; e", "a b c d   e" );
+    }
+    
+    private void testAsText(final String html, final String expectedText) throws Exception {
+        final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
 
         final HtmlPage page = loadPage(content);
         final HtmlElement elt = page.getHtmlElementById("foo");
-        assertEquals("a b c d e", elt.asText());
+        assertEquals(expectedText, elt.asText());
 
         final DomNode node = elt.getFirstChild();
-        assertEquals("a b c d e", node.asText());
+        assertEquals(expectedText, node.asText());
     }
+
 }

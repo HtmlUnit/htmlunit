@@ -399,10 +399,7 @@ public abstract class DomNode implements Cloneable {
             }
         }
         if (isText) {
-            String text = textBuffer.toString();
-            if (!(this instanceof HtmlTextArea)) {
-                text = reduceWhitespace(text);
-            }
+            final String text = textBuffer.toString();
             buffer.append(text);
         }
 
@@ -421,26 +418,28 @@ public abstract class DomNode implements Cloneable {
         final int length = text.length();
         boolean whitespace = false;
         for( int i = 0; i < length; ++i) {
-            char ch = text.charAt(i);
+            final char ch = text.charAt(i);
 
             // Translate non-breaking space to regular space.
             if (ch == (char)160) {
-                ch = ' ';
-            }
-
-            if (whitespace) {
-                if (!Character.isWhitespace(ch)) {
-                    buffer.append(ch);
-                    whitespace = false;
-                }
+                buffer.append( ' ' );
+                whitespace = false;
             }
             else {
-                if( Character.isWhitespace(ch) ) {
-                    whitespace = true;
-                    buffer.append(' ');
+                if (whitespace) {
+                    if (!Character.isWhitespace(ch)) {
+                        buffer.append(ch);
+                        whitespace = false;
+                    }
                 }
                 else {
-                    buffer.append(ch);
+                    if( Character.isWhitespace(ch) ) {
+                        whitespace = true;
+                        buffer.append(' ');
+                    }
+                    else {
+                        buffer.append(ch);
+                    }
                 }
             }
         }
