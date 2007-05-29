@@ -20,7 +20,7 @@ defaultmailhost
 				usedebug="false"
 				uselogger="true"
 				>
-                            <property name="reporting-app-dir" value="&basedir;/htmlunit/&hostname;/htmlunit/"/>
+                    <property name="reporting-app-dir" value="&basedir;/htmlunit/&hostname;/htmlunit/"/>
             </ant>
 		</schedule>
 		<listeners>
@@ -42,6 +42,7 @@ defaultmailhost
 				xslfile="&basedir;/htmlunit/cruisecontrol/checkout/cruise/htmlmail.xsl"
 				>
 				<always address="mguillemot@yahoo.fr"/>
+				<always address="build-support@canoo.com"/>
 				<failure address="htmlunit-develop@lists.sourceforge.net" reportWhenFixed="true"/>
 			</htmlemail>
 			<XSLTLogPublisher
