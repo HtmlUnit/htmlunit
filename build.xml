@@ -209,7 +209,7 @@ JUnit results available here: ${test.reports.dir}/index.html
 
 		<taskdef resource="checkstyletask.properties" classpath="${jars.dir}/checkstyle/checkstyle-4.3/checkstyle-all-4.3.jar"/>
 		
-		<checkstyle config="checkstyle.xml">
+		<checkstyle config="checkstyle.xml" maxWarnings="0">
 			<property key="checkstyle.cache.file" file="${target.dir}/checkstyle-cachefile"/>
 			<classpath>
 			    <path refid="test.class.path"/>
