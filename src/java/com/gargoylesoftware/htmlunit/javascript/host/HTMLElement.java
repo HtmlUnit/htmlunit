@@ -74,6 +74,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
+import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 
 /**
  * The javascript object "HTMLElement" which is the base class for all HTML
@@ -92,7 +93,7 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  */
-public class HTMLElement extends NodeImpl {
+public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGetter {
 
     private static final long serialVersionUID = -6864034414262085851L;
     private static final int BEHAVIOR_ID_UNKNOWN = -1;
@@ -246,36 +247,25 @@ public class HTMLElement extends NodeImpl {
         return getWindow().jsxGet_document();
     }
 
-
     /**
-     * Return the value of the named attribute.
-     * @param name The name of the variable
-     * @param start The scriptable to get the variable from.
-     * @return The attribute value
+     * Looks at attributes with the given name
+     * {@inheritDoc}
      */
-    public Object get( final String name, final Scriptable start ) {
-        // properties and methods are defined on the prototype => only prototype can investigate if nothing found
-        if (this == start) {
-            return super.get(name, start);
-        }
-
-        Object result = super.get( name, start );
-        if ( result == NOT_FOUND ) {
-            final HtmlElement htmlElement = getHtmlElementOrNull();
-            // can name be an attribute of current element?
-            // first approximation: attribute are all lowercase
-            // this should be improved because it's wrong. For instance: tabIndex, hideFocus, acceptCharset
-            if ( htmlElement != null && name.toLowerCase().equals(name)) {
-                final String value = htmlElement.getAttributeValue(name);
-                if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
-                    getLog().debug("Found attribute for evalution of property \"" + name
-                            + "\" for of " + start);
-                    result = value;
-                }
+    public Object getWithFallback(final String name) {
+        final HtmlElement htmlElement = getHtmlElementOrNull();
+        // can name be an attribute of current element?
+        // first approximation: attribute are all lowercase
+        // this should be improved because it's wrong. For instance: tabIndex, hideFocus, acceptCharset
+        if ( htmlElement != null && name.toLowerCase().equals(name)) {
+            final String value = htmlElement.getAttributeValue(name);
+            if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
+                getLog().debug("Found attribute for evalution of property \"" + name
+                        + "\" for of " + this);
+                return value;
             }
         }
-
-        return result;
+        
+        return NOT_FOUND;
     }
 
     /**

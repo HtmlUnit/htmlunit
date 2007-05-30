@@ -57,7 +57,7 @@ import org.mozilla.javascript.ScriptableObject;
  * @author Daniel Gredler
  * @author Bruce Faulkner
  */
-public class HTMLOptionsCollection extends SimpleScriptable {
+public class HTMLOptionsCollection extends SimpleScriptable implements ScriptableWithFallbackGetter{
     private static final long serialVersionUID = -4790255174217201235L;
     private HtmlSelect htmlSelect_;
 
@@ -108,44 +108,20 @@ public class HTMLOptionsCollection extends SimpleScriptable {
         return response;
     }
 
-
     /**
-     * Returns the object with the specified name. If the specified object
-     * is not found and we are emulating IE, this method delegates the call
-     * to the parent select.
-     * 
+     * If IE is emulated, this method delegates the call to the parent select.
      * @param name The name of the object to return.
-     * @param start The object from which to get the named object.
      * @return The object corresponding to the specified name or <tt>NOT_FOUND</tt>.
      */
-    public Object get( final String name, final Scriptable start ) {
-        Object object = super.get( name, start );
-        if( object == NOT_FOUND ) {
-            // First, check the prototype chain for the HTMLOptionsCollection to see if the
-            // name exists elsewhere on the chain before looking to the Select object;
-            // this must be done in case a property or method with the same name
-            // is found on the Select object (e.g. "add") but which has different parameters.
-            // Doing a search on the prototoype before a search on the Select will avoid a
-            // "TypeError: Method "add" called on incompatible object."
-            final Scriptable prototype = this.getPrototype();
-            if (prototype instanceof HTMLOptionsCollection) {
-                object = prototype.get(name, start);
-                if (object != NOT_FOUND) {
-                    return object;
-                }
-            }
-            else {
-                return NOT_FOUND;
-            }
-
-            if( getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE() ) {
-                // If the name was NOT_FOUND on the prototype, then just drop through
-                // to search on the Select for IE only
-                final HTMLSelectElement select = (HTMLSelectElement) htmlSelect_.getScriptObject();
-                object = ScriptableObject.getProperty(select, name);
-            }
+    public Object getWithFallback(final String name) {
+        if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+            // If the name was NOT_FOUND on the prototype, then just drop through
+            // to search on the Select for IE only
+            final HTMLSelectElement select = (HTMLSelectElement) htmlSelect_.getScriptObject();
+            return ScriptableObject.getProperty(select, name);
         }
-        return object;
+
+        return NOT_FOUND;
     }
 
 

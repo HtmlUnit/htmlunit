@@ -49,8 +49,8 @@ import java.util.StringTokenizer;
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
-import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.httpclient.util.DateParseException;
+import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
 import org.jaxen.XPathFunctionContext;
@@ -837,32 +837,19 @@ public final class Document extends NodeImpl {
         return collection;
     }
 
-
     /**
-     * Return the specified property or NOT_FOUND if it could not be found. This is
-     * overridden to get elements by name within this document.
-     * @param name The name of the property
-     * @param start The scriptable object that was originally queried for this property
-     * @return The property.
+     * document.XXX should first look at elements named XXX before using standard functions.
+     * {@inheritDoc}
      */
-    public Object get( final String name, final Scriptable start) {
-        // properties and methods are defined on the prototype
-        if (this == start) {
-            return super.get(name, start);
-        }
-
-        final Document document = (Document) start;
-        // Some calls to get will happen during the initialization of the superclass.
-        // At this point, we don't have enough information to do our own initialization
-        // so we have to just pass this call through to the superclass.
-        final HtmlPage htmlPage = (HtmlPage) document.getDomNodeOrNull();
-        if( htmlPage == null ) {
-            return super.get(name, start);
+    protected Object getWithPreemption(final String name) {
+        final HtmlPage htmlPage = (HtmlPage) getDomNodeOrNull();
+        if (htmlPage == null) {
+            return NOT_FOUND;
         }
 
         // document.xxx allows to retrieve some elements by name like img or form but not input, a, ...
         // TODO: behaviour for iframe seems to differ between IE and Moz
-        final HTMLCollection collection = new HTMLCollection(document);
+        final HTMLCollection collection = new HTMLCollection(this);
         final String xpathExpr = "//*[(@name = '" + name + "' and (name() = 'img' or name() = 'form'))]";
         try {
             collection.init(htmlPage, new HtmlUnitXPath(xpathExpr));
@@ -879,8 +866,8 @@ public final class Document extends NodeImpl {
         else if (size > 1) {
             return collection;
         }
-
-        return super.get(name, start);
+        
+        return NOT_FOUND;
     }
 
     /**

@@ -44,6 +44,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
@@ -153,6 +154,24 @@ public class JavaScriptEngine extends ScriptEngine {
         final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
         context.initStandardObjects(window);
         
+        // put custom object to be called as very last prototype to call the fallback getter (if any)
+        final Scriptable fallbackCaller = new ScriptableObject()
+        {
+            private static final long serialVersionUID = -7124423159070941606L;
+
+            public Object get(final String name, final Scriptable start) {
+                if (start instanceof ScriptableWithFallbackGetter) {
+                    return ((ScriptableWithFallbackGetter) start).getWithFallback(name);
+                }
+                return NOT_FOUND;
+            }
+
+            public String getClassName() {
+                return "htmlUnitHelper-fallbackCaller";
+            }
+        };
+        ScriptableObject.getObjectPrototype(window).setPrototype(fallbackCaller);
+        
         final Iterator it = jsConfig.keySet().iterator();
         while (it.hasNext()) {
             final String jsClassName = (String) it.next();
@@ -180,14 +199,18 @@ public class JavaScriptEngine extends ScriptEngine {
         }
 
         // once all prototypes have been build, it's possible to configure the chains
+        final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(window);
         for (final Iterator iter = prototypesPerJSName.entrySet().iterator(); iter.hasNext();) {
             final Map.Entry entry = (Map.Entry) iter.next();
             final String name = (String) entry.getKey();
             final ClassConfiguration config = jsConfig.getClassConfiguration(name);
-            if (config.getExtendedClass() != null) {
-                final Scriptable prototype = (Scriptable) entry.getValue();
+            final Scriptable prototype = (Scriptable) entry.getValue();
+            if (!StringUtils.isEmpty(config.getExtendedClass())) {
                 final Scriptable parentPrototype = (Scriptable) prototypesPerJSName.get(config.getExtendedClass());
                 prototype.setPrototype(parentPrototype);
+            }
+            else {
+                prototype.setPrototype(objectPrototype); 
             }
         }
         

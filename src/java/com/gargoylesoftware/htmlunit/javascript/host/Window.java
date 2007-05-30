@@ -55,7 +55,6 @@ import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.Assert;
@@ -76,6 +75,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -95,7 +95,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp">
  * MSDN documentation</a>
  */
-public class Window extends SimpleScriptable {
+public class Window extends SimpleScriptable implements ScriptableWithFallbackGetter {
 
     private static final long serialVersionUID = -7730298149962810325L;
     private Document document_;
@@ -864,45 +864,22 @@ public class Window extends SimpleScriptable {
     }
 
     /**
-     * Return the specified property or {@link #NOT_FOUND} if it could not be found.
-     * @param name The name of the property
-     * @param start The scriptable object that was originally queried for this property
-     * @return The property.
+     * Looks at attributes with the given name
+     * {@inheritDoc}
      */
-    public Object get( final String name, final Scriptable start ) {
-
-        // Hack to make eval work in other window scope when needed
-        // see unit tests. Todo: find a clean way to handle that
-        if ("eval".equals(name) && getStartingScope() != start) {
-            return ((ScriptableObject) start).getAssociatedValue("custom_eval");
-        }
-
-        // If the DomNode hasn't been set yet then do it now.
-        if( getDomNodeOrNull() == null && document_ != null ) {
-            final HtmlPage htmlPage = document_.getHtmlPageOrNull();
-            if (htmlPage != null) {
-                setDomNode(htmlPage);
-            }
-        }
-
-        Object result = super.get(name, start);
-
-        final Window thisWindow = (Window) start;
-        // If we are in a frameset or have an iframe then this might be a frame name
-        if( result == NOT_FOUND ) {
-            final DomNode domNode = thisWindow.getDomNodeOrNull();
-            if( domNode != null ) {
-                result = getFrameByName( domNode.getPage(), name );
-            }
+    public Object getWithFallback(final String name) {
+        Object result = NOT_FOUND;
+        final DomNode domNode = getDomNodeOrNull();
+        if (domNode != null) {
+            result = getFrameByName( domNode.getPage(), name );
         }
 
         // See if it is an attempt to access an element directly by name or id if we are emulating IE.
         if (result == NOT_FOUND) {
             // this tests are quite silly and should be removed when custom JS objects have a clean
             // way to get the WebClient they are running in.
-            final DomNode domNode = thisWindow.getDomNodeOrNull();
             if (domNode != null && domNode.getPage().getWebClient().getBrowserVersion().isIE()) {
-                final HTMLCollection array = (HTMLCollection) thisWindow.document_.jsxFunction_getElementsByName(name);
+                final HTMLCollection array = (HTMLCollection) document_.jsxFunction_getElementsByName(name);
                 final int length = array.jsxGet_length();
                 if (length == 1) {
                     result = array.get(0, array);
@@ -911,12 +888,25 @@ public class Window extends SimpleScriptable {
                     result = array;
                 }
                 else {
-                    result = thisWindow.document_.jsxFunction_getElementById(name);
+                    result = document_.jsxFunction_getElementById(name);
                 }
             }
         }
 
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Object get(final String name, final Scriptable start) {
+        // Hack to make eval work in other window scope when needed
+        // see unit tests. Todo: find a clean way to handle that
+        if (getStartingScope() != start && "eval".equals(name)) {
+            return getAssociatedValue("custom_eval");
+        }
+
+        return super.get(name, start);
     }
 
     private Object getFrameByName( final HtmlPage page, final String name ) {

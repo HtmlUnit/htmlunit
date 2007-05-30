@@ -79,7 +79,36 @@ public class SimpleScriptable extends ScriptableObject {
         isInitialized_ = false;
     }
 
+    /**
+     * Get a named property from the object. 
+     * Normally HtmlUnit objects don't need to overwrite this method as properties are defined
+     * on the prototypes from the xml configuration. In some cases where "content" of object
+     * has priority compared to the properties consider using utility {@link #getWithPreemption(String)}.
+     * For fallback case just implement {@link ScriptableWithFallbackGetter}.
+     * {@inheritDoc} 
+     */
+    public Object get(final String name, final Scriptable start) {
+        // try to get property configured on object itself
+        final Object response = super.get(name, start);
+        if (response != NOT_FOUND) {
+            return response;
+        }
 
+        if (this == start) {
+            return getWithPreemption(name);
+        }
+        return NOT_FOUND;
+    }
+
+    /**
+     * Called by {@link #get(String, Scriptable)} to allow to retrieve property before the prototype
+     * chain is searched.
+     * @param name the property name
+     * @return {@link Scriptable#NOT_FOUND} if not found
+     */
+    protected Object getWithPreemption(final String name) {
+        return NOT_FOUND;
+    }
 
     private JavaScriptConfiguration getJavaScriptConfiguration() {
         final BrowserVersion browserVersion

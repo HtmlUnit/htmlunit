@@ -199,15 +199,14 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * {@link #NOT_FOUND} is returned.
      * {@inheritDoc}
      */
-    public final Object get( final String name, final Scriptable start ) {
-        // If the name of a property was specified, return the property value.
-        final Object result = super.get(name, start);
-        if( result != NOT_FOUND ) {
-            return result;
+    protected Object getWithPreemption(final String name) {
+        // Test to see if we are trying to get the length of this collection?
+        // If so return NOT_FOUND here to let the property be retrieved using the prototype
+        if ("length".equals(name)) {
+            return NOT_FOUND;
         }
 
-        final HTMLCollection currentArray = ((HTMLCollection) start);
-        final List elements = currentArray.getElements();
+        final List elements = getElements();
         CollectionUtils.transform(elements, transformer_);
 
         // See if there is an element in the element array with the specified id.
@@ -235,10 +234,10 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         }
 
         // See if there are any elements in the element array with the specified name.
-        final HTMLCollection array = new HTMLCollection(currentArray);
+        final HTMLCollection array = new HTMLCollection(this);
         try {
             final String newCondition = "@name = '" + name + "'";
-            final String currentXPathExpr = currentArray.xpath_.toString();
+            final String currentXPathExpr = xpath_.toString();
             final String xpathExpr;
             if (currentXPathExpr.endsWith("]")) {
                 xpathExpr = currentXPathExpr.substring(0, currentXPathExpr.length()-1) + " and " + newCondition + "]";
@@ -246,17 +245,11 @@ public class HTMLCollection extends SimpleScriptable implements Function {
             else {
                 xpathExpr = currentXPathExpr + "[" + newCondition + "]";
             }
-            final XPath xpathName = currentArray.xpath_.getNavigator().parseXPath(xpathExpr);
-            array.init(currentArray.node_, xpathName);
+            final XPath xpathName = xpath_.getNavigator().parseXPath(xpathExpr);
+            array.init(node_, xpathName);
         }
         catch (final SAXPathException e) {
             throw Context.reportRuntimeError("Failed getting sub elements by name" + e.getMessage());
-        }
-
-        // Test to see if we are trying to get the length of this array?  If so, pass the processing up
-        // to the higher level processing
-        if ("length".equals(name)) {
-            return NOT_FOUND;
         }
 
         final List subElements = array.getElements();

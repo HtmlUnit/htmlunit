@@ -257,31 +257,12 @@ public class HTMLFormElement extends HTMLElement {
         getHtmlForm().reset();
     }
 
-
-    /**
-     * Return the specified property or NOT_FOUND if it could not be found.
-     * @param name The name of the property
-     * @param start The scriptable object that was originally queried for this property
-     * @return The property.
-     */
-    public Object get( final String name, final Scriptable start ) {
-        if (this == start) {
-            return super.get(name, start);
-        }
-        // first look at form elements by name/id
-        Object response = ((HTMLFormElement) start).get(name);
-        if (response == NOT_FOUND) {
-            response = super.get(name, start);
-        }
-        return response;
-    }
-
     /**
      * Return the specified property or NOT_FOUND if it could not be found.
      * @param name The name of the property
      * @return The property.
      */
-    Object get(final String name) {
+    protected Object getWithPreemption(final String name) {
         // Try to get the element or elements specified from the form element array
         // (except input type="image" that can't be accessed this way)
         final HTMLCollection elements = new HTMLCollection(this);
@@ -319,11 +300,6 @@ public class HTMLFormElement extends HTMLElement {
         else if (nbElements == 1) {
             result = elements.get(0, elements);
         }
-
-        if (result == NOT_FOUND) {
-            result = super.get( name, this );
-        }
-
         return result;
     }
 

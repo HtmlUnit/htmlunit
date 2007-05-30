@@ -154,28 +154,15 @@ public class Style extends SimpleScriptable {
     }
 
     /**
-     * Return the specified property or NOT_FOUND if it could not be found.
-     * 
-     * @param name
-     *            The name of the property
-     * @param start
-     *            The scriptable object that was originally queried for this
-     *            property
-     * @return The property.
+     * {@inheritDoc}
      */
-    public Object get(final String name, final Scriptable start) {
-
-        final Object result;
+    protected Object getWithPreemption(final String name) {
         if (STYLE_ALLOWED_PROPERTIES.contains(name)) {
-            result = getStyleAttribute(name);
+            return getStyleAttribute(name);
         }
-        else {
-            result = super.get(name, start);
-        }
-
-        return result;
+        return super.getWithPreemption(name);
     }
-
+    
     /**
      * Gets the style attribute value
      * @param name the style attribute name
