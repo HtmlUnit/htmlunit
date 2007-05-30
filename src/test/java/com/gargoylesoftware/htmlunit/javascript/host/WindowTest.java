@@ -2069,9 +2069,7 @@ public class WindowTest extends WebTestCase {
         final int max = Thread.MAX_PRIORITY + 1;
         final String content = "<html><body><script language='JavaScript'>"
             + "var depth = 0;\n"
-            + "var maxdepth = "
-            + max
-            + ";\n"
+            + "var maxdepth = " + max + ";\n"
             + "function addAnother() {\n"
             + "  if (depth < maxdepth) {\n"
             + "    window.alert('ping');\n"
@@ -2084,7 +2082,8 @@ public class WindowTest extends WebTestCase {
 
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
         final HtmlPage page = loadPage(content, collectedAlerts);
-        assertTrue("threads did not stop in time", page.getEnclosingWindow().getThreadManager().joinAll(1000));
+        assertTrue("threads did not stop in time", page.getEnclosingWindow()
+                .getThreadManager().joinAll((max + 1) * 1000));
         assertEquals(Collections.nCopies(max, "ping"), collectedAlerts);
     }
 
