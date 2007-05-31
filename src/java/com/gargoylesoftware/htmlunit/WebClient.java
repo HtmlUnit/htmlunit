@@ -443,9 +443,11 @@ public class WebClient {
 
         final Page newPage = pageCreator_.createPage( webResponse, webWindow );
 
-        if (! firstWindowStack_.empty() && firstWindowStack_.peek() == null) {
-            firstWindowStack_.pop();
-            firstWindowStack_.push(webWindow);
+        synchronized (firstWindowStack_) {
+            if (! firstWindowStack_.empty() && firstWindowStack_.peek() == null) {
+                firstWindowStack_.pop();
+                firstWindowStack_.push(webWindow);
+            }
         }
 
         // the page beeing loaded may already have been replaced by an other one through js code
@@ -808,7 +810,9 @@ public class WebClient {
      * @return The first window.
      */
     public WebWindow popFirstWindow() {
-        return (WebWindow)firstWindowStack_.pop();
+        synchronized (firstWindowStack_) {
+            return (WebWindow)firstWindowStack_.pop();
+        }
     }
 
 
@@ -816,7 +820,9 @@ public class WebClient {
      * Clear the first window for this client.
      */
     public void pushClearFirstWindow() {
-        firstWindowStack_.push(null);
+        synchronized (firstWindowStack_) {
+            firstWindowStack_.push(null);
+        }
     }
 
 
