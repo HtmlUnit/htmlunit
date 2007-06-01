@@ -57,14 +57,13 @@ import org.mortbay.http.handler.ResourceHandler;
 import com.gargoylesoftware.base.testing.BaseTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-
-
 /**
  * Tests methods in {@link HttpWebConnection} class.
  *
+ * @version $Revision$
  * @author David D. Kilzer
  * @author Marc Guillemot
- * @version $Revision$
+ * @author Ahmed Ashour
  */
 public class HttpWebConnectionTest extends BaseTestCase {
     private HttpServer httpServer_;
@@ -232,12 +231,12 @@ public class HttpWebConnectionTest extends BaseTestCase {
         final HttpWebConnection connection = new HttpWebConnection(new WebClient());
         final Method method =
                 connection.getClass().getDeclaredMethod("makeWebResponse", new Class[]{
-                    int.class, HttpMethodBase.class, URL.class, long.class});
+                    int.class, HttpMethodBase.class, URL.class, long.class, String.class});
         method.setAccessible(true);
 
         final WebResponse response =
                 (WebResponse) method.invoke(connection, new Object[]{
-                    new Integer(httpStatus), httpMethod, url, new Long(loadTime)});
+                    new Integer(httpStatus), httpMethod, url, new Long(loadTime), TextUtil.DEFAULT_CHARSET});
 
         assertEquals(httpStatus, response.getStatusCode());
         assertEquals(url, response.getUrl());
