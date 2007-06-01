@@ -50,8 +50,15 @@ import java.io.UnsupportedEncodingException;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Brad Clarke
+ * @author Ahmed Ashour
  */
 public final class TextUtil {
+
+    /**
+     * Default encoding used.
+     */
+    public static final String DEFAULT_CHARSET = "ISO-8859-1";
+    
     /** Private constructor to prevent instantiation */
     private TextUtil() {}
 
@@ -87,11 +94,11 @@ public final class TextUtil {
      */
     public static InputStream toInputStream( final String content ) {
         try {
-            return toInputStream(content, "ISO-8859-1");
+            return toInputStream(content, DEFAULT_CHARSET);
         }
         catch( final UnsupportedEncodingException e ) {
             throw new IllegalStateException(
-                "ISO-8859-1 is an unsupported encoding!  You may have a corrupted installation of java.");
+                DEFAULT_CHARSET + " is an unsupported encoding!  You may have a corrupted installation of java.");
         }
     }
 
@@ -129,20 +136,35 @@ public final class TextUtil {
     }
 
     /**
-     * Convert a string into a byte array using a default encoding of ISO-8859-1. 
+     * Convert a string into a byte array using a default encoding {@link #DEFAULT_CHARSET}. 
      * 
-     * @param content The string to convert, assumed to be ISO-8859-1 encoded
+     * @param content The string to convert, assumed to be {@link #DEFAULT_CHARSET} encoded
      * @return The String as a byte[]. If the default encoding is not supported an 
      *         empty byte[] will be returned.
      */
     public static byte[] stringToByteArray(final String content) {
+        return stringToByteArray(content, DEFAULT_CHARSET);
+    }
+
+
+    /**
+     * Convert a string into a byte array using the given encoding.
+     *  
+     * @param charset The name of a supported charset
+     * @param content The string to convert
+     * 
+     * @return The String as a byte[]. If the specified encoding is not supported an 
+     *         empty byte[] will be returned.
+     */
+    public static byte[] stringToByteArray(final String content, final String charset ) {
         byte[] contentBytes;
         try {
-            contentBytes = content.getBytes("ISO-8859-1");
+            contentBytes = content.getBytes( charset );
         }
         catch (final UnsupportedEncodingException e) {
             contentBytes = new byte[0];
         }
         return contentBytes;
     }
+
 }

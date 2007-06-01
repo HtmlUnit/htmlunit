@@ -52,6 +52,7 @@ import org.apache.commons.httpclient.NameValuePair;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Brad Clarke
+ * @author Ahmed Ashour
  */
 public class StringWebResponse extends WebResponseImpl {
 
@@ -62,8 +63,8 @@ public class StringWebResponse extends WebResponseImpl {
      * @param contentString String to be converted to WebResponseData
      * @return A simple WebResponseData with defaults specified
      */
-    private static WebResponseData getWebResponseData(final String contentString) {
-        final byte[] content = TextUtil.stringToByteArray(contentString);
+    private static WebResponseData getWebResponseData(final String contentString, final String charset) {
+        final byte[] content = TextUtil.stringToByteArray(contentString, charset);
         final List compiledHeaders = new ArrayList();
         compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
         return new WebResponseData(content, 200, "OK", compiledHeaders);
@@ -91,7 +92,16 @@ public class StringWebResponse extends WebResponseImpl {
      * @param content The content to return.
      */
     public StringWebResponse(final String content) {
-        super(getWebResponseData(content), getURL(), SubmitMethod.GET, 0);
+        super(getWebResponseData(content, TextUtil.DEFAULT_CHARSET), getURL(), SubmitMethod.GET, 0);
+    }
+
+    /**
+     * Create an instance.
+     * @param content The content to return.
+     * @param charset The charset used to convert the content.
+     */
+    public StringWebResponse(final String content, final String charset) {
+        super(getWebResponseData(content, charset), charset, getURL(), SubmitMethod.GET, 0);
     }
 
     /**
@@ -100,6 +110,16 @@ public class StringWebResponse extends WebResponseImpl {
      * @param originatingURL The url that this should be associated with
      */
     public StringWebResponse(final String content, final URL originatingURL) {
-        super(getWebResponseData(content), originatingURL, SubmitMethod.GET, 0);
+        super(getWebResponseData(content, TextUtil.DEFAULT_CHARSET), originatingURL, SubmitMethod.GET, 0);
+    }
+
+    /**
+     * Create an instance associated with an originating URL
+     * @param content The content to return.
+     * @param charset The charset used to convert the content.
+     * @param originatingURL The url that this should be associated with
+     */
+    public StringWebResponse(final String content, final String charset, final URL originatingURL) {
+        super(getWebResponseData(content, charset), charset, originatingURL, SubmitMethod.GET, 0);
     }
 }

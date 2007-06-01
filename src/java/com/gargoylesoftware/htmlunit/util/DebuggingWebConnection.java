@@ -48,6 +48,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -70,6 +71,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * <em>This class is only intended as an help during the conception.</em>
  * @version  $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class DebuggingWebConnection extends WebConnectionWrapper {
     private static final Log LOG = LogFactory.getLog(DebuggingWebConnection.class);
@@ -171,7 +173,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      */
     private void createOverview() throws IOException {
 
-        FileUtils.writeStringToFile(javaScriptFile_, "var tab = [];\n", "ISO-8859-1");
+        FileUtils.writeStringToFile(javaScriptFile_, "var tab = [];\n", TextUtil.DEFAULT_CHARSET);
 
         final File summary = new File(javaScriptFile_.getParentFile(), reportBaseName_ + ".html");
         final String content = "<html><head><title>Summary for " + reportBaseName_ + "</title>\n"
@@ -192,7 +194,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
             + "</ol>"
             + "</body></html>";
 
-        FileUtils.writeStringToFile(summary, content, "ISO-8859-1");
+        FileUtils.writeStringToFile(summary, content, TextUtil.DEFAULT_CHARSET);
         LOG.info("Summary will be in " + summary.getAbsolutePath());
     }
 }

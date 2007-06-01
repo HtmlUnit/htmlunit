@@ -62,6 +62,7 @@ import org.xml.sax.ext.LexicalHandler;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
@@ -76,6 +77,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David K. Taylor
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public final class HTMLParser {
 
@@ -244,7 +246,7 @@ public final class HTMLParser {
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, webResponse.getUrl());
         String charSet = webResponse.getContentCharSet();
         if (!isSupportedCharacterSet(charSet)) {
-            charSet = "ISO-8859-1";
+            charSet = TextUtil.DEFAULT_CHARSET;
         }
         final XMLInputSource in = new XMLInputSource(
                 null,

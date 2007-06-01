@@ -52,6 +52,7 @@ import org.apache.commons.lang.ClassUtils;
  * @version $Revision$
  * @author Brad Clarke
  * @author Hans Donner
+ * @author Ahmed Ashour
  */
 public class WebRequestSettings {
     private URL url_;
@@ -61,7 +62,7 @@ public class WebRequestSettings {
     private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
     private Map additionalHeaders_ = new HashMap();
     private CredentialsProvider credentialsProvider_ = null;
-    private String charset_ = "ISO-8859-1";
+    private String charset_ = TextUtil.DEFAULT_CHARSET;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
     private List requestParameters_ = Collections.EMPTY_LIST;
@@ -277,7 +278,7 @@ public class WebRequestSettings {
     }
 
     /**
-     * Sets the charset. Default value is "ISO-8859-1"
+     * Sets the charset. Default value is {@link TextUtil#DEFAULT_CHARSET}
      * @param charset the new charset
      */
     public void setCharset(final String charset) {

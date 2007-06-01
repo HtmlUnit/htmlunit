@@ -58,6 +58,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Noboru Sinohara
  * @author Marc Guillemot
  * @author Brad Clarke
+ * @author Ahmed Ashour
  */
 public class MockWebConnection extends WebConnectionImpl {
     private final Map responseMap_ = new HashMap(10);
@@ -107,8 +108,8 @@ public class MockWebConnection extends WebConnectionImpl {
             }
         }
 
-        return new WebResponseImpl(response, webRequestSettings.getURL(), webRequestSettings
-                .getSubmitMethod(), 0);
+        return new WebResponseImpl(response, webRequestSettings.getCharset(), 
+                webRequestSettings.getURL(), webRequestSettings.getSubmitMethod(), 0);
     }
 
     /**

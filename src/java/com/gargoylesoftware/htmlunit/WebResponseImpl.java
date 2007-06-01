@@ -56,6 +56,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @version $Revision$
  * @author Brad Clarke
+ * @author Ahmed Ashour
  */
 public class WebResponseImpl implements WebResponse {
 
@@ -64,6 +65,7 @@ public class WebResponseImpl implements WebResponse {
     private SubmitMethod requestMethod_;
     private long loadTime_;
     private WebResponseData responseData_;
+    private String charset_;
 
     /**
      * Construct with all data
@@ -75,7 +77,22 @@ public class WebResponseImpl implements WebResponse {
      */
     public WebResponseImpl(final WebResponseData responseData, final URL url,
             final SubmitMethod requestMethod, final long loadTime) {
+        this( responseData, TextUtil.DEFAULT_CHARSET, url, requestMethod, loadTime);
+    }
+
+    /**
+     * Construct with all data
+     * 
+     * @param responseData      Data that was send back
+     * @param charset           Charset used if not returned in the response.
+     * @param url               Where this response came from
+     * @param requestMethod     The method used to get this response
+     * @param loadTime          How long the response took to be sent
+     */
+    public WebResponseImpl(final WebResponseData responseData, final String charset,
+            final URL url, final SubmitMethod requestMethod, final long loadTime) {
         responseData_ = responseData;
+        charset_ = charset;
         url_ = url;
         requestMethod_ = requestMethod;
         loadTime_ = loadTime;
@@ -189,26 +206,25 @@ public class WebResponseImpl implements WebResponse {
      * If no charset is specified in headers, then try to guess it from the content.
      * Currently only UTF-8 with BOM marker is detected this way.
      * @see <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Wikipedia - Byte Order Mark</a>
-     * @return the charset, ISO-8859-1 if it can't be determined
+     * @return the charset, {@link TextUtil#DEFAULT_CHARSET} if it can't be determined
      */
     public String getContentCharSet() {
         final String contentTypeHeader = getResponseHeaderValue("content-type");
-        String charSet = StringUtils.substringAfter(contentTypeHeader, "charset=");
-        if (StringUtils.isEmpty(charSet)) {
+        String charset = StringUtils.substringAfter(contentTypeHeader, "charset=");
+        if (StringUtils.isEmpty(charset)) {
             log_.debug("No charset specified in header, trying to guess it from content");
             final byte[] body = responseData_.getBody();
             final byte[] markerUTF8 = { (byte) 0xef, (byte) 0xbb, (byte) 0xbf };
             if (body != null && ArrayUtils.isEquals(markerUTF8, ArrayUtils.subarray(body, 0, 3))) {
                 log_.debug("UTF-8 marker found");
-                charSet = "UTF-8";
+                charset = "UTF-8";
             }
             else {
-                log_.debug("Nothing guessed, supposing that it is ISO-8859-1");
-                // default value as long as we are not able to do a better guess
-                charSet = "ISO-8859-1";
+                log_.debug("No charset guessed, using " + charset_ );
+                charset = charset_;
             }
         }
-        return charSet;
+        return charset;
     }
 
     /**

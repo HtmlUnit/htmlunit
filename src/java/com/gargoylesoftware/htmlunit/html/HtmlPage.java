@@ -822,14 +822,14 @@ public final class HtmlPage extends DomNode implements Page {
                         + "loaded javascript element " + url + " but got [" + webResponse.getContentType()+"]");
                 }
                 if (StringUtils.isEmpty(scriptEncoding)) {
-                    if (!contentCharset.equals("ISO-8859-1")) {
+                    if (!contentCharset.equals(TextUtil.DEFAULT_CHARSET)) {
                         scriptEncoding = contentCharset;
                     }
-                    else if (!originalCharset_.equals("ISO-8859-1")) {
+                    else if (!originalCharset_.equals(TextUtil.DEFAULT_CHARSET)) {
                         scriptEncoding = originalCharset_ ;
                     }
                     else {
-                        scriptEncoding = "ISO-8859-1";
+                        scriptEncoding = TextUtil.DEFAULT_CHARSET;
                     }
                 }
                 final byte [] data = webResponse.getResponseBody();

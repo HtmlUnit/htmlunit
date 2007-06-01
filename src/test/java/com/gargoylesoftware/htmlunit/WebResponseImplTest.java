@@ -43,11 +43,14 @@ import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
 
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
 /**
  * Tests for {@link WebResponseImpl}.
  *
  * @version  $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class WebResponseImplTest extends WebTestCase {
 
@@ -87,4 +90,29 @@ public class WebResponseImplTest extends WebTestCase {
         final List expectedAlerts = Collections.singletonList("test");
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testEncoding() throws Exception {
+        final String title = "\u6211\u662F\u6211\u7684FOCUS";
+        final String content =
+            "<html><head>\n"
+            + "<title>" + title + "</title>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, content.getBytes( "UTF-8" ), 
+                200, "OK", "text/html", Collections.EMPTY_LIST);
+        client.setWebConnection( webConnection );
+        final WebRequestSettings settings = new WebRequestSettings( URL_FIRST );
+        settings.setCharset( "UTF-8" );
+        final HtmlPage page = (HtmlPage) client.getPage(settings);
+        assertEquals( title, page.getTitleText() );
+    }
+
 }

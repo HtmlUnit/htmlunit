@@ -127,7 +127,7 @@ public class HttpWebConnection extends WebConnectionImpl {
             final long startTime = System.currentTimeMillis();
             final int responseCode = httpClient.executeMethod(hostConfiguration, httpMethod);
             final long endTime = System.currentTimeMillis();
-            return makeWebResponse( responseCode, httpMethod, url, endTime-startTime );
+            return makeWebResponse( responseCode, httpMethod, url, endTime-startTime, webRequestSettings.getCharset() );
         }
         catch( final HttpException e ) {
             // KLUDGE: hitting www.yahoo.com will cause an exception to be thrown while
@@ -376,7 +376,7 @@ public class HttpWebConnection extends WebConnectionImpl {
      * Converts the HttpMethod into a WebResponse
      */
     private WebResponse makeWebResponse(final int statusCode, final HttpMethodBase method,
-            final URL originatingURL, final long loadTime) throws IOException {
+            final URL originatingURL, final long loadTime, final String charset) throws IOException {
 
         String statusMessage = method.getStatusText();
         if (statusMessage == null || statusMessage.length() == 0) {
@@ -398,7 +398,7 @@ public class HttpWebConnection extends WebConnectionImpl {
                 headers);
 
         final SubmitMethod requestMethod = SubmitMethod.getInstance(method.getName());
-        return new WebResponseImpl(responseData, originatingURL, requestMethod, loadTime);
+        return new WebResponseImpl(responseData, charset, originatingURL, requestMethod, loadTime);
     }
 
 

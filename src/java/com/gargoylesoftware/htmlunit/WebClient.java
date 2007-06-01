@@ -39,12 +39,10 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -329,7 +327,7 @@ public class WebClient {
         final WebResponse webResponse;
         final String protocol = parameters.getURL().getProtocol();
         if (protocol.equals("javascript")) {
-            webResponse = makeWebResponseForJavaScriptUrl(webWindow, parameters.getURL());
+            webResponse = makeWebResponseForJavaScriptUrl(webWindow, parameters.getURL(), parameters.getCharset());
         }
         else {
             webResponse = loadWebResponse(parameters);
@@ -1291,21 +1289,19 @@ public class WebClient {
     /**
      * Builds a WebResponse for a file url.
      * This first implementation is basic. 
-     * It assumes that the file contains an html page encoded with computer's default 
-     * encoding.
+     * It assumes that the file contains an html page encoded with given encoding.
      * @param url The file url
+     * @param charset encodingn to use
      * @return The web response
      * @throws IOException If an IO problem occurs
      */
-    private WebResponse makeWebResponseForFileUrl(final URL url) throws IOException {
+    private WebResponse makeWebResponseForFileUrl(final URL url, final String charset) throws IOException {
         final File file = FileUtils.toFile(url);
         final String contentType = guessContentType(file);
 
         if (contentType.startsWith("text")) {
-            // take default encoding of the computer (in J2SE5 it's easier but...)
-            final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
-            final String str = IOUtils.toString(new FileInputStream(file), encoding);
-            return new StringWebResponse(str, url) {
+            final String str = IOUtils.toString(new FileInputStream(file), charset);
+            return new StringWebResponse(str, charset, url) {
                 public String getContentType() {
                     return contentType;
                 }
@@ -1379,7 +1375,8 @@ public class WebClient {
         return contentType;
     }
 
-    private WebResponse makeWebResponseForJavaScriptUrl( final WebWindow webWindow, final URL url ) {
+    private WebResponse makeWebResponseForJavaScriptUrl( final WebWindow webWindow, final URL url,
+            final String charset ) {
         if (!(webWindow instanceof FrameWindow)) {
             throw new IllegalArgumentException(
                 "javascript urls can only be used to load content into frames and iframes");
@@ -1391,7 +1388,7 @@ public class WebClient {
             url.toExternalForm(), "javascript url", null);
 
         final String contentString = scriptResult.getJavaScriptResult().toString();
-        return new StringWebResponse(contentString);
+        return new StringWebResponse(contentString, charset);
     }
 
     /**
@@ -1410,7 +1407,7 @@ public class WebClient {
             response = makeWebResponseForAboutUrl(webRequestSettings.getURL());
         }
         else if (protocol.equals("file")) {
-            response = makeWebResponseForFileUrl(webRequestSettings.getURL());
+            response = makeWebResponseForFileUrl(webRequestSettings.getURL(), webRequestSettings.getCharset());
         }
         else {
             response = loadWebResponseFromWebConnection(webRequestSettings, ALLOWED_REDIRECTIONS_SAME_URL);
