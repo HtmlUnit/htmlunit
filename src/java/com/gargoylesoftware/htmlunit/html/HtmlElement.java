@@ -49,11 +49,14 @@ import java.util.NoSuchElementException;
 
 import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 
 /**
  * An abstract wrapper for html elements
@@ -90,9 +93,8 @@ public abstract class HtmlElement extends DomNode {
     protected HtmlElement(final HtmlPage htmlPage, final Map attributes) {
 
         super(htmlPage);
-        if(attributes != null) {
+        if (attributes != null) {
             attributes_ = attributes;
-            attributesToEventHandlers();
         }
         else {
             attributes_ = Collections.EMPTY_MAP;
@@ -605,22 +607,6 @@ public abstract class HtmlElement extends DomNode {
         return new ChildElementsIterator();
     }
 
-    /**
-    * Convert javascript snippets defined in the attribute map to executable event handlers.
-    * Should be called only on construction.
-    */
-    private void attributesToEventHandlers() {
-        for (final Iterator iter=attributes_.entrySet().iterator(); iter.hasNext();) {
-            final Map.Entry entry = (Map.Entry) iter.next();
-            final String eventName = (String) entry.getKey();
-
-            if (eventName.startsWith("on")) {
-                setEventHandler(eventName, (String) entry.getValue());
-            }
-        }
-
-    }
-
    /**
      * an iterator over the HtmlElement children
      */
@@ -731,5 +717,52 @@ public abstract class HtmlElement extends DomNode {
         public void remove() {
             baseIter_.remove();
         }
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * Return a Function to be executed when a given event occurs.
+     * @param eventName Name of event such as "onclick" or "onblur", etc.
+     * @return A rhino javascript executable Function, or null if no event
+     * handler has been defined
+     */
+    public final Function getEventHandler(final String eventName) {
+        final HTMLElement jsObj = (HTMLElement) getScriptObject();
+        return jsObj.getEventHandler(eventName);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * Register a Function as an event handler.
+     * @param eventName Name of event such as "onclick" or "onblur", etc.
+     * @param eventHandler A rhino javascript executable Function
+     */
+    public final void setEventHandler(final String eventName, final Function eventHandler) {
+        final HTMLElement jsObj = (HTMLElement) getScriptObject();
+        jsObj.setEventHandler(eventName, eventHandler);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * Register a snippet of javascript code as an event handler.  The javascript code will
+     * be wrapped inside a unique function declaration which provides one argument named
+     * "event"
+     * @param eventName Name of event such as "onclick" or "onblur", etc.
+     * @param jsSnippet executable javascript code
+     */
+    public final void setEventHandler(final String eventName, final String jsSnippet) {
+        final BaseFunction function = new EventHandler(this, eventName, jsSnippet);
+        setEventHandler(eventName, function);
+        getLog().debug("Created event handler " + function.getFunctionName()
+                + " for " + eventName + " on " + this);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * Removes the specified event handler.
+     * @param eventName Name of the event such as "onclick" or "onblur", etc.
+     */
+    public final void removeEventHandler(final String eventName) {
+        setEventHandler(eventName, (Function) null);
     }
 }

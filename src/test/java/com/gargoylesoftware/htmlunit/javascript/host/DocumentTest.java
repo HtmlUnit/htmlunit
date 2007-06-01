@@ -2432,26 +2432,6 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testAddEventListener() throws Exception {
-        final String content = "<html><body>"
-            + "<script>"
-            + "function test()"
-            + "{"
-            + "  alert('in test');"
-            + "}"
-            + "document.addEventListener('click', test, false);"
-            + "</script>"
-            + "</body></html>";
-
-        final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
-        assertNotNull( page.getEventHandler( "click" ) );
-    }
-
-
-    /**
-     * @throws Exception if the test fails
-     */
     public void testPut() throws Exception {
         final String html = "<html><body>"
                 + "<script>"

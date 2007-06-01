@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import java.lang.reflect.Method;
-
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,7 +45,6 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.Assert;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -69,15 +66,6 @@ public class SimpleScriptable extends ScriptableObject {
     private static final long serialVersionUID = 3120000176890886780L;
 
     private DomNode domNode_;
-    private boolean isInitialized_;
-
-
-    /**
-     * Create an instance.  Javascript objects must have a default constructor.
-     */
-    public SimpleScriptable() {
-        isInitialized_ = false;
-    }
 
     /**
      * Get a named property from the object. 
@@ -109,13 +97,6 @@ public class SimpleScriptable extends ScriptableObject {
     protected Object getWithPreemption(final String name) {
         return NOT_FOUND;
     }
-
-    private JavaScriptConfiguration getJavaScriptConfiguration() {
-        final BrowserVersion browserVersion
-            = getWindow().getWebWindow().getWebClient().getBrowserVersion();
-        return JavaScriptConfiguration.getInstance(browserVersion);
-    }
-
 
     /**
      * Return the javascript class name
@@ -194,19 +175,10 @@ public class SimpleScriptable extends ScriptableObject {
      */
     protected void setDomNode( final DomNode domNode, final boolean assignScriptObject ) {
         Assert.notNull("domNode", domNode);
-        isInitialized_ = true;
         domNode_ = domNode;
         if (assignScriptObject) {
             domNode_.setScriptObject(this);
         }
-    }
-
-    /**
-     * Mark the SimpleScriptable as initialized when its JavaScript properties
-     * are defined.
-     */
-    protected void setInitialized() {
-        isInitialized_ = true;
     }
 
     /**
@@ -216,85 +188,6 @@ public class SimpleScriptable extends ScriptableObject {
     public void setHtmlElement( final HtmlElement htmlElement ) {
         setDomNode(htmlElement);
     }
-
-    /**
-     * Set the specified property
-     * @param name The name of the property
-     * @param start The scriptable object that was originally invoked for this property
-     * @param newValue The new value
-     */
-    public void put( final String name, final Scriptable start, Object newValue ) {
-        // TODO: should be removed!!!
-
-        // Some calls to put will happen during the initialization of the superclass.
-        // At this point, we don't have enough information to do our own initialization
-        // so we have to just pass this call through to the superclass.
-        final SimpleScriptable simpleScriptable = (SimpleScriptable) start;
-        if (simpleScriptable.domNode_ == null && ! isInitialized_) {
-            super.put(name, start, newValue);
-            return;
-        }
-
-        final JavaScriptConfiguration configuration = simpleScriptable.getJavaScriptConfiguration();
-        final Method setterMethod = configuration.getPropertyWriteMethod(getClass(), name);
-
-        if (setterMethod == null) {
-            if (configuration.propertyExists(getClass(), name)) {
-                throw Context.reportRuntimeError("Property \"" + name + "\" is not writable for " + start + ". "
-                    + "Cant set it to: " + newValue);
-            }
-            else {
-                getLog().debug("No configured setter \"" + name + "\" found for "
-                    + start + ". Setting it as pure javascript property.");
-
-                super.put(name, start, newValue);
-            }
-        }
-        else {
-            final Class parameterClass = setterMethod.getParameterTypes()[0];
-            if( parameterClass == String.class) {
-                newValue = Context.toString(newValue);
-            }
-            else if (Integer.TYPE.equals(parameterClass)) {
-                newValue = new Integer((new Double(Context.toNumber(newValue))).intValue());
-            }
-            else if (Boolean.TYPE.equals(parameterClass)) {
-                newValue = Boolean.valueOf(Context.toBoolean(newValue));
-            }
-            try {
-                setterMethod.invoke(
-                    simpleScriptable.findMatchingScriptable(start, setterMethod),
-                    new Object[]{ newValue } );
-            }
-            catch( final Exception e ) {
-                throw Context.throwAsScriptRuntimeEx(e);
-            }
-
-        }
-    }
-
-
-    /**
-     * Walk up the prototype chain and return the first scriptable that this method can
-     * be invoked on.
-     * @param start The object on which we are starting the search
-     * @param method The method
-     * @return The first scriptable
-     * @throws IllegalStateException If a matching scriptable could not be found.
-     */
-    private Scriptable findMatchingScriptable( final Scriptable start, final Method method ) {
-        final Class declaringClass = method.getDeclaringClass();
-        Scriptable scriptable = start;
-        while( declaringClass.isInstance(start) == false ) {
-            scriptable = scriptable.getPrototype();
-            if( scriptable == null ) {
-                throw new IllegalStateException("Couldn't find a matching scriptable");
-            }
-        }
-
-        return scriptable;
-    }
-
 
     /**
      * Return the log that is being used for all scripting objects

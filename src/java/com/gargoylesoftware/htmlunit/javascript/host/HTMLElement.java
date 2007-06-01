@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -50,6 +51,7 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
+import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.Function;
@@ -112,6 +114,8 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     private HTMLCollection all_; // has to be a member to have equality (==) working
     private int scrollLeft_ = 0;
     private int scrollTop_ = 0;
+    private final Map eventHandlers_ = new HashMap();
+
 
     /**
      * The tag names of the objects for which outerHTML is readonly
@@ -130,13 +134,6 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         // Empty.
     }
 
-    /**
-     * Javascript constructor.  This must be declared in every javascript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
-     */
-    public void jsConstructor() {
-        // Empty.
-    }
 
     /**
      * Return the value of the "all" property.
@@ -173,6 +170,21 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         super.setDomNode(domNode);
 
         style_ = new Style(this);
+        
+        /**
+         * Convert javascript snippets defined in the attribute map to executable event handlers.
+         * Should be called only on construction.
+         */
+        final HtmlElement htmlElt = (HtmlElement) domNode;
+        for (final Iterator iter=htmlElt.getAttributeEntriesIterator(); iter.hasNext();) {
+            final Map.Entry entry = (Map.Entry) iter.next();
+            final String eventName = (String) entry.getKey();
+            if (eventName.startsWith("on")) {
+                // TODO: check that it is an "allowed" event for the browser, and take care to the case
+                final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, (String) entry.getValue());
+                setEventHandler(eventName, eventHandler);
+            }
+        }
     }
 
     /**
@@ -1033,22 +1045,6 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     //----------------------- END #default#homePage BEHAVIOR -----------------------
 
     /**
-     * Set the onclick event handler for this element.
-     * @param onclick the new handler
-     */
-    public void jsxSet_onclick(final Function onclick) {
-        getHtmlElementOrDie().setEventHandler("onclick", onclick);
-    }
-
-    /**
-     * Get the onclick event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
-     */
-    public Function jsxGet_onclick() {
-        return getHtmlElementOrDie().getEventHandler("onclick");
-    }
-
-    /**
      * Get the children of the current node.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/children.asp">
      * MSDN documentation</a>
@@ -1069,195 +1065,218 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         return children;
     }
 
+    private Object getEventHandlerProp(final String eventName) {
+        // TODO: handle differences between IE and FF: null vs undefined
+        return eventHandlers_.get(eventName);
+    }
+
+
+    /**
+     * Set the onclick event handler for this element.
+     * @param handler the new handler
+     */
+    public void jsxSet_onclick(final Object handler) {
+        eventHandlers_.put("onclick", handler);
+    }
+
+    /**
+     * Get the onclick event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Object jsxGet_onclick() {
+        return getEventHandlerProp("onclick");
+    }
+
      /**
      * Set the ondblclick event handler for this element.
-     * @param ondblclick the new handler     */
-    public void jsxSet_ondblclick(final Function ondblclick) {
-        getHtmlElementOrDie().setEventHandler("ondblclick", ondblclick);
+     * @param handler the new handler     
+     **/
+    public void jsxSet_ondblclick(final Object handler) {
+        eventHandlers_.put("ondblclick", handler);
     }
 
     /**
      * Get the ondblclick event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsxGet_ondblclick() {
-        return getHtmlElementOrDie().getEventHandler("ondblclick");
+    public Object jsxGet_ondblclick() {
+        return getEventHandlerProp("ondblclick");
     }
 
     /**
      * Set the onblur event handler for this element.
-     * @param onblur the new handler
+     * @param handler the new handler
      */
-    public void jsxSet_onblur(final Function onblur) {
-        getHtmlElementOrDie().setEventHandler("onblur", onblur);
+    public void jsxSet_onblur(final Object handler) {
+        eventHandlers_.put("onblur", handler);
     }
 
     /**
      * Get the onblur event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsxGet_onblur() {
-        return getHtmlElementOrDie().getEventHandler("onblur");
+    public Object jsxGet_onblur() {
+        return getEventHandlerProp("onblur");
     }
 
     /**
      * Set the onfocus event handler for this element.
-     * @param onfocus the new handler
+     * @param handler the new handler
      */
-    public void jsxSet_onfocus(final Function onfocus) {
-        getHtmlElementOrDie().setEventHandler("onfocus", onfocus);
+    public void jsxSet_onfocus(final Object handler) {
+        eventHandlers_.put("onfocus", handler);
     }
 
     /**
      * Get the onfocus event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsxGet_onfocus() {
-        return getHtmlElementOrDie().getEventHandler("onfocus");
+    public Object jsxGet_onfocus() {
+        return getEventHandlerProp("onfocus");
     }
 
     /**
      * Set the onkeydown event handler for this element.
-     * @param onkeydown the new handler
+     * @param handler the new handler
      */
-    public void jsxSet_onkeydown(final Function onkeydown) {
-        getHtmlElementOrDie().setEventHandler("onkeydown", onkeydown);
+    public void jsxSet_onkeydown(final Object handler) {
+        eventHandlers_.put("onkeydown", handler);
     }
 
     /**
      * Get the onkeydown event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsxGet_onkeydown() {
-        return getHtmlElementOrDie().getEventHandler("onkeydown");
+    public Object jsxGet_onkeydown() {
+        return getEventHandlerProp("onkeydown");
     }
 
     /**
      * Set the onkeypress event handler for this element.
-     * @param onkeypress the new handler
+     * @param handler the new handler
      */
-    public void jsxSet_onkeypress(final Function onkeypress) {
-        getHtmlElementOrDie().setEventHandler("onkeypress", onkeypress);
+    public void jsxSet_onkeypress(final Object handler) {
+        eventHandlers_.put("onkeypress", handler);
     }
 
     /**
      * Get the onkeypress event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsxGet_onkeypress() {
-        return getHtmlElementOrDie().getEventHandler("onkeypress");
+    public Object jsxGet_onkeypress() {
+        return getEventHandlerProp("onkeypress");
     }
 
     /**
      * Set the onkeyup event handler for this element.
-     * @param onkeyup the new handler
+     * @param handler the new handler
      */
-    public void jsxSet_onkeyup(final Function onkeyup) {
-        getHtmlElementOrDie().setEventHandler("onkeyup", onkeyup);
+    public void jsxSet_onkeyup(final Object handler) {
+        eventHandlers_.put("onkeyup", handler);
     }
 
     /**
      * Get the onkeyup event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsxGet_onkeyup() {
-        return getHtmlElementOrDie().getEventHandler("onkeyup");
+    public Object jsxGet_onkeyup() {
+        return getEventHandlerProp("onkeyup");
     }
 
     /**
      * Set the onmousedown event handler for this element.
-     * @param onmousedown the new handler
+     * @param handler the new handler
      */
-    public void jsxSet_onmousedown(final Function onmousedown) {
-        getHtmlElementOrDie().setEventHandler("onmousedown", onmousedown);
+    public void jsxSet_onmousedown(final Object handler) {
+        eventHandlers_.put("onmousedown", handler);
     }
 
     /**
      * Get the onmousedown event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsxGet_onmousedown() {
-        return getHtmlElementOrDie().getEventHandler("onmousedown");
+    public Object jsxGet_onmousedown() {
+        return getEventHandlerProp("onmousedown");
     }
 
     /**
      * Set the onmousemove event handler for this element.
-     * @param onmousemove the new handler
+     * @param handler the new handler
      */
-    public void jsxSet_onmousemove(final Function onmousemove) {
-        getHtmlElementOrDie().setEventHandler("onmousemove", onmousemove);
+    public void jsxSet_onmousemove(final Object handler) {
+        eventHandlers_.put("onmousemove", handler);
     }
 
     /**
      * Get the onmousemove event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsxGet_onmousemove() {
-        return getHtmlElementOrDie().getEventHandler("onmousemove");
+    public Object jsxGet_onmousemove() {
+        return getEventHandlerProp("onmousemove");
     }
 
     /**
      * Set the onmouseout event handler for this element.
-     * @param onmouseout the new handler
+     * @param handler the new handler
      */
-    public void jsxSet_onmouseout(final Function onmouseout) {
-        getHtmlElementOrDie().setEventHandler("onmouseout", onmouseout);
+    public void jsxSet_onmouseout(final Object handler) {
+        eventHandlers_.put("onmouseout", handler);
     }
 
     /**
      * Get the onmouseout event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsxGet_onmouseout() {
-        return getHtmlElementOrDie().getEventHandler("onmouseout");
+    public Object jsxGet_onmouseout() {
+        return getEventHandlerProp("onmouseout");
     }
 
     /**
      * Set the onmouseover event handler for this element.
-     * @param onmouseover the new handler
+     * @param handler the new handler
      */
-    public void jsxSet_onmouseover(final Function onmouseover) {
-        getHtmlElementOrDie().setEventHandler("onmouseover", onmouseover);
+    public void jsxSet_onmouseover(final Object handler) {
+        eventHandlers_.put("onmouseover", handler);
     }
 
     /**
      * Get the onmouseover event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsxGet_onmouseover() {
-        return getHtmlElementOrDie().getEventHandler("onmouseover");
+    public Object jsxGet_onmouseover() {
+        return getEventHandlerProp("onmouseover");
     }
 
     /**
      * Set the onmouseup event handler for this element.
-     * @param onmouseup the new handler
+     * @param handler the new handler
      */
-    public void jsxSet_onmouseup(final Function onmouseup) {
-        getHtmlElementOrDie().setEventHandler("onmouseup", onmouseup);
+    public void jsxSet_onmouseup(final Object handler) {
+        eventHandlers_.put("onmouseup", handler);
     }
 
     /**
      * Get the onmouseup event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsxGet_onmouseup() {
-        return getHtmlElementOrDie().getEventHandler("onmouseup");
+    public Object jsxGet_onmouseup() {
+        return getEventHandlerProp("onmouseup");
     }
 
     /**
      * Set the onresize event handler for this element.
-     * @param onresize the new handler
+     * @param handler the new handler
      */
-    public void jsxSet_onresize(final Function onresize) {
-        getHtmlElementOrDie().setEventHandler("onresize", onresize);
+    public void jsxSet_onresize(final Object handler) {
+        eventHandlers_.put("onresize", handler);
     }
 
     /**
      * Get the onresize event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsxGet_onresize() {
-        return getHtmlElementOrDie().getEventHandler("onresize");
+    public Object jsxGet_onresize() {
+        return getEventHandlerProp("onresize");
     }
 
     /**
@@ -1406,5 +1425,28 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         else {
             return jsxGet_parentNode();
         }
+    }
+
+    /**
+     * Gets an event handler
+     * @param eventName the event name (ex: "onclick")
+     * @return the handler function, <code>null</code> if the property is null or not a function
+     */
+    public Function getEventHandler(final String eventName) {
+        final Object handler = eventHandlers_.get(eventName.toLowerCase());
+        if (handler instanceof Function) {
+            return (Function) handler;
+        }
+        return null;
+    }
+
+    /**
+     * Defines an event handler
+     * @param eventName the event name (like "onclick")
+     * @param eventHandler the handler (<code>null</code> to reset it)
+     */
+    public void setEventHandler(final String eventName, final Function eventHandler) {
+        eventHandlers_.put(eventName.toLowerCase(), eventHandler);
+
     }
 }

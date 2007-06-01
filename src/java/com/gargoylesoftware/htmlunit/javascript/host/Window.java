@@ -493,16 +493,12 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             Assert.notNull( "document_", document_ );
             document_.setDomNode(htmlPage);
         }
-        else {
-            setInitialized();
-        }
     }
 
     /**
      * Initialize the object.  Only call for Windows with no contents.
      */
     public void initialize() {
-        setInitialized();
     }
 
 

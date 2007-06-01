@@ -41,25 +41,20 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jaxen.JaxenException;
 import org.jaxen.Navigator;
-import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 
 /**
  * Base class for nodes in the HTML DOM tree. This class is modelled after the
@@ -138,11 +133,6 @@ public abstract class DomNode implements Cloneable {
      */
     private Object scriptObject_;
 
-    /**
-     * The map holding event handlers.
-     */
-    private Map eventHandlers_;
-
     /** The ready state is is an IE-only value that is available to a large number of elements. */
     private String readyState_;
 
@@ -179,7 +169,6 @@ public abstract class DomNode implements Cloneable {
     protected DomNode(final HtmlPage htmlPage) {
         readyState_ = STATE_LOADING;
         htmlPage_ = htmlPage;
-        eventHandlers_ = Collections.EMPTY_MAP;
         startLineNumber_ = 0;
         startColumnNumber_ = 0;
         endLineNumber_ = 0;
@@ -690,49 +679,44 @@ public abstract class DomNode implements Cloneable {
         return new ChildIterator();
     }
 
+    // TODO: remove event handlers methods! Nothing to do in DomNode!
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * Return a Function to be executed when a given event occurs.
      * @param eventName Name of event such as "onclick" or "onblur", etc.
      * @return A rhino javascript executable Function, or null if no event
      * handler has been defined
      */
-    public final Function getEventHandler(final String eventName) {
-        return (Function) eventHandlers_.get(eventName);
+    public Function getEventHandler(final String eventName) {
+        return null;
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * Register a Function as an event handler.
      * @param eventName Name of event such as "onclick" or "onblur", etc.
      * @param eventHandler A rhino javascript executable Function
      */
-    public final void setEventHandler(final String eventName, final Function eventHandler) {
-        if (eventHandlers_ == Collections.EMPTY_MAP) {
-            eventHandlers_ = new HashMap();
-        }
-        eventHandlers_.put(eventName, eventHandler);
+    public void setEventHandler(final String eventName, final Function eventHandler) {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * Register a snippet of javascript code as an event handler.  The javascript code will
      * be wrapped inside a unique function declaration which provides one argument named
      * "event"
      * @param eventName Name of event such as "onclick" or "onblur", etc.
      * @param jsSnippet executable javascript code
      */
-    public final void setEventHandler(final String eventName, final String jsSnippet) {
-
-        final BaseFunction function = new EventHandler(this, eventName, jsSnippet);
-        setEventHandler(eventName, function);
-        getLog().debug("Created event handler " + function.getFunctionName()
-                + " for " + eventName + " on " + this);
+    public void setEventHandler(final String eventName, final String jsSnippet) {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * Removes the specified event handler.
      * @param eventName Name of the event such as "onclick" or "onblur", etc.
      */
-    public final void removeEventHandler(final String eventName) {
-        eventHandlers_.remove( eventName );
+    public void removeEventHandler(final String eventName) {
     }
 
     /**

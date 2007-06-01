@@ -176,9 +176,15 @@ public class SimpleScriptableTest extends WebTestCase {
     }
 
     /**
+     * This test fails on IE and FF but not by HtmlUnit because according to Ecma standard, 
+     * attemps to set read only properties should be silently ignored.
+     * Furthermore document.body = document.body will work on FF but not on IE
      * @throws Exception if the test fails
      */
     public void testSetNonWritableProperty() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String content
             = "<html><head><title>foo</title></head><body onload='document.body=123456'>"
             + "</body></html>";
