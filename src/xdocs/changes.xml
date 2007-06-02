@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour" id="1729467" due-to="Karel Kolman">
+                Add UTF-16BE, and UTF-16LE charset detection (#1729467).
+            </action>
             <action type="update" dev="asashour" id="1483301">
                 Use WebRequestSettings#getCharset() as the encoding of pages instead of "ISO-8859-1" (#1483301).
             </action>

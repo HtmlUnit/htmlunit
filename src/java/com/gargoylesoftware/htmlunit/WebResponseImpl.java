@@ -215,9 +215,19 @@ public class WebResponseImpl implements WebResponse {
             log_.debug("No charset specified in header, trying to guess it from content");
             final byte[] body = responseData_.getBody();
             final byte[] markerUTF8 = { (byte) 0xef, (byte) 0xbb, (byte) 0xbf };
+            final byte[] markerUTF16BE = { (byte) 0xfe, (byte) 0xff };
+            final byte[] markerUTF16LE = { (byte) 0xff, (byte) 0xfe };
             if (body != null && ArrayUtils.isEquals(markerUTF8, ArrayUtils.subarray(body, 0, 3))) {
                 log_.debug("UTF-8 marker found");
                 charset = "UTF-8";
+            }
+            else if (body != null && ArrayUtils.isEquals(markerUTF16BE, ArrayUtils.subarray(body, 0, 2))) {
+                log_.debug("UTF-16BE marker found");
+                charset = "UTF-16BE";
+            }
+            else if (body != null && ArrayUtils.isEquals(markerUTF16LE, ArrayUtils.subarray(body, 0, 2))) {
+                log_.debug("UTF-16LE marker found");
+                charset = "UTF-16LE";
             }
             else {
                 log_.debug("No charset guessed, using " + charset_ );

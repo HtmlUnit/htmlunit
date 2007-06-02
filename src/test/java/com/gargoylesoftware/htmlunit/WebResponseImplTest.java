@@ -63,10 +63,17 @@ public class WebResponseImplTest extends WebTestCase {
     }
 
     /**
-     * When no encoding header is provide, UTF-8 may be recognized with its Byte Order Mark
+     * When no encoding header is provided, encoding may be recognized with its Byte Order Mark
      * @throws Exception if the test fails
      */
-    public void testRecognizeUTF8WithBOM() throws Exception {
+    public void testRecognizeBOM() throws Exception {
+        testRecognizeBOM( "UTF-8",    new byte[] { (byte) 0xef, (byte) 0xbb, (byte) 0xbf} );
+        testRecognizeBOM( "UTF-16BE", new byte[] { (byte) 0xfe, (byte) 0xff} );
+        testRecognizeBOM( "UTF-16LE", new byte[] { (byte) 0xff, (byte) 0xfe} );
+    }
+
+    private void testRecognizeBOM(final String encoding, final byte[] markerBytes ) throws Exception {
+    
         final WebClient webClient = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -74,10 +81,11 @@ public class WebResponseImplTest extends WebTestCase {
         final String html = "<html><head><script src='foo.js'></script></head><body></body></html>";
 
         // see http://en.wikipedia.org/wiki/Byte_Order_Mark
-        final byte[] markerUTF8 = {(byte) 0xef, (byte) 0xbb, (byte) 0xbf};
-        final byte[] script = "alert('test');".getBytes("UTF-8");
+        final String[] expectedAlerts = new String[] {"\u6211\u662F\u6211\u7684 "+ 
+                "\u064A\u0627 \u0623\u0647\u0644\u0627\u064B"};
+        final byte[] script = ("alert('" + expectedAlerts[0]  + "');").getBytes(encoding);
 
-        webConnection.setDefaultResponse(ArrayUtils.addAll(markerUTF8, script), 200, "OK", "text/javascript");
+        webConnection.setDefaultResponse(ArrayUtils.addAll(markerBytes, script), 200, "OK", "text/javascript");
         webConnection.setResponse(URL_FIRST, html);
         webClient.setWebConnection( webConnection );
 
@@ -86,8 +94,6 @@ public class WebResponseImplTest extends WebTestCase {
 
         webClient.getPage(URL_FIRST);
 
-        assertEquals("test", collectedAlerts.get(0));
-        final List expectedAlerts = Collections.singletonList("test");
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
