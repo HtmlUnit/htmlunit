@@ -67,6 +67,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author George Murnock
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Philip Graf
  */
 public class HtmlFormTest extends WebTestCase {
     /**
@@ -818,7 +819,67 @@ public class HtmlFormTest extends WebTestCase {
             // Expected path.
         }
     }
+    
+    /**
+     * Test that {@link HtmlForm#getTextAreaByName(String)} returns
+     * the first textarea with the given name.
+     * 
+     * @throws Exception If the test page can't be loaded.
+     */
+    public void testGetTextAreaByName() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "    <textarea id='ta1_1' name='ta1'>hello</textarea>"
+            + "    <textarea id='ta1_2' name='ta1'>world</textarea>"
+            + "    <textarea id='ta2_1' name='ta2'>!</textarea>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+    
+        final HtmlForm form = (HtmlForm)page.getHtmlElementById("form1");
+        
+        assertEquals("First textarea with name 'ta1'", form.getHtmlElementById("ta1_1"), form.getTextAreaByName("ta1"));
+        assertEquals("First textarea with name 'ta2'", form.getHtmlElementById("ta2_1"), form.getTextAreaByName("ta2"));
+        
+        try {
+            form.getTextAreaByName("ta3");
+            fail("Expected ElementNotFoundException as there is no textarea with name 'ta3'");
+        }
+        catch (final ElementNotFoundException e) {
+            // pass: exception is expected
+        }
+    }
 
+    /**
+     * Test that {@link HtmlForm#getButtonByName(String)} returns
+     * the first button with the given name.
+     * 
+     * @throws Exception If the test page can't be loaded.
+     */
+    public void testGetButtonByName() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "    <button id='b1_1' name='b1' value='hello' type='button'/>"
+            + "    <button id='b1_2' name='b1' value='world' type='button'/>"
+            + "    <button id='b2_1' name='b2' value='!' type='button'/>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+        
+        final HtmlForm form = (HtmlForm)page.getHtmlElementById("form1");
+        
+        assertEquals("First button with name 'b1'", form.getHtmlElementById("b1_1"), form.getButtonByName("b1"));
+        assertEquals("First button with name 'b2'", form.getHtmlElementById("b2_1"), form.getButtonByName("b2"));
+        
+        try {
+            form.getTextAreaByName("b3");
+            fail("Expected ElementNotFoundException as there is no button with name 'b3'");
+        }
+        catch (final ElementNotFoundException e) {
+            // pass: exception is expected
+        }
+    }
+    
     /**
      * Test that the result of the form will get loaded into the window
      * specified by "target"
@@ -1137,4 +1198,5 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals(expectedRequestCharset, webConnection.getLastWebRequestSettings().getCharset());
     }
 }
+
 

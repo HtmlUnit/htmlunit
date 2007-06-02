@@ -207,8 +207,8 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlInput input = form.getInputByName("textInput1");
         assertSame("input1", input, form.getInputByName("textInput1")); //??
 
-        final HtmlButton button = (HtmlButton) form.getButtonsByName("button1").get(0);
-        assertSame("button1", button, form.getButtonsByName("button1").get(0));
+        final HtmlButton button = form.getButtonByName("button1");
+        assertSame("button1", button, form.getButtonByName("button1"));
 
         final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
         assertSame("select1", select, form.getSelectsByName("select1").get(0));
@@ -235,8 +235,8 @@ public class HtmlPageTest extends WebTestCase {
         assertSame("tableDataCell1", tableDataCell, tableRow.getCell(1));
         assertSame("tableDataCell2", tableDataCell, page.getHtmlElementById("data1"));
 
-        final HtmlTextArea textArea = (HtmlTextArea) form.getTextAreasByName("textArea1").get(0);
-        assertSame("textArea1", textArea, form.getTextAreasByName("textArea1").get(0));
+        final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
+        assertSame("textArea1", textArea, form.getTextAreaByName("textArea1"));
     }
 
     /**

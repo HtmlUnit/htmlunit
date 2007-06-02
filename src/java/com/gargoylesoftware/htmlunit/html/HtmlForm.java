@@ -76,6 +76,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author George Murnock
  * @author Kent Tong
  * @author Ahmed Ashour
+ * @author Philip Graf
  */
 public class HtmlForm extends ClickableElement {
 
@@ -483,6 +484,23 @@ public class HtmlForm extends ClickableElement {
 
 
     /**
+     * Find the first button element with the specified name.
+     * @param name The name of the button element.
+     * @return The first button.
+     * @throws ElementNotFoundException If the button cannot be found.
+     */
+    public HtmlButton getButtonByName( final String name ) throws ElementNotFoundException {
+        final List list = getButtonsByName( name );
+        if( list.isEmpty() ) {
+            throw new ElementNotFoundException( "button", "name", name );
+        }
+        else {
+            return ( HtmlButton )list.get( 0 );
+        }
+    }
+
+    
+    /**
      *  Return all the HtmlTextAreas that match the specified name
      *
      * @param  name The name
@@ -493,6 +511,23 @@ public class HtmlForm extends ClickableElement {
     }
 
 
+    /**
+     * Find the first textarea element with the specified name.
+     * @param name The name of the textarea element.
+     * @return The first textarea.
+     * @throws ElementNotFoundException If the textarea cannot be found.
+     */
+    public HtmlTextArea getTextAreaByName( final String name ) throws ElementNotFoundException {
+        final List list = getTextAreasByName( name );
+        if( list.isEmpty() ) {
+            throw new ElementNotFoundException( "textarea", "name", name );
+        }
+        else {
+            return ( HtmlTextArea )list.get( 0 );
+        }
+    }
+    
+    
     /**
      *  Return a list of HtmlInputs that are of type radio and match the
      *  specified name

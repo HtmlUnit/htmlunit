@@ -109,8 +109,7 @@ public class TextareaTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlForm form = page.getFormByName("form1");
-        final HtmlTextArea textarea
-            = (HtmlTextArea)form.getTextAreasByName("textarea1").get(0);
+        final HtmlTextArea textarea = form.getTextAreaByName("textarea1");
         textarea.setText("foo");
         final HtmlButtonInput button = (HtmlButtonInput) form.getInputByName("myButton");
         button.click();

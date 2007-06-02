@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour" id="1713515" due-to="Philip Graf">
+                HtmlForm: #getTextAreaByName and #getButtonByName (#1713515).
+            </action>
             <action type="add" dev="asashour" id="1729467" due-to="Karel Kolman">
                 Add UTF-16BE, and UTF-16LE charset detection (#1729467).
             </action>

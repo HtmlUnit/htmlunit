@@ -74,8 +74,7 @@ public class HtmlTextAreaTest extends WebTestCase {
         final MockWebConnection webConnection = getMockConnection(page);
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
-        final HtmlTextArea textArea
-            = ( HtmlTextArea )form.getTextAreasByName( "textArea1" ).get( 0 );
+        final HtmlTextArea textArea = form.getTextAreaByName( "textArea1" );
         assertNotNull(textArea);
 
         final Page secondPage = form.submit();
@@ -100,8 +99,7 @@ public class HtmlTextAreaTest extends WebTestCase {
         final MockWebConnection webConnection = getMockConnection(page);
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
-        final HtmlTextArea textArea
-            = ( HtmlTextArea )form.getTextAreasByName( "textArea1" ).get( 0 );
+        final HtmlTextArea textArea = form.getTextAreaByName( "textArea1" );
         textArea.setText( "Flintstone" );
         final Page secondPage = form.submit();
 
@@ -121,10 +119,10 @@ public class HtmlTextAreaTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
-        final HtmlTextArea textArea
-            = ( HtmlTextArea )form.getTextAreasByName( "textArea1" ).get( 0 );
+        final HtmlTextArea textArea = form.getTextAreaByName( "textArea1" );
         assertNotNull(textArea);
         assertEquals("White space must be preserved!", " foo \n bar ", textArea.getText());
     }
 }
+
 
