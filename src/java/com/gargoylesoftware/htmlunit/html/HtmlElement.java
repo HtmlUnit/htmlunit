@@ -603,7 +603,7 @@ public abstract class HtmlElement extends DomNode {
      * @return an iterator over the HtmlElement children of this object, i.e. excluding the
      * non-element nodes
      */
-    public final ChildElementsIterator getChildElementsIterator() {
+    public final Iterator getChildElementsIterator() {
         return new ChildElementsIterator();
     }
 
