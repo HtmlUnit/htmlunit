@@ -43,6 +43,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
@@ -65,6 +66,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author David K. Taylor
  * @author Marc Guillemot
  * @author Bruce Faulkner
+ * @author Ahmed Ashour
  */
 public class SelectTest extends WebTestCase {
     /**
@@ -945,5 +947,32 @@ public class SelectTest extends WebTestCase {
         final Page page2 = ((ClickableElement) page.getHtmlElementById("testButton")).click();
         final URL url2 = page2.getWebResponse().getUrl();
         assertTrue("Select in url " + url2, url2.toExternalForm().indexOf("testSelect=testValue") != -1);
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testSelectedIndex() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var s = document.getElementById( 'mySelect' );\n"
+            + "    s.options.length = 0;\n"
+            + "    s.selectedIndex = 0;\n"
+            + "    alert( s.selectedIndex );\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "<select id='mySelect'><option>hello</option></select>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"-1"};
+        final WebClient client = new WebClient();
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        loadPage( html, collectedAlerts );
+        assertEquals( expectedAlerts, collectedAlerts);
     }
 }

@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLOptionsCollection;
  * @author David K. Taylor
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public class HTMLSelectElement extends FormField {
 
@@ -248,8 +249,10 @@ public class HTMLSelectElement extends FormField {
 
         final List allOptions = htmlSelect.getOptions();
 
-        final HtmlOption itemToSelect = (HtmlOption) allOptions.get(index);
-        htmlSelect.setSelectedAttribute(itemToSelect, true);
+        if( index < allOptions.size() ) {
+            final HtmlOption itemToSelect = (HtmlOption) allOptions.get(index);
+            htmlSelect.setSelectedAttribute(itemToSelect, true);
+        }
     }
 
     /**

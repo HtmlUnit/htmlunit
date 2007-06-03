@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="asashour">
+                HtmlSelectElement: ignores setting 'selectedIndex' to more than or equal to options size.
+            </action>
             <action type="add" dev="asashour" id="1713515" due-to="Philip Graf">
                 HtmlForm: #getTextAreaByName and #getButtonByName (#1713515).
             </action>
