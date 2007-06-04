@@ -35,7 +35,7 @@
                 JavaScript: Add support for location.toString() (#1725742).
             </action>
             <action type="update" dev="mguillem">
-                asXml() now expands tags for iframe and script to make generated xml interpretable as html by browsers.
+                asXml() now expands tags for div, iframe and script to make generated xml interpretable as html by browsers.
             </action>
             <action type="add" dev="asashour" id="1691024">
                 Add support for table.width (#1691024).

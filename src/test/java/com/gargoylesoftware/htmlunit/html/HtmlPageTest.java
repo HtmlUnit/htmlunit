@@ -1122,7 +1122,7 @@ public class HtmlPageTest extends WebTestCase {
         final String html = 
             "<html><head><title>foo</title>"
             + "<script src='script.js'></script></head>"
-            + "<body><iframe src='about:blank'></iframe></body>"
+            + "<body><div></div><iframe src='about:blank'></iframe></body>"
             + "</html>";
 
         final WebClient client = new WebClient();
