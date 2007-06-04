@@ -75,7 +75,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 public abstract class DomNode implements Cloneable {
 
     /** Node type constant for the <code>Document</code> node. */
-    public static final short DOCUMENT_NODE = 0;
+    public static final short DOCUMENT_NODE = 9;
 
     /** Node type constant for <code>Element</code> nodes. */
     public static final short ELEMENT_NODE = 1;
@@ -87,7 +87,7 @@ public abstract class DomNode implements Cloneable {
     public static final short ATTRIBUTE_NODE = 4;
 
     /** Node type constant for <code>Comment</code> nodes. */
-    public static final short COMMENT_NODE = 5;
+    public static final short COMMENT_NODE = 8;
 
     /** A ready state constant for IE (state 1). */
     public static final String STATE_UNINITIALIZED = "uninitialized";

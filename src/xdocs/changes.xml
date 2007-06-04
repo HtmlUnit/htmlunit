@@ -7,6 +7,12 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem">
+                Align node types numeric values to W3C values.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: allow comment nodes to be retrieved
+            </action>
             <action type="update" dev="asashour">
                 HtmlSelectElement: ignores setting 'selectedIndex' to more than or equal to options size.
             </action>

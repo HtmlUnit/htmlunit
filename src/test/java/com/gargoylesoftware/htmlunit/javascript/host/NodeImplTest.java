@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for NodeImpl
+ * Tests for {@link NodeImpl}.
  * 
  * @author yourgod
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
@@ -237,6 +237,29 @@ public class NodeImplTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * @throws Exception on test failure
+     */
+    public void testChildNodes_Comments() throws Exception {
+        final String content = "<html><head><title>test</title>"
+            + "<html><head></head>"
+            + "<body><!-- comment --><script>"
+            + "var nodes = document.body.childNodes;"
+            + "alert('nb nodes: ' + nodes.length);"
+            + "for (var i=0; i<nodes.length; ++i)"
+            + "{"
+            + " alert(nodes[i].nodeType);"
+            + "}"
+            + "</script></body></html>";
+
+        final String[] expectedAlerts = {"nb nodes: 2", "8", "1"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 
     /**
      * @throws Exception on test failure
@@ -328,6 +351,34 @@ public class NodeImplTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         loadPage(browserVersion, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * The common browsers always return node names in uppercase.  Test this.
+     * @throws Exception on test failure
+     */
+    public void testNodeType() throws Exception {
+        final String content = "<html><head><title>test</title>"
+                + "<script>"
+                + "function doTest(){\n"
+                + "    alert('document: ' + document.nodeType);\n"
+                + "    alert('document.body: ' + document.body.nodeType);\n"
+                + "    alert('body child 1: ' + document.body.childNodes[0].nodeType);\n"
+                + "    alert('body child 2: ' + document.body.childNodes[1].nodeType);\n"
+                + "}\n"
+                + "</script>"
+                + "</head><body onload='doTest()'>"
+                + "some text<!-- some comment -->"
+                + "</body></html>";
+
+        final String[] expectedAlerts = {"document: 9", "document.body: 1", 
+                "body child 1: 3", "body child 2: 8"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

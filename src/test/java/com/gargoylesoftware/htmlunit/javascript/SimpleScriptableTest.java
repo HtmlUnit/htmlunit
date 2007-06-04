@@ -125,7 +125,6 @@ public class SimpleScriptableTest extends WebTestCase {
         final Set names = getFileNames(directoryName.replace('/', File.separatorChar));
 
         // Now pull out those names that we know don't have html equivalents
-        names.remove("CharacterDataImpl");
         names.remove("Document");
         names.remove("Event");
         names.remove("EventHandler");

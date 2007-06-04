@@ -68,7 +68,7 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlButton"/>
 
     <class name="CharacterDataImpl" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl"
-        JSObject="false">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomCharacterData">
         <property name="data" readable="true" writable="true"/>
         <property name="length" readable="true" writable="false"/>
         <property name="tabindex" notImplemented="true" readable="true" writable="true"/>

@@ -245,7 +245,7 @@ public class NodeImpl extends SimpleScriptable {
         if (childNodes_ == null) {
             childNodes_ = new HTMLCollection(this);
             try {
-                childNodes_.init(getDomNodeOrDie(), new HtmlUnitXPath("(./* | text())"));
+                childNodes_.init(getDomNodeOrDie(), new HtmlUnitXPath("(./* | text() | comment())"));
             }
             catch (final JaxenException je) {
                 throw Context.reportRuntimeError("Failed to initialize collection element.childNodes: "
