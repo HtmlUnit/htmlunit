@@ -210,10 +210,6 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testRadioInputChecked() throws Exception {
-        if( notYetImplemented() ) {
-            return;
-        }
-        
         final String content
             = "<html><head>\n"
             + "</head>\n"

@@ -50,6 +50,7 @@ import java.util.Map;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.lang.StringUtils;
+import org.jaxen.JaxenException;
 import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Assert;
@@ -555,7 +556,7 @@ public class HtmlForm extends ClickableElement {
 
 
     /**
-     *  Select the specified radio button in the form. <p />
+     *  Select the specified radio button in the form. <p/>
      *
      *  Only a radio button that is actually contained in the form can be
      *  selected. If you need to be able to select a button that really isn't
@@ -590,6 +591,46 @@ public class HtmlForm extends ClickableElement {
                     input.removeAttribute("checked");
                 }
             }
+        }
+    }
+
+    /**
+     *  Select the specified radio button in the form.
+     *
+     *  Only a radio button that is actually contained in the form can be
+     *  selected.
+     *
+     * @param  inputToSelect radioButton
+     */
+    void setCheckedRadioButton( final HtmlRadioButtonInput inputToSelect ) {
+        try {
+            boolean isChild = false;
+             
+            for( DomNode parent = inputToSelect.getParentNode(); parent != null; parent = parent.getParentNode() ) {
+                if( parent == this ) {
+                    isChild = true;
+                    break;
+                }
+            }
+            if( !isChild ) {
+                throw new IllegalArgumentException( "HtmlRadioButtonInput is not child of this HtmlForm" );
+            }
+            final Iterator iterator = getByXPath(
+                    "//input[@type='radio' and @name='" + inputToSelect.getNameAttribute() + "']"
+            ).iterator();
+            
+            while( iterator.hasNext() ) {
+                final HtmlRadioButtonInput input = (HtmlRadioButtonInput)iterator.next();
+                if( input == inputToSelect ) {
+                    input.setAttributeValue("checked", "checked");
+                }
+                else {
+                    input.removeAttribute("checked");
+                }
+            }
+        }
+        catch( final JaxenException e ) {
+            e.printStackTrace();
         }
     }
 

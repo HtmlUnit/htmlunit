@@ -42,7 +42,6 @@ import java.util.Map;
 
 import org.mozilla.javascript.Function;
 
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
@@ -107,13 +106,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
         final boolean changed = isChecked() != isChecked;
 
         if( isChecked ) {
-            try {
-                form.setCheckedRadioButton( getNameAttribute(), getValueAttribute() );
-            }
-            catch( final ElementNotFoundException e ) {
-                // Shouldn't be possible
-                throw new IllegalStateException("Can't find this element when going up to the form and back down.");
-            }
+            form.setCheckedRadioButton(this);
         }
         else {
             removeAttribute( "checked" );
