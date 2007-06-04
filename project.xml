@@ -94,6 +94,12 @@
             <url>http://daniel.gredler.net/</url>
             <timezone>-5</timezone>
         </developer>
+        <developer>
+            <name>Ahmed Ashour</name>
+            <id>asashour</id>
+            <email>asashour@users.sourceforge.net</email>
+            <timezone>+3</timezone>
+        </developer>
     </developers>
     <contributors>
         <contributor>
@@ -203,7 +209,16 @@
         	<name>Bruce Chapman</name>
         </contributor>
         <contributor>
-        	<name>Ahmed Ashour</name>
+        	<name>Kristian Muntau</name>
+        </contributor>
+        <contributor>
+        	<name>Sam Hough</name>
+        </contributor>
+        <contributor>
+        	<name>Deryk Sinotte</name>
+        </contributor>
+        <contributor>
+        	<name>Philip Graf</name>
         </contributor>
     </contributors>
     <dependencies>
