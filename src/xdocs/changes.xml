@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="fix" dev="asashour" id="1513928">
+                Allow HtmlFileInput to handle values starting with "file:/" (#1513928).
+            </action>
             <action type="update" dev="mguillem">
                 Align node types numeric values to W3C values.
             </action>

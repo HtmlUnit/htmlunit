@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
+import java.net.URL;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.KeyDataPair;
@@ -50,6 +51,7 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class HtmlFileInput extends HtmlInput {
 
@@ -78,8 +80,21 @@ public class HtmlFileInput extends HtmlInput {
      * @return  See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
-        final File file = new File(getValueAttribute());
+        String value = getValueAttribute();
         
+        //to tolerate file://
+        if( value.startsWith( "file://" ) && !value.startsWith( "file:///" ) ) {
+            value = "file:///" + value.substring( 7 );
+        }
+        
+        final File file;
+        try {
+            file = new File( new URL(value).toURI() );
+        }
+        catch( final Exception e ) {
+            throw new IllegalArgumentException( "Invalid 'value' attribute: " + getValueAttribute() );
+        }
+
         // contentType and charset are determined from browser and page
         // perhaps could it be interessant to have setters for it in this class
         // to give finer control to user
