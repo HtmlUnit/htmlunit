@@ -610,13 +610,13 @@ public class HtmlForm extends ClickableElement {
      *  Only a radio button that is actually contained in the form can be
      *  selected.
      *
-     * @param  inputToSelect radioButton
+     * @param  radioButtonInput The radio Button
      */
-    void setCheckedRadioButton( final HtmlRadioButtonInput inputToSelect ) {
+    void setCheckedRadioButton( final HtmlRadioButtonInput radioButtonInput ) {
         try {
             boolean isChild = false;
              
-            for( DomNode parent = inputToSelect.getParentNode(); parent != null; parent = parent.getParentNode() ) {
+            for( DomNode parent = radioButtonInput.getParentNode(); parent != null; parent = parent.getParentNode() ) {
                 if( parent == this ) {
                     isChild = true;
                     break;
@@ -626,12 +626,12 @@ public class HtmlForm extends ClickableElement {
                 throw new IllegalArgumentException( "HtmlRadioButtonInput is not child of this HtmlForm" );
             }
             final Iterator iterator = getByXPath(
-                    "//input[lower-case(@type)='radio' and @name='" + inputToSelect.getNameAttribute() + "']"
+                    "//input[lower-case(@type)='radio' and @name='" + radioButtonInput.getNameAttribute() + "']"
             ).iterator();
             
             while( iterator.hasNext() ) {
                 final HtmlRadioButtonInput input = (HtmlRadioButtonInput)iterator.next();
-                if( input == inputToSelect ) {
+                if( input == radioButtonInput ) {
                     input.setAttributeValue("checked", "checked");
                 }
                 else {
@@ -640,7 +640,7 @@ public class HtmlForm extends ClickableElement {
             }
         }
         catch( final JaxenException e ) {
-            e.printStackTrace();
+            getLog().error(e);
         }
     }
 

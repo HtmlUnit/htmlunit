@@ -55,6 +55,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jaxen.JaxenException;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
@@ -1557,6 +1558,36 @@ public final class HtmlPage extends DomNode implements Page {
             }
         }
         return tags;
+    }
+
+    /**
+     * Select the specified radio button in the page (outside any &lt;form&gt;).
+     *
+     * @param  radioButtonInput The radio Button
+     */
+    void setCheckedRadioButton( final HtmlRadioButtonInput radioButtonInput ) {
+        try {
+            //May be done in single xpath search?
+            final List pageInputs = getByXPath("//input[lower-case(@type)='radio' "
+                    + "and @name='" + radioButtonInput.getNameAttribute() + "']");
+            final List formInputs = getByXPath("//form//input[lower-case(@type)='radio' "
+                    + "and @name='" + radioButtonInput.getNameAttribute() + "']");
+            
+            pageInputs.removeAll(formInputs);
+
+            for( final Iterator iterator = pageInputs.iterator(); iterator.hasNext(); ) {
+                final HtmlRadioButtonInput input = (HtmlRadioButtonInput)iterator.next();
+                if( input == radioButtonInput ) {
+                    input.setAttributeValue("checked", "checked");
+                }
+                else {
+                    input.removeAttribute("checked");
+                }
+            }
+        }
+        catch( final JaxenException e ) {
+            getLog().error( e );
+        }
     }
 
 }

@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="asashour" id="1587962">
+                Allow setChecked of &lt;input type="radio"&gt; which is outside any &lt;form&gt; (#1587962).
+            </action>
             <action type="update" dev="asashour">
                 Deprecated HtmlForm#getRadioButtonInput(String,String) and HtmlForm#setCheckedRadioButton(String,String). Use #getByXPath instead.
             </action>

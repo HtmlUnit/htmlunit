@@ -106,7 +106,12 @@ public class HtmlRadioButtonInput extends HtmlInput {
         final boolean changed = isChecked() != isChecked;
 
         if( isChecked ) {
-            form.setCheckedRadioButton(this);
+            if( form != null ) {
+                form.setCheckedRadioButton(this);
+            }
+            else {
+                getPage().setCheckedRadioButton( this );
+            }
         }
         else {
             removeAttribute( "checked" );
