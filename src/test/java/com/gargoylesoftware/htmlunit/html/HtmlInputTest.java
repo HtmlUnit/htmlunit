@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public final class HtmlInputTest extends WebTestCase {
     /**
@@ -82,7 +83,9 @@ public final class HtmlInputTest extends WebTestCase {
 
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
-        final HtmlRadioButtonInput radioButton = form.getRadioButtonInput( "foo", "2" );
+        final HtmlRadioButtonInput radioButton = (HtmlRadioButtonInput)form.getByXPath(
+            "//input[@type='radio' and @name='foo' and @value='2']" ).get(0);
+
         final HtmlSubmitInput pushButton = ( HtmlSubmitInput )form.getInputByName( "button" );
 
         radioButton.setChecked( true );
@@ -199,7 +202,8 @@ public final class HtmlInputTest extends WebTestCase {
 
         final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
 
-        final HtmlRadioButtonInput radioButton = form.getRadioButtonInput( "foo", "2" );
+        final HtmlRadioButtonInput radioButton = (HtmlRadioButtonInput)form.getByXPath(
+                "//input[@type='radio' and @name='foo' and @value='2']" ).get(0);
 
         assertFalse("Should not be checked before click", radioButton.isChecked());
         radioButton.click();

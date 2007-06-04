@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="asashour">
+                Deprecated HtmlForm#getRadioButtonInput(String,String) and HtmlForm#setCheckedRadioButton(String,String). Use #getByXPath instead.
+            </action>
             <action type="fix" dev="asashour" id="1513928">
                 Allow HtmlFileInput to handle values starting with "file:/" (#1513928).
             </action>

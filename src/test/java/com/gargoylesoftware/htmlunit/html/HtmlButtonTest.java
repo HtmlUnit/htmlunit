@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author David K. Taylor
  * @author Brad Clarke
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlButtonTest extends WebTestCase {
     /**
@@ -163,7 +164,8 @@ public class HtmlButtonTest extends WebTestCase {
         final HtmlButton resetInput = (HtmlButton)page.getHtmlElementById( "resetButton" );
 
         // change all the values to something else
-        form.setCheckedRadioButton("radioButton", "bar");
+        ((HtmlRadioButtonInput)form.getByXPath(
+                "//input[@type='radio' and @name='radioButton' and @value='bar']" ).get(0)).setChecked( true );
         ((HtmlCheckBoxInput)form.getInputByName("checkBox")).setChecked(true);
         ((HtmlOption)page.getHtmlElementById("option1")).setSelected(false);
         ((HtmlOption)page.getHtmlElementById("option2")).setSelected(true);
