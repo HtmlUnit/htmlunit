@@ -1040,7 +1040,13 @@ public final class HtmlPage extends DomNode implements Page {
         }
         else {
             // Format: <meta http-equiv='refresh' content='10;url=http://www.blah.com'>
-            time = Integer.parseInt( refreshString.substring( 0, index ) );
+            try {
+                time = Integer.parseInt( refreshString.substring( 0, index ).trim() );
+            }
+            catch (final NumberFormatException e) {
+                getLog().error("Malformed refresh string (no valid number before ';') " + refreshString, e);
+                return;
+            }
             index = refreshString.indexOf( "URL=", index );
             if( index == -1 ) {
                 index = refreshString.indexOf( "url=", index );

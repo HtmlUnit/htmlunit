@@ -984,6 +984,29 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
+     * Test that whitespace before and after ';' is permitted.
+     *
+     * @throws Exception if the test fails
+     */
+    public void testRefresh_MetaTag_Whitespace() throws Exception {
+        final String firstContent = "<html><head><title>first</title>"
+            + "<META HTTP-EQUIV='Refresh' CONTENT='0  ;  URL=http://second'>"
+            + "</head><body></body></html>";
+        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
+
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+
+        assertEquals("second", page.getTitleText());
+    }
+
+    /**
      * Test auto-refresh from a response header.
      * @throws Exception if the test fails
      */
