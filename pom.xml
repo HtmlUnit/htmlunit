@@ -109,6 +109,12 @@ The reference stays the maven 1 build.
 			<email>sdanig@users.sourceforge.net</email>
 			<url>http://daniel.gredler.net/</url>
 			<timezone>-5</timezone>
+        </developer>
+        <developer>
+            <name>Ahmed Ashour</name>
+            <id>asashour</id>
+            <email>asashour@users.sourceforge.net</email>
+            <timezone>+3</timezone>
 		</developer>
 	</developers>
 	<contributors>
@@ -212,6 +218,27 @@ The reference stays the maven 1 build.
 		<contributor>
 			<name>Andre Soereng</name>
 		</contributor>
+        <contributor>
+        	<name>Karel Kolman</name>
+        </contributor>
+        <contributor>
+        	<name>Bruce Chapman</name>
+        </contributor>
+        <contributor>
+        	<name>Kristian Muntau</name>
+        </contributor>
+        <contributor>
+        	<name>Sam Hough</name>
+        </contributor>
+        <contributor>
+        	<name>Deryk Sinotte</name>
+        </contributor>
+        <contributor>
+        	<name>Martin Tamme</name>
+        </contributor>
+        <contributor>
+        	<name>Philip Graf</name>
+        </contributor>
 	</contributors>
 	<build>
 		<sourceDirectory>src/java</sourceDirectory>		
