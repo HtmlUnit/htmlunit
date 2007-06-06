@@ -56,8 +56,10 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptException;
+import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -311,6 +313,13 @@ public class JavaScriptEngine extends ScriptEngine {
 
         // Pre process the source code
         sourceCode = preProcess(htmlPage, sourceCode, sourceName, htmlElement);
+
+        // PreProcess IE Conditional Compilation if needed 
+        final BrowserVersion browserVersion = htmlPage.getWebClient().getBrowserVersion();
+        if( browserVersion.isIE() && browserVersion.getBrowserVersionNumeric() >= 4) {
+            final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
+            sourceCode = ieCCPreProcessor.preProcess(htmlPage, sourceCode, sourceName, htmlElement);
+        }
 
         // Remove html comments around the source if needed
         sourceCode = sourceCode.trim();

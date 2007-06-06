@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour" id="1680026">
+                Add partial support for IE Conditional Compilation (#1680026).
+            </action>
             <action type="update" dev="asashour" id="1549916" due-to="Andre Soereng">
                 Meta Refresh: tolerate spaces before the semicolon (#1549916).
             </action>

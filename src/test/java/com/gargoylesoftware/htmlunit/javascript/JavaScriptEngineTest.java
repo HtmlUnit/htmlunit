@@ -1021,52 +1021,6 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * Regression test for 1680026
-     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1680026&group_id=47038
-     * @throws Exception If something goes wrong.
-     */
-    public void testIEConditionalCompilation() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
-        final String[] alertsIE = {"testing @cc_on"};
-        testIEConditionalCompilation(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
-        final String[] alertsFF = {};
-        testIEConditionalCompilation(BrowserVersion.MOZILLA_1_0, alertsFF);
-    }
-
-    /**
-     * Check that wrong javascript just causes its context to fail but not the whole page.
-     * @throws Exception If something goes wrong.
-     */
-    private void testIEConditionalCompilation(final BrowserVersion browser, final String[] expectedAlerts)
-        throws Exception {
-
-        final String content
-            = "<html>"
-            + "<head>"
-            + "<script>"
-            + "function test()"
-            + "{"
-            + "/*@cc_on"
-            + "  alert('testing @cc_on');"
-            + "@*/"
-            + "}"
-            + "</script>"
-            + "</head>"
-            + "<body onload='test()'>"
-            + "</body>"
-            + "</html>";
-
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List collectedAlerts = new ArrayList();
-        loadPage(browser, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
      * Test that prototype changes are made in the right scope.
      * Problem reported by Bruce Faulnker in the dev mailing list.
      * This is due to a Rhino bug:
