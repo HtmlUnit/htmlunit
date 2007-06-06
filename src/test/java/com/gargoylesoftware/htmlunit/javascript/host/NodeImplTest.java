@@ -373,7 +373,7 @@ public class NodeImplTest extends WebTestCase {
                 + "</body></html>";
 
         final String[] expectedAlerts = {"document: 9", "document.body: 1", 
-                "body child 1: 3", "body child 2: 8"};
+            "body child 1: 3", "body child 2: 8"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
