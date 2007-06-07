@@ -41,8 +41,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.KeyDataPair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -259,6 +261,48 @@ public final class HtmlInputTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testFileInput() throws Exception {
+        String path = getClass().getResource("../testfiles/" + "tiny-png.img").toExternalForm();
+        if( path.startsWith( "file:" ) ) {
+            path = path.substring( "file:".length() );
+        }
+        while( path.startsWith( "/" ) ) {
+            path = path.substring( 1 );
+        }
+        testFileInput( "file:/" + path );
+        testFileInput( "file://" + path );
+        testFileInput( "file:///" + path );
+    }
+
+    private void testFileInput(final String fileURL) throws Exception {
+        final String firstContent
+            = "<html><head></head><body>\n"
+            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>"
+            + "  <input type='file' name='image' />\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+        final String secondContent = "<html><head><title>second</title></head></html>";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( client );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        client.setWebConnection( webConnection );
+    
+        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
+        final HtmlForm f = (HtmlForm)firstPage.getForms().get( 0);
+        final HtmlFileInput fileInput = (HtmlFileInput)f.getInputByName( "image" );
+        fileInput.setValueAttribute( fileURL );
+        f.submit();
+        final KeyDataPair pair = (KeyDataPair)webConnection.getLastParameters().get( 0 );
+        assertTrue( pair.getFile().length() != 0 );
     }
 }
 
