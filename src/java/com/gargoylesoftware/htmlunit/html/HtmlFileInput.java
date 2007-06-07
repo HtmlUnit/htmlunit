@@ -38,7 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
-import java.net.URL;
+import java.net.URI;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.KeyDataPair;
@@ -89,7 +89,7 @@ public class HtmlFileInput extends HtmlInput {
         
         final File file;
         try {
-            file = new File( new URL(value).toURI() );
+            file = new File( new URI(value) );
         }
         catch( final Exception e ) {
             throw new IllegalArgumentException( "Invalid 'value' attribute: " + getValueAttribute() );
