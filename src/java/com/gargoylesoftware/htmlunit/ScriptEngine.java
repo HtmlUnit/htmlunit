@@ -51,12 +51,21 @@ import org.apache.commons.logging.LogFactory;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author David K. Taylor
+ * @author Ahmed Ashour
  */
 public abstract class ScriptEngine {
 
     private static final Log ScriptEngineLog_ = LogFactory.getLog( ScriptEngine.class );
 
     private final WebClient webClient_;
+
+    /**
+     * Never call this, used for Serialization.
+     * @deprecated
+     */
+    protected ScriptEngine() {
+        webClient_ = null;
+    }
 
     /**
      * Create an instance for the specifed web client

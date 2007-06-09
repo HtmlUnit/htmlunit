@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.Iterator;
 import java.util.List;
@@ -72,7 +73,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public abstract class DomNode implements Cloneable {
+public abstract class DomNode implements Cloneable, Serializable {
 
     /** Node type constant for the <code>Document</code> node. */
     public static final short DOCUMENT_NODE = 9;
@@ -131,7 +132,7 @@ public abstract class DomNode implements Cloneable {
      *
      * It may be null if there isn't a corresponding javascript object.
      */
-    private Object scriptObject_;
+    private transient Object scriptObject_;
 
     /** The ready state is is an IE-only value that is available to a large number of elements. */
     private String readyState_;
@@ -161,6 +162,14 @@ public abstract class DomNode implements Cloneable {
      * The column number in the source page where the DOM node ends.
      */
     private int endColumnNumber_;
+
+    /**
+     * Never call this, used for Serialization.
+     * @deprecated
+     */
+    protected DomNode() {
+        this( null );
+    }
 
     /**
      * Creates an instance.

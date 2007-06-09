@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -55,8 +56,9 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author <a href="mailto:yourgod@users.sourceforge.net">Brad Clarke</a>
  * @author Marc Guillemot
+ * @version $Revision$
  */
-public class DefaultPageCreator implements PageCreator {
+public class DefaultPageCreator implements PageCreator, Serializable  {
 
     /**
      * Create an instance.

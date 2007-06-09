@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour" id="1685311">
+                HtmlPage supports Serialization (#1685311).
+            </action>
             <action type="add" dev="asashour" id="1680026">
                 Add partial support for IE Conditional Compilation (#1680026).
             </action>

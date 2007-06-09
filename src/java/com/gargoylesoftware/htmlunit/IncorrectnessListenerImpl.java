@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -45,8 +47,9 @@ import org.apache.commons.logging.LogFactory;
  * Logs the notifications at WARN level to the originator's log.
  * @version $Revision: 1432 $
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
-public class IncorrectnessListenerImpl implements IncorrectnessListener {
+public class IncorrectnessListenerImpl implements IncorrectnessListener, Serializable  {
 
     /**
      * {@inheritDoc}

@@ -6,6 +6,6 @@
 
 <suppressions>
     <suppress checks="FileLength" files="DocumentTest.java"/>
-    <suppress checks="LineLength" files="JavaScriptEngine.java" lines="87"/>
+    <suppress checks="LineLength" files="JavaScriptEngine.java" lines="88"/>
     <suppress checks="Indentation" files="ThreadManager.java" lines="143"/>    
 </suppressions>

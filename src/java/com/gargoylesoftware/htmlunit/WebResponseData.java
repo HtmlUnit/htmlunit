@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -55,8 +56,9 @@ import org.apache.commons.lang.StringUtils;
  * @version $Revision$
  * @author Brad Clarke
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
-public class WebResponseData {
+public class WebResponseData implements Serializable {
 
     private byte[] body_;
     private int statusCode_;

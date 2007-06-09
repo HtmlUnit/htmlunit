@@ -37,11 +37,16 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -1357,6 +1362,36 @@ public class HtmlPageTest extends WebTestCase {
         final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE);
         settings.setSubmitMethod(SubmitMethod.POST);
         client.getPage(settings);
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testSerialization() throws Exception {        
+        final String content = "<html><body>\n"
+            + "<div id='myId'>Hello there!</div>\n"
+            + "</body></html>\n";
+
+        final HtmlPage page1 = loadPage(content);
+
+        final ByteArrayOutputStream byteOS = new ByteArrayOutputStream();
+        final ObjectOutputStream objectOS = new ObjectOutputStream( byteOS );
+        objectOS.writeObject( page1 );
+        
+        final ByteArrayInputStream byteIS = new ByteArrayInputStream( byteOS.toByteArray() );
+        final ObjectInputStream objectIS = new ObjectInputStream( byteIS );
+        final HtmlPage page2 = (HtmlPage)objectIS.readObject();
+        
+        final Iterator iterator1 = page1.getAllHtmlChildElements();
+        final Iterator iterator2 = page2.getAllHtmlChildElements();
+        while( iterator1.hasNext() ) {
+            assertTrue( iterator2.hasNext() );
+            final HtmlElement element1 = (HtmlElement)iterator1.next();
+            final HtmlElement element2 = (HtmlElement)iterator2.next();
+            assertEquals(element1.getNodeName(), element2.getNodeName());
+        }
+        assertFalse( iterator2.hasNext() );
+        assertEquals( "Hello there!", page2.getHtmlElementById("myId").getFirstChild().getNodeValue() );
     }
 
 }

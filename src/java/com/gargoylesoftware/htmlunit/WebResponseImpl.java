@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.Iterator;
@@ -58,9 +59,9 @@ import org.apache.commons.logging.LogFactory;
  * @author Brad Clarke
  * @author Ahmed Ashour
  */
-public class WebResponseImpl implements WebResponse {
+public class WebResponseImpl implements WebResponse, Serializable {
 
-    private final Log log_ = LogFactory.getLog(WebResponseImpl.class);
+    private final transient Log log_ = LogFactory.getLog(WebResponseImpl.class);
     private URL url_;
     private SubmitMethod requestMethod_;
     private long loadTime_;

@@ -101,7 +101,7 @@ public final class HtmlPage extends DomNode implements Page {
 
     private WebWindow enclosingWindow_;
 
-    private final Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
+    private final transient Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
 
     private static final int TAB_INDEX_NOT_SPECIFIED = -10;
     private static final int TAB_INDEX_OUT_OF_BOUNDS = -20;

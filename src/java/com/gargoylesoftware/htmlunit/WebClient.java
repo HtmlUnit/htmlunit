@@ -43,6 +43,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -100,9 +101,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Paul King
  * @author Ahmed Ashour
  */
-public class WebClient {
+public class WebClient implements Serializable {
 
-    private WebConnection webConnection_;
+    private transient WebConnection webConnection_;
     private boolean printContentOnFailingStatusCode_ = true;
     private boolean throwExceptionOnFailingStatusCode_ = true;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();

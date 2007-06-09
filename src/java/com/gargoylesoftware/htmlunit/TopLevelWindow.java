@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
+
 /**
  * A window representing a top level browser window.
  *
@@ -44,8 +46,9 @@ package com.gargoylesoftware.htmlunit;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author David D. Kilzer
+ * @author Ahmed Ashour
  */
-public class TopLevelWindow extends WebWindowImpl {
+public class TopLevelWindow extends WebWindowImpl implements Serializable  {
 
     private WebWindow opener_;
 

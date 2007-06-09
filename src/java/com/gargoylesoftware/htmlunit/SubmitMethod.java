@@ -37,18 +37,23 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
+
 /**
  *  A collection of constants that represent the various ways a page can be
  *  submitted
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ahmed Ashour
  */
-public final class SubmitMethod {
+public final class SubmitMethod implements Serializable {
+
     /**
      *  POST
      */
     public static final SubmitMethod POST = new SubmitMethod( "post" );
+
     /**
      *  GET
      */
@@ -56,11 +61,9 @@ public final class SubmitMethod {
 
     private final String name_;
 
-
     private SubmitMethod( final String name ) {
         name_ = name;
     }
-
 
     /**
      *  Return the name of this SubmitMethod
@@ -70,7 +73,6 @@ public final class SubmitMethod {
     public String getName() {
         return name_;
     }
-
 
     /**
      *  Return the constant that matches the given name
@@ -97,7 +99,6 @@ public final class SubmitMethod {
         throw new IllegalArgumentException( "No method found for [" + name + "]" );
     }
 
-
     /**
      *  Return a string representation of this object
      *
@@ -107,4 +108,3 @@ public final class SubmitMethod {
         return "SubmitMethod[name=" + getName() + "]";
     }
 }
-

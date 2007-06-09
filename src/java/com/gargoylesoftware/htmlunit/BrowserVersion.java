@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
+
 
 /**
  * Objects of this class represent one specific version of a given browser.  Predefined
@@ -53,8 +55,9 @@ package com.gargoylesoftware.htmlunit;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
-public class BrowserVersion {
+public class BrowserVersion implements Serializable {
     private String applicationCodeName_ = APP_CODE_NAME;
     private String applicationMinorVersion_ = "0";
     private String applicationName_;

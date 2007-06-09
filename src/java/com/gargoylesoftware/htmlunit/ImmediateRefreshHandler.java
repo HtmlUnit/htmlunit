@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 
 /**
@@ -52,8 +53,9 @@ import java.net.URL;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
-public class ImmediateRefreshHandler implements RefreshHandler {
+public class ImmediateRefreshHandler implements RefreshHandler, Serializable  {
 
     /**
      * Immediately refreshes the specified page using the specified URL.

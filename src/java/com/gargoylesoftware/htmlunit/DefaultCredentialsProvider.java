@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -59,12 +60,13 @@ import org.apache.commons.logging.LogFactory;
  * credentials for both web servers and proxies. Supports NTLM authentication, Digest
  * authentication, and Basic HTTP authentication.
  * 
+ * @version $Revision$
  * @author Daniel Gredler
  * @author Vikram Shitole
  * @author Marc Guillemot
- * @version $Revision$
+ * @author Ahmed Ashour
  */
-public class DefaultCredentialsProvider implements CredentialsProvider {
+public class DefaultCredentialsProvider implements CredentialsProvider, Serializable  {
 
     private final Map credentials_ = new HashMap();
     private final Map proxyCredentials_ = new HashMap();

@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
  * @version $Revision$
  * @author Brad Clarke
  * @author David K. Taylor
+ * @author Ahmed Ashour
  */
 public abstract class WebWindowImpl implements WebWindow {
     private WebClient webClient_;
@@ -61,6 +62,13 @@ public abstract class WebWindowImpl implements WebWindow {
     private ThreadManager threadManager_ = new ThreadManager();
     private List childWindows_ = new ArrayList();
     private String name_ = "";
+
+    /**
+     * Never call this, used for Serialization.
+     * @deprecated
+     */
+    protected WebWindowImpl() {
+    }
 
     /**
      * Creates a window and associates it with the client
