@@ -43,7 +43,7 @@ import java.util.List;
 /**
  * Tests for ScriptFilter
  * @version $Revision$
- * @author <a href="mailto:chen_jun@users.sourceforge.net"> Chen Jun </a>
+ * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  */
 public class ScriptFilterTest extends WebTestCase {
 

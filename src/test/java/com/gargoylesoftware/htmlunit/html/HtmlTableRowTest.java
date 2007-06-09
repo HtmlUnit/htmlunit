@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
  * Tests for {@link HtmlTableRow}.
  *
  * @version $Revision$
- * @author <a href="mailto:gallaherm@pragmatics.com">Mike Gallaher </a>
+ * @author <a href="mailto:gallaherm@pragmatics.com">Mike Gallaher</a>
  * @author Mike Bowler
  */
 public class HtmlTableRowTest extends WebTestCase {

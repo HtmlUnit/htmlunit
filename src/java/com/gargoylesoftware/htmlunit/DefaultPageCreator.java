@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author <a href="mailto:yourgod@users.sourceforge.net">Brad Clarke</a>
  * @author Marc Guillemot
- * @version $Revision$
+ * @author Ahmed Ashour
  */
 public class DefaultPageCreator implements PageCreator, Serializable  {
 
