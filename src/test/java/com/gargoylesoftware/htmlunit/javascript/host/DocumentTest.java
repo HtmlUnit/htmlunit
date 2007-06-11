@@ -418,7 +418,47 @@ public class DocumentTest extends WebTestCase {
         assertEquals(1, div1.getNodeType());
         assertEquals(null, div1.getNodeValue());
         assertEquals("div", div1.getNodeName());
+    }
 
+    /**
+     * Ensures that <tt>document.createElementNS()</tt> works correctly.
+     * @throws Exception if the test fails.
+     */
+    public void testDocumentCreateElementNS() throws Exception {
+        if( notYetImplemented() ) {
+            return;
+        }
+        try {
+            testDocumentCreateElementNS( BrowserVersion.FULL_FEATURED_BROWSER, new String[] {} );
+            fail( "IE does not support createElementNS");
+        }
+        catch( final Exception e ) {
+            //expected exception
+        }
+        testDocumentCreateElementNS( BrowserVersion.FULL_FEATURED_BROWSER, new String[] {"myNS", "null"} );
+    }
+
+    private void testDocumentCreateElementNS(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function doTest() {\n"
+            + "        var div1 = document.createElementNS('myNS', 'div');\n"
+            + "        var div2 = document.createElement('div');\n"
+            + "        alert(div1.namespaceURI);\n"
+            + "        alert(div2.namespaceURI);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "  </body>\n"
+            + "</html>\n";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, htmlContent, collectedAlerts);
+        assertEquals( expectedAlerts, collectedAlerts );
     }
 
     /**
