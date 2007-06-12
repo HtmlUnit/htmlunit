@@ -74,6 +74,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Michael Ottati
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author Ahmed Ashour
  */
 public class DocumentTest extends WebTestCase {
     /**
@@ -429,13 +430,17 @@ public class DocumentTest extends WebTestCase {
             return;
         }
         try {
-            testDocumentCreateElementNS( BrowserVersion.FULL_FEATURED_BROWSER, new String[] {} );
+            testDocumentCreateElementNS( BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {} );
             fail( "IE does not support createElementNS");
         }
         catch( final Exception e ) {
             //expected exception
         }
-        testDocumentCreateElementNS( BrowserVersion.FULL_FEATURED_BROWSER, new String[] {"myNS", "null"} );
+        testDocumentCreateElementNS( BrowserVersion.MOZILLA_1_0, new String[] {
+            "some:Divsome:Div,myNS,Div,some",
+            "HI:DIV,HI:DIV,null,HI:DIV,null",
+            "DIV,DIV,null,DIV,null"
+        } );
     }
 
     private void testDocumentCreateElementNS(final BrowserVersion browserVersion, final String[] expectedAlerts)
@@ -445,10 +450,15 @@ public class DocumentTest extends WebTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + "      function doTest() {\n"
-            + "        var div1 = document.createElementNS('myNS', 'div');\n"
-            + "        var div2 = document.createElement('div');\n"
-            + "        alert(div1.namespaceURI);\n"
-            + "        alert(div2.namespaceURI);\n"
+            + "        var div1 = document.createElementNS('myNS', 'some:Div');\n"
+            + "        var div2 = document.createElement('hi:div');\n"
+            + "        var div3 = document.createElement('div');\n"
+            + "        alert(div1.nodeName + ',' + div1.tagName + ',' + div1.namespaceURI + ',' + "
+            +   "div1.localName + ',' + div1.prefix);\n"
+            + "        alert(div2.nodeName + ',' + div2.tagName + ',' + div2.namespaceURI + ',' + "
+            +   "div2.localName + ',' + div2.prefix);\n"
+            + "        alert(div3.nodeName + ',' + div3.tagName + ',' + div3.namespaceURI + ',' + "
+            +   "div3.localName + ',' + div3.prefix);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
