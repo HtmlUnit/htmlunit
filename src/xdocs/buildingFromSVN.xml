@@ -24,7 +24,7 @@
             following commands.
             </p>
             <source>
-svn co https://svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .
+svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .
             </source>
         </section>
 

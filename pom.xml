@@ -33,12 +33,12 @@ The reference stays the maven 1 build.
 	</licenses>
 	<scm>
 		<connection>
-			scm:svn:https://svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit
+			scm:svn:https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit
 		</connection>
 		<developerConnection>
-			scm:svn:https://svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit
+			scm:svn:https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit
 		</developerConnection>
-		<url>http://svn.sourceforge.net/viewcvs.cgi/htmlunit/</url>
+		<url>http://svn.sourceforge.net/viewvc/htmlunit/</url>
 	</scm>
 	<mailingLists>
 		<mailingList>
