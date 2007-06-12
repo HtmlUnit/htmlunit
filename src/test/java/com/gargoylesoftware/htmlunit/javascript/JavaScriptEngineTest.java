@@ -1231,4 +1231,42 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals(expectedAlert, collectedAlerts);
     }
 
+    public void testRegExpSupport() throws Exception {
+
+        final String html =
+            "<html>\n" +
+            "  <head>\n" +
+            "    <title>test</title>\n" +
+            "    <script id='a'>\n" +
+            "       var s = new String('rstlne-rstlne-rstlne');\n" +
+            "       alert (s);\n" +
+            "       s = s.replace('e', 'o');\n" +
+            "       alert (s);\n" +
+            "       s = s.replace(/o/, 'a');\n" +
+            "       alert (s);\n" +
+            "       s = s.replace( new RegExp('a'), 'e');\n" +
+            "       alert (s);\n" +
+            "       s = s.replace( new RegExp('e', 'g'), 'i');\n" +
+            "       alert (s);\n" +
+            "       s = s.replace( /i/g, 'a');\n" +
+            "       alert (s);\n" +
+            "    </script>\n" +
+            "  </head>\n" +
+            "  <body>abc</body>\n" +
+            "</html>\n";
+        
+        final List collectedAlerts = new ArrayList();
+
+        loadPage(html, collectedAlerts);
+        
+        List expectedAlerts = new ArrayList();
+        expectedAlerts.add("rstlne-rstlne-rstlne");
+        expectedAlerts.add("rstlno-rstlne-rstlne");
+        expectedAlerts.add("rstlna-rstlne-rstlne");
+        expectedAlerts.add("rstlne-rstlne-rstlne");
+        expectedAlerts.add("rstlni-rstlni-rstlni");
+        expectedAlerts.add("rstlna-rstlna-rstlna");
+        
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
