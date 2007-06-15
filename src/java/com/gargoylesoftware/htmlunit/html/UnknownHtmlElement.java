@@ -48,28 +48,33 @@ import java.util.Map;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Ahmed Ashour
  */
 public class UnknownHtmlElement extends ClickableElement {
-
-    private String tagName_;
 
     /**
      *  Create an instance
      *
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param tagName the HTML tag represented by this object
      * @param attributes the initial attributes
      */
     UnknownHtmlElement(final HtmlPage page, final String tagName, final Map attributes) {
-        super(page, attributes);
-        tagName_ = tagName.toLowerCase();
+        this(page, null, tagName, attributes);
     }
 
     /**
-     * @return the HTML tag name
+     *  Create an instance
+     *
+     * @param page The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param attributes the initial attributes
      */
-    public String getTagName() {
-        return tagName_;
+    UnknownHtmlElement(final HtmlPage page, final String namespaceURI, final String qualifiedName,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
     }
+
 }
 

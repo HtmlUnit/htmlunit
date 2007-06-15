@@ -80,19 +80,27 @@ public abstract class HtmlElement extends DomNode {
     /** Constant meaning that the specified attribute was found but its value was empty. */
     public static final String ATTRIBUTE_VALUE_EMPTY = new String("");
 
+    private final String namespaceURI_;
+    private final String qualifiedName_;
+    
     /** The map holding the attribute values, keyed by name. */
     private Map attributes_;
 
     /**
      * Creates an instance.
      *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
      * @param htmlPage The page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
      * <code>null</code>. The map will be stored as is, not copied.
      */
-    protected HtmlElement(final HtmlPage htmlPage, final Map attributes) {
-
+    protected HtmlElement(final String namespaceURI, final String qualifiedName, final HtmlPage htmlPage,
+            final Map attributes) {
         super(htmlPage);
+        Assert.notNull("qualifiedName", qualifiedName);
+        namespaceURI_ = namespaceURI;
+        qualifiedName_ = qualifiedName;
         if (attributes != null) {
             attributes_ = attributes;
         }
@@ -204,7 +212,49 @@ public abstract class HtmlElement extends DomNode {
      *
      * @return the tag name of this element.
      */
-    public abstract String getTagName();
+    public String getTagName() {
+        if( getNamespaceURI() == null ) {
+            return getLocalName().toLowerCase();
+        }
+        else {
+            return qualifiedName_;
+        }
+            
+    }
+
+    /**
+     * Returns The URI that identifies an XML namespace.
+     * @return The URI that identifies an XML namespace.
+     */
+    public String getNamespaceURI() {
+        return namespaceURI_;
+    }
+
+    /**
+     * Returns The local name (without prefix).
+     * @return The local name (without prefix).
+     */
+    public String getLocalName() {
+        if( getNamespaceURI() == null ) {
+            return qualifiedName_;
+        }
+        else {
+            return qualifiedName_.substring( qualifiedName_.indexOf( ':' ) + 1 );
+        }
+    }
+
+    /**
+     * Returns The Namespace prefix
+     * @return The Namespace prefix.
+     */
+    public String getPrefix() {
+        if( getNamespaceURI() == null ) {
+            return null;
+        }
+        else {
+            return qualifiedName_.substring( 0, qualifiedName_.indexOf( ':' ) );
+        }
+    }
 
     /** @return the node type */
     public short getNodeType() {

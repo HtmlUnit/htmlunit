@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Denis N. Antonioli
+ * @author Ahmed Ashour
  */
 public class HtmlAttrTest extends WebTestCase {
     /**
@@ -90,11 +91,7 @@ public class HtmlAttrTest extends WebTestCase {
                 throw new NoSuchMethodError(ENTRY_CANT_REMOVE);
             }
         };
-        HTML_ELEMENT = new HtmlElement(null, Collections.EMPTY_MAP) {
-            public String getTagName() {
-                return "dummy";
-            }
-
+        HTML_ELEMENT = new HtmlElement(null, "dummy", null, Collections.EMPTY_MAP) {
             public HtmlPage getPage() {
                 return null;
             }

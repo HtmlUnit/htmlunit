@@ -70,16 +70,21 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlInput( final HtmlPage page, final Map attributes ) {
-        super( page, attributes );
-        defaultValue_ = getValueAttribute();
+    public HtmlInput(final HtmlPage page, final Map attributes) {
+        this(null, TAG_NAME, page, attributes);
     }
 
     /**
-     * @return the HTML tag name
+     *  Create an instance
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param  page The page that contains this element
+     * @param attributes the initial attributes
      */
-    public String getTagName() {
-        return TAG_NAME;
+    public HtmlInput(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
+        defaultValue_ = getValueAttribute();
     }
 
     /**

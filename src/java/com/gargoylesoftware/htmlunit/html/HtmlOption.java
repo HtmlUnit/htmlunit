@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlOption extends ClickableElement implements DisabledElement {
 
@@ -62,19 +63,25 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     /**
      *  Create an instance
      *
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlOption( final HtmlPage page, final Map attributes ) {
-        super(page, attributes);
-        initialSelectedState_ = isAttributeDefined("selected");
+    public HtmlOption(final HtmlPage page, final Map attributes) {
+        this(null, TAG_NAME, page, attributes);
     }
 
     /**
-     * @return the HTML tag name
+     *  Create an instance
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param page The page that contains this element
+     * @param attributes the initial attributes
      */
-    public String getTagName() {
-        return TAG_NAME;
+    public HtmlOption(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
+        initialSelectedState_ = isAttributeDefined("selected");
     }
 
     /**
@@ -85,7 +92,6 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     public boolean isSelected() {
         return isAttributeDefined("selected");
     }
-
 
     /**
      * Set the selected state of this option. This will possibly also change the

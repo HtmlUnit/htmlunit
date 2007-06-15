@@ -92,18 +92,24 @@ public class HtmlForm extends ClickableElement {
     /**
      *  Create an instance
      *
-     * @param  htmlPage The page that contains this element
+     * @param htmlPage The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlForm( final HtmlPage htmlPage, final Map attributes) {
-        super(htmlPage, attributes);
+    public HtmlForm(final HtmlPage htmlPage, final Map attributes) {
+        this(null, TAG_NAME, htmlPage, attributes);
     }
 
     /**
-     * @return the HTML tag name
+     *  Create an instance
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param htmlPage The page that contains this element
+     * @param attributes the initial attributes
      */
-    public String getTagName() {
-        return TAG_NAME;
+    public HtmlForm(final String namespaceURI, final String qualifiedName, final HtmlPage htmlPage,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, htmlPage, attributes);
     }
 
     /**

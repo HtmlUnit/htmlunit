@@ -45,17 +45,22 @@ import java.util.Map;
  * An element that can have focus and onblur/onfocus events.
  *
  * @author David D. Kilzer
+ * @author Ahmed Ashour
  * @version $Revision$
  */
 public abstract class FocusableElement extends ClickableElement {
 
     /** 
      * Create an instance.
+     * 
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
      * @param page The page
      * @param attributes The attributes
      */
-    public FocusableElement(final HtmlPage page, final Map attributes) {
-        super(page, attributes);
+    public FocusableElement(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
     }
 
 

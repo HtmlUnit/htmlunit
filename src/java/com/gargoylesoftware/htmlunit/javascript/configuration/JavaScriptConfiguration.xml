@@ -161,6 +161,9 @@
         <function name="close"/>
         <function name="createAttribute"/>
         <function name="createElement"/>
+        <function name="createElementNS">
+            <browser name="Netscape" min-version="6"/>
+        </function>
         <function name="createTextNode"/>
         <function name="getElementById"/>
         <function name="getElementsByName"/>        
@@ -424,6 +427,15 @@
         </property>
         <property name="tagName" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="namespaceURI" readable="true" writable="false">
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="prefix" readable="true" writable="false">
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="localName" readable="true" writable="false">
             <browser name="Netscape" min-version="6"/>
         </property>
         <property name="title" readable="true" writable="true">

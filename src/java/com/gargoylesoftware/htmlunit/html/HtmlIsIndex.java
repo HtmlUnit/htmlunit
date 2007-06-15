@@ -51,6 +51,7 @@ import java.util.Map;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class HtmlIsIndex extends StyledElement implements SubmittableElement {
 
@@ -65,15 +66,21 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlIsIndex( final HtmlPage page, final Map attributes) {
-        super(page, attributes);
+    public HtmlIsIndex(final HtmlPage page, final Map attributes) {
+        this(null, TAG_NAME, page, attributes);
     }
 
     /**
-     * @return the HTML tag name
+     * Create an instance of HtmlIsIndex
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param page The HtmlPage that contains this element.
+     * @param attributes the initial attributes
      */
-    public String getTagName() {
-        return TAG_NAME;
+    public HtmlIsIndex(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
     }
 
     /**

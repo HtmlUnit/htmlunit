@@ -48,6 +48,7 @@ import java.util.Map;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Ahmed Ashour
  * @see  HtmlTableDataCell
  * @see  HtmlTableHeaderCell
  */
@@ -56,11 +57,14 @@ public abstract class HtmlTableCell extends ClickableElement {
     /**
      *  Create an instance
      *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
      * @param  page The page that this element is contained within
      * @param attributes the initial attributes
      */
-    protected HtmlTableCell(final HtmlPage page, final Map attributes) {
-        super( page, attributes );
+    protected HtmlTableCell(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
     }
 
     /**

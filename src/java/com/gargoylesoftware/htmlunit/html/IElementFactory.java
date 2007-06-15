@@ -43,6 +43,7 @@ import org.xml.sax.Attributes;
  * specification of a factory capable of creating HtmlElement objects
  * @version  $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Ahmed Ashour
  */
 public interface IElementFactory {
     /**
@@ -57,5 +58,19 @@ public interface IElementFactory {
      */
     HtmlElement createElement(
             final HtmlPage page, final String tagName,
+            final Attributes attributes);
+
+    /**
+     * create an element according to this factory's specification.
+     * @param page the enclosing page for the new element. Note that the element is <em>not</em> yet added
+     * into the DOM tree.
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param attributes the attributes encountered during XML/HTML parsing. Possibly <code>null</code>
+     * if no attributes specified
+     * @return the newly created and initialized element
+     */
+    HtmlElement createElementNS(
+            final HtmlPage page, final String namespaceURI, final String qualifiedName,
             final Attributes attributes);
 }

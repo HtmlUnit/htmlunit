@@ -68,14 +68,20 @@ public class HtmlAnchor extends FocusableElement {
      * @param attributes the initial attributes
      */
     public HtmlAnchor(final HtmlPage page, final Map attributes) {
-        super( page, attributes );
+        this(null, TAG_NAME, page, attributes);
     }
 
     /**
-     * @return the HTML tag name
+     *  Create an instance
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param  page The page that contains this element
+     * @param attributes the initial attributes
      */
-    public String getTagName() {
-        return TAG_NAME;
+    public HtmlAnchor(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
     }
 
     /**

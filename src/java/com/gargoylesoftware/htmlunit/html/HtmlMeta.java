@@ -51,6 +51,7 @@ import org.apache.commons.lang.StringUtils;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Ahmed Ashour
  */
 public class HtmlMeta extends HtmlElement {
 
@@ -63,8 +64,20 @@ public class HtmlMeta extends HtmlElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlMeta( final HtmlPage page, final Map attributes ) {
-        super(page, attributes);
+    public HtmlMeta(final HtmlPage page, final Map attributes) {
+        this(null, TAG_NAME, page, attributes);
+    }
+
+    /**
+     * Create an instance of HtmlMeta
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param page The HtmlPage that contains this element.
+     * @param attributes the initial attributes
+     */
+    public HtmlMeta(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
         
         if ("set-cookie".equalsIgnoreCase(getHttpEquivAttribute())) {
             performSetCookie();
@@ -100,13 +113,6 @@ public class HtmlMeta extends HtmlElement {
             }
             getPage().getWebClient().getWebConnection().getState().addCookie(cookie);
         }
-    }
-
-    /**
-     * @return the HTML tag name
-     */
-    public String getTagName() {
-        return TAG_NAME;
     }
 
     /**

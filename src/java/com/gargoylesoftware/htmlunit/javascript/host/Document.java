@@ -89,6 +89,7 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
  * @author Daniel Gredler
  * @author Michael Ottati
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author Ahmed Ashour
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp">
  * MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
@@ -709,6 +710,33 @@ public final class Document extends NodeImpl {
         return result;
     }
 
+    /**
+     * Create a new HTML element with the given tag name, and name
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @return the new HTML element, or NOT_FOUND if the tag is not supported.
+     */
+    public Object jsxFunction_createElementNS(final String namespaceURI, final String qualifiedName) {
+        Object result = NOT_FOUND;
+        try {
+            final HtmlElement htmlElement = getDomNodeOrDie().getPage().createElementNS(namespaceURI, qualifiedName);
+            final Object jsElement = getScriptableFor(htmlElement);
+
+            if( jsElement == NOT_FOUND ) {
+                getLog().debug("createElementNS(" + namespaceURI + ',' + qualifiedName
+                    +") cannot return a result as there isn't a javascript object for the html element "
+                    + htmlElement.getClass().getName());
+            }
+            else {
+                result = jsElement;
+            }
+        }
+        catch( final ElementNotFoundException e ) {
+            // Just fall through - result is already set to NOT_FOUND
+        }
+        return result;
+    }
 
     /**
      * Creates a new HTML attribute with the specified name.

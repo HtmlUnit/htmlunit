@@ -54,6 +54,7 @@ import org.apache.commons.lang.StringUtils;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class HtmlImageInput extends HtmlInput {
 
@@ -62,17 +63,28 @@ public class HtmlImageInput extends HtmlInput {
     private int xPosition_;
     private int yPosition_;
 
-
     /**
      *  Create an instance
      *
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlImageInput( final HtmlPage page, final Map attributes ) {
-        super( page, attributes );
+    public HtmlImageInput(final HtmlPage page, final Map attributes) {
+        this(null, TAG_NAME, page, attributes);
     }
 
+    /**
+     *  Create an instance
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param  page The page that contains this element
+     * @param attributes the initial attributes
+     */
+    public HtmlImageInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
+    }
 
     /**
      *  Return an array of KeyValuePairs that are the values that will be sent

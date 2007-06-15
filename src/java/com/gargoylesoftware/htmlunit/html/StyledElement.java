@@ -49,19 +49,22 @@ import java.util.Map;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Ahmed Ashour
  */
 public abstract class StyledElement extends HtmlElement {
 
     /**
      *  Create an instance
      *
-     * @param  page The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      */
-    protected StyledElement( final HtmlPage page, final Map attributes) {
-        super(page, attributes);
+    protected StyledElement(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
     }
-
 
     /**
      * Return the value of the attribute "id".  Refer to the

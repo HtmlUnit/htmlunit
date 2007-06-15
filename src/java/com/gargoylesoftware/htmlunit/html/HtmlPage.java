@@ -224,6 +224,18 @@ public final class HtmlPage extends DomNode implements Page {
     }
 
     /**
+     * Create a new HTML element with the given namespace and qualified name.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @return the new HTML element.
+     */
+    public HtmlElement createElementNS(final String namespaceURI, final String qualifiedName) {
+        final String tagLower = qualifiedName.toLowerCase().substring( qualifiedName.indexOf( ':' ) + 1 );
+        return HTMLParser.getFactory(tagLower).createElementNS(this, namespaceURI, qualifiedName, null);
+    }
+
+    /**
      *  Return the HtmlAnchor with the specified name
      *
      * @param  name The name to search by

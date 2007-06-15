@@ -47,6 +47,7 @@ import java.util.Map;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
+ * @author Ahmed Ashour
  */
 public class HtmlOptionGroup extends ClickableElement implements DisabledElement {
 
@@ -59,17 +60,22 @@ public class HtmlOptionGroup extends ClickableElement implements DisabledElement
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlOptionGroup( final HtmlPage page, final Map attributes ) {
-        super(page, attributes);
+    public HtmlOptionGroup(final HtmlPage page, final Map attributes) {
+        this(null, TAG_NAME, page, attributes);
     }
 
     /**
-     * @return the HTML tag name
+     * Create an instance of HtmlOptionGroup
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param page The HtmlPage that contains this element.
+     * @param attributes the initial attributes
      */
-    public String getTagName() {
-        return TAG_NAME;
+    public HtmlOptionGroup(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
     }
-
 
     /**
      * Return true if the disabled attribute is set for this element.
@@ -79,7 +85,6 @@ public class HtmlOptionGroup extends ClickableElement implements DisabledElement
     public final boolean isDisabled() {
         return isAttributeDefined("disabled");
     }
-
 
     /**
      * Return the value of the attribute "disabled".  Refer to the
@@ -92,7 +97,6 @@ public class HtmlOptionGroup extends ClickableElement implements DisabledElement
     public final String getDisabledAttribute() {
         return getAttributeValue("disabled");
     }
-
 
     /**
      * Return the value of the attribute "label".  Refer to the

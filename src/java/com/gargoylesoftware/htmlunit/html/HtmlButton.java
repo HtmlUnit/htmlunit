@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David D. Kilzer
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class HtmlButton extends FocusableElement implements DisabledElement, SubmittableElement {
 
@@ -65,15 +66,21 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlButton( final HtmlPage page, final Map attributes) {
-        super(page, attributes);
+    public HtmlButton(final HtmlPage page, final Map attributes) {
+        this(null, TAG_NAME, page, attributes);
     }
 
     /**
-     * @return the HTML tag name
+     *  Create an instance
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param  page The page that contains this element
+     * @param attributes the initial attributes
      */
-    public String getTagName() {
-        return TAG_NAME;
+    public HtmlButton(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
     }
 
     /**

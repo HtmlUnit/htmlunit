@@ -422,24 +422,54 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails.
+     */
+    public void testDocumentCreateElement2() throws Exception {
+        testDocumentCreateElement2(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {
+            "DIV,DIV,undefined,undefined,undefined", "HI:DIV,HI:DIV,undefined,undefined,undefined"} );
+        testDocumentCreateElement2(BrowserVersion.MOZILLA_1_0, new String[] {
+            "DIV,DIV,null,null,DIV", "HI:DIV,HI:DIV,null,null,HI:DIV"} );
+    }
+
+    private void testDocumentCreateElement2(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function doTest() {\n"
+            + "        div = document.createElement('Div');\n"
+            + "        alert(div.nodeName + ',' + div.tagName + ',' + div.namespaceURI + ',' + "
+            +   "div.prefix + ',' + div.localName);\n"
+            + "        div = document.createElement('Hi:Div');\n"
+            + "        alert(div.nodeName + ',' + div.tagName + ',' + div.namespaceURI + ',' + "
+            +   "div.prefix + ',' + div.localName);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "  </body>\n"
+            + "</html>\n";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, htmlContent, collectedAlerts);
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
+    /**
      * Ensures that <tt>document.createElementNS()</tt> works correctly.
      * @throws Exception if the test fails.
      */
     public void testDocumentCreateElementNS() throws Exception {
-        if( notYetImplemented() ) {
-            return;
-        }
         try {
             testDocumentCreateElementNS( BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {} );
-            fail( "IE does not support createElementNS");
+            fail( "IE6 does not support createElementNS");
         }
         catch( final Exception e ) {
             //expected exception
         }
         testDocumentCreateElementNS( BrowserVersion.MOZILLA_1_0, new String[] {
-            "some:Divsome:Div,myNS,Div,some",
-            "HI:DIV,HI:DIV,null,HI:DIV,null",
-            "DIV,DIV,null,DIV,null"
+            "Some:Div,Some:Div,myNS,Some,Div"
         } );
     }
 
@@ -450,15 +480,9 @@ public class DocumentTest extends WebTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + "      function doTest() {\n"
-            + "        var div1 = document.createElementNS('myNS', 'some:Div');\n"
-            + "        var div2 = document.createElement('hi:div');\n"
-            + "        var div3 = document.createElement('div');\n"
-            + "        alert(div1.nodeName + ',' + div1.tagName + ',' + div1.namespaceURI + ',' + "
-            +   "div1.localName + ',' + div1.prefix);\n"
-            + "        alert(div2.nodeName + ',' + div2.tagName + ',' + div2.namespaceURI + ',' + "
-            +   "div2.localName + ',' + div2.prefix);\n"
-            + "        alert(div3.nodeName + ',' + div3.tagName + ',' + div3.namespaceURI + ',' + "
-            +   "div3.localName + ',' + div3.prefix);\n"
+            + "        div = document.createElementNS('myNS', 'Some:Div');\n"
+            + "        alert(div.nodeName + ',' + div.tagName + ',' + div.namespaceURI + ',' + "
+            +   "div.prefix + ',' + div.localName);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"

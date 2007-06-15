@@ -242,13 +242,44 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         }
     }
 
-
     /**
-     * Return the tag name of this element
-     * @return The tag name in uppercase
+     * Return the tag name of this element.
+     * @return The tag name in uppercase.
      */
     public String jsxGet_tagName() {
-        return getHtmlElementOrDie().getTagName().toUpperCase();
+        String tagName = getHtmlElementOrDie().getTagName();
+        if( jsxGet_namespaceURI() == null ) {
+            tagName = tagName.toUpperCase();
+        }
+        return tagName;
+    }
+
+    /**
+     * Returns The URI that identifies an XML namespace.
+     * @return The URI that identifies an XML namespace.
+     */
+    public String jsxGet_namespaceURI() {
+        return getHtmlElementOrDie().getNamespaceURI();
+    }
+
+    /**
+     * Returns The local name (without prefix).
+     * @return The local name (without prefix).
+     */
+    public String jsxGet_localName() {
+        String localName = getHtmlElementOrDie().getLocalName();
+        if( jsxGet_namespaceURI() == null ) {
+            localName = localName.toUpperCase();
+        }
+        return localName;
+    }
+
+    /**
+     * Returns The Namespace prefix
+     * @return The Namespace prefix.
+     */
+    public String jsxGet_prefix() {
+        return getHtmlElementOrDie().getPrefix();
     }
 
     /**

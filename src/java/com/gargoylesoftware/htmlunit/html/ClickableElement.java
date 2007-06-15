@@ -67,11 +67,14 @@ public abstract class ClickableElement extends StyledElement {
     /**
      *  Create an instance
      *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    protected ClickableElement( final HtmlPage page, final Map attributes) {
-        super(page, attributes);
+    protected ClickableElement(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
     }
 
 

@@ -50,6 +50,7 @@ import java.util.HashMap;
  * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public final class InputElementFactory implements IElementFactory {
 
@@ -72,7 +73,15 @@ public final class InputElementFactory implements IElementFactory {
     public HtmlElement createElement(
             final HtmlPage page, final String tagName,
             final Attributes attributes) {
-
+        return createElementNS(page, null, tagName, attributes);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public HtmlElement createElementNS(final HtmlPage page, final String namespaceURI,
+            final String qualifiedName, final Attributes attributes) {
+    
         String type = null;
         if(attributes != null) {
             type = attributes.getValue("type");
@@ -97,41 +106,41 @@ public final class InputElementFactory implements IElementFactory {
             // cf http://www.w3.org/TR/REC-html40/interact/forms.html#adef-type-INPUT
             // and the common browsers seem to treat it as a "text" input so we will as well.
             attributeMap.put("type", "text");
-            result = new HtmlTextInput(page, attributeMap);
+            result = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if( type.equals("submit") ) {
-            result = new HtmlSubmitInput(page, attributeMap);
+            result = new HtmlSubmitInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if( type.equals("checkbox")) {
-            result = new HtmlCheckBoxInput(page, attributeMap);
+            result = new HtmlCheckBoxInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if( type.equals("radio")) {
-            result = new HtmlRadioButtonInput(page, attributeMap);
+            result = new HtmlRadioButtonInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if( type.equals("text")) {
-            result = new HtmlTextInput(page, attributeMap);
+            result = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if( type.equals("hidden")) {
-            result = new HtmlHiddenInput(page, attributeMap);
+            result = new HtmlHiddenInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if( type.equals("password")) {
-            result = new HtmlPasswordInput(page, attributeMap);
+            result = new HtmlPasswordInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if( type.equals("image")) {
-            result = new HtmlImageInput(page, attributeMap);
+            result = new HtmlImageInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if( type.equals("reset")) {
-            result = new HtmlResetInput(page, attributeMap);
+            result = new HtmlResetInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if( type.equals("button")) {
-            result = new HtmlButtonInput(page, attributeMap);
+            result = new HtmlButtonInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if( type.equals("file")) {
-            result = new HtmlFileInput(page, attributeMap);
+            result = new HtmlFileInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else {
             getLog().info("Bad input type: \"" + type + "\", creating a text input");
-            result = new HtmlTextInput(page, attributeMap);
+            result = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         return result;
     }
@@ -144,4 +153,5 @@ public final class InputElementFactory implements IElementFactory {
     protected Log getLog() {
         return LogFactory.getLog(getClass());
     }
+
 }

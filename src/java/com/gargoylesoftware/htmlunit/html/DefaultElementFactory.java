@@ -57,10 +57,11 @@ import org.xml.sax.Attributes;
  *
  * @version  $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Ahmed Ashour
  */
 class DefaultElementFactory implements IElementFactory {
 
-    private static final Class[] CONSTRUCTOR_ARGS = new Class[]{HtmlPage.class, Map.class};
+    private static final Class[] CONSTRUCTOR_ARGS = new Class[]{String.class, String.class, HtmlPage.class, Map.class};
 
     private final Constructor constructor_;
 
@@ -89,7 +90,18 @@ class DefaultElementFactory implements IElementFactory {
      */
     public HtmlElement createElement(
             final HtmlPage page, final String tagName, final Attributes attributes) {
+        return createElementNS(page, null, tagName, attributes);
+    }
 
+    /**
+     * @param page the owning page
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param attributes initial attributes, possibly <code>null</code>
+     * @return the newly created element
+     */
+    public HtmlElement createElementNS(final HtmlPage page, final String namespaceURI,
+            final String qualifiedName, final Attributes attributes) {
         try {
             Map attributeMap = null;
             if (attributes != null) {
@@ -98,7 +110,8 @@ class DefaultElementFactory implements IElementFactory {
                     attributeMap.put(attributes.getQName(i), attributes.getValue(i));
                 }
             }
-            final HtmlElement element = (HtmlElement)constructor_.newInstance(new Object[]{page, attributeMap});
+            final HtmlElement element = (HtmlElement)constructor_.newInstance(
+                    new Object[]{namespaceURI, qualifiedName, page, attributeMap});
             return element;
         }
         catch( final IllegalAccessException e) {
@@ -114,4 +127,5 @@ class DefaultElementFactory implements IElementFactory {
                     "Exception when calling constructor ["+constructor_+"]", e.getTargetException());
         }
     }
+
 }

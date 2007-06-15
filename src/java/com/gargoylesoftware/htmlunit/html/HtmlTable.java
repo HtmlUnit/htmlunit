@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Ahmed Ashour
  */
 public class HtmlTable extends ClickableElement {
 
@@ -65,15 +66,20 @@ public class HtmlTable extends ClickableElement {
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlTable( final HtmlPage page, final Map attributes ) {
-        super( page, attributes );
+    public HtmlTable(final HtmlPage page, final Map attributes) {
+        this(null, TAG_NAME, page, attributes);
     }
 
     /**
-     * @return the HTML tag name
+     *  Create an instance
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param  page The page that contains this element
+     * @param attributes the initial attributes
      */
-    public String getTagName() {
-        return TAG_NAME;
+    public HtmlTable(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
     }
 
     /**

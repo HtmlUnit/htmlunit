@@ -45,6 +45,7 @@ import java.util.Map;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Ahmed Ashour
  */
 public class HtmlParameter extends HtmlElement {
 
@@ -57,15 +58,21 @@ public class HtmlParameter extends HtmlElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlParameter( final HtmlPage page, final Map attributes ) {
-        super(page, attributes);
+    public HtmlParameter(final HtmlPage page, final Map attributes) {
+        this(null, TAG_NAME, page, attributes);
     }
 
     /**
-     * @return the HTML tag name
+     * Create an instance of HtmlParameter
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param page The HtmlPage that contains this element.
+     * @param attributes the initial attributes
      */
-    public String getTagName() {
-        return TAG_NAME;
+    public HtmlParameter(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
     }
 
     /**
@@ -80,7 +87,6 @@ public class HtmlParameter extends HtmlElement {
         return getAttributeValue("id");
     }
 
-
     /**
      * Return the value of the attribute "name".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -92,7 +98,6 @@ public class HtmlParameter extends HtmlElement {
     public final String getNameAttribute() {
         return getAttributeValue("name");
     }
-
 
     /**
      * Return the value of the attribute "value".  Refer to the
@@ -106,7 +111,6 @@ public class HtmlParameter extends HtmlElement {
         return getAttributeValue("value");
     }
 
-
     /**
      * Return the value of the attribute "valuetype".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -118,7 +122,6 @@ public class HtmlParameter extends HtmlElement {
     public final String getValueTypeAttribute() {
         return getAttributeValue("valuetype");
     }
-
 
     /**
      * Return the value of the attribute "type".  Refer to the

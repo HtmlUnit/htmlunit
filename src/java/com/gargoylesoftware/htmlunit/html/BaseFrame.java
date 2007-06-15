@@ -79,12 +79,14 @@ public abstract class BaseFrame extends StyledElement {
     /**
      * Create an instance of BaseFrame
      *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    protected BaseFrame( final HtmlPage page, final Map attributes) {
-
-        super(page, attributes);
+    protected BaseFrame(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
 
         try {
             // put about:blank in the window to allow JS to run on this frame before the
@@ -146,11 +148,6 @@ public abstract class BaseFrame extends StyledElement {
             }
         }
     }
-
-    /**
-     * @return the HTML tag name
-     */
-    public abstract String getTagName();
 
     /**
      * Return the value of the attribute "longdesc".  Refer to the

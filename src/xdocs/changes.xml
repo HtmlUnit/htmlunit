@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour" id="1521790">
+                JavaScript: Add document.createElementNS(), element.namespaceURI, element.prefix, and element.localName (#1521790).
+            </action>
             <action type="add" dev="asashour" id="1685311">
                 HtmlPage supports Serialization (#1685311).
             </action>

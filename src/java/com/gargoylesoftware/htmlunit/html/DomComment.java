@@ -56,7 +56,7 @@ public class DomComment extends DomCharacterData {
      * @param page The HtmlPage that contains this element.
      * @param data the string data held by this node
      */
-    public DomComment( final HtmlPage page, final String data) {
+    public DomComment(final HtmlPage page, final String data) {
         super(page, data);
     }
     

@@ -48,6 +48,7 @@ import java.util.HashMap;
  *
  * @version  $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Ahmed Ashour
  */
 public final class UnknownElementFactory implements IElementFactory {
 
@@ -64,7 +65,14 @@ public final class UnknownElementFactory implements IElementFactory {
     public HtmlElement createElement(
             final HtmlPage page, final String tagName,
             final Attributes attributes) {
+        return createElementNS(page, null, tagName, attributes);
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    public HtmlElement createElementNS(final HtmlPage page, final String namespaceURI,
+            final String qualifiedName, final Attributes attributes) {
         Map attributeMap = null;
         if(attributes != null) {
             attributeMap = new HashMap(attributes.getLength());
@@ -72,7 +80,7 @@ public final class UnknownElementFactory implements IElementFactory {
                 attributeMap.put(attributes.getLocalName(i), attributes.getValue(i));
             }
         }
-        final HtmlElement newElement = new UnknownHtmlElement(page, tagName, attributeMap);
-        return newElement;
+        return new UnknownHtmlElement(page, namespaceURI, qualifiedName, attributeMap);
     }
+
 }

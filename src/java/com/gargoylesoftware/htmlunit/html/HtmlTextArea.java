@@ -71,8 +71,21 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlTextArea( final HtmlPage page, final Map attributes ) {
-        super( page, attributes );
+    public HtmlTextArea(final HtmlPage page, final Map attributes) {
+        this(null, TAG_NAME, page, attributes);
+    }
+
+    /**
+     *  Create an instance
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param  page The page that contains this element
+     * @param attributes the initial attributes
+     */
+    public HtmlTextArea(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
     }
 
     /**
@@ -93,13 +106,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
                 defaultValue_ = "";
             }
         }
-    }
-
-    /**
-     * @return the HTML tag name
-     */
-    public String getTagName() {
-        return TAG_NAME;
     }
 
     /**
@@ -132,7 +138,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         setSelectionEnd( newValue.length() );
     }
 
-
     /**
      *  Return an array of KeyValuePairs that are the values that will be sent
      *  back to the server whenever the current form is submitted.<p>
@@ -146,7 +151,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getText() )};
     }
 
-
     /**
      * {@inheritDoc}
      * @see SubmittableElement#reset()
@@ -155,7 +159,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         initDefaultValue();
         setText( defaultValue_ );
     }
-
 
     /**
      * {@inheritDoc}
@@ -170,7 +173,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
             defaultValue_ = defaultValue;
         }
     }
-
 
     /**
      * {@inheritDoc}
@@ -193,7 +195,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         // Empty.
     }
 
-
     /**
      * {@inheritDoc} This implementation returns <tt>false</tt>; only checkboxes and
      * radio buttons really care what the default checked value is.
@@ -204,7 +205,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     public boolean isDefaultChecked() {
         return false;
     }
-
 
     /**
      * Return the value of the attribute "name".  Refer to the
@@ -218,7 +218,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         return getAttributeValue("name");
     }
 
-
     /**
      * Return the value of the attribute "rows".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -230,7 +229,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     public final String getRowsAttribute() {
         return getAttributeValue("rows");
     }
-
 
     /**
      * Return the value of the attribute "cols".  Refer to the
@@ -244,7 +242,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         return getAttributeValue("cols");
     }
 
-
     /**
      * Return true if the disabled attribute is set for this element.
      *
@@ -253,7 +250,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     public final boolean isDisabled() {
         return isAttributeDefined("disabled");
     }
-
 
     /**
      * Return the value of the attribute "disabled".  Refer to the
@@ -266,7 +262,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     public final String getDisabledAttribute() {
         return getAttributeValue("disabled");
     }
-
 
     /**
      * Return the value of the attribute "readonly".  Refer to the
@@ -293,7 +288,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         return getAttributeValue("tabindex");
     }
 
-
     /**
      * Return the value of the attribute "accesskey".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -305,7 +299,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     public final String getAccessKeyAttribute() {
         return getAttributeValue("accesskey");
     }
-
 
     /**
      * Return the value of the attribute "onfocus".  Refer to the
@@ -319,7 +312,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         return getAttributeValue("onfocus");
     }
 
-
     /**
      * Return the value of the attribute "onblur".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -332,7 +324,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         return getAttributeValue("onblur");
     }
 
-
     /**
      * Return the value of the attribute "onselect".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -344,7 +335,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     public final String getOnSelectAttribute() {
         return getAttributeValue("onselect");
     }
-
 
     /**
      * Return the value of the attribute "onchange".  Refer to the
@@ -396,7 +386,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         this.selectionStart_ = selectionStart; 
     }
     
-
     /**
      * Returns the selected text's end position (Firefox only).
      * @return the end position >= 0
@@ -423,5 +412,4 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         }
         this.selectionEnd_ = selectionEnd;
     }
-
 }

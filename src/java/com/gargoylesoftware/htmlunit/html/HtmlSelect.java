@@ -62,6 +62,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class HtmlSelect extends FocusableElement implements DisabledElement, SubmittableElement {
 
@@ -76,15 +77,21 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlSelect( final HtmlPage page, final Map attributes ) {
-        super( page, attributes );
+    public HtmlSelect(final HtmlPage page, final Map attributes) {
+        this(null, TAG_NAME, page, attributes);
     }
 
     /**
-     * @return the HTML tag name
+     *  Create an instance
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param  page The page that contains this element
+     * @param attributes the initial attributes
      */
-    public String getTagName() {
-        return TAG_NAME;
+    public HtmlSelect(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map attributes) {
+        super(namespaceURI, qualifiedName, page, attributes);
     }
 
     /**
