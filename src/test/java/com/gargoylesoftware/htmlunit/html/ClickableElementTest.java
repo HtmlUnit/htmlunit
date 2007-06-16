@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class ClickableElementTest extends WebTestCase {
     /**
@@ -1004,5 +1005,31 @@ public class ClickableElementTest extends WebTestCase {
         onClickPageTest("<html><body><form>" +
                 "<button type='button' id='clickId' onclick='alert(\"foo\"); onclick=null;'>Item</button>" +
                 "</form></body></html>", 2, expectedAlerts);
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testDblClick() throws Exception {
+        final String content = "<html>" +
+                "<head>\n" +
+                "<script>\n" +
+                "  function clickMe() {\n" +
+                "    document.getElementById('myTextarea').value+='click-';\n" +
+                "  }\n" +
+                "  function dblClickMe() {\n" +
+                "    document.getElementById('myTextarea').value+='dblclick-';\n" +
+                "  }\n" +
+                "</script>\n" +
+                "</head>\n" +
+                "<body id='myBody' onclick='clickMe()' ondblclick='dblClickMe()'>\n" +
+                "<textarea id='myTextarea'></textarea>\n" +
+                "</body></html>\n";
+        
+        final HtmlPage page = loadPage(content);
+        final HtmlBody body = (HtmlBody)page.getHtmlElementById( "myBody");
+        body.dblClick();
+        final HtmlTextArea textArea = (HtmlTextArea)page.getHtmlElementById("myTextarea");
+        assertEquals("click-dblclick-", textArea.getText());
     }
 }

@@ -63,6 +63,9 @@ public class Event extends SimpleScriptable {
     /** The click event type, triggered by "onclick" event handlers. */
     public static final String TYPE_CLICK = "click";
 
+    /** The dblclick event type, triggered by "ondblclick" event handlers. */
+    public static final String TYPE_DBL_CLICK = "dblclick";
+
     /** The submit event type, triggered by "onsubmit" event handlers. */
     public static final String TYPE_SUBMIT = "submit";
 

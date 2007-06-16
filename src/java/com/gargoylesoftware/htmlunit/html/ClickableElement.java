@@ -87,7 +87,7 @@ public abstract class ClickableElement extends StyledElement {
      */
     public Page click()
         throws IOException {
-        return click( false, false, false );
+        return click(false, false, false);
     }
 
     /**
@@ -135,6 +135,71 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
+     * Simulate double clicking this element, note that
+     * {@link #click()} is called first.
+     *
+     * @return The page that occupies this window after this element is double
+     * clicked. It may be the same window or it may be a freshly loaded one.
+     * @exception IOException If an IO error occurs
+     */
+    public Page dblClick()
+        throws IOException {
+        return dblClick(false, false, false);
+    }
+
+    /**
+     * Simulate double clicking this element, note that
+     * {@link #click(boolean, boolean, boolean)} is called first.
+     *
+     * @param shiftKey true if SHIFT is presssed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     * 
+     * @return The page that occupies this window after this element is double
+     * clicked. It may be the same window or it may be a freshly loaded one.
+     * @exception IOException If an IO error occurs
+     */
+    public Page dblClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+        throws IOException {
+        if( this instanceof DisabledElement ) {
+            if( ((DisabledElement) this).isDisabled() ) {
+                return getPage();
+            }
+        }
+        
+        //call click event first
+        final Page clickPage = click(shiftKey, ctrlKey, altKey);
+        if( clickPage != getPage() ) {
+            getLog().warn( "dblClick() is ignored, as click() loaded a different page." );
+            return clickPage;
+        }
+
+        final HtmlPage page = getPage();
+
+        final Function function = getEventHandler("ondblclick");
+
+        if (function != null && page.getWebClient().isJavaScriptEnabled()) {
+            boolean stateUpdated = false;
+            if (isStateUpdateFirst()) {
+                doDblClickAction(page);
+                stateUpdated = true;
+            }
+            final Event event = new Event(this, Event.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey );
+            final ScriptResult scriptResult = getPage().runEventHandler(function, event);
+            final Page scriptPage = scriptResult.getNewPage();
+            if (stateUpdated || Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
+                return scriptPage;
+            }
+            else {
+                return doDblClickAction(scriptPage);
+            }
+        }
+        else {
+            return doDblClickAction(page);
+        }
+    }
+
+    /**
      * This method will be called if there either wasn't an onclick handler or
      * there was but the result of that handler wasn't <code>false</code>.
      * This is the default behaviour of clicking the element.  
@@ -148,10 +213,25 @@ public abstract class ClickableElement extends StyledElement {
      * @throws IOException If an IO error occured
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
-
         return defaultPage;
     }
 
+    /**
+     * This method will be called if there either wasn't an ondblclick handler or
+     * there was but the result of that handler wasn't <code>false</code>.
+     * This is the default behaviour of double clicking the element.  
+     * The default implementation returns
+     * the current page - subclasses requiring different behaviour will
+     * override this method.
+     *
+     * @param defaultPage The default page to return if the action does not
+     * load a new page.
+     * @return The page that is currently loaded after execution of this method
+     * @throws IOException If an IO error occured
+     */
+    protected Page doDblClickAction(final Page defaultPage) throws IOException {
+        return defaultPage;
+    }
 
     /**
      * Return the value of the attribute "lang".  Refer to the
