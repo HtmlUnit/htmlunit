@@ -2523,4 +2523,42 @@ public class DocumentTest extends WebTestCase {
         
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Tests document.cloneNode()
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testDocumentCloneNode() throws Exception {
+        if( notYetImplemented() ) {
+            return;
+        }
+        
+        final String html = "<html><body id='hello' onload='doTest()'>\n"
+                + "  <script id='jscript'>\n"
+                + "    function doTest() {\n"
+                + "      var clone = document.cloneNode(true);\n"
+                + "      alert(clone.body);\n"
+                + "      assert(clone,'clone.body !== document.body');\n"
+                + "      assert(clone,'clone.getElementById(\"id1\") !== document.getElementById(\"id1\")');\n"
+                + "      assert(clone,'document.ownerDocument == null');\n"
+                + "      assert(clone,'clone.ownerDocument == document');\n"
+                + "      assert(clone,'document.getElementById(\"id1\").ownerDocument === document');\n"
+                + "      assert(clone,'clone.getElementById(\"id1\").ownerDocument === document');\n"
+                + "    }\n"
+                + "    function assert(clone, expr, info) {\n"
+                + "      if(! eval(expr)) {\n"
+                + "        alert('failed assertion: ' + expr + ', info: ' + info);\n"
+                + "      }\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "  <div id='id1'>hello</div>\n"
+                + "</body>" + "</html>";
+
+        final String[] expectedAlerts = {"[object]"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

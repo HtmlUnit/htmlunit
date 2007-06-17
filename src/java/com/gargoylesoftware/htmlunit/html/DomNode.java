@@ -509,7 +509,7 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * make a clone of this node
+     * Make a clone of this node
      *
      * @param deep if <code>true</code>, the clone will be propagated to the whole subtree
      * below this one. Otherwise, the new node will not have any children. The page reference

@@ -78,6 +78,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author Ahmed Ashour
  */
 public class JavaScriptEngineTest extends WebTestCase {
+
     /**
      * Create an instance
      * @param name The name of the test
@@ -85,7 +86,6 @@ public class JavaScriptEngineTest extends WebTestCase {
     public JavaScriptEngineTest( final String name ) {
         super(name);
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -160,7 +160,6 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals("blue", textInput.getValueAttribute());
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -182,7 +181,6 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String[] expectedAlerts = new String[] {"foo"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * Checks that a dynamically compiled function works in the scope of its birth
@@ -345,7 +343,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testScriptErrorContainsPageUrl() throws Exception {
-
         // embedded script
         final String content1
             = "<html><head><script>a.foo</script>"
@@ -390,8 +387,8 @@ public class JavaScriptEngineTest extends WebTestCase {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection( client );
         /*
-     * this page has meta element , and script tag has no charset attribute
-     */
+         * this page has meta element , and script tag has no charset attribute
+         */
         final String htmlContent
             = "<html><head>"
             + "<meta http-equiv='content-type' content='text/html; charset=Shift_JIS'>"
@@ -405,9 +402,9 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-    /*
-     * this page has no meta element , and script tag has charset attribute
-     */
+        /*
+         * this page has no meta element , and script tag has charset attribute
+         */
         final String htmlContent2
             = "<html><head>"
             + "<title>foo</title>"
@@ -438,12 +435,12 @@ public class JavaScriptEngineTest extends WebTestCase {
         // make SJIS bytes as responsebody
             new String(jsContent.getBytes("SJIS"),"8859_1"), "text/javascript");
 
-    /*
-     * foo2.js is same with foo.js
-     */
+        /*
+         * foo2.js is same with foo.js
+         */
         webConnection.setResponse(
             new URL("http://www.gargoylesoftware.com/foo2.js"),
-        // make SJIS bytes as responsebody
+            // make SJIS bytes as responsebody
             new String(jsContent.getBytes("SJIS"),"8859_1"),
             "text/javascript");
 
@@ -453,9 +450,9 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-    /*
-     * detect encoding from meta tag
-     */
+        /*
+         * detect encoding from meta tag
+         */
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
         final HtmlScript htmlScript =
                      (HtmlScript)page.getHtmlElementById("script1");
@@ -463,9 +460,9 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertNotNull(htmlScript);
         assertEquals( expectedAlerts, collectedAlerts );
 
-    /*
-     * detect encoding from charset attribute of script tag
-     */
+        /*
+         * detect encoding from charset attribute of script tag
+         */
         collectedAlerts.clear();
         final HtmlPage page2 = ( HtmlPage )client.getPage(
              new URL( "http://www.gargoylesoftware.com/hidden"));
@@ -535,7 +532,6 @@ public class JavaScriptEngineTest extends WebTestCase {
 
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -563,7 +559,6 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals( "frame1", page1.getTitleText() );
         assertEquals( "frame2", page2.getTitleText() );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -613,7 +608,6 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals("foo", page.getTitleText());
     }
 
-
     /**
      * Regression test for bug 1714762
      * @throws Exception if the test fails
@@ -634,7 +628,6 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
-
 
     /**
      * @throws Exception If the test fails.
@@ -690,7 +683,6 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List expectedAlerts = Collections.singletonList("button1");
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -791,8 +783,6 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         assertEquals( Collections.singletonList("Foo is: |flintstone|"), collectedAlerts );
     }
-
-
 
     /**
      * Test that the javascript engine gets called correctly for variable access.
@@ -1231,8 +1221,10 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals(expectedAlert, collectedAlerts);
     }
 
+    /**
+     * @throws Exception If the test fails
+     */
     public void testRegExpSupport() throws Exception {
-
         final String html =
             "<html>\n" +
             "  <head>\n" +
@@ -1256,16 +1248,15 @@ public class JavaScriptEngineTest extends WebTestCase {
             "</html>\n";
         
         final List collectedAlerts = new ArrayList();
-
         loadPage(html, collectedAlerts);
         
-        List expectedAlerts = new ArrayList();
-        expectedAlerts.add("rstlne-rstlne-rstlne");
-        expectedAlerts.add("rstlno-rstlne-rstlne");
-        expectedAlerts.add("rstlna-rstlne-rstlne");
-        expectedAlerts.add("rstlne-rstlne-rstlne");
-        expectedAlerts.add("rstlni-rstlni-rstlni");
-        expectedAlerts.add("rstlna-rstlna-rstlna");
+        final String[] expectedAlerts = new String[] {
+            "rstlne-rstlne-rstlne",
+            "rstlno-rstlne-rstlne",
+            "rstlna-rstlne-rstlne",
+            "rstlne-rstlne-rstlne",
+            "rstlni-rstlni-rstlni",
+            "rstlna-rstlna-rstlna" };
         
         assertEquals(expectedAlerts, collectedAlerts);
     }

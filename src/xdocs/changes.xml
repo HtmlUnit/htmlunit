@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="fix" dev="asashour" id="1708397" due-to="Bruce Chapman">
+                HtmlPage.clone() doesn't share idMap_ with original (#1708397).
+            </action>
             <action type="add" dev="asashour" id="1385295">
                 ClickableElement: Add dblClick() (#1385295).
             </action>
@@ -2870,4 +2873,5 @@
         </release>
     </body>
 </document>
+
 

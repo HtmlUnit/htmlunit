@@ -1299,8 +1299,8 @@ public class HtmlPageTest extends WebTestCase {
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
-    }    
-
+    }
+    
     /**
      * Test for bug 1714767
      * @throws Exception if the test fails
@@ -1394,4 +1394,55 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals( "Hello there!", page2.getHtmlElementById("myId").getFirstChild().getNodeValue() );
     }
 
+    /** 
+     * Verifies that a cloned HtmlPage has its own idMap_ 
+     * @throws Exception if the test fails
+     */
+    public void testClonedPageHasOwnIdMap() throws Exception {
+        final String content = "<html><head><title>foo</title>"
+            + "<body>"
+            + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>"
+            + "</body></html>";
+        
+        final HtmlPage page = loadPage(content);
+        final HtmlElement id1 = (HtmlElement)page.getDocumentElement().getLastChild().getLastChild();
+        assertEquals("id1",id1.getId()); 
+        assertTrue(id1 == page.getHtmlElementById("id1"));
+        final HtmlPage clone = (HtmlPage)page.cloneNode(true);
+        assertTrue(id1 == page.getHtmlElementById("id1"));
+        final HtmlElement id1clone = (HtmlElement)clone.getDocumentElement().getLastChild().getLastChild();
+        assertFalse(id1 == id1clone);
+        assertEquals("id1",id1clone.getId()); 
+        assertTrue(id1clone == clone.getHtmlElementById("id1"));
+        assertTrue(id1clone != page.getHtmlElementById("id1"));
+        assertTrue(id1 != clone.getHtmlElementById("id1"));
+
+        page.getHtmlElementById("id2").remove();
+        try {
+            page.getHtmlElementById("id2");
+            fail("should have thrown ElementNotFoundException");
+        }
+        catch (final ElementNotFoundException enfe) {
+            // expected
+        }
+        assertNotNull(clone.getHtmlElementById("id2"));
+    }
+
+    /**
+     * Verifies that a cloned HtmlPage has its own documentElement
+     * @throws Exception if the test fails
+     */
+    public void testClonedPageHasOwnDocumentElement() throws Exception {
+        final String content = "<html><head><title>foo</title>"
+            + "<body>"
+            + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>"
+            + "</body></html>";
+        
+        final HtmlPage page = loadPage(content);
+        final HtmlPage clone = (HtmlPage)page.cloneNode(true);
+        assertTrue(page != clone);
+        final HtmlElement doc = (HtmlElement)page.getDocumentElement();
+        final HtmlElement docclone = (HtmlElement)clone.getDocumentElement();
+        assertTrue(doc != docclone);
+    }
 }

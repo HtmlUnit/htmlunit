@@ -90,12 +90,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public final class HtmlPage extends DomNode implements Page {
+public final class HtmlPage extends DomNode implements Page, Cloneable {
 
     private final WebClient webClient_;
     private       String originalCharset_ = null;
     private final WebResponse webResponse_;
-    private final Map idMap_ = new HashMap(); // a map of (id, List(HtmlElement))
+    private       Map idMap_ = new HashMap(); // a map of (id, List(HtmlElement))
     private       HtmlElement documentElement_ = null;
     private FocusableElement elementWithFocus_ = null;
 
@@ -257,7 +257,6 @@ public final class HtmlPage extends DomNode implements Page {
         return ( HtmlAnchor )getDocumentElement().getOneHtmlElementByAttribute( "a", "href", href );
     }
 
-
     /**
      * Return a list of all anchors contained in this page.
      * @return the list of {@link HtmlAnchor} in this page.
@@ -265,7 +264,6 @@ public final class HtmlPage extends DomNode implements Page {
     public List getAnchors() {
         return getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("a") );
     }
-
 
     /**
      * Return the first anchor that contains the specified text.
@@ -285,7 +283,6 @@ public final class HtmlPage extends DomNode implements Page {
         }
         throw new ElementNotFoundException("a", "<text>", text);
     }
-
 
     /**
      * Return the first form that matches the specifed name
@@ -394,7 +391,6 @@ public final class HtmlPage extends DomNode implements Page {
         return resolvedTarget;
     }
 
-
     /**
      *  Return the web response that was originally used to create this page.
      *
@@ -403,7 +399,6 @@ public final class HtmlPage extends DomNode implements Page {
     public WebResponse getWebResponse() {
         return webResponse_;
     }
-
 
     /**
      *  Return a list of ids (strings) that correspond to the tabbable elements
@@ -422,7 +417,6 @@ public final class HtmlPage extends DomNode implements Page {
 
         return Collections.unmodifiableList( list );
     }
-
 
     /**
      *  Return a list of all elements that are tabbable in the order that will
@@ -505,7 +499,6 @@ public final class HtmlPage extends DomNode implements Page {
         };
     }
 
-
     private int getTabIndex( final HtmlElement element ) {
         final String tabIndexAttribute = element.getAttributeValue( "tabindex" );
         if( tabIndexAttribute == null || tabIndexAttribute.length() == 0 ) {
@@ -520,7 +513,6 @@ public final class HtmlPage extends DomNode implements Page {
             return TAB_INDEX_OUT_OF_BOUNDS;
         }
     }
-
 
     /**
      *  Return the html element that is assigned to the specified access key. An
@@ -543,7 +535,6 @@ public final class HtmlPage extends DomNode implements Page {
             return (HtmlElement)elements.get(0);
         }
     }
-
 
     /**
      *  Return all the html elements that are assigned to the specified access key. An
@@ -638,7 +629,6 @@ public final class HtmlPage extends DomNode implements Page {
             }
         }
     }
-
 
     /**
      *  Each html element can have an id attribute and by definition, all ids
@@ -1235,7 +1225,6 @@ public final class HtmlPage extends DomNode implements Page {
         return getElementWithFocus();
     }
 
-
     /**
      * Move the focus to the next element in the tab order.  To determine the specified tab
      * order, refer to {@link HtmlPage#getTabbableElements()}
@@ -1275,7 +1264,6 @@ public final class HtmlPage extends DomNode implements Page {
         }
         return elementToGiveFocus;
     }
-
 
     /**
      * Move the focus to the previous element in the tab order.  To determine the specified tab
@@ -1388,7 +1376,6 @@ public final class HtmlPage extends DomNode implements Page {
         removeIdElement(idElement, false);
     }
     
-
     /**
      * Executes the onchange script code for this element if this is appropriate. 
      * This means that the element must have an onchange script, script must be enabled 
@@ -1475,7 +1462,6 @@ public final class HtmlPage extends DomNode implements Page {
         return buffer.toString();
     }
 
-
     /**
      * Runs an event handler taking car to pass him the event in the right form
      * @param handler the handler function
@@ -1514,7 +1500,6 @@ public final class HtmlPage extends DomNode implements Page {
 
         return result;
     }
-
 
     /**
      * Move the focus to the specified component.  This will trigger any relevant javascript
@@ -1608,4 +1593,40 @@ public final class HtmlPage extends DomNode implements Page {
         }
     }
 
+    /**
+     * Creates a clone of this instance, and clears cached state 
+     * to be not shared with the original.
+     * 
+     * @return a clone of this instance.
+     */
+    protected Object clone() {
+        try {
+            final HtmlPage result = (HtmlPage)super.clone();
+            result.documentElement_ = null;
+            result.elementWithFocus_ = null;
+            result.idMap_ = new HashMap();
+            return result;
+        }
+        catch( final CloneNotSupportedException e ) {
+            throw new IllegalStateException("Clone not supported");
+        }
+    }
+    
+    /**
+     * Override cloneNode to add cloned elements to the clone, not to the original. 
+     * {@inheritDoc}
+     */
+    public DomNode cloneNode(final boolean deep) {
+        final HtmlPage result = (HtmlPage)super.cloneNode(deep);
+        if(deep) {
+            // fix up idMap_ and result's idMap_s 
+            final Iterator it = result.getAllHtmlChildElements();
+            while(it.hasNext()) {
+                final HtmlElement child = (HtmlElement)it.next();
+                removeIdElement(child);
+                result.addIdElement(child);
+            }
+        }
+        return result;
+    }
 }
