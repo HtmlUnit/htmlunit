@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="fix" dev="asashour" id="1731042" due-to="Rodney Gitzel">
+                DomNode.asText() now correctly handles style elements (e.g. &lt;i&gt;, &lt;b&gt;, and &lt;font&gt;) (#1731042).
+            </action>
             <action type="fix" dev="asashour" id="1708397" due-to="Bruce Chapman">
                 HtmlPage.clone() doesn't share idMap_ with original (#1708397).
             </action>

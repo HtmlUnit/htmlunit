@@ -239,6 +239,9 @@ The reference stays the maven 1 build.
         <contributor>
         	<name>Philip Graf</name>
         </contributor>
+        <contributor>
+        	<name>Rodney Gitzel</name>
+        </contributor>
 	</contributors>
 	<build>
 		<sourceDirectory>src/java</sourceDirectory>		

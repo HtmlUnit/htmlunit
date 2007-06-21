@@ -223,6 +223,9 @@
         <contributor>
         	<name>Philip Graf</name>
         </contributor>
+        <contributor>
+        	<name>Rodney Gitzel</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

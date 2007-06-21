@@ -47,6 +47,7 @@ import java.util.Map;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Rodney Gitzel
  */
 public class HtmlSpan extends ClickableElement {
 
@@ -73,5 +74,19 @@ public class HtmlSpan extends ClickableElement {
      */
     public HtmlSpan(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isRenderedVisible() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isTrimmedText() {
+        return false;
     }
 }

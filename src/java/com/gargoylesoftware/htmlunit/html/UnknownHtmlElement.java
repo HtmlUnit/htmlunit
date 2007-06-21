@@ -49,6 +49,7 @@ import java.util.Map;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Rodney Gitzel
  */
 public class UnknownHtmlElement extends ClickableElement {
 
@@ -76,5 +77,17 @@ public class UnknownHtmlElement extends ClickableElement {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 
-}
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isRenderedVisible() {
+        return false;
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isTrimmedText() {
+        return false;
+    }
+}

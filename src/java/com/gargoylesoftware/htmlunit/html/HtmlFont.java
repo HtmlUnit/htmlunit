@@ -47,6 +47,7 @@ import java.util.Map;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Rodney Gitzel
  */
 public class HtmlFont extends StyledElement {
 
@@ -87,7 +88,6 @@ public class HtmlFont extends StyledElement {
         return getAttributeValue("lang");
     }
 
-
     /**
      * Return the value of the attribute "xml:lang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -99,7 +99,6 @@ public class HtmlFont extends StyledElement {
     public final String getXmlLangAttribute() {
         return getAttributeValue("xml:lang");
     }
-
 
     /**
      * Return the value of the attribute "dir".  Refer to the
@@ -113,7 +112,6 @@ public class HtmlFont extends StyledElement {
         return getAttributeValue("dir");
     }
 
-
     /**
      * Return the value of the attribute "size".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -125,7 +123,6 @@ public class HtmlFont extends StyledElement {
     public final String getSizeAttribute() {
         return getAttributeValue("size");
     }
-
 
     /**
      * Return the value of the attribute "color".  Refer to the
@@ -139,7 +136,6 @@ public class HtmlFont extends StyledElement {
         return getAttributeValue("color");
     }
 
-
     /**
      * Return the value of the attribute "face".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -150,5 +146,19 @@ public class HtmlFont extends StyledElement {
      */
     public final String getFaceAttribute() {
         return getAttributeValue("face");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isRenderedVisible() {
+        return false;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isTrimmedText() {
+        return false;
     }
 }

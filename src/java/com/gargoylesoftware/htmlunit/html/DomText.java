@@ -47,6 +47,7 @@ import org.apache.commons.lang.StringEscapeUtils;
  * @version  $Revision$
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Rodney Gitzel
  */
 public class DomText extends DomCharacterData {
 
@@ -133,5 +134,12 @@ public class DomText extends DomCharacterData {
      */
     public String toString() {
         return asText();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isTrimmedText() {
+        return false;
     }
 }

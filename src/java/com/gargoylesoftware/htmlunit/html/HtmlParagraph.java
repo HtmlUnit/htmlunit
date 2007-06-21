@@ -48,6 +48,7 @@ import java.util.Map;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Rodney Gitzel
  */
 public class HtmlParagraph extends ClickableElement {
 
@@ -87,5 +88,12 @@ public class HtmlParagraph extends ClickableElement {
      */
     public final String getAlignAttribute() {
         return getAttributeValue("align");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isRenderedVisible() {
+        return false;
     }
 }

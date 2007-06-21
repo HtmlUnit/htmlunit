@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Denis N. Antonioli
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Rodney Gitzel
  */
 public abstract class DomNode implements Cloneable, Serializable {
 
@@ -348,6 +349,29 @@ public abstract class DomNode implements Cloneable, Serializable {
     public abstract String getNodeName();
 
     /**
+     *  Returns a flag indicating whether or not this node itself results
+     *   in any space taken up in the browser windows; for instance, "<b>"
+     *   affects the specified text, but does not use up any space itself
+     *
+     * @return The flag
+     */
+    protected boolean isRenderedVisible() {
+        return false;
+    }
+
+    /**
+     *  Returns a flag indicating whether or not this node should
+     *   have any leading and trailing whitespace removed when asText()
+     *   is called; mostly this should be true, but must be false for
+     *   such things as text formatting tags
+     *
+     * @return The flag
+     */
+    protected boolean isTrimmedText() {
+        return true;
+    }
+    
+    /**
      *  Returns a text representation of this element that represents what would
      *  be visible to the user if this page was shown in a web browser. For
      *  example, a single-selection select element would return the currently selected
@@ -358,6 +382,11 @@ public abstract class DomNode implements Cloneable, Serializable {
     public String asText() {
         String text = getChildrenAsText();
         text = reduceWhitespace(text);
+        
+        if( isTrimmedText() ) {
+            text = text.trim();
+        }
+        
         return text;
     }
 
@@ -375,30 +404,43 @@ public abstract class DomNode implements Cloneable, Serializable {
         if(!childIterator.hasNext()) {
             return "";
         }
-        // Whitespace between adjacent text nodes should reamin as a single
-        // space.  So, append raw adjacent text and reduce it as a whole.
-        boolean isText = false;
+        boolean previousNodeWasText = false;
         final StringBuffer textBuffer = new StringBuffer();
         while(childIterator.hasNext()) {
             final DomNode node = (DomNode)childIterator.next();
             if (node instanceof DomText) {
-                textBuffer.append(((DomText) node).getData());
-                isText = true;
+                textBuffer.append(((DomText)node).getData());
+                previousNodeWasText = true;
             }
             else {
-                if (isText) {
+                if (previousNodeWasText) {
+                    // Whitespace between adjacent text nodes should reamin as a single
+                    // space.  So, append raw adjacent text and reduce it as a whole.
                     buffer.append(reduceWhitespace(textBuffer.toString()));
                     textBuffer.setLength(0);
-                    isText = false;
+                    previousNodeWasText = false;
                 }
-                buffer.append(" ");
-                buffer.append(node.asText());
-                buffer.append(" ");
+                
+                if( node.isRenderedVisible() ) {
+                    buffer.append(" ") ;
+                    buffer.append(node.asText());
+                    buffer.append(" ") ;
+                }
+                else if( node.getNodeName().equals( "p" ) ) {
+                    // this is a bit kludgey, but we can't add the space
+                    //  inside the node's asText(), since it doesn't belong
+                    //  with the contents of the 'p' tag
+                    buffer.append(" ") ;
+                    buffer.append(node.asText());
+                }
+                else {
+                    buffer.append(node.asText());
+                }
             }
         }
-        if (isText) {
-            final String text = textBuffer.toString();
-            buffer.append(text);
+        if (previousNodeWasText) {
+            // we ended with text
+            buffer.append(textBuffer.toString());
         }
 
         return buffer.toString();
@@ -441,7 +483,7 @@ public abstract class DomNode implements Cloneable, Serializable {
                 }
             }
         }
-        return buffer.toString().trim();
+        return buffer.toString();
     }
 
     /**

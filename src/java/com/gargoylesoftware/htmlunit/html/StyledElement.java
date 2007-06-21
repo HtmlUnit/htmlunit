@@ -50,6 +50,7 @@ import java.util.Map;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Rodney Gitzel
  */
 public abstract class StyledElement extends HtmlElement {
 
@@ -78,7 +79,6 @@ public abstract class StyledElement extends HtmlElement {
         return getAttributeValue("id");
     }
 
-
     /**
      * Return the value of the attribute "class".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -90,7 +90,6 @@ public abstract class StyledElement extends HtmlElement {
     public final String getClassAttribute() {
         return getAttributeValue("class");
     }
-
 
     /**
      * Return the value of the attribute "style".  Refer to the
@@ -104,7 +103,6 @@ public abstract class StyledElement extends HtmlElement {
         return getAttributeValue("style");
     }
 
-
     /**
      * Return the value of the attribute "title".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -115,5 +113,12 @@ public abstract class StyledElement extends HtmlElement {
      */
     public final String getTitleAttribute() {
         return getAttributeValue("title");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isRenderedVisible() {
+        return true;
     }
 }
