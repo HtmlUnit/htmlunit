@@ -78,14 +78,13 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAsText_fontFormat() throws Exception {
-    	
-    	// specific case reported by rgitzel
+        // specific case reported by rgitzel
         testAsText( "a <b>b</b> c",  "a b c" );
         testAsText( "a <b>b</b>c",   "a bc" );
         testAsText( "a<b>b</b> c",   "ab c" );
         testAsText( "a<b>b</b>c",    "abc" );
 
-    	// italics and teletype should work the same way
+        // italics and teletype should work the same way
         testAsText( "a <i>b</i> c",  "a b c" );
         testAsText( "a <i>b</i>c",   "a bc" );
         testAsText( "a<i>b</i> c",   "ab c" );
@@ -121,7 +120,6 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAsText_regression() throws Exception {
-        	
         testAsText( "a<ul><li>b</ul>c",                     "a b c" );
         testAsText( "a<p>b<br>c",                           "a b c" );
         testAsText( "a<table><tr><td>b</td></tr></table>c", "a b c" );
@@ -137,7 +135,7 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAsText_table_elements() throws Exception {
-		final String html = "<table id='table'><tr id='row'><td id='cell'> b </td></tr>\n</table>" ;
+        final String html = "<table id='table'><tr id='row'><td id='cell'> b </td></tr>\n</table>" ;
         final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
 
         final HtmlPage page = loadPage(content);
