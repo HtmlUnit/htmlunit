@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour" id="1740086" due-to="Bruce Chapman">
+                HTMLElement.scrollIntoView() is added as an empty implementation (#1740086).
+            </action>
             <action type="fix" dev="asashour" id="1731042" due-to="Rodney Gitzel">
                 DomNode.asText() now correctly handles style elements (e.g. &lt;i&gt;, &lt;b&gt;, and &lt;font&gt;) (#1731042).
             </action>

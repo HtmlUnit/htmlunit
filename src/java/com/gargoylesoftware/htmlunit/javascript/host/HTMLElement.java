@@ -1459,6 +1459,13 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     }
 
     /**
+     * Implement the scrollIntoView() javascript function but don't actually do 
+     * anything. The requirement
+     * is just to prevent scripts that call that method from failing
+     */
+    public void jsxFunction_scrollIntoView() {}
+    
+    /**
      * Gets an event handler
      * @param eventName the event name (ex: "onclick")
      * @return the handler function, <code>null</code> if the property is null or not a function

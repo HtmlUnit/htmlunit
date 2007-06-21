@@ -1205,6 +1205,20 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /** Test that javascript scrollIntoView() function doesn't fail
+     * @throws Exception if the test fails
+     */
+    public void testScrollIntoView() throws Exception {
+        final String content = "<html>\n"
+              + "<body>\n"
+              + "<script id='me'>document.getElementById('me').scrollIntoView(); alert('ok');</script>\n"
+              + "</body></html>";
+        final String[] expectedAlerts = new String[] {"ok"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+    
     /**
      * Test offsetParent property.
      *

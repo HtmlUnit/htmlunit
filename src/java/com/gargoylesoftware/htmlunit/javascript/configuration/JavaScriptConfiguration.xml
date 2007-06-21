@@ -472,8 +472,9 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </function>
-        <function name="scrollIntoView" notImplemented="true">
+        <function name="scrollIntoView" >
             <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Netscape" min-version="6"/>
         </function>
         <function name="setAttribute">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
