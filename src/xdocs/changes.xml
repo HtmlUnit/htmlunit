@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="asashour">
+                HtmlSubmitInput: setting value to "Submit Query" if not specified, associated with asText(), asXml(), and submitValue changes.
+            </action>
             <action type="add" dev="asashour" id="1740086" due-to="Bruce Chapman">
                 HTMLElement.scrollIntoView() is added as an empty implementation (#1740086).
             </action>

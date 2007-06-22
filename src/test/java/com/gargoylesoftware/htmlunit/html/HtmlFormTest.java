@@ -47,6 +47,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
@@ -951,7 +952,7 @@ public class HtmlFormTest extends WebTestCase {
         final List collectedParameters = webConnection.getLastParameters();
         final List expectedParameters = Arrays.asList( new Object[] {
             new KeyValuePair("data", "NOT_SUBMITTED"),
-            new KeyValuePair("submit", "")
+            new KeyValuePair("submit", "Submit Query")
         } );
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -1175,6 +1176,31 @@ public class HtmlFormTest extends WebTestCase {
         form.getInputByName("button").click();
 
         assertEquals(expectedRequestCharset, webConnection.getLastWebRequestSettings().getCharset());
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testSumbit_submitInputValue() throws Exception {
+        testSumbit_submitInputValue( BrowserVersion.INTERNET_EXPLORER_6_0 );
+        //test FF separately as value is not to DEFAULT_VALUE if not specified. 
+        testSumbit_submitInputValue( BrowserVersion.MOZILLA_1_0 );
+    }
+
+    private void testSumbit_submitInputValue(final BrowserVersion browserVersion) throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<form action='" + URL_SECOND + "'>\n"
+            + "  <input id='myButton' type='submit' name='Save'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage firstPage = loadPage(browserVersion, html, null );
+        final HtmlSubmitInput submitInput = (HtmlSubmitInput)firstPage.getHtmlElementById( "myButton" );
+        final HtmlPage secondPage = (HtmlPage)(submitInput).click();
+        assertEquals( URL_SECOND.toExternalForm() + "?Save=Submit+Query", secondPage.getWebResponse().getUrl() );
     }
 
     /**

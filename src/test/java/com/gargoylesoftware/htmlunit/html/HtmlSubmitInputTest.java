@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -53,6 +54,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlSubmitInputTest extends WebTestCase {
     /**
@@ -63,7 +65,6 @@ public class HtmlSubmitInputTest extends WebTestCase {
     public HtmlSubmitInputTest( final String name ) {
         super( name );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -90,7 +91,6 @@ public class HtmlSubmitInputTest extends WebTestCase {
             webConnection.getLastParameters() );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -111,7 +111,6 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final String[] expectedAlerts = new String[] {"foo","bar"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -140,5 +139,66 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final HtmlSubmitInput input = (HtmlSubmitInput)firstPage.getHtmlElementById("button1");
         final HtmlPage secondPage = (HtmlPage)input.click();
         assertEquals("Second", secondPage.getTitleText());
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testDefaultValue() throws Exception {
+        final String[] expectedAlertsIE = {"Submit Query"};
+        testDefaultValue( BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE );
+        final String[] expectedAlertsFF = {""};
+        testDefaultValue( BrowserVersion.MOZILLA_1_0, expectedAlertsFF );
+    }
+
+    private void testDefaultValue( final BrowserVersion browserVersion, final String[] expectedAlerts )
+        throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert( document.getElementById('myId').value );\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form action='" + URL_SECOND + "'>\n"
+            + "  <input type='submit' id='myId'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+
+        final HtmlPage page = loadPage(browserVersion, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts );
+        assertTrue( page.asText().contains( "Submit Query" ) );
+        assertFalse( page.asXml().contains( "Submit Query" ) );
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testEmptyValue() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert( document.getElementById('myId').value );\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form action='" + URL_SECOND + "'>\n"
+            + "  <input type='submit' id='myId' value=''>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = new String[] {""};
+        final List collectedAlerts = new ArrayList();
+
+        final HtmlPage page = loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts );
+        assertFalse( page.asText().contains( "Submit Query" ) );
+        assertTrue( page.asXml().contains( "value=\"\"" ) );
     }
 }

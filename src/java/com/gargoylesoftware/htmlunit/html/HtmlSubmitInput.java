@@ -37,9 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.Map;
+
+import org.apache.commons.lang.StringEscapeUtils;
 
 /**
  *  Wrapper for the html element "input"
@@ -53,6 +58,11 @@ import java.util.Map;
  */
 public class HtmlSubmitInput extends HtmlInput {
 
+    /**
+     * Value to use if no specified <tt>value</tt> attribute.
+     */
+    private static final String DEFAULT_VALUE = "Submit Query";
+    
     /**
      *  Create an instance
      *
@@ -74,6 +84,9 @@ public class HtmlSubmitInput extends HtmlInput {
     public HtmlSubmitInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+        if( getPage().getWebClient().getBrowserVersion().isIE() && !isAttributeDefined( "value" ) ) {
+            setValueAttribute( DEFAULT_VALUE );
+        }
     }
 
     /**
@@ -100,5 +113,48 @@ public class HtmlSubmitInput extends HtmlInput {
         // Empty.
     }
 
-}
+    /**
+     * {@inheritDoc} Returns "Submit Query" if <tt>value</tt> attribute is not defined.
+     */
+    public String asText() {
+        String text = super.asText();
+        if( text == ATTRIBUTE_NOT_DEFINED ) {
+            text = DEFAULT_VALUE;
+        }
+        return text;
+    }
 
+    /**
+     * {@inheritDoc} Doesn't print the attribute if it is <tt>value="Submit Query"</tt>.
+     */
+    protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
+        printWriter.print(getTagName());
+
+        for (final Iterator it=getAttributeEntriesIterator(); it.hasNext(); ) {
+            final HtmlAttr attribute = (HtmlAttr)it.next();
+            if( !attribute.getNodeName().equals( "value" ) || !attribute.getValue().equals( DEFAULT_VALUE ) ) {
+                printWriter.print(" ");
+                final String name = attribute.getNodeName();
+                printWriter.print(name);
+                printWriter.print("=\"");
+                printWriter.print(StringEscapeUtils.escapeXml(attribute.getNodeValue()));
+                printWriter.print("\"");
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     * 
+     *  Returns "Submit Query" if <tt>name</tt> attribute is defined
+     *  and <tt>value</tt> attribute is not defined.
+     */
+    public KeyValuePair[] getSubmitKeyValuePairs() {
+        if( getNameAttribute().length() != 0 && !isAttributeDefined( "value" ) ) {
+            return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), DEFAULT_VALUE )};
+        }
+        else {
+            return super.getSubmitKeyValuePairs();
+        }
+    }
+}
