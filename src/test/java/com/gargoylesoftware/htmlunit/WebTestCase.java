@@ -114,7 +114,6 @@ public abstract class WebTestCase extends BaseTestCase {
         super( name );
     }
 
-
     /**
      * Load a page with the specified html using the default browser version.
      * @param html The html to use.
@@ -124,7 +123,6 @@ public abstract class WebTestCase extends BaseTestCase {
     protected static final HtmlPage loadPage( final String html ) throws Exception {
         return loadPage(html, null);
     }
-
 
    /**
      * Load a page with the specified html and collect alerts into the list.
@@ -162,7 +160,6 @@ public abstract class WebTestCase extends BaseTestCase {
         return LogFactory.getLog(getClass());
     }
 
-
     /**
      * Load a page with the specified html and collect alerts into the list.
      * @param html The HTML to use.
@@ -172,7 +169,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @throws Exception If something goes wrong.
      */
     protected static final HtmlPage loadPage( final String html, final List collectedAlerts,
-            final URL url ) throws Exception {
+            final URL url) throws Exception {
 
         return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, url);
     }
@@ -202,7 +199,6 @@ public abstract class WebTestCase extends BaseTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(url);
         return page;
     }
-
 
     /**
      * Assert that the specified object is null.
@@ -470,7 +466,6 @@ public abstract class WebTestCase extends BaseTestCase {
         throw new RuntimeException("No JUnit test case method found in call stack");
     }
 
-
     /**
      * From Junit. Test if the method is a junit test.
      * @param method the method
@@ -488,4 +483,3 @@ public abstract class WebTestCase extends BaseTestCase {
 
     private static final ThreadLocal notYetImplementedFlag = new ThreadLocal();
 }
-

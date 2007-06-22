@@ -79,7 +79,6 @@ public class HtmlFormTest extends WebTestCase {
         super( name );
     }
 
-
     /**
      *  Test the good case for setCheckedRadioButton()
      *
@@ -116,7 +115,6 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
     }
 
-
     /**
      *  Test setCheckedRadioButton() with a value that doesn't exist
      *
@@ -142,7 +140,6 @@ public class HtmlFormTest extends WebTestCase {
         assertTrue( form.getByXPath(
             "//input[@type='radio' and @name='foo' and @value='4']" ).isEmpty() );
     }
-
 
     /**
      *  Test setCheckedRadioButton() with a value that doesn't exist
@@ -176,7 +173,6 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod() );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -194,7 +190,6 @@ public class HtmlFormTest extends WebTestCase {
         // Regression test: this used to blow up
         form.submit( "button" );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -222,7 +217,6 @@ public class HtmlFormTest extends WebTestCase {
 
         assertEquals( expectedParameters, collectedParameters );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -256,7 +250,6 @@ public class HtmlFormTest extends WebTestCase {
 
         assertEquals( Collections.singletonList("clicked"), collectedAlerts );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -354,7 +347,6 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -387,7 +379,6 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals( Collections.singletonList("clicked"), collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -418,7 +409,6 @@ public class HtmlFormTest extends WebTestCase {
         assertSame( firstPage, secondPage );
     }
 
-
     /**
      * Regression test for a bug that caused a NullPointer exception to be thrown during submit.
      * @throws Exception if the test fails
@@ -440,7 +430,6 @@ public class HtmlFormTest extends WebTestCase {
             = (HtmlSubmitInput)page.getDocumentElement().getOneHtmlElementByAttribute("input","value","Login");
         loginButton.click();
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -467,7 +456,6 @@ public class HtmlFormTest extends WebTestCase {
         final String[] expectedAlerts = {"clicked", "reset"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
-
 
     /**
      * <p>Simulate a bug report where an anchor contained javascript that caused a form submit.
@@ -511,7 +499,6 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals( Collections.EMPTY_LIST, collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -539,7 +526,6 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals( expectedParameters, collectedParameters );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -559,7 +545,6 @@ public class HtmlFormTest extends WebTestCase {
         // Was failing at this point
         form.getInputByName("button");
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -1054,8 +1039,6 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-
-
     /**
      * @throws Exception if the test fails
      */
@@ -1193,6 +1176,36 @@ public class HtmlFormTest extends WebTestCase {
 
         assertEquals(expectedRequestCharset, webConnection.getLastWebRequestSettings().getCharset());
     }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testSubmit_Function() throws Exception {
+        if( notYetImplemented() ) {
+            return;
+        }
+        
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert( 'hello' );\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<form action='" + URL_SECOND + "' onsubmit='test()'>\n"
+            + "  <input type='submit'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = new String[] {"hello"};
+        final List collectedAlerts = new ArrayList();
+
+        final HtmlPage page = loadPage(html, collectedAlerts);
+        final HtmlForm form = (HtmlForm)page.getForms().get( 0 );
+        form.submit();
+
+        assertEquals(expectedAlerts, collectedAlerts );
+    }
 }
-
-
