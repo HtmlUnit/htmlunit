@@ -57,7 +57,7 @@ import org.w3c.dom.NodeList;
  * properties and functions should occur from the xml configuration according to
  * the browser to simulate.
  * 
- * @version $Revision: 1158 $
+ * @version  $Revision: 1129 $
  * @author Marc Guillemot
  */
 public class ScriptableWrapper extends ScriptableObject {
