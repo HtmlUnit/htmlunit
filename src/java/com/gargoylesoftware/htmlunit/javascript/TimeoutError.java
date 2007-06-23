@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 /** 
  * An error that is thrown when a script has been running too long.
  * 
- * @version  $Revision: 1129 $
+ * @version  $Revision$
  * @author Andre Soereng
  */
 public class TimeoutError extends Error {

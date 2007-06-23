@@ -45,7 +45,7 @@ import org.mozilla.javascript.Scriptable;
  * able to return a value that has not been configured has property (ex: the DOM node which id
  * or name match the property name.
  * 
- * @version  $Revision: 1129 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public interface ScriptableWithFallbackGetter extends Scriptable {

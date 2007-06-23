@@ -43,7 +43,7 @@ import org.xml.sax.SAXParseException;
 /**
  * An error handler that throws an exception for all problems no matter how minor.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class StrictErrorHandler implements ErrorHandler {

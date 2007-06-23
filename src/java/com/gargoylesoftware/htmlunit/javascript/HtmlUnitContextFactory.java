@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.Assert;
  * ContextFactory that supports termination of scripts if they exceed a timeout. Based on example from
  * <a href="http://www.mozilla.org/rhino/apidocs/org/mozilla/javascript/ContextFactory.html">ContextFactory</a>.
  *
- * @version  $Revision: 1129 $
+ * @version $Revision$
  * @author Andre Soereng
  */
 public class HtmlUnitContextFactory extends ContextFactory {
