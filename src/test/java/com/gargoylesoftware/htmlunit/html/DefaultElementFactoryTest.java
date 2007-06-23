@@ -46,9 +46,11 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link DefaultElementFactory}.
+ * 
+ * @version $Revision$
  * @author <a href="mailto:marvin.java@gmail.com">Marcos Vinicius B. de Souza</a>
  * @author Marc Guillemot
- * @version $Revision$ 31/01/2006
+ * @author Ahmed Ashour
  * @since 1.2
  */
 public class DefaultElementFactoryTest extends WebTestCase {
@@ -79,7 +81,7 @@ public class DefaultElementFactoryTest extends WebTestCase {
         atts.addAttribute( null, "accesskey", "accesskey", null, "F" );
 
         // Access the factory.
-        final DefaultElementFactory defaultElementFactory = new DefaultElementFactory( HtmlAnchor.class );
+        final DefaultElementFactory defaultElementFactory = new DefaultElementFactory();
 
         // Create a anchor element
         final HtmlAnchor anchor = (HtmlAnchor) defaultElementFactory.createElement( htmlPage, "a", atts );

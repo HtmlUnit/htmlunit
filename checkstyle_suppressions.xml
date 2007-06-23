@@ -9,4 +9,5 @@
     <suppress checks="FileLength" files="WindowTest.java"/>
     <suppress checks="LineLength" files="JavaScriptEngine.java" lines="88"/>
     <suppress checks="Indentation" files="ThreadManager.java" lines="143"/>    
+    <suppress checks="MethodLength" files="DefaultElementFactory.java"/>
 </suppressions>

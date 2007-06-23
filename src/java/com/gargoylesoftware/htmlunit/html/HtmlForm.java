@@ -94,7 +94,9 @@ public class HtmlForm extends ClickableElement {
      *
      * @param htmlPage The page that contains this element
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlForm.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlForm(final HtmlPage htmlPage, final Map attributes) {
         this(null, TAG_NAME, htmlPage, attributes);
     }
@@ -107,7 +109,7 @@ public class HtmlForm extends ClickableElement {
      * @param htmlPage The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlForm(final String namespaceURI, final String qualifiedName, final HtmlPage htmlPage,
+    HtmlForm(final String namespaceURI, final String qualifiedName, final HtmlPage htmlPage,
             final Map attributes) {
         super(namespaceURI, qualifiedName, htmlPage, attributes);
     }

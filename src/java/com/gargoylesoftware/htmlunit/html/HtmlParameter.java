@@ -57,7 +57,9 @@ public class HtmlParameter extends HtmlElement {
      *
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlParameter.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlParameter(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -70,7 +72,7 @@ public class HtmlParameter extends HtmlElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlParameter(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlParameter(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

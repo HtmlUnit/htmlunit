@@ -57,7 +57,9 @@ public class HtmlTableFooter extends TableRowGroup {
      *
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlTableFooter.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlTableFooter(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -70,7 +72,7 @@ public class HtmlTableFooter extends TableRowGroup {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlTableFooter(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlTableFooter(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

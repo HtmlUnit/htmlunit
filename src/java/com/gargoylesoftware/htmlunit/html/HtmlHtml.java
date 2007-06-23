@@ -56,7 +56,9 @@ public final class HtmlHtml extends HtmlElement {
      *
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlHtml.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlHtml(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -69,7 +71,7 @@ public final class HtmlHtml extends HtmlElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlHtml(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
+    HtmlHtml(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

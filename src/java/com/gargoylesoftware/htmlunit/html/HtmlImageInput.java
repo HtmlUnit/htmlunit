@@ -68,7 +68,9 @@ public class HtmlImageInput extends HtmlInput {
      *
      * @param  page The page that contains this element
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlImageInput.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlImageInput(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -81,7 +83,7 @@ public class HtmlImageInput extends HtmlInput {
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlImageInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlImageInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

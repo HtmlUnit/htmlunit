@@ -57,7 +57,9 @@ public class HtmlBase extends HtmlElement {
      *
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlBase.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlBase(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -70,7 +72,7 @@ public class HtmlBase extends HtmlElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlBase(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
+    HtmlBase(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

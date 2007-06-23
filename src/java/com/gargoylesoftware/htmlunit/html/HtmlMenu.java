@@ -59,7 +59,9 @@ public class HtmlMenu extends ClickableElement {
      *
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlMenu.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlMenu(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -72,7 +74,7 @@ public class HtmlMenu extends ClickableElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlMenu(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
+    HtmlMenu(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

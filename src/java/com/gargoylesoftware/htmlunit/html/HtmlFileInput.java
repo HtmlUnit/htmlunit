@@ -60,7 +60,9 @@ public class HtmlFileInput extends HtmlInput {
      *
      * @param  page The page that contains this element
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlFileInput.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlFileInput(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -73,7 +75,7 @@ public class HtmlFileInput extends HtmlInput {
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlFileInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlFileInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         setAttributeValue( "value", "" );

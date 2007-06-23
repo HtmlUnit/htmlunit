@@ -65,7 +65,9 @@ public class HtmlTable extends ClickableElement {
      *
      * @param  page The page that contains this element
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlTable.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlTable(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -78,7 +80,7 @@ public class HtmlTable extends ClickableElement {
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlTable(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
+    HtmlTable(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

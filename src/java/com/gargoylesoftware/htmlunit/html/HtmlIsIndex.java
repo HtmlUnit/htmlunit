@@ -65,7 +65,9 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      *
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlIsIndex.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlIsIndex(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -78,7 +80,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlIsIndex(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlIsIndex(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

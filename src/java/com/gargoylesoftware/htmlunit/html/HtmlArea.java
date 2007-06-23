@@ -74,7 +74,9 @@ public class HtmlArea extends FocusableElement {
      *
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlArea.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlArea(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -87,7 +89,7 @@ public class HtmlArea extends FocusableElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlArea(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
+    HtmlArea(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

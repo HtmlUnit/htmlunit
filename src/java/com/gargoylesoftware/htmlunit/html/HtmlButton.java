@@ -65,7 +65,9 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
      *
      * @param  page The page that contains this element
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlButton.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlButton(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -78,7 +80,7 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlButton(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlButton(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

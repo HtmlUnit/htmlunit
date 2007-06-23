@@ -63,7 +63,9 @@ public class HtmlMeta extends HtmlElement {
      *
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlMeta.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlMeta(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -76,7 +78,7 @@ public class HtmlMeta extends HtmlElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlMeta(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
+    HtmlMeta(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         
         if ("set-cookie".equalsIgnoreCase(getHttpEquivAttribute())) {

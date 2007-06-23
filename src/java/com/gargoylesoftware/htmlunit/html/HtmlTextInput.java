@@ -57,7 +57,9 @@ public class HtmlTextInput extends HtmlInput {
      *
      * @param page The page that contains this element
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlTextInput.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlTextInput(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -70,7 +72,7 @@ public class HtmlTextInput extends HtmlInput {
      * @param page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlTextInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlTextInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

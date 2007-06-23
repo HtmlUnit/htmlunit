@@ -58,7 +58,9 @@ public class HtmlHeader6 extends ClickableElement {
      *
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlHeader6.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlHeader6(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -71,7 +73,7 @@ public class HtmlHeader6 extends ClickableElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlHeader6(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlHeader6(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

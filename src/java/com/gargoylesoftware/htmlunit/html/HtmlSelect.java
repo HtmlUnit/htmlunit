@@ -76,7 +76,9 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *
      * @param  page The page that contains this element
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlSelect.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlSelect(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -89,7 +91,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlSelect(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlSelect(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

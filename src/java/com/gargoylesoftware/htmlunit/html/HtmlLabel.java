@@ -64,7 +64,9 @@ public class HtmlLabel extends FocusableElement {
      *
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlLabel.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlLabel(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -77,7 +79,7 @@ public class HtmlLabel extends FocusableElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlLabel(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
+    HtmlLabel(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
         super( namespaceURI, qualifiedName, page, attributes);
     }
 

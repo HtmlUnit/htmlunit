@@ -56,7 +56,9 @@ public class HtmlButtonInput extends HtmlInput {
      *
      * @param  page The page that contains this element
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlButtonInput.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlButtonInput(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -69,7 +71,7 @@ public class HtmlButtonInput extends HtmlInput {
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlButtonInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlButtonInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

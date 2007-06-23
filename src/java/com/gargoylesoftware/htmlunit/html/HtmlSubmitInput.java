@@ -68,7 +68,9 @@ public class HtmlSubmitInput extends HtmlInput {
      *
      * @param  page The page that contains this element
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlSubmitInput.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlSubmitInput(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -81,7 +83,7 @@ public class HtmlSubmitInput extends HtmlInput {
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlSubmitInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlSubmitInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         if( getPage().getWebClient().getBrowserVersion().isIE() && !isAttributeDefined( "value" ) ) {

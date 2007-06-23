@@ -59,7 +59,9 @@ public class HtmlBlockQuote extends ClickableElement {
      *
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlBlockQuote.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlBlockQuote(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -72,7 +74,7 @@ public class HtmlBlockQuote extends ClickableElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    public HtmlBlockQuote(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlBlockQuote(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

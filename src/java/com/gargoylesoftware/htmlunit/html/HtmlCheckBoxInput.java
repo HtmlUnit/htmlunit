@@ -66,7 +66,9 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * (<a href="http://www.w3.org/TR/REC-html40/interact/forms.html#adef-value-INPUT">W3C</a>).
      * @param  page The page that contains this element
      * @param attributes the initial attributes
+     * @deprecated You should not directly construct HtmlCheckBoxInput.
      */
+    //TODO: to be removed, deprecated in 23 June 2007
     public HtmlCheckBoxInput(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
@@ -82,7 +84,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * @param  page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlCheckBoxInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlCheckBoxInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
 
