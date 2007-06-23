@@ -1202,36 +1202,4 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage)(submitInput).click();
         assertEquals( URL_SECOND.toExternalForm() + "?Save=Submit+Query", secondPage.getWebResponse().getUrl() );
     }
-
-    /**
-     * @throws Exception If the test fails
-     */
-    public void testSubmit_Function() throws Exception {
-        if( notYetImplemented() ) {
-            return;
-        }
-        
-        final String html =
-            "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert( 'hello' );\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "<form action='" + URL_SECOND + "' onsubmit='test()'>\n"
-            + "  <input type='submit'>\n"
-            + "</form>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = new String[] {"hello"};
-        final List collectedAlerts = new ArrayList();
-
-        final HtmlPage page = loadPage(html, collectedAlerts);
-        final HtmlForm form = (HtmlForm)page.getForms().get( 0 );
-        form.submit();
-
-        assertEquals(expectedAlerts, collectedAlerts );
-    }
 }
