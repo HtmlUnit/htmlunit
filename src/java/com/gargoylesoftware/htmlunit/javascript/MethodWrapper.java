@@ -49,8 +49,8 @@ import org.mozilla.javascript.ScriptableObject;
 /**
  * Wraps a java method to make it available as a javascript function 
  * (more flexible than Rhino's {@link FunctionObject}. 
- * @author Marc Guillemot
  * @version $Revision: 1158 $
+ * @author Marc Guillemot
  */
 public class MethodWrapper extends ScriptableObject implements Function {
 

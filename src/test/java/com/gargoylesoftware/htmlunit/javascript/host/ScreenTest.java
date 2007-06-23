@@ -45,9 +45,9 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for the Screen object.
  * 
+ * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
- * @version $Revision$
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_screen.asp">
  * MSDN documentation</a>
  * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html">Mozilla documentation</a>

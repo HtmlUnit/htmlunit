@@ -57,8 +57,8 @@ import org.w3c.dom.NodeList;
  * properties and functions should occur from the xml configuration according to
  * the browser to simulate.
  * 
- * @author Marc Guillemot
  * @version $Revision: 1158 $
+ * @author Marc Guillemot
  */
 public class ScriptableWrapper extends ScriptableObject {
     private static final long serialVersionUID = 1736378450382368760L;

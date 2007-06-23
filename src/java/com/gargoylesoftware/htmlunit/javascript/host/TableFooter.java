@@ -40,8 +40,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 /**
  * A JavaScript object representing a table footer.
  * 
- * @author Daniel Gredler
  * @version $Revision$
+ * @author Daniel Gredler
  */
 public class TableFooter extends RowContainer {
 

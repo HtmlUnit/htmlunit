@@ -43,8 +43,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 /**
  * The JavaScript object representing a TD or TH.
  *
- * @author <a href="https://sourceforge.net/users/marlee/">Mark van Leeuwen</a>
  * @version $Revision$
+ * @author <a href="https://sourceforge.net/users/marlee/">Mark van Leeuwen</a>
  */
 public class TableCell extends HTMLElement {
 

@@ -52,8 +52,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Multi-threaded JavaScript engine test.
  *
- * @author David D. Kilzer
  * @version $Revision$
+ * @author David D. Kilzer
  */
 public class ThreadTest extends WebTestCase {
 

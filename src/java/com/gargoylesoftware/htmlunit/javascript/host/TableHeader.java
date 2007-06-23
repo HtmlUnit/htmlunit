@@ -40,8 +40,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 /**
  * A JavaScript object representing a table header.
  * 
- * @author Daniel Gredler
  * @version $Revision$
+ * @author Daniel Gredler
  */
 public class TableHeader extends RowContainer {
 

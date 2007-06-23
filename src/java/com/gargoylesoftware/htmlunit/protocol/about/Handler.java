@@ -44,8 +44,8 @@ import java.net.URLStreamHandler;
 /**
  * Stream handler for "about:" urls
  *
- * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @version $Revision$
+ * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  */
 public class Handler extends URLStreamHandler {
 

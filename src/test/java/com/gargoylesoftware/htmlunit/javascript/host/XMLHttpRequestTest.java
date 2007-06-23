@@ -57,9 +57,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for {@link XMLHttpRequest}.
  * 
+ * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
- * @version $Revision$
  */
 public class XMLHttpRequestTest extends WebTestCase {
 

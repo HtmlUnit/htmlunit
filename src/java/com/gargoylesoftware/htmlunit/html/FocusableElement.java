@@ -44,9 +44,9 @@ import java.util.Map;
 /**
  * An element that can have focus and onblur/onfocus events.
  *
+ * @version $Revision$
  * @author David D. Kilzer
  * @author Ahmed Ashour
- * @version $Revision$
  */
 public abstract class FocusableElement extends ClickableElement {
 

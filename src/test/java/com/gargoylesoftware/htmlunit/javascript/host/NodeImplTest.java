@@ -52,12 +52,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for {@link NodeImpl}.
  * 
+ * @version $Revision$
  * @author yourgod
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Bruce Faulkner
  * @author Marc Guillemot
- * @version $Revision$
- *
  */
 public class NodeImplTest extends WebTestCase {
 

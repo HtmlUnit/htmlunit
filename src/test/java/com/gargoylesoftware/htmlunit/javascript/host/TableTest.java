@@ -47,12 +47,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for Table.
  * 
+ * @version $Revision$
  * @author David D. Kilzer
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour
- * @version $Revision$
  */
 public class TableTest extends WebTestCase {
 

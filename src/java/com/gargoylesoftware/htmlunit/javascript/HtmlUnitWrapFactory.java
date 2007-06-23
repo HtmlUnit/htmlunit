@@ -46,8 +46,8 @@ import org.w3c.dom.NodeList;
 /**
  * Called by Rhino to Wrap Object as {@link Scriptable}.
  * 
- * @author Marc Guillemot
  * @version $Revision: 1158 $
+ * @author Marc Guillemot
  */
 public class HtmlUnitWrapFactory extends WrapFactory {
 

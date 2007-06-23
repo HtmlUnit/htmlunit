@@ -47,9 +47,9 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for elements with onblur and onfocus attributes.
  *
+ * @version $Revision$
  * @author David D. Kilzer
  * @author Marc Guillemot
- * @version $Revision$
  */
 public class FocusableElementTest extends WebTestCase {
 

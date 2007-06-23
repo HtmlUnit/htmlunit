@@ -65,9 +65,9 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 /**
  * A JavaScript object for a XMLHttpRequest.
  * 
+ * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
- * @version $Revision$
  * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>
  */
 public class XMLHttpRequest extends SimpleScriptable {
