@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: Implement insertAdjacentElement().
+            </action>
             <action type="update" dev="asashour">
                 HtmlSubmitInput: setting value to "Submit Query" if not specified, associated with asText(), asXml(), and submitValue changes.
             </action>

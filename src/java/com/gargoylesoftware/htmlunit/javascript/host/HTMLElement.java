@@ -170,7 +170,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         super.setDomNode(domNode);
 
         style_ = new Style(this);
-        
+
         /**
          * Convert javascript snippets defined in the attribute map to executable event handlers.
          * Should be called only on construction.
@@ -307,7 +307,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
                 return value;
             }
         }
-        
+
         return NOT_FOUND;
     }
 
@@ -521,7 +521,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         domNode.removeAllChildren();
 
         final BrowserVersion browserVersion = getWindow().getWebWindow().getWebClient().getBrowserVersion();
-        
+
         // null && IE     -> add child
         // null && non-IE -> Don't add
         // ''             -> Don't add 
@@ -614,17 +614,65 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
 
     /**
      * Inserts the given HTML text into the element at the location.
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertadjacenthtml.asp">
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536452.aspx">
      * MSDN documentation</a>
      * @param where specifies where to insert the HTML text, using one of the following value:
      *         beforeBegin, afterBegin, beforeEnd, afterEnd
      * @param text the HTML text to insert
      */
     public void jsxFunction_insertAdjacentHTML(final String where, final String text) {
+        final Object[] values = getInsertAdjacentLocation( where );
+        final DomNode node = (DomNode)values[0];
+        final boolean append = ((Boolean)values[1]).booleanValue();
+
+        // add the new nodes
+        parseHtmlSnippet(node, append, text); 
+    }
+
+    /**
+     * Inserts the given element into the element at the location.
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536451.aspx">
+     * MSDN documentation</a>
+     * @param where specifies where to insert the element, using one of the following value:
+     *         beforeBegin, afterBegin, beforeEnd, afterEnd
+     * @param object the element to insert
+     * @return an element object
+     */
+    public Object jsxFunction_insertAdjacentElement(final String where, final Object object) {
+        if( object instanceof NodeImpl ) {
+            final DomNode childNode = ((NodeImpl)object).getDomNodeOrDie();
+            final Object[] values = getInsertAdjacentLocation( where );
+            final DomNode node = (DomNode)values[0];
+            final boolean append = ((Boolean)values[1]).booleanValue();
+
+            if (append) {
+                node.appendChild(childNode);
+            }
+            else {
+                node.insertBefore(childNode);
+            }
+            return object;
+        }
+        else {
+            throw Context.reportRuntimeError("Passed object is not an element: " + object);
+        }
+    }
+
+    /**
+     * Returns where and how to add the new node.
+     * Used by {@link #jsxFunction_insertAdjacentHTML(String, String)} and
+     * {@link #jsxFunction_insertAdjacentElement(String, Object)}.
+     * 
+     * @param where specifies where to insert the element, using one of the following value:
+     *         beforeBegin, afterBegin, beforeEnd, afterEnd
+     *         
+     * @return an array of 1-DomNode:parentNode and 2-Boolean:append 
+     */
+    private Object[] getInsertAdjacentLocation(final String where) {
         final DomNode currentNode = getDomNodeOrDie();
         final DomNode node;
         final boolean append;
-
+        
         // compute the where and how the new nodes should be added
         if (POSITION_AFTER_BEGIN.equalsIgnoreCase(where)) {
             if (currentNode.getFirstChild() == null) {
@@ -663,10 +711,13 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         else {
             throw Context.reportRuntimeError("Illegal position value: \"" + where + "\"");
         }
-
-        // add the new nodes
-        parseHtmlSnippet(node, append, text); 
-
+        
+        if( append ) {
+            return new Object[] {node, Boolean.TRUE};
+        }
+        else {
+            return new Object[] {node, Boolean.FALSE};
+        }
     }
     
     /**
@@ -1118,7 +1169,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         return getEventHandlerProp("onclick");
     }
 
-     /**
+    /**
      * Set the ondblclick event handler for this element.
      * @param handler the new handler     
      **/
@@ -1464,7 +1515,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * is just to prevent scripts that call that method from failing
      */
     public void jsxFunction_scrollIntoView() {}
-    
+
     /**
      * Gets an event handler
      * @param eventName the event name (ex: "onclick")

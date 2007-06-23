@@ -456,13 +456,22 @@
         <function name="getAttributeNode"/>
         <function name="getElementsByTagName"/>
         <function name="handleEvent" notImplemented="true"/>
+        <function name="insertAdjacentElement">
+            <doclink
+                url="http://msdn2.microsoft.com/en-us/library/ms536451.aspx"
+                descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </function>
         <function name="insertAdjacentHTML">
             <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertadjacenthtml.asp"
+                url="http://msdn2.microsoft.com/en-us/library/ms536452.aspx"
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
         <function name="insertAdjacentText" notImplemented="true">
+            <doclink
+                url="http://msdn2.microsoft.com/en-us/library/ms536453.aspx"
+                descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
         <function name="onhelp" notImplemented="true">

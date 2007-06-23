@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for {@link HTMLElement}.
  *
+ * @version $Revision$
  * @author yourgod
  * @author Chris Erskine
  * @author David D. Kilzer
@@ -63,7 +64,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Bruce Faulkner
  * @author Ahmed Ashour
- * @version $Revision$
  */
 public class HTMLElementTest extends WebTestCase {
     /**
@@ -670,7 +670,7 @@ public class HTMLElementTest extends WebTestCase {
      * @param afterBegin data to insert
      * @throws Exception if the test fails
      */
-    void testInsertAdjacentHTML(final String beforeEnd,
+    private void testInsertAdjacentHTML(final String beforeEnd,
             final String afterEnd, final String beforeBegin, final String afterBegin)
         throws Exception {
         final String content = "<html><head><title>First</title>\n"
@@ -688,7 +688,57 @@ public class HTMLElementTest extends WebTestCase {
                 + "  }\n"
                 + "}\n"
                 + "</script>\n"
-                + "</head>"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "<div id='outside' style='color: #00ff00'>\n"
+                + "<div id='middle' style='color: #ff0000'>\n"
+                + "inside\n"
+                + "</div>\n"
+                + "</div>\n"
+                + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content,
+                collectedAlerts);
+        final String[] expectedAlerts = {"outside", "1", "middle", "2", "3", "4"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+        final HtmlElement elt = page.getHtmlElementById("outside");
+        assertEquals("before begin after begin inside before end after end", elt.asText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testInsertAdjacentElement() throws Exception {
+        testInsertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
+        testInsertAdjacentElement("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
+    }
+
+    private void testInsertAdjacentElement(final String beforeEnd,
+            final String afterEnd, final String beforeBegin, final String afterBegin)
+        throws Exception {
+        final String content = "<html><head><title>First</title>\n"
+                + "<script>\n"
+                + "function test()\n"
+                + "{\n"
+                + "  var oDiv = document.getElementById('middle');\n"
+                + "  oDiv.insertAdjacentElement('" + beforeEnd + "', makeElement( 3, 'before end' ) );\n"
+                + "  oDiv.insertAdjacentElement('" + afterEnd + "', makeElement( 4, 'after end' ) );\n"
+                + "  oDiv.insertAdjacentElement('" + beforeBegin + "', makeElement( 1, 'before begin' ) );\n"
+                + "  oDiv.insertAdjacentElement('" + afterBegin + "', makeElement( 2, 'after begin' ) );\n"
+                + "  var coll = document.getElementsByTagName('DIV');\n"
+                + "  for (var i=0; i<coll.length; ++i) {\n"
+                + "    alert(coll[i].id);\n"
+                + "  }\n"
+                + "}\n"
+                + "function makeElement( id, value ) {\n"
+                + "  var div = document.createElement( 'div' );\n"
+                + "  div.appendChild( document.createTextNode( value ) );\n"
+                + "  div.id = id;\n"
+                + "  return div;\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "<div id='outside' style='color: #00ff00'>\n"
                 + "<div id='middle' style='color: #ff0000'>\n"
