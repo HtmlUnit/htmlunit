@@ -216,6 +216,7 @@ JUnit results available here: ${test.reports.dir}/index.html
 				<path location="${base.classes.dir}"/>
 			</classpath>
 			<fileset dir="${base.src.dir}" includes="**/*.java"/>
+			<fileset dir="${test.src.dir}" includes="**/*.java"/>
 		</checkstyle>
 	</target>
 
