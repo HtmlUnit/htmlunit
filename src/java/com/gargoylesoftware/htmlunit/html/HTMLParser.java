@@ -37,13 +37,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -241,7 +239,7 @@ public final class HTMLParser {
                 
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, webResponse.getUrl());
         String charSet = webResponse.getContentCharSet();
-        if (!isSupportedCharacterSet(charSet)) {
+        if( !Charset.isSupported(charSet) ) {
             charSet = TextUtil.DEFAULT_CHARSET;
         }
         final XMLInputSource in = new XMLInputSource(
@@ -287,23 +285,6 @@ public final class HTMLParser {
         return originalException;
     }
     
-    /**
-     * <p>Return true if the specified charset is supported on this platform.</p>
-     * @param charset The charset to check.
-     * @return True if this charset is supported.
-     */
-    private static boolean isSupportedCharacterSet( final String charset ) {
-        //TODO: There's got to be a cleaner way to figure out if a given encoding is
-        // supported but I couldn't find it.
-        try {
-            new InputStreamReader( new ByteArrayInputStream(new byte[0]), charset );
-            return true;
-        }
-        catch( final UnsupportedEncodingException e ) {
-            return false;
-        }
-    }
-
     /**
      * The parser and DOM builder. This class subclasses Xerces's AbstractSAXParser and implements
      * the ContentHandler interface. Thus all parser APIs are kept private. The ContentHandler methods
