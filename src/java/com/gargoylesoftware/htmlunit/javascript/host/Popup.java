@@ -37,13 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.Collections;
-
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ThreadManager;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -52,9 +51,10 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 /**
  * A JavaScript object for IE's Popu.
  * 
+ * @version $Revision: 1223 $
  * @author Marc Guillemot
  * @author David K. Taylor
- * @version $Revision: 1223 $
+ * @author Ahmed Ashour
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/popup.asp">MSDN documentation</a>
  */
 public class Popup extends SimpleScriptable {
@@ -84,9 +84,11 @@ public class Popup extends SimpleScriptable {
         final WebResponse webResponse = openerWindow.getEnclosedPage().getWebResponse();
         final HtmlPage popupPage = new HtmlPage(null, webResponse, popupPseudoWindow);
         popupPseudoWindow.setEnclosedPage(popupPage);
-        final HtmlHtml html = new HtmlHtml(popupPage, Collections.EMPTY_MAP);
+        final HtmlHtml html = (HtmlHtml)HTMLParser.getFactory( HtmlHtml.TAG_NAME ).createElement( 
+                popupPage, HtmlHtml.TAG_NAME, null);
         popupPage.appendChild(html);
-        final HtmlBody body = new HtmlBody(popupPage, Collections.EMPTY_MAP);
+        final HtmlBody body = (HtmlBody)HTMLParser.getFactory( HtmlBody.TAG_NAME ).createElement( 
+                popupPage, HtmlBody.TAG_NAME, null);
         html.appendChild(body);
 
         document_.setDomNode(popupPage);

@@ -187,7 +187,6 @@ public final class HTMLParser {
     public static IElementFactory getFactory(final String tagName) {
         final IElementFactory result = (IElementFactory)ELEMENT_FACTORIES.get(tagName);
 
-        //return result != null ? result : UnknownElementFactory.instance;
         if(result != null) {
             return result;
         }

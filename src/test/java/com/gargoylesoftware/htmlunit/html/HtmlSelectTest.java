@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Mike Williams
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlSelectTest extends WebTestCase {
 
@@ -575,7 +576,8 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     void appendOption(final HtmlSelect select, final String value) {
-        final HtmlOption option = new HtmlOption(select.getPage(), null);
+        final HtmlOption option = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement( 
+                select.getPage(), HtmlOption.TAG_NAME, null);
         option.setValueAttribute(value);
         option.setLabelAttribute(value);
         select.appendOption(option);

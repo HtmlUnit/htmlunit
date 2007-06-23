@@ -44,6 +44,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.HTMLOptionsCollection;
@@ -170,7 +171,8 @@ public class HTMLSelectElement extends FormField {
 
         HtmlOption htmlOption = (HtmlOption) newOptionObject.getHtmlElementOrNull();
         if (htmlOption == null) {
-            htmlOption = new HtmlOption(select.getPage(), null);
+            htmlOption = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement( 
+                    select.getPage(), HtmlOption.TAG_NAME, null);
         }
 
         if (beforeOption == null) {

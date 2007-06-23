@@ -62,6 +62,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Christian Sell
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class AttributesTest extends WebTestCase {
 
@@ -231,13 +232,16 @@ public class AttributesTest extends WebTestCase {
     private Object getNewInstanceForClassUnderTest() throws Exception {
         final Object newInstance;
         if( classUnderTest_ == HtmlTableRow.class ) {
-            newInstance = new HtmlTableRow( page_, null);
+            newInstance = (HtmlTableRow)HTMLParser.getFactory( HtmlTableRow.TAG_NAME ).createElement( 
+                    page_, HtmlTableRow.TAG_NAME, null);
         }
         else if( classUnderTest_ == HtmlTableHeaderCell.class ) {
-            newInstance = new HtmlTableHeaderCell(page_, null );
+            newInstance = (HtmlTableHeaderCell)HTMLParser.getFactory( HtmlTableHeaderCell.TAG_NAME ).createElement( 
+                    page_, HtmlTableHeaderCell.TAG_NAME, null);
         }
         else if( classUnderTest_ == HtmlTableDataCell.class ) {
-            newInstance = new HtmlTableDataCell(page_, null );
+            newInstance = (HtmlTableDataCell)HTMLParser.getFactory( HtmlTableDataCell.TAG_NAME ).createElement( 
+                    page_, HtmlTableDataCell.TAG_NAME, null);
         }
         else {
             final Constructor constructor = classUnderTest_.getDeclaredConstructor(

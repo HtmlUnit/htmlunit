@@ -37,11 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.xml.sax.helpers.AttributesImpl;
+
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The javascript object that represents an option.
@@ -51,6 +52,7 @@ import java.util.Map;
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class Option extends HTMLElement {
     private static final long serialVersionUID = 947015932373556314L;
@@ -73,12 +75,14 @@ public class Option extends HTMLElement {
     public void jsConstructor(final String newText, final String newValue, 
             final boolean defaultSelected, final boolean selected) {
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
-        Map atts = null;
+        AttributesImpl attributes = null;
         if (defaultSelected) {
-            atts = new HashMap(1);
-            atts.put("selected", "selected");
+            attributes = new AttributesImpl();
+            attributes.addAttribute(null, "selected", "selected", null, "selected");
         }
-        final HtmlOption htmlOption = new HtmlOption(page, atts);
+
+        final HtmlOption htmlOption = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement( 
+                page, HtmlOption.TAG_NAME, attributes);
         htmlOption.setSelected(selected);
         setDomNode(htmlOption);
 

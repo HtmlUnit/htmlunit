@@ -899,7 +899,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
                 // perhaps should we create head too?
                 throw new IllegalStateException("Headelement was not defined for this page");
             }
-            titleElement = new HtmlTitle(this, Collections.EMPTY_MAP);
+            titleElement = new HtmlTitle(null, HtmlTitle.TAG_NAME, this, Collections.EMPTY_MAP);
             if (head.getFirstChild() != null) {
                 head.getFirstChild().insertBefore(titleElement);
             }

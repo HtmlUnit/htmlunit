@@ -569,7 +569,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @return collection of {@link DomNode}: the parsed nodes
      */
     private void parseHtmlSnippet(final DomNode target, final boolean append, final String source) {
-        DomNode proxyNode = new HtmlDivision(target.getPage(), null) {
+        DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, target.getPage(), null) {
             public DomNode appendChild(final DomNode node) {
                 if (append) {
                     return target.appendChild(node);

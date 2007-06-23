@@ -66,14 +66,16 @@ public class HtmlDivision extends ClickableElement {
     }
 
     /**
-     * Create an instance of HtmlDivision
+     * Create an instance of HtmlDivision.
+     * 
+     * <p><b>Don't directly construct, it is public as an implementation side-effect.</b> 
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    HtmlDivision(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    public HtmlDivision(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

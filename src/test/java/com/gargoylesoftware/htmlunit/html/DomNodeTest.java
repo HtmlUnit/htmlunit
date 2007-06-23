@@ -38,10 +38,10 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+
+import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode.DescendantElementsIterator;
  *
  * @version  $Revision$
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public class DomNodeTest extends WebTestCase {
 
@@ -109,11 +110,13 @@ public class DomNodeTest extends WebTestCase {
         assertSame(newNode, nextSibling.getPreviousSibling());
         assertEquals(position, readPositionAmongParentChildren(newNode));
 
-        final Map attributes = new HashMap();
-        attributes.put("id", "tag2"); // with the same id as the node to replace
+        final AttributesImpl attributes = new AttributesImpl();
+        attributes.addAttribute(null, "id", "id", null, "tag2"); // with the same id as the node to replace
         final DomNode node2 = page.getHtmlElementById("tag2");
         assertEquals("div", node2.getNodeName());
-        final DomNode node3 = new HtmlSpan(page, attributes);
+        
+        final DomNode node3 = (HtmlSpan)HTMLParser.getFactory( HtmlSpan.TAG_NAME ).createElement( 
+                page, HtmlSpan.TAG_NAME, attributes);
         node2.replace(node3);
         assertEquals("span", page.getHtmlElementById("tag2").getTagName());
     }
@@ -129,9 +132,10 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
 
-        final Map attributes = new HashMap();
-        attributes.put("id", "newElt");
-        final DomNode newNode = new HtmlDivision(page, attributes);
+        final AttributesImpl attributes = new AttributesImpl();
+        attributes.addAttribute(null, "id", "id", null, "newElt");
+        final DomNode newNode = (HtmlDivision)HTMLParser.getFactory( HtmlDivision.TAG_NAME ).createElement( 
+                page, HtmlDivision.TAG_NAME, attributes);
         try {
             page.getHtmlElementById("newElt");
             fail("Element should not exist yet");

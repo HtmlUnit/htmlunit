@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.host.Option;
@@ -56,6 +57,7 @@ import org.mozilla.javascript.ScriptableObject;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Bruce Faulkner
+ * @author Ahmed Ashour
  */
 public class HTMLOptionsCollection extends SimpleScriptable implements ScriptableWithFallbackGetter{
     private static final long serialVersionUID = -4790255174217201235L;
@@ -186,7 +188,9 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         }
         else {
             for (int i=currentLength; i<newLength; ++i) {
-                htmlSelect_.appendOption(new HtmlOption(htmlSelect_.getPage(), null));
+                final HtmlOption option = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement( 
+                        htmlSelect_.getPage(), HtmlOption.TAG_NAME, null);
+                htmlSelect_.appendOption( option );
             }
         }
     }
