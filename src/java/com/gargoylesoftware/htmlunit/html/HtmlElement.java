@@ -85,6 +85,8 @@ public abstract class HtmlElement extends DomNode {
     
     /** The map holding the attribute values, keyed by name. */
     private Map attributes_;
+    
+    private List/*HtmlAttributeChangeListener*/ attributeListeners_;
 
     /**
      * Creates an instance.
@@ -137,7 +139,6 @@ public abstract class HtmlElement extends DomNode {
 
         final String value = (String)attributes_.get(attributeName.toLowerCase());
 
-        //return value != null ? value : ATTRIBUTE_NOT_DEFINED;
         if(value != null) {
             return value;
         }
@@ -153,7 +154,7 @@ public abstract class HtmlElement extends DomNode {
      * @param attributeValue The value of the attribute
      */
     public final void setAttributeValue(final String attributeName, final String attributeValue) {
-
+        final String oldAttributeValue = getAttributeValue(attributeName);
         String value = attributeValue;
 
         if(attributes_ == Collections.EMPTY_MAP) {
@@ -170,6 +171,35 @@ public abstract class HtmlElement extends DomNode {
         if (isId) {
             getPage().addIdElement(this);
         }
+
+        final HtmlAttributeEvent event;
+        if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
+            event = new HtmlAttributeEvent(this, attributeName, attributeValue);
+        }
+        else {
+            event = new HtmlAttributeEvent(this, attributeName, oldAttributeValue);
+        }
+        
+        if( attributeListeners_ != null ) {
+            synchronized (this) {
+                for( final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext(); ) {
+                    final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener)iterator.next();
+                    if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
+                        listener.attributeAdded(event);
+                    }
+                    else {
+                        listener.attributeReplaced(event);
+                    }
+                }
+            }
+        }
+        //call page to fire event
+        if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
+            getPage().fireHtmlAttributeAdded(event);
+        }
+        else {
+            getPage().fireHtmlAttributeReplaced(event);
+        }
     }
 
     /**
@@ -180,7 +210,18 @@ public abstract class HtmlElement extends DomNode {
         if (attributeName.equalsIgnoreCase("id")) {
             getPage().removeIdElement(this);
         }
+        final String attributevalue = getAttributeValue(attributeName);
         attributes_.remove(attributeName.toLowerCase());
+
+        final HtmlAttributeEvent event = new HtmlAttributeEvent( this, attributeName, attributevalue );
+        if (attributeListeners_ != null) {
+            synchronized (this) {
+                for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
+                    ((HtmlAttributeChangeListener)iterator.next()).attributeRemoved(event);
+                }
+            }
+        }
+        getPage().fireHtmlAttributeRemoved(event);
     }
 
     /**
@@ -275,7 +316,6 @@ public abstract class HtmlElement extends DomNode {
         return getAttributeValue("id");
     }
 
-
     /**
      * Set the identifier this element.
      *
@@ -284,7 +324,6 @@ public abstract class HtmlElement extends DomNode {
     public final void setId(final String newId) {
         setAttributeValue("id", newId);
     }
-
 
     /**
      * Return the element with the given name that enclosed this element or null if this element is
@@ -316,7 +355,6 @@ public abstract class HtmlElement extends DomNode {
     public HtmlForm getEnclosingForm() {
         return (HtmlForm) getEnclosingElement("form");
     }
-
 
     /**
      *  Return the form that enclosed this element or throw an exception if this element is
@@ -437,7 +475,6 @@ public abstract class HtmlElement extends DomNode {
         return buffer.toString();
     }
 
-
     /**
      *  Throw an exception. This is a convenience during development only - it
      *  will likely be removed in the future.
@@ -445,7 +482,6 @@ public abstract class HtmlElement extends DomNode {
     protected final void notImplemented() {
         throw new RuntimeException( "Not implemented yet" );
     }
-
 
     /**
      *  Assert that the specified string is not empty. Throw an exception if it
@@ -463,7 +499,6 @@ public abstract class HtmlElement extends DomNode {
             throw new IllegalArgumentException( "String may not be empty: " + description );
         }
     }
-
 
     /**
      *  Search by the specified criteria and return the first HtmlElement that
@@ -496,7 +531,6 @@ public abstract class HtmlElement extends DomNode {
         return ( HtmlElement )list.get( 0 );
     }
 
-
     /**
      *  Return the html element with the specified id. If more than one element
      *  has this id (not allowed by the html spec) then return the first one.
@@ -511,7 +545,6 @@ public abstract class HtmlElement extends DomNode {
 
         return getPage().getHtmlElementById(id);
     }
-
 
     /**
      *  Return true if there is a element with the specified id. This method
@@ -539,7 +572,6 @@ public abstract class HtmlElement extends DomNode {
             return false;
         }
     }
-
 
     /**
      *  Search by the specified criteria and return all the HtmlElement that
@@ -814,5 +846,37 @@ public abstract class HtmlElement extends DomNode {
      */
     public final void removeEventHandler(final String eventName) {
         setEventHandler(eventName, (Function) null);
+    }
+
+    /**
+     * Adds an HtmlAttributeChangeListener to the listener list.
+     * The listener is registered for all attributes of this HtmlElement.
+     * 
+     * @param listener the attribute change listener to be added.
+     * @see #removeHtmlAttributeChangeListener(HtmlAttributeChangeListener)
+     */
+    public void addHtmlAttributeChangeListener( final HtmlAttributeChangeListener listener ) {
+        synchronized( this ) {
+            if( attributeListeners_ == null ) {
+                attributeListeners_ = new ArrayList();
+            }
+            attributeListeners_.add( listener );
+        }
+    }
+
+    /**
+     * Removes an HtmlAttributeChangeListener from the listener list.
+     * This method should be used to remove HtmlAttributeChangeListener that were registered
+     * for all attributes of this HtmlElement.
+     * 
+     * @param listener the attribute change listener to be removed.
+     * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
+     */
+    public void removeHtmlAttributeChangeListener( final HtmlAttributeChangeListener listener ) {
+        synchronized( this ) {
+            if( attributeListeners_ != null ) {
+                attributeListeners_.remove( listener );
+            }
+        }
     }
 }

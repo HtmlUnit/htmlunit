@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Denis N. Antonioli
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class HtmlElementTest extends WebTestCase {
 
@@ -145,7 +146,6 @@ public class HtmlElementTest extends WebTestCase {
         assertEquals("foo", element.asText());
     }
 
-
     /**
      */
     public void testConstants() {
@@ -224,5 +224,146 @@ public class HtmlElementTest extends WebTestCase {
         // just for clover coverage
         assertFalse(mockIterator.hasNext());
         assertNull(mockIterator.next());
+    }
+    
+    static class HtmlAttributeChangeListenerTestImpl implements HtmlAttributeChangeListener {
+        private final List collectedValues_ = new ArrayList();
+        public void attributeAdded(final HtmlAttributeEvent event) {
+            collectedValues_.add( "attributeAdded: " + event.getHtmlElement().getTagName() + ',' + 
+                    event.getName() + ',' + event.getValue() );
+        }
+        public void attributeRemoved(final HtmlAttributeEvent event) {
+            collectedValues_.add( "attributeRemoved: " + event.getHtmlElement().getTagName() + ',' + 
+                    event.getName() + ',' + event.getValue() );
+        }
+    
+        public void attributeReplaced(final HtmlAttributeEvent event) {
+            collectedValues_.add( "attributeReplaced: " + event.getHtmlElement().getTagName() + ',' + 
+                    event.getName() + ',' + event.getValue() );
+        }
+        List getCollectedValues() {
+            return collectedValues_;
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testHtmlAttributeChangeListener_AddAttribute() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function clickMe() {\n"
+            + "    var p1 = document.getElementById('p1');\n"
+            + "    p1.setAttribute('title', 'myTitle');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<p id='p1'></p>\n"
+            + "<input id='myButton' type='button' onclick='clickMe()'>\n"
+            + "</body></html>";
+
+        final String[] expectedValues = {"attributeAdded: p,title,myTitle"};
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlElement p1 = page.getHtmlElementById("p1");
+        final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
+        p1.addHtmlAttributeChangeListener(listenerImpl);
+        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        
+        myButton.click();
+        assertEquals(expectedValues, listenerImpl.getCollectedValues());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testHtmlAttributeChangeListener_ReplaceAttribute() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function clickMe() {\n"
+            + "    var p1 = document.getElementById('p1');\n"
+            + "    p1.setAttribute('title', p1.getAttribute('title') + 'a');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<p id='p1' title='myTitle'></p>\n"
+            + "<input id='myButton' type='button' onclick='clickMe()'>\n"
+            + "</body></html>";
+        
+        final String[] expectedValues = {"attributeReplaced: p,title,myTitle"};
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlElement p1 = page.getHtmlElementById("p1");
+        final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
+        p1.addHtmlAttributeChangeListener(listenerImpl);
+        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        
+        myButton.click();
+        assertEquals(expectedValues, listenerImpl.getCollectedValues());
+        assertEquals("myTitle" + 'a', p1.getAttributeValue("title"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testHtmlAttributeChangeListener_RemoveAttribute() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function clickMe() {\n"
+            + "    var p1 = document.getElementById('p1');\n"
+            + "    p1.removeAttribute('title');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<p id='p1' title='myTitle'></p>\n"
+            + "<input id='myButton' type='button' onclick='clickMe()'>\n"
+            + "</body></html>";
+        
+        final String[] expectedValues = {"attributeRemoved: p,title,myTitle"};
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlElement p1 = page.getHtmlElementById("p1");
+        final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
+        p1.addHtmlAttributeChangeListener(listenerImpl);
+        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        
+        myButton.click();
+        assertEquals(expectedValues, listenerImpl.getCollectedValues());
+        assertSame(HtmlElement.ATTRIBUTE_NOT_DEFINED, p1.getAttributeValue("title"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testHtmlAttributeChangeListener_RemoveListener() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function clickMe() {\n"
+            + "    var p1 = document.getElementById('p1');\n"
+            + "    p1.setAttribute('title', p1.getAttribute('title') + 'a');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<p id='p1' title='myTitle'></p>\n"
+            + "<input id='myButton' type='button' onclick='clickMe()'>\n"
+            + "</body></html>";
+        
+        final String[] expectedValues = {"attributeReplaced: p,title,myTitle"};
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlElement p1 = page.getHtmlElementById("p1");
+        final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
+        p1.addHtmlAttributeChangeListener(listenerImpl);
+        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        
+        myButton.click();
+        p1.removeHtmlAttributeChangeListener(listenerImpl);
+        myButton.click();
+        assertEquals(expectedValues, listenerImpl.getCollectedValues());
+        assertEquals("myTitle" + 'a' + 'a', p1.getAttributeValue("title"));
     }
 }

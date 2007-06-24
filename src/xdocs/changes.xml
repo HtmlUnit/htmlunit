@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour" id="1124781">
+                HtmlElement and HtmlPage: add/remove HtmlAttributeChangeListener (#1124781).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: Implement insertAdjacentElement().
             </action>

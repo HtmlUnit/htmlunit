@@ -106,6 +106,8 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     private static final int TAB_INDEX_NOT_SPECIFIED = -10;
     private static final int TAB_INDEX_OUT_OF_BOUNDS = -20;
 
+    private List/*HtmlAttributeChangeListener*/ attributeListeners_;
+
     /**
      *  Create an instance of HtmlPage
      *
@@ -1628,5 +1630,82 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             }
         }
         return result;
+    }
+
+    /**
+     * Adds an HtmlAttributeChangeListener to the listener list.
+     * The listener is registered for all attributes of all HtmlElements contained in this page.
+     * 
+     * @param listener the attribute change listener to be added.
+     * @see #removeHtmlAttributeChangeListener(HtmlAttributeChangeListener)
+     */
+    public void addHtmlAttributeChangeListener( final HtmlAttributeChangeListener listener ) {
+        synchronized( this ) {
+            if( attributeListeners_ == null ) {
+                attributeListeners_ = new ArrayList();
+            }
+            attributeListeners_.add( listener );
+        }
+    }
+
+    /**
+     * Removes an HtmlAttributeChangeListener from the listener list.
+     * This method should be used to remove HtmlAttributeChangeListener that were registered
+     * for all attributes of all HtmlElements contained in this page.
+     * 
+     * @param listener the attribute change listener to be removed.
+     * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
+     */
+    public void removeHtmlAttributeChangeListener( final HtmlAttributeChangeListener listener ) {
+        synchronized( this ) {
+            if( attributeListeners_ != null ) {
+                attributeListeners_.remove( listener );
+            }
+        }
+    }
+    
+    /**
+     * Notifies all registered listeners for the given event to add an attribute.
+     * @param event the event to fire
+     */
+    void fireHtmlAttributeAdded(final HtmlAttributeEvent event) {
+        synchronized (this) {
+            if( attributeListeners_ != null ) {
+                for( final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext(); ) {
+                    final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener)iterator.next();
+                    listener.attributeAdded(event);
+                }
+            }
+        }
+    }
+
+    /**
+     * Notifies all registered listeners for the given event to replace an attribute.
+     * @param event the event to fire
+     */
+    void fireHtmlAttributeReplaced(final HtmlAttributeEvent event) {
+        synchronized (this) {
+            if( attributeListeners_ != null ) {
+                for( final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext(); ) {
+                    final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener)iterator.next();
+                    listener.attributeReplaced(event);
+                }
+            }
+        }
+    }
+    
+    /**
+     * Notifies all registered listeners for the given event to remove an attribute.
+     * @param event the event to fire
+     */
+    void fireHtmlAttributeRemoved(final HtmlAttributeEvent event) {
+        synchronized (this) {
+            if( attributeListeners_ != null ) {
+                for( final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext(); ) {
+                    final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener)iterator.next();
+                    listener.attributeRemoved(event);
+                }
+            }
+        }
     }
 }

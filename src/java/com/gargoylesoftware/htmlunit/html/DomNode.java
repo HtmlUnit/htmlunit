@@ -75,7 +75,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Rodney Gitzel
  */
 public abstract class DomNode implements Cloneable, Serializable {
-
+    
     /** Node type constant for the <code>Document</code> node. */
     public static final short DOCUMENT_NODE = 9;
 
@@ -196,7 +196,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         startLineNumber_ = startLineNumber;
         startColumnNumber_ = startColumnNumber;
     }
-
+    
     /**
      * Set the line and column numbers in the source page where the
      * DOM node ends.
@@ -296,7 +296,6 @@ public abstract class DomNode implements Cloneable, Serializable {
     protected void setParentNode(final DomNode parent) {
         parent_ = parent;
     }
-
 
     /**
      * @return the previous sibling of this node, or <code>null</code> if this is
@@ -445,7 +444,6 @@ public abstract class DomNode implements Cloneable, Serializable {
 
         return buffer.toString();
     }
-
 
     /**
      * Removes extra whitespace from a string similar to what a browser does
@@ -729,7 +727,7 @@ public abstract class DomNode implements Cloneable, Serializable {
     public Iterator getChildIterator() {
         return new ChildIterator();
     }
-
+    
     // TODO: remove event handlers methods! Nothing to do in DomNode!
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -844,7 +842,6 @@ public abstract class DomNode implements Cloneable, Serializable {
             currentNode_.remove();
         }
     }
-
 
     /**
      * Return an iterator that will recursively iterate over every child element
@@ -994,5 +991,4 @@ public abstract class DomNode implements Cloneable, Serializable {
         final IncorrectnessListener incorrectnessListener = getPage().getWebClient().getIncorrectnessListener();
         incorrectnessListener.notify(message, this);
     }
-
 }
