@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Unit tests for {@link Script}.
  *
- * @version $Revision: 1352 $
+ * @version $Revision$
  * @author Daniel Gredler
  */
 public class ScriptTest extends WebTestCase {

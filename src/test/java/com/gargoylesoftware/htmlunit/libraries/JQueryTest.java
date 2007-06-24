@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlParagraph;
 /**
  * Tests for compatibility with the <a href="http://jquery.com/">jQuery JavaScript library</a>.
  *
- * @version $Revision: 1 $
+ * @version $Revision$
  * @author Daniel Gredler
  */
 public class JQueryTest extends WebTestCase {

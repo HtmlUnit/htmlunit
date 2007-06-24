@@ -41,7 +41,8 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlStyle}.
- * @version $Revision: 1258 $
+ * 
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class HtmlStyleTest extends WebTestCase {

@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
 /**
  * Wrapper for the HTML element "frameset".
  *
- * @version  $Revision: $
+ * @version $Revision$
  * @author Bruce Chapman
  */
 public class FrameSet extends HTMLElement {

@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 /**
  * The JavaScript object that represents a "script".
  * 
- * @version $Revision: 1 $
+ * @version $Revision$
  * @author Daniel Gredler
  */
 public class Script extends HTMLElement {

@@ -41,7 +41,8 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link ActiveXObject}.
- * @version $Revision: 1129 $
+ * 
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class ActiveXObjectTest extends WebTestCase {

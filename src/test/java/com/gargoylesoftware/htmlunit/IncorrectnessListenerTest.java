@@ -41,9 +41,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Tests for {@link IncorrectnessListener}..
+ * Tests for {@link IncorrectnessListener}.
  * 
- * @version $Revision: 1137 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public final class IncorrectnessListenerTest extends WebTestCase {

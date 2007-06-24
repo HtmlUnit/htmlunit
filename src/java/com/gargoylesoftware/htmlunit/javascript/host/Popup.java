@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 /**
  * A JavaScript object for IE's Popu.
  * 
- * @version $Revision: 1223 $
+ * @version $Revision$
  * @author Marc Guillemot
  * @author David K. Taylor
  * @author Ahmed Ashour

@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for {@link Popup}.
  *
- * @version  $Revision: 1129 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class PopupTest extends WebTestCase {

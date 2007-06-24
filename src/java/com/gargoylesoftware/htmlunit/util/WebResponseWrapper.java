@@ -50,7 +50,8 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * by developers wishing to adapt a particular WebResponse. 
  * This class implements the Wrapper or Decorator pattern. Methods default to calling through to the wrapped 
  * web connection object.
- * @version $Revision: 1178 $
+ * 
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class WebResponseWrapper implements WebResponse {

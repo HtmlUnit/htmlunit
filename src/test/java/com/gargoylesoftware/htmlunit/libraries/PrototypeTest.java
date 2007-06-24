@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for compatibility with the <a href="http://prototype.conio.net/">Prototype JavaScript library</a>.
  *
- * @version $Revision: 1432 $
+ * @version $Revision$
  * @author Daniel Gredler
  */
 public class PrototypeTest extends WebTestCase {

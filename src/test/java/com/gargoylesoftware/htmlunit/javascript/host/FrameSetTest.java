@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Unit tests for {@link FrameSet}.
  *
- * @version  $Revision: $
+ * @version $Revision$
  * @author Bruce Chapman
  */
 public class FrameSetTest extends WebTestCase {

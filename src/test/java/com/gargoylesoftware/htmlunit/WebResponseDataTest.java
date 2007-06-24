@@ -47,7 +47,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  * Tests for {@link WebResponseData}.
  *
- * @version $Revision: $
+ * @version $Revision$
  * @author Daniel Gredler
  */
 public class WebResponseDataTest extends WebTestCase {

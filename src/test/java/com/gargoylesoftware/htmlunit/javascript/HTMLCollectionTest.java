@@ -45,7 +45,8 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HTMLCollection}.
- * @version $Revision: 1129 $
+ * 
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class HTMLCollectionTest extends WebTestCase {

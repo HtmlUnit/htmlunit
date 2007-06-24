@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for {@link HtmlHiddenInput}.
  *
- * @version $Revision: 1172 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class HtmlHiddenInputTest extends WebTestCase {
