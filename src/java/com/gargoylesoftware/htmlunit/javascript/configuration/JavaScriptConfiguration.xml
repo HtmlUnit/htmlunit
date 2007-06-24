@@ -714,6 +714,8 @@
         <property name="tFoot" readable="true" writable="false"/>
         <property name="tHead" readable="true" writable="false"/>
         <property name="width" readable="true" writable="true"/>
+        <property name="cellSpacing" readable="true" writable="true"/>
+        <property name="cellPadding" readable="true" writable="true"/>
         
         <function name="createCaption">
             <doclink

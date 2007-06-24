@@ -611,4 +611,41 @@ public class TableTest extends WebTestCase {
         assertTrue( xml.indexOf( "width=\"200\"" ) != -1 );
     }
 
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testCellSpacing() throws Exception {
+        final String content
+            = "<html><head></head><body>\n"
+                + "<table id='tableID' cellspacing='2'><tr><td></td></tr></table>\n"
+                + "<script language='javascript'>\n"
+                + "    var table = document.getElementById('tableID');\n"
+                + "    table.cellSpacing += 1;\n"
+                + "    alert( table.cellSpacing );\n"
+                + "</script></body></html>";
+
+        final String[] expectedAlerts = {"21"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts).asXml();
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testCellPadding() throws Exception {
+        final String content
+            = "<html><head></head><body>\n"
+                + "<table id='tableID' cellpadding='2'><tr><td></td></tr></table>\n"
+                + "<script language='javascript'>\n"
+                + "    var table = document.getElementById('tableID');\n"
+                + "    table.cellPadding += 1;\n"
+                + "    alert( table.cellPadding );\n"
+                + "</script></body></html>";
+
+        final String[] expectedAlerts = {"21"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts).asXml();
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

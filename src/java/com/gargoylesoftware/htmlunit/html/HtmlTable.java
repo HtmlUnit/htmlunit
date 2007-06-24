@@ -161,7 +161,6 @@ public class HtmlTable extends ClickableElement {
         return count;
     }
 
-
     /**
      * Find and return the row with the specified id.
      *
@@ -180,7 +179,6 @@ public class HtmlTable extends ClickableElement {
         throw new ElementNotFoundException( "tr", "id", id );
     }
 
-
     /**
      * Return the table caption text or an empty string if a caption wasn't specified
      *
@@ -196,7 +194,6 @@ public class HtmlTable extends ClickableElement {
         }
         return null;
     }
-
 
     /**
      * Return the table header or null if a header wasn't specified
@@ -214,7 +211,6 @@ public class HtmlTable extends ClickableElement {
         return null;
     }
 
-
     /**
      * Return the table footer or null if a footer wasn't specified
      *
@@ -230,7 +226,6 @@ public class HtmlTable extends ClickableElement {
         }
         return null;
     }
-
 
     /**
      * Return a list of tables bodies defined in this table.  If no bodies were defined
@@ -250,7 +245,6 @@ public class HtmlTable extends ClickableElement {
         return bodies;
     }
 
-
     /**
      * Return the value of the attribute "summary".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -262,7 +256,6 @@ public class HtmlTable extends ClickableElement {
     public final String getSummaryAttribute() {
         return getAttributeValue("summary");
     }
-
 
     /**
      * Return the value of the attribute "width".  Refer to the
@@ -276,7 +269,6 @@ public class HtmlTable extends ClickableElement {
         return getAttributeValue("width");
     }
 
-
     /**
      * Return the value of the attribute "border".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -288,7 +280,6 @@ public class HtmlTable extends ClickableElement {
     public final String getBorderAttribute() {
         return getAttributeValue("border");
     }
-
 
     /**
      * Return the value of the attribute "frame".  Refer to the
@@ -302,7 +293,6 @@ public class HtmlTable extends ClickableElement {
         return getAttributeValue("frame");
     }
 
-
     /**
      * Return the value of the attribute "rules".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -314,7 +304,6 @@ public class HtmlTable extends ClickableElement {
     public final String getRulesAttribute() {
         return getAttributeValue("rules");
     }
-
 
     /**
      * Return the value of the attribute "cellspacing".  Refer to the
@@ -328,7 +317,6 @@ public class HtmlTable extends ClickableElement {
         return getAttributeValue("cellspacing");
     }
 
-
     /**
      * Return the value of the attribute "cellpadding".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -340,7 +328,6 @@ public class HtmlTable extends ClickableElement {
     public final String getCellPaddingAttribute() {
         return getAttributeValue("cellpadding");
     }
-
 
     /**
      * Return the value of the attribute "align".  Refer to the
@@ -354,7 +341,6 @@ public class HtmlTable extends ClickableElement {
         return getAttributeValue("align");
     }
 
-
     /**
      * Return the value of the attribute "bgcolor".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -366,7 +352,6 @@ public class HtmlTable extends ClickableElement {
     public final String getBgcolorAttribute() {
         return getAttributeValue("bgcolor");
     }
-
 
     /**
      * an iterator that moves over all rows in tis table. The iterator will also
