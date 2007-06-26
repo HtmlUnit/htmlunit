@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour" id="1743297" due-to="Bruce Chapman">
+                Add AttachmentPage for "Content-Disposition" header (#1743297).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: Add table.cellSpacing and table.cellPadding.
             </action>

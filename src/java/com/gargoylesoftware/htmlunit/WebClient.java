@@ -169,6 +169,8 @@ public class WebClient implements Serializable {
     private RefreshHandler refreshHandler_ = new ImmediateRefreshHandler();
     private boolean throwExceptionOnScriptError_ = true;
 
+    /** handler to be notified when an attachment is created */
+    private AttachmentHandler attachmentHandler_;    
 
     /**
      * Create an instance using {@link BrowserVersion#FULL_FEATURED_BROWSER}
@@ -344,13 +346,20 @@ public class WebClient implements Serializable {
             getLog().info( webResponse.getContentAsString() );
         }
 
-        loadWebResponseInto(webResponse, webWindow);
+        final Page result = loadWebResponseInto(webResponse, webWindow);
 
         if (isThrowExceptionOnFailingStatusCode() && !wasResponseSuccessful) {
             throw new FailingHttpStatusCodeException(webResponse);
         }
 
-        return webWindow.getEnclosedPage();
+        if(result instanceof AttachmentPage) {
+            return result;
+        } 
+        else {
+            // the original page may have caused another page to load into the window, return that one
+            return webWindow.getEnclosedPage();
+        }
+        
     }
 
     /**
@@ -433,29 +442,39 @@ public class WebClient implements Serializable {
 
         Assert.notNull("webResponse", webResponse);
         Assert.notNull("webWindow", webWindow);
-
-        final Page oldPage = webWindow.getEnclosedPage();
-        if (oldPage != null) {
-            // Remove the old windows before create new ones.
-            oldPage.cleanUp();
-        }
-
-        final Page newPage = pageCreator_.createPage( webResponse, webWindow );
-
-        synchronized (firstWindowStack_) {
-            if (! firstWindowStack_.empty() && firstWindowStack_.peek() == null) {
-                firstWindowStack_.pop();
-                firstWindowStack_.push(webWindow);
+        
+        if(isAttachment(webResponse)) {
+            // create it and return it, but don't replace the current page with the new one
+            final AttachmentPage result = (AttachmentPage) pageCreator_.createPage( webResponse, webWindow );
+            if(attachmentHandler_ != null) {
+                attachmentHandler_.handleAttachment(result);
             }
-        }
+            return result;
+        } 
+        else {
+            final Page oldPage = webWindow.getEnclosedPage();
+            if (oldPage != null) {
+                // Remove the old windows before create new ones.
+                oldPage.cleanUp();
+            }
 
-        // the page beeing loaded may already have been replaced by an other one through js code
-        if (webWindow.getEnclosedPage() == newPage) {
-            newPage.initialize();
-        }
+            final Page newPage = pageCreator_.createPage( webResponse, webWindow );
 
-        fireWindowContentChanged( new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage) );
-        return newPage;
+            synchronized (firstWindowStack_) {
+                if (! firstWindowStack_.empty() && firstWindowStack_.peek() == null) {
+                    firstWindowStack_.pop();
+                    firstWindowStack_.push(webWindow);
+                }
+            }
+
+            // the page being loaded may already have been replaced by another one through js code
+            if (webWindow.getEnclosedPage() == newPage) {
+                newPage.initialize();
+            }
+
+            fireWindowContentChanged( new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage) );
+            return newPage;
+        } 
     }
 
 
@@ -1791,6 +1810,44 @@ public class WebClient implements Serializable {
             throw new NullPointerException("Null incorrectness listener.");
         }
         incorrectnessListener_ = listener;
+    }
+    
+    /**
+     * Return true if the webResponse is an attachment 
+     * @param webResponse The WebResponse to check to see if it is anattachment
+     * @See http://www.ietf.org/rfc/rfc2183.txt
+     * @return true when webResponse represents an attachment.
+     */
+    static boolean isAttachment(final WebResponse webResponse) {
+        // see http://www.ietf.org/rfc/rfc2183.txt
+        final String disp = webResponse.getResponseHeaderValue("Content-Disposition");
+        if(disp == null) {
+            return false;
+        }
+        return disp.startsWith("attachment");
+    }
+    
+    /**
+     * Set a handler to be notified whenever an attachment is created. There are
+     * some cases where an AttachmentPage is created but never returned by the method 
+     * that triggered the request (such as click()ing an Anchor that does a form.submit() in javascript
+     * where the form's response is an attachment.)
+     * For those cases setting an AttachmentHandler is the only mechanism by which the AttachmentPage
+     * can be obtained. The handler is called for All attachments, not just those whose reference is lost.
+     * 
+     * @param handler The handler that is to be informed whenever an AttachmentPage is created, or null 
+     * to set no attachment handler.
+     */
+    public void setAttachmentHandler(final AttachmentHandler handler) {
+        this.attachmentHandler_ = handler;
+    }
+    
+    /**
+     * Returns the current attachment handler
+     * @return the current attachment handler.
+     */
+    public AttachmentHandler getAttachmentHandler() {
+        return attachmentHandler_;
     }
 
 }

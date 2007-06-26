@@ -81,8 +81,14 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
             IOException {
         final String contentType = webResponse.getContentType().toLowerCase();
         final Page newPage;
-
-        final String pageType = determinePageType(contentType);
+        
+        final String pageType;
+        if(WebClient.isAttachment(webResponse)) {
+            pageType = "attachment";
+        } 
+        else {
+            pageType = determinePageType(contentType);
+        }
         if (pageType.equals("html")) {
             newPage = createHtmlPage(webResponse, webWindow);
         }
@@ -94,6 +100,9 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
         }
         else if (pageType.equals("text")) {
             newPage = createTextPage(webResponse, webWindow);
+        }
+        else if (pageType.equals("attachment")) {
+            newPage = createAttachmentPage(webResponse);
         }
         else {
             newPage = createUnexpectedPage(webResponse, webWindow);
@@ -157,6 +166,17 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     }
 
     /**
+     * Create an AttachmentPage for this WebResponse
+     * 
+     * @param webResponse The page's source
+     * @return The newly created AttachmentPage
+     */
+    protected AttachmentPage createAttachmentPage(final WebResponse webResponse) {
+        final AttachmentPage newPage = new AttachmentPage(webResponse);
+        return newPage;
+    }
+
+    /**
      * Create an XmlPage for this WebResponse
      * 
      * @param webResponse The page's source
@@ -198,4 +218,5 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
             return "unknown";
         }
     }
+    
 }
