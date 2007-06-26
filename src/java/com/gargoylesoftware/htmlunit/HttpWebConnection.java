@@ -98,7 +98,6 @@ public class HttpWebConnection extends WebConnectionImpl {
         }
     };
 
-
     /**
      * Create a new HTTP web connection instance.
      * @param  webClient The WebClient that is using this connection
@@ -106,7 +105,6 @@ public class HttpWebConnection extends WebConnectionImpl {
     public HttpWebConnection( final WebClient webClient ) {
         super(webClient);
     }
-
 
     /**
      *  Submit a request and retrieve a response
@@ -157,10 +155,19 @@ public class HttpWebConnection extends WebConnectionImpl {
             }
         }
         finally {
-            httpMethod.releaseConnection();
+            onResponseGenerated(httpMethod);
         }
     }
 
+    /**
+     * Called when the response has been generated. Default action is to release
+     * the HttpMethod's connection. Subclasses may override.
+     * @param httpMethod the httpMethod used.
+     */
+    protected void onResponseGenerated(final HttpMethodBase httpMethod) {
+        httpMethod.releaseConnection();
+    }
+        
     /**
      * Gets the host configuration for the request.
      * Should we cache it?
@@ -186,7 +193,6 @@ public class HttpWebConnection extends WebConnectionImpl {
         }
         return hostConfiguration;
     }
-
 
     /**
      * Creates an <tt>HttpMethod</tt> instance according to the specified parameters.
@@ -298,7 +304,11 @@ public class HttpWebConnection extends WebConnectionImpl {
         return httpMethod;
     }
 
-    private synchronized HttpClient getHttpClient() {
+    /** 
+     * Lazily initialize the httpClient 
+     * @return the initialized client
+     */
+    protected synchronized HttpClient getHttpClient() {
 
         if (httpClient_ == null ) {
             httpClient_ = createHttpClient();
@@ -309,10 +319,8 @@ public class HttpWebConnection extends WebConnectionImpl {
                 ((SimpleLog)log).setLevel( SimpleLog.LOG_LEVEL_WARN );
             }
 
-            final int timeout = getWebClient().getTimeout();
-            httpClient_.getHttpConnectionManager().getParams().setSoTimeout(timeout);
-            httpClient_.getHttpConnectionManager().getParams().setConnectionTimeout(timeout);
-
+            httpClient_.getHttpConnectionManager().getParams().setSoTimeout(getTimeout());
+            httpClient_.getHttpConnectionManager().getParams().setConnectionTimeout(getTimeout());
 
             if (virtualHost_ != null) {
                 httpClient_.getParams().setVirtualHost(virtualHost_);
@@ -324,6 +332,16 @@ public class HttpWebConnection extends WebConnectionImpl {
         httpClient_.getParams().setParameter( CredentialsProvider.PROVIDER, getWebClient().getCredentialsProvider() );
 
         return httpClient_;
+    }
+    
+    /** 
+     * Return the timeout to use for socket and connection timeouts for HttpConnectionManager.
+     * is overridden to 0 by StreamingWebConnection which keeps reading after a timeout and
+     * must have long running connections explicitly terminated.
+     * @return the WebClient's timout.
+     */
+    protected int getTimeout() {
+        return getWebClient().getTimeout();
     }
 
     /**
@@ -338,7 +356,6 @@ public class HttpWebConnection extends WebConnectionImpl {
             new MultiThreadedHttpConnectionManager();
         return new HttpClient(connectionManager);
     }
-
 
     /**
      * Return the log object for this class
@@ -390,17 +407,54 @@ public class HttpWebConnection extends WebConnectionImpl {
         for (int i = 0; i < array.length; i++) {
             headers.add(new NameValuePair(array[i].getName(), array[i].getValue()));
         }
+        final WebResponseData responseData = newWebResponseDataInstance(statusMessage, headers, statusCode, method);
 
-        final WebResponseData responseData = new WebResponseData(
+        final SubmitMethod requestMethod = SubmitMethod.getInstance(method.getName());
+        return newWebResponseInstance(charset, responseData, loadTime, requestMethod, originatingURL);
+    }
+
+    /**
+     * Construct an appropriate WebResponseData. 
+     * May be overridden by subclasses to return a specialised WebResponseData.
+     * @param statusMessage StatusMessage from the response
+     * @param headers response headers
+     * @param statusCode reponse status code
+     * @param method request method
+     * @return The WebResponseData to use for this response.
+     * @throws IOException if there is a problem reading the rsponse body.
+     */
+    protected WebResponseData newWebResponseDataInstance(
+            final String statusMessage, 
+            final List headers, 
+            final int statusCode, 
+            final HttpMethodBase method
+    ) throws IOException {
+        return new WebResponseData(
                 method.getResponseBodyAsStream(),
                 statusCode,
                 statusMessage,
                 headers);
-
-        final SubmitMethod requestMethod = SubmitMethod.getInstance(method.getName());
-        return new WebResponseImpl(responseData, charset, originatingURL, requestMethod, loadTime);
     }
 
+    /**
+     * Construct an appropriate WebResponse. 
+     * May be overridden by subclasses to return a specialised WebResponse.
+     * @param responseData Data that was send back
+     * @param charset Charset used if not returned in the response.
+     * @param originatingURL Where this response came from
+     * @param requestMethod The method used to get this response
+     * @param loadTime How long the response took to be sent
+     * @return the new WebResponse.
+     */
+    protected WebResponse newWebResponseInstance(
+            final String charset, 
+            final WebResponseData responseData, 
+            final long loadTime, 
+            final SubmitMethod requestMethod, 
+            final URL originatingURL
+    ) {
+        return new WebResponseImpl(responseData, charset, originatingURL, requestMethod, loadTime);
+    }
 
     private void writeRequestHeadersToHttpMethod( final HttpMethod httpMethod, final Map requestHeaders ) {
         synchronized( requestHeaders ) {
@@ -413,4 +467,3 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
 }
-

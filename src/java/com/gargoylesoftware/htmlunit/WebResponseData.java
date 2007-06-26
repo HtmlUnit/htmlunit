@@ -109,6 +109,24 @@ public class WebResponseData implements Serializable {
         body_ = getBody( bodyStream, responseHeaders );
     }
 
+    /**
+     * Construct without data stream for subclasses that override getBody()
+     * 
+     * @param statusCode        Status code from the server
+     * @param statusMessage     Status message from the server
+     * @param responseHeaders   Headers in this response
+     * 
+     * @throws IOException on stream errors
+     */
+    protected WebResponseData(final int statusCode,
+            final String statusMessage, final List responseHeaders) throws IOException {
+
+        validateHeaders(responseHeaders);
+        statusCode_ = statusCode;
+        statusMessage_ = statusMessage;
+        responseHeaders_ = Collections.unmodifiableList(responseHeaders);
+    }
+    
     /** 
      * Validate that the response header list only contains KeyValuePairs 
      * (Java5 generics will obsolete this method)
@@ -137,7 +155,7 @@ public class WebResponseData implements Serializable {
      * @return The specified body stream, as a byte array.
      * @throws IOException If a stream error occurs.
      */
-    private byte[] getBody( InputStream stream, final List headers ) throws IOException {
+    protected byte[] getBody( InputStream stream, final List headers ) throws IOException {
         if (stream == null) {
             return null;
         }
@@ -159,13 +177,15 @@ public class WebResponseData implements Serializable {
     }
 
     /**
-     * @return response body
+     * Return the response body.
+     * @return response body.
      */
     public byte[] getBody() {
         return body_;
     }
 
     /**
+     * 
      * @return response headers
      */
     public List getResponseHeaders() {
