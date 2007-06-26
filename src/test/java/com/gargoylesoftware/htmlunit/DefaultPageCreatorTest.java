@@ -37,12 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
-import java.util.List;
-import org.apache.commons.httpclient.NameValuePair;
 
 /**
  * Tests for {@link com.gargoylesoftware.htmlunit.DefaultPageCreator}.
@@ -88,96 +82,5 @@ public class DefaultPageCreatorTest extends WebTestCase {
 
         assertEquals("unknown", creator.determinePageType("application/pdf"));
         assertEquals("unknown", creator.determinePageType("application/x-shockwave-flash"));
-    }
-    
-    /**
-     * Test Attachment Page
-     * @throws Exception If the test fails.
-     */
-    public void testAttachmentPage() throws Exception {
-        final String content = "<html>But is it really?</html>";
-        final WebClient client = new WebClient();
-        final MockWebConnection conn = new MockWebConnection(client);
-        client.setWebConnection(conn);
-
-        final List headers = new ArrayList();
-        headers.add(new NameValuePair("Content-Disposition","attachment"));
-        conn.setResponse(URL_FIRST,content,200,"OK","text/html",headers);
-        final Page result = client.getPage(URL_FIRST);
-        assertInstanceOf(result,AttachmentPage.class);
-        HttpWebConnectionTest.assertEquals(
-            ((AttachmentPage)result).getInputStream(),
-            new ByteArrayInputStream(content.getBytes())
-        );
-    }
-    
-    /**
-     * Test Attachment Page Callback. This demonstrates the case where the 
-     * handler is the only way to obtain a copy of the attachment.
-     * @throws Exception If the test fails.
-     */
-    public void testAttachmentHandler() throws Exception {
-        final String content1 = "<html><body>\n"
-            + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
-            + "<input type='submit' value='ok'>\n"
-            + "</form>\n"
-            + "<a href='#' onclick='document.form.submit()'>click me</a>\n"
-            + "</body></html>";
-        final String content2="download file contents";
-        
-        final WebClient client = new WebClient();
-        final List attachments = new ArrayList();
-        client.setAttachmentHandler(new AttachmentHandler() {
-            public void handleAttachment(final AttachmentPage page) {
-                attachments.add(page);
-            }
-        });
-        final MockWebConnection conn = new MockWebConnection(client);
-        conn.setResponse(URL_FIRST,content1);
-        final List headers = new ArrayList();
-        headers.add(new NameValuePair("Content-Disposition","attachment"));
-        conn.setResponse(URL_SECOND,content2,200,"OK","text/html",headers);
-        client.setWebConnection(conn);
-        final HtmlPage result = (HtmlPage)client.getPage(URL_FIRST);
-        final HtmlAnchor anchor = (HtmlAnchor) result.getAnchors().get(0);
-        final Page clickResult = anchor.click(); // returns same page
-        assertSame(result,clickResult);
-        // attachment was downloaded and placed in attachments
-        assertEquals(1, attachments.size());
-        assertInstanceOf(attachments.get(0),AttachmentPage.class);
-        final AttachmentPage attachment = (AttachmentPage) attachments.get(0);
-        HttpWebConnectionTest.assertEquals(
-            attachment.getInputStream(),
-            new ByteArrayInputStream(content2.getBytes())
-        );
-    }
-
-    /**
-     * Test AttachmentPage's getFilename method.
-     * @throws Exception If the test fails.
-     */
-    public void testAttachmentFilename() throws Exception {
-        final String content = "<html>But is it really?</html>";
-        final WebClient client = new WebClient();
-        final MockWebConnection conn = new MockWebConnection(client);
-        client.setWebConnection(conn);
-
-        final List headers1 = new ArrayList();
-        headers1.add(new NameValuePair("Content-Disposition","attachment;filename=\"hello.html\""));
-        conn.setResponse(URL_FIRST,content,200,"OK","text/html",headers1);
-        final AttachmentPage result = (AttachmentPage) client.getPage(URL_FIRST);
-        assertEquals(result.getSuggestedFilename(),"hello.html");
-        
-        final List headers2 = new ArrayList();
-        headers2.add(new NameValuePair("Content-Disposition","attachment;filename=hello.html;something=else"));
-        conn.setResponse(URL_SECOND,content,200,"OK","text/html",headers2);
-        final AttachmentPage result2 = (AttachmentPage) client.getPage(URL_SECOND);
-        assertEquals(result2.getSuggestedFilename(),"hello.html");
-
-        final List headers3 = new ArrayList();
-        headers3.add(new NameValuePair("Content-Disposition","attachment"));
-        conn.setResponse(URL_THIRD,content,200,"OK","text/html",headers3);
-        final AttachmentPage result3 = (AttachmentPage) client.getPage(URL_THIRD);
-        assertNull(result3.getSuggestedFilename());
     }
 }
