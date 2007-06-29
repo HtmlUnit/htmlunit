@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.html.BaseFrame;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public class HTMLFrameElement extends HTMLElement {
     private static final long serialVersionUID = 3761121622400448304L;
@@ -115,15 +116,13 @@ public class HTMLFrameElement extends HTMLElement {
         return (BaseFrame) getHtmlElementOrDie();
     }
 
-
     /**
      * Set the onload event handler for this element.
      * @param eventHandler the new handler
      */
-    public void jsxSet_onload(final Function eventHandler) {
-        getHtmlElementOrDie().setEventHandler("onload", eventHandler);
+    public void jsxSet_onload(final Object eventHandler) {
+        getHtmlElementOrDie().setEventHandler("onload", (Function)eventHandler);
     }
-
 
     /**
      * Get the onload event handler for this element.

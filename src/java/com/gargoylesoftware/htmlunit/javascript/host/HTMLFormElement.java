@@ -60,6 +60,7 @@ import org.mozilla.javascript.Scriptable;
  * @author Kent Tong
  * @author Chris Erskine
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  * 
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/form.asp">MSDN documentation</a>
  */
@@ -73,14 +74,12 @@ public class HTMLFormElement extends HTMLElement {
      */
     public HTMLFormElement() { }
 
-
     /**
      * Javascript constructor.  This must be declared in every javascript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public final void jsConstructor() {
     }
-
 
     /**
      * {@inheritDoc}
@@ -90,7 +89,6 @@ public class HTMLFormElement extends HTMLElement {
         final HtmlForm htmlForm = getHtmlForm();
         htmlForm.setScriptObject( this );
     }
-
 
     /**
      * Return the value of the javascript attribute "name".
@@ -108,7 +106,6 @@ public class HTMLFormElement extends HTMLElement {
         Assert.notNull("name", name);
         getHtmlForm().setNameAttribute(name);
     }
-
 
     /**
      * Return the value of the javascript attribute "elements".
@@ -131,7 +128,6 @@ public class HTMLFormElement extends HTMLElement {
         return elements_;
     }
 
-
     /**
      * Return the value of the javascript attribute "length".
      * Does not count input type=image elements as browsers (IE6, Mozilla 1.7) do
@@ -144,7 +140,6 @@ public class HTMLFormElement extends HTMLElement {
         return all - images;
     }
 
-
     /**
      * Return the value of the javascript attribute "action".
      * @return The value of this attribute.
@@ -152,7 +147,6 @@ public class HTMLFormElement extends HTMLElement {
     public String jsxGet_action() {
         return getHtmlForm().getActionAttribute();
     }
-
 
     /**
      * Set the value of the javascript attribute "action".
@@ -163,7 +157,6 @@ public class HTMLFormElement extends HTMLElement {
         getHtmlForm().setActionAttribute(action);
     }
 
-
     /**
      * Return the value of the javascript attribute "method".
      * @return The value of this attribute.
@@ -171,7 +164,6 @@ public class HTMLFormElement extends HTMLElement {
     public String jsxGet_method() {
         return getHtmlForm().getMethodAttribute();
     }
-
 
     /**
      * Set the value of the javascript attribute "method".
@@ -181,7 +173,6 @@ public class HTMLFormElement extends HTMLElement {
         Assert.notNull("method", method);
         getHtmlForm().setMethodAttribute(method);
     }
-
 
     /**
      * Return the value of the javascript attribute "target".
@@ -203,8 +194,8 @@ public class HTMLFormElement extends HTMLElement {
      * Set the onsubmit event handler for this element.
      * @param onsubmit the new handler
      */
-    public void jsxSet_onsubmit(final Function onsubmit) {
-        getHtmlForm().setEventHandler("onsubmit", onsubmit);
+    public void jsxSet_onsubmit(final Object onsubmit) {
+        getHtmlForm().setEventHandler("onsubmit", (Function)onsubmit);
     }
 
     /**
@@ -216,7 +207,6 @@ public class HTMLFormElement extends HTMLElement {
         getHtmlForm().setTargetAttribute(target);
     }
 
-
     /**
      * Return the value of the javascript attribute "encoding".
      * @return The value of this attribute.
@@ -224,7 +214,6 @@ public class HTMLFormElement extends HTMLElement {
     public String jsxGet_encoding() {
         return getHtmlForm().getEnctypeAttribute();
     }
-
 
     /**
      * Set the value of the javascript attribute "encoding".
@@ -234,7 +223,6 @@ public class HTMLFormElement extends HTMLElement {
         Assert.notNull("encoding", encoding);
         getHtmlForm().setEnctypeAttribute(encoding);
     }
-
 
     private HtmlForm getHtmlForm() {
         return (HtmlForm)getHtmlElementOrDie();
@@ -248,7 +236,6 @@ public class HTMLFormElement extends HTMLElement {
     public void jsxFunction_submit() throws IOException {
         getHtmlForm().submit();
     }
-
 
     /**
      * Reset this form
@@ -302,7 +289,6 @@ public class HTMLFormElement extends HTMLElement {
         }
         return result;
     }
-
 
     /**
      * Return the specified indexed property

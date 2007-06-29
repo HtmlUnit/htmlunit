@@ -65,7 +65,6 @@ public final class HtmlInputTest extends WebTestCase {
         super( name );
     }
 
-
     /**
      *  Test that selecting one radio button will deselect all the others
      *
@@ -101,7 +100,6 @@ public final class HtmlInputTest extends WebTestCase {
         assertNotNull( secondPage );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -125,7 +123,6 @@ public final class HtmlInputTest extends WebTestCase {
         assertFalse( "After setSelected(false)", checkbox.isChecked() );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -147,7 +144,6 @@ public final class HtmlInputTest extends WebTestCase {
         assertFalse( ((HtmlRadioButtonInput)radioButtons.get(0)).isChecked() );
         assertTrue( ((HtmlRadioButtonInput)radioButtons.get(1)).isChecked() );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -304,5 +300,29 @@ public final class HtmlInputTest extends WebTestCase {
         final KeyDataPair pair = (KeyDataPair)webConnection.getLastParameters().get( 0 );
         assertTrue( pair.getFile().length() != 0 );
     }
-}
 
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testOnchangeNull() throws Exception {
+        final String html =
+            "<html><head>"
+            + "<script>\n"
+            + "  function handler() {}"
+            + "  function test() {\n"
+            + "    var elem = document.getElementById( 'myInput' );\n"
+            + "    elem.onchange = handler;\n"
+            + "    alert( elem.onchange );\n"
+            + "    elem.onchange = null;\n"
+            + "    alert( elem.onchange );\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload=test()>\n"
+            + "  <input id='myInput'>\n"
+            + "</body></html>\n";
+        final String[] expectedAlerts = new String[] {"\nfunction handler() {\n}\n", "null"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+}

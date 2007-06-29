@@ -62,6 +62,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author David K. Taylor
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public class FormTest extends WebTestCase {
     /**
@@ -1203,5 +1204,31 @@ public class FormTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
         assertSame(page1, page2);
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testOnsubmitNull() throws Exception {
+        final String html =
+            "<html><head>"
+            + "<script>\n"
+            + "  function handler() {}"
+            + "  function test() {\n"
+            + "    var form = document.getElementById( 'myForm' );\n"
+            + "    form.onsubmit = handler;\n"
+            + "    alert( form.onsubmit );\n"
+            + "    form.onsubmit = null;\n"
+            + "    alert( form.onsubmit );\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload=test()>\n"
+            + "  <form id='myForm'></form>\n"
+            + "</body></html>\n";
+        
+        final String[] expectedAlerts = new String[] {"\nfunction handler() {\n}\n", "null"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

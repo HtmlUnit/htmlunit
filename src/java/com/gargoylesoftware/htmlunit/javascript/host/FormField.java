@@ -54,11 +54,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public class FormField extends FocusableHostElement {
 
     private static final long serialVersionUID = 3712016051364495710L;
-
 
     /**
      * Sets the associated dom node and sets the enclosing form as parent scope of the current element
@@ -83,7 +83,6 @@ public class FormField extends FocusableHostElement {
         return getHtmlElementOrDie().getAttributeValue( "value" );
     }
 
-
     /**
      *  Set the value of the javascript attribute "value".
      *
@@ -92,7 +91,6 @@ public class FormField extends FocusableHostElement {
     public void jsxSet_value( final String newValue ) {
         getHtmlElementOrDie().setAttributeValue( "value", newValue );
     }
-
 
     /**
      *  Return the value of the javascript attribute "name".
@@ -111,7 +109,6 @@ public class FormField extends FocusableHostElement {
     public void jsxSet_name( final String newName ) {
         getHtmlElementOrDie().setAttributeValue( "name", newName );
     }
-
 
     /**
      *  Return the value of the javascript attribute "form".
@@ -135,8 +132,8 @@ public class FormField extends FocusableHostElement {
      * Set the onchange event handler for this element.
      * @param onchange the new handler
      */
-    public void jsxSet_onchange(final Function onchange) {
-        getHtmlElementOrDie().setEventHandler("onchange", onchange);
+    public void jsxSet_onchange(final Object onchange) {
+        getHtmlElementOrDie().setEventHandler("onchange", (Function) onchange);
     }
 
     /**
@@ -170,7 +167,6 @@ public class FormField extends FocusableHostElement {
         return getHtmlElementOrDie().isAttributeDefined("disabled");
     }
 
-
     /**
      * Set whether or not to disable this element
      * @param disabled True if this is to be disabled.
@@ -193,4 +189,3 @@ public class FormField extends FocusableHostElement {
         return getHtmlElementOrDie().getAttributeValue("tabindex");
     }
 }
-

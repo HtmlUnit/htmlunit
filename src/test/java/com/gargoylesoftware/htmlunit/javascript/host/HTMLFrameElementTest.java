@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Thomas Robbs
  * @author David K. Taylor
+ * @author Ahmed Ashour
  */
 public class HTMLFrameElementTest extends WebTestCase {
     /**
@@ -279,6 +280,31 @@ public class HTMLFrameElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
 
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testOnloadNull() throws Exception {
+        final String html =
+            "<html><head>"
+            + "<script>\n"
+            + "  function handler() {}"
+            + "  function test() {\n"
+            + "    var iframe = document.getElementById( 'myFrame' );\n"
+            + "    iframe.onload = handler;\n"
+            + "    alert( iframe.onload );\n"
+            + "    iframe.onload = null;\n"
+            + "    alert( iframe.onload );\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload=test()>\n"
+            + "  <iframe id='myFrame'></iframe>\n"
+            + "</body></html>\n";
+        final String[] expectedAlerts = new String[] {"\nfunction handler() {\n}\n", "null"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

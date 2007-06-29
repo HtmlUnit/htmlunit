@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour" id="1745024">
+                JavaScript: allow FormField.onchange, form.onsubmit and frame.onload to be set to null (#1745024).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: Add table.cellSpacing and table.cellPadding.
             </action>

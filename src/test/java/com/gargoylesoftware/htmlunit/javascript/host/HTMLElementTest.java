@@ -112,8 +112,7 @@ public class HTMLElementTest extends WebTestCase {
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, firstContent, collectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
     }
-    
-    
+        
     /**
      * @throws Exception on test failure
      */
@@ -1408,33 +1407,6 @@ public class HTMLElementTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(browser, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception If the test fails.
-     */
-    public void testEventHandler_Null() throws Exception {
-        if( notYetImplemented() ) {
-            return;
-        }
-        final String html =
-            "<html><head>"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var elem = document.getElementById( 'myInput' );\n"
-            + "    alert( elem.onchange );\n"
-            + "    elem.onchange = null;\n"
-            + "    alert( elem.onchange );\n"
-            + "  }\n"
-            + "</script>\n"
-            + "<body onload=test()>\n"
-            + "  <input id='myInput'>\n"
-            + "</body></html>\n";
-        
-        final String[] expectedAlerts = new String[] {"null", "null"};
-        final List collectedAlerts = new ArrayList();
-        loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
