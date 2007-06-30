@@ -185,7 +185,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         return defaultValue_;
     }
 
-
     /**
      * {@inheritDoc} This implementation is empty; only checkboxes and radio buttons
      * really care what the default checked value is.
@@ -276,7 +275,6 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     public final String getReadOnlyAttribute() {
         return getAttributeValue("readonly");
     }
-
 
     /**
      * Return the value of the attribute "tabindex".  Refer to the

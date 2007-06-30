@@ -265,7 +265,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         return newWebWindow.getScriptObject();
     }
 
-
     /**
      * Creates a popup window Open a new window
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createpopup.asp">
@@ -375,7 +374,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         getWebWindow().getThreadManager().stopThread(timeoutId);
     }
 
-
     /**
      * Return the javascript property "navigator"
      * @return The document
@@ -383,7 +381,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public Navigator jsxGet_navigator() {
         return navigator_;
     }
-
 
     /**
      * Return the window property.  This is a synonym for "self"
@@ -393,7 +390,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         return this;
     }
 
-
     /**
      * Return the "self" property
      * @return this
@@ -402,7 +398,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         return this;
     }
 
-
     /**
      * Return the location property
      * @return The location property
@@ -410,7 +405,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public Location jsxGet_location() {
         return location_;
     }
-
 
     /**
      * Set the location property.  This will cause a reload of the window.
@@ -421,7 +415,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         location_.jsxSet_href(newLocation);
     }
 
-
     /**
      * Return the "screen" property
      * @return the screen property
@@ -430,7 +423,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         return screen_;
     }
 
-
     /**
      * Return the "history" property
      * @return the "history" property
@@ -438,7 +430,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public History jsxGet_history() {
         return history_;
     }
-
 
     /**
      * Initialize the object.
@@ -476,7 +467,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         location_.initialize(this);
     }
 
-
     /**
      * Initialize the object.
      * @param enclosedPage The page containing the javascript.
@@ -501,7 +491,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public void initialize() {
     }
 
-
     /**
      * Return the value of the top property
      * @return The value of "top"
@@ -511,7 +500,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         return (SimpleScriptable)topWebWindow.getScriptObject();
     }
 
-
     /**
      * Return the value of the parent property
      * @return the value of window.parent
@@ -520,7 +508,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final WebWindow parentWebWindow = webWindow_.getParentWindow();
         return (SimpleScriptable)parentWebWindow.getScriptObject();
     }
-
 
     /**
      * Return the value of the opener property.
@@ -536,7 +523,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
         return null;
     }
-
 
     /**
      * Return the (i)frame in which the window is contained.
@@ -587,7 +573,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         return webWindow_;
     }
 
-
     /**
      * Set the focus to this element.
      */
@@ -595,14 +580,12 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         webWindow_.getWebClient().setCurrentWindow(webWindow_);
     }
 
-
     /**
      * Remove focus from this element
      */
     public void jsxFunction_blur() {
         getLog().debug( "Window.blur() not implemented" );
     }
-
 
     /**
      * Close this window

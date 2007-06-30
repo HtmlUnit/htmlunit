@@ -103,7 +103,6 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             return startIndex_ - ((TextConstant)o).startIndex_;
         }
     }
-    
 
     /**
      * Add the specified values in the given textConstants if it does not intersect
@@ -162,5 +161,4 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         }
         return sourceCode;
     }
-
 }

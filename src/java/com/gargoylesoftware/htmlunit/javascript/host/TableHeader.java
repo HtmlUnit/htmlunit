@@ -59,5 +59,4 @@ public class TableHeader extends RowContainer {
      */
     public void jsConstructor() {
     }
-
 }

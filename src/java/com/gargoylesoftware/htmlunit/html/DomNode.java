@@ -139,7 +139,7 @@ public abstract class DomNode implements Cloneable, Serializable {
     private String readyState_;
 
     /** We do lazy initialization on this since the vast majority of HtmlElement instances won't need it. */
-    private PropertyChangeSupport propertyChangeSupport_ = null;
+    private PropertyChangeSupport propertyChangeSupport_;
 
     /** The name of the "element" property.  Used when watching property change events. */
     public static final String PROPERTY_ELEMENT = "element";

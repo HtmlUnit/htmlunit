@@ -185,7 +185,7 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Executes the <tt>onreadystatechange</tt> handler when simlating IE,
+     * Executes the <tt>onreadystatechange</tt> handler when simulating IE,
      * as well as executing the script itself, if necessary.
      * {@inheritDoc}
      */

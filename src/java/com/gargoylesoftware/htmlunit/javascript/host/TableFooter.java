@@ -59,5 +59,4 @@ public class TableFooter extends RowContainer {
      */
     public void jsConstructor() {
     }
-
 }

@@ -145,7 +145,6 @@ public final class InputElementFactory implements IElementFactory {
         return result;
     }
 
-
     /**
      * Return the log that is being used for all scripting objects
      * @return The log.

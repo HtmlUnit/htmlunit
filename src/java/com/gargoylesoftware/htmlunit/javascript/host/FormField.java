@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 
 /**
- * Base class for all javascript object correspondig to form fields.
+ * Base class for all javascript object corresponding to form fields.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

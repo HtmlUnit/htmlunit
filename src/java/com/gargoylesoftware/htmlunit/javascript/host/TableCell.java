@@ -68,5 +68,4 @@ public class TableCell extends HTMLElement {
         final HtmlTableRow row = cell.getEnclosingRow();
         return new Integer( row.getCells().indexOf( cell ) );
     }
-
 }

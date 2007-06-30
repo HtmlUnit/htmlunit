@@ -50,13 +50,11 @@ public final class TextImpl extends CharacterDataImpl {
 
     private static final long serialVersionUID = 3548915177419561974L;
 
-
     /**
      * Create an instance.  Javascript objects must have a default constructor.
      */
     public TextImpl() {
     }
-
 
     /**
      * Javascript constructor.  This must be declared in every javascript file because
@@ -65,13 +63,11 @@ public final class TextImpl extends CharacterDataImpl {
     public void jsConstructor() {
     }
 
-
     /**
      * Initialize this object
      */
     public void initialize() {
     }
-
 
     /**
      * Split a Text node in two.

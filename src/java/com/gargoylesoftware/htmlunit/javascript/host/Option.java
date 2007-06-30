@@ -63,7 +63,6 @@ public class Option extends HTMLElement {
     public Option() {
     }
 
-
     /**
      * Javascript constructor.  This must be declared in every javascript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
@@ -110,7 +109,6 @@ public class Option extends HTMLElement {
         getHtmlOption().setValueAttribute( newValue );
     }
 
-
     /**
      * Return the value of the "text" property
      * @return The text property
@@ -142,7 +140,6 @@ public class Option extends HTMLElement {
     public boolean jsxGet_selected() {
         return getHtmlOption().isSelected();
     }
-
 
     /**
      * Set the value of the "selected" property

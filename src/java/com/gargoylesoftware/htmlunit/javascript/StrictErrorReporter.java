@@ -61,7 +61,6 @@ public class StrictErrorReporter implements ErrorReporter {
         log_ = log;
     }
 
-
     /**
      * Log a warning
      *
@@ -76,7 +75,6 @@ public class StrictErrorReporter implements ErrorReporter {
             final String lineSource, final int lineOffset) {
         log_.warn(format( "warning", message, sourceName, line, lineSource, lineOffset ));
     }
-
 
     /**
      * Log an error
@@ -95,7 +93,6 @@ public class StrictErrorReporter implements ErrorReporter {
         throw new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
     }
 
-
     /**
      * Log a runtime error
      *
@@ -113,7 +110,6 @@ public class StrictErrorReporter implements ErrorReporter {
         log_.error(format( "runtimeError", message, sourceName, line, lineSource, lineOffset ));
         return new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
     }
-
 
     private String format(
             final String prefix, final String message, final String sourceName,

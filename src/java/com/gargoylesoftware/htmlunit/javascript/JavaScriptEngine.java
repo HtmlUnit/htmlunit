@@ -147,7 +147,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
      * Initialises all the JS stuff for the window
      * @param webWindow the web window
      * @param context the current context
-     * @throws Exception if something ging wrong
+     * @throws Exception if something goes wrong
      */
     private void init(final WebWindow webWindow, final Context context) throws Exception {
         final WebClient webClient = webWindow.getWebClient();
@@ -482,7 +482,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
 
     /**
      * Facility for ContextAction usage.
-     * ContextAction should be prefered because according to Rhino doc it 
+     * ContextAction should be preferred because according to Rhino doc it 
      * "guarantees proper association of Context instances with the current thread and is faster". 
      */
     private abstract class HtmlUnitContextAction implements ContextAction {

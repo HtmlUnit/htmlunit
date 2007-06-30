@@ -82,5 +82,4 @@ public final class UnknownElementFactory implements IElementFactory {
         }
         return new UnknownHtmlElement(page, namespaceURI, qualifiedName, attributeMap);
     }
-
 }

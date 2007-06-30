@@ -320,7 +320,6 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         return array;
     }
 
-
     /**
      * Just for debug purpose.
      * {@inheritDoc}

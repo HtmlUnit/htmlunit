@@ -138,7 +138,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
      * Converts js arguments to java arguments
      * @param context the current context
      * @param scope the current scope
-     * @param jsArgs the javascrip arguments
+     * @param jsArgs the javascript arguments
      * @return the java arguments
      */
     Object[] convertJSArgsToJavaArgs(final Context context, final Scriptable scope, final Object[] jsArgs) {

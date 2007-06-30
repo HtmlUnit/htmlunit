@@ -128,7 +128,6 @@ public class SimpleScriptable extends ScriptableObject {
         }
     }
 
-
     /**
      * Return the html element that corresponds to this javascript object or throw an exception
      * if one cannot be found.
@@ -149,7 +148,6 @@ public class SimpleScriptable extends ScriptableObject {
         return domNode_;
     }
 
-
     /**
      * Return the html element that corresponds to this javascript object
      * or null if an element hasn't been set.
@@ -158,7 +156,6 @@ public class SimpleScriptable extends ScriptableObject {
     public final HtmlElement getHtmlElementOrNull() {
         return (HtmlElement) getDomNodeOrNull();
     }
-
 
     /**
      * Set the DOM node that corresponds to this javascript object
@@ -196,7 +193,6 @@ public class SimpleScriptable extends ScriptableObject {
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
     }
-
 
     /**
      * Return the javascript object that corresponds to the specified object.
@@ -268,7 +264,6 @@ public class SimpleScriptable extends ScriptableObject {
         return scriptable;
     }
 
-
     /**
      * Get the prototype object for the given host class
      * @param javaScriptClass the host class
@@ -277,8 +272,6 @@ public class SimpleScriptable extends ScriptableObject {
     protected Scriptable getPrototype(final Class javaScriptClass) {
         return getWindow().getPrototype(javaScriptClass);
     }
-
-
 
     /**
      * Gets a transformer getting the scriptable element for an HtmlElement
@@ -310,7 +303,6 @@ public class SimpleScriptable extends ScriptableObject {
         }
     }
 
-
     /**
      * Return the string value at the specified location in the argument list.  If the index is larger
      * than the argument array then return the default value.
@@ -323,7 +315,6 @@ public class SimpleScriptable extends ScriptableObject {
     public static String getStringArg( final int index, final Object[] args, final String defaultValue ) {
         return Context.toString(getObjectArg(index, args, defaultValue));
     }
-
 
     /**
      * Return the boolean value at the specified location in the argument list.  If the index is larger
@@ -340,7 +331,6 @@ public class SimpleScriptable extends ScriptableObject {
         return Context.toBoolean(getObjectArg(index, args, defaultBoolean));
     }
 
-
     /**
      * Return the int value at the specified location in the argument list.  If the index is larger
      * than the argument array then return the default value.
@@ -353,7 +343,6 @@ public class SimpleScriptable extends ScriptableObject {
     public static int getIntArg( final int index, final Object[] args, final int defaultValue ) {
         return (int) Context.toNumber(getObjectArg(index, args, new Integer(defaultValue)));
     }
-
 
     /**
      * Return the javascript default value of this object.  This is the javascript equivilent

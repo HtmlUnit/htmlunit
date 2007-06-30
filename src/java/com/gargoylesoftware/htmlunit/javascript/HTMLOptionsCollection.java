@@ -87,7 +87,6 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         htmlSelect_ = select;
     }
 
-
     /**
      * <p>Return the object at the specified index.</p>
      *
@@ -126,7 +125,6 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         return NOT_FOUND;
     }
 
-
     /**
      * <p>Return the object at the specified index.</p>
      *
@@ -136,7 +134,6 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     public Object jsxFunction_item(final int index) {
         return get(index, null);
     }
-
 
     /**
      * Set the index property
@@ -163,7 +160,6 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
             }
         }
     }
-
 
    /**
     * <p>Return the number of elements in this array</p>
@@ -253,5 +249,4 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         // depending on the value of index
         put(index, null, newOptionObject);
     }
-
 }

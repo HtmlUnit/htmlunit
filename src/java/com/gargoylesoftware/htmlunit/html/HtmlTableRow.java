@@ -119,8 +119,6 @@ public class HtmlTableRow extends ClickableElement {
         throw new IndexOutOfBoundsException();
     }
 
-
-
     /**
      * Return the value of the attribute "align".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -132,7 +130,6 @@ public class HtmlTableRow extends ClickableElement {
     public final String getAlignAttribute() {
         return getAttributeValue("align");
     }
-
 
     /**
      * Return the value of the attribute "char".  Refer to the
@@ -146,7 +143,6 @@ public class HtmlTableRow extends ClickableElement {
         return getAttributeValue("char");
     }
 
-
     /**
      * Return the value of the attribute "charoff".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -158,7 +154,6 @@ public class HtmlTableRow extends ClickableElement {
     public final String getCharoffAttribute() {
         return getAttributeValue("charoff");
     }
-
 
     /**
      * Return the value of the attribute "valign".  Refer to the
@@ -179,7 +174,6 @@ public class HtmlTableRow extends ClickableElement {
     public HtmlTable getEnclosingTable() {
         return (HtmlTable) getEnclosingElement("table");
     }
-
 
     /**
      * Return the value of the attribute "bgcolor".  Refer to the

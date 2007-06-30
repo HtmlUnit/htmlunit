@@ -100,7 +100,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * Return a List containing all of the currently selected options. The following special
      * conditions can occur if the element is in single select mode:
      * <ul>
-     * <li>if multiple options are errouneously selected, the last one is returned</li>
+     * <li>if multiple options are erroneously selected, the last one is returned</li>
      * <li>if no options are selected, the first one is returned</li>
      * </ul>
      *
@@ -148,7 +148,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
                     theSize = Integer.parseInt(getSizeAttribute());
                 }
                 catch (final NumberFormatException e) {
-                    // Differet browsers have different (and odd) tolerances for invalid
+                    // Different browsers have different (and odd) tolerances for invalid
                     // size attributes so we'll just assume anything invalid is "1"
                     theSize = 1;
                 }

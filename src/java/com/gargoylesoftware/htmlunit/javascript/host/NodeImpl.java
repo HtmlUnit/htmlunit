@@ -73,14 +73,12 @@ public class NodeImpl extends SimpleScriptable {
     public NodeImpl() {
     }
 
-
     /**
      * Javascript constructor.  This must be declared in every javascript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
     }
-
 
     /**
      * Get the JavaScript property "nodeType" for the current node.
@@ -89,7 +87,6 @@ public class NodeImpl extends SimpleScriptable {
     public short jsxGet_nodeType() {
         return getDomNodeOrDie().getNodeType();
     }
-
 
     /**
      * Get the JavaScript property "nodeName" for the current node.
@@ -108,7 +105,6 @@ public class NodeImpl extends SimpleScriptable {
         return nodeName;
     }
 
-
     /**
      * Get the JavaScript property "nodeValue" for the current node.
      * @return The node value
@@ -117,7 +113,6 @@ public class NodeImpl extends SimpleScriptable {
         return getDomNodeOrDie().getNodeValue();
     }
 
-
     /**
      * Set the JavaScript property "nodeValue" for the current node.
      * @param newValue The new node value
@@ -125,7 +120,6 @@ public class NodeImpl extends SimpleScriptable {
     public void jsxSet_nodeValue( final String newValue ) {
         getDomNodeOrDie().setNodeValue( newValue );
     }
-
 
     /**
      * Add a DOM node to the node
@@ -150,7 +144,6 @@ public class NodeImpl extends SimpleScriptable {
         return appendedChild;
     }
 
-
     /**
      * Duplicate an XML node
      * @param deep If true, recursively clone all descendents.  Otherwise,
@@ -162,7 +155,6 @@ public class NodeImpl extends SimpleScriptable {
         final DomNode clonedNode = domNode.cloneNode( deep );
         return getJavaScriptNode(clonedNode);
     }
-
 
     /**
      * Add a DOM node as a child to this node before the referenced
@@ -208,7 +200,6 @@ public class NodeImpl extends SimpleScriptable {
         }
         return appendedChild;
     }
-
 
     /**
      * Remove a DOM node from this node
@@ -256,7 +247,6 @@ public class NodeImpl extends SimpleScriptable {
         return childNodes_;
     }
 
-
     /**
      * Replace a child DOM node with another DOM node.
      * @param newChildObject The node to add as a child of this node
@@ -284,7 +274,6 @@ public class NodeImpl extends SimpleScriptable {
         return removedChild;
     }
 
-
     /**
      * Get the JavaScript property "parentNode" for the node that
      * contains the current node.
@@ -293,7 +282,6 @@ public class NodeImpl extends SimpleScriptable {
     public Object jsxGet_parentNode() {
         return getJavaScriptNode( getDomNodeOrDie().getParentNode() );
     }
-
 
     /**
      * Get the JavaScript property "nextSibling" for the node that
@@ -305,7 +293,6 @@ public class NodeImpl extends SimpleScriptable {
         return getJavaScriptNode( getDomNodeOrDie().getNextSibling() );
     }
 
-
     /**
      * Get the JavaScript property "previousSibling" for the node that
      * contains the current node.
@@ -315,7 +302,6 @@ public class NodeImpl extends SimpleScriptable {
     public Object jsxGet_previousSibling() {
         return getJavaScriptNode( getDomNodeOrDie().getPreviousSibling() );
     }
-
 
     /**
      * Get the JavaScript property "firstChild" for the node that
@@ -327,7 +313,6 @@ public class NodeImpl extends SimpleScriptable {
         return getJavaScriptNode( getDomNodeOrDie().getFirstChild() );
     }
 
-
     /**
      * Get the JavaScript property "lastChild" for the node that
      * contains the current node.
@@ -337,7 +322,6 @@ public class NodeImpl extends SimpleScriptable {
     public Object jsxGet_lastChild() {
         return getJavaScriptNode( getDomNodeOrDie().getLastChild() );
     }
-
 
     /**
      * Get the JavaScript node for a given DomNode
@@ -351,7 +335,6 @@ public class NodeImpl extends SimpleScriptable {
         return getScriptableFor( domNode );
     }
 
-
     /**
      * Allows the registration of event listeners on the event target.
      * @param type the event type to listen for (like "onclick")
@@ -362,7 +345,6 @@ public class NodeImpl extends SimpleScriptable {
     public void jsxFunction_attachEvent(final String type, final Function listener) {
         jsxFunction_addEventListener( type, listener, false );
     }
-
 
     /**
      * Allows the registration of event listeners on the event target.
@@ -375,7 +357,6 @@ public class NodeImpl extends SimpleScriptable {
         getDomNodeOrDie().setEventHandler( type, listener );
     }
 
-
     /**
      * Allows the removal of event listeners on the event target.
      * @param type the event type to listen for (like "onclick")
@@ -387,7 +368,6 @@ public class NodeImpl extends SimpleScriptable {
         jsxFunction_removeEventListener( type, listener, false );
     }
 
-
     /**
      * Allows the removal of event listeners on the event target.
      * @param type the event type to listen for (like "onclick")
@@ -398,5 +378,4 @@ public class NodeImpl extends SimpleScriptable {
     public void jsxFunction_removeEventListener(final String type, final Function listener, final boolean useCapture) {
         getDomNodeOrDie().removeEventHandler( type );
     }
-
 }

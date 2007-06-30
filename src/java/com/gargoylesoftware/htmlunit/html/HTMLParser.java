@@ -162,7 +162,7 @@ public final class HTMLParser {
 
     /**
      * Set the flag to control validation of the HTML content that is outside of the
-     * BODY and HTML tags.  This flag is false by default to maintain compatability with
+     * BODY and HTML tags.  This flag is false by default to maintain compatibility with
      * current NekoHTML defaults.
      * @param ignoreOutsideContent - boolean flag to set
      */
@@ -171,7 +171,7 @@ public final class HTMLParser {
     }
 
     /**
-     * Get the state of the flag to ignore contant outside the BODY and HTML tags
+     * Get the state of the flag to ignore content outside the BODY and HTML tags
      * @return - The current state
      */
     public static boolean getIgnoreOutsideContent() {
@@ -442,7 +442,7 @@ public final class HTMLParser {
         }
 
         /**
-         * pick up the chacracter data accumulated so far and add it to the
+         * pick up the character data accumulated so far and add it to the
          * current element as a text node
          */
         private void handleCharacters() {
@@ -462,7 +462,6 @@ public final class HTMLParser {
 
             final IElementFactory factory = (IElementFactory)ELEMENT_FACTORIES.get(tagName);
 
-            //return factory != null ? factory : UnknownElementFactory.instance;
             if(factory != null) {
                 return factory;
             }

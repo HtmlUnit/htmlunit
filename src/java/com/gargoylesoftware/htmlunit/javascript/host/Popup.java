@@ -102,7 +102,6 @@ public class Popup extends SimpleScriptable {
         return document_;
     }
 
-
     /**
      * Indicates if the popup is opened.
      * @return <code>true</code> if opened
@@ -140,6 +139,7 @@ class PopupPseudoWebWindow implements WebWindow {
 
         webClient_.initialize(this);
     }
+
     /**
      * @see com.gargoylesoftware.htmlunit.WebWindow#getEnclosedPage()
      */
@@ -209,5 +209,4 @@ class PopupPseudoWebWindow implements WebWindow {
     public void setScriptObject(final Object scriptObject) {
         scriptObject_ = scriptObject;
     }
-
 }

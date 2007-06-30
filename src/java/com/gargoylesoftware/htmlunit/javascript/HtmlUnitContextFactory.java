@@ -150,5 +150,4 @@ public class HtmlUnitContextFactory extends ContextFactory {
         tcx.startClock();
         return super.doTopCall(callable, cx, scope, thisObj, args);
     }
-
 }

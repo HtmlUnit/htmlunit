@@ -57,7 +57,6 @@ public class StrictErrorHandler implements ErrorHandler {
         throw rethrow;
     }
 
-
     /**
      * An error occurred.
      *
@@ -67,7 +66,6 @@ public class StrictErrorHandler implements ErrorHandler {
     public void error( final SAXParseException rethrow ) throws SAXParseException {
         throw rethrow;
     }
-
 
     /**
      * A fatal error occurred.
@@ -79,4 +77,3 @@ public class StrictErrorHandler implements ErrorHandler {
         throw rethrow;
     }
 }
-

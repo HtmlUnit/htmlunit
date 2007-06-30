@@ -76,5 +76,4 @@ public class HtmlTextInput extends HtmlInput {
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
-
 }

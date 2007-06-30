@@ -85,7 +85,6 @@ public abstract class TableRowGroup extends ClickableElement {
         return resultList;
     }
 
-
     /**
      * Return the value of the attribute "align".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -97,7 +96,6 @@ public abstract class TableRowGroup extends ClickableElement {
     public final String getAlignAttribute() {
         return getAttributeValue("align");
     }
-
 
     /**
      * Return the value of the attribute "char".  Refer to the
@@ -111,7 +109,6 @@ public abstract class TableRowGroup extends ClickableElement {
         return getAttributeValue("char");
     }
 
-
     /**
      * Return the value of the attribute "charoff".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -123,7 +120,6 @@ public abstract class TableRowGroup extends ClickableElement {
     public final String getCharoffAttribute() {
         return getAttributeValue("charoff");
     }
-
 
     /**
      * Return the value of the attribute "valign".  Refer to the
