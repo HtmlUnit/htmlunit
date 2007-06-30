@@ -51,7 +51,7 @@ public interface IElementFactory {
      * @param page the enclosing page for the new element. Note that the element is <em>not</em> yet added
      * into the DOM tree.
      * @param tagName the tag name. Most factories will be responsible for a specific tag, but this
-     * parameter is passed in for factories that dont follow this rule
+     * parameter is passed in for factories that don't follow this rule
      * @param attributes the attributes encountered during XML/HTML parsing. Possibly <code>null</code>
      * if no attributes specified
      * @return the newly created and initialized element

@@ -68,14 +68,13 @@ public abstract class ScriptEngine {
     }
 
     /**
-     * Create an instance for the specifed web client
+     * Create an instance for the specified web client
      * @param webClient The web client.
      */
     protected ScriptEngine( final WebClient webClient ) {
         Assert.notNull("webClient", webClient);
         webClient_ = webClient;
     }
-
 
     /**
      * Return the web client that this engine is associated with.
@@ -118,7 +117,6 @@ public abstract class ScriptEngine {
     public abstract Object execute(
         final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement );
 
-
     /**
      * Call a JavaScript function and return the result.
      * @param htmlPage The page
@@ -134,7 +132,6 @@ public abstract class ScriptEngine {
         final Object thisObject,
         final Object [] args,
         final HtmlElement htmlElementScope );
-
 
     /**
      * Return the log object that is being used to log information about the script engine.

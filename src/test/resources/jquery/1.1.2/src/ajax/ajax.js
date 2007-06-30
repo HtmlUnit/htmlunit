@@ -210,7 +210,7 @@ if ( !window.XMLHttpRequest )
  *
  * The XMLHttpRequest and settings used for that request are passed
  * as arguments to the callback. A third argument, an exception object,
- * is passed if an exception occured while processing the request.
+ * is passed if an exception occurred while processing the request.
  *
  * @example $("#msg").ajaxError(function(request, settings){
  *   $(this).append("<li>Error requesting page " + settings.url + "</li>");
@@ -530,7 +530,7 @@ jQuery.extend({
 	 * (Function) error - A function to be called if the request fails. The
 	 * function gets passed tree arguments: The XMLHttpRequest object, a
 	 * string describing the type of error that occurred and an optional
-	 * exception object, if one occured.
+	 * exception object, if one occurred.
 	 *
 	 * (Function) success - A function to be called if the request succeeds. The
 	 * function gets passed one argument: The data returned from the server,

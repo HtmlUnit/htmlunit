@@ -102,5 +102,4 @@ public class DomComment extends DomCharacterData {
     public String toString() {
         return asXml();
     }
-    
 }

@@ -51,7 +51,6 @@ public interface DisabledElement {
      */
     boolean isDisabled();
 
-
     /**
      * Return the value of the attribute "disabled".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>

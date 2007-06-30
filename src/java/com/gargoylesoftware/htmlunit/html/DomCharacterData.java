@@ -60,7 +60,6 @@ public abstract class DomCharacterData extends DomNode {
         data_ = data;
     }
 
-
     /**
      * Get the data character string for this character data.
      * @return The data String.
@@ -68,7 +67,6 @@ public abstract class DomCharacterData extends DomNode {
     public String getData() {
         return data_;
     }
-
 
     /**
      * Set the data character string to the new string.
@@ -94,7 +92,6 @@ public abstract class DomCharacterData extends DomNode {
         return data_.length();
     }
 
-
     /**
      * Append a string to character data.
      * @param newData The string to be appended to the character data.
@@ -102,7 +99,6 @@ public abstract class DomCharacterData extends DomNode {
     public void appendData(final String newData) {
         data_ += newData;
     }
-
 
     /**
      * Delete characters from character data.
@@ -123,7 +119,6 @@ public abstract class DomCharacterData extends DomNode {
         }
     }
 
-
     /**
      * Insert a string into character data.
      * @param offset The position within the first character at which
@@ -133,7 +128,6 @@ public abstract class DomCharacterData extends DomNode {
     public void insertData(final int offset, final String arg) {
         data_ = new StringBuffer(data_).insert(offset, arg).toString();
     }
-
 
     /**
      * Replace characters of character data with a string.
@@ -147,7 +141,6 @@ public abstract class DomCharacterData extends DomNode {
         deleteData(offset, count);
         insertData(offset, arg);
     }
-
 
     /**
      * Extract a substring from character data.

@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * Base class for nodes in the HTML DOM tree. This class is modelled after the
+ * Base class for nodes in the HTML DOM tree. This class is modeled after the
  * W3C DOM specification, but does not implement it.
  *
  * @version $Revision$
@@ -128,7 +128,7 @@ public abstract class DomNode implements Cloneable, Serializable {
 
     /**
      * This is the javascript object corresponding to this DOM node.  It is
-     * declared as Object so that we don't have a dependancy on the rhino jar
+     * declared as Object so that we don't have a dependency on the rhino jar
      * file.<p>
      *
      * It may be null if there isn't a corresponding javascript object.
@@ -258,7 +258,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * 
      * Set the javascript object that corresponds to this node.  This is not
-     * guarenteed to be set even if there is a javascript object for this
+     * guaranteed to be set even if there is a javascript object for this
      * DOM node.
      * @param scriptObject The javascript object.
      */
@@ -290,7 +290,7 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * set the aprent node
+     * Set the parent node
      * @param parent the parent node
      */
     protected void setParentNode(final DomNode parent) {
@@ -708,7 +708,7 @@ public abstract class DomNode implements Cloneable, Serializable {
 
     /**
      * Lifecycle method invoked whenever a node is added to a page. Intended to
-     * be overriden by nodes which need to perform custom logic when they are
+     * be overridden by nodes which need to perform custom logic when they are
      * added to a page. This method is recursive, so if you override it, please
      * be sure to call <tt>super.onAddedToPage()</tt>.
      */
@@ -784,7 +784,7 @@ public abstract class DomNode implements Cloneable, Serializable {
 
     /**
      * Remove a property change listener from this node.
-     * @param listener The istener.
+     * @param listener The listener.
      */
     public final synchronized void removePropertyChangeListener(
         final PropertyChangeListener listener ) {

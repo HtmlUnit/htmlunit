@@ -50,7 +50,6 @@ public class ObjectInstantiationException extends RuntimeException {
     private static final long serialVersionUID = 8831953284047722098L;
     private final Throwable causeException_;
 
-
     /**
      * Create an instance.
      * @param message A message explaining the failure
@@ -61,7 +60,6 @@ public class ObjectInstantiationException extends RuntimeException {
         causeException_ = cause;
     }
 
-
     /**
      * Return the exception that had been thrown during instantiation of the object.
      * @return The cause exception
@@ -69,7 +67,6 @@ public class ObjectInstantiationException extends RuntimeException {
     public Throwable getCauseException() {
         return causeException_;
     }
-
 
     /**
      *  Print the stack trace. If this exception contains another exception then
@@ -84,7 +81,6 @@ public class ObjectInstantiationException extends RuntimeException {
             causeException_.printStackTrace( writer );
         }
     }
-
 
     /**
      *  Print the stack trace. If this exception contains another exception then

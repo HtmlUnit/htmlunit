@@ -44,7 +44,7 @@ import org.apache.commons.collections.map.ListOrderedMap;
 import org.xml.sax.Attributes;
 
 /**
- * Element factory which createss elements by calling the constructor on a
+ * Element factory which creates elements by calling the constructor on a
  * given {@link com.gargoylesoftware.htmlunit.html.HtmlElement} subclass.
  * The constructor is expected to take 2 arguments of type
  * {@link com.gargoylesoftware.htmlunit.html.HtmlPage} and {@link java.util.Map}

@@ -173,7 +173,7 @@ public class DocumentTest extends WebTestCase {
         testDocumentWrite_AssignedToVar(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
 
         // but FF doesn't 
-        final String[] expectedAlertsFF = {"exception occured"};
+        final String[] expectedAlertsFF = {"exception occurred"};
         testDocumentWrite_AssignedToVar(BrowserVersion.MOZILLA_1_0, expectedAlertsFF);
     }
 
@@ -189,7 +189,7 @@ public class DocumentTest extends WebTestCase {
             + "var d = document.writeln\n"
             + "try {\n"
             + "d('foo')\n"
-            + "} catch (e) { alert('exception occured') }\n"
+            + "} catch (e) { alert('exception occurred') }\n"
             + "document.writeln('foo')\n"
             + "}"
             + "</script></head><body onload='doTheFoo()'>\n"

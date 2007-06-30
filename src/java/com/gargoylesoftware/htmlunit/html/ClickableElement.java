@@ -77,7 +77,6 @@ public abstract class ClickableElement extends StyledElement {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 
-
     /**
      * Simulate clicking this element.
      *
@@ -93,7 +92,7 @@ public abstract class ClickableElement extends StyledElement {
     /**
      * Simulate clicking this element.
      *
-     * @param shiftKey true if SHIFT is presssed
+     * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
      * 
@@ -151,7 +150,7 @@ public abstract class ClickableElement extends StyledElement {
      * Simulate double clicking this element, note that
      * {@link #click(boolean, boolean, boolean)} is called first.
      *
-     * @param shiftKey true if SHIFT is presssed
+     * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
      * 
@@ -210,7 +209,7 @@ public abstract class ClickableElement extends StyledElement {
      * @param defaultPage The default page to return if the action does not
      * load a new page.
      * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occured
+     * @throws IOException If an IO error occurred
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
         return defaultPage;
@@ -227,7 +226,7 @@ public abstract class ClickableElement extends StyledElement {
      * @param defaultPage The default page to return if the action does not
      * load a new page.
      * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occured
+     * @throws IOException If an IO error occurred
      */
     protected Page doDblClickAction(final Page defaultPage) throws IOException {
         return defaultPage;
@@ -245,7 +244,6 @@ public abstract class ClickableElement extends StyledElement {
         return getAttributeValue("lang");
     }
 
-
     /**
      * Return the value of the attribute "xml:lang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -257,7 +255,6 @@ public abstract class ClickableElement extends StyledElement {
     public final String getXmlLangAttribute() {
         return getAttributeValue("xml:lang");
     }
-
 
     /**
      * Return the value of the attribute "dir".  Refer to the
@@ -271,7 +268,6 @@ public abstract class ClickableElement extends StyledElement {
         return getAttributeValue("dir");
     }
 
-
     /**
      * Return the value of the attribute "onclick".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -283,7 +279,6 @@ public abstract class ClickableElement extends StyledElement {
     public final String getOnClickAttribute() {
         return getAttributeValue("onclick");
     }
-
 
     /**
      * Return the value of the attribute "ondblclick".  Refer to the
@@ -297,7 +292,6 @@ public abstract class ClickableElement extends StyledElement {
         return getAttributeValue("ondblclick");
     }
 
-
     /**
      * Return the value of the attribute "onmousedown".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -309,7 +303,6 @@ public abstract class ClickableElement extends StyledElement {
     public final String getOnMouseDownAttribute() {
         return getAttributeValue("onmousedown");
     }
-
 
     /**
      * Return the value of the attribute "onmouseup".  Refer to the
@@ -323,7 +316,6 @@ public abstract class ClickableElement extends StyledElement {
         return getAttributeValue("onmouseup");
     }
 
-
     /**
      * Return the value of the attribute "onmouseover".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -335,7 +327,6 @@ public abstract class ClickableElement extends StyledElement {
     public final String getOnMouseOverAttribute() {
         return getAttributeValue("onmouseover");
     }
-
 
     /**
      * Return the value of the attribute "onmousemove".  Refer to the
@@ -349,7 +340,6 @@ public abstract class ClickableElement extends StyledElement {
         return getAttributeValue("onmousemove");
     }
 
-
     /**
      * Return the value of the attribute "onmouseout".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -361,7 +351,6 @@ public abstract class ClickableElement extends StyledElement {
     public final String getOnMouseOutAttribute() {
         return getAttributeValue("onmouseout");
     }
-
 
     /**
      * Return the value of the attribute "onkeypress".  Refer to the
@@ -375,7 +364,6 @@ public abstract class ClickableElement extends StyledElement {
         return getAttributeValue("onkeypress");
     }
 
-
     /**
      * Return the value of the attribute "onkeydown".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -387,7 +375,6 @@ public abstract class ClickableElement extends StyledElement {
     public final String getOnKeyDownAttribute() {
         return getAttributeValue("onkeydown");
     }
-
 
     /**
      * Return the value of the attribute "onkeyup".  Refer to the
@@ -404,7 +391,7 @@ public abstract class ClickableElement extends StyledElement {
     /**
      * Return true if the state update should be done before onclick event
      * handling.
-     * This is expected to be overriden to return "true" by derived classes
+     * This is expected to be overridden to return "true" by derived classes
      * like HtmlCheckBoxInput.
      * @return Return true if state update should be done first.
      */

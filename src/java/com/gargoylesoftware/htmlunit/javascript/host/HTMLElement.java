@@ -584,13 +584,13 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             HTMLParser.parseFragment(proxyNode, source);
         }
         catch (final IOException e) {
-            getLog().error("Unexpected exception occured while parsing html snippet", e);
-            throw Context.reportRuntimeError("Unexpected exception occured while parsing html snippet: "
+            getLog().error("Unexpected exception occurred while parsing html snippet", e);
+            throw Context.reportRuntimeError("Unexpected exception occurred while parsing html snippet: "
                     + e.getMessage());
         }
         catch (final SAXException e) {
-            getLog().error("Unexpected exception occured while parsing html snippet", e);
-            throw Context.reportRuntimeError("Unexpected exception occured while parsing html snippet: "
+            getLog().error("Unexpected exception occurred while parsing html snippet", e);
+            throw Context.reportRuntimeError("Unexpected exception occurred while parsing html snippet: "
                     + e.getMessage());
         }
     }

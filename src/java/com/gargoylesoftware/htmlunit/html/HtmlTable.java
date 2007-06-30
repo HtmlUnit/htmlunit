@@ -354,7 +354,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * an iterator that moves over all rows in tis table. The iterator will also
+     * an iterator that moves over all rows in this table. The iterator will also
      * enter into nested row group elements (header, footer and body)
      */
     private class RowIterator implements Iterator {
@@ -412,7 +412,7 @@ public class HtmlTable extends ClickableElement {
 
         /**
          * set the internal position to the next row, starting at the given node
-         * @param node the node to marik as the next row. If this is not a row, the
+         * @param node the node to mark as the next row. If this is not a row, the
          * next reachable row will be marked
          */
         private void setNextRow(final DomNode node) {

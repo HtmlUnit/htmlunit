@@ -78,7 +78,7 @@ public final class ScriptExceptionTest extends WebTestCase {
     }
 
     /**
-     * Test access to the page where the exception occured from the exception
+     * Test access to the page where the exception occurred from the exception
      * @throws Exception if the test fails
      */
     public void testGetPage() throws Exception {

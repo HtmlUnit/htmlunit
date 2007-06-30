@@ -198,7 +198,6 @@ public class ScriptException extends RuntimeException {
         return stringWriter.toString();
     }
 
-
     /**
      * Return the source code line that failed
      * @return the source code line that failed
@@ -206,7 +205,6 @@ public class ScriptException extends RuntimeException {
     public String getScriptSourceCode() {
         return scriptSourceCode_;
     }
-
 
     /**
      * Return the line of source that was being executed when this exception was
@@ -259,8 +257,8 @@ public class ScriptException extends RuntimeException {
     }
 
     /**
-     * Gets the html page in which the script error occured.<br/>
-     * Caution: this page may be only partially parsed if the exception occured in a script
+     * Gets the html page in which the script error occurred.<br/>
+     * Caution: this page may be only partially parsed if the exception occurred in a script
      * executed at parsing time.
      * @return the page
      */

@@ -55,7 +55,7 @@ import java.net.URL;
 public class WaitingRefreshHandler implements RefreshHandler {
     private final int maxwait_;
     /**
-     * Create a WaitingRefreshHandler that will wait whatver time the server or 
+     * Create a WaitingRefreshHandler that will wait whatever time the server or 
      * content asks unless it it longer than maxwait.
      * 
      * @param maxwait The maximum wait time before the refresh (in seconds). A value
@@ -66,7 +66,7 @@ public class WaitingRefreshHandler implements RefreshHandler {
         maxwait_ = maxwait;
     }
     /**
-     * Create a WaitingRefreshHandler that will always wait whatver time the server or 
+     * Create a WaitingRefreshHandler that will always wait whatever time the server or 
      * content asks.
      */
     public WaitingRefreshHandler() {

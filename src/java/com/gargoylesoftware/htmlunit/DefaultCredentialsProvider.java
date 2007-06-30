@@ -177,7 +177,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param host The host we are authenticating for.
      * @param port The port we are authenticating for.
      * @param proxy Whether or not we are authenticating using a proxy.
-     * @return The credentials correponding to the specified schem, host and port or <code>null</code> if already asked
+     * @return The credentials corresponding to the specified scheme, host and port or <code>null</code> if already asked
      * for it to avoid infinite loop
      * @throws CredentialsNotAvailableException If the specified credentials cannot be provided due to an error.
      * @see CredentialsProvider#getCredentials(AuthScheme, String, int, boolean)
@@ -186,7 +186,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
         throws CredentialsNotAvailableException {
 
         // it's the responsibility of the CredentialProvider to answer only once with a given Credentials
-        // to avoid infinte loop if it is incorrect
+        // to avoid infinite loop if it is incorrect
         // see http://issues.apache.org/bugzilla/show_bug.cgi?id=8140
         if (alreadyAnswered(scheme, host, port, proxy)) {
             getLog().debug("Already answered for " + buildKey(scheme, host, port, proxy)
@@ -221,7 +221,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * @param scheme the request scheme for which Credentials are asked
-     * @param scope the configured autorization scope
+     * @param scope the configured authorization scope
      * @return <code>true</code> if the scope's realm matches the one of the scheme 
      */
     protected boolean matchRealm(final AuthScope scope, final AuthScheme scheme) {
@@ -230,7 +230,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * @param port the request port for which Credentials are asked
-     * @param scope the configured autorization scope
+     * @param scope the configured authorization scope
      * @return <code>true</code> if the scope's port matches the provided one 
      */
     protected boolean matchPort(final AuthScope scope, final int port) {
@@ -239,7 +239,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * @param host the request host for which Credentials are asked
-     * @param scope the configured autorization scope
+     * @param scope the configured authorization scope
      * @return <code>true</code> if the scope's host matches the provided one 
      */
     protected boolean matchHost(final AuthScope scope, final String host) {
@@ -248,7 +248,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * @param scheme the request scheme for which Credentials are asked
-     * @param scope the configured autorization scope
+     * @param scope the configured authorization scope
      * @return <code>true</code> if the scope's scheme matches the provided one 
      */
     protected boolean matchScheme(final AuthScope scope, final AuthScheme scheme) {

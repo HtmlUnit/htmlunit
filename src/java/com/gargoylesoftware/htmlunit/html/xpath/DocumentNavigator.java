@@ -190,8 +190,6 @@ public class DocumentNavigator extends DefaultNavigator {
      * and null otherwise.
      */
     public String getElementNamespaceUri (final Object object) {
-
-        //return object instanceof HtmlElement ? "" : null;
         if(object instanceof HtmlElement) {
             return "";
         }
@@ -391,7 +389,7 @@ public class DocumentNavigator extends DefaultNavigator {
      *  Returns the element whose ID is given by elementId.
      *  If no such element exists, returns null.
      *  Attributes with the name "ID" are not of type ID unless so defined.
-     *  Atribute types are only known if when the parser understands DTD's or
+     *  Attribute types are only known if when the parser understands DTD's or
      *  schemas that declare attributes of type ID. When JAXP is used, you
      *  must call <code>setValidating(true)</code> on the
      *  DocumentBuilderFactory.

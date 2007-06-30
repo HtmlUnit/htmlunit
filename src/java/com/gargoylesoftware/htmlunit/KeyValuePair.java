@@ -47,7 +47,6 @@ public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {
 
     private static final long serialVersionUID = 6163390788878023849L;
 
-
     /**
      *  Create an instance
      *
@@ -58,7 +57,6 @@ public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {
         super( key, value );
     }
 
-
     /**
      *  Return the key
      *
@@ -67,7 +65,6 @@ public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {
     public String getKey() {
         return getName();
     }
-
 
     /**
      *  Return the value
@@ -78,7 +75,6 @@ public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {
         return super.getValue();
     }
 
-
     /**
      * Return a string representation of this object
      * @return a string representation of this object
@@ -87,4 +83,3 @@ public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {
         return "KeyValuePair(\""+getKey()+"\", \""+getValue()+"\")";
     }
 }
-

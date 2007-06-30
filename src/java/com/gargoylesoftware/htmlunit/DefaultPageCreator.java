@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
- * The default implementation of PageCreator. Designed to be extented for easier 
+ * The default implementation of PageCreator. Designed to be extended for easier 
  * handling of new content types. Just check the content type in createPage()
  * and call super(createPage()) if your custom type isn't found. There are 
  * also protected createXXXXPage() methods for creating the Page types HtmlUnit

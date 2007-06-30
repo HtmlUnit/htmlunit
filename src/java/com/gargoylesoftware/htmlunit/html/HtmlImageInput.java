@@ -141,7 +141,7 @@ public class HtmlImageInput extends HtmlInput {
      * @param defaultPage The default page to return if the action does not
      * load a new page.
      * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occured
+     * @throws IOException If an IO error occurred
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
         return getEnclosingFormOrDie().submit(this);

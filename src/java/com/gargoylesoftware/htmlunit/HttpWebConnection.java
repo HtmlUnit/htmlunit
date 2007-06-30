@@ -338,7 +338,7 @@ public class HttpWebConnection extends WebConnectionImpl {
      * Return the timeout to use for socket and connection timeouts for HttpConnectionManager.
      * is overridden to 0 by StreamingWebConnection which keeps reading after a timeout and
      * must have long running connections explicitly terminated.
-     * @return the WebClient's timout.
+     * @return the WebClient's timeout.
      */
     protected int getTimeout() {
         return getWebClient().getTimeout();

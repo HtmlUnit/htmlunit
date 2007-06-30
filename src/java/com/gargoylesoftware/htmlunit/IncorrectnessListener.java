@@ -48,7 +48,7 @@ package com.gargoylesoftware.htmlunit;
 public interface IncorrectnessListener {
     /**
      * Called to notify an incorrectness.
-     * @param message the explaination of the incorrectness
+     * @param message the explanation of the incorrectness
      * @param origin the object that encountered this incorrectness
      */
     void notify(final String message, final Object origin);

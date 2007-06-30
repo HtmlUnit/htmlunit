@@ -62,7 +62,6 @@ public final class TextUtil {
     /** Private constructor to prevent instantiation */
     private TextUtil() {}
 
-
     /**
      * Return true if the string starts with the specified prefix, irrespective of case.
      * @param stringToCheck The string to check
@@ -85,7 +84,6 @@ public final class TextUtil {
             return stringToCheck.substring(0,prefixLength).toLowerCase().equals(prefix.toLowerCase());
         }
     }
-
 
     /**
      * Convert a string into an input stream.
@@ -166,5 +164,4 @@ public final class TextUtil {
         }
         return contentBytes;
     }
-
 }

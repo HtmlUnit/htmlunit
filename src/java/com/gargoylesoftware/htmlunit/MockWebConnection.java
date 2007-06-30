@@ -178,7 +178,7 @@ public class MockWebConnection extends WebConnectionImpl {
     /**
      * Convenience method that is the same as calling
      * {@link #setResponse(URL,String,int,String,String,List)} with a status
-     * of "200 OK", a content type of "text/html" and no additonal headers.
+     * of "200 OK", a content type of "text/html" and no additional headers.
      *
      * @param url The url that will return the given response
      * @param content The content to return
@@ -190,7 +190,7 @@ public class MockWebConnection extends WebConnectionImpl {
     /**
      * Convenience method that is the same as calling
      * {@link #setResponse(URL,String,int,String,String,List)} with a status
-     * of "200 OK" and no additonal headers.
+     * of "200 OK" and no additional headers.
      *
      * @param url The url that will return the given response
      * @param content The content to return

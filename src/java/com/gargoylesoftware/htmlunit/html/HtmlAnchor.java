@@ -92,7 +92,7 @@ public class HtmlAnchor extends FocusableElement {
      * @param defaultPage The default page to return if the action does not load a new page.
      * @param hrefSuffix the suffix to add to the anchor's href attribute (for instance coordinates from an image map)
      * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occured
+     * @throws IOException If an IO error occurred
      */
     protected Page doClickAction(final Page defaultPage, final String hrefSuffix) throws IOException {
 
@@ -139,7 +139,7 @@ public class HtmlAnchor extends FocusableElement {
      * @param defaultPage The default page to return if the action does not
      * load a new page.
      * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occured
+     * @throws IOException If an IO error occurred
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
         return doClickAction(defaultPage, "");

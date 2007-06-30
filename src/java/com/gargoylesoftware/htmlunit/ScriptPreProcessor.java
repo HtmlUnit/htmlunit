@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
 /**
  * A script pre processor call back. This interface is called when ScriptEngine.execute()
- * is called. It gives developers the oportunity to modify the script to be executed.
+ * is called. It gives developers the opportunity to modify the script to be executed.
  *
  * @version  $Revision$
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>

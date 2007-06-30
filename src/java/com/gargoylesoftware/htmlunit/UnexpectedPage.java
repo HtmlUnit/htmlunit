@@ -92,7 +92,6 @@ public class UnexpectedPage implements Page {
         return webResponse_.getContentAsStream();
     }
 
-
     /**
      *  Return the web response that was originally used to create this page.
      *
@@ -101,7 +100,6 @@ public class UnexpectedPage implements Page {
     public WebResponse getWebResponse() {
         return webResponse_;
     }
-
 
     /**
      * Return the window that this page is sitting inside.
