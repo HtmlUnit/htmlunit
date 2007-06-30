@@ -57,7 +57,7 @@ public class HtmlHiddenInputTest extends WebTestCase {
 
 
     /**
-     * Verifies that a asText() returns "checked" or "unckecked" according to the state of the checkbox.
+     * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.
      * @throws Exception if the test fails
      */
     public void testAsText() throws Exception {

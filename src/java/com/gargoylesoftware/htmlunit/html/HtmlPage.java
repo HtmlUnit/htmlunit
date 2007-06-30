@@ -1477,7 +1477,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      * Runs an event handler taking car to pass him the event in the right form
      * @param handler the handler function
-     * @param event the event that is beeing triggered
+     * @param event the event that is being triggered
      * @param isListener indicates if the function is a listener and therefore if the event has to be passed
      * as parameter even if browser is IE)
      * @return the script execution result

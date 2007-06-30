@@ -147,8 +147,7 @@ public class DomTextTest extends WebTestCase {
     
     
     // ====================================================================================
-    
-    
+        
     private void testPlainText(final String html, final String expectedText) throws Exception {
         final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
 
@@ -160,8 +159,6 @@ public class DomTextTest extends WebTestCase {
         assertEquals(expectedText, node.asText());
     }
 
-    
-    
     private void testAsText(final String html, final String expectedText) throws Exception {
         final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
 

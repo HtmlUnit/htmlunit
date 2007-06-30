@@ -49,7 +49,7 @@ public class HtmlTableCellTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public HtmlTableCellTest( final String name ) {
         super( name );
@@ -57,7 +57,7 @@ public class HtmlTableCellTest extends WebTestCase {
 
 
     /**
-     *  Placeholder for some real tests
+     *  Place holder for some real tests
      */
     public void testFoo() {
     }

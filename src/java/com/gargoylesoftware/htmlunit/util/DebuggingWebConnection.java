@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * to do the real job and save all received responses
  * in the temp directory with an overview page.<br>
  * <br>
- * This may be usefull at conception time to understand what is "browsed".<br>
+ * This may be useful at conception time to understand what is "browsed".<br>
  * <br>
  * Example:
  * <pre>

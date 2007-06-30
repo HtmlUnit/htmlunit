@@ -112,10 +112,10 @@ public final class UrlUtils {
     }
 
     /**
-     * Creates and returns a new URL identical to the specified URL, except using the specified querystring.
+     * Creates and returns a new URL identical to the specified URL, except using the specified query string.
      * @param u The URL on which to base the returned URL.
-     * @param newQuery The new querystring to use in the returned URL.
-     * @return A new URL identical to the specified URL, except using the specified querystring.
+     * @param newQuery The new query string to use in the returned URL.
+     * @return A new URL identical to the specified URL, except using the specified query string.
      * @throws MalformedURLException If there is a problem creating the new URL.
      */
     public static URL getUrlWithNewQuery( final URL u, final String newQuery ) throws MalformedURLException {
@@ -127,7 +127,7 @@ public final class UrlUtils {
      * @param protocol The protocol to use. May not be <tt>null</tt>.
      * @param host The host to use. May not be <tt>null</tt>.
      * @param port The port to use. May be <tt>-1</tt> if no port is specified.
-     * @param path The path to use. May be <tt>null</tt> and may ommitt the initial <tt>'/'</tt>.
+     * @param path The path to use. May be <tt>null</tt> and may omit the initial <tt>'/'</tt>.
      * @param ref The reference to use. May be <tt>null</tt>. Must not include the <tt>'#'</tt>.
      * @param query The query to use. May be <tt>null</tt>. Must not include the <tt>'?'</tt>.
      * @return A new URL based on the specified fragments.

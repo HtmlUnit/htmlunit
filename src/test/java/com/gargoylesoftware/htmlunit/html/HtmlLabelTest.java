@@ -59,7 +59,7 @@ public class HtmlLabelTest extends WebTestCase {
     }
 
     /**
-     * Verifies that a checkbox is togled when the related label is clicked.
+     * Verifies that a checkbox is toggled when the related label is clicked.
      * @throws Exception if the test fails
      */
     public void test_click() throws Exception {

@@ -64,7 +64,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
     }
 
     /**
-     * Verifies that a asText() returns "checked" or "unckecked" according to the state of the radio.
+     * Verifies that a asText() returns "checked" or "unchecked" according to the state of the radio.
      * @throws Exception if the test fails
      */
     public void test_asTextWhenNotChecked() throws Exception {

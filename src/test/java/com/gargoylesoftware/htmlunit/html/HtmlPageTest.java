@@ -461,7 +461,6 @@ public class HtmlPageTest extends WebTestCase {
         catch (final AssertionFailedError e) {
             //pass
         }
-
     }
 
     /**

@@ -74,7 +74,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
 
     
     /**
-     * Reset the JavaScriptConfiguration file for each test to it's inital clean state.
+     * Reset the JavaScriptConfiguration file for each test to it's initial clean state.
      * 
      * @throws Exception if the test fails
      */
@@ -84,7 +84,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
 
     /**
-     * Reset the JavaScriptConfiguration file for each test to it's inital clean state.
+     * Reset the JavaScriptConfiguration file for each test to it's initial clean state.
      * 
      * @throws Exception if the test fails
      */
@@ -478,7 +478,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     /**
      * Test that the data in the JavaScriptConfiguration file matches the classes in listed
      * properties and functions.  The first step is to get the configuration using a special method which
-     * ignores the browser and javascript constrants.  This checks that there is a method for each item in 
+     * ignores the browser and javascript constraints.  This checks that there is a method for each item in 
      * the configuration file and fails by throwing an exception.
      * 
      * The second step is to go through each class and determine if for each jsGet, jsSet, and jsFunction class,

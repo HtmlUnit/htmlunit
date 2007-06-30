@@ -156,7 +156,7 @@ public class HTMLParserListenerTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("foo", page.getTitleText());
         
-        // ignore colum and key
+        // ignore column and key
         final MessageInfo expectedError = new MessageInfo(false, 
                 "End element <head> automatically closes element <title>.",
                 URL_FIRST, 4, -1, null);
