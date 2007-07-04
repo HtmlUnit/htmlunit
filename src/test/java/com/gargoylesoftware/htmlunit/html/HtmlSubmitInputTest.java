@@ -201,4 +201,23 @@ public class HtmlSubmitInputTest extends WebTestCase {
         assertFalse( page.asText().contains( "Submit Query" ) );
         assertTrue( page.asXml().contains( "value=\"\"" ) );
     }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testOutsideForm() throws Exception {
+        final String html =
+            "<html><head></head>\n"
+            + "<body>\n"
+            + "<input id='myInput' type='submit' onclick='alert(1)'>\n"
+            + "</body></html>\n";
+
+        final String[] expectedAlerts = new String[] {"1"};
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(html, collectedAlerts);
+        final HtmlSubmitInput input = (HtmlSubmitInput)page.getHtmlElementById( "myInput" );
+        input.click();
+        
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

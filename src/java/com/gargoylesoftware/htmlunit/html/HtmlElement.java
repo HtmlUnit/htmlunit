@@ -385,7 +385,7 @@ public abstract class HtmlElement extends DomNode {
      * Simulate pressing a key on this element
      *
      * @param keyCode the key you wish to press
-     * @param shiftKey true if SHIFT is presssed
+     * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
      */

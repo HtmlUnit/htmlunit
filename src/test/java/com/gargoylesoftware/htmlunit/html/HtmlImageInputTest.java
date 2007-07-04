@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -50,6 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlImageInputTest extends WebTestCase {
     /**
@@ -60,7 +62,6 @@ public class HtmlImageInputTest extends WebTestCase {
     public HtmlImageInputTest( final String name ) {
         super( name );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -151,5 +152,24 @@ public class HtmlImageInputTest extends WebTestCase {
         assertEquals(
             expectedPairs,
             webConnection.getLastParameters() );
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testOutsideForm() throws Exception {
+        final String html =
+            "<html><head></head>\n"
+            + "<body>\n"
+            + "<input id='myInput' type='image' src='test.png' onclick='alert(1)'>\n"
+            + "</body></html>\n";
+
+        final String[] expectedAlerts = new String[] {"1"};
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(html, collectedAlerts);
+        final HtmlImageInput input = (HtmlImageInput)page.getHtmlElementById( "myInput" );
+        input.click();
+        
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

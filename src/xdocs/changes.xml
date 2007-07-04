@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="asashour" id="1747454">
+                HtmlImageInput, HtmlResetInput and HtmlSubmitInput can be clicked if exist outside an enclosing form. (#1747454).
+            </action>
             <action type="add" dev="asashour" id="1745024">
                 JavaScript: allow FormField.onchange, form.onsubmit and frame.onload to be set to null (#1745024).
             </action>

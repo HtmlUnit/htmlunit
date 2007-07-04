@@ -144,9 +144,14 @@ public class HtmlImageInput extends HtmlInput {
      * @throws IOException If an IO error occurred
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
-        return getEnclosingFormOrDie().submit(this);
+        final HtmlForm form = getEnclosingForm();
+        if( form != null ) {
+            return form.submit(this);
+        }
+        else {
+            return super.doClickAction(defaultPage);
+        }
     }
-
 
     /**
      * Simulate clicking this input with a pointing device.  The x and y coordinates
@@ -178,5 +183,4 @@ public class HtmlImageInput extends HtmlInput {
         super.setDefaultValue( defaultValue );
         setValueAttribute( defaultValue );
     }
-
 }
