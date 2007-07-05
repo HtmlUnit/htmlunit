@@ -89,7 +89,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author Dominique Broeglin
  * @author Noboru Sinohara
- * @author <a href="mailto:chen_jun@users.sourceforge.net"> Chen Jun</a>
+ * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
@@ -313,8 +313,8 @@ public class WebClient implements Serializable {
      * @param  webWindow The WebWindow to load this request into
      * @param  parameters Parameter object for the web request
      * @return  See above
-     * @exception  IOException If an IO error occurs
-     * @exception  FailingHttpStatusCodeException If the server returns a
+     * @throws  IOException If an IO error occurs
+     * @throws  FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
      *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true 
      *      
@@ -364,10 +364,10 @@ public class WebClient implements Serializable {
      *  be passed into the javascript open() method.
      *  @param params Any parameters
      *  @return The new page.
-     *  @exception  FailingHttpStatusCodeException If the server returns a
+     *  @throws  FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
      *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
-     *  @exception IOException If an IO problem occurs. 
+     *  @throws IOException If an IO problem occurs. 
      */
     public Page getPage(final WebWindow opener, final String target, final WebRequestSettings params)
         throws FailingHttpStatusCodeException, IOException {
@@ -405,10 +405,10 @@ public class WebClient implements Serializable {
      * Convenience method to load a web request into the current WebWindow
      *  @param request The request parameters 
      *  @return The new page.
-     *  @exception  FailingHttpStatusCodeException If the server returns a
+     *  @throws  FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
      *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
-     *  @exception IOException If an IO problem occurs.
+     *  @throws IOException If an IO problem occurs.
      *  @see #getPage(WebWindow,WebRequestSettings) 
      */
     public Page getPage(final WebRequestSettings request) throws IOException,
@@ -1140,8 +1140,7 @@ public class WebClient implements Serializable {
      * @param baseUrl The base url
      * @param relativeUrl The relative url
      * @return See above
-     * @exception MalformedURLException If an error occurred when creating a URL
-     *                object
+     * @throws MalformedURLException If an error occurred when creating a URL object
      */
     public static URL expandUrl( final URL baseUrl, final String relativeUrl )
         throws MalformedURLException {

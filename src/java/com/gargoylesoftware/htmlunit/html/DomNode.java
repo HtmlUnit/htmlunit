@@ -1011,7 +1011,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * The listener is registered for all nodes of this DomNode.
      * 
      * @param listener the dom structure change listener to be added.
-     * @see #removeDomChangeListener(HtmlAttributeChangeListener)
+     * @see #removeDomChangeListener(DomChangeListener)
      */
     public void addDomChangeListener( final DomChangeListener listener ) {
         Assert.notNull("listener", listener);
