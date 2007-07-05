@@ -771,7 +771,9 @@ public abstract class DomNode implements Cloneable, Serializable {
     /**
      * Add a property change listener to this node.
      * @param listener The new listener.
+     * @deprecated Not used
      */
+    //deprecated after 1.11
     public final synchronized void addPropertyChangeListener(
         final PropertyChangeListener listener ) {
 
@@ -785,7 +787,9 @@ public abstract class DomNode implements Cloneable, Serializable {
     /**
      * Remove a property change listener from this node.
      * @param listener The listener.
+     * @deprecated Not used
      */
+    //deprecated after 1.11
     public final synchronized void removePropertyChangeListener(
         final PropertyChangeListener listener ) {
 
@@ -800,7 +804,9 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param propertyName The name of the property.
      * @param oldValue The old value.
      * @param newValue The new value.
+     * @deprecated Not used
      */
+    //deprecated after 1.11
     protected final synchronized void firePropertyChange(
         final String propertyName, final Object oldValue, final Object newValue ) {
 
