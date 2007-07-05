@@ -297,4 +297,108 @@ public class DomNodeTest extends WebTestCase {
         assertFalse(iterator.hasNext());
     }
 
+    static class DomChangeListenerTestImpl implements DomChangeListener {
+        private final List collectedValues_ = new ArrayList();
+        public void nodeAdded(final DomChangeEvent event) {
+            collectedValues_.add("nodeAdded: " + event.getOriginatingNode().getNodeName() + ',' + 
+                    event.getChangedNode().getNodeName());
+        }
+        public void nodeDeleted(final DomChangeEvent event) {
+            collectedValues_.add("nodeDeleted: " + event.getOriginatingNode().getNodeName() + ',' + 
+                    event.getChangedNode().getNodeName());
+        }
+        List getCollectedValues() {
+            return collectedValues_;
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDomChangeListenerTestImpl_insertBefore() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function clickMe() {\n"
+            + "    var p1 = document.getElementById('p1');\n"
+            + "    var div = document.createElement( 'DIV' );\n" 
+            + "    p1.insertBefore(div);"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<p id='p1' title='myTitle'></p>\n"
+            + "<input id='myButton' type='button' onclick='clickMe()'>\n"
+            + "</body></html>";
+        
+        final String[] expectedValues = {"nodeAdded: p,div"};
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlElement p1 = page.getHtmlElementById("p1");
+        final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
+        p1.addDomChangeListener(listenerImpl);
+        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        
+        myButton.click();
+        assertEquals(expectedValues, listenerImpl.getCollectedValues());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDomChangeListenerTestImpl_appendChild() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function clickMe() {\n"
+            + "    var p1 = document.getElementById('p1');\n"
+            + "    var div = document.createElement( 'DIV' );\n" 
+            + "    p1.appendChild(div);"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<p id='p1' title='myTitle'></p>\n"
+            + "<input id='myButton' type='button' onclick='clickMe()'>\n"
+            + "</body></html>";
+        
+        final String[] expectedValues = {"nodeAdded: p,div"};
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlElement p1 = page.getHtmlElementById("p1");
+        final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
+        p1.addDomChangeListener(listenerImpl);
+        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        
+        myButton.click();
+        assertEquals(expectedValues, listenerImpl.getCollectedValues());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDomChangeListenerTestImpl_removeChild() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function clickMe() {\n"
+            + "    var p1 = document.getElementById('p1');\n"
+            + "    var div = document.getElementById('myDiv');\n" 
+            + "    div.removeChild(p1);"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<div id='myDiv'><p id='p1' title='myTitle'></p></div>\n"
+            + "<input id='myButton' type='button' onclick='clickMe()'>\n"
+            + "</body></html>";
+        
+        final String[] expectedValues = {"nodeDeleted: p,p"};
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlElement p1 = page.getHtmlElementById("p1");
+        final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
+        p1.addDomChangeListener(listenerImpl);
+        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        
+        myButton.click();
+        assertEquals(expectedValues, listenerImpl.getCollectedValues());
+    }
 }

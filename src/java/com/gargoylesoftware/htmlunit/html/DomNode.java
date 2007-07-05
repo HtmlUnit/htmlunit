@@ -42,6 +42,7 @@ import java.beans.PropertyChangeSupport;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -163,6 +164,8 @@ public abstract class DomNode implements Cloneable, Serializable {
      * The column number in the source page where the DOM node ends.
      */
     private int endColumnNumber_;
+
+    private List/*DomChangeListener*/ domListeners_;
 
     /**
      * Never call this, used for Serialization.
@@ -625,6 +628,8 @@ public abstract class DomNode implements Cloneable, Serializable {
         node.parent_ = this;
 
         getPage().notifyNodeAdded(node);
+        
+        fireNodeAddded(this, node);
 
         return node;
     }
@@ -659,6 +664,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         newNode.parent_ = parent_;
 
         getPage().notifyNodeAdded(newNode);
+        fireNodeAddded(this, newNode);
     }
 
     /**
@@ -671,6 +677,8 @@ public abstract class DomNode implements Cloneable, Serializable {
         }
         basicRemove();
         getPage().notifyNodeRemoved(this);
+
+        fireNodeDeleted(this, this);
     }
 
     /**
@@ -996,5 +1004,79 @@ public abstract class DomNode implements Cloneable, Serializable {
     protected void notifyIncorrectness(final String message) {
         final IncorrectnessListener incorrectnessListener = getPage().getWebClient().getIncorrectnessListener();
         incorrectnessListener.notify(message, this);
+    }
+
+    /**
+     * Adds a DomChangeListener to the listener list.
+     * The listener is registered for all nodes of this DomNode.
+     * 
+     * @param listener the dom structure change listener to be added.
+     * @see #removeDomChangeListener(HtmlAttributeChangeListener)
+     */
+    public void addDomChangeListener( final DomChangeListener listener ) {
+        Assert.notNull("listener", listener);
+        synchronized( this ) {
+            if( domListeners_ == null ) {
+                domListeners_ = new ArrayList();
+            }
+            domListeners_.add( listener );
+        }
+    }
+
+    /**
+     * Removes an HtmlAttributeChangeListener from the listener list.
+     * This method should be used to remove HtmlAttributeChangeListener that were registered
+     * for all attributes of this HtmlElement.
+     * 
+     * @param listener the dom structure change listener to be removed.
+     * @see #addDomChangeListener(DomChangeListener)
+     */
+    public void removeDomChangeListener( final DomChangeListener listener ) {
+        Assert.notNull("listener", listener);
+        synchronized( this ) {
+            if( domListeners_ != null ) {
+                domListeners_.remove( listener );
+            }
+        }
+    }
+
+    /**
+     * Support for reporting dom changes.
+     * This method can be called when a node has been added and it will send the 
+     * appropriate DomChangeEvent to any registered DomChangeListeners.
+     * 
+     * @param source the node that is sending the event.
+     * @param addedNode the node that has been added.
+     */
+    protected void fireNodeAddded(final DomNode source, final DomNode addedNode) {
+        if( domListeners_ != null ) {
+            final DomChangeEvent event = new DomChangeEvent(source, addedNode);
+            synchronized (this) {
+                for( final Iterator iterator = domListeners_.iterator(); iterator.hasNext(); ) {
+                    final DomChangeListener listener = (DomChangeListener)iterator.next();
+                    listener.nodeAdded(event);
+                }
+            }
+        }
+    }
+
+    /**
+     * Support for reporting dom changes.
+     * This method can be called when a node has been deleted and it will send the 
+     * appropriate DomChangeEvent to any registered DomChangeListeners.
+     * 
+     * @param source the node that is sending the event.
+     * @param deletedNode the node that has been deleted.
+     */
+    protected void fireNodeDeleted(final DomNode source, final DomNode deletedNode) {
+        if( domListeners_ != null ) {
+            final DomChangeEvent event = new DomChangeEvent(source, deletedNode);
+            synchronized (this) {
+                for( final Iterator iterator = domListeners_.iterator(); iterator.hasNext(); ) {
+                    final DomChangeListener listener = (DomChangeListener)iterator.next();
+                    listener.nodeDeleted(event);
+                }
+            }
+        }
     }
 }

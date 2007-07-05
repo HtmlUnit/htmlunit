@@ -874,6 +874,7 @@ public abstract class HtmlElement extends DomNode {
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     public void removeHtmlAttributeChangeListener( final HtmlAttributeChangeListener listener ) {
+        Assert.notNull("listener", listener);
         synchronized( this ) {
             if( attributeListeners_ != null ) {
                 attributeListeners_.remove( listener );

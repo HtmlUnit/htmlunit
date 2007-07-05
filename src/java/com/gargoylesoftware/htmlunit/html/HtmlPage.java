@@ -1640,6 +1640,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @see #removeHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     public void addHtmlAttributeChangeListener( final HtmlAttributeChangeListener listener ) {
+        Assert.notNull("listener", listener);
         synchronized( this ) {
             if( attributeListeners_ == null ) {
                 attributeListeners_ = new ArrayList();
@@ -1657,6 +1658,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     public void removeHtmlAttributeChangeListener( final HtmlAttributeChangeListener listener ) {
+        Assert.notNull("listener", listener);
         synchronized( this ) {
             if( attributeListeners_ != null ) {
                 attributeListeners_.remove( listener );
