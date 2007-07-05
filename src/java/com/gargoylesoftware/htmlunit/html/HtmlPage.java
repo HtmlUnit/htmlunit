@@ -1668,7 +1668,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * Notifies all registered listeners for the given event to add an attribute.
      * @param event the event to fire
      */
-    void fireHtmlAttributeAdded(final HtmlAttributeEvent event) {
+    void fireHtmlAttributeAdded(final HtmlAttributeChangeEvent event) {
         synchronized (this) {
             if( attributeListeners_ != null ) {
                 for( final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext(); ) {
@@ -1683,7 +1683,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * Notifies all registered listeners for the given event to replace an attribute.
      * @param event the event to fire
      */
-    void fireHtmlAttributeReplaced(final HtmlAttributeEvent event) {
+    void fireHtmlAttributeReplaced(final HtmlAttributeChangeEvent event) {
         synchronized (this) {
             if( attributeListeners_ != null ) {
                 for( final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext(); ) {
@@ -1698,7 +1698,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * Notifies all registered listeners for the given event to remove an attribute.
      * @param event the event to fire
      */
-    void fireHtmlAttributeRemoved(final HtmlAttributeEvent event) {
+    void fireHtmlAttributeRemoved(final HtmlAttributeChangeEvent event) {
         synchronized (this) {
             if( attributeListeners_ != null ) {
                 for( final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext(); ) {

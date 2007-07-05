@@ -228,16 +228,16 @@ public class HtmlElementTest extends WebTestCase {
     
     static class HtmlAttributeChangeListenerTestImpl implements HtmlAttributeChangeListener {
         private final List collectedValues_ = new ArrayList();
-        public void attributeAdded(final HtmlAttributeEvent event) {
+        public void attributeAdded(final HtmlAttributeChangeEvent event) {
             collectedValues_.add( "attributeAdded: " + event.getHtmlElement().getTagName() + ',' + 
                     event.getName() + ',' + event.getValue() );
         }
-        public void attributeRemoved(final HtmlAttributeEvent event) {
+        public void attributeRemoved(final HtmlAttributeChangeEvent event) {
             collectedValues_.add( "attributeRemoved: " + event.getHtmlElement().getTagName() + ',' + 
                     event.getName() + ',' + event.getValue() );
         }
     
-        public void attributeReplaced(final HtmlAttributeEvent event) {
+        public void attributeReplaced(final HtmlAttributeChangeEvent event) {
             collectedValues_.add( "attributeReplaced: " + event.getHtmlElement().getTagName() + ',' + 
                     event.getName() + ',' + event.getValue() );
         }

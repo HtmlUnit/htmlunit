@@ -172,12 +172,12 @@ public abstract class HtmlElement extends DomNode {
             getPage().addIdElement(this);
         }
 
-        final HtmlAttributeEvent event;
+        final HtmlAttributeChangeEvent event;
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
-            event = new HtmlAttributeEvent(this, attributeName, attributeValue);
+            event = new HtmlAttributeChangeEvent(this, attributeName, attributeValue);
         }
         else {
-            event = new HtmlAttributeEvent(this, attributeName, oldAttributeValue);
+            event = new HtmlAttributeChangeEvent(this, attributeName, oldAttributeValue);
         }
         
         if( attributeListeners_ != null ) {
@@ -213,7 +213,7 @@ public abstract class HtmlElement extends DomNode {
         final String attributevalue = getAttributeValue(attributeName);
         attributes_.remove(attributeName.toLowerCase());
 
-        final HtmlAttributeEvent event = new HtmlAttributeEvent( this, attributeName, attributevalue );
+        final HtmlAttributeChangeEvent event = new HtmlAttributeChangeEvent( this, attributeName, attributevalue );
         if (attributeListeners_ != null) {
             synchronized (this) {
                 for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {

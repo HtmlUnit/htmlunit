@@ -43,7 +43,7 @@ package com.gargoylesoftware.htmlunit.html;
  * 
  * @version $Revision$
  * @author Ahmed Ashour
- * @see HtmlAttributeEvent
+ * @see HtmlAttributeChangeEvent
  */
 public interface HtmlAttributeChangeListener {
 
