@@ -47,7 +47,7 @@ import java.util.EventObject;
  * @author Ahmed Ashour 
  * @see HtmlAttributeChangeListener
  */
-public class HtmlAttributeEvent extends EventObject {
+public class HtmlAttributeChangeEvent extends EventObject {
 
     private final String name_;
     private final String value_;
@@ -60,7 +60,7 @@ public class HtmlAttributeEvent extends EventObject {
      * @param name the name of the attribute that changed on the element.
      * @param value the value of the attribute that has been added, removed, or replaced.
      */
-    public HtmlAttributeEvent(final HtmlElement element, final String name, final String value) {
+    public HtmlAttributeChangeEvent(final HtmlElement element, final String name, final String value) {
         super( element );
         this.name_ = name;
         this.value_ = value;
