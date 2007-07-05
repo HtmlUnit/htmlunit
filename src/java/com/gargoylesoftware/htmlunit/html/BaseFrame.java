@@ -65,18 +65,6 @@ public abstract class BaseFrame extends StyledElement {
     private final WebWindow enclosedWindow_ = new FrameWindow(this);
 
     /**
-     * @deprecated Please use {@link com.gargoylesoftware.htmlunit.html.FrameWindow} instead
-     */
-    public final class FrameWindow extends com.gargoylesoftware.htmlunit.html.FrameWindow {
-        /**
-         * {@inheritDoc}
-         */
-        FrameWindow(final BaseFrame frame) {
-            super(frame);
-        }
-    }
-
-    /**
      * Create an instance of BaseFrame
      *
      * @param namespaceURI the URI that identifies an XML namespace.

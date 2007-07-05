@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="remove" dev="asashour">
+                Remove deprecated WebClient.getThrowExceptionOnFailingStatusCode and BaseFrame.FrameWindow.
+            </action>
             <action type="update" dev="asashour" id="1747454">
                 HtmlImageInput, HtmlResetInput and HtmlSubmitInput can be clicked if exist outside an enclosing form. (#1747454).
             </action>

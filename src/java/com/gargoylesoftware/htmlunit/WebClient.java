@@ -494,20 +494,6 @@ public class WebClient implements Serializable {
         throwExceptionOnFailingStatusCode_ = enabled;
     }
 
-
-    /**
-     *  Return true if an exception will be thrown in the event of a failing
-     *  response code.
-     *
-     * @return  See above
-     * @see  #setThrowExceptionOnFailingStatusCode
-     * @deprecated after 1.7. Use {@link #isThrowExceptionOnFailingStatusCode()} instead
-     */
-    public boolean getThrowExceptionOnFailingStatusCode() {
-        return throwExceptionOnFailingStatusCode_;
-    }
-
-
     /**
      * Return true if an exception will be thrown in the event of a failing response code.
      * @return See above
