@@ -46,6 +46,7 @@ import java.net.URL;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ahmed Ashour
  */
 public class Version {
     /**
@@ -59,14 +60,10 @@ public class Version {
             return;
         }
 
-        final Package aPackage = Package.getPackage("com.gargoylesoftware.htmlunit");
+        System.out.println(getProductName());
+        System.out.println(getCopyRight());
 
-        System.out.println("HTMLUnit");
-        System.out.println("Copyright (C) 2002-2006 Gargoyle Software Inc. All rights reserved.");
-
-        if( aPackage != null ) {
-            System.out.println("Version: "+aPackage.getImplementationVersion());
-        }
+        System.out.println("Version: "+getProductVersion());
     }
 
     private void runSanityCheck() throws Exception {
@@ -77,4 +74,27 @@ public class Version {
         System.out.println("SanityCheck complete.");
     }
 
+    /**
+     * Returns "HTMLUnit".
+     * @return "HTMLUnit"
+     */
+    public static String getProductName() {
+        return "HTMLUnit";
+    }
+    
+    /**
+     * Returns the current implementation version.
+     * @return the current implementation version.
+     */
+    public static String getProductVersion() {
+        return Version.class.getPackage().getImplementationVersion();
+    }
+    
+    /**
+     * Returns the copyright notice.
+     * @return the copyright notice.
+     */
+    public static String getCopyRight() {
+        return "Copyright (C) 2002-2007 Gargoyle Software Inc. All rights reserved.";
+    }
 }
