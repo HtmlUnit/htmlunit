@@ -276,9 +276,9 @@ public class HtmlScript extends HtmlElement {
             return false;
         }
 
-        // If the script node is nested in an iframe or a noframes node, we don't need to execute.
+        // If the script node is nested in an iframe, a noframes, or a noscript node, we don't need to execute.
         for (DomNode o = this; o != null; o = o.getParentNode()) {
-            if (o instanceof HtmlInlineFrame || o instanceof HtmlNoFrames) {
+            if (o instanceof HtmlInlineFrame || o instanceof HtmlNoFrames || o instanceof HtmlNoScript) {
                 return false;
             }
         }

@@ -530,26 +530,6 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testGetInputByName_WithinNoScriptTags() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "    <input type='text' name='textfield' value='*'/>"
-            + "    <noscript>"
-            + "    <input type='submit' name='button' value='foo'/>"
-            + "    </noscript>"
-            + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
-
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
-
-        // Was failing at this point
-        form.getInputByName("button");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
     public void testForSubmit_TwoInputsWithSameName() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>"

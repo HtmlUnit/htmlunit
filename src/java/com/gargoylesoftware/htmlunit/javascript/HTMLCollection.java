@@ -54,6 +54,7 @@ import org.mozilla.javascript.Scriptable;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -67,6 +68,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public class HTMLCollection extends SimpleScriptable implements Function {
     private static final long serialVersionUID = 4049916048017011764L;
@@ -184,6 +186,19 @@ public class HTMLCollection extends SimpleScriptable implements Function {
     private List getElements() {
         try {
             final List list = xpath_.selectNodes(node_);
+
+            if(getWindow().getWebWindow().getWebClient().isJavaScriptEnabled()) {
+                for( int i=0; i < list.size(); i++ ) {
+                    final DomNode element = (DomNode) list.get(i);
+                    for( DomNode parent = element.getParentNode(); parent != null; 
+                        parent = parent.getParentNode() ) {
+                        if( parent instanceof HtmlNoScript ) {
+                            list.remove(i--);
+                            break;
+                        }
+                    }
+                }
+            }
             return list;
         }
         catch (final JaxenException e) {

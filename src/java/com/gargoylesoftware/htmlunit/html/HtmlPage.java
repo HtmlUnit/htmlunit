@@ -1415,7 +1415,18 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      */
     void notifyNodeAdded(final DomNode node) {
         if (node instanceof HtmlElement) {
-            addIdElement((HtmlElement) node);
+            boolean insideNoScript = false;
+            if (getWebClient().isJavaScriptEnabled()) {
+                for( DomNode parent = node.getParentNode(); parent != null; parent = parent.getParentNode()) {
+                    if (parent instanceof HtmlNoScript) {
+                        insideNoScript = true;
+                        break;
+                    }
+                }
+            }
+            if (!insideNoScript) {
+                addIdElement((HtmlElement) node);
+            }
         }
         node.onAddedToPage();
     }
