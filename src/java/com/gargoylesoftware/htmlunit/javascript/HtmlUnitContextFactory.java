@@ -41,9 +41,11 @@ import org.apache.commons.logging.Log;
 import org.mozilla.javascript.Callable;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextFactory;
+import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
 
 /**
  * ContextFactory that supports termination of scripts if they exceed a timeout. Based on example from
@@ -122,6 +124,9 @@ public class HtmlUnitContextFactory extends ContextFactory {
 
         cx.setErrorReporter(new StrictErrorReporter(log_));
         cx.setWrapFactory(new HtmlUnitWrapFactory());
+
+        // register custom RegExp processing
+        ScriptRuntime.setRegExpProxy(cx, new HtmlUnitRegExpProxy(ScriptRuntime.getRegExpProxy(cx)));
 
         return cx;
     }

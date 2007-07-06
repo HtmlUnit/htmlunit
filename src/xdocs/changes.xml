@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem>
+                JavaScript: use custom JDK based regular expression evaluation for String.replace
+                to avoid Rhino problems (speed and wrong evaluation).
+            </action>
             <action type="update" dev="asashour" id="1186639">
                 Elements inside &lt;noscript&gt; are ignored if isJavaScriptEnabled() (#1186639).
             </action>
