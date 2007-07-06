@@ -61,7 +61,7 @@ public class Version {
         }
 
         System.out.println(getProductName());
-        System.out.println(getCopyRight());
+        System.out.println(getCopyright());
 
         System.out.println("Version: "+getProductVersion());
     }
@@ -94,7 +94,7 @@ public class Version {
      * Returns the copyright notice.
      * @return the copyright notice.
      */
-    public static String getCopyRight() {
+    public static String getCopyright() {
         return "Copyright (C) 2002-2007 Gargoyle Software Inc. All rights reserved.";
     }
 }
