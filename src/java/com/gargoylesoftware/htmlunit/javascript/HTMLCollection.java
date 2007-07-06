@@ -187,15 +187,13 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         try {
             final List list = xpath_.selectNodes(node_);
 
-            if(getWindow().getWebWindow().getWebClient().isJavaScriptEnabled()) {
-                for( int i=0; i < list.size(); i++ ) {
-                    final DomNode element = (DomNode) list.get(i);
-                    for( DomNode parent = element.getParentNode(); parent != null; 
-                        parent = parent.getParentNode() ) {
-                        if( parent instanceof HtmlNoScript ) {
-                            list.remove(i--);
-                            break;
-                        }
+            for( int i=0; i < list.size(); i++ ) {
+                final DomNode element = (DomNode) list.get(i);
+                for( DomNode parent = element.getParentNode(); parent != null; 
+                    parent = parent.getParentNode() ) {
+                    if( parent instanceof HtmlNoScript ) {
+                        list.remove(i--);
+                        break;
                     }
                 }
             }
