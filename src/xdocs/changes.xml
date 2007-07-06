@@ -7,7 +7,7 @@
 
     <body>
         <release version="1.12-prerelease">
-            <action type="update" dev="mguillem>
+            <action type="update" dev="mguillem">
                 JavaScript: use custom JDK based regular expression evaluation for String.replace
                 to avoid Rhino problems (speed and wrong evaluation).
             </action>
