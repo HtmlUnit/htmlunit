@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.
- * @version  $Revision: 1129 $
+ * @version  $Revision$
  * @author Marc Guillemot
  */
 public class HtmlUnitRegExpProxyTest extends WebTestCase {
@@ -86,7 +86,6 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         page.executeJavaScriptIfPossible(src_, "custom", page.getDocumentElement());
     }
 
-    
     /** 
      * Test if custom patch is still needed 
      */

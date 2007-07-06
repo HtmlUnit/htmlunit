@@ -49,8 +49,8 @@ import org.mozilla.javascript.regexp.RegExpImpl;
 
 /**
  * Begins customisation of JavaScript RegExp base on JDK regular expression support.
- * @author Marc Guillemot
  * @version $Revision$
+ * @author Marc Guillemot
  */
 public class HtmlUnitRegExpProxy extends RegExpImpl {
     private final RegExpProxy wrapped_;
