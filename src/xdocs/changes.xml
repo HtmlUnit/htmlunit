@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="fix" dev="asashour" id="1065041">
+                FailingHttpStatusCodeException is thrown for failing frame (#1065041).
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: use custom JDK based regular expression evaluation for String.replace
                 to avoid Rhino problems (speed and wrong evaluation).

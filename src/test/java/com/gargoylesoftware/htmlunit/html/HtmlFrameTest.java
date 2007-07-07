@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -50,6 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ahmed Ashour
  */
 public class HtmlFrameTest extends WebTestCase {
 
@@ -161,5 +163,48 @@ public class HtmlFrameTest extends WebTestCase {
         
         // loads something else to trigger frame de-registration
         webClient.getPage(URL_SECOND);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testFailingHttpStatusCodeException()
+        throws Exception {
+
+        final String failingContent
+            = "<html><head><body>Not found</body></html>";
+        
+        final String firstContent
+            = "<html><head><title>First</title></head>"
+            + "<frameset cols='130,*'>"
+            + "  <frame scrolling='no' name='left' src='" + "failing_url" + "' frameborder='1' />"
+            + "  <frame scrolling='auto' name='right' src='" + URL_THIRD + "' frameborder='1' />"
+            + "  <noframes>"
+            + "    <body>Frames not supported</body>"
+            + "  </noframes>"
+            + "</frameset>"
+            + "</html>";
+
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdContent  = "<html><head><title>Third</title></head><body></body></html>";
+
+        final WebClient webClient = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        webConnection.setDefaultResponse(
+                failingContent, 404, "No Found", "text/html" );
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
+
+        webClient.setWebConnection( webConnection );
+
+        try {
+            webClient.getPage(URL_FIRST);
+            fail( "Expected FailingHttpStatusCodeException" );
+        }
+        catch( final FailingHttpStatusCodeException e ) {
+            assertEquals( 404, e.getStatusCode() );
+        }
     }
 }

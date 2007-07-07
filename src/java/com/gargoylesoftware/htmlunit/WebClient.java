@@ -378,7 +378,7 @@ public class WebClient implements Serializable {
      * Convenience method to build an URL and load it into the current WebWindow
      * @param url The url of the new content.
      * @return The new page.
-     * @throws  FailingHttpStatusCodeException If the server returns a
+     * @throws FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
      *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException If an IO problem occurs. 
@@ -392,7 +392,7 @@ public class WebClient implements Serializable {
      * Convenience method to load a URL into the current WebWindow
      * @param url The url of the new content.
      * @return The new page.
-     * @throws  FailingHttpStatusCodeException If the server returns a
+     * @throws FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
      *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException If an IO problem occurs. 
@@ -424,12 +424,15 @@ public class WebClient implements Serializable {
      * @param webResponse The response that will be used to create the new page.
      * @param webWindow The window that the new page will be placed within.
      * @throws IOException If an IO error occurs.
+     * @throws FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the property
+     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true 
      * @return The newly created page.
      */
     public Page loadWebResponseInto(
             final WebResponse webResponse, final WebWindow webWindow )
         throws
-            IOException {
+            IOException, FailingHttpStatusCodeException {
 
         Assert.notNull("webResponse", webResponse);
         Assert.notNull("webWindow", webWindow);

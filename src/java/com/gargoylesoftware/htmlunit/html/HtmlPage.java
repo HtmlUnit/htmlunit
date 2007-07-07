@@ -137,8 +137,11 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      * Initialize this page.
      * @throws IOException If an IO problem occurs.
+     * @throws FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the property
+     *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      */
-    public void initialize() throws IOException {
+    public void initialize() throws IOException, FailingHttpStatusCodeException {
         loadFrames();
         getDocumentElement().setReadyState(STATE_COMPLETE);
         executeOnLoadHandlersIfNeeded();
@@ -1446,8 +1449,11 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * Loads the content of the contained frames. This is done after the page is completely
      * loaded to allow script contained in the frames to reference elements from the
      * page located after the closing </frame> tag. 
+     * @throws FailingHttpStatusCodeException If the server returns a
+     *      failing status code AND the property
+     *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      */
-    void loadFrames() {
+    void loadFrames() throws FailingHttpStatusCodeException{
         final List frameTags = Arrays.asList(new String[] {"frame", "iframe"});
         final List frames = getDocumentElement().getHtmlElementsByTagNames(frameTags);
         for (final Iterator iter=frames.iterator(); iter.hasNext();) {
