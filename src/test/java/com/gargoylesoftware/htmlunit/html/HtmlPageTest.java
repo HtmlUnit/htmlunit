@@ -59,6 +59,7 @@ import org.apache.commons.httpclient.Cookie;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ImmediateRefreshHandler;
+import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
@@ -635,6 +636,78 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals("http://somewhere.com/", page.getFullyQualifiedUrl("http://somewhere.com/"));
         assertEquals(page.getWebResponse().getUrl().toExternalForm() + "foo.html",
                 page.getFullyQualifiedUrl("foo.html"));
+    }
+
+    /**
+     * @throws Exception If an error occurs.
+     */
+    public void testBase_Multiple() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<base href='" + URL_SECOND + "'>\n"
+            + "<base href='" + URL_THIRD + "'>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <a href='somepage.html'>\n"
+            + "</body></html>";
+
+        final WebClient webClient = new WebClient();
+        final List collectedIncorrectness = new ArrayList();
+        final IncorrectnessListener listener = new IncorrectnessListener()
+        {
+            public void notify(final String message, final Object origin) {
+                collectedIncorrectness.add(message);
+            }
+        };
+        webClient.setIncorrectnessListener(listener);
+        
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webClient.setWebConnection(webConnection);
+        webConnection.setDefaultResponse(html);
+        final HtmlPage page = (HtmlPage)webClient.getPage(URL_FIRST);
+        final HtmlAnchor anchor = (HtmlAnchor)page.getAnchors().get(0);
+        anchor.click();
+        
+        final String[] expectedIncorrectness = {
+            "Multiple 'base' detected, only the first is used."
+        };
+        assertEquals(expectedIncorrectness, collectedIncorrectness);
+    }
+
+    /**
+     * @throws Exception If an error occurs.
+     */
+    public void testBase_InsideBody() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <base href='" + URL_SECOND + "'>\n"
+            + "  <a href='somepage.html'>\n"
+            + "</body></html>";
+
+        final WebClient webClient = new WebClient();
+        final List collectedIncorrectness = new ArrayList();
+        final IncorrectnessListener listener = new IncorrectnessListener()
+        {
+            public void notify(final String message, final Object origin) {
+                collectedIncorrectness.add(message);
+            }
+        };
+        webClient.setIncorrectnessListener(listener);
+        
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webClient.setWebConnection(webConnection);
+        webConnection.setDefaultResponse(html);
+        final HtmlPage page = (HtmlPage)webClient.getPage(URL_FIRST);
+        final HtmlAnchor anchor = (HtmlAnchor)page.getAnchors().get(0);
+        final HtmlPage secondPage = (HtmlPage)anchor.click();
+        
+        final String[] expectedIncorrectness = {
+            "Element 'base' must appear in <head>, it is ignored."
+        };
+        assertEquals(expectedIncorrectness, collectedIncorrectness);
+        assertEquals( URL_FIRST + "/somepage.html", secondPage.getWebResponse().getUrl());
     }
 
     /**

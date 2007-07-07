@@ -334,15 +334,31 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     public URL getFullyQualifiedUrl( String relativeUrl )
         throws MalformedURLException {
 
-        final List baseElements = getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("base"));
+        final List baseElements = getDocumentElement().getHtmlElementsByTagNames(Collections.singletonList("base"));
         URL baseUrl;
         if( baseElements.isEmpty() ) {
             baseUrl = webResponse_.getUrl();
         }
         else {
+            if (baseElements.size() > 1) {
+                notifyIncorrectness("Multiple 'base' detected, only the first is used.");
+            }
             final HtmlBase htmlBase = (HtmlBase) baseElements.get(0);
+            boolean insideHead = false;
+            for (DomNode parent = htmlBase.getParentNode(); parent != null; parent = parent.getParentNode()) {
+                if (parent instanceof HtmlHead) {
+                    insideHead = true;
+                    break;
+                }
+            }
+            
+            //http://www.w3.org/TR/1999/REC-html401-19991224/struct/links.html#edef-BASE
+            if (!insideHead) {
+                notifyIncorrectness("Element 'base' must appear in <head>, it is ignored.");
+            }
+            
             final String href = htmlBase.getHrefAttribute();
-            if (StringUtils.isEmpty(href)) {
+            if (!insideHead || StringUtils.isEmpty(href)) {
                 baseUrl = webResponse_.getUrl();
             }
             else {

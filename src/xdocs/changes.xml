@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="asashour" id="1579707">
+                Ignore &lt;base&gt; if inside &lt;body&gt; (#1579707).
+            </action>
             <action type="fix" dev="asashour" id="1065041">
                 FailingHttpStatusCodeException is thrown for failing frame (#1065041).
             </action>
