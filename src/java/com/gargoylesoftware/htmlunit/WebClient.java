@@ -375,7 +375,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Convenience method to build an URL and load it into the current WebWindow
+     * Convenient method to build an URL and load it into the current WebWindow
      * @param url The url of the new content.
      * @return The new page.
      * @throws FailingHttpStatusCodeException If the server returns a
@@ -389,7 +389,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Convenience method to load a URL into the current WebWindow
+     * Convenient method to load a URL into the current WebWindow
      * @param url The url of the new content.
      * @return The new page.
      * @throws FailingHttpStatusCodeException If the server returns a
@@ -402,7 +402,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Convenience method to load a web request into the current WebWindow
+     * Convenient method to load a web request into the current WebWindow
      *  @param request The request parameters 
      *  @return The new page.
      *  @throws  FailingHttpStatusCodeException If the server returns a

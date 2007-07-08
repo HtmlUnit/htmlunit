@@ -418,10 +418,10 @@ public class HttpWebConnection extends WebConnectionImpl {
      * May be overridden by subclasses to return a specialised WebResponseData.
      * @param statusMessage StatusMessage from the response
      * @param headers response headers
-     * @param statusCode reponse status code
+     * @param statusCode response status code
      * @param method request method
      * @return The WebResponseData to use for this response.
-     * @throws IOException if there is a problem reading the rsponse body.
+     * @throws IOException if there is a problem reading the response body.
      */
     protected WebResponseData newWebResponseDataInstance(
             final String statusMessage, 
