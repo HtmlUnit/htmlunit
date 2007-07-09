@@ -132,7 +132,7 @@ public class HtmlResetInputTest extends WebTestCase {
             + "<input id='myInput' type='reset' onclick='alert(1)'>\n"
             + "</body></html>\n";
 
-        final String[] expectedAlerts = new String[] {"1"};
+        final String[] expectedAlerts = {"1"};
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlResetInput input = (HtmlResetInput)page.getHtmlElementById( "myInput" );

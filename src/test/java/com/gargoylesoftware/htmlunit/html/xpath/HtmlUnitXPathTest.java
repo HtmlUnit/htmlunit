@@ -124,7 +124,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
         final XPath xpath = new HtmlUnitXPath("//*");
         final List list = xpath.selectNodes(page);
 
-        final String[] expected = new String[] {"html", "head", "title", "script", "body"};
+        final String[] expected = {"html", "head", "title", "script", "body"};
         final Transformer tagReader = new Transformer() {
             public Object transform(final Object obj) {
                 return ((DomNode) obj).getNodeName();
@@ -189,7 +189,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
         final List nameList = xpath.selectNodes(page);
         final List valueList = new ArrayList(nameList);
 
-        final String[] expectedName = new String[] {"src", "src", "src"};
+        final String[] expectedName = {"src", "src", "src"};
         final Transformer nameReader = new Transformer() {
             public Object transform(final Object obj) {
                 return ((DomNode) obj).getNodeName();
@@ -198,7 +198,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
         CollectionUtils.transform(nameList, nameReader);
         assertEquals(expectedName, nameList);
 
-        final String[] expectedValue = new String[] {"1.png", "2.png", "3.png"};
+        final String[] expectedValue = {"1.png", "2.png", "3.png"};
         final Transformer valueReader = new Transformer() {
             public Object transform(final Object obj) {
                 return ((DomNode) obj).getNodeValue();

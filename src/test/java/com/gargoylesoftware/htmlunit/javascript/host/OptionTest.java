@@ -80,7 +80,7 @@ public class OptionTest extends WebTestCase {
             + "<p>hello world</p>"
             + "</body></html>";
 
-        final String[] expectedAlerts = new String[]{
+        final String[] expectedAlerts = {
             "some text", "some value", "false",
             "some other text", "some other value", "true"
         };

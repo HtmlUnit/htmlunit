@@ -85,7 +85,7 @@ public class ScriptEngineTest extends WebTestCase {
         loadPageAndCollectScripts(content, collectedScripts);
 
         // NO MORE: The last expected is the dummy stub that is needed to initialize the javascript engine
-        final String[] expectedScripts = new String[] {"One", "Two", "Three"};
+        final String[] expectedScripts = {"One", "Two", "Three"};
 
         assertEquals( expectedScripts, collectedScripts );
     }

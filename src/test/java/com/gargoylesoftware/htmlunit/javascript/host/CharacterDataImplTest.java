@@ -96,7 +96,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final String[] expectedAlerts = new String[]{
+        final String[] expectedAlerts = {
             "Some Text", "9", "3", "Some Text", "#text"
         };
         assertEquals( expectedAlerts, collectedAlerts );
@@ -133,7 +133,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final String[] expectedAlerts = new String[]{
+        final String[] expectedAlerts = {
             "Some New Text", "Some New Text"
         };
         assertEquals( expectedAlerts, collectedAlerts );
@@ -170,7 +170,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final String[] expectedAlerts = new String[]{
+        final String[] expectedAlerts = {
             "Some New Text", "Some New Text"
         };
         assertEquals( expectedAlerts, collectedAlerts );
@@ -206,7 +206,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final String[] expectedAlerts = new String[] {"Some Text Appended"};
+        final String[] expectedAlerts = {"Some Text Appended"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -240,7 +240,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final String[] expectedAlerts = new String[] {"Some Text"};
+        final String[] expectedAlerts = {"Some Text"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -274,7 +274,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final String[] expectedAlerts = new String[] {"Some New Text"};
+        final String[] expectedAlerts = {"Some New Text"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -308,7 +308,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final String[] expectedAlerts = new String[] {"Some New Text"};
+        final String[] expectedAlerts = {"Some New Text"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -342,7 +342,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final String[] expectedAlerts = new String[] {"New", "Some New Text"};
+        final String[] expectedAlerts = {"New", "Some New Text"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -378,7 +378,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals( "First", firstPage.getTitleText() );
 
-        final String[] expectedAlerts = new String[] {"Some ", "Text", "true"};
+        final String[] expectedAlerts = {"Some ", "Text", "true"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 }

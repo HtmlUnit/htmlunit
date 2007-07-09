@@ -164,7 +164,7 @@ public class HtmlImageInputTest extends WebTestCase {
             + "<input id='myInput' type='image' src='test.png' onclick='alert(1)'>\n"
             + "</body></html>\n";
 
-        final String[] expectedAlerts = new String[] {"1"};
+        final String[] expectedAlerts = {"1"};
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlImageInput input = (HtmlImageInput)page.getHtmlElementById( "myInput" );

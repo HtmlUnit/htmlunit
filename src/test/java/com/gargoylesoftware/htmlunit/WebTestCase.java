@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Chris Erskine
  * @author Michael Ottati
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public abstract class WebTestCase extends BaseTestCase {
     /** Constant for the url http://first which is used in the tests. */
@@ -241,7 +242,7 @@ public abstract class WebTestCase extends BaseTestCase {
     }
 
     /**
-     * Facility method to avoid having to create explicitely a list from
+     * Facility method to avoid having to create explicitly a list from
      * a String[] (for example when testing received alerts).
      * Transforms the String[] to a List before calling 
      * {@link junit.framework.Assert#assertEquals(java.lang.Object, java.lang.Object)}. 
@@ -250,6 +251,19 @@ public abstract class WebTestCase extends BaseTestCase {
      */
     protected void assertEquals(final String[] expected, final List actual) {
         assertEquals(Arrays.asList(expected), actual);
+    }
+
+    /**
+     * Facility method to avoid having to create explicitly a list from
+     * a String[] (for example when testing received alerts).
+     * Transforms the String[] to a List before calling 
+     * {@link junit.framework.Assert#assertEquals(java.lang.String, java.lang.Object, java.lang.Object)}.
+     * @param message the message to display if assertion fails
+     * @param expected the expected strings
+     * @param actual the collection of strings to test
+     */
+    protected void assertEquals(final String message, final String[] expected, final List actual) {
+        assertEquals(message, Arrays.asList(expected), actual);
     }
 
     /**

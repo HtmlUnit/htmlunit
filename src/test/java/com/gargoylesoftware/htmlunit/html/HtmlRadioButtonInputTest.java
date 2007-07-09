@@ -171,7 +171,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         assertTrue(oneItem.isChecked());
         assertFalse(twoItems.isChecked());
 
-        final String[] expectedAlerts = new String[] { 
+        final String[] expectedAlerts = { 
             "oneItem.checked: false twoItems.checked: true",
             "oneItem.checked: true twoItems.checked: false"};
         assertEquals(expectedAlerts, collectedAlerts);

@@ -358,7 +358,7 @@ public class HtmlTableTest extends WebTestCase {
             + "<script>alert(document.getElementById('div1').parentNode.tagName);</script>"
             + "</body></html>";
 
-        final String[] expectedAlerts = new String[] {"foo", "BODY"};
+        final String[] expectedAlerts = {"foo", "BODY"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();

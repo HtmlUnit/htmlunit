@@ -86,7 +86,7 @@ public class TextareaTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"1234", "PoohBear"};
+        final String[] expectedAlerts = {"1234", "PoohBear"};
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -114,7 +114,7 @@ public class TextareaTest extends WebTestCase {
         final HtmlButtonInput button = (HtmlButtonInput) form.getInputByName("myButton");
         button.click();
 
-        final String[] expectedAlerts = new String[] {"foo"};
+        final String[] expectedAlerts = {"foo"};
         assertEquals(expectedAlerts, collectedAlerts);
     }    
 
@@ -136,7 +136,7 @@ public class TextareaTest extends WebTestCase {
             + "</script>"
             + "</body>"
             + "</html>";
-        final String[] expectedAlerts = new String[] {"TEXTAREA", "INPUT"};
+        final String[] expectedAlerts = {"TEXTAREA", "INPUT"};
         final List collectedAlerts = new ArrayList();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);

@@ -99,7 +99,7 @@ public class ScriptTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         client.getPage(URL_FIRST);
-        final String[] expectedAlerts = new String[] { "1", "2", "b=complete", "3" };
+        final String[] expectedAlerts = {"1", "2", "b=complete", "3" };
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

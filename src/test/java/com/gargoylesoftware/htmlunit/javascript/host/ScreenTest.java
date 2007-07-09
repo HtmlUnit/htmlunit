@@ -104,7 +104,7 @@ public class ScreenTest extends WebTestCase {
             + "</body></html>";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = new String[] {"16"};
+        final String[] expectedAlerts = {"16"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

@@ -108,7 +108,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
 
         submitInput.click();
 
-        final String[] expectedAlerts = new String[] {"foo","bar"};
+        final String[] expectedAlerts = {"foo","bar"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -193,7 +193,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = new String[] {""};
+        final String[] expectedAlerts = {""};
         final List collectedAlerts = new ArrayList();
 
         final HtmlPage page = loadPage(html, collectedAlerts);
@@ -212,7 +212,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
             + "<input id='myInput' type='submit' onclick='alert(1)'>\n"
             + "</body></html>\n";
 
-        final String[] expectedAlerts = new String[] {"1"};
+        final String[] expectedAlerts = {"1"};
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlSubmitInput input = (HtmlSubmitInput)page.getHtmlElementById( "myInput" );

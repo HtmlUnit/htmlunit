@@ -766,9 +766,7 @@ public class HtmlFormTest extends WebTestCase {
             iterator.set( input.getNameAttribute() );
         }
 
-        final List expectedInputs = Arrays.asList( new String[] {
-            "textfield", "button1", "button2"
-        } );
+        final String[] expectedInputs = {"textfield", "button1", "button2"};
         assertEquals( "Get all", expectedInputs, allInputsByValue );
         assertEquals( Collections.EMPTY_LIST, form.getInputsByValue("none-matching"));
 

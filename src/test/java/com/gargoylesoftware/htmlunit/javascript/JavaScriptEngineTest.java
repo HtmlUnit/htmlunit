@@ -127,7 +127,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</script></head><body>"
             + "</body></html>";
 
-        final String[] expectedAlerts = { "foo" };
+        final String[] expectedAlerts = {"foo"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -178,7 +178,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"foo"};
+        final String[] expectedAlerts = {"foo"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -193,7 +193,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "f();"
             + "</script></head><body>"
             + "</body></html>";
-        final String[] expectedAlerts = new String[] {"foo"};
+        final String[] expectedAlerts = {"foo"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -255,7 +255,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         client.setWebConnection( webConnection );
 
-        final String[] expectedAlerts = new String[] {"foo", "foo", "foo"};
+        final String[] expectedAlerts = {"foo", "foo", "foo"};
 
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
@@ -289,7 +289,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         client.setWebConnection( webConnection );
 
-        final String[] expectedAlerts = new String[] {"foo"};
+        final String[] expectedAlerts = {"foo"};
 
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
@@ -496,7 +496,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"1"};
+        final String[] expectedAlerts = {"1"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -647,7 +647,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</html>\n";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = new String[] {"undefined"};
+        final String[] expectedAlerts = {"undefined"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -656,7 +656,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     public void testEventHandlerWithComment() throws Exception {
         final String content = "<html><body onLoad='alert(\"test\"); // xxx'></body></html>";
-        final String[] expectedAlerts = { "test" };
+        final String[] expectedAlerts = {"test"};
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -829,7 +829,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals(1, countingJavaScriptEngine.getExecutionCount());
         assertEquals(2, countingJavaScriptEngine.getCallCount());
 
-        final String[] expectedAlerts = new String[] {"unqualified: foo", "qualified: foo"};
+        final String[] expectedAlerts = {"unqualified: foo", "qualified: foo"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -982,7 +982,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</body>"
             + "</html>";
 
-        final String[] expectedAlerts = new String[] { "1", "3", "4" };
+        final String[] expectedAlerts = {"1", "3", "4"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final WebClient client = new WebClient();
@@ -1043,7 +1043,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</script>"
             + "</head><body></body></html>";
 
-        final String[] expectedAlerts = { "in page 2", "in foo" };
+        final String[] expectedAlerts = {"in page 2", "in foo"};
 
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -1165,7 +1165,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        final String[] expectedAlert = new String[] {"2"};
+        final String[] expectedAlert = {"2"};
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlert, collectedAlerts);
@@ -1215,7 +1215,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        final String[] expectedAlert = new String[] {"2", "3"};
+        final String[] expectedAlert = {"2", "3"};
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlert, collectedAlerts);
@@ -1250,7 +1250,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
         
-        final String[] expectedAlerts = new String[] {
+        final String[] expectedAlerts = {
             "rstlne-rstlne-rstlne",
             "rstlno-rstlne-rstlne",
             "rstlna-rstlne-rstlne",

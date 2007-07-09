@@ -120,7 +120,7 @@ public class FormTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[]{
+        final String[] expectedAlerts = {
             "16", "button1", "button2", "checkbox1", "fileupload1", "hidden1",
             "radio1", "radio1",
             "select1", "select2", "password1", "reset1",
@@ -156,7 +156,7 @@ public class FormTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
 
-        final String[] expectedAlerts = new String[] {"3", "1", "2", "3"};
+        final String[] expectedAlerts = {"3", "1", "2", "3"};
 
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final HtmlPage page = loadPage(content, collectedAlerts);
@@ -189,7 +189,7 @@ public class FormTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"1"};
+        final String[] expectedAlerts = {"1"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -284,7 +284,7 @@ public class FormTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final String[] expectedAlerts = new String[] {oldValue, newValue};
+        final String[] expectedAlerts = {oldValue, newValue};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -302,7 +302,7 @@ public class FormTest extends WebTestCase {
     public void testFormReset_IE() throws Exception {
         // As tested with IE 6.0 on Win2k; note that refreshing the page will get you different results;
         // you need to open a new browser instance each time you test this.
-        final String[] expected = new String[] {
+        final String[] expected = {
             "before setting default values",               /* Before setting default values. */
             "text: initial1 initial1 false false",
             "file:   false false",
@@ -349,7 +349,7 @@ public class FormTest extends WebTestCase {
      */
     public void testFormReset_Firefox() throws Exception {
         // As tested with Firefox 1.0.3 on Win2k.
-        final String[] expected = new String[] {
+        final String[] expected = {
             "before setting default values",               /* Before setting default values. */
             "text: initial1 initial1 false false",
             "file:  initial2 false false",                 // THIS LINE DIFFERS FROM IE; see HtmlFileInput constructor.
@@ -662,7 +662,7 @@ public class FormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
-        final String[] expectedAlerts = new String[] {name+"2", "foo"};
+        final String[] expectedAlerts = {name+"2", "foo"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -703,7 +703,7 @@ public class FormTest extends WebTestCase {
         final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
         assertEquals("Button Test", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"value = 2"};
+        final String[] expectedAlerts = {"value = 2"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -730,7 +730,7 @@ public class FormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         assertEquals("foo", page.getTitleText());
-        final String[] expectedAlerts = new String[] {"foo"};
+        final String[] expectedAlerts = {"foo"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -789,7 +789,7 @@ public class FormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        final String[] expectedAlerts = new String[] {"2"};
+        final String[] expectedAlerts = {"2"};
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -813,7 +813,7 @@ public class FormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        final String[] expectedAlerts = new String[] {"button1"};
+        final String[] expectedAlerts = {"button1"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -892,7 +892,7 @@ public class FormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        final String[] expectedAlerts = new String[] {"0", "1", "1", "true"};
+        final String[] expectedAlerts = {"0", "1", "1", "true"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -910,7 +910,7 @@ public class FormTest extends WebTestCase {
             + "</html>";
 
         final List collectedAlerts = new ArrayList();
-        final String[] expectedAlerts = new String[] {"foo.html"};
+        final String[] expectedAlerts = {"foo.html"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 
@@ -932,7 +932,7 @@ public class FormTest extends WebTestCase {
             + "</html>";
 
         final List collectedAlerts = new ArrayList();
-        final String[] expectedAlerts = new String[] {"text"};
+        final String[] expectedAlerts = {"text"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 
@@ -985,7 +985,7 @@ public class FormTest extends WebTestCase {
             + "</html>";
 
         final List collectedAlerts = new ArrayList();
-        final String[] expectedAlerts = new String[] {expected};
+        final String[] expectedAlerts = {expected};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 
@@ -1015,7 +1015,7 @@ public class FormTest extends WebTestCase {
             + " </form>"
             + "</body>"
             + "</html>";
-        final String[] expectedAlerts = new String[] {"before", "2"};
+        final String[] expectedAlerts = {"before", "2"};
         final List collectedAlerts = new ArrayList();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
@@ -1226,7 +1226,7 @@ public class FormTest extends WebTestCase {
             + "  <form id='myForm'></form>\n"
             + "</body></html>\n";
         
-        final String[] expectedAlerts = new String[] {"\nfunction handler() {\n}\n", "null"};
+        final String[] expectedAlerts = {"\nfunction handler() {\n}\n", "null"};
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);

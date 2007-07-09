@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -103,7 +102,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
         final HtmlCheckBoxInput checkBox = ( HtmlCheckBoxInput )page.getHtmlElementById( "checkbox" );
         final HtmlPage secondPage = (HtmlPage)checkBox.click();
 
-        final List expectedAlerts = Arrays.asList( new String[] {"foo", "click"} );
+        final String[] expectedAlerts = {"foo", "click"};
         assertEquals( expectedAlerts, collectedAlerts );
 
         assertSame( page, secondPage );
@@ -164,7 +163,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final List expectedAlerts = Arrays.asList(new String[] {"foo"});
+        final String[] expectedAlerts = {"foo"};
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);

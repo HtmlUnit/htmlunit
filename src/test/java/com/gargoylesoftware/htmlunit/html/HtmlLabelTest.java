@@ -77,7 +77,7 @@ public class HtmlLabelTest extends WebTestCase {
         final HtmlLabel label = (HtmlLabel) page.getHtmlElementById("testLabel");
         label.click();
         assertTrue(checkBox.isChecked());
-        final String[] expectedAlerts = new String[] {"label", "checkbox"};
+        final String[] expectedAlerts = {"label", "checkbox"};
         assertEquals(expectedAlerts, collectedAlerts);
         label.click();
         assertFalse(checkBox.isChecked());

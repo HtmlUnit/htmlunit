@@ -78,7 +78,7 @@ public class ImageTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        final String[] expectedAlerts = new String[]{
+        final String[] expectedAlerts = {
             "http://www.gargoylesoftware.com/foo.gif"
         };
 
@@ -132,7 +132,7 @@ public class ImageTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        final String[] expectedAlerts = new String[]{
+        final String[] expectedAlerts = {
             "http://www.gargoylesoftware.com/bar.gif"
         };
         
@@ -156,7 +156,7 @@ public class ImageTest extends WebTestCase {
             + "<img src='foo.png' id='myImage'>"
             + "</body></html>";
 
-        final String[] expectedAlerts = new String[] {"foo"};
+        final String[] expectedAlerts = {"foo"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();

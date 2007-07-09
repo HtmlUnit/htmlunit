@@ -170,7 +170,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection( webConnection );
         client.getPage( URL_FIRST );
 
-        final String[] alerts = new String[] {UNINITIALIZED, LOADING, COMPLETED, xml};
+        final String[] alerts = {UNINITIALIZED, LOADING, COMPLETED, xml};
         assertEquals( alerts, collectedAlerts );
     }
 
@@ -226,7 +226,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection( webConnection );
         final Page page = client.getPage( URL_FIRST );
 
-        final String[] alerts = new String[] { UNINITIALIZED,
+        final String[] alerts = { UNINITIALIZED,
             LOADING, LOADING, LOADED, INTERACTIVE, COMPLETED, xml };
 
         assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
@@ -277,7 +277,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection( webConnection );
         client.getPage(URL_FIRST);
 
-        final String[] alerts = new String[] {COMPLETED, xml};
+        final String[] alerts = {COMPLETED, xml};
         assertEquals( alerts, collectedAlerts );
     }
 
@@ -312,7 +312,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection( webConnection );
         client.getPage(URL_FIRST);
 
-        final String[] alerts = new String[] {"bla bla"};
+        final String[] alerts = {"bla bla"};
         assertEquals( alerts, collectedAlerts );
     }
 

@@ -115,7 +115,7 @@ public class HTMLParserTest extends WebTestCase {
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
-        final String[] expectedAlerts = new String[] {"myForm"};
+        final String[] expectedAlerts = {"myForm"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         loadPage(content, collectedAlerts);
@@ -150,7 +150,7 @@ public class HTMLParserTest extends WebTestCase {
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
-        final String[] expectedAlerts = new String[] {"first"};
+        final String[] expectedAlerts = {"first"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         loadPage(content, collectedAlerts);

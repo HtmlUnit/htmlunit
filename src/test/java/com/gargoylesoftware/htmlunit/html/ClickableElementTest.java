@@ -75,7 +75,7 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void onClickPageTest(final String htmlContent) throws Exception {
-        final String[] expectedAlerts = new String[] {"foo"};
+        final String[] expectedAlerts = {"foo"};
         onClickPageTest(htmlContent, 1, expectedAlerts);
     }
 
@@ -256,7 +256,7 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testButton_onClickTwice() throws Exception {
-        final String[] expectedAlerts = new String[] {"foo0", "foo1"};
+        final String[] expectedAlerts = {"foo0", "foo1"};
         onClickPageTest("<body><form>" +
                 "<button id='clickId' onClick='alert(\"foo\" + count++); return false;'>Item</button>" +
                 "<script> var count = 0 </script>" +
@@ -1001,7 +1001,7 @@ public class ClickableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSetOnClick() throws Exception {
-        final String[] expectedAlerts = new String[] {"foo"};
+        final String[] expectedAlerts = {"foo"};
         onClickPageTest("<html><body><form>" +
                 "<button type='button' id='clickId' onclick='alert(\"foo\"); onclick=null;'>Item</button>" +
                 "</form></body></html>", 2, expectedAlerts);

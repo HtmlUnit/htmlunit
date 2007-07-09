@@ -88,7 +88,7 @@ public class AttributesTest extends WebTestCase {
         final HtmlPage page = loadPage("<html><head><title>foo</title></head><body></body></html>");
 
         final TestSuite suite = new TestSuite();
-        final String[] classesToTest = new String[] {
+        final String[] classesToTest = {
             "HtmlAddress", "HtmlAnchor", "HtmlApplet", "HtmlArea",
             "HtmlBase", "HtmlBaseFont", "HtmlBidirectionalOverride",
             "HtmlBlockQuote", "HtmlBody", "HtmlBreak", "HtmlButton",

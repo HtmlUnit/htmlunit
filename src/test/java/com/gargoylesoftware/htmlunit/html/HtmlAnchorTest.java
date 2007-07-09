@@ -86,7 +86,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
 
-        final String[] expectedAlerts = new String[] {"9", "9"};
+        final String[] expectedAlerts = {"9", "9"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

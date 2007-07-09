@@ -77,7 +77,7 @@ public class IFrameTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = new String[] {"false"};
+        final String[] expectedAlerts = {"false"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -97,7 +97,7 @@ public class IFrameTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = new String[] {"1", "myIFrame"};
+        final String[] expectedAlerts = {"1", "myIFrame"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -155,7 +155,7 @@ public class IFrameTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String[] expectedAlerts = new String[] {"IFRAME"};
+        final String[] expectedAlerts = {"IFRAME"};
         webClient.getPage(URL_FIRST);
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -175,7 +175,7 @@ public class IFrameTest extends WebTestCase {
                 + "<body onload='test()'>"
                 + "<iframe name='foo' id='myFrame' src='about:blank'></iframe>"
                 + "</body></html>";
-        final String[] expectedAlerts = new String[] {"true"};
+        final String[] expectedAlerts = {"true"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -200,7 +200,7 @@ public class IFrameTest extends WebTestCase {
                 + "<body onload='test()'>"
                 + "<iframe name='foo' id='myFrame' src='about:blank'></iframe>"
                 + "</body></html>";
-        final String[] expectedAlerts = new String[] {"true"};
+        final String[] expectedAlerts = {"true"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();

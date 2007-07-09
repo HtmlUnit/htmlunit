@@ -102,7 +102,7 @@ public class SelectTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"3", "1"};
+        final String[] expectedAlerts = {"3", "1"};
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -136,7 +136,7 @@ public class SelectTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"3", "1", "3", "2"};
+        final String[] expectedAlerts = {"3", "1", "3", "2"};
         assertEquals( expectedAlerts, collectedAlerts );
 
         final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
@@ -203,9 +203,7 @@ public class SelectTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {
-            "value1", "One", "value2", "Two", "value3", "Three"
-        };
+        final String[] expectedAlerts = {"value1", "One", "value2", "Two", "value3", "Three"};
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -238,9 +236,7 @@ public class SelectTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[]{
-            "value1", "OneLabel", "value2", "TwoLabel", "value3", "ThreeLabel"
-        };
+        final String[] expectedAlerts = {"value1", "OneLabel", "value2", "TwoLabel", "value3", "ThreeLabel"};
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -273,9 +269,7 @@ public class SelectTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        final String[] expectedAlerts = new String[]{
-            "false", "true", "true", "false"
-        };
+        final String[] expectedAlerts = {"false", "true", "true", "false"};
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -362,9 +356,7 @@ public class SelectTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[]{
-            "4", "Four", "value4"
-        };
+        final String[] expectedAlerts = {"4", "Four", "value4"};
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -402,7 +394,7 @@ public class SelectTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final String[] expectedAlerts = { "1", "true", "4", "Four", "value4", "true", "3", "false" };
+        final String[] expectedAlerts = {"1", "true", "4", "Four", "value4", "true", "3", "false"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -506,7 +498,7 @@ public class SelectTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final String[] expectedAlerts = new String[] {"0", "1"};
+        final String[] expectedAlerts = {"0", "1"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -542,7 +534,7 @@ public class SelectTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"2", "Three", "value3"};
+        final String[] expectedAlerts = {"2", "Three", "value3"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -573,7 +565,7 @@ public class SelectTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"2", "Three", "value3"};
+        final String[] expectedAlerts = {"2", "Three", "value3"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -602,7 +594,7 @@ public class SelectTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"0"};
+        final String[] expectedAlerts = {"0"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -635,7 +627,7 @@ public class SelectTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final String[] expectedAlerts = new String[] {"1", "2", "", "", "foo", "fooValue"};
+        final String[] expectedAlerts = {"1", "2", "", "", "foo", "fooValue"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -669,7 +661,7 @@ public class SelectTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"One", "value1"};
+        final String[] expectedAlerts = {"One", "value1"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -707,7 +699,7 @@ public class SelectTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final String[] expectedAlerts = new String[] {"Two", "", "Two", "", ""};
+        final String[] expectedAlerts = {"Two", "", "Two", "", ""};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -776,7 +768,7 @@ public class SelectTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final String[] expectedAlerts = new String[] {"0", "1"};
+        final String[] expectedAlerts = {"0", "1"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -841,7 +833,7 @@ public class SelectTest extends WebTestCase {
             + "</select></form>"
             + "</body></html>";
 
-        final String[] expectedAlerts = new String[]{"2", "2", "1", "1"};
+        final String[] expectedAlerts = {"2", "2", "1", "1"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -889,7 +881,7 @@ public class SelectTest extends WebTestCase {
             + "</select></form>"
             + "</body></html>";
 
-        final String[] expectedAlerts = new String[] {"2", "b", "3", "c"};
+        final String[] expectedAlerts = {"2", "b", "3", "c"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();

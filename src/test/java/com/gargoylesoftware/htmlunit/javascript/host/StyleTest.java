@@ -109,7 +109,7 @@ public class StyleTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
 
-        final String[] expectedAlerts = new String[] {"black", "pink"};
+        final String[] expectedAlerts = {"black", "pink"};
         assertEquals( expectedAlerts, collectedAlerts );
 
         assertEquals(

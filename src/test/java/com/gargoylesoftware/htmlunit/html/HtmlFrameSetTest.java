@@ -244,7 +244,7 @@ public class HtmlFrameSetTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection( webClient );
 
         final List collectedAlerts = new ArrayList();
-        final String[] expectedAlerts = new String[] {"Success"};
+        final String[] expectedAlerts = {"Success"};
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         webConnection.setResponse(URL_FIRST, framesContent);

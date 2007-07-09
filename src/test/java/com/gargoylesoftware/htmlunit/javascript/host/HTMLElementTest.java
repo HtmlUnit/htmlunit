@@ -1262,7 +1262,7 @@ public class HTMLElementTest extends WebTestCase {
               + "<body>\n"
               + "<script id='me'>document.getElementById('me').scrollIntoView(); alert('ok');</script>\n"
               + "</body></html>";
-        final String[] expectedAlerts = new String[] {"ok"};
+        final String[] expectedAlerts = {"ok"};
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);

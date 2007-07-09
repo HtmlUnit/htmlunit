@@ -83,7 +83,7 @@ public class FrameSetTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(framesetContent, collectedAlerts);
 
-        final String[] expectedAlerts = new String[] {"20%,*", "*,*"};
+        final String[] expectedAlerts = {"20%,*", "*,*"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -120,7 +120,7 @@ public class FrameSetTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, frameContent);
         webClient.setWebConnection(webConnection);
 
-        final String[] expectedAlerts = new String[] {"20%,*", "*,*"};
+        final String[] expectedAlerts = {"20%,*", "*,*"};
         webClient.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }

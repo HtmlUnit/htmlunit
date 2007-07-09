@@ -320,7 +320,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "<body onload=test()>\n"
             + "  <input id='myInput'>\n"
             + "</body></html>\n";
-        final String[] expectedAlerts = new String[] {"\nfunction handler() {\n}\n", "null"};
+        final String[] expectedAlerts = {"\nfunction handler() {\n}\n", "null"};
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);

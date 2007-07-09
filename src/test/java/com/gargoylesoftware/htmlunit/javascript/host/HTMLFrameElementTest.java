@@ -116,7 +116,7 @@ public class HTMLFrameElementTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(defaultContent);
 
-        final String[] expectedAlerts = new String[] {URL_FIRST.toExternalForm() + "/subdir/frame.html",
+        final String[] expectedAlerts = {URL_FIRST.toExternalForm() + "/subdir/frame.html",
                 URL_FIRST.toExternalForm() + "/frame.html"};
 
         webClient.setWebConnection(webConnection);
@@ -143,7 +143,7 @@ public class HTMLFrameElementTest extends WebTestCase {
                 + "<frame name='foo' id='myFrame' src='about:blank'/>"
                 + "</frameset>"
                 + "</html>";
-        final String[] expectedAlerts = new String[] {"true"};
+        final String[] expectedAlerts = {"true"};
 
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
@@ -167,7 +167,7 @@ public class HTMLFrameElementTest extends WebTestCase {
                 + "<frame name='foo' id='myFrame' src='about:blank'/>"
                 + "</frameset>"
                 + "</html>";
-        final String[] expectedAlerts = new String[] {"true"};
+        final String[] expectedAlerts = {"true"};
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
@@ -199,7 +199,7 @@ public class HTMLFrameElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String[] expectedAlerts = new String[] {"2"};
+        final String[] expectedAlerts = {"2"};
 
         webClient.getPage(URL_FIRST);
 
@@ -235,7 +235,7 @@ public class HTMLFrameElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String[] expectedAlerts = new String[] {"DIV"};
+        final String[] expectedAlerts = {"DIV"};
 
         webClient.getPage( URL_GARGOYLE );
         assertEquals(expectedAlerts, collectedAlerts);
@@ -270,7 +270,7 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "</script>\n"
             + "</html>";
 
-        final String[] expectedAlerts = new String[] {"frame=OK",
+        final String[] expectedAlerts = {"frame=OK",
             "frames.length=2",
             "frame=OK",
             "frames.length=0",
@@ -302,7 +302,7 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "<body onload=test()>\n"
             + "  <iframe id='myFrame'></iframe>\n"
             + "</body></html>\n";
-        final String[] expectedAlerts = new String[] {"\nfunction handler() {\n}\n", "null"};
+        final String[] expectedAlerts = {"\nfunction handler() {\n}\n", "null"};
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);

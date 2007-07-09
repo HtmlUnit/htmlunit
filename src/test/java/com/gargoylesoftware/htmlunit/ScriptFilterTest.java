@@ -74,7 +74,7 @@ public class ScriptFilterTest extends WebTestCase {
             + "<form name='form1'><input type=text name='txt'></form></body></html>";
         final List collectedAlerts = new ArrayList();
 
-        final String[] expectedAlerts = new String[]{ "hello" };
+        final String[] expectedAlerts = {"hello"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         loadPage(content, collectedAlerts);

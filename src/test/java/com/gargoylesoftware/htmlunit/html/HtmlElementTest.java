@@ -86,7 +86,7 @@ public class HtmlElementTest extends WebTestCase {
                 "</script></body></html>\n";
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
-        final String[] expectedAlerts = new String[] {"false", "true", "a", "a", "b", "b", "b", "c"};
+        final String[] expectedAlerts = {"false", "true", "a", "a", "b", "b", "b", "c"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

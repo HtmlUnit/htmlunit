@@ -154,7 +154,7 @@ public class HtmlScriptTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         client.getPage(URL_FIRST);
-        final String[] expectedAlerts = new String[] {"First script executes", "Second page loading"};
+        final String[] expectedAlerts = {"First script executes", "Second page loading"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -170,7 +170,7 @@ public class HtmlScriptTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
 
-        final String[] expectedAlerts = new String[] {"a"};
+        final String[] expectedAlerts = {"a"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

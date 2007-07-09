@@ -100,7 +100,7 @@ public class HtmlFrameTest extends WebTestCase {
             + "    <frame id='frame1'>"
             + "    <frame onload='alert(this.tagName)' id='frame2'>"
             + "</frameset></html>";
-        final String[] expectedAlerts = new String[] {"FRAME"};
+        final String[] expectedAlerts = {"FRAME"};
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);

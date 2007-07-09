@@ -205,7 +205,7 @@ public class NavigatorTest extends WebTestCase {
                 "</html>";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = new String[] {name + " = " + value};
+        final String[] expectedAlerts = {name + " = " + value};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -231,7 +231,7 @@ public class NavigatorTest extends WebTestCase {
 
         webClient.getPage(URL_FIRST);
 
-        final String[] expectedAlerts = new String[] {"Netscape"};
+        final String[] expectedAlerts = {"Netscape"};
         assertEquals(expectedAlerts, collectedAlerts);
     }    
     
@@ -257,7 +257,7 @@ public class NavigatorTest extends WebTestCase {
 
         webClient.getPage(URL_FIRST);
 
-        final String[] expectedAlerts = new String[] {BrowserVersion.MOZILLA_1_0.getBrowserLanguage()};
+        final String[] expectedAlerts = {BrowserVersion.MOZILLA_1_0.getBrowserLanguage()};
         assertEquals(expectedAlerts, collectedAlerts);
     }    
 

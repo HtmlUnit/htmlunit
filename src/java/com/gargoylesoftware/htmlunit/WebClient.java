@@ -169,14 +169,12 @@ public class WebClient implements Serializable {
     private RefreshHandler refreshHandler_ = new ImmediateRefreshHandler();
     private boolean throwExceptionOnScriptError_ = true;
 
-
     /**
      * Create an instance using {@link BrowserVersion#FULL_FEATURED_BROWSER}
      */
     public WebClient() {
         this( BrowserVersion.FULL_FEATURED_BROWSER );
     }
-
 
     /**
      *  Create an instance using the specified {@link BrowserVersion}
@@ -199,7 +197,6 @@ public class WebClient implements Serializable {
         // The window must be constructed after the script engine.
         currentWindow_ = new TopLevelWindow("", this);
     }
-
 
     /**
      *  Create an instance that will use the specified {@link BrowserVersion} and proxy server
@@ -226,7 +223,6 @@ public class WebClient implements Serializable {
         currentWindow_ = new TopLevelWindow("", this);
     }
 
-
     /**
      *  Create a javascript engine if possible.
      *
@@ -246,7 +242,6 @@ public class WebClient implements Serializable {
         }
     }
 
-
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * 
@@ -259,7 +254,6 @@ public class WebClient implements Serializable {
         }
         return webConnection_;
     }
-
 
     /**
      *  Set the object that will resolve all url requests <p />
@@ -461,7 +455,6 @@ public class WebClient implements Serializable {
         return newPage;
     }
 
-
     /**
      *  Specify whether or not the content of the resulting document will be
      *  printed to the console in the event of a failing response code.
@@ -473,7 +466,6 @@ public class WebClient implements Serializable {
         printContentOnFailingStatusCode_ = enabled;
     }
 
-
     /**
      *  Return true if the content of the resulting document will be printed to
      *  the console in the event of a failing response code.
@@ -484,7 +476,6 @@ public class WebClient implements Serializable {
     public boolean getPrintContentOnFailingStatusCode() {
         return printContentOnFailingStatusCode_;
     }
-
 
     /**
      *  Specify whether or not an exception will be thrown in the event of a
@@ -516,7 +507,6 @@ public class WebClient implements Serializable {
         requestHeaders_.put( name, value );
     }
 
-
     /**
      *  Remove a header
      *
@@ -526,7 +516,6 @@ public class WebClient implements Serializable {
     public void removeRequestHeader( final String name ) {
         requestHeaders_.remove( name );
     }
-
 
     /**
      * Sets the credentials provider that will provide authentication information when
@@ -540,7 +529,6 @@ public class WebClient implements Serializable {
         credentialsProvider_ = credentialsProvider;
     }
 
-
     /**
      * Returns the credentials provider for this client instance. By default, this
      * method returns an instance of {@link DefaultCredentialsProvider}.
@@ -549,7 +537,6 @@ public class WebClient implements Serializable {
     public CredentialsProvider getCredentialsProvider() {
         return credentialsProvider_;
     }
-
 
     /**
      *  Throw an exception with the specified message. If junit is found in the
@@ -574,7 +561,6 @@ public class WebClient implements Serializable {
         }
     }
 
-
     /**
      *  This method is intended for testing only - use at your own risk.
      *
@@ -583,7 +569,6 @@ public class WebClient implements Serializable {
     public ScriptEngine getScriptEngine() {
         return scriptEngine_;
     }
-
 
     /**
      *  This method is intended for testing only - use at your own risk.
@@ -594,7 +579,6 @@ public class WebClient implements Serializable {
         scriptEngine_ = engine;
     }
 
-
     /**
      * Enable/disable javascript support.  By default, this property is enabled.
      *
@@ -603,7 +587,6 @@ public class WebClient implements Serializable {
     public void setJavaScriptEnabled( final boolean isEnabled ) {
         javaScriptEnabled_ = isEnabled;
     }
-
 
     /**
      * Return true if javascript is enabled and the script engine was loaded successfully.
@@ -640,7 +623,6 @@ public class WebClient implements Serializable {
         return homePage_;
     }
 
-
     /**
      * Sets the client's homepage.
      * @param homePage the new homepage URL
@@ -648,7 +630,6 @@ public class WebClient implements Serializable {
     public void setHomePage(final String homePage) {
         homePage_ = homePage;
     }
-
 
     /**
      * Any hosts matched by the specified regular expression pattern will bypass the configured proxy.
@@ -660,7 +641,6 @@ public class WebClient implements Serializable {
         proxyBypassHosts_.put( pattern, Pattern.compile( pattern ) );
     }
 
-
     /**
      * Any hosts matched by the specified regular expression pattern will no longer bypass the configured proxy.
      * @param pattern The previously added regular expression pattern.
@@ -669,7 +649,6 @@ public class WebClient implements Serializable {
     public void removeHostsFromProxyBypass( final String pattern ) {
         proxyBypassHosts_.remove( pattern );
     }
-
 
     /**
      * Returns <tt>true</tt> if the host with the specified hostname should be accessed bypassing the
@@ -690,7 +669,6 @@ public class WebClient implements Serializable {
         return bypass;
     }
 
-
     /**
      * Set the alert handler for this webclient.
      * @param alertHandler The new alerthandler or null if none is specified.
@@ -698,7 +676,6 @@ public class WebClient implements Serializable {
     public void setAlertHandler( final AlertHandler alertHandler ) {
         alertHandler_ = alertHandler;
     }
-
 
     /**
      * Return the alert handler for this webclient.
@@ -708,7 +685,6 @@ public class WebClient implements Serializable {
         return alertHandler_;
     }
 
-
     /**
      * Set the handler that will be executed when the javascript method Window.confirm() is called.
      * @param handler The new handler or null if no handler is to be used.
@@ -716,7 +692,6 @@ public class WebClient implements Serializable {
     public void setConfirmHandler( final ConfirmHandler handler ) {
         confirmHandler_ = handler;
     }
-
 
     /**
      * Return the confirm handler.
@@ -726,7 +701,6 @@ public class WebClient implements Serializable {
         return confirmHandler_;
     }
 
-
     /**
      * Set the handler that will be executed when the javascript method Window.prompt() is called.
      * @param handler The new handler or null if no handler is to be used.
@@ -734,7 +708,6 @@ public class WebClient implements Serializable {
     public void setPromptHandler( final PromptHandler handler ) {
         promptHandler_ = handler;
     }
-
 
     /**
      * Return the prompt handler.
@@ -744,7 +717,6 @@ public class WebClient implements Serializable {
         return promptHandler_;
     }
 
-
     /**
      * Set the status handler for this webclient.
      * @param statusHandler The new alerthandler or null if none is specified.
@@ -752,7 +724,6 @@ public class WebClient implements Serializable {
     public void setStatusHandler( final StatusHandler statusHandler ) {
         statusHandler_ = statusHandler;
     }
-
 
     /**
      * Return the status handler for this webclient.
@@ -770,7 +741,6 @@ public class WebClient implements Serializable {
         return browserVersion_;
     }
 
-
     /**
      * Return the "current" window for this client.  This is the window that will be used
      * when getPage() is called without specifying a window.
@@ -779,7 +749,6 @@ public class WebClient implements Serializable {
     public WebWindow getCurrentWindow() {
         return currentWindow_;
     }
-
 
     /**
      * Set the current window for this client.  This is the window that will be used when
@@ -790,7 +759,6 @@ public class WebClient implements Serializable {
         Assert.notNull("window", window);
         currentWindow_ = window;
     }
-
 
     /**
      * Return the "first" window for this client.  This is the first window
@@ -803,7 +771,6 @@ public class WebClient implements Serializable {
         }
     }
 
-
     /**
      * Clear the first window for this client.
      */
@@ -812,7 +779,6 @@ public class WebClient implements Serializable {
             firstWindowStack_.push(null);
         }
     }
-
 
     /**
      * Add a listener for WebWindowEvent's.  All events from all windows associated with this
@@ -824,7 +790,6 @@ public class WebClient implements Serializable {
         webWindowListeners_.add(listener);
     }
 
-
     /**
      * Remove a listener for WebWindowEvent's.
      * @param listener A listener.
@@ -834,7 +799,6 @@ public class WebClient implements Serializable {
         webWindowListeners_.remove(listener);
     }
 
-
     private void fireWindowContentChanged( final WebWindowEvent event ) {
         final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
         while( iterator.hasNext() ) {
@@ -843,7 +807,6 @@ public class WebClient implements Serializable {
         }
     }
 
-
     private void fireWindowOpened( final WebWindowEvent event ) {
         final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
         while( iterator.hasNext() ) {
@@ -851,7 +814,6 @@ public class WebClient implements Serializable {
             listener.webWindowOpened(event);
         }
     }
-
 
     private void fireWindowClosed( final WebWindowEvent event ) {
         final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
@@ -873,7 +835,6 @@ public class WebClient implements Serializable {
         Assert.notNull("windowName", windowName);
         return openWindow( url, windowName, getCurrentWindow() );
     }
-
 
     /**
      * Open a new window with the specified name.  If the url is non-null then attempt to load
@@ -904,7 +865,6 @@ public class WebClient implements Serializable {
         }
         return window;
     }
-
 
     /**
      * Open the window with the specified name.  The name may be a special
@@ -966,7 +926,6 @@ public class WebClient implements Serializable {
         return webWindow;
     }
 
-
     /**
      * Set whether or not redirections will be followed automatically on receipt of
      * a redirect status code from the server.
@@ -976,7 +935,6 @@ public class WebClient implements Serializable {
         isRedirectEnabled_ = enabled;
     }
 
-
     /**
      * Return whether or not redirections will be followed automatically on receipt of
      * a redirect status code from the server.
@@ -985,7 +943,6 @@ public class WebClient implements Serializable {
     public boolean isRedirectEnabled() {
         return isRedirectEnabled_;
     }
-
 
     /**
      * Set the object that will be used to create pages.  Set this if you want
@@ -998,7 +955,6 @@ public class WebClient implements Serializable {
         pageCreator_ = pageCreator;
     }
 
-
     /**
      * Return the current page creator.
      *
@@ -1007,7 +963,6 @@ public class WebClient implements Serializable {
     public PageCreator getPageCreator() {
         return pageCreator_;
     }
-
 
     /**
      * Return the first {@link WebWindow} that matches the specified name.
@@ -1030,7 +985,6 @@ public class WebClient implements Serializable {
         throw new WebWindowNotFoundException(name);
     }
 
-
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * 
@@ -1044,7 +998,6 @@ public class WebClient implements Serializable {
         }
     }
 
-
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * 
@@ -1057,7 +1010,6 @@ public class WebClient implements Serializable {
             ((Window) newPage.getEnclosingWindow().getScriptObject()).initialize(newPage);
         }
     }
-
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -1073,7 +1025,6 @@ public class WebClient implements Serializable {
         }
     }
 
-
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * 
@@ -1084,7 +1035,6 @@ public class WebClient implements Serializable {
         Assert.notNull("webWindow", webWindow);
         webWindows_.add(webWindow);
     }
-
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -1108,7 +1058,6 @@ public class WebClient implements Serializable {
         fireWindowClosed(new WebWindowEvent(webWindow, WebWindowEvent.CLOSE, webWindow.getEnclosedPage(), null));
     }
 
-
     /**
      * Return the log object for this web client
      * @return The log object
@@ -1116,7 +1065,6 @@ public class WebClient implements Serializable {
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
     }
-
 
     private static URL makeUrl( final String urlString ) throws MalformedURLException {
         Assert.notNull("urlString", urlString);
@@ -1131,7 +1079,6 @@ public class WebClient implements Serializable {
             return new URL(urlString);
         }
     }
-
 
     /**
      * Expands a relative url relative to the specified base. In most situations
@@ -1552,7 +1499,6 @@ public class WebClient implements Serializable {
         return URIUtil.encode(str, bits);
     }
 
-
     /**
      * Remove the focus to the specified component.  This will trigger any relevant javascript
      * event handlers.
@@ -1578,7 +1524,6 @@ public class WebClient implements Serializable {
         return false;
     }
 
-
     /**
      * Move the focus to the specified component.  This will trigger any relevant javascript
      * event handlers.
@@ -1601,7 +1546,6 @@ public class WebClient implements Serializable {
         elementWithFocus_ = newElement;
         return newElement.getPage().moveFocusToElement(newElement);
     }
-
 
     /**
      * Return the element with the focus or null if no elements have the focus.
@@ -1652,7 +1596,6 @@ public class WebClient implements Serializable {
         scriptPreProcessor_ = scriptPreProcessor;
     }
 
-
     /**
      * Return the script pre processor for this webclient.
      * @return the pre processor or null of one hasn't been set.
@@ -1671,7 +1614,6 @@ public class WebClient implements Serializable {
     public void setActiveXObjectMap( final Map activeXObjectMap ) {
         activeXObjectMap_ = activeXObjectMap;
     }
-
 
     /**
      * Return the active X object map for this webclient.

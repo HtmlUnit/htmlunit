@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -189,11 +188,9 @@ public class LocationTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        List expectedAlerts;
-
         // Try page with only a server name
         client.getPage( new URL("http://first") );
-        expectedAlerts = Arrays.asList( new String[]{
+        String[] expectedAlerts = {
             "",               // hash
             "first",          // host
             "first",          // hostname
@@ -202,14 +199,14 @@ public class LocationTest extends WebTestCase {
             "",               // port
             "http:",          // protocol
             ""                // search
-        } );
-        assertEquals( "simple url", expectedAlerts, collectedAlerts );
+        };
+        assertEquals( "simple url", expectedAlerts, collectedAlerts);
 
         collectedAlerts.clear();
 
         // Try page with all the appropriate parts
         client.getPage( new URL("http://www.first:77/foo?bar#wahoo") );
-        expectedAlerts = Arrays.asList( new String[]{
+        expectedAlerts = new String[] {
             "wahoo",                             // hash
             "www.first:77",                      // host
             "www.first",                         // hostname
@@ -218,7 +215,7 @@ public class LocationTest extends WebTestCase {
             "77",                                // port
             "http:",                             // protocol
             "?bar"                               // search
-        } );
+        };
         assertEquals( "complete url", expectedAlerts, collectedAlerts );
     }
 
