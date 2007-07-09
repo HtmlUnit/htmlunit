@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -85,7 +86,7 @@ public class NodeImplTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("test_hasChildNodes", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"true"};
+        final String[] expectedAlerts = {"true"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
     /**
@@ -106,7 +107,7 @@ public class NodeImplTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("test_hasChildNodes", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"false"};
+        final String[] expectedAlerts = {"false"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -140,7 +141,7 @@ public class NodeImplTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"true", "true"};
+        final String[] expectedAlerts = {"true", "true"};
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -176,7 +177,7 @@ public class NodeImplTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"true", "true"};
+        final String[] expectedAlerts = {"true", "true"};
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -200,7 +201,7 @@ public class NodeImplTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("test_hasChildNodes", page.getTitleText());
 
-        final String[] expectedAlerts = new String[] {"DIV"};
+        final String[] expectedAlerts = {"DIV"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -226,7 +227,7 @@ public class NodeImplTest extends WebTestCase {
             + "<h2>Child Node 2-A</h2></div>"
             + "</body></html>";
 
-        final String[] expectedAlerts = new String[] {"2", "SPAN", "2", "#text", "H1", "H2"};
+        final String[] expectedAlerts = {"2", "SPAN", "2", "#text", "H1", "H2"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -284,7 +285,7 @@ public class NodeImplTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final String[] expectedAlerts = new String[] {"length: 5",
+        final String[] expectedAlerts = {"length: 5",
             "tempNode.name: undefined", "tempNode.name: input1", "tempNode.name: undefined",
             "tempNode.name: input2", "tempNode.name: undefined"};
 
@@ -377,6 +378,38 @@ public class NodeImplTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test for 1716129
+     * @throws Exception on test failure
+     */
+    public void testAttachEvent() throws Exception {
+    	if (notYetImplemented()) {
+    		return;
+    	}
+        final String content = "<html><head>"
+            + "<title>First</title>"
+            + "<script>"
+            + "function test()" 
+            + "{"
+            + "    var oField = document.getElementById('div1');"
+            + "    oField.attachEvent('onclick', foo1);"
+            + "    oField.attachEvent('onclick', foo2);"
+            + "}"
+            + "function foo1() { alert('in foo1');}"
+            + "function foo2() { alert('in foo2');}"
+            + "</script></head><body onload='test()'>"
+            + "<div id='div1'>bla</div>"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"in foo1", "in foo2"};
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        ((ClickableElement) page.getHtmlElementById("div1")).click();
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
