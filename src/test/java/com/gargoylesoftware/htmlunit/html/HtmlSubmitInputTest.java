@@ -171,8 +171,8 @@ public class HtmlSubmitInputTest extends WebTestCase {
 
         final HtmlPage page = loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts );
-        assertTrue( page.asText().contains( "Submit Query" ) );
-        assertFalse( page.asXml().contains( "Submit Query" ) );
+        assertTrue(page.asText().indexOf("Submit Query") > -1);
+        assertFalse(page.asXml().indexOf("Submit Query") > -1);
     }
 
     /**

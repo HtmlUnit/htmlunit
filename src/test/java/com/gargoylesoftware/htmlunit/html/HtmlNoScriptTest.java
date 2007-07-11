@@ -152,6 +152,6 @@ public class HtmlNoScriptTest extends WebTestCase {
         
         final MockWebConnection mockWebConnection = getMockConnection(secondPage);
         assertEquals( 1, mockWebConnection.getLastParameters().size() );
-        assertTrue( secondPage.asXml().contains( "__webpage_no_js__" ) );
+        assertTrue(secondPage.asXml().indexOf("__webpage_no_js__") > -1);
     }
 }
