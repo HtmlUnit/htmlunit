@@ -220,7 +220,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      * Create a new HTML element with the given tag name.
      *
-     * @param tagName The tag name, preferrably in lowercase
+     * @param tagName The tag name, preferably in lowercase
      * @return the new HTML element.
      */
     public HtmlElement createElement(final String tagName) {
@@ -1177,7 +1177,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
 
     /**
-     * Returns the first frame contained in this page with the specifed name.
+     * Returns the first frame contained in this page with the specified name.
      * @param name The name to search for
      * @return The first frame found.
      * @exception ElementNotFoundException If no frame exist in this page with the specified name.
@@ -1500,7 +1500,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      * Runs an event handler taking car to pass him the event in the right form
      * @param handler the handler function
-     * @param event the event that is beeing triggered
+     * @param event the event that is being triggered
      * @return the script execution result
      */
     protected ScriptResult runEventHandler(final Function handler, final Event event) {
@@ -1540,7 +1540,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * Move the focus to the specified component.  This will trigger any relevant javascript
      * event handlers.
      *
-     * @param newElement The element that will recieve the focus, use <code>null</code> to remove focus from any element
+     * @param newElement The element that will receive the focus, use <code>null</code> to remove focus from any element
      * @return true if the specified element now has the focus.
      * @see #getElementWithFocus()
      * @see #tabToNextElement()

@@ -49,7 +49,7 @@
                     <li>
                         All files must be copyright <a href="http://www.GargoyleSoftware.com">Gargoyle Software Inc.</a>
                         and must be licensed under the same
-                        license as the rest of the probject - currently an <a href="license.html">Apache
+                        license as the rest of the project - currently an <a href="license.html">Apache
                         style</a> one.  This is required so that we can make sweeping changes such as the license
                         change that we already did (from LGPL to Apache style).
                     </li>
@@ -66,20 +66,20 @@
                     </li>
                     <li>
                     	   Please provide one patch only that contains all the files.  Some people
-	                    will submit seperate patches for each file in the diff and this just
+	                    will submit separate patches for each file in the diff and this just
 	                    makes more work for the committer.  Please also submit it as one single diff, 
 	                    not zipped up - again because it's easier for the committers.
                     </li>
                 </ul>
             </p>
             <p>
-            	<b>IMPORTANT: Patches without tests will be rejected</b>.  Occassionally
+            	<b>IMPORTANT: Patches without tests will be rejected</b>.  Occasionally
             	one of the committers will have the time to write the tests for you but this
             	is rare.  If you are not sure how to write a test for a given situation then
             	ask on the developer mailing list.
             </p>
             <p>
-                Additional documentation or code samples are always appreciated.  We're focussed on writing
+                Additional documentation or code samples are always appreciated.  We're focused on writing
                 code and documentation often gets neglected.
             </p>
         </section>

@@ -8,7 +8,7 @@
 -->
 
 <module name="Checker">
-    <!-- Make all of the messesages flagged as warnings -->
+    <!-- Make all of the messages flagged as warnings -->
     <property name="severity" value="warning"/>
 
     <!-- Checks that a package.html file exists for each package.     -->

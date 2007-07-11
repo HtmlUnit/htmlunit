@@ -106,7 +106,7 @@ security.provider.3=com.sun.net.ssl.internal.ssl.Provider
      <!-- jakarta commons lib -->
      <pathelement path="${weblogic.dir}/lib/commons-collections.jar"/>
                 ]]></source>
-                The xalan stuff is in here so that the xslt transalation works when I do the
+                The xalan stuff is in here so that the xslt translation works when I do the
                 junitreports
                 </li>
                 <li>

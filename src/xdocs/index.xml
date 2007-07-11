@@ -160,7 +160,7 @@
             <p>
                 Starting with the 1.1 release, HtmlUnit is supporting javascript.  The core
                 javascript language is already fully supported by the Rhino javascript engine.  The
-                web browser specific host objects are being implemented now.  We are focussing on
+                web browser specific host objects are being implemented now.  We are focusing on
                 those parts of javascript that are most commonly used first and will flesh out the
                 remaining javascript support over time.  If there is something specific that you
                 need that we haven't got to yet then please open a feature request.  We are

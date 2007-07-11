@@ -3,4 +3,4 @@ missing dependencies, you need to run the command "ant initialize".  This
 will load all the jar files you need from the ibiblio.org repository.
 
 If you are using maven to do your build, it will download these jars 
-automagically so there is nothing extra for you to do.
+automatically so there is nothing extra for you to do.

@@ -54,7 +54,7 @@
         <section name="Internet Explorer features">
             <p>
                 Internet Explorer has a number of features which are out of the normal Html/JavaScript spec.  Most of
-                these features have not been implimented but are being added and found and needed.  One feature is the
+                these features have not been implemented but are being added and found and needed.  One feature is the
                 document.getElementById function.  This function is suppose to return the tag that has the given id.
                 Within IE, if the id is not found, it is searched for by name. HtmlUnit supports this function but will
                 log a message at the WARN level that the search was done by name.

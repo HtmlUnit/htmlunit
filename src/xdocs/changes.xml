@@ -132,7 +132,7 @@
                 DomNode#getAllHtmlChildElements() now returns Iterator.
             </action>
             <action type="update" dev="mguillem" id="1714762">
-                Fixed exception occuring handling script tag with one line content starting with &lt;!-- and without closing --!&gt;.
+                Fixed exception occurring handling script tag with one line content starting with &lt;!-- and without closing --!&gt;.
             </action>
             <action type="update" dev="mguillem" id="1609944">
                 JavaScript: allow function named onload.
@@ -243,7 +243,7 @@
                 JavaScript: fixed remaining problem of submitted select values when select.selectedIndex = -1 has been used before setting an other value.
             </action>
             <action type="update" dev="mguillem" id="1692572" due-to="Ahmed Ashour">
-                JavaScript: setting innerHTML to emtpy string shouldn't create any text node.
+                JavaScript: setting innerHTML to empty string shouldn't create any text node.
             </action>
             <action type="update" dev="mguillem" id="1690203" due-to="Ahmed Ashour">
                 JavaScript: added support for property parentElement on DOM nodes (IE specific).
@@ -320,7 +320,7 @@
                 Set cookies defined in meta tags with http-equiv equals to set-cookie.
             </action>
             <action type="update" dev="mguillem" id="1628521" due-to="Andre Soereng">
-                Fixed NullPointerException occuring while submitting a from which onsubmit handler returns null.
+                Fixed NullPointerException occurring while submitting a from which onsubmit handler returns null.
             </action>
             <action type="update" dev="mguillem" id="1627983">
                 JavaScript: fixed bad initialisation of JavaScript context when window content changes 
@@ -341,7 +341,7 @@
             </action>
             <action type="update" dev="dktaylor" id="1040244">
                 Fixed Non-html reply in window.open() doesn't create window
-                object by restructing initialization of windows and pages.
+                object by restricting initialization of windows and pages.
                 Added line/column numbering of HTML elements for embedded
                 script names that are easier to debug.
             </action>
@@ -389,7 +389,7 @@
                 shouldn't reset the whole select.
             </action>
             <action type="update" dev="mguillem" id="1596926">
-                JavaScript: fixed java.util.ConcurrentModificationException occuring when some onload event is
+                JavaScript: fixed java.util.ConcurrentModificationException occurring when some onload event is
                 removed during execution of an onload event.
             </action>
             <action type="update" dev="mguillem" id="1409087">
@@ -437,7 +437,7 @@
                 Fixed asText() for hidden input. Now returns an empty string.
             </action>
             <action type="update" dev="mguillem">
-                JavaScript: only style's built in properties are of type String (with emtpy string as default value)
+                JavaScript: only style's built in properties are of type String (with empty string as default value)
             </action>
             <action type="update" dev="mguillem" id="1472606">
                 Use MultiThreadedHttpConnectionManager (avoids problems with requests started asynchronously from JavaScript).
@@ -493,7 +493,7 @@
                 XPath: fixed wrong behavior with following axis.
             </action>
             <action type="update" dev="mguillem" id="1552746">
-                JavaScript: fixed double execution of external javascript files occuring when text contained
+                JavaScript: fixed double execution of external javascript files occurring when text contained
                 between &lt;script src=...&gt; and &lt;/script&gt;.
             </action>
             <action type="update" dev="mguillem" id="1525269" due-to="Andre Soereng">
@@ -519,7 +519,7 @@
                 JavaScript: fixed default String conversion of objects (like table, table row, table cell, collection).
             </action>
             <action type="update" dev="mguillem" id="1415496">
-                JavaScript: XMLHttpRequest.responseXml NodeList elements now accesible by index.
+                JavaScript: XMLHttpRequest.responseXml NodeList elements now accessible by index.
             </action> 
             <action type="update" dev="mguillem" id="1525234" due-to="Andre Soereng">
                 JavaScript: take expiration date into account when creating cookies.
@@ -562,11 +562,11 @@
                 XmlPage: parse xml pages namespace aware.
 			</action>
             <action type="update" dev="mguillem" id="1494421">
-                JavaScript: ensure that the page beeing loaded has not already been replaced in its window
+                JavaScript: ensure that the page being loaded has not already been replaced in its window
                 by a new one through JavaScript before executing onload handlers.
 			</action>
             <action type="update" dev="mguillem">
-                Use Byte Order Mark to regognize UTF-8 content when no charset header is provided.
+                Use Byte Order Mark to recognize UTF-8 content when no charset header is provided.
 			</action>
             <action type="update" dev="mguillem">
                 JavaScript: added addEventListener/attachEvent, removeEventListener/detachEvent to Window, 
@@ -694,14 +694,14 @@
                 FrameWindow class.
             </action>        
             <action type="update" dev="mguillem">
-                JavaScript: fixed exception occuring when addBehavior is called twice for the same
+                JavaScript: fixed exception occurring when addBehavior is called twice for the same
                 behavior.
             </action>
             <action type="update" dev="mguillem" id="1378925" due-to="Bruce Faulkner">
                 JavaScript: Implement add() method for OptionsArray to avoid TypeError.
             </action>
             <action type="update" dev="mguillem">
-                JavaScript: added the full url of the file containing the script beeing executed
+                JavaScript: added the full url of the file containing the script being executed
                 in the exception message when a script error occurs.
             </action>
             <action type="update" dev="mguillem" id="1238429" due-to="Daniel Gredler">
@@ -756,7 +756,7 @@
 				HtmlOption.click() now returns correctly the page loaded by an onchange event.
             </action>
             <action type="update" dev="mguillem" id="1334541" due-to="ianzlovejoy">
-				Fixed requested url for post form with empty action and orginal page containing
+				Fixed requested url for post form with empty action and original page containing
                 a query string or action containing only a query string.
             </action>
             <action type="update" dev="mguillem">
@@ -848,7 +848,7 @@
                 (when no attribute is found as defined in HTML 4.01).
             </action>
             <action type="update" dev="mguillem" id="1264271" due-to="Bruce Faulkner">
-                JavaScript: fixed problem occuring while reading properties of nodes retrieved with childNodes().
+                JavaScript: fixed problem occurring while reading properties of nodes retrieved with childNodes().
             </action>
             <action type="update" dev="mguillem" id="1210726">
                 When posting a form as multipart/form-data don't send Content-Transfer-Encoding
@@ -990,7 +990,7 @@
                 which have been deprecated and given default implementations that call this method.
             </action>
             <action type="update" dev="mguillem" id="1183971" due-to="Bruce Faulkner">
-                Javascript: fixed exception occuring while changing type of input created via document.createElement().
+                Javascript: fixed exception occurring while changing type of input created via document.createElement().
             </action>
             <action type="update" dev="yourgod">
                 Upgraded commons-httpclient to version 3.0rc2
@@ -1005,7 +1005,7 @@
                 Javascript: implemented property contentDocument for frames and iframes on Mozilla.
             </action>
             <action type="update" dev="mguillem" id="1180352" due-to="George Murnock">
-                Javascript: fixed error occuring in NodeImpl insertBefore() with null reference child object.
+                Javascript: fixed error occurring in NodeImpl insertBefore() with null reference child object.
             </action>
 			<action type="update" dev="cerskine">
 				Now load the mapping of html classes to their respective JS classes from the configuration
@@ -1087,7 +1087,7 @@
                 to load an invalid URL starting with http://first
             </action>
             <action type="update" dev="mguillem" id="1155063">
-                Fixed node reference problem occuring when the text of a textarea is changed.
+                Fixed node reference problem occurring when the text of a textarea is changed.
             </action>
             <action type="update" dev="mguillem" id="1153710" due-to="George Murnock">
                 Javascript: document.links doesn't return tags with empty href anymore.
@@ -1102,7 +1102,7 @@
                 Javascript: the type property of input elements can now be changed.
             </action>
             <action type="update" dev="mguillem" id="1145773" due-to="George Murnock">
-                Fixed bug occuring when submitting from javascript a form with a javascript action.
+                Fixed bug occurring when submitting from javascript a form with a javascript action.
             </action>
             <action type="update" dev="yourgod" id="1151184">
                 HtmlElement's getHtmlElementsByAttribute, getHtmlElementsByTagName, and 
@@ -1166,7 +1166,7 @@
                 Parse responses of type "application/xml" as XmlPage.
             </action>
             <action type="update" dev="mguillem" id="1101525" due-to="Hans Donner">
-                Fixed wrond urls expansion with "#".
+                Fixed wrong urls expansion with "#".
             </action>
             <action type="update" dev="mguillem" id="1106319" due-to="Daniel Gredler">
                 JavaScript: improved window.execScript to execute JavaScript code.
@@ -1181,10 +1181,10 @@
                 Javascript: implemented innerText for html elements (read/write).
             </action>
             <action type="update" dev="mguillem">
-                Fixed ClassCastException occuring when unloading a frameset that contained a frame which content wasn't html.
+                Fixed ClassCastException occurring when unloading a frameset that contained a frame which content wasn't html.
             </action>
             <action type="update" dev="yourgod">
-                Implemeted WebRequestSettings parameter object.
+                Implemented WebRequestSettings parameter object.
                 Created new WebClient.getPage() methods and deprecated old ones.
             </action>        
             <action type="update" dev="yourgod">
@@ -1201,7 +1201,7 @@
                 JavaScript: added dummy implementation of window.setInterval and window.clearInterval doing nothing.
             </action>
             <action type="update" dev="yourgod" id="976471" due-to="David D. Kilzer">
-                syncronized javascript execution for multi-threaded testing
+                synchronized javascript execution for multi-threaded testing
             </action>
             <action type="update" dev="yourgod" id="1088709">
                 parse application/xhtml+xml content type into HtmlPage
@@ -1254,7 +1254,7 @@
                 JavaScript: dynamically compiled function runs in the scope of their creation.
             </action>
             <action type="update" dev="mguillem">
-                JavaScript: fixed problem occuring for &lt;script for="window" event="onload()"&gt; with event value ending with "()".
+                JavaScript: fixed problem occurring for &lt;script for="window" event="onload()"&gt; with event value ending with "()".
             </action>
             <action type="add" dev="mguillem">
                 JavaScript: added document.domain.
@@ -1302,7 +1302,7 @@
             </action>
             <action type="update" dev="mguillem">
                 Added DebuggingWebConnection, a web connection that saves the received responses and builds an overview. 
-                Sometimes usefull at conception time to understand what is "browsed".
+                Sometimes useful at conception time to understand what is "browsed".
             </action>
             <action type="update" dev="mguillem" due-to="Chris Eldredge" id="1090438">
                 Extended javascript event handler to most common events:  ondblclick, onmousedown, onmouseup,
@@ -1513,7 +1513,7 @@
             <action type="add" dev="mbowler">
                 Added dependencies to jaxen 1.0 and saxpath 1.0 as they are needed by the
                 latest dom4j.  It would appear that saxpath will be rolled into jaxen in future
-                releases but for now it is a seperate dependency.
+                releases but for now it is a separate dependency.
             </action>                 
             <action type="update" dev="mbowler">
                 Upgraded commons-collections to version 3.1
@@ -1669,7 +1669,7 @@
                 FocusableElement as it's parameter instead of an HtmlElement.
                 FocusableElement is derived from HtmlElement.
                 Added framework for focus() and blur() as well as JavaScript support 
-                for them on achors and inputs.
+                for them on anchors and inputs.
             </action>           
             <action type="update" dev="yourgod">
                 Added support for JavaScript Element.setAttribute()
@@ -1702,7 +1702,7 @@
                 INCOMPATIBLE CHANGE: PageCreator.createPage() no longer takes a 
                 WebClient as a parameter. If you have an existing PageCreator 
                 you can get the WebClient from the WebWindow parameter. 
-                This change also occured in DefaultPageCreator.
+                This change also occurred in DefaultPageCreator.
             </action>        
             <action type="update" dev="yourgod">
                 Deprecated HtmlPage(WebClient, URL, WebResponse, webWindow) in favor of
@@ -1776,7 +1776,7 @@
             </action>
             <action type="update" dev="mbowler">
                 The same hard coded urls were being used over and over again throughout 
-                the tests.  Defined constants for the most freqently used urls in 
+                the tests.  Defined constants for the most frequently used urls in 
                 WebTestCase and changed tests to use these constants.  This will reduce 
                 the number of temporary objects during tests runs and will decrease the 
                 chance of making a typo in the urls.
@@ -1824,7 +1824,7 @@
                 window closing events.
             </action>
             <action type="update" dev="mbowler" due-to="Christian Sell">
-                INCOMPATIBLE CHANGE: There previously were three seperate tree models
+                INCOMPATIBLE CHANGE: There previously were three separate tree models
                 for any given page: 1) the HtmlElement hierarchy 2) The xml DOM model and
                 3) the javascript element model.  Now the first two tree models have 
                 been merged into one.
@@ -1955,7 +1955,7 @@
                 Fixed exception when specifying an empty string for src on an a frame.
             </action>
             <action type="update" dev="dktaylor" id="753776">
-                Fixed the bug where newly opened windows targetted at named
+                Fixed the bug where newly opened windows targeted at named
                 frames were not opening in the correct windows.
 
                 Changed returned page from click() method to work with new
@@ -2109,7 +2109,7 @@
             </action>
             <action type="update" dev="mbowler">
                 Many classes had their own assertNotNull() method.  Created an assert class and
-                changed all classes to use Assert.notNull() rather than seperate methods.
+                changed all classes to use Assert.notNull() rather than separate methods.
             </action>
             <action type="update" dev="mbowler" due-to="Noboru Sinohara" id="716568">
                 Fixed bug in character encoding.  Patch supplied by Noboru Sinohara.
@@ -2315,7 +2315,7 @@
         <release version="1.2" date="March 10, 2003">
             <action type="update" dev="mbowler">
                 Fixed bug where redirection didn't happen correctly if the location header contained
-                multiple entries seperated by commas
+                multiple entries separated by commas
             </action>
             <action type="update" dev="mbowler">
                 Fixed bug where some success status codes (not 200) were being reported as errors
@@ -2378,7 +2378,7 @@
             <action type="update" dev="mbowler">
                 Changes in the latest versions of commons-httpclient are reusing buffers that they
                 previously weren't.  This results in a situation where trying to get the content
-                out of a WebResponse after the inital load would result in no content.  Buffering
+                out of a WebResponse after the initial load would result in no content.  Buffering
                 is now done within HtmlUnit to avoid this problem.
             </action>
             <action type="add" dev="mbowler">
@@ -2448,7 +2448,7 @@
             <action type="update" dev="mbowler">
                 Removed the need for HiddenWebWindow - javascript files are now loaded via
                 <javadoc>com.gargoylesoftware.htmlunit.WebClient#loadWebResponse(java.net.URL, com.gargoylesoftware.htmlunit.SubmitMethod, java.util.List)</javadoc>.
-                This should fix an intermittant bug where an UnsupportedOperationException was being called from
+                This should fix an intermittent bug where an UnsupportedOperationException was being called from
                 the HiddenWebWindow if a javascript file was returned with a content type of "text/html"
             </action>
             <action type="update" dev="mbowler">
@@ -2559,7 +2559,7 @@
                 Changed html parser from
                 <a href="http://sourceforge.net/projects/jtidy">JTidy</a> to
                 <a href="http://www.apache.org/~andyc/neko/doc/index.html">CyberNeko</a>.
-                CyberNeko is better at parsing really bad html but this now gives us a dependancy on the
+                CyberNeko is better at parsing really bad html but this now gives us a dependency on the
                 <a href="http://xml.apache.org/xerces2-j/">xerces parser from apache</a>.
             </action>
             <action type="update" dev="mbowler">
@@ -2692,7 +2692,7 @@
             </action>
             <action type="update" dev="mbowler">
                 Changed SimpleScriptable.getLog() to create a new log object each time.  This is
-                neccessary since in rhino, functions don't know who their object is.  A way for
+                necessary since in rhino, functions don't know who their object is.  A way for
                 functions to learn about their objects will have to be determined.
             </action>
             <action type="add" dev="mbowler">

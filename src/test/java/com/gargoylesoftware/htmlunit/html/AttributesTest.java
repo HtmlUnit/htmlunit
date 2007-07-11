@@ -78,7 +78,7 @@ public class AttributesTest extends WebTestCase {
     }
 
     /**
-     * Return a test suite containing a seperate test for each attribute
+     * Return a test suite containing a separate test for each attribute
      * on each element.
      *
      * @return The test suite

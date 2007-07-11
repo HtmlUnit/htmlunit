@@ -45,7 +45,7 @@
 								 	 </li>
 								 	 <li>
 								 	      Best is to review the code and find what is causing the bug and not only write a unit test that
-								 	      procduces the bug, but also a patch that fixes the bug.  Include these files in the bug report
+								 	      produces the bug, but also a patch that fixes the bug.  Include these files in the bug report
 								 	      following the rules for <a href="submittingPatches.html">submitting patches.</a>
 								 	 </li>
 							  </ul>
