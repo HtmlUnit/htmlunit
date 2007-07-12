@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="mguillem">
+                Experimental: added AjaxController and NicelyResynchronizingAjaxController.
+            </action>
             <action type="update" dev="mguillem" id="1225021">
                 JavaScript: added support for window.captureEvents (FF).
             </action>

@@ -51,6 +51,7 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Document;
 
+import com.gargoylesoftware.htmlunit.AjaxController;
 import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -325,7 +326,10 @@ public class XMLHttpRequest extends SimpleScriptable {
     public void jsxFunction_send( final Object content ) {
         prepareRequest(content);
 
-        if (!async_) {
+        final AjaxController ajaxController = getWindow().getWebWindow().getWebClient().getAjaxController();
+        final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final boolean synchron = ajaxController.processSynchron(page, requestSettings_, async_);
+        if (synchron) {
             doSend(Context.getCurrentContext());
         }
         else {

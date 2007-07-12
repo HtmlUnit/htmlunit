@@ -127,6 +127,8 @@ public class WebClient implements Serializable {
     private ConfirmHandler confirmHandler_;
     private PromptHandler  promptHandler_;
     private StatusHandler  statusHandler_;
+    private AjaxController ajaxController_ = new AjaxController();
+    
 
     private BrowserVersion browserVersion_ = BrowserVersion.getDefault();
     private boolean isRedirectEnabled_ = true;
@@ -1722,5 +1724,24 @@ public class WebClient implements Serializable {
         }
         incorrectnessListener_ = listener;
     }
+    
+    /**
+     * Gets the current Ajax controller
+     * @return the controller
+     */
+    public AjaxController getAjaxController() {
+        return ajaxController_;
+    }
 
+    /**
+     * Sets the current Ajax controller
+     * <span style="color:red">EXPERIMENTAL - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * @param newValue the controller
+     */
+    public void setAjaxController(final AjaxController newValue) {
+        if (newValue == null) {
+            throw new NullPointerException();
+        }
+        ajaxController_ = newValue;
+    }
 }
