@@ -37,15 +37,22 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * The javascript object "NodeImpl" which is the base class for all DOM
@@ -65,19 +72,12 @@ public class NodeImpl extends SimpleScriptable {
 
     private HTMLCollection childNodes_; //has to be a member to have equality (==) working
     private static final long serialVersionUID = -5695262053081637445L;
-
+    private EventListenersContainer eventListenersContainer_;
 
     /**
      * Create an instance.
      */
     public NodeImpl() {
-    }
-
-    /**
-     * Javascript constructor.  This must be declared in every javascript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
-     */
-    public void jsConstructor() {
     }
 
     /**
@@ -341,20 +341,32 @@ public class NodeImpl extends SimpleScriptable {
      * @param listener the event listener
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/attachevent.asp">
      * MSDN documentation</a>
+     * @return <code>true</code> if the listener has been added
      */
-    public void jsxFunction_attachEvent(final String type, final Function listener) {
-        jsxFunction_addEventListener( type, listener, false );
+    public boolean jsxFunction_attachEvent(final String type, final Function listener) {
+        return getEventListenersContainer().addEventListener(StringUtils.substring(type, 2), listener, false);
     }
 
     /**
      * Allows the registration of event listeners on the event target.
-     * @param type the event type to listen for (like "onclick")
+     * @param type the event type to listen for (like "click")
      * @param listener the event listener
-     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
+     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.addEventListener">Mozilla documentation</a>
      */
     public void jsxFunction_addEventListener(final String type, final Function listener, final boolean useCapture) {
-        getDomNodeOrDie().setEventHandler( type, listener );
+        getEventListenersContainer().addEventListener(type, listener, useCapture);
+    }
+
+    /**
+     * Gets the container for event listeners
+     * @return the container (newly created if needed)
+     */
+    private EventListenersContainer getEventListenersContainer() {
+        if (eventListenersContainer_ == null) {
+            eventListenersContainer_ = new EventListenersContainer(this);
+        }
+        return eventListenersContainer_;
     }
 
     /**
@@ -365,17 +377,181 @@ public class NodeImpl extends SimpleScriptable {
      * MSDN documentation</a>
      */
     public void jsxFunction_detachEvent(final String type, final Function listener) {
-        jsxFunction_removeEventListener( type, listener, false );
+        jsxFunction_removeEventListener(StringUtils.substring(type, 2), listener, false);
     }
 
     /**
      * Allows the removal of event listeners on the event target.
-     * @param type the event type to listen for (like "onclick")
+     * @param type the event type to listen for (like "click")
      * @param listener the event listener
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener">Mozilla documentation</a>
      */
     public void jsxFunction_removeEventListener(final String type, final Function listener, final boolean useCapture) {
-        getDomNodeOrDie().removeEventHandler( type );
+        getEventListenersContainer().removeEventListener(type, listener, useCapture);
+    }
+
+    /**
+     * Execute the event on this object only (needed for instance for onload on (i)frame tags)
+     * @param event the event
+     * @return the result
+     */
+    public ScriptResult executeEvent(final Event event) {
+
+        if (eventListenersContainer_ != null) {
+            final HtmlPage page = getDomNodeOrDie().getPage();
+            final boolean isIE = page.getWebClient().getBrowserVersion().isIE();
+            final Window window = (Window) page.getEnclosingWindow().getScriptObject();
+            final Object[] args = new Object[] {event};
+            if (isIE) {
+                window.setEvent(event);
+            }
+            
+            // handlers declared as property on a node don't receive the event as argument for IE
+            final Object[] propHandlerArgs;
+            if (isIE) {
+                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY; 
+            }
+            else {
+                propHandlerArgs = args;
+            }
+            
+            try {
+                return eventListenersContainer_.executeListeners(event, args, propHandlerArgs);
+            }
+            finally {
+                window.setEvent(null); // reset event
+            }
+        }
+        
+        return null;
+    }
+    
+    /**
+     * Fires the event on the node with capturing and bubbling phase
+     * @param event the event
+     * @return the result
+     */
+    public ScriptResult fireEvent(final Event event) {
+        final HtmlPage page = getDomNodeOrDie().getPage();
+        final boolean isIE = page.getWebClient().getBrowserVersion().isIE();
+        final Window window = (Window) page.getEnclosingWindow().getScriptObject();
+        final Object[] args = new Object[] {event};
+
+        ScriptResult result = null;
+        if (isIE) {
+            window.setEvent(event);
+        }
+        try {
+            // window's listeners
+            final EventListenersContainer windowsListeners = getWindow().getEventListenersContainer();
+    
+            // capturing phase
+            result = windowsListeners.executeCapturingListeners(event, args);
+            if (event.isPropagationStopped()) {
+                return result;
+            }
+            final List parents = new ArrayList();
+            DomNode node = getDomNodeOrDie();
+            while (node != null) {
+                parents.add(node);
+                node = node.getParentNode();
+            }
+            for (int i=parents.size()-1; i>=0; --i) {
+                final DomNode curNode = (DomNode) parents.get(i);
+                final NodeImpl jsNode = (NodeImpl) curNode.getScriptObject();
+                if (jsNode.eventListenersContainer_ != null) {
+                    result = defaultResult(jsNode.eventListenersContainer_.executeCapturingListeners(event, args), 
+                            result);
+                    if (event.isPropagationStopped()) {
+                        return result;
+                    }
+                }
+            }
+    
+            // handlers declared as property on a node don't receive the event as argument for IE
+            final Object[] propHandlerArgs;
+            if (isIE) {
+                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY; 
+            }
+            else {
+                propHandlerArgs = args;
+            }
+    
+            // bubbling phase
+            node = getHtmlElementOrDie();
+            while (node != null) {
+                final NodeImpl jsNode = (NodeImpl) node.getScriptObject();
+                
+                if (jsNode.eventListenersContainer_ != null) {
+                    result = defaultResult(
+                            jsNode.eventListenersContainer_.executeBubblingListeners(event, args, propHandlerArgs), 
+                            result);
+                    if (event.isPropagationStopped()) {
+                        return result;
+                    }
+                }
+    
+                node = node.getParentNode();
+            }
+            
+            result = defaultResult(windowsListeners.executeBubblingListeners(event, args, propHandlerArgs), result);
+        }
+        finally {
+            window.setEvent(null); // reset event
+        }
+
+        return result;
+    }
+
+    private ScriptResult defaultResult(final ScriptResult newResult, final ScriptResult defaultResult) {
+        if (newResult != null) {
+            return newResult;
+        }
+        return defaultResult;
+    }
+
+    /**
+     * Gets an event handler
+     * @param eventName the event name (ex: "onclick")
+     * @return the handler function, <code>null</code> if the property is null or not a function
+     */
+    public Function getEventHandler(final String eventName) {
+        if (eventListenersContainer_ == null) {
+            return null;
+        }
+        return eventListenersContainer_.getEventHandler(StringUtils.substring(eventName, 2));
+    }
+
+    /**
+     * Defines an event handler
+     * @param eventName the event name (like "onclick")
+     * @param eventHandler the handler (<code>null</code> to reset it)
+     */
+    public void setEventHandler(final String eventName, final Function eventHandler) {
+        setEventHandlerProp(eventName, eventHandler);
+    }
+
+    /**
+     * Defines an event handler (or maybe any other object)
+     * @param eventName the event name (like "onclick")
+     * @param value the property (<code>null</code> to reset it)
+     */
+    protected void setEventHandlerProp(final String eventName, final Object value) {
+        getEventListenersContainer().setEventHandlerProp(StringUtils.substring(eventName.toLowerCase(), 2), value);
+    }
+
+    /**
+     * Gets the property defined as event handler (not necessary a Function if something else has been set)
+     * @param eventName the event name (like "onclick")
+     * @return the property
+     */
+    protected Object getEventHandlerProp(final String eventName) {
+        if (eventListenersContainer_ == null) {
+            return null;
+        }
+        else {
+            return eventListenersContainer_.getEventHandlerProp(StringUtils.substring(eventName.toLowerCase(), 2));
+        }
     }
 }

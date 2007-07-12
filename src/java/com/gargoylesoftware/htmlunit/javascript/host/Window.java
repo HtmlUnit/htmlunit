@@ -41,14 +41,11 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.collections.Transformer;
-import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
@@ -104,13 +101,12 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private Screen screen_;
     private History history_;
     private Location location_;
-    private Object onload_;
     private Object event_;
     private String status_ = "";
     private HTMLCollection frames_; // has to be a member to have equality (==) working
-    private Map eventHandlers_ = new HashMap();
     private Map prototypes_ = new HashMap(); 
     private final JavaScriptEngine scriptEngine_;
+    private EventListenersContainer eventListenersContainer_;
 
     /**
      * Creates an instance.
@@ -677,7 +673,41 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param newOnload The new handler
      */
     public void jsxSet_onload(final Object newOnload) {
-        onload_ = newOnload;
+        getEventListenersContainer().setEventHandlerProp("load", newOnload);
+    }
+
+    /**
+     * Set the value of the onclick event handler.
+     * @param newOnload The new handler
+     */
+    public void jsxSet_onclick(final Object newOnload) {
+        getEventListenersContainer().setEventHandlerProp("click", newOnload);
+    }
+
+    /**
+     * Return the onclick property (caution this is not necessary a function if something else has
+     * been set)
+     * @return the onclick property
+     */
+    public Object jsxGet_onclick() {
+        return getEventListenersContainer().getEventHandlerProp("click");
+    }
+
+    /**
+     * Set the value of the ondblclick event handler.
+     * @param newHandler The new handler
+     */
+    public void jsxSet_ondblclick(final Object newHandler) {
+        getEventListenersContainer().setEventHandlerProp("dblclick", newHandler);
+    }
+
+    /**
+     * Return the ondblclick property (caution this is not necessary a function if something else has
+     * been set)
+     * @return the ondblclick property
+     */
+    public Object jsxGet_ondblclick() {
+        return getEventListenersContainer().getEventHandlerProp("dblclick");
     }
 
     /**
@@ -686,7 +716,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the onload property
      */
     public Object jsxGet_onload() {
-        if (onload_ == null) {
+        final Object onload = getEventListenersContainer().getEventHandlerProp("load");
+        if (onload == null) {
             // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
             final HtmlPage page = (HtmlPage) webWindow_.getEnclosedPage();
             final List listTagNames = Arrays.asList(new String[] {"body", "frameset"});
@@ -699,55 +730,19 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             }
         }
         else {
-            return onload_;
+            return onload;
         }
     }
 
     /**
-     * Return the onload event handler function.
-     * @return <code>null</code> if onload has been set to something that is not a function
+     * Gets the container for event listeners
+     * @return the container (newly created if needed)
      */
-    public Function getOnloadHandler() {
-        final Object handler = jsxGet_onload();
-        if (handler instanceof Function) {
-            return (Function) handler;
+    EventListenersContainer getEventListenersContainer() {
+        if (eventListenersContainer_ == null) {
+            eventListenersContainer_ = new EventListenersContainer(this);
         }
-        else {
-            return null;
-        }
-    }
-
-    /**
-     * Gets the listeners registered for the given type
-     * @param type the type of event
-     * @return a list of {@link Function}
-     */
-    public List getListeners(final String type) {
-        return (List) ObjectUtils.defaultIfNull(eventHandlers_.get(type), Collections.EMPTY_LIST);
-    }
-
-    /**
-     * Internal function adding an event listener
-     * @param type the event type to listen for (like "load")
-     * @param listener the event listener
-     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
-     * @return <code>true</code> if the listener has been added
-     */
-    protected boolean addEventListener(final String type, final Function listener, final boolean useCapture) {
-        List listeners = (List) eventHandlers_.get(type);
-        if (listeners == null) {
-            listeners = new Vector();
-            eventHandlers_.put(type, listeners);
-        }
-
-        if (listeners.contains(listener)) {
-            getLog().debug(type + " listener already registered, skipping it (" + listener + ")");
-            return false;
-        }
-        else {
-            listeners.add(listener);
-            return true;
-        }
+        return eventListenersContainer_;
     }
 
     /**
@@ -759,7 +754,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return <code>true</code> if the listener has been added
      */
     public boolean jsxFunction_attachEvent(final String type, final Function listener) {
-        return addEventListener(StringUtils.substring(type, 2), listener, true);
+        return getEventListenersContainer().addEventListener(StringUtils.substring(type, 2), listener, false);
     }
 
     /**
@@ -770,7 +765,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.addEventListener">Mozilla documentation</a>
      */
     public void jsxFunction_addEventListener(final String type, final Function listener, final boolean useCapture) {
-        addEventListener(type, listener, useCapture);
+        getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
 
     /**
@@ -781,7 +776,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * MSDN documentation</a>
      */
     public void jsxFunction_detachEvent(final String type, final Function listener) {
-        removeEventListener(StringUtils.substring(type, 2), listener, true);
+        getEventListenersContainer().removeEventListener(StringUtils.substring(type, 2), listener, false);
     }
 
     /**
@@ -792,21 +787,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener">Mozilla documentation</a>
      */
     public void jsxFunction_removeEventListener(final String type, final Function listener, final boolean useCapture) {
-        removeEventListener(type, listener, useCapture);
-    }
-
-    /**
-     * Allows the removal of event listeners on the event target
-     * @param type the event type to listen for (like "load")
-     * @param listener the event listener
-     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
-     * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener">Mozilla documentation</a>
-     */
-    protected void removeEventListener(final String type, final Function listener, final boolean useCapture) {
-        final List listeners = (List) eventHandlers_.get(type);
-        if (listeners != null) {
-            listeners.remove(listener);
-        }
+        getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }
 
     /**

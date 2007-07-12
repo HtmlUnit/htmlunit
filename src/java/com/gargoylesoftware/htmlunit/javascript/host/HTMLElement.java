@@ -41,7 +41,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -71,6 +70,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
@@ -114,7 +114,6 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     private HTMLCollection all_; // has to be a member to have equality (==) working
     private int scrollLeft_ = 0;
     private int scrollTop_ = 0;
-    private final Map eventHandlers_ = new HashMap();
 
 
     /**
@@ -183,6 +182,11 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
                 // TODO: check that it is an "allowed" event for the browser, and take care to the case
                 final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, (String) entry.getValue());
                 setEventHandler(eventName, eventHandler);
+                // forward onload, onclick, ondblclick, ... to window
+                if ((domNode instanceof HtmlBody || domNode instanceof HtmlFrameSet)) {
+                    getWindow().getEventListenersContainer()
+                        .setEventHandlerProp(eventName.substring(2), eventHandler);
+                }
             }
         }
     }
@@ -1147,18 +1151,12 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         return children;
     }
 
-    private Object getEventHandlerProp(final String eventName) {
-        // TODO: handle differences between IE and FF: null vs undefined
-        return eventHandlers_.get(eventName);
-    }
-
-
     /**
      * Set the onclick event handler for this element.
      * @param handler the new handler
      */
     public void jsxSet_onclick(final Object handler) {
-        eventHandlers_.put("onclick", handler);
+        setEventHandlerProp("onclick", handler);
     }
 
     /**
@@ -1174,7 +1172,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @param handler the new handler     
      **/
     public void jsxSet_ondblclick(final Object handler) {
-        eventHandlers_.put("ondblclick", handler);
+        setEventHandlerProp("ondblclick", handler);
     }
 
     /**
@@ -1190,7 +1188,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @param handler the new handler
      */
     public void jsxSet_onblur(final Object handler) {
-        eventHandlers_.put("onblur", handler);
+        setEventHandlerProp("onblur", handler);
     }
 
     /**
@@ -1206,7 +1204,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @param handler the new handler
      */
     public void jsxSet_onfocus(final Object handler) {
-        eventHandlers_.put("onfocus", handler);
+        setEventHandlerProp("onfocus", handler);
     }
 
     /**
@@ -1222,7 +1220,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @param handler the new handler
      */
     public void jsxSet_onkeydown(final Object handler) {
-        eventHandlers_.put("onkeydown", handler);
+        setEventHandlerProp("onkeydown", handler);
     }
 
     /**
@@ -1238,7 +1236,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @param handler the new handler
      */
     public void jsxSet_onkeypress(final Object handler) {
-        eventHandlers_.put("onkeypress", handler);
+        setEventHandlerProp("onkeypress", handler);
     }
 
     /**
@@ -1254,7 +1252,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @param handler the new handler
      */
     public void jsxSet_onkeyup(final Object handler) {
-        eventHandlers_.put("onkeyup", handler);
+        setEventHandlerProp("onkeyup", handler);
     }
 
     /**
@@ -1270,7 +1268,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @param handler the new handler
      */
     public void jsxSet_onmousedown(final Object handler) {
-        eventHandlers_.put("onmousedown", handler);
+        setEventHandlerProp("onmousedown", handler);
     }
 
     /**
@@ -1286,7 +1284,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @param handler the new handler
      */
     public void jsxSet_onmousemove(final Object handler) {
-        eventHandlers_.put("onmousemove", handler);
+        setEventHandlerProp("onmousemove", handler);
     }
 
     /**
@@ -1302,7 +1300,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @param handler the new handler
      */
     public void jsxSet_onmouseout(final Object handler) {
-        eventHandlers_.put("onmouseout", handler);
+        setEventHandlerProp("onmouseout", handler);
     }
 
     /**
@@ -1318,7 +1316,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @param handler the new handler
      */
     public void jsxSet_onmouseover(final Object handler) {
-        eventHandlers_.put("onmouseover", handler);
+        setEventHandlerProp("onmouseover", handler);
     }
 
     /**
@@ -1334,7 +1332,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @param handler the new handler
      */
     public void jsxSet_onmouseup(final Object handler) {
-        eventHandlers_.put("onmouseup", handler);
+        setEventHandlerProp("onmouseup", handler);
     }
 
     /**
@@ -1350,7 +1348,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @param handler the new handler
      */
     public void jsxSet_onresize(final Object handler) {
-        eventHandlers_.put("onresize", handler);
+        setEventHandlerProp("onresize", handler);
     }
 
     /**
@@ -1515,27 +1513,4 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * is just to prevent scripts that call that method from failing
      */
     public void jsxFunction_scrollIntoView() {}
-
-    /**
-     * Gets an event handler
-     * @param eventName the event name (ex: "onclick")
-     * @return the handler function, <code>null</code> if the property is null or not a function
-     */
-    public Function getEventHandler(final String eventName) {
-        final Object handler = eventHandlers_.get(eventName.toLowerCase());
-        if (handler instanceof Function) {
-            return (Function) handler;
-        }
-        return null;
-    }
-
-    /**
-     * Defines an event handler
-     * @param eventName the event name (like "onclick")
-     * @param eventHandler the handler (<code>null</code> to reset it)
-     */
-    public void setEventHandler(final String eventName, final Function eventHandler) {
-        eventHandlers_.put(eventName.toLowerCase(), eventHandler);
-
-    }
 }

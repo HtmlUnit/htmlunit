@@ -327,7 +327,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         }
 
         if (triggerHandler) {
-            return getPage().executeOnChangeHandlerIfAppropriate(this);
+            return HtmlInput.executeOnChangeHandlerIfAppropriate(this);
         }
         else {
             // nothing to do

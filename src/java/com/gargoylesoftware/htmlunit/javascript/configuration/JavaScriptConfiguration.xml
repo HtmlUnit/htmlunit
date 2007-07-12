@@ -198,6 +198,12 @@
         <property name="shiftKey" readable="true" writable="false"/>
         <property name="ctrlKey" readable="true" writable="false"/>
         <property name="altKey" readable="true" writable="false"/>
+        <property name="cancelBubble" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <function name="stopPropagation">
+            <browser name="Netscape" min-version="6"/>
+        </function>
     </class>
 
     <class name="FocusableHostElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"
@@ -858,6 +864,8 @@
         </property>
         <property name="name" readable="true" writable="true"/>
         <property name="navigator" readable="true" writable="false"/>
+        <property name="onclick" readable="true" writable="true"/>
+        <property name="ondblclick" readable="true" writable="true"/>
         <property name="onerror" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="3" max-version="5"/>
         </property>

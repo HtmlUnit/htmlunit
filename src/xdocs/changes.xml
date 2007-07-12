@@ -7,6 +7,18 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1716129">
+                JavaScript: fixed addEventListener cannot be called twice.
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: added support for event capturing and bubbling phases.
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: added support for Event.stopPropagation() (FF) and Event.cancelBubble() (IE).
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: added support for window.onclick and window.ondblclick.
+            </action>
             <action type="update" dev="asashour" id="1579707">
                 Ignore &lt;base&gt; if inside &lt;body&gt; (#1579707).
             </action>

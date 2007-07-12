@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
@@ -106,7 +107,7 @@ public class ScriptEngineTest extends WebTestCase {
             public Object callFunction(
                     final HtmlPage htmlPage, final Object javaScriptFunction,
                     final Object thisObject, final Object [] args,
-                    final HtmlElement htmlElement ) {
+                    final DomNode htmlElement ) {
                 return null;
             }
             public boolean isScriptRunning() {

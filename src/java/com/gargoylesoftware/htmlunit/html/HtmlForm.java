@@ -51,7 +51,6 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
-import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -168,13 +167,9 @@ public class HtmlForm extends ClickableElement {
         final HtmlPage htmlPage = getPage();
         if (htmlPage.getWebClient().isJavaScriptEnabled()) {
             if (submitElement != null) {
-                final Function onsubmit = getEventHandler("onsubmit");
-                if (onsubmit != null) {
-                    final Event event = new Event(this, Event.TYPE_SUBMIT);
-                    final ScriptResult scriptResult = getPage().runEventHandler(onsubmit, event);
-                    if (Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
-                        return scriptResult.getNewPage();
-                    }
+                final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);
+                if (scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
+                    return scriptResult.getNewPage();
                 }
             }
 
@@ -284,17 +279,9 @@ public class HtmlForm extends ClickableElement {
      */
     public Page reset() {
         final HtmlPage htmlPage = getPage();
-        if (htmlPage.getWebClient().isJavaScriptEnabled() ) {
-            final Function function = getEventHandler("onreset");
-
-            if (function != null) {
-                final Event event = new Event(this, Event.TYPE_RESET);
-                final ScriptResult scriptResult = getPage().runEventHandler(function, event);
-
-                if (Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
-                    return scriptResult.getNewPage();
-                }
-            }
+        final ScriptResult scriptResult = fireEvent(Event.TYPE_RESET);
+        if (scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
+            return scriptResult.getNewPage();
         }
 
         final Iterator elementIterator = getAllHtmlChildElements();

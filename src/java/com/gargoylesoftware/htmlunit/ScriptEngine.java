@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.apache.commons.logging.Log;
@@ -131,7 +132,7 @@ public abstract class ScriptEngine {
         final Object javaScriptFunction,
         final Object thisObject,
         final Object [] args,
-        final HtmlElement htmlElementScope );
+        final DomNode htmlElementScope );
 
     /**
      * Return the log object that is being used to log information about the script engine.

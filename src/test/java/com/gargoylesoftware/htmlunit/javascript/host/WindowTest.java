@@ -1660,7 +1660,7 @@ public class WindowTest extends WebTestCase {
             + "</script></head>\n"
             + "<body onload='alert(\"onload\")'></body></html>\n";
         final String[] expectedAlerts = {"true", "false", "true", "false", 
-            "test1, param null: false", "test2", "onload"};
+            "onload", "test1, param null: false", "test2"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);

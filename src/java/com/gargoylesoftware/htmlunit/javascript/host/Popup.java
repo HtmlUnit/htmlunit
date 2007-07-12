@@ -83,6 +83,7 @@ public class Popup extends SimpleScriptable {
         // take the WebResponse of the opener (not really correct, but...)
         final WebResponse webResponse = openerWindow.getEnclosedPage().getWebResponse();
         final HtmlPage popupPage = new HtmlPage(null, webResponse, popupPseudoWindow);
+        setDomNode(popupPage);
         popupPseudoWindow.setEnclosedPage(popupPage);
         final HtmlHtml html = (HtmlHtml)HTMLParser.getFactory( HtmlHtml.TAG_NAME ).createElement( 
                 popupPage, HtmlHtml.TAG_NAME, null);

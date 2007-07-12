@@ -379,8 +379,6 @@ public class EventTest extends WebTestCase {
 
     }
 
-
-
     /**
      * Test that the event property of the window is available
      * @throws Exception if the test fails
@@ -427,5 +425,120 @@ public class EventTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test for event capturing and bubbling in FF
+     * @throws Exception if the test fails
+     */
+    public void testFF_EventCapturingAndBubbling() throws Exception {
+        final String content = "<html><head><title>foo</title>"
+            + "<script>"
+            + "function t(_s)"
+            + "{"
+            + "     return function() { alert(_s) };"
+            + "}"
+            + "function init()"
+            + "{"
+            + "  window.addEventListener('click', t('window capturing'), true);"
+            + "  window.addEventListener('click', t('window bubbling'), false);"
+            + "  var oDiv = document.getElementById('theDiv');"
+            + "  oDiv.addEventListener('click', t('div capturing'), true);"
+            + "  oDiv.addEventListener('click', t('div bubbling'), false);"
+            + "  var oSpan = document.getElementById('theSpan');"
+            + "  oSpan.addEventListener('click', t('span capturing'), true);"
+            + "  oSpan.addEventListener('click', t('span bubbling'), false);"
+            + "}"
+            + "</script>"
+            + "</head><body onload='init()'>"
+            + "<div onclick=\"alert('div')\" id='theDiv'>"
+            + "<span id='theSpan'>blabla</span>"
+            + "</div>"
+            + "</body></html>";
+       
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        ((ClickableElement) page.getHtmlElementById("theSpan")).click();
+
+        final String[] expectedAlerts = { "window capturing", "div capturing", "span capturing",
+            "span bubbling", "div", "div bubbling", "window bubbling" };
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test for event bubbling in IE
+     * @throws Exception if the test fails
+     */
+    public void testIE_EventBubbling() throws Exception {
+        // TODO: in IE no click event can be registered for the window
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title>"
+            + "<script>"
+            + "function t(_s)"
+            + "{"
+            + "     return function() { alert(_s) };"
+            + "}"
+            + "function init()"
+            + "{"
+            + "  window.attachEvent('onclick', t('window bubbling'));"
+            + "  var oDiv = document.getElementById('theDiv');"
+            + "  oDiv.attachEvent('onclick', t('div bubbling'));"
+            + "  var oSpan = document.getElementById('theSpan');"
+            + "  oSpan.attachEvent('onclick', t('span bubbling'));"
+            + "}"
+            + "</script>"
+            + "</head><body onload='init()'>"
+            + "<div onclick=\"alert('div')\" id='theDiv'>"
+            + "<span id='theSpan'>blabla</span>"
+            + "</div>"
+            + "</body></html>";
+       
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+        ((ClickableElement) page.getHtmlElementById("theSpan")).click();
+
+        final String[] expectedAlerts = {"span bubbling", "div", "div bubbling"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test for event capturing and bubbling in FF
+     * @throws Exception if the test fails
+     */
+    public void testFF_StopPropagation() throws Exception {
+        final String content = "<html><head><title>foo</title>"
+            + "<script>"
+            + "var counter = 0;"
+            + "function t(_s)"
+            + "{"
+            + "     return function(e) { alert(_s); counter++; if (counter >= 4) e.stopPropagation(); };"
+            + "}"
+            + "function init()"
+            + "{"
+            + "  window.addEventListener('click', t('window capturing'), true);"
+            + "  var oDiv = document.getElementById('theDiv');"
+            + "  oDiv.addEventListener('click', t('div capturing'), true);"
+            + "  var oSpan = document.getElementById('theSpan');"
+            + "  oSpan.addEventListener('click', t('span capturing'), true);"
+            + "}"
+            + "</script>"
+            + "</head><body onload='init()'>"
+            + "<div onclick=\"alert('div')\" id='theDiv'>"
+            + "<span id='theSpan'>blabla</span>"
+            + "</div>"
+            + "</body></html>";
+   
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        ((ClickableElement) page.getHtmlElementById("theSpan")).click();
+        final String[] expectedAlerts1 = { "window capturing", "div capturing", "span capturing", "div" };
+        assertEquals(expectedAlerts1, collectedAlerts);
+        collectedAlerts.clear();
+
+        ((ClickableElement) page.getHtmlElementById("theSpan")).click();
+        final String[] expectedAlerts2 = { "window capturing" };
+        assertEquals(expectedAlerts2, collectedAlerts);
     }
 }

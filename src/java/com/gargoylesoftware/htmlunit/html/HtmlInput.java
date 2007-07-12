@@ -44,6 +44,9 @@ import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptEngine;
+import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
  *  Wrapper for the html element "input"
@@ -97,7 +100,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         Assert.notNull( "newValue", newValue );
         setAttributeValue( "value", newValue );
 
-        return getPage().executeOnChangeHandlerIfAppropriate(this);
+        return executeOnChangeHandlerIfAppropriate(this);
     }
 
 
@@ -484,5 +487,35 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
 
         // By default this is no different than a click without coordinates.
         return click();
+    }
+
+    
+    /**
+     * Executes the onchange script code for this element if this is appropriate. 
+     * This means that the element must have an onchange script, script must be enabled 
+     * and the change in the element must not have been triggered by a script.
+     * 
+     * @param htmlElement The element that contains the onchange attribute.
+     * @return The page that occupies this window after this method completes. It
+     * may be this or it may be a freshly loaded page. 
+     */
+    static Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
+        final HtmlPage page = htmlElement.getPage();
+
+        final ScriptEngine engine = htmlElement.getPage().getWebClient().getScriptEngine();
+        if (engine != null && engine.isScriptRunning()) {
+            return page;
+        }
+        final ScriptResult scriptResult = htmlElement.fireEvent(Event.TYPE_CHANGE);
+
+        if (page.getWebClient().getWebWindows().contains(page.getEnclosingWindow())) {
+            return page.getEnclosingWindow().getEnclosedPage(); // may be itself or a newly loaded one
+        }
+        else if (scriptResult != null) {
+            // current window doesn't exist anymore
+            return scriptResult.getNewPage();
+        }
+
+        return page;
     }
 }

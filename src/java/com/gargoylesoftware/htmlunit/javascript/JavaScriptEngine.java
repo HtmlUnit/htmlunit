@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
@@ -404,7 +405,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
             final Object javaScriptFunction,
             final Object thisObject,
             final Object [] args,
-            final HtmlElement htmlElement ) {
+            final DomNode htmlElement ) {
 
         final Scriptable scope = getScope(htmlPage, htmlElement);
         
@@ -421,7 +422,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
         return Context.call(action);
     }
 
-    private Scriptable getScope(final HtmlPage htmlPage, final HtmlElement htmlElement) {
+    private Scriptable getScope(final HtmlPage htmlPage, final DomNode htmlElement) {
         final Scriptable scope;
         if (htmlElement != null) {
             scope = (Scriptable) htmlElement.getScriptObject();

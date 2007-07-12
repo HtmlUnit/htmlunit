@@ -387,9 +387,6 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception on test failure
      */
     public void testAttachEvent() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><head>"
             + "<title>First</title>"
             + "<script>"

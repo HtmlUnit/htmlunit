@@ -37,9 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.KeyValuePair;
-
 import java.util.Map;
+
+import com.gargoylesoftware.htmlunit.KeyValuePair;
 
 /**
  *  Wrapper for the html element "textarea"
@@ -135,7 +135,8 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
             child.setData( newValue );
         }
 
-        getPage().executeOnChangeHandlerIfAppropriate(this);
+        HtmlInput.executeOnChangeHandlerIfAppropriate(this);
+
         setSelectionStart( newValue.length() );
         setSelectionEnd( newValue.length() );
     }

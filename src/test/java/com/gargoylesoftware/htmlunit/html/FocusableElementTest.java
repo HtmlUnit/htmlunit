@@ -78,7 +78,6 @@ public class FocusableElementTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-
         final FocusableElement element = (FocusableElement) page.getHtmlElementById("focusId");
 
         element.focus();

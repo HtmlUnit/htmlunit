@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -98,6 +99,7 @@ public class Event extends SimpleScriptable {
     private boolean shiftKey_;
     private boolean ctrlKey_;
     private boolean altKey_;
+    private boolean stopPropagation_ = false;
 
     /**
      * Creates a new event instance.
@@ -130,16 +132,6 @@ public class Event extends SimpleScriptable {
         setParentScope((SimpleScriptable) target);
         setPrototype(getPrototype(getClass()));
         setDomNode(domNode, false);
-    }
-
-    /**
-     * Creates a new event instance for a keypress event.
-     * @param domNode the DOM node that triggered the event.
-     * @param type The event type.
-     * @param keyCode The key code associated with the event.
-     */
-    public Event(final DomNode domNode, final String type, final int keyCode) {
-        this(domNode, type, keyCode, false, false, false);
     }
 
     /**
@@ -197,6 +189,14 @@ public class Event extends SimpleScriptable {
     }
 
     /**
+     * Sets the current target
+     * @param target the new value
+     */
+    public void setCurrentTarget(final Scriptable target) {
+        currentTarget_ = target;
+    }
+
+    /**
      * Returns the event type.
      * @return The event type.
      */
@@ -234,10 +234,40 @@ public class Event extends SimpleScriptable {
     }
 
     /**
+     * @return indicates if event propagation is stopped.
+     */
+    public boolean jsxGet_cancelBubble() {
+        return stopPropagation_;
+    }
+
+    /**
+     * @param newValue indicates if event propagation is stopped.
+     */
+    public void jsxSet_cancelBubble(final boolean newValue) {
+        stopPropagation_ = newValue;
+    }
+
+    /**
+     */
+    public void jsxFunction_stopPropagation() {
+        stopPropagation_ = true;
+    }
+    
+    /**
+     * Indicates if event propagation is stopped.
+     * @return the status
+     */
+    public boolean isPropagationStopped() {
+        return stopPropagation_;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public String toString() {
-        final StringBuffer buffer = new StringBuffer("Event: (");
+        final StringBuffer buffer = new StringBuffer("Event ");
+        buffer.append(jsxGet_type());
+        buffer.append(" (");
         buffer.append("Current Target: ");
         buffer.append(currentTarget_.toString());
         buffer.append(");");

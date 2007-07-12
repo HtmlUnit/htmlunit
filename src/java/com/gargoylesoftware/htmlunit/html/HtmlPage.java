@@ -51,7 +51,6 @@ import java.util.Map;
 import java.util.Vector;
 
 import org.apache.commons.httpclient.util.EncodingUtil;
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -71,8 +70,8 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.NodeImpl;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
@@ -744,7 +743,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             final Function function,
             final Scriptable thisObject,
             final Object[] args,
-            final HtmlElement htmlElementScope) {
+            final DomNode htmlElementScope) {
 
         final WebWindow window = getEnclosingWindow();
         getWebClient().pushClearFirstWindow();
@@ -976,52 +975,20 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         // onload for the window
         final Window jsWindow = (Window) getEnclosingWindow().getScriptObject();
         if (jsWindow != null) {
-
-            final Event loadEvent = new Event(getDocumentElement(), Event.TYPE_LOAD);
-
-            final List onLoadHandlers = new ArrayList(jsWindow.getListeners("load"));
-            for (final Iterator iter = onLoadHandlers.iterator(); iter.hasNext(); ) {
-                final Function listener = (Function) iter.next();
-                getLog().debug("Executing load listener for the window: " + listener);
-                runEventHandler(listener, loadEvent, true);
-            }
-
-            if (jsWindow.getOnloadHandler() != null) {
-                getLog().debug("Executing onload handler for the window");
-                runEventHandler(jsWindow.getOnloadHandler(), loadEvent);
-            }
+            getDocumentElement().fireEvent(Event.TYPE_LOAD);
         }
 
         // the onload of the contained frames or iframe tags
-        final List list = getDocumentElement().getHtmlElementsByTagNames( Arrays.asList( new String[]{
+        final List frames = getDocumentElement().getHtmlElementsByTagNames( Arrays.asList( new String[]{
             "frame", "iframe" } ));
-        for (final Iterator iter = list.iterator(); iter.hasNext();) {
+        for (final Iterator iter = frames.iterator(); iter.hasNext();) {
             final BaseFrame frame = (BaseFrame) iter.next();
-            getLog().debug("Executing onload handler for " + frame);
-            executeOneOnLoadHandler(frame);
-        }
-    }
-
-    /**
-     * Execute a single onload handler.  This will either be a string which
-     * will be executed as javascript, or a javascript Function.
-     * @param element The element that contains the onload attribute.
-     */
-    private void executeOneOnLoadHandler(final HtmlElement element) {
-        executeEventHandler(element, "onload", Event.TYPE_LOAD);
-    }
-
-    /**
-     * Execute an event handler.
-     * @param element The event's owner.
-     * @param handlerName The event handler's name.
-     * @param eventType The event type.
-     */
-    private void executeEventHandler(final HtmlElement element, final String handlerName, final String eventType) {
-        final Function function = element.getEventHandler(handlerName);
-        if (function != null) {
-            getLog().debug("Executing " + handlerName + " handler for " + element);
-            runEventHandler(function, new Event(element, eventType));
+            final Function frameTagOnloadHandler = frame.getEventHandler("onload"); 
+            if (frameTagOnloadHandler != null) {
+                getLog().debug("Executing onload handler for " + frame);
+                final Event event = new Event(frame, Event.TYPE_LOAD);
+                ((NodeImpl) frame.getScriptObject()).executeEvent(event);
+            }
         }
     }
 
@@ -1398,36 +1365,6 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
     
     /**
-     * Executes the onchange script code for this element if this is appropriate. 
-     * This means that the element must have an onchange script, script must be enabled 
-     * and the change in the element must not have been triggered by a script.
-     * 
-     * @param htmlElement The element that contains the onchange attribute.
-     * @return The page that occupies this window after this method completes. It
-     * may be this or it may be a freshly loaded page. 
-     */
-    Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
-        final Function onchange = htmlElement.getEventHandler("onchange");
-        final ScriptEngine engine = getWebClient().getScriptEngine();
-        if (onchange != null && getWebClient().isJavaScriptEnabled()
-                && engine != null && !engine.isScriptRunning()) {
-
-            final Event event = new Event(htmlElement, Event.TYPE_CHANGE);
-            final ScriptResult scriptResult = runEventHandler(onchange, event);
-
-            if (getWebClient().getWebWindows().contains(getEnclosingWindow())) {
-                return getEnclosingWindow().getEnclosedPage(); // may be itself or a newly loaded one
-            }
-            else {
-                // current window doesn't exist anymore
-                return scriptResult.getNewPage();
-            }
-        }
-
-        return this;
-    }
-
-    /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * 
      * @param node the node that has just been added to the document.
@@ -1498,45 +1435,6 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
 
     /**
-     * Runs an event handler taking car to pass him the event in the right form
-     * @param handler the handler function
-     * @param event the event that is being triggered
-     * @return the script execution result
-     */
-    protected ScriptResult runEventHandler(final Function handler, final Event event) {
-        return runEventHandler(handler, event, false);
-    }
-
-    /**
-     * Runs an event handler taking car to pass him the event in the right form
-     * @param handler the handler function
-     * @param event the event that is being triggered
-     * @param isListener indicates if the function is a listener and therefore if the event has to be passed
-     * as parameter even if browser is IE)
-     * @return the script execution result
-     */
-    protected ScriptResult runEventHandler(final Function handler, final Event event, final boolean isListener) {
-
-        final Window window = (Window) getEnclosingWindow().getScriptObject();
-        Object[] args = ArrayUtils.EMPTY_OBJECT_ARRAY;
-        if (getWebClient().getBrowserVersion().isIE()) {
-            window.setEvent(event);
-        }
-        // listeners and handlers in non IE browser need to receive the event as argument
-        if (isListener || !getWebClient().getBrowserVersion().isIE()) {
-            args = new Object[] {event};
-        }
-
-        final SimpleScriptable target = (SimpleScriptable) event.jsxGet_target();
-        final ScriptResult result = executeJavaScriptFunctionIfPossible(
-                handler, target, args, target.getHtmlElementOrDie());
-
-        window.setEvent(null); // reset event
-
-        return result;
-    }
-
-    /**
      * Move the focus to the specified component.  This will trigger any relevant javascript
      * event handlers.
      *
@@ -1559,12 +1457,12 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         }
 
         if (elementWithFocus_ != null) {
-            executeEventHandler(elementWithFocus_, "onblur", Event.TYPE_BLUR);
+            elementWithFocus_.fireEvent(Event.TYPE_BLUR);
         }
 
         elementWithFocus_ = newElement;
         if (newElement != null) {
-            executeEventHandler(elementWithFocus_, "onfocus", Event.TYPE_FOCUS);
+            newElement.fireEvent(Event.TYPE_FOCUS);
         }
 
         // If a page reload happened as a result of the focus change then obviously this

@@ -37,19 +37,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.Assert;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
-import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
-
 import java.io.IOException;
 
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
+
+import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
+import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 
 /**
  * A JavaScript object for a Form.
@@ -186,8 +185,8 @@ public class HTMLFormElement extends HTMLElement {
      * Get the onsubmit event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
-    public Function jsxGet_onsubmit() {
-        return getHtmlForm().getEventHandler("onsubmit");
+    public Object jsxGet_onsubmit() {
+        return getEventHandlerProp("onsubmit");
     }
 
     /**
@@ -195,7 +194,7 @@ public class HTMLFormElement extends HTMLElement {
      * @param onsubmit the new handler
      */
     public void jsxSet_onsubmit(final Object onsubmit) {
-        getHtmlForm().setEventHandler("onsubmit", (Function)onsubmit);
+        setEventHandlerProp("onsubmit", onsubmit);
     }
 
     /**

@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -1131,7 +1132,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         public Object callFunction(
                 final HtmlPage htmlPage, final Object javaScriptFunction,
                 final Object thisObject, final Object[] args,
-                final HtmlElement htmlElementScope) {
+                final DomNode htmlElementScope) {
             scriptCallCount_++;
             return delegate_.callFunction(htmlPage, javaScriptFunction, thisObject, args, htmlElementScope);
         }

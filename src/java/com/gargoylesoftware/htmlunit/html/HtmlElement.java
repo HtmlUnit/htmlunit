@@ -54,6 +54,8 @@ import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.ScriptEngine;
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
@@ -396,13 +398,7 @@ public abstract class HtmlElement extends DomNode {
             }
         }
 
-        final HtmlPage page = getPage();
-        final Function function = getEventHandler("onkeydown");
-
-        if (function != null && page.getWebClient().isJavaScriptEnabled()) {
-            final Event event = new Event(this, Event.TYPE_KEY_DOWN, keyCode, shiftKey, ctrlKey, altKey);
-            getPage().runEventHandler(function, event);
-        }
+        fireEvent(new Event(this, Event.TYPE_KEY_DOWN, keyCode, shiftKey, ctrlKey, altKey));
     }
 
     /**
@@ -880,5 +876,29 @@ public abstract class HtmlElement extends DomNode {
                 attributeListeners_.remove( listener );
             }
         }
+    }
+
+    /**
+     * Shortcut for {@link #fireEvent(Event)].
+     * @param eventType the event type (like "load", "click")
+     * @return the execution result. <code>null</code> if nothing is executed.
+     */
+    public ScriptResult fireEvent(final String eventType) {
+        return fireEvent(new Event(this, eventType));
+    }
+
+    /**
+     * Fire the event on the element. Nothing is done if JavaScript is disabled
+     * @param event the event to fire.
+     * @return the execution result. <code>null</code> if nothing is executed.
+     */
+    public ScriptResult fireEvent(final Event event) {
+        final ScriptEngine engine = getPage().getWebClient().getScriptEngine();
+        if (!getPage().getWebClient().isJavaScriptEnabled() || engine == null) {
+            return null;
+        }
+
+        final HTMLElement jsElt = (HTMLElement) getScriptObject();
+        return jsElt.fireEvent(event);
     }
 }

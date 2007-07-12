@@ -40,8 +40,6 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.IOException;
 import java.util.Map;
 
-import org.mozilla.javascript.Function;
-
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -102,34 +100,33 @@ public abstract class ClickableElement extends StyledElement {
      */
     public Page click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
-        if( this instanceof DisabledElement ) {
-            if( ((DisabledElement) this).isDisabled() ) {
+        if (this instanceof DisabledElement) {
+            if (((DisabledElement) this).isDisabled()) {
                 return getPage();
             }
         }
 
         final HtmlPage page = getPage();
 
-        final Function function = getEventHandler("onclick");
-
-        if (function != null && page.getWebClient().isJavaScriptEnabled()) {
-            boolean stateUpdated = false;
-            if (isStateUpdateFirst()) {
-                doClickAction(page);
-                stateUpdated = true;
-            }
-            final Event event = new Event(this, Event.TYPE_CLICK, shiftKey, ctrlKey, altKey );
-            final ScriptResult scriptResult = getPage().runEventHandler(function, event);
-            final Page scriptPage = scriptResult.getNewPage();
-            if (stateUpdated || Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
-                return scriptPage;
-            }
-            else {
-                return doClickAction(scriptPage);
-            }
+        boolean stateUpdated = false;
+        if (isStateUpdateFirst()) {
+            doClickAction(page);
+            stateUpdated = true;
+        }
+        final Event event = new Event(this, Event.TYPE_CLICK, shiftKey, ctrlKey, altKey);
+        final ScriptResult scriptResult = fireEvent(event);
+        final Page currentPage;
+        if (scriptResult == null) {
+            currentPage = page;
         }
         else {
-            return doClickAction(page);
+            currentPage = scriptResult.getNewPage();
+        }
+        if (stateUpdated || ScriptResult.isFalse(scriptResult)) {
+            return currentPage;
+        }
+        else {
+            return doClickAction(currentPage);
         }
     }
 
@@ -173,28 +170,13 @@ public abstract class ClickableElement extends StyledElement {
             return clickPage;
         }
 
-        final HtmlPage page = getPage();
-
-        final Function function = getEventHandler("ondblclick");
-
-        if (function != null && page.getWebClient().isJavaScriptEnabled()) {
-            boolean stateUpdated = false;
-            if (isStateUpdateFirst()) {
-                doDblClickAction(page);
-                stateUpdated = true;
-            }
-            final Event event = new Event(this, Event.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey );
-            final ScriptResult scriptResult = getPage().runEventHandler(function, event);
-            final Page scriptPage = scriptResult.getNewPage();
-            if (stateUpdated || Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
-                return scriptPage;
-            }
-            else {
-                return doDblClickAction(scriptPage);
-            }
+        final Event event = new Event(this, Event.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey );
+        final ScriptResult scriptResult = fireEvent(event);
+        if (scriptResult == null) {
+            return clickPage;
         }
         else {
-            return doDblClickAction(page);
+            return scriptResult.getNewPage();
         }
     }
 
@@ -212,23 +194,6 @@ public abstract class ClickableElement extends StyledElement {
      * @throws IOException If an IO error occurred
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
-        return defaultPage;
-    }
-
-    /**
-     * This method will be called if there either wasn't an ondblclick handler or
-     * there was but the result of that handler wasn't <code>false</code>.
-     * This is the default behaviour of double clicking the element.  
-     * The default implementation returns
-     * the current page - subclasses requiring different behaviour will
-     * override this method.
-     *
-     * @param defaultPage The default page to return if the action does not
-     * load a new page.
-     * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occurred
-     */
-    protected Page doDblClickAction(final Page defaultPage) throws IOException {
         return defaultPage;
     }
 

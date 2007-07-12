@@ -76,6 +76,9 @@ public class HtmlFrameSet extends StyledElement {
     HtmlFrameSet(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+
+        // force script object creation now to forward onXXX handlers to window
+        getScriptObject();
     }
 
     /**

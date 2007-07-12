@@ -40,8 +40,9 @@ package com.gargoylesoftware.htmlunit;
 /**
  * This object contains the result of executing a chunk of script code.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
  */
 public final class ScriptResult {
     private final Object javaScriptResult_;
@@ -75,5 +76,14 @@ public final class ScriptResult {
      */
     public Page getNewPage() {
         return newPage_;
+    }
+    
+    /**
+     * Utility method testing if a script result is <code>false</code>
+     * @param scriptResult a script result (may be <code>null</code>)
+     * @return <code>true</code> if <code>scriptResult</code> is <code>false</code>
+     */
+    public static boolean isFalse(final ScriptResult scriptResult) {
+        return scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult());
     }
 }

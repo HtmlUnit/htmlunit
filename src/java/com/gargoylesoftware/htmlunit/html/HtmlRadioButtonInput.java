@@ -40,9 +40,8 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.IOException;
 import java.util.Map;
 
-import org.mozilla.javascript.Function;
-
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
@@ -134,12 +133,13 @@ public class HtmlRadioButtonInput extends HtmlInput {
             removeAttribute( "checked" );
         }
 
-        final Function onchangeHandler = getEventHandler("onchange");
         Page page = getPage();
 
-        if (changed && onchangeHandler != null && ((HtmlPage)page).getWebClient().isJavaScriptEnabled()) {
-            final Event event = new Event(this, Event.TYPE_CHANGE);
-            page = getPage().runEventHandler(onchangeHandler, event).getNewPage();
+        if (changed) {
+            final ScriptResult scriptResult = fireEvent(Event.TYPE_CHANGE);
+            if (scriptResult != null) {
+                page = scriptResult.getNewPage();
+            }
         }
         return page;
     }

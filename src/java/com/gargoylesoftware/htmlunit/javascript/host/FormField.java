@@ -133,7 +133,7 @@ public class FormField extends FocusableHostElement {
      * @param onchange the new handler
      */
     public void jsxSet_onchange(final Object onchange) {
-        getHtmlElementOrDie().setEventHandler("onchange", (Function) onchange);
+        setEventHandlerProp("onchange", onchange);
     }
 
     /**
@@ -141,7 +141,7 @@ public class FormField extends FocusableHostElement {
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Function jsxGet_onchange() {
-        return getHtmlElementOrDie().getEventHandler("onchange");
+        return getEventHandler("onchange");
     }
 
     /**
