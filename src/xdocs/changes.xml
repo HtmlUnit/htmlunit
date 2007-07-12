@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1225021">
+                JavaScript: added support for window.captureEvents (FF).
+            </action>
             <action type="update" dev="mguillem" id="1716129">
                 JavaScript: fixed addEventListener cannot be called twice.
             </action>

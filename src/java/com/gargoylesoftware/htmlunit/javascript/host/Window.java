@@ -1010,6 +1010,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public int jsxGet_outerHeight() {
         return 936; // why this value? this is the current value of my Mozilla
     }
+
     /**
      * Prints the current page.
      * Current implementation does nothing.
@@ -1020,5 +1021,12 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public void jsxFunction_print() {
         getLog().debug( "window.print() not implemented" );
+    }
+
+    /**
+     * Does nothing special anymore... just like FF
+     */
+    public void jsxFunction_captureEvents(final String type) {
+        // nothing
     }
 }

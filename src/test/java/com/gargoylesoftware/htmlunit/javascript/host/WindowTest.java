@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowEvent;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
@@ -2154,6 +2155,31 @@ public class WindowTest extends WebTestCase {
         final String[] expectedAlerts = {"true"};
         loadPage(content, collectedAlerts);
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+    
+    /**
+     * Test for 1225021.
+     * @throws Exception If the test fails
+     */
+    public void testCaptureEvents() throws Exception {
+    	final String content = "<html><head><title>foo</title>"
+	    	+ "<script>"
+	    	+ "function t()"
+	    	+ "{"
+	    	+ "	alert('captured');"
+	    	+ "}"
+	    	+ "window.captureEvents(Event.CLICK);"
+	    	+ "window.onclick = t;"
+	    	+ "</script></head><body>"
+	    	+ "<div id='theDiv' onclick='alert(123)'>foo</div>"
+	    	+ "</body></html>";
+    	
+        final List collectedAlerts = new ArrayList();
+    	final HtmlPage page = loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+    	((ClickableElement) page.getHtmlElementById("theDiv")).click();
+
+        final String[] expectedAlerts = {"123", "captured"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

@@ -896,6 +896,9 @@
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="blur"/>
+        <function name="captureEvents">
+            <browser name="Netscape"/>
+        </function>
         <function name="clearInterval">
             <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp"
                     descr="MSDN documentation"/>
