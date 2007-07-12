@@ -1025,6 +1025,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Does nothing special anymore... just like FF
+     * @param type the type of events
      */
     public void jsxFunction_captureEvents(final String type) {
         // nothing
