@@ -182,24 +182,12 @@ public abstract class HtmlElement extends DomNode {
             event = new HtmlAttributeChangeEvent(this, attributeName, oldAttributeValue);
         }
         
-        if( attributeListeners_ != null ) {
-            synchronized (this) {
-                for( final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext(); ) {
-                    final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener)iterator.next();
-                    if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
-                        listener.attributeAdded(event);
-                    }
-                    else {
-                        listener.attributeReplaced(event);
-                    }
-                }
-            }
-        }
-        //call page to fire event
-        if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
+        if( oldAttributeValue == ATTRIBUTE_NOT_DEFINED ) {
+            fireHtmlAttributeAdded(event);
             getPage().fireHtmlAttributeAdded(event);
         }
         else {
+            fireHtmlAttributeReplaced(event);
             getPage().fireHtmlAttributeReplaced(event);
         }
     }
@@ -216,6 +204,66 @@ public abstract class HtmlElement extends DomNode {
         attributes_.remove(attributeName.toLowerCase());
 
         final HtmlAttributeChangeEvent event = new HtmlAttributeChangeEvent( this, attributeName, attributevalue );
+        fireHtmlAttributeRemoved(event);
+        getPage().fireHtmlAttributeRemoved(event);
+    }
+    
+    /**
+     * Support for reporting html attribute changes.
+     * This method can be called when an attribute has been added and it will send the 
+     * appropriate HtmlAttributeChangeEvent to any registered HtmlAttributeChangeListener.
+     * 
+     * Note that this methods recursively calls this parent fireHtmlAttributeAdded.
+     * 
+     * @param event The event.
+     */
+    protected void fireHtmlAttributeAdded(final HtmlAttributeChangeEvent event) {
+        if (attributeListeners_ != null) {
+            synchronized (this) {
+                for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
+                    ((HtmlAttributeChangeListener)iterator.next()).attributeAdded(event);
+                }
+            }
+        }
+        final DomNode parentNode = getParentNode();
+        if( parentNode instanceof HtmlElement ) {
+            ((HtmlElement)parentNode).fireHtmlAttributeAdded(event);
+        }
+    }
+
+    /**
+     * Support for reporting html attribute changes.
+     * This method can be called when an attribute has been replaced and it will send the 
+     * appropriate HtmlAttributeChangeEvent to any registered HtmlAttributeChangeListener.
+     * 
+     * Note that this methods recursively calls this parent fireHtmlAttributeReplaced.
+     * 
+     * @param event The event.
+     */
+    protected void fireHtmlAttributeReplaced(final HtmlAttributeChangeEvent event) {
+        if (attributeListeners_ != null) {
+            synchronized (this) {
+                for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
+                    ((HtmlAttributeChangeListener)iterator.next()).attributeReplaced(event);
+                }
+            }
+        }
+        final DomNode parentNode = getParentNode();
+        if( parentNode instanceof HtmlElement ) {
+            ((HtmlElement)parentNode).fireHtmlAttributeReplaced(event);
+        }
+    }
+
+    /**
+     * Support for reporting html attribute changes.
+     * This method can be called when an attribute has been removed and it will send the 
+     * appropriate HtmlAttributeChangeEvent to any registered HtmlAttributeChangeListener.
+     * 
+     * Note that this methods recursively calls this parent fireHtmlAttributeRemoved.
+     * 
+     * @param event The event.
+     */
+    protected void fireHtmlAttributeRemoved(final HtmlAttributeChangeEvent event) {
         if (attributeListeners_ != null) {
             synchronized (this) {
                 for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
@@ -223,7 +271,10 @@ public abstract class HtmlElement extends DomNode {
                 }
             }
         }
-        getPage().fireHtmlAttributeRemoved(event);
+        final DomNode parentNode = getParentNode();
+        if( parentNode instanceof HtmlElement ) {
+            ((HtmlElement)parentNode).fireHtmlAttributeRemoved(event);
+        }
     }
 
     /**
@@ -846,7 +897,8 @@ public abstract class HtmlElement extends DomNode {
 
     /**
      * Adds an HtmlAttributeChangeListener to the listener list.
-     * The listener is registered for all attributes of this HtmlElement.
+     * The listener is registered for all attributes of this HtmlElement,
+     * as well as descendant elements. 
      * 
      * @param listener the attribute change listener to be added.
      * @see #removeHtmlAttributeChangeListener(HtmlAttributeChangeListener)
@@ -864,7 +916,7 @@ public abstract class HtmlElement extends DomNode {
     /**
      * Removes an HtmlAttributeChangeListener from the listener list.
      * This method should be used to remove HtmlAttributeChangeListener that were registered
-     * for all attributes of this HtmlElement.
+     * for all attributes of this HtmlElement, as well as descendant elements. 
      * 
      * @param listener the attribute change listener to be removed.
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)

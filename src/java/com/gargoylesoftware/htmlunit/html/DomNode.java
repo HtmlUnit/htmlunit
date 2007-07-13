@@ -675,10 +675,13 @@ public abstract class DomNode implements Cloneable, Serializable {
         if(previousSibling_ == null) {
             throw new IllegalStateException();
         }
+        final DomNode exParent = parent_;
         basicRemove();
         getPage().notifyNodeRemoved(this);
-
-        fireNodeDeleted(this, this);
+        
+        fireNodeDeleted(exParent, this);
+        //ask ex-parent to fire event (because we don't have parent now)
+        exParent.fireNodeDeleted(exParent, this);
     }
 
     /**
@@ -1011,7 +1014,8 @@ public abstract class DomNode implements Cloneable, Serializable {
 
     /**
      * Adds a DomChangeListener to the listener list.
-     * The listener is registered for all nodes of this DomNode.
+     * The listener is registered for all children nodes of this DomNode, 
+     * as well as the descendant nodes.
      * 
      * @param listener the dom structure change listener to be added.
      * @see #removeDomChangeListener(DomChangeListener)
@@ -1027,9 +1031,9 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * Removes an HtmlAttributeChangeListener from the listener list.
-     * This method should be used to remove HtmlAttributeChangeListener that were registered
-     * for all attributes of this HtmlElement.
+     * Removes an DomChangeListener from the listener list.
+     * This method should be used to remove DomChangeListener that were registered
+     * for all children nodes and descendant nodes of this DomNode. 
      * 
      * @param listener the dom structure change listener to be removed.
      * @see #addDomChangeListener(DomChangeListener)
@@ -1048,18 +1052,23 @@ public abstract class DomNode implements Cloneable, Serializable {
      * This method can be called when a node has been added and it will send the 
      * appropriate DomChangeEvent to any registered DomChangeListeners.
      * 
-     * @param source the node that is sending the event.
-     * @param addedNode the node that has been added.
+     * Note that this methods recursively calls this parent fireNoddeAdded.
+     * 
+     * @param parentNode the parent of the node that was added.
+     * @param addedNode the node that was added.
      */
-    protected void fireNodeAddded(final DomNode source, final DomNode addedNode) {
+    protected void fireNodeAddded(final DomNode parentNode, final DomNode addedNode) {
         if( domListeners_ != null ) {
-            final DomChangeEvent event = new DomChangeEvent(source, addedNode);
+            final DomChangeEvent event = new DomChangeEvent(parentNode, addedNode);
             synchronized (this) {
                 for( final Iterator iterator = domListeners_.iterator(); iterator.hasNext(); ) {
                     final DomChangeListener listener = (DomChangeListener)iterator.next();
                     listener.nodeAdded(event);
                 }
             }
+        }
+        if( parent_ != null ) {
+            parent_.fireNodeAddded(parentNode, addedNode);
         }
     }
 
@@ -1068,18 +1077,23 @@ public abstract class DomNode implements Cloneable, Serializable {
      * This method can be called when a node has been deleted and it will send the 
      * appropriate DomChangeEvent to any registered DomChangeListeners.
      * 
-     * @param source the node that is sending the event.
-     * @param deletedNode the node that has been deleted.
+     * Note that this methods recursively calls this parent fireNoddeDeleted.
+     * 
+     * @param parentNode the parent of the node that was deleted.
+     * @param deletedNode the node that was deleted.
      */
-    protected void fireNodeDeleted(final DomNode source, final DomNode deletedNode) {
+    protected void fireNodeDeleted(final DomNode parentNode, final DomNode deletedNode) {
         if( domListeners_ != null ) {
-            final DomChangeEvent event = new DomChangeEvent(source, deletedNode);
+            final DomChangeEvent event = new DomChangeEvent(parentNode, deletedNode);
             synchronized (this) {
                 for( final Iterator iterator = domListeners_.iterator(); iterator.hasNext(); ) {
                     final DomChangeListener listener = (DomChangeListener)iterator.next();
                     listener.nodeDeleted(event);
                 }
             }
+        }
+        if( parent_ != null ) {
+            parent_.fireNodeDeleted(parentNode, deletedNode);
         }
     }
 }

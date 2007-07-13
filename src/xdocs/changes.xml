@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="asashour" id="1751756">
+                HTMLCollection: cache getElements() for better performance (#1751756).
+            </action>
             <action type="add" dev="mguillem">
                 Experimental: added AjaxController and NicelyResynchronizingAjaxController.
             </action>

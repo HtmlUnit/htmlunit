@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * 
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HTMLCollectionTest extends WebTestCase {
 
@@ -105,4 +106,26 @@ public class HTMLCollectionTest extends WebTestCase {
     
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetElements() throws Exception {
+        final String firstContent
+            = "<html><head><title>foo</title><script>"
+            + "function doTest() {\n"
+            + "    alert(document.all.length);\n"
+            + "    document.appendChild( document.createElement('div') );\n"
+            + "    alert(document.all.length);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(firstContent, collectedAlerts);
+
+        final String[] expectedAlerts = {"5", "6"};
+        assertEquals( expectedAlerts, collectedAlerts );
+    }
+
 }

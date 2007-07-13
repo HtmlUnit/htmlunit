@@ -300,11 +300,11 @@ public class DomNodeTest extends WebTestCase {
     static class DomChangeListenerTestImpl implements DomChangeListener {
         private final List collectedValues_ = new ArrayList();
         public void nodeAdded(final DomChangeEvent event) {
-            collectedValues_.add("nodeAdded: " + event.getOriginatingNode().getNodeName() + ',' + 
+            collectedValues_.add("nodeAdded: " + event.getParentNode().getNodeName() + ',' + 
                     event.getChangedNode().getNodeName());
         }
         public void nodeDeleted(final DomChangeEvent event) {
-            collectedValues_.add("nodeDeleted: " + event.getOriginatingNode().getNodeName() + ',' + 
+            collectedValues_.add("nodeDeleted: " + event.getParentNode().getNodeName() + ',' + 
                     event.getChangedNode().getNodeName());
         }
         List getCollectedValues() {
@@ -331,11 +331,12 @@ public class DomNodeTest extends WebTestCase {
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
         
-        final String[] expectedValues = {"nodeAdded: p,div"};
+        final String[] expectedValues = {"nodeAdded: p,div", "nodeAdded: p,div"};
         final HtmlPage page = loadPage(htmlContent);
         final HtmlElement p1 = page.getHtmlElementById("p1");
         final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
         p1.addDomChangeListener(listenerImpl);
+        page.addDomChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
         
         myButton.click();
@@ -361,11 +362,12 @@ public class DomNodeTest extends WebTestCase {
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
         
-        final String[] expectedValues = {"nodeAdded: p,div"};
+        final String[] expectedValues = {"nodeAdded: p,div", "nodeAdded: p,div"};
         final HtmlPage page = loadPage(htmlContent);
         final HtmlElement p1 = page.getHtmlElementById("p1");
         final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
         p1.addDomChangeListener(listenerImpl);
+        page.addDomChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
         
         myButton.click();
@@ -391,11 +393,12 @@ public class DomNodeTest extends WebTestCase {
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
         
-        final String[] expectedValues = {"nodeDeleted: p,p"};
+        final String[] expectedValues = {"nodeDeleted: div,p", "nodeDeleted: div,p"};
         final HtmlPage page = loadPage(htmlContent);
         final HtmlElement p1 = page.getHtmlElementById("p1");
         final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
         p1.addDomChangeListener(listenerImpl);
+        page.addDomChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
         
         myButton.click();

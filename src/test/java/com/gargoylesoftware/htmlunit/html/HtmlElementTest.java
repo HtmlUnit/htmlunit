@@ -259,16 +259,23 @@ public class HtmlElementTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body>\n"
+            + "<body id='myBody'>\n"
             + "<p id='p1'></p>\n"
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
 
-        final String[] expectedValues = {"attributeAdded: p,title,myTitle"};
+        final String[] expectedValues =
+        {"attributeAdded: p,title,myTitle", 
+            "attributeAdded: p,title,myTitle",
+            "attributeAdded: p,title,myTitle"};
         final HtmlPage page = loadPage(htmlContent);
+        final HtmlBody body = (HtmlBody)page.getHtmlElementById("myBody");
         final HtmlElement p1 = page.getHtmlElementById("p1");
+        
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         p1.addHtmlAttributeChangeListener(listenerImpl);
+        body.addHtmlAttributeChangeListener(listenerImpl);
+        page.addHtmlAttributeChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
         
         myButton.click();
@@ -288,15 +295,21 @@ public class HtmlElementTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body>\n"
+            + "<body id='myBody'>\n"
             + "<p id='p1' title='myTitle'></p>\n"
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
         
-        final String[] expectedValues = {"attributeReplaced: p,title,myTitle"};
+        final String[] expectedValues = 
+        {"attributeReplaced: p,title,myTitle",
+            "attributeReplaced: p,title,myTitle",
+            "attributeReplaced: p,title,myTitle"};
         final HtmlPage page = loadPage(htmlContent);
+        final HtmlBody body = (HtmlBody)page.getHtmlElementById("myBody");
         final HtmlElement p1 = page.getHtmlElementById("p1");
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
+        page.addHtmlAttributeChangeListener(listenerImpl);
+        body.addHtmlAttributeChangeListener(listenerImpl);
         p1.addHtmlAttributeChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
         
@@ -318,15 +331,21 @@ public class HtmlElementTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body>\n"
+            + "<body id='myBody'>\n"
             + "<p id='p1' title='myTitle'></p>\n"
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
         
-        final String[] expectedValues = {"attributeRemoved: p,title,myTitle"};
+        final String[] expectedValues =
+        {"attributeRemoved: p,title,myTitle",
+            "attributeRemoved: p,title,myTitle",
+            "attributeRemoved: p,title,myTitle"};
         final HtmlPage page = loadPage(htmlContent);
+        final HtmlBody body = (HtmlBody)page.getHtmlElementById("myBody");
         final HtmlElement p1 = page.getHtmlElementById("p1");
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
+        page.addHtmlAttributeChangeListener(listenerImpl);
+        body.addHtmlAttributeChangeListener(listenerImpl);
         p1.addHtmlAttributeChangeListener(listenerImpl);
         final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
         

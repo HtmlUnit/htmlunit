@@ -51,26 +51,26 @@ public class DomChangeEvent extends EventObject {
     private final DomNode changedNode_;
 
     /**
-     * Constructs a new DomChangeEvent from the given source node and a changed node.
+     * Constructs a new DomChangeEvent from the given parent node and a changed node.
      * 
-     * @param node the node that is sending the event.
-     * @param changeNode the node that has been added or deleted.
+     * @param parentNode the parent of the node that was changed.
+     * @param changedNode the node that has been added or deleted.
      */
-    public DomChangeEvent(final DomNode node, final DomNode changeNode) {
-        super( node );
-        this.changedNode_ = changeNode;
+    public DomChangeEvent(final DomNode parentNode, final DomNode changedNode) {
+        super( parentNode );
+        this.changedNode_ = changedNode;
     }
     
     /**
-     * Return the HtmlElement that changed.
-     * @return the HtmlElement that sent the event.
+     * Returns the parent of the node that was changed.
+     * @return the parent of the node that was changed.
      */
-    public DomNode getOriginatingNode() {
+    public DomNode getParentNode() {
         return (DomNode)getSource();
     }
     
     /**
-     * Return the node that has been added or deleted.
+     * Returns the node that has been added or deleted.
      * @return the node that has been added or deleted.
      */
     public DomNode getChangedNode() {

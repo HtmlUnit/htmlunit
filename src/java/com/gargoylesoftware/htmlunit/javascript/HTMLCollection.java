@@ -52,7 +52,11 @@ import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
+import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 
@@ -70,16 +74,20 @@ import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class HTMLCollection extends SimpleScriptable implements Function {
+public class HTMLCollection extends SimpleScriptable implements 
+    Function, DomChangeListener, HtmlAttributeChangeListener {
     private static final long serialVersionUID = 4049916048017011764L;
 
     private XPath xpath_;
     private DomNode node_;
+
     /**
      * The transformer used to get the element to return from the html element.
      * It returns the html element itself except for frames where it returns the nested window.
      */
     private Transformer transformer_;
+    
+    private List cachedElements_;
 
     /**
      * Create an instance. Javascript objects must have a default constructor.
@@ -119,6 +127,11 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         node_ = node;
         xpath_ = xpath;
         transformer_ = transformer;
+        node_.addDomChangeListener(this);
+        if( node_ instanceof HtmlElement ) {
+            ((HtmlElement)node_).addHtmlAttributeChangeListener(this);
+            cachedElements_ = null;
+        }
     }
 
     /**
@@ -184,24 +197,26 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * @return the list of {@link HtmlElement} contained in this collection
      */
     private List getElements() {
-        try {
-            final List list = xpath_.selectNodes(node_);
+        if (cachedElements_ == null) {
+            try {
+                cachedElements_ = xpath_.selectNodes(node_);
 
-            for( int i=0; i < list.size(); i++ ) {
-                final DomNode element = (DomNode) list.get(i);
-                for( DomNode parent = element.getParentNode(); parent != null; 
-                    parent = parent.getParentNode() ) {
-                    if( parent instanceof HtmlNoScript ) {
-                        list.remove(i--);
-                        break;
+                for( int i=0; i < cachedElements_.size(); i++ ) {
+                    final DomNode element = (DomNode) cachedElements_.get(i);
+                    for( DomNode parent = element.getParentNode(); parent != null; 
+                        parent = parent.getParentNode() ) {
+                        if( parent instanceof HtmlNoScript ) {
+                            cachedElements_.remove(i--);
+                            break;
+                        }
                     }
                 }
             }
-            return list;
+            catch (final JaxenException e) {
+                throw Context.reportRuntimeError("Exeption getting elements: " + e.getMessage());
+            }
         }
-        catch (final JaxenException e) {
-            throw Context.reportRuntimeError("Exeption getting elements: " + e.getMessage());
-        }
+        return cachedElements_;
     }
 
     /**
@@ -365,5 +380,40 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         }
 
         return super.equivalentValues(other);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void nodeAdded(final DomChangeEvent event) {
+        cachedElements_ = null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void nodeDeleted(final DomChangeEvent event) {
+        cachedElements_ = null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void attributeAdded(final HtmlAttributeChangeEvent event) {
+        cachedElements_ = null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void attributeRemoved(final HtmlAttributeChangeEvent event) {
+        cachedElements_ = null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void attributeReplaced(final HtmlAttributeChangeEvent event) {
+        cachedElements_ = null;
     }
 }

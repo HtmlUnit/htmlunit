@@ -1009,7 +1009,7 @@ public final class Document extends NodeImpl {
                     + currentDomain + "\" to: \"" + newDomain +"\"");
         }
 
-        // Netscape down shifts the cse of the domain
+        // Netscape down shifts the case of the domain
         if (getHtmlPage().getWebClient().getBrowserVersion().isNetscape()) {
             domain_ = newDomain.toLowerCase();
         }
@@ -1045,4 +1045,5 @@ public final class Document extends NodeImpl {
         return getWindow().jsxGet_frames();
     }
 }
+
 
