@@ -74,8 +74,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class HTMLCollection extends SimpleScriptable implements 
-    Function, DomChangeListener, HtmlAttributeChangeListener {
+public class HTMLCollection extends SimpleScriptable implements Function {
     private static final long serialVersionUID = 4049916048017011764L;
 
     private XPath xpath_;
@@ -127,9 +126,10 @@ public class HTMLCollection extends SimpleScriptable implements
         node_ = node;
         xpath_ = xpath;
         transformer_ = transformer;
-        node_.addDomChangeListener(this);
+        final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+        node_.addDomChangeListener(listener);
         if( node_ instanceof HtmlElement ) {
-            ((HtmlElement)node_).addHtmlAttributeChangeListener(this);
+            ((HtmlElement)node_).addHtmlAttributeChangeListener(listener);
             cachedElements_ = null;
         }
     }
@@ -381,39 +381,41 @@ public class HTMLCollection extends SimpleScriptable implements
 
         return super.equivalentValues(other);
     }
+    
+    private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
+        /**
+         * {@inheritDoc}
+         */
+        public void nodeAdded(final DomChangeEvent event) {
+            cachedElements_ = null;
+        }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void nodeAdded(final DomChangeEvent event) {
-        cachedElements_ = null;
-    }
+        /**
+         * {@inheritDoc}
+         */
+        public void nodeDeleted(final DomChangeEvent event) {
+            cachedElements_ = null;
+        }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void nodeDeleted(final DomChangeEvent event) {
-        cachedElements_ = null;
-    }
+        /**
+         * {@inheritDoc}
+         */
+        public void attributeAdded(final HtmlAttributeChangeEvent event) {
+            cachedElements_ = null;
+        }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void attributeAdded(final HtmlAttributeChangeEvent event) {
-        cachedElements_ = null;
-    }
+        /**
+         * {@inheritDoc}
+         */
+        public void attributeRemoved(final HtmlAttributeChangeEvent event) {
+            cachedElements_ = null;
+        }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-        cachedElements_ = null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void attributeReplaced(final HtmlAttributeChangeEvent event) {
-        cachedElements_ = null;
+        /**
+         * {@inheritDoc}
+         */
+        public void attributeReplaced(final HtmlAttributeChangeEvent event) {
+            cachedElements_ = null;
+        }
     }
 }
