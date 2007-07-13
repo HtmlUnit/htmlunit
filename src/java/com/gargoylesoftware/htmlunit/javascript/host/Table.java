@@ -208,6 +208,15 @@ public class Table extends RowContainer {
     }
 
     /**
+     * Refreshes the content of this table.
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536687.aspx">
+     * MSDN Documentation</a>
+     */
+    public void jsxFunction_refresh() {
+        //empty implementation
+    }
+
+    /**
      * {@inheritDoc}
      */
     protected String getXPathRows() {

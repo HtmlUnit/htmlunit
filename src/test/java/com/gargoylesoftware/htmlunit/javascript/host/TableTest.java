@@ -648,4 +648,19 @@ public class TableTest extends WebTestCase {
         loadPage(content, collectedAlerts).asXml();
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testRefresh() throws Exception {
+        final String htmlContent
+            = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    document.getElementById( 'myTable' ).refresh();"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<table id='myTable'></table>\n"
+            + "</body></html>";
+        loadPage(htmlContent);
+    }
 }
