@@ -92,7 +92,6 @@ public class HtmlBody extends ClickableElement {
         return getAttributeValue("onload");
     }
 
-
     /**
      * Return the value of the attribute "onunload".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -104,7 +103,6 @@ public class HtmlBody extends ClickableElement {
     public final String getOnUnloadAttribute() {
         return getAttributeValue("onunload");
     }
-
 
     /**
      * Return the value of the attribute "background".  Refer to the
@@ -118,7 +116,6 @@ public class HtmlBody extends ClickableElement {
         return getAttributeValue("background");
     }
 
-
     /**
      * Return the value of the attribute "bgcolor".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -130,7 +127,6 @@ public class HtmlBody extends ClickableElement {
     public final String getBgcolorAttribute() {
         return getAttributeValue("bgcolor");
     }
-
 
     /**
      * Return the value of the attribute "text".  Refer to the
@@ -144,7 +140,6 @@ public class HtmlBody extends ClickableElement {
         return getAttributeValue("text");
     }
 
-
     /**
      * Return the value of the attribute "link".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -157,7 +152,6 @@ public class HtmlBody extends ClickableElement {
         return getAttributeValue("link");
     }
 
-
     /**
      * Return the value of the attribute "vlink".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -169,7 +163,6 @@ public class HtmlBody extends ClickableElement {
     public final String getVlinkAttribute() {
         return getAttributeValue("vlink");
     }
-
 
     /**
      * Return the value of the attribute "alink".  Refer to the

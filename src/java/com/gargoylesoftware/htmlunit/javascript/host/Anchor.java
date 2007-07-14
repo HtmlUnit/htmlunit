@@ -47,7 +47,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import java.net.URL;
 
-
 /**
  * The javascript object that represents an anchor
  *

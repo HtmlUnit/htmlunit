@@ -50,13 +50,11 @@ public class CharacterDataImpl extends NodeImpl {
 
     private static final long serialVersionUID = 5413850371617638797L;
 
-
     /**
      * Create an instance.  Javascript objects must have a default constructor.
      */
     public CharacterDataImpl() {
     }
-
 
     /**
      * Get the JavaScript property "data" for this character data.
@@ -68,7 +66,6 @@ public class CharacterDataImpl extends NodeImpl {
         return domCharacterData.getData();
     }
 
-
     /**
      * Set the JavaScript property "data" for this character data.
      * @param newValue The new String of data.
@@ -78,7 +75,6 @@ public class CharacterDataImpl extends NodeImpl {
             (DomCharacterData) getDomNodeOrDie();
         domCharacterData.setData(newValue);
     }
-
 
     /**
      * Get the number of character in the character data.
@@ -90,7 +86,6 @@ public class CharacterDataImpl extends NodeImpl {
         return domCharacterData.getLength();
     }
 
-
     /**
      * Append a string to character data.
      * @param arg The string to be appended to the character data.
@@ -100,7 +95,6 @@ public class CharacterDataImpl extends NodeImpl {
             (DomCharacterData) getDomNodeOrDie();
         domCharacterData.appendData(arg);
     }
-
 
     /**
      * Delete characters from character data.
@@ -113,7 +107,6 @@ public class CharacterDataImpl extends NodeImpl {
         domCharacterData.deleteData(offset, count);
     }
 
-
     /**
      * Insert a string into character data.
      * @param offset The position within the first character at which
@@ -125,7 +118,6 @@ public class CharacterDataImpl extends NodeImpl {
             (DomCharacterData) getDomNodeOrDie();
         domCharacterData.insertData(offset, arg);
     }
-
 
     /**
      * Replace characters of character data with a string.
@@ -141,7 +133,6 @@ public class CharacterDataImpl extends NodeImpl {
             (DomCharacterData) getDomNodeOrDie();
         domCharacterData.replaceData(offset, count, arg);
     }
-
 
     /**
      * Extract a substring from character data.

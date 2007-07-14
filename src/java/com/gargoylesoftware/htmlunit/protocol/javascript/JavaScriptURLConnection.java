@@ -52,7 +52,6 @@ import com.gargoylesoftware.htmlunit.TextUtil;
 public class JavaScriptURLConnection extends URLConnection {
     private final String content_;
 
-
     /**
      * Create an instance
      * @param newUrl The javascript url.
@@ -63,13 +62,11 @@ public class JavaScriptURLConnection extends URLConnection {
         content_ = newUrl.toExternalForm().substring("javascript:".length());
     }
 
-
     /**
      * This method does nothing in this implementation but is required to be implemented.
      */
     public void connect() {
     }
-
 
     /**
      * Return the input stream - in this case the content of the url

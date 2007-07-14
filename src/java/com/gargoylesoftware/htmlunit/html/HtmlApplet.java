@@ -90,7 +90,6 @@ public class HtmlApplet extends StyledElement {
         return getAttributeValue("codebase");
     }
 
-
     /**
      * Return the value of the attribute "archive".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -102,7 +101,6 @@ public class HtmlApplet extends StyledElement {
     public final String getArchiveAttribute() {
         return getAttributeValue("archive");
     }
-
 
     /**
      * Return the value of the attribute "code".  Refer to the
@@ -116,7 +114,6 @@ public class HtmlApplet extends StyledElement {
         return getAttributeValue("code");
     }
 
-
     /**
      * Return the value of the attribute "object".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -128,7 +125,6 @@ public class HtmlApplet extends StyledElement {
     public final String getObjectAttribute() {
         return getAttributeValue("object");
     }
-
 
     /**
      * Return the value of the attribute "alt".  Refer to the
@@ -142,7 +138,6 @@ public class HtmlApplet extends StyledElement {
         return getAttributeValue("alt");
     }
 
-
     /**
      * Return the value of the attribute "name".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -154,7 +149,6 @@ public class HtmlApplet extends StyledElement {
     public final String getNameAttribute() {
         return getAttributeValue("name");
     }
-
 
     /**
      * Return the value of the attribute "width".  Refer to the
@@ -168,7 +162,6 @@ public class HtmlApplet extends StyledElement {
         return getAttributeValue("width");
     }
 
-
     /**
      * Return the value of the attribute "height".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -180,7 +173,6 @@ public class HtmlApplet extends StyledElement {
     public final String getHeightAttribute() {
         return getAttributeValue("height");
     }
-
 
     /**
      * Return the value of the attribute "align".  Refer to the
@@ -194,7 +186,6 @@ public class HtmlApplet extends StyledElement {
         return getAttributeValue("align");
     }
 
-
     /**
      * Return the value of the attribute "hspace".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -206,7 +197,6 @@ public class HtmlApplet extends StyledElement {
     public final String getHspaceAttribute() {
         return getAttributeValue("hspace");
     }
-
 
     /**
      * Return the value of the attribute "vspace".  Refer to the

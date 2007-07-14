@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
-
 /**
  *  Wrapper for the html element "td"
  *
@@ -91,7 +90,6 @@ public class HtmlTableDataCell extends HtmlTableCell {
         return getAttributeValue("abbr");
     }
 
-
     /**
      * Return the value of the attribute "axis".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -103,7 +101,6 @@ public class HtmlTableDataCell extends HtmlTableCell {
     public final String getAxisAttribute() {
         return getAttributeValue("axis");
     }
-
 
     /**
      * Return the value of the attribute "headers".  Refer to the
@@ -117,7 +114,6 @@ public class HtmlTableDataCell extends HtmlTableCell {
         return getAttributeValue("headers");
     }
 
-
     /**
      * Return the value of the attribute "scope".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -129,7 +125,6 @@ public class HtmlTableDataCell extends HtmlTableCell {
     public final String getScopeAttribute() {
         return getAttributeValue("scope");
     }
-
 
     /**
      * Return the value of the attribute "rowspan".  Refer to the
@@ -143,7 +138,6 @@ public class HtmlTableDataCell extends HtmlTableCell {
         return getAttributeValue("rowspan");
     }
 
-
     /**
      * Return the value of the attribute "colspan".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -155,7 +149,6 @@ public class HtmlTableDataCell extends HtmlTableCell {
     public final String getColumnSpanAttribute() {
         return getAttributeValue("colspan");
     }
-
 
     /**
      * Return the value of the attribute "align".  Refer to the
@@ -169,7 +162,6 @@ public class HtmlTableDataCell extends HtmlTableCell {
         return getAttributeValue("align");
     }
 
-
     /**
      * Return the value of the attribute "char".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -181,7 +173,6 @@ public class HtmlTableDataCell extends HtmlTableCell {
     public final String getCharAttribute() {
         return getAttributeValue("char");
     }
-
 
     /**
      * Return the value of the attribute "charoff".  Refer to the
@@ -195,7 +186,6 @@ public class HtmlTableDataCell extends HtmlTableCell {
         return getAttributeValue("charoff");
     }
 
-
     /**
      * Return the value of the attribute "valign".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -207,7 +197,6 @@ public class HtmlTableDataCell extends HtmlTableCell {
     public final String getValignAttribute() {
         return getAttributeValue("valign");
     }
-
 
     /**
      * Return the value of the attribute "nowrap".  Refer to the
@@ -221,7 +210,6 @@ public class HtmlTableDataCell extends HtmlTableCell {
         return getAttributeValue("nowrap");
     }
 
-
     /**
      * Return the value of the attribute "bgcolor".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -234,7 +222,6 @@ public class HtmlTableDataCell extends HtmlTableCell {
         return getAttributeValue("bgcolor");
     }
 
-
     /**
      * Return the value of the attribute "width".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -246,7 +233,6 @@ public class HtmlTableDataCell extends HtmlTableCell {
     public final String getWidthAttribute() {
         return getAttributeValue("width");
     }
-
 
     /**
      * Return the value of the attribute "height".  Refer to the

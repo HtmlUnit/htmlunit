@@ -151,7 +151,6 @@ public class HtmlArea extends FocusableElement {
         return getAttributeValue("shape");
     }
 
-
     /**
      * Return the value of the attribute "coords".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -163,7 +162,6 @@ public class HtmlArea extends FocusableElement {
     public final String getCoordsAttribute() {
         return getAttributeValue("coords");
     }
-
 
     /**
      * Return the value of the attribute "href".  Refer to the
@@ -177,7 +175,6 @@ public class HtmlArea extends FocusableElement {
         return getAttributeValue("href");
     }
 
-
     /**
      * Return the value of the attribute "nohref".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -189,7 +186,6 @@ public class HtmlArea extends FocusableElement {
     public final String getNoHrefAttribute() {
         return getAttributeValue("nohref");
     }
-
 
     /**
      * Return the value of the attribute "alt".  Refer to the
@@ -203,7 +199,6 @@ public class HtmlArea extends FocusableElement {
         return getAttributeValue("alt");
     }
 
-
     /**
      * Return the value of the attribute "tabindex".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -215,7 +210,6 @@ public class HtmlArea extends FocusableElement {
     public final String getTabIndexAttribute() {
         return getAttributeValue("tabindex");
     }
-
 
     /**
      * Return the value of the attribute "accesskey".  Refer to the
@@ -229,7 +223,6 @@ public class HtmlArea extends FocusableElement {
         return getAttributeValue("accesskey");
     }
 
-
     /**
      * Return the value of the attribute "onfocus".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -242,7 +235,6 @@ public class HtmlArea extends FocusableElement {
         return getAttributeValue("onfocus");
     }
 
-
     /**
      * Return the value of the attribute "onblur".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -254,7 +246,6 @@ public class HtmlArea extends FocusableElement {
     public final String getOnBlurAttribute() {
         return getAttributeValue("onblur");
     }
-
 
     /**
      * Return the value of the attribute "target".  Refer to the

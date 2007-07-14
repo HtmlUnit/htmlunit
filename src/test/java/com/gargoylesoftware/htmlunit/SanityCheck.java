@@ -67,7 +67,6 @@ public class SanityCheck extends WebTestCase {
         super( name );
     }
 
-
     /**
      * Main entry point for testing.
      * @param args the arguments.
@@ -79,7 +78,6 @@ public class SanityCheck extends WebTestCase {
         System.exit( 0 );
     }
 
-
     /**
      * Test against a live server: Yahoo mail
      * @throws Exception If something goes wrong.
@@ -88,7 +86,6 @@ public class SanityCheck extends WebTestCase {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertInstanceOf(webClient.getPage( new URL( "http://mail.yahoo.com/" ) ), HtmlPage.class);
     }
-
 
     /**
      * Test against a live server: Yahoo
@@ -109,7 +106,6 @@ public class SanityCheck extends WebTestCase {
             webClient.getPage( new URL( "http://edit.europe.yahoo.com/config/mail?.intl=es" ) ), HtmlPage.class );
     }
 
-
     /**
      * Test against a live server: IBM
      * @throws Exception If something goes wrong.
@@ -121,7 +117,6 @@ public class SanityCheck extends WebTestCase {
         assertEquals("http://www.ibm.com/us/", page.getWebResponse().getUrl());
     }
 
-
     /**
      * Test against a live server: IBM Alphaworks
      * @throws Exception If something goes wrong.
@@ -130,7 +125,6 @@ public class SanityCheck extends WebTestCase {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertInstanceOf(webClient.getPage(new URL( "http://www.alphaworks.ibm.com" ) ), HtmlPage.class);
     }
-
 
     /**
      * Test against a live server: CNN
@@ -141,7 +135,6 @@ public class SanityCheck extends WebTestCase {
         assertInstanceOf( webClient.getPage( new URL( "http://www.cnn.com" ) ), HtmlPage.class);
     }
 
-
     /**
      * Test against a live server: Toyota Canada
      * @throws Exception If something goes wrong.
@@ -150,7 +143,6 @@ public class SanityCheck extends WebTestCase {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertInstanceOf(webClient.getPage( new URL( "http://www.toyota.ca" ) ), HtmlPage.class);
     }
-
 
     /**
      * Test against a live server: HtmlUnit page on sourceforge using https
@@ -169,7 +161,6 @@ public class SanityCheck extends WebTestCase {
         }
     }
 
-
     /**
      * Test against a live server: Yahoo secure login
      * @throws Exception If something goes wrong.
@@ -186,7 +177,6 @@ public class SanityCheck extends WebTestCase {
         }
     }
 
-
     /**
      * Test against a live server: Amazon Canada
      * @throws Exception If something goes wrong.
@@ -195,7 +185,6 @@ public class SanityCheck extends WebTestCase {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertInstanceOf( webClient.getPage( new URL( "http://www.amazon.ca/" ) ), HtmlPage.class );
     }
-
 
     /**
      * Test against a live server: CNN After hours
@@ -206,7 +195,6 @@ public class SanityCheck extends WebTestCase {
         assertInstanceOf( webClient.getPage( new URL( "http://money.cnn.com/markets/afterhours/" ) ), HtmlPage.class );
     }
 
-
     /**
      * Test against a live server: htmlunit.sourceforge.net
      * @throws Exception If something goes wrong.
@@ -215,7 +203,6 @@ public class SanityCheck extends WebTestCase {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertInstanceOf( webClient.getPage( new URL( "http://htmlunit.sourceforge.net" ) ), HtmlPage.class );
     }
-
 
     /**
      * Test against a live server: Adobe Acrobat Reader download step 2
@@ -227,7 +214,6 @@ public class SanityCheck extends WebTestCase {
                           HtmlPage.class );
     }
 
-
     /**
      * Print out the name of the test that is running.
      */
@@ -238,11 +224,9 @@ public class SanityCheck extends WebTestCase {
         System.out.println( "=====================================" );
     }
 
-
     private URL getPrintEnvUrl() throws MalformedURLException {
         return new URL("http://htmlunit.sourceforge.net/cgi-bin/printenv");
     }
-
 
     /**
      * Test against htmlunit.sourceforge.net to make sure parameters are being passed
@@ -265,7 +249,6 @@ public class SanityCheck extends WebTestCase {
             secondPage.getHtmlElementById("QUERY_STRING").asText());
         assertEquals("", secondPage.getHtmlElementById("CONTENT").asText());
     }
-
 
     /**
      * Test against htmlunit.sourceforge.net to make sure parameters are being passed

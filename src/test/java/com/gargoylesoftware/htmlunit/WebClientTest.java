@@ -85,7 +85,6 @@ public class WebClientTest extends WebTestCase {
         super( name );
     }
 
-
     /**
      * Test the situation where credentials are required but they haven't been specified.
      *
@@ -113,7 +112,6 @@ public class WebClientTest extends WebTestCase {
         }
     }
 
-
     /**
      * Test that {@link WebClient#assertionFailed(String)} actually throws an exception.
      */
@@ -128,7 +126,6 @@ public class WebClientTest extends WebTestCase {
             assertEquals( "foobar", e.getMessage() );
         }
     }
-
 
     /**
      * Test that the {@link WebWindowEvent#CHANGE} window event gets fired at the
@@ -166,7 +163,6 @@ public class WebClientTest extends WebTestCase {
         } );
         assertEquals( secondExpectedEvents, eventCatcher.getEvents() );
     }
-
 
     /**
      * Test that the {@link WebWindowEvent#OPEN} window event gets fired at
@@ -207,7 +203,6 @@ public class WebClientTest extends WebTestCase {
         } );
         assertEquals( expectedEvents, eventCatcher.getEvents() );
     }
-
 
     /**
      * Test that the {@link WebWindowEvent#CLOSE} window event gets fired at
@@ -257,7 +252,6 @@ public class WebClientTest extends WebTestCase {
         assertEquals( expectedEvents.get(0), eventCatcher.getEvents().get(0) );
         assertEquals( expectedEvents, eventCatcher.getEvents() );
     }
-
 
     /**
      * Test a 301 redirection code where the original request was a GET.
@@ -335,7 +329,6 @@ public class WebClientTest extends WebTestCase {
         doTestRedirectionSameUrlAfterPost(statusCode);
     }
 
-
     /**
      * From the http spec:  Note: RFC 1945 and RFC 2068 specify that the client
      * is not allowed to change the method on the redirected request.  However,
@@ -355,7 +348,6 @@ public class WebClientTest extends WebTestCase {
         doTestRedirectionSameUrlAfterPost(statusCode);
     }
 
-
     /**
      * Test a 302 redirection code.
      * @throws Exception If something goes wrong.
@@ -367,7 +359,6 @@ public class WebClientTest extends WebTestCase {
 
         doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
     }
-
 
     /**
      * Test a 302 redirection code with "," in url parameters.
@@ -389,7 +380,6 @@ public class WebClientTest extends WebTestCase {
         doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
     }
 
-
     /**
      * Tests a 303 redirection code - this should be the same as a 302.
      * @throws Exception If something goes wrong.
@@ -403,7 +393,6 @@ public class WebClientTest extends WebTestCase {
         doTestRedirectionSameUrlAfterPost(statusCode);
     }
 
-
     /**
      * Tests a 307 redirection code.
      * @throws Exception If something goes wrong.
@@ -416,7 +405,6 @@ public class WebClientTest extends WebTestCase {
         doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
     }
 
-
     /**
      * Tests a 307 redirection code.
      * @throws Exception If something goes wrong.
@@ -428,7 +416,6 @@ public class WebClientTest extends WebTestCase {
 
         doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
     }
-
 
     /**
      * Basic logic for all the redirection tests.
@@ -470,7 +457,6 @@ public class WebClientTest extends WebTestCase {
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod, newLocation, false);
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod, newLocation, true);
     }
-
 
     /**
      * Browsers allow many redirections to the same url before to stop redirections.
@@ -514,7 +500,6 @@ public class WebClientTest extends WebTestCase {
         webConnection.setResponse(url, firstContent, 302, "Redirect needed", "text/html", headers);
         webClient.setWebConnection( webConnection );
         webClient.setThrowExceptionOnFailingStatusCode(false);
-
         
         return (HtmlPage) webClient.getPage(url);
     }
@@ -604,9 +589,7 @@ public class WebClientTest extends WebTestCase {
         assertEquals( initialRequestMethod, webConnection.getLastMethod() );
         assertEquals(proxyHost, webConnection.getLastWebRequestSettings().getProxyHost());
         assertEquals(proxyPort, webConnection.getLastWebRequestSettings().getProxyPort());
-
     }
-
 
     /**
      * Test passing in a null page creator.
@@ -621,7 +604,6 @@ public class WebClientTest extends WebTestCase {
             // expected path
         }
     }
-
 
     /**
      * Test {@link WebClient#setPageCreator(PageCreator)}.
@@ -651,7 +633,6 @@ public class WebClientTest extends WebTestCase {
 
         assertEquals( expectedPageCreationItems, collectedPageCreationItems );
     }
-
 
     /** A PageCreator that collects data */
     private class CollectingPageCreator implements PageCreator {
@@ -850,7 +831,6 @@ public class WebClientTest extends WebTestCase {
         assertEquals("Second", page.getTitleText());
     }
 
-
     /**
      * Test tabbing where there are no tabbable elements.
      * @throws Exception If something goes wrong.
@@ -869,7 +849,6 @@ public class WebClientTest extends WebTestCase {
         final List expectedAlerts = Collections.EMPTY_LIST;
         assertEquals(expectedAlerts, collectedAlerts);
     }
-
 
     /**
      * Test tabbing where there is only one tabbable element.
@@ -901,7 +880,6 @@ public class WebClientTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-
     /**
      * Test pressing an accesskey.
      * @throws Exception If something goes wrong.
@@ -922,7 +900,6 @@ public class WebClientTest extends WebTestCase {
         };
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * Test tabbing to the next element.
@@ -945,7 +922,6 @@ public class WebClientTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Test tabbing to the previous element.
      * @throws Exception If something goes wrong.
@@ -967,7 +943,6 @@ public class WebClientTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Test that a button can be selected via accesskey.
      * @throws Exception If something goes wrong.
@@ -988,7 +963,6 @@ public class WebClientTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * Return a loaded page for one of the keyboard tests.
@@ -1229,7 +1203,6 @@ public class WebClientTest extends WebTestCase {
         assertEquals(urlString + "#second", WebClient.expandUrl(url, "#second"));
     }
 
-
     /** Test the accessors for refreshHandler */
     public void testRefreshHandlerAccessors() {
         final WebClient webClient = new WebClient();
@@ -1461,7 +1434,6 @@ public class WebClientTest extends WebTestCase {
         assertEquals("empty.js", "text/javascript", webClient.guessContentType(getTestFile("empty.js")));
     }
 
-
     /**
      * Test that no encoding disturb file reads from filesystem.
      * For instance this test failed under Linux with LANG=de_DE.UTF-8 or LANG=C
@@ -1494,7 +1466,6 @@ public class WebClientTest extends WebTestCase {
         }
         return hexString.toString().trim();
     }
-
 
     /**
      * Gets the file located in testfiles from the file name

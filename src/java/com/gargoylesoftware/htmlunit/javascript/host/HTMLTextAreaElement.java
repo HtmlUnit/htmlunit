@@ -52,13 +52,11 @@ public class HTMLTextAreaElement extends FormField {
 
     private static final long serialVersionUID = 49352135575074390L;
 
-
     /**
      * Create an instance.
      */
     public HTMLTextAreaElement() {
     }
-
 
     /**
      * Javascript constructor.  This must be declared in every javascript file because
@@ -66,7 +64,6 @@ public class HTMLTextAreaElement extends FormField {
      */
     public void jsConstructor() {
     }
-
 
     /**
      * Return the type of this input.
@@ -76,7 +73,6 @@ public class HTMLTextAreaElement extends FormField {
         return "textarea";
     }
 
-
     /**
      * Return the value of the "value" attribute
      * @return The value of the "value" attribute
@@ -84,7 +80,6 @@ public class HTMLTextAreaElement extends FormField {
     public String jsxGet_value() {
         return ((HtmlTextArea)getHtmlElementOrDie()).getText();
     }
-
 
     /**
      * Set the value of the "value" attribute

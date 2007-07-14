@@ -45,7 +45,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-
 /**
  * The javascript object that represents an "Image"
  *
@@ -60,13 +59,11 @@ public class Image extends HTMLElement {
     private static final long serialVersionUID = 5630843390548382869L;
     private String src_;
 
-
     /**
      * Create an instance.
      */
     public Image() {
     }
-
 
     /**
      * Javascript constructor.  This must be declared in every javascript file because

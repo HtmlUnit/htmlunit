@@ -65,20 +65,17 @@ public class UnexpectedPage implements Page {
         enclosingWindow_ = enclosingWindow;
     }
 
-
     /**
      * Initialize this page.
      */
     public void initialize() {
     }
 
-
     /**
      * Clean up this page.
      */
     public void cleanUp() {
     }
-
 
     /**
      *  Return an input stream representing all the content that was returned

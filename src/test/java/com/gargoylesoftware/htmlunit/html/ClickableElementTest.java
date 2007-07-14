@@ -65,7 +65,6 @@ public class ClickableElementTest extends WebTestCase {
         super( name );
     }
 
-
     /**
      * Full page driver for onClick tests.
      *
@@ -127,7 +126,6 @@ public class ClickableElementTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Body driver for onClick tests.
      *
@@ -139,7 +137,6 @@ public class ClickableElementTest extends WebTestCase {
                  + "</html>");
     }
 
-
     /**
      * Simple tag name driver for onClick tests.
      *
@@ -150,7 +147,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickBodyTest("<body><" + tagName + " id='clickId' onClick='alert(\"foo\")'>Text</" + tagName + "></body>");
     }
 
-
     /**
      * Test onClick handler and click method of anchor element.
      *
@@ -159,7 +155,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testAnchor_onClick() throws Exception {
         onClickSimpleTest("a");
     }
-
 
     /**
      * Test onClick handler and click method of abbreviation element.
@@ -170,7 +165,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("abbr");
     }
 
-
     /**
      * Test onClick handler and click method of acronym element.
      *
@@ -179,7 +173,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testAcronym_onClick() throws Exception {
         onClickSimpleTest("acronym");
     }
-
 
     /**
      * Test onClick handler and click method of address element.
@@ -190,7 +183,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("address");
     }
 
-
     /**
      * Test onClick handler and click method of area element.
      *
@@ -199,7 +191,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testArea_onClick() throws Exception {
         onClickBodyTest("<body><map><area id='clickId' onClick='alert(\"foo\")'/></map></body>");
     }
-
 
     /**
      * Test onClick handler and click method of bold element.
@@ -210,7 +201,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("b");
     }
 
-
     /**
      * Test onClick handler and click method of big element.
      *
@@ -219,7 +209,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testBig_onClick() throws Exception {
         onClickSimpleTest("big");
     }
-
 
     /**
      * Test onClick handler and click method of blockquote element.
@@ -230,7 +219,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("blockquote");
     }
 
-
     /**
      * Test onClick handler and click method of body element.
      *
@@ -239,7 +227,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testBody_onClick() throws Exception {
         onClickBodyTest("<body id='clickId' onClick='alert(\"foo\")'>Text</body>");
     }
-
 
     /**
      * Test onClick handler and click method of button element.
@@ -272,7 +259,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("cite");
     }
 
-
     /**
      * Test onClick handler and click method of code element.
      *
@@ -281,7 +267,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testCode_onClick() throws Exception {
         onClickSimpleTest("code");
     }
-
 
     /**
      * Test onClick handler and click method of table column element.
@@ -295,7 +280,6 @@ public class ClickableElementTest extends WebTestCase {
             + "th>Header</th></tr></tfoot></table></body>");
     }
 
-
     /**
      * Test onClick handler and click method of table column group element.
      *
@@ -308,7 +292,6 @@ public class ClickableElementTest extends WebTestCase {
             + "<tr><th>Header</th></tr></tfoot></table></body>");
     }
 
-
     /**
      * Test onClick handler and click method of center element.
      *
@@ -317,7 +300,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testCenter_onClick() throws Exception {
         onClickSimpleTest("center");
     }
-
 
     /**
      * Test onClick handler and click method of table caption element.
@@ -331,7 +313,6 @@ public class ClickableElementTest extends WebTestCase {
             + "</tfoot></table></body>");
     }
 
-
     /**
      * Test onClick handler and click method of definition description dd element.
      *
@@ -340,7 +321,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testDefinitionDescription_onClick() throws Exception {
         onClickBodyTest("<body><dl><dt>Term</dt><dd id='clickId' onClick='alert(\"foo\")'>Definition</dd></dl></body>");
     }
-
 
     /**
      * Test that no NPE is thrown when JS fails on link click 
@@ -355,7 +335,6 @@ public class ClickableElementTest extends WebTestCase {
                 1, new String[0], false);
     }
 
-
     /**
      * Test onClick handler and click method of definition element.
      *
@@ -364,7 +343,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testDefinition_onClick() throws Exception {
         onClickSimpleTest("dfn");
     }
-
 
     /**
      * Test onClick handler and click method of directory element.
@@ -375,7 +353,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("dir");
     }
 
-
     /**
      * Test onClick handler and click method of definition list dl element.
      *
@@ -384,7 +361,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testDefinitionList_onClick() throws Exception {
         onClickBodyTest("<body><dl id='clickId' onClick='alert(\"foo\")'><dt>Term</dt><dd>Definition</dd></dl></body>");
     }
-
 
     /**
      * Test onClick handler and click method of definition term dt element.
@@ -395,7 +371,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickBodyTest("<body><dl><dt id='clickId' onClick='alert(\"foo\")'>Term</dt><dd>Definition</dd></dl></body>");
     }
 
-
     /**
      * Test onClick handler and click method of deleted text element.
      *
@@ -404,7 +379,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testDeletedText_onClick() throws Exception {
         onClickSimpleTest("del");
     }
-
 
     /**
      * Test onClick handler and click method of Text Direction element.
@@ -415,7 +389,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("dir");
     }
 
-
     /**
      * Test onClick handler and click method of division element.
      *
@@ -425,7 +398,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("div");
     }
 
-
     /**
      * Test onClick handler and click method of emphasis element.
      *
@@ -434,7 +406,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testEmphasis_onClick() throws Exception {
         onClickSimpleTest("em");
     }
-
 
     /**
      * Test onClick handler and click method of field set element.
@@ -446,7 +417,6 @@ public class ClickableElementTest extends WebTestCase {
             + "<legend>Legend</legend></fieldset></form></body>");
     }
 
-
     /**
      * Test onClick handler and click method of form element.
      *
@@ -455,7 +425,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testForm_onClick() throws Exception {
         onClickSimpleTest("form");
     }
-
 
     /**
      * Test onClick handler and click method of italics element.
@@ -466,7 +435,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("i");
     }
 
-
     /**
      * Test onClick handler and click method of image element.
      *
@@ -475,7 +443,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testImage_onClick() throws Exception {
         onClickSimpleTest("img");
     }
-
 
     /**
      * Test onClick handler and click method of header1 element.
@@ -486,7 +453,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("h1");
     }
 
-
     /**
      * Test onClick handler and click method of header2 element.
      *
@@ -495,7 +461,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testHeader2_onClick() throws Exception {
         onClickSimpleTest("h2");
     }
-
 
     /**
      * Test onClick handler and click method of header3 element.
@@ -506,7 +471,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("h3");
     }
 
-
     /**
      * Test onClick handler and click method of header4 element.
      *
@@ -515,7 +479,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testHeader4_onClick() throws Exception {
         onClickSimpleTest("h4");
     }
-
 
     /**
      * Test onClick handler and click method of header5 element.
@@ -526,7 +489,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("h5");
     }
 
-
     /**
      * Test onClick handler and click method of header6 element.
      *
@@ -535,7 +497,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testHeader6_onClick() throws Exception {
         onClickSimpleTest("h6");
     }
-
 
     /**
      * Test onClick handler and click method of horizontal rule element.
@@ -555,7 +516,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickBodyTest("<body><form><input id='clickId' onClick='alert(\"foo\")'>Item</input></form></body>");
     }
 
-
     /**
      * Test onClick handler and click method of inserted text element.
      *
@@ -564,7 +524,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testInsertedText_onClick() throws Exception {
         onClickSimpleTest("ins");
     }
-
 
     /**
      * Test onClick handler and click method of keyboard element.
@@ -575,7 +534,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("kbd");
     }
 
-
     /**
      * Test onClick handler and click method of label element.
      *
@@ -584,7 +542,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testLabel_onClick() throws Exception {
         onClickBodyTest("<body><form><label id='clickId' onClick='alert(\"foo\")'>Item</label></form></body>");
     }
-
 
     /**
      * Test onClick handler and click method of legend element.
@@ -596,7 +553,6 @@ public class ClickableElementTest extends WebTestCase {
             + "Legend</legend></fieldset></form></body>");
     }
 
-
     /**
      * Test onClick handler and click method of link element.
      *
@@ -607,7 +563,6 @@ public class ClickableElementTest extends WebTestCase {
             + "</head><body></body></html>");
     }
 
-
     /**
      * Test onClick handler and click method of List Item element.
      *
@@ -616,7 +571,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testListItem_onClick() throws Exception {
         onClickBodyTest("<body><ol><li id='clickId' onClick='alert(\"foo\")'>Item</li></ol></body>");
     }
-
 
     /**
      * Test onClick handler and click method of map element.
@@ -627,7 +581,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickBodyTest("<body><map id='clickId' onClick='alert(\"foo\")'><area/></map></body>");
     }
 
-
     /**
      * Test onClick handler and click method of menu element.
      *
@@ -636,7 +589,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testMenu_onClick() throws Exception {
         onClickBodyTest("<body><menu id='clickId' onClick='alert(\"foo\")'><li>Item</li></menu></body>");
     }
-
 
     /**
      * Test onClick handler and click method of no frames element.
@@ -648,7 +600,6 @@ public class ClickableElementTest extends WebTestCase {
             + "<noframes id='clickId' onClick='alert(\"foo\")'/></frameset></html>");
     }
 
-
     /**
      * Test onClick handler and click method of no script element.
      *
@@ -659,7 +610,6 @@ public class ClickableElementTest extends WebTestCase {
             + "onClick='alert(\"foo\")'>Item</noscript></body>");
     }
 
-
     /**
      * Test onClick handler and click method of object element.
      *
@@ -668,7 +618,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testObject_onClick() throws Exception {
         onClickSimpleTest("object");
     }
-
 
     /**
      * Test onClick handler and click method of option element.
@@ -680,7 +629,6 @@ public class ClickableElementTest extends WebTestCase {
             + "Option</option></select></form></body>");
     }
 
-
     /**
      * Test onClick handler and click method of Option Group element.
      *
@@ -691,7 +639,6 @@ public class ClickableElementTest extends WebTestCase {
             + "<option>Option</option></optgroup></select></form></body>");
     }
 
-
     /**
      * Test onClick handler and click method of Ordered List element.
      *
@@ -700,7 +647,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testOrderedList_onClick() throws Exception {
         onClickBodyTest("<body><ol id='clickId' onClick='alert(\"foo\")'><li>Item</li></ol></body>");
     }
-
 
     /**
      * Test onClick handler and click method of paragraph element.
@@ -711,7 +657,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("p");
     }
 
-
     /**
      * Test onClick handler and click method of pre element.
      *
@@ -720,7 +665,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testPre_onClick() throws Exception {
         onClickSimpleTest("pre");
     }
-
 
     /**
      * Test onClick handler and click method of inline Quotation element.
@@ -731,7 +675,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("q");
     }
 
-
     /**
      * Test onClick handler and click method of strikethrough element.
      *
@@ -741,7 +684,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("s");
     }
 
-
     /**
      * Test onClick handler and click method of sample element.
      *
@@ -750,7 +692,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testSample_onClick() throws Exception {
         onClickSimpleTest("samp");
     }
-
 
     /**
      * Test onClick handler and click method of select element.
@@ -762,7 +703,6 @@ public class ClickableElementTest extends WebTestCase {
             + "<option>Option</option></select></form></body>");
     }
 
-
     /**
      * Test onClick handler and click method of small element.
      *
@@ -771,7 +711,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testSmall_onClick() throws Exception {
         onClickSimpleTest("small");
     }
-
 
     /**
      * Test onClick handler and click method of span element.
@@ -782,7 +721,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("span");
     }
 
-
     /**
      * Test onClick handler and click method of strike element.
      *
@@ -791,7 +729,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testStrike_onClick() throws Exception {
         onClickSimpleTest("strike");
     }
-
 
     /**
      * Test onClick handler and click method of subscript element.
@@ -802,7 +739,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("sub");
     }
 
-
     /**
      * Test onClick handler and click method of superscript element.
      *
@@ -811,7 +747,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testSuperscript_onClick() throws Exception {
         onClickSimpleTest("sup");
     }
-
 
     /**
      * Test onClick handler and click method of table element.
@@ -825,7 +760,6 @@ public class ClickableElementTest extends WebTestCase {
             + "</tfoot></table></body>");
     }
 
-
     /**
      * Test onClick handler and click method of table body element.
      *
@@ -837,7 +771,6 @@ public class ClickableElementTest extends WebTestCase {
             + "<tbody id='clickId' onClick='alert(\"foo\")'><tr><td>Data</td></tr>"
             + "</tbody><tfoot><tr><th>Header</th></tr></tfoot></table></body>");
     }
-
 
     /**
      * Test onClick handler and click method of table data cell element.
@@ -851,7 +784,6 @@ public class ClickableElementTest extends WebTestCase {
             + "<tfoot><tr><th>Header</th></tr></tfoot></table></body>");
     }
 
-
     /**
      * Test onClick handler and click method of textarea element.
      *
@@ -860,7 +792,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testTextarea_onClick() throws Exception {
         onClickBodyTest("<body><form><textarea id='clickId' onClick='alert(\"foo\")'>Item</textarea></form></body>");
     }
-
 
     /**
      * Test onClick handler and click method of table footer element.
@@ -874,7 +805,6 @@ public class ClickableElementTest extends WebTestCase {
             + "</tr></tfoot></table></body>");
     }
 
-
     /**
      * Test onClick handler and click method of table header cell element.
      *
@@ -887,7 +817,6 @@ public class ClickableElementTest extends WebTestCase {
             + "<th>Header</th></tr></tfoot></table></body>");
     }
 
-
     /**
      * Test onClick handler and click method of table header element.
      *
@@ -899,7 +828,6 @@ public class ClickableElementTest extends WebTestCase {
             + "</tr></thead><tbody><tr><td>Data</td></tr></tbody><tfoot><tr><th>Header</th>"
             + "</tr></tfoot></table></body>");
     }
-
 
     /**
      * Test onClick handler and click method of table row element.
@@ -965,7 +893,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("tt");
     }
 
-
     /**
      * Test onClick handler and click method of underline element.
      *
@@ -975,7 +902,6 @@ public class ClickableElementTest extends WebTestCase {
         onClickSimpleTest("u");
     }
 
-
     /**
      * Test onClick handler and click method of unordered List element.
      *
@@ -984,7 +910,6 @@ public class ClickableElementTest extends WebTestCase {
     public void testUnorderedList_onClick() throws Exception {
         onClickBodyTest("<body><ul id='clickId' onClick='alert(\"foo\")'><li>Item</li></ul></body>");
     }
-
 
     /**
      * Test onClick handler and click method of variable element.

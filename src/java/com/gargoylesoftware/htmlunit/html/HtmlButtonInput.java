@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
-
 /**
  *  Wrapper for the html element "input" where type is "button"
  *

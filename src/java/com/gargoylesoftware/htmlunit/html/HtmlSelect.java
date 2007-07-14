@@ -50,7 +50,6 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 
-
 /**
  * Wrapper for the HTML element "select".
  *
@@ -171,7 +170,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         return Collections.unmodifiableList( elementList );
     }
 
-
     /**
      *  Return the indexed option.
      *
@@ -184,7 +182,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         return (HtmlOption) elementList.get( index );
     }
 
-
     /**
      * Return the number of options
      * @return The number of options
@@ -194,7 +191,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         final List elementList = getHtmlElementsByTagName( "option" );
         return elementList.size();
     }
-
 
     /**
      * Remove options by reducing the "length" property.  This has no
@@ -208,7 +204,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             ((HtmlElement)elementList.get(i)).remove();
         }
     }
-
 
     /**
      * Remove an option at the given index.
@@ -224,7 +219,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             }
         }
     }
-
 
     /**
      * Replace an option at the given index with a new option.
@@ -246,7 +240,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             setSelectedAttribute(newOption, true);
         }
     }
-
 
     /**
      * Add a new option at the end.
@@ -335,7 +328,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         }
     }
 
-
     /**
      *  Set the selected value to be something that was not originally contained
      *  in the document.
@@ -346,7 +338,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         Assert.notNull( "optionValue", optionValue );
         fakeSelectedAttribute( new String[]{optionValue} );
     }
-
 
     /**
      *  Set the selected values to be something that were not originally
@@ -395,7 +386,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         return pairs;
     }
 
-
     /**
      * Indicates if this select is submittable
      * @return <code>false</code> if not
@@ -415,7 +405,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         }
     }
 
-
     /**
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultValue(String)
@@ -423,7 +412,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public void setDefaultValue( final String defaultValue ) {
         setSelectedAttribute( defaultValue, true );
     }
-
 
     /**
      * {@inheritDoc}
@@ -439,7 +427,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         }
     }
 
-
     /**
      * {@inheritDoc} This implementation is empty; only checkboxes and radio buttons
      * really care what the default checked value is.
@@ -450,7 +437,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public void setDefaultChecked( final boolean defaultChecked ) {
         // Empty.
     }
-
 
     /**
      * {@inheritDoc} This implementation returns <tt>false</tt>; only checkboxes and
@@ -463,7 +449,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         return false;
     }
 
-
     /**
      *  Return true if this select is using "multiple select"
      *
@@ -472,7 +457,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public boolean isMultipleSelectEnabled() {
         return getAttributeValue( "multiple" ) != ATTRIBUTE_NOT_DEFINED;
     }
-
 
     /**
      *  Return the HtmlOption object that corresponds to the specified value
@@ -533,7 +517,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         return getAttributeValue( "name" );
     }
 
-
     /**
      *  Return the value of the attribute "size". Refer to the <a
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
@@ -546,7 +529,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         return getAttributeValue( "size" );
     }
 
-
     /**
      *  Return the value of the attribute "multiple". Refer to the <a
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
@@ -558,7 +540,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public final String getMultipleAttribute() {
         return getAttributeValue( "multiple" );
     }
-
 
     /**
      *  Return the value of the attribute "disabled". Refer to the <a
@@ -593,7 +574,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         return getAttributeValue( "tabindex" );
     }
 
-
     /**
      *  Return the value of the attribute "onfocus". Refer to the <a
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
@@ -606,7 +586,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         return getAttributeValue( "onfocus" );
     }
 
-
     /**
      *  Return the value of the attribute "onblur". Refer to the <a
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
@@ -618,7 +597,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public final String getOnBlurAttribute() {
         return getAttributeValue( "onblur" );
     }
-
 
     /**
      *  Return the value of the attribute "onchange". Refer to the <a

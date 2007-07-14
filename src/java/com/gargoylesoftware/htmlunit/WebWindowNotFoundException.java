@@ -48,7 +48,6 @@ public class WebWindowNotFoundException extends RuntimeException {
     private static final long serialVersionUID = 2971032116624875170L;
     private final String name_;
 
-
     /**
      * Create an instance
      * @param name The name that was searched by.
@@ -57,7 +56,6 @@ public class WebWindowNotFoundException extends RuntimeException {
         super("Searching for ["+name+"]");
         name_ = name;
     }
-
 
     /**
      * Return the name of the {@link WebWindow} that wasn't found

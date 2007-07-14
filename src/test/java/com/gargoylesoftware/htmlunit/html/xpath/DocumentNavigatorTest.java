@@ -68,7 +68,6 @@ public class DocumentNavigatorTest extends WebTestCase {
         + "</html>";
     private final HtmlPage page_;
     
-
     /**
      *  Create an instance
      *

@@ -212,7 +212,6 @@
         <function name="focus"/>
     </class>
 
-
     <class name="HTMLOptionsCollection" classname="com.gargoylesoftware.htmlunit.javascript.HTMLOptionsCollection" JSObject="true">
         <property name="length" readable="true" writable="true"/>
         <function name="add"/>
@@ -246,7 +245,6 @@
         <function name="reset"/>
         <function name="submit"/>
     </class>
-
 
     <class name="FormField" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FormField"
         JSObject="false">

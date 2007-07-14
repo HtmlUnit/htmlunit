@@ -42,7 +42,6 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
-
 /**
  * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.Option}.
  *
@@ -57,7 +56,6 @@ public class OptionTest extends WebTestCase {
     public OptionTest( final String name ) {
         super(name);
     }
-
 
     /**
      * @throws Exception if the test fails

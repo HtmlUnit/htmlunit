@@ -58,14 +58,12 @@ public interface WebResponse {
      */
     int getStatusCode();
 
-
     /**
      *  Return the status message that was returned from the server
      *
      * @return  See above
      */
     String getStatusMessage();
-
 
     /**
      *  Return the content type returned from the server. Ie "text/html"
@@ -74,14 +72,12 @@ public interface WebResponse {
      */
     String getContentType();
 
-
     /**
      *  Return the content from the server as a string
      *
      * @return  See above
      */
     String getContentAsString();
-
 
     /**
      *  Return the content from the server as an input stream
@@ -92,14 +88,12 @@ public interface WebResponse {
     InputStream getContentAsStream()
         throws IOException;
 
-
     /**
      * Return the URL that was used to load this page.
      *
      * @return The originating URL
      */
     URL getUrl();
-
 
     /**
      * Return the method used for the request resulting into this response.
@@ -114,7 +108,6 @@ public interface WebResponse {
      */
     List getResponseHeaders();
 
-
     /**
      * Return the value of the specified header from this response.
      *
@@ -122,7 +115,6 @@ public interface WebResponse {
      * @return The value of the specified header
      */
     String getResponseHeaderValue( final String headerName );
-
 
     /**
      * Return the time it took to load this web response in milliseconds.

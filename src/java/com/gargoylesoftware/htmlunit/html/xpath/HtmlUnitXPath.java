@@ -90,7 +90,6 @@ public class HtmlUnitXPath extends BaseXPath {
         xpath_ = xpathExpr;
     }
     
-    
     /**
      * Builds a navigator that will see the provided node as the "document" 
      * and only navigate in its children.<br/>

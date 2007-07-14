@@ -41,7 +41,6 @@ import java.io.Serializable;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-
 /**
  * This class gets notified of AJAX calls and has the possibility to influence them. 
  * For instance it can turn asynchron calls synchron to allow a deterministic test 

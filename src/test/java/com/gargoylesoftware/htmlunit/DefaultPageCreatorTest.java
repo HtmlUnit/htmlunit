@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-
 /**
  * Tests for {@link com.gargoylesoftware.htmlunit.DefaultPageCreator}.
  *
@@ -45,7 +44,6 @@ package com.gargoylesoftware.htmlunit;
  * @author Marc Guillemot
  */
 public class DefaultPageCreatorTest extends WebTestCase {
-
 
     /**
      * Create an instance

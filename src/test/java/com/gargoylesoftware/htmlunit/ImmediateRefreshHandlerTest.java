@@ -54,7 +54,6 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
         super(name);
     }
 
-
     /**
      * Regression test for bug 1211980: redirect on the same page after a post
      * @throws Exception if the test fails

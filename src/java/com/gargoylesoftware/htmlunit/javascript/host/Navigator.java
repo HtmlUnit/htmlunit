@@ -57,12 +57,10 @@ public final class Navigator extends SimpleScriptable {
 
     private static final long serialVersionUID = 6741787912716453833L;
 
-
     /**
      * Create an instance. Javascript objects must have a default constructor.
      */
     public Navigator() {}
-
 
     /**
      * Return the property "appCodeName".
@@ -72,7 +70,6 @@ public final class Navigator extends SimpleScriptable {
         return getBrowserVersion().getApplicationCodeName();
     }
 
-
     /**
      * Return the property "appMinorVersion".
      * @return the property "appMinorVersion".
@@ -80,7 +77,6 @@ public final class Navigator extends SimpleScriptable {
     public String jsxGet_appMinorVersion() {
         return getBrowserVersion().getApplicationMinorVersion();
     }
-
 
     /**
      * Return the property "appName".
@@ -90,7 +86,6 @@ public final class Navigator extends SimpleScriptable {
         return getBrowserVersion().getApplicationName();
     }
 
-
     /**
      * Return the property "appVersion".
      * @return the property "appVersion".
@@ -98,7 +93,6 @@ public final class Navigator extends SimpleScriptable {
     public String jsxGet_appVersion() {
         return getBrowserVersion().getApplicationVersion();
     }
-
 
     /**
      * Return the language of the browser (for IE).
@@ -124,7 +118,6 @@ public final class Navigator extends SimpleScriptable {
         return true;
     }
 
-
     /**
      * Return the property "cpuClass".
      * @return the property "cpuClass".
@@ -141,7 +134,6 @@ public final class Navigator extends SimpleScriptable {
         return getBrowserVersion().isOnLine();
     }
 
-
     /**
      * Return the property "platform".
      * @return the property "platform".
@@ -149,7 +141,6 @@ public final class Navigator extends SimpleScriptable {
     public String jsxGet_platform() {
         return getBrowserVersion().getPlatform();
     }
-
 
     /**
      * Return the property "systemLanguage".
@@ -159,7 +150,6 @@ public final class Navigator extends SimpleScriptable {
         return getBrowserVersion().getSystemLanguage();
     }
 
-
     /**
      * Return the property "userAgent".
      * @return The property "userAgent".
@@ -168,7 +158,6 @@ public final class Navigator extends SimpleScriptable {
         return getBrowserVersion().getUserAgent();
     }
 
-
     /**
      * Return the property "userLanguage".
      * @return the property "userLanguage".
@@ -176,7 +165,6 @@ public final class Navigator extends SimpleScriptable {
     public String jsxGet_userLanguage() {
         return getBrowserVersion().getUserLanguage();
     }
-
 
     /**
      * Return an empty array because HtmlUnit does not support embedded objects.
@@ -202,7 +190,6 @@ public final class Navigator extends SimpleScriptable {
         return false;
     }
 
-
     /**
      * Return <tt>false</tt> always as data tainting support is not enabled in HtmlUnit.
      * @return false.
@@ -210,7 +197,6 @@ public final class Navigator extends SimpleScriptable {
     public boolean jsxFunction_taintEnabled() {
         return false;
     }
-
 
     /**
      * Returns the default browser version.

@@ -104,7 +104,6 @@ public class HTMLParserListenerTest extends WebTestCase {
             return builder.isEquals();
         }
         
-        
         /**
          * Stub to fix Eclipse warning
          * @see Object#hashCode()

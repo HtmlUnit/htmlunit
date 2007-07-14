@@ -55,7 +55,6 @@ public class HtmlTableCellTest extends WebTestCase {
         super( name );
     }
 
-
     /**
      *  Place holder for some real tests
      */

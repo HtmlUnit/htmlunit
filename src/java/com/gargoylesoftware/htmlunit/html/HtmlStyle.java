@@ -90,7 +90,6 @@ public class HtmlStyle extends HtmlElement {
         return getAttributeValue("lang");
     }
 
-
     /**
      * Return the value of the attribute "xml:lang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -102,7 +101,6 @@ public class HtmlStyle extends HtmlElement {
     public final String getXmlLangAttribute() {
         return getAttributeValue("xml:lang");
     }
-
 
     /**
      * Return the value of the attribute "dir".  Refer to the
@@ -116,7 +114,6 @@ public class HtmlStyle extends HtmlElement {
         return getAttributeValue("dir");
     }
 
-
     /**
      * Return the value of the attribute "type".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -129,7 +126,6 @@ public class HtmlStyle extends HtmlElement {
         return getAttributeValue("type");
     }
 
-
     /**
      * Return the value of the attribute "media".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -141,7 +137,6 @@ public class HtmlStyle extends HtmlElement {
     public final String getMediaAttribute() {
         return getAttributeValue("media");
     }
-
 
     /**
      * Return the value of the attribute "title".  Refer to the

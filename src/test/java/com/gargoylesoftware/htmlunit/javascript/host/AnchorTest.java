@@ -66,7 +66,6 @@ public class AnchorTest extends WebTestCase {
         super(name);
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -124,13 +123,11 @@ public class AnchorTest extends WebTestCase {
             + "<a href='foo2.html'>"
             + "</body></html>";
         
-        
         final List collectedAlerts = new ArrayList();
         final String[] expectedAlerts = {"true", "not defined"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 
-        
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -153,7 +150,6 @@ public class AnchorTest extends WebTestCase {
             + "<a href='javascript:void(0)'>void</a>"
             + "<a href='#'>#</a>"
             + "</body></html>";
-        
         
         final List collectedAlerts = new ArrayList();
         final String[] expectedAlerts = { "", 

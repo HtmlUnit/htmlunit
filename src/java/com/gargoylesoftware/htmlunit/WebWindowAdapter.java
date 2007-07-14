@@ -51,7 +51,6 @@ public class WebWindowAdapter implements WebWindowListener {
     public WebWindowAdapter() {
     }
 
-
     /**
      * A web window has been opened
      *
@@ -59,7 +58,6 @@ public class WebWindowAdapter implements WebWindowListener {
      */
     public void webWindowOpened( final WebWindowEvent event ) {
     }
-
 
     /**
      * The contents of a web window has been changed

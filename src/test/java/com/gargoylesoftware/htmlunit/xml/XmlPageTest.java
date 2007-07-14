@@ -80,7 +80,6 @@ public class XmlPageTest extends WebTestCase {
         assertEquals("http://www.mozilla.org/2004/em-rdf#", node.getNamespaceURI());
     }
 
-
     /**
      * Tests a simple valid xml document
      * @throws Exception if the test fails
@@ -96,7 +95,6 @@ public class XmlPageTest extends WebTestCase {
         final XmlPage xmlPage = testXmlDocument(content, "text/xml");
         assertEquals("foo", xmlPage.getXmlDocument().getFirstChild().getNodeName());
     }
-
 
     /**
      * Utility method to test xml page of different mime types
@@ -122,7 +120,6 @@ public class XmlPageTest extends WebTestCase {
         assertNotNull(xmlPage.getXmlDocument());
         return xmlPage;
     }
-
 
     /**
      * Tests a simple invalid (badly formed) xml document

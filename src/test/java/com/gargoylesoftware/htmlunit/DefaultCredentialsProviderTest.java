@@ -41,7 +41,6 @@ import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.NTCredentials;
 import org.apache.commons.httpclient.auth.NTLMScheme;
 
-
 /**
  * Tests for {@link DefaultCredentialsProvider}.
  *
@@ -49,7 +48,6 @@ import org.apache.commons.httpclient.auth.NTLMScheme;
  * @author Marc Guillemot
  */
 public class DefaultCredentialsProviderTest extends WebTestCase {
-
 
     /**
      * Create an instance

@@ -90,7 +90,6 @@ public class HtmlLegend extends ClickableElement {
         return getAttributeValue("accesskey");
     }
 
-
     /**
      * Return the value of the attribute "align".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>

@@ -64,7 +64,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
-
 /**
  * Tests for the Javascript engine
  *
@@ -500,7 +499,6 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String[] expectedAlerts = {"1"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * @throws Exception if the test fails

@@ -88,7 +88,6 @@ public class HtmlHead extends HtmlElement {
         return getAttributeValue("lang");
     }
 
-
     /**
      * Return the value of the attribute "xml:lang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -101,7 +100,6 @@ public class HtmlHead extends HtmlElement {
         return getAttributeValue("xml:lang");
     }
 
-
     /**
      * Return the value of the attribute "dir".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -113,7 +111,6 @@ public class HtmlHead extends HtmlElement {
     public final String getTextDirectionAttribute() {
         return getAttributeValue("dir");
     }
-
 
     /**
      * Return the value of the attribute "profile".  Refer to the

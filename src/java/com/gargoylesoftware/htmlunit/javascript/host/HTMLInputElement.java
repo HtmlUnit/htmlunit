@@ -55,13 +55,11 @@ public class HTMLInputElement extends FormField {
 
     private static final long serialVersionUID = 3712016051364495710L;
 
-
     /**
      *  Create an instance.
      */
     public HTMLInputElement() {
     }
-
 
     /**
      *  Javascript constructor. This must be declared in every javascript file

@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
-
 /**
  * A script pre processor call back. This interface is called when ScriptEngine.execute()
  * is called. It gives developers the opportunity to modify the script to be executed.

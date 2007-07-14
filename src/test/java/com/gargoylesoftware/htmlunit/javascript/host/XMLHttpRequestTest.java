@@ -316,7 +316,6 @@ public class XMLHttpRequestTest extends WebTestCase {
         assertEquals( alerts, collectedAlerts );
     }
 
-
     /**
      * Test access to the XML DOM
      * @throws Exception if the test fails.
@@ -618,7 +617,6 @@ public class XMLHttpRequestTest extends WebTestCase {
         assertTrue("thread failed to stop in 4 seconds", window.getThreadManager().joinAll(4000));
         assertEquals("about:blank", window.getEnclosedPage().getWebResponse().getUrl());
     }
-
 
     /**
      * Asynchron callback should be called in "main" js thread and not parallel to other js execution

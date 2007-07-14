@@ -120,7 +120,6 @@ public class WindowTest extends WebTestCase {
         assertSame( webClient.getCurrentWindow(), secondPage.getEnclosingWindow() );
     }
 
-
     /**
      * @throws Exception If the test fails
      */
@@ -179,7 +178,6 @@ public class WindowTest extends WebTestCase {
             collectedAlerts);
     }
 
-
     /**
      * @throws Exception If the test fails
      */
@@ -224,7 +222,6 @@ public class WindowTest extends WebTestCase {
             Collections.singletonList("MyNewWindow"),
             collectedAlerts);
     }
-
 
     /**
      * _blank is a magic name.  If we call open(url, '_blank') then a new
@@ -296,7 +293,6 @@ public class WindowTest extends WebTestCase {
             collectedAlerts);
     }
 
-
     /**
      * _self is a magic name.  If we call open(url, '_self') then the current window must be
      * reloaded.
@@ -341,7 +337,6 @@ public class WindowTest extends WebTestCase {
         assertSame( webClient.getCurrentWindow(), firstWebWindow);
         assertSame( firstWebWindow, secondWebWindow );
     }
-
 
     /**
      * _top is a magic name.  If we call open(url, '_top') then the top level
@@ -413,7 +408,6 @@ public class WindowTest extends WebTestCase {
         }
     }
 
-
     /**
      * _parent is a magic name.  If we call open(url, '_parent') then the
      * parent window must be reloaded.
@@ -458,7 +452,6 @@ public class WindowTest extends WebTestCase {
             (HtmlInlineFrame)secondPage.getHtmlElementById("thirdFrame");
         final HtmlPage thirdPage = (HtmlPage)thirdFrame.getEnclosedPage();
         assertEquals( "Third", thirdPage.getTitleText() );
-
 
         assertSame( webClient.getCurrentWindow(), firstWebWindow);
         assertNotSame( firstWebWindow, secondFrame );
@@ -553,7 +546,6 @@ public class WindowTest extends WebTestCase {
         assertEquals( "First", firstPage.getTitleText() );
     }
 
-
     /**
      * @throws Exception If the test fails
      */
@@ -610,7 +602,6 @@ public class WindowTest extends WebTestCase {
             collectedAlerts);
     }
 
-
     /**
      * @throws Exception If the test fails
      */
@@ -642,7 +633,6 @@ public class WindowTest extends WebTestCase {
         assertEquals( Collections.singletonList("true"), collectedAlerts );
     }
 
-
     /**
      * @throws Exception If the test fails
      */
@@ -657,7 +647,6 @@ public class WindowTest extends WebTestCase {
 
         assertEquals( Collections.singletonList("true"), collectedAlerts );
     }
-
 
     /**
      * @throws Exception If the test fails
@@ -690,7 +679,6 @@ public class WindowTest extends WebTestCase {
         assertEquals( Collections.singletonList("Flintstone"), collectedAlerts );
     }
 
-
     /**
      * @throws Exception If the test fails
      */
@@ -716,7 +704,6 @@ public class WindowTest extends WebTestCase {
         assertEquals( Collections.EMPTY_LIST, collectedPrompts );
         assertEquals( Collections.singletonList("null"), collectedAlerts );
     }
-
 
     /**
      * @throws Exception If the test fails
@@ -768,7 +755,6 @@ public class WindowTest extends WebTestCase {
         final String[] expectedAlerts = {"null", "one", "two", "three"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * @throws Exception If the test fails
@@ -1638,7 +1624,6 @@ public class WindowTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-
     /**
      * @throws Exception If the test fails.
      */
@@ -1730,7 +1715,6 @@ public class WindowTest extends WebTestCase {
         final String[] expectedStatus = {"newStatus"};
         assertEquals( "status", expectedStatus, collectedStatus );
     }
-
 
     /**
      * Test <code>window.name</code>.

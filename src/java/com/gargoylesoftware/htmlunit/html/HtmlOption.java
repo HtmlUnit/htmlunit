@@ -143,14 +143,12 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
         return (HtmlSelect) getEnclosingElement("select");
     }
 
-
     /**
      * Reset the option to its original selected state.
      */
     public void reset() {
         setSelectedInternal(initialSelectedState_);
     }
-
 
     /**
      * Return the value of the attribute "selected".  Refer to the
@@ -175,7 +173,6 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
         return initialSelectedState_;
     }
 
-
     /**
      * Return true if the disabled attribute is set for this element.
      *
@@ -184,7 +181,6 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     public final boolean isDisabled() {
         return isAttributeDefined("disabled");
     }
-
 
     /**
      * Return the value of the attribute "disabled".  Refer to the
@@ -198,7 +194,6 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
         return getAttributeValue("disabled");
     }
 
-
     /**
      * Return the value of the attribute "label".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -211,7 +206,6 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
         return getAttributeValue("label");
     }
 
-
     /**
      * Set the value of the attribute "label".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -222,7 +216,6 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     public final void setLabelAttribute( final String newLabel ) {
         setAttributeValue("label", newLabel);
     }
-
 
     /**
      * Return the value of the attribute "value".  Refer to the
@@ -235,7 +228,6 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     public final String getValueAttribute() {
         return getAttributeValue("value");
     }
-
 
     /**
      * Set the value of the attribute "value".  Refer to the

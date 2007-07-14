@@ -80,7 +80,6 @@ public class DomCommentTest extends WebTestCase {
         assertEquals(comment, node.asXml());
     }
 
-    
      /**
      * Test comment and character data sibling correctness
      * @throws Exception if the test fails

@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
-
 /**
  *  An abstract cell that provides the implementation for HtmlTableDataCell and
  *  HtmlTableHeaderCell.

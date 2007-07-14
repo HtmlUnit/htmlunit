@@ -230,5 +230,3 @@ abstract class NodeIterator implements Iterator {
      */
     protected abstract DomNode getNextNode (final DomNode contextNode);
 }
-
-

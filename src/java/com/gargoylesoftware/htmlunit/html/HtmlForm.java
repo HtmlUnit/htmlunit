@@ -138,7 +138,6 @@ public class HtmlForm extends ClickableElement {
         return submit( button );
     }
 
-
     /**
      *  Submit this form to the appropriate server as if it had been submitted
      *  by javascript - ie no submit buttons were pressed.  Note that because we
@@ -151,7 +150,6 @@ public class HtmlForm extends ClickableElement {
     public Page submit() throws IOException {
         return submit( ( SubmittableElement )null );
     }
-
 
     /**
      *  Submit this form to the appropriate server.  If submitElement is null then
@@ -225,7 +223,6 @@ public class HtmlForm extends ClickableElement {
                 settings);
     }
 
-
     /**
      * Gets the charset to use for the form submission. This is the first one
      * from the list provided in {@link #getAcceptCharsetAttribute()} if any
@@ -269,7 +266,6 @@ public class HtmlForm extends ClickableElement {
         }
         return parameterList;
     }
-
 
     /**
      * Reset this form to its initial values.
@@ -408,7 +404,6 @@ public class HtmlForm extends ClickableElement {
         }
     }
 
-
     /**
      *  Return the "radio" type input field that matches the specified name and value
      *
@@ -442,7 +437,6 @@ public class HtmlForm extends ClickableElement {
         throw new ElementNotFoundException( "input", "value", value );
     }
 
-
     /**
      *  Return all the HtmlSelect that match the specified name
      *
@@ -452,7 +446,6 @@ public class HtmlForm extends ClickableElement {
     public List getSelectsByName( final String name ) {
         return getHtmlElementsByAttribute( "select", "name", name );
     }
-
 
     /**
      * Find the first select element with the specified name
@@ -470,7 +463,6 @@ public class HtmlForm extends ClickableElement {
         }
     }
 
-
     /**
      *  Return all the HtmlButtons that match the specified name
      *
@@ -482,7 +474,6 @@ public class HtmlForm extends ClickableElement {
         throws ElementNotFoundException {
         return getHtmlElementsByAttribute( "button", "name", name );
     }
-
 
     /**
      * Find the first button element with the specified name.
@@ -499,7 +490,6 @@ public class HtmlForm extends ClickableElement {
             return ( HtmlButton )list.get( 0 );
         }
     }
-
     
     /**
      *  Return all the HtmlTextAreas that match the specified name
@@ -510,7 +500,6 @@ public class HtmlForm extends ClickableElement {
     public List getTextAreasByName( final String name ) {
         return getHtmlElementsByAttribute( "textarea", "name", name );
     }
-
 
     /**
      * Find the first textarea element with the specified name.
@@ -527,8 +516,7 @@ public class HtmlForm extends ClickableElement {
             return ( HtmlTextArea )list.get( 0 );
         }
     }
-    
-    
+        
     /**
      *  Return a list of HtmlInputs that are of type radio and match the
      *  specified name
@@ -553,7 +541,6 @@ public class HtmlForm extends ClickableElement {
 
         return results;
     }
-
 
     /**
      *  Select the specified radio button in the form. <p/>
@@ -657,7 +644,6 @@ public class HtmlForm extends ClickableElement {
         fakeSelectedRadioButton_ = new KeyValuePair( name, value );
     }
 
-
     private void adjustParameterListToAccountForFakeSelectedRadioButton( final List list ) {
         final String fakeRadioButtonName = fakeSelectedRadioButton_.getKey();
 
@@ -673,7 +659,6 @@ public class HtmlForm extends ClickableElement {
         // Now add this one back in
         list.add( fakeSelectedRadioButton_ );
     }
-
 
     /**
      * Return the first checked radio button with the specified name.  If none of
@@ -701,7 +686,6 @@ public class HtmlForm extends ClickableElement {
         return null;
     }
 
-
     /**
      *  Return the value of the attribute "action". Refer to the <a
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
@@ -714,7 +698,6 @@ public class HtmlForm extends ClickableElement {
         return getAttributeValue( "action" );
     }
 
-
     /**
      *  Set the value of the attribute "action". Refer to the <a
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
@@ -725,7 +708,6 @@ public class HtmlForm extends ClickableElement {
     public final void setActionAttribute( final String action ) {
         setAttributeValue( "action", action );
     }
-
 
     /**
      *  Return the value of the attribute "method". Refer to the <a
@@ -739,7 +721,6 @@ public class HtmlForm extends ClickableElement {
         return getAttributeValue( "method" );
     }
 
-
     /**
      *  Set the value of the attribute "method". Refer to the <a
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
@@ -752,7 +733,6 @@ public class HtmlForm extends ClickableElement {
         setAttributeValue( "method", method );
     }
 
-
     /**
      *  Return the value of the attribute "name". Refer to the <a
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
@@ -764,7 +744,6 @@ public class HtmlForm extends ClickableElement {
     public final String getNameAttribute() {
         return getAttributeValue( "name" );
     }
-
 
     /**
      *  Set the value of the attribute "name". Refer to the <a
@@ -791,7 +770,6 @@ public class HtmlForm extends ClickableElement {
         return getAttributeValue( "enctype" );
     }
 
-
     /**
      *  Set the value of the attribute "enctype". Refer to the <a
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
@@ -806,7 +784,6 @@ public class HtmlForm extends ClickableElement {
         setAttributeValue( "enctype", encoding );
     }
 
-
     /**
      *  Return the value of the attribute "onsubmit". Refer to the <a
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
@@ -818,7 +795,6 @@ public class HtmlForm extends ClickableElement {
     public final String getOnSubmitAttribute() {
         return getAttributeValue( "onsubmit" );
     }
-
 
     /**
      *  Return the value of the attribute "onreset". Refer to the <a
@@ -832,7 +808,6 @@ public class HtmlForm extends ClickableElement {
         return getAttributeValue( "onreset" );
     }
 
-
     /**
      *  Return the value of the attribute "accept". Refer to the <a
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
@@ -844,7 +819,6 @@ public class HtmlForm extends ClickableElement {
     public final String getAcceptAttribute() {
         return getAttributeValue( "accept" );
     }
-
 
     /**
      * Return the value of the attribute "accept-charset". Refer to the <a
@@ -858,7 +832,6 @@ public class HtmlForm extends ClickableElement {
         return getAttributeValue( "accept-charset" );
     }
 
-
     /**
      *  Return the value of the attribute "target". Refer to the <a
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
@@ -870,7 +843,6 @@ public class HtmlForm extends ClickableElement {
     public final String getTargetAttribute() {
         return getAttributeValue( "target" );
     }
-
 
     /**
      *  Set the value of the attribute "target". Refer to the <a

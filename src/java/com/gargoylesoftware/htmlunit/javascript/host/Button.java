@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-
 /**
  * The javascript object that represents a button (&lt;button type=...&gt;)
  *
@@ -49,13 +48,11 @@ public class Button extends FormField {
 
     private static final long serialVersionUID = -3163222167146343119L;
 
-
     /**
      * Create an instance.
      */
     public Button() {
     }
-
 
     /**
      * Javascript constructor.  This must be declared in every javascript file because

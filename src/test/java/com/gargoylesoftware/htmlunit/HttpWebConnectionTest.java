@@ -77,7 +77,6 @@ public class HttpWebConnectionTest extends BaseTestCase {
         assertEquals(null, expected, actual);
     }
 
-
     /**
      * Assert that the two byte arrays are equal
      * @param message The message to display on failure
@@ -88,7 +87,6 @@ public class HttpWebConnectionTest extends BaseTestCase {
             final String message, final byte[] expected, final byte[] actual) {
         assertEquals(message, expected, actual, expected.length);
     }
-
 
     /**
      * Assert that the two byte arrays are equal
@@ -195,7 +193,6 @@ public class HttpWebConnectionTest extends BaseTestCase {
         }
     }
 
-
     /**
      * Create an instance.
      *
@@ -204,8 +201,6 @@ public class HttpWebConnectionTest extends BaseTestCase {
     public HttpWebConnectionTest(final String name) {
         super(name);
     }
-
-
 
     /**
      * Test creation of a web response
@@ -266,7 +261,6 @@ public class HttpWebConnectionTest extends BaseTestCase {
         assertInstanceOf("Response should be (mostly) valid HTML", page, HtmlPage.class);
 
     }
-
 
     /**
      * Starts the webserver on the given port

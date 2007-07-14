@@ -75,7 +75,6 @@ public class WebRequestSettings {
         setURL(target);
     }
 
-
     /**
      * Instantiate a {@link WebRequestSettings} for the given url using the proxy configuration from the original 
      * request

@@ -59,7 +59,6 @@ public class HtmlImageTest extends WebTestCase {
         super(name);
     }
 
-
     /**
      * @throws Exception if the test fails
      */

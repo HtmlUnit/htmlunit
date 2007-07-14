@@ -62,7 +62,6 @@ public class IFrameTest extends WebTestCase {
         super(name);
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -125,7 +124,6 @@ public class IFrameTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Tests that the <iframe> node is visible from the contained page when it is loaded
      * @throws Exception if the test fails
@@ -183,7 +181,6 @@ public class IFrameTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
-
 
     /**
      * @throws Exception if the test fails

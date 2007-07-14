@@ -95,7 +95,6 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
         value_ = newValue;
     }
 
-
     /**
      * Return the value that would be send during submission of a form.
      *
@@ -104,7 +103,6 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     public String getValue() {
         return value_;
     }
-
 
     /**
      *  Return an array of KeyValuePairs that are the values that will be sent
@@ -119,7 +117,6 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
         return new KeyValuePair[]{new KeyValuePair( getPromptAttribute(), getValue() )};
     }
 
-
     /**
      * {@inheritDoc}
      * @see SubmittableElement#reset()
@@ -127,7 +124,6 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     public void reset() {
         value_ = "";
     }
-
 
     /**
      * {@inheritDoc}
@@ -137,7 +133,6 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
         // The reset() method does nothing, so this method doesn't have to, either.
     }
 
-
     /**
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultValue(String)
@@ -146,7 +141,6 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
         // The reset() method does nothing, so this method doesn't have to, either.
         return "";
     }
-
 
     /**
      * {@inheritDoc} This implementation is empty; only checkboxes and radio buttons
@@ -159,7 +153,6 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
         // Empty.
     }
 
-
     /**
      * {@inheritDoc} This implementation returns <tt>false</tt>; only checkboxes and
      * radio buttons really care what the default checked value is.
@@ -170,7 +163,6 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     public boolean isDefaultChecked() {
         return false;
     }
-
 
     /**
      * Return the value of the attribute "lang".  Refer to the
@@ -184,7 +176,6 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
         return getAttributeValue("lang");
     }
 
-
     /**
      * Return the value of the attribute "xml:lang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -197,7 +188,6 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
         return getAttributeValue("xml:lang");
     }
 
-
     /**
      * Return the value of the attribute "dir".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -209,7 +199,6 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     public final String getTextDirectionAttribute() {
         return getAttributeValue("dir");
     }
-
 
     /**
      * Return the value of the attribute "prompt".  Refer to the

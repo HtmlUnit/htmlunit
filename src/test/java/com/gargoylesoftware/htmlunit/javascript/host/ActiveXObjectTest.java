@@ -55,7 +55,6 @@ public class ActiveXObjectTest extends WebTestCase {
         super(name);
     }
 
-
     /**
      * @throws Exception if the test fails
      */

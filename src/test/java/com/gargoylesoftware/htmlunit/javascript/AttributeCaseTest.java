@@ -45,7 +45,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-
 /**
  * Tests for {@link HtmlElement} attributes.
  * 
@@ -61,7 +60,6 @@ public class AttributeCaseTest extends WebTestCase {
 
     private HtmlElement element_;
     private HtmlPage page_;
-
 
     /**
      * Create an instance
@@ -183,7 +181,6 @@ public class AttributeCaseTest extends WebTestCase {
         assertTrue(page_.asXml(), element_.isAttributeDefined(ATTRIBUTE_NAME.toUpperCase()));
     }
 
-
     private void setupAttributeTest(final String content, final String elementId) throws IOException {
 
         final WebClient client = new WebClient();
@@ -197,7 +194,6 @@ public class AttributeCaseTest extends WebTestCase {
         element_ = page_.getHtmlElementById(elementId);
     }
 
-
     private void setupGetAttributeTest(final String attributeName, final String attributeValue) throws IOException {
 
         final String elementId = "p-id";
@@ -207,7 +203,6 @@ public class AttributeCaseTest extends WebTestCase {
 
         setupAttributeTest(content, elementId);
     }
-
 
     private void setupSetAttributeTest(
             final String attributeName, final String attributeValue,

@@ -73,7 +73,6 @@ public class FormTest extends WebTestCase {
         super(name);
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -130,7 +129,6 @@ public class FormTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -165,7 +163,6 @@ public class FormTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * If there is only one radio button with a specified name then that radio
      * button will be returned for the name, not an array of radio buttons.  Test
@@ -192,7 +189,6 @@ public class FormTest extends WebTestCase {
         final String[] expectedAlerts = {"1"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -233,7 +229,6 @@ public class FormTest extends WebTestCase {
         assertEquals( newValue, form.getEnctypeAttribute() );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -247,7 +242,6 @@ public class FormTest extends WebTestCase {
         assertEquals( newValue, form.getMethodAttribute() );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -260,7 +254,6 @@ public class FormTest extends WebTestCase {
         final HtmlForm form = doTestProperty( jsProperty, htmlProperty, oldValue, newValue );
         assertEquals( newValue, form.getTargetAttribute() );
     }
-
 
     private HtmlForm doTestProperty(
             final String jsProperty,
@@ -293,7 +286,6 @@ public class FormTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
         return (HtmlForm) page.getForms().get(0);
     }
-
 
     /**
      * Tests form reset and input default values while emulating IE.
@@ -342,7 +334,6 @@ public class FormTest extends WebTestCase {
         formResetTest(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
     }
 
-
     /**
      * Tests form reset and input default values while emulating Mozilla.
      * @throws Exception if the test fails
@@ -388,7 +379,6 @@ public class FormTest extends WebTestCase {
             "textarea: default11 default11 undefined undefined" };
         formResetTest(BrowserVersion.MOZILLA_1_0, expected);
     }
-
 
     /**
      * Tests form reset and input default values while emulating the specified browser.
@@ -489,7 +479,6 @@ public class FormTest extends WebTestCase {
         final List collected = new ArrayList();
         loadPage( browserVersion, html, collected );
 
-
         // The lists are too long to call assertEquals() on them directly and get meaningful failure info.
         for( int i = 0; i < expected.length; i++ ) {
             final String s1 = expected[i];
@@ -503,7 +492,6 @@ public class FormTest extends WebTestCase {
             assertEquals( "At index " + i + ", expected '" + s1 + "' but got '" + s2 + "'.", s1, s2 );
         }
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -536,7 +524,6 @@ public class FormTest extends WebTestCase {
             = (HtmlPage)page.executeJavaScriptIfPossible("document.form1.submit()", "test", null).getNewPage();
         assertEquals( "second", secondPage.getTitleText() );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -635,14 +622,12 @@ public class FormTest extends WebTestCase {
         doTestInputWithName("id");
     }
 
-
     /**
      * @throws Exception if the test fails
      */
     public void testInputNamedAction() throws Exception {
         doTestInputWithName("action");
     }
-
 
     private void doTestInputWithName( final String name ) throws Exception {
         final String content
@@ -666,7 +651,6 @@ public class FormTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * Regression test that used to blow up on page load
@@ -706,7 +690,6 @@ public class FormTest extends WebTestCase {
         final String[] expectedAlerts = {"value = 2"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * Test for a bug that appeared when visiting mail.yahoo.com. Setting the value of one input
@@ -816,7 +799,6 @@ public class FormTest extends WebTestCase {
         final String[] expectedAlerts = {"button1"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
     * @throws Exception if the test fails

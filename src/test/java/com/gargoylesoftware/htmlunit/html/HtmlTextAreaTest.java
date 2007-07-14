@@ -59,7 +59,6 @@ public class HtmlTextAreaTest extends WebTestCase {
         super( name );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -83,7 +82,6 @@ public class HtmlTextAreaTest extends WebTestCase {
                 secondPage.getWebResponse().getUrl());
         assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -124,5 +122,3 @@ public class HtmlTextAreaTest extends WebTestCase {
         assertEquals("White space must be preserved!", " foo \n bar ", textArea.getText());
     }
 }
-
-

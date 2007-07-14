@@ -62,7 +62,6 @@ public class StyleTest extends WebTestCase {
         super(name);
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -89,7 +88,6 @@ public class StyleTest extends WebTestCase {
 
         assertEquals("color: pink;", page.getHtmlElementById("div1").getAttributeValue("style") );
     }
-
 
     /**
      * @throws Exception if the test fails

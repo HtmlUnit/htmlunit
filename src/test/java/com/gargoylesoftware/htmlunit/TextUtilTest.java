@@ -56,7 +56,6 @@ public final class TextUtilTest extends WebTestCase {
         super(name);
     }
 
-
     /**
      * Test startsWithIgnoreCase() with null values.
      */
@@ -78,7 +77,6 @@ public final class TextUtilTest extends WebTestCase {
         }
     }
 
-
     /**
      * Test startsWithIgnoreCase() with an empty prefix
      */
@@ -91,7 +89,6 @@ public final class TextUtilTest extends WebTestCase {
             // Expected path
         }
     }
-
 
     /**
      * Test a variety of cases that should return true.
@@ -113,7 +110,6 @@ public final class TextUtilTest extends WebTestCase {
                 TextUtil.startsWithIgnoreCase(stringToCheck, prefix));
         }
     }
-
 
     /**
      * Test a variety of cases that should return false.
@@ -147,7 +143,6 @@ public final class TextUtilTest extends WebTestCase {
             // Expected path
         }
     }
-
 
     /**
      * @throws Exception if the test fails

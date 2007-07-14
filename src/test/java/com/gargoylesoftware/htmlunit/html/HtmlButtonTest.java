@@ -68,7 +68,6 @@ public class HtmlButtonTest extends WebTestCase {
         super( name );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -90,7 +89,6 @@ public class HtmlButtonTest extends WebTestCase {
 
         assertSame( page, secondPage );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -114,7 +112,6 @@ public class HtmlButtonTest extends WebTestCase {
         assertNotSame( page, secondPage );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -136,7 +133,6 @@ public class HtmlButtonTest extends WebTestCase {
 
         assertSame( page, secondPage );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -226,7 +222,6 @@ public class HtmlButtonTest extends WebTestCase {
 
         assertEquals( expectedParameters, collectedParameters );
     }
-
 
     /**
      * According to the html spec, the default type for a button is "submit"

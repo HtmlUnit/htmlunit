@@ -57,7 +57,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
-
 /**
  * Tests for {@link HTMLSelectElement}.
  *
@@ -76,7 +75,6 @@ public class SelectTest extends WebTestCase {
     public SelectTest( final String name ) {
         super(name);
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -208,7 +206,6 @@ public class SelectTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -326,7 +323,6 @@ public class SelectTest extends WebTestCase {
         assertEquals("first", page.getTitleText());
         assertEquals( Collections.singletonList("One"), collectedAlerts );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -705,7 +701,6 @@ public class SelectTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -746,7 +741,6 @@ public class SelectTest extends WebTestCase {
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
-
 
     /**
      * @throws Exception if the test fails

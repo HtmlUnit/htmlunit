@@ -86,7 +86,6 @@ public class HTMLFrameElementTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-
     /**
      * Regression test for
      * http://sourceforge.net/tracker/index.php?func=detail&aid=1101525&group_id=47038&atid=448266

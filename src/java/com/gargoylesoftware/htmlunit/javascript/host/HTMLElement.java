@@ -115,7 +115,6 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     private int scrollLeft_ = 0;
     private int scrollTop_ = 0;
 
-
     /**
      * The tag names of the objects for which outerHTML is readonly
      */
@@ -132,7 +131,6 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     public HTMLElement() {
         // Empty.
     }
-
 
     /**
      * Return the value of the "all" property.
@@ -159,7 +157,6 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     public Object jsxGet_style() {
         return style_;
     }
-
 
     /**
      * Set the DOM node that corresponds to this javascript object
@@ -230,7 +227,6 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     public boolean jsxGet_disabled() {
         return getHtmlElementOrDie().isAttributeDefined("disabled");
     }
-
 
     /**
      * Set whether or not to disable this element
@@ -1433,7 +1429,6 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     public String toString() {
         return "HTMLElement for " + getHtmlElementOrNull();
     }
-
 
     /**
      * Get the scrollTop for this element.

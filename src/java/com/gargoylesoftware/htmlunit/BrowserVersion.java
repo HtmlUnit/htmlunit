@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 
-
 /**
  * Objects of this class represent one specific version of a given browser.  Predefined
  * constants are provided for common browser versions.
@@ -122,7 +121,6 @@ public class BrowserVersion implements Serializable {
 
     private static BrowserVersion DefaultBrowserVersion_ = FULL_FEATURED_BROWSER;
 
-
     /**
      * Instantiate one.
      *
@@ -142,7 +140,6 @@ public class BrowserVersion implements Serializable {
         browserVersionNumeric_ = browserVersionNumeric;
     }
 
-
     /**
      * Return the default version that is used whenever a specific version isn't specified.
      * @return The default version.
@@ -150,7 +147,6 @@ public class BrowserVersion implements Serializable {
     public static BrowserVersion getDefault() {
         return DefaultBrowserVersion_;
     }
-
 
     /**
      * Set the default version that is used whenever a specific version isn't specified.
@@ -161,7 +157,6 @@ public class BrowserVersion implements Serializable {
         DefaultBrowserVersion_ = newBrowserVersion;
     }
 
-
     /**
      * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
      * version of Microsoft Internet Explorer.
@@ -171,7 +166,6 @@ public class BrowserVersion implements Serializable {
         return INTERNET_EXPLORER.equals( getApplicationName() );
     }
 
-
     /**
      * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
      * version of a Netscape browser, including Mozilla and Firefox.
@@ -180,7 +174,6 @@ public class BrowserVersion implements Serializable {
     public final boolean isNetscape() {
         return NETSCAPE.equals( getApplicationName() );
     }
-
 
     /**
      * Return the application code name, for example "Mozilla".
@@ -193,7 +186,6 @@ public class BrowserVersion implements Serializable {
         return applicationCodeName_;
     }
 
-
     /**
      * Return the application minor version, for example "0".
      * Default value is "0" if not explicitly configured. 
@@ -205,7 +197,6 @@ public class BrowserVersion implements Serializable {
         return applicationMinorVersion_;
     }
 
-
     /**
      * Return the application name, for example "Microsoft Internet Explorer".
      * @return The application name.
@@ -216,7 +207,6 @@ public class BrowserVersion implements Serializable {
         return applicationName_;
     }
 
-
     /**
      * Return the application version, for example "4.0 (compatible; MSIE 6.0b; Windows 98)".
      * @return The application version.
@@ -226,7 +216,6 @@ public class BrowserVersion implements Serializable {
     public String getApplicationVersion() {
         return applicationVersion_;
     }
-
 
     /**
      * Return the browser application language, for example "en-us".
@@ -239,7 +228,6 @@ public class BrowserVersion implements Serializable {
         return browserLanguage_;
     }
 
-
     /**
      * Return the type of CPU in the machine, for example "x86".
      * Default value is {@link #CPU_CLASS_X86} if not explicitly configured. 
@@ -250,7 +238,6 @@ public class BrowserVersion implements Serializable {
     public String getCpuClass() {
         return cpuClass_;
     }
-
 
     /**
      * Return <tt>true</tt> if the browser is currently online.
@@ -263,7 +250,6 @@ public class BrowserVersion implements Serializable {
         return onLine_;
     }
 
-
     /**
      * Return the platform on which the application is running, for example "Win32".
      * Default value is {@link #PLATFORM_WIN32} if not explicitly configured. 
@@ -274,7 +260,6 @@ public class BrowserVersion implements Serializable {
     public String getPlatform() {
         return platform_;
     }
-
 
     /**
      * Return the system language, for example "en-us".
@@ -287,7 +272,6 @@ public class BrowserVersion implements Serializable {
         return systemLanguage_;
     }
 
-
     /**
      * Return the user agent string, for example "Mozilla/4.0 (compatible; MSIE 6.0b; Windows 98)".
      * @return The user agent string.
@@ -295,7 +279,6 @@ public class BrowserVersion implements Serializable {
     public String getUserAgent() {
         return userAgent_;
     }
-
 
     /**
      * Return the user language, for example "en-us".
@@ -307,7 +290,6 @@ public class BrowserVersion implements Serializable {
     public String getUserLanguage() {
         return userLanguage_;
     }
-
 
     /**
      * Return the version of javascript used by the browser, for example "1.2".

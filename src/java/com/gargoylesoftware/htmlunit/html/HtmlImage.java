@@ -95,7 +95,6 @@ public class HtmlImage extends ClickableElement {
         return getAttributeValue("src");
     }
 
-
     /**
      * Return the value of the attribute "alt".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -107,7 +106,6 @@ public class HtmlImage extends ClickableElement {
     public final String getAltAttribute() {
         return getAttributeValue("alt");
     }
-
 
     /**
      * Return the value of the attribute "name".  Refer to the
@@ -121,7 +119,6 @@ public class HtmlImage extends ClickableElement {
         return getAttributeValue("name");
     }
 
-
     /**
      * Return the value of the attribute "longdesc".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -133,7 +130,6 @@ public class HtmlImage extends ClickableElement {
     public final String getLongDescAttribute() {
         return getAttributeValue("longdesc");
     }
-
 
     /**
      * Return the value of the attribute "height".  Refer to the
@@ -147,7 +143,6 @@ public class HtmlImage extends ClickableElement {
         return getAttributeValue("height");
     }
 
-
     /**
      * Return the value of the attribute "width".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -159,7 +154,6 @@ public class HtmlImage extends ClickableElement {
     public final String getWidthAttribute() {
         return getAttributeValue("width");
     }
-
 
     /**
      * Return the value of the attribute "usemap".  Refer to the
@@ -173,7 +167,6 @@ public class HtmlImage extends ClickableElement {
         return getAttributeValue("usemap");
     }
 
-
     /**
      * Return the value of the attribute "ismap".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -185,7 +178,6 @@ public class HtmlImage extends ClickableElement {
     public final String getIsmapAttribute() {
         return getAttributeValue("ismap");
     }
-
 
     /**
      * Return the value of the attribute "align".  Refer to the
@@ -199,7 +191,6 @@ public class HtmlImage extends ClickableElement {
         return getAttributeValue("align");
     }
 
-
     /**
      * Return the value of the attribute "border".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -212,7 +203,6 @@ public class HtmlImage extends ClickableElement {
         return getAttributeValue("border");
     }
 
-
     /**
      * Return the value of the attribute "hspace".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -224,7 +214,6 @@ public class HtmlImage extends ClickableElement {
     public final String getHspaceAttribute() {
         return getAttributeValue("hspace");
     }
-
 
     /**
      * Return the value of the attribute "vspace".  Refer to the

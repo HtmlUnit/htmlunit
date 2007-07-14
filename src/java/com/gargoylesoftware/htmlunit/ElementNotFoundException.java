@@ -51,7 +51,6 @@ public class ElementNotFoundException extends RuntimeException {
     private final String attributeName_;
     private final String attributeValue_;
 
-
     /**
      *  Create an instance from the variables that were used to search for the
      *  xml element
@@ -71,7 +70,6 @@ public class ElementNotFoundException extends RuntimeException {
         attributeValue_ = attributeValue;
     }
 
-
     /**
      *  Return the name of the element
      *
@@ -81,7 +79,6 @@ public class ElementNotFoundException extends RuntimeException {
         return elementName_;
     }
 
-
     /**
      *  Return the name of the attribute
      *
@@ -90,7 +87,6 @@ public class ElementNotFoundException extends RuntimeException {
     public String getAttributeName() {
         return attributeName_;
     }
-
 
     /**
      *  Return the value of the attribute

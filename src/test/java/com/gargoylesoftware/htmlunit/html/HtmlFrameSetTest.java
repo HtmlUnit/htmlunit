@@ -68,7 +68,6 @@ public class HtmlFrameSetTest extends WebTestCase {
         super( name );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -109,7 +108,6 @@ public class HtmlFrameSetTest extends WebTestCase {
         assertSame( firstPage, ((FrameWindow) thirdWebWindow).getEnclosingPage() );
         assertEquals( "Third", ((HtmlPage)thirdWebWindow.getEnclosedPage()).getTitleText() );
     }
-
 
     /**
      * @throws Exception if the test fails

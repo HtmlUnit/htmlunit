@@ -208,7 +208,6 @@ public class HtmlUnitXPathTest extends WebTestCase {
         assertEquals(expectedValue, valueList);
     }
 
-
     /**
      * Test if option/text() is cleaned like other text()
      * @throws Exception if test fails

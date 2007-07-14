@@ -79,7 +79,6 @@ public class KeyDataPair extends KeyValuePair {
         charset_ = charset;
     }
 
-
     /** 
      * @return The <code>java.io.File</code> object if the file exists, else <code>null</code>. 
      */

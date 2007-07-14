@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-
 /**
  * A handler for javascript window.confirm().  Confirms are triggered when the javascript
  * method Window.confirm() is called.

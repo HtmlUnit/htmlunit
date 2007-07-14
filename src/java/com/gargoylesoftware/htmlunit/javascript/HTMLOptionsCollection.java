@@ -170,7 +170,6 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         return htmlSelect_.getOptionSize();
     }
 
-
     /**
      * Change the number of options: removes options if the new lenght
      * is less than the current one else add new empty options to reach the

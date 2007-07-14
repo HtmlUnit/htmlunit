@@ -90,7 +90,6 @@ public class HtmlHorizontalRule extends ClickableElement {
         return getAttributeValue("align");
     }
 
-
     /**
      * Return the value of the attribute "noshade".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -103,7 +102,6 @@ public class HtmlHorizontalRule extends ClickableElement {
         return getAttributeValue("noshade");
     }
 
-
     /**
      * Return the value of the attribute "size".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -115,7 +113,6 @@ public class HtmlHorizontalRule extends ClickableElement {
     public final String getSizeAttribute() {
         return getAttributeValue("size");
     }
-
 
     /**
      * Return the value of the attribute "width".  Refer to the

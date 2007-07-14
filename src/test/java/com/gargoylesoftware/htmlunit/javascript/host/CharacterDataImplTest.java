@@ -47,7 +47,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-
 /**
  * Tests for CharacterDataImpl
  *
@@ -62,7 +61,6 @@ public class CharacterDataImplTest extends WebTestCase {
     public CharacterDataImplTest( final String name ) {
         super(name);
     }
-
 
     /**
      * Regression test for inline text nodes
@@ -102,7 +100,6 @@ public class CharacterDataImplTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for setting the data property of a text node
      * @throws Exception if the test fails
@@ -138,7 +135,6 @@ public class CharacterDataImplTest extends WebTestCase {
         };
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * Regression test for setting the nodeValue property of a text node
@@ -176,7 +172,6 @@ public class CharacterDataImplTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for appendData of a text node
      * @throws Exception if the test fails
@@ -209,7 +204,6 @@ public class CharacterDataImplTest extends WebTestCase {
         final String[] expectedAlerts = {"Some Text Appended"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * Regression test for deleteData of a text node
@@ -244,7 +238,6 @@ public class CharacterDataImplTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for insertData of a text node
      * @throws Exception if the test fails
@@ -277,7 +270,6 @@ public class CharacterDataImplTest extends WebTestCase {
         final String[] expectedAlerts = {"Some New Text"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * Regression test for replaceData of a text node
@@ -312,7 +304,6 @@ public class CharacterDataImplTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for substringData of a text node
      * @throws Exception if the test fails
@@ -345,7 +336,6 @@ public class CharacterDataImplTest extends WebTestCase {
         final String[] expectedAlerts = {"New", "Some New Text"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * Regression test for substringData of a text node

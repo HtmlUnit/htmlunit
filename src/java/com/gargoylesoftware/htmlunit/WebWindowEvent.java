@@ -91,7 +91,6 @@ public final class WebWindowEvent extends EventObject {
         }
     }
 
-
     /**
      * Return true if the two objects are equal
      *
@@ -109,7 +108,6 @@ public final class WebWindowEvent extends EventObject {
         return false;
     }
 
-
     /**
      * Return the hash code for this object.
      * @return the hash code for this object.
@@ -126,7 +124,6 @@ public final class WebWindowEvent extends EventObject {
         return oldPage_;
     }
 
-
     /**
      * Return the oldPage
      * @return the page or null if the window has no page
@@ -135,7 +132,6 @@ public final class WebWindowEvent extends EventObject {
         return newPage_;
     }
 
-
     /**
      * Return the web window that fired the event.
      * @return The web window that fired the event.
@@ -143,7 +139,6 @@ public final class WebWindowEvent extends EventObject {
     public WebWindow getWebWindow() {
         return (WebWindow)getSource();
     }
-
 
     private boolean isEqual( final Object object1, final Object object2 ) {
         final boolean result;
@@ -160,7 +155,6 @@ public final class WebWindowEvent extends EventObject {
 
         return result;
     }
-
 
     /**
      * Return a string representation of this event

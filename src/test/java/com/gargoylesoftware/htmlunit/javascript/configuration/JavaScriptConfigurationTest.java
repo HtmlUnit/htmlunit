@@ -71,7 +71,6 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     public JavaScriptConfigurationTest( final String name ) {
         super(name);
     }
-
     
     /**
      * Reset the JavaScriptConfiguration file for each test to it's initial clean state.
@@ -92,7 +91,6 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         super.tearDown();
         JavaScriptConfiguration.resetClassForTesting();
     }
-
 
     /**
      * Test loading a configuration from the supplied stream
@@ -115,7 +113,6 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         assertTrue("Documnet should now be loaded", JavaScriptConfiguration.isDocumentLoaded());
     }
-
     
     /**
      * Test loading a configuration from the supplied stream
@@ -126,8 +123,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration();
         assertTrue("Documnet should now be loaded", JavaScriptConfiguration.isDocumentLoaded());
     }
-    
-    
+        
     /**
      * Test getting the configuration for the full browser
      *
@@ -160,7 +156,6 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         expectedConfig.addProperty("readyState", true, false);
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
-    
     
     /**
      * Test getting the configuration for the Netscape browser.  The readyState property should not be
@@ -352,7 +347,6 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         assertTrue("Document should not property did not match", 
             configuration.classConfigEquals("Document", expectedConfig));
     }
-
 
     /**
      * Test getting the configuration for the JavaScript max version.  The readyState property should not be
@@ -548,7 +542,6 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         }
         return false;
     }
-
 
     /**
      * Test for if the property exists for the configuration

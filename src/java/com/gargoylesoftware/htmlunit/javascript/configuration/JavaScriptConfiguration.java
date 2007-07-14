@@ -92,7 +92,6 @@ public final class JavaScriptConfiguration {
     private final Map configuration_;
     private final BrowserVersion browser_;
 
-
     /**
      * C'tor is only called from {@link #getInstance(BrowserVersion)} which is synchronized. 
      * @param browser the browser version to use
@@ -154,7 +153,6 @@ public final class JavaScriptConfiguration {
         }
     }
 
-
     /**
      * Load the configuration from a supplied Reader
      * 
@@ -184,7 +182,6 @@ public final class JavaScriptConfiguration {
         }
     }
 
-
     /**
      * Return the instance that represents the configuration for the specified {@link BrowserVersion}.
      * This method is synchronized to allow multithreaded access to the Javascript configuration.
@@ -204,7 +201,6 @@ public final class JavaScriptConfiguration {
         return configuration;
     }
 
-
     /**
      * Return the configuration that has all entries.  No constraints are put on the returned
      * entries.
@@ -216,18 +212,14 @@ public final class JavaScriptConfiguration {
         return configuration;
     }
 
-
-
     private static Log getLog() {
         return LogFactory.getLog(JavaScriptConfiguration.class);
     }
-
 
     private static Reader getConfigurationFileAsReader() {
         final String fileName = "/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml";
         return new InputStreamReader(getResourceAsStream(fileName));
     }
-
 
     private static InputStream getResourceAsStream( final String name ) {
         Assert.notNull("name", name);
@@ -491,7 +483,6 @@ public final class JavaScriptConfiguration {
         return true;
     }
 
-
     private boolean testToIncludeForJSConstraint(final Element element, final BrowserVersion browser) {
         final String max = element.getAttribute("max-version");
         float maxVersion;
@@ -572,7 +563,6 @@ public final class JavaScriptConfiguration {
         return null;
     }
 
-
     private ClassConfiguration.PropertyInfo findPropertyInChain(final String classname, final String propertyName) {
         String workname = classname;
         ClassConfiguration config;
@@ -618,7 +608,6 @@ public final class JavaScriptConfiguration {
         return null;
     }
 
-
     /**
      * Get the method that implements the setter for the given property based upon the class object.
      * @param clazz The actual class to use as reference
@@ -661,7 +650,6 @@ public final class JavaScriptConfiguration {
         final String classname = getClassnameForClass(clazz);
         return propertyExists(classname, propertyName);
     }
-
 
     /**
      * Check to see if there is an entry for the given property.

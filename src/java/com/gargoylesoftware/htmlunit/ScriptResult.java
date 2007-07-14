@@ -60,7 +60,6 @@ public final class ScriptResult {
         newPage_ = newPage;
     }
 
-
     /**
      * Return the object that was the output of the script engine.
      * @return The result from the script engine.
@@ -68,7 +67,6 @@ public final class ScriptResult {
     public Object getJavaScriptResult() {
         return javaScriptResult_;
     }
-
 
     /**
      * Return the page that is loaded at the end of the script execution.

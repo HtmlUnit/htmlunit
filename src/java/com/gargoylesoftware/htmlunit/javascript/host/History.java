@@ -50,12 +50,10 @@ public class History extends SimpleScriptable {
 
     private static final long serialVersionUID = -285158453206844475L;
 
-
     /**
      * Create an instance.  Javascript objects must have a default constructor.
      */
     public History() {}
-
 
     /**
      * Return the "length" property.  Currently hardcoded to return 0;
@@ -66,7 +64,6 @@ public class History extends SimpleScriptable {
         return 0;
     }
 
-
     /**
      * javascript function "back".  Currently not implemented
      */
@@ -74,14 +71,12 @@ public class History extends SimpleScriptable {
         getLog().debug("javascript: history.back() not implemented yet");
     }
 
-
     /**
      * javascript function "forward".  Currently not implemented
      */
     public void jsxFunction_forward() {
         getLog().debug("javascript: history.forward() not implemented yet");
     }
-
 
     /**
      * javascript function "go".  Currently not implemented

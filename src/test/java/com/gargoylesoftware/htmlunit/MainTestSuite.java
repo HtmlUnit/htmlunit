@@ -69,7 +69,6 @@ public class MainTestSuite extends RecursiveTestSuite {
         //enableAllLogging();
     }
 
-
     /**
      * Set the appropriate logging levels for running the tests.
      */
@@ -94,7 +93,5 @@ public class MainTestSuite extends RecursiveTestSuite {
         properties.put(prefix+"org.apache.commons.logging.simplelog.showdatetime", "true");
         properties.put(prefix+"httpclient.wire", "info");
         properties.put(prefix+"org.apache.commons.httpclient", "info");
-
-
     }
 }

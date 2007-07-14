@@ -93,7 +93,6 @@ public class HtmlFrameSet extends StyledElement {
         return getAttributeValue("rows");
     }
 
-
     /**
      * Return the value of the attribute "cols".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -106,7 +105,6 @@ public class HtmlFrameSet extends StyledElement {
         return getAttributeValue("cols");
     }
 
-
     /**
      * Return the value of the attribute "onload".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -118,7 +116,6 @@ public class HtmlFrameSet extends StyledElement {
     public final String getOnLoadAttribute() {
         return getAttributeValue("onload");
     }
-
 
     /**
      * Return the value of the attribute "onunload".  Refer to the

@@ -91,7 +91,6 @@ public abstract class BaseFrame extends StyledElement {
         }
     }
 
-
     /**
      * Called after the node for <frame...> or <iframe> has been added to the containing page.
      * The node needs to be added first to allow js in the frame to see the frame in the parent

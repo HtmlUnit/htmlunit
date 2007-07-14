@@ -47,7 +47,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
-
 /**
  * Tests for Inputs
  *
@@ -90,7 +89,6 @@ public class TextareaTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
     
     /**
      * @throws Exception if the test fails

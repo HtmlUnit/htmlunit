@@ -105,7 +105,6 @@ public abstract class ScriptEngine {
         return execute(htmlPage, sourceCode, sourceName, null);
     }
 
-
     /**
      * Execute the specified source code in the context of the given page.
      * @param htmlPage The page

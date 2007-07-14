@@ -115,14 +115,12 @@ public final class ClassConfiguration {
         }
     }
 
-
     /**
      * @return Returns the className.
      */
     public String getClassName() {
         return className_;
     }
-
 
     /**
      * Add the property to the configuration
@@ -198,7 +196,6 @@ public final class ClassConfiguration {
         functionMap_.put(name, info);
     }
 
-
     /**
      * Set the browser information for this named property
      * @param propertyName - Name of the property to set
@@ -236,7 +233,6 @@ public final class ClassConfiguration {
     protected PropertyInfo getPropertyInfo(final String propertyName) {
         return (PropertyInfo) propertyMap_.get(propertyName);
     }
-
 
     private FunctionInfo getFunctionInfo(final String functionName) {
         return (FunctionInfo) functionMap_.get(functionName);

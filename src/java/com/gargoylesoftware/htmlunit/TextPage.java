@@ -63,20 +63,17 @@ public class TextPage implements Page {
         enclosingWindow_ = enclosingWindow;
     }
 
-
     /**
      * Initialize this page.
      */
     public void initialize() {
     }
 
-
     /**
      * Clean up this page.
      */
     public void cleanUp() {
     }
-
 
     /**
      *  Return the content of the page
@@ -87,7 +84,6 @@ public class TextPage implements Page {
         return content_;
     }
 
-
     /**
      *  Return the web response that was originally used to create this page.
      *
@@ -96,7 +92,6 @@ public class TextPage implements Page {
     public WebResponse getWebResponse() {
         return webResponse_;
     }
-
 
     /**
      * Return the window that this page is sitting inside.

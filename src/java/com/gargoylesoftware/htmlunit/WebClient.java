@@ -129,7 +129,6 @@ public class WebClient implements Serializable {
     private StatusHandler  statusHandler_;
     private AjaxController ajaxController_ = new AjaxController();
     
-
     private BrowserVersion browserVersion_ = BrowserVersion.getDefault();
     private boolean isRedirectEnabled_ = true;
     private PageCreator pageCreator_ = new DefaultPageCreator();

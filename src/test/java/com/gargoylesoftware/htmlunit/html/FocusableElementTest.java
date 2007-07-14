@@ -42,8 +42,6 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
-
-
 /**
  * Tests for elements with onblur and onfocus attributes.
  *
@@ -64,7 +62,6 @@ public class FocusableElementTest extends WebTestCase {
     public FocusableElementTest(final String name) {
         super(name);
     }
-
 
     /**
      * Full page driver for onblur and onfocus tests.
@@ -87,7 +84,6 @@ public class FocusableElementTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-
     /**
      * Body driver for onblur and onfocus tests.
      *
@@ -104,7 +100,6 @@ public class FocusableElementTest extends WebTestCase {
                 "</script></body></html>");
     }
 
-
     /**
      * Simple tag name driver for onblur and onfocus tests.
      *
@@ -118,7 +113,6 @@ public class FocusableElementTest extends WebTestCase {
                 " " + tagAttributes + ">Text</" + tagName + ">");
     }
 
-
     /**
      * Test onblur and onfocus handlers and blur() and focus() methods of anchor element.
      *
@@ -127,7 +121,6 @@ public class FocusableElementTest extends WebTestCase {
     public void testAnchor_onblur_onfocus() throws Exception {
         onClickSimpleTest("a", "href=\".\"");
     }
-
 
     /**
      * Test onblur and onfocus handlers and blur() and focus() methods of area element.
@@ -141,7 +134,6 @@ public class FocusableElementTest extends WebTestCase {
                 "</area></map>");
     }
 
-
     /**
      * Test onblur and onfocus handlers and blur() and focus() methods of button element.
      *
@@ -150,7 +142,6 @@ public class FocusableElementTest extends WebTestCase {
     public void testButton_onblur_onfocus() throws Exception {
         onClickSimpleTest("button", "name=\"foo\" value=\"bar\" type=\"button\"");
     }
-
 
     /**
      * Test onblur and onfocus handlers and blur() and focus() methods of label element surrounding input element.
@@ -163,7 +154,6 @@ public class FocusableElementTest extends WebTestCase {
                 "Foo<input type=\"text\" name=\"foo\"" + COMMON_EVENTS + "></label></form>");
     }
 
-
     /**
      * Test onblur and onfocus handlers and blur() and focus() methods of label element referencing an input element.
      *
@@ -175,7 +165,6 @@ public class FocusableElementTest extends WebTestCase {
                 "<input type=\"text\" name=\"foo\" id=\"fooId\"" + COMMON_EVENTS + "></form>");
     }
 
-
     /**
      * Test onblur and onfocus handlers and blur() and focus() methods of select element.
      *
@@ -184,7 +173,6 @@ public class FocusableElementTest extends WebTestCase {
     public void testSelect_onblur_onfocus() throws Exception {
         onClickBodyTest("<form><select " + COMMON_ATTRIBUTES + "><option>1</option></select></form>");
     }
-
 
     /**
      * Test onblur and onfocus handlers and blur() and focus() methods of textarea element.

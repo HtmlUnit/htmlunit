@@ -47,8 +47,6 @@ import junit.framework.TestSuite;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-
-
 /**
  * Multi-threaded JavaScript engine test.
  *
@@ -65,7 +63,6 @@ public class ThreadTest extends WebTestCase {
     public ThreadTest(final String name) {
         super(name);
     }
-
 
     /**
      * @throws InterruptedException if the test fails
@@ -135,7 +132,6 @@ public class ThreadTest extends WebTestCase {
         public boolean isSuccessful() {
             return successful_;
         }
-
 
         /**
          * @see SimpleScriptableTest#testCallInheritedFunction()

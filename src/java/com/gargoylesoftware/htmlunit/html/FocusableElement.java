@@ -39,8 +39,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
-
-
 /**
  * An element that can have focus and onblur/onfocus events.
  *
@@ -63,14 +61,12 @@ public abstract class FocusableElement extends ClickableElement {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 
-
     /**
      * Remove focus from this element.
      */
     public void blur() {
         getPage().moveFocusToElement(null);
     }
-
 
     /**
      * Set the focus to this element.

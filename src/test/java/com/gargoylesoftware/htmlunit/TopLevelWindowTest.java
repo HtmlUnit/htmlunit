@@ -42,7 +42,6 @@ import java.util.List;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
 
-
 /**
  *  Tests for WebClient
  *

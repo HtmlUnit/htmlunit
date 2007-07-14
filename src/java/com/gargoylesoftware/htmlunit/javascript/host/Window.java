@@ -974,7 +974,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         getWebWindow().getThreadManager().stopThread(intervalID);
     }
 
-
     /**
      * Return the innerWidth.
      * @return a dummy value

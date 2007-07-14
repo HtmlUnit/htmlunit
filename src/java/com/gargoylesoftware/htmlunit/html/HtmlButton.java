@@ -122,7 +122,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
         return defaultPage;
     }
 
-
     /**
      * Return true if the disabled attribute is set for this element.
      * @return Return true if this is disabled.
@@ -130,7 +129,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
     public final boolean isDisabled() {
         return isAttributeDefined("disabled");
     }
-
 
     /**
      *  Return an array of KeyValuePairs that are the values that will be sent
@@ -145,7 +143,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
         return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getValueAttribute() )};
     }
 
-
     /**
      * {@inheritDoc}
      * @see SubmittableElement#reset()
@@ -153,7 +150,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
     public void reset() {
         getLog().debug("reset() not implemented for this element");
     }
-
 
     /**
      * {@inheritDoc}
@@ -163,7 +159,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
         getLog().debug("setDefaultValue() not implemented for this element");
     }
 
-
     /**
      * {@inheritDoc}
      * @see SubmittableElement#getDefaultValue()
@@ -172,7 +167,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
         getLog().debug("getDefaultValue() not implemented for this element");
         return "";
     }
-
 
     /**
      * {@inheritDoc} This implementation is empty; only checkboxes and radio buttons
@@ -185,7 +179,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
         // Empty.
     }
 
-
     /**
      * {@inheritDoc} This implementation returns <tt>false</tt>; only checkboxes and
      * radio buttons really care what the default checked value is.
@@ -196,7 +189,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
     public boolean isDefaultChecked() {
         return false;
     }
-
 
     /**
      * Return the value of the attribute "name".  Refer to the
@@ -210,7 +202,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
         return getAttributeValue("name");
     }
 
-
     /**
      * Return the value of the attribute "value".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -222,7 +213,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
     public final String getValueAttribute() {
         return getAttributeValue("value");
     }
-
 
     /**
      * Return the value of the attribute "type".  Refer to the
@@ -248,7 +238,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
         return type;
     }
 
-
     /**
      * Return the value of the attribute "disabled".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -260,7 +249,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
     public final String getDisabledAttribute() {
         return getAttributeValue("disabled");
     }
-
 
     /**
      * Return the value of the attribute "tabindex".  Refer to the
@@ -274,7 +262,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
         return getAttributeValue("tabindex");
     }
 
-
     /**
      * Return the value of the attribute "accesskey".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -287,7 +274,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
         return getAttributeValue("accesskey");
     }
 
-
     /**
      * Return the value of the attribute "onfocus".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -299,7 +285,6 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
     public final String getOnFocusAttribute() {
         return getAttributeValue("onfocus");
     }
-
 
     /**
      * Return the value of the attribute "onblur".  Refer to the

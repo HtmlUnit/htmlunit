@@ -93,7 +93,6 @@ public class HtmlImageInputTest extends WebTestCase {
             webConnection.getLastParameters() );
     }
 
-
     /**
      * @throws Exception if the test fails
      */

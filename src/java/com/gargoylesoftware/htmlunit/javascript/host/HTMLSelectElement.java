@@ -70,7 +70,6 @@ public class HTMLSelectElement extends FormField {
     public HTMLSelectElement() {
     }
 
-
     /**
      * Javascript constructor.  This must be declared in every javascript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
@@ -198,7 +197,6 @@ public class HTMLSelectElement extends FormField {
         return type;
     }
 
-
     /**
      * Return the value of the "options" property
      * @return The options property
@@ -210,7 +208,6 @@ public class HTMLSelectElement extends FormField {
         }
         return optionsArray_;
     }
-
 
     /**
      * Return the value of the "selectedIndex" property
@@ -227,7 +224,6 @@ public class HTMLSelectElement extends FormField {
             return allOptions.indexOf(selectedOptions.get(0));
         }
     }
-
 
     /**
      * Set the value of the "selectedIndex" property
@@ -283,7 +279,6 @@ public class HTMLSelectElement extends FormField {
         return optionsArray_.jsxGet_length();
     }
 
-
     /**
      * Remove options by reducing the "length" property
      * @param newLength The new length property value
@@ -308,7 +303,6 @@ public class HTMLSelectElement extends FormField {
         return optionsArray_.get( index, start );
     }
 
-
     /**
      * Set the index property
      * @param index The index
@@ -322,7 +316,6 @@ public class HTMLSelectElement extends FormField {
         optionsArray_.put( index, start, newValue );
     }
 
-
     /**
      * Return the HTML select object.
      * @return The HTML select object.
@@ -330,7 +323,6 @@ public class HTMLSelectElement extends FormField {
     private HtmlSelect getHtmlSelect() {
         return (HtmlSelect)getHtmlElementOrDie();
     }
-
 
     /**
      * Selects the option with the specified value

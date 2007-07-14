@@ -138,7 +138,6 @@ public class SimpleScriptable extends ScriptableObject {
         return (HtmlElement) getDomNodeOrDie();
     }
 
-
     /**
      * Return the DOM node that corresponds to this javascript object
      * or null if a node hasn't been set.

@@ -117,7 +117,6 @@ public class HtmlImageInput extends HtmlInput {
         return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getValueAttribute() )};
     }
 
-
     /**
      * Submit the form that contains this input.  Only a couple of the inputs
      * support this method so it is made protected here.  Those subclasses

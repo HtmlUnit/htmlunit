@@ -56,7 +56,6 @@ public class CollectingAlertHandler implements AlertHandler {
         this( new ArrayList() );
     }
 
-
     /**
      * Create an instance with the specified list.
      *
@@ -66,7 +65,6 @@ public class CollectingAlertHandler implements AlertHandler {
         Assert.notNull("list",list);
         collectedAlerts_ = list;
     }
-
 
     /**
      * Handle the alert.  This implementation will store the message in a list
@@ -78,7 +76,6 @@ public class CollectingAlertHandler implements AlertHandler {
     public void handleAlert( final Page page, final String message ) {
         collectedAlerts_.add(message);
     }
-
 
     /**
      * Return a list containing the message portion of any collected alerts.

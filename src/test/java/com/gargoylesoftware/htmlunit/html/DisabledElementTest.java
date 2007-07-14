@@ -48,8 +48,6 @@ import junit.framework.TestSuite;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
-
-
 /**
  * Tests the <code>isDisabled()</code> method on all of the elements that must implement the <code>disabled</code>
  * attribute:  <code>button</code>, <code>input</code>, <code>optgroup</code>, <code>option</code>, <code>select</code>
@@ -61,7 +59,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class DisabledElementTest extends WebTestCase {
 
     private final String htmlContent_;
-
 
     /**
      * Generate a <code>TestSuite</code> for every HTML element that implements {@link DisabledElement}.
@@ -91,7 +88,6 @@ public class DisabledElementTest extends WebTestCase {
         return suite;
     }
 
-
     /**
      * Adds test cases to the <code>suite</code> argument for the given parameters.
      *
@@ -116,7 +112,6 @@ public class DisabledElementTest extends WebTestCase {
         suite.addTest(subsuite);
     }
 
-
     /**
      * Creates an instance of the test class for testing <em>one</em> of the test methods.
      *
@@ -129,7 +124,6 @@ public class DisabledElementTest extends WebTestCase {
         htmlContent_ = MessageFormat.format(htmlContent, new String[]{elementHtml});
     }
 
-
     /**
      * Tests that the <code>isDisabled()</code> method returns <code>false</code> when the <code>disabled</code>
      * attribute does not exist.
@@ -139,7 +133,6 @@ public class DisabledElementTest extends WebTestCase {
     public void testNoDisabledAttribute() throws Exception {
         executeDisabledTest("", false);
     }
-
 
     /**
      * Tests that the <code>isDisabled()</code> method returns <code>true</code> when the <code>disabled</code>
@@ -151,7 +144,6 @@ public class DisabledElementTest extends WebTestCase {
         executeDisabledTest("disabled=''", true);
     }
 
-
     /**
      * Tests that the <code>isDisabled()</code> method returns <code>false</code> when the <code>disabled</code>
      * attribute exists and is <em>not</em> blank.
@@ -161,7 +153,6 @@ public class DisabledElementTest extends WebTestCase {
     public void testPopulatedDisabledAttribute() throws Exception {
         executeDisabledTest("disabled='disabled'", true);
     }
-
 
     /**
      * Tests the <code>isDisabled()</code> method with the given parameters.

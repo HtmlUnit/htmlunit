@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
-
 /**
  * Wrapper for the html element "ol".
  *
@@ -91,7 +90,6 @@ public class HtmlOrderedList extends ClickableElement {
         return getAttributeValue("type");
     }
 
-
     /**
      * Return the value of the attribute "compact".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -103,7 +101,6 @@ public class HtmlOrderedList extends ClickableElement {
     public final String getCompactAttribute() {
         return getAttributeValue("compact");
     }
-
 
     /**
      * Return the value of the attribute "start".  Refer to the

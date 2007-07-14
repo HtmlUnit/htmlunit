@@ -90,7 +90,6 @@ public class HtmlListItem extends ClickableElement {
         return getAttributeValue("type");
     }
 
-
     /**
      * Return the value of the attribute "value".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>

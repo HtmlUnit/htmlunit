@@ -59,7 +59,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
-
 /**
  * Tests for Inputs and buttons.
  *
@@ -76,7 +75,6 @@ public class InputTest extends WebTestCase {
     public InputTest( final String name ) {
         super(name);
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -109,7 +107,6 @@ public class InputTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -172,7 +169,6 @@ public class InputTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -202,7 +198,6 @@ public class InputTest extends WebTestCase {
         final String[] expectedAlerts = {"false", "true"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -251,7 +246,6 @@ public class InputTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -304,7 +298,6 @@ public class InputTest extends WebTestCase {
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
-
 
     /**
      * @throws Exception if the test fails

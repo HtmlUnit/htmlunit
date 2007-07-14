@@ -82,7 +82,6 @@ public void testDocumentWrite() throws Exception {
             ]]></source>
         </section>
         
-        
         <section name="Example: Watching for 'alerts'">
             <p>
                 Often you want to watch alerts triggered by javascript.
@@ -127,7 +126,6 @@ public void testAlerts() throws Exception {
                 WebClient.setStatusHandler() for details on these.
             </p>
         </section>
-
 
         <section name="Event handlers">
             <p>

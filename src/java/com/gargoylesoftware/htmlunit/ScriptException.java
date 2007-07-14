@@ -116,7 +116,6 @@ public class ScriptException extends RuntimeException {
         writer.write( createPrintableStackTrace() );
     }
 
-
     /**
      *  Print the stack trace. If this exception contains another exception then
      *  the stack traces for both will be printed.
@@ -126,7 +125,6 @@ public class ScriptException extends RuntimeException {
     public void printStackTrace( final PrintStream stream ) {
         stream.print(createPrintableStackTrace());
     }
-
 
     private String createPrintableStackTrace() {
         final StringWriter stringWriter = new StringWriter();
@@ -234,7 +232,6 @@ public class ScriptException extends RuntimeException {
         }
         return "";
     }
-
 
     /**
      * Return the line number of the source that was executing at the time of the

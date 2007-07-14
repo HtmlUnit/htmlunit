@@ -58,7 +58,6 @@ public class HtmlTableTest extends WebTestCase {
         super( name );
     }
 
-
     /**
      *  Test getTableCell(int,int)
      *
@@ -127,7 +126,6 @@ public class HtmlTableTest extends WebTestCase {
         assertEquals( "cell (2, 1) contents", null, cell6 );
     }
 
-
     /**
      *  Test getTableCell(int,int) for a cell that doesn't exist
      *
@@ -150,7 +148,6 @@ public class HtmlTableTest extends WebTestCase {
         final HtmlTableCell cell = table.getCellAt( 99, 0 );
         assertNull( "cell", cell );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -183,7 +180,6 @@ public class HtmlTableTest extends WebTestCase {
 
         assertEquals( expectedRows, table.getRows() );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -223,7 +219,6 @@ public class HtmlTableTest extends WebTestCase {
         assertEquals( expectedRows, table.getRows() );
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -258,7 +253,6 @@ public class HtmlTableTest extends WebTestCase {
         assertEquals( 2, table.getBodies().size() );
     }
 
-
     /**
      * Check to ensure that the proper numbers of tags show up.  Note that an extra tbody
      * will be inserted to be in compliance with the common browsers.
@@ -286,7 +280,6 @@ public class HtmlTableTest extends WebTestCase {
         assertEquals( null, table.getFooter() );
         assertEquals( 1, table.getBodies().size() );
     }
-
 
     /**
      * @throws Exception if the test fails

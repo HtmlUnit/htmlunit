@@ -145,7 +145,6 @@ public class HtmlAnchor extends FocusableElement {
         return doClickAction(defaultPage, "");
     }
 
-
     /**
      * Return the value of the attribute "charset".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -157,7 +156,6 @@ public class HtmlAnchor extends FocusableElement {
     public final String getCharsetAttribute() {
         return getAttributeValue("charset");
     }
-
 
     /**
      * Return the value of the attribute "type".  Refer to the
@@ -171,7 +169,6 @@ public class HtmlAnchor extends FocusableElement {
         return getAttributeValue("type");
     }
 
-
     /**
      * Return the value of the attribute "name".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -183,7 +180,6 @@ public class HtmlAnchor extends FocusableElement {
     public final String getNameAttribute() {
         return getAttributeValue("name");
     }
-
 
     /**
      * Return the value of the attribute "href".  Refer to the
@@ -197,7 +193,6 @@ public class HtmlAnchor extends FocusableElement {
         return getAttributeValue("href").trim();
     }
 
-
     /**
      * Return the value of the attribute "hreflang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -209,7 +204,6 @@ public class HtmlAnchor extends FocusableElement {
     public final String getHrefLangAttribute() {
         return getAttributeValue("hreflang");
     }
-
 
     /**
      * Return the value of the attribute "rel".  Refer to the
@@ -223,7 +217,6 @@ public class HtmlAnchor extends FocusableElement {
         return getAttributeValue("rel");
     }
 
-
     /**
      * Return the value of the attribute "rev".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -235,7 +228,6 @@ public class HtmlAnchor extends FocusableElement {
     public final String getRevAttribute() {
         return getAttributeValue("rev");
     }
-
 
     /**
      * Return the value of the attribute "accesskey".  Refer to the
@@ -249,7 +241,6 @@ public class HtmlAnchor extends FocusableElement {
         return getAttributeValue("accesskey");
     }
 
-
     /**
      * Return the value of the attribute "shape".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -261,7 +252,6 @@ public class HtmlAnchor extends FocusableElement {
     public final String getShapeAttribute() {
         return getAttributeValue("shape");
     }
-
 
     /**
      * Return the value of the attribute "coords".  Refer to the
@@ -275,7 +265,6 @@ public class HtmlAnchor extends FocusableElement {
         return getAttributeValue("coords");
     }
 
-
     /**
      * Return the value of the attribute "tabindex".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -287,7 +276,6 @@ public class HtmlAnchor extends FocusableElement {
     public final String getTabIndexAttribute() {
         return getAttributeValue("tabindex");
     }
-
 
     /**
      * Return the value of the attribute "onfocus".  Refer to the
@@ -301,7 +289,6 @@ public class HtmlAnchor extends FocusableElement {
         return getAttributeValue("onfocus");
     }
 
-
     /**
      * Return the value of the attribute "onblur".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -313,7 +300,6 @@ public class HtmlAnchor extends FocusableElement {
     public final String getOnBlurAttribute() {
         return getAttributeValue("onblur");
     }
-
 
     /**
      * Return the value of the attribute "target".  Refer to the

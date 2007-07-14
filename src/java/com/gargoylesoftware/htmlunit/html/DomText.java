@@ -64,7 +64,6 @@ public class DomText extends DomCharacterData {
         super(page, data);
     }
 
-
     /**
      * Split a Text node in two.
      * @param offset The character position at which to split the Text node.

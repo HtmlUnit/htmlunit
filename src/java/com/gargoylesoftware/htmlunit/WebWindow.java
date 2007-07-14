@@ -55,14 +55,12 @@ public interface WebWindow {
      */
     String getName();
 
-
     /**
      * Set the name of this window.
      *
      * @param name The new window name.
      */
     void setName( final String name );
-
 
     /**
      * Return the currently loaded page or null if no page has been loaded.
@@ -71,14 +69,12 @@ public interface WebWindow {
      */
     Page getEnclosedPage();
 
-
     /**
      * Set the currently loaded page.
      *
      * @param page The new page or null if there is no page (ie empty window)
      */
     void setEnclosedPage( final Page page );
-
 
     /**
      * Return the window that contains this window.  If this is a top
@@ -87,7 +83,6 @@ public interface WebWindow {
      * @return The parent window or this window if there is no parent.
      */
     WebWindow getParentWindow();
-
 
     /**
      * Return the top level window that contains this window.  If this
@@ -98,14 +93,12 @@ public interface WebWindow {
      */
     WebWindow getTopWindow();
 
-
     /**
      * Return the web client that "owns" this window.
      *
      * @return The web client or null if this window has been closed.
      */
     WebClient getWebClient();
-
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -116,7 +109,6 @@ public interface WebWindow {
      */
     void setScriptObject( final Object scriptObject );
 
-
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * 
@@ -124,7 +116,6 @@ public interface WebWindow {
      * @return The javascript object that corresponds to this element.
      */
     Object getScriptObject();
-
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>

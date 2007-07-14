@@ -97,7 +97,6 @@ public class HtmlAttr extends DomNode implements Map.Entry {
         return wrappedMappedEntry_.getValue();
     }
 
-
     /**
      * Delegate to the wrapped map entry.
      * @param value new value to be stored in this entry.

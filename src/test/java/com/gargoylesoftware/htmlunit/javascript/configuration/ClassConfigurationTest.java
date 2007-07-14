@@ -54,7 +54,6 @@ public class ClassConfigurationTest extends WebTestCase {
     public ClassConfigurationTest( final String name ) {
         super(name);
     }
-
     
     /**
      * Reset the JavaScriptConfiguration file for each test to it's inital clean state.
@@ -65,7 +64,6 @@ public class ClassConfigurationTest extends WebTestCase {
         super.setUp();
         JavaScriptConfiguration.resetClassForTesting();
     }
-
 
     /**
      * Test equality on a class configuration
@@ -83,7 +81,6 @@ public class ClassConfigurationTest extends WebTestCase {
         assertTrue("Configs should now be equal", config1.equals(config2));
     }
 
-
     /**
      * Test equality on a class configuration for function
      * @throws Exception - Exception on error
@@ -99,7 +96,6 @@ public class ClassConfigurationTest extends WebTestCase {
         config2.addFunction("testFunction");
         assertTrue("Configs should now be equal", config1.equals(config2));
     }
-
     
     /**
      * Test equality on a class configuration
@@ -173,7 +169,6 @@ public class ClassConfigurationTest extends WebTestCase {
         assertFalse("Should be equal with different browser added", config1.equals(config2));        
     }
     
-
     /**
      * Test for throwing exception when setter method is not defined
      *

@@ -103,7 +103,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         return executeOnChangeHandlerIfAppropriate(this);
     }
 
-
     /**
      *  Return an array of KeyValuePairs that are the values that will be sent
      *  back to the server whenever the current form is submitted.<p>
@@ -136,7 +135,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         return getAttributeValue("type");
     }
 
-
     /**
      * Return the value of the attribute "name".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -148,7 +146,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     public final String getNameAttribute() {
         return getAttributeValue("name");
     }
-
 
     /**
      * <p>Return the value of the attribute "value".  Refer to the
@@ -162,7 +159,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         return getAttributeValue("value");
     }
 
-
     /**
      * Return the value of the attribute "checked".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -174,7 +170,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     public final String getCheckedAttribute() {
         return getAttributeValue("checked");
     }
-
 
     /**
      * Return the value of the attribute "disabled".  Refer to the
@@ -188,7 +183,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         return getAttributeValue("disabled");
     }
 
-
     /**
      * Return true if the disabled attribute is set for this element.
      * @return Return true if this is disabled.
@@ -196,7 +190,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     public final boolean isDisabled() {
         return isAttributeDefined("disabled");
     }
-
 
     /**
      * Return the value of the attribute "readonly".  Refer to the
@@ -210,7 +203,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         return getAttributeValue("readonly");
     }
 
-
     /**
      * Return the value of the attribute "size".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -222,7 +214,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     public final String getSizeAttribute() {
         return getAttributeValue("size");
     }
-
 
     /**
      * Return the value of the attribute "maxlength".  Refer to the
@@ -236,7 +227,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         return getAttributeValue("maxlength");
     }
 
-
     /**
      * Return the value of the attribute "src".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -248,7 +238,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     public final String getSrcAttribute() {
         return getAttributeValue("src");
     }
-
 
     /**
      * Return the value of the attribute "alt".  Refer to the
@@ -262,7 +251,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         return getAttributeValue("alt");
     }
 
-
     /**
      * Return the value of the attribute "usemap".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -274,7 +262,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     public final String getUseMapAttribute() {
         return getAttributeValue("usemap");
     }
-
 
     /**
      * Return the value of the attribute "tabindex".  Refer to the
@@ -288,7 +275,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         return getAttributeValue("tabindex");
     }
 
-
     /**
      * Return the value of the attribute "accesskey".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -300,7 +286,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     public final String getAccessKeyAttribute() {
         return getAttributeValue("accesskey");
     }
-
 
     /**
      * Return the value of the attribute "onfocus".  Refer to the
@@ -314,7 +299,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         return getAttributeValue("onfocus");
     }
 
-
     /**
      * Return the value of the attribute "onblur".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -326,7 +310,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     public final String getOnBlurAttribute() {
         return getAttributeValue("onblur");
     }
-
 
     /**
      * Return the value of the attribute "onselect".  Refer to the
@@ -340,7 +323,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         return getAttributeValue("onselect");
     }
 
-
     /**
      * Return the value of the attribute "onchange".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -352,7 +334,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     public final String getOnChangeAttribute() {
         return getAttributeValue("onchange");
     }
-
 
     /**
      * Return the value of the attribute "accept".  Refer to the
@@ -366,7 +347,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         return getAttributeValue("accept");
     }
 
-
     /**
      * Return the value of the attribute "align".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -379,7 +359,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         return getAttributeValue("align");
     }
 
-
     /**
      * {@inheritDoc}
      * @see SubmittableElement#reset()
@@ -387,7 +366,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     public void reset() {
         setValueAttribute( defaultValue_ );
     }
-
 
     /**
      * {@inheritDoc} Also sets the value attribute when emulating Netscape browsers.
@@ -398,7 +376,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         final boolean modifyValue = getPage().getWebClient().getBrowserVersion().isNetscape();
         setDefaultValue( defaultValue, modifyValue );
     }
-
 
     /**
      * Sets the default value, optionally also modifying the current value.
@@ -412,7 +389,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         }
     }
 
-
     /**
      * {@inheritDoc}
      * @see SubmittableElement#getDefaultValue()
@@ -420,7 +396,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     public String getDefaultValue() {
         return defaultValue_;
     }
-
 
     /**
      * {@inheritDoc} The default implementation is empty; only checkboxes and radio buttons
@@ -433,7 +408,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         // Empty.
     }
 
-
     /**
      * {@inheritDoc} The default implementation returns <tt>false</tt>; only checkboxes and
      * radio buttons really care what the default checked value is.
@@ -444,7 +418,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     public boolean isDefaultChecked() {
         return false;
     }
-
 
     /**
      *  Set the "checked" attribute
@@ -458,7 +431,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         return getPage();
     }
 
-
     /**
      *  Return true if this element is currently selected
      *
@@ -467,7 +439,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     public boolean isChecked() {
         return isAttributeDefined("checked");
     }
-
 
     /**
      * Simulate clicking this input with a pointing device.  The x and y coordinates
@@ -488,7 +459,6 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
         // By default this is no different than a click without coordinates.
         return click();
     }
-
     
     /**
      * Executes the onchange script code for this element if this is appropriate. 

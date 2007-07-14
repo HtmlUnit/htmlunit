@@ -44,7 +44,6 @@ import org.apache.commons.httpclient.util.DateParseException;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
 
-
 /**
  * Wrapper for the HTML element "meta".
  *

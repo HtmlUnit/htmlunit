@@ -89,7 +89,6 @@ public class HtmlBaseFont extends HtmlElement {
         return getAttributeValue("id");
     }
 
-
     /**
      * Return the value of the attribute "size".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -102,7 +101,6 @@ public class HtmlBaseFont extends HtmlElement {
         return getAttributeValue("size");
     }
 
-
     /**
      * Return the value of the attribute "color".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -114,7 +112,6 @@ public class HtmlBaseFont extends HtmlElement {
     public final String getColorAttribute() {
         return getAttributeValue("color");
     }
-
 
     /**
      * Return the value of the attribute "face".  Refer to the

@@ -152,7 +152,6 @@ public abstract class WebTestCase extends BaseTestCase {
         return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, URL_GARGOYLE);
     }
 
-
     /**
      * Return the log that is being used for all testing objects
      * @return The log.

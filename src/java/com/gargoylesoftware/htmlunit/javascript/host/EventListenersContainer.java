@@ -53,7 +53,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
-
 class EventListenersContainer {
     static class Handlers {
         private final List capturingHandlers_ = new ArrayList();

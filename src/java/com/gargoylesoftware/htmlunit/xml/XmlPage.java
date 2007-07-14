@@ -90,13 +90,11 @@ public class XmlPage implements Page {
         }
     }
 
-
     /**
      * Clean up this page.
      */
     public void cleanUp() {
     }
-
 
     /**
      *  Return the content of the page
@@ -106,7 +104,6 @@ public class XmlPage implements Page {
     public String getContent() {
         return content_;
     }
-
 
     /**
      * Return the window that this page is sitting inside.
@@ -124,7 +121,6 @@ public class XmlPage implements Page {
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
     }
-
 
     /**
      *  Return the web response that was originally used to create this page.

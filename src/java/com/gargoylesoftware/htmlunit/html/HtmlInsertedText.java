@@ -90,7 +90,6 @@ public class HtmlInsertedText extends ClickableElement {
         return getAttributeValue("cite");
     }
 
-
     /**
      * Return the value of the attribute "datetime".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>

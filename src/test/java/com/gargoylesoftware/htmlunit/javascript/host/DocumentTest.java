@@ -241,7 +241,6 @@ public class DocumentTest extends WebTestCase {
         assertEquals( "second", secondPage.getTitleText() );
     }
 
-
     /**
      * Test that forms is a live collection
      * @throws Exception if the test fails
@@ -266,7 +265,6 @@ public class DocumentTest extends WebTestCase {
             + "</form>"
             + "</body>"
             + "</html>";
-
 
         final List collectedAlerts = new ArrayList();
         final String[] expectedAlerts = {"0", "1", "1", "true"};
@@ -960,7 +958,6 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
     /**
      * Regression test for firstChild and appendChild
      * @throws Exception if the test fails
@@ -1360,7 +1357,6 @@ public class DocumentTest extends WebTestCase {
 
         assertEquals( Collections.singletonList("http://ref"), collectedAlerts );
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -2243,7 +2239,6 @@ public class DocumentTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-
         webConnection.setResponse(urlGargoyleUpperCase, content);
         client.setWebConnection( webConnection );
         final List collectedAlerts = new ArrayList();
@@ -2275,8 +2270,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
-
-      /**
+    /**
      * @throws Exception if the test fails
      */
     public void testDomainLong() throws Exception {

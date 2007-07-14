@@ -344,7 +344,6 @@ public class EventTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-
     /**
      * Test event transmission to event handler
      * @throws Exception if the test fails

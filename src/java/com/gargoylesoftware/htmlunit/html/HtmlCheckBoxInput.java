@@ -97,7 +97,6 @@ public class HtmlCheckBoxInput extends HtmlInput {
         }
     }
 
-
     /**
      * {@inheritDoc}
      * @see SubmittableElement#reset()

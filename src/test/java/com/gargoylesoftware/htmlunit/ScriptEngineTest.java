@@ -63,7 +63,6 @@ public class ScriptEngineTest extends WebTestCase {
         super(name);
     }
 
-
     /**
      * Test that code in script tags is executed on page load.  Try different combinations
      * of the script tag except for the case where a remote javascript page is loaded.  That
@@ -90,7 +89,6 @@ public class ScriptEngineTest extends WebTestCase {
 
         assertEquals( expectedScripts, collectedScripts );
     }
-
 
     private HtmlPage loadPageAndCollectScripts(
             final String html, final List collectedScripts )

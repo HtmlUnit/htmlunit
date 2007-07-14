@@ -65,7 +65,6 @@ public class HtmlAreaTest extends WebTestCase {
         super( name );
     }
 
-
     private WebClient createWebClient( final String onClick ) {
         final String firstContent
             = "<html><head><title>first</title></head><body>"
@@ -104,7 +103,6 @@ public class HtmlAreaTest extends WebTestCase {
         assertEquals("third", thirdPage.getTitleText());
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -139,7 +137,6 @@ public class HtmlAreaTest extends WebTestCase {
         assertEquals("second", thirdPage.getTitleText());
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -161,7 +158,6 @@ public class HtmlAreaTest extends WebTestCase {
         assertEquals( Collections.singletonList("clicked"), collectedAlerts );
         assertSame( page, secondPage );
     }
-
 
     /**
      * @throws Exception if the test fails

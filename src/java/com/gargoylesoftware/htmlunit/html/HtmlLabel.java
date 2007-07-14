@@ -95,7 +95,6 @@ public class HtmlLabel extends FocusableElement {
         return getAttributeValue("for");
     }
 
-
     /**
      * Return the value of the attribute "accesskey".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -107,7 +106,6 @@ public class HtmlLabel extends FocusableElement {
     public final String getAccessKeyAttribute() {
         return getAttributeValue("accesskey");
     }
-
 
     /**
      * Return the value of the attribute "onfocus".  Refer to the
@@ -121,7 +119,6 @@ public class HtmlLabel extends FocusableElement {
         return getAttributeValue("onfocus");
     }
 
-
     /**
      * Return the value of the attribute "onblur".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -134,7 +131,6 @@ public class HtmlLabel extends FocusableElement {
         return getAttributeValue("onblur");
     }
 
-
     /**
      * Remove focus from this element.
      */
@@ -145,7 +141,6 @@ public class HtmlLabel extends FocusableElement {
         }
     }
 
-
     /**
      * Set the focus to this element.
      */
@@ -155,7 +150,6 @@ public class HtmlLabel extends FocusableElement {
             element.focus();
         }
     }
-
 
     /**
      * Gets the element referenced by this label. That is the element in the page which id is 

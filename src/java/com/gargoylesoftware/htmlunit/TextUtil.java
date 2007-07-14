@@ -144,7 +144,6 @@ public final class TextUtil {
         return stringToByteArray(content, DEFAULT_CHARSET);
     }
 
-
     /**
      * Convert a string into a byte array using the given encoding.
      *  

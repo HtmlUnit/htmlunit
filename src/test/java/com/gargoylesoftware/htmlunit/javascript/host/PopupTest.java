@@ -59,7 +59,6 @@ public class PopupTest extends WebTestCase {
         super(name);
     }
 
-
     /**
      * Just test that a standard use of popup works without exception
      * @throws Exception if the test fails

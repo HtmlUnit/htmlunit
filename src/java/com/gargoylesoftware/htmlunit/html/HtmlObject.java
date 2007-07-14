@@ -90,7 +90,6 @@ public class HtmlObject extends ClickableElement {
         return getAttributeValue("declare");
     }
 
-
     /**
      * Return the value of the attribute "classid".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -102,7 +101,6 @@ public class HtmlObject extends ClickableElement {
     public final String getClassIdAttribute() {
         return getAttributeValue("classid");
     }
-
 
     /**
      * Return the value of the attribute "codebase".  Refer to the
@@ -116,7 +114,6 @@ public class HtmlObject extends ClickableElement {
         return getAttributeValue("codebase");
     }
 
-
     /**
      * Return the value of the attribute "data".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -128,7 +125,6 @@ public class HtmlObject extends ClickableElement {
     public final String getDataAttribute() {
         return getAttributeValue("data");
     }
-
 
     /**
      * Return the value of the attribute "type".  Refer to the
@@ -142,7 +138,6 @@ public class HtmlObject extends ClickableElement {
         return getAttributeValue("type");
     }
 
-
     /**
      * Return the value of the attribute "codetype".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -154,7 +149,6 @@ public class HtmlObject extends ClickableElement {
     public final String getCodeTypeAttribute() {
         return getAttributeValue("codetype");
     }
-
 
     /**
      * Return the value of the attribute "archive".  Refer to the
@@ -168,7 +162,6 @@ public class HtmlObject extends ClickableElement {
         return getAttributeValue("archive");
     }
 
-
     /**
      * Return the value of the attribute "standby".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -180,7 +173,6 @@ public class HtmlObject extends ClickableElement {
     public final String getStandbyAttribute() {
         return getAttributeValue("standby");
     }
-
 
     /**
      * Return the value of the attribute "height".  Refer to the
@@ -194,7 +186,6 @@ public class HtmlObject extends ClickableElement {
         return getAttributeValue("height");
     }
 
-
     /**
      * Return the value of the attribute "width".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -206,7 +197,6 @@ public class HtmlObject extends ClickableElement {
     public final String getWidthAttribute() {
         return getAttributeValue("width");
     }
-
 
     /**
      * Return the value of the attribute "usemap".  Refer to the
@@ -220,7 +210,6 @@ public class HtmlObject extends ClickableElement {
         return getAttributeValue("usemap");
     }
 
-
     /**
      * Return the value of the attribute "name".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -232,7 +221,6 @@ public class HtmlObject extends ClickableElement {
     public final String getNameAttribute() {
         return getAttributeValue("name");
     }
-
 
     /**
      * Return the value of the attribute "tabindex".  Refer to the
@@ -246,7 +234,6 @@ public class HtmlObject extends ClickableElement {
         return getAttributeValue("tabindex");
     }
 
-
     /**
      * Return the value of the attribute "align".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -258,7 +245,6 @@ public class HtmlObject extends ClickableElement {
     public final String getAlignAttribute() {
         return getAttributeValue("align");
     }
-
 
     /**
      * Return the value of the attribute "border".  Refer to the
@@ -272,7 +258,6 @@ public class HtmlObject extends ClickableElement {
         return getAttributeValue("border");
     }
 
-
     /**
      * Return the value of the attribute "hspace".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -284,7 +269,6 @@ public class HtmlObject extends ClickableElement {
     public final String getHspaceAttribute() {
         return getAttributeValue("hspace");
     }
-
 
     /**
      * Return the value of the attribute "vspace".  Refer to the

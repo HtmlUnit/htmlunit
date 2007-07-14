@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
-
 /**
  * Wrapper for the html element "col".
  *
@@ -91,7 +90,6 @@ public class HtmlTableColumn extends ClickableElement {
         return getAttributeValue("span");
     }
 
-
     /**
      * Return the value of the attribute "width".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -103,7 +101,6 @@ public class HtmlTableColumn extends ClickableElement {
     public final String getWidthAttribute() {
         return getAttributeValue("width");
     }
-
 
     /**
      * Return the value of the attribute "align".  Refer to the
@@ -117,7 +114,6 @@ public class HtmlTableColumn extends ClickableElement {
         return getAttributeValue("align");
     }
 
-
     /**
      * Return the value of the attribute "char".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -130,7 +126,6 @@ public class HtmlTableColumn extends ClickableElement {
         return getAttributeValue("char");
     }
 
-
     /**
      * Return the value of the attribute "charoff".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
@@ -142,7 +137,6 @@ public class HtmlTableColumn extends ClickableElement {
     public final String getCharoffAttribute() {
         return getAttributeValue("charoff");
     }
-
 
     /**
      * Return the value of the attribute "valign".  Refer to the
