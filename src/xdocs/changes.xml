@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="asashour">
+                JavaScript: implement navigator.cookieEnabled to match WebClient#isCookiesEnabled().
+            </action>
             <action type="add" dev="asashour" id="1742662">
                 Add empty implementation for table.refresh() (#1742662).
             </action>

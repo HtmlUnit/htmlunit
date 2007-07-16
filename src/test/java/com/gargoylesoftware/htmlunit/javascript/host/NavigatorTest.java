@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class NavigatorTest extends WebTestCase {
 
@@ -109,7 +110,37 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testCookieEnabled() throws Exception {
-        testAttribute("cookieEnabled", "true");
+        testCookieEnabled(true);
+        testCookieEnabled(false);
+    }
+
+    private void testCookieEnabled(final boolean cookieEnabled) throws Exception {
+        final String content
+            = "<html><head><title>First</title></head>"
+            + "<script>"
+            + "function test()"
+            + "{"
+            + "  alert(navigator.cookieEnabled);"
+            + "}"
+            + "</script>"
+            + "<body onload='test()'></body>"
+            + "</html>";
+
+        final String[] expectedAlerts = {Boolean.toString(cookieEnabled)};
+        final WebClient webClient = new WebClient();
+        if( !cookieEnabled ) {
+            webClient.setCookiesEnabled( cookieEnabled );
+        }
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        webConnection.setDefaultResponse(content);
+        webClient.setWebConnection(webConnection);
+
+        webClient.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

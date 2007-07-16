@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Chris Erskine
+ * @author Ahmed Ashour
  * 
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_navigator.asp">
  * MSDN documentation</a>
@@ -115,7 +116,7 @@ public final class Navigator extends SimpleScriptable {
      * @return the property "cookieEnabled".
      */
     public boolean jsxGet_cookieEnabled() {
-        return true;
+        return getWindow().getWebWindow().getWebClient().isCookiesEnabled();
     }
 
     /**
