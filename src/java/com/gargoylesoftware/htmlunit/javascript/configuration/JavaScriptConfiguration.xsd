@@ -8,7 +8,6 @@
 
 	<xsd:element name="configuration" type="configurationType"/>
 
-
 	<xsd:complexType name="configurationType">
 		<xsd:sequence>
 			<xsd:element name="doclink" type="doclinkType" minOccurs="0" maxOccurs="unbounded"/>
@@ -16,12 +15,10 @@
 		</xsd:sequence>
 	</xsd:complexType>
 
-
 	<xsd:complexType name="doclinkType">
 		<xsd:attribute name="url" type="xsd:string" use="required"/>
 		<xsd:attribute name="descr" type="xsd:string"/>
 	</xsd:complexType>
-
 
 	<xsd:complexType name="classType">
 		<xsd:sequence>
@@ -40,7 +37,6 @@
 		<xsd:attribute name="extends" type="xsd:string"/>
 	</xsd:complexType>
 
-
 	<xsd:complexType name="propertyType">
 		<xsd:sequence>
 			<xsd:element name="doclink" type="doclinkType" minOccurs="0" maxOccurs="unbounded"/>
@@ -52,7 +48,6 @@
 		<xsd:attribute name="readable" type="xsd:boolean" default="true"/>
 		<xsd:attribute name="writable" type="xsd:boolean" default="true"/>
 	</xsd:complexType>
-
 
 	<xsd:complexType name="functionType">
 		<xsd:sequence>
@@ -88,7 +83,6 @@
 		<xsd:attribute name="min-version" type="xsd:float"/>
 		<xsd:attribute name="max-version" type="xsd:float"/>
 	</xsd:complexType>
-
 
 	<xsd:complexType name="requiredJavascriptType">
 		<xsd:attribute name="min-version" type="xsd:float"/>

@@ -122,7 +122,6 @@ public final class Document extends NodeImpl {
         functionContext_.registerFunction("lower-case", new LowerCaseFunction());
     }
 
-
     /**
      * Javascript constructor.  This must be declared in every javascript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
@@ -147,7 +146,6 @@ public final class Document extends NodeImpl {
         return (HtmlPage)getDomNodeOrDie();
     }
 
-
     /**
      * Return the html page that this document is modeling or null if the
      * page is empty.
@@ -156,7 +154,6 @@ public final class Document extends NodeImpl {
     public HtmlPage getHtmlPageOrNull() {
         return (HtmlPage)getDomNodeOrNull();
     }
-
 
     /**
      * Return the value of the javascript attribute "forms".
@@ -174,7 +171,6 @@ public final class Document extends NodeImpl {
         }
         return forms_;
     }
-
 
     /**
      * Return the value of the javascript attribute "links".  Refer also to the
@@ -242,7 +238,6 @@ public final class Document extends NodeImpl {
         thisAsDocument.write(concatArgsAsString(args));
     }
 
-
     /**
      * Converts the arguments to strings and concatenate them.
      * @param args the javascript arguments
@@ -295,7 +290,6 @@ public final class Document extends NodeImpl {
             }
         }
     }
-
 
     /**
      * javascript function "write".
@@ -407,7 +401,6 @@ public final class Document extends NodeImpl {
         return true;
     }
 
-
     /**
      * Gets the node that is the last one when exploring following nodes, depth-first.
      * @param node the node to search
@@ -423,7 +416,6 @@ public final class Document extends NodeImpl {
 
         return getLastHtmlElement((HtmlElement) lastChild);
     }
-
 
     /**
      * Return the cookie attribute.
@@ -527,7 +519,6 @@ public final class Document extends NodeImpl {
         return cookie;
     }
 
-
     /**
      * Return the value of the "location" property.
      * @return The value of the "location" property
@@ -535,7 +526,6 @@ public final class Document extends NodeImpl {
     public Location jsxGet_location() {
         return window_.jsxGet_location();
     }
-
 
     /**
      * Sets the value of the "location" property. The location's default property is "href",
@@ -549,7 +539,6 @@ public final class Document extends NodeImpl {
     public void jsxSet_location(final String location) throws IOException {
         window_.jsxSet_location(location);
     }
-
 
     /**
      * Return the value of the "images" property.
@@ -568,7 +557,6 @@ public final class Document extends NodeImpl {
         return images_;
     }
 
-
     /**
      * Return the value of the "referrer" property.
      * @return The value of the "referrer" property
@@ -583,7 +571,6 @@ public final class Document extends NodeImpl {
         }
     }
 
-
     /**
      * Return the value of the "URL" property.
      * @return The value of the "URL" property
@@ -591,7 +578,6 @@ public final class Document extends NodeImpl {
     public String jsxGet_URL() {
         return getHtmlPage().getWebResponse().getUrl().toExternalForm();
     }
-
 
     /**
      * Return the value of the "all" property.
@@ -609,7 +595,6 @@ public final class Document extends NodeImpl {
         }
         return all_;
     }
-
 
     /**
      * javascript function "open".
@@ -631,7 +616,6 @@ public final class Document extends NodeImpl {
         document.writeInCurrentDocument_ = false;
         return null;
     }
-
 
     /**
      * javascript function "close".
@@ -673,7 +657,6 @@ public final class Document extends NodeImpl {
     public Object jsxGet_defaultView() {
         return getWindow();
     }
-
 
     /**
      * Get the window in which this document is contained.
@@ -752,7 +735,6 @@ public final class Document extends NodeImpl {
         return att;
     }
 
-
     /**
      * Create a new DOM text node with the given data.
      *
@@ -779,7 +761,6 @@ public final class Document extends NodeImpl {
         }
         return result;
     }
-
 
     /**
      * Return the element with the specified id or null if that element could
@@ -819,7 +800,6 @@ public final class Document extends NodeImpl {
         }
         return result;
     }
-
 
     /**
      * Return all the elements with the specified tag name
@@ -1045,5 +1025,3 @@ public final class Document extends NodeImpl {
         return getWindow().jsxGet_frames();
     }
 }
-
-
