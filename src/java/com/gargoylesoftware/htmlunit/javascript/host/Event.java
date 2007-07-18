@@ -88,6 +88,21 @@ public class Event extends SimpleScriptable {
     /** The submit event type, triggered by "onreset" event handlers. */
     public static final String TYPE_RESET = "reset";
 
+    /** The mouse over event type, triggered by "onmouseover" event handlers. */
+    public static final String TYPE_MOUSE_OVER = "mouseover";
+
+    /** The mouse move event type, triggered by "onmousemove" event handlers. */
+    public static final String TYPE_MOUSE_MOVE = "mousemove";
+    
+    /** The mouse out event type, triggered by "onmouseout" event handlers. */
+    public static final String TYPE_MOUSE_OUT = "mouseout";
+
+    /** The mouse down event type, triggered by "onmousedown" event handlers. */
+    public static final String TYPE_MOUSE_DOWN = "mousedown";
+
+    /** The mouse up event type, triggered by "onmouseup" event handlers. */
+    public static final String TYPE_MOUSE_UP = "mouseup";
+
     private static final long serialVersionUID = 4050485607908455730L;
 
     private Object srcElement_;     // IE-only writeable equivalent of target.
