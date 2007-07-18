@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit;
 /**
  *  Utility methods for performing runtime assertions.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public final class Assert {

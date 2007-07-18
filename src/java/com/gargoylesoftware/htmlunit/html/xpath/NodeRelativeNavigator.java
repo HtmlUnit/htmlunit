@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * during evaluation.
  * </em>
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author Marc Guillemot
  * @author Mike Bowler
  * @see HtmlUnitXPath

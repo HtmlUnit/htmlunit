@@ -69,7 +69,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * In this example an overview page will be generated under the name myTest.html in the temp directory.<br>
  * <br>
  * <em>This class is only intended as an help during the conception.</em>
- * @version  $Revision$
+ * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */

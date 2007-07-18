@@ -43,7 +43,7 @@ import java.util.Map;
  *  An element that is returned for an html tag that is not supported by this
  *  framework.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>

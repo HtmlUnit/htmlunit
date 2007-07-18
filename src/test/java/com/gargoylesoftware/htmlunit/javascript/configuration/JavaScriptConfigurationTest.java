@@ -59,7 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Document;
 /**
  * Tests for JavaScriptConfiguration.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author Chris Erskine
  * @author Ahmed Ashour
  */

@@ -45,7 +45,7 @@ import java.util.Map;
  * this class is a base class for all HTML elements except these:
  * base, basefont, head, html, meta, param, script, style and title.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>

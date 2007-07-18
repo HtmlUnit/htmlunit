@@ -48,7 +48,7 @@ import org.apache.commons.httpclient.NameValuePair;
  * A simple WebResponse created from a string.  Content is assumed to be
  * of type text/html.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Brad Clarke

@@ -41,7 +41,7 @@ package com.gargoylesoftware.htmlunit;
  * A handler for javascript window.confirm().  Confirms are triggered when the javascript
  * method Window.confirm() is called.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public interface ConfirmHandler {

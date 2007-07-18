@@ -44,7 +44,7 @@ import java.net.URL;
  * Class to display version information about HtmlUnit.  This is the class
  * that will be executed if the jar file is run.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */

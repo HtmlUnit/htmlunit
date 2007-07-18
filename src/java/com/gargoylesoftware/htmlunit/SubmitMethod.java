@@ -43,7 +43,7 @@ import java.io.Serializable;
  *  A collection of constants that represent the various ways a page can be
  *  submitted
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */

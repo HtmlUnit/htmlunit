@@ -44,7 +44,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 /**
  * representation of a text node in the Html DOM
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Rodney Gitzel

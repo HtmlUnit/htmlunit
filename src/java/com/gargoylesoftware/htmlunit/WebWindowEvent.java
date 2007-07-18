@@ -42,7 +42,7 @@ import java.util.EventObject;
 /**
  * An event that will be fired when a WebWindow changes.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  */

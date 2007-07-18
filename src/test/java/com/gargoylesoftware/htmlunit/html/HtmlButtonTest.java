@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  *  Tests for HtmlButton
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Brad Clarke

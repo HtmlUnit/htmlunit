@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for JavaScriptConfiguration.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author Chris Erskine
  * @author Ahmed Ashour
  */

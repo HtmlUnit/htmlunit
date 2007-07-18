@@ -76,7 +76,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * Like all classes in this package, this class is not intended for direct use
  * and may change without notice.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  * @author David K. Taylor

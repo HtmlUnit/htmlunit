@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  *
  * @see org.jaxen.BaseXPath
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Mike Bowler
  * @author Marc Guillemot

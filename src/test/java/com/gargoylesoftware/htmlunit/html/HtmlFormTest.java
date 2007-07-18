@@ -62,7 +62,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 /**
  * Tests for {@link HtmlForm}.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
  * @author George Murnock

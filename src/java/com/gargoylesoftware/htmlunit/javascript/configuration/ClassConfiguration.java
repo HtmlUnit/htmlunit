@@ -46,7 +46,7 @@ import java.util.Set;
 /**
  * A container for all the javascript configuration information.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Chris Erskine
  * @author Ahmed Ashour

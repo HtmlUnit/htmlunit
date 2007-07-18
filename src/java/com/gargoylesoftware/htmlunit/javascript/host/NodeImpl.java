@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * The javascript object "NodeImpl" which is the base class for all DOM
  * objects.  This will typically wrap an instance of {@link DomNode}.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Barnaby Court

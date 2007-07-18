@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  *  Tests for HtmlResetInput
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */

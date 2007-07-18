@@ -42,7 +42,7 @@ import java.util.Map;
 /**
  * Wrapper for the HTML element "input" where type is "button".
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Daniel Gredler

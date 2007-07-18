@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for HtmlTable
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class HtmlTableTest extends WebTestCase {

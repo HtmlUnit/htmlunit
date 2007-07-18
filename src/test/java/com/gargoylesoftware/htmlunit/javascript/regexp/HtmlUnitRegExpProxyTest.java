@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.
- * @version  $Revision$
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class HtmlUnitRegExpProxyTest extends WebTestCase {

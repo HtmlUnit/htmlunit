@@ -45,7 +45,7 @@ import com.gargoylesoftware.base.testing.EventCatcher;
 /**
  *  Tests for WebClient
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class TopLevelWindowTest extends WebTestCase {

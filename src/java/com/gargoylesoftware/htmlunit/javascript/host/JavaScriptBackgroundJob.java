@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * 
- * @version  $Revision$
+ * @version $Revision$
  * @author Brad Clarke
  *
  */

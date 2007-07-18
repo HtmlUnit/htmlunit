@@ -44,7 +44,7 @@ import java.net.URLStreamHandler;
 /**
  *  Stream handler for javascript urls
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class Handler extends URLStreamHandler {

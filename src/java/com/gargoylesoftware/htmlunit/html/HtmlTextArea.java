@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
 /**
  *  Wrapper for the html element "textarea"
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:BarnabyCourt@users.sourceforge.net">Barnaby Court</a>
  * @author David K. Taylor

@@ -48,7 +48,7 @@ import org.apache.commons.logging.LogFactory;
  * used by htmlunit. The line and column may indicates the position of the problem detected
  * by the parser. This is only an indication and in some cases the position where
  * the problem has to be solved is located lines before.
- * @version  $Revision$
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public interface HTMLParserListener {

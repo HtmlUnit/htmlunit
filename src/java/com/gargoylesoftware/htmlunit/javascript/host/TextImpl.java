@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 /**
  * A javascript object for Text.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author David K. Taylor
  * @author Chris Erskine
  */

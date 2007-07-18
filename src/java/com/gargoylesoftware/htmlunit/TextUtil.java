@@ -47,7 +47,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * Utility methods relating to text.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Brad Clarke
  * @author Ahmed Ashour

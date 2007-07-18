@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  *  Tests for HtmlImageInput
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour

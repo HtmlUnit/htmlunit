@@ -47,7 +47,7 @@ import org.apache.commons.httpclient.HttpState;
  * An object that handles the actual communication portion of page
  * retrieval/submission.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Marc Guillemot

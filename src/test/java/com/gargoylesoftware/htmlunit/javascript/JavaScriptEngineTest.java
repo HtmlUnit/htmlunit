@@ -67,7 +67,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 /**
  * Tests for the Javascript engine
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author Darrell DeBoer

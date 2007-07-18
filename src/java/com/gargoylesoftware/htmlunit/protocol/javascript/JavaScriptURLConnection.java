@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.TextUtil;
 /**
  * A URLConnection for supporting javascript urls
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class JavaScriptURLConnection extends URLConnection {

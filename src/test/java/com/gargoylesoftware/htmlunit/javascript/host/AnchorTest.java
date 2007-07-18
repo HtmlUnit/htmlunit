@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for {@link Anchor}.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
  * @author Marc Guillemot
  */

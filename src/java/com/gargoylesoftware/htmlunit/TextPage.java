@@ -41,7 +41,7 @@ package com.gargoylesoftware.htmlunit;
  *  A generic page that will be returned for any text related content.
  *  Specifically any content types that start with "text/"
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  */

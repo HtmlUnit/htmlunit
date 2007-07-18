@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for {@link WebResponseImpl}.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */

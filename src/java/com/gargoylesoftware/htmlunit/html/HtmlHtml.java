@@ -42,7 +42,7 @@ import java.util.Map;
 /**
  *  A representation of an html element "html".
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author David K. Taylor
  * @author Ahmed Ashour
  */

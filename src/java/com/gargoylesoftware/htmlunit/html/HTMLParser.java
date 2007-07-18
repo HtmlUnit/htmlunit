@@ -71,7 +71,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * <em>Note that the parser currently does not handle CDATA or comment sections, i.e. these
  * do not appear in the resulting DOM tree</em>
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David K. Taylor
  * @author Chris Erskine

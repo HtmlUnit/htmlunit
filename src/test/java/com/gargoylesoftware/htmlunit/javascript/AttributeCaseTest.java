@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for {@link HtmlElement} attributes.
  * 
- * @version  $Revision$
+ * @version $Revision$
  * @author David D. Kilzer
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */

@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 /**
  * Wrapper for the DOM node CharacterData.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */

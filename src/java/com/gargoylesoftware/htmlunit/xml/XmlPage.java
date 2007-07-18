@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * A page that will be returned for response with content type "text/xml".
  * It doesn't implement itself {@link org.w3c.dom.Document} to allow to see the source of badly formed
  * xml responses.
- * @version  $Revision$
+ * @version $Revision$
  * @author Marc Guillemot
  * @author David K. Taylor
  */

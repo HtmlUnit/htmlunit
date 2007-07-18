@@ -41,7 +41,7 @@ package com.gargoylesoftware.htmlunit;
  * A handler for javascript window.prompt().  Confirms are triggered when the javascript
  * method Window.prompt() is called.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public interface PromptHandler {

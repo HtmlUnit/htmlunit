@@ -84,7 +84,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 /**
  *  An object that represents a web browser
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author Dominique Broeglin

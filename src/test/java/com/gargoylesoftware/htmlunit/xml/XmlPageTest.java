@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for {@link XmlPage}.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class XmlPageTest extends WebTestCase {

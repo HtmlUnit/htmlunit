@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 /**
  * A javascript object for a Location
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Marc Guillemot

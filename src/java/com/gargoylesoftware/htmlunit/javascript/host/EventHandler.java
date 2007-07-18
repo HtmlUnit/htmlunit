@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * Allows to wrap event handler code as Function object.
- * @version  $Revision$
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class EventHandler extends BaseFunction {

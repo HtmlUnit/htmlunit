@@ -41,7 +41,7 @@ import org.xml.sax.Attributes;
 
 /**
  * specification of a factory capable of creating HtmlElement objects
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */

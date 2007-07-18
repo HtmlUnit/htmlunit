@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for {@link HtmlSelect}.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Mike Williams
  * @author Marc Guillemot

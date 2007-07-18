@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * The javascript object that represents an option.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Chris Erskine

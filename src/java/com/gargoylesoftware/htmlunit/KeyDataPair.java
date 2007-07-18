@@ -42,7 +42,7 @@ import java.io.File;
 /**
  *  A holder for a key/value pair that represents a file to upload.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author Brad Clarke
  * @author David D. Kilzer
  * @author Mike Bowler

@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for IFrame.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class IFrameTest extends WebTestCase {

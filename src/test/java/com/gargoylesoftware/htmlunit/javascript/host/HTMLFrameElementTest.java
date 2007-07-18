@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for {@link HTMLFrameElement}.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Thomas Robbs

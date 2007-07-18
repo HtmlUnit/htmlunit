@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  *  Tests for TableElementCreator
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class TableElementCreatorTest extends WebTestCase {

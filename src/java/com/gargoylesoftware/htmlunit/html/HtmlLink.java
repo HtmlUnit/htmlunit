@@ -43,7 +43,7 @@ import java.util.Map;
  * Wrapper for the html element "link".  <b>Note:</b> This is not a clickable link,
  * that one is an HtmlAnchor
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>

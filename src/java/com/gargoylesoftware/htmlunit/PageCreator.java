@@ -45,7 +45,7 @@ import java.io.IOException;
  * and the page, usually by calling {@link WebWindow#setEnclosedPage(Page)}. This should
  * be done as early as possible, e.g. to allow for re-loading of pages during page parsing.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */

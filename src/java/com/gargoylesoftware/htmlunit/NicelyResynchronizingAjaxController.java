@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * are directly usefull for the user. To easily have a testable state, these calls
  * are performed synchron.
  * <span style="color:red">EXPERIMENTAL - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
- * @version  $Revision: 1165 $
+ * @version $Revision: 1165 $
  * @author Marc Guillemot
  */
 public class NicelyResynchronizingAjaxController extends AjaxController {

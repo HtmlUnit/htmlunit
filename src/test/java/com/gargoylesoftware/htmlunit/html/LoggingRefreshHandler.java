@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.RefreshHandler;
  * A handler for page refreshes that logs the refreshes but doesn't actually
  * perform any refreshes.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  */

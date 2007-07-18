@@ -68,7 +68,7 @@ import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
 /**
  * A container for all the javascript configuration information.
  * TODO - Need to add the logic to support the browser and javascript conditionals in the Class elements.
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Chris Erskine
  * @author Ahmed Ashour

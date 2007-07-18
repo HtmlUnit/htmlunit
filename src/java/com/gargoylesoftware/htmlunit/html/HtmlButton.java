@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.Page;
 /**
  *  Wrapper for the html element "button"
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>

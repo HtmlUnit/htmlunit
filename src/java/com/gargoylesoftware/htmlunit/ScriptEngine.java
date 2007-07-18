@@ -46,7 +46,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  *  An abstract base class for scripting engines.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Marc Guillemot

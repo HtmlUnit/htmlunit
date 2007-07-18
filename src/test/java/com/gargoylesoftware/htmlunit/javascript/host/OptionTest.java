@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.Option}.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class OptionTest extends WebTestCase {

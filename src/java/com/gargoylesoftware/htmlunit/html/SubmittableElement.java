@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
 /**
  *  An element that can have it's values sent to the server during a form submit
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  */

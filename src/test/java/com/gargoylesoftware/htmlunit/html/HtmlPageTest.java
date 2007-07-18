@@ -74,7 +74,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeLis
 /**
  * Tests for HtmlPage.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author David K. Taylor

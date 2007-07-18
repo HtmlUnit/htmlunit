@@ -43,7 +43,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
  *  A collection of constants that represent the various ways a form can be
  *  encoded when submitted
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author Brad Clarke
  */
 public final class FormEncodingType {

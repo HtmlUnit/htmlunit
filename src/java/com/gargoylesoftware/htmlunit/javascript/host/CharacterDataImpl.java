@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 /**
  * A javascript object for CharacterData.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author David K. Taylor
  * @author Chris Erskine
  */

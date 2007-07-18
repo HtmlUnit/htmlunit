@@ -43,7 +43,7 @@ import java.io.PrintStream;
 /**
  * Thrown if an object could not be instantiated for some reason.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class ObjectInstantiationException extends RuntimeException {

@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 /**
  *  Tests for HtmlFrameSet
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Hans Donner

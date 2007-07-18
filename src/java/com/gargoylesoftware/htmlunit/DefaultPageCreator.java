@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * also protected createXXXXPage() methods for creating the Page types HtmlUnit
  * already knows about for your custom content types. 
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author <a href="mailto:yourgod@users.sourceforge.net">Brad Clarke</a>

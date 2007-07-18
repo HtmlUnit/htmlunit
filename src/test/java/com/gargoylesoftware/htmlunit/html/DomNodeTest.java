@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode.DescendantElementsIterator;
 /**
  *  Tests for DomNode
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author Chris Erskine
  * @author Ahmed Ashour
  */

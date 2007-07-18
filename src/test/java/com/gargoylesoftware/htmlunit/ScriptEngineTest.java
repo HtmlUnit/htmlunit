@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
  * Tests that have to do with when the scripting engine is called.  Javascript
  * specific tests will be found elsewhere.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author David K. Taylor

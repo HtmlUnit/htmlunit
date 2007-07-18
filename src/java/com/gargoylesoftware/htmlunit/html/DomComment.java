@@ -42,7 +42,7 @@ import java.io.PrintWriter;
 /**
  * Wrapper for the DOM node Comment.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author Karel Kolman
  */
 public class DomComment extends DomCharacterData {

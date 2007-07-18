@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * applet, base, basefront, bdo, br, font, frame, frameset, head, html,
  * iframe, isindex, meta, param, script, style, and title.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author David K. Taylor
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>

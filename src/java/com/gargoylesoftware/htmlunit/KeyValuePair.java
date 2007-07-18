@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit;
 /**
  *  A container that holds a key and a value
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {

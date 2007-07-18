@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.Page;
 /**
  *  Wrapper for the html element "input"
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>

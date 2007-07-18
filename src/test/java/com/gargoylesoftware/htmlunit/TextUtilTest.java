@@ -44,7 +44,7 @@ import java.io.InputStreamReader;
 /**
  *  Tests for TextUtil.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public final class TextUtilTest extends WebTestCase {

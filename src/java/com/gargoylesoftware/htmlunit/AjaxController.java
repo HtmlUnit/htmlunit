@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * and avoid the necessity of waiting.
  *
  * <span style="color:red">EXPERIMENTAL - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
- * @version  $Revision: 1165 $
+ * @version $Revision: 1165 $
  * @author Marc Guillemot
  */
 public class AjaxController implements Serializable {

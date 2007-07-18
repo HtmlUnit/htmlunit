@@ -49,7 +49,7 @@ import com.gargoylesoftware.base.testing.RecursiveTestSuite;
  * only purpose is to initialize the RecursiveTestSuite properly and to
  * ensure that all logging is turned up to its highest level.
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class MainTestSuite extends RecursiveTestSuite {

@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 /**
  * The javascript object that represents a button (&lt;button type=...&gt;)
  *
- * @version  $Revision$
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  */

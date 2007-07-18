@@ -42,7 +42,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Provides some utilities for working on the Html document.
- * @version  $Revision$
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public final class Util {
