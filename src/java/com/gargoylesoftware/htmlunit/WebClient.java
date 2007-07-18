@@ -1672,6 +1672,7 @@ public class WebClient implements Serializable {
     public int getTimeout() {
         return timeout_;
     }
+    
     /**
      * Sets the timeout of the WebConnection. Set to zero (the default) for an infinite wait.  
      * 

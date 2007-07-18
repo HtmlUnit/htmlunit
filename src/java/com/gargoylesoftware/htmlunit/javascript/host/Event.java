@@ -114,7 +114,7 @@ public class Event extends SimpleScriptable {
      * Creates a new event instance.
      * @param domNode The DOM node that triggered the event.
      * @param type The event type.
-     * @param shiftKey true if SHIFT is presssed
+     * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
      */
@@ -139,7 +139,7 @@ public class Event extends SimpleScriptable {
      * @param domNode the DOM node that triggered the event.
      * @param type The event type.
      * @param keyCode The key code associated with the event.
-     * @param shiftKey true if SHIFT is presssed
+     * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
      */

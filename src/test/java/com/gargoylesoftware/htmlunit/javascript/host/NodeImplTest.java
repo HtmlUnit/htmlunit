@@ -89,6 +89,7 @@ public class NodeImplTest extends WebTestCase {
         final String[] expectedAlerts = {"true"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
+    
     /**
      * @throws Exception on test failure
      */

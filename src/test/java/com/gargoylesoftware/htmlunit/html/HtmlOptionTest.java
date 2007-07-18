@@ -115,6 +115,7 @@ public class HtmlOptionTest extends WebTestCase {
         assertEquals("Number Two", option2.getValueAttribute());
 
     }
+    
     /**
      * @throws Exception if the test fails
      */

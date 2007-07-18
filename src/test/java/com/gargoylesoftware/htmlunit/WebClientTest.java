@@ -644,6 +644,7 @@ public class WebClientTest extends WebTestCase {
         public CollectingPageCreator( final List list ) {
             collectedPages_ = list;
         }
+        
         /**
          * Create a page
          * @param webResponse The web response
@@ -1406,6 +1407,7 @@ public class WebClientTest extends WebTestCase {
         WebClient.setIgnoreOutsideContent(true);
         assertTrue("Ignore content did not get set", WebClient.getIgnoreOutsideContent());
     }
+    
     /**
      * Unset the static items set in tests here
      * @throws Exception if superclass throws

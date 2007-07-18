@@ -114,6 +114,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
         newPage = HTMLParser.parse(webResponse, webWindow);
         return newPage;
     }
+    
     /**
      * Create a JavaScriptPage for this WebResponse
      * 

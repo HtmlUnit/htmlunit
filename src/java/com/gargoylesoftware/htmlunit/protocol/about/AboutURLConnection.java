@@ -55,6 +55,7 @@ public class AboutURLConnection extends URLConnection {
     public AboutURLConnection(final URL newUrl) {
         super(newUrl);
     }
+    
     /**
      * @see java.net.URLConnection#connect()
      */
