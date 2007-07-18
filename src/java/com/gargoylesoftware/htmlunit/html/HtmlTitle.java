@@ -51,6 +51,8 @@ import java.util.Map;
  */
 public class HtmlTitle extends HtmlElement {
 
+    private static final long serialVersionUID = 5463879100333678376L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "title";
 

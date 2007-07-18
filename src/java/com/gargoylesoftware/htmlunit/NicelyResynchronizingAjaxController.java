@@ -55,8 +55,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  */
 public class NicelyResynchronizingAjaxController extends AjaxController {
+
+    private static final long serialVersionUID = -5406000795046341395L;
+
     private final WeakReference originatedThread_;
-    
+
     NicelyResynchronizingAjaxController() {
         originatedThread_ = new WeakReference(Thread.currentThread());
     }

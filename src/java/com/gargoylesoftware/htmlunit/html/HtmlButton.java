@@ -57,6 +57,8 @@ import com.gargoylesoftware.htmlunit.Page;
  */
 public class HtmlButton extends FocusableElement implements DisabledElement, SubmittableElement {
 
+    private static final long serialVersionUID = 4828725767615187345L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "button";
 

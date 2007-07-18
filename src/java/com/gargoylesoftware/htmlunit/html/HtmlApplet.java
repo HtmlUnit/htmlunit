@@ -50,6 +50,8 @@ import java.util.Map;
  */
 public class HtmlApplet extends StyledElement {
 
+    private static final long serialVersionUID = -2868018454095564791L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "applet";
 

@@ -50,6 +50,8 @@ import java.util.Map;
  */
 public class HtmlTextDirection extends ClickableElement {
 
+    private static final long serialVersionUID = 7234953475940770872L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "dir";
 

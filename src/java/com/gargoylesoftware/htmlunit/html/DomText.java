@@ -51,6 +51,8 @@ import org.apache.commons.lang.StringEscapeUtils;
  */
 public class DomText extends DomCharacterData {
 
+    private static final long serialVersionUID = 6589779086230288951L;
+
     /** the symbolic node name */
     public static final String NODE_NAME = "#text";
 

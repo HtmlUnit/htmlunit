@@ -57,6 +57,8 @@ import java.net.URL;
  */
 public class ImmediateRefreshHandler implements RefreshHandler, Serializable  {
 
+    private static final long serialVersionUID = 529942009235309224L;
+
     /**
      * Immediately refreshes the specified page using the specified URL.
      * @param page The page that is going to be refreshed.

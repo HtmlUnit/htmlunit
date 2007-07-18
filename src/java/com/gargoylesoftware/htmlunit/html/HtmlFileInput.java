@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.KeyDataPair;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 
 /**
- *  Wrapper for the html element "input"
+ * Wrapper for the HTML element "input".
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -54,6 +54,8 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
  * @author Ahmed Ashour
  */
 public class HtmlFileInput extends HtmlInput {
+
+    private static final long serialVersionUID = 7925479292349207154L;
 
     /**
      *  Create an instance

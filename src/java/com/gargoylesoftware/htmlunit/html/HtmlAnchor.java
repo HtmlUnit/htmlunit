@@ -58,6 +58,8 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  */
 public class HtmlAnchor extends FocusableElement {
 
+    private static final long serialVersionUID = 7968778206454737178L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "a";
 

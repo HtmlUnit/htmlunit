@@ -64,6 +64,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Script;
  */
 public class HtmlScript extends HtmlElement {
 
+    private static final long serialVersionUID = 5736570536821513938L;
+
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "script";
 

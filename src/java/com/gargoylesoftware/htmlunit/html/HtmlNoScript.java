@@ -50,6 +50,8 @@ import java.util.Map;
  */
 public class HtmlNoScript extends ClickableElement {
 
+    private static final long serialVersionUID = -8157919390565102613L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "noscript";
 

@@ -50,6 +50,8 @@ import java.io.Serializable;
  */
 public class TopLevelWindow extends WebWindowImpl implements Serializable  {
 
+    private static final long serialVersionUID = 2448888802967514906L;
+
     private WebWindow opener_;
 
     /**

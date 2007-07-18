@@ -60,6 +60,8 @@ import org.apache.commons.lang.StringUtils;
  */
 public class WebResponseData implements Serializable {
 
+    private static final long serialVersionUID = 2979956380280496543L;
+
     private byte[] body_;
     private int statusCode_;
     private String statusMessage_;

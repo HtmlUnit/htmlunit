@@ -49,6 +49,8 @@ import java.io.Serializable;
  */
 public final class SubmitMethod implements Serializable {
 
+    private static final long serialVersionUID = 6202782549629170616L;
+
     /**
      *  POST
      */

@@ -58,6 +58,8 @@ import org.apache.commons.lang.StringUtils;
  */
 public class HtmlImageInput extends HtmlInput {
 
+    private static final long serialVersionUID = -2955826367201282767L;
+
     // For click with x, y position.
     private boolean wasPositionSpecified_ = false;
     private int xPosition_;

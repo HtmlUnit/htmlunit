@@ -48,6 +48,8 @@ import java.util.EventObject;
  */
 public class DomChangeEvent extends EventObject {
 
+    private static final long serialVersionUID = -7301406882254534491L;
+
     private final DomNode changedNode_;
 
     /**

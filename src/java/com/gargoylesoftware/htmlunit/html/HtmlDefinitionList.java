@@ -50,6 +50,8 @@ import java.util.Map;
  */
 public class HtmlDefinitionList extends ClickableElement {
 
+    private static final long serialVersionUID = -943498809957878042L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "dl";
 

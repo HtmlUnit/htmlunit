@@ -51,6 +51,8 @@ import java.util.Map;
  */
 public class HtmlFont extends StyledElement {
 
+    private static final long serialVersionUID = -3134589337466409730L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "font";
 

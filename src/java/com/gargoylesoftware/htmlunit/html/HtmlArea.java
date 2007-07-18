@@ -66,6 +66,8 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  */
 public class HtmlArea extends FocusableElement {
 
+    private static final long serialVersionUID = 8933911141016200386L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "area";
 

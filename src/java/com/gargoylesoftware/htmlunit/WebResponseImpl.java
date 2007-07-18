@@ -61,6 +61,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WebResponseImpl implements WebResponse, Serializable {
 
+    private static final long serialVersionUID = 2842434739251092348L;
+
     private final transient Log log_ = LogFactory.getLog(WebResponseImpl.class);
     private URL url_;
     private SubmitMethod requestMethod_;

@@ -50,6 +50,8 @@ import java.util.Map;
  */
 public class HtmlDeletedText extends ClickableElement {
 
+    private static final long serialVersionUID = 6790105329776696420L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "del";
 

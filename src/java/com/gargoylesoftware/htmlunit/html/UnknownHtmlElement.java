@@ -52,6 +52,8 @@ import java.util.Map;
  */
 public class UnknownHtmlElement extends ClickableElement {
 
+    private static final long serialVersionUID = 5504784230513084888L;
+
     /**
      *  Create an instance
      *

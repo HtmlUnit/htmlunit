@@ -50,6 +50,8 @@ import java.util.Map;
  */
 public class HtmlCenter extends ClickableElement {
 
+    private static final long serialVersionUID = 3248794004926373269L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "center";
 

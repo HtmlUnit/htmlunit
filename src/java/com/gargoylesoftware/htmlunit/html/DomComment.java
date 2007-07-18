@@ -46,7 +46,9 @@ import java.io.PrintWriter;
  * @author Karel Kolman
  */
 public class DomComment extends DomCharacterData {
-    
+
+    private static final long serialVersionUID = -7728247579175928593L;
+
     /** the symbolic node name */
     public static final String NODE_NAME = "#comment";
 

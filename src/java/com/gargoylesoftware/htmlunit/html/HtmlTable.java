@@ -47,7 +47,7 @@ import java.util.NoSuchElementException;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 
 /**
- *  Wrapper for the html element "table"
+ * Wrapper for the HTML element "table".
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -56,6 +56,8 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
  * @author Ahmed Ashour
  */
 public class HtmlTable extends ClickableElement {
+
+    private static final long serialVersionUID = 2484055580262042798L;
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "table";

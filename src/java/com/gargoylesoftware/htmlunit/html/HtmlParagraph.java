@@ -51,6 +51,8 @@ import java.util.Map;
  */
 public class HtmlParagraph extends ClickableElement {
 
+    private static final long serialVersionUID = 6276828219596081566L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "p";
 

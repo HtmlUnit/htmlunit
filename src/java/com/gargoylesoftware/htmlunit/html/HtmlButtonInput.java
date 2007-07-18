@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 /**
- *  Wrapper for the html element "input" where type is "button"
+ * Wrapper for the HTML element "input" where type is "button".
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -49,6 +49,8 @@ import java.util.Map;
  * @author Ahmed Ashour
  */
 public class HtmlButtonInput extends HtmlInput {
+
+    private static final long serialVersionUID = 6218252462789212481L;
 
     /**
      *  Create an instance

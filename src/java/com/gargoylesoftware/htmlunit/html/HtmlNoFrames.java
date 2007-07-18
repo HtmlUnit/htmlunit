@@ -50,6 +50,8 @@ import java.util.Map;
  */
 public class HtmlNoFrames extends ClickableElement {
 
+    private static final long serialVersionUID = 4274843483412977205L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "noframes";
 

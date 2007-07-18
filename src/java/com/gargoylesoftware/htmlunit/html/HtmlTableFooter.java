@@ -49,6 +49,8 @@ import java.util.Map;
  */
 public class HtmlTableFooter extends TableRowGroup {
 
+    private static final long serialVersionUID = -6442808304225679408L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "tfoot";
 

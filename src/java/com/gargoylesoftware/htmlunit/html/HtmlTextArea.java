@@ -56,6 +56,8 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
  */
 public class HtmlTextArea extends FocusableElement implements DisabledElement, SubmittableElement {
 
+    private static final long serialVersionUID = 4572856255042499634L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "textarea";
 

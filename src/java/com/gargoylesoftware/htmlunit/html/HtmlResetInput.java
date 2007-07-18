@@ -53,6 +53,8 @@ import java.util.Map;
  */
 public class HtmlResetInput extends HtmlInput {
 
+    private static final long serialVersionUID = 1055766612574450754L;
+
     /**
      *  Create an instance
      *

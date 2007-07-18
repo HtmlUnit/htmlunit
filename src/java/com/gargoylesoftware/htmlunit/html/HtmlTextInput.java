@@ -51,6 +51,8 @@ import java.util.Map;
  */
 public class HtmlTextInput extends HtmlInput {
 
+    private static final long serialVersionUID = -2473799124286935674L;
+
     /**
      *  Create an instance
      *

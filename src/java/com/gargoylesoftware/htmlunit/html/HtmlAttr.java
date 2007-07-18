@@ -48,6 +48,9 @@ import java.util.Map;
  * @author Denis N. Antonioli
  */
 public class HtmlAttr extends DomNode implements Map.Entry {
+
+    private static final long serialVersionUID = 4832218455328064213L;
+
     private final Map.Entry wrappedMappedEntry_;
 
     /**

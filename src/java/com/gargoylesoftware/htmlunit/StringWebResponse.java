@@ -56,6 +56,8 @@ import org.apache.commons.httpclient.NameValuePair;
  */
 public class StringWebResponse extends WebResponseImpl {
 
+    private static final long serialVersionUID = 8001886227379566491L;
+
     /**
      * Helper method for constructors. Converts the passed string into
      * WebResponseData with other defaults specified.

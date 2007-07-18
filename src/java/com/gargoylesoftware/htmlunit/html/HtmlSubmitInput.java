@@ -47,7 +47,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringEscapeUtils;
 
 /**
- *  Wrapper for the html element "input"
+ * Wrapper for the HTML element "input".
  *
  * @version  $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -57,6 +57,8 @@ import org.apache.commons.lang.StringEscapeUtils;
  * @author Ahmed Ashour
  */
 public class HtmlSubmitInput extends HtmlInput {
+
+    private static final long serialVersionUID = -615974535731910492L;
 
     /**
      * Value to use if no specified <tt>value</tt> attribute.

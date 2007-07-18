@@ -50,6 +50,8 @@ import java.util.Map;
  */
 public class HtmlOrderedList extends ClickableElement {
 
+    private static final long serialVersionUID = -6804521464322433501L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "ol";
 

@@ -91,6 +91,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  */
 public class JavaScriptEngine extends ScriptEngine implements Serializable {
 
+    private static final long serialVersionUID = -5414040051465432088L;
+
     private static final ThreadLocal javaScriptRunning_ = new ThreadLocal();
 
     /**

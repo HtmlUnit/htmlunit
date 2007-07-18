@@ -50,6 +50,8 @@ import java.util.Map;
  */
 public class HtmlHeader1 extends ClickableElement {
 
+    private static final long serialVersionUID = 5846396728739967656L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "h1";
 

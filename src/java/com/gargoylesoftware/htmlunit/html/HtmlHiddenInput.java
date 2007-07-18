@@ -52,6 +52,8 @@ import java.util.Map;
  */
 public class HtmlHiddenInput extends HtmlInput {
 
+    private static final long serialVersionUID = -8139303691659609858L;
+
     /**
      * Create an instance.
      * @param  page The page that contains this element

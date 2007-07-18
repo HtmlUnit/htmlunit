@@ -80,6 +80,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  */
 public class HtmlForm extends ClickableElement {
 
+    private static final long serialVersionUID = 5338964478788825866L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "form";
 

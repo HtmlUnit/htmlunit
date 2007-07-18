@@ -50,6 +50,8 @@ import java.util.Map;
  */
 public class HtmlInsertedText extends ClickableElement {
 
+    private static final long serialVersionUID = -1385486713192118686L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "ins";
 

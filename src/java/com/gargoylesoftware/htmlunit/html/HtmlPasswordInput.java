@@ -51,6 +51,8 @@ import java.util.Map;
  */
 public class HtmlPasswordInput extends HtmlInput {
 
+    private static final long serialVersionUID = -1074283471317076942L;
+
     /**
      * Create an instance.
      * @param  page The page that contains this element

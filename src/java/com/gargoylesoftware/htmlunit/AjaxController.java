@@ -52,6 +52,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class AjaxController implements Serializable {
 
+    private static final long serialVersionUID = 2170842485774504546L;
+
     /**
      * Gets notified of an AJAX call to determine how it should be processed
      * @param page the page the request comes from
@@ -63,4 +65,5 @@ public class AjaxController implements Serializable {
             final boolean async) {
         return !async;
     }
+
 }

@@ -55,6 +55,8 @@ import com.gargoylesoftware.htmlunit.Page;
  */
 public class HtmlOption extends ClickableElement implements DisabledElement {
 
+    private static final long serialVersionUID = 8995198439134305753L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "option";
 

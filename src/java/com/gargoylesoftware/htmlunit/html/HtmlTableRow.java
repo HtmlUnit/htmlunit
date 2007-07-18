@@ -55,6 +55,8 @@ import java.util.NoSuchElementException;
  */
 public class HtmlTableRow extends ClickableElement {
 
+    private static final long serialVersionUID = 1296770669696592851L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "tr";
 

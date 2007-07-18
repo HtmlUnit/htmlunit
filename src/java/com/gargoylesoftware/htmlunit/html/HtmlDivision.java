@@ -50,6 +50,8 @@ import java.util.Map;
  */
 public class HtmlDivision extends ClickableElement {
 
+    private static final long serialVersionUID = -8669455470526154631L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "div";
 

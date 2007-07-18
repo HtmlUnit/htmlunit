@@ -49,6 +49,8 @@ import java.util.Map;
  */
 public class HtmlTableBody extends TableRowGroup {
 
+    private static final long serialVersionUID = 676435852636735076L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "tbody";
 

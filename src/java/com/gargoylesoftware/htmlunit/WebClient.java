@@ -103,6 +103,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  */
 public class WebClient implements Serializable {
 
+    private static final long serialVersionUID = -7214321203864969635L;
+
     private transient WebConnection webConnection_;
     private boolean printContentOnFailingStatusCode_ = true;
     private boolean throwExceptionOnFailingStatusCode_ = true;

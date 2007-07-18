@@ -50,6 +50,8 @@ import java.util.Map;
  */
 public class HtmlLegend extends ClickableElement {
 
+    private static final long serialVersionUID = -3143196346930065671L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "legend";
 

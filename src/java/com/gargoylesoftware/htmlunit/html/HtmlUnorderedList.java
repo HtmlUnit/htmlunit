@@ -50,6 +50,8 @@ import java.util.Map;
  */
 public class HtmlUnorderedList extends ClickableElement {
 
+    private static final long serialVersionUID = -6921066357090632169L;
+
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "ul";
 

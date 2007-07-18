@@ -91,6 +91,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  */
 public final class HtmlPage extends DomNode implements Page, Cloneable {
 
+    private static final long serialVersionUID = 1779746292119944291L;
+
     private final WebClient webClient_;
     private       String originalCharset_ = null;
     private final WebResponse webResponse_;

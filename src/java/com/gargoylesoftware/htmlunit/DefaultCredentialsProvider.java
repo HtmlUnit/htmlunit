@@ -68,6 +68,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DefaultCredentialsProvider implements CredentialsProvider, Serializable  {
 
+    private static final long serialVersionUID = 1036331144926557053L;
+
     private final Map credentials_ = new HashMap();
     private final Map proxyCredentials_ = new HashMap();
     private final Set answerMarks_ = Collections.synchronizedSortedSet(new TreeSet());
