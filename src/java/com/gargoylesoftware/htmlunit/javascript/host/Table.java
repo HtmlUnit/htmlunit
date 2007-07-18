@@ -213,7 +213,7 @@ public class Table extends RowContainer {
      * MSDN Documentation</a>
      */
     public void jsxFunction_refresh() {
-        //empty implementation
+        // Empty: this method only affects rendering, which we don't care about.
     }
 
     /**
