@@ -2095,8 +2095,8 @@ public class WindowTest extends WebTestCase {
         webClient.setWebConnection( webConnection );
 
         webClient.getPage(URL_FIRST);
-        final String[] expectedAlersts = {"1"};
-        assertEquals(expectedAlersts, collectedAlerts);
+        final String[] expectedAlerts = {"1"};
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

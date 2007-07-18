@@ -1,4 +1,4 @@
-// permits to generate html file testing that the generated alerst are as expected
+// permits us to generate an html file testing that the generated alerts are as expected
 
 var htmlunitReserved_i = 0;
 function htmlunitReserved_catchedAlert(_str)
