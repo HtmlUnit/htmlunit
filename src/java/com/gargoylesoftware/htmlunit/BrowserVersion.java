@@ -386,18 +386,21 @@ public class BrowserVersion implements Serializable {
     public void setUserLanguage(final String userLanguage) {
         userLanguage_ = userLanguage;
     }
+    
     /**
      * @param browserVersion The browserVersion to set.
      */
     public void setBrowserVersion(final float browserVersion) {
         browserVersionNumeric_ = browserVersion;
     }
+    
     /**
      * @return Returns the browserVersionNumeric.
      */
     public float getBrowserVersionNumeric() {
         return browserVersionNumeric_;
     }
+    
     /**
      * @return Returns the javaScriptVersionNumeric.
      */

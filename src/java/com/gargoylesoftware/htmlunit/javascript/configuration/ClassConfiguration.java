@@ -175,6 +175,7 @@ public final class ClassConfiguration {
     public Set functionKeys() {
         return functionMap_.keySet();
     }
+    
     /**
      * Add the function to the configuration
      * @param name - Name of the function
@@ -355,6 +356,7 @@ public final class ClassConfiguration {
     public boolean isJsObject() {
         return jsObject_;
     }
+    
     /**
      * Class used to contain the property information if the property is readable, writeable and the
      * methods that implement the get and set functions.

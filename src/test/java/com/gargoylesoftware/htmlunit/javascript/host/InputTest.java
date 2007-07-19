@@ -327,6 +327,7 @@ public class InputTest extends WebTestCase {
         final HtmlForm form = page.getFormByName("form1");
         form.submit();
     }
+    
     /**
      * @throws Exception if the test fails
      */

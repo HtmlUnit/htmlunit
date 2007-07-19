@@ -316,6 +316,9 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="6"/>
         </property>
+        <property name="currentStyle" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="5"/>
+        </property>
         <property name="disabled" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
@@ -925,6 +928,9 @@
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="focus"/>
+        <function name="getComputedStyle">
+            <browser name="Netscape"/>
+        </function>
         <function name="moveBy"/>
         <function name="moveTo"/>
         <function name="open"/>

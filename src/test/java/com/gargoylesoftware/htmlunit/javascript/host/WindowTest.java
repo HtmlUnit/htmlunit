@@ -1032,6 +1032,7 @@ public class WindowTest extends WebTestCase {
         };
         assertEquals( expectedAlerts, collectedAlerts );
     }
+    
     /**
      * Variables that are defined inside javascript should be accessible through the
      * window object (ie window.myVariable).  Test that this works.
@@ -1763,6 +1764,7 @@ public class WindowTest extends WebTestCase {
         loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+    
     /**
      * @throws Exception If the test fails.
      */
@@ -1778,6 +1780,7 @@ public class WindowTest extends WebTestCase {
 
         loadPage(content);
     }
+    
     /**
      * Open a window with only an image for content, then try to set focus to it.
      *
@@ -2164,6 +2167,39 @@ public class WindowTest extends WebTestCase {
         ((ClickableElement) page.getHtmlElementById("theDiv")).click();
 
         final String[] expectedAlerts = {"123", "captured"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testGetComputedStyle() throws Exception {
+        testGetComputedStyle(BrowserVersion.MOZILLA_1_0);
+        try {
+            testGetComputedStyle(BrowserVersion.INTERNET_EXPLORER_6_0);
+            fail("'getComputedStyle' is not defined for IE");
+        } catch(Exception e) {
+            //expected
+        }
+    }
+
+    private void testGetComputedStyle(final BrowserVersion browserVersion) throws Exception {
+        final String content = "<html>" +
+                "<head>\n" +
+                "<script>\n" +
+                "  function test() {\n" +
+                "    var e = document.getElementById('myDiv');\n" +
+                "    alert(window.getComputedStyle(e,null).color);\n" +
+                "  }\n" +
+                "</script>\n" +
+                "</head>\n" +
+                "<body onload='test()'>\n" +
+                "<div id='myDiv'></div>\n" +
+                "</body></html>\n";
+        
+        final String[] expectedAlerts = {""};
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

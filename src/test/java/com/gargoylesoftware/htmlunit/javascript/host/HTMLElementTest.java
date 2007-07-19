@@ -1409,4 +1409,36 @@ public class HTMLElementTest extends WebTestCase {
         loadPage(browser, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+    
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testCurrentStyle() throws Exception {
+        testCurrentStyle(BrowserVersion.INTERNET_EXPLORER_6_0);
+        try {
+            testCurrentStyle(BrowserVersion.MOZILLA_1_0);
+            fail("'currentStyle' is defined for only IE");
+        } catch(Exception e) {
+            //expected
+        }
+    }
+    
+    private void testCurrentStyle(final BrowserVersion browserVersion) throws Exception {
+        final String content = "<html>" +
+                "<head>\n" +
+                "<script>\n" +
+                "  function test() {\n" +
+                "    alert( document.getElementById('myDiv').currentStyle.color );\n" +
+                "  }\n" +
+                "</script>\n" +
+                "</head>\n" +
+                "<body onload='test()'>\n" +
+                "<div id='myDiv'></div>\n" +
+                "</body></html>\n";
+        
+        final String[] expectedAlerts = {""};
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

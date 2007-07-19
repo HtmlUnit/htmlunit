@@ -68,6 +68,7 @@ class EventListenersContainer {
             }
         }
     }
+    
     private final Map eventHandlers_ = new HashMap();
     private final SimpleScriptable jsNode_;
 

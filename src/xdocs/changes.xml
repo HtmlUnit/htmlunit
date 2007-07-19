@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="asashour" id="1756277">
+                JavaScript: add basic support for element.currentStyle and window.getComputedStyle.
+            </action>
             <action type="update" dev="asashour" id="1756617" due-to="Matt Ryall">
                 BrowserVersion: add equals() and hashCode().
             </action>

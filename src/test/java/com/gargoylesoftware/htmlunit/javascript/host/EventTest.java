@@ -308,6 +308,7 @@ public class EventTest extends WebTestCase {
         final String[] expectedAlerts = {"true"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
+    
     private void onClickPageTest(final String content, final List expectedAlerts) throws Exception, IOException {
         onClickPageTest( BrowserVersion.getDefault(), content, expectedAlerts );
     }

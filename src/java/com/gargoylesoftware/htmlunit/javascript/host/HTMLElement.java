@@ -159,6 +159,15 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     }
 
     /**
+     * Return the current style object for this element.
+     *
+     * @return The style object
+     */
+    public Object jsxGet_currentStyle() {
+        return style_;
+    }
+
+    /**
      * Set the DOM node that corresponds to this javascript object
      * @param domNode The DOM node
      */

@@ -150,6 +150,7 @@ public class ClassConfigurationTest extends WebTestCase {
         config2.setBrowser("test", "Netscape");
         assertTrue("Should be equal with browser added", config1.equals(config2));        
     }
+    
     /**
      * Test equality on a class configuration mis-matched browsers
      *
@@ -214,15 +215,15 @@ public class ClassConfigurationTest extends WebTestCase {
          */
         public void jsxFunction_testFunction() {
         }
+        
         /**
-         * 
          * @return boolean
          */
         public boolean jsxGet_test() {
             return test_;
         }
+
         /**
-         * 
          * @return boolean
          */
         public boolean jsxGet_getterOnly() {
@@ -230,7 +231,6 @@ public class ClassConfigurationTest extends WebTestCase {
         }
 
         /**
-         * 
          * @param testFlag - test value
          */
         public void jsxSet_test(final boolean testFlag) {

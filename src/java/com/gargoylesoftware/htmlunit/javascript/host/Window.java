@@ -181,7 +181,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param message The message
      * @return true if ok was pressed, false if cancel was pressed
      */
-    public String jsxFunction_prompt( final String message ) {
+    public String jsxFunction_prompt(final String message) {
         final PromptHandler handler = getWebWindow().getWebClient().getPromptHandler();
         if( handler == null ) {
             getLog().warn("window.prompt(\""+message+"\") no prompt handler installed");
@@ -1028,5 +1028,18 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public void jsxFunction_captureEvents(final String type) {
         // nothing
+    }
+
+    /**
+     * Returns computed style of the element. Computed style represents the final computed values
+     * of all CSS properties for the element.
+     * 
+     * The current implementation returns the element 'style' property.
+     * 
+     * @param element the element
+     * @param pseudoElt is a string specifying the pseudo-element to match, can be null.
+     */
+    public Object jsxFunction_getComputedStyle(final NodeImpl element, String pseudoElt) {
+        return ((HTMLElement)element).jsxGet_style();
     }
 }

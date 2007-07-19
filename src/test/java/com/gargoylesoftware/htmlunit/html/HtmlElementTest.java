@@ -385,6 +385,7 @@ public class HtmlElementTest extends WebTestCase {
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
         assertEquals("myTitle" + 'a' + 'a', p1.getAttributeValue("title"));
     }
+    
     /**
      * @throws Exception If the test fails
      */

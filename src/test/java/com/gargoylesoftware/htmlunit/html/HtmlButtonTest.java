@@ -195,6 +195,7 @@ public class HtmlButtonTest extends WebTestCase {
         assertEquals( "foo", ((HtmlPasswordInput)page.getHtmlElementById("password1")).getValueAttribute());
         assertEquals( "", ((HtmlIsIndex)page.getHtmlElementById("isindex1")).getValue());
     }
+    
     /**
      * @throws Exception if the test fails
      */

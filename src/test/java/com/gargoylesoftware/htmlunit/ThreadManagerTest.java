@@ -65,6 +65,7 @@ public class ThreadManagerTest extends WebTestCase {
     private void startTimedTest() {
         startTime_ = System.currentTimeMillis();
     }
+    
     private void assertMaxTestRunTime(final long maxRunTimeMilliseconds) {
         final long endTime = System.currentTimeMillis();
         final long runTime = endTime - startTime_;

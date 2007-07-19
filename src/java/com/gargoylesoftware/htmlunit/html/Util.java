@@ -189,10 +189,12 @@ abstract class NodeIterator implements Iterator {
     public NodeIterator(final DomNode contextNode) {
         node_ = getFirstNode(contextNode);
     }
+    
     /** @inheritDoc Iterator#hasNext() */
     public boolean hasNext() {
         return (node_ != null);
     }
+    
     /** @inheritDoc Iterator#next() */
     public Object next() {
         if (node_ == null) {
@@ -202,10 +204,12 @@ abstract class NodeIterator implements Iterator {
         node_ = getNextNode(node_);
         return ret;
     }
+    
     /** @inheritDoc Iterator#remove() */
     public void remove() {
         throw new UnsupportedOperationException();
     }
+    
     /**
      * Get the first node for iteration.
      *
@@ -217,6 +221,7 @@ abstract class NodeIterator implements Iterator {
      * @see #getNextNode
      */
     protected abstract DomNode getFirstNode(final DomNode contextNode);
+    
     /**
      * Get the next node for iteration.
      *

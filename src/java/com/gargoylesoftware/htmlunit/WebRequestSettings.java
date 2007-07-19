@@ -211,6 +211,7 @@ public class WebRequestSettings {
     public void setSubmitMethod(final SubmitMethod submitMethod) {
         submitMethod_ = submitMethod;
     }
+    
     /**
      * @return Returns the additionalHeaders.
      */
@@ -240,6 +241,7 @@ public class WebRequestSettings {
     public CredentialsProvider getCredentialsProvider() {
         return credentialsProvider_;
     }
+    
     /**
      * @param credentialsProvider The credentialProvider to set.
      */

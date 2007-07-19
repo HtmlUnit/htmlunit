@@ -65,6 +65,7 @@ public class Version {
 
         System.out.println("Version: "+getProductVersion());
     }
+    
     private void runSanityCheck() throws Exception {
         final WebClient webClient = new WebClient();
         final HtmlPage page = (HtmlPage)webClient.getPage(

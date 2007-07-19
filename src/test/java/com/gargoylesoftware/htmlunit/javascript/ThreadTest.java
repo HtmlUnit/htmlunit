@@ -102,6 +102,7 @@ public class ThreadTest extends WebTestCase {
         }
         return suite;
     }
+    
     /** A test object for threads*/
     private static class TestThread extends Thread {
 
