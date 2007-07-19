@@ -41,7 +41,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import org.xml.sax.EntityResolver;
@@ -605,4 +607,21 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             configuration.propertyExists(Document.class, "noreadyState"));
     }
 
+    /**
+     * Test if configuration map expands with each new instance of BrowserVersion used.
+     * 
+     * @throws Exception If the test fails
+     */
+    public void testConfigurationMapExpands() throws Exception {
+        // get a reference to the leaky map
+        final Field field = JavaScriptConfiguration.class.getDeclaredField("ConfigurationMap_");
+        field.setAccessible(true);
+        final HashMap leakyMap = (HashMap) field.get(null);
+
+        for (int i = 0; i < 3; i++) {
+            final BrowserVersion browserVersion = new BrowserVersion("App", "Version", "User agent", "1.2", 1);
+            JavaScriptConfiguration.getInstance(browserVersion);
+        }
+        assertEquals(1, leakyMap.size());
+    }
 }
