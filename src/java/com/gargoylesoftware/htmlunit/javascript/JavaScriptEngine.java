@@ -226,7 +226,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
         final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
         window.associateValue("custom_eval", jsCustomEval);
         
-        for( final Iterator classnames = jsConfig.keySet().iterator(); classnames.hasNext(); ) {
+        for( final Iterator classnames = jsConfig.keySet().iterator(); classnames.hasNext();) {
             final String jsClassName = (String) classnames.next();
             final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
             final Method jsConstructor = config.getJsConstructor();

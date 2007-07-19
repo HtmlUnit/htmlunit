@@ -662,7 +662,7 @@ public class WebClient implements Serializable {
      */
     private boolean shouldBypassProxy( final String hostname ) {
         boolean bypass = false;
-        for( final Iterator i = proxyBypassHosts_.values().iterator(); i.hasNext(); ) {
+        for( final Iterator i = proxyBypassHosts_.values().iterator(); i.hasNext();) {
             final Pattern p = (Pattern) i.next();
             if( p.matcher( hostname ).find() ) {
                 bypass = true;

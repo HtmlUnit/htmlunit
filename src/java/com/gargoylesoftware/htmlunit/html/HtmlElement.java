@@ -491,7 +491,7 @@ public abstract class HtmlElement extends DomNode {
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
         printWriter.print(getTagName());
 
-        for (final Iterator it=attributes_.keySet().iterator(); it.hasNext(); ) {
+        for (final Iterator it=attributes_.keySet().iterator(); it.hasNext();) {
             printWriter.print(" ");
             final String name = (String) it.next();
             printWriter.print(name);

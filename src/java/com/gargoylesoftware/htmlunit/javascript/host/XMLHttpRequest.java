@@ -251,7 +251,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         if (webResponse_ != null) {
             final StringBuffer buffer = new StringBuffer();
             final List headers = webResponse_.getResponseHeaders();
-            for (final Iterator i = headers.iterator(); i.hasNext(); ) {
+            for (final Iterator i = headers.iterator(); i.hasNext();) {
                 final NameValuePair header = (NameValuePair) i.next();
                 buffer.append(header.getName()).append(": ").append(header.getValue()).append("\n");
             }

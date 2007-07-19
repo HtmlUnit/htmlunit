@@ -115,7 +115,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
      */
     private void addTextConstant( final Set textConstants, final int startIndex,
             final int endIndex, final String textToReplace ) {
-        for( final Iterator it = textConstants.iterator(); it.hasNext(); ) {
+        for (final Iterator it = textConstants.iterator(); it.hasNext();) {
             final TextConstant c = (TextConstant)it.next();
             if( startIndex >= c.startIndex_ && startIndex < c.endIndex_ ) {
                 return;
@@ -151,7 +151,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
 
     private String restoreTextConstants( String sourceCode, final SortedSet textConstants ) {
         int variation = 0;
-        for( final Iterator iterator = textConstants.iterator(); iterator.hasNext(); ) {
+        for (final Iterator iterator = textConstants.iterator(); iterator.hasNext();) {
             final TextConstant constant = (TextConstant)iterator.next();
             sourceCode = sourceCode.substring( 0, constant.startIndex_+ variation )
                 + constant.textToReplace_

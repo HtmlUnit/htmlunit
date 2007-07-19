@@ -162,7 +162,7 @@ public class WebResponseData implements Serializable {
             return null;
         }
         String encoding = null;
-        for (final Iterator i = headers.iterator(); i.hasNext(); ) {
+        for (final Iterator i = headers.iterator(); i.hasNext();) {
             final NameValuePair header = (NameValuePair) i.next();
             final String headerName = header.getName().trim();
             if( headerName.equalsIgnoreCase( "content-encoding" ) ) {

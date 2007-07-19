@@ -182,7 +182,7 @@ public class AttributesTest extends WebTestCase {
      * @param page The page that will be passed into the constructor of the object
      * to be tested.
      */
-    public AttributesTest (
+    public AttributesTest(
             final String attributeName,
             final Class classUnderTest,
             final Method method,

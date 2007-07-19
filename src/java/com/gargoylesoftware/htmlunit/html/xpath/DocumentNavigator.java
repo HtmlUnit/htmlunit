@@ -79,7 +79,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the child axis.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getChildAxisIterator (final Object contextNode) {
+    public Iterator getChildAxisIterator(final Object contextNode) {
         return ((DomNode)contextNode).getChildIterator();
     }
 
@@ -89,7 +89,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode the context node for the parent axis.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getParentAxisIterator (final Object contextNode) {
+    public Iterator getParentAxisIterator(final Object contextNode) {
         return new Iterator() {
             private DomNode parent_ = ((DomNode)contextNode).getParentNode();
 
@@ -113,7 +113,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode the context node for the sibling iterator.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getFollowingSiblingAxisIterator (final Object contextNode) {
+    public Iterator getFollowingSiblingAxisIterator(final Object contextNode) {
         return Util.getFollowingSiblingAxisIterator((DomNode) contextNode);
     }
 
@@ -123,7 +123,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the preceding sibling axis.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getPrecedingSiblingAxisIterator (final Object contextNode) {
+    public Iterator getPrecedingSiblingAxisIterator(final Object contextNode) {
         return Util.getPrecedingSiblingAxisIterator((DomNode)contextNode);
     }
 
@@ -133,7 +133,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the following axis.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getFollowingAxisIterator (final Object contextNode) {
+    public Iterator getFollowingAxisIterator(final Object contextNode) {
         return Util.getFollowingAxisIterator((DomNode)contextNode);
     }
 
@@ -143,7 +143,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the preceding axis.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getPrecedingAxisIterator (final Object contextNode) {
+    public Iterator getPrecedingAxisIterator(final Object contextNode) {
         return Util.getPrecedingAxisIterator((DomNode)contextNode);
     }
 
@@ -153,7 +153,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the attribute axis.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getAttributeAxisIterator (final Object contextNode) {
+    public Iterator getAttributeAxisIterator(final Object contextNode) {
         if(contextNode instanceof HtmlElement) {
             return ((HtmlElement)contextNode).getAttributeEntriesIterator();
         }
@@ -168,7 +168,7 @@ public class DocumentNavigator extends DefaultNavigator {
      *  for queries on DOM documents.
      * @throws JaxenException if the expression could not be parsed
      */
-    public XPath parseXPath (final String xpath) throws JaxenException {
+    public XPath parseXPath(final String xpath) throws JaxenException {
         return new HtmlUnitXPath(xpath);
     }
 
@@ -178,7 +178,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode Any node in the document.
      * @return The root node.
      */
-    public Object getDocumentNode (final Object contextNode) {
+    public Object getDocumentNode(final Object contextNode) {
         return ((DomNode)contextNode).getPage();
     }
 
@@ -189,7 +189,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return A string (possibly empty) if the node is an element,
      * and null otherwise.
      */
-    public String getElementNamespaceUri (final Object object) {
+    public String getElementNamespaceUri(final Object object) {
         if(object instanceof HtmlElement) {
             return "";
         }
@@ -205,7 +205,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return A string representing the unqualified local name
      * if the node is an element, or null otherwise.
      */
-    public String getElementName (final Object object) {
+    public String getElementName(final Object object) {
         return ((DomNode)object).getNodeName();
     }
 
@@ -216,7 +216,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return A string representing the qualified (i.e. possibly
      * prefixed) name if the node is an element, or null otherwise.
      */
-    public String getElementQName (final Object object) {
+    public String getElementQName(final Object object) {
         return ((DomNode)object).getNodeName();
     }
 
@@ -224,7 +224,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param object The target node.
      * @return the Namespace URI of an attribute.
      */
-    public String getAttributeNamespaceUri (final Object object) {
+    public String getAttributeNamespaceUri(final Object object) {
         return "";
     }
 
@@ -235,7 +235,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return A string representing the unqualified local name
      * if the node is an attribute, or null otherwise.
      */
-    public String getAttributeName (final Object object) {
+    public String getAttributeName(final Object object) {
         return (String)((Map.Entry)object).getKey();
     }
 
@@ -246,7 +246,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return A string representing the qualified (i.e. possibly
      * prefixed) name if the node is an attribute, or null otherwise.
      */
-    public String getAttributeQName (final Object object) {
+    public String getAttributeQName(final Object object) {
         return (String)((Map.Entry)object).getKey();
     }
 
@@ -256,7 +256,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param object The target node.
      * @return true if the node is the document root, false otherwise.
      */
-    public boolean isDocument (final Object object) {
+    public boolean isDocument(final Object object) {
         return (object instanceof HtmlPage);
     }
 
@@ -266,7 +266,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param object The target node.
      * @return true if the node is a Namespace, false otherwise.
      */
-    public boolean isNamespace (final Object object) {
+    public boolean isNamespace(final Object object) {
         return false;
     }
 
@@ -276,7 +276,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param object The target node.
      * @return true if the node is an element, false otherwise.
      */
-    public boolean isElement (final Object object) {
+    public boolean isElement(final Object object) {
         return (object instanceof HtmlElement);
     }
 
@@ -286,7 +286,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param object The target node.
      * @return true if the node is an attribute, false otherwise.
      */
-    public boolean isAttribute (final Object object) {
+    public boolean isAttribute(final Object object) {
         return (object instanceof Map.Entry);
     }
 
@@ -296,7 +296,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param object The target node.
      * @return true if the node is a comment, false otherwise.
      */
-    public boolean isComment (final Object object) {
+    public boolean isComment(final Object object) {
         return (object instanceof DomComment);
     }
 
@@ -306,7 +306,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param object The target node.
      * @return true if the node is a text node, false otherwise.
      */
-    public boolean isText (final Object object) {
+    public boolean isText(final Object object) {
         return (object instanceof DomText);
     }
 
@@ -316,7 +316,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param object The target node.
      * @return true if the node is a processing instruction, false otherwise.
      */
-    public boolean isProcessingInstruction (final Object object) {
+    public boolean isProcessingInstruction(final Object object) {
         return false;
     }
 
@@ -327,7 +327,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return The text inside the node and its descendants if the node
      * is an element, null otherwise.
      */
-    public String getElementStringValue (final Object object) {
+    public String getElementStringValue(final Object object) {
         return ((DomNode)object).asText();
     }
 
@@ -338,7 +338,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return The text of the attribute value if the node is an
      * attribute, null otherwise.
      */
-    public String getAttributeStringValue (final Object object) {
+    public String getAttributeStringValue(final Object object) {
         return (String)((Map.Entry)object).getValue();
     }
 
@@ -348,7 +348,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param object The target node.
      * @return The string of text if the node is text, null otherwise.
      */
-    public String getTextStringValue (final Object object) {
+    public String getTextStringValue(final Object object) {
         return ((DomText)object).asText();
     }
 
@@ -359,7 +359,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return The text of the comment if the node is a comment,
      * null otherwise.
      */
-    public String getCommentStringValue (final Object object) {
+    public String getCommentStringValue(final Object object) {
         return null;
     }
 
@@ -370,7 +370,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return The Namespace URI as a (possibly empty) string if the
      * node is a namespace node, null otherwise.
      */
-    public String getNamespaceStringValue (final Object object) {
+    public String getNamespaceStringValue(final Object object) {
         return null;
     }
 
@@ -381,7 +381,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return The Namespace prefix a (possibly empty) string if the
      * node is a namespace node, null otherwise.
      */
-    public String getNamespacePrefix (final Object object) {
+    public String getNamespacePrefix(final Object object) {
         return null;
     }
 

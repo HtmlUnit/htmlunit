@@ -285,12 +285,12 @@ public class InputTest extends WebTestCase {
         final HtmlSubmitInput button3
             = (HtmlSubmitInput)form.getInputByName("button3");
         assertFalse( button1.isDisabled() );
-        assertTrue ( button2.isDisabled() );
+        assertTrue( button2.isDisabled() );
         assertFalse( button3.isDisabled() );
         ((HtmlAnchor)page.getHtmlElementById("clickme")).click();
-        assertTrue ( button1.isDisabled() );
+        assertTrue( button1.isDisabled() );
         assertFalse( button2.isDisabled() );
-        assertTrue ( button3.isDisabled() );
+        assertTrue( button3.isDisabled() );
 
         final String[] expectedAlerts = {
             "false", "true", "false", "true", "false", "true"

@@ -387,8 +387,7 @@ public abstract class WebTestCase extends BaseTestCase {
         final StringBuffer sb = new StringBuffer();
         sb.append("\n<script type='text/javascript'>\n");
         sb.append("var htmlunitReserved_tab = [");
-        for (final ListIterator iter = expectedAlerts.listIterator(); iter.hasNext();)
-        {
+        for (final ListIterator iter = expectedAlerts.listIterator(); iter.hasNext();) {
             if (iter.hasPrevious()) {
                 sb.append(", ");
             }

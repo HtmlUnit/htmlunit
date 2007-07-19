@@ -76,14 +76,14 @@ public class HtmlOptionTest extends WebTestCase {
         final HtmlOption option3 = ( HtmlOption )page.getHtmlElementById( "option3" );
 
         assertFalse( option1.isSelected() );
-        assertTrue ( option2.isSelected() );
+        assertTrue( option2.isSelected() );
         assertFalse( option3.isSelected() );
 
         option3.setSelected(true);
 
         assertFalse( option1.isSelected() );
         assertFalse( option2.isSelected() );
-        assertTrue ( option3.isSelected() );
+        assertTrue( option3.isSelected() );
 
         option3.setSelected(false);
 

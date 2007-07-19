@@ -479,7 +479,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             buffer.append(htmlElt.getTagName());
 
             // the attributes
-            for (final Iterator iterator=htmlElt.getAttributeEntriesIterator(); iterator.hasNext(); ) {
+            for (final Iterator iterator=htmlElt.getAttributeEntriesIterator(); iterator.hasNext();) {
                 buffer.append(' ' );
                 final Map.Entry entry = (Map.Entry) iterator.next();
                 buffer.append(entry.getKey());

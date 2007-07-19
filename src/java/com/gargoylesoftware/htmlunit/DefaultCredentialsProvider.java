@@ -204,7 +204,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             credentials = credentials_;
         }
 
-        for (final Iterator i = credentials.entrySet().iterator(); i.hasNext(); ) {
+        for (final Iterator i = credentials.entrySet().iterator(); i.hasNext();) {
             final Map.Entry entry = (Map.Entry) i.next();
             final AuthScope scope = (AuthScope) entry.getKey();
             final Credentials c = (Credentials) entry.getValue();

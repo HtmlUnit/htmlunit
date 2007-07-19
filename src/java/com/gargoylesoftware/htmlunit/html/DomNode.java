@@ -1061,7 +1061,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         if( domListeners_ != null ) {
             final DomChangeEvent event = new DomChangeEvent(parentNode, addedNode);
             synchronized (this) {
-                for( final Iterator iterator = domListeners_.iterator(); iterator.hasNext(); ) {
+                for( final Iterator iterator = domListeners_.iterator(); iterator.hasNext();) {
                     final DomChangeListener listener = (DomChangeListener)iterator.next();
                     listener.nodeAdded(event);
                 }
@@ -1086,7 +1086,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         if( domListeners_ != null ) {
             final DomChangeEvent event = new DomChangeEvent(parentNode, deletedNode);
             synchronized (this) {
-                for( final Iterator iterator = domListeners_.iterator(); iterator.hasNext(); ) {
+                for( final Iterator iterator = domListeners_.iterator(); iterator.hasNext();) {
                     final DomChangeListener listener = (DomChangeListener)iterator.next();
                     listener.nodeDeleted(event);
                 }

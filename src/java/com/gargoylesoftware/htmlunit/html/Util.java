@@ -76,11 +76,11 @@ public final class Util {
      * @return A possibly-empty iterator (not null).
      */
     public static Iterator getPrecedingSiblingAxisIterator(final DomNode contextNode) {
-        return new NodeIterator (contextNode) {
-            protected DomNode getFirstNode (final DomNode node) {
+        return new NodeIterator(contextNode) {
+            protected DomNode getFirstNode(final DomNode node) {
                 return getNextNode(node);
             }
-            protected DomNode getNextNode (final DomNode node) {
+            protected DomNode getNextNode(final DomNode node) {
                 return node.getPreviousSibling();
             }
         };
@@ -93,8 +93,8 @@ public final class Util {
      * @return A possibly-empty iterator (not null).
      */
     public static Iterator getFollowingAxisIterator(final DomNode contextNode) {
-        return new NodeIterator (contextNode) {
-            protected DomNode getFirstNode (final DomNode node) {
+        return new NodeIterator(contextNode) {
+            protected DomNode getFirstNode(final DomNode node) {
                 if (node == null) {
                     return null;
                 } 
@@ -135,9 +135,9 @@ public final class Util {
      * @param contextNode The context node for the preceding axis.
      * @return A possibly-empty iterator (not null).
      */
-    public static Iterator getPrecedingAxisIterator (final DomNode contextNode) {
+    public static Iterator getPrecedingAxisIterator(final DomNode contextNode) {
         return new NodeIterator(contextNode) {
-            protected DomNode getFirstNode (final DomNode node) {
+            protected DomNode getFirstNode(final DomNode node) {
                 if (node == null) {
                     return null;
                 }
@@ -151,7 +151,7 @@ public final class Util {
                     }
                 }
             }
-            protected DomNode getNextNode (final DomNode node) {
+            protected DomNode getNextNode(final DomNode node) {
                 if (node == null) {
                     return null;
                 }
@@ -186,15 +186,15 @@ abstract class NodeIterator implements Iterator {
     /**
      * @param contextNode The starting node.
      */
-    public NodeIterator (final DomNode contextNode) {
+    public NodeIterator(final DomNode contextNode) {
         node_ = getFirstNode(contextNode);
     }
     /** @inheritDoc Iterator#hasNext() */
-    public boolean hasNext () {
+    public boolean hasNext() {
         return (node_ != null);
     }
     /** @inheritDoc Iterator#next() */
-    public Object next () {
+    public Object next() {
         if (node_ == null) {
             throw new NoSuchElementException();
         }
@@ -203,7 +203,7 @@ abstract class NodeIterator implements Iterator {
         return ret;
     }
     /** @inheritDoc Iterator#remove() */
-    public void remove () {
+    public void remove() {
         throw new UnsupportedOperationException();
     }
     /**
@@ -216,7 +216,7 @@ abstract class NodeIterator implements Iterator {
      * @return The first node in the iteration.
      * @see #getNextNode
      */
-    protected abstract DomNode getFirstNode (final DomNode contextNode);
+    protected abstract DomNode getFirstNode(final DomNode contextNode);
     /**
      * Get the next node for iteration.
      *
@@ -228,5 +228,5 @@ abstract class NodeIterator implements Iterator {
      * if there is none.
      * @see #getFirstNode
      */
-    protected abstract DomNode getNextNode (final DomNode contextNode);
+    protected abstract DomNode getNextNode(final DomNode contextNode);
 }

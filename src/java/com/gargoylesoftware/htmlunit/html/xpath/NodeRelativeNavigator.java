@@ -79,7 +79,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
      *  for queries on DOM documents.
      * @throws JaxenException if the expression could not be parsed
      */
-    public XPath parseXPath (final String xpath) throws JaxenException {
+    public XPath parseXPath(final String xpath) throws JaxenException {
         return new BaseXPath(xpath, this);
     }
 
@@ -89,7 +89,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
      * @param contextNode Any node in the document.
      * @return The root node.
      */
-    public Object getDocumentNode (final Object contextNode) {
+    public Object getDocumentNode(final Object contextNode) {
         return rootNode_;
     }
 
@@ -99,8 +99,8 @@ class NodeRelativeNavigator extends DocumentNavigator {
      * @param object The target node.
      * @return true if the node is the document root, false otherwise.
      */
-    public boolean isDocument (final Object object) {
-        return (object == rootNode_);
+    public boolean isDocument(final Object object) {
+        return object == rootNode_;
     }
 
     /**
@@ -109,8 +109,8 @@ class NodeRelativeNavigator extends DocumentNavigator {
      * @param object The target node.
      * @return true if the node is an element, false otherwise.
      */
-    public boolean isElement (final Object object) {
-        return super.isElement(object) && (object != rootNode_);
+    public boolean isElement(final Object object) {
+        return super.isElement(object) && object != rootNode_;
     }
 
     /**

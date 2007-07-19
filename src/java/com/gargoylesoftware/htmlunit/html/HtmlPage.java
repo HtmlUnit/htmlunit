@@ -1513,7 +1513,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             
             pageInputs.removeAll(formInputs);
 
-            for( final Iterator iterator = pageInputs.iterator(); iterator.hasNext(); ) {
+            for( final Iterator iterator = pageInputs.iterator(); iterator.hasNext();) {
                 final HtmlRadioButtonInput input = (HtmlRadioButtonInput)iterator.next();
                 if( input == radioButtonInput ) {
                     input.setAttributeValue("checked", "checked");
@@ -1606,7 +1606,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     void fireHtmlAttributeAdded(final HtmlAttributeChangeEvent event) {
         synchronized (this) {
             if( attributeListeners_ != null ) {
-                for( final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext(); ) {
+                for( final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
                     final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener)iterator.next();
                     listener.attributeAdded(event);
                 }
@@ -1621,7 +1621,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     void fireHtmlAttributeReplaced(final HtmlAttributeChangeEvent event) {
         synchronized (this) {
             if( attributeListeners_ != null ) {
-                for( final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext(); ) {
+                for( final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
                     final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener)iterator.next();
                     listener.attributeReplaced(event);
                 }
@@ -1636,7 +1636,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     void fireHtmlAttributeRemoved(final HtmlAttributeChangeEvent event) {
         synchronized (this) {
             if( attributeListeners_ != null ) {
-                for( final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext(); ) {
+                for( final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
                     final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener)iterator.next();
                     listener.attributeRemoved(event);
                 }

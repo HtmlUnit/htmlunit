@@ -132,8 +132,7 @@ public class Style extends SimpleScriptable {
         if (htmlElement.getHtmlElementOrDie().getPage().getWebClient()
                 .getBrowserVersion().isIE()) {
             // If a behavior was specified in the style, apply the behavior.
-            for (final Iterator i = getStyleMap().entrySet().iterator(); i
-                    .hasNext();) {
+            for (final Iterator i = getStyleMap().entrySet().iterator(); i.hasNext();) {
                 final Map.Entry entry = (Map.Entry) i.next();
                 final String key = (String) entry.getKey();
                 if ("behavior".equals(key)) {

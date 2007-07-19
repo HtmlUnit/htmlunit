@@ -445,7 +445,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         parser.setFeature("http://xml.org/sax/features/validation", true);
         parser.setFeature("http://apache.org/xml/features/validation/schema", true);
         parser.setEntityResolver( new EntityResolver() {
-            public InputSource resolveEntity (final String publicId, final String systemId) throws IOException {
+            public InputSource resolveEntity(final String publicId, final String systemId) throws IOException {
                 return createInputSourceForFile(directory+"JavaScriptConfiguration.xsd");
             }
         });

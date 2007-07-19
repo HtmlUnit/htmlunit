@@ -126,7 +126,7 @@ public class HtmlTable extends ClickableElement {
      */
     public List getRows() {
         final List result = new ArrayList();
-        for(final RowIterator iterator = getRowIterator(); iterator.hasNext(); ) {
+        for(final RowIterator iterator = getRowIterator(); iterator.hasNext();) {
             result.add(iterator.next());
         }
         return Collections.unmodifiableList(result);

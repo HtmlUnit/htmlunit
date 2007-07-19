@@ -270,7 +270,7 @@ public class HtmlImage extends ClickableElement {
             final String mapName = getUseMapAttribute().substring(1);
             final HtmlElement doc = getPage().getDocumentElement();
             final HtmlMap map = (HtmlMap) doc.getOneHtmlElementByAttribute("map", "name", mapName);
-            for (final Iterator it = map.getChildElementsIterator(); it.hasNext(); ) {
+            for (final Iterator it = map.getChildElementsIterator(); it.hasNext();) {
                 final HtmlElement element = (HtmlElement) it.next();
                 if (element instanceof HtmlArea) {
                     final HtmlArea area = (HtmlArea) element;
