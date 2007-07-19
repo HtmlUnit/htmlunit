@@ -11,7 +11,7 @@
                 BrowserVersion: add equals() and hashCode().
             </action>
             <action type="add" dev="asashour">
-                ClickableElement: add mouseOver(), mouseMove(), mouseOut(), mouseDown(), and mouseUp().
+                HtmlElement: add mouseOver(), mouseMove(), mouseOut(), mouseDown(), and mouseUp().
             </action>
             <action type="update" dev="asashour">
                 JavaScript: implement navigator.cookieEnabled to match WebClient#isCookiesEnabled().

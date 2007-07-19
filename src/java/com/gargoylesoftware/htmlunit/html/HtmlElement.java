@@ -54,6 +54,7 @@ import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -953,4 +954,156 @@ public abstract class HtmlElement extends DomNode {
         final HTMLElement jsElt = (HTMLElement) getScriptObject();
         return jsElt.fireEvent(event);
     }
+
+    /**
+     * Simulate moving the mouse over this element.
+     *
+     * @return The page that occupies this window after the mouse moves over this element.
+     * It may be the same window or it may be a freshly loaded one.
+     */
+    public Page mouseOver() {
+        return mouseOver(false, false, false);
+    }
+    
+    /**
+     * Simulate moving the mouse over this element.
+     *
+     * @param shiftKey true if SHIFT is pressed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     * 
+     * @return The page that occupies this window after the mouse moves over this element.
+     * It may be the same window or it may be a freshly loaded one.
+     */
+    public Page mouseOver(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        return doMouseEvent(Event.TYPE_MOUSE_OVER, shiftKey, ctrlKey, altKey);
+    }
+
+    /**
+     * Simulate moving the mouse inside this element.
+     *
+     * @return The page that occupies this window after the mouse moves inside this element.
+     * It may be the same window or it may be a freshly loaded one.
+     */
+    public Page mouseMove() {
+        return mouseMove(false, false, false);
+    }
+    
+    /**
+     * Simulate moving the mouse inside this element.
+     *
+     * @param shiftKey true if SHIFT is pressed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     * 
+     * @return The page that occupies this window after the mouse moves inside this element.
+     * It may be the same window or it may be a freshly loaded one.
+     */
+    public Page mouseMove(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        return doMouseEvent(Event.TYPE_MOUSE_MOVE, shiftKey, ctrlKey, altKey);
+    }
+
+    /**
+     * Simulate moving the mouse out of this element.
+     *
+     * @return The page that occupies this window after the mouse moves out of this element.
+     * It may be the same window or it may be a freshly loaded one.
+     */
+    public Page mouseOut() {
+        return mouseOut(false, false, false);
+    }
+    
+    /**
+     * Simulate moving the mouse out of this element.
+     *
+     * @param shiftKey true if SHIFT is pressed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     * 
+     * @return The page that occupies this window after the mouse moves out of this element.
+     * It may be the same window or it may be a freshly loaded one.
+     */
+    public Page mouseOut(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        return doMouseEvent(Event.TYPE_MOUSE_OUT, shiftKey, ctrlKey, altKey);
+    }
+
+    /**
+     * Simulate clicking the mouse in this element.
+     *
+     * @return The page that occupies this window after the mouse is clicked in this element.
+     * It may be the same window or it may be a freshly loaded one.
+     */
+    public Page mouseDown() {
+        return mouseDown(false, false, false);
+    }
+    
+    /**
+     * Simulate clicking the mouse in this element.
+     *
+     * @param shiftKey true if SHIFT is pressed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     * 
+     * @return The page that occupies this window after the mouse is clicked in this element.
+     * It may be the same window or it may be a freshly loaded one.
+     */
+    public Page mouseDown(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        return doMouseEvent(Event.TYPE_MOUSE_DOWN, shiftKey, ctrlKey, altKey);
+    }
+
+    /**
+     * Simulate releasing the mouse click in this element.
+     *
+     * @return The page that occupies this window after the mouse click is released in this element.
+     * It may be the same window or it may be a freshly loaded one.
+     */
+    public Page mouseUp() {
+        return mouseUp(false, false, false);
+    }
+    
+    /**
+     * Simulate releasing the mouse click in this element.
+     *
+     * @param shiftKey true if SHIFT is pressed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     * 
+     * @return The page that occupies this window after the mouse click is released in this element.
+     * It may be the same window or it may be a freshly loaded one.
+     */
+    public Page mouseUp(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        return doMouseEvent(Event.TYPE_MOUSE_UP, shiftKey, ctrlKey, altKey);
+    }
+
+    /**
+     * Simulate the given mouse event.
+     * 
+     * @param shiftKey true if SHIFT is pressed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     * 
+     * @return The page that occupies this window after the mouse event occur on this element.
+     * It may be the same window or it may be a freshly loaded one.
+     */
+    private Page doMouseEvent(final String eventType, final boolean shiftKey, final boolean ctrlKey,
+        final boolean altKey) {
+        if (this instanceof DisabledElement) {
+            if (((DisabledElement) this).isDisabled()) {
+                return getPage();
+            }
+        }
+
+        final HtmlPage page = getPage();
+        final Event event = new Event(this, eventType, shiftKey, ctrlKey, altKey);
+        final ScriptResult scriptResult = fireEvent(event);
+        final Page currentPage;
+        if (scriptResult == null) {
+            currentPage = page;
+        }
+        else {
+            currentPage = scriptResult.getNewPage();
+        }
+        return currentPage;
+    }
+
 }
