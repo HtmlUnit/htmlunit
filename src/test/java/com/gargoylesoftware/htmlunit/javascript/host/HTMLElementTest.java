@@ -1418,7 +1418,8 @@ public class HTMLElementTest extends WebTestCase {
         try {
             testCurrentStyle(BrowserVersion.MOZILLA_1_0);
             fail("'currentStyle' is defined for only IE");
-        } catch(Exception e) {
+        }
+        catch(final Exception e) {
             //expected
         }
     }

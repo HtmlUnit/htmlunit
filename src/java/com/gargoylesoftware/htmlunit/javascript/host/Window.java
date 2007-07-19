@@ -89,6 +89,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Daniel Gredler
  * @author David D. Kilzer
  * @author Chris Erskine
+ * @author Ahmed Ashour
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp">
  * MSDN documentation</a>
  */
@@ -1038,8 +1039,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * 
      * @param element the element
      * @param pseudoElt is a string specifying the pseudo-element to match, can be null.
+     * @return the computed style.
      */
-    public Object jsxFunction_getComputedStyle(final NodeImpl element, String pseudoElt) {
+    public Object jsxFunction_getComputedStyle(final NodeImpl element, final String pseudoElt) {
         return ((HTMLElement)element).jsxGet_style();
     }
 }

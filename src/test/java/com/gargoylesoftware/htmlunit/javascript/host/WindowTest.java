@@ -2178,7 +2178,8 @@ public class WindowTest extends WebTestCase {
         try {
             testGetComputedStyle(BrowserVersion.INTERNET_EXPLORER_6_0);
             fail("'getComputedStyle' is not defined for IE");
-        } catch(Exception e) {
+        }
+        catch(final Exception e) {
             //expected
         }
     }
