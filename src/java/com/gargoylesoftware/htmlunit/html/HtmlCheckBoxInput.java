@@ -66,7 +66,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * If no value is specified, it is set to "on" as browsers do (e.g. IE6 and Mozilla 1.7) 
      * even if spec says that it is not allowed 
      * (<a href="http://www.w3.org/TR/REC-html40/interact/forms.html#adef-value-INPUT">W3C</a>).
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      * @deprecated You should not directly construct HtmlCheckBoxInput.
      */
@@ -83,7 +83,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * 
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      */
     HtmlCheckBoxInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -110,7 +110,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
     /**
      *  Set the "checked" attribute
      *
-     * @param  isChecked true if this element is to be selected
+     * @param isChecked true if this element is to be selected
      * @return The page that occupies this window after setting checked status.
      * It may be the same window or it may be a freshly loaded one.
      */

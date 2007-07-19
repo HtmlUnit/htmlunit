@@ -63,7 +63,7 @@ public class HtmlTableRow extends ClickableElement {
     /**
      *  Create an instance
      *
-     * @param  page The page that this element is contained within
+     * @param page The page that this element is contained within
      * @param attributes the initial attributes
      * @deprecated You should not directly construct HtmlTableRow.
      */
@@ -77,7 +77,7 @@ public class HtmlTableRow extends ClickableElement {
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
-     * @param  page The page that this element is contained within
+     * @param page The page that this element is contained within
      * @param attributes the initial attributes
      */
     HtmlTableRow(final String namespaceURI, final String qualifiedName, final HtmlPage page,

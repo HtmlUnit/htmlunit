@@ -70,7 +70,7 @@ public final class SubmitMethod implements Serializable {
     /**
      *  Return the name of this SubmitMethod
      *
-     * @return  See above
+     * @return See above
      */
     public String getName() {
         return name_;
@@ -79,8 +79,8 @@ public final class SubmitMethod implements Serializable {
     /**
      *  Return the constant that matches the given name
      *
-     * @param  name The name to search by
-     * @return  See above
+     * @param name The name to search by
+     * @return See above
      */
     public static SubmitMethod getInstance( final String name ) {
         final String lowerCaseName = name.toLowerCase();
@@ -104,7 +104,7 @@ public final class SubmitMethod implements Serializable {
     /**
      *  Return a string representation of this object
      *
-     * @return  See above
+     * @return See above
      */
     public String toString() {
         return "SubmitMethod[name=" + getName() + "]";

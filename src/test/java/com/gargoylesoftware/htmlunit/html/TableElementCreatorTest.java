@@ -49,7 +49,7 @@ public class TableElementCreatorTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public TableElementCreatorTest( final String name ) {
         super( name );
@@ -58,7 +58,7 @@ public class TableElementCreatorTest extends WebTestCase {
     /**
      *  Regression test for asText() which would blow up inside the TableElementCreator
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testGetTableCell() throws Exception {
         final String htmlContent

@@ -107,14 +107,14 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     private static final int TAB_INDEX_NOT_SPECIFIED = -10;
     private static final int TAB_INDEX_OUT_OF_BOUNDS = -20;
 
-    private List/*HtmlAttributeChangeListener*/ attributeListeners_;
+    private List/* HtmlAttributeChangeListener */ attributeListeners_;
 
     /**
      *  Create an instance of HtmlPage
      *
-     * @param  originatingUrl The url that was used to load this page.
-     * @param  webResponse The web response that was used to create this page
-     * @param  webWindow The window that this page is being loaded into.
+     * @param originatingUrl The url that was used to load this page.
+     * @param webResponse The web response that was used to create this page
+     * @param webWindow The window that this page is being loaded into.
      */
     public HtmlPage(
             final URL originatingUrl,
@@ -244,8 +244,8 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      *  Return the HtmlAnchor with the specified name
      *
-     * @param  name The name to search by
-     * @return  See above
+     * @param name The name to search by
+     * @return See above
      * @throws com.gargoylesoftware.htmlunit.ElementNotFoundException If the anchor could not be found.
      */
     public HtmlAnchor getAnchorByName( final String name ) throws ElementNotFoundException {
@@ -255,8 +255,8 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
     *  Return the {@link HtmlAnchor} with the specified href
      *
-     * @param  href The string to search by
-     * @return  The HtmlAnchor
+     * @param href The string to search by
+     * @return The HtmlAnchor
      * @throws ElementNotFoundException If the anchor could not be found.
      */
     public HtmlAnchor getAnchorByHref( final String href ) throws ElementNotFoundException {
@@ -317,7 +317,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      *  Return the WebClient that originally loaded this page
      *
-     * @return  See above
+     * @return See above
      */
     public WebClient getWebClient() {
         return webClient_;
@@ -327,9 +327,9 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      *  Given a relative url (ie /foo), return a fully qualified url based on
      *  the url that was used to load this page
      *
-     * @param  relativeUrl The relative url
-     * @return  See above
-     * @exception  MalformedURLException If an error occurred when creating a
+     * @param relativeUrl The relative url
+     * @return See above
+     * @exception MalformedURLException If an error occurred when creating a
      *      URL object
      */
     public URL getFullyQualifiedUrl( String relativeUrl )
@@ -393,7 +393,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      *  target for the page.
      *
      * @param elementTarget The target specified as an attribute of the element.
-     * @return  The resolved target to use for the element.
+     * @return The resolved target to use for the element.
      */
     public String getResolvedTarget( final String elementTarget ) {
 
@@ -416,7 +416,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      *  Return the web response that was originally used to create this page.
      *
-     * @return  The web response
+     * @return The web response
      */
     public WebResponse getWebResponse() {
         return webResponse_;
@@ -427,7 +427,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      *  in this page. Return them in the same order specified in {@link
      *  #getTabbableElements}
      *
-     * @return  The list of id's
+     * @return The list of id's
      */
     public List getTabbableElementIds() {
         final List list = new ArrayList( getTabbableElements() );
@@ -465,7 +465,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      *  The following elements support the tabindex attribute: A, AREA, BUTTON,
      *  INPUT, OBJECT, SELECT, and TEXTAREA.<p>
      *
-     * @return  A list containing all the tabbable elements in proper tab order.
+     * @return A list containing all the tabbable elements in proper tab order.
      */
     public List getTabbableElements() {
 
@@ -544,8 +544,8 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      *  Only the following html elements may have accesskey's defined: A, AREA,
      *  BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
      *
-     * @param  accessKey The key to look for
-     * @return  The html element that is assigned to the specified key or null
+     * @param accessKey The key to look for
+     * @return The html element that is assigned to the specified key or null
      *      if no elements can be found that match the specified key.
      */
     public HtmlElement getHtmlElementByAccessKey( final char accessKey ) {
@@ -572,8 +572,8 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      *  Only the following html elements may have accesskey's defined: A, AREA,
      *  BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
      *
-     * @param  accessKey The key to look for
-     * @return  A list of html elements that are assigned to the specified accesskey.
+     * @param accessKey The key to look for
+     * @return A list of html elements that are assigned to the specified accesskey.
      */
     public List getHtmlElementsByAccessKey( final char accessKey ) {
 
@@ -1299,9 +1299,9 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      *  Return the html element with the specified id. If more than one element
      *  has this id (not allowed by the html spec) then return the first one.
      *
-     * @param  id The id value to search by
-     * @return  The html element found
-     * @exception  ElementNotFoundException If no element was found that matches
+     * @param id The id value to search by
+     * @return The html element found
+     * @exception ElementNotFoundException If no element was found that matches
      *      the id
      */
     public HtmlElement getHtmlElementById( final String id )
@@ -1501,7 +1501,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      * Select the specified radio button in the page (outside any &lt;form&gt;).
      *
-     * @param  radioButtonInput The radio Button
+     * @param radioButtonInput The radio Button
      */
     void setCheckedRadioButton( final HtmlRadioButtonInput radioButtonInput ) {
         try {

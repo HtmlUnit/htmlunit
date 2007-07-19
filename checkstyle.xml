@@ -161,6 +161,12 @@
 
         <!-- Miscellaneous other checks.                   -->
         <!-- See http://checkstyle.sf.net/config_misc.html -->
+
+        <!-- Prevent two spaces after @xxxx -->
+        <module name="GenericIllegalRegexp">
+            <property name="format" value="\* *@\w*  "/>
+        </module>
+
         <module name="UpperEll"/>
         
         <module name="FinalLocalVariable">

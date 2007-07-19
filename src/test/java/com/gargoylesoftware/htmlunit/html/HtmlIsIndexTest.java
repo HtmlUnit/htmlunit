@@ -57,7 +57,7 @@ public class HtmlIsIndexTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public HtmlIsIndexTest( final String name ) {
         super( name );

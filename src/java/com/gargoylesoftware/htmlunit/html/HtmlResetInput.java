@@ -58,7 +58,7 @@ public class HtmlResetInput extends HtmlInput {
     /**
      *  Create an instance
      *
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      * @deprecated You should not directly construct HtmlResetInput.
      */
@@ -72,7 +72,7 @@ public class HtmlResetInput extends HtmlInput {
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      */
     HtmlResetInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,

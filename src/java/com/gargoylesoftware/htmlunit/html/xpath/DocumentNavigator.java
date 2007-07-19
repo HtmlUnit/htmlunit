@@ -398,10 +398,10 @@ public class DocumentNavigator extends DefaultNavigator {
      *                       id
      *  @param elementId   id to look for
      *
-     *  @return   element whose ID is given by elementId, or null if no such
+     *  @return element whose ID is given by elementId, or null if no such
      *            element exists in the document or if the implementation
      *            does not know about attribute types
-     *  @see   javax.xml.parsers.DocumentBuilderFactory
+     *  @see javax.xml.parsers.DocumentBuilderFactory
      */
     public Object getElementById(final Object contextNode, final String elementId) {
         final HtmlPage page = ((DomNode)contextNode).getPage();

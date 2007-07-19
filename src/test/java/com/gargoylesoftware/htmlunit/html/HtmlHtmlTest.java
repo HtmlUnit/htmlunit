@@ -49,7 +49,7 @@ public class HtmlHtmlTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public HtmlHtmlTest( final String name ) {
         super( name );

@@ -165,7 +165,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      */
     private int endColumnNumber_;
 
-    private List/*DomChangeListener*/ domListeners_;
+    private List/* DomChangeListener */ domListeners_;
 
     /**
      * Never call this, used for Serialization.
@@ -251,7 +251,7 @@ public abstract class DomNode implements Cloneable, Serializable {
     /**
      *  Return the HtmlPage that contains this node
      *
-     * @return  See above
+     * @return See above
      */
     public HtmlPage getPage() {
         return htmlPage_;
@@ -396,8 +396,8 @@ public abstract class DomNode implements Cloneable, Serializable {
      *  Return a text string that represents all the child elements as they
      *  would be visible in a web browser
      *
-     * @return  See above
-     * @see  #asText()
+     * @return See above
+     * @see #asText()
      */
     protected final String getChildrenAsText() {
         final StringBuffer buffer = new StringBuffer();

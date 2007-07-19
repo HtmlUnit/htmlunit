@@ -181,7 +181,7 @@ public class WebClient implements Serializable {
 
     /**
      *  Create an instance using the specified {@link BrowserVersion}
-     * @param  browserVersion The browser version to simulate
+     * @param browserVersion The browser version to simulate
      */
     public WebClient( final BrowserVersion browserVersion ) {
         Assert.notNull("browserVersion", browserVersion);
@@ -203,9 +203,9 @@ public class WebClient implements Serializable {
 
     /**
      *  Create an instance that will use the specified {@link BrowserVersion} and proxy server
-     * @param  browserVersion The browser version to simulate
-     * @param  proxyHost The server that will act as proxy
-     * @param  proxyPort The port to use on the proxy server
+     * @param browserVersion The browser version to simulate
+     * @param proxyHost The server that will act as proxy
+     * @param proxyPort The port to use on the proxy server
      */
     public WebClient( final BrowserVersion browserVersion, final String proxyHost, final int proxyPort ) {
         Assert.notNull("browserVersion", browserVersion);
@@ -229,7 +229,7 @@ public class WebClient implements Serializable {
     /**
      *  Create a javascript engine if possible.
      *
-     * @param  webClient The webclient that we are creating the script engine for.
+     * @param webClient The webclient that we are creating the script engine for.
      * @return A javascript engine or null if one could not be created.
      */
     private static JavaScriptEngine createJavaScriptEngineIfPossible( final WebClient webClient ) {
@@ -249,7 +249,7 @@ public class WebClient implements Serializable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * 
      * <p>Return the object that will resolve all url requests<p>
-     * @return  The connection that will be used.
+     * @return The connection that will be used.
      */
     public synchronized WebConnection getWebConnection() {
         if( webConnection_ == null ) {
@@ -264,7 +264,7 @@ public class WebClient implements Serializable {
      * This method is intended for unit testing HtmlUnit itself.  It is not expected
      * to change but you shouldn't need to call it during normal use of HtmlUnit.
      *
-     * @param  webConnection The new web connection
+     * @param webConnection The new web connection
      */
     public void setWebConnection( final WebConnection webConnection ) {
         Assert.notNull( "webConnection", webConnection );
@@ -307,11 +307,11 @@ public class WebClient implements Serializable {
      *  </table>
      *
      *
-     * @param  webWindow The WebWindow to load this request into
-     * @param  parameters Parameter object for the web request
-     * @return  See above
-     * @throws  IOException If an IO error occurs
-     * @throws  FailingHttpStatusCodeException If the server returns a
+     * @param webWindow The WebWindow to load this request into
+     * @param parameters Parameter object for the web request
+     * @return See above
+     * @throws IOException If an IO error occurs
+     * @throws FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
      *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true 
      *      
@@ -361,7 +361,7 @@ public class WebClient implements Serializable {
      *  be passed into the javascript open() method.
      *  @param params Any parameters
      *  @return The new page.
-     *  @throws  FailingHttpStatusCodeException If the server returns a
+     *  @throws FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
      *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      *  @throws IOException If an IO problem occurs. 
@@ -402,7 +402,7 @@ public class WebClient implements Serializable {
      * Convenient method to load a web request into the current WebWindow
      *  @param request The request parameters 
      *  @return The new page.
-     *  @throws  FailingHttpStatusCodeException If the server returns a
+     *  @throws FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
      *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      *  @throws IOException If an IO problem occurs.
@@ -463,7 +463,7 @@ public class WebClient implements Serializable {
      *  printed to the console in the event of a failing response code.
      *  Successful response codes are in the range 200-299. The default is true.
      *
-     * @param  enabled True to enable this feature
+     * @param enabled True to enable this feature
      */
     public void setPrintContentOnFailingStatusCode( final boolean enabled ) {
         printContentOnFailingStatusCode_ = enabled;
@@ -473,8 +473,8 @@ public class WebClient implements Serializable {
      *  Return true if the content of the resulting document will be printed to
      *  the console in the event of a failing response code.
      *
-     * @return  See above
-     * @see  #setPrintContentOnFailingStatusCode
+     * @return See above
+     * @see #setPrintContentOnFailingStatusCode
      */
     public boolean getPrintContentOnFailingStatusCode() {
         return printContentOnFailingStatusCode_;
@@ -485,7 +485,7 @@ public class WebClient implements Serializable {
      *  failing status code. Successful status codes are in the range 200-299.
      *  The default is true.
      *
-     * @param  enabled True to enable this feature
+     * @param enabled True to enable this feature
      */
     public void setThrowExceptionOnFailingStatusCode( final boolean enabled ) {
         throwExceptionOnFailingStatusCode_ = enabled;
@@ -503,8 +503,8 @@ public class WebClient implements Serializable {
     /**
      *  Set a header which will be sent up on EVERY request from this client.
      *
-     * @param  name The name of the header
-     * @param  value The value of the header
+     * @param name The name of the header
+     * @param value The value of the header
      */
     public void addRequestHeader( final String name, final String value ) {
         requestHeaders_.put( name, value );
@@ -513,8 +513,8 @@ public class WebClient implements Serializable {
     /**
      *  Remove a header
      *
-     * @param  name Name of the header
-     * @see  #addRequestHeader
+     * @param name Name of the header
+     * @see #addRequestHeader
      */
     public void removeRequestHeader( final String name ) {
         requestHeaders_.remove( name );
@@ -550,7 +550,7 @@ public class WebClient implements Serializable {
      *
      *  Override this to provide custom behaviour.
      *
-     * @param  message The failure message
+     * @param message The failure message
      */
     public void assertionFailed( final String message ) {
         try {
@@ -567,7 +567,7 @@ public class WebClient implements Serializable {
     /**
      *  This method is intended for testing only - use at your own risk.
      *
-     * @return  the current script engine
+     * @return the current script engine
      */
     public ScriptEngine getScriptEngine() {
         return scriptEngine_;

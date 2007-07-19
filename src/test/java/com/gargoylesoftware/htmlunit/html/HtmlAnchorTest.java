@@ -63,7 +63,7 @@ public class HtmlAnchorTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name Name of the test
+     * @param name Name of the test
      */
     public HtmlAnchorTest( final String name ) {
         super( name );

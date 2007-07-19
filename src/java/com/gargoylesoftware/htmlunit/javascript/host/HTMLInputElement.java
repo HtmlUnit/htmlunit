@@ -110,8 +110,7 @@ public class HTMLInputElement extends FormField {
      *  implementation does nothing. The implementations in Checkbox and Radio
      *  actually do the work.
      *
-     *@param  checked  True if this input should have the "checked" attribute
-     *      set
+     * @param checked  True if this input should have the "checked" attribute set
      */
     public void jsxSet_checked( final boolean checked ) {
         ((HtmlInput)getDomNodeOrDie()).setChecked( checked );
@@ -131,7 +130,7 @@ public class HTMLInputElement extends FormField {
      *  checkbox and radio. This implementation does nothing. The
      *  implementations in Checkbox and Radio actually do the work.
      *
-     *@return    The checked property.
+     *@return The checked property.
      */
     public boolean jsxGet_checked() {
         return ((HtmlInput)getDomNodeOrDie()).isChecked();

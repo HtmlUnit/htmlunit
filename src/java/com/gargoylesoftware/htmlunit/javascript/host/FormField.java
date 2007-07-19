@@ -77,7 +77,7 @@ public class FormField extends FocusableHostElement {
     /**
      *  Return the value of the javascript attribute "value".
      *
-     *@return    The value of this attribute.
+     *@return The value of this attribute.
      */
     public String jsxGet_value() {
         return getHtmlElementOrDie().getAttributeValue( "value" );
@@ -86,7 +86,7 @@ public class FormField extends FocusableHostElement {
     /**
      *  Set the value of the javascript attribute "value".
      *
-     *@param  newValue  The new value.
+     *@param newValue  The new value.
      */
     public void jsxSet_value( final String newValue ) {
         getHtmlElementOrDie().setAttributeValue( "value", newValue );
@@ -95,7 +95,7 @@ public class FormField extends FocusableHostElement {
     /**
      *  Return the value of the javascript attribute "name".
      *
-     *@return    The value of this attribute.
+     *@return The value of this attribute.
      */
     public String jsxGet_name() {
         return getHtmlElementOrDie().getAttributeValue( "name" );
@@ -104,7 +104,7 @@ public class FormField extends FocusableHostElement {
     /**
      *  Set the value of the javascript attribute "name".
      *
-     *@param  newName  The new name.
+     *@param newName  The new name.
      */
     public void jsxSet_name( final String newName ) {
         getHtmlElementOrDie().setAttributeValue( "name", newName );

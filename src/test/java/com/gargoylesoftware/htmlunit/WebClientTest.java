@@ -79,7 +79,7 @@ public class WebClientTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public WebClientTest( final String name ) {
         super( name );

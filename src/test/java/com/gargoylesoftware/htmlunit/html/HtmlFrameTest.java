@@ -58,7 +58,7 @@ public class HtmlFrameTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name Name of the test
+     * @param name Name of the test
      */
     public HtmlFrameTest( final String name ) {
         super( name );

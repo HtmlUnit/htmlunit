@@ -48,8 +48,8 @@ import java.util.Map;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
- * @see  HtmlTableDataCell
- * @see  HtmlTableHeaderCell
+ * @see HtmlTableDataCell
+ * @see HtmlTableHeaderCell
  */
 public abstract class HtmlTableCell extends ClickableElement {
 
@@ -58,7 +58,7 @@ public abstract class HtmlTableCell extends ClickableElement {
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
-     * @param  page The page that this element is contained within
+     * @param page The page that this element is contained within
      * @param attributes the initial attributes
      */
     protected HtmlTableCell(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -70,7 +70,7 @@ public abstract class HtmlTableCell extends ClickableElement {
      *  Return the value of the colspan attribute or 1 if the attribute wasn't
      *  specified
      *
-     * @return  See above
+     * @return See above
      */
     public int getColumnSpan() {
         final String spanString = getAttributeValue( "colspan" );
@@ -86,7 +86,7 @@ public abstract class HtmlTableCell extends ClickableElement {
      *  Return the value of the rowspan attribute or 1 if the attribute wasn't
      *  specified
      *
-     * @return  See above
+     * @return See above
      */
     public int getRowSpan() {
         final String spanString = getAttributeValue( "rowspan" );

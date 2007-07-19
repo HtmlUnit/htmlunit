@@ -70,7 +70,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     /**
      *  Create an instance
      *
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      * @deprecated You should not directly construct HtmlTextArea.
      */
@@ -84,7 +84,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      */
     HtmlTextArea(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -124,7 +124,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     /**
      *  Set the new value of this text area.
      *
-     * @param  newValue The new value.
+     * @param newValue The new value.
      */
     public final void setText( final String newValue ) {
         initDefaultValue();
@@ -150,7 +150,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      *  THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
      *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
-     * @return  See above
+     * @return See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
         return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getText() )};

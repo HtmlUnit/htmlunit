@@ -68,7 +68,7 @@ public class HtmlSubmitInput extends HtmlInput {
     /**
      *  Create an instance
      *
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      * @deprecated You should not directly construct HtmlSubmitInput.
      */
@@ -82,7 +82,7 @@ public class HtmlSubmitInput extends HtmlInput {
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      */
     HtmlSubmitInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,

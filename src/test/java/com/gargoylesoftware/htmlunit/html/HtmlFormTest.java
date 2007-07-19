@@ -74,7 +74,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public HtmlFormTest( final String name ) {
         super( name );
@@ -83,7 +83,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      *  Test the good case for setCheckedRadioButton()
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testSetSelectedRadioButton_ValueExists()
         throws Exception {
@@ -119,7 +119,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      *  Test setCheckedRadioButton() with a value that doesn't exist
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testSetSelectedRadioButton_ValueDoesNotExist_DoNotForceSelection()
         throws Exception {
@@ -145,7 +145,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      *  Test setCheckedRadioButton() with a value that doesn't exist
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testSetSelectedRadioButton_ValueDoesNotExist_ForceSelection()
         throws Exception {

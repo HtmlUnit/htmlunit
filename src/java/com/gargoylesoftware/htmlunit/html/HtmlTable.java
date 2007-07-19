@@ -65,7 +65,7 @@ public class HtmlTable extends ClickableElement {
     /**
      *  Create an instance
      *
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      * @deprecated You should not directly construct HtmlTable.
      */
@@ -79,7 +79,7 @@ public class HtmlTable extends ClickableElement {
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      */
     HtmlTable(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
@@ -90,9 +90,9 @@ public class HtmlTable extends ClickableElement {
      *  Return the first cell that matches the specified row and column,
      *  searching left to right, top to bottom.
      *
-     * @param  rowIndex The row index
-     * @param  columnIndex The column index
-     * @return  The HtmlTableCell at that location or null if there are no cells
+     * @param rowIndex The row index
+     * @param columnIndex The column index
+     * @return The HtmlTableCell at that location or null if there are no cells
      *      at that location
      */
     public final HtmlTableCell getCellAt( final int rowIndex, final int columnIndex )
@@ -114,7 +114,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * @return  an iterator over all the HtmlTableRow objects
+     * @return an iterator over all the HtmlTableRow objects
      */
     private RowIterator getRowIterator() {
         return new RowIterator();
@@ -153,7 +153,7 @@ public class HtmlTable extends ClickableElement {
      * compute the number of rows in this table. Note that the count is computed dynamically
      * by iterating over all rows
      *
-     * @return  The number of rows in this table
+     * @return The number of rows in this table
      */
     public final int getRowCount() {
         int count = 0;

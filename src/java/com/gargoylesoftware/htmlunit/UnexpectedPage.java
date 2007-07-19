@@ -56,7 +56,7 @@ public class UnexpectedPage implements Page {
     /**
      *  Create an instance
      *
-     * @param  webResponse The response from the server that contains the data
+     * @param webResponse The response from the server that contains the data
      *      required to create this page
      * @param enclosingWindow The window that this page is being loaded into.
      */
@@ -81,8 +81,8 @@ public class UnexpectedPage implements Page {
      *  Return an input stream representing all the content that was returned
      *  from the server.
      *
-     * @return  See above.
-     * @exception  IOException If an IO error occurs
+     * @return See above.
+     * @exception IOException If an IO error occurs
      */
     public InputStream getInputStream()
         throws IOException {
@@ -92,7 +92,7 @@ public class UnexpectedPage implements Page {
     /**
      *  Return the web response that was originally used to create this page.
      *
-     * @return  The web response
+     * @return The web response
      */
     public WebResponse getWebResponse() {
         return webResponse_;

@@ -50,8 +50,8 @@ public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {
     /**
      *  Create an instance
      *
-     * @param  key A key
-     * @param  value a Value
+     * @param key A key
+     * @param value a Value
      */
     public KeyValuePair( final String key, final String value ) {
         super( key, value );
@@ -60,7 +60,7 @@ public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {
     /**
      *  Return the key
      *
-     * @return  Return the key
+     * @return Return the key
      */
     public String getKey() {
         return getName();
@@ -69,7 +69,7 @@ public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {
     /**
      *  Return the value
      *
-     * @return  Return the value
+     * @return Return the value
      */
     public String getValue() {
         return super.getValue();

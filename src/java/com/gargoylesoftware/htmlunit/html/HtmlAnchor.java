@@ -66,7 +66,7 @@ public class HtmlAnchor extends FocusableElement {
     /**
      *  Create an instance
      *
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      * @deprecated You should not directly construct HtmlAnchor.
      */
@@ -80,7 +80,7 @@ public class HtmlAnchor extends FocusableElement {
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      */
     HtmlAnchor(final String namespaceURI, final String qualifiedName, final HtmlPage page,

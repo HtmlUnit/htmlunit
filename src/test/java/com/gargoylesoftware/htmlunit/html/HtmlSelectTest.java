@@ -62,7 +62,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name Name of the test
+     * @param name Name of the test
      */
     public HtmlSelectTest(final String name) {
         super(name);
@@ -71,7 +71,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      *  Test the good path of submitting a select
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testSelect() throws Exception {
 
@@ -106,7 +106,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      *  Test submitting the select with no options selected
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testSelect_MultipleSelectNoneSelected() throws Exception {
 
@@ -140,7 +140,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      *  Test changing the selected option
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testSelect_ChangeSelectedOption_SingleSelect() throws Exception {
 
@@ -175,7 +175,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      *  Test changing the selected option
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testSelect_ChangeSelectedOption_MultipleSelect() throws Exception {
 
@@ -212,7 +212,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      *  Test multiple selected options on multiple select lists
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testSelect_MultipleSelectMultipleSelected() throws Exception {
 
@@ -240,7 +240,7 @@ public class HtmlSelectTest extends WebTestCase {
      * Test multiple selected options on single select lists. This is erroneous HTML, but
      * browsers simply use the last option.
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testSelect_SingleSelectMultipleSelected() throws Exception {
 
@@ -267,7 +267,7 @@ public class HtmlSelectTest extends WebTestCase {
      * Test no selected options on single select lists. This is erroneous HTML, but
      * browsers simply assume the first one to be selected
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testSelect_SingleSelectNoneSelected() throws Exception {
 
@@ -293,7 +293,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      * Test no selected options on single select lists with a size > 1
      * 
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testSelect_SingleSelectNoneSelectedButSizeGreaterThanOne() throws Exception {
 
@@ -316,7 +316,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      *  Test changing the selected option
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testSetSelected_IllegalValue() throws Exception {
 
@@ -586,7 +586,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      * Test that asText() returns a blank string if nothing is selected.
      * 
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testAsTextWhenNothingSelected() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>"
@@ -624,7 +624,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      * Test that setSelectedAttribute returns the right page.
      * 
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testSetSelectedAttributeReturnedPage() throws Exception {
         final String content = "<html><head><title>foo</title>"

@@ -72,7 +72,7 @@ public class ObjectInstantiationException extends RuntimeException {
      *  Print the stack trace. If this exception contains another exception then
      *  the stack traces for both will be printed.
      *
-     * @param  writer  Where the stack trace will be written
+     * @param writer  Where the stack trace will be written
      */
     public void printStackTrace( final PrintWriter writer ) {
         super.printStackTrace( writer );
@@ -86,7 +86,7 @@ public class ObjectInstantiationException extends RuntimeException {
      *  Print the stack trace. If this exception contains another exception then
      *  the stack traces for both will be printed.
      *
-     * @param  stream  Where the stack trace will be written
+     * @param stream Where the stack trace will be written
      */
     public void printStackTrace( final PrintStream stream ) {
         super.printStackTrace( stream );

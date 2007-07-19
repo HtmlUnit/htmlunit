@@ -105,7 +105,7 @@ public final class XmlUtil {
      * A warning is logged if an exception is thrown while parsing the xml content 
      * (for instance when the content is not a valid xml and can't be parsed).
      *
-     * @param  webResponse The response from the server
+     * @param webResponse The response from the server
      * @throws IOException If the page could not be created
      * @return the parse result
      * @throws SAXException if the parsing fails

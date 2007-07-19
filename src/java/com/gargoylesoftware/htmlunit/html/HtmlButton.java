@@ -65,7 +65,7 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
     /**
      *  Create an instance
      *
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      * @deprecated You should not directly construct HtmlButton.
      */
@@ -79,7 +79,7 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      */
     HtmlButton(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -90,7 +90,7 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
     /**
      *  Set the content of the "value" attribute
      *
-     * @param  newValue The new content
+     * @param newValue The new content
      */
     public void setValueAttribute( final String newValue ) {
         setAttributeValue( "value", newValue );
@@ -139,7 +139,7 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
      *  THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
      *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
-     * @return  See above
+     * @return See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
         return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getValueAttribute() )};

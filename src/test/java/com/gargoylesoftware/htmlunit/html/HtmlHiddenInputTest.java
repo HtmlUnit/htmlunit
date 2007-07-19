@@ -49,7 +49,7 @@ public class HtmlHiddenInputTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public HtmlHiddenInputTest( final String name ) {
         super( name );

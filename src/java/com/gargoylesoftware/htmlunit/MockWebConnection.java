@@ -70,7 +70,7 @@ public class MockWebConnection extends WebConnectionImpl {
     /**
      *  Create an instance
      *
-     * @param  webClient The web client
+     * @param webClient The web client
      */
     public MockWebConnection(final WebClient webClient) {
         super(webClient);
@@ -87,8 +87,8 @@ public class MockWebConnection extends WebConnectionImpl {
     /**
      *  Submit a request and retrieve a response
      *
-     * @param  webRequestSettings Settings to make the request with
-     * @return  See above
+     * @param webRequestSettings Settings to make the request with
+     * @return See above
      * @throws IOException (only for extending classes)
      */
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
@@ -115,7 +115,7 @@ public class MockWebConnection extends WebConnectionImpl {
     /**
      *  Return the method that was used in the last call to submitRequest()
      *
-     * @return  See above
+     * @return See above
      */
     public SubmitMethod getLastMethod() {
         return lastRequest_.getSubmitMethod();
@@ -124,7 +124,7 @@ public class MockWebConnection extends WebConnectionImpl {
     /**
      *  Return the parameters that were used in the last call to submitRequest()
      *
-     * @return  See above
+     * @return See above
      */
     public List getLastParameters() {
         return lastRequest_.getRequestParameters();
@@ -272,7 +272,7 @@ public class MockWebConnection extends WebConnectionImpl {
     /**
      *  Return the additional headers that were used in the in the last call 
      *  to {@link #getResponse(WebRequestSettings)}.
-     * @return  See above
+     * @return See above
      */
     public Map getLastAdditionalHeaders() {
         return lastRequest_.getAdditionalHeaders();
@@ -281,7 +281,7 @@ public class MockWebConnection extends WebConnectionImpl {
     /**
      * Return the {@link WebRequestSettings} that was used in the in the last call 
      * to {@link #getResponse(WebRequestSettings)}.
-     * @return  See above
+     * @return See above
      */
     public WebRequestSettings getLastWebRequestSettings() {
         return lastRequest_;

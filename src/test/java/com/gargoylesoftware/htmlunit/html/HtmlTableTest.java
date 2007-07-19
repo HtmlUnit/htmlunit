@@ -52,7 +52,7 @@ public class HtmlTableTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public HtmlTableTest( final String name ) {
         super( name );
@@ -61,7 +61,7 @@ public class HtmlTableTest extends WebTestCase {
     /**
      *  Test getTableCell(int,int)
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testGetTableCell() throws Exception {
         final String htmlContent
@@ -93,7 +93,7 @@ public class HtmlTableTest extends WebTestCase {
     /**
      *  Test getCellAt(int,int) with colspan
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testGetCellAt() throws Exception {
         final String htmlContent
@@ -129,7 +129,7 @@ public class HtmlTableTest extends WebTestCase {
     /**
      *  Test getTableCell(int,int) for a cell that doesn't exist
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testGetTableCell_NotFound()
         throws Exception {

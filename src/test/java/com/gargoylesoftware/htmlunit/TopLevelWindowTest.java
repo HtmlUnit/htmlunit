@@ -53,7 +53,7 @@ public class TopLevelWindowTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public TopLevelWindowTest( final String name ) {
         super( name );

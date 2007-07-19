@@ -71,7 +71,7 @@ public class DocumentNavigatorTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      * @throws Exception if initialisation fails
      */
     public DocumentNavigatorTest( final String name ) throws Exception {

@@ -59,7 +59,7 @@ public class DomNodeTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name Name of the test
+     * @param name Name of the test
      */
     public DomNodeTest( final String name ) {
         super( name );

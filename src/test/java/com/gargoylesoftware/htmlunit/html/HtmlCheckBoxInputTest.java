@@ -56,7 +56,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public HtmlCheckBoxInputTest( final String name ) {
         super( name );

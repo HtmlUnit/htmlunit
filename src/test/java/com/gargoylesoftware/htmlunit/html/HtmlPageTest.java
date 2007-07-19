@@ -88,14 +88,14 @@ public class HtmlPageTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public HtmlPageTest(final String name) {
         super(name);
     }
 
     /**
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testConstructor() throws Exception {
         final String htmlContent = "<html>"
@@ -1203,7 +1203,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testAsXml() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head>"
@@ -1216,7 +1216,7 @@ public class HtmlPageTest extends WebTestCase {
         
     /**
      * Test that the generated xml is valid as html code too
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testAsXmlValidHtmlOutput() throws Exception {
         final String html = 
@@ -1240,7 +1240,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testAsXml2() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>"
@@ -1258,7 +1258,7 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * Regression test for bug 1204637
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testIsJavascript() throws Exception {
         assertTrue(HtmlPage.isJavaScript("text/javascript", null));
@@ -1267,7 +1267,7 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * Regression test for bug 1233519
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testGetHtmlElementByIdAfterRemove() throws Exception {
         final String htmlContent
@@ -1304,7 +1304,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * Test getHtmlElementById() when 2 elements have the same id and the first one
      * is removed.
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testGetHtmlElementById_idTwice() throws Exception {
         final String htmlContent

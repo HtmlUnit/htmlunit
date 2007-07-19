@@ -60,7 +60,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public HtmlSubmitInputTest( final String name ) {
         super( name );

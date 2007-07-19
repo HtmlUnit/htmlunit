@@ -58,7 +58,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
     /**
      *  Create an instance
      *
-     * @param  page The page that this element is contained within
+     * @param page The page that this element is contained within
      * @param attributes the initial attributes
      * @deprecated You should not directly construct HtmlTableHeaderCell.
      */
@@ -72,7 +72,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
-     * @param  page The page that this element is contained within
+     * @param page The page that this element is contained within
      * @param attributes the initial attributes
      */
     HtmlTableHeaderCell(final String namespaceURI, final String qualifiedName, final HtmlPage page,

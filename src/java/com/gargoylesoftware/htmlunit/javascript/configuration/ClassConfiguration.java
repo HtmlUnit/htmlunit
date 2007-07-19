@@ -241,8 +241,8 @@ public final class ClassConfiguration {
     /**
      * Test for value equality of the 2 objects
      * 
-     * @param   obj   the reference object with which to compare.
-     * @return  <code>true</code> if the value of this object is the same as the obj
+     * @param obj   the reference object with which to compare.
+     * @return <code>true</code> if the value of this object is the same as the obj
      *          argument; <code>false</code> otherwise.
      */
     public boolean equals(final Object obj) {
@@ -407,8 +407,8 @@ public final class ClassConfiguration {
         /**
          * Test for value equality of the 2 objects
          * 
-         * @param   obj   the reference object with which to compare.
-         * @return  <code>true</code> if the value of this object is the same as the obj
+         * @param obj   the reference object with which to compare.
+         * @return <code>true</code> if the value of this object is the same as the obj
          *          argument; <code>false</code> otherwise.
          */
         private boolean valueEquals(final Object obj) {
@@ -460,8 +460,8 @@ public final class ClassConfiguration {
         /**
          * Test for value equality of the 2 objects
          * 
-         * @param   obj   the reference object with which to compare.
-         * @return  <code>true</code> if the value of this object is the same as the obj
+         * @param obj   the reference object with which to compare.
+         * @return <code>true</code> if the value of this object is the same as the obj
          *          argument; <code>false</code> otherwise.
          */
         private boolean valueEquals(final Object obj) {
@@ -513,8 +513,8 @@ public final class ClassConfiguration {
         /**
          * Test for value equality of the 2 objects
          * 
-         * @param   obj   the reference object with which to compare.
-         * @return  <code>true</code> if the value of this object is the same as the obj
+         * @param obj the reference object with which to compare.
+         * @return <code>true</code> if the value of this object is the same as the obj
          *          argument; <code>false</code> otherwise.
          */
         private boolean valueEquals(final Object obj) {

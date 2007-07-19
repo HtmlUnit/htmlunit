@@ -68,7 +68,7 @@ public class HtmlImageInput extends HtmlInput {
     /**
      *  Create an instance
      *
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      * @deprecated You should not directly construct HtmlImageInput.
      */
@@ -82,7 +82,7 @@ public class HtmlImageInput extends HtmlInput {
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      */
     HtmlImageInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -97,7 +97,7 @@ public class HtmlImageInput extends HtmlInput {
      *  THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
      *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
-     * @return  See above
+     * @return See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
         final String name = getNameAttribute();
@@ -124,9 +124,9 @@ public class HtmlImageInput extends HtmlInput {
      * support this method so it is made protected here.  Those subclasses
      * that wish to expose it will override and make it public.
      *
-     * @return  The Page that is the result of submitting this page to the
+     * @return The Page that is the result of submitting this page to the
      *      server
-     * @exception  IOException If an io error occurs
+     * @exception IOException If an io error occurs
      */
     public Page click() throws IOException {
         return click(0,0);
@@ -161,8 +161,8 @@ public class HtmlImageInput extends HtmlInput {
      * @param x The x coordinate of the pointing device at the time of clicking
      * @param y The y coordinate of the pointing device at the time of clicking
      * @return The page that is loaded after the click has taken place.
-     * @exception  IOException If an io error occurs
-     * @exception  ElementNotFoundException If a particular xml element could
+     * @exception IOException If an io error occurs
+     * @exception ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
      */
     public Page click( final int x, final int y )

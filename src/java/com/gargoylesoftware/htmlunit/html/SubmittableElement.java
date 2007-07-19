@@ -55,7 +55,7 @@ public interface SubmittableElement {
      *  THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
      *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
-     * @return  See above
+     * @return See above
      */
     KeyValuePair[] getSubmitKeyValuePairs();
 

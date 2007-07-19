@@ -100,7 +100,7 @@ public class HttpWebConnection extends WebConnectionImpl {
 
     /**
      * Create a new HTTP web connection instance.
-     * @param  webClient The WebClient that is using this connection
+     * @param webClient The WebClient that is using this connection
      */
     public HttpWebConnection( final WebClient webClient ) {
         super(webClient);
@@ -109,9 +109,9 @@ public class HttpWebConnection extends WebConnectionImpl {
     /**
      *  Submit a request and retrieve a response
      *
-     * @param  webRequestSettings Settings to make the request with
-     * @return  See above
-     * @exception  IOException If an IO error occurs
+     * @param webRequestSettings Settings to make the request with
+     * @return See above
+     * @exception IOException If an IO error occurs
      */
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
 

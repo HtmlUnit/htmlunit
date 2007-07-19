@@ -82,7 +82,7 @@ public final class HtmlHtml extends HtmlElement {
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      *  details on the use of this attribute.
      *
-     * @return  The value of the attribute "lang" or an empty string if that
+     * @return The value of the attribute "lang" or an empty string if that
      *      attribute isn't defined.
      */
     public String getLangAttribute() {
@@ -94,7 +94,7 @@ public final class HtmlHtml extends HtmlElement {
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      *  details on the use of this attribute.
      *
-     * @return  The value of the attribute "xml:lang" or an empty string if that
+     * @return The value of the attribute "xml:lang" or an empty string if that
      *      attribute isn't defined.
      */
     public String getXmlLangAttribute() {
@@ -106,7 +106,7 @@ public final class HtmlHtml extends HtmlElement {
      *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      *  details on the use of this attribute.
      *
-     * @return  The value of the attribute "dir" or an empty string if that
+     * @return The value of the attribute "dir" or an empty string if that
      *      attribute isn't defined.
      */
     public String getTextDirectionAttribute() {

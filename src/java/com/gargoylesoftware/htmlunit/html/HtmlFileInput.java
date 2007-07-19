@@ -60,7 +60,7 @@ public class HtmlFileInput extends HtmlInput {
     /**
      *  Create an instance
      *
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      * @deprecated You should not directly construct HtmlFileInput.
      */
@@ -74,7 +74,7 @@ public class HtmlFileInput extends HtmlInput {
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      */
     HtmlFileInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -94,7 +94,7 @@ public class HtmlFileInput extends HtmlInput {
      *  THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
      *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
-     * @return  See above
+     * @return See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
         String value = getValueAttribute();

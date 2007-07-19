@@ -54,8 +54,8 @@ public class TextPage implements Page {
     /**
      *  Create an instance
      *
-     * @param  webResponse The response from the server
-     * @param  enclosingWindow The window that holds the page.
+     * @param webResponse The response from the server
+     * @param enclosingWindow The window that holds the page.
      */
     public TextPage( final WebResponse webResponse, final WebWindow enclosingWindow ) {
         webResponse_ = webResponse;
@@ -78,7 +78,7 @@ public class TextPage implements Page {
     /**
      *  Return the content of the page
      *
-     * @return  See above
+     * @return See above
      */
     public String getContent() {
         return content_;
@@ -87,7 +87,7 @@ public class TextPage implements Page {
     /**
      *  Return the web response that was originally used to create this page.
      *
-     * @return  The web response
+     * @return The web response
      */
     public WebResponse getWebResponse() {
         return webResponse_;

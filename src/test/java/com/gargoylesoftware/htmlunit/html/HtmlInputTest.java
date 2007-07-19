@@ -59,7 +59,7 @@ public final class HtmlInputTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public HtmlInputTest( final String name ) {
         super( name );
@@ -68,7 +68,7 @@ public final class HtmlInputTest extends WebTestCase {
     /**
      *  Test that selecting one radio button will deselect all the others
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testRadioButtonsAreMutuallyExclusive() throws Exception {
         final String htmlContent
@@ -185,7 +185,7 @@ public final class HtmlInputTest extends WebTestCase {
     /**
      *  Test that clicking a radio button will select it
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testClickRadioButton() throws Exception {
         final String htmlContent
@@ -211,7 +211,7 @@ public final class HtmlInputTest extends WebTestCase {
     /**
      *  Test that default type of input is text
      *
-     * @exception  Exception If the test fails
+     * @exception Exception If the test fails
      */
     public void testInputNoType() throws Exception {
         final String htmlContent

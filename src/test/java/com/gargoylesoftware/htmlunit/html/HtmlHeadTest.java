@@ -52,7 +52,7 @@ public class HtmlHeadTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public HtmlHeadTest( final String name ) {
         super( name );

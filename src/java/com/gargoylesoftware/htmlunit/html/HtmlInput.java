@@ -70,7 +70,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     /**
      *  Create an instance
      *
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      */
     public HtmlInput(final HtmlPage page, final Map attributes) {
@@ -82,7 +82,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
-     * @param  page The page that contains this element
+     * @param page The page that contains this element
      * @param attributes the initial attributes
      */
     public HtmlInput(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
@@ -110,7 +110,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      *  THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
      *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
-     * @return  See above
+     * @return See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
         return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getValueAttribute() )};
@@ -422,7 +422,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     /**
      *  Set the "checked" attribute
      *
-     * @param  isChecked true if this element is to be selected
+     * @param isChecked true if this element is to be selected
      * @return The page that occupies this window after setting checked status.
      * It may be the same window or it may be a freshly loaded one.
      */
@@ -434,7 +434,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     /**
      *  Return true if this element is currently selected
      *
-     * @return  See above
+     * @return See above
      */
     public boolean isChecked() {
         return isAttributeDefined("checked");
@@ -447,8 +447,8 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * @param x The x coordinate of the pointing device at the time of clicking
      * @param y The y coordinate of the pointing device at the time of clicking
      * @return The page that is loaded after the click has taken place.
-     * @exception  IOException If an io error occurs
-     * @exception  ElementNotFoundException If a particular xml element could
+     * @exception IOException If an io error occurs
+     * @exception ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
      */
     public Page click( final int x, final int y )

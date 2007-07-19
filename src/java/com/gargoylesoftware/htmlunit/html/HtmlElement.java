@@ -88,7 +88,7 @@ public abstract class HtmlElement extends DomNode {
     /** The map holding the attribute values, keyed by name. */
     private Map attributes_;
     
-    private List/*HtmlAttributeChangeListener*/ attributeListeners_;
+    private List/* HtmlAttributeChangeListener */ attributeListeners_;
 
     /**
      * Creates an instance.
@@ -133,8 +133,8 @@ public abstract class HtmlElement extends DomNode {
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
      * attribute was specified but it was empty.
      *
-     * @param  attributeName the name of the attribute
-     * @return  The value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
+     * @param attributeName the name of the attribute
+     * @return The value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
      * or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
     public final String getAttributeValue( final String attributeName ) {
@@ -382,7 +382,7 @@ public abstract class HtmlElement extends DomNode {
      * Return the element with the given name that enclosed this element or null if this element is
      * no such element is found.
      * @param tagName the name of the tag searched (case insensitive)
-     * @return  See above
+     * @return See above
      */
     public HtmlElement getEnclosingElement(final String tagName) {
         final String tagNameLC = tagName.toLowerCase();
@@ -403,7 +403,7 @@ public abstract class HtmlElement extends DomNode {
      *  Return the form that enclosed this element or null if this element is
      *  not within a form.
      *
-     * @return  See above
+     * @return See above
      */
     public HtmlForm getEnclosingForm() {
         return (HtmlForm) getEnclosingElement("form");
@@ -413,7 +413,7 @@ public abstract class HtmlElement extends DomNode {
      *  Return the form that enclosed this element or throw an exception if this element is
      *  not within a form.
      *
-     * @return  See above
+     * @return See above
      * @throws IllegalStateException If the element is not within a form.
      */
     public HtmlForm getEnclosingFormOrDie() throws IllegalStateException {
@@ -504,7 +504,7 @@ public abstract class HtmlElement extends DomNode {
     /**
      *  Return a string representation of this object
      *
-     * @return  See above
+     * @return See above
      */
     public String toString() {
         final StringBuffer buffer = new StringBuffer();
@@ -534,10 +534,10 @@ public abstract class HtmlElement extends DomNode {
      *  Assert that the specified string is not empty. Throw an exception if it
      *  is.
      *
-     * @param  description The description to pass into the exception if this
+     * @param description The description to pass into the exception if this
      *      string is empty
-     * @param  string The string to check
-     * @throws  IllegalArgumentException If the string is empty
+     * @param string The string to check
+     * @throws IllegalArgumentException If the string is empty
      */
     protected final void assertNotEmpty( final String description, final String string )
         throws IllegalArgumentException {
@@ -551,11 +551,11 @@ public abstract class HtmlElement extends DomNode {
      *  Search by the specified criteria and return the first HtmlElement that
      *  is found
      *
-     * @param  elementName The name of the element
-     * @param  attributeName The name of the attribute
-     * @param  attributeValue The value of the attribute
-     * @return  The HtmlElement
-     * @exception  ElementNotFoundException If a particular xml element could
+     * @param elementName The name of the element
+     * @param attributeName The name of the attribute
+     * @param attributeValue The value of the attribute
+     * @return The HtmlElement
+     * @exception ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
      */
     public final HtmlElement getOneHtmlElementByAttribute(
@@ -582,9 +582,9 @@ public abstract class HtmlElement extends DomNode {
      *  Return the html element with the specified id. If more than one element
      *  has this id (not allowed by the html spec) then return the first one.
      *
-     * @param  id The id value to search by
-     * @return  The html element found
-     * @exception  ElementNotFoundException If no element was found that matches
+     * @param id The id value to search by
+     * @return The html element found
+     * @exception ElementNotFoundException If no element was found that matches
      *      the id
      */
     public HtmlElement getHtmlElementById( final String id )
@@ -607,8 +607,8 @@ public abstract class HtmlElement extends DomNode {
      * }
      * </pre>
      *
-     * @param  id The id to search by
-     * @return  true if an element was found with the specified id.
+     * @param id The id to search by
+     * @return true if an element was found with the specified id.
      */
     public boolean hasHtmlElementWithId( final String id ) {
         try {
@@ -624,10 +624,10 @@ public abstract class HtmlElement extends DomNode {
      *  Search by the specified criteria and return all the HtmlElement that
      *  are found
      *
-     * @param  elementName The name of the element
-     * @param  attributeName The name of the attribute
-     * @param  attributeValue The value of the attribute
-     * @return  A list of HtmlElements
+     * @param elementName The name of the element
+     * @param attributeName The name of the attribute
+     * @param attributeValue The value of the attribute
+     * @return A list of HtmlElements
      */
     public final List getHtmlElementsByAttribute(
             final String elementName,
@@ -654,7 +654,7 @@ public abstract class HtmlElement extends DomNode {
      *  Given a list of tag names, return the html elements that correspond to
      *  any matching element
      *
-     * @param  acceptableTagNames The list of tag names to search by.
+     * @param acceptableTagNames The list of tag names to search by.
      * @return The list of tag names
      */
     public final List getHtmlElementsByTagNames( final List acceptableTagNames ) {
@@ -673,7 +673,7 @@ public abstract class HtmlElement extends DomNode {
      *  Given a list of tag names, return the html elements that correspond to
      *  any matching element
      *
-     * @param  tagName the tag name to match
+     * @param tagName the tag name to match
      * @return The list of tag names
      */
     public final List getHtmlElementsByTagName( final String tagName ) {

@@ -57,7 +57,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public HtmlRadioButtonInputTest( final String name ) {
         super( name );

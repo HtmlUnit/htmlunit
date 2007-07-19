@@ -249,7 +249,7 @@ public class WebRequestSettings {
 
     /**
      * Return a string representation of this object
-     * @return  See above
+     * @return See above
      */
     public String toString() {
         final StringBuffer buffer = new StringBuffer();

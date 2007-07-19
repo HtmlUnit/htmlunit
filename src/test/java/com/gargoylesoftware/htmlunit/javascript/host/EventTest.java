@@ -62,7 +62,7 @@ public class EventTest extends WebTestCase {
     /**
      *  Create an instance
      *
-     * @param  name Name of the test
+     * @param name Name of the test
      */
     public EventTest( final String name ) {
         super( name );

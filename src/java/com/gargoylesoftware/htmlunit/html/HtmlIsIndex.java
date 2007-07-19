@@ -113,7 +113,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      *  THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
      *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
-     * @return  See above
+     * @return See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
         return new KeyValuePair[]{new KeyValuePair( getPromptAttribute(), getValue() )};

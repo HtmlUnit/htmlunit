@@ -56,7 +56,7 @@ public class WebResponseImplTest extends WebTestCase {
 
     /**
      *  Create an instance
-     * @param  name The name of the test
+     * @param name The name of the test
      */
     public WebResponseImplTest( final String name ) {
         super( name );
