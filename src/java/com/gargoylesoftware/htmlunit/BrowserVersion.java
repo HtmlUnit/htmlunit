@@ -39,6 +39,9 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 /**
  * Objects of this class represent one specific version of a given browser.  Predefined
  * constants are provided for common browser versions.
@@ -435,121 +438,13 @@ public class BrowserVersion implements Serializable {
      * {@inheritDoc}
      */
     public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        final BrowserVersion other = (BrowserVersion) o;
-
-        if (Float.compare(other.getBrowserVersionNumeric(), getBrowserVersionNumeric()) != 0) {
-            return false;
-        }
-        if (Float.compare(other.getJavaScriptVersionNumeric(), getJavaScriptVersionNumeric()) != 0) {
-            return false;
-        }
-        if (isOnLine() != other.isOnLine()) {
-            return false;
-        }
-        if( !equals( getApplicationCodeName(), other.getApplicationCodeName() ) ) {
-            return false;
-        }
-        if( !equals( getApplicationMinorVersion(), other.getApplicationMinorVersion() ) ) {
-            return false;
-        }
-        if( !equals( getApplicationName(), other.getApplicationName() ) ) {
-            return false;
-        }
-        if( !equals( getApplicationVersion(), other.getApplicationVersion() ) ) {
-            return false;
-        }
-        if( !equals( getBrowserLanguage(), other.getBrowserLanguage() ) ) {
-            return false;
-        }
-        if( !equals( getCpuClass(), other.getCpuClass() ) ) {
-            return false;
-        }
-        if( !equals( getJavaScriptVersion(), other.getJavaScriptVersion() ) ) {
-            return false;
-        }
-        if( !equals( getPlatform(), other.getPlatform() ) ) {
-            return false;
-        }
-        if( !equals( getSystemLanguage(), other.getSystemLanguage() ) ) {
-            return false;
-        }
-        if( !equals( getUserAgent(), other.getUserAgent() ) ) {
-            return false;
-        }
-        if( !equals( getUserLanguage(), other.getUserLanguage() ) ) {
-            return false;
-        }
-        return true;
+        return EqualsBuilder.reflectionEquals(this, o);
     }
 
     /**
      * {@inheritDoc}
      */
     public int hashCode() {
-        int result = 0;
-        if( getApplicationCodeName() != null ) {
-            result = getApplicationCodeName().hashCode();
-        }
-        result = 31 * result + hashCode(getApplicationMinorVersion());
-        result = 31 * result + hashCode(getApplicationName());
-        result = 31 * result + hashCode(getApplicationVersion());
-        result = 31 * result + hashCode(getBrowserLanguage());
-        result = 31 * result + hashCode(getCpuClass());
-        result = 31 * result;
-        if( isOnLine() ) {
-            result += 1;
-        }
-        result = 31 * result + hashCode(getPlatform());
-        result = 31 * result + hashCode(getSystemLanguage());
-        result = 31 * result + hashCode(getUserAgent());
-        result = 31 * result + hashCode(getUserLanguage());
-        result = 31 * result + hashCode(getJavaScriptVersion());
-        result = 31 * result;
-        if( getJavaScriptVersionNumeric() != +0.0f ) {
-            result += Float.floatToIntBits(getJavaScriptVersionNumeric());
-        }
-        result = 31 * result;
-        if( getBrowserVersionNumeric() != +0.0f ) {
-            result +=  Float.floatToIntBits(getBrowserVersionNumeric());
-        }
-        return result;
-    }
-
-    /**
-     * Test if the given objects are equal.
-     * 
-     * @param o1 object1
-     * @param o2 object 2
-     * 
-     * @return whether o1 equals o2
-     */
-    private static boolean equals( final Object o1, final Object o2 ) {
-        if( o1 != null ) {
-            return o1.equals( o2 );
-        }
-        else {
-            return o2 == null;
-        }
-    }
-
-    /**
-     * Returns the hashCode of the given object, or 0 if null.
-     * @param object an object
-     * @return the hashCode of the given object, or 0 if null
-     */
-    private static int hashCode( final Object object ) {
-        if( object == null ) {
-            return 0;
-        }
-        else {
-            return object.hashCode();
-        }
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 }
