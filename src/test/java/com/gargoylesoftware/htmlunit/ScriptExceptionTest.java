@@ -122,12 +122,10 @@ public final class ScriptExceptionTest extends WebTestCase {
     }
 
     private String getFileContent(final String fileName) throws IOException {
-        final InputStream stream = getClass().getClassLoader().
-            getResourceAsStream("com/gargoylesoftware/htmlunit/" + fileName);
+        final String resource = "com/gargoylesoftware/htmlunit/" + fileName;
+        final InputStream stream = getClass().getClassLoader().getResourceAsStream(resource);
         assertNotNull(fileName, stream);
-        final StringWriter stringWriter = new StringWriter();
-        IOUtils.copy(stream, stringWriter);
-        IOUtils.closeQuietly(stream);
-        return stringWriter.toString();
+        return IOUtils.toString(stream);
     }
+
 }
