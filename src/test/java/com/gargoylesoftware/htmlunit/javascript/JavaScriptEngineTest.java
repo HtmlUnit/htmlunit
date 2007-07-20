@@ -131,7 +131,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
-        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -1185,7 +1185,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         try {
-            loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+            loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
             fail();
         }
         catch( final Exception e ) {
@@ -1197,8 +1197,8 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testComment() throws Exception {
-        testComment(BrowserVersion.FULL_FEATURED_BROWSER);
-        testComment(BrowserVersion.MOZILLA_1_0);
+        testComment(BrowserVersion.INTERNET_EXPLORER_6_0);
+        testComment(BrowserVersion.FIREFOX_2);
     }
     
     /**

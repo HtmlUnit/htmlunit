@@ -94,35 +94,57 @@ public class BrowserVersion implements Serializable {
     public static final String PLATFORM_WIN32 = "Win32";
 
     /**
-     * A fake browser that supports all the new features.  This constant is used whenever
+     * A fake browser that supports all the new features. This constant is used whenever
      * you don't care which browser is being simulated.
+     * @deprecated please use INTERNET_EXPLORER_7_0
      */
     public static final BrowserVersion FULL_FEATURED_BROWSER = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
         "Mozilla/4.0 (compatible; MSIE 6.0b; Windows 98)", "1.2", 6);
 
-    /** Mozilla 1.0 */
+    /**
+     * Mozilla 1.0
+     * @deprecated please use FIREFOX_2
+     */
     public static final BrowserVersion MOZILLA_1_0 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.0.0) Gecko/20020530", "1.2", 6);
 
-    /** Netscape 4.79 */
+    /**
+     * Netscape 4.79
+     * @deprecated please use FIREFOX_2
+     */
     public static final BrowserVersion NETSCAPE_4_7_9 = new BrowserVersion(
         NETSCAPE, "4.79 [en] (Windows NT 5.0; U)",
         "Mozilla/4.79 [en] (Windows NT 5.0; U)", "1.2", 4.79f);
 
-    /** Netscape 6.2.3 */
+    /**
+     * Netscape 6.2.3
+     * @deprecated please use FIREFOX_2
+     */
     public static final BrowserVersion NETSCAPE_6_2_3 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US;rv:0.9.4.1) Gecko/20020508 Netscape6/6.2.3",
         "1.2", 6);
 
-    /** Internet explorer 6.0  */
+    /** Firefox 2 */
+    public static final BrowserVersion FIREFOX_2 = new BrowserVersion(
+        NETSCAPE, "5.0 (Windows; en-US)",
+        "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.4) Gecko/20070515 Firefox/2.0.0.4",
+        "1.2", 6 );
+
+    /** Internet Explorer 6  */
     public static final BrowserVersion INTERNET_EXPLORER_6_0 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
         "4.0 (compatible; MSIE 6.0; Windows 98)", "1.2", 6);
 
-    private static BrowserVersion DefaultBrowserVersion_ = FULL_FEATURED_BROWSER;
+    /** Internet Explorer 7 */
+    public static final BrowserVersion INTERNET_EXPLORER_7_0 = new BrowserVersion(
+        INTERNET_EXPLORER, "4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)",
+        "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)", "1.2", 7);
+
+    /** The default browser version. */
+    private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_6_0;
 
     /**
      * Instantiate one.
@@ -144,16 +166,17 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Return the default version that is used whenever a specific version isn't specified.
-     * @return The default version.
+     * Returns the default browser version that is used whenever a specific version isn't specified.
+     * Defaults to {@link #INTERNET_EXPLORER_6_0}.
+     * @return The default browser version.
      */
     public static BrowserVersion getDefault() {
         return DefaultBrowserVersion_;
     }
 
     /**
-     * Set the default version that is used whenever a specific version isn't specified.
-     * @param newBrowserVersion The new default version.
+     * Sets the default browser version that is used whenever a specific version isn't specified.
+     * @param newBrowserVersion The new default browser version.
      */
     public static void setDefault( final BrowserVersion newBrowserVersion ) {
         Assert.notNull("newBrowserVersion", newBrowserVersion);

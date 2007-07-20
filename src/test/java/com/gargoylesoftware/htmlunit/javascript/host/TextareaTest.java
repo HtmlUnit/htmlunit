@@ -149,7 +149,7 @@ public class TextareaTest extends WebTestCase {
         final String[] alertsIE = {"undefined","undefined"};
         testTextLength(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
         final String[] alertsFF = {"11","0"};
-        testTextLength(BrowserVersion.MOZILLA_1_0, alertsFF);
+        testTextLength(BrowserVersion.FIREFOX_2, alertsFF);
     }
 
     private void testTextLength(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
@@ -180,17 +180,17 @@ public class TextareaTest extends WebTestCase {
     public void testSelection() throws Exception {
         testSelection(3, 10, BrowserVersion.INTERNET_EXPLORER_6_0, 
                 new String[] {"undefined,undefined", "3,undefined", "3,10"});
-        testSelection(3, 10, BrowserVersion.MOZILLA_1_0, 
+        testSelection(3, 10, BrowserVersion.FIREFOX_2, 
                 new String[] {"11,11", "3,11", "3,10"});
         
         testSelection(-3, 15, BrowserVersion.INTERNET_EXPLORER_6_0, 
                 new String[] {"undefined,undefined", "-3,undefined", "-3,15"});
-        testSelection(-3, 15, BrowserVersion.MOZILLA_1_0, 
+        testSelection(-3, 15, BrowserVersion.FIREFOX_2, 
                 new String[] {"11,11", "0,11", "0,11"});
 
         testSelection(10, 5, BrowserVersion.INTERNET_EXPLORER_6_0, 
                 new String[] {"undefined,undefined", "10,undefined", "10,5"});
-        testSelection(10, 5, BrowserVersion.MOZILLA_1_0, 
+        testSelection(10, 5, BrowserVersion.FIREFOX_2, 
                 new String[] {"11,11", "10,11", "5,5"});
     }
 

@@ -305,7 +305,7 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void test_insertBefore_nullRef() throws Exception {
-        test_insertBefore(BrowserVersion.MOZILLA_1_0, "aNode.insertBefore(nodeToInsert, null);");
+        test_insertBefore(BrowserVersion.FIREFOX_2, "aNode.insertBefore(nodeToInsert, null);");
         test_insertBefore(BrowserVersion.INTERNET_EXPLORER_6_0, "aNode.insertBefore(nodeToInsert, null);");
     }
 
@@ -317,7 +317,7 @@ public class NodeImplTest extends WebTestCase {
     public void test_insertBefore_noSecondArg() throws Exception {
         test_insertBefore(BrowserVersion.INTERNET_EXPLORER_6_0, "aNode.insertBefore(nodeToInsert);");
         try {
-            test_insertBefore(BrowserVersion.MOZILLA_1_0, "aNode.insertBefore(nodeToInsert);");
+            test_insertBefore(BrowserVersion.FIREFOX_2, "aNode.insertBefore(nodeToInsert);");
             fail();
         }
         catch (final ScriptException e) {

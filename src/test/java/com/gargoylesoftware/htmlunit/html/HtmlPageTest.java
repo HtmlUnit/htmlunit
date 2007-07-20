@@ -1390,7 +1390,7 @@ public class HtmlPageTest extends WebTestCase {
     
         final String secondContent
             = "<html><body></body></html>";
-        final WebClient client = new WebClient(BrowserVersion.MOZILLA_1_0);
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
 
         final MockWebConnection webConnection = new MockWebConnection( client );
         webConnection.setResponse(URL_FIRST, firstContent);

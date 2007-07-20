@@ -246,7 +246,7 @@ public class NavigatorTest extends WebTestCase {
      */
     public void testUseConfiguredBrowser() throws Exception {
 
-        final WebClient webClient = new WebClient(BrowserVersion.MOZILLA_1_0);
+        final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final List collectedAlerts = new ArrayList();
@@ -272,7 +272,7 @@ public class NavigatorTest extends WebTestCase {
      */
     public void testLanguage() throws Exception {
 
-        final WebClient webClient = new WebClient(BrowserVersion.MOZILLA_1_0);
+        final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final List collectedAlerts = new ArrayList();
@@ -288,7 +288,7 @@ public class NavigatorTest extends WebTestCase {
 
         webClient.getPage(URL_FIRST);
 
-        final String[] expectedAlerts = {BrowserVersion.MOZILLA_1_0.getBrowserLanguage()};
+        final String[] expectedAlerts = {BrowserVersion.FIREFOX_2.getBrowserLanguage()};
         assertEquals(expectedAlerts, collectedAlerts);
     }    
 
@@ -314,7 +314,7 @@ public class NavigatorTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
-        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }    

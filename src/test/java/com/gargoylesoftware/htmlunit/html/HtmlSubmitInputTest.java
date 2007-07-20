@@ -148,7 +148,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final String[] expectedAlertsIE = {"Submit Query"};
         testDefaultValue( BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE );
         final String[] expectedAlertsFF = {""};
-        testDefaultValue( BrowserVersion.MOZILLA_1_0, expectedAlertsFF );
+        testDefaultValue( BrowserVersion.FIREFOX_2, expectedAlertsFF );
     }
 
     private void testDefaultValue( final BrowserVersion browserVersion, final String[] expectedAlerts )

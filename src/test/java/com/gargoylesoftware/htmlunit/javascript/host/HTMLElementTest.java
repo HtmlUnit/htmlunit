@@ -558,7 +558,7 @@ public class HTMLElementTest extends WebTestCase {
         final String[] alertsIE = {"Null ChildrenLength: 1"};
         testSetInnerHTMLNull(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
         final String[] alertsFF = {"Null ChildrenLength: 0"};
-        testSetInnerHTMLNull(BrowserVersion.MOZILLA_1_0, alertsFF);
+        testSetInnerHTMLNull(BrowserVersion.FIREFOX_2, alertsFF);
     }
 
     /**
@@ -1371,7 +1371,7 @@ public class HTMLElementTest extends WebTestCase {
             "123", "from myFunction", "123", "from myFunction"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
-        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1381,12 +1381,11 @@ public class HTMLElementTest extends WebTestCase {
     public void testParentElement() throws Exception {
         final String[] alertsIE = {"null", "[object]"};
         testParentElement(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
+        testParentElement(BrowserVersion.INTERNET_EXPLORER_7_0, alertsIE);
         final String[] alertsFF = {"undefined", "undefined"};
-        testParentElement(BrowserVersion.MOZILLA_1_0, alertsFF);
-        final String[] alertsNS = {"undefined", "undefined"};
-        testParentElement(BrowserVersion.NETSCAPE_4_7_9, alertsNS);
+        testParentElement(BrowserVersion.FIREFOX_2, alertsFF);
     }
-    
+
     private void testParentElement(final BrowserVersion browser, final String[] expectedAlerts)
         throws Exception {
 
@@ -1416,7 +1415,7 @@ public class HTMLElementTest extends WebTestCase {
     public void testCurrentStyle() throws Exception {
         testCurrentStyle(BrowserVersion.INTERNET_EXPLORER_6_0);
         try {
-            testCurrentStyle(BrowserVersion.MOZILLA_1_0);
+            testCurrentStyle(BrowserVersion.FIREFOX_2);
             fail("'currentStyle' is defined for only IE");
         }
         catch(final Exception e) {

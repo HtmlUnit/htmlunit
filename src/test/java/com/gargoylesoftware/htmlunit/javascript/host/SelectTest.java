@@ -427,7 +427,7 @@ public class SelectTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
-        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
 
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -835,7 +835,7 @@ public class SelectTest extends WebTestCase {
         assertEquals( expectedAlerts, collectedAlerts );
 
         try {
-            loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+            loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
             fail("Should have thrown a JS error");
         }
         catch (final ScriptException e) {

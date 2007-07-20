@@ -71,7 +71,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
         
         testScript( BrowserVersion.INTERNET_EXPLORER_6_0, script,
                 new String[] {"testing @cc_on"} );
-        testScript( BrowserVersion.MOZILLA_1_0, script,
+        testScript( BrowserVersion.FIREFOX_2, script,
                 new String[] {} );
     }
     
@@ -83,7 +83,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
         
         testScript( BrowserVersion.INTERNET_EXPLORER_6_0, script,
                 new String[] {"testing /*@cc_on"} );
-        testScript( BrowserVersion.MOZILLA_1_0, script,
+        testScript( BrowserVersion.FIREFOX_2, script,
                 new String[] {} );
     }
 
@@ -99,7 +99,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
         
         testScript( BrowserVersion.INTERNET_EXPLORER_6_0, script,
                 new String[] {"12"} );
-        testScript( BrowserVersion.MOZILLA_1_0, script,
+        testScript( BrowserVersion.FIREFOX_2, script,
                 new String[] {} );
     }
 

@@ -82,7 +82,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testSyncUse() throws Exception {
-        testSyncUse(BrowserVersion.MOZILLA_1_0);
+        testSyncUse(BrowserVersion.FIREFOX_2);
         testSyncUse(BrowserVersion.INTERNET_EXPLORER_6_0);
     }
 
@@ -91,7 +91,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testCreation() throws Exception {
-        testCreation(BrowserVersion.MOZILLA_1_0, new String[] {"[object XMLHttpRequest]"});
+        testCreation(BrowserVersion.FIREFOX_2, new String[] {"[object XMLHttpRequest]"});
         testCreation(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"activeX created"});
     }
 
@@ -179,7 +179,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testAsyncUse() throws Exception {
-        testAsyncUse(BrowserVersion.MOZILLA_1_0);
+        testAsyncUse(BrowserVersion.FIREFOX_2);
         testAsyncUse(BrowserVersion.INTERNET_EXPLORER_6_0);
     }
 
@@ -399,7 +399,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         testSendNoArg(BrowserVersion.INTERNET_EXPLORER_6_0);
         // Mozilla fails if no arg is provided.
         try {
-            testSendNoArg(BrowserVersion.MOZILLA_1_0);
+            testSendNoArg(BrowserVersion.FIREFOX_2);
             fail("Should have thrown");
         }
         catch (final Exception e) {
@@ -492,7 +492,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "</head>"
             + "<body onload='test()'></body></html>";
 
-        final WebClient client = new WebClient(BrowserVersion.MOZILLA_1_0);
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
         final MockWebConnection webConnection = new MockWebConnection( client );
@@ -515,7 +515,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testReplaceOnTextData() throws Exception {
-        testReplaceOnTextData(BrowserVersion.MOZILLA_1_0);
+        testReplaceOnTextData(BrowserVersion.FIREFOX_2);
         testReplaceOnTextData(BrowserVersion.INTERNET_EXPLORER_6_0);
     }
 
@@ -582,7 +582,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testSetLocation() throws Exception {
-        testSetLocation(BrowserVersion.MOZILLA_1_0);
+        testSetLocation(BrowserVersion.FIREFOX_2);
         testSetLocation(BrowserVersion.INTERNET_EXPLORER_6_0);
     }
 

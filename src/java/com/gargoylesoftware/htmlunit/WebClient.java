@@ -130,8 +130,8 @@ public class WebClient implements Serializable {
     private PromptHandler  promptHandler_;
     private StatusHandler  statusHandler_;
     private AjaxController ajaxController_ = new AjaxController();
-    
-    private BrowserVersion browserVersion_ = BrowserVersion.getDefault();
+
+    private BrowserVersion browserVersion_;
     private boolean isRedirectEnabled_ = true;
     private PageCreator pageCreator_ = new DefaultPageCreator();
 
@@ -173,15 +173,16 @@ public class WebClient implements Serializable {
     private boolean throwExceptionOnScriptError_ = true;
 
     /**
-     * Create an instance using {@link BrowserVersion#FULL_FEATURED_BROWSER}
+     * Creates a web client instance using the browser version returned by
+     * {@link BrowserVersion#getDefault()}.
      */
     public WebClient() {
-        this( BrowserVersion.FULL_FEATURED_BROWSER );
+        this( BrowserVersion.getDefault() );
     }
 
     /**
-     *  Create an instance using the specified {@link BrowserVersion}
-     * @param browserVersion The browser version to simulate
+     * Creates a web client instance using the specified {@link BrowserVersion}.
+     * @param browserVersion The browser version to simulate.
      */
     public WebClient( final BrowserVersion browserVersion ) {
         Assert.notNull("browserVersion", browserVersion);

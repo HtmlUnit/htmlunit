@@ -229,7 +229,7 @@ public class HtmlButtonTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDefaultButtonType_StandardsCompliantBrowser() throws Exception {
-        doTestDefaultButtonType(BrowserVersion.MOZILLA_1_0, "submit");
+        doTestDefaultButtonType(BrowserVersion.FIREFOX_2, "submit");
     }
 
     /**

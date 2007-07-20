@@ -76,6 +76,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 public class DocumentTest extends WebTestCase {
+
     /**
      * Create an instance
      * @param name The name of the test
@@ -173,7 +174,7 @@ public class DocumentTest extends WebTestCase {
 
         // but FF doesn't 
         final String[] expectedAlertsFF = {"exception occurred"};
-        testDocumentWrite_AssignedToVar(BrowserVersion.MOZILLA_1_0, expectedAlertsFF);
+        testDocumentWrite_AssignedToVar(BrowserVersion.FIREFOX_2, expectedAlertsFF);
     }
 
     /**
@@ -279,7 +280,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAnchors() throws Exception {
-        testAnchors(BrowserVersion.MOZILLA_1_0,
+        testAnchors(BrowserVersion.FIREFOX_2,
                 new String[] {"0", "1", "1", "true", "name: end"});
         testAnchors(BrowserVersion.INTERNET_EXPLORER_6_0,
             new String[] {"0", "3", "3", "true", "id: firstLink"});
@@ -424,7 +425,7 @@ public class DocumentTest extends WebTestCase {
     public void testDocumentCreateElement2() throws Exception {
         testDocumentCreateElement2(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {
             "DIV,DIV,undefined,undefined,undefined", "HI:DIV,HI:DIV,undefined,undefined,undefined"} );
-        testDocumentCreateElement2(BrowserVersion.MOZILLA_1_0, new String[] {
+        testDocumentCreateElement2(BrowserVersion.FIREFOX_2, new String[] {
             "DIV,DIV,null,null,DIV", "HI:DIV,HI:DIV,null,null,HI:DIV"} );
     }
 
@@ -465,7 +466,7 @@ public class DocumentTest extends WebTestCase {
         catch( final Exception e ) {
             //expected exception
         }
-        testDocumentCreateElementNS( BrowserVersion.MOZILLA_1_0, new String[] {
+        testDocumentCreateElementNS( BrowserVersion.FIREFOX_2, new String[] {
             "Some:Div,Some:Div,myNS,Some,Div"
         } );
     }
@@ -1854,7 +1855,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testReadyStateNonIE() throws Exception {
-        final WebClient client = new WebClient(BrowserVersion.NETSCAPE_6_2_3);
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection( client );
         final String content = "<html><head>\n"
             + "<script>\n"
@@ -1951,7 +1952,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetElementByIdForNetscape() throws Exception {
-        final WebClient client = new WebClient(BrowserVersion.NETSCAPE_6_2_3);
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection( client );
         final String content
             = "<html><head><title>foo</title></head>"
@@ -2226,7 +2227,7 @@ public class DocumentTest extends WebTestCase {
 
         final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM");
 
-        final WebClient client = new WebClient(BrowserVersion.NETSCAPE_6_2_3);
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection( client );
 
         final String content = "<html><head><title>foo</title><script>\n"
@@ -2464,7 +2465,7 @@ public class DocumentTest extends WebTestCase {
 
         // test for Mozilla
         collectedAlerts.clear();
-        loadPage(BrowserVersion.MOZILLA_1_0, html, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(Collections.singletonList("not defined"), collectedAlerts);
     }
 
@@ -2485,7 +2486,7 @@ public class DocumentTest extends WebTestCase {
         // test for Mozilla
         final String[] expectedAlertsMoz = {"true", "false"};
         createTestPageForRealBrowserIfNeeded(html, expectedAlertsMoz);
-        loadPage(BrowserVersion.MOZILLA_1_0, html, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(expectedAlertsMoz, collectedAlerts);
 
         // test for IE

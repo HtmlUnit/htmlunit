@@ -377,7 +377,7 @@ public class FormTest extends WebTestCase {
             "password: default9 default9 false false",
             "checkbox: default10 default10 false false",
             "textarea: default11 default11 undefined undefined" };
-        formResetTest(BrowserVersion.MOZILLA_1_0, expected);
+        formResetTest(BrowserVersion.FIREFOX_2, expected);
     }
 
     /**
@@ -1124,7 +1124,7 @@ public class FormTest extends WebTestCase {
 
         final String[] expectedAlertsFF = {"srcElement null: true", "srcElement==form: false", 
             "target null: false", "target==form: true"};
-        testOnSubmitEvent(BrowserVersion.NETSCAPE_6_2_3, expectedAlertsFF);
+        testOnSubmitEvent(BrowserVersion.FIREFOX_2, expectedAlertsFF);
     }
 
     /**

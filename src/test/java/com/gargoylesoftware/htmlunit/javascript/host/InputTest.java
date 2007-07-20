@@ -315,7 +315,7 @@ public class InputTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final WebClient client = new WebClient(BrowserVersion.MOZILLA_1_0);
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
 
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setDefaultResponse(htmlContent);
@@ -344,7 +344,7 @@ public class InputTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final WebClient client = new WebClient(BrowserVersion.MOZILLA_1_0);
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
 
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setDefaultResponse(htmlContent);
@@ -653,7 +653,7 @@ public class InputTest extends WebTestCase {
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         final Page page2 = ((ClickableElement) page.getHtmlElementById("clickMe")).click();
 
         assertSame(page, page2);

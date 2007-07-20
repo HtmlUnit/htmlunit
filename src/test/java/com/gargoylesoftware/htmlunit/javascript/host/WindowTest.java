@@ -521,7 +521,7 @@ public class WindowTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         final String[] expectedAlertsMoz = {"null"};
-        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         createTestPageForRealBrowserIfNeeded(content, expectedAlertsMoz);
         assertEquals(expectedAlertsMoz, collectedAlerts);
 
@@ -1621,7 +1621,7 @@ public class WindowTest extends WebTestCase {
         final String[] expectedAlerts = {"false", "true", "false", "true", "test1", "test2", "onload"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
-        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1761,7 +1761,7 @@ public class WindowTest extends WebTestCase {
         final List expectedAlerts = Collections.nCopies(4, "number");
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
-        loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
     
@@ -2011,12 +2011,9 @@ public class WindowTest extends WebTestCase {
     public void testOpenWindow_refererHeader() throws Exception {
         final String headerIE = null;
         testOpenWindow_refererHeader(BrowserVersion.INTERNET_EXPLORER_6_0, headerIE);
-
+        testOpenWindow_refererHeader(BrowserVersion.INTERNET_EXPLORER_7_0, headerIE);
         final String headerFF = URL_FIRST.toString();
-        testOpenWindow_refererHeader(BrowserVersion.MOZILLA_1_0, headerFF);
-
-        final String headerNS = URL_FIRST.toString();
-        testOpenWindow_refererHeader(BrowserVersion.NETSCAPE_4_7_9, headerNS);
+        testOpenWindow_refererHeader(BrowserVersion.FIREFOX_2, headerFF);
     }
 
     /**
@@ -2163,7 +2160,7 @@ public class WindowTest extends WebTestCase {
             + "</body></html>";
         
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theDiv")).click();
 
         final String[] expectedAlerts = {"123", "captured"};
@@ -2174,7 +2171,7 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testGetComputedStyle() throws Exception {
-        testGetComputedStyle(BrowserVersion.MOZILLA_1_0);
+        testGetComputedStyle(BrowserVersion.FIREFOX_2);
         try {
             testGetComputedStyle(BrowserVersion.INTERNET_EXPLORER_6_0);
             fail("'getComputedStyle' is not defined for IE");

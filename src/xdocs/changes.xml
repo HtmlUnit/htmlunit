@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="sdanig">
+                Deprecate BrowserVersion constants for Mozilla 1.0, Netscape 4.7.9 and Netscape 6.2.3;
+                add MSIE 7 and Firefox 2.
+            </action>
             <action type="add" dev="asashour" id="1756277">
                 JavaScript: add basic support for element.currentStyle and window.getComputedStyle.
             </action>

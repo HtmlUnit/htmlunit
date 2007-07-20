@@ -1162,7 +1162,7 @@ public class HtmlFormTest extends WebTestCase {
     public void testSumbit_submitInputValue() throws Exception {
         testSumbit_submitInputValue( BrowserVersion.INTERNET_EXPLORER_6_0 );
         //test FF separately as value is not to DEFAULT_VALUE if not specified. 
-        testSumbit_submitInputValue( BrowserVersion.MOZILLA_1_0 );
+        testSumbit_submitInputValue( BrowserVersion.FIREFOX_2 );
     }
 
     private void testSumbit_submitInputValue(final BrowserVersion browserVersion) throws Exception {

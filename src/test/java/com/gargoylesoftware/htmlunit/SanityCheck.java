@@ -47,9 +47,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
 /**
- *  This class runs live tests against popular webservers just to make sure
- *  nothing obvious has broken. Don't run this very often lest we piss off the
- *  web masters.
+ * This class runs live tests against popular webservers just to make sure
+ * nothing obvious has broken. Don't run this very often lest we piss off the
+ * web masters.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -57,7 +57,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Marc Guillemot
  */
 public class SanityCheck extends WebTestCase {
-    private static final BrowserVersion BROWSER_VERSION = BrowserVersion.MOZILLA_1_0;
+
+    private static final BrowserVersion BROWSER_VERSION = BrowserVersion.FIREFOX_2;
 
     /**
      * Create an instance.

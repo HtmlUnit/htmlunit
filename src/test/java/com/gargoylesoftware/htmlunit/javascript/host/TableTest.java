@@ -560,7 +560,7 @@ public class TableTest extends WebTestCase {
         }
         final String[] expectedAlerts = { "table: [object HTMLTableElement]", 
             "row: [object HTMLRowElement]", "cell: [object HTMLCellElement]" };
-        testStringValues(BrowserVersion.MOZILLA_1_0, expectedAlerts);
+        testStringValues(BrowserVersion.FIREFOX_2, expectedAlerts);
     }
 
     /**

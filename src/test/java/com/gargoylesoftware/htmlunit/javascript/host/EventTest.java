@@ -117,7 +117,7 @@ public class EventTest extends WebTestCase {
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId' onclick=\"alert(event ? 'defined' : 'undefined')\"/>\n"
             + "</body></html>\n";
-        onClickPageTest(BrowserVersion.MOZILLA_1_0, content, expectedAlerts);
+        onClickPageTest(BrowserVersion.FIREFOX_2, content, expectedAlerts);
         onClickPageTest(BrowserVersion.INTERNET_EXPLORER_6_0, content, expectedAlerts);
     }
 
@@ -134,7 +134,7 @@ public class EventTest extends WebTestCase {
             + "function handler(event) { alert(event ? 'defined' : 'undefined'); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>\n";
-        onClickPageTest(BrowserVersion.MOZILLA_1_0, content, expectedAlerts);
+        onClickPageTest(BrowserVersion.FIREFOX_2, content, expectedAlerts);
     }
 
     /**
@@ -150,7 +150,7 @@ public class EventTest extends WebTestCase {
             + "alert(event.target == this ? 'pass' : event.target + '!=' + this); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>\n";
-        onClickPageTest(BrowserVersion.NETSCAPE_6_2_3, content, expectedAlerts);
+        onClickPageTest(BrowserVersion.FIREFOX_2, content, expectedAlerts);
     }
 
     /**
@@ -184,7 +184,7 @@ public class EventTest extends WebTestCase {
             + "alert(event.currentTarget == this ? 'pass' : event.currentTarget + '!=' + this); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>\n";
-        onClickPageTest(BrowserVersion.NETSCAPE_6_2_3, content, expectedAlerts);
+        onClickPageTest(BrowserVersion.FIREFOX_2, content, expectedAlerts);
     }
 
     /**
@@ -308,7 +308,7 @@ public class EventTest extends WebTestCase {
         final String[] expectedAlerts = {"true"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
-    
+
     private void onClickPageTest(final String content, final List expectedAlerts) throws Exception, IOException {
         onClickPageTest( BrowserVersion.getDefault(), content, expectedAlerts );
     }
@@ -364,7 +364,7 @@ public class EventTest extends WebTestCase {
             + "</script></body></html>";
 
         final List collectedAlerts = new ArrayList();
-        HtmlPage page = loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("clickMe")).click();
 
         String[] expectedAlerts = { "false", "true", "SPAN" };
@@ -457,7 +457,7 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
        
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theSpan")).click();
 
         final String[] expectedAlerts = { "window capturing", "div capturing", "span capturing",
@@ -531,7 +531,7 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
    
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(BrowserVersion.MOZILLA_1_0, content, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theSpan")).click();
         final String[] expectedAlerts1 = { "window capturing", "div capturing", "span capturing", "div" };
         assertEquals(expectedAlerts1, collectedAlerts);
