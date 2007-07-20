@@ -2200,4 +2200,25 @@ public class WindowTest extends WebTestCase {
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Verifies that the onload handler is executed with "this" referring to the window.
+     *
+     * @throws Exception If an error occurs.
+     */
+    public void testOnLoadContext() throws Exception {
+
+        final String html =
+            "<html><body><script>" +
+            "var x = function() { alert(this==window) };" +
+            "window.onload = x;" +
+            "</script></body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
+
+        final List expectedAlerts = Collections.singletonList("true");
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }
