@@ -75,7 +75,7 @@ public final class ClassConfiguration {
      * Constructor
      * 
      * @param classname the name of the configuration class this entry is for
-     * @param implementingClass - the fully qualified name of the class implimenting this functionality
+     * @param implementingClass - the fully qualified name of the class implementing this functionality
      * @param jsConstructor the constructor of method <code>implementingClass</code>
      * @param extendedClass - The name of the class that this class extends
      * @param htmlClass The name of the html class that this object supports
@@ -336,7 +336,7 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Gets the JavaScript constroctor method in {@link #getLinkedClass()}
+     * Gets the JavaScript constructor method in {@link #getLinkedClass()}
      * @return Returns the constructor Method.
      */
     public Method getJsConstructor() {

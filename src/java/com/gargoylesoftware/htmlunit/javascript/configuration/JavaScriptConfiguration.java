@@ -118,7 +118,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Reset the this class to it's intial state.  This method is
+     * Reset the this class to it's initial state.  This method is
      * used for testing only.
      *
      */
@@ -426,7 +426,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Test to see if the supplied configuration matches for the parsed configuration for the nameds class
+     * Test to see if the supplied configuration matches for the parsed configuration for the named class
      * This is a method for testing.
      * 
      * @param classname - the parsed classname to test
