@@ -109,10 +109,10 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     private int jsFlagsToPatternFlags(final String flagsStr) {
         int flags = 0;
         if (flagsStr.indexOf('i') != -1) {
-            flags &= Pattern.CASE_INSENSITIVE;
+            flags |= Pattern.CASE_INSENSITIVE;
         }
         if (flagsStr.indexOf('m') != -1) {
-            flags &= Pattern.MULTILINE;
+            flags |= Pattern.MULTILINE;
         }
         return flags;
     }

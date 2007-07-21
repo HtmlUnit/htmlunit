@@ -1631,4 +1631,22 @@ public class HtmlPageTest extends WebTestCase {
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testCaseInsensitiveRegexReplacement() throws Exception {
+        final String html =
+            "<html><body><script>" +
+            "var r = /^([#.]?)([a-z0-9\\*_-]*)/i;" +
+            "var s = '#userAgent';" +
+            "s = s.replace(r, '');" +
+            "alert(s.length);" +
+            "</script></body></html>";
+        List expected = Collections.singletonList("0");
+        List actual = new ArrayList();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
 }
