@@ -1643,8 +1643,30 @@ public class HtmlPageTest extends WebTestCase {
             "s = s.replace(r, '');" +
             "alert(s.length);" +
             "</script></body></html>";
-        List expected = Collections.singletonList("0");
-        List actual = new ArrayList();
+        final List expected = Collections.singletonList("0");
+        final List actual = new ArrayList();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testRegexReplacementWithFunction() throws Exception {
+        if(notYetImplemented()) {
+            // This should be fixed ASAP! Needed for jQuery!
+            // This test works fine without the custom regex proxy.
+            return;
+        }
+        final String html =
+            "<html><body><script>" +
+            "var r = /-([a-z])/ig;" +
+            "var s = 'font-size';" +
+            "s = s.replace(r, function(z,b){return b.toUpperCase();});" +
+            "alert(s);" +
+            "</script></body></html>";
+        final List expected = Collections.singletonList("fontSize");
+        final List actual = new ArrayList();
         loadPage(html, actual);
         assertEquals(expected, actual);
     }
