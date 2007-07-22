@@ -1480,7 +1480,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * All elements should be accessible via the window object by their id, if we
-     * are emulating Microsoft Internet Explorer. 
+     * are emulating Microsoft Internet Explorer.
      * @throws Exception If the test fails.
      */
     public void testElementByIdFromWindow() throws Exception {
@@ -1576,7 +1576,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Verifies that you can set window.onload to something else than a function. 
+     * Verifies that you can set window.onload to something else than a function.
      * See bug 1708532 & 1201561.
      * @throws Exception If an error occurs.
      */
@@ -1646,7 +1646,7 @@ public class WindowTest extends WebTestCase {
             + "window.detachEvent('onload', test3);"
             + "</script></head>\n"
             + "<body onload='alert(\"onload\")'></body></html>\n";
-        final String[] expectedAlerts = {"true", "false", "true", "false", 
+        final String[] expectedAlerts = {"true", "false", "true", "false",
             "onload", "test1, param null: false", "test2"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
@@ -1662,7 +1662,7 @@ public class WindowTest extends WebTestCase {
         final String content = "<html>\n"
             + "<head><title>test</title>\n"
             + "<script>\n"
-            + "function test()" 
+            + "function test()"
             + "{"
             + "  window.detachEvent('onload', test);"
             + "  alert('detached');"

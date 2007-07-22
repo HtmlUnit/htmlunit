@@ -159,7 +159,7 @@ public class HtmlElementTest extends WebTestCase {
      */
     public void testEmtpyMapEntryWrappingIterator() {
         final Map attributsMap = new HashMap();
-        final HtmlElement.MapEntryWrappingIterator it = 
+        final HtmlElement.MapEntryWrappingIterator it =
             new HtmlElement.MapEntryWrappingIterator(attributsMap.entrySet().iterator(), HtmlAttrTest.HTML_ELEMENT);
         assertFalse(it.hasNext());
         try {
@@ -176,7 +176,7 @@ public class HtmlElementTest extends WebTestCase {
     public void testMapEntryWrappingIterator() {
         final Map attributsMap = new HashMap();
         attributsMap.put("key", "value");
-        final HtmlElement.MapEntryWrappingIterator it = 
+        final HtmlElement.MapEntryWrappingIterator it =
             new HtmlElement.MapEntryWrappingIterator(attributsMap.entrySet().iterator(), HtmlAttrTest.HTML_ELEMENT);
 
         assertTrue(it.hasNext());
@@ -214,7 +214,7 @@ public class HtmlElementTest extends WebTestCase {
             }
         };
 
-        final HtmlElement.MapEntryWrappingIterator it = 
+        final HtmlElement.MapEntryWrappingIterator it =
             new HtmlElement.MapEntryWrappingIterator(mockIterator, HtmlAttrTest.HTML_ELEMENT);
 
         assertFalse(removed[0]);
@@ -229,16 +229,16 @@ public class HtmlElementTest extends WebTestCase {
     static class HtmlAttributeChangeListenerTestImpl implements HtmlAttributeChangeListener {
         private final List collectedValues_ = new ArrayList();
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
-            collectedValues_.add( "attributeAdded: " + event.getHtmlElement().getTagName() + ',' + 
+            collectedValues_.add( "attributeAdded: " + event.getHtmlElement().getTagName() + ',' +
                     event.getName() + ',' + event.getValue() );
         }
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-            collectedValues_.add( "attributeRemoved: " + event.getHtmlElement().getTagName() + ',' + 
+            collectedValues_.add( "attributeRemoved: " + event.getHtmlElement().getTagName() + ',' +
                     event.getName() + ',' + event.getValue() );
         }
     
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
-            collectedValues_.add( "attributeReplaced: " + event.getHtmlElement().getTagName() + ',' + 
+            collectedValues_.add( "attributeReplaced: " + event.getHtmlElement().getTagName() + ',' +
                     event.getName() + ',' + event.getValue() );
         }
         List getCollectedValues() {
@@ -265,7 +265,7 @@ public class HtmlElementTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedValues =
-        {"attributeAdded: p,title,myTitle", 
+        {"attributeAdded: p,title,myTitle",
             "attributeAdded: p,title,myTitle",
             "attributeAdded: p,title,myTitle"};
         final HtmlPage page = loadPage(htmlContent);
@@ -300,7 +300,7 @@ public class HtmlElementTest extends WebTestCase {
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
         
-        final String[] expectedValues = 
+        final String[] expectedValues =
         {"attributeReplaced: p,title,myTitle",
             "attributeReplaced: p,title,myTitle",
             "attributeReplaced: p,title,myTitle"};

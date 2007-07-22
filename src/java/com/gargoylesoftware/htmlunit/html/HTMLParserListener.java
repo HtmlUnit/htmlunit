@@ -54,11 +54,11 @@ import org.apache.commons.logging.LogFactory;
 public interface HTMLParserListener {
    
     /**
-     * Simple implementation of {@link HTMLParserListener} logging the received warnings 
+     * Simple implementation of {@link HTMLParserListener} logging the received warnings
      * and errors in the "com.gargoylesoftware.htmlunit.html.HTMLParserListener" log.<br/>
-     * Errors are logged at the error level and warnings at the warning level. 
+     * Errors are logged at the error level and warnings at the warning level.
      */
-    HTMLParserListener LOG_REPORTER = new HTMLParserListener() 
+    HTMLParserListener LOG_REPORTER = new HTMLParserListener()
     {
         protected final Log getLog() {
             return LogFactory.getLog(HTMLParserListener.class);
@@ -88,9 +88,9 @@ public interface HTMLParserListener {
      * Called when the html parser reports an error.
      * @param message the description of the problem
      * @param url the url of the document in which the problem occurs
-     * @param line the line of the problem 
+     * @param line the line of the problem
      * @param column the column of the problem
-     * @param key the key identifying the "type" of problem. May be interesting to filter messages. 
+     * @param key the key identifying the "type" of problem. May be interesting to filter messages.
      */
     void error(final String message, final URL url, final int line, final int column, final String key);
     
@@ -98,9 +98,9 @@ public interface HTMLParserListener {
      * Called when the html parser reports a warning.
      * @param message the description of the problem
      * @param url the url of the document in which the problem occurs
-     * @param line the line of the problem 
+     * @param line the line of the problem
      * @param column the column of the problem
-     * @param key the key identifying the "type" of problem. May be interesting to filter messages. 
+     * @param key the key identifying the "type" of problem. May be interesting to filter messages.
      */
     void warning(final String message, final URL url, final int line, final int column, final String key);
 }

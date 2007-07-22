@@ -183,7 +183,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         }
         else {
             for (int i=currentLength; i<newLength; ++i) {
-                final HtmlOption option = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement( 
+                final HtmlOption option = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement(
                         htmlSelect_.getPage(), HtmlOption.TAG_NAME, null);
                 htmlSelect_.appendOption( option );
             }
@@ -192,21 +192,21 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
 
     /**
      * Add a new item to the option collection
-     * 
-     * <p> 
-     * <b><i>Implementation Note:</i></b> The specification for the JavaScript add() method 
-     * actually calls for the optional newIndex parameter to be an integer. However, the 
-     * newIndex parameter is specified as an Object here rather than an int because of the 
-     * way Rhino and HtmlUnit process optional parameters for the JavaScript method calls. 
-     * If the newIndex parameter were specified as an int, then the Undefined value for an 
-     * integer is specified as NaN (Not A Number, which is a Double value), but Rhino 
-     * translates this value into 0 (perhaps correctly?) when converting NaN into an int. 
-     * As a result, when the newIndex parameter is not specified, it is impossible to make 
-     * a distinction between a caller of the form add(someObject) and add (someObject, 0). 
-     * Since the behavior of these two call forms is different, the newIndex parameter is 
-     * specified as an Object. If the newIndex parameter is not specified by the actual 
-     * JavaScript code being run, then newIndex is of type org.mozilla.javascript.Undefined. 
-     * If the newIndex parameter is specified, then it should be of type java.lang.Number and 
+     *
+     * <p>
+     * <b><i>Implementation Note:</i></b> The specification for the JavaScript add() method
+     * actually calls for the optional newIndex parameter to be an integer. However, the
+     * newIndex parameter is specified as an Object here rather than an int because of the
+     * way Rhino and HtmlUnit process optional parameters for the JavaScript method calls.
+     * If the newIndex parameter were specified as an int, then the Undefined value for an
+     * integer is specified as NaN (Not A Number, which is a Double value), but Rhino
+     * translates this value into 0 (perhaps correctly?) when converting NaN into an int.
+     * As a result, when the newIndex parameter is not specified, it is impossible to make
+     * a distinction between a caller of the form add(someObject) and add (someObject, 0).
+     * Since the behavior of these two call forms is different, the newIndex parameter is
+     * specified as an Object. If the newIndex parameter is not specified by the actual
+     * JavaScript code being run, then newIndex is of type org.mozilla.javascript.Undefined.
+     * If the newIndex parameter is specified, then it should be of type java.lang.Number and
      * can be converted into an integer value.
      * </p>
      * <p>
@@ -214,24 +214,24 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * collection.
      * </p>
      * <p>
-     * According to 
+     * According to
      * <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/add.asp">the
-     * Microsoft DHTML reference page for the JavaScript add() method of the options collection</a>, 
+     * Microsoft DHTML reference page for the JavaScript add() method of the options collection</a>,
      * the index parameter is specified as follows:
      * <dl>
      * <dt></dt>
      * <dd>
-     * <i>Optional. Integer that specifies the index position in the collection where the element is 
+     * <i>Optional. Integer that specifies the index position in the collection where the element is
      * placed. If no value is given, the method places the element at the end of the collection.</i>
      * </dl>
      * </p>
-     * 
+     *
      * @param newOptionObject The DomNode to insert in the collection
-     * @param newIndex An optional parameter which specifies the index position in the 
-     * collection where the element is placed. If no value is given, the method places 
+     * @param newIndex An optional parameter which specifies the index position in the
+     * collection where the element is placed. If no value is given, the method places
      * the element at the end of the collection.
-     * 
-     * @see #put   
+     *
+     * @see #put
      */
     public void jsxFunction_add(final Object newOptionObject, final Object newIndex)
     {

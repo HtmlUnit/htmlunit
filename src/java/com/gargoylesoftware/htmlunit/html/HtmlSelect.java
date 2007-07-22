@@ -248,7 +248,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @param newOption The new option to add
      */
     public void appendOption( final HtmlOption newOption ) {
-        appendChild( newOption ) ;
+        appendChild( newOption );
     }
 
     /**
@@ -309,7 +309,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         fakeSelectedValues_ = null;
 
         // caution the HtmlOption may have been created from js and therefore the select now need
-        // to "know" that it is selected 
+        // to "know" that it is selected
         if (isMultipleSelectEnabled()) {
             selectedOption.setSelectedInternal(isSelected);
         }

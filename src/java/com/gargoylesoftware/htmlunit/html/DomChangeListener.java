@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 /**
  * Implementations of this interface receive notifications of changes to the DOM structure.
- * 
+ *
  * @version $Revision$
  * @author Ahmed Ashour
  * @see DomChangeEvent
@@ -48,14 +48,14 @@ public interface DomChangeListener {
 
     /**
      * Notification that a new node was added. Called after the node is added.
-     * 
+     *
      * @param event The event.
      */
     void nodeAdded( final DomChangeEvent event );
     
     /**
      * Notification that a new node was deleted. Called after the node is deleted.
-     * 
+     *
      * @param event The event.
      */
     void nodeDeleted( final DomChangeEvent event );

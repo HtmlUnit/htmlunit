@@ -56,8 +56,8 @@ public interface Page {
     void initialize() throws IOException;
 
     /**
-     * Clean up this page. 
-     * Gets called by the web client when an other page is loaded in the window. 
+     * Clean up this page.
+     * Gets called by the web client when an other page is loaded in the window.
      * @throws IOException If an IO problem occurs.
      */
     void cleanUp() throws IOException;

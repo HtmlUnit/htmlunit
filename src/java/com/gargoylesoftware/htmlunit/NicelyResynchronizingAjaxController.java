@@ -77,7 +77,7 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
      * been created.
      * {@inheritDoc}
      */
-    public boolean processSynchron(final HtmlPage page, final WebRequestSettings requestSettings, 
+    public boolean processSynchron(final HtmlPage page, final WebRequestSettings requestSettings,
             final boolean async) {
         
         if (async && isInOriginalThread()) {

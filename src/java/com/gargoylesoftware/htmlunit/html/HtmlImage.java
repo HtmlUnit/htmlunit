@@ -230,7 +230,7 @@ public class HtmlImage extends ClickableElement {
     }
     
     /**
-     * Simulate clicking this element at the given position. 
+     * Simulate clicking this element at the given position.
      * This makes only sense for an image map (currently only server side) where the position matters.
      *
      * @param x the x position of the click

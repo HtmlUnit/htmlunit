@@ -73,7 +73,7 @@ public final class ClassConfiguration {
 
     /**
      * Constructor
-     * 
+     *
      * @param classname the name of the configuration class this entry is for
      * @param implementingClass - the fully qualified name of the class implementing this functionality
      * @param jsConstructor the constructor of method <code>implementingClass</code>
@@ -98,7 +98,7 @@ public final class ClassConfiguration {
                 }
             }
             if( foundCtor == null ) {
-                throw new IllegalStateException( "Constructor method \"" + jsConstructor + 
+                throw new IllegalStateException( "Constructor method \"" + jsConstructor +
                         "\" in class \"" + implementingClass + " is not found." );
             }
             jsConstructor_ = foundCtor;
@@ -241,7 +241,7 @@ public final class ClassConfiguration {
 
     /**
      * Test for value equality of the 2 objects
-     * 
+     *
      * @param obj   the reference object with which to compare.
      * @return <code>true</code> if the value of this object is the same as the obj
      *          argument; <code>false</code> otherwise.
@@ -287,7 +287,7 @@ public final class ClassConfiguration {
 
     /**
      * Gets the method that implements the getter for the named property
-     * 
+     *
      * @param propertyName The name of the property
      * @return Method
      */
@@ -301,7 +301,7 @@ public final class ClassConfiguration {
 
     /**
      * Gets the method that implements the setter for the named property
-     * 
+     *
      * @param propertyName The name of the property
      * @return Method
      */
@@ -315,7 +315,7 @@ public final class ClassConfiguration {
 
     /**
      * Gets the method that implements the given function
-     * 
+     *
      * @param functionName The name of the property
      * @return Method
      */
@@ -408,7 +408,7 @@ public final class ClassConfiguration {
 
         /**
          * Test for value equality of the 2 objects
-         * 
+         *
          * @param obj   the reference object with which to compare.
          * @return <code>true</code> if the value of this object is the same as the obj
          *          argument; <code>false</code> otherwise.
@@ -461,7 +461,7 @@ public final class ClassConfiguration {
 
         /**
          * Test for value equality of the 2 objects
-         * 
+         *
          * @param obj   the reference object with which to compare.
          * @return <code>true</code> if the value of this object is the same as the obj
          *          argument; <code>false</code> otherwise.
@@ -514,7 +514,7 @@ public final class ClassConfiguration {
 
         /**
          * Test for value equality of the 2 objects
-         * 
+         *
          * @param obj the reference object with which to compare.
          * @return <code>true</code> if the value of this object is the same as the obj
          *          argument; <code>false</code> otherwise.
@@ -543,7 +543,7 @@ public final class ClassConfiguration {
         }
 
         /**
-         * @param browserName - Name of the browser 
+         * @param browserName - Name of the browser
          */
         public BrowserInfo(final String browserName) {
             browserName_ = browserName;

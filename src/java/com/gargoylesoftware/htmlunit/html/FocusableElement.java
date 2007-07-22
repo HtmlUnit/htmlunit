@@ -48,9 +48,9 @@ import java.util.Map;
  */
 public abstract class FocusableElement extends ClickableElement {
 
-    /** 
+    /**
      * Create an instance.
-     * 
+     *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
      * @param page The page

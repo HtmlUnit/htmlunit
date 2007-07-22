@@ -103,7 +103,7 @@ public interface WebResponse {
 
     /**
      * Return the response headers as a List of {@link org.apache.commons.httpclient.NameValuePair}s.
-     * 
+     *
      * @return a List of {@link org.apache.commons.httpclient.NameValuePair}s.
      */
     List getResponseHeaders();

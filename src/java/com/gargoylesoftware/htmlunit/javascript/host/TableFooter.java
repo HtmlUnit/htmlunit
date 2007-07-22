@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 /**
  * A JavaScript object representing a table footer.
- * 
+ *
  * @version $Revision$
  * @author Daniel Gredler
  */

@@ -266,7 +266,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Common utility for GET after POST redirection on same urls 
+     * Common utility for GET after POST redirection on same urls
      * @param statusCode The code to return from the initial request
      * @throws Exception if the test fails.
      */
@@ -1031,7 +1031,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Verifies that exceptions are thrown on failing status code and the returned page
      * is still set as the current page in the WebWindow.
-     * 
+     *
      * @throws Exception if test fails
      */
     public void testGetPageFailingStatusCode() throws Exception {
@@ -1111,7 +1111,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Regression test for 
+     * Regression test for
      * https://sourceforge.net/tracker/index.php?func=detail&aid=1669097&group_id=47038&atid=448266
      * @throws Exception If the test fails.
      */
@@ -1214,7 +1214,7 @@ public class WebClientTest extends WebTestCase {
         assertSame( handler, webClient.getRefreshHandler() );
     }
 
-    /** 
+    /**
      * Test the script preprocessor
      * @throws IOException if the test fails
      */
@@ -1273,10 +1273,10 @@ public class WebClientTest extends WebTestCase {
         client.getPage( new URL( "http://www.yahoo.com" ) );
     }
 
-    /** 
+    /**
      * Test the ScriptPreProcessor's ability to filter out a javascript method
      * that is not implemented without affecting the rest of the page.
-     * 
+     *
      * @throws Exception if the test fails
      */
     public void testScriptPreProcessor_UnimplementedJavascript() throws Exception {
@@ -1399,7 +1399,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test setting the NekoHTML logging and parsing flags
-     * 
+     *
      * @throws Exception if test fails
      */
     public void testNekoFlagSetters() throws Exception {
@@ -1512,7 +1512,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Test that content type is looked in a case insensitive way.
      * Cf <a href="http://www.ietf.org/rfc/rfc2045.txt">RFC 2045</a>:
-     * "All media type values, subtype values, and parameter names as defined 
+     * "All media type values, subtype values, and parameter names as defined
      * are case-insensitive".
      * @throws Exception If something goes wrong.
      */
@@ -1553,9 +1553,9 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Load a javascript function from an external file using src references
-     * inside a script element. 
-     * 
-     * @throws Exception if the test fails 
+     * inside a script element.
+     *
+     * @throws Exception if the test fails
      */
     public void testLoadFilePageWithExternalJS() throws Exception {
         final File currentDirectory = new File((new File("")).getAbsolutePath());
@@ -1587,7 +1587,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test that WebClient.getPage(String) calls WebClient.getPage(URL) with the right URL
-     * @throws Exception if the test fails 
+     * @throws Exception if the test fails
      */
     public void testGetPageWithStringArg() throws Exception {
         final URL[] calledUrls = {null};

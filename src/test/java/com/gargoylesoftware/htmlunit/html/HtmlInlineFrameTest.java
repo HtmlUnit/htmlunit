@@ -114,7 +114,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
     /**
      * Tests that an invalid src attribute (i.e. src="foo://bar") doesn't result
      * in a NPE (bug 1699119).
-     * 
+     *
      * @throws Exception if an error occurs
      */
     public void testInvalidSrcAttribute() throws Exception {
@@ -153,7 +153,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
     }
 
     /**
-     * 
+     *
      * @throws Exception if the test fails
      */
     public void testScriptUnderIFrame() throws Exception {

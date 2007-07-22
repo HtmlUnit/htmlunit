@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests that when DOM events such as "onclick" have access
  * to an {@link Event} object with context information.
- * 
+ *
  * @version $Revision$
  * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
  * @author Ahmed Ashour
@@ -122,7 +122,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     *  Verify that when event handler is invoked an argument is passed in. 
+     *  Verify that when event handler is invoked an argument is passed in.
      * @throws Exception if the test fails
      */
     public void testEventArgDefined() throws Exception {
@@ -171,7 +171,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     *  event.currentTarget == this inside javascript event handler 
+     *  event.currentTarget == this inside javascript event handler
      * @throws Exception if the test fails
      */
     public void testEventCurrentTargetSameAsThis() throws Exception {
@@ -403,7 +403,7 @@ public class EventTest extends WebTestCase {
 
     /**
      * Test that the event handler is correctly parsed even if it contains comments.
-     * It seems that it is correctly parsed and stored in non public field 
+     * It seems that it is correctly parsed and stored in non public field
      * org.apache.xerces.util.XMLAttributesImpl#nonNormalizedValue
      * but that getValue(i) returns a normalized value. Furthermore access seems not possible as
      * we just see an org.apache.xerces.parsers.AbstractSAXParser.AttributesProxy

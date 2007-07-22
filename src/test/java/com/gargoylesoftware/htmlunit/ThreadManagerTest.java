@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for ThreadManager
- * 
+ *
  * @version $Revision$
  * @author Brad Clarke
  *

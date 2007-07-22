@@ -462,7 +462,7 @@ public class HtmlFormTest extends WebTestCase {
      * <p>Simulate a bug report where an anchor contained javascript that caused a form submit.
      * According to the bug report, the form would be submitted even though the onsubmit
      * handler would return false.  This wasn't reproducible but I added a test for it anyway.</p>
-     * 
+     *
      * <p>UPDATE: If the form submit is triggered by javascript then the onsubmit handler is not
      * supposed to be called so it doesn't matter what value it returns.</p>
      * @throws Exception if the test fails
@@ -689,7 +689,7 @@ public class HtmlFormTest extends WebTestCase {
         final List collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
-    }    
+    }
 
     /**
      * @throws Exception if the test fails
@@ -783,7 +783,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * Test that {@link HtmlForm#getTextAreaByName(String)} returns
      * the first textarea with the given name.
-     * 
+     *
      * @throws Exception If the test page can't be loaded.
      */
     public void testGetTextAreaByName() throws Exception {
@@ -813,7 +813,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * Test that {@link HtmlForm#getButtonByName(String)} returns
      * the first button with the given name.
-     * 
+     *
      * @throws Exception If the test page can't be loaded.
      */
     public void testGetButtonByName() throws Exception {
@@ -1161,7 +1161,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     public void testSumbit_submitInputValue() throws Exception {
         testSumbit_submitInputValue( BrowserVersion.INTERNET_EXPLORER_6_0 );
-        //test FF separately as value is not to DEFAULT_VALUE if not specified. 
+        //test FF separately as value is not to DEFAULT_VALUE if not specified.
         testSumbit_submitInputValue( BrowserVersion.FIREFOX_2 );
     }
 

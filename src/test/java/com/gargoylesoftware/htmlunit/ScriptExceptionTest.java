@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link ScriptException}.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  */
@@ -56,9 +56,8 @@ public final class ScriptExceptionTest extends WebTestCase {
 
     /**
      * Create an instance.
-     * 
-     * @param name
-     *            The name of the test.
+     *
+     * @param name The name of the test.
      */
     public ScriptExceptionTest(final String name) {
         super(name);

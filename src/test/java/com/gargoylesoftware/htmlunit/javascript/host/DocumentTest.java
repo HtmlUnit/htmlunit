@@ -168,11 +168,11 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDocumentWrite_AssignedToVar() throws Exception {
-        // IE accept use of detached function 
+        // IE accept use of detached function
         final String[] expectedAlertsIE = {};
         testDocumentWrite_AssignedToVar(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
 
-        // but FF doesn't 
+        // but FF doesn't
         final String[] expectedAlertsFF = {"exception occurred"};
         testDocumentWrite_AssignedToVar(BrowserVersion.FIREFOX_2, expectedAlertsFF);
     }
@@ -2041,7 +2041,7 @@ public class DocumentTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts 
+        final String[] expectedAlerts
             = {"myImageId", "2", "FORM", "undefined", "undefined", "undefined", "undefined"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
@@ -2194,8 +2194,7 @@ public class DocumentTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         
         assertEquals( expectedAlerts, collectedAlerts );
-        
-    }    
+    }
   
     /**
      * @throws Exception if the test fails
@@ -2287,7 +2286,7 @@ public class DocumentTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = 
+        final String[] expectedAlerts =
         {"d4.d3.d2.d1.gargoylesoftware.com", "d4.d3.d2.d1.gargoylesoftware.com", "d1.gargoylesoftware.com"};
 
         final List collectedAlerts = new ArrayList();
@@ -2387,8 +2386,8 @@ public class DocumentTest extends WebTestCase {
             + "document.write('<p id=\"para2\">Paragraph #2</p>');\n"
             + "document.write('<p id=\"para3\">Paragraph #3</p>');\n"
             + "alert(document.getElementById('para1').parentNode.id);\n"
-            + "alert(document.getElementById('para2').parentNode.id);\n"            
-            + "alert(document.getElementById('para3').parentNode.id);\n"            
+            + "alert(document.getElementById('para2').parentNode.id);\n"
+            + "alert(document.getElementById('para3').parentNode.id);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -2520,7 +2519,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Tests document.cloneNode()
-     * 
+     *
      * @throws Exception if the test fails
      */
     public void testDocumentCloneNode() throws Exception {

@@ -66,7 +66,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
  * Note that this class must not be used for collections that can be modified, for example
  * <tt>map.areas</tt> and <tt>select.options</tt>.
  * <br>
- * This class (like all classes in this package) is specific for the javascript engine. 
+ * This class (like all classes in this package) is specific for the javascript engine.
  * Users of HtmlUnit shouldn't use it directly.
  * @version $Revision$
  * @author Daniel Gredler
@@ -203,7 +203,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
 
                 for( int i=0; i < cachedElements_.size(); i++ ) {
                     final DomNode element = (DomNode) cachedElements_.get(i);
-                    for( DomNode parent = element.getParentNode(); parent != null; 
+                    for( DomNode parent = element.getParentNode(); parent != null;
                         parent = parent.getParentNode() ) {
                         if( parent instanceof HtmlNoScript ) {
                             cachedElements_.remove(i--);

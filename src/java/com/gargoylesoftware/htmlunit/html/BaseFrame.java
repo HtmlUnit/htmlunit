@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
- * @author David D. Kilzer 
+ * @author David D. Kilzer
  * @author Stefan Anzinger
  * @author Ahmed Ashour
  */

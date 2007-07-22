@@ -68,7 +68,7 @@ public class HtmlUnitXPath extends BaseXPath {
     private static final long serialVersionUID = -3902959929710269843L;
     private final String xpath_;
 
-    /** 
+    /**
      * Construct given an XPath expression string.
      *  @param xpathExpr The XPath expression.
      *  @throws org.jaxen.JaxenException if there is a syntax error while
@@ -78,7 +78,7 @@ public class HtmlUnitXPath extends BaseXPath {
         this( xpathExpr, DocumentNavigator.instance );
     }
 
-    /** 
+    /**
      * Construct given an XPath expression string and a Document Navigator.
      * @param xpathExpr The XPath expression.
      * @param navigator the document navigator to use for evaluation
@@ -91,11 +91,11 @@ public class HtmlUnitXPath extends BaseXPath {
     }
     
     /**
-     * Builds a navigator that will see the provided node as the "document" 
+     * Builds a navigator that will see the provided node as the "document"
      * and only navigate in its children.<br/>
      * The returned navigator can only be used to evaluate xpath expressions on nodes
-     * of the same document as the provided one. The behavior when used on an other document is undefined. 
-     * @param node the node that should be considered as the root by the navigator 
+     * of the same document as the provided one. The behavior when used on an other document is undefined.
+     * @param node the node that should be considered as the root by the navigator
      * @return a navigator
      */
     public static Navigator buildSubtreeNavigator(final DomNode node) {

@@ -43,7 +43,7 @@ import org.apache.commons.httpclient.HttpState;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
- * 
+ *
  * An object that handles the actual communication portion of page
  * retrieval/submission.
  *
@@ -58,7 +58,7 @@ public abstract class WebConnectionImpl implements WebConnection {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Creates a new web connection instance.
      * @param webClient The WebClient that is using this connection.
      */
@@ -68,7 +68,7 @@ public abstract class WebConnectionImpl implements WebConnection {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Submits a request and retrieves a response.
      * @param webRequestSettings Settings to make the request with.
      * @return The response to the request defined by the specified request settings.
@@ -78,7 +78,7 @@ public abstract class WebConnectionImpl implements WebConnection {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Return the web client.
      * @return The web client.
      */
@@ -88,7 +88,7 @@ public abstract class WebConnectionImpl implements WebConnection {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Return the {@link HttpState} that is being used.
      * @return the state.
      */

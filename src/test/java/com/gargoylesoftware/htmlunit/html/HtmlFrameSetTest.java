@@ -143,7 +143,7 @@ public class HtmlFrameSetTest extends WebTestCase {
     /**
      * <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1101525&group_id=47038&atid=448266">
      * Bug report 1101525 </a>
-     * 
+     *
      * @throws Exception if the test fails
      */
     public void testLoadingFrameSetWithRelativePaths()
@@ -320,6 +320,5 @@ public class HtmlFrameSetTest extends WebTestCase {
         
         client.getPage(URL_FIRST);
         assertEquals( expectedAlerts, collectedAlerts );
-    }    
-
+    }
 }

@@ -76,7 +76,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     
     /**
      * Reset the JavaScriptConfiguration file for each test to it's initial clean state.
-     * 
+     *
      * @throws Exception if the test fails
      */
     protected void setUp() throws Exception {
@@ -86,7 +86,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
 
     /**
      * Reset the JavaScriptConfiguration file for each test to it's initial clean state.
-     * 
+     *
      * @throws Exception if the test fails
      */
     protected void tearDown() throws Exception {
@@ -153,7 +153,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
             Document.class.getName(), null, null, null, true);
         expectedConfig.addProperty("readyState", true, false);
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
@@ -187,7 +187,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.FIREFOX_2;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
             Document.class.getName(), null, null, null, true);
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -241,7 +241,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final Reader reader = new StringReader(configurationString);
         JavaScriptConfiguration.loadConfiguration(reader);
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
             Document.class.getName(), null, null, null, true);
         expectedConfig.addProperty("readyState", true, false);
         assertTrue("Document property did not match", configuration.classConfigEquals("Document", expectedConfig));
@@ -310,9 +310,9 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
             Document.class.getName(), null, null, null, true);
-        assertTrue("Document should not property did not match", 
+        assertTrue("Document should not property did not match",
             configuration.classConfigEquals("Document", expectedConfig));
     }
     
@@ -344,9 +344,9 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
             Document.class.getName(), null, null, null, true);
-        assertTrue("Document should not property did not match", 
+        assertTrue("Document should not property did not match",
             configuration.classConfigEquals("Document", expectedConfig));
     }
 
@@ -378,9 +378,9 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
             Document.class.getName(), null, null, null, true);
-        assertTrue("Document should not property did not match", 
+        assertTrue("Document should not property did not match",
             configuration.classConfigEquals("Document", expectedConfig));
     }
 
@@ -404,7 +404,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
             Document.class.getName(), null, null, null, true);
         expectedConfig.addFunction("createAttribute");
         assertTrue("Document function did not match", configuration.classConfigEquals("Document", expectedConfig));
@@ -432,7 +432,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        final ClassConfiguration expectedConfig = new ClassConfiguration("Document", 
+        final ClassConfiguration expectedConfig = new ClassConfiguration("Document",
             Document.class.getName(), null, null, null, true);
         assertTrue("Document function did not match", configuration.classConfigEquals("Document", expectedConfig));
     }
@@ -474,12 +474,12 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     /**
      * Test that the data in the JavaScriptConfiguration file matches the classes in listed
      * properties and functions.  The first step is to get the configuration using a special method which
-     * ignores the browser and javascript constraints.  This checks that there is a method for each item in 
+     * ignores the browser and javascript constraints.  This checks that there is a method for each item in
      * the configuration file and fails by throwing an exception.
-     * 
+     *
      * The second step is to go through each class and determine if for each jsGet, jsSet, and jsFunction class,
      * there is an entry in the configuration.
-     *  
+     *
      * @throws Exception Exception on error
      */
     public void testConfigurationFile() throws Exception {
@@ -509,7 +509,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
                     theMethod = configuration.getPropertyWriteMethod(classname, elementName);
                     assertNotNull("No definition found for " + name + " defined in " + clazz.getName()
                         + " for object " + classname, theMethod);
-                } 
+                }
                 else if (name.startsWith("jsxFunction_")) {
                     elementName = name.substring(12);
                     theMethod = configuration.getFunctionMethod(classname, elementName);
@@ -547,7 +547,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
 
     /**
      * Test for if the property exists for the configuration
-     * 
+     *
      * @throws Exception Exception on error
      */
     public void testForPropertyExist() throws Exception {
@@ -572,13 +572,13 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        assertTrue("Requested property should have existed", 
+        assertTrue("Requested property should have existed",
             configuration.propertyExists(Document.class, "readyState"));
     }
     
     /**
      * Test for if the property exists for the configuration
-     * 
+     *
      * @throws Exception Exception on error
      */
     public void testForPropertyNotExist() throws Exception {
@@ -603,13 +603,13 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        assertFalse("Requested property should not exist", 
+        assertFalse("Requested property should not exist",
             configuration.propertyExists(Document.class, "noreadyState"));
     }
 
     /**
      * Test if configuration map expands with each new instance of BrowserVersion used.
-     * 
+     *
      * @throws Exception If the test fails
      */
     public void testConfigurationMapExpands() throws Exception {

@@ -136,7 +136,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
         if (isChild(node)) {
             return node;
         }
-        return null; 
+        return null;
     }
 
     /**

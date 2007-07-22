@@ -152,7 +152,7 @@ public class AnchorTest extends WebTestCase {
             + "</body></html>";
         
         final List collectedAlerts = new ArrayList();
-        final String[] expectedAlerts = { "", 
+        final String[] expectedAlerts = { "",
             "http://www.gargoylesoftware.com/foo.html",
             "javascript:void(0)",
             "http://www.gargoylesoftware.com/#"};
@@ -207,7 +207,7 @@ public class AnchorTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testReadWriteAnchorTarget() throws Exception {
-        final String content 
+        final String content
             = "<html>"
             + "<body onload=\"document.links[0].target += 'K';\">"
             + "<a href='#' target='O'>link 1</a>"
@@ -221,7 +221,7 @@ public class AnchorTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testReadWriteAnchorSearch() throws Exception {
-        final String content 
+        final String content
             = "<html>"
             + "<body onload=\"document.links[0].search += '&p2=2';\">"
             + "<a href='foo.html?p1=1' target='O'>link 1</a>"
@@ -235,7 +235,7 @@ public class AnchorTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testReadWriteAnchorHash() throws Exception {
-        final String content 
+        final String content
             = "<html>"
             + "<body onload=\"document.links[0].hash += 'K';\">"
             + "<a href='foo.html#O'>link 1</a>"
@@ -249,7 +249,7 @@ public class AnchorTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testReadWriteAnchorPort() throws Exception {
-        final String content 
+        final String content
             = "<html>"
             + "<body onload=\"document.links[0].port += '80';"
             + "    document.links[1].port += '80'; \">"
@@ -267,7 +267,7 @@ public class AnchorTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testReadWritePathname() throws Exception {
-        final String content 
+        final String content
             = "<html>"
             + "<body onload=\"document.links[0].pathname = '/bar' + document.links[0].pathname;\">"
             + "<a href='foo.html#B'>link 1</a>"
@@ -281,7 +281,7 @@ public class AnchorTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testReadWriteProtocol() throws Exception {
-        final String content 
+        final String content
             = "<html>"
             + "<body onload=\"document.links[0].protocol = document.links[0].protocol.substring(0,4) + 's:';\">"
             + "<a href='foo.html#B'>link 1</a>"
@@ -295,11 +295,11 @@ public class AnchorTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testReadWriteAnchorHost() throws Exception {
-        final String content 
+        final String content
             = "<html>"
-            + "<body onload=\"document.links[0].host += 'motion:8080';" 
-            +    " document.links[1].host += 'motion';" 
-            +    " document.links[2].host += '80';" 
+            + "<body onload=\"document.links[0].host += 'motion:8080';"
+            +    " document.links[1].host += 'motion';"
+            +    " document.links[2].host += '80';"
             +    " document.links[3].host = 'www.gargoylesoftware.com'; \">"
             + "<a href='foo.html#O'>link 0</a>"
             + "<a href='foo.html#O'>link 1</a>"
@@ -321,7 +321,7 @@ public class AnchorTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testReadWriteAnchorHostname() throws Exception {
-        final String content 
+        final String content
             = "<html>"
             + "<body onload=\"document.links[0].hostname += 'motion';\">"
             + "<a href='foo.html#O'>link 1</a>"

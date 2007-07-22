@@ -66,8 +66,8 @@ public class XmlPage implements Page {
     private final WebResponse webResponse_;
 
     /**
-     * Create an instance. 
-     * A warning is logged if an exception is thrown while parsing the xml content 
+     * Create an instance.
+     * A warning is logged if an exception is thrown while parsing the xml content
      * (for instance when the content is not a valid xml and can't be parsed).
      *
      * @param webResponse The response from the server
@@ -132,7 +132,7 @@ public class XmlPage implements Page {
     }
 
     /**
-     * Gets the DOM representation of the xml content 
+     * Gets the DOM representation of the xml content
      * @return <code>null</code> if the content couldn't be parsed.
      */
     public Document getXmlDocument() {

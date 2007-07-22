@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for the Screen object.
- * 
+ *
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
@@ -66,7 +66,7 @@ public class ScreenTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     public void testProperties() throws Exception {
-        final String content = "<html><head><title>test</title>\n" 
+        final String content = "<html><head><title>test</title>\n"
             + "    <script>\n"
             + "    function doTest(){\n"
             + "       var props = {\n"
@@ -81,7 +81,7 @@ public class ScreenTest extends WebTestCase {
             + "           height: 600, \n"
             + "           left: 0, \n"
             + "           logicalXDPI: 96, \n"
-            + "           logicalYDPI: 96, \n" 
+            + "           logicalYDPI: 96, \n"
             + "           pixelDepth: 24, \n"
             + "           top: 0, \n"
             + "           updateInterval: 0, \n"
@@ -89,9 +89,9 @@ public class ScreenTest extends WebTestCase {
             + "       }; \n"
             + "       var nbTests = 0;\n"
             + "       for (var i in props) {"
-            + "           var myExpr = 'window.screen.' + i;\n" 
-            + "           var result = eval(myExpr);\n" 
-            + "           if (props[i] != result) {" 
+            + "           var myExpr = 'window.screen.' + i;\n"
+            + "           var result = eval(myExpr);\n"
+            + "           if (props[i] != result) {"
             + "               alert(myExpr + ': ' + result + ' != ' + props[i]);\n"
             + "           }\n"
             + "           ++nbTests;\n"

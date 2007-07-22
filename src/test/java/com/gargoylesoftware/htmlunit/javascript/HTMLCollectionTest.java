@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HTMLCollection}.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour

@@ -43,7 +43,7 @@ import java.net.URL;
 /**
  * A handler for page refreshes. A refresh can be triggered by a response header
  * or a meta tag.
- * 
+ *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler

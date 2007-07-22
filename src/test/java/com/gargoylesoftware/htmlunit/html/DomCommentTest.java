@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link DomComment}.
- * 
+ *
  * @version $Revision$
  * @author Karel Kolman
  */

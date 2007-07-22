@@ -175,7 +175,7 @@ public class SimpleScriptableTest extends WebTestCase {
     }
 
     /**
-     * This test fails on IE and FF but not by HtmlUnit because according to Ecma standard, 
+     * This test fails on IE and FF but not by HtmlUnit because according to Ecma standard,
      * attemps to set read only properties should be silently ignored.
      * Furthermore document.body = document.body will work on FF but not on IE
      * @throws Exception if the test fails

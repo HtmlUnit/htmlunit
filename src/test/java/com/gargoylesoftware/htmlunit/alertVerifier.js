@@ -17,10 +17,10 @@ function htmlunitReserved_catchedAlert(_str)
 
 function htmlunitReserved_addSummaryAfterOnload()
 {
-	var originalOnload = window.onload; 
+	var originalOnload = window.onload;
 	window.onload = function() {
 			if (originalOnload)
-				originalOnload(); 
+				originalOnload();
 			htmlunitReserved_displaySummary();
 		};
 }

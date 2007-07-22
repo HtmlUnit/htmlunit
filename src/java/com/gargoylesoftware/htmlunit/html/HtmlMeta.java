@@ -107,7 +107,7 @@ public class HtmlMeta extends HtmlElement {
                     cookie.setExpiryDate(DateUtil.parseDate(partValue));
                 }
                 catch (final DateParseException e) {
-                    notifyIncorrectness("set-cookie http-equiv meta tag: can't parse expiration date >" 
+                    notifyIncorrectness("set-cookie http-equiv meta tag: can't parse expiration date >"
                             + partValue + "<.");
                 }
             }

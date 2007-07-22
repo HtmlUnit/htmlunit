@@ -134,7 +134,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testUpdateStateFirstForOnclickHandler() throws Exception {
-        final String htmlContent 
+        final String htmlContent
             = "<html><head><title>foo</title></head><body>"
             + "<script type='text/javascript'>"
             + "    function itemOnClickHandler() {"
@@ -149,7 +149,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
             + "  onclick='itemOnClickHandler()' id='oneItem'>"
             + "<label for='oneItem'>1</label>"
             + "<input type='radio' name='numOfItems' value='2' onclick='itemOnClickHandler()' id='twoItems'>"
-            + "<label for='twoItems'>2</label>" 
+            + "<label for='twoItems'>2</label>"
             + "</form></body></html>";
         
         final List collectedAlerts = new ArrayList();
@@ -171,7 +171,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         assertTrue(oneItem.isChecked());
         assertFalse(twoItems.isChecked());
 
-        final String[] expectedAlerts = { 
+        final String[] expectedAlerts = {
             "oneItem.checked: false twoItems.checked: true",
             "oneItem.checked: true twoItems.checked: false"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -206,7 +206,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
     }
 
     /**
-     * Test <code>input.checked</code> if the radio <code>&lt;input&gt;</code> do not have distinct 'value' 
+     * Test <code>input.checked</code> if the radio <code>&lt;input&gt;</code> do not have distinct 'value'
      * @throws Exception If the test fails
      */
     public void testRadioInputChecked() throws Exception {
@@ -229,7 +229,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>\n";
 
-        final String[] expectedAlerts = {"false,false", "true,false", "false,true"}; 
+        final String[] expectedAlerts = {"false,false", "true,false", "false,true"};
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts);

@@ -130,7 +130,7 @@ public class Anchor extends FocusableHostElement {
      * @throws Exception If an error occurs.
      */
     private URL getUrl() throws Exception {
-        final HtmlAnchor anchor = (HtmlAnchor) getHtmlElementOrDie(); 
+        final HtmlAnchor anchor = (HtmlAnchor) getHtmlElementOrDie();
         return anchor.getPage().getFullyQualifiedUrl(anchor.getHrefAttribute());
     }
 
@@ -142,7 +142,7 @@ public class Anchor extends FocusableHostElement {
     }
 
     /**
-     * Returns the search portion of the link's URL (the portion starting with 
+     * Returns the search portion of the link's URL (the portion starting with
      * '?' and up to but not including any '#').
      * @return The search portion of the link's URL.
      * @throws Exception If an error occurs.
@@ -160,7 +160,7 @@ public class Anchor extends FocusableHostElement {
     }
 
     /**
-     * Sets the search portion of the link's URL (the portion starting with '?' 
+     * Sets the search portion of the link's URL (the portion starting with '?'
      * and up to but not including any '#')..
      * @param search The new search portion of the link's URL.
      * @throws Exception If an error occurs.
@@ -366,7 +366,7 @@ public class Anchor extends FocusableHostElement {
         else {
             final int indexAnchor = href.indexOf('#');
             final String beforeAnchor;
-            final String anchorPart; 
+            final String anchorPart;
             if (indexAnchor == -1) {
                 beforeAnchor = href;
                 anchorPart = "";

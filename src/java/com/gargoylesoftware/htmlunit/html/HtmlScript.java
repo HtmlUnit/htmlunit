@@ -46,9 +46,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.Script;
 /**
  * Wrapper for the html element "script".<br>
  * When a script tag references an external script (with attribute src) it gets executed when the node
- * is added to the DOM tree. When the script code is nested, it gets executed when the text node 
+ * is added to the DOM tree. When the script code is nested, it gets executed when the text node
  * containing the script is added to the HtmlScript.<br>
- * The ScriptFilter feature of NekoHtml can't be used because it doesn't allow immediate access to the DOM 
+ * The ScriptFilter feature of NekoHtml can't be used because it doesn't allow immediate access to the DOM
  * (i.e. <code>document.write("&lt;span id='mySpan'/>"); document.getElementById("mySpan").tagName;</code>
  * can't work with a filter).
  *
@@ -266,7 +266,7 @@ public class HtmlScript extends HtmlElement {
 
     /**
      * Indicates if script execution is necessary and/or possible.
-     * 
+     *
      * @return <code>true</code> if the script should be executed.
      */
     private boolean isExecutionNeeded() {

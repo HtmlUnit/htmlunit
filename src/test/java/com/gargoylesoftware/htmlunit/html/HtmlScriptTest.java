@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlScript}.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
@@ -165,7 +165,7 @@ public class HtmlScriptTest extends WebTestCase {
      */
     public void testScriptIsNotRunWhenCloned() throws Exception {
 
-        final String html = "<html><body onload='document.body.cloneNode(true)'>" + 
+        final String html = "<html><body onload='document.body.cloneNode(true)'>" +
             "<script>alert('a')</script></body></html>";
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);

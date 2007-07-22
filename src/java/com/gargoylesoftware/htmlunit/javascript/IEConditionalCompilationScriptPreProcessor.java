@@ -48,12 +48,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * A basic implementation for IE Conditional Compilation.
- * 
+ *
  * <p>Currently supports only <b>@cc_on</b>, but not <b>@if</b> or <b>@set</b>.
- * 
+ *
  * @version $Revision$
  * @author Ahmed Ashour
- * 
+ *
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ahx1z4fs(VS.80).aspx">Microsoft Docs</a>
  */
 public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProcessor {
@@ -107,7 +107,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
     /**
      * Add the specified values in the given textConstants if it does not intersect
      * with previously added textConstants.
-     * 
+     *
      * @param textConstants set of textconats to add the following values as a TextConstant to it.
      * @param startIndex starting index
      * @param endIndex end index
@@ -155,7 +155,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             final TextConstant constant = (TextConstant)iterator.next();
             sourceCode = sourceCode.substring( 0, constant.startIndex_+ variation )
                 + constant.textToReplace_
-                + sourceCode.substring( constant.endIndex_+ variation ); 
+                + sourceCode.substring( constant.endIndex_+ variation );
                         
             variation += constant.textToReplace_.length() - (constant.endIndex_ - constant.startIndex_);
         }

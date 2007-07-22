@@ -69,8 +69,8 @@ public class HtmlDivision extends ClickableElement {
 
     /**
      * Create an instance of HtmlDivision.
-     * 
-     * <p><b>Don't directly construct, it is public as an implementation side-effect.</b> 
+     *
+     * <p><b>Don't directly construct, it is public as an implementation side-effect.</b>
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate

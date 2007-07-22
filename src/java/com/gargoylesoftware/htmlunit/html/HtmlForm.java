@@ -413,9 +413,9 @@ public class HtmlForm extends ClickableElement {
      * @param value The value of the HtmlInput
      * @return See above
      * @exception ElementNotFoundException If the field could not be found
-     * 
-     * @deprecated Deprecated because 'name' and 'value' are sometimes not unique to select a single 
-     * HtmlRadioButtonInput, it should not be called, 
+     *
+     * @deprecated Deprecated because 'name' and 'value' are sometimes not unique to select a single
+     * HtmlRadioButtonInput, it should not be called,
      * you can use {@link #getByXPath(String)} instead.
      */
     //TODO: to be removed, deprecated in 4 June 2007
@@ -555,9 +555,9 @@ public class HtmlForm extends ClickableElement {
      * @param name The name of the radio buttons
      * @param value The value to match
      * @exception ElementNotFoundException If the specified element could not be found
-     * 
-     * @deprecated Deprecated because 'name' and 'value' are sometimes not unique to select a single 
-     * HtmlRadioButtonInput, it should not be called, 
+     *
+     * @deprecated Deprecated because 'name' and 'value' are sometimes not unique to select a single
+     * HtmlRadioButtonInput, it should not be called,
      * you can use {@link #getByXPath(String)} instead.
      */
     //TODO: to be removed, deprecated in 4 June 2007

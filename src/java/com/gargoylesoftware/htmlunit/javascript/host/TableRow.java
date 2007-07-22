@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 
 /**
  * A JavaScript object representing a TR.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Chris Erskine
@@ -113,7 +113,7 @@ public class TableRow extends HTMLElement {
      * @param f the function object that invoked this function.
      * @return the newly-created cell.
      */
-    public static Object jsxFunction_insertCell(final Context cx, final Scriptable s, 
+    public static Object jsxFunction_insertCell(final Context cx, final Scriptable s,
             final Object[] args, final Function f) {
         final TableRow row = (TableRow) s;
         final HtmlTableRow htmlRow = (HtmlTableRow) row.getDomNodeOrDie();

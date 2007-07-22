@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.html.BaseFrame;
 /**
  * A JavaScript object for a {@link com.gargoylesoftware.htmlunit.html.HtmlFrame}
  * and {@link com.gargoylesoftware.htmlunit.html.HtmlInlineFrame}.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Chris Erskine

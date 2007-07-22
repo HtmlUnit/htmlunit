@@ -44,10 +44,10 @@ import java.net.URL;
  * This refresh handler spawns a new thread that waits the specified
  * number of seconds before refreshing the specified page, using the
  * specified URL.
- * 
+ *
  * If you want a refresh handler that ignores the wait time, see
  * {@link ImmediateRefreshHandler}.
- * 
+ *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler

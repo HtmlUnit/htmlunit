@@ -59,7 +59,7 @@ import org.apache.commons.logging.LogFactory;
  * Default HtmlUnit implementation of the <tt>CredentialsProvider</tt> interface. Provides
  * credentials for both web servers and proxies. Supports NTLM authentication, Digest
  * authentication, and Basic HTTP authentication.
- * 
+ *
  * @version $Revision$
  * @author Daniel Gredler
  * @author Vikram Shitole
@@ -179,7 +179,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param host The host we are authenticating for.
      * @param port The port we are authenticating for.
      * @param proxy Whether or not we are authenticating using a proxy.
-     * @return The credentials corresponding to the specified scheme, host and port or <code>null</code> 
+     * @return The credentials corresponding to the specified scheme, host and port or <code>null</code>
      *   if already asked for it to avoid infinite loop
      * @throws CredentialsNotAvailableException If the specified credentials cannot be provided due to an error.
      * @see CredentialsProvider#getCredentials(AuthScheme, String, int, boolean)
@@ -224,7 +224,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     /**
      * @param scheme the request scheme for which Credentials are asked
      * @param scope the configured authorization scope
-     * @return <code>true</code> if the scope's realm matches the one of the scheme 
+     * @return <code>true</code> if the scope's realm matches the one of the scheme
      */
     protected boolean matchRealm(final AuthScope scope, final AuthScheme scheme) {
         return scope.getRealm() == AuthScope.ANY_REALM || scope.getRealm().equals(scheme.getRealm());
@@ -233,7 +233,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     /**
      * @param port the request port for which Credentials are asked
      * @param scope the configured authorization scope
-     * @return <code>true</code> if the scope's port matches the provided one 
+     * @return <code>true</code> if the scope's port matches the provided one
      */
     protected boolean matchPort(final AuthScope scope, final int port) {
         return scope.getPort() == AuthScope.ANY_PORT || scope.getPort() == port;
@@ -242,7 +242,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     /**
      * @param host the request host for which Credentials are asked
      * @param scope the configured authorization scope
-     * @return <code>true</code> if the scope's host matches the provided one 
+     * @return <code>true</code> if the scope's host matches the provided one
      */
     protected boolean matchHost(final AuthScope scope, final String host) {
         return scope.getHost() == AuthScope.ANY_HOST || scope.getHost().equals(host);
@@ -251,7 +251,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     /**
      * @param scheme the request scheme for which Credentials are asked
      * @param scope the configured authorization scope
-     * @return <code>true</code> if the scope's scheme matches the provided one 
+     * @return <code>true</code> if the scope's scheme matches the provided one
      */
     protected boolean matchScheme(final AuthScope scope, final AuthScheme scheme) {
         return scope.getScheme() == AuthScope.ANY_SCHEME || scope.getScheme().equals(scheme.getSchemeName());

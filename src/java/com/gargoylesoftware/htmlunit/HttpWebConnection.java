@@ -74,7 +74,7 @@ import org.apache.commons.logging.impl.SimpleLog;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
- *  
+ *
  * An object that handles the actual communication portion of page
  * retrieval/submission
  *
@@ -304,8 +304,8 @@ public class HttpWebConnection extends WebConnectionImpl {
         return httpMethod;
     }
 
-    /** 
-     * Lazily initialize the httpClient 
+    /**
+     * Lazily initialize the httpClient
      * @return the initialized client
      */
     protected synchronized HttpClient getHttpClient() {
@@ -334,7 +334,7 @@ public class HttpWebConnection extends WebConnectionImpl {
         return httpClient_;
     }
     
-    /** 
+    /**
      * Return the timeout to use for socket and connection timeouts for HttpConnectionManager.
      * is overridden to 0 by StreamingWebConnection which keeps reading after a timeout and
      * must have long running connections explicitly terminated.
@@ -346,13 +346,13 @@ public class HttpWebConnection extends WebConnectionImpl {
 
     /**
      * Creates the httpClient that will be used by this WebConnection.
-     * Extensions may override this method to create the HttpClient with for instance a custom 
-     * {@link org.apache.commons.httpclient.HttpConnectionManager} to perform some tracking 
+     * Extensions may override this method to create the HttpClient with for instance a custom
+     * {@link org.apache.commons.httpclient.HttpConnectionManager} to perform some tracking
      * (see feature request 1438216).
      * @return the client
      */
     protected HttpClient createHttpClient() {
-        final MultiThreadedHttpConnectionManager connectionManager = 
+        final MultiThreadedHttpConnectionManager connectionManager =
             new MultiThreadedHttpConnectionManager();
         return new HttpClient(connectionManager);
     }
@@ -375,7 +375,7 @@ public class HttpWebConnection extends WebConnectionImpl {
 
     /**
      * Get the virtual host
-     * @return virtualHost The current virtualHost 
+     * @return virtualHost The current virtualHost
      */
     public String getVirtualHost() {
         return virtualHost_;
@@ -414,7 +414,7 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Construct an appropriate WebResponseData. 
+     * Construct an appropriate WebResponseData.
      * May be overridden by subclasses to return a specialised WebResponseData.
      * @param statusMessage StatusMessage from the response
      * @param headers response headers
@@ -424,9 +424,9 @@ public class HttpWebConnection extends WebConnectionImpl {
      * @throws IOException if there is a problem reading the response body.
      */
     protected WebResponseData newWebResponseDataInstance(
-            final String statusMessage, 
-            final List headers, 
-            final int statusCode, 
+            final String statusMessage,
+            final List headers,
+            final int statusCode,
             final HttpMethodBase method
     ) throws IOException {
         return new WebResponseData(
@@ -437,7 +437,7 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Construct an appropriate WebResponse. 
+     * Construct an appropriate WebResponse.
      * May be overridden by subclasses to return a specialised WebResponse.
      * @param responseData Data that was send back
      * @param charset Charset used if not returned in the response.
@@ -447,10 +447,10 @@ public class HttpWebConnection extends WebConnectionImpl {
      * @return the new WebResponse.
      */
     protected WebResponse newWebResponseInstance(
-            final String charset, 
-            final WebResponseData responseData, 
-            final long loadTime, 
-            final SubmitMethod requestMethod, 
+            final String charset,
+            final WebResponseData responseData,
+            final long loadTime,
+            final SubmitMethod requestMethod,
             final URL originatingURL
     ) {
         return new WebResponseImpl(responseData, charset, originatingURL, requestMethod, loadTime);

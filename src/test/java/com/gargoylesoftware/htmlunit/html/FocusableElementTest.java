@@ -184,12 +184,12 @@ public class FocusableElementTest extends WebTestCase {
     }
     
     /**
-     * Regression test for bug 
+     * Regression test for bug
      * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1161705&group_id=47038
      * @throws Exception if the test fails
      */
     public void testOnBlurWith2Pages() throws Exception {
-        final String html = 
+        final String html =
             "<html>"
             + "<head>"
             + "<script>\n"

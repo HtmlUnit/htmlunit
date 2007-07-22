@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 
 /**
  * A JavaScript object representing a Table.
- * 
+ *
  * @version $Revision$
  * @author David D. Kilzer
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

@@ -59,6 +59,6 @@ public interface PageCreator {
      * @return The new page.
      */
     Page createPage( final WebResponse webResponse, final WebWindow webWindow )
-        throws IOException ;
+        throws IOException;
 }
 

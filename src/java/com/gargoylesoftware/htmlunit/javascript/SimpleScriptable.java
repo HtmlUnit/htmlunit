@@ -68,12 +68,12 @@ public class SimpleScriptable extends ScriptableObject {
     private DomNode domNode_;
 
     /**
-     * Get a named property from the object. 
+     * Get a named property from the object.
      * Normally HtmlUnit objects don't need to overwrite this method as properties are defined
      * on the prototypes from the xml configuration. In some cases where "content" of object
      * has priority compared to the properties consider using utility {@link #getWithPreemption(String)}.
      * For fallback case just implement {@link ScriptableWithFallbackGetter}.
-     * {@inheritDoc} 
+     * {@inheritDoc}
      */
     public Object get(final String name, final Scriptable start) {
         // try to get property configured on object itself

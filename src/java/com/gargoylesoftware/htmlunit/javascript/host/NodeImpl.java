@@ -410,7 +410,7 @@ public class NodeImpl extends SimpleScriptable {
             // handlers declared as property on a node don't receive the event as argument for IE
             final Object[] propHandlerArgs;
             if (isIE) {
-                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY; 
+                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
             }
             else {
                 propHandlerArgs = args;
@@ -461,7 +461,7 @@ public class NodeImpl extends SimpleScriptable {
                 final DomNode curNode = (DomNode) parents.get(i);
                 final NodeImpl jsNode = (NodeImpl) curNode.getScriptObject();
                 if (jsNode.eventListenersContainer_ != null) {
-                    result = defaultResult(jsNode.eventListenersContainer_.executeCapturingListeners(event, args), 
+                    result = defaultResult(jsNode.eventListenersContainer_.executeCapturingListeners(event, args),
                             result);
                     if (event.isPropagationStopped()) {
                         return result;
@@ -472,7 +472,7 @@ public class NodeImpl extends SimpleScriptable {
             // handlers declared as property on a node don't receive the event as argument for IE
             final Object[] propHandlerArgs;
             if (isIE) {
-                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY; 
+                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
             }
             else {
                 propHandlerArgs = args;
@@ -485,7 +485,7 @@ public class NodeImpl extends SimpleScriptable {
                 
                 if (jsNode.eventListenersContainer_ != null) {
                     result = defaultResult(
-                            jsNode.eventListenersContainer_.executeBubblingListeners(event, args, propHandlerArgs), 
+                            jsNode.eventListenersContainer_.executeBubblingListeners(event, args, propHandlerArgs),
                             result);
                     if (event.isPropagationStopped()) {
                         return result;

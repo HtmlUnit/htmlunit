@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link DomText}.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
@@ -58,7 +58,7 @@ public class DomTextTest extends WebTestCase {
     }
 
     /**
-     * Test the clean up of &amp;nbsp; in strings 
+     * Test the clean up of &amp;nbsp; in strings
      * @throws Exception if the test fails
      */
     public void testAsText_nbsp() throws Exception {
@@ -73,7 +73,7 @@ public class DomTextTest extends WebTestCase {
     /**
      * Test font formats, as per bug #1731042
      *  (http://sourceforge.net/tracker/index.php?func=detail&aid=1731042&group_id=47038&atid=448266)
-     *  
+     *
      * @throws Exception if the test fails
      */
     public void testAsText_fontFormat() throws Exception {
@@ -100,7 +100,7 @@ public class DomTextTest extends WebTestCase {
         testAsText( "a <font>b</font>c",   "a bc" );
         testAsText( "a<font>b</font>c",    "abc" );
 
-        // I guess 'span' should be just like 'font' 
+        // I guess 'span' should be just like 'font'
         testAsText( "a <span>b</span> c",  "a b c" );
         testAsText( "a<span>b</span> c",   "ab c" );
         testAsText( "a <span>b</span>c",   "a bc" );
@@ -113,7 +113,7 @@ public class DomTextTest extends WebTestCase {
     
     /**
      * These worked before the changes for bug #1731042, and should afterwards, too
-     *  
+     *
      * @throws Exception if the test fails
      */
     public void testAsText_regression() throws Exception {
@@ -127,11 +127,11 @@ public class DomTextTest extends WebTestCase {
     
     /**
      * check the HtmlTable* objects themselves
-     *  
+     *
      * @throws Exception if the test fails
      */
     public void testAsText_table_elements() throws Exception {
-        final String html = "<table id='table'><tr id='row'><td id='cell'> b </td></tr>\n</table>" ;
+        final String html = "<table id='table'><tr id='row'><td id='cell'> b </td></tr>\n</table>";
         final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
 
         final HtmlPage page = loadPage(content);

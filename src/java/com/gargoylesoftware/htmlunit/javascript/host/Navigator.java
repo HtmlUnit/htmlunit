@@ -44,13 +44,13 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * A javascript object for a Navigator.
- * 
+ *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Ahmed Ashour
- * 
+ *
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_navigator.asp">
  * MSDN documentation</a>
  */

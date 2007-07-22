@@ -45,7 +45,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Default implementation of {@link IncorrectnessListener} configured on {@link WebClient}.
  * Logs the notifications at WARN level to the originator's log.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour

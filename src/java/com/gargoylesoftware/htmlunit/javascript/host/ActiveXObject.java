@@ -171,7 +171,7 @@ public class ActiveXObject extends SimpleScriptable {
     }
 
     /**
-     * Gets the first method found of the class with the given name 
+     * Gets the first method found of the class with the given name
      * @param clazz the class to search on
      * @param name the name of the searched method
      * @return <code>null</code> if not found

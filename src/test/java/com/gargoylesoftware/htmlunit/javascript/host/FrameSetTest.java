@@ -55,7 +55,7 @@ public class FrameSetTest extends WebTestCase {
 
     /**
      * Creates an instance.
-     * 
+     *
      * @param name The name of the test.
      */
     public FrameSetTest(final String name) {

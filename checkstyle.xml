@@ -167,6 +167,16 @@
             <property name="format" value="\* *@\w*  "/>
         </module>
 
+        <module name="GenericIllegalRegexp">
+            <property name="format" value="\S +$"/>
+            <property name="message" value="Trailing space found."/>
+        </module>
+
+        <module name="GenericIllegalRegexp">
+            <property name="format" value="\S +;$"/>
+            <property name="message" value="Space before semicolon found."/>
+        </module>
+
         <module name="UpperEll"/>
         
         <module name="FinalLocalVariable">

@@ -50,10 +50,10 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
- * 
+ *
  * This is a class that provides thread handling services to internal clients
  * as well as exposes some of the status of these threads to the public API.
- * 
+ *
  * @version $Revision$
  * @author Brad Clarke
  * @author Marc Guillemot
@@ -65,7 +65,7 @@ public class ThreadManager {
     private static final Log LOG = LogFactory.getLog(ThreadManager.class);
 
     /**
-     * @return The number of tracked threads. 
+     * @return The number of tracked threads.
      */
     public int activeCount() {
         return threadMap_.size();
@@ -80,7 +80,7 @@ public class ThreadManager {
     /**
      * HtmlUnit threads are started at a higher priority than the priority
      * of the first thread to ask for HtmlUnit thread handling services. Assuming
-     * there are no users screwing with their own thread priority after starting 
+     * there are no users screwing with their own thread priority after starting
      * a test this should be enough to encourage background threads to execute
      * quicker than the test they were started from, if possible.
      */
@@ -96,19 +96,19 @@ public class ThreadManager {
         return nextThreadID_++;
     }
 
-    /** 
+    /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Starts a new job on a background thread. Threads started by this method
      * are always considered daemon threads and will not prevent the JVM from
-     * shutting down. For our purposes the JUnit test is the only thread that 
-     * matters and the background threads are just there to keep the HtmlUnit 
+     * shutting down. For our purposes the JUnit test is the only thread that
+     * matters and the background threads are just there to keep the HtmlUnit
      * objects as up to date as possible.
-     * 
+     *
      * @param job The job to start
      * @param label a job description
      * @return ID of the new thread, suitable for use in JavaScript and required
-     * when calling {@link #stopThread(int)} 
+     * when calling {@link #stopThread(int)}
      */
     public int startThread(final Runnable job, final String label) {
         final int myThreadID = getNextThreadId();
@@ -131,14 +131,14 @@ public class ThreadManager {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Stops a thread that was started in this thread manager.
-     * 
+     *
      * Note: this does not immediately stop the thread, only interrupt
      * it and remove it from being tracked by this manager. The thread
      * is responsible for handling being interrupted properly and shutting
      * itself down.
-     * 
+     *
      * @param threadID the ID of the thread to stop
      */
     public void stopThread(final int threadID) {
@@ -150,8 +150,8 @@ public class ThreadManager {
 
     /**
      * Wait for any executing background threads to complete.
-     * 
-     * @param maxWaitMillis The maximum time that should be waited, in milliseconds. 
+     *
+     * @param maxWaitMillis The maximum time that should be waited, in milliseconds.
      *        This is not an exact time but will be fairly close.
      * @return true if all threads expired in the specified time
      */
@@ -198,6 +198,6 @@ public class ThreadManager {
      * {@inheritDoc}
      */
     public String toString() {
-        return "ThreadManager: " + threadMap_; 
+        return "ThreadManager: " + threadMap_;
     }
 }

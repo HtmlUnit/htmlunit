@@ -65,7 +65,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
  * A JavaScript object for a XMLHttpRequest.
- * 
+ *
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
@@ -150,7 +150,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             
             for (int i=0; i<nbExecutions; ++i) {
-                jsEngine.callFunction(containingPage_, stateChangeHandler_, context, 
+                jsEngine.callFunction(containingPage_, stateChangeHandler_, context,
                         this, scope, ArrayUtils.EMPTY_OBJECT_ARRAY);
             }
         }
@@ -420,8 +420,8 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
     
     /**
-     * Override the mime type returned by the server (if any). This may be used, for example, to force a stream 
-     * to be treated and parsed as text/xml, even if the server does not report it as such. 
+     * Override the mime type returned by the server (if any). This may be used, for example, to force a stream
+     * to be treated and parsed as text/xml, even if the server does not report it as such.
      * This must be done before the send method is invoked.
      * @param mimeType the type used to override that returned by the server (if any)
      * @see <a href="http://xulplanet.com/references/objref/XMLHttpRequest.html#method_overrideMimeType">XUL Planet</a>

@@ -42,7 +42,7 @@ import java.util.List;
 
 /**
  * Tests for {@link IncorrectnessListener}.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  */

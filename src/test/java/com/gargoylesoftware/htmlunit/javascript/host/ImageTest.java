@@ -83,7 +83,7 @@ public class ImageTest extends WebTestCase {
 
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
-    }    
+    }
 
     /**
      * This test verifies that when JavaScript is used to modify the src
@@ -109,11 +109,11 @@ public class ImageTest extends WebTestCase {
     /**
      * JavaScript can be used to preload images, as follows:
      * <code>var newImage = new Image(); newImage.src = 'foo.gif';</code>.
-     * When <code>new Image()</code> is called, HtmlUnit creates a new JavaScript 
+     * When <code>new Image()</code> is called, HtmlUnit creates a new JavaScript
      * Image object. However, no corresponding DOM node is created, which is
      * just as well, since browers don't create one either.
      * This test verifies that the above JavaScript code can be invoked without
-     * throwing an "IllegalStateException: DomNode has not been set for this 
+     * throwing an "IllegalStateException: DomNode has not been set for this
      * SimpleScriptable."
      * @throws Exception if the test fails
      */

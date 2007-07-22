@@ -174,10 +174,10 @@ public class HTMLParserTest extends WebTestCase {
         catch (final ConnectException e) {
             /* sf.net's flaky web servers and not being able to connect
              * here from the shell server can cause this, doesn't mean something
-             * is broken 
+             * is broken
              */
             System.out.println("Connection could not be made to " + htmlUnitSite.toExternalForm());
-            return; 
+            return;
         }
         catch (final SocketException e) {
             /* Some systems do not have access to the sf.net's web page.  If the connection

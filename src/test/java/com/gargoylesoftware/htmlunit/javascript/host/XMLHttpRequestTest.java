@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link XMLHttpRequest}.
- * 
+ *
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
@@ -235,7 +235,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
     /**
      * Regression test for bug 1209692
-     * http://sourceforge.net/tracker/index.php?func=detail&aid=1209692&group_id=47038&atid=448266 
+     * http://sourceforge.net/tracker/index.php?func=detail&aid=1209692&group_id=47038&atid=448266
      * @throws Exception If the test fails.
      */
     public void testRelativeUrl() throws Exception {
@@ -510,7 +510,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     /**
      * Regression test for bug 1611097.
      * https://sourceforge.net/tracker/index.php?func=detail&aid=1611097&group_id=47038&atid=448266
-     * Caution: the problem appeared with jdk 1.4 but not with jdk 1.5 as String contains a 
+     * Caution: the problem appeared with jdk 1.4 but not with jdk 1.5 as String contains a
      * replace(CharSequence, CharSequence) method in this version
      * @throws Exception if the test fails
      */
@@ -673,7 +673,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         assertTrue("thread failed to stop in 4 seconds", page.getEnclosingWindow().getThreadManager().joinAll(4000));
 
-        final String[] alerts = { URL_FIRST.toExternalForm(), "before long loop", "after long loop", 
+        final String[] alerts = { URL_FIRST.toExternalForm(), "before long loop", "after long loop",
                 urlPage2.toExternalForm(), "ready state handler, content loaded: j=5000" };
         assertEquals( alerts, collectedAlerts );
     }

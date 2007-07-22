@@ -110,7 +110,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
     }
 
     /**
-     * Test that the elements are in the right order (was a bug in Jaxen 1.0-FCS: 
+     * Test that the elements are in the right order (was a bug in Jaxen 1.0-FCS:
      * http://jira.codehaus.org/browse/JAXEN-55)
      * @throws Exception if test fails
      */

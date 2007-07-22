@@ -155,7 +155,7 @@ public class HtmlSubmitInput extends HtmlInput {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      *  Returns "Submit Query" if <tt>name</tt> attribute is defined
      *  and <tt>value</tt> attribute is not defined.
      */

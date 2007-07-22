@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 
 /**
  * A JavaScript object for a Form.
- * 
+ *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Ahmed Ashour
- * 
+ *
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/form.asp">MSDN documentation</a>
  */
 public class HTMLFormElement extends HTMLElement {

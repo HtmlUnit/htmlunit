@@ -93,7 +93,7 @@ public abstract class ClickableElement extends StyledElement {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
-     * 
+     *
      * @return The page that occupies this window after this element is
      * clicked. It may be the same window or it may be a freshly loaded one.
      * @exception IOException If an IO error occurs
@@ -150,7 +150,7 @@ public abstract class ClickableElement extends StyledElement {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
-     * 
+     *
      * @return The page that occupies this window after this element is double
      * clicked. It may be the same window or it may be a freshly loaded one.
      * @exception IOException If an IO error occurs
@@ -183,7 +183,7 @@ public abstract class ClickableElement extends StyledElement {
     /**
      * This method will be called if there either wasn't an onclick handler or
      * there was but the result of that handler wasn't <code>false</code>.
-     * This is the default behaviour of clicking the element.  
+     * This is the default behaviour of clicking the element.
      * The default implementation returns
      * the current page - subclasses requiring different behaviour (like
      * {@link HtmlSubmitInput}) will override this method.

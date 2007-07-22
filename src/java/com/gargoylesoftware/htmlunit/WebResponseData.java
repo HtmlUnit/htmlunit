@@ -69,7 +69,7 @@ public class WebResponseData implements Serializable {
 
     /**
      * Construct with a raw byte[] (mostly for testing)
-     * 
+     *
      * @param body              Body of this response
      * @param statusCode        Status code from the server
      * @param statusMessage     Status message from the server
@@ -93,12 +93,12 @@ public class WebResponseData implements Serializable {
 
     /**
      * Construct with a data stream to minimize copying of the entire body.
-     * 
+     *
      * @param bodyStream        Stream of this response's body
      * @param statusCode        Status code from the server
      * @param statusMessage     Status message from the server
      * @param responseHeaders   Headers in this response
-     * 
+     *
      * @throws IOException on stream errors
      */
     public WebResponseData(final InputStream bodyStream, final int statusCode,
@@ -113,11 +113,11 @@ public class WebResponseData implements Serializable {
 
     /**
      * Construct without data stream for subclasses that override getBody()
-     * 
+     *
      * @param statusCode        Status code from the server
      * @param statusMessage     Status message from the server
      * @param responseHeaders   Headers in this response
-     * 
+     *
      * @throws IOException on stream errors
      */
     protected WebResponseData(final int statusCode,
@@ -129,10 +129,10 @@ public class WebResponseData implements Serializable {
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
     }
     
-    /** 
-     * Validate that the response header list only contains KeyValuePairs 
+    /**
+     * Validate that the response header list only contains KeyValuePairs
      * (Java5 generics will obsolete this method)
-     * 
+     *
      * @param responseHeaders Header list to be validated
      */
     private void validateHeaders(final List responseHeaders) {
@@ -187,7 +187,7 @@ public class WebResponseData implements Serializable {
     }
 
     /**
-     * 
+     *
      * @return response headers
      */
     public List getResponseHeaders() {

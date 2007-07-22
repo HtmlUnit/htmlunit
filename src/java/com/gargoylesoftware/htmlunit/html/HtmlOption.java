@@ -165,7 +165,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
     
     /**
-     * Return whether this Option is selected by default. 
+     * Return whether this Option is selected by default.
      * That is whether the "selected"
      * attribute exists when the Option is constructed. This also determines
      * the value of getSelectedAttribute() after a reset() on the form.
@@ -284,7 +284,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
 
     /**
      * {@inheritDoc}
-     * This implementation will show the label attribute before the 
+     * This implementation will show the label attribute before the
      * content of the tag if the attribute exists.
      */
     public String asText() {

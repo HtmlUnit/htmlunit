@@ -138,7 +138,7 @@ public class WebClient implements Serializable {
     private final Set webWindowListeners_ = new HashSet(5);
     private final List webWindows_ = Collections.synchronizedList(new ArrayList());
 
-    private WebWindow currentWindow_ ;
+    private WebWindow currentWindow_;
     private Stack firstWindowStack_ = new Stack();
     private int timeout_ = 0;
     private HTMLParserListener htmlParserListener_;
@@ -248,7 +248,7 @@ public class WebClient implements Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * <p>Return the object that will resolve all url requests<p>
      * @return The connection that will be used.
      */
@@ -293,10 +293,10 @@ public class WebClient implements Serializable {
      *    </tr>
      *    <tr>
      *      <td>"application/xhtml+xml"</td>
-     *      <td>{@link com.gargoylesoftware.htmlunit.html.HtmlPage} for now, in the 
-     *          future it will be XML validated as well 
+     *      <td>{@link com.gargoylesoftware.htmlunit.html.HtmlPage} for now, in the
+     *          future it will be XML validated as well
      *      </td>
-     *    </tr>    
+     *    </tr>
      *    <tr>
      *      <td>"text/*"</td>
      *      <td>{@link com.gargoylesoftware.htmlunit.TextPage}</td>
@@ -314,8 +314,8 @@ public class WebClient implements Serializable {
      * @throws IOException If an IO error occurs
      * @throws FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
-     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true 
-     *      
+     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
+     *
      * @see WebRequestSettings
      */
     public Page getPage( final WebWindow webWindow, final WebRequestSettings parameters )
@@ -353,10 +353,10 @@ public class WebClient implements Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
-     * <p>Open a new web window and populate it with a page loaded by 
+     *
+     * <p>Open a new web window and populate it with a page loaded by
      * {@link #getPage(WebWindow,WebRequestSettings)}</p>
-     * 
+     *
      *  @param opener The web window that initiated the request.
      *  @param target The name of the window to be opened.  This is the name that would
      *  be passed into the javascript open() method.
@@ -365,7 +365,7 @@ public class WebClient implements Serializable {
      *  @throws FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
      *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
-     *  @throws IOException If an IO problem occurs. 
+     *  @throws IOException If an IO problem occurs.
      */
     public Page getPage(final WebWindow opener, final String target, final WebRequestSettings params)
         throws FailingHttpStatusCodeException, IOException {
@@ -379,8 +379,8 @@ public class WebClient implements Serializable {
      * @throws FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
      *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
-     * @throws IOException If an IO problem occurs. 
-     * @throws MalformedURLException if no url can be created from the provided string 
+     * @throws IOException If an IO problem occurs.
+     * @throws MalformedURLException if no url can be created from the provided string
      */
     public Page getPage(final String url) throws IOException, FailingHttpStatusCodeException, MalformedURLException {
         return getPage(new URL(url));
@@ -393,7 +393,7 @@ public class WebClient implements Serializable {
      * @throws FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
      *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
-     * @throws IOException If an IO problem occurs. 
+     * @throws IOException If an IO problem occurs.
      */
     public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
         return getPage(getCurrentWindow(), new WebRequestSettings(url));
@@ -401,13 +401,13 @@ public class WebClient implements Serializable {
 
     /**
      * Convenient method to load a web request into the current WebWindow
-     *  @param request The request parameters 
+     *  @param request The request parameters
      *  @return The new page.
      *  @throws FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
      *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      *  @throws IOException If an IO problem occurs.
-     *  @see #getPage(WebWindow,WebRequestSettings) 
+     *  @see #getPage(WebWindow,WebRequestSettings)
      */
     public Page getPage(final WebRequestSettings request) throws IOException,
             FailingHttpStatusCodeException {
@@ -424,7 +424,7 @@ public class WebClient implements Serializable {
      * @throws IOException If an IO error occurs.
      * @throws FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
-     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true 
+     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      * @return The newly created page.
      */
     public Page loadWebResponseInto(
@@ -991,7 +991,7 @@ public class WebClient implements Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Initialize a new web window for JavaScript.
      * @param webWindow The new WebWindow
      */
@@ -1004,7 +1004,7 @@ public class WebClient implements Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Initialize a new page for JavaScript.
      * @param newPage The new page.
      */
@@ -1017,7 +1017,7 @@ public class WebClient implements Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Initialize a new empty web window for JavaScript.
      * @param webWindow The new WebWindow
      */
@@ -1031,7 +1031,7 @@ public class WebClient implements Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Add a new web window to the list of available windows.
      * @param webWindow The new WebWindow
      */
@@ -1042,7 +1042,7 @@ public class WebClient implements Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Remove a web window from the list of available windows.
      * @param webWindow The WebWindow to remove
      */
@@ -1087,10 +1087,10 @@ public class WebClient implements Serializable {
     /**
      * Expands a relative url relative to the specified base. In most situations
      * this is the same as <code>new URL(baseUrl, relativeUrl)</code> but
-     * there are some cases that URL doesn't handle correctly. See 
+     * there are some cases that URL doesn't handle correctly. See
      * <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>
      * regarding Relative Uniform Resource Locators for more information.
-     * 
+     *
      * @param baseUrl The base url
      * @param relativeUrl The relative url
      * @return See above
@@ -1228,7 +1228,7 @@ public class WebClient implements Serializable {
 
     /**
      * Builds a WebResponse for a file url.
-     * This first implementation is basic. 
+     * This first implementation is basic.
      * It assumes that the file contains an html page encoded with given encoding.
      * @param url The file url
      * @param charset encoding to use
@@ -1281,8 +1281,8 @@ public class WebClient implements Serializable {
     /**
      * Tries to guess the content type of the file.<br/>
      * This utility could be located in an helper class but we can compare this functionality
-     * for instance with the "Helper Applications" settings of Mozilla and therefore see it as a 
-     * property of the "browser".  
+     * for instance with the "Helper Applications" settings of Mozilla and therefore see it as a
+     * property of the "browser".
      * @param file the file
      * @return "application/octet-stream" if nothing could be guessed.
      */
@@ -1362,7 +1362,7 @@ public class WebClient implements Serializable {
      * @throws IOException if an IO problem occurs
      * @return The WebResponse
      */
-    private WebResponse loadWebResponseFromWebConnection(final WebRequestSettings webRequestSettings, 
+    private WebResponse loadWebResponseFromWebConnection(final WebRequestSettings webRequestSettings,
                 final int nbAllowedRedirections)
         throws
             IOException {
@@ -1413,7 +1413,7 @@ public class WebClient implements Serializable {
 
             getLog().debug("Got a redirect status code [" + statusCode + "] new location=[" + locationString + "]");
 
-            if (webRequestSettings.getSubmitMethod().equals(SubmitMethod.GET) 
+            if (webRequestSettings.getSubmitMethod().equals(SubmitMethod.GET)
                     && webResponse.getUrl().toExternalForm().equals(locationString) ) {
 
                 if (nbAllowedRedirections == 0) {
@@ -1445,7 +1445,7 @@ public class WebClient implements Serializable {
 
     /**
      * Encodes illegal parameter in path or query string (if any) as done by browsers.
-     * Example: changes "http://first?a=b c" to "http://first?a=b%20c"  
+     * Example: changes "http://first?a=b c" to "http://first?a=b%20c"
      * @param url the url to encode
      * @return the provided url if no change needed, the fixed url else
      * @throws MalformedURLException if the new URL could note be instantiated
@@ -1509,7 +1509,7 @@ public class WebClient implements Serializable {
      * @param oldElement The element that will lose the focus.
      * @see #moveFocusToElement(FocusableElement)
      * @return true if the focus changed and a new page was not loaded
-     * @deprecated Use {@link HtmlPage#moveFocusToElement} with <code>null</code> as parameter 
+     * @deprecated Use {@link HtmlPage#moveFocusToElement} with <code>null</code> as parameter
      * on the desired page instead
      */
     public boolean moveFocusFromElement( final FocusableElement oldElement ) {
@@ -1630,8 +1630,8 @@ public class WebClient implements Serializable {
     /**
      * Defines a listener for messages generated by the html parser.<br/>
      * <b>Note</b>: If {@link #getIgnoreOutsideContent()} returns <code>false</code>, the parser
-     * will ignore closing &lt;body&gt; and &lt;html&gt; tags to be able to handle html content 
-     * incorrectly located after the end of the html file. As a consequence it will finally 
+     * will ignore closing &lt;body&gt; and &lt;html&gt; tags to be able to handle html content
+     * incorrectly located after the end of the html file. As a consequence it will finally
      * notify as errors that &lt;body&gt; and &lt;html&gt; are not closed properly even if
      * they were correctly present.
      * @param listener the new listener, <code>null</code> if messages should be totally ignored.
@@ -1651,7 +1651,7 @@ public class WebClient implements Serializable {
     /**
      * Set the flag on the HtmlParse to ignore the content that is outside of the BODY
      * and HTML tags.
-     * @param ignoreOutsideContent The boolean flag to enable or disable the support of 
+     * @param ignoreOutsideContent The boolean flag to enable or disable the support of
      *          content outside of the HTML and BODY tags
      */
     public static void setIgnoreOutsideContent(final boolean ignoreOutsideContent) {
@@ -1668,7 +1668,7 @@ public class WebClient implements Serializable {
 
     /**
      * Gets the timeout value for the WebConnection
-     * 
+     *
      * @return The timeout value in milliseconds
      * @see WebClient#setTimeout(int)
      */
@@ -1677,12 +1677,12 @@ public class WebClient implements Serializable {
     }
     
     /**
-     * Sets the timeout of the WebConnection. Set to zero (the default) for an infinite wait.  
-     * 
+     * Sets the timeout of the WebConnection. Set to zero (the default) for an infinite wait.
+     *
      * Note: The timeout is used twice. The first is for making the socket connection, the
-     * second is for data retrieval. If the time is critical you must allow for twice the 
-     * time specified here.  
-     * 
+     * second is for data retrieval. If the time is critical you must allow for twice the
+     * time specified here.
+     *
      * @param timeout The value of the timeout in milliseconds
      */
     public void setTimeout(final int timeout){
@@ -1693,7 +1693,7 @@ public class WebClient implements Serializable {
      * Indicates if an exception should be thrown when a script execution fails
      * (the default) or if it should be catched and just logged to allow page
      * execution to continue.
-     * @return <code>true</code> if an exception is thrown on script error (the default) 
+     * @return <code>true</code> if an exception is thrown on script error (the default)
      */
     public boolean isThrowExceptionOnScriptError() {
         return throwExceptionOnScriptError_;

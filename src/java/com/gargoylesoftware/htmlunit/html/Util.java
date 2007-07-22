@@ -97,7 +97,7 @@ public final class Util {
             protected DomNode getFirstNode(final DomNode node) {
                 if (node == null) {
                     return null;
-                } 
+                }
                 else {
                     final DomNode sibling = node.getNextSibling();
                     if (sibling == null) {

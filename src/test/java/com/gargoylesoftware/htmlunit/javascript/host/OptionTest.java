@@ -113,14 +113,14 @@ public class OptionTest extends WebTestCase {
     }
 
     /**
-     * Regression test for 1592728 
+     * Regression test for 1592728
      * @throws Exception if the test fails
      */
     public void testSetSelected() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>"
             + "function doTest() {\n"
-            + "  var sel = document.form1.select1;" 
+            + "  var sel = document.form1.select1;"
             + "  alert(sel.selectedIndex);"
             + "  sel.options[0].selected = false;"
             + "  alert(sel.selectedIndex);"
@@ -145,15 +145,15 @@ public class OptionTest extends WebTestCase {
     }
 
     /**
-     * Regression test for 1672048 
+     * Regression test for 1672048
      * @throws Exception if the test fails
      */
     public void testSetAttribute() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>"
             + "function doTest() {\n"
-            + "  document.getElementById('option1').setAttribute('class', 'bla bla');" 
-            + "  var o = new Option('some text', 'some value');" 
+            + "  document.getElementById('option1').setAttribute('class', 'bla bla');"
+            + "  var o = new Option('some text', 'some value');"
             + "  o.setAttribute('class', 'myClass');\n"
             + "}</script></head><body onload='doTest()'>"
             + "<form name='form1'>"
@@ -181,15 +181,15 @@ public class OptionTest extends WebTestCase {
             = "<html><head><title>foo</title><script>"
             + "function doTest()"
             + "{"
-            + "  var options = document.getElementById('testSelect').options;" 
+            + "  var options = document.getElementById('testSelect').options;"
             + "  alert(options[55]);"
             + "  try"
             + "  {"
-            + "    alert(options[-55]);" 
+            + "    alert(options[-55]);"
             + "  }"
             + "  catch (e)"
             + "  {"
-            + "    alert('catched exception for negative index');" 
+            + "    alert('catched exception for negative index');"
             + "  }"
             + "}"
             + "</script></head><body onload='doTest()'>"
@@ -218,8 +218,8 @@ public class OptionTest extends WebTestCase {
             = "<html><head><title>foo</title><script>"
             + "function dumpOption(_o) {"
             + "  return 'text: ' + _o.text "
-            + " + ', label: ' + _o.label" 
-            + " + ', value: ' + _o.value" 
+            + " + ', label: ' + _o.label"
+            + " + ', value: ' + _o.value"
             + " + ', defaultSelected: ' + _o.defaultSelected"
             + " + ', selected: ' + _o.selected;"
             + "}\n"

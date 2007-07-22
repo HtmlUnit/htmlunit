@@ -72,7 +72,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
 
     /**
      * Construct with all data
-     * 
+     *
      * @param responseData      Data that was send back
      * @param url               Where this response came from
      * @param requestMethod     The method used to get this response
@@ -85,7 +85,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
 
     /**
      * Construct with all data
-     * 
+     *
      * @param responseData      Data that was send back
      * @param charset           Charset used if not returned in the response.
      * @param url               Where this response came from

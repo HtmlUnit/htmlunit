@@ -134,10 +134,10 @@ public final class TextUtil {
     }
 
     /**
-     * Convert a string into a byte array using a default encoding {@link #DEFAULT_CHARSET}. 
-     * 
+     * Convert a string into a byte array using a default encoding {@link #DEFAULT_CHARSET}.
+     *
      * @param content The string to convert, assumed to be {@link #DEFAULT_CHARSET} encoded
-     * @return The String as a byte[]. If the default encoding is not supported an 
+     * @return The String as a byte[]. If the default encoding is not supported an
      *         empty byte[] will be returned.
      */
     public static byte[] stringToByteArray(final String content) {
@@ -146,11 +146,11 @@ public final class TextUtil {
 
     /**
      * Convert a string into a byte array using the given encoding.
-     *  
+     *
      * @param charset The name of a supported charset
      * @param content The string to convert
-     * 
-     * @return The String as a byte[]. If the specified encoding is not supported an 
+     *
+     * @return The String as a byte[]. If the specified encoding is not supported an
      *         empty byte[] will be returned.
      */
     public static byte[] stringToByteArray(final String content, final String charset ) {

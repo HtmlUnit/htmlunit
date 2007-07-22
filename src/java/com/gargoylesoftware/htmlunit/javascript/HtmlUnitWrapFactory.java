@@ -45,7 +45,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * Called by Rhino to Wrap Object as {@link Scriptable}.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  */

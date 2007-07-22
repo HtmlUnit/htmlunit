@@ -42,12 +42,12 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 /**
  * A javascript object for a Screen. Combines properties from both Mozilla's DOM
  * and IE's DOM.
- * 
+ *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Chris Erskine
- * 
+ *
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_screen.asp">
  * MSDN documentation</a>
  * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html">Mozilla documentation</a>

@@ -81,7 +81,7 @@ public class WebResponseImplTest extends WebTestCase {
         final String html = "<html><head><script src='foo.js'></script></head><body></body></html>";
 
         // see http://en.wikipedia.org/wiki/Byte_Order_Mark
-        final String[] expectedAlerts = {"\u6211\u662F\u6211\u7684 "+ 
+        final String[] expectedAlerts = {"\u6211\u662F\u6211\u7684 "+
                 "\u064A\u0627 \u0623\u0647\u0644\u0627\u064B"};
         final byte[] script = ("alert('" + expectedAlerts[0]  + "');").getBytes(encoding);
 
@@ -112,7 +112,7 @@ public class WebResponseImplTest extends WebTestCase {
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(URL_FIRST, content.getBytes( "UTF-8" ), 
+        webConnection.setResponse(URL_FIRST, content.getBytes( "UTF-8" ),
                 200, "OK", "text/html", Collections.EMPTY_LIST);
         client.setWebConnection( webConnection );
         final WebRequestSettings settings = new WebRequestSettings( URL_FIRST );

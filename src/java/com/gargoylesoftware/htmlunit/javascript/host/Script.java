@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
  * The JavaScript object that represents a "script".
- * 
+ *
  * @version $Revision$
  * @author Daniel Gredler
  */

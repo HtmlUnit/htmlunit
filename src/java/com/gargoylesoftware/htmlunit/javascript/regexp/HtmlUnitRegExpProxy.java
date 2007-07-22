@@ -67,7 +67,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
      * Use wrapped proxy except for replacement with string arg where it uses Java regular expression
      * {@inheritDoc}
      */
-    public Object action(final Context cx, final Scriptable scope, final Scriptable thisObj, 
+    public Object action(final Context cx, final Scriptable scope, final Scriptable thisObj,
             final Object[] args, final int actionType) {
         
         // in a first time just improve replacement with a String (not a function)
@@ -127,8 +127,8 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     /**
      * {@inheritDoc}
      */
-    public int find_split(final Context cx, final Scriptable scope, final String target, 
-            final String separator, final Scriptable re, final int[] ip, final int[] matchlen, 
+    public int find_split(final Context cx, final Scriptable scope, final String target,
+            final String separator, final Scriptable re, final int[] ip, final int[] matchlen,
             final boolean[] matched, final String[][] parensp) {
         return wrapped_.find_split(cx, scope, target, separator, re, ip, matchlen, matched, parensp);
     }

@@ -140,7 +140,7 @@ public abstract class WebTestCase extends BaseTestCase {
     }
 
    /**
-     * User the default browser version to load a page with the specified html 
+     * User the default browser version to load a page with the specified html
      * and collect alerts into the list.
      * @param html The HTML to use.
      * @param collectedAlerts The list to hold the alerts.
@@ -243,8 +243,8 @@ public abstract class WebTestCase extends BaseTestCase {
     /**
      * Facility method to avoid having to create explicitly a list from
      * a String[] (for example when testing received alerts).
-     * Transforms the String[] to a List before calling 
-     * {@link junit.framework.Assert#assertEquals(java.lang.Object, java.lang.Object)}. 
+     * Transforms the String[] to a List before calling
+     * {@link junit.framework.Assert#assertEquals(java.lang.Object, java.lang.Object)}.
      * @param expected the expected strings
      * @param actual the collection of strings to test
      */
@@ -255,7 +255,7 @@ public abstract class WebTestCase extends BaseTestCase {
     /**
      * Facility method to avoid having to create explicitly a list from
      * a String[] (for example when testing received alerts).
-     * Transforms the String[] to a List before calling 
+     * Transforms the String[] to a List before calling
      * {@link junit.framework.Assert#assertEquals(java.lang.String, java.lang.Object, java.lang.Object)}.
      * @param message the message to display if assertion fails
      * @param expected the expected strings
@@ -329,7 +329,7 @@ public abstract class WebTestCase extends BaseTestCase {
 
     /**
      * Generates an instrumented html file in the temporary dir to easily make a manual test in a real browser.
-     * The file is generated only if the system property {@link #PROPERTY_GENERATE_TESTPAGES} is set. 
+     * The file is generated only if the system property {@link #PROPERTY_GENERATE_TESTPAGES} is set.
      * @param content the content of the html page
      * @param expectedAlerts the expected alerts
      * @throws IOException if writing file fails
@@ -351,7 +351,7 @@ public abstract class WebTestCase extends BaseTestCase {
                 newContent = StringUtils.replaceOnce(newContent, "<head>", "<head>" + instrumentationJS);
             }
             else {
-                newContent = StringUtils.replaceOnce(newContent, "<html>", 
+                newContent = StringUtils.replaceOnce(newContent, "<html>",
                         "<html>\n<head>\n" + instrumentationJS + "\n</head>\n");
             }
             final String endScript = "\n<script>htmlunitReserved_addSummaryAfterOnload();</script>\n";
@@ -402,8 +402,8 @@ public abstract class WebTestCase extends BaseTestCase {
 
     /**
      * Convenience method to pull the MockWebConnection out of an HtmlPage created with
-     * the loadPage method. 
-     * @param page HtmlPage to get the connection from 
+     * the loadPage method.
+     * @param page HtmlPage to get the connection from
      * @return the MockWebConnection that served this page
      */
     protected static final MockWebConnection getMockConnection(final HtmlPage page) {
@@ -420,7 +420,7 @@ public abstract class WebTestCase extends BaseTestCase {
      *   if (notYetImplemented()) {
      *       return;
      *   }
-     *   
+     *
      *   ... the real (now failing) unit test
      * }
      * </pre>

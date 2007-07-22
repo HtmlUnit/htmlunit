@@ -55,7 +55,7 @@ public class LoggingRefreshHandler implements RefreshHandler {
     private final List list_;
     
     /**
-     * @param list The list to add data to 
+     * @param list The list to add data to
      */
     public LoggingRefreshHandler( final List list ) {
         list_ = list;

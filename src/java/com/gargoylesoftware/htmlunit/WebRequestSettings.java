@@ -48,7 +48,7 @@ import org.apache.commons.lang.ClassUtils;
 
 /**
  * Parameter object for making web requests
- * 
+ *
  * @version $Revision$
  * @author Brad Clarke
  * @author Hans Donner
@@ -76,7 +76,7 @@ public class WebRequestSettings {
     }
 
     /**
-     * Instantiate a {@link WebRequestSettings} for the given url using the proxy configuration from the original 
+     * Instantiate a {@link WebRequestSettings} for the given url using the proxy configuration from the original
      * request
      * @param originalRequest the original request
      * @param target The URL for this request

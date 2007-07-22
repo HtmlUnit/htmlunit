@@ -89,7 +89,7 @@ public class HtmlAnchor extends FocusableElement {
     }
 
     /**
-     * Same as {@link #doClickAction(Page)} except that it accepts an href suffix needed when a click is 
+     * Same as {@link #doClickAction(Page)} except that it accepts an href suffix needed when a click is
      * performed on an image map to pass information on the click position.
      * @param defaultPage The default page to return if the action does not load a new page.
      * @param hrefSuffix the suffix to add to the anchor's href attribute (for instance coordinates from an image map)
@@ -318,11 +318,11 @@ public class HtmlAnchor extends FocusableElement {
     /**
      * Open this link in a new window, much as web browsers do when you
      * shift-click a link or use the context menu to open in a new window.
-     * 
+     *
      * It should be noted that even web browsers will sometimes not give the
      * expected result when using this method of following links. Links that
      * have no real href and rely on javascript to do their work will fail.
-     * 
+     *
      * @return The Page opened by this link, nested in a new TopLevelWindow
      * @throws MalformedURLException if the href could not be converted to
      *         a valid URL

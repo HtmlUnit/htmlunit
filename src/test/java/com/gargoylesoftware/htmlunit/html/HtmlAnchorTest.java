@@ -411,10 +411,10 @@ public class HtmlAnchorTest extends WebTestCase {
     
     /**
      * https://sourceforge.net/tracker/index.php?func=detail&aid=1587110&group_id=47038&atid=448266
-     * 
+     *
      * Links with an href and a non-false returning onclick that opens a new window should still
      * open the href in the first window.
-     * 
+     *
      * @throws Exception on test failure
      */
     public void testCorrectLinkTargetWhenOnclickOpensWindow() throws Exception {

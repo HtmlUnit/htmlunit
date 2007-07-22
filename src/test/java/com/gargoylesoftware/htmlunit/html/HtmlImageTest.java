@@ -69,7 +69,7 @@ public class HtmlImageTest extends WebTestCase {
         testIsMapClick("img3", true, "", "");
     }
 
-    private void testIsMapClick(final String imgId, final boolean samePage, 
+    private void testIsMapClick(final String imgId, final boolean samePage,
             final String urlSuffixClick, final String urlSuffixClickXY) throws Exception {
 
         final String htmlContent

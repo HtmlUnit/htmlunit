@@ -98,7 +98,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
     /**
      * Key used to place the scope in which the execution of some javascript code
      * started as thread local attribute in current context.<br/>
-     * This is needed to resolve some relative locations relatively to the page 
+     * This is needed to resolve some relative locations relatively to the page
      * in which the script is executed and not to the page which location is changed.
      */
     public static final String KEY_STARTING_SCOPE = "startingScope";
@@ -196,7 +196,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
                         final Scriptable obj = (Scriptable) config.getLinkedClass().newInstance();
                         obj.put("prototype", obj, prototype);
                         obj.setPrototype(prototype);
-                        ScriptableObject.defineProperty(window, 
+                        ScriptableObject.defineProperty(window,
                                 config.getClassName(), obj, ScriptableObject.DONTENUM);
                     }
                 }
@@ -216,7 +216,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
                 prototype.setPrototype(parentPrototype);
             }
             else {
-                prototype.setPrototype(objectPrototype); 
+                prototype.setPrototype(objectPrototype);
             }
         }
         
@@ -318,7 +318,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
         // Pre process the source code
         sourceCode = preProcess(htmlPage, sourceCode, sourceName, htmlElement);
 
-        // PreProcess IE Conditional Compilation if needed 
+        // PreProcess IE Conditional Compilation if needed
         final BrowserVersion browserVersion = htmlPage.getWebClient().getBrowserVersion();
         if( browserVersion.isIE() && browserVersion.getBrowserVersionNumeric() >= 4) {
             final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
@@ -334,7 +334,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
             if (sourceCode.endsWith("-->")) {
                 endIndex = sourceCode.length() - 3;
 
-                // check for last line that has 
+                // check for last line that has
                 // "statement-->", but not "statement//-->"
                 int lastLineIndex;
                 for( lastLineIndex = endIndex; lastLineIndex > startIndex; lastLineIndex-- ) {
@@ -436,7 +436,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
     }
 
     /**
-     * Calls the given function taking care of synchronisation issues. 
+     * Calls the given function taking care of synchronisation issues.
      * @param htmlPage the html page that caused this script to executed
      * @param function the js function to execute
      * @param context the context in which execution should occur
@@ -445,7 +445,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
      * @param args the function's arguments
      * @return the function result
      */
-    public Object callFunction(final HtmlPage htmlPage, final Function function, final Context context, 
+    public Object callFunction(final HtmlPage htmlPage, final Function function, final Context context,
             final Scriptable scope, final Scriptable thisObject, final Object[] args) {
 
         synchronized (htmlPage) // 2 scripts can't be executed in parallel for one page
@@ -463,7 +463,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
         return Boolean.TRUE.equals(javaScriptRunning_.get());
     }
 
-    /** 
+    /**
      * Set the number of milliseconds a script is allowed to execute before
      * being terminated. A value of 0 or less means no timeout.
      *
@@ -485,8 +485,8 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
 
     /**
      * Facility for ContextAction usage.
-     * ContextAction should be preferred because according to Rhino doc it 
-     * "guarantees proper association of Context instances with the current thread and is faster". 
+     * ContextAction should be preferred because according to Rhino doc it
+     * "guarantees proper association of Context instances with the current thread and is faster".
      */
     private abstract class HtmlUnitContextAction implements ContextAction {
         private final Scriptable scope_;

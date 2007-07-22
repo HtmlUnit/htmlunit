@@ -292,7 +292,7 @@ public class HtmlSelectTest extends WebTestCase {
 
     /**
      * Test no selected options on single select lists with a size > 1
-     * 
+     *
      * @exception Exception If the test fails
      */
     public void testSelect_SingleSelectNoneSelectedButSizeGreaterThanOne() throws Exception {
@@ -358,7 +358,7 @@ public class HtmlSelectTest extends WebTestCase {
         expectedParameters.add(new KeyValuePair("select1", "newOption"));
         expectedParameters.add(new KeyValuePair("button", "foo"));
 
-        assertEquals("url", "http://www.gargoylesoftware.com/?select1=newOption&select2=fakedValue&button=foo", 
+        assertEquals("url", "http://www.gargoylesoftware.com/?select1=newOption&select2=fakedValue&button=foo",
                 secondPage.getWebResponse().getUrl());
         assertNotNull(secondPage);
     }
@@ -576,7 +576,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     void appendOption(final HtmlSelect select, final String value) {
-        final HtmlOption option = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement( 
+        final HtmlOption option = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement(
                 select.getPage(), HtmlOption.TAG_NAME, null);
         option.setValueAttribute(value);
         option.setLabelAttribute(value);
@@ -585,7 +585,7 @@ public class HtmlSelectTest extends WebTestCase {
 
     /**
      * Test that asText() returns a blank string if nothing is selected.
-     * 
+     *
      * @exception Exception If the test fails
      */
     public void testAsTextWhenNothingSelected() throws Exception {
@@ -623,7 +623,7 @@ public class HtmlSelectTest extends WebTestCase {
 
     /**
      * Test that setSelectedAttribute returns the right page.
-     * 
+     *
      * @exception Exception If the test fails
      */
     public void testSetSelectedAttributeReturnedPage() throws Exception {

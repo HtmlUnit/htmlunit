@@ -93,7 +93,7 @@ public final class JavaScriptConfiguration {
     private final BrowserVersion browser_;
 
     /**
-     * C'tor is only called from {@link #getInstance(BrowserVersion)} which is synchronized. 
+     * C'tor is only called from {@link #getInstance(BrowserVersion)} which is synchronized.
      * @param browser the browser version to use
      */
     private JavaScriptConfiguration(final BrowserVersion browser) {
@@ -110,7 +110,7 @@ public final class JavaScriptConfiguration {
 
     /**
      * Test for a configuration having been loaded for testing
-     * 
+     *
      * @return boolean - true if the XmlDocument has been loaded;
      */
     protected static boolean isDocumentLoaded() {
@@ -155,7 +155,7 @@ public final class JavaScriptConfiguration {
 
     /**
      * Load the configuration from a supplied Reader
-     * 
+     *
      * @param configurationReader - A reader pointing to the configuration
      */
     protected static void loadConfiguration(final Reader configurationReader) {
@@ -204,7 +204,7 @@ public final class JavaScriptConfiguration {
     /**
      * Return the configuration that has all entries.  No constraints are put on the returned
      * entries.
-     * 
+     *
      * @return The instance containing all entries from the configuration file.
      */
     static JavaScriptConfiguration getAllEntries() {
@@ -339,7 +339,7 @@ public final class JavaScriptConfiguration {
 
     /**
      * Parse out the values for the property.
-     * 
+     *
      * @param classConfiguration The configuration that is being built
      * @param element The property element
      */
@@ -367,7 +367,7 @@ public final class JavaScriptConfiguration {
 
     /**
      * Parse out the values from the function element.
-     * 
+     *
      * @param classConfiguration The configuration that is being built
      * @param element The function element
      */
@@ -428,7 +428,7 @@ public final class JavaScriptConfiguration {
     /**
      * Test to see if the supplied configuration matches for the parsed configuration for the named class
      * This is a method for testing.
-     * 
+     *
      * @param classname - the parsed classname to test
      * @param config - the expected configuration
      * @return true if they match
@@ -542,7 +542,7 @@ public final class JavaScriptConfiguration {
 
     /**
      * Return the method that implements the get function for in the class for the given class
-     * 
+     *
      * @param classname The name of the class to work with
      * @param propertyName The property to find the getter for
      * @return Method
@@ -591,7 +591,7 @@ public final class JavaScriptConfiguration {
 
     /**
      * Return the method that implements the set function in the class for the given class
-     * 
+     *
      * @param classname The name of the class to work with
      * @param propertyName The property to find the setter for
      * @return Method
@@ -623,7 +623,7 @@ public final class JavaScriptConfiguration {
 
     /**
      * Return the method that implements the given function in the class for the given class
-     * 
+     *
      * @param classname The name of the class to work with
      * @param functionName The function to find the method for
      * @return Method

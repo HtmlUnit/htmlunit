@@ -222,17 +222,17 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     private void testAttribute(final String name, final String value) throws Exception {
-        final String content = "<html>\n" + 
-                "<head>\n" + 
-                "    <title>test</title>\n" + 
-                "    <script>\n" + 
-                "    function doTest(){\n" + 
-                "       alert('" + name + " = ' + window.navigator." + name + ");\n" +  
-                "    }\n" + 
-                "    </script>\n" + 
-                "</head>\n" + 
-                "<body onload=\'doTest()\'>\n" + 
-                "</body>\n" + 
+        final String content = "<html>\n" +
+                "<head>\n" +
+                "    <title>test</title>\n" +
+                "    <script>\n" +
+                "    function doTest(){\n" +
+                "       alert('" + name + " = ' + window.navigator." + name + ");\n" +
+                "    }\n" +
+                "    </script>\n" +
+                "</head>\n" +
+                "<body onload=\'doTest()\'>\n" +
+                "</body>\n" +
                 "</html>";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
@@ -264,7 +264,7 @@ public class NavigatorTest extends WebTestCase {
 
         final String[] expectedAlerts = {"Netscape"};
         assertEquals(expectedAlerts, collectedAlerts);
-    }    
+    }
     
     /**
      * Test language property (only for Mozilla)
@@ -290,7 +290,7 @@ public class NavigatorTest extends WebTestCase {
 
         final String[] expectedAlerts = {BrowserVersion.FIREFOX_2.getBrowserLanguage()};
         assertEquals(expectedAlerts, collectedAlerts);
-    }    
+    }
 
     /**
      * Test some Mozilla properties (minimal tests are support is not completed)
@@ -317,5 +317,5 @@ public class NavigatorTest extends WebTestCase {
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
-    }    
+    }
 }

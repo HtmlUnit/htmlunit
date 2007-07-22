@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * A javascript object for a Style
- * 
+ *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
@@ -119,7 +119,7 @@ public class Style extends SimpleScriptable {
 
     /**
      * Initialize the object
-     * 
+     *
      * @param htmlElement
      *            The element that this style describes
      */
@@ -179,7 +179,7 @@ public class Style extends SimpleScriptable {
 
     /**
      * Set the specified property
-     * 
+     *
      * @param name The name of the property
      * @param start The scriptable object that was originally invoked for this property
      * @param newValue The new value

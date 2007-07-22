@@ -44,7 +44,7 @@ import org.mozilla.javascript.Scriptable;
  * Most properties are "cleanly" defined but some host objects like Document or Window are
  * able to return a value that has not been configured has property (ex: the DOM node which id
  * or name match the property name.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  */
@@ -53,7 +53,7 @@ public interface ScriptableWithFallbackGetter extends Scriptable {
      * Fallback called when no configured property is found with the given name
      * on the {@link Scriptable} object.
      * @param name the name of the requested property
-     * @return the object value, {@link Scriptable#NOT_FOUND} if nothing is found 
+     * @return the object value, {@link Scriptable#NOT_FOUND} if nothing is found
      */
     Object getWithFallback(final String name);
 }

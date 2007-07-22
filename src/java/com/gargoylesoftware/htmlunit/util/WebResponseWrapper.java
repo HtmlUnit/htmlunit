@@ -46,11 +46,11 @@ import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
- * Provides a convenient implementation of the {@link WebResponse} interface that can be subclassed 
- * by developers wishing to adapt a particular WebResponse. 
- * This class implements the Wrapper or Decorator pattern. Methods default to calling through to the wrapped 
+ * Provides a convenient implementation of the {@link WebResponse} interface that can be subclassed
+ * by developers wishing to adapt a particular WebResponse.
+ * This class implements the Wrapper or Decorator pattern. Methods default to calling through to the wrapped
  * web connection object.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  */

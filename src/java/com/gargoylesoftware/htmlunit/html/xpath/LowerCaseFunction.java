@@ -50,7 +50,7 @@ import org.jaxen.function.StringFunction;
  * as in {@link java.lang.String#toLowerCase()}.
  * This class will be removed as soon as we use Jaxen >= 1.1 because it already contains
  * a LowerFunction class doing the same job. This class is therefore not intended for
- * public use. 
+ * public use.
  * @version $Revision$
  * @author Marc Guillemot
  */

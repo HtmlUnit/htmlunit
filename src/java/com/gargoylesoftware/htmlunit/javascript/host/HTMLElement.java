@@ -533,8 +533,8 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
 
         // null && IE     -> add child
         // null && non-IE -> Don't add
-        // ''             -> Don't add 
-        if ((value == null && browserVersion.isIE()) 
+        // ''             -> Don't add
+        if ((value == null && browserVersion.isIE())
             || (value != null && !"".equals(value))) {
 
             final String valueAsString = Context.toString(value);
@@ -635,7 +635,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         final boolean append = ((Boolean)values[1]).booleanValue();
 
         // add the new nodes
-        parseHtmlSnippet(node, append, text); 
+        parseHtmlSnippet(node, append, text);
     }
 
     /**
@@ -671,11 +671,11 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * Returns where and how to add the new node.
      * Used by {@link #jsxFunction_insertAdjacentHTML(String, String)} and
      * {@link #jsxFunction_insertAdjacentElement(String, Object)}.
-     * 
+     *
      * @param where specifies where to insert the element, using one of the following value:
      *         beforeBegin, afterBegin, beforeEnd, afterEnd
-     *         
-     * @return an array of 1-DomNode:parentNode and 2-Boolean:append 
+     *
+     * @return an array of 1-DomNode:parentNode and 2-Boolean:append
      */
     private Object[] getInsertAdjacentLocation(final String where) {
         final DomNode currentNode = getDomNodeOrDie();
@@ -1174,7 +1174,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
 
     /**
      * Set the ondblclick event handler for this element.
-     * @param handler the new handler     
+     * @param handler the new handler
      **/
     public void jsxSet_ondblclick(final Object handler) {
         setEventHandlerProp("ondblclick", handler);
@@ -1512,7 +1512,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     }
 
     /**
-     * Implement the scrollIntoView() javascript function but don't actually do 
+     * Implement the scrollIntoView() javascript function but don't actually do
      * anything. The requirement
      * is just to prevent scripts that call that method from failing
      */

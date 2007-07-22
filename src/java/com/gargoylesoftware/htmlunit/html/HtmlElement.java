@@ -211,11 +211,11 @@ public abstract class HtmlElement extends DomNode {
     
     /**
      * Support for reporting html attribute changes.
-     * This method can be called when an attribute has been added and it will send the 
+     * This method can be called when an attribute has been added and it will send the
      * appropriate HtmlAttributeChangeEvent to any registered HtmlAttributeChangeListener.
-     * 
+     *
      * Note that this methods recursively calls this parent fireHtmlAttributeAdded.
-     * 
+     *
      * @param event The event.
      */
     protected void fireHtmlAttributeAdded(final HtmlAttributeChangeEvent event) {
@@ -234,11 +234,11 @@ public abstract class HtmlElement extends DomNode {
 
     /**
      * Support for reporting html attribute changes.
-     * This method can be called when an attribute has been replaced and it will send the 
+     * This method can be called when an attribute has been replaced and it will send the
      * appropriate HtmlAttributeChangeEvent to any registered HtmlAttributeChangeListener.
-     * 
+     *
      * Note that this methods recursively calls this parent fireHtmlAttributeReplaced.
-     * 
+     *
      * @param event The event.
      */
     protected void fireHtmlAttributeReplaced(final HtmlAttributeChangeEvent event) {
@@ -257,11 +257,11 @@ public abstract class HtmlElement extends DomNode {
 
     /**
      * Support for reporting html attribute changes.
-     * This method can be called when an attribute has been removed and it will send the 
+     * This method can be called when an attribute has been removed and it will send the
      * appropriate HtmlAttributeChangeEvent to any registered HtmlAttributeChangeListener.
-     * 
+     *
      * Note that this methods recursively calls this parent fireHtmlAttributeRemoved.
-     * 
+     *
      * @param event The event.
      */
     protected void fireHtmlAttributeRemoved(final HtmlAttributeChangeEvent event) {
@@ -899,8 +899,8 @@ public abstract class HtmlElement extends DomNode {
     /**
      * Adds an HtmlAttributeChangeListener to the listener list.
      * The listener is registered for all attributes of this HtmlElement,
-     * as well as descendant elements. 
-     * 
+     * as well as descendant elements.
+     *
      * @param listener the attribute change listener to be added.
      * @see #removeHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
@@ -917,8 +917,8 @@ public abstract class HtmlElement extends DomNode {
     /**
      * Removes an HtmlAttributeChangeListener from the listener list.
      * This method should be used to remove HtmlAttributeChangeListener that were registered
-     * for all attributes of this HtmlElement, as well as descendant elements. 
-     * 
+     * for all attributes of this HtmlElement, as well as descendant elements.
+     *
      * @param listener the attribute change listener to be removed.
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
@@ -971,7 +971,7 @@ public abstract class HtmlElement extends DomNode {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
-     * 
+     *
      * @return The page that occupies this window after the mouse moves over this element.
      * It may be the same window or it may be a freshly loaded one.
      */
@@ -995,7 +995,7 @@ public abstract class HtmlElement extends DomNode {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
-     * 
+     *
      * @return The page that occupies this window after the mouse moves inside this element.
      * It may be the same window or it may be a freshly loaded one.
      */
@@ -1019,7 +1019,7 @@ public abstract class HtmlElement extends DomNode {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
-     * 
+     *
      * @return The page that occupies this window after the mouse moves out of this element.
      * It may be the same window or it may be a freshly loaded one.
      */
@@ -1043,7 +1043,7 @@ public abstract class HtmlElement extends DomNode {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
-     * 
+     *
      * @return The page that occupies this window after the mouse is clicked in this element.
      * It may be the same window or it may be a freshly loaded one.
      */
@@ -1067,7 +1067,7 @@ public abstract class HtmlElement extends DomNode {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
-     * 
+     *
      * @return The page that occupies this window after the mouse click is released in this element.
      * It may be the same window or it may be a freshly loaded one.
      */
@@ -1077,11 +1077,11 @@ public abstract class HtmlElement extends DomNode {
 
     /**
      * Simulate the given mouse event.
-     * 
+     *
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
-     * 
+     *
      * @return The page that occupies this window after the mouse event occur on this element.
      * It may be the same window or it may be a freshly loaded one.
      */

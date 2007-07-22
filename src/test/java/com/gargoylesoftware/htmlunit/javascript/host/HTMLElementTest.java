@@ -458,8 +458,8 @@ public class HTMLElementTest extends WebTestCase {
                 "</html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = { "Old = <b>Old innerHTML</b><!-- old comment -->", 
-            "New =  <b><i id=\"newElt\">New cell value</i></b>", 
+        final String[] expectedAlerts = { "Old = <b>Old innerHTML</b><!-- old comment -->",
+            "New =  <b><i id=\"newElt\">New cell value</i></b>",
             "I" };
         assertEquals(expectedAlerts, collectedAlerts);
 
@@ -1367,7 +1367,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<a id='testLink' href='foo'>bla</a>"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"undefined", "undefined", "undefined", "undefined", 
+        final String[] expectedAlerts = {"undefined", "undefined", "undefined", "undefined",
             "123", "from myFunction", "123", "from myFunction"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();

@@ -91,7 +91,7 @@ public class HTMLInputElement extends FormField {
                 // if the input has a previous sibling, then it was already in the
                 // DOM tree and can be replaced
                 input.replace(newInput);
-            }            
+            }
             else {
                 // the input hasn't yet been inserted into the DOM tree (likely has been
                 // created via document.createElement()), so simply replace it with the

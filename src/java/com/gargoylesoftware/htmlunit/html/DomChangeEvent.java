@@ -41,9 +41,9 @@ import java.util.EventObject;
 
 /**
  * This is the event class for notifications about changes to the DOM structure.
- * 
+ *
  * @version $Revision$
- * @author Ahmed Ashour 
+ * @author Ahmed Ashour
  * @see DomChangeListener
  */
 public class DomChangeEvent extends EventObject {
@@ -54,7 +54,7 @@ public class DomChangeEvent extends EventObject {
 
     /**
      * Constructs a new DomChangeEvent from the given parent node and a changed node.
-     * 
+     *
      * @param parentNode the parent of the node that was changed.
      * @param changedNode the node that has been added or deleted.
      */

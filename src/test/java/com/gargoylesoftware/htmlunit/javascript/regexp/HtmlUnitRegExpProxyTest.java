@@ -55,7 +55,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     private final String str_ = "(?:<script.*?>)((\\n|\\r|.)*?)(?:<\\/script>)";
     private final String begin_ = "<div>bla</div>\n";
     private final String end_ = "foo\n<span>bla2</span>\n";
-    private final String text_ = begin_ 
+    private final String text_ = begin_
         + "<script>var a = 123;</script>"
         + end_;
     private final String expected_ = begin_ + end_;
@@ -72,9 +72,9 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         super(name);
     }
 
-    /** 
+    /**
      * Test that string.replace works correctly (?) in htmlunit
-     * @throws Exception if the test fails 
+     * @throws Exception if the test fails
      */
     public void testFixedInHtmlUnit() throws Exception {
         final String html = "<html></html>";
@@ -86,8 +86,8 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         page.executeJavaScriptIfPossible(src_, "custom", page.getDocumentElement());
     }
 
-    /** 
-     * Test if custom patch is still needed 
+    /**
+     * Test if custom patch is still needed
      */
     public void testNeedCustomFix() {
         final Context ctx = Context.enter();

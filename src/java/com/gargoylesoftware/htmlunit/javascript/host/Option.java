@@ -69,9 +69,9 @@ public class Option extends HTMLElement {
      * @param newText The text
      * @param newValue The value
      * @param defaultSelected Whether the option is initially selected
-     * @param selected The current selection state of the option 
+     * @param selected The current selection state of the option
      */
-    public void jsConstructor(final String newText, final String newValue, 
+    public void jsConstructor(final String newText, final String newValue,
             final boolean defaultSelected, final boolean selected) {
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
         AttributesImpl attributes = null;
@@ -80,7 +80,7 @@ public class Option extends HTMLElement {
             attributes.addAttribute(null, "selected", "selected", null, "selected");
         }
 
-        final HtmlOption htmlOption = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement( 
+        final HtmlOption htmlOption = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement(
                 page, HtmlOption.TAG_NAME, attributes);
         htmlOption.setSelected(selected);
         setDomNode(htmlOption);

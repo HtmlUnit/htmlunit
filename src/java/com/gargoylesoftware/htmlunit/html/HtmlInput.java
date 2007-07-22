@@ -93,7 +93,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     /**
      * Set the content of the "value" attribute, executing onchange handlers if appropriate.
      * @param newValue The new content
-     * @return the page that occupies this window after this value is set. 
+     * @return the page that occupies this window after this value is set.
      * It may be the same window or it may be a freshly loaded one.
      */
     public Page setValueAttribute( final String newValue ) {
@@ -461,13 +461,13 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     }
     
     /**
-     * Executes the onchange script code for this element if this is appropriate. 
-     * This means that the element must have an onchange script, script must be enabled 
+     * Executes the onchange script code for this element if this is appropriate.
+     * This means that the element must have an onchange script, script must be enabled
      * and the change in the element must not have been triggered by a script.
-     * 
+     *
      * @param htmlElement The element that contains the onchange attribute.
      * @return The page that occupies this window after this method completes. It
-     * may be this or it may be a freshly loaded page. 
+     * may be this or it may be a freshly loaded page.
      */
     static Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
         final HtmlPage page = htmlElement.getPage();

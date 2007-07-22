@@ -154,7 +154,7 @@ public class HtmlLabel extends FocusableElement {
     }
 
     /**
-     * Gets the element referenced by this label. That is the element in the page which id is 
+     * Gets the element referenced by this label. That is the element in the page which id is
      * equal to the value of the for attribute of this label.
      * @return the element, <code>null</code> if not found
      */

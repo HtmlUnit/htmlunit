@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 /**
  * Superclass for all row-containing JavaScript host classes, including tables,
  * table headers, table bodies and table footers.
- * 
+ *
  * @version $Revision$
  * @author Daniel Gredler
  * @author Chris Erskine
@@ -161,7 +161,7 @@ public class RowContainer extends HTMLElement {
     }
 
     /**
-     * Insert a new row at the given position 
+     * Insert a new row at the given position
      * @param index the index where the row should be inserted (0 <= index < nbRows)
      * @return the inserted row
      */

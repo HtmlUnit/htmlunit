@@ -77,7 +77,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * A JavaScript object for a Window.
- * 
+ *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
@@ -105,7 +105,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private Object event_;
     private String status_ = "";
     private HTMLCollection frames_; // has to be a member to have equality (==) working
-    private Map prototypes_ = new HashMap(); 
+    private Map prototypes_ = new HashMap();
     private final JavaScriptEngine scriptEngine_;
     private EventListenersContainer eventListenersContainer_;
 
@@ -168,7 +168,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public boolean jsxFunction_confirm(final String message) {
         final ConfirmHandler handler = getWebWindow().getWebClient().getConfirmHandler();
         if (handler == null) {
-            getLog().warn("window.confirm(\"" 
+            getLog().warn("window.confirm(\""
                     + message + "\") no confirm handler installed, simulating the OK button");
             return true;
         }
@@ -313,7 +313,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Makes the job object for setTimeout and setInterval
-     * 
+     *
      * @param codeToExec either a Function or a String of the javascript code
      * @param timeout time to wait
      * @param thisWindow the window to associate the thread with
@@ -341,11 +341,11 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Set a chunk of javascript to be invoked at some specified time later.
      * The invocation occurs only if the window is opened after the delay
-     * and does not contain an other page than the one that originated the setTimeout. 
-     * 
+     * and does not contain an other page than the one that originated the setTimeout.
+     *
      * JavaScript param 1: The code to execute, either a String or a Function.
      * JavaScript param 2: the delay in milliseconds to wait before executing the code.
-     * 
+     *
      * @param context The javascript Context
      * @param scriptable The object that the function was called on.
      * @param args The arguments passed to the function.
@@ -364,7 +364,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Cancels a time-out previously set with the <tt>setTimeout</tt> method.
-     * 
+     *
      * @param timeoutId identifier for the timeout to clear (returned by <tt>setTimeout</tt>)
      */
     public void jsxFunction_clearTimeout(final int timeoutId) {
@@ -940,13 +940,13 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Set a chunk of javascript to be invoked each time a specified number of milliseconds has elapsed
      * Current implementation does nothing.
-     * 
+     *
      * JavaScript param 1: The code to execute, either a String or a Function.
      * JavaScript param 2: the delay in milliseconds to wait before executing the code.
-     * 
+     *
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp">
      * MSDN documentation</a>
-     * 
+     *
      * @param context The javascript Context
      * @param scriptable The object that the function was called on.
      * @param args The arguments passed to the function.
@@ -1034,9 +1034,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Returns computed style of the element. Computed style represents the final computed values
      * of all CSS properties for the element.
-     * 
+     *
      * The current implementation returns the element 'style' property.
-     * 
+     *
      * @param element the element
      * @param pseudoElt is a string specifying the pseudo-element to match, can be null.
      * @return the computed style.

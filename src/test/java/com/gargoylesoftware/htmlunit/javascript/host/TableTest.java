@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for Table.
- * 
+ *
  * @version $Revision$
  * @author David D. Kilzer
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -227,7 +227,7 @@ public class TableTest extends WebTestCase {
             + "</head>"
             + "<body onload='test()'>"
             + "<table id='myTable'>"
-            + "<tr><th>Some Heading</th></tr>"  
+            + "<tr><th>Some Heading</th></tr>"
             + "<tr><td>some desc</td></tr>"
             + "</table>"
             + "</body>"
@@ -558,7 +558,7 @@ public class TableTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        final String[] expectedAlerts = { "table: [object HTMLTableElement]", 
+        final String[] expectedAlerts = { "table: [object HTMLTableElement]",
             "row: [object HTMLRowElement]", "cell: [object HTMLCellElement]" };
         testStringValues(BrowserVersion.FIREFOX_2, expectedAlerts);
     }
@@ -572,7 +572,7 @@ public class TableTest extends WebTestCase {
             + "  <script>"
             + "    function test()"
             + "    {"
-            + "      alert('table: ' + document.getElementById('myTable'));" 
+            + "      alert('table: ' + document.getElementById('myTable'));"
             + "      alert('row: ' + document.getElementById('myRow'));"
             + "      alert('cell: ' + document.getElementById('myCell'));"
             + "    }"

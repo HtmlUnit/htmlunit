@@ -1118,17 +1118,17 @@ public class FormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnSubmitEvent() throws Exception {
-        final String[] expectedAlertsIE = {"srcElement null: false", "srcElement==form: true", 
+        final String[] expectedAlertsIE = {"srcElement null: false", "srcElement==form: true",
             "target null: true", "target==form: false"};
         testOnSubmitEvent(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
 
-        final String[] expectedAlertsFF = {"srcElement null: true", "srcElement==form: false", 
+        final String[] expectedAlertsFF = {"srcElement null: true", "srcElement==form: false",
             "target null: false", "target==form: true"};
         testOnSubmitEvent(BrowserVersion.FIREFOX_2, expectedAlertsFF);
     }
 
     /**
-     * 
+     *
      * @param browserVersion browser version
      * @param expectedAlerts expected alerts
      * @throws Exception If the test fails

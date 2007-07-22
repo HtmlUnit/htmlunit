@@ -170,7 +170,7 @@ public class HTMLSelectElement extends FormField {
 
         HtmlOption htmlOption = (HtmlOption) newOptionObject.getHtmlElementOrNull();
         if (htmlOption == null) {
-            htmlOption = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement( 
+            htmlOption = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement(
                     select.getPage(), HtmlOption.TAG_NAME, null);
         }
 

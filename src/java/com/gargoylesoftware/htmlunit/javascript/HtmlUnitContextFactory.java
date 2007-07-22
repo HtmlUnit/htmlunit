@@ -60,9 +60,9 @@ public class HtmlUnitContextFactory extends ContextFactory {
     private static final int INSTRUCTION_COUNT_THRESHOLD = 10000;
     private static long Timeout_ = 0;
 
-    /** 
+    /**
      * Create a new instance of HtmlUnitContextFactory
-     * 
+     *
      * @param log the log that the error reporter should use
      */
     public HtmlUnitContextFactory(final Log log) {
@@ -70,7 +70,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         log_ = log;
     }
 
-    /** 
+    /**
      * Set the number of milliseconds a script is allowed to execute before
      * being terminated. A value of 0 or less means no timeout.
      *
@@ -131,7 +131,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         return cx;
     }
 
-    /** 
+    /**
      * Run-time calls this when instruction counting is enabled and the counter
      * reaches limit set by setInstructionObserverThreshold(). A script can be
      * terminated by throwing an Error instance here.

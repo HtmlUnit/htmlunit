@@ -114,7 +114,7 @@ public class TextareaTest extends WebTestCase {
 
         final String[] expectedAlerts = {"foo"};
         assertEquals(expectedAlerts, collectedAlerts);
-    }    
+    }
 
     /**
      * Tests that setValue doesn't has side effect. Test for bug 1155063.
@@ -178,19 +178,19 @@ public class TextareaTest extends WebTestCase {
      * @throws Exception If test fails
      */
     public void testSelection() throws Exception {
-        testSelection(3, 10, BrowserVersion.INTERNET_EXPLORER_6_0, 
+        testSelection(3, 10, BrowserVersion.INTERNET_EXPLORER_6_0,
                 new String[] {"undefined,undefined", "3,undefined", "3,10"});
-        testSelection(3, 10, BrowserVersion.FIREFOX_2, 
+        testSelection(3, 10, BrowserVersion.FIREFOX_2,
                 new String[] {"11,11", "3,11", "3,10"});
         
-        testSelection(-3, 15, BrowserVersion.INTERNET_EXPLORER_6_0, 
+        testSelection(-3, 15, BrowserVersion.INTERNET_EXPLORER_6_0,
                 new String[] {"undefined,undefined", "-3,undefined", "-3,15"});
-        testSelection(-3, 15, BrowserVersion.FIREFOX_2, 
+        testSelection(-3, 15, BrowserVersion.FIREFOX_2,
                 new String[] {"11,11", "0,11", "0,11"});
 
-        testSelection(10, 5, BrowserVersion.INTERNET_EXPLORER_6_0, 
+        testSelection(10, 5, BrowserVersion.INTERNET_EXPLORER_6_0,
                 new String[] {"undefined,undefined", "10,undefined", "10,5"});
-        testSelection(10, 5, BrowserVersion.FIREFOX_2, 
+        testSelection(10, 5, BrowserVersion.FIREFOX_2,
                 new String[] {"11,11", "10,11", "5,5"});
     }
 

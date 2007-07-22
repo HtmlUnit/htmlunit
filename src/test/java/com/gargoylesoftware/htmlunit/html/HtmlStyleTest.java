@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlStyle}.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  */

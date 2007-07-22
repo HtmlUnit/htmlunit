@@ -52,11 +52,11 @@ import org.w3c.dom.NodeList;
 
 /**
  * Simple wrapper to make "normal" object scriptable according to specific configuration
- * and allowing use of index properties. 
+ * and allowing use of index properties.
  * TODO: Configuration of the
  * properties and functions should occur from the xml configuration according to
  * the browser to simulate.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  */
@@ -71,7 +71,7 @@ public class ScriptableWrapper extends ScriptableObject {
     private Method getByNameFallback_;
 
     /**
-     * Constructs a wrapper for the java object. 
+     * Constructs a wrapper for the java object.
      * @param scope the scope of the executing script
      * @param javaObject the javaObject to wrap
      * @param staticType the static type of the object
@@ -113,7 +113,7 @@ public class ScriptableWrapper extends ScriptableObject {
                     final Method getNamedItem = javaObject.getClass()
                             .getMethod("getNamedItem",
                                     new Class[] { String.class });
-                    defineProperty("getNamedItem", 
+                    defineProperty("getNamedItem",
                             new MethodWrapper("getNamedItem", staticType, new Class[] { String.class }), 0);
 
                     getByNameFallback_ = getNamedItem;

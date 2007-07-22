@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link NodeImpl}.
- * 
+ *
  * @version $Revision$
  * @author yourgod
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
@@ -373,7 +373,7 @@ public class NodeImplTest extends WebTestCase {
                 + "some text<!-- some comment -->"
                 + "</body></html>";
 
-        final String[] expectedAlerts = {"document: 9", "document.body: 1", 
+        final String[] expectedAlerts = {"document: 9", "document.body: 1",
             "body child 1: 3", "body child 2: 8"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
@@ -391,7 +391,7 @@ public class NodeImplTest extends WebTestCase {
         final String content = "<html><head>"
             + "<title>First</title>"
             + "<script>"
-            + "function test()" 
+            + "function test()"
             + "{"
             + "    var oField = document.getElementById('div1');"
             + "    oField.attachEvent('onclick', foo1);"

@@ -63,7 +63,7 @@ public class KeyDataPair extends KeyValuePair {
      * @param contentType the content type
      * @param charset the charset encoding
      */
-    public KeyDataPair( final String key, final File file, final String contentType, 
+    public KeyDataPair( final String key, final File file, final String contentType,
             final String charset) {
 
         super(key, file.getName());
@@ -79,8 +79,8 @@ public class KeyDataPair extends KeyValuePair {
         charset_ = charset;
     }
 
-    /** 
-     * @return The <code>java.io.File</code> object if the file exists, else <code>null</code>. 
+    /**
+     * @return The <code>java.io.File</code> object if the file exists, else <code>null</code>.
      */
     public File getFile() {
         return fileObject_;

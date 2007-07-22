@@ -38,10 +38,10 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- * Interface to receive notification of incorrect information in html code 
+ * Interface to receive notification of incorrect information in html code
  * (but not the parser messages), headers, ...
  * that HtmlUnit can handle but that denote a badly written application.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  */

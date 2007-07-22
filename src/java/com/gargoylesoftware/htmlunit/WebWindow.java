@@ -102,7 +102,7 @@ public interface WebWindow {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Set the javascript object that corresponds to this element.  This is not guaranteed
      * to be set even if there is a javascript object for this html element.
      * @param scriptObject The javascript object.
@@ -111,7 +111,7 @@ public interface WebWindow {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Return the javascript object that corresponds to this element.
      * @return The javascript object that corresponds to this element.
      */
@@ -119,10 +119,10 @@ public interface WebWindow {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
-     * Currently exposed here for testing purposes, a better API will be added in the 
+     *
+     * Currently exposed here for testing purposes, a better API will be added in the
      * future and this will become a completely internal class.
-     * 
+     *
      * @return The ThreadManager for this WebWindow
      */
     ThreadManager getThreadManager();

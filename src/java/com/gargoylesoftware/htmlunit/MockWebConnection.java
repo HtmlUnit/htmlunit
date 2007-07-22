@@ -108,7 +108,7 @@ public class MockWebConnection extends WebConnectionImpl {
             }
         }
 
-        return new WebResponseImpl(response, webRequestSettings.getCharset(), 
+        return new WebResponseImpl(response, webRequestSettings.getCharset(),
                 webRequestSettings.getURL(), webRequestSettings.getSubmitMethod(), 0);
     }
 
@@ -270,7 +270,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     *  Return the additional headers that were used in the in the last call 
+     *  Return the additional headers that were used in the in the last call
      *  to {@link #getResponse(WebRequestSettings)}.
      * @return See above
      */
@@ -279,7 +279,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Return the {@link WebRequestSettings} that was used in the in the last call 
+     * Return the {@link WebRequestSettings} that was used in the in the last call
      * to {@link #getResponse(WebRequestSettings)}.
      * @return See above
      */

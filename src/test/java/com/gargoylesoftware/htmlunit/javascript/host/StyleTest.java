@@ -142,7 +142,7 @@ public class StyleTest extends WebTestCase {
 
     /**
      * Even if javascript isn't really executed according to the browser version used,
-     * it may have some side effects if configuration is incorrect. 
+     * it may have some side effects if configuration is incorrect.
      * @throws Exception if the test fails
      */
     public void testMozillaStyle() throws Exception {

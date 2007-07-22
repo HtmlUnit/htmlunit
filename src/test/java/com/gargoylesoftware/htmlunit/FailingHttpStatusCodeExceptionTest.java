@@ -43,14 +43,14 @@ import org.apache.commons.lang.ArrayUtils;
 
 /**
  * Tests for {@link FailingHttpStatusCodeException}..
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  */
 public final class FailingHttpStatusCodeExceptionTest extends WebTestCase {
     /**
      * Create an instance.
-     * 
+     *
      * @param name
      *            The name of the test.
      */

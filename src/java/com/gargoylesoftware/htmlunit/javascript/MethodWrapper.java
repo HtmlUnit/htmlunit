@@ -47,9 +47,9 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 /**
- * Wraps a java method to make it available as a javascript function 
+ * Wraps a java method to make it available as a javascript function
  * (more flexible than Rhino's {@link FunctionObject}.
- *  
+ *
  * @version $Revision$
  * @author Marc Guillemot
  */
@@ -63,7 +63,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
     /**
      * Facility constructor to wrap a method without arguments
      * @param methodName the name of the method to wrap
-     * @param clazz the class declaring the method 
+     * @param clazz the class declaring the method
      * @throws NoSuchMethodException if the method is no found
      */
     MethodWrapper(final String methodName, final Class clazz) throws NoSuchMethodException {
@@ -73,11 +73,11 @@ public class MethodWrapper extends ScriptableObject implements Function {
     /**
      * Wraps a method as a javascript function.
      * @param methodName the name of the method to wrap
-     * @param clazz the class declaring the method 
+     * @param clazz the class declaring the method
      * @param parameterTypes the types of the method's parameter
      * @throws NoSuchMethodException if the method is no found
      */
-    MethodWrapper(final String methodName, final Class clazz, final Class[] parameterTypes) 
+    MethodWrapper(final String methodName, final Class clazz, final Class[] parameterTypes)
         throws NoSuchMethodException {
 
         clazz_ = clazz;
@@ -112,7 +112,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
                     javaResp = method_.invoke(wrappedObject, javaArgs);
                 }
                 catch (final Exception e) {
-                    throw Context.reportRuntimeError("Exception calling wrapped function " 
+                    throw Context.reportRuntimeError("Exception calling wrapped function "
                             + method_.getName() + ": " + e.getMessage());
                 }
             }
@@ -130,7 +130,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
     }
     
     private RuntimeException buildInvalidCallException(final Scriptable thisObj) {
-        return Context.reportRuntimeError("Function " + method_.getName() 
+        return Context.reportRuntimeError("Function " + method_.getName()
                 + " called on incompatible object: " + thisObj);
     }
 
@@ -143,7 +143,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
      */
     Object[] convertJSArgsToJavaArgs(final Context context, final Scriptable scope, final Object[] jsArgs) {
         if (jsArgs.length != jsTypeTags_.length) {
-            throw Context.reportRuntimeError("Bad number of parameters for function " + method_.getName() 
+            throw Context.reportRuntimeError("Bad number of parameters for function " + method_.getName()
                     + ": expected " + jsTypeTags_.length + " got " + jsArgs.length);
         }
         final Object[] javaArgs = new Object[jsArgs.length];

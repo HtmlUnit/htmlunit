@@ -358,7 +358,7 @@ public final class Document extends NodeImpl {
                     if (currentChar == '/') {
                         tagIsOpen = false;
                         tagNameBeginIndex = index + 1;
-                    } 
+                    }
                     else {
                         tagNameBeginIndex = index;
                     }
@@ -504,9 +504,9 @@ public final class Document extends NodeImpl {
         final String date = (String) attributes.get("expires");
         if (date != null){
             try {
-                expires = DateUtil.parseDate(date); 
-            } 
-            catch (final DateParseException e) { 
+                expires = DateUtil.parseDate(date);
+            }
+            catch (final DateParseException e) {
                 // nothing
             }
         }

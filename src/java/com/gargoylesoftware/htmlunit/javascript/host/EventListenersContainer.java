@@ -141,7 +141,7 @@ class EventListenersContainer {
         }
     }
 
-    private ScriptResult executeEventListeners(final boolean useCapture, final Event event, 
+    private ScriptResult executeEventListeners(final boolean useCapture, final Event event,
             final Object[] args) {
 
         final List handlers = getHandlers(event.jsxGet_type(), useCapture);
@@ -152,7 +152,7 @@ class EventListenersContainer {
             final DomNode node = jsNode_.getDomNodeOrDie();
             final HtmlPage page = node.getPage();
             // make a copy of the list as execution of an handler may (de-)register handlers
-            final List handlersToExecute = new ArrayList(handlers); 
+            final List handlersToExecute = new ArrayList(handlers);
             for (final Iterator iter=handlersToExecute.iterator(); iter.hasNext();) {
                 final Function listener = (Function) iter.next();
                 result = page.executeJavaScriptFunctionIfPossible(
@@ -179,11 +179,11 @@ class EventListenersContainer {
         return null;
     }
 
-    public ScriptResult executeBubblingListeners(final Event event, final Object[] args, 
+    public ScriptResult executeBubblingListeners(final Event event, final Object[] args,
             final Object[] propHandlerArgs) {
         ScriptResult result = null;
 
-        // the handler declared as property if any (not on body, as handler declared on body 
+        // the handler declared as property if any (not on body, as handler declared on body
         // goes to the window)
         if (!(jsNode_.getDomNodeOrDie() instanceof HtmlBody)) {
             result = executeEventHandler(event, propHandlerArgs);

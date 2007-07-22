@@ -130,7 +130,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         initDefaultValue();
         final DomText child = (DomText) getFirstChild();
         if (child == null) {
-            final DomText newChild = new DomText(getPage(), newValue); 
+            final DomText newChild = new DomText(getPage(), newValue);
             appendChild( newChild );
         }
         else {
@@ -386,7 +386,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         if( selectionEnd_ < selectionStart ) {
             selectionEnd_ = selectionStart;
         }
-        this.selectionStart_ = selectionStart; 
+        this.selectionStart_ = selectionStart;
     }
     
     /**
@@ -398,7 +398,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     }
  
     /**
-     * Sets the selection end to the specified position (Firefox only). 
+     * Sets the selection end to the specified position (Firefox only).
      * @param selectionEnd the end position of the text >= 0
 
      */

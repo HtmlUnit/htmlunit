@@ -127,7 +127,7 @@ public class HtmlArea extends FocusableElement {
                     throw new IllegalStateException(
                         "Not a valid url: " + getHrefAttribute() );
                 }
-                final WebRequestSettings settings = new WebRequestSettings(url, 
+                final WebRequestSettings settings = new WebRequestSettings(url,
                         SubmitMethod.getInstance(getAttributeValue("method")));
                 final WebWindow webWindow = enclosingPage.getEnclosingWindow();
                 return webClient.getPage(
@@ -279,7 +279,7 @@ public class HtmlArea extends FocusableElement {
             final double topY = Double.parseDouble( coords[1].trim() );
             final double rightX = Double.parseDouble( coords[2].trim() );
             final double bottomY = Double.parseDouble( coords[3].trim() );
-            final Rectangle2D rectangle = new Rectangle2D.Double(leftX, topY, 
+            final Rectangle2D rectangle = new Rectangle2D.Double(leftX, topY,
                     rightX - leftX + 1, bottomY - topY + 1);
             if (rectangle.contains(x, y)) {
                 return true;
@@ -298,7 +298,7 @@ public class HtmlArea extends FocusableElement {
             catch (final NumberFormatException nfe) {
                 throw new NumberFormatException("Circle radius of " + radiusString + " is not yet implemented.");
             }
-            final Ellipse2D ellipse = new Ellipse2D.Double(centerX - radius / 2, centerY - radius / 2, 
+            final Ellipse2D ellipse = new Ellipse2D.Double(centerX - radius / 2, centerY - radius / 2,
                     radius, radius);
             if (ellipse.contains(x, y)) {
                 return true;

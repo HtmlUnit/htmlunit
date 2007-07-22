@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.Assert;
 
 /**
  * A wrapper allowing to add new functions without affecting the original context.
- * 
+ *
  * @version $Revision$
  * @author Marc Guillemot
  */
@@ -67,10 +67,10 @@ public class FunctionContextWrapper implements FunctionContext {
 
     /**
      * First look at the locally defined function and if none found calls the wrapped
-     * context. 
+     * context.
      * {@inheritDoc}
      */
-    public Function getFunction(final String namespaceURI, final String prefix, final String localName) 
+    public Function getFunction(final String namespaceURI, final String prefix, final String localName)
         throws UnresolvableException {
 
         final Function localFunction = (Function) localFunctions_.get(localName);

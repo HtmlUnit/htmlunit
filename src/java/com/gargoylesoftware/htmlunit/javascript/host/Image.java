@@ -73,7 +73,7 @@ public class Image extends HTMLElement {
     }
     
     /**
-     * Set the src property, either on the DOM node which corresponds to this 
+     * Set the src property, either on the DOM node which corresponds to this
      * JavaScript object, or if none exists (as when using JavaScript to preload
      * images), on the JavaScript object itself.
      * @param src the src attribute value
@@ -89,7 +89,7 @@ public class Image extends HTMLElement {
     /**
      * Return the value of the src property, either from the DOM node which
      * corresponds to this JavaScript object, or if that doesn't exist (as
-     * when using JavaScript to preload images), from the JavaScript object 
+     * when using JavaScript to preload images), from the JavaScript object
      * itself.
      * @return the src attribute
      */
@@ -99,9 +99,9 @@ public class Image extends HTMLElement {
             final String srcValue = htmlImageElement.getSrcAttribute();
             try {
                 return htmlImageElement.getPage().getFullyQualifiedUrl(srcValue).toExternalForm();
-            } 
+            }
             catch (final MalformedURLException e) {
-                throw Context.reportRuntimeError("Unable to create fully qualified URL for src attribute of image: " 
+                throw Context.reportRuntimeError("Unable to create fully qualified URL for src attribute of image: "
                                                   + e.getMessage());
             }
         }
@@ -113,7 +113,7 @@ public class Image extends HTMLElement {
                 return currentPage.getFullyQualifiedUrl(src_).toExternalForm();
             }
             catch (final MalformedURLException e) {
-                throw Context.reportRuntimeError("Unable to create fully qualified URL for src attribute of image: " 
+                throw Context.reportRuntimeError("Unable to create fully qualified URL for src attribute of image: "
                                                  + e.getMessage());
             }
         }

@@ -84,7 +84,7 @@ public class HtmlLabelTest extends WebTestCase {
     }
 
     /**
-     * 
+     *
      * @throws Exception if the test fails
      */
     public void test_getReferencedElement() throws Exception {

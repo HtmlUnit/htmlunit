@@ -38,9 +38,9 @@
 package com.gargoylesoftware.htmlunit.html;
 
 /**
- * Implementations of this interface receive notifications of changes to the attribute 
+ * Implementations of this interface receive notifications of changes to the attribute
  * list on the HtmlElement.
- * 
+ *
  * @version $Revision$
  * @author Ahmed Ashour
  * @see HtmlAttributeChangeEvent
@@ -49,7 +49,7 @@ public interface HtmlAttributeChangeListener {
 
     /**
      * Notification that a new attribute was added to the HtmlElement. Called after the attribute is added.
-     * 
+     *
      * @param event The event.
      */
     void attributeAdded( final HtmlAttributeChangeEvent event );
@@ -57,14 +57,14 @@ public interface HtmlAttributeChangeListener {
     /**
      * Notification that an existing attribute has been removed from the HtmlElement.
      * Called after the attribute is removed.
-     * 
+     *
      * @param event The event.
      */
     void attributeRemoved( final HtmlAttributeChangeEvent event );
 
     /**
      * Notification that an attribute on the HtmlElement has been replaced. Called after the attribute is replaced.
-     * 
+     *
      * @param event The event.
      */
     void attributeReplaced( final HtmlAttributeChangeEvent event );

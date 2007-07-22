@@ -40,11 +40,11 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.EventObject;
 
 /**
- * This is the event class for notifications about changes to the attributes of the 
+ * This is the event class for notifications about changes to the attributes of the
  * HtmlElement.
- * 
+ *
  * @version $Revision$
- * @author Ahmed Ashour 
+ * @author Ahmed Ashour
  * @see HtmlAttributeChangeListener
  */
 public class HtmlAttributeChangeEvent extends EventObject {
@@ -55,9 +55,9 @@ public class HtmlAttributeChangeEvent extends EventObject {
     private final String value_;
 
     /**
-     * Constructs a new AttributeEvent from the given element 
+     * Constructs a new AttributeEvent from the given element
      * for the given attribute name and attribute value.
-     * 
+     *
      * @param element the HtmlElement that is sending the event.
      * @param name the name of the attribute that changed on the element.
      * @param value the value of the attribute that has been added, removed, or replaced.
@@ -89,7 +89,7 @@ public class HtmlAttributeChangeEvent extends EventObject {
      * If the attribute was added, this is the value of the attribute.
      * If the attribute was removed, this is the value of the removed attribute.
      * If the attribute was replaced, this is the old value of the attribute.
-     *  
+     *
      * @return the value of the attribute that has been added, removed, or replaced.
      */
     public String getValue() {

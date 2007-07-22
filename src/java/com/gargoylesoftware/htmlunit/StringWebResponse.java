@@ -61,7 +61,7 @@ public class StringWebResponse extends WebResponseImpl {
     /**
      * Helper method for constructors. Converts the passed string into
      * WebResponseData with other defaults specified.
-     * 
+     *
      * @param contentString String to be converted to WebResponseData
      * @return A simple WebResponseData with defaults specified
      */
@@ -76,7 +76,7 @@ public class StringWebResponse extends WebResponseImpl {
      * Helper method for constructors. Gets the default URL that is used
      * if none is specified. Mostly exists to deal with the checked exception
      * on the URL constructor.
-     * 
+     *
      * @return The default URL
      */
     private static URL getURL() {

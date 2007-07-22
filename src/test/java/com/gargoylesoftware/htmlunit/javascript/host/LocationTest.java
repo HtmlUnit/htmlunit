@@ -470,7 +470,7 @@ public class LocationTest extends WebTestCase {
             + "     <frame name='content' src='content.html'/>"
             + " </frameset>"
             + " </html>";
-        final String frameMenu = 
+        final String frameMenu =
             "<html><body>"
             + "<a href='#' id='myLink' target='content' "
             + "onclick='parent.frames.content.location.replace(\"test.html\");'>Test2</a>"

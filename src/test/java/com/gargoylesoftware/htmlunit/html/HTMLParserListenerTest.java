@@ -64,7 +64,7 @@ public class HTMLParserListenerTest extends WebTestCase {
         private int column_;
 
         /**
-         * Utility class to hold data. 
+         * Utility class to hold data.
          * @param error The error
          * @param message The message
          * @param url The url
@@ -156,7 +156,7 @@ public class HTMLParserListenerTest extends WebTestCase {
         assertEquals("foo", page.getTitleText());
         
         // ignore column and key
-        final MessageInfo expectedError = new MessageInfo(false, 
+        final MessageInfo expectedError = new MessageInfo(false,
                 "End element <head> automatically closes element <title>.",
                 URL_FIRST, 4, -1, null);
         assertEquals(Collections.singletonList(expectedError), messages);

@@ -264,8 +264,8 @@ public class ScriptException extends RuntimeException {
     }
     
     /**
-     * Print the script stack trace. 
-     * This represents only the script calls. 
+     * Print the script stack trace.
+     * This represents only the script calls.
      * @param writer where the stack trace will be written
      */
     public void printScriptStackTrace(final PrintWriter writer) {

@@ -45,11 +45,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
- * The default implementation of PageCreator. Designed to be extended for easier 
+ * The default implementation of PageCreator. Designed to be extended for easier
  * handling of new content types. Just check the content type in createPage()
- * and call super(createPage()) if your custom type isn't found. There are 
+ * and call super(createPage()) if your custom type isn't found. There are
  * also protected createXXXXPage() methods for creating the Page types HtmlUnit
- * already knows about for your custom content types. 
+ * already knows about for your custom content types.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -105,7 +105,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
 
     /**
      * Create a HtmlPage for this WebResponse
-     * 
+     *
      * @param webResponse The page's source
      * @param webWindow The WebWindow to place the HtmlPage in
      * @return The newly created HtmlPage
@@ -119,7 +119,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     
     /**
      * Create a JavaScriptPage for this WebResponse
-     * 
+     *
      * @param webResponse The page's source
      * @param webWindow The WebWindow to place the JavaScriptPage in
      * @return The newly created JavaScriptPage
@@ -133,7 +133,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
 
     /**
      * Create a TextPage for this WebResponse
-     * 
+     *
      * @param webResponse The page's source
      * @param webWindow The WebWindow to place the TextPage in
      * @return The newly created TextPage
@@ -147,7 +147,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
 
     /**
      * Create an UnexpectedPage for this WebResponse
-     * 
+     *
      * @param webResponse The page's source
      * @param webWindow The WebWindow to place the UnexpectedPage in
      * @return The newly created UnexpectedPage
@@ -161,7 +161,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
 
     /**
      * Create an XmlPage for this WebResponse
-     * 
+     *
      * @param webResponse The page's source
      * @param webWindow The WebWindow to place the TextPage in
      * @return The newly created TextPage

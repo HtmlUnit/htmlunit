@@ -76,7 +76,7 @@ public class HtmlTableRowTest extends WebTestCase {
     private HtmlTableCell cellClone_;
 
     /**
-     * {@inheritDoc} 
+     * {@inheritDoc}
      */
     public void setUp() throws Exception {
         page_ = loadPage(htmlContent);

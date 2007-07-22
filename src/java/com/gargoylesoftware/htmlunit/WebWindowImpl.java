@@ -45,11 +45,11 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
- * 
- * Base class for common WebWindow functionality. While public, this class is not 
+ *
+ * Base class for common WebWindow functionality. While public, this class is not
  * exposed in any other places of the API. Internally we can cast to this class
  * when we need access to functionality that is not present in {@link WebWindow}
- * 
+ *
  * @version $Revision$
  * @author Brad Clarke
  * @author David K. Taylor
@@ -72,7 +72,7 @@ public abstract class WebWindowImpl implements WebWindow {
 
     /**
      * Creates a window and associates it with the client
-     * 
+     *
      * @param webClient The web client that "owns" this window.
      */
     public WebWindowImpl(final WebClient webClient) {
@@ -138,9 +138,9 @@ public abstract class WebWindowImpl implements WebWindow {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Adds a child to this window, for shutdown purposes.
-     * 
+     *
      * @param child The child window to associate with this window.
      */
     public void addChildWindow(final FrameWindow child) {
@@ -159,15 +159,15 @@ public abstract class WebWindowImpl implements WebWindow {
     
     /**
      * {@inheritDoc}
-     */    
+     */
     public String getName() {
         return name_;
     }
     
     /**
      * {@inheritDoc}
-     */    
+     */
     public void setName(final String name) {
         name_ = name;
-    }    
+    }
 }

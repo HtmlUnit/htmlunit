@@ -624,7 +624,7 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals(baseUrl + "/c/d", page.getFullyQualifiedUrl("c/./d"));
     }
 
-    /** 
+    /**
      * @throws Exception if the test fails
      */
     public void testGetFullQualifiedUrl_WithInvalidBase() throws Exception {
@@ -1143,7 +1143,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * 
+     *
      * @throws Exception if the test fails
      */
     public void testDeregisterFrameWithoutSrc() throws Exception {
@@ -1219,7 +1219,7 @@ public class HtmlPageTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testAsXmlValidHtmlOutput() throws Exception {
-        final String html = 
+        final String html =
             "<html><head><title>foo</title>"
             + "<script src='script.js'></script></head>"
             + "<body><div></div><iframe src='about:blank'></iframe></body>"
@@ -1439,7 +1439,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
-    public void testSerialization() throws Exception {        
+    public void testSerialization() throws Exception {
         final String content = "<html><body>\n"
             + "<div id='myId'>Hello there!</div>\n"
             + "</body></html>\n";
@@ -1466,8 +1466,8 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals( "Hello there!", page2.getHtmlElementById("myId").getFirstChild().getNodeValue() );
     }
 
-    /** 
-     * Verifies that a cloned HtmlPage has its own idMap_ 
+    /**
+     * Verifies that a cloned HtmlPage has its own idMap_
      * @throws Exception if the test fails
      */
     public void testClonedPageHasOwnIdMap() throws Exception {
@@ -1478,13 +1478,13 @@ public class HtmlPageTest extends WebTestCase {
         
         final HtmlPage page = loadPage(content);
         final HtmlElement id1 = (HtmlElement)page.getDocumentElement().getLastChild().getLastChild();
-        assertEquals("id1",id1.getId()); 
+        assertEquals("id1",id1.getId());
         assertTrue(id1 == page.getHtmlElementById("id1"));
         final HtmlPage clone = (HtmlPage)page.cloneNode(true);
         assertTrue(id1 == page.getHtmlElementById("id1"));
         final HtmlElement id1clone = (HtmlElement)clone.getDocumentElement().getLastChild().getLastChild();
         assertFalse(id1 == id1clone);
-        assertEquals("id1",id1clone.getId()); 
+        assertEquals("id1",id1clone.getId());
         assertTrue(id1clone == clone.getHtmlElementById("id1"));
         assertTrue(id1clone != page.getHtmlElementById("id1"));
         assertTrue(id1 != clone.getHtmlElementById("id1"));

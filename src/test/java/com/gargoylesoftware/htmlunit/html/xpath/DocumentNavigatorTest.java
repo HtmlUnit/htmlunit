@@ -83,10 +83,10 @@ public class DocumentNavigatorTest extends WebTestCase {
      * Test evaluation of some simple paths
      * @throws Exception if test fails
      */
-    public void testFollowingSiblingAxisIterator() throws Exception {        
+    public void testFollowingSiblingAxisIterator() throws Exception {
         final List expected = Arrays.asList(new String[] {"body"});
         final Collection received = CollectionUtils
-            .collect(NAVIGATOR.getFollowingSiblingAxisIterator(page_.getDocumentElement().getFirstChild()), 
+            .collect(NAVIGATOR.getFollowingSiblingAxisIterator(page_.getDocumentElement().getFirstChild()),
                 NODE_TO_NODENAME);
         assertEquals(expected, received);
     }

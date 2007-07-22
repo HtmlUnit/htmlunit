@@ -198,7 +198,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      */
     public String getPageEncoding() {
         if (originalCharset_ != null) {
-            return originalCharset_ ;
+            return originalCharset_;
         }
 
         final List list = getMetaTags("content-type");
@@ -688,7 +688,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * as a user would by clicking on buttons or links and having the javascript event
      * handlers execute as needed..
      * </p>
-     * 
+     *
      * @param sourceCode The javascript code to execute.
      * @param sourceName The name for this chunk of code.  This name will be displayed
      * in any error messages.
@@ -699,7 +699,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * the previous page and a javascript result object.
      */
     public ScriptResult executeJavaScriptIfPossible(
-        String sourceCode, final String sourceName, 
+        String sourceCode, final String sourceName,
         final HtmlElement htmlElement ) {
 
         final ScriptEngine engine = getWebClient().getScriptEngine();
@@ -729,12 +729,12 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Execute a Function in the given context.
      *
      * @param function The javascript Function to call.
      * @param thisObject The "this" object to be used during invocation.
-     * @param args The arguments to pass into the call. 
+     * @param args The arguments to pass into the call.
      * @param htmlElementScope The html element for which this script is being executed.
      * This element will be the context during the javascript execution.  If null,
      * the context will default to the page.
@@ -774,7 +774,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * @param srcAttribute The source attribute from the script tag.
      * @param charset The charset attribute from the script tag.
      */
@@ -799,8 +799,8 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>  
-     * 
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
      * Return true if a script with the specified type and language attributes
      * is actually JavaScript.
      * According to <a href="http://www.w3.org/TR/REC-html40/types.html#h-6.7">W3C recommendation</a>
@@ -826,7 +826,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
 
     /**
-     * 
+     *
      * @param url the url of the script
      * @param charset the charset to use to read the text
      * @return the content of the file
@@ -851,7 +851,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
                         scriptEncoding = contentCharset;
                     }
                     else if (!originalCharset_.equals(TextUtil.DEFAULT_CHARSET)) {
-                        scriptEncoding = originalCharset_ ;
+                        scriptEncoding = originalCharset_;
                     }
                     else {
                         scriptEncoding = TextUtil.DEFAULT_CHARSET;
@@ -910,7 +910,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      * Set the text for the title of this page.  If there is not a title element
      * on this page, then one has to be generated.
-     * @param message The new text 
+     * @param message The new text
      */
     public void setTitleText(final String message) {
         HtmlTitle titleElement = getTitleElement();
@@ -953,7 +953,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
     /**
      * Get the title element for this page.  Returns null if one is not found.
-     * 
+     *
      * @return the title element for this page or null if this is not one.
      */
     private HtmlTitle getTitleElement() {
@@ -985,7 +985,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             "frame", "iframe" } ));
         for (final Iterator iter = frames.iterator(); iter.hasNext();) {
             final BaseFrame frame = (BaseFrame) iter.next();
-            final Function frameTagOnloadHandler = frame.getEventHandler("onload"); 
+            final Function frameTagOnloadHandler = frame.getEventHandler("onload");
             if (frameTagOnloadHandler != null) {
                 getLog().debug("Executing onload handler for " + frame);
                 final Event event = new Event(frame, Event.TYPE_LOAD);
@@ -1368,7 +1368,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * @param node the node that has just been added to the document.
      */
     void notifyNodeAdded(final DomNode node) {
@@ -1391,7 +1391,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * @param node the node that has just been removed from the tree
      */
     void notifyNodeRemoved(final DomNode node) {
@@ -1403,7 +1403,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      * Loads the content of the contained frames. This is done after the page is completely
      * loaded to allow script contained in the frames to reference elements from the
-     * page located after the closing </frame> tag. 
+     * page located after the closing </frame> tag.
      * @throws FailingHttpStatusCodeException If the server returns a
      *      failing status code AND the property
      *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
@@ -1529,9 +1529,9 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
 
     /**
-     * Creates a clone of this instance, and clears cached state 
+     * Creates a clone of this instance, and clears cached state
      * to be not shared with the original.
-     * 
+     *
      * @return a clone of this instance.
      */
     protected Object clone() {
@@ -1548,13 +1548,13 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
     
     /**
-     * Override cloneNode to add cloned elements to the clone, not to the original. 
+     * Override cloneNode to add cloned elements to the clone, not to the original.
      * {@inheritDoc}
      */
     public DomNode cloneNode(final boolean deep) {
         final HtmlPage result = (HtmlPage)super.cloneNode(deep);
         if(deep) {
-            // fix up idMap_ and result's idMap_s 
+            // fix up idMap_ and result's idMap_s
             final Iterator it = result.getAllHtmlChildElements();
             while(it.hasNext()) {
                 final HtmlElement child = (HtmlElement)it.next();
@@ -1568,7 +1568,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      * Adds an HtmlAttributeChangeListener to the listener list.
      * The listener is registered for all attributes of all HtmlElements contained in this page.
-     * 
+     *
      * @param listener the attribute change listener to be added.
      * @see #removeHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
@@ -1586,7 +1586,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * Removes an HtmlAttributeChangeListener from the listener list.
      * This method should be used to remove HtmlAttributeChangeListener that were registered
      * for all attributes of all HtmlElements contained in this page.
-     * 
+     *
      * @param listener the attribute change listener to be removed.
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */

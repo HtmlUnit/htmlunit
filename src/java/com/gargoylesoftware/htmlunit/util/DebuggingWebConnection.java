@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
- * Wrapper around a "real" WebConnection that will use the wrapped web connection 
+ * Wrapper around a "real" WebConnection that will use the wrapped web connection
  * to do the real job and save all received responses
  * in the temp directory with an overview page.<br>
  * <br>
@@ -84,7 +84,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     /**
      * Wraps a web connection to have a report generated of the received responses.
      * @param webConnection the webConnection that do the real work
-     * @param reportBaseName the base name to use for the generated files. 
+     * @param reportBaseName the base name to use for the generated files.
      * The report will be reportBaseName + ".html" in the temp file.
      * @throws IOException in case of problems writing the files.
      */
@@ -150,7 +150,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
 
     /**
      * Produces a String that will produce a JS map like "{'key1': 'value1', 'key 2': 'value2'}"
-     * @param headers a list of {@link NameValuePair} 
+     * @param headers a list of {@link NameValuePair}
      * @return the JS String
      */
     static String nameValueListToJsMap(final List headers) {

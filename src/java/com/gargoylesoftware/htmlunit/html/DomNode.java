@@ -259,7 +259,7 @@ public abstract class DomNode implements Cloneable, Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * Set the javascript object that corresponds to this node.  This is not
      * guaranteed to be set even if there is a javascript object for this
      * DOM node.
@@ -424,15 +424,15 @@ public abstract class DomNode implements Cloneable, Serializable {
                 }
                 
                 if( node.isRenderedVisible() ) {
-                    buffer.append(" ") ;
+                    buffer.append(" ");
                     buffer.append(node.asText());
-                    buffer.append(" ") ;
+                    buffer.append(" ");
                 }
                 else if( node.getNodeName().equals( "p" ) ) {
                     // this is a bit kludgey, but we can't add the space
                     //  inside the node's asText(), since it doesn't belong
                     //  with the contents of the 'p' tag
-                    buffer.append(" ") ;
+                    buffer.append(" ");
                     buffer.append(node.asText());
                 }
                 else {
@@ -586,9 +586,9 @@ public abstract class DomNode implements Cloneable, Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * 
+     *
      * The logic of when and where the js object is created needs a clean up: functions using
-     * a js object of a dom node should not have to look if they should create it first 
+     * a js object of a dom node should not have to look if they should create it first
      * Return the javascript object that corresponds to this node.
      * @return The javascript object that corresponds to this node building it if necessary.
      */
@@ -1001,7 +1001,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         final Navigator navigator = HtmlUnitXPath.buildSubtreeNavigator(this);
         final HtmlUnitXPath xpath = new HtmlUnitXPath(xpathExpr, navigator);
         return xpath.selectNodes(this);
-    } 
+    }
     
     /**
      * Facility to notify the registered {@link IncorrectnessListener} of something that is not fully correct.
@@ -1014,9 +1014,9 @@ public abstract class DomNode implements Cloneable, Serializable {
 
     /**
      * Adds a DomChangeListener to the listener list.
-     * The listener is registered for all children nodes of this DomNode, 
+     * The listener is registered for all children nodes of this DomNode,
      * as well as the descendant nodes.
-     * 
+     *
      * @param listener the dom structure change listener to be added.
      * @see #removeDomChangeListener(DomChangeListener)
      */
@@ -1033,8 +1033,8 @@ public abstract class DomNode implements Cloneable, Serializable {
     /**
      * Removes an DomChangeListener from the listener list.
      * This method should be used to remove DomChangeListener that were registered
-     * for all children nodes and descendant nodes of this DomNode. 
-     * 
+     * for all children nodes and descendant nodes of this DomNode.
+     *
      * @param listener the dom structure change listener to be removed.
      * @see #addDomChangeListener(DomChangeListener)
      */
@@ -1049,11 +1049,11 @@ public abstract class DomNode implements Cloneable, Serializable {
 
     /**
      * Support for reporting dom changes.
-     * This method can be called when a node has been added and it will send the 
+     * This method can be called when a node has been added and it will send the
      * appropriate DomChangeEvent to any registered DomChangeListeners.
-     * 
+     *
      * Note that this methods recursively calls this parent fireNoddeAdded.
-     * 
+     *
      * @param parentNode the parent of the node that was added.
      * @param addedNode the node that was added.
      */
@@ -1074,11 +1074,11 @@ public abstract class DomNode implements Cloneable, Serializable {
 
     /**
      * Support for reporting dom changes.
-     * This method can be called when a node has been deleted and it will send the 
+     * This method can be called when a node has been deleted and it will send the
      * appropriate DomChangeEvent to any registered DomChangeListeners.
-     * 
+     *
      * Note that this methods recursively calls this parent fireNoddeDeleted.
-     * 
+     *
      * @param parentNode the parent of the node that was deleted.
      * @param deletedNode the node that was deleted.
      */
