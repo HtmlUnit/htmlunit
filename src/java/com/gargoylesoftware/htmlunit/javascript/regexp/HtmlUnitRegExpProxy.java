@@ -43,6 +43,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.RegExpProxy;
+import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.regexp.NativeRegExp;
 import org.mozilla.javascript.regexp.RegExpImpl;
@@ -98,9 +99,26 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             }
         }
         
-        return wrapped_.action(cx, scope, thisObj, args, actionType);
+        return wrappedAction(cx, scope, thisObj, args, actionType);
     }
     
+    /**
+     * Calls action on the wrapped RegExp proxy.
+     */
+    private Object wrappedAction(final Context cx, final Scriptable scope, final Scriptable thisObj,
+            final Object[] args, final int actionType) {
+        
+        // take care to set the context's RegExp proxy to the original one as this is checked 
+        // (cf org.mozilla.javascript.regexp.RegExpImp:334)
+        try {
+            ScriptRuntime.setRegExpProxy(cx, wrapped_);
+            return wrapped_.action(cx, scope, thisObj, args, actionType);
+        }
+        finally {
+            ScriptRuntime.setRegExpProxy(cx, this);
+        }
+    }
+
     /**
      * Convert JavaScript RegExp flags "img" to Java Pattern flags
      * @param flagsStr the flags (a combination of i, m and g)

@@ -1653,11 +1653,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRegexReplacementWithFunction() throws Exception {
-        if(notYetImplemented()) {
-            // This should be fixed ASAP! Needed for jQuery!
-            // This test works fine without the custom regex proxy.
-            return;
-        }
         final String html =
             "<html><body><script>" +
             "var r = /-([a-z])/ig;" +
