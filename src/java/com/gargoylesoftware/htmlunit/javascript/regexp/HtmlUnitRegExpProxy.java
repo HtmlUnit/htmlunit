@@ -108,7 +108,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     private Object wrappedAction(final Context cx, final Scriptable scope, final Scriptable thisObj,
             final Object[] args, final int actionType) {
         
-        // take care to set the context's RegExp proxy to the original one as this is checked 
+        // take care to set the context's RegExp proxy to the original one as this is checked
         // (cf org.mozilla.javascript.regexp.RegExpImp:334)
         try {
             ScriptRuntime.setRegExpProxy(cx, wrapped_);
