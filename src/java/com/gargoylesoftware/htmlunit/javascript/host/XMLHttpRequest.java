@@ -150,6 +150,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             
             for (int i=0; i<nbExecutions; ++i) {
+                getLog().debug("Calling onreadystatechange handler for state " + state);
                 jsEngine.callFunction(containingPage_, stateChangeHandler_, context,
                         this, scope, ArrayUtils.EMPTY_OBJECT_ARRAY);
             }
