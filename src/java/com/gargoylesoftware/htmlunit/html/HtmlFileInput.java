@@ -41,6 +41,8 @@ import java.io.File;
 import java.net.URI;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.gargoylesoftware.htmlunit.KeyDataPair;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 
@@ -98,10 +100,14 @@ public class HtmlFileInput extends HtmlInput {
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
         String value = getValueAttribute();
+
+        if (StringUtils.isEmpty(value)) {
+            return new KeyValuePair[] { new KeyDataPair(getNameAttribute(), new File(""), null, null) };
+        }
         
         //to tolerate file://
-        if( value.startsWith( "file://" ) && !value.startsWith( "file:///" ) ) {
-            value = "file:///" + value.substring( 7 );
+        if (value.startsWith("file://") && !value.startsWith("file:///")) {
+            value = "file:///" + value.substring(7);
         }
         
         final File file;
