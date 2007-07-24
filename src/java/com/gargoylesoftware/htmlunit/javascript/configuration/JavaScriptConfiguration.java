@@ -711,9 +711,7 @@ public final class JavaScriptConfiguration {
                     while (!classConfig.isJsObject()) {
                         jsClassname = classConfig.getExtendedClass();
                         classConfig = configuration.getClassConfiguration(jsClassname);
-                        getLog().debug("   testing to use " + jsClassname);
                     }
-
                     map.put( htmlClass, classConfig.getLinkedClass());
                 }
                 catch (final ClassNotFoundException e) {
