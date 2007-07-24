@@ -58,13 +58,14 @@ import org.mozilla.javascript.debug.Debugger;
  *
  * <p>
  * In order to enable the debugging output, call
- * {@link HtmlUnitContextFactory#setDebuggerEnabled(boolean)}, and make sure you loggers are
+ * {@link HtmlUnitContextFactory#setDebuggerEnabled(boolean)}, and make sure your loggers are
  * configured to output <tt>TRACE</tt> level log messages.
  * </p>
  *
  * @version $Revision$
  * @author Daniel Gredler
  * @see DebugFrameImpl
+ * @see HtmlUnitContextFactory#setDebuggerEnabled(boolean)
  */
 public class DebuggerImpl implements Debugger {
 
