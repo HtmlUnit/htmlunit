@@ -95,7 +95,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * Enables or disables the debugger, which logs stack entries and exceptions. Enabling the
      * debugger may be useful if HtmlUnit is having trouble with JavaScript, especially if you are
      * using some of the more advanced libraries like Dojo, Prototype or jQuery.
-     * 
+     *
      * @param enabled whether or not the debugger should be enabled
      * @see DebuggerImpl
      * @see DebugFrameImpl
