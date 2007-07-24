@@ -2126,6 +2126,32 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
+     * Verifies that eval() works correctly when triggered from an event handler. Event handlers are
+     * executed in a child scope of the global window scope, so variables set from inside eval()
+     * should go to this child scope, and not to the window scope.
+     * 
+     * @throws Exception if the test fails
+     */
+    public void testEvalScopeEvent() throws Exception {
+        final String html =
+            "<html><body onload='test()'><script>\r\n" +
+            "   function test() {\r\n" +
+            "      var s = 'string';\r\n" +
+            "      var f = 'initial';\r\n" +
+            "      eval('f = function(){alert(s);}');\r\n" +
+            "      invoke(f);\r\n" +
+            "   };\r\n" +
+            "   function invoke(fn) {\r\n" +
+            "      fn();\r\n" +
+            "   }\r\n" +
+            "</script></body></html>";
+        final String[] expected = { "string" };
+        final List actual = new ArrayList();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
      * @throws Exception If the test fails
      */
     public void testFunctionEquality() throws Exception {

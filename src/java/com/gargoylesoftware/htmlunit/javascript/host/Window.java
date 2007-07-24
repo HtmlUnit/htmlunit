@@ -861,16 +861,27 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * {@inheritDoc}
      */
     public Object get(final String name, final Scriptable start) {
-        // Hack to make eval work in other window scope when needed
-        // see unit tests. Todo: find a clean way to handle that
-        if (getStartingScope() != start && "eval".equals(name)) {
-            return getAssociatedValue("custom_eval");
+        // Hack to make eval work in other window scope when needed.
+        // See unit test testEvalScopeOtherWindow().
+        // TODO: Find a cleaner way to handle this.
+        if ("eval".equals(name)) {
+            final Window w = (Window) getTopScope(getStartingScope());
+            if (w != this) {
+                return getAssociatedValue("custom_eval");
+            }
         }
-
         return super.get(name, start);
     }
 
-    private Object getFrameByName( final HtmlPage page, final String name ) {
+    private Scriptable getTopScope(final Scriptable s) {
+        Scriptable top = s;
+        while (top != null && top.getParentScope() != null) {
+            top = top.getParentScope();
+        }
+        return top;
+    }
+
+    private Object getFrameByName(final HtmlPage page, final String name) {
         try {
             return page.getFrameByName(name).getScriptObject();
         }
