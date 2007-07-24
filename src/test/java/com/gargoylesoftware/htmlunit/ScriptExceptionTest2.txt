@@ -1,4 +1,4 @@
-TypeError: Cannot set property "bli" of null to "123" (Script in http://www.gargoylesoftware.com/ from (4, 9) to (0, 0)#3)
-	at foo(Script in http://www.gargoylesoftware.com/ from (4, 9) to (0, 0):3)
-	at bla(Script in http://www.gargoylesoftware.com/ from (13, 9) to (0, 0):3)
-	at (Script in http://www.gargoylesoftware.com/ from (13, 9) to (0, 0):5)
+TypeError: Cannot set property "bli" of null to "123" (script in http://www.gargoylesoftware.com/ from (4, 9) to (0, 0)#3)
+	at foo(script in http://www.gargoylesoftware.com/ from (4, 9) to (0, 0):3)
+	at bla(script in http://www.gargoylesoftware.com/ from (13, 9) to (0, 0):3)
+	at (script in http://www.gargoylesoftware.com/ from (13, 9) to (0, 0):5)

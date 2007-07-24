@@ -1,3 +1,3 @@
-TypeError: notExisting is not a function, it is null. (Script in http://www.gargoylesoftware.com/ from (4, 9) to (0, 0)#3)
-	at foo(Script in http://www.gargoylesoftware.com/ from (4, 9) to (0, 0):3)
+TypeError: notExisting is not a function, it is null. (script in http://www.gargoylesoftware.com/ from (4, 9) to (0, 0)#3)
+	at foo(script in http://www.gargoylesoftware.com/ from (4, 9) to (0, 0):3)
 	at (onload event for HtmlBody[<body onload="foo()">]:1)
