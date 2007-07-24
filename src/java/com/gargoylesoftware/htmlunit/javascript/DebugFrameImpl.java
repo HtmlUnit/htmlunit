@@ -211,7 +211,7 @@ public class DebugFrameImpl implements DebugFrame {
         int first = Integer.MAX_VALUE;
         final int[] lines = this.functionOrScript_.getLineNumbers();
         for (int i = 0; i < lines.length; i++) {
-            int current = lines[i];
+            final int current = lines[i];
             if (current < first) {
                 first = current;
             }
