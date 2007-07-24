@@ -2129,7 +2129,6 @@ public class WindowTest extends WebTestCase {
      * Verifies that eval() works correctly when triggered from an event handler. Event handlers are
      * executed in a child scope of the global window scope, so variables set from inside eval()
      * should go to this child scope, and not to the window scope.
-     * 
      * @throws Exception if the test fails
      */
     public void testEvalScopeEvent() throws Exception {

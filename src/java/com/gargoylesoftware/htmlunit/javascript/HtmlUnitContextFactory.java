@@ -59,6 +59,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     private final Log log_;
     private static final int INSTRUCTION_COUNT_THRESHOLD = 10000;
     private static long Timeout_ = 0;
+    private static boolean DebuggerEnabled_ = false;
 
     /**
      * Create a new instance of HtmlUnitContextFactory
@@ -90,6 +91,30 @@ public class HtmlUnitContextFactory extends ContextFactory {
         return Timeout_;
     }
 
+    /**
+     * Enables or disables the debugger, which logs stack entries and exceptions. Enabling the
+     * debugger may be useful if HtmlUnit is having trouble with JavaScript, especially if you are
+     * using some of the more advanced libraries like Dojo, Prototype or jQuery.
+     * 
+     * @param enabled whether or not the debugger should be enabled
+     * @see DebuggerImpl
+     * @see DebugFrameImpl
+     */
+    public static void setDebuggerEnabled(final boolean enabled) {
+        DebuggerEnabled_ = enabled;
+    }
+
+    /**
+     * Returns <tt>true</tt> if the debugger is enabled, <tt>false</tt> otherwise.
+     *
+     * @return <tt>true</tt> if the debugger is enabled, <tt>false</tt> otherwise
+     * @see DebuggerImpl
+     * @see DebugFrameImpl
+     */
+    public static boolean getDebuggerEnabled() {
+        return DebuggerEnabled_;
+    }
+
     // Custom Context to store execution time.
     private static class TimeoutContext extends Context {
         private long startTime_;
@@ -114,6 +139,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * {@inheritDoc}
      */
     protected Context makeContext() {
+
         final TimeoutContext cx = new TimeoutContext();
 
         // Use pure interpreter mode to get observeInstructionCount() callbacks.
@@ -124,6 +150,10 @@ public class HtmlUnitContextFactory extends ContextFactory {
 
         cx.setErrorReporter(new StrictErrorReporter(log_));
         cx.setWrapFactory(new HtmlUnitWrapFactory());
+
+        if (DebuggerEnabled_) {
+            cx.setDebugger(new DebuggerImpl(), null);
+        }
 
         // register custom RegExp processing
         ScriptRuntime.setRegExpProxy(cx, new HtmlUnitRegExpProxy(ScriptRuntime.getRegExpProxy(cx)));

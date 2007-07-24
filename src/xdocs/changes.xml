@@ -8,6 +8,10 @@
     <body>
         <release version="1.12-prerelease">
             <action type="add" dev="sdanig">
+                Add an optional (disabled by default) debugger implementation which can make it easier
+                to debug complex interactions between HtmlUnit and JavaScript.
+            </action>
+            <action type="add" dev="sdanig">
                 Deprecate BrowserVersion constants for Mozilla 1.0, Netscape 4.7.9 and Netscape 6.2.3;
                 add MSIE 7 and Firefox 2.
             </action>
