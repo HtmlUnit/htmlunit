@@ -2248,7 +2248,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Added test for [ 1727599 ] Bad context in evaluation of the javascript.
-     * @throws Exception
+     * @throws Exception If the test fails
      */
     public void testEval() throws Exception {
         final String content = "<html><body>\n"
