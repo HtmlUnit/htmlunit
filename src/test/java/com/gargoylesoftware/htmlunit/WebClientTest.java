@@ -756,7 +756,7 @@ public class WebClientTest extends WebTestCase {
     public void testLoadFilePage() throws Exception {
 
         // create a real file to read
-        // it could be usefull to have existing files to test in a special location in filesystem.
+        // it could be useful to have existing files to test in a special location in filesystem.
         // It will be really needed when we have to test binary files using the file protocol.
         final String htmlContent = "<html><head><title>foo</title></head><body></body></html>";
         final File currentDirectory = new File((new File("")).getAbsolutePath());

@@ -95,7 +95,7 @@ public final class ScriptExceptionTest extends WebTestCase {
      * Test the JavaScript stacktrace.
      * Note: this test will fail when the information (line, col, source name) provided to execute
      * scripts is improved. In this case this unit test should be adapted IF the provided information
-     * in the script stack trace gets better and provides more usefull information to understand the
+     * in the script stack trace gets better and provides more useful information to understand the
      * cause of a problem.
      * @throws Exception if the test fails
      */

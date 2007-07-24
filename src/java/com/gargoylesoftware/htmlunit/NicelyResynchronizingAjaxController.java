@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * This {@link AjaxController} resynchronizes calls calling from the main thread.
  * The idea is that asynchron AJAX calls performed directly in response to a user
  * action (therefore in the "main" thread and not in the thread of a background task)
- * are directly usefull for the user. To easily have a testable state, these calls
+ * are directly useful for the user. To easily have a testable state, these calls
  * are performed synchron.
  * <span style="color:red">EXPERIMENTAL - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
  * @version $Revision: 1165 $
