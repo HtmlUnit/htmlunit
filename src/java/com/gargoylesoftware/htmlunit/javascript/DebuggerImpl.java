@@ -62,7 +62,7 @@ import org.mozilla.javascript.debug.Debugger;
  * configured to output <tt>TRACE</tt> level log messages.
  * </p>
  *
- * @version $Revision: $
+ * @version $Revision$
  * @author Daniel Gredler
  * @see DebugFrameImpl
  */

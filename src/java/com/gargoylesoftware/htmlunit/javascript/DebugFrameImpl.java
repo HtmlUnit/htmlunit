@@ -61,7 +61,7 @@ import org.mozilla.javascript.debug.DebuggableScript;
  * HtmlUnit itself, rather than the debugging and development of web applications.
  * </p>
  *
- * @version $Revision: $
+ * @version $Revision$
  * @author Daniel Gredler
  * @see DebuggerImpl
  */
