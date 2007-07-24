@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for {@link HtmlFileInput}.
  *
- * @version $Revision: 1580 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class HtmlFileInputTest extends WebTestCase {
