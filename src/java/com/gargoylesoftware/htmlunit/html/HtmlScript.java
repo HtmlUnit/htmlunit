@@ -237,7 +237,7 @@ public class HtmlScript extends HtmlElement {
         final int line2 = getEndLineNumber();
         final int col1 = getStartColumnNumber();
         final int col2 = getEndColumnNumber();
-        final String desc = "Script in " + url + " from (" + line1 + ", " + col1 + ") to (" + line2 + ", " + col2 + ")";
+        final String desc = "script in " + url + " from (" + line1 + ", " + col1 + ") to (" + line2 + ", " + col2 + ")";
         getPage().executeJavaScriptIfPossible(scriptCode, desc, null);
     }
 
