@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem" id="1727599">
+                JavaScript: fixed eval scope bug when used within function. 
+            </action>
             <action type="add" dev="sdanig">
                 Add an optional (disabled by default) debugger implementation which can make it easier
                 to debug complex interactions between HtmlUnit and JavaScript.

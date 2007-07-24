@@ -2246,4 +2246,25 @@ public class WindowTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * Added test for [ 1727599 ] Bad context in evaluation of the javascript.
+     * @throws Exception
+     */
+    public void testEval() throws Exception {
+        final String content = "<html><body>\n"
+            + "<input type='button' id='myButton' value='Click Me' onclick='test(this)'>\n"
+            + "<script>\n"
+            + "function test(f) {"
+            + "   alert(eval('f.tagName'));\n"
+            + "}"
+            + "</script>\n"
+            + "</body></html>\n";
+
+        final String[] expectedAlerts = {"INPUT"};
+        
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        ((ClickableElement)page.getHtmlElementById("myButton")).click();
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
