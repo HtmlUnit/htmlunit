@@ -76,9 +76,9 @@ public class ObjectInstantiationException extends RuntimeException {
      */
     public void printStackTrace( final PrintWriter writer ) {
         super.printStackTrace( writer );
-        if( causeException_ != null ) {
+        if (causeException_ != null) {
             writer.write( "Enclosed exception: " );
-            causeException_.printStackTrace( writer );
+            causeException_.printStackTrace(writer);
         }
     }
 
@@ -88,11 +88,11 @@ public class ObjectInstantiationException extends RuntimeException {
      *
      * @param stream Where the stack trace will be written
      */
-    public void printStackTrace( final PrintStream stream ) {
+    public void printStackTrace(final PrintStream stream) {
         super.printStackTrace( stream );
-        if( causeException_ != null ) {
-            stream.print( "Enclosed exception: " );
-            causeException_.printStackTrace( stream );
+        if (causeException_ != null) {
+            stream.print("Enclosed exception: ");
+            causeException_.printStackTrace(stream);
         }
     }
 }

@@ -119,7 +119,7 @@ public class ClickableElementTest extends WebTestCase {
         final HtmlPage page = ( HtmlPage ) client.getPage(URL_GARGOYLE);
         final ClickableElement clickable = ( ClickableElement )page.getHtmlElementById( "clickId" );
 
-        for (int i=0; i<numClicks; i++) {
+        for (int i = 0; i < numClicks; i++) {
             clickable.click();
         }
 

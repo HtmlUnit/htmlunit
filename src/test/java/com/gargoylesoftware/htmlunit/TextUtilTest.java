@@ -64,7 +64,7 @@ public final class TextUtilTest extends WebTestCase {
             TextUtil.startsWithIgnoreCase(null, "foo");
             fail("Expected null pointer exception");
         }
-        catch( final NullPointerException e ) {
+        catch (final NullPointerException e) {
             // Expected path
         }
 
@@ -72,7 +72,7 @@ public final class TextUtilTest extends WebTestCase {
             TextUtil.startsWithIgnoreCase("foo", null);
             fail("Expected null pointer exception");
         }
-        catch( final NullPointerException e ) {
+        catch (final NullPointerException e) {
             // Expected path
         }
     }
@@ -85,7 +85,7 @@ public final class TextUtilTest extends WebTestCase {
             TextUtil.startsWithIgnoreCase("foo", "");
             fail("Expected IllegalArgumentException");
         }
-        catch( final IllegalArgumentException e ) {
+        catch (final IllegalArgumentException e) {
             // Expected path
         }
     }
@@ -101,12 +101,12 @@ public final class TextUtilTest extends WebTestCase {
             {"foo:bar","FOO"},
         };
 
-        for( int i=0; i<data.length; i++ ) {
+        for (int i = 0; i < data.length; i++) {
             final String stringToCheck = data[i][0];
             final String prefix = data[i][1];
 
             assertTrue(
-                "stringToCheck=["+stringToCheck+"] prefix=["+prefix+"]",
+                "stringToCheck=[" + stringToCheck + "] prefix=[" + prefix + "]",
                 TextUtil.startsWithIgnoreCase(stringToCheck, prefix));
         }
     }
@@ -121,12 +121,12 @@ public final class TextUtilTest extends WebTestCase {
             {"fo","foo"},
         };
 
-        for( int i=0; i<data.length; i++ ) {
+        for (int i = 0; i < data.length; i++) {
             final String stringToCheck = data[i][0];
             final String prefix = data[i][1];
 
             assertFalse(
-                "stringToCheck=["+stringToCheck+"] prefix=["+prefix+"]",
+                "stringToCheck=[" + stringToCheck + "] prefix=[" + prefix + "]",
                 TextUtil.startsWithIgnoreCase(stringToCheck, prefix));
         }
     }
@@ -139,7 +139,7 @@ public final class TextUtilTest extends WebTestCase {
             TextUtil.toInputStream(null);
             fail("Expected NullPointerException");
         }
-        catch( final NullPointerException e ) {
+        catch (final NullPointerException e) {
             // Expected path
         }
     }
@@ -155,7 +155,7 @@ public final class TextUtilTest extends WebTestCase {
         };
         final String encoding = "ISO-8859-1";
 
-        for( int i=0; i<data.length; i++ ) {
+        for (int i = 0; i < data.length; i++) {
             final String input = data[i][0];
             final String expectedResult = data[i][1];
 

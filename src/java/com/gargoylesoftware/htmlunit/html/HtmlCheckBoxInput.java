@@ -114,12 +114,12 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * @return The page that occupies this window after setting checked status.
      * It may be the same window or it may be a freshly loaded one.
      */
-    public Page setChecked( final boolean isChecked ) {
-        if( isChecked ) {
-            setAttributeValue( "checked", "checked" );
+    public Page setChecked(final boolean isChecked) {
+        if (isChecked) {
+            setAttributeValue("checked", "checked");
         }
         else {
-            removeAttribute( "checked" );
+            removeAttribute("checked");
         }
         return executeOnChangeHandlerIfAppropriate(this);
     }
@@ -179,7 +179,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     public void setDefaultChecked( final boolean defaultChecked ) {
         defaultCheckedState_ = defaultChecked;
-        if( getPage().getWebClient().getBrowserVersion().isNetscape() ) {
+        if (getPage().getWebClient().getBrowserVersion().isNetscape()) {
             setChecked( defaultChecked );
         }
     }

@@ -98,7 +98,7 @@ public class HtmlTableRow extends ClickableElement {
      */
     public List getCells() {
         final List result = new ArrayList();
-        for(final CellIterator iterator = getCellIterator(); iterator.hasNext();) {
+        for (final CellIterator iterator = getCellIterator(); iterator.hasNext();) {
             result.add(iterator.next());
         }
         return Collections.unmodifiableList(result);
@@ -111,9 +111,9 @@ public class HtmlTableRow extends ClickableElement {
      */
     public HtmlTableCell getCell(final int index) throws IndexOutOfBoundsException {
         int count = 0;
-        for(final CellIterator iterator = getCellIterator(); iterator.hasNext(); count++) {
+        for (final CellIterator iterator = getCellIterator(); iterator.hasNext(); count++) {
             final HtmlTableCell next = iterator.nextCell();
-            if(count == index) {
+            if (count == index) {
                 return next;
             }
         }
@@ -220,10 +220,10 @@ public class HtmlTableRow extends ClickableElement {
          * @throws IllegalStateException if there is no currenr row
          */
         public void remove() throws IllegalStateException {
-            if(nextCell_ == null) {
+            if (nextCell_ == null) {
                 throw new IllegalStateException();
             }
-            if(nextCell_.getPreviousSibling() != null) {
+            if (nextCell_.getPreviousSibling() != null) {
                 nextCell_.getPreviousSibling().remove();
             }
         }
@@ -234,7 +234,7 @@ public class HtmlTableRow extends ClickableElement {
          */
         public HtmlTableCell nextCell() throws NoSuchElementException {
 
-            if(nextCell_ != null) {
+            if (nextCell_ != null) {
                 final HtmlTableCell result = nextCell_;
                 setNextCell(nextCell_.getNextSibling());
                 return result;
@@ -252,19 +252,19 @@ public class HtmlTableRow extends ClickableElement {
         private void setNextCell(final DomNode node) {
 
             nextCell_ = null;
-            for(DomNode next = node; next != null; next = next.getNextSibling()) {
-                if(next instanceof HtmlTableCell) {
+            for (DomNode next = node; next != null; next = next.getNextSibling()) {
+                if (next instanceof HtmlTableCell) {
                     nextCell_ = (HtmlTableCell)next;
                     return;
                 }
-                else if(currentForm_ == null && next instanceof HtmlForm) {
+                else if (currentForm_ == null && next instanceof HtmlForm) {
                     // Completely illegal html but some of the big sites (ie amazon) do this
                     currentForm_ = (HtmlForm)next;
                     setNextCell(next.getFirstChild());
                     return;
                 }
             }
-            if(currentForm_ != null) {
+            if (currentForm_ != null) {
                 final DomNode form = currentForm_;
                 currentForm_ = null;
                 setNextCell(form.getNextSibling());

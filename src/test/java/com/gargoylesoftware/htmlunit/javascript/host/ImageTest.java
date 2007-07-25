@@ -69,7 +69,7 @@ public class ImageTest extends WebTestCase {
             = "<html><head><title></title><script>"
             + "function doTest(){\n"
             + "    alert(document.getElementById('anImage').src);\n"
-            +"}\n"
+            + "}\n"
             + "</script></head><body onload='doTest()'>"
             + "<img src='foo.gif' id='anImage'/>"
             + "</body></html>";
@@ -96,7 +96,7 @@ public class ImageTest extends WebTestCase {
             = "<html><head><title></title><script>"
             + "function doTest(){\n"
             + "    document.getElementById('anImage').src = 'bar.gif';\n"
-            +"}\n"
+            + "}\n"
             + "</script></head><body onload='doTest()'>"
             + "<img src='foo.gif' id='anImage'/>"
             + "</body></html>";
@@ -124,7 +124,7 @@ public class ImageTest extends WebTestCase {
             + "    var preloadImage = new Image();\n"
             + "    preloadImage.src = 'bar.gif';\n"
             + "    alert(preloadImage.src);\n"
-            +"}\n"
+            + "}\n"
             + "</script></head><body onload='doTest()'>"
             + "</body></html>";
 
@@ -150,7 +150,7 @@ public class ImageTest extends WebTestCase {
             + "  var oImg = document.getElementById('myImage');\n"
             + "  oImg.name = 'foo';\n"
             + "  alert(oImg.name);\n"
-            +"}\n"
+            + "}\n"
             + "</script></head><body onload='test()'>"
             + "<img src='foo.png' id='myImage'>"
             + "</body></html>";

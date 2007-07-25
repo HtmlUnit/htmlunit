@@ -128,7 +128,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         transformer_ = transformer;
         final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
         node_.addDomChangeListener(listener);
-        if( node_ instanceof HtmlElement ) {
+        if (node_ instanceof HtmlElement) {
             ((HtmlElement)node_).addHtmlAttributeChangeListener(listener);
             cachedElements_ = null;
         }
@@ -141,7 +141,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
             final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args)
         throws JavaScriptException {
-        if( args.length == 0 ) {
+        if (args.length == 0) {
             throw Context.reportRuntimeError( "Zero arguments; need an index or a key." );
         }
         return get( args[0] );
@@ -163,7 +163,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * @return The element or elements corresponding to the specified index or key.
      */
     private Object get( final Object o ) {
-        if( o instanceof Number ) {
+        if (o instanceof Number) {
             final Number n = (Number) o;
             final int i = n.intValue();
             return get( i, this );
@@ -183,7 +183,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         final HTMLCollection array = (HTMLCollection) start;
         final List elements = array.getElements();
 
-        if( index >= 0 && index < elements.size()) {
+        if (index >= 0 && index < elements.size()) {
             return getScriptableFor(transformer_.transform(elements.get(index)));
         }
         else {
@@ -201,11 +201,11 @@ public class HTMLCollection extends SimpleScriptable implements Function {
             try {
                 cachedElements_ = xpath_.selectNodes(node_);
 
-                for( int i=0; i < cachedElements_.size(); i++ ) {
+                for (int i = 0; i < cachedElements_.size(); i++) {
                     final DomNode element = (DomNode) cachedElements_.get(i);
-                    for( DomNode parent = element.getParentNode(); parent != null;
-                        parent = parent.getParentNode() ) {
-                        if( parent instanceof HtmlNoScript ) {
+                    for (DomNode parent = element.getParentNode(); parent != null;
+                        parent = parent.getParentNode()) {
+                        if (parent instanceof HtmlNoScript) {
                             cachedElements_.remove(i--);
                             break;
                         }
@@ -243,7 +243,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
             if (next instanceof HtmlElement) {
                 final HtmlElement element = (HtmlElement) next;
                 final String id = element.getId();
-                if( id != null && id.equals(name) ) {
+                if (id != null && id.equals(name)) {
                     getLog().debug("Property \"" + name + "\" evaluated (by id) to " + element);
                     return getScriptableFor( element );
                 }
@@ -268,7 +268,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
             final String currentXPathExpr = xpath_.toString();
             final String xpathExpr;
             if (currentXPathExpr.endsWith("]")) {
-                xpathExpr = currentXPathExpr.substring(0, currentXPathExpr.length()-1) + " and " + newCondition + "]";
+                xpathExpr = currentXPathExpr.substring(0, currentXPathExpr.length() - 1) + " and " + newCondition + "]";
             }
             else {
                 xpathExpr = currentXPathExpr + "[" + newCondition + "]";

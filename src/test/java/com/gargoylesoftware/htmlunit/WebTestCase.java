@@ -101,7 +101,7 @@ public abstract class WebTestCase extends BaseTestCase {
             URL_THIRD = new URL("http://third");
             URL_GARGOYLE = new URL("http://www.gargoylesoftware.com/");
         }
-        catch( final MalformedURLException e ) {
+        catch (final MalformedURLException e) {
             // This is theoretically impossible.
             throw new IllegalStateException("Unable to create url constants");
         }
@@ -188,8 +188,8 @@ public abstract class WebTestCase extends BaseTestCase {
         throws Exception {
 
         final WebClient client = new WebClient(browserVersion);
-        if( collectedAlerts != null ) {
-            client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        if (collectedAlerts != null) {
+            client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         }
 
         final MockWebConnection webConnection = new MockWebConnection( client );
@@ -205,8 +205,8 @@ public abstract class WebTestCase extends BaseTestCase {
      * @param object The object to check.
      */
     public static void assertNull( final Object object ) {
-        if( object != null ) {
-            throw new AssertionFailedError("Expected null but found ["+object+"]");
+        if (object != null) {
+            throw new AssertionFailedError("Expected null but found [" + object + "]");
         }
     }
 
@@ -299,15 +299,15 @@ public abstract class WebTestCase extends BaseTestCase {
         final String localizedName = fileName.replace( '/', File.separatorChar );
 
         File file = new File(localizedName);
-        if( file.exists() == false ) {
-            file = new File("../../"+localizedName);
+        if (!file.exists()) {
+            file = new File("../../" + localizedName);
         }
 
-        if( file.exists() == false ) {
+        if (!file.exists()) {
             try {
-                System.out.println("currentDir="+new File(".").getCanonicalPath());
+                System.out.println("currentDir=" + new File(".").getCanonicalPath());
             }
-            catch( final IOException e ) {
+            catch (final IOException e) {
                 e.printStackTrace();
             }
             throw new FileNotFoundException(localizedName);
@@ -458,9 +458,9 @@ public abstract class WebTestCase extends BaseTestCase {
         final Class cl = getClass();
         final Class[] args = new Class[] {};
 
-        // search the inial junit test
+        // search the initial junit test
         final Throwable t = new Exception();
-        for (int i=t.getStackTrace().length-1; i>=0; --i) {
+        for (int i = t.getStackTrace().length - 1; i >= 0; i--) {
             final StackTraceElement element = t.getStackTrace()[i];
             if (element.getClassName().equals(cl.getName())) {
                 try {

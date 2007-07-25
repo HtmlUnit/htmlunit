@@ -83,7 +83,7 @@ public class HtmlFileInput extends HtmlInput {
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         setAttributeValue( "value", "" );
-        if( page.getWebClient().getBrowserVersion().isIE() ) {
+        if (page.getWebClient().getBrowserVersion().isIE()) {
             setDefaultValue( "" );
         }
     }
@@ -114,7 +114,7 @@ public class HtmlFileInput extends HtmlInput {
         try {
             file = new File( new URI(value) );
         }
-        catch( final Exception e ) {
+        catch (final Exception e) {
             throw new IllegalArgumentException( "Invalid 'value' attribute: " + getValueAttribute() );
         }
 

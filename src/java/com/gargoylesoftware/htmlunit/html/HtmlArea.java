@@ -112,9 +112,9 @@ public class HtmlArea extends FocusableElement {
         final WebClient webClient = enclosingPage.getWebClient();
 
         final String href = getHrefAttribute();
-        if( href != null && href.length() > 0 ) {
+        if (href != null && href.length() > 0) {
             final HtmlPage page = getPage();
-            if( TextUtil.startsWithIgnoreCase(href, "javascript:") ) {
+            if (TextUtil.startsWithIgnoreCase(href, "javascript:")) {
                 return page.executeJavaScriptIfPossible(
                     href, "javascript url", null).getNewPage();
             }
@@ -123,7 +123,7 @@ public class HtmlArea extends FocusableElement {
                 try {
                     url = enclosingPage.getFullyQualifiedUrl( getHrefAttribute() );
                 }
-                catch( final MalformedURLException e ) {
+                catch (final MalformedURLException e) {
                     throw new IllegalStateException(
                         "Not a valid url: " + getHrefAttribute() );
                 }
@@ -307,12 +307,12 @@ public class HtmlArea extends FocusableElement {
         else if ("poly".equals(shape) && getCoordsAttribute() != null ) {
             final String[] coords = getCoordsAttribute().split(",");
             final GeneralPath path = new GeneralPath();
-            for (int i=0; i + 1 < coords.length; i+=2) {
+            for (int i = 0; i + 1 < coords.length; i += 2) {
                 if (i == 0) {
-                    path.moveTo(Float.parseFloat(coords[i]), Float.parseFloat(coords[i+1]));
+                    path.moveTo(Float.parseFloat(coords[i]), Float.parseFloat(coords[i + 1]));
                 }
                 else {
-                    path.lineTo(Float.parseFloat(coords[i]), Float.parseFloat(coords[i+1]));
+                    path.lineTo(Float.parseFloat(coords[i]), Float.parseFloat(coords[i + 1]));
                 }
             }
             path.closePath();

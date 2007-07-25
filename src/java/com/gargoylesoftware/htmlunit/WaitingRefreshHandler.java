@@ -95,11 +95,11 @@ public class WaitingRefreshHandler implements RefreshHandler {
             throw new RuntimeException("Unknown threading error during refresh", e);
         }
         final WebWindow window = page.getEnclosingWindow();
-        if( window == null ) {
+        if (window == null) {
             return;
         }
         final WebClient client = window.getWebClient();
-        client.getPage( window, new WebRequestSettings( url ) );
+        client.getPage(window, new WebRequestSettings(url));
     }
 
 }

@@ -134,7 +134,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
                 try {
                     init(webWindow, cx);
                 }
-                catch( final Exception e ) {
+                catch (final Exception e) {
                     getLog().error("Exception while initializing JavaScript for the page", e);
                     throw new ScriptException(null, e); // BUG: null is not useful.
                 }
@@ -226,13 +226,13 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
         final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
         window.associateValue("custom_eval", jsCustomEval);
         
-        for( final Iterator classnames = jsConfig.keySet().iterator(); classnames.hasNext();) {
+        for (final Iterator classnames = jsConfig.keySet().iterator(); classnames.hasNext();) {
             final String jsClassName = (String) classnames.next();
             final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
             final Method jsConstructor = config.getJsConstructor();
-            if( jsConstructor != null ) {
+            if (jsConstructor != null) {
                 final Scriptable prototype = (Scriptable) prototypesPerJSName.get(jsClassName);
-                if( prototype != null ) {
+                if (prototype != null) {
                     final FunctionObject jsCtor = new FunctionObject(jsClassName, jsConstructor, window);
                     jsCtor.addAsConstructor(window, prototype);
                 }
@@ -320,7 +320,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
 
         // PreProcess IE Conditional Compilation if needed
         final BrowserVersion browserVersion = htmlPage.getWebClient().getBrowserVersion();
-        if( browserVersion.isIE() && browserVersion.getBrowserVersionNumeric() >= 4) {
+        if (browserVersion.isIE() && browserVersion.getBrowserVersionNumeric() >= 4) {
             final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
             sourceCode = ieCCPreProcessor.preProcess(htmlPage, sourceCode, sourceName, htmlElement);
         }
@@ -337,12 +337,12 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
                 // check for last line that has
                 // "statement-->", but not "statement//-->"
                 int lastLineIndex;
-                for( lastLineIndex = endIndex; lastLineIndex > startIndex; lastLineIndex-- ) {
+                for (lastLineIndex = endIndex; lastLineIndex > startIndex; lastLineIndex--) {
                     final char eachChar = sourceCode.charAt( lastLineIndex );
-                    if( eachChar == '\n' || eachChar == '\r' ) {
+                    if (eachChar == '\n' || eachChar == '\r') {
                         final String lastLine = sourceCode.substring(lastLineIndex + 1, endIndex);
-                        if(lastLine.indexOf( "//" ) == -1 && lastLine.trim().length() != 0) {
-                            if( getWebClient().getBrowserVersion().isIE() ) {
+                        if (lastLine.indexOf( "//" ) == -1 && lastLine.trim().length() != 0) {
+                            if (getWebClient().getBrowserVersion().isIE()) {
                                 //IE ignores last line
                                 endIndex = lastLineIndex;
                             }
@@ -364,9 +364,9 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
             }
             else {
                 // Anything on the same line as the opening comment should be ignored
-                for( ; startIndex < endIndex; startIndex++ ) {
+                for ( ; startIndex < endIndex; startIndex++) {
                     final char eachChar = sourceCode.charAt(startIndex);
-                    if( eachChar == '\n' || eachChar == '\r' ) {
+                    if (eachChar == '\n' || eachChar == '\r') {
                         break;
                     }
                 }

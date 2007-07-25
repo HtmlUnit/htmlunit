@@ -166,7 +166,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
             final byte[] actualArray = new byte[2048];
 
             int expectedLength = expectedBuf.read(expectedArray);
-            while(true) {
+            while (true) {
 
                 final int actualLength = actualBuf.read(actualArray);
                 assertEquals(message, expectedLength, actualLength);

@@ -92,7 +92,7 @@ public class HTMLElementTest extends WebTestCase {
             + "  var oNode = document.getElementById(_id);"
             + "  var col = oNode.all;"
             + "  var str = 'all node for ' + _id + ': ';"
-            + "  for (var i=0; i<col.length; ++i)"
+            + "  for (var i=0; i<col.length; i++)"
             + "  {"
             + "    str += col[i].tagName + ' ';"
             + "  }"
@@ -682,7 +682,7 @@ public class HTMLElementTest extends WebTestCase {
                 + "  oDiv.insertAdjacentHTML('" + beforeBegin + "', ' <div id=1>before begin</div> ');\n"
                 + "  oDiv.insertAdjacentHTML('" + afterBegin + "', ' <div id=2>after begin</div> ');\n"
                 + "  var coll = document.getElementsByTagName('DIV');\n"
-                + "  for (var i=0; i<coll.length; ++i) {\n"
+                + "  for (var i=0; i<coll.length; i++) {\n"
                 + "    alert(coll[i].id);\n"
                 + "  }\n"
                 + "}\n"
@@ -726,7 +726,7 @@ public class HTMLElementTest extends WebTestCase {
                 + "  oDiv.insertAdjacentElement('" + beforeBegin + "', makeElement( 1, 'before begin' ) );\n"
                 + "  oDiv.insertAdjacentElement('" + afterBegin + "', makeElement( 2, 'after begin' ) );\n"
                 + "  var coll = document.getElementsByTagName('DIV');\n"
-                + "  for (var i=0; i<coll.length; ++i) {\n"
+                + "  for (var i=0; i<coll.length; i++) {\n"
                 + "    alert(coll[i].id);\n"
                 + "  }\n"
                 + "}\n"
@@ -898,12 +898,12 @@ public class HTMLElementTest extends WebTestCase {
         final String[] expectedAlerts = {"Refused", "foo"};
         final int waitTime = 50;
         final int maxTime = 1000;
-        for( int time = 0; time < maxTime; time += waitTime ) {
+        for (int time = 0; time < maxTime; time += waitTime) {
             if (expectedAlerts.length <= collectedAlerts.size()) {
                 assertEquals(expectedAlerts, collectedAlerts);
                 return;
             }
-            Thread.sleep( waitTime );
+            Thread.sleep(waitTime);
         }
         fail( "Unable to collect expected alerts within " + maxTime + "ms; collected alerts: " + collectedAlerts );
     }
@@ -950,7 +950,7 @@ public class HTMLElementTest extends WebTestCase {
             + "function test()\n"
             + "{\n"
             + "    var oDiv = document.getElementById('myDiv');\n"
-            + "    for (var i=0; i<oDiv.children.length; ++i) \n"
+            + "    for (var i=0; i<oDiv.children.length; i++) \n"
             + "        alert(oDiv.children(i).tagName);\n"
             + "    var oCol = oDiv.children;\n"
             + "    alert(oCol.length);\n"
@@ -1418,7 +1418,7 @@ public class HTMLElementTest extends WebTestCase {
             testCurrentStyle(BrowserVersion.FIREFOX_2);
             fail("'currentStyle' is defined for only IE");
         }
-        catch(final Exception e) {
+        catch (final Exception e) {
             //expected
         }
     }

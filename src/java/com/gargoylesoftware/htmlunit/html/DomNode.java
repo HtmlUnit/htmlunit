@@ -275,7 +275,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * no children.
      */
     public DomNode getLastChild() {
-        if(firstChild_ != null) {
+        if (firstChild_ != null) {
             // last child is stored as the previous sibling of first child
             return firstChild_.previousSibling_;
         }
@@ -305,7 +305,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * the first node
      */
     public DomNode getPreviousSibling() {
-        if(parent_ == null || this == parent_.firstChild_) {
+        if (parent_ == null || this == parent_.firstChild_) {
             // previous sibling of first child points to last child
             return null;
         }
@@ -385,7 +385,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         String text = getChildrenAsText();
         text = reduceWhitespace(text);
         
-        if( isTrimmedText() ) {
+        if (isTrimmedText()) {
             text = text.trim();
         }
         
@@ -403,12 +403,12 @@ public abstract class DomNode implements Cloneable, Serializable {
         final StringBuffer buffer = new StringBuffer();
         final Iterator childIterator = getChildIterator();
 
-        if(!childIterator.hasNext()) {
+        if (!childIterator.hasNext()) {
             return "";
         }
         boolean previousNodeWasText = false;
         final StringBuffer textBuffer = new StringBuffer();
-        while(childIterator.hasNext()) {
+        while (childIterator.hasNext()) {
             final DomNode node = (DomNode)childIterator.next();
             if (node instanceof DomText) {
                 textBuffer.append(((DomText)node).getData());
@@ -423,12 +423,12 @@ public abstract class DomNode implements Cloneable, Serializable {
                     previousNodeWasText = false;
                 }
                 
-                if( node.isRenderedVisible() ) {
+                if (node.isRenderedVisible()) {
                     buffer.append(" ");
                     buffer.append(node.asText());
                     buffer.append(" ");
                 }
-                else if( node.getNodeName().equals( "p" ) ) {
+                else if (node.getNodeName().equals( "p" )) {
                     // this is a bit kludgey, but we can't add the space
                     //  inside the node's asText(), since it doesn't belong
                     //  with the contents of the 'p' tag
@@ -458,7 +458,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         final StringBuffer buffer = new StringBuffer( text.length() );
         final int length = text.length();
         boolean whitespace = false;
-        for( int i = 0; i < length; ++i) {
+        for (int i = 0; i < length; i++) {
             final char ch = text.charAt(i);
 
             // Translate non-breaking space to regular space.
@@ -474,7 +474,7 @@ public abstract class DomNode implements Cloneable, Serializable {
                     }
                 }
                 else {
-                    if( Character.isWhitespace(ch) ) {
+                    if (Character.isWhitespace(ch)) {
                         whitespace = true;
                         buffer.append(' ');
                     }
@@ -518,7 +518,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      */
     protected void printXml( final String indent, final PrintWriter printWriter ) {
 
-        printWriter.println(indent+this);
+        printWriter.println(indent + this);
         printChildrenAsXml( indent, printWriter );
     }
 
@@ -531,7 +531,7 @@ public abstract class DomNode implements Cloneable, Serializable {
     protected void printChildrenAsXml( final String indent, final PrintWriter printWriter ) {
         DomNode child = getFirstChild();
         while (child != null) {
-            child.printXml(indent+"  ", printWriter);
+            child.printXml(indent + "  ", printWriter);
             child = child.getNextSibling();
         }
     }
@@ -565,8 +565,8 @@ public abstract class DomNode implements Cloneable, Serializable {
         try {
             newnode = (DomNode) clone();
         }
-        catch( final CloneNotSupportedException e ) {
-            throw new IllegalStateException("Clone not supported for node ["+this+"]");
+        catch (final CloneNotSupportedException e) {
+            throw new IllegalStateException("Clone not supported for node [" + this + "]");
         }
 
         newnode.parent_ = null;
@@ -610,10 +610,10 @@ public abstract class DomNode implements Cloneable, Serializable {
     public DomNode appendChild(final DomNode node) {
 
         //clean up the new node, in case it is being moved
-        if(node != this) {
+        if (node != this) {
             node.basicRemove();
         }
-        if(firstChild_ == null) {
+        if (firstChild_ == null) {
             firstChild_ = node;
             firstChild_.previousSibling_ = node;
         }
@@ -643,16 +643,16 @@ public abstract class DomNode implements Cloneable, Serializable {
      */
     public void insertBefore(final DomNode newNode) throws IllegalStateException {
 
-        if(previousSibling_ == null) {
+        if (previousSibling_ == null) {
             throw new IllegalStateException();
         }
 
         //clean up the new node, in case it is being moved
-        if(newNode != this) {
+        if (newNode != this) {
             newNode.basicRemove();
         }
 
-        if(parent_.firstChild_ == this) {
+        if (parent_.firstChild_ == this) {
             parent_.firstChild_ = newNode;
         }
         else {
@@ -672,7 +672,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @throws IllegalStateException if this node is not a child of any other node
      */
     public void remove() throws IllegalStateException {
-        if(previousSibling_ == null) {
+        if (previousSibling_ == null) {
             throw new IllegalStateException();
         }
         final DomNode exParent = parent_;
@@ -688,16 +688,16 @@ public abstract class DomNode implements Cloneable, Serializable {
      * cut off all relationships this node has with siblings an parents
      */
     private void basicRemove() {
-        if(parent_ != null && parent_.firstChild_ == this) {
+        if (parent_ != null && parent_.firstChild_ == this) {
             parent_.firstChild_ = nextSibling_;
         }
-        else if(previousSibling_ != null && previousSibling_.nextSibling_ == this) {
+        else if (previousSibling_ != null && previousSibling_.nextSibling_ == this) {
             previousSibling_.nextSibling_ = nextSibling_;
         }
-        if(nextSibling_ != null && nextSibling_.previousSibling_ == this) {
+        if (nextSibling_ != null && nextSibling_.previousSibling_ == this) {
             nextSibling_.previousSibling_ = previousSibling_;
         }
-        if(parent_ != null && this == parent_.getLastChild()) {
+        if (parent_ != null && this == parent_.getLastChild()) {
             parent_.firstChild_.previousSibling_ = previousSibling_;
         }
 
@@ -789,7 +789,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         final PropertyChangeListener listener ) {
 
         Assert.notNull("listener", listener);
-        if( propertyChangeSupport_ == null ) {
+        if (propertyChangeSupport_ == null) {
             propertyChangeSupport_ = new PropertyChangeSupport(this);
         }
         propertyChangeSupport_.addPropertyChangeListener(listener);
@@ -805,7 +805,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         final PropertyChangeListener listener ) {
 
         Assert.notNull("listener", listener);
-        if( propertyChangeSupport_ != null ) {
+        if (propertyChangeSupport_ != null) {
             propertyChangeSupport_.removePropertyChangeListener(listener);
         }
     }
@@ -821,7 +821,7 @@ public abstract class DomNode implements Cloneable, Serializable {
     protected final synchronized void firePropertyChange(
         final String propertyName, final Object oldValue, final Object newValue ) {
 
-        if( propertyChangeSupport_ != null ) {
+        if (propertyChangeSupport_ != null) {
             propertyChangeSupport_.firePropertyChange(propertyName, oldValue, newValue);
         }
     }
@@ -841,7 +841,7 @@ public abstract class DomNode implements Cloneable, Serializable {
 
         /** @return the next object */
         public Object next() {
-            if(nextNode_ != null) {
+            if (nextNode_ != null) {
                 currentNode_ = nextNode_;
                 nextNode_ = nextNode_.nextSibling_;
                 return currentNode_;
@@ -853,7 +853,7 @@ public abstract class DomNode implements Cloneable, Serializable {
 
         /** remove the current object */
         public void remove() {
-            if(currentNode_ == null) {
+            if (currentNode_ == null) {
                 throw new IllegalStateException();
             }
             currentNode_.remove();
@@ -901,31 +901,31 @@ public abstract class DomNode implements Cloneable, Serializable {
 
         private void setNextElement() {
             HtmlElement next = getFirstChildElement(nextElement_);
-            if( next == null ) {
+            if (next == null) {
                 next = getNextSibling(nextElement_);
             }
-            if( next == null ) {
+            if (next == null) {
                 next = getNextElementUpwards(nextElement_);
             }
             nextElement_ = next;
         }
 
         private HtmlElement getNextElementUpwards( final DomNode startingNode ) {
-            if( startingNode == DomNode.this) {
+            if (startingNode == DomNode.this) {
                 return null;
             }
 
             final DomNode parent = startingNode.getParentNode();
-            if( parent == DomNode.this ) {
+            if (parent == DomNode.this) {
                 return null;
             }
 
             DomNode next = parent.getNextSibling();
-            while( next != null && next instanceof HtmlElement == false ) {
+            while (next != null && next instanceof HtmlElement == false) {
                 next = next.getNextSibling();
             }
 
-            if( next == null ) {
+            if (next == null) {
                 return getNextElementUpwards(parent);
             }
             else {
@@ -934,11 +934,11 @@ public abstract class DomNode implements Cloneable, Serializable {
         }
 
         private HtmlElement getFirstChildElement(final DomNode parent) {
-            if( parent instanceof HtmlNoScript && getPage().getWebClient().isJavaScriptEnabled() ) {
+            if (parent instanceof HtmlNoScript && getPage().getWebClient().isJavaScriptEnabled()) {
                 return null;
             }
             DomNode node = parent.getFirstChild();
-            while( node != null && node instanceof HtmlElement == false ) {
+            while (node != null && node instanceof HtmlElement == false) {
                 node = node.getNextSibling();
             }
             return (HtmlElement)node;
@@ -946,7 +946,7 @@ public abstract class DomNode implements Cloneable, Serializable {
 
         private HtmlElement getNextSibling( final HtmlElement element) {
             DomNode node = element.getNextSibling();
-            while( node != null && node instanceof HtmlElement == false ) {
+            while (node != null && node instanceof HtmlElement == false) {
                 node = node.getNextSibling();
             }
             return (HtmlElement)node;
@@ -1022,8 +1022,8 @@ public abstract class DomNode implements Cloneable, Serializable {
      */
     public void addDomChangeListener( final DomChangeListener listener ) {
         Assert.notNull("listener", listener);
-        synchronized( this ) {
-            if( domListeners_ == null ) {
+        synchronized (this) {
+            if (domListeners_ == null) {
                 domListeners_ = new ArrayList();
             }
             domListeners_.add( listener );
@@ -1040,8 +1040,8 @@ public abstract class DomNode implements Cloneable, Serializable {
      */
     public void removeDomChangeListener( final DomChangeListener listener ) {
         Assert.notNull("listener", listener);
-        synchronized( this ) {
-            if( domListeners_ != null ) {
+        synchronized (this) {
+            if (domListeners_ != null) {
                 domListeners_.remove( listener );
             }
         }
@@ -1058,16 +1058,16 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param addedNode the node that was added.
      */
     protected void fireNodeAddded(final DomNode parentNode, final DomNode addedNode) {
-        if( domListeners_ != null ) {
+        if (domListeners_ != null) {
             final DomChangeEvent event = new DomChangeEvent(parentNode, addedNode);
             synchronized (this) {
-                for( final Iterator iterator = domListeners_.iterator(); iterator.hasNext();) {
+                for (final Iterator iterator = domListeners_.iterator(); iterator.hasNext();) {
                     final DomChangeListener listener = (DomChangeListener)iterator.next();
                     listener.nodeAdded(event);
                 }
             }
         }
-        if( parent_ != null ) {
+        if (parent_ != null) {
             parent_.fireNodeAddded(parentNode, addedNode);
         }
     }
@@ -1083,16 +1083,16 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param deletedNode the node that was deleted.
      */
     protected void fireNodeDeleted(final DomNode parentNode, final DomNode deletedNode) {
-        if( domListeners_ != null ) {
+        if (domListeners_ != null) {
             final DomChangeEvent event = new DomChangeEvent(parentNode, deletedNode);
             synchronized (this) {
-                for( final Iterator iterator = domListeners_.iterator(); iterator.hasNext();) {
+                for (final Iterator iterator = domListeners_.iterator(); iterator.hasNext();) {
                     final DomChangeListener listener = (DomChangeListener)iterator.next();
                     listener.nodeDeleted(event);
                 }
             }
         }
-        if( parent_ != null ) {
+        if (parent_ != null) {
             parent_.fireNodeDeleted(parentNode, deletedNode);
         }
     }

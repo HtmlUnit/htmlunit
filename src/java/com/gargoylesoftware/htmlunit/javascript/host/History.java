@@ -53,7 +53,7 @@ public class History extends SimpleScriptable {
     /**
      * Create an instance.  Javascript objects must have a default constructor.
      */
-    public History() {}
+    public History() { }
 
     /**
      * Return the "length" property.  Currently hardcoded to return 0;

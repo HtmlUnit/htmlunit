@@ -68,7 +68,7 @@ public class ImmediateRefreshHandler implements RefreshHandler, Serializable  {
      */
     public void handleRefresh(final Page page, final URL url, final int seconds) throws IOException {
         final WebWindow window = page.getEnclosingWindow();
-        if( window == null ) {
+        if (window == null) {
             return;
         }
         final WebClient client = window.getWebClient();

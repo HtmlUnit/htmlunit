@@ -105,11 +105,11 @@ public class SimpleScriptable extends ScriptableObject {
     public String getClassName() {
         final String javaClassName = getClass().getName();
         final int index = javaClassName.lastIndexOf(".");
-        if( index == -1 ) {
-            throw new IllegalStateException("No dot in classname: "+javaClassName);
+        if (index == -1) {
+            throw new IllegalStateException("No dot in classname: " + javaClassName);
         }
 
-        return javaClassName.substring(index+1);
+        return javaClassName.substring(index + 1);
     }
 
     /**
@@ -119,7 +119,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @exception IllegalStateException If the DOM node could not be found.
      */
     public final DomNode getDomNodeOrDie() throws IllegalStateException {
-        if( domNode_ == null ) {
+        if (domNode_ == null) {
             final String clazz = getClass().getName();
             throw new IllegalStateException("DomNode has not been set for this SimpleScriptable: " + clazz);
         }
@@ -209,7 +209,7 @@ public class SimpleScriptable extends ScriptableObject {
         final DomNode domNode = (DomNode) object;
 
         final Object scriptObject = domNode.getScriptObject();
-        if( scriptObject != null ) {
+        if (scriptObject != null) {
             return (SimpleScriptable)scriptObject;
         }
         else {
@@ -227,7 +227,7 @@ public class SimpleScriptable extends ScriptableObject {
         // Get the JS class name for the specified DOM node.
         // Walk up the inheritance chain if necessary.
         Class javaScriptClass = null;
-        for( Class c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass() ) {
+        for (Class c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass()) {
             javaScriptClass = (Class) JavaScriptConfiguration.getHtmlJavaScriptMapping().get( c );
         }
 
@@ -235,7 +235,7 @@ public class SimpleScriptable extends ScriptableObject {
         if (javaScriptClass == null) {
             // We don't have a specific subclass for this element so create something generic.
             scriptable = new HTMLElement();
-            getLog().debug("No javascript class found for element <"+domNode.getNodeName()+">. Using HTMLElement");
+            getLog().debug("No javascript class found for element <" + domNode.getNodeName() + ">. Using HTMLElement");
         }
         else {
             try {
@@ -294,7 +294,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The specified object or null
      */
     public static Object getObjectArg( final int index, final Object[] args, final Object defaultValue ) {
-        if( index >= args.length ) {
+        if (index >= args.length) {
             return defaultValue;
         }
         else {
@@ -381,7 +381,7 @@ public class SimpleScriptable extends ScriptableObject {
      */
     protected static Window getWindow( final Scriptable s ) throws RuntimeException {
         final Scriptable top = ScriptableObject.getTopLevelScope( s );
-        if( top instanceof Window ) {
+        if (top instanceof Window) {
             return (Window) top;
         }
         else {

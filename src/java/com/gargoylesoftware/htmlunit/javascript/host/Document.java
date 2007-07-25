@@ -245,7 +245,7 @@ public final class Document extends NodeImpl {
      */
     private static String concatArgsAsString(final Object[] args) {
         final StringBuffer buffer = new StringBuffer();
-        for (int i=0; i<args.length; ++i) {
+        for (int i = 0; i < args.length; i++) {
             buffer.append(Context.toString(args[i]));
         }
         return buffer.toString();
@@ -442,8 +442,8 @@ public final class Document extends NodeImpl {
 
         final StringBuffer buffer = new StringBuffer();
 
-        for( int i=0; i<cookies.length; i++ ) {
-            if( i != 0 ) {
+        for (int i = 0; i < cookies.length; i++) {
+            if (i != 0) {
                 buffer.append(";");
             }
             buffer.append( cookies[i].getName() );
@@ -492,7 +492,7 @@ public final class Document extends NodeImpl {
             final int indexEqual = token.indexOf("=");
             if (indexEqual > -1) {
                 attributes.put(token.substring(0, indexEqual).toLowerCase().trim(),
-                        token.substring(indexEqual+1).trim());
+                        token.substring(indexEqual + 1).trim());
             }
             else {
                 attributes.put(token.toLowerCase().trim(), Boolean.TRUE);
@@ -502,7 +502,7 @@ public final class Document extends NodeImpl {
         // Try to parse the <expires> value as a date if specified
         Date expires = null;
         final String date = (String) attributes.get("expires");
-        if (date != null){
+        if (date != null) {
             try {
                 expires = DateUtil.parseDate(date);
             }
@@ -563,7 +563,7 @@ public final class Document extends NodeImpl {
      */
     public String jsxGet_referrer() {
         final String referrer = getHtmlPage().getWebResponse().getResponseHeaderValue("referrer");
-        if( referrer == null ) {
+        if (referrer == null) {
             return "";
         }
         else {
@@ -678,16 +678,16 @@ public final class Document extends NodeImpl {
             final HtmlElement htmlElement = getDomNodeOrDie().getPage().createElement(tagName);
             final Object jsElement = getScriptableFor(htmlElement);
 
-            if( jsElement == NOT_FOUND ) {
-                getLog().debug("createElement("+tagName
-                    +") cannot return a result as there isn't a javascript object for the html element "
+            if (jsElement == NOT_FOUND) {
+                getLog().debug("createElement(" + tagName
+                    + ") cannot return a result as there isn't a javascript object for the html element "
                     + htmlElement.getClass().getName());
             }
             else {
                 result = jsElement;
             }
         }
-        catch( final ElementNotFoundException e ) {
+        catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to NOT_FOUND
         }
         return result;
@@ -706,16 +706,16 @@ public final class Document extends NodeImpl {
             final HtmlElement htmlElement = getDomNodeOrDie().getPage().createElementNS(namespaceURI, qualifiedName);
             final Object jsElement = getScriptableFor(htmlElement);
 
-            if( jsElement == NOT_FOUND ) {
+            if (jsElement == NOT_FOUND) {
                 getLog().debug("createElementNS(" + namespaceURI + ',' + qualifiedName
-                    +") cannot return a result as there isn't a javascript object for the html element "
+                    + ") cannot return a result as there isn't a javascript object for the html element "
                     + htmlElement.getClass().getName());
             }
             else {
                 result = jsElement;
             }
         }
-        catch( final ElementNotFoundException e ) {
+        catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to NOT_FOUND
         }
         return result;
@@ -747,16 +747,16 @@ public final class Document extends NodeImpl {
             final DomNode domNode = new DomText(getDomNodeOrDie().getPage(), newData);
             final Object jsElement = getScriptableFor(domNode);
 
-            if( jsElement == NOT_FOUND ) {
-                getLog().debug("createTextNode("+newData
-                    +") cannot return a result as there isn't a javascript object for the DOM node "
+            if (jsElement == NOT_FOUND) {
+                getLog().debug("createTextNode(" + newData
+                    + ") cannot return a result as there isn't a javascript object for the DOM node "
                     + domNode.getClass().getName());
             }
             else {
                 result = jsElement;
             }
         }
-        catch( final ElementNotFoundException e ) {
+        catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to NOT_FOUND
         }
         return result;
@@ -774,9 +774,9 @@ public final class Document extends NodeImpl {
             final HtmlElement htmlElement = ((HtmlPage)getDomNodeOrDie()).getDocumentElement().getHtmlElementById(id);
             final Object jsElement = getScriptableFor(htmlElement);
 
-            if( jsElement == NOT_FOUND ) {
-                getLog().debug("getElementById("+id
-                    +") cannot return a result as there isn't a javascript object for the html element "
+            if (jsElement == NOT_FOUND) {
+                getLog().debug("getElementById(" + id
+                    + ") cannot return a result as there isn't a javascript object for the html element "
                     + htmlElement.getClass().getName());
             }
             else {
@@ -885,7 +885,7 @@ public final class Document extends NodeImpl {
     public Object jsxGet_body() {
         final List tagNames = Arrays.asList(new String[] {"body", "frameset"});
         final List list = getHtmlPage().getDocumentElement().getHtmlElementsByTagNames(tagNames);
-        if( list.size() == 0 ) {
+        if (list.size() == 0) {
             return NOT_FOUND;
         }
         else {
@@ -986,7 +986,7 @@ public final class Document extends NodeImpl {
         if (newDomain.indexOf(".") == -1
                 || !currentDomain.toLowerCase().endsWith("." + newDomain.toLowerCase())) {
             throw Context.reportRuntimeError("Illegal domain value, can not set domain from: \""
-                    + currentDomain + "\" to: \"" + newDomain +"\"");
+                    + currentDomain + "\" to: \"" + newDomain + "\"");
         }
 
         // Netscape down shifts the case of the domain

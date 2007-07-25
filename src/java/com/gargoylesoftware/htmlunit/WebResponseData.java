@@ -165,17 +165,17 @@ public class WebResponseData implements Serializable {
         for (final Iterator i = headers.iterator(); i.hasNext();) {
             final NameValuePair header = (NameValuePair) i.next();
             final String headerName = header.getName().trim();
-            if( headerName.equalsIgnoreCase( "content-encoding" ) ) {
+            if (headerName.equalsIgnoreCase("content-encoding")) {
                 encoding = header.getValue();
                 break;
             }
         }
-        if( encoding != null ) {
-            if( StringUtils.contains( encoding, "gzip" ) ) {
-                stream = new GZIPInputStream( stream );
+        if (encoding != null) {
+            if (StringUtils.contains(encoding, "gzip")) {
+                stream = new GZIPInputStream(stream);
             }
         }
-        return IOUtils.toByteArray( stream );
+        return IOUtils.toByteArray(stream);
     }
 
     /**

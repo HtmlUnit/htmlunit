@@ -181,7 +181,7 @@ public class DomNodeTest extends WebTestCase {
         assertSame("new node next sibling", null, newNode.getNextSibling());
         assertSame("next sibling", newNode, node.getNextSibling());
         assertSame("parent", parent, newNode.getParentNode());
-        assertEquals(position+1, readPositionAmongParentChildren(newNode));
+        assertEquals(position + 1, readPositionAmongParentChildren(newNode));
 
         final DomNode newNode2 = new DomText(page, "test2");
         parent.appendChild(newNode2);
@@ -230,7 +230,7 @@ public class DomNodeTest extends WebTestCase {
             if (child == node) {
                 return i;
             }
-            ++i;
+            i++;
         }
 
         return -1;

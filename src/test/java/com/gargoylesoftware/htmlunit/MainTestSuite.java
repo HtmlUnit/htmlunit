@@ -78,20 +78,20 @@ public class MainTestSuite extends RecursiveTestSuite {
         properties.put("org.apache.commons.logging.simplelog.defaultlog", "trace");
 
         final String prefix = "org.apache.commons.logging.simplelog.log.";
-        properties.put(prefix+"org.apache.commons.httpclient.Authenticator", "info");
-        properties.put(prefix+"org.apache.commons.httpclient.Cookie", "info");
-        properties.put(prefix+"org.apache.commons.httpclient.HeaderElement", "info");
-        properties.put(prefix+"org.apache.commons.httpclient.HttpClient", "info");
-        properties.put(prefix+"org.apache.commons.httpclient.HttpConnection", "info");
-        properties.put(prefix+"org.apache.commons.httpclient.HttpMethod", "info");
-        properties.put(prefix+"org.apache.commons.httpclient.HttpParser", "info");
-        properties.put(prefix+"org.apache.commons.httpclient.HttpState", "info");
-        properties.put(prefix+"org.apache.commons.httpclient.ResponseInputStream", "info");
-        properties.put(prefix+"org.apache.commons.httpclient.cookie.CookieSpec", "info");
-        properties.put(prefix+"org.apache.commons.httpclient.methods.GetMethod", "info");
-        properties.put(prefix+"org.apache.commons.httpclient.HttpMethodBase", "info");
-        properties.put(prefix+"org.apache.commons.logging.simplelog.showdatetime", "true");
-        properties.put(prefix+"httpclient.wire", "info");
-        properties.put(prefix+"org.apache.commons.httpclient", "info");
+        properties.put(prefix + "org.apache.commons.httpclient.Authenticator", "info");
+        properties.put(prefix + "org.apache.commons.httpclient.Cookie", "info");
+        properties.put(prefix + "org.apache.commons.httpclient.HeaderElement", "info");
+        properties.put(prefix + "org.apache.commons.httpclient.HttpClient", "info");
+        properties.put(prefix + "org.apache.commons.httpclient.HttpConnection", "info");
+        properties.put(prefix + "org.apache.commons.httpclient.HttpMethod", "info");
+        properties.put(prefix + "org.apache.commons.httpclient.HttpParser", "info");
+        properties.put(prefix + "org.apache.commons.httpclient.HttpState", "info");
+        properties.put(prefix + "org.apache.commons.httpclient.ResponseInputStream", "info");
+        properties.put(prefix + "org.apache.commons.httpclient.cookie.CookieSpec", "info");
+        properties.put(prefix + "org.apache.commons.httpclient.methods.GetMethod", "info");
+        properties.put(prefix + "org.apache.commons.httpclient.HttpMethodBase", "info");
+        properties.put(prefix + "org.apache.commons.logging.simplelog.showdatetime", "true");
+        properties.put(prefix + "httpclient.wire", "info");
+        properties.put(prefix + "org.apache.commons.httpclient", "info");
     }
 }

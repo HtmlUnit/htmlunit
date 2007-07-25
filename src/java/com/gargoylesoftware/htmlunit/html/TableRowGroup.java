@@ -75,9 +75,9 @@ public abstract class TableRowGroup extends ClickableElement {
         final List resultList = new ArrayList();
 
         final Iterator iterator = getChildElementsIterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement)iterator.next();
-            if( element instanceof HtmlTableRow ) {
+            if (element instanceof HtmlTableRow) {
                 resultList.add(element);
             }
         }

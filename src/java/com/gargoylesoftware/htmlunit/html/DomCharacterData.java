@@ -106,12 +106,12 @@ public abstract class DomCharacterData extends DomNode {
      * @param count The number of characters to be deleted.
      */
     public void deleteData(final int offset, final int count) {
-        if(offset < 0 || count < 0) {
-            throw new IllegalArgumentException("offset: "+offset+" count: "+count);
+        if (offset < 0 || count < 0) {
+            throw new IllegalArgumentException("offset: " + offset + " count: " + count);
         }
 
         final int tailLength = Math.max(data_.length() - count - offset, 0);
-        if(tailLength > 0) {
+        if (tailLength > 0) {
             data_ = data_.substring(0, offset) + data_.substring(offset + count, offset + count + tailLength);
         }
         else {
@@ -152,7 +152,7 @@ public abstract class DomCharacterData extends DomNode {
     public String substringData(final int offset, final int count) {
         final int length = data_.length();
         if (count < 0 || offset < 0 || offset > length - 1) {
-            throw new IllegalArgumentException("offset: "+offset+" count: "+count);
+            throw new IllegalArgumentException("offset: " + offset + " count: " + count);
         }
 
         final int tailIndex = Math.min(offset + count, length);

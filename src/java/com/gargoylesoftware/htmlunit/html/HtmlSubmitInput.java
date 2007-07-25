@@ -88,7 +88,7 @@ public class HtmlSubmitInput extends HtmlInput {
     HtmlSubmitInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
-        if( getPage().getWebClient().getBrowserVersion().isIE() && !isAttributeDefined( "value" ) ) {
+        if (getPage().getWebClient().getBrowserVersion().isIE() && !isAttributeDefined("value")) {
             setAttributeValue("value", DEFAULT_VALUE);
         }
     }
@@ -107,7 +107,7 @@ public class HtmlSubmitInput extends HtmlInput {
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
         final HtmlForm form = getEnclosingForm();
-        if( form != null ) {
+        if (form != null) {
             return form.submit(this);
         }
         else {
@@ -128,7 +128,7 @@ public class HtmlSubmitInput extends HtmlInput {
      */
     public String asText() {
         String text = super.asText();
-        if( text == ATTRIBUTE_NOT_DEFINED ) {
+        if (text == ATTRIBUTE_NOT_DEFINED) {
             text = DEFAULT_VALUE;
         }
         return text;
@@ -140,9 +140,9 @@ public class HtmlSubmitInput extends HtmlInput {
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
         printWriter.print(getTagName());
 
-        for (final Iterator it=getAttributeEntriesIterator(); it.hasNext();) {
+        for (final Iterator it = getAttributeEntriesIterator(); it.hasNext();) {
             final HtmlAttr attribute = (HtmlAttr)it.next();
-            if( !attribute.getNodeName().equals( "value" ) || !attribute.getValue().equals( DEFAULT_VALUE ) ) {
+            if (!attribute.getNodeName().equals("value") || !attribute.getValue().equals(DEFAULT_VALUE)) {
                 printWriter.print(" ");
                 final String name = attribute.getNodeName();
                 printWriter.print(name);
@@ -160,7 +160,7 @@ public class HtmlSubmitInput extends HtmlInput {
      *  and <tt>value</tt> attribute is not defined.
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
-        if( getNameAttribute().length() != 0 && !isAttributeDefined( "value" ) ) {
+        if (getNameAttribute().length() != 0 && !isAttributeDefined("value")) {
             return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), DEFAULT_VALUE )};
         }
         else {

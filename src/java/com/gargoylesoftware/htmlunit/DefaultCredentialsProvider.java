@@ -197,7 +197,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
         }
 
         final Map credentials;
-        if( proxy ) {
+        if (proxy) {
             credentials = proxyCredentials_;
         }
         else {

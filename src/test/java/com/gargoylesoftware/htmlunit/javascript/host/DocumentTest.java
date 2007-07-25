@@ -91,7 +91,7 @@ public class DocumentTest extends WebTestCase {
     public void testFormsAccessor_TwoForms() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.forms.length)\n"
             + "    for( var i=0; i< document.forms.length; i++) {\n"
             + "        alert( document.forms[i].name )\n"
@@ -151,7 +151,7 @@ public class DocumentTest extends WebTestCase {
             + "    for( var i=0; i< document.forms.length; i++) {\n"
             + "        alert( document.forms[i].name )\n"
             + "    }\n"
-            +"}\n"
+            + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>"
             + "</body></html>";
@@ -460,10 +460,10 @@ public class DocumentTest extends WebTestCase {
      */
     public void testDocumentCreateElementNS() throws Exception {
         try {
-            testDocumentCreateElementNS( BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {} );
-            fail( "IE6 does not support createElementNS");
+            testDocumentCreateElementNS(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {});
+            fail("IE6 does not support createElementNS");
         }
-        catch( final Exception e ) {
+        catch (final Exception e) {
             //expected exception
         }
         testDocumentCreateElementNS( BrowserVersion.FIREFOX_2, new String[] {
@@ -2094,7 +2094,7 @@ public class DocumentTest extends WebTestCase {
         client.setWebConnection(webConnection);
         webConnection.setResponse(URL_FIRST, content);
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        assertTrue(page.asText().indexOf("Hello World")>=0);
+        assertTrue(page.asText().indexOf("Hello World") >= 0);
     }
 
     /**
@@ -2523,7 +2523,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDocumentCloneNode() throws Exception {
-        if( notYetImplemented() ) {
+        if (notYetImplemented()) {
             return;
         }
         
@@ -2540,7 +2540,7 @@ public class DocumentTest extends WebTestCase {
                 + "      assert(clone,'clone.getElementById(\"id1\").ownerDocument === document');\n"
                 + "    }\n"
                 + "    function assert(clone, expr, info) {\n"
-                + "      if(! eval(expr)) {\n"
+                + "      if (!eval(expr)) {\n"
                 + "        alert('failed assertion: ' + expr + ', info: ' + info);\n"
                 + "      }\n"
                 + "    }\n"

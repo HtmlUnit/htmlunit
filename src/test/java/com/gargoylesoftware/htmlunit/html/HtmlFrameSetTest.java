@@ -299,7 +299,7 @@ public class HtmlFrameSetTest extends WebTestCase {
             + "  <noframes>"
             + "    <div><script>alert(1);</script></div>"
             + "    <script src='http://third'></script>"
-            +"   </noframes>"
+            + "   </noframes>"
             + "</frameset></html>";
         final String secondContent
             = "<html><body><script>alert(2);</script></body></html>";

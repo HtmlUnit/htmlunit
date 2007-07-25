@@ -65,11 +65,11 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             final String sourceName, final HtmlElement htmlElement) {
         final SortedSet textConstants = initTextConstants( sourceCode );
         int index = -1;
-        while( ( index = sourceCode.indexOf( "/*@cc_on", index + 1 ) ) != -1 ) {
+        while (( index = sourceCode.indexOf( "/*@cc_on", index + 1 ) ) != -1) {
             addTextConstant(textConstants, index, index + "/*@cc_on".length(), "");
         }
         index = -1;
-        while( ( index = sourceCode.indexOf( "@*/", index + 1 ) ) != -1 ) {
+        while (( index = sourceCode.indexOf( "@*/", index + 1 ) ) != -1) {
             addTextConstant(textConstants, index, index + "@*/".length(), "" );
         }
         sourceCode = restoreTextConstants(sourceCode, textConstants);
@@ -117,7 +117,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             final int endIndex, final String textToReplace ) {
         for (final Iterator it = textConstants.iterator(); it.hasNext();) {
             final TextConstant c = (TextConstant)it.next();
-            if( startIndex >= c.startIndex_ && startIndex < c.endIndex_ ) {
+            if (startIndex >= c.startIndex_ && startIndex < c.endIndex_) {
                 return;
             }
         }
@@ -132,10 +132,10 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         final SortedSet textConstants = new TreeSet();
         char boundaryChar = 0;
         int lastStartIndex = -1;
-        for( int index=0; index < sourceCode.length(); index++ ) {
+        for (int index = 0; index < sourceCode.length(); index++) {
             final char currentChar = sourceCode.charAt( index );
-            if( currentChar == '\'' || currentChar == '"' ) {
-                if( boundaryChar == 0 && index < sourceCode.length() - 1) {
+            if (currentChar == '\'' || currentChar == '"') {
+                if (boundaryChar == 0 && index < sourceCode.length() - 1) {
                     boundaryChar = currentChar;
                     lastStartIndex = index + 1;
                 }
@@ -153,9 +153,9 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         int variation = 0;
         for (final Iterator iterator = textConstants.iterator(); iterator.hasNext();) {
             final TextConstant constant = (TextConstant)iterator.next();
-            sourceCode = sourceCode.substring( 0, constant.startIndex_+ variation )
+            sourceCode = sourceCode.substring( 0, constant.startIndex_ + variation )
                 + constant.textToReplace_
-                + sourceCode.substring( constant.endIndex_+ variation );
+                + sourceCode.substring( constant.endIndex_ + variation );
                         
             variation += constant.textToReplace_.length() - (constant.endIndex_ - constant.startIndex_);
         }

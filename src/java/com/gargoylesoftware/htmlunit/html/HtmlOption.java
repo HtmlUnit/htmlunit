@@ -288,7 +288,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * content of the tag if the attribute exists.
      */
     public String asText() {
-        if (getLabelAttribute() != ATTRIBUTE_NOT_DEFINED){
+        if (getLabelAttribute() != ATTRIBUTE_NOT_DEFINED) {
             return getLabelAttribute();
         }
         return super.asText();

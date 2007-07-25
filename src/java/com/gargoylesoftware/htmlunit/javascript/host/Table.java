@@ -83,7 +83,7 @@ public class Table extends RowContainer {
      */
     public Object jsxGet_caption() {
         final List captions = getHtmlElementOrDie().getHtmlElementsByTagName("caption");
-        if(captions.isEmpty()) {
+        if (captions.isEmpty()) {
             return null;
         }
         else {
@@ -98,7 +98,7 @@ public class Table extends RowContainer {
      */
     public Object jsxGet_tFoot() {
         final List tfoots = getHtmlElementOrDie().getHtmlElementsByTagName("tfoot");
-        if(tfoots.isEmpty()) {
+        if (tfoots.isEmpty()) {
             return null;
         }
         else {
@@ -113,7 +113,7 @@ public class Table extends RowContainer {
      */
     public Object jsxGet_tHead() {
         final List theads = getHtmlElementOrDie().getHtmlElementsByTagName("thead");
-        if(theads.isEmpty()) {
+        if (theads.isEmpty()) {
             return null;
         }
         else {

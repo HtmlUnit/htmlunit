@@ -83,10 +83,10 @@ public final class InputElementFactory implements IElementFactory {
             final String qualifiedName, final Attributes attributes) {
     
         String type = null;
-        if(attributes != null) {
+        if (attributes != null) {
             type = attributes.getValue("type");
         }
-        if(type == null) {
+        if (type == null) {
             type = "";
         }
         else {
@@ -94,48 +94,48 @@ public final class InputElementFactory implements IElementFactory {
         }
 
         final Map attributeMap = new HashMap();
-        if(attributes != null) {
-            for(int i=0; i < attributes.getLength(); i++) {
+        if (attributes != null) {
+            for (int i = 0; i < attributes.getLength(); i++) {
                 attributeMap.put(attributes.getLocalName(i), attributes.getValue(i));
             }
         }
 
         final HtmlInput result;
-        if( type.length() == 0 ) {
+        if (type.length() == 0) {
             // This not an illegal value, as it defaults to "text"
             // cf http://www.w3.org/TR/REC-html40/interact/forms.html#adef-type-INPUT
             // and the common browsers seem to treat it as a "text" input so we will as well.
             attributeMap.put("type", "text");
             result = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if( type.equals("submit") ) {
+        else if (type.equals("submit")) {
             result = new HtmlSubmitInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if( type.equals("checkbox")) {
+        else if (type.equals("checkbox")) {
             result = new HtmlCheckBoxInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if( type.equals("radio")) {
+        else if (type.equals("radio")) {
             result = new HtmlRadioButtonInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if( type.equals("text")) {
+        else if (type.equals("text")) {
             result = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if( type.equals("hidden")) {
+        else if (type.equals("hidden")) {
             result = new HtmlHiddenInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if( type.equals("password")) {
+        else if (type.equals("password")) {
             result = new HtmlPasswordInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if( type.equals("image")) {
+        else if (type.equals("image")) {
             result = new HtmlImageInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if( type.equals("reset")) {
+        else if (type.equals("reset")) {
             result = new HtmlResetInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if( type.equals("button")) {
+        else if (type.equals("button")) {
             result = new HtmlButtonInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if( type.equals("file")) {
+        else if (type.equals("file")) {
             result = new HtmlFileInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else {

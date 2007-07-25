@@ -265,7 +265,7 @@ public class StyleTest extends WebTestCase {
             testGetPropertyValue(BrowserVersion.INTERNET_EXPLORER_7_0);
             fail("getPropertyValue is not supported in IE");
         }
-        catch(final Exception e) {
+        catch (final Exception e) {
             //expected
         }
     }

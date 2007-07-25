@@ -98,11 +98,11 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      * from all methods that use the default value.
      */
     private void initDefaultValue() {
-        if( defaultValue_ == null ) {
+        if (defaultValue_ == null) {
             final DomText child = (DomText) getFirstChild();
-            if( child != null ) {
+            if (child != null) {
                 defaultValue_ = child.getData();
-                if( defaultValue_ == null ) {
+                if (defaultValue_ == null) {
                     defaultValue_ = "";
                 }
             }
@@ -171,7 +171,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      */
     public void setDefaultValue( final String defaultValue ) {
         initDefaultValue();
-        if( defaultValue == null ) {
+        if (defaultValue == null) {
             defaultValue_ = "";
         }
         else {
@@ -357,7 +357,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      */
     public String getSelectedText() {
         String text = null;
-        if( selectionStart_ != selectionEnd_ ) {
+        if (selectionStart_ != selectionEnd_) {
             text = getText().substring( selectionStart_, selectionEnd_ );
         }
         return text;
@@ -376,14 +376,14 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      * @param selectionStart the start position of the text >= 0
      */
     public void setSelectionStart(int selectionStart) {
-        if( selectionStart < 0 ) {
+        if (selectionStart < 0) {
             selectionStart = 0;
         }
         final int length = getText().length();
-        if( selectionStart > length ) {
+        if (selectionStart > length) {
             selectionStart = length;
         }
-        if( selectionEnd_ < selectionStart ) {
+        if (selectionEnd_ < selectionStart) {
             selectionEnd_ = selectionStart;
         }
         this.selectionStart_ = selectionStart;
@@ -403,14 +403,14 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
 
      */
     public void setSelectionEnd(int selectionEnd) {
-        if( selectionEnd < 0 ) {
+        if (selectionEnd < 0) {
             selectionEnd = 0;
         }
         final int length = getText().length();
-        if( selectionEnd > length ) {
+        if (selectionEnd > length) {
             selectionEnd = length;
         }
-        if( selectionEnd < selectionStart_ ) {
+        if (selectionEnd < selectionStart_) {
             selectionStart_ = selectionEnd;
         }
         this.selectionEnd_ = selectionEnd;

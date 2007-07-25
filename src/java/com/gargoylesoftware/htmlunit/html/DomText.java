@@ -73,7 +73,7 @@ public class DomText extends DomCharacterData {
      */
     public DomText splitText(final int offset) {
         if (offset < 0 || offset > getLength() ) {
-            throw new IllegalArgumentException("offset: "+offset+" data.length: "+getLength());
+            throw new IllegalArgumentException("offset: " + offset + " data.length: " + getLength());
         }
 
         // split text into two separate nodes

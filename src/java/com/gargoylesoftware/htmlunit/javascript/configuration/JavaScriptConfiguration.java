@@ -98,11 +98,11 @@ public final class JavaScriptConfiguration {
      */
     private JavaScriptConfiguration(final BrowserVersion browser) {
         browser_ = browser;
-        if( XmlDocument_ == null ) {
+        if (XmlDocument_ == null) {
             loadConfiguration();
         }
 
-        if( XmlDocument_ == null ) {
+        if (XmlDocument_ == null) {
             throw new IllegalStateException("Configuration was not initialized - see log for details");
         }
         configuration_ = buildUsageMap(browser);
@@ -141,13 +141,13 @@ public final class JavaScriptConfiguration {
     protected static void loadConfiguration() {
         try {
             final Reader reader = getConfigurationFileAsReader();
-            if( reader == null ) {
+            if (reader == null) {
                 getLog().error("Unable to load JavaScriptConfiguration.xml");
             }
             loadConfiguration(reader);
             reader.close();
         }
-        catch( final Exception e ) {
+        catch (final Exception e) {
             getLog().error("Error when loading JavascriptConfiguration.xml", e);
             e.printStackTrace();
         }
@@ -171,13 +171,13 @@ public final class JavaScriptConfiguration {
 
             XmlDocument_ = documentBuilder.parse( inputSource );
         }
-        catch( final SAXParseException parseException ) {
+        catch (final SAXParseException parseException) {
             getLog().error( "line=[" + parseException.getLineNumber()
                     + "] columnNumber=[" + parseException.getColumnNumber()
                     + "] systemId=[" + parseException.getSystemId()
                     + "] publicId=[" + parseException.getPublicId() + "]", parseException );
         }
-        catch( final Exception e ) {
+        catch (final Exception e) {
             getLog().error("Error when loading JavascriptConfiguration.xml", e);
         }
     }
@@ -194,7 +194,7 @@ public final class JavaScriptConfiguration {
         }
         JavaScriptConfiguration configuration = (JavaScriptConfiguration)ConfigurationMap_.get(browserVersion);
 
-        if( configuration == null ) {
+        if (configuration == null) {
             configuration = new JavaScriptConfiguration(browserVersion);
             ConfigurationMap_.put( browserVersion, configuration );
         }
@@ -224,23 +224,23 @@ public final class JavaScriptConfiguration {
     private static InputStream getResourceAsStream( final String name ) {
         Assert.notNull("name", name);
         InputStream inputStream = JavaScriptConfiguration.class.getResourceAsStream(name);
-        if( inputStream == null ) {
+        if (inputStream == null) {
             try {
                 final String localizedName = name.replace( '/', File.separatorChar );
                 inputStream = new FileInputStream( localizedName );
             }
-            catch( final IOException e ) {
+            catch (final IOException e) {
                 // Fall through
             }
         }
 
         // If we are running maven tests then the path will be slightly different
-        if( inputStream == null ) {
+        if (inputStream == null) {
             try {
-                final String localizedName = ("./src/java"+name).replace( '/', File.separatorChar );
+                final String localizedName = ("./src/java" + name).replace( '/', File.separatorChar );
                 inputStream = new FileInputStream( localizedName );
             }
-            catch( final IOException e ) {
+            catch (final IOException e) {
                 // Fall through
             }
         }
@@ -258,10 +258,10 @@ public final class JavaScriptConfiguration {
     private Map buildUsageMap(final BrowserVersion browser) {
         final Map classMap = new HashMap(30);
         Node node = XmlDocument_.getDocumentElement().getFirstChild();
-        while( node != null ) {
-            if( node instanceof Element ) {
+        while (node != null) {
+            if (node instanceof Element) {
                 final Element element = (Element)node;
-                if( element.getTagName().equals("class")) {
+                if (element.getTagName().equals("class")) {
                     final String className = element.getAttribute("name");
                     if (!testToExcludeElement(element)) {
                         try {
@@ -308,11 +308,11 @@ public final class JavaScriptConfiguration {
                     superclassName, htmlClassname, jsObjectFlag);
         ClassnameMap_.put(linkedClassname, className);
         Node node = element.getFirstChild();
-        while( node != null ) {
-            if( node instanceof Element ) {
+        while (node != null) {
+            if (node instanceof Element) {
                 final Element childElement = (Element)node;
                 final String tagName = childElement.getTagName();
-                if( tagName.equals("property")) {
+                if (tagName.equals("property")) {
                     parsePropertyElement(classConfiguration, childElement);
                 }
                 else if (tagName.equals("function")) {
@@ -398,16 +398,16 @@ public final class JavaScriptConfiguration {
         boolean allowBrowser = false;
         boolean javascriptConstraint = false;
         boolean allowJavascriptConstraint = false;
-        while( node != null ) {
-            if( node instanceof Element ) {
+        while (node != null) {
+            if (node instanceof Element) {
                 final Element childElement = (Element)node;
-                if( childElement.getTagName().equals("browser")) {
+                if (childElement.getTagName().equals("browser")) {
                     browserConstraint = true;
                     if (testToIncludeForBrowserConstraint(childElement, browser_)) {
                         allowBrowser = true;
                     }
                 }
-                else if( childElement.getTagName().equals("javascript")) {
+                else if (childElement.getTagName().equals("javascript")) {
                     javascriptConstraint = true;
                     if (testToIncludeForJSConstraint(childElement, browser_)) {
                         allowJavascriptConstraint = true;
@@ -691,7 +691,7 @@ public final class JavaScriptConfiguration {
      * @return the mappings
      */
     public static synchronized Map getHtmlJavaScriptMapping() {
-        if( HtmlJavaScriptMap_ != null ) {
+        if (HtmlJavaScriptMap_ != null) {
             return HtmlJavaScriptMap_;
         }
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();

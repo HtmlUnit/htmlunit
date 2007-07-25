@@ -91,13 +91,13 @@ public final class ClassConfiguration {
         if (jsConstructor != null && jsConstructor.length() != 0) {
             Method foundCtor = null;
             final Method[] methods = linkedClass_.getMethods();
-            for( int i=0; i < methods.length; i++ ) {
-                if( methods[i].getName().equals( jsConstructor ) ) {
+            for (int i = 0; i < methods.length; i++) {
+                if (methods[i].getName().equals( jsConstructor )) {
                     foundCtor = methods[i];
                     break;
                 }
             }
-            if( foundCtor == null ) {
+            if (foundCtor == null) {
                 throw new IllegalStateException( "Constructor method \"" + jsConstructor +
                         "\" in class \"" + implementingClass + " is not found." );
             }
@@ -146,13 +146,13 @@ public final class ClassConfiguration {
         if (writeable) {
             final Method[] methods = linkedClass_.getMethods();
             final String setMethodName = SETTER_PREFIX + name;
-            for( int i=0; i<methods.length; i++ ) {
-                if( methods[i].getName().equals(setMethodName) && methods[i].getParameterTypes().length == 1 ) {
+            for (int i = 0; i < methods.length; i++) {
+                if (methods[i].getName().equals(setMethodName) && methods[i].getParameterTypes().length == 1) {
                     info.setWriteMethod(methods[i]);
                     break;
                 }
             }
-            if(info.getWriteMethod() == null) {
+            if (info.getWriteMethod() == null) {
                 throw new IllegalStateException("Method '" + SETTER_PREFIX + name + "' was not found for " + name
                     + " property in " + linkedClass_.getName());
             }
@@ -184,13 +184,13 @@ public final class ClassConfiguration {
         final FunctionInfo info = new FunctionInfo();
         final Method[] methods = linkedClass_.getMethods();
         final String setMethodName = FUNCTION_PREFIX + name;
-        for( int i=0; i<methods.length; i++ ) {
-            if( methods[i].getName().equals(setMethodName)) {
+        for (int i = 0; i < methods.length; i++) {
+            if (methods[i].getName().equals(setMethodName)) {
                 info.setFunctionMethod(methods[i]);
                 break;
             }
         }
-        if(info.getFunctionMethod() == null) {
+        if (info.getFunctionMethod() == null) {
             throw new IllegalStateException("Method '" + FUNCTION_PREFIX + name + "' was not found for " + name
                 + " function in " + linkedClass_.getName());
         }

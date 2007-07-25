@@ -80,6 +80,6 @@ public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {
      * @return a string representation of this object
      */
     public String toString() {
-        return "KeyValuePair(\""+getKey()+"\", \""+getValue()+"\")";
+        return "KeyValuePair(\"" + getKey() + "\", \"" + getValue() + "\")";
     }
 }

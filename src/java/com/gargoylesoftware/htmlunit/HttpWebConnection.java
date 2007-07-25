@@ -125,21 +125,21 @@ public class HttpWebConnection extends WebConnectionImpl {
             final long startTime = System.currentTimeMillis();
             final int responseCode = httpClient.executeMethod(hostConfiguration, httpMethod);
             final long endTime = System.currentTimeMillis();
-            return makeWebResponse( responseCode, httpMethod, url, endTime-startTime, webRequestSettings.getCharset() );
+            return makeWebResponse(responseCode, httpMethod, url, endTime - startTime, webRequestSettings.getCharset());
         }
-        catch( final HttpException e ) {
+        catch (final HttpException e) {
             // KLUDGE: hitting www.yahoo.com will cause an exception to be thrown while
             // www.yahoo.com/ (note the trailing slash) will not.  If an exception is
             // caught here then check to see if this is the situation.  If so, then retry
             // it with a trailing slash.  The bug manifests itself with httpClient
             // complaining about not being able to find a line with HTTP/ on it.
-            if( url.getPath().length() == 0 ) {
+            if (url.getPath().length() == 0) {
                 final StringBuffer buffer = new StringBuffer();
                 buffer.append(url.getProtocol());
                 buffer.append("://");
                 buffer.append(url.getHost());
                 buffer.append("/");
-                if( url.getQuery() != null ) {
+                if (url.getQuery() != null) {
                     buffer.append(url.getQuery());
                 }
                 //TODO: There might be a bug here since the original encoding type is lost.
@@ -181,12 +181,12 @@ public class HttpWebConnection extends WebConnectionImpl {
         try {
             uri = new URI(url.toExternalForm(), false);
         }
-        catch( final URIException e ) {
+        catch (final URIException e) {
             // Theoretically impossible but ....
-            throw new IllegalStateException("Unable to create URI from URL: "+url.toExternalForm());
+            throw new IllegalStateException("Unable to create URI from URL: " + url.toExternalForm());
         }
         hostConfiguration.setHost(uri);
-        if( webRequestSettings.getProxyHost() != null ) {
+        if (webRequestSettings.getProxyHost() != null) {
             final String proxyHost = webRequestSettings.getProxyHost();
             final int proxyPort = webRequestSettings.getProxyPort();
             hostConfiguration.setProxy( proxyHost, proxyPort );
@@ -205,7 +205,7 @@ public class HttpWebConnection extends WebConnectionImpl {
 
         final HttpMethodBase httpMethod;
         String path = webRequestSettings.getURL().getPath();
-        if( path.length() == 0 ) {
+        if (path.length() == 0) {
             path = "/";
         }
         if (SubmitMethod.GET == webRequestSettings.getSubmitMethod()) {
@@ -226,7 +226,7 @@ public class HttpWebConnection extends WebConnectionImpl {
             postMethod.getParams().setContentCharset(webRequestSettings.getCharset());
 
             final String queryString = webRequestSettings.getURL().getQuery();
-            if( queryString != null ) {
+            if (queryString != null) {
                 postMethod.setQueryString(queryString);
             }
             if (webRequestSettings.getRequestBody() != null ) {
@@ -239,13 +239,13 @@ public class HttpWebConnection extends WebConnectionImpl {
             // be able to support two elements with the same name.
             if (webRequestSettings.getEncodingType() == FormEncodingType.URL_ENCODED) {
                 Iterator iterator = webRequestSettings.getRequestParameters().iterator();
-                while( iterator.hasNext() ) {
+                while (iterator.hasNext()) {
                     final NameValuePair pair = ( NameValuePair )iterator.next();
                     postMethod.removeParameter( pair.getName(), pair.getValue() );
                 }
 
                 iterator = webRequestSettings.getRequestParameters().iterator();
-                while( iterator.hasNext() ) {
+                while (iterator.hasNext()) {
                     final NameValuePair pair = ( NameValuePair )iterator.next();
                     postMethod.addParameter( pair.getName(), pair.getValue() );
                 }
@@ -298,7 +298,7 @@ public class HttpWebConnection extends WebConnectionImpl {
                     webRequestSettings.getCredentialsProvider());
         }
         
-        if( !getWebClient().isCookiesEnabled() ) {
+        if (!getWebClient().isCookiesEnabled()) {
             httpMethod.getParams().setCookiePolicy( CookiePolicy.IGNORE_COOKIES );
         }
         return httpMethod;
@@ -315,7 +315,7 @@ public class HttpWebConnection extends WebConnectionImpl {
 
             // Disable informational messages from httpclient
             final Log log = LogFactory.getLog("httpclient.wire");
-            if( log instanceof SimpleLog ) {
+            if (log instanceof SimpleLog) {
                 ((SimpleLog)log).setLevel( SimpleLog.LOG_LEVEL_WARN );
             }
 
@@ -457,9 +457,9 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     private void writeRequestHeadersToHttpMethod( final HttpMethod httpMethod, final Map requestHeaders ) {
-        synchronized( requestHeaders ) {
+        synchronized (requestHeaders) {
             final Iterator iterator = requestHeaders.entrySet().iterator();
-            while( iterator.hasNext() ) {
+            while (iterator.hasNext()) {
                 final Map.Entry entry = ( Map.Entry )iterator.next();
                 httpMethod.setRequestHeader( ( String )entry.getKey(), ( String )entry.getValue() );
             }

@@ -104,7 +104,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * @see SubmittableElement#reset()
      */
     public void reset() {
-        if( defaultCheckedState_ ) {
+        if (defaultCheckedState_) {
             setAttributeValue("checked", "checked");
         }
         else {
@@ -123,16 +123,16 @@ public class HtmlRadioButtonInput extends HtmlInput {
         final HtmlForm form = getEnclosingForm();
         final boolean changed = isChecked() != isChecked;
 
-        if( isChecked ) {
-            if( form != null ) {
+        if (isChecked) {
+            if (form != null) {
                 form.setCheckedRadioButton(this);
             }
             else {
-                getPage().setCheckedRadioButton( this );
+                getPage().setCheckedRadioButton(this);
             }
         }
         else {
-            removeAttribute( "checked" );
+            removeAttribute("checked");
         }
 
         Page page = getPage();
@@ -189,7 +189,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     public void setDefaultChecked( final boolean defaultChecked ) {
         defaultCheckedState_ = defaultChecked;
-        if( getPage().getWebClient().getBrowserVersion().isNetscape() ) {
+        if (getPage().getWebClient().getBrowserVersion().isNetscape()) {
             setChecked( defaultChecked );
         }
     }

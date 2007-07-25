@@ -110,13 +110,13 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public List getSelectedOptions() {
         List result;
 
-        if(isMultipleSelectEnabled()) {
+        if (isMultipleSelectEnabled()) {
             result = new ArrayList();
 
             final DescendantElementsIterator iterator = new DescendantElementsIterator();
-            while(iterator.hasNext()) {
+            while (iterator.hasNext()) {
                 final HtmlElement element = iterator.nextElement();
-                if(element instanceof HtmlOption && ((HtmlOption)element).isSelected()) {
+                if (element instanceof HtmlOption && ((HtmlOption)element).isSelected()) {
                     result.add(element);
                 }
             }
@@ -128,19 +128,19 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             HtmlOption lastOption = null;
 
             final DescendantElementsIterator iterator = new DescendantElementsIterator();
-            while(iterator.hasNext()) {
+            while (iterator.hasNext()) {
                 final HtmlElement element = iterator.nextElement();
                 if (element instanceof HtmlOption) {
                     final HtmlOption option = (HtmlOption) element;
-                    if(firstOption == null) {
+                    if (firstOption == null) {
                         firstOption = option; //remember in case we need it
                     }
-                    if(option.isSelected()) {
+                    if (option.isSelected()) {
                         lastOption = option;
                     }
                 }
             }
-            if(lastOption != null) {
+            if (lastOption != null) {
                 result.add(lastOption);
             }
             else if (firstOption != null) {
@@ -202,7 +202,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public void setOptionSize( final int newLength ) {
         final List elementList = getHtmlElementsByTagName( "option" );
 
-        for(int i=elementList.size()-1; i >= newLength; i--) {
+        for (int i = elementList.size() - 1; i >= newLength; i--) {
             ((HtmlElement)elementList.get(i)).remove();
         }
     }
@@ -213,9 +213,9 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      */
     public void removeOption( final int index ) {
         final ChildElementsIterator iterator = new ChildElementsIterator();
-        for(int i=0; iterator.hasNext(); i++) {
+        for (int i = 0; iterator.hasNext(); i++) {
             final HtmlElement element = iterator.nextElement();
-            if(i == index) {
+            if (i == index) {
                 element.remove();
                 return;
             }
@@ -230,7 +230,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public void replaceOption( final int index, final HtmlOption newOption ) {
 
         final ChildElementsIterator iterator = new ChildElementsIterator();
-        for (int i=0; iterator.hasNext(); i++) {
+        for (int i = 0; iterator.hasNext(); i++) {
             final HtmlElement element = iterator.nextElement();
             if (i == index) {
                 element.replace(newOption);
@@ -284,7 +284,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         try {
             return setSelectedAttribute( getOptionByValue(optionValue), isSelected );
         }
-        catch( final ElementNotFoundException e ) {
+        catch (final ElementNotFoundException e) {
             throw new IllegalArgumentException("No option found with value: " + optionValue);
         }
     }
@@ -315,7 +315,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         }
         else {
             final Iterator iterator = getOptions().iterator();
-            while( iterator.hasNext() ) {
+            while (iterator.hasNext()) {
                 final HtmlOption option = ( HtmlOption )iterator.next();
                 option.setSelectedInternal(option == selectedOption && isSelected);
             }
@@ -371,14 +371,14 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
 
             pairs = new KeyValuePair[optionCount];
 
-            for( int i = 0; i < optionCount; i++ ) {
+            for (int i = 0; i < optionCount; i++) {
                 final HtmlOption option = ( HtmlOption )selectedOptions.get( i );
                 pairs[i] = new KeyValuePair( name, option.getValueAttribute() );
             }
         }
         else {
             final List pairsList = new ArrayList();
-            for( int i = 0; i < fakeSelectedValues_.length; i++ ) {
+            for (int i = 0; i < fakeSelectedValues_.length; i++) {
                 if (fakeSelectedValues_[i].length() > 0) {
                     pairsList.add(new KeyValuePair( name, fakeSelectedValues_[i] ));
                 }
@@ -401,7 +401,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      */
     public void reset() {
         final Iterator iterator = getOptions().iterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlOption option = (HtmlOption)iterator.next();
             option.reset();
         }
@@ -421,8 +421,8 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      */
     public String getDefaultValue() {
         final List options = getSelectedOptions();
-        if( options.size() > 0 ) {
-            return ( (HtmlOption) options.get( 0 ) ).getValueAttribute();
+        if (options.size() > 0) {
+            return ( (HtmlOption) options.get(0) ).getValueAttribute();
         }
         else {
             return "";
@@ -486,7 +486,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public String asText() {
 
         final List options;
-        if(isMultipleSelectEnabled()) {
+        if (isMultipleSelectEnabled()) {
             options = getOptions();
         }
         else {

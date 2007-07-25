@@ -94,7 +94,7 @@ public class ScreenTest extends WebTestCase {
             + "           if (props[i] != result) {"
             + "               alert(myExpr + ': ' + result + ' != ' + props[i]);\n"
             + "           }\n"
-            + "           ++nbTests;\n"
+            + "           nbTests++;\n"
             + "       }\n"
             + "       alert(nbTests);\n"
             + "    }\n"

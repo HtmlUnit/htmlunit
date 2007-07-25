@@ -203,7 +203,7 @@ public class HtmlFrameTest extends WebTestCase {
             webClient.getPage(URL_FIRST);
             fail( "Expected FailingHttpStatusCodeException" );
         }
-        catch( final FailingHttpStatusCodeException e ) {
+        catch (final FailingHttpStatusCodeException e) {
             assertEquals( 404, e.getStatusCode() );
         }
     }

@@ -61,7 +61,7 @@ public final class Navigator extends SimpleScriptable {
     /**
      * Create an instance. Javascript objects must have a default constructor.
      */
-    public Navigator() {}
+    public Navigator() { }
 
     /**
      * Return the property "appCodeName".

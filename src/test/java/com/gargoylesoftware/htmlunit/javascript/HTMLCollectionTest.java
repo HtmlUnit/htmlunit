@@ -65,9 +65,9 @@ public class HTMLCollectionTest extends WebTestCase {
      */
     public void testImplicitToStringConversion() throws Exception {
         final String content = "<html><head><title>foo</title><script>"
-            + "function test(){\n"
+            + "function test() {\n"
             + "    alert(document.links != 'foo')\n"
-            +"}\n"
+            + "}\n"
             + "</script></head><body onload='test()'>"
             + "<a href='bla.html'>link</a>"
             + "</body></html>";
@@ -91,9 +91,9 @@ public class HTMLCollectionTest extends WebTestCase {
         }
 
         final String content = "<html><head><title>foo</title><script>"
-            + "function test(){\n"
+            + "function test() {\n"
             + "    alert(typeof document.links.toString)\n"
-            +"}\n"
+            + "}\n"
             + "</script></head><body onload='test()'>"
             + "<a href='bla.html'>link</a>"
             + "</body></html>";

@@ -99,7 +99,7 @@ public class NodeImpl extends SimpleScriptable {
         // If this is an HtmlElement then flip the result to uppercase.  This should really be
         // changed in HtmlElement itself but that would break backwards compatibility fairly
         // significantly as that one is documented as always returning a lowercase value.
-        if( domNode instanceof HtmlElement && ((HtmlElement)domNode).getNamespaceURI() == null ) {
+        if (domNode instanceof HtmlElement && ((HtmlElement)domNode).getNamespaceURI() == null) {
             nodeName = nodeName.toUpperCase();
         }
         return nodeName;
@@ -264,7 +264,7 @@ public class NodeImpl extends SimpleScriptable {
                 ((NodeImpl) newChildObject).getDomNodeOrDie();
 
             final DomNode oldChildNode;
-            if(oldChildObject != null) {
+            if (oldChildObject != null) {
                 // Replace the old child with the new child.
                 oldChildNode = ((NodeImpl) oldChildObject).getDomNodeOrDie();
                 oldChildNode.replace(newChildNode);
@@ -457,7 +457,7 @@ public class NodeImpl extends SimpleScriptable {
                 parents.add(node);
                 node = node.getParentNode();
             }
-            for (int i=parents.size()-1; i>=0; --i) {
+            for (int i = parents.size() - 1; i >= 0; i--) {
                 final DomNode curNode = (DomNode) parents.get(i);
                 final NodeImpl jsNode = (NodeImpl) curNode.getScriptObject();
                 if (jsNode.eventListenersContainer_ != null) {

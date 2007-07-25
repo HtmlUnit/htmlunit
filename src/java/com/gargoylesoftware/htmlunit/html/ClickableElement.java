@@ -157,15 +157,15 @@ public abstract class ClickableElement extends StyledElement {
      */
     public Page dblClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
-        if( this instanceof DisabledElement ) {
-            if( ((DisabledElement) this).isDisabled() ) {
+        if (this instanceof DisabledElement) {
+            if (((DisabledElement) this).isDisabled()) {
                 return getPage();
             }
         }
         
         //call click event first
         final Page clickPage = click(shiftKey, ctrlKey, altKey);
-        if( clickPage != getPage() ) {
+        if (clickPage != getPage()) {
             getLog().warn( "dblClick() is ignored, as click() loaded a different page." );
             return clickPage;
         }

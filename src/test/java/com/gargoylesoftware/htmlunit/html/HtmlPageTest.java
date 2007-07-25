@@ -952,7 +952,7 @@ public class HtmlPageTest extends WebTestCase {
             loadPage(firstContent);
             fail("should have thrown");
         }
-        catch (final RuntimeException e){
+        catch (final RuntimeException e) {
             assertTrue(e.getMessage().indexOf("could have caused an OutOfMemoryError") > -1);
         }
         Thread.sleep(1000);
@@ -1421,7 +1421,7 @@ public class HtmlPageTest extends WebTestCase {
                     content += "<meta http-equiv='refresh' content='1; URL='>";
                 }
                 content += "</head><body></body></html>";
-                ++nbCalls_;
+                nbCalls_++;
                 return new StringWebResponse(content, settings.getURL()) {
                     public SubmitMethod getRequestMethod() {
                         return settings.getSubmitMethod();
@@ -1456,8 +1456,8 @@ public class HtmlPageTest extends WebTestCase {
         
         final Iterator iterator1 = page1.getAllHtmlChildElements();
         final Iterator iterator2 = page2.getAllHtmlChildElements();
-        while( iterator1.hasNext() ) {
-            assertTrue( iterator2.hasNext() );
+        while (iterator1.hasNext()) {
+            assertTrue(iterator2.hasNext());
             final HtmlElement element1 = (HtmlElement)iterator1.next();
             final HtmlElement element2 = (HtmlElement)iterator2.next();
             assertEquals(element1.getNodeName(), element2.getNodeName());

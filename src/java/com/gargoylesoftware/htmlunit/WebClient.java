@@ -195,7 +195,7 @@ public class WebClient implements Serializable {
         try {
             scriptEngine_ = createJavaScriptEngineIfPossible( this );
         }
-        catch( final NoClassDefFoundError e ) {
+        catch (final NoClassDefFoundError e) {
             scriptEngine_ = null;
         }
         // The window must be constructed after the script engine.
@@ -220,7 +220,7 @@ public class WebClient implements Serializable {
         try {
             scriptEngine_ = createJavaScriptEngineIfPossible( this );
         }
-        catch( final NoClassDefFoundError e ) {
+        catch (final NoClassDefFoundError e) {
             scriptEngine_ = null;
         }
         // The window must be constructed after the script engine.
@@ -238,10 +238,10 @@ public class WebClient implements Serializable {
             Class.forName( "org.mozilla.javascript.Context" );
             return new JavaScriptEngine( webClient );
         }
-        catch( final ClassNotFoundException e ) {
+        catch (final ClassNotFoundException e) {
             return null;
         }
-        catch( final NoClassDefFoundError e ) {
+        catch (final NoClassDefFoundError e) {
             return null;
         }
     }
@@ -253,7 +253,7 @@ public class WebClient implements Serializable {
      * @return The connection that will be used.
      */
     public synchronized WebConnection getWebConnection() {
-        if( webConnection_ == null ) {
+        if (webConnection_ == null) {
             webConnection_ = new HttpWebConnection( this );
         }
         return webConnection_;
@@ -336,7 +336,7 @@ public class WebClient implements Serializable {
 
         final boolean wasResponseSuccessful = ( statusCode >= 200 && statusCode < 300 );
 
-        if( printContentOnFailingStatusCode_ && !wasResponseSuccessful) {
+        if (printContentOnFailingStatusCode_ && !wasResponseSuccessful) {
             getLog().info( "statusCode=[" + statusCode
                 + "] contentType=[" + contentType + "]" );
             getLog().info( webResponse.getContentAsString() );
@@ -560,7 +560,7 @@ public class WebClient implements Serializable {
             final Error error = ( Error )constructor.newInstance( new Object[]{message} );
             throw error;
         }
-        catch( final Exception e ) {
+        catch (final Exception e) {
             throw new IllegalStateException( message );
         }
     }
@@ -663,9 +663,9 @@ public class WebClient implements Serializable {
      */
     private boolean shouldBypassProxy( final String hostname ) {
         boolean bypass = false;
-        for( final Iterator i = proxyBypassHosts_.values().iterator(); i.hasNext();) {
+        for (final Iterator i = proxyBypassHosts_.values().iterator(); i.hasNext();) {
             final Pattern p = (Pattern) i.next();
-            if( p.matcher( hostname ).find() ) {
+            if (p.matcher( hostname ).find()) {
                 bypass = true;
                 break;
             }
@@ -805,7 +805,7 @@ public class WebClient implements Serializable {
 
     private void fireWindowContentChanged( final WebWindowEvent event ) {
         final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final WebWindowListener listener = (WebWindowListener)iterator.next();
             listener.webWindowContentChanged(event);
         }
@@ -813,7 +813,7 @@ public class WebClient implements Serializable {
 
     private void fireWindowOpened( final WebWindowEvent event ) {
         final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final WebWindowListener listener = (WebWindowListener)iterator.next();
             listener.webWindowOpened(event);
         }
@@ -821,7 +821,7 @@ public class WebClient implements Serializable {
 
     private void fireWindowClosed( final WebWindowEvent event ) {
         final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final WebWindowListener listener = (WebWindowListener)iterator.next();
             listener.webWindowClosed(event);
         }
@@ -851,7 +851,7 @@ public class WebClient implements Serializable {
      */
     public WebWindow openWindow( final URL url, final String windowName, final WebWindow opener ) {
         final WebWindow window = openTargetWindow( opener, windowName, "_blank" );
-        if( url != null ) {
+        if (url != null) {
             try {
                 final WebRequestSettings settings = new WebRequestSettings(url);
                 final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
@@ -860,7 +860,7 @@ public class WebClient implements Serializable {
                 }
                 getPage(window, settings);
             }
-            catch( final IOException e ) {
+            catch (final IOException e) {
                 getLog().error("Error when loading content into window", e);
             }
         }
@@ -888,42 +888,42 @@ public class WebClient implements Serializable {
         Assert.notNull("defaultName", defaultName);
 
         String windowToOpen = windowName;
-        if( windowToOpen == null || windowToOpen.length() == 0 ) {
+        if (windowToOpen == null || windowToOpen.length() == 0) {
             windowToOpen = defaultName;
         }
 
         WebWindow webWindow = null;
-        if( windowToOpen.equals("_self") ) {
+        if (windowToOpen.equals("_self")) {
             webWindow = opener;
             windowToOpen = "";
         }
-        else if( windowToOpen.equals("_parent") ) {
+        else if (windowToOpen.equals("_parent")) {
             webWindow = opener.getParentWindow();
             windowToOpen = "";
         }
-        else if( windowToOpen.equals("_top") ) {
+        else if (windowToOpen.equals("_top")) {
             webWindow = opener.getTopWindow();
             windowToOpen = "";
         }
-        else if( windowToOpen.equals("_blank") ) {
+        else if (windowToOpen.equals("_blank")) {
             // Leave window null to create a new window.
             windowToOpen = "";
         }
-        else if( windowToOpen.length() != 0 ) {
+        else if (windowToOpen.length() != 0) {
             try {
                 webWindow = getWebWindowByName(windowToOpen);
             }
-            catch( final WebWindowNotFoundException e ) {
+            catch (final WebWindowNotFoundException e) {
                 // Fall through - a new window will be created below
             }
         }
 
-        if( webWindow == null ) {
+        if (webWindow == null) {
             webWindow = new TopLevelWindow(windowToOpen, this);
             fireWindowOpened( new WebWindowEvent(webWindow, WebWindowEvent.OPEN, null, null) );
         }
 
-        if( webWindow instanceof TopLevelWindow && webWindow != opener.getTopWindow() ) {
+        if (webWindow instanceof TopLevelWindow && webWindow != opener.getTopWindow()) {
             ((TopLevelWindow)webWindow).setOpener(opener);
         }
 
@@ -979,9 +979,9 @@ public class WebClient implements Serializable {
         Assert.notNull("name", name);
 
         final Iterator iterator = webWindows_.iterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final WebWindow webWindow = (WebWindow)iterator.next();
-            if( webWindow.getName().equals(name) ) {
+            if (webWindow.getName().equals(name)) {
                 return webWindow;
             }
         }
@@ -1050,8 +1050,8 @@ public class WebClient implements Serializable {
         Assert.notNull("webWindow", webWindow);
         webWindows_.remove(webWindow);
 
-        if( getCurrentWindow() == webWindow ) {
-            if( webWindows_.size() == 0 ) {
+        if (getCurrentWindow() == webWindow) {
+            if (webWindows_.size() == 0) {
                 // Create a new one - we always have to have at least one window.
                 setCurrentWindow(new TopLevelWindow("", this));
             }
@@ -1073,10 +1073,10 @@ public class WebClient implements Serializable {
     private static URL makeUrl( final String urlString ) throws MalformedURLException {
         Assert.notNull("urlString", urlString);
 
-        if( TextUtil.startsWithIgnoreCase(urlString, "javascript:") ) {
+        if (TextUtil.startsWithIgnoreCase(urlString, "javascript:")) {
             return new URL(null, urlString, JavaScriptUrlStreamHandler_);
         }
-        else if (TextUtil.startsWithIgnoreCase(urlString,"about:")){
+        else if (TextUtil.startsWithIgnoreCase(urlString,"about:")) {
             return new URL(null, urlString, AboutUrlStreamHandler_);
         }
         else {
@@ -1106,22 +1106,22 @@ public class WebClient implements Serializable {
 
         // section 2.4.2 - parsing scheme
         final int schemeIndex = parseUrl.indexOf(":");
-        if( schemeIndex != -1 ) {
+        if (schemeIndex != -1) {
             boolean isProtocolSpecified = true;
-            for( int i=0; i<schemeIndex; i++ ) {
-                if( Character.isLetter(parseUrl.charAt(i)) == false ) {
+            for (int i = 0; i < schemeIndex; i++) {
+                if (Character.isLetter(parseUrl.charAt(i)) == false) {
                     isProtocolSpecified = false;
                     break;
                 }
             }
-            if( isProtocolSpecified == true ) {
+            if (isProtocolSpecified) {
                 return makeUrl( parseUrl);
             }
         }
 
         // section 2.4.3 - parsing network location/login
-        if( parseUrl.startsWith("//") ) {
-            return makeUrl(baseUrl.getProtocol()+":"+parseUrl);
+        if (parseUrl.startsWith("//")) {
+            return makeUrl(baseUrl.getProtocol() + ":" + parseUrl);
         }
 
         // section 2.4.1 - parsing fragment
@@ -1135,7 +1135,7 @@ public class WebClient implements Serializable {
         // section 2.4.4 - parsing query
         String stringQuery = null;
         final int queryIndex = parseUrl.lastIndexOf("?");
-        if( queryIndex != -1 ) {
+        if (queryIndex != -1) {
             stringQuery = parseUrl.substring(queryIndex);
             parseUrl = parseUrl.substring(0, queryIndex);
         }
@@ -1143,7 +1143,7 @@ public class WebClient implements Serializable {
         // section 2.4.5 - parsing parameters
         String stringParameters = null;
         final int parametersIndex = parseUrl.lastIndexOf(";");
-        if( parametersIndex != -1 ) {
+        if (parametersIndex != -1) {
             stringParameters = parseUrl.substring(parametersIndex);
             parseUrl = parseUrl.substring(0, parametersIndex);
         }
@@ -1151,34 +1151,34 @@ public class WebClient implements Serializable {
         // section 2.4.6 - parse path
         final List tokens = new ArrayList();
         final String stringToTokenize;
-        if( parseUrl.trim().length() == 0 ) {
+        if (parseUrl.trim().length() == 0) {
             stringToTokenize = baseUrl.getPath();
         }
-        else if( parseUrl.startsWith("/") ) {
+        else if (parseUrl.startsWith("/")) {
             stringToTokenize = parseUrl;
         }
         else {
             String path = baseUrl.getPath();
-            if( !path.endsWith("/") && parseUrl.length() != 0) {
+            if (!path.endsWith("/") && parseUrl.length() != 0) {
                 path += "/..";
             }
-            stringToTokenize = path+"/"+parseUrl;
+            stringToTokenize = path + "/" + parseUrl;
         }
 
         final String pathToTokenize = stringToTokenize;
         final StringTokenizer tokenizer = new StringTokenizer(pathToTokenize, "/");
-        while( tokenizer.hasMoreTokens() ) {
+        while (tokenizer.hasMoreTokens()) {
             tokens.add( tokenizer.nextToken() );
         }
 
-        for( int i=0; i<tokens.size(); i++ ) {
+        for (int i = 0; i < tokens.size(); i++) {
             final String oneToken = (String)tokens.get(i);
-            if( oneToken.length() == 0 || oneToken.equals(".") ) {
+            if (oneToken.length() == 0 || oneToken.equals(".")) {
                 tokens.remove(i--);
             }
-            else if( oneToken.equals("..") ) {
+            else if (oneToken.equals("..")) {
                 tokens.remove(i--);
-                if( i >= 0 ) {
+                if (i >= 0) {
                     tokens.remove(i--);
                 }
             }
@@ -1189,18 +1189,18 @@ public class WebClient implements Serializable {
         buffer.append( "://" );
         buffer.append( baseUrl.getHost() );
         final int port = baseUrl.getPort();
-        if( port != -1 ) {
+        if (port != -1) {
             buffer.append( ":" );
             buffer.append( port );
         }
 
         final Iterator iterator = tokens.iterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             buffer.append("/");
             buffer.append(iterator.next());
         }
 
-        if( pathToTokenize.endsWith("/") ) {
+        if (pathToTokenize.endsWith("/")) {
             buffer.append("/");
         }
 
@@ -1396,18 +1396,19 @@ public class WebClient implements Serializable {
         final WebResponse webResponse = getWebConnection().getResponse(webRequestSettings);
         final int statusCode = webResponse.getStatusCode();
 
-        if (statusCode >= 301 && statusCode <=307 && isRedirectEnabled()) {
+        if (statusCode >= 301 && statusCode <= 307 && isRedirectEnabled()) {
             URL newUrl = null;
             String locationString = null;
             try {
                 locationString = webResponse.getResponseHeaderValue("Location");
                 newUrl = expandUrl( fixedUrl, locationString);
             }
-            catch( final MalformedURLException e ) {
+            catch (final MalformedURLException e) {
                 getIncorrectnessListener().notify("Got a redirect status code [" + statusCode + " "
                     + webResponse.getStatusMessage()
-                    + "] but the location is not a valid url ["+locationString+"]. Skipping redirection processing.",
-                    this);
+
+                    + "] but the location is not a valid url [" + locationString
+                    + "]. Skipping redirection processing.", this);
                 return webResponse;
             }
 
@@ -1423,7 +1424,7 @@ public class WebClient implements Serializable {
                 else {
                     getLog().debug("Got a redirect with location same as the page we just loaded. "
                             + "Nb self redirection allowed: " + nbAllowedRedirections);
-                    return loadWebResponseFromWebConnection(webRequestSettings, nbAllowedRedirections-1);
+                    return loadWebResponseFromWebConnection(webRequestSettings, nbAllowedRedirections - 1);
                 }
             }
             else if ((statusCode == 301 || statusCode == 307)
@@ -1543,7 +1544,7 @@ public class WebClient implements Serializable {
      */
     public boolean moveFocusToElement(final FocusableElement newElement) {
 
-        if( newElement == null ) {
+        if (newElement == null) {
             throw new IllegalArgumentException("Cannot move focus to null");
         }
 
@@ -1576,7 +1577,7 @@ public class WebClient implements Serializable {
      * @param handler The new handler
      */
     public void setRefreshHandler( final RefreshHandler handler ) {
-        if( handler == null ) {
+        if (handler == null) {
             refreshHandler_ = new ImmediateRefreshHandler();
         }
         else {
@@ -1685,7 +1686,7 @@ public class WebClient implements Serializable {
      *
      * @param timeout The value of the timeout in milliseconds
      */
-    public void setTimeout(final int timeout){
+    public void setTimeout(final int timeout) {
         timeout_ = timeout;
     }
 

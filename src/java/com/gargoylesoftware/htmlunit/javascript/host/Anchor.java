@@ -243,7 +243,7 @@ public class Anchor extends FocusableHostElement {
         final int index = host.indexOf(':');
         if (index != -1) {
             hostname = host.substring(0, index);
-            port = Integer.parseInt( host.substring(index+1) );
+            port = Integer.parseInt( host.substring(index + 1) );
         }
         else {
             hostname = host;

@@ -108,7 +108,7 @@ public class RowContainer extends HTMLElement {
     public void jsxFunction_deleteRow(int rowIndex) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
         final int rowCount = rows.jsxGet_length();
-        if (rowIndex == -1){
+        if (rowIndex == -1) {
             rowIndex = rowCount - 1;
         }
         final boolean rowIndexValid = (rowIndex >= 0 && rowIndex < rowCount);

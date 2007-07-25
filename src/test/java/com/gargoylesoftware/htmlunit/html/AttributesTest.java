@@ -115,10 +115,10 @@ public class AttributesTest extends WebTestCase {
             "HtmlTableRow", "HtmlTextArea", "HtmlTextDirection", "HtmlTextInput",
             "HtmlTitle", "HtmlUnorderedList"
         };
-        for( int i=0; i<classesToTest.length; i++ ) {
+        for (int i = 0; i < classesToTest.length; i++) {
             final Class clazz = Class.forName(
-                "com.gargoylesoftware.htmlunit.html."+classesToTest[i]);
-            addTestsForClass( clazz, page, suite );
+                "com.gargoylesoftware.htmlunit.html." + classesToTest[i]);
+            addTestsForClass(clazz, page, suite);
         }
         return suite;
     }
@@ -140,35 +140,35 @@ public class AttributesTest extends WebTestCase {
             Exception {
 
         final Method[] methods = clazz.getMethods();
-        for( int i=0; i<methods.length; i++ ) {
+        for (int i = 0; i < methods.length; i++) {
             final String methodName = methods[i].getName();
-            if( methodName.startsWith("get")
+            if (methodName.startsWith("get")
                 && methodName.endsWith("Attribute")
                 && !EXCLUDED_METHODS.contains(methodName)) {
 
-                String attributeName = methodName.substring(3, methodName.length()-9).toLowerCase();
-                if( attributeName.equals("xmllang") ) {
+                String attributeName = methodName.substring(3, methodName.length() - 9).toLowerCase();
+                if (attributeName.equals("xmllang")) {
                     attributeName = "xml:lang";
                 }
-                else if( attributeName.equals("columns") ) {
+                else if (attributeName.equals("columns")) {
                     attributeName = "cols";
                 }
-                else if( attributeName.equals("columnspan") ) {
+                else if (attributeName.equals("columnspan")) {
                     attributeName = "colspan";
                 }
-                else if( attributeName.equals("textdirection") ) {
+                else if (attributeName.equals("textdirection")) {
                     attributeName = "dir";
                 }
-                else if( attributeName.equals("httpequiv") ) {
+                else if (attributeName.equals("httpequiv")) {
                     attributeName = "http-equiv";
                 }
-                else if( attributeName.equals("acceptcharset") ) {
+                else if (attributeName.equals("acceptcharset")) {
                     attributeName = "accept-charset";
                 }
-                else if( attributeName.equals("htmlfor") ) {
+                else if (attributeName.equals("htmlfor")) {
                     attributeName = "for";
                 }
-                suite.addTest( new AttributesTest(attributeName, clazz, methods[i], page) );
+                suite.addTest(new AttributesTest(attributeName, clazz, methods[i], page));
             }
         }
     }
@@ -204,9 +204,9 @@ public class AttributesTest extends WebTestCase {
     private static String createTestName( final Class clazz, final Method method ) {
         String className = clazz.getName();
         final int index = className.lastIndexOf('.');
-        className = className.substring(index+1);
+        className = className.substring(index + 1);
 
-        return "testAttributes_"+className+"_"+method.getName();
+        return "testAttributes_" + className + "_" + method.getName();
     }
 
     /**
@@ -231,15 +231,15 @@ public class AttributesTest extends WebTestCase {
      */
     private Object getNewInstanceForClassUnderTest() throws Exception {
         final Object newInstance;
-        if( classUnderTest_ == HtmlTableRow.class ) {
+        if (classUnderTest_ == HtmlTableRow.class) {
             newInstance = (HtmlTableRow)HTMLParser.getFactory( HtmlTableRow.TAG_NAME ).createElement(
                     page_, HtmlTableRow.TAG_NAME, null);
         }
-        else if( classUnderTest_ == HtmlTableHeaderCell.class ) {
+        else if (classUnderTest_ == HtmlTableHeaderCell.class) {
             newInstance = (HtmlTableHeaderCell)HTMLParser.getFactory( HtmlTableHeaderCell.TAG_NAME ).createElement(
                     page_, HtmlTableHeaderCell.TAG_NAME, null);
         }
-        else if( classUnderTest_ == HtmlTableDataCell.class ) {
+        else if (classUnderTest_ == HtmlTableDataCell.class) {
             newInstance = (HtmlTableDataCell)HTMLParser.getFactory( HtmlTableDataCell.TAG_NAME ).createElement(
                     page_, HtmlTableDataCell.TAG_NAME, null);
         }
@@ -250,12 +250,12 @@ public class AttributesTest extends WebTestCase {
                 newInstance = constructor.newInstance(
                     new Object[]{page_, null});
             }
-            catch( final InvocationTargetException e ) {
+            catch (final InvocationTargetException e) {
                 final Throwable targetException = e.getTargetException();
-                if( targetException instanceof Exception ) {
+                if (targetException instanceof Exception) {
                     throw (Exception)targetException;
                 }
-                else if( targetException instanceof Error ) {
+                else if (targetException instanceof Error) {
                     throw (Error)targetException;
                 }
                 else {

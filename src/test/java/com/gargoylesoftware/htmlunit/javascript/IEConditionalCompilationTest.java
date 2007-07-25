@@ -91,7 +91,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testSet() throws Exception {
-        if( notYetImplemented() ) {
+        if (notYetImplemented()) {
             return;
         }
         

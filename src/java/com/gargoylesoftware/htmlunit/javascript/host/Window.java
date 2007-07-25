@@ -184,8 +184,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public String jsxFunction_prompt(final String message) {
         final PromptHandler handler = getWebWindow().getWebClient().getPromptHandler();
-        if( handler == null ) {
-            getLog().warn("window.prompt(\""+message+"\") no prompt handler installed");
+        if (handler == null) {
+            getLog().warn("window.prompt(\"" + message + "\") no prompt handler installed");
             return null;
         }
         else {
@@ -298,15 +298,15 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
         try {
             final Page page = webWindow_.getEnclosedPage();
-            if( page != null && page instanceof HtmlPage ) {
+            if (page != null && page instanceof HtmlPage) {
                 return ((HtmlPage)page).getFullyQualifiedUrl(urlString);
             }
             else {
                 return new URL(urlString);
             }
         }
-        catch( final MalformedURLException e ) {
-            getLog().error("Unable to create url for openWindow: relativeUrl=["+urlString+"]", e);
+        catch (final MalformedURLException e) {
+            getLog().error("Unable to create url for openWindow: relativeUrl=[" + urlString + "]", e);
             return null;
         }
     }
@@ -511,9 +511,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of window.opener, <code>null</code> for a top level window
      */
     public Object jsxGet_opener() {
-        if( webWindow_ instanceof TopLevelWindow ) {
+        if (webWindow_ instanceof TopLevelWindow) {
             final WebWindow opener = ((TopLevelWindow)webWindow_).getOpener();
-            if( opener != null ) {
+            if (opener != null) {
                 return opener.getScriptObject();
             }
         }
@@ -943,7 +943,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         status_ = message;
 
         final StatusHandler statusHandler = webWindow_.getWebClient().getStatusHandler();
-        if( statusHandler != null ) {
+        if (statusHandler != null) {
             statusHandler.statusMessageChanged(webWindow_.getEnclosedPage(), message);
         }
     }

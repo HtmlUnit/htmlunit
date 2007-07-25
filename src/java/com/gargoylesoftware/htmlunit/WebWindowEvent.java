@@ -87,7 +87,7 @@ public final class WebWindowEvent extends EventObject {
 
             default:
                 throw new IllegalArgumentException(
-                    "type must be one of OPEN, CLOSE, CHANGE but got "+type);
+                    "type must be one of OPEN, CLOSE, CHANGE but got " + type);
         }
     }
 
@@ -98,7 +98,7 @@ public final class WebWindowEvent extends EventObject {
      * @return true if the two objects are equal.
      */
     public boolean equals( final Object object ) {
-        if( getClass() == object.getClass() ) {
+        if (getClass() == object.getClass()) {
             final WebWindowEvent event = (WebWindowEvent)object;
             return isEqual(getSource(), event.getSource())
                 && getEventType() == event.getEventType()
@@ -143,10 +143,10 @@ public final class WebWindowEvent extends EventObject {
     private boolean isEqual( final Object object1, final Object object2 ) {
         final boolean result;
 
-        if( object1 == null && object2 == null ) {
+        if (object1 == null && object2 == null) {
             result = true;
         }
-        else if( object1 == null || object2 == null ) {
+        else if (object1 == null || object2 == null) {
             result = false;
         }
         else {

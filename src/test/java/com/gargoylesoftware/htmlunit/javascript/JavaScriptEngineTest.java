@@ -143,7 +143,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testSetInputValue() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    document.form1.textfield1.value='blue'"
             + "}\n"
             + "</script></head><body onload='doTest()'>"
@@ -842,7 +842,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             loadPage(getJavaScriptContent( "new ActiveXObject()" ));
             fail( "An exception should be thrown for zero argument constructor." );
         }
-        catch( final ScriptException e ) {
+        catch (final ScriptException e) {
             // Success
         }
 
@@ -850,7 +850,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             loadPage(getJavaScriptContent( "new ActiveXObject(1, '2', '3')" ));
             fail( "An exception should be thrown for a three argument constructor." );
         }
-        catch( final ScriptException e ) {
+        catch (final ScriptException e) {
             // Success
         }
 
@@ -858,7 +858,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             loadPage(getJavaScriptContent( "new ActiveXObject(a)" ));
             fail( "An exception should be thrown for an undefined parameter in the constructor." );
         }
-        catch( final ScriptException e ) {
+        catch (final ScriptException e) {
             // Success
         }
 
@@ -866,7 +866,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             loadPage(getJavaScriptContent( "new ActiveXObject(10)" ));
             fail( "An exception should be thrown for an integer parameter in the constructor." );
         }
-        catch( final ScriptException e ) {
+        catch (final ScriptException e) {
             // Success
         }
 
@@ -874,7 +874,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             loadPage(getJavaScriptContent( "new ActiveXObject('UnknownObject')" ));
             fail( "An exception should be thrown for a null map." );
         }
-        catch( final ScriptException e ) {
+        catch (final ScriptException e) {
             // Success
         }
     }
@@ -906,7 +906,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for non existent object in the map." );
         }
-        catch( final ScriptException e ) {
+        catch (final ScriptException e) {
             // Success
         }
 
@@ -915,7 +915,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for an invalid object in the map." );
         }
-        catch( final ScriptException e ) {
+        catch (final ScriptException e) {
             // Success
         }
 
@@ -925,7 +925,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             client.getPage( new URL( "http://www.yahoo.com" ) );
             fail( "An exception should be thrown for a non existent object in the map." );
         }
-        catch( final ScriptException e ) {
+        catch (final ScriptException e) {
             // Success
         }
 
@@ -1188,7 +1188,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
             fail();
         }
-        catch( final Exception e ) {
+        catch (final Exception e) {
             //expected exception
         }
     }

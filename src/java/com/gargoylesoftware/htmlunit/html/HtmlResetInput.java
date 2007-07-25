@@ -94,7 +94,7 @@ public class HtmlResetInput extends HtmlInput {
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
         final HtmlForm form = getEnclosingForm();
-        if( form != null ) {
+        if (form != null) {
             return form.reset();
         }
         else {

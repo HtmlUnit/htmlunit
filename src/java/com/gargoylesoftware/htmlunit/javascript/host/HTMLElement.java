@@ -181,7 +181,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
          * Should be called only on construction.
          */
         final HtmlElement htmlElt = (HtmlElement) domNode;
-        for (final Iterator iter=htmlElt.getAttributeEntriesIterator(); iter.hasNext();) {
+        for (final Iterator iter = htmlElt.getAttributeEntriesIterator(); iter.hasNext();) {
             final Map.Entry entry = (Map.Entry) iter.next();
             final String eventName = (String) entry.getKey();
             if (eventName.startsWith("on")) {
@@ -243,7 +243,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      */
     public void jsxSet_disabled( final boolean disabled ) {
         final HtmlElement element = getHtmlElementOrDie();
-        if( disabled ) {
+        if (disabled) {
             element.setAttributeValue("disabled", "disabled");
         }
         else {
@@ -257,7 +257,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      */
     public String jsxGet_tagName() {
         String tagName = getHtmlElementOrDie().getTagName();
-        if( jsxGet_namespaceURI() == null ) {
+        if (jsxGet_namespaceURI() == null) {
             tagName = tagName.toUpperCase();
         }
         return tagName;
@@ -277,7 +277,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      */
     public String jsxGet_localName() {
         String localName = getHtmlElementOrDie().getLocalName();
-        if( jsxGet_namespaceURI() == null ) {
+        if (jsxGet_namespaceURI() == null) {
             localName = localName.toUpperCase();
         }
         return localName;
@@ -488,7 +488,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             buffer.append(htmlElt.getTagName());
 
             // the attributes
-            for (final Iterator iterator=htmlElt.getAttributeEntriesIterator(); iterator.hasNext();) {
+            for (final Iterator iterator = htmlElt.getAttributeEntriesIterator(); iterator.hasNext();) {
                 buffer.append(' ' );
                 final Map.Entry entry = (Map.Entry) iterator.next();
                 buffer.append(entry.getKey());
@@ -648,7 +648,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @return an element object
      */
     public Object jsxFunction_insertAdjacentElement(final String where, final Object object) {
-        if( object instanceof NodeImpl ) {
+        if (object instanceof NodeImpl) {
             final DomNode childNode = ((NodeImpl)object).getDomNodeOrDie();
             final Object[] values = getInsertAdjacentLocation( where );
             final DomNode node = (DomNode)values[0];
@@ -721,7 +721,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             throw Context.reportRuntimeError("Illegal position value: \"" + where + "\"");
         }
         
-        if( append ) {
+        if (append) {
             return new Object[] {node, Boolean.TRUE};
         }
         else {
@@ -983,8 +983,8 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      */
     public int compareVersions(final String v1, final String v2) {
         final int i = v1.compareTo(v2);
-        if(i == 0)     { return 0;  }
-        else if(i < 0) { return -1; }
+        if (i == 0)     { return 0;  }
+        else if (i < 0) { return -1; }
         else           { return 1;  }
     }
 
@@ -1109,7 +1109,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             final boolean isHomePage = (home != null && home.equals(url));
             return (sameDomains && isHomePage);
         }
-        catch(final MalformedURLException e) {
+        catch (final MalformedURLException e) {
             return false;
         }
     }
@@ -1516,5 +1516,5 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * anything. The requirement
      * is just to prevent scripts that call that method from failing
      */
-    public void jsxFunction_scrollIntoView() {}
+    public void jsxFunction_scrollIntoView() { }
 }

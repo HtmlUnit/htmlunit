@@ -68,7 +68,7 @@ public void testDocumentWrite() throws Exception {
         form.getInputByName("textfield0");
         fail("Expected an ElementNotFoundException");
     }
-    catch( final ElementNotFoundException e ) {
+    catch (final ElementNotFoundException e) {
         // Expected path
     }
 
@@ -76,7 +76,7 @@ public void testDocumentWrite() throws Exception {
         form.getInputByName("textfield6");
         fail("Expected an ElementNotFoundException");
     }
-    catch( final ElementNotFoundException e ) {
+    catch (final ElementNotFoundException e) {
         // Expected path
     }
             ]]></source>

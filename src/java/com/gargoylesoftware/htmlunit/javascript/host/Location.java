@@ -100,7 +100,7 @@ public class Location extends SimpleScriptable {
      * @return The full URL string.
      */
     public String toString() {
-        if( window_ != null ) {
+        if (window_ != null) {
             return jsxGet_href();
         }
         else {
@@ -129,8 +129,8 @@ public class Location extends SimpleScriptable {
      */
     public void jsxFunction_reload( final boolean force ) throws IOException {
         final String url = jsxGet_href();
-        if( UNKNOWN.equals( url ) ) {
-            getLog().error( "Unable to reload location: current URL is unknown." );
+        if (UNKNOWN.equals(url)) {
+            getLog().error("Unable to reload location: current URL is unknown.");
         }
         else {
             jsxSet_href( url );
@@ -164,7 +164,7 @@ public class Location extends SimpleScriptable {
      */
     public String jsxGet_href() {
         final Page page = window_.getWebWindow().getEnclosedPage();
-        if( page == null ) {
+        if (page == null) {
             return UNKNOWN;
         }
         else {
@@ -195,12 +195,12 @@ public class Location extends SimpleScriptable {
                 final WebWindow webWindow = getWindow().getWebWindow();
                 webWindow.getWebClient().getPage(webWindow, new WebRequestSettings(url));
             }
-            catch( final MalformedURLException e ) {
-                getLog().error("jsxSet_location(\""+newLocation+"\") Got MalformedURLException", e);
+            catch (final MalformedURLException e) {
+                getLog().error("jsxSet_location(\"" + newLocation + "\") Got MalformedURLException", e);
                 throw e;
             }
-            catch( final IOException e ) {
-                getLog().error("jsxSet_location(\""+newLocation+"\") Got IOException", e);
+            catch (final IOException e) {
+                getLog().error("jsxSet_location(\"" + newLocation + "\") Got IOException", e);
                 throw e;
             }
         }
@@ -214,11 +214,11 @@ public class Location extends SimpleScriptable {
      */
     public String jsxGet_search() {
         final String search = getUrl().getQuery();
-        if( search == null ) {
+        if (search == null) {
             return "";
         }
         else {
-            return "?"+search;
+            return "?" + search;
         }
     }
 
@@ -241,7 +241,7 @@ public class Location extends SimpleScriptable {
      */
     public String jsxGet_hash() {
         final String hash = getUrl().getRef();
-        if( hash == null ) {
+        if (hash == null) {
             return "";
         }
         else {
@@ -292,11 +292,11 @@ public class Location extends SimpleScriptable {
         final int port = url.getPort();
         final String host = url.getHost();
 
-        if( port == -1 ) {
+        if (port == -1) {
             return host;
         }
         else {
-            return host+":"+port;
+            return host + ":" + port;
         }
     }
 
@@ -311,7 +311,7 @@ public class Location extends SimpleScriptable {
         final String hostname;
         final int port;
         final int index = host.indexOf( ':' );
-        if( index != -1 ) {
+        if (index != -1) {
             hostname = host.substring( 0, index );
             port = Integer.parseInt( host.substring( index + 1 ) );
         }
@@ -353,7 +353,7 @@ public class Location extends SimpleScriptable {
      */
     public String jsxGet_port() {
         final int port = getUrl().getPort();
-        if( port == -1 ) {
+        if (port == -1) {
             return "";
         }
         else {

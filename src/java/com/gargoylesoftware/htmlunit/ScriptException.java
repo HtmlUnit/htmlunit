@@ -81,7 +81,7 @@ public class ScriptException extends RuntimeException {
     }
 
     private static String getMessageFrom( final Throwable throwable ) {
-        if( throwable == null ) {
+        if (throwable == null) {
             return "null";
         }
         else {
@@ -133,7 +133,7 @@ public class ScriptException extends RuntimeException {
         printWriter.println("======= EXCEPTION START ========");
 
         if (getCause() != null ) {
-            if( getCause() instanceof EcmaError ) {
+            if (getCause() instanceof EcmaError) {
                 final EcmaError ecmaError = (EcmaError) getCause();
                 printWriter.print("EcmaError: ");
                 printWriter.print("lineNumber=[");
@@ -152,16 +152,16 @@ public class ScriptException extends RuntimeException {
                 printWriter.println();
             }
             else {
-                printWriter.println("Exception class=["+getCause().getClass().getName()+"]");
+                printWriter.println("Exception class=[" + getCause().getClass().getName() + "]");
             }
         }
 
         super.printStackTrace(printWriter);
-        if( getCause() != null && getCause() instanceof JavaScriptException ) {
+        if (getCause() != null && getCause() instanceof JavaScriptException) {
             final Object value = ((JavaScriptException) getCause()).getValue();
 
             printWriter.print("JavaScriptException value = ");
-            if( value instanceof Throwable ) {
+            if (value instanceof Throwable) {
                 ((Throwable)value).printStackTrace(printWriter);
             }
             else {
@@ -174,7 +174,7 @@ public class ScriptException extends RuntimeException {
             wrappedException.printStackTrace(printWriter);
 
             final Throwable innerException = wrappedException.getWrappedException();
-            if( innerException == null ) {
+            if (innerException == null) {
                 printWriter.println("Inside wrapped exception: null");
             }
             else {
@@ -187,7 +187,7 @@ public class ScriptException extends RuntimeException {
             getCause().printStackTrace( printWriter );
         }
 
-        if( scriptSourceCode_ != null && scriptSourceCode_.length() > 0 ) {
+        if (scriptSourceCode_ != null && scriptSourceCode_.length() > 0) {
             printWriter.println("== CALLING JAVASCRIPT ==");
             printWriter.println(scriptSourceCode_);
         }
@@ -213,20 +213,20 @@ public class ScriptException extends RuntimeException {
      */
     public String getFailingLine() {
         final int lineNumber = getFailingLineNumber();
-        if( lineNumber == -1 ) {
+        if (lineNumber == -1) {
             return "<no source>";
         }
 
         try {
             final BufferedReader reader = new BufferedReader( new StringReader(scriptSourceCode_) );
-            for( int i=0; i<lineNumber-1; i++ ) {
+            for (int i = 0; i < lineNumber - 1; i++) {
                 reader.readLine();
             }
             final String result = reader.readLine();
             reader.close();
             return result;
         }
-        catch( final IOException e ) {
+        catch (final IOException e) {
             // Theoretically impossible
             e.printStackTrace();
         }
@@ -241,7 +241,7 @@ public class ScriptException extends RuntimeException {
      * execution of a script.
      */
     public int getFailingLineNumber() {
-        if( scriptSourceCode_ == null ) {
+        if (scriptSourceCode_ == null) {
             return -1;
         }
 

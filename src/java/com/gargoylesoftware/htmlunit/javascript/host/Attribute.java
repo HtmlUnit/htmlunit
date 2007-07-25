@@ -75,7 +75,7 @@ public class Attribute extends SimpleScriptable {
     /**
      * Create an instance. Javascript objects must have a default constructor.
      */
-    public Attribute() {}
+    public Attribute() { }
 
     /**
      * Initializes this attribute.
@@ -85,7 +85,7 @@ public class Attribute extends SimpleScriptable {
     public void init(final String name, final HtmlElement parent) {
         name_ = name;
         parent_ = parent;
-        if(parent_ == null) {
+        if (parent_ == null) {
             value_ = "";
         }
     }
@@ -94,7 +94,7 @@ public class Attribute extends SimpleScriptable {
      * Detaches this attribute from the parent HTML element after caching the attribute value.
      */
     public void detachFromParent() {
-        if(parent_ != null) {
+        if (parent_ != null) {
             value_ = parent_.getAttributeValue(name_);
         }
         parent_ = null;
@@ -169,7 +169,7 @@ public class Attribute extends SimpleScriptable {
      * @return the containing document.
      */
     public Object jsxGet_ownerDocument() {
-        if(parent_ != null) {
+        if (parent_ != null) {
             final SimpleScriptable documentScriptable = getScriptableFor(parent_.getPage());
             return documentScriptable;
         }
@@ -207,7 +207,7 @@ public class Attribute extends SimpleScriptable {
      * @return the value of this attribute.
      */
     public String jsxGet_value() {
-        if(parent_ != null) {
+        if (parent_ != null) {
             return parent_.getAttributeValue(name_);
         }
         else {
@@ -220,7 +220,7 @@ public class Attribute extends SimpleScriptable {
      * @param value the new value of this attribute.
      */
     public void jsxSet_value(final String value) {
-        if(parent_ != null) {
+        if (parent_ != null) {
             parent_.setAttributeValue(name_, value);
         }
         else {

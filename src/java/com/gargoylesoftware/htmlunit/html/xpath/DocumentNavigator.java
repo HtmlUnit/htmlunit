@@ -154,7 +154,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return A possibly-empty iterator (not null).
      */
     public Iterator getAttributeAxisIterator(final Object contextNode) {
-        if(contextNode instanceof HtmlElement) {
+        if (contextNode instanceof HtmlElement) {
             return ((HtmlElement)contextNode).getAttributeEntriesIterator();
         }
         else {
@@ -190,7 +190,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * and null otherwise.
      */
     public String getElementNamespaceUri(final Object object) {
-        if(object instanceof HtmlElement) {
+        if (object instanceof HtmlElement) {
             return "";
         }
         else {

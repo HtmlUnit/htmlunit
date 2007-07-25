@@ -164,7 +164,7 @@ public class WebRequestSettings {
      * @throws RuntimeException If the request body has already been set.
      */
     public void setRequestParameters(final List requestParameters) throws RuntimeException {
-        if( requestBody_ != null ) {
+        if (requestBody_ != null) {
             final String msg = "Trying to set the request parameters, but the request body has already been specified;"
                              + "the two are mutually exclusive!";
             throw new RuntimeException( msg );
@@ -186,12 +186,12 @@ public class WebRequestSettings {
      * @throws RuntimeException If the request parameters have already been set or this is not a <tt>POST</tt> request.
      */
     public void setRequestBody(final String requestBody) throws RuntimeException {
-        if( requestParameters_ != null && requestParameters_.size() > 0 ) {
+        if (requestParameters_ != null && requestParameters_.size() > 0) {
             final String msg = "Trying to set the request body, but the request parameters have already been specified;"
                        + "the two are mutually exclusive!";
-            throw new RuntimeException( msg );
+            throw new RuntimeException(msg);
         }
-        if( submitMethod_ != SubmitMethod.POST ) {
+        if (submitMethod_ != SubmitMethod.POST) {
             final String msg = "The request body may only be set for POST requests!";
             throw new RuntimeException( msg );
         }

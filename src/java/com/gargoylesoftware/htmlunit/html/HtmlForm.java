@@ -129,9 +129,9 @@ public class HtmlForm extends ClickableElement {
 
         final List inputList = getHtmlElementsByAttribute("input", "name", buttonName);
         final Iterator iterator = inputList.iterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlInput input = (HtmlInput)iterator.next();
-            if( input.getTypeAttribute().equals("submit")) {
+            if (input.getTypeAttribute().equals("submit")) {
                 return submit( input );
             }
         }
@@ -208,7 +208,7 @@ public class HtmlForm extends ClickableElement {
         try {
             url = htmlPage.getFullyQualifiedUrl( actionUrl );
         }
-        catch( final MalformedURLException e ) {
+        catch (final MalformedURLException e) {
             throw new IllegalArgumentException( "Not a valid url: " + actionUrl );
         }
 
@@ -254,16 +254,16 @@ public class HtmlForm extends ClickableElement {
 
         final List parameterList = new ArrayList( submittableElements.size() );
         final Iterator iterator = submittableElements.iterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final SubmittableElement element = ( SubmittableElement )iterator.next();
             final KeyValuePair[] pairs = element.getSubmitKeyValuePairs();
 
-            for( int i = 0; i < pairs.length; i++ ) {
+            for (int i = 0; i < pairs.length; i++) {
                 parameterList.add( pairs[i] );
             }
         }
 
-        if( fakeSelectedRadioButton_ != null ) {
+        if (fakeSelectedRadioButton_ != null) {
             adjustParameterListToAccountForFakeSelectedRadioButton( parameterList );
         }
         return parameterList;
@@ -306,9 +306,9 @@ public class HtmlForm extends ClickableElement {
         final List submittableElements = new ArrayList();
 
         final Iterator iterator = getAllHtmlChildElements();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlElement element = ( HtmlElement )iterator.next();
-            if( isSubmittable(element, submitElement) ) {
+            if (isSubmittable(element, submitElement)) {
                 submittableElements.add(element);
             }
         }
@@ -316,12 +316,12 @@ public class HtmlForm extends ClickableElement {
         return submittableElements;
     }
 
-    private boolean isValidForSubmission(final HtmlElement element, final SubmittableElement submitElement){
+    private boolean isValidForSubmission(final HtmlElement element, final SubmittableElement submitElement) {
         final String tagName = element.getTagName();
         if (!SUBMITTABLE_ELEMENT_NAMES.contains(tagName.toLowerCase())) {
             return false;
         }
-        if(element.isAttributeDefined("disabled")) {
+        if (element.isAttributeDefined("disabled")) {
             return false;
         }
         // clicked input type="image" is submittted even if it hasn't a name
@@ -329,17 +329,17 @@ public class HtmlForm extends ClickableElement {
             return true;
         }
 
-        if (!tagName.equals("isindex") && !element.isAttributeDefined("name")){
+        if (!tagName.equals("isindex") && !element.isAttributeDefined("name")) {
             return false;
         }
 
-        if( !tagName.equals( "isindex" ) && element.getAttributeValue("name").equals("") ) {
+        if (!tagName.equals( "isindex" ) && element.getAttributeValue("name").equals("")) {
             return false;
         }
 
-        if( tagName.equals( "input" ) ) {
+        if (tagName.equals("input")) {
             final String type = element.getAttributeValue("type").toLowerCase();
-            if( type.equals( "radio" ) || type.equals( "checkbox" ) ) {
+            if (type.equals( "radio" ) || type.equals("checkbox")) {
                 return element.isAttributeDefined("checked");
             }
         }
@@ -357,7 +357,7 @@ public class HtmlForm extends ClickableElement {
      */
     private boolean isSubmittable(final HtmlElement element, final SubmittableElement submitElement) {
         final String tagName = element.getTagName();
-        if (!isValidForSubmission(element, submitElement)){
+        if (!isValidForSubmission(element, submitElement)) {
             return false;
         }
 
@@ -365,10 +365,10 @@ public class HtmlForm extends ClickableElement {
         if (element == submitElement) {
             return true;
         }
-        if( tagName.equals( "input" ) ) {
+        if (tagName.equals("input")) {
             final HtmlInput input = (HtmlInput)element;
             final String type = input.getTypeAttribute().toLowerCase();
-            if (type.equals("submit") || type.equals("image") || type.equals("reset") || type.equals("button")){
+            if (type.equals("submit") || type.equals("image") || type.equals("reset") || type.equals("button")) {
                 return false;
             }
         }
@@ -398,7 +398,7 @@ public class HtmlForm extends ClickableElement {
      */
     public final HtmlInput getInputByName( final String name ) throws ElementNotFoundException {
         final List inputs = getHtmlElementsByAttribute( "input", "name", name );
-        if( inputs.size() == 0 ) {
+        if (inputs.size() == 0) {
             throw new ElementNotFoundException( "input", "name", name );
         }
         else {
@@ -424,14 +424,14 @@ public class HtmlForm extends ClickableElement {
             ElementNotFoundException {
 
         final Iterator iterator = getAllHtmlChildElements();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement)iterator.next();
 
-            if( element instanceof HtmlRadioButtonInput
-                    && element.getAttributeValue("name").equals( name ) ) {
+            if (element instanceof HtmlRadioButtonInput
+                    && element.getAttributeValue("name").equals(name)) {
 
                 final HtmlRadioButtonInput input = (HtmlRadioButtonInput)element;
-                if( input.getValueAttribute().equals( value ) ) {
+                if (input.getValueAttribute().equals(value)) {
                     return input;
                 }
             }
@@ -457,7 +457,7 @@ public class HtmlForm extends ClickableElement {
      */
     public HtmlSelect getSelectByName( final String name ) throws ElementNotFoundException {
         final List list = getSelectsByName( name );
-        if( list.isEmpty() ) {
+        if (list.isEmpty()) {
             throw new ElementNotFoundException( "select", "name", name );
         }
         else {
@@ -485,7 +485,7 @@ public class HtmlForm extends ClickableElement {
      */
     public HtmlButton getButtonByName( final String name ) throws ElementNotFoundException {
         final List list = getButtonsByName( name );
-        if( list.isEmpty() ) {
+        if (list.isEmpty()) {
             throw new ElementNotFoundException( "button", "name", name );
         }
         else {
@@ -511,7 +511,7 @@ public class HtmlForm extends ClickableElement {
      */
     public HtmlTextArea getTextAreaByName( final String name ) throws ElementNotFoundException {
         final List list = getTextAreasByName( name );
-        if( list.isEmpty() ) {
+        if (list.isEmpty()) {
             throw new ElementNotFoundException( "textarea", "name", name );
         }
         else {
@@ -533,10 +533,10 @@ public class HtmlForm extends ClickableElement {
         final List results = new ArrayList();
 
         final Iterator iterator = getAllHtmlChildElements();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlElement element = ( HtmlElement )iterator.next();
-            if( element instanceof HtmlRadioButtonInput
-                     && element.getAttributeValue("name").equals( name ) ) {
+            if (element instanceof HtmlRadioButtonInput
+                     && element.getAttributeValue("name").equals(name)) {
                 results.add(element);
             }
         }
@@ -572,13 +572,13 @@ public class HtmlForm extends ClickableElement {
         final HtmlInput inputToSelect = getRadioButtonInput( name, value );
 
         final Iterator iterator = getAllHtmlChildElements();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement)iterator.next();
-            if( element instanceof HtmlRadioButtonInput
-                     && element.getAttributeValue("name").equals( name ) ) {
+            if (element instanceof HtmlRadioButtonInput
+                     && element.getAttributeValue("name").equals(name)) {
 
                 final HtmlRadioButtonInput input = (HtmlRadioButtonInput)element;
-                if( input == inputToSelect ) {
+                if (input == inputToSelect) {
                     input.setAttributeValue("checked", "checked");
                 }
                 else {
@@ -600,22 +600,22 @@ public class HtmlForm extends ClickableElement {
         try {
             boolean isChild = false;
              
-            for( DomNode parent = radioButtonInput.getParentNode(); parent != null; parent = parent.getParentNode() ) {
-                if( parent == this ) {
+            for (DomNode parent = radioButtonInput.getParentNode(); parent != null; parent = parent.getParentNode()) {
+                if (parent == this) {
                     isChild = true;
                     break;
                 }
             }
-            if( !isChild ) {
+            if (!isChild) {
                 throw new IllegalArgumentException( "HtmlRadioButtonInput is not child of this HtmlForm" );
             }
             final Iterator iterator = getByXPath(
                     "//input[lower-case(@type)='radio' and @name='" + radioButtonInput.getNameAttribute() + "']"
             ).iterator();
             
-            while( iterator.hasNext() ) {
+            while (iterator.hasNext()) {
                 final HtmlRadioButtonInput input = (HtmlRadioButtonInput)iterator.next();
-                if( input == radioButtonInput ) {
+                if (input == radioButtonInput) {
                     input.setAttributeValue("checked", "checked");
                 }
                 else {
@@ -623,13 +623,13 @@ public class HtmlForm extends ClickableElement {
                 }
             }
         }
-        catch( final JaxenException e ) {
+        catch (final JaxenException e) {
             getLog().error(e);
         }
     }
 
     /**
-     *  Set the "selected radio buttion" to a value that doesn't actually exist
+     *  Set the "selected radio button" to a value that doesn't actually exist
      *  in the page. This is useful primarily for testing error cases.
      *
      * @param name The name of the radio buttons
@@ -651,9 +651,9 @@ public class HtmlForm extends ClickableElement {
 
         // Remove any pairs that match the name of the radio button
         final Iterator iterator = list.iterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final KeyValuePair pair = ( KeyValuePair )iterator.next();
-            if( pair.getKey().equals( fakeRadioButtonName ) ) {
+            if (pair.getKey().equals(fakeRadioButtonName)) {
                 iterator.remove();
             }
         }
@@ -674,13 +674,13 @@ public class HtmlForm extends ClickableElement {
         Assert.notNull("name", name);
 
         final Iterator iterator = getAllHtmlChildElements();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement)iterator.next();
-            if( element instanceof HtmlRadioButtonInput
-                     && element.getAttributeValue("name").equals( name ) ) {
+            if (element instanceof HtmlRadioButtonInput
+                     && element.getAttributeValue("name").equals(name)) {
 
                 final HtmlRadioButtonInput input = (HtmlRadioButtonInput)element;
-                if( input.isChecked() ) {
+                if (input.isChecked()) {
                     return input;
                 }
             }

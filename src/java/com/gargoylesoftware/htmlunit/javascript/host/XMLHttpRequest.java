@@ -149,7 +149,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 nbExecutions = 1;
             }
             
-            for (int i=0; i<nbExecutions; ++i) {
+            for (int i = 0; i < nbExecutions; i++) {
                 getLog().debug("Calling onreadystatechange handler for state " + state);
                 jsEngine.callFunction(containingPage_, stateChangeHandler_, context,
                         this, scope, ArrayUtils.EMPTY_OBJECT_ARRAY);
@@ -177,7 +177,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return A string version of the data retrieved from the server.
      */
     public String jsxGet_responseText() {
-        if( webResponse_ != null ) {
+        if (webResponse_ != null) {
             return webResponse_.getContentAsString();
         }
         else {
@@ -214,7 +214,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return The numeric status returned by the server.
      */
     public int jsxGet_status() {
-        if( webResponse_ != null ) {
+        if (webResponse_ != null) {
             return webResponse_.getStatusCode();
         }
         else {
@@ -228,7 +228,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return The string message accompanying the status code.
      */
     public String jsxGet_statusText() {
-        if( webResponse_ != null ) {
+        if (webResponse_ != null) {
             return webResponse_.getStatusMessage();
         }
         else {
@@ -296,21 +296,21 @@ public class XMLHttpRequest extends SimpleScriptable {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
             final WebRequestSettings settings = new WebRequestSettings(fullUrl);
             final SubmitMethod submitMethod;
-            if( "POST".equalsIgnoreCase( method ) ) {
+            if ("POST".equalsIgnoreCase(method)) {
                 submitMethod = SubmitMethod.POST;
             }
             else {
                 submitMethod = SubmitMethod.GET;
             }
             settings.setSubmitMethod( submitMethod );
-            if( user != null ) {
+            if (user != null) {
                 final DefaultCredentialsProvider dcp = new DefaultCredentialsProvider();
                 dcp.addCredentials( user, password );
                 settings.setCredentialsProvider( dcp );
             }
             requestSettings_ = settings;
         }
-        catch( final MalformedURLException e ) {
+        catch (final MalformedURLException e) {
             getLog().error( "Unable to initialize XMLHttpRequest using malformed URL '" + url + "'." );
             return;
         }
@@ -396,10 +396,10 @@ public class XMLHttpRequest extends SimpleScriptable {
                     }
                 };
             }
-            setState( STATE_INTERACTIVE, context );
-            setState( STATE_COMPLETED, context );
+            setState(STATE_INTERACTIVE, context);
+            setState(STATE_COMPLETED, context);
         }
-        catch( final IOException e ) {
+        catch (final IOException e) {
             setState( STATE_LOADING, context );
             throw Context.reportRuntimeError( "Unable to send the XMLHttpRequest: " + e );
         }
@@ -412,8 +412,8 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param value The value of the header being set.
      */
     public void jsxFunction_setRequestHeader( final String name, final String value ) {
-        if( requestSettings_ != null ) {
-            requestSettings_.addAdditionalHeader( name, value );
+        if (requestSettings_ != null) {
+            requestSettings_.addAdditionalHeader(name, value);
         }
         else {
             throw Context.reportRuntimeError( "The open() method must be called before setRequestHeader()." );

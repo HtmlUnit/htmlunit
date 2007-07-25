@@ -86,15 +86,14 @@ public final class SubmitMethod implements Serializable {
         final String lowerCaseName = name.toLowerCase();
         final SubmitMethod allInstances[] = new SubmitMethod[]{POST, GET};
 
-        int i;
-        for( i = 0; i < allInstances.length; i++ ) {
-            if( allInstances[i].getName().equals( lowerCaseName ) ) {
+        for (int i = 0; i < allInstances.length; i++) {
+            if (allInstances[i].getName().equals(lowerCaseName)) {
                 return allInstances[i];
             }
         }
 
         // Special case: empty string defaults to get
-        if( name.equals( "" ) ) {
+        if (name.equals( "" )) {
             return GET;
         }
 

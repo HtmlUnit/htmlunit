@@ -70,7 +70,7 @@ public class HtmlAreaTest extends WebTestCase {
             = "<html><head><title>first</title></head><body>"
             + "<img src='/images/planets.gif' width='145' height='126' usemap='#planetmap'>"
             + "<map id='planetmap' name='planetmap'>"
-            + "<area shape='rect' onClick=\""+onClick+"\" coords='0,0,82,126' id='second' href='http://second'>"
+            + "<area shape='rect' onClick=\"" + onClick + "\" coords='0,0,82,126' id='second' href='http://second'>"
             + "<area shape='circle' coords='90,58,3' id='third' href='http://third'>"
             + "</map></body></html>";
         final String secondContent

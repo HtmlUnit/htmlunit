@@ -274,7 +274,7 @@ public class HtmlImage extends ClickableElement {
                 final HtmlElement element = (HtmlElement) it.next();
                 if (element instanceof HtmlArea) {
                     final HtmlArea area = (HtmlArea) element;
-                    if (area.containsPoint(lastClickX_, lastClickY_)){
+                    if (area.containsPoint(lastClickX_, lastClickY_)) {
                         return area.doClickAction(defaultPage);
                     }
                 }

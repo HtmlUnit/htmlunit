@@ -116,7 +116,7 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
             if (type.equals("submit")) {
                 return form.submit(this);
             }
-            else if (type.equals("reset")){
+            else if (type.equals("reset")) {
                 return form.reset();
             }
         }
@@ -228,9 +228,9 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
      */
     public final String getTypeAttribute() {
         String type = getAttributeValue("type");
-        if( type == HtmlElement.ATTRIBUTE_NOT_DEFINED ) {
+        if (type == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
             final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
-            if( browser.getApplicationName().equals(BrowserVersion.INTERNET_EXPLORER) ) {
+            if (browser.getApplicationName().equals(BrowserVersion.INTERNET_EXPLORER)) {
                 type = "button";
             }
             else {

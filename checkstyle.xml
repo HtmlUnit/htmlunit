@@ -113,6 +113,7 @@
         
         <module name="TabCharacter"/>
         
+        <module name="WhitespaceAround"/>
 
         <!-- Checks for correct basic indentation                -->
         <!-- See http://checkstyle.sf.net/config_misc.html       -->

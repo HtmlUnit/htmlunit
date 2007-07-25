@@ -247,7 +247,7 @@ public class NodeImplTest extends WebTestCase {
             + "<body><!-- comment --><script>"
             + "var nodes = document.body.childNodes;"
             + "alert('nb nodes: ' + nodes.length);"
-            + "for (var i=0; i<nodes.length; ++i)"
+            + "for (var i=0; i<nodes.length; i++)"
             + "{"
             + " alert(nodes[i].nodeType);"
             + "}"

@@ -77,14 +77,14 @@ public class ActiveXObject extends SimpleScriptable {
     public static Scriptable jsConstructor(
             final Context cx, final Object[] args, final Function ctorObj,
             final boolean inNewExpr) {
-        if( args.length < 1 || args.length > 2 ) {
+        if (args.length < 1 || args.length > 2) {
             throw Context.reportRuntimeError(
                     "ActiveXObject Error: constructor must have one or two String parameters." );
         }
-        if( args[0] == Context.getUndefinedValue() ) {
+        if (args[0] == Context.getUndefinedValue()) {
             throw Context.reportRuntimeError( "ActiveXObject Error: constructor parameter is undefined." );
         }
-        if( !(args[0] instanceof String) ) {
+        if (!(args[0] instanceof String)) {
             throw Context.reportRuntimeError( "ActiveXObject Error: constructor parameter must be a String." );
         }
         final String activeXName = (String) args[0];
@@ -104,10 +104,10 @@ public class ActiveXObject extends SimpleScriptable {
             throw Context.reportRuntimeError("ActiveXObject Error: the map is null.");
         }
         final Object mapValue = map.get(activeXName);
-        if( mapValue == null ) {
+        if (mapValue == null) {
             throw Context.reportRuntimeError( "ActiveXObject Error: no value for " + activeXName + "." );
         }
-        if( !(mapValue instanceof String) ) {
+        if (!(mapValue instanceof String)) {
             throw Context.reportRuntimeError( "ActiveXObject Error: value for " + activeXName + " is not a String." );
         }
 
@@ -117,7 +117,7 @@ public class ActiveXObject extends SimpleScriptable {
             final Class xClass = Class.forName(xClassString);
             object = xClass.newInstance();
         }
-        catch( final Exception e ) {
+        catch (final Exception e) {
             throw Context.reportRuntimeError( "ActiveXObject Error: failed instantiating class " + xClassString +
                     " because " + e.getMessage() + "." );
         }
@@ -181,7 +181,7 @@ public class ActiveXObject extends SimpleScriptable {
             return null;
         }
         final Method[] methods = clazz.getMethods();
-        for (int i=0; i<methods.length; ++i) {
+        for (int i = 0; i < methods.length; i++) {
             if (methods[i].getName().equals(name)) {
                 return methods[i];
             }

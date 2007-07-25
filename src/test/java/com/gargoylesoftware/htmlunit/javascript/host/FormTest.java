@@ -81,9 +81,9 @@ public class FormTest extends WebTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.form1.length)\n"
-            + "    for( var i=0; i< document.form1.length; i++) {\n"
+            + "    for (var i=0; i< document.form1.length; i++) {\n"
             + "        var element = document.form1.elements[i];"
-            + "        if( element.type != 'radio' && element != document.form1[element.name] ) {\n"
+            + "        if (element.type != 'radio' && element != document.form1[element.name]) {\n"
             + "            alert('name index not working for '+element.name);\n"
             + "        }\n"
             + "        alert( element.name )\n"
@@ -138,7 +138,7 @@ public class FormTest extends WebTestCase {
             + "function doTest(){\n"
             + "    var radioArray = document.form1['radio1'];"
             + "    alert(radioArray.length)\n"
-            + "    for( var i=0; i< radioArray.length; i++) {\n"
+            + "    for (var i=0; i< radioArray.length; i++) {\n"
             + "        var element = radioArray[i];"
             + "        alert( element.value )\n"
             + "    }\n"
@@ -266,9 +266,9 @@ public class FormTest extends WebTestCase {
         final String content
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
-            + "    alert(document.forms[0]."+jsProperty+");\n"
-            + "    document.forms[0]."+jsProperty+"='"+newValue+"'\n"
-            + "    alert(document.forms[0]."+jsProperty+");\n"
+            + "    alert(document.forms[0]." + jsProperty + ");\n"
+            + "    document.forms[0]." + jsProperty + "='" + newValue + "'\n"
+            + "    alert(document.forms[0]." + jsProperty + ");\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>"
@@ -480,16 +480,16 @@ public class FormTest extends WebTestCase {
         loadPage( browserVersion, html, collected );
 
         // The lists are too long to call assertEquals() on them directly and get meaningful failure info.
-        for( int i = 0; i < expected.length; i++ ) {
+        for (int i = 0; i < expected.length; i++) {
             final String s1 = expected[i];
             final String s2;
-            if( collected.size() > i ) {
+            if (collected.size() > i) {
                 s2 = (String) collected.get( i );
             }
             else {
                 s2 = null;
             }
-            assertEquals( "At index " + i + ", expected '" + s1 + "' but got '" + s2 + "'.", s1, s2 );
+            assertEquals("At index " + i + ", expected '" + s1 + "' but got '" + s2 + "'.", s1, s2);
         }
     }
 
@@ -633,21 +633,21 @@ public class FormTest extends WebTestCase {
         final String content
             = "<html><head><title>foo</title><script>"
             + "function go() {\n"
-            + "   alert(document.simple_form."+name+".value);\n"
-            + "   document.simple_form."+name+".value='foo';\n"
-            + "   alert(document.simple_form."+name+".value);\n"
+            + "   alert(document.simple_form." + name + ".value);\n"
+            + "   document.simple_form." + name + ".value='foo';\n"
+            + "   alert(document.simple_form." + name + ".value);\n"
             + "}</script></head>"
             + "<body onload='go()'>"
             + "<p>hello world</p>"
             + "<form action='login.jsp' name='simple_form'>"
-            + "    <input name='"+name+"' type='hidden' value='"+name+"2'>"
+            + "    <input name='" + name + "' type='hidden' value='" + name + "2'>"
             + "</form>"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
-        final String[] expectedAlerts = {name+"2", "foo"};
+        final String[] expectedAlerts = {name + "2", "foo"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals( expectedAlerts, collectedAlerts );
     }

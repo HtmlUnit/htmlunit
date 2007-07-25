@@ -155,9 +155,9 @@ public class SimpleScriptableTest extends WebTestCase {
     }
 
     private Set getFileNames( final String directoryName ) {
-        File directory = new File("."+File.separatorChar+directoryName);
-        if( directory.exists() == false ) {
-            directory = new File("./src/java/".replace('/', File.separatorChar)+directoryName );
+        File directory = new File("." + File.separatorChar + directoryName);
+        if (!directory.exists()) {
+            directory = new File("./src/java/".replace('/', File.separatorChar) + directoryName );
         }
         assertTrue("directory exists", directory.exists() );
         assertTrue("is a directory", directory.isDirectory() );
@@ -165,10 +165,10 @@ public class SimpleScriptableTest extends WebTestCase {
         final String fileNames[] = directory.list();
         final Set collection = new HashSet();
 
-        for( int i=0; i<fileNames.length; i++ ) {
+        for (int i = 0; i < fileNames.length; i++) {
             final String name = fileNames[i];
-            if( name.endsWith(".java") ) {
-                collection.add( name.substring(0, name.length()-5) );
+            if (name.endsWith(".java")) {
+                collection.add( name.substring(0, name.length() - 5) );
             }
         }
         return collection;

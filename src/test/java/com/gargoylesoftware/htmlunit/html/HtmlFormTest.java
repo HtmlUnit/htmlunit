@@ -701,7 +701,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<script language='javascript'>"
             + "function setFormat()"
             + "{"
-            + "    if(document.form1.Format.checked) {"
+            + "    if (document.form1.Format.checked) {"
             + "        document.form1.Format.value='html';"
             + "    } else {"
             + "        document.form1.Format.value='plain';"
@@ -761,7 +761,7 @@ public class HtmlFormTest extends WebTestCase {
 
         final List allInputsByValue = form.getInputsByValue("foo");
         final ListIterator iterator = allInputsByValue.listIterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlInput input = (HtmlInput)iterator.next();
             iterator.set( input.getNameAttribute() );
         }
@@ -775,7 +775,7 @@ public class HtmlFormTest extends WebTestCase {
             form.getInputByValue("none-matching");
             fail("Expected ElementNotFoundException");
         }
-        catch( final ElementNotFoundException e ) {
+        catch (final ElementNotFoundException e) {
             // Expected path.
         }
     }

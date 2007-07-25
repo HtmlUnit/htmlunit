@@ -74,9 +74,9 @@ public final class UnknownElementFactory implements IElementFactory {
     public HtmlElement createElementNS(final HtmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
         Map attributeMap = null;
-        if(attributes != null) {
+        if (attributes != null) {
             attributeMap = new HashMap(attributes.getLength());
-            for(int i=0; i < attributes.getLength(); i++) {
+            for (int i = 0; i < attributes.getLength(); i++) {
                 attributeMap.put(attributes.getLocalName(i), attributes.getValue(i));
             }
         }

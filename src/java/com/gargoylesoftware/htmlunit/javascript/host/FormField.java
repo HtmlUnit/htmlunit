@@ -173,7 +173,7 @@ public class FormField extends FocusableHostElement {
      */
     public void jsxSet_disabled( final boolean disabled ) {
         final HtmlElement element = getHtmlElementOrDie();
-        if( disabled ) {
+        if (disabled) {
             element.setAttributeValue("disabled", "disabled");
         }
         else {

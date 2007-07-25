@@ -115,7 +115,7 @@ public class StrictErrorReporter implements ErrorReporter {
             final String prefix, final String message, final String sourceName,
             final int line, final String lineSource, final int lineOffset) {
 
-        return prefix+": message=["+message+"] sourceName=["+sourceName+"] line=["+line
-            +"] lineSource=["+lineSource+"] lineOffset=["+lineOffset+"]";
+        return prefix + ": message=[" + message + "] sourceName=[" + sourceName + "] line=[" + line
+            + "] lineSource=[" + lineSource + "] lineOffset=[" + lineOffset + "]";
     }
 }

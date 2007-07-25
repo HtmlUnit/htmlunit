@@ -139,19 +139,19 @@ public final class UrlUtils {
         s.append( protocol );
         s.append( "://" );
         s.append( host );
-        if( port != -1 ) {
+        if (port != -1) {
             s.append( ":" ).append( port );
         }
-        if( path != null && path.length() > 0 ) {
-            if( !path.startsWith( "/" ) ) {
+        if (path != null && path.length() > 0) {
+            if (!path.startsWith("/")) {
                 s.append( "/" );
             }
             s.append( path );
         }
-        if( query != null ) {
+        if (query != null) {
             s.append( "?" ).append( query );
         }
-        if( ref != null ) {
+        if (ref != null) {
             s.append( "#" ).append( ref );
         }
         final URL url = new URL( s.toString() );

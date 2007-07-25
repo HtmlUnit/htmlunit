@@ -97,7 +97,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         topScope.put("text", topScope, text_);
         topScope.put("expected", topScope, expected_);
         
-        assertEquals(begin_+end_, text_.replaceAll(str_, ""));
+        assertEquals(begin_ + end_, text_.replaceAll(str_, ""));
         try {
             ctx.evaluateString(topScope, src_, "test script", 0, null);
         }

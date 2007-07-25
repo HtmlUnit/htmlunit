@@ -100,7 +100,7 @@ public abstract class BaseFrame extends StyledElement {
      */
     void loadInnerPage() throws FailingHttpStatusCodeException {
         String source = getSrcAttribute();
-        if( source.length() == 0 ) {
+        if (source.length() == 0) {
             // Nothing to load
             source = "about:blank";
         }
@@ -136,7 +136,7 @@ public abstract class BaseFrame extends StyledElement {
             }
             catch (final IOException e) {
                 getLog().error("IOException when getting content for " + getTagName()
-                        + ": url=["+url.toExternalForm()+"]", e);
+                        + ": url=[" + url.toExternalForm() + "]", e);
             }
         }
     }

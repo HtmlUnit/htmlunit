@@ -63,7 +63,7 @@ public class PrototypeTest extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testAjax() throws Exception {
-        if( notYetImplemented() ) {
+        if (notYetImplemented()) {
             return;
         }
         test( "ajax.html", 3, 11 );
@@ -87,34 +87,34 @@ public class PrototypeTest extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testDom() throws Exception {
-        if( notYetImplemented() ) {
+        if (notYetImplemented()) {
             return;
         }
-        test( "dom.html", 25, 254 );
+        test("dom.html", 25, 254);
     }
 
     /**
      * @throws Exception If test fails.
      */
     public void testElementMixins() throws Exception {
-        test( "element_mixins.html", 4, 7 );
+        test("element_mixins.html", 4, 7);
     }
 
     /**
      * @throws Exception If test fails.
      */
     public void testEnumerable() throws Exception {
-        test( "enumerable.html", 23, 67 );
+        test("enumerable.html", 23, 67);
     }
 
     /**
      * @throws Exception If test fails.
      */
     public void testForm() throws Exception {
-        if( notYetImplemented() ) {
+        if (notYetImplemented()) {
             return;
         }
-        test( "form.html", 4, 21 );
+        test("form.html", 4, 21);
     }
 
     /**
@@ -123,34 +123,34 @@ public class PrototypeTest extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testHash() throws Exception {
-        if( notYetImplemented() ) {
+        if (notYetImplemented()) {
             return;
         }
-        test( "hash.html", 5, 19 );
+        test("hash.html", 5, 19);
     }
 
     /**
      * @throws Exception If test fails.
      */
     public void testPosition() throws Exception {
-        if( notYetImplemented() ) {
+        if (notYetImplemented()) {
             return;
         }
-        test( "position.html", 5, 28 );
+        test("position.html", 5, 28);
     }
 
     /**
      * @throws Exception If test fails.
      */
     public void testRange() throws Exception {
-        test( "range.html", 6, 21 );
+        test("range.html", 6, 21);
     }
 
     /**
      * @throws Exception If test fails.
      */
     public void testSelector() throws Exception {
-        if(notYetImplemented()) {
+        if (notYetImplemented()) {
             return;
         }
         test("selector.html", 18, 46);
@@ -162,7 +162,7 @@ public class PrototypeTest extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testString() throws Exception {
-        if(notYetImplemented()) {
+        if (notYetImplemented()) {
             return;
         }
         test("string.html", 19, 76);

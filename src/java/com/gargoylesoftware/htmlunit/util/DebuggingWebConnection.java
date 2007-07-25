@@ -158,11 +158,11 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
             return "{}";
         }
         final StringBuffer buffer = new StringBuffer("{");
-        for (final Iterator iter=headers.iterator(); iter.hasNext();) {
+        for (final Iterator iter = headers.iterator(); iter.hasNext();) {
             final NameValuePair header = (NameValuePair) iter.next();
             buffer.append("'" + header.getName() + "': '" + header.getValue().replaceAll("'", "\\'") + "', ");
         }
-        buffer.delete(buffer.length()-2, buffer.length());
+        buffer.delete(buffer.length() - 2, buffer.length());
         buffer.append("}");
         return buffer.toString();
     }
@@ -183,7 +183,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
             + "<body>"
             + "<ol>\n"
             + "<script>\n"
-            + "for (var i=0; i<tab.length; ++i) {\n"
+            + "for (var i=0; i<tab.length; i++) {\n"
             + "  var curRes = tab[i];\n"
             + "  document.writeln('<li>'"
             + " + curRes.code + ' ' + curRes.method + ' ' "

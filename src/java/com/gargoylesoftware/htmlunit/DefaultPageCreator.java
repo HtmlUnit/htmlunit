@@ -186,7 +186,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
             //Should create a validated XML document but for now just make what we can
             return "html";
         }
-        else if( contentType.equals("text/javascript") || contentType.equals("application/x-javascript") ) {
+        else if (contentType.equals("text/javascript") || contentType.equals("application/x-javascript")) {
             return "javascript";
         }
         else if (contentType.equals("text/xml") || contentType.equals("application/xml")
@@ -194,7 +194,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
                 || contentType.equals("text/vnd.wap.wml")) {
             return "xml";
         }
-        else if( contentType.startsWith( "text/" ) ) {
+        else if (contentType.startsWith( "text/" )) {
             return "text";
         }
         else {

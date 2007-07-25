@@ -85,7 +85,7 @@ public class HTMLSelectElement extends FormField {
 
         final HtmlSelect htmlSelect = getHtmlSelect();
         htmlSelect.setScriptObject(this);
-        if( optionsArray_ == null ) {
+        if (optionsArray_ == null) {
             optionsArray_ = new HTMLOptionsCollection(this);
             optionsArray_.initialize( htmlSelect );
         }
@@ -203,7 +203,7 @@ public class HTMLSelectElement extends FormField {
      */
     public HTMLOptionsCollection jsxGet_options() {
 
-        if( optionsArray_ == null ) {
+        if (optionsArray_ == null) {
             initialize();
         }
         return optionsArray_;
@@ -216,7 +216,7 @@ public class HTMLSelectElement extends FormField {
     public int jsxGet_selectedIndex() {
         final HtmlSelect htmlSelect = getHtmlSelect();
         final List selectedOptions = htmlSelect.getSelectedOptions();
-        if( selectedOptions.isEmpty() ) {
+        if (selectedOptions.isEmpty()) {
             return -1;
         }
         else {
@@ -233,11 +233,11 @@ public class HTMLSelectElement extends FormField {
         final HtmlSelect htmlSelect = getHtmlSelect();
 
         final Iterator iter = htmlSelect.getSelectedOptions().iterator();
-        while (iter.hasNext()){
+        while (iter.hasNext()) {
             final HtmlOption itemToUnSelect = (HtmlOption) iter.next();
             htmlSelect.setSelectedAttribute(itemToUnSelect, false);
         }
-        if (index < 0){
+        if (index < 0) {
             htmlSelect.fakeSelectedAttribute("");
             return;
         }
@@ -247,7 +247,7 @@ public class HTMLSelectElement extends FormField {
 
         final List allOptions = htmlSelect.getOptions();
 
-        if( index < allOptions.size() ) {
+        if (index < allOptions.size()) {
             final HtmlOption itemToSelect = (HtmlOption) allOptions.get(index);
             htmlSelect.setSelectedAttribute(itemToSelect, true);
         }
@@ -273,7 +273,7 @@ public class HTMLSelectElement extends FormField {
      * @return The length property
      */
     public int jsxGet_length() {
-        if( optionsArray_ == null ) {
+        if (optionsArray_ == null) {
             initialize();
         }
         return optionsArray_.jsxGet_length();
@@ -284,7 +284,7 @@ public class HTMLSelectElement extends FormField {
      * @param newLength The new length property value
      */
     public void jsxSet_length( final int newLength ) {
-        if( optionsArray_ == null ) {
+        if (optionsArray_ == null) {
             initialize();
         }
         optionsArray_.jsxSet_length( newLength );
@@ -297,7 +297,7 @@ public class HTMLSelectElement extends FormField {
      * @return The property.
      */
     public Object get( final int index, final Scriptable start ) {
-        if( optionsArray_ == null ) {
+        if (optionsArray_ == null) {
             initialize();
         }
         return optionsArray_.get( index, start );
@@ -310,7 +310,7 @@ public class HTMLSelectElement extends FormField {
      * @param newValue The new value
      */
     public void put( final int index, final Scriptable start, final Object newValue ) {
-        if( optionsArray_ == null ) {
+        if (optionsArray_ == null) {
             initialize();
         }
         optionsArray_.put( index, start, newValue );

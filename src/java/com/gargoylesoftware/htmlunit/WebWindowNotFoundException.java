@@ -53,7 +53,7 @@ public class WebWindowNotFoundException extends RuntimeException {
      * @param name The name that was searched by.
      */
     public WebWindowNotFoundException( final String name ) {
-        super("Searching for ["+name+"]");
+        super("Searching for [" + name + "]");
         name_ = name;
     }
 

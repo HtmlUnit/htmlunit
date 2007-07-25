@@ -72,7 +72,7 @@ public class DomCommentTest extends WebTestCase {
      */
     public void testAsXml() throws Exception {
         final String comment = "<!-- a comment -->";
-        final String content = "<html><body><span id='foo'>" + comment +"</span></body></html>";
+        final String content = "<html><body><span id='foo'>" + comment + "</span></body></html>";
         final HtmlPage page = loadPage(content);
         final HtmlElement elt = page.getHtmlElementById("foo");
         final DomNode node = elt.getFirstChild();

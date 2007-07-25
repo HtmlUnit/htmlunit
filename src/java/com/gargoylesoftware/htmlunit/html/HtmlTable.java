@@ -98,13 +98,13 @@ public class HtmlTable extends ClickableElement {
     public final HtmlTableCell getCellAt( final int rowIndex, final int columnIndex )
     {
         final RowIterator rowIterator = getRowIterator();
-        for(int rowNo = 0; rowIterator.hasNext(); rowNo++) {
+        for (int rowNo = 0; rowIterator.hasNext(); rowNo++) {
             final HtmlTableRow row = rowIterator.nextRow();
             final HtmlTableRow.CellIterator cellIterator = row.getCellIterator();
-            for(int colNo = 0; cellIterator.hasNext(); colNo++) {
+            for (int colNo = 0; cellIterator.hasNext(); colNo++) {
                 final HtmlTableCell cell = cellIterator.nextCell();
-                if( rowNo <= rowIndex && rowNo + cell.getRowSpan() > rowIndex) {
-                    if(colNo <= columnIndex && colNo + cell.getColumnSpan() > columnIndex) {
+                if (rowNo <= rowIndex && rowNo + cell.getRowSpan() > rowIndex) {
+                    if (colNo <= columnIndex && colNo + cell.getColumnSpan() > columnIndex) {
                         return cell;
                     }
                 }
@@ -126,7 +126,7 @@ public class HtmlTable extends ClickableElement {
      */
     public List getRows() {
         final List result = new ArrayList();
-        for(final RowIterator iterator = getRowIterator(); iterator.hasNext();) {
+        for (final RowIterator iterator = getRowIterator(); iterator.hasNext();) {
             result.add(iterator.next());
         }
         return Collections.unmodifiableList(result);
@@ -140,9 +140,9 @@ public class HtmlTable extends ClickableElement {
      */
     public HtmlTableRow getRow(final int index) throws IndexOutOfBoundsException {
         int count = 0;
-        for(final RowIterator iterator = getRowIterator(); iterator.hasNext(); count++) {
+        for (final RowIterator iterator = getRowIterator(); iterator.hasNext(); count++) {
             final HtmlTableRow next = iterator.nextRow();
-            if(count == index) {
+            if (count == index) {
                 return next;
             }
         }
@@ -157,7 +157,7 @@ public class HtmlTable extends ClickableElement {
      */
     public final int getRowCount() {
         int count = 0;
-        for(final RowIterator iterator = getRowIterator(); iterator.hasNext(); iterator.next()) {
+        for (final RowIterator iterator = getRowIterator(); iterator.hasNext(); iterator.next()) {
             count++;
         }
         return count;
@@ -172,9 +172,9 @@ public class HtmlTable extends ClickableElement {
      */
     public final HtmlTableRow getRowById( final String id ) throws ElementNotFoundException {
         final RowIterator iterator = new RowIterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlTableRow row = (HtmlTableRow)iterator.next();
-            if( row.getIdAttribute().equals(id) ) {
+            if (row.getIdAttribute().equals(id)) {
                 return row;
             }
         }
@@ -188,9 +188,9 @@ public class HtmlTable extends ClickableElement {
      */
     public String getCaptionText() {
         final Iterator iterator = getChildElementsIterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement)iterator.next();
-            if( element instanceof HtmlCaption ) {
+            if (element instanceof HtmlCaption) {
                 return element.asText();
             }
         }
@@ -204,9 +204,9 @@ public class HtmlTable extends ClickableElement {
      */
     public HtmlTableHeader getHeader() {
         final Iterator iterator = getChildElementsIterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement)iterator.next();
-            if( element instanceof HtmlTableHeader ) {
+            if (element instanceof HtmlTableHeader) {
                 return (HtmlTableHeader)element;
             }
         }
@@ -220,9 +220,9 @@ public class HtmlTable extends ClickableElement {
      */
     public HtmlTableFooter getFooter() {
         final Iterator iterator = getChildElementsIterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement)iterator.next();
-            if( element instanceof HtmlTableFooter ) {
+            if (element instanceof HtmlTableFooter) {
                 return (HtmlTableFooter)element;
             }
         }
@@ -238,9 +238,9 @@ public class HtmlTable extends ClickableElement {
     public List getBodies() {
         final List bodies = new ArrayList();
         final Iterator iterator = getChildElementsIterator();
-        while( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement)iterator.next();
-            if( element instanceof HtmlTableBody ) {
+            if (element instanceof HtmlTableBody) {
                 bodies.add( element );
             }
         }
@@ -389,10 +389,10 @@ public class HtmlTable extends ClickableElement {
          * @throws IllegalStateException if there is no current element
          */
         public void remove() throws IllegalStateException {
-            if(nextRow_ == null) {
+            if (nextRow_ == null) {
                 throw new IllegalStateException();
             }
-            if(nextRow_.getPreviousSibling() != null) {
+            if (nextRow_.getPreviousSibling() != null) {
                 nextRow_.getPreviousSibling().remove();
             }
         }
@@ -402,7 +402,7 @@ public class HtmlTable extends ClickableElement {
          * @throws NoSuchElementException if no more rows are available
          */
         public HtmlTableRow nextRow() throws NoSuchElementException {
-            if(nextRow_ != null) {
+            if (nextRow_ != null) {
                 final HtmlTableRow result = nextRow_;
                 setNextRow(nextRow_.getNextSibling());
                 return result;
@@ -420,18 +420,18 @@ public class HtmlTable extends ClickableElement {
         private void setNextRow(final DomNode node) {
 
             nextRow_ = null;
-            for(DomNode next = node; next != null; next = next.getNextSibling()) {
-                if(next instanceof HtmlTableRow) {
+            for (DomNode next = node; next != null; next = next.getNextSibling()) {
+                if (next instanceof HtmlTableRow) {
                     nextRow_ = (HtmlTableRow)next;
                     return;
                 }
-                else if(currentGroup_ == null && next instanceof TableRowGroup) {
+                else if (currentGroup_ == null && next instanceof TableRowGroup) {
                     currentGroup_ = (TableRowGroup)next;
                     setNextRow(next.getFirstChild());
                     return;
                 }
             }
-            if(currentGroup_ != null) {
+            if (currentGroup_ != null) {
                 final DomNode group = currentGroup_;
                 currentGroup_ = null;
                 setNextRow(group.getNextSibling());

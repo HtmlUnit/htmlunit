@@ -157,8 +157,8 @@ public class SanityCheck extends WebTestCase {
                 webClient.getPage( new URL( "https://sourceforge.net/projects/htmlunit/" ) ),
                 HtmlPage.class );
         }
-        catch( final MalformedURLException e ) {
-            System.out.println("Skipping https test: "+getName());
+        catch (final MalformedURLException e) {
+            System.out.println("Skipping https test: " + getName());
         }
     }
 
@@ -173,8 +173,8 @@ public class SanityCheck extends WebTestCase {
             final HtmlForm form = page.getFormByName("login_form");
             assertNotNull(form);
         }
-        catch( final MalformedURLException e ) {
-            System.out.println("Skipping https test: "+getName());
+        catch (final MalformedURLException e) {
+            System.out.println("Skipping https test: " + getName());
         }
     }
 

@@ -188,7 +188,7 @@ public class ThreadManager {
      */
     public void interruptAll() {
         final Set keys = new HashSet(threadMap_.keySet());
-        for (final Iterator iter=keys.iterator(); iter.hasNext();) {
+        for (final Iterator iter = keys.iterator(); iter.hasNext();) {
             stopThread(((Integer) iter.next()).intValue());
         }
     }

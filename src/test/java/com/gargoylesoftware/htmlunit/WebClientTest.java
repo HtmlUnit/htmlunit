@@ -107,7 +107,7 @@ public class WebClientTest extends WebTestCase {
             client.getPage(new WebRequestSettings(URL_GARGOYLE, SubmitMethod.POST));
             fail( "Expected FailingHttpStatusCodeException" );
         }
-        catch( final FailingHttpStatusCodeException e ) {
+        catch (final FailingHttpStatusCodeException e) {
             assertEquals( 401, e.getStatusCode() );
         }
     }
@@ -122,7 +122,7 @@ public class WebClientTest extends WebTestCase {
             client.assertionFailed( "foobar" );
             fail( "Expected AssertionFailedError" );
         }
-        catch( final junit.framework.AssertionFailedError e ) {
+        catch (final junit.framework.AssertionFailedError e) {
             assertEquals( "foobar", e.getMessage() );
         }
     }
@@ -564,7 +564,7 @@ public class WebClientTest extends WebTestCase {
         //
         page = (HtmlPage) webClient.getPage(new WebRequestSettings(url, initialRequestMethod));
         webResponse = page.getWebResponse();
-        if( expectedRedirectedRequestMethod == null ) {
+        if (expectedRedirectedRequestMethod == null) {
             // No redirect should have happened
             assertEquals( statusCode, webResponse.getStatusCode() );
             assertEquals( initialRequestMethod, webConnection.getLastMethod() );
@@ -600,7 +600,7 @@ public class WebClientTest extends WebTestCase {
             webClient.setPageCreator(null);
             fail("Expected NullPointerException");
         }
-        catch( final NullPointerException e ) {
+        catch (final NullPointerException e) {
             // expected path
         }
     }
@@ -980,20 +980,20 @@ public class WebClientTest extends WebTestCase {
         buffer.append(
             "<html><head><title>First</title></head><body><form name='form1' method='post' onsubmit='return false;'>");
 
-        for( int i=0; i<tabIndexValues.length; i++ ) {
+        for (int i = 0; i < tabIndexValues.length; i++) {
             buffer.append("<input type='submit' name='submit");
             buffer.append(i);
             buffer.append("' id='submit");
             buffer.append(i);
             buffer.append("'");
-            if( tabIndexValues[i] != null ) {
+            if (tabIndexValues[i] != null) {
                 buffer.append(" tabindex='");
                 buffer.append(tabIndexValues[i]);
                 buffer.append("'");
             }
-            buffer.append(" onblur='alert(\"blur-"+i+"\")'");
-            buffer.append(" onfocus='alert(\"focus-"+i+"\")'");
-            buffer.append(" accesskey='"+(char)('a'+i)+"'");
+            buffer.append(" onblur='alert(\"blur-" + i + "\")'");
+            buffer.append(" onfocus='alert(\"focus-" + i + "\")'");
+            buffer.append(" accesskey='" + (char)('a' + i) + "'");
             buffer.append(">");
         }
         buffer.append("<div id='div1'>foo</div>"); // something that isn't tabbable
@@ -1209,7 +1209,7 @@ public class WebClientTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         assertInstanceOf( webClient.getRefreshHandler(), ImmediateRefreshHandler.class );
 
-        final RefreshHandler handler = new ImmediateRefreshHandler() {};
+        final RefreshHandler handler = new ImmediateRefreshHandler() { };
         webClient.setRefreshHandler( handler );
         assertSame( handler, webClient.getRefreshHandler() );
     }
@@ -1264,7 +1264,7 @@ public class WebClientTest extends WebTestCase {
         });
         client.setAlertHandler( new AlertHandler() {
             public void handleAlert( final Page page, final String message ) {
-                if( !message.equals( newAlertText ) ) {
+                if (!message.equals( newAlertText )) {
                     fail( "The pre processor did not modify the javascript" );
                 }
             }
@@ -1477,7 +1477,7 @@ public class WebClientTest extends WebTestCase {
      */
     private File getTestFile(final String fileName) throws Exception {
         final URL url = getClass().getResource("testfiles/" + fileName);
-        if( url == null ) {
+        if (url == null) {
             throw new FileNotFoundException(fileName);
         }
         final File file = new File(new URI(url.toString()));

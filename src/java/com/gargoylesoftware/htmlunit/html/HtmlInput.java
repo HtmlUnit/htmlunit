@@ -384,8 +384,8 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      */
     protected void setDefaultValue( final String defaultValue, final boolean modifyValue ) {
         defaultValue_ = defaultValue;
-        if( modifyValue ) {
-            setValueAttribute( defaultValue );
+        if (modifyValue) {
+            setValueAttribute(defaultValue);
         }
     }
 

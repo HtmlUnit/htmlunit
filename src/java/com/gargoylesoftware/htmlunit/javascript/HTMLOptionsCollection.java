@@ -59,7 +59,7 @@ import org.mozilla.javascript.ScriptableObject;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  */
-public class HTMLOptionsCollection extends SimpleScriptable implements ScriptableWithFallbackGetter{
+public class HTMLOptionsCollection extends SimpleScriptable implements ScriptableWithFallbackGetter {
     private static final long serialVersionUID = -4790255174217201235L;
     private HtmlSelect htmlSelect_;
 
@@ -171,7 +171,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     }
 
     /**
-     * Change the number of options: removes options if the new lenght
+     * Change the number of options: removes options if the new length
      * is less than the current one else add new empty options to reach the
      * new length.
      * @param newLength The new length property value
@@ -182,7 +182,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
             htmlSelect_.setOptionSize( newLength );
         }
         else {
-            for (int i=currentLength; i<newLength; ++i) {
+            for (int i = currentLength; i < newLength; i++) {
                 final HtmlOption option = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement(
                         htmlSelect_.getPage(), HtmlOption.TAG_NAME, null);
                 htmlSelect_.appendOption( option );

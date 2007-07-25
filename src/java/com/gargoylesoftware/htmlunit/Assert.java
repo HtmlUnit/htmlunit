@@ -56,7 +56,7 @@ public final class Assert {
      * @param object The object to check for null.
      */
     public static void notNull( final String description, final Object object ) {
-        if( object == null ) {
+        if (object == null) {
             throw new NullPointerException(description);
         }
     }

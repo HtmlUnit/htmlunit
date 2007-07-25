@@ -136,7 +136,7 @@ public class HtmlScriptTest extends WebTestCase {
             + "<script>alert('First script executes')</script>"
             + "<script>window.location.href='" + URL_SECOND + "'</script>"
             + "<script>alert('Third script executing but should be skipped')</script>"
-            +"</body></html>";
+            + "</body></html>";
 
         final String secondPage
             = "<html><head></head><body>"

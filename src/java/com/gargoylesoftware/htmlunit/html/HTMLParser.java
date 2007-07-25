@@ -185,7 +185,7 @@ public final class HTMLParser {
     public static IElementFactory getFactory(final String tagName) {
         final IElementFactory result = (IElementFactory)ELEMENT_FACTORIES.get(tagName);
 
-        if(result != null) {
+        if (result != null) {
             return result;
         }
         else {
@@ -239,7 +239,7 @@ public final class HTMLParser {
                 
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, webResponse.getUrl());
         String charSet = webResponse.getContentCharSet();
-        if( !Charset.isSupported(charSet) ) {
+        if (!Charset.isSupported(charSet)) {
             charSet = TextUtil.DEFAULT_CHARSET;
         }
         final XMLInputSource in = new XMLInputSource(
@@ -418,7 +418,7 @@ public final class HTMLParser {
                 stack_.pop(); //remove extra node from stack
             }
 
-            if(!stack_.isEmpty()) {
+            if (!stack_.isEmpty()) {
                 currentNode_ = (DomNode)stack_.peek();
             }
         }
@@ -426,7 +426,7 @@ public final class HTMLParser {
         /** @inheritDoc ContentHandler#characters(char,int,int) */
         public void characters(final char ch[], final int start, final int length) throws SAXException {
 
-            if(characters_ == null) {
+            if (characters_ == null) {
                 characters_ = new StringBuffer();
             }
             characters_.append(ch, start, length);
@@ -435,7 +435,7 @@ public final class HTMLParser {
         /** @inheritDoc ContentHandler#ignorableWhitespace(char,int,int) */
         public void ignorableWhitespace(final char ch[], final int start, final int length) throws SAXException {
 
-            if(characters_ == null) {
+            if (characters_ == null) {
                 characters_ = new StringBuffer();
             }
             characters_.append(ch, start, length);
@@ -447,7 +447,7 @@ public final class HTMLParser {
          */
         private void handleCharacters() {
 
-            if(characters_ != null && characters_.length() > 0) {
+            if (characters_ != null && characters_.length() > 0) {
                 final DomText text = new DomText(page_, characters_.toString());
                 currentNode_.appendChild(text);
                 characters_.setLength(0);
@@ -462,7 +462,7 @@ public final class HTMLParser {
 
             final IElementFactory factory = (IElementFactory)ELEMENT_FACTORIES.get(tagName);
 
-            if(factory != null) {
+            if (factory != null) {
                 return factory;
             }
             else {

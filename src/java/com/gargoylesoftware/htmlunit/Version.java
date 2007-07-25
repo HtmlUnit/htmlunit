@@ -55,7 +55,7 @@ public class Version {
      * @throws Exception If an error occurs
      */
     public static void main( final String args[] ) throws Exception {
-        if( args.length == 1 && args[0].equals("-SanityCheck") ) {
+        if (args.length == 1 && args[0].equals("-SanityCheck")) {
             new Version().runSanityCheck();
             return;
         }
@@ -63,7 +63,7 @@ public class Version {
         System.out.println(getProductName());
         System.out.println(getCopyright());
 
-        System.out.println("Version: "+getProductVersion());
+        System.out.println("Version: " + getProductVersion());
     }
     
     private void runSanityCheck() throws Exception {

@@ -153,7 +153,7 @@ class EventListenersContainer {
             final HtmlPage page = node.getPage();
             // make a copy of the list as execution of an handler may (de-)register handlers
             final List handlersToExecute = new ArrayList(handlers);
-            for (final Iterator iter=handlersToExecute.iterator(); iter.hasNext();) {
+            for (final Iterator iter = handlersToExecute.iterator(); iter.hasNext();) {
                 final Function listener = (Function) iter.next();
                 result = page.executeJavaScriptFunctionIfPossible(
                         listener, jsNode_, args, node);

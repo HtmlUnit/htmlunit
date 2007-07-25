@@ -110,7 +110,7 @@ public class HtmlImageInput extends HtmlInput {
             prefix = name + ".";
         }
             
-        if( wasPositionSpecified_ ) {
+        if (wasPositionSpecified_) {
             return new KeyValuePair[]{
                 new KeyValuePair(prefix + "x", String.valueOf(xPosition_)),
                 new KeyValuePair(prefix + "y", String.valueOf(yPosition_))
@@ -146,7 +146,7 @@ public class HtmlImageInput extends HtmlInput {
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
         final HtmlForm form = getEnclosingForm();
-        if( form != null ) {
+        if (form != null) {
             return form.submit(this);
         }
         else {

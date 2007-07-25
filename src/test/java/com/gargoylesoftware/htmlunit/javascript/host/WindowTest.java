@@ -1526,7 +1526,7 @@ public class WindowTest extends WebTestCase {
             + "    try {\n"
             + "      window.execScript('alert(\"BadLanguage\")', 'BadLanguage');\n"
             + "    }\n"
-            + "    catch(e) {\n"
+            + "    catch (e) {\n"
             + "      alert(e.message.substr(0, 20)); // msg now contains info on error location\n"
             + "    }\n"
             + "  }\n"
@@ -2201,7 +2201,7 @@ public class WindowTest extends WebTestCase {
             testGetComputedStyle(BrowserVersion.INTERNET_EXPLORER_6_0);
             fail("'getComputedStyle' is not defined for IE");
         }
-        catch(final Exception e) {
+        catch (final Exception e) {
             //expected
         }
     }

@@ -89,7 +89,7 @@ public class InputTest extends WebTestCase {
             + "    alert(document.form1.textfield1.form.name)\n"
             + "    document.form1.textfield1.value='cat'\n"
             + "    alert(document.form1.textfield1.value)\n"
-            +"}\n"
+            + "}\n"
             + "</script></head><body onload='doTest()'>"
             + "<p>hello world</p>"
             + "<form name='form1'>"

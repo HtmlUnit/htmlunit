@@ -60,7 +60,7 @@ public final class TextUtil {
     public static final String DEFAULT_CHARSET = "ISO-8859-1";
     
     /** Private constructor to prevent instantiation */
-    private TextUtil() {}
+    private TextUtil() { }
 
     /**
      * Return true if the string starts with the specified prefix, irrespective of case.
@@ -72,12 +72,12 @@ public final class TextUtil {
         Assert.notNull("stringToCheck", stringToCheck);
         Assert.notNull("prefix", prefix);
 
-        if( prefix.length() == 0 ) {
+        if (prefix.length() == 0) {
             throw new IllegalArgumentException("Prefix may not be empty");
         }
 
         final int prefixLength = prefix.length();
-        if( stringToCheck.length() < prefixLength ) {
+        if (stringToCheck.length() < prefixLength) {
             return false;
         }
         else {
@@ -94,7 +94,7 @@ public final class TextUtil {
         try {
             return toInputStream(content, DEFAULT_CHARSET);
         }
-        catch( final UnsupportedEncodingException e ) {
+        catch (final UnsupportedEncodingException e) {
             throw new IllegalStateException(
                 DEFAULT_CHARSET + " is an unsupported encoding!  You may have a corrupted installation of java.");
         }
@@ -114,7 +114,7 @@ public final class TextUtil {
             UnsupportedEncodingException {
 
         try {
-            final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(content.length()*2);
+            final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(content.length() * 2);
             final OutputStreamWriter writer = new OutputStreamWriter(byteArrayOutputStream, encoding);
             writer.write(content);
             writer.flush();
@@ -122,14 +122,14 @@ public final class TextUtil {
             final byte[] byteArray = byteArrayOutputStream.toByteArray();
             return new ByteArrayInputStream(byteArray);
         }
-        catch( final UnsupportedEncodingException e ) {
+        catch (final UnsupportedEncodingException e) {
             throw e;
         }
-        catch( final IOException e ) {
+        catch (final IOException e) {
             // Theoretically impossible since all the "IO" is in memory but it's a
             // checked exception so we have to catch it.
             e.printStackTrace();
-            throw new IllegalStateException("Exception when converting a string to an input stream: "+e);
+            throw new IllegalStateException("Exception when converting a string to an input stream: " + e);
         }
     }
 

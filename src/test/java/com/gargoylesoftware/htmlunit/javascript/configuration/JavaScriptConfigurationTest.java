@@ -448,7 +448,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         parser.setFeature("http://apache.org/xml/features/validation/schema", true);
         parser.setEntityResolver( new EntityResolver() {
             public InputSource resolveEntity(final String publicId, final String systemId) throws IOException {
-                return createInputSourceForFile(directory+"JavaScriptConfiguration.xsd");
+                return createInputSourceForFile(directory + "JavaScriptConfiguration.xsd");
             }
         });
         parser.setErrorHandler( new ErrorHandler() {
@@ -463,7 +463,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             }
         });
 
-        parser.parse( createInputSourceForFile(directory+"JavaScriptConfiguration.xml") );
+        parser.parse(createInputSourceForFile(directory + "JavaScriptConfiguration.xml"));
 
     }
     
@@ -493,7 +493,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             final Method[] methods = clazz.getMethods();
             String elementName;
             Method theMethod;
-            for (int i=0; i < methods.length; i++) {
+            for (int i = 0; i < methods.length; i++) {
                 final String name = methods[i].getName();
                 if (checkForIgnore(name, classname)) {
                     continue;
