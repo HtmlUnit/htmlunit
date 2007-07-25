@@ -261,12 +261,13 @@
     <postGoal name="test:compile">
         <ant:copy todir="target/test-classes/com/gargoylesoftware/htmlunit/testfiles">
             <ant:fileset dir="${basedir}/src/test/java/com/gargoylesoftware/htmlunit/testfiles">
-			    <ant:exclude name=".svn"/>
+                <ant:exclude name=".svn"/>
             </ant:fileset>
         </ant:copy>
         <ant:copy todir="target/test-classes/">
             <ant:fileset dir="${basedir}/src/test/java/">
-			    <ant:include name="**/*.html.gz"/>
+                <ant:include name="**/*.htm*"/>
+                <ant:include name="**/*.txt"/>
             </ant:fileset>
         </ant:copy>
     </postGoal>
