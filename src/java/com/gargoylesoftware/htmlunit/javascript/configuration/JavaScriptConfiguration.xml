@@ -712,6 +712,9 @@
         <property name="behavior" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
+        <function name="getPropertyValue">
+            <browser name="Netscape"/>
+        </function>
     </class>
 
     <class name="Table" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.Table"

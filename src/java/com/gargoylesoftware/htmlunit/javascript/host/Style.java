@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Daniel Gredler
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public class Style extends SimpleScriptable {
     private static final long serialVersionUID = -1976370264911039311L;
@@ -261,5 +262,14 @@ public class Style extends SimpleScriptable {
      */
     public void jsxSet_behavior(final String newValue) {
         setStyleAttribute("behavior", newValue);
+    }
+    
+    /**
+     * Gets the style property value.
+     * @param name the style property name
+     * @return empty string if noting found
+     */
+    public String jsxFunction_getPropertyValue(final String name) {
+        return getStyleAttribute(name);
     }
 }

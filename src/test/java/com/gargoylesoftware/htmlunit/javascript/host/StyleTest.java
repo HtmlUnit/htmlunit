@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class StyleTest extends WebTestCase {
 
@@ -247,11 +248,42 @@ public class StyleTest extends WebTestCase {
                 + "<body onload='doTest()'>"
                 + "<div id='div1'>foo</div></body></html>";
 
-        final String[] expectedAlerts = { "123" };
+        final String[] expectedAlerts = {"123"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
         assertEquals( expectedAlerts, collectedAlerts );
+    }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetPropertyValue() throws Exception {
+        testGetPropertyValue(BrowserVersion.FIREFOX_2);
+        try {
+            testGetPropertyValue(BrowserVersion.INTERNET_EXPLORER_7_0);
+            fail("getPropertyValue is not supported in IE");
+        }
+        catch(final Exception e) {
+            //expected
+        }
+    }
+    
+    private void testGetPropertyValue(final BrowserVersion browserVersion) throws Exception {
+        final String content = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var oDiv1 = document.getElementById('div1');\n"
+            + "    alert(oDiv1.style.getPropertyValue( 'background' ));\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<div id='div1' style='background: blue'>foo</div></body></html>";
+
+        final String[] expectedAlerts = {"blue"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
