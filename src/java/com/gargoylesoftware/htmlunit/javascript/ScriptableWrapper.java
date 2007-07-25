@@ -98,8 +98,8 @@ public class ScriptableWrapper extends ScriptableObject {
                 properties_.put("length", length);
 
                 final Method item = javaObject.getClass().getMethod("item",
-                        new Class[] { Integer.TYPE });
-                defineProperty("item", new MethodWrapper("item", staticType, new Class[] { Integer.TYPE }),
+                        new Class[] {Integer.TYPE});
+                defineProperty("item", new MethodWrapper("item", staticType, new Class[] {Integer.TYPE}),
                         0);
 
                 final Method toString = getClass().getMethod("jsToString",
@@ -112,9 +112,9 @@ public class ScriptableWrapper extends ScriptableObject {
                 if (NamedNodeMap.class.equals(staticType)) {
                     final Method getNamedItem = javaObject.getClass()
                             .getMethod("getNamedItem",
-                                    new Class[] { String.class });
+                                    new Class[] {String.class});
                     defineProperty("getNamedItem",
-                            new MethodWrapper("getNamedItem", staticType, new Class[] { String.class }), 0);
+                            new MethodWrapper("getNamedItem", staticType, new Class[] {String.class}), 0);
 
                     getByNameFallback_ = getNamedItem;
                 }
@@ -145,7 +145,7 @@ public class ScriptableWrapper extends ScriptableObject {
             }
             else {
                 final Object byName = invoke(getByNameFallback_,
-                        new Object[] { name });
+                        new Object[] {name});
                 if (byName != null) {
                     response = byName;
                 }
@@ -200,7 +200,7 @@ public class ScriptableWrapper extends ScriptableObject {
     public Object get(final int index, final Scriptable start) {
         if (getByIndexMethod_ != null) {
             final Object byIndex = invoke(getByIndexMethod_,
-                    new Object[] { new Integer(index) });
+                    new Object[] {new Integer(index)});
             return Context.javaToJS(byIndex, ScriptableObject
                     .getTopLevelScope(start));
         }

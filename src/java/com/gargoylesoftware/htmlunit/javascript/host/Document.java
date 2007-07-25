@@ -365,7 +365,7 @@ public final class Document extends NodeImpl {
                     tagState = tagInName;
                     break;
                 case tagInName:
-                    if (! Character.isLetter(currentChar)) {
+                    if (!Character.isLetter(currentChar)) {
                         final String tagName = content.substring(tagNameBeginIndex, index);
                         if (tagName.equalsIgnoreCase("script")) {
                             if (tagIsOpen) {

@@ -76,7 +76,7 @@ public class Style extends SimpleScriptable {
     /**
      * These are IE properties, this should be configured per browser
      */
-    private static final String[] STYLE_PROPERTIES = { "backgroundColor",
+    private static final String[] STYLE_PROPERTIES = {"backgroundColor",
         "bottom", "clear", "clip", "color", "direction",
         "display", "font", "fontFamily", "fontSize", "fontStyle",
         "fontWeight", "fontWeight", "hasLayout", "height", "layoutFlow",

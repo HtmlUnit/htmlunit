@@ -58,7 +58,7 @@ public class DebuggingWebConnectionTest extends WebTestCase {
      * @param name The name of the new instance.
      */
     public DebuggingWebConnectionTest(final String name) {
-        super( name );
+        super(name);
     }
 
     /**

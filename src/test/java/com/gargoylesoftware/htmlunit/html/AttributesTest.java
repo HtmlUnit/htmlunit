@@ -245,7 +245,7 @@ public class AttributesTest extends WebTestCase {
         }
         else {
             final Constructor constructor = classUnderTest_.getDeclaredConstructor(
-                new Class[]{ HtmlPage.class, Map.class } );
+                new Class[]{HtmlPage.class, Map.class} );
             try {
                 newInstance = constructor.newInstance(
                     new Object[]{page_, null});

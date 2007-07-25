@@ -67,9 +67,9 @@ public class WebResponseImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRecognizeBOM() throws Exception {
-        testRecognizeBOM( "UTF-8",    new byte[] { (byte) 0xef, (byte) 0xbb, (byte) 0xbf} );
-        testRecognizeBOM( "UTF-16BE", new byte[] { (byte) 0xfe, (byte) 0xff} );
-        testRecognizeBOM( "UTF-16LE", new byte[] { (byte) 0xff, (byte) 0xfe} );
+        testRecognizeBOM( "UTF-8",    new byte[] {(byte) 0xef, (byte) 0xbb, (byte) 0xbf} );
+        testRecognizeBOM( "UTF-16BE", new byte[] {(byte) 0xfe, (byte) 0xff} );
+        testRecognizeBOM( "UTF-16LE", new byte[] {(byte) 0xff, (byte) 0xfe} );
     }
 
     private void testRecognizeBOM(final String encoding, final byte[] markerBytes ) throws Exception {

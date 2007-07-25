@@ -292,7 +292,7 @@ public class Location extends SimpleScriptable {
         final int port = url.getPort();
         final String host = url.getHost();
 
-        if( port == - 1 ) {
+        if( port == -1 ) {
             return host;
         }
         else {

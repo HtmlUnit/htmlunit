@@ -54,43 +54,43 @@ public class UrlUtilsTest extends WebTestCase {
      * @param name The name of the new instance.
      */
     public UrlUtilsTest(final String name) {
-        super( name );
+        super(name);
     }
 
     /**
      * @throws Exception If the test fails.
      */
     public void testGetUrlWithNewProtocol() throws Exception {
-        final URL a = new URL( "http://my.home.com/index.html?query#ref" );
-        final URL b = UrlUtils.getUrlWithNewProtocol( a, "ftp" );
-        assertEquals( "ftp://my.home.com/index.html?query#ref", b.toExternalForm() );
+        final URL a = new URL("http://my.home.com/index.html?query#ref");
+        final URL b = UrlUtils.getUrlWithNewProtocol(a, "ftp");
+        assertEquals("ftp://my.home.com/index.html?query#ref", b.toExternalForm());
     }
 
     /**
      * @throws Exception If the test fails.
      */
     public void testGetUrlWithNewHost() throws Exception {
-        final URL a = new URL( "http://my.home.com/index.html?query#ref" );
-        final URL b = UrlUtils.getUrlWithNewHost( a, "your.home.com" );
-        assertEquals( "http://your.home.com/index.html?query#ref", b.toExternalForm() );
+        final URL a = new URL("http://my.home.com/index.html?query#ref");
+        final URL b = UrlUtils.getUrlWithNewHost(a, "your.home.com");
+        assertEquals("http://your.home.com/index.html?query#ref", b.toExternalForm());
     }
 
     /**
      * @throws Exception If the test fails.
      */
     public void testGetUrlWithNewPort() throws Exception {
-        final URL a = new URL( "http://my.home.com/index.html?query#ref" );
-        final URL b = UrlUtils.getUrlWithNewPort( a, 8080 );
-        assertEquals( "http://my.home.com:8080/index.html?query#ref", b.toExternalForm() );
+        final URL a = new URL("http://my.home.com/index.html?query#ref");
+        final URL b = UrlUtils.getUrlWithNewPort(a, 8080);
+        assertEquals("http://my.home.com:8080/index.html?query#ref", b.toExternalForm());
     }
 
     /**
      * @throws Exception If the test fails.
      */
     public void testGetUrlWithNewPath() throws Exception {
-        final URL a = new URL( "http://my.home.com/index.html?query#ref" );
-        final URL b = UrlUtils.getUrlWithNewPath( a, "/es/indice.html" );
-        assertEquals( "http://my.home.com/es/indice.html?query#ref", b.toExternalForm() );
+        final URL a = new URL("http://my.home.com/index.html?query#ref");
+        final URL b = UrlUtils.getUrlWithNewPath(a, "/es/indice.html");
+        assertEquals("http://my.home.com/es/indice.html?query#ref", b.toExternalForm());
     }
 
     /**
@@ -98,26 +98,26 @@ public class UrlUtilsTest extends WebTestCase {
      */
     public void testGetUrlWithNewRef() throws Exception {
 
-        final URL a = new URL( "http://my.home.com/index.html?query#ref" );
-        final URL b = UrlUtils.getUrlWithNewRef( a, "abc" );
-        assertEquals( "http://my.home.com/index.html?query#abc", b.toExternalForm() );
+        final URL a = new URL("http://my.home.com/index.html?query#ref");
+        final URL b = UrlUtils.getUrlWithNewRef(a, "abc");
+        assertEquals("http://my.home.com/index.html?query#abc", b.toExternalForm());
 
-        final URL c = new URL( "http://my.home.com/#ref" );
-        final URL d = UrlUtils.getUrlWithNewRef( c, "xyz" );
-        assertEquals( "http://my.home.com/#xyz", d.toExternalForm() );
+        final URL c = new URL("http://my.home.com/#ref");
+        final URL d = UrlUtils.getUrlWithNewRef(c, "xyz");
+        assertEquals("http://my.home.com/#xyz", d.toExternalForm());
 
-        final URL e = new URL( "http://my.home.com#ref" );
-        final URL f = UrlUtils.getUrlWithNewRef( e, "xyz" );
-        assertEquals( "http://my.home.com#xyz", f.toExternalForm() );
+        final URL e = new URL("http://my.home.com#ref");
+        final URL f = UrlUtils.getUrlWithNewRef(e, "xyz");
+        assertEquals("http://my.home.com#xyz", f.toExternalForm());
     }
 
     /**
      * @throws Exception If the test fails.
      */
     public void testGetUrlWithNewQuery() throws Exception {
-        final URL a = new URL( "http://my.home.com/index.html?query#ref" );
-        final URL b = UrlUtils.getUrlWithNewQuery( a, "xyz" );
-        assertEquals( "http://my.home.com/index.html?xyz#ref", b.toExternalForm() );
+        final URL a = new URL("http://my.home.com/index.html?query#ref");
+        final URL b = UrlUtils.getUrlWithNewQuery(a, "xyz");
+        assertEquals("http://my.home.com/index.html?xyz#ref", b.toExternalForm());
     }
 
 }

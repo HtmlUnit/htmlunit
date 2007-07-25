@@ -100,7 +100,7 @@ public class AnchorTest extends WebTestCase {
         
         anchor.click();
         
-        final String[] expectedAlerts = { "http://x/testsite1.html", "testsite1.html",
+        final String[] expectedAlerts = {"http://x/testsite1.html", "testsite1.html",
             "http://x/testsite2.html", "testsite2.html", "13", "testanchor"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
@@ -152,7 +152,7 @@ public class AnchorTest extends WebTestCase {
             + "</body></html>";
         
         final List collectedAlerts = new ArrayList();
-        final String[] expectedAlerts = { "",
+        final String[] expectedAlerts = {"",
             "http://www.gargoylesoftware.com/foo.html",
             "javascript:void(0)",
             "http://www.gargoylesoftware.com/#"};

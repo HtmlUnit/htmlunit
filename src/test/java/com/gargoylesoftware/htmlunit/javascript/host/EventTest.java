@@ -367,14 +367,14 @@ public class EventTest extends WebTestCase {
         HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("clickMe")).click();
 
-        String[] expectedAlerts = { "false", "true", "SPAN" };
+        String[] expectedAlerts = {"false", "true", "SPAN"};
         assertEquals( expectedAlerts, collectedAlerts );
 
         collectedAlerts.clear();
         page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("clickMe")).click();
 
-        expectedAlerts = new String[] { "true", "false", "SPAN" };
+        expectedAlerts = new String[] {"true", "false", "SPAN"};
         assertEquals( expectedAlerts, collectedAlerts );
 
     }
@@ -397,7 +397,7 @@ public class EventTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
 
-        final String[] expectedAlerts = { "false", "false"};
+        final String[] expectedAlerts = {"false", "false"};
         assertEquals( expectedAlerts, collectedAlerts );
     }
 
@@ -421,7 +421,7 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = { "1", "2" };
+        final String[] expectedAlerts = {"1", "2"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -460,8 +460,8 @@ public class EventTest extends WebTestCase {
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theSpan")).click();
 
-        final String[] expectedAlerts = { "window capturing", "div capturing", "span capturing",
-            "span bubbling", "div", "div bubbling", "window bubbling" };
+        final String[] expectedAlerts = {"window capturing", "div capturing", "span capturing",
+            "span bubbling", "div", "div bubbling", "window bubbling"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -533,12 +533,12 @@ public class EventTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theSpan")).click();
-        final String[] expectedAlerts1 = { "window capturing", "div capturing", "span capturing", "div" };
+        final String[] expectedAlerts1 = {"window capturing", "div capturing", "span capturing", "div"};
         assertEquals(expectedAlerts1, collectedAlerts);
         collectedAlerts.clear();
 
         ((ClickableElement) page.getHtmlElementById("theSpan")).click();
-        final String[] expectedAlerts2 = { "window capturing" };
+        final String[] expectedAlerts2 = {"window capturing"};
         assertEquals(expectedAlerts2, collectedAlerts);
     }
 }

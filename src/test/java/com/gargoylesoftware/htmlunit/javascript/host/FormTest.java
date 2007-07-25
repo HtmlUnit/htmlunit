@@ -1031,7 +1031,7 @@ public class FormTest extends WebTestCase {
             + " </form>"
             + "</body>"
             + "</html>";
-        final String[] expectedAlerts = { "INPUT", "idImg1", "img2", "true"};
+        final String[] expectedAlerts = {"INPUT", "idImg1", "img2", "true"};
         final List collectedAlerts = new ArrayList();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
@@ -1107,7 +1107,7 @@ public class FormTest extends WebTestCase {
 
         client.getPage(URL_FIRST);
 
-        final String[] expectedAlerts = { "page 1: formPage1", "page 2: formPage2"};
+        final String[] expectedAlerts = {"page 1: formPage1", "page 2: formPage2"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

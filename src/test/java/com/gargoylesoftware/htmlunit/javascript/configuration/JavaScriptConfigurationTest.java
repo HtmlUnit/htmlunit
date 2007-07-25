@@ -523,7 +523,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
     
     private boolean checkForIgnore(final String methodName, final String classname) {
-        final String[] ignoreList = { "Button|jsxGet_form",
+        final String[] ignoreList = {"Button|jsxGet_form",
             "FormField|jsxGet_form",
             "FileUpload|jsxGet_form",
             "Radio|jsxGet_form",

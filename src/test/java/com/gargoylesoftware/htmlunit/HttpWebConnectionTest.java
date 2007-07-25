@@ -302,7 +302,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
         setupWebServer(12345);
 
         final WebClient webClient = new WebClient();
-        final boolean[] tabCalled = { false };
+        final boolean[] tabCalled = {false};
         final WebConnection myWebConnection = new HttpWebConnection(webClient) {
             protected HttpClient createHttpClient() {
                 tabCalled[0] = true;

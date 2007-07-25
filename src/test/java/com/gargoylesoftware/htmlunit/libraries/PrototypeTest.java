@@ -150,10 +150,10 @@ public class PrototypeTest extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testSelector() throws Exception {
-        if( notYetImplemented() ) {
+        if(notYetImplemented()) {
             return;
         }
-        test( "selector.html", 18, 46 );
+        test("selector.html", 18, 46);
     }
 
     /**
@@ -162,24 +162,23 @@ public class PrototypeTest extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testString() throws Exception {
-        if( notYetImplemented() ) {
+        if(notYetImplemented()) {
             return;
         }
-        test( "string.html", 19, 76 );
+        test("string.html", 19, 76);
     }
 
-    private void test( final String filename, final int tests, final int assertions ) throws Exception {
-
-        final WebClient client = new WebClient( BrowserVersion.INTERNET_EXPLORER_6_0 );
-        final URL url = getClass().getClassLoader().getResource( "prototype/1.5.0-rc1/test/unit/" + filename );
+    private void test(final String filename, final int tests, final int assertions) throws Exception {
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
+        final URL url = getClass().getClassLoader().getResource("prototype/1.5.0-rc1/test/unit/" + filename);
         assertNotNull(url);
 
-        final HtmlPage page = (HtmlPage) client.getPage( url );
-        page.getEnclosingWindow().getThreadManager().joinAll( 10000 );
+        final HtmlPage page = (HtmlPage) client.getPage(url);
+        page.getEnclosingWindow().getThreadManager().joinAll(10000);
 
-        final String summary = page.getHtmlElementById( "logsummary" ).asText();
+        final String summary = page.getHtmlElementById("logsummary").asText();
         final String expected = tests + " tests, " + assertions + " assertions, 0 failures, 0 errors";
-        assertEquals( expected, summary );
+        assertEquals(expected, summary);
     }
 
 }

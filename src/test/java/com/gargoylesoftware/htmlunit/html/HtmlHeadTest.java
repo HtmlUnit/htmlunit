@@ -70,7 +70,7 @@ public class HtmlHeadTest extends WebTestCase {
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
-        final String[] expectedAlerts = { "HEAD" };
+        final String[] expectedAlerts = {"HEAD"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
         loadPage(htmlContent, collectedAlerts);

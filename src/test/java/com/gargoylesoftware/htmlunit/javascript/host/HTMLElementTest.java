@@ -105,7 +105,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='testDiv2'>foo</div>"
             + "</body></html>";
 
-        final String[] expectedAlerts = { "all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
+        final String[] expectedAlerts = {"all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
             "all node for testA: IMG ", "all node for testImg: ", "all node for testDiv2: "};
 
         final List collectedAlerts = new ArrayList();
@@ -164,7 +164,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String[] expectedAlerts = { "true", "true" };
+        final String[] expectedAlerts = {"true", "true"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
@@ -317,7 +317,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<tr id='r2'><td>3</td><td>4</td></tr>\n"
             + "</table>\n"
             + "</body></html>\n";
-        final String[] expectedAlerts = { "all = 4", "row = 2" };
+        final String[] expectedAlerts = {"all = 4", "row = 2"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -351,7 +351,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final String[] expectedAlerts = { "first", "second", "third" };
+        final String[] expectedAlerts = {"first", "second", "third"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -430,7 +430,7 @@ public class HTMLElementTest extends WebTestCase {
                 "";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = { "Old = <b>Old innerHTML</b>", "New = New cell value" };
+        final String[] expectedAlerts = {"Old = <b>Old innerHTML</b>", "New = New cell value"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -458,9 +458,9 @@ public class HTMLElementTest extends WebTestCase {
                 "</html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = { "Old = <b>Old innerHTML</b><!-- old comment -->",
+        final String[] expectedAlerts = {"Old = <b>Old innerHTML</b><!-- old comment -->",
             "New =  <b><i id=\"newElt\">New cell value</i></b>",
-            "I" };
+            "I"};
         assertEquals(expectedAlerts, collectedAlerts);
 
         final HtmlElement pElt = page.getHtmlElementById("myNode");
@@ -492,7 +492,7 @@ public class HTMLElementTest extends WebTestCase {
                 "</html>\n" +
                 "";
         final List collectedAlerts = new ArrayList();
-        final String[] expectedAlerts = { "true" };
+        final String[] expectedAlerts = {"true"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -895,7 +895,7 @@ public class HTMLElementTest extends WebTestCase {
         client.setWebConnection( webConnection );
         client.getPage(content1Url);
 
-        final String[] expectedAlerts = { "Refused", "foo" };
+        final String[] expectedAlerts = {"Refused", "foo"};
         final int waitTime = 50;
         final int maxTime = 1000;
         for( int time = 0; time < maxTime; time += waitTime ) {
@@ -964,7 +964,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
         final List collectedAlerts = new ArrayList();
-        final String[] expectedAlerts = { "BR", "DIV", "2", "3" };
+        final String[] expectedAlerts = {"BR", "DIV", "2", "3"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1087,7 +1087,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
         final List collectedAlerts = new ArrayList();
-        final String[] expectedAlerts = { "success" };
+        final String[] expectedAlerts = {"success"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlElement div = page.getHtmlElementById("myDiv");

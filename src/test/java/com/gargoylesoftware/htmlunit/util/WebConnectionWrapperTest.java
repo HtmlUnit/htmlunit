@@ -63,7 +63,7 @@ public class WebConnectionWrapperTest extends WebTestCase {
      * @param name The name of the new instance.
      */
     public WebConnectionWrapperTest(final String name) {
-        super( name );
+        super(name);
     }
 
     /**

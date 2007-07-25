@@ -226,8 +226,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection( webConnection );
         final Page page = client.getPage( URL_FIRST );
 
-        final String[] alerts = { UNINITIALIZED,
-            LOADING, LOADING, LOADED, INTERACTIVE, COMPLETED, xml };
+        final String[] alerts = {UNINITIALIZED, LOADING, LOADING, LOADED, INTERACTIVE, COMPLETED, xml};
 
         assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
         assertEquals( alerts, collectedAlerts );
@@ -359,7 +358,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection( webConnection );
         client.getPage(URL_FIRST);
 
-        final String[] alerts = { "1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1" };
+        final String[] alerts = {"1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1" };
         assertEquals( alerts, collectedAlerts );
     }
 
@@ -503,7 +502,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection( webConnection );
         client.getPage(URL_FIRST);
 
-        final String[] alerts = { "true", "false" };
+        final String[] alerts = {"true", "false"};
         assertEquals( alerts, collectedAlerts );
     }
 
@@ -573,7 +572,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection( webConnection );
         client.getPage( URL_FIRST );
 
-        final String[] alerts = { "ibcdefg", "xxxxxfg" };
+        final String[] alerts = {"ibcdefg", "xxxxxfg" };
 
         assertEquals( alerts, collectedAlerts );
     }
@@ -673,7 +672,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         assertTrue("thread failed to stop in 4 seconds", page.getEnclosingWindow().getThreadManager().joinAll(4000));
 
-        final String[] alerts = { URL_FIRST.toExternalForm(), "before long loop", "after long loop",
+        final String[] alerts = {URL_FIRST.toExternalForm(), "before long loop", "after long loop",
                 urlPage2.toExternalForm(), "ready state handler, content loaded: j=5000" };
         assertEquals( alerts, collectedAlerts );
     }

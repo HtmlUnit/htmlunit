@@ -247,7 +247,7 @@ public final class ClassConfiguration {
      *          argument; <code>false</code> otherwise.
      */
     public boolean equals(final Object obj) {
-        if (! (obj instanceof ClassConfiguration)) {
+        if (!(obj instanceof ClassConfiguration)) {
             return false;
         }
         final ClassConfiguration config = (ClassConfiguration) obj;
@@ -525,17 +525,17 @@ public final class ClassConfiguration {
             }
             final BrowserInfo info = (BrowserInfo) obj;
             if (minVersion_ != null) {
-                if (! minVersion_.equals(info.minVersion_)) {
+                if (!minVersion_.equals(info.minVersion_)) {
                     return false;
                 }
             }
             if (maxVersion_ != null) {
-                if (! maxVersion_.equals(info.maxVersion_)) {
+                if (!maxVersion_.equals(info.maxVersion_)) {
                     return false;
                 }
             }
             if (lessThanVersion_ != null) {
-                if (! lessThanVersion_.equals(info.lessThanVersion_)) {
+                if (!lessThanVersion_.equals(info.lessThanVersion_)) {
                     return false;
                 }
             }

@@ -444,7 +444,7 @@ public class WebClient implements Serializable {
         final Page newPage = pageCreator_.createPage( webResponse, webWindow );
 
         synchronized (firstWindowStack_) {
-            if (! firstWindowStack_.empty() && firstWindowStack_.peek() == null) {
+            if (!firstWindowStack_.empty() && firstWindowStack_.peek() == null) {
                 firstWindowStack_.pop();
                 firstWindowStack_.push(webWindow);
             }

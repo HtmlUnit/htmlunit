@@ -143,7 +143,7 @@ public final class UrlUtils {
             s.append( ":" ).append( port );
         }
         if( path != null && path.length() > 0 ) {
-            if( ! path.startsWith( "/" ) ) {
+            if( !path.startsWith( "/" ) ) {
                 s.append( "/" );
             }
             s.append( path );

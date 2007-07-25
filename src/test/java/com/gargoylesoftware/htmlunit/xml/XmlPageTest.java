@@ -55,7 +55,7 @@ public class XmlPageTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public XmlPageTest( final String name ) {
+    public XmlPageTest(final String name) {
         super(name);
     }
 
@@ -106,9 +106,9 @@ public class XmlPageTest extends WebTestCase {
     private XmlPage testXmlDocument(final String content, final String mimeType) throws Exception
     {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setDefaultResponse(content, 200, "OK", mimeType);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         final Page page = client.getPage(URL_FIRST);
         assertEquals(URL_FIRST, page.getWebResponse().getUrl());
         assertEquals("OK", page.getWebResponse().getStatusMessage());
@@ -127,7 +127,7 @@ public class XmlPageTest extends WebTestCase {
      */
     public void testInvalidDocument() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
 
         final String content
             = "<?xml version=\"1.0\"?>"
@@ -138,7 +138,7 @@ public class XmlPageTest extends WebTestCase {
             + "</foo>";
 
         webConnection.setDefaultResponse(content, 200, "OK", "text/xml");
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final Page page = client.getPage(URL_FIRST);
         assertEquals(URL_FIRST, page.getWebResponse().getUrl());

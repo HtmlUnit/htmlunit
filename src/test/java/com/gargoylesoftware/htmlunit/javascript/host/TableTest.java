@@ -93,7 +93,7 @@ public class TableTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
 
-        final String[] expectedAlerts = { "caption1", "caption2", "null", "caption3" };
+        final String[] expectedAlerts = {"caption1", "caption2", "null", "caption3"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -128,7 +128,7 @@ public class TableTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
 
-        final String[] expectedAlerts = { "thead1", "thead2", "null", "thead3" };
+        final String[] expectedAlerts = {"thead1", "thead2", "null", "thead3"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -333,7 +333,7 @@ public class TableTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
 
-        final String[] expectedAlerts = { "tfoot1", "tfoot2", "null", "tfoot3" };
+        final String[] expectedAlerts = {"tfoot1", "tfoot2", "null", "tfoot3"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -357,7 +357,7 @@ public class TableTest extends WebTestCase {
             + "<tr><td id='td1'>c</td><td id='td2'>d</td></tr>\n"
             + "</table></body></html>";
 
-        final String[] expectedAlerts = { "0", "1", "0", "1" };
+        final String[] expectedAlerts = {"0", "1", "0", "1"};
         createTestPageForRealBrowserIfNeeded( htmlContent, expectedAlerts );
 
         final List collectedAlerts = new ArrayList();
@@ -391,7 +391,7 @@ public class TableTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>\n";
 
-        final String[] expectedAlerts = { "1", "2", "1", "0", "TD", "1", "2" };
+        final String[] expectedAlerts = {"1", "2", "1", "0", "TD", "1", "2"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -428,7 +428,7 @@ public class TableTest extends WebTestCase {
             + "</body>"
             + "</html>";
 
-        final String[] expectedAlerts = { "mytable", "mytable" };
+        final String[] expectedAlerts = {"mytable", "mytable"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -461,7 +461,7 @@ public class TableTest extends WebTestCase {
             + "</body>"
             + "</html>";
 
-        final String[] expectedAlerts = { "TBODY", "TABLE" };
+        final String[] expectedAlerts = {"TBODY", "TABLE"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -495,7 +495,7 @@ public class TableTest extends WebTestCase {
             + "</body>"
             + "</html>";
 
-        final String[] expectedAlerts = { "TBODY", "TBODY", "TBODY" };
+        final String[] expectedAlerts = {"TBODY", "TBODY", "TBODY"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -531,7 +531,7 @@ public class TableTest extends WebTestCase {
             + "</body>"
             + "</html>";
 
-        final String[] expectedAlerts = { "1", "1" };
+        final String[] expectedAlerts = {"1", "1"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -546,7 +546,7 @@ public class TableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testStringValuesIE() throws Exception {
-        final String[] expectedAlerts = { "table: [object]", "row: [object]", "cell: [object]" };
+        final String[] expectedAlerts = {"table: [object]", "row: [object]", "cell: [object]"};
         testStringValues(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlerts);
     }
 
@@ -558,8 +558,8 @@ public class TableTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        final String[] expectedAlerts = { "table: [object HTMLTableElement]",
-            "row: [object HTMLRowElement]", "cell: [object HTMLCellElement]" };
+        final String[] expectedAlerts = {"table: [object HTMLTableElement]",
+            "row: [object HTMLRowElement]", "cell: [object HTMLCellElement]"};
         testStringValues(BrowserVersion.FIREFOX_2, expectedAlerts);
     }
 

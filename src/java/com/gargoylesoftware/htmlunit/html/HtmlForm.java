@@ -333,7 +333,7 @@ public class HtmlForm extends ClickableElement {
             return false;
         }
 
-        if( ! tagName.equals( "isindex" ) && element.getAttributeValue("name").equals("") ) {
+        if( !tagName.equals( "isindex" ) && element.getAttributeValue("name").equals("") ) {
             return false;
         }
 

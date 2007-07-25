@@ -860,7 +860,7 @@ public class WebClientTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ null });
+        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{null});
         final HtmlElement element = page.getHtmlElementById("submit0");
 
         assertNull( "original", page.getElementWithFocus() );
@@ -890,7 +890,7 @@ public class WebClientTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
+        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
 
         assertEquals( "submit0", page.pressAccessKey('a').getAttributeValue("name") );
         assertEquals( "submit2", page.pressAccessKey('c').getAttributeValue("name") );
@@ -911,7 +911,7 @@ public class WebClientTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
+        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
 
         assertEquals( "submit0", page.tabToNextElement().getAttributeValue("name") );
         assertEquals( "submit1", page.tabToNextElement().getAttributeValue("name") );
@@ -932,7 +932,7 @@ public class WebClientTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
+        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
 
         assertEquals( "submit2", page.tabToPreviousElement().getAttributeValue("name") );
         assertEquals( "submit1", page.tabToPreviousElement().getAttributeValue("name") );
@@ -953,7 +953,7 @@ public class WebClientTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
 
-        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{ "1", "2", "3" });
+        final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
         final HtmlElement button = page.getHtmlElementById("button1");
 
         final List expectedAlerts = Collections.singletonList("buttonPushed");

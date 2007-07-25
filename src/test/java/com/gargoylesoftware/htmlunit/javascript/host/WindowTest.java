@@ -2144,7 +2144,7 @@ public class WindowTest extends WebTestCase {
             "      fn();\r\n" +
             "   }\r\n" +
             "</script></body></html>";
-        final String[] expected = { "string" };
+        final String[] expected = {"string"};
         final List actual = new ArrayList();
         loadPage(html, actual);
         assertEquals(expected, actual);

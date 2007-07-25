@@ -532,7 +532,7 @@ public class LocationTest extends WebTestCase {
             + "</head>\n"
             + "<body></body></html>";
 
-        final String[] expectedAlerts = { "foo" };
+        final String[] expectedAlerts = {"foo"};
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
         
@@ -551,7 +551,7 @@ public class LocationTest extends WebTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = { URL_GARGOYLE.toExternalForm() };
+        final String[] expectedAlerts = {URL_GARGOYLE.toExternalForm()};
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);

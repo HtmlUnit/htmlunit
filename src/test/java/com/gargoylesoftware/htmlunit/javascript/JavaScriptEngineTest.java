@@ -1073,7 +1073,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
 
-        final Exception[] exceptions = { null };
+        final Exception[] exceptions = {null};
         final Thread runner = new Thread() {
             public void run() {
                 try {

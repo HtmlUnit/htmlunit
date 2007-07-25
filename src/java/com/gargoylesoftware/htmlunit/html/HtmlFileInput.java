@@ -102,7 +102,7 @@ public class HtmlFileInput extends HtmlInput {
         String value = getValueAttribute();
 
         if (StringUtils.isEmpty(value)) {
-            return new KeyValuePair[] { new KeyDataPair(getNameAttribute(), new File(""), null, null) };
+            return new KeyValuePair[] {new KeyDataPair(getNameAttribute(), new File(""), null, null)};
         }
         
         //to tolerate file://
@@ -119,11 +119,11 @@ public class HtmlFileInput extends HtmlInput {
         }
 
         // contentType and charset are determined from browser and page
-        // perhaps could it be interessant to have setters for it in this class
+        // perhaps it could be interesting to have setters for it in this class
         // to give finer control to user
         final String contentType = getPage().getWebClient().guessContentType(file);
         final String charset = getPage().getPageEncoding();
-        return new KeyValuePair[] { new KeyDataPair(getNameAttribute(), file, contentType,
+        return new KeyValuePair[] {new KeyDataPair(getNameAttribute(), file, contentType,
                 charset) };
     }
 
@@ -136,7 +136,7 @@ public class HtmlFileInput extends HtmlInput {
     }
 
     /**
-     * {@inheritDoc} Overriden so that this does not set the value attribute when emulating
+     * {@inheritDoc} Overridden so that this does not set the value attribute when emulating
      * Netscape browsers.
      * @see HtmlInput#setDefaultValue(String)
      */

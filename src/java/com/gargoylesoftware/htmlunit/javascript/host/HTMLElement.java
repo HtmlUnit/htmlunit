@@ -1073,7 +1073,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
                 final WebResponse webResponse = wc.loadWebResponse(settings);
                 final String content = webResponse.getContentAsString();
                 getLog().debug("Downloaded content: " + StringUtils.abbreviate(content, 512));
-                final Object[] args = new Object[] { content };
+                final Object[] args = new Object[] {content};
                 final ContextAction action = new ContextAction()
                 {
                     public Object run(final Context cx) {

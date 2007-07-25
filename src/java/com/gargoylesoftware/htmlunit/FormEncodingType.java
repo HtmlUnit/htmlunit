@@ -82,7 +82,7 @@ public final class FormEncodingType {
      */
     public static FormEncodingType getInstance(final String name) {
         final String lowerCaseName = name.toLowerCase();
-        final FormEncodingType allInstances[] = new FormEncodingType[] { URL_ENCODED, MULTIPART };
+        final FormEncodingType allInstances[] = new FormEncodingType[] {URL_ENCODED, MULTIPART};
 
         int i;
         for (i = 0; i < allInstances.length; i++) {

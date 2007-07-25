@@ -658,7 +658,7 @@ public class InputTest extends WebTestCase {
 
         assertSame(page, page2);
 
-        final String[] expectedAlerts = { "123" };
+        final String[] expectedAlerts = {"123"};
 
         assertEquals(expectedAlerts, collectedAlerts);
     }

@@ -181,7 +181,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     public HtmlElement getDocumentElement() {
         if (documentElement_ == null) {
             DomNode childNode = getFirstChild();
-            while (childNode != null && ! (childNode instanceof HtmlElement)) {
+            while (childNode != null && !(childNode instanceof HtmlElement)) {
                 childNode = childNode.getNextSibling();
             }
             documentElement_ = (HtmlElement) childNode;
@@ -237,7 +237,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return the new HTML element.
      */
     public HtmlElement createElementNS(final String namespaceURI, final String qualifiedName) {
-        final String tagLower = qualifiedName.toLowerCase().substring( qualifiedName.indexOf( ':' ) + 1 );
+        final String tagLower = qualifiedName.toLowerCase().substring(qualifiedName.indexOf( ':' ) + 1);
         return HTMLParser.getFactory(tagLower).createElementNS(this, namespaceURI, qualifiedName, null);
     }
 
@@ -248,8 +248,8 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return See above
      * @throws com.gargoylesoftware.htmlunit.ElementNotFoundException If the anchor could not be found.
      */
-    public HtmlAnchor getAnchorByName( final String name ) throws ElementNotFoundException {
-        return ( HtmlAnchor )getDocumentElement().getOneHtmlElementByAttribute( "a", "name", name );
+    public HtmlAnchor getAnchorByName(final String name) throws ElementNotFoundException {
+        return (HtmlAnchor) getDocumentElement().getOneHtmlElementByAttribute("a", "name", name);
     }
 
     /**
@@ -259,8 +259,8 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return The HtmlAnchor
      * @throws ElementNotFoundException If the anchor could not be found.
      */
-    public HtmlAnchor getAnchorByHref( final String href ) throws ElementNotFoundException {
-        return ( HtmlAnchor )getDocumentElement().getOneHtmlElementByAttribute( "a", "href", href );
+    public HtmlAnchor getAnchorByHref(final String href) throws ElementNotFoundException {
+        return ( HtmlAnchor )getDocumentElement().getOneHtmlElementByAttribute("a", "href", href);
     }
 
     /**
@@ -268,7 +268,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return the list of {@link HtmlAnchor} in this page.
      */
     public List getAnchors() {
-        return getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("a") );
+        return getDocumentElement().getHtmlElementsByTagNames(Collections.singletonList("a"));
     }
 
     /**
@@ -277,7 +277,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return The first anchor that was found.
      * @throws ElementNotFoundException If no anchors are found with the specified text
      */
-    public HtmlAnchor getFirstAnchorByText( final String text ) throws ElementNotFoundException {
+    public HtmlAnchor getFirstAnchorByText(final String text) throws ElementNotFoundException {
         Assert.notNull("text", text);
 
         final Iterator iterator = getAnchors().iterator();
@@ -703,7 +703,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         final HtmlElement htmlElement ) {
 
         final ScriptEngine engine = getWebClient().getScriptEngine();
-        if( ! getWebClient().isJavaScriptEnabled() || engine == null ) {
+        if( !getWebClient().isJavaScriptEnabled() || engine == null ) {
             return new ScriptResult(null, this);
         }
 

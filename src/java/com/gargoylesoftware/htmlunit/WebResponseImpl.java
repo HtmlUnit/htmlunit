@@ -217,9 +217,9 @@ public class WebResponseImpl implements WebResponse, Serializable {
         if (StringUtils.isEmpty(charset)) {
             log_.debug("No charset specified in header, trying to guess it from content");
             final byte[] body = responseData_.getBody();
-            final byte[] markerUTF8 = { (byte) 0xef, (byte) 0xbb, (byte) 0xbf };
-            final byte[] markerUTF16BE = { (byte) 0xfe, (byte) 0xff };
-            final byte[] markerUTF16LE = { (byte) 0xff, (byte) 0xfe };
+            final byte[] markerUTF8 = {(byte) 0xef, (byte) 0xbb, (byte) 0xbf};
+            final byte[] markerUTF16BE = {(byte) 0xfe, (byte) 0xff};
+            final byte[] markerUTF16LE = {(byte) 0xff, (byte) 0xfe};
             if (body != null && ArrayUtils.isEquals(markerUTF8, ArrayUtils.subarray(body, 0, 3))) {
                 log_.debug("UTF-8 marker found");
                 charset = "UTF-8";

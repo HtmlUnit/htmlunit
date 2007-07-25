@@ -106,6 +106,10 @@
         <module name="EmptyForIteratorPad"/>
         
         <module name="MethodParamPad"/>
+
+        <module name="NoWhitespaceAfter"/>
+
+        <module name="NoWhitespaceBefore"/>
         
         <module name="TabCharacter"/>
         

@@ -310,7 +310,7 @@ public class NavigatorTest extends WebTestCase {
             + "<body onload='test()'></body>"
             + "</html>";
 
-        final String[] expectedAlerts = { "number", "number"};
+        final String[] expectedAlerts = {"number", "number"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
