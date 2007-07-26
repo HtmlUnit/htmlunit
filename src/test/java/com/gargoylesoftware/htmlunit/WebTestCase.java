@@ -342,7 +342,7 @@ public abstract class WebTestCase extends BaseTestCase {
 
             // calls to alert() should be replaced by call to custom function
             String newContent = StringUtils.replace(content,
-                    "alert(", "htmlunitReserved_catchedAlert(");
+                    "alert(", "htmlunitReserved_caughtAlert(");
 
             final String instrumentationJS = createInstrumentationScript(expectedAlerts);
 

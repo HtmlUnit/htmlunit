@@ -515,7 +515,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
                 else {
                     // use a ScriptException to log it because it provides good information
                     // on the source code
-                    getLog().info("Catched script exception", scriptException);
+                    getLog().info("Caught script exception", scriptException);
                     return null;
                 }
             }
@@ -524,7 +524,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
                     throw new RuntimeException(e);
                 }
                 else {
-                    getLog().info("Catched script timeout error", e);
+                    getLog().info("Caught script timeout error", e);
                     return null;
                 }
             }

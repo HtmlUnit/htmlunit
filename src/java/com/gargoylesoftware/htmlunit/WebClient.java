@@ -1692,7 +1692,7 @@ public class WebClient implements Serializable {
 
     /**
      * Indicates if an exception should be thrown when a script execution fails
-     * (the default) or if it should be catched and just logged to allow page
+     * (the default) or if it should be caught and just logged to allow page
      * execution to continue.
      * @return <code>true</code> if an exception is thrown on script error (the default)
      */

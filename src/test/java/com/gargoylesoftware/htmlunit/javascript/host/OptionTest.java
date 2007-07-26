@@ -189,7 +189,7 @@ public class OptionTest extends WebTestCase {
             + "  }"
             + "  catch (e)"
             + "  {"
-            + "    alert('catched exception for negative index');"
+            + "    alert('caught exception for negative index');"
             + "  }"
             + "}"
             + "</script></head><body onload='doTest()'>"
@@ -200,7 +200,7 @@ public class OptionTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"undefined", "catched exception for negative index"};
+        final String[] expectedAlerts = {"undefined", "caught exception for negative index"};
 
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 

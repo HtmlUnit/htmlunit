@@ -1,7 +1,7 @@
 // permits us to generate an html file testing that the generated alerts are as expected
 
 var htmlunitReserved_i = 0;
-function htmlunitReserved_catchedAlert(_str)
+function htmlunitReserved_caughtAlert(_str)
 {
 	var tab = htmlunitReserved_tab;
 	var index = htmlunitReserved_i++;
